@@ -136,7 +136,7 @@ There are different types of metric aggregations as shown below:
 Parent pipeline aggregations
 ............................
 
-This category of pipeline aggregations is able to compute new buckets based of other parent aggregations.
+This category of pipeline aggregations is able to compute new buckets based on other parent aggregations.
 
 .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/parent-pipelines-aggregations.png
    :align: center
@@ -547,7 +547,7 @@ Creating a Gauge
    -  ``Aggregation`` = ``unique_count``
    -  ``Field`` = ``data.sca.failed``
 
-#. Click the Update button.
+#. Click the **Update** button.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-gauge-visualization-update-button.png
       :align: center
