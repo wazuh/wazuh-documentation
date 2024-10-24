@@ -227,7 +227,7 @@ To upgrade your deployment keeping your custom docker-compose files, do the foll
                   - DASHBOARD_USERNAME=kibanaserver
                   - DASHBOARD_PASSWORD=kibanaserver
 
-#. Replace these files with the ones from the v|WAZUH_CURRENT_DOCKER| version of wazuh-docker repository in your own deployment.
+#. Replace these files with the ones from the v|WAZUH_CURRENT_DOCKER| version of the wazuh-docker repository in your own deployment.
 
    .. tabs::
 
