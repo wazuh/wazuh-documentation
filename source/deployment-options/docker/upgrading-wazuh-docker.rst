@@ -173,7 +173,7 @@ To upgrade your deployment keeping your custom docker-compose files, do the foll
             -  Replace ``/usr/share/wazuh-indexer/config/opensearch.yml`` with ``/usr/share/wazuh-indexer/opensearch.yml``.
             -  Replace ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/`` with ``/usr/share/wazuh-indexer/opensearch-security/``.
 
-#. If you are upgrading from 4.3, edit the ``docker-compose.yml`` file corresponding to your deployment type. Modify the highlighted lines and add the variable related to the ``kibanaserver`` user with the corresponding value.
+#. Edit the ``docker-compose.yml`` file corresponding to your deployment type. Modify the highlighted lines and add the variable related to the ``kibanaserver`` user with the corresponding value.
 
    .. tabs::
 
@@ -226,6 +226,19 @@ To upgrade your deployment keeping your custom docker-compose files, do the foll
                   - API_PASSWORD=MyS3cr37P450r.*-
                   - DASHBOARD_USERNAME=kibanaserver
                   - DASHBOARD_PASSWORD=kibanaserver
+
+#. Replace these files with the ones from the v|WAZUH_CURRENT_DOCKER| version of wazuh-docker repository in your own deployment.
+
+   .. tabs::
+
+      .. group-tab:: Single node deployment
+
+         -  ``single-node/config/wazuh_cluster/wazuh_manager.conf``
+
+      .. group-tab:: Multi node deployment
+
+         -  ``multi-node/config/wazuh_cluster/wazuh_manager.conf``
+         -  ``multi-node/config/wazuh_cluster/wazuh_worker.conf``
 
 #. Start the new version of Wazuh using ``docker-compose``.
 
