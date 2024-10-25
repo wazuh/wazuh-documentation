@@ -158,7 +158,7 @@ header {
     }
     @media screen and (max-width: 50rem){
       width: 100%;
-      height: $redoc-header-height / 2;
+      height: calc($redoc-header-height / 2);
       padding: 10px 40px;
     }
 
@@ -179,8 +179,8 @@ header {
       @media screen and (max-width: 50rem){
         position: absolute;
         right: 26px;
-        bottom: -($redoc-header-height / 2);
-        height: $redoc-header-height / 2;
+        bottom: calc($redoc-header-height / -2);
+        height: calc($redoc-header-height / 2);
         border: none;
       }
     }
@@ -201,7 +201,7 @@ header {
       align-items: center;
       justify-content: flex-start;
       width: auto;
-      height: $redoc-header-height / 2;
+      height: calc($redoc-header-height / 2);
       padding: 0 0 0 22px;
       margin: 0;
       border: none;
