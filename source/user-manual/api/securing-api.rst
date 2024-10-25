@@ -86,11 +86,11 @@ You can change the default password for the administrative users  ``wazuh`` and 
 3. Change the default host and port
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-By default, the ``host`` is set to ``0.0.0.0``, allowing the Wazuh server API to accept incoming connections on all available network interfaces. To restrict access, edit the Wazuh server API configuration in ``/var/ossec/api/configuration/api.yaml``:
+By default, the ``host`` is set to ``['0.0.0.0', '::']``, allowing the Wazuh server API to accept incoming connections on all available network interfaces. To restrict access, edit the Wazuh server API configuration in ``/var/ossec/api/configuration/api.yaml``:
 
 .. code-block:: yaml
 
-   host: 0.0.0.0
+   host: ['0.0.0.0', '::']
 
 You can also change the default port:
 

@@ -732,9 +732,9 @@ Wazuh API variables
 $wazuh_api_host
   IP address or hostname of the Wazuh manager where the Wazuh API is running.
 
-  `Default 0.0.0.0`
+  `Default ['0.0.0.0', '::']`
 
-  `Type String`
+  `Type List`
 
 $wazuh_api_port
   Port where the Wazuh API will listen.
