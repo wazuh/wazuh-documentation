@@ -87,11 +87,17 @@ if "%1" == "theme" (
 	goto end
 )
 
+if "%1" == "search-index" (
+	npx -y pagefind@v1.1.0 --site %BUILDDIR%/html --force-language en
+	goto end
+)
+
 if "%1" == "html-prod" (
 	%SPHINXBUILD% -b html %ALLSPHINXOPTS% %BUILDDIR%/html -t production
 	if errorlevel 1 exit /b 1
 	echo.
 	echo.Build finished. The HTML pages are in %BUILDDIR%/html "(production mode)"
+	npx -y pagefind@v1.1.0 --site %BUILDDIR%/html --force-language en
 	goto end
 )
 
@@ -100,6 +106,7 @@ if "%1" == "html-dev" (
 	if errorlevel 1 exit /b 1
 	echo.
 	echo.Build finished. The HTML pages are in %BUILDDIR%/html "(dev mode)"
+	npx -y pagefind@v1.1.0 --site %BUILDDIR%/html --force-language en
 	goto end
 )
 
