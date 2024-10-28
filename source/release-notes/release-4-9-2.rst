@@ -8,15 +8,20 @@
 
 This section lists the changes in version 4.9.2. Every update of the Wazuh solution is cumulative and includes all enhancements and fixes from previous releases.
 
-What's new
-----------
-
-This release includes new features or enhancements as the following:
-
 Resolved issues
 ---------------
 
 This release resolves known issues as the following:
+
+Wazuh manager
+^^^^^^^^^^^^^
+
+-  `#26453 <https://github.com/wazuh/wazuh/pull/26453>`__ Fixed an unhandled exception during IPC event parsing.
+
+Wazuh dashboard
+^^^^^^^^^^^^^^^
+
+-  `#7128 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7128>`__ Fixed vulnerabilities inventory table scroll.
 
 Changelogs
 ----------
