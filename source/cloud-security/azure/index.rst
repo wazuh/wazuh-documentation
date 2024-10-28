@@ -20,5 +20,8 @@ This section provides instructions for monitoring Microsoft Azure infrastructure
    :maxdepth: 2
 
    monitoring-instances
-   activity-services/index
+   platform-and-services
+   log-analytics
+   storage
+   graph
    posture-management
