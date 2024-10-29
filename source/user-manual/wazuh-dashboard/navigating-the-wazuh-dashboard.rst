@@ -82,16 +82,10 @@ This section shows dashboards for:
    :title: Navigating the Wazuh dashboard: Cloud security
    :alt: Navigating the Wazuh dashboard: Cloud security
 
-Server management
+Agents management
 -----------------
 
-Wazuh server management offers options for managing rules, decoders, CDB lists, clusters, security configurations such as user, roles, policies and more. It also includes options for managing Wazuh agents installed on monitored endpoints.
-
-.. thumbnail:: /images/wazuh-dashboard/navigating/server-management.png
-   :align: center
-   :width: 80%
-   :title: Navigating the Wazuh dashboard: Server management
-   :alt: Navigating the Wazuh dashboard: Server management
+Wazuh agents management offers options for managing agents, agent groups, and agent configurations. It also includes options for managing Wazuh agents installed on monitored endpoints.
 
 Endpoints Summary
 ^^^^^^^^^^^^^^^^^
@@ -114,6 +108,17 @@ Users can view existing groups, create new endpoint groups, and organize endpoin
    :width: 80%
    :title: Navigating the Wazuh dashboard: Endpoint Groups
    :alt: Navigating the Wazuh dashboard: Endpoint Groups
+
+Server management
+-----------------
+
+Wazuh server management offers options for managing rules, decoders, CDB lists, clusters, security configurations such as user, roles, policies and more. It also includes options for managing Wazuh agents installed on monitored endpoints.
+
+.. thumbnail:: /images/wazuh-dashboard/navigating/server-management.png
+   :align: center
+   :width: 80%
+   :title: Navigating the Wazuh dashboard: Server management
+   :alt: Navigating the Wazuh dashboard: Server management
 
 Rules
 ^^^^^
