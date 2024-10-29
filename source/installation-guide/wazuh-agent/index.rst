@@ -12,7 +12,7 @@ The Wazuh agent is multi-platform and runs on the endpoints that the user wants 
 
 The agent was developed considering the need to monitor a wide variety of different endpoints without impacting their performance. It is supported on the most popular operating systems, and it requires 35 MB of RAM on average.
 
-The Wazuh agent provides :ref:`key features <agents_modules>` to enhance your system’s security. 
+The Wazuh agent provides :ref:`key features <agents_modules>` to enhance your system’s security.
 
 .. list-table::
    :width: 100%
@@ -20,9 +20,9 @@ The Wazuh agent provides :ref:`key features <agents_modules>` to enhance your sy
 
    * - Log collector
      - Command execution
-   * - File integrity monitoring (FIM) 
+   * - File integrity monitoring (FIM)
      - Security configuration assessment (SCA)
-   * - System inventory 
+   * - System inventory
      - Malware detection
    * - Active response
      - Container security
@@ -108,8 +108,8 @@ If you are deploying Wazuh in a large environment, with a high number of servers
 
 .. note:: Compatibility between the Wazuh agent and the Wazuh manager is guaranteed when the Wazuh manager version is later than or equal to that of the Wazuh agent.
 
-You can also deploy a new agent following the instructions in the Wazuh dashboard. Go to **Endpoints Summary**, and click on **Deploy new agent**.
- 
+You can also deploy a new agent following the instructions in the Wazuh dashboard. Go to **Agents management** > **Summary**, and click on **Deploy new agent**.
+
   .. thumbnail::  /images/installation/deploy-new-agent-from-ui.png
     :align: center
     :width: 80%
@@ -136,4 +136,4 @@ Then the Wazuh dashboard will show you the steps to deploy a new agent.
     Solaris <wazuh-agent-package-solaris>
     AIX <wazuh-agent-package-aix>
     HP-UX <wazuh-agent-package-hpux>
-       
+

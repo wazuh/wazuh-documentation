@@ -32,14 +32,14 @@ Wazuh meets the architecture, infrastructure, and security software aspects of t
          <packages>yes</packages>
          <ports all="no">yes</ports>
          <processes>yes</processes>
-     
+
          <!-- Database synchronization settings -->
          <synchronization>
            <max_eps>10</max_eps>
          </synchronization>
        </wodle>
 
-#. Navigate to **Endpoints Summary** > **AGENT_NAME** > **Inventory data** on the Wazuh dashboard. Where **AGENT_NAME** is the monitored endpoint. You can see details about installed applications, network services, and used ports on the monitored endpoint.
+#. Navigate to **Agents management** > **Summary** > **AGENT_NAME** > **Inventory data** on the Wazuh dashboard. Where **AGENT_NAME** is the monitored endpoint. You can see details about installed applications, network services, and used ports on the monitored endpoint. #.
 
    .. thumbnail:: /images/compliance/tsc/common-criteria/agent-inventory-data.png
       :title: Agent inventory data

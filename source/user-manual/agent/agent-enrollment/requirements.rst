@@ -18,4 +18,4 @@ The following requirements have to be in place to ensure the Wazuh agent enrollm
 
 .. note::
 
-   Instructions for installing and enrolling agents can be found in the Wazuh dashboard. Go to **Server Management** > **Endpoints Summary**, and click on **Deploy new agent**.
+   Instructions for installing and enrolling agents can be found in the Wazuh dashboard. Go to **Agents management** > **Summary**, and click on **Deploy new agent**.
