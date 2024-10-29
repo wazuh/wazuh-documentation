@@ -87,7 +87,13 @@ Agents management
 
 Wazuh agents management offers options for managing agents, agent groups, and agent configurations. It also includes options for managing Wazuh agents installed on monitored endpoints.
 
-Endpoints Summary
+   .. thumbnail:: /images/wazuh-dashboard/navigating/agents-management.png
+      :align: center
+      :width: 80%
+      :title: Navigating the Wazuh dashboard: Agents management
+      :alt: Navigating the Wazuh dashboard: Agents management
+
+Summary
 ^^^^^^^^^^^^^^^^^
 
 This section shows details of monitored endpoints and options for deploying Wazuh agents.
