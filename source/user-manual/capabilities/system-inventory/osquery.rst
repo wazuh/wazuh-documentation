@@ -2,8 +2,6 @@
 
 .. meta::
   :description: Osquery exposes operating system data. Learn how to explore this data with Wazuh in this section of the Wazuh documentation.
-  
-.. _osquery:
 
 Osquery
 =======
