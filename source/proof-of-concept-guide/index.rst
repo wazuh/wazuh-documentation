@@ -64,7 +64,6 @@ Use cases
    integrate-network-ids-suricata
    detect-web-attack-sql-injection
    poc-detect-trojan
-   detect-remove-malware-virustotal
    poc-vulnerability-detection
    detect-malware-yara-integration
    poc-detect-hidden-process

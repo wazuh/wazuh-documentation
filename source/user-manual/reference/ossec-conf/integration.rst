@@ -15,7 +15,7 @@ integration
     <integration>
     </integration>
 
-This configures the manager to :doc:`connect Wazuh to external APIs </user-manual/manager/integration-with-external-apis>` and alerting tools such as Slack, PagerDuty, VirusTotal, Shuffle, and Maltiverse.
+This configures the manager to :doc:`connect Wazuh to external APIs </user-manual/manager/integration-with-external-apis>` and alerting tools such as Slack, PagerDuty, Shuffle, and Maltiverse.
 
 Integration options
 -------------------
@@ -28,7 +28,7 @@ This indicates the service to integrate with.
 +--------------------+------------------------------------------------------------------------------------------+
 | **Default value**  | n/a                                                                                      |
 +--------------------+------------------------------------------------------------------------------------------+
-| **Allowed values** | slack, pagerduty, virustotal, shuffle, maltiverse, any string that begins with 'custom-' |
+| **Allowed values** | slack, pagerduty, shuffle, maltiverse, any string that begins with 'custom-' |
 +--------------------+------------------------------------------------------------------------------------------+
 
 .. note::
@@ -48,12 +48,12 @@ This is the URL that is used for communication with the software being integrate
 api_key
 ^^^^^^^
 
-This is the key that you would have retrieved from the PagerDuty, VirusTotal, or Maltiverse API. This is **mandatory for PagerDuty, VirusTotal, and Maltiverse.**
+This is the key that you would have retrieved from the PagerDuty, or Maltiverse API. This is **mandatory for PagerDuty and Maltiverse.**
 
 +--------------------+-----------------------------------------+
 | **Default value**  | n/a                                     |
 +--------------------+-----------------------------------------+
-| **Allowed values** | PagerDuty/VirusTotal/Maltiverse Api key |
+| **Allowed values** | PagerDuty/Maltiverse Api key            |
 +--------------------+-----------------------------------------+
 
 alert_format
@@ -67,7 +67,7 @@ This writes the alert file in the JSON format, which the Integrator uses to fetc
 | **Allowed values** | json                                                      |
 +--------------------+-----------------------------------------------------------+
 
-.. note:: Set this option as ``json`` for Slack, VirusTotal, Shuffle, and Maltiverse integrations.
+.. note:: Set this option as ``json`` for Slack, Shuffle, and Maltiverse integrations.
 
 Optional filters
 ----------------
@@ -97,7 +97,7 @@ This filters alerts by rule ID.
 group
 ^^^^^
 
-This filters alerts by rule group. For the VirusTotal integration, only rules from the `syscheck` group are available.
+This filters alerts by rule group.
 
 +--------------------+------------------------------------------------------------+
 | **Default value**  | n/a                                                        |
@@ -192,16 +192,6 @@ Configuration example
     <api_key>API_KEY</api_key> <!-- Replace with your PagerDuty API key -->
     <options>{"pretext": "Custom title"}</options> <!-- Replace with your custom JSON object -->
     <alert_format>json</alert_format> <!-- With the new script this is mandatory -->
-  </integration>
-
-  <!-- Integration with VirusTotal -->
-  <integration>
-    <name>virustotal</name>
-    <api_key>API_KEY</api_key> <!-- Replace with your VirusTotal API key -->
-    <group>syscheck</group>
-    <alert_format>json</alert_format>
-    <timeout>30</timeout>
-    <retries>5</retries>
   </integration>
 
   <!-- Integration with Shuffle -->

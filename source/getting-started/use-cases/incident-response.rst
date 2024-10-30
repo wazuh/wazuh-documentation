@@ -47,12 +47,11 @@ To leverage the Wazuh Active Response module, you need to :doc:`configure </user
 Removing malware
 ^^^^^^^^^^^^^^^^
 
-You can use the Wazuh Active Response module in conjunction with the :doc:`File Integrity Monitoring </user-manual/capabilities/file-integrity/index>` module and :doc:`VirusTotal integration </user-manual/capabilities/malware-detection/virus-total-integration>` to detect and remove malicious files from an endpoint.
+You can use the Wazuh Active Response module in conjunction with the :doc:`File Integrity Monitoring </user-manual/capabilities/file-integrity/index>` module to detect and remove malicious files from an endpoint.
 
 The image below shows the following activities:
 
 #. Rule ID ``554`` is fired when a file is added to the ``Downloads`` directory which is monitored with the Wazuh File Integrity Monitoring module.
-#. Rule ID ``87105`` triggers when Wazuh extracts the file hash, requests data about the file hash from the VirusTotal database via its API, and receives a malicious file response.
 #. Rule ID ``553`` is fired when a file is deleted from the ``Downloads`` directory which is monitored with the Wazuh File Integrity Monitoring module.
 #. Rule ID ``110006`` is fired when the Wazuh Active Response module deletes the malicious file from the endpoint.
 
