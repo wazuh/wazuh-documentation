@@ -21,6 +21,7 @@ All notable changes to this project will be documented in this file.
 ### Removed
 
 - Removed the step to disable the Wazuh manager service from the *Uninstalling the Wazuh central components* guide. ([#7814](https://github.com/wazuh/wazuh-documentation/pull/7814))
+- Removed VirusTotal references ([#]())
 
 ## [v4.9.1]
 
