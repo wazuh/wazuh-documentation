@@ -205,6 +205,8 @@ Use case
 
 Here is an example of monitoring the infrastructure activity using the previously created Azure application.
 
+.. _log_analytics_use_case_creating_user:
+
 Creating a user
 ~~~~~~~~~~~~~~~
 

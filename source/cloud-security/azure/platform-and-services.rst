@@ -106,6 +106,8 @@ Follow the steps below to obtain an ``application_id`` and ``application_key``:
       :align: center
       :width: 80%
 
+.. _getting_access_credentials:
+
 Getting access credentials for Microsoft Azure Storage
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
