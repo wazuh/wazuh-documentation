@@ -24,4 +24,3 @@ This section provides instructions for monitoring Microsoft Azure infrastructure
    log-analytics
    storage
    graph
-   posture-management

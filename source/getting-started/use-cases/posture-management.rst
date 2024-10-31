@@ -77,7 +77,7 @@ Wazuh integrates with Azure using the Log Analytics Workspace. The Azure Log Ana
    :align: center
    :width: 80%
 
-We provide detailed guidelines on configuring Wazuh to receive Azure Cloud logs using the Log Analytics Workspace in our :doc:`Azure Log Analytics </cloud-security/azure/activity-services/services/log-analytics>` documentation. Once configured, you can set up your Wazuh deployment to retrieve *Recommendations*, *Security alerts*, and *Regulatory compliance* logs for your Azure cloud infrastructure.
+We provide detailed guidelines on configuring Wazuh to receive Azure Cloud logs using the Log Analytics Workspace in our :doc:`Azure Log Analytics </cloud-security/azure/log-analytics>` documentation. Once configured, you can set up your Wazuh deployment to retrieve *Recommendations*, *Security alerts*, and *Regulatory compliance* logs for your Azure cloud infrastructure.
 
 The image below shows Azure security posture management logs received on Wazuh.
 

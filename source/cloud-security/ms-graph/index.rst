@@ -1,35 +1,46 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Discover how Wazuh helps you monitor the Microsoft Graph API for your organization. Learn more about it in this section of our documentation.
-  
-.. _ms-graph:
+   :description: This section provides instructions for monitoring your organization's Microsoft Graph API resources and relationships using the Wazuh module for Microsoft Graph.
 
-Using Wazuh to monitor Microsoft Graph
-======================================
+Monitoring Microsoft Graph services with Wazuh
+==============================================
 
-.. versionadded:: 4.6.0
+The Microsoft Graph API is a comprehensive API system that provides access to data across the full suite of Microsoft cloud services, including but not limited to Microsoft 365, Azure, Dynamics 365, and various other Microsoft cloud components. It is an endpoint for accessing structured data, insights, and rich relationships from the Microsoft Cloud ecosystem.
 
-This section provides instructions for monitoring **Microsoft Graph API** `resources` and `relationships` within your organization.
+This section provides instructions for monitoring your organization's Microsoft Graph API resources and relationships using the Wazuh module for Microsoft Graph.
 
-Currently, the module allows you to monitor the following with Wazuh:
+Currently, the Wazuh module for Microsoft Graph allows you to monitor the following with Wazuh:
 
-- Microsoft Entra ID Protection
-- Microsoft 365 Defender
-- Microsoft Defender for Cloud Apps
-- Microsoft Defender for Endpoint
-- Microsoft Defender for Identity
-- Microsoft Defender for Office 365
-- Microsoft Purview eDiscovery
-- Microsoft Purview Data Loss Prevention (DLP)
+-  Microsoft Entra ID Protection
+-  Microsoft 365 Defender
+-  Microsoft Defender for Cloud Apps
+-  Microsoft Defender for Endpoint
+-  Microsoft Defender for Identity
+-  Microsoft Defender for Office 365
+-  Microsoft Purview eDiscovery
+-  Microsoft Purview Data Loss Prevention (DLP)
 
-While these are centric to the security resource, the Microsoft Graph REST API contains a large number of additional resources that can be monitored. See the `Overview of Microsoft Graph <https://learn.microsoft.com/en-us/graph/overview?view=graph-rest-1.0>`_ documentation to learn more.
+While these are fundamental to the security resource, you can monitor many additional resources using the Microsoft Graph API. See the `Overview of Microsoft Graph <https://learn.microsoft.com/en-us/graph/overview?view=graph-rest-1.0>`__ documentation to learn more.
 
-.. note:: Currently, only the `security` resource can be considered mature as it's the only one tested and with pre-made rules. However, the logs of other resources can still be ingested at your organization's discretion.
+.. note::
 
-.. topic:: Contents
+   The security resource can be considered mature, as it has been tested with pre-made rules. However, your organization can ingest logs from other resources to your Wazuh deployment.
 
-  .. toctree::
-    :maxdepth: 2
+Retrieving content
+------------------
 
-    monitoring-ms-graph-activity
+To retrieve a set of logs from Microsoft Graph, make a ``GET`` request using the URL below:
+
+.. code-block:: none
+
+   GET https://graph.microsoft.com/{version}/{resource}/{relationship}?{query-parameters}
+
+A description of the current production version of the Microsoft Graph API can be found in the `Overview of Microsoft Graph <https://learn.microsoft.com/en-us/graph/overview?view=graph-rest-1.0>`__.
+
+Alternatively, the API can be directly experimented with through `Microsoft Graph Explorer <https://developer.microsoft.com/graph/graph-explorer>`__.
+
+.. toctree::
+   :hidden:
+
+   monitoring-ms-graph-activity
