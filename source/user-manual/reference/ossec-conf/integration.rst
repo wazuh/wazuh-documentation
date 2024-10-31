@@ -28,7 +28,7 @@ This indicates the service to integrate with.
 +--------------------+------------------------------------------------------------------------------------------+
 | **Default value**  | n/a                                                                                      |
 +--------------------+------------------------------------------------------------------------------------------+
-| **Allowed values** | slack, pagerduty, shuffle, maltiverse, any string that begins with 'custom-' |
+| **Allowed values** | slack, pagerduty, shuffle, maltiverse, any string that begins with 'custom-'             |
 +--------------------+------------------------------------------------------------------------------------------+
 
 .. note::
