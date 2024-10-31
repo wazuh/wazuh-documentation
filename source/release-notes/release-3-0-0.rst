@@ -146,8 +146,6 @@ Below is an example of an alert triggered from a positive result:
    virustotal.scan_date: 2017-11-14 17:24:37
    integration: virustotal
 
-The complete documentation of this integration is located at :doc:`VirusTotal integration section </user-manual/capabilities/malware-detection/virus-total-integration>`.
-
 MSI Windows installer for agents
 --------------------------------
 
