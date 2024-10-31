@@ -127,6 +127,8 @@ The section below shows the steps to retrieving the Microsoft Azure Storage acco
       :align: center
       :width: 80%
 
+.. _wazuh_azure_authentication_file:
+
 Wazuh Azure authentication file
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
