@@ -269,6 +269,7 @@ newUrls['4.9'] = [
 /* Pages no longer available in 4.9 */
 
 removedUrls['4.9'] = [
+  '/deployment-options/docker/data-migration.html',
   '/deployment-options/offline-installation.html',
   '/development/packaging/generate-deb-package.html',
   '/development/packaging/generate-rpm-package.html',
