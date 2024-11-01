@@ -123,7 +123,7 @@ Monitoring security resources
 
 One of the more ubiquitous alerts that an organization of any size receives is spam emails. In this case, we can specifically examine an example of a spam email containing malicious content and examine how Microsoft Graph & Wazuh report on this information.
 
-We can set up the Wazuh module for Microsoft Graph to monitor the security resource and the ``alerts_v2`` relationship within our Microsoft 365 tenant described in :ref:`retrieving_content`. We also enable **Microsoft Defender for Office 365** within the Microsoft 365 tenant. Microsoft Defender for Office 365 monitors email messages for threats such as spam and malicious attachments.
+We can set up the Wazuh module for Microsoft Graph to monitor the security resource and the ``alerts_v2`` relationship within our Microsoft 365 tenant described in :ref:`Retrieving content <retrieving_content>`. We also enable **Microsoft Defender for Office 365** within the Microsoft 365 tenant. Microsoft Defender for Office 365 monitors email messages for threats such as spam and malicious attachments.
 
 Detect malicious email
 ^^^^^^^^^^^^^^^^^^^^^^

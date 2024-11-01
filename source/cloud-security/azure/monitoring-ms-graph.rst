@@ -29,8 +29,7 @@ While these are fundamental to the security resource, you can monitor many addit
 
 .. _retrieving_content:
 
-Retrieving content
-------------------
+**Retrieving content**
 
 To retrieve a set of logs from Microsoft Graph, make a ``GET`` request using the URL below:
 
@@ -43,6 +42,6 @@ A description of the current production version of the Microsoft Graph API can b
 Alternatively, the API can be directly experimented with through `Microsoft Graph Explorer <https://developer.microsoft.com/graph/graph-explorer>`__.
 
 .. toctree::
-   :hidden:
+   :maxdepth: 2
 
-   monitoring-ms-graph-activity
+   ms-graph-api-setup
