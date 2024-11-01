@@ -27,6 +27,8 @@ While these are fundamental to the security resource, you can monitor many addit
 
    The security resource can be considered mature, as it has been tested with pre-made rules. However, your organization can ingest logs from other resources to your Wazuh deployment.
 
+.. _retrieving_content:
+
 Retrieving content
 ------------------
 
