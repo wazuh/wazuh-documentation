@@ -243,7 +243,7 @@ WQL supports numeric inequalities using the ``>``, and ``<`` operators. For exam
 
    local.port>36271 and local.port<53771
 
-.. thumbnail:: ../../images/wazuh-dashboard/queries/port-ranges.png
+.. thumbnail:: /images/wazuh-dashboard/queries/port-ranges.png
    :align: center
    :width: 80%
    :title: Port ranges
