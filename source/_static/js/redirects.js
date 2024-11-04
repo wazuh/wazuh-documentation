@@ -166,7 +166,7 @@ redirections.push(
   {
     'target': ['4.8=>4.9', '4.9=>4.8'],
     '4.8': '/user-manual/wazuh-indexer/certificates.html',
-    '4.9': '/user-manual/wazuh-indexer/wazuh-indexer-cluster.html#certificates-deployment',
+    '4.9': '/user-manual/wazuh-indexer-cluster.html#certificates-deployment',
   },
   {
     'target': ['4.8=>4.9', '4.9=>4.8'],
@@ -181,12 +181,17 @@ redirections.push(
   {
     'target': ['4.8=>4.9', '4.9=>4.8'],
     '4.8': '/user-manual/upscaling/adding-indexer-node.html',
-    '4.9': '/user-manual/wazuh-indexer/wazuh-indexer-cluster.html#adding-wazuh-indexer-nodes',
+    '4.9': '/user-manual/wazuh-indexer-cluster.html#adding-wazuh-indexer-nodes',
   },
   {
     'target': ['4.8=>4.9', '4.9=>4.8'],
     '4.8': '/user-manual/upscaling/adding-server-node.html',
-    '4.9': '/user-manual/manager/wazuh-server-cluster.html#adding-new-wazuh-server-nodes',
+    '4.9': '/user-manual/wazuh-server-cluster.html#adding-new-wazuh-server-nodes',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/user-manual/manager/wazuh-server-cluster.html',
+    '4.9': '/user-manual/wazuh-server-cluster.html',
   },
   {
     'target': ['4.8=>4.9', '4.9=>4.8'],
@@ -254,7 +259,8 @@ newUrls['4.9'] = [
   '/user-manual/agent/agent-management/remote-upgrading/wpk-files/wpk-list.html',
   '/user-manual/wazuh-dashboard/navigating-the-wazuh-dashboard.html',
   '/user-manual/wazuh-dashboard/settings.html',
-  '/user-manual/wazuh-indexer/wazuh-indexer-cluster.html',
+  '/user-manual/wazuh-server-cluster.html',
+  '/user-manual/wazuh-indexer-cluster.html',
   '/cloud-service/your-environment/custom-dns.html',
   '/migration-guide/creating/index.html',
   '/migration-guide/creating/wazuh-agent.html',
@@ -286,6 +292,7 @@ removedUrls['4.9'] = [
   '/user-manual/wazuh-dashboard/config-file.html',
   '/user-manual/wazuh-dashboard/management.html',
   '/user-manual/wazuh-indexer/certificates.html',
+  '/user-manual/manager/wazuh-server-cluster.html',
   '/user-manual/capabilities/policy-monitoring/index.html',
   '/user-manual/capabilities/policy-monitoring/openscap/index.html',
   '/user-manual/capabilities/policy-monitoring/openscap/how-it-works.html',
