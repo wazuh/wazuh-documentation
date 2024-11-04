@@ -1,6 +1,12 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+# [v4.9.2]
+
+### Added
+
+- Updated the API host default value. ([#7933](https://github.com/wazuh/wazuh-documentation/pull/7933))
+
 ## [v4.9.1]
 
 ### Added
