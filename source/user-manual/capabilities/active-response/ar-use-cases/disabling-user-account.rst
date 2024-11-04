@@ -1,9 +1,9 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Learn how to disable a user account on Linux using active response in this use case.
+   :description: Learn how to disable a user account on Linux using Active Response in this use case.
 
-Disabling a Linux user account with active response
+Disabling a Linux user account with Active Response
 ===================================================
 
 Without knowledge of the password for an account, an adversary might opt to systematically guess the password using a repetitive or iterative mechanism. In this use case, we configure the ``disable-account`` active response to disable a Linux/Unix account subject to brute-force attacks. Wazuh uses the ``disable-account`` active response on Linux/Unix endpoints to disable the account for the user in the ``dstuser`` field of a Wazuh alert.
@@ -67,8 +67,8 @@ Wazuh server
 
    -  ``<command>``: Specifies the command to configure. This is the command name ``disable-account`` defined in the previous step.
    -  ``<location>``: Specifies where the command executes. Using the ``local`` value here means that the command executes on the monitored endpoint where the trigger event occurs.
-   -  ``<rules_id>``: The active response module executes the command if rule ID ``120100``: ``Possible password guess on $(dstuser): 3 failed logins in a short period of time`` fires.
-   -  ``<timeout>``: Specifies how long the active response action must last. In this use case, we configure it to last for 300 seconds. After that period, the active response reverts its action and re-enables the account.
+   -  ``<rules_id>``: The Active Response module executes the command if rule ID ``120100``: ``Possible password guess on $(dstuser): 3 failed logins in a short period of time`` fires.
+   -  ``<timeout>``: Specifies how long the active response action must last. In this use case, we configure it to last for 300 seconds. After that period, the Active Response reverts its action and re-enables the account.
 
 #. Restart the Wazuh manager service to apply changes:
 
@@ -122,7 +122,7 @@ Visualize the alerts
 You can visualize the alert data on the Wazuh dashboard. In the image below, you can see that the active response triggers just after rule ID ``120100`` fires to disable the account. Then re-enables it again after 5 minutes.
 
 .. thumbnail:: /images/manual/active-response/ar-alert-fired3.png
-   :title: Active response alert: User account disabled
-   :alt: Active response alert: User account disabled
+   :title: Active Response alert: User account disabled
+   :alt: Active Response alert: User account disabled
    :align: center
    :width: 80%

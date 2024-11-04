@@ -118,7 +118,7 @@ Users can view existing groups, create new endpoint groups, and organize endpoin
 Rules
 ^^^^^
 
-The Rules section allows users to query existing rules using Wazuh Query Language and manage custom rules.
+The **Rules** section allows users to query existing rules using Wazuh Query Language and manage custom rules.
 
 .. thumbnail:: /images/wazuh-dashboard/navigating/rules.png
    :align: center
@@ -129,7 +129,7 @@ The Rules section allows users to query existing rules using Wazuh Query Languag
 Decoders
 ^^^^^^^^
 
-The Decoders section allows users to query existing decoders using :doc:`Wazuh Query Language <../wazuh-dashboard/queries>` and manage custom decoders.
+The **Decoders** section allows users to query existing decoders using :doc:`Wazuh Query Language <../wazuh-dashboard/queries>` and manage custom decoders.
 
 .. thumbnail:: /images/wazuh-dashboard/navigating/decoders.png
    :align: center
@@ -260,16 +260,16 @@ The **Roles mapping** tab presents users with the option to assign different rol
    :title: Navigating the Wazuh dashboard: Security: Roles mapping
    :alt: Navigating the Wazuh dashboard: Security: Roles mapping
 
-Indexer management
-------------------
+Index management
+----------------
 
 The Wazuh indexer is a real-time, full-text search and analytics engine for security data. Log data ingested into the Wazuh server is analyzed and forwarded to the Wazuh indexer for indexing and storage.
 
-.. thumbnail:: /images/wazuh-dashboard/navigating/indexer-management.png
+.. thumbnail:: /images/wazuh-dashboard/navigating/index-management.png
    :align: center
    :width: 80%
-   :title: Navigating the Wazuh dashboard: Indexer management
-   :alt: Navigating the Wazuh dashboard: Indexer management
+   :title: Navigating the Wazuh dashboard: Index management
+   :alt: Navigating the Wazuh dashboard: Index management
 
 Index and Snapshot Management
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -321,7 +321,7 @@ Dashboard management
 Dashboard Management
 ^^^^^^^^^^^^^^^^^^^^
 
-The Wazuh **Dashboard Management** section includes the options for creating and managing your index patterns and saved objects.
+The Wazuh **Dashboard Management** section includes the options for creating and managing your index patterns, saved objects, and advanced settings you can make to your Wazuh dashboard.
 
 .. thumbnail:: /images/wazuh-dashboard/navigating/dashboards-management.png
    :align: center

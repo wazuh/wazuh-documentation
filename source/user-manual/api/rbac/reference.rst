@@ -59,7 +59,7 @@ In each action, the affected endpoints are specified along with the necessary re
 Active_response
 ^^^^^^^^^^^^^^^
 
-The :api-ref:`/active-response <tag/Active-response>` endpoint of the Wazuh server API allows users to interact with the Wazuh active response module.
+The :api-ref:`/active-response <tag/Active-response>` endpoint of the Wazuh server API allows users to interact with the Wazuh Active Response module.
 
 active-response:command
 ~~~~~~~~~~~~~~~~~~~~~~~

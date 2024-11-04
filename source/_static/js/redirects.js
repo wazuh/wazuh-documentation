@@ -176,6 +176,11 @@ redirections.push(
   },
   {
     'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/user-manual/capabilities/malware-detection/osquery.html',
+    '4.9': '/user-manual/capabilities/system-inventory/osquery.html',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
     '4.8': '/user-manual/upscaling/adding-indexer-node.html',
     '4.9': '/user-manual/wazuh-indexer/wazuh-indexer-cluster.html#adding-wazuh-indexer-nodes',
   },
@@ -233,6 +238,7 @@ newUrls['4.10'] = [
 newUrls['4.9'] = [
   '/release-notes/release-4-9-0.html',
   '/release-notes/release-4-9-1.html',
+  '/release-notes/release-4-9-2.html',
   '/deployment-options/offline-installation/index.html',
   '/deployment-options/offline-installation/step-by-step.html',
   '/deployment-options/offline-installation/installation-assistant.html',
@@ -241,6 +247,7 @@ newUrls['4.9'] = [
   '/development/packaging/generate-indexer-package.html',
   '/development/packaging/generate-deb-rpm-package.html',
   '/user-manual/capabilities/log-data-collection/journald.html',
+  '/user-manual/capabilities/system-inventory/osquery.html',
   '/integrations-guide/amazon-security-lake/index.html',
   '/user-manual/agent/agent-enrollment/agent-life-cycle.html',
   '/user-manual/agent/agent-enrollment/deployment-variables/deployment-variables-aix.html',
@@ -264,6 +271,8 @@ newUrls['4.9'] = [
   '/migration-guide/restoring/index.html',
   '/migration-guide/restoring/wazuh-agent.html',
   '/migration-guide/restoring/wazuh-central-components.html',
+  '/cloud-security/amazon/services/prerequisites/aws-policy.html',
+  '/cloud-security/amazon/services/prerequisites/iam-identities.html',
 ];
 
 /* Pages no longer available in 4.9 */
@@ -296,6 +305,7 @@ removedUrls['4.9'] = [
   '/user-manual/capabilities/policy-monitoring/rootcheck/rootcheck-configuration.html',
   '/user-manual/capabilities/policy-monitoring/rootcheck/rootcheck-faq.html',
   '/user-manual/capabilities/policy-monitoring/ciscat/ciscat.html',
+  '/user-manual/capabilities/malware-detection/osquery.html',
   '/user-manual/upscaling/index.html',
   '/user-manual/upscaling/adding-indexer-node.html',
   '/user-manual/upscaling/adding-server-node.html',
