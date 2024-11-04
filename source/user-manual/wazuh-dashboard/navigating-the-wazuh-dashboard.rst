@@ -101,8 +101,8 @@ This section shows details of monitored endpoints and options for deploying Wazu
 .. thumbnail:: /images/wazuh-dashboard/navigating/endpoints-summary.png
    :align: center
    :width: 80%
-   :title: Navigating the Wazuh dashboard: Endpoints Summary
-   :alt: Navigating the Wazuh dashboard: Endpoints Summary
+   :title: Navigating the Wazuh dashboard: Agents management summary
+   :alt: Navigating the Wazuh dashboard: Agents management summary
 
 Endpoint Groups
 ^^^^^^^^^^^^^^^
