@@ -24,7 +24,7 @@ The Wazuh agent provides :ref:`key features <agents_modules>` to enhance your sy
      - Security configuration assessment (SCA)
    * - System inventory 
      - Malware detection
-   * - Active response
+   * - Active Response
      - Container security
    * - Cloud security
      -

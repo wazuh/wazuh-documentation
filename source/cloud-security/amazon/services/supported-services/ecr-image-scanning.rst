@@ -1,12 +1,12 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn how to configure Amazon ECR Image scanning to export the scan results to CloudWatch Logs.
+   :description: The following sections cover how to configure AWS to store the scan findings in CloudWatch Logs and how to ingest them into Wazuh.
 
 Amazon ECR Image scanning
 =========================
 
-`Amazon ECR image scanning <https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning.html>`_ uses the Common Vulnerabilities and Exposures (CVEs) database from the open-source `Clair project <https://github.com/quay/clair>`_ to detect software vulnerabilities in container images and provide a list of scan findings, which can be easily integrated into Wazuh thanks to the :doc:`AWS CloudWatch Logs integration </cloud-security/amazon/services/supported-services/cloudwatchlogs>`.
+`Amazon ECR image scanning <https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning.html>`__ uses the Common Vulnerabilities and Exposures (CVEs) database from the open source `Clair project <https://github.com/quay/clair>`__ to detect software vulnerabilities in container images and provide a list of scan findings, which can be easily integrated into Wazuh thanks to the :doc:`Amazon CloudWatch Logs <cloudwatchlogs>`  integration.
 
 Amazon ECR sends an event to Amazon EventBridge when an image scan is completed. The event itself is only a summary and does not contain the details of the scan findings. However, it is possible to configure a Lambda function to request the scan findings details and store them in CloudWatch Logs. Here is a quick summary of what the workflow looks like:
 
@@ -17,29 +17,39 @@ Amazon ECR sends an event to Amazon EventBridge when an image scan is completed.
 #. The Lambda function creates a log group and a log stream in CloudWatch Logs to store the response received.
 #. Wazuh pulls the logs from the CloudWatch log groups using the CloudWatch Logs integration.
 
-The following sections cover how to configure AWS to store the scan findings in CloudWatch Logs and how to ingest them into Wazuh.
-
+.. thumbnail:: /images/cloud-security/aws/ecr-image-scanning/ecr-image-scanning.png
+   :align: center
+   :width: 80%
 
 AWS configuration
 -----------------
+
+The following sections cover how to configure AWS to store the scan findings in CloudWatch Logs and how to ingest them into Wazuh.
+
+Amazon ECR Image scan configuration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 AWS provides a `template <https://github.com/aws-samples/ecr-image-scan-findings-logger/blob/main/Template-ECR-SFL.yml>`__ that logs to CloudWatch the findings of Amazon ECR scans of images. The template uses an AWS Lambda function to accomplish this.
 
 Uploading the template and creating a stack, uploading the images to Amazon ECR, scanning the images, and using the logger all require specific permissions. Because of this, you need to create a custom policy granting these permissions.
 
-.. include:: /_templates/cloud/amazon/create_policy.rst
+Take into account that the policies below follow the principle of least privilege to ensure that only the minimum permissions are provided to the AWS IAM user.
 
-IAM permissions
-^^^^^^^^^^^^^^^
+.. _ecr_policy_configuration:
 
-You need the permissions listed below inside the sections for  ``RoleCreator`` and ``PassRole`` to create and delete the stack based on the template.
+Policy configuration
+^^^^^^^^^^^^^^^^^^^^
+
+Follow the :ref:`creating an AWS policy <creating_an_AWS_policy>` guide to create a policy using the Amazon Web Services console.
+
+You need the permissions listed below inside the sections for ``RoleCreator`` and ``PassRole`` to create and delete the stack based on the template.
 
 .. warning::
 
    These permissions must be bound to the specific resources due to overly permissive actions.
 
 .. code-block:: json
-  
+
    {
       "Sid": "RoleCreator",
       "Effect": "Allow",
@@ -53,19 +63,19 @@ You need the permissions listed below inside the sections for  ``RoleCreator`` a
          "iam:GetRolePolicy",
          "iam:PassRole"
       ],
-      "Resource": "arn:aws:iam::<account-ID>:role/*"
+      "Resource": "arn:aws:iam::<ACCOUNT_ID>:role/*"
    },
    {
       "Sid": "PassRole",
       "Effect": "Allow",
       "Action": "iam:PassRole",
-      "Resource": "arn:aws:iam::<account-ID>:role/*-LambdaExecutionRole*"
+      "Resource": "arn:aws:iam::<ACCOUNT_ID>:role/*-LambdaExecutionRole*"
    }
 
 CloudFormation stack permissions
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You need the following permissions to create and delete any template-based CloudFormation stack.
+A CloudFormation stack is a collection of AWS resources that can be managed as a single unit, including creation, update, or deletion. You need the following permissions to create and delete any template-based CloudFormation stack.
 
 .. code-block:: json
 
@@ -86,34 +96,34 @@ You need the following permissions to create and delete any template-based Cloud
          "s3:GetObject",
          "s3:CreateBucket"
       ],
-      "Resource": "*"   
+      "Resource": "*"
    }
 
 ECR registry and repository permissions
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This `Amazon ECR <https://docs.aws.amazon.com/AmazonECR/latest/userguide/set-repository-policy.html>`__ permission allows calls to the API through an IAM policy.
 
 .. note::
 
-   Before authenticating to a registry and pushing or pulling any images from any Amazon ECR repository, you need  ``ecr:GetAuthorizationToken``. 
+   Before authenticating to a registry and pushing or pulling any images from any Amazon ECR repository, you need ``ecr:GetAuthorizationToken``.
 
 .. code-block:: json
 
-   { 
+   {
       "Sid": "ECRUtilities",
       "Effect": "Allow",
       "Action": [
-         "ecr:GetAuthorizationToken",  
-         "ecr:DescribeRepositories"    
+         "ecr:GetAuthorizationToken",
+         "ecr:DescribeRepositories"
       ],
       "Resource": "*"
    }
 
 Image pushing and scanning permissions
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You need the following Amazon ECR permissions to `push images <https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-push.html#image-push-iam>`__. They are scoped down to a specific repository. The steps to push Docker images are described in the `Amazon ECR - Pushing a Docker image <https://docs.aws.amazon.com/AmazonECR/latest/userguide/docker-push-ecr-image.html>`_ documentation.
+You need the following Amazon ECR permissions to `push images <https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-push.html#image-push-iam>`__. They are scoped down to a specific repository. The steps to push Docker images are described in the `Amazon ECR - pushing a docker image <https://docs.aws.amazon.com/AmazonECR/latest/userguide/docker-push-ecr-image.html>`__ documentation.
 
 .. code-block:: json
 
@@ -131,14 +141,14 @@ You need the following Amazon ECR permissions to `push images <https://docs.aws.
          "ecr:DescribeImageScanFindings",
          "ecr:StartImageScan"
       ],
-      "Resource": "arn:aws:ecr:<region>:<account-ID>:repository/<repository-name>"
+      "Resource": "arn:aws:ecr:<REGION>:<ACCOUNT_ID>:repository/<repository-name>"
    }
 
 Amazon Lambda and Amazon EventBridge permissions
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You need the following permissions to create and delete the resources handled by the Scan Findings Logger template.
-  
+
 .. code-block:: json
 
    {
@@ -151,7 +161,7 @@ You need the following permissions to create and delete the resources handled by
          "lambda:CreateFunction",
          "lambda:AddPermission"
       ],
-      "Resource": "arn:aws:lambda:<region>:<account-ID>:*"
+      "Resource": "arn:aws:lambda:<REGION>:<ACCOUNT_ID>:*"
    },
    {
       "Sid": "TemplateRequired1",
@@ -163,52 +173,58 @@ You need the following permissions to create and delete the resources handled by
          "events:DescribeRule",
          "events:PutTargets"
       ],
-      "Resource": "arn:aws:events:<region>:<account-ID>:*"
-    }
+      "Resource": "arn:aws:events:<REGION>:<ACCOUNT_ID>:*"
+   }
 
 How to create the CloudFormation Stack
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1. Download the ECR Image Scan findings logger `template <https://github.com/aws-samples/ecr-image-scan-findings-logger/blob/main/Template-ECR-SFL.yml>`_ from the official `aws-samples <https://github.com/aws-samples/>`_ GitHub repository.
+#. Download the ECR Image Scan findings logger `template <https://github.com/aws-samples/ecr-image-scan-findings-logger/blob/main/Template-ECR-SFL.yml>`__ from the official `aws-samples <https://github.com/aws-samples/>`__ GitHub repository.
+#. Access `CloudFormation <https://console.aws.amazon.com/cloudformation/home>`__ and click on **Create stack**.
+#. Create a new stack using the template from step 1.
 
-2. Access `CloudFormation <https://console.aws.amazon.com/cloudformation/home>`_ and click on **Create stack**.
+   .. thumbnail:: /images/cloud-security/aws/ecr-image-scanning/01-create-stack.png
+      :align: center
+      :width: 80%
 
-3. Create a new stack using the template from step 1.
+#. Choose a name for the stack and finish the creation process. No additional configuration is required.
 
-.. thumbnail:: /images/cloud-security/aws/aws-create-stack.png
-    :title: Create new stack
-    :align: center
-    :width: 100%
+   .. thumbnail:: /images/cloud-security/aws/ecr-image-scanning/02-choose-stack-name.png
+      :align: center
+      :width: 80%
 
-4. Choose a name for the stack and finish the creation process. No additional configuration is required.
+#. Wait until **CREATE_COMPLETE** status is reached. The stack containing the AWS Lambda is now ready to be used.
 
-5. Wait until "CREATE_COMPLETE" status is reached. The stack containing the AWS Lambda is now ready to be used.
+   .. thumbnail:: /images/cloud-security/aws/ecr-image-scanning/03-wait-until-create_complete.png
+      :align: center
+      :width: 80%
 
-.. thumbnail:: /images/cloud-security/aws/aws-create-completed.png
-    :title: Stack creation completed
-    :align: center
-    :width: 100%
+Once the stack configuration is completed, the Lambda can be tested by manually triggering an `image scan <https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning-basic.html>`__ of a container in `Amazon ECR private registry <https://docs.aws.amazon.com/AmazonECR/latest/userguide/Registries.html>`__. The scan results in the creation of a CloudWatch log group called ``/aws/ecr/image-scan-findings/<NAME_OF_ECR_REPOSITORY>`` containing the scan results. For every new scan, the corresponding log streams are created inside the log group.
 
+.. thumbnail:: /images/cloud-security/aws/ecr-image-scanning/04-log-group.png
+   :align: center
+   :width: 80%
 
-Once the stack configuration is completed, the Lambda can be tested by manually triggering an image scan. The scan results in the creation of a CloudWatch log group called ``/aws/ecr/image-scan-findings/<name of the ECR repository>`` containing the scan results. For every new scan, the corresponding log streams are created inside the log group.
+.. thumbnail:: /images/cloud-security/aws/ecr-image-scanning/05-log-stream.png
+   :align: center
+   :width: 80%
 
-.. thumbnail:: /images/cloud-security/aws/aws-findings-1.png
-    :title: Stack creation completed
-    :align: center
-    :width: 100%
+Configure Wazuh to process Amazon ECR image scanning logs
+---------------------------------------------------------
 
-.. thumbnail:: /images/cloud-security/aws/aws-findings-2.png
-    :title: Stack creation completed
-    :align: center
-    :width: 100%
+#. Access the Wazuh configuration in **Server management** > **Settings** using the Wazuh dashboard or by manually editing the ``/var/ossec/etc/ossec.conf`` file in the Wazuh server or agent.
 
+   .. thumbnail:: /images/cloud-security/aws/ecr-image-scanning/01-wazuh-configuration.png
+      :align: center
+      :width: 80%
 
-Wazuh configuration
--------------------
+   .. thumbnail:: /images/cloud-security/aws/ecr-image-scanning/02-wazuh-configuration.png
+      :align: center
+      :width: 80%
 
-#. Open the Wazuh configuration file (``/var/ossec/etc/ossec.conf``) and add the following configuration block:
+#. Add the following :doc:`Wazuh module for AWS </user-manual/reference/ossec-conf/wodle-s3>` configuration block to enable the integration with Amazon ECR Image scanning. Replace ``<NAME_OF_ECR_REPOSITORY>`` with the name of the Amazon ECR repository:
 
-    .. code-block:: xml
+   .. code-block:: xml
 
       <wodle name="aws-s3">
         <disabled>no</disabled>
@@ -216,20 +232,34 @@ Wazuh configuration
         <run_on_start>yes</run_on_start>
         <service type="cloudwatchlogs">
           <aws_profile>default</aws_profile>
-          <aws_log_groups>/aws/ecr/image-scan-findings/name_of_the_ECR_repository</aws_log_groups>
+          <aws_log_groups>/aws/ecr/<NAME_OF_ECR_REPOSITORY></aws_log_groups>
         </service>
       </wodle>
 
-    .. note::
+   .. note::
+
       Check the :doc:`AWS CloudWatch Logs integration </cloud-security/amazon/services/supported-services/cloudwatchlogs>` to learn more about how the CloudWatch Logs integration works.
 
-#. Restart Wazuh to apply the configuration changes.
+#. Save the changes and restart Wazuh to apply the changes. The service can be manually restarted using the following command outside the Wazuh dashboard:
 
-    * If you are configuring a Wazuh manager:
+   -  Wazuh manager:
 
-      .. include:: /_templates/common/restart_manager.rst
+      .. code-block:: console
 
-    * If you are configuring a Wazuh agent:
+         # systemctl restart wazuh-manager
 
-      .. include:: /_templates/common/restart_agent.rst
+   -  Wazuh agent:
 
+      .. code-block:: console
+
+         # systemctl restart wazuh-agent
+
+Use case
+--------
+
+Amazon ECR provides an image scanning feature that uses the Common Vulnerabilities and Exposure (CVEs) database from the open source Clair project to detect vulnerabilities in container images. Wazuh polls and detects these vulnerabilities from AWS CloudWatch.
+
+Detecting vulnerabilities in container images
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Check the `Detecting vulnerabilities in container images using Amazon ECR <https://wazuh.com/blog/detecting-vulnerabilities-in-container-images-using-amazon-ecr/>`__ blog to learn how to detect vulnerabilities in container images using Wazuh and Amazon ECR integration.

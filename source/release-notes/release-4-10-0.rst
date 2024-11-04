@@ -59,6 +59,8 @@ Wazuh dashboard
 -  `#7041 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7041>`__ Changed the agents summary in overview with no results to an agent deployment help message.
 -  `#7036 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7036>`__ Changed malware feature description.
 -  `#7033 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7033>`__ Changed the font size of the KPI subtitles and the features descriptions.
+-  `#7059 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/7059>`__ Changed the initial width of the default columns for each selected field.
+-  `#7038 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7038>`__ Removed VirusTotal application in favor of Malware Detection.
 
 Packages
 ^^^^^^^^
@@ -66,7 +68,6 @@ Packages
 -  `#3059 <https://github.com/wazuh/wazuh-packages/pull/3059>`__ Add a post-install validation for Wazuh manager and Filebeat in the WIA.
 -  `#3088 <https://github.com/wazuh/wazuh-packages/pull/3088>`__ Removed OVA related files and references.
 -  `#3089 <https://github.com/wazuh/wazuh-packages/pull/3089>`__ Deleted installation assistant related files and references.
--  `#3141 <https://github.com/wazuh/wazuh-packages/pull/3141>`__ Reverted update of the source branch in the unattended installer.
 
 Resolved issues
 ---------------
@@ -82,6 +83,7 @@ Wazuh manager
 -  `#26223 <https://github.com/wazuh/wazuh/pull/26223>`__ Fixed repeated OS vulnerability reports.
 -  `#25479 <https://github.com/wazuh/wazuh/issues/25479>`__ Fixed inconsistencies between reported context and vulnerability data.
 -  `#26073 <https://github.com/wazuh/wazuh/pull/26073>`__ Fixed concurrency issues in LRU caches.
+-  `#26232 <https://github.com/wazuh/wazuh/pull/26232>`__ Removed all CVEs related to a deleted agent from the indexer.
 
 Wazuh agent
 ^^^^^^^^^^^
@@ -102,6 +104,7 @@ Wazuh dashboard
 -  `#7029 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7029>`__ Fixed no-agent alert appearing with a selected agent in the agent-welcome view.
 -  `#7042 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7042>`__ Fixed security policy exception when it contained deprecated actions.
 -  `#7048 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7048>`__ Fixed export of formatted CSV data with special characters from tables.
+-  `#7077 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7077>`__ Fixed filter management to prevent hiding when adding multiple filters.
 
 Changelogs
 ----------
