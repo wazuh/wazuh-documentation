@@ -218,6 +218,26 @@ redirections.push(
     '4.8': '/migration-guide/files-backup/restoring/wazuh-central-components.html',
     '4.9': '/migration-guide/restoring/wazuh-central-components.html',
   },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/cloud-security/azure/activity-services/entra/graph.html',
+    '4.9': '/cloud-security/azure/graph.html',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/cloud-security/azure/activity-services/entra/index.html',
+    '4.9': '/cloud-security/azure/graph.html#microsoft-entra-id-use-case',
+  },
+  {
+    'target': ['4.8=>4.9'],
+    '4.8': '/cloud-security/azure/activity-services/index.html',
+    '4.9': '/cloud-security/azure/index.html',
+  },
+  {
+    'target': ['4.8=>4.9'],
+    '4.8': '/cloud-security/azure/activity-services/prerequisites/considerations.html',
+    '4.9': '/cloud-security/azure/platform-and-services.html#prerequisites',
+  },
 );
 
 /* Pages added in 4.9 */
@@ -258,6 +278,8 @@ newUrls['4.9'] = [
   '/migration-guide/restoring/wazuh-central-components.html',
   '/cloud-security/amazon/services/prerequisites/aws-policy.html',
   '/cloud-security/amazon/services/prerequisites/iam-identities.html',
+  '/cloud-security/azure/graph.html',
+  '/cloud-security/azure/platform-and-services.html',
 ];
 
 /* Pages no longer available in 4.9 */
@@ -302,6 +324,10 @@ removedUrls['4.9'] = [
   '/migration-guide/files-backup/restoring/index.html',
   '/migration-guide/files-backup/restoring/wazuh-agent.html',
   '/migration-guide/files-backup/restoring/wazuh-central-components.html',
+  '/cloud-security/azure/activity-services/entra/graph.html',
+  '/cloud-security/azure/activity-services/entra/index.html',
+  '/cloud-security/azure/activity-services/index.html',
+  '/cloud-security/azure/activity-services/prerequisites/considerations.html',
 ];
 
 /* *** RELEASE 4.8 ****/
