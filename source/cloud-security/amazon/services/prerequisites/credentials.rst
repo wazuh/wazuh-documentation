@@ -1,201 +1,208 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn about the different ways to configure your AWS credentials when monitoring AWS services with Wazuh.
-
-.. _amazon_credentials:
+   :description: The Wazuh module for AWS might require access credentials to collect log data from the different AWS services. Learn more in this section of the documentation.
 
 Configuring AWS credentials
 ===========================
 
-In order to make the Wazuh AWS module pull log data from the different services, it's necessary to provide access credentials to connect to them. The ``.aws/credentials`` file must be placed at the correct location. You need to create the credentials file using ``root``. The root user is the one that runs *wazuh-modulesd*. Thus, the correct location is ``/root/.aws/credentials``, the home directory of the root user.
+You can configure the Wazuh module for AWS on the Wazuh server (which also behaves as the Wazuh agent) or on a Wazuh agent installed on a Linux endpoint. Depending on the authentication option used, the Wazuh module for AWS will require access credentials of an AWS Identity and Access Management (IAM) identity to collect log data from the different AWS services. These credentials need to be stored in a file named ``.aws/credentials`` on the Wazuh server or agent.
 
-There are multiple ways to configure the AWS credentials:
+You need to create the credentials file using the root user because the :doc:`wazuh-modulesd </user-manual/reference/daemons/wazuh-modulesd>` daemon runs with root permission. Ensure the ``.aws/credentials`` file is saved in the home directory of the root user, therefore the absolute file path will be ``/root/.aws/credentials``. This file is required for all authentication options except IAM roles for EC2 instances.
 
-- `Profiles`_
-- `IAM Roles`_
-- `IAM roles for EC2 instances`_
-- `Environment variables`_
-- `Insert the credentials into the configuration`_
+In the following sections, we describe how to configure the Wazuh module for AWS to pull AWS services logs using these credentials.
 
-Create an IAM User
-------------------
-
-Wazuh requires a user with permissions to pull log data from the different services. The easiest way to accomplish this is by creating a new IAM user in the AWS account.
-
-1. Create a new user:
-
-    Navigate to Services > IAM > Users
-
-    .. thumbnail:: /images/cloud-security/aws/aws-user.png
-      :align: center
-      :width: 70%
-
-    Click on "Next: Permissions" to continue.
-
-2. Confirm user creation and get credentials:
-
-    .. thumbnail:: /images/cloud-security/aws/aws-summary-user.png
-      :align: center
-      :width: 70%
-
-Save the credentials, you will use them later to configure the module.
-
-Depending on the service that will be monitored, the Wazuh user will need a different set of permissions. The permissions required for each service are explained on the page of each service listed in the :ref:`supported services <amazon_supported_services>` section.
+.. contents::
+   :local:
+   :depth: 2
+   :backlinks: none
 
 .. _authentication_method:
 
 Authenticating options
 ----------------------
 
-Credentials can be loaded from different locations. You can either specify the credentials as they are in the previous block of configuration, assume an IAM role, or load them from other `Boto3 supported locations <https://boto3.amazonaws.com/v1/documentation/api/latest/guide/credentials.html#configuring-credentials>`__.
+Credentials can be loaded from different locations. You can specify the credentials in a file, assume an IAM role, or load them from other `Boto3 supported locations <https://boto3.amazonaws.com/v1/documentation/api/latest/guide/credentials.html#configuring-credentials>`__.
+
+In this section, we describe the several methods of adding the AWS credentials to Wazuh and how to configure the Wazuh module for AWS to use the credentials.
 
 .. _aws_profile:
 
 Profiles
 ^^^^^^^^
 
-You can define profiles in ``/root/.aws/credentials`` and specify those profiles on the bucket configuration.
+Profiles represent logical groups of configuration. You can set up multiple profiles in the ``/root/.aws/credentials`` file. Each profile defines the access keys for a :ref:`previously created IAM user <iam_identities_create_iam_user>` and an AWS region. After setting up the profiles in the ``/root/.aws/credentials`` file, you must define which profile the Wazuh module for AWS will use to collect logs from AWS services.
 
 .. note::
-  A region must be also specified on the ``credentials`` file in order to make it work.
 
-For example, the following credentials file defines three different profiles: *default*, *dev* and *prod*.
+   An AWS region must be specified on the ``credentials`` file to make it work.
+
+In the example below, the ``/root/.aws/credentials`` file defines the *default*, *dev*, and *prod* profiles.
 
 .. code-block:: ini
+   :emphasize-lines: 1,6,11
 
-  [default]
-  aws_access_key_id=foo
-  aws_secret_access_key=bar
-  region=us-east-1
+   [default]
+   aws_access_key_id=foo
+   aws_secret_access_key=bar
+   region=us-east-1
 
-  [dev]
-  aws_access_key_id=foo2
-  aws_secret_access_key=bar2
-  region=us-east-1
+   [dev]
+   aws_access_key_id=foo2
+   aws_secret_access_key=bar2
+   region=us-east-1
 
-  [prod]
-  aws_access_key_id=foo3
-  aws_secret_access_key=bar3
-  region=us-east-1
+   [prod]
+   aws_access_key_id=foo3
+   aws_secret_access_key=bar3
+   region=us-east-1
 
-To use the *prod* profile in the AWS integration you would use the following bucket configuration:
+It is necessary to configure the Wazuh module for AWS using the ``/var/ossec/etc/ossec.conf`` file of the Wazuh server or agent. In the example below, we configure the Wazuh module for AWS to pull Amazon CloudTrail logs from the specified bucket using the *prod* profile.
 
 .. code-block:: xml
 
-  <bucket type="cloudtrail">
-    <name>my-bucket</name>
-    <aws_profile>prod</aws_profile>
-  </bucket>
+   <bucket type="cloudtrail">
+     <name>wazuh-s3-bucket</name>
+     <aws_profile>prod</aws_profile>
+   </bucket>
 
 .. _iam_roles:
 
 IAM Roles
 ^^^^^^^^^
 
-.. warning::
-  This authentication method requires some credentials to be previously added to the configuration using any other authentication method.
+An `IAM role <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html>`__ is an identity within your AWS account with specific permissions. It's similar to an IAM user but isn't associated with a specific person. Trusted entities can also use IAM roles to interact with different AWS services.  An IAM role can be assumed by AWS services, applications running on Amazon EC2 instances, and AWS Identity and Access Management (IAM) users.
 
-IAM Roles can also be used to interact with the different AWS services. This section shows how to create a sample IAM role with read-only permissions to pull data from a bucket:
+.. note::
 
-1. Go to Services > Security, Identity & Compliance > IAM.
+   This authentication method requires some credentials to be previously added to the configuration using any other authentication method.
 
-    .. thumbnail:: /images/cloud-security/aws/aws-create-role-1.png
+This section shows how to create a sample IAM role with read-only permissions to pull data from a bucket:
+
+#. Go to **Services** > **Security, Identity, & Compliance** > **IAM**.
+
+   .. thumbnail:: /images/cloud-security/aws/config-aws-credentials/select-iam.png
+      :title: Select IAM
+      :alt: Select IAM
       :align: center
-      :width: 70%
+      :width: 80%
 
-2. Select Roles in the right menu and click on the **Create role** button:
+#. Go to **Roles** on the left side of the AWS console and click **Create role**.
 
-    .. thumbnail:: /images/cloud-security/aws/aws-create-role-2.png
+   .. thumbnail:: /images/cloud-security/aws/config-aws-credentials/create-role.png
+      :title: Create role
+      :alt: Create role
       :align: center
-      :width: 70%
+      :width: 80%
 
-3. Select S3 service and click on the **Next: Permissions** button:
+#. Choose **AWS service** as Trusted entity type, **S3** as service and **Use case** then click **Next**.
 
-    .. thumbnail:: /images/cloud-security/aws/aws-create-role-4.png
+   .. thumbnail:: /images/cloud-security/aws/config-aws-credentials/select-trusted-entity.png
+      :title: Select trusted entity
+      :alt: Select trusted entity
       :align: center
-      :width: 70%
+      :width: 80%
 
-4. Select the previously created policy:
+#. Select a previously created :doc:`policy <aws-policy>` and click **Next**.
 
-    .. thumbnail:: /images/cloud-security/aws/aws-create-role-5.png
+   .. thumbnail:: /images/cloud-security/aws/config-aws-credentials/select-policy.png
+      :title: Select policy
+      :alt: Select policy
       :align: center
-      :width: 70%
+      :width: 80%
 
-5. Click on the **Create role** button:
+#. Give the role a descriptive name and click **Create role**.
 
-    .. thumbnail:: /images/cloud-security/aws/aws-create-role-6.png
+   .. thumbnail:: /images/cloud-security/aws/config-aws-credentials/assign-name-to-role.png
+      :title: Assign name to role
+      :alt: Assign name to role
       :align: center
-      :width: 70%
+      :width: 80%
 
-6. Access to role summary and click on its policy name:
-
-    .. thumbnail:: /images/cloud-security/aws/aws-create-role-7.png
+   .. thumbnail:: /images/cloud-security/aws/config-aws-credentials/assign-name-to-role-and-create-role.png
+      :title: Create role
+      :alt: Create role
       :align: center
-      :width: 70%
+      :width: 80%
 
-7. Add permissions so the new role can do *sts:AssumeRole* action:
+#. Access the role **Summary** and click on its **Policy name**.
 
-    .. thumbnail:: /images/cloud-security/aws/aws-create-role-8.png
+   .. thumbnail:: /images/cloud-security/aws/config-aws-credentials/click-a-policy.png
+      :title: Click a policy
+      :alt: Click a policy
       :align: center
-      :width: 70%
+      :width: 80%
 
-8. Come back to the role summary, go to the *Trust relationships* tab and click on the **Edit trust relationship** button:
+#. Add permissions so the new role can do `sts:AssumeRole <https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html>`__ action.
 
-    .. thumbnail:: /images/cloud-security/aws/aws-create-role-9.png
+   .. thumbnail:: /images/cloud-security/aws/config-aws-credentials/add-sts-assume.png
+      :title: Add STS AssumeRole action
+      :alt: Add STS AssumeRole action
       :align: center
-      :width: 70%
+      :width: 80%
 
-9. Add your user to the *Principal* tag and click on the **Update Trust Policy** button:
+#. Go back to the role **Summary**, go to the **Trust relationships** tab, and click **Edit trust policy**.
 
-    .. thumbnail:: /images/cloud-security/aws/aws-create-role-10.png
+   .. thumbnail:: /images/cloud-security/aws/config-aws-credentials/trust-relationship.png
+      :title: Edit trust relationship
+      :alt: Edit trust relationship
       :align: center
-      :width: 70%
+      :width: 80%
 
-Once your role is created, just paste it on the bucket configuration:
+#. Add the AWS IAM user to the ``Principal`` tag and click **Update policy**.
+
+   .. thumbnail:: /images/cloud-security/aws/config-aws-credentials/add-user-to-principal.png
+      :title: Add user to Principal
+      :alt: Add user to Principal
+      :align: center
+      :width: 80%
+
+#. After updating the trust policy, copy the Amazon Resource Name (ARN) of the role as this will be used to configure the Wazuh module for AWS.
+
+   .. thumbnail:: /images/cloud-security/aws/config-aws-credentials/update-trust-policy.png
+      :title: Update trust policy
+      :alt: Update trust policy
+      :align: center
+      :width: 80%
+
+It is necessary to configure the Wazuh module for AWS using the ``/var/ossec/etc/ossec.conf`` file of the Wazuh server or agent. In the example below, we configure the Wazuh module for AWS to pull Amazon CloudTrail logs from the specified bucket using the *default* profile and the *Wazuh-IAM-Role* IAM role.
 
 .. code-block:: xml
 
-  <bucket type="cloudtrail">
-    <name>my-bucket</name>
-    <aws_profile>default</aws_profile>
-    <iam_role_arn>arn:aws:iam::xxxxxxxxxxx:role/wazuh-role</iam_role_arn>
- </bucket>
+   <bucket type="cloudtrail">
+      <name><WAZUH_AWS_BUCKET></name>
+      <aws_profile>default</aws_profile>
+      <iam_role_arn>arn:aws:iam::xxxxxxxxxxx:role/Wazuh-IAM-Role</iam_role_arn>
+   </bucket>
 
 IAM roles for EC2 instances
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You can use IAM roles and assign them to EC2 instances so there's no need to insert authentication parameters on the ``ossec.conf`` file. This is the recommended configuration. Find more information about IAM roles on EC2 instances in the official `Amazon AWS documentation <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html>`_.
+You can use IAM roles and assign them to EC2 instances so there's no need to insert authentication parameters in the ``/var/ossec/etc/ossec.conf`` file of the Wazuh server or agent. This is the recommended configuration if the Wazuh server or agent is running on an EC2 instance. Find more information about IAM roles on EC2 instances in the official `Amazon AWS documentation <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html>`__.
 
-This is an example configuration:
+In the example below, we configure the Wazuh module for AWS to pull Amazon CloudTrail logs from the specified bucket using the IAM roles for EC2 instances.
 
 .. code-block:: xml
 
-  <bucket type="cloudtrail">
-    <name>my-bucket</name>
-  </bucket>
+   <bucket type="cloudtrail">
+     <name><WAZUH_AWS_BUCKET></name>
+   </bucket>
 
 Environment variables
 ^^^^^^^^^^^^^^^^^^^^^
 
-If you're using a single AWS account for all your buckets this could be the most suitable option for you. You just have to define the following environment variables:
+If you're using a single AWS account for all your buckets this could be the most suitable option for you. You have to define the following environment variables:
 
-* ``AWS_ACCESS_KEY_ID``
-* ``AWS_SECRET_ACCESS_KEY``
+-  **AWS_ACCESS_KEY_ID**
+-  **AWS_SECRET_ACCESS_KEY**
 
-Insert the credentials into the configuration
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Run the following command on the Wazuh server or agent to configure environment variables for the IAM user. Replace ``<PASTE-ACCESS-KEY>``  and ``<PASTE-SECRET-KEY>`` with the appropriate credentials.
 
-.. deprecated:: 4.4.0
+.. code-block:: console
 
-Another available option to set up credentials is writing them right into the Wazuh configuration file (``/var/ossec/etc/ossec.conf``), inside of the ``<bucket>`` block on the module configuration.
+   export AWS_ACCESS_KEY_ID=<PASTE-ACCESS-KEY>
+   export AWS_SECRET_ACCESS_KEY=<PASTE-SECRET-KEY>
 
-This is an example configuration:
+.. note::
 
-.. code-block:: xml
-
-  <bucket type="cloudtrail">
-    <name>my-bucket</name>
-    <access_key>insert_access_key</access_key>
-    <secret_key>insert_secret_key</secret_key>
-  </bucket>
+   This option can only be used when running the Wazuh module for AWS manually.

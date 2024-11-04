@@ -44,7 +44,7 @@ The manager pushes all files included in the group folder to the agents belongin
 
 In case an agent is assigned to multiple groups, all the files contained in each group folder will be merged into one, and subsequently sent to the agents, being the last one the group with the highest priority.
 
-The file ``ar.conf`` (active response status) will always be sent to agents even if it is not present in the group folder.
+The file ``ar.conf`` (Active Response status) will always be sent to agents even if it is not present in the group folder.
 
 The agent will store the shared files in ``/var/ossec/etc/shared``, not in a group folder.
 
