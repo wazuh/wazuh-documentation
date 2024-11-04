@@ -1353,14 +1353,14 @@ Suppose we have the following IP addresses for the Wazuh server nodes:
 
    .. include:: /_templates/common/restart_agent.rst
 
-Using this method, if the ``worker01`` node is not available, the agents will report to the Wazuh server node. This process is performed cyclically between all the nodes that we place in the ``/var/ossec/etc/ossec.conf`` of the agents.
+Using this method, if the ``worker01`` node is not available, the agents will report to the ``worker02``. If both worker nodes are unavailable, the agent will report to the ``master`` node. This process is performed cyclically between all the nodes that we place in the ``/var/ossec/etc/ossec.conf`` of the agents.
 
 .. _connecting_with_load_balancer:
 
 Connecting Wazuh agents to the Wazuh cluster with a load balancer
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Wazuh agents can be configured to report to a :ref:`load balancer <cluster_load_balancers>` to evenly distribute incoming Wazuh agent traffic among all available Wazuh server nodes in a cluster. This way, new Wazuh servrer nodes can be added without modifying the Wazuh agents' configuration.
+Wazuh agents can be configured to report to a :ref:`load balancer <cluster_load_balancers>` to evenly distribute incoming Wazuh agent traffic among all available Wazuh server nodes in a cluster. This way, Wazuh agents can report to newly added Wazuh server nodes without modifying the Wazuh agents' configuration.
 
 Perform the following steps to point a Wazuh agent to a load balancer.
 
