@@ -175,6 +175,11 @@ redirections.push(
   },
   {
     'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/user-manual/capabilities/malware-detection/osquery.html',
+    '4.9': '/user-manual/capabilities/system-inventory/osquery.html',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
     '4.8': '/user-manual/upscaling/adding-indexer-node.html',
     '4.9': '/user-manual/wazuh-indexer/wazuh-indexer-cluster.html#adding-wazuh-indexer-nodes',
   },
@@ -234,6 +239,7 @@ newUrls['4.9'] = [
   '/development/packaging/generate-indexer-package.html',
   '/development/packaging/generate-deb-rpm-package.html',
   '/user-manual/capabilities/log-data-collection/journald.html',
+  '/user-manual/capabilities/system-inventory/osquery.html',
   '/integrations-guide/amazon-security-lake/index.html',
   '/user-manual/agent/agent-enrollment/agent-life-cycle.html',
   '/user-manual/agent/agent-enrollment/deployment-variables/deployment-variables-aix.html',
@@ -291,6 +297,7 @@ removedUrls['4.9'] = [
   '/user-manual/capabilities/policy-monitoring/rootcheck/rootcheck-configuration.html',
   '/user-manual/capabilities/policy-monitoring/rootcheck/rootcheck-faq.html',
   '/user-manual/capabilities/policy-monitoring/ciscat/ciscat.html',
+  '/user-manual/capabilities/malware-detection/osquery.html',
   '/user-manual/upscaling/index.html',
   '/user-manual/upscaling/adding-indexer-node.html',
   '/user-manual/upscaling/adding-server-node.html',
