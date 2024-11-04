@@ -24,7 +24,7 @@ The ``-j`` option is used for enabling JSON output format, but only in Wazuh ser
 +-------------+---------------------------------------------------------------------------------------------------------+
 | **reload**  | Restart all Wazuh processes except wazuh-execd.                                                         |
 |             |                                                                                                         |
-|             | This allows an agent to reload without losing active response status.                                   |
+|             | This allows an agent to reload without losing Active Response status.                                   |
 |             |                                                                                                         |
 |             | This option is not available on a local Wazuh installation.                                             |
 +-------------+---------------------------------------------------------------------------------------------------------+

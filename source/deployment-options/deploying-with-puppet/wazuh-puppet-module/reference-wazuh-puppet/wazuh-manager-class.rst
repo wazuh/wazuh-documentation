@@ -732,9 +732,9 @@ Wazuh API variables
 $wazuh_api_host
   IP address or hostname of the Wazuh manager where the Wazuh API is running.
 
-  `Default 0.0.0.0`
+  `Default ['0.0.0.0', '::']`
 
-  `Type String`
+  `Type List`
 
 $wazuh_api_port
   Port where the Wazuh API will listen.
@@ -1230,7 +1230,7 @@ $active_response_rules_id
   `Default []`
 
 $active_response_timeout
-  Usually active response blocks for a certain amount of time.
+  Usually Active Response blocks for a certain amount of time.
 
   `Default undef`
 
