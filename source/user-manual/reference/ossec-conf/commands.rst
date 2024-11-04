@@ -90,7 +90,7 @@ Allows the user to customize the parameters sent to the active response script l
 timeout_allowed
 ^^^^^^^^^^^^^^^
 
-Specifies whether the command is *stateful* or *stateless*. If yes, the command is stateful, meaning it will undo its original action after the period of time specified in the active response.
+Specifies whether the command is *stateful* or *stateless*. If yes, the command is stateful, meaning it will undo its original action after the period of time specified in the Active Response.
 
 +--------------------+--------+
 | **Default value**  | no     |

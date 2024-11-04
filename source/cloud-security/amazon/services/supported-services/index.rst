@@ -1,83 +1,75 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The Wazuh for AWS module provides capabilities for monitoring AWS-based services. Learn how to install and configure it to monitor Amazon instances and services.  
-
-.. _amazon_supported_services:
+   :description: The next table contains the most relevant information about configuring each service in the ``/var/ossec/etc/ossec.conf`` file, as well as the path where the logs will be stored in the bucket if the corresponding service uses them as its storage medium
 
 Supported services
 ==================
 
-All the services except ``Inspector Classic`` and ``CloudWatch Logs`` get their data from log files stored in an ``S3`` bucket. These services store their data into log files which are configured inside ``<bucket type='TYPE'> </bucket>`` tags, while ``Inspector Classic`` and ``CloudWatch Logs`` services are configured inside ``<service type='inspector'> </service>`` and ``<service type='cloudwatchlogs'> </service>`` tags, respectively.
+All the services except ``Inspector Classic``, ``CloudWatch Logs``, and ``Security Lake`` get their data from log files stored in an ``S3`` bucket. These services store their data into log files which are configured inside ``<bucket type='TYPE'> </bucket>`` tags, while ``Inspector Classic`` and ``CloudWatch Logs`` services are configured inside ``<service type='inspector'> </service>`` and ``<service type='cloudwatchlogs'> </service>`` tags, respectively. The ``<subscriber type='TYPE'> </subscriber>`` tags are added to obtain logs from ``Amazon Security Lake`` buckets.
 
-.. versionadded:: 4.4.2
+The next table contains the most relevant information about configuring each service in the ``/var/ossec/etc/ossec.conf`` file, as well as the path where the logs will be stored in the bucket if the corresponding service uses them as its storage medium:
 
-The ``<subscriber type='TYPE'> </subscriber>`` tags are added in order to obtain logs from ``Amazon Security Lake`` buckets.
-
-The next table contains the most relevant information about configuring each service in the ``ossec.conf`` file, as well as the path where the logs will be stored in the bucket if the corresponding service uses them as its storage medium:
-
-+--------------+-------------------------------------------------------------------------------+-----------------------+----------------+------------------------------------------------------------------------------------------------------------------+
-| **Provider** | **Service**                                                                   | **Configuration tag** | **Type**       | **Path to logs**                                                                                                 |
-+--------------+-------------------------------------------------------------------------------+-----------------------+----------------+------------------------------------------------------------------------------------------------------------------+
-| Amazon       | :doc:`CloudTrail <cloudtrail>`                                                | bucket                | cloudtrail     | <bucket_name>/<prefix>/AWSLogs/<suffix>/<organization_id>/<account_id>/CloudTrail/<region>/<year>/<month>/<day>  |
-+--------------+-------------------------------------------------------------------------------+-----------------------+----------------+------------------------------------------------------------------------------------------------------------------+
-| Amazon       | :doc:`VPC <vpc>`                                                              | bucket                | vpcflow        | <bucket_name>/<prefix>/AWSLogs/<suffix>/<account_id>/vpcflowlogs/<region>/<year>/<month>/<day>                   |
-+--------------+-------------------------------------------------------------------------------+-----------------------+----------------+------------------------------------------------------------------------------------------------------------------+
-| Amazon       | :doc:`Config <config>`                                                        | bucket                | config         | <bucket_name>/<prefix>/AWSLogs/<suffix>/<account_id>/Config/<region>/<year>/<month>/<day>                        |
-+--------------+-------------------------------------------------------------------------------+-----------------------+----------------+------------------------------------------------------------------------------------------------------------------+
-| Amazon       | :doc:`ALB <elastic-load-balancing/alb>`                                       | bucket                | alb            | <bucket_name>/<prefix>/AWSLogs/<account_id>/elasticloadbalancing/<region>/<year>/<month>/<day>                   |
-+--------------+-------------------------------------------------------------------------------+-----------------------+----------------+------------------------------------------------------------------------------------------------------------------+
-| Amazon       | :doc:`CLB <elastic-load-balancing/clb>`                                       | bucket                | clb            | <bucket_name>/<prefix>/AWSLogs/<account_id>/elasticloadbalancing/<region>/<year>/<month>/<day>                   |
-+--------------+-------------------------------------------------------------------------------+-----------------------+----------------+------------------------------------------------------------------------------------------------------------------+
-| Amazon       | :doc:`NLB <elastic-load-balancing/nlb>`                                       | bucket                | nlb            | <bucket_name>/<prefix>/AWSLogs/<account_id>/elasticloadbalancing/<region>/<year>/<month>/<day>                   |
-+--------------+-------------------------------------------------------------------------------+-----------------------+----------------+------------------------------------------------------------------------------------------------------------------+
-| Amazon       | :doc:`KMS <kms>`                                                              | bucket                | custom         | <bucket_name>/<prefix>/<year>/<month>/<day>                                                                      |
-+--------------+-------------------------------------------------------------------------------+-----------------------+----------------+------------------------------------------------------------------------------------------------------------------+
-| Amazon       | :doc:`Macie <macie>`                                                          | bucket                | custom         | <bucket_name>/<prefix>/<year>/<month>/<day>                                                                      |
-+--------------+-------------------------------------------------------------------------------+-----------------------+----------------+------------------------------------------------------------------------------------------------------------------+
-| Amazon       | :doc:`Trusted Advisor <trusted-advisor>`                                      | bucket                | custom         | <bucket_name>/<prefix>/<year>/<month>/<day>                                                                      |
-+--------------+-------------------------------------------------------------------------------+-----------------------+----------------+------------------------------------------------------------------------------------------------------------------+
-| Amazon       | :doc:`GuardDuty Native <guardduty>`                                           | bucket                | guardduty      | <bucket_name>/<prefix>/AWSLogs/<suffix>/<account_id>/GuardDuty/<region>/<year>/<month>/<day>                     |
-+--------------+-------------------------------------------------------------------------------+-----------------------+----------------+------------------------------------------------------------------------------------------------------------------+
-| Amazon       | :doc:`GuardDuty Firehose <guardduty>`                                         | bucket                | guardduty      | <bucket_name>/<prefix>/<year>/<month>/<day>/<hh>                                                                 |
-+--------------+-------------------------------------------------------------------------------+-----------------------+----------------+------------------------------------------------------------------------------------------------------------------+
-| Amazon       | :doc:`WAF <waf>`                                                              | bucket                | waf            | <bucket_name>/<prefix>/AWSLogs/<suffix>/<account_id>/WAFLogs/<region>/<acl_name>/<year>/<month>/<day>/<hh>/<mm>  |
-+--------------+-------------------------------------------------------------------------------+-----------------------+----------------+------------------------------------------------------------------------------------------------------------------+
-| Amazon       | :doc:`S3 Server Access logs <server-access>`                                  | bucket                | server_access  | <bucket_name>/<prefix>                                                                                           |
-+--------------+-------------------------------------------------------------------------------+-----------------------+----------------+------------------------------------------------------------------------------------------------------------------+
-| Amazon       | :doc:`Inspector Classic <inspector>`                                          | service               | inspector      |                                                                                                                  |
-+--------------+-------------------------------------------------------------------------------+-----------------------+----------------+------------------------------------------------------------------------------------------------------------------+
-| Amazon       | :doc:`CloudWatch Logs <cloudwatchlogs>`                                       | service               | cloudwatchlogs |                                                                                                                  |
-+--------------+-------------------------------------------------------------------------------+-----------------------+----------------+------------------------------------------------------------------------------------------------------------------+
-| Amazon       | :doc:`Amazon ECR Image scanning <ecr-image-scanning>`                         | service               | cloudwatchlogs |                                                                                                                  |
-+--------------+-------------------------------------------------------------------------------+-----------------------+----------------+------------------------------------------------------------------------------------------------------------------+
-| Amazon       | :doc:`Amazon Security Lake <security-lake>`                                   | subscriber            | security_lake  |                                                                                                                  |
-+--------------+-------------------------------------------------------------------------------+-----------------------+----------------+------------------------------------------------------------------------------------------------------------------+
-| Amazon       | :doc:`Custom Logs Buckets <custom-buckets>`                                   | subscriber            | buckets        |                                                                                                                  |
-+--------------+-------------------------------------------------------------------------------+-----------------------+----------------+------------------------------------------------------------------------------------------------------------------+
-| Amazon       | :doc:`Security Hub <security-hub>`                                            | subscriber            | security_hub   |                                                                                                                  |
-+--------------+-------------------------------------------------------------------------------+-----------------------+----------------+------------------------------------------------------------------------------------------------------------------+
-| Cisco        | :doc:`Umbrella <cisco-umbrella>`                                              | bucket                | cisco_umbrella | <bucket_name>/<prefix>/<year>-<month>-<day>                                                                      |
-+--------------+-------------------------------------------------------------------------------+-----------------------+----------------+------------------------------------------------------------------------------------------------------------------+
++--------------+----------------------------------------------------------+-----------------------+----------------+----------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------+
+| **Provider** | **Service**                                              | **Configuration tag** | **Type**       | **Path to logs**                                                                                                     | **Required permission**                                          |
++--------------+----------------------------------------------------------+-----------------------+----------------+----------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------+
+| Amazon       | :doc:`CloudTrail <cloudtrail>`                           | bucket                | cloudtrail     | <WAZUH_AWS_BUCKET>/<prefix>/AWSLogs/<suffix>/<organization_id>/<ACCOUNT_ID>/CloudTrail/<REGION>/<year>/<month>/<day> | :ref:`Policy configuration <cloudtrail_policy_configuration>`    |
++--------------+----------------------------------------------------------+-----------------------+----------------+----------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------+
+| Amazon       | :doc:`VPC <vpc>`                                         | bucket                | vpcflow        | <WAZUH_AWS_BUCKET>/<prefix>/AWSLogs/<suffix>/<ACCOUNT_ID>/vpcflowlogs/<REGION>/<year>/<month>/<day>                  | :ref:`Policy configuration <vpc_policy_configuration>`           |
++--------------+----------------------------------------------------------+-----------------------+----------------+----------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------+
+| Amazon       | :doc:`Config <config>`                                   | bucket                | config         | <WAZUH_AWS_BUCKET>/<prefix>/AWSLogs/<suffix>/<ACCOUNT_ID>/Config/<REGION>/<year>/<month>/<day>                       | :ref:`Policy configuration <config_policy_configuration>`        |
++--------------+----------------------------------------------------------+-----------------------+----------------+----------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------+
+| Amazon       | :doc:`KMS <kms>`                                         | bucket                | custom         | <WAZUH_AWS_BUCKET>/<prefix>/<year>/<month>/<day>                                                                     | :ref:`Policy configuration <kms_policy_configuration>`           |
++--------------+----------------------------------------------------------+-----------------------+----------------+----------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------+
+| Amazon       | :doc:`Macie <macie>`                                     | bucket                | custom         | <WAZUH_AWS_BUCKET>/<prefix>/<year>/<month>/<day>                                                                     | :ref:`Policy configuration <macie_policy_configuration>`         |
++--------------+----------------------------------------------------------+-----------------------+----------------+----------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------+
+| Amazon       | :doc:`Trusted Advisor <trusted-advisor>`                 | bucket                | custom         | <WAZUH_AWS_BUCKET>/<prefix>/<year>/<month>/<day>                                                                     | :ref:`Policy configuration <tr_advisor_policy_configuration>`    |
++--------------+----------------------------------------------------------+-----------------------+----------------+----------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------+
+| Amazon       | :doc:`GuardDuty <guardduty>`                             | bucket                | guardduty      | <WAZUH_AWS_BUCKET>/<prefix>/<year>/<month>/<day>/<hh>                                                                | :ref:`Policy configuration <guardduty_policy_configuration>`     |
++--------------+----------------------------------------------------------+-----------------------+----------------+----------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------+
+| Amazon       | :doc:`WAF <waf>`                                         | bucket                | waf            | <WAZUH_AWS_BUCKET>/<prefix>/AWSLogs/<suffix>/<account_id>/WAFLogs/<region>/<acl_name>/<year>/<month>/<day>/<hh>/<mm> | :ref:`Policy configuration <waf_policy_configuration>`           |
++--------------+----------------------------------------------------------+-----------------------+----------------+----------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------+
+| Amazon       | :doc:`S3 Server Access logs <server-access>`             | bucket                | server_access  | <WAZUH_AWS_BUCKET>/<prefix>                                                                                          | :ref:`Policy configuration <server_access_policy_configuration>` |
++--------------+----------------------------------------------------------+-----------------------+----------------+----------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------+
+| Amazon       | :doc:`Inspector Classic <inspector>`                     | service               | inspector      |                                                                                                                      | :ref:`Policy configuration <inspector_policy_configuration>`     |
++--------------+----------------------------------------------------------+-----------------------+----------------+----------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------+
+| Amazon       | :doc:`CloudWatch Logs <cloudwatchlogs>`                  | service               | cloudwatchlogs |                                                                                                                      | :ref:`Policy configuration <cloudwatch_policy_configuration>`    |
++--------------+----------------------------------------------------------+-----------------------+----------------+----------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------+
+| Amazon       | :doc:`Amazon ECR Image scanning <ecr-image-scanning>`    | service               | cloudwatchlogs |                                                                                                                      | :ref:`Policy configuration <ecr_policy_configuration>`           |
++--------------+----------------------------------------------------------+-----------------------+----------------+----------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------+
+| Cisco        | :doc:`Umbrella <cisco-umbrella>`                         | bucket                | cisco_umbrella | <WAZUH_AWS_BUCKET>/<prefix>/<year>-<month>-<day>                                                                     | :ref:`Policy configuration <umbrella_policy_configuration>`      |
++--------------+----------------------------------------------------------+-----------------------+----------------+----------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------+
+| Amazon       | :doc:`ALB <elastic-load-balancing/alb>`                  | bucket                | alb            | <WAZUH_AWS_BUCKET>/<prefix>/AWSLogs/<ACCOUNT_ID>/elasticloadbalancing/<REGION>/<year>/<month>/<day>                  | :ref:`Policy configuration <alb_policy_configuration>`           |
++--------------+----------------------------------------------------------+-----------------------+----------------+----------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------+
+| Amazon       | :doc:`CLB <elastic-load-balancing/clb>`                  | bucket                | clb            | <WAZUH_AWS_BUCKET>/<prefix>/AWSLogs/<ACCOUNT_ID>/elasticloadbalancing/<REGION>/<year>/<month>/<day>                  | :ref:`Policy configuration <clb_policy_configuration>`           |
++--------------+----------------------------------------------------------+-----------------------+----------------+----------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------+
+| Amazon       | :doc:`NLB <elastic-load-balancing/nlb>`                  | bucket                | custom         | <WAZUH_AWS_BUCKET>/<prefix>/<year>/<month>/<day>                                                                     | :ref:`Policy configuration <nlb_policy_configuration>`           |
++--------------+----------------------------------------------------------+-----------------------+----------------+----------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------+
+| Amazon       | :doc:`Amazon Security Lake <security-lake>`              | subscriber            | security_lake  |                                                                                                                      | :ref:`Policy configuration <security_lake_policy_configuration>` |
++--------------+----------------------------------------------------------+-----------------------+----------------+----------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------+
+| Amazon       | :doc:`Custom Logs Buckets <custom-buckets>`              | subscriber            | buckets        |                                                                                                                      | :ref:`Amazon Simple Queue Service <sqs_custom_configuration>`    |
++--------------+----------------------------------------------------------+-----------------------+----------------+----------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------+
+| Amazon       | :doc:`Security Hub <security-hub>`                       | subscriber            | security_hub   |                                                                                                                      |                                                                  |
++--------------+----------------------------------------------------------+-----------------------+----------------+----------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------+
 
 .. toctree::
-    :maxdepth: 1
-    :hidden:
+   :maxdepth: 1
+   :hidden:
 
-    cloudtrail
-    vpc
-    config
-    kms
-    macie
-    trusted-advisor
-    guardduty
-    waf
-    server-access
-    inspector
-    cloudwatchlogs
-    ecr-image-scanning
-    cisco-umbrella
-    elastic-load-balancing/index
-    security-lake
-    custom-buckets
-    security-hub
+   cloudtrail
+   vpc
+   config
+   kms
+   macie
+   trusted-advisor
+   guardduty
+   waf
+   server-access
+   inspector
+   cloudwatchlogs
+   ecr-image-scanning
+   cisco-umbrella
+   elastic-load-balancing/index
+   security-lake
+   custom-buckets
+   security-hub

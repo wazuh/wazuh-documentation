@@ -3,10 +3,10 @@
 .. meta::
    :description: Learn more about how to configure the Active Response capability in this section of the Wazuh documentation. 
 
-How to configure active response
+How to configure Active Response
 ================================
 
-The following steps describe how to configure the active response module to perform an action on a monitored endpoint.
+The following steps describe how to configure the Active Response module to perform an action on a monitored endpoint.
 
 Configuring the Wazuh server
 ----------------------------
@@ -69,7 +69,7 @@ Configuring the Wazuh server
 
    -  ``<timeout>``: Specifies how long the active response action is effective, in seconds.
 
-   Refer to the :doc:`active response </user-manual/reference/ossec-conf/active-response>` configuration section for more information on the supported options.
+   Refer to the :doc:`Active Response </user-manual/reference/ossec-conf/active-response>` configuration section for more information on the supported options.
 
 #. Restart the Wazuh manager to apply all the changes made:
 

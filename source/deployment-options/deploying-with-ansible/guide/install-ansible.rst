@@ -62,7 +62,7 @@ For Debian and Ubuntu, we will use the Ansible PPA repository. The steps are as 
    .. code-block:: console
 
       # apt-get update
-      # apt-get install lsb-release software-properties-common
+      # apt-get install lsb-release software-properties-common gnupg
 
 #. Setup ansible repository:
 
