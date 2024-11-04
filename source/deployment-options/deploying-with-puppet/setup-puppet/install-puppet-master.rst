@@ -26,7 +26,7 @@ Install the Puppet yum repository and then the “puppetserver” package. See t
 
   .. code-block:: console
 
-    # sudo rpm -Uvh https://yum.puppet.com/puppet7-release-el-8.noarch.rpm
+    # sudo rpm -Uvh https://yum.puppetlabs.com/puppet7-release-el-8.noarch.rpm
     # yum -y install puppetserver
 
 

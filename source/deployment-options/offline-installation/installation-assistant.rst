@@ -27,6 +27,7 @@ Install and configure the Wazuh indexer nodes.
       -  debconf
       -  adduser
       -  procps
+      -  apt-transport-https
 
 #. Run the assistant with the ``--offline-installation`` to perform an offline installation. Use the option ``--wazuh-indexer`` and the node name to install and configure the Wazuh indexer. The node name must be the same one used in ``config.yml`` for the initial configuration, for example, ``node-1``.
 
@@ -89,6 +90,12 @@ Installing the Wazuh server
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. tabs::
+
+   .. group-tab:: RPM
+
+      On systems with *yum* as package manager, the following dependencies must be installed on the Wazuh server nodes.
+
+      -  libcap
 
    .. group-tab:: DEB
 

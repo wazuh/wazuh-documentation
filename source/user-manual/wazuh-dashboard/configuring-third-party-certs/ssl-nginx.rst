@@ -160,7 +160,7 @@ Configure the proxy and the certificates
    -  ``<WAZUH_DASHBOARD_IP_ADDRESS>`` with your Wazuh dashboard IP address.
    -  ``<PORT_NUMBER>`` with your new port number.
 
-#. Restart the Wazuh dashboard and the Wazuh server
+#. Restart the Wazuh dashboard and the Wazuh server:
 
    .. code-block:: console
 
