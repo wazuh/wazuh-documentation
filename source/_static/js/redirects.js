@@ -228,6 +228,71 @@ redirections.push(
     '4.8': '/migration-guide/files-backup/restoring/wazuh-central-components.html',
     '4.9': '/migration-guide/restoring/wazuh-central-components.html',
   },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/cloud-security/azure/activity-services/entra/graph.html',
+    '4.9': '/cloud-security/azure/graph.html',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/cloud-security/azure/activity-services/entra/index.html',
+    '4.9': '/cloud-security/azure/graph.html#microsoft-entra-id-use-case',
+  },
+  {
+    'target': ['4.8=>4.9'],
+    '4.8': '/cloud-security/azure/activity-services/index.html',
+    '4.9': '/cloud-security/azure/index.html',
+  },
+  {
+    'target': ['4.8=>4.9'],
+    '4.8': '/cloud-security/azure/activity-services/prerequisites/considerations.html',
+    '4.9': '/cloud-security/azure/platform-and-services.html#prerequisites',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/cloud-security/azure/activity-services/prerequisites/credentials.html',
+    '4.9': '/cloud-security/azure/platform-and-services.html#configuring-azure-credentials',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/cloud-security/azure/activity-services/prerequisites/dependencies.html',
+    '4.9': '/cloud-security/azure/platform-and-services.html#installing-dependencies',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/cloud-security/azure/activity-services/prerequisites/index.html',
+    '4.9': '/cloud-security/azure/platform-and-services.html#prerequisites',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/cloud-security/azure/activity-services/services/index.html',
+    '4.9': '/cloud-security/azure/index.html',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/cloud-security/azure/activity-services/services/log-analytics.html',
+    '4.9': '/cloud-security/azure/log-analytics.html',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/cloud-security/azure/activity-services/services/storage.html',
+    '4.9': '/cloud-security/azure/storage.html',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/cloud-security/azure/activity-services/index.html',
+    '4.9': '/cloud-security/azure/platform-and-services.html',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/cloud-security/ms-graph/index.html',
+    '4.9': '/cloud-security/azure/monitoring-ms-graph.html',
+  },
+  {
+    'target': ['4.8=>4.9'],
+    '4.8': '/cloud-security/ms-graph/monitoring-ms-graph-activity.html',
+    '4.9': '/cloud-security/azure/monitoring-ms-graph.html',
+  },
 );
 
 /* Pages added in 4.9 */
@@ -271,6 +336,12 @@ newUrls['4.9'] = [
   '/migration-guide/restoring/wazuh-central-components.html',
   '/cloud-security/amazon/services/prerequisites/aws-policy.html',
   '/cloud-security/amazon/services/prerequisites/iam-identities.html',
+  '/cloud-security/azure/graph.html',
+  '/cloud-security/azure/platform-and-services.html',
+  '/cloud-security/azure/log-analytics.html',
+  '/cloud-security/azure/storage.html',
+  '/cloud-security/azure/monitoring-ms-graph.html',
+  '/cloud-security/azure/ms-graph-api-setup.html',
 ];
 
 /* Pages no longer available in 4.9 */
@@ -318,6 +389,19 @@ removedUrls['4.9'] = [
   '/migration-guide/files-backup/restoring/index.html',
   '/migration-guide/files-backup/restoring/wazuh-agent.html',
   '/migration-guide/files-backup/restoring/wazuh-central-components.html',
+  '/cloud-security/azure/activity-services/entra/graph.html',
+  '/cloud-security/azure/activity-services/entra/index.html',
+  '/cloud-security/azure/activity-services/index.html',
+  '/cloud-security/azure/activity-services/prerequisites/considerations.html',
+  '/cloud-security/azure/activity-services/prerequisites/credentials.html',
+  '/cloud-security/azure/activity-services/prerequisites/dependencies.html',
+  '/cloud-security/azure/activity-services/prerequisites/index.html',
+  '/cloud-security/azure/activity-services/services/index.html',
+  '/cloud-security/azure/activity-services/services/log-analytics.html',
+  '/cloud-security/azure/activity-services/services/storage.html',
+  '/cloud-security/azure/posture-management.html',
+  '/cloud-security/ms-graph/index.html',
+  '/cloud-security/ms-graph/monitoring-ms-graph-activity.html',
 ];
 
 /* *** RELEASE 4.8 ****/
