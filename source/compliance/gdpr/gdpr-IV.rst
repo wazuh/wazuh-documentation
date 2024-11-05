@@ -363,5 +363,5 @@ Wazuh helps meet this article of the GDPR by providing security measures such as
 -  :doc:`/user-manual/capabilities/malware-detection/index`.
 -  :doc:`Integrating with YARA to detect malware </proof-of-concept-guide/detect-malware-yara-integration>`.
 -  `Using constant database (CDB) lists to detect and remove malicious files <https://wazuh.com/blog/detecting-and-responding-to-malicious-files-using-cdb-lists-and-active-response/>`__.
--  :doc:`Active response </getting-started/use-cases/incident-response>`.
+-  :doc:`Active Response </getting-started/use-cases/incident-response>`.
 -  :doc:`Vulnerability detection </getting-started/use-cases/vulnerability-detection>`.
