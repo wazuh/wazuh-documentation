@@ -53,7 +53,7 @@ To build the packages, follow these steps:
 
    .. note::
 
-      If you want to build a package to ARM architecture, you must use the ``--linux-arm`` flag in the ``yarn build`` command instead of the ``--linux`` flag.
+      To build a package for ARM architecture, you must use the ``--linux-arm`` flag with the ``yarn build`` command, rather than the ``--linux`` flag.
 
 #. Clone the Wazuh Security Dashboards Plugin repository in the plugins folder and build the plugin.
 
@@ -148,19 +148,19 @@ Using the script
 
 Run the ``build-packages.sh`` script in the ``dev-tools/build-packages/`` folder of the repository. The script requires the following parameters:
 
-- ``-a``, ``--app``: Path to the ``wazuh-package.zip``.
-- ``-b``, ``--base``: Path to the ``dashboard-package.zip``.
-- ``-s``, ``--security``: Path to the ``security-package.zip``.
-- ``-v``, ``--version``: Set the version of this build.
-- ``--all-platforms``: Build all platforms.
-- ``--deb``: Build deb.
-- ``--rpm``: Build rpm.
-- ``--tar``: Build tar.gz.
-- ``-r``, ``--revision``: [Optional] Set the revision of this build. By default, it is set to 1.
-- ``--production``:[Optional] The naming of the package will be ready for production. Otherwise, it will include the hash of the current commit.
-- ``--arm``: [Optional] Build for arm64 instead of x64.
-- ``--debug``: [Optional] Enables debug mode, which will show detailed information during the script run.
-- ``--silent``: [Optional] Enables silent mode, which will show the minimum possible information during the script run. ``--debug`` has priority over this.
+- ``-a``, ``--app``: Indicate the path to the ``wazuh-package.zip``.
+- ``-b``, ``--base``: Indicate the path to the ``dashboard-package.zip``.
+- ``-s``, ``--security``: Indicate the path to the ``security-package.zip``.
+- ``-v``, ``--version``: Set the version for this build.
+- ``--all-platforms``: Build the package for all platforms.
+- ``--deb``: Build a deb package.
+- ``--rpm``: Build an rpm package.
+- ``--tar``: Build a tar.gz archive.
+- ``-r``, ``--revision``: [Optional] Indicate the revision for this build; defaults to 1.
+- ``--production``:[Optional] Prepare the package naming for production; otherwise, it will include the hash of the current commit.
+- ``--arm``: [Optional] Build for arm64 architecture instead of x64.
+- ``--debug``: [Optional] Enables debug mode to display detailed information during script execution.
+- ``--silent``: [Optional] Enables silent mode to show minimal information during the script run; note that --debug takes precedence over this option.
 
 .. code:: console
 
@@ -169,11 +169,11 @@ Run the ``build-packages.sh`` script in the ``dev-tools/build-packages/`` folder
 
 .. note::
 
-   In the inputs where a local path is available, use ``file://<absolute_path>`` to indicate it.
+   In cases where a local path is available, use ``file://<absolute_path>`` to indicate it.
 
 .. note::
 
-   To build ``arm`` packages, you need to run the script in an arm machine, and use an arm build of the wazuh-dashboard base with ``-b``
+   To build ``arm`` packages, you need to run the script on an arm machine, and use an arm build of the wazuh-dashboard base with the ``-b`` option.
 
 Example:
 
@@ -187,16 +187,16 @@ The package will be generated in the ``output`` folder of the same directory whe
 Build with Docker image
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-This option facilitates the creation of packages of all plugins in order to generate the Wazuh dashboard installer.
+This option facilitates the creation of packages that include all necessary plugins to generate the Wazuh dashboard installer.
 
 .. topic:: Requirements
 
    - A system with Docker.
-   - Internet connection (to download the docker images the first time).
+   - Internet connection (to download the Docker images the first time).
 
 .. topic:: Steps
 
-   #. Clone the Wazuh dashboard repository and move to the ``dev-tools/build-packages/base-packages-to-base`` folder of the repository.
+   #. Clone the Wazuh dashboard repository and navigate to the ``dev-tools/build-packages/base-packages-to-base`` folder within it.
 
       .. code:: console
       
@@ -212,11 +212,11 @@ This option facilitates the creation of packages of all plugins in order to gene
 
    #. Run the script ``run-docker-compose.sh`` with the following parameters:
 
-      -  ``--node-version``: Node version to use in the ``.nvmrc`` file.
+      -  ``--node-version``: Specifies the Node version for the ``.nvmrc`` file.
       -  ``-b``, ``--base``: Branch of the Wazuh dashboards repository.
       -  ``-a``, ``--app``: Branch of the Wazuh dashboards Plugins repository.
       -  ``-s``, ``--security```: Branch of the Wazuh Security Dashboards Plugin repository.
-      -  ``--arm``: [Optional] Build for arm64 instead of x64.
+      -  ``--arm``: [Optional] Build for arm6 architecture instead of x64.
 
       .. code:: console
       
@@ -236,11 +236,11 @@ This option facilitates the creation of packages of all plugins in order to gene
          #   --security 4.10.2 \
          #   --node-version 18.19.0
 
-   #. The packages will be generated in the ``packages`` folder of the ``base-packages-to-base`` folder.
+   #. The packages will be created in the ``packages`` directory within the ``base-packages-to-base`` folder.
 
       .. note::
 
-         If you want to build a custom package, you can replace the packages in the ``packages`` folder with the ones you have customized.
+         To build a custom package, replace the contents of the ``packages`` folder with your customized packages.
 
    #. Zip the packages
 
@@ -264,4 +264,4 @@ This option facilitates the creation of packages of all plugins in order to gene
 
          # ./build-packages.sh -v 4.10.2 -r 1 --deb -a file://$(pwd)/base-packages-to-base/packages/wazuh-package.zip -s file://$(pwd)/base-packages-to-base/packages/security-package.zip -b file://$(pwd)/base-packages-to-base/packages/dashboard-package.zip
 
-      The package will be generated in the ``output`` folder of the same directory where the script is located.
+      The package will be created in the ``output`` folder within the same directory as the script.
