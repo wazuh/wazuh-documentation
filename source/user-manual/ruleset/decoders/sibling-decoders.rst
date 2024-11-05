@@ -47,7 +47,7 @@ We have a log source that provides the following log message:
 
 .. code-block:: none
 
-   2019/01/02 13:16:35 securityapp: INFO: srcuser="Bob" action="called" dstusr="Alice"
+   Apr 12 14:31:38 hostname1 securityapp: INFO: srcuser="Bob" action="called" dstusr="Alice"
 
 A simple decoder may be:
 
