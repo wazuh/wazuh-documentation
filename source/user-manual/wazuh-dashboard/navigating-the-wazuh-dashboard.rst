@@ -40,6 +40,7 @@ This section shows dashboards for:
 -  :doc:`Threat Hunting </getting-started/use-cases/threat-hunting>`
 -  :doc:`Vulnerability Detection </user-manual/capabilities/vulnerability-detection/index>`
 -  :doc:`MITRE ATT&CK </user-manual/ruleset/mitre>`
+-  :doc:`VirusTotal </user-manual/capabilities/malware-detection/virus-total-integration>`
 
 .. thumbnail:: /images/wazuh-dashboard/navigating/threat-intelligence.png
    :align: center

@@ -56,8 +56,8 @@ Screenshots
           :title: Security configuration assessment   
           :alt: Security configuration assessment   
    * - .. thumbnail:: ../images/getting-started/endpoints-summary.png
-          :title: Endpoints Summary 
-          :alt: Endpoints Summary 
+          :title: Summary 
+          :alt: Summary 
      - .. thumbnail:: ../images/getting-started/aws.png
           :title: Amazon Web Services 
           :alt: Amazon Web Services 
