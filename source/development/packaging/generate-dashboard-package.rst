@@ -40,7 +40,7 @@ To build the packages, follow these steps:
       # git clone -b <BRANCH_OR_TAG> https://github.com/wazuh/wazuh-dashboard.git
       # cd wazuh-dashboard/
       # yarn osd bootstrap
-      # yarn build < --linux || --linux-arm > --skip-os-packages --release
+      # yarn build <--linux | --linux-arm> --skip-os-packages --release
 
    Example:
 
@@ -53,7 +53,7 @@ To build the packages, follow these steps:
 
    .. note::
 
-      To build a package for ARM architecture, you must use the ``--linux-arm`` flag with the ``yarn build`` command, rather than the ``--linux`` flag.
+      To build a package for ARM architecture, use the ``--linux-arm`` flag with the ``yarn build`` command instead of ``--linux``.
 
 #. Clone the Wazuh Security Dashboards Plugin repository in the plugins folder and build the plugin.
 
@@ -148,32 +148,34 @@ Using the script
 
 Run the ``build-packages.sh`` script in the ``dev-tools/build-packages/`` folder of the repository. The script requires the following parameters:
 
-- ``-a``, ``--app``: Indicate the path to the ``wazuh-package.zip``.
-- ``-b``, ``--base``: Indicate the path to the ``dashboard-package.zip``.
-- ``-s``, ``--security``: Indicate the path to the ``security-package.zip``.
-- ``-v``, ``--version``: Set the version for this build.
-- ``--all-platforms``: Build the package for all platforms.
-- ``--deb``: Build a deb package.
-- ``--rpm``: Build an rpm package.
-- ``--tar``: Build a tar.gz archive.
-- ``-r``, ``--revision``: [Optional] Indicate the revision for this build; defaults to 1.
-- ``--production``:[Optional] Prepare the package naming for production; otherwise, it will include the hash of the current commit.
-- ``--arm``: [Optional] Build for arm64 architecture instead of x64.
-- ``--debug``: [Optional] Enables debug mode to display detailed information during script execution.
-- ``--silent``: [Optional] Enables silent mode to show minimal information during the script run; note that --debug takes precedence over this option.
+-  ``-a``, ``--app``: Indicate the path to ``wazuh-package.zip``.
+-  ``-b``, ``--base``: Indicate the path to ``dashboard-package.zip``.
+-  ``-s``, ``--security``: Indicate the path to ``security-package.zip``.
+-  ``-v``, ``--version``: Set the version for this build.
+-  ``--all-platforms``: Build the packages for all platforms.
+-  ``--deb``: Build a deb package.
+-  ``--rpm``: Build an rpm package.
+-  ``--tar``: Build a tar.gz archive.
+-  ``-r``, ``--revision``: *Optional* – Set the revision for this build. Defaults to ``1``.
+-  ``--production``: *Optional* – Use package naming for production. Otherwise, it includes the hash of the current commit.
+-  ``--arm``: *Optional* – Build for arm64 architecture instead of x64.
+-  ``--debug``: *Optional* – Enable debug mode to display detailed information during execution.
+-  ``--silent``: *Optional* – Enable silent mode for minimal output. Note that ``--debug`` overrides this option.
 
 .. code:: console
 
    # cd ../wazuh-dashboard/dev-tools/build-packages/
-   # ./build-packages.sh -v <VERSION> -r <REVISION> --<DISTRIBUTION_(--deb || --rpm || --tar || --all-platforms)> -a file:///<PATH_TO_wazuh-package.zip> -s file:///<PATH_TO_security-package.zip> -b file:///<PATH_TO_dashboard-package.zip>
+   # ./build-packages.sh -v <VERSION> -r <REVISION> --<DISTRIBUTION> -a file:///<PATH_TO_wazuh-package.zip> -s file:///<PATH_TO_security-package.zip> -b file:///<PATH_TO_dashboard-package.zip>
+
+Where ``--<DISTRIBUTION>`` is either ``--deb``, ``--rpm``,  ``--tar``, or ``--all-platforms``.
 
 .. note::
 
-   In cases where a local path is available, use ``file://<absolute_path>`` to indicate it.
+   In cases where a local path is available, use ``file://<ABSOLUTE_PATH>`` to specify its absolute path.
 
 .. note::
 
-   To build ``arm`` packages, you need to run the script on an arm machine, and use an arm build of the wazuh-dashboard base with the ``-b`` option.
+   To build ARM packages, run the script on an ARM machine. Use  the ``-b`` option with an ARM build of the Wazuh dashboard base.
 
 Example:
 
@@ -182,86 +184,90 @@ Example:
    # cd ../wazuh-dashboard/dev-tools/build-packages/
    # ./build-packages.sh -v 4.10.2 -r 1 --deb -a file:///packages/wazuh-package.zip -s file:///packages/security-package.zip -b file:///packages/dashboard-package.zip
 
-The package will be generated in the ``output`` folder of the same directory where the script is located.
+The script generates the package in the ``output`` folder of the same directory where it is located.
 
 Build with Docker image
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-This option facilitates the creation of packages that include all necessary plugins to generate the Wazuh dashboard installer.
+This option allows you to create packages that include all necessary plugins required to generate the Wazuh dashboard installer.
 
-.. topic:: Requirements
+Requirements
+~~~~~~~~~~~~
 
-   - A system with Docker.
-   - Internet connection (to download the Docker images the first time).
+-  A system with Docker installed.
+-  Internet connection to download the Docker images for the first time.
 
-.. topic:: Steps
+Building the packages
+~~~~~~~~~~~~~~~~~~~~~
 
-   #. Clone the Wazuh dashboard repository and navigate to the ``dev-tools/build-packages/base-packages-to-base`` folder within it.
+#. Clone the Wazuh dashboard repository and navigate to the ``dev-tools/build-packages/base-packages-to-base`` folder within it.
 
-      .. code:: console
-      
-         # git clone -b <BRANCH_OR_TAG> https://github.com/wazuh/wazuh-dashboard.git
-         # cd wazuh-dashboard/dev-tools/build-packages/
-      
-      Example:
-      
-      .. code:: console
-      
-         # git clone -b 4.10.2 https://github.com/wazuh/wazuh-dashboard.git
-         # cd wazuh-dashboard/dev-tools/build-packages/base-packages-to-base
+   .. code:: console
 
-   #. Run the script ``run-docker-compose.sh`` with the following parameters:
+      # git clone -b <BRANCH_OR_TAG> https://github.com/wazuh/wazuh-dashboard.git
+      # cd wazuh-dashboard/dev-tools/build-packages/
 
-      -  ``--node-version``: Specifies the Node version for the ``.nvmrc`` file.
-      -  ``-b``, ``--base``: Branch of the Wazuh dashboards repository.
-      -  ``-a``, ``--app``: Branch of the Wazuh dashboards Plugins repository.
-      -  ``-s``, ``--security```: Branch of the Wazuh Security Dashboards Plugin repository.
-      -  ``--arm``: [Optional] Build for arm6 architecture instead of x64.
+   Example:
 
-      .. code:: console
-      
-         # docker build \
-         # --node-version <NODE_VERSION> \
-         # --base <BRANCH_OF_wazuh-dashboard> \
-         # --app <BRANCH_OF_wazuh-dashboard-plugins> \
-         # --security <BRANCH_OF_wazuh-security-dashboards-plugin>
+   .. code:: console
 
-      Example:
-      
-      .. code:: console
-      
-         # bash run-docker-compose.sh \
-         #   --app 4.10.2 \
-         #   --base 4.10.2 \
-         #   --security 4.10.2 \
-         #   --node-version 18.19.0
+      # git clone -b 4.10.2 https://github.com/wazuh/wazuh-dashboard.git
+      # cd wazuh-dashboard/dev-tools/build-packages/base-packages-to-base
 
-   #. The packages will be created in the ``packages`` directory within the ``base-packages-to-base`` folder.
+#. Run the script ``run-docker-compose.sh`` with the following parameters:
 
-      .. note::
+   -  ``--node-version``: Node.js version for the ``.nvmrc`` file.
+   -  ``-b``, ``--base``: Branch of the Wazuh dashboard repository.
+   -  ``-a``, ``--app``: Branch of the Wazuh dashboard plugins repository.
+   -  ``-s``, ``--security```: Branch of the Wazuh Security Dashboards Plugin repository.
+   -  ``--arm``: *Optional* – Build for arm6 architecture instead of x64.
 
-         To build a custom package, replace the contents of the ``packages`` folder with your customized packages.
+   .. code:: console
 
-   #. Zip the packages
+      # docker build \
+      --node-version <NODE_VERSION> \
+      --base <BRANCH_OF_wazuh-dashboard> \
+      --app <BRANCH_OF_wazuh-dashboard-plugins> \
+      --security <BRANCH_OF_wazuh-security-dashboards-plugin>
 
-      .. code:: console
+   Example:
 
-         # cd ./packages
-         # zip -r -j ./dashboard-package.zip ./wazuh-dashboard/*.tar.gz
-         # zip -r -j ./security-package.zip ./wazuh-security-dashboards-plugin/*.zip
-         # zip -r -j ./wazuh-package.zip ./wazuh-dashboard-plugins/*.zip
+   .. code:: console
 
-   #. Build deb, rpm, or tar.gz packages
+      # bash run-docker-compose.sh \
+      --app 4.10.2 \
+      --base 4.10.2 \
+      --security 4.10.2 \
+      --node-version 18.19.0
 
-      .. code:: console
+   The script creates the packages in the ``packages`` directory within the ``base-packages-to-base`` folder.
 
-         # cd ../../
-         # ./build-packages.sh -v <VERSION> -r <REVISION> (optional --arm) --<DISTRIBUTION_(--deb || --rpm || --tar || --all-platforms)> -a file:///<PATH_TO_wazuh-package.zip> -s file:///<PATH_TO_security-package.zip> -b file:///<PATH_TO_dashboard-package.zip>
+   .. note::
 
-      Example:
+      To build a custom package, replace the contents of the ``packages`` folder with your customized packages.
 
-      .. code:: console
+#. Zip the packages
 
-         # ./build-packages.sh -v 4.10.2 -r 1 --deb -a file://$(pwd)/base-packages-to-base/packages/wazuh-package.zip -s file://$(pwd)/base-packages-to-base/packages/security-package.zip -b file://$(pwd)/base-packages-to-base/packages/dashboard-package.zip
+   .. code:: console
 
-      The package will be created in the ``output`` folder within the same directory as the script.
+      # cd ./packages
+      # zip -r -j ./dashboard-package.zip ./wazuh-dashboard/*.tar.gz
+      # zip -r -j ./security-package.zip ./wazuh-security-dashboards-plugin/*.zip
+      # zip -r -j ./wazuh-package.zip ./wazuh-dashboard-plugins/*.zip
+
+#. Build deb, rpm, or tar.gz packages
+
+   .. code:: console
+
+      # cd ../../
+      # ./build-packages.sh -v <VERSION> -r <REVISION> [--arm] --<DISTRIBUTION> -a file:///<PATH_TO_wazuh-package.zip> -s file:///<PATH_TO_security-package.zip> -b file:///<PATH_TO_dashboard-package.zip>
+
+   Where ``--<DISTRIBUTION>`` is either ``--deb``, ``--rpm``, ``--tar``, or ``--all-platforms``.
+
+   Example:
+
+   .. code:: console
+
+      # ./build-packages.sh -v 4.10.2 -r 1 --deb -a file://$(pwd)/base-packages-to-base/packages/wazuh-package.zip -s file://$(pwd)/base-packages-to-base/packages/security-package.zip -b file://$(pwd)/base-packages-to-base/packages/dashboard-package.zip
+
+   The script creates the package in the ``output`` folder within the same directory as the script.
