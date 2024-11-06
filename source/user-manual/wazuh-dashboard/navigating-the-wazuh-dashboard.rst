@@ -118,7 +118,7 @@ Users can view existing groups, create new endpoint groups, and organize endpoin
 Server management
 -----------------
 
-Wazuh server management offers options for managing rules, decoders, CDB lists, clusters, security configurations such as user, roles, policies and more. It also includes options for managing Wazuh agents installed on monitored endpoints.
+Wazuh server management offers options for managing rules, decoders, CDB lists, clusters, security configurations such as user, roles, policies and more.
 
 .. thumbnail:: /images/wazuh-dashboard/navigating/server-management.png
    :align: center
