@@ -39,7 +39,7 @@ Wazuh meets the architecture, infrastructure, and security software aspects of t
          </synchronization>
        </wodle>
 
-#. Navigate to **Agents management** > **Summary** > **AGENT_NAME** > **Inventory data** on the Wazuh dashboard. Where **AGENT_NAME** is the monitored endpoint. You can see details about installed applications, network services, and used ports on the monitored endpoint. #.
+#. Navigate to **Agents management** > **Summary** > **AGENT_NAME** > **Inventory data** on the Wazuh dashboard. Where **AGENT_NAME** is the monitored endpoint. You can see details about installed applications, network services, and used ports on the monitored endpoint.
 
    .. thumbnail:: /images/compliance/tsc/common-criteria/agent-inventory-data.png
       :title: Agent inventory data
