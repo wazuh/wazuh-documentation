@@ -55,6 +55,15 @@ Wazuh collects logs from a wide range of sources, enabling comprehensive monitor
       :align: center
       :width: 80%
 
+-  **Custom logs**: You can configure Wazuh to collect and parse logs from several applications and third-party security tools like :doc:`VirusTotal </user-manual/capabilities/malware-detection/virus-total-integration>`, :doc:`Windows Defender </user-manual/capabilities/malware-detection/win-defender-logs-collection>`, and :doc:`ClamAV </user-manual/capabilities/malware-detection/clam-av-logs-collection>`. The image below shows an alert of a log from VirusTotal processed by the Wazuh server.
+
+   .. thumbnail:: /images/getting-started/use-cases/log-data-analysis/virustotal-log-alert.png
+      :title: VirusTotal log alert
+      :alt: VirusTotal log alert
+      :align: center
+      :width: 80%
+
+
 Rules and decoders
 ------------------
 

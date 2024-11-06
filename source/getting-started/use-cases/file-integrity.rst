@@ -88,7 +88,17 @@ The Wazuh FIM module integrates with other Wazuh capabilities and third-party th
 The Wazuh FIM module supports various integrations, including but not limited to:
 
 -  **File integrity monitoring and YARA**: By combining the Wazuh FIM module and the YARA tool, it is possible to detect malware when suspicious file additions or modifications are identified. The YARA rule files contain samples of malware indicators that are downloaded to the monitored endpoints. When the FIM module detects a change in the monitored file or directory, it executes a YARA scan using a script to determine if it is malware. If the YARA rule finds a match with a file, it will send the scan results to the Wazuh server for decoding and alerting. This would be reported according to the custom rule and decoder configurations configured on the Wazuh server. Check this documentation for more information on :doc:`how to integrate the Wazuh FIM module with YARA </user-manual/capabilities/malware-detection/fim-yara>`.
+-  **File integrity monitoring and VirusTotal**: The Wazuh :doc:`Integrator module </user-manual/reference/ossec-conf/integration>` connects to external APIs and alerting tools such as VirusTotal. The :doc:`VirusTotal integration </user-manual/capabilities/malware-detection/virus-total-integration>` uses the VirusTotal API to detect malicious file hashes within the files and directories monitored by the FIM module. Once enabled, when FIM generates alerts, Wazuh initiates the VirusTotal integration to extract the hash value associated with the flagged file from the alert. The VirusTotal API is then used to compare these hashes against its scanning engines for potentially malicious content.
 -  **File integrity monitoring and Active Response**: The :doc:`Wazuh Active Response </user-manual/capabilities/active-response/index>` module automatically responds to threats identified in a timely manner. This combination enables the FIM module to not only detect but also respond to malicious activities. You can configure active response scripts to execute when the FIM module detects file changes in your monitored environment.  Additionally, it also generates alerts for the response performed. This reduces the Mean Time To Respond (MTTR) as malicious changes detected are remediated in a timely manner.
+
+   In the image below Wazuh triggers when a file is added to the monitored endpoint. The VirusTotal API scans the file and identifies it as malicious content on 55 engines. Then the Wazuh Active Response module acts immediately to remove the threat from the monitored endpoint.
+
+   .. thumbnail:: /images/getting-started/use-cases/fim/fim-ar-virustotal-alerts.png
+      :title: FIM and Active Response using VirusTotal alerts
+      :alt: FIM and Active Response using VirusTotal alerts
+      :align: center
+      :width: 80%
+
 
 -  **File integrity monitoring and CDB list**: Wazuh FIM module also detects malicious files by checking the presence of known malware signatures when combined with :doc:`CDB lists (constant database) </user-manual/capabilities/malware-detection/cdb-lists-threat-intelligence>`. CDB lists are used to store known malware indicators of Compromise (IOCs) such as file hashes, IP addresses, and domain names. When CDB lists are created, Wazuh checks if field values from FIM alerts such as file hash match the keys stored in the CDB lists. If matched, it generates an alert and response based on how you configure your custom rule.
 

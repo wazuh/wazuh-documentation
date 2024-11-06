@@ -146,8 +146,16 @@ The rules above detect specific behaviors of the Vidar infostealer malware and t
    :align: center
    :width: 80%
 
-Wazuh offers support for integrating third-party malware detection tools such as :doc:`ClamAV </user-manual/capabilities/malware-detection/clam-av-logs-collection>` and :doc:`Windows Defender </user-manual/capabilities/malware-detection/win-defender-logs-collection>`. By collecting and analyzing logs from third-party malware detection tools, Wazuh provides security analysts with a centralized monitoring platform. Wazuh increases the efficiency in detecting malware by combining diverse threat intelligence from third-party tools, thereby improving the organization's IT hygiene.
+Wazuh boosts its malware detection capabilities by :doc:`integrating with threat intelligence </user-manual/capabilities/malware-detection/virus-total-integration>` sources such as VirusTotal, MISP, and more. Wazuh also offers support for integrating third-party malware detection tools such as :doc:`ClamAV </user-manual/capabilities/malware-detection/clam-av-logs-collection>` and :doc:`Windows Defender </user-manual/capabilities/malware-detection/win-defender-logs-collection>`. By collecting and analyzing logs from third-party malware detection tools, Wazuh provides security analysts with a centralized monitoring platform. Wazuh increases the efficiency in detecting malware by combining diverse threat intelligence from third-party tools, thereby improving the organization's IT hygiene.
 
+The image below shows an alert of an event from VirusTotal processed by the Wazuh server.
+
+.. thumbnail:: /images/getting-started/use-cases/it-hygiene/virustotal-finding-alert.png
+   :title: VirusTotal finding alert
+   :alt: VirusTotal finding alert
+   :align: center
+   :width: 80%
+   
 Wazuh uses :doc:`CDB lists </user-manual/ruleset/cdb-list>` (constant databases) containing indicators of compromise (IOCs) to detect malware. These lists contain known malware IOCs such as file hashes, IP addresses, and domain names. Wazuh proactively identifies malicious files by comparing the identified IOCs with the information stored in the CDB lists.
 
 .. thumbnail:: /images/getting-started/use-cases/it-hygiene/malware-detected-alert.png
