@@ -130,7 +130,7 @@ Take the following steps on your Ubuntu endpoint to create the file ``/usr/share
 Windows endpoint
 ^^^^^^^^^^^^^^^^
 
-Take the following steps on your Ubuntu endpoint to create the file ``C:\Program Files\testfile.txt`` and monitor it with the Wazuh SCA module:
+Take the following steps on your Windows endpoint to create the file ``C:\Program Files\testfile.txt`` and monitor it with the Wazuh SCA module:
 
 #. Run PowerShell as an administrator and create the test file and add some text to it, including the keyword ``password_enabled: yes``:
 
