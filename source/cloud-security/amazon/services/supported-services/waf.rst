@@ -68,8 +68,8 @@ Native integration
 
    Check :ref:`waf_acls <bucket_waf_acls>` for a comma-separated list of ACLs to iterate over the WAF v2 ACLs.
 
-Integration using Kinesis
-^^^^^^^^^^^^^^^^^^^^^^^^^
+Integration using Amazon Data Firehose
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. deprecated:: 5.0
 
@@ -209,8 +209,8 @@ Native Integration
 
       .. include:: /_templates/common/restart_agent.rst
 
-Integration using Kinesis
-^^^^^^^^^^^^^^^^^^^^^^^^^
+Integration using Amazon Data Firehose
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 #. Access the Wazuh configuration in **Server management** > **Settings** using the Wazuh dashboard or by manually editing the ``/var/ossec/etc/ossec.conf`` file in the Wazuh server or agent.
 
