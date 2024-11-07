@@ -74,11 +74,19 @@ You can proactively protect your systems and data by leveraging insights from th
 Third-party integration
 -----------------------
 
-Wazuh integrates with :doc:`third-party solutions </user-manual/manager/integration-with-external-apis>` that enhance threat hunting capabilities. These integrations enable users to consolidate data from diverse sources and automate threat detection and response. Wazuh seamlessly integrates with popular open source platforms like AlienVault, URLHaus, MISP, and many others. This integration allows users to cross-reference telemetry with threat intelligence feeds, improving detection and response to threats.
+Wazuh integrates with :doc:`third-party solutions </user-manual/manager/integration-with-external-apis>` that enhance threat hunting capabilities. These integrations enable users to consolidate data from diverse sources and automate threat detection and response. Wazuh seamlessly integrates with popular open source platforms like VirusTotal, AlienVault, URLHaus, MISP, and many others. This integration allows users to cross-reference telemetry with threat intelligence feeds, improving detection and response to threats.
 
 Third-party integrations play a crucial role in proactive threat hunting, encompassing threat intelligence and a range of collaborative tools. These integrations provide essential insights into both established and emerging threats, enabling a comprehensive and forward-looking approach to threat detection. By promoting the exchange of information among seasoned security teams, these integrations foster a collective defense strategy, enhancing the effectiveness of the overall threat hunting process.
 
 Some third-party solutions that Wazuh integrates with to aid threat hunting are:
+
+- **VirusTotal**: :doc:`Integrating VirusTotal </proof-of-concept-guide/detect-remove-malware-virustotal>` enhances threat detection by leveraging the VirusTotal malware database for accurate identification and faster incident response. The image below shows malware detection via the VirusTotal integration.
+
+   .. thumbnail:: /images/getting-started/use-cases/threat-hunting/security-events.png
+      :title: Malware detection via the VirusTotal integration
+      :alt: Malware detection via the VirusTotal integration
+      :align: center
+      :width: 80%
 
 - **URLHaus**: `Integrating URLHaus by abuse.ch <https://wazuh.com/blog/detecting-malicious-urls-using-wazuh-and-urlhaus/>`__ with Wazuh amplifies threat intelligence capabilities, empowering users to proactively detect and block malicious URLs in real-time.
 

@@ -160,16 +160,17 @@ To set up this integration, follow these steps:
 
    .. code-block:: xml
       :emphasize-lines: 3
+
       <integration>
         <name>virustotal</name>
         <api_key><VIRUSTOTAL_API_KEY></api_key> <!-- Replace with your VirusTotal API key -->
         <group>syscheck</group>
         <alert_format>json</alert_format>
       </integration>
+
 #. Restart the Wazuh manager to apply the changes:
 
    .. include:: /_templates/common/restart_manager.rst
-
 
 Shuffle
 -------
