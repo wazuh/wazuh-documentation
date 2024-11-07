@@ -99,7 +99,6 @@ The Wazuh FIM module supports various integrations, including but not limited to
       :align: center
       :width: 80%
 
-
 -  **File integrity monitoring and CDB list**: Wazuh FIM module also detects malicious files by checking the presence of known malware signatures when combined with :doc:`CDB lists (constant database) </user-manual/capabilities/malware-detection/cdb-lists-threat-intelligence>`. CDB lists are used to store known malware indicators of Compromise (IOCs) such as file hashes, IP addresses, and domain names. When CDB lists are created, Wazuh checks if field values from FIM alerts such as file hash match the keys stored in the CDB lists. If matched, it generates an alert and response based on how you configure your custom rule.
 
    .. thumbnail:: /images/getting-started/use-cases/fim/malware-hash-file-alerts.png

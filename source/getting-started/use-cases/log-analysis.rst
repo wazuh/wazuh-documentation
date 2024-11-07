@@ -63,7 +63,6 @@ Wazuh collects logs from a wide range of sources, enabling comprehensive monitor
       :align: center
       :width: 80%
 
-
 Rules and decoders
 ------------------
 

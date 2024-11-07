@@ -455,12 +455,12 @@ Example:
 
    <rule id="87100" level="0">
        <decoded_as>json</decoded_as>
-       <field name="script">firewall-drop.sh</field>
-       <field name="type">add</field>
-       <description>Host Blocked by firewall-drop.sh Active Response</description>
+       <field name="integration">virustotal</field>
+       <description>VirusTotal integration messages.</description>
        <options>no_full_log</options>
    </rule>
 
+This rule groups events decoded from json that belong to an integration called :doc:`VirusTotal </user-manual/capabilities/malware-detection/virus-total-integration>`. It checks the field decoded as ``integration`` and if its content is ``virustotal``, the rule is triggered.
 
 srcip
 ^^^^^

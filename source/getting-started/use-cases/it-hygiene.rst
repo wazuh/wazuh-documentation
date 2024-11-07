@@ -155,7 +155,7 @@ The image below shows an alert of an event from VirusTotal processed by the Wazu
    :alt: VirusTotal finding alert
    :align: center
    :width: 80%
-   
+
 Wazuh uses :doc:`CDB lists </user-manual/ruleset/cdb-list>` (constant databases) containing indicators of compromise (IOCs) to detect malware. These lists contain known malware IOCs such as file hashes, IP addresses, and domain names. Wazuh proactively identifies malicious files by comparing the identified IOCs with the information stored in the CDB lists.
 
 .. thumbnail:: /images/getting-started/use-cases/it-hygiene/malware-detected-alert.png

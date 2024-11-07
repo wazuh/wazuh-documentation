@@ -6,7 +6,7 @@
 External API integration
 ========================
 
-The Wazuh Integrator module allows Wazuh to connect to external APIs and alerting tools such as `Slack`_, `PagerDuty`_, `Shuffle`_, and `Maltiverse`_. You can also configure the Integrator module to connect to other software. These integrations empower security administrators to enhance orchestration, automate responses, and fortify their defenses against cyber threats.
+The Wazuh Integrator module allows Wazuh to connect to external APIs and alerting tools such as `Slack`_, `PagerDuty`_, `VirusTotal`_, `Shuffle`_, and `Maltiverse`_. You can also configure the Integrator module to connect to other software. These integrations empower security administrators to enhance orchestration, automate responses, and fortify their defenses against cyber threats.
 
 Configuration
 -------------
@@ -18,8 +18,8 @@ To configure an integration, add the following configuration within the ``<ossec
    <integration>
      <name> </name>
      <hook_url> </hook_url> <!-- Required for Slack, Shuffle, and Maltiverse -->
-     <api_key> </api_key> <!-- Required for PagerDuty and Maltiverse -->
-     <alert_format>json</alert_format> <!-- Required for Slack, PagerDuty, Shuffle, and Maltiverse -->
+     <api_key> </api_key> <!-- Required for PagerDuty, VirusTotal, and Maltiverse -->
+     <alert_format>json</alert_format> <!-- Required for Slack, PagerDuty, VirusTotal, Shuffle, and Maltiverse -->
 
      <!-- Optional filters -->
      <rule_id> </rule_id>
@@ -31,13 +31,13 @@ To configure an integration, add the following configuration within the ``<ossec
 
 Where:
 
--  ``<name>`` indicates the name of the service to integrate with. The allowed values are ``slack``, ``pagerduty``, ``shuffle``, ``maltiverse``. For custom integrations, the name must be any string that begins with ``custom-``.
+-  ``<name>`` indicates the name of the service to integrate with. The allowed values are ``slack``, ``pagerduty``, ``virustotal``, ``shuffle``, ``maltiverse``. For custom integrations, the name must be any string that begins with ``custom-``.
 -  ``<hook_url>`` is the URL that is used for communication with the software being integrated. It's mandatory for the Slack, Shuffle, and Maltiverse integrations.
--  ``<api_key>`` is the key you would have retrieved from the PagerDuty, or Maltiverse API. This is mandatory for PagerDuty and Maltiverse.
+-  ``<api_key>`` is the key you would have retrieved from the PagerDuty, VirusTotal, or Maltiverse API. This is mandatory for PagerDuty, VirusTotal, and Maltiverse.
 -  ``<alert_format>`` writes the alert file in the JSON format. The Integrator module makes use of this alert file to fetch field values. The allowed value is ``json``.
 -  ``<rule_id>`` filters alerts by rule ID. The allowed values are comma-separated rule IDs.
 -  ``<level>`` filters alerts by rule level so only alerts with the specified level or above are pushed. The allowed value is any alert level from ``0`` to ``16``.
--  ``<group>`` filters alerts by rule group. The allowed values are any rule group or comma-separated rule groups.
+-  ``<group>`` filters alerts by rule group. For the VirusTotal integration, only rules from the syscheck group are available. The allowed values are any rule group or comma-separated rule groups.
 -  ``<event_location>`` filters alerts by where the event originated. The allowed value is any sregex expression.
 -  ``<options>`` overwrites the previous fields or adds customization fields according to the information provided in the JSON object. The allowed value is json.
 
@@ -146,6 +146,30 @@ Once the configuration is complete, alerts start showing on the Pagerduty dashbo
    :alt: Alerts in PagerDuty
    :align: center
    :width: 80%
+
+VirusTotal
+----------
+
+`VirusTotal <https://www.virustotal.com/gui/home/upload>`__ is an online service that analyzes files and URLs to detect viruses, worms, trojans, and other malicious content using antivirus engines and website scanners. This integration allows the inspection of malicious files using the VirusTotal database. Find more information about this on the :doc:`VirusTotal integration </user-manual/capabilities/malware-detection/virus-total-integration>` section.
+
+To set up this integration, follow these steps:
+
+#. Get your API key from the `VirusTotal API key <https://www.virustotal.com/gui/my-apikey>`__ page.
+
+#. Edit ``/var/ossec/etc/ossec.conf`` in the Wazuh server and include a configuration block such as the following. Replace ``<VIRUSTOTAL_API_KEY>`` with your VirusTotal API key.
+
+   .. code-block:: xml
+      :emphasize-lines: 3
+      <integration>
+        <name>virustotal</name>
+        <api_key><VIRUSTOTAL_API_KEY></api_key> <!-- Replace with your VirusTotal API key -->
+        <group>syscheck</group>
+        <alert_format>json</alert_format>
+      </integration>
+#. Restart the Wazuh manager to apply the changes:
+
+   .. include:: /_templates/common/restart_manager.rst
+
 
 Shuffle
 -------

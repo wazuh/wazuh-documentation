@@ -74,6 +74,11 @@ Here are all the available settings for the ``/var/ossec/api/configuration/api.y
             allow: yes
        indexer:
          allow: yes
+       integrations:
+         virustotal:
+            public_key:
+               allow: yes
+               minimum_quota: 240
 
 .. warning::
 
