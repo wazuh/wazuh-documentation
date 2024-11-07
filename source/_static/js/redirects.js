@@ -2263,6 +2263,7 @@ newUrls['4.3'] = [
   '/user-manual/capabilities/malware-detection/fim-threat-detection-rules.html',
   '/user-manual/capabilities/malware-detection/rootkits-behavior-detection.html',
   '/user-manual/capabilities/malware-detection/cdb-lists-threat-intelligence.html',
+  '/user-manual/capabilities/malware-detection/virus-total-integration.html',
   '/user-manual/capabilities/malware-detection/fim-yara.html',
   '/user-manual/capabilities/malware-detection/clam-av-logs-collection.html',
   '/user-manual/capabilities/malware-detection/win-defender-logs-collection.html',
@@ -2427,6 +2428,9 @@ removedUrls['4.3'] = [
   '/user-manual/capabilities/anomalies-detection/anomaly-faq.html',
   '/user-manual/capabilities/anomalies-detection/how-it-works.html',
   '/user-manual/capabilities/anomalies-detection/index.html',
+  '/user-manual/capabilities/virustotal-scan/about.html',
+  '/user-manual/capabilities/virustotal-scan/index.html',
+  '/user-manual/capabilities/virustotal-scan/integration.html',
   '/user-manual/capabilities/active-response/ar-use-cases/blocking-attacks.html',
   '/user-manual/capabilities/active-response/ar-use-cases/removing-malware.html',
   '/user-manual/capabilities/active-response/ar-use-cases/wazuh-with-yara.html',
@@ -3136,6 +3140,21 @@ redirections.push(
     '4.3': '/user-manual/capabilities/malware-detection/index.html',
   },
   {
+    'target': ['4.2=>4.3'],
+    '4.2': '/user-manual/capabilities/virustotal-scan/about.html',
+    '4.3': '/user-manual/capabilities/malware-detection/virus-total-integration.html#about-virustotal',
+  },
+  {
+    'target': ['4.2=>4.3', '4.3=>4.2'],
+    '4.2': '/user-manual/capabilities/virustotal-scan/index.html',
+    '4.3': '/user-manual/capabilities/malware-detection/virus-total-integration.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/user-manual/capabilities/virustotal-scan/integration.html',
+    '4.3': '/user-manual/capabilities/malware-detection/virus-total-integration.html#how-it-works',
+  },
+  {
     'target': ['4.2=>4.3', '4.3=>4.2'],
     '4.2': '/user-manual/capabilities/active-response/ar-use-cases/blocking-attacks.html',
     '4.3': '/user-manual/capabilities/active-response/ar-use-cases/blocking-ssh-brute-force.html',
@@ -3143,6 +3162,7 @@ redirections.push(
   {
     'target': ['4.2=>4.3'],
     '4.2': '/user-manual/capabilities/active-response/ar-use-cases/removing-malware.html',
+    '4.3': '/proof-of-concept-guide/detect-remove-malware-virustotal.html',
   },
   {
     'target': ['4.2=>4.3'],
@@ -3183,6 +3203,7 @@ redirections.push(
 newUrls['4.2'] = [
   '/proof-of-concept-guide/detect-malware-yara-integration.html',
   '/proof-of-concept-guide/poc-vulnerability-detection.html',
+  '/proof-of-concept-guide/detect-remove-malware-virustotal.html',
   '/proof-of-concept-guide/poc-detect-trojan.html',
   '/proof-of-concept-guide/poc-integrate-slack.html',
   '/proof-of-concept-guide/detect-web-attack-sql-injection.html',
@@ -6995,6 +7016,16 @@ redirections.push(
   },
   {
     'target': ['3.6=>3.7', '3.7=>3.6'],
+    '3.6': '/user-manual/capabilities/virustotal-scan/what-is-virustotal.html',
+    '3.7': '/user-manual/capabilities/virustotal-scan/about.html',
+  },
+  {
+    'target': ['3.6=>3.7', '3.7=>3.6'],
+    '3.6': '/user-manual/capabilities/virustotal-scan/terms-of-service.html',
+    '3.7': '/user-manual/capabilities/virustotal-scan/about.html#terms-of-service',
+  },
+  {
+    'target': ['3.6=>3.7', '3.7=>3.6'],
     '3.6': '/user-manual/reference/statistics-files.html',
     '3.7': '/user-manual/reference/statistics-files/index.html',
   },
@@ -7064,6 +7095,7 @@ newUrls['3.7'] = [
   '/installing-splunk/splunk-polling.html',
   '/installing-splunk/splunk-reverse-proxy.html',
   '/user-manual/api/queries.html',
+  '/user-manual/capabilities/virustotal-scan/about.html',
   '/user-manual/kibana-app/features/query-configuration.html',
   '/user-manual/manager/manual-database-output.html',
   '/user-manual/reference/daemons/ossec-integratord.html',
@@ -7318,6 +7350,10 @@ newUrls['3.0'] = [
   '/user-manual/agents/remote-upgrading/create-custom-wpk.html#compile-a-package',
   '/user-manual/agents/remote-upgrading/upgrading-agent.html',
   '/user-manual/agents/remote-upgrading/wpk-list.html',
+  '/user-manual/capabilities/virustotal-scan/index.html',
+  '/user-manual/capabilities/virustotal-scan/integration.html',
+  '/user-manual/capabilities/virustotal-scan/terms-of-service.html',
+  '/user-manual/capabilities/virustotal-scan/what-is-virustotal.html',
   '/user-manual/manager/wazuh-cluster.html',
   '/user-manual/reference/daemons/clusterd.html',
   '/user-manual/reference/daemons/clusterd-internal.html',
