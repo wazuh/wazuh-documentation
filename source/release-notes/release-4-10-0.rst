@@ -61,6 +61,14 @@ Wazuh dashboard
 -  `#7033 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7033>`__ Changed the font size of the KPI subtitles and the features descriptions.
 -  `#7059 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/7059>`__ Changed the initial width of the default columns for each selected field.
 -  `#7038 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7038>`__ Removed VirusTotal application in favor of Malware Detection.
+-  `#7058 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/7058>`__ Add vulnerabilities card to agent details page.
+-  `#7112 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7112>`__ Added an **Agents management** menu and moved the sections: **Endpoint Groups** and **Endpoint Summary** which changed its name to **Summary**.
+-  `#7119 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7119>`__ Added ability to filter from File Integrity Monitoring registry inventory.
+-  `#7119 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7119>`__ Added new field columns and ability to select the visible fields in the File Integrity Monitoring Files and Registry tables.
+-  `#7081 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7081>`__ Added filter by value to document details fields.
+-  `#7135 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7135>`__ Added pinned agent mechanic to inventory data, stats, and configuration for consistent functionality.
+-  `#7057 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7057>`__ Changed the warning icon in events view to an info icon.
+-  `#7089 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7089>`__ Changed inventory, stats and configuration page to use tabs.
 
 Packages
 ^^^^^^^^
@@ -95,6 +103,7 @@ Wazuh agent
 -  `#25429 <https://github.com/wazuh/wazuh/pull/25429>`__ Fixed permission error on Windows 11 agents after remote upgrade.
 -  `#24387 <https://github.com/wazuh/wazuh/pull/24387>`__ Fixed increase of the variable containing file size in FIM for Windows.
 -  `#25699 <https://github.com/wazuh/wazuh/pull/25699>`__ Fixed timeout issue when upgrading Windows agent via WPK.
+-  `#26748 <https://github.com/wazuh/wazuh/pull/26748>`__ Allowed unknown syslog identifiers in Logcollector's journald reader.
 
 Wazuh dashboard
 ^^^^^^^^^^^^^^^
@@ -105,6 +114,12 @@ Wazuh dashboard
 -  `#7042 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7042>`__ Fixed security policy exception when it contained deprecated actions.
 -  `#7048 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7048>`__ Fixed export of formatted CSV data with special characters from tables.
 -  `#7077 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7077>`__ Fixed filter management to prevent hiding when adding multiple filters.
+-  `#7120 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7120>`__ Fixed loading state of the agents status chart in the home overview.
+-  `#7075 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7075>`__ Fixed border on cells in events that disappear when clicked.
+-  `#7116 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7116>`__ Fixed the Mitre ATT&CK exception in the agent view, the redirections of **ID**, **Tactics**, **Dashboard Icon** and **Event Icon** in the drop-down menu, and the card not displaying information when the flyout was opened.
+-  `#7047 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7047>`__ Fixed the filter displaying cropped on screens of 575px to 767px in vulnerability detection module.
+-  `#7119 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7119>`__ Fixed ability to filter from files inventory details flyout of File Integrity Monitoring.
+-  `#7122 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7122>`__ Removed processes state column in macOS agents.
 
 Changelogs
 ----------
