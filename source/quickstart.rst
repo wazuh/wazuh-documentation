@@ -63,6 +63,7 @@ Installing Wazuh
 
 #.  Download and run the Wazuh installation assistant.
 
+    .. note:: ``curl`` isn't installed on all Linux operating systems by defaut, such as Ubuntu. Therefore, it may need to be installed manually before proceeding.
     .. code-block:: console
 
         $ curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-install.sh && sudo bash ./wazuh-install.sh -a --install-dependencies
