@@ -64,7 +64,7 @@ The image below shows the following activities:
 
 In this scenario, the Wazuh Active Response module automatically removes the malicious file, reducing the time between threat detection and mitigation.
 
-Responding to DoS attacks
+Responding to Denial of Serice (DoS) attacks
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The primary goal of a DoS attack is to render the target inaccessible to legitimate users, causing a denial of service. In the image below, we show how the Wazuh Active Response module blocks malicious IP addresses performing a DoS against a web server on an Ubuntu endpoint.

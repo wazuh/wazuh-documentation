@@ -28,7 +28,7 @@ Agent modules
 
 All agent modules are configurable and perform different security tasks. This modular architecture allows you to enable or disable each component according to your security needs. Below you can learn about the different purposes of all the agent modules.
 
--  **Log collector:** This agent component can read flat log files and Windows events, collecting operating system and application log messages. It supports XPath filters for Windows events and recognizes multi-line formats like Linux Audit logs. It can also enrich JSON events with additional metadata.
+-  **Log collector:** This agent component can read flat log files and Windows events, collecting operating system and application log messages. It supports XPath (XML Path Language) filters for Windows events and recognizes multi-line formats like Linux Audit logs. It can also enrich JSON events with additional metadata.
 
 -  **Command execution:** Agents run authorized commands periodically, collecting their output and reporting it back to the Wazuh server for further analysis. You can use this module for different purposes, such as monitoring hard disk space left or getting a list of the last logged-in users.
 
