@@ -23,6 +23,7 @@ The configuration file reference is organized into sections:
    -  `enrollment.dns`_
    -  `enrollment.password`_
    -  `cron.prefix`_
+   -  `wazuh.updates.disabled`_
 
 -  :ref:`Monitoring <dashboard_monitoring>`
 
@@ -167,6 +168,12 @@ The following table shows the configuration options for the Wazuh dashboard:
 | cron.prefix                     | This property defines the index prefix of predefined    | ``wazuh``                                           | Any string              |
 |                                 | cron jobs. The predefined jobs are the statistics       |                                                     |                         |
 |                                 | monitoring jobs.                                        |                                                     |                         |
++---------------------------------+---------------------------------------------------------+-----------------------------------------------------+-------------------------+
+|                                 | .. _wazuh.updates.disabled:                             |                                                     |                         |
+|                                 |                                                         |                                                     |                         |
+| wazuh.updates.disabled          | This property defines if the check updates              | ``false``                                           | true, false             |
+|                                 | service is disabled.                                    |                                                     |                         |
+|                                 |                                                         |                                                     |                         |
 +---------------------------------+---------------------------------------------------------+-----------------------------------------------------+-------------------------+
 | .. _dashboard_monitoring:                                                                                                                                                 |
 |                                                                                                                                                                           |
@@ -374,6 +381,7 @@ This is an example of the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.y
    logs.level: info
    hideManagerAlerts: true
    alerts.sample.prefix: wazuh-alerts-4.x-
+   wazuh.updates.disabled: false
 
    #Monitoring
 
