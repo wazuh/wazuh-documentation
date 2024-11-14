@@ -17,9 +17,21 @@ You can view the system inventory of each monitored endpoint from the Wazuh dash
   :align: center
   :width: 80%
 
-.. thumbnail:: /images/manual/system-inventory/inventory-data-tab.png
-  :title: Inventory data module
-  :alt: Inventory data module
+.. thumbnail:: ../../../images/manual/system-inventory/inventory-data-software-tab.png
+  :title: Inventory data module - Software tab
+  :alt: Inventory data module - Software tab
+  :align: center
+  :width: 80%
+
+.. thumbnail:: ../../../images/manual/system-inventory/inventory-data-network-tab.png
+  :title: Inventory data module - Network tab
+  :alt: Inventory data module - Network tab
+  :align: center
+  :width: 80%
+
+.. thumbnail:: ../../../images/manual/system-inventory/inventory-data-processes-tab.png
+  :title: Inventory data module - Processes tab
+  :alt: Inventory data module - Processes tab
   :align: center
   :width: 80%
 
