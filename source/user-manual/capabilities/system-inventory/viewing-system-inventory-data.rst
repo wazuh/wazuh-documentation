@@ -12,28 +12,28 @@ Wazuh dashboard
 You can view the system inventory of each monitored endpoint from the Wazuh dashboard. To do this, select an agent from your Wazuh dashboard and navigate to the **Inventory data** module as displayed below. The inventory data page for each monitored endpoint shows its operating system, hardware, processes, network interface, and packages.
 
 .. thumbnail:: /images/manual/system-inventory/inventory-data.png
-  :title: Inventory data
-  :alt: Inventory data
-  :align: center
-  :width: 80%
+   :title: Inventory data
+   :alt: Inventory data
+   :align: center
+   :width: 80%
 
-.. thumbnail:: ../../../images/manual/system-inventory/inventory-data-software-tab.png
-  :title: Inventory data module - Software tab
-  :alt: Inventory data module - Software tab
-  :align: center
-  :width: 80%
+.. thumbnail:: /images/manual/system-inventory/inventory-data-software-tab.png
+   :title: Inventory data module - Software tab
+   :alt: Inventory data module - Software tab
+   :align: center
+   :width: 80%
 
-.. thumbnail:: ../../../images/manual/system-inventory/inventory-data-network-tab.png
-  :title: Inventory data module - Network tab
-  :alt: Inventory data module - Network tab
-  :align: center
-  :width: 80%
+.. thumbnail:: /images/manual/system-inventory/inventory-data-network-tab.png
+   :title: Inventory data module - Network tab
+   :alt: Inventory data module - Network tab
+   :align: center
+   :width: 80%
 
-.. thumbnail:: ../../../images/manual/system-inventory/inventory-data-processes-tab.png
-  :title: Inventory data module - Processes tab
-  :alt: Inventory data module - Processes tab
-  :align: center
-  :width: 80%
+.. thumbnail:: /images/manual/system-inventory/inventory-data-processes-tab.png
+   :title: Inventory data module - Processes tab
+   :alt: Inventory data module - Processes tab
+   :align: center
+   :width: 80%
 
 Query the agent inventory database
 ----------------------------------
