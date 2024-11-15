@@ -13,11 +13,11 @@ Property-specific report
 
 This feature allows you to export ``CSV`` reports of a specific property of an endpoint. For example, you can generate a report of the installed software on an endpoint. This kind of report is only available for processes and installed software. 
 
-To download this report, click on the **Download CSV** beneath the specific property you are interested in on the **Inventory data** page of the endpoint.
+To download this report, click on the **Export formatted** beneath the specific property you are interested in on the **Inventory data** page of the endpoint.
 
-.. thumbnail:: /images/manual/system-inventory/download-csv.png
-  :title: Download CSV
-  :alt: Download CSV
+.. thumbnail:: /images/manual/system-inventory/export-formatted.png
+  :title: Export formatted
+  :alt: Export formatted
   :align: center
   :width: 80%
 
