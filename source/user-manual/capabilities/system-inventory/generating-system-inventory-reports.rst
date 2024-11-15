@@ -26,7 +26,7 @@ Endpoint inventory report
 
 This feature allows you to export a full report of all endpoint properties collected by the Wazuh Syscollector module. This report is generated in PDF format and can serve a variety of uses. To download the full endpoint report:
 
-- Click on **Generate Report** on the **Inventory data** page of the Wazuh agent.
+- Click on **Generate report** on the **Inventory data** page of the Wazuh agent.
 
 .. thumbnail:: /images/manual/system-inventory/generate-report.png
   :title: Generate report
