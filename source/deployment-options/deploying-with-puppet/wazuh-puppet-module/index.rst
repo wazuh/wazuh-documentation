@@ -57,7 +57,8 @@ You can use  the manifest shown below to deploy a single-node stack. This stack 
 
 To configure the manager before deployment, check the configuration variables for the Wazuh manager class section in :ref:`ref_wazuh_puppet`.
 
-Create the ``stack.pp`` file at ``/etc/puppetlabs/code/environments/production/manifests/`` with the contents below. Here, ``puppet-aio-node`` refers to the hostname or IP address of the puppet agent.
+Create the ``stack.pp`` file at ``/etc/puppetlabs/code/environments/production/manifests/`` with the contents below.
+Here, ``puppet-aio-node`` refers to the hostname or IP address of the Puppet agent and ``puppet-server`` refers to the hostname or IP address of the Puppet server when Wazuh module was installed.
 
 .. code-block:: puppet
 
@@ -116,12 +117,12 @@ You must include the IP addresses of the servers where you are installing each a
 .. code-block:: puppet
    :emphasize-lines: 1-6
 
-   $node1host   = 'x.x.x.x'
-   $node2host   = 'x.x.x.x'
-   $node3host   = 'x.x.x.x'
-   $masterhost    = 'x.x.x.x'
-   $workerhost    = 'x.x.x.x'
-   $dashboardhost = 'x.x.x.x'
+   $node1host   = '<wazuh-indexer-node1-ip>'
+   $node2host   = '<wazuh-indexer-node2-ip>'
+   $node3host   = '<wazuh-indexer-node3-ip>'
+   $masterhost    = '<wazuh-manager-master-ip>'
+   $workerhost    = '<wazuh-manager-worker-ip>'
+   $dashboardhost = '<wazuh-dashboard-ip>'
    $indexer_node1_name = 'node1'
    $indexer_node2_name = 'node2'
    $indexer_node3_name = 'node3'
