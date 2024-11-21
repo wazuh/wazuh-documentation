@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 
 - Support for Wazuh 4.10.2
 
+### Changed
+
+- Updated images in FIM PoC [#7979](https://github.com/wazuh/wazuh-documentation/pull/7979)
+
 ## [v4.10.1]
 
 - Support for Wazuh 4.10.1
