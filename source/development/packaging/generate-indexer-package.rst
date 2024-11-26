@@ -3,258 +3,172 @@
 .. meta::
    :description: Wazuh provides an automated way of building packages for the Wazuh components. Learn how to build your own Wazuh indexer package in this section of our documentation.
 
+=============
 Wazuh indexer
 =============
 
-The packages' generation process is orchestrated by two scripts, which are found within the ``packaging_scripts`` folder of the repository:
+Local packages generation
+#########################
+
+While official ``Wazuh Indexer`` packages are generated in a GitHub Actions pipeline, packages can also be compiled locally or within a docker container.
+
+The packages' generation process is orchestrated by two scripts, found under the ``build-scripts`` directory of the repository:
 
 -  ``build.sh``: compiles the Java application and bundles it into a package.
 -  ``assemble.sh``: uses the package from the previous step and inflates it with plugins and configuration files, ready for production deployment.
 
-Official packages are built through a GitHub Actions pipeline, however, the process is designed to be independent enough for maximum portability.
+.. contents:: Table of contents:
+   :depth: 2
+   :local:
 
-The building process is self-contained in the application code.
+Docker environment
+******************
+.. raw:: html
 
-Pre-requisistes:
+  <div class="accordion-section open">
 
--  Clone the ``wazuh-indexer`` repository and switch to the appropriate branch:
+Pre-requisistes
+===============
+
+1. Clone the ``Wazuh Indexer`` GitHub repository and switch to the ``v|WAZUH_CURRENT|`` tag:
+
+.. code:: console
+
+   # git clone https://github.com/wazuh/wazuh-indexer/
+   # git checkout v|WAZUH_CURRENT|
+
+2. Bring the docker environment up:
+
+.. code:: console
+
+   # cd wazuh-indexer/docker/ci
+   # bash ci.sh up
+   # cd ../..
+
+Build a minimal package
+=======================
+
+A basic package including only the ``Wazuh Indexer`` engine without extra plugin is generated first.
+
+1. Set the environment variables:
+
+.. note:: 
+
+   Replace ``<arch>`` with one of ``x64`` or ``arm64`` and ``<package-type>`` with one of ``rpm``, ``deb`` or ``tar``
+
+.. code:: console
+
+   # ARCHITECTURE=<arch>
+   # PACKAGE_TYPE=<package-type>
+
+2. Run the build script:
+
+.. code:: console
+
+   # docker exec -it wi-build_$(<VERSION) bash build-scripts/build.sh -a $ARCHITECTURE -d $PACKAGE_TYPE -n $(bash build-scripts/baptizer.sh -a $ARCHITECTURE -d $PACKAGE_TYPE -m)
+
+After this step, a minimal package (without plugins) will be present under the ``artifacts`` directory.
+
+Full package assembly
+=====================
+
+1. Set the environment variables:
+
+.. note:: 
+
+   Replace ``<arch>`` with one of ``x64`` or ``arm64`` and ``<package-type>`` with one of ``rpm``, ``deb`` or ``tar``.
+
+.. code:: console
+
+   # ARCHITECTURE=<arch>
+   # PACKAGE_TYPE=<package-type>
+
+2. Run the assembly process:
+
+.. code:: console
+
+   # docker exec -it wi-assemble_$(<VERSION) bash build-scripts/assemble.sh -a $ARCHITECTURE -d $PACKAGE_TYPE -r 1
+
+Native environment
+******************
+.. raw:: html
+
+  <div class="accordion-section open">
+
+
+Pre-requisistes
+================
+
+1. Install build dependencies
+
+.. tabs::
+
+   .. group-tab:: RPM
+
+      .. code-block:: console
+   
+         # yum install -y git curl gnupg2 gcc gcc-c++ make cpio rpm-build mesa-libGLU freeglut alsa-lib atk at-spi2-core cairo cairo-devel cups-libs libdrm libgbm nspr nspr-devel nss pango libXcomposite libXdamage libXfixes libXfixes-devel libXi libxkbcommon libXrandr libXrender libXtst rpm rpm-build maven
+   
+   .. group-tab:: DEB
+
+      .. code-block:: console
+   
+         # apt-get update
+         # apt-get install -y git curl gnupg2 y build-essential cpio debhelper-compat debmake freeglut3 libasound2 libatk-bridge2.0-0 libatk1.0-0 libatspi2.0-dev libcairo2 libcairo2-dev libcups2 libdrm2 libgbm-dev libgconf-2-4 libnspr4 libnspr4-dev libnss3 libpangocairo-1.0-0 libxcomposite-dev libxdamage1 libxfixes-dev libxfixes3 libxi6 libxkbcommon-x11-0 libxrandr2 libxrender1 libxtst6 rpm rpm2cpio maven
+
+2. Clone the ``wazuh-indexer`` repository and switch to the appropriate branch
 
 .. code:: console
 
    # git clone https://github.com/wazuh/wazuh-indexer
    # git checkout v|WAZUH_CURRENT|
 
-Build stage
------------
 
-Docker environment
-^^^^^^^^^^^^^^^^^^
+Build a minimal package
+=======================
 
-Using the provided `Docker environment <https://www.github.com/wazuh/wazuh-indexer/tree/v|WAZUH_CURRENT|/docker>`__:
+A basic package including only the ``Wazuh Indexer`` engine without extra plugin is generated first.
 
-.. tabs::
-
-   .. group-tab:: RPM
-
-      .. code-block:: console
-   
-         # docker exec -it wi-build_|WAZUH_CURRENT| bash packaging_scripts/build.sh -a x64 -d rpm
-   
-   .. group-tab:: DEB
-
-      .. code-block:: console
-   
-         # docker exec -it wi-build_|WAZUH_CURRENT| bash packaging_scripts/build.sh -a x64 -d deb
-   
-   .. group-tab:: TAR
-
-      .. code-block:: console
-   
-         # docker exec -it wi-build_|WAZUH_CURRENT| bash packaging_scripts/build.sh -a x64 -d tar
-
-Local package generation
-^^^^^^^^^^^^^^^^^^^^^^^^
-
-For local package generation, use the ``build.sh`` script.
-
-Take a look at the ``build.yml`` workflow file for an example of usage.
-
-.. code:: console
-
-   # bash packaging_scripts/build.sh -a x64 -d tar -n $(bash packaging_scripts/baptizer.sh -a x64 -d tar -m)
-
-The generated package is sent to the ``wazuh-indexer/artifacts`` folder.
-
-.. _full-package-assemble-stage-1:
-
-Assembly stage
---------------
-
-Docker environment
-^^^^^^^^^^^^^^^^^^
-
-Pre-requisites:
-
--  Current directory: ``wazuh-indexer/``
--  Existing package in ``wazuh-indexer/artifacts/dist/{rpm|deb}``, as a result of the *Build* stage.
--  Using the `Docker environment <https://www.github.com/wazuh/wazuh-indexer/tree/v|WAZUH_CURRENT|/docker>`__:
-
-   .. tabs::
-
-      .. group-tab:: RPM
-
-         .. code-block:: console
-
-            # docker exec -it wi-assemble_|WAZUH_CURRENT| bash packaging_scripts/assemble.sh -a x64 -d rpm
-
-      .. group-tab:: DEB
-
-         .. code-block:: console
-
-            # docker exec -it wi-assemble_|WAZUH_CURRENT| bash packaging_scripts/assemble.sh -a x64 -d deb
-   
-      .. group-tab:: TAR
-
-         .. code-block:: console
-
-            # docker exec -it wi-assemble_|WAZUH_CURRENT| bash packaging_scripts/assemble.sh -a x64 -d tar
-
-Local package generation
-^^^^^^^^^^^^^^^^^^^^^^^^
+1. Set the environment variables:
 
 .. note:: 
 
-   Set the environment variable ``TEST=true`` to assemble a package with a minimal set of plugins, speeding up the assembly process.
+   Replace ``<arch>`` with one of ``x64`` or ``arm64`` and ``<package-type>`` with one of ``rpm``, ``deb`` or ``tar``
 
-.. tabs::
+.. code:: console
 
-   .. group-tab:: RPM
+   # ARCHITECTURE=<arch>
+   # PACKAGE_TYPE=<package-type>
 
-      The ``assemble.sh`` script will use the output from the ``build.sh`` script and use it as a base to bundle together a final package containing the plugins, the production configuration and the service files.
-      
-      The script will:
-      
-      #. Extract the RPM package using ``rpm2cpio`` and ``cpio`` tools.
-      
-         By default, ``rpm2cpio`` and ``cpio`` tools expect the package to be in ``wazuh-indexer/artifacts/tmp/rpm``.
-         The script takes care of creating the required folder structure, copying also the min package and the SPEC file.
-      
-         Current folder loadout at this stage:
-      
-         .. code-block:: none
-      
-            /rpm/$ARCH
-                /etc
-                /usr
-                /var
-                wazuh-indexer-min-*.rpm
-                wazuh-indexer.rpm.spec
-      
-         ``usr``, ``etc`` and ``var`` folders contain ``wazuh-indexer`` files, extracted from ``wazuh-indexer-min-*.rpm``.
+2. Run the build script:
 
-         ``wazuh-indexer.rpm.spec`` is copied over from ``wazuh-indexer/distribution/packages/src/rpm/wazuh-indexer.rpm.spec``.
+.. code:: console
 
-         The ``wazuh-indexer-performance-analyzer.service`` file is also copied from the same folder.
+   # bash build-scripts/build.sh -a $ARCHITECTURE -d $PACKAGE_TYPE -n $(bash build-scripts/baptizer.sh -a $ARCHITECTURE -d $PACKAGE_TYPE -m)
 
-         It is a dependency of the SPEC file.
-      
-      #. Install the plugins using the ``opensearch-plugin`` CLI tool.
-      
-      #. Set up configuration files.
-      
-         Included in ``min-package``. Default files are overwritten.
-      
-      #. Bundle an RPM file with ``rpmbuild`` and the SPEC file ``wazuh-indexer.rpm.spec``.
-      
-         ``rpmbuild`` is part of the ``rpm`` OS package.
+After this step, a minimal package (without plugins) will be present under the ``artifacts`` directory.
 
-         ``rpmbuild`` is invoked from ``wazuh-indexer/artifacts/tmp/rpm``.
+Full package assembly
+=====================
 
-         It creates the ``{BUILD,RPMS,SOURCES,SRPMS,SPECS,TMP}`` folders and applies the rules in the SPEC file.
+1. Set the ``ARCHITECTURE`` and ``PACKAGE_TYPE`` environment variables replacing ``<package-type>`` with one of ``tar``, ``deb`` or ``rpm`` and ``<arch>`` with ``x64`` or ``arm64`` depending on the target system the packages are being built for.
 
-         If successful, ``rpmbuild`` will generate the package in the ``RPMS/`` folder.
+.. code:: console
 
-         The script will copy it to ``wazuh-indexer/artifacts/dist`` and clean: remove the ``tmp\`` folder and its contents.
-      
-         Current folder loadout at this stage:
-      
-         .. code-block:: none
-      
-            /rpm/$ARCH
-                /{BUILD,RPMS,SOURCES,SRPMS,SPECS,TMP}
-                /etc
-                /usr
-                /var
-                wazuh-indexer-min-*.rpm
-                wazuh-indexer.rpm.spec
+   # ARCHITECTURE=<arch>
+   # PACKAGE_TYPE=<package-type>
 
-   .. group-tab:: DEB
+2. Run the assembly process:
 
-      For DEB packages, the ``assemble.sh`` script will perform the following operations:
-      
-      #. Extract the deb package using ``ar`` and ``tar`` tools.
-      
-         By default, ``ar`` and ``tar`` tools expect the package to be in ``wazuh-indexer/artifacts/tmp/deb``.
+.. code:: console
 
-         The script takes care of creating the required folder structure, copying also the min package and the Makefile.
-      
-         Current folder loadout at this stage:
-      
-         .. code-block:: none
-      
-            artifacts/
-            |-- dist
-            |   |-- wazuh-indexer-min_|WAZUH_CURRENT|_amd64.deb
-            `-- tmp
-                `-- deb
-                    |-- Makefile
-                    |-- data.tar.gz
-                    |-- debmake_install.sh
-                    |-- etc
-                    |-- usr
-                    |-- var
-                    `-- wazuh-indexer-min_|WAZUH_CURRENT|_amd64.deb
-      
-         ``usr``, ``etc`` and ``var`` folders contain ``wazuh-indexer`` files, extracted from ``wazuh-indexer-min-*.deb``.
+   # bash build-scripts/assemble.sh -a $ARCHITECTURE -d $PACKAGE_TYPE
 
-         ``Makefile`` and the ``debmake_install`` are copied over from ``wazuh-indexer/distribution/packages/src/deb``.
-
-         The ``wazuh-indexer-performance-analyzer.service`` file is also copied from the same folder.
-
-         It is a dependency of the SPEC file.
-      
-      #. Install the plugins using the ``opensearch-plugin`` CLI tool.
-      
-      #. Set up configuration files.
-      
-         Included in ``min-package``. Default files are overwritten.
-      
-      #. Bundle a DEB file with ``debmake`` and the ``Makefile``.
-      
-         ``debmake`` and other dependencies can be installed using the ``provision.sh`` script.
-         The script is invoked by the GitHub Workflow.
-      
-         Current folder loadout at this stage:
-      
-         .. code-block:: none
-      
-            artifacts/
-            |-- artifact_name.txt
-            |-- dist
-            |   |-- wazuh-indexer-min_|WAZUH_CURRENT|_amd64.deb
-            |   `-- wazuh-indexer_|WAZUH_CURRENT|_amd64.deb
-            `-- tmp
-                `-- deb
-                    |-- Makefile
-                    |-- data.tar.gz
-                    |-- debmake_install.sh
-                    |-- etc
-                    |-- usr
-                    |-- var
-                    |-- wazuh-indexer-min_|WAZUH_CURRENT|_amd64.deb
-                    `-- debian/
-                        | -- control
-                        | -- copyright
-                        | -- rules
-                        | -- preinst
-                        | -- prerm
-                        | -- postinst
-      
-   .. group-tab:: TAR
-
-      The assembly process for tarballs consists on:
-      
-      #. Extraction of the minimal package
-      #. Bundling of plugins
-      #. Addition of Wazuh configuration files and tooling
-      #. Compression
-      
-      .. code:: console
-      
-         # bash packaging_scripts/assemble.sh -a x64 -d tar -r 1
-      
 Build and assemble scripts reference
-------------------------------------
+####################################
+.. raw:: html
+
+  <div class="accordion-section open">
 
 The packages' generation process is guided through bash scripts.
 
