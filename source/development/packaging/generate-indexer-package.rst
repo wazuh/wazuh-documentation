@@ -15,8 +15,6 @@ Official packages are built through a GitHub Actions pipeline, however, the proc
 
 The building process is self-contained in the application code.
 
-The GitHub Actions pipeline can be tested locally with `Act <https://github.com/nektos/act>`__.
-
 Pre-requisistes:
 
 -  Clone the ``wazuh-indexer`` repository and switch to the appropriate branch:
@@ -24,6 +22,7 @@ Pre-requisistes:
 .. code:: console
 
    # git clone https://github.com/wazuh/wazuh-indexer
+   # git checkout v|WAZUH_CURRENT|
 
 Build stage
 -----------
