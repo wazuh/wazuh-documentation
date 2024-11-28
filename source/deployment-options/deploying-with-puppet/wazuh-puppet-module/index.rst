@@ -3,8 +3,6 @@
 .. meta::
    :description: Learn about Wazuh Puppet module in this section of the Wazuh documentation.
 
-.. _wazuh_puppet_module:
-
 Wazuh Puppet module
 ===================
 
@@ -57,9 +55,10 @@ You can use  the manifest shown below to deploy a single-node stack. This stack 
 
 To configure the manager before deployment, check the configuration variables for the Wazuh manager class section in :ref:`ref_wazuh_puppet`.
 
-Create the ``stack.pp`` file at ``/etc/puppetlabs/code/environments/production/manifests/`` with the contents below.
+Create the ``stack.pp`` file at ``/etc/puppetlabs/code/environments/production/manifests/`` with the contents below, where:
 
-Here, ``puppet-aio-node`` refers to the hostname or IP address of the Puppet agent and ``puppet-server`` refers to the hostname or IP address of the Puppet server when Wazuh module was installed.
+-  ``puppet-aio-node``: Hostname or IP address of the Puppet agent.
+-  ``puppet-server``: Hostname or IP address of the Puppet server when the Wazuh module was installed.
 
 .. code-block:: puppet
 
