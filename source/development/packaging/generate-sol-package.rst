@@ -17,11 +17,11 @@ Requirements
 
  * Git
 
-Download our wazuh-packages repository from GitHub and go to the ``solaris`` directory.
+Download our wazuh repository from GitHub and go to the ``solaris`` directory.
 
 .. code-block:: console
 
-  $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/solaris && git checkout v|WAZUH_CURRENT_SOLARIS|
+  $ git clone https://github.com/wazuh/wazuh && cd wazuh/packages/solaris && git checkout v|WAZUH_CURRENT_SOLARIS|
 
 Choose the version of solaris you want to build the package for and go to that directory.
 
@@ -105,7 +105,7 @@ Bring the machine up ``vagrant [OPTION] ... up solaris10/solaris11/both``:
       -v, --version                    Print the version and exit.
       -h, --help                       Print this help.
 
-Clone our wazuh-packages repository from GitHub and switch to your target branch. Copy the source files for your Solaris 10 or Solaris 11 target system into ``wazuh-packages/solaris/package_generation/src``. Change to the ``wazuh-packages/solaris/package_generation`` directory before building the package.
+Clone our wazuh repository from GitHub and switch to your target branch. Copy the source files for your Solaris 10 or Solaris 11 target system into ``wazuh/packages/solaris/package_generation/src``. Change to the ``wazuh/packages/solaris/package_generation`` directory before building the package.
 
 .. tabs::
 
@@ -113,7 +113,7 @@ Clone our wazuh-packages repository from GitHub and switch to your target branch
 
     .. code-block:: console
 
-      $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/solaris && git checkout v|WAZUH_CURRENT_SOLARIS10|
+      $ git clone https://github.com/wazuh/wazuh && cd wazuh/packages/solaris && git checkout v|WAZUH_CURRENT_SOLARIS10|
       $ cp solaris10 package_generation/src/
       $ cd package_generation
 
@@ -121,7 +121,7 @@ Clone our wazuh-packages repository from GitHub and switch to your target branch
 
     .. code-block:: console
 
-      $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/solaris && git checkout v|WAZUH_CURRENT_SOLARIS11|
+      $ git clone https://github.com/wazuh/wazuh && cd wazuh/packages/solaris && git checkout v|WAZUH_CURRENT_SOLARIS11|
       $ cp solaris11 package_generation/src/
       $ cd package_generation
 
