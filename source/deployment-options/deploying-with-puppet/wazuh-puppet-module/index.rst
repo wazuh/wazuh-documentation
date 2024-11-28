@@ -117,12 +117,12 @@ You must include the IP addresses of the servers where you are installing each a
 .. code-block:: puppet
    :emphasize-lines: 1-6
 
-   $node1host   = '<wazuh-indexer-node1-ip>'
-   $node2host   = '<wazuh-indexer-node2-ip>'
-   $node3host   = '<wazuh-indexer-node3-ip>'
-   $masterhost    = '<wazuh-manager-master-ip>'
-   $workerhost    = '<wazuh-manager-worker-ip>'
-   $dashboardhost = '<wazuh-dashboard-ip>'
+   $node1host   = '<WAZUH_INDEXER_NODE1_IP_ADDRESS>'
+   $node2host   = '<WAZUH_INDEXER_NODE2_IP_ADDRESS>'
+   $node3host   = '<WAZUH_INDEXER_NODE3_IP_ADDRESS>'
+   $masterhost    = '<WAZUH_MANAGER_MASTER_IP_ADDRESS>'
+   $workerhost    = '<WAZUH_MANAGER_WORKER_IP_ADDRESS>'
+   $dashboardhost = '<WAZUH_DASHBOARD_IP_ADDRESS>'
    $indexer_node1_name = 'node1'
    $indexer_node2_name = 'node2'
    $indexer_node3_name = 'node3'
