@@ -277,6 +277,7 @@ Building the packages
 
    .. code:: console
 
+      $ cd ../../
       $ ./build-packages.sh -v 4.10.2 -r 1 --deb -a file://$(pwd)/base-packages-to-base/packages/wazuh-package.zip -s file://$(pwd)/base-packages-to-base/packages/security-package.zip -b file://$(pwd)/base-packages-to-base/packages/dashboard-package.zip
 
    The script creates the package in the ``output`` folder within the same directory as the script.
