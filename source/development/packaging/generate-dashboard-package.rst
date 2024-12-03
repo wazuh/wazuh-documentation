@@ -233,7 +233,7 @@ Building the packages
 
    .. code:: console
 
-      $ docker build \
+      $ bash run-docker-compose.sh \
       --node-version <NODE_VERSION> \
       --base <BRANCH_OF_wazuh-dashboard> \
       --app <BRANCH_OF_wazuh-dashboard-plugins> \
