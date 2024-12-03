@@ -247,7 +247,7 @@ Building the packages
       --app 4.10.2 \
       --base 4.10.2 \
       --security 4.10.2 \
-      --node-version $(cat .nvmrc)
+      --node-version $(cat ../../../.nvmrc)
 
    The script creates the packages in the ``packages`` directory within the ``base-packages-to-base`` folder.
 
