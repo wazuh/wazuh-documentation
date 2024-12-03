@@ -214,7 +214,7 @@ Building the packages
    .. code:: console
 
       $ git clone -b <BRANCH_OR_TAG> https://github.com/wazuh/wazuh-dashboard.git
-      $ cd wazuh-dashboard/dev-tools/build-packages/
+      $ cd wazuh-dashboard/dev-tools/build-packages/base-packages-to-base
 
    Example:
 
