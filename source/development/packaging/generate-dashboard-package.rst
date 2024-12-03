@@ -244,10 +244,10 @@ Building the packages
    .. code:: console
 
       $ bash run-docker-compose.sh \
-      --app 4.10.2 \
+      --node-version $(cat ../../../.nvmrc) \
       --base 4.10.2 \
-      --security 4.10.2 \
-      --node-version $(cat ../../../.nvmrc)
+      --app 4.10.2 \
+      --security 4.10.2
 
    The script creates the packages in the ``packages`` directory within the ``base-packages-to-base`` folder.
 
