@@ -117,5 +117,9 @@ Example of configuration
       <enabled>yes</enabled>
       <index-status>yes</index-status>
       <feed-update-interval>60m</feed-update-interval>
-      <offline-url>file://path/to/content/file.tar.xz</offline-url> <!-- Optional -->
+      <offline-url>file://absolute_path_to_content/offline_content.zip</offline-url> <!-- Optional -->
    </vulnerability-detection>
+
+.. note::
+
+   zip, xz, and gzip are the already supported compression formats. It also accepts raw JSON content in a plain text file.
