@@ -11,7 +11,7 @@ The packages generation process is orchestrated by the ``build-packages.sh`` scr
 -  version
 -  revision
 -  distribution
--  wazuh-dashboard, wazuh-dashboard-plugins, and wazuh-security-dashboards-plugin package paths
+-  ``wazuh-dashboard``, ``wazuh-dashboard-plugins``, and ``wazuh-security-dashboards-plugin`` package paths
 
 Official packages are built through a GitHub Actions pipeline, however, the process is designed to be independent enough for maximum portability. The building process is self-contained in the application code.
 
@@ -21,6 +21,9 @@ Build manually
 Requirements:
 
 -  Docker
+-  NVM (Node Version Manager): see `NVM installation guide <https://github.com/nvm-sh/nvm#installing-and-updating>`_
+   -  ``nvm use`` command is used to switch Node.js version within the project
+-  Yarn v1.22.22 (Node Package Manager): see `Yarn installation guide <https://classic.yarnpkg.com/en/docs/install/>`_
 
 Generating zip packages
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -28,7 +31,7 @@ Generating zip packages
 To use the script you first need to generate the packages from these repositories:
 
 -  ``wazuh-dashboard``
--  ``wazuh-security-dashboards-plugin`` 
+-  ``wazuh-security-dashboards-plugin``
 -  ``wazuh-dashboard-plugins``
 
 To build the packages, follow these steps:
@@ -39,6 +42,7 @@ To build the packages, follow these steps:
 
       # git clone -b <BRANCH_OR_TAG> https://github.com/wazuh/wazuh-dashboard.git
       # cd wazuh-dashboard/
+      # nvm use
       # yarn osd bootstrap
       # yarn build <--linux | --linux-arm> --skip-os-packages --release
 
@@ -48,6 +52,7 @@ To build the packages, follow these steps:
 
       # git clone -b 4.10.2 https://github.com/wazuh/wazuh-dashboard.git
       # cd wazuh-dashboard/
+      # nvm use
       # yarn osd bootstrap
       # yarn build --linux --skip-os-packages --release
 
@@ -62,6 +67,7 @@ To build the packages, follow these steps:
       # cd plugins/
       # git clone -b <BRANCH_OR_TAG> https://github.com/wazuh/wazuh-security-dashboards-plugin.git
       # cd wazuh-security-dashboards-plugin/
+      # nvm use
       # yarn
       # yarn build
 
@@ -72,6 +78,7 @@ To build the packages, follow these steps:
       # cd plugins/
       # git clone -b 4.10.2 https://github.com/wazuh/wazuh-security-dashboards-plugin.git
       # cd wazuh-security-dashboards-plugin/
+      # nvm use
       # yarn
       # yarn build
 
@@ -86,6 +93,7 @@ To build the packages, follow these steps:
       # cd ../
       # git clone -b <BRANCH_OR_TAG> https://github.com/wazuh/wazuh-dashboard-plugins.git
       # cd wazuh-dashboard-plugins/
+      # nvm use
       # cp -r plugins/* ../
       # cd ../main
       # yarn
@@ -104,6 +112,7 @@ To build the packages, follow these steps:
       # cd ../
       # git clone -b 4.10.2 https://github.com/wazuh/wazuh-dashboard-plugins.git
       # cd wazuh-dashboard-plugins/
+      # nvm use
       # cp -r plugins/* ../
       # cd ../main
       # yarn
