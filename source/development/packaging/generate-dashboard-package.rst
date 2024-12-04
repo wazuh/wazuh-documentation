@@ -22,7 +22,9 @@ Requirements:
 
 -  Docker
 -  NVM (Node Version Manager): see `NVM installation guide <https://github.com/nvm-sh/nvm#installing-and-updating>`_
+
    -  ``nvm use`` command is used to switch Node.js version within the project
+
 -  Yarn v1.22.22 (Node Package Manager): see `Yarn installation guide <https://classic.yarnpkg.com/en/docs/install/>`_
 
 Generating zip packages
