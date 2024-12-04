@@ -163,6 +163,9 @@ custom_replacements = {
     "|SPLUNK_LATEST_MINOR|" : "8.2",
     "|WAZUH_SPLUNK_REV_CURRENT_LATEST|" : "1", # 8.2
     "|WAZUH_SPLUNK_REV_CURRENT_8.1|" : "1",
+    #
+    # === Node.js
+    "|NODE_VERSION|": "18.19.0",
 }
 
 if is_latest_release:
