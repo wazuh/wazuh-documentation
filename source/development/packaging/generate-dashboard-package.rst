@@ -46,7 +46,7 @@ To build the packages, follow these steps:
 
    .. code:: console
 
-      $ git clone -b 4.9.0 https://github.com/wazuh/wazuh-dashboard.git
+      $ git clone -b v|WAZUH_CURRENT| https://github.com/wazuh/wazuh-dashboard.git
       $ cd wazuh-dashboard/
       $ yarn osd bootstrap
       $ yarn build --linux --skip-os-packages --release
@@ -66,7 +66,7 @@ To build the packages, follow these steps:
    .. code:: console
 
       $ cd plugins/
-      $ git clone -b 4.9.0 https://github.com/wazuh/wazuh-security-dashboards-plugin.git
+      $ git clone -b v|WAZUH_CURRENT| https://github.com/wazuh/wazuh-security-dashboards-plugin.git
       $ cd wazuh-security-dashboards-plugin/
       $ yarn
       $ yarn build
@@ -98,7 +98,7 @@ To build the packages, follow these steps:
    .. code:: console
 
       $ cd ../
-      $ git clone -b 4.9.0 https://github.com/wazuh/wazuh-dashboard-plugins.git
+      $ git clone -b v|WAZUH_CURRENT| https://github.com/wazuh/wazuh-dashboard-plugins.git
       $ cd wazuh-dashboard-plugins/
       $ cp -r plugins/* ../
       $ cd ../main
@@ -181,7 +181,7 @@ With this option you can create an image that has the package in tar.gz format a
 
    .. code:: console
 
-      $ git clone -b 4.9.0 https://github.com/wazuh/wazuh-dashboard.git
+      $ git clone -b v|WAZUH_CURRENT| https://github.com/wazuh/wazuh-dashboard.git
       $ cd wazuh-dashboard/dev-tools/build-packages/
 
 #. Build the Docker image with the following parameters:
