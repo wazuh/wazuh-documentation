@@ -214,7 +214,7 @@ With this option you can create an image that has the package in tar.gz format a
       --build-arg WAZUH_DASHBOARDS_PLUGINS=4.9.0 \
       --build-arg WAZUH_SECURITY_DASHBOARDS_PLUGIN_BRANCH=4.9.0 \
       --build-arg OPENSEARCH_DASHBOARDS_VERSION=2.13.0 \
-      -t wzd:4.9.0 \
+      -t wzd:v|WAZUH_CURRENT| \
       -f wazuh-dashboard.Dockerfile .
 
 #. Run the Docker image:
@@ -227,7 +227,7 @@ With this option you can create an image that has the package in tar.gz format a
 
    .. code:: console
 
-      $ docker run -d --rm --name wazuh-dashboard-package wzd:4.9.0 tail -f /dev/null
+      $ docker run -d --rm --name wazuh-dashboard-package wzd:v|WAZUH_CURRENT| tail -f /dev/null
 
 #. Copy the package to the host:
 
