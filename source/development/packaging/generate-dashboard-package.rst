@@ -257,6 +257,6 @@ With this option you can create an image that has the package in tar.gz format a
 
    .. code:: console
 
-      $ ./launcher.sh -v 4.9.0 -r 1 -p file:///wazuh-dashboard-4.9.0-1-linux-x64.tar.gz
+      $ ./launcher.sh -v |WAZUH_CURRENT| -r 1 -p file:///wazuh-dashboard-|WAZUH_CURRENT|-1-linux-x64.tar.gz
 
 The package will be generated in the ``output`` folder of the ``rpm`` or ``deb`` folder.
