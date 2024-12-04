@@ -23,7 +23,8 @@ Requirements:
 -  Docker
 -  NVM (Node Version Manager): see `NVM installation guide <https://github.com/nvm-sh/nvm#installing-and-updating>`_
 
-   -  ``nvm use`` command is used to switch Node.js version within the project
+   -  ``nvm install v|NODE_VERSION|``: installs Node.js version v|NODE_VERSION|
+   -  ``nvm use v|NODE_VERSION|``: sets the current Node.js version to v|NODE_VERSION|
 
 -  Yarn v1.22.22 (Node Package Manager): see `Yarn installation guide <https://classic.yarnpkg.com/en/docs/install/>`_
 
@@ -44,7 +45,7 @@ To build the packages, follow these steps:
 
       $ git clone -b <BRANCH_OR_TAG> https://github.com/wazuh/wazuh-dashboard.git
       $ cd wazuh-dashboard/
-      $ nvm use
+      $ nvm use v|NODE_VERSION|
       $ yarn osd bootstrap
       $ yarn build <--linux | --linux-arm> --skip-os-packages --release
 
@@ -54,7 +55,7 @@ To build the packages, follow these steps:
 
       $ git clone -b v|WAZUH_CURRENT| https://github.com/wazuh/wazuh-dashboard.git
       $ cd wazuh-dashboard/
-      $ nvm use
+      $ nvm use v|NODE_VERSION|
       $ yarn osd bootstrap
       $ yarn build --linux --skip-os-packages --release
 
@@ -69,7 +70,7 @@ To build the packages, follow these steps:
       $ cd plugins/
       $ git clone -b <BRANCH_OR_TAG> https://github.com/wazuh/wazuh-security-dashboards-plugin.git
       $ cd wazuh-security-dashboards-plugin/
-      $ nvm use
+      $ nvm use v|NODE_VERSION|
       $ yarn
       $ yarn build
 
@@ -80,7 +81,7 @@ To build the packages, follow these steps:
       $ cd plugins/
       $ git clone -b v|WAZUH_CURRENT| https://github.com/wazuh/wazuh-security-dashboards-plugin.git
       $ cd wazuh-security-dashboards-plugin/
-      $ nvm use
+      $ nvm use v|NODE_VERSION|
       $ yarn
       $ yarn build
 
@@ -95,7 +96,7 @@ To build the packages, follow these steps:
       $ cd ../
       $ git clone -b <BRANCH_OR_TAG> https://github.com/wazuh/wazuh-dashboard-plugins.git
       $ cd wazuh-dashboard-plugins/
-      $ nvm use
+      $ nvm use v|NODE_VERSION|
       $ cp -r plugins/* ../
       $ cd ../main
       $ yarn
@@ -114,7 +115,7 @@ To build the packages, follow these steps:
       $ cd ../
       $ git clone -b v|WAZUH_CURRENT| https://github.com/wazuh/wazuh-dashboard-plugins.git
       $ cd wazuh-dashboard-plugins/
-      $ nvm use
+      $ nvm use v|NODE_VERSION|
       $ cp -r plugins/* ../
       $ cd ../main
       $ yarn
