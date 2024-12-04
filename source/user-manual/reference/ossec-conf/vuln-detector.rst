@@ -86,7 +86,7 @@ File path or URL for offline content access.
 
 Where:
 
--  ``file://</ABSOLUTE_PATH_TO/OFFLINE_CONTENT>``: File path pointing to offline content. For example, ``file:///var/path/to/the/cves.file.zip``
+-  ``file://</ABSOLUTE_PATH_TO/OFFLINE_CONTENT>``: File path pointing to offline content. For example, ``file:///path/to/the/cves.file.zip``
 -  ``http[s]://<CONTENT_URL>``: URL starting with either ``http://`` or ``https://``, pointing to local network content or online content accessible via the internet.
 
 interval
@@ -118,7 +118,7 @@ Example of configuration
       <enabled>yes</enabled>
       <index-status>yes</index-status>
       <feed-update-interval>60m</feed-update-interval>
-      <offline-url>file:///var/path/to/the/cves.file.zip</offline-url> <!-- Optional -->
+      <offline-url>file:///path/to/the/cves.file.zip</offline-url> <!-- Optional -->
    </vulnerability-detection>
 
 .. note::
