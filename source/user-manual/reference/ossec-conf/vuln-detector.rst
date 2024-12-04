@@ -27,17 +27,17 @@ Options
    :depth: 1
    :backlinks: none
 
-+---------------------------+------------------------------------------------------------+
-| Options                   | Allowed values                                             |
-+===========================+============================================================+
-| `enabled`_                | ``yes``, ``no``                                            |
-+---------------------------+------------------------------------------------------------+
-| `feed-update-interval`_   | Positive number + Time unit suffix                         |
-+---------------------------+------------------------------------------------------------+
-| `index-status`_           | ``yes``, ``no``                                            |
-+---------------------------+------------------------------------------------------------+
-| `offline-url`_            | ``file://<LOCAL_FILE_PATH>``, ``http[s]://<CONTENT_URL>``  |
-+---------------------------+------------------------------------------------------------+
++---------------------------+-----------------------------------------------------------------------------+
+| Options                   | Allowed values                                                              |
++===========================+=============================================================================+
+| `enabled`_                | ``yes``, ``no``                                                             |
++---------------------------+-----------------------------------------------------------------------------+
+| `feed-update-interval`_   | Positive number + Time unit suffix                                          |
++---------------------------+-----------------------------------------------------------------------------+
+| `index-status`_           | ``yes``, ``no``                                                             |
++---------------------------+-----------------------------------------------------------------------------+
+| `offline-url`_            | ``file://</ABSOLUTE_PATH_TO/OFFLINE_CONTENT>``, ``http[s]://<CONTENT_URL>`` |
++---------------------------+-----------------------------------------------------------------------------+
 
 enabled
 ^^^^^^^
@@ -78,15 +78,16 @@ offline-url
 
 File path or URL for offline content access.
 
-+--------------------+---------------------------------------------------------+
-| **Default**        | Empty                                                   |
-+--------------------+---------------------------------------------------------+
-| **Allowed values** |``file://<LOCAL_FILE_PATH>``, ``http[s]://<CONTENT_URL>``|
-+--------------------+---------------------------------------------------------+
++--------------------+-----------------------------------------------------------------------------+
+| **Default**        | Empty                                                                       |
++--------------------+-----------------------------------------------------------------------------+
+| **Allowed values** | ``file://</ABSOLUTE_PATH_TO/OFFLINE_CONTENT>``, ``http[s]://<CONTENT_URL>`` |
++--------------------+-----------------------------------------------------------------------------+
 
-``<LOCAL_FILE_PATH>``: A local file path starting with \file://, pointing to offline content stored on the device.
+Where:
 
-``<CONTENT_URL>``: A URL starting with either \http:// or \https://, pointing to local network content or online content accessible via the internet.
+-  ``file://</ABSOLUTE_PATH_TO/OFFLINE_CONTENT>``: File path pointing to offline content. For example, ``file:///var/path/to/the/cves.file.zip``
+-  ``http[s]://<CONTENT_URL>``: URL starting with either ``http://`` or ``https://``, pointing to local network content or online content accessible via the internet.
 
 interval
 ^^^^^^^^
@@ -117,9 +118,9 @@ Example of configuration
       <enabled>yes</enabled>
       <index-status>yes</index-status>
       <feed-update-interval>60m</feed-update-interval>
-      <offline-url>file://absolute_path_to_content/offline_content.zip</offline-url> <!-- Optional -->
+      <offline-url>file:///var/path/to/the/cves.file.zip</offline-url> <!-- Optional -->
    </vulnerability-detection>
 
 .. note::
 
-   zip, xz, and gzip are the already supported compression formats. It also accepts raw JSON content in a plain text file.
+   Supported compression formats include zip, xz, and gzip. The module also accepts raw JSON content in plain text files.
