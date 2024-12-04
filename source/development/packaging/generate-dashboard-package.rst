@@ -11,7 +11,7 @@ The packages generation process is orchestrated by the ``build-packages.sh`` scr
 -  version
 -  revision
 -  distribution
--  wazuh-dashboard, wazuh-dashboard-plugins, and wazuh-security-dashboards-plugin package paths
+-  ``wazuh-dashboard``, ``wazuh-dashboard-plugins``, and ``wazuh-security-dashboards-plugin`` package paths
 
 Official packages are built through a GitHub Actions pipeline, however, the process is designed to be independent enough for maximum portability. The building process is self-contained in the application code.
 
