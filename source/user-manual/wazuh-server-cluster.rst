@@ -359,7 +359,7 @@ Ensure you select the appropriate sub-section based on your existing deployment.
 Certificates creation
 ^^^^^^^^^^^^^^^^^^^^^
 
-Wazuh uses certificates to establish trust and confidentiality between its components - the Wazuh indexer, Filebeat and the Wazuh dashboard. The Wazuh server comprises two components, the Wazuh manager and Filebeat. When adding new Wazuh server nodes, an SSL certificate is required for the Filebeat on the new node to communicate securely with the Wazuh indexer. 
+Wazuh uses certificates to establish trust and confidentiality between its components - the Wazuh indexer, Filebeat and the Wazuh dashboard. The Wazuh server comprises two components, the Wazuh manager and Filebeat. When adding new Wazuh server nodes, an SSL certificate is required for the Filebeat on the new node to communicate securely with the Wazuh indexer.
 
 Perform the following steps on your existing Wazuh server node to generate the certificates required for secure communication among the Wazuh central components.
 
@@ -612,7 +612,7 @@ All-in-one deployment
 
       # bash /root/deploy-certificates.sh
 
-   This deploys the SSL certificates to encrypt communications between the Wazuh central components. 
+   This deploys the SSL certificates to encrypt communications between the Wazuh central components.
 
    **Recommended action**: Save a copy offline for potential future use and scalability. You can  remove the ``wazuh-certificates.tar`` file on this node by running the command below to increase security:
 
@@ -735,8 +735,8 @@ Distributed deployment
 
    .. code-block:: console
 
-      # mkdir /etc/filebeat/certs
       # rm -rf /etc/filebeat/certs
+      # mkdir /etc/filebeat/certs
       # tar -xf ./wazuh-certificates.tar -C /etc/filebeat/certs/ ./$NODE_NAME.pem ./$NODE_NAME-key.pem ./root-ca.pem
       # mv -n /etc/filebeat/certs/$NODE_NAME.pem /etc/filebeat/certs/filebeat.pem
       # mv -n /etc/filebeat/certs/$NODE_NAME-key.pem /etc/filebeat/certs/filebeat-key.pem
@@ -1129,7 +1129,7 @@ Run the following commands in the directory where the ``wazuh-certificates.tar``
       # mv -n /etc/filebeat/certs/$NODE_NAME-key.pem /etc/filebeat/certs/filebeat-key.pem
       # chmod 500 /etc/filebeat/certs
       # chmod 400 /etc/filebeat/certs/*
-      #chown -R root:root /etc/filebeat/certs
+      # chown -R root:root /etc/filebeat/certs
 
 Starting the service
 ~~~~~~~~~~~~~~~~~~~~
@@ -2147,7 +2147,7 @@ Depending on the :ref:`HAProxy installation method <haproxy_installation>`, foll
 
                   COPY <HAPROXY_CERTIFICATE_FILE> /etc/haproxy/ssl/<HAPROXY_CERTIFICATE_FILE>
                   COPY <HAPROXY_CERTIFICATE_KEY_FILE> /etc/haproxy/ssl/<HAPROXY_CERTIFICATE_KEY_FILE>
-                  COPY <CLIENT_SIDE_CERTIFICATE_FILE> /etc/haproxy/ssl/<CLIENT_SIDE_CERTIFICATE_FILE> 
+                  COPY <CLIENT_SIDE_CERTIFICATE_FILE> /etc/haproxy/ssl/<CLIENT_SIDE_CERTIFICATE_FILE>
 
                   RUN chmod +x /etc/init.d/haproxy
                   RUN chmod +x /entrypoint.sh
@@ -2297,7 +2297,7 @@ As an example, you can configure a basic HAProxy helper within an already config
          -  :ref:`haproxy_password <haproxy_password>` specifies the password to authenticate with HAProxy.
          -  :ref:`haproxy_protocol <haproxy_protocol>` specifies the protocol to use for the HAProxy Dataplane API communication. It is recommended to set it to ``https``.
          -  :ref:`haproxy_port <haproxy_port>` specifies the port used for the HAProxy Dataplane API communication.
-         -  :ref:`haproxy_cert` <haproxy_cert> specifies the certificate file used for the HTTPS communication. It must be the same as the one defined in the ``tls_certificate`` parameter in the ``dataplaneapi.yml`` file. 
+         -  :ref:`haproxy_cert` <haproxy_cert> specifies the certificate file used for the HTTPS communication. It must be the same as the one defined in the ``tls_certificate`` parameter in the ``dataplaneapi.yml`` file.
          -  :ref:`client_cert` <client_cert> specifies the certificate file used in the client side of the HTTPS communication. It must be the same as the one defined in the ``tls_ca`` parameter in the ``dataplaneapi.yml`` file.
          -  :ref:`client_cert_key` <client_cert_key> specifies the certificate key file used in the client side of the HTTPS communication.
 
