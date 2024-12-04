@@ -210,9 +210,9 @@ With this option you can create an image that has the package in tar.gz format a
 
       $ docker build \
       --build-arg NODE_VERSION=18.19.0 \
-      --build-arg WAZUH_DASHBOARDS_BRANCH=4.9.0 \
-      --build-arg WAZUH_DASHBOARDS_PLUGINS=4.9.0 \
-      --build-arg WAZUH_SECURITY_DASHBOARDS_PLUGIN_BRANCH=4.9.0 \
+      --build-arg WAZUH_DASHBOARDS_BRANCH=v|WAZUH_CURRENT| \
+      --build-arg WAZUH_DASHBOARDS_PLUGINS=v|WAZUH_CURRENT| \
+      --build-arg WAZUH_SECURITY_DASHBOARDS_PLUGIN_BRANCH=v|WAZUH_CURRENT| \
       --build-arg OPENSEARCH_DASHBOARDS_VERSION=2.13.0 \
       -t wzd:v|WAZUH_CURRENT| \
       -f wazuh-dashboard.Dockerfile .
