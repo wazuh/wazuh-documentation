@@ -6,7 +6,7 @@
 Wazuh dashboard
 ===============
 
-The packages generation process is orchestrated by the ``build-packages.sh`` script, which is found within the ``dev-tools/build-packages/`` folder of the repository. This script is responsible for bundling plugins into one single application in tar, rpm and/or deb distributions. It takes the following parameters:
+The packages generation process is orchestrated by the ``build-packages.sh`` script, which is found within the ``dev-tools/build-packages/`` folder of the repository. This script is responsible for bundling plugins into one single application in ``tar``, ``rpm`` and/or ``deb`` distributions. It takes the following parameters:
 
 -  version
 -  revision
