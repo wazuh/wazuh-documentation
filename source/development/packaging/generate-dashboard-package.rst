@@ -28,7 +28,7 @@ Generating zip packages
 To use the script you first need to generate the packages from these repositories:
 
 -  ``wazuh-dashboard``
--  ``wazuh-security-dashboards-plugin`` 
+-  ``wazuh-security-dashboards-plugin``
 -  ``wazuh-dashboard-plugins``
 
 To build the packages, follow these steps:
@@ -37,39 +37,39 @@ To build the packages, follow these steps:
 
    .. code:: console
 
-      # git clone -b <BRANCH_OR_TAG> https://github.com/wazuh/wazuh-dashboard.git
-      # cd wazuh-dashboard/
-      # yarn osd bootstrap
-      # yarn build --linux --skip-os-packages --release
+      $ git clone -b <BRANCH_OR_TAG> https://github.com/wazuh/wazuh-dashboard.git
+      $ cd wazuh-dashboard/
+      $ yarn osd bootstrap
+      $ yarn build --linux --skip-os-packages --release
 
    Example:
 
    .. code:: console
 
-      # git clone -b 4.9.0 https://github.com/wazuh/wazuh-dashboard.git
-      # cd wazuh-dashboard/
-      # yarn osd bootstrap
-      # yarn build --linux --skip-os-packages --release
+      $ git clone -b 4.9.0 https://github.com/wazuh/wazuh-dashboard.git
+      $ cd wazuh-dashboard/
+      $ yarn osd bootstrap
+      $ yarn build --linux --skip-os-packages --release
 
 #. Clone the Wazuh Security Dashboards Plugin repository in the plugins folder and build the plugin.
 
    .. code:: console
 
-      # cd plugins/
-      # git clone -b <BRANCH_OR_TAG> https://github.com/wazuh/wazuh-security-dashboards-plugin.git
-      # cd wazuh-security-dashboards-plugin/
-      # yarn
-      # yarn build
+      $ cd plugins/
+      $ git clone -b <BRANCH_OR_TAG> https://github.com/wazuh/wazuh-security-dashboards-plugin.git
+      $ cd wazuh-security-dashboards-plugin/
+      $ yarn
+      $ yarn build
 
    Example:
 
    .. code:: console
 
-      # cd plugins/
-      # git clone -b 4.9.0 https://github.com/wazuh/wazuh-security-dashboards-plugin.git
-      # cd wazuh-security-dashboards-plugin/
-      # yarn
-      # yarn build
+      $ cd plugins/
+      $ git clone -b 4.9.0 https://github.com/wazuh/wazuh-security-dashboards-plugin.git
+      $ cd wazuh-security-dashboards-plugin/
+      $ yarn
+      $ yarn build
 
 #. Clone the Wazuh dashboard plugins repository in the plugins folder, move the contents of the plugins folder to the folder where the repository was cloned and build the plugins.
 
@@ -79,59 +79,59 @@ To build the packages, follow these steps:
 
    .. code:: console
 
-      # cd ../
-      # git clone -b <BRANCH_OR_TAG> https://github.com/wazuh/wazuh-dashboard-plugins.git
-      # cd wazuh-dashboard-plugins/
-      # cp -r plugins/* ../
-      # cd ../main
-      # yarn
-      # yarn build
-      # cd ../wazuh-core/
-      # yarn
-      # yarn build
-      # cd ../wazuh-check-updates/
-      # yarn
-      # yarn build
+      $ cd ../
+      $ git clone -b <BRANCH_OR_TAG> https://github.com/wazuh/wazuh-dashboard-plugins.git
+      $ cd wazuh-dashboard-plugins/
+      $ cp -r plugins/* ../
+      $ cd ../main
+      $ yarn
+      $ yarn build
+      $ cd ../wazuh-core/
+      $ yarn
+      $ yarn build
+      $ cd ../wazuh-check-updates/
+      $ yarn
+      $ yarn build
 
    Example:
 
    .. code:: console
 
-      # cd ../
-      # git clone -b 4.9.0 https://github.com/wazuh/wazuh-dashboard-plugins.git
-      # cd wazuh-dashboard-plugins/
-      # cp -r plugins/* ../
-      # cd ../main
-      # yarn
-      # yarn build
-      # cd ../wazuh-core/
-      # yarn
-      # yarn build
-      # cd ../wazuh-check-updates/
-      # yarn
-      # yarn build
+      $ cd ../
+      $ git clone -b 4.9.0 https://github.com/wazuh/wazuh-dashboard-plugins.git
+      $ cd wazuh-dashboard-plugins/
+      $ cp -r plugins/* ../
+      $ cd ../main
+      $ yarn
+      $ yarn build
+      $ cd ../wazuh-core/
+      $ yarn
+      $ yarn build
+      $ cd ../wazuh-check-updates/
+      $ yarn
+      $ yarn build
 
 #. Zip the packages and move them to the packages folder
 
    .. code:: console
 
-      # cd ../../../
-      # mkdir packages
-      # cd packages
-      # zip -r -j ./dashboard-package.zip ../wazuh-dashboard/target/opensearch-dashboards-2.13.0-linux-x64.tar.gz
-      # zip -r -j ./security-package.zip ../wazuh-dashboard/plugins/wazuh-security-dashboards-plugin/build/security-dashboards-<OPENSEARCH_VERSION>.0.zip
-      # zip -r -j ./wazuh-package.zip ../wazuh-dashboard/plugins/wazuh-check-updates/build/wazuhCheckUpdates-<OPENSEARCH_VERSION>.zip ../wazuh-dashboard/plugins/main/build/wazuh-<OPENSEARCH_VERSION>.zip ../wazuh-dashboard/plugins/wazuh-core/build/wazuhCore-<OPENSEARCH_VERSION>.zip
+      $ cd ../../../
+      $ mkdir packages
+      $ cd packages
+      $ zip -r -j ./dashboard-package.zip ../wazuh-dashboard/target/opensearch-dashboards-2.13.0-linux-x64.tar.gz
+      $ zip -r -j ./security-package.zip ../wazuh-dashboard/plugins/wazuh-security-dashboards-plugin/build/security-dashboards-<OPENSEARCH_VERSION>.0.zip
+      $ zip -r -j ./wazuh-package.zip ../wazuh-dashboard/plugins/wazuh-check-updates/build/wazuhCheckUpdates-<OPENSEARCH_VERSION>.zip ../wazuh-dashboard/plugins/main/build/wazuh-<OPENSEARCH_VERSION>.zip ../wazuh-dashboard/plugins/wazuh-core/build/wazuhCore-<OPENSEARCH_VERSION>.zip
 
    Example:
 
    .. code:: console
 
-      # cd ../../../
-      # mkdir packages
-      # cd packages
-      # zip -r -j ./dashboard-package.zip ../wazuh-dashboard/target/opensearch-dashboards-2.13.0-linux-x64.tar.gz
-      # zip -r -j ./security-package.zip ../wazuh-dashboard/plugins/wazuh-security-dashboards-plugin/build/security-dashboards-2.13.0.0.zip
-      # zip -r -j ./wazuh-package.zip ../wazuh-dashboard/plugins/wazuh-check-updates/build/wazuhCheckUpdates-2.13.0.zip ../wazuh-dashboard/plugins/main/build/wazuh-2.13.0.zip ../wazuh-dashboard/plugins/wazuh-core/build/wazuhCore-2.13.0.zip
+      $ cd ../../../
+      $ mkdir packages
+      $ cd packages
+      $ zip -r -j ./dashboard-package.zip ../wazuh-dashboard/target/opensearch-dashboards-2.13.0-linux-x64.tar.gz
+      $ zip -r -j ./security-package.zip ../wazuh-dashboard/plugins/wazuh-security-dashboards-plugin/build/security-dashboards-2.13.0.0.zip
+      $ zip -r -j ./wazuh-package.zip ../wazuh-dashboard/plugins/wazuh-check-updates/build/wazuhCheckUpdates-2.13.0.zip ../wazuh-dashboard/plugins/main/build/wazuh-2.13.0.zip ../wazuh-dashboard/plugins/wazuh-core/build/wazuhCore-2.13.0.zip
 
 At this point you must have three packages in the ``packages`` folder:
 
@@ -153,15 +153,15 @@ Run the ``build-packages.sh`` script in the ``dev-tools/build-packages/`` folder
 
 .. code:: console
 
-   # cd ../wazuh-dashboard/dev-tools/build-packages/
-   # ./build-packages.sh -v <VERSION> -r <REVISION> --<DISTRIBUTION_(--deb_OR_--rpm)> -a file:///<PATH_TO_wazuh-package.zip> -s file:///<PATH_TO_security-package.zip> -b file:///<PATH_TO_dashboard-package.zip>
+   $ cd ../wazuh-dashboard/dev-tools/build-packages/
+   $ ./build-packages.sh -v <VERSION> -r <REVISION> --<DISTRIBUTION_(--deb_OR_--rpm)> -a file:///<PATH_TO_wazuh-package.zip> -s file:///<PATH_TO_security-package.zip> -b file:///<PATH_TO_dashboard-package.zip>
 
 Example:
 
 .. code:: console
 
-   # cd ../wazuh-dashboard/dev-tools/build-packages/
-   # ./build-packages.sh -v 4.9.0 -r 1 --deb -a file:///packages/wazuh-package.zip -s file:///packages/security-package.zip -b file:///packages/dashboard-package.zip
+   $ cd ../wazuh-dashboard/dev-tools/build-packages/
+   $ ./build-packages.sh -v 4.9.0 -r 1 --deb -a file:///packages/wazuh-package.zip -s file:///packages/security-package.zip -b file:///packages/dashboard-package.zip
 
 The package will be generated in the ``output`` folder of the same directory where the script is located.
 
@@ -173,16 +173,16 @@ With this option you can create an image that has the package in tar.gz format a
 #. Clone the Wazuh dashboard repository.
 
    .. code:: console
-   
-      # git clone -b <BRANCH_OR_TAG> https://github.com/wazuh/wazuh-dashboard.git
-      # cd wazuh-dashboard/dev-tools/build-packages/
-   
+
+      $ git clone -b <BRANCH_OR_TAG> https://github.com/wazuh/wazuh-dashboard.git
+      $ cd wazuh-dashboard/dev-tools/build-packages/
+
    Example:
-   
+
    .. code:: console
-   
-      # git clone -b 4.9.0 https://github.com/wazuh/wazuh-dashboard.git
-      # cd wazuh-dashboard/dev-tools/build-packages/
+
+      $ git clone -b 4.9.0 https://github.com/wazuh/wazuh-dashboard.git
+      $ cd wazuh-dashboard/dev-tools/build-packages/
 
 #. Build the Docker image with the following parameters:
 
@@ -194,21 +194,21 @@ With this option you can create an image that has the package in tar.gz format a
    -  ``-t``: Tag of the image.
 
    .. code:: console
-   
-      # docker build \
+
+      $ docker build \
       --build-arg NODE_VERSION=<NODE_VERSION> \
       --build-arg WAZUH_DASHBOARDS_BRANCH=<BRANCH_OF_wazuh-dashboard> \
       --build-arg WAZUH_DASHBOARDS_PLUGINS=<BRANCH_OF_wazuh-dashboard-plugins> \
       --build-arg WAZUH_SECURITY_DASHBOARDS_PLUGIN_BRANCH=<BRANCH_OF_wazuh-security-dashboards-plugin> \
       --build-arg OPENSEARCH_DASHBOARDS_VERSION=<OPENSEARCH_DASHBOARDS_VERSION> \
-      -t <TAG_OF_IMAGE> \ 
+      -t <TAG_OF_IMAGE> \
       -f wazuh-dashboard.Dockerfile .
 
    Example:
-   
+
    .. code:: console
-   
-      # docker build \
+
+      $ docker build \
       --build-arg NODE_VERSION=18.19.0 \
       --build-arg WAZUH_DASHBOARDS_BRANCH=4.9.0 \
       --build-arg WAZUH_DASHBOARDS_PLUGINS=4.9.0 \
@@ -220,26 +220,26 @@ With this option you can create an image that has the package in tar.gz format a
 #. Run the Docker image:
 
    .. code:: console
-   
-      # docker run -d --rm --name wazuh-dashboard-package <TAG_OF_IMAGE> tail -f /dev/null
-   
+
+      $ docker run -d --rm --name wazuh-dashboard-package <TAG_OF_IMAGE> tail -f /dev/null
+
    Example:
-   
+
    .. code:: console
-   
-      # docker run -d --rm --name wazuh-dashboard-package wzd:4.9.0 tail -f /dev/null
+
+      $ docker run -d --rm --name wazuh-dashboard-package wzd:4.9.0 tail -f /dev/null
 
 #. Copy the package to the host:
 
    .. code:: console
-   
-      # docker cp wazuh-dashboard-package:/home/node/packages/. <PATH_TO_SAVE_THE_PACKAGE>
+
+      $ docker cp wazuh-dashboard-package:/home/node/packages/. <PATH_TO_SAVE_THE_PACKAGE>
 
    Example:
-   
+
    .. code:: console
-   
-      # docker cp wazuh-dashboard-package:/home/node/packages/. /
+
+      $ docker cp wazuh-dashboard-package:/home/node/packages/. /
 
    This copies the final package and the packages that were used to generate the final package.
 
@@ -248,15 +248,15 @@ With this option you can create an image that has the package in tar.gz format a
    -  ``-v``: Version of the package.
    -  ``-r``: Revision of the package.
    -  ``-p``: Path to the package in tar.gz format generated in the previous step
-   
+
    .. code:: console
-   
-      # ./launcher.sh -v <VERSION> -r <REVISION> -p <PATH_TO_PACKAGE>
-   
+
+      $ ./launcher.sh -v <VERSION> -r <REVISION> -p <PATH_TO_PACKAGE>
+
    Example:
-   
+
    .. code:: console
-   
-      # ./launcher.sh -v 4.9.0 -r 1 -p file:///wazuh-dashboard-4.9.0-1-linux-x64.tar.gz
+
+      $ ./launcher.sh -v 4.9.0 -r 1 -p file:///wazuh-dashboard-4.9.0-1-linux-x64.tar.gz
 
 The package will be generated in the ``output`` folder of the ``rpm`` or ``deb`` folder.
