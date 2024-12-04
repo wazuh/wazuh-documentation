@@ -50,7 +50,7 @@ To build the packages, follow these steps:
 
    .. code:: console
 
-      $ git clone -b 4.10.2 https://github.com/wazuh/wazuh-dashboard.git
+      $ git clone -b v|WAZUH_CURRENT| https://github.com/wazuh/wazuh-dashboard.git
       $ cd wazuh-dashboard/
       $ nvm use
       $ yarn osd bootstrap
@@ -76,7 +76,7 @@ To build the packages, follow these steps:
    .. code:: console
 
       $ cd plugins/
-      $ git clone -b 4.10.2 https://github.com/wazuh/wazuh-security-dashboards-plugin.git
+      $ git clone -b v|WAZUH_CURRENT| https://github.com/wazuh/wazuh-security-dashboards-plugin.git
       $ cd wazuh-security-dashboards-plugin/
       $ nvm use
       $ yarn
@@ -110,7 +110,7 @@ To build the packages, follow these steps:
    .. code:: console
 
       $ cd ../
-      $ git clone -b 4.10.2 https://github.com/wazuh/wazuh-dashboard-plugins.git
+      $ git clone -b v|WAZUH_CURRENT| https://github.com/wazuh/wazuh-dashboard-plugins.git
       $ cd wazuh-dashboard-plugins/
       $ nvm use
       $ cp -r plugins/* ../
@@ -191,7 +191,7 @@ Example:
 .. code:: console
 
    $ cd ../wazuh-dashboard/dev-tools/build-packages/
-   $ ./build-packages.sh -v 4.10.2 -r 1 --deb -a file:///packages/wazuh-package.zip -s file:///packages/security-package.zip -b file:///packages/dashboard-package.zip
+   $ ./build-packages.sh -v v|WAZUH_CURRENT| -r 1 --deb -a file:///packages/wazuh-package.zip -s file:///packages/security-package.zip -b file:///packages/dashboard-package.zip
 
 The script generates the package in the ``output`` folder of the same directory where it is located.
 
@@ -220,7 +220,7 @@ Building the packages
 
    .. code:: console
 
-      $ git clone -b 4.10.2 https://github.com/wazuh/wazuh-dashboard.git
+      $ git clone -b v|WAZUH_CURRENT| https://github.com/wazuh/wazuh-dashboard.git
       $ cd wazuh-dashboard/dev-tools/build-packages/base-packages-to-base
 
 #. Run the script ``run-docker-compose.sh`` with the following parameters:
@@ -245,9 +245,9 @@ Building the packages
 
       $ bash run-docker-compose.sh \
       --node-version $(cat ../../../.nvmrc) \
-      --base 4.10.2 \
-      --app 4.10.2 \
-      --security 4.10.2
+      --base v|WAZUH_CURRENT| \
+      --app v|WAZUH_CURRENT| \
+      --security v|WAZUH_CURRENT|
 
    The script creates the packages in the ``packages`` directory within the ``base-packages-to-base`` folder.
 
@@ -278,6 +278,6 @@ Building the packages
    .. code:: console
 
       $ cd ../../
-      $ ./build-packages.sh -v 4.10.2 -r 1 --deb -a file://$(pwd)/base-packages-to-base/packages/wazuh-package.zip -s file://$(pwd)/base-packages-to-base/packages/security-package.zip -b file://$(pwd)/base-packages-to-base/packages/dashboard-package.zip
+      $ ./build-packages.sh -v v|WAZUH_CURRENT| -r 1 --deb -a file://$(pwd)/base-packages-to-base/packages/wazuh-package.zip -s file://$(pwd)/base-packages-to-base/packages/security-package.zip -b file://$(pwd)/base-packages-to-base/packages/dashboard-package.zip
 
    The script creates the package in the ``output`` folder within the same directory as the script.
