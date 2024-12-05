@@ -80,16 +80,10 @@ Wazuh dashboard
 -  `#7081 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7081>`__ Added filter by value to document details fields.
 -  `#7135 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7135>`__ Added pinned agent mechanic to inventory data, stats, and configuration for consistent functionality.
 -  `#7057 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7057>`__ Changed the warning icon in events view to an info icon.
+-  `#7034 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7034>`__ Changed feature container margins to ensure consistent separation and uniform design.
 -  `#7089 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7089>`__ Changed inventory, stats and configuration page to use tabs.
 -  `#7156 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7156>`__ Added ability to edit the ``wazuh.updates.disabled`` configuration setting from the UI.
 -  `#7149 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7149>`__ Changed styles in the register agent view for consistency of styles across views.
-
-Packages
-^^^^^^^^
-
--  `#3059 <https://github.com/wazuh/wazuh-packages/pull/3059>`__ Add a post-install validation for Wazuh manager and Filebeat in the WIA.
--  `#3088 <https://github.com/wazuh/wazuh-packages/pull/3088>`__ Removed OVA related files and references.
--  `#3089 <https://github.com/wazuh/wazuh-packages/pull/3089>`__ Deleted installation assistant related files and references.
 
 Resolved issues
 ---------------
@@ -110,6 +104,7 @@ Wazuh manager
 -  `#26842 <https://github.com/wazuh/wazuh/pull/26842>`__ Fixed segmentation fault in ``DescriptionsHelper::vulnerabilityDescription``.
 -  `#24034 <https://github.com/wazuh/wazuh/pull/24034>`__ Fixed vulnerability scanner re-scan triggers in cluster environment.
 -  `#23266 <https://github.com/wazuh/wazuh/issues/23266>`__ Updated CURL version to 8.10.0.
+-  `#27145 <https://github.com/wazuh/wazuh/pull/27145>`__ Fixed an issue where elements in the delayed list were not purged when changing nodes.
 
 Wazuh agent
 ^^^^^^^^^^^
@@ -127,6 +122,9 @@ Wazuh agent
 -  `#26900 <https://github.com/wazuh/wazuh/pull/26900>`__ Fixed errors on AIX 7.2 by adapting the ``blibpath`` variable.
 -  `#26944 <https://github.com/wazuh/wazuh/pull/26944>`__ Sanitized agent paths to prevent issues with parent folder references.
 -  `#26633 <https://github.com/wazuh/wazuh/pull/26633>`__ Fixed an issue in the DEB package that prevented the agent from restarting after an upgrade.
+-  `#26944 <https://github.com/wazuh/wazuh/pull/26944>`__ Improved file path handling in agent communications to avoid references to parent folders.
+-  `#27054 <https://github.com/wazuh/wazuh/pull/27054>`__ Set RPM package vendor to ``UNKNOWN_VALUE`` when the value is missing.
+-  `#27059 <https://github.com/wazuh/wazuh/issues/27059>`__ Updated Solaris package generation to use the correct ``wazuh-packages`` reference.
 
 Ruleset
 ^^^^^^^
@@ -155,6 +153,7 @@ Wazuh dashboard
 -  `#7156 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7156>`__ Fixed the **Check updates** UI being displayed despite being configured as disabled.
 -  `#7151 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7151>`__ Fixed filter by value in document details not working in Safari.
 -  `#7167 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7167>`__ Fixed error message to prevent passing non-string values to the Wazuh logger.
+-  `#7177 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7177>`__ Fixed the rendering of the ``data.vulnerability.reference`` field in the table and flyout.
 
 Changelogs
 ----------
