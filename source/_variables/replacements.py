@@ -165,7 +165,7 @@ custom_replacements = {
     "|WAZUH_SPLUNK_REV_CURRENT_8.1|" : "1",
     #
     # === Node.js
-    "|NODE_VERSION|": "18.19.0",
+    "|WAZUH_DASHBOARD_NODE_VERSION|": "18.19.0",
 }
 
 if is_latest_release:
