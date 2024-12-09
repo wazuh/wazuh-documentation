@@ -374,10 +374,6 @@ Reference Wazuh puppet
 |                                                                 |                                                                 |                                             |
 |                                                                 | :ref:`Wazuh API <ref_server_vars_wazuh_api>`                    |                                             |
 |                                                                 |                                                                 |                                             |
-|                                                                 | :ref:`Wodle OpenSCAP <ref_server_vars_wodle_openscap>`          |                                             |
-|                                                                 |                                                                 |                                             |
-|                                                                 | :ref:`Wodle CIS-CAT <ref_server_vars_ciscat>`                   |                                             |
-|                                                                 |                                                                 |                                             |
 |                                                                 | :ref:`Wodle osquery <ref_server_vars_wodle_osquery>`            |                                             |
 |                                                                 |                                                                 |                                             |
 |                                                                 | :ref:`Wodle Syscollector <ref_server_vars_wodle_syscollector>`  |                                             |
@@ -397,10 +393,6 @@ Reference Wazuh puppet
 |                                                                 | :ref:`SCA <ref_agent_vars_sca>`                                 |                                             |
 |                                                                 |                                                                 |                                             |
 |                                                                 | :ref:`Syscheck <ref_agent_vars_syscheck>`                       |                                             |
-|                                                                 |                                                                 |                                             |
-|                                                                 | :ref:`Wodle OpenSCAP <ref_agent_vars_wodle_openscap>`           |                                             |
-|                                                                 |                                                                 |                                             |
-|                                                                 | :ref:`Wodle CIS-CAT <ref_agent_vars_wodle_ciscat>`              |                                             |
 |                                                                 |                                                                 |                                             |
 |                                                                 | :ref:`Wodle osquery <ref_agent_vars_wodle_osquery>`             |                                             |
 |                                                                 |                                                                 |                                             |
