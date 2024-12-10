@@ -56,12 +56,6 @@ In the case Wazuh is installed in a multi-node cluster configuration, repeat the
 Upgrading the Wazuh indexer
 ---------------------------
 
-.. note::
-
-   Note that this upgrade process doesn't update plugins installed manually. Outdated plugins might cause the upgrade to fail.
-
-   To ensure compatibility with the latest Wazuh indexer and Wazuh dashboard, please update manually installed plugins accordingly. For additional information, check the `distribution matrix <https://github.com/wazuh/wazuh-packages/tree/v|WAZUH_CURRENT|#distribution-version-matrix>`__.
-
 The cluster remains available throughout the upgrading process in a Wazuh indexer cluster with multiple nodes. This rolling upgrade allows for the shutting down of one Wazuh indexer node at a time for minimal disruption of service.
 
 Repeat the following steps for every Wazuh indexer node replacing ``<WAZUH_INDEXER_IP_ADDRESS>``, ``<USERNAME>``, and ``<PASSWORD>``.
@@ -194,10 +188,10 @@ If upgrading from version 4.7 and earlier, edit ``/var/ossec/etc/ossec.conf`` to
 #. Save the Wazuh indexer username and password into the Wazuh manager keystore using the :doc:`Wazuh-keystore </user-manual/reference/tools/wazuh-keystore>` tool.
 
    .. code-block:: console
-  
+
       # echo '<INDEXER_USERNAME>' | /var/ossec/bin/wazuh-keystore -f indexer -k username
       # echo '<INDEXER_PASSWORD>' | /var/ossec/bin/wazuh-keystore -f indexer -k password
-   
+
    .. note::
 
       In case you've forgotten your Wazuh indexer password, follow the :doc:`password management </user-manual/user-administration/password-management>` guide to reset the password.
@@ -231,12 +225,6 @@ Configuring Filebeat
 
 Upgrading the Wazuh dashboard
 -----------------------------
-
-.. note::
-
-   Note that this upgrade process doesn't update plugins installed manually. Outdated plugins might cause the upgrade to fail.
-
-   To ensure compatibility with the latest Wazuh indexer and Wazuh dashboard, please update manually installed plugins accordingly. For additional information, check the `distribution matrix <https://github.com/wazuh/wazuh-packages/tree/v|WAZUH_CURRENT|#distribution-version-matrix>`__.
 
 Configuration options might differ across versions. Follow these steps to ensure a smooth upgrade.
 
