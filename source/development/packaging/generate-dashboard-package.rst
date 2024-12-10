@@ -20,7 +20,8 @@ Build manually
 
 Requirements:
 
--  Docker
+-  Docker: see `Docker installation guide <https://docs.docker.com/engine/install/>`_
+-  zip: see `zip installation guide <https://www.tecmint.com/install-zip-and-unzip-in-linux/>`_
 -  NVM (Node Version Manager): see `NVM installation guide <https://github.com/nvm-sh/nvm#installing-and-updating>`_
 
    -  ``nvm install v|NODE_VERSION|``: installs Node.js version v|NODE_VERSION|
