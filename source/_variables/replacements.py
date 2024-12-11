@@ -166,6 +166,7 @@ custom_replacements = {
     #
     # === Node.js
     "|WAZUH_DASHBOARD_NODE_VERSION|": "18.19.0",
+    "|WAZUH_DASHBOARD_YARN_VERSION|": "1.22.22",
 }
 
 if is_latest_release:

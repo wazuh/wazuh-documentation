@@ -27,7 +27,7 @@ Requirements:
    -  ``nvm install v|WAZUH_DASHBOARD_NODE_VERSION|``: installs Node.js version v|WAZUH_DASHBOARD_NODE_VERSION|
    -  ``nvm use v|WAZUH_DASHBOARD_NODE_VERSION|``: sets the current Node.js version to v|WAZUH_DASHBOARD_NODE_VERSION|
 
--  Yarn v1.22.22 (Node Package Manager): see `Yarn installation guide <https://classic.yarnpkg.com/en/docs/install/>`_
+-  Yarn v|WAZUH_DASHBOARD_YARN_VERSION| (Node Package Manager): see `Yarn installation guide <https://classic.yarnpkg.com/en/docs/install/>`_
 
 Generating zip packages
 ~~~~~~~~~~~~~~~~~~~~~~~
