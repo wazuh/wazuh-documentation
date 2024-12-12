@@ -101,7 +101,7 @@ To change the password for a single Wazuh indexer user, run the script with the 
 
 If you use the tool in an all-in-one deployment, it automatically updates the passwords where necessary.  If you use it in a distributed environment, depending on the user whose password you change, you may have to update the password on other components. See :ref:`Changing the passwords in a distributed environment <passwords_distributed>` for more details.
 
-If you want to change the password for a Wazuh manager API user, run the script on a Wazuh server node and use option ``-A, --api``. Alternatively, you can change the Wazuh manager API passwords following the instructions in the :doc:`Securing the Wazuh API </user-manual/api/securing-api>` documentation.
+If you want to change the password for a Wazuh manager API user, run the script on a Wazuh server node and use option ``-A|--api``. Alternatively, you can change the Wazuh manager API passwords following the instructions in the :doc:`Securing the Wazuh API </user-manual/api/securing-api>` documentation.
 
 
 Changing the passwords for all users
