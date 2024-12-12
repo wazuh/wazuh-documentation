@@ -23,10 +23,6 @@ Requirements:
 -  Docker: see `Docker installation guide <https://docs.docker.com/engine/install/>`_
 -  zip
 -  NVM (Node Version Manager): see `NVM installation guide <https://github.com/nvm-sh/nvm#installing-and-updating>`_
-
-   -  ``nvm install v|WAZUH_DASHBOARD_NODE_VERSION|``: installs Node.js version v|WAZUH_DASHBOARD_NODE_VERSION|
-   -  ``nvm use v|WAZUH_DASHBOARD_NODE_VERSION|``: sets the current Node.js version to v|WAZUH_DASHBOARD_NODE_VERSION|
-
 -  Yarn v|WAZUH_DASHBOARD_YARN_VERSION| (Node Package Manager): see `Yarn installation guide <https://classic.yarnpkg.com/en/docs/install/>`_
 
 Generating zip packages
@@ -46,7 +42,8 @@ To build the packages, follow these steps:
 
       $ git clone -b <BRANCH_OR_TAG> https://github.com/wazuh/wazuh-dashboard.git
       $ cd wazuh-dashboard/
-      $ nvm use v|WAZUH_DASHBOARD_NODE_VERSION|
+      $ nvm install $(cat .nvmrc)
+      $ nvm use $(cat .nvmrc)
       $ yarn osd bootstrap
       $ yarn build <--linux | --linux-arm> --skip-os-packages --release
 
@@ -56,7 +53,8 @@ To build the packages, follow these steps:
 
       $ git clone -b v|WAZUH_CURRENT| https://github.com/wazuh/wazuh-dashboard.git
       $ cd wazuh-dashboard/
-      $ nvm use v|WAZUH_DASHBOARD_NODE_VERSION|
+      $ nvm install $(cat .nvmrc)
+      $ nvm use $(cat .nvmrc)
       $ yarn osd bootstrap
       $ yarn build --linux --skip-os-packages --release
 
@@ -71,7 +69,6 @@ To build the packages, follow these steps:
       $ cd plugins/
       $ git clone -b <BRANCH_OR_TAG> https://github.com/wazuh/wazuh-security-dashboards-plugin.git
       $ cd wazuh-security-dashboards-plugin/
-      $ nvm use v|WAZUH_DASHBOARD_NODE_VERSION|
       $ yarn
       $ yarn build
 
@@ -82,7 +79,6 @@ To build the packages, follow these steps:
       $ cd plugins/
       $ git clone -b v|WAZUH_CURRENT| https://github.com/wazuh/wazuh-security-dashboards-plugin.git
       $ cd wazuh-security-dashboards-plugin/
-      $ nvm use v|WAZUH_DASHBOARD_NODE_VERSION|
       $ yarn
       $ yarn build
 
@@ -97,7 +93,8 @@ To build the packages, follow these steps:
       $ cd ../
       $ git clone -b <BRANCH_OR_TAG> https://github.com/wazuh/wazuh-dashboard-plugins.git
       $ cd wazuh-dashboard-plugins/
-      $ nvm use v|WAZUH_DASHBOARD_NODE_VERSION|
+      $ nvm install $(cat .nvmrc)
+      $ nvm use $(cat .nvmrc)
       $ cp -r plugins/* ../
       $ cd ../main
       $ yarn
@@ -116,7 +113,8 @@ To build the packages, follow these steps:
       $ cd ../
       $ git clone -b v|WAZUH_CURRENT| https://github.com/wazuh/wazuh-dashboard-plugins.git
       $ cd wazuh-dashboard-plugins/
-      $ nvm use v|WAZUH_DASHBOARD_NODE_VERSION|
+      $ nvm install $(cat .nvmrc)
+      $ nvm use $(cat .nvmrc)
       $ cp -r plugins/* ../
       $ cd ../main
       $ yarn
