@@ -204,13 +204,13 @@ Follow the instructions below to change the passwords for all the Wazuh indexer 
       INFO: The password for user snapshotrestore is Mb2EHw8SIc1d.oz.nM?dHiPBGk7s?UZB
       WARNING: Wazuh indexer passwords changed. Remember to update the password in the Wazuh dashboard, Wazuh server, and Filebeat nodes if necessary, and restart the services.
 
-#. On your `Wazuh server master node`, download the Wazuh passwords tool and use it to change the passwords of the Wazuh API users. Replace ``<WAZUH_PASSWORD>`` with the *wazuh* user password. 
+#. On your `Wazuh server master node`, download the Wazuh passwords tool and use it to change the passwords of the Wazuh API users. Replace ``<WAZUH_PASSWORD>`` with the *wazuh* user password.
 
    .. code-block:: console
 
       # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-passwords-tool.sh
       # bash wazuh-passwords-tool.sh --api --admin-user wazuh --admin-password <WAZUH_PASSWORD>
-  
+
    .. code-block:: console
       :class: output
 
@@ -223,11 +223,11 @@ Follow the instructions below to change the passwords for all the Wazuh indexer 
 
       # echo <CUSTOM_USERNAME> | filebeat keystore add username --stdin --force
       # echo <CUSTOM_PASSWORD> | filebeat keystore add password --stdin --force
-         
+
    Restart Filebeat to apply the changes.
 
    .. include:: /_templates/common/restart_filebeat.rst
-       
+
 #. On your `Wazuh dashboard node`, run the following command to update the `kibanaserver` password in the Wazuh dashboard keystore. Replace ``<KIBANASERVER_PASSWORD>`` with the random password generated in the first step.
 
    .. code-block:: console
