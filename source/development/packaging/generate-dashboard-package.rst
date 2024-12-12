@@ -45,7 +45,7 @@ To build the packages, follow these steps:
       $ nvm install $(cat .nvmrc)
       $ nvm use $(cat .nvmrc)
       $ yarn osd bootstrap
-      $ yarn build <--linux | --linux-arm> --skip-os-packages --release
+      $ yarn build-platform <--linux | --linux-arm> --skip-os-packages --release
 
    Example:
 
@@ -56,7 +56,7 @@ To build the packages, follow these steps:
       $ nvm install $(cat .nvmrc)
       $ nvm use $(cat .nvmrc)
       $ yarn osd bootstrap
-      $ yarn build --linux --skip-os-packages --release
+      $ yarn build-platform --linux --skip-os-packages --release
 
    .. note::
 
