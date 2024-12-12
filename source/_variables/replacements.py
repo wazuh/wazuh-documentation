@@ -164,8 +164,7 @@ custom_replacements = {
     "|WAZUH_SPLUNK_REV_CURRENT_LATEST|" : "1", # 8.2
     "|WAZUH_SPLUNK_REV_CURRENT_8.1|" : "1",
     #
-    # === Node.js
-    "|WAZUH_DASHBOARD_NODE_VERSION|": "18.19.0",
+    # === Wazuh dashboard
     "|WAZUH_DASHBOARD_YARN_VERSION|": "1.22.22",
 }
 
