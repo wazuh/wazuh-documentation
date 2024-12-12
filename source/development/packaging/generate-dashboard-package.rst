@@ -21,6 +21,7 @@ Build manually
 Requirements:
 
 -  Docker: see `Docker installation guide <https://docs.docker.com/engine/install/>`_
+-  Docker Compose: see `Docker Compose installation guide <https://docs.docker.com/compose/install/>`_
 -  zip
 -  NVM (Node Version Manager): see `NVM installation guide <https://github.com/nvm-sh/nvm#installing-and-updating>`_
 -  Yarn v|WAZUH_DASHBOARD_YARN_VERSION| (Node Package Manager): see `Yarn installation guide <https://classic.yarnpkg.com/en/docs/install/>`_
