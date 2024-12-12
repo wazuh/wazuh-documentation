@@ -99,7 +99,6 @@ To build the packages, follow these steps:
       $ cd ../main
       $ yarn
       $ yarn build
-      $ # When prompted for the OpenSearch version, check the version specified in the package.json file.
       $ cd ../wazuh-core/
       $ yarn
       $ yarn build
@@ -120,7 +119,6 @@ To build the packages, follow these steps:
       $ cd ../main
       $ yarn
       $ yarn build
-      $ # When prompted for the OpenSearch version, check the version specified in the package.json file.
       $ cd ../wazuh-core/
       $ yarn
       $ yarn build
