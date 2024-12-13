@@ -22,5 +22,3 @@ The Wazuh indexer can be configured as a single-node or multi-node cluster, prov
       index-life-management
       wazuh-indexer-tuning
       migrating-wazuh-indices
-      wazuh-indexer-cluster
-
