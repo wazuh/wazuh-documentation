@@ -51,5 +51,4 @@ If your pip version is less than 19.3, run the following command to upgrade the 
 
          To prevent the modification, you can run ``pip3 install --upgrade pip`` within a virtual environment. You must update the shebang of the |module_script| Python script with the interpreter in your virtual environment. For example, ``#!/path/to/your/virtual/environment/bin/python3``.
 
-
 .. End of include file

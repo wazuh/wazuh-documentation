@@ -45,7 +45,7 @@ Creating a custom ruleset
 
 The Wazuh agent collects logs and events that contain specific information on monitored endpoints. You need to create a custom ruleset to extract relevant information from the collected logs.
 
-To demonstrate the process of creating a custom ruleset, we configure the Command module to obtain the amount of physical RAM left unused in a Linux endpoint every five minutes. In this example, the module executes a command to generate memory usage events on the Linux endpoint and forward the logs to the Wazuh server. 
+To demonstrate the process of creating a custom ruleset, we configure the Command module to obtain the amount of physical RAM left unused in a Linux endpoint every five minutes. In this example, the module executes a command to generate memory usage events on the Linux endpoint and forward the logs to the Wazuh server.
 
 Perform the steps below to generate the events and create a custom ruleset.
 
@@ -82,7 +82,7 @@ Linux endpoint
 
    .. code-block:: console
 
-      # systemctl restart wazuh-agent      
+      # systemctl restart wazuh-agent
 
 Wazuh server
 ^^^^^^^^^^^^
@@ -98,7 +98,7 @@ Wazuh server
 
       {"timestamp":"2023-07-26T09:06:08.947+0000","agent":{"id":"002","name":"Ubuntu-22-LTS","ip":"10.0.2.15"},"manager":{"name":"wazuh-server"},"id":"1690362368.662599","full_log":"MemFree:       	90008 kB","decoder":{},"location":"command_unused_memory"}
 
-   The ``full_log`` field in the log contains the actual event generated on the monitored Linux endpoint. 
+   The ``full_log`` field in the log contains the actual event generated on the monitored Linux endpoint.
 
 #. Run the ``/var/ossec/bin/wazuh-logtest`` program and paste the value of the ``full_log`` field in the prompt:
 
@@ -108,12 +108,12 @@ Wazuh server
       # /var/ossec/bin/wazuh-logtest
       Starting wazuh-logtest v|WAZUH_CURRENT|
       Type one log per line
-      
+
       MemFree:       	90008 kB
-      
+
       **Phase 1: Completed pre-decoding.
           	full event: 'MemFree:       	90008 kB'
-      
+
       **Phase 2: Completed decoding.
           	No decoder matched.
 
@@ -137,12 +137,12 @@ Wazuh server
       # /var/ossec/bin/wazuh-logtest
       Starting wazuh-logtest v|WAZUH_CURRENT|
       Type one log per line
-      
+
       MemFree:       	90008 kB
-      
+
       **Phase 1: Completed pre-decoding.
           	full event: 'MemFree:       	90008 kB'
-      
+
       **Phase 2: Completed decoding.
           	name: 'unused-memory'
           	free_memory: '90008'
@@ -210,7 +210,7 @@ Wazuh server
 Wazuh dashboard
 ^^^^^^^^^^^^^^^
 
-Click the upper-left menu icon **☰** to open the options, go to **Server management** > **Endpoints summary** and select the monitored Linux endpoint. Then, navigate to the **Threat Hunting** module to view the alerts generated when the Command module runs the ``grep MemFree /proc/meminfo`` command.
+Click the upper-left menu icon **☰** to open the options, go to **Agents management** > **Summary** and select the monitored Linux endpoint. Then, navigate to the **Threat Hunting** module to view the alerts generated when the Command module runs the ``grep MemFree /proc/meminfo`` command.
 
 .. thumbnail:: /images/manual/command-monitoring/free-memory-alert.png
   :title: System's free memory alert
