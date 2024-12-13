@@ -13,7 +13,7 @@ To re-index an existing index, perform the following steps on either the Wazuh d
 Wazuh dashboard
 ---------------
 
-#. Click on the **upper left menu ☰** and go to **Server management** then **Dev Tools**.
+#. Click on the **upper left menu ☰** and go to **Indexer management** then **Dev Tools**.
 #. Enter the following API call, replacing ``my-source-index`` with the source index pattern and ``my-destination-index`` with the destination index pattern.
 
    .. code-block:: none
