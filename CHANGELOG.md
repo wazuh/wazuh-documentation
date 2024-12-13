@@ -3,11 +3,17 @@ All notable changes to this project will be documented in this file.
 
 ## [v4.10.1]
 
-- Support for Wazuh 4.10.1
-
 ### Added
 
 - Added architecture information to assistant pages. ([#7830](https://github.com/wazuh/wazuh-documentation/pull/7830))
+
+### Changed
+
+- Updated note about uninstalling Wazuh agents in Solaris. ([#7925](https://github.com/wazuh/wazuh-documentation/pull/7925))
+
+### Removed
+
+- Removed note about plugins and upgrading Wazuh central components. ([#8020](https://github.com/wazuh/wazuh-documentation/pull/8020))
 
 ## [v4.10.0]
 
