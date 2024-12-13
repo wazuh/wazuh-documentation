@@ -35,63 +35,67 @@ The passwords tool is embedded in the Wazuh indexer under ``/usr/share/wazuh-ind
 
 All the available options to run the script are:
 
-+------------------------------------------------------+-------------------------------------------------------------------------------------------------------------+
-| Options                                              | Purpose                                                                                                     |
-+======================================================+=============================================================================================================+
-| ``-a`` / ``--change-all``                            | Changes all the Wazuh indexer and Wazuh API user passwords and prints them on screen.                       |
-|                                                      | To change API passwords ``-au|--admin-user`` and ``-ap|--admin-password`` are required.                     |
-+------------------------------------------------------+-------------------------------------------------------------------------------------------------------------+
-| ``-A`` /  ``--api``                                  | Change the Wazuh API password given the current password.                                                   |
-|                                                      | Requires ``-u|--user``, and ``-p|--password``, ``-au|--admin-user`` and ``-ap|--admin-password``.           |
-+------------------------------------------------------+-------------------------------------------------------------------------------------------------------------+
-| ``-au`` / ``--admin-user <adminUser>``               | Admin user for the Wazuh API. Required for changing the Wazuh API passwords.                                |
-|                                                      | Requires ``-A|--api``.                                                                                      |
-+------------------------------------------------------+-------------------------------------------------------------------------------------------------------------+
-| ``-ap`` / ``--admin-password <adminPassword>``       | Password for the Wazuh API admin user. Required for changing the Wazuh API passwords.                       |
-|                                                      | Requires ``-A|--api``.                                                                                      |
-+------------------------------------------------------+-------------------------------------------------------------------------------------------------------------+
-| ``-u`` / ``--user <user>``                           | Indicates the name of the user whose password will be changed.                                              |
-|                                                      | If no password is specified, it will generate a random one.                                                 |
-+------------------------------------------------------+-------------------------------------------------------------------------------------------------------------+
-| ``-p`` / ``--password <password>``                   | Indicates the new password. Must be used with option ``-u``.                                                |
-+------------------------------------------------------+-------------------------------------------------------------------------------------------------------------+
-| ``-c`` / ``--cert <route-admin-certificate>``        | Indicates route to the admin certificate.                                                                   |
-+------------------------------------------------------+-------------------------------------------------------------------------------------------------------------+
-| ``-k`` / ``--certkey <route-admin-certificate-key>`` | Indicates route to the admin certificate key.                                                               |
-+------------------------------------------------------+-------------------------------------------------------------------------------------------------------------+
-| ``-v`` / ``--verbose``                               | Shows the complete script execution output.                                                                 |
-+------------------------------------------------------+-------------------------------------------------------------------------------------------------------------+
-| ``-f`` / ``--file <password_file.yml>``              | Changes the passwords for the ones given in the file.                                                       |
-|                                                      |                                                                                                             |
-|                                                      | Wazuh indexer users must have this format:                                                                  |
-|                                                      |                                                                                                             |
-|                                                      |    # Description                                                                                            |
-|                                                      |      indexer_username: ``<user>``                                                                           |
-|                                                      |                                                                                                             |
-|                                                      |      indexer_password: ``<password>``                                                                       |
-|                                                      |                                                                                                             |
-|                                                      | Wazuh API users must have this format:                                                                      |
-|                                                      |                                                                                                             |
-|                                                      |    # Description                                                                                            |
-|                                                      |      api_username: ``<user>``                                                                               |
-|                                                      |                                                                                                             |
-|                                                      |      api_password: ``<password>``                                                                           |
-+------------------------------------------------------+-------------------------------------------------------------------------------------------------------------+
-| ``-gf`` / ``--generate-file <passwords.wazuh>``      | Generate password file with random passwords for standard users.                                            |
-+------------------------------------------------------+-------------------------------------------------------------------------------------------------------------+
-| ``-h`` / ``--help``                                  | Shows help.                                                                                                 |
-+------------------------------------------------------+-------------------------------------------------------------------------------------------------------------+
++--------------------------------------------------+--------------------------------------------------------------------------------------------------------------------+
+| Options                                          | Purpose                                                                                                            |
++==================================================+====================================================================================================================+
+| ``-a|--change-all``                              | Changes all the Wazuh indexer and Wazuh API user passwords and prints them on screen.                              |
+|                                                  | Changing API passwords requires ``-au|--admin-user <ADMIN_USER>`` and ``-ap|--admin-password <ADMIN_PASSWORD>``.   |
++--------------------------------------------------+--------------------------------------------------------------------------------------------------------------------+
+| ``-A|--api``                                     | Change the Wazuh API password given the current password.                                                          |
+|                                                  | Requires ``-u|--user <USER>``, ``-p|--password <PASSWORD>``, ``-au|--admin-user <ADMIN_USER>``, and                |
+|                                                  | ``-ap|--admin-password <ADMIN_PASSWORD>``.                                                                         |
++--------------------------------------------------+--------------------------------------------------------------------------------------------------------------------+
+| ``-au|--admin-user <ADMIN_USER>``                | Admin user for the Wazuh API. Required for changing the Wazuh API passwords.                                       |
+|                                                  | Requires ``-A|--api``.                                                                                             |
++--------------------------------------------------+--------------------------------------------------------------------------------------------------------------------+
+| ``-ap|--admin-password <ADMIN_PASSWORD>``        | Password for the Wazuh API admin user. Required for changing the Wazuh API passwords.                              |
+|                                                  | Requires ``-A|--api``.                                                                                             |
++--------------------------------------------------+--------------------------------------------------------------------------------------------------------------------+
+| ``-u|--user <USER>``                             | Indicates the name of the user whose password will be changed.                                                     |
+|                                                  | If no password is specified, it will generate a random one.                                                        |
++--------------------------------------------------+--------------------------------------------------------------------------------------------------------------------+
+| ``-p|--password <PASSWORD>``                     | Indicates the new password. Must be used with option ``-u|--user <USER>``.                                         |
++--------------------------------------------------+--------------------------------------------------------------------------------------------------------------------+
+| ``-c|--cert <ROUTE_ADMIN_CERTIFICATE>``          | Indicates route to the admin certificate.                                                                          |
++--------------------------------------------------+--------------------------------------------------------------------------------------------------------------------+
+| ``-k|--certkey <ROUTE_ADMIN_CERTIFICATE_KEY>``   | Indicates route to the admin certificate key.                                                                      |
++--------------------------------------------------+--------------------------------------------------------------------------------------------------------------------+
+| ``-v|--verbose``                                 | Shows the complete script execution output.                                                                        |
++--------------------------------------------------+--------------------------------------------------------------------------------------------------------------------+
+| ``-f|--file <PASSWORD_FILE.yml>``                | Changes the passwords for the ones given in the file.                                                              |
+|                                                  |                                                                                                                    |
+|                                                  | Wazuh indexer users must have this format:                                                                         |
+|                                                  |                                                                                                                    |
+|                                                  | .. code-block:: yaml                                                                                               |
+|                                                  |                                                                                                                    |
+|                                                  |    # Description                                                                                                   |
+|                                                  |      indexer_username: <USER>                                                                                      |
+|                                                  |                                                                                                                    |
+|                                                  |      indexer_password: <PASSWORD>                                                                                  |
+|                                                  |                                                                                                                    |
+|                                                  | Wazuh API users must have this format:                                                                             |
+|                                                  |                                                                                                                    |
+|                                                  | .. code-block:: yaml                                                                                               |
+|                                                  |                                                                                                                    |
+|                                                  |    # Description                                                                                                   |
+|                                                  |      api_username: <USER>                                                                                          |
+|                                                  |                                                                                                                    |
+|                                                  |      api_password: <PASSWORD>                                                                                      |
++--------------------------------------------------+--------------------------------------------------------------------------------------------------------------------+
+| ``-gf|--generate-file <passwords.wazuh>``        | Generate password file with random passwords for standard users.                                                   |
++--------------------------------------------------+--------------------------------------------------------------------------------------------------------------------+
+| ``-h|--help``                                    | Shows help.                                                                                                        |
++--------------------------------------------------+--------------------------------------------------------------------------------------------------------------------+
 
 Changing the password for single user
 -------------------------------------
 
-To change the password for a single Wazuh indexer user, run the script with the ``-u`` option and indicate the new password with the option ``-p``. The password must have a length between 8 and 64 characters and contain at least one upper case letter, one lower case letter, a number and one of the following symbols: ``.*+?-``. If no password is specified, the script will generate a random one.
+To change the password for a single Wazuh indexer user, run the script with the ``-u|--user <USER>`` option and indicate the new password with the option ``-p|--password <PASSWORD>``. The password must have a length between 8 and 64 characters and contain at least one upper case letter, one lower case letter, a number and one of the following symbols: ``.*+?-``. If no password is specified, the script will generate a random one.
 
 
    .. code-block:: console
 
       # bash wazuh-passwords-tool.sh -u admin -p Secr3tP4ssw*rd
-
 
    .. code-block:: console
       :class: output
@@ -107,7 +111,7 @@ If you want to change the password for a Wazuh manager API user, run the script 
 Changing the passwords for all users
 ------------------------------------
 
-To generate and change passwords for all the Wazuh indexer users, run the script with the ``-a`` option:
+To generate and change passwords for all the Wazuh indexer users, run the script with the ``-a|--change-all`` option:
 
   .. code-block:: console
 
@@ -128,7 +132,7 @@ To generate and change passwords for all the Wazuh indexer users, run the script
 
 If you use the tool in an all-in-one deployment, it automatically updates the passwords where necessary. If you use it in a distributed environment, you have to update the password on other components. See :ref:`Changing the passwords in a distributed environment <passwords_distributed>` for more details.
 
-On an all-in-one deployment, use options ``-a``, ``-au`` and ``-ap`` to also change the passwords for all the Wazuh indexer and the Wazuh manager API users.
+On an all-in-one deployment, use options ``-a|--change-all``, ``-au|--admin-user <ADMIN_USER>``, and ``-ap|--admin-password <ADMIN_PASSWORD>`` to also change the passwords for all the Wazuh indexer and the Wazuh manager API users.
 
    .. code-block:: console
 
@@ -150,33 +154,30 @@ On an all-in-one deployment, use options ``-a``, ``-au`` and ``-ap`` to also cha
       INFO: The password for Wazuh API user wazuh-wui is JmKiaCBQo?4Ne0yrM4+n7kGdXGfCmVjO
       INFO: Updated wazuh-wui user password in wazuh dashboard. Remember to restart the service.
 
-
-
-
 Changing the passwords using a formatted file
 ---------------------------------------------
 
-Use a formatted file to indicate the passwords and run the script with the ``-f`` option followed by the file path. Use the following pattern to indicate the users and passwords in the formatted file.
+Use a formatted file to indicate the passwords and run the script with the ``-f|--file <PASSWORD_FILE.yml>`` option followed by the file path. Use the following pattern to indicate the users and passwords in the formatted file.
 
 For Wazuh indexer users:
 
-  .. code-block:: none
+.. code-block:: none
 
-    # Description
-      indexer_username: <user>
-      indexer_password: <password>
+   # Description
+     indexer_username: <USER>
+     indexer_password: <PASSWORD>
 
 For Wazuh manager API users:
 
-  .. code-block:: none
+.. code-block:: none
 
-    # Description
-      api_username: <user>
-      api_password: <password>
+   # Description
+     api_username: <USER>
+     api_password: <PASSWORD>
 
-If the ``-a`` option is used in combination with the ``-f`` option, all users not included in the file are given a random password.
+If the ``-a|--change-all`` option is used in combination with the ``-f|--file <PASSWORD_FILE.yml>`` option, all users not included in the file are given a random password.
 
-The options ``-au`` and ``-ap`` are necessary to change the passwords for the API users.
+The options ``-au|--admin-user <ADMIN_USER>`` and ``-ap|--admin-password <ADMIN_PASSWORD>`` are necessary to change the passwords for the API users.
 
 .. _passwords_distributed:
 
