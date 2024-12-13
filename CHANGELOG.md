@@ -27,12 +27,15 @@ All notable changes to this project will be documented in this file.
 - Updated **Inventory Data** page screenshots to reflect the newly added tabs: **Software**, **Network**, and **Processes**. ([#7976 ](https://github.com/wazuh/wazuh-documentation/pull/7976))
 - Changed ``urllib3`` dependency version to ``1.26.20`` and fixed references to the minimum Python version. ([#7978](https://github.com/wazuh/wazuh-documentation/pull/7978))
 - Updated references to the ``wazuh-packages`` repository in commands for building agent packages to reflect the latest repository structure. ([#7995](https://github.com/wazuh/wazuh-documentation/pull/7995))
+- Updated dashboard query configuration screenshots. ([#8027](https://github.com/wazuh/wazuh-documentation/pull/8027))
+- Improved Password management section. ([#8026](https://github.com/wazuh/wazuh-documentation/pull/8026))
 
 ### Fixed
 
 - Updated URL in Puppet agent installation step. ([#7920](https://github.com/wazuh/wazuh-documentation/pull/7920))
 - Added ``gnupg`` to the dependencies installation step in the Install Ansible guide. ([#7932](https://github.com/wazuh/wazuh-documentation/pull/7932))
 - Added step in the *Upgrading Wazuh Docker* guide. ([#7929](https://github.com/wazuh/wazuh-documentation/pull/7929))
+- Fixed Securing your Wazuh installation steps for distributed deployments in Password management section. ([#8026](https://github.com/wazuh/wazuh-documentation/pull/8026))
 
 ### Removed
 
