@@ -20,8 +20,8 @@ To ensure that alerts and vulnerabilities detected by the Wazuh Vulnerability De
 
 .. code-block:: console
 
-   # /var/ossec/bin/wazuh-keystore -f indexer -k username -v <INDEXER_USERNAME>
-   # /var/ossec/bin/wazuh-keystore -f indexer -k password -v <INDEXER_PASSWORD>
+   # echo '<INDEXER_USERNAME>' | /var/ossec/bin/wazuh-keystore -f indexer -k username
+   # echo '<INDEXER_PASSWORD>' | /var/ossec/bin/wazuh-keystore -f indexer -k password
 
 IndexerConnector initialization failed
 --------------------------------------

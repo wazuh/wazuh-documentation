@@ -11,7 +11,7 @@ This section lists the changes in version 4.9.0. Every update of the Wazuh solut
 Highlights
 ----------
 
-This release introduces several significant updates aimed at enhancing functionality, compatibility, and user experience. Key updates include support for journald logs in Logcollector, improved compatibility with OpenSearch 2.11.0, and integration with AWS Security Hub. Additionally, there are improvements to WPK packages and enhancements in the Wazuh-API with Connexion 3.0 and Uvicorn support. The release also addresses numerous bugs, further stabilizing the platform and improving overall performance.
+This release introduces several significant updates aimed at enhancing functionality, compatibility, and user experience. Key updates include support for journald logs in Logcollector, improved compatibility with OpenSearch 2.13.0, and integration with AWS Security Hub. Additionally, there are improvements to WPK packages and enhancements in the Wazuh-API with Connexion 3.0 and Uvicorn support. The release also addresses numerous bugs, further stabilizing the platform and improving overall performance.
 
 -  `Journald support in Logcollector <https://github.com/wazuh/wazuh/issues/12862>`__: Systemd's journald logging is now supported, enabling Logcollector to monitor these logs, which can provide valuable information for users.
 -  `Integrate Wazuh with AWS Security Hub <https://github.com/wazuh/wazuh/issues/21209>`__: Wazuh now integrates with AWS Security Hub, enabling users to manage security and assess compliance with best practices directly within AWS.

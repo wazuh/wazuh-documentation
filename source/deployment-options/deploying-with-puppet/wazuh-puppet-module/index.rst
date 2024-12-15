@@ -3,8 +3,6 @@
 .. meta::
    :description: Learn about Wazuh Puppet module in this section of the Wazuh documentation.
 
-.. _wazuh_puppet_module:
-
 Wazuh Puppet module
 ===================
 
@@ -57,7 +55,10 @@ You can use  the manifest shown below to deploy a single-node stack. This stack 
 
 To configure the manager before deployment, check the configuration variables for the Wazuh manager class section in :ref:`ref_wazuh_puppet`.
 
-Create the ``stack.pp`` file at ``/etc/puppetlabs/code/environments/production/manifests/`` with the contents below. Here, ``puppet-aio-node`` refers to the hostname or IP address of the puppet agent.
+Create the ``stack.pp`` file at ``/etc/puppetlabs/code/environments/production/manifests/`` with the contents below, where:
+
+-  ``puppet-aio-node``: Hostname or IP address of the Puppet agent.
+-  ``puppet-server``: Hostname or IP address of the Puppet server when the Wazuh module was installed.
 
 .. code-block:: puppet
 
@@ -116,12 +117,12 @@ You must include the IP addresses of the servers where you are installing each a
 .. code-block:: puppet
    :emphasize-lines: 1-6
 
-   $node1host   = 'x.x.x.x'
-   $node2host   = 'x.x.x.x'
-   $node3host   = 'x.x.x.x'
-   $masterhost    = 'x.x.x.x'
-   $workerhost    = 'x.x.x.x'
-   $dashboardhost = 'x.x.x.x'
+   $node1host   = '<WAZUH_INDEXER_NODE1_IP_ADDRESS>'
+   $node2host   = '<WAZUH_INDEXER_NODE2_IP_ADDRESS>'
+   $node3host   = '<WAZUH_INDEXER_NODE3_IP_ADDRESS>'
+   $masterhost    = '<WAZUH_MANAGER_MASTER_IP_ADDRESS>'
+   $workerhost    = '<WAZUH_MANAGER_WORKER_IP_ADDRESS>'
+   $dashboardhost = '<WAZUH_DASHBOARD_IP_ADDRESS>'
    $indexer_node1_name = 'node1'
    $indexer_node2_name = 'node2'
    $indexer_node3_name = 'node3'
@@ -383,7 +384,7 @@ Reference Wazuh puppet
 |                                                                 |                                                                 |                                             |
 |                                                                 | :ref:`Misc <ref_server_vars_misc>`                              |                                             |
 +-----------------------------------------------------------------+-----------------------------------------------------------------+---------------------------------------------+
-| :ref:`Wazuh agent class <reference_wazuh_agent_class>`          | :ref:`Active response <ref_agent_vars_ar>`                      |                                             |
+| :ref:`Wazuh agent class <reference_wazuh_agent_class>`          | :ref:`Active Response <ref_agent_vars_ar>`                      |                                             |
 |                                                                 |                                                                 |                                             |
 |                                                                 | :ref:`Agent enrollment <ref_agent_vars_enroll>`                 |                                             |
 |                                                                 |                                                                 |                                             |
