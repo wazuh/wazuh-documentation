@@ -172,7 +172,7 @@ Example:
 .. code:: console
 
    $ cd ../wazuh-dashboard/dev-tools/build-packages/
-   $ ./build-packages.sh -v |WAZUH_CURRENT| -r 1 --deb -a file:///packages/wazuh-package.zip -s file:///packages/security-package.zip -b file:///packages/dashboard-package.zip
+   $ ./build-packages.sh -v v|WAZUH_CURRENT| -r 1 --deb -a file:///packages/wazuh-package.zip -s file:///packages/security-package.zip -b file:///packages/dashboard-package.zip
 
 The package will be generated in the ``output`` folder of the same directory where the script is located.
 
