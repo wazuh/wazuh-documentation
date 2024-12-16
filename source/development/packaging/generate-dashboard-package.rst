@@ -6,7 +6,7 @@
 Wazuh dashboard
 ===============
 
-The packages generation process is orchestrated by the ``build-packages.sh`` script, which is found within the ``dev-tools/build-packages/`` folder of the repository. This script is responsible for bundling plugins into one single application in ``tar``, ``rpm`` and/or ``deb`` distributions. It takes the following parameters:
+The ``build-packages.sh`` script, located in the ``dev-tools/build-packages/`` folder, orchestrates the package generation process. This script bundles plugins into a single application and supports ``tar``, ``rpm``, and ``deb`` distributions. It accepts the following parameters:
 
 -  version
 -  revision
@@ -20,10 +20,9 @@ Build manually
 
 Requirements:
 
--  Docker: see `Docker installation guide <https://docs.docker.com/engine/install/>`_
--  zip
--  NVM (Node Version Manager): see `NVM installation guide <https://github.com/nvm-sh/nvm#installing-and-updating>`_
--  Yarn v|WAZUH_DASHBOARD_YARN_VERSION| (Node Package Manager): see `Yarn installation guide <https://classic.yarnpkg.com/en/docs/install/>`_
+-  **NVM (Node Version Manager)**: Refer to `NVM installation guide <https://github.com/nvm-sh/nvm#installing-and-updating>`__.
+-  **Yarn v|WAZUH_DASHBOARD_YARN_VERSION| (Node Package Manager)**: Refer to `Yarn installation guide <https://classic.yarnpkg.com/en/docs/install/>`__.
+-  **zip**: Ensure the ``zip`` utility is available.
 
 Generating zip packages
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -205,9 +204,10 @@ This option allows you to create packages that include all necessary plugins req
 Requirements
 ~~~~~~~~~~~~
 
--  A system with Docker installed.
--  Docker Compose: see `Docker Compose installation guide <https://docs.docker.com/compose/install/>`_
--  Internet connection to download the Docker images for the first time.
+-  **Docker**: Refer to `Docker installation guide <https://docs.docker.com/engine/install/>`__.
+-  **Docker Compose**: Refer to `Docker Compose installation guide <https://docs.docker.com/compose/install/>`__.
+-  **Internet connection** to download the Docker images for the first time.
+-  **zip**: Ensure the ``zip`` utility is available.
 
 Building the packages
 ~~~~~~~~~~~~~~~~~~~~~
