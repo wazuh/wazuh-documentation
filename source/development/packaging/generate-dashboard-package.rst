@@ -24,6 +24,10 @@ Requirements:
 -  **NVM (Node Version Manager)**: Refer to `NVM installation guide <https://github.com/nvm-sh/nvm#installing-and-updating>`__.
 -  **Yarn v|WAZUH_DASHBOARD_YARN_VERSION| (Node Package Manager)**: Refer to `Yarn installation guide <https://classic.yarnpkg.com/en/docs/install/>`__.
 -  **zip**: Ensure the ``zip`` utility is available.
+-  **unzip**: Ensure the ``unzip`` utility is available.
+-  **gzip**: Ensure the ``gzip`` utility is available.
+-  **brotli**: Ensure the ``brotli`` utility is available.
+-  **curl**: Ensure the ``curl`` utility is available.
 
 Generating zip packages
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -180,6 +184,14 @@ Build with Docker image
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 With this option you can create an image that has the package in tar.gz format and then if desired you can use the created package to generate the .deb or .rpm file.
+
+Requirements
+~~~~~~~~~~~~
+
+-  **Docker**: Refer to `Docker installation guide <https://docs.docker.com/engine/install/>`__.
+-  **Internet connection** to download the Docker images for the first time.
+-  **jq**: Ensure the ``jq`` utility is available.
+-  **curl**: Ensure the ``curl`` utility is available.
 
 #. Clone the Wazuh dashboard repository.
 
