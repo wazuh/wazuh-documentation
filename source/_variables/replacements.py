@@ -166,6 +166,9 @@ custom_replacements = {
     #
     # === Wazuh dashboard
     "|WAZUH_DASHBOARD_YARN_VERSION|": "1.22.22",
+    #
+    # === OpenSearch Dashboard
+    "|OPENSEARCH_DASHBOARDS_VERSION|": "2.13.0",
 }
 
 if is_latest_release:

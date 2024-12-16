@@ -129,7 +129,7 @@ To build the packages, follow these steps:
       $ cd ../../../
       $ mkdir packages
       $ cd packages
-      $ zip -r -j ./dashboard-package.zip ../wazuh-dashboard/target/opensearch-dashboards-2.13.0-linux-x64.tar.gz
+      $ zip -r -j ./dashboard-package.zip ../wazuh-dashboard/target/opensearch-dashboards-<OPENSEARCH_VERSION>-linux-x64.tar.gz
       $ zip -r -j ./security-package.zip ../wazuh-dashboard/plugins/wazuh-security-dashboards-plugin/build/security-dashboards-<OPENSEARCH_VERSION>.0.zip
       $ zip -r -j ./wazuh-package.zip ../wazuh-dashboard/plugins/wazuh-check-updates/build/wazuhCheckUpdates-<OPENSEARCH_VERSION>.zip ../wazuh-dashboard/plugins/main/build/wazuh-<OPENSEARCH_VERSION>.zip ../wazuh-dashboard/plugins/wazuh-core/build/wazuhCore-<OPENSEARCH_VERSION>.zip
 
@@ -140,9 +140,9 @@ To build the packages, follow these steps:
       $ cd ../../../
       $ mkdir packages
       $ cd packages
-      $ zip -r -j ./dashboard-package.zip ../wazuh-dashboard/target/opensearch-dashboards-2.13.0-linux-x64.tar.gz
-      $ zip -r -j ./security-package.zip ../wazuh-dashboard/plugins/wazuh-security-dashboards-plugin/build/security-dashboards-2.13.0.0.zip
-      $ zip -r -j ./wazuh-package.zip ../wazuh-dashboard/plugins/wazuh-check-updates/build/wazuhCheckUpdates-2.13.0.zip ../wazuh-dashboard/plugins/main/build/wazuh-2.13.0.zip ../wazuh-dashboard/plugins/wazuh-core/build/wazuhCore-2.13.0.zip
+      $ zip -r -j ./dashboard-package.zip ../wazuh-dashboard/target/opensearch-dashboards-|OPENSEARCH_DASHBOARDS_VERSION|-linux-x64.tar.gz
+      $ zip -r -j ./security-package.zip ../wazuh-dashboard/plugins/wazuh-security-dashboards-plugin/build/security-dashboards-|OPENSEARCH_DASHBOARDS_VERSION|.0.zip
+      $ zip -r -j ./wazuh-package.zip ../wazuh-dashboard/plugins/wazuh-check-updates/build/wazuhCheckUpdates-|OPENSEARCH_DASHBOARDS_VERSION|.zip ../wazuh-dashboard/plugins/main/build/wazuh-|OPENSEARCH_DASHBOARDS_VERSION|.zip ../wazuh-dashboard/plugins/wazuh-core/build/wazuhCore-|OPENSEARCH_DASHBOARDS_VERSION|.zip
 
 At this point you must have three packages in the ``packages`` folder:
 
@@ -224,7 +224,7 @@ With this option you can create an image that has the package in tar.gz format a
       --build-arg WAZUH_DASHBOARDS_BRANCH=v|WAZUH_CURRENT| \
       --build-arg WAZUH_DASHBOARDS_PLUGINS=v|WAZUH_CURRENT| \
       --build-arg WAZUH_SECURITY_DASHBOARDS_PLUGIN_BRANCH=v|WAZUH_CURRENT| \
-      --build-arg OPENSEARCH_DASHBOARDS_VERSION=2.13.0 \
+      --build-arg OPENSEARCH_DASHBOARDS_VERSION=|OPENSEARCH_DASHBOARDS_VERSION| \
       -t wzd:v|WAZUH_CURRENT| \
       -f wazuh-dashboard.Dockerfile .
 
