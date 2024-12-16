@@ -23,12 +23,15 @@ custom_replacements = {
     #
     "|CTI_URL|" : "https://cti.wazuh.com/api/v1/catalog/contexts/vd_1.0.0/consumers/vd_4.8.0",
     #
+    # === Environment
+    "|PYTHON_CLOUD_CONTAINERS_MIN|": "3.8",
+    "|PYTHON_CLOUD_CONTAINERS_MAX|": "3.12",
+    "|WAZUH_DASHBOARD_YARN_VERSION|": "1.22.22",
+    #
     # === Global and Wazuh version (wazuh agent, manager, indexer, and dashboard)
     "|WAZUH_CURRENT_MAJOR|" : "4.x",
     "|WAZUH_CURRENT_MINOR|" : version,
     "|WAZUH_CURRENT|" : release,
-    "|PYTHON_CLOUD_CONTAINERS_MIN|": "3.8",
-    "|PYTHON_CLOUD_CONTAINERS_MAX|": "3.12",
 
     # --- Revision numbers for Wazuh agent and manager packages versions
     # Yum packages revisions
