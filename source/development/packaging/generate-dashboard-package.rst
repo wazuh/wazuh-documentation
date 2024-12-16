@@ -165,7 +165,7 @@ Run the ``build-packages.sh`` script in the ``dev-tools/build-packages/`` folder
 .. code:: console
 
    $ cd ../wazuh-dashboard/dev-tools/build-packages/
-   $ ./build-packages.sh -v <VERSION> -r <REVISION> --<DISTRIBUTION_(--deb_OR_--rpm)> -a file:///<PATH_TO_wazuh-package.zip> -s file:///<PATH_TO_security-package.zip> -b file:///<PATH_TO_dashboard-package.zip>
+   $ ./build-packages.sh -v <VERSION> -r <REVISION> (--deb|--rpm) -a file:///<PATH_TO_wazuh-package.zip> -s file:///<PATH_TO_security-package.zip> -b file:///<PATH_TO_dashboard-package.zip>
 
 Example:
 
