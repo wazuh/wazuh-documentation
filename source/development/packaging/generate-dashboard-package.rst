@@ -20,10 +20,10 @@ Build manually
 
 Requirements:
 
--  Docker: see `Docker installation guide <https://docs.docker.com/engine/install/>`_
--  zip
--  NVM (Node Version Manager): see `NVM installation guide <https://github.com/nvm-sh/nvm#installing-and-updating>`_
--  Yarn v|WAZUH_DASHBOARD_YARN_VERSION| (Node Package Manager): see `Yarn installation guide <https://classic.yarnpkg.com/en/docs/install/>`_
+-  **Docker**: Refer to `Docker installation guide <https://docs.docker.com/engine/install/>`__.
+-  **NVM (Node Version Manager)**: Refer to `NVM installation guide <https://github.com/nvm-sh/nvm#installing-and-updating>`__.
+-  **Yarn v|WAZUH_DASHBOARD_YARN_VERSION| (Node Package Manager)**: Refer to `Yarn installation guide <https://classic.yarnpkg.com/en/docs/install/>`__.
+-  **zip**: Ensure the ``zip`` utility is available.
 
 Generating zip packages
 ~~~~~~~~~~~~~~~~~~~~~~~
