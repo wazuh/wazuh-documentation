@@ -6,7 +6,7 @@
 Wazuh dashboard
 ===============
 
-The packages generation process is orchestrated by the ``build-packages.sh`` script, which is found within the ``dev-tools/build-packages/`` folder of the repository. This script is responsible for bundling plugins into one single application in ``tar``, ``rpm`` and/or ``deb`` distributions. It takes the following parameters:
+The ``build-packages.sh`` script, located in the ``dev-tools/build-packages/`` folder, orchestrates the package generation process. This script bundles plugins into a single application and supports ``tar``, ``rpm``, and ``deb`` distributions. It accepts the following parameters:
 
 -  version
 -  revision
@@ -23,11 +23,13 @@ Requirements:
 -  **Docker**: Refer to `Docker installation guide <https://docs.docker.com/engine/install/>`__.
 -  **NVM (Node Version Manager)**: Refer to `NVM installation guide <https://github.com/nvm-sh/nvm#installing-and-updating>`__.
 -  **Yarn v|WAZUH_DASHBOARD_YARN_VERSION| (Node Package Manager)**: Refer to `Yarn installation guide <https://classic.yarnpkg.com/en/docs/install/>`__.
--  **zip**: Ensure the ``zip`` utility is available.
--  **unzip**: Ensure the ``unzip`` utility is available.
--  **gzip**: Ensure the ``gzip`` utility is available.
--  **brotli**: Ensure the ``brotli`` utility is available.
--  **curl**: Ensure the ``curl`` utility is available.
+-  **Utilities**: Ensure the following are available:
+
+   -  ``zip``
+   -  ``unzip``
+   -  ``gzip``
+   -  ``brotli``
+   -  ``curl``
 
 Generating zip packages
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -190,8 +192,10 @@ Requirements
 
 -  **Docker**: Refer to `Docker installation guide <https://docs.docker.com/engine/install/>`__.
 -  **Internet connection** to download the Docker images for the first time.
--  **jq**: Ensure the ``jq`` utility is available.
--  **curl**: Ensure the ``curl`` utility is available.
+-  **Utilities**: Ensure the following are available:
+
+   -  ``jq``
+   -  ``curl``
 
 #. Clone the Wazuh dashboard repository.
 
