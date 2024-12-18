@@ -16,7 +16,6 @@ Agents can be configured remotely by using the ``agent.conf`` file. The followin
 -  :doc:`File Integrity monitoring <../capabilities/file-integrity/index>` (**syscheck**)
 -  :doc:`Rootkit detection <../capabilities/malware-detection/index>` (**rootcheck**)
 -  :doc:`Log data collection <../capabilities/log-data-collection/index>` (**localfile**)
--  Security policy monitoring (:doc:`wodle name="open-scap" <ossec-conf/wodle-openscap>`, :doc:`wodle name="cis-cat" <ossec-conf/wodle-ciscat>`)
 -  :doc:`Remote commands <ossec-conf/wodle-command>` (**wodle name="command"**)
 -  :doc:`Labels for agent alerts <../agent/agent-management/labels>` (**labels**)
 -  :doc:`Security Configuration Assessment <../capabilities/sec-config-assessment/index>` (**sca**)

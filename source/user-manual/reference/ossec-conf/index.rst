@@ -105,13 +105,9 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 +---------------------------------------------------------------------+------------------------+
 | :doc:`wodle name="azure-logs" <wodle-azure-logs>`                   | manager, agent         |
 +---------------------------------------------------------------------+------------------------+
-| :doc:`wodle name="cis-cat" <wodle-ciscat>`                          | manager, agent         |
-+---------------------------------------------------------------------+------------------------+
 | :doc:`wodle name="command" <wodle-command>`                         | manager, agent         |
 +---------------------------------------------------------------------+------------------------+
 | :doc:`wodle name="docker-listener" <wodle-docker>`                  | manager, agent         |
-+---------------------------------------------------------------------+------------------------+
-| :doc:`wodle name="open-scap" <wodle-openscap>`                      | manager, agent         |
 +---------------------------------------------------------------------+------------------------+
 | :doc:`wodle name="osquery" <wodle-osquery>`                         | manager, agent         |
 +---------------------------------------------------------------------+------------------------+
@@ -165,9 +161,7 @@ All of the above sections must be located within the top-level ``<ossec_config>`
    gcp-pubsub
    gcp-bucket
    vuln-detector
-   wodle-openscap
    wodle-command
-   wodle-ciscat
    wodle-s3
    wodle-syscollector
    wazuh-db-config
