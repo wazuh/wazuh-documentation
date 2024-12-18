@@ -21,10 +21,6 @@ The wazuh-modulesd program manages the Wazuh modules described below.
     - Rootcheck detected defects: issue message, first detection date, and last alert time.
     - Static core settings: maximum permitted agents or SSL being enabled for Authd.
 
-.. topic:: CIS-CAT wodle
-
-  The CIS-CAT wodle allows you to run CIS policy scans visualizing the results of assessments in the Wazuh dashboard.
-
 .. topic:: Command wodle
 
   The Command module allows running external commands asynchronously, one in each thread.

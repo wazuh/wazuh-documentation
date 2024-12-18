@@ -1133,10 +1133,6 @@ The following components use a static location:
 +----------------------+------------------------+
 | Osquery integration  | osquery                |
 +----------------------+------------------------+
-| OpenSCAP integration | open-scap              |
-+----------------------+------------------------+
-| CIS-CAT integration  | wodle_cis-cat          |
-+----------------------+------------------------+
 | SCA module           | sca                    |
 +----------------------+------------------------+
 
