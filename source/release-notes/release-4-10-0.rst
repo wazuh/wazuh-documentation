@@ -19,6 +19,9 @@ Wazuh manager
 -  `#24333 <https://github.com/wazuh/wazuh/pull/24333>`__ Added self-recovery mechanism for rocksDB databases.
 -  `#25189 <https://github.com/wazuh/wazuh/pull/25189>`__ Improve logging for indexer connector monitoring class.
 -  `#23760 <https://github.com/wazuh/wazuh/pull/23760>`__ Added generation of debug symbols.
+-  `#27320 <https://github.com/wazuh/wazuh/pull/27320>`__ Improved Vulnerability Scanner performance by optimizing the PEP440 version matcher.
+-  `#27324 <https://github.com/wazuh/wazuh/pull/27324>`__ Improved Vulnerability Scanner performance by optimizing version matcher object creation.
+-  `#27321 <https://github.com/wazuh/wazuh/pull/27321>`__ Improved Vulnerability Scanner performance by optimizing global data handling.
 
 Wazuh agent
 ^^^^^^^^^^^
@@ -105,6 +108,7 @@ Wazuh manager
 -  `#24034 <https://github.com/wazuh/wazuh/pull/24034>`__ Fixed vulnerability scanner re-scan triggers in cluster environment.
 -  `#23266 <https://github.com/wazuh/wazuh/issues/23266>`__ Updated CURL version to 8.10.0.
 -  `#27145 <https://github.com/wazuh/wazuh/pull/27145>`__ Fixed an issue where elements in the delayed list were not purged when changing nodes.
+-  `#27145 <https://github.com/wazuh/wazuh/pull/27145>`__ Added logic to avoid re-scanning disconnected agents.
 
 Wazuh agent
 ^^^^^^^^^^^
@@ -154,6 +158,9 @@ Wazuh dashboard
 -  `#7151 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7151>`__ Fixed filter by value in document details not working in Safari.
 -  `#7167 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7167>`__ Fixed error message to prevent passing non-string values to the Wazuh logger.
 -  `#7177 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7177>`__ Fixed the rendering of the ``data.vulnerability.reference`` field in the table and flyout.
+-  `#7072 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7072>`__ Fixed column reordering feature.
+-  `#7161 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7161>`__ Fixed endpoint group module name and indexer management order.
+-  `#440 <https://github.com/wazuh/wazuh-dashboard/issues/440>`__ Fixed incorrect or empty Wazuh API version displayed after upgrade.
 
 Changelogs
 ----------
