@@ -71,6 +71,7 @@ newUrls['4.10'] = [
   '/release-notes/release-4-10-0.html',
   '/release-notes/release-4-10-1.html',
   '/release-notes/release-4-10-2.html',
+  '/release-notes/release-4-10-3.html',
   '/user-manual/reference/ossec-conf/anti-tampering.html'
 ]
 
