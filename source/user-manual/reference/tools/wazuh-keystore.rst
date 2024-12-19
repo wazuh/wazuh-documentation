@@ -3,6 +3,8 @@
 .. meta::
   :description: Tool where sensitive configuration data can be securely stored, including any information that the Wazuh manager daemons/tools need for their work.
 
+.. _wazuh-keystore:
+
 wazuh-keystore
 ==============
 
