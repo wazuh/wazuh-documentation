@@ -3,7 +3,15 @@ All notable changes to this project will be documented in this file.
 
 ## [v4.10.3]
 
-- Support for Wazuh 4.10.3
+### Added
+
+- Added reference to macOS arm64 WPK. ([#7883](https://github.com/wazuh/wazuh-documentation/pull/7883))
+- Add Ubuntu 24.04 SCA to list of available SCAs. ([#8021](https://github.com/wazuh/wazuh-documentation/pull/8021))
+
+### Changed
+
+- Updated Wazuh dashboard package generation guide. ([#7961](https://github.com/wazuh/wazuh-documentation/pull/7961))
+- Updated images in FIM PoC. [#7979](https://github.com/wazuh/wazuh-documentation/pull/7979)
 
 ## [v4.10.2]
 
