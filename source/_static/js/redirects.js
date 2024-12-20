@@ -4,6 +4,7 @@ const redirections = [];
 
 /* Note: new release versions must always be inserted in the first position of the array "versions" */
 const versions = [
+  '4.12',
   '4.10',
   '4.9',
   '4.8',
@@ -64,14 +65,20 @@ removedUrls['x.y'] = [
 ];
 */
 
+/* *** RELEASE 4.12 ****/
+
+/* Pages added in 4.12 */
+
+newUrls['4.12'] = [
+  '/release-notes/release-4-12-0.html',
+]
+
 /* *** RELEASE 4.10 ****/
 
 /* Pages added in 4.10 */
 newUrls['4.10'] = [
   '/release-notes/release-4-10-0.html',
   '/release-notes/release-4-10-1.html',
-  '/release-notes/release-4-10-2.html',
-  '/release-notes/release-4-10-3.html',
   '/user-manual/reference/ossec-conf/anti-tampering.html'
 ]
 
