@@ -64,6 +64,17 @@ removedUrls['x.y'] = [
 ];
 */
 
+/* *** RELEASE 4.10 ****/
+
+/* Pages added in 4.10 */
+newUrls['4.10'] = [
+  '/release-notes/release-4-10-0.html',
+  '/user-manual/reference/ossec-conf/anti-tampering.html',
+  '/user-manual/capabilities/vulnerability-detection/troubleshooting.html',
+  '/user-manual/capabilities/vulnerability-detection/FAQ.html',
+  '/user-manual/capabilities/vulnerability-detection/known-issues.html',
+]
+
 /* *** RELEASE 4.9 ****/
 
 /* Redirections from 4.8 to 4.9  */
@@ -295,12 +306,6 @@ redirections.push(
     '4.9': '/cloud-security/azure/monitoring-ms-graph.html',
   },
 );
-
-/* Pages added in 4.10 */
-newUrls['4.10'] = [
-  '/release-notes/release-4-10-0.html',
-  '/user-manual/reference/ossec-conf/anti-tampering.html'
-]
 
 /* Pages added in 4.9 */
 
