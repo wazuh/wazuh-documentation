@@ -57,7 +57,7 @@ The `builder.sh` script is controlled by a number of optional arguments that are
    -D	Destroy the docker environment
    -h	Print help
 
-Use these to select the desired target and the repo branch of the plugins. If none is provided, a ``rpm`` package for the ``amd64`` architecture will be built.
+Use these to select the desired target and the repo branch of the plugins. If none is provided, a ``rpm`` package for the ``x64`` architecture will be built.
 
 1. Change directory to the docker environment's path:
 
@@ -75,9 +75,9 @@ Use these to select the desired target and the repo branch of the plugins. If no
       -R 0 \
       -s false \
       -d deb \
-      -a amd64
+      -a x64
 
-The code above will build a ``.deb`` package for the ``amd64`` architecture, using the plugins' master branch. The package revision will be set to ``0``.
+The code above will build a ``.deb`` package for the ``x64`` architecture, using the plugins' master branch. The package revision will be set to ``0``.
 
 Once the build process finishes, built packages will be deployed to the ``artifacts/dist`` directory under the repo's root.
 
