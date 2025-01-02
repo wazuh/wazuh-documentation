@@ -57,7 +57,11 @@ The `builder.sh` script is controlled by a number of optional arguments that are
    -D	Destroy the docker environment
    -h	Print help
 
+
 Use these to select the desired target and the repo branch of the plugins. If none is provided, a ``rpm`` package for the ``x64`` architecture will be built.
+
+Valid ``DISTRIBUTION`` arguments are ``rpm``, ``deb`` and ``tar`` for packages with such extensions.
+``ARCHITECTURE`` can be one of ``x64`` or ``arm64``.
 
 1. Change directory to the docker environment's path:
 
