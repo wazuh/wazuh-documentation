@@ -15,10 +15,6 @@ While official ``Wazuh Indexer`` packages are generated in a GitHub Actions pipe
 The packages' generation process is controlled by the ``docker/builder/builder.sh`` script. This script prepares and launches a docker container that automates the build process.
 
 
-.. contents:: Table of contents:
-   :depth: 2
-   :local:
-
 Docker environment
 ******************
 .. raw:: html
