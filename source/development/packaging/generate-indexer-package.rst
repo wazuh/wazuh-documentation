@@ -3,82 +3,70 @@
 .. meta::
    :description: Wazuh provides an automated way of building packages for the Wazuh components. Learn how to build your own Wazuh indexer package in this section of our documentation.
 
-=============
 Wazuh indexer
 =============
 
+We generate official Wazuh indexer packages using a GitHub Actions pipeline. However, you can compile packages locally within a Docker container.
+
 Local packages generation
-#########################
+-------------------------
 
-While official ``Wazuh Indexer`` packages are generated in a GitHub Actions pipeline, packages can also be compiled locally within a :doc:`docker</deployment-options/docker/docker-installation>` container.
+The ``docker/builder/builder.sh`` script controls the package generation process. This script prepares and launches a Docker container to automate the build.
 
-The packages' generation process is controlled by the ``docker/builder/builder.sh`` script. This script prepares and launches a docker container that automates the build process.
+Setting up the environment
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+#. Install :doc:`Docker Engine </deployment-options/docker/docker-installation>`.
+#. Clone the Wazuh indexer GitHub repository and switch to the ``v|WAZUH_CURRENT|`` tag.
 
-Docker environment
-******************
-.. raw:: html
+   .. code:: console
 
-  <div class="accordion-section open">
+      # git clone https://github.com/wazuh/wazuh-indexer/
+      # git checkout v|WAZUH_CURRENT|
 
-Pre-requisistes
-===============
+Building the package
+^^^^^^^^^^^^^^^^^^^^
 
-1. Install the :doc:`docker engine</deployment-options/docker/docker-installation>`
+#. Change to the Docker environment's directory.
 
-2. Clone the ``Wazuh Indexer`` GitHub repository and switch to the ``v|WAZUH_CURRENT|`` tag:
+   .. code:: console
 
-.. code:: console
+      $ cd wazuh-indexer/docker/builder
 
-   # git clone https://github.com/wazuh/wazuh-indexer/
-   # git checkout v|WAZUH_CURRENT|
+#. Launch the script with specific arguments. For example, to build a Debian ``deb`` package for the ``x64`` architecture, with the package revision set to ``0`` and the plugins' branch set to ``master``, run the following command.
 
-Build the package
-=================
+   .. code:: console
 
-The `builder.sh` script is controlled by a number of optional arguments that are detailed in its help page:
+      $ bash builder.sh \
+         -p master \
+         -r master \
+         -R 0 \
+         -s false \
+         -d deb \
+         -a x64
 
-.. code:: console
+   Optional arguments control the script. Details are provided in the ``builder.sh`` help page.
 
-   $ ./builder.sh -h
-   Usage: ./builder.sh [args]
+   .. code:: console
 
-   Arguments:
-   -p INDEXER_PLUGINS_BRANCH	[Optional] wazuh-indexer-plugins repo branch, default is 'master'.
-   -r INDEXER_REPORTING_BRANCH	[Optional] wazuh-indexer-reporting repo branch, default is 'master'.
-   -R REVISION	[Optional] Package revision, default is '0'.
-   -s STAGE	[Optional] Staging build, default is 'false'.
-   -d DISTRIBUTION	[Optional] Distribution, default is 'rpm'.
-   -a ARCHITECTURE	[Optional] Architecture, default is 'x64'.
-   -D	Destroy the docker environment
-   -h	Print help
+      $ ./builder.sh -h
+      Usage: ./builder.sh [args]
 
+      Arguments:
+      -p INDEXER_PLUGINS_BRANCH	[Optional] wazuh-indexer-plugins repo branch, default is 'master'.
+      -r INDEXER_REPORTING_BRANCH	[Optional] wazuh-indexer-reporting repo branch, default is 'master'.
+      -R REVISION	[Optional] Package revision, default is '0'.
+      -s STAGE	[Optional] Staging build, default is 'false'.
+      -d DISTRIBUTION	[Optional] Distribution, default is 'rpm'.
+      -a ARCHITECTURE	[Optional] Architecture, default is 'x64'.
+      -D	Destroy the docker environment
+      -h	Print help
 
-Use these to select the desired target and the repo branch of the plugins. If none is provided, a ``rpm`` package for the ``x64`` architecture will be built.
+   Where:
 
-Valid ``DISTRIBUTION`` arguments are ``rpm``, ``deb`` and ``tar`` for packages with such extensions.
-``ARCHITECTURE`` can be one of ``x64`` or ``arm64``.
+   -  ``DISTRIBUTION`` is either ``rpm``, ``deb``, or ``tar``.
+   -  ``ARCHITECTURE`` is either ``x64`` or ``arm64``.
 
-1. Change directory to the docker environment's path:
+   Use arguments to select options such as the target distribution, architecture, and repository branch for the plugins. If no arguments are provided, the script defaults to building an ``rpm`` package for the ``x64`` architecture.
 
-.. code:: console
-
-   $ cd wazuh-indexer/docker/builder
-
-2. Launch the script with the selected option flags:
-
-.. code:: console
-   
-   $ bash builder.sh \
-      -p master \
-      -r master \
-      -R 0 \
-      -s false \
-      -d deb \
-      -a x64
-
-The code above will build a ``.deb`` package for the ``x64`` architecture, using the plugins' master branch. The package revision will be set to ``0``.
-
-Once the build process finishes, built packages will be deployed to the ``artifacts/dist`` directory under the repo's root.
-
-
+After the build process completes, you can find the built packages in the ``artifacts/dist/`` directory at the repository's root.
