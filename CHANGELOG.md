@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file.
 - Added PowerPC package references back to the packages list. ([#7724](https://github.com/wazuh/wazuh-documentation/pull/7724))
 - Added dependencies to the dependency requirements in the Offline installation guide using the installation assistant. ([#7931](https://github.com/wazuh/wazuh-documentation/pull/7931))
 - Added ``wazuh.updates.disabled`` to the *Wazuh dashboard settings* reference document. ([#7977](https://github.com/wazuh/wazuh-documentation/pull/7977))
+- Added a troubleshooting guide to the Vulnerability detection capability section. ([#8014](https://github.com/wazuh/wazuh-documentation/pull/8014))
 
 ### Changed
 
