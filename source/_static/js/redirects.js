@@ -73,6 +73,19 @@ newUrls['4.11'] = [
   '/release-notes/release-4-11-0.html',
 ]
 
+/* *** RELEASE 4.10 ****/
+
+/* Pages added in 4.10 */
+
+newUrls['4.10'] = [
+  '/release-notes/release-4-10-0.html',
+  '/release-notes/release-4-10-1.html',
+  '/user-manual/reference/ossec-conf/anti-tampering.html',
+  '/user-manual/capabilities/vulnerability-detection/troubleshooting.html',
+  '/user-manual/capabilities/vulnerability-detection/FAQ.html',
+  '/user-manual/capabilities/vulnerability-detection/known-issues.html',
+]
+
 /* *** RELEASE 4.9 ****/
 
 /* Redirections from 4.8 to 4.9  */
@@ -305,12 +318,6 @@ redirections.push(
   },
 );
 
-/* Pages added in 4.10 */
-newUrls['4.10'] = [
-  '/release-notes/release-4-10-0.html',
-  '/user-manual/reference/ossec-conf/anti-tampering.html'
-]
-
 /* Pages added in 4.9 */
 
 newUrls['4.9'] = [
@@ -391,8 +398,10 @@ removedUrls['4.9'] = [
   '/user-manual/capabilities/policy-monitoring/rootcheck/index.html',
   '/user-manual/capabilities/policy-monitoring/rootcheck/rootcheck-configuration.html',
   '/user-manual/capabilities/policy-monitoring/rootcheck/rootcheck-faq.html',
-  '/user-manual/capabilities/policy-monitoring/ciscat/ciscat.html',
   '/user-manual/capabilities/malware-detection/osquery.html',
+  '/user-manual/capabilities/policy-monitoring/ciscat/ciscat.html',
+  '/user-manual/reference/ossec-conf/wodle-ciscat.html',
+  '/user-manual/reference/ossec-conf/wodle-openscap.html',
   '/user-manual/upscaling/index.html',
   '/user-manual/upscaling/adding-indexer-node.html',
   '/user-manual/upscaling/adding-server-node.html',

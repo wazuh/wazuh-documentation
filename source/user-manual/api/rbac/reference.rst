@@ -134,17 +134,6 @@ agent:uninstall
 
 -  :api-ref:`GET /agents/uninstall <operation/api.controllers.agent_controller.get_agent_uninstall_permission>` (:ref:`*:* <api_rbac_reference_resources>`)
 
-CIS-CAT
-^^^^^^^
-
-The :api-ref:`/ciscat <tag/Ciscat>` endpoint of the Wazuh server API enables users to retrieve specific information from the results of CIS-CAT scans carried out on the Wazuh agents.
-
-ciscat:read
-~~~~~~~~~~~
-
--  :api-ref:`GET /ciscat/{agent_id}/results <operation/api.controllers.ciscat_controller.get_agents_ciscat_results>` (:ref:`agent:id <api_rbac_reference_resources>`, :ref:`agent:group <api_rbac_reference_resources>`)
--  :api-ref:`GET /experimental/ciscat/results <operation/api.controllers.experimental_controller.get_cis_cat_results>` (:ref:`agent:id <api_rbac_reference_resources>`, :ref:`agent:group <api_rbac_reference_resources>`)
-
 Cluster
 ^^^^^^^
 
@@ -634,20 +623,6 @@ Grant read access to all agents related functionalities.
        - group:id:*
      effect: allow
 
-ciscat_read
-^^^^^^^^^^^
-
-Allow reading the agent ciscat results information.
-
-.. code-block:: yaml
-
-   ciscat:
-     actions:
-       - ciscat:read
-     resources:
-       - agent:id:*
-     effect: allow
-
 cluster_all
 ^^^^^^^^^^^
 
@@ -1058,7 +1033,6 @@ The administrator role has full access to all endpoints in the Wazuh server API.
 
    -  `agents_all`_
    -  `agents_commands`_
-   -  `ciscat_read`_
    -  `cluster_all`_
    -  `decoders_all`_
    -  `lists_all`_
@@ -1123,7 +1097,6 @@ Read only role, this role can read all the information of the system.
 **Policies**
 
    -  `agents_read`_
-   -  `ciscat_read`_
    -  `cluster_read`_
    -  `decoders_read`_
    -  `lists_read`_

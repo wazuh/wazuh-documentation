@@ -14,7 +14,7 @@ Here is a list of the Wazuh server API capabilities:
 -  Wazuh manager control and overview
 -  Cluster control and overview
 -  File integrity monitoring control and search
--  MITRE ATT&CK and CIS-CAT overview
+-  MITRE ATT&CK overview
 -  Ruleset information
 -  Testing and verification of rules and decoders
 -  Syscollector information
