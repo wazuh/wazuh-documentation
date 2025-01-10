@@ -180,9 +180,27 @@ Setting up Office 365 for monitoring
 
 The Office 365 API provides an endpoint for accessing audit logs in Office 365. You need an application with the right permissions to access the Microsoft API. The following list provides a summary of the steps you need to perform on Microsoft Azure to integrate with Wazuh:
 
+-  **Enabling auditing in your O365 tenant**: In order to ingest logs from Office 365 you must first enable auditing in your Office 365 tenant.
 -  **Registering an app via the Microsoft Azure portal**: This step involves creating an application with unique credentials (client ID, tenant ID, and client secret) in your organization.
 -  **Creating certificates and secrets**: The created application needs to authenticate to the Office 365 Management API to ensure security. This step shows how to create certificates and secrets for the application.
 -  **Enabling API permissions**: The created application needs specific API permissions to request the Office 365 activity events. This step shows how to assign the appropriate permissions required to pull logs from the Office 365 Management API.
+
+Enabling Auditing in your Office 365 tenant
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+In order to ingest logs from Office 365 you must first enable auditing in your Office 365 tenant. The easiest method to achieve this is via the PowerShell Exchange module. 
+
+#. Connect to Exchange Online PowerShell
+      .. code-block:: powershell
+      
+         > Import-Module ExchangeOnlineManagement
+         > Connect-ExchangeOnline -UserPrincipalName <youroffice365@accountupn.com>
+
+#. Enable auditing
+      .. code-block:: powershell
+
+         > Set-AdminAuditLogConfig -UnifiedAuditLogIngestionEnabled $true
+
 
 Registering an app via the Azure portal
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
