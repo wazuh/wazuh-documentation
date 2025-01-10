@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Learn how to install Wazuh dashboard, a flexible and intuitive web interface for mining and visualizing the events and archives. 
+   :description: Learn how to install Wazuh dashboard, a flexible and intuitive web interface for mining and visualizing the events and archives.
 
 .. _wazuh_dashboard_step_by_step:
 
@@ -27,21 +27,21 @@ Adding the Wazuh repository
     If you are installing the Wazuh dashboard on the same host as the Wazuh indexer or the Wazuh server, you may skip these steps as you may have added the Wazuh repository already.
 
   .. tabs::
-  
+
     .. group-tab:: Yum
-  
-  
+
+
       .. include:: /_templates/installations/common/yum/add-repository.rst
-  
-  
-  
+
+
+
     .. group-tab:: APT
-  
-  
+
+
       .. include:: /_templates/installations/common/deb/add-repository.rst
-  
-  
-  
+
+
+
 
 Installing the Wazuh dashboard
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -59,7 +59,7 @@ Installing the Wazuh dashboard
       .. group-tab:: APT
 
          .. code-block:: console
-              
+
             # apt-get -y install wazuh-dashboard|WAZUH_DASHBOARD_DEB_PKG_INSTALL|
 
 Configuring the Wazuh dashboard
@@ -99,10 +99,10 @@ Starting the Wazuh dashboard service
       .. include:: /_templates/installations/dashboard/enable_dashboard.rst
 
   #. Edit the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` file and replace the ``url`` value with the IP address or hostname of the Wazuh server master node.
-   
+
       .. code-block:: yaml
          :emphasize-lines: 3
-      
+
          hosts:
             - default:
                url: https://<WAZUH_SERVER_IP_ADDRESS>
@@ -118,14 +118,14 @@ Starting the Wazuh dashboard service
       - **Username**: *admin*
       - **Password**: *admin*
 
-    When you access the Wazuh dashboard for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser. For increased security, the ``root-ca.pem``  file previously generated can be imported to the certificate manager of the browser. Alternatively, a certificate from a trusted authority can be configured. 
+    When you access the Wazuh dashboard for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser. For increased security, the ``root-ca.pem``  file previously generated can be imported to the certificate manager of the browser. Alternatively, a certificate from a trusted authority can be configured.
 
 
 Securing your Wazuh installation
 --------------------------------
 
 
-You have now installed and configured all the Wazuh central components. We recommend changing the default credentials to protect your infrastructure from possible attacks. 
+You have now installed and configured all the Wazuh central components. We recommend changing the default credentials to protect your infrastructure from possible attacks.
 
 Select your deployment type and follow the instructions to change the default passwords for both the Wazuh API and the Wazuh indexer users.
 
@@ -135,14 +135,14 @@ Select your deployment type and follow the instructions to change the default pa
    .. group-tab:: All-in-one deployment
 
       #. Use the Wazuh passwords tool to change all the internal users' passwords.
-      
+
          .. code-block:: console
-         
+
             # /usr/share/wazuh-indexer/plugins/opensearch-security/tools/wazuh-passwords-tool.sh --api --change-all --admin-user wazuh --admin-password wazuh
-         
+
          .. code-block:: console
             :class: output
-       
+
             INFO: The password for user admin is yWOzmNA.?Aoc+rQfDBcF71KZp?1xd7IO
             INFO: The password for user kibanaserver is nUa+66zY.eDF*2rRl5GKdgLxvgYQA+wo
             INFO: The password for user kibanaro is 0jHq.4i*VAgclnqFiXvZ5gtQq1D5LCcL
@@ -153,16 +153,16 @@ Select your deployment type and follow the instructions to change the default pa
             INFO: The password for Wazuh API user wazuh is JYWz5Zdb3Yq+uOzOPyUU4oat0n60VmWI
             INFO: The password for Wazuh API user wazuh-wui is +fLddaCiZePxh24*?jC0nyNmgMGCKE+2
             INFO: Updated wazuh-wui user password in wazuh dashboard. Remember to restart the service.
-       
-    
+
+
    .. group-tab:: Distributed deployment
 
-      #. On `any Wazuh indexer node`, use the Wazuh passwords tool to change the passwords of the Wazuh indexer users. 
+      #. On `any Wazuh indexer node`, use the Wazuh passwords tool to change the passwords of the Wazuh indexer users.
 
          .. code-block:: console
-  
+
             # /usr/share/wazuh-indexer/plugins/opensearch-security/tools/wazuh-passwords-tool.sh --change-all
-  
+
          .. code-block:: console
             :class: output
 
@@ -178,10 +178,10 @@ Select your deployment type and follow the instructions to change the default pa
       #. On your `Wazuh server master node`, download the Wazuh passwords tool and use it to change the passwords of the Wazuh API users.
 
          .. code-block:: console
-  
+
             # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-passwords-tool.sh
             # bash wazuh-passwords-tool.sh --api --change-all --admin-user wazuh --admin-password wazuh
-  
+
          .. code-block:: console
             :class: output
 
@@ -189,7 +189,7 @@ Select your deployment type and follow the instructions to change the default pa
             INFO: The password for Wazuh API user wazuh-wui is fL+f?sFRPEv5pYRE559rqy9b6G4Z5pVi
 
       #. On `all your Wazuh server nodes`, run the following command to update the `admin` password in the Filebeat keystore. Replace ``<ADMIN_PASSWORD>`` with the random password generated in the first step.
-      
+
          .. code-block:: console
 
             # echo <ADMIN_PASSWORD> | filebeat keystore add password --stdin --force
@@ -199,7 +199,7 @@ Select your deployment type and follow the instructions to change the default pa
          .. include:: /_templates/common/restart_filebeat.rst
 
          .. note:: Repeat steps 3 and 4 on `every Wazuh server node`.
-       
+
       #. On your `Wazuh dashboard node`, run the following command to update the `kibanaserver` password in the Wazuh dashboard keystore. Replace ``<KIBANASERVER_PASSWORD>`` with the random password generated in the first step.
 
          .. code-block:: console
@@ -210,7 +210,7 @@ Select your deployment type and follow the instructions to change the default pa
 
          .. code-block:: yaml
             :emphasize-lines: 6
-           
+
             hosts:
               - default:
                   url: https://127.0.0.1
@@ -249,7 +249,7 @@ All the Wazuh central components are successfully installed and secured.
 
       </a>
     </div>
-  
+
     <div class="link-boxes-item past-step">
       <a class="link-boxes-link" href="../wazuh-server/index.html">
         <p class="link-boxes-label">Install the Wazuh server</p>
@@ -262,7 +262,7 @@ All the Wazuh central components are successfully installed and secured.
 
       </a>
     </div>
-  
+
     <div class="link-boxes-item past-step">
       <a class="link-boxes-link" href="index.html">
         <p class="link-boxes-label">Install the Wazuh dashboard</p>
@@ -270,7 +270,7 @@ All the Wazuh central components are successfully installed and secured.
 .. image:: ../../images/installation/Dashboard-Circle.png
      :align: center
      :height: 61px
-     
+
 .. raw:: html
 
       </a>

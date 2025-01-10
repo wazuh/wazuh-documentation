@@ -71,7 +71,10 @@ removedUrls['x.y'] = [
 newUrls['4.10'] = [
   '/release-notes/release-4-10-0.html',
   '/release-notes/release-4-10-1.html',
-  '/user-manual/reference/ossec-conf/anti-tampering.html'
+  '/user-manual/reference/ossec-conf/anti-tampering.html',
+  '/user-manual/capabilities/vulnerability-detection/troubleshooting.html',
+  '/user-manual/capabilities/vulnerability-detection/FAQ.html',
+  '/user-manual/capabilities/vulnerability-detection/known-issues.html',
 ]
 
 /* *** RELEASE 4.9 ****/
