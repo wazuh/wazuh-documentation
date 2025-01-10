@@ -229,8 +229,7 @@ Configuring Filebeat
       # filebeat setup --pipelines
       # filebeat setup --index-management -E output.logstash.enabled=false
 
-
-   .. note:: When upgrading from v4.8.x or v4.9.x, the ``wazuh-states-vulnerabilities-*`` mappings need to be updated manually with the command that follows:
+#. If you are upgrading from versions v4.8.x or v4.9.x, manually update the ``wazuh-states-vulnerabilities-*`` mappings using the following command:
 
    .. code-block:: console
 
