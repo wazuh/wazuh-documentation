@@ -229,6 +229,34 @@ Configuring Filebeat
       # filebeat setup --pipelines
       # filebeat setup --index-management -E output.logstash.enabled=false
 
+
+   .. note:: Due to additions of new fields in version v|WAZUH_CURRENT| the ``wazuh-states-vulnerabilities-*`` mappings need to be updated manually with the command that follows:
+
+   .. code-block:: console
+
+      curl -X PUT "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/wazuh-states-vulnerabilities-*/_mapping"  -u <USERNAME>:<PASSWORD> -k -H 'Content-Type: application/json' -d'
+      {
+        "properties": {
+          "vulnerability": {
+            "properties": {
+              "under_evaluation": {
+                "type": "boolean"
+              },
+              "scanner": {
+                "properties": {
+                  "source": {
+                    "type": "keyword",
+                    "ignore_above": 1024
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      '
+
+
 Upgrading the Wazuh dashboard
 -----------------------------
 
