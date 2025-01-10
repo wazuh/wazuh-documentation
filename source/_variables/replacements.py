@@ -146,6 +146,9 @@ custom_replacements = {
     "|WAZUH_CURRENT_HPUX|" : release,
     "|WAZUH_REVISION_HPUX|" : "1",
     #
+    # === OpenSearch
+    "|OPENSEARCH_DASHBOARDS_VERSION|": "2.16.0",
+    #
     # === Elastic
     # --- Filebeat
     "|FILEBEAT_LATEST|" : "7.10.2",
