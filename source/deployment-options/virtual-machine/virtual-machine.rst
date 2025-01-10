@@ -8,7 +8,7 @@
 Virtual Machine (OVA)
 =====================
 
-Wazuh provides a pre-built virtual machine image in Open Virtual Appliance (OVA) format. This can be directly imported to VirtualBox or other OVA compatible virtualization systems. Take into account that this VM only runs on 64-bit systems. It does not provide high availability and scalability out of the box. However, these can be implemented by using :doc:`distributed deployment </installation-guide/index>`.
+Wazuh provides a pre-built virtual machine image in Open Virtual Appliance (OVA) format. This can be directly imported to VirtualBox or other OVA compatible virtualization systems. Take into account that this VM only runs on 64-bit systems with x86_64/AMD64 architecture. It does not provide high availability and scalability out of the box. However, these can be implemented by using :doc:`distributed deployment </installation-guide/index>`.
 
 
 Download the `virtual appliance (OVA) <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_OVA|/vm/wazuh-|WAZUH_CURRENT_OVA|.ova>`_, which contains the following components:
@@ -25,18 +25,18 @@ Packages list
 .. |VM_AL2_64_OVA| replace:: `wazuh-|WAZUH_CURRENT_OVA|.ova <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_OVA|/vm/wazuh-|WAZUH_CURRENT_OVA|.ova>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_OVA|/checksums/wazuh/|WAZUH_CURRENT_OVA|/wazuh-|WAZUH_CURRENT_OVA|.ova.sha512>`__)
 .. |WAZUH_OVA_VERSION| replace:: |WAZUH_CURRENT_OVA|
 
-+----------------+--------------+--------------+----------------------+------------------+
-|  Distribution  | Architecture | VM Format    | Version              | Package          |
-+================+==============+==============+======================+==================+
-| Amazon Linux 2 |    64-bit    |      OVA     | |WAZUH_OVA_VERSION|  | |VM_AL2_64_OVA|  |
-+----------------+--------------+--------------+----------------------+------------------+
++----------------+-----------------------------------+--------------+----------------------+------------------+
+|  Distribution  | Architecture                      | VM Format    | Version              | Package          |
++================+===================================+==============+======================+==================+
+| Amazon Linux 2 | 64-bit x86_64/AMD64 architecture  |      OVA     | |WAZUH_OVA_VERSION|  | |VM_AL2_64_OVA|  |
++----------------+-----------------------------------+--------------+----------------------+------------------+
 
 Hardware requirements
 ---------------------
 
 The following requirements have to be in place before the Wazuh VM can be imported into a host operating system:
 
-- The host operating system has to be a 64-bit system. 
+- The host operating system has to be a 64-bit system with x86_64/AMD64 architecture.
 - Hardware virtualization has to be enabled on the firmware of the host.
 - A virtualization platform, such as VirtualBox, should be installed on the host system.
 
