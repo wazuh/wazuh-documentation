@@ -8,6 +8,20 @@
 
 This section lists the changes in version 4.10.0. Every update of the Wazuh solution is cumulative and includes all enhancements and fixes from previous releases.
 
+Highlights
+----------
+
+This release delivers key improvements across several areas, including enhanced debugging, expanded integration capabilities, standardised logging, refined compliance checks, and an improved dashboard user experience.
+
+Key features include the following:
+
+-  `Wazuh debug symbols generation <https://github.com/wazuh/wazuh/issues/9913>`__: Debug symbols are now generated during builds for macOS, Linux, and Windows, with crash dump generation by default in installers. Adequate documentation is provided for users to disable the crash dump generation process.
+-  `Standardized logging for cloud integrations <https://github.com/wazuh/wazuh/issues/16717>`__: A logger has been introduced to standardize logs for cloud integration modules, improving log management and consistency.
+-  `Microsoft Intune integration <https://github.com/wazuh/wazuh/issues/24498>`__: Integration with Microsoft Intune allows Wazuh to retrieve audit logs from managed devices, process them using built-in decoders and rules, and generate actionable security alerts.
+-  `Vulnerability evaluation status <https://github.com/wazuh/wazuh/issues/25482>`__: A new field has been introduced to indicate whether a vulnerability is under evaluation or disputed, assisting users in tracking vulnerabilities still awaiting analysis in the National Vulnerability Database (NVD).
+-  `Wazuh Dashboard UI improvements <https://github.com/wazuh/wazuh-dashboard-plugins/issues/7028>`__: Several key sections of the Wazuh dashboard have been redesigned to improve the user experience. Changes include updates to the **Overview**, **Events**, and **Agent detail** pages, along with the addition of an **Agents management** menu. Additionally, there are redesigns of the deploy new agent page, adjustments to the loading logo size, and fixes to the vulnerability inventory table for improved usability.
+-  **Reworked SCA policies**: Numerous SCA policies have been reworked, including policies for Rocky Linux 8, Alma Linux 8, Amazon Linux 2023, Windows Server 2019, RedHat 9, Windows Server 2012 R2, Windows Server 2012 (no R2), Debian 10, Ubuntu 18, Amazon Linux 2, SUSE 15, macOS Ventura, and Windows 11 Enterprise..
+
 What's new
 ----------
 
