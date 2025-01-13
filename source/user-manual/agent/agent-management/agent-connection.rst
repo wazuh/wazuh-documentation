@@ -236,11 +236,11 @@ For the other capabilities of the ``/var/ossec/bin/agent_groups`` tool, refer to
 Using the :api-ref:`GET /agents <operation/api.controllers.agent_controller.get_agents>` Wazuh server API endpoint
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Run the command below on the Wazuh server or any endpoint that has connectivity with the Wazuh server. Replace ``<WAZUH_MANAGER_IP>`` with the IP address or FQDN of the Wazuh server.
+Run the command below on the Wazuh server or any endpoint that has connectivity with the Wazuh server. Replace ``<WAZUH_MANAGER_IP_ADDRESS>`` with the IP address or FQDN of the Wazuh server.
 
 .. code-block:: console
 
-   # curl -k -X GET "https://<WAZUH_MANAGER_IP>:55000/agents?agents_list=001&select=group_config_status&pretty=true" -H  "Authorization: Bearer $TOKEN"
+   # curl -k -X GET "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/agents?agents_list=001&select=group_config_status&pretty=true" -H  "Authorization: Bearer $TOKEN"
 
 .. code-block:: none
    :class: output
