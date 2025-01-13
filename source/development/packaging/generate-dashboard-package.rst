@@ -23,7 +23,13 @@ Requirements:
 -  **Docker**: Refer to `Docker installation guide <https://docs.docker.com/engine/install/>`__.
 -  **NVM (Node Version Manager)**: Refer to `NVM installation guide <https://github.com/nvm-sh/nvm#installing-and-updating>`__.
 -  **Yarn v|WAZUH_DASHBOARD_YARN_VERSION| (Node Package Manager)**: Refer to `Yarn installation guide <https://classic.yarnpkg.com/en/docs/install/>`__.
--  **zip**: Ensure the ``zip`` utility is available.
+-  **Utilities**: Ensure the following are available:
+
+   -  ``zip``
+   -  ``unzip``
+   -  ``gzip``
+   -  ``brotli``
+   -  ``curl``
 
 Generating zip packages
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -133,7 +139,7 @@ To build the packages, follow these steps:
       $ cd ../../../
       $ mkdir packages
       $ cd packages
-      $ zip -r -j ./dashboard-package.zip ../wazuh-dashboard/target/opensearch-dashboards-2.16.0-linux-x64.tar.gz
+      $ zip -r -j ./dashboard-package.zip ../wazuh-dashboard/target/opensearch-dashboards-<OPENSEARCH_VERSION>-linux-x64.tar.gz
       $ zip -r -j ./security-package.zip ../wazuh-dashboard/plugins/wazuh-security-dashboards-plugin/build/security-dashboards-<OPENSEARCH_VERSION>.0.zip
       $ zip -r -j ./wazuh-package.zip ../wazuh-dashboard/plugins/wazuh-check-updates/build/wazuhCheckUpdates-<OPENSEARCH_VERSION>.zip ../wazuh-dashboard/plugins/main/build/wazuh-<OPENSEARCH_VERSION>.zip ../wazuh-dashboard/plugins/wazuh-core/build/wazuhCore-<OPENSEARCH_VERSION>.zip
 
@@ -144,9 +150,9 @@ To build the packages, follow these steps:
       $ cd ../../../
       $ mkdir packages
       $ cd packages
-      $ zip -r -j ./dashboard-package.zip ../wazuh-dashboard/target/opensearch-dashboards-2.16.0-linux-x64.tar.gz
-      $ zip -r -j ./security-package.zip ../wazuh-dashboard/plugins/wazuh-security-dashboards-plugin/build/security-dashboards-2.16.0.0.zip
-      $ zip -r -j ./wazuh-package.zip ../wazuh-dashboard/plugins/wazuh-check-updates/build/wazuhCheckUpdates-2.16.0.zip ../wazuh-dashboard/plugins/main/build/wazuh-2.16.0.zip ../wazuh-dashboard/plugins/wazuh-core/build/wazuhCore-2.16.0.zip
+      $ zip -r -j ./dashboard-package.zip ../wazuh-dashboard/target/opensearch-dashboards-|OPENSEARCH_DASHBOARDS_VERSION|-linux-x64.tar.gz
+      $ zip -r -j ./security-package.zip ../wazuh-dashboard/plugins/wazuh-security-dashboards-plugin/build/security-dashboards-|OPENSEARCH_DASHBOARDS_VERSION|.0.zip
+      $ zip -r -j ./wazuh-package.zip ../wazuh-dashboard/plugins/wazuh-check-updates/build/wazuhCheckUpdates-|OPENSEARCH_DASHBOARDS_VERSION|.zip ../wazuh-dashboard/plugins/main/build/wazuh-|OPENSEARCH_DASHBOARDS_VERSION|.zip ../wazuh-dashboard/plugins/wazuh-core/build/wazuhCore-|OPENSEARCH_DASHBOARDS_VERSION|.zip
 
 At this point you must have three packages in the ``packages`` folder:
 
@@ -193,7 +199,7 @@ Example:
 .. code:: console
 
    $ cd ../wazuh-dashboard/dev-tools/build-packages/
-   $ ./build-packages.sh -v |WAZUH_CURRENT| -r 1 --deb -a file:///packages/wazuh-package.zip -s file:///packages/security-package.zip -b file:///packages/dashboard-package.zip
+   $ ./build-packages.sh -v v|WAZUH_CURRENT| -r 1 --deb -a file:///packages/wazuh-package.zip -s file:///packages/security-package.zip -b file:///packages/dashboard-package.zip
 
 The script generates the package in the ``output`` folder of the same directory where it is located.
 
@@ -208,7 +214,11 @@ Requirements
 -  **Docker**: Refer to `Docker installation guide <https://docs.docker.com/engine/install/>`__.
 -  **Docker Compose**: Refer to `Docker Compose installation guide <https://docs.docker.com/compose/install/>`__.
 -  **Internet connection** to download the Docker images for the first time.
--  **zip**: Ensure the ``zip`` utility is available.
+-  **Utilities**: Ensure the following are available:
+
+   -  ``zip``
+   -  ``jq``
+   -  ``curl``
 
 Building the packages
 ~~~~~~~~~~~~~~~~~~~~~

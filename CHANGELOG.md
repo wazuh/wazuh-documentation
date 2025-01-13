@@ -13,7 +13,7 @@ All notable changes to this project will be documented in this file.
 - Updated Wazuh dashboard package generation guide. ([#7961](https://github.com/wazuh/wazuh-documentation/pull/7961))
 - Updated images in FIM PoC. [#7979](https://github.com/wazuh/wazuh-documentation/pull/7979)
 
-## [v4.10.1]
+## [v4.11.0]
 
 ### Added
 
@@ -22,10 +22,15 @@ All notable changes to this project will be documented in this file.
 ### Changed
 
 - Updated note about uninstalling Wazuh agents in Solaris. ([#7925](https://github.com/wazuh/wazuh-documentation/pull/7925))
+- Updated screenshots from System Inventory.  ([#8044](https://github.com/wazuh/wazuh-documentation/pull/8044))
 
 ### Removed
 
 - Removed note about plugins and upgrading Wazuh central components. ([#8020](https://github.com/wazuh/wazuh-documentation/pull/8020))
+
+# [v4.10.1]
+
+- Support for Wazuh 4.10.1
 
 ## [v4.10.0]
 
@@ -37,6 +42,7 @@ All notable changes to this project will be documented in this file.
 - Added PowerPC package references back to the packages list. ([#7724](https://github.com/wazuh/wazuh-documentation/pull/7724))
 - Added dependencies to the dependency requirements in the Offline installation guide using the installation assistant. ([#7931](https://github.com/wazuh/wazuh-documentation/pull/7931))
 - Added ``wazuh.updates.disabled`` to the *Wazuh dashboard settings* reference document. ([#7977](https://github.com/wazuh/wazuh-documentation/pull/7977))
+- Added a troubleshooting guide to the Vulnerability detection capability section. ([#8014](https://github.com/wazuh/wazuh-documentation/pull/8014))
 
 ### Changed
 
