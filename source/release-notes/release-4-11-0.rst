@@ -38,7 +38,6 @@ Auxiliary repositories
 -  `wazuh/wazuh-puppet <https://github.com/wazuh/wazuh-puppet/blob/v4.11.0/CHANGELOG.md>`__
 -  `wazuh/wazuh-docker <https://github.com/wazuh/wazuh-docker/blob/v4.11.0/CHANGELOG.md>`__
 
--  `wazuh/wazuh-qa <https://github.com/wazuh/wazuh-qa/blob/v4.11.0/CHANGELOG.md>`__
 -  `wazuh/qa-integration-framework <https://github.com/wazuh/qa-integration-framework/blob/v4.11.0/CHANGELOG.md>`__
 
 -  `wazuh/wazuh-documentation <https://github.com/wazuh/wazuh-documentation/blob/v4.11.0/CHANGELOG.md>`__
