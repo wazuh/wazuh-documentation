@@ -66,6 +66,46 @@ removedUrls['x.y'] = [
 
 /* *** RELEASE 4.10 ****/
 
+/* Redirections from 4.9 to 4.10  */
+
+redirections.push(
+  {
+    'target': ['4.9=>4.10', '4.10=>4.9'],
+    '4.9': '/user-manual/wazuh-indexer-cluster.html',
+    '4.10': '/user-manual/wazuh-indexer-cluster/index.html',
+  },
+  {
+    'target': ['4.9=>4.10', '4.10=>4.9'],
+    '4.9': '/user-manual/wazuh-indexer-cluster.html#certificates-deployment',
+    '4.10': '/user-manual/wazuh-indexer-cluster/certificate-deployment.html',
+  },
+  {
+    'target': ['4.9=>4.10', '4.10=>4.9'],
+    '4.9': '/user-manual/wazuh-indexer-cluster.html#adding-wazuh-indexer-nodes',
+    '4.10': '/user-manual/wazuh-indexer-cluster/add-wazuh-indexer-nodes.html',
+  },
+  {
+    'target': ['4.9=>4.10', '4.10=>4.9'],
+    '4.9': '/user-manual/wazuh-indexer-cluster.html#cluster-management',
+    '4.10': '/user-manual/wazuh-indexer-cluster/cluster-management.html',
+  },
+  {
+    'target': ['4.9=>4.10', '4.10=>4.9'],
+    '4.9': '/user-manual/wazuh-indexer/index-life-management.html',
+    '4.10': '/user-manual/wazuh-indexer-cluster/index-lifecycle-management.html',
+  },
+  {
+    'target': ['4.9=>4.10', '4.10=>4.9'],
+    '4.9': '/user-manual/wazuh-indexer/wazuh-indexer-tuning.html#configure-shard-allocation-awareness-or-forced-awareness',
+    '4.10': '/user-manual/wazuh-indexer-cluster/wazuh-indexer-cluster-tuning.html#configure-shard-allocation-awareness-or-forced-awareness',
+  },
+  {
+    'target': ['4.9=>4.10', '4.10=>4.9'],
+    '4.9': '/user-manual/wazuh-indexer/wazuh-indexer-tuning.html#set-node-attributes-for-each-node-in-a-cluster',
+    '4.10': '/user-manual/wazuh-indexer-cluster/wazuh-indexer-cluster-tuning.html#set-node-attributes-for-each-node-in-a-cluster',
+  },
+);
+
 /* Pages added in 4.10 */
 newUrls['4.10'] = [
   '/release-notes/release-4-10-0.html',
@@ -73,7 +113,20 @@ newUrls['4.10'] = [
   '/user-manual/capabilities/vulnerability-detection/troubleshooting.html',
   '/user-manual/capabilities/vulnerability-detection/FAQ.html',
   '/user-manual/capabilities/vulnerability-detection/known-issues.html',
+  '/user-manual/wazuh-indexer-cluster/index.html',
+  '/user-manual/wazuh-indexer-cluster/certificate-deployment.html',
+  '/user-manual/wazuh-indexer-cluster/add-wazuh-indexer-nodes.html',
+  '/user-manual/wazuh-indexer-cluster/index-lifecycle-management.html',
+  '/user-manual/wazuh-indexer-cluster/wazuh-indexer-cluster-tuning.html',
+  '/user-manual/wazuh-indexer-cluster/cluster-management.html',
 ]
+
+/* Pages no longer available in 4.10 */
+
+removedUrls['4.10'] = [
+  '/user-manual/wazuh-indexer-cluster.html',
+  '/user-manual/wazuh-indexer/index-life-management.html',
+];
 
 /* *** RELEASE 4.9 ****/
 
