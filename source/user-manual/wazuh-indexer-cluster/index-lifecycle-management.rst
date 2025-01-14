@@ -1,4 +1,4 @@
-.. Copyright (C) 2015, Wazuh, Inc.
+﻿.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
    :description: Learn how to define index management policies in this section of the documentation.

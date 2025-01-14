@@ -73,6 +73,12 @@ newUrls['4.10'] = [
   '/user-manual/capabilities/vulnerability-detection/troubleshooting.html',
   '/user-manual/capabilities/vulnerability-detection/FAQ.html',
   '/user-manual/capabilities/vulnerability-detection/known-issues.html',
+  '/user-manual/wazuh-indexer-cluster/index.html',
+  '/user-manual/wazuh-indexer-cluster/certificate-deployment.html',
+  '/user-manual/wazuh-indexer-cluster/add-wazuh-indexer-nodes.html',
+  '/user-manual/wazuh-indexer-cluster/index-lifecycle-management.html',
+  '/user-manual/wazuh-indexer-cluster/wazuh-indexer-cluster-tuning.html',
+  '/user-manual/wazuh-indexer-cluster/cluster-management.html',
 ]
 
 /* *** RELEASE 4.9 ****/
