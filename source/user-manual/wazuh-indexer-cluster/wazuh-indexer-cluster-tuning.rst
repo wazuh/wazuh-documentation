@@ -1,4 +1,4 @@
-﻿.. Copyright (C) 2015, Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
    :description: Learn how to change settings to optimize the Wazuh indexer cluster performance in this section of the documentation.

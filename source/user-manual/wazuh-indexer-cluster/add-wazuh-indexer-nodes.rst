@@ -1,4 +1,4 @@
-﻿.. Copyright (C) 2015, Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
    :description: This section covers adding Wazuh indexer nodes to increase capacity and resilience.

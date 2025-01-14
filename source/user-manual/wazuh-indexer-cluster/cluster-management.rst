@@ -1,4 +1,4 @@
-﻿.. Copyright (C) 2015, Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
    :description: This section covers cluster management including health checks and node details.
@@ -53,7 +53,7 @@ Perform the following cluster management queries on the Wazuh dashboard console 
 
       GET _cluster/stats/nodes/*
 
--  Check storage allocation. This can be used to determine if the Wazuh indexer node is full. If the indexer node is full, implement the :doc:`index lifecycle management <wazuh-indexer/index-lifecycle-management>` to free up old indices.
+-  Check storage allocation. This can be used to determine if the Wazuh indexer node is full. If the indexer node is full, implement the :doc:`index lifecycle management <index-lifecycle-management>` to free up old indices.
 
    .. code-block:: none
 
