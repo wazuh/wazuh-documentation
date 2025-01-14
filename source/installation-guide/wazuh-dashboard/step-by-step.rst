@@ -216,7 +216,7 @@ Select your deployment type and follow the instructions to change the default pa
                   url: https://127.0.0.1
                   port: 55000
                   username: wazuh-wui
-                  password: "<wazuh-wui-password>"
+                  password: "<WAZUH_WUI_PASSWORD>"
                   run_as: false
 
       #. Restart the Wazuh dashboard to apply the changes.

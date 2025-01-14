@@ -108,7 +108,7 @@ Master node
           <port>1516</port>
           <bind_addr>0.0.0.0</bind_addr>
           <nodes>
-              <node>MASTER_NODE_IP</node>
+              <node><MASTER_NODE_IP_ADDRESS></node>
           </nodes>
           <hidden>no</hidden>
           <disabled>no</disabled>
@@ -149,7 +149,7 @@ Worker node
         <port>1516</port>
         <bind_addr>0.0.0.0</bind_addr>
         <nodes>
-            <node>MASTER_NODE_IP</node>
+            <node><MASTER_NODE_IP_ADDRESS></node>
         </nodes>
         <hidden>no</hidden>
         <disabled>no</disabled>
@@ -229,13 +229,13 @@ Follow the steps below to create Wazuh server certificates using the ``wazuh-cer
         # node, each one must have a node_type
         server:
           - name: wazuh-1
-            ip: "<WAZUH_MANAGER_IP>"
+            ip: "<WAZUH_MANAGER_IP_ADDRESS>"
           #  node_type: master
           #- name: wazuh-2
-          #  ip: "<WAZUH_MANAGER_IP>"
+          #  ip: "<WAZUH_MANAGER_IP_ADDRESS>"
           #  node_type: worker
           #- name: wazuh-3
-          #  ip: "<WAZUH_MANAGER_IP>"
+          #  ip: "<WAZUH_MANAGER_IP_ADDRESS>"
           #  node_type: worker
 
    Where:
@@ -243,7 +243,7 @@ Follow the steps below to create Wazuh server certificates using the ``wazuh-cer
    -  ``name`` represents a unique node name. You can choose any.
    -  ``ip`` represents the IP address or DNS name of the node.
    -  ``node type`` represents the node type to configure. Two types are available, master and worker. You can only have one master node per cluster.
-   -  ``<WAZUH_MANAGER_IP>`` represents the IP address of Wazuh manager nodes (master/worker)
+   -  ``<WAZUH_MANAGER_IP_ADDRESS>`` represents the IP address of Wazuh manager nodes (master/worker)
 
 #. Run the script to create the Wazuh server certificates:
 
@@ -383,21 +383,21 @@ We generate new certificates for the Wazuh components in an all-in-one deploymen
         # Wazuh indexer nodes
         indexer:
           - name: <WAZUH_INDEXER_NODE_NAME>
-            ip: <WAZUH_INDEXER_IP>
+            ip: <WAZUH_INDEXER_IP_ADDRESS>
 
         # Wazuh server nodes
         server:
           - name: <EXISTING_WAZUH_SERVER_NODE_NAME>
-            ip: <EXISTING_WAZUH_SERVER_IP>
+            ip: <EXISTING_WAZUH_SERVER_IP_ADDRESS>
             node_type: master
           - name: <NEW_WAZUH_SERVER_NODE_NAME>
-            ip: <NEW_WAZUH_SERVER_IP>
+            ip: <NEW_WAZUH_SERVER_IP_ADDRESS>
             node_type: worker
 
         # Wazuh dashboard nodes
         dashboard:
           - name: <WAZUH_DASHBOARD_NODE_NAME>
-            ip: <WAZUH_DASHBOARD_IP>
+            ip: <WAZUH_DASHBOARD_IP_ADDRESS>
 
    Replace the node names and IP values with your new node names and IP addresses.
 
@@ -428,7 +428,7 @@ We generate new certificates for the Wazuh components in an all-in-one deploymen
    .. code-block:: console
 
       # tar -cvf ./wazuh-certificates.tar -C ./wazuh-certificates/ .
-      # scp wazuh-certificates.tar <TARGET_USERNAME>@<TARGET_IP>:
+      # scp wazuh-certificates.tar <TARGET_USERNAME>@<TARGET_IP_ADDRESS>:
 
    This will copy the certificates to the ``/home`` directory of the user on the target system. You can change this to specify a path to your installation directory.
 
@@ -461,10 +461,10 @@ Perform the steps below on your existing Wazuh server node to generate the certi
         # Wazuh server nodes
         server:
           - name: <EXISTING_WAZUH_SERVER_NODE_NAME>
-            ip: <EXISTING_WAZUH_SERVER_IP>
+            ip: <EXISTING_WAZUH_SERVER_IP_ADDRESS>
             node_type: master
           - name: <NEW_WAZUH_SERVER_NODE_NAME>
-            ip: <NEW_WAZUH_SERVER_IP>
+            ip: <NEW_WAZUH_SERVER_IP_ADDRESS>
             node_type: worker
 
    Replace the values with your node names and their corresponding IP addresses.
@@ -502,7 +502,7 @@ Perform the steps below on your existing Wazuh server node to generate the certi
    .. code-block:: console
 
       # tar -cvf ./wazuh-certificates.tar -C ./wazuh-install-files/ .
-      # scp wazuh-certificates.tar <TARGET_USERNAME>@<TARGET_IP>:
+      # scp wazuh-certificates.tar <TARGET_USERNAME>@<TARGET_IP_ADDRESS>:
 
    This command copies the certificates to the ``/home`` directory of the target user on the endpoint. You can modify the command to specify a path to your installation directory.
 
@@ -522,21 +522,21 @@ You can follow the steps below to generate fresh certificates if the pre-existin
         # Wazuh indexer nodes
         indexer:
           - name: <WAZUH_INDEXER_NODE_NAME>
-            ip: <WAZUH_INDEXER_IP>
+            ip: <WAZUH_INDEXER_IP_ADDRESS>
 
         # Wazuh server nodes
         server:
           - name: <EXISTING_WAZUH_SERVER_NODE_NAME>
-            ip: <EXISTING_WAZUH_SERVER_IP>
+            ip: <EXISTING_WAZUH_SERVER_IP_ADDRESS>
             node_type: master
           - name: <NEW_WAZUH_SERVER_NODE_NAME>
-            ip: <NEW_WAZUH_SERVER_IP>
+            ip: <NEW_WAZUH_SERVER_IP_ADDRESS>
             node_type: worker
 
         # Wazuh dashboard nodes
         dashboard:
           - name: <WAZUH_DASHBOARD_NODE_NAME>
-            ip: <WAZUH_DASHBOARD_IP>
+            ip: <WAZUH_DASHBOARD_IP_ADDRESS>
 
 #. Download and execute the ``wazuh-certs-tool.sh`` script to create the certificates:
 
@@ -550,7 +550,7 @@ You can follow the steps below to generate fresh certificates if the pre-existin
    .. code-block:: console
 
       # tar -cvf ./wazuh-certificates.tar -C ./wazuh-certificates/
-      # scp wazuh-certificates.tar <TARGET_USERNAME>@<TARGET_IP>:
+      # scp wazuh-certificates.tar <TARGET_USERNAME>@<TARGET_IP_ADDRESS>:
 
    This command copies the certificates to the ``/home`` directory of the target user on the endpoint. You can modify the command to specify a path to your installation directory.
 
@@ -626,7 +626,7 @@ All-in-one deployment
    .. code-block:: yaml
       :emphasize-lines: 1,2,4
 
-      network.host: "<WAZUH_INDEXER_IP>"
+      network.host: "<WAZUH_INDEXER_IP_ADDRESS>"
       node.name: "<WAZUH_INDEXER_NODE_NAME>"
       cluster.initial_master_nodes:
       - "<WAZUH_INDEXER_NODE_NAME>"
@@ -636,7 +636,7 @@ All-in-one deployment
    .. code-block:: yaml
 
       output.elasticsearchhosts:
-              - <WAZUH_INDEXER_IP>:9200
+              - <WAZUH_INDEXER_IP_ADDRESS>:9200
 
    .. note::
 
@@ -656,7 +656,7 @@ All-in-one deployment
 
    .. code-block:: yaml
 
-      opensearch.hosts: https://<WAZUH_INDEXER_IP>:9200
+      opensearch.hosts: https://<WAZUH_INDEXER_IP_ADDRESS>:9200
 
 #. Edit the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` file and replace the ``url`` value with the IP address or hostname of the Wazuh server master node:
 
@@ -665,10 +665,10 @@ All-in-one deployment
 
       hosts:
         - default:
-            url: https://<EXISTING_WAZUH_SERVER_IP>
+            url: https://<EXISTING_WAZUH_SERVER_IP_ADDRESS>
             port: 55000
             username: wazuh-wui
-            password: <WAZUH-WUI-PASSWORD>
+            password: <WAZUH_WUI_PASSWORD>
             run_as: false
 
 #. Edit the Wazuh server configuration file at ``/var/ossec/etc/ossec.conf`` to enable the Wazuh server cluster:
@@ -684,7 +684,7 @@ All-in-one deployment
         <port>1516</port>
         <bind_addr>0.0.0.0</bind_addr>
         <nodes>
-            <node><MASTER_NODE_IP></node>
+            <node><MASTER_NODE_IP_ADDRESS></node>
         </nodes>
         <hidden>no</hidden>
         <disabled>no</disabled>
@@ -698,7 +698,7 @@ All-in-one deployment
    -  :ref:`key <cluster_key>` represents a :ref:`key <generate_random_encryption_key>` used to encrypt communication between cluster nodes. It should be the same on all the server nodes. To generate a unique key you can use the command ``openssl rand -hex 16``.
    -  :ref:`port <cluster_port>` indicates the destination port for cluster communication. Leave the default as ``1516``.
    -  :ref:`bind_addr <cluster_bind_addr>` is the network IP to which the node is bound to listen for incoming requests (0.0.0.0 means the node will use any IP).
-   -  :ref:`nodes <cluster_nodes>` is the address of the master node and can be either an IP or a DNS hostname. This parameter must be specified in all nodes, including the master itself. Replace ``<MASTER_NODE_IP>`` with the IP address of your master node.
+   -  :ref:`nodes <cluster_nodes>` is the address of the master node and can be either an IP or a DNS hostname. This parameter must be specified in all nodes, including the master itself. Replace ``<MASTER_NODE_IP_ADDRESS>`` with the IP address of your master node.
    -  :ref:`hidden <cluster_hidden>` shows or hides the cluster information in the generated alerts.
    -  :ref:`disabled <cluster_disabled>` indicates whether the node is enabled or disabled in the cluster. This option must be set to no.
 
@@ -796,7 +796,7 @@ Distributed deployment
 
    .. code-block:: yaml
 
-      network.host: "<WAZUH_INDEXER_IP>"
+      network.host: "<WAZUH_INDEXER_IP_ADDRESS>"
       node.name: "<WAZUH_INDEXER_NODE_NAME>"
       cluster.initial_master_nodes:
       - "<WAZUH_INDEXER_NODE_NAME>"
@@ -806,7 +806,7 @@ Distributed deployment
    .. code-block:: yaml
 
       output.elasticsearchhosts:
-              - <WAZUH_INDEXER_IP>:9200
+              - <WAZUH_INDEXER_IP_ADDRESS>:9200
 
    .. note::
 
@@ -826,7 +826,7 @@ Distributed deployment
 
    .. code-block:: yaml
 
-      opensearch.hosts: https://<WAZUH_INDEXER_IP>:9200
+      opensearch.hosts: https://<WAZUH_INDEXER_IP_ADDRESS>:9200
 
 #. Edit the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` file located in the Wazuh dashboard node and replace the ``url`` value with the IP address or hostname of the Wazuh server master node:
 
@@ -835,10 +835,10 @@ Distributed deployment
 
       hosts:
         - default:
-            url: https://<EXISTING_WAZUH_SERVER_IP>
+            url: https://<EXISTING_WAZUH_SERVER_IP_ADDRESS>
             port: 55000
             username: wazuh-wui
-            password: <WAZUH-WUI-PASSWORD>
+            password: <WAZUH_WUI_PASSWORD>
             run_as: false
 
 #. Edit the Wazuh server configuration file at ``/var/ossec/etc/ossec.conf`` to enable cluster mode:
@@ -854,7 +854,7 @@ Distributed deployment
         <port>1516</port>
         <bind_addr>0.0.0.0</bind_addr>
         <nodes>
-            <node><MASTER_NODE_IP></node>
+            <node><MASTER_NODE_IP_ADDRESS></node>
         </nodes>
         <hidden>no</hidden>
         <disabled>no</disabled>
@@ -868,7 +868,7 @@ Distributed deployment
    -  :ref:`key <cluster_key>` represents a :ref:`key <generate_random_encryption_key_cluster>` used to encrypt communication between cluster nodes. It should be the same on all the server nodes. To generate a unique key you can use the command ``openssl rand -hex 16``.
    -  :ref:`port <cluster_port>` indicates the destination port for cluster communication. Leave the default as ``1516``.
    -  :ref:`bind_addr <cluster_bind_addr>` is the network IP to which the node is bound to listen for incoming requests (0.0.0.0 means the node will use any IP).
-   -  :ref:`nodes <cluster_nodes>` is the address of the master node and can be either an IP or a DNS hostname. This parameter must be specified in all nodes, including the master itself. Replace ``<MASTER_NODE_IP>`` with the IP address of your master node.
+   -  :ref:`nodes <cluster_nodes>` is the address of the master node and can be either an IP or a DNS hostname. This parameter must be specified in all nodes, including the master itself. Replace ``<MASTER_NODE_IP_ADDRESS>`` with the IP address of your master node.
    -  :ref:`hidden <cluster_hidden>` shows or hides the cluster information in the generated alerts.
    -  :ref:`disabled <cluster_disabled>` indicates whether the node is enabled or disabled in the cluster. This option must be set to ``no``.
 
@@ -1073,7 +1073,7 @@ Install and configure Filebeat
 
       # Wazuh - Filebeat configuration file
       output.elasticsearch:
-        hosts: <WAZUH_INDEXER_IP>:9200
+        hosts: <WAZUH_INDEXER_IP_ADDRESS>:9200
         protocol: https
 
 #. Create a Filebeat keystore to securely store authentication credentials:
@@ -1202,7 +1202,7 @@ Configuring the Wazuh server worker nodes
           <port>1516</port>
           <bind_addr>0.0.0.0</bind_addr>
           <nodes>
-              <node><MASTER_NODE_IP></node>
+              <node><MASTER_NODE_IP_ADDRESS></node>
           </nodes>
           <hidden>no</hidden>
           <disabled>no</disabled>
@@ -1216,7 +1216,7 @@ Configuring the Wazuh server worker nodes
    -  ``<key>`` represents the :ref:`key created previously <generate_random_encryption_key_cluster>` for the master node. It has to be the same for all the nodes. In case you have an already distributed infrastructure, copy this key from the master node’s ``/var/ossec/etc/ossec.conf`` file.
    -  ``<port>`` indicates the destination port for cluster communication. Leave the default as ``1516``.
    -  ``<bind_addr>`` is the network IP to which the node is bound to listen for incoming requests (0.0.0.0 means the node will use any IP).
-   -  ``<nodes>`` contain the address of the master node which can be either an IP or a DNS hostname. Replace ``<MASTER_NODE_IP>`` with the IP address of your master node.
+   -  ``<nodes>`` contain the address of the master node which can be either an IP or a DNS hostname. Replace ``<MASTER_NODE_IP_ADDRESS>`` with the IP address of your master node.
    -  ``<hidden>`` shows or hides the cluster information in the generated alerts.
    -  ``<disabled>`` indicates whether the node is enabled or disabled in the cluster. This option must be set to ``no``.
 
@@ -1261,7 +1261,7 @@ You can also check your new Wazuh server cluster by using the **Wazuh API Consol
 
 Access the Wazuh dashboard using the credentials below.
 
--  URL: ``https://<WAZUH_DASHBOARD_IP>``
+-  URL: ``https://<WAZUH_DASHBOARD_IP_ADDRESS>``
 -  Username: ``admin``
 -  Password: ``<ADMIN_PASSWORD>`` or ``admin`` in case you already have a distributed architecture and using the default password.
 
@@ -1364,14 +1364,14 @@ Wazuh agents can be configured to report to a :ref:`load balancer <cluster_load_
 
 Perform the following steps to point a Wazuh agent to a load balancer.
 
-#. Edit the Wazuh agent configuration in ``/var/ossec/etc/ossec.conf`` to add the Load Balancer IP address. In the ``<server></server>`` block, replace the ``<LOAD_BALANCER_IP>`` with the load balancer IP address:
+#. Edit the Wazuh agent configuration in ``/var/ossec/etc/ossec.conf`` to add the Load Balancer IP address. In the ``<server></server>`` block, replace the ``<LOAD_BALANCER_IP_ADDRESS>`` with the load balancer IP address:
 
    .. code-block:: xml
       :emphasize-lines: 3
 
       <client>
         <server>
-          <address><LOAD_BALANCER_IP></address>
+          <address><LOAD_BALANCER_IP_ADDRESS></address>
           …
         </server>
       </client>
@@ -1872,9 +1872,9 @@ Perform the following steps to configure HAProxy to work with a Wazuh server clu
       backend wazuh_register
         	mode tcp
         	balance leastconn
-        	server master <IP_OR_DNS_OF_WAZUH_MASTER_NODE>:1515 check
-        	server worker1 <IP_OR_DNS_OF_WAZUH_WORKER_NODE>:1515 check
-        	server workern <IP_OR_DNS_OF_WAZUH_WORKER_NODE>:1515 check
+        	server master <IP_ADDRESS_OR_DNS_OF_WAZUH_MASTER_NODE>:1515 check
+        	server worker1 <IP_ADDRESS_OR_DNS_OF_WAZUH_WORKER_NODE>:1515 check
+        	server workern <IP_ADDRESS_OR_DNS_OF_WAZUH_WORKER_NODE>:1515 check
 
       # Do not include the following if you will enable HAProxy Helper
       frontend wazuh_reporting_front
@@ -1885,14 +1885,14 @@ Perform the following steps to configure HAProxy to work with a Wazuh server clu
       backend wazuh_reporting
         	mode tcp
         	balance leastconn
-        	server master <IP_OR_DNS_OF_WAZUH_MASTER_NODE>:1514 check
-        	server worker1 <IP_OR_DNS_OF_WAZUH_WORKER_NODE>:1514 check
-        	server worker2 <IP_OR_DNS_OF_WAZUH_WORKER_NODE>:1514 check
+        	server master <IP_ADDRESS_OR_DNS_OF_WAZUH_MASTER_NODE>:1514 check
+        	server worker1 <IP_ADDRESS_OR_DNS_OF_WAZUH_WORKER_NODE>:1514 check
+        	server worker2 <IP_ADDRESS_OR_DNS_OF_WAZUH_WORKER_NODE>:1514 check
 
    Replace:
 
-   -  ``<IP_OR_DNS_OF_WAZUH_MASTER_NODE>`` with the IP address or DNS of the Wazuh server master node in your cluster.
-   -  ``<IP_OR_DNS_OF_WAZUH_WORKER_NODE>`` with the IP address or DNS of the Wazuh server worker nodes in your cluster.
+   -  ``<IP_ADDRESS_OR_DNS_OF_WAZUH_MASTER_NODE>`` with the IP address or DNS of the Wazuh server master node in your cluster.
+   -  ``<IP_ADDRESS_OR_DNS_OF_WAZUH_WORKER_NODE>`` with the IP address or DNS of the Wazuh server worker nodes in your cluster.
 
    .. raw:: html
 
@@ -2238,7 +2238,7 @@ As an example, you can configure a basic HAProxy helper within an already config
                <port>1516</port>
                <bind_addr>0.0.0.0</bind_addr>
                <nodes>
-                  <node>WAZUH-MASTER-ADDRESS</node>
+                  <node><WAZUH_MASTER_ADDRESS></node>
                </nodes>
                <hidden>no</hidden>
                <disabled>no</disabled>
@@ -2272,7 +2272,7 @@ As an example, you can configure a basic HAProxy helper within an already config
                <port>1516</port>
                <bind_addr>0.0.0.0</bind_addr>
                <nodes>
-                  <node>WAZUH-MASTER-ADDRESS</node>
+                  <node><WAZUH_MASTER_ADDRESS></node>
                </nodes>
                <hidden>no</hidden>
                <disabled>no</disabled>
