@@ -45,8 +45,7 @@ For larger environments we recommend a distributed deployment. Multi-node cluste
 Operating system
 ^^^^^^^^^^^^^^^^
 
-Wazuh central components can be installed on a 64-bit Linux operating system. Wazuh recommends any of the following operating system versions:
-
+The Wazuh central components require a 64-bit Intel or AMD Linux processor (x86_64/AMD64 architecture) to run. Wazuh recommends any of the following operating system versions:
 
 .. list-table::
    :width: 100%
@@ -74,14 +73,14 @@ Installing Wazuh
         :emphasize-lines: 4
 
         INFO: --- Summary ---
-        INFO: You can access the web interface https://<wazuh-dashboard-ip>
+        INFO: You can access the web interface https://<WAZUH_DASHBOARD_IP_ADDRESS>
             User: admin
             Password: <ADMIN_PASSWORD>
         INFO: Installation finished.
 
     You now have installed and configured Wazuh.
 
-#.  Access the Wazuh web interface with ``https://<wazuh-dashboard-ip>`` and your credentials:
+#.  Access the Wazuh web interface with ``https://<WAZUH_DASHBOARD_IP_ADDRESS>`` and your credentials:
 
     -   Username: admin
     -   Password: <ADMIN_PASSWORD>

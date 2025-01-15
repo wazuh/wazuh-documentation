@@ -78,7 +78,7 @@ To achieve this configuration, follow these steps:
 
       .. code-block::
 
-         WAZUH_MANAGER_IP=<NGINX_IP> WAZUH_PROTOCOL="tcp" \
+         WAZUH_MANAGER_IP=<NGINX_IP_ADDRESS> WAZUH_PROTOCOL="tcp" \
          WAZUH_PASSWORD="<PASSWORD>" \
          yum install wazuh-agent|WAZUH_AGENT_RPM_PKG_INSTALL|
          
@@ -93,7 +93,7 @@ In case your agents are located in AWS, you can access our Wazuh Cloud service s
    
 2. Go to the **Help** section to contact the Wazuh team requesting your VPC endpoint service name. It has this format:
 
-   ``com.amazonaws.vpce.<region>.vpce-svc-<aws-service-id>``
+   ``com.amazonaws.vpce.<REGION>.vpce-svc-<AWS_SERVICE_ID>``
 
 3. Select your endpoints in AWS:
    
@@ -107,7 +107,7 @@ In case your agents are located in AWS, you can access our Wazuh Cloud service s
 
 5. After the endpoint is created, Wazuh approves the connection and sends a notification when it is ready to use.
 
-6. You can now enroll your Wazuh agent but replace the *WAZUH_MANAGER_IP* value with the endpoint's DNS (``vpce-<aws-endpoint-id>.vpce-svc-<aws-service-id>.<region>.vpce.amazonaws.com``).
+6. You can now enroll your Wazuh agent but replace the *WAZUH_MANAGER_IP* value with the endpoint's DNS (``vpce-<AWS_ENDPOINT_ID>.vpce-svc-<AWS_SERVICE_ID>.<REGION>.vpce.amazonaws.com``).
 
    If the agents are located in a different region than your endpoint, use VPC Peerings to connect them to the endpoint service.
 
@@ -115,7 +115,7 @@ In case your agents are located in AWS, you can access our Wazuh Cloud service s
 
    .. code-block::
 
-      WAZUH_MANAGER_IP=vpce-<aws-endpoint-id>.vpce-svc-<aws-service-id>.<region>.vpce.amazonaws.com WAZUH_PROTOCOL="tcp" \
+      WAZUH_MANAGER_IP=vpce-<AWS_ENDPOINT_ID>.vpce-svc-<AWS_SERVICE_ID>.<REGION>.vpce.amazonaws.com WAZUH_PROTOCOL="tcp" \
       WAZUH_PASSWORD="<PASSWORD>>" \
       yum install wazuh-agent|WAZUH_AGENT_RPM_PKG_INSTALL|
 

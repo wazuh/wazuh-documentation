@@ -111,14 +111,14 @@ Follow these steps to enroll a Linux/Unix endpoint with password authentication:
         <authorization_pass_path><PATH_TO_PASSWORD_FILE></authorization_pass_path>
       </enrollment>
 
-#. Add the Wazuh manager IP address or FQDN (Fully Qualified Domain Name) in the ``<client><server><address>`` section of the Wazuh agent configuration file ``/var/ossec/etc/ossec.conf``. Replace ``<WAZUH_MANAGER_IP>`` with the Wazuh manager IP address or FQDN:
+#. Add the Wazuh manager IP address or FQDN (Fully Qualified Domain Name) in the ``<client><server><address>`` section of the Wazuh agent configuration file ``/var/ossec/etc/ossec.conf``. Replace ``<WAZUH_MANAGER_IP_ADDRESS>`` with the Wazuh manager IP address or FQDN:
 
       .. code-block:: xml
          :emphasize-lines: 3
 
          <client>
             <server>
-               <address><WAZUH_MANAGER_IP></address>
+               <address><WAZUH_MANAGER_IP_ADDRESS></address>
             ...
             </server>
          </client>
@@ -173,14 +173,14 @@ The Wazuh agent installation directory depends on the host's architecture.
         <authorization_pass_path><PATH_TO_PASSWORD_FILE></authorization_pass_path>
       </enrollment>
 
-#. Add the Wazuh manager IP address or FQDN (Fully Qualified Domain Name) in the ``<client><server><address>`` section of the agent configuration file in ``C:\Program Files (x86)\ossec-agent\ossec.conf``. Replace ``<WAZUH_MANAGER_IP>`` with the IP address or FQDN of the Wazuh manager.
+#. Add the Wazuh manager IP address or FQDN (Fully Qualified Domain Name) in the ``<client><server><address>`` section of the agent configuration file in ``C:\Program Files (x86)\ossec-agent\ossec.conf``. Replace ``<WAZUH_MANAGER_IP_ADDRESS>`` with the IP address or FQDN of the Wazuh manager.
 
    .. code-block:: xml
       :emphasize-lines: 3
 
       <client>
          <server>
-             <address><WAZUH_MANAGER_IP></address>
+             <address><WAZUH_MANAGER_IP_ADDRESS></address>
             ...
          </server>
       </client>
@@ -244,14 +244,14 @@ Follow the steps below  to enroll a macOS endpoint with password authentication:
         <authorization_pass_path><PATH_TO_PASSWORD_FILE></authorization_pass_path>
       </enrollment>
 
-#. Add the Wazuh manager IP address or FQDN (Fully Qualified Domain Name) to the agent configuration file in ``/Library/Ossec/etc/ossec.conf``. Replace ``<WAZUH_MANAGER_IP>`` with the IP address or FQDN of the Wazuh manager.
+#. Add the Wazuh manager IP address or FQDN (Fully Qualified Domain Name) to the agent configuration file in ``/Library/Ossec/etc/ossec.conf``. Replace ``<WAZUH_MANAGER_IP_ADDRESS>`` with the IP address or FQDN of the Wazuh manager.
 
    .. code-block:: xml
       :emphasize-lines: 3
 
       <client>
         <server>
-          <address><WAZUH_MANAGER_IP></address>
+          <address><WAZUH_MANAGER_IP_ADDRESS></address>
           ...
         </server>
       </client>
