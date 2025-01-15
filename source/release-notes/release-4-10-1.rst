@@ -13,10 +13,22 @@ What's new
 
 This release includes new features or enhancements as the following:
 
+Wazuh dashboard
+^^^^^^^^^^^^^^^
+
+-  `#7233 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7233>`__ Added comma separators to numbers.
+-  `#7226 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7226>`__ Moved the ability to manage the visibility of fields in **Events** and **Vulnerability Detection** > **Inventory** tables from the **Columns** button to a new **Available fields** button, enhancing the performance of the view.
+-  `#7226 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7226>`__ Changed the color of the **Export formatted** button in data grid tables to match the color of the rest of the table buttons.
+
 Resolved issues
 ---------------
 
 This release resolves known issues as the following:
+
+Wazuh manager
+^^^^^^^^^^^^^
+
+-  `#27502 <https://github.com/wazuh/wazuh/pull/27502>`__ Handled HTTP ``413`` response code in the Indexer connector.
 
 Changelogs
 ----------
