@@ -14,7 +14,7 @@ The pattern should be enclosed in single quotes to help prevent any unintended i
 
 The syntax for wazuh-regex is as follows:
 
-``/var/ossec/bin/wazuh-regex '<pattern>'``
+``/var/ossec/bin/wazuh-regex '<PATTERN>'``
 
 It then reads strings from stdin and outputs matches to stdout.
 

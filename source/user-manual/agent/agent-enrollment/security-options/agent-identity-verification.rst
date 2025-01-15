@@ -51,7 +51,7 @@ Wazuh server configuration
 
       .. code-block:: console
 
-         # openssl req -new -nodes -newkey rsa:4096 -keyout sslagent.key -out sslagent.csr -subj '/C=US/CN=<agent_IP>'
+         # openssl req -new -nodes -newkey rsa:4096 -keyout sslagent.key -out sslagent.csr -subj '/C=US/CN=<AGENT_IP_ADDRESS>'
 
    Where:
 
@@ -107,7 +107,7 @@ Follow these steps to enroll a Linux/Unix endpoint by using certificates for age
 
       <client>
          <server>
-            <address><WAZUH_MANAGER_IP></address>
+            <address><WAZUH_MANAGER_IP_ADDRESS></address>
          </server>
          <enrollment>
             <agent_certificate_path>/<PATH_TO>/sslagent.cert</agent_certificate_path>
@@ -151,7 +151,7 @@ The Wazuh agent installation directory depends on the architecture of the host.
 
       <client>
          <server>
-            <address>WAZUH_MANAGER_IP</address>
+            <address><WAZUH_MANAGER_IP_ADDRESS></address>
          </server>
          <enrollment>
             <agent_certificate_path>/<PATH_TO>/sslagent.cert</agent_certificate_path>
@@ -202,7 +202,7 @@ Follow these steps to enroll a macOS endpoint by using certificates for Wazuh ag
 
       <client>
          <server>
-            <address><WAZUH_MANAGER_IP></address>
+            <address><WAZUH_MANAGER_IP_ADDRESS></address>
          </server>
          <enrollment>
             <agent_certificate_path>/<PATH_TO>/sslagent.cert</agent_certificate_path>

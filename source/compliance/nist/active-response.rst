@@ -53,16 +53,16 @@ Ubuntu endpoint
 
    .. code-block:: console
        
-      # useradd <user1>
-      # useradd <user2>
+      # useradd <USER1>
+      # useradd <USER2>
 
-   In our use case, ``<user1>`` is ``kon``, while ``<user2>`` is ``jon``.
+   In our use case, ``<USER1>`` is ``kon``, while ``<USER2>`` is ``jon``.
 
-#. Attempt to log in with the wrong credentials to the ``<user2>`` account using ``<user1>`` account:
+#. Attempt to log in with the wrong credentials to the ``<USER2>`` account using ``<USER1>`` account:
 
    .. code-block:: console
        
-      <user 1>:$ su <user2>
+      <USER1>:$ su <USER2>
 
    The image below shows the related alerts on the Wazuh dashboard:  
 
@@ -83,7 +83,7 @@ Ubuntu endpoint
 
    .. code-block:: console
        
-      # passwd --status <user2>
+      # passwd --status <USER2>
 
 
 

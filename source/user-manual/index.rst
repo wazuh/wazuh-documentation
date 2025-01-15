@@ -17,7 +17,7 @@ Welcome to the Wazuh user manual. Use it as your reference library once your bas
       wazuh-server-cluster
       api/index
       wazuh-indexer/index
-      wazuh-indexer-cluster
+      wazuh-indexer-cluster/index
       wazuh-dashboard/index
       agent/index
       ruleset/index
