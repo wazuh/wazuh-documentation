@@ -60,30 +60,30 @@ The Wazuh central components require a 64-bit Intel or AMD Linux processor (x86_
 Installing Wazuh
 ----------------
 
-#.  Download and run the Wazuh installation assistant.
+#. Download and run the Wazuh installation assistant.
 
-    .. code-block:: console
+   .. code-block:: console
 
-        $ curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-install.sh && sudo bash ./wazuh-install.sh -a
+      $ curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-install.sh && sudo bash ./wazuh-install.sh -a
 
 
-    Once the assistant finishes the installation, the output shows the access credentials and a message that confirms that the installation was successful.
+   Once the assistant finishes the installation, the output shows the access credentials and a message that confirms that the installation was successful.
 
-    .. code-block:: none
-        :emphasize-lines: 4
+   .. code-block:: none
+      :emphasize-lines: 4
 
-        INFO: --- Summary ---
-        INFO: You can access the web interface https://<WAZUH_DASHBOARD_IP_ADDRESS>
-            User: admin
-            Password: <ADMIN_PASSWORD>
-        INFO: Installation finished.
+      INFO: --- Summary ---
+      INFO: You can access the web interface https://<WAZUH_DASHBOARD_IP_ADDRESS>
+          User: admin
+          Password: <ADMIN_PASSWORD>
+      INFO: Installation finished.
 
-    You now have installed and configured Wazuh.
+   You now have installed and configured Wazuh.
 
-#.  Access the Wazuh web interface with ``https://<WAZUH_DASHBOARD_IP_ADDRESS>`` and your credentials:
+#. Access the Wazuh web interface with ``https://<WAZUH_DASHBOARD_IP_ADDRESS>`` and your credentials:
 
-    -   Username: admin
-    -   Password: <ADMIN_PASSWORD>
+   -  **Username**: ``admin``
+   -  **Password**: ``<ADMIN_PASSWORD>``
 
 When you access the Wazuh dashboard for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. This is expected and the user has the option to accept the certificate as an exception or, alternatively, configure the system to use a certificate from a trusted authority.
 
