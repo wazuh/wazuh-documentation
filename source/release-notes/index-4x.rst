@@ -11,6 +11,7 @@ This section summarizes the most important features of each Wazuh 4.x release.
 =============================================  ====================
 Wazuh version                                  Release date
 =============================================  ====================
+:doc:`4.10.1 </release-notes/release-4-10-1>`  16 January 2025
 :doc:`4.10.0 </release-notes/release-4-10-0>`  9 January 2025
 :doc:`4.9.2 </release-notes/release-4-9-2>`    4 November 2024
 :doc:`4.9.1 </release-notes/release-4-9-1>`    17 October 2024
@@ -73,6 +74,7 @@ Wazuh version                                  Release date
 
    .. toctree::
 
+      4.10.1 Release notes <release-4-10-1>
       4.10.0 Release notes <release-4-10-0>
       4.9.2 Release notes <release-4-9-2>
       4.9.1 Release notes <release-4-9-1>
