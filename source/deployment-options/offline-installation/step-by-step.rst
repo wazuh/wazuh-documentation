@@ -433,11 +433,11 @@ Installing the Wazuh dashboard
 
     .. include:: /_templates/installations/wazuh/common/check_wazuh_dashboard.rst
 
-#.  Access the web interface.
+#.  Access the Wazuh web interface.
 
-    -   URL: *https://<WAZUH_DASHBOARD_IP_ADDRESS>*
-    -   **Username**: admin
-    -   **Password**: admin
+    -  **URL**: ``https://<WAZUH_DASHBOARD_IP_ADDRESS>``
+    -  **Username**: ``admin``
+    -  **Password**: ``admin``
 
 Upon the first access to the Wazuh dashboard, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or, for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser. Alternatively, a certificate from a trusted authority can be configured.
 
