@@ -120,6 +120,27 @@ Starting the Wazuh dashboard service
 
    When you access the Wazuh dashboard for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser. For increased security, the ``root-ca.pem``  file previously generated can be imported to the certificate manager of the browser. Alternatively, a certificate from a trusted authority can be configured.
 
+-  **Recommended Action**: Disable Wazuh Updates.
+
+   We recommend disabling the Wazuh package repositories after installation to prevent accidental upgrades that could break the environment.
+
+   Execute the following command to disable the Wazuh repository:
+
+   .. tabs::
+
+      .. group-tab:: YUM
+
+         .. code-block:: console
+
+            # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
+
+      .. group-tab:: APT (Debian/Ubuntu)
+
+         .. code-block:: console
+
+            # sed -i "s/^deb /#deb /" /etc/apt/sources.list.d/wazuh.list
+            # apt update
+
 Securing your Wazuh installation
 --------------------------------
 
