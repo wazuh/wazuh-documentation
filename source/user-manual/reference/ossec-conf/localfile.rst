@@ -439,7 +439,7 @@ The list of available parameters is:
 +------------------------+-----------------------------------------------------------------------+
 | ``timestamp``          | Current timestamp (when the log is sent), in RFC3164 format.          |
 +------------------------+-----------------------------------------------------------------------+
-| ``timestamp <format>`` | Custom timestamp, in ``strftime`` string format.                      |
+| ``timestamp <FORMAT>`` | Custom timestamp, in ``strftime`` string format.                      |
 +------------------------+-----------------------------------------------------------------------+
 | ``hostname``           | System's host name.                                                   |
 +------------------------+-----------------------------------------------------------------------+

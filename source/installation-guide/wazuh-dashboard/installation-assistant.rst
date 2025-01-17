@@ -27,7 +27,7 @@ Wazuh dashboard installation
 
       # bash wazuh-install.sh --wazuh-dashboard dashboard
 
-   The default Wazuh web user interface port is 443, used by the Wazuh dashboard. You can change this port using the optional parameter ``-p|--port <port_number>``. Some recommended ports are 8443, 8444, 8080, 8888, and 9000.
+   The default Wazuh web user interface port is 443, used by the Wazuh dashboard. You can change this port using the optional parameter ``-p|--port <PORT_NUMBER>``. Some recommended ports are 8443, 8444, 8080, 8888, and 9000.
 
    Once the Wazuh installation is completed, the output shows the access credentials and a message that confirms that the installation was successful.
 
@@ -35,7 +35,7 @@ Wazuh dashboard installation
       :emphasize-lines: 3,4          
     
       INFO: --- Summary ---
-      INFO: You can access the web interface https://<wazuh-dashboard-ip>
+      INFO: You can access the web interface https://<WAZUH_DASHBOARD_IP_ADDRESS>
          User: admin
          Password: <ADMIN_PASSWORD>
 
@@ -49,9 +49,9 @@ Wazuh dashboard installation
 
 #. Access the Wazuh web interface with your credentials. 
 
-   -  URL: *https://<wazuh-dashboard-ip>*
-   -  **Username**: *admin*
-   -  **Password**: *<ADMIN_PASSWORD>*
+   -  **URL**: ``https://<WAZUH_DASHBOARD_IP_ADDRESS>``
+   -  **Username**: ``admin``
+   -  **Password**: ``<ADMIN_PASSWORD>``
 
    When you access the Wazuh dashboard for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser. For increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser instead. Alternatively, a certificate from a trusted authority can be configured. 
 

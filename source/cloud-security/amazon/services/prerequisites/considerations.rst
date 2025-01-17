@@ -38,7 +38,7 @@ In the ``/var/ossec/etc/ossec.conf`` file of the Wazuh server or agent, the conf
      <skip_on_error>yes</skip_on_error>
      <!-- CloudTrail, two regions, path, account_id, organization_id and logs after January 2018 -->
      <bucket type="cloudtrail">
-       <name>WAZUH_AWS_BUCKET</name>
+       <name><WAZUH_AWS_BUCKET></name>
        <aws_profile>default</aws_profile>
        <aws_account_id>123456789012</aws_account_id>
        <regions>us-east-1,us-east-2</regions>

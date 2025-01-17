@@ -49,7 +49,7 @@ By default, the Wazuh Cloud CLI reads the credential information from a local fi
 
 A non-default location can be specified for the config file by setting the `WAZUH_CLOUD_CREDENTIALS_FILE` environment variable to another local path.
 
-1. Create the credentials file and add your :ref:`API key <cloud_apis_auth>`.
+1. Create the credentials file and add your :ref:`API key <CLOUD_APIS_AUTH>`.
 
   ``~/.wazuh-cloud/credentials``
 
@@ -65,7 +65,7 @@ A non-default location can be specified for the config file by setting the `WAZU
 
   .. code-block:: console
 
-    # wcloud-cli test-credentials --profile <profile-name>
+    # wcloud-cli test-credentials --profile <PROFILE_NAME>
 
   .. code-block:: none
     :class: output

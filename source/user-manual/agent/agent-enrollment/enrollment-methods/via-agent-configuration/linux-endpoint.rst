@@ -17,7 +17,7 @@ Follow the steps below to configure a Linux/Unix endpoint for enrollment via the
 
          <client>
            <server>
-             <address><WAZUH_MANAGER_IP></address>
+             <address><WAZUH_MANAGER_IP_ADDRESS></address>
              ...
            </server>
          </client>

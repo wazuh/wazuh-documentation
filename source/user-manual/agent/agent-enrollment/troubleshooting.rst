@@ -35,27 +35,27 @@ The following default ports on the Wazuh manager should be opened:
 -  1515/TCP for enrollment via agent configuration.
 -  55000/TCP for enrollment via Wazuh server API.
 
-On Linux and macOS systems (with netcat installed), open a terminal and run the following command. Replace ``<WAZUH_MANAGER_IP>`` with your Wazuh manager IP address or FQDN (Fully Qualified Domain Name).
+On Linux and macOS systems (with netcat installed), open a terminal and run the following command. Replace ``<WAZUH_MANAGER_IP_ADDRESS>`` with your Wazuh manager IP address or FQDN (Fully Qualified Domain Name).
 
 .. code-block:: console
 
-   # nc -zv <WAZUH_MANAGER_IP> 1514 1515 55000
+   # nc -zv <WAZUH_MANAGER_IP_ADDRESS> 1514 1515 55000
 
 If there is connectivity, the output should be a connection success message:
 
 .. code-block:: none
 
-   Connection to <WAZUH_MANAGER_IP> port 1514 [tcp] succeeded!
-   Connection to <WAZUH_MANAGER_IP> port 1515 [tcp] succeeded!
-   Connection to <WAZUH_MANAGER_IP> port 55000 [tcp] succeeded!
+   Connection to <WAZUH_MANAGER_IP_ADDRESS> port 1514 [tcp] succeeded!
+   Connection to <WAZUH_MANAGER_IP_ADDRESS> port 1515 [tcp] succeeded!
+   Connection to <WAZUH_MANAGER_IP_ADDRESS> port 55000 [tcp] succeeded!
 
 On Windows, open a PowerShell terminal and run the following command:
 
 .. code-block:: pwsh-session
 
-   # (new-object Net.Sockets.TcpClient).Connect("<WAZUH_MANAGER_IP>", 1514)
-   # (new-object Net.Sockets.TcpClient).Connect("<WAZUH_MANAGER_IP>", 1515)
-   # (new-object Net.Sockets.TcpClient).Connect("<WAZUH_MANAGER_IP>", 55000)
+   # (new-object Net.Sockets.TcpClient).Connect("<WAZUH_MANAGER_IP_ADDRESS>", 1514)
+   # (new-object Net.Sockets.TcpClient).Connect("<WAZUH_MANAGER_IP_ADDRESS>", 1515)
+   # (new-object Net.Sockets.TcpClient).Connect("<WAZUH_MANAGER_IP_ADDRESS>", 55000)
 
 If there is connectivity, there is no output. Otherwise, an error is shown:
 
