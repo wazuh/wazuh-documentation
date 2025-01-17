@@ -54,11 +54,11 @@ Testing the cluster installation
 
       # tar -axf wazuh-install-files.tar wazuh-install-files/wazuh-passwords.txt -O | grep -P "\'admin\'" -A 1
 
-#. Run the following command to confirm that the installation is successful. Replace ``<ADMIN_PASSWORD>`` with the password gotten from the output of the previous command. Replace ``<WAZUH_INDEXER_IP>`` with the configured Wazuh indexer IP address:
+#. Run the following command to confirm that the installation is successful. Replace ``<ADMIN_PASSWORD>`` with the password gotten from the output of the previous command. Replace ``<WAZUH_INDEXER_IP_ADDRESS>`` with the configured Wazuh indexer IP address:
 
    .. code-block:: console
 
-      # curl -k -u admin:<ADMIN_PASSWORD> https://<WAZUH_INDEXER_IP>:9200
+      # curl -k -u admin:<ADMIN_PASSWORD> https://<WAZUH_INDEXER_IP_ADDRESS>:9200
 
    .. code-block:: none
       :class: output
@@ -80,11 +80,11 @@ Testing the cluster installation
         "tagline" : "The OpenSearch Project: https://opensearch.org/"
       }
 
-#. Replace ``<WAZUH_INDEXER_IP>`` and ``<ADMIN_PASSWORD>``, and run the following command to check if the cluster is working correctly:
+#. Replace ``<WAZUH_INDEXER_IP_ADDRESS>`` and ``<ADMIN_PASSWORD>``, and run the following command to check if the cluster is working correctly:
 
    .. code-block:: console
 
-      # curl -k -u admin:<ADMIN_PASSWORD> https://<WAZUH_INDEXER_IP>:9200/_cat/nodes?v
+      # curl -k -u admin:<ADMIN_PASSWORD> https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cat/nodes?v
 
 Installing the Wazuh server
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -141,7 +141,7 @@ Installing the Wazuh dashboard
 
       # bash wazuh-install.sh --offline-installation --wazuh-dashboard dashboard
 
-   The default Wazuh web user interface port is 443, used by the Wazuh dashboard. You can change this port using the optional parameter ``-p|--port <port_number>``. Some recommended ports are 8443, 8444, 8080, 8888, and 9000.
+   The default Wazuh web user interface port is 443, used by the Wazuh dashboard. You can change this port using the optional parameter ``-p|--port <PORT_NUMBER>``. Some recommended ports are 8443, 8444, 8080, 8888, and 9000.
 
    Once the assistant finishes the installation, the output shows the access credentials and a message that confirms that the installation was successful.
 
@@ -149,7 +149,7 @@ Installing the Wazuh dashboard
       :emphasize-lines: 3,4
 
       INFO: --- Summary ---
-      INFO: You can access the web interface https://<wazuh-dashboard-ip>
+      INFO: You can access the web interface https://<WAZUH_DASHBOARD_IP_ADDRESS>
          User: admin
          Password: <ADMIN_PASSWORD>
 
@@ -163,8 +163,8 @@ Installing the Wazuh dashboard
 
 #. Access the Wazuh web interface with your credentials.
 
-   -  URL: *https://<wazuh-dashboard-ip>*
-   -  **Username**: *admin*
-   -  **Password**: *<ADMIN_PASSWORD>*
+   -  **URL**: ``https://<WAZUH_DASHBOARD_IP_ADDRESS>``
+   -  **Username**: ``admin``
+   -  **Password**: ``<ADMIN_PASSWORD>``
 
    When you access the Wazuh dashboard for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser. For increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser instead. Alternatively, a certificate from a trusted authority can be configured.

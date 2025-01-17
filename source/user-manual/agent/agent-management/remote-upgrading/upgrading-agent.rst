@@ -75,11 +75,11 @@ To upgrade agents using the command line, use the :doc:`/var/ossec/bin/agent_upg
 Using the RESTful API
 ----------------------
 
-#. List all outdated agents using endpoint :api-ref:`GET /agents/outdated <operation/api.controllers.agent_controller.get_agent_outdated>`. Replace ``<WAZUH_MANAGER_IP>`` with the IP address or FQDN of the Wazuh server:
+#. List all outdated agents using endpoint :api-ref:`GET /agents/outdated <operation/api.controllers.agent_controller.get_agent_outdated>`. Replace ``<WAZUH_MANAGER_IP_ADDRESS>`` with the IP address or FQDN of the Wazuh server:
 
    .. code-block:: console
 
-      # curl -k -X GET "https://<WAZUH_MANAGER_IP>:55000/agents/outdated?pretty=true" -H  "Authorization: Bearer $TOKEN"
+      # curl -k -X GET "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/agents/outdated?pretty=true" -H  "Authorization: Bearer $TOKEN"
 
    .. code-block:: none
       :class: output
@@ -99,11 +99,11 @@ Using the RESTful API
       	"error": 0,
       }
 
-#. Upgrade the Wazuh agent using endpoint :api-ref:`PUT /agents/upgrade <operation/api.controllers.agent_controller.put_upgrade_agents>` (here, we upgrade agents with ID *002* and *003*). Replace ``<WAZUH_MANAGER_IP>`` with the IP address or FQDN of the Wazuh server:
+#. Upgrade the Wazuh agent using endpoint :api-ref:`PUT /agents/upgrade <operation/api.controllers.agent_controller.put_upgrade_agents>` (here, we upgrade agents with ID *002* and *003*). Replace ``<WAZUH_MANAGER_IP_ADDRESS>`` with the IP address or FQDN of the Wazuh server:
 
    .. code-block:: console
 
-      # curl -k -X PUT "https://<WAZUH_MANAGER_IP>:55000/agents/upgrade?agents_list=002,003&pretty=true" -H  "Authorization: Bearer $TOKEN"
+      # curl -k -X PUT "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/agents/upgrade?agents_list=002,003&pretty=true" -H  "Authorization: Bearer $TOKEN"
 
    .. code-block:: none
       :class: output
@@ -134,11 +134,11 @@ Using the RESTful API
 
    This recommendation is based on testing with a Wazuh manager on a server with a 2.5 GHz AMD EPYC 7000 series processor and 4 GiB memory. Using an agent list with 3000 agents or fewer on a system with similar or better specifications guarantees a response before the API timeout occurs.
 
-#. Check the upgrade results using endpoint :api-ref:`GET /agents/upgrade_result <operation/api.controllers.agent_controller.get_agent_upgrade>`. Replace ``<WAZUH_MANAGER_IP>`` with the IP address or FQDN of the Wazuh server:
+#. Check the upgrade results using endpoint :api-ref:`GET /agents/upgrade_result <operation/api.controllers.agent_controller.get_agent_upgrade>`. Replace ``<WAZUH_MANAGER_IP_ADDRESS>`` with the IP address or FQDN of the Wazuh server:
 
    .. code-block:: console
 
-      # curl -k -X GET "https://<WAZUH_MANAGER_IP>:55000/agents/upgrade_result?agents_list=002,003&pretty=true" -H  "Authorization: Bearer $TOKEN"
+      # curl -k -X GET "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/agents/upgrade_result?agents_list=002,003&pretty=true" -H  "Authorization: Bearer $TOKEN"
 
    .. code-block:: none
       :class: output
@@ -181,7 +181,7 @@ Using the RESTful API
 
    .. code-block:: console
 
-      # curl -k -X GET "https://<WAZUH_MANAGER_IP>:55000/agents?agents_list=002,003&pretty=true&select=version" -H  "Authorization: Bearer $TOKEN"
+      # curl -k -X GET "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/agents?agents_list=002,003&pretty=true&select=version" -H  "Authorization: Bearer $TOKEN"
 
    .. code-block:: json
       :class: output
