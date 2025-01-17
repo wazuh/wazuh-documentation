@@ -73,7 +73,7 @@ Check the supported operating systems and the recommended hardware requirements 
 Recommended operating systems
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Wazuh can be installed on a 64-bit Linux operating system. Wazuh supports the following operating system versions:
+The Wazuh indexer requires a 64-bit Intel or AMD Linux processor (x86_64/AMD64 architecture) to run. Wazuh supports the following operating system versions:
 
 .. list-table::
    :width: 100%

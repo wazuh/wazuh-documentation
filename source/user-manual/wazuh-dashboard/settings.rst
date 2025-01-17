@@ -70,10 +70,10 @@ Defines the list of APIs to connect with your Wazuh managers.
 
    hosts:
        - <host_id/host_name>:
-           url: http(s)://<WAZUH_MANAGER_IP>
-           port: <port>
-           username: <username>
-           password: <password>
+           url: http(s)://<WAZUH_MANAGER_IP_ADDRESS>
+           port: <PORT>
+           username: <USERNAME>
+           password: <PASSWORD>
 
 .. note::
 
