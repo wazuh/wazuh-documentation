@@ -3,7 +3,7 @@
    :description: Wazuh 4.10.2 has been released. Check out our release notes to discover the changes and additions of this release.
 
 4.10.2 Release notes - TBD
-=========================
+==========================
 
 This section lists the changes in version 4.10.2. Every update of the Wazuh solution is cumulative and includes all enhancements and fixes from previous releases.
 
