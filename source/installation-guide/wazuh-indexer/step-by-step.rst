@@ -164,26 +164,7 @@ Starting the service
     
 Repeat this stage of the installation process for every Wazuh indexer node in your cluster. Then proceed with initializing your single-node or multi-node cluster in the next stage.
 
--  **Recommended Action**: Disable Wazuh Updates.
-
-   We recommend disabling the Wazuh package repositories after installation to prevent accidental upgrades that could break the environment.
-
-   Execute the following command to disable the Wazuh repository:
-
-   .. tabs::
-
-      .. group-tab:: YUM
-
-         .. code-block:: console
-
-            # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
-
-      .. group-tab:: APT (Debian/Ubuntu)
-
-         .. code-block:: console
-
-            # sed -i "s/^deb /#deb /" /etc/apt/sources.list.d/wazuh.list
-            # apt update
+.. include:: /_templates/installations/disable-wazuh-updates.rst
 
 3. Cluster initialization
 -------------------------

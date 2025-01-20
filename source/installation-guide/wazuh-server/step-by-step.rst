@@ -212,26 +212,7 @@ Starting the Filebeat service
 
 Your Wazuh server node is now successfully installed. Repeat this stage of the installation process for every Wazuh server node in your Wazuh cluster, then proceed with configuring the Wazuh cluster. If you want a Wazuh server single-node cluster, everything is set and you can proceed directly with :doc:`../wazuh-dashboard/step-by-step`.
 
--  **Recommended Action**: Disable Wazuh Updates.
-
-   We recommend disabling the Wazuh package repositories after installation to prevent accidental upgrades that could break the environment.
-
-   Execute the following command to disable the Wazuh repository:
-
-   .. tabs::
-
-      .. group-tab:: YUM
-
-         .. code-block:: console
-
-            # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
-
-      .. group-tab:: APT (Debian/Ubuntu)
-
-         .. code-block:: console
-
-            # sed -i "s/^deb /#deb /" /etc/apt/sources.list.d/wazuh.list
-            # apt update
+.. include:: /_templates/installations/disable-wazuh-updates.rst
 
 2. Cluster configuration for multi-node deployment
 --------------------------------------------------
