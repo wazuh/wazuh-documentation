@@ -16,6 +16,10 @@ All notable changes to this project will be documented in this file.
 
 - Removed note about plugins and upgrading Wazuh central components. ([#8020](https://github.com/wazuh/wazuh-documentation/pull/8020))
 
+# [v4.10.2]
+
+- Support for Wazuh 4.10.2
+
 # [v4.10.1]
 
 - Support for Wazuh 4.10.1
