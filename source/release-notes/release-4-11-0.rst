@@ -41,7 +41,7 @@ Wazuh manager
 RESTful API
 ^^^^^^^^^^^
 
--  `#24621 <https://github.com/wazuh/wazuh/pull/24621>`__ Added the ``security:revoke`` action to the ``PUT /security/user/revoke`` endpoint.
+-  `#26255 <https://github.com/wazuh/wazuh/pull/26255>`__ Added the ``security:revoke`` action to the ``PUT /security/user/revoke`` endpoint.
 
 Changelogs
 ----------
