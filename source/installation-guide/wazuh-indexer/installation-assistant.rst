@@ -156,6 +156,8 @@ Testing the cluster installation
 
       # curl -k -u admin:<ADMIN_PASSWORD> https://<WAZUH_INDEXER_IP>:9200/_cat/nodes?v
 
+.. include:: /_templates/installations/disable-wazuh-updates.rst
+
 Next steps
 ----------
 
