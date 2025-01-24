@@ -98,6 +98,8 @@ When you access the Wazuh dashboard for the first time, the browser shows a warn
 
 If you want to uninstall the Wazuh central components, run the Wazuh installation assistant using the option ``-u`` or ``–-uninstall``.
 
+.. include:: /_templates/installations/disable-wazuh-updates.rst
+
 Next steps
 ----------
 
