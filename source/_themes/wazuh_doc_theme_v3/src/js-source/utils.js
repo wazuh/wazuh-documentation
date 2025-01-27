@@ -41,14 +41,14 @@ if ( typeof(versions) === 'undefined' ) {
       if ($(this).closest('.dropdown').hasClass('show')
         && toElement !== $(this).siblings()[0]) {
         e.stopPropagation();
-        $(this).trigger('click');
+        $(this).trigger('click').trigger('blur');
       }
     });
     $('.navbar-nav .dropdown-menu').on('mouseleave', function(e) {
       let toElement = e.toElement || e.relatedTarget;
       if ($(this).closest('.dropdown').hasClass('show')
         && toElement !== $(this).siblings()[0]) {
-        $(this).siblings().trigger('click');
+        $(this).siblings().trigger('click').trigger('blur');
       }
     });
   }
