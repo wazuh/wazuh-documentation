@@ -48,6 +48,8 @@ Certificates & secrets
 
       Ensure you write down the secret's value section because the UI won't let you copy it afterward.
 
+.. _permissions-ms-graph-api-setup:
+
 API permissions
 ---------------
 

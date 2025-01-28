@@ -121,6 +121,7 @@ newUrls['4.10'] = [
   '/user-manual/wazuh-indexer-cluster/index-lifecycle-management.html',
   '/user-manual/wazuh-indexer-cluster/wazuh-indexer-cluster-tuning.html',
   '/user-manual/wazuh-indexer-cluster/cluster-management.html',
+  '/cloud-security/azure/ms-intune-integration.html',
 ]
 
 /* Pages no longer available in 4.10 */
