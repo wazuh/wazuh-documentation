@@ -104,6 +104,11 @@ redirections.push(
     '4.9': '/user-manual/wazuh-indexer/wazuh-indexer-tuning.html#set-node-attributes-for-each-node-in-a-cluster',
     '4.10': '/user-manual/wazuh-indexer-cluster/wazuh-indexer-cluster-tuning.html#set-node-attributes-for-each-node-in-a-cluster',
   },
+  {
+    'target': ['4.9=>4.10', '4.10=>4.9'],
+    '4.9': '/user-manual/wazuh-server-cluster.html',
+    '4.10': '/user-manual/wazuh-server-cluster/index.html',
+  },
 );
 
 /* Pages added in 4.10 */
@@ -122,6 +127,14 @@ newUrls['4.10'] = [
   '/user-manual/wazuh-indexer-cluster/wazuh-indexer-cluster-tuning.html',
   '/user-manual/wazuh-indexer-cluster/cluster-management.html',
   '/cloud-security/azure/ms-intune-integration.html',
+  '/user-manual/wazuh-server-cluster/index.html',
+  '/user-manual/wazuh-server-cluster/architecture-overview.html',
+  '/user-manual/wazuh-server-cluster/types-of-nodes.html',
+  '/user-manual/wazuh-server-cluster/how-server-cluster-works.html',
+  '/user-manual/wazuh-server-cluster/cluster-nodes-configuration.html',
+  '/user-manual/wazuh-server-cluster/data-synchronization.html',
+  '/user-manual/wazuh-server-cluster/certificates-deployment.html',
+  '/user-manual/wazuh-server-cluster/adding-new-server-nodes.html',
 ]
 
 /* Pages no longer available in 4.10 */
@@ -129,6 +142,7 @@ newUrls['4.10'] = [
 removedUrls['4.10'] = [
   '/user-manual/wazuh-indexer-cluster.html',
   '/user-manual/wazuh-indexer/index-life-management.html',
+  '/user-manual/wazuh-server-cluster.html',
 ];
 
 /* *** RELEASE 4.9 ****/
