@@ -14,6 +14,6 @@ The following diagram shows a typical Wazuh server cluster architecture:
    :align: center
    :width: 80%
 
-In this architecture, there are multiple Wazuh server nodes within the cluster. The Wazuh server cluster consists of a master node and worker nodes. The Wazuh agents are configured to report to the server nodes in the cluster. This setup allows for horizontal scalability and enhances the performance of the Wazuh servers.
+In this architecture, there are multiple Wazuh server nodes within the cluster. The Wazuh server cluster consists of a :ref:`master node <server-cluster-master-node>` and :ref:`worker nodes <server-cluster-worker-node>`. The Wazuh agents are configured to report to the server nodes in the cluster. This setup allows for horizontal scalability and enhances the performance of the Wazuh servers.
 
 

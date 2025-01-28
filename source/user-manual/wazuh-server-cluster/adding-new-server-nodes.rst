@@ -14,7 +14,7 @@ We have organized the steps for upscaling the Wazuh server into two subsections:
 
 -  **All-in-one deployment**:
 
-   An all-in-one deployment refers to using our :ref:`Wazuh installation assistant <quickstart_installing_wazuh>` or the pre-built virtual machine image in Open Virtual Appliance (OVA) format provided by Wazuh. This deployment method installs all the Wazuh central components on a single server. If you have a Wazuh all-in-one configuration, follow the steps outlined in the "All-in-one deployment" subsections to upscale your Wazuh server cluster.
+   An all-in-one deployment refers to using the :ref:`Wazuh installation assistant <quickstart_installing_wazuh>` or the pre-built virtual machine image in Open Virtual Appliance (OVA) format provided by Wazuh. This deployment method installs all the Wazuh central components on a single endpoint. If you have a Wazuh all-in-one setup, follow the steps outlined in the "All-in-one deployment" subsections to upscale your Wazuh server cluster.
 
 -  **Distributed deployment**:
 
@@ -221,7 +221,7 @@ You can follow the steps below to generate fresh certificates if the pre-existin
 
    .. code-block:: console
 
-      # tar -cvf ./wazuh-certificates.tar -C ./wazuh-certificates/
+      # tar -cvf ./wazuh-certificates.tar -C ./wazuh-certificates/ .
       # scp wazuh-certificates.tar <TARGET_USERNAME>@<TARGET_IP_ADDRESS>:
 
    This command copies the certificates to the ``/home`` directory of the target user on the endpoint. You can modify the command to specify a path to your installation directory.
