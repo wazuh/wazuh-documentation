@@ -505,7 +505,29 @@ Configuration options might differ across versions. Follow these steps to ensure
 #. Manually reapply any settings changes to the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file.
 #. Restart the Wazuh dashboard:
 
-    .. include:: /_templates/installations/dashboard/enable_dashboard.rst
+   .. include:: /_templates/installations/dashboard/enable_dashboard.rst
+
+You can now access the Wazuh dashboard via:  
+``https://<DASHBOARD_IP_ADDRESS>/app/wz-home``.
+
+.. note::
+
+   Note that the upgrade process doesn't update plugins installed manually. Outdated plugins might cause the upgrade to fail.
+
+   - Run the following command on the Wazuh dashboard server to list installed plugins and identify those that require an update:
+
+      .. code-block:: console
+
+         # sudo -u wazuh-dashboard /usr/share/wazuh-dashboard/bin/opensearch-dashboards-plugin list
+
+      In the output, plugins that require an update will be labeled as "outdated."
+
+   - Remove the outdated plugins and reinstall the latest version replacing ``<PLUGIN_NAME>`` with the name of the plugin:
+
+      .. code-block:: console
+
+         # sudo -u wazuh-dashboard /usr/share/wazuh-dashboard/bin/opensearch-dashboards-plugin remove <PLUGIN_NAME>
+         # sudo -u wazuh-dashboard /usr/share/wazuh-dashboard/bin/opensearch-dashboards-plugin install <PLUGIN_NAME>
 
 Next steps
 ----------
