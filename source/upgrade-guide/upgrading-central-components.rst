@@ -291,7 +291,7 @@ Perform the following steps on any of the Wazuh indexer nodes replacing ``<WAZUH
 
         # /usr/share/wazuh-indexer/bin/opensearch-plugin list
 
-   In the output, plugins that require an update will be labeled as **"outdated."**
+   In the output, plugins that require an update will be labeled as **"outdated".**
 
    - Remove the outdated plugins and reinstall the latest version replacing ``<PLUGIN_NAME>`` with the name of the plugin:
 
@@ -525,7 +525,7 @@ You can now access the Wazuh dashboard via:
 
          # sudo -u wazuh-dashboard /usr/share/wazuh-dashboard/bin/opensearch-dashboards-plugin list
 
-      In the output, plugins that require an update will be labeled as "outdated."
+      In the output, plugins that require an update will be labeled as "outdated".
 
    - Remove the outdated plugins and reinstall the latest version replacing ``<PLUGIN_NAME>`` with the name of the plugin:
 
