@@ -473,15 +473,13 @@ When upgrading Wazuh, you must also update the Wazuh Filebeat module and the ale
 Upgrading the Wazuh dashboard
 -----------------------------
 
-.. note::
+Backup the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file to save your settings.  
+For example, create a copy of the file using the following command:
 
-   Note that this upgrade process doesn't update plugins installed manually. Outdated plugins might cause the upgrade to fail.
+.. code-block:: console
 
-   To ensure compatibility with the latest Wazuh indexer and Wazuh dashboard, please update manually installed plugins accordingly. For additional information, check the `distribution matrix <https://github.com/wazuh/wazuh-packages/tree/v|WAZUH_CURRENT|#distribution-version-matrix>`__.
+   # cp /etc/wazuh-dashboard/opensearch_dashboards.yml /etc/wazuh-dashboard/opensearch_dashboards.yml.old
 
-Configuration options might differ across versions. Follow these steps to ensure a smooth upgrade.
-
-#. Backup the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file to save your settings.
 #. Upgrade the Wazuh dashboard.
 
    .. tabs::
@@ -490,19 +488,26 @@ Configuration options might differ across versions. Follow these steps to ensure
 
          .. code-block:: console
 
-            # yum upgrade wazuh-dashboard|WAZUH_DASHBOARD_RPM_PKG_INSTALL|
+            # yum upgrade wazuh-dashboard
 
       .. group-tab:: APT
 
          .. code-block:: console
 
-            # apt-get install wazuh-dashboard|WAZUH_DASHBOARD_DEB_PKG_INSTALL|
+            # apt-get install wazuh-dashboard
 
-         .. note::
+      .. note::
 
-            When prompted, choose to replace the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file with the updated version.
+         When prompted, choose to replace the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file with the updated version.
 
-#. Manually reapply any settings changes to the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file.
+#. Manually reapply any configuration changes to the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file. Ensure that the values of ``server.ssl.key`` and ``server.ssl.certificate`` match the files located in ``/etc/wazuh-dashboard/certs/``.
+
+#. Ensure the value of ``uiSettings.overrides.defaultRoute`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file is set to ``/app/wz-home`` as shown below:
+
+   .. code-block:: yaml
+
+      uiSettings.overrides.defaultRoute: /app/wz-home
+
 #. Restart the Wazuh dashboard:
 
    .. include:: /_templates/installations/dashboard/enable_dashboard.rst
@@ -532,6 +537,25 @@ You can now access the Wazuh dashboard via:
 Next steps
 ----------
 
-The Wazuh server, indexer, and dashboard are now successfully upgraded. The next step consists in upgrading the Wazuh agents. Follow the instructions in:
+The Wazuh server, indexer, and dashboard are now successfully upgraded. You can verify the versions by running the following commands on the node(s) where the central components are installed:
 
--  :doc:`Upgrading the Wazuh agent </upgrade-guide/wazuh-agent/index>`.
+      .. tabs::
+   
+         .. group-tab:: Yum
+   
+            .. code-block:: console
+   
+               # yum list installed wazuh-indexer
+               # yum list installed wazuh-manager
+               # yum list installed wazuh-dashboard
+   
+         .. group-tab:: APT
+   
+            .. code-block:: console
+            
+               # apt list --installed wazuh-indexer
+               # apt list --installed wazuh-manager
+               # apt list --installed wazuh-dashboard
+
+   
+Next, upgrade the Wazuh agents by following the instructions in :doc:`Upgrading the Wazuh agent </upgrade-guide/wazuh-agent/index>`.
