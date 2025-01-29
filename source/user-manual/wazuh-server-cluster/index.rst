@@ -19,4 +19,6 @@ The Wazuh server cluster is made up of multiple Wazuh server nodes in a distribu
       cluster-nodes-configuration
       data-synchronization
       certificates-deployment
-      adding-new-server-nodes
+      adding-new-server-nodes/index
+      agent-connections
+      load-balancers

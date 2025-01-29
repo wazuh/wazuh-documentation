@@ -134,7 +134,13 @@ newUrls['4.10'] = [
   '/user-manual/wazuh-server-cluster/cluster-nodes-configuration.html',
   '/user-manual/wazuh-server-cluster/data-synchronization.html',
   '/user-manual/wazuh-server-cluster/certificates-deployment.html',
-  '/user-manual/wazuh-server-cluster/adding-new-server-nodes.html',
+  '/user-manual/wazuh-server-cluster/adding-new-server-nodes/index.html',
+  '/user-manual/wazuh-server-cluster/adding-new-server-nodes/certificates-creation.html',
+  '/user-manual/wazuh-server-cluster/adding-new-server-nodes/configuration-to-connect-with-new-node.html',
+  '/user-manual/wazuh-server-cluster/adding-new-server-nodes/server-nodes-installation.html',
+  '/user-manual/wazuh-server-cluster/adding-new-server-nodes/testing-the-cluster.html',
+  '/user-manual/wazuh-server-cluster/agent-connections.html',
+  '/user-manual/wazuh-server-cluster/load-balancers.html',
 ]
 
 /* Pages no longer available in 4.10 */
