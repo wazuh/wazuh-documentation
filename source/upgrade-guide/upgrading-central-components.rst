@@ -162,7 +162,7 @@ Perform the following steps on each Wazuh indexer node to upgrade them. Upgrade 
 
          .. code-block:: console
 
-            # apt-get install wazuh-indexer
+            # apt-get install wazuh-indexer|WAZUH_INDEXER_DEB_PKG_INSTALL|
 
 #. Restart the Wazuh indexer service.
 
