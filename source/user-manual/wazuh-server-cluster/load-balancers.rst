@@ -565,12 +565,12 @@ Perform the following steps to configure HAProxy to work with a Wazuh server clu
 .. _haproxy_helper_setup:
 
 HAProxy helper
---------------
+^^^^^^^^^^^^^^
 
 This is an optional tool to manage HAProxy configuration depending on the Wazuh server cluster status in real time. It provides the Wazuh manager with the ability to automatically balance the Wazuh agent TCP sessions.
 
 Key features of HAProxy helper
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Some of its key features are:
 
@@ -593,7 +593,7 @@ The HAProxy helper runs in an independent thread that initiates with the ``wazuh
    :width: 80%
 
 Enabling the HAProxy helper
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To use this feature, you need a :ref:`HAProxy <lb_haproxy>` instance balancing the Wazuh server cluster using the least connections algorithm.
 
@@ -602,7 +602,7 @@ To use this feature, you need a :ref:`HAProxy <lb_haproxy>` instance balancing t
    The recommended version of HAProxy is the 2.8 LTS.
 
 Dataplane API configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+...........................
 
 The HAProxy helper uses the Dataplane API to communicate with HAProxy and update the configuration according to the changes in the Wazuh server cluster.
 
