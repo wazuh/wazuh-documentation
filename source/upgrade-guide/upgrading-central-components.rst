@@ -470,8 +470,7 @@ For example, create a copy of the file using the following command:
 
    .. include:: /_templates/installations/dashboard/enable_dashboard.rst
 
-You can now access the Wazuh dashboard via:  
-``https://<DASHBOARD_IP_ADDRESS>/app/wz-home``.
+You can now access the Wazuh dashboard via:  ``https://<DASHBOARD_IP_ADDRESS>/app/wz-home``.
 
 .. note::
 
