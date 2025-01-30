@@ -445,7 +445,7 @@ Backup the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file to save your 
 
          .. code-block:: console
 
-            # yum upgrade wazuh-dashboard
+            # yum upgrade wazuh-dashboard|WAZUH_DASHBOARD_RPM_PKG_INSTALL|
 
       .. group-tab:: APT
 
