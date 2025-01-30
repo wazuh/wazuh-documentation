@@ -199,17 +199,17 @@ Perform the following steps on any of the Wazuh indexer nodes replacing ``<WAZUH
       :class: output
 
       {
-         "acknowledged" : true,
-         "persistent" : {
-            "cluster" : {
-               "routing" : {
-                  "allocation" : {
-                     "enable" : "all"
-                  }
-               }
+        "acknowledged" : true,
+        "persistent" : {
+          "cluster" : {
+            "routing" : {
+              "allocation" : {
+                "enable" : "all"
+              }
             }
-         },
-         "transient" : {}
+          }
+        },
+        "transient" : {}
       }
 
 #. Check the status of the Wazuh indexer cluster again to see if the shard allocation has finished.
