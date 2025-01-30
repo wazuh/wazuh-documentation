@@ -457,9 +457,9 @@ Backup the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file to save your 
 
             # apt-get install wazuh-dashboard|WAZUH_DASHBOARD_DEB_PKG_INSTALL|
 
-      .. note::
+         .. note::
 
-         When prompted, choose to replace the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file with the updated version.
+            When prompted, choose to replace the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file with the updated version.
 
 #. Manually reapply any configuration changes to the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file. Ensure that the values of ``server.ssl.key`` and ``server.ssl.certificate`` match the files located in ``/etc/wazuh-dashboard/certs/``.
 
