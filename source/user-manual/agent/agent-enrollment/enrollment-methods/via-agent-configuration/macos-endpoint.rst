@@ -26,7 +26,7 @@ Follow these steps to configure a macOS endpoint for enrollment via the Wazuh ag
 
       .. note::
 
-         If you have a multi-cluster Wazuh server installation, you can add multiple ``<client>`` sections that point to the worker nodes. Refer to :ref:`pointing agents to the cluster (Failover mode) <cluster_agent_connections>` for more information.
+         If you have a multi-cluster Wazuh server installation, you can add multiple ``<client>`` sections that point to the worker nodes. Refer to :doc:`pointing agents to the cluster (Failover mode) </user-manual/wazuh-server-cluster/agent-connections>` for more information.
 
    #. (Optional) Add enrollment parameters in the ``<client><enrollment>`` section.
 
