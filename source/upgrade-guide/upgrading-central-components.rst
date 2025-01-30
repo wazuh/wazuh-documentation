@@ -19,19 +19,14 @@ In case Wazuh is installed in a multi-node cluster configuration, repeat the fol
 #. Ensure you have added the Wazuh repository to every Wazuh indexer, server, and dashboard node before proceeding to perform the upgrade actions.
 
    .. tabs::
-   
-   
-        .. group-tab:: Yum
-   
-   
-          .. include:: /_templates/installations/common/yum/add-repository.rst
-   
-   
-   
-        .. group-tab:: APT
-   
-   
-          .. include:: /_templates/installations/common/deb/add-repository.rst
+
+      .. group-tab:: Yum
+
+         .. include:: /_templates/installations/common/yum/add-repository.rst
+
+      .. group-tab:: APT
+
+         .. include:: /_templates/installations/common/deb/add-repository.rst
 
 
 
