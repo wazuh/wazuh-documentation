@@ -8,9 +8,8 @@ Wazuh central components
 
 This section guides you through the upgrade process of the Wazuh indexer, the Wazuh server, and the Wazuh dashboard.
 
-- **All-in-one deployments:** Execute all commands and configuration actions on the same node since all components run on a single system.
-
-- **Multi-node cluster deployments:** Run commands and apply configurations on the respective node where the component being upgraded is located.
+-  **All-in-one deployments:** Execute all commands and configuration actions on the same node since all components run on a single system.
+-  **Multi-node cluster deployments:** Run commands and apply configurations on the respective node where the component being upgraded is located.
 
 Preparing the upgrade
 ---------------------
