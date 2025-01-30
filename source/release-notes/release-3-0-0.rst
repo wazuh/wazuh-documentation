@@ -57,7 +57,7 @@ The Wazuh cluster provides new capability to scale Wazuh horizontally by adding 
 
 The cluster architecture is master/client based, synchronizing internal configuration files (agent keys, groups configuration, agents configuration and agent statuses) between all clients nodes.  This allows agents to report to multiple managers (cluster nodes) which increases availability and fault tolerance.
 
-More information on this new functionality can be found in the dedicated section at :doc:`Cluster basics </user-manual/wazuh-server-cluster>`.
+More information on this new functionality can be found in the dedicated section at :doc:`Cluster basics </user-manual/wazuh-server-cluster/index>`.
 
 Automatic decoding for JSON events
 ----------------------------------
