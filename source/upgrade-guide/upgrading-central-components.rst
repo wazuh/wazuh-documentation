@@ -399,7 +399,7 @@ When upgrading Wazuh, you must also update the Wazuh Filebeat module and the ale
       # filebeat setup --pipelines
       # filebeat setup --index-management -E output.logstash.enabled=false
 
-#. If you are upgrading from Wazuh versions v4.8.x or v4.9.x, manually update the wazuh-states-vulnerabilities-* mappings using the following command. Replace ``<WAZUH_INDEXER_IP_ADDRESS>``, ``<USERNAME>``, and ``<PASSWORD>`` with the values applicable to your deployment.
+#. If you are upgrading from Wazuh versions v4.8.x or v4.9.x, manually update the ``wazuh-states-vulnerabilities-*`` mappings using the following command. Replace ``<WAZUH_INDEXER_IP_ADDRESS>``, ``<USERNAME>``, and ``<PASSWORD>`` with the values applicable to your deployment.
 
    Skip this step if upgrading from other versions.
 
