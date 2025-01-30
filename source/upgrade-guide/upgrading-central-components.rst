@@ -431,8 +431,7 @@ When upgrading Wazuh, you must also update the Wazuh Filebeat module and the ale
 Upgrading the Wazuh dashboard
 -----------------------------
 
-Backup the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file to save your settings.  
-For example, create a copy of the file using the following command:
+Backup the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file to save your settings.  For example, create a copy of the file using the following command:
 
 .. code-block:: console
 
