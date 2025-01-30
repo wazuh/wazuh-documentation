@@ -495,23 +495,22 @@ Next steps
 
 The Wazuh server, indexer, and dashboard are now successfully upgraded. You can verify the versions by running the following commands on the node(s) where the central components are installed:
 
-      .. tabs::
-   
-         .. group-tab:: Yum
-   
-            .. code-block:: console
-   
-               # yum list installed wazuh-indexer
-               # yum list installed wazuh-manager
-               # yum list installed wazuh-dashboard
-   
-         .. group-tab:: APT
-   
-            .. code-block:: console
-            
-               # apt list --installed wazuh-indexer
-               # apt list --installed wazuh-manager
-               # apt list --installed wazuh-dashboard
+.. tabs::
 
+   .. group-tab:: Yum
+
+      .. code-block:: console
+
+         # yum list installed wazuh-indexer
+         # yum list installed wazuh-manager
+         # yum list installed wazuh-dashboard
+
+   .. group-tab:: APT
+
+      .. code-block:: console
+
+         # apt list --installed wazuh-indexer
+         # apt list --installed wazuh-manager
+         # apt list --installed wazuh-dashboard
    
 Next, upgrade the Wazuh agents by following the instructions in :doc:`Upgrading the Wazuh agent </upgrade-guide/wazuh-agent/index>`.
