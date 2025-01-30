@@ -248,20 +248,21 @@ Perform the following steps on any of the Wazuh indexer nodes replacing ``<WAZUH
 
    Note that the upgrade process doesn't update plugins installed manually. Outdated plugins might cause the upgrade to fail.
 
-   -  Run the following command on each Wazuh indexer node to list installed plugins and identify those that require an update:
+   #. Run the following command on each Wazuh indexer node to list installed plugins and identify those that require an update:
 
       .. code-block:: console
 
          # /usr/share/wazuh-indexer/bin/opensearch-plugin list
 
-   In the output, plugins that require an update will be labeled as "outdated".
+      In the output, plugins that require an update will be labeled as "outdated".
 
-   -  Remove the outdated plugins and reinstall the latest version replacing ``<PLUGIN_NAME>`` with the name of the plugin:
+   #. Remove the outdated plugins and reinstall the latest version replacing ``<PLUGIN_NAME>`` with the name of the plugin:
 
       .. code-block:: console
 
          # /usr/share/wazuh-indexer/bin/opensearch-plugin remove <PLUGIN_NAME>
          # /usr/share/wazuh-indexer/bin/opensearch-plugin install <PLUGIN_NAME>
+
 .. _upgrading_wazuh_server:
 
 Upgrading the Wazuh server
