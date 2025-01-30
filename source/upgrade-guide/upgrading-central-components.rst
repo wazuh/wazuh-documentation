@@ -197,6 +197,7 @@ Perform the following steps on any of the Wazuh indexer nodes replacing ``<WAZUH
 
    .. code-block:: json
       :class: output
+
       {
          "acknowledged" : true,
          "persistent" : {
