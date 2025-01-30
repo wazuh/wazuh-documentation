@@ -253,7 +253,7 @@ Perform the following steps on any of the Wazuh indexer nodes replacing ``<WAZUH
 
    In the output, plugins that require an update will be labeled as "outdated".
 
-   - Remove the outdated plugins and reinstall the latest version replacing ``<PLUGIN_NAME>`` with the name of the plugin:
+   -  Remove the outdated plugins and reinstall the latest version replacing ``<PLUGIN_NAME>`` with the name of the plugin:
 
       .. code-block:: console
 
