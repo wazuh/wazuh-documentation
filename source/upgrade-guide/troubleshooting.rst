@@ -72,9 +72,9 @@ Wazuh dashboard server is not ready yet
 
 This message typically appears right after starting or restarting the Wazuh dashboard. However, it may also indicate one of the following issues:
 
-- The Wazuh dashboard service is encountering an error and repeatedly restarting.
-- The Wazuh dashboard cannot communicate with the Wazuh indexer.
-- The Wazuh indexer service is not running or has encountered an error.
+-   The Wazuh dashboard service is encountering an error and repeatedly restarting.
+-   The Wazuh dashboard cannot communicate with the Wazuh indexer.
+-   The Wazuh indexer service is not running or has encountered an error.
 
 Steps to diagnose and fix the issue
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -166,7 +166,7 @@ This warning suggests that the Wazuh Vulnerability Detection module might be dis
 Application Not Found
 ---------------------
 
-If you encounter the message *Application Not Found* when accessing the Wazuh dashboard after upgrading, it may be because the configuration file ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` wasn’t updated with the latest changes.
+If you see the message *Application Not Found* when accessing the Wazuh dashboard after upgrading, it may be because the configuration file ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` wasn’t updated with the latest changes.
 
 To fix this issue, update the ``uiSettings.overrides.defaultRoute`` setting in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file to the following value:
 

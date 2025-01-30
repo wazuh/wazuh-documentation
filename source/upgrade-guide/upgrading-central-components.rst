@@ -20,46 +20,19 @@ In case Wazuh is installed in a multi-node cluster configuration, repeat the fol
 #. Ensure you have added the Wazuh repository to every Wazuh indexer, server, and dashboard node before proceeding to perform the upgrade actions.
 
    .. tabs::
-
-      .. group-tab:: Yum
-
-         a. Import the GPG key:
-
-            .. code-block:: console
-
-               # rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH
-
-         b. Add the repository:
-
-            .. code-block:: console
-
-               # echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages.wazuh.com/4.x/yum/\nprotect=1' | tee /etc/yum.repos.d/wazuh.repo
-
-      .. group-tab:: APT
-
-         a. Install the following packages if missing:
-
-            .. code-block:: console
-
-               # apt-get install gnupg apt-transport-https
-
-         b. Install the GPG key:
-
-            .. code-block:: console
-
-               # curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | gpg --no-default-keyring --keyring gnupg-ring:/usr/share/keyrings/wazuh.gpg --import && chmod 644 /usr/share/keyrings/wazuh.gpg
-
-         c. Add the repository:
-
-            .. code-block:: console
-
-               # echo "deb [signed-by=/usr/share/keyrings/wazuh.gpg] https://packages.wazuh.com/4.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
-
-         d. Update the packages information:
-
-            .. code-block:: console
-
-               # apt-get update
+   
+   
+        .. group-tab:: Yum
+   
+   
+          .. include:: /_templates/installations/common/yum/add-repository.rst
+   
+   
+   
+        .. group-tab:: APT
+   
+   
+          .. include:: /_templates/installations/common/deb/add-repository.rst
 
 
 
@@ -202,7 +175,7 @@ Perform the following steps on each Wazuh indexer node to upgrade them. Upgrade 
 
 #. Restart the Wazuh indexer service.
 
-   .. include:: /_templates/installations/basic/elastic/common/enable_filebeat.rst
+   .. include:: /_templates/installations/indexer/common/enable_indexer.rst
 
 Repeat steps 1 to 3 above on all Wazuh indexer nodes before proceeding to the :ref:`post-upgrade actions <post-upgrade-actions>`.
 
@@ -287,19 +260,18 @@ Perform the following steps on any of the Wazuh indexer nodes replacing ``<WAZUH
 
    - Run the following command on each Wazuh indexer node to list installed plugins and identify those that require an update:
 
-     .. code-block:: console
+      .. code-block:: console
 
-        # /usr/share/wazuh-indexer/bin/opensearch-plugin list
+         # /usr/share/wazuh-indexer/bin/opensearch-plugin list
 
    In the output, plugins that require an update will be labeled as "outdated".
 
    - Remove the outdated plugins and reinstall the latest version replacing ``<PLUGIN_NAME>`` with the name of the plugin:
 
-     .. code-block:: console
+      .. code-block:: console
 
-        # /usr/share/wazuh-indexer/bin/opensearch-plugin remove <PLUGIN_NAME>
-        # /usr/share/wazuh-indexer/bin/opensearch-plugin install <PLUGIN_NAME>
-
+         # /usr/share/wazuh-indexer/bin/opensearch-plugin remove <PLUGIN_NAME>
+         # /usr/share/wazuh-indexer/bin/opensearch-plugin install <PLUGIN_NAME>
 
 .. _upgrading_wazuh_server:
 
@@ -519,7 +491,7 @@ You can now access the Wazuh dashboard via:
 
    Note that the upgrade process doesn't update plugins installed manually. Outdated plugins might cause the upgrade to fail.
 
-   - Run the following command on the Wazuh dashboard server to list installed plugins and identify those that require an update:
+   #. Run the following command on the Wazuh dashboard server to list installed plugins and identify those that require an update:
 
       .. code-block:: console
 
@@ -527,7 +499,7 @@ You can now access the Wazuh dashboard via:
 
       In the output, plugins that require an update will be labeled as "outdated".
 
-   - Remove the outdated plugins and reinstall the latest version replacing ``<PLUGIN_NAME>`` with the name of the plugin:
+   #. Remove the outdated plugins and reinstall the latest version replacing ``<PLUGIN_NAME>`` with the name of the plugin:
 
       .. code-block:: console
 
