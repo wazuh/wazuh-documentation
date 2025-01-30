@@ -451,7 +451,7 @@ Backup the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file to save your 
 
          .. code-block:: console
 
-            # apt-get install wazuh-dashboard
+            # apt-get install wazuh-dashboard|WAZUH_DASHBOARD_DEB_PKG_INSTALL|
 
       .. note::
 
