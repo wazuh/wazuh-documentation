@@ -272,7 +272,6 @@ Perform the following steps on any of the Wazuh indexer nodes replacing ``<WAZUH
 
          # /usr/share/wazuh-indexer/bin/opensearch-plugin remove <PLUGIN_NAME>
          # /usr/share/wazuh-indexer/bin/opensearch-plugin install <PLUGIN_NAME>
-
 .. _upgrading_wazuh_server:
 
 Upgrading the Wazuh server
