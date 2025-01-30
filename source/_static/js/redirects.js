@@ -138,6 +138,7 @@ newUrls['4.10'] = [
 removedUrls['4.10'] = [
   '/user-manual/wazuh-indexer-cluster.html',
   '/user-manual/wazuh-indexer/index-life-management.html',
+  '/user-manual/wazuh-server-cluster.html',
   '/upgrade-guide/manual-backup-restore.html',
   '/upgrade-guide/compatibility-matrix/index.html'
 ];
