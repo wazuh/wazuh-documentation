@@ -109,6 +109,16 @@ redirections.push(
     '4.9': '/user-manual/wazuh-server-cluster.html',
     '4.10': '/user-manual/wazuh-server-cluster/index.html',
   },
+  {
+    'target': ['4.9=>4.10', '4.10=>4.9'],
+    '4.9': '/upgrade-guide/compatibility-matrix/index.html',
+    '4.10': '/upgrade-guide/index.html#wazuh-components-compatibility',
+  },
+  {
+    'target': ['4.9=>4.10', '4.10=>4.9'],
+    '4.9': '/upgrade-guide/manual-backup-restore.html',
+    '4.10': '/upgrade-guide/troubleshooting.html#wazuh-db-backup-restoration',
+  }
 );
 
 /* Pages added in 4.10 */
@@ -149,6 +159,8 @@ removedUrls['4.10'] = [
   '/user-manual/wazuh-indexer-cluster.html',
   '/user-manual/wazuh-indexer/index-life-management.html',
   '/user-manual/wazuh-server-cluster.html',
+  '/upgrade-guide/manual-backup-restore.html',
+  '/upgrade-guide/compatibility-matrix/index.html'
 ];
 
 /* *** RELEASE 4.9 ****/
