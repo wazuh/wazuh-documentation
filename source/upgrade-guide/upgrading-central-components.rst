@@ -408,7 +408,8 @@ When upgrading Wazuh, you must also update the Wazuh Filebeat module and the ale
    .. code-block:: bash
 
       curl -X PUT "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/wazuh-states-vulnerabilities-*/_mapping" \
-      -u <USERNAME>:<PASSWORD> -k -H "Content-Type: application/json" -d '{
+      -u <USERNAME>:<PASSWORD> -k -H "Content-Type: application/json" -d '
+      {
          "properties": {
             "vulnerability": {
                "properties": {
