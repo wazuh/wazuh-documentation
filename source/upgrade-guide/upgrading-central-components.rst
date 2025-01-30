@@ -156,7 +156,7 @@ Perform the following steps on each Wazuh indexer node to upgrade them. Upgrade 
 
          .. code-block:: console
 
-            # yum upgrade wazuh-indexer
+            # yum upgrade wazuh-indexer|WAZUH_INDEXER_RPM_PKG_INSTALL|
 
       .. group-tab:: APT
 
