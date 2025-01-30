@@ -327,37 +327,37 @@ When upgrading from Wazuh version 4.7.x or earlier, follow these steps to config
 
 #. Configure the indexer block
 
-   a. Ensure the ``<indexer>`` block contains the details of your Wazuh indexer host. During the upgrade, a default ``<indexer>`` configuration is added under ``<ossec_conf>`` if none exists in ``/var/ossec/etc/ossec.conf``. By default, the configuration includes one host with the IP address ``0.0.0.0``:
+   #. Ensure the ``<indexer>`` block contains the details of your Wazuh indexer host. During the upgrade, a default ``<indexer>`` configuration is added under ``<ossec_conf>`` if none exists in ``/var/ossec/etc/ossec.conf``. By default, the configuration includes one host with the IP address ``0.0.0.0``:
 
-   .. code-block:: xml
-      :emphasize-lines: 4
+      .. code-block:: xml
+         :emphasize-lines: 4
 
-      <indexer>
-         <enabled>yes</enabled>
+         <indexer>
+            <enabled>yes</enabled>
+            <hosts>
+               <host>https://0.0.0.0:9200</host>
+            </hosts>
+            <ssl>
+               <certificate_authorities>
+                  <ca>/etc/filebeat/certs/root-ca.pem</ca>
+               </certificate_authorities>
+               <certificate>/etc/filebeat/certs/filebeat.pem</certificate>
+               <key>/etc/filebeat/certs/filebeat-key.pem</key>
+            </ssl>
+         </indexer>
+
+      Replace ``0.0.0.0`` with the IP address or hostname of your Wazuh indexer node. You can find this value in the Filebeat configuration file at ``/etc/filebeat/filebeat.yml``. Ensure that the ``<certificate>`` and ``<key>`` names match the files located in ``/etc/filebeat/certs/``.
+
+   #. If using a Wazuh indexer cluster, add a ``<host>`` entry in the Wazuh manager ``/var/ossec/etc/ossec.conf`` file for each node in the cluster. For example, for a two-node configuration:
+
+      .. code-block:: xml
+
          <hosts>
-            <host>https://0.0.0.0:9200</host>
+            <host>https://10.0.0.1:9200</host>
+            <host>https://10.0.0.2:9200</host>
          </hosts>
-         <ssl>
-            <certificate_authorities>
-               <ca>/etc/filebeat/certs/root-ca.pem</ca>
-            </certificate_authorities>
-            <certificate>/etc/filebeat/certs/filebeat.pem</certificate>
-            <key>/etc/filebeat/certs/filebeat-key.pem</key>
-         </ssl>
-      </indexer>
 
-   Replace ``0.0.0.0`` with the IP address or hostname of your Wazuh indexer node. You can find this value in the Filebeat configuration file at ``/etc/filebeat/filebeat.yml``. Ensure that the ``<certificate>`` and ``<key>`` names match the files located in ``/etc/filebeat/certs/``.
-
-   b. If using a Wazuh indexer cluster, add a ``<host>`` entry in the Wazuh manager ``/var/ossec/etc/ossec.conf`` file for each node in the cluster. For example, for a two-node configuration:
-
-   .. code-block:: xml
-
-      <hosts>
-         <host>https://10.0.0.1:9200</host>
-         <host>https://10.0.0.2:9200</host>
-      </hosts>
-
-   The Wazuh server will prioritize reporting to the first indexer node in the list and switch to the next available node if it becomes unavailable.
+      The Wazuh server will prioritize reporting to the first indexer node in the list and switch to the next available node if it becomes unavailable.
 
 #. Store Wazuh indexer credentials
 
