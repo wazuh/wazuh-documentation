@@ -385,7 +385,7 @@ When upgrading from Wazuh version 4.7.x or earlier, follow these steps to config
 Configuring Filebeat
 ^^^^^^^^^^^^^^^^^^^^
 
-When upgrading Wazuh, you must also update the Wazuh Filebeat module and the alerts template to ensure compatibility with the latest Wazuh indexer version.
+When upgrading Wazuh, you must also update the Wazuh Filebeat module and the alerts template to ensure compatibility with the latest Wazuh indexer version. Follow these steps to configure Filebeat properly:
 
 #. Download the Wazuh module for Filebeat:
 
