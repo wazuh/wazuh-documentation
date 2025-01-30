@@ -340,6 +340,7 @@ When upgrading from Wazuh version 4.7.x or earlier, follow these steps to config
    a. Ensure the ``<indexer>`` block contains the details of your Wazuh indexer host. During the upgrade, a default ``<indexer>`` configuration is added under ``<ossec_conf>`` if none exists in ``/var/ossec/etc/ossec.conf``. By default, the configuration includes one host with the IP address ``0.0.0.0``:
 
    .. code-block:: xml
+      :emphasize-lines: 4
 
       <indexer>
          <enabled>yes</enabled>
