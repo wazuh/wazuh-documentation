@@ -72,9 +72,9 @@ Wazuh dashboard server is not ready yet
 
 This message typically appears right after starting or restarting the Wazuh dashboard. However, it may also indicate one of the following issues:
 
--   The Wazuh dashboard service is encountering an error and repeatedly restarting.
--   The Wazuh dashboard cannot communicate with the Wazuh indexer.
--   The Wazuh indexer service is not running or has encountered an error.
+-  The Wazuh dashboard service is encountering an error and repeatedly restarting.
+-  The Wazuh dashboard cannot communicate with the Wazuh indexer.
+-  The Wazuh indexer service is not running or has encountered an error.
 
 Steps to diagnose and fix the issue
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

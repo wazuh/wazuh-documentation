@@ -75,23 +75,21 @@ Perform the following steps on any of the Wazuh indexer nodes replacing ``<WAZUH
          }
       }'
 
-
-   **Output:**
-
    .. code-block:: json
+      :class: output
 
       {
-         "acknowledged" : true,
-         "persistent" : {
-            "cluster" : {
-               "routing" : {
-                  "allocation" : {
-                     "enable" : "primaries"
-                  }
-               }
+        "acknowledged" : true,
+        "persistent" : {
+          "cluster" : {
+            "routing" : {
+              "allocation" : {
+                "enable" : "primaries"
+              }
             }
-         },
-         "transient" : {}
+          }
+        },
+        "transient" : {}
       }
 
 #. Perform a flush operation on the cluster to commit transaction log entries to the index.
@@ -100,9 +98,8 @@ Perform the following steps on any of the Wazuh indexer nodes replacing ``<WAZUH
 
       # curl -X POST "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_flush" -u <USERNAME>:<PASSWORD> -k
 
-   **Output:**
-
    .. code-block:: json
+      :class: output
 
       {
          "_shards" : {
@@ -196,7 +193,7 @@ Perform the following steps on any of the Wazuh indexer nodes replacing ``<WAZUH
 
    .. code-block:: bash
 
-      curl -X PUT "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cluster/settings" \
+      # curl -X PUT "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cluster/settings" \
       -u <USERNAME>:<PASSWORD> -k -H "Content-Type: application/json" -d '{
          "persistent": {
             "cluster.routing.allocation.enable": "all"
@@ -204,11 +201,8 @@ Perform the following steps on any of the Wazuh indexer nodes replacing ``<WAZUH
       }
       '
 
-
-   **Output:**
-
    .. code-block:: json
-
+      :class: output
       {
          "acknowledged" : true,
          "persistent" : {
@@ -229,10 +223,9 @@ Perform the following steps on any of the Wazuh indexer nodes replacing ``<WAZUH
 
       # curl -k -u <USERNAME>:<PASSWORD> https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cat/nodes?v
 
-   **Output:**
-
    .. code-block:: console
-
+      :class: output
+      
       ip         heap.percent ram.percent cpu load_1m load_5m load_15m node.role node.roles                                        cluster_manager name
       172.18.0.3           34          86  32    6.67    5.30     2.53 dimr      cluster_manager,data,ingest,remote_cluster_client -               wazuh2.indexer
       172.18.0.4           21          86  32    6.67    5.30     2.53 dimr      cluster_manager,data,ingest,remote_cluster_client *               wazuh1.indexer
@@ -300,13 +293,13 @@ Upgrade the Wazuh manager to the latest version:
 
       .. code-block:: console
 
-         # yum upgrade wazuh-manager
+         # yum upgrade wazuh-manager|WAZUH_MANAGER_RPM_PKG_INSTALL|
 
    .. group-tab:: APT
 
       .. code-block:: console
 
-         # apt-get install wazuh-manager
+         # apt-get install wazuh-manager|WAZUH_MANAGER_DEB_PKG_INSTALL|
 
 .. warning::
 
@@ -405,15 +398,14 @@ When upgrading Wazuh, you must also update the Wazuh Filebeat module and the ale
 
    .. include:: /_templates/installations/basic/elastic/common/enable_filebeat.rst
 
-#. Upload the new Wazuh template and pipelines for Filebeat:**
+#. Upload the new Wazuh template and pipelines for Filebeat:
 
    .. code-block:: console
 
       # filebeat setup --pipelines
       # filebeat setup --index-management -E output.logstash.enabled=false
 
-#. If you are upgrading from Wazuh versions v4.8.x or v4.9.x, manually update the wazuh-states-vulnerabilities-* mappings using the following command.  
-   Replace ``<WAZUH_INDEXER_IP_ADDRESS>``, ``<USERNAME>``, and ``<PASSWORD>`` with the values applicable to your deployment.
+#. If you are upgrading from Wazuh versions v4.8.x or v4.9.x, manually update the wazuh-states-vulnerabilities-* mappings using the following command. Replace ``<WAZUH_INDEXER_IP_ADDRESS>``, ``<USERNAME>``, and ``<PASSWORD>`` with the values applicable to your deployment.
 
    Skip this step if upgrading from other versions.
 
