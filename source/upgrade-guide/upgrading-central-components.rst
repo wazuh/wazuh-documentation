@@ -245,7 +245,7 @@ Perform the following steps on any of the Wazuh indexer nodes replacing ``<WAZUH
 
    Note that the upgrade process doesn't update plugins installed manually. Outdated plugins might cause the upgrade to fail.
 
-   - Run the following command on each Wazuh indexer node to list installed plugins and identify those that require an update:
+   -  Run the following command on each Wazuh indexer node to list installed plugins and identify those that require an update:
 
       .. code-block:: console
 
