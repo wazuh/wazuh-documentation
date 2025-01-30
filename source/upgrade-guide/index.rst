@@ -13,7 +13,7 @@ Wazuh components compatibility
 
 All central Wazuh components must have identical version numbers, including the patch level, for proper operation. Additionally, the Wazuh manager must always be the same version or newer than the Wazuh agents.
 
-Note that Wazuh indexer 4.10.1 is specifically compatible with Filebeat-OSS 7.10.2.
+Note that Wazuh indexer |WAZUH_CURRENT| is specifically compatible with Filebeat-OSS |FILEBEAT_LATEST|.
 
 Upgrade the Wazuh central components
 ------------------------------------
