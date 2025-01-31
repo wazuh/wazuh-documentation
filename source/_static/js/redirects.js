@@ -111,6 +111,71 @@ redirections.push(
   },
   {
     'target': ['4.9=>4.10', '4.10=>4.9'],
+    '4.9': '/user-manual/wazuh-server-cluster.html#architecture-overview',
+    '4.10': '/user-manual/wazuh-server-cluster/architecture-overview.html',
+  },
+  {
+    'target': ['4.9=>4.10', '4.10=>4.9'],
+    '4.9': '/user-manual/wazuh-server-cluster.html#types-of-nodes-in-a-wazuh-server-cluster',
+    '4.10': '/user-manual/wazuh-server-cluster/types-of-nodes.html',
+  },
+  {
+    'target': ['4.9=>4.10', '4.10=>4.9'],
+    '4.9': '/user-manual/wazuh-server-cluster.html#how-the-wazuh-server-cluster-works',
+    '4.10': '/user-manual/wazuh-server-cluster/how-server-cluster-works.html',
+  },
+  {
+    'target': ['4.9=>4.10', '4.10=>4.9'],
+    '4.9': '/user-manual/wazuh-server-cluster.html#wazuh-cluster-nodes-configuration',
+    '4.10': '/user-manual/wazuh-server-cluster/cluster-nodes-configuration.html',
+  },
+  {
+    'target': ['4.9=>4.10', '4.10=>4.9'],
+    '4.9': '/user-manual/wazuh-server-cluster.html#data-synchronization',
+    '4.10': '/user-manual/wazuh-server-cluster/data-synchronization.html',
+  },
+  {
+    'target': ['4.9=>4.10', '4.10=>4.9'],
+    '4.9': '/user-manual/wazuh-server-cluster.html#certificates-deployment',
+    '4.10': '/user-manual/wazuh-server-cluster/certificates-deployment.html',
+  },
+  {
+    'target': ['4.9=>4.10', '4.10=>4.9'],
+    '4.9': '/user-manual/wazuh-server-cluster.html#adding-new-wazuh-server-nodes',
+    '4.10': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/index.html',
+  },
+  {
+    'target': ['4.9=>4.10', '4.10=>4.9'],
+    '4.9': '/user-manual/wazuh-server-cluster.html#certificates-creation',
+    '4.10': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/certificates-creation.html',
+  },
+  {
+    'target': ['4.9=>4.10', '4.10=>4.9'],
+    '4.9': '/user-manual/wazuh-server-cluster.html#configuring-existing-components-to-connect-with-the-new-node',
+    '4.10': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/configuration-to-connect-with-new-node.html',
+  },
+  {
+    'target': ['4.9=>4.10', '4.10=>4.9'],
+    '4.9': '/user-manual/wazuh-server-cluster.html#wazuh-server-node-s-installation',
+    '4.10': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/server-nodes-installation.html',
+  },
+  {
+    'target': ['4.9=>4.10', '4.10=>4.9'],
+    '4.9': '/user-manual/wazuh-server-cluster.html#testing-the-cluster',
+    '4.10': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/testing-the-cluster.html',
+  },
+  {
+    'target': ['4.9=>4.10', '4.10=>4.9'],
+    '4.9': '/user-manual/wazuh-server-cluster.html#agent-connections',
+    '4.10': '/user-manual/wazuh-server-cluster/agent-connections.html',
+  },
+  {
+    'target': ['4.9=>4.10', '4.10=>4.9'],
+    '4.9': '/user-manual/wazuh-server-cluster.html#load-balancers',
+    '4.10': '/user-manual/wazuh-server-cluster/load-balancers.html',
+  },
+  {
+    'target': ['4.9=>4.10', '4.10=>4.9'],
     '4.9': '/upgrade-guide/compatibility-matrix/index.html',
     '4.10': '/upgrade-guide/index.html#wazuh-components-compatibility',
   },
