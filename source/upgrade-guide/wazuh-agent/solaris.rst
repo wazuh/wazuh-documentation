@@ -4,10 +4,10 @@
   :description: Check out how to upgrade the Wazuh agent to the latest available version remotely, using the agent_upgrade tool or the Wazuh API, or locally.
 
 
-Upgrading Wazuh agents on Solaris systems
-=========================================
+Upgrading Wazuh agents on Solaris endpoints
+===========================================
 
-Select your Solaris version and follow the steps to upgrade the Wazuh agent.
+Select your Solaris version and follow the steps to upgrade the Wazuh agent on Solaris endpoints.
 
 .. tabs::
 
@@ -63,7 +63,7 @@ Select your Solaris version and follow the steps to upgrade the Wazuh agent.
             # /var/ossec/bin/wazuh-control stop
 
 
-      #. Backup the ``ossec.conf`` and ``client.keys`` files.
+      #. Backup the ``/var/ossec/etc/ossec.conf`` and ``/var/ossec/etc/client.keys`` files.
 
            .. code-block:: console
 
@@ -98,7 +98,7 @@ Select your Solaris version and follow the steps to upgrade the Wazuh agent.
                # pkgadd -d wazuh-agent_v|WAZUH_CURRENT_SOLARIS10_SPARC|-sol10-sparc.pkg wazuh-agent
 
 
-      #. Restore the ``ossec.conf`` and ``client.keys`` files.
+      #. Restore the ``/var/ossec/etc/ossec.conf`` and ``/var/ossec/etc/client.keys`` files.
 
          .. code-block:: console
 
@@ -113,9 +113,3 @@ Select your Solaris version and follow the steps to upgrade the Wazuh agent.
          .. code-block:: console
 
             # /var/ossec/bin/wazuh-control start
-
-
-.. note::
-   :class: not-long
-
-   When upgrading agents from versions earlier than 4.x, make sure that the communication protocol is compatible. Up to that point, UDP was the default protocol and it was switched to TCP for later versions. Edit the agent configuration file ``ossec.conf`` to update the :ref:`protocol <server_protocol>` or make sure that your Wazuh manager accepts :ref:`both protocols<manager_protocol>`.

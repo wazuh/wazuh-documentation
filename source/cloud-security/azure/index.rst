@@ -25,3 +25,4 @@ This section provides instructions for monitoring Microsoft Azure infrastructure
    storage
    graph
    monitoring-ms-graph
+   ms-intune-integration
