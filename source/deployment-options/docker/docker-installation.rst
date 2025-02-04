@@ -53,7 +53,7 @@ Wazuh indexer creates many memory-mapped areas. So you need to set the kernel to
 Docker engine
 -------------
 
-For Linux/Unix machines, Docker requires an amd64 architecture system running kernel version 3.10 or later.
+For Linux/Unix machines, Docker requires an AMD64 or ARM64 architecture system running kernel version 3.10 or later.
 
 #. Open a terminal and use ``uname -r`` to display and check your kernel version:
 
