@@ -45,7 +45,7 @@ For larger environments we recommend a distributed deployment. Multi-node cluste
 Operating system
 ^^^^^^^^^^^^^^^^
 
-The Wazuh central components require a 64-bit Intel or AMD Linux processor (x86_64/AMD64 architecture) to run. Wazuh recommends any of the following operating system versions:
+The Wazuh central components require a 64-bit Intel, AMD, or ARM Linux processor (x86_64/AMD64 or AARCH64/ARM64 architecture) to run. Wazuh recommends any of the following operating system versions:
 
 .. list-table::
    :width: 100%

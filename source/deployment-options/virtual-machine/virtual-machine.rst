@@ -36,9 +36,9 @@ Hardware requirements
 
 The following requirements have to be in place before the Wazuh VM can be imported into a host operating system:
 
-- The host operating system has to be a 64-bit system with x86_64/AMD64 architecture.
-- Hardware virtualization has to be enabled on the firmware of the host.
-- A virtualization platform, such as VirtualBox, should be installed on the host system.
+-  The host operating system has to be a 64-bit system with x86_64/AMD64 or AARCH64/ARM64 architecture.
+-  Hardware virtualization has to be enabled on the firmware of the host.
+-  A virtualization platform, such as VirtualBox, should be installed on the host system.
 
 Out of the box, the Wazuh VM is configured with the following specifications:
 
