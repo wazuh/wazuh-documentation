@@ -14,7 +14,7 @@ Welcome to the Wazuh user manual. Use it as your reference library once your bas
       :maxdepth: 2
 
       manager/index
-      wazuh-server-cluster
+      wazuh-server-cluster/index
       api/index
       wazuh-indexer/index
       wazuh-indexer-cluster/index
