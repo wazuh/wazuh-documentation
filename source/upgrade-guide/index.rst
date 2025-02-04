@@ -1,28 +1,29 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Find out more about the process of upgrading the Wazuh central components, Open Distro for Elasticsearch, Elastic Stack, and Wazuh agents in this section.
+   :description: Learn about upgrading Wazuh central components, Open Distro for Elasticsearch, Elastic Stack, and Wazuh agents in this section.
 
 Upgrade guide
 =============
 
-This guide includes instructions to upgrade the :doc:`Wazuh components </getting-started/components/index>`.
+This guide includes instructions on how to upgrade the Wazuh central components (server, indexer, and dashboard) and the Wazuh agent.
 
-Check the :doc:`compatibility-matrix/index` section to learn about the compatibility requirements between components.
+Wazuh components compatibility
+------------------------------
+
+All central Wazuh components must have identical version numbers, including the patch level, for proper operation. Additionally, the Wazuh manager must always be the same version or newer than the Wazuh agents.
+
+Note that Wazuh indexer |WAZUH_CURRENT| is specifically compatible with Filebeat-OSS |FILEBEAT_LATEST|.
 
 Upgrade the Wazuh central components
 ------------------------------------
 
-The :doc:`upgrading-central-components` section includes instructions to upgrade the Wazuh server, the Wazuh indexer, and the Wazuh dashboard.
-
-.. note::
-
-   Since Wazuh v4.6.0, we don't provide the Kibana plugin and Splunk app anymore. To integrate Wazuh with Elastic or Splunk, refer to our :doc:`/integrations-guide/index`.
+The :doc:`Wazuh central components </upgrade-guide/upgrading-central-components>` section includes instructions on how to upgrade the Wazuh server, the Wazuh indexer, and the Wazuh dashboard. These instructions apply to both all-in-one deployments and multi-node cluster deployments.
 
 Upgrade the Wazuh agents
 ------------------------
 
-You can upgrade the Wazuh agents either remotely from the Wazuh manager or locally. Upgrading the Wazuh agents remotely is possible by using the ``agent_upgrade`` tool and the Wazuh API. See the :doc:`Remote agent upgrade </user-manual/agent/agent-management/remote-upgrading/upgrading-agent>` section to learn more.
+You can upgrade the Wazuh agents either remotely or locally. For remote upgrades, you can use either the Wazuh manager (``agent_upgrade`` tool ) or the Wazuh API (via the Wazuh dashboard or a command-line tool). For details, refer to the :doc:`remote agent upgrade </user-manual/agent/agent-management/remote-upgrading/upgrading-agent>` section.
 
 To perform the upgrade locally, select your operating system and follow the instructions.
 
@@ -104,6 +105,4 @@ To perform the upgrade locally, select your operating system and follow the inst
 
    upgrading-central-components
    wazuh-agent/index
-   compatibility-matrix/index
-   manual-backup-restore
    troubleshooting

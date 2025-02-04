@@ -32,7 +32,7 @@ Now, the client nodes initialize the communication and only the master node is i
 
 The number of daemons has been reduced to one: ``wazuh-clusterd``.
 
-You can check our documentation for Wazuh cluster in the following :doc:`Cluster basics </user-manual/wazuh-server-cluster>`.
+You can check our documentation for Wazuh cluster in the following :doc:`Cluster basics </user-manual/wazuh-server-cluster/index>`.
 
 Core improvements
 -----------------
