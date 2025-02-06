@@ -71,6 +71,7 @@ removedUrls['x.y'] = [
 
 newUrls['4.11'] = [
   '/release-notes/release-4-11-0.html',
+  '/release-notes/release-4-11-1.html',
 ]
 
 /* *** RELEASE 4.10 ****/
