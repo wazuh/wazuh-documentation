@@ -45,7 +45,7 @@ Wazuh dashboard
 
 -  `#7193 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/7193>`__ Refined the layout of the agent details view.
 -  `#7195 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/7195>`__ Changed the width of the command column, relocate argvs column and change the width of the rest of the columns in the table processes.
--  `#7245 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7245>`__ Removed unused ``node_build`` field in the package manifest of the **wazuh** plugin.  
+-  `#7245 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7245>`__ Removed unused ``node_build`` field in the package manifest of the ``wazuh`` plugin.  
 
 Resolved issues
 ---------------
