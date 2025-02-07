@@ -234,7 +234,7 @@ Configure the renew_hook using the following steps
       authenticator = standalone
       server = https://acme-v02.api.letsencrypt.org/directory
       key_type = rsa
-      renew_hook = systemctl restart wazuh-dashboard
+      renew_hook = cp /etc/letsencrypt/live/<YOUR_DOMAIN_NAME>/privkey.pem /etc/letsencrypt/live/<YOUR_DOMAIN_NAME>/fullchain.pem /etc/wazuh-dashboard/certs/ && systemctl restart wazuh-dashboard
 
 #. Test the renewal hook by running the command below:
 
