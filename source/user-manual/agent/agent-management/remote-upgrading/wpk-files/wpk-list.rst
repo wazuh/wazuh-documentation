@@ -13,13 +13,13 @@ Linux
 .. |WPK_Linux_RPM| replace:: `wazuh_agent_v|WAZUH_CURRENT|_linux_x86_64.rpm.wpk <https://packages.wazuh.com/4.x/wpk/linux/rpm/x86_64/wazuh_agent_v|WAZUH_CURRENT|_linux_x86_64.rpm.wpk>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_agent_v|WAZUH_CURRENT|_linux_x86_64.rpm.wpk.sha512>`__)
 .. |WAZUH_CUR_VER| replace:: |WAZUH_CURRENT|
 
-+--------------+-----------------+--------------+-------------------------------+
-| Distribution | Version         | Architecture | WPK Package                   |
-+==============+=================+==============+===============================+
-|  Linux (deb) | |WAZUH_CUR_VER| |    64bit     | |WPK_Linux_DEB|               |
-+--------------+-----------------+--------------+-------------------------------+
-|  Linux (rpm) | |WAZUH_CUR_VER| |    64bit     | |WPK_Linux_RPM|               |
-+--------------+-----------------+--------------+-------------------------------+
++--------------+-----------------+---------------------+-------------------------------+
+| Distribution | Version         |     Architecture    | WPK Package                   |
++==============+=================+=====================+===============================+
+|  Linux (deb) | |WAZUH_CUR_VER| |    x86_64/AMD64     | |WPK_Linux_DEB|               |
++--------------+-----------------+---------------------+-------------------------------+
+|  Linux (rpm) | |WAZUH_CUR_VER| |    x86_64/AMD64     | |WPK_Linux_RPM|               |
++--------------+-----------------+---------------------+-------------------------------+
 
 Windows
 -------
@@ -42,5 +42,5 @@ macOS
 +--------------+---------------------+--------------+---------------------------------------------+
 | Distribution | Version             | Architecture | WPK Package                                 |
 +==============+=====================+==============+=============================================+
-|    macOS     | |WAZUH_CUR_OSX|     |    64bit     | |WPK_macOS|                                 |
+|    macOS     | |WAZUH_CUR_OSX|     |  Intel 64    | |WPK_macOS|                                 |
 +--------------+---------------------+--------------+---------------------------------------------+
