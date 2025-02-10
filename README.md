@@ -1,6 +1,6 @@
 # Wazuh documentation
 
-⚠️ **The `master` branch is deprecated. Please use `main` instead.** ⚠️
+ ⚠️⚠️ **The `master` branch is deprecated. Please use `main` instead.** ⚠️ ⚠️
 
 [![Slack](https://img.shields.io/badge/slack-join-blue.svg)](https://wazuh.com/community/join-us-on-slack/)
 [![Mailing list](https://img.shields.io/badge/email-join-blue.svg)](https://groups.google.com/forum/#!forum/wazuh)
