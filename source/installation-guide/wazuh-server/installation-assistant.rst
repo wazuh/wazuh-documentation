@@ -23,7 +23,7 @@ Wazuh server cluster installation
 
    .. code-block:: console
   
-       # bash wazuh-install.sh --wazuh-server wazuh-1
+       # sudo bash wazuh-install.sh --all-in-one
 
 
 Your Wazuh server is now successfully installed. 
