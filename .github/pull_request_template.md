@@ -14,11 +14,11 @@ Provide a clear and concise description of how this PR addresses the problem.
 If this PR resolves an issue, use the `closes` keyword followed by the issue number (e.g., "closes #123").
 -->
 
-## Changelog
-- [ ] Updated `CHANGELOG.md`.
-
 ## Documentation compilation
 - [ ] Verified that documentation compiles without warnings.
+
+## Changelog
+- [ ] Updated `CHANGELOG.md`.
 
 ## Code formatting & web optimization
 - [ ] Added or updated meta descriptions.
