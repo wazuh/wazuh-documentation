@@ -1,26 +1,31 @@
 <!--
-This template reflects sections that must be included in new Pull requests.
-Contributions from the community are really appreciated. If this is the case, please add the "contribution" to properly track the Pull Request.
-Please fill the table below. Feel free to extend it at your convenience.
+## Pull Request guidelines
+This template outlines essential sections for new pull requests.
+
+We greatly appreciate community contributions! If this is a community PR, please add the "contribution" label for proper tracking.
+
+### Community contributions advice
+We recommend making PRs from the current branch. For example, if Wazuh 4.10.1 is the latest release, use the `4.10` branch.
 -->
-<!--
-## Community contributions advice
-We love our community contributions. We recommend making PRs from the current branch. For instance, if Wazuh 4.3.7 is the latest release, the branch to be used is 4.3.
-Thanks!
--->
+
 ## Description
 <!--
-Add a clear description of how the problem has been solved.
-If your PR closes an issue, please use the "closes" keyword indicating the issue.
+Provide a clear and concise description of how this PR addresses the problem.
+If this PR resolves an issue, use the `closes` keyword followed by the issue number (e.g., "closes #123").
 -->
-## Checks
-### Docs building
-- [ ] Compiles without warnings.
-### Code formatting and web optimization
-- [ ] Uses three spaces indentation.
-- [ ] Adds or updates meta descriptions accordingly.
-- [ ] Updates the `redirects.js` script if necessary (check [this guide](https://github.com/wazuh/wazuh-documentation/blob/master/NEW_RELEASE.md)).
-### Writing style
-- [ ] Uses present tense, active voice, and semi-formal registry.
-- [ ] Uses short, simple sentences.
-- [ ] Uses **bold** for user interface elements, _italics_ for key terms or emphasis, and `code` font for Bash commands, file names, REST paths, and code.
+
+## Changelog
+- [ ] Updated `CHANGELOG.md`.
+
+## Documentation compilation
+- [ ] Verified that documentation compiles without warnings.
+
+## Code formatting & web optimization
+- [ ] Added or updated meta descriptions.
+- [ ] Updated `redirects.js` if necessary ([guide](https://github.com/wazuh/wazuh-documentation/blob/master/NEW_RELEASE.md)).
+- [ ] Used three-space indentation in `.rst` files.
+
+## Writing style
+- [ ] Used **bold** for UI elements, _italics_ for key terms or emphasis, and `code` font for Bash commands, file names, REST paths, and code.
+- [ ] Followed present tense, active voice, and a semi-formal tone.
+- [ ] Wrote short, clear, and concise sentences.
