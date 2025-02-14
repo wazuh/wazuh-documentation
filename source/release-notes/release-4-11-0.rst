@@ -32,6 +32,7 @@ Wazuh manager
 -  `#27835 <https://github.com/wazuh/wazuh/pull/27835>`__ Improved SCA and Syscheck decoders.
 -  `#27914 <https://github.com/wazuh/wazuh/pull/27914>`__ Improved CISCAT decoder detection messages.
 -  `#27692 <https://github.com/wazuh/wazuh/pull/27692>`__ Added CISA vulnerability content and prioritized it over NVD in the vulnerability scanner.
+-  `#28195 <https://github.com/wazuh/wazuh/pull/28195>`__ Changed ``ms-graph`` page size.
 
 Wazuh agent
 ^^^^^^^^^^^
