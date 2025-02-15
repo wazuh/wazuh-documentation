@@ -20,7 +20,7 @@ Using the command line
 
 To upgrade agents using the command line, use the :doc:`agent_upgrade </user-manual/reference/tools/agent-upgrade>` tool as follows:
 
-1. List all outdated agents using the *'-l'* parameter:
+1. List all outdated agents using the `-l` parameter:
 
     .. code-block:: console
 
@@ -36,7 +36,7 @@ To upgrade agents using the command line, use the :doc:`agent_upgrade </user-man
 
         Total outdated agents: 3
 
-2. Upgrade the agent with ID 002 using the *'-a'* parameter followed by the agent ID:
+2. Upgrade the agent with ID 002 using the `-a` parameter followed by the agent ID:
 
     .. code-block:: console
 
