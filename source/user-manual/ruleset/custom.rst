@@ -46,7 +46,7 @@ Now, we will add the following rule to ``/var/ossec/etc/rules/local_rules.xml``:
   </rule>
 
 
-We can check if it works by using ``/var/ossec/bin/ossec-logtest``:
+We can check if it works by using ``/var/ossec/bin/wazuh-logtest``:
 
 .. code-block:: none
   :class: output
