@@ -27,7 +27,7 @@ If your PR closes an issue, please use the "closes" keyword indicating the issue
 - [ ] Spelling and grammar. 
 - [ ] Used impersonal speech. 
 - [ ] Used uppercase only on nouns. 
-- [ ] Updated the `redirect.js` script if necessary (check [this guide](https://github.com/wazuh/wazuh-documentation/blob/master/NEW_RELEASE.md)).
+- [ ] Updated the `redirect.js` script if necessary (check [this guide](https://github.com/wazuh/wazuh-documentation/blob/master/guide/redirections.md).
 
 <!--
 Leave the following note if you made any changes to the redirect.js script. Remove it otherwise.
