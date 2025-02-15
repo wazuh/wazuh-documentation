@@ -513,12 +513,12 @@ Example:
     <prematch>^$header</prematch>
   </decoder>
 
-    <decoder name="syscall-child">
-      <parent>syscall</parent>
-      <prematch offset="$offset">^: $type </prematch>
-      <regex offset="after_prematch">(\S+)</regex>
-      <order>syscall</order>
-    </decoder>
+  <decoder name="syscall-child">
+    <parent>syscall</parent>
+    <prematch offset="$offset">^: $type </prematch>
+    <regex offset="after_prematch">(\S+)</regex>
+    <order>syscall</order>
+  </decoder>
 
 .. _decoders_type:
 
