@@ -19,6 +19,8 @@ Below you can find a section about the requirements needed to install Wazuh. It 
 Requirements
 ------------
 
+Intermediate Linux experience is required.
+
 Hardware
 ^^^^^^^^
 
