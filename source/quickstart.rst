@@ -61,7 +61,7 @@ You can install the Wazuh central components on a 64-bit (x86_64/AMD64) Linux sy
 Installing Wazuh
 ----------------
 
-#.  Download and run the Wazuh installation assistant.
+#.  Download and run the Wazuh installation assistant. If ``curl`` is not installed on your computer, install it using your operating system's package manager.
 
     .. code-block:: console
 
