@@ -6,7 +6,7 @@
 Wazuh dashboard
 ===============
 
-The Wazuh dashboard is a flexible and intuitive web user interface for mining, analyzing, and visualizing security events and alerts data. It is also used for the management and monitoring of the Wazuh platform. Additionally, it provides features for role-based access control (RBAC) and single sign-on (SSO).
+The Wazuh dashboard is a flexible and intuitive web user interface for mining, analyzing, and visualizing security events and alerts data. It is also used for the management and monitoring of the Wazuh platform. Additionally, it provides features for role-based access control (``RBAC``) and single sign-on (``SSO``).
 
 Data visualization and analysis
 -------------------------------
