@@ -1,0 +1,54 @@
+name: Weekly documentation tasks
+on:
+  schedule:
+    - cron: 00 06 * * 2
+
+jobs:
+  security_scans:
+    name: Create a security scans issue
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: This week
+        run: echo "THIS_WEEK=$(date +\%U)" >> $GITHUB_ENV
+
+      - name: Create issue
+        uses: imjohnbo/issue-bot@3d96848fb5e9a4a473bb81ae62b4b4866a56e93a
+        with:
+          project-v2-path: orgs/wazuh/projects/57
+          labels: "level/task, type/bug, request/operational"
+          title: "Documentation vulnerability scan — Week ${{ env.THIS_WEEK }}"
+          body: |
+            ## Scan for vulnerabilities in:
+            - Wazuh documentation requirement dependencies
+            - Wazuh documentation sources
+          close-previous: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  update_rn:
+    name: Create a Release notes issue
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: This week
+        run: echo "THIS_WEEK=$(date +\%U)" >> $GITHUB_ENV
+
+      - name: Create issue
+        uses: imjohnbo/issue-bot@3d96848fb5e9a4a473bb81ae62b4b4866a56e93a
+        with:
+          project-v2-path: orgs/wazuh/projects/57
+          labels: "level/task, type/bug, request/operational"
+          title: "Release notes update — Week ${{ env.THIS_WEEK }}"
+          body: |
+            ## Update release notes of upcoming versions release
+
+            - [ ] 4.5.x
+            - [ ] 4.6.x
+            - [ ] 4.7.x
+            - [ ] 4.8.x
+          close-previous: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
