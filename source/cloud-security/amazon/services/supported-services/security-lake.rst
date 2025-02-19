@@ -175,7 +175,7 @@ Authentication
 
 -  ``<iam_role_arn>``: Amazon Resource Name (ARN) for the corresponding IAM role to assume.
 -  ``<external_id>``: External ID to use when assuming the role.
--  ``<aws_profile>``: A valid profile name from a Shared Credential File or AWS Config File with the permission to access the service. By default, the integration uses the settings found in the ``default`` profile. For this configuration, we use the ``dev`` profile, replace this with the appropriate profile defined in your :ref:`credential file <aws_profile>`.
+-  ``<aws_profile>``: A valid profile name from a Shared Credential File or AWS Config File with permissions to access the service. By default, the integration uses the settings found in the ``default`` profile. For this configuration, we use the ``dev`` profile. Replace it with the appropriate profile defined in your :ref:`credential file <aws_profile>`.
 -  ``<iam_role_duration>`` - Optional: The session duration in seconds.
 -  ``<sts_endpoint>`` - Optional: The URL of the VPC endpoint of the AWS Security Token Service.
 
