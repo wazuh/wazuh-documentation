@@ -175,6 +175,7 @@ Authentication
 
 -  ``<iam_role_arn>``: Amazon Resource Name (ARN) for the corresponding IAM role to assume.
 -  ``<external_id>``: External ID to use when assuming the role.
+-  ``<aws_profile>``: A valid profile name from a Shared Credential File or AWS Config File with permissions to access the service. By default, the integration uses the settings found in the ``default`` profile. For this configuration, we use the ``dev`` profile. Replace it with the appropriate profile defined in your :ref:`credential file <aws_profile>`.
 -  ``<iam_role_duration>`` - Optional: The session duration in seconds.
 -  ``<sts_endpoint>`` - Optional: The URL of the VPC endpoint of the AWS Security Token Service.
 
@@ -210,6 +211,7 @@ Configure Wazuh to process Amazon Security Lake logs
               <iam_role_arn>arn:aws:iam::xxxxxxxxxxx:role/ASL-Role</iam_role_arn>
               <iam_role_duration>1300</iam_role_duration>
               <external_id><WAZUH-EXTERNAL-ID-VALUE></external_id>
+              <aws_profile>dev</aws_profile>
               <sts_endpoint>xxxxxx.sts.region.vpce.amazonaws.com</sts_endpoint>
               <service_endpoint>https://bucket.xxxxxx.s3.region.vpce.amazonaws.com</service_endpoint>
           </subscriber>
