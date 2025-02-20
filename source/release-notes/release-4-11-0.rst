@@ -56,9 +56,7 @@ This release resolves known issues as the following:
 Wazuh manager
 ^^^^^^^^^^^^^
 
--  `#25939 <https://github.com/wazuh/wazuh/pull/25939>`__ Fixed integration tests for Remoted to ensure proper execution.
 -  `#26132 <https://github.com/wazuh/wazuh/pull/26132>`__ Enabled inventory synchronization in Vulnerability Detector when the Indexer module is disabled.
--  `#26378 <https://github.com/wazuh/wazuh/pull/26378>`__ Fixed concurrent access errors in the Vulnerability Detector's OS scan column family.
 
 Wazuh agent
 ^^^^^^^^^^^
