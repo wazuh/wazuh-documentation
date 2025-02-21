@@ -76,6 +76,7 @@ Wazuh version                                  Release date
 
    .. toctree::
 
+      4.11.1 Release notes <release-4-11-1>
       4.11.0 Release notes <release-4-11-0>
       4.10.2 Release notes <release-4-10-2>
       4.10.1 Release notes <release-4-10-1>
