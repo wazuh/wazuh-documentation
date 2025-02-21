@@ -254,19 +254,16 @@ Example:
 
 .. code-block:: xml
 
-   <rule id="3151" level="10" frequency="8" timeframe="120">
-     <if_matched_sid>3102</if_matched_sid>
-     <same_source_ip />
-     <description>sendmail: Sender domain has bogus MX record. </description>
-     <description>It should not be sending email.</description>
+   <rule id="50180" level="10" frequency="8" timeframe="120" ignore="60">
+     <if_matched_sid>50125</if_matched_sid>
+     <description>MySQL: Multiple errors.</description>
      <mitre>
-       <id>T1114</id>
        <id>T1499</id>
      </mitre>
-     <group>multiple_spam,pci_dss_11.4,gdpr_IV_35.7.d,nist_800_53_SI.4,tsc_CC6.1,tsc_CC6.8,tsc_CC7.2,tsc_CC7.3,</group>
+     <group>service_availability,pci_dss_10.6.1,gpg13_4.3,gdpr_IV_35.7.d,hipaa_164.312.b,nist_800_53_AU.6,tsc_CC7.2,tsc_CC7.3,</group>
    </rule>
 
-The rule is created with ID: ``3151`` and it will trigger a level 10 alert if the rule ``3102`` has matched 8 times in the last 120 seconds.
+The rule with ID ``50180`` triggers a level 10 alert if rule ``50125`` matches 8 times within 120 seconds. To prevent floods, it is ignored for 60 seconds after triggering.
 
 .. _rules_match:
 
@@ -1424,17 +1421,16 @@ Example:
 .. code-block:: xml
    :emphasize-lines: 2
 
-   <rule id="30316" level="10" frequency="10" timeframe="120">
-     <if_matched_sid>30315</if_matched_sid>
-     <same_source_ip />
-     <description>Apache: Multiple Invalid URI requests from same source.</description>
+   <rule id="30202" level="10" frequency="10" timeframe="120">
+     <if_matched_sid>30201</if_matched_sid>
+     <description>ModSecurity: Multiple attempts blocked.</description>
      <mitre>
-       <id>T1499</id>
+       <id>T1110</id>
      </mitre>
-     <group>gdpr_IV_35.7.d,hipaa_164.312.b,invalid_request,nist_800_53_AU.14,nist_800_53_AC.7,nist_800_53_SI.4,pci_dss_10.2.4,pci_dss_11.4,tsc_CC6.1,tsc_CC6.8,tsc_CC7.2,tsc_CC7.3,</group>
+     <group>access_denied,gdpr_IV_35.7.d,hipaa_164.312.b,modsecurity,nist_800_53_AU.14,nist_800_53_AC.7,nist_800_53_SI.4,pci_dss_10.2.4,pci_dss_11.4,tsc_CC6.1,tsc_CC6.8,tsc_CC7.2,tsc_CC7.3,</group>
    </rule>
 
-The rule is triggered when rule 30315 has been triggered 10 times in 120 seconds and if the requests were made by the same ``srcip``.
+The rule triggers when rule ``30201`` matches 10 times within 120 seconds.
 
 if_matched_group
 ^^^^^^^^^^^^^^^^
