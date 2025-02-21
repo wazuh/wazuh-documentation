@@ -293,8 +293,8 @@ Indexer users
    .. code-block:: puppet
 
       node "puppet-agent.com" {
-        class { 'wazuh::dashboard':
-          dashboard_password => '<NEW_PASSWORD>'
+        class { 'wazuh::filebeat_oss':
+          filebeat_oss_elastic_password  => '<NEW_PASSWORD>'
         }
       }
 
@@ -303,8 +303,8 @@ Indexer users
    .. code-block:: puppet
 
       node "puppet-agent.com" {
-        class { 'wazuh::filebeat_oss':
-          filebeat_oss_elastic_password  => '<NEW_PASSWORD>'
+        class { 'wazuh::dashboard':
+          dashboard_password => '<NEW_PASSWORD>'
         }
       }
 
