@@ -186,7 +186,7 @@ Perform the following steps on any of the Wazuh indexer nodes replacing ``<WAZUH
 
 #. Re-enable shard allocation.
 
-   .. code-block:: bash
+   .. code-block:: console
 
       # curl -X PUT "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cluster/settings" \
       -u <USERNAME>:<PASSWORD> -k -H "Content-Type: application/json" -d '
