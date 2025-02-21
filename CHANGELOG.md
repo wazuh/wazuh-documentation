@@ -12,7 +12,6 @@ All notable changes to this project will be documented in this file.
 
 - Updated Wazuh dashboard package generation guide. ([#7961](https://github.com/wazuh/wazuh-documentation/pull/7961))
 - Updated images in FIM PoC. [#7979](https://github.com/wazuh/wazuh-documentation/pull/7979)
-=======
 # [v4.11.1]
 
 - Support for Wazuh 4.11.1
