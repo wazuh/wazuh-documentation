@@ -132,11 +132,11 @@ To generate and change passwords for all the Wazuh indexer users, run the script
 
 If you use the tool in an all-in-one deployment, it automatically updates the passwords where necessary. If you use it in a distributed environment, you have to update the password on other components. See :ref:`Changing the passwords in a distributed environment <passwords_distributed>` for more details.
 
-On an all-in-one deployment, use options ``-a|--change-all``, ``-au|--admin-user <ADMIN_USER>``, and ``-ap|--admin-password <ADMIN_PASSWORD>`` to also change the passwords for all the Wazuh indexer and the Wazuh manager API users.
+On an all-in-one deployment, use options ``-a|--change-all``, ``-A|--api``, ``-au|--admin-user <ADMIN_USER>``, and ``-ap|--admin-password <ADMIN_PASSWORD>`` to also change the passwords for all the Wazuh indexer and the Wazuh manager API users.
 
    .. code-block:: console
 
-      # sudo bash wazuh-passwords-tool.sh -a -au wazuh -ap KTb+Md+rR74J2yHfoGGnFGHGm03Gadyu
+      # sudo bash wazuh-passwords-tool.sh -a -A -au wazuh -ap KTb+Md+rR74J2yHfoGGnFGHGm03Gadyu
 
 
    .. code-block:: console
