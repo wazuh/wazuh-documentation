@@ -1,0 +1,43 @@
+name: Track Wazuh Releases
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # Runs every hour
+  workflow_dispatch:  # Allows manual trigger
+
+jobs:
+  check-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch Latest Wazuh Release
+        id: fetch_release
+        run: |
+          LATEST_RELEASE=$(curl -s https://api.github.com/repos/wazuh/wazuh/releases/latest | jq -r '.tag_name')
+          echo "Latest Wazuh Release: $LATEST_RELEASE"
+          echo "LATEST_RELEASE=$LATEST_RELEASE" >> $GITHUB_ENV
+
+      - name: Check for New Release
+        id: check_changes
+        run: |
+          PREV_RELEASE=$(cat prev_release.txt 2>/dev/null || echo "none")
+          echo "Previous Release: $PREV_RELEASE"
+          if [ "$LATEST_RELEASE" != "$PREV_RELEASE" ]; then
+            echo "New Release Found: $LATEST_RELEASE"
+            echo "$LATEST_RELEASE" > prev_release.txt
+            echo "new_release=true" >> $GITHUB_ENV
+          else
+            echo "No new release."
+            echo "new_release=false" >> $GITHUB_ENV
+          
+      - name: Notify via GitHub Logs
+        if: env.new_release == 'true'
+        run: echo "🚀 New Wazuh Release Detected: ${{ env.LATEST_RELEASE }}"
+
+      - name: Save Latest Release
+        if: env.new_release == 'true'
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
+          git add prev_release.txt
+          git commit -m "Updated latest release to $LATEST_RELEASE"
+          git push || echo "No changes to commit."
