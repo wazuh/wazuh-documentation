@@ -9,35 +9,44 @@ jobs:
   check-release:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
       - name: Fetch Latest Wazuh Release
         id: fetch_release
         run: |
           LATEST_RELEASE=$(curl -s https://api.github.com/repos/wazuh/wazuh/releases/latest | jq -r '.tag_name')
-          echo "Latest Wazuh Release: $LATEST_RELEASE"
           echo "LATEST_RELEASE=$LATEST_RELEASE" >> $GITHUB_ENV
+          echo "Latest Wazuh Release: $LATEST_RELEASE"
+
+      - name: Load Previous Release (if exists)
+        run: |
+          if [ -f prev_release.txt ]; then
+            PREV_RELEASE=$(cat prev_release.txt)
+          else
+            PREV_RELEASE="none"
+          fi
+          echo "PREV_RELEASE=$PREV_RELEASE" >> $GITHUB_ENV
+          echo "Previous Release: $PREV_RELEASE"
 
       - name: Check for New Release
-        id: check_changes
         run: |
-          PREV_RELEASE=$(cat prev_release.txt 2>/dev/null || echo "none")
-          echo "Previous Release: $PREV_RELEASE"
           if [ "$LATEST_RELEASE" != "$PREV_RELEASE" ]; then
-            echo "New Release Found: $LATEST_RELEASE"
             echo "$LATEST_RELEASE" > prev_release.txt
             echo "new_release=true" >> $GITHUB_ENV
           else
-            echo "No new release."
             echo "new_release=false" >> $GITHUB_ENV
-          
+          fi
+
       - name: Notify via GitHub Logs
-        if: env.new_release == 'true'
-        run: echo "🚀 New Wazuh Release Detected: ${{ env.LATEST_RELEASE }}"
+        if: ${{ env.new_release == 'true' }}
+        run: echo "🚀 New Wazuh Release Detected:$LATEST_RELEASE"
 
       - name: Save Latest Release
-        if: env.new_release == 'true'
+        if: ${{ env.new_release == 'true' }}
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "actions@github.com"
           git add prev_release.txt
-          git commit -m "Updated latest release to $LATEST_RELEASE"
-          git push || echo "No changes to commit."
+          git commit -m "Updated latest release to $LATEST_RELEASE" || echo "No changes to commit."
+          git push || echo "Push failed, possibly no changes."
