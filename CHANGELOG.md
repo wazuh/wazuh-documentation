@@ -18,6 +18,10 @@ All notable changes to this project will be documented in this file.
 
 - Removed note about plugins and upgrading Wazuh central components. ([#8020](https://github.com/wazuh/wazuh-documentation/pull/8020))
 
+### Fixed
+
+- **Post-release**: Removed prompt symbol from code block. ([#8211](https://github.com/wazuh/wazuh-documentation/pull/8211))
+
 # [v4.10.2]
 
 - Support for Wazuh 4.10.2
