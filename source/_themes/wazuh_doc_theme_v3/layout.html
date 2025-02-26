@@ -281,7 +281,7 @@
     {%- set body_class = body_class + ' pre-v3' -%}
   {% endif -%}
 
-  <body class="{{ body_class }}"  data-path="{{ pagename }}" data-spy="scroll" data-target="#local-toc" data-offset="200">
+  <body class="{{ body_class }}"  data-path="{{ pagename }}">
   {%- if production and theme_breadcrumb_root_title == 'Documentation' -%}
     {#- Google Tag Manager - Body -#}
     {%- block gtm_body -%}

@@ -10,7 +10,7 @@ if ( $('#global-toc').length > 0 ) {
   $('#global-toc .toctree-l1 a').each(function(e) {
     if ($(this).siblings('ul').length) {
       $(this).closest('li').addClass('toc-toggle');
-      $(this).append($('<button class="toc-toggle-btn"><span class="sr-only">Expand submenu</span></button>'));
+      $(this).append($('<button class="toc-toggle-btn"><span class="visually-hidden">Expand submenu</span></button>'));
     }
   });
 
@@ -26,8 +26,8 @@ if ( $('#global-toc').length > 0 ) {
   $('#global-toc a .toc-toggle-btn').on('click', function(e) {
     /* Normal link: avoid toggle if current menu item doesn't have submenu */
 
-    $('#global-toc a .toc-toggle-btn .sr-only').text('Expand submenu');
-    $(this).find('.sr-only').text('Close submenu');
+    $('#global-toc a .toc-toggle-btn .visually-hidden').text('Expand submenu');
+    $(this).find('.visually-hidden').text('Close submenu');
     li = $(e.target).closest('li');
     if (!li || li.children('ul').length == 0) {
       return true;

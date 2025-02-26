@@ -14,8 +14,8 @@
   flex-grow: 0;
 
   @include media-only(xl, xxl) {
-    flex-basis: $right-sidebar-width-narrow;
-    width: $right-sidebar-width-narrow;
+    flex-basis: $right-sidebar-width;
+    width: $right-sidebar-width;
   }
   @include media-min(xxl) {
     flex-basis: $right-sidebar-width;
@@ -29,7 +29,7 @@
       top: $header-height-xl;
       right: 0;
       bottom: $footer-height;
-      width: calc((#{$left-sidebar-width} / 2) + 30px);
+      width: calc(100% - 15px);
       padding: 30px 16px;
       margin-left: auto;
       overflow: hidden;

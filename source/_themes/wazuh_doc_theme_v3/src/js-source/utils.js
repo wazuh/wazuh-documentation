@@ -29,26 +29,35 @@ if ( typeof(versions) === 'undefined' ) {
 
 /* Menu dropdown hover =========================================================== */
 (function($) {
+  let menuDropdowns = [];
+  $('.navbar-nav .dropdown-toggle').each(function(){
+    menuDropdowns.push(new bootstrap.Dropdown(this, {}));
+  });
   if(window.matchMedia("(hover: hover)").matches) {
     $('.navbar-nav .dropdown-toggle').on('mouseenter', function(e) {
       if (!$(this).closest('.dropdown').hasClass('show')) {
         e.stopPropagation();
-        $(this).trigger('click');
+        let index = $('.navbar-nav .dropdown-toggle').index($(this));
+        menuDropdowns[index].show();
       }
     });
     $('.navbar-nav .dropdown-toggle').on('mouseleave', function(e) {
       let toElement = e.toElement || e.relatedTarget;
-      if ($(this).closest('.dropdown').hasClass('show')
+      if ($(this).hasClass('show')
         && toElement !== $(this).siblings()[0]) {
         e.stopPropagation();
-        $(this).trigger('click').trigger('blur');
+        let index = $('.navbar-nav .dropdown-toggle').index($(this));
+        $(this).trigger('blur');
+        menuDropdowns[index].hide();
       }
     });
     $('.navbar-nav .dropdown-menu').on('mouseleave', function(e) {
       let toElement = e.toElement || e.relatedTarget;
-      if ($(this).closest('.dropdown').hasClass('show')
+      if ($(this).hasClass('show')
         && toElement !== $(this).siblings()[0]) {
-        $(this).siblings().trigger('click').trigger('blur');
+        let index = $('.navbar-nav .dropdown-toggle').index($(this).siblings('.dropdown-toggle'));
+        $(this).siblings('.dropdown-toggle').trigger('blur');
+        menuDropdowns[index].hide();
       }
     });
   }

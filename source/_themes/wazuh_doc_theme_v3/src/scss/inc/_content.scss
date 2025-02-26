@@ -59,6 +59,8 @@
   }
   
   .table-responsive {
+    display: block;
+    max-width: 100%;
     &.align-left,
     &.align-center,
     &.align-right {

@@ -230,10 +230,12 @@ body {
   }
   a {
     color: $light-color-primary;
+    text-decoration: none;
 
     &:hover,
     &:focus {
       color: $light-color-primary-lighter;
+      text-decoration: underline;
     }
 
     &:active {

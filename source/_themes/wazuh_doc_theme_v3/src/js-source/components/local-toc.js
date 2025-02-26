@@ -21,14 +21,28 @@ $(document).ready(function() {
     if (firstSectionId) {
       firstLocalTocItem.attr('href', firstLocalTocItem.attr('href') + firstSectionId);
     }
+    var scrollSpy = new bootstrap.ScrollSpy(document.body, {
+      target: '#local-toc',
+      offset: 200
+    });
   }
 });
 
 /* Expand accordion functionality for the local-toc */
 $('#local-toc .nav-link').on('click', function(e) {
   const anchor = $(e.target).attr('href');
-  const accordion = $('[href="'+anchor+'"].headerlink').parent();
-  if ( accordion.hasClass('collapsed') ) {
-    accordion.click();
+  let accordions = $('[href="'+anchor+'"].headerlink').parent();
+  if ( accordions.hasClass('accordion-title') ) {
+    if ( accordions.hasClass('collapsed') ) {
+      accordions.trigger('click');
+    }
+  } else {
+    accordions = $('[href="'+anchor+'"].headerlink').parents('.accordion-section');
+    accordions.each(function(){
+      if (!$(this).hasClass('show')) {
+        $(this).siblings('.accordion-title').trigger('click');
+        $('html,body').animate({scrollTop:$('[href="'+anchor+'"].headerlink').offset().top - 180}, 'smooth');
+      }
+    });
   }
 });

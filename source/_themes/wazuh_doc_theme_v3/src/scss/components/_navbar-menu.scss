@@ -66,7 +66,7 @@ header {
     border: 1px solid;
     border-radius: 10px;
     position: absolute;
-    top: -24px!important;
+    top: -5px!important;
     &::before {
       position: absolute;
       top: -9px;
@@ -82,6 +82,9 @@ header {
       padding: .9rem .75rem;
       font-size: 17px;
       font-weight: 500;
+      &:hover {
+        text-decoration: none;
+      }
     }
   }
 }
@@ -95,8 +98,10 @@ header {
       color: $light-color-main-text;
       &.active,
       &:hover,
-      &:focus {
+      &:focus,
+      &:focus-visible {
         color: $light-color-primary;
+        box-shadow: none;
       }
       &.dropdown-toggle {
         &[aria-expanded="true"],
