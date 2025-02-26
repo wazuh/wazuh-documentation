@@ -165,10 +165,10 @@ Using the script
 
 Run the ``build-packages.sh`` script in the ``dev-tools/build-packages/`` folder of the repository. The script requires the following parameters:
 
+-  ``-c``, ``--commit-sha``: Set the commit sha of this build.
 -  ``-a``, ``--app``: Indicate the path to ``wazuh-package.zip``.
 -  ``-b``, ``--base``: Indicate the path to ``dashboard-package.zip``.
 -  ``-s``, ``--security``: Indicate the path to ``security-package.zip``.
--  ``-v``, ``--version``: Set the version for this build.
 -  ``--all-platforms``: Build the packages for all platforms.
 -  ``--deb``: Build a deb package.
 -  ``--rpm``: Build an rpm package.
@@ -182,7 +182,7 @@ Run the ``build-packages.sh`` script in the ``dev-tools/build-packages/`` folder
 .. code:: console
 
    $ cd ../wazuh-dashboard/dev-tools/build-packages/
-   $ ./build-packages.sh -v <VERSION> -r <REVISION> --<DISTRIBUTION> -a file:///<PATH_TO_wazuh-package.zip> -s file:///<PATH_TO_security-package.zip> -b file:///<PATH_TO_dashboard-package.zip>
+   $ ./build-packages.sh -r <REVISION> --<DISTRIBUTION> -a file:///<PATH_TO_wazuh-package.zip> -s file:///<PATH_TO_security-package.zip> -b file:///<PATH_TO_dashboard-package.zip>
 
 Where ``--<DISTRIBUTION>`` is either ``--deb``, ``--rpm``,  ``--tar``, or ``--all-platforms``.
 
@@ -199,7 +199,7 @@ Example:
 .. code:: console
 
    $ cd ../wazuh-dashboard/dev-tools/build-packages/
-   $ ./build-packages.sh -v v|WAZUH_CURRENT| -r 1 --deb -a file:///packages/wazuh-package.zip -s file:///packages/security-package.zip -b file:///packages/dashboard-package.zip
+   $ ./build-packages.sh -r 1 --deb -a file:///packages/wazuh-package.zip -s file:///packages/security-package.zip -b file:///packages/dashboard-package.zip
 
 The script generates the package in the ``output`` folder of the same directory where it is located.
 
