@@ -182,7 +182,7 @@ Run the ``build-packages.sh`` script in the ``dev-tools/build-packages/`` folder
 .. code:: console
 
    $ cd ../wazuh-dashboard/dev-tools/build-packages/
-   $ ./build-packages.sh -r <REVISION> --<DISTRIBUTION> -a file:///<PATH_TO_wazuh-package.zip> -s file:///<PATH_TO_security-package.zip> -b file:///<PATH_TO_dashboard-package.zip>
+   $ ./build-packages.sh --commit-sha <COMMIT_SHA> -r <REVISION> --<DISTRIBUTION> -a file:///<PATH_TO_wazuh-package.zip> -s file:///<PATH_TO_security-package.zip> -b file:///<PATH_TO_dashboard-package.zip>
 
 Where ``--<DISTRIBUTION>`` is either ``--deb``, ``--rpm``,  ``--tar``, or ``--all-platforms``.
 
@@ -199,9 +199,32 @@ Example:
 .. code:: console
 
    $ cd ../wazuh-dashboard/dev-tools/build-packages/
-   $ ./build-packages.sh -r 1 --deb -a file:///packages/wazuh-package.zip -s file:///packages/security-package.zip -b file:///packages/dashboard-package.zip
+   $ ./build-packages.sh --commit-sha c68286b87b-b917f56ac4-970c469531-33215c72e5 -r 1 --deb -a file:///packages/wazuh-package.zip -s file:///packages/security-package.zip -b file:///packages/dashboard-package.zip
 
 The script generates the package in the ``output`` folder of the same directory where it is located.
+
+How to generate the commit SHA
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To generate the commit SHA, run the following command for each repository (``wazuh-dashboard``, ``wazuh-dashboard-plugins``, ``wazuh-security-dashboards-plugin``, and ``wazuh-dashboards-reporting``):
+
+.. code:: console
+
+   $ git rev-parse HEAD
+
+This command returns the commit SHA of the current branch.
+
+Once you have the commit SHA for each repository, you must concatenate them in the following format:
+
+-  ``<COMMIT_DASHBOARD_SHA>-<COMMIT_PLUGINS_SHA>-<COMMIT_SECURITY_SHA>-<COMMIT_REPORTING_SHA>``
+
+For example:
+
+-  ``c68286b87b-b917f56ac4-970c469531-33215c72e5``
+
+.. note::
+
+   The commit SHA is used to identify the build in the package name. Ensure you reference the correct branch for an accurate SHA representation. This SHA will inform versioning and help in tracking changes across builds.
 
 Build with Docker image
 ^^^^^^^^^^^^^^^^^^^^^^^
