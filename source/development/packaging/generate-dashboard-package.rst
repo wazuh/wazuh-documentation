@@ -165,7 +165,7 @@ Using the script
 
 Run the ``build-packages.sh`` script in the ``dev-tools/build-packages/`` folder of the repository. The script requires the following parameters:
 
--  ``-c``, ``--commit-sha``: Set the commit sha of this build.
+-  ``-c``, ``--commit-sha``: Set the commit SHA of this build.
 -  ``-a``, ``--app``: Indicate the path to ``wazuh-package.zip``.
 -  ``-b``, ``--base``: Indicate the path to ``dashboard-package.zip``.
 -  ``-s``, ``--security``: Indicate the path to ``security-package.zip``.
