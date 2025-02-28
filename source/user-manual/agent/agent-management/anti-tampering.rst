@@ -62,6 +62,8 @@ Perform the following steps on the monitored endpoint to enable the Wazuh agent 
 
 After completing these steps, the anti-tampering feature will be active.
 
+.. _uninstalling_an_agent_with_anti_tampering_enabled:
+
 Uninstalling an agent with anti-tampering enabled
 -------------------------------------------------
 
