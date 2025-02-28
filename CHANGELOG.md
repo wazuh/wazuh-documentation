@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 
 - Added architecture information to assistant pages. ([#7830](https://github.com/wazuh/wazuh-documentation/pull/7830))
 - Added CISA to the vulnerability source enumerations and compatibility matrix. ([#8201](https://github.com/wazuh/wazuh-documentation/pull/8201))
+- **Post-release**: Added an Anti-tampering section to User administration and a note about it in Uninstalling a Linux Wazuh agent. ([#8221](https://github.com/wazuh/wazuh-documentation/pull/8221))
 
 ### Changed
 
@@ -22,10 +23,6 @@ All notable changes to this project will be documented in this file.
 
 - **Post-release**: Removed prompt symbol from code block. ([#8211](https://github.com/wazuh/wazuh-documentation/pull/8211))
 - **Post-release**: Increased note and code block indentation. ([8213](https://github.com/wazuh/wazuh-documentation/pull/8213))
-
-# [v4.10.2]
-
-- Support for Wazuh 4.10.2
 
 # [v4.10.1]
 
