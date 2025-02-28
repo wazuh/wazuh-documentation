@@ -1,4 +1,4 @@
-﻿---
+---
 name: Documentation request
 about: Request improvements or updates to documentation
 title: ''
