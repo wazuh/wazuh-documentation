@@ -30,8 +30,6 @@ Contribute by forking the repository, creating a new branch, making your changes
 The Digital Ocean guides below provide an overview of installing Python 3 and configuring a virtual environment. This approach lets you install the required dependencies without altering your primary environment, making it easier to manage and remove development setups.
 
 - Ubuntu 22.04: [Link](https://www.digitalocean.com/community/tutorials/how-to-install-python-3-and-set-up-a-programming-environment-on-ubuntu-22-04)
-- Ubuntu 16.04: [Link](https://www.digitalocean.com/community/tutorials/how-to-install-python-3-and-set-up-a-local-programming-environment-on-ubuntu-16-04)
-- Ubuntu 18.04: [Link](https://www.digitalocean.com/community/tutorials/how-to-install-python-3-and-set-up-a-programming-environment-on-an-ubuntu-18-04-server)
 - CentOS 7: [Link](https://www.digitalocean.com/community/tutorials/how-to-install-python-3-and-set-up-a-local-programming-environment-on-centos-7)
 
 After following one of the previous guides, you should have a Python programming environment ready to be used.
