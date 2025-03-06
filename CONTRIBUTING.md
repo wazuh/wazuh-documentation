@@ -88,6 +88,5 @@ To compile the documentation with the alternative Pagefind search engine, instal
 - Also include an explanation of your changes in your PR description.
 - Make sure to resolve merge conflicts so we can continue reviewing your pull request.
 - In your PR description, add links to relevant issues, external resources, or related PRs that are useful.
-- Your commits will be squashed into a single commit upon merging.
 
 This guide covers everything you need to know. Thank you for contributing!
