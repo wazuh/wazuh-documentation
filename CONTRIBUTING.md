@@ -9,7 +9,7 @@ This document provides instructions for deploying a Python virtual environment, 
 
 The community is important to us. We value your feedback on bugs or typos in the documentation. When reporting an issue, include the **URL or section** where the error occurs and provide all relevant details to help us resolve it.
 
-Keep in mind that this repository is for the Wazuh documentation. There are some cases where your issue might be more effective if it's created on the proper repository. Here you can find some tips if you have doubts about the right place for your issue:
+Keep in mind that this repository is for the Wazuh documentation. In some cases, your issue might be more effectively addressed if it's reported in the appropriate repository. Here you can find some tips if you have doubts about the right place for your issue:
 
 - If Wazuh works fine but something in the documentation seems inaccurate, unclear, or confusing, let us know by creating an issue [here](https://github.com/wazuh/wazuh-documentation/issues).
 - If you have **problems, bugs or unexpected results** when using any of the Wazuh components, create the issue in its respective repository:
