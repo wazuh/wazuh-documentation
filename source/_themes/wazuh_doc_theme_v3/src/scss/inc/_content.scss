@@ -444,7 +444,7 @@
     h1 {
       background-color: $light-color-primary-lighter;
       background-image: url("#{$img-path}waves.png");
-      background-size: 100% 90px;
+      background-size: cover;
       background-repeat: no-repeat;
       background-position: bottom;
       color: white;

@@ -15,8 +15,11 @@
 .not-top {
   .breadcrumb-wrapper {
     position: fixed;
-    @include media-min(xl){
+    @include media-only(xl, xxl){
       max-width: calc(100% - #{$left-sidebar-width-narrow + $right-sidebar-width});
+    }
+    @include media-min(xxl){
+      max-width: calc(1600px - #{$left-sidebar-width-narrow + $right-sidebar-width});
     }
   }
 }

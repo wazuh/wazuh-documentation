@@ -175,9 +175,9 @@
   #global-toc {
     ul {
       .current-toc-node {
-        color: $light-color-primary-alt;
+        color: $light-color-primary-lighter;
         &:hover {
-          color: $light-color-primary-lighter;
+          color: rgba($light-color-primary-lighter, 0.9);
         }
         &::before {
           border-top-color: $light-color-primary;
