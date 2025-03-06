@@ -73,15 +73,76 @@ header {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding-bottom: 15px;
-  height: $index-header-height-xs;
-  @include media-min(xl){
-    height: $index-header-height-xl;
-  }
   @include media-min(xxl){
     max-width: $outer-container-xxl;
     margin-left: auto;
     margin-right: auto;
+  }
+  
+  .outer-container {
+    width: 100%;
+    overflow: hidden;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 26px;
+    padding-top: 50px;
+    padding-bottom: 60px;
+    background-color: $light-color-primary-lighter;
+    background-image: url("#{$img-path}waves.png");
+    background-size: 100% 190px;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    color: white;
+    display: flex;
+    min-height: 200px;
+    align-items: center;
+    flex-direction: row;
+    margin-bottom: 30px;
+    @include media-max(lg) {
+      margin-top: 25px;
+    }
+    @include media-max(sm) {
+      max-width: calc(100% - 30px);
+    }
+    @include media-only(sm, md) {
+      max-width: calc(97% - 64px);
+    }
+    @include media-only(md, lg) {
+      max-width: calc(90% - 24px);
+    }
+    @include media-min(lg) {
+      max-width: calc(97% - 24px);
+    }
+    @include media-min(xxl) {
+      max-width: 1520px;
+    }
+    @include media-only(wzh-xl,xxl) {
+      max-width: 94%;
+    }
+    @include media-only(xl, wzh-xl) {
+      max-width: 1156px;
+    }
+    .container {
+      @include media-max(sm) {
+        max-width: calc(100% - 60px);
+      }
+      @include media-min(sm) {
+        max-width: calc(90% + 36px);
+      }
+      @include media-min(md) {
+        max-width: calc(90% + 72px);
+      }
+      @include media-min(xl) {
+        max-width: 1148px;
+      }
+      @include media-min(wzh-xl) {
+        max-width: 1220px;
+      }
+      @include media-min(xxl) {
+        max-width: calc(1600px - #{$left-sidebar-width-narrow - 12px} * 2);
+      }
+    }
   }
   .title {
     font-weight: 400;
@@ -90,7 +151,7 @@ header {
     @include media-max(sm){
       font-size: 1.5rem;
     }
-    .wzh-remark {
+    .text-bold {
       font-weight: 600;
     }
   }
@@ -98,15 +159,26 @@ header {
     // max-width: 850px;
     margin-right: auto;
     margin-left: auto;
+    border-radius: 20px;
+    border-width: 1px;
+    @include media-only (sm, xxl){
+      max-width: 80%;
+    }
+    @include media-min (xxl){
+      max-width: 984px;
+    }
     .form-control {
       box-shadow: none;
     }
     .search-form {
-      height: 46px;
+      height: 60px;
       .btn-search {
-        width: 44px;
-        height: 44px;
-        background-size: 41px 41px;
+        width: 70px;
+        height: 60px;
+        background-size: 30px 30px;
+        background-color: $light-color-main-text;
+        background-image: url("#{$ico-path}svg-icons.svg#search-white");
+        border-radius: 0 $rounded-corners*2 - 2px $rounded-corners*2 - 2px 0;
       }
     }
   }
@@ -115,8 +187,13 @@ header {
 #large-search-box .container,
 .inner-body .container {
   @include media-min(xxl){
-    max-width: calc(100% - #{$left-sidebar-width-narrow - 15px} * 2);
+    max-width: calc(100% - #{$left-sidebar-width-narrow - 12px} * 2);
   }
+}
+
+.sidebar .sidebar-container {
+  position: relative;
+  top: 135px;
 }
 
 main {
@@ -125,6 +202,12 @@ main {
   padding-right: 0;
   padding-left: 0;
   padding-bottom: 80px;
+
+  & > section {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
   h1 {
     width: 0;
     height: 0;

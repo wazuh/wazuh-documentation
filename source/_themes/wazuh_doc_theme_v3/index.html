@@ -18,11 +18,13 @@
     </nav>
   </header>
   <div id="large-search-box">
-    <div class="container">
-      <div class="h2 title">
-        Documentation <span class="wzh-remark">Index</span>
+    <div class="outer-container">
+      <div class="container">
+        <div class="h2 title">
+          Documentation <span class="text-bold">Index</span>
+        </div>
+        {% include "template-parts/search-box.html" %}
       </div>
-      {% include "template-parts/search-box.html" %}
     </div>
   </div>
   {% endblock %}

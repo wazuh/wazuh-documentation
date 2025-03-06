@@ -17,8 +17,31 @@
 @import "../components/previous-next";
 @import "pre-v3";
 
+.document,
+.index,
+.not_found,
+.search {
+  .not-top {
+    #central-column {
+      @include media-min (xl) {
+        padding-top: $breadcrumbs-height-xl;
+      }
+    }
+  }
+}
+
+.document,
+.index,
+.not_found,
+.search {
+  #central-column {
+    @include media-max (xl) {
+      padding-top: 75px;
+    }
+  }
+}
+
 #central-column {
-  padding-top: $breadcrumbs-height-xl;
   @include media-max(sm){
     padding-top: 0;
   }
@@ -143,7 +166,7 @@
 
     &:hover {
       .headerlink::after {
-        opacity: 1;
+        opacity: 0.8;
         transition: opacity ease-in .1s;
       }
     }
@@ -416,6 +439,32 @@
   }
 }
 
+.document {
+  [role="main"]  {
+    h1 {
+      background-color: $light-color-primary-lighter;
+      background-image: url("#{$img-path}waves.png");
+      background-size: 100% 90px;
+      background-repeat: no-repeat;
+      background-position: bottom;
+      color: white;
+      display: flex;
+      padding: 28px;
+      border-radius: 26px;
+      min-height: 100px;
+      width: 100%;
+      align-items: center;
+      flex-direction: row;
+      margin-bottom: 30px;
+      @include media-min (sm) {
+      margin-left: -28px;
+      margin-right: -28px;
+      width: calc(100% + 56px);
+      }
+    }
+  }
+}
+
 /* Light theme -------------------------------------------------------------- */
 
 .light-theme {
@@ -424,6 +473,14 @@
       &::after {
         color: $light-color-shaded-text;
         background-image: url("#{$ico-path}link.svg#link-lt");
+      }
+    }
+    h1 {
+      .headerlink {
+        &::after {
+          color: $light-color-shaded-text;
+          background-image: url("#{$ico-path}link.svg#link-white");
+        }
       }
     }
     code {
@@ -507,6 +564,14 @@
       &::after {
         color: $dark-color-shaded-text;
         background-image: url("#{$ico-path}link.svg#link-dt");
+      }
+    }
+    h1 {
+      .headerlink {
+        &::after {
+          color: $light-color-shaded-text;
+          background-image: url("#{$ico-path}link.svg#link-white");
+        }
       }
     }
     code {

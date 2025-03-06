@@ -23,6 +23,14 @@
     }
   }
 
+  .toc-toggle {
+    &.show {
+      & > a > .toc-toggle-btn {
+        display: block;
+      }
+    }
+  }
+
   ul {
     padding: 0;
     list-style: none;
@@ -114,7 +122,7 @@
 
   .toctree-l1 {
     > a {
-      padding-left: 20px;
+      padding-left: 24px;
       font-size: 16px;
       &::before {
         left: 10px;
@@ -145,7 +153,7 @@
     background-color: transparent;
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 24px 24px;
+    background-size: 15px 15px;
     border: none;
     @media (hover: none) {
       display: block;
@@ -179,12 +187,12 @@
     a {
       color: $light-color-main-text;
       .toc-toggle-btn {
-        background-image: url(#{$ico-path}svg-icons.svg#chevron-blue-light-lt);
+        background-image: url(#{$ico-path}svg-icons.svg#chevron-black);
       }
       &:hover {
         color: $light-color-primary-lighter;
         .toc-toggle-btn {
-          background-image: url(#{$ico-path}svg-icons.svg#chevron-blue-lt);
+          background-image: url(#{$ico-path}svg-icons.svg#chevron-black);
         }
       }
     }
@@ -235,12 +243,12 @@
     a {
       color: $dark-color-main-text;
       .toc-toggle-btn {
-        background-image: url(#{$ico-path}svg-icons.svg#chevron-blue-light-dt);
+        background-image: url(#{$ico-path}svg-icons.svg#chevron-white);
       }
       &:hover {
         color: $dark-color-primary-lighter;
         .toc-toggle-btn {
-          background-image: url(#{$ico-path}svg-icons.svg#chevron-blue-dt);
+          background-image: url(#{$ico-path}svg-icons.svg#chevron-white);
         }
       }
     }
@@ -265,8 +273,12 @@
         }
       }
       &.show {
+        background: #4d525d;
+        &:not(.current) > a {
+          background-color: $dark-color-sidebar-space ;
+        }
         & > ul {
-          background: linear-gradient(90deg, $dark-color-sidebar-space 0, #2D2E33 40px);
+          // background: linear-gradient(90deg, $dark-color-sidebar-space 0, #2D2E33 40px);
         }
       }
       > ul::before {
