@@ -13,7 +13,7 @@ Keep in mind that this repository is for the Wazuh documentation. In some cases,
 
 - If Wazuh works fine but something in the documentation seems inaccurate, unclear, or confusing, let us know by creating an issue [here](https://github.com/wazuh/wazuh-documentation/issues).
 - If you encounter problems, bugs, or unexpected results when using any of the Wazuh components, create the issue in its respective repository:
-  - [Wazuh Core](https://github.com/wazuh/wazuh/issues)
+  - [Wazuh server](https://github.com/wazuh/wazuh/issues)
   - [Wazuh API](https://github.com/wazuh/wazuh-api/issues)
   - [Wazuh indexer](https://github.com/wazuh/wazuh-indexer/issues)
   - [Wazuh dashboard](https://github.com/wazuh/wazuh-dashboard/issues)
