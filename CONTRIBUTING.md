@@ -69,7 +69,10 @@ This will delete the contents from `/wazuh-documentation/build/html`.
 
 ## Alternative Pagefind search engine
 
-To compile the documentation with the alternative Pagefind search engine, install NodeJS 22+. Then, follow the steps from the previous section replacing with `make html-search` the command in step 3.
+To compile the documentation with the alternative Pagefind search engine, install NodeJS 22+. Replace the command in step 3 with:
+
+```shell
+ (wazuh_venv) $ make html-search
 
 ## How the branches work
 
