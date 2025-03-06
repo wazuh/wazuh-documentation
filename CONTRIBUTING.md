@@ -3,7 +3,7 @@
 This document provides instructions for deploying a Python virtual environment, cloning the repository, contributing changes, and submitting a pull request. It also explains how to report issues clearly so that we can resolve them quickly.
 
 
-*Note: This contribution guidelines might change in the future as we improve or change how we organize, create or compile the documentation.*
+*Note: These contribution guidelines might change in the future as we improve or change how we organize, create, and compile the documentation.*
 
 ## How to report issues in the Wazuh documentation
 
