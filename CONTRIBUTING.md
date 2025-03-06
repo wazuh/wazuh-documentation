@@ -78,7 +78,7 @@ To compile the documentation with the alternative Pagefind search engine, instal
 
 - The latest stable documentation is on the `main` branch. **Do not submit pull requests directly to this branch.**
 - We actively work on version numbered branches (4.10, 4.11, x.y) for new additions, improvements of existing documentation, or typo fixes.
-  - All new additions to this branch will be compatible with the latest stable release. That means we won't include documentation for a future release that doesn't work with the last official one.
+  - All new additions to a version branch will be compatible with the latest stable release. We won't include documentation for a future release that is incompatible with the current official version.
   - The work for a future release is merged on a different branch until we make the final decission of what the next release will be.
 - All branches other than `main` or version branches (e.g., 4.x) are feature branches under development and will be merged later.
 - Where appropriate, we'll backport changes into older release branches.
