@@ -12,7 +12,7 @@ The community is important to us. We value your feedback on bugs or typos in the
 Keep in mind that this repository is for the Wazuh documentation. In some cases, your issue might be more effectively addressed if it's reported in the appropriate repository. Here you can find some tips if you have doubts about the right place for your issue:
 
 - If Wazuh works fine but something in the documentation seems inaccurate, unclear, or confusing, let us know by creating an issue [here](https://github.com/wazuh/wazuh-documentation/issues).
-- If you have **problems, bugs or unexpected results** when using any of the Wazuh components, create the issue in its respective repository:
+- If you encounter problems, bugs, or unexpected results when using any of the Wazuh components, create the issue in its respective repository:
   - [Wazuh Core](https://github.com/wazuh/wazuh/issues)
   - [Wazuh API](https://github.com/wazuh/wazuh-api/issues)
   - [Wazuh indexer](https://github.com/wazuh/wazuh-indexer/issues)
