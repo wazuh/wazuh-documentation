@@ -90,4 +90,4 @@ This command deletes the contents of `wazuh-documentation/build/html/`.
 - Make sure to resolve merge conflicts so we can continue reviewing your pull request.
 - In your PR description, add links to relevant issues, external resources, or related PRs that are useful.
 
-This guide covers everything you need to know. Thank you for contributing!
+Thank you for contributing!
