@@ -208,13 +208,20 @@ The script generates the package in the ``output`` folder of the same directory 
 Generating the commit SHA
 .........................
 
-To generate the commit SHA, run the following command for each repository (``wazuh-dashboard``, ``wazuh-dashboard-plugins``, ``wazuh-security-dashboards-plugin``, and ``wazuh-dashboards-reporting``):
+#. Run the following command in each relevant repository to obtain individual SHAs. Ensure you are on the correct branch in each repository.
 
-.. code:: console
+   .. code:: console
 
-   $ git rev-parse HEAD
+      $ git rev-parse --short HEAD
 
-This command returns the commit SHA of the current branch.
+   ===================================== =============================
+   Repository                            SHA Variable
+   ===================================== =============================
+   wazuh-dashboard                       ``<DASHBOARD_COMMIT_SHA>``
+   wazuh-dashboard-plugins               ``<PLUGINS_COMMIT_SHA>``
+   wazuh-security-dashboards-plugin      ``<SECURITY_COMMIT_SHA>``
+   wazuh-dashboards-reporting            ``<REPORTING_COMMIT_SHA>``
+   ===================================== =============================
 
 Once you have the commit SHA for each repository, you must concatenate them in the following format:
 
