@@ -71,7 +71,7 @@ You can view the compiled documentation at `/wazuh-documentation/build/html/inde
   (wazuh_venv) $ make clean
   ```
 
-This command deletes the contents of `wazuh-documentation/build/html/`.
+  This command deletes the contents of `wazuh-documentation/build/html/`.
 
 ## How the branches work
 
