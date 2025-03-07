@@ -203,8 +203,10 @@ Example:
 
 The script generates the package in the ``output`` folder of the same directory where it is located.
 
-How to generate the commit SHA
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. _generating_commit_sha:
+
+Generating the commit SHA
+.........................
 
 To generate the commit SHA, run the following command for each repository (``wazuh-dashboard``, ``wazuh-dashboard-plugins``, ``wazuh-security-dashboards-plugin``, and ``wazuh-dashboards-reporting``):
 
