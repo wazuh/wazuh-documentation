@@ -1,21 +1,19 @@
 # Contributing to the Wazuh documentation
 
-In this document you'll find instructions about how to deploy a Python virtual environment that you can use to clone this repository, add a contribution and submit a pull request for review.
+This document explains how to set up a Python virtual environment, clone the repository, contribute changes, and submit a pull request. It also explains how to report issues clearly so that we can resolve them quickly.
 
-At the same time, this document will give you a better idea of how to post meaningful issues that will be more easily understood, and resolved as quickly as possible.
-
-*Note: This contribution guidelines might change in the future as we improve or change how we organize, create or compile the documentation.*
+*Note: These contribution guidelines might change in the future as we improve or change how we organize, create, and compile the documentation.*
 
 ## How to report issues in the Wazuh documentation
 
-The community is important to us. We appreciate your reports of bugs or typos in the documentation. When creating a new issue, make sure to include **the URL or section** where the error occurs, along with all the possible details that could help us solve the problem.
+The community is important to us. We value your feedback on bugs or typos in the documentation. When reporting an issue, include the **URL or section** where the error occurs and provide all relevant details to help us resolve it.
 
-Keep in mind that this repository is for the Wazuh documentation. There are some cases where your issue might be more effective if it's created on the proper repository. Here you can find some tips if you have doubts about the right place for your issue:
+This repository is dedicated to Wazuh documentation. In some cases, your issue might be more effectively addressed if it's reported in the appropriate repository. Here you can find some tips if you have doubts about the right place for your issue:
 
-- If you think that Wazuh is working fine but you find the documentation **inaccurate, incorrect or confusing**, then create the issue [here](https://github.com/wazuh/wazuh-documentation/issues) in this repository.
-- If you have **problems, bugs or unexpected results** when using any of the Wazuh components, create the issue in its respective repository:
-  - [Wazuh Core](https://github.com/wazuh/wazuh/issues)
-  - [Wazuh API](https://github.com/wazuh/wazuh-api/issues)
+- If Wazuh works fine but something in the documentation seems inaccurate, unclear, or confusing, let us know by creating an issue [here](https://github.com/wazuh/wazuh-documentation/issues).
+- If you encounter problems, bugs, or unexpected results when using any of the Wazuh components, create the issue in its respective repository:
+  - [Wazuh server](https://github.com/wazuh/wazuh/issues)
+  - [Wazuh server API](https://github.com/wazuh/wazuh-api/issues)
   - [Wazuh indexer](https://github.com/wazuh/wazuh-indexer/issues)
   - [Wazuh dashboard](https://github.com/wazuh/wazuh-dashboard/issues)
   - [All Wazuh repositories](https://github.com/wazuh)
@@ -24,17 +22,16 @@ In any case, **don't worry if you create an issue here**, we'll assist you with 
 
 ## How to collaborate with the Wazuh documentation
 
-The most common way of contributing consists in forking the repository, creating a new branch, make the desired changes and submit a pull request.
+Contribute by forking the repository, creating a new branch, making your changes, and submitting a pull request.
 
 ### Installing a Python virtual environment
 
-The following guides created by Digital Ocean will give you a quick overview of how to install Python 3 and configure a virtual environment. This way, you can install the required dependencies for the documentation without modifying your own environments, making easier to manage and delete development environments.
+The Digital Ocean guides below provide an overview of installing Python 3 and configuring a virtual environment. This approach lets you install the required dependencies without altering your primary environment, making it easier to manage and remove development setups.
 
-- Ubuntu 16.04: [Link](https://www.digitalocean.com/community/tutorials/how-to-install-python-3-and-set-up-a-local-programming-environment-on-ubuntu-16-04)
-- Ubuntu 18.04: [Link](https://www.digitalocean.com/community/tutorials/how-to-install-python-3-and-set-up-a-programming-environment-on-an-ubuntu-18-04-server)
+- Ubuntu 22.04: [Link](https://www.digitalocean.com/community/tutorials/how-to-install-python-3-and-set-up-a-programming-environment-on-ubuntu-22-04)
 - CentOS 7: [Link](https://www.digitalocean.com/community/tutorials/how-to-install-python-3-and-set-up-a-local-programming-environment-on-centos-7)
 
-After following one of the previous guides, you should have a Python programming environment ready to be used.
+After completing one of these guides, your Python environment will be ready.
 
 ### How to fork this repository
 
@@ -42,42 +39,46 @@ Follow the [GitHub forking model](https://help.github.com/articles/fork-a-repo/)
 
 ### Setting up the virtual environment
 
-Let's assume that you created a virtual environment called `wazuh_venv` and it's activated. Now we can proceed to clone our forked repository and install the dependencies:
+Assuming you have created and activated a virtual environment named `wazuh_venv`, proceed with the following steps:
 
-1. Clone the repository into your computer:
-```shell
-(wazuh_venv) $ git clone https://github.com/<YOUR_USERNAME>/wazuh-documentation.git
-```
-Note that the `(wazuh_venv)` label on the terminal means that we're currently using the virtual environment that we previously created.
+1. Clone the repository:
 
-2. Change to the repository folder and install the dependencies. You can use `pip` for this:
-```shell
-(wazuh_venv) $ pip install -r requirements.txt
-```
+  ```shell
+  (wazuh_venv) $ git clone https://github.com/<YOUR_USERNAME>/wazuh-documentation.git
+  ```
 
-3. After installing the dependencies, you should be able to compile the documentation:
-```shell
-(wazuh_venv) $ make html
-```
-The documentation will be available at `/wazuh-documentation/build/html/index.html` to see the results just as if the documentation were available on a web server.
+The `(wazuh_venv)` label indicates that the virtual environment is active.
 
-4. To clean the documentation, use this:
-```shell
-(wazuh_venv) $ make clean
-```
-This will delete the contents from `/wazuh-documentation/build/html`.
+2. Change to the repository folder and install the dependencies.
 
-## Alternative Pagefind search engine
+  ```shell
+  (wazuh_venv) $ cd wazuh-documentation
+  (wazuh_venv) $ pip install -r requirements.txt
+  ```
 
-To compile the documentation with the alternative Pagefind search engine, install NodeJS 16+. Then, follow the steps from the previous section replacing with `make html-search` the command in step 3.
+3. Compile the documentation:
+
+  ```shell
+  (wazuh_venv) $ make html
+  ```
+
+You can view the compiled documentation at `wazuh-documentation/build/html/index.html` as if it were served by web server.
+
+4. Clean the documentation.
+
+  ```shell
+  (wazuh_venv) $ make clean
+  ```
+
+This command deletes the contents of `wazuh-documentation/build/html/`.
 
 ## How the branches work
 
-- Our latest stable documentation is found on `master`. **You should never submit a pull request to this branch.**
-- We actively work on version numbered branches (3.8, 3.9, x.y) for new additions, improvements of existing documentation, or typo fixes.
-  - All new additions to this branch will be compatible with the latest stable release. That means we won't include documentation for a future release that doesn't work with the last official one.
-  - The work for a future release is merged on a different branch until we make the final decission of what the next release will be.
-- Every other branch different from `master` or `3.x` is a feature branch, something that we're currently working on and that will be merged in the future.
+- The latest stable documentation is on the `main` branch. **Do not submit pull requests directly to this branch.**
+- We actively work on version numbered branches (4.10, 4.11, x.y) for new additions, improvements of existing documentation, or typo fixes.
+  - All new additions to a version branch will be compatible with the latest stable release. We won't include documentation for a future release that is incompatible with the current official version.
+- Work for a future release is merged into a separate branch until we make the final decision on the next release.
+- All branches other than `main` or version branches (e.g., 4.x) are feature branches under development and will be merged later.
 - Where appropriate, we'll backport changes into older release branches.
 
 ## Commits, pull requests and merging
@@ -87,6 +88,5 @@ To compile the documentation with the alternative Pagefind search engine, instal
 - Also include an explanation of your changes in your PR description.
 - Make sure to resolve merge conflicts so we can continue reviewing your pull request.
 - In your PR description, add links to relevant issues, external resources, or related PRs that are useful.
-- When merging, we'll squash your commits into a single commit.
 
-That's all you need to know. Thank you so much for reading this contribution guide!
+Thank you for contributing!
