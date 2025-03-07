@@ -29,6 +29,8 @@ Options
 - `only_future_events`_
 - `interval`_
 - `curl_max_size`_
+- `page_size`_
+- `time_delay`_
 - `run_on_start`_
 - `version`_
 - `api_auth`_
@@ -50,6 +52,10 @@ Options
 | `interval`_                            | A positive number + suffix      |
 +----------------------------------------+---------------------------------+
 | `curl_max_size`_                       | A positive number + suffix      |
++----------------------------------------+---------------------------------+
+| `page_size`_                           | A positive number between 1–50  |
++----------------------------------------+---------------------------------+
+| `time_delay`_                          | A positive number + suffix      |
 +----------------------------------------+---------------------------------+
 | `run_on_start`_                        | yes, no                         |
 +----------------------------------------+---------------------------------+
@@ -121,6 +127,28 @@ Specifies the maximum size allowed for the Microsoft Graph API response.
 +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | **Allowed values** | A positive number that should contain a suffix character indicating a size unit, such as b/B (bytes), k/K (kilobytes), m/M (megabytes), and g/G (gigabytes). Minimum value of 1M. |
 +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+page_size
+^^^^^^^^^
+
+Controls the page size by limiting the items returned per page on every API request.
+
++--------------------+---------------------------------+
+| **Default value**  | 50                              |
++--------------------+---------------------------------+
+| **Allowed values** | A positive number between 1–50. |
++--------------------+---------------------------------+
+
+time_delay
+^^^^^^^^^^
+
+Adds ``time_delay`` setting. Its value must be greater than or equal to 0. By default, its value is ``30s``. This setting allows time suffixes ``s`` (seconds), ``m`` (minutes), ``h`` (hours), ``d`` (days), and ``w`` (weeks).
+
++--------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Default value**  | 30s                                                                                                                                                                       |
++--------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Allowed values** | A positive number that must contain a suffix character indicating a time unit, such as ``s`` (seconds), ``m`` (minutes), ``h`` (hours), ``d`` (days), and ``w`` (weeks).  |
++--------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 run_on_start
 ^^^^^^^^^^^^
@@ -244,6 +272,10 @@ resource\\relationship
 
 This section configures the `relationships` content type from which to obtain logs.
 
+For the ``identityProtection`` resource, the configuration includes the following relationship:
+
+-  riskDetections: Retrieves details of user risk, user and application sign-in risk detections from Microsoft Entra ID.
+
 For the ``security`` resource, the configuration includes the following relationships:
 
 - alerts: Legacy alert from supported Azure and Microsoft 365 Defender security providers.
@@ -296,5 +328,9 @@ Example of configuration
         <resource>
           <name>deviceManagement</name>
           <relationship>auditEvents</relationship>
+        </resource>
+        <resource>
+          <name>identityProtection</name>
+          <relationship>riskDetections</relationship>
         </resource>
     </ms-graph>

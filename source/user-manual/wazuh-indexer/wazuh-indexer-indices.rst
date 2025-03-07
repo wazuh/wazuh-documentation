@@ -66,13 +66,13 @@ This section describes how to create a custom index pattern, for example, ``my-c
    -  ``<INDEXER_IP_ADDRESS>`` with the IP address of your Wazuh indexer
    -  ``<INDEXER_USERNAME>`` and ``<INDEXER_PASSWORD>`` with the Wazuh indexer username and password. You can obtain the Wazuh indexer credentials for fresh deployments using the command:
 
-   .. note::
+      .. note::
 
-      If using the Wazuh OVA, use the default credentials ``admin:admin`` or refer to the :doc:`password management </user-manual/user-administration/password-management>` section.
+         If using the Wazuh OVA, use the default credentials ``admin:admin`` or refer to the :doc:`password management </user-manual/user-administration/password-management>` section.
 
-   .. code-block:: console
+      .. code-block:: console
 
-      # tar -axf wazuh-install-files.tar wazuh-install-files/wazuh-passwords.txt -O | grep -P "\'admin\'" -A 1
+         # tar -axf wazuh-install-files.tar wazuh-install-files/wazuh-passwords.txt -O | grep -P "\'admin\'" -A 1
 
    .. code-block:: output
       :class: output
