@@ -233,7 +233,7 @@ Generating the commit SHA
 
    .. code-block:: none
 
-      c68286b87b-b917f56ac4-970c469531-33215c72e5
+      c68286b87-b917f56ac-970c46953-33215c72e
 
 Build with Docker image
 ^^^^^^^^^^^^^^^^^^^^^^^
