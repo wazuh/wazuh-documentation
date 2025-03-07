@@ -62,7 +62,7 @@ The `(wazuh_venv)` label indicates that the virtual environment is active.
   (wazuh_venv) $ make html
   ```
 
-You can view the compiled documentation at `/wazuh-documentation/build/html/index.html` as if it were served by web server.
+  You can view the compiled documentation at `wazuh-documentation/build/html/index.html` as if it were served by web server.
 
 4. Clean the documentation.
 
