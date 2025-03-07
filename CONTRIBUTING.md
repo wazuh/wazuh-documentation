@@ -31,7 +31,7 @@ The Digital Ocean guides below provide an overview of installing Python 3 and co
 - Ubuntu 22.04: [Link](https://www.digitalocean.com/community/tutorials/how-to-install-python-3-and-set-up-a-programming-environment-on-ubuntu-22-04)
 - CentOS 7: [Link](https://www.digitalocean.com/community/tutorials/how-to-install-python-3-and-set-up-a-local-programming-environment-on-centos-7)
 
-After following one of the previous guides, you should have a Python programming environment ready to be used.
+After completing one of these guides, your Python environment will be ready.
 
 ### How to fork this repository
 
