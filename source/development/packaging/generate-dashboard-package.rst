@@ -223,17 +223,17 @@ Generating the commit SHA
    wazuh-dashboards-reporting            ``<REPORTING_COMMIT_SHA>``
    ===================================== =============================
 
-Once you have the commit SHA for each repository, you must concatenate them in the following format:
+#. Concatenate individual SHAs in the following format. The resulting commit SHA is used for package versioning and build tracking.
 
--  ``<COMMIT_DASHBOARD_SHA>-<COMMIT_PLUGINS_SHA>-<COMMIT_SECURITY_SHA>-<COMMIT_REPORTING_SHA>``
+   .. code-block:: none
 
-For example:
+      <DASHBOARD_COMMIT_SHA>-<PLUGINS_COMMIT_SHA>-<SECURITY_COMMIT_SHA>-<REPORTING_COMMIT_SHA>
 
--  ``c68286b87b-b917f56ac4-970c469531-33215c72e5``
+   Example:
 
-.. note::
+   .. code-block:: none
 
-   The commit SHA is used to identify the build in the package name. Ensure you reference the correct branch for an accurate SHA representation. This SHA will inform versioning and help in tracking changes across builds.
+      c68286b87b-b917f56ac4-970c469531-33215c72e5
 
 Build with Docker image
 ^^^^^^^^^^^^^^^^^^^^^^^
