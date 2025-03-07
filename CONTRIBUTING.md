@@ -47,7 +47,7 @@ Assuming you have created and activated a virtual environment named `wazuh_venv`
   (wazuh_venv) $ git clone https://github.com/<YOUR_USERNAME>/wazuh-documentation.git
   ```
 
-The `(wazuh_venv)` label indicates that the virtual environment is active.
+  The `(wazuh_venv)` label indicates that the virtual environment is active.
 
 2. Change to the repository folder and install the dependencies.
 
