@@ -40,37 +40,38 @@ Follow the [GitHub forking model](https://help.github.com/articles/fork-a-repo/)
 
 ### Setting up the virtual environment
 
-Let's assume that you created a virtual environment called `wazuh_venv` and it's activated. Now we can proceed to clone our forked repository and install the dependencies:
+Assuming you have created and activated a virtual environment named `wazuh_venv`, proceed with the following steps:
 
-1. Clone the repository into your computer:
-```shell
-(wazuh_venv) $ git clone https://github.com/<YOUR_USERNAME>/wazuh-documentation.git
-```
-Note that the `(wazuh_venv)` label on the terminal means that we're currently using the virtual environment that we previously created.
+1. Clone the repository:
 
-2. Change to the repository folder and install the dependencies. You can use `pip` for this:
-```shell
-(wazuh_venv) $ pip install -r requirements.txt
-```
+  ```shell
+  (wazuh_venv) $ git clone https://github.com/<YOUR_USERNAME>/wazuh-documentation.git
+  ```
 
-3. After installing the dependencies, you should be able to compile the documentation:
-```shell
-(wazuh_venv) $ make html
-```
-The documentation will be available at `/wazuh-documentation/build/html/index.html` to see the results just as if the documentation were available on a web server.
+The `(wazuh_venv)` label indicates that the virtual environment is active.
 
-4. To clean the documentation, use this:
-```shell
-(wazuh_venv) $ make clean
-```
-This will delete the contents from `/wazuh-documentation/build/html`.
+2. Change to the repository folder and install the dependencies.
 
-## Alternative Pagefind search engine
+  ```shell
+  (wazuh_venv) $ cd wazuh-documentation
+  (wazuh_venv) $ pip install -r requirements.txt
+  ```
 
-To compile the documentation with the alternative Pagefind search engine, install NodeJS 22+. Replace the command in step 3 with:
+3. Compile the documentation:
 
-```shell
- (wazuh_venv) $ make html-search
+  ```shell
+  (wazuh_venv) $ make html
+  ```
+
+You can view the compiled documentation at `/wazuh-documentation/build/html/index.html` as if it were served by web server.
+
+4. Clean the documentation.
+
+  ```shell
+  (wazuh_venv) $ make clean
+  ```
+
+This command deletes the contents of `wazuh-documentation/build/html/`.
 
 ## How the branches work
 
