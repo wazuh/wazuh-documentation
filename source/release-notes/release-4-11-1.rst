@@ -13,10 +13,38 @@ What's new
 
 This release includes new features or enhancements as the following:
 
+Wazuh agent
+^^^^^^^^^^^
+
+-  `#28075 <https://github.com/wazuh/wazuh/pull/28075>`__ Changed ``ms-graph`` page size to ``50``.
+-  `#28045 <https://github.com/wazuh/wazuh/pull/28045>`__ Removed ``ca.com`` domain filter from the Rootcheck malware ruleset.
+
+Wazuh dashboard
+^^^^^^^^^^^^^^^
+
+-  `#7318 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7318>`__ Added missing fields to the default fields list of the alerts index pattern.
+
 Resolved issues
 ---------------
 
 This release resolves known issues as the following:
+
+Wazuh manager
+^^^^^^^^^^^^^
+
+-  `#28294 <https://github.com/wazuh/wazuh/pull/28294>`__ Fixed the OS CPE build for package scans with data from Wazuh-DB.
+-  `#28292 <https://github.com/wazuh/wazuh/pull/28292>`__ Added delete by query logic when indexer is disabled.
+-  `#28396 <https://github.com/wazuh/wazuh/pull/28396>`__ Fixed heap buffer overflow in Analysisd rule parser.
+
+Wazuh agent
+^^^^^^^^^^^
+
+-  `#28339 <https://github.com/wazuh/wazuh/pull/28339>`__ Improved agent connectivity.
+
+Wazuh dashboard
+^^^^^^^^^^^^^^^
+
+-  `#7299 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7299>`__ Fixed documentation links related to agent management.
 
 Changelogs
 ----------
