@@ -25,7 +25,7 @@ $(function() {
     accordionParent.classList.add('accordion-parent');
 
     setAccordionAttributes(accordionTitle, {
-      'data-toggle': 'collapse',
+      'data-bs-toggle': 'collapse',
       'href': '#' + sectionId,
       'role': 'button',
       'aria-expanded': aria,
