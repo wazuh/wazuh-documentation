@@ -165,10 +165,10 @@ Using the script
 
 Run the ``build-packages.sh`` script in the ``dev-tools/build-packages/`` folder of the repository. The script requires the following parameters:
 
+-  ``-c``, ``--commit-sha``: Commit SHA identifier for the build (see :ref:`generating_commit_sha` below).
 -  ``-a``, ``--app``: Indicate the path to ``wazuh-package.zip``.
 -  ``-b``, ``--base``: Indicate the path to ``dashboard-package.zip``.
 -  ``-s``, ``--security``: Indicate the path to ``security-package.zip``.
--  ``-v``, ``--version``: Set the version for this build.
 -  ``--all-platforms``: Build the packages for all platforms.
 -  ``--deb``: Build a deb package.
 -  ``--rpm``: Build an rpm package.
@@ -182,7 +182,7 @@ Run the ``build-packages.sh`` script in the ``dev-tools/build-packages/`` folder
 .. code:: console
 
    $ cd ../wazuh-dashboard/dev-tools/build-packages/
-   $ ./build-packages.sh -v <VERSION> -r <REVISION> --<DISTRIBUTION> -a file:///<PATH_TO_wazuh-package.zip> -s file:///<PATH_TO_security-package.zip> -b file:///<PATH_TO_dashboard-package.zip>
+   $ ./build-packages.sh --commit-sha <COMMIT_SHA> -r <REVISION> --<DISTRIBUTION> -a file:///<PATH_TO_wazuh-package.zip> -s file:///<PATH_TO_security-package.zip> -b file:///<PATH_TO_dashboard-package.zip>
 
 Where ``--<DISTRIBUTION>`` is either ``--deb``, ``--rpm``,  ``--tar``, or ``--all-platforms``.
 
@@ -199,9 +199,40 @@ Example:
 .. code:: console
 
    $ cd ../wazuh-dashboard/dev-tools/build-packages/
-   $ ./build-packages.sh -v v|WAZUH_CURRENT| -r 1 --deb -a file:///packages/wazuh-package.zip -s file:///packages/security-package.zip -b file:///packages/dashboard-package.zip
+   $ ./build-packages.sh --commit-sha c68286b87-b917f56ac-970c46953 -r 1 --deb -a file:///packages/wazuh-package.zip -s file:///packages/security-package.zip -b file:///packages/dashboard-package.zip
 
 The script generates the package in the ``output`` folder of the same directory where it is located.
+
+.. _generating_commit_sha:
+
+Generating the commit SHA
+.........................
+
+#. Run the following command in each relevant repository to obtain individual SHAs. Ensure you are on the correct branch in each repository.
+
+   .. code:: console
+
+      $ git rev-parse --short HEAD
+
+   ===================================== =============================
+   Repository                            SHA Variable
+   ===================================== =============================
+   wazuh-dashboard                       ``<DASHBOARD_COMMIT_SHA>``
+   wazuh-dashboard-plugins               ``<PLUGINS_COMMIT_SHA>``
+   wazuh-security-dashboards-plugin      ``<SECURITY_COMMIT_SHA>``
+   ===================================== =============================
+
+#. Concatenate individual SHAs in the following format. The resulting commit SHA is used for package versioning and build tracking.
+
+   .. code-block:: none
+
+      <DASHBOARD_COMMIT_SHA>-<PLUGINS_COMMIT_SHA>-<SECURITY_COMMIT_SHA>
+
+   Example:
+
+   .. code-block:: none
+
+      c68286b87-b917f56ac-970c46953
 
 Build with Docker image
 ^^^^^^^^^^^^^^^^^^^^^^^
