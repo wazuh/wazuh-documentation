@@ -13,9 +13,8 @@
 
   .toc-title {
     display: inline-block;
-    height: 30px;
-    margin-top: 20px;
-    font-size: 18px;
+    height: 45px;
+    font-size: 22px;
     font-weight: 600;
     text-transform: uppercase;
   }
@@ -30,12 +29,32 @@
     margin: 0;
     list-style: none;
 
+    li {
+      &:first-of-type {
+        margin-top: 8px;
+      }
+    }
+
     a {
-      padding-top: 4px;
-      padding-bottom: 4px;
+      display: block;
+      position: relative;
+      padding-top: 6px;
+      padding-bottom: 6px;
       font-size: 14px;
       line-height: 24px;
-      border-left: 2px solid;
+      border-radius: 0 15px 15px 0;
+      &:before {
+        content: "";
+        position: absolute;
+        display: block;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        border-left-style: solid;
+        border-left-color: #E3E3E3;
+        border-left-width: 2px;
+      }
 
       &:hover,
       &:focus {
@@ -48,6 +67,9 @@
 
     .active {
       font-weight: 600;
+      &:before {
+        border-left-width: 4px;
+      }
     }
   }
 }
@@ -58,13 +80,13 @@
   #local-toc {
     .navbar-nav {
       background-color: $light-color-base-space;
+      margin-bottom: 4px;
     }
     .toc-title {
       color: $light-color-main-text;
     }
     ul {
       a {
-        border-left-color: $light-color-base-space;
         &:hover,
         &:focus {
           color: $light-color-primary-lighter;
@@ -74,8 +96,11 @@
         }
       }
       .active {
-        color: $light-color-primary;
-        border-left-color: $light-color-primary;
+        color: $light-color-main-text;
+        background-color: #EBF3FF;
+        &:before {
+          border-left-color: $light-color-global-toc-highlight;
+        }
       }
     }
   }
@@ -93,7 +118,6 @@
     }
     ul {
       a {
-        border-left-color: $dark-color-base-space;
         &:hover,
         &:focus {
           color: $dark-color-primary-lighter;
@@ -103,8 +127,11 @@
         }
       }
       .active {
-        color: $dark-color-primary;
-        border-left-color: $dark-color-primary;
+        color: $dark-color-main-text;
+        background-color: rgba(#EBF3FF, 0.1);
+        &:before {
+          border-left-color: $light-color-global-toc-highlight;
+        }
       }
     }
   }
