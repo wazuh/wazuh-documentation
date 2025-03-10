@@ -125,8 +125,15 @@ header {
     }
   }
 
+  button.navbar-toggler {
+    &:focus {
+      box-shadow: 0px 0px 0 1px $light-color-border-deeper;
+    }
+  }
+
   .navbar-toggler {
     padding: .4rem;
+    border: none;
     .navbar-toggler-icon,
     .navbar-toggler-icon::before,
     .navbar-toggler-icon::after {
@@ -134,6 +141,7 @@ header {
       height: 3px;
       border: 1px solid;
       border-radius: 6px;
+      background: none;
     }
     .navbar-toggler-icon {
       position: relative;
