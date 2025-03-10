@@ -40,7 +40,7 @@
   width: 100%;
   position: relative;
   @include media-min(xl){
-    max-width: calc(100% - #{$left-sidebar-width-narrow + $right-sidebar-width-narrow});
+    max-width: calc(100% - #{$left-sidebar-width-narrow + $right-sidebar-width});
   }
 }
 
