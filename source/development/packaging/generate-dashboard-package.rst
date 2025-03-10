@@ -199,7 +199,7 @@ Example:
 .. code:: console
 
    $ cd ../wazuh-dashboard/dev-tools/build-packages/
-   $ ./build-packages.sh --commit-sha c68286b87-b917f56ac-970c46953-33215c72e -r 1 --deb -a file:///packages/wazuh-package.zip -s file:///packages/security-package.zip -b file:///packages/dashboard-package.zip
+   $ ./build-packages.sh --commit-sha c68286b87-b917f56ac-970c46953 -r 1 --deb -a file:///packages/wazuh-package.zip -s file:///packages/security-package.zip -b file:///packages/dashboard-package.zip
 
 The script generates the package in the ``output`` folder of the same directory where it is located.
 
@@ -220,20 +220,19 @@ Generating the commit SHA
    wazuh-dashboard                       ``<DASHBOARD_COMMIT_SHA>``
    wazuh-dashboard-plugins               ``<PLUGINS_COMMIT_SHA>``
    wazuh-security-dashboards-plugin      ``<SECURITY_COMMIT_SHA>``
-   wazuh-dashboards-reporting            ``<REPORTING_COMMIT_SHA>``
    ===================================== =============================
 
 #. Concatenate individual SHAs in the following format. The resulting commit SHA is used for package versioning and build tracking.
 
    .. code-block:: none
 
-      <DASHBOARD_COMMIT_SHA>-<PLUGINS_COMMIT_SHA>-<SECURITY_COMMIT_SHA>-<REPORTING_COMMIT_SHA>
+      <DASHBOARD_COMMIT_SHA>-<PLUGINS_COMMIT_SHA>-<SECURITY_COMMIT_SHA>
 
    Example:
 
    .. code-block:: none
 
-      c68286b87-b917f56ac-970c46953-33215c72e
+      c68286b87-b917f56ac-970c46953
 
 Build with Docker image
 ^^^^^^^^^^^^^^^^^^^^^^^
