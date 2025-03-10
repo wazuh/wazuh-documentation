@@ -43,11 +43,12 @@ h1,
   width: fit-content;
   margin-top: 1.2rem;
   margin-bottom: 1rem;
-  font-size: 34px;
-  font-weight: 600;
-  letter-spacing: .03em;
+  font-size: 30px;
+  font-weight: 500;
+  letter-spacing: .01em;
+  line-height: 1.5em;
   @include media-max(xl){
-    font-size: 28px;
+    font-size: 24px;
   }
 }
 
@@ -123,10 +124,16 @@ main {
   @include media-max(md) {
     min-height: auto;
   }
-
   @include media-min(xl) {
     min-height: calc(100vh - #{$header-height-xl} - #{$footer-height});
     padding-left: 30px;
+  }
+
+  & > section {
+    @include media-min(sm) {
+      padding-left: 28px;
+      padding-right: 28px;
+    }
   }
 
   img {
@@ -164,9 +171,13 @@ main {
   }
 }
 
-a:active {
-  font-weight: 600;
+a {
+  text-decoration: none;
+  &:active {
+    font-weight: 600;
+  }
 }
+
 
 th p,
 th .line {
