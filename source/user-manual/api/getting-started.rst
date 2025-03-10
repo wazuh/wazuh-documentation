@@ -309,18 +309,18 @@ A standard Wazuh server API request consists of three essential components: the 
 
 The cURL command for each request contains the following fields:
 
-+-------------------------------------------------+----------------------------------------------------------------------------------------------------+
-| **Field**                                       | **Description**                                                                                    |
-+=================================================+====================================================================================================+
-| ``-X GET/POST/PUT/DELETE``                      | Specify a request method to use when communicating with the HTTP server.                           |
-+-------------------------------------------------+----------------------------------------------------------------------------------------------------+
-| ``http://<WAZUH_MANAGER_IP>:55000/<ENDPOINT>``  | The API URL to use. Specify ``http`` or ``https`` depending on whether SSL is activated            |
-| ``https://<WAZUH_MANAGER_IP>:55000/<ENDPOINT>`` | in the API or not.                                                                                 |
-+-------------------------------------------------+----------------------------------------------------------------------------------------------------+
-| ``-H "Authorization: Bearer <YOUR_JWT_TOKEN>"`` | Include an extra header in the request to specify the JWT.                                         |
-+-------------------------------------------------+----------------------------------------------------------------------------------------------------+
-| ``-k``                                          | Suppress SSL certificate errors (only if you use the default self-signed certificates).            |
-+-------------------------------------------------+----------------------------------------------------------------------------------------------------+
++---------------------------------------------------------+----------------------------------------------------------------------------------------------------+
+| **Field**                                               | **Description**                                                                                    |
++=========================================================+====================================================================================================+
+| ``-X GET/POST/PUT/DELETE``                              | Specify a request method to use when communicating with the HTTP server.                           |
++---------------------------------------------------------+----------------------------------------------------------------------------------------------------+
+| ``http://<WAZUH_MANAGER_IP_ADDRESS>:55000/<ENDPOINT>``  | The API URL to use. Specify ``http`` or ``https`` depending on whether SSL is activated            |
+| ``https://<WAZUH_MANAGER_IP_ADDRESS>:55000/<ENDPOINT>`` | in the API or not.                                                                                 |
++---------------------------------------------------------+----------------------------------------------------------------------------------------------------+
+| ``-H "Authorization: Bearer <YOUR_JWT_TOKEN>"``         | Include an extra header in the request to specify the JWT.                                         |
++---------------------------------------------------------+----------------------------------------------------------------------------------------------------+
+| ``-k``                                                  | Suppress SSL certificate errors (only if you use the default self-signed certificates).            |
++---------------------------------------------------------+----------------------------------------------------------------------------------------------------+
 
 All responses are in JSON format, and most of them follow this structure:
 
@@ -345,7 +345,7 @@ All responses are in JSON format, and most of them follow this structure:
 -  All responses include an HTTP status code: 2xx (success), 4xx (client error), 5xx (server error), etc.
 -  All requests (except ``POST /security/user/authenticate`` and ``POST /security/user/authenticate/run_as``) accept the ``pretty`` parameter to convert the JSON response to a more human-readable format.
 -  The Wazuh server API stores logs in the ``api.log`` or ``api.json`` files, depending on the chosen log format. These log files are located at ``/var/ossec/logs/`` on the Wazuh server. You can change the verbosity level in the :ref:`Wazuh API configuration file <api_configuration_file>`.
--  The Wazuh API logs are rotated based on time by default. Rotation only occurs after adding a new entry to the log. For instance, time-based rotation triggers when a new entry is added on a different day, not necessarily every midnight. Rotated logs are stored in ``/var/ossec/logs/api/<year>/<month>/`` and compressed using ``gzip``.
+-  The Wazuh API logs are rotated based on time by default. Rotation only occurs after adding a new entry to the log. For instance, time-based rotation triggers when a new entry is added on a different day, not necessarily every midnight. Rotated logs are stored in ``/var/ossec/logs/api/<YEAR>/<MONTH>/`` and compressed using ``gzip``.
 -  All Wazuh server API requests will be aborted if no response is received after the time duration defined in the ``request_timeout`` field of the server API configuration file ``/var/ossec/api/configuration/api.yaml``. You can use the ``wait_for_complete`` parameter to disable this timeout, which is particularly useful for calls that might exceed the expected duration, such as :api-ref:`PUT /agents/upgrade <operation/api.controllers.agent_controller.put_upgrade_agents>`.
 
 .. note::
@@ -597,7 +597,7 @@ Save the following Python script as ``get_agent_keep_alive.py``:
    endpoint = '/agents?select=lastKeepAlive&select=id&status=disconnected'
 
    protocol = 'https'
-   host = '<WAZUH_SERVER_API_IP>'
+   host = '<WAZUH_SERVER_API_IP_ADDRESS>'
    port = '<WAZUH_SERVER_API_PORT>'
    user = '<WAZUH_API_USER>'
    password = '<WAZUH_API_PASSWORD>'
@@ -636,7 +636,7 @@ Save the following Python script as ``get_agent_keep_alive.py``:
 
 Replace the following variables below:
 
--  ``<WAZUH_SERVER_API_IP>`` with your Wazuh server IP address.
+-  ``<WAZUH_SERVER_API_IP_ADDRESS>`` with your Wazuh server IP address.
 -  ``<WAZUH_SERVER_API_PORT>`` with the Wazuh server API port number (port 5500 by default).
 -  ``<WAZUH_API_USER>`` and ``<WAZUH_API_PASSWORD>`` with the correct credentials.
 
@@ -718,7 +718,7 @@ Save the following PowerShell script as ``get_agent_keep_alive.ps1``:
    $method = "get"
 
    $protocol = "https"
-   $host_name = "<WAZUH_SERVER_API_IP>"
+   $host_name = "<WAZUH_SERVER_API_IP_ADDRESS>"
    $port = "<WAZUH_SERVER_API_PORT>"
    $username = "<WAZUH_API_USER>"
    $password = "<WAZUH_API_PASSWORD>"
@@ -749,7 +749,7 @@ Save the following PowerShell script as ``get_agent_keep_alive.ps1``:
 
 Replace the following variables below:
 
--  ``<WAZUH_SERVER_API_IP>`` with your Wazuh server IP address.
+-  ``<WAZUH_SERVER_API_IP_ADDRESS>`` with your Wazuh server IP address.
 -  ``<WAZUH_SERVER_API_PORT>`` with the Wazuh server API port number (port 5500 by default).
 -  ``<WAZUH_API_USER>`` and ``<WAZUH_API_PASSWORD>`` with the correct credentials.
 

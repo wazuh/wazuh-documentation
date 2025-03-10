@@ -198,16 +198,3 @@ Now, we are ready to run the playbook and start the installation. However, some 
 	.. code-block:: console
 
 		# /var/ossec/bin/agent_control -l
-
-..
-		We can see the agent connection in the Wazuh dashboard.
-
-		.. thumbnail:: ../../../images/ansible/ansible-agent2.png
-		   :title: Ansible agent 1
-		   :align: center
-		   :width: 80%
-
-		.. thumbnail:: ../../../images/ansible/ansible-agent.png
-		   :title: Ansible agent 2
-		   :align: center
-		   :width: 80%

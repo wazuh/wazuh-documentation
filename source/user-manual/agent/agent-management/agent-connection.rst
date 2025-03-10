@@ -21,26 +21,26 @@ There are different ways to check the connection status between a Wazuh agent an
 Using the Wazuh dashboard
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You can check the connection status of a Wazuh agent by selecting **Endpoints Summary** under **Server management** on the Wazuh dashboard.
+You can check the connection status of a Wazuh agent by selecting **Summary** under **Agents management** on the Wazuh dashboard.
 
 .. thumbnail:: /images/manual/managing-agents/endpoints-summary-menu.png
-   :title: Wazuh dashboard Endpoints Summary menu option
-   :alt: Wazuh dashboard Endpoints Summary menu option
+   :title: Wazuh dashboard – Agents management summary menu option
+   :alt: Wazuh dashboard – Agents management summary menu option
    :align: center
    :width: 80%
 
 This option displays the **Endpoints** dashboard with a list of all enrolled Wazuh agents. The list includes the connection status of each Wazuh agent. The Wazuh dashboard also displays a summary with the number of Wazuh agents found for each possible agent connection :ref:`status <agent-status-cycle>`: *Active*, *Disconnected*, *Pending*, or *Never connected*.
 
 .. thumbnail:: /images/manual/managing-agents/endpoints-summary-dashboard.png
-   :title: Wazuh Endpoints Summary dashboard
-   :alt: Wazuh Endpoints Summary dashboard
+   :title: Agents management summary dashboard
+   :alt: Agents management summary dashboard
    :align: center
    :width: 80%
 
 Using the agent_control utility from the server
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You can check the :ref:`status <agent-status-cycle>` of a Wazuh agent remotely by using the :doc:`agent_control </user-manual/reference/tools/agent-control>` utility present on the Wazuh server. To get the Wazuh agent status, run the following command and replace the ``<WAZUH_AGENT_ID>`` parameter with your Wazuh agent ID, for example, ``001``. 
+You can check the :ref:`status <agent-status-cycle>` of a Wazuh agent remotely by using the :doc:`agent_control </user-manual/reference/tools/agent-control>` utility present on the Wazuh server. To get the Wazuh agent status, run the following command and replace the ``<WAZUH_AGENT_ID>`` parameter with your Wazuh agent ID, for example, ``001``.
 
 .. code-block:: console
 
@@ -236,11 +236,11 @@ For the other capabilities of the ``/var/ossec/bin/agent_groups`` tool, refer to
 Using the :api-ref:`GET /agents <operation/api.controllers.agent_controller.get_agents>` Wazuh server API endpoint
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Run the command below on the Wazuh server or any endpoint that has connectivity with the Wazuh server. Replace ``<WAZUH_MANAGER_IP>`` with the IP address or FQDN of the Wazuh server.
+Run the command below on the Wazuh server or any endpoint that has connectivity with the Wazuh server. Replace ``<WAZUH_MANAGER_IP_ADDRESS>`` with the IP address or FQDN of the Wazuh server.
 
 .. code-block:: console
 
-   # curl -k -X GET "https://<WAZUH_MANAGER_IP>:55000/agents?agents_list=001&select=group_config_status&pretty=true" -H  "Authorization: Bearer $TOKEN"
+   # curl -k -X GET "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/agents?agents_list=001&select=group_config_status&pretty=true" -H  "Authorization: Bearer $TOKEN"
 
 .. code-block:: none
    :class: output

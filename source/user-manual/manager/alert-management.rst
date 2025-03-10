@@ -574,10 +574,10 @@ According to your database system, create a new database, set up the database us
       mysql> CREATE DATABASE Alerts_DB;
       Query OK, 1 row affected (2.34 sec)
 
-      mysql> CREATE USER '<DATABASE_USER>'@'<DATABASE_SERVER_IP>' IDENTIFIED BY '<DATABASE_USER_PASSWORD>';
+      mysql> CREATE USER '<DATABASE_USER>'@'<DATABASE_SERVER_IP_ADDRESS>' IDENTIFIED BY '<DATABASE_USER_PASSWORD>';
       Query OK, 0 rows affected (0.00 sec)
 
-      mysql> GRANT INSERT,SELECT,UPDATE,CREATE,DELETE,EXECUTE on Alerts_DB.* to '<DATABASE_USER>'@'<DATABASE_SERVER_IP>';
+      mysql> GRANT INSERT,SELECT,UPDATE,CREATE,DELETE,EXECUTE on Alerts_DB.* to '<DATABASE_USER>'@'<DATABASE_SERVER_IP_ADDRESS>';
       Query OK, 0 rows affected (0.00 sec)
 
       mysql> FLUSH PRIVILEGES;
@@ -588,7 +588,7 @@ According to your database system, create a new database, set up the database us
    Replace the following variables in the commands above:
 
    -  ``<DATABASE_USER>`` with the user you want to create for the database server.
-   -  ``<DATABASE_SERVER_IP>`` with the IP address of the database server.
+   -  ``<DATABASE_SERVER_IP_ADDRESS>`` with the IP address of the database server.
    -  ``<DATABASE_USER_PASSWORD>`` with the user password to access the database server.
 
    .. code-block:: console
@@ -622,7 +622,7 @@ Perform the following steps to configure the Wazuh manager to send alerts and ot
          :emphasize-lines: 2-4
 
          <database_output>
-           <hostname><DATABASE_SERVER_IP></hostname>
+           <hostname><DATABASE_SERVER_IP_ADDRESS></hostname>
            <username><DATABASE_USER></username>
            <password><DATABASE_USER_PASSWORD></password>
            <database>Alerts_DB</database>
@@ -635,7 +635,7 @@ Perform the following steps to configure the Wazuh manager to send alerts and ot
          :emphasize-lines: 2-4
 
          <database_output>
-           <hostname><DATABASE_SERVER_IP></hostname>
+           <hostname><DATABASE_SERVER_IP_ADDRESS></hostname>
            <username><DATABASE_USER></username>
            <password><DATABASE_USER_PASSWORD></password>
            <database>Alerts_DB</database>
@@ -644,7 +644,7 @@ Perform the following steps to configure the Wazuh manager to send alerts and ot
 
    Where:
 
-   -  ``<hostname>`` specifies the IP address of the database server. Replace ``<DATABASE_SERVER_IP>`` the IP address of the database server.
+   -  ``<hostname>`` specifies the IP address of the database server. Replace ``<DATABASE_SERVER_IP_ADDRESS>`` the IP address of the database server.
    -  ``<username>`` specifies the user to access the database. Replace ``<DATABASE_USER>`` with the database user created above.
    -  ``<password>`` specifies the user password to access the database. Replace ``<DATABASE_USER_PASSWORD>`` with the user password created above.
    -  ``<database>`` specifies the name of the database in which to store the alerts. For example, ``Alerts_DB`` as specified in the configuration above.

@@ -71,7 +71,7 @@ Generating the SSL certificates
               ip: "<dashboard-node-ip>"
 
 
-      To learn more about how to create and configure the certificates, see the :ref:`certificates_deployment` section.
+      To learn more about how to create and configure the certificates, see the :doc:`/user-manual/wazuh-indexer-cluster/certificate-deployment` section.
 
 #. Run ``./wazuh-certs-tool.sh`` to create the certificates. For a multi-node cluster, these certificates need to be later deployed to all Wazuh instances in your cluster.
 
@@ -168,6 +168,7 @@ Starting the service
 
 Repeat this stage of the installation process for every Wazuh indexer node in your cluster. Then proceed with initializing your single-node or multi-node cluster in the next stage.
 
+.. include:: /_templates/installations/disable-wazuh-updates.rst
 
 3. Cluster initialization
 -------------------------

@@ -17,5 +17,4 @@ Wazuh helps increase the security of some of the most comprehensive and broadly 
    azure/index
    github/index
    gcp/index
-   ms-graph/index
    office365/index

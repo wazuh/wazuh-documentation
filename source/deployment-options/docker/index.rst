@@ -23,5 +23,4 @@ In the :doc:`/deployment-options/docker/docker-installation` section, you can se
    wazuh-container
    container-usage
    upgrading-wazuh-docker
-   data-migration
    faq-wazuh-container

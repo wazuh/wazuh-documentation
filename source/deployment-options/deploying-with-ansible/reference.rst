@@ -223,35 +223,6 @@ Wazuh Manager
       frequency: 43200
 
 |
-| **Variable**: ``wazuh_manager_openscap``
-| **Description**: Configures the :doc:`wodle </user-manual/reference/ossec-conf/wodle-openscap>` item named ``open-scap`` from ``ossec.conf``.
-| **Default values**:
-
-.. code-block:: yaml
-
-    wazuh_manager_openscap:
-      disable: 'yes'
-      timeout: 1800
-      interval: '1d'
-      scan_on_start: 'yes'
-
-|
-| **Variable**: ``wazuh_manager_ciscat``
-| **Description**: Configures the :doc:`wodle </user-manual/reference/ossec-conf/wodle-ciscat>` item named ``cis-cat`` from ``ossec.conf``.
-| **Default value**:
-
-.. code-block:: yaml
-
-    wazuh_manager_ciscat:
-      disable: 'yes'
-      install_java: 'yes'
-      timeout: 1800
-      interval: '1d'
-      scan_on_start: 'yes'
-      java_path: '/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/bin'
-      ciscat_path: 'wodles/ciscat'
-
-|
 | **Variable**: ``wazuh_manager_osquery``
 | **Description**: Configures the :doc:`wodle</user-manual/reference/ossec-conf/wodle-osquery>` item named ``osquery`` from ``ossec.conf``.
 | **Default values**:
@@ -709,23 +680,6 @@ Wazuh Manager
             checks: 'check_all="yes"'
       rootcheck:
         frequency: 43200
-      openscap:
-        disable: 'no'
-        timeout: 1800
-        interval: '1d'
-        scan_on_start: 'yes'
-      cis_cat:
-        disable: 'yes'
-        install_java: 'yes'
-        timeout: 1800
-        interval: '1d'
-        scan_on_start: 'yes'
-        java_path: '/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/bin'
-        ciscat_path: '/var/ossec/wodles/ciscat'
-        content:
-          - type: 'xccdf'
-            path: 'benchmarks/CIS_Ubuntu_Linux_16.04_LTS_Benchmark_v1.0.0-xccdf.xml'
-            profile: 'xccdf_org.cisecurity.benchmarks_profile_Level_1_-_Server'
       log_level: 1
       email_level: 12
       localfiles:
@@ -943,7 +897,6 @@ Wazuh Agent
         user_enable_active_response: "y"
         user_enable_syscheck: "y"
         user_enable_rootcheck: "y"
-        user_enable_openscap: "n"
         user_enable_sca: "y"
         user_enable_authd: "y"
         user_generate_authd_cert: "n"
@@ -1083,37 +1036,6 @@ Wazuh Agent
 
     wazuh_agent_rootcheck:
       frequency: 43200
-
-|
-| **Variable**: ``wazuh_agent_openscap``
-| **Description**: Configures the :doc:`wodle </user-manual/reference/ossec-conf/wodle-openscap>` item named ``open-scap`` from ``ossec.conf``.
-| **Default values**:
-
-.. code-block:: yaml
-
-    wazuh_agent_openscap:
-      disable: 'yes'
-      timeout: 1800
-      interval: '1d'
-      scan_on_start: 'yes'
-
-|
-| **Variable**: ``wazuh_agent_cis_cat``
-| **Description**: Configures the :doc:`wodle </user-manual/reference/ossec-conf/wodle-ciscat>` item named ``cis-cat`` from ``ossec.conf``.
-| **Default values**:
-
-.. code-block:: yaml
-
-    wazuh_agent_cis_cat:
-      disable: 'yes'
-      install_java: 'no'
-      timeout: 1800
-      interval: '1d'
-      scan_on_start: 'yes'
-      java_path: 'wodles/java'
-      java_path_win: '\\server\jre\bin\java.exe'
-      ciscat_path: 'wodles/ciscat'
-      ciscat_path_win: 'C:\cis-cat'
 
 |
 | **Variable**: ``wazuh_agent_osquery``
@@ -1376,7 +1298,6 @@ Wazuh Agent
       syscheck: '{{ wazuh_agent_syscheck }}'
 
       rootcheck: '{{ wazuh_agent_rootcheck }}'
-      openscap: '{{ wazuh_agent_openscap }}'
 
       osquery: '{{ wazuh_agent_osquery }}'
       syscollector: '{{ wazuh_agent_syscollector }}'

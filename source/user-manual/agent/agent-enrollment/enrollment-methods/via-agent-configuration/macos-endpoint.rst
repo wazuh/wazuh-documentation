@@ -10,14 +10,14 @@ Follow these steps to configure a macOS endpoint for enrollment via the Wazuh ag
 
 #. Launch the terminal, obtain root access, edit the Wazuh agent configuration file ``/Library/Ossec/etc/ossec.conf``, and make the following changes:
 
-   #. Include the Wazuh manager IP address or FQDN (Fully Qualified Domain Name) in the ``<client><server><address>`` section. Replace ``<WAZUH_MANAGER_IP>`` with the Wazuh manager IP address or FQDN of the Wazuh manager:
+   #. Include the Wazuh manager IP address or FQDN (Fully Qualified Domain Name) in the ``<client><server><address>`` section. Replace ``<WAZUH_MANAGER_IP_ADDRESS>`` with the Wazuh manager IP address or FQDN of the Wazuh manager:
 
       .. code-block:: xml
          :emphasize-lines: 3
 
          <client>
            <server>
-             <address><WAZUH_MANAGER_IP></address>
+             <address><WAZUH_MANAGER_IP_ADDRESS></address>
              ...
            </server>
          </client>
@@ -26,7 +26,7 @@ Follow these steps to configure a macOS endpoint for enrollment via the Wazuh ag
 
       .. note::
 
-         If you have a multi-cluster Wazuh server installation, you can add multiple ``<client>`` sections that point to the worker nodes. Refer to :ref:`pointing agents to the cluster (Failover mode) <cluster_agent_connections>` for more information.
+         If you have a multi-cluster Wazuh server installation, you can add multiple ``<client>`` sections that point to the worker nodes. Refer to :doc:`pointing agents to the cluster (Failover mode) </user-manual/wazuh-server-cluster/agent-connections>` for more information.
 
    #. (Optional) Add enrollment parameters in the ``<client><enrollment>`` section.
 
@@ -55,7 +55,7 @@ Follow these steps to configure a macOS endpoint for enrollment via the Wazuh ag
 
       # /Library/Ossec/bin/wazuh-control restart
 
-#. Click on the upper-left menu icon and navigate to **Server management** > **Endpoints Summary** on the Wazuh dashboard to check for the newly enrolled Wazuh agent and its connection status. If the enrollment was successful, you will have an interface similar to the image below.
+#. Click on the upper-left menu icon and navigate to **Agents management** > **Summary** on the Wazuh dashboard to check for the newly enrolled Wazuh agent and its connection status. If the enrollment was successful, you will have an interface similar to the image below.
 
    .. thumbnail:: /images/manual/agent/macOS-check-newly-enrolled.png
       :title: Check newly enrolled Wazuh agent - macOS

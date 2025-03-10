@@ -55,9 +55,9 @@ Screenshots
      - .. thumbnail:: ../images/getting-started/configuration-assessment.png
           :title: Security configuration assessment   
           :alt: Security configuration assessment   
-   * - .. thumbnail:: ../images/getting-started/virustotal.png
-          :title: VirusTotal 
-          :alt: VirusTotal 
+   * - .. thumbnail:: ../images/getting-started/endpoints-summary.png
+          :title: Summary 
+          :alt: Summary 
      - .. thumbnail:: ../images/getting-started/aws.png
           :title: Amazon Web Services 
           :alt: Amazon Web Services 

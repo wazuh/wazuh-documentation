@@ -17,7 +17,7 @@ Follow the steps below to configure a Linux/Unix endpoint for enrollment via the
 
          <client>
            <server>
-             <address><WAZUH_MANAGER_IP></address>
+             <address><WAZUH_MANAGER_IP_ADDRESS></address>
              ...
            </server>
          </client>
@@ -26,7 +26,7 @@ Follow the steps below to configure a Linux/Unix endpoint for enrollment via the
 
       .. note::
 
-         If you have a multi-cluster Wazuh server installation, you can add multiple ``<client>`` sections that point to the worker nodes. Refer to :ref:`pointing agents to the cluster (Failover mode) <cluster_agent_connections>` for more information.
+         If you have a multi-cluster Wazuh server installation, you can add multiple ``<client>`` sections that point to the worker nodes. Refer to :doc:`pointing agents to the cluster (Failover mode) </user-manual/wazuh-server-cluster/agent-connections>` for more information.
 
    #. (Optional) Add enrollment parameters in the ``<client><enrollment>`` section.
 
@@ -55,7 +55,7 @@ Follow the steps below to configure a Linux/Unix endpoint for enrollment via the
 
       # systemctl restart wazuh-agent
 
-#. Click on the upper-left menu icon and navigate to **Server management** > **Endpoints Summary** on the Wazuh dashboard to check for the newly enrolled Wazuh agent and its connection status. If the enrollment was successful, you will have an interface similar to the image below.
+#. Click on the upper-left menu icon and navigate to **Agents management** > **Summary** on the Wazuh dashboard to check for the newly enrolled Wazuh agent and its connection status. If the enrollment was successful, you will have an interface similar to the image below.
 
    .. thumbnail:: /images/manual/agent/linux-check-newly-enrolled.png
       :title: Check newly enrolled Wazuh agent - Linux

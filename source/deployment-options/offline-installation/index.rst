@@ -6,7 +6,7 @@
 Offline installation
 ====================
 
-You can install Wazuh even when there is no connection to the Internet. Installing the solution offline involves downloading the Wazuh central components to later install them on a system with no Internet connection. The Wazuh server, the Wazuh indexer, and the Wazuh dashboard can be installed and configured on the same host in an all-in-one deployment, or each component can be installed on a separate host as a distributed deployment, depending on your environment needs. The supported architecture is 64-bit (x86_64/AMD64).
+You can install Wazuh even when there is no connection to the Internet. Installing the solution offline involves downloading the Wazuh central components later to install them on a system with no Internet connection. The Wazuh server, the Wazuh indexer, and the Wazuh dashboard can be installed and configured on the same host in an all-in-one deployment, or each component can be installed on a separate host as a distributed deployment, depending on your environment's needs. The supported architecture is 64-bit (x86_64/AMD64 or AARCH64/ARM64).
 
 For more information about the hardware requirements and the recommended operating systems, check the :ref:`Requirements <installation_requirements>` section.
 
@@ -22,26 +22,38 @@ Prerequisites
 Download the packages and configuration files
 ---------------------------------------------
 
-#. Run the following commands from any Linux system with Internet connection. This action executes a script that downloads all required files for the offline installation on x86_64 architectures. Select the package format to download.
-    
+#. Run the following commands from any Linux system with Internet connection. This action executes a script that downloads all required files for the offline installation (on x86_64/AMD64 and AARCH64/ARM64 architectures). Select the package format to download.
+
    .. tabs::
 
-        .. group-tab:: RPM
+      .. group-tab:: RPM
 
-            .. code-block:: console
-        
-               # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-install.sh
-               # chmod 744 wazuh-install.sh
-               # ./wazuh-install.sh -dw rpm
+         .. code-block:: console
 
-        .. group-tab:: DEB
+            # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-install.sh
+            # chmod 744 wazuh-install.sh
+            # ./wazuh-install.sh -dw rpm -da x86_64
 
-            .. code-block:: console
-        
-               # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-install.sh
-               # chmod 744 wazuh-install.sh
-               # ./wazuh-install.sh -dw deb
-          
+         .. code-block:: console
+
+            # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-install.sh
+            # chmod 744 wazuh-install.sh
+            # ./wazuh-install.sh -dw rpm -da aarch64
+
+      .. group-tab:: DEB
+
+         .. code-block:: console
+
+            # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-install.sh
+            # chmod 744 wazuh-install.sh
+            # ./wazuh-install.sh -dw deb -da amd64
+
+         .. code-block:: console
+
+            # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-install.sh
+            # chmod 744 wazuh-install.sh
+            # ./wazuh-install.sh -dw deb -da arm64
+
 #. Download the certificates configuration file.
 
       .. code-block:: console

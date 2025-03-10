@@ -32,10 +32,10 @@ Click on the name of each active response to open its source code.
 .. |npf| replace:: `npf <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|/src/active-response/firewalls/npf.c>`__
 .. |wazuh-slack| replace:: `wazuh-slack <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|/src/active-response/wazuh-slack.c>`__
 .. |pf| replace:: `pf <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|/src/active-response/firewalls/pf.c>`__
-.. |restart.sh| replace:: `restart.sh <https://github.com/wazuh/wazuh/blob/master/src/active-response/restart.sh>`__
+.. |restart.sh| replace:: `restart.sh <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|/src/active-response/restart.sh>`__
 .. |restart-wazuh| replace:: `restart-wazuh <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|/src/active-response/restart-wazuh.c>`__
 .. |route-null| replace:: `route-null <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|/src/active-response/route-null.c>`__
-.. |kaspersky| replace:: `kaspersky <https://github.com/wazuh/wazuh/blob/master/src/active-response/kaspersky.c>`__
+.. |kaspersky| replace:: `kaspersky <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|/src/active-response/kaspersky.c>`__
 
 +---------------------------+-------------------------------------------------------------------------------------------------------------+
 | Name of script            | Description                                                                                                 |

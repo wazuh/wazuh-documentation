@@ -46,9 +46,9 @@ Amazon CloudTrail configuration
 
       .. code-block:: xml
 
-         <WAZUH_AWS_BUCKET>/<prefix>/AWSLogs/<ACCOUNT_ID>/CloudTrail/<REGION>/<year>/<month>/<day>
+         <WAZUH_AWS_BUCKET>/<PREFIX>/AWSLogs/<ACCOUNT_ID>/CloudTrail/<REGION>/<YEAR>/<MONTH>/<DAY>
 
-      The structure may change depending on the different configurations of the services, or changing of the ``<WAZUH_AWS_BUCKET>`` & ``<prefix>`` values by the user.
+      The structure may change depending on the different configurations of the services, or changing of the ``<WAZUH_AWS_BUCKET>`` and ``<PREFIX>`` values by the user.
 
 #. Choose log events to be recorded and click **Next**.
 

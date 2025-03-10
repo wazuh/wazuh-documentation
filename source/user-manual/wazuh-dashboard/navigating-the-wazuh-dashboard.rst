@@ -82,27 +82,27 @@ This section shows dashboards for:
    :title: Navigating the Wazuh dashboard: Cloud security
    :alt: Navigating the Wazuh dashboard: Cloud security
 
-Server management
+Agents management
 -----------------
 
-Wazuh server management offers options for managing rules, decoders, CDB lists, clusters, security configurations such as user, roles, policies and more. It also includes options for managing Wazuh agents installed on monitored endpoints.
+Wazuh agents management offers options for managing agents, agent groups, and agent configurations.
 
-.. thumbnail:: /images/wazuh-dashboard/navigating/server-management.png
+.. thumbnail:: /images/wazuh-dashboard/navigating/agents-management.png
    :align: center
    :width: 80%
-   :title: Navigating the Wazuh dashboard: Server management
-   :alt: Navigating the Wazuh dashboard: Server management
+   :title: Navigating the Wazuh dashboard: Agents management
+   :alt: Navigating the Wazuh dashboard: Agents management
 
-Endpoints Summary
-^^^^^^^^^^^^^^^^^
+Summary
+^^^^^^^
 
 This section shows details of monitored endpoints and options for deploying Wazuh agents.
 
 .. thumbnail:: /images/wazuh-dashboard/navigating/endpoints-summary.png
    :align: center
    :width: 80%
-   :title: Navigating the Wazuh dashboard: Endpoints Summary
-   :alt: Navigating the Wazuh dashboard: Endpoints Summary
+   :title: Navigating the Wazuh dashboard: Agents management summary
+   :alt: Navigating the Wazuh dashboard: Agents management summary
 
 Endpoint Groups
 ^^^^^^^^^^^^^^^
@@ -114,6 +114,17 @@ Users can view existing groups, create new endpoint groups, and organize endpoin
    :width: 80%
    :title: Navigating the Wazuh dashboard: Endpoint Groups
    :alt: Navigating the Wazuh dashboard: Endpoint Groups
+
+Server management
+-----------------
+
+Wazuh server management offers options for managing rules, decoders, CDB lists, clusters, security configurations such as user, roles, policies and more.
+
+.. thumbnail:: /images/wazuh-dashboard/navigating/server-management.png
+   :align: center
+   :width: 80%
+   :title: Navigating the Wazuh dashboard: Server management
+   :alt: Navigating the Wazuh dashboard: Server management
 
 Rules
 ^^^^^

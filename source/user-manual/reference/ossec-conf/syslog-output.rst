@@ -100,7 +100,6 @@ The location field refers to the origin of the alert, it could be:
 - Command or its alias
 - command_tag (wodle)
 - aws-cloudtrail
-- cis-cat
 - vulnerability-detector
 - syscollector
 

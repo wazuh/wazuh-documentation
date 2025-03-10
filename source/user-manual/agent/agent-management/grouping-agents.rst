@@ -37,7 +37,7 @@ Below are the steps to assign agents to a group with a specific configuration:
 
       .. code-block:: console
 
-         # curl -k -X PUT "https://<WAZUH_MANAGER_IP>:55000/agents/002/group/dbms?pretty=true" -H  "Authorization: Bearer $TOKEN"
+         # curl -k -X PUT "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/agents/002/group/dbms?pretty=true" -H  "Authorization: Bearer $TOKEN"
 
       .. code-block:: none
          :class: output
@@ -75,7 +75,7 @@ Below are the steps to assign agents to a group with a specific configuration:
 
       .. code-block:: console
 
-         # curl -k -X GET "https://<WAZUH_MANAGER_IP>:55000/groups/dbms/agents?pretty=true&select=id,name" -H  "Authorization: Bearer $TOKEN"
+         # curl -k -X GET "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/groups/dbms/agents?pretty=true&select=id,name" -H  "Authorization: Bearer $TOKEN"
 
       .. code-block:: none
          :class: output
@@ -150,7 +150,7 @@ In this example, agent ``001`` has been added to the ``webserver`` and ``apache`
 
 .. code-block:: console
 
-   # curl -k -X PUT "https://<WAZUH_MANAGER_IP>:55000/agents/001/group/webserver?pretty=true" -H  "Authorization: Bearer $TOKEN"
+   # curl -k -X PUT "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/agents/001/group/webserver?pretty=true" -H  "Authorization: Bearer $TOKEN"
 
 .. code-block:: none
    :class: output
@@ -168,7 +168,7 @@ In this example, agent ``001`` has been added to the ``webserver`` and ``apache`
 
 .. code-block:: console
 
-   # curl -k -X PUT "https://<WAZUH_MANAGER_IP>:55000/agents/001/group/apache?pretty=true" -H  "Authorization: Bearer $TOKEN"
+   # curl -k -X PUT "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/agents/001/group/apache?pretty=true" -H  "Authorization: Bearer $TOKEN"
 
 .. code-block:: none
    :class: output
@@ -188,7 +188,7 @@ Following this, we can query for groups to which a Wazuh agent belongs using the
 
 .. code-block:: console
 
-   # curl -k -X GET "https://<WAZUH_MANAGER_IP>:55000/agents?pretty=true&agents_list=001&select=group" -H  "Authorization: Bearer $TOKEN"
+   # curl -k -X GET "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/agents?pretty=true&agents_list=001&select=group" -H  "Authorization: Bearer $TOKEN"
 
 .. code-block:: none
    :class: output

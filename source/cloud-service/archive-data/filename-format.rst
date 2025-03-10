@@ -11,34 +11,34 @@ The files are stored in a directory structure that indicates the date and time t
 
 The main path follows this format:
 
-``wazuh-cloud-cold-<region>/<CLOUD_ID>/<category>[/<subcategory>]/<year>/<month>/<day>``
+``wazuh-cloud-cold-<REGION>/<CLOUD_ID>/<CATEGORY>[/<SUBCATEGORY>]/<YEAR>/<MONTH>/<DAY>``
 
 Each file has the following name:
 
-``<CLOUD_ID>_<category>[_<subcategory>]_<YYYYMMDDTHHmm>_<UniqueString>.<format>``
+``<CLOUD_ID>_<CATEGORY>[_<SUBCATEGORY>]_<YYYYMMDDTHHmm>_<UniqueString>.<FORMAT>``
 
 The files include the following fields:
 
 +-------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | field                         | Description                                                                                                                                                                                                                  |
 +===============================+==============================================================================================================================================================================================================================+
-| ``<region>``                  | The region where the environment is located.                                                                                                                                                                                 |
+| ``<REGION>``                  | The region where the environment is located.                                                                                                                                                                                 |
 +-------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``<cloud_id>``                | Cloud ID of the environment.                                                                                                                                                                                                 |
+| ``<CLOUD_ID>``                | Cloud ID of the environment.                                                                                                                                                                                                 |
 +-------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``<category>``                | This field must be *output*.                                                                                                                                                                                                 |
+| ``<CATEGORY>``                | This field must be *output*.                                                                                                                                                                                                 |
 +-------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``<subcategory>``             | This field is only used by the output category and contains *alerts* or *archives* files.                                                                                                                                    |
+| ``<SUBCATEGORY>``             | This field is only used by the output category and contains *alerts* or *archives* files.                                                                                                                                    |
 +-------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``<year>``                    | The year when the file was delivered.                                                                                                                                                                                        |
+| ``<YEAR>``                    | The year when the file was delivered.                                                                                                                                                                                        |
 +-------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``<month>``                   | The month when the file was delivered.                                                                                                                                                                                       |
+| ``<MONTH>``                   | The month when the file was delivered.                                                                                                                                                                                       |
 +-------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``<day>``                     | The day when the file was delivered.                                                                                                                                                                                         |
+| ``<DAY>``                     | The day when the file was delivered.                                                                                                                                                                                         |
 +-------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``<YYYYMMDDTHHmm>``           | Digits of the year, month, day, hour, and minute when the file was delivered. Hours are in 24-hour format and in UTC. A log file delivered at a specific time can contain records written at any point before that time.     |
 +-------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``<UniqueString>``            | The 16-character UniqueString component of the file name prevents overwriting files. It has no meaning and log processing software should ignore it.                                                                         |
 +-------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``<format>``                  | It is the encoding of the file. This field is *json.gz* for *output* files, which is a JSON text file in compressed gzip format, and *tar.gz* for *configuration* files.                                                     |
+| ``<FORMAT>``                  | It is the encoding of the file. This field is *json.gz* for *output* files, which is a JSON text file in compressed gzip format, and *tar.gz* for *configuration* files.                                                     |
 +-------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+

@@ -8,11 +8,11 @@ Remove agents using the Wazuh server API
 
 This section includes examples of using the :api-ref:`DELETE /agents <operation/api.controllers.agent_controller.delete_agents>` request to delete a list of agents or agents disconnected for a given period. This action is performed on the Wazuh server or on an authorized endpoint.
 
-The examples use an :ref:`authentication token <api_log_in>`. To get your token, replace ``<USER>:<PASSWORD>`` with your Wazuh server API credentials, ``<WAZUH_MANAGER_IP>`` with the Wazuh manager IP address or FQDN (Fully Qualified Domain Name), and run the following command:
+The examples use an :ref:`authentication token <api_log_in>`. To get your token, replace ``<USER>:<PASSWORD>`` with your Wazuh server API credentials, ``<WAZUH_MANAGER_IP_ADDRESS>`` with the Wazuh manager IP address or FQDN (Fully Qualified Domain Name), and run the following command:
 
 .. code-block:: console
 
-   # TOKEN=$(curl -u <USER>:<PASSWORD> -k -X GET "https://<WAZUH_MANAGER_IP>:55000/security/user/authenticate?raw=true")
+   # TOKEN=$(curl -u <USER>:<PASSWORD> -k -X GET "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/security/user/authenticate?raw=true")
 
 .. note::
 
@@ -25,9 +25,9 @@ You can remove specific Wazuh agents using a list. Use the parameter ``agents_li
 
 .. code-block:: console
 
-   # curl -k -X DELETE "https://<WAZUH_MANAGER_IP>:55000/agents?pretty=true&older_than=0s&agents_list=005,006,007&status=all" -H  "Authorization: Bearer $TOKEN"
+   # curl -k -X DELETE "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/agents?pretty=true&older_than=0s&agents_list=005,006,007&status=all" -H  "Authorization: Bearer $TOKEN"
 
-Replace ``<WAZUH_MANAGER_IP>`` with the IP address or FQDN of the Wazuh server.
+Replace ``<WAZUH_MANAGER_IP_ADDRESS>`` with the IP address or FQDN of the Wazuh server.
 
 .. code-block:: json
    :class: output
@@ -56,9 +56,9 @@ You can remove Wazuh agents that never connected or agents that have been discon
 
 .. code-block:: console
 
-   # curl -k -X DELETE "https://<WAZUH_MANAGER_IP>:55000/agents?pretty=true&older_than=21d&agents_list=all&status=never_connected,disconnected" -H  "Authorization: Bearer $TOKEN"
+   # curl -k -X DELETE "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/agents?pretty=true&older_than=21d&agents_list=all&status=never_connected,disconnected" -H  "Authorization: Bearer $TOKEN"
 
-Replace ``<WAZUH_MANAGER_IP>`` with the IP address or FQDN of the Wazuh server.
+Replace ``<WAZUH_MANAGER_IP_ADDRESS>`` with the IP address or FQDN of the Wazuh server.
 
 .. code-block:: json
    :class: output

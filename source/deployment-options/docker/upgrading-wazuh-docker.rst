@@ -6,7 +6,7 @@
 Upgrading Wazuh Docker
 ======================
 
-This section describes how to upgrade your Wazuh Docker deployment, starting from version 4.3. To upgrade Wazuh deployments of versions earlier than 4.3, refer to the :doc:`/deployment-options/docker/data-migration` documentation.
+This section describes how to upgrade your Wazuh Docker deployment, starting from version 4.3.
 
 To upgrade to version |WAZUH_CURRENT_MINOR|, you can follow one of two strategies.
 

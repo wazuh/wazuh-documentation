@@ -5,6 +5,8 @@ const redirections = [];
 /* Note: new release versions must always be inserted in the first position of the array "versions" */
 const versions = [
   '5.0',
+  '4.12',
+  '4.11',
   '4.10',
   '4.9',
   '4.8',
@@ -78,15 +80,187 @@ newUrls['5.0'] = [
 
 /* Pages no longer available in 5.0 */
 
+/* *** RELEASE 4.12 ****/
+
+/* Pages added in 4.12 */
+
+newUrls['4.12'] = [
+  '/release-notes/release-4-12-0.html',
+]
+
+/* *** RELEASE 4.11 ****/
+
+/* Pages added in 4.11 */
+
+newUrls['4.11'] = [
+  '/release-notes/release-4-11-0.html',
+  '/release-notes/release-4-11-1.html',
+]
+
 /* *** RELEASE 4.10 ****/
 
+/* Redirections from 4.9 to 4.10  */
+
+redirections.push(
+  {
+    'target': ['4.9=>4.10', '4.10=>4.9'],
+    '4.9': '/user-manual/wazuh-indexer-cluster.html',
+    '4.10': '/user-manual/wazuh-indexer-cluster/index.html',
+  },
+  {
+    'target': ['4.9=>4.10', '4.10=>4.9'],
+    '4.9': '/user-manual/wazuh-indexer-cluster.html#certificates-deployment',
+    '4.10': '/user-manual/wazuh-indexer-cluster/certificate-deployment.html',
+  },
+  {
+    'target': ['4.9=>4.10', '4.10=>4.9'],
+    '4.9': '/user-manual/wazuh-indexer-cluster.html#adding-wazuh-indexer-nodes',
+    '4.10': '/user-manual/wazuh-indexer-cluster/add-wazuh-indexer-nodes.html',
+  },
+  {
+    'target': ['4.9=>4.10', '4.10=>4.9'],
+    '4.9': '/user-manual/wazuh-indexer-cluster.html#cluster-management',
+    '4.10': '/user-manual/wazuh-indexer-cluster/cluster-management.html',
+  },
+  {
+    'target': ['4.9=>4.10', '4.10=>4.9'],
+    '4.9': '/user-manual/wazuh-indexer/index-life-management.html',
+    '4.10': '/user-manual/wazuh-indexer-cluster/index-lifecycle-management.html',
+  },
+  {
+    'target': ['4.9=>4.10', '4.10=>4.9'],
+    '4.9': '/user-manual/wazuh-indexer/wazuh-indexer-tuning.html#configure-shard-allocation-awareness-or-forced-awareness',
+    '4.10': '/user-manual/wazuh-indexer-cluster/wazuh-indexer-cluster-tuning.html#configure-shard-allocation-awareness-or-forced-awareness',
+  },
+  {
+    'target': ['4.9=>4.10', '4.10=>4.9'],
+    '4.9': '/user-manual/wazuh-indexer/wazuh-indexer-tuning.html#set-node-attributes-for-each-node-in-a-cluster',
+    '4.10': '/user-manual/wazuh-indexer-cluster/wazuh-indexer-cluster-tuning.html#set-node-attributes-for-each-node-in-a-cluster',
+  },
+  {
+    'target': ['4.9=>4.10', '4.10=>4.9'],
+    '4.9': '/user-manual/wazuh-server-cluster.html',
+    '4.10': '/user-manual/wazuh-server-cluster/index.html',
+  },
+  {
+    'target': ['4.9=>4.10', '4.10=>4.9'],
+    '4.9': '/user-manual/wazuh-server-cluster.html#architecture-overview',
+    '4.10': '/user-manual/wazuh-server-cluster/architecture-overview.html',
+  },
+  {
+    'target': ['4.9=>4.10', '4.10=>4.9'],
+    '4.9': '/user-manual/wazuh-server-cluster.html#types-of-nodes-in-a-wazuh-server-cluster',
+    '4.10': '/user-manual/wazuh-server-cluster/types-of-nodes.html',
+  },
+  {
+    'target': ['4.9=>4.10', '4.10=>4.9'],
+    '4.9': '/user-manual/wazuh-server-cluster.html#how-the-wazuh-server-cluster-works',
+    '4.10': '/user-manual/wazuh-server-cluster/how-server-cluster-works.html',
+  },
+  {
+    'target': ['4.9=>4.10', '4.10=>4.9'],
+    '4.9': '/user-manual/wazuh-server-cluster.html#wazuh-cluster-nodes-configuration',
+    '4.10': '/user-manual/wazuh-server-cluster/cluster-nodes-configuration.html',
+  },
+  {
+    'target': ['4.9=>4.10', '4.10=>4.9'],
+    '4.9': '/user-manual/wazuh-server-cluster.html#data-synchronization',
+    '4.10': '/user-manual/wazuh-server-cluster/data-synchronization.html',
+  },
+  {
+    'target': ['4.9=>4.10', '4.10=>4.9'],
+    '4.9': '/user-manual/wazuh-server-cluster.html#certificates-deployment',
+    '4.10': '/user-manual/wazuh-server-cluster/certificates-deployment.html',
+  },
+  {
+    'target': ['4.9=>4.10', '4.10=>4.9'],
+    '4.9': '/user-manual/wazuh-server-cluster.html#adding-new-wazuh-server-nodes',
+    '4.10': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/index.html',
+  },
+  {
+    'target': ['4.9=>4.10', '4.10=>4.9'],
+    '4.9': '/user-manual/wazuh-server-cluster.html#certificates-creation',
+    '4.10': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/certificates-creation.html',
+  },
+  {
+    'target': ['4.9=>4.10', '4.10=>4.9'],
+    '4.9': '/user-manual/wazuh-server-cluster.html#configuring-existing-components-to-connect-with-the-new-node',
+    '4.10': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/configuration-to-connect-with-new-node.html',
+  },
+  {
+    'target': ['4.9=>4.10', '4.10=>4.9'],
+    '4.9': '/user-manual/wazuh-server-cluster.html#wazuh-server-node-s-installation',
+    '4.10': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/server-nodes-installation.html',
+  },
+  {
+    'target': ['4.9=>4.10', '4.10=>4.9'],
+    '4.9': '/user-manual/wazuh-server-cluster.html#testing-the-cluster',
+    '4.10': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/testing-the-cluster.html',
+  },
+  {
+    'target': ['4.9=>4.10', '4.10=>4.9'],
+    '4.9': '/user-manual/wazuh-server-cluster.html#agent-connections',
+    '4.10': '/user-manual/wazuh-server-cluster/agent-connections.html',
+  },
+  {
+    'target': ['4.9=>4.10', '4.10=>4.9'],
+    '4.9': '/user-manual/wazuh-server-cluster.html#load-balancers',
+    '4.10': '/user-manual/wazuh-server-cluster/load-balancers.html',
+  },
+  {
+    'target': ['4.9=>4.10', '4.10=>4.9'],
+    '4.9': '/upgrade-guide/compatibility-matrix/index.html',
+    '4.10': '/upgrade-guide/index.html#wazuh-components-compatibility',
+  },
+  {
+    'target': ['4.9=>4.10', '4.10=>4.9'],
+    '4.9': '/upgrade-guide/manual-backup-restore.html',
+    '4.10': '/upgrade-guide/troubleshooting.html#wazuh-db-backup-restoration',
+  }
+);
+
 /* Pages added in 4.10 */
+
 newUrls['4.10'] = [
   '/release-notes/release-4-10-0.html',
   '/release-notes/release-4-10-1.html',
   '/release-notes/release-4-10-2.html',
-  '/user-manual/reference/ossec-conf/anti-tampering.html'
+  '/user-manual/reference/ossec-conf/anti-tampering.html',
+  '/user-manual/capabilities/vulnerability-detection/troubleshooting.html',
+  '/user-manual/capabilities/vulnerability-detection/FAQ.html',
+  '/user-manual/capabilities/vulnerability-detection/known-issues.html',
+  '/user-manual/wazuh-indexer-cluster/index.html',
+  '/user-manual/wazuh-indexer-cluster/certificate-deployment.html',
+  '/user-manual/wazuh-indexer-cluster/add-wazuh-indexer-nodes.html',
+  '/user-manual/wazuh-indexer-cluster/index-lifecycle-management.html',
+  '/user-manual/wazuh-indexer-cluster/wazuh-indexer-cluster-tuning.html',
+  '/user-manual/wazuh-indexer-cluster/cluster-management.html',
+  '/cloud-security/azure/ms-intune-integration.html',
+  '/user-manual/wazuh-server-cluster/index.html',
+  '/user-manual/wazuh-server-cluster/architecture-overview.html',
+  '/user-manual/wazuh-server-cluster/types-of-nodes.html',
+  '/user-manual/wazuh-server-cluster/how-server-cluster-works.html',
+  '/user-manual/wazuh-server-cluster/cluster-nodes-configuration.html',
+  '/user-manual/wazuh-server-cluster/data-synchronization.html',
+  '/user-manual/wazuh-server-cluster/certificates-deployment.html',
+  '/user-manual/wazuh-server-cluster/adding-new-server-nodes/index.html',
+  '/user-manual/wazuh-server-cluster/adding-new-server-nodes/certificates-creation.html',
+  '/user-manual/wazuh-server-cluster/adding-new-server-nodes/configuration-to-connect-with-new-node.html',
+  '/user-manual/wazuh-server-cluster/adding-new-server-nodes/server-nodes-installation.html',
+  '/user-manual/wazuh-server-cluster/adding-new-server-nodes/testing-the-cluster.html',
+  '/user-manual/wazuh-server-cluster/agent-connections.html',
+  '/user-manual/wazuh-server-cluster/load-balancers.html',
 ]
+
+/* Pages no longer available in 4.10 */
+
+removedUrls['4.10'] = [
+  '/user-manual/wazuh-indexer-cluster.html',
+  '/user-manual/wazuh-indexer/index-life-management.html',
+  '/user-manual/wazuh-server-cluster.html',
+  '/upgrade-guide/manual-backup-restore.html',
+  '/upgrade-guide/compatibility-matrix/index.html'
+];
 
 /* *** RELEASE 4.9 ****/
 
@@ -191,7 +365,7 @@ redirections.push(
   {
     'target': ['4.8=>4.9', '4.9=>4.8'],
     '4.8': '/user-manual/wazuh-indexer/certificates.html',
-    '4.9': '/user-manual/wazuh-indexer/wazuh-indexer-cluster.html#certificates-deployment',
+    '4.9': '/user-manual/wazuh-indexer-cluster.html#certificates-deployment',
   },
   {
     'target': ['4.8=>4.9', '4.9=>4.8'],
@@ -206,12 +380,17 @@ redirections.push(
   {
     'target': ['4.8=>4.9', '4.9=>4.8'],
     '4.8': '/user-manual/upscaling/adding-indexer-node.html',
-    '4.9': '/user-manual/wazuh-indexer/wazuh-indexer-cluster.html#adding-wazuh-indexer-nodes',
+    '4.9': '/user-manual/wazuh-indexer-cluster.html#adding-wazuh-indexer-nodes',
   },
   {
     'target': ['4.8=>4.9', '4.9=>4.8'],
     '4.8': '/user-manual/upscaling/adding-server-node.html',
-    '4.9': '/user-manual/manager/wazuh-server-cluster.html#adding-new-wazuh-server-nodes',
+    '4.9': '/user-manual/wazuh-server-cluster.html#adding-new-wazuh-server-nodes',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/user-manual/manager/wazuh-server-cluster.html',
+    '4.9': '/user-manual/wazuh-server-cluster.html',
   },
   {
     'target': ['4.8=>4.9', '4.9=>4.8'],
@@ -248,6 +427,71 @@ redirections.push(
     '4.8': '/migration-guide/files-backup/restoring/wazuh-central-components.html',
     '4.9': '/migration-guide/restoring/wazuh-central-components.html',
   },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/cloud-security/azure/activity-services/entra/graph.html',
+    '4.9': '/cloud-security/azure/graph.html',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/cloud-security/azure/activity-services/entra/index.html',
+    '4.9': '/cloud-security/azure/graph.html#microsoft-entra-id-use-case',
+  },
+  {
+    'target': ['4.8=>4.9'],
+    '4.8': '/cloud-security/azure/activity-services/index.html',
+    '4.9': '/cloud-security/azure/index.html',
+  },
+  {
+    'target': ['4.8=>4.9'],
+    '4.8': '/cloud-security/azure/activity-services/prerequisites/considerations.html',
+    '4.9': '/cloud-security/azure/platform-and-services.html#prerequisites',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/cloud-security/azure/activity-services/prerequisites/credentials.html',
+    '4.9': '/cloud-security/azure/platform-and-services.html#configuring-azure-credentials',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/cloud-security/azure/activity-services/prerequisites/dependencies.html',
+    '4.9': '/cloud-security/azure/platform-and-services.html#installing-dependencies',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/cloud-security/azure/activity-services/prerequisites/index.html',
+    '4.9': '/cloud-security/azure/platform-and-services.html#prerequisites',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/cloud-security/azure/activity-services/services/index.html',
+    '4.9': '/cloud-security/azure/index.html',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/cloud-security/azure/activity-services/services/log-analytics.html',
+    '4.9': '/cloud-security/azure/log-analytics.html',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/cloud-security/azure/activity-services/services/storage.html',
+    '4.9': '/cloud-security/azure/storage.html',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/cloud-security/azure/activity-services/index.html',
+    '4.9': '/cloud-security/azure/platform-and-services.html',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/cloud-security/ms-graph/index.html',
+    '4.9': '/cloud-security/azure/monitoring-ms-graph.html',
+  },
+  {
+    'target': ['4.8=>4.9'],
+    '4.8': '/cloud-security/ms-graph/monitoring-ms-graph-activity.html',
+    '4.9': '/cloud-security/azure/monitoring-ms-graph.html',
+  },
 );
 
 /* Pages added in 4.9 */
@@ -280,7 +524,8 @@ newUrls['4.9'] = [
   '/user-manual/agent/agent-management/remote-upgrading/wpk-files/wpk-list.html',
   '/user-manual/wazuh-dashboard/navigating-the-wazuh-dashboard.html',
   '/user-manual/wazuh-dashboard/settings.html',
-  '/user-manual/wazuh-indexer/wazuh-indexer-cluster.html',
+  '/user-manual/wazuh-server-cluster.html',
+  '/user-manual/wazuh-indexer-cluster.html',
   '/cloud-service/your-environment/custom-dns.html',
   '/migration-guide/creating/index.html',
   '/migration-guide/creating/wazuh-agent.html',
@@ -290,11 +535,18 @@ newUrls['4.9'] = [
   '/migration-guide/restoring/wazuh-central-components.html',
   '/cloud-security/amazon/services/prerequisites/aws-policy.html',
   '/cloud-security/amazon/services/prerequisites/iam-identities.html',
+  '/cloud-security/azure/graph.html',
+  '/cloud-security/azure/platform-and-services.html',
+  '/cloud-security/azure/log-analytics.html',
+  '/cloud-security/azure/storage.html',
+  '/cloud-security/azure/monitoring-ms-graph.html',
+  '/cloud-security/azure/ms-graph-api-setup.html',
 ];
 
 /* Pages no longer available in 4.9 */
 
 removedUrls['4.9'] = [
+  '/deployment-options/docker/data-migration.html',
   '/deployment-options/offline-installation.html',
   '/development/packaging/generate-deb-package.html',
   '/development/packaging/generate-rpm-package.html',
@@ -312,6 +564,7 @@ removedUrls['4.9'] = [
   '/user-manual/wazuh-dashboard/config-file.html',
   '/user-manual/wazuh-dashboard/management.html',
   '/user-manual/wazuh-indexer/certificates.html',
+  '/user-manual/manager/wazuh-server-cluster.html',
   '/user-manual/capabilities/policy-monitoring/index.html',
   '/user-manual/capabilities/policy-monitoring/openscap/index.html',
   '/user-manual/capabilities/policy-monitoring/openscap/how-it-works.html',
@@ -321,8 +574,10 @@ removedUrls['4.9'] = [
   '/user-manual/capabilities/policy-monitoring/rootcheck/index.html',
   '/user-manual/capabilities/policy-monitoring/rootcheck/rootcheck-configuration.html',
   '/user-manual/capabilities/policy-monitoring/rootcheck/rootcheck-faq.html',
-  '/user-manual/capabilities/policy-monitoring/ciscat/ciscat.html',
   '/user-manual/capabilities/malware-detection/osquery.html',
+  '/user-manual/capabilities/policy-monitoring/ciscat/ciscat.html',
+  '/user-manual/reference/ossec-conf/wodle-ciscat.html',
+  '/user-manual/reference/ossec-conf/wodle-openscap.html',
   '/user-manual/upscaling/index.html',
   '/user-manual/upscaling/adding-indexer-node.html',
   '/user-manual/upscaling/adding-server-node.html',
@@ -335,6 +590,19 @@ removedUrls['4.9'] = [
   '/migration-guide/files-backup/restoring/index.html',
   '/migration-guide/files-backup/restoring/wazuh-agent.html',
   '/migration-guide/files-backup/restoring/wazuh-central-components.html',
+  '/cloud-security/azure/activity-services/entra/graph.html',
+  '/cloud-security/azure/activity-services/entra/index.html',
+  '/cloud-security/azure/activity-services/index.html',
+  '/cloud-security/azure/activity-services/prerequisites/considerations.html',
+  '/cloud-security/azure/activity-services/prerequisites/credentials.html',
+  '/cloud-security/azure/activity-services/prerequisites/dependencies.html',
+  '/cloud-security/azure/activity-services/prerequisites/index.html',
+  '/cloud-security/azure/activity-services/services/index.html',
+  '/cloud-security/azure/activity-services/services/log-analytics.html',
+  '/cloud-security/azure/activity-services/services/storage.html',
+  '/cloud-security/azure/posture-management.html',
+  '/cloud-security/ms-graph/index.html',
+  '/cloud-security/ms-graph/monitoring-ms-graph-activity.html',
 ];
 
 /* *** RELEASE 4.8 ****/
