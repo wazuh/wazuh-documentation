@@ -29,6 +29,10 @@ $dark-color-redoc-danger: #e31b0f !default;
   }
 }
 
+#central-column {
+  padding-top: $no-latest-notice-height-xl;
+}
+
 body {
   position: relative;
   margin-top: 0;
