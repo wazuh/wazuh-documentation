@@ -12,16 +12,27 @@
     }
   }
 }
+.not-top {
+  .breadcrumb-wrapper {
+    position: fixed;
+    @include media-only(xl, xxl){
+      max-width: calc(100% - #{$left-sidebar-width-narrow + $right-sidebar-width});
+    }
+    @include media-min(xxl){
+      max-width: calc(1600px - #{$left-sidebar-width-narrow + $right-sidebar-width});
+    }
+  }
+}
 
 .breadcrumb-wrapper {
-  position: fixed;
+  order: 1;
   top: $header-height-xl;
   z-index: 99;
   display: flex;
   flex-direction: row;
   width: 100%;
   min-height: $breadcrumbs-height-xl;
-  padding: 5px 15px 5px 30px;
+  padding: 5px 15px 15px 30px;
   @include media-max(sm){
     position: static;
     overflow: auto;
@@ -30,16 +41,13 @@
     top: calc(#{$header-height-xs} + #{$secondary-mobile-bar});
     align-items: center;
     padding-left: 15px;
+    padding-bottom: 5px;
+    position: fixed;
   }
   @include media-min(xl){
     align-items: flex-end;
     max-height: $breadcrumbs-height-xl * 1.5;
-  }
-  @include media-only(xl,xxl) {
-    width: calc(100% - #{$left-sidebar-width-narrow} - #{$right-sidebar-width-narrow});
-  }
-  @include media-min(xxl) {
-    width: calc(#{$outer-container-xxl} - #{$left-sidebar-width-narrow} - #{$right-sidebar-width-narrow});
+    max-width: 100%;
   }
 }
 
@@ -96,12 +104,12 @@
     color: $light-color-main-text;
     background-color: $light-color-base-space;
     .home-icon {
-      fill: $light-color-primary;
+      fill: $light-color-primary-lighter;
     }
     a:hover,
     a:focus {
       .home-icon {
-        fill: $light-color-primary-lighter;
+        fill: $dark-color-primary-lighter;
       }
     }
   }
@@ -121,7 +129,7 @@
     color: $dark-color-main-text;
     background-color: $dark-color-base-space;
     .home-icon {
-      fill: $dark-color-primary;
+      fill: $light-color-primary-lighter;
     }
     a:hover,
     a:focus {
