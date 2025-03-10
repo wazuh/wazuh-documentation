@@ -5,11 +5,6 @@
  */
 
 $(function() {
-  $('#btn-scroll').on('click', function(){
-    $("html, body").animate({ scrollTop: 0 }, "slow");
-    return false;
-  });
-
   $(document).on('scroll', function(){
     var scrollvalue = $(document).scrollTop();
     
