@@ -5,10 +5,14 @@
     </defs>
     <view id="link-lt" viewBox="0 0 512 512" />
     <view id="link-dt" viewBox="0 600 512 512" />
+    <view id="link-white" viewBox="0 1200 512 512" />
     <g>
         <use xlink:href="#link-icon" fill="#545f73" />
     </g>
     <g transform="translate(0, 600)">
         <use xlink:href="#link-icon" fill="#9298ab" />
+    </g>
+    <g transform="translate(0, 1200)">
+        <use xlink:href="#link-icon" fill="#ffffff" />
     </g>
 </svg>
