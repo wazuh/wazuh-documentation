@@ -4,10 +4,10 @@
   :description: Check out how to upgrade the Wazuh agent to the latest available version remotely, using the agent_upgrade tool or the Wazuh API, or locally.
 
 
-Upgrading Wazuh agents on Linux systems
-=======================================
+Upgrading Wazuh agents on Linux endpoints
+=========================================
 
-Select your package manager and follow the instructions to upgrade the Wazuh agent locally. If you want to perform a remote upgrade, check the :doc:`Remote agent upgrade </user-manual/agent/agent-management/remote-upgrading/upgrading-agent>` section to learn more.
+Select your package manager and follow the instructions to upgrade the Wazuh agent locally.
 
 .. note:: You need root user privileges to run all the commands described below.
 
@@ -126,13 +126,8 @@ Select your package manager and follow the instructions to upgrade the Wazuh age
 
             # zypper update wazuh-agent|WAZUH_AGENT_ZYPP_PKG_INSTALL|
 
-      #. It is recommended to disable the Wazuh repository in order to avoid undesired upgrades and compatibility issues as the Wazuh agent should always be in the same or an older version than the Wazuh manager.
+      #. It is recommended to disable the Wazuh repository to avoid undesired upgrades and compatibility issues as the Wazuh agent should always be in the same or an older version than the Wazuh manager.
 
          .. code-block:: console
 
             # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/wazuh.repo
-
-.. note::
-   :class: not-long
-
-   When upgrading agents from versions earlier than 4.x, make sure that the communication protocol is compatible. Up to that point, UDP was the default protocol and it was switched to TCP for later versions. Edit the agent configuration file ``ossec.conf`` to update the :ref:`protocol <server_protocol>` or make sure that your Wazuh manager accepts :ref:`both protocols<manager_protocol>`.

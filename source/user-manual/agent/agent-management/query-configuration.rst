@@ -14,7 +14,7 @@ You can query the actual configuration of a Wazuh agent or the Wazuh manager on 
    :align: center
    :width: 80%
 
-Navigate to the **Server management** > **Endpoints Summary** tab in the Wazuh dashboard. Select an agent and click on **Configuration**. The image below shows details about the Wazuh agent configuration. It also shows that the Wazuh agent configuration is *synchronized*. This means that the Wazuh agent's local configuration reflects the latest settings defined on the Wazuh manager.
+Navigate to the **Agents management** > **Summary** tab in the Wazuh dashboard. Select an agent and click on **Configuration**. The image below shows details about the Wazuh agent configuration. It also shows that the Wazuh agent configuration is *synchronized*. This means that the Wazuh agent's local configuration reflects the latest settings defined on the Wazuh manager.
 
 .. thumbnail:: /images/kibana-app/features/query-configuration/configuration-synchronized.png
    :title: Configuration is synchronized
@@ -22,7 +22,7 @@ Navigate to the **Server management** > **Endpoints Summary** tab in the Wazuh d
    :align: center
    :width: 80%
 
-Navigate to the **Server management** > **Endpoints Summary** tab in the Wazuh dashboard. Select an agent and click on **Configuration**. Scroll down to the **Log data analysis** section and click on the **Log collection** configuration. The active configuration is shown. The image below shows the log files that will be analyzed.
+Navigate to the **Agents management** > **Summary** tab in the Wazuh dashboard. Select an agent and click on **Configuration**. Scroll down to the **Log data analysis** section and click on the **Log collection** configuration. The active configuration is shown. The image below shows the log files that will be analyzed.
 
 .. thumbnail:: /images/kibana-app/features/query-configuration/logcollector-query.png
    :title: Log collection configuration

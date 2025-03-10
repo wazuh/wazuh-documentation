@@ -74,7 +74,7 @@ Check the supported operating systems and the recommended hardware requirements 
 Recommended operating systems
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Wazuh server can be installed on a 64-bit Linux operating system. Wazuh supports the following operating system versions:
+The Wazuh server requires a 64-bit Intel, AMD, or ARM Linux processor (x86_64/AMD64 or AARCH64/ARM64 architecture). Wazuh supports the following operating system versions:
 
 .. list-table::
    :width: 100%

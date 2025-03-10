@@ -12,7 +12,7 @@ Configure the cluster node by editing the following settings in the ``/var/ossec
       <port>1516</port>
       <bind_addr>0.0.0.0</bind_addr>
       <nodes>
-          <node>WAZUH-MASTER-ADDRESS</node>
+          <node><WAZUH_MASTER_ADDRESS></node>
       </nodes>
       <hidden>no</hidden>
       <disabled>no</disabled>

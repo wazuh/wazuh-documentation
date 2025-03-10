@@ -46,11 +46,11 @@ Installing the Wazuh indexer
 
                 # dpkg -i ./wazuh-offline/wazuh-packages/wazuh-indexer*.deb
 
-#. Run the following commands replacing ``<indexer-node-name>`` with the name of the Wazuh indexer node you are configuring as defined in ``config.yml``. For example, ``node-1``. This deploys the SSL certificates to encrypt communications between the Wazuh central components.
+#. Run the following commands replacing ``<INDEXER_NODE_NAME>`` with the name of the Wazuh indexer node you are configuring as defined in ``config.yml``. For example, ``node-1``. This deploys the SSL certificates to encrypt communications between the Wazuh central components.
 
    .. code-block:: console
 
-      # NODE_NAME=<indexer-node-name>
+      # NODE_NAME=<INDEXER_NODE_NAME>
 
    .. code-block:: console
 
@@ -382,11 +382,11 @@ Installing the Wazuh dashboard
 
                 # dpkg -i ./wazuh-offline/wazuh-packages/wazuh-dashboard*.deb
 
-#.  Replace ``<DASHBOARD_NODE_NAME>>`` with your Wazuh dashboard node name, the same used in ``config.yml`` to create the certificates. For example, ``dashboard``. Then, move the certificates to their corresponding location.
+#.  Replace ``<DASHBOARD_NODE_NAME>`` with your Wazuh dashboard node name, the same used in ``config.yml`` to create the certificates. For example, ``dashboard``. Then, move the certificates to their corresponding location.
 
     .. code-block:: console
 
-        # NODE_NAME=<DASHBOARD_NODE_NAME>>
+        # NODE_NAME=<DASHBOARD_NODE_NAME>
 
     .. code-block:: console
 
@@ -433,11 +433,11 @@ Installing the Wazuh dashboard
 
     .. include:: /_templates/installations/wazuh/common/check_wazuh_dashboard.rst
 
-#.  Access the web interface.
+#.  Access the Wazuh web interface.
 
-    -   URL: *https://<WAZUH_DASHBOARD_IP_ADDRESS>*
-    -   **Username**: admin
-    -   **Password**: admin
+    -  **URL**: ``https://<WAZUH_DASHBOARD_IP_ADDRESS>``
+    -  **Username**: ``admin``
+    -  **Password**: ``admin``
 
 Upon the first access to the Wazuh dashboard, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or, for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser. Alternatively, a certificate from a trusted authority can be configured.
 
@@ -567,7 +567,7 @@ Select your deployment type and follow the instructions to change the default pa
                   url: https://127.0.0.1
                   port: 55000
                   username: wazuh-wui
-                  password: "<wazuh-wui-password>"
+                  password: "<WAZUH_WUI_PASSWORD>"
                   run_as: false
 
       #. Restart the Wazuh dashboard to apply the changes.

@@ -22,7 +22,7 @@ Ansible does most of the work via SSH, and uses SSH authentication mechanisms. I
 .. code-block:: none
    :class: output
 
-   -u <user>   Set the connection user.
+   -u <USER>   Set the connection user.
    -k          Ask the password of the connection user.
    -b          Execute task and operations with a privilege user.
    -K          Ask for sudo password, intended for privilege escalation.

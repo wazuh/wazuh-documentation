@@ -41,17 +41,17 @@ Docker library for Python
 
 .. tabs::
 
-   .. group-tab:: Python 3.7–3.10
+   .. group-tab:: Python 3.8–3.10
 
       .. code-block:: console
 
-         $ pip3 install docker==7.1.0 urllib3==2.2.2 requests==2.32.2
+         $ pip3 install docker==7.1.0 urllib3==1.26.20 requests==2.32.2
 
    .. group-tab:: Python 3.11–3.12
 
       .. code-block:: console
 
-         $ pip3 install docker==7.1.0 urllib3==2.2.2 requests==2.32.2 --break-system-packages
+         $ pip3 install docker==7.1.0 urllib3==1.26.20 requests==2.32.2 --break-system-packages
 
       .. note::
 

@@ -83,7 +83,7 @@ This filter operator finds all data that do not match the specified value within
 Greater than ( > )
 ~~~~~~~~~~~~~~~~~~
 
-This *greater than* (``>``) operator filters values exceeding a specified threshold in a dataset. For example, you can filter by entities whose local port number is greater than a specific value such as *5353* with the query ``local.port>5353``.
+This *greater than* (``>``) operator filters values exceeding a specified threshold in a dataset. For example, you can filter by entities whose local port number is greater than a specific value such as *36271* with the query ``local.port>36271``.
 
 .. thumbnail:: /images/wazuh-dashboard/queries/port-greater-than-value.png
    :align: center
@@ -94,7 +94,7 @@ This *greater than* (``>``) operator filters values exceeding a specified thresh
 Less than (<)
 ~~~~~~~~~~~~~
 
-This *less than* (``<``) operator filters values below a specified limit in a dataset. For example, you can filter by entities whose local port number is less than a specific value such as *546* with the query ``local.port<546``.
+This *less than* (``<``) operator filters values below a specified limit in a dataset. For example, you can filter by entities whose local port number is less than a specific value such as *53770* with the query ``local.port<53770``.
 
 .. thumbnail:: /images/wazuh-dashboard/queries/port-less-than-value.png
    :align: center
@@ -241,7 +241,7 @@ WQL supports numeric inequalities using the ``>``, and ``<`` operators. For exam
 
 .. code-block:: none
 
-   local.port>53 and local.port<631
+   local.port>36271 and local.port<53771
 
 .. thumbnail:: /images/wazuh-dashboard/queries/port-ranges.png
    :align: center

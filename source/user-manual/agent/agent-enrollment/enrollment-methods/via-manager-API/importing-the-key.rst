@@ -39,14 +39,14 @@ Follow the steps below to import the client key to a Linux/Unix endpoint:
    	Confirm adding it?(y/n): y
    	Added.
 
-#. Add the Wazuh manager IP address or FQDN (Fully Qualified Domain Name)  to the Wazuh agent configuration file in ``/var/ossec/etc/ossec.conf``. Replace ``<WAZUH_MANAGER_IP>`` with the IP address or FQDN (Fully Qualified Domain Name) of the Wazuh manager.
+#. Add the Wazuh manager IP address or FQDN (Fully Qualified Domain Name)  to the Wazuh agent configuration file in ``/var/ossec/etc/ossec.conf``. Replace ``<WAZUH_MANAGER_IP_ADDRESS>`` with the IP address or FQDN (Fully Qualified Domain Name) of the Wazuh manager.
 
    .. code-block:: xml
       :emphasize-lines: 3
 
       <client>
         <server>
-          <address><WAZUH_MANAGER_IP></address>
+          <address><WAZUH_MANAGER_IP_ADDRESS></address>
           ...
         </server>
       </client>
@@ -57,7 +57,7 @@ Follow the steps below to import the client key to a Linux/Unix endpoint:
 
       # systemctl restart wazuh-agent
 
-#. Click on the upper-left menu icon and navigate to **Server management** > **Endpoints Summary** on the Wazuh dashboard to check for the newly enrolled Wazuh agent and its connection status. If the enrollment was successful, you will have an interface similar to the image below.
+#. Click on the upper-left menu icon and navigate to **Agents management** > **Summary** on the Wazuh dashboard to check for the newly enrolled Wazuh agent and its connection status. If the enrollment was successful, you will have an interface similar to the image below.
 
    .. thumbnail:: /images/manual/agent/linux-check-newly-enrolled.png
      :title: Check newly enrolled Wazuh agent - Linux
@@ -98,14 +98,14 @@ Follow the steps below to import the client key to a Windows endpoint.
       Confirm adding it?(y/n): y
       Added.
 
-#. Add the Wazuh manager IP address or FQDN (Fully Qualified Domain Name) to the Wazuh agent configuration file in ``C:\Program Files (x86)\ossec-agent\ossec.conf``. Replace ``<WAZUH_MANAGER_IP>`` with the IP address or FQDN of the Wazuh manager.
+#. Add the Wazuh manager IP address or FQDN (Fully Qualified Domain Name) to the Wazuh agent configuration file in ``C:\Program Files (x86)\ossec-agent\ossec.conf``. Replace ``<WAZUH_MANAGER_IP_ADDRESS>`` with the IP address or FQDN of the Wazuh manager.
 
    .. code-block:: xml
       :emphasize-lines: 3
 
       <client>
          <server>
-           <address><WAZUH_MANAGER_IP></address>
+           <address><WAZUH_MANAGER_IP_ADDRESS></address>
            ...
          </server>
        </client>
@@ -127,7 +127,7 @@ Follow the steps below to import the client key to a Windows endpoint.
             # net stop wazuh
             # net start wazuh
 
-#. Click on the upper-left menu icon and navigate to **Server management** > **Endpoints Summary** on the Wazuh dashboard to check for the newly enrolled Wazuh agent and its connection status. If the enrollment was successful, you will have an interface similar to the image below.
+#. Click on the upper-left menu icon and navigate to **Agents management** > **Summary** on the Wazuh dashboard to check for the newly enrolled Wazuh agent and its connection status. If the enrollment was successful, you will have an interface similar to the image below.
 
    .. thumbnail:: /images/manual/agent/windows-check-newly-enrolled.png
       :title: Check newly enrolled Wazuh agent - Windows
@@ -160,14 +160,14 @@ Follow the steps below to import the client key to a macOS endpoint:
    	Confirm adding it?(y/n): y
    	Added.
 
-#. Add the Wazuh manager IP address or FQDN (Fully Qualified Domain Name) to the Wazuh agent configuration file in ``/Library/Ossec/etc/ossec.conf``. Replace ``<WAZUH_MANAGER_IP>`` with the IP address or FQDN of the Wazuh manager.
+#. Add the Wazuh manager IP address or FQDN (Fully Qualified Domain Name) to the Wazuh agent configuration file in ``/Library/Ossec/etc/ossec.conf``. Replace ``<WAZUH_MANAGER_IP_ADDRESS>`` with the IP address or FQDN of the Wazuh manager.
 
    .. code-block:: xml
       :emphasize-lines: 3
 
       <client>
         <server>
-          <address><WAZUH_MANAGER_IP></address>
+          <address><WAZUH_MANAGER_IP_ADDRESS></address>
           ...
         </server>
       </client>
@@ -178,7 +178,7 @@ Follow the steps below to import the client key to a macOS endpoint:
 
       # /Library/Ossec/bin/wazuh-control restart
 
-#. Click on the upper-left menu icon and navigate to **Server management** > **Endpoints Summary** on the Wazuh dashboard to check for the newly enrolled Wazuh agent and its connection status. If the enrollment was successful, you will have an interface similar to the image below.
+#. Click on the upper-left menu icon and navigate to **Agents management** > **Summary** on the Wazuh dashboard to check for the newly enrolled Wazuh agent and its connection status. If the enrollment was successful, you will have an interface similar to the image below.
 
    .. thumbnail:: /images/manual/agent/macOS-check-newly-enrolled.png
       :title: Check newly enrolled Wazuh agent - macOS

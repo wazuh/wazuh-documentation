@@ -21,7 +21,7 @@ Requirements
 
 If ``Packages`` and ``Brew`` are not already installed in your system, they can be installed using the generate_wazuh_packages.sh script
 
-Download our wazuh-packages repository from GitHub and go to the macos directory.
+Download our wazuh repository from GitHub and go to the macos directory.
 
 .. code-block:: console
 
@@ -108,7 +108,7 @@ Once you have set up the environment, you can build and notarize the package as 
 
 The script will automatically sign the code and enable the hardened runtime, build the package and sign it, upload the package for its notarization and once it is notarized, the script will staple the notarization ticket to the package. Thanks to this, the package will be able to be installed in those hosts without an internet connection.
 
-The result of the notarization will be stored in wazuh-packages/macos/request_result.txt.
+The result of the notarization will be stored in wazuh/packages/macos/request_result.txt.
 
 Common issues
 ^^^^^^^^^^^^^^

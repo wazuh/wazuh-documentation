@@ -20,7 +20,7 @@ Installing and configuring the certbot client
 Install certbot
 ^^^^^^^^^^^^^^^
 
-#. Install snap: 
+#. Install snap:
 
    The certbot snap provides an easy way to ensure you have the latest version of certbot with features like automated certificate renewal preconfigured.
 
@@ -42,6 +42,13 @@ Install certbot
             # apt-get update
             # apt-get install snap
 
+      .. group-tab:: Amazon Linux 2
+
+         .. code-block:: console
+
+            # amazon-linux-extras enable epel
+            # yum install epel-release
+
 #. Confirm installed snap is the latest:
 
    .. code-block:: console
@@ -54,11 +61,29 @@ Install certbot
       core 16-2.61.4-20240607 from Canonical✓ installed
       snap "core" has no updates available
 
+   **For Amazon Linux 2**
+
+   Confirm the EPEL repository is available:
+
+   .. code-block:: console
+
+      # yum repolist
+
+   You should see a repo name that says "Amazon Extras repo for epel."
+
 #. Install certbot:
 
    .. code-block:: console
 
       # snap install --classic certbot
+
+   **For Amazon Linux 2**
+
+   .. code-block:: console
+
+      # yum install -y certbot python3-certbot-apache
+
+   Skip step 4 if your operating system is Amazon Linux 2.
 
 #. Run the following command to link the certbot from the snap directory to the user directory:
 

@@ -411,7 +411,7 @@ This block configures the integration with Azure Active Directory Graph REST API
 graph\\auth_path
 ^^^^^^^^^^^^^^^^
 
-File path containing the application identifier and key for authentication. This is necessary to use the AAD Graph API.
+File path containing the application identifier and key for authentication. This is necessary to use the Active Directory Graph API. Incompatible with the ``application_id`` and ``application_key`` options. Check the :ref:`credentials <configure_azure_credentials>` reference for more information about this topic.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |

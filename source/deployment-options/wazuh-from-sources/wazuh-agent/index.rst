@@ -422,7 +422,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
                 .. code-block:: console
 
-                    # wget https://raw.githubusercontent.com/wazuh/wazuh-packages/|WAZUH_CURRENT_MINOR_FROM_SOURCES|/aix/generate_wazuh_packages.sh --no-check-certificate
+                    # wget https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_CURRENT|/packages/aix/generate_wazuh_packages.sh --no-check-certificate
 
                 .. note::
 
@@ -555,7 +555,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
                 .. code-block:: console
 
-                    # /usr/local/bin/wget https://github.com/wazuh/wazuh-packages/raw/master/hp-ux/depothelper-2.10-hppa_32-11.31.depot --no-check-certificate
+                    # /usr/local/bin/wget https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_CURRENT|/packages/hp-ux/depothelper-2.20-ia64_64-11.31.depot --no-check-certificate
 
                 .. note::
 
@@ -577,7 +577,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
                 .. code-block:: console
 
-                    # /usr/local/bin/wget https://raw.githubusercontent.com/wazuh/wazuh-packages/master/hp-ux/generate_wazuh_packages.sh --no-check-certificate
+                    # /usr/local/bin/wget https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_CURRENT|/packages/hp-ux/generate_wazuh_packages.sh --no-check-certificate
 
                 .. note::
 

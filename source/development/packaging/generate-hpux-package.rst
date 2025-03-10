@@ -18,13 +18,13 @@ Requirements
  * GCC: download.
  * depothelper: download.
 
-Download our wazuh-packages repository from GitHub and go to the ``hpux`` directory.
+Download our wazuh repository from GitHub and go to the ``hp-ux`` directory.
 
 .. code-block:: console
 
- $ curl -L https://github.com/wazuh/wazuh-packages/tarball/v|WAZUH_CURRENT| | tar zx
- $ cd wazuh-wazuh-packages-*
- $ cd hp-ux
+ $ curl -L https://github.com/wazuh/wazuh/tarball/v|WAZUH_CURRENT| | tar zx
+ $ cd wazuh-wazuh-*
+ $ cd packages/hp-ux
 
 Execute the ``generate_wazuh_packages.sh`` script, with the different options you desire.
 

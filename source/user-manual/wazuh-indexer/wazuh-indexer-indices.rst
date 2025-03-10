@@ -66,13 +66,13 @@ This section describes how to create a custom index pattern, for example, ``my-c
    -  ``<INDEXER_IP_ADDRESS>`` with the IP address of your Wazuh indexer
    -  ``<INDEXER_USERNAME>`` and ``<INDEXER_PASSWORD>`` with the Wazuh indexer username and password. You can obtain the Wazuh indexer credentials for fresh deployments using the command:
 
-   .. note::
+      .. note::
 
-      If using the Wazuh OVA, use the default credentials ``admin:admin`` or refer to the :doc:`password management </user-manual/user-administration/password-management>` section.
+         If using the Wazuh OVA, use the default credentials ``admin:admin`` or refer to the :doc:`password management </user-manual/user-administration/password-management>` section.
 
-   .. code-block:: console
+      .. code-block:: console
 
-      # tar -axf wazuh-install-files.tar wazuh-install-files/wazuh-passwords.txt -O | grep -P "\'admin\'" -A 1
+         # tar -axf wazuh-install-files.tar wazuh-install-files/wazuh-passwords.txt -O | grep -P "\'admin\'" -A 1
 
    .. code-block:: output
       :class: output
@@ -446,7 +446,7 @@ The connection status of an enrolled Wazuh agent at any moment is one of the fol
 
 Wazuh stores a history of the connection status of all its agents. By default, it indexes the agent connection status using the ``wazuh‑monitoring-*`` indices. The Wazuh indexer creates one of these indices per week by default. Check the documentation on :doc:`custom creation intervals </user-manual/wazuh-dashboard/settings>`. These indices store the connection status of all the agents every 15 minutes by default. Check the documentation on the :doc:`frequency of API requests </user-manual/wazuh-dashboard/settings>`.
 
-The Wazuh dashboard requires these indices to display information about agent status. For example, by clicking **☰** > **Server management** > **Endpoints Summary**, you can see information such as the Wazuh agent's connection status and historical evolution within set timeframes.
+The Wazuh dashboard requires these indices to display information about agent status. For example, by clicking **☰** > **Agents management** > **Summary**, you can see information such as the Wazuh agent's connection status and historical evolution within set timeframes.
 
 .. thumbnail:: /images/manual/wazuh-indexer/status-evolution-agents-dashboard.png
    :title: Status and evolution in Agents dashboard

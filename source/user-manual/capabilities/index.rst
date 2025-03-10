@@ -1,23 +1,12 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about Wazuh capabilities, how they work, their configuration, FAQs, and practical examples on how to use our solution. 
-  
-.. _capabilities:
+   :description: Learn more about Wazuh capabilities, how they work, their configuration, FAQs, and practical examples on how to use our solution.
 
 Capabilities
 ============
 
-In this section you will find:
-
-- A detailed explanation of how each capability works.
-
-- The configuration options for specific capabilities.
-
-- Frequently asked questions.
-
-- Some practical examples.
-
+This section shows detailed explanation of the Wazuh capabilities and their configuration options.
 
 .. toctree::
    :maxdepth: 2

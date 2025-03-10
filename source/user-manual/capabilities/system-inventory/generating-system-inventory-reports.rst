@@ -11,13 +11,13 @@ You can generate two types of reports from the Wazuh dashboard. These reports ar
 Property-specific report
 ------------------------
 
-This feature allows you to export ``CSV`` reports of a specific property of an endpoint. For example, you can generate a report of the installed software on an endpoint. This kind of report is only available for processes and installed software. 
+This feature allows you to export ``CSV`` reports of a specific property of an endpoint. For example, you can generate a report of the installed software on an endpoint. 
 
-To download this report, click on the **Download CSV** beneath the specific property you are interested in on the **Inventory data** page of the endpoint.
+To download this report, click **Export formatted** within the specific property you are interested in on the **Inventory Data** page of the endpoint.
 
-.. thumbnail:: /images/manual/system-inventory/download-csv.png
-  :title: Download CSV
-  :alt: Download CSV
+.. thumbnail:: /images/manual/system-inventory/export-formatted.png
+  :title: Export formatted
+  :alt: Export formatted
   :align: center
   :width: 80%
 
@@ -26,7 +26,7 @@ Endpoint inventory report
 
 This feature allows you to export a full report of all endpoint properties collected by the Wazuh Syscollector module. This report is generated in PDF format and can serve a variety of uses. To download the full endpoint report:
 
-- Click on **Generate Report** on the **Inventory data** page of the Wazuh agent.
+- Click **Generate report** on the **Inventory Data** page of the Wazuh agent.
 
 .. thumbnail:: /images/manual/system-inventory/generate-report.png
   :title: Generate report

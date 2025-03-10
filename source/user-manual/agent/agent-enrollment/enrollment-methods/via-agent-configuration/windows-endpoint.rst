@@ -15,14 +15,14 @@ The Wazuh agent installation directory depends on the architecture of the endpoi
 
 #. Using an administrator account, modify the Wazuh agent configuration file ``ossec.conf`` in the installation directory. For this guide, we are assuming a 64-bit architecture. Hence, ``C:\Program Files (x86)\ossec-agent\ossec.conf``
 
-   -  Include the Wazuh manager IP address or FQDN (Fully Qualified Domain Name) in the ``<client><server><address>`` section. Replace ``<WAZUH_MANAGER_IP>`` with the Wazuh manager IP address or FQDN:
+   -  Include the Wazuh manager IP address or FQDN (Fully Qualified Domain Name) in the ``<client><server><address>`` section. Replace ``<WAZUH_MANAGER_IP_ADDRESS>`` with the Wazuh manager IP address or FQDN:
 
       .. code-block:: xml
          :emphasize-lines: 3
 
          <client>
            <server>
-             <address><WAZUH_MANAGER_IP></address>
+             <address><WAZUH_MANAGER_IP_ADDRESS></address>
              ...
            </server>
          </client>
@@ -31,7 +31,7 @@ The Wazuh agent installation directory depends on the architecture of the endpoi
 
       .. note::
 
-         If you have a multi-cluster Wazuh server installation, you can add multiple ``<client>`` sections that point to the worker nodes. Refer to :ref:`pointing agents to the cluster (Failover mode) <cluster_agent_connections>` for more information.
+         If you have a multi-cluster Wazuh server installation, you can add multiple ``<client>`` sections that point to the worker nodes. Refer to :doc:`pointing agents to the cluster (Failover mode) </user-manual/wazuh-server-cluster/agent-connections>` for more information.
 
    -  (Optional) Add enrollment parameters in the ``<client><enrollment>`` section.
 
@@ -71,7 +71,7 @@ The Wazuh agent installation directory depends on the architecture of the endpoi
             # net stop wazuh
             # net start wazuh
 
-#. Click on the upper-left menu icon and navigate to **Server management** > **Endpoints Summary** on the Wazuh dashboard to check for the newly enrolled Wazuh agent and its connection status. If the enrollment was successful, you will have an interface similar to the image below.
+#. Click on the upper-left menu icon and navigate to **Agents management** > **Summary** on the Wazuh dashboard to check for the newly enrolled Wazuh agent and its connection status. If the enrollment was successful, you will have an interface similar to the image below.
 
    .. thumbnail:: /images/manual/agent/windows-check-newly-enrolled.png
       :title: Check newly enrolled Wazuh agent - Windows

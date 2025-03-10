@@ -11,17 +11,48 @@ All notable changes to this project will be documented in this file.
 
 - Removed the option to store authentication credentials as plain text in ``ossec.conf``. ([#6405](https://github.com/wazuh/wazuh-documentation/pull/6405))
 
-## [v4.10.2]
+## [v4.12.0]
 
-- Support for Wazuh 4.10.2
+### Added
 
-## [v4.10.1]
+- Added reference to macOS arm64 WPK. ([#7883](https://github.com/wazuh/wazuh-documentation/pull/7883))
+- Add Ubuntu 24.04 SCA to list of available SCAs. ([#8021](https://github.com/wazuh/wazuh-documentation/pull/8021))
 
-- Support for Wazuh 4.10.1
+### Changed
+
+- Updated Wazuh dashboard package generation guide. ([#7961](https://github.com/wazuh/wazuh-documentation/pull/7961))
+- Updated images in FIM PoC. [#7979](https://github.com/wazuh/wazuh-documentation/pull/7979)
+
+# [v4.11.1]
+
+- Support for Wazuh 4.11.1
+
+## [v4.11.0]
 
 ### Added
 
 - Added architecture information to assistant pages. ([#7830](https://github.com/wazuh/wazuh-documentation/pull/7830))
+- Added CISA to the vulnerability source enumerations and compatibility matrix. ([#8201](https://github.com/wazuh/wazuh-documentation/pull/8201))
+- **Post-release**: Added new configuration options to the MS Graph integration documentation. ([#8226](https://github.com/wazuh/wazuh-documentation/pull/8226))
+
+### Changed
+
+- Updated note about uninstalling Wazuh agents in Solaris. ([#7925](https://github.com/wazuh/wazuh-documentation/pull/7925))
+- Updated screenshots from System Inventory.  ([#8044](https://github.com/wazuh/wazuh-documentation/pull/8044))
+- Updated the Virtual Machine (OVA) and Amazon Machine Images (AMI) sections. Updated the operating system component to AL2023. ([#8201](https://github.com/wazuh/wazuh-documentation/pull/8201))
+
+### Removed
+
+- Removed note about plugins and upgrading Wazuh central components. ([#8020](https://github.com/wazuh/wazuh-documentation/pull/8020))
+
+### Fixed
+
+- **Post-release**: Removed prompt symbol from code block. ([#8211](https://github.com/wazuh/wazuh-documentation/pull/8211))
+- **Post-release**: Increased note and code block indentation. ([8213](https://github.com/wazuh/wazuh-documentation/pull/8213))
+
+# [v4.10.1]
+
+- Support for Wazuh 4.10.1
 
 ## [v4.10.0]
 
@@ -31,6 +62,9 @@ All notable changes to this project will be documented in this file.
 - Added the agent uninstall RBAC action. ([#7708](https://github.com/wazuh/wazuh-documentation/pull/7708))
 - Added the ``anti_tampering`` configuration block documentation. ([#7580](https://github.com/wazuh/wazuh-documentation/pull/7580))
 - Added PowerPC package references back to the packages list. ([#7724](https://github.com/wazuh/wazuh-documentation/pull/7724))
+- Added dependencies to the dependency requirements in the Offline installation guide using the installation assistant. ([#7931](https://github.com/wazuh/wazuh-documentation/pull/7931))
+- Added ``wazuh.updates.disabled`` to the *Wazuh dashboard settings* reference document. ([#7977](https://github.com/wazuh/wazuh-documentation/pull/7977))
+- Added a troubleshooting guide to the Vulnerability detection capability section. ([#8014](https://github.com/wazuh/wazuh-documentation/pull/8014))
 
 ### Changed
 
@@ -39,10 +73,28 @@ All notable changes to this project will be documented in this file.
 - Updated the available SCA policies table. ([#7698](https://github.com/wazuh/wazuh-documentation/pull/7698))
 - Updated default and allowed ``chunk_size`` values for upgrading agents using wpk files. ([#7717](https://github.com/wazuh/wazuh-documentation/pull/7717))
 - Updated upgrading steps for Wazuh on Docker and Wazuh on Kubernetes deployments. ([#7859](https://github.com/wazuh/wazuh-documentation/pull/7859))
+- Replaced ``wazuh-packages`` repository references with ``wazuh-virtual-machines`` in the OVA generation guide. ([#7926](https://github.com/wazuh/wazuh-documentation/pull/7926))
+- Updated agent dashboard screenshots: Inventory, Stats, and Configuration. ([#7942](https://github.com/wazuh/wazuh-documentation/pull/7942))
+- Updated references for the new Wazuh dashboard Agents management section. ([#7944](https://github.com/wazuh/wazuh-documentation/pull/7944))
+- Replaced VirusTotal screenshot in the getting started guide. ([#7946](https://github.com/wazuh/wazuh-documentation/pull/7946))
+- Updated malware detection screenshots to include VirusTotal. ([#7975](https://github.com/wazuh/wazuh-documentation/pull/7975))
+- Updated **Inventory Data** page screenshots to reflect the newly added tabs: **Software**, **Network**, and **Processes**. ([#7976 ](https://github.com/wazuh/wazuh-documentation/pull/7976))
+- Changed ``urllib3`` dependency version to ``1.26.20`` and fixed references to the minimum Python version. ([#7978](https://github.com/wazuh/wazuh-documentation/pull/7978))
+- Updated references to the ``wazuh-packages`` repository in commands for building agent packages to reflect the latest repository structure. ([#7995](https://github.com/wazuh/wazuh-documentation/pull/7995))
+- Updated dashboard query configuration screenshots. ([#8027](https://github.com/wazuh/wazuh-documentation/pull/8027))
+- Improved Password management section. ([#8026](https://github.com/wazuh/wazuh-documentation/pull/8026))
+
+### Fixed
+
+- Updated URL in Puppet agent installation step. ([#7920](https://github.com/wazuh/wazuh-documentation/pull/7920))
+- Added ``gnupg`` to the dependencies installation step in the Install Ansible guide. ([#7932](https://github.com/wazuh/wazuh-documentation/pull/7932))
+- Added step in the *Upgrading Wazuh Docker* guide. ([#7929](https://github.com/wazuh/wazuh-documentation/pull/7929))
+- Fixed Securing your Wazuh installation steps for distributed deployments in Password management section. ([#8026](https://github.com/wazuh/wazuh-documentation/pull/8026))
 
 ### Removed
 
 - Removed the step to disable the Wazuh manager service from the *Uninstalling the Wazuh central components* guide. ([#7814](https://github.com/wazuh/wazuh-documentation/pull/7814))
+- Removed ``wazuh-packages`` repository reference from release notes. ([#7970](https://github.com/wazuh/wazuh-documentation/pull/7970))
 
 # [v4.9.2]
 

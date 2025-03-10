@@ -17,13 +17,13 @@ Requirements
 
  * curl
 
-Download our wazuh-packages repository from GitHub and go to the aix directory.
+Download our wazuh repository from GitHub and go to the aix directory.
 
 .. code-block:: console
 
- $ curl -L https://github.com/wazuh/wazuh-packages/tarball/v|WAZUH_CURRENT| | tar zx
- $ cd wazuh-wazuh-packages-*
- $ cd aix
+ $ curl -L https://github.com/wazuh/wazuh/tarball/v|WAZUH_CURRENT| | tar zx
+ $ cd wazuh-wazuh-*
+ $ cd packages/aix
 
 Execute the ``generate_wazuh_packages.sh`` script, with the different options you desire.
 

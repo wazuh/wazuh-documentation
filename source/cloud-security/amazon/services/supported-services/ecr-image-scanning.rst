@@ -141,7 +141,7 @@ You need the following Amazon ECR permissions to `push images <https://docs.aws.
          "ecr:DescribeImageScanFindings",
          "ecr:StartImageScan"
       ],
-      "Resource": "arn:aws:ecr:<REGION>:<ACCOUNT_ID>:repository/<repository-name>"
+      "Resource": "arn:aws:ecr:<REGION>:<ACCOUNT_ID>:repository/<REPOSITORY_NAME>"
    }
 
 Amazon Lambda and Amazon EventBridge permissions
