@@ -15,12 +15,12 @@
           <li><a href="{{ theme_wazuh_web_url + '/contact-us/' }}" target="_blank" rel="noreferrer noopener">Contact us</a></li>
         </ul>
         <ul class="social-links nav">
-          <li class="rrss nav-item"><a class="nav-link" title="Wazuh on X" aria-label="Wazuh on X" target="_blank" href="https://x.com/wazuh" rel="noreferrer noopener"><svg><use xlink:href="#ico-twitter"></use></svg><span class="sr-only">X</span></a></li>
-          <li class="rrss nav-item"><a class="nav-link" title="Wazuh on LinkedIn" aria-label="Wazuh on LinkedIn" target="_blank" href="https://www.linkedin.com/company/wazuh" rel="noreferrer noopener"><svg><use xlink:href="#ico-linkedin"></use></svg><span class="sr-only">LinkedIn</span></a></li>
-          <li class="rrss nav-item"><a class="nav-link" title="Wazuh on Reddit" aria-label="Wazuh on Reddit" target="_blank" href="https://www.reddit.com/r/Wazuh/" rel="noreferrer noopener"><svg><use xlink:href="#ico-reddit"></use></svg><span class="sr-only">Reddit</span></a></li>
-          <li class="rrss nav-item"><a class="nav-link" title="Wazuh on Github" aria-label="Wazuh on Github" target="_blank" href="https://github.com/wazuh" rel="noreferrer noopener"><svg><use xlink:href="#ico-github"></use></svg><span class="sr-only">GitHub</span></a></a></li>
-          <li class="rrss nav-item"><a class="nav-link" title="Join us on Slack" aria-label="Join us on Slack" target="_blank" href="{{ theme_wazuh_web_url }}/community/join-us-on-slack/" rel="noreferrer noopener"><svg><use xlink:href="#ico-slack"></use></svg><span class="sr-only">Slack</span></a></li>
-          <li class="rrss nav-item"><a class="nav-link" title="Subscribe to our mailing list" aria-label="Subscribe to our mailing list" target="_blank" href="mailto:wazuh+subscribe@googlegroups.com" rel="noreferrer noopener"><svg><use xlink:href="#ico-mailinglist"></use></svg><span class="sr-only">Mailing list</span></a></li>
+          <li class="rrss nav-item"><a class="nav-link" title="Wazuh on X" aria-label="Wazuh on X" target="_blank" href="https://x.com/wazuh" rel="noreferrer noopener"><svg><use xlink:href="#ico-twitter"></use></svg><span class="visually-hidden">X</span></a></li>
+          <li class="rrss nav-item"><a class="nav-link" title="Wazuh on LinkedIn" aria-label="Wazuh on LinkedIn" target="_blank" href="https://www.linkedin.com/company/wazuh" rel="noreferrer noopener"><svg><use xlink:href="#ico-linkedin"></use></svg><span class="visually-hidden">LinkedIn</span></a></li>
+          <li class="rrss nav-item"><a class="nav-link" title="Wazuh on Reddit" aria-label="Wazuh on Reddit" target="_blank" href="https://www.reddit.com/r/Wazuh/" rel="noreferrer noopener"><svg><use xlink:href="#ico-reddit"></use></svg><span class="visually-hidden">Reddit</span></a></li>
+          <li class="rrss nav-item"><a class="nav-link" title="Wazuh on Github" aria-label="Wazuh on Github" target="_blank" href="https://github.com/wazuh" rel="noreferrer noopener"><svg><use xlink:href="#ico-github"></use></svg><span class="visually-hidden">GitHub</span></a></a></li>
+          <li class="rrss nav-item"><a class="nav-link" title="Join us on Slack" aria-label="Join us on Slack" target="_blank" href="{{ theme_wazuh_web_url }}/community/join-us-on-slack/" rel="noreferrer noopener"><svg><use xlink:href="#ico-slack"></use></svg><span class="visually-hidden">Slack</span></a></li>
+          <li class="rrss nav-item"><a class="nav-link" title="Subscribe to our mailing list" aria-label="Subscribe to our mailing list" target="_blank" href="mailto:wazuh+subscribe@googlegroups.com" rel="noreferrer noopener"><svg><use xlink:href="#ico-mailinglist"></use></svg><span class="visually-hidden">Mailing list</span></a></li>
         </ul>
       </nav>
       <div class="desktop-search-form">
@@ -29,17 +29,17 @@
             <div class="search-input-wrapper-container">
               <div class="search-input-wrapper">
                 <label aria-label="Search here">
-                  <span class="sr-only">Search here</span>
+                  <span class="visually-hidden">Search here</span>
                   <input autocomplete="off" type="text" class="form-control" name="s" placeholder="Search">
                   <button type="submit" class="d-block">
                     <svg width="31" height="31"><use xlink:href="#search-header"></use></svg>
                   </button>
                   <button type="button" class="btn-close d-none">
-                    <span class="sr-only">Close</span>
+                    <span class="visually-hidden">Close</span>
                   </button>
                 </label>
                 <button type="submit" class="d-none">
-                  <span class="sr-only">Search</span>
+                  <span class="visually-hidden">Search</span>
                   <svg width="31" height="31"><use xlink:href="#search-header"></use></svg>
                 </button>
               </div>
@@ -57,10 +57,10 @@
           {% include "template-parts/brand.html" %}
           {% if pagename != 'index' %}
           <div class="toggle-buttons d-flex d-xl-none">
-            <button class="navbar-toggler search-toggler" type="button" data-toggle="collapse" data-target="#search-box-wrapper" aria-controls="search-box-wrapper" aria-expanded="false" aria-label="Toggle search bar">
+            <button class="navbar-toggler search-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#search-box-wrapper" aria-controls="search-box-wrapper" aria-expanded="false" aria-label="Toggle search bar">
               <span class="search-toggler-icon"></span>
             </button>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#global-toc" aria-controls="global-toc" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#global-toc" aria-controls="global-toc" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
           </div>
@@ -73,7 +73,7 @@
           {% if theme_breadcrumb_root_title == 'Documentation' %}
             <ul class="navbar-nav">
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="dropdown-platform" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Platform<b class="caret d-inline d-sm-none"></b><svg class="d-none d-sm-inline"><use xlink:href="#menu-chevron" /></svg></a>
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown-platform" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Platform<b class="caret d-inline d-sm-none"></b><svg class="d-none d-sm-inline"><use xlink:href="#menu-chevron" /></svg></a>
                 <ul class="dropdown-menu" aria-labelledby="dropdown-platform">
                   <li class="nav-item">
                     <a class="dropdown-item" href="{{ theme_wazuh_web_url + '/platform/overview/' }}" target="_blank" rel="noreferrer noopener">Overview</a>
@@ -96,7 +96,7 @@
                 <a class="nav-link active" href="{{ theme_wazuh_doc_url + '/current/index.html' }}">Documentation</a>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="dropdown-services" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Services<b class="caret d-inline d-sm-none"></b><svg class="d-none d-sm-inline"><use xlink:href="#menu-chevron" /></svg></a>
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown-services" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Services<b class="caret d-inline d-sm-none"></b><svg class="d-none d-sm-inline"><use xlink:href="#menu-chevron" /></svg></a>
                 <ul class="dropdown-menu" aria-labelledby="dropdown-services">
                   <li class="nav-item">
                     <a class="dropdown-item" href="{{ theme_wazuh_web_url + '/services/professional-support/' }}" target="_blank" rel="noreferrer noopener">Professional support</a>
@@ -110,7 +110,7 @@
                 </ul>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="dropdown-partners" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Partners<b class="caret d-inline d-sm-none"></b><svg class="d-none d-sm-inline"><use xlink:href="#menu-chevron" /></svg></a>
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown-partners" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Partners<b class="caret d-inline d-sm-none"></b><svg class="d-none d-sm-inline"><use xlink:href="#menu-chevron" /></svg></a>
                 <ul class="dropdown-menu" aria-labelledby="dropdown-partners">
                   <li class="nav-item">
                     <a class="dropdown-item" href="{{ theme_wazuh_web_url + '/partners/' }}" target="_blank" rel="noreferrer noopener">Become a partner</a>
@@ -121,7 +121,7 @@
                 </ul>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="dropdown-company" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Company<b class="caret d-inline d-sm-none"></b><svg class="d-none d-sm-inline"><use xlink:href="#menu-chevron" /></svg></a>
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown-company" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Company<b class="caret d-inline d-sm-none"></b><svg class="d-none d-sm-inline"><use xlink:href="#menu-chevron" /></svg></a>
                 <ul class="dropdown-menu" aria-labelledby="dropdown-company">
                   <li class="nav-item">
                     <a class="dropdown-item" href="{{ theme_wazuh_web_url + '/our-customers/' }}" target="_blank" rel="noreferrer noopener">Customers</a>
