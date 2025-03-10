@@ -25,6 +25,7 @@
 }
 
 .breadcrumb-wrapper {
+  order: 1;
   top: $header-height-xl;
   z-index: 99;
   display: flex;

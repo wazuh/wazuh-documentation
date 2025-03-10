@@ -6,7 +6,7 @@
 ----------------------------------------------------------------------------- */
 
 .no-latest-notice-wrapper {
-  position: fixed;
+  order: 2;
   z-index: 98;
   width: 100%;
   min-height: $no-latest-notice-height-xl;
@@ -16,9 +16,7 @@
     padding-left: 15px;
   }
   @include media-only(xl, xxl) {
-    right: $right-sidebar-width;
-    left: $left-sidebar-width-narrow;
-    width: calc(100% - #{$right-sidebar-width} - #{$left-sidebar-width-narrow});
+    width: 100%;
   }
   @include media-min(xxl) {
     width: calc(#{$outer-container-xxl} - #{$left-sidebar-width-narrow} - #{$right-sidebar-width});
@@ -55,12 +53,21 @@
   }
 }
 
-
+.not-top {
+  .no-latest-notice-wrapper {
+    position: fixed;
+    @include media-only(xl, xxl) {
+      right: $right-sidebar-width;
+      left: $left-sidebar-width-narrow;
+      width: calc(100% - #{$right-sidebar-width} - #{$left-sidebar-width-narrow});
+    }
+  }
+}
 
 .no-latest-docs {
   &.document {
     #central-column {
-      padding-top: calc(#{$breadcrumbs-height-xl} + #{$no-latest-notice-height-xl} + 20px);
+      // padding-top: calc(#{$breadcrumbs-height-xl} + #{$no-latest-notice-height-xl} + 20px);
       * {
         scroll-margin-top: calc(#{$header-height-xl} + #{$breadcrumbs-height-xl} + #{$no-latest-notice-height-xl} + 20px);
       }
@@ -83,6 +90,14 @@
         top: calc(#{$header-height-xs} + #{$secondary-mobile-bar} + #{$breadcrumbs-height-xl});
       }
     }
+    .not-top {
+      [role="main"] {
+      }
+      #central-column {
+        padding-top: calc(#{$breadcrumbs-height-xl} + #{$no-latest-notice-height-xl} + 20px);
+        // padding-top: #{$breadcrumbs-height-xl} + #{$no-latest-notice-height-xl};
+      }
+    }
   }
   &.search {
     .no-latest-notice-wrapper {
@@ -102,10 +117,10 @@
       }
     }
     #central-column {
-      padding-top: $no-latest-notice-height-xl;
-      @include media-max(sm){
-        padding-top: calc(#{$no-latest-notice-height-xl} + 40px);
-      }
+      // padding-top: $no-latest-notice-height-xl;
+      // @include media-max(sm){
+      //   padding-top: calc(#{$no-latest-notice-height-xl} + 40px);
+      // }
     }
   }
 }

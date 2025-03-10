@@ -2,27 +2,6 @@
   Code to be used in any page
 ----------------------------------------------------------------------------- */
 
-$(document).ready(function() {
-  if (!window.matchMedia) {
-    return;
-  }
-  let current = $('head > link[rel="icon"][media]');
-  $.each(current, function(i, icon) {
-    const match = window.matchMedia(icon.media);
-    /**
-     * Sets only the favicon that matches the user preference as configured in the browser.
-     */
-    function swap() {
-      if (match.matches) {
-        current.remove();
-        current = $(icon).appendTo('head');
-      }
-    }
-    match.addListener(swap);
-    swap();
-  });
-});
-
 if ( typeof(versions) === 'undefined' ) {
   const versions = [];
 }
