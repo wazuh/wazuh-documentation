@@ -35,6 +35,7 @@ Wazuh manager
 -  `#28294 <https://github.com/wazuh/wazuh/pull/28294>`__ Fixed the OS CPE build for package scans with data from Wazuh-DB.
 -  `#28292 <https://github.com/wazuh/wazuh/pull/28292>`__ Added delete by query logic when indexer is disabled.
 -  `#28396 <https://github.com/wazuh/wazuh/pull/28396>`__ Fixed heap buffer overflow in Analysisd rule parser.
+-  `#28429 <https://github.com/wazuh/wazuh/pull/28429>`__ Fixed unnecessary data copy during curl calls.
 
 Wazuh agent
 ^^^^^^^^^^^
