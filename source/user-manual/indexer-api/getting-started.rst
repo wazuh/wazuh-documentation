@@ -859,10 +859,10 @@ Follow the steps below.
 
       # ./top_failed_login.sh
 
-   .. code-block:: json
+   .. code-block:: none
       :class: output
    
-    ...
+      ...
               {
                 "key" : "root",
                 "doc_count" : 19
