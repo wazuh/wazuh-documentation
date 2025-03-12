@@ -16,6 +16,7 @@ All notable changes to this project will be documented in this file.
 
 - Updated Wazuh dashboard package generation guide. ([#7961](https://github.com/wazuh/wazuh-documentation/pull/7961))
 - Updated images in FIM PoC. [#7979](https://github.com/wazuh/wazuh-documentation/pull/7979)
+- Replaced the ``--version`` parameter with ``--commit-sha`` in the Wazuh dashboard package generation guide. ([#8216](https://github.com/wazuh/wazuh-documentation/pull/8216))
 
 # [v4.11.1]
 
@@ -43,6 +44,8 @@ All notable changes to this project will be documented in this file.
 
 - **Post-release**: Removed prompt symbol from code block. ([#8211](https://github.com/wazuh/wazuh-documentation/pull/8211))
 - **Post-release**: Increased note and code block indentation. ([8213](https://github.com/wazuh/wazuh-documentation/pull/8213))
+- **Post-release**: Fixed script argument in dashboard package generation command. ([8265](https://github.com/wazuh/wazuh-documentation/pull/8265))
+- **Post-release**: Fixed OpenSearch Dashboards version reference. ([8265](https://github.com/wazuh/wazuh-documentation/pull/8265))
 
 # [v4.10.1]
 

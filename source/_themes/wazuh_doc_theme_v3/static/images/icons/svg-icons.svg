@@ -64,6 +64,7 @@
   </defs>
   <view id="search-lt" viewBox="8 7 28 28"/>
   <view id="search-dt" viewBox="8 47 28 28"/>
+  <view id="search-white" viewBox="8 87 28 28"/>
   <view id="menu-chevron-default-lt" viewBox="40 0 12 7"/>
   <view id="menu-chevron-blue-lt" viewBox="40 40 12 7"/>
   <view id="menu-chevron-blue-light-lt" viewBox="40 80 12 7"/>
@@ -75,6 +76,7 @@
   <view id="chevron-blue-dt" viewBox="80 80 32 32"/>
   <view id="chevron-blue-light-dt" viewBox="80 120 32 32"/>
   <view id="chevron-white" viewBox="80 160 32 32"/>
+  <view id="chevron-black" viewBox="80 200 32 32"/>
   <view id="sun-lt" viewBox="120 0 20 20"/>
   <view id="sun-dt" viewBox="120 40 20 20"/>
   <view id="moon-lt" viewBox="160 0 20 20"/>
@@ -98,6 +100,9 @@
   </g>
   <g transform="translate(0, 40)">
     <use xlink:href="#search" fill="#499cfe"/>
+  </g>
+  <g transform="translate(0, 80)">
+    <use xlink:href="#search" fill="#ffffff"/>
   </g>
   <g transform="translate(40, 0)">
     <use xlink:href="#menu-chevron" stroke="black"/>
@@ -131,6 +136,9 @@
   </g>
   <g transform="translate(80, 160)">
     <use xlink:href="#chevron" fill="#ffffff"/>
+  </g>
+  <g transform="translate(80, 200)">
+    <use xlink:href="#chevron" fill="#000000"/>
   </g>
   <g transform="translate(120, 0)">
     <use xlink:href="#sun" fill="black"/>
