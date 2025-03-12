@@ -5,6 +5,7 @@ const redirections = [];
 /* Note: new release versions must always be inserted in the first position of the array "versions" */
 const versions = [
   '5.0',
+  '4.13',
   '4.12',
   '4.11',
   '4.10',
@@ -79,6 +80,14 @@ newUrls['5.0'] = [
 ];
 
 /* Pages no longer available in 5.0 */
+
+/* *** RELEASE 4.13 ****/
+
+/* Pages added in 4.13 */
+
+newUrls['4.13'] = [
+  '/release-notes/release-4-13-0.html',
+]
 
 /* *** RELEASE 4.12 ****/
 
@@ -250,6 +259,7 @@ newUrls['4.10'] = [
   '/user-manual/wazuh-server-cluster/adding-new-server-nodes/testing-the-cluster.html',
   '/user-manual/wazuh-server-cluster/agent-connections.html',
   '/user-manual/wazuh-server-cluster/load-balancers.html',
+  '/user-manual/agent/agent-management/anti-tampering.html',
 ]
 
 /* Pages no longer available in 4.10 */

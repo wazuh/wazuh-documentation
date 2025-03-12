@@ -84,7 +84,6 @@ Product repositories
 
 -  `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v4.11.0/CHANGELOG.md>`__
 -  `wazuh/wazuh-dashboard-plugins <https://github.com/wazuh/wazuh-dashboard-plugins/blob/v4.11.0/CHANGELOG.md>`__
--  `wazuh/wazuh-packages <https://github.com/wazuh/wazuh-packages/blob/v4.11.0/CHANGELOG.md>`__
 
 Auxiliary repositories
 ^^^^^^^^^^^^^^^^^^^^^^^
