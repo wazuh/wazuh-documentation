@@ -79,10 +79,9 @@ header {
     margin-right: auto;
   }
   
-  .outer-container {
+  .inner-container {
     width: 100%;
     overflow: hidden;
-    margin-top: 30px;
     margin-left: auto;
     margin-right: auto;
     border-radius: 26px;
@@ -97,31 +96,10 @@ header {
     display: flex;
     min-height: 200px;
     align-items: center;
-    flex-direction: row;
+    flex-direction: column;
     margin-bottom: 30px;
-    @include media-max(lg) {
-      margin-top: 25px;
-    }
-    @include media-max(sm) {
-      max-width: calc(100% - 30px);
-    }
-    @include media-only(sm, md) {
-      max-width: calc(97% - 64px);
-    }
-    @include media-only(md, lg) {
-      max-width: calc(90% - 24px);
-    }
-    @include media-min(lg) {
-      max-width: calc(97% - 24px);
-    }
-    @include media-min(xxl) {
-      max-width: 1520px;
-    }
-    @include media-only(wzh-xl,xxl) {
-      max-width: 94%;
-    }
-    @include media-only(xl, wzh-xl) {
-      max-width: 1156px;
+    @include media-min(xl) {
+      margin-top: 30px;
     }
     .container {
       @include media-max(sm) {
@@ -161,11 +139,13 @@ header {
     margin-left: auto;
     border-radius: 20px;
     border-width: 1px;
+    width: 90%;
+    max-width: calc(100% - 60px);
     @include media-only (sm, xxl){
       max-width: 80%;
     }
     @include media-min (xxl){
-      max-width: 984px;
+      max-width: 800px;
     }
     .form-control {
       box-shadow: none;
