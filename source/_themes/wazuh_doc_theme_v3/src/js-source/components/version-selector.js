@@ -87,7 +87,7 @@ jQuery(function($) {
   }
 
   /* Initialize the tooltip of bootstrap */
-  $('#version-selector [data-toggle="tooltip"]').tooltip({container: 'header', placement: 'left', boundary: 'window'});
+  $('#version-selector [data-bs-toggle="tooltip"]').tooltip({container: 'header', placement: 'left', boundary: 'window'});
 
   /**
    * Add the current version to the version selector
@@ -223,7 +223,7 @@ jQuery(function($) {
       aEle.attr('href', href).text(listOfVersions[i] + ((i == 0) ? ' (current)' : ''));
       if ( tooltip !== false ){
         aEle.addClass('disabled')
-        .attr('data-toggle', 'tooltip')
+        .attr('data-bs-toggle', 'tooltip')
         .attr('data-placement', 'right')
         .attr('title', 'This page is not available in version ' + listOfVersions[i] + ((i == 0) ? ' (current)' : ''));
       }
@@ -613,6 +613,13 @@ jQuery(function($) {
     }
     return found;
   }
+
+  /* Avoid page reload when selecting a non-available release -----------------*/
+  $('#version-selector a.disabled').on('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    return false;
+  });
 });
 
 /**
@@ -623,10 +630,3 @@ jQuery(function($) {
 function checkEncodeURI(str) {
   return /\%/i.test(str);
 }
-
-/* Avoid page reload when selecting a non-available release -----------------*/
-$('#version-selector a.disable').click(function(e) {
-  e.preventDefault();
-  e.stopPropagation();
-  return false;
-});
