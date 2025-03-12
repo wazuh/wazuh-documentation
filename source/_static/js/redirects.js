@@ -236,6 +236,7 @@ newUrls['4.10'] = [
   '/user-manual/wazuh-server-cluster/adding-new-server-nodes/testing-the-cluster.html',
   '/user-manual/wazuh-server-cluster/agent-connections.html',
   '/user-manual/wazuh-server-cluster/load-balancers.html',
+  '/user-manual/agent/agent-management/anti-tampering.html',
 ]
 
 /* Pages no longer available in 4.10 */

@@ -3,8 +3,8 @@
 .. meta::
    :description: Wazuh 4.11.1 has been released. Check out our release notes to discover the changes and additions of this release.
 
-4.11.1 Release notes - TBD
-==========================
+4.11.1 Release notes - 12 March 2025
+====================================
 
 This section lists the changes in version 4.11.1. Every update of the Wazuh solution is cumulative and includes all enhancements and fixes from previous releases.
 
@@ -35,6 +35,7 @@ Wazuh manager
 -  `#28294 <https://github.com/wazuh/wazuh/pull/28294>`__ Fixed the OS CPE build for package scans with data from Wazuh-DB.
 -  `#28292 <https://github.com/wazuh/wazuh/pull/28292>`__ Added delete by query logic when indexer is disabled.
 -  `#28396 <https://github.com/wazuh/wazuh/pull/28396>`__ Fixed heap buffer overflow in Analysisd rule parser.
+-  `#28429 <https://github.com/wazuh/wazuh/pull/28429>`__ Fixed unnecessary data copy during curl calls.
 
 Wazuh agent
 ^^^^^^^^^^^
@@ -56,7 +57,6 @@ Product repositories
 
 -  `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v4.11.1/CHANGELOG.md>`__
 -  `wazuh/wazuh-dashboard-plugins <https://github.com/wazuh/wazuh-dashboard-plugins/blob/v4.11.1/CHANGELOG.md>`__
--  `wazuh/wazuh-packages <https://github.com/wazuh/wazuh-packages/blob/v4.11.1/CHANGELOG.md>`__
 
 Auxiliary repositories
 ^^^^^^^^^^^^^^^^^^^^^^^
