@@ -30,3 +30,4 @@ Here is a list of some of the Wazuh indexer API capabilities:
       :maxdepth: 3
 
       getting-started
+      configuration

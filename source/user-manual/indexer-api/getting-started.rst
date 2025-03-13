@@ -13,19 +13,7 @@ Starting and stopping the Wazuh indexer API
 
 By default, the Wazuh indexer API is included in the Wazuh indexer installation. You can manage or monitor the Wazuh indexer API by executing the ``systemctl`` or ``service`` commands with the Wazuh indexer service:
 
-.. tabs::
-
-   .. group-tab:: Systemd
-
-      .. code-block:: console
-
-         # systemctl start/status/stop/restart wazuh-indexer
-
-   .. group-tab:: SysV init
-
-      .. code-block:: console
-
-         # service wazuh-indexer start/status/stop/restart
+   .. include:: /_templates/installations/indexer/common/restart_indexer.rst
 
 
 Logging into the Wazuh indexer API
