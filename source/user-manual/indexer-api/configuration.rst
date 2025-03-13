@@ -73,17 +73,17 @@ Wazuh indexer API configuration options
 network
 ^^^^^^^
 
-+------------------+----------------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------------------+
-| **Sub-fields**   | **Allowed values**                     | **Default value** | **Description**                                                                                                                 |
-+==================+========================================+===================+=================================================================================================================================+
-| host             | A list of valid IP address(es)         | ``127.0.0.1``     | IP addresses or hostnames of the Wazuh indexer where the Wazuh indexer API is running.                                          |
-|                  | or hostname(s)                         |                   |                                                                                                                                 |
-+------------------+----------------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------------------+
-| bind_host        | IP address                             | ``127.0.0.1``     | This setting binds a node to an address(es) for incoming connections. The default value is the value specified in the           |
-|                  |                                        |                   | ``network.host`` setting.                                                                                                       |
-+------------------+----------------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------------------+
-| publish_host     | IP address                             | ``127.0.0.1``     | This is the address(es) that a node publishes to other nodes in a cluster to enable them to connect.                            |
-+------------------+----------------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------------------+
++----------------------+----------------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------------------+
+| **Sub-fields**       | **Allowed values**                     | **Default value** | **Description**                                                                                                                 |
++======================+========================================+===================+=================================================================================================================================+
+| ``host``             | A list of valid IP address(es)         | ``127.0.0.1``     | IP addresses or hostnames of the Wazuh indexer where the Wazuh indexer API is running.                                          |
+|                      | or hostname(s)                         |                   |                                                                                                                                 |
++----------------------+----------------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------------------+
+| ``bind_host``        | IP address                             | ``127.0.0.1``     | This setting binds a node to an address(es) for incoming connections. The default value is the value specified in the           |
+|                      |                                        |                   | ``network.host`` setting.                                                                                                       |
++----------------------+----------------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------------------+
+| ``publish_host``     | IP address                             | ``127.0.0.1``     | This is the address(es) that a node publishes to other nodes in a cluster to enable them to connect.                            |
++----------------------+----------------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------------------+
 
 .. note::
 
@@ -176,14 +176,14 @@ http.cors
 | ``max-age``             | Any time value representing          | ``1728000``                                              | Defines how long the results of a preflight request (for CORS) can be cached.                |
 |                         | duration in seconds.                 |                                                          |                                                                                              |
 +-------------------------+--------------------------------------+----------------------------------------------------------+----------------------------------------------------------------------------------------------+
-| ``allow-origin``        | Any string representing a domain.    | `""`                                                     | Specifies which domains are allowed to access the Wazuh indexer. Wildcards are supported.    |
+| ``allow-origin``        | Any string representing a domain.    | ``""``                                                   | Specifies which domains are allowed to access the Wazuh indexer. Wildcards are supported.    |
 +-------------------------+--------------------------------------+----------------------------------------------------------+----------------------------------------------------------------------------------------------+
-| ``allow-headers``       | Any HTTP header                      | X-Requested-With,Content-Type,Content-Length             | Specifies which HTTP headers can be included in the request.                                 |
+| ``allow-headers``       | Any HTTP header                      | ``X-Requested-With,Content-Type,Content-Length``         | Specifies which HTTP headers can be included in the request.                                 |
 +-------------------------+--------------------------------------+----------------------------------------------------------+----------------------------------------------------------------------------------------------+
 | ``allow-credentials``   | true, false                          | ``false``                                                | Controls whether cookies and authentication information (such as HTTP credentials) are       |
 |                         |                                      |                                                          | included in cross-origin requests made to the Wazuh indexer server.                          |
 +-------------------------+--------------------------------------+----------------------------------------------------------+----------------------------------------------------------------------------------------------+
-| ``allow-methods``       | Any HTTP method                      | ``OPTIONS``,``HEAD``,``GET``,``POST``,``PUT``,``DELETE`` | Defines which HTTP methods (e.g., GET, POST, PUT) are allowed for cross-origin requests.     |
+| ``allow-methods``       | Any HTTP method                      | ``OPTIONS,HEAD,GET,POST,PUT,DELETE``                     | Defines which HTTP methods (e.g., GET, POST, PUT) are allowed for cross-origin requests.     |
 +-------------------------+--------------------------------------+----------------------------------------------------------+----------------------------------------------------------------------------------------------+
 
 logger 
@@ -206,7 +206,7 @@ path
 +-----------------+---------------------------+------------------------------+---------------------------------------------------------------------------------------------+
 | ``logs``        | Any valid path            | ``/var/log/wazuh-indexer``   | Specifies the path to store Wazuh indexer log files.                                        |
 +-----------------+---------------------------+------------------------------+---------------------------------------------------------------------------------------------+
-| ``shared_data`` | Any valid path            | `""`                         | Specifies the directory path where the Wazuh indexer stores shared data files.              |
+| ``shared_data`` | Any valid path            | ``""``                       | Specifies the directory path where the Wazuh indexer stores shared data files.              |
 +-----------------+---------------------------+------------------------------+---------------------------------------------------------------------------------------------+
 | ``home``        | Any valid path            | ``/usr/share/wazuh-indexer`` | Specifies the root directory where the Wazuh indexer core files and directories are stored. |
 +-----------------+---------------------------+------------------------------+---------------------------------------------------------------------------------------------+

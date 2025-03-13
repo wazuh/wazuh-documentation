@@ -6,7 +6,7 @@
 Use cases
 =========
 
-This section provides several use cases to demonstrate some of the potentials of the Wazuh indexer API. You can find details about all possible API requests in the reference document.
+This section provides several use cases to demonstrate some of the potentials of the Wazuh indexer API.
 
 Exploring alerts
 ----------------
@@ -19,7 +19,6 @@ Follow the steps below.
 #. Input the following query and execute:
 
    .. code-block:: none
-      :emphasize-lines: 5,6,7
 
       POST /wazuh-alerts*/_search
       {

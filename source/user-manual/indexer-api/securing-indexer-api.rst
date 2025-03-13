@@ -13,7 +13,7 @@ Recommended changes to secure the Wazuh indexer API
 
 Change the default password for the administrative users
 
-The password for the default administrative user ``admin`` can be changed via the Wazuh dashboard or through a Wazuh indexer API. On the dashboard, navigate to **Index management** > **Security** > **Internal users** > **admin** then input and save a new password.
+The password for the default administrative user admin can be changed via the Wazuh dashboard or through a Wazuh indexer API. On the dashboard, navigate to **Index management** > **Security** > **Internal users** > **admin** then input and save a new password.
 
 .. note::
 
@@ -21,8 +21,8 @@ The password for the default administrative user ``admin`` can be changed via th
 
 To change the user password using the API, we use the ``_plugins/_security/api/account`` endpoint. Below is an example of changing the password for the current user using the API:
 
-.. code-block:: console
-   :emphasize-lines: 2,3
+.. code-block:: none
+   :emphasize-lines: 3,4
 
    PUT _plugins/_security/api/account
    {
@@ -43,6 +43,7 @@ Limit API exposure
 Exposing all endpoints can increase the attack surface of the Wazuh indexer API. We can specify the Wazuh indexer API endpoints we want to be accessible using the ``/etc/wazuh-indexer/opensearch-security/allowlist.yml`` configuration file. This configuration allows us to specify the HTTP methods and endpoints that can be accessed. The below shows the syntax:
 
 .. code-block:: yaml
+   :emphasize-lines: 2,4,5,6,8,9,10
 
    config:
      enabled: true
@@ -100,28 +101,28 @@ The allowed settings are highlighted below.
 auth_failure_listeners
 ^^^^^^^^^^^^^^^^^^^^^^
 
-+---------------------------+---------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| **Sub-fields**            | **Allowed values**        | **Description**                                                                                                                       |
-+===========================+===========================+=======================================================================================================================================+
-| type                      | username, ip              | Specifies the type of rate limiting. Set to ``username``.                                                                             |
-+---------------------------+---------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| authentication_backend    | internal, ldap, jwt       | Specifies the authentication backend.                                                                                                 |
-+---------------------------+---------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| allowed_tries             | Any positive integer      | Sets the maximum number of allowed login attempts before blocking the user.                                                           |
-+---------------------------+---------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| time_window_seconds       | Any positive integer      | Sets the time window to enforce ``allowed_tries``. For example, if ``allowed_tries`` is 3 and                                         |
-|                           |                           | ``time_window_seconds`` is 60, a username has 3 attempts to log in successfully within a 60-second period before login attempts are   |
-|                           |                           | blocked.                                                                                                                              |
-+---------------------------+---------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| block_expiry_seconds      | Any positive integer      | Sets the time window for a username to remain blocked.                                                                                |
-+---------------------------+---------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| max_blocked_clients       | Any positive integer      | Sets the maximum number of blocked usernames. This limits heap usage to avoid a potential DoS attack.                                 |
-+---------------------------+---------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| max_tracked_clients       | Any positive integer      | Sets the maximum number of tracked usernames with failed login attempts. This limits heap usage to avoid a potential DoS attack.      |
-+---------------------------+---------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| ignore_hosts              |                           | Specifies a list of IP addresses or hostname patterns to ignore while evaluating rate-limiting rules.                                 |
-|                           |                           | ``config.dynamic.hosts_resolver_mode`` must be set to ``ip-hostname`` to support hostname matching.                                   |
-+---------------------------+---------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
++-------------------------------+---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| **Sub-fields**                | **Allowed values**                    | **Description**                                                                                                                       |
++===============================+=======================================+=======================================================================================================================================+
+| ``type``                      | username, ip                          | Specifies the type of rate limiting. Set to ``username``.                                                                             |
++-------------------------------+---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| ``authentication_backend``    | ``internal``, ``ldap``, ``jwt``       | Specifies the authentication backend.                                                                                                 |
++-------------------------------+---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| ``allowed_tries``             | Any positive integer                  | Sets the maximum number of allowed login attempts before blocking the user.                                                           |
++-------------------------------+---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| ``time_window_seconds``       | Any positive integer                  | Sets the time window to enforce ``allowed_tries``. For example, if ``allowed_tries`` is 3 and                                         |
+|                               |                                       | ``time_window_seconds`` is 60, a username has 3 attempts to log in successfully within a 60-second period before login attempts are   |
+|                               |                                       | blocked.                                                                                                                              |
++-------------------------------+---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| ``block_expiry_seconds``      | Any positive integer                  | Sets the time window for a username to remain blocked.                                                                                |
++-------------------------------+---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| ``max_blocked_clients``       | Any positive integer                  | Sets the maximum number of blocked usernames. This limits heap usage to avoid a potential DoS attack.                                 |
++-------------------------------+---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| ``max_tracked_clients``       | Any positive integer                  | Sets the maximum number of tracked usernames with failed login attempts. This limits heap usage to avoid a potential DoS attack.      |
++-------------------------------+---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| ``ignore_hosts``              |                                       | Specifies a list of IP addresses or hostname patterns to ignore while evaluating rate-limiting rules.                                 |
+|                               |                                       | ``config.dynamic.hosts_resolver_mode`` must be set to ``ip-hostname`` to support hostname matching.                                   |
++-------------------------------+---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
 After a change is made, run the ``/usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh`` script to load the configuration changes:
 
