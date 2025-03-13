@@ -46,7 +46,7 @@ HTTP basic authentication is enabled by default, and its settings are specified 
      "description" : "Authenticate via HTTP Basic against internal users database"
    },
 
-The format to authenticate to the Wazuh indexer API using basic authentication is below. In this example, we use ``curl`` to connect and authenticate:
+The format to authenticate to the Wazuh indexer API using basic authentication is below. In this example, we use ``cURL`` to connect and authenticate:
 
 .. code-block:: console
 
