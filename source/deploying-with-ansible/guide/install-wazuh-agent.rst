@@ -138,7 +138,7 @@ Let's see below, the content of the YAML file ``/etc/ansible/roles/wazuh-ansible
 	    wazuh_managers:
 	      - address: <your manager IP>
 	        port: 1514
-	        protocol: udp
+	        protocol: tcp
 	        api_port: 55000
 	        api_proto: 'http'
 	        api_user: ansible
@@ -176,7 +176,7 @@ Our resulting file is:
 	    wazuh_managers:
 	      - address: 192.168.0.180
 	        port: 1514
-	        protocol: udp
+	        protocol: tcp
 	        api_port: 55000
 	        api_proto: 'http'
 	        api_user: ansible
