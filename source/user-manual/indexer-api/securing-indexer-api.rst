@@ -99,7 +99,6 @@ The rate limit for username limits the number of authentication trials a user ca
 The allowed settings are highlighted below.
 
 auth_failure_listeners
-^^^^^^^^^^^^^^^^^^^^^^
 
 +-------------------------------+---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | **Sub-fields**                | **Allowed values**                    | **Description**                                                                                                                       |

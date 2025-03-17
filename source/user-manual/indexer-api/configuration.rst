@@ -13,7 +13,7 @@ The Wazuh indexer API configuration is located in the ``/etc/wazuh-indexer/opens
 
 For more information on each of the available settings, check the :ref:`configuration options <configuration_options>`. Here are the default settings in the ``/etc/wazuh-indexer/opensearch.yml`` configuration file:
 
-.. code-block:: console
+.. code-block:: yaml
 
    network.host: "127.0.0.1"
    node.name: "node-1"
@@ -63,7 +63,7 @@ For more information on each of the available settings, check the :ref:`configur
 
 After any change is made to the configuration file, you must restart the Wazuh indexer API using the Wazuh indexer service:
 
-   .. include:: /_templates/installations/indexer/common/restart_indexer.rst
+.. include:: /_templates/installations/indexer/common/restart_indexer.rst
 
 .. _configuration_options:
 

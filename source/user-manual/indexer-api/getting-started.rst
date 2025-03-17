@@ -13,9 +13,9 @@ Starting and stopping the Wazuh indexer API
 
 By default, the Wazuh indexer API is included in the Wazuh indexer installation. You can manage or monitor the Wazuh indexer API by executing the ``systemctl`` or ``service`` commands with the Wazuh indexer service:
 
-   .. include:: /_templates/installations/indexer/common/restart_indexer.rst
+.. include:: /_templates/installations/indexer/common/restart_indexer.rst
 
-
+.. _logging_into_wazuh_indexer_api:
 Logging into the Wazuh indexer API
 ----------------------------------
 
@@ -52,7 +52,7 @@ The format to authenticate to the Wazuh indexer API using basic authentication i
 
    # curl -k -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> https://localhost:9200/
 
-.. code-block:: none
+.. code-block:: json
    :class: output
 
    {
@@ -119,7 +119,7 @@ JWT authentication is not enabled by default, and its settings are specified wit
    
       # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /etc/wazuh-indexer/opensearch-security/config.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h 127.0.0.1 -nhnv
 
-#. Authenticate to the Wazuh indexer API using your JWT, as seen below. In this example, we use ``curl`` to connect and authenticate:
+#. Authenticate to the Wazuh indexer API using your JWT, as seen below. In this example, we use cURL to connect and authenticate:
 
    .. code-block:: console
    
@@ -161,7 +161,7 @@ Configuration options
 The JWT configurations are specified under the ``authc`` key in the ``/etc/wazuh-indexer/opensearch-security/config.yml`` configuration file. The configuration parameters are described below:
 
 jwt_auth_domain
-"""""""""""""""
+...............
 
 +------------------+---------------------+-------------------+-----------------------------------------------------------------------------------------------+
 | **Sub-fields**   | **Allowed values**  | **Default value** | **Description**                                                                               |
@@ -173,7 +173,7 @@ jwt_auth_domain
 +------------------+---------------------+-------------------+-----------------------------------------------------------------------------------------------+
 
 jwt_auth_domain.http_authenticator
-""""""""""""""""""""""""""""""""""
+..................................
 +------------------+---------------------+--------------------+-----------------------------------------------------------------------------------------------+
 | **Sub-fields**   | **Allowed values**  | **Default value**  | **Description**                                                                               |
 +==================+=====================+====================+===============================================================================================+
@@ -183,7 +183,7 @@ jwt_auth_domain.http_authenticator
 +------------------+---------------------+--------------------+-----------------------------------------------------------------------------------------------+
 
 jwt_auth_domain.http_authenticator.config
-"""""""""""""""""""""""""""""""""""""""""
+.........................................
 +--------------------------------------+------------------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | **Sub-fields**                       | **Allowed values**                       | **Default value** | **Description**                                                                                                                                                                                                                                                           |
 +======================================+==========================================+===================+===========================================================================================================================================================================================================================================================================+
@@ -205,11 +205,11 @@ jwt_auth_domain.http_authenticator.config
 +--------------------------------------+------------------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 jwt_auth_domain.authentication_backend
-""""""""""""""""""""""""""""""""""""""
+......................................
 +----------------------+---------------------+--------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
 | **Sub-fields**       | **Allowed values**  | **Default value**  | **Description**                                                                                                                                |
 +======================+=====================+====================+================================================================================================================================================+
-| ``type``             | noop                | noop               | This value is set to no operation (noop) because JWTs are self-contained and the user is authenticated at the HTTP level.                      |
+| ``type``             | noop                | noop               | This value is set to no operation (``noop``) because JWTs are self-contained and the user is authenticated at the HTTP level.                  |
 +----------------------+---------------------+--------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
 
 .. note::
@@ -346,7 +346,7 @@ Replace ``<WAZUH_INDEXER_USERNAME>`` and ``<WAZUH_INDEXER_PASSWORD>`` with the c
 
 .. note::
 
-   When using the script in a production environment, it is advised to use environment variables or a secrets manager to secure the authentication credentials from exposure. See securing the Wazuh indexer API for more information.
+   When using the script in a production environment, it is advised to use environment variables or a secrets manager to secure the authentication credentials from exposure. See :doc:`securing-indexer-api` for more information.
 
    The script is run from the Wazuh indexer node. You can run it from a remote host by replacing the value of ``wazuh_indexer_url`` with the IP address or hostname of the Wazuh indexer node.
 
@@ -415,7 +415,7 @@ Run the ``check_wazuh_indexer_health`` script:
 
 .. note::
 
-   When using the script in a production environment, it is advised to use environment variables or a secrets manager to secure the authentication credentials from exposure. See `securing the Wazuh indexer API`_ for more information.
+   When using the script in a production environment, it is advised to use environment variables or a secrets manager to secure the authentication credentials from exposure. See :doc:`securing-indexer-api` for more information.
 
    The script is run from the Wazuh indexer node. You can run it from a remote host by replacing the value of ``indexer_url`` with the IP address or hostname of the Wazuh indexer node.
 
@@ -683,7 +683,7 @@ This section demonstrates how to send requests to the Wazuh indexer API using cU
 cURL
 ^^^^
 
-cURL is a command-line tool for sending HTTP/HTTPS requests and commands. It comes pre-installed on many Linux, macOS, and Windows endpoints, allowing users to interact directly with the Wazuh indexer API from the command line. In the examples below, we store the Wazuh API credentials as environment variables and interact with different endpoints. For detailed instructions on obtaining authentication, please refer to the *Logging in to the Wazuh indexer API* section.
+cURL is a command-line tool for sending HTTP/HTTPS requests and commands. It comes pre-installed on many Linux, macOS, and Windows endpoints, allowing users to interact directly with the Wazuh indexer API from the command line. In the examples below, we store the Wazuh API credentials as environment variables and interact with different endpoints. For detailed instructions on obtaining authentication, please refer to the :ref:`Logging in to the Wazuh indexer API <logging_into_wazuh_indexer_api>` section.
 
 .. note::
 
