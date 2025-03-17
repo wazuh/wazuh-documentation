@@ -16,6 +16,7 @@ By default, the Wazuh indexer API is included in the Wazuh indexer installation.
 .. include:: /_templates/installations/indexer/common/restart_indexer.rst
 
 .. _logging_into_wazuh_indexer_api:
+
 Logging into the Wazuh indexer API
 ----------------------------------
 

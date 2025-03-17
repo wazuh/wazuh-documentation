@@ -399,7 +399,7 @@ Keeping track of the Wazuh indexer health and associated node statistics is impo
 
 Upon successful execution of the script, a report is created where we can see the cluster health and state of the indexes. The below image shows an example of the report. 
 
-.. thumbnail:: /images/manual/indexer-api/wazuh_indexer_report.png
+.. thumbnail:: /images/manual/indexer-api/wazuh-indexer-report.png
    :title: Wazuh Indexer Report
    :alt: An image showing the Wazuh Indexer Report.
    :align: center
