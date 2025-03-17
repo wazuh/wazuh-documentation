@@ -30,22 +30,18 @@ HTTP basic authentication is one of the simplest methods of accessing the Wazuh 
 
 HTTP basic authentication is enabled by default, and its settings are specified within the ``basic_internal_auth_domain`` section in the ``/etc/wazuh-indexer/opensearch-security/config.yml`` configuration file. The default setting is seen below:
 
-.. code-block:: none
+.. code-block:: yaml
 
-   "basic_internal_auth_domain" : {
-     "http_enabled" : true,
-     "order" : 4,
-     "http_authenticator" : {
-       "challenge" : true,
-       "type" : "basic",
-       "config" : { }
-     },
-     "authentication_backend" : {
-       "type" : "intern",
-       "config" : { }
-     },
-     "description" : "Authenticate via HTTP Basic against internal users database"
-   },
+   basic_internal_auth_domain:
+     description: "Authenticate via HTTP Basic against internal users database"
+     http_enabled: true
+     transport_enabled: true
+     order: 4
+     http_authenticator:
+       type: basic
+       challenge: true
+     authentication_backend:
+       type: intern
 
 The format to authenticate to the Wazuh indexer API using basic authentication is below. In this example, we use ``cURL`` to connect and authenticate:
 
@@ -629,10 +625,9 @@ In the query above, we query the index ``wazuh-alerts-4.x-2024`` using a wildcar
 
 In the output above, we observe eight (8) documents matching the query. Next, we use DELETE to remove these documents from the index.
 
-.. code-block:: console
+.. code-block:: bash
 
-   # curl -X DELETE "https://localhost:9200/wazuh-alerts-4.x-2024*?pretty" -H "Content-Type: application/json" -u "$indexer_username:$indexer_password" -k -d 
-   '{
+   curl -X DELETE "https://localhost:9200/wazuh-alerts-4.x-2024*?pretty" -H "Content-Type: application/json" -u "$indexer_username:$indexer_password" -k -d '{
      "query": {
        "range": {
          "@timestamp": {
