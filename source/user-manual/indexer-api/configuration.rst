@@ -193,7 +193,7 @@ logger
 | **Sub-fields**   | **Allowed values**                        | **Default value**  | **Description**                                                                              |
 +==================+===========================================+====================+==============================================================================================+
 | ``level``        | ``TRACE``, ``DEBUG``, ``INFO``, ``WARN``, | ``INFO``           | Defines the logging verbosity of the system, controlling what kind of log messages are       |
-|                  |   ``ERROR``, ``FATAL``                    |                    | captured and recorded.                                                                       |
+|                  | ``ERROR``, ``FATAL``                      |                    | captured and recorded.                                                                       |
 +------------------+-------------------------------------------+--------------------+----------------------------------------------------------------------------------------------+
 
 path 
