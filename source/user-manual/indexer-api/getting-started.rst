@@ -714,7 +714,7 @@ Save the following Python script as ``top_successful_login.py``:
            }
        },
        "aggs": {
-           "failed_logins_by_user": {
+           "successful_logins_by_user": {
                "terms": {
                    "field": "data.dstuser",
                    "size": 3,
