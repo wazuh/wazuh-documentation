@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 # [v4.11.1]
 
 - **Post-release**: Added missing entry to 4.11.1 release notes. ([#8280](https://github.com/wazuh/wazuh-documentation/pull/8280))
+- **Post-release**: Added clarification about the user account used to access the Wazuh dashboard. ([#8282](https://github.com/wazuh/wazuh-documentation/pull/8282))
 
 ## [v4.11.0]
 
