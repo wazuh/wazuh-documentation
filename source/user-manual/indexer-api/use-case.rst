@@ -510,7 +510,7 @@ Threat hunting
 
 The Wazuh indexer API is helpful during threat hunting exercises where you have to query external systems. This use case demonstrates how we can extract source IPs from alerts and run them against AbuseIPDB; we generate a report showing if the source IP is contained in AbuseIPDB’s bad reputation IP listing. Follow the steps below.
 
-#. `Sign up <https://www.abuseipdb.com/register?plan=free>`_ for a free AbuseIPDB account and obtain an `AbuseIPDB API <https://www.abuseipdb.com/account/api>`_ key.
+#. `Sign up <https://www.abuseipdb.com/register?plan=free>`__ for a free AbuseIPDB account and obtain an `AbuseIPDB API <https://www.abuseipdb.com/account/api>`__ key.
 
 #. Export your Wazuh indexer authentication credentials and the AbuseIPDB API key as environment variables:
 

@@ -105,7 +105,7 @@ JWT authentication is not enabled by default, and its settings are specified wit
    
    .. note::
    
-      Replace ``<ENCODED_SIGNING_KEY>`` with your encoded JWT signing key. Update the values of ``<ROLES_KEY>`` with the name of a backend user the JWT should attach to, and ``<SUBJECT_KEY>`` to a descriptive subject name that identifies the JWT. For example, setting the values to **admin** and **automationUser** respectively will attach the JWT to the internal admin user and name the JWT as automationUser.
+      Replace ``<ENCODED_SIGNING_KEY>`` with your base64 encoded HMAC key or public RSA/ECDSA pem key. Update the values of ``<ROLES_KEY>`` with the name of a backend user the JWT should attach to, and ``<SUBJECT_KEY>`` to a descriptive subject name that identifies the JWT. For example, setting the values to **admin** and **automationUser** respectively will attach the JWT to the internal admin user and name the JWT as automationUser.
 
 #. Run the ``/usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh`` script to load the configuration changes made in the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file:
 
@@ -221,7 +221,7 @@ Using the Wazuh indexer API from the Wazuh dashboard enables users to run API re
    :align: center
    :width: 100%
 
-The API Console is made up of two panes. The pane on the left collects the API request, while the pane on the right displays the query result. On the left pane, input the HTTP method, request endpoint, and any query parameters, then click the play button to execute the request. The pane on the right displays the result of the API request. See `understanding the Wazuh indexer API request and response`_ to learn more about the basic concepts.
+The API Console is made up of two panes. The pane on the left collects the API request, while the pane on the right displays the query result. On the left pane, input the HTTP method, request endpoint, and any query parameters, then click the play button to execute the request. The pane on the right displays the result of the API request. See `Understanding the Wazuh indexer API request and response`_ to learn more about the basic concepts.
 
 .. thumbnail:: /images/manual/indexer-api/access-wazuh-indexer-api-console.png
    :title: Access the Wazuh indexer API console
@@ -282,7 +282,7 @@ The Python ``requests`` library allows us to send HTTP requests to the Wazuh Ind
    from requests.auth import HTTPBasicAuth
 
    # Base URL and endpoint
-   wazuh_indexer_url = "https://localhost:9200"
+   Wazuh_indexer_url = "https://localhost:9200"
    endpoint = "/_cluster/health"
 
    # Full URL
@@ -582,7 +582,7 @@ In this example, we use this DELETE request to remove documents from indexes fro
 
 .. code-block:: bash
 
-   # curl -X POST "https://localhost:9200/wazuh-alerts-4.x-2024*/_search?pretty" \
+   curl -X POST "https://localhost:9200/wazuh-alerts-4.x-2024*/_search?pretty" \
    -H "Content-Type: application/json" \
    -u "<WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD>" \
    -k \
@@ -676,7 +676,7 @@ This section demonstrates how to send requests to the Wazuh indexer API using cU
 cURL
 ^^^^
 
-cURL is a command-line tool for sending HTTP/HTTPS requests and commands. It comes pre-installed on many Linux, macOS, and Windows endpoints, allowing users to interact directly with the Wazuh indexer API from the command line. In the examples below, we store the Wazuh API credentials as environment variables and interact with different endpoints. For detailed instructions on obtaining authentication, please refer to the :ref:`Logging in to the Wazuh indexer API <logging_into_wazuh_indexer_api>` section.
+cURL is a command-line tool for sending HTTP/HTTPS requests and commands. It comes pre-installed on many Linux, macOS, and Windows endpoints, allowing users to interact directly with the Wazuh indexer API from the command line. In the examples below, we store the Wazuh API credentials as environment variables and interact with different endpoints. For detailed instructions on obtaining authentication, please refer to the :ref:`logging_into_wazuh_indexer_api` section.
 
 .. note::
 
