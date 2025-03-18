@@ -71,6 +71,7 @@ removedUrls['x.y'] = [
 
 newUrls['4.11'] = [
   '/release-notes/release-4-11-0.html',
+  '/release-notes/release-4-11-1.html',
   '/user-manual/indexer-api/index.html',
   '/user-manual/indexer-api/getting-started.html',
   '/user-manual/indexer-api/configuration.html',
@@ -231,6 +232,7 @@ newUrls['4.10'] = [
   '/user-manual/wazuh-server-cluster/adding-new-server-nodes/testing-the-cluster.html',
   '/user-manual/wazuh-server-cluster/agent-connections.html',
   '/user-manual/wazuh-server-cluster/load-balancers.html',
+  '/user-manual/agent/agent-management/anti-tampering.html',
 ]
 
 /* Pages no longer available in 4.10 */
