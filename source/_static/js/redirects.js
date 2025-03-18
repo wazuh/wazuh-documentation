@@ -72,6 +72,11 @@ removedUrls['x.y'] = [
 newUrls['4.11'] = [
   '/release-notes/release-4-11-0.html',
   '/release-notes/release-4-11-1.html',
+  '/user-manual/indexer-api/index.html',
+  '/user-manual/indexer-api/getting-started.html',
+  '/user-manual/indexer-api/configuration.html',
+  '/user-manual/indexer-api/securing-indexer-api.html',
+  '/user-manual/indexer-api/use-case.html',
 ]
 
 /* *** RELEASE 4.10 ****/
