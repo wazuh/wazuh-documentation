@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+# [v4.11.2]
+
+- Support for Wazuh 4.11.2
+
 # [v4.11.1]
 
 - **Post-release**: Added missing entry to 4.11.1 release notes. ([#8280](https://github.com/wazuh/wazuh-documentation/pull/8280))
