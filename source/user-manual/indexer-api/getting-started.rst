@@ -221,7 +221,7 @@ Using the Wazuh indexer API from the Wazuh dashboard enables users to run API re
    :align: center
    :width: 100%
 
-The API Console is made up of two panes. The pane on the left collects the API request, while the pane on the right displays the query result. On the left pane, input the HTTP method, request endpoint, and any query parameters, then click the play button to execute the request. The pane on the right displays the result of the API request. See `Understanding the Wazuh indexer API request and response`_ to learn more about the basic concepts.
+The API Console is made up of two panes. The pane on the left collects the API request, while the pane on the right displays the query result. On the left pane, input the HTTP method, request endpoint, and any query parameters, then click the play button to execute the request. The pane on the right displays the result of the API request. See `understanding the Wazuh indexer API request and response`_ to learn more about the basic concepts.
 
 .. thumbnail:: /images/manual/indexer-api/access-wazuh-indexer-api-console.png
    :title: Access the Wazuh indexer API console
