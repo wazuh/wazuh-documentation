@@ -406,7 +406,7 @@ Upon successful execution of the script, a report is created where we can see th
    :width: 100%
    
 Query vulnerability data
-^^^^^^^^^^^^^^^^^^^^^^^^
+------------------------
 
 Wazuh indexer API also facilitates the querying of vulnerability detection data. Vulnerability data is stored in the ``wazuh-states-vulnerabilities*`` index. We can query the index for any vulnerability data. In the example below, we search for a particular CVE ``CVE-2020-14393`` to identify if any monitored endpoint is affected:
 
@@ -506,13 +506,13 @@ The query result below shows the value of ``hits.total.value`` key indicates tha
    }
 
 Threat hunting
-^^^^^^^^^^^^^^
+--------------
 
 The Wazuh indexer API is helpful during threat hunting exercises where you have to query external systems. This use case demonstrates how we can extract source IPs from alerts and run them against AbuseIPDB; we generate a report showing if the source IP is contained in AbuseIPDB’s bad reputation IP listing. Follow the steps below.
 
-1. Sign up for a free `AbuseIPDB account <https://www.abuseipdb.com/register?plan=free>`_ and obtain an `AbuseIPDB API key <https://www.abuseipdb.com/account/api>`_.
+#. `Sign up <https://www.abuseipdb.com/register?plan=free>`_ for a free AbuseIPDB account and obtain an `AbuseIPDB API <https://www.abuseipdb.com/account/api>`_ key.
 
-2. Export your Wazuh indexer authentication credentials and the AbuseIPDB API key as environment variables:
+#. Export your Wazuh indexer authentication credentials and the AbuseIPDB API key as environment variables:
 
    .. code-block:: console
 
@@ -522,7 +522,7 @@ The Wazuh indexer API is helpful during threat hunting exercises where you have 
 
    Replace ``<WAZUH_INDEXER_USERNAME>`` and ``<WAZUH_INDEXER_PASSWORD>`` with your Wazuh indexer username and password. Replace ``ABUSEIPDB_KEY`` with your AbuseIPDB API key collected in step 1.
 
-3. Create a file ``ip_reputation_check.sh`` and input the following script to the file:
+#. Create a file ``ip_reputation_check.sh`` and input the following script to the file:
 
    .. code-block:: bash
 
@@ -598,7 +598,7 @@ The Wazuh indexer API is helpful during threat hunting exercises where you have 
 
       echo "Report generated: $OUTPUT_FILE"
 
-4. Execute the ``ip_reputation_check.sh`` script:
+#. Execute the ``ip_reputation_check.sh`` script:
 
    .. code-block:: console
 

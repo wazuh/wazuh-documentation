@@ -31,6 +31,7 @@ HTTP basic authentication is one of the simplest methods of accessing the Wazuh 
 HTTP basic authentication is enabled by default, and its settings are specified within the ``basic_internal_auth_domain`` section in the ``/etc/wazuh-indexer/opensearch-security/config.yml`` configuration file. The default setting is seen below:
 
 .. code-block:: yaml
+   :emphasize-lines: 3,4
 
    basic_internal_auth_domain:
      description: "Authenticate via HTTP Basic against internal users database"
@@ -81,30 +82,26 @@ JWT authentication is not enabled by default, and its settings are specified wit
 
 #. Open the ``/etc/wazuh-indexer/opensearch-security/config.yml`` configuration file and update the highlighted settings:
 
-   .. code-block:: none
-      :emphasize-lines: 3,9,12,13
+   .. code-block:: yaml
+      :emphasize-lines: 3,10,14,15
    
-      "authc" : {
-          "jwt_auth_domain" : {
-            "http_enabled" : true,
-            "order" : 0,
-            "http_authenticator" : {
-              "challenge" : false,
-              "type" : "jwt",
-              "config" : {
-                "signing_key" : "<ENCODED_SIGNING_KEY>",
-                "jwt_header" : "Authorization",
-                "jwt_clock_skew_tolerance_seconds" : 30,
-                "roles_key" : "<ROLES_KEY>",
-                "subject_key" : "<SUBJECT_KEY>"
-              }
-            },
-            "authentication_backend" : {
-              "type" : "noop",
-              "config" : { }
-            },
-            "description" : "Authenticate via Json Web Token"
-          },
+      jwt_auth_domain:
+        description: "Authenticate via Json Web Token"
+        http_enabled: true
+        transport_enabled: false
+        order: 0
+        http_authenticator:
+          type: jwt
+          challenge: false
+          config:
+            signing_key: "<ENCODED_SIGNING_KEY>"
+            jwt_header: "Authorization"
+            jwt_url_parameter: null
+            jwt_clock_skew_tolerance_seconds: 30
+            roles_key: <ROLES_KEY>
+            subject_key: <SUBJECT_KEY>
+        authentication_backend:
+          type: noop
    
    .. note::
    

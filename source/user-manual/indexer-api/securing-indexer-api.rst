@@ -12,6 +12,7 @@ Recommended changes to secure the Wazuh indexer API
 ---------------------------------------------------
 
 Change the default password for the administrative users
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The password for the default administrative user admin can be changed via the Wazuh dashboard or through a Wazuh indexer API. On the dashboard, navigate to **Index management** > **Security** > **Internal users** > **admin** then input and save a new password.
 

@@ -157,7 +157,7 @@ http
 | ``max_warning_header_size``   | Any data size value followed by a valid unit  | ``-1b``                                                      | Specifies the maximum cumulative size of all warning headers in an HTTP response. These headers are used to communicate deprecation warnings, potential        |
 |                               | (i.e. b, kb, mb)                              |                                                              | issues, or other alerts related to the request.                                                                                                                |
 +-------------------------------+-----------------------------------------------+--------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``detailed_errors.enabled``   | true, false                                   | ``true``                                                     | Controls whether detailed error messages are included in HTTP responses when requests fail.                                                                    |
+| ``detailed_errors.enabled``   | ``true``, ``false``                           | ``true``                                                     | Controls whether detailed error messages are included in HTTP responses when requests fail.                                                                    |
 +-------------------------------+-----------------------------------------------+--------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``max_header_size``           | Any data size value followed by a valid unit  | ``8192b``                                                    | Specifies the maximum size of an HTTP request header that the Wazuh indexer server will accept.                                                                |
 |                               | (i.e. b, kb, mb)                              |                                                              |                                                                                                                                                                |
@@ -171,7 +171,7 @@ http.cors
 +-------------------------+--------------------------------------+----------------------------------------------------------+----------------------------------------------------------------------------------------------+
 | **Sub-fields**          | **Allowed values**                   | **Default value**                                        | **Description**                                                                              |
 +=========================+======================================+==========================================================+==============================================================================================+
-| ``enabled``             | true, false                          | ``false``                                                | This setting enables or disables Cross-Origin Resource Sharing (CORS) for HTTP requests.     |
+| ``enabled``             | ``true``, ``false``                  | ``false``                                                | This setting enables or disables Cross-Origin Resource Sharing (CORS) for HTTP requests.     |
 +-------------------------+--------------------------------------+----------------------------------------------------------+----------------------------------------------------------------------------------------------+
 | ``max-age``             | Any time value representing          | ``1728000``                                              | Defines how long the results of a preflight request (for CORS) can be cached.                |
 |                         | duration in seconds.                 |                                                          |                                                                                              |
@@ -180,7 +180,7 @@ http.cors
 +-------------------------+--------------------------------------+----------------------------------------------------------+----------------------------------------------------------------------------------------------+
 | ``allow-headers``       | Any HTTP header                      | ``X-Requested-With,Content-Type,Content-Length``         | Specifies which HTTP headers can be included in the request.                                 |
 +-------------------------+--------------------------------------+----------------------------------------------------------+----------------------------------------------------------------------------------------------+
-| ``allow-credentials``   | true, false                          | ``false``                                                | Controls whether cookies and authentication information (such as HTTP credentials) are       |
+| ``allow-credentials``   | ``true``, ``false``                  | ``false``                                                | Controls whether cookies and authentication information (such as HTTP credentials) are       |
 |                         |                                      |                                                          | included in cross-origin requests made to the Wazuh indexer server.                          |
 +-------------------------+--------------------------------------+----------------------------------------------------------+----------------------------------------------------------------------------------------------+
 | ``allow-methods``       | Any HTTP method                      | ``OPTIONS,HEAD,GET,POST,PUT,DELETE``                     | Defines which HTTP methods (e.g., GET, POST, PUT) are allowed for cross-origin requests.     |
@@ -192,8 +192,8 @@ logger
 +------------------+-------------------------------------------+--------------------+----------------------------------------------------------------------------------------------+
 | **Sub-fields**   | **Allowed values**                        | **Default value**  | **Description**                                                                              |
 +==================+===========================================+====================+==============================================================================================+
-| ``level``        | TRACE, DEBUG, INFO, WARN, ERROR, FATAL    | ``INFO``           | Defines the logging verbosity of the system, controlling what kind of log messages are       |
-|                  |                                           |                    | captured and recorded.                                                                       |
+| ``level``        | ``TRACE``, ``DEBUG``, ``INFO``, ``WARN``, | ``INFO``           | Defines the logging verbosity of the system, controlling what kind of log messages are       |
+|                  |   ``ERROR``, ``FATAL``                    |                    | captured and recorded.                                                                       |
 +------------------+-------------------------------------------+--------------------+----------------------------------------------------------------------------------------------+
 
 path 
