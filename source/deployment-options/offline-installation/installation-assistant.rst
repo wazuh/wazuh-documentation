@@ -161,7 +161,7 @@ Installing the Wazuh dashboard
 
       # tar -O -xvf wazuh-install-files.tar wazuh-install-files/wazuh-passwords.txt
 
-#. Access the Wazuh web interface with your credentials.
+#. Access the Wazuh web interface with your ``admin`` user credentials. This is the default administrator account for the Wazuh indexer and it allows you to access the Wazuh dashboard.
 
    -  **URL**: ``https://<WAZUH_DASHBOARD_IP_ADDRESS>``
    -  **Username**: ``admin``
