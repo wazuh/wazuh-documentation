@@ -57,6 +57,8 @@ Here are all the available settings for the ``/var/ossec/api/configuration/api.y
       max_login_attempts: 50
       block_time: 300
       max_request_per_minute: 300
+      
+   authentication_pool_size: 2
 
    upload_configuration:
       remote_commands:
@@ -245,6 +247,14 @@ access
 | max_request_per_minute | Any positive integer | 300           | The maximum number of requests allowed per minute. It applies to all Wazuh server API endpoints except for authentication requests. Reaching this limit in less than a minute blocks all incoming requests from any user for the remaining time. A value of ``0`` disables this feature. For ``POST /events`` requests, the effective value is ``30`` for values greater than 30.             |
 +------------------------+----------------------+---------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
+authentication_pool_size
+^^^^^^^^^^^^^^^^^^^^^^^^
+
++------------------------------+---------------+------------------------------------------------------------------------------+
+| Allowed values               | Default value | Description                                                                  |
++==============================+===============+==============================================================================+
+| Any integer between 1 and 50 | 2             | Number of processes dedicated to processing authentication requests.         |
++------------------------------+---------------+------------------------------------------------------------------------------+
 
 upload_configuration
 ^^^^^^^^^^^^^^^^^^^^
