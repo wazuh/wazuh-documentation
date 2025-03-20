@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- Added the ``authentication_pool_size`` option to customize the number of authentication processes in the Wazuh server API configuration. ([#8287](https://github.com/wazuh/wazuh-documentation/pull/8287)
+- Added the ``authentication_pool_size`` option to the Wazuh server API configuration section. ([#8287](https://github.com/wazuh/wazuh-documentation/pull/8287))
 
 # [v4.11.1]
 
