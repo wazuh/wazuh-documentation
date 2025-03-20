@@ -13,10 +13,10 @@ What's new
 
 This release includes new features or enhancements as the following:
 
-Resolved issues
----------------
+RESTful API
+^^^^^^^^^^^
 
-This release resolves known issues as the following:
+-  `#28653 <https://github.com/wazuh/wazuh/pull/28653>`__ Added the ``authentication_pool_size`` option to customize the number of authentication processes in the Wazuh server API configuration.
 
 Changelogs
 ----------
