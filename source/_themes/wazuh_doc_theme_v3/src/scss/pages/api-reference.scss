@@ -21,6 +21,9 @@ $dark-color-redoc-table-heading: #292929 !default;
 $dark-color-redoc-table-background: #2a2d34 !default;
 $dark-color-redoc-danger: #e31b0f !default;
 
+:root {
+  scroll-behavior: unset;
+}
 
 .loading {
   header,
