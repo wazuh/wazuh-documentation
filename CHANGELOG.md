@@ -3,7 +3,9 @@ All notable changes to this project will be documented in this file.
 
 # [v4.11.2]
 
-- Support for Wazuh 4.11.2
+### Added
+
+- Added the ``authentication_pool_size`` option to customize the number of authentication processes in the Wazuh server API configuration. ([#8287](https://github.com/wazuh/wazuh-documentation/pull/8287)
 
 # [v4.11.1]
 
