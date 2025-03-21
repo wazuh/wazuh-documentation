@@ -24,6 +24,17 @@
 header {
   
   .mobile-secondary-header {
+    .navbar-nav {
+      @include media-only(xl,wzh-xl) {
+        max-width: 900px;
+      }
+      @include media-only(wzh-xl,xxl) {
+        max-width: 930px;
+      }
+      @include media-min(xxl) {
+        max-width: 1000px;
+      }
+    }
     .nav-item {
       &.install,
       &.login { 
@@ -31,10 +42,15 @@ header {
           @include media-min(xl) {
             border-radius: 8px;
             border-width: 1.5px;
-            font-size: 15px;
             height: 40px;
             padding: 0 20px;
             margin-left: 10px;
+          }
+          @include media-only(xl,xxl) {
+            font-size: 15px;
+          }
+          @include media-min(xxl) {
+            font-size: 16px;
           }
         }
       }
