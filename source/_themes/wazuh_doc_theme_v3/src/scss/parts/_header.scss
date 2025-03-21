@@ -36,17 +36,17 @@ header {
     }
     svg {
       height: 33px;
-      width: 144px;
+      width: 173px;
+      @include media-max (xl) {
+        width: 127px;
+        height: 26px;
+      }
       @include media-max(sm){
         max-width: 180px;
       }
       @include media-only(xl,wzh-xl){
-        height: 27px;
-        width: 127px;
-      }
-      @include media-min(wzh-xl){
-        height: 34px;
-        width: 170px;
+        height: 33px;
+        width: 144px;
       }
     }
   }
@@ -71,6 +71,15 @@ header {
       flex-shrink: 0;
       flex-wrap: nowrap;
     }
+    @include media-only(xl,wzh-xl) {
+      width: 956px;
+    }
+    @include media-only(wzh-xl,xxl) {
+      width: 996px;
+    }
+    @include media-min(xxl) {
+      width: 1146px;
+    }
     .container {
       @include media-min(xl){
         display: flex;
@@ -86,6 +95,16 @@ header {
         flex-direction: row;
         align-items: center;
         margin-left: auto;
+        width: calc(100% - 30px);
+      }
+      @include media-only(xl,wzh-xl) {
+        max-width: calc(900px - 273px);
+      }
+      @include media-only(wzh-xl,xxl) {
+        max-width: calc(930px - 263px);
+      }
+      @include media-min(xxl) {
+        max-width: calc(1000px - 278px);
       }
     }
     .nav-item {
@@ -101,7 +120,13 @@ header {
           padding-left: 8px;
           padding-right: 8px;
         }
+        @include media-only(wzh-xl,xxl){
+          font-size: 16px;
+          padding-left: 9px;
+          padding-right: 9px;
+        }
         &.dropdown-toggle {
+          padding: 0 10px;
           @include media-only(xl,wzh-xl){
             padding-left: 8px;
             padding-right: 2px;
@@ -296,7 +321,7 @@ header {
           width: 202px;
         }
         @include media-only (xl,wzh-xl) {
-          width: 263px;
+          width: 262px;
         }
         @include media-only (wzh-xl,xxl) {
           width: 253px;
