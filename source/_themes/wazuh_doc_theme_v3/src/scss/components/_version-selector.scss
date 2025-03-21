@@ -39,6 +39,15 @@ header {
       padding: 0 5px;
       border: none;
     }
+    @include media-only(xl, wzh-xl) {
+      width: 263px;
+    }
+    @include media-only(wzh-xl, xxl) {
+      width: 253px;
+    }
+    @include media-min(xxl) {
+      width: 268px;
+    }
     &:focus  {
       box-shadow: none;
     }
