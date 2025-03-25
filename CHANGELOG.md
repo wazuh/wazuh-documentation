@@ -1,7 +1,7 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-# [v4.11.1]
+## [v4.11.1]
 
 - **Post-release**: Added missing entry to 4.11.1 release notes. ([#8280](https://github.com/wazuh/wazuh-documentation/pull/8280))
 - **Post-release**: Added clarification about the user account used to access the Wazuh dashboard. ([#8282](https://github.com/wazuh/wazuh-documentation/pull/8282))
@@ -32,7 +32,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Fixed script argument in dashboard package generation command. ([8265](https://github.com/wazuh/wazuh-documentation/pull/8265))
 - **Post-release**: Fixed OpenSearch Dashboards version reference. ([8265](https://github.com/wazuh/wazuh-documentation/pull/8265))
 
-# [v4.10.1]
+## [v4.10.1]
 
 - Support for Wazuh 4.10.1
 
@@ -78,7 +78,7 @@ All notable changes to this project will be documented in this file.
 - Removed the step to disable the Wazuh manager service from the *Uninstalling the Wazuh central components* guide. ([#7814](https://github.com/wazuh/wazuh-documentation/pull/7814))
 - Removed ``wazuh-packages`` repository reference from release notes. ([#7970](https://github.com/wazuh/wazuh-documentation/pull/7970))
 
-# [v4.9.2]
+## [v4.9.2]
 
 ### Added
 
