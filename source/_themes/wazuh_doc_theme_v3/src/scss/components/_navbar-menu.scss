@@ -10,8 +10,47 @@ header {
 
   .navbar-nav .nav-item {
     .nav-link {
+      display: inline;
       padding: 24px 10px;
       font-weight: 500;
+    }
+    &.install,
+    &.login {
+      flex-grow: 0;
+      .nav-link {
+        display: flex;
+        align-items: center;
+      }
+    }
+    &.login {
+      svg {
+        width: 13px;
+        height: 19px;
+      }
+      .nav-link {
+        @include media-only(xl,wzh-xl) {
+          width: 111.5px;
+        }
+        @include media-only(wzh-xl,xxl) {
+          width: 106.5px;
+        }
+        @include media-min(xxl) {
+          width: 112.1px;
+        }
+      }
+    }
+    &.install {
+      .nav-link {
+        @include media-only(xl,wzh-xl) {
+          width: 141.8px;
+        }
+        @include media-only(wzh-xl,xxl) {
+          width: 136.8px;
+        }
+        @include media-min(xxl) {
+          width: 146px;
+        }
+      }
     }
   }
 }
@@ -66,7 +105,7 @@ header {
     border: 1px solid;
     border-radius: 10px;
     position: absolute;
-    top: -5px!important;
+    top: 20px!important;
     &::before {
       position: absolute;
       top: -9px;
@@ -95,7 +134,7 @@ header {
   .navbar-nav {
     background-color: $light-color-base-space;
     .nav-link {
-      color: $light-color-main-text;
+      color: $light-color-main-text-extra;
       &.active,
       &:hover,
       &:focus,
@@ -111,7 +150,7 @@ header {
           }
         }
         svg {
-          fill: $light-color-main-text;
+          fill: $light-color-main-text-extra;
         }
       }
     }
@@ -123,7 +162,7 @@ header {
         border-color: $light-color-primary-lighter;
       }
       .dropdown-item {
-        color: $light-color-main-text;
+        color: $light-color-main-text-extra;
         &:hover {
           color: $light-color-primary;
           background-color: $light-color-base-space;
