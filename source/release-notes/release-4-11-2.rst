@@ -13,10 +13,25 @@ What's new
 
 This release includes new features or enhancements as the following:
 
+Wazuh manager
+^^^^^^^^^^^^^
+
+-  `#28797 <https://github.com/wazuh/wazuh/pull/28797>`__ Improved Wazuh DB performance using built-in types.
+
 RESTful API
 ^^^^^^^^^^^
 
 -  `#28653 <https://github.com/wazuh/wazuh/pull/28653>`__ Added the ``authentication_pool_size`` option to customize the number of authentication processes in the Wazuh server API configuration.
+
+Resolved issues
+---------------
+
+This release resolves known issues as the following:
+
+Wazuh dashboard
+^^^^^^^^^^^^^^^
+
+-  `#7370 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7370>`__ `#7371 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7371>`__ Fixed several broken Wazuh documentation links.
 
 Changelogs
 ----------
