@@ -112,13 +112,22 @@ Wazuh manager
 Filebeat
 ^^^^^^^^
 
-+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Package type | Package                                                                                                                                                                                                                                         |
-+==============+=================================================================================================================================================================================================================================================+
-|     RPM      | `filebeat-oss-|ELASTICSEARCH_LATEST|-x86_64.rpm <https://packages.wazuh.com/4.x/yum/filebeat-oss-|ELASTICSEARCH_LATEST|-x86_64.rpm>`_ (`sha512 <https://packages.wazuh.com/4.x/checksums/elasticsearch/|ELASTICSEARCH_LATEST|/filebeat-oss-|ELASTICSEARCH_LATEST|-x86_64.rpm.sha512>`__)                        |
-+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|     DEB      | `filebeat-oss-|ELASTICSEARCH_LATEST|-amd64.deb <https://packages.wazuh.com/4.x/apt/pool/main/f/filebeat/filebeat-oss-|ELASTICSEARCH_LATEST|-amd64.deb>`_ (`sha512 <https://packages.wazuh.com/4.x/checksums/elasticsearch/|ELASTICSEARCH_LATEST|/filebeat-oss-|ELASTICSEARCH_LATEST|-amd64.deb.sha512>`__)      |
-+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+.. |Filebeat_x86_64_RPM| replace:: `filebeat-|FILEBEAT_LATEST|-1.x86_64.rpm <https://packages.wazuh.com/4.x/yum/filebeat-|FILEBEAT_LATEST|-1.x86_64.rpm>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/elasticsearch/|FILEBEAT_LATEST|/filebeat-|FILEBEAT_LATEST|-1.x86_64.rpm.sha512>`__)
+.. |Filebeat_AARCH64_RPM| replace:: `filebeat-|FILEBEAT_LATEST|-1.aarch64.rpm <https://packages.wazuh.com/4.x/yum/filebeat-|FILEBEAT_LATEST|-1.aarch64.rpm>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/elasticsearch/|FILEBEAT_LATEST|/filebeat-|FILEBEAT_LATEST|-1.aarch64.rpm.sha512>`__)
+.. |Filebeat_AMD64_DEB| replace:: `filebeat-|FILEBEAT_LATEST|-1.amd64.deb <https://packages.wazuh.com/4.x/yum/filebeat-|FILEBEAT_LATEST|-1.amd64.deb>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/elasticsearch/|FILEBEAT_LATEST|/filebeat-|FILEBEAT_LATEST|-1.amd64.deb.sha512>`__)
+.. |Filebeat_ARM64_DEB| replace:: `filebeat-|FILEBEAT_LATEST|-1.arm64.deb <https://packages.wazuh.com/4.x/yum/filebeat-|FILEBEAT_LATEST|-1.arm64.deb>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/elasticsearch/|FILEBEAT_LATEST|/filebeat-|FILEBEAT_LATEST|-1.arm64.deb.sha512>`__)
+
++--------------+--------------+----------------------------+
+| Package type | Architecture | Package                    |
++==============+==============+============================+
+|     RPM      |    x86_64    | |Filebeat_x86_64_RPM|      |
+|              +--------------+----------------------------+
+|              |    aarch64   | |Filebeat_AARCH64_RPM|     |
++--------------+--------------+----------------------------+
+|     DEB      |    amd64     | |Filebeat_AMD64_DEB|       |
+|              +--------------+----------------------------+
+|              |    arm64     | |Filebeat_ARM64_DEB|       |
++--------------+--------------+----------------------------+
 
 Wazuh dashboard
 ---------------
