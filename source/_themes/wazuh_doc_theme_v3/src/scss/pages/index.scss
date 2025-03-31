@@ -154,7 +154,7 @@ header {
     margin-right: auto;
     margin-left: auto;
     border-radius: 20px;
-    border-width: 1px;
+    border: none;
     width: 90%;
     max-width: calc(100% - 60px);
     @include media-only (sm, xxl){
