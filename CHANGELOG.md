@@ -28,9 +28,16 @@ All notable changes to this project will be documented in this file.
 - Updated images in FIM PoC. [#7979](https://github.com/wazuh/wazuh-documentation/pull/7979)
 - Replaced the ``--version`` parameter with ``--commit-sha`` in the Wazuh dashboard package generation guide. ([#8216](https://github.com/wazuh/wazuh-documentation/pull/8216))
 
-# [v4.11.1]
+## [v4.11.2]
 
-- Support for Wazuh 4.11.1
+### Added
+
+- Added the ``authentication_pool_size`` option to the Wazuh server API configuration section. ([#8287](https://github.com/wazuh/wazuh-documentation/pull/8287))
+
+## [v4.11.1]
+
+- **Post-release**: Added missing entry to 4.11.1 release notes. ([#8280](https://github.com/wazuh/wazuh-documentation/pull/8280))
+- **Post-release**: Added clarification about the user account used to access the Wazuh dashboard. ([#8282](https://github.com/wazuh/wazuh-documentation/pull/8282))
 
 ## [v4.11.0]
 
@@ -39,6 +46,7 @@ All notable changes to this project will be documented in this file.
 - Added architecture information to assistant pages. ([#7830](https://github.com/wazuh/wazuh-documentation/pull/7830))
 - Added CISA to the vulnerability source enumerations and compatibility matrix. ([#8201](https://github.com/wazuh/wazuh-documentation/pull/8201))
 - **Post-release**: Added new configuration options to the MS Graph integration documentation. ([#8226](https://github.com/wazuh/wazuh-documentation/pull/8226))
+- **Post-release**: Added Wazuh indexer API documentation. ([#8231](https://github.com/wazuh/wazuh-documentation/pull/8231))
 
 ### Changed
 
@@ -57,7 +65,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Fixed script argument in dashboard package generation command. ([8265](https://github.com/wazuh/wazuh-documentation/pull/8265))
 - **Post-release**: Fixed OpenSearch Dashboards version reference. ([8265](https://github.com/wazuh/wazuh-documentation/pull/8265))
 
-# [v4.10.1]
+## [v4.10.1]
 
 - Support for Wazuh 4.10.1
 
@@ -103,7 +111,7 @@ All notable changes to this project will be documented in this file.
 - Removed the step to disable the Wazuh manager service from the *Uninstalling the Wazuh central components* guide. ([#7814](https://github.com/wazuh/wazuh-documentation/pull/7814))
 - Removed ``wazuh-packages`` repository reference from release notes. ([#7970](https://github.com/wazuh/wazuh-documentation/pull/7970))
 
-# [v4.9.2]
+## [v4.9.2]
 
 ### Added
 

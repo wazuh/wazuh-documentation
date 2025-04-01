@@ -27,6 +27,7 @@ Here are all the available settings for the ``/var/ossec/api/configuration/api.y
    drop_privileges: yes
    experimental_features: no
    max_upload_size: 10485760
+   authentication_pool_size: 2
 
    intervals:
       request_timeout: 10
@@ -149,6 +150,17 @@ max_upload_size
 | Any positive integer | 10485760      | Set the maximum body size that the API can accept, in bytes (0 -> limitless) |
 +----------------------+---------------+------------------------------------------------------------------------------+
 
+authentication_pool_size
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. versionadded:: 4.11.2
+
++------------------------------+---------------+------------------------------------------------------------------------------+
+| Allowed values               | Default value | Description                                                                  |
++==============================+===============+==============================================================================+
+| Any integer between 1 and 50 | 2             | Number of processes dedicated to processing authentication requests.         |
++------------------------------+---------------+------------------------------------------------------------------------------+
+
 intervals
 ^^^^^^^^^^
 
@@ -244,7 +256,6 @@ access
 +------------------------+----------------------+---------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | max_request_per_minute | Any positive integer | 300           | The maximum number of requests allowed per minute. It applies to all Wazuh server API endpoints except for authentication requests. Reaching this limit in less than a minute blocks all incoming requests from any user for the remaining time. A value of ``0`` disables this feature. For ``POST /events`` requests, the effective value is ``30`` for values greater than 30.             |
 +------------------------+----------------------+---------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
 
 upload_configuration
 ^^^^^^^^^^^^^^^^^^^^
