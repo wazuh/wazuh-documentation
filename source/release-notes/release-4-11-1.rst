@@ -41,6 +41,7 @@ Wazuh agent
 ^^^^^^^^^^^
 
 -  `#28339 <https://github.com/wazuh/wazuh/pull/28339>`__ Improved agent connectivity.
+-  `#28516 <https://github.com/wazuh/wazuh/pull/28516>`__ Applied the ``agent.recv_timeout`` timeout to the agent enrollment process to prevent it from waiting indefinitely for a response.
 
 Wazuh dashboard
 ^^^^^^^^^^^^^^^
