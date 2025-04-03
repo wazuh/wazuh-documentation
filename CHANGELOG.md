@@ -13,6 +13,7 @@ All notable changes to this project will be documented in this file.
 - Updated Wazuh dashboard package generation guide. ([#7961](https://github.com/wazuh/wazuh-documentation/pull/7961))
 - Updated images in FIM PoC. [#7979](https://github.com/wazuh/wazuh-documentation/pull/7979)
 - Replaced the ``--version`` parameter with ``--commit-sha`` in the Wazuh dashboard package generation guide. ([#8216](https://github.com/wazuh/wazuh-documentation/pull/8216))
+- Updated the Filebeat package references in Packages list. ([#8348](https://github.com/wazuh/wazuh-documentation/pull/8348))
 
 ## [v4.11.2]
 
