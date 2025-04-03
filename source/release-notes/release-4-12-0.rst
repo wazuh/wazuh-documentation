@@ -39,6 +39,13 @@ Ruleset
 -  `#23194 <https://github.com/wazuh/wazuh/issues/23194>`__ Created SCA policy for Ubuntu 24.04 LTS.
 -  `#26982 <https://github.com/wazuh/wazuh/issues/26982>`__ Improved SCA rule for macOS 15.
 
+Wazuh dashboard
+^^^^^^^^^^^^^^^
+
+-  `#7182 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7182>`__ Added setting to limit the number of rows in CSV reports.
+-  `#7306 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7306>`__ Added ``vulnerability.scanner.reference`` field containing the CTI reference of the vulnerability.
+-  `#7192 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7192>`__ Refined queue usage visualizations in **Statistics**.
+
 Resolved issues
 ---------------
 
@@ -58,6 +65,18 @@ Wazuh agent
 -  `#26647 <https://github.com/wazuh/wazuh/pull/26647>`__ Fixed a bug that might cause ``wazuh-modulesd`` to crash on startup.
 -  `#26289 <https://github.com/wazuh/wazuh/pull/26289>`__ Fixed invalid UTF-8 character checking in FIM. Thanks to `@zbalkan <https://github.com/zbalkan>`__.
 -  `#27100 <https://github.com/wazuh/wazuh/pull/27100>`__ Improved URL validations in ``Maltiverse`` integration.
+
+Wazuh dashboard
+^^^^^^^^^^^^^^^
+
+-  `#7185 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7185>`__ Fixed issue where adding the same filter twice wouldn't display it in the search bar.
+-  `#7171 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/7171>`__ Fixed rendering of rows in **CDB list** table when they start with quotes.
+-  `#7206 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/7206>`__ Fixed width of long fields in the document detail flyout.
+-  `#7267 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7267>`__ Fixed logging of UI logs due to an undefined logger property.
+-  `#7278 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7278>`__ Fixed **TOP-5-SO** filter management in **Endpoints** > **Summary**.
+-  `#7304 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7304>`__ Fixed CSV export not filtering by time range.
+-  `#7336 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7336>`__ Fixed agent view not displaying the latest agent state.
+-  `#7377 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7377>`__ Fixed saved queries not appearing in the search bar.
 
 Changelogs
 ----------
