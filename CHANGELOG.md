@@ -6,13 +6,15 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 - Added reference to macOS arm64 WPK. ([#7883](https://github.com/wazuh/wazuh-documentation/pull/7883))
-- Add Ubuntu 24.04 SCA to list of available SCAs. ([#8021](https://github.com/wazuh/wazuh-documentation/pull/8021))
+- Added Ubuntu 24.04 SCA to the list of available SCAs. ([#8021](https://github.com/wazuh/wazuh-documentation/pull/8021))
+- Added the `<aws_profile>` authentication parameter to the Amazon Security Lake documentation. ([#8199](https://github.com/wazuh/wazuh-documentation/pull/8199))
+- Added ARM64 to the central components architecture references. ([#8173](https://github.com/wazuh/wazuh-documentation/pull/8173))
 
 ### Changed
 
 - Updated Wazuh dashboard package generation guide. ([#7961](https://github.com/wazuh/wazuh-documentation/pull/7961))
 - Updated images in FIM PoC. [#7979](https://github.com/wazuh/wazuh-documentation/pull/7979)
-- Replaced the ``--version`` parameter with ``--commit-sha`` in the Wazuh dashboard package generation guide. ([#8216](https://github.com/wazuh/wazuh-documentation/pull/8216))
+- Replaced the `--version` parameter with `--commit-sha` in the Wazuh dashboard package generation guide. ([#8216](https://github.com/wazuh/wazuh-documentation/pull/8216))
 - Updated the Filebeat package references in Packages list. ([#8348](https://github.com/wazuh/wazuh-documentation/pull/8348))
 
 ## [v4.11.2]
