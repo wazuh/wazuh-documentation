@@ -979,7 +979,7 @@ Example of configuration
           <aws_account_id>123456789012</aws_account_id>
           <aws_account_alias>dev1-account</aws_account_alias>
           <discard_regex field="userIdentity.userName">john.doe</discard_regex>
-          <remove_from_bucket>yes<remove_from_bucket>
+          <remove_from_bucket>yes</remove_from_bucket>
       </bucket>
       <bucket type="cloudtrail">
           <name>s3-dev-bucket</name>
@@ -1006,7 +1006,7 @@ Example of configuration
           <aws_account_id>11112222333</aws_account_id>
           <aws_account_alias>prod-account</aws_account_alias>
           <discard_regex field="detail.status">OK</discard_regex>
-          <remove_from_bucket>yes<remove_from_bucket>
+          <remove_from_bucket>yes</remove_from_bucket>
       </bucket>
       <service type="cloudwatchlogs">
           <aws_profile>default</aws_profile>
