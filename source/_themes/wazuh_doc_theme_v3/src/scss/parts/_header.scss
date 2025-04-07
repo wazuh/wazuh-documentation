@@ -131,6 +131,9 @@ header {
             padding-left: 8px;
             padding-right: 2px;
           }
+          @include media-min (xl) {
+            padding: 24px 10px;
+          }
         }
       }
     }
