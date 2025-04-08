@@ -125,16 +125,11 @@ Install and configure Filebeat
 
       .. group-tab:: YUM
 
-         .. code-block:: console
-
-            # yum install https://packages.wazuh.com/4.x/yum/filebeat-oss-7.10.2-x86_64.rpm
+         .. include:: /_templates/installations/filebeat/common/yum/install_filebeat.rst
 
       .. group-tab:: APT
 
-         .. code-block:: console
-
-            # curl -O https://packages.wazuh.com/4.x/apt/pool/main/f/filebeat/filebeat-oss-7.10.2-amd64.deb
-            # apt install ./filebeat-oss-7.10.2-amd64.deb
+         .. include:: /_templates/installations/filebeat/common/apt/install_filebeat.rst
 
 #. Download the preconfigured Filebeat configuration file:
 
