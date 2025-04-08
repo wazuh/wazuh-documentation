@@ -7,6 +7,10 @@ All notable changes to this project will be documented in this file.
 
 - Added the ``authentication_pool_size`` option to the Wazuh server API configuration section. ([#8287](https://github.com/wazuh/wazuh-documentation/pull/8287))
 
+### Fixed
+
+- **Post-release**: Added missing Oracle Linux to the vulnerability detection compatibility matrix and fixed heading level. ([#8391](https://github.com/wazuh/wazuh-documentation/pull/8391))
+
 ## [v4.11.1]
 
 - **Post-release**: Added missing entry to 4.11.1 release notes. ([#8280](https://github.com/wazuh/wazuh-documentation/pull/8280))
