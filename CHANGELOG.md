@@ -3,7 +3,9 @@ All notable changes to this project will be documented in this file.
 
 # [v4.10.1]
 
-- Support for Wazuh 4.10.1
+### Fixed
+
+- **Post-release**: Added missing Oracle Linux to the vulnerability detection compatibility matrix and fixed heading level. ([#8393](https://github.com/wazuh/wazuh-documentation/pull/8393))
 
 ## [v4.10.0]
 
