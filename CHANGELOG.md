@@ -7,10 +7,6 @@ All notable changes to this project will be documented in this file.
 
 - Updated the API host default value. ([#7933](https://github.com/wazuh/wazuh-documentation/pull/7933))
 
-### Fixed
-
-- **Post-release**: Added missing Oracle Linux to the vulnerability detection compatibility matrix and fixed heading level. ([#8395](https://github.com/wazuh/wazuh-documentation/pull/8395))
-
 ## [v4.9.1]
 
 ### Added
