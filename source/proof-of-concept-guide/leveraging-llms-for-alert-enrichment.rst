@@ -8,9 +8,9 @@ Leveraging LLMs for alert enrichment
 
 **Large Language Model** is a type of artificial intelligence (AI) model designed to understand, generate, and manipulate human language. These models are typically built using machine learning techniques, particularly those involving deep learning and neural networks. LLMs can add human-like intelligence to process data, enhancing the efficiency of various business and personal operations. *LLMs* such as the ones adopted by ChatGPT have gained massive popularity and are widely used in various industries including security operations.
 
-YARA is a tool that detects and classifies malware artifacts. While YARA can identify known patterns and signatures of malicious activity, human intervention is often required to interpret and contextualize the output of YARA scans. ChatGPT is a generative AI chatbot developed by OpenAI. It provides users with various LLMs to process data. These LLMs can analyze and enrich YARA alerts with additional context, providing security teams with deeper insights into the nature and severity of detected threats.
+YARA is a tool that detects and classifies malware artifacts. While YARA can identify known patterns and signatures of malicious activity, human intervention is often required to interpret and contextualize the output of YARA scans. ChatGPT is a generative AI chatbot developed by OpenAI and is one of the many LLMs available. These provide users with various LLMs to process data. These LLMs can analyze and enrich YARA alerts with additional context, providing security teams with deeper insights into the nature and severity of detected threats.
 
-In this use case, we integrate Wazuh with YARA to detect when a malicious file is added to a monitored endpoint. The integration utilizes the Wazuh :doc:`FIM </user-manual/capabilities/file-integrity/index>` module to monitor a directory for new or modified files. When a file modification or addition is detected, the Wazuh :doc:`Active Response </user-manual/capabilities/active-response/index>` module triggers a YARA scan on the file. The Active Response module automatically deletes the malicious file from the endpoint if it has a positive match with a malicious signature. The Active Response module then queries ChatGPT to enrich the YARA scan result with additional insight into the malicious file that helps security teams understand its nature, potential impact, and remediation.
+In this use case, we integrate Wazuh with YARA to detect when a malicious file is added to a monitored endpoint. The integration utilizes the Wazuh :doc:`FIM </user-manual/capabilities/file-integrity/index>` module to monitor a directory for new or modified files. When a file modification or addition is detected, the Wazuh :doc:`Active Response </user-manual/capabilities/active-response/index>` module triggers a YARA scan on the file. The Active Response module automatically deletes the malicious file from the endpoint if it has a positive match with a malicious signature. The Active Response module then queries the LLM to enrich the YARA scan result with additional insight into the malicious file that helps security teams understand its nature, potential impact, and remediation.
 
 Infrastructure
 --------------
@@ -18,14 +18,14 @@ Infrastructure
 ============== ====================================================================================================================================
 Endpoint       Description                                                                                                                         
 ============== ====================================================================================================================================
-Ubuntu 22.04   Monitored endpoint configured with Wazuh File Integrity Monitoring (FIM) module and YARA integration with ChatGPT log enrichment.
-Windows 11     Monitored endpoint configured with Wazuh File Integrity Monitoring (FIM) module and YARA integration with ChatGPT log enrichment.
+Ubuntu 22.04   Monitored endpoint configured with Wazuh File Integrity Monitoring (FIM) module and YARA integration with LLM log enrichment.
+Windows 11     Monitored endpoint configured with Wazuh File Integrity Monitoring (FIM) module and YARA integration with LLM log enrichment.
 ============== ====================================================================================================================================
 
 Configuration
 -------------
 
-Perform the following steps to set up the YARA and ChatGPT integration. Choose either Ubuntu or Windows configuration depending on the operating system of the monitored endpoint.
+Perform the following steps to set up the YARA and LLM integration. Choose either Ubuntu or Windows configuration depending on the operating system of the monitored endpoint.
 
 Ubuntu 22.04 endpoint
 ^^^^^^^^^^^^^^^^^^^^^
@@ -82,11 +82,11 @@ Perform the following steps to install YARA and configure the Active Response an
 
    .. note::
       
-      If you use a custom YARA rule, ensure that the description field in the YARA rule metadata is present as this field is required to enrich the alert with ChatGPT.
+      If you use a custom YARA rule, ensure that the description field in the YARA rule metadata is present as this field is required to enrich the alert with LLMs.
 
-#. Create a script ``yara.sh`` in the ``/var/ossec/active-response/bin/`` directory. This script runs YARA scans on files added or modified in the monitored directories. It also queries ChatGPT to enrich the logs and attempts to remove malware files detected by YARA. 
+#. Create a script ``yara.sh`` in the ``/var/ossec/active-response/bin/`` directory. This script runs YARA scans on files added or modified in the monitored directories. It also queries the LLMs to enrich the logs and attempts to remove malware files detected by YARA. 
 
-   Replace ``<API_KEY>`` with your `OpenAI API key <https://platform.openai.com/docs/quickstart>`__ and ``<OPENAI_MODEL>`` with your preferred `OpenAI model <https://platform.openai.com/docs/models>`__. The model used in this POC guide is *gpt-4-turbo*:
+   Replace ``<API_KEY>`` with your `OpenAI API key <https://platform.openai.com/docs/quickstart>`__ , ``<MODEL_NAME>`` with your preferred `OpenAI or custom model name <https://platform.openai.com/docs/models>`__ , and ``<BASE_URL>`` with your `OpenAI API compatible endpoint <https://docs.together.ai/docs/openai-api-compatibility>`__. The model used in this POC guide is *gpt-4-turbo*:
 
    .. code-block:: bash
       :emphasize-lines: 14,15
@@ -100,25 +100,27 @@ Perform the following steps to install YARA and configure the Active Response an
       # License (version 2) as published by the FSF - Free Software
       # Foundation.
 
-
       #------------------------- Configuration -------------------------#
-
       # ChatGPT API key
       API_KEY="<API_KEY>"
       OPENAI_MODEL="<OPENAI_MODEL>" #for example gpt-4-turbo
-
-
+      BASE_URL="BASE_URL" #default base URL for OpenAI: https://api.openai.com. Some endpoints may need /v1 after the URL.
+      
+      # Prompt for custom base URL
+      read -p "Enter custom base URL (press enter to use default '$BASE_URL'): " CUSTOM_BASE_URL
+      if [ -n "$CUSTOM_BASE_URL" ]; then
+      BASE_URL="$CUSTOM_BASE_URL"
+      fi
+      
       # Set LOG_FILE path
       LOG_FILE="logs/active-responses.log"
-
+      
       #------------------------- Gather parameters -------------------------#
-
       # Extra arguments
       read INPUT_JSON
       YARA_PATH=$(echo $INPUT_JSON | jq -r .parameters.extra_args[1])
       YARA_RULES=$(echo $INPUT_JSON | jq -r .parameters.extra_args[3])
       FILENAME=$(echo $INPUT_JSON | jq -r .parameters.alert.syscheck.path)
-
       size=0
       actual_size=$(stat -c %s ${FILENAME})
       while [ ${size} -ne ${actual_size} ]; do
@@ -126,20 +128,17 @@ Perform the following steps to install YARA and configure the Active Response an
           size=${actual_size}
           actual_size=$(stat -c %s ${FILENAME})
       done
-
+      
       #----------------------- Analyze parameters -----------------------#
-
       if [[ ! $YARA_PATH ]] || [[ ! $YARA_RULES ]]
       then
           echo "wazuh-YARA: ERROR - YARA active response error. YARA path and rules parameters are mandatory." >> ${LOG_FILE}
           exit 1
       fi
-
+      
       #------------------------- Main workflow --------------------------#
-
       # Execute YARA scan on the specified filename
       YARA_output="$("${YARA_PATH}"/yara -w -r -m "$YARA_RULES" "$FILENAME")"
-
       if [[ $YARA_output != "" ]]
       then
           # Attempt to delete the file if any YARA rule matches
@@ -148,10 +147,10 @@ Perform the following steps to install YARA and configure the Active Response an
           else
               echo "wazuh-YARA: INFO - Unable to delete $FILENAME" >> ${LOG_FILE}
           fi
-
+      
           # Flag to check if API key is invalid
           api_key_invalid=false
-
+      
           # Iterate every detected rule
           while read -r line; do
               # Extract the description from the line using regex
@@ -175,13 +174,13 @@ Perform the following steps to install YARA and configure the Active Response an
                           frequency_penalty: 0,
                           presence_penalty: 0
                       }')
-
+      
                   # Query ChatGPT for more information
-                  chatgpt_response=$(curl -s -X POST "https://api.openai.com/v1/chat/completions" \
+                  chatgpt_response=$(curl -s -X POST "$BASE_URL/v1/chat/completions" \
                       -H "Content-Type: application/json" \
                       -H "Authorization: Bearer $API_KEY" \
                       -d "$payload")
-
+      
                   # Check for invalid API key error
                   if echo "$chatgpt_response" | grep -q "invalid_request_error"; then
                       api_key_invalid=true
@@ -191,14 +190,13 @@ Perform the following steps to install YARA and configure the Active Response an
                   else
                       # Extract the response text from ChatGPT API response
                       response_text=$(echo "$chatgpt_response" | jq -r '.choices[0].message.content')
-
+      
                       # Check if the response text is null and handle the error
                       if [[ $response_text == "null" ]]; then
                           echo "wazuh-YARA: ERROR - ChatGPT API returned null response: $chatgpt_response" >> ${LOG_FILE}
                       else
                           # Combine the YARA scan output and ChatGPT response
                           combined_output="wazuh-YARA: INFO - Scan result: $line | chatgpt_response: $response_text"
-
                           # Append the combined output to the log file
                           echo "$combined_output" >> ${LOG_FILE}
                       fi
@@ -207,7 +205,7 @@ Perform the following steps to install YARA and configure the Active Response an
                   echo "wazuh-YARA: INFO - Scan result: $line" >> ${LOG_FILE}
               fi
           done <<< "$YARA_output"
-
+      
           # If API key was invalid, log a specific message
           if $api_key_invalid; then
               echo "wazuh-YARA: INFO - API key is invalid. ChatGPT response omitted." >> ${LOG_FILE}
@@ -215,7 +213,7 @@ Perform the following steps to install YARA and configure the Active Response an
       else
           echo "wazuh-YARA: INFO - No YARA rule matched." >> ${LOG_FILE}
       fi
-
+      
       exit 0;
 
    .. note::
@@ -278,9 +276,9 @@ Perform the following steps to install Python, YARA, and download YARA rules.
 
    .. note::
       
-      If you use a custom YARA rule, ensure that the description field in the YARA rule metadata is present, as this field is required to enrich the alert with ChatGPT.
+      If you use a custom YARA rule, ensure that the description field in the YARA rule metadata is present, as this field is required to enrich the alert with LLMs.
 
-#. Create a script ``yara.py`` in the ``C:\Program Files (x86)\ossec-agent\active-response\bin\`` directory. This script runs a YARA scan against any file modified or added to the monitored directory. It also queries ChatGPT to enrich the logs and attempts to remove malware files detected by YARA. Replace ``<API_KEY>`` with your `OpenAI API key <https://platform.openai.com/docs/quickstart>`__ and ``<OPENAI_MODEL>`` with your preferred `OpenAI model <https://platform.openai.com/docs/models>`__. The model used in this POC guide is *gpt-4-turbo*:
+#. Create a script ``yara.py`` in the ``C:\Program Files (x86)\ossec-agent\active-response\bin\`` directory. This script runs a YARA scan against any file modified or added to the monitored directory. It also queries the LLM to enrich the logs and attempts to remove malware files detected by YARA.    Replace ``<API_KEY>`` with your `OpenAI API key <https://platform.openai.com/docs/quickstart>`__ , ``<MODEL_NAME>`` with your preferred `OpenAI or custom model name <https://platform.openai.com/docs/models>`__ , and ``<BASE_URL>`` with your `OpenAI API compatible endpoint <https://docs.together.ai/docs/openai-api-compatibility>`__. The model used in this POC guide is *gpt-4-turbo*:
 
    .. code-block:: python
       :emphasize-lines: 7,8
@@ -290,28 +288,38 @@ Perform the following steps to install Python, YARA, and download YARA rules.
       import json
       import re
       import requests
-
+      
       API_KEY = '<API_KEY>'
-      OPENAI_MODEL='<OPENAI_MODEL>' #for example gpt-4-turbo
-
+      OPENAI_MODEL = '<OPENAI_MODEL>'  # for example gpt-4-turbo
+      BASE_URL = '<BASE_URL>'  # default base URL for OpenAI: https://api.openai.com. Some endpoints may need /v1 after the URL.
+      
+      def get_base_url():
+          custom_base_url = input("Enter custom base URL (press enter to use default '{}'): ".format(BASE_URL))
+          if custom_base_url:
+              return custom_base_url
+          else:
+              return BASE_URL
+      
+      BASE_URL = get_base_url()
+      
       # Determine OS architecture and set log file path
       if os.environ['PROCESSOR_ARCHITECTURE'].endswith('86'):
           log_file_path = os.path.join(os.environ['ProgramFiles'], 'ossec-agent', 'active-response', 'active-responses.log')
       else:
           log_file_path = os.path.join(os.environ['ProgramFiles(x86)'], 'ossec-agent', 'active-response', 'active-responses.log')
-
+      
       def log_message(message):
           with open(log_file_path, 'a') as log_file:
               log_file.write(message + '\n')
-
+      
       def read_input():
           return input()
-
+      
       def get_syscheck_file_path(json_file_path):
           with open(json_file_path, 'r') as json_file:
               data = json.load(json_file)
               return data['parameters']['alert']['syscheck']['path']
-
+      
       def run_yara_scan(yara_exe_path, yara_rules_path, syscheck_file_path):
           try:
               result = subprocess.run([yara_exe_path, '-m', yara_rules_path, syscheck_file_path], capture_output=True, text=True)
@@ -319,14 +327,14 @@ Perform the following steps to install Python, YARA, and download YARA rules.
           except Exception as e:
               log_message(f"Error running Yara scan: {str(e)}")
               return None
-
+      
       def extract_description(yara_output):
           match = re.search(r'description="([^"]+)"', yara_output)
           if match:
               return match.group(1)
           else:
               return None
-
+      
       def query_chatgpt(description):
           headers = {
               'Authorization': f'Bearer {API_KEY}',
@@ -341,7 +349,7 @@ Perform the following steps to install Python, YARA, and download YARA rules.
               'frequency_penalty': 0,
               'presence_penalty': 0
           }
-          response = requests.post('https://api.openai.com/v1/chat/completions', headers=headers, json=data)
+          response = requests.post(f'{BASE_URL}/v1/chat/completions', headers=headers, json=data)
           if response.status_code == 200:
               return response.json()['choices'][0]['message']['content']
           elif response.status_code == 401:  # Unauthorized (invalid API key)
@@ -350,23 +358,18 @@ Perform the following steps to install Python, YARA, and download YARA rules.
           else:
               log_message(f"Error querying ChatGPT: {response.status_code} {response.text}")
               return None
-
+      
       def main():
           json_file_path = r"C:\Program Files (x86)\ossec-agent\active-response\stdin.txt"
           yara_exe_path = r"C:\Program Files (x86)\ossec-agent\active-response\bin\yara\yara64.exe"
           yara_rules_path = r"C:\Program Files (x86)\ossec-agent\active-response\bin\yara\rules\yara_rules.yar"
-
           input_data = read_input()
-
           with open(json_file_path, 'w') as json_file:
               json_file.write(input_data)
-
           syscheck_file_path = get_syscheck_file_path(json_file_path)
-
           yara_output = run_yara_scan(yara_exe_path, yara_rules_path, syscheck_file_path)
           if yara_output is not None:
               description = extract_description(yara_output)
-
               if description:
                   chatgpt_response = query_chatgpt(description)
                   if chatgpt_response:
@@ -375,7 +378,6 @@ Perform the following steps to install Python, YARA, and download YARA rules.
                   else:
                       # Log the Yara scan result without the ChatGPT response
                       log_message(f"wazuh-YARA: INFO - Scan result: {yara_output} | chatgpt_response: None")
-
                   # Delete the scanned file if a description is found
                   try:
                       os.remove(syscheck_file_path)
@@ -389,7 +391,7 @@ Perform the following steps to install Python, YARA, and download YARA rules.
                   log_message("Failed to extract description from Yara output.")
           else:
               log_message("Yara scan returned no output.")
-
+      
       if __name__ == "__main__":
           main()
 
@@ -637,11 +639,11 @@ Run the following commands on the Ubuntu endpoint to download malware samples to
 
 You can visualize the alert data in the Wazuh dashboard. To do this, go to the **Modules** > **Security events** tab and add the ``rule.groups:yara`` filter in the search bar to query the alerts.
 
-As seen in the image, ChatGPT provides more context to the malicious file detected by YARA. Further insight such as origin, attack vectors, and impact of the malicious file can be seen in the ``yara.chatgpt_response`` field.
+As seen in the image, the LLM provides more context to the malicious file detected by YARA. Further insight such as origin, attack vectors, and impact of the malicious file can be seen in the ``yara.chatgpt_response`` field.
 
 .. thumbnail:: /images/poc/chatgpt_response-ubuntu-alert.png
-   :title: ChatGPT context in alert with YARA
-   :alt: ChatGPT context in alert with YARA
+   :title: LLM context in alert with YARA
+   :alt: LLM context in alert with YARA
    :align: center
    :width: 80%
 
@@ -651,11 +653,11 @@ As seen in the image, ChatGPT provides more context to the malicious file detect
    :align: center
    :width: 80%
 
-The below image shows an example of an alert triggered when the provided ChatGPT API key is invalid or a matched YARA rule does not contain a description.
+The below image shows an example of an alert triggered when the provided OpenAI API API key is invalid or a matched YARA rule does not contain a description.
 
 .. thumbnail:: /images/poc/chatgpt_response-none-ubuntu-alert.png
-   :title: ChatGPT context none in alert with YARA
-   :alt: ChatGPT context none in alert with YARA
+   :title: LLM context none in alert with YARA
+   :alt: LLM context none in alert with YARA
    :align: center
    :width: 80%
 
@@ -674,11 +676,11 @@ You can visualize the alert data in the Wazuh dashboard. To do this, go to the *
 
 -  ``rule.groups:yara``
 
-As seen in the image, ChatGPT provides more context to the malicious file detected by YARA. Further insight, such as origin, attack vectors, and impact of the malicious file, can be seen in the ``yara.chatgpt_response`` field.
+As seen in the image, the LLM provides more context to the malicious file detected by YARA. Further insight, such as origin, attack vectors, and impact of the malicious file, can be seen in the ``yara.chatgpt_response`` field.
 
 .. thumbnail:: /images/poc/chatgpt_response-windows-alert.png
-   :title: ChatGPT context in alert with YARA
-   :alt: ChatGPT context in alert with YARA
+   :title: LLM context in alert with YARA
+   :alt: LLM context in alert with YARA
    :align: center
    :width: 80%
 
@@ -688,10 +690,10 @@ As seen in the image, ChatGPT provides more context to the malicious file detect
    :align: center
    :width: 80%
 
-The below image shows an example of an alert triggered when the provided ChatGPT API key is invalid or a matched YARA rule does not contain a description.
+The below image shows an example of an alert triggered when the provided OpenAI API API key is invalid or a matched YARA rule does not contain a description.
 
 .. thumbnail:: /images/poc/chatgpt_response-none-windows-alert.png
-   :title: ChatGPT context none in alert with YARA
-   :alt: ChatGPT context none in alert with YARA
+   :title: LLM context none in alert with YARA
+   :alt: LLM context none in alert with YARA
    :align: center
    :width: 80%
