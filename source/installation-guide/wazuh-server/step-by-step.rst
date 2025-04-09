@@ -26,7 +26,7 @@ Adding the Wazuh repository
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
   .. note::
-    If you are installing the Wazuh server on the same host as the Wazuh indexer, you may skip these steps as you may have added the Wazuh repository already.
+    If you are installing the Wazuh server on the same host as the Wazuh indexer, you may skip these steps provided the Wazuh repository is already configured and enabled.
 
   ..
     Add the Wazuh repository to download the official Wazuh packages. As an alternative, you can download the Wazuh packages directly from :doc:`../packages-list`.
