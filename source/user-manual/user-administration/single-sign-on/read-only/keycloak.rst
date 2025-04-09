@@ -6,15 +6,15 @@
 Keycloak
 ========
 
-`Keycloak <https://www.keycloak.org/>`_ is an open source identity and access management tool. It provides user federation, strong authentication, user management, and fine-grained authorization for modern applications and services. In this guide, we integrate the KeyCloak IdP to authenticate users into the Wazuh platform.
+`Keycloak <https://www.keycloak.org/>`_ is an open source identity and access management tool. It provides user federation, strong authentication, user management, and fine-grained authorization for modern applications and services. In this guide, we integrate the Keycloak IdP to authenticate users into the Wazuh platform.
 
 There are three stages in the single sign-on integration:
 
-#. `KeyCloak configuration`_
+#. `Keycloak configuration`_
 #. `Wazuh indexer configuration`_
 #. `Wazuh dashboard configuration`_
 
-KeyCloak configuration
+Keycloak configuration
 ----------------------
 
 #. Create a new realm. Log in to the Keycloak admin console, expand the **master** drop-down menu and click **Add Realm**. Input a name in the **Realm name** field; in our case, this is named ``Wazuh``. Click on **Create** to apply this configuration.
