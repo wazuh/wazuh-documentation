@@ -46,6 +46,8 @@ Technical FAQ
 
 - `What are the available regions?`_
 
+- `What status can my environment have?`_
+
 How can I send data to my environment?
 --------------------------------------
 
@@ -165,3 +167,26 @@ Available regions:
 * Canada: ``ca-central-1``
 
 When selecting a region to host your environment, if you are not sure which one is the best option for you, select one that is the closest to your location since this typically reduces latency for indexing and search requests.
+
+What status can my environment have?
+------------------------------------
+
+      +---------------+---------------------------------------------------------------------------------------------------+
+      | Status        | Description                                                                                       |
+      +===============+===================================================================================================+
+      | Creating      | Your environment is being created.                                                                |
+      +---------------+---------------------------------------------------------------------------------------------------+
+      | Ready         | Your environment was successfully created and is ready to be used.                                |
+      +---------------+---------------------------------------------------------------------------------------------------+
+      | Failed        | The creation of your environment failed.                                                          |
+      +---------------+---------------------------------------------------------------------------------------------------+
+      | Maintenance   | Your environment is under maintenance and will be available again once completed.                 |
+      +---------------+---------------------------------------------------------------------------------------------------+
+      | Suspending    | Your environment is being temporarily suspended due to lack of payment.                           |
+      +---------------+---------------------------------------------------------------------------------------------------+
+      | Suspended     | Your environment is currently suspended.                                                          |
+      +---------------+---------------------------------------------------------------------------------------------------+
+      | Resuming      | Your environment is being resumed after suspension and will be available again upon completion.   |
+      +---------------+---------------------------------------------------------------------------------------------------+
+      | Terminated    | Your environment has been deleted.                                                                |
+      +---------------+---------------------------------------------------------------------------------------------------+
