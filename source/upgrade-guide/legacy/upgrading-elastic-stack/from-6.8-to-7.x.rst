@@ -201,16 +201,12 @@ Upgrading Filebeat
 
       .. group-tab:: YUM
 
-        .. code-block:: console
-
-          # yum install filebeat-|ELASTICSEARCH_LATEST|
+         .. include:: /_templates/installations/filebeat/common/yum/install_filebeat.rst
 
 
       .. group-tab:: APT
 
-        .. code-block:: console
-
-          # apt-get install filebeat=|ELASTICSEARCH_LATEST|
+         .. include:: /_templates/installations/filebeat/common/apt/install_filebeat.rst
 
       .. group-tab:: ZYpp
 
