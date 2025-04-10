@@ -228,11 +228,15 @@ The following steps need to be run in the Wazuh server or servers in the case of
 
       .. group-tab:: Yum
 
-         .. include:: /_templates/installations/filebeat/common/yum/install_filebeat.rst
+        .. code-block:: console
+
+          # yum install filebeat-|ELASTICSEARCH_ELK_LATEST|
 
       .. group-tab:: APT
 
-         .. include:: /_templates/installations/filebeat/common/apt/install_filebeat.rst
+        .. code-block:: console
+
+          # apt-get install filebeat=|ELASTICSEARCH_ELK_LATEST|
         
         It's recommended to keep your currently installed version of the configuration file (option N or O if prompted).  
 
