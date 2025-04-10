@@ -125,11 +125,15 @@ Install and configure Filebeat
 
       .. group-tab:: YUM
 
-         .. include:: /_templates/installations/filebeat/common/yum/install_filebeat.rst
+         .. code-block:: console
+                  
+            # yum -y install filebeat|FILEBEAT_LATEST_YUM_PKG_INSTALL|
 
       .. group-tab:: APT
 
-         .. include:: /_templates/installations/filebeat/common/apt/install_filebeat.rst
+         .. code-block:: console
+                  
+            # apt-get -y install filebeat|FILEBEAT_LATEST_APT_PKG_INSTALL|
 
 #. Download the preconfigured Filebeat configuration file:
 
