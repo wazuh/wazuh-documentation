@@ -2,7 +2,6 @@
 
 .. code-block:: console
 
-   # curl -O https://packages.wazuh.com/4.x/apt/pool/main/f/filebeat/filebeat-oss-7.10.2-amd64.deb
-   # apt install ./filebeat-oss-7.10.2-amd64.deb
+  # apt-get install filebeat=7.17.13
 
 .. End of include file
