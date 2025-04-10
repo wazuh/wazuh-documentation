@@ -2,6 +2,6 @@
 
 .. code-block:: console
 
-   # yum install https://packages.wazuh.com/4.x/yum/filebeat-oss-7.10.2-x86_64.rpm
+  # yum install filebeat-7.17.13
 
 .. End of include file
