@@ -1044,15 +1044,11 @@ Install and configure Filebeat
 
       .. group-tab:: YUM
 
-         .. code-block:: console
-
-            # yum -y install filebeat
+         .. include:: /_templates/installations/filebeat/common/yum/install_filebeat.rst
 
       .. group-tab:: APT
 
-         .. code-block:: console
-
-            # apt-get -y install filebeat
+         .. include:: /_templates/installations/filebeat/common/apt/install_filebeat.rst
 
 #. Download the preconfigured Filebeat configuration file:
 
