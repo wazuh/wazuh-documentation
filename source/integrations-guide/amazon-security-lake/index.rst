@@ -155,7 +155,7 @@ Install Logstash on a dedicated server or on the server hosting the Wazuh Indexe
 
    .. code-block:: console
 
-      $ sudo chmod -R 755 </PATH/TO/WAZUH_INDEXER/CERTIFICATE>/root-ca.pem
+      $ sudo chmod 755 </PATH/TO/LOGSTASH_CERTS>/root-ca.pem
 
 Configuring the Logstash pipeline
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -186,7 +186,7 @@ The Logstash pipeline requires access to the following secrets:
               user  =>  "${INDEXER_USERNAME}"
               password  =>  "${INDEXER_PASSWORD}"
               ssl => true
-              ca_file => "</PATH/TO/WAZUH_INDEXER/CERTIFICATE>/root-ca.pem"
+              ca_file => "</PATH/TO/LOGSTASH_CERTS>/root-ca.pem"
               index =>  "wazuh-alerts-4.x-*"
               query =>  '{
                   "query": {
