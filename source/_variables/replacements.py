@@ -154,6 +154,9 @@ custom_replacements = {
     "|FILEBEAT_LATEST|" : "7.10.2",
     "|FILEBEAT_LATEST_AMI|" : "7.10.2",
     "|FILEBEAT_LATEST_OVA|" : "7.10.2",
+    "|FILEBEAT_CURRENT_REV|" : "1",
+    "|FILEBEAT_LATEST_APT_PKG_INSTALL|" : "7.10.2",
+    "|FILEBEAT_LATEST_YUM_PKG_INSTALL|" : "7.10.2",
     # --- Open Distro for Elasticsearch
     "|OPEN_DISTRO_LATEST|" : "1.13.2",
     # --- Elasticsearch
@@ -181,6 +184,8 @@ if is_latest_release:
     custom_replacements["|WAZUH_AGENT_RPM_PKG_INSTALL|"] = ''
     custom_replacements["|WAZUH_AGENT_DEB_PKG_INSTALL|"] = ''
     custom_replacements["|WAZUH_AGENT_ZYPP_PKG_INSTALL|"] = ''
+    custom_replacements["|FILEBEAT_LATEST_APT_PKG_INSTALL|"] = ''
+    custom_replacements["|FILEBEAT_LATEST_YUM_PKG_INSTALL|"] = ''
 else:
     custom_replacements["|WAZUH_INDEXER_RPM_PKG_INSTALL|"] = '-' + custom_replacements["|WAZUH_CURRENT|"] + '-' + custom_replacements["|WAZUH_INDEXER_CURRENT_REV|"]
     custom_replacements["|WAZUH_MANAGER_RPM_PKG_INSTALL|"] = '-' + custom_replacements["|WAZUH_CURRENT|"] + '-' + custom_replacements["|WAZUH_REVISION_YUM_MANAGER_X86|"]
@@ -191,3 +196,5 @@ else:
     custom_replacements["|WAZUH_AGENT_RPM_PKG_INSTALL|"] = '-' + custom_replacements["|WAZUH_CURRENT|"] + '-' + custom_replacements["|WAZUH_REVISION_YUM_AGENT_X86|"]
     custom_replacements["|WAZUH_AGENT_DEB_PKG_INSTALL|"] = '=' + custom_replacements["|WAZUH_CURRENT|"] + '-' + custom_replacements["|WAZUH_REVISION_DEB_AGENT_X86|"]
     custom_replacements["|WAZUH_AGENT_ZYPP_PKG_INSTALL|"] = '-' + custom_replacements["|WAZUH_CURRENT|"] + '-' + '1'
+    custom_replacements["|FILEBEAT_LATEST_APT_PKG_INSTALL|"] = '=' + custom_replacements["|FILEBEAT_LATEST_APT_PKG_INSTALL|"] + '-' + custom_replacements["|FILEBEAT_CURRENT_REV|"]
+    custom_replacements["|FILEBEAT_LATEST_YUM_PKG_INSTALL|"] = '-' + custom_replacements["|FILEBEAT_LATEST_YUM_PKG_INSTALL|"] + '-' + custom_replacements["|FILEBEAT_CURRENT_REV|"]

@@ -4,9 +4,9 @@
 
    **Recommended Action**: Disable Wazuh Updates.
 
-   We recommend disabling the Wazuh package repositories after installing all components on this server to prevent accidental upgrades.
+   We recommend disabling the Wazuh package repositories after installation to prevent accidental upgrades that could break the environment.
 
-   Execute the following command only after completing all installations:
+   Execute the following command to disable the Wazuh repository:
 
    .. tabs::
 
