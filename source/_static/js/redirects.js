@@ -81,6 +81,7 @@ newUrls['4.13'] = [
 
 newUrls['4.12'] = [
   '/release-notes/release-4-12-0.html',
+  '/release-notes/release-4-12-1.html',
 ]
 
 /* *** RELEASE 4.11 ****/

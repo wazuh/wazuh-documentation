@@ -13,9 +13,9 @@ There are three stages in the single sign-on integration.
 #. Microsoft Entra ID Configuration
 #. Wazuh indexer configuration
 #. Wazuh dashboard configuration
-   
+
  .. note::
-    You may have to request a free trial at least to complete the configuration. 
+    You may have to request a free trial at least to complete the configuration.
 
 Microsoft Entra ID Configuration
 --------------------------------
@@ -24,7 +24,7 @@ Microsoft Entra ID Configuration
 #. Go to `Microsoft Azure Portal <https://portal.azure.com/>`_ and sign in with your Microsoft account.
 #. Create an app in **Microsoft Entra ID**.
 
-   #. Go to **Microsoft Entra ID** > **Enterprise applications** > **New application** and **Create your own application**. 
+   #. Go to **Microsoft Entra ID** > **Enterprise applications** > **New application** and **Create your own application**.
 
    #. Select **Integrate any other application you don't find in the gallery**. Give a name to your application and click **Add**. In our case, we name this application ``wazuh-sso``.
 
@@ -42,41 +42,27 @@ Microsoft Entra ID Configuration
          :align: center
          :width: 80%
 
-   #. Select your new app under **All applications** and **click Manifest**.
+   #. Select your new app under **All applications** and click **App roles**.
 
       .. thumbnail:: /images/single-sign-on/azure-active-directory/03-select-your-new-apps.png
          :title: Select your new app
          :align: center
          :width: 80%
 
-   #. Add a new role to your application's **Manifest**:
+   #. Add the following details to your app role:
 
-      .. code-block:: console
-
-         {
-            "allowedMemberTypes": [
-               "User"
-            ],
-            "description": "Wazuh role",
-            "displayName": "Wazuh_role",
-            "id": "<application_id>",
-            "isEnabled": true,
-            "lang": null,
-            "origin": "Application",
-            "value": "Wazuh_role"
-         },
-   
-      - ``description``: can be any value that you want.
-      - ``id``: should be the ID of your application. You can find it in the application's overview menu or at the top of the Manifest in the field ``appId``.
-      - ``value``: defines the name of the role. In this case, ``Wazuh_role``, which will be the value for the role to be mapped on the ``roles_mapping.yml`` file.
-      - ``displayName``: can be the same as ``value``.
+      -  **Display name**: This can be any value that you want. In our case this is ``Wazuh role``.
+      -  **Allowed member types**: Select **Users/Groups**.
+      -  **Value**: Defines the name of the role. In this case ``Wazuh_role``, which will be the backend role value to be mapped in the ``roles_mapping.yml`` file.
+      -  **Description**: This can be any value that you want. In our case this is ``Wazuh Admin Role``.
+      -  **Do you want to enable this app role**: Click on the checkmark to enable the role.
 
       .. thumbnail:: /images/single-sign-on/azure-active-directory/04-add-a-new-role.png
          :title: Add a new role to your application's Manifest
          :align: center
          :width: 80%
 
-   #. Save the changes and proceed to the next step.
+   #. Click **Apply** to save the changes and proceed to the next step.
 
 #. Assign a user to the app.
 
