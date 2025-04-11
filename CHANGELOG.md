@@ -5,24 +5,42 @@ All notable changes to this project will be documented in this file.
 
 - Support for Wazuh 4.13.0
 
+# [v4.12.1]
+
+- Support for Wazuh 4.12.1
+
 ## [v4.12.0]
 
 ### Added
 
 - Added reference to macOS arm64 WPK. ([#7883](https://github.com/wazuh/wazuh-documentation/pull/7883))
-- Add Ubuntu 24.04 SCA to list of available SCAs. ([#8021](https://github.com/wazuh/wazuh-documentation/pull/8021))
+- Added Ubuntu 24.04 SCA to the list of available SCAs. ([#8021](https://github.com/wazuh/wazuh-documentation/pull/8021))
+- Added the `<aws_profile>` authentication parameter to the Amazon Security Lake documentation. ([#8199](https://github.com/wazuh/wazuh-documentation/pull/8199))
+- Added ARM64 to the central components architecture references. ([#8173](https://github.com/wazuh/wazuh-documentation/pull/8173))
 
 ### Changed
 
 - Updated Wazuh dashboard package generation guide. ([#7961](https://github.com/wazuh/wazuh-documentation/pull/7961))
 - Updated images in FIM PoC. [#7979](https://github.com/wazuh/wazuh-documentation/pull/7979)
-- Replaced the ``--version`` parameter with ``--commit-sha`` in the Wazuh dashboard package generation guide. ([#8216](https://github.com/wazuh/wazuh-documentation/pull/8216))
+- Replaced the `--version` parameter with `--commit-sha` in the Wazuh dashboard package generation guide. ([#8216](https://github.com/wazuh/wazuh-documentation/pull/8216))
+- Updated the Filebeat package references in Packages list. ([#8348](https://github.com/wazuh/wazuh-documentation/pull/8348))
+- Updated Microsoft Entra ID SSO setup steps for the administrator role. ([#8399](https://github.com/wazuh/wazuh-documentation/pull/8399))
+- Updated filebeat installation commands ([#8410](https://github.com/wazuh/wazuh-documentation/pull/8410))
 
 ## [v4.11.2]
 
 ### Added
 
 - Added the ``authentication_pool_size`` option to the Wazuh server API configuration section. ([#8287](https://github.com/wazuh/wazuh-documentation/pull/8287))
+
+### Changed
+
+- **Post-release**: Clarified the conditions for the Wazuh repository disabling recommendation upon installation. ([#8408](https://github.com/wazuh/wazuh-documentation/pull/8408))
+- **Post-release**: Updated certificate location reference for Logstash and file permissions change command. ([#8415](https://github.com/wazuh/wazuh-documentation/pull/8415))
+
+### Fixed
+
+- **Post-release**: Added missing Oracle Linux to the vulnerability detection compatibility matrix and fixed heading level. ([#8391](https://github.com/wazuh/wazuh-documentation/pull/8391))
 
 ## [v4.11.1]
 
@@ -43,6 +61,8 @@ All notable changes to this project will be documented in this file.
 - Updated note about uninstalling Wazuh agents in Solaris. ([#7925](https://github.com/wazuh/wazuh-documentation/pull/7925))
 - Updated screenshots from System Inventory.  ([#8044](https://github.com/wazuh/wazuh-documentation/pull/8044))
 - Updated the Virtual Machine (OVA) and Amazon Machine Images (AMI) sections. Updated the operating system component to AL2023. ([#8201](https://github.com/wazuh/wazuh-documentation/pull/8201))
+- **Post-release**: Updated the explanation of the `frequency` option in the `localfile` documentation.
+- **Post-release**: Updated the Filebeat installation commands. ([#8390](https://github.com/wazuh/wazuh-documentation/pull/8390))
 
 ### Removed
 
