@@ -26,7 +26,7 @@ Adding the Wazuh repository
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
   .. note::
-    If you are installing the Wazuh server on the same host as the Wazuh indexer, you may skip these steps as you may have added the Wazuh repository already.
+    If you are installing the Wazuh server on the same host as the Wazuh indexer, you may skip these steps only if the Wazuh repository is already configured and enabled.
 
   ..
     Add the Wazuh repository to download the official Wazuh packages. As an alternative, you can download the Wazuh packages directly from :doc:`../packages-list`.
@@ -81,14 +81,17 @@ Installing Filebeat
         .. group-tab:: Yum
 
 
-          .. include:: /_templates/installations/filebeat/common/yum/install_filebeat.rst
-
-
+         .. code-block:: console
+         
+             # yum -y install filebeat|FILEBEAT_LATEST_YUM_PKG_INSTALL|
+             
 
         .. group-tab:: APT
 
 
-          .. include:: /_templates/installations/filebeat/common/apt/install_filebeat.rst
+          .. code-block:: console
+          
+              # apt-get -y install filebeat|FILEBEAT_LATEST_APT_PKG_INSTALL|
 
 
 .. _installation_configuring_filebeat:
