@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 ### Changed
 
 - **Post-release**: Clarified the conditions for the Wazuh repository disabling recommendation upon installation. ([#8408](https://github.com/wazuh/wazuh-documentation/pull/8408))
+- **Post-release**: Updated certificate location reference for Logstash and file permissions change command. ([#8415](https://github.com/wazuh/wazuh-documentation/pull/8415))
 
 ### Fixed
 
