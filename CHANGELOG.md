@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file.
 
 - **Post-release**: Clarified the conditions for the Wazuh repository disabling recommendation upon installation. ([#8408](https://github.com/wazuh/wazuh-documentation/pull/8408))
 - **Post-release**: Updated certificate location reference for Logstash and file permissions change command. ([#8415](https://github.com/wazuh/wazuh-documentation/pull/8415))
+- **Post-release**: Updated Vulnerability Detection Proof of Concept. ([#8422](https://github.com/wazuh/wazuh-documentation/pull/8422))
 
 ### Fixed
 
@@ -37,7 +38,6 @@ All notable changes to this project will be documented in this file.
 - Updated the Virtual Machine (OVA) and Amazon Machine Images (AMI) sections. Updated the operating system component to AL2023. ([#8201](https://github.com/wazuh/wazuh-documentation/pull/8201))
 - **Post-release**: Updated the explanation of the `frequency` option in the `localfile` documentation.
 - **Post-release**: Updated the Filebeat installation commands. ([#8390](https://github.com/wazuh/wazuh-documentation/pull/8390))
-- **Post-release**: Updated Vulnerability Detection Proof of Concept. ([#8422](https://github.com/wazuh/wazuh-documentation/pull/8422))
 
 ### Removed
 
