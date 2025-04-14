@@ -19,11 +19,11 @@ By default, the indexer settings have one host configured. It's set to ``0.0.0.0
      </ssl>
    </indexer>
 
-Replace ``0.0.0.0`` with your Wazuh indexer node IP address or hostname. You can find this value in the Filebeat config file ``/etc/filebeat/filebeat.yml``.
+- Replace ``0.0.0.0`` with your Wazuh indexer node IP address or hostname. You can find this value in the Filebeat config file ``/etc/filebeat/filebeat.yml``.
 
-Ensure the Filebeat certificate and key name match the certificate files in ``/etc/filebeat/certs``.
+- Ensure the Filebeat certificate and key name match the certificate files in ``/etc/filebeat/certs``.
 
-If you are running a cluster infrastructure, add a ``<host>`` entry for each one of your nodes. For example, in a two-nodes configuration:
+If you are running a cluster infrastructure, add a ``<host>`` entry for each one of your nodes. For example, in a two-node configuration:
 
 .. code-block:: xml
 
