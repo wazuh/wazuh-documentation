@@ -46,6 +46,9 @@ Toggles the active-response capability on and off. Setting this option to ``yes`
 .. note::
 
     This option is available on the server, local, and agent installations.
+    
+.. important::
+   This field is mandatory within each ``<active-response>`` block. It must be explicitly set to either ``yes`` or ``no``.
 
 +--------------------+------------+
 | **Default value**  | no         |
