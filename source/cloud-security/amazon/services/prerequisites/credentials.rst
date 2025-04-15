@@ -31,33 +31,42 @@ In this section, we describe the several methods of adding the AWS credentials t
 Profiles
 ^^^^^^^^
 
-Profiles represent logical groups of configuration. You can set up multiple profiles in the ``/root/.aws/credentials`` file. Each profile defines the access keys for a :ref:`previously created IAM user <iam_identities_create_iam_user>` and an AWS region. After setting up the profiles in the ``/root/.aws/credentials`` file, you must define which profile the Wazuh module for AWS will use to collect logs from AWS services.
+Profiles are logical groups of configuration settings. You can set up multiple profiles in the following files.
 
-.. note::
+-  ``/root/.aws/credentials``: Each profile defines the access keys for a :ref:`previously created IAM user <iam_identities_create_iam_user>`.
+-  ``/root/.aws/config``: Each corresponding profile specifies an AWS region.
 
-   An AWS region must be specified on the ``credentials`` file to make it work.
-
-In the example below, the ``/root/.aws/credentials`` file defines the *default*, *dev*, and *prod* profiles.
+In the example below, the ``/root/.aws/credentials`` file defines the ``default``, ``dev``, and ``prod`` profiles.
 
 .. code-block:: ini
-   :emphasize-lines: 1,6,11
+   :emphasize-lines: 1,5,9
 
    [default]
    aws_access_key_id=foo
    aws_secret_access_key=bar
-   region=us-east-1
 
    [dev]
    aws_access_key_id=foo2
    aws_secret_access_key=bar2
-   region=us-east-1
 
    [prod]
    aws_access_key_id=foo3
    aws_secret_access_key=bar3
-   region=us-east-1
 
-It is necessary to configure the Wazuh module for AWS using the ``/var/ossec/etc/ossec.conf`` file of the Wazuh server or agent. In the example below, we configure the Wazuh module for AWS to pull Amazon CloudTrail logs from the specified bucket using the *prod* profile.
+The ``/root/.aws/config`` file specifies the AWS region for each profile:
+
+.. code-block:: ini
+
+   [profile default]
+   region = us-east-1
+
+   [profile dev]
+   region = us-east-1
+
+   [profile prod]
+   region = us-east-1
+
+After setting up the profiles, define which one the Wazuh module for AWS will use to collect logs. Configure this in the ``/var/ossec/etc/ossec.conf`` file of the Wazuh server or agent. The example below configures the module to pull Amazon CloudTrail logs from the specified bucket using the ``prod`` profile.
 
 .. code-block:: xml
 
