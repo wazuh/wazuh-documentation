@@ -57,7 +57,7 @@ The ``/root/.aws/config`` file specifies the AWS region for each profile:
 
 .. code-block:: ini
 
-   [profile default]
+   [default]
    region = us-east-1
 
    [profile dev]
