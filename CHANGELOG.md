@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file.
 - Added Ubuntu 24.04 SCA to the list of available SCAs. ([#8021](https://github.com/wazuh/wazuh-documentation/pull/8021))
 - Added the `<aws_profile>` authentication parameter to the Amazon Security Lake documentation. ([#8199](https://github.com/wazuh/wazuh-documentation/pull/8199))
 - Added ARM64 to the central components architecture references. ([#8173](https://github.com/wazuh/wazuh-documentation/pull/8173))
+- Added a note warning that downgrades to 4.11 and earlier versions from 4.12 and later are not possible. ([#8425](https://github.com/wazuh/wazuh-documentation/pull/8425))
 
 ### Changed
 
