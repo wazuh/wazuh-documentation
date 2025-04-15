@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file.
 - Added Ubuntu 24.04 SCA to the list of available SCAs. ([#8021](https://github.com/wazuh/wazuh-documentation/pull/8021))
 - Added the `<aws_profile>` authentication parameter to the Amazon Security Lake documentation. ([#8199](https://github.com/wazuh/wazuh-documentation/pull/8199))
 - Added ARM64 to the central components architecture references. ([#8173](https://github.com/wazuh/wazuh-documentation/pull/8173))
+- Added a note warning that downgrades to 4.11 and earlier versions from 4.12 and later are not possible. ([#8425](https://github.com/wazuh/wazuh-documentation/pull/8425))
 
 ### Changed
 
@@ -17,7 +18,8 @@ All notable changes to this project will be documented in this file.
 - Replaced the `--version` parameter with `--commit-sha` in the Wazuh dashboard package generation guide. ([#8216](https://github.com/wazuh/wazuh-documentation/pull/8216))
 - Updated the Filebeat package references in Packages list. ([#8348](https://github.com/wazuh/wazuh-documentation/pull/8348))
 - Updated Microsoft Entra ID SSO setup steps for the administrator role. ([#8399](https://github.com/wazuh/wazuh-documentation/pull/8399)) ([#8424](https://github.com/wazuh/wazuh-documentation/pull/8424))
-- Updated filebeat installation commands ([#8410](https://github.com/wazuh/wazuh-documentation/pull/8410))
+- Updated filebeat installation commands. ([#8410](https://github.com/wazuh/wazuh-documentation/pull/8410))
+- Updated the *Profiles* section in *Configuring AWS credentials*. ([#8426](https://github.com/wazuh/wazuh-documentation/pull/8426))
 
 ## [v4.11.2]
 
