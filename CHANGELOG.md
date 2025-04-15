@@ -11,7 +11,7 @@ All notable changes to this project will be documented in this file.
 
 - **Post-release**: Clarified the conditions for the Wazuh repository disabling recommendation upon installation. ([#8408](https://github.com/wazuh/wazuh-documentation/pull/8408))
 - **Post-release**: Updated certificate location reference for Logstash and file permissions change command. ([#8415](https://github.com/wazuh/wazuh-documentation/pull/8415))
-- **Post-release**: Include command to checkout to current branch in amazon security lake documentation. ([#8423](https://github.com/wazuh/wazuh-documentation/pull/8423))
+- **Post-release**: Included checkout command in Amazon Security Lake integration guide. ([#8423](https://github.com/wazuh/wazuh-documentation/pull/8423))
 
 ### Fixed
 
