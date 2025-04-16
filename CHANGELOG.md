@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 - Added the ``authentication_pool_size`` option to the Wazuh server API configuration section. ([#8287](https://github.com/wazuh/wazuh-documentation/pull/8287))
-- Added note that `<disabled>` is required in `active-response` blocks in **use case** and **active response reference** sections. ([#8428](https://github.com/wazuh/wazuh-documentation/pull/8428))
+- Added clarifications that `<disabled>` is required in `active-response` blocks in *Use cases* and *Active response* reference sections. ([#8428](https://github.com/wazuh/wazuh-documentation/pull/8428))
 
 ### Changed
 

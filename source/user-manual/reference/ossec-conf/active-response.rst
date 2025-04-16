@@ -49,7 +49,6 @@ This field is mandatory in every ``<active-response>`` block. You must explicitl
 
     This option is available on the server, local, and agent installations.
 
-
 +--------------------+------------+
 | **Allowed values** | yes, no    |
 +--------------------+------------+
