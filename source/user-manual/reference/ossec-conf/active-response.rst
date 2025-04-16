@@ -51,8 +51,6 @@ This field is mandatory in every ``<active-response>`` block. You must explicitl
 
 
 +--------------------+------------+
-| **Default value**  | no         |
-+--------------------+------------+
 | **Allowed values** | yes, no    |
 +--------------------+------------+
 
