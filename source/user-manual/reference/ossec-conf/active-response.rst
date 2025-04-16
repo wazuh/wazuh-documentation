@@ -43,12 +43,12 @@ disabled
 
 Toggles the active-response capability on and off. Setting this option to ``yes`` on an agent will disable active-response for that agent only while setting it in the manager ``ossec.conf`` file will disable active-response on the manager and all agents.
 
+This field is mandatory in every ``<active-response>`` block, and has a default value of ``no``. You must explicitly set it to either ``yes`` or ``no`` to ensure the configuration works properly.
+
 .. note::
 
     This option is available on the server, local, and agent installations.
-    
-.. important::
-   This field is mandatory within each ``<active-response>`` block. It must be explicitly set to either ``yes`` or ``no``.
+
 
 +--------------------+------------+
 | **Default value**  | no         |
