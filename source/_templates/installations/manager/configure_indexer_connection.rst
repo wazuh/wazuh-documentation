@@ -1,6 +1,6 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
-The Wazuh indexer connection is properly configured. By default, the indexer settings have one host configured. It's set to ``0.0.0.0`` as highlighted below.
+By default, the indexer settings have one host configured. It's set to ``0.0.0.0`` as highlighted below.
 
 .. code-block:: xml
    :emphasize-lines: 4
