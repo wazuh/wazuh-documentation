@@ -93,8 +93,9 @@ Follow the `official documentation <https://docs.aws.amazon.com/lambda/latest/dg
 
    .. code-block:: console
 
-      $ git clone https://github.com/wazuh/wazuh-indexer.git
-      $ cd wazuh-indexer/integrations/amazon-security-lake
+      $ git clone https://github.com/wazuh/wazuh-indexer.git && cd wazuh-indexer
+      $ git checkout v|WAZUH_CURRENT|
+      $ cd integrations/amazon-security-lake
       $ make
 
 #. Configure the Lambda with these environment variables.
