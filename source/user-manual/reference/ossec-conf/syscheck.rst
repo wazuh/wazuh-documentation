@@ -946,6 +946,8 @@ The Whodata options will be configured inside this tag.
         <queue_size>100000</queue_size>
     </whodata>
 
+.. _syscheck_whodata_provider:
+
 **provider**
 
 Specifies the who-data mode used by the FIM module. If the ``<provider>`` tag is not configured, the FIM module defaults to the ``audit`` mode. If the provider is set to ``ebpf`` but unavailable due to kernel version incompatibility, it also falls back to the ``audit`` mode. This option is only available for Linux endpoints.
