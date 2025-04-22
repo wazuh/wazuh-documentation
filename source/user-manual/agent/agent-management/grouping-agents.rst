@@ -53,11 +53,11 @@ The :doc:`agent_groups </user-manual/reference/tools/agent-groups>` tool offers 
 .. note::
    
    You need root user privileges to execute the commands below.
-   
+
 .. code-block:: console
-   
-   /var/ossec/bin/agent_groups -a -g <GROUP_ID> -q
-   
+
+   # /var/ossec/bin/agent_groups -a -g <GROUP_ID> -q
+
 Where:
 
 -  The flag ``-a`` ``-g`` adds a group.
@@ -107,7 +107,7 @@ The Wazuh API
 
 Using the :doc:`Wazuh API </user-manual/api/reference>` to create and manage groups programmatically is effective for automating group management tasks. Perform the steps below to create agent groups using the Wazuh API:
 
-#. On the Wazuh dashboard, navigate to Server management, and select Dev Tools.  
+#. On the Wazuh dashboard, navigate to **Server management**, and select **Dev Tools**.
 
 #. Run the queries below to create the agent groups ``Windows``, ``macOS``, and ``Linux``:
 
