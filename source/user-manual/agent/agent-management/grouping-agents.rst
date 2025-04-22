@@ -38,7 +38,7 @@ To create agent groups from the Wazuh dashboard:
 
 #. Enter a name for the agent group and click on the **Save new group** button.
 
-.. thumbnail:: /images/manual/agent/new-group-agent-api.gif
+.. thumbnail:: /images/manual/agent/new-group-agent-dashboard.gif
    :title: Creating an agent in Wazuh Dashboard
    :align: center
    :width: 100%
