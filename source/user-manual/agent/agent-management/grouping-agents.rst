@@ -124,7 +124,7 @@ Using the :doc:`Wazuh API </user-manual/api/reference>` to create and manage gro
       
 #.  You can also use the command line interface to create agent groups via the Wazuh API. The equivalent command to run from the console with root user privileges to create the ``Linux`` group would be:
    
-   .. code-block:: none
+   .. code-block:: console
          
       # curl -k -X POST "https://<WAZUH_MANAGER_IP>:55000/groups?pretty=true" -H "Content-Type: application/json" -d '{"group_id": "Linux"}' -H  "Authorization: Bearer $(curl -u <API_USER>:<API_PASSWORD> -k -X POST 'https://<WAZUH_MANAGER_IP>:55000/security/user/authenticate?raw=true')"
          
