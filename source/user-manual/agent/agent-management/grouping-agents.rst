@@ -53,11 +53,11 @@ The :doc:`agent_groups </user-manual/reference/tools/agent-groups>` tool offers 
 .. note::
    
    You need root user privileges to execute the commands below.
-   
+
 .. code-block:: console
-   
-   /var/ossec/bin/agent_groups -a -g <GROUP_ID> -q
-   
+
+   # /var/ossec/bin/agent_groups -a -g <GROUP_ID> -q
+
 Where:
 
 -  The flag ``-a`` ``-g`` adds a group.
