@@ -41,7 +41,7 @@ To create agent groups from the Wazuh dashboard:
 .. thumbnail:: /images/manual/agent/new-group-agent-dashboard.gif
    :title: Creating an agent in Wazuh Dashboard
    :align: center
-   :width: 100%
+   :width: 80%
    
 .. _agent-groups-tool:
 
@@ -120,7 +120,7 @@ Using the :doc:`Wazuh API </user-manual/api/reference>` to create and manage gro
    .. thumbnail:: /images/manual/agent/new-group-agent-api.gif
       :title: Creating an agent with Wazuh API
       :align: center
-      :width: 100%
+      :width: 80%
       
 #.  You can also use the command line interface to create agent groups via the Wazuh API. The equivalent command to run from the console with root user privileges to create the ``Linux`` group would be:
    
