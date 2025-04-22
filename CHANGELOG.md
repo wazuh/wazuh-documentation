@@ -3,7 +3,9 @@ All notable changes to this project will be documented in this file.
 
 # [v4.12.1]
 
-- Support for Wazuh 4.12.1
+### Added
+
+- Added the *Wazuh indexer configuration on hardened endpoints* section. ([#8437](https://github.com/wazuh/wazuh-documentation/pull/8437))
 
 ## [v4.12.0]
 
