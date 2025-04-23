@@ -38,6 +38,19 @@
     @include media-max (xl) {
       padding-top: 75px;
     }
+    @include media-min (xl) {
+      position: relative;
+      &::after {
+        content: "";
+        position: absolute;
+        width: 2px;
+        border-radius: 0px 0px 15px 15px;
+        background-color: rgba(227, 227, 227, .5);
+        top: 0;
+        right: 0;
+        bottom: 95px;
+      }
+    }
   }
 }
 
