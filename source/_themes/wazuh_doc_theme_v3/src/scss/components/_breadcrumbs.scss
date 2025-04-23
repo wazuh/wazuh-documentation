@@ -15,11 +15,21 @@
 .not-top {
   .breadcrumb-wrapper {
     position: fixed;
-    @include media-only(xl, xxl){
-      max-width: calc(100% - #{$left-sidebar-width-narrow + $right-sidebar-width});
+    @include media-only(xl,wzh-xl){
+      max-width: calc(1180px - #{$left-sidebar-width-narrow + $right-sidebar-width-narrow});
     }
-    @include media-min(xxl){
-      max-width: calc(1600px - #{$left-sidebar-width-narrow + $right-sidebar-width});
+    @include media-only(wzh-xl,mid-xxl){
+      max-width: calc(1250px - #{$left-sidebar-width + $right-sidebar-width-narrow});
+    }
+    @include media-only(mid-xxl, xxl){
+      width: calc(100% - #{$left-sidebar-width + $right-sidebar-width-narrow});
+      max-width: calc(1530px - #{$left-sidebar-width + $right-sidebar-width-narrow});
+    }
+    @include media-only(xxl,xxxl){
+      max-width: calc(1600px - #{$left-sidebar-width + $right-sidebar-width-narrow});
+    }
+    @include media-min(xxxl){
+      max-width: calc(1780px - #{$left-sidebar-width-wide + $right-sidebar-width-narrow});
     }
   }
 }
