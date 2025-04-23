@@ -13,10 +13,13 @@
 
   .toc-title {
     display: inline-block;
-    height: 45px;
-    font-size: 22px;
+    height: 25px;
+    font-size: 14px;
+    line-height: 32px;
     font-weight: 600;
-    text-transform: uppercase;
+    color: #d9d9d9;
+    letter-spacing: -0.14px;
+    margin-bottom: 12px;
   }
 
   > ul {
@@ -38,10 +41,9 @@
     a {
       display: block;
       position: relative;
-      padding-top: 6px;
-      padding-bottom: 6px;
-      font-size: 14px;
-      line-height: 24px;
+      padding: 6px 15px;
+      font-size: 11px;
+      line-height: 18px;
       border-radius: 0 15px 15px 0;
       &:before {
         content: "";
@@ -82,9 +84,6 @@
       background-color: $light-color-base-space;
       margin-bottom: 4px;
     }
-    .toc-title {
-      color: $light-color-main-text;
-    }
     ul {
       a {
         &:hover,
@@ -112,9 +111,6 @@
   #local-toc {
     .navbar-nav {
       background-color: $dark-color-base-space;
-    }
-    .toc-title {
-      color: $dark-color-main-text;
     }
     ul {
       a {
