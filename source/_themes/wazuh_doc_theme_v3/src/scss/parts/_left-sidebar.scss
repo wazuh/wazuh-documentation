@@ -22,9 +22,16 @@
     display: block;
   }
 
-  @include media-min(xl) {
+  @include media-only(xl, wzh-xl) {
     flex-basis: $left-sidebar-width-narrow;
     width: $left-sidebar-width-narrow;
+  }
+  @include media-min(wzh-xl) {
+    flex-basis: $left-sidebar-width;
+    width: $left-sidebar-width;
+  }
+  @include media-min(xxl) {
+    margin-left: auto;
   }
 
   .sidebar-container {
@@ -44,8 +51,11 @@
       height: calc(100vh - #{$header-height-xl});
       padding: 30px 0;
     }
-    @include media-min(xl) {
+    @include media-only(xl, wzh-xl) {
       width: $left-sidebar-width-narrow;
+    }
+    @include media-min(wzh-xl) {
+      width: $left-sidebar-width;
     }
 
     & > nav {
