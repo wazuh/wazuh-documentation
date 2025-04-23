@@ -278,11 +278,11 @@ Upgrading Filebeat
 
         .. group-tab:: Yum
 
-         .. include:: /_templates/installations/filebeat/common/yum/install_filebeat.rst
+          .. include:: /_templates/installations/filebeat/common/yum/install_filebeat.rst
 
         .. group-tab:: APT
 
-         .. include:: /_templates/installations/filebeat/common/apt/install_filebeat.rst
+          .. include:: /_templates/installations/filebeat/common/apt/install_filebeat.rst
 
 
         .. group-tab:: ZYpp
