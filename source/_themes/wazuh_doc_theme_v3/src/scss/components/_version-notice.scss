@@ -15,11 +15,8 @@
   @include media-max(xl) {
     padding-left: 15px;
   }
-  @include media-only(xl, xxl) {
-    width: 100%;
-  }
-  @include media-min(xxl) {
-    width: calc(#{$outer-container-xxl} - #{$left-sidebar-width-narrow} - #{$right-sidebar-width});
+  @include media-min(xl) {
+    width: calc(100% - 2px);
   }
 
   .no-latest-notice {
@@ -56,10 +53,31 @@
 .not-top {
   .no-latest-notice-wrapper {
     position: fixed;
-    @include media-only(xl, xxl) {
-      right: $right-sidebar-width;
-      left: $left-sidebar-width-narrow;
-      width: calc(100% - #{$right-sidebar-width} - #{$left-sidebar-width-narrow});
+    @include media-min(xl) {
+      right: $right-sidebar-width-narrow;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    @include media-only(xl, wzh-xl) {
+      left: $left-sidebar-width-narrow - 2px;
+      width: calc(1180px - #{$right-sidebar-width-narrow} - #{$left-sidebar-width-narrow} - 2px);
+    }
+    @include media-only(wzh-xl,mid-xxl) {
+      left: $left-sidebar-width - 2px;
+      width: calc(1250px - #{$right-sidebar-width-narrow} - #{$left-sidebar-width} - 2px);
+    }  
+    @include media-only(mid-xxl, xxl) {
+      left: $left-sidebar-width - 2px;
+      width: calc(100% - #{$right-sidebar-width-narrow} - #{$left-sidebar-width} - 2px);
+      max-width: calc(1530px - #{$right-sidebar-width-narrow} - #{$left-sidebar-width} - 2px);
+    }
+    @include media-only(xxl, xxxl) {
+      left: $left-sidebar-width - 2px;
+      width: calc(1600px - #{$right-sidebar-width-narrow} - #{$left-sidebar-width} - 2px);
+    }
+    @include media-min(xxxl) {
+      left: 1780px - 1220px - $right-sidebar-width-narrow - 2px;
+      width: calc(1780px - #{$right-sidebar-width-narrow} - #{1780px - 1220px - $right-sidebar-width-narrow} - 2px);
     }
   }
 }
@@ -67,7 +85,6 @@
 .no-latest-docs {
   &.document {
     #central-column {
-      // padding-top: calc(#{$breadcrumbs-height-xl} + #{$no-latest-notice-height-xl} + 20px);
       * {
         scroll-margin-top: calc(#{$header-height-xl} + #{$breadcrumbs-height-xl} + #{$no-latest-notice-height-xl} + 20px);
       }
@@ -95,7 +112,6 @@
       }
       #central-column {
         padding-top: calc(#{$breadcrumbs-height-xl} + #{$no-latest-notice-height-xl} + 20px);
-        // padding-top: #{$breadcrumbs-height-xl} + #{$no-latest-notice-height-xl};
       }
     }
   }
@@ -115,12 +131,6 @@
           top: calc(#{$header-height-xs});
         }
       }
-    }
-    #central-column {
-      // padding-top: $no-latest-notice-height-xl;
-      // @include media-max(sm){
-      //   padding-top: calc(#{$no-latest-notice-height-xl} + 40px);
-      // }
     }
   }
 }

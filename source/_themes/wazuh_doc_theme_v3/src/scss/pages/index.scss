@@ -187,6 +187,12 @@ header {
   }
 }
 
+.inner-body {
+  @include media-min (xxxl) {
+    max-width: 1600px;
+  }
+}
+
 .sidebar .sidebar-container {
   position: relative;
   top: 135px;
