@@ -198,11 +198,15 @@ Upgrading Filebeat
 
       .. group-tab:: YUM
 
-         .. include:: /_templates/installations/filebeat/common/yum/install_filebeat.rst
+        .. code-block:: console
+
+          # yum install filebeat-|ELASTIC_6_LATEST|
 
       .. group-tab:: APT
 
-         .. include:: /_templates/installations/filebeat/common/apt/install_filebeat.rst
+        .. code-block:: console
+
+          # apt-get install filebeat=|ELASTIC_6_LATEST|
 
       .. group-tab:: ZYpp
 
