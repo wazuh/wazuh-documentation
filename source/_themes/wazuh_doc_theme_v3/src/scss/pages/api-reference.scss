@@ -96,6 +96,9 @@ body {
 
 .inner-body {
   display: block;
+  @include media-min (xl) {
+    max-width: 100%;
+  }
 }
 
 
@@ -131,16 +134,14 @@ header {
     width: 100%;
     height: $redoc-header-height;
   }
-  @include media-min (xxl) {
-    max-width: calc(#{($outer-container-xxl - $left-redoc-sidebar-width)* 0.6} + #{$left-redoc-sidebar-width - .6});
-    margin-left: auto;
-    margin-right: auto;
-  }
   #version-selector {
     .dropdown-btn {
       @media screen and (min-width: 50.01rem) and (max-width: 75rem) {
         padding: 5px 10px;
         border: 2px solid;
+      }
+      @include media-only (lg, xl) {
+        width: 263px;
       }
     }
     .dropdown-menu {
