@@ -39,8 +39,14 @@
 #central-column {
   width: 100%;
   position: relative;
-  @include media-min(xl){
-    max-width: calc(100% - #{$left-sidebar-width-narrow + $right-sidebar-width});
+  @include media-only(xl,wzh-xl){
+    max-width: calc(100% - #{$left-sidebar-width-narrow + $right-sidebar-width-narrow});
+  }
+  @include media-only(wzh-xl,xxxl){
+    max-width: calc(100% - #{$left-sidebar-width + $right-sidebar-width-narrow});
+  }
+  @include media-min(xxxl){
+    max-width: calc(100% - #{$left-sidebar-width-wide + $right-sidebar-width-narrow});
   }
 }
 
