@@ -35,6 +35,26 @@ body {
     display: flex;
     flex-direction: row;
   }
+  @include media-only (xl,wzh-xl) {
+    max-width: 1180px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  @include media-only (wzh-xl,mid-xxl) {
+    max-width: 1250px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  @include media-only (mid-xxl,xxl) {
+    max-width: 1530px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  @include media-min (xxxl) {
+    max-width: 1780px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 h1,
