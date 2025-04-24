@@ -47,13 +47,7 @@ Operating system
 
 The Wazuh central components require a 64-bit Intel, AMD, or ARM Linux processor (x86_64/AMD64 or AARCH64/ARM64 architecture) to run. Wazuh recommends any of the following operating system versions:
 
-.. list-table::
-   :width: 100%
-
-   * - Amazon Linux 2, Amazon Linux 2023
-     - CentOS 7, 8
-   * - Red Hat Enterprise Linux 7, 8, 9
-     - Ubuntu 16.04, 18.04, 20.04, 22.04, 24.04
+.. include:: /_templates/operating_systems.rst
 
 .. _quickstart_installing_wazuh:
 
