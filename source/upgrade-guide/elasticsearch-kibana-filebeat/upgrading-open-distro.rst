@@ -213,13 +213,14 @@ Upgrading Filebeat
 
           .. code-block:: console
 
-            # yum install filebeat-|ELASTICSEARCH_LATEST|
+            # yum install https://packages.wazuh.com/4.x/yum/filebeat-oss-7.10.2-x86_64.rpm
 
         .. group-tab:: APT
 
           .. code-block:: console
 
-            # apt-get install filebeat=|ELASTICSEARCH_LATEST|
+            # curl -O https://packages.wazuh.com/4.x/apt/pool/main/f/filebeat/filebeat-oss-7.10.2-amd64.deb
+            # apt-get install ./filebeat-oss-7.10.2-amd64.deb
 
 
         .. group-tab:: ZYpp
