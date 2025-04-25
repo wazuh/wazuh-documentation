@@ -47,7 +47,7 @@ Operating system
 
 The Wazuh central components require a 64-bit Intel, AMD, or ARM Linux processor (x86_64/AMD64 or AARCH64/ARM64 architecture) to run. Wazuh recommends any of the following operating system versions:
 
-.. include:: /_templates/operating_systems.rst
+.. include:: /_templates/installations/wazuh/recommended-operating-systems.rst
 
 .. _quickstart_installing_wazuh:
 
