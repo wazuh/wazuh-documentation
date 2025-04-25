@@ -16,13 +16,14 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Included checkout command in Amazon Security Lake integration guide. ([#8423](https://github.com/wazuh/wazuh-documentation/pull/8423))
 - **Post-release**: Updated Vulnerability Detection Proof of Concept. ([#8422](https://github.com/wazuh/wazuh-documentation/pull/8422))
 - Added new section on creating agent groups. ([#8436](https://github.com/wazuh/wazuh-documentation/pull/8436))
-- **Post-release**: Updated `wazuh-certs-tool` download command from static version number to use `WAZUH_CURRENT_VERSION` ([#8473](https://github.com/wazuh/wazuh-documentation/pull/8473))
 
 ### Fixed
 
 - **Post-release**: Added missing Oracle Linux to the vulnerability detection compatibility matrix and fixed heading level. ([#8391](https://github.com/wazuh/wazuh-documentation/pull/8391))
 - **Post-release**: Added specific version for Email app in Shuffle integration section. ([#8420](https://github.com/wazuh/wazuh-documentation/pull/8420))
 - **Post-release**: Fixed mispelled word "address" occurrences. ([#8421](https://github.com/wazuh/wazuh-documentation/pull/8421))
+- **Post-release**: Fixed `wazuh-certs-tool` download command from static version number to use `WAZUH_CURRENT_VERSION` ([#8473](https://github.com/wazuh/wazuh-documentation/pull/8473))
+
 
 ## [v4.11.1]
 
