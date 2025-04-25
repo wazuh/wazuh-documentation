@@ -1,9 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-# [v4.13.0]
+## [v4.13.0]
 
-- Support for Wazuh 4.13.0
+### Added
+
+- Added support for CentOS Stream 10. ([#8474](https://github.com/wazuh/wazuh-documentation/pull/8474))
 
 # [v4.12.1]
 
