@@ -175,7 +175,7 @@ KeyCloak configuration
 
       - **Mapper type**: ``Role list``
       - **Name**: ``wazuhRoleKey``. You can use any name here.
-      - **Role attribute name**: ``Roles``. This will be the ``roles_key`` on the Wazuh indexer configuration.
+      - **Role attribute name**: ``Role``. This will be the ``roles_key`` on the Wazuh indexer configuration.
       - **SAML Attribute NameFormat**: ``Basic``  
       - **Single Role Attribute**: ``On``
 
@@ -191,7 +191,7 @@ KeyCloak configuration
    #. The parameters already obtained during the integration are:
 
       - ``sp.entity_id``: ``wazuh-saml``
-      - ``roles_key``: ``Roles``
+      - ``roles_key``: ``Role``
       - ``kibana_url``: ``https://<WAZUH_DASHBOARD_URL>``
 
    #. To obtain the remaining parameters.
@@ -269,7 +269,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
                     entity_id: wazuh-saml
                     metadata_file: /etc/wazuh-indexer/opensearch-security/sp.metadata.xml
                   kibana_url: https://<WAZUH_DASHBOARD_ADDRESS>
-                  roles_key: Roles
+                  roles_key: Role
                   exchange_key: 'b1d6dd32753374557dcf92e241.......'
               authentication_backend:
                 type: noop
