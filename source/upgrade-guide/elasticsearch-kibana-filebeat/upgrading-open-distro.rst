@@ -211,16 +211,11 @@ Upgrading Filebeat
 
         .. group-tab:: Yum
 
-          .. code-block:: console
-
-            # yum install https://packages.wazuh.com/4.x/yum/filebeat-oss-7.10.2-x86_64.rpm
+          .. include:: /_templates/installations/elastic/yum/install_filebeat.rst
 
         .. group-tab:: APT
 
-          .. code-block:: console
-
-            # curl -O https://packages.wazuh.com/4.x/apt/pool/main/f/filebeat/filebeat-oss-7.10.2-amd64.deb
-            # apt-get install ./filebeat-oss-7.10.2-amd64.deb
+          .. include:: /_templates/installations/elastic/deb/install_filebeat.rst
 
 
         .. group-tab:: ZYpp
