@@ -20,7 +20,7 @@ All notable changes to this project will be documented in this file.
 - Updated Microsoft Entra ID SSO setup steps for the administrator role. ([#8399](https://github.com/wazuh/wazuh-documentation/pull/8399)) ([#8424](https://github.com/wazuh/wazuh-documentation/pull/8424))
 - Updated filebeat installation commands. ([#8410](https://github.com/wazuh/wazuh-documentation/pull/8410))
 - Updated the *Profiles* section in *Configuring AWS credentials*. ([#8426](https://github.com/wazuh/wazuh-documentation/pull/8426)) ([#8429](https://github.com/wazuh/wazuh-documentation/pull/8429))
-- Updated the *Who-data monitoring on Linux* section. ([#8435](https://github.com/wazuh/wazuh-documentation/pull/8435))
+- Updated the *Who-data monitoring on Linux* section. ([#8435](https://github.com/wazuh/wazuh-documentation/pull/8435)), ([#8492](https://github.com/wazuh/wazuh-documentation/pull/8492))
 - Updated the *Agents* sub-section in *Deployment on Kubernetes*. ([#8475](https://github.com/wazuh/wazuh-documentation/pull/8475))
 
 ## [v4.11.2]

@@ -940,6 +940,7 @@ The Whodata options will be configured inside this tag.
 
     <!-- Whodata options -->
     <whodata>
+        <provider>audit</provider>
         <restart_audit>yes</restart_audit>
         <audit_key>auditkey1,auditkey2</audit_key>
         <startup_healthcheck>yes</startup_healthcheck>
@@ -953,7 +954,7 @@ The Whodata options will be configured inside this tag.
 Specifies the who-data mode used by the FIM module. If the ``<provider>`` tag is not configured, the FIM module defaults to the ``audit`` mode. If the provider is set to ``ebpf`` but unavailable due to kernel version incompatibility, it also falls back to the ``audit`` mode. This option is only available for Linux endpoints.
 
 +--------------------+---------------------+
-| **Default value**  | N/A                 |
+| **Default value**  | ``audit``           |
 +--------------------+---------------------+
 | **Allowed values** | ``audit``, ``ebpf`` |
 +--------------------+---------------------+

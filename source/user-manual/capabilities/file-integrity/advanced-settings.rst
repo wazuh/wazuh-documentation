@@ -58,7 +58,7 @@ You need to install the ``audit`` daemon if you don’t have it already installe
 
          # apt-get install auditd
 
-      For Audit 3.1.1 and later, install the audispd af_unix plugin and restart the Audit service.
+      For Audit 3.1.1 and later, install the ``audispd af_unix`` plugin and restart the Audit service.
 
       .. code-block:: console
 
@@ -389,14 +389,14 @@ Alert fields
 Who-data monitoring alerts generated using the eBPF mode preserve the same structure as the audit mode :ref:`alert fields <audit_mode_alert_fields>`.
 
 Example: Monitoring changes in configuration files
-''''''''''''''''''''''''''''''''''''''''''''''''''
+..................................................
 
 Monitoring configuration files such as the ``../sshd_config`` file on Linux endpoints can help detect unauthorized changes. This approach ensures the integrity of configuration files are not tempered and provides early detection of suspicious behavior.
 
 Perform the steps below to monitor changes made to the ``/etc/ssh/sshd_config`` configuration file on an Ubuntu endpoint using who-data in eBPF mode.
 
 Configuration
-,,,,,,,,,,,,,
+'''''''''''''
 
 #. Append the configuration below to the ``/var/ossec/etc/ossec.conf`` configuration file on the Ubuntu endpoint:
 
@@ -420,7 +420,7 @@ Configuration
       # systemctl restart wazuh-agent
 
 Test the configuration
-,,,,,,,,,,,,,,,,,,,,,,
+''''''''''''''''''''''
 
 While logged in as the ``root`` user, append a new line of text to the ``/etc/ssh/sshd_config`` file on the Ubuntu endpoint:
 
@@ -429,7 +429,7 @@ While logged in as the ``root`` user, append a new line of text to the ``/etc/ss
    # echo "eBPF test" >> /etc/ssh/sshd_config
 
 Visualize the alert
-,,,,,,,,,,,,,,,,,,,
+'''''''''''''''''''
 
 Navigate to **Endpoint security** > **File Integrity Monitoring** > **Events** on the Wazuh dashboard to view the alert generated when the FIM module detects changes in the monitored file.
 
