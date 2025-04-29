@@ -396,7 +396,7 @@ Monitoring configuration files such as the ``../sshd_config`` file on Linux endp
 Perform the steps below to monitor changes made to the ``/etc/ssh/sshd_config`` configuration file on an Ubuntu endpoint using who-data in eBPF mode.
 
 Configuration
-,,,,,,,,,,,,,
+'''''''''''''
 
 #. Append the configuration below to the ``/var/ossec/etc/ossec.conf`` configuration file on the Ubuntu endpoint:
 
@@ -420,7 +420,7 @@ Configuration
       # systemctl restart wazuh-agent
 
 Test the configuration
-,,,,,,,,,,,,,,,,,,,,,,
+''''''''''''''''''''''
 
 While logged in as the ``root`` user, append a new line of text to the ``/etc/ssh/sshd_config`` file on the Ubuntu endpoint:
 
@@ -429,7 +429,7 @@ While logged in as the ``root`` user, append a new line of text to the ``/etc/ss
    # echo "eBPF test" >> /etc/ssh/sshd_config
 
 Visualize the alert
-,,,,,,,,,,,,,,,,,,,
+'''''''''''''''''''
 
 Navigate to **Endpoint security** > **File Integrity Monitoring** > **Events** on the Wazuh dashboard to view the alert generated when the FIM module detects changes in the monitored file.
 
