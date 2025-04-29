@@ -58,7 +58,7 @@ You need to install the ``audit`` daemon if you don’t have it already installe
 
          # apt-get install auditd
 
-      For Audit 3.1.1 and later, install the audispd af_unix plugin and restart the Audit service.
+      For Audit 3.1.1 and later, install the ``audispd af_unix`` plugin and restart the Audit service.
 
       .. code-block:: console
 
@@ -389,7 +389,7 @@ Alert fields
 Who-data monitoring alerts generated using the eBPF mode preserve the same structure as the audit mode :ref:`alert fields <audit_mode_alert_fields>`.
 
 Example: Monitoring changes in configuration files
-''''''''''''''''''''''''''''''''''''''''''''''''''
+..................................................
 
 Monitoring configuration files such as the ``../sshd_config`` file on Linux endpoints can help detect unauthorized changes. This approach ensures the integrity of configuration files are not tempered and provides early detection of suspicious behavior.
 
