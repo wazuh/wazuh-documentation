@@ -27,9 +27,10 @@ Use cases
    #. Configure the Active Response to execute the ``firewall-drop`` command when the rule for attempts to log in to a non-existent user is triggered (rule 5710) by adding the following block in the manager configuration file (``/var/ossec/etc/ossec.conf``):
 
       .. code-block:: xml
-         :emphasize-lines: 4
+         :emphasize-lines: 5
 
          <active-response>
+            <disabled>no</disabled>
             <command>firewall-drop</command>
             <location>local</location>
             <rules_id>5710</rules_id>

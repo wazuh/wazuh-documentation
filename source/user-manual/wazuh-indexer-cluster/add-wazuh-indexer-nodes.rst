@@ -69,7 +69,7 @@ We recommend creating entirely new certificates for your Wazuh indexer nodes. Pe
 
    .. code-block:: console
 
-      # curl -sO https://packages.wazuh.com/4.8/wazuh-certs-tool.sh
+      # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-certs-tool.sh
       # bash wazuh-certs-tool.sh -A
 
 #. Compress the certificates folder and copy it to the new Wazuh indexer node(s). You can make use of the ``scp`` utility to securely copy the compressed file:
@@ -115,7 +115,7 @@ Perform the steps below on one indexer node only.
 
    .. code-block:: console
 
-      # curl -sO https://packages.wazuh.com/4.7/wazuh-certs-tool.sh
+      # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-certs-tool.sh
       # bash wazuh-certs-tool.sh -A wazuh-install-files/root-ca.pem wazuh-install-files/root-ca.key
 
 #. Copy the newly created certificates to the ``wazuh-install-files`` folder making sure not to replace the admin certificates:
@@ -157,7 +157,7 @@ Perform the steps below on one indexer node only.
 
          .. code-block:: console
 
-            # curl -sO https://packages.wazuh.com/4.7/wazuh-certs-tool.sh
+            # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-certs-tool.sh
             # bash wazuh-certs-tool.sh -A
 
       #. Compress the certificates folder and copy it to the new Wazuh indexer node(s). You can make use of the ``scp`` utility to securely copy the compressed file:

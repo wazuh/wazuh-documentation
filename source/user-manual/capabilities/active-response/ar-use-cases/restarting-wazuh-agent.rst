@@ -41,6 +41,7 @@ Wazuh server
 
       <ossec_config>
         <active-response>
+          <disabled>no</disabled>
           <command>restart-wazuh</command>
           <location>local</location>
           <rules_id>100009</rules_id>
