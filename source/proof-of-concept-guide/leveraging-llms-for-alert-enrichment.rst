@@ -603,12 +603,14 @@ Perform the following steps on the Wazuh server to configure custom rules, decod
         </command>
 
         <active-response>
+          <disabled>no</disabled>
           <command>yara_linux</command>
           <location>local</location>
           <rules_id>100300,100301</rules_id>
         </active-response>
 
         <active-response>
+          <disabled>no</disabled>
           <command>yara_windows</command>
           <location>local</location>
           <rules_id>100302,100303</rules_id>

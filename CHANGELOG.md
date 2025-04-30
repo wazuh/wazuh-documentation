@@ -28,6 +28,8 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 - Added the ``authentication_pool_size`` option to the Wazuh server API configuration section. ([#8287](https://github.com/wazuh/wazuh-documentation/pull/8287))
+- Added clarifications that `<disabled>` is required in `active-response` blocks in *Use cases* and *Active response* reference sections. ([#8428](https://github.com/wazuh/wazuh-documentation/pull/8428))
+- Added new section on creating agent groups. ([#8436](https://github.com/wazuh/wazuh-documentation/pull/8436))
 
 ### Changed
 
@@ -35,12 +37,15 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated certificate location reference for Logstash and file permissions change command. ([#8415](https://github.com/wazuh/wazuh-documentation/pull/8415))
 - **Post-release**: Moved the note in the **Configuring vulnerability detection** documentation to appear after the `<indexer>` block. ([#8427](https://github.com/wazuh/wazuh-documentation/pull/8427))
 - **Post-release**: Included checkout command in Amazon Security Lake integration guide. ([#8423](https://github.com/wazuh/wazuh-documentation/pull/8423))
+- **Post-release**: Updated Vulnerability Detection Proof of Concept. ([#8422](https://github.com/wazuh/wazuh-documentation/pull/8422))
 
 ### Fixed
 
 - **Post-release**: Added missing Oracle Linux to the vulnerability detection compatibility matrix and fixed heading level. ([#8391](https://github.com/wazuh/wazuh-documentation/pull/8391))
 - **Post-release**: Added specific version for Email app in Shuffle integration section. ([#8420](https://github.com/wazuh/wazuh-documentation/pull/8420))
 - **Post-release**: Fixed mispelled word "address" occurrences. ([#8421](https://github.com/wazuh/wazuh-documentation/pull/8421))
+- **Post-release**: Fixed `wazuh-certs-tool` download command from static version number to use `WAZUH_CURRENT_VERSION` ([#8473](https://github.com/wazuh/wazuh-documentation/pull/8473))
+- **Post-release**: Add missing changes in Download configuration files from remote location section. ([#8476](https://github.com/wazuh/wazuh-documentation/pull/8476))
 
 ## [v4.11.1]
 

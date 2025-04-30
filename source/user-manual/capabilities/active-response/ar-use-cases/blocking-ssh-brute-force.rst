@@ -49,6 +49,7 @@ Wazuh comes with a set of default scripts used in Active Response. These scripts
 
       <ossec_config>
         <active-response>
+          <disabled>no</disabled>
           <command>firewall-drop</command>
           <location>local</location>
           <rules_id>5763</rules_id>
