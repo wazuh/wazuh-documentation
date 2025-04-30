@@ -24,6 +24,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Fixed mispelled word "address" occurrences. ([#8421](https://github.com/wazuh/wazuh-documentation/pull/8421))
 - **Post-release**: Fixed `wazuh-certs-tool` download command from static version number to use `WAZUH_CURRENT_VERSION` ([#8473](https://github.com/wazuh/wazuh-documentation/pull/8473))
 - **Post-release**: Add missing changes in Download configuration files from remote location section. ([#8476](https://github.com/wazuh/wazuh-documentation/pull/8476))
+- **Post-release**: Reverted new configuration options added to the MS Graph integration documentation. ([#8495](https://github.com/wazuh/wazuh-documentation/pull/8495))
 
 ## [v4.11.1]
 

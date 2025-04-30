@@ -53,7 +53,7 @@ Certificates & secrets
 API permissions
 ---------------
 
-Your application needs specific API permissions to retrieve logs and events from the Microsoft Graph API. The specific API permission required depends on the resource to be accessed. The comprehensive list of permissions is documented in `Microsoft Graph permissions reference <https://learn.microsoft.com/en-us/graph/permissions-reference>`__.
+Your application needs specific API permissions to retrieve logs and events from the Microsoft Graph API, such as permissions related to the ``security`` and ``deviceManagement`` resources.
 
 To configure the application permissions, go to the **API permissions** page and choose **Add a permission**.
 
