@@ -31,6 +31,10 @@ Public key authentication can be used with the following command:
 
 Once created, the public key must be copied into the remote device.
 
+.. note::
+
+  To use Public key authentication, it is recommended to generate the key as an ossec user inside /var/ossec/.ssh directory, to avoid any authentication issues.
+
 Monitoring
 ----------
 
