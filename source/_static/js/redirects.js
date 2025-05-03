@@ -2165,7 +2165,17 @@ redirections.push(
     'target': ['3.12=>3.13', '3.13=>3.12'],
     '3.12': '/getting-started/use-cases.html',
     '3.13': '/getting-started/use_cases/index.html',
-  }
+  },
+  {
+    'target': ['3.12=>3.13'],
+    '3.12': '/user-manual/reference/tools/syscheck_control.html',
+    '3.13': '/user-manual/reference/tools/index.html',
+  },
+  {
+    'target': ['3.12=>3.13'],
+    '3.12': '/user-manual/reference/tools/syscheck_update.html',
+    '3.13': '/user-manual/reference/tools/index.html',
+  },
 );
 
 newUrls['3.13'] = [
@@ -2205,6 +2215,8 @@ newUrls['3.13'] = [
 removedUrls['3.13'] = [
   '/getting-started/use-cases.html',
   '/getting-started/components.html',
+  '/user-manual/reference/tools/syscheck_control.html',
+  '/user-manual/reference/tools/syscheck_update.html',
 ];
 
 /* *** RELEASE 3.12 ****/
