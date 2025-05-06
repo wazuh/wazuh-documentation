@@ -73,6 +73,7 @@ removedUrls['x.y'] = [
 newUrls['4.12'] = [
   '/release-notes/release-4-12-0.html',
   '/release-notes/release-4-12-1.html',
+  '/release-notes/release-4-12-2.html',
   '/user-manual/wazuh-indexer/wazuh-indexer-on-hardened-endpoints.html',
 ]
 
