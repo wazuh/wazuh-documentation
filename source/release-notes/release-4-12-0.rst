@@ -17,7 +17,6 @@ Wazuh 4.12.0 introduces functional improvements that expand the platform’s cap
 -  `CTI links into CVE information <https://github.com/wazuh/wazuh/issues/28220>`__: Vulnerability Detection now includes CTI links into CVE details, providing enriched context and external threat insights to aid in vulnerability assessment.
 -  `eBPF support in File Integrity Monitoring <https://github.com/wazuh/wazuh/issues/27598>`__: File Integrity Monitoring now supports eBPF on Linux, improving performance and system visibility.
 -  `New SCA policy for Distribution Independent Linux <https://github.com/wazuh/wazuh/issues/26837>`__: A new Security Configuration Assessment policy is now available for Linux systems.
--  `OpenSearch 2.19.1 compatibility <https://github.com/wazuh/wazuh-indexer/issues/727>`__: Wazuh is now compatible with OpenSearch 2.19.1, ensuring smooth integration with the latest version.
 
 Breaking changes
 ----------------
