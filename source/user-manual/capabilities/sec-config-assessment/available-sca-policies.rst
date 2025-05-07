@@ -111,8 +111,6 @@ The table below shows SCA policies pre-installed in Wazuh out-of-the-box. The Wa
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_hpux_bastille           |  CIS Benchmark for HP-UX 11i using Bastille                | HPUX 11i                      |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | sca_unix_audit              |  Benchmark for Linux auditing                              | Unix based OS                 |
-    +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_apple_macOS_10.11       |  CIS Apple macOS 10.11 Benchmark                           | macOS 10.11 (El Capitan)      |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_apple_macOS_10.12       |  CIS Apple macOS 10.12 Benchmark                           | macOS 10.12 (Sierra)          |
@@ -161,5 +159,5 @@ The table below shows SCA policies pre-installed in Wazuh out-of-the-box. The Wa
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_postgre-sql-13          |  CIS Checks for PostgreSQL 13                              | PostgreSQL 13                 |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | sca_distro_independent_linux |  CIS Benchmark for Distribution Independent Linux   | Distribution Independent Linux  |
+    | sca_distro_independent_linux|  CIS Benchmark for Distribution Independent Linux          | Distribution Independent Linux|
     +-----------------------------+------------------------------------------------------------+-------------------------------+
