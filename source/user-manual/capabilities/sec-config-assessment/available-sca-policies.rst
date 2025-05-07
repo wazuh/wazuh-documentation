@@ -161,5 +161,5 @@ The table below shows SCA policies pre-installed in Wazuh out-of-the-box. The Wa
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_postgre-sql-13          |  CIS Checks for PostgreSQL 13                              | PostgreSQL 13                 |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | sca_distro_independent_linux|  CIS Checks for Independent Linux                          | PostgreSQL 13                 |
+    | sca_distro_independent_linux |  CIS Benchmark for Distribution Independent Linux   | Distribution Independent Linux  |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
