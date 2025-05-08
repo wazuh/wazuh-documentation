@@ -24,6 +24,7 @@ All notable changes to this project will be documented in this file.
 - Updated the *Who-data monitoring on Linux* section. ([#8435](https://github.com/wazuh/wazuh-documentation/pull/8435)), ([#8492](https://github.com/wazuh/wazuh-documentation/pull/8492))
 - Updated the *Agents* sub-section in *Deployment on Kubernetes*. ([#8475](https://github.com/wazuh/wazuh-documentation/pull/8475))
 - Updated the available SCA policies table. ([#8500](https://github.com/wazuh/wazuh-documentation/pull/8500))
+- **Post-release**: Updated the 4.12.0 release notes highlights text. ([#8510](https://github.com/wazuh/wazuh-documentation/pull/8510))
 
 ## [v4.11.2]
 
