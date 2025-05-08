@@ -31,11 +31,15 @@ The table below shows SCA policies pre-installed in Wazuh out-of-the-box. The Wa
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_win2022                 |  CIS Benchmark for Windows Server 2022                     | Windows Server 2022           |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_win2025                 |  CIS Benchmark for Windows Server 2025                     | Windows Server 2025           |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
     | sca_win_audit               |  Benchmark for Windows auditing                            | Windows                       |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_alma_linux_8            |  CIS Benchmark for Alma Linux 8                            | Alma Linux 8                  |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_alma_linux_9            |  CIS Benchmark for Alma Linux 9                            | Alma Linux 9                  |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_alma_linux_10           |  CIS Benchmark for Alma Linux 10                           | Alma Linux 10                 |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_rocky_linux_8           |  CIS Benchmark for Rocky Linux 8                           | Rocky Linux 8                 |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
@@ -49,6 +53,8 @@ The table below shows SCA policies pre-installed in Wazuh out-of-the-box. The Wa
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_centos8_linux           |  CIS Benchmark for CentOS 8                                | CentOS 8                      |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_centos10_linux          |  CIS Benchmark for CentOS 10                               | CentOS 10                     |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_rhel5_linux             |  CIS Benchmark for Red Hat Enterprise Linux 5              | Red Hat Enterprise Linux 5    |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_rhel6_linux             |  CIS Benchmark for Red Hat Enterprise Linux 6              | Red Hat Enterprise Linux 6    |
@@ -58,6 +64,8 @@ The table below shows SCA policies pre-installed in Wazuh out-of-the-box. The Wa
     | cis_rhel8_linux             |  CIS Benchmark for Red Hat Enterprise Linux 8              | Red Hat Enterprise Linux 8    |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_rhel9_linux             |  CIS Benchmark for Red Hat Enterprise Linux 9              | Red Hat Enterprise Linux 9    |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_rhel10_linux            |  CIS Benchmark for Red Hat Enterprise Linux 10             | Red Hat Enterprise Linux 10   |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_debian7                 |  CIS Benchmark for Debian/Linux 7                          | Debian 7                      |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
@@ -102,8 +110,6 @@ The table below shows SCA policies pre-installed in Wazuh out-of-the-box. The Wa
     | cis_hpux                    |  CIS Benchmark for HP-UX 11i                               | HPUX 11i                      |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_hpux_bastille           |  CIS Benchmark for HP-UX 11i using Bastille                | HPUX 11i                      |
-    +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | sca_unix_audit              |  Benchmark for Linux auditing                              | Unix based OS                 |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_apple_macOS_10.11       |  CIS Apple macOS 10.11 Benchmark                           | macOS 10.11 (El Capitan)      |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
@@ -152,4 +158,6 @@ The table below shows SCA policies pre-installed in Wazuh out-of-the-box. The Wa
     | cis_oracle_database_19c     |  CIS Checks for Oracle Database 19c                        | Oracle Database 19c           |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_postgre-sql-13          |  CIS Checks for PostgreSQL 13                              | PostgreSQL 13                 |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | sca_distro_independent_linux|  CIS Benchmark for Distribution Independent Linux          | Distribution Independent Linux|
     +-----------------------------+------------------------------------------------------------+-------------------------------+
