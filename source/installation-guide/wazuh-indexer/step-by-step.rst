@@ -154,10 +154,15 @@ Configuring the Wazuh indexer
 Deploying certificates
 ^^^^^^^^^^^^^^^^^^^^^^
 
-  .. note::
-    Make sure that a copy of the ``wazuh-certificates.tar`` file, created during the initial configuration step, is placed in your working directory.
+.. note::
 
-  .. include:: /_templates/installations/indexer/common/deploy_certificates.rst
+   Make sure that a copy of the ``wazuh-certificates.tar`` file, created during the initial configuration step, is placed in your working directory.
+
+.. include:: /_templates/installations/indexer/common/deploy_certificates.rst
+
+.. note::
+
+   For Wazuh indexer installation on hardened endpoints with ``noexec`` flag on the ``/tmp`` directory, additional setup is required. See the :doc:`/user-manual/wazuh-indexer/wazuh-indexer-on-hardened-endpoints` section for necessary configuration.
 
 Starting the service
 ^^^^^^^^^^^^^^^^^^^^
@@ -193,7 +198,7 @@ Testing the cluster installation
 
    .. code-block:: console
 
-      # curl -k -u admin:admin https://<WAZUH_INDEXER_IP_ADRESS>:9200
+      # curl -k -u admin:admin https://<WAZUH_INDEXER_IP_ADDRESS>:9200
 
    .. code-block:: none
       :class: output accordion-output
