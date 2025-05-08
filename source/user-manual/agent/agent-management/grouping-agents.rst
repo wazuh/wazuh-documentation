@@ -16,6 +16,134 @@ Unless otherwise assigned, all newly connected Wazuh agents automatically belong
 
 Each group has a configuration file ``/var/ossec/etc/shared/<GROUP_NAME>/agent.conf`` located on the Wazuh server, where ``<GROUP_NAME>`` is the name of the agent group. This file is empty by default, and here, you can define :doc:`centralized agent configurations </user-manual/reference/centralized-configuration>`. After creating a group, you can modify the group's configuration file to apply configurations to all agents in that group.
 
+Creating agent groups
+---------------------
+
+There are three methods for creating agent groups which include:
+
+-  :ref:`The Wazuh dashboard <agent-group-dashboard>`
+
+-  :ref:`The agent_groups tool <agent-groups-tool>`
+
+-  :ref:`The Wazuh API <agent-group-api>`
+
+.. _agent-group-dashboard:
+
+The Wazuh dashboard
+^^^^^^^^^^^^^^^^^^^
+
+To create agent groups from the Wazuh dashboard:
+
+#. Navigate to **Agents management > Groups** and click the **Add new group** button.
+
+#. Enter a name for the agent group and click on the **Save new group** button.
+
+.. thumbnail:: /images/manual/agent/new-group-agent-dashboard.gif
+   :title: Creating an agent in Wazuh Dashboard
+   :align: center
+   :width: 80%
+   
+.. _agent-groups-tool:
+
+The agent_groups tool
+^^^^^^^^^^^^^^^^^^^^^
+
+The :doc:`agent_groups </user-manual/reference/tools/agent-groups>` tool offers the ability to create and manage Wazuh agent groups directly from the command line.  The tool is used as follows to create a Wazuh agent group:
+
+.. note::
+   
+   You need root user privileges to execute the commands below.
+
+.. code-block:: console
+
+   # /var/ossec/bin/agent_groups -a -g <GROUP_ID> -q
+
+Where:
+
+-  The flag ``-a`` ``-g`` adds a group.
+
+-  The ``<GROUP_ID>`` indicates a unique group name. Replace ``<GROUP_ID>`` with the name of the group you want to create.
+
+-  The flag ``-q`` triggers the silent or no confirmation mode.
+         
+Run the following commands on the Wazuh server to create the agent groups ``Windows``, ``macOS``, and  ``Linux``:
+
+.. code-block:: console
+   
+   # /var/ossec/bin/agent_groups -a -g Windows -q
+   # /var/ossec/bin/agent_groups -a -g macOS -q
+   # /var/ossec/bin/agent_groups -a -g Linux -q
+
+An example output is as follows:
+
+.. code-block:: none
+   :class: output
+   
+   Group 'Windows' created.
+   
+To ensure the groups are created correctly, run the following command to list all existing groups:
+
+.. code-block:: console
+   
+   # /var/ossec/bin/agent_groups -l
+   
+An example output is as follows:
+
+.. code-block:: none
+   :class: output
+   
+   Groups (5):
+     Linux (0)
+     Test (0)
+     Windows (0)
+     default (2)
+     macOS (0)
+   Unassigned agents: 0.
+
+.. _agent-group-api:
+
+The Wazuh API 
+^^^^^^^^^^^^^
+
+Using the :doc:`Wazuh API </user-manual/api/reference>` to create and manage groups programmatically is effective for automating group management tasks. Perform the steps below to create agent groups using the Wazuh API:
+
+#. On the Wazuh dashboard, navigate to **Server management**, and select **Dev Tools**.
+
+#. Run the queries below to create the agent groups ``Windows``, ``macOS``, and ``Linux``:
+
+   .. code-block:: none
+      
+      POST /groups {"group_id": "Windows"}
+      POST /groups {"group_id": "macOS"}
+      POST /groups {"group_id": "Linux"}
+      
+   .. thumbnail:: /images/manual/agent/new-group-agent-api.gif
+      :title: Creating an agent with Wazuh API
+      :align: center
+      :width: 80%
+      
+#.  You can also use the command line interface to create agent groups via the Wazuh API. The equivalent command to run from the console with root user privileges to create the ``Linux`` group would be:
+   
+   .. code-block:: console
+         
+      # curl -k -X POST "https://<WAZUH_MANAGER_IP>:55000/groups?pretty=true" -H "Content-Type: application/json" -d '{"group_id": "Linux"}' -H  "Authorization: Bearer $(curl -u <API_USER>:<API_PASSWORD> -k -X POST 'https://<WAZUH_MANAGER_IP>:55000/security/user/authenticate?raw=true')"
+         
+   Replace:
+   
+   -  The ``<WAZUH_MANAGER_IP>`` variable with the IP address of your Wazuh server. In case you have a distributed deployment, use the IP address of the master node.
+   -  The ``<API_USER>`` variable with your :doc:`Wazuh API </user-manual/api/getting-started>` username.
+   -  The ``<API_PASSWORD>`` variable with the password of your :doc:`Wazuh API </user-manual/api/getting-started>` user.
+   
+   The output of the command is as follows:
+   
+   .. code-block:: none
+      :class: output
+      
+      {
+         "message": "Group 'Linux' created.",
+         "error": 0
+      }
+
 Assigning agents to a group
 ---------------------------
 
