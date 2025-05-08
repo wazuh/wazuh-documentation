@@ -217,10 +217,11 @@ Configure the Active Response module to block the malicious IP address
    The ``firewall-drop`` command integrates with the Ubuntu local iptables firewall and drops incoming network connection from the attacker endpoint for 60 seconds:
 
       .. code-block:: xml
-         :emphasize-lines: 3
+         :emphasize-lines: 4
 
          <ossec_config>
            <active-response>
+             <disabled>no</disabled>
              <command>firewall-drop</command>
              <location>local</location>
              <rules_id>100100</rules_id>
@@ -233,10 +234,11 @@ Configure the Active Response module to block the malicious IP address
    The active response script uses the ``netsh`` command to block the attacker's IP address on the Windows endpoint. It runs for 60 seconds:
 
       .. code-block:: xml
-         :emphasize-lines: 3
+         :emphasize-lines: 4
 
          <ossec_config>
            <active-response>
+             <disabled>no</disabled>
              <command>netsh</command>
              <location>local</location>
              <rules_id>100100</rules_id>

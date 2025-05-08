@@ -397,9 +397,32 @@ The ``wazuh-wui`` user is the user to connect with the Wazuh API by default. Fol
 Agents
 ^^^^^^
 
-Wazuh agents are designed to monitor hosts. To start using them:
+Wazuh agents are designed to monitor hosts. To start using them, follow the steps below:
 
-#. :doc:`Install the agent </installation-guide/wazuh-agent/index>`.
-#. Enroll the agent by modifying the file ``/var/ossec/etc/ossec.conf``. Change the “transport protocol” to TCP and replace the ``MANAGER_IP`` with the external IP address of the service pointing to port 1514 or with the hostname provided by the cloud provider
+#. :ref:`Add the Wazuh repository <agent-installation-add-wazuh-repository>` to download the official packages.
+#. Run the following command to install the Wazuh agent and enroll to your kubernetes cluster:
 
-To learn more about registering agents, see the :doc:`Wazuh agent enrollment </user-manual/agent/agent-enrollment/index>` section of the documentation.
+   .. code-block:: console
+
+      # WAZUH_MANAGER="EXTERNAL_IP_WAZUH_WORKER" WAZUH_REGISTRATION_SERVER="EXTERNAL_IP_WAZUH" WAZUH_REGISTRATION_PASSWORD="PASSWORD" \
+        apt-get install wazuh-agent
+
+   Replace:
+
+   -  ``EXTERNAL_IP_WAZUH_WORKER`` with the external IP address of the Wazuh workers loadbalancer service.
+   -  ``EXTERNAL_IP_WAZUH`` with the external IP address of the Wazuh loadbalancer service.
+   -  ``PASSWORD`` with the password used to enroll agents.
+
+   .. note::
+
+      The default password for deploying agents in Wazuh on Kubernetes is ``password``. This password is used for enrolling new agents. A file at ``/var/ossec/etc/authd.pass`` contains this password.
+
+#. Enable and start the Wazuh agent service.
+
+   .. code-block:: console
+
+      # systemctl daemon-reload
+      # systemctl enable wazuh-agent
+      # systemctl start wazuh-agent
+
+To learn more about enrolling agents, see the :doc:`Wazuh agent enrollment </user-manual/agent/agent-enrollment/index>` section of the documentation.

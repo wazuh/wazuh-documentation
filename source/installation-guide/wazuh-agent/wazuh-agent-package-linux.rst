@@ -12,6 +12,8 @@ The deployment of a Wazuh agent on a Linux system uses deployment variables that
 
 .. note:: You need root user privileges to run all the commands described below.
 
+.. _agent-installation-add-wazuh-repository:
+
 Add the Wazuh repository
 -------------------------
 
