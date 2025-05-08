@@ -194,7 +194,7 @@ Testing the cluster installation
 
    .. code-block:: console
 
-      # curl -k -u admin:admin https://<WAZUH_INDEXER_IP_ADRESS>:9200
+      # curl -k -u admin:admin https://<WAZUH_INDEXER_IP_ADDRESS>:9200
 
    .. code-block:: none
       :class: output accordion-output

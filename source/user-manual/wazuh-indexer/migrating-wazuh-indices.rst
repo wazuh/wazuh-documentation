@@ -183,6 +183,8 @@ On the Wazuh dashboard, perform the following steps:
 
 Repeat the above steps on the destination Wazuh cluster to set up a similar snapshot repository.
 
+.. _migrating_indices_take_snapshots:
+
 Take snapshots
 --------------
 
