@@ -51,7 +51,7 @@ Microsoft Entra ID Configuration
 
    #. Add the following details to your app role:
 
-      -  **Display name**: This can be any value that you want. In our case this is ``Wazuh role``.
+      -  **Display name**: This can be any value that you want. In our case this is ``Wazuh_role``.
       -  **Allowed member types**: Select **Users/Groups**.
       -  **Value**: Defines the name of the role. In this case ``Wazuh_role``, which will be the backend role value to be mapped in the ``roles_mapping.yml`` file.
       -  **Description**: This can be any value that you want. In our case this is ``Wazuh Admin Role``.

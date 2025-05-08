@@ -58,6 +58,7 @@ Wazuh server
 
       <ossec_config>
         <active-response>
+          <disabled>no</disabled>
           <command>disable-account</command>
           <location>local</location>
           <rules_id>120100</rules_id>
