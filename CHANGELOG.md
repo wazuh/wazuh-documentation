@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+# [v4.13.0]
+
+- Support for Wazuh 4.13.0
+
 ## [v4.12.2]
 
 - Support for Wazuh 4.12.2
