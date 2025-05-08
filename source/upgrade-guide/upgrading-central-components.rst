@@ -11,6 +11,14 @@ This section guides you through the upgrade process of the Wazuh indexer, the Wa
 -  **All-in-one deployments:** Execute all commands and configuration actions on the same node since all components run on a single system.
 -  **Multi-node cluster deployments:** Run commands and apply configurations on the respective node where the component being upgraded is located.
 
+.. warning::
+
+   Downgrading to version 4.11 and earlier is not possible. Since version 4.12.0, Wazuh uses a newer version of Apache Lucene.
+
+   Apache Lucene does not support downgrades, meaning once you upgrade to Wazuh 4.12.0 or later, you cannot roll back to 4.11 and earlier versions without a fresh installation of the indexer.
+
+   To avoid data loss, create an :ref:`index snapshot <migrating_indices_take_snapshots>` before upgrading. For more details, refer to the `Opensearch documentation <https://opensearch.org/docs/latest/install-and-configure/upgrade-opensearch/rolling-upgrade/#:~:text=Important%3A%20OpenSearch%20nodes%20cannot%20be,before%20beginning%20the%20upgrade%20procedure.>`__.
+
 Preparing the upgrade
 ---------------------
 

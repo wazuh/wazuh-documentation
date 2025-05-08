@@ -40,6 +40,7 @@ In cases where you need to increase the Active Response blocking time for :ref:`
 
    <ossec_config>
      <active-response>
+       <disabled>no</disabled>
        <repeated_offenders>10,20,30</repeated_offenders>
      </active-response>
    </ossec_config>

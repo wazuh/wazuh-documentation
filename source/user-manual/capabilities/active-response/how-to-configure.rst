@@ -36,6 +36,7 @@ Configuring the Wazuh server
    .. code-block:: xml
 
       <active-response>
+        <disabled>no</disabled>
         <command>host-deny</command>
         <location>local</location>
         <level>7</level>

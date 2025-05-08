@@ -24,6 +24,7 @@ In this use case, you configure the Active Response module to block an IP addres
     .. code-block:: console
 
         <active-response>
+          <disabled>no</disabled>
           <command>firewall-drop</command>
           <location>local</location>
           <rules_id>5710</rules_id>
