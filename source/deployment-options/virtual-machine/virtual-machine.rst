@@ -18,8 +18,8 @@ Download the `virtual appliance (OVA) <https://packages.wazuh.com/|WAZUH_CURRENT
 -  Wazuh indexer |WAZUH_CURRENT_OVA|
 -  Wazuh dashboard |WAZUH_CURRENT_OVA|
 
-Packages list
--------------
+Open Virtual Appliances
+-----------------------
 
 .. |VM_AL_64_OVA| replace:: `wazuh-|WAZUH_CURRENT_OVA|.ova <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_OVA|/vm/wazuh-|WAZUH_CURRENT_OVA|.ova>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_OVA|/checksums/wazuh/|WAZUH_CURRENT_OVA|/wazuh-|WAZUH_CURRENT_OVA|.ova.sha512>`__)
 .. |WAZUH_OVA_VERSION| replace:: |WAZUH_CURRENT_OVA|
