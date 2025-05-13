@@ -434,7 +434,7 @@ Perform the steps below on your relay server to configure Postfix with Gmail.
 
    The command sends an email to the receiver’s email with subject ``Test Postfix`` and body ``Test mail from postfix``.
 
-   If you get the error message ``fatal: tls_fprint: error computing md5 message digest`` in the ``/var/log/maillog`` file, run the following commands to switch Postfix from the default ``MD5`` hashing function to ``SHA-256``:
+   If you get the error message ``fatal: tls_fprint: error computing md5 message digest`` in the ``/var/log/mail.log`` file, run the following commands to switch Postfix from the default ``MD5`` hashing function to ``SHA-256``:
 
    .. code-block:: console
 
