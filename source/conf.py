@@ -676,7 +676,7 @@ else:
     production = False
 
 html_context = {
-    "display_github": True,
+    "display_github": False,
     "github_user": "wazuh",
     "github_repo": "wazuh-documentation",
     "conf_py_path": "/source/",
