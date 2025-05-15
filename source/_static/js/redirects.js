@@ -71,27 +71,16 @@ removedUrls['x.y'] = [
 
 /* *** RELEASE 6.0 ****/
 
-/* Redirections from 5.9 to 6.0  */
+/* Redirections from 4.9 to 6.0  */
 
-/* Pages added in 5.0 */
+/* Pages added in 6.0 */
 
 newUrls['6.0'] = [
   '/release-notes/release-6-0-0.html',
   '/release-notes/index-6x.html',
 ];
 
-/* *** RELEASE 5.0 ****/
-
-/* Redirections from 4.9 to 5.0  */
-
-/* Pages added in 5.0 */
-
-newUrls['5.0'] = [
-  '/release-notes/release-5-0-0.html',
-  '/release-notes/index-5x.html',
-];
-
-/* Pages no longer available in 5.0 */
+/* Pages no longer available in 6.0 */
 
 /* *** RELEASE 4.13 ****/
 

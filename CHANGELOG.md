@@ -1,11 +1,7 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-# [v6.0.0]
-
-- Support for Wazuh 6.0.0
-
-## [v5.0.0]
+## [v6.0.0]
 
 ### Changed
 
