@@ -127,7 +127,6 @@ Wazuh version                                    Release date
    .. toctree::
 
       index-6x
-      index-5x
       index-4x
       index-3x
       index-2x
