@@ -70,7 +70,6 @@ removedUrls['x.y'] = [
 
 /* *** RELEASE 6.0 ****/
 
-/* Redirections from 4.9 to 6.0  */
 
 /* Pages added in 6.0 */
 
