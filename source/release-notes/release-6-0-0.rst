@@ -8,6 +8,12 @@
 
 This section lists the changes in version 6.0.0. Every update of the Wazuh solution is cumulative and includes all enhancements and fixes from previous releases.
 
+Highlights
+----------
+
+Breaking changes
+----------------
+
 What's new
 ----------
 
