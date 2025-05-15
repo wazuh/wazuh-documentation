@@ -2,13 +2,16 @@
 
 name: CI
 
+permissions:
+  contents: read
+
 # Controls when the action will run. Triggers the workflow on push or pull request 
 # events but only for the master branch
 on:
   push:
-    branches: [ 3.11 ]
+    branches: [ 4.11 ]
   pull_request:
-    branches: [ 3.11 ]
+    branches: [ 4.11 ]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -18,12 +21,12 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.9, 3.10, 3.11]
+        python-version: [3.9, 3.11]
 
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v1
+      uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
 
@@ -38,4 +41,3 @@ jobs:
     - name: Run a multi-line script
       run: |
         make html
-
