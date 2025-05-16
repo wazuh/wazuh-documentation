@@ -27,8 +27,22 @@ This release resolves known issues as the following:
 Changelogs
 ----------
 
-More details about these changes are provided in the changelog of each component:
+The repository changelogs provide more details about the changes.
 
-- `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v5.0.0/CHANGELOG.md>`__
-- `wazuh/wazuh-dashboard <https://github.com/wazuh/wazuh-dashboard-plugins/blob/v5.0.0-2.10.0/CHANGELOG.md>`__
-- `wazuh/wazuh-packages <https://github.com/wazuh/wazuh-packages/releases/tag/v5.0.0>`__
+Product repositories
+^^^^^^^^^^^^^^^^^^^^
+
+-  `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v5.0.0/CHANGELOG.md>`__
+-  `wazuh/wazuh-dashboard-plugins <https://github.com/wazuh/wazuh-dashboard-plugins/blob/v5.0.0/CHANGELOG.md>`__
+
+Auxiliary repositories
+^^^^^^^^^^^^^^^^^^^^^^^
+
+-  `wazuh/wazuh-ansible <https://github.com/wazuh/wazuh-ansible/blob/v5.0.0/CHANGELOG.md>`__
+-  `wazuh/wazuh-kubernetes <https://github.com/wazuh/wazuh-kubernetes/blob/v5.0.0/CHANGELOG.md>`__
+-  `wazuh/wazuh-puppet <https://github.com/wazuh/wazuh-puppet/blob/v5.0.0/CHANGELOG.md>`__
+-  `wazuh/wazuh-docker <https://github.com/wazuh/wazuh-docker/blob/v5.0.0/CHANGELOG.md>`__
+
+-  `wazuh/qa-integration-framework <https://github.com/wazuh/qa-integration-framework/blob/v5.0.0/CHANGELOG.md>`__
+
+-  `wazuh/wazuh-documentation <https://github.com/wazuh/wazuh-documentation/blob/v5.0.0/CHANGELOG.md>`__
