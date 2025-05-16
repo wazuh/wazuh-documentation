@@ -22,6 +22,7 @@ is_latest_release = True
 # Important: use a valid branch (4.0) or, preferably, tag name (v4.0.0)
 
 release = '5.0.0'
-api_tag = '5.0.0'
+api_tag = 'master'
+
 
 apiURL = 'https://raw.githubusercontent.com/wazuh/wazuh/'+api_tag+'/api/api/spec/spec.yaml'
