@@ -4,7 +4,7 @@ const redirections = [];
 
 /* Note: new release versions must always be inserted in the first position of the array "versions" */
 const versions = [
-  '5.0',
+  '6.0',
   '4.13',
   '4.12',
   '4.11',
@@ -68,18 +68,17 @@ removedUrls['x.y'] = [
 ];
 */
 
-/* *** RELEASE 5.0 ****/
+/* *** RELEASE 6.0 ****/
 
-/* Redirections from 4.9 to 5.0  */
 
-/* Pages added in 5.0 */
+/* Pages added in 6.0 */
 
-newUrls['5.0'] = [
-  '/release-notes/release-5-0-0.html',
-  '/release-notes/index-5x.html',
+newUrls['6.0'] = [
+  '/release-notes/release-6-0-0.html',
+  '/release-notes/index-6x.html',
 ];
 
-/* Pages no longer available in 5.0 */
+/* Pages no longer available in 6.0 */
 
 /* *** RELEASE 4.13 ****/
 

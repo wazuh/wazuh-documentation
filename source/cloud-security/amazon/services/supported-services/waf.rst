@@ -71,7 +71,7 @@ Native integration
 Integration using Amazon Data Firehose
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. deprecated:: 5.0
+.. deprecated:: 6.0
 
 Amazon Data Firehose configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
