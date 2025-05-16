@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Check out Wazuh 5.x release notes. Every update of the solution is cumulative and includes all enhancements and fixes from previous releases.
+   :description: Check out Wazuh 5.x release notes. Every update of the solution is cumulative and includes all enhancements and fixes from previous releases.
 
 5.x
 ===
