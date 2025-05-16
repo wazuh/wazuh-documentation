@@ -11,6 +11,10 @@ All notable changes to this project will be documented in this file.
 
 - Removed the option to store authentication credentials as plain text in ``ossec.conf``. ([#6405](https://github.com/wazuh/wazuh-documentation/pull/6405))
 
+## [v5.0.0]
+
+- Support for Wazuh 5.0.0
+
 ## [v4.13.0]
 
 - Support for Wazuh 4.13.0
