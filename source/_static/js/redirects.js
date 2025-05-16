@@ -69,6 +69,24 @@ removedUrls['x.y'] = [
 ];
 */
 
+/* *** RELEASE 6.0 ****/
+
+/* Pages added in 6.0 */
+
+newUrls['6.0'] = [
+  '/release-notes/release-6-0-0.html',
+  '/release-notes/index-6x.html',
+];
+
+/* *** RELEASE 5.0 ****/
+
+/* Pages added in 5.0 */
+
+newUrls['5.0'] = [
+  '/release-notes/release-5-0-0.html',
+  '/release-notes/index-5x.html',
+];
+
 /* *** RELEASE 4.13 ****/
 
 /* Pages added in 4.13 */
