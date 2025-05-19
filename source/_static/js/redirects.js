@@ -4,6 +4,7 @@ const redirections = [];
 
 /* Note: new release versions must always be inserted in the first position of the array "versions" */
 const versions = [
+  '4.14',
   '4.13',
   '4.12',
   '4.11',
@@ -66,6 +67,14 @@ removedUrls['x.y'] = [
   '/old-url',
 ];
 */
+
+/* *** RELEASE 4.14 ****/
+
+/* Pages added in 4.14 */
+
+newUrls['4.14'] = [
+  '/release-notes/release-4-14-0.html',
+]
 
 /* *** RELEASE 4.13 ****/
 
