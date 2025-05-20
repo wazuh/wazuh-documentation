@@ -1,15 +1,12 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The pre-built Wazuh Virtual Machine includes all Wazuh components ready-to-use. Test all Wazuh capabilities with our OVA.  
-
-.. _virtual_machine:
+   :description: The pre-built Wazuh Virtual Machine includes all Wazuh components ready-to-use. Test all Wazuh capabilities with our OVA.
 
 Virtual Machine (OVA)
 =====================
 
 Wazuh provides a pre-built virtual machine image in Open Virtual Appliance (OVA) format. This can be directly imported to VirtualBox or other OVA compatible virtualization systems. Take into account that this VM only runs on 64-bit systems with x86_64/AMD64 architecture. It does not provide high availability and scalability out of the box. However, these can be implemented by using :doc:`distributed deployment </installation-guide/index>`.
-
 
 Download the `virtual appliance (OVA) <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_OVA|/vm/wazuh-|WAZUH_CURRENT_OVA|.ova>`_, which includes Amazon Linux 2023 and the Wazuh central components.
 
@@ -64,7 +61,7 @@ Import and access the virtual machine
 
 #. Start the machine.
 #. Access the virtual machine using the following user and password. You can use the virtualization platform or access it via SSH.
- 
+
    .. code-block:: none
 
       user: wazuh-user
@@ -87,13 +84,11 @@ Shortly after starting the VM, the Wazuh dashboard can be accessed from the web 
      user: admin
      password: admin
 
-
 You can find ``<wazuh_server_ip>``  by typing the following command in the VM:
 
   .. code-block:: none
 
      ip a
-
 
 Configuration files
 -------------------
@@ -103,9 +98,9 @@ All components included in this virtual image are configured to work out-of-the-
   - Wazuh manager: ``/var/ossec/etc/ossec.conf``
 
   - Wazuh indexer: ``/etc/wazuh-indexer/opensearch.yml``
-  
+
   - Filebeat-OSS: ``/etc/filebeat/filebeat.yml``
-  
+
   - Wazuh dashboard: 
 
      - ``/etc/wazuh-dashboard/opensearch_dashboards.yml``
@@ -123,6 +118,38 @@ In case of using VirtualBox, once the virtual machine is imported it may run int
 
 Once the virtual machine is imported and running, the next step is to :doc:`deploy the Wazuh agents </installation-guide/wazuh-agent/index>` on the systems to be monitored.
 
+Troubleshooting
+---------------
+
+VM fails to start on AMD processors with VMware
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Issue**:
+
+-  After importing the Wazuh OVA into VMware Workstation on a host with an AMD processor, the VM fails to start with the error:
+
+   .. code-block:: none
+
+      The CPU has been disabled by the guest operating system. Power off or reset the virtual machine.
+
+**Workaround**:
+
+#. Locate and edit the VM’s ``.vmx`` file after importing the OVA.
+#. Add the following lines to the end of the file to resolve compatibility issues between the VM and AMD processors.
+
+   .. code-block:: ini
+
+      cpuid.0.eax = "0000:0000:0000:0000:0000:0000:0000:1011"
+      cpuid.0.ebx = "0111:0101:0110:1110:0110:0101:0100:0111"
+      cpuid.0.ecx = "0110:1100:0110:0101:0111:0100:0110:1110"
+      cpuid.0.edx = "0100:1001:0110:0101:0110:1110:0110:1001"
+      cpuid.1.eax = "0000:0000:0000:0001:0000:0110:0111:0001"
+      cpuid.1.ebx = "0000:0010:0000:0001:0000:1000:0000:0000"
+      cpuid.1.ecx = "1000:0010:1001:1000:0010:0010:0000:0011"
+      cpuid.1.edx = "0000:0111:1000:1011:1111:1011:1111:1111"
+      featureCompat.enable = "FALSE"
+
+#. Save the file and power on the VM.
 
 Upgrading the VM
 ----------------
