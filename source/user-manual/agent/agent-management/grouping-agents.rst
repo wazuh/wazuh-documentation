@@ -229,7 +229,7 @@ Below are the steps to assign agents to a group with a specific configuration:
 
 #. After connecting to the Wazuh manager, each agent assigned to the group will receive the files contained in the ``/var/ossec/etc/shared/dbms/`` folder from the Wazuh manager, including the ``agent.conf`` file that was modified in the previous step. The length of time it takes for the Wazuh manager to push these files to the Wazuh agents depends on the size of the files, the number of agents in the group, and the connection protocol used. For example, depending on network bandwidth and performance, it may take 8 minutes to receive a 10 MB folder (excluding ``merged.mg`` file) on 100 agents using UDP. However, if TCP is used, it may take less time.
 
-#. Once a specific agent belongs to a group, it will not be automatically reassigned to this group even if it is re-enrolled under another name or ID. After re-enrollment, it will be added to the default group.
+#. Re-enrollment adds the agent to the ``default`` group. It does not automatically reassign the agent to its previous group when re-enrolled under a different name or ID.
 
 merged.mg
 ^^^^^^^^^
