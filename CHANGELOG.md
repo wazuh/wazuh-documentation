@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 - Added the ``authentication_pool_size`` option to the Wazuh server API configuration section. ([#8287](https://github.com/wazuh/wazuh-documentation/pull/8287))
 - Added clarifications that `<disabled>` is required in `active-response` blocks in *Use cases* and *Active response* reference sections. ([#8428](https://github.com/wazuh/wazuh-documentation/pull/8428))
 - Added new section on creating agent groups. ([#8436](https://github.com/wazuh/wazuh-documentation/pull/8436))
+- **Post-release**: Backported troubleshooting steps to the *Virtual Machine (OVA)* installation guide. ([#8563](https://github.com/wazuh/wazuh-documentation/pull/8563))
 
 ### Changed
 
