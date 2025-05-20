@@ -229,16 +229,12 @@ Below are the steps to assign agents to a group with a specific configuration:
 
 #. After connecting to the Wazuh manager, each agent assigned to the group will receive the files contained in the ``/var/ossec/etc/shared/dbms/`` folder from the Wazuh manager, including the ``agent.conf`` file that was modified in the previous step. The length of time it takes for the Wazuh manager to push these files to the Wazuh agents depends on the size of the files, the number of agents in the group, and the connection protocol used. For example, depending on network bandwidth and performance, it may take 8 minutes to receive a 10 MB folder (excluding ``merged.mg`` file) on 100 agents using UDP. However, if TCP is used, it may take less time.
 
-#. Once a specific agent belongs to a group, it will not be automatically reassigned to this group even if it is re-enrolled under another name or ID. After re-enrollment, it will be added to the default group which is the default behavior. If you want the Wazuh agent to be automatically reassigned after re-enrollment, it must be explicitly activated by the user in the ``/var/ossec/etc/local_internal_options.conf`` file by adding the option ``remoted.guess_agent_group=1`` (see section ``remoted`` in :doc:`internal options </user-manual/reference/internal-options>`).
-
-   When this option is added, on re-enrollment, the checksum of the ``merged.mg`` file sent by the Wazuh agent is compared with that of the other agents enrolled with the Wazuh manager.
+#. Re-enrollment adds the agent to the ``default`` group. It does not automatically reassign the agent to its previous group when re-enrolled under a different name or ID.
 
 merged.mg
 ^^^^^^^^^
 
 When a Wazuh agent is enrolled in the Wazuh manager for the first time, the Wazuh manager generates a ``merged.mg`` file based on the Wazuh agent's configuration and group membership. Whenever the Wazuh agent's configuration or group membership changes, the Wazuh manager updates the ``merged.mg`` file and sends it to the Wazuh agent.
-
-The ``merged.mg`` file plays a role in automatic re-assignment of agents to their original groups after re-enrollment (with the ``remoted.guess_agent_group=1`` option enabled). The checksum of the ``merged.mg`` file is used for comparison with other agents to determine the appropriate group.
 
 On the Wazuh server, the file is located at ``var/ossec/etc/shared/merged.mg``.
 
