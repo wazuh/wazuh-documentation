@@ -9,7 +9,7 @@ All notable changes to this project will be documented in this file.
 - 
 ### Removed
 
-- Removed `remoted.guess_agent_group` option and related functionality. After re-enrollment, agents will be added to the default group. ([#8560](https://github.com/wazuh/wazuh-documentation/pull/8560))
+- Removed `remoted.guess_agent_group` option and related functionality. Re-enrollment adds the agent to the ``default`` group. ([#8560](https://github.com/wazuh/wazuh-documentation/pull/8560))
 
 ## [v4.12.0]
 
