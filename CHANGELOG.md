@@ -6,7 +6,6 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 - Added the *Wazuh indexer configuration on hardened endpoints* section. ([#8437](https://github.com/wazuh/wazuh-documentation/pull/8437))
-- 
 ### Removed
 
 - Removed `remoted.guess_agent_group` option and related functionality. Re-enrollment adds the agent to the ``default`` group. ([#8560](https://github.com/wazuh/wazuh-documentation/pull/8560))
