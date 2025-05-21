@@ -179,7 +179,7 @@ Shuffle
 
 To set up this integration, do the following:
 
-#. Go to Shuffle, make a Workflow using the Email app, and select the version.
+#. Go to Shuffle, make a Workflow using the Email app and select version ``1.0.1`` for it.
 
 #. Set **Recipients** and **Subject** in the email configuration. Put ``$exec`` in the Body to include the alert information.
 
@@ -294,7 +294,7 @@ You are recommended to follow the instructions below when creating an integratio
       # chmod 750 /var/ossec/integrations/custom-script
       # chown root:wazuh /var/ossec/integrations/custom-script
 
-#. The first line of the integration script must indicate its interpreter, or else Wazuh won’t know how to read and execute the script. The following example line indicates the Python interpreter:
+#. The first line of the integration script must indicate its interpreter, or else Wazuh won't know how to read and execute the script. The following example line indicates the Python interpreter:
 
    .. code-block:: python
 
