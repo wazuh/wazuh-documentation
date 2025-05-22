@@ -3,7 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [v4.10.2]
 
-- Support for Wazuh 4.10.2
+### Fixed
+
+- Removed prompt symbol from code block. ([#8561](https://github.com/wazuh/wazuh-documentation/pull/8561))
+- Added specific version for Email app in Shuffle integration section. ([#8565](https://github.com/wazuh/wazuh-documentation/pull/8565))
 
 ## [v4.10.1]
 
