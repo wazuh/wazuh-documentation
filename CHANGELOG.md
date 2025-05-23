@@ -60,6 +60,13 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Fixed script argument in dashboard package generation command. ([8265](https://github.com/wazuh/wazuh-documentation/pull/8265))
 - **Post-release**: Fixed OpenSearch Dashboards version reference. ([8265](https://github.com/wazuh/wazuh-documentation/pull/8265))
 
+## [v4.10.2]
+
+### Fixed
+
+- Removed prompt symbol from code block. ([#8561](https://github.com/wazuh/wazuh-documentation/pull/8561))
+- Added specific version for Email app in Shuffle integration section. ([#8565](https://github.com/wazuh/wazuh-documentation/pull/8565))
+
 ## [v4.10.1]
 
 - Support for Wazuh 4.10.1
