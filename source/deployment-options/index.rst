@@ -47,10 +47,6 @@ All the alternatives include instructions on how to install the :doc:`Wazuh cent
 
 - :doc:`Installing the Wazuh server from sources <wazuh-from-sources/index>`: Installing Wazuh from sources means installing the Wazuh manager without using a package manager. You compile the source code and copy the binaries to your computer instead.
 
-.. note::
-
-   Since Wazuh v4.6.0, we don't provide the Kibana plugin and Splunk app anymore. To integrate Wazuh with Elastic or Splunk, refer to our :doc:`/integrations-guide/index`.
-
 Installing the Wazuh agent
 --------------------------
 
