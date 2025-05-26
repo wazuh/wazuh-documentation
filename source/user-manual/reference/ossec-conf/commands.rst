@@ -56,7 +56,6 @@ These files are located in ``/var/ossec/active-response/bin`` directory in Linux
 
 expect
 ^^^^^^
-.. deprecated:: 4.2
 
 Specifies the lists of extracted fields that are to be passed as parameters to the command. If any of the listed fields were not declared in a certain instance, those field values would be passed as a dash (``-``) instead of as no value at all. The command requires finding the expected fields in the alert, otherwise, the AR will be skipped.
 
