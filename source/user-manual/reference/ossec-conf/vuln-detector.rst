@@ -74,7 +74,6 @@ Enables indexing of vulnerability inventory data.
 
 offline-url
 ^^^^^^^^^^^
-.. versionadded:: 4.8.0
 
 File path or URL for offline content access.
 
@@ -92,22 +91,14 @@ Where:
 interval
 ^^^^^^^^
 
-.. deprecated:: 4.8.0
-
 run_on_start
 ^^^^^^^^^^^^
-
-.. deprecated:: 4.8.0
 
 retry_interval
 ^^^^^^^^^^^^^^
 
-.. deprecated:: 4.8.0
-
 provider
 ^^^^^^^^
-
-.. deprecated:: 4.8.0
 
 Example of configuration
 ------------------------
