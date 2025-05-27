@@ -828,6 +828,16 @@ Remoted
 +                                   +               +--------------------------------------------------------------+
 |                                   |               | Any other integer between 1 and 86400                        |
 +-----------------------------------+---------------+--------------------------------------------------------------+
+| **remoted.guess_agent_group**     | Description   | Toggle to enable or disable the guessing of the group to     |
+|                                   |               | which the agent belongs when registering it again.           |
+|                                   |               |                                                              |
+|                                   |               | .. note:: Since version 4.4.0, in a cluster architecture,    |
+|                                   |               |           this setting only applies to the master node.      |
++                                   +---------------+--------------------------------------------------------------+
+|                                   | Default value | 0                                                            |
++                                   +---------------+--------------------------------------------------------------+
+|                                   | Allowed values| 0, 1                                                         |
++-----------------------------------+---------------+--------------------------------------------------------------+
 | **remoted.receive_chunk**         | Description   | | Reception buffer size for TCP (bytes).                     |
 |                                   |               | | Amount of data that Remoted can receive per operation.     |
 +                                   +---------------+--------------------------------------------------------------+
