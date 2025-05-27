@@ -65,6 +65,8 @@ custom_replacements = {
     # --- Architectures for Wazuh indexer packages
     "|WAZUH_INDEXER_x64_RPM|" : "x86_64",
     "|WAZUH_INDEXER_x64_DEB|" : "amd64",
+    "|WAZUH_INDEXER_AARCH64_RPM|" : "aarch64",
+    "|WAZUH_INDEXER_ARM64_DEB|" : "arm64",
     #
     # === Wazuh dashboard version revisions
     "|WAZUH_DASHBOARD_CURRENT_REV_RPM|" : "1",
@@ -72,6 +74,8 @@ custom_replacements = {
     # --- Architectures for Wazuh dashboard packages
     "|WAZUH_DASHBOARD_x64_RPM|" : "x86_64",
     "|WAZUH_DASHBOARD_x64_DEB|" : "amd64",
+    "|WAZUH_DASHBOARD_AARCH64_RPM|" : "aarch64",
+    "|WAZUH_DASHBOARD_ARM64_DEB|" : "arm64",
     #
     # === Versions and revisions for other Wazuh deployments
     #"|WAZUH_CURRENT_MAJOR_AMI|" :
