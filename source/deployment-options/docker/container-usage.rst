@@ -29,7 +29,7 @@ Access to services and containers
 
    .. code-block:: console
 
-      # docker-compose ps
+      # docker compose ps
 
    .. code-block:: none
       :class: output
@@ -43,7 +43,7 @@ Access to services and containers
 
    .. code-block:: console
 
-      # docker-compose exec <SERVICE> bash
+      # docker compose exec <SERVICE> bash
 
 Wazuh service data volumes
 --------------------------

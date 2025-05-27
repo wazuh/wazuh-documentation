@@ -61,7 +61,7 @@ Single-node Deployment
       
          .. code-block:: console
          
-            # docker-compose -f generate-indexer-certs.yml run --rm generator
+            # docker compose -f generate-indexer-certs.yml run --rm generator
 
       This saves the certificates into the ``config/wazuh_indexer_ssl_certs`` directory.
 
@@ -95,26 +95,26 @@ Single-node Deployment
          config/wazuh_indexer_ssl_certs/wazuh.dashboard-key.pem
          config/wazuh_indexer_ssl_certs/root-ca.pem
  
-#. Start the Wazuh single-node deployment using docker-compose:
+#. Start the Wazuh single-node deployment using Docker Compose:
 
    -  **Foreground**:
 
       .. code-block:: console  
 
-         # docker-compose up
+         # docker compose up
 
    -  **Background**:
 
       .. code-block:: console  
 
-         # docker-compose up -d
+         # docker compose up -d
 
    The default username and password for the Wazuh dashboard are ``admin`` and ``SecretPassword``. For :ref:`additional security <change-pwd-existing-usr>`, you can change the default password for the Wazuh indexer *admin* user.
 
 
 .. note::
 
-   To know when the Wazuh indexer is up, the Wazuh dashboard container uses ``curl`` to run multiple queries to the Wazuh indexer API. You can expect to see several ``Failed to connect to Wazuh indexer port 9200`` log messages or “ *Wazuh dashboard server is not ready yet* ” until the Wazuh indexer is started. Then the setup process continues normally. It takes about 1 minute for the Wazuh indexer to start up. You can find the default Wazuh indexer credentials in the ``docker-compose.yml`` file.
+   To know when the Wazuh indexer is up, the Wazuh dashboard container uses ``curl`` to run multiple queries to the Wazuh indexer API. You can expect to see several ``Failed to connect to Wazuh indexer port 9200`` log messages or " *Wazuh dashboard server is not ready yet* " until the Wazuh indexer is started. Then the setup process continues normally. It takes about 1 minute for the Wazuh indexer to start up. You can find the default Wazuh indexer credentials in the ``docker-compose.yml`` file.
 
 Multi-node deployment
 ^^^^^^^^^^^^^^^^^^^^^
@@ -161,7 +161,7 @@ Multi-node deployment
         
       .. code-block:: console
 
-         # docker-compose -f generate-indexer-certs.yml run --rm generator
+         # docker compose -f generate-indexer-certs.yml run --rm generator
 
       This saves the certificates into the ``config/wazuh_indexer_ssl_certs`` directory.
 
@@ -202,25 +202,25 @@ Multi-node deployment
          config/wazuh_indexer_ssl_certs/root-ca.pem
 
 
-#. Start the Wazuh multi-node deployment using ``docker-compose``:
+#. Start the Wazuh multi-node deployment using ``docker compose``:
 
    -  **Foreground**:
 
       .. code-block:: console
 
-         # docker-compose up
+         # docker compose up
 
    -  **Background**:
 
       .. code-block:: console
 
-         # docker-compose up -d
+         # docker compose up -d
 
    The default username and password for the Wazuh dashboard are ``admin`` and ``SecretPassword``. For :ref:`additional security <change-pwd-existing-usr>`, you can change the default password for the Wazuh indexer *admin* user.
 
 .. note::
 
-   To know when the Wazuh indexer is up, the Wazuh dashboard container uses ``curl`` to run multiple queries to the Wazuh indexer API. You can expect to see several ``Failed to connect to Wazuh indexer port 9200`` log messages or “Wazuh dashboard server is not ready yet” until the Wazuh indexer is started. Then the setup process continues normally. It takes about 1 minute for the Wazuh indexer to start up. You can find the default Wazuh indexer credentials in the ``docker-compose.yml`` file.
+   To know when the Wazuh indexer is up, the Wazuh dashboard container uses ``curl`` to run multiple queries to the Wazuh indexer API. You can expect to see several ``Failed to connect to Wazuh indexer port 9200`` log messages or "Wazuh dashboard server is not ready yet" until the Wazuh indexer is started. Then the setup process continues normally. It takes about 1 minute for the Wazuh indexer to start up. You can find the default Wazuh indexer credentials in the ``docker-compose.yml`` file.
 
 Build docker images locally
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -233,13 +233,7 @@ You can modify and build the Wazuh manager, indexer, and dashboard images locall
   
       # git clone https://github.com/wazuh/wazuh-docker.git -b v|WAZUH_CURRENT_DOCKER|
 
-#. For versions up to 4.3.4, enter into the ``build-docker-images`` directory and build the Wazuh manager, indexer, and dashboard images:
-  
-   .. code-block:: console
-  
-      # docker-compose build
-
-   For version 4.3.5 and above, run the image creation script:
+#. Run the image creation script:
 
    .. code-block:: console
   
@@ -276,11 +270,11 @@ If you don't log out, persistent session cookies might cause errors when accessi
 Setting a new hash
 ..................
 
-#. Stop the deployment stack if it’s running:
+#. Stop the deployment stack if it's running:
 
    .. code-block:: console
   
-      # docker-compose down
+      # docker compose down
 
 #. Run this command to generate the hash of your new password. Once the container launches, input the new password and press **Enter**.
 
@@ -396,7 +390,7 @@ Applying the changes
 
    .. code-block:: console
   
-      # docker-compose up -d
+      # docker compose up -d
 
 #. Run ``docker ps`` and note the name of the first Wazuh indexer container. For example, ``single-node-wazuh.indexer-1``, or ``multi-node-wazuh1.indexer-1``.
 
@@ -495,8 +489,8 @@ The ``wazuh-wui`` user is the user to connect with the Wazuh API by default. Fol
 
    .. code-block:: console
 
-      # docker-compose down
-      # docker-compose up -d
+      # docker compose down
+      # docker compose up -d
 
 Exposed ports
 -------------
@@ -519,4 +513,4 @@ By default, the stack exposes the following ports:
 
 .. note::
 
-   Docker doesn’t reload the configuration dynamically. You need to restart the stack after changing the configuration of a component.
+   Docker doesn't reload the configuration dynamically. You need to restart the stack after changing the configuration of a component.

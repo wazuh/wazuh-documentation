@@ -115,31 +115,4 @@ For Linux/Unix machines, Docker requires an AMD64 or ARM64 architecture system r
 Docker compose
 --------------
 
-The Wazuh Docker deployment requires Docker Compose 1.29 or later. Follow these steps to install it:
-
-#. Download the Docker Compose binary:
-
-   .. code-block:: console
-
-      # curl -L "https://github.com/docker/compose/releases/download/v2.12.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-
-#. Grant execution permissions:
-
-   .. code-block:: console
-
-      # chmod +x /usr/local/bin/docker-compose
-
-#. Test the installation to ensure everything is fine:
-
-   .. code-block:: console
-
-      # docker-compose --version
-
-   .. code-block:: none
-      :class: output
-
-      Docker Compose version v2.12.2
-
-   .. note::
-
-      If the command ``docker-compose`` fails after installation. Create a symbolic link to ``/usr/bin`` or any other directory in your path: ``ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose``
+- The Wazuh Docker deployment requires Docker Compose 1.29 or later. The Docker Compose plugin is included with Docker CLI and does not require a separate installation.

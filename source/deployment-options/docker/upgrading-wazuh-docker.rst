@@ -10,17 +10,17 @@ This section describes how to upgrade your Wazuh Docker deployment, starting fro
 
 To upgrade to version |WAZUH_CURRENT_MINOR|, you can follow one of two strategies.
 
-- `Using default docker-compose files`_ : This strategy uses the default docker-compose files for Wazuh |WAZUH_CURRENT_MINOR|. It replaces the docker-compose files of your outdated Wazuh version. 
-- `Keeping custom docker-compose files`_ : This strategy preserves the docker-compose files of your outdated Wazuh deployment. It ignores the docker-compose files of the latest Wazuh version. 
+- `Using default Docker Compose files`_ : This strategy uses the default Docker Compose files for Wazuh |WAZUH_CURRENT_MINOR|. It replaces the Docker Compose files of your outdated Wazuh version. 
+- `Keeping custom Docker Compose files`_ : This strategy preserves the Docker Compose files of your outdated Wazuh deployment. It ignores the Docker Compose files of the latest Wazuh version. 
 
-Using default docker-compose files
+Using default Docker Compose files
 ----------------------------------
 
 #. Run the following command from your wazuh-docker directory, such as ``wazuh-docker/single-node/`` or ``wazuh-docker/multi-node/``, to stop the outdated environment:
 
    .. code-block::
 
-      # docker-compose down
+      # docker compose down
 
 #. Checkout the tag for the current version of wazuh-docker:
 
@@ -28,22 +28,22 @@ Using default docker-compose files
 
          # git checkout v|WAZUH_CURRENT_DOCKER|
 
-#. Start the new version of Wazuh using ``docker-compose``:
+#. Start the new version of Wazuh using Docker Compose:
 
    .. code-block::
 
-      # docker-compose up -d
+      # docker compose up -d
 
-Keeping custom docker-compose files
+Keeping custom Docker Compose files
 -----------------------------------
 
-To upgrade your deployment keeping your custom docker-compose files, do the following.
+To upgrade your deployment keeping your custom Docker Compose files, do the following.
 
 #. Run the following command from your wazuh-docker directory, such as ``wazuh-docker/single-node/`` or ``wazuh-docker/multi-node/``, to stop the outdated environment:
 
    .. code-block:: console
 
-      # docker-compose down
+      # docker compose down
 
 #. If you are upgrading from a version earlier than 4.8, update the ``defaultRoute`` parameter in the Wazuh dashboard configuration.
 
@@ -117,7 +117,7 @@ To upgrade your deployment keeping your custom docker-compose files, do the foll
 
    .. code-block:: bash
 
-      docker-compose -f generate-indexer-certs.yml run --rm generator
+      docker compose -f generate-indexer-certs.yml run --rm generator
 
 #. If you are upgrading from 4.3, update old paths with the new ones.
 
@@ -240,8 +240,8 @@ To upgrade your deployment keeping your custom docker-compose files, do the foll
          -  ``multi-node/config/wazuh_cluster/wazuh_manager.conf``
          -  ``multi-node/config/wazuh_cluster/wazuh_worker.conf``
 
-#. Start the new version of Wazuh using ``docker-compose``.
+#. Start the new version of Wazuh using Docker Compose.
 
    .. code-block:: console
 
-      # docker-compose up -d
+      # docker compose up -d
