@@ -270,7 +270,7 @@ If you don't log out, persistent session cookies might cause errors when accessi
 Setting a new hash
 ..................
 
-#. Stop the deployment stack if it's running:
+#. Stop the deployment stack if it’s running:
 
    .. code-block:: console
   
