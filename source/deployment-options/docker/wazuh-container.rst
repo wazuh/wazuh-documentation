@@ -114,7 +114,7 @@ Single-node Deployment
 
 .. note::
 
-   To know when the Wazuh indexer is up, the Wazuh dashboard container uses ``curl`` to run multiple queries to the Wazuh indexer API. You can expect to see several ``Failed to connect to Wazuh indexer port 9200`` log messages or " *Wazuh dashboard server is not ready yet* " until the Wazuh indexer is started. Then the setup process continues normally. It takes about 1 minute for the Wazuh indexer to start up. You can find the default Wazuh indexer credentials in the ``docker-compose.yml`` file.
+   To know when the Wazuh indexer is up, the Wazuh dashboard container uses ``curl`` to run multiple queries to the Wazuh indexer API. You can expect to see several ``Failed to connect to Wazuh indexer port 9200`` log messages or “ *Wazuh dashboard server is not ready yet* ” until the Wazuh indexer is started. Then the setup process continues normally. It takes about 1 minute for the Wazuh indexer to start up. You can find the default Wazuh indexer credentials in the ``docker-compose.yml`` file.
 
 Multi-node deployment
 ^^^^^^^^^^^^^^^^^^^^^
@@ -220,7 +220,7 @@ Multi-node deployment
 
 .. note::
 
-   To know when the Wazuh indexer is up, the Wazuh dashboard container uses ``curl`` to run multiple queries to the Wazuh indexer API. You can expect to see several ``Failed to connect to Wazuh indexer port 9200`` log messages or "Wazuh dashboard server is not ready yet" until the Wazuh indexer is started. Then the setup process continues normally. It takes about 1 minute for the Wazuh indexer to start up. You can find the default Wazuh indexer credentials in the ``docker-compose.yml`` file.
+   To know when the Wazuh indexer is up, the Wazuh dashboard container uses ``curl`` to run multiple queries to the Wazuh indexer API. You can expect to see several ``Failed to connect to Wazuh indexer port 9200`` log messages or “Wazuh dashboard server is not ready yet” until the Wazuh indexer is started. Then the setup process continues normally. It takes about 1 minute for the Wazuh indexer to start up. You can find the default Wazuh indexer credentials in the ``docker-compose.yml`` file.
 
 Build docker images locally
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
