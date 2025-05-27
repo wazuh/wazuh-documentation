@@ -7,6 +7,10 @@ All notable changes to this project will be documented in this file.
 
 ## [v4.12.1]
 
+### Changed
+
+- Replaced all `docker-compose` command references with `docker compose` in Docker deployment documentation to reflect the use of the Docker Compose plugin included with Docker CLI. ([#8580](https://github.com/wazuh/wazuh-documentation/pull/8580))
+
 ### Added
 
 - Added the *Wazuh indexer configuration on hardened endpoints* section. ([#8437](https://github.com/wazuh/wazuh-documentation/pull/8437))
