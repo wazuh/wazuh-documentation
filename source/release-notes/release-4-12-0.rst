@@ -11,17 +11,17 @@ This section lists the changes in version 4.12.0. Every update of the Wazuh solu
 Highlights
 ----------
 
-Wazuh 4.12.0 introduces functional improvements that expand the platform’s capabilities and compatibility. This release adds support for ARM architecture in central components, allowing Wazuh to run on a wider range of hardware. It also enhances threat intelligence by adding CTI links into CVE data, providing better context for vulnerabilities. Additionally, it introduces eBPF support in the File Integrity Monitoring (FIM) module, enabling more efficient and modern monitoring on Linux systems.
+Wazuh 4.12.0 introduces functional improvements that expand the platform’s capabilities and compatibility. This release supports ARM architecture in central components, allowing Wazuh to run on a wider range of hardware. It also enhances threat intelligence by adding CTI references to the CVE data, providing better context for vulnerabilities. Additionally, it introduces eBPF support for the File Integrity Monitoring (FIM) module, enabling more efficient and modern monitoring on Linux endpoints.
 
 -  `ARM architecture support in central components <https://github.com/wazuh/wazuh/issues/26083>`__: The Wazuh manager, indexer, and dashboard now support ARM-based systems, offering greater deployment flexibility.
--  `CTI links into CVE information <https://github.com/wazuh/wazuh/issues/28220>`__: Vulnerability Detection now includes CTI links into CVE details, providing enriched context and external threat insights to aid in vulnerability assessment.
--  `eBPF support in File Integrity Monitoring <https://github.com/wazuh/wazuh/issues/27598>`__: File Integrity Monitoring now supports eBPF on Linux, improving performance and system visibility.
--  `New SCA policy for Distribution Independent Linux <https://github.com/wazuh/wazuh/issues/26837>`__: A new Security Configuration Assessment policy is now available for Linux systems.
+-  `CTI links to CVE information <https://github.com/wazuh/wazuh/issues/28220>`__: Vulnerability Detection module now includes CTI references within the CVE details, offering enriched context and threat intelligence to aid in vulnerability assessment.
+-  `Improved file integrity monitoring with eBPF support <https://github.com/wazuh/wazuh/issues/27598>`__: The file integrity monitoring module now supports eBPF on Linux, improving who-data monitoring and system visibility.
+-  `New SCA policy for Distribution Independent Linux endpoints <https://github.com/wazuh/wazuh/issues/26837>`__: A new Security Configuration Assessment (SCA) policy is now available for Wazuh Linux agents.
 
 Breaking changes
 ----------------
 
-- **OpenSearch 2.19.1 and Apache Lucene upgrade**: Wazuh 4.12.0 upgrades to OpenSearch 2.19.1 and updates the Apache Lucene version. This change affects compatibility with previous versions. As a result, **downgrades are not supported**. Once you upgrade the Wazuh indexer to version 4.12.0, you cannot revert to an earlier version.
+-  OpenSearch 2.19.1 and Apache Lucene upgrade: Wazuh 4.12.0 upgrades to OpenSearch 2.19.1 and updates the Apache Lucene version. This change affects compatibility with previous versions. As a result, **downgrades are not supported**. Once you upgrade the Wazuh indexer to version 4.12.0, you cannot revert to an earlier version.
 
 What's new
 ----------
