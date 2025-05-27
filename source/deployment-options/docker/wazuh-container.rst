@@ -513,4 +513,4 @@ By default, the stack exposes the following ports:
 
 .. note::
 
-   Docker doesn't reload the configuration dynamically. You need to restart the stack after changing the configuration of a component.
+   Docker doesn’t reload the configuration dynamically. You need to restart the stack after changing the configuration of a component.
