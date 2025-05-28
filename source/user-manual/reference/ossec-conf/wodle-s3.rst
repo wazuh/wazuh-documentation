@@ -233,6 +233,8 @@ A user-friendly name for the AWS account.
 access_key
 ^^^^^^^^^^
 
+.. deprecated:: 4.4.0
+
 The access key ID for the IAM user with the permission to read logs from the bucket.
 
 +--------------------+--------------------------+
@@ -246,6 +248,8 @@ The access key ID for the IAM user with the permission to read logs from the buc
 
 secret_key
 ^^^^^^^^^^
+
+.. deprecated:: 4.4.0
 
 The secret key created for the IAM user with the permission to read logs from the bucket.
 
