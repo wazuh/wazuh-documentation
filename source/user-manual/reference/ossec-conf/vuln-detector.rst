@@ -91,14 +91,22 @@ Where:
 interval
 ^^^^^^^^
 
+.. deprecated:: 4.8.0
+
 run_on_start
 ^^^^^^^^^^^^
+
+.. deprecated:: 4.8.0
 
 retry_interval
 ^^^^^^^^^^^^^^
 
+.. deprecated:: 4.8.0
+
 provider
 ^^^^^^^^
+
+.. deprecated:: 4.8.0
 
 Example of configuration
 ------------------------
