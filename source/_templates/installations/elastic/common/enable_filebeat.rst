@@ -9,8 +9,8 @@
     .. code-block:: console
 
       # systemctl daemon-reload
-      # systemctl enable wazuh-managerfilebeat
-      # systemctl start wazuh-managerfilebeat
+      # systemctl enable filebeat
+      # systemctl start filebeat
 
 
 
@@ -22,14 +22,14 @@
 
       .. code-block:: console
 
-        # chkconfig --add wazuh-manager
-        # service wazuh-manager start
+        # chkconfig --add filebeat
+        # service filebeat start
     
     b) Debian-based operating system:
 
       .. code-block:: console
 
-        # update-rc.d wazuh-manager defaults 95 10
-        # service wazuh-manager start
+        # update-rc.d filebeat defaults 95 10
+        # service filebeat start
 
 .. End of include file
