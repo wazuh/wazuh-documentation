@@ -38,8 +38,6 @@ The agent runs on the endpoint you want to monitor and communicates with the Waz
 
                .. group-tab:: Apple silicon
 
-                  .. versionadded:: 4.5.1
-
                   .. code-block:: console
 
                      # echo "WAZUH_MANAGER='10.0.0.2'" > /tmp/wazuh_envs && sudo installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.arm64.pkg -target /
