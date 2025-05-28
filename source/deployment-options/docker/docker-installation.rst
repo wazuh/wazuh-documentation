@@ -1,14 +1,14 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Check out this section of the Wazuh documentation to learn about Docker installation: how to install the Docker engine and the Docker compose. 
+  :description: Check out this section of the Wazuh documentation to learn about Docker installation: how to install the Docker engine. 
   
 .. _docker-installation:
 
 Docker installation
 ===================
 
-The first thing you need to do is to set up a system with the requirements needed to run Docker and Docker compose. Then install Docker and Docker compose if you don’t have them already.
+This guide walks you through verifying that your system meets the minimum requirements and installing Docker to prepare for deploying Wazuh with Docker.
 
 .. 
    .. contents::
@@ -111,8 +111,3 @@ For Linux/Unix machines, Docker requires an AMD64 or ARM64 architecture system r
 .. note::
 
    If you would like to use Docker as a non-root user, you should add your user to the ``docker`` group with something like the following command: ``usermod -aG docker your-user``. Log out and log back in for this to take effect.
-
-Docker compose
---------------
-
-- The Wazuh Docker deployment requires Docker Compose 1.29 or later. The Docker Compose plugin is included with Docker CLI and does not require a separate installation.
