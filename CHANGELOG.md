@@ -9,7 +9,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
-- Replaced all `docker-compose` command references with `docker compose` in Docker deployment documentation to reflect the use of the Docker Compose plugin included with Docker CLI. ([#8580](https://github.com/wazuh/wazuh-documentation/pull/8580))
+- Replaced all `docker-compose` command references with `docker compose` in *Deployment on Docker* documentation to reflect the use of the Docker Compose plugin included with Docker CLI. ([#8580](https://github.com/wazuh/wazuh-documentation/pull/8580))
 
 ### Added
 
