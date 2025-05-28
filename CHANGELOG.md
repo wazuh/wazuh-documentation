@@ -3,13 +3,11 @@ All notable changes to this project will be documented in this file.
 
 ## [v4.12.2]
 
-- Support for Wazuh 4.12.2
-
-## [v4.12.1]
-
 ### Changed
 
 - Replaced all `docker-compose` command references with `docker compose` in *Deployment on Docker* documentation to reflect the use of the Docker Compose plugin included with Docker CLI. ([#8580](https://github.com/wazuh/wazuh-documentation/pull/8580))
+
+## [v4.12.1]
 
 ### Added
 
