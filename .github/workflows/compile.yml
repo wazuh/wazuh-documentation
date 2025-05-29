@@ -9,9 +9,9 @@ permissions:
 # events but only for the master branch
 on:
   push:
-    branches: [ 4.12 ]
+    branches: [ 4.14 ]
   pull_request:
-    branches: [ 4.12 ]
+    branches: [ 4.14 ]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
