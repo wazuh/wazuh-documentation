@@ -27,6 +27,7 @@ All notable changes to this project will be documented in this file.
 - Updated the available SCA policies table. ([#8500](https://github.com/wazuh/wazuh-documentation/pull/8500))
 - **Post-release**: Updated the 4.12.0 release notes highlights text. ([#8510](https://github.com/wazuh/wazuh-documentation/pull/8510))
 - **Post-release**: Changed the *Packages list* title to *Open Virtual Appliances* in the *Virtual Machine (OVA)* section. ([#8514](https://github.com/wazuh/wazuh-documentation/pull/8514))
+- **Post-release**: Updated the launchctl `unload` and `load` commands with `launchctl bootout system` and `launchctl bootstrap system`. ([#8591](https://github.com/wazuh/wazuh-documentation/pull/8591))
 
 ### Fixed
 
