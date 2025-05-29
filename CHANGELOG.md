@@ -5,10 +5,6 @@ All notable changes to this project will be documented in this file.
 
 - Support for Wazuh 4.13.0
 
-## [v4.12.2]
-
-- Support for Wazuh 4.12.2
-
 ## [v4.12.1]
 
 ### Added
