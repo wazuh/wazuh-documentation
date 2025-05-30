@@ -36,8 +36,6 @@ To configure the FIM module, it’s necessary to specify the registry keys that 
 
 You can modify the :ref:`default FIM configuration <reference_ossec_syscheck_default_configuration>` on the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file of the  Wazuh agent to specify the Windows Registry keys to monitor. You can also configure this capability remotely by using :ref:`centralized configuration <reference_agent_conf>`.
 
-.. versionadded:: 4.6.0
-
 You can use ``*`` and ``?`` wildcards when configuring Windows registry keys. Use them in the same way you would in a shell or Windows command prompt (cmd) terminal for listing files. For example:
 
 .. code-block:: xml

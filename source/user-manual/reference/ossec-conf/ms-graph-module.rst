@@ -8,8 +8,6 @@
 ms-graph
 ========
 
-.. versionadded:: 4.6.0
-
 .. note:: This module only works on Windows, Linux, and macOS. It is recommended to have it enabled on a single manager/agent to avoid log duplication.
 
 .. topic:: XML section name

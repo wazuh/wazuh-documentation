@@ -220,8 +220,8 @@ Starting the service
       .. code-block:: console
 
          # systemctl daemon-reload
-         # systemctl enable wazuh-manager
-         # systemctl start wazuh-manager
+         # systemctl enable filebeat
+         # systemctl start filebeat
 
    .. group-tab:: SysV init
 
@@ -229,15 +229,15 @@ Starting the service
 
          .. code-block:: console
 
-            # chkconfig --add wazuh-manager
-            # service wazuh-manager start
+            # chkconfig --add filebeat
+            # service filebeat start
 
       -  Debian-based operating system:
 
          .. code-block:: console
 
-            # update-rc.d wazuh-manager defaults 95 10
-            # service wazuh-manager start
+            # update-rc.d filebeat defaults 95 10
+            # service filebeat start
 
 Run the following command to verify that Filebeat is successfully installed:
 
