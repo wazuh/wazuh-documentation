@@ -1,29 +1,28 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Wazuh provides an automated way of building packages for the Wazuh components. Learn how to build your own Wazuh indexer package in this section of our documentation.
+   :description: Wazuh provides an automated way of building the Wazuh indexer package. Learn more in this section of the documentation.
 
 Wazuh indexer
 =============
 
-The packages' generation process is orchestrated by two scripts, which are found within the ``packaging_scripts`` folder of the repository:
+Wazuh provides an automated way of building the Wazuh indexer package. The package generation process is orchestrated by two scripts, which are located in the ``wazuh-indexer/packaging_scripts`` directory of the `wazuh-indexer <https://github.com/wazuh/wazuh-indexer>`__ repository. The generation process is separated into two stages:
 
--  ``build.sh``: compiles the Java application and bundles it into a package.
--  ``assemble.sh``: uses the package from the previous step and inflates it with plugins and configuration files, ready for production deployment.
+-  **Build stage**: In this stage, the Java application is compiled and bundled into a package using the ``build.sh`` script.
+-  **Assemble stage**: In this stage, plugins and configuration files are added to the package from the previous step using the ``assemble.sh`` script. The package is then ready for deployment in production.
 
-Official packages are built through a GitHub Actions pipeline, however, the process is designed to be independent enough for maximum portability.
+.. note::
 
-The building process is self-contained in the application code.
+   Official packages are built through a GitHub Actions pipeline, but the process is designed to be flexible and adaptable, and not strictly tied to GitHub Actions. Additionally, `act <https://github.com/nektos/act>`__ enables local testing and debugging of GitHub Actions workflows. The packages can also be built directly in a local Linux environment.
 
-The GitHub Actions pipeline can be tested locally with `Act <https://github.com/nektos/act>`__.
+Prerequisites
+-------------
 
-Pre-requisistes:
+-  Clone the `wazuh-indexer <https://github.com/wazuh/wazuh-indexer>`__ repository and navigate to the ``wazuh-indexer/`` directory. Select the version, for example, ``v|WAZUH_CURRENT|``.
 
--  Clone the ``wazuh-indexer`` repository and switch to the appropriate branch:
+   .. code-block:: console
 
-.. code:: console
-
-   # git clone https://github.com/wazuh/wazuh-indexer
+      $ git clone https://github.com/wazuh/wazuh-indexer && cd wazuh-indexer && git checkout v4.12.0
 
 Build stage
 -----------
@@ -31,7 +30,25 @@ Build stage
 Docker environment
 ^^^^^^^^^^^^^^^^^^
 
-Using the provided `Docker environment <https://www.github.com/wazuh/wazuh-indexer/tree/v|WAZUH_CURRENT|/docker>`__:
+Follow the steps below to build the Wazuh indexer package using the provided `Docker environment <https://www.github.com/wazuh/wazuh-indexer/tree/v|WAZUH_CURRENT|/docker>`__:
+
+#. Run the ``ci.sh`` script to start the provisioned containers for package generation:
+
+   .. code-block:: console
+
+      $ cd docker/ci/ && bash ./ci.sh up
+
+   .. note::
+
+      The provisioned container can be further managed using: ``./ci.sh {up|down|stop}``.
+
+#.
+
+
+
+
+
+
 
 .. tabs::
 
