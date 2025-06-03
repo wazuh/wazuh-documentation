@@ -52,6 +52,7 @@ The table below shows SCA policies pre-installed in Wazuh out-of-the-box. The Wa
     | cis_centos7_linux           |  CIS Benchmark for CentOS Linux 7                          | CentOS Linux 7                |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_centos8_linux           |  CIS Benchmark for CentOS Linux 8                          | CentOS Linux 8                |
+    |                             |                                                            +-------------------------------+
     |                             |                                                            | CentOS Stream 8               |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_centos9_linux           |  CIS Benchmark for CentOS Stream 9                         | CentOS Stream 9               |
