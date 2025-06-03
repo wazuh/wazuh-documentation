@@ -42,48 +42,40 @@ Follow the steps below to build the Wazuh indexer package using the provided `Do
 
       The provisioned container can be further managed using: ``./ci.sh {up|down|stop}``.
 
-#.
+#. Run the following command to build the Wazuh indexer package using the Docker container:
 
+   .. tabs::
 
+      .. group-tab:: RPM
 
+         .. code-block:: console
 
+            $ docker exec -it wi-build_v|WAZUH_CURRENT| bash packaging_scripts/build.sh -a x64 -d rpm
 
+      .. group-tab:: DEB
 
+         .. code-block:: console
 
-.. tabs::
+            $ docker exec -it wi-build_v|WAZUH_CURRENT| bash packaging_scripts/build.sh -a x64 -d deb
 
-   .. group-tab:: RPM
+      .. group-tab:: TAR
 
-      .. code-block:: console
-   
-         # docker exec -it wi-build_|WAZUH_CURRENT| bash packaging_scripts/build.sh -a x64 -d rpm
-   
-   .. group-tab:: DEB
+         .. code-block:: console
 
-      .. code-block:: console
-   
-         # docker exec -it wi-build_|WAZUH_CURRENT| bash packaging_scripts/build.sh -a x64 -d deb
-   
-   .. group-tab:: TAR
+            $ docker exec -it wi-build_v|WAZUH_CURRENT| bash packaging_scripts/build.sh -a x64 -d tar
 
-      .. code-block:: console
-   
-         # docker exec -it wi-build_|WAZUH_CURRENT| bash packaging_scripts/build.sh -a x64 -d tar
+The generated package is sent to the ``wazuh-indexer/artifacts/dist`` directory.
 
 Local package generation
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-For local package generation, use the ``build.sh`` script.
-
-Take a look at the ``build.yml`` workflow file for an example of usage.
+For local package generation, use the ``build.sh`` script. Take a look at the ``build.yml`` workflow file for an example of usage.
 
 .. code:: console
 
    # bash packaging_scripts/build.sh -a x64 -d tar -n $(bash packaging_scripts/baptizer.sh -a x64 -d tar -m)
 
-The generated package is sent to the ``wazuh-indexer/artifacts`` folder.
-
-.. _full-package-assemble-stage-1:
+The generated package is sent to the ``wazuh-indexer/artifacts/dist`` folder.
 
 Assembly stage
 --------------
@@ -91,11 +83,15 @@ Assembly stage
 Docker environment
 ^^^^^^^^^^^^^^^^^^
 
-Pre-requisites:
+Follow the steps below to assemble the generated Wazuh indexer package using the provided `Docker environment <https://www.github.com/wazuh/wazuh-indexer/tree/v|WAZUH_CURRENT|/docker>`__:
 
--  Current directory: ``wazuh-indexer/``
--  Existing package in ``wazuh-indexer/artifacts/dist/{rpm|deb}``, as a result of the *Build* stage.
--  Using the `Docker environment <https://www.github.com/wazuh/wazuh-indexer/tree/v|WAZUH_CURRENT|/docker>`__:
+#. Navigate to the ``wazuh-indexer/artifacts/dist`` directory to access the created packages from the build stage:
+
+   .. code-block:: console
+
+      $ cd ../../artifacts/dist
+
+#. Run the following commands to assemble the packages using the Docker container provisioned in the build stage with the ``ci.sh`` script:
 
    .. tabs::
 
@@ -110,7 +106,7 @@ Pre-requisites:
          .. code-block:: console
 
             # docker exec -it wi-assemble_|WAZUH_CURRENT| bash packaging_scripts/assemble.sh -a x64 -d deb
-   
+
       .. group-tab:: TAR
 
          .. code-block:: console
@@ -120,64 +116,58 @@ Pre-requisites:
 Local package generation
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. note:: 
+Follow the steps below to assemble the generated package locally for both RPM and DEB environments.
 
-   Set the environment variable ``TEST=true`` to assemble a package with a minimal set of plugins, speeding up the assembly process.
+.. note::
+
+   Set the environment variable ``TEST=true`` to assemble a package with a minimal set of plugins. This will speed up the assembly process.
 
 .. tabs::
 
    .. group-tab:: RPM
 
-      The ``assemble.sh`` script will use the output from the ``build.sh`` script and use it as a base to bundle together a final package containing the plugins, the production configuration and the service files.
-      
+      The ``assemble.sh`` script will use the output from the ``build.sh`` script and use it as a base to bundle together a final package containing the plugins, the production configuration, and the service files.
+
       The script will:
-      
+
       #. Extract the RPM package using ``rpm2cpio`` and ``cpio`` tools.
-      
+
          By default, ``rpm2cpio`` and ``cpio`` tools expect the package to be in ``wazuh-indexer/artifacts/tmp/rpm``.
-         The script takes care of creating the required folder structure, copying also the min package and the SPEC file.
-      
+         The script creates the required folder structure, copying also the min package and the SPEC file.
+
          Current folder loadout at this stage:
-      
+
          .. code-block:: none
-      
+
             /rpm/$ARCH
                 /etc
                 /usr
                 /var
                 wazuh-indexer-min-*.rpm
                 wazuh-indexer.rpm.spec
-      
+
          ``usr``, ``etc`` and ``var`` folders contain ``wazuh-indexer`` files, extracted from ``wazuh-indexer-min-*.rpm``.
 
-         ``wazuh-indexer.rpm.spec`` is copied over from ``wazuh-indexer/distribution/packages/src/rpm/wazuh-indexer.rpm.spec``.
+         ``wazuh-indexer.rpm.spec`` is copied from ``wazuh-indexer/distribution/packages/src/rpm/wazuh-indexer.rpm.spec``.
 
-         The ``wazuh-indexer-performance-analyzer.service`` file is also copied from the same folder.
+         The ``wazuh-indexer-performance-analyzer.service`` file is also copied from the same folder. It is a dependency of the SPEC file.
 
-         It is a dependency of the SPEC file.
-      
       #. Install the plugins using the ``opensearch-plugin`` CLI tool.
-      
-      #. Set up configuration files.
-      
-         Included in ``min-package``. Default files are overwritten.
-      
+      #. Set up configuration files. They are included in ``min-package``. Default files are overwritten.
       #. Bundle an RPM file with ``rpmbuild`` and the SPEC file ``wazuh-indexer.rpm.spec``.
-      
-         ``rpmbuild`` is part of the ``rpm`` OS package.
 
-         ``rpmbuild`` is invoked from ``wazuh-indexer/artifacts/tmp/rpm``.
+         ``rpmbuild`` is part of the ``rpm`` OS package. ``rpmbuild`` is invoked from ``wazuh-indexer/artifacts/tmp/rpm``.
 
          It creates the ``{BUILD,RPMS,SOURCES,SRPMS,SPECS,TMP}`` folders and applies the rules in the SPEC file.
 
          If successful, ``rpmbuild`` will generate the package in the ``RPMS/`` folder.
 
-         The script will copy it to ``wazuh-indexer/artifacts/dist`` and clean: remove the ``tmp\`` folder and its contents.
-      
+         The script will copy it to ``wazuh-indexer/artifacts/dist`` and cleanly remove the ``tmp\`` folder and its contents.
+
          Current folder loadout at this stage:
-      
+
          .. code-block:: none
-      
+
             /rpm/$ARCH
                 /{BUILD,RPMS,SOURCES,SRPMS,SPECS,TMP}
                 /etc
