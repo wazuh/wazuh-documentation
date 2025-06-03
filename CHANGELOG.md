@@ -6,6 +6,11 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 - Added the *Wazuh indexer configuration on hardened endpoints* section. ([#8437](https://github.com/wazuh/wazuh-documentation/pull/8437))
+- Added the CentOS Stream 9 SCA policy reference to the Available SCA policies section. ([#8602](https://github.com/wazuh/wazuh-documentation/pull/8602))
+
+### Changed
+
+- Updated the Available SCA policies section. ([#8602](https://github.com/wazuh/wazuh-documentation/pull/8602))
 
 ## [v4.12.0]
 
