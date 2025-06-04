@@ -179,17 +179,15 @@ Follow the steps below to assemble the generated package locally for both RPM an
    .. group-tab:: DEB
 
       For DEB packages, the ``assemble.sh`` script will perform the following operations:
-      
-      #. Extract the deb package using ``ar`` and ``tar`` tools.
-      
-         By default, ``ar`` and ``tar`` tools expect the package to be in ``wazuh-indexer/artifacts/tmp/deb``.
 
-         The script takes care of creating the required folder structure, copying also the min package and the Makefile.
-      
+      #. Extract the DEB package using ``ar`` and ``tar`` tools.
+
+         By default, the ``ar`` and ``tar`` tools expect the package to be in the ``wazuh-indexer/artifacts/tmp/deb`` directory. The script creates the required folder structure, copying also the min package and the Makefile.
+
          Current folder loadout at this stage:
-      
+
          .. code-block:: none
-      
+
             artifacts/
             |-- dist
             |   |-- wazuh-indexer-min_|WAZUH_CURRENT|_amd64.deb
@@ -202,30 +200,23 @@ Follow the steps below to assemble the generated package locally for both RPM an
                     |-- usr
                     |-- var
                     `-- wazuh-indexer-min_|WAZUH_CURRENT|_amd64.deb
-      
-         ``usr``, ``etc`` and ``var`` folders contain ``wazuh-indexer`` files, extracted from ``wazuh-indexer-min-*.deb``.
 
-         ``Makefile`` and the ``debmake_install`` are copied over from ``wazuh-indexer/distribution/packages/src/deb``.
+         ``usr``, ``etc`` and ``var`` folders contain ``wazuh-indexer`` files, extracted from ``wazuh-indexer-min-*.deb`` directory.
 
-         The ``wazuh-indexer-performance-analyzer.service`` file is also copied from the same folder.
+         ``Makefile`` and the ``debmake_install`` are copied over from ``wazuh-indexer/distribution/packages/src/deb`` directory.
 
-         It is a dependency of the SPEC file.
-      
+         The ``wazuh-indexer-performance-analyzer.service`` file is also copied from the same folder. It is a dependency of the SPEC file.
+
       #. Install the plugins using the ``opensearch-plugin`` CLI tool.
-      
-      #. Set up configuration files.
-      
-         Included in ``min-package``. Default files are overwritten.
-      
+      #. Set up configuration files. They are included in ``min-package``. The default files are overwritten.
       #. Bundle a DEB file with ``debmake`` and the ``Makefile``.
-      
-         ``debmake`` and other dependencies can be installed using the ``provision.sh`` script.
-         The script is invoked by the GitHub Workflow.
-      
+
+         ``debmake`` and other dependencies can be installed using the ``provision.sh`` script. The script is invoked by the GitHub Workflow.
+
          Current folder loadout at this stage:
-      
+
          .. code-block:: none
-      
+
             artifacts/
             |-- artifact_name.txt
             |-- dist
@@ -247,26 +238,24 @@ Follow the steps below to assemble the generated package locally for both RPM an
                         | -- preinst
                         | -- prerm
                         | -- postinst
-      
+
    .. group-tab:: TAR
 
       The assembly process for tarballs consists on:
-      
+
       #. Extraction of the minimal package
       #. Bundling of plugins
       #. Addition of Wazuh configuration files and tooling
       #. Compression
-      
+
       .. code:: console
-      
+
          # bash packaging_scripts/assemble.sh -a x64 -d tar -r 1
-      
+
 Build and assemble scripts reference
 ------------------------------------
 
-The packages' generation process is guided through bash scripts.
-
-Below is a reference of their inputs, outputs and code:
+The package generation process is guided through bash scripts. Below is a reference showing their inputs, outputs, and code:
 
 .. code:: none
 
@@ -281,7 +270,7 @@ Below is a reference of their inputs, outputs and code:
            name: the name of the package to be generated.
         outputs:
            package: minimal wazuh-indexer package for the required distribution.
-      
+
       - file: assemble.sh
         description: |
            bundles the wazuh-indexer package generated in by build.sh with plugins, 
@@ -292,10 +281,10 @@ Below is a reference of their inputs, outputs and code:
            revision: revision number. 0 by default.
         outputs:
            package: wazuh-indexer package.
-      
+
       - file: provision.sh
         description: Provision script for the assembly of DEB packages.
-      
+
       - file: baptizer.sh
         description: generate the wazuh-indexer package name depending on the parameters.
         inputs:
