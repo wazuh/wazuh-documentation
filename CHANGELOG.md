@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- Added support for CentOS Stream 10. ([#8474](https://github.com/wazuh/wazuh-documentation/pull/8474))
+- Added support for CentOS Stream 10. ([#8607](https://github.com/wazuh/wazuh-documentation/pull/8607))
 
 ## [v4.12.1]
 
