@@ -153,6 +153,8 @@ Configuring the Wazuh indexer connection
 
    You can skip this step if you are not going to use the vulnerability detection capability.
 
+.. include:: /_templates/installations/common/firewall-ports-note.rst
+
 #. Save the Wazuh indexer username and password into the Wazuh manager keystore using the wazuh-keystore tool:
 
    .. code-block:: console
