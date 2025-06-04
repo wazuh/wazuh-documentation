@@ -78,8 +78,8 @@ Configuring the Wazuh dashboard
              server.port: 443
              opensearch.hosts: https://localhost:9200
              opensearch.ssl.verificationMode: certificate
-
-
+             
+.. include:: /_templates/installations/common/firewall-ports-note.rst
 
 
 Deploying certificates
