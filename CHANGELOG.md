@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 - Added the *Wazuh indexer configuration on hardened endpoints* section. ([#8437](https://github.com/wazuh/wazuh-documentation/pull/8437))
 - Added steps to preserve custom settings in the JVM configuration file during the indexer upgrade. ([#8603](https://github.com/wazuh/wazuh-documentation/pull/8603))
 - Added the CentOS Stream 9 SCA policy reference to the Available SCA policies section. ([#8602](https://github.com/wazuh/wazuh-documentation/pull/8602))
+- Added a note in the installation guides about CentOS firewall configuration to prevent communication issues between Wazuh components. ([#8606](https://github.com/wazuh/wazuh-documentation/pull/8606))
 
 ### Changed
 
