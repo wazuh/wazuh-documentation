@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 
 ### Removed
 
-- Removed `compatibility.override_main_response_version` setting from Wazuh Indexer configuration as it is no longer supported in OpenSearch 3.0. 
+- Removed `compatibility.override_main_response_version` setting from Wazuh Indexer configuration as it is no longer supported in OpenSearch 3.0. ([#8609](https://github.com/wazuh/wazuh-documentation/pull/8609)) 
 
 ### [v4.14.0]
 
