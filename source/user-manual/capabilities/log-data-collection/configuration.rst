@@ -249,8 +249,6 @@ Perform the following steps to configure a Linux endpoint to forward events usin
 macOS
 ------
 
-.. versionadded:: 4.3.0
-
 The macOS unified logging system (ULS) centralizes the management and storage of logs across all the system levels. macOS ULS does not write data to text-based log files, requiring Wazuh to use the CLI log tool to collect logs from macOS endpoints. The CLI log tool provides an interface for filtering and collecting logs. The ``query`` parameters in the Wazuh configuration allow users to:
 
 - Set the ``level`` of the messages to collect.
@@ -378,8 +376,6 @@ String comparison operators are by default case and diacritic-sensitive. You can
 
 macOS decoders and rules
 ^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. versionadded:: 4.4.2
 
 The Wazuh server has default decoders and rules to analyze macOS events. These decoders and rules are in the files ``/var/ossec/ruleset/decoders/0580-macos_decoders.xml`` and ``/var/ossec/ruleset/rules/0960-macos_rules.xml`` respectively.
 
