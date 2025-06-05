@@ -23,9 +23,17 @@ Adding the Wazuh repository
 
       #. Add the repository:
 
-         .. code-block:: console
+         -  For RHEL-compatible systems version 8 and earlier, use the following command:
 
-            # echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages.wazuh.com/4.x/yum/\nprotect=1' | tee /etc/yum.repos.d/wazuh.repo
+            .. code-block:: console
+
+               # echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages.wazuh.com/4.x/yum/\nprotect=1' | tee /etc/yum.repos.d/wazuh.repo
+
+         -  For RHEL-compatible systems version 9 and later, use the following command:
+
+            .. code-block:: console
+
+               # echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages.wazuh.com/4.x/yum/\npriority=1' | tee /etc/yum.repos.d/wazuh.repo
 
    .. group-tab:: APT
 
@@ -220,8 +228,8 @@ Starting the service
       .. code-block:: console
 
          # systemctl daemon-reload
-         # systemctl enable wazuh-manager
-         # systemctl start wazuh-manager
+         # systemctl enable filebeat
+         # systemctl start filebeat
 
    .. group-tab:: SysV init
 
@@ -229,15 +237,15 @@ Starting the service
 
          .. code-block:: console
 
-            # chkconfig --add wazuh-manager
-            # service wazuh-manager start
+            # chkconfig --add filebeat
+            # service filebeat start
 
       -  Debian-based operating system:
 
          .. code-block:: console
 
-            # update-rc.d wazuh-manager defaults 95 10
-            # service wazuh-manager start
+            # update-rc.d filebeat defaults 95 10
+            # service filebeat start
 
 Run the following command to verify that Filebeat is successfully installed:
 

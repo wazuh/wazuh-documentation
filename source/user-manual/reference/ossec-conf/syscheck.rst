@@ -1040,8 +1040,6 @@ windows_registry
 
 List of registry entries to be monitored. One entry per line. Multiple lines may be entered to include multiple registry entries.
 
-.. versionadded:: 4.6.0
-
    To scan paths matching a pattern, you can use the wildcard characters ``?`` and ``*``. For example ``HKEY_LOCAL_MACHINE\SOFTWARE\*``. FIM uses these wildcards during scheduled scan.
 
 +--------------------+----------------------------------------------------------------------+
@@ -1188,8 +1186,6 @@ Example:
  <windows_registry arch="both" check_sum="no">HKEY_LOCAL_MACHINE\SOFTWARE\test_key</windows_registry>
  <windows_registry arch="64bit" recursion_level="3">HKEY_LOCAL_MACHINE\SYSTEM\Setup</windows_registry>
 
-
-.. versionadded:: 4.6.0
 
 Configurations with specific registry keys take precedence over those that use wildcards. The following configuration block provides an example. The first settings line enables scanning the ``SOFTWARE`` keys of all users without checking any hashes.
 
