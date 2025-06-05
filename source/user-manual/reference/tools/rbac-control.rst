@@ -3,8 +3,6 @@
 rbac_control
 ============
 
-.. versionadded:: 4.6.0
-
 The ``rbac_control`` tool allows managing resources from the Wazuh RBAC database and resetting the DB to its default state. For more information about the Wazuh RBAC resources and database, please visit the
 :doc:`How it works </user-manual/api/rbac/how-it-works>` section.
 

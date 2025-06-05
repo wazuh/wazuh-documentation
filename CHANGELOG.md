@@ -7,13 +7,22 @@ All notable changes to this project will be documented in this file.
 
 ## [v4.13.0]
 
-- Support for Wazuh 4.13.0
+### Added
+
+- Added support for CentOS Stream 10. ([#8607](https://github.com/wazuh/wazuh-documentation/pull/8607))
+- Added support for Red Hat Enterprise Linux 10. ([#8608](https://github.com/wazuh/wazuh-documentation/pull/8608))
 
 ## [v4.12.1]
 
 ### Added
 
 - Added the *Wazuh indexer configuration on hardened endpoints* section. ([#8437](https://github.com/wazuh/wazuh-documentation/pull/8437))
+- Added steps to preserve custom settings in the JVM configuration file during the indexer upgrade. ([#8603](https://github.com/wazuh/wazuh-documentation/pull/8603))
+- Added the CentOS Stream 9 SCA policy reference to the Available SCA policies section. ([#8602](https://github.com/wazuh/wazuh-documentation/pull/8602))
+
+### Changed
+
+- Updated the Available SCA policies section. ([#8602](https://github.com/wazuh/wazuh-documentation/pull/8602))
 
 ## [v4.12.0]
 
@@ -41,11 +50,17 @@ All notable changes to this project will be documented in this file.
 - Updated the available SCA policies table. ([#8500](https://github.com/wazuh/wazuh-documentation/pull/8500))
 - **Post-release**: Updated the 4.12.0 release notes highlights text. ([#8510](https://github.com/wazuh/wazuh-documentation/pull/8510))
 - **Post-release**: Changed the *Packages list* title to *Open Virtual Appliances* in the *Virtual Machine (OVA)* section. ([#8514](https://github.com/wazuh/wazuh-documentation/pull/8514))
+- **Post-release**: Updated the launchctl `unload` and `load` commands with `launchctl bootout system` and `launchctl bootstrap system`. ([#8591](https://github.com/wazuh/wazuh-documentation/pull/8591))
+- **Post-release**: Updated the Wazuh repository addition steps for RHEL 9-compatible systems. ([#8594](https://github.com/wazuh/wazuh-documentation/pull/8594))
+- **Post-release**: Updated the `alienvault_reputation.ipset` download link in the *Blocking a known malicious actor* PoC. ([#8594](https://github.com/wazuh/wazuh-documentation/pull/8604))
 
 ### Fixed
 
 - **Post-release**: Updated the package list to include missing ARM64 architecture references for the Wazuh indexer and Wazuh dashboard. ([#8511](https://github.com/wazuh/wazuh-documentation/pull/8511))
 - **Post-release**: Fixed Filebeat DEB package URLs in the package list. ([#8577](https://github.com/wazuh/wazuh-documentation/pull/8577))
+- **Post-release**: Removed outdated version notices from documentation. ([#8578](https://github.com/wazuh/wazuh-documentation/pull/8578))
+- **Post-release**: Fixed command errors in the "Starting the service" section of the Wazuh server cluster documentation. ([#8587](https://github.com/wazuh/wazuh-documentation/pull/8587))
+- **Post-release**: Removed extra `PUT /rules/files/{filename}` reference from `rules:delete` ([#8599](https://github.com/wazuh/wazuh-documentation/pull/8599))
 
 ## [v4.11.2]
 

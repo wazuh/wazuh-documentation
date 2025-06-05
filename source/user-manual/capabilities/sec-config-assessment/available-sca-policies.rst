@@ -15,7 +15,7 @@ The table below shows SCA policies pre-installed in Wazuh out-of-the-box. The Wa
     :name: available_sca_policies
 
     +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | Policy                      | Name                                                       | Target                        |
+    | Reference                   | Policy                                                     | Target                        |
     +=============================+============================================================+===============================+
     | cis_win10_enterprise        |  CIS Benchmark for Windows 10 Enterprise                   | Windows 10                    |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
@@ -47,13 +47,17 @@ The table below shows SCA policies pre-installed in Wazuh out-of-the-box. The Wa
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_oracle_linux_9          |  CIS Benchmark for Oracle Linux 9                          | Oracle Linux 9                |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | cis_centos6_linux           |  CIS Benchmark for CentOS 6                                | CentOS 6                      |
+    | cis_centos6_linux           |  CIS Benchmark for CentOS Linux 6                          | CentOS Linux 6                |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | cis_centos7_linux           |  CIS Benchmark for CentOS 7                                | CentOS 7                      |
+    | cis_centos7_linux           |  CIS Benchmark for CentOS Linux 7                          | CentOS Linux 7                |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | cis_centos8_linux           |  CIS Benchmark for CentOS 8                                | CentOS 8                      |
+    | cis_centos8_linux           |  CIS Benchmark for CentOS Linux 8                          | CentOS Linux 8                |
+    |                             |                                                            +-------------------------------+
+    |                             |                                                            | CentOS Stream 8               |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | cis_centos10_linux          |  CIS Benchmark for CentOS 10                               | CentOS 10                     |
+    | cis_centos9_linux           |  CIS Benchmark for CentOS Stream 9                         | CentOS Stream 9               |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_centos10_linux          |  CIS Benchmark for CentOS Stream 10                        | CentOS Stream 10              |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_rhel5_linux             |  CIS Benchmark for Red Hat Enterprise Linux 5              | Red Hat Enterprise Linux 5    |
     +-----------------------------+------------------------------------------------------------+-------------------------------+

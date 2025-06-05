@@ -49,7 +49,7 @@ All the alternatives include instructions on how to install the :doc:`Wazuh cent
 
 .. note::
 
-   Since Wazuh v4.6.0, we don't provide the Kibana plugin and Splunk app anymore. To integrate Wazuh with Elastic or Splunk, refer to our :doc:`/integrations-guide/index`.
+   To integrate Wazuh with Elastic or Splunk, refer to our :doc:`/integrations-guide/index`.
 
 Installing the Wazuh agent
 --------------------------
