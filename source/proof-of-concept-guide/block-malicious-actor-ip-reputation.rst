@@ -139,7 +139,7 @@ Download the utilities and configure the CDB list
 
    .. code-block:: console
 
-      $ sudo wget https://raw.githubusercontent.com/firehol/blocklist-ipsets/master/alienvault_reputation.ipset -O /var/ossec/etc/lists/alienvault_reputation.ipset
+      $ sudo wget https://iplists.firehol.org/files/alienvault_reputation.ipset -O /var/ossec/etc/lists/alienvault_reputation.ipset
 
 #. Append the IP address of the attacker endpoint to the IP reputation database. Replace ``<ATTACKER_IP>`` with the RHEL IP address in the command below:
 

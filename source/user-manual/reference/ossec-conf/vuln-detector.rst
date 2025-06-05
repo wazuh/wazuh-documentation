@@ -74,7 +74,6 @@ Enables indexing of vulnerability inventory data.
 
 offline-url
 ^^^^^^^^^^^
-.. versionadded:: 4.8.0
 
 File path or URL for offline content access.
 
