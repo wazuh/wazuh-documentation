@@ -38,8 +38,6 @@ The agent runs on the endpoint you want to monitor and communicates with the Waz
 
                .. group-tab:: Apple silicon
 
-                  .. versionadded:: 4.5.1
-
                   .. code-block:: console
 
                      # echo "WAZUH_MANAGER='10.0.0.2'" > /tmp/wazuh_envs && sudo installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.arm64.pkg -target /
@@ -52,7 +50,7 @@ The agent runs on the endpoint you want to monitor and communicates with the Waz
 
             .. code-block:: console
 
-               # launchctl load /Library/LaunchDaemons/com.wazuh.agent.plist
+               # launchctl bootstrap system /Library/LaunchDaemons/com.wazuh.agent.plist
 
 
          The installation process is now complete, and the Wazuh agent is successfully deployed and running on your macOS endpoint.
@@ -71,7 +69,7 @@ The agent runs on the endpoint you want to monitor and communicates with the Waz
 
             .. code-block:: console
 
-               # launchctl load /Library/LaunchDaemons/com.wazuh.agent.plist
+               # launchctl bootstrap system /Library/LaunchDaemons/com.wazuh.agent.plist
 
          The installation process is now complete, and the Wazuh agent is successfully installed on your macOS endpoint. The next step is to register and configure the agent to communicate with the Wazuh server. To perform this action, see the :doc:`Wazuh agent enrollment </user-manual/agent/agent-enrollment/index>` section.  
 

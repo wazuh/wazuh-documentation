@@ -147,8 +147,6 @@ Sets the time to close the RIDS files for agents that don't report new events in
 connection_overtake_time
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. versionadded:: 4.5.2
-
 Sets the time to wait before considering a connection with a TCP client down when a new connection with the same key arrives. A value of 0 disables this assessment of connection activity.
 
 .. warning::
@@ -169,8 +167,6 @@ agents
 ^^^^^^
 
 **allow_higher_versions**
-
-.. versionadded:: 4.6.0
 
 Accept agents with a later version than the current manager.
 

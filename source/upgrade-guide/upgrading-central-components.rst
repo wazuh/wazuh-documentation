@@ -157,6 +157,12 @@ Perform the following steps on each Wazuh indexer node to upgrade them. Upgrade 
 
             # service wazuh-indexer stop
 
+#. Backup the ``/etc/wazuh-indexer/jvm.options`` file to preserve your custom JVM settings. For example, create a copy of the file using the following command:
+
+   .. code-block:: console
+
+      # cp /etc/wazuh-indexer/jvm.options /etc/wazuh-indexer/jvm.options.old
+
 #. Upgrade the Wazuh indexer to the latest version.
 
    .. tabs::
@@ -173,11 +179,17 @@ Perform the following steps on each Wazuh indexer node to upgrade them. Upgrade 
 
             # apt-get install wazuh-indexer|WAZUH_INDEXER_DEB_PKG_INSTALL|
 
+         .. note::
+
+            When prompted, choose to replace the ``/etc/wazuh-indexer/jvm.options`` file with the updated version.
+
+#. Manually reapply any custom settings to the ``/etc/wazuh-indexer/jvm.options`` file from your backup file.
+
 #. Restart the Wazuh indexer service.
 
    .. include:: /_templates/installations/indexer/common/enable_indexer.rst
 
-Repeat steps 1 to 3 above on all Wazuh indexer nodes before proceeding to the :ref:`post-upgrade actions <post-upgrade-actions>`.
+Repeat steps 1 to 5 above on all Wazuh indexer nodes before proceeding to the :ref:`post-upgrade actions <post-upgrade-actions>`.
 
 .. _post-upgrade-actions:
 
