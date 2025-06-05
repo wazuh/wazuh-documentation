@@ -461,8 +461,6 @@ Add a new Wazuh agent by sending an API request with the agent name and its IP a
 Ingest security events
 ^^^^^^^^^^^^^^^^^^^^^^
 
-.. versionadded:: 4.6.0
-
 You can utilize the Wazuh server API to ingest security events into the Wazuh manager for analysis.
 
 There's a limit of 30 requests per minute and 100 events per request. This limit prevents endpoints from ingesting large amounts of data too fast. Check :ref:`max_request_per_minute <api_configuration_access>` to lower this limit even further or disable the feature.

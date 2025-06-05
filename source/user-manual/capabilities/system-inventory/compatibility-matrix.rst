@@ -28,8 +28,6 @@ The Syscollector module supports different options across various operating syst
 
 The module detects various package formats depending on the operating system. This is shown in the table below.
 
-.. versionadded:: 4.7.0
-
 The packages scan supports detection of `NPM (Node Package Manager)  <https://www.npmjs.com/>`__ and `PyPI (Python Package Index)  <https://pypi.org/>`__ packages in some of operating systems. The NPM and PyPI scan isn't available in all operating systems. The scan requires a C++ compiler supporting the `17 standard <https://en.cppreference.com/w/cpp/compiler_support/17>`__ (GCC>=7).
 
 .. note::
