@@ -40,6 +40,8 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated the 4.12.0 release notes highlights text. ([#8510](https://github.com/wazuh/wazuh-documentation/pull/8510))
 - **Post-release**: Changed the *Packages list* title to *Open Virtual Appliances* in the *Virtual Machine (OVA)* section. ([#8514](https://github.com/wazuh/wazuh-documentation/pull/8514))
 - **Post-release**: Updated the launchctl `unload` and `load` commands with `launchctl bootout system` and `launchctl bootstrap system`. ([#8591](https://github.com/wazuh/wazuh-documentation/pull/8591))
+- **Post-release**: Updated the Wazuh repository addition steps for RHEL 9-compatible systems. ([#8594](https://github.com/wazuh/wazuh-documentation/pull/8594))
+- **Post-release**: Updated the `alienvault_reputation.ipset` download link in the *Blocking a known malicious actor* PoC. ([#8594](https://github.com/wazuh/wazuh-documentation/pull/8604))
 
 ### Fixed
 
@@ -47,6 +49,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Fixed Filebeat DEB package URLs in the package list. ([#8577](https://github.com/wazuh/wazuh-documentation/pull/8577))
 - **Post-release**: Removed outdated version notices from documentation. ([#8578](https://github.com/wazuh/wazuh-documentation/pull/8578))
 - **Post-release**: Fixed command errors in the "Starting the service" section of the Wazuh server cluster documentation. ([#8587](https://github.com/wazuh/wazuh-documentation/pull/8587))
+- **Post-release**: Removed extra `PUT /rules/files/{filename}` reference from `rules:delete` ([#8599](https://github.com/wazuh/wazuh-documentation/pull/8599))
 
 ## [v4.11.2]
 

@@ -388,7 +388,6 @@ rules:update
 rules:delete
 ~~~~~~~~~~~~
 
--  :api-ref:`PUT /rules/files/{filename} <operation/api.controllers.rule_controller.put_file>` (:ref:`*:* <api_rbac_reference_resources>`)
 -  :api-ref:`DELETE /rules/files/{filename} <operation/api.controllers.rule_controller.delete_file>` (:ref:`rule:file <api_rbac_reference_resources>`)
 
 SCA
