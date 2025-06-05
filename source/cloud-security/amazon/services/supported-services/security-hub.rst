@@ -6,8 +6,6 @@
 AWS Security Hub
 ================
 
-.. versionadded:: 4.9.0
-
 `AWS Security Hub <https://aws.amazon.com/security-hub/>`_ automates security best practice checks and aggregates insights to help users understand their overall security posture across multiple AWS accounts. Security Hub helps users assess their compliance against security best practices. It achieves this by:
 
 -  Running checks against security controls.
