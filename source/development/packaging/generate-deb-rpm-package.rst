@@ -1,93 +1,133 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Wazuh provides an automated way of building DEB and RPM packages. Learn how to build your own Wazuh DEB and RPM packages in this section of our documentation.
+   :description: In this section, we show how to generate the Wazuh agent package for different environments using dedicated automation scripts.
 
-Linux manager/agent
-===================
+Wazuh agent
+===========
 
-Wazuh provides an automated way of building DEB and RPM packages using Docker so there is no need for any other dependency.
+In this section, we show how to generate the Wazuh agent package for different environments using dedicated automation scripts. We show package generation for Linux, macOS, Windows, Solaris, and Wazuh signed packages (WPK). 
 
-To create a Debian or RPM package follow these steps:
+Follow the steps outlined in each sub-section to build the Wazuh agent package for your preferred environment.
+
+Linux endpoint
+--------------
+
+Wazuh provides an automated way of building DEB and RPM Linux agent packages using Docker.
 
 Requirements
 ^^^^^^^^^^^^
 
--  Docker
--  Git
+Ensure that you meet the following requirements to continue:
 
-Download our wazuh repository from GitHub and go to the packages directory.
+-  :doc:`Docker </deployment-options/docker/docker-installation>`
+-  `Git <https://git-scm.com/book/en/v2/Getting-Started-Installing-Git>`__
+
+Creating the Wazuh Linux agent package
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Follow the steps below to create the Wazuh DEB and RPM  agent packages:
+
+#. Clone the `wazuh <https://github.com/wazuh/wazuh>`__ repository from GitHub and navigate to the ``packages/`` directory. Select the version, v|WAZUH_CURRENT|.
+
+
+   .. code-block:: console
+
+      $ git clone https://github.com/wazuh/wazuh && cd wazuh/packages && git checkout v|WAZUH_CURRENT|
+
+#. Run the command below  to build a DEB or an RPM Wazuh agent package:
+
+   .. note::
+
+      Use the following architecture equivalences:
+
+      -  ``amd64`` -> x86_64
+      -  ``arm64`` -> aarch64
+      -  ``armhf`` -> armv7hl
+
+   .. tabs::
+
+      .. group-tab:: DEB
+
+         .. code-block:: console
+
+            # ./generate_package.sh -t agent -a amd64 -p /opt/ossec --system deb
+
+         This command generates a  Wazuh agent v|WAZUH_CURRENT| DEB package with ``/opt/ossec/`` as the installation directory for ``x86_64`` systems.
+
+      .. group-tab:: RPM
+
+         .. code-block:: console
+
+            # ./generate_package.sh -t agent -a amd64 -p /opt/ossec --system rpm
+
+         This command generates a  Wazuh agent v|WAZUH_CURRENT| RPM package with ``/opt/ossec/`` as the installation directory for ``x86_64`` systems.
+
+You can run the ``generate_package.sh`` script with the ``-h`` flag to explore your desired options:
 
 .. code-block:: console
 
-   $ git clone https://github.com/wazuh/wazuh && cd wazuh/packages && git checkout v|WAZUH_CURRENT|
+   $ ./generate_package.sh -h
 
-Execute the ``generate_package.sh`` script with your desired options. This script builds a Docker image with all the necessary tools to create the DEB or RPM package and run a container that builds it:
+macOS endpoint
+--------------
+
+Wazuh provides an automated way of building the Wazuh agent package for macOS environments.
+
+.. note::
+
+   To build the Wazuh agent package for macOS, you must perform this operation in a macOS environment.
+
+Requirements
+^^^^^^^^^^^^
+
+Ensure that you meet the following requirements to continue.
+
+-  `Packages <http://s.sudre.free.fr/Software/Packages/about.html>`__
+-  `Brew <https://brew.sh/>`__
+-  **git**: Install with Homebrew using this command:  ``brew install git``.
+
+If ``Packages`` and ``Brew`` are not already installed on your system, they will be installed when you run the ``generate_wazuh_packages.sh`` script below.
+
+Follow the steps below to create a macOS package:
+
+#. Clone the `wazuh <https://github.com/wazuh/wazuh>`__ repository from GitHub and navigate to the ``macos/`` directory. Select the version, ``v|WAZUH_CURRENT|``.
+
+   .. code-block:: console
+
+      $ git clone https://github.com/wazuh/wazuh && cd wazuh/packages && git checkout v|WAZUH_CURRENT| && cd macos
+
+#. Install the build dependencies using the command:
+
+   .. code-block:: console
+
+      $ ./generate_wazuh_packages.sh -i
+
+#. Build the macOS package. Find some examples below.
+
+   .. code-block:: console
+
+      # ./generate_wazuh_packages.sh -s /tmp
+
+   This will build a version ``v|WAZUH_CURRENT|`` Wazuh agent macOS package and store it in ``/tmp``.
+
+   .. code-block:: console
+
+      # ./generate_wazuh_packages.sh -s /tmp -j 6
+
+   This will also build a ``v|WAZUH_CURRENT|`` Wazuh agent macOS package and store it in ``/tmp`` but will use 6 jobs to compile the sources.
+
+   .. code-block:: console
+
+      # ./generate_wazuh_packages.sh -s /tmp -j 6 -c
+
+   In addition to the previous settings, this will generate a ``.sha512`` file containing the checksum of the package.
+
+You can run the ``generate_package.sh`` script with the ``-h`` flag to explore your desired options:
 
 .. code-block:: console
 
-   # ./generate_package.sh -h
+   $ ./generate_package.sh -h
 
-.. code-block:: none
-   :class: output
-
-   Usage: packages/generate_package.sh [OPTIONS]
-
-     -b, --branch <branch>      [Optional] Select Git branch.
-     -t, --target <target>      [Required] Target package to build: manager or agent.
-     -a, --architecture <arch>  [Optional] Target architecture of the package [amd64/i386/ppc64le/arm64/armhf].
-     -j, --jobs <number>        [Optional] Change number of parallel jobs when compiling the manager or agent. By default: 2.
-     -r, --revision <rev>       [Optional] Package revision. By default: 0.
-     -s, --store <path>         [Optional] Set the destination path of package. By default, an output folder will be created.
-     -p, --path <path>          [Optional] Installation path for the package. By default: /var/ossec.
-     -d, --debug                [Optional] Build the binaries with debug symbols. By default: no.
-     -c, --checksum             [Optional] Generate checksum on the same directory than the package. By default: no.
-     -l, --legacy               [Optional only for RPM] Build package for CentOS 5.
-     --dont-build-docker        [Optional] Locally built docker image will be used instead of generating a new one.
-     --tag                      [Optional] Tag to use with the docker image.
-     --sources <path>           [Optional] Absolute path containing wazuh source code. This option will use local source code instead of downloading it from GitHub. By default use the script path.
-     --is_stage                 [Optional] Use release name in package.
-     --system                   [Optional] Select Package OS [rpm, deb]. By default is 'deb'.
-     --src                      [Optional] Generate the source package in the destination directory.
-     --future                   [Optional] Build test future package x.30.0 Used for development purposes.
-     -h, --help                 Show this help.
-
-Below, you will find some examples of how to build a DEB and an RPM package.
-
-.. tabs::
-
-   .. group-tab:: DEB
-
-      .. code-block:: console
-
-         # ./generate_package.sh -s /tmp -t manager -a amd64 -r my_rev --system deb
-
-      This command generates a |WAZUH_CURRENT| Wazuh manager DEB package with revision ``my_rev`` for ``amd64`` systems.
-
-      .. code-block:: console
-
-         # ./generate_package.sh -t agent -a amd64 -p /opt/ossec --system deb
-
-      This command generates a |WAZUH_CURRENT| Wazuh agent DEB package with ``/opt/ossec/`` as installation directory for ``amd64`` systems.
-
-   .. group-tab:: RPM
-
-      .. note::
-
-         Use the following architecture equivalences:
- 
-         -  ``amd64`` -> x86_64
-         -  ``arm64`` -> aarch64
-         -  ``armhf`` -> armv7hl
-
-      .. code-block:: console
-
-         # ./generate_package.sh -s /tmp -t manager -a amd64 -r my_rev --system rpm
-
-      This command generates a |WAZUH_CURRENT| Wazuh manager RPM package with revision ``my_rev`` for x86_64 systems.
-
-      .. code-block:: console
-
-         # ./generate_package.sh -t agent -a amd64 -p /opt/ossec --system rpm
-
-      This command generates a |WAZUH_CURRENT| Wazuh agent RPM package with ``/opt/ossec/`` as installation directory for x86_64 systems.
+Apple notarization process
+^^^^^^^^^^^^^^^^^^^^^^^^^^

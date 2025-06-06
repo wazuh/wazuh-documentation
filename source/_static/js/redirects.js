@@ -72,7 +72,15 @@ removedUrls['x.y'] = [
 
 newUrls['4.12'] = [
   '/release-notes/release-4-12-0.html',
+  '/development/packaging/generate-server-package.html',
 ]
+
+/* Pages no longer available in 4.12 */
+
+removedUrls['4.12'] = [
+  '/development/packaging/generate-aix-package.html',
+  '/development/packaging/generate-hpux-package.html',
+];
 
 /* *** RELEASE 4.11 ****/
 
