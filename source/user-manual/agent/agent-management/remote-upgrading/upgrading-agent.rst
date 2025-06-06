@@ -85,8 +85,6 @@ To upgrade agents using the command line, use the :doc:`/var/ossec/bin/agent_upg
          Syscheck last started at:  Wed Jun  4 14:14:45 2025
          Syscheck last ended at:  Wed Jun  4 14:14:48 2025
 
-      Rootcheck last started at: Mon Jul 9 13:00:57 2024
-
 Using the RESTful API
 ----------------------
 
