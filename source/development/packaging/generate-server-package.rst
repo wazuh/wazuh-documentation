@@ -25,7 +25,7 @@ Follow the steps below to create the Wazuh server package:
 
    .. code-block:: console
 
-      $ git clone https://github.com/wazuh/wazuh && git checkout v|WAZUH_CURRENT| && cd wazuh/packages
+      $ git clone https://github.com/wazuh/wazuh && cd wazuh/packages && git checkout v|WAZUH_CURRENT|
 
 #. Run the below command to build a DEB or an RPM Wazuh server package:
 
