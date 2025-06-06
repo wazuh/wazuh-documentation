@@ -68,6 +68,8 @@ Installing the Wazuh manager
 
             # apt-get -y install wazuh-manager|WAZUH_MANAGER_DEB_PKG_INSTALL|
 
+.. include:: /_templates/installations/common/firewall-ports-note.rst
+
 .. _wazuh_server_multi_node_filebeat:
 
 Installing Filebeat
@@ -152,8 +154,6 @@ Configuring the Wazuh indexer connection
 .. note::
 
    You can skip this step if you are not going to use the vulnerability detection capability.
-
-.. include:: /_templates/installations/common/firewall-ports-note.rst
 
 #. Save the Wazuh indexer username and password into the Wazuh manager keystore using the wazuh-keystore tool:
 
