@@ -22,7 +22,11 @@ This section guides you through the upgrade process of the Wazuh indexer, the Wa
 Preparing the upgrade
 ---------------------
 
-In case Wazuh is installed in a multi-node cluster configuration, repeat the following steps for every node.
+Perform the steps below before upgrading any of the Wazuh components.
+
+.. note::
+
+   In case Wazuh is installed in a multi-node cluster configuration, repeat the following steps for every node.
 
 #. Ensure you have added the Wazuh repository to every Wazuh indexer, server, and dashboard node before proceeding to perform the upgrade actions.
 
@@ -30,15 +34,53 @@ In case Wazuh is installed in a multi-node cluster configuration, repeat the fol
 
       .. group-tab:: Yum
 
-         .. include:: /_templates/installations/common/yum/add-repository.rst
+         #. Import the GPG key:
+
+            .. code-block:: console
+
+               # rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH
+
+         #. Add the repository:
+
+            .. code-block:: console
+
+               # echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages.wazuh.com/4.x/yum/\nprotect=1' | tee /etc/yum.repos.d/wazuh.repo
 
       .. group-tab:: APT
 
-         .. include:: /_templates/installations/common/deb/add-repository.rst
+         #. Install the following packages if missing:
 
+            .. code-block:: console
 
+               # apt-get install gnupg apt-transport-https
 
-#. Stop the Filebeat and Wazuh dashboard services if installed in the node.
+         #. Install the GPG key:
+
+            .. code-block:: console
+
+               # curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | gpg --no-default-keyring --keyring gnupg-ring:/usr/share/keyrings/wazuh.gpg --import && chmod 644 /usr/share/keyrings/wazuh.gpg
+
+         #. Add the repository:
+
+            .. code-block:: console
+
+               # echo "deb [signed-by=/usr/share/keyrings/wazuh.gpg] https://packages.wazuh.com/4.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
+
+         #. Update the packages information:
+
+            .. code-block:: console
+
+               # apt-get update
+
+#. (Recommended) Export customizations from the Wazuh dashboard. This step helps to preserve visualizations, dashboards, and other saved objects in case there are any issues during the upgrade process.
+
+   #. Navigate to **Management** > **Stack Management** > **Saved Objects** on the Wazuh dashboard.
+   #. Click **Export objects**.
+   #. Select which objects to export and click **Export all**.
+
+   .. image:: /images/upgrade-guide/saved-objects-export.png
+
+#. Stop the Filebeat and Wazuh dashboard services if installed in the node:
 
    .. tabs::
 
@@ -236,21 +278,9 @@ Perform the following steps on any of the Wazuh indexer nodes replacing ``<WAZUH
       172.18.0.4           21          86  32    6.67    5.30     2.53 dimr      cluster_manager,data,ingest,remote_cluster_client *               wazuh1.indexer
       172.18.0.2           16          86  32    6.67    5.30     2.53 dimr      cluster_manager,data,ingest,remote_cluster_client -               wazuh3.indexer
 
-#. Run the following command on the Wazuh manager node(s) to start the Wazuh manager service if you stopped it earlier.
+#. Run the following command on the Wazuh manager node(s) to start the Wazuh manager service if you stopped it earlier:
 
-   .. tabs::
-
-      .. tab:: Systemd
-
-         .. code-block:: console
-
-            # systemctl start wazuh-manager
-
-      .. tab:: SysV init
-
-         .. code-block:: console
-
-            # service wazuh-manager start
+   .. include:: /_templates/common/start_manager.rst
 
 .. note::
 
@@ -291,25 +321,29 @@ When upgrading a multi-node Wazuh manager cluster, run the upgrade in every node
 Upgrading the Wazuh manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Upgrade the Wazuh manager to the latest version:
+#. Upgrade the Wazuh manager to the latest version:
 
-.. tabs::
+   .. tabs::
+   
+      .. group-tab:: Yum
+   
+         .. code-block:: console
+   
+            # yum upgrade wazuh-manager|WAZUH_MANAGER_RPM_PKG_INSTALL|
+   
+      .. group-tab:: APT
+   
+         .. code-block:: console
+   
+            # apt-get install wazuh-manager|WAZUH_MANAGER_DEB_PKG_INSTALL|
+   
+   .. warning::
+   
+      If the ``/var/ossec/etc/ossec.conf`` configuration file was modified, it will not be replaced by the upgrade. You will therefore have to add the settings of the new capabilities manually. More information can be found in the :doc:`/user-manual/index`.
 
-   .. group-tab:: Yum
+#. Run the following command on the Wazuh manager node(s) to start the Wazuh manager service if you stopped it earlier:
 
-      .. code-block:: console
-
-         # yum upgrade wazuh-manager|WAZUH_MANAGER_RPM_PKG_INSTALL|
-
-   .. group-tab:: APT
-
-      .. code-block:: console
-
-         # apt-get install wazuh-manager|WAZUH_MANAGER_DEB_PKG_INSTALL|
-
-.. warning::
-
-   If the ``/var/ossec/etc/ossec.conf`` configuration file was modified, it will not be replaced by the upgrade. You will therefore have to add the settings of the new capabilities manually. More information can be found in the :doc:`/user-manual/index`.
+   .. include:: /_templates/common/start_manager.rst
 
 .. _configuring_vulnerability_detection:
 
@@ -482,7 +516,13 @@ Backup the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file to save your 
 
    .. include:: /_templates/installations/dashboard/enable_dashboard.rst
 
-You can now access the Wazuh dashboard via:  ``https://<DASHBOARD_IP_ADDRESS>/app/wz-home``.
+   You can now access the Wazuh dashboard via:  ``https://<DASHBOARD_IP_ADDRESS>/app/wz-home``.
+
+
+#. Import the saved customizations exported while preparing the upgrade.
+
+   #. Navigate to **Dashboard management** > **Dashboard Management** > **Saved objects** on the Wazuh dashboard.
+   #. Click **Import**, add the ndjson file and click **Import**.
 
 .. note::
 
