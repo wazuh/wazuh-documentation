@@ -17,7 +17,7 @@ Using the command line
 
 To upgrade agents using the command line, use the :doc:`/var/ossec/bin/agent_upgrade </user-manual/reference/tools/agent-upgrade>` tool as follows:
 
-#. List all outdated agents using the ``-l`` parameter:
+#. List all outdated Wazuh agents using the ``-l`` parameter:
 
    .. code-block:: console
 
@@ -27,11 +27,11 @@ To upgrade agents using the command line, use the :doc:`/var/ossec/bin/agent_upg
       :class: output
 
       ID    Name                               Version
-      002   VM_Debian9                         Wazuh v4.7.2
-      003   VM_Debian8                         Wazuh v4.7.2
-      009   VM_WinServ2016                     Wazuh v4.7.2
+      001   Win-Server-2019                    Wazuh v4.7.5
+      002   debian12                           Wazuh v4.7.5
+      003   debian12                           Wazuh v4.7.5
 
-      Total outdated agents: 3
+      Total outdated agents: 2
 
 #. Upgrade the Wazuh agent using the ``-a`` parameter followed by the agent ID (here, the agent ID is *003*):
 
@@ -45,32 +45,45 @@ To upgrade agents using the command line, use the :doc:`/var/ossec/bin/agent_upg
       Upgrading...
 
       Upgraded agents:
-      	Agent 003 upgraded: Wazuh v4.7.2 -> Wazuh v4.8.0
+         Agent 003 upgraded: Wazuh v4.7.5 -> Wazuh v4.12.0
+
+   It is possible to specify multiple agent IDs using this method:
+
+   .. code-block:: console
+
+      # /var/ossec/bin/agent_upgrade -a 001 002
+
+   .. code-block:: none
+      :class: output
+
+      Upgrading...
+
+      Upgraded agents:
+         Agent 001 upgraded: Wazuh v4.7.5 -> Wazuh v4.12.0
+         Agent 002 upgraded: Wazuh v4.7.5 -> Wazuh v4.12.0
 
 #. Following the upgrade, the Wazuh agent is automatically restarted. Check the agent version to ensure it has been properly upgraded as follows:
 
    .. code-block:: console
 
-      # /var/ossec/bin/agent_control -i 003
+      # /var/ossec/bin/agent_control -i 002
 
    .. code-block:: none
       :class: output
 
-      Agent ID:   003
-      Agent Name: wazuh-agent2
-      IP address: any/any
-      Status: 	Active
+      Wazuh agent_control. Agent information:
+         Agent ID:   002
+         Agent Name: debian12
+         IP address: any
+         Status:     Active
 
-      Operating system:	Linux |wazuh-agent2 |5.8.0-7625-generic |#26~1604441477~20.10~d41e407-Ubuntu SMP Wed Jul 4 01:25:00 UTC 2 |x86_64
-      Client version:  	Wazuh v4.8.0
-      Configuration hash:  e2f47d482da37c099fa1d6e4c43b523c
-      Shared file hash:	aabb92f4a8cba49c7c6045c1aa80fbd3
-      Last keep alive: 	1604927114
-
-      Syscheck last started at:  Mon Jul 9 13:00:55 2024
-      Syscheck last ended at:	Mon Jul 9 13:00:56 2024
-
-      Rootcheck last started at: Mon Jul 9 13:00:57 2024
+         Operating system: Linux |debian12 |6.1.0-31-amd64 |#1 SMP PREEMPT_DYNAMIC Debian 6.1.128-1 (2025-02-07) |x86_64
+         Client version:   Wazuh v4.12.0
+         Configuration hash:  ab73af41699f13fdbd8193b5f23d8d00
+         Shared file hash:  cb5dc59d19532bb2b0b6039a519a8c0e
+         Last keep alive:  1749046794
+         Syscheck last started at:  Wed Jun  4 14:14:45 2025
+         Syscheck last ended at:  Wed Jun  4 14:14:48 2025
 
 Using the RESTful API
 ----------------------
