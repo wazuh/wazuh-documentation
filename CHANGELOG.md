@@ -7,11 +7,6 @@ All notable changes to this project will be documented in this file.
 
 - Added support for CentOS Stream 10. ([#8607](https://github.com/wazuh/wazuh-documentation/pull/8607))
 - Added support for Red Hat Enterprise Linux 10. ([#8608](https://github.com/wazuh/wazuh-documentation/pull/8608))
-
-## [v4.12.1]
-
-### Added
-
 - Added the *Wazuh indexer configuration on hardened endpoints* section. ([#8437](https://github.com/wazuh/wazuh-documentation/pull/8437))
 - Added steps to preserve custom settings in the JVM configuration file during the indexer upgrade. ([#8603](https://github.com/wazuh/wazuh-documentation/pull/8603))
 - Added the CentOS Stream 9 SCA policy reference to the Available SCA policies section. ([#8602](https://github.com/wazuh/wazuh-documentation/pull/8602))
