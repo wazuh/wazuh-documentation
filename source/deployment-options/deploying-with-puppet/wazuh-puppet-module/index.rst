@@ -46,61 +46,75 @@ Install a stack via Puppet
 Single Node
 ^^^^^^^^^^^
 
-You can use  the manifest shown below to deploy a single-node stack. This stack consists of:
+You can follow the steps below to deploy a single-node stack. This stack consists of:
 
 -  Wazuh dashboard
 -  Wazuh indexer
 -  Wazuh manager
 -  Filebeat
 
-To configure the manager before deployment, check the configuration variables for the Wazuh manager class section in :ref:`ref_wazuh_puppet`.
+#. Create the ``stack.pp`` file in ``/etc/puppetlabs/code/environments/production/manifests/`` with the following content.
 
-Create the ``stack.pp`` file at ``/etc/puppetlabs/code/environments/production/manifests/`` with the contents below, where:
+   .. code-block:: puppet
 
--  ``puppet-aio-node``: Hostname or IP address of the Puppet agent.
--  ``puppet-server``: Hostname or IP address of the Puppet server when the Wazuh module was installed.
+      $discovery_type = 'single-node'
+      stage { 'certificates': }
+      stage { 'repo': }
+      stage { 'indexerdeploy': }
+      stage { 'securityadmin': }
+      stage { 'dashboard': }
+      stage { 'manager': }
+      Stage[certificates] -> Stage[repo] -> Stage[indexerdeploy] -> Stage[securityadmin] -> Stage[manager] -> Stage[dashboard]
+      Exec {
+      timeout => 0,
+      }
+      node "puppet-server" {
+      class { 'wazuh::certificates':
+        indexer_certs => [['node-1','127.0.0.1']],
+        manager_certs => [['master','127.0.0.1']],
+        dashboard_certs => ['127.0.0.1'],
+        stage => certificates,
+      }
+      }
+      node "puppet-aio-node" {
+      class { 'wazuh::repo':
+      stage => repo,
+      }
+      class { 'wazuh::indexer':
+        stage => indexerdeploy,
+      }
+      class { 'wazuh::securityadmin':
+      stage => securityadmin
+      }
+      class { 'wazuh::manager':
+        stage => manager,
+      }
+      class { 'wazuh::filebeat_oss':
+        stage => manager,
+      }
+      class { 'wazuh::dashboard':
+        stage => dashboard,
+      }
+      }
 
-.. code-block:: puppet
+   Where:
 
-   $discovery_type = 'single-node'
-   stage { 'certificates': }
-   stage { 'repo': }
-   stage { 'indexerdeploy': }
-   stage { 'securityadmin': }
-   stage { 'dashboard': }
-   stage { 'manager': }
-   Stage[certificates] -> Stage[repo] -> Stage[indexerdeploy] -> Stage[securityadmin] -> Stage[manager] -> Stage[dashboard]
-   Exec {
-   timeout => 0,
-   }
-   node "puppet-server" {
-   class { 'wazuh::certificates':
-     indexer_certs => [['node-1','127.0.0.1']],
-     manager_certs => [['master','127.0.0.1']],
-     dashboard_certs => ['127.0.0.1'],
-     stage => certificates,
-   }
-   }
-   node "puppet-aio-node" {
-   class { 'wazuh::repo':
-   stage => repo,
-   }
-   class { 'wazuh::indexer':
-     stage => indexerdeploy,
-   }
-   class { 'wazuh::securityadmin':
-   stage => securityadmin
-   }
-   class { 'wazuh::manager':
-     stage => manager,
-   }
-   class { 'wazuh::filebeat_oss':
-     stage => manager,
-   }
-   class { 'wazuh::dashboard':
-     stage => dashboard,
-   }
-   }
+   -  ``puppet-aio-node``: Hostname or IP address of the Puppet agent.
+   -  ``puppet-server``: Hostname or IP address of the Puppet server when the Wazuh module was installed.
+
+   To configure the manager before deployment, check the configuration variables for the Wazuh manager class section in :ref:`ref_wazuh_puppet`.
+
+#. Trigger a Puppet run on the Puppet server to generate the Wazuh certificates.
+
+   .. code-block:: console
+
+      # puppet agent -t
+
+#. Perform a Puppet run on the Puppet agent to start the deployment of the Wazuh stack.
+
+   .. code-block:: console
+
+      # puppet agent -t
 
 Multi Node
 ^^^^^^^^^^
