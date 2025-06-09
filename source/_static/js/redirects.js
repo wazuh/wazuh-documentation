@@ -73,11 +73,19 @@ removedUrls['x.y'] = [
 newUrls['4.12'] = [
   '/release-notes/release-4-12-0.html',
   '/development/packaging/generate-server-package.html',
+  '/development/packaging/generate-agent-package.html',
 ]
 
-/* Pages no longer available in 4.12 */
+/* Redirections from 4.9 to 4.10  */
+
+
+  /* Pages no longer available in 4.12 */
 
 removedUrls['4.12'] = [
+  '/development/packaging/generate-deb-rpm-package.html',
+  '/development/packaging/generate-osx-package.html',
+  '/development/packaging/generate-windows-package.html',
+  '/development/packaging/generate-sol-package.html',
   '/development/packaging/generate-aix-package.html',
   '/development/packaging/generate-hpux-package.html',
 ];

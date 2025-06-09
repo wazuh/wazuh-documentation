@@ -183,3 +183,137 @@ Additional information
 -  `Entitlements <https://developer.apple.com/documentation/bundleresources/entitlements>`_
 -  `Hardened Runtime Entitlements <https://developer.apple.com/documentation/security/hardened_runtime_entitlements?language=objc>`_
 -  `Resolving common notarization issues <https://developer.apple.com/documentation/security/notarizing_your_app_before_distribution/resolving_common_notarization_issues>`_
+
+Windows endpoint
+----------------
+
+Wazuh simplifies the process of building Windows agent packages by providing an automated tool specifically designed for this purpose.
+
+Requirements
+^^^^^^^^^^^^
+
+Ensure that you meet the following requirements to continue.
+
+-  `Docker <https://docs.docker.com/engine/install/>`__
+-  `Git <https://git-scm.com/book/en/v2/Getting-Started-Installing-Git>`__
+-  `WiX Toolset <https://github.com/wixtoolset/wix3/releases/tag/wix3141rtm>`__
+-  `.NET framework 4.8.1 <https://dotnet.microsoft.com/en-us/download/dotnet-framework/thank-you/net481-web-installer>`__
+-  `Microsoft Windows SDK <https://developer.microsoft.com/en-us/windows/downloads/windows-sdk/>`__
+
+Follow the steps below to generate a Windows agent package:
+
+.. note::
+
+   The automated tool must be executed within a Windows system to ensure compatibility and proper functionality.
+
+The process of successfully generating the Windows Microsoft Software Installer (MSI) package consists of two key stages:
+
+-  **Windows agent compilation**: This step requires a Unix-based system with both Docker and Git installed. The Unix environment is necessary for compiling the Windows agent before packaging.
+-  **Windows MSI package generation**: Once the agent is compiled, a Windows-based system is needed to create the MSI package. This system must have the *WiX Toolset*, *.NET Framework 4.8.1*, and the *Microsoft Windows SDK* installed, as these tools are essential for packaging and installer creation.
+
+Compiling the Windows package
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+#. Clone the `wazuh <https://github.com/wazuh/wazuh>`__ repository from GitHub and navigate to the ``windows/`` directory. Select the version, ``v4.12.0``.
+
+   .. code-block:: console
+
+      $ git clone https://github.com/wazuh/wazuh && cd wazuh/packages && git checkout v4.12.0 && cd windows
+
+#. Execute the ``generate_compiled_windows_agent.sh`` script. This script will build a Docker image with all the necessary tools to compile and obtain the Windows agent compiled in a ZIP file.
+
+   .. code-block:: console
+
+      $ ./generate_compiled_windows_agent.sh -o winagent -s <PATH_TO_AGENT.ZIP>
+
+   Replace ``<PATH_TO_AGENT.ZIP>`` with the path to the directory where to store the zip file.
+
+   .. note::
+
+      The ``-s`` parameter needs an absolute path. This is where the ZIP file containing the compiled Windows agent will be stored.
+
+Generating the MSI package
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+After obtaining the ZIP file containing the compiled Wazuh agent, you need to transfer it along with the ``generate_wazuh_msi.ps1`` script to the target Windows host. One way to securely transfer these files from a Linux or macOS system is by using SCP (Secure Copy Protocol).
+
+To transfer the files via SCP, use the following command from your Windows machine:
+
+.. code-block:: ps1con
+
+   > scp USERNAME@LINUX_HOST_IP:/<PATH_TO_AGENT.ZIP> C:\Users\<PATH_TO_WORKING_DIRECTORY>
+   > scp USERNAME@LINUX_HOST_IP:/<PATH_TO_SCRIPT> C:\Users\<PATH_TO_WORKING_DIRECTORY>
+
+Replace:
+
+-  ``USERNAME`` with your Linux user account.
+-  ``LINUX_HOST_IP`` with the IP address of the Linux system.
+-  ``<PATH_TO_AGENT.ZIP>`` with the full path to the agent ZIP file on the Linux system.
+-  ``<PATH_TO_SCRIPT>`` with the full path to the PowerShell script on the Linux system.
+-  ``<PATH_TO_WORKING_DIRECTORY>`` with the full path to where to store the copied files on the Windows system.
+
+Once the files are transferred, you can extract the ZIP file on the Windows host using PowerShell (version 5 or higher) with the following command:
+
+.. code-block:: ps1con
+
+   > Expand-Archive -LiteralPath .\COMPRESSED_AGENT .\
+
+Replace ``COMPRESSED_AGENT`` with the path to the zip file containing the compressed agent. Then copy the ``generate_wazuh_msi.ps1`` script into the ``src/win32`` directory.
+
+.. code-block:: ps1con
+
+   > cp generate_wazuh_msi.ps1 .\AGENT_UNCOMPRESSED_FOLDER\src\win32
+
+Execute the ``generate_wazuh_msi.ps1`` script:
+
+.. code-block:: ps1con
+
+   > cd .\AGENT_UNCOMPRESSED_FOLDER\src\win32
+   > .\generate_wazuh_msi.ps1
+
+.. note::
+
+   The ``generate_wazuh_msi.ps1`` script requires ``cv2pdb.exe`` V3 to function correctly. Ensure that ``cv2pdb.exe`` is accessible via the system's ``PATH``. Using an incompatible version may result in errors or unexpected behavior.
+
+.. code-block:: none
+   :class: output
+
+   This tool can be used to generate the Windows Wazuh agent msi package.
+
+   PARAMETERS TO BUILD WAZUH-AGENT MSI (OPTIONALS):
+       1. MSI_NAME: MSI package name output.
+       2. SIGN: yes or no. By default 'no'.
+       3. WIX_TOOLS_PATH: Wix tools path.
+       4. SIGN_TOOLS_PATH: sign tools path.
+       5. CERTIFICATE_PATH: Path to the .pfx certificate file.
+       6. CERTIFICATE_PASSWORD: Password for the .pfx certificate file.
+
+   USAGE:
+
+       * WAZUH:
+         $ ./generate_wazuh_msi.ps1  -MSI_NAME {{ NAME }} -SIGN {{ yes|no }} -WIX_TOOLS_PATH {{ PATH }} -SIGN_TOOLS_PATH {{ PATH }}
+           Build a devel msi:    $ ./generate_wazuh_msi.ps1 -MSI_NAME wazuh-agent_4.11.1-1_windows_0ceb378.msi -SIGN no
+           Build a prod msi:     $ ./generate_wazuh_msi.ps1 -MSI_NAME wazuh-agent-4.11.1-1.msi -SIGN yes
+
+.. code-block:: ps1con
+
+   > ./generate_wazuh_msi.ps1 -MSI_NAME WAZUH_PACKAGE.msi -SIGN no  -WIX_TOOLS_PATH "C:\Program Files (x86)\WiX Toolset v3.14\bin"
+
+Replace ``WAZUH_PACKAGE`` with your desired name for the output MSI package.
+
+Use the command below to use a specific certificate and password.
+
+.. code-block:: ps1con
+
+   > ./generate_wazuh_msi.ps1 -MSI_NAME WAZUH_PACKAGE.msi -SIGN yes -WIX_TOOLS_PATH "C:\Program Files (x86)\WiX Toolset v3.14\bin" -CERTIFICATE_PATH .\certificate.pfx -CERTIFICATE_PASSWORD mypassword
+
+If you don't specify the ``CERTIFICATE_PATH`` and ``CERTIFICATE_PASSWORD`` parameters, the best-matching certificate from the Certificate Store is selected for signing the package. For more details, check the ``/a`` option of the sign command in `SignTool <https://learn.microsoft.com/en-us/windows/win32/seccrypto/signtool#sign-command-options>`__.
+
+If the ``WIX_TOOLS`` and/or ``SIGN_TOOLS`` binaries are not added to the environment ``PATH``, specify the path as shown below:
+
+.. code-block:: ps1con
+
+   > ./generate_wazuh_msi.ps1 -MSI_NAME mypackage.msi -SIGN yes -WIX_TOOLS_PATH C:\PATH_TO_WIX_TOOL_FILES -SIGN_TOOLS_PATH C:\PATH_TO_SIGN_TOOL_FILES
+
+Solaris endpoint
+----------------
