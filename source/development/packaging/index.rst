@@ -20,8 +20,5 @@ The Wazuh package generation guide is useful for developers who need to customiz
       generate-server-package
       generate-indexer-package
       generate-dashboard-package
-      generate-deb-rpm-package
-      generate-osx-package
-      generate-windows-package
-      generate-sol-package
+      generate-agent-package
       generate-wpk-package
