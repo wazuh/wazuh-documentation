@@ -23,8 +23,8 @@ Ensure that you meet the following requirements to continue:
 -  :doc:`Docker </deployment-options/docker/docker-installation>`
 -  `Git <https://git-scm.com/book/en/v2/Getting-Started-Installing-Git>`__
 
-Creating the Wazuh Linux agent package
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Creating the agent package
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Follow the steps below to create the Wazuh DEB and RPM  agent packages:
 
@@ -88,6 +88,9 @@ Ensure that you meet the following requirements to continue.
 -  **git**: Install with Homebrew using this command:  ``brew install git``.
 
 If ``Packages`` and ``Brew`` are not already installed on your system, they will be installed when you run the ``generate_wazuh_packages.sh`` script below.
+
+Creating the agent package
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Follow the steps below to create a macOS package:
 
@@ -200,6 +203,9 @@ Ensure that you meet the following requirements to continue.
 -  `.NET framework 4.8.1 <https://dotnet.microsoft.com/en-us/download/dotnet-framework/thank-you/net481-web-installer>`__
 -  `Microsoft Windows SDK <https://developer.microsoft.com/en-us/windows/downloads/windows-sdk/>`__
 
+Creating the agent package
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 Follow the steps below to generate a Windows agent package:
 
 .. note::
@@ -212,7 +218,7 @@ The process of successfully generating the Windows Microsoft Software Installer 
 -  **Windows MSI package generation**: Once the agent is compiled, a Windows-based system is needed to create the MSI package. This system must have the *WiX Toolset*, *.NET Framework 4.8.1*, and the *Microsoft Windows SDK* installed, as these tools are essential for packaging and installer creation.
 
 Compiling the Windows package
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #. Clone the `wazuh <https://github.com/wazuh/wazuh>`__ repository from GitHub and navigate to the ``windows/`` directory. Select the version, ``v4.12.0``.
 
@@ -233,7 +239,7 @@ Compiling the Windows package
       The ``-s`` parameter needs an absolute path. This is where the ZIP file containing the compiled Windows agent will be stored.
 
 Generating the MSI package
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 After obtaining the ZIP file containing the compiled Wazuh agent, you need to transfer it along with the ``generate_wazuh_msi.ps1`` script to the target Windows host. One way to securely transfer these files from a Linux or macOS system is by using SCP (Secure Copy Protocol).
 
@@ -318,10 +324,13 @@ If the ``WIX_TOOLS`` and/or ``SIGN_TOOLS`` binaries are not added to the environ
 Solaris endpoint
 ----------------
 
-Wazuh provides an automated way of building the Wazuh agent package for  Solaris 10 and 11 environments.
+Using the script
+^^^^^^^^^^^^^^^^
+
+Wazuh provides an automated way of building the Wazuh agent package for Solaris 10 and 11 environments.
 
 Requirements
-^^^^^^^^^^^^
+~~~~~~~~~~~~
 
 Ensure that you meet the following requirements to continue.
 
@@ -331,6 +340,9 @@ Ensure that you meet the following requirements to continue.
 .. note::
 
    To build a Solaris package, you must run the automated script in a Solaris environment.
+
+Creating the agent package
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Follow the steps below to create a Solaris package:
 
@@ -393,13 +405,19 @@ Follow the steps below  to build a Solaris package.
 
    To build a Solaris package for a SPARC-based system, the same command above could be run in a SPARC system. SPARC (Scalable Processor Architecture) is a 32-bit and 64-bit microprocessor architecture, developed by Sun Microsystems. It is a Reduced Instruction Set Computing (RISC) type computer architecture, often used with UNIX-based operating systems like Solaris.
 
+Using Vagrant
+^^^^^^^^^^^^^
+
 Wazuh also provides an automated way of building packages for i386 Solaris systems using Vagrant.
 
 Requirements
-^^^^^^^^^^^^
+~~~~~~~~~~~~
 
 -  Virtual Box
 -  Vagrant
+
+Creating the agent package
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Follow the steps described below to build the Solaris package corresponding to your environment:
 
@@ -444,6 +462,9 @@ Follow the steps described below to build the Solaris package corresponding to y
       # vagrant --branch-tag=v4.12.0 up solaris10_cmake solaris11_cmake
 
    The generated packages are stored in the ``wazuh/packages/solaris/package_generation/src/`` directory.
+
+Destroying the VMs
+~~~~~~~~~~~~~~~~~~
 
 Run the command below to destroy the VMs once the package generation is completed.
 
