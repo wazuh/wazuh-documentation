@@ -15,10 +15,6 @@ syscheck
 		<syscheck>
 		</syscheck>
 
-Configuration options for file integrity monitoring.
-
-.. note::
-   Windows agents restrict the use of UNC paths and mapped drives in the ``<directories>`` configuration. For more information, refer to :doc:`Windows agent path restrictions </user-manual/agent/agent-management/windows-restrictions>`.
 
 Configuration options for file integrity monitoring:
 
@@ -1326,7 +1322,7 @@ Default syscheck configuration:
     <frequency>43200</frequency>
     <!-- Default files to be monitored. -->
     <directories recursion_level="0" restrict="regedit.exe$|system.ini$|win.ini$">%WINDIR%</directories>
-    <directories recursion_level="0" restrict="at.exe$|attrib.exe$|cacls.exe$|cmd.exe$|eventcreate.exe$|ftp.exe$|lsass.exe$|net.exe$|net1.exe$|netsh.exe$|reg.exe$|regedt32.exe|regsvr32.exe|runas.exe|sc.exe|schtasks.exe|sethc.exe$|subst.exe$">%WINDIR%\SysNative</directories>
+    <directories recursion_level="0" restrict="at.exe$|attrib.exe$|cacls.exe$|cmd.exe$|eventcreate.exe$|ftp.exe$|lsass.exe$|net.exe$|net1.exe$|netsh.exe$|reg.exe$|regedt32.exe|regsvr32.exe|runas.exe|sc.exe|schtasks.exe|sethc.exe|subst.exe$">%WINDIR%\SysNative</directories>
     <directories recursion_level="0">%WINDIR%\SysNative\drivers\etc</directories>
     <directories recursion_level="0" restrict="WMIC.exe$">%WINDIR%\SysNative\wbem</directories>
     <directories recursion_level="0" restrict="powershell.exe$">%WINDIR%\SysNative\WindowsPowerShell\v1.0</directories>
