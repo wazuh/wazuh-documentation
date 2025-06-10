@@ -80,9 +80,19 @@ newUrls['4.12'] = [
 
 redirections.push(
   {
-    'target': ['4.11=>4.12', '4.12=>4.11'],
+    'target': ['4.12=>4.11'],
     '4.11': '/development/packaging/generate-deb-rpm-package.html',
-    '4.12': '/development/packaging/generate-agent-package.html#linux-endpoint',
+    '4.12': '/development/packaging/generate-server-package.html',
+  },
+  {
+    'target': ['4.12=>4.11'],
+    '4.11': '/development/packaging/generate-deb-rpm-package.html',
+    '4.12': '/development/packaging/generate-agent-package.html',
+  },
+  {
+    'target': ['4.11=>4.12'],
+    '4.11': '/development/packaging/generate-deb-rpm-package.html',
+    '4.12': '/development/packaging/index.html',
   },
   {
     'target': ['4.11=>4.12', '4.12=>4.11'],
@@ -103,7 +113,7 @@ redirections.push(
     'target': ['4.11=>4.12', '4.12=>4.11'],
     '4.11': '/development/packaging/generate-wpk-package.html',
     '4.12': '/development/packaging/generate-agent-package.html#wazuh-signed-package-wpk',
-  },
+  }
 );
 
   /* Pages no longer available in 4.12 */
