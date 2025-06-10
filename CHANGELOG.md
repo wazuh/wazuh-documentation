@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file.
 - Added a note warning that downgrades to 4.11 and earlier versions from 4.12 and later are not possible. ([#8425](https://github.com/wazuh/wazuh-documentation/pull/8425))
 - Added new configuration options to the MS Graph integration documentation. ([#8226](https://github.com/wazuh/wazuh-documentation/pull/8226)) ([#8495](https://github.com/wazuh/wazuh-documentation/pull/8495)) ([#8496](https://github.com/wazuh/wazuh-documentation/pull/8496))
 - **Post-release**: Added troubleshooting steps to the *Virtual Machine (OVA)* installation guide. ([#8562](https://github.com/wazuh/wazuh-documentation/pull/8562))
+- **Post-release**: Added a note in the installation guide about firewall configuration to prevent communication issues between Wazuh components. ([#8622](https://github.com/wazuh/wazuh-documentation/pull/8622))
 
 ### Changed
 
