@@ -21,4 +21,3 @@ The Wazuh package generation guide is useful for developers who need to customiz
       generate-indexer-package
       generate-dashboard-package
       generate-agent-package
-      generate-wpk-package

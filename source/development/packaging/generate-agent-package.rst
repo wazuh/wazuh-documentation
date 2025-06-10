@@ -474,3 +474,142 @@ Run the command below to destroy the VMs once the package generation is complete
 
 Wazuh signed package (WPK)
 --------------------------
+
+Wazuh signed package (WPK) is a lightweight package format that includes the agent binaries along with a digital signature to ensure its integrity. It is particularly useful for remotely upgrading Wazuh agents directly from the Wazuh manager, eliminating the need for external configuration management tools.
+
+Wazuh provides an automated way of building WPK using Docker, so there is no need for any other dependencies.
+
+To generate a WPK package, you need an X509 certificate and a certificate authority (CA). See :doc:`Creating a custom WPK </user-manual/agent/agent-management/remote-upgrading/wpk-files/create-custom-wpk>` to learn more.
+
+Follow the steps below to create a WPK package:
+
+Requirements
+^^^^^^^^^^^^
+
+Ensure that you meet the following requirements to continue.
+
+-  :doc:`Docker </deployment-options/docker/docker-installation>`
+-  `Git <https://git-scm.com/book/en/v2/Getting-Started-Installing-Git>`__
+
+Initial steps
+^^^^^^^^^^^^^
+
+#. Clone the `wazuh <https://github.com/wazuh/wazuh>`__ repository and navigate to the ``wpk/`` directory. Select the version, ``v4.12.0``.
+
+   .. code-block:: console
+
+      # git clone https://github.com/wazuh/wazuh && cd wazuh/packages && git checkout v4.12.0 && cd wpk
+
+#. Execute the ``generate_wpk_package.sh`` script:
+
+   .. code-block:: console
+
+      # ./generate_wpk_package.sh -h
+
+   This script will build a Docker image with all the necessary tools to create the WPK and run a container that will build it:
+
+   .. code-block:: none
+      :class: output
+
+      Usage: ./generate_wpk_package.sh [OPTIONS]
+      It is required to use -k or --aws-wpk-key, --aws-wpk-cert parameters
+
+          -t,   --target-system <target> [Required] Select target wpk to build [linux/windows/macos].
+          -b,   --branch <branch>        [Required] Select Git branch.
+          -d,   --destination <path>     [Required] Set the destination path of package.
+          -pn,  --package-name <name>    [Required] Path to package file (rpm, deb, apk, msi, pkg) to pack in wpk.
+          -o,   --output <name>          [Required] Name to the output package.
+          -k,   --key-dir <path>         [Optional] Set the WPK key path to sign package.
+          --aws-wpk-key                  [Optional] AWS Secrets manager Name/ARN to get WPK private key.
+          --aws-wpk-cert                 [Optional] AWS secrets manager Name/ARN to get WPK certificate.
+          --aws-wpk-key-region           [Optional] AWS Region where secrets are stored.
+          -c,   --checksum               [Optional] Generate checksum on destination folder. By default: no.
+          --dont-build-docker            [Optional] Locally built docker image will be used instead of generating a new one. By default: yes.
+          --tag <name>                   [Optional] Tag to use with the docker image.
+          -h,   --help                   Show this help.
+
+To use this tool, the previously required :ref:`certificate <create-wpk-key>` and the key must be created in a dedicated directory.
+
+Linux
+^^^^^
+
+To build a WPK for Linux, you need to first download a package of the desired version.
+
+The following steps demonstrate the build process for Debian ``amd64``, but you can follow similar steps for RPM-based distributions and other supported architectures:
+
+#. Download the Linux debian package:
+
+   .. code-block:: console
+
+      # curl -O https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-agent/wazuh-agent_4.12.0-1_amd64.deb
+
+#. Run the ``generate_wpk_package.sh`` script to build the Linux WPK package:
+
+   .. code-block:: console
+
+      # ./generate_wpk_package.sh -t linux -b v4.12.0 -d /tmp/wpk -k <PATH_TO_KEYS> -o LinuxAgent.wpk -pn Wazuh-agent_4.12.0-1_amd64.deb
+
+   Replace ``<PATH_TO_KEYS>`` with the full path to where the X509 certificate and root CA are stored.
+
+This script builds a Wazuh 4.12.0 Linux WPK package named ``LinuxAgent.wpk`` and stores it in ``/tmp/wpk``. This action is done using the previously generated keys that are saved in ``/tmp/keys``.
+
+If you use the ``-c`` or ``--checksum`` option, a file containing the SHA512 checksum is created in the same output path. This location is configurable, allowing you to indicate where you want to store it.
+
+macOS
+^^^^^
+
+To build a WPK for macOS, you need to first download a PKG package of the desired version:
+
+The following steps demonstrate the build process for an intel64 architecture, but you can follow similar steps for arm64:
+
+#. Download the intel64 package:
+
+   .. code-block:: console
+
+      # curl -O https://packages.wazuh.com/4.x/macos/wazuh-agent-4.12.0-1.intel64.pkg
+
+#. Run the ``generate_wpk_package.sh`` script to build the macOS WPK package:
+
+   .. code-block:: console
+
+      # ./generate_wpk_package.sh -t macos -b v4.12.0 -d /tmp/wpk -k /PATH/TO/KEYS -o macOSAgent.wpk -pn wazuh-agent-4.12.0-1.intel64.pkg
+
+   Replace ``/PATH/TO/KEYS`` with the full path to where the X509 certificate and root CA are stored.
+
+This script builds a Wazuh 4.12.1 macOS WPK package named ``macOSAgent.wpk`` and stores it in ``/tmp/wpk``. This action is done using the previously generated keys that are saved in ``/tmp/keys``.
+
+If the ``-c`` or ``--checksum`` option is used, a file is created containing the SHA512 checksum in the same output path. This location is configurable, and you can indicate where you want to store it.
+
+Windows
+^^^^^^^
+
+To build a WPK for Windows, you need to first download an MSI package of the desired version:
+
+#. Download the intel64 package:
+
+   .. code-block:: console
+
+      # curl -O https://packages.wazuh.com/4.x/windows/wazuh-agent-4.12.0-1.msi
+
+#. Run the ``generate_wpk_package.sh`` script to build the Windows WPK package:
+
+   .. code-block:: console
+
+      # ./generate_wpk_package.sh -t windows -b v4.12.0 -d /tmp/wpk -k /<PATH_TO_KEYS> -o WindowsAgent.wpk -pn /tmp/wazuh-agent-4.12.0-1.msi
+
+   Replace ``<PATH_TO_KEYS>`` with the full path to where the X509 certificate and root CA are stored.
+
+This script builds a Wazuh 4.12.0 Windows WPK package named ``WindowsAgent.wpk`` and stores it in ``/tmp/wpk``. This action is done using the previously generated keys that are saved in ``/tmp/keys``.
+
+If the ``-c`` or ``--checksum`` option is used, a file is created containing the SHA512 checksum in the same output path. This location is configurable, and you can indicate where you want to store it
+
+Using checksums
+---------------
+
+Run the command below  to build a WPK with a checksum:
+
+.. code-block:: console
+
+   # ./generate_wpk_package.sh -t linux -b v4.12.0 -d /tmp/wpk -k /<PATH_TO_KEYS> -o LinuxAgent.wpk -pn wazuh-agent_4.12.0-1_amd64.deb -c /tmp/wpk_checksum
+
+Replace ``<PATH_TO_KEYS>`` with the full path to where the X509 certificate and root CA are stored.
