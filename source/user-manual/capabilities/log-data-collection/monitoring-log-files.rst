@@ -19,6 +19,9 @@ Linux/Unix         ``/var/ossec/etc/ossec.conf``
 macOS              ``/Library/Ossec/etc/ossec.conf``
 =================  ==================================================
 
+.. note::
+   Windows agents restrict the use of UNC paths and mapped drives in the ``<location>`` configuration. For more information, refer to :doc:`Windows agent path restrictions </user-manual/agent/agent-management/windows-restrictions>`.
+
 - Centralized configuration: The :doc:`agent.conf </user-manual/reference/centralized-configuration>` file on the Wazuh server enables centralized distribution of configuration settings to multiple monitored endpoints in the same operating system or group. For example, you can configure the ``agent.conf`` file to distribute configuration settings to all monitored Windows endpoints.  Configuration settings in the ``agent.conf`` file take precedence over the settings in the ``ossec.conf`` file.
 
 .. note:: The Wazuh agent is designed to be a lightweight application that minimizes RAM and CPU usage on the endpoint where it is installed. On the Wazuh server side, the CPU and memory consumption is influenced by the number of events per second (EPS) that the server needs to analyze.
