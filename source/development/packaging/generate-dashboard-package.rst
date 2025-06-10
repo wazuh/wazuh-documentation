@@ -177,12 +177,12 @@ Generating the commit SHA
       c68286b87-b917f56ac-970c46953
 
 Build with Docker image
-^^^^^^^^^^^^^^^^^^^^^^^
+-----------------------
 
 With this option, you can create an image that has the package in ``tar.gz`` format, and then, if desired you can use the created package to generate the ``deb`` or ``rpm`` file.
 
 Requirements
-~~~~~~~~~~~~
+^^^^^^^^^^^^
 
 Ensure that these dependencies are installed on the system.
 
@@ -194,7 +194,7 @@ Ensure that these dependencies are installed on the system.
    -  ``curl``
 
 Building the Wazuh dashboard package using Docker
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 #. Clone the `wazuh-dashboard <https://github.com/wazuh/wazuh-dashboard>`__ repository, navigate to the ``wazuh-dashboard/dev-tools/build-packages/`` directory, and build the application.
 
@@ -222,7 +222,6 @@ Building the Wazuh dashboard package using Docker
       --build-arg OPENSEARCH_DASHBOARDS_VERSION=<OPENSEARCH_DASHBOARDS_VERSION> \
       -t <TAG_OF_IMAGE> \
       -f wazuh-dashboard.Dockerfile .
-
 
    Replace the placeholders as shown in the example below.
 

@@ -78,6 +78,33 @@ newUrls['4.12'] = [
 
 /* Redirections from 4.9 to 4.10  */
 
+redirections.push(
+  {
+    'target': ['4.11=>4.12', '4.12=>4.11'],
+    '4.11': '/development/packaging/generate-deb-rpm-package.html',
+    '4.12': '/development/packaging/generate-agent-package.html#linux-endpoint',
+  },
+  {
+    'target': ['4.11=>4.12', '4.12=>4.11'],
+    '4.11': '/development/packaging/generate-osx-package.html',
+    '4.12': '/development/packaging/generate-agent-package.html#macos-endpoint',
+  },
+  {
+    'target': ['4.11=>4.12', '4.12=>4.11'],
+    '4.11': '/development/packaging/generate-windows-package.html',
+    '4.12': '/development/packaging/generate-agent-package.html#windows-endpoint',
+  },
+  {
+    'target': ['4.11=>4.12', '4.12=>4.11'],
+    '4.11': '/development/packaging/generate-sol-package.html',
+    '4.12': '/development/packaging/generate-agent-package.html#solaris-endpoint',
+  },
+  {
+    'target': ['4.11=>4.12', '4.12=>4.11'],
+    '4.11': '/development/packaging/generate-wpk-package.html',
+    '4.12': '/development/packaging/generate-agent-package.html#wazuh-signed-package-wpk',
+  },
+);
 
   /* Pages no longer available in 4.12 */
 
@@ -88,6 +115,7 @@ removedUrls['4.12'] = [
   '/development/packaging/generate-sol-package.html',
   '/development/packaging/generate-aix-package.html',
   '/development/packaging/generate-hpux-package.html',
+  '/development/packaging/generate-wpk-package.html',
 ];
 
 /* *** RELEASE 4.11 ****/
