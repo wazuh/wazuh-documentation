@@ -50,4 +50,4 @@ Runtime warnings:
 Security considerations
 -----------------------
 
-This restriction prevents the NetNTLMv2 vulnerability that could occur during permission negotiations when accessing network files. The agent blocks these paths to ensure secure file access and prevent potential security risks. 
+This restriction prevents the **NetNTLMv2** vulnerability that could occur during permission negotiations when accessing network files. The agent blocks these paths to ensure secure file access and prevent potential security risks. 
