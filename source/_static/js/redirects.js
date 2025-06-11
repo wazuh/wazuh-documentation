@@ -81,14 +81,10 @@ newUrls['4.13'] = [
 
 newUrls['4.12'] = [
   '/release-notes/release-4-12-0.html',
-<<<<<<< HEAD
   '/user-manual/wazuh-indexer/wazuh-indexer-on-hardened-endpoints.html',
-=======
   '/development/packaging/generate-server-package.html',
   '/development/packaging/generate-agent-package.html',
->>>>>>> 4.12
 ]
-
 /* Redirections from 4.9 to 4.10  */
 
 redirections.push(
