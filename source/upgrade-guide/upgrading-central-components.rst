@@ -15,18 +15,14 @@ This section guides you through the upgrade process of the Wazuh indexer, the Wa
 
    Downgrading to version 4.11 and earlier is not possible. Since version 4.12.0, Wazuh uses a newer version of Apache Lucene.
 
-   Apache Lucene does not support downgrades, meaning once you upgrade to Wazuh 4.12.0 or later, you cannot roll back to 4.11 and earlier versions without a fresh installation of the indexer.
+   Apache Lucene does not support downgrades, meaning once you upgrade to Wazuh 4.12.0 or later, you cannot roll back to 4.11 and earlier versions without a fresh installation of the Indexer.
 
-   To avoid data loss, create an :ref:`index snapshot <migrating_indices_take_snapshots>` before upgrading. For more details, refer to the `Opensearch documentation <https://opensearch.org/docs/latest/install-and-configure/upgrade-opensearch/rolling-upgrade/#:~:text=Important%3A%20OpenSearch%20nodes%20cannot%20be,before%20beginning%20the%20upgrade%20procedure.>`__.
+   To avoid data loss, create an :ref:`index snapshot <migrating_indices_take_snapshots>` before upgrading. For more details, refer to the `Opensearch documentation <https://opensearch.org/docs/latest/install-and-configure/upgrade-opensearch/rolling-upgrade/>`__ for more information.
 
 Preparing the upgrade
 ---------------------
 
-Perform the steps below before upgrading any of the Wazuh components.
-
-.. note::
-
-   In case Wazuh is installed in a multi-node cluster configuration, repeat the following steps for every node.
+Perform the steps below before upgrading any of the Wazuh components. In case Wazuh is installed in a multi-node cluster configuration, repeat the following steps for every node.
 
 #. Ensure you have added the Wazuh repository to every Wazuh indexer, server, and dashboard node before proceeding to perform the upgrade actions.
 
@@ -42,9 +38,17 @@ Perform the steps below before upgrading any of the Wazuh components.
 
          #. Add the repository:
 
-            .. code-block:: console
+            - For RHEL-compatible systems version 8 and earlier, use the following command:
 
-               # echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages.wazuh.com/4.x/yum/\nprotect=1' | tee /etc/yum.repos.d/wazuh.repo
+               .. code-block:: console
+
+                  # echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages.wazuh.com/4.x/yum/\nprotect=1' | tee /etc/yum.repos.d/wazuh.repo
+
+            - For RHEL-compatible systems version 9 and later, use the following command:
+
+               .. code-block:: console
+
+                  # echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages.wazuh.com/4.x/yum/\npriority=1' | tee /etc/yum.repos.d/wazuh.repo
 
       .. group-tab:: APT
 
