@@ -32,7 +32,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated the Wazuh repository addition steps for RHEL 9-compatible systems. ([#8594](https://github.com/wazuh/wazuh-documentation/pull/8594))
 - **Post-release**: Updated the `alienvault_reputation.ipset` download link in the *Blocking a known malicious actor* PoC. ([#8594](https://github.com/wazuh/wazuh-documentation/pull/8604))
 - **Post-release**: Updated agent upgrade documentation to include examples for upgrading multiple agents at once using the `-a` flag. ([#8617](https://github.com/wazuh/wazuh-documentation/pull/8617))
-- **Post-release**: Updated the *Wazuh package generation* guide. ([#8600](https://github.com/wazuh/wazuh-documentation/pull/8600))
+- **Post-release**: Updated the *Wazuh package generation* guide. ([#8600](https://github.com/wazuh/wazuh-documentation/pull/8600)) ([#8626](https://github.com/wazuh/wazuh-documentation/pull/8626))
 
 ### Fixed
 
