@@ -82,7 +82,60 @@ newUrls['4.13'] = [
 newUrls['4.12'] = [
   '/release-notes/release-4-12-0.html',
   '/user-manual/wazuh-indexer/wazuh-indexer-on-hardened-endpoints.html',
+  '/development/packaging/generate-server-package.html',
+  '/development/packaging/generate-agent-package.html',
 ]
+/* Redirections from 4.9 to 4.10  */
+
+redirections.push(
+  {
+    'target': ['4.12=>4.11'],
+    '4.11': '/development/packaging/generate-deb-rpm-package.html',
+    '4.12': '/development/packaging/generate-server-package.html',
+  },
+  {
+    'target': ['4.12=>4.11'],
+    '4.11': '/development/packaging/generate-deb-rpm-package.html',
+    '4.12': '/development/packaging/generate-agent-package.html',
+  },
+  {
+    'target': ['4.11=>4.12'],
+    '4.11': '/development/packaging/generate-deb-rpm-package.html',
+    '4.12': '/development/packaging/index.html',
+  },
+  {
+    'target': ['4.11=>4.12', '4.12=>4.11'],
+    '4.11': '/development/packaging/generate-osx-package.html',
+    '4.12': '/development/packaging/generate-agent-package.html#macos-endpoint',
+  },
+  {
+    'target': ['4.11=>4.12', '4.12=>4.11'],
+    '4.11': '/development/packaging/generate-windows-package.html',
+    '4.12': '/development/packaging/generate-agent-package.html#windows-endpoint',
+  },
+  {
+    'target': ['4.11=>4.12', '4.12=>4.11'],
+    '4.11': '/development/packaging/generate-sol-package.html',
+    '4.12': '/development/packaging/generate-agent-package.html#solaris-endpoint',
+  },
+  {
+    'target': ['4.11=>4.12', '4.12=>4.11'],
+    '4.11': '/development/packaging/generate-wpk-package.html',
+    '4.12': '/development/packaging/generate-agent-package.html#wazuh-signed-package-wpk',
+  }
+);
+
+  /* Pages no longer available in 4.12 */
+
+removedUrls['4.12'] = [
+  '/development/packaging/generate-deb-rpm-package.html',
+  '/development/packaging/generate-osx-package.html',
+  '/development/packaging/generate-windows-package.html',
+  '/development/packaging/generate-sol-package.html',
+  '/development/packaging/generate-aix-package.html',
+  '/development/packaging/generate-hpux-package.html',
+  '/development/packaging/generate-wpk-package.html',
+];
 
 /* *** RELEASE 4.11 ****/
 
