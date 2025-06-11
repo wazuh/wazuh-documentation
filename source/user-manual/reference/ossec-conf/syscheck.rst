@@ -123,15 +123,15 @@ There is a limit of 64 directories, comma-separated, that can be written in one 
 Wildcard characters (``?`` and ``*``) can be used to monitor paths that fulfill the given pattern.
 These wildcards will be reloaded every time a scheduled scan is run.
 
-+--------------------+---------------------------------------------------------------------------------------------------+
-| **Default value**  | /etc,/usr/bin,/usr/sbin,/bin,/sbin                                                                |
-+--------------------+---------------------------------------------------------------------------------------------------+
-| **Allowed values** | Any directory                                                                                     |
-|                    | Any environment variable                                                                          |
-|                    |                                                                                                   |
-|                    | Note that on Windows, UNC paths and mapped drives are not allowed. Refer to                       |
-|                    | :doc:`Windows agent path restrictions </user-manual/agent/agent-management/windows-restrictions>`.|
-+--------------------+---------------------------------------------------------------------------------------------------+
++--------------------+----------------------------------------------------------------------------------------------------+
+| **Default value**  | /etc,/usr/bin,/usr/sbin,/bin,/sbin                                                                 |
++--------------------+----------------------------------------------------------------------------------------------------+
+| **Allowed values** | Any directory                                                                                      |
+|                    | Any environment variable                                                                           |
+|                    |                                                                                                    |
+|                    | Note that on Windows, UNC paths and mapped drives are not allowed. Refer to                        |
+|                    | :doc:`Windows agent path restrictions </user-manual/agent/agent-management/windows-restrictions>`. |
++--------------------+----------------------------------------------------------------------------------------------------+
 
 Attributes:
 
