@@ -19,6 +19,8 @@ This section guides you through the upgrade process of the Wazuh indexer, the Wa
 
    To avoid data loss, create an :ref:`index snapshot <migrating_indices_take_snapshots>` before upgrading. For more details, refer to the `Opensearch documentation <https://opensearch.org/docs/latest/install-and-configure/upgrade-opensearch/rolling-upgrade/>`__ for more information.
 
+.. _preparing-the-upgrade:
+
 Preparing the upgrade
 ---------------------
 
@@ -479,7 +481,7 @@ Backup the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file to save your 
    You can now access the Wazuh dashboard via:  ``https://<DASHBOARD_IP_ADDRESS>/app/wz-home``.
 
 
-#. Import the saved customizations exported while preparing the upgrade.
+#. Import the saved customizations exported while :ref:`preparing the upgrade <preparing-the-upgrade>`.
 
    #. Navigate to **Dashboard management** > **Dashboard Management** > **Saved objects** on the Wazuh dashboard.
    #. Click **Import**, add the ndjson file and click **Import**.
