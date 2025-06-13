@@ -30,7 +30,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated the launchctl `unload` and `load` commands with `launchctl bootout system` and `launchctl bootstrap system`. ([#8591](https://github.com/wazuh/wazuh-documentation/pull/8591))
 - **Post-release**: Updated the Wazuh repository addition steps for RHEL 9-compatible systems. ([#8594](https://github.com/wazuh/wazuh-documentation/pull/8594))
 - **Post-release**: Updated the `alienvault_reputation.ipset` download link in the *Blocking a known malicious actor* PoC. ([#8594](https://github.com/wazuh/wazuh-documentation/pull/8604))
-- **Post-release**: Improved upgrade guide steps and dashboard customization instructions. ([#8618](https://github.com/wazuh/wazuh-documentation/pull/8618))
+- **Post-release**: Added steps to export and import dashboard customizations in the upgrade guide. ([#8618](https://github.com/wazuh/wazuh-documentation/pull/8618))
 
 ### Fixed
 
