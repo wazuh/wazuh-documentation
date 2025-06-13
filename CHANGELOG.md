@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file.
 - Added a note warning that downgrades to 4.11 and earlier versions from 4.12 and later are not possible. ([#8425](https://github.com/wazuh/wazuh-documentation/pull/8425))
 - Added new configuration options to the MS Graph integration documentation. ([#8226](https://github.com/wazuh/wazuh-documentation/pull/8226)) ([#8495](https://github.com/wazuh/wazuh-documentation/pull/8495)) ([#8496](https://github.com/wazuh/wazuh-documentation/pull/8496))
 - **Post-release**: Added troubleshooting steps to the *Virtual Machine (OVA)* installation guide. ([#8562](https://github.com/wazuh/wazuh-documentation/pull/8562))
+- **Post-release**: Added a note in the installation guide about firewall configuration to prevent communication issues between Wazuh components. ([#8622](https://github.com/wazuh/wazuh-documentation/pull/8622))
 
 ### Changed
 
@@ -30,6 +31,8 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated the launchctl `unload` and `load` commands with `launchctl bootout system` and `launchctl bootstrap system`. ([#8591](https://github.com/wazuh/wazuh-documentation/pull/8591))
 - **Post-release**: Updated the Wazuh repository addition steps for RHEL 9-compatible systems. ([#8594](https://github.com/wazuh/wazuh-documentation/pull/8594))
 - **Post-release**: Updated the `alienvault_reputation.ipset` download link in the *Blocking a known malicious actor* PoC. ([#8594](https://github.com/wazuh/wazuh-documentation/pull/8604))
+- **Post-release**: Updated agent upgrade documentation to include examples for upgrading multiple agents at once using the `-a` flag. ([#8617](https://github.com/wazuh/wazuh-documentation/pull/8617))
+- **Post-release**: Updated the *Wazuh package generation* guide. ([#8600](https://github.com/wazuh/wazuh-documentation/pull/8600)) ([#8626](https://github.com/wazuh/wazuh-documentation/pull/8626))
 - **Post-release**: Added steps to export and import dashboard customizations in the upgrade guide. ([#8618](https://github.com/wazuh/wazuh-documentation/pull/8618))
 
 ### Fixed
@@ -39,6 +42,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Removed outdated version notices from documentation. ([#8578](https://github.com/wazuh/wazuh-documentation/pull/8578))
 - **Post-release**: Fixed command errors in the "Starting the service" section of the Wazuh server cluster documentation. ([#8587](https://github.com/wazuh/wazuh-documentation/pull/8587))
 - **Post-release**: Removed extra `PUT /rules/files/{filename}` reference from `rules:delete` ([#8599](https://github.com/wazuh/wazuh-documentation/pull/8599))
+- **Post-release**: Fixed incorrect reference from **Ubuntu** to **Windows** endpoint in the SCA use case documentation. ([#8629](https://github.com/wazuh/wazuh-documentation/pull/8629))
 
 ## [v4.11.2]
 
