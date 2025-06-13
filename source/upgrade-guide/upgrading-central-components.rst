@@ -17,7 +17,7 @@ This section guides you through the upgrade process of the Wazuh indexer, the Wa
 
    Apache Lucene does not support downgrades, meaning once you upgrade to Wazuh 4.12.0 or later, you cannot roll back to 4.11 and earlier versions without a fresh installation of the Indexer.
 
-   To avoid data loss, create an :ref:`index snapshot <migrating_indices_take_snapshots>` before upgrading. For more details, refer to the `Opensearch documentation <https://opensearch.org/docs/latest/install-and-configure/upgrade-opensearch/rolling-upgrade/>`__ for more information.
+   To avoid data loss, create an :ref:`index snapshot <migrating_indices_take_snapshots>` before upgrading. For more details, refer to the `Opensearch documentation <https://opensearch.org/docs/latest/install-and-configure/upgrade-opensearch/rolling-upgrade/>`__.
 
 .. _preparing-the-upgrade:
 
