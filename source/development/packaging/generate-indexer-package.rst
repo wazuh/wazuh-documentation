@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Wazuh provides an automated way of building packages for the Wazuh components. Learn how to build your own Wazuh indexer package in this section of our documentation.
+   :description: Wazuh provides an automated way of building the Wazuh indexer package. Learn more in this section of the documentation.
 
 Wazuh indexer
 =============

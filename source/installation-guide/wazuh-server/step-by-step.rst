@@ -68,6 +68,8 @@ Installing the Wazuh manager
 
             # apt-get -y install wazuh-manager|WAZUH_MANAGER_DEB_PKG_INSTALL|
 
+.. include:: /_templates/installations/common/firewall-ports-note.rst
+
 .. _wazuh_server_multi_node_filebeat:
 
 Installing Filebeat
