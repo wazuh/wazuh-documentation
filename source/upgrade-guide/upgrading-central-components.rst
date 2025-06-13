@@ -27,54 +27,14 @@ Perform the steps below before upgrading any of the Wazuh components. In case Wa
 #. Ensure you have added the Wazuh repository to every Wazuh indexer, server, and dashboard node before proceeding to perform the upgrade actions.
 
    .. tabs::
-
+      
       .. group-tab:: Yum
-
-         #. Import the GPG key:
-
-            .. code-block:: console
-
-               # rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH
-
-         #. Add the repository:
-
-            - For RHEL-compatible systems version 8 and earlier, use the following command:
-
-               .. code-block:: console
-
-                  # echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages.wazuh.com/4.x/yum/\nprotect=1' | tee /etc/yum.repos.d/wazuh.repo
-
-            - For RHEL-compatible systems version 9 and later, use the following command:
-
-               .. code-block:: console
-
-                  # echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages.wazuh.com/4.x/yum/\npriority=1' | tee /etc/yum.repos.d/wazuh.repo
-
+      
+         .. include:: /_templates/installations/common/yum/add-repository.rst
+      
       .. group-tab:: APT
-
-         #. Install the following packages if missing:
-
-            .. code-block:: console
-
-               # apt-get install gnupg apt-transport-https
-
-         #. Install the GPG key:
-
-            .. code-block:: console
-
-               # curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | gpg --no-default-keyring --keyring gnupg-ring:/usr/share/keyrings/wazuh.gpg --import && chmod 644 /usr/share/keyrings/wazuh.gpg
-
-         #. Add the repository:
-
-            .. code-block:: console
-
-               # echo "deb [signed-by=/usr/share/keyrings/wazuh.gpg] https://packages.wazuh.com/4.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
-
-         #. Update the packages information:
-
-            .. code-block:: console
-
-               # apt-get update
+      
+         .. include:: /_templates/installations/common/deb/add-repository.rst
 
 #. (Recommended) Export customizations from the Wazuh dashboard. This step helps to preserve visualizations, dashboards, and other saved objects in case there are any issues during the upgrade process.
 
@@ -281,10 +241,6 @@ Perform the following steps on any of the Wazuh indexer nodes replacing ``<WAZUH
       172.18.0.3           34          86  32    6.67    5.30     2.53 dimr      cluster_manager,data,ingest,remote_cluster_client -               wazuh2.indexer
       172.18.0.4           21          86  32    6.67    5.30     2.53 dimr      cluster_manager,data,ingest,remote_cluster_client *               wazuh1.indexer
       172.18.0.2           16          86  32    6.67    5.30     2.53 dimr      cluster_manager,data,ingest,remote_cluster_client -               wazuh3.indexer
-
-#. Run the following command on the Wazuh manager node(s) to start the Wazuh manager service if you stopped it earlier:
-
-   .. include:: /_templates/common/start_manager.rst
 
 .. note::
 
