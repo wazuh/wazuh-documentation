@@ -96,13 +96,18 @@ redirections.push(
   },
   {
     'target': ['4.12=>4.11'],
-    '4.11': '/development/packaging/generate-deb-rpm-package.html',
+    '4.11': '/development/packaging/index.html',
     '4.12': '/development/packaging/generate-agent-package.html',
   },
   {
     'target': ['4.11=>4.12'],
     '4.11': '/development/packaging/generate-deb-rpm-package.html',
     '4.12': '/development/packaging/index.html',
+  },
+  {
+    'target': ['4.12=>4.11'],
+    '4.11': '/development/packaging/generate-deb-rpm-package.html',
+    '4.12': '/development/packaging/generate-agent-package.html#linux-endpoint',
   },
   {
     'target': ['4.11=>4.12', '4.12=>4.11'],
