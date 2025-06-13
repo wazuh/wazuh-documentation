@@ -158,7 +158,7 @@ custom_replacements = {
     "|FILEBEAT_LATEST|" : "7.10.2",
     "|FILEBEAT_LATEST_AMI|" : "7.10.2",
     "|FILEBEAT_LATEST_OVA|" : "7.10.2",
-    "|FILEBEAT_CURRENT_REV|" : "1",
+    "|FILEBEAT_CURRENT_REV|" : "2",
     "|FILEBEAT_LATEST_APT_PKG_INSTALL|" : "7.10.2",
     "|FILEBEAT_LATEST_YUM_PKG_INSTALL|" : "7.10.2",
     # --- Open Distro for Elasticsearch
