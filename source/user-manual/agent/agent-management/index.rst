@@ -13,3 +13,4 @@ This section describes managing the Wazuh agent using the command line (CLI), th
 
    agent-connection
    agent-administration
+   windows-restrictions

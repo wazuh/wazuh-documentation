@@ -91,13 +91,15 @@ command
 
 Path and arguments of the command to be executed.
 
-+--------------------+-----------------------+
-| **Default value**  | N/A                   |
-+--------------------+-----------------------+
-| **Allowed values** | - An existing command |
-|                    | - Path to a binary    |
-|                    | - Path to a script    |
-+--------------------+-----------------------+
++--------------------+----------------------------------------------------------------------------------------------------+
+| **Default value**  | Empty                                                                                             |
++--------------------+----------------------------------------------------------------------------------------------------+
+| **Allowed values** | Any command                                                                                       |
+|                    | Any environment variable                                                                          |
+|                    |                                                                                                   |
+|                    | Note that on Windows, UNC paths and mapped drives are not allowed. Refer to                       |
+|                    | :doc:`Windows agent path restrictions </user-manual/agent/agent-management/windows-restrictions>`.|
++--------------------+---------------------------------------------------------------------------------------------------+
 
 ignore_output
 ^^^^^^^^^^^^^
