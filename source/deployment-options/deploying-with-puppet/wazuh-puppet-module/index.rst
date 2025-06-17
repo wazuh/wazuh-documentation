@@ -338,13 +338,15 @@ Wazuh API users
 Install Wazuh agent via Puppet
 ------------------------------
 
-To apply the manifest to a specific Puppet agent node, you must use the actual node name (hostname) of the agent in the manifest. You can retrieve the node name by running the following command on the agent:
+The agent is configured by installing the ``wazuh::agent`` class.
+
+To apply the manifest to a specific Puppet agent node, you must use the agent's actual node name in the manifest. Retrieve it by running this command on the agent:
 
   .. code-block:: console
 
     # puppet config print certname
 
-This will output the node's certname, which should be used in place of the <PUPPET_AGENT_NODE_NAME> placeholder below.
+This will output the node's certname, which should be used in place of the ``<PUPPET_AGENT_NODE_NAME>`` placeholder in the manifest example below.
 
 Here is an example of a manifest ``wazuh-agent.pp`` (please replace  ``<MANAGER_IP_ADDRESS>`` with your manager IP address, and ``<PUPPET_AGENT_NODE_NAME>`` with your agent's node name):
 
