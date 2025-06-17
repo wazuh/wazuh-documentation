@@ -131,7 +131,7 @@ html_theme_options = {
     'wazuh_web_url': 'https://wazuh.com',
     'wazuh_doc_url': 'https://documentation.wazuh.com',
     'collapse_navigation': False, # Only for Wazuh documentation theme v2.0
-    'include_edit_repo': True,
+    'include_edit_repo': False,
     'include_version_selector': True,
     'breadcrumb_root_title': 'Documentation',
     'enable_search_shortcuts': True
@@ -162,7 +162,7 @@ if html_theme == 'wazuh_doc_theme_v3':
 # Add any paths that contain custom themes here, relative to this directory.
 html_theme_path = ['_themes']
 
-# Custom variable to store the path to the selected theme assets
+# Custom variable to store the path to the theme assets
 theme_assets_path = html_theme_path[0] + '/' + html_theme
 
 # The name for this set of Sphinx documents.  If None, it defaults to
@@ -189,7 +189,7 @@ html_static_path = ['_static']
 # Add any extra paths that contain custom files (such as robots.txt or
 # .htaccess) here, relative to this directory. These files are copied
 # directly to the root of the documentation.
-# html_extra_path = []
+#html_extra_path = []
 
 # If not '', a 'Last updated on:' timestamp is inserted at every page bottom,
 # using the given strftime format.
@@ -423,14 +423,14 @@ emptyTocNodes = json.dumps(emptyTocNodes)
 
 # -- Setup -------------------------------------------------------------------
 
-compilation_time = 0 
+compilation_time = 0
 
 def setup(app):
 
     current_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), theme_assets_path)
     static_path_str = os.path.join(os.path.dirname(os.path.realpath(__file__)), html_static_path[0])
 
-    if not os.path.exists(os.fspath(os.path.join(app.srcdir, html_static_path[0]))):
+    if not os.path.exists(os.path.join(os.path.realpath(app.srcdir), html_static_path[0])):
         os.mkdir(app.srcdir + '/' + html_static_path[0] + '/')
 
     if html_theme == 'wazuh_doc_theme_v3':
@@ -468,11 +468,10 @@ def setup(app):
     app.connect('html-page-context', pagefind_custom_weights)
 
 def pagefind_custom_weights(app, pagename, templatename, context, doctree):
-    ''' Runs once per page, inserting attributes to customize the weights of certain elements in the Pagefind search index '''
+    ''' Runs once per page, inserting the attribute to customize the weights of certain elements in the Pagefind search index '''
     if 'body' in context:
-        # Increase weight for the h1 titles
+
         context['body'] = context['body'].replace('<h1>', '<h1 data-pagefind-weight="10">')
-        # Decrease weight for hits inside code blocks
         context['body'] = context['body'].replace('<div class="highlight">', '<div class="highlight" data-pagefind-weight="0.5">')
 
 def insert_inline_style(app, pagename, templatename, context, doctree):
@@ -583,9 +582,6 @@ def manage_assets(app, pagename, templatename, context, doctree):
             # lightbox (extension)
         ]
 
-        if version < '4.0':
-            js_map['user-manual/api/reference'] = default
-
         if html_theme_options['breadcrumb_root_title'] == 'Training':
             js_map['index'] = default
 
@@ -659,12 +655,12 @@ def creating_file_list(app, exception):
         sitemap += '</urlset>'
 
         # Create .doclist file
-        with open(os.fspath(os.path.join(build_path,'.doclist')), 'w') as doclist_file:
+        with open(os.path.join(os.path.dirname(os.path.realpath(build_path)),'html', '.doclist'), 'w') as doclist_file:
             list_text = separator.join(list_compiled_html)
             doclist_file.write(list_text)
 
         # Create release sitemap file
-        with open(os.fspath(os.path.join(build_path,sitemap_version+'-sitemap.xml')), 'w') as sitemap_file:
+        with open(os.path.join(os.path.dirname(os.path.realpath(build_path)),'html', sitemap_version+'-sitemap.xml'), 'w') as sitemap_file:
             sitemap_file.write(sitemap)
 
 # -- Additional configuration ------------------------------------------------
