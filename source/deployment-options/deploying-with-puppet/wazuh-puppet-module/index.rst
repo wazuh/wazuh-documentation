@@ -306,7 +306,7 @@ Indexer users
 
    .. code-block:: puppet
 
-      node "puppet-agent.com" {
+      node "<PUPPET_AGENT_NODE_NAME>" {
         class { 'wazuh::filebeat_oss':
           filebeat_oss_elastic_password  => '<NEW_PASSWORD>'
         }
@@ -316,7 +316,7 @@ Indexer users
 
    .. code-block:: puppet
 
-      node "puppet-agent.com" {
+      node "<PUPPET_AGENT_NODE_NAME>" {
         class { 'wazuh::dashboard':
           dashboard_password => '<NEW_PASSWORD>'
         }
@@ -329,11 +329,25 @@ Wazuh API users
 
    .. code-block:: puppet
 
-      node "puppet-agent.com" {
+      node "<PUPPET_AGENT_NODE_NAME>" {
         class { 'wazuh::dashboard':
           dashboard_wazuh_api_credentials => '<NEW_PASSWORD>'
         }
       }
+
+Retrieving the Puppet node name
+-------------------------------
+
+The ``<PUPPET_AGENT_NODE_NAME>`` placeholder in your Puppet manifest represents the name under which the Puppet Server catalogs the agent (the VM or server added as a Puppet agent).
+
+You can obtain this node name by running the following command on the agent:
+
+  .. code-block:: console
+
+    # puppet config print certname
+
+Replace ``<PUPPET_AGENT_NODE_NAME>`` in your manifest with the value returned by this command.
+
 
 Install Wazuh agent via Puppet
 ------------------------------
@@ -344,7 +358,7 @@ Here is an example of a manifest ``wazuh-agent.pp`` (please replace  ``<MANAGER_
 
   .. code-block:: puppet
 
-   node "puppet-agent.com" {
+   node "<PUPPET_AGENT_NODE_NAME>" {
      class { 'wazuh::repo':
      }
      class { "wazuh::agent":
