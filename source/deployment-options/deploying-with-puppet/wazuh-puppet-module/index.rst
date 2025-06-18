@@ -338,7 +338,7 @@ Wazuh API users
 Retrieving the Puppet node name
 -------------------------------
 
-The `<PUPPET_AGENT_NODE_NAME>` placeholder in your Puppet manifest represents the name under which the Puppet Server catalogs the agent (the VM or server added as a Puppet agent).
+The ``<PUPPET_AGENT_NODE_NAME>`` placeholder in your Puppet manifest represents the name under which the Puppet Server catalogs the agent (the VM or server added as a Puppet agent).
 
 You can obtain this node name by running the following command on the agent:
 
@@ -346,7 +346,7 @@ You can obtain this node name by running the following command on the agent:
 
     # puppet config print certname
 
-Replace `<PUPPET_AGENT_NODE_NAME>` in your manifest with the value returned by this command.
+Replace ``<PUPPET_AGENT_NODE_NAME>`` in your manifest with the value returned by this command.
 
 
 Install Wazuh agent via Puppet
