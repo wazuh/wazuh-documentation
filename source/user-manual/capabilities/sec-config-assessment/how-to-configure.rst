@@ -56,6 +56,10 @@ The second is to disable them from the Wazuh agent ``ossec.conf`` file by adding
       </policies>
     </sca>
 
+.. note::
+
+   From Wazuh 4.13.0, SCA policy files must be on local file systems. UNC network paths or mapped network drives are not supported.
+
 .. _share_policy_files_and_configuration_with_the_Wazuh_agents:
 
 How to share policy files and configuration with the Wazuh agents
