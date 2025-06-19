@@ -978,9 +978,12 @@ You can monitor the Windows special directories ``%WINDIR%/System32`` and ``%WIN
 .. note::
 
    Starting with Wazuh 4.13.0, the FIM module on Windows does not support monitoring network locations. This includes:
-   - UNC paths (e.g., \\server\share\folder)
-   - Mapped drives (e.g., Z:\f ,older)
-   If these types of paths are included in your <directories> configuration, they will be ignored and no FIM events will be generated for them. This applies to all FIM modes: scheduled, real-time, and whodata.
+   
+   - UNC paths (e.g., ``\\server\share\folder``)
+   
+   - Mapped drives (e.g., ``Z:\folder``)
+   
+   If these types of paths are included in your ``<directories>`` configuration, they will be ignored and no FIM events will be generated for them. This applies to all FIM modes: scheduled, real-time, and whodata.
 
 Recursion level
 ---------------
