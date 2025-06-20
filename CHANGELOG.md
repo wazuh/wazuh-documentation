@@ -11,7 +11,7 @@ All notable changes to this project will be documented in this file.
 - Added steps to preserve custom settings in the JVM configuration file during the indexer upgrade. ([#8603](https://github.com/wazuh/wazuh-documentation/pull/8603))
 - Added the CentOS Stream 9 SCA policy reference to the Available SCA policies section. ([#8602](https://github.com/wazuh/wazuh-documentation/pull/8602))
 - Added steps for installing a single node stack via Puppet in *Deployment with Puppet*. ([#8611](https://github.com/wazuh/wazuh-documentation/pull/8611))
-
+- Added information about filters in the Windows agent to block UNC and mapped drive paths to mitigate *NetNTLMv2* vulnerabilities. ([#8665](https://github.com/wazuh/wazuh-documentation/pull/8665))
 ### Changed
 
 - Updated the Available SCA policies section. ([#8602](https://github.com/wazuh/wazuh-documentation/pull/8602))
