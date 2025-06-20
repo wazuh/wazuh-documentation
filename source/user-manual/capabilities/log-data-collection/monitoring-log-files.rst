@@ -19,6 +19,10 @@ Linux/Unix         ``/var/ossec/etc/ossec.conf``
 macOS              ``/Library/Ossec/etc/ossec.conf``
 =================  ==================================================
 
+.. note::
+
+   From Wazuh 4.13.0, log data collection on Windows does not support monitoring log files located on UNC network paths such as ``\\server\share\file.log`` or mapped network drives such as ``Z:\logs\file.log``. Only log files on local file systems are supported. If you specify a UNC path or mapped drive in the ``<localfile>`` block of your Windows agent configuration, it will be ignored by the agent and no monitoring or alerts will occur for those locations.
+   
 - Centralized configuration: The :doc:`agent.conf </user-manual/reference/centralized-configuration>` file on the Wazuh server enables centralized distribution of configuration settings to multiple monitored endpoints in the same operating system or group. For example, you can configure the ``agent.conf`` file to distribute configuration settings to all monitored Windows endpoints.  Configuration settings in the ``agent.conf`` file take precedence over the settings in the ``ossec.conf`` file.
 
 .. note:: The Wazuh agent is designed to be a lightweight application that minimizes RAM and CPU usage on the endpoint where it is installed. On the Wazuh server side, the CPU and memory consumption is influenced by the number of events per second (EPS) that the server needs to analyze.
