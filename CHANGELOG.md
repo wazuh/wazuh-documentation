@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [v5.0.0]
 
+### Changed
+
+- Replaced `indexer_cluster_initial_master_nodes` with `indexer_initial_cluster_manager_nodes` in Puppet deployment documentation. ([#8666](https://github.com/wazuh/wazuh-documentation/pull/8666))
+
 ### Removed
 
 - Removed `compatibility.override_main_response_version` setting from Wazuh Indexer configuration as it is no longer supported in OpenSearch 3.0. ([#8609](https://github.com/wazuh/wazuh-documentation/pull/8609)) 

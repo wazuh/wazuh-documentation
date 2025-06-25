@@ -144,7 +144,7 @@ You must include the IP addresses of the servers where you are installing each a
    $worker_name = 'worker'
    $cluster_size = '3'
    $indexer_discovery_hosts = [$node1host, $node2host, $node3host]
-   $indexer_cluster_initial_master_nodes = [$node1host, $node2host, $node3host]
+   $indexer_initial_cluster_manager_nodes = [$node1host, $node2host, $node3host]
    $indexer_cluster_CN = [$indexer_node1_name, $indexer_node2_name, $indexer_node3_name]
    # Define stage for order execution
    stage { 'certificates': }
@@ -178,7 +178,7 @@ You must include the IP addresses of the servers where you are installing each a
      indexer_network_host => "$node1host",
      indexer_node_max_local_storage_nodes => "$cluster_size",
      indexer_discovery_hosts => $indexer_discovery_hosts,
-     indexer_cluster_initial_master_nodes => $indexer_cluster_initial_master_nodes,
+     indexer_initial_cluster_manager_nodes => $indexer_initial_cluster_manager_nodes,
      indexer_cluster_CN => $indexer_cluster_CN,
      stage => indexerdeploy
    }
@@ -196,7 +196,7 @@ You must include the IP addresses of the servers where you are installing each a
      indexer_network_host => "$node2host",
      indexer_node_max_local_storage_nodes => "$cluster_size",
      indexer_discovery_hosts => $indexer_discovery_hosts,
-     indexer_cluster_initial_master_nodes => $indexer_cluster_initial_master_nodes,
+     indexer_initial_cluster_manager_nodes => $indexer_initial_cluster_manager_nodes,
      indexer_cluster_CN => $indexer_cluster_CN,
      stage => indexerdeploy
    }
@@ -210,7 +210,7 @@ You must include the IP addresses of the servers where you are installing each a
      indexer_network_host => "$node3host",
      indexer_node_max_local_storage_nodes => "$cluster_size",
      indexer_discovery_hosts => $indexer_discovery_hosts,
-     indexer_cluster_initial_master_nodes => $indexer_cluster_initial_master_nodes,
+     indexer_initial_cluster_manager_nodes => $indexer_initial_cluster_manager_nodes,
      indexer_cluster_CN => $indexer_cluster_CN,
      stage => indexerdeploy
    }
@@ -280,7 +280,7 @@ The ``wazuh::certificates`` class needs to be applied on the Puppet server (``pu
 If you need more Wazuh indexer nodes, add new variables. For example ``indexer_node4_name`` and ``node4host``. Add them to the following arrays:
 
 -  ``indexer_discovery_hosts``
--  ``indexer_cluster_initial_master_nodes``
+-  ``indexer_initial_cluster_manager_nodes``
 -  ``indexer_cluster_CN``
 -  ``indexer_certs``
 
