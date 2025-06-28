@@ -117,7 +117,7 @@ Deploy
 1. Deploy Kubernetes
 
     Follow the `Official guide <https://kubernetes.io/docs/tutorials/kubernetes-basics/create-cluster/cluster-intro/>`_ to deploy a Kubernetes Cluster.
-    This repository focuses on `AWS <https://aws.amazon.com/es/>`_ but it should be easy to adapt it to another Cloud provider. In case you are using AWS, we recommend `EKS <https://docs.aws.amazon.com/en_us/eks/latest/userguide/getting-started.html>`_.
+    Our Kubernetes repository focuses on `AWS <https://aws.amazon.com/es/>`_ but it should be easy to adapt it to another Cloud provider. In case you are using AWS, we recommend `EKS <https://docs.aws.amazon.com/en_us/eks/latest/userguide/getting-started.html>`_.
 
 2. Create domains to access the services
 
@@ -172,11 +172,15 @@ Deploy
 
     3.2. Apply all manifests using kustomize
 
-        By using the kustomization.yml we can now deploy the whole cluster in a single command.
+        We are using the overlay feature of `Kustomize <https://https://kubernetes.io/docs/tasks/manage-kubernetes-objects/kustomization/>`_ to create two variants: ``eks`` and ``local-env``, in this guide we're using ``eks``. (For a deployment on a local environment check the guide :ref:`Deployment on local environment <kubernetes_local_env>`)
+
+        You can adjust resources for the cluster on ``envs/eks/``, you can tune cpu, memory as well as storage for persistent volumes of each of the cluster objects.
+
+        By using the kustomization file on the ``eks`` variant we can now deploy the whole cluster with a single command:
 
         .. code-block:: console
 
-            $ kubectl apply -k .
+            $ kubectl apply -k envs/eks/
 
 
 Verifying the deployment
