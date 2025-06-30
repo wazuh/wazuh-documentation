@@ -10,7 +10,7 @@ To create a backup of your Wazuh agent installation follow these steps.
 
 .. note::
 
-   You need root user privileges to execute the commands below.
+   You need elevated privileges to execute the commands below.
 
 Preparing the backup
 --------------------
@@ -26,10 +26,7 @@ Preparing the backup
             # bkp_folder=~/wazuh_files_backup/$(date +%F_%H:%M)
             # mkdir -p $bkp_folder && echo $bkp_folder
 
-      .. group-tab:: Windows
-
-         .. note::
-            Run the following Windows commands in **CMD (Command Prompt)** as **Administrator**. Running with PowerShell will result in errors.
+      .. group-tab:: Windows (CMD Admin)
 
          .. code-block:: doscon
 
