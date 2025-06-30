@@ -40,5 +40,7 @@ Following, you can see how to configure the FIM module to monitor a file and dir
 
       If you specify a directory both in a :doc:`centralized configuration </user-manual/reference/centralized-configuration>` and on the :doc:`configuration </user-manual/reference/ossec-conf/index>` file of the Wazuh agent, the centralized configuration takes precedence and overrides the local configuration.
 
+      From Wazuh 4.13.0, the FIM module does not support monitoring UNC network paths or mapped network drives on Windows. Only local file system paths are supported.
+
 
 
