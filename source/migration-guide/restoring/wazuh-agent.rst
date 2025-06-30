@@ -10,7 +10,7 @@ Restore your Wazuh agent installation by following these steps.
 
 .. note::
    
-   You need root user privileges to execute the commands below.
+   You need elevated privileges to execute the commands below.
 
 Linux
 -----
