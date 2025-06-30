@@ -27,6 +27,8 @@ Below, you can see how to configure the FIM module to monitor a directory in rea
 
    When specifying a directory for real time monitoring, it must exist before restarting the Wazuh agent. If not, the module ignores the directory until it finds it on a subsequent restart of the Wazuh agent.
 
+   From Wazuh 4.13.0, the FIM module does not support monitoring UNC network paths or mapped network drives on Windows. Only local file system paths are supported. This restriction applies to all monitoring modes (realtime, scheduled, and whodata) on Windows.
+
 #. Add the following settings to the Wazuh agent configuration file:
 
    - Linux: ``/var/ossec/etc/ossec.conf``
