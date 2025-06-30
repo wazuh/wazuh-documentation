@@ -28,6 +28,9 @@ Preparing the backup
 
       .. group-tab:: Windows
 
+         .. note::
+            Run the following Windows commands in **CMD (Command Prompt)** as **Administrator**. Running with PowerShell will result in errors.
+
          .. code-block:: doscon
 
             > set datetime=%date%-%time%
