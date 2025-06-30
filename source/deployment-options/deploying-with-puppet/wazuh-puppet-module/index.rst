@@ -144,7 +144,7 @@ You must include the IP addresses of the servers where you are installing each a
    $worker_name = 'worker'
    $cluster_size = '3'
    $indexer_discovery_hosts = [$node1host, $node2host, $node3host]
-   $indexer_cluster_initial_master_nodes = [$node1host, $node2host, $node3host]
+   $indexer_initial_cluster_manager_nodes = [$node1host, $node2host, $node3host]
    $indexer_cluster_CN = [$indexer_node1_name, $indexer_node2_name, $indexer_node3_name]
    # Define stage for order execution
    stage { 'certificates': }
@@ -178,7 +178,7 @@ You must include the IP addresses of the servers where you are installing each a
      indexer_network_host => "$node1host",
      indexer_node_max_local_storage_nodes => "$cluster_size",
      indexer_discovery_hosts => $indexer_discovery_hosts,
-     indexer_cluster_initial_master_nodes => $indexer_cluster_initial_master_nodes,
+     indexer_initial_cluster_manager_nodes => $indexer_initial_cluster_manager_nodes,
      indexer_cluster_CN => $indexer_cluster_CN,
      stage => indexerdeploy
    }
@@ -196,7 +196,7 @@ You must include the IP addresses of the servers where you are installing each a
      indexer_network_host => "$node2host",
      indexer_node_max_local_storage_nodes => "$cluster_size",
      indexer_discovery_hosts => $indexer_discovery_hosts,
-     indexer_cluster_initial_master_nodes => $indexer_cluster_initial_master_nodes,
+     indexer_initial_cluster_manager_nodes => $indexer_initial_cluster_manager_nodes,
      indexer_cluster_CN => $indexer_cluster_CN,
      stage => indexerdeploy
    }
@@ -210,7 +210,7 @@ You must include the IP addresses of the servers where you are installing each a
      indexer_network_host => "$node3host",
      indexer_node_max_local_storage_nodes => "$cluster_size",
      indexer_discovery_hosts => $indexer_discovery_hosts,
-     indexer_cluster_initial_master_nodes => $indexer_cluster_initial_master_nodes,
+     indexer_initial_cluster_manager_nodes => $indexer_initial_cluster_manager_nodes,
      indexer_cluster_CN => $indexer_cluster_CN,
      stage => indexerdeploy
    }
@@ -280,7 +280,7 @@ The ``wazuh::certificates`` class needs to be applied on the Puppet server (``pu
 If you need more Wazuh indexer nodes, add new variables. For example ``indexer_node4_name`` and ``node4host``. Add them to the following arrays:
 
 -  ``indexer_discovery_hosts``
--  ``indexer_cluster_initial_master_nodes``
+-  ``indexer_initial_cluster_manager_nodes``
 -  ``indexer_cluster_CN``
 -  ``indexer_certs``
 
@@ -306,7 +306,7 @@ Indexer users
 
    .. code-block:: puppet
 
-      node "puppet-agent.com" {
+      node "<PUPPET_AGENT_NODE_NAME>" {
         class { 'wazuh::filebeat_oss':
           filebeat_oss_elastic_password  => '<NEW_PASSWORD>'
         }
@@ -316,7 +316,7 @@ Indexer users
 
    .. code-block:: puppet
 
-      node "puppet-agent.com" {
+      node "<PUPPET_AGENT_NODE_NAME>" {
         class { 'wazuh::dashboard':
           dashboard_password => '<NEW_PASSWORD>'
         }
@@ -329,11 +329,25 @@ Wazuh API users
 
    .. code-block:: puppet
 
-      node "puppet-agent.com" {
+      node "<PUPPET_AGENT_NODE_NAME>" {
         class { 'wazuh::dashboard':
           dashboard_wazuh_api_credentials => '<NEW_PASSWORD>'
         }
       }
+
+Retrieving the Puppet node name
+-------------------------------
+
+The ``<PUPPET_AGENT_NODE_NAME>`` placeholder in your Puppet manifest represents the name under which the Puppet Server catalogs the agent (the VM or server added as a Puppet agent).
+
+You can obtain this node name by running the following command on the agent:
+
+  .. code-block:: console
+
+    # puppet config print certname
+
+Replace ``<PUPPET_AGENT_NODE_NAME>`` in your manifest with the value returned by this command.
+
 
 Install Wazuh agent via Puppet
 ------------------------------
@@ -344,7 +358,7 @@ Here is an example of a manifest ``wazuh-agent.pp`` (please replace  ``<MANAGER_
 
   .. code-block:: puppet
 
-   node "puppet-agent.com" {
+   node "<PUPPET_AGENT_NODE_NAME>" {
      class { 'wazuh::repo':
      }
      class { "wazuh::agent":
