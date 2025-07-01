@@ -34,3 +34,9 @@ After providing the above and applying the configuration, create a ``CNAME`` DNS
 .. note::
 
    Your Wazuh Cloud environment is still accessible through the default URL, even if you have configured a custom domain.
+
+
+.. toctree::
+   :maxdepth: 1
+
+   update-custom-dns
