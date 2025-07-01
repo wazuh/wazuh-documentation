@@ -102,7 +102,7 @@ Preparing the data restoration
 Restoring Wazuh agent files
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Perform the steps below to restore the Wazuh agent files on a Windows endpoint.
+Perform the steps below in an elevated Windows Command Prompt (CMD) to restore the Wazuh agent files on a Windows endpoint.
 
 #. Stop the Wazuh agent to prevent any modification to the Wazuh agent files during the restore process by running the following command on the Command Prompt as an administrator:
 
