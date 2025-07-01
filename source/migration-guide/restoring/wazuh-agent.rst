@@ -110,7 +110,7 @@ Perform the steps below in an elevated Windows Command Prompt (CMD) to restore t
 
       NET STOP WazuhSvc
 
-#. Launch PowerShell or the CMD utility as an administrator and navigate to the ``wazuh_files_backup/<DATE_TIME>`` folder that contains the backup files.
+#. Launch the Windows Command Prompt as an administrator and navigate to the ``wazuh_files_backup/<DATE_TIME>`` folder that contains the backup files.
 
 #. Run the following commands to copy the Wazuh agent data, certificates, and configurations:
 
