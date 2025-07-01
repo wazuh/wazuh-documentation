@@ -3,10 +3,6 @@ All notable changes to this project will be documented in this file.
 
 ## [v4.14.0]
 
-### Added
-
-- Added support for AlmaLinux 10. ([#8669](https://github.com/wazuh/wazuh-documentation/pull/8669))
-
 ### Changed
 
 - Updated the Filebeat package revision number. ([#8627](https://github.com/wazuh/wazuh-documentation/pull/8627))
