@@ -11,8 +11,8 @@ This section lists the changes in version 4.13.0. Every update of the Wazuh solu
 Highlights
 ----------
 
-
-
+-  `Agent Docker images <https://github.com/wazuh/wazuh-docker/issues/1790>`__: Docker images for the Wazuh agent are now available.
+-  `Global queries for FIM and system inventory <https://github.com/wazuh/wazuh/issues/27894>`__: Added support for global queries on data collected by the Wazuh agent. The FIM and inventory modules can now perform advanced searches and filtering on data stored in the Wazuh indexer. This enhances Wazuh's security and compliance capabilities and provides deeper insights into system status and configuration.
 
 What's new
 ----------
@@ -64,7 +64,7 @@ Ruleset
 Other
 ^^^^^
 
-- `#29489 <https://github.com/wazuh/wazuh/pull/29489>`__ Updated Python dependencies: `setuptools`, `Jinja2`, and `PyJWT`.
+- `#29610 <https://github.com/wazuh/wazuh/pull/29610>`__ Updated Python dependencies: `setuptools`, `Jinja2`, and `PyJWT`.
 - `#28646 <https://github.com/wazuh/wazuh/pull/28646>`__ Upgraded embedded Python interpreter to 3.10.16.
 - `#29735 <https://github.com/wazuh/wazuh/pull/29735>`__ Upgraded `h11` to 0.16.0 and `httpcore` to 1.0.9.
 - `#28564 <https://github.com/wazuh/wazuh/pull/28564>`__ Removed unused Azure Python dependencies.
