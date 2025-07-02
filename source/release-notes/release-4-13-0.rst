@@ -84,6 +84,9 @@ Wazuh dashboard
 - `#7489 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7489>`__ Removed the cluster restart warning on rules, decoders and CDB lists.
 - `#7368 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7368>`__ Removed ``Inventory data`` view from agent overview.
 - `#7475 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7475>`__ Removed ``vulnerability.pattern`` setting.
+- `#7368 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7368>`__ Removed ``GET /api/syscollector`` API endpoint.
+- `#7368 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7368>`__ Removed inventory data report and ``POST /reports/agents/{agentID}/inventory`` API endpoint.
+- `#7483 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7483>`__ Removed the ``enrollment.password`` field from the ``/utils/configuration`` endpoint response to prevent unauthorized agent registration by users with read-only API roles.
 
 Resolved issues
 ---------------
@@ -131,9 +134,6 @@ Wazuh dashboard
 - `#7422 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7422>`__ Fixed the X-axis label in the ``Vulnerabilities by year of publication`` visualization.
 - `#7501 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7501>`__ Fixed a bug in Rule details flyout, where it didn't map all the compliances.
 - `#7540 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7540>`__ Fixed the Windows service name in Deploy new agent.
-- `#7368 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7368>`__ Removed ``GET /api/syscollector`` API endpoint.
-- `#7368 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7368>`__ Removed inventory data report and ``POST /reports/agents/{agentID}/inventory`` API endpoint.
-- `#7483 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7483>`__ Removed the ``enrollment.password`` field from the ``/utils/configuration`` endpoint response to prevent unauthorized agent registration by users with read-only API roles.
 
 Changelogs
 ----------
