@@ -10,7 +10,7 @@ Restore your Wazuh agent installation by following these steps.
 
 .. note::
    
-   You need root user privileges to execute the commands below.
+   You need elevated privileges to execute the commands below.
 
 Linux
 -----
@@ -102,7 +102,7 @@ Preparing the data restoration
 Restoring Wazuh agent files
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Perform the steps below to restore the Wazuh agent files on a Windows endpoint.
+Perform the steps below in an elevated Windows Command Prompt (CMD) to restore the Wazuh agent files on a Windows endpoint.
 
 #. Stop the Wazuh agent to prevent any modification to the Wazuh agent files during the restore process by running the following command on the Command Prompt as an administrator:
 
@@ -110,7 +110,7 @@ Perform the steps below to restore the Wazuh agent files on a Windows endpoint.
 
       NET STOP WazuhSvc
 
-#. Launch PowerShell or the CMD utility as an administrator and navigate to the ``wazuh_files_backup/<DATE_TIME>`` folder that contains the backup files.
+#. Launch the Windows Command Prompt as an administrator and navigate to the ``wazuh_files_backup/<DATE_TIME>`` folder that contains the backup files.
 
 #. Run the following commands to copy the Wazuh agent data, certificates, and configurations:
 
