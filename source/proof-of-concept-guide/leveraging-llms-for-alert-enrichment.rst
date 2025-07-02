@@ -257,8 +257,8 @@ Perform the following steps to install Python, YARA, and download YARA rules.
 
    .. code-block:: powershell
 
-      > Invoke-WebRequest -Uri https://github.com/VirusTotal/yara/releases/download/v4.5.1/yara-master-2298-win64.zip -OutFile yara-master-2298-win64.zip
-      > Expand-Archive yara-master-2298-win64.zip; Remove-Item yara-master-2298-win64.zip
+      > Invoke-WebRequest -Uri https://github.com/VirusTotal/yara/releases/download/v4.5.1/yara-v4.5.1-2298-win64.zip -OutFile yara-v4.5.1-2298-win64.zip
+      > Expand-Archive yara-v4.5.1-2298-win64.zip; Remove-Item yara-v4.5.1-2298-win64.zip
 
 #. Create a directory called ``C:\Program Files (x86)\ossec-agent\active-response\bin\yara\`` and copy the YARA executable into it:
 
