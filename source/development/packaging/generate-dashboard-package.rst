@@ -46,6 +46,7 @@ To use the ``build-packages.sh`` script, you first need to generate the packages
 -  ``wazuh-dashboard``
 -  ``wazuh-security-dashboards-plugin``
 -  ``wazuh-dashboard-plugins``
+-  ``wazuh-dashboard-reporting``
 
 Follow the steps below to build the packages:
 
@@ -97,6 +98,20 @@ Follow the steps below to build the packages:
       $ yarn
       $ yarn build
 
+#. Clone the `wazuh-dashboard-reporting <https://github.com/wazuh/wazuh-dashboard-reporting.git>`__ repository in the ``wazuh-dashboard/plugins`` folder and build the plugin:
+
+   .. note::
+
+      Run the following commands while in the ``wazuh-dashboard/`` directory.
+
+   .. code:: console
+
+      $ cd plugins/
+      $ git clone -b v|WAZUH_CURRENT| https://github.com/wazuh/wazuh-dashboard-reporting.git
+      $ cd wazuh-dashboard-reporting/
+      $ yarn
+      $ yarn build
+
 #. Zip the packages and move them to the packages folder
 
    .. code:: console
@@ -107,13 +122,15 @@ Follow the steps below to build the packages:
       $ zip -r -j ./dashboard-package.zip ../wazuh-dashboard/target/opensearch-dashboards-2.*.*-linux-x64.tar.gz
       $ zip -r -j ./security-package.zip ../wazuh-dashboard/plugins/wazuh-security-dashboards-plugin/build/security-dashboards-2.*.*.0.zip
       $ zip -r -j ./wazuh-package.zip ../wazuh-dashboard/plugins/wazuh-check-updates/build/wazuhCheckUpdates-2.*.*.zip ../wazuh-dashboard/plugins/main/build/wazuh-2.*.*.zip ../wazuh-dashboard/plugins/wazuh-core/build/wazuhCore-2.*.*.zip
+      $ zip -r -j ./reporting-package.zip ../wazuh-dashboard/plugins/wazuh-dashboard-reporting/build/reporting-dashboards-2.*.*.0.zip
       $ ls
 
-After completing the previous steps, you will have three packages in the packages folder:
+After completing the previous steps, you will have four packages in the packages folder:
 
 -  ``dashboard-package.zip``
 -  ``security-package.zip``
 -  ``wazuh-package.zip``
+-  ``reporting-package.zip``
 
 Using the script
 ^^^^^^^^^^^^^^^^
@@ -126,11 +143,12 @@ Run the ``build-packages.sh`` script in the ``dev-tools/build-packages/`` folder
 -  ``-a``: Path to the ``wazuh-package.zip``.
 -  ``-s``: Path to the ``security-package.zip``.
 -  ``-b``: Path to the ``dashboard-package.zip``.
+-  ``-rp``: Path to the ``reporting-package.zip``.
 
 .. code:: console
 
    $ cd ../wazuh-dashboard/dev-tools/build-packages/
-   $ ./build-packages.sh --commit-sha <COMMIT_SHA> -r <REVISION> --<DISTRIBUTION> -a file:///<PATH_TO_wazuh-package.zip> -s file:///<PATH_TO_security-package.zip> -b file:///<PATH_TO_dashboard-package.zip>
+   $ ./build-packages.sh --commit-sha <COMMIT_SHA> -r <REVISION> --<DISTRIBUTION> -a file:///<PATH_TO_wazuh-package.zip> -s file:///<PATH_TO_security-package.zip> -b file:///<PATH_TO_dashboard-package.zip> -rp file:///<PATH_TO_reporting-package.zip>
 
 Where ``--<DISTRIBUTION>`` is either ``--deb`` or ``--rpm``.
 
@@ -141,7 +159,7 @@ Example:
 .. code:: console
 
    $ cd ../wazuh-dashboard/dev-tools/build-packages/
-   $ ./build-packages.sh --commit-sha c68286b87-b917f56ac-970c46953 -r 1 --deb -a file:///packages/wazuh-package.zip -s file:///packages/security-package.zip -b file:///packages/dashboard-package.zip
+   $ ./build-packages.sh --commit-sha c68286b87-b917f56ac-970c46953-a68286b87 -r 1 --deb -a file:///packages/wazuh-package.zip -s file:///packages/security-package.zip -b file:///packages/dashboard-package.zip -rp file:///packages/reporting-package.zip
 
 The script generates the package in the ``output`` folder of the same directory where it is located. To see the generated package, run the command: ``ls output/deb``.
 
@@ -162,19 +180,20 @@ Generating the commit SHA
    wazuh-dashboard                       ``<DASHBOARD_COMMIT_SHA>``
    wazuh-dashboard-plugins               ``<PLUGINS_COMMIT_SHA>``
    wazuh-security-dashboards-plugin      ``<SECURITY_COMMIT_SHA>``
+   wazuh-dashboard-reporting             ``<REPORTING_COMMIT_SHA>``
    ===================================== =============================
 
 #. Concatenate individual SHAs in the following format. The resulting commit SHA is used for package versioning and build tracking.
 
    .. code-block:: none
 
-      <DASHBOARD_COMMIT_SHA>-<PLUGINS_COMMIT_SHA>-<SECURITY_COMMIT_SHA>
+      <DASHBOARD_COMMIT_SHA>-<PLUGINS_COMMIT_SHA>-<SECURITY_COMMIT_SHA>-<REPORTING_COMMIT_SHA>
 
    Example:
 
    .. code-block:: none
 
-      c68286b87-b917f56ac-970c46953
+      c68286b87-b917f56ac-970c46953-a68286b87
 
 Build with Docker image
 -----------------------
@@ -209,6 +228,7 @@ Building the Wazuh dashboard package using Docker
    -  ``WAZUH_DASHBOARDS_BRANCH``: Branch of the Wazuh dashboards repository.
    -  ``WAZUH_DASHBOARDS_PLUGINS``: Branch of the Wazuh dashboards Plugins repository.
    -  ``WAZUH_SECURITY_DASHBOARDS_PLUGIN_BRANCH``: Branch of the Wazuh Security Dashboards Plugin repository.
+   -  ``WAZUH_REPORTING_DASHBOARDS_PLUGIN_BRANCH``: Branch of the Wazuh Reporting Dashboards Plugin repository.
    -  ``OPENSEARCH_DASHBOARDS_VERSION``: Version of the OpenSearch Dashboards. You can find the version in the ``package.json`` file of the Wazuh dashboards repository.
    -  ``-t``: Tag of the image.
 
@@ -219,6 +239,7 @@ Building the Wazuh dashboard package using Docker
       --build-arg WAZUH_DASHBOARDS_BRANCH=<BRANCH_OF_wazuh-dashboard> \
       --build-arg WAZUH_DASHBOARDS_PLUGINS=<BRANCH_OF_wazuh-dashboard-plugins> \
       --build-arg WAZUH_SECURITY_DASHBOARDS_PLUGIN_BRANCH=<BRANCH_OF_wazuh-security-dashboards-plugin> \
+      --build-arg WAZUH_REPORTING_DASHBOARDS_PLUGIN_BRANCH=<BRANCH_OF_wazuh-reporting-dashboards-plugin> \
       --build-arg OPENSEARCH_DASHBOARDS_VERSION=<OPENSEARCH_DASHBOARDS_VERSION> \
       -t <TAG_OF_IMAGE> \
       -f wazuh-dashboard.Dockerfile .
@@ -232,6 +253,7 @@ Building the Wazuh dashboard package using Docker
       --build-arg WAZUH_DASHBOARDS_BRANCH=v|WAZUH_CURRENT| \
       --build-arg WAZUH_DASHBOARDS_PLUGINS=v|WAZUH_CURRENT| \
       --build-arg WAZUH_SECURITY_DASHBOARDS_PLUGIN_BRANCH=v|WAZUH_CURRENT| \
+      --build-arg WAZUH_REPORTING_DASHBOARDS_PLUGIN_BRANCH=v|WAZUH_CURRENT| \
       --build-arg OPENSEARCH_DASHBOARDS_VERSION=|OPENSEARCH_DASHBOARDS_VERSION| \
       -t wzd:v|WAZUH_CURRENT| \
       -f wazuh-dashboard.Dockerfile .
