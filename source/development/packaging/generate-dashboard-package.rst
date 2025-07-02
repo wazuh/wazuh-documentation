@@ -11,7 +11,7 @@ Wazuh provides an automated way of building the Wazuh dashboard package locally 
 -  ``version``
 -  ``revision``
 -  ``distribution``
--  ``wazuh-dashboard``, ``wazuh-dashboard-plugins``, and ``wazuh-security-dashboards-plugin`` package paths.
+-  ``wazuh-dashboard``, ``wazuh-dashboard-plugins``, ``wazuh-security-dashboards-plugin``, and ``wazuh-dashboard-reporting`` package paths.
 
 .. note::
 
