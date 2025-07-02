@@ -69,7 +69,14 @@ Other
 Wazuh dashboard
 ^^^^^^^^^^^^^^^
 
+- `#7368 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7368>`__ `#7461 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7461>`__ `#7476 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7476>`__ `#7475 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7475>`__ `#7513 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7513>`__ Added `It Hygiene` application.
+- `#7368 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7368>`__ Added hardware and system information to the agent overview.
+- `#7379 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7379>`__ `#7513 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7513>`__ Added persistence for selected columns and page size in data grid settings.
+- `#7373 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7373>`__ `#7449 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7449>`__ `#7475 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7475>`__ Added the ability to manage the sample data from FIM, IT Hygiene and vulnerabilities inventories prefixes.
+- `#7443 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7443>`__ Added back button to Deploy Agent page that redirects to Endpoints Summary.
 - `#7412 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7412>`__ Added UUID field to the APIs table.
+- `#7373 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7373>`__ Moved `/elastic/samplealerts` API endpoints to `/indexer/samplealerts`.
+- `#7368 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7368>`__ `#7482 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7482>`__ `#7538 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7538>`__ Changed FIM inventory to display information ingested by the indexer.
 - `#7430 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7430>`__ Changed macOS agent startup command.
 
 Resolved issues
@@ -110,7 +117,11 @@ Ruleset
 Wazuh dashboard
 ^^^^^^^^^^^^^^^
 
+- `#7368 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7368>`__ Fixed a problem in Vulnerabilities > Dashboard and Inventory when there are no indices matching with the index pattern.
+- `#7425 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7425>`__ Fixed double backslash warning on xml editor.
 - `#7422 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7422>`__ Fixed the X-axis label in the ``Vulnerabilities by year of publication`` visualization.
+- `#7501 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7501>`__ Fixed a bug in Rule details flyout, where it didn't map all the compliances.
+- `#7540 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7540>`__ Fixed the Windows service name in Deploy new agent.
 
 Changelogs
 ----------
