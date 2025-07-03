@@ -14,6 +14,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Added troubleshooting steps to the *Virtual Machine (OVA)* installation guide. ([#8562](https://github.com/wazuh/wazuh-documentation/pull/8562))
 - **Post-release**: Added a note in the installation guide about firewall configuration to prevent communication issues between Wazuh components. ([#8622](https://github.com/wazuh/wazuh-documentation/pull/8622))
 - **Post-release**: Added instruction to run Windows backup commands in CMD (Command Prompt) and not PowerShell. ([#8672](https://github.com/wazuh/wazuh-documentation/pull/8672))
+- **Post-release**: Added a new page on Update DNS certificates ([#2606](https://github.com/wazuh/internal-devel-requests/issues/2606))
 
 ### Changed
 
