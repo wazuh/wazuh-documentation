@@ -25,29 +25,23 @@ The installation process is divided into two stages.
 Adding the Wazuh repository
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-  .. note::
-    If you are installing the Wazuh server on the same host as the Wazuh indexer, you may skip these steps only if the Wazuh repository is already configured and enabled.
+.. note::
 
-  ..
-    Add the Wazuh repository to download the official Wazuh packages. As an alternative, you can download the Wazuh packages directly from :doc:`../packages-list`.
+   If you are installing the Wazuh server on the same host as the Wazuh indexer, you may skip these steps only if the Wazuh repository is already configured and enabled.
 
-  .. tabs::
+.. tabs::
 
-
-    .. group-tab:: Yum
-
-
-      .. include:: /_templates/installations/common/yum/add-repository.rst
-
-
-
-    .. group-tab:: APT
-
+   .. group-tab:: APT
 
       .. include:: /_templates/installations/common/deb/add-repository.rst
 
+   .. group-tab:: Yum
 
+      .. include:: /_templates/installations/common/yum/add-repository.rst
 
+   .. group-tab:: DNF
+
+      .. include:: /_templates/installations/common/dnf/add-repository.rst
 
 Installing the Wazuh manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -56,17 +50,23 @@ Installing the Wazuh manager
 
    .. tabs::
 
+      .. group-tab:: APT
+
+         .. code-block:: console
+
+            # apt-get -y install wazuh-manager|WAZUH_MANAGER_DEB_PKG_INSTALL|
+
       .. group-tab:: Yum
 
          .. code-block:: console
 
             # yum -y install wazuh-manager|WAZUH_MANAGER_RPM_PKG_INSTALL|
 
-      .. group-tab:: APT
+      .. group-tab:: DNF
 
          .. code-block:: console
 
-            # apt-get -y install wazuh-manager|WAZUH_MANAGER_DEB_PKG_INSTALL|
+            # dnf -y install wazuh-manager|WAZUH_MANAGER_RPM_PKG_INSTALL|
 
 .. include:: /_templates/installations/common/firewall-ports-note.rst
 
@@ -75,26 +75,27 @@ Installing the Wazuh manager
 Installing Filebeat
 ^^^^^^^^^^^^^^^^^^^
 
-  #. Install the Filebeat package.
+#. Install the Filebeat package.
 
-      .. tabs::
+   .. tabs::
 
-
-        .. group-tab:: Yum
-
+      .. group-tab:: APT
 
          .. code-block:: console
-         
-             # yum -y install filebeat|FILEBEAT_LATEST_YUM_PKG_INSTALL|
-             
 
-        .. group-tab:: APT
+            # apt-get -y install filebeat|FILEBEAT_LATEST_APT_PKG_INSTALL|
 
+      .. group-tab:: Yum
 
-          .. code-block:: console
-          
-              # apt-get -y install filebeat|FILEBEAT_LATEST_APT_PKG_INSTALL|
+         .. code-block:: console
 
+            # yum -y install filebeat|FILEBEAT_LATEST_YUM_PKG_INSTALL|
+
+      .. group-tab:: DNF
+
+         .. code-block:: console
+
+            # dnf -y install filebeat|FILEBEAT_LATEST_YUM_PKG_INSTALL|
 
 .. _installation_configuring_filebeat:
 

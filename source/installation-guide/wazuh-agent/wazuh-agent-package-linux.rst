@@ -21,27 +21,21 @@ Add the Wazuh repository to download the official packages.
 
 .. tabs::
 
+   .. group-tab:: APT
 
-  .. group-tab:: Yum
+      .. include:: /_templates/installations/wazuh/deb/add_repository.rst
 
+   .. group-tab:: Yum
 
-    .. include:: ../../_templates/installations/wazuh/yum/add_repository.rst
+      .. include:: /_templates/installations/wazuh/yum/add_repository.rst
 
+   .. group-tab:: DNF
 
+      .. include:: /_templates/installations/wazuh/dnf/add_repository.rst
 
-  .. group-tab:: APT
+   .. group-tab:: ZYpp
 
-
-    .. include:: ../../_templates/installations/wazuh/deb/add_repository.rst
-
-
-
-  .. group-tab:: ZYpp
-
-
-    .. include:: ../../_templates/installations/wazuh/zypp/add_repository.rst
-
-
+      .. include:: /_templates/installations/wazuh/zypp/add_repository.rst
 
 Deploy a Wazuh agent
 --------------------
@@ -50,25 +44,23 @@ Deploy a Wazuh agent
 
    .. tabs::
 
-      .. group-tab:: Yum
-
-         .. code-block:: console
-
-            # WAZUH_MANAGER="10.0.0.2" yum install wazuh-agent|WAZUH_AGENT_RPM_PKG_INSTALL|
-
-         For additional deployment options such as agent name, agent group, and registration password, see the :doc:`Deployment variables for Linux </user-manual/agent/agent-enrollment/deployment-variables/deployment-variables-linux>` section.
-
-          .. note:: Alternatively, if you want to install an agent without registering it, omit the deployment variables. To learn more about the different registration methods, see the :doc:`Wazuh agent enrollment </user-manual/agent/agent-enrollment/index>` section.
-
       .. group-tab:: APT
 
          .. code-block:: console
 
             # WAZUH_MANAGER="10.0.0.2" apt-get install wazuh-agent|WAZUH_AGENT_DEB_PKG_INSTALL|
 
-         For additional deployment options such as agent name, agent group, and registration password, see the :doc:`Deployment variables for Linux </user-manual/agent/agent-enrollment/deployment-variables/deployment-variables-linux>` section.
+      .. group-tab:: Yum
 
-         .. note:: Alternatively, if you want to install an agent without registering it, omit the deployment variables. To learn more about the different registration methods, see the :doc:`Wazuh agent enrollment </user-manual/agent/agent-enrollment/index>` section.
+         .. code-block:: console
+
+            # WAZUH_MANAGER="10.0.0.2" yum install wazuh-agent|WAZUH_AGENT_RPM_PKG_INSTALL|
+
+      .. group-tab:: DNF
+
+         .. code-block:: console
+
+            # WAZUH_MANAGER="10.0.0.2" dnf install wazuh-agent|WAZUH_AGENT_RPM_PKG_INSTALL|
 
       .. group-tab:: ZYpp
 
@@ -76,9 +68,11 @@ Deploy a Wazuh agent
 
             # WAZUH_MANAGER="10.0.0.2" zypper install wazuh-agent|WAZUH_AGENT_ZYPP_PKG_INSTALL|
 
-         For additional deployment options such as agent name, agent group, and registration password, see the :doc:`Deployment variables for Linux </user-manual/agent/agent-enrollment/deployment-variables/deployment-variables-linux>` section.
+   For additional deployment options such as agent name, agent group, and registration password, see the :doc:`Deployment variables for Linux </user-manual/agent/agent-enrollment/deployment-variables/deployment-variables-linux>` section.
 
-         .. note:: Alternatively, if you want to install an agent without registering it, omit the deployment variables. To learn more about the different registration methods, see the :doc:`Wazuh agent enrollment </user-manual/agent/agent-enrollment/index>` section.
+   .. note::
+
+      Alternatively, if you want to install an agent without registering it, omit the deployment variables. To learn more about the different registration methods, see the :doc:`Wazuh agent enrollment </user-manual/agent/agent-enrollment/index>` section.
 
 #. Enable and start the Wazuh agent service.
 
@@ -86,27 +80,24 @@ Deploy a Wazuh agent
 
 The deployment process is now complete, and the Wazuh agent is successfully running on your Linux system.
 
-- **Recommended action** -  Disable Wazuh updates
+-  **Recommended action** -  Disable Wazuh updates
 
-  Compatibility between the Wazuh agent and the Wazuh manager is guaranteed when the Wazuh manager version is later than or equal to that of the Wazuh agent. Therefore, we recommend disabling the Wazuh repository to prevent accidental upgrades. To do so, use the following command:
+   Compatibility between the Wazuh agent and the Wazuh manager is guaranteed when the Wazuh manager version is later than or equal to that of the Wazuh agent. Therefore, we recommend disabling the Wazuh repository to prevent accidental upgrades. To do so, use the following command:
 
-    .. tabs::
-
-
-      .. group-tab:: Yum
-
-
-        .. include:: ../../_templates/installations/wazuh/yum/disabling_repository.rst
-
-
+   .. tabs::
 
       .. group-tab:: APT
 
+         .. include:: /_templates/installations/wazuh/deb/disabling_repository.rst
 
-        .. include:: ../../_templates/installations/wazuh/deb/disabling_repository.rst
+      .. group-tab:: Yum
 
+         .. include:: /_templates/installations/wazuh/yum/disabling_repository.rst
 
+      .. group-tab:: DNF
+
+         .. include:: /_templates/installations/wazuh/dnf/disabling_repository.rst
 
       .. group-tab:: ZYpp
 
-        .. include:: ../../_templates/installations/wazuh/zypp/disabling_repository.rst
+         .. include:: /_templates/installations/wazuh/zypp/disabling_repository.rst

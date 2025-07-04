@@ -2,18 +2,24 @@
 
 #. Install the following packages if missing:
 
-      .. tabs::
+   .. tabs::
 
-          .. group-tab:: Yum
+      .. group-tab:: APT
 
-                  .. code-block:: console
+         .. code-block:: console
 
-                      # yum install coreutils
+            # apt-get install debconf adduser procps
 
-          .. group-tab:: APT
+      .. group-tab:: Yum
 
-                  .. code-block:: console
+         .. code-block:: console
 
-                      # apt-get install debconf adduser procps
+            # yum install coreutils
+
+      .. group-tab:: DNF
+
+         .. code-block:: console
+
+            # dnf install coreutils
 
 .. End of include file

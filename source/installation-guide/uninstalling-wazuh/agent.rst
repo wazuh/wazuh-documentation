@@ -31,17 +31,21 @@ Run the following commands to uninstall a Linux agent.
 
    .. tabs::
 
-      .. group-tab:: Yum
-
-         .. include:: ../../_templates/installations/wazuh/yum/uninstall_wazuh_agent.rst
-
       .. group-tab:: APT
 
-         .. include:: ../../_templates/installations/wazuh/deb/uninstall_wazuh_agent.rst
+         .. include:: /_templates/installations/wazuh/deb/uninstall_wazuh_agent.rst
+
+      .. group-tab:: Yum
+
+         .. include:: /_templates/installations/wazuh/yum/uninstall_wazuh_agent.rst
+
+      .. group-tab:: DNF
+
+         .. include:: /_templates/installations/wazuh/dnf/uninstall_wazuh_agent.rst
 
       .. group-tab:: ZYpp
 
-         .. include:: ../../_templates/installations/wazuh/zypp/uninstall_wazuh_agent.rst
+         .. include:: /_templates/installations/wazuh/zypp/uninstall_wazuh_agent.rst
 
 #. Disable the Wazuh agent service.
 

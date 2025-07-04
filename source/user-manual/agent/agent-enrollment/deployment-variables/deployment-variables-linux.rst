@@ -47,6 +47,13 @@ Examples:
 
    .. tabs::
 
+      .. group-tab:: APT
+
+         .. code-block:: console
+
+            # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_PASSWORD="TopSecret" \
+                 WAZUH_AGENT_NAME="apt-agent" apt-get install wazuh-agent
+
       .. group-tab:: Yum
 
          .. code-block:: console
@@ -54,12 +61,12 @@ Examples:
             # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_PASSWORD="TopSecret" \
                  WAZUH_AGENT_NAME="yum-agent" yum install wazuh-agent
 
-      .. group-tab:: APT
+      .. group-tab:: DNF
 
          .. code-block:: console
 
             # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_PASSWORD="TopSecret" \
-                 WAZUH_AGENT_NAME="apt-agent" apt-get install wazuh-agent
+                 WAZUH_AGENT_NAME="dnf-agent" dnf install wazuh-agent
 
       .. group-tab:: ZYpp
 
@@ -72,6 +79,13 @@ Examples:
 
    .. tabs::
 
+      .. group-tab:: APT
+
+         .. code-block:: console
+
+            # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_REGISTRATION_PASSWORD="TopSecret" \
+                 WAZUH_AGENT_GROUP="my-group" apt-get install wazuh-agent
+
       .. group-tab:: Yum
 
          .. code-block:: console
@@ -79,12 +93,12 @@ Examples:
             # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_REGISTRATION_PASSWORD="TopSecret" \
                  WAZUH_AGENT_GROUP="my-group" yum install wazuh-agent
 
-      .. group-tab:: APT
+      .. group-tab:: DNF
 
          .. code-block:: console
 
             # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_REGISTRATION_PASSWORD="TopSecret" \
-                 WAZUH_AGENT_GROUP="my-group" apt-get install wazuh-agent
+                 WAZUH_AGENT_GROUP="my-group" dnf install wazuh-agent
 
       .. group-tab:: ZYpp
 
@@ -97,6 +111,13 @@ Examples:
 
    .. tabs::
 
+      .. group-tab:: APT
+
+         .. code-block:: console
+
+            # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_AGENT_NAME="apt-agent" \
+                 WAZUH_REGISTRATION_CA="rootCA.pem" apt-get install wazuh-agent
+
       .. group-tab:: Yum
 
          .. code-block:: console
@@ -104,12 +125,12 @@ Examples:
             # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_AGENT_NAME="yum-agent" \
                  WAZUH_REGISTRATION_CA="rootCA.pem" yum install wazuh-agent
 
-      .. group-tab:: APT
+      .. group-tab:: DNF
 
          .. code-block:: console
 
-            # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_AGENT_NAME="apt-agent" \
-                 WAZUH_REGISTRATION_CA="rootCA.pem" apt-get install wazuh-agent
+            # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_AGENT_NAME="dnf-agent" \
+                 WAZUH_REGISTRATION_CA="rootCA.pem" dnf install wazuh-agent
 
       .. group-tab:: ZYpp
 
@@ -122,6 +143,13 @@ Examples:
 
    .. tabs::
 
+      .. group-tab:: APT
+
+         .. code-block:: console
+
+            # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_AGENT_NAME="apt-agent" \
+                 WAZUH_PROTOCOL="udp" apt-get install wazuh-agent
+
       .. group-tab:: Yum
 
          .. code-block:: console
@@ -129,12 +157,12 @@ Examples:
             # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_AGENT_NAME="yum-agent" \
                  WAZUH_PROTOCOL="udp" yum install wazuh-agent
 
-      .. group-tab:: APT
+      .. group-tab:: DNF
 
          .. code-block:: console
 
-            # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_AGENT_NAME="apt-agent" \
-                 WAZUH_PROTOCOL="udp" apt-get install wazuh-agent
+            # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_AGENT_NAME="dnf-agent" \
+                 WAZUH_PROTOCOL="udp" dnf install wazuh-agent
 
       .. group-tab:: ZYpp
 
@@ -147,6 +175,13 @@ Examples:
 
    .. tabs::
 
+      .. group-tab:: APT
+
+         .. code-block:: console
+
+            # WAZUH_MANAGER="10.0.0.2,10.0.0.3" WAZUH_REGISTRATION_SERVER="10.0.0.2" \
+                 WAZUH_AGENT_NAME="apt-agent" apt-get install wazuh-agent
+
       .. group-tab:: Yum
 
          .. code-block:: console
@@ -154,12 +189,12 @@ Examples:
             # WAZUH_MANAGER="10.0.0.2,10.0.0.3" WAZUH_REGISTRATION_SERVER="10.0.0.2" \
                  WAZUH_AGENT_NAME="yum-agent" yum install wazuh-agent
 
-      .. group-tab:: APT
+      .. group-tab:: DNF
 
          .. code-block:: console
 
             # WAZUH_MANAGER="10.0.0.2,10.0.0.3" WAZUH_REGISTRATION_SERVER="10.0.0.2" \
-                 WAZUH_AGENT_NAME="apt-agent" apt-get install wazuh-agent
+                 WAZUH_AGENT_NAME="dnf-agent" dnf install wazuh-agent
 
       .. group-tab:: ZYpp
 
@@ -172,6 +207,13 @@ Examples:
 
    .. tabs::
 
+      .. group-tab:: APT
+
+         .. code-block:: console
+
+            # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_REGISTRATION_KEY="/var/ossec/etc/sslagent.key" \
+                 WAZUH_REGISTRATION_CERTIFICATE="/var/ossec/etc/sslagent.cert" apt-get install wazuh-agent
+
       .. group-tab:: Yum
 
          .. code-block:: console
@@ -179,12 +221,12 @@ Examples:
             # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_REGISTRATION_KEY="/var/ossec/etc/sslagent.key" \
                  WAZUH_REGISTRATION_CERTIFICATE="/var/ossec/etc/sslagent.cert" yum install wazuh-agent
 
-      .. group-tab:: APT
+      .. group-tab:: DNF
 
          .. code-block:: console
 
             # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_REGISTRATION_KEY="/var/ossec/etc/sslagent.key" \
-                 WAZUH_REGISTRATION_CERTIFICATE="/var/ossec/etc/sslagent.cert" apt-get install wazuh-agent
+                 WAZUH_REGISTRATION_CERTIFICATE="/var/ossec/etc/sslagent.cert" dnf install wazuh-agent
 
       .. group-tab:: ZYpp
 

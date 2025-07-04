@@ -23,25 +23,23 @@ Installing package dependencies
 Adding the Wazuh repository
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-  .. note::
-    If you are installing the Wazuh dashboard on the same host as the Wazuh indexer or the Wazuh server, you may skip these steps as you may have added the Wazuh repository already.
+.. note::
 
-  .. tabs::
+   If you are installing the Wazuh dashboard on the same host as the Wazuh indexer or the Wazuh server, you may skip these steps as you may have added the Wazuh repository already.
 
-    .. group-tab:: Yum
+.. tabs::
 
-
-      .. include:: /_templates/installations/common/yum/add-repository.rst
-
-
-
-    .. group-tab:: APT
-
+   .. group-tab:: APT
 
       .. include:: /_templates/installations/common/deb/add-repository.rst
 
+   .. group-tab:: Yum
 
+      .. include:: /_templates/installations/common/yum/add-repository.rst
 
+   .. group-tab:: DNF
+
+      .. include:: /_templates/installations/common/dnf/add-repository.rst
 
 Installing the Wazuh dashboard
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -50,17 +48,23 @@ Installing the Wazuh dashboard
 
    .. tabs::
 
+      .. group-tab:: APT
+
+         .. code-block:: console
+
+            # apt-get -y install wazuh-dashboard|WAZUH_DASHBOARD_DEB_PKG_INSTALL|
+
       .. group-tab:: Yum
 
          .. code-block:: console
 
             # yum -y install wazuh-dashboard|WAZUH_DASHBOARD_RPM_PKG_INSTALL|
 
-      .. group-tab:: APT
+      .. group-tab:: DNF
 
          .. code-block:: console
 
-            # apt-get -y install wazuh-dashboard|WAZUH_DASHBOARD_DEB_PKG_INSTALL|
+            # dnf -y install wazuh-dashboard|WAZUH_DASHBOARD_RPM_PKG_INSTALL|
 
 Configuring the Wazuh dashboard
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -78,7 +82,7 @@ Configuring the Wazuh dashboard
              server.port: 443
              opensearch.hosts: https://localhost:9200
              opensearch.ssl.verificationMode: certificate
-             
+
 .. include:: /_templates/installations/common/firewall-ports-note.rst
 
 
