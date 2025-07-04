@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Wazuh provides official Docker images that you can install to streamline deployment.
+   :description: Wazuh provides official Docker images that you can install to streamline deployment. Learn more in this section of the documentation.
 
 Deployment on Docker
 ====================

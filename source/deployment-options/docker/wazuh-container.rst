@@ -56,6 +56,7 @@ Certificate generation
       #. Add the following to the ``generate-indexer-certs.yml`` file if your system uses a proxy. If not, skip this particular step:
 
          .. code-block:: yaml
+            :emphasize-lines: 2
 
             environment:
               - HTTP_PROXY=<YOUR_PROXY_ADDRESS_OR_DNS>
@@ -68,7 +69,7 @@ Certificate generation
 
             # docker-compose -f generate-indexer-certs.yml run --rm generator
 
-      This saves the certificates into the ``config/wazuh_indexer_ssl_certs`` directory.
+         This saves the certificates into the ``config/wazuh_indexer_ssl_certs`` directory.
 
    -  Provide your certificates for each node.
 
@@ -153,6 +154,7 @@ Certificate generation
       #. Add the following to the ``generate-indexer-certs.yml`` file if your system uses a proxy. If not, skip this particular step:
 
          .. code-block:: yaml
+            :emphasize-lines: 2
 
             environment:
               - HTTP_PROXY=<YOUR_PROXY_ADDRESS_OR_DNS>
@@ -165,7 +167,7 @@ Certificate generation
 
             # docker-compose -f generate-indexer-certs.yml run --rm generator
 
-      This saves the certificates into the ``config/wazuh_indexer_ssl_certs`` directory.
+         This saves the certificates into the ``config/wazuh_indexer_ssl_certs`` directory.
 
    -  Provide your certificates for each node.
 
@@ -534,7 +536,6 @@ By default, the stack exposes the following ports:
 .. note::
 
    Docker does not dynamically reload the configuration. After changing a component's configuration, you need to restart the stack.
-
 
 .. _agent_docker:
 
