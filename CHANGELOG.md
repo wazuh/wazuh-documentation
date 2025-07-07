@@ -16,6 +16,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Added instruction to run Windows backup commands in CMD (Command Prompt) and not PowerShell. ([#8672](https://github.com/wazuh/wazuh-documentation/pull/8672))
 - **Post-release**: Added clarification references to the *Agent upgrade module* section. ([#8687](https://github.com/wazuh/wazuh-documentation/pull/8687))
 - **Post-release**: Added the *Wazuh AI Analyst service* section to the Cloud service documentation. ([#8690](https://github.com/wazuh/wazuh-documentation/pull/8690))
+- **Post-release**: Added DNF package manager support for installation and configuration steps. ([#8689](https://github.com/wazuh/wazuh-documentation/pull/8689))
 
 ### Changed
 
