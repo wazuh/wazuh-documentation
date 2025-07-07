@@ -74,6 +74,7 @@ newUrls['4.12'] = [
   '/release-notes/release-4-12-0.html',
   '/development/packaging/generate-server-package.html',
   '/development/packaging/generate-agent-package.html',
+  '/cloud-service/ai-analyst.html',
 ]
 
 /* Redirections from 4.9 to 4.10  */
