@@ -63,6 +63,21 @@ Certificate generation
 
          Replace ``<YOUR_PROXY_ADDRESS_OR_DNS>``  with your information.
 
+         Here is an example of what the file looks like:
+
+         .. code-block:: yaml
+
+            # Wazuh App Copyright (C) 2017, Wazuh Inc. (License GPLv2)
+            services:
+              generator:
+                image: wazuh/wazuh-certs-generator:0.0.2
+                hostname: wazuh-certs-generator
+                volumes:
+                  - ./config/wazuh_indexer_ssl_certs/:/certificates/
+                  - ./config/certs.yml:/config/certs.yml
+                environment:
+                  - HTTP_PROXY=<YOUR_PROXY_ADDRESS_OR_DNS>
+
       #. Execute the following command to get the desired certificates:
 
          .. code-block:: console
@@ -160,6 +175,21 @@ Certificate generation
               - HTTP_PROXY=<YOUR_PROXY_ADDRESS_OR_DNS>
 
          Replace ``<YOUR_PROXY_ADDRESS_OR_DNS>``  with your information.
+
+         Here is an example of what the file looks like:
+
+         .. code-block:: yaml
+
+            # Wazuh App Copyright (C) 2017, Wazuh Inc. (License GPLv2)
+            services:
+              generator:
+                image: wazuh/wazuh-certs-generator:0.0.2
+                hostname: wazuh-certs-generator
+                volumes:
+                  - ./config/wazuh_indexer_ssl_certs/:/certificates/
+                  - ./config/certs.yml:/config/certs.yml
+                environment:
+                  - HTTP_PROXY=<YOUR_PROXY_ADDRESS_OR_DNS>
 
       #. Execute the following command to get the desired certificates:
 
@@ -515,7 +545,7 @@ The ``wazuh-wui`` user is the user to connect with the Wazuh API by default. Fol
       # docker-compose up -d
 
 Exposed ports
--------------
+^^^^^^^^^^^^^
 
 By default, the stack exposes the following ports:
 
