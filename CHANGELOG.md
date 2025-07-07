@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [v4.14.0]
 
+### Added
+
+- Added AlmaLinux 10 support to Wazuh agent packages list. ([#8691](https://github.com/wazuh/wazuh-documentation/pull/8691))
+
 ### Changed
 
 - Updated the Filebeat package revision number. ([#8627](https://github.com/wazuh/wazuh-documentation/pull/8627))
