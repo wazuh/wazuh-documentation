@@ -21,6 +21,7 @@ Learn more about Wazuh Cloud in the sections below.
 
    getting-started/index
    your-environment/index
+   AI Analyst <ai-analyst>
    account-billing/index
    archive-data/index
    apis/index
