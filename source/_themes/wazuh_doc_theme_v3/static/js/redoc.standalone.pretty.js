@@ -30318,7 +30318,7 @@ function(e, t) {
                 const n = t.shift();
                 return void 0 === n ? e : (pi(e) && pi(n) && Object.keys(n).forEach((t => {
                     Object.prototype.hasOwnProperty.call(n, t) && "__proto__" !== t && (pi(n[t]) ? (e[t] || (e[t] = {}),
-                    ci(e[t], n[t])) : e[t] = n[t])
+                    ci(e[t], n[t])) : t!=="__proto__"&&t!=="constructor"&&(e[t] = n[t]))
                 }
                 )),
                 ci(e, ...t))
