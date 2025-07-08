@@ -340,33 +340,35 @@ Setting a new hash
 
 #. Replace the hash.
 
-   -  ``admin`` user
+   .. tabs::
 
-      .. code-block:: YAML
-         :emphasize-lines: 3
+      .. group-tab:: ``admin`` user
 
-         ...
-         admin:
-           hash: "$2y$12$K/SpwjtB.wOHJ/Nc6GVRDuc1h0rM1DfvziFRNPtk27P.c4yDr9njO"
-           reserved: true
-           backend_roles:
-           - "admin"
-           description: "Demo admin user"
+         .. code-block:: YAML
+            :emphasize-lines: 3
 
-         ...
+            ...
+            admin:
+              hash: "$2y$12$K/SpwjtB.wOHJ/Nc6GVRDuc1h0rM1DfvziFRNPtk27P.c4yDr9njO"
+              reserved: true
+              backend_roles:
+              - "admin"
+              description: "Demo admin user"
 
-   -  ``kibanaserver`` user
+            ...
 
-      .. code-block:: YAML
-         :emphasize-lines: 3
+      .. group-tab:: ``kibanaserver`` user
 
-         ...
-         kibanaserver:
-           hash: "$2a$12$4AcgAt3xwOWadA5s5blL6ev39OXDNhmOesEoo33eZtrq2N0YrU3H."
-           reserved: true
-           description: "Demo kibanaserver user"
+         .. code-block:: YAML
+            :emphasize-lines: 3
 
-         ...
+            ...
+            kibanaserver:
+              hash: "$2a$12$4AcgAt3xwOWadA5s5blL6ev39OXDNhmOesEoo33eZtrq2N0YrU3H."
+              reserved: true
+              description: "Demo kibanaserver user"
+
+            ...
 
 .. _wazuh-docker-password-setting:
 
@@ -379,61 +381,63 @@ Setting the new password
 
 #. Open  the ``docker-compose.yml`` file. Change all occurrences of the old password with the new one. For example, for a single-node deployment:
 
-   -  ``admin`` user
+   .. tabs::
 
-      .. code-block:: YAML
-         :emphasize-lines: 8, 25
+      .. group-tab:: ``admin`` user
 
-         ...
-         services:
-           wazuh.manager:
-             ...
-             environment:
-               - INDEXER_URL=https://wazuh.indexer:9200
-               - INDEXER_USERNAME=admin
-               - INDEXER_PASSWORD=SecretPassword
-               - FILEBEAT_SSL_VERIFICATION_MODE=full
-               - SSL_CERTIFICATE_AUTHORITIES=/etc/ssl/root-ca.pem
-               - SSL_CERTIFICATE=/etc/ssl/filebeat.pem
-               - SSL_KEY=/etc/ssl/filebeat.key
-               - API_USERNAME=wazuh-wui
-               - API_PASSWORD=MyS3cr37P450r.*-
-           ...
-           wazuh.indexer:
-             ...
-             environment:
-               - "OPENSEARCH_JAVA_OPTS=-Xms1024m -Xmx1024m"
-           ...
-           wazuh.dashboard:
-             ...
-             environment:
-               - INDEXER_USERNAME=admin
-               - INDEXER_PASSWORD=SecretPassword
-               - WAZUH_API_URL=https://wazuh.manager
-               - DASHBOARD_USERNAME=kibanaserver
-               - DASHBOARD_PASSWORD=kibanaserver
-               - API_USERNAME=wazuh-wui
-               - API_PASSWORD=MyS3cr37P450r.*-
-           ...
+         .. code-block:: YAML
+            :emphasize-lines: 8, 25
 
-   -  ``kibanaserver`` user
+            ...
+            services:
+              wazuh.manager:
+                ...
+                environment:
+                  - INDEXER_URL=https://wazuh.indexer:9200
+                  - INDEXER_USERNAME=admin
+                  - INDEXER_PASSWORD=SecretPassword
+                  - FILEBEAT_SSL_VERIFICATION_MODE=full
+                  - SSL_CERTIFICATE_AUTHORITIES=/etc/ssl/root-ca.pem
+                  - SSL_CERTIFICATE=/etc/ssl/filebeat.pem
+                  - SSL_KEY=/etc/ssl/filebeat.key
+                  - API_USERNAME=wazuh-wui
+                  - API_PASSWORD=MyS3cr37P450r.*-
+              ...
+              wazuh.indexer:
+                ...
+                environment:
+                  - "OPENSEARCH_JAVA_OPTS=-Xms1024m -Xmx1024m"
+              ...
+              wazuh.dashboard:
+                ...
+                environment:
+                  - INDEXER_USERNAME=admin
+                  - INDEXER_PASSWORD=SecretPassword
+                  - WAZUH_API_URL=https://wazuh.manager
+                  - DASHBOARD_USERNAME=kibanaserver
+                  - DASHBOARD_PASSWORD=kibanaserver
+                  - API_USERNAME=wazuh-wui
+                  - API_PASSWORD=MyS3cr37P450r.*-
+              ...
 
-      .. code-block:: YAML
-         :emphasize-lines: 10
+      .. group-tab:: ``kibanaserver`` user
 
-         ...
-         services:
-           wazuh.dashboard:
-             ...
-             environment:
-               - INDEXER_USERNAME=admin
-               - INDEXER_PASSWORD=SecretPassword
-               - WAZUH_API_URL=https://wazuh.manager
-               - DASHBOARD_USERNAME=kibanaserver
-               - DASHBOARD_PASSWORD=kibanaserver
-               - API_USERNAME=wazuh-wui
-               - API_PASSWORD=MyS3cr37P450r.*-
-           ...
+         .. code-block:: YAML
+            :emphasize-lines: 10
+
+            ...
+            services:
+              wazuh.dashboard:
+                ...
+                environment:
+                  - INDEXER_USERNAME=admin
+                  - INDEXER_PASSWORD=SecretPassword
+                  - WAZUH_API_URL=https://wazuh.manager
+                  - DASHBOARD_USERNAME=kibanaserver
+                  - DASHBOARD_PASSWORD=kibanaserver
+                  - API_USERNAME=wazuh-wui
+                  - API_PASSWORD=MyS3cr37P450r.*-
+              ...
 
 Applying the changes
 ....................
