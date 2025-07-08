@@ -119,7 +119,12 @@ redirections.push(
     'target': ['4.11=>4.12', '4.12=>4.11'],
     '4.11': '/development/packaging/generate-wpk-package.html',
     '4.12': '/development/packaging/generate-agent-package.html#wazuh-signed-package-wpk',
-  }
+  },
+  {
+    'target': ['4.11=>4.12', '4.12=>4.11'],
+    '4.11': '/user-manual/capabilities/vulnerability-detection/offline-update.html',
+    '4.12': '/user-manual/capabilities/vulnerability-detection/configuring-scans.html#offline-vulnerability-detection',
+  },
 );
 
   /* Pages no longer available in 4.12 */
@@ -132,6 +137,7 @@ removedUrls['4.12'] = [
   '/development/packaging/generate-aix-package.html',
   '/development/packaging/generate-hpux-package.html',
   '/development/packaging/generate-wpk-package.html',
+  '/user-manual/capabilities/vulnerability-detection/offline-update.html',
 ];
 
 /* *** RELEASE 4.11 ****/
