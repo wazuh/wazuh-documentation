@@ -61,7 +61,7 @@ body {
       @include media-min (xl) {
         padding-top: #{$redoc-header-height + 50px};
       }
-      redoc[spec-url] .beRszf .menu-content {
+      redoc[spec-url] .menu-content {
         @media screen and (min-width: 50rem) and (max-width: 75rem){
           top: #{$redoc-header-height + $header-height-xl} !important;
         }
@@ -101,7 +101,6 @@ body {
   }
 }
 
-
 main {
   padding: 0;
   strong {
@@ -139,6 +138,9 @@ header {
       @media screen and (min-width: 50.01rem) and (max-width: 75rem) {
         padding: 5px 10px;
         border: 2px solid;
+      }
+      @media screen and (min-width: 50.01rem) {
+        border-color: $light-color-accent;
       }
       @include media-only (lg, xl) {
         width: 263px;
@@ -313,70 +315,36 @@ header {
 
 /* Redoc Element styles ----------------------------------------------------- */
 
-redoc[spec-url] .beRszf {
+redoc[spec-url] .redoc-wrap {
   font-family: Manrope, sans-serif;
   font-size: 16px;
   font-weight: 500;
   line-height: 32px;
   letter-spacing: .03em;
 
-  // Responosive tables
-  .eCjbJc {
+  // Right column dark background only
+  & > div:last-of-type {
+    top: calc(-60px - #{$redoc-header-height});
+    width: calc((100% - #{$left-redoc-sidebar-width}) * .4);
+  }
+
+  // Responsive tables
+  .table.table-striped {
     display: block;
     overflow-x: auto;
   }
 
-  // Right column dark background only
-  .cObJOV {
-    top: calc(-60px - #{$redoc-header-height});
-    width: calc((100% - #{$left-redoc-sidebar-width}) * .4);
-    background-color: $dark-color-base-space;
-  }
-
-  // API menu toggle
-  .sc-bMVAic.llQIcF {
-    top: 6px;
-    right: 15px;
-    width: 45px;
-    height: 45px;
-    padding: .4rem;
-    background: transparent;
-    background-color: transparent;
-    border-radius: 4px;
-    box-shadow: none;
-  }
-
-  // Tag sections:
-  .cncswi {
-    padding: 10px 0 0;
-
-    // Tag sections head:
-    .TPAYK {
-      padding-top: 0;
-      padding-bottom: 0;
+  table {
+    width: 100%;
+    overflow-x: auto;
+    .property-name {
+      font-family: Manrope,sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 32px;
+      display: inline-block;
+      padding: 0 10px 10px 0;
     }
-  }
-
-  // Original "Powered by ReDoc" link
-  .bmRLPL {
-    display: none;
-  }
-
-  // Simple table style
-  .dCnGCn table th {
-    font-weight: 500;
-  }
-  .dCnGCn table th,
-  .dCnGCn table td {
-    padding: 6px 20px;
-    border: 2px solid;
-  }
-
-  // Font inside the tables
-  .xNubs {
-    font-family: Manrope, sans-serif;
-    font-size: 1rem;
-    line-height: 32px;
   }
 
   // Advanced table style
@@ -394,27 +362,15 @@ redoc[spec-url] .beRszf {
     }
   }
 
-  // AUTHORIZATIONS
-  .sc-epnACN {
-    padding-right: 10px;
-    .XrbXS {
-      font-size: 16px !important;
-    }
-  }
-
   // QUERY PARAMETERS and REQUEST BODY SCHEMA
-  .sc-gqjmRU.LiUBH {
-    width: 100%;
-    font-size: 16px !important;
-    > .sc-hSdWYo.hoUoen {
-      font-size: 16px !important;
+  h5 {
+    span {
+      font-size: 16px;
     }
   }
 
   // Code blocks
-  code,
-  .sc-cHGsZl.sc-jbKcbu,
-  .sc-cHGsZl.sc-jqCOkK {
+  code {
     font-family: "Fira Mono", monospace;
     font-size: 14px;
     line-height: 32px;
@@ -422,9 +378,7 @@ redoc[spec-url] .beRszf {
   }
   pre code {
     background-color: $dark-color-code-block-background;
-  }
-  .gbsZqp {
-    color: #fff;
+    border: none;
   }
   .token {
     color: $dark-color-main-text;
@@ -465,109 +419,34 @@ redoc[spec-url] .beRszf {
     }
   }
 
-  // Responses (central column): 200, 400, etc
-  .sc-ibxdXY {
-    &.gxJjxJ,
-    &.dUFXgZ {
-      strong {
-        margin-right: 10px;
-        font-weight: 600;
-      }
-    }
-  }
-
-  // Content blocks
-  .sc-jWBwVP.sc-iRbamj.dCnGCn {
-    line-height: 32px;
-    pre {
-      background-color: $dark-color-code-block-background;
-    }
-    p {
-      line-height: 32px;
-    }
-  }
-
-  // Inline code value
-  .bMfIUD {
-    border: 1px solid;
-  }
-  .xNubs code {
-    border: none;
-  }
-  .beUper {
-    border: none;
-  }
-
-  // Properties and property required
-  .sc-chPdSV.eAybih {
-    font-family: Manrope, sans-serif;
-    font-size: 16px;
-    line-height: 32px;
-    .sc-ksYbfQ.sc-hmzhuo.bGITIP {
-      font-size: 14px;
-      text-transform: capitalize;
-    }
-  }
-
   // Fix error of the connecting line on sigle properties
-  tr.last:first-of-type > .eAybih,
-  tr.last:first-of-type > .jMEzIu {
+  tr.last:first-of-type > [kind="field"] {
     background-image: none;
   }
 
-  // Expandable property
-  .sc-kjoXOD.jMEzIu,
-  .sc-kjoXOD.QefOL {
-    button {
-      font-family: Manrope, sans-serif;
-      font-size: 16px;
-      line-height: 32px;
-    }
-  }
-
-  // Array of <Type>
-  .sc-TOsTZ.fKyGWc {
-    font-size: 15px;
-  }
-
-  // Array () []
-  .sc-hMqMXs.dDdNtD,
-  .sc-kEYyzF.cMefLx {
-    font-family: Manrope, sans-serif;
-    font-size: 15px;
-  }
-
-  // Types
-  .sc-kgAjT.hqYVjx {
-    font-size: 15px;
-  }
-
-  // Default
-  .sc-cHGsZl.lpeYvY {
-    font-size: 15px;
-  }
-
-  // One of...
-  .sc-jKJlTe.eZZMfQ {
-    font-family: Manrope, sans-serif;
-    font-size: 16px;
-  }
-  .sc-eNQAEJ {
+  // One of... - TODO
+  .sc-hzhJZQ {
     font-size: 15px;
     border-radius: 3px;
   }
 
-  // Parameters values and descriptions
-  .kGwPhO {
-    //   width: 100%;
-    font-size: 16px;
-  }
-  .edBCth {
-    font-size: 14px;
+  // Code block area container
+  .react-tabs__tab-panel {
+    div {
+      margin-top: 0;
+    }
+
+    // Code block content
+    .redoc-json {
+      overflow-x: auto;
+      a {
+        text-decoration: none !important;
+      }
+    }
   }
 
   // Samples tabs (in dark background part)
-  .dOwpAS {
+  [data-rttabs] {
     .react-tabs__tab-list {
       [role="tab"] {
         width: 5em;
@@ -595,45 +474,20 @@ redoc[spec-url] .beRszf {
         }
       }
     }
-  }
-
-  // Samples endpoint boxes (in dark background part)
-  .gLTsd {
-    background-color: $dark-color-code-block-background;
-
-    // Endpoint string
-    .sc-hwwEjo {
-      font-family: Manrope, sans-serif;
-      letter-spacing: .03em;
-    }
-  }
-
-  // Content type boxes  (in dark background part)
-  .sc-eqIVtm.ecxnvs {
-    display: none;
-  }
-
-  // Code block area container
-  .sc-gisBJw.gwfZGU {
-    margin-top: 0;
-
-    // Code block content
-    .jCgylq {
-      a {
-        text-decoration: none !important;
+    .react-tabs__tab-panel {
+      .token {
+        &.punctuation {
+          opacity: 0.7;
+        }
+        &.number {
+          color: $dark-color-code-function;
+        }
       }
     }
   }
 
-  // Code block buttons
-  .gsaTRZ > button {
-    font-family: Manrope, sans-serif;
-    font-size: 16px;
-    border-radius: 3px;
-  }
-
   // API specs download button
-  a.sc-hEsumM.jrowNk {
+  a[download] {
     padding: 0 34px;
     text-decoration: none;
     user-select: none;
@@ -651,7 +505,17 @@ redoc[spec-url] .beRszf {
     @media screen and (max-width: 50rem){
       width: 100%;
     }
-    label[role="menuitem"] {
+    // Toggle mobile  menu
+    & + div {
+      top: 6px;
+      right: 15px;
+      width: 45px;
+      height: 45px;
+      padding: .4rem;
+      border-radius: 4px;
+      box-shadow: none;
+    }
+    label {
       padding-right: 26px;
       padding-left: 26px;
       font-family: Manrope, sans-serif;
@@ -663,38 +527,45 @@ redoc[spec-url] .beRszf {
       &.-depth1 {
         text-transform: uppercase;
       }
-      &.active .hRqESd,
-      &.iTiWpH .hRqESd {
-        transform: rotateZ(-180deg);
-      }
       &.-depth2 {
         padding-left: 36px;
       }
     }
-  }
-
-  // Search box
-  .cziLoD {
-    padding: 30px 0 5px;
-    input {
-      padding-bottom: 0;
-      padding-left: 28px;
-      font-family: Manrope, sans-serif;
-      font-size: 16px;
-      font-weight: 500;
-      background-repeat: no-repeat;
-      background-position: left center;
-      background-size: 25px 25px;
-      border-bottom: 2px solid;
+    // Original "Powered by ReDoc" link
+    [role="menu"] {
+      & + div a {
+        display: none;
+      }
     }
-    svg {
-      display: none;
+    
+    // Search box
+    [role="search"],
+    & >div:first-of-type {
+      padding: 30px 0 5px;
+      input {
+        padding-bottom: 0;
+        padding-left: 28px;
+        font-family: Manrope, sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        background-repeat: no-repeat;
+        background-position: left center;
+        background-size: 25px 25px;
+        border-bottom: 2px solid;
+      }
+      svg {
+        display: none;
+      }
     }
-  }
-  .kwnyAC {
-    background: transparent;
-    width: calc(100% - 40px);
-    margin: 0 auto;
+    [role="search"] {
+      .scrollbar-container {
+        border-bottom: 1px solid $light-color-border-deeper;
+      }
+      [data-role="search:results"] {
+        background-color: transparent;
+        padding: 0 15px;
+      }
+    }
   }
 
   // Central and right content columns
@@ -704,6 +575,287 @@ redoc[spec-url] .beRszf {
     @media screen and (max-width: 50rem){
       margin-left: 0;
     }
+
+    h2 {
+      margin-top: calc(1.2rem + 10px);
+      margin-bottom: 1rem;
+    }
+
+    [id="section/Authentication"] {
+      & > div:first-of-type > div:first-of-type {
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+      // Simple table style
+      table {
+        th {
+          font-weight: 500;
+        }
+        th,
+        td {
+          padding: 6px 20px;
+          border: 2px solid;
+        }
+      }
+      & > [id^="section/"] {
+        & > div > div {
+          padding-top: 0;
+          padding-bottom: 0;
+          & > div:last-of-type {
+            margin-bottom: 1.5em;
+            margin-top: 1.5em;
+            padding-bottom: 0;
+            border:  2px solid;
+            display: table;
+            & > div {
+              margin: 0;
+              display: table-row;
+              &:first-child {
+                display: inline-block;
+                border-bottom: 2px solid;
+                width: 100%;
+              }
+              div,
+              b {
+                margin: 0;
+                font-weight: 400;
+              }
+              b {
+                display: inline-block;
+                padding: 6px 20px;
+                box-sizing: content-box;
+                width: 100%;
+                @media screen and (min-width: 50rem){
+                  border-right: 2px solid;
+                  width: 256px;
+                }
+                @media screen and (max-width: 50rem){
+                  padding: 10px;
+                  font-weight: 500;
+                }
+                & + span {
+                  margin-right: 20px;
+                  margin-left: 20px;
+                  @media screen and (max-width: 50rem){
+                    margin-right: 10px;
+                    margin-left: 10px;
+                  }
+                }
+              }
+              & > div {
+                display: block;
+                border-bottom: 2px solid;
+                &:last-of-type {
+                  border-bottom: none;
+                }
+                & > :last-child {
+                  margin-right: 20px;
+                  margin-left: 20px;
+                  @media screen and (max-width: 50rem){
+                    margin-right: 10px;
+                    margin-left: 10px;
+                  }
+                }
+                div,
+                span {
+                  font-weight: 400;
+                  display: table-cell;
+                  min-width: 92px;
+                  padding: 6px 20px;
+                  box-sizing: content-box;
+                  @media screen and (max-width: 50rem){
+                    padding: 10px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    [id="section/Authentication/basicAuth"] {
+      & > div>div>div:last-of-type>div>div:first-of-type {
+        border-bottom: none;
+      }
+    }
+
+    // Tags
+    [id^="tag/"] {
+      & > div {
+        // Right column (and middle in some parts)
+        & > div:last-of-type {
+          color: $dark-color-main-text;
+          code {
+            color: $dark-color-main-text;
+          }
+          .token,
+          .token.punctuation {
+            // opacity: 1;
+            background-color: $dark-color-code-block-background;
+          }
+          button {
+            border-radius: 3px;
+            span {
+              font-family: Manrope, sans-serif;
+              font-size: 16px;
+              letter-spacing: .03em;
+              &[type] {
+                color: $light-color-code-default;
+              }
+            }
+          }
+          [role="tablist"] {
+            font-family: Manrope, sans-serif;
+            font-size: 16px;
+            letter-spacing: .03em;
+            color: $light-color-code-default;
+          }
+
+          h3 {
+            font-size: 16px;
+            font-weight: 500;
+            color: $dark-color-main-text;
+            text-transform: uppercase;
+          }
+
+          .http-verb {
+            font-family: Manrope, sans-serif;
+            font-size: 16px;
+            color: #000;
+            &.get {
+              background-color: $dark-color-success;
+            }
+            &.post {
+              background-color: $dark-color-primary-lighter;
+            }
+            &.put {
+              background-color: $dark-color-code-variable;
+            }
+            &.delete {
+              background-color: $dark-color-danger;
+            }
+          }
+
+          .react-tabs__tab-panel > div{
+            padding-top: 10px;
+            margin-top: 10px;
+            & > div {
+              margin-top: 0;
+              &:first-of-type {
+                display: none;
+              }
+              // Copy/expande buttons
+              & > div {
+                &:hover,
+                &:focus { 
+                  & > div:first-of-type {
+                    opacity: 1;
+                  }
+                }
+                & > div:first-of-type {
+                  opacity: 0.4;
+                }
+              }
+            }
+          }
+
+          .react-tabs__tab-list {
+            [role="tab"] {
+              width: 5em;
+              padding: 3px 10px;
+              margin-top: 7px;
+              font-size: 1rem;
+              font-weight: 500;
+              border-radius: 3px;
+
+              & > [role="tab"].react-tabs__tab--selected {
+                font-weight: 500;
+              }
+              &.tab-success::before,
+              &.tab-error::before,
+              &.tab-redirect::before,
+              &.tab-info::before {
+                position: relative;
+                top: -2px;
+                display: inline-block;
+                width: 5px;
+                height: 5px;
+                margin-right: .5em;
+                content: "";
+                border-radius: 50%;
+              }
+            }
+          }
+        }
+        // Middle column
+        & > div:first-of-type {
+          &:not(.redoc-markdown) {
+            padding: 0 40px;
+          }
+          & > div {
+            // Responses
+            &:last-of-type {
+              margin-bottom: 40px;
+              // Individual response
+              & > div {
+                & > button {
+                  display: flex;
+                  flex-direction: row;
+                  justify-content: flex-start;
+                  align-items: center;
+                  strong {
+                    margin-right: 10px;
+                  }
+                  p {
+                    margin-top: 0;
+                  }
+                }
+              }
+            }
+            & > h5 {
+              display: block;
+              width: 100%;
+              margin-right: 0;
+              span {
+                font-size: 16px;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    // AUTHORIZATIONS
+    // Section:
+    > [data-section-id] {
+      h5 {
+        font-size: 16px !important;
+        display: inline-block;
+      }
+      & > [data-section-id] > div > h5 {
+        display: block;
+        width: 100%;
+        margin-top: 30px;
+      }
+      & > div > div > div > div {
+        &[aria-hidden] {
+          background: $dark-color-code-block-background;
+          p {
+            color: $dark-color-main-text;
+          }
+        } 
+      }
+      &::after {
+        content: none;
+      }
+    }
+
+    // Tag sections
+    [data-section-id],
+    & > div:first-of-type {
+      padding: 10px 0 0;
+    }
+
     h1,
     h2,
     h3,
@@ -712,7 +864,7 @@ redoc[spec-url] .beRszf {
       font-family: Manrope, sans-serif;
       font-weight: 600;
       letter-spacing: .03em;
-      .sc-VigVT.jrPOYQ {
+      a {
         position: absolute;
         top: .3em;
         right: -24px;
@@ -720,10 +872,20 @@ redoc[spec-url] .beRszf {
     }
 
     // Main h1 heading
-    .sc-htoDjs.sc-tilXH.givSXQ {
-      font-size: 34px;
-      line-height: 46.44px;
+    .api-info {
+      // Tag sections head:
+      padding-top: 0;
+      padding-bottom: 0;
+      [data-role="redoc-description"] {
+        margin-top: 2em;
+      }
+
+      h1 {
+        font-size: 34px;
+        line-height: 46.44px;
+      }
     }
+
     h1 {
       font-size: 28px;
       line-height: 40px;
@@ -733,56 +895,6 @@ redoc[spec-url] .beRszf {
       font-size: 22px;
       line-height: 36px;
     }
-
-    // Central column
-    .TPAYK {
-      // License
-      .sc-kafWEX.egTZxS {
-        margin-bottom: 1rem;
-      }
-
-    }
-
-    // Right column (always dark)
-    .celZWI {
-      color: $dark-color-main-text;
-      background-color: $dark-color-base-space;
-
-      h3 {
-        font-size: 16px;
-        font-weight: 500;
-        color: $dark-color-main-text;
-        text-transform: uppercase;
-      }
-
-      .http-verb {
-        font-family: Manrope, sans-serif;
-        font-size: 16px;
-        color: #000;
-        &.get {
-          background-color: $dark-color-success;
-        }
-        &.post {
-          background-color: $dark-color-primary-lighter;
-        }
-        &.put {
-          background-color: $dark-color-code-variable;
-        }
-        &.delete {
-          background-color: $dark-color-danger;
-        }
-      }
-
-      .react-tabs__tab-panel > div{
-        padding-top: 10px;
-        margin-top: 10px;
-      }
-    }
-  }
-
-  // Remove the horizontal line between sections
-  .ddXLZs:not(:last-of-type)::after {
-    content: none;
   }
 }
 
@@ -832,7 +944,7 @@ redoc[spec-url] .beRszf {
       border-bottom-color: $light-color-global-toc-highlight;
     }
   }
-  redoc[spec-url] .beRszf {
+  redoc[spec-url] .redoc-wrap {
     color: $light-color-main-text;
 
     // Generic links
@@ -846,25 +958,85 @@ redoc[spec-url] .beRszf {
     p {
       color: $light-color-main-text;
     }
-    .jCgylq {
-      // Code blocks tokens
-      .token {
-        &.boolean {
-          color: $dark-color-danger;
-        }
-        &.number {
-          color: $light-color-primary-lighter;
+    // Code blocks tokens
+    .token {
+      &.boolean {
+        color: $dark-color-danger;
+      }
+    }
+
+    [id="section/Authentication"] {
+      & > [id^="section/"] {
+        & > div > div {
+          & > div:last-of-type {
+            border-color: $light-color-table-border;
+            & > div {
+              &:first-child {
+                border-color: $light-color-table-border;
+              }
+              &:last-child {
+                & > div:nth-child(odd) {
+                  background-color: $light-color-sidebar-space;
+                }
+              }
+              b {
+                @media screen and (min-width: 50rem){
+                  border-right-color: $light-color-table-border;
+                }
+              }
+              & > div {
+                border-bottom-color: $light-color-table-border;
+              }
+            }
+          }
         }
       }
     }
 
-    // Simple table style
-    .dCnGCn table th,
-    .dCnGCn table td {
-      border-color: $light-color-table-border;
-    }
-    .dCnGCn table tr:nth-child(2n) {
-      background-color: $light-color-sidebar-space;
+    table {
+      .property-name {
+        color: $light-color-main-text;
+        & + svg {
+          polygon {
+            fill: $light-color-primary;
+          }
+        }
+      }
+      tr {
+        &.expanded {
+          svg polygon {
+            fill: $light-color-primary;
+          }
+        }
+      }
+      td[kind="field"] {
+        :first-child {
+          &::before,
+          &::after {
+            background-color: $dark-color-primary-lighter;
+          }
+        }
+        // Expandable property
+        button {
+          color: $light-color-main-text;
+        }
+      }
+      
+      // Nested expandable properties
+      & > tbody > tr {
+        & > [colspan="2"] {
+          & > div,
+          & > div [colspan="2"] [colspan="2"] > div,
+          & > div [colspan="2"] [colspan="2"] [colspan="2"] [colspan="2"] > div {
+            background: $light-color-admonition-background;
+          }
+          & > div [colspan="2"] > div,
+          & > div [colspan="2"]  [colspan="2"] [colspan="2"] > div,
+          & > div [colspan="2"]  [colspan="2"] [colspan="2"]  [colspan="2"] [colspan="2"] > div {
+            background-color: $light-color-base-space;
+          }
+        }
+      }
     }
 
     // Advanced table style
@@ -893,209 +1065,114 @@ redoc[spec-url] .beRszf {
     }
 
     // AUTHORIZATIONS
-    .sc-epnACN {
-      color: $light-color-redoc-type;
-    }
-    .XrbXS {
+    h5 {
       color: $light-color-redoc-type;
       border-bottom-color: $light-color-redoc-type-border !important;
-    }
-
-    // QUERY PARAMETERS and REQUEST BODY SCHEMA
-    .sc-gqjmRU.LiUBH {
-      color: $light-color-redoc-type !important;
-      border-bottom-color: $light-color-redoc-type-border !important;
-      > .sc-hSdWYo.hoUoen {
+      & + svg {
+        fill: $light-color-primary-lighter;
+      }
+      span {
         color: $light-color-main-text;
       }
     }
 
     // Properties
-    .sc-chPdSV.eAybih {
-      color: $light-color-main-text;
-
-      // Porperty required
-      .sc-ksYbfQ.sc-hmzhuo.bGITIP {
-        color: $light-color-danger-dark;
-      }
-    }
-
-    // Expandable property
-    .sc-kjoXOD.jMEzIu,
-    .sc-kjoXOD.QefOL {
-      button {
-        color: $light-color-main-text;
-        svg polygon {
-          fill: $light-color-primary;
-        }
-      }
-    }
-    .jMEzIu {
+    [kind="field"] {
       border-left-color: $light-color-primary-lighter;
-    }
-
-    // Nested expandable properties
-    .eCjbJc .sc-kpOJdX,
-    .eCjbJc .sc-kpOJdX .sc-kpOJdX .sc-kpOJdX,
-    .eCjbJc .sc-kpOJdX .sc-kpOJdX .sc-kpOJdX .sc-kpOJdX .sc-kpOJdX {
-      background: $light-color-admonition-background;
-    }
-    .eCjbJc .sc-kpOJdX .sc-kpOJdX,
-    .eCjbJc .sc-kpOJdX .sc-kpOJdX .sc-kpOJdX .sc-kpOJdX,
-    .eCjbJc .sc-kpOJdX .sc-kpOJdX .sc-kpOJdX .sc-kpOJdX .sc-kpOJdX .sc-kpOJdX {
-      background-color: $light-color-base-space;
+      color: $light-color-main-text;
     }
 
     // API menu toggle
-    .imibLw {
+    svg {
       color: $light-color-primary-lighter;
     }
 
     // Properties connecting line
-    tr:first-of-type > .eAybih,
-    tr:first-of-type > .jMEzIu {
-      background-image: linear-gradient(transparent 0%, transparent 28px, $light-color-primary-lighter 28px, $light-color-primary-lighter 100%);
-    }
-    .eAybih,
-    .gtEarq {
-      border-left-color: $light-color-primary-lighter;
-    }
-    tr.last + tr > .gtEarq {
-      border-left-color: transparent;
-    }
-    tr.last {
-      & > .eAybih,
-      & > .jMEzIu {
-        background-image: linear-gradient($light-color-primary-lighter 0%, $light-color-primary-lighter 29px, transparent 29px, transparent 100%);
+    table:not(.table) {
+      & > tbody {
+        & > tr {
+          &:first-of-type > td:first-of-type {
+            background-image: linear-gradient(transparent 0%, transparent 28px, $light-color-primary-lighter 28px, $light-color-primary-lighter 100%);
+          }
+          & > td:first-of-type {
+            border-left-color: $light-color-primary-lighter;
+          }
+        }
       }
-      &:first-of-type > .eAybih,
-      &:first-of-type > .jMEzIu {
-        background-image: none;
+      td:first-of-type {
+        & > span {
+          &::before,
+          &::after {
+            background-color: $light-color-primary-lighter;
+          }
+        }
+      }
+      tr.last + tr > td:first-of-type {
+        border-left-color: transparent;
+      }
+      tr.last {
+        & > td:first-of-type {
+          background-image: linear-gradient($light-color-primary-lighter 0%, $light-color-primary-lighter 29px, transparent 29px, transparent 100%);
+        }
+        &:first-of-type > td:first-of-type {
+          background-image: none;
+        }
       }
     }
-    .bcLONg::before,
-    .bcLONg::after {
-      background-color: $light-color-primary-lighter;
-    }
 
-    // Array of <Type>
-    .sc-TOsTZ.fKyGWc {
-      color: $light-color-redoc-type;
-    }
-
-    // Array () []
-    .sc-hMqMXs.dDdNtD,
-    .sc-kEYyzF.cMefLx {
+    // One of... TODO
+    .sc-fUnMCh.kaVHuF {
       color: $light-color-main-text;
     }
-
-    // Types
-    .sc-kgAjT.hqYVjx {
-      color: $light-color-redoc-type;
-    }
-
-    // Default
-    .sc-cHGsZl.lpeYvY {
-      color: $light-color-main-text;
-    }
-
-    // One of...
-    .sc-jKJlTe.eZZMfQ {
-      color: $light-color-main-text;
-    }
-    .sc-eNQAEJ {
+    .sc-hzhJZQ {
       border-color: $light-color-primary-lighter;
-      &.jdXjUh {
+      &.fCWfjy {
         color: $light-color-main-text;
         background-color: $light-color-base-space;
       }
-      &.gYsnwL {
+      &.fpPbRN {
         color: $light-color-base-space;
         background-color: $light-color-primary-lighter;
       }
     }
 
-    // Parameters values and descriptions
-    .kGwPhO {
-      border-bottom-color: $light-color-redoc-type-border;
-    }
-    .edBCth {
-      color: $light-color-shaded-text;
-    }
-
-    // Value restrictions
-    .beUper {
-      color: $light-color-primary-alt;
-      background-color: $light-color-highlight-background;
-    }
-
-    // Responses (central column): 200, 400, etc
-    .sc-ibxdXY {
-      &.gxJjxJ {
-        background-color: rgba($light-color-success-dark, .2);
-        strong {
-          color: $light-color-success-dark;
-        }
-        svg polygon {
-          fill: $light-color-success-dark;
-        }
-      }
-      &.dUFXgZ {
-        background-color: rgba($light-color-danger-dark, .2);
-        strong {
-          color: $light-color-danger-dark;
-        }
-        svg polygon {
-          fill: $light-color-danger-dark;
-        }
-      }
-    }
-
-    // Inline code value
-    .bMfIUD {
-      color: $light-color-main-text-extra;
-      border-color: $light-color-redoc-type-border;
-    }
-
     // Samples tabs (in dark background part)
-    .dOwpAS {
-      .react-tabs__tab-list {
-        & > [role="tab"].react-tabs__tab--selected {
-          color: $light-color-main-text;
-          background-color: $light-color-base-space;
-        }
-        [role="tab"] {
-          color: $dark-color-main-text;
-          background-color: $dark-color-code-block-background;
-          &.tab-success::before {
-            background-color: $light-color-success-dark;
-            box-shadow: 0 0 3px 0 $dark-color-success-dark;
-          }
-          &.tab-error::before {
-            background-color: $dark-color-danger;
-            box-shadow: 0 0 3px 0 $dark-color-danger;
-          }
-          &.tab-redirect::before {
-            background-color: $dark-color-warning;
-            box-shadow: 0 0 3px 0 $dark-color-warning;
-          }
-          &.tab-info::before {
-            background-color: $dark-color-primary;
-            box-shadow: 0 0 3px 0 $dark-color-primary;
-          }
-        }
+    .react-tabs__tab-list {
+      & > [role="tab"].react-tabs__tab--selected {
+        color: $light-color-main-text;
+        background-color: $light-color-base-space;
       }
-
-      // Samples tab content
-      & > .react-tabs__tab-panel {
+      [role="tab"] {
+        color: $dark-color-main-text;
         background-color: $dark-color-code-block-background;
+        &.tab-success::before {
+          background-color: $light-color-success-dark;
+          box-shadow: 0 0 3px 0 $dark-color-success-dark;
+        }
+        &.tab-error::before {
+          background-color: $dark-color-danger;
+          box-shadow: 0 0 3px 0 $dark-color-danger;
+        }
+        &.tab-redirect::before {
+          background-color: $dark-color-warning;
+          box-shadow: 0 0 3px 0 $dark-color-warning;
+        }
+        &.tab-info::before {
+          background-color: $dark-color-primary;
+          box-shadow: 0 0 3px 0 $dark-color-primary;
+        }
       }
+    }
+
+    // Samples tab content
+    [data-tabs] > .react-tabs__tab-panel {
+      background-color: $dark-color-code-block-background;
     }
 
     // Code block area container
-    .sc-gisBJw.gwfZGU {
+    .react-tabs__tab-panel {
       // Code block content
-      .jCgylq {
+      .redoc-json {
         background-color: $dark-color-code-block-background;
         code {
           background-color: $dark-color-code-block-background;
@@ -1114,7 +1191,7 @@ redoc[spec-url] .beRszf {
     }
 
     // Download button
-    a.sc-hEsumM.jrowNk {
+    a[download] {
       color: $light-color-main-text;
       border-color: $light-color-primary-lighter;
       &:hover,
@@ -1129,27 +1206,16 @@ redoc[spec-url] .beRszf {
     .menu-content {
       background-color: $light-color-sidebar-space;
 
-      // Menu items text
-      .hxqNKs,
-      .iTiWpH {
+      // Menu items
+      label[role="menuitem"],
+      [role="menuitem"] > label {
         color: $light-color-main-text;
-      }
-      label[role="menuitem"] {
+        background-color: $light-color-sidebar-space;
         &:hover {
           color: $light-color-primary;
           background-color: $light-color-sidebar-space;
         }
 
-        // Menu items text
-        .hxqNKs,
-        .iTiWpH,
-        .dttBLN,
-        &.idRuNa {
-          color: $light-color-main-text;
-          &:hover {
-            color: $light-color-primary;
-          }
-        }
         svg polygon {
           fill: $light-color-primary;
         }
@@ -1161,17 +1227,10 @@ redoc[spec-url] .beRszf {
           }
         }
       }
-      .kwnyAC {
-        label[role="menuitem"] {
-          &:hover {
-            background: transparent
-          }
-        }
-      }
     }
 
     // Search box
-    .cziLoD {
+    [role="search"] {
       input {
         color: rgba($light-color-main-text, .8);
         background-image: url("#{$ico-path}svg-icons.svg#search-lt");
@@ -1179,11 +1238,6 @@ redoc[spec-url] .beRszf {
       }
       ::placeholder {
         color: $light-color-focus-shade;
-      }
-    }
-    .kwnyAC {
-      & > li {
-        background: rgba(255,255,255,.55);
       }
     }
 
@@ -1195,16 +1249,7 @@ redoc[spec-url] .beRszf {
       h4 {
         color: $light-color-main-text-extra;
       }
-      .celZWI {
-        h1,
-        h2,
-        h3,
-        h4 {
-          color: $dark-color-main-text;
-        }
-      }
     }
-
   }
   #version-selector {
     .dropdown-btn {
@@ -1224,6 +1269,7 @@ redoc[spec-url] .beRszf {
 
 .dark-theme body {
   color: $dark-color-main-text;
+  background-color: $dark-color-redoc-base-space;
   & > div:not(.loading):first-of-type {
     @include  media-min (xl) {
       background: linear-gradient(90deg,$dark-color-sidebar-space 50%, $dark-color-index-toc-background 50%)
@@ -1248,7 +1294,6 @@ redoc[spec-url] .beRszf {
       }
     }
   }
-  background-color: $dark-color-redoc-base-space;
   header {
     background: $dark-color-redoc-base-space;
     @media screen and (max-width: 50rem){
@@ -1264,8 +1309,19 @@ redoc[spec-url] .beRszf {
       border-bottom-color: $dark-color-global-toc-highlight;
     }
   }
-  redoc[spec-url] .beRszf {
+  redoc[spec-url] .redoc-wrap {
     color: $dark-color-main-text;
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      a:before {
+        filter: invert(1);
+      }
+    }
 
     // Generic links
     a {
@@ -1278,27 +1334,114 @@ redoc[spec-url] .beRszf {
     p {
       color: $dark-color-main-text;
     }
-    .jCgylq {
-      // Code blocks tokens
-      .token {
-        &.boolean {
-          color: $dark-color-danger;
-        }
-        &.number {
-          color: $light-color-primary-lighter;
+    // Code blocks tokens
+    .token {
+      &.boolean {
+        color: $dark-color-danger;
+      }
+    }
+
+    // Very specific style
+    [id^="tag/"] [id^="operation/"] > div:first-child > div > div:last-child,  // Wazuh Server API
+    [id^="tag/"] > div > div:first-child > div > div:last-child // Wazuh Cloud API
+     {
+      background: transparent;
+    }
+
+    [id="section/Authentication"] {
+      & > [id^="section/"] {
+        & > div > div {
+          & > div:last-of-type {
+            border-color: $light-color-table-border;
+            & > div {
+              background-color: $dark-color-redoc-table-background;
+              &:first-child {
+                border-color: $light-color-table-border;
+              }
+              &:last-child {
+                & > div:nth-child(odd) {
+                  background-color: $dark-color-highlight-background;
+                }
+              }
+              b {
+                @media screen and (min-width: 50rem){
+                  border-right-color: $light-color-table-border;
+                }
+              }
+              & > div {
+                border-bottom-color: $light-color-table-border;
+              }
+            }
+          }
         }
       }
     }
 
-    // Simple table style
-    .dCnGCn table th,
-    .dCnGCn table td {
-      border-color: $light-color-table-border;
+    .api-content [id^="tag/"]>div>div:first-of-type>div:last-of-type {
+      button:not([aria-label]) {
+        & > svg {
+          filter: brightness(3) saturate(0.95);
+          & + strong {
+            filter: brightness(3) saturate(0.95);
+          }
+        }
+      }
     }
-    .dCnGCn table tr {
-      background-color: $dark-color-redoc-table-background;
-      &:nth-child(2n) {
-        background-color: $dark-color-highlight-background;
+
+    table {
+      .property-name {
+        color: $dark-color-main-text;
+        & + svg {
+          polygon {
+            fill: $light-color-primary-lighter;
+          }
+        }
+      }
+      // Nested expandable properties
+      & > tbody > tr {
+        & > [colspan="2"] {
+          & > div,
+          & > div [colspan="2"] [colspan="2"] > div,
+          & > div [colspan="2"] [colspan="2"] [colspan="2"] [colspan="2"] > div {
+            background: $dark-color-sidebar-space;
+          }
+          & > div [colspan="2"] > div,
+          & > div [colspan="2"]  [colspan="2"] [colspan="2"] > div,
+          & > div [colspan="2"]  [colspan="2"] [colspan="2"]  [colspan="2"] [colspan="2"] > div {
+            background-color: $dark-color-redoc-base-space;
+          }
+        }
+      }
+      tr {
+        &.expanded {
+          svg {
+            polygon {
+              fill: $light-color-primary-lighter;
+            }
+          }
+        }
+      }
+      td {
+        div {
+          & > span {
+            color: #b4b4b4;
+          }
+        }
+      }
+      td[kind="field"] {
+        :first-child {
+          &::before,
+          &::after {
+            background-color: $dark-color-primary-lighter;
+          }
+        }
+        // Expandable property
+        button {
+          color: $dark-color-main-text;
+          svg polygon {
+            fill: $dark-color-primary;
+          }
+        }
       }
     }
 
@@ -1331,174 +1474,89 @@ redoc[spec-url] .beRszf {
     }
 
     // AUTHORIZATIONS
-    .sc-epnACN {
-      color: $light-color-redoc-type-border;
-    }
-    .XrbXS {
+    h5 {
       color: $light-color-redoc-type-border;
       border-bottom-color: $light-color-redoc-type-border !important;
-    }
-
-    // QUERY PARAMETERS and REQUEST BODY SCHEMA
-    .sc-gqjmRU.LiUBH {
-      color: $light-color-redoc-type-border !important;
-      border-bottom-color: $light-color-redoc-type-border !important;
-      > .sc-hSdWYo.hoUoen {
+      & + svg {
+        fill: $dark-color-primary-lighter;
+      }
+      span {
         color: $dark-color-main-text;
       }
     }
 
     // Properties
-    .sc-chPdSV.eAybih {
+    [kind="field"] {
       color: $dark-color-main-text;
-
-      // Porperty required
-      .sc-ksYbfQ.sc-hmzhuo.bGITIP {
-        color: $dark-color-danger;
-      }
     }
-    tr.last:first-of-type > .eAybih,
-    tr.last:first-of-type > .jMEzIu {
+    tr.last:first-of-type > [kind="field"] {
       background-image: none;
     }
 
     // Expandable property
-    .sc-kjoXOD.jMEzIu,
-    .sc-kjoXOD.QefOL {
-      button {
-        color: $dark-color-main-text;
-        svg polygon {
-          fill: $dark-color-primary;
-        }
-      }
-    }
-    .jMEzIu {
+    [kind="field"] {
       border-left-color: $light-color-primary-lighter;
     }
 
-    // Nested expandable properties
-    .eCjbJc .sc-kpOJdX,
-    .eCjbJc .sc-kpOJdX .sc-kpOJdX .sc-kpOJdX,
-    .eCjbJc .sc-kpOJdX .sc-kpOJdX .sc-kpOJdX .sc-kpOJdX .sc-kpOJdX {
-      background: $dark-color-sidebar-space;
-    }
-    .eCjbJc .sc-kpOJdX .sc-kpOJdX,
-    .eCjbJc .sc-kpOJdX .sc-kpOJdX .sc-kpOJdX .sc-kpOJdX,
-    .eCjbJc .sc-kpOJdX .sc-kpOJdX .sc-kpOJdX .sc-kpOJdX .sc-kpOJdX .sc-kpOJdX {
-      background-color: $dark-color-redoc-base-space;
-    }
-
     // API menu toggle
-    .imibLw {
+    svg {
       color: $dark-color-primary-lighter;
     }
     
     // Properties connecting line
-    tr:first-of-type > .eAybih,
-    tr:first-of-type > .jMEzIu {
-      background-image: linear-gradient(transparent 0%, transparent 28px, $dark-color-primary-lighter 28px, $dark-color-primary-lighter 100%);
-    }
-    .eAybih,
-    .gtEarq {
-      border-left-color: $dark-color-primary-lighter;
-    }
-    tr.last + tr > .gtEarq {
-      border-left-color: transparent;
-    }
-    tr.last {
-      & > .eAybih,
-      & > .jMEzIu {
-        background-image: linear-gradient($dark-color-primary-lighter 0%, $dark-color-primary-lighter 29px, transparent 29px, transparent 100%);
+    table:not(.table) {
+      & > tbody {
+        & > tr {
+          &:first-of-type > td:first-of-type {
+            background-image: linear-gradient(transparent 0%, transparent 28px, $dark-color-primary-lighter 28px, $dark-color-primary-lighter 100%);
+          }
+          & > td:first-of-type {
+            border-left-color: $dark-color-primary-lighter;
+          }
+        }
+        td:first-of-type {
+          & > span {
+            &::before,
+            &::after {
+              background-color: $dark-color-primary-lighter;
+            }
+          }
+        }
+        tr.last + tr > td:first-of-type {
+          border-left-color: transparent;
+        }
+        tr.last {
+          & > td:first-of-type,
+          & > [kind="field"] {
+            background-image: linear-gradient($dark-color-primary-lighter 0%, $dark-color-primary-lighter 29px, transparent 29px, transparent 100%);
+          }
+          &:first-of-type > td:first-of-type {
+            background-image: none;
+          }
+        }
       }
-      &:first-of-type > .eAybih,
-      &:first-of-type > .jMEzIu {
-        background-image: none;
-      }
-    }
-    .bcLONg::before,
-    .bcLONg::after {
-      background-color: $dark-color-primary-lighter;
-    }
-
-    // Array of <Type>
-    .sc-TOsTZ.fKyGWc {
-      color: $light-color-border-details;
-    }
-
-    // Array () []
-    .sc-hMqMXs.dDdNtD,
-    .sc-kEYyzF.cMefLx {
-      color: $dark-color-main-text;
-    }
-
-    // Types
-    .sc-kgAjT.hqYVjx {
-      color: $light-color-redoc-type-border;
-    }
-
-    // Default
-    .sc-cHGsZl.lpeYvY {
-      color: $dark-color-main-text;
     }
 
     // One of...
-    .sc-jKJlTe.eZZMfQ {
+    // Important: this redoc classes may change from version to version
+    .sc-fUnMCh.kaVHuF {
       color: $dark-color-main-text;
     }
-    .sc-eNQAEJ {
-      &.jdXjUh {
+    .sc-hzhJZQ {
+      &.fCWfjy {
         color: $light-color-main-text;
         background-color: $light-color-base-space;
         border-color: $light-color-base-space;
       }
-      &.gYsnwL {
+      &.fpPbRN {
         color: $light-color-main-text;
         background-color: $dark-color-primary-lighter;
         border-color: $dark-color-primary-lighter;
       }
     }
-
-    // Parameters values and descriptions
-    .edBCth {
-      color: $light-color-input-placeholder;
-    }
-    // Value restrictions
-    .beUper {
-      color: $dark-color-primary;
-      background-color: $dark-color-redoc-base-space;
-    }
-
-    // Responses (central column): 200, 400, etc
-    .sc-ibxdXY {
-      &.gxJjxJ {
-        background-color: rgba($dark-color-success-dark, .2);
-        strong {
-          color: $dark-color-success-dark;
-        }
-        svg polygon {
-          fill: $dark-color-success-dark;
-        }
-      }
-      &.dUFXgZ {
-        background-color: rgba($dark-color-danger-dark, .2);
-        strong {
-          color: $dark-color-danger-dark;
-        }
-        svg polygon {
-          fill: $dark-color-danger-dark;
-        }
-      }
-    }
-
-    // Inline code value
-    .bMfIUD {
-      color: $dark-color-main-text;
-      background-color: $dark-color-redoc-table-heading;
-      border-color: $dark-color-redoc-table-heading;
-    }
     
     // Samples tabs (in dark background part)
-    .dOwpAS {
+    [data-rttabs] {
       .react-tabs__tab-list {
         & > [role="tab"].react-tabs__tab--selected {
           color: $light-color-main-text;
@@ -1533,9 +1591,9 @@ redoc[spec-url] .beRszf {
     }
     
     // Code block area container
-    .sc-gisBJw.gwfZGU {
+    .react-tabs__tab-panel {
       // Code block content
-      .jCgylq {
+      .redoc-json {
         background-color: $dark-color-code-block-background;
         code {
           background-color: $dark-color-code-block-background;
@@ -1554,7 +1612,7 @@ redoc[spec-url] .beRszf {
     }
 
     // Download button
-    a.sc-hEsumM.jrowNk {
+    a[download] {
       color: $dark-color-main-text;
       border-color: $dark-color-primary;
       &:hover,
@@ -1569,29 +1627,17 @@ redoc[spec-url] .beRszf {
     .menu-content {
       background-color: $dark-color-sidebar-space;
 
-      // Menu items text
-      .hxqNKs,
-      .iTiWpH {
+      // Menu items
+      label[role="menuitem"],
+      [role="menuitem"] > label {
         color: $dark-color-main-text;
-      }
-      label[role="menuitem"] {
+        background-color: $dark-color-sidebar-space;
         &:hover {
-          color: $dark-color-primary-lighter;
+          // color: $dark-color-primary-lighter;
+          color: $dark-color-primary;
           background-color: $dark-color-sidebar-space;
+          // background: transparent
         }
-
-        // Menu items text
-        .hxqNKs,
-        .iTiWpH,
-        .dttBLN,
-        &.idRuNa {
-          color: $dark-color-main-text;
-          &:hover {
-            color: $dark-color-primary;
-          }
-        }
-        
-        // color: $light-color-base-space;
 
         svg polygon {
           fill: $dark-color-primary;
@@ -1603,19 +1649,11 @@ redoc[spec-url] .beRszf {
             fill: $light-color-base-space;
           }
         }
-        
-      }
-      .kwnyAC {
-        label[role="menuitem"] {
-          &:hover {
-            background: transparent
-          }
-        }
       }
     }
 
     // Search box
-    .cziLoD {
+    [role="search"] {
       input {
         color: rgba($dark-color-main-text, .8);
         background-image: url("#{$ico-path}svg-icons.svg#search-dt");
@@ -1624,10 +1662,8 @@ redoc[spec-url] .beRszf {
       ::placeholder {
         color: $dark-color-focus-shade;
       }
-    }
-    .kwnyAC {
-      & > li {
-        background: rgba(0,0,0,.1);
+      [data-role="search:results"] {
+        color: $dark-color-main-text;
       }
     }
 
@@ -1638,26 +1674,6 @@ redoc[spec-url] .beRszf {
       h3,
       h4 {
         color: $dark-color-main-text;
-      }
-    }
-    .celZWI {
-      h1,
-      h2,
-      h3,
-      h4 {
-        color: $dark-color-main-text;
-      }
-      // Endpoint dropdown
-      .hvYMHo,
-      .fKwhsn {
-        background-color: $dark-color-highlight-background;
-        .hmRbVC {
-          color: $dark-color-main-text;
-          background-color: $dark-color-code-block-background;
-          & > span {
-            color: $dark-color-main-text;
-          }
-        }
       }
     }
   }
