@@ -239,7 +239,7 @@ Building the Wazuh dashboard package using Docker
       --build-arg WAZUH_DASHBOARDS_BRANCH=<BRANCH_OF_wazuh-dashboard> \
       --build-arg WAZUH_DASHBOARDS_PLUGINS=<BRANCH_OF_wazuh-dashboard-plugins> \
       --build-arg WAZUH_SECURITY_DASHBOARDS_PLUGIN_BRANCH=<BRANCH_OF_wazuh-security-dashboards-plugin> \
-      --build-arg WAZUH_REPORTING_DASHBOARDS_PLUGIN_BRANCH=<BRANCH_OF_wazuh-reporting-dashboards-plugin> \
+      --build-arg WAZUH_DASHBOARD_REPORTING_BRANCH=<BRANCH_OF_wazuh-dashboard-reporting> \
       --build-arg OPENSEARCH_DASHBOARDS_VERSION=<OPENSEARCH_DASHBOARDS_VERSION> \
       -t <TAG_OF_IMAGE> \
       -f wazuh-dashboard.Dockerfile .
