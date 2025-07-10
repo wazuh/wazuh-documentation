@@ -1,5 +1,143 @@
 {%- extends "!wazuh_doc_theme_v3/template-parts/body.html" -%}
 
+{% set redoc_theme = '{
+  "codeBlock": {
+    "backgroundColor": "#25252c"
+  },
+  "colors": {
+    "error": {
+      "main": "#bd271e"
+    },
+    "primary": {
+      "main": "#3585f9"
+    },
+    "http": {
+      "delete": "#f86b63",
+      "get": "#207d82",
+      "post": "#6ca2f0",
+      "put": "#b677dc"
+    },
+    "responses": {
+      "error": {
+        "backgroundColor": "rgba(248,107,99,.2)",
+        "color": "#bd271e",
+        "tabTextColor": "#ffffff"
+      },
+      "success": {
+        "backgroundColor": "rgba(32,125,130,.2)",
+        "color": "#207d82",
+        "tabTextColor": "#ffffff"
+      }
+    },
+    "success": {
+      "main": "#207d82"
+    },
+    "text": {
+      "primary": "#000000",
+      "secondary": "#757575"
+    },
+    "tonalOffset": 0
+  },
+  "fab": {
+    "backgroundColor": "transparent",
+    "color": "#256bd1"
+  },
+  "rightPanel": {
+    "backgroundColor": "#2a2d34",
+    "textColor": "#ffffff"
+  },
+  "schema": {
+    "caretColor": "#256bd1",
+    "labelsTextSize": "14px",
+    "linesColor": "#3585f9",
+    "nestedBackground": "#f7f7f7",
+    "nestingSpacing": "1em",
+    "requireLabelColor": "#f86b63",
+    "typeNameColor": "#8c8c8c",
+    "typeTitleColor": "#545f73"
+  },
+  "sidebar": {
+    "activeBgColor": "#3585f9",
+    "activeTextColor": "#ffffff",
+    "backgroundColor": "#ebf2fb",
+    "fontSize": "16px",
+    "level1Items": {
+      "textTransform": "uppercase"
+    },
+    "spacing": {
+      "unit": "6",
+      "paddingVertical": "36px"
+    },
+    "textColor": "#292929",
+    "width": "294px"
+  },
+  "spacing": {
+    "unit": 5,
+    "sectionHorizontal": 40,
+    "sectionVertical": 40
+  },
+  "typography": {
+    "code": {
+      "backgroundColor": "#e2eefe",
+      "color": "#7c3db2",
+      "fontFamily": "Fira Mono, monospace",
+      "fontSize": "14px",
+      "fontWeight": "400",
+      "lineHeight": "32px"
+    },
+    "fontFamily": "Manrope, sans-serif",
+    "fontSize": "16px",
+    "fontWeightBold": "600",
+    "fontWeightLight": "400",
+    "fontWeightRegular": "400",
+    "lineHeight": "32px",
+    "smoothing": "antialiased",
+    "optimizeSpeed": "true",
+    "headings": {
+      "fontFamily": "Manrope, sans-serif",
+      "fontWeight": "600",
+      "lineHeight": "1.44em"
+    },
+    "links": {
+      "color": "#256bd1",
+      "visited": "#256bd1",
+      "hover": "#3585f9",
+      "textDecoration": "none",
+      "hoverTextDecoration": "none"
+    },
+    "rightPanelHeading": {
+      "transform": "uppercase"
+    }
+  }
+}'
+%}
+
+{#
+        
+    "sidebar"
+        "groupItems" # Group headings
+            "activeBackgroundColor": # COMPUTED: theme.sidebar.backgroundColor
+            "activeTextColor": # COMPUTED: theme.sidebar.activeTextColor
+            "textTransform": "uppercase"
+        "level1Items" # Level 1 items like tags or section 1st level items
+            "activeBackgroundColor": # COMPUTED: theme.sidebar.backgroundColor
+            "activeTextColor": # COMPUTED: theme.sidebar.activeTextColor
+            "textTransform": "none"
+        "arrow" # sidebar arrow
+            "size": "1.5em"
+            "color": # COMPUTED: theme.sidebar.textColor
+    "rightPanel"
+        "backgroundColor": "#263238"
+        "width": "40%"
+        "textColor": "#ffffff"
+        "servers"
+            "overlay"
+                "backgroundColor": "#fafafa"
+                "textColor": "#263238"
+            "url"
+                "backgroundColor": "#fff"
+#}
+
 {%- block htmltitle -%}
 <title>API reference{{ titlesuffix }}</title>
 {% endblock htmltitle -%}
@@ -16,10 +154,10 @@
     </div>
   </footer>
 </div>
+<!-- <script src="https://cdn.jsdelivr.net/npm/redoc@2.5.0/bundles/redoc.standalone.js"> </script> -->
 {% endblock %}
 
 {%- block header %}
-<div class="inner-body">
     <header>
       {%- block latest %}
         {% include "template-parts/no-latest-notice.html" %}
@@ -35,7 +173,7 @@
         {% include "template-parts/version-selector.html" %}
       </div>
       {% endif %}
-    </header></div>
+    </header>
 {% endblock header -%}
 
 {% block sidebar1 -%}{% endblock sidebar1 -%}
