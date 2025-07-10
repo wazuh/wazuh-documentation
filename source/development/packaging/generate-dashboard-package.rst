@@ -228,7 +228,7 @@ Building the Wazuh dashboard package using Docker
    -  ``WAZUH_DASHBOARDS_BRANCH``: Branch of the Wazuh dashboards repository.
    -  ``WAZUH_DASHBOARDS_PLUGINS``: Branch of the Wazuh dashboards Plugins repository.
    -  ``WAZUH_SECURITY_DASHBOARDS_PLUGIN_BRANCH``: Branch of the Wazuh Security Dashboards Plugin repository.
-   -  ``WAZUH_REPORTING_DASHBOARDS_PLUGIN_BRANCH``: Branch of the Wazuh Reporting Dashboards Plugin repository.
+   -  ``WAZUH_DASHBOARD_REPORTING_BRANCH``: Branch of the Wazuh dashboard reporting repository.
    -  ``OPENSEARCH_DASHBOARDS_VERSION``: Version of the OpenSearch Dashboards. You can find the version in the ``package.json`` file of the Wazuh dashboards repository.
    -  ``-t``: Tag of the image.
 
