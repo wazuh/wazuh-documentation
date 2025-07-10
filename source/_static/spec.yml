@@ -1,8 +1,14 @@
 openapi: 3.0.0
 info:
-  title: Simple API
-  description: A simple example to demonstrate OpenAPI 3.0
-  version: 1.0.0
+  title: Wazuh indexer API reference
+  description: |
+    The Wazuh indexer API is an open source RESTful API. It allows interaction with the Wazuh indexer from a web browser, command line tools like cURL or any script or program that can make web requests. The Wazuh indexer API is used to perform actions like adding and querying the indexes, modifying the Wazuh indexer settings, etc.
+
+    # Authentication
+
+    Wazuh indexer API endpoints require authentication to be used. There are multiple options on what authentication mechanism to use including basic HTTP authentication and JSON Wen Token (JWT). More information can be seen in  Logging into the Wazuh indexer API.
+
+  version: 4.13.0
 servers:
   - url: http://api.example.com/v1
 paths:
