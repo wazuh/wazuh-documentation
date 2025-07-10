@@ -253,7 +253,7 @@ Building the Wazuh dashboard package using Docker
       --build-arg WAZUH_DASHBOARDS_BRANCH=v|WAZUH_CURRENT| \
       --build-arg WAZUH_DASHBOARDS_PLUGINS=v|WAZUH_CURRENT| \
       --build-arg WAZUH_SECURITY_DASHBOARDS_PLUGIN_BRANCH=v|WAZUH_CURRENT| \
-      --build-arg WAZUH_REPORTING_DASHBOARDS_PLUGIN_BRANCH=v|WAZUH_CURRENT| \
+      --build-arg WAZUH_DASHBOARD_REPORTING_BRANCH=v|WAZUH_CURRENT| \
       --build-arg OPENSEARCH_DASHBOARDS_VERSION=|OPENSEARCH_DASHBOARDS_VERSION| \
       -t wzd:v|WAZUH_CURRENT| \
       -f wazuh-dashboard.Dockerfile .
