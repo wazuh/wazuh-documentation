@@ -10,19 +10,22 @@ info:
 
   version: 1.0.0
 servers:
-  - url: https://{host}:{port}
-    description: Wazuh indexer
+  - url: '{protocol}://{host}:{port}'
+    description: Wazuh indexer API server
     variables:
       host:
         default: localhost
         description: The hostname or IP address of the Wazuh indexer
       port:
         default: '9200'
-        description: The port number for the Wazuh indexer
+        description: The port number for the Wazuh indexer API
+      protocol:
+        default: https
+        description: The protocol to use for the Wazuh indexer API (http or https)
 
 security:
-  - basicAuth: []
-  - bearerAuth: []
+  - Basic: []
+  - JWT: []
 
 paths:
   /:
@@ -33,8 +36,8 @@ paths:
       description: Return basic information about the API
       operationId: getApiInfo
       security:
-        - basicAuth: []
-        - bearerAuth: []
+        - Basic: []
+        - JWT: []
       parameters:
         - name: pretty
           in: query
@@ -69,7 +72,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/Unauthorized'
+              example:
+                Unauthorized
         '403':
           description: Forbidden
           content:
@@ -87,11 +92,11 @@ paths:
 
 components:
   securitySchemes:
-    basicAuth:
+    Basic:
       type: http
       scheme: basic
       description: Basic HTTP authentication
-    bearerAuth:
+    JWT:
       type: http
       scheme: bearer
       bearerFormat: JWT
@@ -124,7 +129,7 @@ components:
           description: The version number of the Wazuh indexer node.
         build_type:
           type: string
-          description: Describes how the build was packaged (e.g., rpm, deb, tar).
+          description: Describes how the build was packaged (e.g., `rpm`, `deb`, `tar`).
         build_hash:
           type: string
           description: A short hash of the Git commit from which this build was created. Useful for debugging and identifying the exact source code version.
@@ -134,7 +139,7 @@ components:
           description: The date and time when this particular build was created.
         build_snapshot:
           type: boolean
-          description: A boolean indicating if this is a snapshot build (development version) or a release build (false for releases).
+          description: A boolean indicating if this is a snapshot build (development version) or a release build (`false` for releases).
         lucene_version:
           type: string
           description: The version of Apache Lucene, the underlying search library that Wazuh indexer uses.
@@ -157,6 +162,9 @@ components:
               type: string
         status:
           type: integer
+
+    Unauthorized:
+      type: string
 
     SecurityError:
       type: object
