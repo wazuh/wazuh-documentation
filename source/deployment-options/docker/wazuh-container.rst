@@ -327,9 +327,9 @@ Setting a new hash
 Setting the new password
 ........................
 
-.. warning::
+.. note::
 
-   Don't use the ``$`` or ``&`` characters in your new password. These characters can cause errors during deployment.
+   If your password contains the ``$`` character, you must escape it using another ``$``. For example, to set the password ``Secret$Password`` in the ``docker-compose.yml`` file, write it as ``Secret$$Password``.
 
 #. Open  the ``docker-compose.yml`` file. Change all occurrences of the old password with the new one. For example, for a single-node deployment:
 
