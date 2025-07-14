@@ -1,4 +1,5 @@
 openapi: 3.0.0
+
 info:
   title: Wazuh indexer API reference
   description: |
@@ -7,8 +8,8 @@ info:
     # Authentication
 
     Wazuh indexer API endpoints require authentication to be used. There are multiple options on what authentication mechanism to use including basic HTTP authentication and JSON Web Token (JWT). More information can be seen in [Logging into the Wazuh indexer API](https://documentation.wazuh.com/current/user-manual/indexer-api/getting-started.html#logging-into-the-wazuh-indexer-api).
-
   version: 1.0.0
+
 servers:
   - url: '{protocol}://{host}:{port}'
     description: Wazuh indexer API server
@@ -25,6 +26,7 @@ servers:
       port:
         default: '9200'
         description: API port number
+
 security:
   - basicAuth: []
   - jwtAuth: []
@@ -71,7 +73,7 @@ paths:
   /_analyze:
     get:
       tags: [Analyze API]
-      summary: Get text analysis (Global)
+      summary: Text analysis (Global GET)
       description: |
         The analyze API endpoint enables text analysis by transforming unstructured text into individual tokens, typically words, optimized for search functionality. It processes a text string and returns the corresponding tokens as the output. It helps you debug and fine-tune text analysis settings for indexing and querying, providing insight into how text is broken into tokens and how filters are applied.
       operationId: analyzeGlobalGet
@@ -101,7 +103,7 @@ paths:
 
     post:
       tags: [Analyze API]
-      summary: Post text analysis (Global)
+      summary: Text analysis (Global POST)
       description: |
         The analyze API endpoint enables text analysis by transforming unstructured text into individual tokens, typically words, optimized for search functionality. It processes a text string and returns the corresponding tokens as the output. It helps you debug and fine-tune text analysis settings for indexing and querying, providing insight into how text is broken into tokens and how filters are applied.
       operationId: analyzeGlobalPost
@@ -134,7 +136,7 @@ paths:
       - $ref: '#/components/parameters/index'
     get:
       tags: [Analyze API]
-      summary: Get text analysis (Index-specific)
+      summary: Text analysis (Index GET)
       description: |
         The analyze API endpoint enables text analysis by transforming unstructured text into individual tokens, typically words, optimized for search functionality. It processes a text string and returns the corresponding tokens as the output. It helps you debug and fine-tune text analysis settings for indexing and querying, providing insight into how text is broken into tokens and how filters are applied.
       operationId: analyzeIndexedGet
@@ -165,7 +167,7 @@ paths:
 
     post:
       tags: [Analyze API]
-      summary: Post text analysis (Index-specific)
+      summary: Text analysis (Index POST)
       description: |
         The analyze API endpoint enables text analysis by transforming unstructured text into individual tokens, typically words, optimized for search functionality. It processes a text string and returns the corresponding tokens as the output. It helps you debug and fine-tune text analysis settings for indexing and querying, providing insight into how text is broken into tokens and how filters are applied.
       operationId: analyzeIndexedPost
@@ -297,7 +299,7 @@ components:
           description: The name of the cluster which the Wazuh indexer is joined to.
         cluster_uuid:
           type: string
-          description: A unique ID that identifies the Wazuh indexer node’s cluster. This ID is generated when the cluster is first formed and remains constant.
+          description: A unique ID that identifies the Wazuh indexer node's cluster. This ID is generated when the cluster is first formed and remains constant.
         version:
           $ref: '#/components/schemas/VersionInfo'
         tagline:
