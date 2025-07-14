@@ -96,7 +96,7 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
-          $ref: '#/components/responses/ForbiddenAnalyze'
+          $ref: '#/components/responses/Forbidden'
       security:
         - basicAuth: []
         - jwtAuth: []
@@ -126,7 +126,7 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
-          $ref: '#/components/responses/ForbiddenAnalyze'
+          $ref: '#/components/responses/Forbidden'
       security:
         - basicAuth: []
         - jwtAuth: []
@@ -160,7 +160,7 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
-          $ref: '#/components/responses/ForbiddenAnalyze'
+          $ref: '#/components/responses/Forbidden'
       security:
         - basicAuth: []
         - jwtAuth: []
@@ -191,7 +191,101 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
-          $ref: '#/components/responses/ForbiddenAnalyze'
+          $ref: '#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /_search/scroll:
+    get:
+      tags: [Scroll]
+      summary: Scroll search (GET)
+      operationId: scrollSearchGet
+      parameters:
+        - $ref: '#/components/parameters/scroll'
+        - $ref: '#/components/parameters/scroll_id'
+        - $ref: '#/components/parameters/rest_total_hits_as_int'
+      requestBody:
+        $ref: '#/components/requestBodies/ScrollRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/ScrollSuccess'
+        '400':
+          $ref: '#/components/responses/ScrollBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+    post:
+      tags: [Scroll]
+      summary: Scroll search (POST)
+      operationId: scrollSearchPost
+      parameters:
+        - $ref: '#/components/parameters/scroll'
+        - $ref: '#/components/parameters/scroll_id'
+        - $ref: '#/components/parameters/rest_total_hits_as_int'
+      requestBody:
+        $ref: '#/components/requestBodies/ScrollRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/ScrollSuccess'
+        '400':
+          $ref: '#/components/responses/ScrollBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /_search/scroll/<SCROLL_ID>:
+    parameters:
+      - $ref: '#/components/parameters/scroll_id_path'
+    get:
+      tags: [Scroll]
+      summary: Scroll search by ID (GET)
+      operationId: scrollSearchByIdGet
+      parameters:
+        - $ref: '#/components/parameters/scroll'
+        - $ref: '#/components/parameters/rest_total_hits_as_int'
+      requestBody:
+        $ref: '#/components/requestBodies/ScrollRequestByID'
+      responses:
+        '200':
+          $ref: '#/components/responses/ScrollSuccess'
+        '400':
+          $ref: '#/components/responses/ScrollBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+    post:
+      tags: [Scroll]
+      summary: Scroll search by ID (POST)
+      operationId: scrollSearchByIdPost
+      parameters:
+        - $ref: '#/components/parameters/scroll'
+        - $ref: '#/components/parameters/rest_total_hits_as_int'
+      requestBody:
+        $ref: '#/components/requestBodies/ScrollRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/ScrollSuccess'
+        '400':
+          $ref: '#/components/responses/ScrollBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
       security:
         - basicAuth: []
         - jwtAuth: []
@@ -283,6 +377,37 @@ components:
       name: pretty
       in: query
       description: Show results in human-readable format.
+      schema:
+        type: boolean
+        default: false
+
+    scroll:
+      name: scroll
+      in: query
+      description: Specifies the amount of time the search context is maintained.
+      schema:
+        type: string
+        format: time
+
+    scroll_id:
+      name: scroll_id
+      in: query
+      description: The scroll ID for the search.
+      schema:
+        type: string
+
+    scroll_id_path:
+      name: scroll_id
+      in: path
+      required: true
+      description: The scroll ID for the search.
+      schema:
+        type: string
+
+    rest_total_hits_as_int:
+      name: rest_total_hits_as_int
+      in: query
+      description: Whether the `hits.total` property is returned as an integer (`true`) or an object (`false`).
       schema:
         type: boolean
         default: false
@@ -381,6 +506,68 @@ components:
           type: array
           items: { $ref: '#/components/schemas/Token' }
 
+    ScrollRequest:
+      type: object
+      properties:
+        size:
+          type: integer
+          description: The number of documents to return per scroll request.
+        query:
+          type: object
+          description: Defines the search criteria (e.g., `match`, `match_all`, `term`, etc.).
+        sort:
+          description: Defines how documents should be sorted (optional).
+        _source:
+          description: Controls which fields to return in the response.
+
+    ScrollResponse:
+      type: object
+      properties:
+        scroll:
+          type: string
+          format: time
+          description: The scroll duration to keep the search context active.
+        _scroll_id:
+          type: string
+          description: A unique identifier for retrieving the next batch of search results.
+        took:
+          type: integer
+          description: The time (in milliseconds) it took Wazuh indexer to process the query.
+        timed_out:
+          type: boolean
+          description: This indicates whether the query exceeded the timeout limit (`true` if the query timed out, `false` if it completed successfully).
+        _shards:
+          type: object
+          properties:
+            total:
+              type: integer
+              description: The total number of shards searched across the cluster for this query.
+            successful:
+              type: integer
+              description: The number of shards that successfully executed the query.
+            skipped:
+              type: integer
+              description: The number of shards skipped (if routing or index filtering is used).
+            failed:
+              type: integer
+              description: The number of shards that encountered errors while processing the query.
+        hits:
+          type: object
+          properties:
+            total:
+              type: object
+              description: Provides information on the total number of matching documents.
+              properties:
+                value:
+                  type: integer
+                  description: The number of documents that match the query.
+                relation:
+                  type: string
+                  description: The accuracy of the total value (`eq` means exact count, `gte` means "greater than or equal to" if the count was estimated).
+            max_score:
+              type: string
+              description: The highest relevance score assigned to any matching document. A higher score means a closer match to the search query.
+
     SecurityError:
       type: object
       properties:
@@ -405,6 +592,22 @@ components:
           schema:
             $ref: '#/components/schemas/AnalyzeRequest'
 
+    ScrollRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ScrollRequest'
+          example: {}
+
+    ScrollRequestByID:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ScrollRequest'
+          example:
+            scroll: "20s"
+            scroll_id: "FGluY2x1ZGVfY29udGV4dF91dWlkDnF1ZXJ5VGhlbkZldGNoAxZOcTlkTW9EblRBZXVObU5TbzlEdjhnAAAAAAAAEIAWdXlsbThKWnJRbHllSE53Ynl1UC01dxZOcTlkTW9EblRBZXVObU5TbzlEdjhnAAAAAAAAEH8WdXlsbThKWnJRbHllSE53Ynl1UC01dxZOcTlkTW9EblRBZXVObU5TbzlEdjhnAAAAAAAAEH4WdXlsbThKWnJRbHllSE53Ynl1UC01dw=="
+
   responses:
     AnalyzeSuccess:
       description: Success
@@ -426,6 +629,28 @@ components:
                     end_offset: 9
                     type: "<ALPHANUM>"
                     position: 1
+
+    ScrollSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ScrollResponse'
+          example:
+            _scroll_id: "FGluY2x1ZGVfY29udGV4dF91dWlkDnF1ZXJ5VGhlbkZldGNoAxZOcTlkTW9EblRBZXVObU5TbzlEdjhnAAAAAAAAEIAWdXlsbThKWnJRbHllSE53Ynl1UC01dxZOcTlkTW9EblRBZXVObU5TbzlEdjhnAAAAAAAAEH8WdXlsbThKWnJRbHllSE53Ynl1UC01dxZOcTlkTW9EblRBZXVObU5TbzlEdjhnAAAAAAAAEH4WdXlsbThKWnJRbHllSE53Ynl1UC01dw=="
+            took: 4
+            timed_out: false
+            _shards:
+              total: 3
+              successful: 3
+              skipped: 0
+              failed: 0
+            hits:
+              total:
+                value: 183
+                relation: "eq"
+              max_score: 1
+              hits: []
 
     BadRequest:
       description: Response to report a bad request
@@ -454,6 +679,41 @@ components:
                   reason: "Validation Failed: 1: text is missing;"
                 status: 400
 
+    ScrollBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  root_cause:
+                    type: object
+                    properties:
+                      type: { type: string }
+                      reason: { type: string }
+                  caused_by:
+                    type: object
+                    properties:
+                      type: { type: string }
+                      reason: { type: string }
+              status: { type: integer }
+          examples:
+            scrollError:
+              value:
+                error:
+                  root_cause:
+                    - type: "illegal_argument_exception"
+                      reason: "failed to parse [wazuh]"
+                  type: "illegal_argument_exception"
+                  reason: "failed to parse [wazuh]"
+                  caused_by:
+                    type: "number_format_exception"
+                    reason: "For input string: \"wazu\""
+                status: 400
+
     Unauthorized:
       description: Response to report an unauthorized request
       content:
@@ -480,7 +740,7 @@ components:
               reason: "no permissions for [/] and User [name=test, backend_roles=[], requestedTenant=null]"
             status: 403
 
-    ForbiddenAnalyze:
+    Forbidden:
       description: Response to report a permission denied request
       content:
         application/json:
@@ -510,3 +770,10 @@ tags:
   - name: Get API info
     description: Wazuh indexer API information
   - name: Analyze API
+  - name: Scroll
+    description: |
+      You can utilize the scroll operation to obtain a substantial number of results. For instance, when looking for machine learning jobs, you can request an unlimited number of results in separate batches.
+
+      To implement the scroll operation, include a scroll parameter in the request header along with a search context that indicates to the indexer how long you wish to continue scrolling. This search context should be sufficiently lengthy to allow for processing a single batch of results.
+
+      Since search contexts can be memory-intensive, it's advisable to avoid using the scroll operation for frequent user queries. Instead, consider utilizing the sort parameter in conjunction with the search_after parameter to paginate through results for user queries.
