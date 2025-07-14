@@ -148,6 +148,8 @@ paths:
         - $ref: '#/components/parameters/tokenizer'
         - $ref: '#/components/parameters/explain'
         - $ref: '#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/AnalyzeRequest'
       responses:
         '200':
           $ref: '#/components/responses/AnalyzeSuccess'
@@ -168,6 +170,14 @@ paths:
         The analyze API endpoint enables text analysis by transforming unstructured text into individual tokens, typically words, optimized for search functionality. It processes a text string and returns the corresponding tokens as the output. It helps you debug and fine-tune text analysis settings for indexing and querying, providing insight into how text is broken into tokens and how filters are applied.
       operationId: analyzeIndexedPost
       parameters:
+        - $ref: '#/components/parameters/analyzer'
+        - $ref: '#/components/parameters/attributes'
+        - $ref: '#/components/parameters/char_filter'
+        - $ref: '#/components/parameters/field'
+        - $ref: '#/components/parameters/filter'
+        - $ref: '#/components/parameters/normalizer'
+        - $ref: '#/components/parameters/tokenizer'
+        - $ref: '#/components/parameters/explain'
         - $ref: '#/components/parameters/pretty'
       requestBody:
         $ref: '#/components/requestBodies/AnalyzeRequest'
