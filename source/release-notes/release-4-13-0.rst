@@ -72,7 +72,7 @@ Other
 Wazuh dashboard
 ^^^^^^^^^^^^^^^
 
-- `#7368 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7368>`__ `#7461 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7461>`__ `#7476 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7476>`__ `#7475 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7475>`__ `#7513 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7513>`__ Added ``It Hygiene`` application.
+- `#7368 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7368>`__ `#7461 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7461>`__ `#7476 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7476>`__ `#7475 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7475>`__ `#7513 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7513>`__ `#7582 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7582>`__ `#7588 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7588>`__ Added ``It Hygiene`` application.
 - `#7368 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7368>`__ Added hardware and system information to the agent overview.
 - `#7379 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7379>`__ `#7513 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7513>`__ Added persistence for selected columns and page size in data grid settings.
 - `#7373 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7373>`__ `#7449 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7449>`__ `#7475 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7475>`__ Added the ability to manage the sample data from FIM, IT Hygiene and vulnerabilities inventories prefixes.
@@ -99,6 +99,7 @@ Wazuh manager
 - `#29181 <https://github.com/wazuh/wazuh/pull/29181>`__ Fixed missing agent version handling in Vulnerability Detector.
 - `#29624 <https://github.com/wazuh/wazuh/pull/29624>`__ Fixed race condition in agent status synchronization between worker and master.
 - `#30534 <https://github.com/wazuh/wazuh/pull/30534>`__ Fixed agent-group assignment for missing agents with improved error handling.
+- `#30818 <https://github.com/wazuh/wazuh/pull/30818>`__ Fixed missing OS info updates in global inventory after first scan.
 
 Wazuh agent
 ^^^^^^^^^^^
