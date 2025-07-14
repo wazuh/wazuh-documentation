@@ -51,7 +51,6 @@ RESTful API
 ^^^^^^^^^^^
 
 - `#29524 <https://github.com/wazuh/wazuh/pull/29524>`__ Added server UUID to the `/manager/info` endpoint.
-- `#29954 <https://github.com/wazuh/wazuh/pull/29954>`__ Added support for hot ruleset reload via API.
 
 Ruleset
 ^^^^^^^
@@ -81,7 +80,6 @@ Wazuh dashboard
 - `#7373 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7373>`__ Moved ``/elastic/samplealerts`` API endpoints to ``/indexer/samplealerts``.
 - `#7368 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7368>`__ `#7482 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7482>`__ `#7538 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7538>`__ Changed FIM inventory to display information ingested by the indexer.
 - `#7430 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7430>`__ Changed macOS agent startup command.
-- `#7489 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7489>`__ Removed the cluster restart warning on rules, decoders and CDB lists.
 - `#7368 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7368>`__ Removed ``Inventory data`` view from agent overview.
 - `#7475 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7475>`__ Removed ``vulnerability.pattern`` setting.
 - `#7368 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7368>`__ Removed ``GET /api/syscollector`` API endpoint.
