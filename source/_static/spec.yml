@@ -276,7 +276,7 @@ paths:
         - $ref: '#/components/parameters/scroll'
         - $ref: '#/components/parameters/rest_total_hits_as_int'
       requestBody:
-        $ref: '#/components/requestBodies/ScrollRequest'
+        $ref: '#/components/requestBodies/ScrollRequestByID'
       responses:
         '200':
           $ref: '#/components/responses/ScrollSuccess'
@@ -470,9 +470,6 @@ components:
               items:
                 type: string
           description: Text to analyze. If you provide an array of strings, the text is analyzed as a multi-value field.
-          example:
-            analyzer: "standard"
-            text: ["first array element", "second array element"]
 
     Token:
       type: object
@@ -591,13 +588,18 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/AnalyzeRequest'
+          example:
+            analyzer: "standard"
+            text: ["first array element", "second array element"]
 
     ScrollRequest:
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ScrollRequest'
-          example: {}
+          example:
+            scroll: "20s"
+            scroll_id: "FGluY2x1ZGVfY29udGV4dF91dWlkDnF1ZXJ5VGhlbkZldGNoAxZOcTlkTW9EblRBZXVObU5TbzlEdjhnAAAAAAAAEIAWdXlsbThKWnJRbHllSE53Ynl1UC01dxZOcTlkTW9EblRBZXVObU5TbzlEdjhnAAAAAAAAEH8WdXlsbThKWnJRbHllSE53Ynl1UC01dxZOcTlkTW9EblRBZXVObU5TbzlEdjhnAAAAAAAAEH4WdXlsbThKWnJRbHllSE53Ynl1UC01dw=="
 
     ScrollRequestByID:
       content:
@@ -606,7 +608,6 @@ components:
             $ref: '#/components/schemas/ScrollRequest'
           example:
             scroll: "20s"
-            scroll_id: "FGluY2x1ZGVfY29udGV4dF91dWlkDnF1ZXJ5VGhlbkZldGNoAxZOcTlkTW9EblRBZXVObU5TbzlEdjhnAAAAAAAAEIAWdXlsbThKWnJRbHllSE53Ynl1UC01dxZOcTlkTW9EblRBZXVObU5TbzlEdjhnAAAAAAAAEH8WdXlsbThKWnJRbHllSE53Ynl1UC01dxZOcTlkTW9EblRBZXVObU5TbzlEdjhnAAAAAAAAEH4WdXlsbThKWnJRbHllSE53Ynl1UC01dw=="
 
   responses:
     AnalyzeSuccess:
