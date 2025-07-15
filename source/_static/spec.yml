@@ -131,7 +131,7 @@ paths:
         - basicAuth: []
         - jwtAuth: []
 
-  /{index}/_analyze:
+  /{INDEX}/_analyze:
     parameters:
       - $ref: '#/components/parameters/index'
     get:
@@ -243,7 +243,7 @@ paths:
         - basicAuth: []
         - jwtAuth: []
 
-  /_search/scroll/<SCROLL_ID>:
+  /_search/scroll/{SCROLL_ID}:
     parameters:
       - $ref: '#/components/parameters/scroll_id_path'
     get:
@@ -286,6 +286,274 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /_search:
+    get:
+      tags: [Search]
+      summary: Global search (GET)
+      operationId: searchGlobalGet
+      parameters:
+        - $ref: '#/components/parameters/allow_partial_search_results'
+        - $ref: '#/components/parameters/searchAnalyzer'
+        - $ref: '#/components/parameters/analyze_wildcard'
+        - $ref: '#/components/parameters/batched_reduce_size'
+        - $ref: '#/components/parameters/cancel_after_time_interval'
+        - $ref: '#/components/parameters/ccs_minimize_roundtrips'
+        - $ref: '#/components/parameters/default_operator'
+        - $ref: '#/components/parameters/df'
+        - $ref: '#/components/parameters/docvalue_fields'
+        - $ref: '#/components/parameters/expand_wildcards'
+        - $ref: '#/components/parameters/searchExplain'
+        - $ref: '#/components/parameters/from'
+        - $ref: '#/components/parameters/ignore_throttled'
+        - $ref: '#/components/parameters/ignore_unavailable'
+        - $ref: '#/components/parameters/lenient'
+        - $ref: '#/components/parameters/max_concurrent_shard_requests'
+        - $ref: '#/components/parameters/phase_took'
+        - $ref: '#/components/parameters/pre_filter_shard_size'
+        - $ref: '#/components/parameters/preference'
+        - $ref: '#/components/parameters/q'
+        - $ref: '#/components/parameters/request_cache'
+        - $ref: '#/components/parameters/rest_total_hits_as_int'
+        - $ref: '#/components/parameters/routing'
+        - $ref: '#/components/parameters/scroll'
+        - $ref: '#/components/parameters/search_type'
+        - $ref: '#/components/parameters/seq_no_primary_term'
+        - $ref: '#/components/parameters/size'
+        - $ref: '#/components/parameters/sort'
+        - $ref: '#/components/parameters/_source'
+        - $ref: '#/components/parameters/_source_excludes'
+        - $ref: '#/components/parameters/_source_includes'
+        - $ref: '#/components/parameters/stats'
+        - $ref: '#/components/parameters/stored_fields'
+        - $ref: '#/components/parameters/suggest_field'
+        - $ref: '#/components/parameters/suggest_mode'
+        - $ref: '#/components/parameters/suggest_size'
+        - $ref: '#/components/parameters/suggest_text'
+        - $ref: '#/components/parameters/terminate_after'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/track_scores'
+        - $ref: '#/components/parameters/track_total_hits'
+        - $ref: '#/components/parameters/typed_keys'
+        - $ref: '#/components/parameters/version'
+        - $ref: '#/components/parameters/include_named_queries_score'
+      requestBody:
+        $ref: '#/components/requestBodies/SearchRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/SearchSuccess'
+        '400':
+          $ref: '#/components/responses/SearchBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/SearchNotFound'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+    post:
+      tags: [Search]
+      summary: Global search (POST)
+      operationId: searchGlobalPost
+      parameters:
+        - $ref: '#/components/parameters/allow_partial_search_results'
+        - $ref: '#/components/parameters/searchAnalyzer'
+        - $ref: '#/components/parameters/analyze_wildcard'
+        - $ref: '#/components/parameters/batched_reduce_size'
+        - $ref: '#/components/parameters/cancel_after_time_interval'
+        - $ref: '#/components/parameters/ccs_minimize_roundtrips'
+        - $ref: '#/components/parameters/default_operator'
+        - $ref: '#/components/parameters/df'
+        - $ref: '#/components/parameters/docvalue_fields'
+        - $ref: '#/components/parameters/expand_wildcards'
+        - $ref: '#/components/parameters/searchExplain'
+        - $ref: '#/components/parameters/from'
+        - $ref: '#/components/parameters/ignore_throttled'
+        - $ref: '#/components/parameters/ignore_unavailable'
+        - $ref: '#/components/parameters/lenient'
+        - $ref: '#/components/parameters/max_concurrent_shard_requests'
+        - $ref: '#/components/parameters/phase_took'
+        - $ref: '#/components/parameters/pre_filter_shard_size'
+        - $ref: '#/components/parameters/preference'
+        - $ref: '#/components/parameters/q'
+        - $ref: '#/components/parameters/request_cache'
+        - $ref: '#/components/parameters/rest_total_hits_as_int'
+        - $ref: '#/components/parameters/routing'
+        - $ref: '#/components/parameters/scroll'
+        - $ref: '#/components/parameters/search_type'
+        - $ref: '#/components/parameters/seq_no_primary_term'
+        - $ref: '#/components/parameters/size'
+        - $ref: '#/components/parameters/sort'
+        - $ref: '#/components/parameters/_source'
+        - $ref: '#/components/parameters/_source_excludes'
+        - $ref: '#/components/parameters/_source_includes'
+        - $ref: '#/components/parameters/stats'
+        - $ref: '#/components/parameters/stored_fields'
+        - $ref: '#/components/parameters/suggest_field'
+        - $ref: '#/components/parameters/suggest_mode'
+        - $ref: '#/components/parameters/suggest_size'
+        - $ref: '#/components/parameters/suggest_text'
+        - $ref: '#/components/parameters/terminate_after'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/track_scores'
+        - $ref: '#/components/parameters/track_total_hits'
+        - $ref: '#/components/parameters/typed_keys'
+        - $ref: '#/components/parameters/version'
+        - $ref: '#/components/parameters/include_named_queries_score'
+      requestBody:
+        $ref: '#/components/requestBodies/SearchRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/SearchSuccess'
+        '400':
+          $ref: '#/components/responses/SearchBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/SearchNotFound'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /{INDEX}/_search:
+    parameters:
+      - $ref: '#/components/parameters/index'
+    get:
+      tags: [Search]
+      summary: Index search (GET)
+      operationId: searchIndexGet
+      parameters:
+        - $ref: '#/components/parameters/allow_partial_search_results'
+        - $ref: '#/components/parameters/searchAnalyzer'
+        - $ref: '#/components/parameters/analyze_wildcard'
+        - $ref: '#/components/parameters/batched_reduce_size'
+        - $ref: '#/components/parameters/cancel_after_time_interval'
+        - $ref: '#/components/parameters/ccs_minimize_roundtrips'
+        - $ref: '#/components/parameters/default_operator'
+        - $ref: '#/components/parameters/df'
+        - $ref: '#/components/parameters/docvalue_fields'
+        - $ref: '#/components/parameters/expand_wildcards'
+        - $ref: '#/components/parameters/searchExplain'
+        - $ref: '#/components/parameters/from'
+        - $ref: '#/components/parameters/ignore_throttled'
+        - $ref: '#/components/parameters/ignore_unavailable'
+        - $ref: '#/components/parameters/lenient'
+        - $ref: '#/components/parameters/max_concurrent_shard_requests'
+        - $ref: '#/components/parameters/phase_took'
+        - $ref: '#/components/parameters/pre_filter_shard_size'
+        - $ref: '#/components/parameters/preference'
+        - $ref: '#/components/parameters/q'
+        - $ref: '#/components/parameters/request_cache'
+        - $ref: '#/components/parameters/rest_total_hits_as_int'
+        - $ref: '#/components/parameters/routing'
+        - $ref: '#/components/parameters/scroll'
+        - $ref: '#/components/parameters/search_type'
+        - $ref: '#/components/parameters/seq_no_primary_term'
+        - $ref: '#/components/parameters/size'
+        - $ref: '#/components/parameters/sort'
+        - $ref: '#/components/parameters/_source'
+        - $ref: '#/components/parameters/_source_excludes'
+        - $ref: '#/components/parameters/_source_includes'
+        - $ref: '#/components/parameters/stats'
+        - $ref: '#/components/parameters/stored_fields'
+        - $ref: '#/components/parameters/suggest_field'
+        - $ref: '#/components/parameters/suggest_mode'
+        - $ref: '#/components/parameters/suggest_size'
+        - $ref: '#/components/parameters/suggest_text'
+        - $ref: '#/components/parameters/terminate_after'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/track_scores'
+        - $ref: '#/components/parameters/track_total_hits'
+        - $ref: '#/components/parameters/typed_keys'
+        - $ref: '#/components/parameters/version'
+        - $ref: '#/components/parameters/include_named_queries_score'
+      requestBody:
+        $ref: '#/components/requestBodies/SearchRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/SearchSuccess'
+        '400':
+          $ref: '#/components/responses/SearchBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/SearchNotFound'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+    post:
+      tags: [Search]
+      summary: Index search (POST)
+      operationId: searchIndexPost
+      parameters:
+        - $ref: '#/components/parameters/allow_partial_search_results'
+        - $ref: '#/components/parameters/searchAnalyzer'
+        - $ref: '#/components/parameters/analyze_wildcard'
+        - $ref: '#/components/parameters/batched_reduce_size'
+        - $ref: '#/components/parameters/cancel_after_time_interval'
+        - $ref: '#/components/parameters/ccs_minimize_roundtrips'
+        - $ref: '#/components/parameters/default_operator'
+        - $ref: '#/components/parameters/df'
+        - $ref: '#/components/parameters/docvalue_fields'
+        - $ref: '#/components/parameters/expand_wildcards'
+        - $ref: '#/components/parameters/searchExplain'
+        - $ref: '#/components/parameters/from'
+        - $ref: '#/components/parameters/ignore_throttled'
+        - $ref: '#/components/parameters/ignore_unavailable'
+        - $ref: '#/components/parameters/lenient'
+        - $ref: '#/components/parameters/max_concurrent_shard_requests'
+        - $ref: '#/components/parameters/phase_took'
+        - $ref: '#/components/parameters/pre_filter_shard_size'
+        - $ref: '#/components/parameters/preference'
+        - $ref: '#/components/parameters/q'
+        - $ref: '#/components/parameters/request_cache'
+        - $ref: '#/components/parameters/rest_total_hits_as_int'
+        - $ref: '#/components/parameters/routing'
+        - $ref: '#/components/parameters/scroll'
+        - $ref: '#/components/parameters/search_type'
+        - $ref: '#/components/parameters/seq_no_primary_term'
+        - $ref: '#/components/parameters/size'
+        - $ref: '#/components/parameters/sort'
+        - $ref: '#/components/parameters/_source'
+        - $ref: '#/components/parameters/_source_excludes'
+        - $ref: '#/components/parameters/_source_includes'
+        - $ref: '#/components/parameters/stats'
+        - $ref: '#/components/parameters/stored_fields'
+        - $ref: '#/components/parameters/suggest_field'
+        - $ref: '#/components/parameters/suggest_mode'
+        - $ref: '#/components/parameters/suggest_size'
+        - $ref: '#/components/parameters/suggest_text'
+        - $ref: '#/components/parameters/terminate_after'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/track_scores'
+        - $ref: '#/components/parameters/track_total_hits'
+        - $ref: '#/components/parameters/typed_keys'
+        - $ref: '#/components/parameters/version'
+        - $ref: '#/components/parameters/include_named_queries_score'
+      requestBody:
+        $ref: '#/components/requestBodies/SearchRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/SearchSuccess'
+        '400':
+          $ref: '#/components/responses/SearchBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/SearchNotFound'
       security:
         - basicAuth: []
         - jwtAuth: []
@@ -384,7 +652,7 @@ components:
     scroll:
       name: scroll
       in: query
-      description: Specifies the amount of time the search context is maintained.
+      description: How long to keep the search context open.
       schema:
         type: string
         format: time
@@ -408,6 +676,338 @@ components:
       name: rest_total_hits_as_int
       in: query
       description: Whether the `hits.total` property is returned as an integer (`true`) or an object (`false`).
+      schema:
+        type: boolean
+        default: false
+
+    allow_partial_search_results:
+      name: allow_partial_search_results
+      in: query
+      description: Whether to return partial results if the request runs into an error or times out.
+      schema:
+        type: boolean
+        default: true
+
+    searchAnalyzer:
+      name: analyzer
+      in: query
+      description: Analyzer to use in the query string.
+      schema: { type: string }
+
+    analyze_wildcard:
+      name: analyze_wildcard
+      in: query
+      description: Whether the update operation should include wildcard and prefix queries in the analysis.
+      schema:
+        type: boolean
+        default: false
+
+    batched_reduce_size:
+      name: batched_reduce_size
+      in: query
+      description: How many shard results to reduce on a node.
+      schema:
+        type: integer
+        default: 512
+
+    cancel_after_time_interval:
+      name: cancel_after_time_interval
+      in: query
+      description: The time after which the search request will be canceled. Request-level parameter takes precedence over `cancel_after_time_interval` cluster setting.
+      schema:
+        type: string
+        format: time
+        default: "-1"
+
+    ccs_minimize_roundtrips:
+      name: ccs_minimize_roundtrips
+      in: query
+      description: Whether to minimize roundtrips between a node and remote clusters.
+      schema:
+        type: boolean
+        default: true
+
+    default_operator:
+      name: default_operator
+      in: query
+      description: Indicates whether the default operator for a string query should be `AND` or `OR`.
+      schema:
+        type: string
+        default: OR
+
+    df:
+      name: df
+      in: query
+      description: The default field in case a field prefix is not provided in the query string.
+      schema:
+        type: string
+
+    docvalue_fields:
+      name: docvalue_fields
+      in: query
+      description: The fields that the Wazuh indexer should return using their `docvalue` forms.
+      schema:
+        type: string
+
+    expand_wildcards:
+      name: expand_wildcards
+      in: query
+      description: Specifies the type of index that wildcard expressions can match. Supports comma-separated values. Valid values are all (match any index), open (match open, non-hidden indexes), closed (match closed, non-hidden indexes), hidden (match hidden indexes), and none (deny wildcard expressions).
+      schema:
+        type: string
+        default: open
+
+    searchExplain:
+      name: explain
+      in: query
+      description: Whether to return details about how Wazuh indexer computed the document’s score.
+      schema:
+        type: boolean
+        default: false
+
+    from:
+      name: from
+      in: query
+      description: The starting index to search from.
+      schema:
+        type: integer
+        default: 0
+
+    ignore_throttled:
+      name: ignore_throttled
+      in: query
+      description: Whether to ignore concrete, expanded, or indexes with aliases if indexes are frozen.
+      schema:
+        type: boolean
+        default: true
+
+    ignore_unavailable:
+      name: ignore_unavailable
+      in: query
+      description: Specifies whether to include missing or closed indexes in the response and ignores unavailable shards during the search request.
+      schema:
+        type: boolean
+        default: false
+
+    lenient:
+      name: lenient
+      in: query
+      description: Specifies whether Wazuh indexer should accept requests if queries have format errors (for example, querying a text field for an integer).
+      schema:
+        type: boolean
+        default: false
+
+    max_concurrent_shard_requests:
+      name: max_concurrent_shard_requests
+      in: query
+      description: How many concurrent shard requests this request should execute on each node.
+      schema:
+        type: integer
+        default: 5
+
+    phase_took:
+      name: phase_took
+      in: query
+      description: Whether to return phase-level took time values in the response.
+      schema:
+        type: boolean
+        default: false
+
+    pre_filter_shard_size:
+      name: pre_filter_shard_size
+      in: query
+      description: A prefilter size threshold that triggers a prefilter operation if the request exceeds the threshold.
+      schema:
+        type: integer
+        default: 128
+
+    preference:
+      name: preference
+      in: query
+      description: Specifies the shards or nodes on which Wazuh indexer should perform the search.
+      schema:
+        type: string
+
+    q:
+      name: q
+      in: query
+      description: Lucene query string's query.
+      schema:
+        type: string
+
+    request_cache:
+      name: request_cache
+      in: query
+      description: Specifies whether Wazuh indexer should use the request cache. Default is whether it's enabled in the index's settings.
+      schema:
+        type: boolean
+
+    routing:
+      name: routing
+      in: query
+      description: Value used to route the update by query operation to a specific shard.
+      schema:
+        type: string
+
+    search_type:
+      name: search_type
+      in: query
+      description: Whether Wazuh indexer should use global term and document frequencies when calculating relevance scores. Valid choices are `query_then_fetch` and `dfs_query_then_fetch`. `query_then_fetch` scores documents using local term and document frequencies for the shard. It’s usually faster but less accurate. `dfs_query_then_fetch` scores documents using global terms and document frequencies across all shards. It’s usually slower but more accurate.
+      schema:
+        type: string
+        default: query_then_fetch
+
+    seq_no_primary_term:
+      name: seq_no_primary_term
+      in: query
+      description: Whether to return sequence number and primary term of the last operation of each document hit.
+      schema:
+        type: boolean
+
+    size:
+      name: size
+      in: query
+      description: How many results to include in the response.
+      schema:
+        type: integer
+
+    sort:
+      name: sort
+      in: query
+      description: |
+        A comma-separated list of `<FIELD> : <DIRECTION>` pairs to sort by.
+      schema:
+        type: array
+        items:
+          type: string
+      style: form
+      explode: true
+
+    _source:
+      name: _source
+      in: query
+      description: Whether to include the `_source` field in the response.
+      schema:
+        type: string
+
+    _source_excludes:
+      name: _source_excludes
+      in: query
+      description: A comma-separated list of source fields to exclude from the response.
+      schema:
+        type: array
+        items:
+          type: string
+      style: form
+      explode: true
+
+    _source_includes:
+      name: _source_includes
+      in: query
+      description: A comma-separated list of source fields to include in the response.
+      schema:
+        type: array
+        items:
+          type: string
+      style: form
+      explode: true
+
+    stats:
+      name: stats
+      in: query
+      description: Value to associate with the request for additional logging.
+      schema:
+        type: string
+
+    stored_fields:
+      name: stored_fields
+      in: query
+      description: Whether the get operation should retrieve fields stored in the index.
+      schema:
+        type: boolean
+        default: false
+
+    suggest_field:
+      name: suggest_field
+      in: query
+      description: Fields Wazuh indexer can use to look for similar terms.
+      schema:
+        type: string
+
+    suggest_mode:
+      name: suggest_mode
+      in: query
+      description: The mode to use when searching. Available options are always (use suggestions based on the provided terms), popular (use suggestions that have more occurrences), and missing (use suggestions for terms not in the index).
+      schema:
+        type: string
+
+    suggest_size:
+      name: suggest_size
+      in: query
+      description: How many suggestions to return.
+      schema:
+        type: integer
+
+    suggest_text:
+      name: suggest_text
+      in: query
+      description: The source that suggestions should be based off of.
+      schema:
+        type: string
+
+    terminate_after:
+      name: terminate_after
+      in: query
+      description: The maximum number of documents Wazuh indexer should process before terminating the request.
+      schema:
+        type: integer
+        default: 0
+
+    timeout:
+      name: timeout
+      in: query
+      description: How long the operation should wait for a response from active shards.
+      schema:
+        type: string
+        format: time
+        default: 1m
+
+    track_scores:
+      name: track_scores
+      in: query
+      description: Whether to return document scores.
+      schema:
+        type: boolean
+        default: false
+
+    track_total_hits:
+      name: track_total_hits
+      in: query
+      description: Whether to return how many documents matched the query.
+      schema:
+        oneOf:
+          - type: boolean
+          - type: integer
+
+    typed_keys:
+      name: typed_keys
+      in: query
+      description: Whether returned aggregations and suggested terms should include their types in the response.
+      schema:
+        type: boolean
+        default: true
+
+    version:
+      name: version
+      in: query
+      description: Whether to include the document version as a match.
+      schema:
+        type: boolean
+
+    include_named_queries_score:
+      name: include_named_queries_score
+      in: query
+      description: Whether to return scores with named queries.
       schema:
         type: boolean
         default: false
@@ -582,6 +1182,185 @@ components:
             reason: { type: string }
         status: { type: integer }
 
+    SearchRequest:
+      type: object
+      properties:
+        aggs:
+          type: object
+          description: In the optional `aggs` parameter, you can define any number of aggregations. Each aggregation is defined by its name and one of the types of aggregations that Wazuh indexer supports.
+        docvalue_fields:
+          type: array
+          items:
+            type: object
+          description: The fields that Wazuh indexer should return using their docvalue forms. Specify a format to return results in a certain format, such as date and time.
+        fields:
+          type: array
+          items:
+            type: string
+          description: The fields to search for in the request. Specify a format to return results in a certain format, such as date and time.
+        explain:
+          type: boolean
+          description: Whether to return details about how Wazuh indexer computed the document's score.
+          default: false
+        from:
+          type: integer
+          description: The starting index to search from.
+          default: 0
+        indices_boost:
+          type: array
+          items:
+            type: object
+          description: |
+            Values used to boost the score of specified indexes. Specify in the format of `<INDEX> : <BOOST-MULTIPLIER>`
+        min_score:
+          type: integer
+          description: Specify a score threshold to return only documents above the threshold.
+        query:
+          type: object
+          description: The DSL query to use in the request.
+        seq_no_primary_term:
+          type: boolean
+          description: Whether to return sequence number and primary term of the last operation of each document hit.
+        size:
+          type: integer
+          description: How many results to return.
+          default: 10
+        _source:
+          description: Whether to include the `_source` field in the response.
+        stats:
+          type: string
+          description: Value to associate with the request for additional logging.
+        terminate_after:
+          type: integer
+          description: The maximum number of documents Wazuh indexer should process before terminating the request.
+          default: 0
+        timeout:
+          type: string
+          format: time
+          description: How long to wait for a response. The default is no timeout.
+        version:
+          type: boolean
+          description: Whether to include the document version in the response.
+
+    SearchResponse:
+      type: object
+      properties:
+        query:
+          type: object
+          description: The root object that defines the search criteria in Wazuh indexer.
+        match:
+          type: object
+          description: A full-text search query that searches for relevant documents by analyzing and tokenizing the input text.
+        took:
+          type: integer
+          description: The time (in milliseconds) it took Wazuh indexer to process the query.
+        timed_out:
+          type: boolean
+          description: This indicates whether the query exceeded the timeout limit (`true` if the query timed out, `false` if it completed successfully).
+        _shards:
+          type: object
+          properties:
+            total:
+              type: integer
+              description: The total number of shards searched across the cluster for this query.
+            successful:
+              type: integer
+              description: The number of shards that successfully executed the query.
+            skipped:
+              type: integer
+              description: The number of shards skipped (if routing or index filtering is used).
+            failed:
+              type: integer
+              description: The number of shards that encountered errors while processing the query.
+        hits:
+          type: object
+          properties:
+            total:
+              type: object
+              description: Provides information on the total number of matching documents.
+              properties:
+                value:
+                  type: integer
+                  description: The number of documents that match the query.
+                relation:
+                  type: string
+                  description: The accuracy of the total value (`eq` means exact count, `gte` means "greater than or equal to" if the count was estimated).
+            max_score:
+              type: number
+              description: The highest relevance score assigned to any matching document. A higher score means a closer match to the search query.
+            hits:
+              type: array
+              items:
+                type: object
+
+    SearchError:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            root_cause:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                  reason:
+                    type: string
+                  line:
+                    type: integer
+                  col:
+                    type: integer
+            type:
+              type: string
+            reason:
+              type: string
+            line:
+              type: integer
+            col:
+              type: integer
+        status:
+          type: integer
+
+    SearchNotFoundError:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            root_cause:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                  reason:
+                    type: string
+                  index:
+                    type: string
+                  resource.id:
+                    type: string
+                  resource.type:
+                    type: string
+                  index_uuid:
+                    type: string
+            type:
+              type: string
+            reason:
+              type: string
+            index:
+              type: string
+            resource.id:
+              type: string
+            resource.type:
+              type: string
+            index_uuid:
+              type: string
+        status:
+          type: integer
+
   requestBodies:
     AnalyzeRequest:
       content:
@@ -608,6 +1387,16 @@ components:
             $ref: '#/components/schemas/ScrollRequest'
           example:
             scroll: "20s"
+
+    SearchRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SearchRequest'
+          example:
+            query:
+              match:
+                "data.win.eventdata.processId": "1712"
 
   responses:
     AnalyzeSuccess:
@@ -715,6 +1504,77 @@ components:
                     reason: "For input string: \"wazu\""
                 status: 400
 
+    SearchSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SearchResponse'
+          example:
+            took: 6
+            timed_out: false
+            _shards:
+              total: 3
+              successful: 3
+              skipped: 0
+              failed: 0
+            hits:
+              total:
+                value: 1
+                relation: "eq"
+              max_score: 4.9881625
+              hits:
+                - _index: "wazuh-alerts-4.x-2025.01.27"
+                  _id: "0xcOqJQBa_IChuOFCcY7"
+                  _score: 4.9881625
+                  _source:
+                    agent:
+                      ip: "192.168.71.128"
+                      name: "Windows11"
+                      id: "002"
+
+    SearchBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SearchError'
+          example:
+            error:
+              root_cause:
+                - type: "parsing_exception"
+                  reason: "No text specified for text query"
+                  line: 5
+                  col: 5
+              type: "parsing_exception"
+              reason: "No text specified for text query"
+              line: 5
+              col: 5
+            status: 400
+
+    SearchNotFound:
+      description: Response to report a request not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SearchNotFoundError'
+          example:
+            error:
+              root_cause:
+                - type: "index_not_found_exception"
+                  reason: "no such index [wazuh]"
+                  index: "wazuh"
+                  resource.id: "wazuh"
+                  resource.type: "index_or_alias"
+                  index_uuid: "_na_"
+              type: "index_not_found_exception"
+              reason: "no such index [wazuh]"
+              index: "wazuh"
+              resource.id: "wazuh"
+              resource.type: "index_or_alias"
+              index_uuid: "_na_"
+            status: 404
+
     Unauthorized:
       description: Response to report an unauthorized request
       content:
@@ -778,3 +1638,5 @@ tags:
       To implement the scroll operation, include a scroll parameter in the request header along with a search context that indicates to the indexer how long you wish to continue scrolling. This search context should be sufficiently lengthy to allow for processing a single batch of results.
 
       Since search contexts can be memory-intensive, it's advisable to avoid using the scroll operation for frequent user queries. Instead, consider utilizing the sort parameter in conjunction with the search_after parameter to paginate through results for user queries.
+  - name: Search
+    description: The Search API operation allows you to perform a search request to find data within your cluster.
