@@ -617,6 +617,83 @@ paths:
         - basicAuth: []
         - jwtAuth: []
 
+  /_cluster/routing/awareness/{attribute}/weights:
+    parameters:
+      - $ref: '#/components/parameters/awareness_attribute'
+    get:
+      tags: [Cluster API]
+      summary: Cluster routing and awareness (GET)
+      description: |
+        Cluster routing and awareness is used to control the distribution of search or HTTP traffic. You can use the weights per awareness attribute to control the distribution of search or HTTP traffic across zones. This is commonly used for zonal deployments, heterogeneous instances, and routing traffic away from zones during zonal failure.
+      operationId: getClusterRoutingAwarenessWeights
+      parameters:
+        - $ref: '#/components/parameters/format'
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: '#/components/responses/ClusterRoutingWeightsSuccess'
+        '400':
+          $ref: '#/components/responses/ClusterRoutingBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/ClusterRoutingForbidden'
+        '500':
+          $ref: '#/components/responses/ClusterRoutingServerError'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+    put:
+      tags: [Cluster API]
+      summary: Cluster routing and awareness (PUT)
+      description: |
+        Cluster routing and awareness is used to control the distribution of search or HTTP traffic. You can use the weights per awareness attribute to control the distribution of search or HTTP traffic across zones. This is commonly used for zonal deployments, heterogeneous instances, and routing traffic away from zones during zonal failure.
+      operationId: setClusterRoutingAwarenessWeights
+      parameters:
+        - $ref: '#/components/parameters/format'
+        - $ref: '#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/ClusterRoutingWeightsRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/ClusterRoutingWeightsSuccess'
+        '400':
+          $ref: '#/components/responses/ClusterRoutingBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/ClusterRoutingForbidden'
+        '500':
+          $ref: '#/components/responses/ClusterRoutingServerError'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+    delete:
+      tags: [Cluster API]
+      summary: Cluster routing and awareness (DELETE)
+      description: |
+        Cluster routing and awareness is used to control the distribution of search or HTTP traffic. You can use the weights per awareness attribute to control the distribution of search or HTTP traffic across zones. This is commonly used for zonal deployments, heterogeneous instances, and routing traffic away from zones during zonal failure.
+      operationId: deleteClusterRoutingAwarenessWeights
+      parameters:
+        - $ref: '#/components/parameters/format'
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: '#/components/responses/ClusterRoutingDeleteSuccess'
+        '400':
+          $ref: '#/components/responses/ClusterRoutingBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/ClusterRoutingForbidden'
+        '500':
+          $ref: '#/components/responses/ClusterRoutingServerError'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
 components:
   parameters:
     index:
@@ -1087,6 +1164,24 @@ components:
       schema:
         type: boolean
         default: false
+
+    awareness_attribute:
+      name: attribute
+      in: path
+      required: true
+      description: |
+        The name of the awareness attribute, usually zone. The attribute name must match
+        the values listed in the request body when assigning weights to zones.
+      schema:
+        type: string
+
+    format:
+      name: format
+      in: query
+      description: A short version of the `Accept` header, such as `json` or `yaml`.
+      schema:
+        type: string
+        enum: [json, yaml]
 
   schemas:
     ApiInfo:
@@ -1563,6 +1658,51 @@ components:
         status:
           type: integer
 
+    ClusterRoutingWeightsRequest:
+      type: object
+      properties:
+        weights:
+          description: |
+            JSON. Text to assign weights to attributes within the request body of the PUT request. Weights can be set in any ratio, for example, 2:3:5. In a 2:3:5 ratio with 3 zones, for every 100 requests sent to the cluster, each zone would receive either 20, 30, or 50 search requests in a random order. When assigned a weight of 0, the zone does not receive any search traffic.
+          type: array
+          items:
+            type: object
+        _version:
+          type: integer
+          description: |
+            Implements optimistic concurrency control (OCC) through versioning.
+            The parameter uses simple versioning, such as 1, and increments upward
+            based on each subsequent modification. This allows any servers from which
+            a request originates to validate whether or not a zone has been modified.
+
+    ClusterRoutingWeightsResponse:
+      type: object
+      properties:
+        acknowledged:
+          type: boolean
+
+    ClusterRoutingError:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            root_cause:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                  reason:
+                    type: string
+            type:
+              type: string
+            reason:
+              type: string
+        status:
+          type: integer
+
   requestBodies:
     AnalyzeRequest:
       content:
@@ -1609,6 +1749,18 @@ components:
             index: "wazuh-statistics-2025.8w"
             shard: 0
             primary: true
+
+    ClusterRoutingWeightsRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ClusterRoutingWeightsRequest'
+          example:
+            weights:
+              zone_1: "1"
+              zone_2: "1"
+              zone_3: "0"
+            _version: 1
 
   responses:
     AnalyzeSuccess:
@@ -1865,6 +2017,72 @@ components:
           example:
             error: "Incorrect HTTP method for uri [/_cluster/allocation/explain?pretty] and method [PUT], allowed: [GET, POST]"
             status: 405
+
+    ClusterRoutingWeightsSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ClusterRoutingWeightsResponse'
+          example:
+            acknowledged: true
+
+    ClusterRoutingDeleteSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              acknowledged:
+                type: boolean
+          example:
+            acknowledged: true
+
+    ClusterRoutingBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ClusterRoutingError'
+          example:
+            error:
+              root_cause:
+                - type: "action_request_validation_exception"
+                  reason: "Validation Failed: 1: invalid awareness attribute zone requested for weighted routing;"
+              type: "action_request_validation_exception"
+              reason: "Validation Failed: 1: invalid awareness attribute zone requested for weighted routing;"
+            status: 400
+
+    ClusterRoutingForbidden:
+      description: Response to report a permission denied request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ClusterRoutingError'
+          example:
+            error:
+              root_cause:
+                - type: "security_exception"
+                  reason: "no permissions for [cluster:admin/routing/awareness/weights/get] and User [name=test, backend_roles=[], requestedTenant=null]"
+              type: "security_exception"
+              reason: "no permissions for [cluster:admin/routing/awareness/weights/get] and User [name=test, backend_roles=[], requestedTenant=null]"
+            status: 403
+
+    ClusterRoutingServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ClusterRoutingError'
+          example:
+            error:
+              root_cause:
+                - type: "null_pointer_exception"
+                  reason: "Cannot invoke \"org.opensearch.cluster.routing.WeightedRouting.attributeName()\" because \"this.weightedRouting\" is null"
+              type: "null_pointer_exception"
+              reason: "Cannot invoke \"org.opensearch.cluster.routing.WeightedRouting.attributeName()\" because \"this.weightedRouting\" is null"
+            status: 500
 
     Unauthorized:
       description: Response to report an unauthorized request
