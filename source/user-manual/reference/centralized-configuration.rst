@@ -209,7 +209,7 @@ Creating and validating the configuration
 
       The ``profile`` option uses values defined in the :ref:`config-profile  <reference_ossec_client_config_profile>` setting of the ``<client>`` configuration.
 
-#. Run the following command to validate the configuration before making it active:
+#. Use the ``verify-agent-conf`` tool to validate the temporary configuration before making it active. For example:
 
    .. code-block:: console
 
@@ -217,17 +217,17 @@ Creating and validating the configuration
 
    Fix any issues before continuing.
 
-#. Rename the validated file to make it active:
+#. Rename the validated file to make it active. For example:
 
    .. code-block:: console
 
       # mv /var/ossec/etc/shared/default/agent.conf.tmp /var/ossec/etc/shared/default/agent.conf
 
-   The manager will automatically detect the new file and distribute it to all agents in the ``default`` group.
+The manager will automatically detect the new configuration and distribute it to all agents in the group.
 
-   .. note::
+.. note::
 
-      Restarting the manager helps distribute the new ``agent.conf`` file to the agents more quickly.
+   Restarting the manager helps distribute the new ``agent.conf`` file to the agents more quickly.
 
 Confirming that the configuration was applied
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
