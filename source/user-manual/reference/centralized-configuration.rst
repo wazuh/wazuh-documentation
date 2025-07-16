@@ -1,9 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn how to remotely configure agents using agent.conf. In this section of the Wazuh documentation, you will find which capabilities can be configured remotely.
-
-.. _reference_agent_conf:
+   :description: Learn how to remotely configure agents using ``agent.conf``. This section describes the capabilities that can be configured remotely in Wazuh.
 
 Centralized configuration (agent.conf)
 ======================================
@@ -169,106 +167,121 @@ Options
 Centralized configuration process
 ---------------------------------
 
-The following is an example of how a centralized configuration can be done.
+Creating and validating the configuration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1. Configure the ``agent.conf`` file:
+#. Create or edit the configuration file in the group directory.
 
-    Edit the file corresponding to the agent group. For example, for the ``default`` group, edit the file ``/var/ossec/etc/shared/default/agent.conf``. If the file does not exist, create it:
+   Use a temporary filename such as ``agent.conf.tmp`` during editing to prevent the manager from distributing an incomplete or invalid configuration. For example, run these commands for the ``default`` group.
 
-    .. code-block:: console
+   .. code-block:: console
 
-        # touch /var/ossec/etc/shared/default/agent.conf
-        # chown wazuh:wazuh /var/ossec/etc/shared/default/agent.conf
-        # chmod 660 /var/ossec/etc/shared/default/agent.conf
+      # touch /var/ossec/etc/shared/default/agent.conf.tmp
+      # chown wazuh:wazuh /var/ossec/etc/shared/default/agent.conf.tmp
+      # chmod 660 /var/ossec/etc/shared/default/agent.conf.tmp
 
-    Several configurations may be created based on the ``name``, ``OS`` or ``profile`` of an agent.
+#. Define one or more configuration blocks. Use filters such as ``name``, ``os``, and ``profile`` to target specific agents:
 
-    .. code-block:: xml
+   .. code-block:: xml
 
-        <agent_config name="agent_name">
-            <localfile>
-                <location>/var/log/my.log</location>
-                <log_format>syslog</log_format>
-            </localfile>
-        </agent_config>
+      <agent_config name="agent_name">
+          <localfile>
+              <location>/var/log/my.log</location>
+              <log_format>syslog</log_format>
+          </localfile>
+      </agent_config>
 
-        <agent_config os="Linux">
-            <localfile>
-                <location>/var/log/linux.log</location>
-                <log_format>syslog</log_format>
-            </localfile>
-        </agent_config>
+      <agent_config os="Linux">
+          <localfile>
+              <location>/var/log/linux.log</location>
+              <log_format>syslog</log_format>
+          </localfile>
+      </agent_config>
 
-        <agent_config profile="database">
-            <localfile>
-                <location>/var/log/database.log</location>
-                <log_format>syslog</log_format>
-            </localfile>
-        </agent_config>
+      <agent_config profile="database">
+          <localfile>
+              <location>/var/log/database.log</location>
+              <log_format>syslog</log_format>
+          </localfile>
+      </agent_config>
 
-    .. note::
-        The ``profile`` option uses the values defined on the ``<config-profile>`` setting from the :ref:`client configuration <reference_ossec_client_config_profile>`.
+   .. note::
 
-2. Run ``/var/ossec/bin/verify-agent-conf``:
+      The ``profile`` option uses values defined in the :ref:`config-profile  <reference_ossec_client_config_profile>` setting of the ``<client>`` configuration.
 
-    Each time you make a change to the ``agent.conf`` file, it is important to check for configuration errors. If any errors are reported by this check, they must be fixed before the next step.  Failure to perform this step may allow errors to be pushed to agents which may prevent the agents from running.  At that point, it is very likely that you will be forced to visit each agent manually to recover them.
+#. Run the following command to validate the configuration before making it active:
 
-3. Push the configuration to the agents:
+   .. code-block:: console
 
-    With every agent keepalive (10 seconds default), the agent sends to the manager the checksum of its merge.md file and the manager compares it with the current one. If the received checksum differs from the available one, the Wazuh manager pushes the new file to the agent. The agent will start using the new configuration after being restarted.
+      # /var/ossec/bin/verify-agent-conf -f /var/ossec/etc/shared/default/agent.conf.tmp
 
-    .. note:: Restarting the manager will make the new ``agent.conf`` file available to the agents more quickly.
+   Fix any issues before continuing.
 
-4. Confirm that the agent received the configuration:
+#. Rename the validated file to make it active:
 
-    The ``agent_groups`` tool or the Wazuh API endpoint :api-ref:`GET /agents <operation/api.controllers.agent_controller.get_agents>` can show whether the group configuration is synchronized in the agent or not:
+   .. code-block:: console
 
-    .. code-block:: console
+      # mv /var/ossec/etc/shared/default/agent.conf.tmp /var/ossec/etc/shared/default/agent.conf
 
-        # curl -k -X GET "https://localhost:55000/agents?agents_list=001&select=group_config_status&pretty=true" -H  "Authorization: Bearer $TOKEN"
+   The manager will automatically detect the new file and distribute it to all agents in the ``default`` group.
 
-    .. code-block:: json
-        :class: output
+   .. note::
 
-        {
-           "data": {
-              "affected_items": [
-                 {
-                    "group_config_status": "synced",
-                    "id": "001"
-                 }
-              ],
-              "total_affected_items": 1,
-              "total_failed_items": 0,
-              "failed_items": []
-           },
-           "message": "All selected agents information was returned",
-           "error": 0
-        }
+      Restarting the manager helps distribute the new ``agent.conf`` file to the agents more quickly.
 
-    .. code-block:: console
+Confirming that the configuration was applied
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-        # /var/ossec/bin/agent_groups -S -i 001
+Agents automatically reload the configuration after receiving it. The agent maintains its connection to the manager, since the ``agentd`` daemon is not restarted.
 
-    .. code-block:: none
-        :class: output
+With every agent keepalive (10 seconds default), the agent sends the checksum of its ``merge.md`` file to the manager. If the checksums differ, the manager pushes the updated file to the agent. The agent applies the new configuration immediately after receiving it. No manual restart is required, regardless of the :ref:`auto_restart <client_auto_restart>` setting.
 
-        Agent '001' is synchronized.
+If the configuration is successfully applied, the agent log includes entries similar to the following:
 
-5. Restart the agent:
+.. code-block:: none
 
-    By default, the agent restarts by itself automatically when it receives a new shared configuration.
+   2025/07/11 08:42:24 wazuh-agentd: INFO: Agent is reloading due to shared configuration changes.
+   2025/07/11 08:42:34 wazuh-agentd: INFO: SIGNAL [(30)-(User defined signal 1: 30)] Received. Reload agentd.
+   2025/07/11 08:42:34 wazuh-agentd: INFO: Buffer agent.conf updated, enable: 1 size: 30000
+   2025/07/11 08:42:34 wazuh-agentd: INFO: Client buffer resized from 20000 to 30000 elements.
 
-    If ``auto_restart`` has been disabled (in the ``<client>`` section of :doc:`Local configuration <ossec-conf/index>`), the agent will have to be manually restarted so that the new ``agent.conf`` file will be used. This can be done as follows:
+Use the Wazuh server API endpoint :api-ref:`GET /agents <operation/api.controllers.agent_controller.get_agents>` or the ``agent_groups`` tool to check the synchronization status of the group configuration on the agent. For example, for agent ID ``001``:
 
-    .. code-block:: console
+-  **Wazuh server API**
 
-        # /var/ossec/bin/agent_control -R -u 1032
+   .. code-block:: console
 
-    .. code-block:: none
-        :class: output
+      # curl -k -X GET "https://localhost:55000/agents?agents_list=001&select=group_config_status&pretty=true" -H  "Authorization: Bearer $TOKEN"
 
-        Wazuh agent_control: Restarting agent: 1032
+   .. code-block:: json
+      :class: output
+
+      {
+         "data": {
+            "affected_items": [
+               {
+                  "group_config_status": "synced",
+                  "id": "001"
+               }
+            ],
+            "total_affected_items": 1,
+            "total_failed_items": 0,
+            "failed_items": []
+         },
+         "message": "All selected agents information was returned",
+         "error": 0
+      }
+
+-  **agent_groups tool**
+
+   .. code-block:: console
+
+      # /var/ossec/bin/agent_groups -S -i 001
+
+   .. code-block:: none
+      :class: output
+
+      Agent '001' is synchronized.
 
 Precedence
 ----------
