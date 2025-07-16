@@ -558,6 +558,65 @@ paths:
         - basicAuth: []
         - jwtAuth: []
 
+  /_cluster/allocation/explain:
+    get:
+      tags: [Cluster API]
+      summary: Cluster allocation explain (GET)
+      description: |
+        The cluster allocation explain request finds an unassigned shard and explains why it cannot be allocated to a node.
+      operationId: clusterAllocationExplainGet
+      parameters:
+        - $ref: '#/components/parameters/include_yes_decisions'
+        - $ref: '#/components/parameters/include_disk_info'
+        - $ref: '#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/ClusterAllocationExplainRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/ClusterAllocationExplainSuccess'
+        '400':
+          $ref: '#/components/responses/ClusterAllocExplainBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/IndexNotFound'
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+    post:
+      tags: [Cluster API]
+      summary: Cluster allocation explain (POST)
+      description: |
+        The cluster allocation explain request finds an unassigned shard and explains why it cannot be allocated to a node.
+      operationId: clusterAllocationExplainPost
+      parameters:
+        - $ref: '#/components/parameters/include_yes_decisions'
+        - $ref: '#/components/parameters/include_disk_info'
+        - $ref: '#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/ClusterAllocationExplainRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/ClusterAllocationExplainSuccess'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/IndexNotFound'
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
 components:
   parameters:
     index:
@@ -1012,6 +1071,23 @@ components:
         type: boolean
         default: false
 
+    include_yes_decisions:
+      name: include_yes_decisions
+      in: query
+      description: |
+        Wazuh indexer makes a series of *yes* or *no* decisions when trying to allocate a shard to a node. When set to `true`, the *explain* decision response will always include *yes*.
+      schema:
+        type: boolean
+        default: false
+
+    include_disk_info:
+      name: include_disk_info
+      in: query
+      description: Controls whether to include information about disk usage in the response or not.
+      schema:
+        type: boolean
+        default: false
+
   schemas:
     ApiInfo:
       type: object
@@ -1293,6 +1369,132 @@ components:
               items:
                 type: object
 
+    ClusterAllocationExplainRequest:
+      type: object
+      properties:
+        current_node:
+          type: string
+          description: Specify the name of the node if you only want an explanation for when the shard is on that particular node.
+        index:
+          type: string
+          description: The name of the shard's index.
+        primary:
+          type: boolean
+          description: Indicates if the explanation should be provided for the primary shard (`true`) or its first replica (`false`). Note that both the primary shard and its first replica have the same shard ID.
+        shard:
+          type: integer
+          description: The shard ID that you want an explanation for.
+
+    ClusterAllocationExplainResponse:
+      type: object
+      properties:
+        index:
+          type: string
+          description: The name of the index which the shard belongs to.
+        shard:
+          type: integer
+          description: The numerical identifier of the specific shard being explained.
+        primary:
+          type: boolean
+          description: A boolean value that specifies whether the shard is a primary shard (`true`) or a replica shard (`false`).
+        current_state:
+          type: string
+          description: This field describes the current lifecycle state of the shard.
+        current_node:
+          type: object
+          properties:
+            id:
+              type: string
+              description: The unique identifier of the node where the shard is located.
+            name:
+              type: string
+              description: The human-readable name of the node.
+            transport_address:
+              type: string
+              description: The network address and port used for communication with the node.
+            attributes:
+              type: object
+            weight_ranking:
+              type: integer
+              description: A numerical value showing the ranking of the node regarding its suitability.
+        can_remain_on_current_node:
+          type: string
+          description: Indicates whether the shard is allowed to remain on its current node.
+        can_rebalance_cluster:
+          type: string
+          description: Indicating if the cluster is allowed to rebalance.
+        can_rebalance_to_other_node:
+          type: string
+          description: Indicates if the shard can be rebalanced to another node.
+        rebalance_explanation:
+          type: string
+          description: Explains why the `can_rebalance_to_other_node` field returned the value that it did.
+        node_allocation_decisions:
+          type: array
+          items:
+            type: object
+            properties:
+              node_id:
+                type: string
+                description: The unique identifier of a particular node in the cluster.
+              node_name:
+                type: string
+                description: The human-readable name of the node.
+              transport_address:
+                type: string
+                description: The network address and port used of the node.
+              node_decision:
+                type: string
+                description: Indicates the final allocation decision for the node.
+              weight_ranking:
+                type: integer
+                description: Represents the ranking of the node in the allocation process.
+              deciders:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    decider:
+                      type: string
+                      description: The name of the allocation decider (e.g., `disk`, `same_shard`, `filter`, `max_retry`).
+                    decision:
+                      type: string
+                      description: Indicates the decision made by the decider.
+                    explanation:
+                      type: string
+                      description: A detailed explanation of why the decider made its decision.
+
+    IndexNotFoundError:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            root_cause:
+              type: array
+              items:
+                type: object
+                properties:
+                  type: { type: string }
+                  reason: { type: string }
+                  index: { type: string }
+                  index_uuid: { type: string }
+            type: { type: string }
+            reason: { type: string }
+            index: { type: string }
+            index_uuid: { type: string }
+        status: { type: integer }
+
+    MethodNotAllowedError:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message indicating the HTTP method is not allowed.
+        status:
+          type: integer
+          description: HTTP status code.
+
     SearchError:
       type: object
       properties:
@@ -1397,6 +1599,16 @@ components:
             query:
               match:
                 "data.win.eventdata.processId": "1712"
+
+    ClusterAllocationExplainRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ClusterAllocationExplainRequest'
+          example:
+            index: "wazuh-statistics-2025.8w"
+            shard: 0
+            primary: true
 
   responses:
     AnalyzeSuccess:
@@ -1504,6 +1716,33 @@ components:
                     reason: "For input string: \"wazu\""
                 status: 400
 
+    ClusterAllocExplainBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  root_cause:
+                    type: object
+                    properties:
+                      type: { type: string }
+                      reason: { type: string }
+              status: { type: integer }
+          examples:
+            missingText:
+              value:
+                error:
+                  root_cause:
+                    - type: "illegal_argument_exception"
+                      reason: "request [/_cluster/allocation/explain] contains unrecognized parameter: [v1]"
+                  type: "illegal_argument_exception"
+                  reason: "request [/_cluster/allocation/explain] contains unrecognized parameter: [v1]"
+                status: 400
+
     SearchSuccess:
       description: OK
       content:
@@ -1575,6 +1814,58 @@ components:
               index_uuid: "_na_"
             status: 404
 
+    ClusterAllocationExplainSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ClusterAllocationExplainResponse'
+          example:
+            index: "wazuh-statistics-2025.8w"
+            shard: 0
+            primary: true
+            current_state: "started"
+            current_node:
+              id: "XyGg_gfbR0-X-5XpDVKxdg"
+              name: "node-1"
+              transport_address: "127.0.0.1:9300"
+              attributes:
+                shard_indexing_pressure_enabled: "true"
+              weight_ranking: 1
+            can_remain_on_current_node: "yes"
+            can_rebalance_cluster: "yes"
+            can_rebalance_to_other_node: "no"
+            rebalance_explanation: "cannot rebalance as no target node exists that can both allocate this shard and improve the cluster balance"
+
+    IndexNotFound:
+      description: Response to report an index not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IndexNotFoundError'
+          example:
+            error:
+              root_cause:
+                - type: "index_not_found_exception"
+                  reason: "no such index [movies]"
+                  index: "movies"
+                  index_uuid: "_na_"
+              type: "index_not_found_exception"
+              reason: "no such index [movies]"
+              index: "movies"
+              index_uuid: "_na_"
+            status: 404
+
+    MethodNotAllowed:
+      description: Response to report an invalid HTTP method
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/MethodNotAllowedError'
+          example:
+            error: "Incorrect HTTP method for uri [/_cluster/allocation/explain?pretty] and method [PUT], allowed: [GET, POST]"
+            status: 405
+
     Unauthorized:
       description: Response to report an unauthorized request
       content:
@@ -1631,6 +1922,8 @@ tags:
   - name: Get API info
     description: Wazuh indexer API information
   - name: Analyze API
+  - name: Cluster API
+    description: The cluster APIs allow you to manage your cluster. You can use them to check cluster health, modify settings, retrieve statistics, and more.
   - name: Scroll
     description: |
       You can utilize the scroll operation to obtain a substantial number of results. For instance, when looking for machine learning jobs, you can request an unlimited number of results in separate batches.
