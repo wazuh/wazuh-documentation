@@ -1,5 +1,32 @@
 components:
   parameters:
+    include_yes_decisions:
+      name: include_yes_decisions
+      in: query
+      description: |
+        Wazuh indexer makes a series of *yes* or *no* decisions when trying to allocate a shard to a node. When set to `true`, the *explain* decision response will always include *yes*.
+      schema:
+        type: boolean
+        default: false
+
+    include_disk_info:
+      name: include_disk_info
+      in: query
+      description: Controls whether to include information about disk usage in the response or not.
+      schema:
+        type: boolean
+        default: false
+
+    awareness_attribute:
+      name: attribute
+      in: path
+      required: true
+      description: |
+        The name of the awareness attribute, usually zone. The attribute name must match
+        the values listed in the request body when assigning weights to zones.
+      schema:
+        type: string
+
     awareness_attribute_name:
       name: awareness_attribute_name
       in: path
@@ -24,7 +51,347 @@ components:
         type: string
         enum: [json, yaml]
 
+  schemas:
+    ClusterAllocationExplainRequest:
+      type: object
+      properties:
+        current_node:
+          type: string
+          description: Specify the name of the node if you only want an explanation for when the shard is on that particular node.
+        index:
+          type: string
+          description: The name of the shard's index.
+        primary:
+          type: boolean
+          description: Indicates if the explanation should be provided for the primary shard (`true`) or its first replica (`false`). Note that both the primary shard and its first replica have the same shard ID.
+        shard:
+          type: integer
+          description: The shard ID that you want an explanation for.
+
+    ClusterAllocationExplainResponse:
+      type: object
+      properties:
+        index:
+          type: string
+          description: The name of the index which the shard belongs to.
+        shard:
+          type: integer
+          description: The numerical identifier of the specific shard being explained.
+        primary:
+          type: boolean
+          description: A boolean value that specifies whether the shard is a primary shard (`true`) or a replica shard (`false`).
+        current_state:
+          type: string
+          description: This field describes the current lifecycle state of the shard.
+        current_node:
+          type: object
+          properties:
+            id:
+              type: string
+              description: The unique identifier of the node where the shard is located.
+            name:
+              type: string
+              description: The human-readable name of the node.
+            transport_address:
+              type: string
+              description: The network address and port used for communication with the node.
+            attributes:
+              type: object
+            weight_ranking:
+              type: integer
+              description: A numerical value showing the ranking of the node regarding its suitability.
+        can_remain_on_current_node:
+          type: string
+          description: Indicates whether the shard is allowed to remain on its current node.
+        can_rebalance_cluster:
+          type: string
+          description: Indicating if the cluster is allowed to rebalance.
+        can_rebalance_to_other_node:
+          type: string
+          description: Indicates if the shard can be rebalanced to another node.
+        rebalance_explanation:
+          type: string
+          description: Explains why the `can_rebalance_to_other_node` field returned the value that it did.
+        node_allocation_decisions:
+          type: array
+          items:
+            type: object
+            properties:
+              node_id:
+                type: string
+                description: The unique identifier of a particular node in the cluster.
+              node_name:
+                type: string
+                description: The human-readable name of the node.
+              transport_address:
+                type: string
+                description: The network address and port used of the node.
+              node_decision:
+                type: string
+                description: Indicates the final allocation decision for the node.
+              weight_ranking:
+                type: integer
+                description: Represents the ranking of the node in the allocation process.
+              deciders:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    decider:
+                      type: string
+                      description: The name of the allocation decider (e.g., `disk`, `same_shard`, `filter`, `max_retry`).
+                    decision:
+                      type: string
+                      description: Indicates the decision made by the decider.
+                    explanation:
+                      type: string
+                      description: A detailed explanation of why the decider made its decision.
+
+    IndexNotFoundError:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            root_cause:
+              type: array
+              items:
+                type: object
+                properties:
+                  type: { type: string }
+                  reason: { type: string }
+                  index: { type: string }
+                  index_uuid: { type: string }
+            type: { type: string }
+            reason: { type: string }
+            index: { type: string }
+            index_uuid: { type: string }
+        status: { type: integer }
+
+    MethodNotAllowedError:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message indicating the HTTP method is not allowed.
+        status:
+          type: integer
+          description: HTTP status code.
+
+    ClusterRoutingWeightsRequest:
+      type: object
+      properties:
+        weights:
+          description: |
+            JSON. Text to assign weights to attributes within the request body of the PUT request. Weights can be set in any ratio, for example, 2:3:5. In a 2:3:5 ratio with 3 zones, for every 100 requests sent to the cluster, each zone would receive either 20, 30, or 50 search requests in a random order. When assigned a weight of 0, the zone does not receive any search traffic.
+          type: array
+          items:
+            type: object
+        _version:
+          type: integer
+          description: |
+            Implements optimistic concurrency control (OCC) through versioning.
+            The parameter uses simple versioning, such as 1, and increments upward
+            based on each subsequent modification. This allows any servers from which
+            a request originates to validate whether or not a zone has been modified.
+
+    ClusterRoutingWeightsResponse:
+      type: object
+      properties:
+        acknowledged:
+          type: boolean
+
+    ClusterRoutingError:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            root_cause:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                  reason:
+                    type: string
+            type:
+              type: string
+            reason:
+              type: string
+        status:
+          type: integer
+
+  requestBodies:
+    ClusterAllocationExplainRequest:
+      content:
+        application/json:
+          schema:
+            $ref: 'cluster_api.yml#/components/schemas/ClusterAllocationExplainRequest'
+          example:
+            index: "wazuh-statistics-2025.8w"
+            shard: 0
+            primary: true
+
+    ClusterRoutingWeightsRequest:
+      content:
+        application/json:
+          schema:
+            $ref: 'cluster_api.yml#/components/schemas/ClusterRoutingWeightsRequest'
+          example:
+            weights:
+              zone_1: "1"
+              zone_2: "1"
+              zone_3: "0"
+            _version: 1
+
   responses:
+    ClusterAllocationExplainSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ClusterAllocationExplainResponse'
+          example:
+            index: "wazuh-statistics-2025.8w"
+            shard: 0
+            primary: true
+            current_state: "started"
+            current_node:
+              id: "XyGg_gfbR0-X-5XpDVKxdg"
+              name: "node-1"
+              transport_address: "127.0.0.1:9300"
+              attributes:
+                shard_indexing_pressure_enabled: "true"
+              weight_ranking: 1
+            can_remain_on_current_node: "yes"
+            can_rebalance_cluster: "yes"
+            can_rebalance_to_other_node: "no"
+            rebalance_explanation: "cannot rebalance as no target node exists that can both allocate this shard and improve the cluster balance"
+
+    ClusterAllocExplainBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  root_cause:
+                    type: object
+                    properties:
+                      type: { type: string }
+                      reason: { type: string }
+              status: { type: integer }
+          examples:
+            missingText:
+              value:
+                error:
+                  root_cause:
+                    - type: "illegal_argument_exception"
+                      reason: "request [/_cluster/allocation/explain] contains unrecognized parameter: [v1]"
+                  type: "illegal_argument_exception"
+                  reason: "request [/_cluster/allocation/explain] contains unrecognized parameter: [v1]"
+                status: 400
+
+    IndexNotFound:
+      description: Response to report an index not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IndexNotFoundError'
+          example:
+            error:
+              root_cause:
+                - type: "index_not_found_exception"
+                  reason: "no such index [movies]"
+                  index: "movies"
+                  index_uuid: "_na_"
+              type: "index_not_found_exception"
+              reason: "no such index [movies]"
+              index: "movies"
+              index_uuid: "_na_"
+            status: 404
+
+    MethodNotAllowed:
+      description: Response to report an invalid HTTP method
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/MethodNotAllowedError'
+          example:
+            error: "Incorrect HTTP method for uri [/_cluster/allocation/explain?pretty] and method [PUT], allowed: [GET, POST]"
+            status: 405
+
+    ClusterRoutingWeightsSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ClusterRoutingWeightsResponse'
+          example:
+            acknowledged: true
+
+    ClusterRoutingDeleteSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              acknowledged:
+                type: boolean
+          example:
+            acknowledged: true
+
+    ClusterRoutingBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ClusterRoutingError'
+          example:
+            error:
+              root_cause:
+                - type: "action_request_validation_exception"
+                  reason: "Validation Failed: 1: invalid awareness attribute zone requested for weighted routing;"
+              type: "action_request_validation_exception"
+              reason: "Validation Failed: 1: invalid awareness attribute zone requested for weighted routing;"
+            status: 400
+
+    ClusterRoutingForbidden:
+      description: Response to report a permission denied request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ClusterRoutingError'
+          example:
+            error:
+              root_cause:
+                - type: "security_exception"
+                  reason: "no permissions for [cluster:admin/routing/awareness/weights/get] and User [name=test, backend_roles=[], requestedTenant=null]"
+              type: "security_exception"
+              reason: "no permissions for [cluster:admin/routing/awareness/weights/get] and User [name=test, backend_roles=[], requestedTenant=null]"
+            status: 403
+
+    ClusterRoutingServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ClusterRoutingError'
+          example:
+            error:
+              root_cause:
+                - type: "null_pointer_exception"
+                  reason: "Cannot invoke \"org.opensearch.cluster.routing.WeightedRouting.attributeName()\" because \"this.weightedRouting\" is null"
+              type: "null_pointer_exception"
+              reason: "Cannot invoke \"org.opensearch.cluster.routing.WeightedRouting.attributeName()\" because \"this.weightedRouting\" is null"
+            status: 500
+
     DecommissionSuccess:
       description: Success
       content:
