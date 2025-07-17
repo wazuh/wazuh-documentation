@@ -765,6 +765,81 @@ paths:
         - basicAuth: []
         - jwtAuth: []
 
+  /_cluster/health:
+    get:
+      tags: [Cluster API]
+      summary: Cluster health
+      description: |
+        The cluster health API returns a simple status of the health of your cluster. The cluster health is represented in three colors: green, yellow, and red. A green status means all primary shards and their replicas are allocated to nodes. A yellow status means all primary shards are allocated to nodes, but some replicas aren't. A red status means at least one primary shard is not allocated to any node.
+      operationId: clusterHealth
+      parameters:
+        - $ref: 'cluster_api.yml#/components/parameters/expand_wildcards'
+        - $ref: 'cluster_api.yml#/components/parameters/level'
+        - $ref: 'cluster_api.yml#/components/parameters/awareness_attribute_health'
+        - $ref: 'cluster_api.yml#/components/parameters/local'
+        - $ref: 'cluster_api.yml#/components/parameters/cluster_manager_timeout'
+        - $ref: 'cluster_api.yml#/components/parameters/timeout'
+        - $ref: 'cluster_api.yml#/components/parameters/wait_for_active_shards'
+        - $ref: 'cluster_api.yml#/components/parameters/wait_for_nodes'
+        - $ref: 'cluster_api.yml#/components/parameters/wait_for_events'
+        - $ref: 'cluster_api.yml#/components/parameters/wait_for_no_relocating_shards'
+        - $ref: 'cluster_api.yml#/components/parameters/wait_for_no_initializing_shards'
+        - $ref: 'cluster_api.yml#/components/parameters/wait_for_status'
+        - $ref: 'cluster_api.yml#/components/parameters/weights'
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: 'cluster_api.yml#/components/responses/ClusterHealthSuccess'
+        '400':
+          $ref: 'cluster_api.yml#/components/responses/ClusterHealthBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cluster_api.yml#/components/responses/ClusterHealthForbidden'
+        '405':
+          $ref: 'cluster_api.yml#/components/responses/ClusterHealthMethodNotAllowed'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /_cluster/health/{index}:
+    get:
+      tags: [Cluster API]
+      summary: Cluster health (Index)
+      description: |
+        The cluster health API returns a simple status of the health of your cluster. The cluster health is represented in three colors: green, yellow, and red. A green status means all primary shards and their replicas are allocated to nodes. A yellow status means all primary shards are allocated to nodes, but some replicas aren't. A red status means at least one primary shard is not allocated to any node.
+      operationId: clusterHealthIndex
+      parameters:
+        - $ref: 'cluster_api.yml#/components/parameters/cluster_health_index'
+        - $ref: 'cluster_api.yml#/components/parameters/expand_wildcards'
+        - $ref: 'cluster_api.yml#/components/parameters/level'
+        - $ref: 'cluster_api.yml#/components/parameters/awareness_attribute_health'
+        - $ref: 'cluster_api.yml#/components/parameters/local'
+        - $ref: 'cluster_api.yml#/components/parameters/cluster_manager_timeout'
+        - $ref: 'cluster_api.yml#/components/parameters/timeout'
+        - $ref: 'cluster_api.yml#/components/parameters/wait_for_active_shards'
+        - $ref: 'cluster_api.yml#/components/parameters/wait_for_nodes'
+        - $ref: 'cluster_api.yml#/components/parameters/wait_for_events'
+        - $ref: 'cluster_api.yml#/components/parameters/wait_for_no_relocating_shards'
+        - $ref: 'cluster_api.yml#/components/parameters/wait_for_no_initializing_shards'
+        - $ref: 'cluster_api.yml#/components/parameters/wait_for_status'
+        - $ref: 'cluster_api.yml#/components/parameters/weights'
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: 'cluster_api.yml#/components/responses/ClusterHealthSuccess'
+        '400':
+          $ref: 'cluster_api.yml#/components/responses/ClusterHealthBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cluster_api.yml#/components/responses/ClusterHealthForbidden'
+        '405':
+          $ref: 'cluster_api.yml#/components/responses/ClusterHealthMethodNotAllowed'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
 components:
   parameters:
     pretty:

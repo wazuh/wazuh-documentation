@@ -1,3 +1,5 @@
+openapi: 3.0.0
+
 components:
   parameters:
     include_yes_decisions:
@@ -50,6 +52,119 @@ components:
       schema:
         type: string
         enum: [json, yaml]
+
+    cluster_health_index:
+      name: index
+      in: path
+      required: true
+      description: The name of the index you want to query for. A single index or a comma-separated list of index names is supported.
+      schema:
+        type: string
+
+    expand_wildcards:
+      name: expand_wildcards
+      in: query
+      description: Expands wildcard expressions to concrete indexes. Combine multiple values with commas.
+      schema:
+        type: string
+        enum: [all, open, closed, hidden, none]
+        default: open
+
+    level:
+      name: level
+      in: query
+      description: The level of detail for returned health information.
+      schema:
+        type: string
+        enum: [cluster, indices, shards, awareness_attributes]
+        default: cluster
+
+    awareness_attribute_health:
+      name: awareness_attribute
+      in: query
+      description: |
+        The name of the awareness attribute, for which to return cluster health (for example, zone). Applicable only if `level` is set to `awareness_attributes`.
+      schema:
+        type: string
+
+    local:
+      name: local
+      in: query
+      description: Whether to return information from the local node only instead of from the cluster manager node.
+      schema:
+        type: boolean
+        default: false
+
+    cluster_manager_timeout:
+      name: cluster_manager_timeout
+      in: query
+      description: The amount of time in seconds to wait for a connection to the cluster manager node.
+      schema:
+        type: integer
+        default: 30
+
+    timeout:
+      name: timeout
+      in: query
+      description: The amount of time in seconds to wait for a response. If the timeout expires, the request fails.
+      schema:
+        type: integer
+        default: 30
+
+    wait_for_active_shards:
+      name: wait_for_active_shards
+      in: query
+      description: Wait until the specified number of shards is active before returning a response. `all` for all shards.
+      schema:
+        type: string
+        default: 0
+
+    wait_for_nodes:
+      name: wait_for_nodes
+      in: query
+      description: Wait for N number of nodes. Use `12` for exact match, `>12` and `<12` for range.
+      schema:
+        type: string
+
+    wait_for_events:
+      name: wait_for_events
+      in: query
+      description: Wait until all currently queued events with the given priority are processed.
+      schema:
+        type: string
+        enum: [immediate, urgent, high, normal, low, languid]
+
+    wait_for_no_relocating_shards:
+      name: wait_for_no_relocating_shards
+      in: query
+      description: Whether to wait until there are no relocating shards in the cluster.
+      schema:
+        type: boolean
+        default: false
+
+    wait_for_no_initializing_shards:
+      name: wait_for_no_initializing_shards
+      in: query
+      description: Whether to wait until there are no initializing shards in the cluster.
+      schema:
+        type: boolean
+        default: false
+
+    wait_for_status:
+      name: wait_for_status
+      in: query
+      description: Wait until the cluster health reaches the specified status or better.
+      schema:
+        type: string
+        enum: [green, yellow, red]
+
+    weights:
+      name: weights
+      in: query
+      description: |
+        JSON. Assigns weights to attributes within the request body of the PUT request. Weights can be set in any ration, for example, 2:3:5. In a 2:3:5 ratio with three zones, for every 100 requests sent to the cluster, each zone would receive either 20, 30, or 50 search requests in a random order. When assigned a weight of 0, the zone does not receive any search traffic.
+      schema:
+        type: object
 
   schemas:
     ClusterAllocationExplainRequest:
@@ -222,6 +337,65 @@ components:
               type: string
         status:
           type: integer
+
+    ClusterHealthResponse:
+      type: object
+      properties:
+        cluster_name:
+          type: string
+          description: The name of the cluster.
+        status:
+          type: string
+          enum: [green, yellow, red]
+          description: The cluster health status, which represents the state of shard allocation in the cluster.
+        timed_out:
+          type: boolean
+          description: Whether the request timed out.
+        number_of_nodes:
+          type: integer
+          description: The number of nodes in the cluster.
+        number_of_data_nodes:
+          type: integer
+          description: The number of data nodes in the cluster.
+        discovered_master:
+          type: boolean
+          description: Specifies whether the master is discovered.
+        discovered_cluster_manager:
+          type: boolean
+          description: Specifies whether the cluster manager is discovered.
+        active_primary_shards:
+          type: integer
+          description: The number of active primary shards.
+        active_shards:
+          type: integer
+          description: The total number of active shards, including primary and replica shards.
+        relocating_shards:
+          type: integer
+          description: The number of relocating shards.
+        initializing_shards:
+          type: integer
+          description: The number of initializing shards.
+        unassigned_shards:
+          type: integer
+          description: The number of unassigned shards.
+        delayed_unassigned_shards:
+          type: integer
+          description: The number of delayed unassigned shards.
+        number_of_pending_tasks:
+          type: integer
+          description: The number of pending tasks in the cluster.
+        number_of_in_flight_fetch:
+          type: integer
+          description: The number of unfinished fetches.
+        task_max_waiting_in_queue_millis:
+          type: integer
+          description: The maximum wait time for all tasks waiting to be performed, in milliseconds.
+        active_shards_percent_as_number:
+          type: number
+          description: The percentage of active shards in the cluster.
+        awareness_attributes:
+          type: object
+          description: Contains cluster health information for each awareness attribute.
 
   requestBodies:
     ClusterAllocationExplainRequest:
@@ -435,3 +609,71 @@ components:
               type: "security_exception"
               reason: "no permissions for [cluster:admin/decommission/awareness/get] and User [name=test, backend_roles=[], requestedTenant=null]"
             status: 403
+
+    ClusterHealthSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ClusterHealthResponse'
+          example:
+            cluster_name: "wazuh-cluster"
+            status: "green"
+            timed_out: false
+            number_of_nodes: 1
+            number_of_data_nodes: 1
+            discovered_master: true
+            discovered_cluster_manager: true
+            active_primary_shards: 111
+            active_shards: 111
+            relocating_shards: 0
+            initializing_shards: 0
+            unassigned_shards: 0
+            delayed_unassigned_shards: 0
+            number_of_pending_tasks: 0
+            number_of_in_flight_fetch: 0
+            task_max_waiting_in_queue_millis: 0
+            active_shards_percent_as_number: 100.0
+
+    ClusterHealthBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: 'spec.yml#/components/schemas/SecurityError'
+          examples:
+            scrollError:
+              value:
+                error:
+                  root_cause:
+                    - type: "illegal_argument_exception"
+                      reason: "request [/_cluster/health] contains unrecognized parameter: [v]"
+                  type: "illegal_argument_exception"
+                  reason: "request [/_cluster/health] contains unrecognized parameter: [v]"
+                status: 400
+
+    ClusterHealthForbidden:
+      description: Response to report a permission denied request
+      content:
+        application/json:
+          schema:
+            $ref: 'spec.yml#/components/schemas/SecurityError'
+          example:
+            error:
+              root_cause:
+                - type: "security_exception"
+                  reason: "no permissions for [cluster:monitor/health] and User [name=test, backend_roles=[], requestedTenant=null]"
+              type: "security_exception"
+              reason: "no permissions for [cluster:monitor/health] and User [name=test, backend_roles=[], requestedTenant=null]"
+            status: 403
+
+    ClusterHealthMethodNotAllowed:
+      description: Response to report an invalid HTTP method
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/MethodNotAllowedError'
+          example:
+            error: "Incorrect HTTP method for uri [/_cluster/health?format=json&pretty] and method [PUT], allowed: [GET]"
+            status: 405
+
