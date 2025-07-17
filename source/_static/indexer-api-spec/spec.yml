@@ -694,6 +694,77 @@ paths:
         - basicAuth: []
         - jwtAuth: []
 
+  /_cluster/decommission/awareness/{awareness_attribute_name}/{awareness_attribute_value}:
+    parameters:
+      - $ref: 'cluster_api.yml#/components/parameters/awareness_attribute_name'
+      - $ref: 'cluster_api.yml#/components/parameters/awareness_attribute_value'
+    put:
+      tags: [Cluster API]
+      summary: Cluster decommission (PUT)
+      description: |
+        The cluster decommission operation adds support for awareness based decommissioning. It greatly benefits multi-zone deployments where awareness attributes, such as zones, can aid in applying new upgrades to a cluster in a controlled fashion. This is especially useful during outages, in which case, you can decommission the unhealthy zone to prevent replication requests from stalling and prevent your request backlog from becoming too large.
+      operationId: decommissionAwareness
+      parameters:
+        - $ref: '#/components/parameters/format'
+      responses:
+        '200':
+          $ref: 'cluster_api.yml#/components/responses/DecommissionSuccess'
+        '400':
+          $ref: 'cluster_api.yml#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cluster_api.yml#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /_cluster/decommission/awareness/{awareness_attribute_name}/_status:
+    parameters:
+      - $ref: 'cluster_api.yml#/components/parameters/awareness_attribute_name'
+    get:
+      tags: [Cluster API]
+      summary: Cluster decommission (GET)
+      description: |
+        The cluster decommission operation adds support for awareness based decommissioning. It greatly benefits multi-zone deployments where awareness attributes, such as zones, can aid in applying new upgrades to a cluster in a controlled fashion. This is especially useful during outages, in which case, you can decommission the unhealthy zone to prevent replication requests from stalling and prevent your request backlog from becoming too large.
+      operationId: getDecommissionStatus
+      parameters:
+        - $ref: '#/components/parameters/format'
+      responses:
+        '200':
+          $ref: 'cluster_api.yml#/components/responses/DecommissionSuccess'
+        '400':
+          $ref: 'cluster_api.yml#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cluster_api.yml#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /_cluster/decommission/awareness:
+    delete:
+      tags: [Cluster API]
+      summary: Cluster decommission (DELETE)
+      description: |
+        The cluster decommission operation adds support for awareness based decommissioning. It greatly benefits multi-zone deployments where awareness attributes, such as zones, can aid in applying new upgrades to a cluster in a controlled fashion. This is especially useful during outages, in which case, you can decommission the unhealthy zone to prevent replication requests from stalling and prevent your request backlog from becoming too large.
+      operationId: cancelDecommission
+      parameters:
+        - $ref: '#/components/parameters/format'
+      responses:
+        '200':
+          $ref: 'cluster_api.yml#/components/responses/DecommissionSuccess'
+        '400':
+          $ref: 'cluster_api.yml#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cluster_api.yml#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
 components:
   parameters:
     index:

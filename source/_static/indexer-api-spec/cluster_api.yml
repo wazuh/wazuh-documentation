@@ -1,0 +1,70 @@
+components:
+  parameters:
+    awareness_attribute_name:
+      name: awareness_attribute_name
+      in: path
+      required: true
+      description: The name of the awareness attribute. The value is usually `zone`.
+      schema:
+        type: string
+
+    awareness_attribute_value:
+      name: awareness_attribute_value
+      in: path
+      required: true
+      description: The value of the awareness attribute. For example, if you have shards allocated in two different zones, you can give each zone a value of `zone-a` or `zone-b`. The cluster decommission operation decommissions the zone listed in the method.
+      schema:
+        type: string
+
+    format:
+      name: format
+      in: query
+      description: A short version of the Accept header, such as json or yaml.
+      schema:
+        type: string
+        enum: [json, yaml]
+
+  responses:
+    DecommissionSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties:
+              type: string
+              enum: [INIT, DRAINING, IN_PROGRESS, SUCCESSFUL, FAILED]
+          example:
+            zone-1: "INIT"
+
+    BadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: 'spec.yml#/components/schemas/SecurityError'
+          examples:
+            scrollError:
+              value:
+                error:
+                  root_cause:
+                    - type: "illegal_argument_exception"
+                      reason: "request [/_cluster/decommission/awareness/zone/_status] contains unrecognized parameter: [vformat] -> did you mean [format]?"
+                  type: "illegal_argument_exception"
+                  reason: "request [/_cluster/decommission/awareness/zone/_status] contains unrecognized parameter: [vformat] -> did you mean [format]?"
+                status: 400
+
+    Forbidden:
+      description: Response to report a permission denied request
+      content:
+        application/json:
+          schema:
+            $ref: 'spec.yml#/components/schemas/SecurityError'
+          example:
+            error:
+              root_cause:
+                - type: "security_exception"
+                  reason: "no permissions for [cluster:admin/decommission/awareness/get] and User [name=test, backend_roles=[], requestedTenant=null]"
+              type: "security_exception"
+              reason: "no permissions for [cluster:admin/decommission/awareness/get] and User [name=test, backend_roles=[], requestedTenant=null]"
+            status: 403
