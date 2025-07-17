@@ -1,0 +1,158 @@
+components:
+  parameters:
+    index:
+      name: index
+      in: path
+      required: true
+      description: Target index name for analyzer derivation
+      schema: { type: string }
+
+    analyzer:
+      name: analyzer
+      in: query
+      description: |
+        The name of the analyzer to apply to the `text` field. The analyzer can be built in or configured in the index.
+
+        If analyzer is not specified, the analyze API uses the analyzer defined in the mapping of the `field` field.
+      schema: { type: string }
+
+    attributes:
+      name: attributes
+      in: query
+      description: Array of token attributes for filtering the output of the `explain` field.
+      schema:
+        type: array
+        items: { type: string }
+      style: form
+      explode: true
+
+    char_filter:
+      name: char_filter
+      in: query
+      description: Array of character filters for preprocessing characters before the `tokenizer` field.
+      schema:
+        type: array
+        items: { type: string }
+      style: form
+      explode: true
+
+    field:
+      name: field
+      in: query
+      description: |
+        Field for deriving the analyzer.
+
+        If you specify `field`, you must also specify the `index` path parameter.
+
+        If you specify the `analyzer` field, it overrides the value of `field`.
+
+        If you do not specify `field`, the analyze API uses the default analyzer for the index.
+
+        If you do not specify the `index` field, or the index does not have a default analyzer, the analyze API uses the standard analyzer.
+      schema: { type: string }
+
+    filter:
+      name: filter
+      in: query
+      description: Array of token filters to apply after the `tokenizer` field.
+      schema:
+        type: array
+        items: { type: string }
+      style: form
+      explode: true
+
+    normalizer:
+      name: normalizer
+      in: query
+      description: Normalizer for converting text into a single token.
+      schema: { type: string }
+
+    tokenizer:
+      name: tokenizer
+      in: query
+      description: Tokenizer for converting the text field into tokens.
+      schema: { type: string }
+
+    explain:
+      name: explain
+      in: query
+      description: If `true`, causes the response to include token attributes and additional details.
+      schema:
+        type: boolean
+        default: false
+
+  schemas:
+    AnalyzeRequest:
+      type: object
+      properties:
+        text:
+          oneOf:
+            - type: string
+            - type: array
+              items:
+                type: string
+          description: Text to analyze. If you provide an array of strings, the text is analyzed as a multi-value field.
+
+    Token:
+      type: object
+      properties:
+        token:
+          type: string
+          description: The text fragment extracted during analysis. It is a word or part of a word.
+        start_offset:
+          type: integer
+          description: The position in the input text where this token starts.
+        end_offset:
+          type: integer
+          description: The position in the input text where this token ends.
+        type:
+          type: string
+          description: The type of token inputted. This can be alphanumeric or custom depending on the analyzer.
+        position:
+          type: integer
+          description: The position of the token in the sequence of tokens, starting from 0. This can help determine word order.
+
+    AnalyzeResponse:
+      type: object
+      properties:
+        analyzer:
+          type: string
+          description: The name of the analyzer applied to the query.
+        text:
+          type: string
+          description: The text supplied to the query for analysis.
+        tokens:
+          type: array
+          items: { $ref: '#/components/schemas/Token' }
+
+  requestBodies:
+    AnalyzeRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AnalyzeRequest'
+          example:
+            analyzer: "standard"
+            text: ["first array element", "second array element"]
+
+  responses:
+    AnalyzeSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AnalyzeResponse'
+          examples:
+            standard:
+              value:
+                tokens:
+                  - token: "test"
+                    start_offset: 0
+                    end_offset: 4
+                    type: "<ALPHANUM>"
+                    position: 0
+                  - token: "word"
+                    start_offset: 5
+                    end_offset: 9
+                    type: "<ALPHANUM>"
+                    position: 1
