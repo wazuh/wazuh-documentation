@@ -98,18 +98,18 @@ components:
     cluster_manager_timeout:
       name: cluster_manager_timeout
       in: query
-      description: The amount of time in seconds to wait for a connection to the cluster manager node.
+      description: The amount of time to wait for a response from the cluster manager node.
       schema:
-        type: integer
-        default: 30
+        type: string
+        default: 30s
 
     timeout:
       name: timeout
       in: query
-      description: The amount of time in seconds to wait for a response. If the timeout expires, the request fails.
+      description: The amount of time to wait for a response. If the timeout expires, the request fails.
       schema:
-        type: integer
-        default: 30
+        type: string
+        default: 30s
 
     wait_for_active_shards:
       name: wait_for_active_shards
@@ -165,6 +165,26 @@ components:
         JSON. Assigns weights to attributes within the request body of the PUT request. Weights can be set in any ration, for example, 2:3:5. In a 2:3:5 ratio with three zones, for every 100 requests sent to the cluster, each zone would receive either 20, 30, or 50 search requests in a random order. When assigned a weight of 0, the zone does not receive any search traffic.
       schema:
         type: object
+
+    flat_settings:
+      name: flat_settings
+      in: query
+      description: |
+        Whether to return settings in the flat form, which can improve readability, especially for heavily nested settings.
+
+        For example, the flat form of `"cluster": { "max_shards_per_node": 500 }` is `"cluster.max_shards_per_node": "500"`.
+      schema:
+        type: boolean
+        default: false
+
+    include_defaults:
+      name: include_defaults
+      in: query
+      description: |
+        Whether to include default settings as part of the response. This parameter is useful for identifying
+        the names and current values of settings you want to update.
+      schema:
+        type: boolean
 
   schemas:
     ClusterAllocationExplainRequest:
@@ -397,6 +417,52 @@ components:
           type: object
           description: Contains cluster health information for each awareness attribute.
 
+    ClusterSettingsResponse:
+      type: object
+      properties:
+        acknowledged:
+          type: boolean
+          description: Returns a value to specify if the settings were acknowledged.
+        persistent:
+          type: object
+          description: Returns the persistent setting that was applied.
+        transient:
+          type: object
+          description: Returns the transient setting that was applied.
+        defaults:
+          type: object
+          description: Returns the default settings (only when `include_defaults=true`).
+
+    ClusterSettingsRequest:
+      type: object
+      properties:
+        persistent:
+          type: object
+        transient:
+          type: object
+
+    ClusterSettingsBadRequest:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            root_cause:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                  reason:
+                    type: string
+            type:
+              type: string
+            reason:
+              type: string
+        status:
+          type: integer
+
   requestBodies:
     ClusterAllocationExplainRequest:
       content:
@@ -419,6 +485,15 @@ components:
               zone_2: "1"
               zone_3: "0"
             _version: 1
+
+    ClusterSettingsRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ClusterSettingsRequest'
+          example:
+            transient:
+              cluster.max_shards_per_node: 500
 
   responses:
     ClusterAllocationExplainSuccess:
@@ -677,3 +752,45 @@ components:
             error: "Incorrect HTTP method for uri [/_cluster/health?format=json&pretty] and method [PUT], allowed: [GET]"
             status: 405
 
+    ClusterSettingsSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ClusterSettingsResponse'
+          example:
+            acknowledged: true
+            persistent: {}
+            transient:
+              cluster:
+                max_shards_per_node: "500"
+
+    ClusterSettingsBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ClusterSettingsBadRequest'
+          example:
+            error:
+              root_cause:
+                - type: "illegal_argument_exception"
+                  reason: "transient setting [custer.max_shards_per_node], not recognized"
+              type: "illegal_argument_exception"
+              reason: "transient setting [custer.max_shards_per_node], not recognized"
+            status: 400
+
+    ClusterSettingsForbidden:
+      description: Response to report a permission denied request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ClusterRoutingError'
+          example:
+            error:
+              root_cause:
+                - type: "security_exception"
+                  reason: "no permissions for [cluster:admin/settings/update] and User [name=test, backend_roles=[], requestedTenant=null]"
+              type: "security_exception"
+              reason: "no permissions for [cluster:admin/settings/update] and User [name=test, backend_roles=[], requestedTenant=null]"
+            status: 403

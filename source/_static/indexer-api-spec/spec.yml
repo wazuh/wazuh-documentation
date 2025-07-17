@@ -840,6 +840,79 @@ paths:
         - basicAuth: []
         - jwtAuth: []
 
+  /_cluster/settings:
+    get:
+      tags: [Cluster API]
+      summary: Cluster settings (GET)
+      description: |
+        The cluster settings operation allows you to view and modify the current settings for your cluster, as well as review the default settings. Any setting updates made through the API are applied to all nodes within the cluster by Wazuh indexer.
+
+        The request body is only supported by PUT operation. Not all settings can be updated via the cluster settings API, some settings are only available in the configuration file. When you try to update a setting that is not supported by the cluster setting API, a `"setting [cluster.some.setting], not dynamically updateable"` response is received.
+
+        The cluster settings API contains three types of settings: persistent, transient, and default. Persistent settings remain after a cluster restart, unlike transient settings, which the Wazuh indexer removes after a restart. When the same setting is specified in multiple places, the following hierarchy is followed by the Wazuh indexer:
+
+        - Transient settings
+        - Persistent settings
+        - Settings from the `/etc/wazuh-indexer/opensearch.yml` file
+        - Default settings
+
+        The cluster setting API PUT operation must contain either `transient` or `persistent` value. To check available settings, you can run the GET request with the `include_defaults` parameter and copy any setting to edit the required setting.
+      operationId: getClusterSettings
+      parameters:
+        - $ref: 'cluster_api.yml#/components/parameters/flat_settings'
+        - $ref: 'cluster_api.yml#/components/parameters/include_defaults'
+        - $ref: 'cluster_api.yml#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: 'cluster_api.yml#/components/responses/ClusterSettingsSuccess'
+        '400':
+          $ref: 'cluster_api.yml#/components/responses/ClusterSettingsBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cluster_api.yml#/components/responses/ClusterSettingsForbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+    put:
+      tags: [Cluster API]
+      summary: Cluster settings (PUT)
+      description: |
+        The cluster settings operation allows you to view and modify the current settings for your cluster, as well as review the default settings. Any setting updates made through the API are applied to all nodes within the cluster by Wazuh indexer.
+
+        The request body is only supported by PUT operation. Not all settings can be updated via the cluster settings API, some settings are only available in the configuration file. When you try to update a setting that is not supported by the cluster setting API, a `"setting [cluster.some.setting], not dynamically updateable"` response is received.
+
+        The cluster settings API contains three types of settings: persistent, transient, and default. Persistent settings remain after a cluster restart, unlike transient settings, which the Wazuh indexer removes after a restart. When the same setting is specified in multiple places, the following hierarchy is followed by the Wazuh indexer:
+
+        - Transient settings
+        - Persistent settings
+        - Settings from the `/etc/wazuh-indexer/opensearch.yml` file
+        - Default settings
+
+        The cluster setting API PUT operation must contain either `transient` or `persistent` value. To check available settings, you can run the GET request with the `include_defaults` parameter and copy any setting to edit the required setting.
+      operationId: putClusterSettings
+      parameters:
+        - $ref: 'cluster_api.yml#/components/parameters/flat_settings'
+        - $ref: 'cluster_api.yml#/components/parameters/cluster_manager_timeout'
+        - $ref: 'cluster_api.yml#/components/parameters/timeout'
+        - $ref: '#/components/parameters/pretty'
+      requestBody:
+        $ref: 'cluster_api.yml#/components/requestBodies/ClusterSettingsRequest'
+      responses:
+        '200':
+          $ref: 'cluster_api.yml#/components/responses/ClusterSettingsSuccess'
+        '400':
+          $ref: 'cluster_api.yml#/components/responses/ClusterSettingsBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cluster_api.yml#/components/responses/ClusterSettingsForbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
 components:
   parameters:
     pretty:
