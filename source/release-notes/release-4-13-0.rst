@@ -32,6 +32,7 @@ Wazuh manager
 - `#29153 <https://github.com/wazuh/wazuh/pull/29153>`__ Separated control messages from remoted's connection handling.
 - `#30504 <https://github.com/wazuh/wazuh/pull/30504>`__ Added sanity checks for hotfix values in Vulnerability Detector.
 - `#27894 <https://github.com/wazuh/wazuh/issues/27894>`__ Added support for global queries of FIM and system inventory data.
+- `#30851 <https://github.com/wazuh/wazuh/pull/30851>`__ Improved exception handling in the ``run_local`` SDK function.
 
 Wazuh agent
 ^^^^^^^^^^^
