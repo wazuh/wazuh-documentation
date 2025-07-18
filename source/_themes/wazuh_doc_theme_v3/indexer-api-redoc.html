@@ -1,0 +1,9 @@
+{%- extends "!wazuh_doc_theme_v3/redoc-master.html" -%}
+
+{% block body %}
+{{ super() }}
+{% endblock %}
+
+{%- block redoc %}
+    <redoc spec-url='{{ apiURL_indexer }}' scroll-y-offset="110"></redoc>
+{% endblock redoc %}

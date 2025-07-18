@@ -1,0 +1,1195 @@
+openapi: 3.0.0
+
+info:
+  title: Wazuh indexer API reference
+  description: |
+    The Wazuh indexer API is an open source RESTful API. It allows interaction with the Wazuh indexer from a web browser, command line tools like cURL or any script or program that can make web requests. The Wazuh indexer API is used to perform actions like adding and querying the indexes, modifying the Wazuh indexer settings, etc.
+
+    # Authentication
+
+    Wazuh indexer API endpoints require authentication to be used. There are multiple options on what authentication mechanism to use including basic HTTP authentication and JSON Web Token (JWT). More information can be seen in [Logging into the Wazuh indexer API](https://documentation.wazuh.com/current/user-manual/indexer-api/getting-started.html#logging-into-the-wazuh-indexer-api).
+  version: 1.0.0
+
+servers:
+  - url: '{protocol}://{host}:{port}'
+    description: Wazuh indexer API server
+    variables:
+      protocol:
+        enum:
+          - http
+          - https
+        default: https
+        description: Protocol for API communication
+      host:
+        default: localhost
+        description: Hostname or IP address
+      port:
+        default: '9200'
+        description: API port number
+
+security:
+  - basicAuth: []
+  - jwtAuth: []
+
+paths:
+  /:
+    get:
+      tags:
+        - Get API info
+      summary: API info
+      description: Return basic information about the API
+      operationId: getApiInfo
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiInfo'
+              example:
+                name: "node-1"
+                cluster_name: "wazuh-cluster"
+                cluster_uuid: "XUqydNCQTuCnvtXobnRZ8w"
+                version:
+                  number: "7.10.2"
+                  build_type: "deb"
+                  build_hash: "9fd1835bba77ae04d48550eb4dc9be4787070806"
+                  build_date: "2024-08-30T10:06:03.028357Z"
+                  build_snapshot: false
+                  lucene_version: "9.10.0"
+                  minimum_wire_compatibility_version: "7.10.0"
+                  minimum_index_compatibility_version: "7.0.0"
+                tagline: "The OpenSearch Project: https://opensearch.org/"
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/ForbiddenApiInfo'
+
+  /_analyze:
+    get:
+      tags: [Analyze API]
+      summary: Text analysis (Global GET)
+      description: |
+        The analyze API endpoint enables text analysis by transforming unstructured text into individual tokens, typically words, optimized for search functionality. It processes a text string and returns the corresponding tokens as the output. It helps you debug and fine-tune text analysis settings for indexing and querying, providing insight into how text is broken into tokens and how filters are applied.
+      operationId: analyzeGlobalGet
+      parameters:
+        - $ref: 'analyze_api.yml#/components/parameters/analyzer'
+        - $ref: 'analyze_api.yml#/components/parameters/attributes'
+        - $ref: 'analyze_api.yml#/components/parameters/char_filter'
+        - $ref: 'analyze_api.yml#/components/parameters/filter'
+        - $ref: 'analyze_api.yml#/components/parameters/normalizer'
+        - $ref: 'analyze_api.yml#/components/parameters/tokenizer'
+        - $ref: 'analyze_api.yml#/components/parameters/explain'
+        - $ref: '#/components/parameters/pretty'
+      requestBody:
+        $ref: 'analyze_api.yml#/components/requestBodies/AnalyzeRequest'
+      responses:
+        '200':
+          $ref: 'analyze_api.yml#/components/responses/AnalyzeSuccess'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+    post:
+      tags: [Analyze API]
+      summary: Text analysis (Global POST)
+      description: |
+        The analyze API endpoint enables text analysis by transforming unstructured text into individual tokens, typically words, optimized for search functionality. It processes a text string and returns the corresponding tokens as the output. It helps you debug and fine-tune text analysis settings for indexing and querying, providing insight into how text is broken into tokens and how filters are applied.
+      operationId: analyzeGlobalPost
+      parameters:
+        - $ref: 'analyze_api.yml#/components/parameters/analyzer'
+        - $ref: 'analyze_api.yml#/components/parameters/attributes'
+        - $ref: 'analyze_api.yml#/components/parameters/char_filter'
+        - $ref: 'analyze_api.yml#/components/parameters/filter'
+        - $ref: 'analyze_api.yml#/components/parameters/normalizer'
+        - $ref: 'analyze_api.yml#/components/parameters/tokenizer'
+        - $ref: 'analyze_api.yml#/components/parameters/explain'
+        - $ref: '#/components/parameters/pretty'
+      requestBody:
+        $ref: 'analyze_api.yml#/components/requestBodies/AnalyzeRequest'
+      responses:
+        '200':
+          $ref: 'analyze_api.yml#/components/responses/AnalyzeSuccess'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /{index}/_analyze:
+    parameters:
+      - $ref: 'analyze_api.yml#/components/parameters/index'
+    get:
+      tags: [Analyze API]
+      summary: Text analysis (Index GET)
+      description: |
+        The analyze API endpoint enables text analysis by transforming unstructured text into individual tokens, typically words, optimized for search functionality. It processes a text string and returns the corresponding tokens as the output. It helps you debug and fine-tune text analysis settings for indexing and querying, providing insight into how text is broken into tokens and how filters are applied.
+      operationId: analyzeIndexedGet
+      parameters:
+        - $ref: 'analyze_api.yml#/components/parameters/analyzer'
+        - $ref: 'analyze_api.yml#/components/parameters/attributes'
+        - $ref: 'analyze_api.yml#/components/parameters/char_filter'
+        - $ref: 'analyze_api.yml#/components/parameters/field'
+        - $ref: 'analyze_api.yml#/components/parameters/filter'
+        - $ref: 'analyze_api.yml#/components/parameters/normalizer'
+        - $ref: 'analyze_api.yml#/components/parameters/tokenizer'
+        - $ref: 'analyze_api.yml#/components/parameters/explain'
+        - $ref: '#/components/parameters/pretty'
+      requestBody:
+        $ref: 'analyze_api.yml#/components/requestBodies/AnalyzeRequest'
+      responses:
+        '200':
+          $ref: 'analyze_api.yml#/components/responses/AnalyzeSuccess'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+    post:
+      tags: [Analyze API]
+      summary: Text analysis (Index POST)
+      description: |
+        The analyze API endpoint enables text analysis by transforming unstructured text into individual tokens, typically words, optimized for search functionality. It processes a text string and returns the corresponding tokens as the output. It helps you debug and fine-tune text analysis settings for indexing and querying, providing insight into how text is broken into tokens and how filters are applied.
+      operationId: analyzeIndexedPost
+      parameters:
+        - $ref: 'analyze_api.yml#/components/parameters/analyzer'
+        - $ref: 'analyze_api.yml#/components/parameters/attributes'
+        - $ref: 'analyze_api.yml#/components/parameters/char_filter'
+        - $ref: 'analyze_api.yml#/components/parameters/field'
+        - $ref: 'analyze_api.yml#/components/parameters/filter'
+        - $ref: 'analyze_api.yml#/components/parameters/normalizer'
+        - $ref: 'analyze_api.yml#/components/parameters/tokenizer'
+        - $ref: 'analyze_api.yml#/components/parameters/explain'
+        - $ref: '#/components/parameters/pretty'
+      requestBody:
+        $ref: 'analyze_api.yml#/components/requestBodies/AnalyzeRequest'
+      responses:
+        '200':
+          $ref: 'analyze_api.yml#/components/responses/AnalyzeSuccess'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /_search/scroll:
+    get:
+      tags: [Scroll]
+      summary: Scroll search (GET)
+      operationId: scrollSearchGet
+      parameters:
+        - $ref: 'search_api.yml#/components/parameters/scroll'
+        - $ref: 'search_api.yml#/components/parameters/scroll_id'
+        - $ref: 'search_api.yml#/components/parameters/rest_total_hits_as_int'
+      requestBody:
+        $ref: 'search_api.yml#/components/requestBodies/ScrollRequest'
+      responses:
+        '200':
+          $ref: 'search_api.yml#/components/responses/ScrollSuccess'
+        '400':
+          $ref: 'search_api.yml#/components/responses/ScrollBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+    post:
+      tags: [Scroll]
+      summary: Scroll search (POST)
+      operationId: scrollSearchPost
+      parameters:
+        - $ref: 'search_api.yml#/components/parameters/scroll'
+        - $ref: 'search_api.yml#/components/parameters/scroll_id'
+        - $ref: 'search_api.yml#/components/parameters/rest_total_hits_as_int'
+      requestBody:
+        $ref: 'search_api.yml#/components/requestBodies/ScrollRequest'
+      responses:
+        '200':
+          $ref: 'search_api.yml#/components/responses/ScrollSuccess'
+        '400':
+          $ref: 'search_api.yml#/components/responses/ScrollBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /_search/scroll/{scroll_id}:
+    parameters:
+      - $ref: 'search_api.yml#/components/parameters/scroll_id_path'
+    get:
+      tags: [Scroll]
+      summary: Scroll search by ID (GET)
+      operationId: scrollSearchByIdGet
+      parameters:
+        - $ref: 'search_api.yml#/components/parameters/scroll'
+        - $ref: 'search_api.yml#/components/parameters/rest_total_hits_as_int'
+      requestBody:
+        $ref: 'search_api.yml#/components/requestBodies/ScrollRequestByID'
+      responses:
+        '200':
+          $ref: 'search_api.yml#/components/responses/ScrollSuccess'
+        '400':
+          $ref: 'search_api.yml#/components/responses/ScrollBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+    post:
+      tags: [Scroll]
+      summary: Scroll search by ID (POST)
+      operationId: scrollSearchByIdPost
+      parameters:
+        - $ref: 'search_api.yml#/components/parameters/scroll'
+        - $ref: 'search_api.yml#/components/parameters/rest_total_hits_as_int'
+      requestBody:
+        $ref: 'search_api.yml#/components/requestBodies/ScrollRequestByID'
+      responses:
+        '200':
+          $ref: 'search_api.yml#/components/responses/ScrollSuccess'
+        '400':
+          $ref: 'search_api.yml#/components/responses/ScrollBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /_search:
+    get:
+      tags: [Search]
+      summary: Global search (GET)
+      operationId: searchGlobalGet
+      parameters:
+        - $ref: 'search_api.yml#/components/parameters/allow_partial_search_results'
+        - $ref: 'search_api.yml#/components/parameters/searchAnalyzer'
+        - $ref: 'search_api.yml#/components/parameters/analyze_wildcard'
+        - $ref: 'search_api.yml#/components/parameters/batched_reduce_size'
+        - $ref: 'search_api.yml#/components/parameters/cancel_after_time_interval'
+        - $ref: 'search_api.yml#/components/parameters/ccs_minimize_roundtrips'
+        - $ref: 'search_api.yml#/components/parameters/default_operator'
+        - $ref: 'search_api.yml#/components/parameters/df'
+        - $ref: 'search_api.yml#/components/parameters/docvalue_fields'
+        - $ref: 'search_api.yml#/components/parameters/expand_wildcards'
+        - $ref: 'search_api.yml#/components/parameters/searchExplain'
+        - $ref: 'search_api.yml#/components/parameters/from'
+        - $ref: 'search_api.yml#/components/parameters/ignore_throttled'
+        - $ref: 'search_api.yml#/components/parameters/ignore_unavailable'
+        - $ref: 'search_api.yml#/components/parameters/lenient'
+        - $ref: 'search_api.yml#/components/parameters/max_concurrent_shard_requests'
+        - $ref: 'search_api.yml#/components/parameters/phase_took'
+        - $ref: 'search_api.yml#/components/parameters/pre_filter_shard_size'
+        - $ref: 'search_api.yml#/components/parameters/preference'
+        - $ref: 'search_api.yml#/components/parameters/q'
+        - $ref: 'search_api.yml#/components/parameters/request_cache'
+        - $ref: 'search_api.yml#/components/parameters/rest_total_hits_as_int'
+        - $ref: 'search_api.yml#/components/parameters/routing'
+        - $ref: 'search_api.yml#/components/parameters/scroll'
+        - $ref: 'search_api.yml#/components/parameters/search_type'
+        - $ref: 'search_api.yml#/components/parameters/seq_no_primary_term'
+        - $ref: 'search_api.yml#/components/parameters/size'
+        - $ref: 'search_api.yml#/components/parameters/sort'
+        - $ref: 'search_api.yml#/components/parameters/_source'
+        - $ref: 'search_api.yml#/components/parameters/_source_excludes'
+        - $ref: 'search_api.yml#/components/parameters/_source_includes'
+        - $ref: 'search_api.yml#/components/parameters/stats'
+        - $ref: 'search_api.yml#/components/parameters/stored_fields'
+        - $ref: 'search_api.yml#/components/parameters/suggest_field'
+        - $ref: 'search_api.yml#/components/parameters/suggest_mode'
+        - $ref: 'search_api.yml#/components/parameters/suggest_size'
+        - $ref: 'search_api.yml#/components/parameters/suggest_text'
+        - $ref: 'search_api.yml#/components/parameters/terminate_after'
+        - $ref: 'search_api.yml#/components/parameters/timeout'
+        - $ref: 'search_api.yml#/components/parameters/track_scores'
+        - $ref: 'search_api.yml#/components/parameters/track_total_hits'
+        - $ref: 'search_api.yml#/components/parameters/typed_keys'
+        - $ref: 'search_api.yml#/components/parameters/version'
+        - $ref: 'search_api.yml#/components/parameters/include_named_queries_score'
+      requestBody:
+        $ref: 'search_api.yml#/components/requestBodies/SearchRequest'
+      responses:
+        '200':
+          $ref: 'search_api.yml#/components/responses/SearchSuccess'
+        '400':
+          $ref: 'search_api.yml#/components/responses/SearchBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: 'search_api.yml#/components/responses/SearchNotFound'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+    post:
+      tags: [Search]
+      summary: Global search (POST)
+      operationId: searchGlobalPost
+      parameters:
+        - $ref: 'search_api.yml#/components/parameters/allow_partial_search_results'
+        - $ref: 'search_api.yml#/components/parameters/searchAnalyzer'
+        - $ref: 'search_api.yml#/components/parameters/analyze_wildcard'
+        - $ref: 'search_api.yml#/components/parameters/batched_reduce_size'
+        - $ref: 'search_api.yml#/components/parameters/cancel_after_time_interval'
+        - $ref: 'search_api.yml#/components/parameters/ccs_minimize_roundtrips'
+        - $ref: 'search_api.yml#/components/parameters/default_operator'
+        - $ref: 'search_api.yml#/components/parameters/df'
+        - $ref: 'search_api.yml#/components/parameters/docvalue_fields'
+        - $ref: 'search_api.yml#/components/parameters/expand_wildcards'
+        - $ref: 'search_api.yml#/components/parameters/searchExplain'
+        - $ref: 'search_api.yml#/components/parameters/from'
+        - $ref: 'search_api.yml#/components/parameters/ignore_throttled'
+        - $ref: 'search_api.yml#/components/parameters/ignore_unavailable'
+        - $ref: 'search_api.yml#/components/parameters/lenient'
+        - $ref: 'search_api.yml#/components/parameters/max_concurrent_shard_requests'
+        - $ref: 'search_api.yml#/components/parameters/phase_took'
+        - $ref: 'search_api.yml#/components/parameters/pre_filter_shard_size'
+        - $ref: 'search_api.yml#/components/parameters/preference'
+        - $ref: 'search_api.yml#/components/parameters/q'
+        - $ref: 'search_api.yml#/components/parameters/request_cache'
+        - $ref: 'search_api.yml#/components/parameters/rest_total_hits_as_int'
+        - $ref: 'search_api.yml#/components/parameters/routing'
+        - $ref: 'search_api.yml#/components/parameters/scroll'
+        - $ref: 'search_api.yml#/components/parameters/search_type'
+        - $ref: 'search_api.yml#/components/parameters/seq_no_primary_term'
+        - $ref: 'search_api.yml#/components/parameters/size'
+        - $ref: 'search_api.yml#/components/parameters/sort'
+        - $ref: 'search_api.yml#/components/parameters/_source'
+        - $ref: 'search_api.yml#/components/parameters/_source_excludes'
+        - $ref: 'search_api.yml#/components/parameters/_source_includes'
+        - $ref: 'search_api.yml#/components/parameters/stats'
+        - $ref: 'search_api.yml#/components/parameters/stored_fields'
+        - $ref: 'search_api.yml#/components/parameters/suggest_field'
+        - $ref: 'search_api.yml#/components/parameters/suggest_mode'
+        - $ref: 'search_api.yml#/components/parameters/suggest_size'
+        - $ref: 'search_api.yml#/components/parameters/suggest_text'
+        - $ref: 'search_api.yml#/components/parameters/terminate_after'
+        - $ref: 'search_api.yml#/components/parameters/timeout'
+        - $ref: 'search_api.yml#/components/parameters/track_scores'
+        - $ref: 'search_api.yml#/components/parameters/track_total_hits'
+        - $ref: 'search_api.yml#/components/parameters/typed_keys'
+        - $ref: 'search_api.yml#/components/parameters/version'
+        - $ref: 'search_api.yml#/components/parameters/include_named_queries_score'
+      requestBody:
+        $ref: 'search_api.yml#/components/requestBodies/SearchRequest'
+      responses:
+        '200':
+          $ref: 'search_api.yml#/components/responses/SearchSuccess'
+        '400':
+          $ref: 'search_api.yml#/components/responses/SearchBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: 'search_api.yml#/components/responses/SearchNotFound'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /{index}/_search:
+    parameters:
+      - $ref: 'analyze_api.yml#/components/parameters/index'
+    get:
+      tags: [Search]
+      summary: Index search (GET)
+      operationId: searchIndexGet
+      parameters:
+        - $ref: 'search_api.yml#/components/parameters/allow_partial_search_results'
+        - $ref: 'search_api.yml#/components/parameters/searchAnalyzer'
+        - $ref: 'search_api.yml#/components/parameters/analyze_wildcard'
+        - $ref: 'search_api.yml#/components/parameters/batched_reduce_size'
+        - $ref: 'search_api.yml#/components/parameters/cancel_after_time_interval'
+        - $ref: 'search_api.yml#/components/parameters/ccs_minimize_roundtrips'
+        - $ref: 'search_api.yml#/components/parameters/default_operator'
+        - $ref: 'search_api.yml#/components/parameters/df'
+        - $ref: 'search_api.yml#/components/parameters/docvalue_fields'
+        - $ref: 'search_api.yml#/components/parameters/expand_wildcards'
+        - $ref: 'search_api.yml#/components/parameters/searchExplain'
+        - $ref: 'search_api.yml#/components/parameters/from'
+        - $ref: 'search_api.yml#/components/parameters/ignore_throttled'
+        - $ref: 'search_api.yml#/components/parameters/ignore_unavailable'
+        - $ref: 'search_api.yml#/components/parameters/lenient'
+        - $ref: 'search_api.yml#/components/parameters/max_concurrent_shard_requests'
+        - $ref: 'search_api.yml#/components/parameters/phase_took'
+        - $ref: 'search_api.yml#/components/parameters/pre_filter_shard_size'
+        - $ref: 'search_api.yml#/components/parameters/preference'
+        - $ref: 'search_api.yml#/components/parameters/q'
+        - $ref: 'search_api.yml#/components/parameters/request_cache'
+        - $ref: 'search_api.yml#/components/parameters/rest_total_hits_as_int'
+        - $ref: 'search_api.yml#/components/parameters/routing'
+        - $ref: 'search_api.yml#/components/parameters/scroll'
+        - $ref: 'search_api.yml#/components/parameters/search_type'
+        - $ref: 'search_api.yml#/components/parameters/seq_no_primary_term'
+        - $ref: 'search_api.yml#/components/parameters/size'
+        - $ref: 'search_api.yml#/components/parameters/sort'
+        - $ref: 'search_api.yml#/components/parameters/_source'
+        - $ref: 'search_api.yml#/components/parameters/_source_excludes'
+        - $ref: 'search_api.yml#/components/parameters/_source_includes'
+        - $ref: 'search_api.yml#/components/parameters/stats'
+        - $ref: 'search_api.yml#/components/parameters/stored_fields'
+        - $ref: 'search_api.yml#/components/parameters/suggest_field'
+        - $ref: 'search_api.yml#/components/parameters/suggest_mode'
+        - $ref: 'search_api.yml#/components/parameters/suggest_size'
+        - $ref: 'search_api.yml#/components/parameters/suggest_text'
+        - $ref: 'search_api.yml#/components/parameters/terminate_after'
+        - $ref: 'search_api.yml#/components/parameters/timeout'
+        - $ref: 'search_api.yml#/components/parameters/track_scores'
+        - $ref: 'search_api.yml#/components/parameters/track_total_hits'
+        - $ref: 'search_api.yml#/components/parameters/typed_keys'
+        - $ref: 'search_api.yml#/components/parameters/version'
+        - $ref: 'search_api.yml#/components/parameters/include_named_queries_score'
+      requestBody:
+        $ref: 'search_api.yml#/components/requestBodies/SearchRequest'
+      responses:
+        '200':
+          $ref: 'search_api.yml#/components/responses/SearchSuccess'
+        '400':
+          $ref: 'search_api.yml#/components/responses/SearchBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: 'search_api.yml#/components/responses/SearchNotFound'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+    post:
+      tags: [Search]
+      summary: Index search (POST)
+      operationId: searchIndexPost
+      parameters:
+        - $ref: 'search_api.yml#/components/parameters/allow_partial_search_results'
+        - $ref: 'search_api.yml#/components/parameters/searchAnalyzer'
+        - $ref: 'search_api.yml#/components/parameters/analyze_wildcard'
+        - $ref: 'search_api.yml#/components/parameters/batched_reduce_size'
+        - $ref: 'search_api.yml#/components/parameters/cancel_after_time_interval'
+        - $ref: 'search_api.yml#/components/parameters/ccs_minimize_roundtrips'
+        - $ref: 'search_api.yml#/components/parameters/default_operator'
+        - $ref: 'search_api.yml#/components/parameters/df'
+        - $ref: 'search_api.yml#/components/parameters/docvalue_fields'
+        - $ref: 'search_api.yml#/components/parameters/expand_wildcards'
+        - $ref: 'search_api.yml#/components/parameters/searchExplain'
+        - $ref: 'search_api.yml#/components/parameters/from'
+        - $ref: 'search_api.yml#/components/parameters/ignore_throttled'
+        - $ref: 'search_api.yml#/components/parameters/ignore_unavailable'
+        - $ref: 'search_api.yml#/components/parameters/lenient'
+        - $ref: 'search_api.yml#/components/parameters/max_concurrent_shard_requests'
+        - $ref: 'search_api.yml#/components/parameters/phase_took'
+        - $ref: 'search_api.yml#/components/parameters/pre_filter_shard_size'
+        - $ref: 'search_api.yml#/components/parameters/preference'
+        - $ref: 'search_api.yml#/components/parameters/q'
+        - $ref: 'search_api.yml#/components/parameters/request_cache'
+        - $ref: 'search_api.yml#/components/parameters/rest_total_hits_as_int'
+        - $ref: 'search_api.yml#/components/parameters/routing'
+        - $ref: 'search_api.yml#/components/parameters/scroll'
+        - $ref: 'search_api.yml#/components/parameters/search_type'
+        - $ref: 'search_api.yml#/components/parameters/seq_no_primary_term'
+        - $ref: 'search_api.yml#/components/parameters/size'
+        - $ref: 'search_api.yml#/components/parameters/sort'
+        - $ref: 'search_api.yml#/components/parameters/_source'
+        - $ref: 'search_api.yml#/components/parameters/_source_excludes'
+        - $ref: 'search_api.yml#/components/parameters/_source_includes'
+        - $ref: 'search_api.yml#/components/parameters/stats'
+        - $ref: 'search_api.yml#/components/parameters/stored_fields'
+        - $ref: 'search_api.yml#/components/parameters/suggest_field'
+        - $ref: 'search_api.yml#/components/parameters/suggest_mode'
+        - $ref: 'search_api.yml#/components/parameters/suggest_size'
+        - $ref: 'search_api.yml#/components/parameters/suggest_text'
+        - $ref: 'search_api.yml#/components/parameters/terminate_after'
+        - $ref: 'search_api.yml#/components/parameters/timeout'
+        - $ref: 'search_api.yml#/components/parameters/track_scores'
+        - $ref: 'search_api.yml#/components/parameters/track_total_hits'
+        - $ref: 'search_api.yml#/components/parameters/typed_keys'
+        - $ref: 'search_api.yml#/components/parameters/version'
+        - $ref: 'search_api.yml#/components/parameters/include_named_queries_score'
+      requestBody:
+        $ref: 'search_api.yml#/components/requestBodies/SearchRequest'
+      responses:
+        '200':
+          $ref: 'search_api.yml#/components/responses/SearchSuccess'
+        '400':
+          $ref: 'search_api.yml#/components/responses/SearchBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: 'search_api.yml#/components/responses/SearchNotFound'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /_cluster/allocation/explain:
+    get:
+      tags: [Cluster API]
+      summary: Cluster allocation explain (GET)
+      description: |
+        The cluster allocation explain request finds an unassigned shard and explains why it cannot be allocated to a node.
+      operationId: clusterAllocationExplainGet
+      parameters:
+        - $ref: 'cluster_api.yml#/components/parameters/include_yes_decisions'
+        - $ref: 'cluster_api.yml#/components/parameters/include_disk_info'
+        - $ref: '#/components/parameters/pretty'
+      requestBody:
+        $ref: 'cluster_api.yml#/components/requestBodies/ClusterAllocationExplainRequest'
+      responses:
+        '200':
+          $ref: 'cluster_api.yml#/components/responses/ClusterAllocationExplainSuccess'
+        '400':
+          $ref: 'cluster_api.yml#/components/responses/ClusterAllocExplainBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: 'cluster_api.yml#/components/responses/IndexNotFound'
+        '405':
+          $ref: 'cluster_api.yml#/components/responses/MethodNotAllowed'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+    post:
+      tags: [Cluster API]
+      summary: Cluster allocation explain (POST)
+      description: |
+        The cluster allocation explain request finds an unassigned shard and explains why it cannot be allocated to a node.
+      operationId: clusterAllocationExplainPost
+      parameters:
+        - $ref: 'cluster_api.yml#/components/parameters/include_yes_decisions'
+        - $ref: 'cluster_api.yml#/components/parameters/include_disk_info'
+        - $ref: '#/components/parameters/pretty'
+      requestBody:
+        $ref: 'cluster_api.yml#/components/requestBodies/ClusterAllocationExplainRequest'
+      responses:
+        '200':
+          $ref: 'cluster_api.yml#/components/responses/ClusterAllocationExplainSuccess'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: 'cluster_api.yml#/components/responses/IndexNotFound'
+        '405':
+          $ref: 'cluster_api.yml#/components/responses/MethodNotAllowed'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /_cluster/routing/awareness/{attribute}/weights:
+    parameters:
+      - $ref: 'cluster_api.yml#/components/parameters/awareness_attribute'
+    get:
+      tags: [Cluster API]
+      summary: Cluster routing and awareness (GET)
+      description: |
+        Cluster routing and awareness is used to control the distribution of search or HTTP traffic. You can use the weights per awareness attribute to control the distribution of search or HTTP traffic across zones. This is commonly used for zonal deployments, heterogeneous instances, and routing traffic away from zones during zonal failure.
+      operationId: getClusterRoutingAwarenessWeights
+      parameters:
+        - $ref: '#/components/parameters/format'
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: 'cluster_api.yml#/components/responses/ClusterRoutingWeightsSuccess'
+        '400':
+          $ref: 'cluster_api.yml#/components/responses/ClusterRoutingBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cluster_api.yml#/components/responses/ClusterRoutingForbidden'
+        '500':
+          $ref: 'cluster_api.yml#/components/responses/ClusterRoutingServerError'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+    put:
+      tags: [Cluster API]
+      summary: Cluster routing and awareness (PUT)
+      description: |
+        Cluster routing and awareness is used to control the distribution of search or HTTP traffic. You can use the weights per awareness attribute to control the distribution of search or HTTP traffic across zones. This is commonly used for zonal deployments, heterogeneous instances, and routing traffic away from zones during zonal failure.
+      operationId: setClusterRoutingAwarenessWeights
+      parameters:
+        - $ref: '#/components/parameters/format'
+        - $ref: '#/components/parameters/pretty'
+      requestBody:
+        $ref: 'cluster_api.yml#/components/requestBodies/ClusterRoutingWeightsRequest'
+      responses:
+        '200':
+          $ref: 'cluster_api.yml#/components/responses/ClusterRoutingWeightsSuccess'
+        '400':
+          $ref: 'cluster_api.yml#/components/responses/ClusterRoutingBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cluster_api.yml#/components/responses/ClusterRoutingForbidden'
+        '500':
+          $ref: 'cluster_api.yml#/components/responses/ClusterRoutingServerError'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+    delete:
+      tags: [Cluster API]
+      summary: Cluster routing and awareness (DELETE)
+      description: |
+        Cluster routing and awareness is used to control the distribution of search or HTTP traffic. You can use the weights per awareness attribute to control the distribution of search or HTTP traffic across zones. This is commonly used for zonal deployments, heterogeneous instances, and routing traffic away from zones during zonal failure.
+      operationId: deleteClusterRoutingAwarenessWeights
+      parameters:
+        - $ref: '#/components/parameters/format'
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: 'cluster_api.yml#/components/responses/ClusterRoutingDeleteSuccess'
+        '400':
+          $ref: 'cluster_api.yml#/components/responses/ClusterRoutingBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cluster_api.yml#/components/responses/ClusterRoutingForbidden'
+        '500':
+          $ref: 'cluster_api.yml#/components/responses/ClusterRoutingServerError'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /_cluster/decommission/awareness/{awareness_attribute_name}/{awareness_attribute_value}:
+    parameters:
+      - $ref: 'cluster_api.yml#/components/parameters/awareness_attribute_name'
+      - $ref: 'cluster_api.yml#/components/parameters/awareness_attribute_value'
+    put:
+      tags: [Cluster API]
+      summary: Cluster decommission (PUT)
+      description: |
+        The cluster decommission operation adds support for awareness based decommissioning. It greatly benefits multi-zone deployments where awareness attributes, such as zones, can aid in applying new upgrades to a cluster in a controlled fashion. This is especially useful during outages, in which case, you can decommission the unhealthy zone to prevent replication requests from stalling and prevent your request backlog from becoming too large.
+      operationId: decommissionAwareness
+      parameters:
+        - $ref: '#/components/parameters/format'
+      responses:
+        '200':
+          $ref: 'cluster_api.yml#/components/responses/DecommissionSuccess'
+        '400':
+          $ref: 'cluster_api.yml#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cluster_api.yml#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /_cluster/decommission/awareness/{awareness_attribute_name}/_status:
+    parameters:
+      - $ref: 'cluster_api.yml#/components/parameters/awareness_attribute_name'
+    get:
+      tags: [Cluster API]
+      summary: Cluster decommission (GET)
+      description: |
+        The cluster decommission operation adds support for awareness based decommissioning. It greatly benefits multi-zone deployments where awareness attributes, such as zones, can aid in applying new upgrades to a cluster in a controlled fashion. This is especially useful during outages, in which case, you can decommission the unhealthy zone to prevent replication requests from stalling and prevent your request backlog from becoming too large.
+      operationId: getDecommissionStatus
+      parameters:
+        - $ref: '#/components/parameters/format'
+      responses:
+        '200':
+          $ref: 'cluster_api.yml#/components/responses/DecommissionSuccess'
+        '400':
+          $ref: 'cluster_api.yml#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cluster_api.yml#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /_cluster/decommission/awareness:
+    delete:
+      tags: [Cluster API]
+      summary: Cluster decommission (DELETE)
+      description: |
+        The cluster decommission operation adds support for awareness based decommissioning. It greatly benefits multi-zone deployments where awareness attributes, such as zones, can aid in applying new upgrades to a cluster in a controlled fashion. This is especially useful during outages, in which case, you can decommission the unhealthy zone to prevent replication requests from stalling and prevent your request backlog from becoming too large.
+      operationId: cancelDecommission
+      parameters:
+        - $ref: '#/components/parameters/format'
+      responses:
+        '200':
+          $ref: 'cluster_api.yml#/components/responses/DecommissionSuccess'
+        '400':
+          $ref: 'cluster_api.yml#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cluster_api.yml#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /_cluster/health:
+    get:
+      tags: [Cluster API]
+      summary: Cluster health
+      description: |
+        The cluster health API returns a simple status of the health of your cluster. The cluster health is represented in three colors: green, yellow, and red. A green status means all primary shards and their replicas are allocated to nodes. A yellow status means all primary shards are allocated to nodes, but some replicas aren't. A red status means at least one primary shard is not allocated to any node.
+      operationId: clusterHealth
+      parameters:
+        - $ref: 'cluster_api.yml#/components/parameters/expand_wildcards'
+        - $ref: 'cluster_api.yml#/components/parameters/level'
+        - $ref: 'cluster_api.yml#/components/parameters/awareness_attribute_health'
+        - $ref: 'cluster_api.yml#/components/parameters/local'
+        - $ref: 'cluster_api.yml#/components/parameters/cluster_manager_timeout'
+        - $ref: 'cluster_api.yml#/components/parameters/timeout'
+        - $ref: 'cluster_api.yml#/components/parameters/wait_for_active_shards'
+        - $ref: 'cluster_api.yml#/components/parameters/wait_for_nodes'
+        - $ref: 'cluster_api.yml#/components/parameters/wait_for_events'
+        - $ref: 'cluster_api.yml#/components/parameters/wait_for_no_relocating_shards'
+        - $ref: 'cluster_api.yml#/components/parameters/wait_for_no_initializing_shards'
+        - $ref: 'cluster_api.yml#/components/parameters/wait_for_status'
+        - $ref: 'cluster_api.yml#/components/parameters/weights'
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: 'cluster_api.yml#/components/responses/ClusterHealthSuccess'
+        '400':
+          $ref: 'cluster_api.yml#/components/responses/ClusterHealthBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cluster_api.yml#/components/responses/ClusterHealthForbidden'
+        '405':
+          $ref: 'cluster_api.yml#/components/responses/ClusterHealthMethodNotAllowed'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /_cluster/health/{index}:
+    get:
+      tags: [Cluster API]
+      summary: Cluster health (Index)
+      description: |
+        The cluster health API returns a simple status of the health of your cluster. The cluster health is represented in three colors: green, yellow, and red. A green status means all primary shards and their replicas are allocated to nodes. A yellow status means all primary shards are allocated to nodes, but some replicas aren't. A red status means at least one primary shard is not allocated to any node.
+      operationId: clusterHealthIndex
+      parameters:
+        - $ref: 'cluster_api.yml#/components/parameters/cluster_health_index'
+        - $ref: 'cluster_api.yml#/components/parameters/expand_wildcards'
+        - $ref: 'cluster_api.yml#/components/parameters/level'
+        - $ref: 'cluster_api.yml#/components/parameters/awareness_attribute_health'
+        - $ref: 'cluster_api.yml#/components/parameters/local'
+        - $ref: 'cluster_api.yml#/components/parameters/cluster_manager_timeout'
+        - $ref: 'cluster_api.yml#/components/parameters/timeout'
+        - $ref: 'cluster_api.yml#/components/parameters/wait_for_active_shards'
+        - $ref: 'cluster_api.yml#/components/parameters/wait_for_nodes'
+        - $ref: 'cluster_api.yml#/components/parameters/wait_for_events'
+        - $ref: 'cluster_api.yml#/components/parameters/wait_for_no_relocating_shards'
+        - $ref: 'cluster_api.yml#/components/parameters/wait_for_no_initializing_shards'
+        - $ref: 'cluster_api.yml#/components/parameters/wait_for_status'
+        - $ref: 'cluster_api.yml#/components/parameters/weights'
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: 'cluster_api.yml#/components/responses/ClusterHealthSuccess'
+        '400':
+          $ref: 'cluster_api.yml#/components/responses/ClusterHealthBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cluster_api.yml#/components/responses/ClusterHealthForbidden'
+        '405':
+          $ref: 'cluster_api.yml#/components/responses/ClusterHealthMethodNotAllowed'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /_cluster/settings:
+    get:
+      tags: [Cluster API]
+      summary: Cluster settings (GET)
+      description: |
+        The cluster settings operation allows you to view and modify the current settings for your cluster, as well as review the default settings. Any setting updates made through the API are applied to all nodes within the cluster by Wazuh indexer.
+
+        The request body is only supported by PUT operation. Not all settings can be updated via the cluster settings API, some settings are only available in the configuration file. When you try to update a setting that is not supported by the cluster setting API, a `"setting [cluster.some.setting], not dynamically updateable"` response is received.
+
+        The cluster settings API contains three types of settings: persistent, transient, and default. Persistent settings remain after a cluster restart, unlike transient settings, which the Wazuh indexer removes after a restart. When the same setting is specified in multiple places, the following hierarchy is followed by the Wazuh indexer:
+
+        - Transient settings
+        - Persistent settings
+        - Settings from the `/etc/wazuh-indexer/opensearch.yml` file
+        - Default settings
+
+        The cluster setting API PUT operation must contain either `transient` or `persistent` value. To check available settings, you can run the GET request with the `include_defaults` parameter and copy any setting to edit the required setting.
+      operationId: getClusterSettings
+      parameters:
+        - $ref: 'cluster_api.yml#/components/parameters/flat_settings'
+        - $ref: 'cluster_api.yml#/components/parameters/include_defaults'
+        - $ref: 'cluster_api.yml#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: 'cluster_api.yml#/components/responses/ClusterSettingsSuccess'
+        '400':
+          $ref: 'cluster_api.yml#/components/responses/ClusterSettingsBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cluster_api.yml#/components/responses/ClusterSettingsForbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+    put:
+      tags: [Cluster API]
+      summary: Cluster settings (PUT)
+      description: |
+        The cluster settings operation allows you to view and modify the current settings for your cluster, as well as review the default settings. Any setting updates made through the API are applied to all nodes within the cluster by Wazuh indexer.
+
+        The request body is only supported by PUT operation. Not all settings can be updated via the cluster settings API, some settings are only available in the configuration file. When you try to update a setting that is not supported by the cluster setting API, a `"setting [cluster.some.setting], not dynamically updateable"` response is received.
+
+        The cluster settings API contains three types of settings: persistent, transient, and default. Persistent settings remain after a cluster restart, unlike transient settings, which the Wazuh indexer removes after a restart. When the same setting is specified in multiple places, the following hierarchy is followed by the Wazuh indexer:
+
+        - Transient settings
+        - Persistent settings
+        - Settings from the `/etc/wazuh-indexer/opensearch.yml` file
+        - Default settings
+
+        The cluster setting API PUT operation must contain either `transient` or `persistent` value. To check available settings, you can run the GET request with the `include_defaults` parameter and copy any setting to edit the required setting.
+      operationId: putClusterSettings
+      parameters:
+        - $ref: 'cluster_api.yml#/components/parameters/flat_settings'
+        - $ref: 'cluster_api.yml#/components/parameters/cluster_manager_timeout'
+        - $ref: 'cluster_api.yml#/components/parameters/timeout'
+        - $ref: '#/components/parameters/pretty'
+      requestBody:
+        $ref: 'cluster_api.yml#/components/requestBodies/ClusterSettingsRequest'
+      responses:
+        '200':
+          $ref: 'cluster_api.yml#/components/responses/ClusterSettingsSuccess'
+        '400':
+          $ref: 'cluster_api.yml#/components/responses/ClusterSettingsBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cluster_api.yml#/components/responses/ClusterSettingsForbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /_cluster/stats:
+    get:
+      tags:
+        - Cluster API
+      summary: Cluster stats
+      description: The cluster stats API operation returns statistics about your cluster.
+      operationId: getClusterStats
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: 'cluster_api.yml#/components/responses/ClusterStatsSuccess'
+        '400':
+          $ref: 'cluster_api.yml#/components/responses/ClusterStatsBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cluster_api.yml#/components/responses/ClusterStatsForbidden'
+        '405':
+          $ref: 'cluster_api.yml#/components/responses/ClusterStatsMethodNotAllowed'
+
+  /_cluster/stats/nodes/{node_filters}:
+    get:
+      tags:
+        - Cluster API
+      summary: Cluster stats (Node filters)
+      description: The cluster stats API operation returns statistics about your cluster.
+      operationId: getClusterStatsWithNodeFilters
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'cluster_api.yml#/components/parameters/node_filters'
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: 'cluster_api.yml#/components/responses/ClusterStatsSuccess'
+        '400':
+          $ref: 'cluster_api.yml#/components/responses/ClusterStatsBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cluster_api.yml#/components/responses/ClusterStatsForbidden'
+        '405':
+          $ref: 'cluster_api.yml#/components/responses/ClusterStatsMethodNotAllowed'
+
+  /_cluster/stats/{metric}/nodes/{node_filters}:
+    get:
+      tags:
+        - Cluster API
+      summary: Cluster stats (Metric and node filters)
+      description: The cluster stats API operation returns statistics about your cluster.
+      operationId: getClusterStatsWithMetricAndNodeFilters
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'cluster_api.yml#/components/parameters/node_filters'
+        - $ref: 'cluster_api.yml#/components/parameters/metric'
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: 'cluster_api.yml#/components/responses/ClusterStatsSuccess'
+        '400':
+          $ref: 'cluster_api.yml#/components/responses/ClusterStatsBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cluster_api.yml#/components/responses/ClusterStatsForbidden'
+        '405':
+          $ref: 'cluster_api.yml#/components/responses/ClusterStatsMethodNotAllowed'
+
+  /_cluster/stats/{metric}/{index_metric}/nodes/{node_filters}:
+    get:
+      tags:
+        - Cluster API
+      summary: Cluster stats (Metric, index metric and node filters)
+      description: The cluster stats API operation returns statistics about your cluster.
+      operationId: getClusterStatsWithMetricIndexMetricAndNodeFilters
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'cluster_api.yml#/components/parameters/node_filters'
+        - $ref: 'cluster_api.yml#/components/parameters/metric'
+        - $ref: 'cluster_api.yml#/components/parameters/index_metric'
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: 'cluster_api.yml#/components/responses/ClusterStatsSuccess'
+        '400':
+          $ref: 'cluster_api.yml#/components/responses/ClusterStatsBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cluster_api.yml#/components/responses/ClusterStatsForbidden'
+        '405':
+          $ref: 'cluster_api.yml#/components/responses/ClusterStatsMethodNotAllowed'
+
+components:
+  parameters:
+    pretty:
+      name: pretty
+      in: query
+      description: Show results in human-readable format.
+      schema:
+        type: boolean
+        default: false
+
+    format:
+      name: format
+      in: query
+      description: A short version of the `Accept` header, such as `json` or `yaml`.
+      schema:
+        type: string
+        enum: [json, yaml]
+
+  schemas:
+    ApiInfo:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The unique name of the specific Wazuh indexer node that responded to the request. In a multi-node cluster, this will be the name of the node that handled the request.
+        cluster_name:
+          type: string
+          description: The name of the cluster which the Wazuh indexer is joined to.
+        cluster_uuid:
+          type: string
+          description: A unique ID that identifies the Wazuh indexer node's cluster. This ID is generated when the cluster is first formed and remains constant.
+        version:
+          $ref: '#/components/schemas/VersionInfo'
+        tagline:
+          type: string
+          description: Project description
+
+    VersionInfo:
+      type: object
+      properties:
+        number:
+          type: string
+          description: The version number of the Wazuh indexer node.
+        build_type:
+          type: string
+          description: Describes how the build was packaged (e.g., `rpm`, `deb`, `tar`).
+        build_hash:
+          type: string
+          description: A short hash of the Git commit from which this build was created. Useful for debugging and identifying the exact source code version.
+        build_date:
+          type: string
+          format: date-time
+          description: The date and time when this particular build was created.
+        build_snapshot:
+          type: boolean
+          description: A boolean indicating if this is a snapshot build (development version) or a release build (`false` for releases).
+        lucene_version:
+          type: string
+          description: The version of Apache Lucene, the underlying search library that Wazuh indexer uses.
+        minimum_wire_compatibility_version:
+          type: string
+          description: The minimum version of Wazuh indexer that this node can communicate with over the network. Ensures backward compatibility.
+        minimum_index_compatibility_version:
+          type: string
+          description: The minimum version of Wazuh indexer that this node can read indices created by. Ensures backward compatibility for stored data.
+
+    SecurityError:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            root_cause:
+              type: array
+              items:
+                type: object
+                properties:
+                  type: { type: string }
+                  reason: { type: string }
+            type: { type: string }
+            reason: { type: string }
+        status: { type: integer }
+
+  responses:
+    BadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  root_cause:
+                    type: object
+                    properties:
+                      type: { type: string }
+                      reason: { type: string }
+              status: { type: integer }
+          examples:
+            missingText:
+              value:
+                error:
+                  root_cause:
+                    - type: "action_request_validation_exception"
+                      reason: "Validation Failed: 1: text is missing;"
+                  type: "action_request_validation_exception"
+                  reason: "Validation Failed: 1: text is missing;"
+                status: 400
+
+    Unauthorized:
+      description: Response to report an unauthorized request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              root_cause:
+                type: string
+          example: "Unauthorized"
+
+    ForbiddenApiInfo:
+      description: Response to report a permission denied request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SecurityError'
+          example:
+            error:
+              root_cause:
+                - type: "security_exception"
+                  reason: "no permissions for [/] and User [name=test, backend_roles=[], requestedTenant=null]"
+              type: "security_exception"
+              reason: "no permissions for [/] and User [name=test, backend_roles=[], requestedTenant=null]"
+            status: 403
+
+    Forbidden:
+      description: Response to report a permission denied request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SecurityError'
+          example:
+            error:
+              root_cause:
+                - type: "security_exception"
+                  reason: "no permissions for [indices:admin/analyze] and User [name=test, backend_roles=[], requestedTenant=null]"
+              type: "security_exception"
+              reason: "no permissions for [indices:admin/analyze] and User [name=test, backend_roles=[], requestedTenant=null]"
+            status: 403
+
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Basic HTTP authentication
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT Bearer token authentication
+
+tags:
+  - name: Get API info
+    description: Wazuh indexer API information
+  - name: Analyze API
+  - name: Cluster API
+    description: The cluster APIs allow you to manage your cluster. You can use them to check cluster health, modify settings, retrieve statistics, and more.
+  - name: Scroll
+    description: |
+      You can utilize the scroll operation to obtain a substantial number of results. For instance, when looking for machine learning jobs, you can request an unlimited number of results in separate batches.
+
+      To implement the scroll operation, include a scroll parameter in the request header along with a search context that indicates to the indexer how long you wish to continue scrolling. This search context should be sufficiently lengthy to allow for processing a single batch of results.
+
+      Since search contexts can be memory-intensive, it's advisable to avoid using the scroll operation for frequent user queries. Instead, consider utilizing the sort parameter in conjunction with the search_after parameter to paginate through results for user queries.
+  - name: Search
+    description: The Search API operation allows you to perform a search request to find data within your cluster.
