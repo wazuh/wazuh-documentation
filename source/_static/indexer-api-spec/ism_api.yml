@@ -1,0 +1,112 @@
+openapi: 3.0.0
+
+components:
+  schemas:
+    PolicyRequest:
+      type: object
+      required:
+        - policy
+      properties:
+        policy:
+          type: object
+          description: The policy definition that includes policy metadata, description, default state, and the states.
+          required:
+            - description
+            - default_state
+            - states
+          properties:
+            description:
+              type: string
+              description: A human-readable description of the policy
+            default_state:
+              type: string
+              description: The initial state to apply when the policy is first assigned to an index
+            states:
+              type: array
+              description: A list of states that define the lifecycle behavior
+              items:
+                $ref: '#/components/schemas/PolicyState'
+            schema_version:
+              type: integer
+              description: The schema version number used for internal tracking of policy changes
+            last_updated_time:
+              type: integer
+              format: int64
+              description: Timestamp in ms of the last update to the policy. This is typically set automatically and does not need to be included in requests.
+
+    PolicyState:
+      type: object
+      required:
+        - name
+        - actions
+        - transitions
+      properties:
+        name:
+          type: string
+          description: The name of the state
+        actions:
+          type: array
+          description: List of actions like `rollover`, `delete`, `read_only`, etc.
+          items:
+            type: object
+        transitions:
+          type: array
+          description: List of transitions to other states, optionally based on conditions. (e.g., `min_index_age`).
+          items:
+            type: object
+            properties:
+              state_name:
+                type: string
+              conditions:
+                type: object
+
+    PolicyResponse:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The unique identifier of the policy
+        _version:
+          type: integer
+          description: The version number of the policy, incremented on each update
+        _primary_term:
+          type: integer
+          description: The primary term used for optimistic concurrency control within the Wazuh indexer
+        _seq_no:
+          type: integer
+          description: The sequence number for internal versioning
+        policy:
+          type: object
+          properties:
+            policy:
+              type: object
+              properties:
+                policy_id:
+                  type: string
+                  description: The identifier of the policy
+                description:
+                  type: string
+                  description: A description of what the policy is for
+                last_updated_time:
+                  type: integer
+                  format: int64
+                  description: Timestamp in ms of the last time the policy was updated
+                schema_version:
+                  type: integer
+                  description: Schema version of the policy definition
+                error_notification:
+                  type: object
+                  nullable: true
+                  description: Optional field for setting up notifications on policy errors
+                default_state:
+                  type: string
+                  description: The name of the state where the policy begins
+                states:
+                  type: array
+                  description: A list of lifecycle states the index will pass through
+                  items:
+                    $ref: '#/components/schemas/PolicyState'
+                ism_template:
+                  type: object
+                  nullable: true
+                  description: Defines index templates to which this policy applies
