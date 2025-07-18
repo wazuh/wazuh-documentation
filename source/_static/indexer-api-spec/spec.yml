@@ -1015,6 +1015,68 @@ paths:
         '405':
           $ref: 'cluster_api.yml#/components/responses/ClusterStatsMethodNotAllowed'
 
+  /_plugins/_ism/policies/{policy_id}:
+    put:
+      tags:
+        - Index State Management API
+      summary: Create policy
+      description: This API operation creates  a policy.
+      operationId: createPolicy
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: policy_id
+          in: path
+          required: true
+          description: A unique identifier used to reference the policy being created.
+          schema:
+            type: string
+        - name: if_seq_no
+          in: query
+          description: Performs the operation only if the policy has the specified sequence number.
+          schema:
+            type: integer
+        - name: if_primary_term
+          in: query
+          description: Performs the operation only if the policy has the specified primary term.
+          schema:
+            type: integer
+        - name: refresh
+          in: query
+          description: Specifies if the affected shards should be refreshed.
+          schema:
+            type: string
+            enum: ["true", "false", "wait_for"]
+            default: "false"
+        - $ref: '#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: 'ism_api.yml#/components/schemas/PolicyRequest'
+            example:
+              policy:
+                description: "ingesting logs"
+                default_state: "ingest"
+                states:
+                  - name: "ingest"
+                    actions:
+                      - rollover:
+                          min_doc_count: 5
+                    transitions:
+                      - state_name: "search"
+                  - name: "search"
+                    actions: []
+                    transitions:
+                      - state_name: "delete"
+                        conditions:
+                          min_index_age: "5m"
+                  - name: "delete"
+                    actions:
+                      - delete: {}
+                    transitions: []
 components:
   parameters:
     pretty:
@@ -1184,6 +1246,8 @@ tags:
   - name: Analyze API
   - name: Cluster API
     description: The cluster APIs allow you to manage your cluster. You can use them to check cluster health, modify settings, retrieve statistics, and more.
+  - name: Index State Management API
+    description: The Index State Management (ISM) API operations allow you to programmatically manage index policies and the lifecycle of indexes in the Wazuh indexer
   - name: Scroll
     description: |
       You can utilize the scroll operation to obtain a substantial number of results. For instance, when looking for machine learning jobs, you can request an unlimited number of results in separate batches.
