@@ -131,7 +131,7 @@ paths:
         - basicAuth: []
         - jwtAuth: []
 
-  /{INDEX}/_analyze:
+  /{index}/_analyze:
     parameters:
       - $ref: 'analyze_api.yml#/components/parameters/index'
     get:
@@ -243,7 +243,7 @@ paths:
         - basicAuth: []
         - jwtAuth: []
 
-  /_search/scroll/{SCROLL_ID}:
+  /_search/scroll/{scroll_id}:
     parameters:
       - $ref: 'search_api.yml#/components/parameters/scroll_id_path'
     get:
@@ -423,7 +423,7 @@ paths:
         - basicAuth: []
         - jwtAuth: []
 
-  /{INDEX}/_search:
+  /{index}/_search:
     parameters:
       - $ref: 'analyze_api.yml#/components/parameters/index'
     get:
@@ -912,6 +912,108 @@ paths:
       security:
         - basicAuth: []
         - jwtAuth: []
+
+  /_cluster/stats:
+    get:
+      tags:
+        - Cluster API
+      summary: Cluster stats
+      description: The cluster stats API operation returns statistics about your cluster.
+      operationId: getClusterStats
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: 'cluster_api.yml#/components/responses/ClusterStatsSuccess'
+        '400':
+          $ref: 'cluster_api.yml#/components/responses/ClusterStatsBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cluster_api.yml#/components/responses/ClusterStatsForbidden'
+        '405':
+          $ref: 'cluster_api.yml#/components/responses/ClusterStatsMethodNotAllowed'
+
+  /_cluster/stats/nodes/{node_filters}:
+    get:
+      tags:
+        - Cluster API
+      summary: Cluster stats (Node filters)
+      description: The cluster stats API operation returns statistics about your cluster.
+      operationId: getClusterStatsWithNodeFilters
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'cluster_api.yml#/components/parameters/node_filters'
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: 'cluster_api.yml#/components/responses/ClusterStatsSuccess'
+        '400':
+          $ref: 'cluster_api.yml#/components/responses/ClusterStatsBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cluster_api.yml#/components/responses/ClusterStatsForbidden'
+        '405':
+          $ref: 'cluster_api.yml#/components/responses/ClusterStatsMethodNotAllowed'
+
+  /_cluster/stats/{metric}/nodes/{node_filters}:
+    get:
+      tags:
+        - Cluster API
+      summary: Cluster stats (Metric and node filters)
+      description: The cluster stats API operation returns statistics about your cluster.
+      operationId: getClusterStatsWithMetricAndNodeFilters
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'cluster_api.yml#/components/parameters/node_filters'
+        - $ref: 'cluster_api.yml#/components/parameters/metric'
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: 'cluster_api.yml#/components/responses/ClusterStatsSuccess'
+        '400':
+          $ref: 'cluster_api.yml#/components/responses/ClusterStatsBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cluster_api.yml#/components/responses/ClusterStatsForbidden'
+        '405':
+          $ref: 'cluster_api.yml#/components/responses/ClusterStatsMethodNotAllowed'
+
+  /_cluster/stats/{metric}/{index_metric}/nodes/{node_filters}:
+    get:
+      tags:
+        - Cluster API
+      summary: Cluster stats (Metric, index metric and node filters)
+      description: The cluster stats API operation returns statistics about your cluster.
+      operationId: getClusterStatsWithMetricIndexMetricAndNodeFilters
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'cluster_api.yml#/components/parameters/node_filters'
+        - $ref: 'cluster_api.yml#/components/parameters/metric'
+        - $ref: 'cluster_api.yml#/components/parameters/index_metric'
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: 'cluster_api.yml#/components/responses/ClusterStatsSuccess'
+        '400':
+          $ref: 'cluster_api.yml#/components/responses/ClusterStatsBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cluster_api.yml#/components/responses/ClusterStatsForbidden'
+        '405':
+          $ref: 'cluster_api.yml#/components/responses/ClusterStatsMethodNotAllowed'
 
 components:
   parameters:

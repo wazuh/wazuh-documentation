@@ -186,6 +186,37 @@ components:
       schema:
         type: boolean
 
+    node_filters:
+      name: node_filters
+      in: path
+      required: true
+      description: |
+        A comma-separated list of node filters that Wazuh indexer uses to filter results. The following are supported:
+        - Predefined constants: `_local`, `_cluster_manager`, or `_all`
+        - An exact match for `nodeID`
+        - A simple case-sensitive wildcard pattern matching for node-name, host-name, or host-IP-address
+        - A simple case-sensitive wildcard pattern matching for node attributes: `<NODE_ATTRIBUTE*>:<ATTRIBUTE_VALUE*>`
+      schema:
+        type: string
+
+    metric:
+      name: metric
+      in: path
+      required: true
+      description: A comma-separated list of metric groups.
+      schema:
+        type: string
+        enum: [indices, os, process, jvm, fs, plugins, network_types, discovery_type, ingest]
+
+    index_metric:
+      name: index_metric
+      in: path
+      required: true
+      description: A comma-separated list of index metric groups.
+      schema:
+        type: string
+        enum: [shards, docs, store, fielddata, query_cache, completion, segments, mappings, analysis]
+
   schemas:
     ClusterAllocationExplainRequest:
       type: object
@@ -336,7 +367,7 @@ components:
         acknowledged:
           type: boolean
 
-    ClusterRoutingError:
+    ClusterException:
       type: object
       properties:
         error:
@@ -463,6 +494,110 @@ components:
         status:
           type: integer
 
+    ClusterStatsResponse:
+      type: object
+      properties:
+        _nodes:
+          type: object
+          description: The number of nodes returned in the response.
+          properties:
+            total:
+              type: integer
+            successful:
+              type: integer
+            failed:
+              type: integer
+        cluster_name:
+          type: string
+          description: The cluster's name.
+        cluster_uuid:
+          type: string
+          description: The cluster's UUID.
+        timestamp:
+          type: integer
+          description: The Unix epoch time indicating when the cluster was last refreshed.
+        status:
+          type: string
+          description: The cluster's health status.
+        indices:
+          type: object
+          properties:
+            count:
+              type: integer
+              description: The number of indexes in the cluster.
+            shards:
+              type: object
+              description: Information about the cluster's shards.
+            docs:
+              type: object
+              description: The number of documents remaining in the cluster and the number of documents that were deleted.
+            store:
+              type: object
+              description: Information about the cluster's storage.
+            fielddata:
+              type: object
+              description: Information about the cluster's field data.
+            query_cache:
+              type: object
+              description: Data about the cluster's query cache.
+            completion:
+              type: object
+              description: The number of bytes in memory that were used to complete operations.
+            segments:
+              type: object
+              description: Information about the cluster's segments, which are small Lucene indexes.
+            mappings:
+              type: object
+              description: Information about mappings in the cluster.
+            analysis:
+              type: object
+              description: Information about analyzers used in the cluster.
+        nodes:
+          type: object
+          properties:
+            count:
+              type: object
+              description: The number of nodes returned by the request.
+            versions:
+              type: array
+              items:
+                type: string
+              description: The Wazuh indexer version number for each node.
+            os:
+              type: object
+              description: Information about the operating systems used by the nodes.
+            process:
+              type: object
+              description: A list of processes used by each node.
+            jvm:
+              type: object
+              description: Statistics about the JVMs in use.
+            fs:
+              type: object
+              description: Information about the node's file storage.
+            plugins:
+              type: array
+              items:
+                type: object
+              description: A list of the Wazuh indexer plugins integrated with the nodes.
+            network_types:
+              type: object
+              description: A list of the transport and HTTP networks connected to the nodes.
+            discovery_types:
+              type: object
+              description: A list of methods used by the nodes to find other nodes in the cluster.
+            packaging_types:
+              type: array
+              items:
+                type: object
+              description: Information about each node's Wazuh indexer distribution.
+            ingest:
+              type: object
+              description: Information about the node's ingest pipelines/nodes, if there are any.
+        total_time_spent:
+          type: integer
+          description: The total amount of download and upload time spent across all shards in the cluster when downloading or uploading from the remote store.
+
   requestBodies:
     ClusterAllocationExplainRequest:
       content:
@@ -535,7 +670,7 @@ components:
                       type: { type: string }
                       reason: { type: string }
               status: { type: integer }
-          examples:
+          example:
             missingText:
               value:
                 error:
@@ -601,7 +736,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ClusterRoutingError'
+            $ref: '#/components/schemas/ClusterException'
           example:
             error:
               root_cause:
@@ -616,7 +751,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ClusterRoutingError'
+            $ref: '#/components/schemas/ClusterException'
           example:
             error:
               root_cause:
@@ -631,7 +766,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ClusterRoutingError'
+            $ref: '#/components/schemas/ClusterException'
           example:
             error:
               root_cause:
@@ -659,7 +794,7 @@ components:
         application/json:
           schema:
             $ref: 'spec.yml#/components/schemas/SecurityError'
-          examples:
+          example:
             scrollError:
               value:
                 error:
@@ -716,7 +851,7 @@ components:
         application/json:
           schema:
             $ref: 'spec.yml#/components/schemas/SecurityError'
-          examples:
+          example:
             scrollError:
               value:
                 error:
@@ -785,7 +920,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ClusterRoutingError'
+            $ref: '#/components/schemas/ClusterException'
           example:
             error:
               root_cause:
@@ -794,3 +929,303 @@ components:
               type: "security_exception"
               reason: "no permissions for [cluster:admin/settings/update] and User [name=test, backend_roles=[], requestedTenant=null]"
             status: 403
+
+    ClusterStatsSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ClusterStatsResponse'
+          example:
+            _nodes:
+              total: 1
+              successful: 1
+              failed: 0
+            cluster_name: "wazuh-cluster"
+            cluster_uuid: "WsfeldPUTGukOF2OYtQUQQ"
+            timestamp: 1742951639741
+            status: "green"
+            indices:
+              count: 66
+              shards:
+                total: 146
+                primaries: 146
+                replication: 0.0
+                index:
+                  shards:
+                    min: 1
+                    max: 3
+                    avg: 2.212121212121212
+                  primaries:
+                    min: 1
+                    max: 3
+                    avg: 2.212121212121212
+                  replication:
+                    min: 0.0
+                    max: 0.0
+                    avg: 0.0
+              docs:
+                count: 36182
+                deleted: 77
+              store:
+                size_in_bytes: 76027454
+                reserved_in_bytes: 0
+              fielddata:
+                memory_size_in_bytes: 0
+                evictions: 0
+              query_cache:
+                memory_size_in_bytes: 0
+                total_count: 0
+                hit_count: 0
+                miss_count: 0
+                cache_size: 0
+                cache_count: 0
+                evictions: 0
+              completion:
+                size_in_bytes: 0
+              segments:
+                count: 678
+                memory_in_bytes: 0
+                terms_memory_in_bytes: 0
+                stored_fields_memory_in_bytes: 0
+                term_vectors_memory_in_bytes: 0
+                norms_memory_in_bytes: 0
+                points_memory_in_bytes: 0
+                doc_values_memory_in_bytes: 0
+                index_writer_memory_in_bytes: 0
+                version_map_memory_in_bytes: 0
+                fixed_bit_set_memory_in_bytes: 28920
+                max_unsafe_auto_id_timestamp: 1742919403510
+                remote_store:
+                  upload:
+                    total_upload_size:
+                      started_bytes: 0
+                      succeeded_bytes: 0
+                      failed_bytes: 0
+                    refresh_size_lag:
+                      total_bytes: 0
+                      max_bytes: 0
+                    max_refresh_time_lag_in_millis: 0
+                    total_time_spent_in_millis: 0
+                    pressure:
+                      total_rejections: 0
+                  download:
+                    total_download_size:
+                      started_bytes: 0
+                      succeeded_bytes: 0
+                      failed_bytes: 0
+                    total_time_spent_in_millis: 0
+                segment_replication:
+                  max_bytes_behind: 0
+                  total_bytes_behind: 0
+                  max_replication_lag: 0
+                file_sizes: {}
+              mappings:
+                field_types:
+                  - name: "boolean"
+                    count: 45
+                    index_count: 42
+                  - name: "date"
+                    count: 1258
+                    index_count: 63
+                  - name: "double"
+                    count: 200
+                    index_count: 40
+                  - name: "flat_object"
+                    count: 1
+                    index_count: 1
+                  - name: "float"
+                    count: 3
+                    index_count: 1
+                  - name: "geo_point"
+                    count: 80
+                    index_count: 40
+                  - name: "integer"
+                    count: 182
+                    index_count: 43
+                  - name: "ip"
+                    count: 320
+                    index_count: 40
+                  - name: "keyword"
+                    count: 22779
+                    index_count: 66
+                  - name: "long"
+                    count: 2884
+                    index_count: 59
+                  - name: "nested"
+                    count: 287
+                    index_count: 41
+                  - name: "object"
+                    count: 3520
+                    index_count: 62
+                  - name: "text"
+                    count: 831
+                    index_count: 62
+              analysis:
+                char_filter_types: []
+                tokenizer_types: []
+                filter_types: []
+                analyzer_types: []
+                built_in_char_filters: []
+                built_in_tokenizers: []
+                built_in_filters: []
+                built_in_analyzers:
+                  - name: "whitespace"
+                    count: 1
+                    index_count: 1
+            nodes:
+              count:
+                total: 1
+                cluster_manager: 1
+                coordinating_only: 0
+                data: 1
+                ingest: 1
+                master: 1
+                remote_cluster_client: 1
+                search: 0
+              versions:
+                - "2.16.0"
+              os:
+                available_processors: 2
+                allocated_processors: 2
+                names:
+                  - name: "Linux"
+                    count: 1
+                pretty_names:
+                  - pretty_name: "Ubuntu 22.04.1 LTS"
+                    count: 1
+                mem:
+                  total_in_bytes: 4097409024
+                  free_in_bytes: 105721856
+                  used_in_bytes: 3991687168
+                  free_percent: 3
+                  used_percent: 97
+              process:
+                cpu:
+                  percent: 4
+                open_file_descriptors:
+                  min: 1577
+                  max: 1577
+                  avg: 1577
+              jvm:
+                max_uptime_in_millis: 331659
+                versions:
+                  - version: "21.0.3"
+                    vm_name: "OpenJDK 64-Bit Server VM"
+                    vm_version: "21.0.3+9-LTS"
+                    vm_vendor: "Eclipse Adoptium"
+                    bundled_jdk: true
+                    using_bundled_jdk: true
+                    count: 1
+                mem:
+                  heap_used_in_bytes: 418789984
+                  heap_max_in_bytes: 1073741824
+                threads: 87
+              fs:
+                total_in_bytes: 62692343808
+                free_in_bytes: 38146904064
+                available_in_bytes: 35365666816
+                cache_reserved_in_bytes: 0
+              plugins:
+                - name: "opensearch-neural-search"
+                  version: "2.16.0.0"
+                  opensearch_version: "2.16.0"
+                  java_version: "11"
+                  description: "A plugin that adds dense neural retrieval into the OpenSearch ecosytem"
+                  classname: "org.opensearch.neuralsearch.plugin.NeuralSearch"
+                  custom_foldername: ""
+                  extended_plugins:
+                    - "opensearch-knn"
+                  has_native_controller: false
+                - name: "opensearch-security"
+                  version: "2.16.0.0"
+                  opensearch_version: "2.16.0"
+                  java_version: "11"
+                  description: "Provide access control related features for OpenSearch"
+                  classname: "org.opensearch.security.OpenSearchSecurityPlugin"
+                  custom_foldername: ""
+                  extended_plugins: []
+                  has_native_controller: false
+              network_types:
+                transport_types:
+                  org.opensearch.security.ssl.http.netty.SecuritySSLNettyTransport: 1
+                http_types:
+                  org.opensearch.security.http.SecurityHttpServerTransport: 1
+              discovery_types:
+                zen: 1
+              packaging_types:
+                - type: "deb"
+                  count: 1
+              ingest:
+                number_of_pipelines: 1
+                processor_stats:
+                  date:
+                    count: 374
+                    failed: 0
+                    current: 0
+                    time_in_millis: 17844
+                  date_index_name:
+                    count: 374
+                    failed: 0
+                    current: 0
+                    time_in_millis: 31450
+                  geoip:
+                    count: 2992
+                    failed: 0
+                    current: 0
+                    time_in_millis: 39656
+                  json:
+                    count: 374
+                    failed: 0
+                    current: 0
+                    time_in_millis: 6722
+                  remove:
+                    count: 5610
+                    failed: 0
+                    current: 0
+                    time_in_millis: 6650
+                  set:
+                    count: 748
+                    failed: 0
+                    current: 0
+                    time_in_millis: 16598
+
+    ClusterStatsBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ClusterException'
+          example:
+            error:
+              root_cause:
+                - type: "illegal_argument_exception"
+                  reason: "request [/_cluster/stats] contains unrecognized parameter: [v1]"
+              type: "illegal_argument_exception"
+              reason: "request [/_cluster/stats] contains unrecognized parameter: [v1]"
+            status: 400
+
+    ClusterStatsForbidden:
+      description: Response to report a permission denied request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ClusterException'
+          example:
+            error:
+              root_cause:
+                - type: "security_exception"
+                  reason: "no permissions for [cluster:monitor/stats] and User [name=test, backend_roles=[], requestedTenant=null]"
+              type: "security_exception"
+              reason: "no permissions for [cluster:monitor/stats] and User [name=test, backend_roles=[], requestedTenant=null]"
+            status: 403
+
+    ClusterStatsMethodNotAllowed:
+      description: Response to report an invalid HTTP method
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/MethodNotAllowedError'
+          example:
+            error: "Incorrect HTTP method for uri [/_cluster/stats?pretty] and method [PUT], allowed: [GET]"
+            status: 405
