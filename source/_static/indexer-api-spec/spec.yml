@@ -1077,6 +1077,62 @@ paths:
                     actions:
                       - delete: {}
                     transitions: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: 'ism_api.yml#/components/schemas/PolicyResponse'
+              example:
+                _id: "policy_1"
+                _version: 1
+                _primary_term: 8
+                _seq_no: 140840
+                policy:
+                  policy:
+                    policy_id: "policy_1"
+                    description: "ingesting logs"
+                    last_updated_time: 1744640873889
+                    schema_version: 1
+                    error_notification: null
+                    default_state: "ingest"
+                    states:
+                      - name: "ingest"
+                        actions:
+                          - retry:
+                              count: 3
+                              backoff: "exponential"
+                              delay: "1m"
+                            rollover:
+                              min_doc_count: 5
+                              copy_alias: false
+                        transitions:
+                          - state_name: "search"
+                      - name: "search"
+                        actions: []
+                        transitions:
+                          - state_name: "delete"
+                            conditions:
+                              min_index_age: "5m"
+                      - name: "delete"
+                        actions:
+                          - retry:
+                              count: 3
+                              backoff: "exponential"
+                              delay: "1m"
+                            delete: {}
+                        transitions: []
+                    ism_template: null
+        '400':
+          $ref: 'ism_api.yml#/components/responses/PolicyBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '409':
+          $ref: 'ism_api.yml#/components/responses/VersionConflict'
+
 components:
   parameters:
     pretty:
@@ -1247,7 +1303,7 @@ tags:
   - name: Cluster API
     description: The cluster APIs allow you to manage your cluster. You can use them to check cluster health, modify settings, retrieve statistics, and more.
   - name: Index State Management API
-    description: The Index State Management (ISM) API operations allow you to programmatically manage index policies and the lifecycle of indexes in the Wazuh indexer
+    description: The Index State Management (ISM) API operations allow you to programmatically manage index policies and the lifecycle of indexes in the Wazuh indexer.
   - name: Scroll
     description: |
       You can utilize the scroll operation to obtain a substantial number of results. For instance, when looking for machine learning jobs, you can request an unlimited number of results in separate batches.

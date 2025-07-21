@@ -65,16 +65,16 @@ components:
       properties:
         _id:
           type: string
-          description: The unique identifier of the policy
+          description: The unique identifier of the policy.
         _version:
           type: integer
-          description: The version number of the policy, incremented on each update
+          description: The version number of the policy, incremented on each update.
         _primary_term:
           type: integer
-          description: The primary term used for optimistic concurrency control within the Wazuh indexer
+          description: The primary term used for optimistic concurrency control within the Wazuh indexer.
         _seq_no:
           type: integer
-          description: The sequence number for internal versioning
+          description: The sequence number for internal versioning.  This helps manage updates and conflict resolution.
         policy:
           type: object
           properties:
@@ -83,30 +83,110 @@ components:
               properties:
                 policy_id:
                   type: string
-                  description: The identifier of the policy
+                  description: The identifier of the policy.
                 description:
                   type: string
-                  description: A description of what the policy is for
+                  description: A description of what the policy is for (e.g., "ingesting logs").
                 last_updated_time:
                   type: integer
                   format: int64
-                  description: Timestamp in ms of the last time the policy was updated
+                  description: Timestamp in ms of the last time the policy was updated.
                 schema_version:
                   type: integer
-                  description: Schema version of the policy definition
+                  description: Schema version of the policy definition.
                 error_notification:
                   type: object
                   nullable: true
-                  description: Optional field for setting up notifications on policy errors
+                  description: Optional field for setting up notifications (e.g., email or webhook) on policy errors.
                 default_state:
                   type: string
                   description: The name of the state where the policy begins
                 states:
                   type: array
-                  description: A list of lifecycle states the index will pass through
+                  description: A list of lifecycle states the index will pass through.
                   items:
                     $ref: '#/components/schemas/PolicyState'
                 ism_template:
                   type: object
                   nullable: true
                   description: Defines index templates to which this policy applies
+
+  responses:
+    PolicyBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  root_cause:
+                    type: object
+                    properties:
+                      type: { type: string }
+                      reason: { type: string }
+              status: { type: integer }
+          examples:
+            missingText:
+              value:
+                error:
+                  root_cause:
+                    - type: "illegal_argument_exception"
+                      reason: "Missing policy ID"
+                  type: "illegal_argument_exception"
+                  reason: "Missing policy ID"
+                status: 400
+
+    VersionConflict:
+      description: Response to report a version conflict
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  root_cause:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        reason:
+                          type: string
+                        index:
+                          type: string
+                        shard:
+                          type: integer
+                        index_uuid:
+                          type: string
+                  type:
+                    type: string
+                  reason:
+                    type: string
+                  index:
+                    type: string
+                  shard:
+                    type: integer
+                  index_uuid:
+                    type: string
+              status:
+                type: integer
+          example:
+            error:
+              root_cause:
+                - type: "version_conflict_engine_exception"
+                  reason: "[policy_1]: version conflict, document already exists (current version [1])"
+                  index: ".opendistro-ism-config"
+                  shard: "0"
+                  index_uuid: "Bcf6j1bkSKG5-sKZnV11sg"
+              type: "version_conflict_engine_exception"
+              reason: "[policy_1]: version conflict, document already exists (current version [1])"
+              index: ".opendistro-ism-config"
+              shard: "0"
+              index_uuid: "Bcf6j1bkSKG5-sKZnV11sg"
+            status: 409
