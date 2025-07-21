@@ -1018,7 +1018,7 @@ paths:
   /_plugins/_ism/policies/{policy_id}:
     put:
       tags:
-        - Index State Management API
+        - Index state management API
       summary: Create policy
       description: This API operation creates  a policy.
       operationId: createPolicy
@@ -1132,6 +1132,54 @@ paths:
           $ref: '#/components/responses/Forbidden'
         '409':
           $ref: 'ism_api.yml#/components/responses/VersionConflict'
+
+  /_plugins/_ism/add/{index}:
+    post:
+      tags:
+        - Index state management API
+      summary: Add policy
+      description: |
+        This API operation associates a policy with an index. If the index already has a policy, this operation does not modify it.
+
+        If you use a wildcard `*` while adding a policy to an index, the ISM plugin interprets `*` as all indexes, including system indexes like `.opendistro-security`, which stores users, roles, and tenants. A delete action in your policy might accidentally delete all user roles and tenants in your cluster. Don’t use the broad `*` wildcard, and instead add a prefix, such as `my-logs*`, when specifying indexes with the `_ism/add` API.
+      operationId: addPolicy
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: index
+          in: path
+          required: true
+          description: The name of the index (or a comma-separated list of indexes) to which the ISM policy should be applied.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: 'ism_api.yml#/components/schemas/AddPolicyRequest'
+            example:
+              policy_id: "policy_1"
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: 'ism_api.yml#/components/schemas/AddPolicyResponse'
+              example:
+                updated_indices: 1
+                failures: false
+                failed_indices: []
+        '400':
+          $ref: 'ism_api.yml#/components/responses/PolicyBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: 'ism_api.yml#/components/responses/PolicyNotFound'
 
 components:
   parameters:
@@ -1302,7 +1350,7 @@ tags:
   - name: Analyze API
   - name: Cluster API
     description: The cluster APIs allow you to manage your cluster. You can use them to check cluster health, modify settings, retrieve statistics, and more.
-  - name: Index State Management API
+  - name: Index state management API
     description: The Index State Management (ISM) API operations allow you to programmatically manage index policies and the lifecycle of indexes in the Wazuh indexer.
   - name: Scroll
     description: |

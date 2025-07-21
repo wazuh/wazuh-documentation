@@ -111,23 +111,44 @@ components:
                   nullable: true
                   description: Defines index templates to which this policy applies
 
+    AddPolicyRequest:
+      type: object
+      required:
+        - policy_id
+      properties:
+        policy_id:
+          type: string
+          description: The ID of the Index State Management (ISM) policy to attach to the index.
+        rollover_alias:
+          type: string
+          description: The alias used for rollover operations.
+        is_manual:
+          type: boolean
+          description: Indicates whether the policy is manually managed. When set to `true`, the policy is not automatically removed.
+          default: false
+
+    AddPolicyResponse:
+      type: object
+      properties:
+        updated_indices:
+          type: integer
+          description: The number of indexes that were successfully updated with the ISM policy.
+        failures:
+          type: boolean
+          description: Indicates whether there were any failures while applying the policy. A value of `false` means all operations completed successfully.
+        failed_indices:
+          type: array
+          description: A list of indexes that failed to be updated. If empty, no failures occurred.
+          items:
+            type: string
+
   responses:
     PolicyBadRequest:
       description: Response to report a bad request
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              error:
-                type: object
-                properties:
-                  root_cause:
-                    type: object
-                    properties:
-                      type: { type: string }
-                      reason: { type: string }
-              status: { type: integer }
+            $ref: 'spec.yml#/components/schemas/SecurityError'
           examples:
             missingText:
               value:
@@ -138,6 +159,21 @@ components:
                   type: "illegal_argument_exception"
                   reason: "Missing policy ID"
                 status: 400
+
+    PolicyNotFound:
+      description: Response to report a request not found
+      content:
+        application/json:
+          schema:
+            $ref: 'spec.yml#/components/schemas/SecurityError'
+          example:
+            error:
+              root_cause:
+                - type: "status_exception"
+                  reason: "Could not find policy=policy_10"
+              type: "status_exception"
+              reason: "Could not find policy=policy_10"
+            status: 404
 
     VersionConflict:
       description: Response to report a version conflict
