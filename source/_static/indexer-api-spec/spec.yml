@@ -1181,6 +1181,120 @@ paths:
         '404':
           $ref: 'ism_api.yml#/components/responses/PolicyNotFound'
 
+  /_plugins/_ism/policies/{policy_id}?if_seq_no={value}&if_primary_term={value}:
+    put:
+      tags:
+        - Index state management API
+      summary: Update policy
+      description: |
+        This API operation updates an existing policy. To perform this update, you must include the `seq_no` and `primary_term` parameters. If these values don't match the current policy version or the policy doesn't exist, Index State Management (ISM) will return an error.
+      operationId: updatePolicy
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: policy_id
+          in: path
+          required: true
+          description: The unique identifier of the policy to update.
+          schema:
+            type: string
+        - name: if_seq_no
+          in: query
+          required: true
+          description: The sequence number for optimistic concurrency control. This field is required to update an existing policy.
+          schema:
+            type: integer
+        - name: if_primary_term
+          in: query
+          required: true
+          description: The primary term for optimistic concurrency control. This field is required to update an existing policy.
+          schema:
+            type: integer
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: 'ism_api.yml#/components/schemas/PolicyRequestUpdate'
+            example:
+              policy:
+                description: "ingesting logs"
+                default_state: "ingest"
+                states:
+                  - name: "ingest"
+                    actions:
+                      - rollover:
+                          min_doc_count: 5
+                    transitions:
+                      - state_name: "search"
+                  - name: "search"
+                    actions: []
+                    transitions:
+                      - state_name: "delete"
+                        conditions:
+                          min_index_age: "5m"
+                  - name: "delete"
+                    actions:
+                      - delete: {}
+                    transitions: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: 'ism_api.yml#/components/schemas/PolicyResponse'
+              example:
+                _id: "policy_1"
+                _version: 2
+                _primary_term: 8
+                _seq_no: 144943
+                policy:
+                  policy:
+                    policy_id: "policy_1"
+                    description: "ingesting logs"
+                    last_updated_time: 1744701144668
+                    schema_version: 1
+                    error_notification: null
+                    default_state: "ingest"
+                    states:
+                      - name: "ingest"
+                        actions:
+                          - retry:
+                              count: 3
+                              backoff: "exponential"
+                              delay: "1m"
+                            rollover:
+                              min_doc_count: 5
+                              copy_alias: false
+                        transitions:
+                          - state_name: "search"
+                      - name: "search"
+                        actions: []
+                        transitions:
+                          - state_name: "delete"
+                            conditions:
+                              min_index_age: "5m"
+                      - name: "delete"
+                        actions:
+                          - retry:
+                              count: 3
+                              backoff: "exponential"
+                              delay: "1m"
+                            delete: {}
+                        transitions: []
+                    ism_template: null
+        '400':
+          $ref: 'ism_api.yml#/components/responses/PolicyBadRequestUpdate'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '409':
+          $ref: 'ism_api.yml#/components/responses/VersionConflictUpdate'
+
 components:
   parameters:
     pretty:

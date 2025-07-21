@@ -2,7 +2,7 @@ openapi: 3.0.0
 
 components:
   schemas:
-    PolicyRequest:
+    PolicyRequestBase:
       type: object
       required:
         - policy
@@ -29,10 +29,34 @@ components:
             schema_version:
               type: integer
               description: The schema version number used for internal tracking of policy changes
-            last_updated_time:
-              type: integer
-              format: int64
-              description: Timestamp in ms of the last update to the policy. This is typically set automatically and does not need to be included in requests.
+
+    PolicyRequest:
+      allOf:
+        - $ref: '#/components/schemas/PolicyRequestBase'
+        - type: object
+          properties:
+            policy:
+              type: object
+              properties:
+                last_updated_time:
+                  type: integer
+                  format: int64
+                  description: Timestamp in ms of the last update to the policy. This is typically set automatically and does not need to be included in requests.
+
+    PolicyRequestUpdate:
+      allOf:
+        - $ref: '#/components/schemas/PolicyRequestBase'
+        - type: object
+          properties:
+            policy:
+              type: object
+              properties:
+                error_notification:
+                  type: object
+                  description: A Mustache template used to send notifications if the policy fails.
+                ism_template:
+                  type: object
+                  description: Defines index patterns that automatically bind this policy to new indexes.
 
     PolicyState:
       type: object
@@ -142,6 +166,40 @@ components:
           items:
             type: string
 
+    VersionConflict:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            root_cause:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                  reason:
+                    type: string
+                  index:
+                    type: string
+                  shard:
+                    type: integer
+                  index_uuid:
+                    type: string
+            type:
+              type: string
+            reason:
+              type: string
+            index:
+              type: string
+            shard:
+              type: integer
+            index_uuid:
+              type: string
+        status:
+          type: integer
+
   responses:
     PolicyBadRequest:
       description: Response to report a bad request
@@ -158,6 +216,23 @@ components:
                       reason: "Missing policy ID"
                   type: "illegal_argument_exception"
                   reason: "Missing policy ID"
+                status: 400
+
+    PolicyBadRequestUpdate:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: 'spec.yml#/components/schemas/SecurityError'
+          examples:
+            missingText:
+              value:
+                error:
+                  root_cause:
+                    - type: "parse_exception"
+                      reason: "request body is required"
+                  type: "parse_exception"
+                  reason: "request body is required"
                 status: 400
 
     PolicyNotFound:
@@ -180,38 +255,7 @@ components:
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              error:
-                type: object
-                properties:
-                  root_cause:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        type:
-                          type: string
-                        reason:
-                          type: string
-                        index:
-                          type: string
-                        shard:
-                          type: integer
-                        index_uuid:
-                          type: string
-                  type:
-                    type: string
-                  reason:
-                    type: string
-                  index:
-                    type: string
-                  shard:
-                    type: integer
-                  index_uuid:
-                    type: string
-              status:
-                type: integer
+            $ref: '#/components/schemas/VersionConflict'
           example:
             error:
               root_cause:
@@ -222,6 +266,27 @@ components:
                   index_uuid: "Bcf6j1bkSKG5-sKZnV11sg"
               type: "version_conflict_engine_exception"
               reason: "[policy_1]: version conflict, document already exists (current version [1])"
+              index: ".opendistro-ism-config"
+              shard: "0"
+              index_uuid: "Bcf6j1bkSKG5-sKZnV11sg"
+            status: 409
+
+    VersionConflictUpdate:
+      description: Response to report a version conflict
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/VersionConflict'
+          example:
+            error:
+              root_cause:
+                - type: "version_conflict_engine_exception"
+                  reason: "[policy_1]: version conflict, required seqNo [140840], primary term [23]. current document has seqNo [144943] and primary term [8]"
+                  index: ".opendistro-ism-config"
+                  shard: "0"
+                  index_uuid: "Bcf6j1bkSKG5-sKZnV11sg"
+              type: "version_conflict_engine_exception"
+              reason: "[policy_1]: version conflict, required seqNo [140840], primary term [23]. current document has seqNo [144943] and primary term [8]"
               index: ".opendistro-ism-config"
               shard: "0"
               index_uuid: "Bcf6j1bkSKG5-sKZnV11sg"
