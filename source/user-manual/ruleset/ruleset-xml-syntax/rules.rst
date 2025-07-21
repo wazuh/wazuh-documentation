@@ -320,6 +320,8 @@ regex
 
 Used as a requisite to trigger a rule. It will search for a match in the log event.
 
+Regular expressions are case-sensitive by default. Use ``(?i)`` for case-insensitive matching.
+
 +--------------------+---------------------------------------------------------------+
 | Default Value      | n/a                                                           |
 +--------------------+---------------------------------------------------------------+
