@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [v5.0.0]
 
+### Added
+
+- Added documentation for the reporting plugin in the Wazuh dashboard package generation guide. ([#8682](https://github.com/wazuh/wazuh-documentation/pull/8682))
+
 ### Changed
 
 - Replaced `indexer_cluster_initial_master_nodes` with `indexer_initial_cluster_manager_nodes` in Puppet deployment documentation. ([#8666](https://github.com/wazuh/wazuh-documentation/pull/8666))
