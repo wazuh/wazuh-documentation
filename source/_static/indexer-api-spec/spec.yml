@@ -1404,6 +1404,102 @@ paths:
         '404':
           $ref: 'ism_api.yml#/components/responses/PolicyNotFoundRemove'
 
+  /_plugins/_ism/change_policy/{index}:
+    post:
+      tags:
+        - Index state management API
+      summary: Update managed index policy
+      description: |
+        Update the managed index policy to a new policy or a new version of an existing one. This update can be applied to multiple indexes at once using an index pattern. To ensure the update targets only specific managed indexes, a state filter can be included. This filter limits the update to indexes currently in the specified state. It's also possible to define the state that the managed index transitions to after the policy change takes effect.
+
+        Policy changes are handled as asynchronous background processes and are not executed immediately. This delay prevents disruptions to currently running managed indexes. If the new policy introduces minor configuration adjustments such as changing the `min_index_age` in a rollover condition from `1000d` to `100d`, the change is applied during the index's next execution. However, if the update alters the current state, its actions, or the order of actions, the changes are applied only after the current state completes and before transitioning to a new one.
+
+        For example, changing the policy on `wazuh-alerts-4.x-2025.03.11` to `policy_1` (either a new or updated version) will only take place if `wazuh-alerts-4.x-2025.03.11` is in the `searches` state. Once the policy is updated, the index will transition to the `delete` state.
+      operationId: updateManagedIndexPolicy
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: index
+          in: path
+          required: true
+          description: The name of the index or a comma-separated list of index names to which the policy change should be applied. You can also use wildcard expressions (e.g., `wazuh-alerts-4.x-*`) to target multiple indexes.
+          schema:
+            type: string
+        - name: if_seq_no
+          in: query
+          description: The sequence number for optimistic concurrency control. This field is required to update an existing policy.
+          schema:
+            type: integer
+        - name: if_primary_term
+          in: query
+          description: The primary term for optimistic concurrency control. This field is required to update an existing policy.
+          schema:
+            type: integer
+        - $ref: '#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: 'ism_api.yml#/components/schemas/ChangePolicyRequest'
+            example:
+              policy_id: "policy_1"
+              state: "delete"
+              include:
+                - state: "searches"
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: 'ism_api.yml#/components/schemas/ChangePolicyResponse'
+              example:
+                updated_indices: 1
+                failures: false
+                failed_indices: []
+        '400':
+          description: Response to report a bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityError'
+              example:
+                error:
+                  root_cause:
+                    - type: "illegal_argument_exception"
+                      reason: "ChangePolicy policy id is null"
+                  type: "illegal_argument_exception"
+                  reason: "ChangePolicy policy id is null"
+                status: 400
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          description: Response to report a request not found
+          content:
+            application/json:
+              schema:
+                $ref: 'ism_api.yml#/components/schemas/IndexNotFoundException'
+              example:
+                error:
+                  root_cause:
+                    - type: "index_not_found_exception"
+                      reason: "no such index [wazuh-alerts-4.x-2025.03.40]"
+                      index: "wazuh-alerts-4.x-2025.03.40"
+                      resource.id: "wazuh-alerts-4.x-2025.03.40"
+                      resource.type: "index_or_alias"
+                      index_uuid: "_na_"
+                  type: "index_not_found_exception"
+                  reason: "no such index [wazuh-alerts-4.x-2025.03.40]"
+                  index: "wazuh-alerts-4.x-2025.03.40"
+                  resource.id: "wazuh-alerts-4.x-2025.03.40"
+                  resource.type: "index_or_alias"
+                  index_uuid: "_na_"
+                status: 404
+
 components:
   parameters:
     pretty:
