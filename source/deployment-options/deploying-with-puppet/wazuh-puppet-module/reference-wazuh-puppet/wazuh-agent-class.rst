@@ -196,7 +196,7 @@ $wazuh_reporting_endpoint
   `Type String`
   
 $wazuh_register_endpoint
-  Specifies the IP address or the hostname of the Wazuh manager to register against. It is used to run the **agent-auth** tool.
+  Specifies the IP address or the hostname of the Wazuh manager to register against.
 
   `Type String`
 
@@ -843,13 +843,6 @@ $manage_client_keys
 
   `Default yes`
 
-  `Type String`
-
-$agent_auth_password
-  Define password for agent-auth
-
-  `Default undef`
-  
   `Type String`
 
 .. _ref_agent_addlog:

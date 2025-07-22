@@ -78,6 +78,10 @@ newUrls['5.0'] = [
   '/release-notes/index-5x.html',
 ];
 
+removedUrls['5.0'] = [
+  '/user-manual/reference/tools/agent-auth.html',
+];
+
 /* *** RELEASE 4.14 ****/
 
 /* Pages added in 4.14 */

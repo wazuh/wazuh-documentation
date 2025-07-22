@@ -14,6 +14,8 @@ Highlights
 Breaking changes
 ----------------
 
+- The agent-auth tool has been deprecated.
+
 What's new
 ----------
 
