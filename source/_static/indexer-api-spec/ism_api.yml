@@ -200,6 +200,59 @@ components:
         status:
           type: integer
 
+    RemovePolicyResponse:
+      type: object
+      properties:
+        updated_indices:
+          type: integer
+          description: The number of indexes from which the ISM policy was successfully removed.
+        failures:
+          type: boolean
+          description: Indicates whether any errors occurred during the removal operation.
+        failed_indices:
+          type: array
+          description: A list of index names that failed to have their ISM policies removed. Empty if there were no failures.
+          items:
+            type: string
+
+    IndexNotFoundException:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            root_cause:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                  reason:
+                    type: string
+                  index:
+                    type: string
+                  resource.id:
+                    type: string
+                  resource.type:
+                    type: string
+                  index_uuid:
+                    type: string
+            type:
+              type: string
+            reason:
+              type: string
+            index:
+              type: string
+            resource.id:
+              type: string
+            resource.type:
+              type: string
+            index_uuid:
+              type: string
+        status:
+          type: integer
+
   responses:
     PolicyBadRequest:
       description: Response to report a bad request
@@ -252,6 +305,21 @@ components:
                   reason: "request body is required"
                 status: 400
 
+    PolicyBadRequestRemove:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: 'spec.yml#/components/schemas/SecurityError'
+          example:
+            error:
+              root_cause:
+                - type: "illegal_argument_exception"
+                  reason: "Missing indices"
+              type: "illegal_argument_exception"
+              reason: "Missing indices"
+            status: 400
+
     PolicyNotFound:
       description: Response to report a request not found
       content:
@@ -280,6 +348,29 @@ components:
                   reason: "Policy not found"
               type: "status_exception"
               reason: "Policy not found"
+            status: 404
+
+    PolicyNotFoundRemove:
+      description: Response to report a request not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IndexNotFoundException'
+          example:
+            error:
+              root_cause:
+                - type: "index_not_found_exception"
+                  reason: "no such index [wazuh-alerts-4.x-2025.03.40]"
+                  index: "wazuh-alerts-4.x-2025.03.40"
+                  resource.id: "wazuh-alerts-4.x-2025.03.40"
+                  resource.type: "index_or_alias"
+                  index_uuid: "_na_"
+              type: "index_not_found_exception"
+              reason: "no such index [wazuh-alerts-4.x-2025.03.40]"
+              index: "wazuh-alerts-4.x-2025.03.40"
+              resource.id: "wazuh-alerts-4.x-2025.03.40"
+              resource.type: "index_or_alias"
+              index_uuid: "_na_"
             status: 404
 
     VersionConflict:

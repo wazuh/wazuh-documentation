@@ -1367,6 +1367,43 @@ paths:
         '409':
           $ref: 'ism_api.yml#/components/responses/VersionConflictUpdate'
 
+  /_plugins/_ism/remove/{index}:
+    post:
+      tags:
+        - Index state management API
+      summary: Remove policy from index
+      description: Removes any Index State Management (ISM) policy currently associated with an index.
+      operationId: removePolicyFromIndex
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: index
+          in: path
+          required: true
+          description: The name of the index from which to remove the ISM policy.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: 'ism_api.yml#/components/schemas/RemovePolicyResponse'
+              example:
+                updated_indices: 1
+                failures: false
+                failed_indices: []
+        '400':
+          $ref: 'ism_api.yml#/components/responses/PolicyBadRequestRemove'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: 'ism_api.yml#/components/responses/PolicyNotFoundRemove'
+
 components:
   parameters:
     pretty:
