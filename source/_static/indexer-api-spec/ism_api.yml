@@ -124,7 +124,7 @@ components:
                   description: Optional field for setting up notifications (e.g., email or webhook) on policy errors.
                 default_state:
                   type: string
-                  description: The name of the state where the policy begins
+                  description: The name of the state where the policy begins.
                 states:
                   type: array
                   description: A list of lifecycle states the index will pass through.
@@ -133,7 +133,7 @@ components:
                 ism_template:
                   type: object
                   nullable: true
-                  description: Defines index templates to which this policy applies
+                  description: Defines index templates to which this policy applies. `null` means no automatic binding to templates.
 
     AddPolicyRequest:
       type: object
@@ -218,6 +218,23 @@ components:
                   reason: "Missing policy ID"
                 status: 400
 
+    PolicyBadRequestGet:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: 'spec.yml#/components/schemas/SecurityError'
+          examples:
+            missingText:
+              value:
+                error:
+                  root_cause:
+                    - type: "illegal_argument_exception"
+                      reason: "request [/_plugins/_ism/policies/policy_1] contains unrecognized parameter: [flat_settings]"
+                  type: "illegal_argument_exception"
+                  reason: "request [/_plugins/_ism/policies/policy_1] contains unrecognized parameter: [flat_settings]"
+                status: 400
+
     PolicyBadRequestUpdate:
       description: Response to report a bad request
       content:
@@ -248,6 +265,21 @@ components:
                   reason: "Could not find policy=policy_10"
               type: "status_exception"
               reason: "Could not find policy=policy_10"
+            status: 404
+
+    PolicyNotFoundGet:
+      description: Response to report a request not found
+      content:
+        application/json:
+          schema:
+            $ref: 'spec.yml#/components/schemas/SecurityError'
+          example:
+            error:
+              root_cause:
+                - type: "status_exception"
+                  reason: "Policy not found"
+              type: "status_exception"
+              reason: "Policy not found"
             status: 404
 
     VersionConflict:

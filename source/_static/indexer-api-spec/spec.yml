@@ -1133,6 +1133,78 @@ paths:
         '409':
           $ref: 'ism_api.yml#/components/responses/VersionConflict'
 
+    get:
+      tags:
+        - Index state management API
+      summary: Get policy
+      description: Retrieves a policy using its `policy_id`.
+      operationId: getPolicy
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: policy_id
+          in: path
+          required: true
+          description: The unique identifier of the policy. It is required to retrieve a specific policy.
+          schema:
+            type: string
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: 'ism_api.yml#/components/schemas/PolicyResponse'
+              example:
+                _id: "policy_1"
+                _version: 2
+                _seq_no: 144943
+                _primary_term: 8
+                policy:
+                  policy_id: "policy_1"
+                  description: "ingesting logs"
+                  last_updated_time: 1744701144668
+                  schema_version: 21
+                  error_notification: null
+                  default_state: "ingest"
+                  states:
+                    - name: "ingest"
+                      actions:
+                        - retry:
+                            count: 3
+                            backoff: "exponential"
+                            delay: "1m"
+                          rollover:
+                            min_doc_count: 5
+                            copy_alias: false
+                      transitions:
+                        - state_name: "search"
+                    - name: "search"
+                      actions: []
+                      transitions:
+                        - state_name: "delete"
+                          conditions:
+                            min_index_age: "5m"
+                    - name: "delete"
+                      actions:
+                        - retry:
+                            count: 3
+                            backoff: "exponential"
+                            delay: "1m"
+                          delete: {}
+                      transitions: []
+                  ism_template: null
+        '400':
+          $ref: 'ism_api.yml#/components/responses/PolicyBadRequestGet'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: 'ism_api.yml#/components/responses/PolicyNotFoundGet'
+
   /_plugins/_ism/add/{index}:
     post:
       tags:
@@ -1211,7 +1283,7 @@ paths:
           description: The primary term for optimistic concurrency control. This field is required to update an existing policy.
           schema:
             type: integer
-        - $ref: 'spec.yml#/components/parameters/pretty'
+        - $ref: '#/components/parameters/pretty'
       requestBody:
         required: true
         content:
@@ -1289,9 +1361,9 @@ paths:
         '400':
           $ref: 'ism_api.yml#/components/responses/PolicyBadRequestUpdate'
         '401':
-          $ref: 'spec.yml#/components/responses/Unauthorized'
+          $ref: '#/components/responses/Unauthorized'
         '403':
-          $ref: 'spec.yml#/components/responses/Forbidden'
+          $ref: '#/components/responses/Forbidden'
         '409':
           $ref: 'ism_api.yml#/components/responses/VersionConflictUpdate'
 
