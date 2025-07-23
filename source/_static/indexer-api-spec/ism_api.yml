@@ -289,6 +289,23 @@ components:
           items:
             type: string
 
+    RetryFailedIndexResponse:
+      type: object
+      properties:
+        updated_indices:
+          type: integer
+          description: The number of indexes for which the retry was successfully initiated.
+        failures:
+          type: boolean
+          description: Indicates whether there were any failures while processing the request.
+        failed_indices:
+          type: array
+          description: |
+            A list of indexes that failed to be retried, including their names, UUIDs, and failure reasons.
+            Empty if there are no failures.
+          items:
+            type: string
+
   responses:
     PolicyBadRequest:
       description: Response to report a bad request

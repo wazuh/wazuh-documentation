@@ -1500,6 +1500,61 @@ paths:
                   index_uuid: "_na_"
                 status: 404
 
+  /_plugins/_ism/retry/{index}:
+    post:
+      tags:
+        - Index state management API
+      summary: Retry failed index
+      description: |
+        To successfully perform a retry, the index must be managed by ISM and must currently be in a failed state.
+        Wildcard patterns (`*`) can be used to target and retry multiple failed indexes simultaneously.
+      operationId: retryFailedIndex
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: index
+          in: path
+          required: true
+          description: |
+            The name of the index or a comma-separated list of index names for which to retry failed actions.
+            You can also use wildcard expressions (e.g., `wazuh-alerts-4.x-*`) to target multiple indexes.
+          schema:
+            type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                state:
+                  type: string
+                  description: |
+                    Specifies the name of the state where the retry should be applied.
+                    If not provided, the retry is applied to the current failed state.
+            example:
+              state: "delete"
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: 'ism_api.yml#/components/schemas/RetryFailedIndexResponse'
+              example:
+                updated_indices: 0
+                failures: false
+                failed_indices: []
+        '400':
+          $ref: 'ism_api.yml#/components/responses/PolicyBadRequestRemove'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: 'ism_api.yml#/components/responses/PolicyNotFoundRemove'
+
 components:
   parameters:
     pretty:
