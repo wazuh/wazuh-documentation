@@ -1205,6 +1205,50 @@ paths:
         '404':
           $ref: 'ism_api.yml#/components/responses/PolicyNotFoundGet'
 
+    delete:
+      tags:
+        - Index state management API
+      summary: Delete policy
+      description: This deletes the policy using the `policy_id`.
+      operationId: deletePolicy
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: policy_id
+          in: path
+          required: true
+          description: The unique identifier of the ISM policy that you want to delete. This ID is required and must match the policy you previously created or applied to an index.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: 'ism_api.yml#/components/schemas/DeletePolicyResponse'
+              example:
+                _index: ".opendistro-ism-config"
+                _id: "policy_5"
+                _version: 2
+                result: "deleted"
+                forced_refresh: true
+                _shards:
+                  total: 2
+                  successful: 1
+                  failed: 0
+                _seq_no: 164481
+                _primary_term: 9
+        '400':
+          $ref: 'ism_api.yml#/components/responses/PolicyBadRequestDelete'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: 'ism_api.yml#/components/responses/PolicyNotFoundDelete'
+
   /_plugins/_ism/add/{index}:
     post:
       tags:

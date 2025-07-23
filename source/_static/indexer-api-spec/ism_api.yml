@@ -411,6 +411,43 @@ components:
           type: boolean
           description: Specifies whether ISM is currently enabled for this index.
 
+    DeletePolicyResponse:
+      type: object
+      properties:
+        _index:
+          type: string
+          description: The internal index where the policy document was stored (usually `.opendistro-ism-config`).
+        _id:
+          type: string
+          description: The unique identifier of the policy that was deleted.
+        _version:
+          type: integer
+          description: The new version number of the document after deletion.
+        result:
+          type: string
+          description: Indicates the outcome of the operation. In this case, deleted confirms successful deletion.
+        forced_refresh:
+          type: boolean
+          description: Specifies whether a refresh was forced to make the deletion visible to search immediately.
+        _shards:
+          type: object
+          properties:
+            total:
+              type: integer
+              description: The total number of shards involved in the deletion.
+            successful:
+              type: integer
+              description: The number of shards where the deletion was successful.
+            failed:
+              type: integer
+              description: The number of shards where the deletion failed.
+        _seq_no:
+          type: integer
+          description: The sequence number assigned to the operation for internal tracking.
+        _primary_term:
+          type: integer
+          description: The primary term assigned for concurrency control in OpenSearch.
+
   responses:
     PolicyBadRequest:
       description: Response to report a bad request
@@ -495,6 +532,14 @@ components:
                   reason: "Validation Failed: 1: no documents to get;"
                 status: 400
 
+    PolicyBadRequestDelete:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: 'spec.yml#/components/schemas/SecurityError'
+          example:
+
     PolicyNotFound:
       description: Response to report a request not found
       content:
@@ -546,6 +591,21 @@ components:
               resource.id: "wazuh-alerts-4.x-2025.03.40"
               resource.type: "index_or_alias"
               index_uuid: "_na_"
+            status: 404
+
+    PolicyNotFoundDelete:
+      description: Response to report a request not found
+      content:
+        application/json:
+          schema:
+            $ref: 'spec.yml#/components/schemas/SecurityError'
+          example:
+            error:
+              root_cause:
+                - type: "status_exception"
+                  reason: "Policy policy_3 is not found"
+              type: "status_exception"
+              reason: "Policy policy_3 is not found"
             status: 404
 
     VersionConflict:
