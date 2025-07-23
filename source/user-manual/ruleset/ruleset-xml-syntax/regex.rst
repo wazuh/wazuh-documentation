@@ -114,7 +114,7 @@ PCRE2 syntax
 
 It provides features like recursive patterns, look-ahead and look-behind assertions, non-capturing groups, non-greedy quantifiers, extended syntax for characters and character classes, and many others. For more details, please refer to the `PCRE Syntax documentation <https://www.pcre.org/current/doc/html/pcre2syntax.html>`_.
 
-By default, PCRE2 is case-sensitive. Use ``(?i)`` for case-insensitive matching.
+By default, PCRE2 is case-sensitive. Use ``(?i)`` for case-insensitive matching. For example, the string ``post`` matches the regex ``(?i)POST|GET|PUT`` but not ``POST|GET|PUT``.
 
 .. topic:: Supported expressions
 
