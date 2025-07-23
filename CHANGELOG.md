@@ -18,6 +18,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Added the *Wazuh AI Analyst service* section to the Cloud service documentation. ([#8690](https://github.com/wazuh/wazuh-documentation/pull/8690))
 - **Post-release**: Added DNF package manager support for installation and configuration steps. ([#8689](https://github.com/wazuh/wazuh-documentation/pull/8689))
 - **Post-release**: Added security update for the `remove-threat.py` script and a warning to the Detecting and removing malware using VirusTotal integration POC guide. ([#8697](https://github.com/wazuh/wazuh-documentation/pull/8697))
+- **Post-release**: Added note about manual replication of `ossec.conf` between master and worker nodes. ([#8720](https://github.com/wazuh/wazuh-documentation/pull/8720))
 
 ### Changed
 

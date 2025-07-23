@@ -8,6 +8,12 @@ Types of nodes in a Wazuh server cluster
 
 There are two types of nodes in the Wazuh server cluster, the master node and the worker node. The node types define the tasks of each node within the Wazuh server cluster and establish a hierarchy to determine which node's information takes precedence during :doc:`data synchronizations </user-manual/wazuh-server-cluster/data-synchronization>`. A Wazuh server cluster can only have one master node, during synchronizations, the data from the master node always takes precedence over the data from worker nodes. This ensures uniformity and consistency within the cluster.
 
+.. note::
+
+   Configurations applied to the ``/var/ossec/etc/ossec.conf`` file on the master node are not automatically synchronized with the ``/var/ossec/etc/ossec.conf`` file on the worker nodes. You need to manually replicate the configurations to attain synchronization.
+
+   Additionally, restart nodes to apply configuration changes.
+
 .. _server-cluster-master-node:
 
 Master node
