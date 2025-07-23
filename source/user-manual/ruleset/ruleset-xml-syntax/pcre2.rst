@@ -32,7 +32,8 @@ All quantifiers can be used and combined with groups, expressions and literals. 
 Case sensitivity
 ^^^^^^^^^^^^^^^^
 
-PCRE regex are case sensitive by default. This can be changed by using ``(?i)``. Example: ``post`` will match ``(?i)POST|GET|PUT`` regex but not ``POST|GET|PUT``.
+Compared to :ref:`OSRegex <os_regex_syntax>` and :ref:`OSMatch <sregex_os_match_syntax>`, which are case insensitive, PCRE regex are case sensitive by default. This can be changed by using ``(?i)``. Example: ``post`` will match ``(?i)POST|GET|PUT`` regex but not ``POST|GET|PUT``.
+
 
 Groups within groups
 ^^^^^^^^^^^^^^^^^^^^
