@@ -306,6 +306,111 @@ components:
           items:
             type: string
 
+    ExplainIndexResponse:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/IndexExplanation'
+      properties:
+        total_managed_indices:
+          type: integer
+          description: The number of indexes currently managed by ISM in the cluster.
+
+    IndexExplanation:
+      type: object
+      properties:
+        "index.plugins.index_state_management.policy_id":
+          type: string
+          description: The policy ID assigned to the index (legacy key for backward compatibility).
+        "index.opendistro.index_state_management.policy_id":
+          type: string
+          description: Another legacy key showing the assigned policy ID.
+        index:
+          type: string
+          description: The name of the index being managed.
+        index_uuid:
+          type: string
+          description: This is the universally unique identifier for the index.
+        policy_id:
+          type: string
+          description: The id of the ISM policy currently applied to the index.
+        policy_seq_no:
+          type: integer
+          description: This is the sequence number of the policy used for optimistic concurrency control.
+        policy_primary_term:
+          type: integer
+          description: This is the primary term of the policy, also used for concurrency control.
+        rolled_over:
+          type: boolean
+          description: This indicates whether the index has been rolled over.
+        index_creation_date:
+          type: integer
+          format: int64
+          description: The timestamp (epoch) when the index was created.
+        state:
+          type: object
+          properties:
+            name:
+              type: string
+              description: This is the name of the active state in the policy.
+            start_time:
+              type: integer
+              format: int64
+              description: This refers to the time when the index entered the current state.
+        action:
+          type: object
+          properties:
+            name:
+              type: string
+              description: This refers to the name of the action.
+            start_time:
+              type: integer
+              format: int64
+              description: This is the time when the action started.
+            index:
+              type: integer
+              description: This is the position of the action within the state's action list.
+            failed:
+              type: boolean
+              description: Specifies whether the action failed.
+            consumed_retries:
+              type: integer
+              description: This refers to the number of retry attempts consumed.
+            last_retry_time:
+              type: integer
+              format: int64
+              description: The time of the last retry attempt.
+        step:
+          type: object
+          properties:
+            name:
+              type: string
+              description: This is the name of the current step.
+            start_time:
+              type: integer
+              format: int64
+              description: This is the time when the current step began.
+            step_status:
+              type: string
+              description: This refers to the status of the current step.
+        retry_info:
+          type: object
+          properties:
+            failed:
+              type: boolean
+              description: Specifies whether the retry attempts have failed.
+            consumed_retries:
+              type: integer
+              description: This is the number of retries used for the failed step.
+        info:
+          type: object
+          properties:
+            message:
+              type: string
+              description: This is an error or informative message (e.g., missing required setting).
+        enabled:
+          type: boolean
+          description: Specifies whether ISM is currently enabled for this index.
+
   responses:
     PolicyBadRequest:
       description: Response to report a bad request
@@ -372,6 +477,23 @@ components:
               type: "illegal_argument_exception"
               reason: "Missing indices"
             status: 400
+
+    PolicyBadRequestExplain:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: 'spec.yml#/components/schemas/SecurityError'
+          examples:
+            missingText:
+              value:
+                error:
+                  root_cause:
+                    - type: "action_request_validation_exception"
+                      reason: "Validation Failed: 1: no documents to get;"
+                  type: "action_request_validation_exception"
+                  reason: "Validation Failed: 1: no documents to get;"
+                status: 400
 
     PolicyNotFound:
       description: Response to report a request not found

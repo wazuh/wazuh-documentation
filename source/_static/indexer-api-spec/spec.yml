@@ -1555,6 +1555,70 @@ paths:
         '404':
           $ref: 'ism_api.yml#/components/responses/PolicyNotFoundRemove'
 
+  /_plugins/_ism/explain/{index}:
+    get:
+      tags:
+        - Index state management API
+      summary: Explain index
+      description: The Explain index API retrieves the current state of an index. It supports the use of index patterns to obtain the status of multiple indexes simultaneously.
+      operationId: explainIndex
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: index
+          in: path
+          required: true
+          description: Specifies the name of the index or index pattern whose ISM (Index State Management) status should be retrieved. You can also use wildcard expressions (e.g., `wazuh-alerts-4.x-*`) to target multiple indexes.
+          schema:
+            type: string
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: 'ism_api.yml#/components/schemas/ExplainIndexResponse'
+              example:
+                "wazuh-alerts-4.x-2025.03.36":
+                  "index.plugins.index_state_management.policy_id": "policy_1"
+                  "index.opendistro.index_state_management.policy_id": "policy_1"
+                  index: "wazuh-alerts-4.x-2025.03.36"
+                  index_uuid: "1GkrhBwOQA-2I-Giq0ul9A"
+                  policy_id: "policy_1"
+                  policy_seq_no: 144943
+                  policy_primary_term: 8
+                  rolled_over: false
+                  index_creation_date: 1742532571328
+                  state:
+                    name: "ingest"
+                    start_time: 1745214419126
+                  action:
+                    name: "rollover"
+                    start_time: 1745214828297
+                    index: 0
+                    failed: true
+                    consumed_retries: 3
+                    last_retry_time: 1745215466654
+                  step:
+                    name: "attempt_rollover"
+                    start_time: 1745214828297
+                    step_status: "failed"
+                  retry_info:
+                    failed: false
+                    consumed_retries: 0
+                  info:
+                    message: "Missing rollover_alias index setting [index=wazuh-alerts-4.x-2025.03.36]"
+                  enabled: false
+                total_managed_indices: 1
+        '400':
+          $ref: 'ism_api.yml#/components/responses/PolicyBadRequestExplain'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
 components:
   parameters:
     pretty:
