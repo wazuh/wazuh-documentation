@@ -1663,6 +1663,75 @@ paths:
         '403':
           $ref: '#/components/responses/Forbidden'
 
+  /_ingest/pipeline/{pipeline_id}:
+    parameters:
+      - $ref: 'ingest_api.yml#/components/parameters/pipeline_id'
+    put:
+      tags: [Ingest APIs]
+      summary: Create or Update Pipeline
+      description: |
+        The Create Pipeline API operation is used to define or update pipelines in OpenSearch. Each pipeline must include at least one processor, which determines how documents are modified during ingestion.
+
+        ### Template snippets
+        Some processor parameters support Mustache template snippets. To get the value of a field, surround the field name in three curly braces, for example:
+
+        ```
+        {{{field-name}}}
+        ```
+
+        **Example:** set ingest processor using Mustache template snippet
+
+        ```
+        PUT _ingest/pipeline/wazuh-pipeline
+        {
+          "processors": [
+            {
+              "set": {
+                "field": "{{{role}}}",
+                "value": "{{{tenure}}}"
+              }
+            }
+          ]
+        }
+        ```
+      operationId: createUpdatePipeline
+      parameters:
+        - $ref: 'ingest_api.yml#/components/parameters/cluster_manager_timeout'
+        - $ref: 'ingest_api.yml#/components/parameters/timeout'
+      requestBody:
+        $ref: 'ingest_api.yml#/components/requestBodies/CreatePipelineRequest'
+      responses:
+        '200':
+          $ref: 'ingest_api.yml#/components/responses/CreatePipelineSuccess'
+        '400':
+          $ref: 'ingest_api.yml#/components/responses/CreatePipelineBadRequest'
+        '401':
+          $ref: 'ingest_api.yml#/components/responses/CreatePipelineUnauthorized'
+        '403':
+          $ref: 'ingest_api.yml#/components/responses/CreatePipelineForbidden'
+        '409':
+          $ref: 'ingest_api.yml#/components/responses/CreatePipelineConflict'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+    get:
+      tags: [Ingest APIs]
+      summary: Get Pipeline
+      description: |
+        The get ingest pipeline API operation retrieves all the information about the pipeline. The get ingest pipeline API operation retrieves all the information about the pipeline. Use the GET _ingest/pipeline/ to retrieve information about all ingest pipelines.
+      operationId: getPipeline
+      responses:
+        '200':
+          $ref: 'ingest_api.yml#/components/responses/GetPipelineSuccess'
+        '401':
+          $ref: 'ingest_api.yml#/components/responses/GetPipelineUnauthorized'
+        '403':
+          $ref: 'ingest_api.yml#/components/responses/GetPipelineForbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
 components:
   parameters:
     pretty:
@@ -1843,3 +1912,13 @@ tags:
       Since search contexts can be memory-intensive, it's advisable to avoid using the scroll operation for frequent user queries. Instead, consider utilizing the sort parameter in conjunction with the search_after parameter to paginate through results for user queries.
   - name: Search
     description: The Search API operation allows you to perform a search request to find data within your cluster.
+  - name: Ingest APIs
+    description: |
+      The Wazuh indexer Ingest APIs facilitate the transformation and enrichment of data as it is ingested into the system. These APIs allow for the creation and management of ingest pipelines, which consist of a series of processors that execute sequentially to process incoming documents.
+
+      **Ingest pipeline APIs**
+      1. **Create or Update Pipeline**: Define a new pipeline or modify an existing one by specifying a sequence of processors.
+      2. **Get Pipeline**: Retrieve the configuration details of a specific pipeline.
+      3. **Simulate Pipeline**: Test a pipeline configuration by simulating the processing of sample documents, aiding in validation before deployment.
+      4. **Delete Pipeline**: Remove an existing pipeline from the system.
+      5. **Access Data in a Pipeline**: Interact with data as it flows through a pipeline, enabling monitoring and debugging of the ingestion process.
