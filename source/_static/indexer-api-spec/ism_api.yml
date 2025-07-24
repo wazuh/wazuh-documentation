@@ -1,0 +1,651 @@
+openapi: 3.0.0
+
+components:
+  schemas:
+    PolicyRequestBase:
+      type: object
+      required:
+        - policy
+      properties:
+        policy:
+          type: object
+          description: The policy definition that includes policy metadata, description, default state, and the states.
+          required:
+            - description
+            - default_state
+            - states
+          properties:
+            description:
+              type: string
+              description: A human-readable description of the policy
+            default_state:
+              type: string
+              description: The initial state to apply when the policy is first assigned to an index
+            states:
+              type: array
+              description: A list of states that define the lifecycle behavior
+              items:
+                $ref: '#/components/schemas/PolicyState'
+            schema_version:
+              type: integer
+              description: The schema version number used for internal tracking of policy changes
+
+    PolicyRequest:
+      allOf:
+        - $ref: '#/components/schemas/PolicyRequestBase'
+        - type: object
+          properties:
+            policy:
+              type: object
+              properties:
+                last_updated_time:
+                  type: integer
+                  format: int64
+                  description: Timestamp in ms of the last update to the policy. This is typically set automatically and does not need to be included in requests.
+
+    PolicyRequestUpdate:
+      allOf:
+        - $ref: '#/components/schemas/PolicyRequestBase'
+        - type: object
+          properties:
+            policy:
+              type: object
+              properties:
+                error_notification:
+                  type: object
+                  description: A Mustache template used to send notifications if the policy fails.
+                ism_template:
+                  type: object
+                  description: Defines index patterns that automatically bind this policy to new indexes.
+
+    PolicyState:
+      type: object
+      required:
+        - name
+        - actions
+        - transitions
+      properties:
+        name:
+          type: string
+          description: The name of the state
+        actions:
+          type: array
+          description: List of actions like `rollover`, `delete`, `read_only`, etc.
+          items:
+            type: object
+        transitions:
+          type: array
+          description: List of transitions to other states, optionally based on conditions. (e.g., `min_index_age`).
+          items:
+            type: object
+            properties:
+              state_name:
+                type: string
+              conditions:
+                type: object
+
+    PolicyResponse:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The unique identifier of the policy.
+        _version:
+          type: integer
+          description: The version number of the policy, incremented on each update.
+        _primary_term:
+          type: integer
+          description: The primary term used for optimistic concurrency control within the Wazuh indexer.
+        _seq_no:
+          type: integer
+          description: The sequence number for internal versioning.  This helps manage updates and conflict resolution.
+        policy:
+          type: object
+          properties:
+            policy:
+              type: object
+              properties:
+                policy_id:
+                  type: string
+                  description: The identifier of the policy.
+                description:
+                  type: string
+                  description: A description of what the policy is for (e.g., "ingesting logs").
+                last_updated_time:
+                  type: integer
+                  format: int64
+                  description: Timestamp in ms of the last time the policy was updated.
+                schema_version:
+                  type: integer
+                  description: Schema version of the policy definition.
+                error_notification:
+                  type: object
+                  nullable: true
+                  description: Optional field for setting up notifications (e.g., email or webhook) on policy errors.
+                default_state:
+                  type: string
+                  description: The name of the state where the policy begins.
+                states:
+                  type: array
+                  description: A list of lifecycle states the index will pass through.
+                  items:
+                    $ref: '#/components/schemas/PolicyState'
+                ism_template:
+                  type: object
+                  nullable: true
+                  description: Defines index templates to which this policy applies. `null` means no automatic binding to templates.
+
+    AddPolicyRequest:
+      type: object
+      required:
+        - policy_id
+      properties:
+        policy_id:
+          type: string
+          description: The ID of the Index State Management (ISM) policy to attach to the index.
+        rollover_alias:
+          type: string
+          description: The alias used for rollover operations.
+        is_manual:
+          type: boolean
+          description: Indicates whether the policy is manually managed. When set to `true`, the policy is not automatically removed.
+          default: false
+
+    AddPolicyResponse:
+      type: object
+      properties:
+        updated_indices:
+          type: integer
+          description: The number of indexes that were successfully updated with the ISM policy.
+        failures:
+          type: boolean
+          description: Indicates whether there were any failures while applying the policy. A value of `false` means all operations completed successfully.
+        failed_indices:
+          type: array
+          description: A list of indexes that failed to be updated. If empty, no failures occurred.
+          items:
+            type: string
+
+    VersionConflict:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            root_cause:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                  reason:
+                    type: string
+                  index:
+                    type: string
+                  shard:
+                    type: integer
+                  index_uuid:
+                    type: string
+            type:
+              type: string
+            reason:
+              type: string
+            index:
+              type: string
+            shard:
+              type: integer
+            index_uuid:
+              type: string
+        status:
+          type: integer
+
+    RemovePolicyResponse:
+      type: object
+      properties:
+        updated_indices:
+          type: integer
+          description: The number of indexes from which the ISM policy was successfully removed.
+        failures:
+          type: boolean
+          description: Indicates whether any errors occurred during the removal operation.
+        failed_indices:
+          type: array
+          description: A list of index names that failed to have their ISM policies removed. Empty if there were no failures.
+          items:
+            type: string
+
+    IndexNotFoundException:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            root_cause:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                  reason:
+                    type: string
+                  index:
+                    type: string
+                  resource.id:
+                    type: string
+                  resource.type:
+                    type: string
+                  index_uuid:
+                    type: string
+            type:
+              type: string
+            reason:
+              type: string
+            index:
+              type: string
+            resource.id:
+              type: string
+            resource.type:
+              type: string
+            index_uuid:
+              type: string
+        status:
+          type: integer
+
+    ChangePolicyRequest:
+      type: object
+      required:
+        - policy_id
+      properties:
+        policy_id:
+          type: string
+          description: The ID of the policy to apply to the index. This can refer to a new policy or a new version of an existing policy.
+        state:
+          type: string
+          description: The state that the managed index should transition to after the policy change takes effect.
+        include:
+          type: array
+          description: A filter to limit the policy change to managed indexes currently in a specific state.
+          items:
+            type: object
+            properties:
+              state:
+                type: string
+                description: A list of state names. The policy change only applies if the index is currently in one of the specified states.
+
+    ChangePolicyResponse:
+      type: object
+      properties:
+        updated_indices:
+          type: integer
+          description: The number of indexes that successfully had their ISM policy changed.
+        failures:
+          type: boolean
+          description: Indicates whether any errors occurred while applying the policy change.
+        failed_indices:
+          type: array
+          description: A list of indexes for which the policy update failed. An empty array (`[]`) means no indexes failed to update.
+          items:
+            type: string
+
+    RetryFailedIndexResponse:
+      type: object
+      properties:
+        updated_indices:
+          type: integer
+          description: The number of indexes for which the retry was successfully initiated.
+        failures:
+          type: boolean
+          description: Indicates whether there were any failures while processing the request.
+        failed_indices:
+          type: array
+          description: |
+            A list of indexes that failed to be retried, including their names, UUIDs, and failure reasons.
+            Empty if there are no failures.
+          items:
+            type: string
+
+    ExplainIndexResponse:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/IndexExplanation'
+      properties:
+        total_managed_indices:
+          type: integer
+          description: The number of indexes currently managed by ISM in the cluster.
+
+    IndexExplanation:
+      type: object
+      properties:
+        "index.plugins.index_state_management.policy_id":
+          type: string
+          description: The policy ID assigned to the index (legacy key for backward compatibility).
+        "index.opendistro.index_state_management.policy_id":
+          type: string
+          description: Another legacy key showing the assigned policy ID.
+        index:
+          type: string
+          description: The name of the index being managed.
+        index_uuid:
+          type: string
+          description: This is the universally unique identifier for the index.
+        policy_id:
+          type: string
+          description: The id of the ISM policy currently applied to the index.
+        policy_seq_no:
+          type: integer
+          description: This is the sequence number of the policy used for optimistic concurrency control.
+        policy_primary_term:
+          type: integer
+          description: This is the primary term of the policy, also used for concurrency control.
+        rolled_over:
+          type: boolean
+          description: This indicates whether the index has been rolled over.
+        index_creation_date:
+          type: integer
+          format: int64
+          description: The timestamp (epoch) when the index was created.
+        state:
+          type: object
+          properties:
+            name:
+              type: string
+              description: This is the name of the active state in the policy.
+            start_time:
+              type: integer
+              format: int64
+              description: This refers to the time when the index entered the current state.
+        action:
+          type: object
+          properties:
+            name:
+              type: string
+              description: This refers to the name of the action.
+            start_time:
+              type: integer
+              format: int64
+              description: This is the time when the action started.
+            index:
+              type: integer
+              description: This is the position of the action within the state's action list.
+            failed:
+              type: boolean
+              description: Specifies whether the action failed.
+            consumed_retries:
+              type: integer
+              description: This refers to the number of retry attempts consumed.
+            last_retry_time:
+              type: integer
+              format: int64
+              description: The time of the last retry attempt.
+        step:
+          type: object
+          properties:
+            name:
+              type: string
+              description: This is the name of the current step.
+            start_time:
+              type: integer
+              format: int64
+              description: This is the time when the current step began.
+            step_status:
+              type: string
+              description: This refers to the status of the current step.
+        retry_info:
+          type: object
+          properties:
+            failed:
+              type: boolean
+              description: Specifies whether the retry attempts have failed.
+            consumed_retries:
+              type: integer
+              description: This is the number of retries used for the failed step.
+        info:
+          type: object
+          properties:
+            message:
+              type: string
+              description: This is an error or informative message (e.g., missing required setting).
+        enabled:
+          type: boolean
+          description: Specifies whether ISM is currently enabled for this index.
+
+    DeletePolicyResponse:
+      type: object
+      properties:
+        _index:
+          type: string
+          description: The internal index where the policy document was stored (usually `.opendistro-ism-config`).
+        _id:
+          type: string
+          description: The unique identifier of the policy that was deleted.
+        _version:
+          type: integer
+          description: The new version number of the document after deletion.
+        result:
+          type: string
+          description: Indicates the outcome of the operation. In this case, deleted confirms successful deletion.
+        forced_refresh:
+          type: boolean
+          description: Specifies whether a refresh was forced to make the deletion visible to search immediately.
+        _shards:
+          type: object
+          properties:
+            total:
+              type: integer
+              description: The total number of shards involved in the deletion.
+            successful:
+              type: integer
+              description: The number of shards where the deletion was successful.
+            failed:
+              type: integer
+              description: The number of shards where the deletion failed.
+        _seq_no:
+          type: integer
+          description: The sequence number assigned to the operation for internal tracking.
+        _primary_term:
+          type: integer
+          description: The primary term assigned for concurrency control in OpenSearch.
+
+  responses:
+    PolicyBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: 'spec.yml#/components/schemas/SecurityError'
+          examples:
+            missingText:
+              value:
+                error:
+                  root_cause:
+                    - type: "illegal_argument_exception"
+                      reason: "Missing policy ID"
+                  type: "illegal_argument_exception"
+                  reason: "Missing policy ID"
+                status: 400
+
+    PolicyBadRequestGet:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: 'spec.yml#/components/schemas/SecurityError'
+          examples:
+            missingText:
+              value:
+                error:
+                  root_cause:
+                    - type: "illegal_argument_exception"
+                      reason: "request [/_plugins/_ism/policies/policy_1] contains unrecognized parameter: [flat_settings]"
+                  type: "illegal_argument_exception"
+                  reason: "request [/_plugins/_ism/policies/policy_1] contains unrecognized parameter: [flat_settings]"
+                status: 400
+
+    PolicyBadRequestUpdate:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: 'spec.yml#/components/schemas/SecurityError'
+          examples:
+            missingText:
+              value:
+                error:
+                  root_cause:
+                    - type: "parse_exception"
+                      reason: "request body is required"
+                  type: "parse_exception"
+                  reason: "request body is required"
+                status: 400
+
+    PolicyBadRequestRemove:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: 'spec.yml#/components/schemas/SecurityError'
+          example:
+            error:
+              root_cause:
+                - type: "illegal_argument_exception"
+                  reason: "Missing indices"
+              type: "illegal_argument_exception"
+              reason: "Missing indices"
+            status: 400
+
+    PolicyBadRequestExplain:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: 'spec.yml#/components/schemas/SecurityError'
+          examples:
+            missingText:
+              value:
+                error:
+                  root_cause:
+                    - type: "action_request_validation_exception"
+                      reason: "Validation Failed: 1: no documents to get;"
+                  type: "action_request_validation_exception"
+                  reason: "Validation Failed: 1: no documents to get;"
+                status: 400
+
+    PolicyBadRequestDelete:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: 'spec.yml#/components/schemas/SecurityError'
+          example:
+
+    PolicyNotFound:
+      description: Response to report a request not found
+      content:
+        application/json:
+          schema:
+            $ref: 'spec.yml#/components/schemas/SecurityError'
+          example:
+            error:
+              root_cause:
+                - type: "status_exception"
+                  reason: "Could not find policy=policy_10"
+              type: "status_exception"
+              reason: "Could not find policy=policy_10"
+            status: 404
+
+    PolicyNotFoundGet:
+      description: Response to report a request not found
+      content:
+        application/json:
+          schema:
+            $ref: 'spec.yml#/components/schemas/SecurityError'
+          example:
+            error:
+              root_cause:
+                - type: "status_exception"
+                  reason: "Policy not found"
+              type: "status_exception"
+              reason: "Policy not found"
+            status: 404
+
+    PolicyNotFoundRemove:
+      description: Response to report a request not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IndexNotFoundException'
+          example:
+            error:
+              root_cause:
+                - type: "index_not_found_exception"
+                  reason: "no such index [wazuh-alerts-4.x-2025.03.40]"
+                  index: "wazuh-alerts-4.x-2025.03.40"
+                  resource.id: "wazuh-alerts-4.x-2025.03.40"
+                  resource.type: "index_or_alias"
+                  index_uuid: "_na_"
+              type: "index_not_found_exception"
+              reason: "no such index [wazuh-alerts-4.x-2025.03.40]"
+              index: "wazuh-alerts-4.x-2025.03.40"
+              resource.id: "wazuh-alerts-4.x-2025.03.40"
+              resource.type: "index_or_alias"
+              index_uuid: "_na_"
+            status: 404
+
+    PolicyNotFoundDelete:
+      description: Response to report a request not found
+      content:
+        application/json:
+          schema:
+            $ref: 'spec.yml#/components/schemas/SecurityError'
+          example:
+            error:
+              root_cause:
+                - type: "status_exception"
+                  reason: "Policy policy_3 is not found"
+              type: "status_exception"
+              reason: "Policy policy_3 is not found"
+            status: 404
+
+    VersionConflict:
+      description: Response to report a version conflict
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/VersionConflict'
+          example:
+            error:
+              root_cause:
+                - type: "version_conflict_engine_exception"
+                  reason: "[policy_1]: version conflict, document already exists (current version [1])"
+                  index: ".opendistro-ism-config"
+                  shard: "0"
+                  index_uuid: "Bcf6j1bkSKG5-sKZnV11sg"
+              type: "version_conflict_engine_exception"
+              reason: "[policy_1]: version conflict, document already exists (current version [1])"
+              index: ".opendistro-ism-config"
+              shard: "0"
+              index_uuid: "Bcf6j1bkSKG5-sKZnV11sg"
+            status: 409
+
+    VersionConflictUpdate:
+      description: Response to report a version conflict
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/VersionConflict'
+          example:
+            error:
+              root_cause:
+                - type: "version_conflict_engine_exception"
+                  reason: "[policy_1]: version conflict, required seqNo [140840], primary term [23]. current document has seqNo [144943] and primary term [8]"
+                  index: ".opendistro-ism-config"
+                  shard: "0"
+                  index_uuid: "Bcf6j1bkSKG5-sKZnV11sg"
+              type: "version_conflict_engine_exception"
+              reason: "[policy_1]: version conflict, required seqNo [140840], primary term [23]. current document has seqNo [144943] and primary term [8]"
+              index: ".opendistro-ism-config"
+              shard: "0"
+              index_uuid: "Bcf6j1bkSKG5-sKZnV11sg"
+            status: 409
