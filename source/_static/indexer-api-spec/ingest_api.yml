@@ -38,6 +38,8 @@ components:
         description:
           type: string
           description: A brief explanation or summary of the ingest pipeline.
+      required:
+        - processors
 
     CreatePipelineResponse:
       type: object
@@ -120,6 +122,53 @@ components:
         status:
           type: integer
 
+    SimulatePipelineRequest:
+      type: object
+      properties:
+        pipeline:
+          type: object
+          description: Pipeline definition to simulate (optional).
+        docs:
+          type: array
+          description: List of documents to simulate.
+          items:
+            type: object
+            properties:
+              _index:
+                type: string
+              _id:
+                type: string
+              _source:
+                type: object
+                additionalProperties: true
+      required:
+        - docs
+
+    SimulatePipelineResponse:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            type: object
+            properties:
+              doc:
+                type: object
+                properties:
+                  _index:
+                    type: string
+                  _id:
+                    type: string
+                  _source:
+                    type: object
+                    additionalProperties: true
+                  _ingest:
+                    type: object
+                    properties:
+                      timestamp:
+                        type: string
+                        format: date-time
+
   requestBodies:
     CreatePipelineRequest:
       content:
@@ -139,6 +188,26 @@ components:
                   value: true
               - uppercase:
                   field: "name"
+
+    SimulatePipelineRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SimulatePipelineRequest'
+          example:
+            docs:
+              - _index: my-index
+                _id: "1"
+                _source:
+                  grad_year: 2024
+                  graduated: false
+                  name: "John Doe"
+              - _index: my-index
+                _id: "2"
+                _source:
+                  grad_year: 2025
+                  graduated: false
+                  name: "Jane Doe"
 
   responses:
     CreatePipelineSuccess:
@@ -228,7 +297,7 @@ components:
                 - set:
                     description: "Sets graduated to true"
                     field: "graduated"
-                    value: true
+                    value: 5
                 - uppercase:
                     field: "name"
 
@@ -250,14 +319,303 @@ components:
           schema:
             type: object
             properties:
-              root_cause:
+              error:
                 type: object
                 properties:
+                  root_cause:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        reason:
+                          type: string
                   type:
                     type: string
                   reason:
                     type: string
+              status:
+                type: integer
           example:
-            root_cause:
+            error:
+              root_cause:
+                - type: "security_exception"
+                  reason: "no permissions for [indices:admin/analyze] and User [name=test, backend_roles=[], requestedTenant=null]"
               type: "security_exception"
-              reason: "no permissions for [indices:admin/ingest] and User [name=test, backend_roles=[], requestedTenant=null]" 
+              reason: "no permissions for [indices:admin/analyze] and User [name=test, backend_roles=[], requestedTenant=null]"
+            status: 403
+
+    GetPipelineNotFound:
+      description: Response to report a request not found
+      content:
+        application/json:
+          schema:
+            type: string
+          example: "404 - Not Found"
+
+    SimulatePipelineSuccess:
+      description: Simulation successful
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SimulatePipelineResponse'
+          example:
+            docs:
+              - doc:
+                  _index: my-index
+                  _id: "1"
+                  _source:
+                    name: "JOHN DOE"
+                    grad_year: 2023
+                    graduated: true
+                  _ingest:
+                    timestamp: "2025-04-22T09:00:01.674578946Z"
+              - doc:
+                  _index: my-index
+                  _id: "2"
+                  _source:
+                    name: "JANE DOE"
+                    grad_year: 2023
+                    graduated: true
+                  _ingest:
+                    timestamp: "2025-04-22T09:00:01.674584808Z"
+
+    SimulatePipelineBadRequest:
+      description: Bad request – e.g. pipeline not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  root_cause:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        reason:
+                          type: string
+                  type:
+                    type: string
+                  reason:
+                    type: string
+              status:
+                type: integer
+          example:
+            error:
+              root_cause:
+                - type: illegal_argument_exception
+                  reason: pipeline [wazuh-pipelines] does not exist
+              type: illegal_argument_exception
+              reason: pipeline [wazuh-pipelines] does not exist
+            status: 400
+
+    SimulatePipelineUnauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              root_cause:
+                type: string
+          example: "Unauthorized"
+
+    SimulatePipelineForbidden:
+      description: Permission Denied
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  root_cause:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        reason:
+                          type: string
+                  type:
+                    type: string
+                  reason:
+                    type: string
+              status:
+                type: integer
+          example:
+            error:
+              root_cause:
+                - type: security_exception
+                  reason: no permissions for [indices:admin/analyze] and User [name=test, backend_roles=[], requestedTenant=null]
+              type: security_exception
+              reason: no permissions for [indices:admin/analyze] and User [name=test, backend_roles=[], requestedTenant=null]
+            status: 403
+
+    AccessPipelineDataSuccess:
+      description: Successfully accessed pipeline data
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true
+          example:
+            pipeline_data:
+              processors:
+                - set:
+                    field: environment
+                    value: production
+                - set:
+                    field: received_at
+                    value: "{{_ingest.timestamp}}"
+              description: "Pipeline for accessing and transforming document data"
+
+    AccessPipelineDataUnauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            type: string
+          example: "Unauthorized"
+
+    AccessPipelineDataForbidden:
+      description: Permission Denied
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  root_cause:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        reason:
+                          type: string
+                  type:
+                    type: string
+                  reason:
+                    type: string
+              status:
+                type: integer
+          example:
+            error:
+              root_cause:
+                - type: security_exception
+                  reason: no permissions for [indices:admin/ingest] and User [name=test, backend_roles=[], requestedTenant=null]
+              type: security_exception
+              reason: no permissions for [indices:admin/ingest] and User [name=test, backend_roles=[], requestedTenant=null]
+            status: 403
+
+    AccessPipelineDataNotFound:
+      description: Pipeline not found
+      content:
+        application/json:
+          schema:
+            type: string
+          example: "404 - Not Found"
+
+    DeletePipelineSuccess:
+      description: Pipeline deleted successfully
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              acknowledged:
+                type: boolean
+                description: This indicates whether the pipeline deletion request was successfully received and processed by the Wazuh indexer. A value of true confirms the pipeline was deleted.
+          example:
+            acknowledged: true
+
+    DeletePipelineUnauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              root_cause:
+                type: string
+          example: "Unauthorized"
+
+    DeletePipelineForbidden:
+      description: Permission Denied
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  root_cause:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        reason:
+                          type: string
+                  type:
+                    type: string
+                  reason:
+                    type: string
+              status:
+                type: integer
+          example:
+            error:
+              root_cause:
+                - type: security_exception
+                  reason: no permissions for [indices:admin/analyze] and User [name=test, backend_roles=[], requestedTenant=null]
+              type: security_exception
+              reason: no permissions for [indices:admin/analyze] and User [name=test, backend_roles=[], requestedTenant=null]
+            status: 403
+
+    DeletePipelineNotFound:
+      description: Pipeline not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  root_cause:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        reason:
+                          type: string
+                  type:
+                    type: string
+                  reason:
+                    type: string
+              status:
+                type: integer
+          example:
+            error:
+              root_cause:
+                - type: resource_not_found_exception
+                  reason: pipeline [wazuh-pipeline1] is missing
+              type: resource_not_found_exception
+              reason: pipeline [wazuh-pipeline1] is missing
+            status: 404 
