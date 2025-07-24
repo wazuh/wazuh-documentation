@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description:
+   :description: Learn how to use Wazuh global queries to visualize FIM and system inventory data across endpoints using the Inventory Harvester and dashboard views.
 
 Global queries
 ==============
