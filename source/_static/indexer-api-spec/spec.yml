@@ -28,8 +28,8 @@ servers:
         description: API port number
 
 security:
-  - basicAuth: []
-  - jwtAuth: []
+  - basicAuth: [ ]
+  - jwtAuth: [ ]
 
 paths:
   /:
@@ -40,8 +40,8 @@ paths:
       description: Return basic information about the API
       operationId: getApiInfo
       security:
-        - basicAuth: []
-        - jwtAuth: []
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
       parameters:
         - $ref: '#/components/parameters/pretty'
       responses:
@@ -72,7 +72,7 @@ paths:
 
   /_analyze:
     get:
-      tags: [Analyze API]
+      tags: [ Analyze API ]
       summary: Text analysis (Global GET)
       description: |
         The analyze API endpoint enables text analysis by transforming unstructured text into individual tokens, typically words, optimized for search functionality. It processes a text string and returns the corresponding tokens as the output. It helps you debug and fine-tune text analysis settings for indexing and querying, providing insight into how text is broken into tokens and how filters are applied.
@@ -98,11 +98,11 @@ paths:
         '403':
           $ref: '#/components/responses/Forbidden'
       security:
-        - basicAuth: []
-        - jwtAuth: []
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
 
     post:
-      tags: [Analyze API]
+      tags: [ Analyze API ]
       summary: Text analysis (Global POST)
       description: |
         The analyze API endpoint enables text analysis by transforming unstructured text into individual tokens, typically words, optimized for search functionality. It processes a text string and returns the corresponding tokens as the output. It helps you debug and fine-tune text analysis settings for indexing and querying, providing insight into how text is broken into tokens and how filters are applied.
@@ -128,14 +128,14 @@ paths:
         '403':
           $ref: '#/components/responses/Forbidden'
       security:
-        - basicAuth: []
-        - jwtAuth: []
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
 
   /{index}/_analyze:
     parameters:
       - $ref: 'analyze_api.yml#/components/parameters/index'
     get:
-      tags: [Analyze API]
+      tags: [ Analyze API ]
       summary: Text analysis (Index GET)
       description: |
         The analyze API endpoint enables text analysis by transforming unstructured text into individual tokens, typically words, optimized for search functionality. It processes a text string and returns the corresponding tokens as the output. It helps you debug and fine-tune text analysis settings for indexing and querying, providing insight into how text is broken into tokens and how filters are applied.
@@ -162,11 +162,11 @@ paths:
         '403':
           $ref: '#/components/responses/Forbidden'
       security:
-        - basicAuth: []
-        - jwtAuth: []
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
 
     post:
-      tags: [Analyze API]
+      tags: [ Analyze API ]
       summary: Text analysis (Index POST)
       description: |
         The analyze API endpoint enables text analysis by transforming unstructured text into individual tokens, typically words, optimized for search functionality. It processes a text string and returns the corresponding tokens as the output. It helps you debug and fine-tune text analysis settings for indexing and querying, providing insight into how text is broken into tokens and how filters are applied.
@@ -193,12 +193,503 @@ paths:
         '403':
           $ref: '#/components/responses/Forbidden'
       security:
-        - basicAuth: []
-        - jwtAuth: []
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
+
+  /_ingest/pipeline/{pipeline_id}:
+    parameters:
+      - $ref: 'ingest_api.yml#/components/parameters/pipeline_id'
+    put:
+      tags: [ Ingest APIs ]
+      summary: Create or Update Pipeline
+      description: |
+        The Create Pipeline API operation is used to define or update pipelines in OpenSearch. Each pipeline must include at least one processor, which determines how documents are modified during ingestion.
+
+        ### Template snippets
+        Some processor parameters support Mustache template snippets. To get the value of a field, surround the field name in three curly braces, for example:
+
+        ```
+        {{{field-name}}}
+        ```
+
+        **Example:** set ingest processor using Mustache template snippet
+
+        The following example sets the field `{{{role}}}` with a value `{{{tenure}}}`:
+
+        ```
+        PUT _ingest/pipeline/wazuh-pipeline
+        {
+          "processors": [
+            {
+              "set": {
+                "field": "{{{role}}}",
+                "value": "{{{tenure}}}"
+              }
+            }
+          ]
+        }
+        ```
+      operationId: createUpdatePipeline
+      parameters:
+        - $ref: 'ingest_api.yml#/components/parameters/cluster_manager_timeout'
+        - $ref: 'ingest_api.yml#/components/parameters/timeout'
+      requestBody:
+        $ref: 'ingest_api.yml#/components/requestBodies/CreatePipelineRequest'
+      responses:
+        '200':
+          $ref: 'ingest_api.yml#/components/responses/CreatePipelineSuccess'
+        '400':
+          $ref: 'ingest_api.yml#/components/responses/CreatePipelineBadRequest'
+        '401':
+          $ref: 'ingest_api.yml#/components/responses/CreatePipelineUnauthorized'
+        '403':
+          $ref: 'ingest_api.yml#/components/responses/CreatePipelineForbidden'
+        '409':
+          $ref: 'ingest_api.yml#/components/responses/CreatePipelineConflict'
+      security:
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
+
+    get:
+      tags: [ Ingest APIs ]
+      summary: Get Pipeline
+      description: |
+        The get ingest pipeline API operation retrieves all the information about the pipeline. The get ingest pipeline API operation retrieves all the information about the pipeline. Use the GET _ingest/pipeline/ to retrieve information about all ingest pipelines.
+      operationId: getPipeline
+      parameters:
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: 'ingest_api.yml#/components/responses/GetPipelineSuccess'
+        '401':
+          $ref: 'ingest_api.yml#/components/responses/GetPipelineUnauthorized'
+        '403':
+          $ref: 'ingest_api.yml#/components/responses/GetPipelineForbidden'
+        '404':
+          $ref: 'ingest_api.yml#/components/responses/GetPipelineNotFound'
+      security:
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
+
+  /_ingest/pipeline/{pipeline_id}/_simulate:
+    get:
+      tags: [ Ingest APIs ]
+      summary: (GET) Simulate pipeline
+      description: |
+        The following requests simulate a single pipeline based on the pipeline id:
+      operationId: simulatePipeline
+      parameters:
+        - name: pipeline_id
+          in: path
+          required: true
+          description: The unique identifier of the ingest pipeline you want to simulate. The simulation will run the defined processors in the pipeline against sample input documents you provide in the request body.
+          schema:
+            type: string
+        - name: verbose
+          in: query
+          required: false
+          description: |
+            This enables verbose mode, which includes the output data after each processor in the pipeline execution.
+          schema:
+            type: boolean
+        - $ref: '#/components/parameters/pretty'
+      requestBody:
+        $ref: 'ingest_api.yml#/components/requestBodies/SimulatePipelineRequest'
+      responses:
+        '200':
+          $ref: 'ingest_api.yml#/components/responses/SimulatePipelineSuccess'
+        '400':
+          $ref: 'ingest_api.yml#/components/responses/SimulatePipelineBadRequest'
+        '401':
+          $ref: 'ingest_api.yml#/components/responses/SimulatePipelineUnauthorized'
+        '403':
+          $ref: 'ingest_api.yml#/components/responses/SimulatePipelineForbidden'
+      security:
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
+
+    post:
+      tags: [ Ingest APIs ]
+      summary: (POST) Simulate pipeline
+      description: |
+        The following requests simulate a single pipeline based on the pipeline id:
+      operationId: simulatePipelinePost
+      parameters:
+        - name: pipeline_id
+          in: path
+          required: true
+          description: The unique identifier of the ingest pipeline you want to simulate. The simulation will run the defined processors in the pipeline against sample input documents you provide in the request body.
+          schema:
+            type: string
+        - name: verbose
+          in: query
+          required: false
+          description: |
+            This enables verbose mode, which includes the output data after each processor in the pipeline execution.
+          schema:
+            type: boolean
+        - $ref: '#/components/parameters/pretty'
+      requestBody:
+        $ref: 'ingest_api.yml#/components/requestBodies/SimulatePipelineRequest'
+      responses:
+        '200':
+          $ref: 'ingest_api.yml#/components/responses/SimulatePipelineSuccess'
+        '400':
+          $ref: 'ingest_api.yml#/components/responses/SimulatePipelineBadRequest'
+        '401':
+          $ref: 'ingest_api.yml#/components/responses/SimulatePipelineUnauthorized'
+        '403':
+          $ref: 'ingest_api.yml#/components/responses/SimulatePipelineForbidden'
+      security:
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
+
+  /_ingest/pipeline/_simulate:
+    get:
+      tags: [ Ingest APIs ]
+      summary: (GET) Simulate pipeline
+      description: |
+        The following requests simulate the latest ingest pipeline created
+      operationId: simulateLatestPipeline
+      parameters:
+        - name: verbose
+          in: query
+          required: false
+          description: |
+            This enables verbose mode, which includes the output data after each processor in the pipeline execution.
+          schema:
+            type: boolean
+        - $ref: '#/components/parameters/pretty'
+      requestBody:
+        $ref: 'ingest_api.yml#/components/requestBodies/SimulatePipelineRequest'
+      responses:
+        '200':
+          $ref: 'ingest_api.yml#/components/responses/SimulatePipelineSuccess'
+        '400':
+          $ref: 'ingest_api.yml#/components/responses/SimulatePipelineBadRequest'
+        '401':
+          $ref: 'ingest_api.yml#/components/responses/SimulatePipelineUnauthorized'
+        '403':
+          $ref: 'ingest_api.yml#/components/responses/SimulatePipelineForbidden'
+      security:
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
+
+    post:
+      tags: [ Ingest APIs ]
+      summary: (POST) Simulate pipeline
+      description: |
+        The following requests simulate the latest ingest pipeline created
+      operationId: simulateLatestPipelinePost
+      parameters:
+        - name: verbose
+          in: query
+          required: false
+          description: |
+            This enables verbose mode, which includes the output data after each processor in the pipeline execution.
+          schema:
+            type: boolean
+        - $ref: '#/components/parameters/pretty'
+      requestBody:
+        $ref: 'ingest_api.yml#/components/requestBodies/SimulatePipelineRequest'
+      responses:
+        '200':
+          $ref: 'ingest_api.yml#/components/responses/SimulatePipelineSuccess'
+        '400':
+          $ref: 'ingest_api.yml#/components/responses/SimulatePipelineBadRequest'
+        '401':
+          $ref: 'ingest_api.yml#/components/responses/SimulatePipelineUnauthorized'
+        '403':
+          $ref: 'ingest_api.yml#/components/responses/SimulatePipelineForbidden'
+      security:
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
+
+  /_ingest/pipeline/{pipeline_id}/_data:
+    get:
+      tags: [ Ingest APIs ]
+      summary: Access Data in a Pipeline
+      description: |
+        In ingest pipelines, the ctx object provides access to the document's data. This object represents the document being processed and enables you to read, update, or enrich its fields. Processors within the pipeline have read and write access to both the document's _source field and its metadata fields.
+
+        ## Accessing document fields
+        The ctx object makes all document fields accessible, allowing you to reference them directly using dot notation.
+
+        **Example: Access a top-level field**
+        Given the following example document:
+        ```json
+        {
+          "user": "alice"
+        }
+        ```
+
+        You can access user as follows:
+        ```json
+        "field": "ctx.user"
+        ```
+
+        **Example: Access a nested field**
+        Given the following example document:
+        ```json
+        {
+          "user": {
+            "name": "alice"
+          }
+        }
+        ```
+
+        You can access user.name as follows:
+        ```json
+        "field": "ctx.user.name"
+        ```
+
+        ## Accessing a field in the source
+        To access a field in the document _source, refer to the field by its name:
+        ```json
+        {
+          "set": {
+            "field": "environment",
+            "value": "production"
+          }
+        }
+        ```
+
+        Alternatively, you can explicitly use _source:
+        ```json
+        {
+          "set": {
+            "field": "_source.environment",
+            "value": "production"
+          }
+        }
+        ```
+
+        ## Accessing metadata fields
+        You can read or write to metadata fields such as _index, _type, _id, _routing.
+
+        **Example: Set _routing dynamically**
+        ```json
+        {
+          "set": {
+            "field": "_routing",
+            "value": "{{region}}"
+          }
+        }
+        ```
+
+        Using {{_id}} is not supported when document IDs are auto-generated.
+
+        ## Accessing ingest metadata fields
+        The _ingest.timestamp field represents the time at which the ingest node received the document. To persist this timestamp, use the set processor:
+        ```json
+        {
+          "set": {
+            "field": "received_at",
+            "value": "{{_ingest.timestamp}}"
+          }
+        }
+        ```
+
+        ## Using ctx in Mustache templates
+        Mustache templates allow you to dynamically insert field values into processor settings. To include unescaped field values, use triple curly braces ({{{ and }}}).
+
+        **Example: Combining source fields**
+        The following processor configuration combines the app and env fields, separated by an underscore (_), and stores the result in the log_label field:
+        ```json
+        {
+          "set": {
+            "field": "log_label",
+            "value": "{{{app}}}_{{{env}}}"
+          }
+        }
+        ```
+
+        **Example: Generating a dynamic greeting using the set processor**
+        If a document's user field is set to alice, use the following syntax to produce the result "greeting": "Hello, alice!":
+        ```json
+        {
+          "set": {
+            "field": "greeting",
+            "value": "Hello, {{{user}}}!"
+          }
+        }
+        ```
+
+        ## Dynamic field names
+        You can use a field's value as the name of a new field:
+        ```json
+        {
+          "set": {
+            "field": "{{service}}",
+            "value": "{{code}}"
+          }
+        }
+        ```
+
+        **Example: Routing to a dynamic index based on status**
+        The following processor configuration sets the target index dynamically by appending -events to the value of the status field:
+        ```json
+        {
+          "set": {
+            "field": "_index",
+            "value": "{{status}}-events"
+          }
+        }
+        ```
+
+        ## Using ctx in the script processor
+        The script processor enables advanced transformations by allowing you to execute custom scripts that modify document fields during ingestion.
+
+        **Example: Adding a field only if another is missing**
+        The following processor adds the error_message field with the value "none" only if the field is missing from the document:
+        ```json
+        {
+          "script": {
+            "lang": "painless",
+            "source": "if (ctx.error_message == null) { ctx.error_message = 'none'; }"
+          }
+        }
+        ```
+
+        **Example: Copying a value from one field to another**
+        The following processor copies the value from the timestamp field into a new field called event_time:
+        ```json
+        {
+          "script": {
+            "lang": "painless",
+            "source": "ctx.event_time = ctx.timestamp;"
+          }
+        }
+        ```
+
+        **Example of a complete pipeline**
+        The example below presents a complete ingest pipeline that sets a value for the tagline field using an existing field from the document, extracts the year from the date field, and captures the document's ingest timestamp in the received_at field.
+        ```json
+        PUT _ingest/pipeline/example-pipeline
+        {
+          "description": "Sets tags, log label, and defaults error message",
+          "processors": [
+            {
+              "set": {
+                "field": "tagline",
+                "value": "{{{user.first}}} from {{{department}}}"
+              }
+            },
+            {
+              "script": {
+                "lang": "painless",
+                "source": "ctx.year = ctx.date.substring(0, 4);"
+              }
+            },
+            {
+              "set": {
+                "field": "received_at",
+                "value": "{{_ingest.timestamp}}"
+              }
+            }
+          ]
+        }
+        ```
+
+        **To test the pipeline, use the following request:**
+        ```json
+        POST _ingest/pipeline/example-pipeline/_simulate
+        {
+          "docs": [
+            {
+              "_source": {
+                "user": {
+                  "first": "Liam"
+                },
+                "department": "Engineering",
+                "date": "2024-12-03T14:05:00Z"
+              }
+            }
+          ]
+        }
+        ```
+
+        **The response shows the enriched document after processing, including the newly added tagline, extracted year, and the received_at timestamp generated by the ingest pipeline:**
+        ```json
+        {
+          "docs": [
+            {
+              "doc": {
+                "_index": "_index",
+                "_id": "_id",
+                "_source": {
+                  "date": "2024-12-03T14:05:00Z",
+                  "year": "2024",
+                  "received_at": "2025-04-22T11:18:50.834050015Z",
+                  "tagline": "Liam from Engineering",
+                  "department": "Engineering",
+                  "user": {
+                    "first": "Liam"
+                  }
+                },
+                "_ingest": {
+                  "timestamp": "2025-04-22T11:18:50.834050015Z"
+                }
+              }
+            }
+          ]
+        }
+        ```
+      operationId: accessPipelineData
+      parameters:
+        - name: pipeline_id
+          in: path
+          required: true
+          description: The unique identifier of the ingest pipeline to access data from.
+          schema:
+            type: string
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: 'ingest_api.yml#/components/responses/AccessPipelineDataSuccess'
+        '401':
+          $ref: 'ingest_api.yml#/components/responses/AccessPipelineDataUnauthorized'
+        '403':
+          $ref: 'ingest_api.yml#/components/responses/AccessPipelineDataForbidden'
+        '404':
+          $ref: 'ingest_api.yml#/components/responses/AccessPipelineDataNotFound'
+      security:
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
+    
+    
+    delete:
+      tags: [ Ingest APIs ]
+      summary: Delete Pipeline
+      description: |
+        The delete pipeline API operation deletes a pipeline.
+        
+        You can delete a specific pipeline by its ID or use wildcards to delete multiple pipelines.
+      operationId: deletePipeline
+      parameters:
+        - name: pipeline_id
+          in: path
+          required: true
+          description: The unique identifier of the ingest pipeline you want to delete. You can also use wildcards like * to delete multiple pipelines.
+          schema:
+            type: string
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: 'ingest_api.yml#/components/responses/DeletePipelineSuccess'
+        '401':
+          $ref: 'ingest_api.yml#/components/responses/DeletePipelineUnauthorized'
+        '403':
+          $ref: 'ingest_api.yml#/components/responses/DeletePipelineForbidden'
+        '404':
+          $ref: 'ingest_api.yml#/components/responses/DeletePipelineNotFound'
+      security:
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
 
   /_search/scroll:
     get:
-      tags: [Scroll]
+      tags: [ Scroll ]
       summary: Scroll search (GET)
       operationId: scrollSearchGet
       parameters:
@@ -217,11 +708,11 @@ paths:
         '403':
           $ref: '#/components/responses/Forbidden'
       security:
-        - basicAuth: []
-        - jwtAuth: []
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
 
     post:
-      tags: [Scroll]
+      tags: [ Scroll ]
       summary: Scroll search (POST)
       operationId: scrollSearchPost
       parameters:
@@ -240,14 +731,14 @@ paths:
         '403':
           $ref: '#/components/responses/Forbidden'
       security:
-        - basicAuth: []
-        - jwtAuth: []
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
 
   /_search/scroll/{scroll_id}:
     parameters:
       - $ref: 'search_api.yml#/components/parameters/scroll_id_path'
     get:
-      tags: [Scroll]
+      tags: [ Scroll ]
       summary: Scroll search by ID (GET)
       operationId: scrollSearchByIdGet
       parameters:
@@ -265,11 +756,11 @@ paths:
         '403':
           $ref: '#/components/responses/Forbidden'
       security:
-        - basicAuth: []
-        - jwtAuth: []
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
 
     post:
-      tags: [Scroll]
+      tags: [ Scroll ]
       summary: Scroll search by ID (POST)
       operationId: scrollSearchByIdPost
       parameters:
@@ -287,12 +778,12 @@ paths:
         '403':
           $ref: '#/components/responses/Forbidden'
       security:
-        - basicAuth: []
-        - jwtAuth: []
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
 
   /_search:
     get:
-      tags: [Search]
+      tags: [ Search ]
       summary: Global search (GET)
       operationId: searchGlobalGet
       parameters:
@@ -354,11 +845,11 @@ paths:
         '404':
           $ref: 'search_api.yml#/components/responses/SearchNotFound'
       security:
-        - basicAuth: []
-        - jwtAuth: []
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
 
     post:
-      tags: [Search]
+      tags: [ Search ]
       summary: Global search (POST)
       operationId: searchGlobalPost
       parameters:
@@ -420,14 +911,14 @@ paths:
         '404':
           $ref: 'search_api.yml#/components/responses/SearchNotFound'
       security:
-        - basicAuth: []
-        - jwtAuth: []
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
 
   /{index}/_search:
     parameters:
       - $ref: 'analyze_api.yml#/components/parameters/index'
     get:
-      tags: [Search]
+      tags: [ Search ]
       summary: Index search (GET)
       operationId: searchIndexGet
       parameters:
@@ -489,11 +980,11 @@ paths:
         '404':
           $ref: 'search_api.yml#/components/responses/SearchNotFound'
       security:
-        - basicAuth: []
-        - jwtAuth: []
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
 
     post:
-      tags: [Search]
+      tags: [ Search ]
       summary: Index search (POST)
       operationId: searchIndexPost
       parameters:
@@ -555,12 +1046,12 @@ paths:
         '404':
           $ref: 'search_api.yml#/components/responses/SearchNotFound'
       security:
-        - basicAuth: []
-        - jwtAuth: []
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
 
   /_cluster/allocation/explain:
     get:
-      tags: [Cluster API]
+      tags: [ Cluster API ]
       summary: Cluster allocation explain (GET)
       description: |
         The cluster allocation explain request finds an unassigned shard and explains why it cannot be allocated to a node.
@@ -585,11 +1076,11 @@ paths:
         '405':
           $ref: 'cluster_api.yml#/components/responses/MethodNotAllowed'
       security:
-        - basicAuth: []
-        - jwtAuth: []
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
 
     post:
-      tags: [Cluster API]
+      tags: [ Cluster API ]
       summary: Cluster allocation explain (POST)
       description: |
         The cluster allocation explain request finds an unassigned shard and explains why it cannot be allocated to a node.
@@ -614,14 +1105,14 @@ paths:
         '405':
           $ref: 'cluster_api.yml#/components/responses/MethodNotAllowed'
       security:
-        - basicAuth: []
-        - jwtAuth: []
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
 
   /_cluster/routing/awareness/{attribute}/weights:
     parameters:
       - $ref: 'cluster_api.yml#/components/parameters/awareness_attribute'
     get:
-      tags: [Cluster API]
+      tags: [ Cluster API ]
       summary: Cluster routing and awareness (GET)
       description: |
         Cluster routing and awareness is used to control the distribution of search or HTTP traffic. You can use the weights per awareness attribute to control the distribution of search or HTTP traffic across zones. This is commonly used for zonal deployments, heterogeneous instances, and routing traffic away from zones during zonal failure.
@@ -641,11 +1132,11 @@ paths:
         '500':
           $ref: 'cluster_api.yml#/components/responses/ClusterRoutingServerError'
       security:
-        - basicAuth: []
-        - jwtAuth: []
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
 
     put:
-      tags: [Cluster API]
+      tags: [ Cluster API ]
       summary: Cluster routing and awareness (PUT)
       description: |
         Cluster routing and awareness is used to control the distribution of search or HTTP traffic. You can use the weights per awareness attribute to control the distribution of search or HTTP traffic across zones. This is commonly used for zonal deployments, heterogeneous instances, and routing traffic away from zones during zonal failure.
@@ -667,11 +1158,11 @@ paths:
         '500':
           $ref: 'cluster_api.yml#/components/responses/ClusterRoutingServerError'
       security:
-        - basicAuth: []
-        - jwtAuth: []
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
 
     delete:
-      tags: [Cluster API]
+      tags: [ Cluster API ]
       summary: Cluster routing and awareness (DELETE)
       description: |
         Cluster routing and awareness is used to control the distribution of search or HTTP traffic. You can use the weights per awareness attribute to control the distribution of search or HTTP traffic across zones. This is commonly used for zonal deployments, heterogeneous instances, and routing traffic away from zones during zonal failure.
@@ -691,15 +1182,15 @@ paths:
         '500':
           $ref: 'cluster_api.yml#/components/responses/ClusterRoutingServerError'
       security:
-        - basicAuth: []
-        - jwtAuth: []
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
 
   /_cluster/decommission/awareness/{awareness_attribute_name}/{awareness_attribute_value}:
     parameters:
       - $ref: 'cluster_api.yml#/components/parameters/awareness_attribute_name'
       - $ref: 'cluster_api.yml#/components/parameters/awareness_attribute_value'
     put:
-      tags: [Cluster API]
+      tags: [ Cluster API ]
       summary: Cluster decommission (PUT)
       description: |
         The cluster decommission operation adds support for awareness based decommissioning. It greatly benefits multi-zone deployments where awareness attributes, such as zones, can aid in applying new upgrades to a cluster in a controlled fashion. This is especially useful during outages, in which case, you can decommission the unhealthy zone to prevent replication requests from stalling and prevent your request backlog from becoming too large.
@@ -716,14 +1207,14 @@ paths:
         '403':
           $ref: 'cluster_api.yml#/components/responses/Forbidden'
       security:
-        - basicAuth: []
-        - jwtAuth: []
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
 
   /_cluster/decommission/awareness/{awareness_attribute_name}/_status:
     parameters:
       - $ref: 'cluster_api.yml#/components/parameters/awareness_attribute_name'
     get:
-      tags: [Cluster API]
+      tags: [ Cluster API ]
       summary: Cluster decommission (GET)
       description: |
         The cluster decommission operation adds support for awareness based decommissioning. It greatly benefits multi-zone deployments where awareness attributes, such as zones, can aid in applying new upgrades to a cluster in a controlled fashion. This is especially useful during outages, in which case, you can decommission the unhealthy zone to prevent replication requests from stalling and prevent your request backlog from becoming too large.
@@ -740,12 +1231,12 @@ paths:
         '403':
           $ref: 'cluster_api.yml#/components/responses/Forbidden'
       security:
-        - basicAuth: []
-        - jwtAuth: []
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
 
   /_cluster/decommission/awareness:
     delete:
-      tags: [Cluster API]
+      tags: [ Cluster API ]
       summary: Cluster decommission (DELETE)
       description: |
         The cluster decommission operation adds support for awareness based decommissioning. It greatly benefits multi-zone deployments where awareness attributes, such as zones, can aid in applying new upgrades to a cluster in a controlled fashion. This is especially useful during outages, in which case, you can decommission the unhealthy zone to prevent replication requests from stalling and prevent your request backlog from becoming too large.
@@ -762,12 +1253,12 @@ paths:
         '403':
           $ref: 'cluster_api.yml#/components/responses/Forbidden'
       security:
-        - basicAuth: []
-        - jwtAuth: []
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
 
   /_cluster/health:
     get:
-      tags: [Cluster API]
+      tags: [ Cluster API ]
       summary: Cluster health
       description: |
         The cluster health API returns a simple status of the health of your cluster. The cluster health is represented in three colors: green, yellow, and red. A green status means all primary shards and their replicas are allocated to nodes. A yellow status means all primary shards are allocated to nodes, but some replicas aren't. A red status means at least one primary shard is not allocated to any node.
@@ -799,12 +1290,12 @@ paths:
         '405':
           $ref: 'cluster_api.yml#/components/responses/ClusterHealthMethodNotAllowed'
       security:
-        - basicAuth: []
-        - jwtAuth: []
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
 
   /_cluster/health/{index}:
     get:
-      tags: [Cluster API]
+      tags: [ Cluster API ]
       summary: Cluster health (Index)
       description: |
         The cluster health API returns a simple status of the health of your cluster. The cluster health is represented in three colors: green, yellow, and red. A green status means all primary shards and their replicas are allocated to nodes. A yellow status means all primary shards are allocated to nodes, but some replicas aren't. A red status means at least one primary shard is not allocated to any node.
@@ -837,12 +1328,12 @@ paths:
         '405':
           $ref: 'cluster_api.yml#/components/responses/ClusterHealthMethodNotAllowed'
       security:
-        - basicAuth: []
-        - jwtAuth: []
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
 
   /_cluster/settings:
     get:
-      tags: [Cluster API]
+      tags: [ Cluster API ]
       summary: Cluster settings (GET)
       description: |
         The cluster settings operation allows you to view and modify the current settings for your cluster, as well as review the default settings. Any setting updates made through the API are applied to all nodes within the cluster by Wazuh indexer.
@@ -873,11 +1364,11 @@ paths:
         '403':
           $ref: 'cluster_api.yml#/components/responses/ClusterSettingsForbidden'
       security:
-        - basicAuth: []
-        - jwtAuth: []
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
 
     put:
-      tags: [Cluster API]
+      tags: [ Cluster API ]
       summary: Cluster settings (PUT)
       description: |
         The cluster settings operation allows you to view and modify the current settings for your cluster, as well as review the default settings. Any setting updates made through the API are applied to all nodes within the cluster by Wazuh indexer.
@@ -910,8 +1401,8 @@ paths:
         '403':
           $ref: 'cluster_api.yml#/components/responses/ClusterSettingsForbidden'
       security:
-        - basicAuth: []
-        - jwtAuth: []
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
 
   /_cluster/stats:
     get:
@@ -921,8 +1412,8 @@ paths:
       description: The cluster stats API operation returns statistics about your cluster.
       operationId: getClusterStats
       security:
-        - basicAuth: []
-        - jwtAuth: []
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
       parameters:
         - $ref: '#/components/parameters/pretty'
       responses:
@@ -945,8 +1436,8 @@ paths:
       description: The cluster stats API operation returns statistics about your cluster.
       operationId: getClusterStatsWithNodeFilters
       security:
-        - basicAuth: []
-        - jwtAuth: []
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
       parameters:
         - $ref: 'cluster_api.yml#/components/parameters/node_filters'
         - $ref: '#/components/parameters/pretty'
@@ -970,8 +1461,8 @@ paths:
       description: The cluster stats API operation returns statistics about your cluster.
       operationId: getClusterStatsWithMetricAndNodeFilters
       security:
-        - basicAuth: []
-        - jwtAuth: []
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
       parameters:
         - $ref: 'cluster_api.yml#/components/parameters/node_filters'
         - $ref: 'cluster_api.yml#/components/parameters/metric'
@@ -996,8 +1487,8 @@ paths:
       description: The cluster stats API operation returns statistics about your cluster.
       operationId: getClusterStatsWithMetricIndexMetricAndNodeFilters
       security:
-        - basicAuth: []
-        - jwtAuth: []
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
       parameters:
         - $ref: 'cluster_api.yml#/components/parameters/node_filters'
         - $ref: 'cluster_api.yml#/components/parameters/metric'
@@ -1023,8 +1514,8 @@ paths:
       description: This API operation creates  a policy.
       operationId: createPolicy
       security:
-        - basicAuth: []
-        - jwtAuth: []
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
       parameters:
         - name: policy_id
           in: path
@@ -1047,7 +1538,7 @@ paths:
           description: Specifies if the affected shards should be refreshed.
           schema:
             type: string
-            enum: ["true", "false", "wait_for"]
+            enum: [ "true", "false", "wait_for" ]
             default: "false"
         - $ref: '#/components/parameters/pretty'
       requestBody:
@@ -1068,15 +1559,15 @@ paths:
                     transitions:
                       - state_name: "search"
                   - name: "search"
-                    actions: []
+                    actions: [ ]
                     transitions:
                       - state_name: "delete"
                         conditions:
                           min_index_age: "5m"
                   - name: "delete"
                     actions:
-                      - delete: {}
-                    transitions: []
+                      - delete: { }
+                    transitions: [ ]
       responses:
         '200':
           description: Success
@@ -1110,7 +1601,7 @@ paths:
                         transitions:
                           - state_name: "search"
                       - name: "search"
-                        actions: []
+                        actions: [ ]
                         transitions:
                           - state_name: "delete"
                             conditions:
@@ -1121,8 +1612,8 @@ paths:
                               count: 3
                               backoff: "exponential"
                               delay: "1m"
-                            delete: {}
-                        transitions: []
+                            delete: { }
+                        transitions: [ ]
                     ism_template: null
         '400':
           $ref: 'ism_api.yml#/components/responses/PolicyBadRequest'
@@ -1140,8 +1631,8 @@ paths:
       description: Retrieves a policy using its `policy_id`.
       operationId: getPolicy
       security:
-        - basicAuth: []
-        - jwtAuth: []
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
       parameters:
         - name: policy_id
           in: path
@@ -1182,7 +1673,7 @@ paths:
                       transitions:
                         - state_name: "search"
                     - name: "search"
-                      actions: []
+                      actions: [ ]
                       transitions:
                         - state_name: "delete"
                           conditions:
@@ -1193,8 +1684,8 @@ paths:
                             count: 3
                             backoff: "exponential"
                             delay: "1m"
-                          delete: {}
-                      transitions: []
+                          delete: { }
+                      transitions: [ ]
                   ism_template: null
         '400':
           $ref: 'ism_api.yml#/components/responses/PolicyBadRequestGet'
@@ -1212,8 +1703,8 @@ paths:
       description: This deletes the policy using the `policy_id`.
       operationId: deletePolicy
       security:
-        - basicAuth: []
-        - jwtAuth: []
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
       parameters:
         - name: policy_id
           in: path
@@ -1257,11 +1748,11 @@ paths:
       description: |
         This API operation associates a policy with an index. If the index already has a policy, this operation does not modify it.
 
-        If you use a wildcard `*` while adding a policy to an index, the ISM plugin interprets `*` as all indexes, including system indexes like `.opendistro-security`, which stores users, roles, and tenants. A delete action in your policy might accidentally delete all user roles and tenants in your cluster. Don’t use the broad `*` wildcard, and instead add a prefix, such as `my-logs*`, when specifying indexes with the `_ism/add` API.
+        If you use a wildcard `*` while adding a policy to an index, the ISM plugin interprets `*` as all indexes, including system indexes like `.opendistro-security`, which stores users, roles, and tenants. A delete action in your policy might accidentally delete all user roles and tenants in your cluster. Don't use the broad `*` wildcard, and instead add a prefix, such as `my-logs*`, when specifying indexes with the `_ism/add` API.
       operationId: addPolicy
       security:
-        - basicAuth: []
-        - jwtAuth: []
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
       parameters:
         - name: index
           in: path
@@ -1287,7 +1778,7 @@ paths:
               example:
                 updated_indices: 1
                 failures: false
-                failed_indices: []
+                failed_indices: [ ]
         '400':
           $ref: 'ism_api.yml#/components/responses/PolicyBadRequest'
         '401':
@@ -1306,8 +1797,8 @@ paths:
         This API operation updates an existing policy. To perform this update, you must include the `seq_no` and `primary_term` parameters. If these values don't match the current policy version or the policy doesn't exist, Index State Management (ISM) will return an error.
       operationId: updatePolicy
       security:
-        - basicAuth: []
-        - jwtAuth: []
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
       parameters:
         - name: policy_id
           in: path
@@ -1346,15 +1837,15 @@ paths:
                     transitions:
                       - state_name: "search"
                   - name: "search"
-                    actions: []
+                    actions: [ ]
                     transitions:
                       - state_name: "delete"
                         conditions:
                           min_index_age: "5m"
                   - name: "delete"
                     actions:
-                      - delete: {}
-                    transitions: []
+                      - delete: { }
+                    transitions: [ ]
       responses:
         '200':
           description: Success
@@ -1388,7 +1879,7 @@ paths:
                         transitions:
                           - state_name: "search"
                       - name: "search"
-                        actions: []
+                        actions: [ ]
                         transitions:
                           - state_name: "delete"
                             conditions:
@@ -1399,8 +1890,8 @@ paths:
                               count: 3
                               backoff: "exponential"
                               delay: "1m"
-                            delete: {}
-                        transitions: []
+                            delete: { }
+                        transitions: [ ]
                     ism_template: null
         '400':
           $ref: 'ism_api.yml#/components/responses/PolicyBadRequestUpdate'
@@ -1419,8 +1910,8 @@ paths:
       description: Removes any Index State Management (ISM) policy currently associated with an index.
       operationId: removePolicyFromIndex
       security:
-        - basicAuth: []
-        - jwtAuth: []
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
       parameters:
         - name: index
           in: path
@@ -1438,7 +1929,7 @@ paths:
               example:
                 updated_indices: 1
                 failures: false
-                failed_indices: []
+                failed_indices: [ ]
         '400':
           $ref: 'ism_api.yml#/components/responses/PolicyBadRequestRemove'
         '401':
@@ -1461,8 +1952,8 @@ paths:
         For example, changing the policy on `wazuh-alerts-4.x-2025.03.11` to `policy_1` (either a new or updated version) will only take place if `wazuh-alerts-4.x-2025.03.11` is in the `searches` state. Once the policy is updated, the index will transition to the `delete` state.
       operationId: updateManagedIndexPolicy
       security:
-        - basicAuth: []
-        - jwtAuth: []
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
       parameters:
         - name: index
           in: path
@@ -1502,7 +1993,7 @@ paths:
               example:
                 updated_indices: 1
                 failures: false
-                failed_indices: []
+                failed_indices: [ ]
         '400':
           description: Response to report a bad request
           content:
@@ -1554,8 +2045,8 @@ paths:
         Wildcard patterns (`*`) can be used to target and retry multiple failed indexes simultaneously.
       operationId: retryFailedIndex
       security:
-        - basicAuth: []
-        - jwtAuth: []
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
       parameters:
         - name: index
           in: path
@@ -1589,7 +2080,7 @@ paths:
               example:
                 updated_indices: 0
                 failures: false
-                failed_indices: []
+                failed_indices: [ ]
         '400':
           $ref: 'ism_api.yml#/components/responses/PolicyBadRequestRemove'
         '401':
@@ -1607,8 +2098,8 @@ paths:
       description: The Explain index API retrieves the current state of an index. It supports the use of index patterns to obtain the status of multiple indexes simultaneously.
       operationId: explainIndex
       security:
-        - basicAuth: []
-        - jwtAuth: []
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
       parameters:
         - name: index
           in: path
@@ -1679,7 +2170,7 @@ components:
       description: A short version of the `Accept` header, such as `json` or `yaml`.
       schema:
         type: string
-        enum: [json, yaml]
+        enum: [ json, yaml ]
 
   schemas:
     ApiInfo:
@@ -1834,6 +2325,16 @@ tags:
     description: The cluster APIs allow you to manage your cluster. You can use them to check cluster health, modify settings, retrieve statistics, and more.
   - name: Index state management API
     description: The Index State Management (ISM) API operations allow you to programmatically manage index policies and the lifecycle of indexes in the Wazuh indexer.
+  - name: Ingest APIs
+    description: |
+      The Wazuh indexer Ingest APIs facilitate the transformation and enrichment of data as it is ingested into the system. These APIs allow for the creation and management of ingest pipelines, which consist of a series of processors that execute sequentially to process incoming documents.
+
+      **Ingest pipeline APIs**
+      1. **Create or Update Pipeline**: Define a new pipeline or modify an existing one by specifying a sequence of processors.
+      2. **Get Pipeline**: Retrieve the configuration details of a specific pipeline.
+      3. **Simulate Pipeline**: Test a pipeline configuration by simulating the processing of sample documents, aiding in validation before deployment.
+      4. **Delete Pipeline**: Remove an existing pipeline from the system.
+      5. **Access Data in a Pipeline**: Interact with data as it flows through a pipeline, enabling monitoring and debugging of the ingestion process.
   - name: Scroll
     description: |
       You can utilize the scroll operation to obtain a substantial number of results. For instance, when looking for machine learning jobs, you can request an unlimited number of results in separate batches.
