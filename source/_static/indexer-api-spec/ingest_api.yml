@@ -4,7 +4,7 @@ components:
       name: pipeline_id
       in: path
       required: true
-      description: A unique identifier assigned to the ingest pipeline, referred to as the pipeline id.
+      description: The unique identifier of the ingest pipeline to retrieve. This is required if you are retrieving information about a specific pipeline.
       schema:
         type: string
 
@@ -63,6 +63,28 @@ components:
             description: A list of processors that sequentially transform documents in the pipeline. Each object in the processors array represents a specific transformation.
 
     IngestError:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            root_cause:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                  reason:
+                    type: string
+            type:
+              type: string
+            reason:
+              type: string
+        status:
+          type: integer
+
+    IngestBadRequestError:
       type: object
       properties:
         error:
@@ -224,7 +246,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/IngestError'
+            $ref: '#/components/schemas/IngestBadRequestError'
           example:
             error:
               root_cause:
@@ -306,10 +328,7 @@ components:
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              root_cause:
-                type: string
+            type: string
           example: "Unauthorized"
 
     GetPipelineForbidden:
@@ -317,26 +336,7 @@ components:
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              error:
-                type: object
-                properties:
-                  root_cause:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        type:
-                          type: string
-                        reason:
-                          type: string
-                  type:
-                    type: string
-                  reason:
-                    type: string
-              status:
-                type: integer
+            $ref: '#/components/schemas/IngestError'
           example:
             error:
               root_cause:
@@ -355,11 +355,36 @@ components:
           example: "404 - Not Found"
 
     SimulatePipelineSuccess:
-      description: Simulation successful
+      description: Success
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/SimulatePipelineResponse'
+            type: object
+            properties:
+              docs:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    doc:
+                      type: object
+                      properties:
+                        _index:
+                          type: string
+                          description: The index where the document would be stored after processing.
+                        _id:
+                          type: string
+                          description: The identifier assigned to the document.
+                        _source:
+                          type: object
+                          description: The content of the document after all pipeline transformations.
+                        _ingest:
+                          type: object
+                          description: This displays metadata about the ingest process.
+                          properties:
+                            timestamp:
+                              type: string
+                              description: The timestamp indicates when the document was processed by the pipeline. It is automatically generated.
           example:
             docs:
               - doc:
@@ -382,30 +407,11 @@ components:
                     timestamp: "2025-04-22T09:00:01.674584808Z"
 
     SimulatePipelineBadRequest:
-      description: Bad request – e.g. pipeline not found
+      description: Response to report a bad request
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              error:
-                type: object
-                properties:
-                  root_cause:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        type:
-                          type: string
-                        reason:
-                          type: string
-                  type:
-                    type: string
-                  reason:
-                    type: string
-              status:
-                type: integer
+            $ref: '#/components/schemas/IngestError'
           example:
             error:
               root_cause:
@@ -416,41 +422,19 @@ components:
             status: 400
 
     SimulatePipelineUnauthorized:
-      description: Unauthorized
+      description: Response to report an unauthorized request
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              root_cause:
-                type: string
+            type: string
           example: "Unauthorized"
 
     SimulatePipelineForbidden:
-      description: Permission Denied
+      description: Response to report a permission denied request
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              error:
-                type: object
-                properties:
-                  root_cause:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        type:
-                          type: string
-                        reason:
-                          type: string
-                  type:
-                    type: string
-                  reason:
-                    type: string
-              status:
-                type: integer
+            $ref: '#/components/schemas/IngestError'
           example:
             error:
               root_cause:
@@ -546,10 +530,7 @@ components:
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              root_cause:
-                type: string
+            type: string
           example: "Unauthorized"
 
     DeletePipelineForbidden:
@@ -557,26 +538,7 @@ components:
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              error:
-                type: object
-                properties:
-                  root_cause:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        type:
-                          type: string
-                        reason:
-                          type: string
-                  type:
-                    type: string
-                  reason:
-                    type: string
-              status:
-                type: integer
+            $ref: '#/components/schemas/IngestError'
           example:
             error:
               root_cause:
@@ -591,26 +553,7 @@ components:
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              error:
-                type: object
-                properties:
-                  root_cause:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        type:
-                          type: string
-                        reason:
-                          type: string
-                  type:
-                    type: string
-                  reason:
-                    type: string
-              status:
-                type: integer
+            $ref: '#/components/schemas/IngestError'
           example:
             error:
               root_cause:
