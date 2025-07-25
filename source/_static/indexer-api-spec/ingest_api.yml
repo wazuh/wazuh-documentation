@@ -46,7 +46,7 @@ components:
       properties:
         acknowledged:
           type: boolean
-          description: Indicates whether the request to create or update the ingest pipeline was successfully received and applied by the cluster. A value true confirms success.
+          description: Indicates whether the request to create or update the ingest pipeline was successfully received and applied by the cluster. A value `true` confirms success.
 
     GetPipelineResponse:
       type: object
