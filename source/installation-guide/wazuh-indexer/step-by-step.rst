@@ -109,22 +109,19 @@ Installing package dependencies
 Adding the Wazuh repository
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-    .. tabs::
+.. tabs::
 
+   .. group-tab:: APT
 
-      .. group-tab:: Yum
+      .. include:: /_templates/installations/common/deb/add-repository.rst
 
+   .. group-tab:: Yum
 
-        .. include:: /_templates/installations/common/yum/add-repository.rst
+      .. include:: /_templates/installations/common/yum/add-repository.rst
 
+   .. group-tab:: DNF
 
-
-      .. group-tab:: APT
-
-
-        .. include:: /_templates/installations/common/deb/add-repository.rst
-
-
+      .. include:: /_templates/installations/common/dnf/add-repository.rst
 
 Installing the Wazuh indexer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -133,17 +130,23 @@ Installing the Wazuh indexer
 
    .. tabs::
 
+      .. group-tab:: APT
+
+         .. code-block:: console
+
+            # apt-get -y install wazuh-indexer|WAZUH_INDEXER_DEB_PKG_INSTALL|
+
       .. group-tab:: Yum
 
          .. code-block:: console
 
             # yum -y install wazuh-indexer|WAZUH_INDEXER_RPM_PKG_INSTALL|
 
-      .. group-tab:: APT
+      .. group-tab:: DNF
 
          .. code-block:: console
 
-            # apt-get -y install wazuh-indexer|WAZUH_INDEXER_DEB_PKG_INSTALL|
+            # dnf -y install wazuh-indexer|WAZUH_INDEXER_RPM_PKG_INSTALL|
 
 Configuring the Wazuh indexer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
