@@ -32,6 +32,8 @@ This section shows dashboards for:
    :title: Navigating the Wazuh dashboard: Endpoint security
    :alt: Navigating the Wazuh dashboard: Endpoint security
 
+.. _navigating_dahsboard_threat_intel:
+
 Threat intelligence
 ^^^^^^^^^^^^^^^^^^^
 
