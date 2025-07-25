@@ -264,20 +264,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/IngestConflictError'
-          example:
-            error:
-              root_cause:
-                - type: "version_conflict_engine_exception"
-                  reason: "[wazuh-pipeline][0]: version conflict, current version [1] is different than the one provided [0]"
-                  index: "wazuh-pipeline"
-                  shard: 0
-                  index_uuid: "abc123"
-              type: "version_conflict_engine_exception"
-              reason: "[wazuh-pipeline][0]: version conflict, current version [1] is different than the one provided [0]"
-              index: "wazuh-pipeline"
-              shard: 0
-              index_uuid: "abc123"
-            status: 409
 
     CreatePipelineUnauthorized:
       description: Response to report an unauthorized request
