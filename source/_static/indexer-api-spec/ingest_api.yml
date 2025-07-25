@@ -287,20 +287,6 @@ components:
             type: string
           example: "Unauthorized"
 
-    CreatePipelineForbidden:
-      description: Response to report a permission denied request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/IngestError'
-          example:
-            error:
-              root_cause:
-                - type: "security_exception"
-                  reason: "no permissions for [indices:admin/analyze] and User [name=test, backend_roles=[], requestedTenant=null]"
-              type: "security_exception"
-              reason: "no permissions for [indices:admin/analyze] and User [name=test, backend_roles=[], requestedTenant=null]"
-            status: 403
 
     GetPipelineSuccess:
       description: Success
@@ -331,20 +317,6 @@ components:
             type: string
           example: "Unauthorized"
 
-    GetPipelineForbidden:
-      description: Response to report a permission denied request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/IngestError'
-          example:
-            error:
-              root_cause:
-                - type: "security_exception"
-                  reason: "no permissions for [indices:admin/analyze] and User [name=test, backend_roles=[], requestedTenant=null]"
-              type: "security_exception"
-              reason: "no permissions for [indices:admin/analyze] and User [name=test, backend_roles=[], requestedTenant=null]"
-            status: 403
 
     GetPipelineNotFound:
       description: Response to report a request not found
@@ -429,20 +401,7 @@ components:
             type: string
           example: "Unauthorized"
 
-    SimulatePipelineForbidden:
-      description: Response to report a permission denied request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/IngestError'
-          example:
-            error:
-              root_cause:
-                - type: security_exception
-                  reason: no permissions for [indices:admin/analyze] and User [name=test, backend_roles=[], requestedTenant=null]
-              type: security_exception
-              reason: no permissions for [indices:admin/analyze] and User [name=test, backend_roles=[], requestedTenant=null]
-            status: 403
+
 
     AccessPipelineDataSuccess:
       description: Successfully accessed pipeline data
@@ -470,39 +429,7 @@ components:
             type: string
           example: "Unauthorized"
 
-    AccessPipelineDataForbidden:
-      description: Permission Denied
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: object
-                properties:
-                  root_cause:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        type:
-                          type: string
-                        reason:
-                          type: string
-                  type:
-                    type: string
-                  reason:
-                    type: string
-              status:
-                type: integer
-          example:
-            error:
-              root_cause:
-                - type: security_exception
-                  reason: no permissions for [indices:admin/ingest] and User [name=test, backend_roles=[], requestedTenant=null]
-              type: security_exception
-              reason: no permissions for [indices:admin/ingest] and User [name=test, backend_roles=[], requestedTenant=null]
-            status: 403
+
 
     AccessPipelineDataNotFound:
       description: Pipeline not found
@@ -533,20 +460,7 @@ components:
             type: string
           example: "Unauthorized"
 
-    DeletePipelineForbidden:
-      description: Permission Denied
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/IngestError'
-          example:
-            error:
-              root_cause:
-                - type: security_exception
-                  reason: no permissions for [indices:admin/analyze] and User [name=test, backend_roles=[], requestedTenant=null]
-              type: security_exception
-              reason: no permissions for [indices:admin/analyze] and User [name=test, backend_roles=[], requestedTenant=null]
-            status: 403
+
 
     DeletePipelineNotFound:
       description: Pipeline not found
