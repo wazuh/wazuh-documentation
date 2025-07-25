@@ -2,18 +2,24 @@
 
 #. Install the following packages if missing.
 
-      .. tabs::
+   .. tabs::
 
-          .. group-tab:: Yum
+      .. group-tab:: APT
 
-                  .. code-block:: console
+         .. code-block:: console
 
-                      # yum install libcap
+            # apt-get install debhelper tar curl libcap2-bin #debhelper version 9 or later
 
-          .. group-tab:: APT
+      .. group-tab:: Yum
 
-                  .. code-block:: console
+         .. code-block:: console
 
-                      # apt-get install debhelper tar curl libcap2-bin #debhelper version 9 or later
+            # yum install libcap
+
+      .. group-tab:: DNF
+
+         .. code-block:: console
+
+            # dnf install libcap
 
 .. End of include file
