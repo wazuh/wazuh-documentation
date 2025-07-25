@@ -206,11 +206,7 @@ paths:
         The Create Pipeline API operation is used to define or update pipelines in OpenSearch. Each pipeline must include at least one processor, which determines how documents are modified during ingestion.
 
         ### Template snippets
-        Some processor parameters support Mustache template snippets. To get the value of a field, surround the field name in three curly braces, for example:
-
-        ```
-        {{{field-name}}}
-        ```
+        Some processor parameters support Mustache template snippets. To get the value of a field, surround the field name in three curly braces, for example, `{{{field-name}}}`.
 
         **Example:** set ingest processor using Mustache template snippet
 
@@ -274,7 +270,7 @@ paths:
   /_ingest/pipeline/{pipeline_id}/_simulate:
     get:
       tags: [ Ingest APIs ]
-      summary: (GET) Simulate pipeline
+      summary: Simulate pipeline (GET)
       description: |
         The following requests simulate a single pipeline based on the pipeline id:
       operationId: simulatePipeline
@@ -310,7 +306,7 @@ paths:
 
     post:
       tags: [ Ingest APIs ]
-      summary: (POST) Simulate pipeline
+      summary: Simulate pipeline (POST)
       description: |
         The following requests simulate a single pipeline based on the pipeline id:
       operationId: simulatePipelinePost
@@ -347,7 +343,7 @@ paths:
   /_ingest/pipeline/_simulate:
     get:
       tags: [ Ingest APIs ]
-      summary: (GET) Simulate pipeline
+      summary: Simulate pipeline (GET)
       description: |
         The following requests simulate the latest ingest pipeline created
       operationId: simulateLatestPipeline
@@ -377,7 +373,7 @@ paths:
 
     post:
       tags: [ Ingest APIs ]
-      summary: (POST) Simulate pipeline
+      summary: Simulate pipeline (POST)
       description: |
         The following requests simulate the latest ingest pipeline created
       operationId: simulateLatestPipelinePost
