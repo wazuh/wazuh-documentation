@@ -23,6 +23,7 @@ Users can generate system inventory reports from the Wazuh dashboard, which can 
       how-it-works
       configuration
       viewing-system-inventory-data
+      global-queries
       generating-system-inventory-reports
       available-inventory-fields
       compatibility-matrix

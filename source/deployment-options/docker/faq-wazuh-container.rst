@@ -1,8 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Get answers to the most frequently asked questions about the Wazuh deployment on Docker in this FAQ. 
-    
+   :description: Get answers to the most frequently asked questions about the Wazuh deployment on Docker in this FAQ. 
+
 FAQ
 ===
 
@@ -23,11 +23,10 @@ Read the `YAML files Opensearch documentation <https://opensearch.org/docs/lates
 How can I tune the Wazuh indexer configuration?
 -----------------------------------------------
 
-The Wazuh indexer container uses the default configuration, and it’s not exposed by default.
-
-If you want to override the default configuration, create a file ``config/wazuh_indexer/<new_wazuh_indexer>.yml`` and add your custom version of the configuration to it. Then map your configuration file inside the container in the ``docker-compose.yml``. Update the Wazuh indexer container declaration to:
+The Wazuh indexer container uses the default configuration, and it’s not exposed by default. If you want to override the default configuration, create a file ``config/wazuh_indexer/<new_wazuh_indexer>.yml`` and add your custom configuration version. Then, map your configuration file inside the container in ``docker-compose.yml``. Update the Wazuh indexer container declaration to:
 
 .. code-block:: yaml
+   :emphasize-lines: 4,5,7
 
     <new_wazuh_indexer>:
       image: wazuh/wazuh-indexer:latest
@@ -44,9 +43,10 @@ How can I store the Wazuh indexer data?
 
 The data stored in the Wazuh indexer persists after container reboots but not after container removal.
 
-By default, the single-node and multi-node deployments already have volumes configured. For example, see  ``wazuh1.indexer`` volume in the multi-node ``docker-compose.yml`` file:
+By default, the single-node and multi-node deployments already have volumes configured. For example, see  ``wazuh1.indexer`` volume in the multi-node ``wazuh-docker/multi-node/docker-compose.yml`` file:
 
 .. code-block:: yaml
+   :emphasize-lines: 4
 
    wazuh1.indexer:
     ...
