@@ -211,6 +211,8 @@ Any value equal to or lower than the configured ``notify_time`` will cause the I
 
  .. note:: Most systems won't need to modify this value, but on systems with large routing tables this configuration can help lower CPU usage from wazuh-modulesd.
 
+.. _client_auto_restart:
+
 auto_restart
 ^^^^^^^^^^^^
 

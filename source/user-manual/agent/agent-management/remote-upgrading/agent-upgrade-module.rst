@@ -3,10 +3,10 @@
 .. meta::
    :description: The agent upgrade module is responsible for remotely carrying out the agent upgrade process. Learn more in this section of the documentation.
 
-Agent upgrade module
-====================
+Agent upgrade module - How it works
+===================================
 
-The agent upgrade module is responsible for remotely carrying out the agent upgrade process.
+This section describes how the agent upgrade module works.The agent upgrade module is responsible for remotely carrying out the agent upgrade process.
 
 -  On the Wazuh manager side, it validates, downloads, and/or sends the WPK files to the Wazuh agents.
 -  On the Wazuh agent side, it processes the received commands and notifies the Wazuh manager after an upgrade process has been accomplished.
@@ -101,6 +101,8 @@ The module expects three parameters:
               "installer": "custom-upgrade-script.sh"
           }
       }
+
+Refer to the :api-ref:`Upgrade agents API reference documentation <operation/api.controllers.agent_controller.put_upgrade_agents>` for more information.
 
 Upgrade result request [API/CLI]
 --------------------------------
@@ -218,4 +220,4 @@ Example response:
    	"message": "Success"
    }
 
-Refer to the :ref:`packages list <wazuh_agent_packages_list>` for a full list of the available agent packages.
+Refer to the :ref:`packages list <wazuh_agent_packages_list>` for a full list of the available agent packages. Refer to the :api-ref:`Get upgrade results API reference documentation <operation/api.controllers.agent_controller.get_agent_upgrade>` for more information.
