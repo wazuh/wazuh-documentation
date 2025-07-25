@@ -1663,6 +1663,153 @@ paths:
         '403':
           $ref: '#/components/responses/Forbidden'
 
+  /{index}/_doc/{id}:
+    parameters:
+      - $ref: 'document_api.yml#/components/parameters/document_index'
+      - $ref: 'document_api.yml#/components/parameters/document_id'
+    put:
+      tags: [Document APIs]
+      summary: Index document (PUT _doc)
+      description: |
+        The Index Document operation allows you to add an individual document to your index.
+      operationId: indexDocumentPut
+      parameters:
+        - $ref: 'document_api.yml#/components/parameters/if_seq_no'
+        - $ref: 'document_api.yml#/components/parameters/if_primary_term'
+        - $ref: 'document_api.yml#/components/parameters/op_type'
+        - $ref: 'document_api.yml#/components/parameters/pipeline'
+        - $ref: 'document_api.yml#/components/parameters/routing'
+        - $ref: 'document_api.yml#/components/parameters/refresh'
+        - $ref: 'document_api.yml#/components/parameters/timeout'
+        - $ref: 'document_api.yml#/components/parameters/version'
+        - $ref: 'document_api.yml#/components/parameters/version_type'
+        - $ref: 'document_api.yml#/components/parameters/wait_for_active_shards'
+        - $ref: 'document_api.yml#/components/parameters/require_alias'
+        - $ref: '#/components/parameters/pretty'
+      requestBody:
+        $ref: 'document_api.yml#/components/requestBodies/IndexDocumentRequest'
+      responses:
+        '200':
+          $ref: 'document_api.yml#/components/responses/IndexDocumentSuccess'
+        '400':
+          $ref: 'document_api.yml#/components/responses/IndexDocumentBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /{index}/_doc:
+    parameters:
+      - $ref: 'document_api.yml#/components/parameters/document_index'
+    post:
+      tags: [Document APIs]
+      summary: Index document (POST _doc)
+      description: |
+        The Index Document operation allows you to add an individual document to your index.
+      operationId: indexDocumentPost
+      parameters:
+        - $ref: 'document_api.yml#/components/parameters/if_seq_no'
+        - $ref: 'document_api.yml#/components/parameters/if_primary_term'
+        - $ref: 'document_api.yml#/components/parameters/op_type'
+        - $ref: 'document_api.yml#/components/parameters/pipeline'
+        - $ref: 'document_api.yml#/components/parameters/routing'
+        - $ref: 'document_api.yml#/components/parameters/refresh'
+        - $ref: 'document_api.yml#/components/parameters/timeout'
+        - $ref: 'document_api.yml#/components/parameters/version'
+        - $ref: 'document_api.yml#/components/parameters/version_type'
+        - $ref: 'document_api.yml#/components/parameters/wait_for_active_shards'
+        - $ref: 'document_api.yml#/components/parameters/require_alias'
+        - $ref: '#/components/parameters/pretty'
+      requestBody:
+        $ref: 'document_api.yml#/components/requestBodies/IndexDocumentRequest'
+      responses:
+        '200':
+          $ref: 'document_api.yml#/components/responses/IndexDocumentSuccess'
+        '400':
+          $ref: 'document_api.yml#/components/responses/IndexDocumentBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /{index}/_create/{id}:
+    parameters:
+      - $ref: 'document_api.yml#/components/parameters/document_index'
+      - $ref: 'document_api.yml#/components/parameters/document_id'
+    put:
+      tags: [Document APIs]
+      summary: Index document (PUT _create)
+      description: |
+        The Index Document operation allows you to add an individual document to your index.
+      operationId: createDocumentPut
+      parameters:
+        - $ref: 'document_api.yml#/components/parameters/if_seq_no'
+        - $ref: 'document_api.yml#/components/parameters/if_primary_term'
+        - $ref: 'document_api.yml#/components/parameters/op_type'
+        - $ref: 'document_api.yml#/components/parameters/pipeline'
+        - $ref: 'document_api.yml#/components/parameters/routing'
+        - $ref: 'document_api.yml#/components/parameters/refresh'
+        - $ref: 'document_api.yml#/components/parameters/timeout'
+        - $ref: 'document_api.yml#/components/parameters/version'
+        - $ref: 'document_api.yml#/components/parameters/version_type'
+        - $ref: 'document_api.yml#/components/parameters/wait_for_active_shards'
+        - $ref: 'document_api.yml#/components/parameters/require_alias'
+        - $ref: '#/components/parameters/pretty'
+      requestBody:
+        $ref: 'document_api.yml#/components/requestBodies/IndexDocumentRequest'
+      responses:
+        '200':
+          $ref: 'document_api.yml#/components/responses/IndexDocumentSuccess'
+        '400':
+          $ref: 'document_api.yml#/components/responses/IndexDocumentBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+    post:
+      tags: [Document APIs]
+      summary: Index document (POST _create)
+      description: |
+        The Index Document operation allows you to create a new document with a specific ID. This operation will only succeed if a document with the same ID does not already exist.
+      operationId: createDocumentPost
+      parameters:
+        - $ref: 'document_api.yml#/components/parameters/if_seq_no'
+        - $ref: 'document_api.yml#/components/parameters/if_primary_term'
+        - $ref: 'document_api.yml#/components/parameters/op_type'
+        - $ref: 'document_api.yml#/components/parameters/pipeline'
+        - $ref: 'document_api.yml#/components/parameters/routing'
+        - $ref: 'document_api.yml#/components/parameters/refresh'
+        - $ref: 'document_api.yml#/components/parameters/timeout'
+        - $ref: 'document_api.yml#/components/parameters/version'
+        - $ref: 'document_api.yml#/components/parameters/version_type'
+        - $ref: 'document_api.yml#/components/parameters/wait_for_active_shards'
+        - $ref: 'document_api.yml#/components/parameters/require_alias'
+        - $ref: '#/components/parameters/pretty'
+      requestBody:
+        $ref: 'document_api.yml#/components/requestBodies/IndexDocumentRequest'
+      responses:
+        '200':
+          $ref: 'document_api.yml#/components/responses/IndexDocumentSuccess'
+        '400':
+          $ref: 'document_api.yml#/components/responses/IndexDocumentBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
 components:
   parameters:
     pretty:
@@ -1832,6 +1979,11 @@ tags:
   - name: Analyze API
   - name: Cluster API
     description: The cluster APIs allow you to manage your cluster. You can use them to check cluster health, modify settings, retrieve statistics, and more.
+  - name: Document APIs
+    description: |
+      Document APIs enable you to manage documents within your index, including adding, updating, and deleting records.
+
+      These APIs are categorized into single-document operations and multi-document operations. Multi-document operations are more efficient than processing multiple individual requests separately, so it is recommended to use them whenever possible for better performance.
   - name: Index state management API
     description: The Index State Management (ISM) API operations allow you to programmatically manage index policies and the lifecycle of indexes in the Wazuh indexer.
   - name: Scroll

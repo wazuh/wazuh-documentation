@@ -1,0 +1,208 @@
+openapi: 3.0.0
+
+components:
+  parameters:
+    document_index:
+      name: index
+      in: path
+      required: true
+      schema:
+        type: string
+      example: "wazuh-alerts-4.x-2025.03.12"
+
+    document_id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+      example: "1"
+
+    if_seq_no:
+      name: if_seq_no
+      in: query
+      description: Executes the index operation only if the document has the specified sequence number.
+      schema:
+        type: integer
+
+    if_primary_term:
+      name: if_primary_term
+      in: query
+      description: Executes the index operation only if the document has the specified primary term.
+      schema:
+        type: integer
+
+    op_type:
+      name: op_type
+      in: query
+      description: Defines the type of operation to perform on the document. Options are `create` (only index the document if it does not exist) and `index` (update or insert the document). If a document ID is provided, the default is `index`; otherwise, it defaults to `create`.
+      schema:
+        type: string
+        enum: [create, index]
+
+    pipeline:
+      name: pipeline
+      in: query
+      description: Directs the indexing operation to a specific ingest pipeline for processing.
+      schema:
+        type: string
+
+    routing:
+      name: routing
+      in: query
+      description: Specifies a routing value to determine which shard will process the index operation.
+      schema:
+        type: string
+
+    refresh:
+      name: refresh
+      in: query
+      description: Controls when the Wazuh indexer refreshes shards to make the document searchable. `wait_for` waits for a refresh before processing.
+      schema:
+        type: string
+        enum: [true, false, wait_for]
+        default: false
+
+    timeout:
+      name: timeout
+      in: query
+      description: The maximum time to wait for a response from the cluster.
+      schema:
+        type: string
+        format: time
+        default: 1m
+
+    version:
+      name: version
+      in: query
+      description: Specifies the version number of the document.
+      schema:
+        type: integer
+
+    version_type:
+      name: version_type
+      in: query
+      description: |
+        Defines how versioning should be handled. Options are `external` (only index if the new version is higher than the current one) and `external_gte` (only index if the new version is equal to or greater than the current one). Example: `/_doc/1?version=3&version_type=external`.
+      schema:
+        type: string
+        enum: [external, external_gte]
+
+    wait_for_active_shards:
+      name: wait_for_active_shards
+      in: query
+      description: Specifies the minimum number of active shards required before processing the request. Default is `1` (primary shard only). Values greater than `1` require additional replicas.
+      schema:
+        oneOf:
+          - type: string
+            enum: [all]
+          - type: integer
+            minimum: 1
+            default: 1
+
+    require_alias:
+      name: require_alias
+      in: query
+      description: Determines whether the target index must be an index alias.
+      schema:
+        type: boolean
+        default: false
+
+  requestBodies:
+    IndexDocumentRequest:
+      description: The JSON source that defines the document's data.
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true
+          example:
+            "agent.id": "001"
+            "agent.ip": "Windows PC"
+            "description": "Malware detected"
+
+  responses:
+    IndexDocumentSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              _index:
+                type: string
+                description: The name of the index where the document was stored.
+              _id:
+                type: string
+                description: The unique identifier assigned to the document.
+              _version:
+                type: integer
+                description: The version number of the document. Each update increases this value.
+              result:
+                type: string
+                description: Indicates the outcome of the operation. Possible values are `created` (new document added) or `updated` (existing document modified).
+                enum: [created, updated]
+              _shards:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                    description: Total number of shards targeted in the request.
+                  successful:
+                    type: integer
+                    description: Number of shards that successfully executed the operation.
+                  failed:
+                    type: integer
+                    description: Number of shards where the operation failed.
+              _seq_no:
+                type: integer
+                description: The sequence number assigned to this operation. This is used for optimistic concurrency control.
+              _primary_term:
+                type: integer
+                description: The primary term of the shard that processed the request. Helps in ensuring consistency in case of shard relocations.
+          example:
+            _index: "wazuh-alerts-4.x-2025.03.12"
+            _id: "1"
+            _version: 1
+            result: "created"
+            _shards:
+              total: 1
+              successful: 1
+              failed: 0
+            _seq_no: 262
+            _primary_term: 3
+
+    IndexDocumentBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  root_cause:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        reason:
+                          type: string
+                  type:
+                    type: string
+                  reason:
+                    type: string
+              status:
+                type: integer
+          example:
+            error:
+              root_cause:
+                - type: "parse_exception"
+                  reason: "request body is required"
+              type: "parse_exception"
+              reason: "request body is required"
+            status: 400
