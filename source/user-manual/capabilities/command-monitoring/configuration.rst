@@ -115,13 +115,13 @@ For example, we use the Command module to monitor running processes on a Windows
 
       @Echo Off
       setlocal enableDelayedExpansion
-      
+
       for /f "delims=" %%a in ('powershell -command "& tasklist"') do (
           echo tasklist: %%a
       )
-      
+
       exit /b
-    
+
 #. Add the following configuration to the Wazuh agent ``C:\Program Files (x86)\ossec-agent\ossec.conf`` file:
 
    .. code-block:: xml
@@ -143,7 +143,7 @@ For example, we use the Command module to monitor running processes on a Windows
 
    - The value ``2m`` in the ``<interval>`` tag indicates that the Command module runs the command every 2 minutes.
 
-   .. note:: You can use the :ref:`centralized configuration file <command_monitoring_centralized_configuration>` to distribute this setting across multiple monitored endpoints.
+   .. note:: You can use the :ref:`centralized configuration file <command_monitoring_centralized_configuration>` to distribute this setting across multiple monitored endpoints. Skip the next step, as centralized configuration changes apply immediately without requiring a restart.
 
 #. Restart the Wazuh agent to apply the changes, using PowerShell with administrator privileges:
 
@@ -246,14 +246,14 @@ For example, to monitor the percentage of memory available on a Linux endpoint e
    Where:
 
    - The ``full_command`` value in the ``<log_format>`` tag specifies the output of the command ``free -m | awk 'NR==2{printf "%.2f\t\t\n", $3*100/$2 }'`` is read as a single event.
-   
+
    - The value ``free -m | awk 'NR==2{printf "%.2f\t\t\n", $3*100/$2 }'`` in the ``<command>`` tag is the command the Logcollector module executes.
-   
+
    - The value ``memory_utilization`` of the ``<alias>`` tag is a string that represents the ``free -m | awk 'NR==2{printf "%.2f\t\t\n", $3*100/$2 }'`` command for better identification in creating rules.
-   
+
    - The value ``120`` in the ``<frequency>`` tag implies the command runs every 120 seconds (2 minutes).
 
-   .. note:: You can use the :ref:`centralized configuration file <command_monitoring_centralized_configuration>` to distribute this setting across multiple monitored endpoints.
+   .. note:: You can use the :ref:`centralized configuration file <command_monitoring_centralized_configuration>` to distribute this setting across multiple monitored endpoints. Skip the next step, as centralized configuration changes apply immediately without requiring a restart.
 
 #. Restart the Wazuh agent service to apply the changes:
 

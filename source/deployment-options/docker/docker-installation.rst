@@ -1,61 +1,67 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Check out this section of the Wazuh documentation to learn about Docker installation: how to install the Docker engine and the Docker compose. 
-  
-.. _docker-installation:
+   :description: Learn about Docker installation in this section of the documentation.
 
 Docker installation
 ===================
 
-The first thing you need to do is to set up a system with the requirements needed to run Docker and Docker compose. Then install Docker and Docker compose if you don’t have them already.
+Begin by preparing a system that meets the Docker and Docker Compose requirements. If neither tool has been installed, proceed to install them.
 
-.. 
-   .. contents::
-      :local:
-      :depth: 1
-      :backlinks: none
+.. note::
 
-.. note:: You need root user privileges to run all the commands described below.
+   You need root user privileges to execute all the commands described below.
 
 Requirements
 ------------
 
-.. 
-   .. contents::
-      :local:
-      :depth: 1
-      :backlinks: none
+Before installing Docker tools on your host environment, ensure your system meets the following requirements to support a smooth and successful installation.
 
 Container memory
 ^^^^^^^^^^^^^^^^
 
-We recommend configuring the Docker host with at least 6 GB of memory. Depending on the deployment and usage, Wazuh indexer memory consumption varies. Therefore, allocate the recommended memory for a complete stack deployment to work properly.
-
+We recommend configuring the Docker host with at least 6 GB of memory. Wazuh indexer memory consumption varies depending on the deployment and usage. Therefore, allocate the recommended memory for a complete stack deployment to work properly.
 
 Increase max_map_count on your host (Linux)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Wazuh indexer creates many memory-mapped areas. So you need to set the kernel to give a process at least 262,144 memory-mapped areas.
+Wazuh indexer creates many memory-mapped areas. To support this, the kernel must be configured to allow a process to create at least 262,144 memory-mapped areas.
 
-#. Increase ``max_map_count`` on your Docker host:
+#. Run the following command to set the ``max_map_count`` on your Docker host to ``262,144``:
 
    .. code-block:: console
 
       # sysctl -w vm.max_map_count=262144
 
-#. Update the ``vm.max_map_count`` setting in ``/etc/sysctl.conf`` to set this value permanently. To verify after rebooting, run “``sysctl vm.max_map_count``”.
+#. Add the following line to the ``/etc/sysctl.conf`` file on your Docker host:
 
-   .. warning::
+   .. code-block:: linux-config
 
-      If you don’t set the ``max_map_count`` on your host, the Wazuh indexer will NOT work properly.
+      vm.max_map_count=262144
+
+   This will ensure the ``vm.max_map_count`` value remains set after a reboot.
+
+#. Run the following command to confirm that the value has been applied after rebooting:
+
+   .. code-block:: console
+
+      # sysctl vm.max_map_count
+
+   .. code-block:: none
+      :class: output
+
+      vm.max_map_count = 262144
+
+.. warning::
+
+   If you don’t set at least this minimum ``max_map_count`` value of ``262,144`` on your host, the Wazuh indexer will not work correctly.
 
 Docker engine
 -------------
 
 For Linux/Unix machines, Docker requires an AMD64 or ARM64 architecture system running kernel version 3.10 or later.
 
-#. Open a terminal and use ``uname -r`` to display and check your kernel version:
+#. Run the following command to display and check your kernel version:
 
    .. code-block:: console
 
@@ -72,21 +78,21 @@ For Linux/Unix machines, Docker requires an AMD64 or ARM64 architecture system r
 
       .. group-tab:: On Ubuntu/Debian machines
 
-         .. code-block:: console  
+         .. code-block:: console
 
             # curl -sSL https://get.docker.com/ | sh
 
 
       .. group-tab:: On CentOS machines
 
-         .. code-block:: console  
+         .. code-block:: console
 
             # yum install -y yum-utils
             # yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
             # yum install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 
       .. group-tab:: On Amazon Linux 2 machines
-        
+
          .. code-block:: console
 
             # yum update -y
@@ -110,7 +116,9 @@ For Linux/Unix machines, Docker requires an AMD64 or ARM64 architecture system r
 
 .. note::
 
-   If you would like to use Docker as a non-root user, you should add your user to the ``docker`` group with something like the following command: ``usermod -aG docker your-user``. Log out and log back in for this to take effect.
+   If you want to use Docker as a non-root user, you should add your user to the ``docker`` group using the following command: ``usermod -aG docker your-user``.
+
+   Log out and log back in for these changes to take effect.
 
 Docker compose
 --------------
@@ -123,17 +131,19 @@ The Wazuh Docker deployment requires Docker Compose 1.29 or later. Follow these 
 
       # curl -L "https://github.com/docker/compose/releases/download/v2.12.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 
-#. Grant execution permissions:
+#. Grant execution permissions to the ``docker-compose`` binary:
 
    .. code-block:: console
 
       # chmod +x /usr/local/bin/docker-compose
 
-#. Test the installation to ensure everything is fine:
+#. Check the version of the installation to confirm everything is fine:
 
    .. code-block:: console
 
       # docker-compose --version
+
+   The following shows an example of an output:
 
    .. code-block:: none
       :class: output
@@ -142,4 +152,4 @@ The Wazuh Docker deployment requires Docker Compose 1.29 or later. Follow these 
 
    .. note::
 
-      If the command ``docker-compose`` fails after installation. Create a symbolic link to ``/usr/bin`` or any other directory in your path: ``ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose``
+      If the command ``docker-compose`` fails after installation. Create a symbolic link to ``/usr/bin`` or any other directory in your path using the command: ``ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose``

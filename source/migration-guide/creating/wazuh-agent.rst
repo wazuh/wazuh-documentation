@@ -10,7 +10,7 @@ To create a backup of your Wazuh agent installation follow these steps.
 
 .. note::
 
-   You need root user privileges to execute the commands below.
+   You need elevated privileges to execute the commands below.
 
 Preparing the backup
 --------------------
@@ -26,7 +26,7 @@ Preparing the backup
             # bkp_folder=~/wazuh_files_backup/$(date +%F_%H:%M)
             # mkdir -p $bkp_folder && echo $bkp_folder
 
-      .. group-tab:: Windows
+      .. group-tab:: Windows (CMD Admin)
 
          .. code-block:: doscon
 
@@ -65,7 +65,7 @@ Backing up a Wazuh agent
             /var/ossec/logs/ \
             /var/ossec/queue/rids/ $bkp_folder
 
-      .. group-tab:: Windows
+      .. group-tab:: Windows (CMD Admin)
 
          .. code-block:: doscon
 
@@ -103,7 +103,7 @@ Backing up a Wazuh agent
             # rsync -aREz /var/ossec/active-response/bin/<CUSTOM_ACTIVE_RESPONSE_SCRIPT> $bkp_folder
             # rsync -aREz /var/ossec/wodles/<CUSTOM_WODLE_SCRIPT> $bkp_folder
 
-      .. group-tab:: Windows
+      .. group-tab:: Windows (CMD Admin)
 
          .. code-block:: doscon
 
@@ -133,7 +133,7 @@ Checking the backup
 
             # find $bkp_folder -type f | sed "s|$bkp_folder/||" | less
 
-      .. group-tab:: Windows
+      .. group-tab:: Windows (CMD Admin)
 
          .. code-block:: doscon
 
