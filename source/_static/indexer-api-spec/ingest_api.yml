@@ -4,7 +4,7 @@ components:
       name: pipeline_id
       in: path
       required: true
-      description: The unique identifier of the ingest pipeline to retrieve. This is required if you are retrieving information about a specific pipeline.
+      description: A unique identifier assigned to the ingest pipeline, referred to as the pipeline id
       schema:
         type: string
         example: wazuh-pipeline
@@ -267,13 +267,7 @@ components:
             $ref: '#/components/schemas/IngestConflictError'
           example:
 
-    CreatePipelineUnauthorized:
-      description: Response to report an unauthorized request
-      content:
-        application/json:
-          schema:
-            type: string
-          example: "Unauthorized"
+
 
 
     GetPipelineSuccess:
@@ -297,13 +291,7 @@ components:
                 - uppercase:
                     field: "name"
 
-    GetPipelineUnauthorized:
-      description: Response to report an unauthorized request
-      content:
-        application/json:
-          schema:
-            type: string
-          example: "Unauthorized"
+
 
 
     GetPipelineNotFound:
@@ -381,13 +369,7 @@ components:
               reason: pipeline [wazuh-pipelines] does not exist
             status: 400
 
-    SimulatePipelineUnauthorized:
-      description: Response to report an unauthorized request
-      content:
-        application/json:
-          schema:
-            type: string
-          example: "Unauthorized"
+
 
 
 
@@ -409,13 +391,7 @@ components:
                     value: "{{_ingest.timestamp}}"
               description: "Pipeline for accessing and transforming document data"
 
-    AccessPipelineDataUnauthorized:
-      description: Unauthorized
-      content:
-        application/json:
-          schema:
-            type: string
-          example: "Unauthorized"
+
 
 
 
@@ -440,13 +416,7 @@ components:
           example:
             acknowledged: true
 
-    DeletePipelineUnauthorized:
-      description: Unauthorized
-      content:
-        application/json:
-          schema:
-            type: string
-          example: "Unauthorized"
+
 
 
 

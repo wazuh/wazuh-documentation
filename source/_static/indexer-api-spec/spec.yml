@@ -237,7 +237,7 @@ paths:
         '400':
           $ref: 'ingest_api.yml#/components/responses/CreatePipelineBadRequest'
         '401':
-          $ref: 'ingest_api.yml#/components/responses/CreatePipelineUnauthorized'
+          $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
         '409':
@@ -258,7 +258,7 @@ paths:
         '200':
           $ref: 'ingest_api.yml#/components/responses/GetPipelineSuccess'
         '401':
-          $ref: 'ingest_api.yml#/components/responses/GetPipelineUnauthorized'
+          $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
         '404':
@@ -297,7 +297,7 @@ paths:
         '400':
           $ref: 'ingest_api.yml#/components/responses/SimulatePipelineBadRequest'
         '401':
-          $ref: 'ingest_api.yml#/components/responses/SimulatePipelineUnauthorized'
+          $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
       security:
@@ -333,7 +333,7 @@ paths:
         '400':
           $ref: 'ingest_api.yml#/components/responses/SimulatePipelineBadRequest'
         '401':
-          $ref: 'ingest_api.yml#/components/responses/SimulatePipelineUnauthorized'
+          $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
       security:
@@ -364,7 +364,7 @@ paths:
         '400':
           $ref: 'ingest_api.yml#/components/responses/SimulatePipelineBadRequest'
         '401':
-          $ref: 'ingest_api.yml#/components/responses/SimulatePipelineUnauthorized'
+          $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
       security:
@@ -394,7 +394,7 @@ paths:
         '400':
           $ref: 'ingest_api.yml#/components/responses/SimulatePipelineBadRequest'
         '401':
-          $ref: 'ingest_api.yml#/components/responses/SimulatePipelineUnauthorized'
+          $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
       security:
@@ -644,7 +644,7 @@ paths:
         '200':
           $ref: 'ingest_api.yml#/components/responses/AccessPipelineDataSuccess'
         '401':
-          $ref: 'ingest_api.yml#/components/responses/AccessPipelineDataUnauthorized'
+          $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
         '404':
@@ -674,7 +674,7 @@ paths:
         '200':
           $ref: 'ingest_api.yml#/components/responses/DeletePipelineSuccess'
         '401':
-          $ref: 'ingest_api.yml#/components/responses/DeletePipelineUnauthorized'
+          $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
         '404':
@@ -2266,10 +2266,7 @@ components:
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              root_cause:
-                type: string
+            type: string
           example: "Unauthorized"
 
     ForbiddenApiInfo:
