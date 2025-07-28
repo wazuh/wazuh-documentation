@@ -1880,6 +1880,47 @@ paths:
         - basicAuth: []
         - jwtAuth: []
 
+  /{index}/_update/{id}:
+    parameters:
+      - $ref: 'document_api.yml#/components/parameters/document_index'
+      - $ref: 'document_api.yml#/components/parameters/document_id'
+    post:
+      tags: [Document APIs]
+      summary: Update document
+      description: |
+        To modify a document's fields in your index, you can use the Update Document API. This can be done by providing the updated data directly or by including a script in the request body, which Wazuh indexer executes to update the document. By default, the update operation only applies to existing documents in the index. If the document does not exist, the API returns an error.
+      operationId: updateDocument
+      parameters:
+        - $ref: 'document_api.yml#/components/parameters/if_seq_no'
+        - $ref: 'document_api.yml#/components/parameters/if_primary_term'
+        - $ref: 'document_api.yml#/components/parameters/lang'
+        - $ref: 'document_api.yml#/components/parameters/require_alias'
+        - $ref: 'document_api.yml#/components/parameters/refresh'
+        - $ref: 'document_api.yml#/components/parameters/retry_on_conflict'
+        - $ref: 'document_api.yml#/components/parameters/routing'
+        - $ref: 'document_api.yml#/components/parameters/_source'
+        - $ref: 'document_api.yml#/components/parameters/_source_excludes'
+        - $ref: 'document_api.yml#/components/parameters/_source_includes'
+        - $ref: 'document_api.yml#/components/parameters/timeout'
+        - $ref: 'document_api.yml#/components/parameters/wait_for_active_shards'
+        - $ref: '#/components/parameters/pretty'
+      requestBody:
+        $ref: 'document_api.yml#/components/requestBodies/UpdateDocumentRequest'
+      responses:
+        '200':
+          $ref: 'document_api.yml#/components/responses/UpdateDocumentSuccess'
+        '400':
+          $ref: 'document_api.yml#/components/responses/UpdateDocumentBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: 'document_api.yml#/components/responses/UpdateDocumentNotFound'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
 components:
   parameters:
     pretty:

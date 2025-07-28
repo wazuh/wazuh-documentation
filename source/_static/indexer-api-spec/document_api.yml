@@ -154,6 +154,80 @@ components:
       schema:
         type: string
 
+    lang:
+      name: lang
+      in: query
+      description: Specifies the scripting language used in the update request.
+      schema:
+        type: string
+        default: painless
+
+    retry_on_conflict:
+      name: retry_on_conflict
+      in: query
+      description: Specifies how many times Wazuh indexer should retry the update operation in case of a document conflict.
+      schema:
+        type: integer
+        default: 0
+
+  schemas:
+    DocumentSuccess:
+      type: object
+      properties:
+        _index:
+          type: string
+          description: The name of the index where the document was stored.
+        _id:
+          type: string
+          description: The unique identifier assigned to the document.
+        _version:
+          type: integer
+          description: The version number of the document. Each update increases this value.
+        result:
+          type: string
+          description: Indicates the outcome of the operation. Possible values are `created` (new document added) or `updated` (existing document modified).
+          enum: [created, updated]
+        _shards:
+          type: object
+          properties:
+            total:
+              type: integer
+              description: Total number of shards targeted in the request.
+            successful:
+              type: integer
+              description: Number of shards that successfully executed the operation.
+            failed:
+              type: integer
+              description: Number of shards where the operation failed.
+        _seq_no:
+          type: integer
+          description: The sequence number assigned to this operation. This is used for optimistic concurrency control.
+        _primary_term:
+          type: integer
+          description: The primary term of the shard that processed the request. Helps in ensuring consistency in case of shard relocations.
+
+    DocumentBadRequest:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            root_cause:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                  reason:
+                    type: string
+            type:
+              type: string
+            reason:
+              type: string
+        status:
+          type: integer
+
   requestBodies:
     IndexDocumentRequest:
       description: The JSON source that defines the document's data.
@@ -204,45 +278,28 @@ components:
                 description: If `true`, it forces the Wazuh indexer to use the script to create a new document if it does not exist.
             example:
 
+    UpdateDocumentRequest:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              script:
+                description: A script to modify matching documents. You can use Painless (default) or another supported scripting language.
+                type: object
+                additionalProperties: true
+          example:
+            script:
+              source: "ctx._source.location = \"EventChannel\""
+
   responses:
     IndexDocumentSuccess:
       description: Success
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              _index:
-                type: string
-                description: The name of the index where the document was stored.
-              _id:
-                type: string
-                description: The unique identifier assigned to the document.
-              _version:
-                type: integer
-                description: The version number of the document. Each update increases this value.
-              result:
-                type: string
-                description: Indicates the outcome of the operation. Possible values are `created` (new document added) or `updated` (existing document modified).
-                enum: [created, updated]
-              _shards:
-                type: object
-                properties:
-                  total:
-                    type: integer
-                    description: Total number of shards targeted in the request.
-                  successful:
-                    type: integer
-                    description: Number of shards that successfully executed the operation.
-                  failed:
-                    type: integer
-                    description: Number of shards where the operation failed.
-              _seq_no:
-                type: integer
-                description: The sequence number assigned to this operation. This is used for optimistic concurrency control.
-              _primary_term:
-                type: integer
-                description: The primary term of the shard that processed the request. Helps in ensuring consistency in case of shard relocations.
+            $ref: '#/components/schemas/DocumentSuccess'
           example:
             _index: "wazuh-alerts-4.x-2025.03.12"
             _id: "1"
@@ -260,26 +317,7 @@ components:
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              error:
-                type: object
-                properties:
-                  root_cause:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        type:
-                          type: string
-                        reason:
-                          type: string
-                  type:
-                    type: string
-                  reason:
-                    type: string
-              status:
-                type: integer
+            $ref: '#/components/schemas/DocumentBadRequest'
           example:
             error:
               root_cause:
@@ -400,3 +438,88 @@ components:
               index: "_wazuh-alerts-4.x-2025.03.12"
               index_uuid: "_na_"
             status: 400
+
+    UpdateDocumentSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DocumentSuccess'
+          example:
+            _index: "wazuh-alerts-4.x-2025.03.12"
+            _id: "1"
+            _version: 5
+            result: "updated"
+            _shards:
+              total: 1
+              successful: 1
+              failed: 0
+            _seq_no: 266
+            _primary_term: 3
+
+    UpdateDocumentBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DocumentBadRequest'
+          example:
+            error:
+              root_cause:
+                - type: "action_request_validation_exception"
+                  reason: "Validation Failed: 1: script or doc is missing;"
+              type: "action_request_validation_exception"
+              reason: "Validation Failed: 1: script or doc is missing;"
+            status: 400
+
+    UpdateDocumentNotFound:
+      description: Response to report a document not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  root_cause:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        reason:
+                          type: string
+                        index:
+                          type: string
+                        shard:
+                          type: string
+                        index_uuid:
+                          type: string
+                  type:
+                    type: string
+                  reason:
+                    type: string
+                  index:
+                    type: string
+                  shard:
+                    type: string
+                  index_uuid:
+                    type: string
+              status:
+                type: integer
+          example:
+            error:
+              root_cause:
+                - type: "document_missing_exception"
+                  reason: "[1]: document missing"
+                  index: "wazuh-alerts-4.x-2025.03.22"
+                  shard: "2"
+                  index_uuid: "GbPjnHpgTiivnQRY_wCJ1g"
+              type: "document_missing_exception"
+              reason: "[1]: document missing"
+              index: "wazuh-alerts-4.x-2025.03.22"
+              shard: "2"
+              index_uuid: "GbPjnHpgTiivnQRY_wCJ1g"
+            status: 404
