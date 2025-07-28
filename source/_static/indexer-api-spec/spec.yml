@@ -1701,6 +1701,76 @@ paths:
         - basicAuth: []
         - jwtAuth: []
 
+    get:
+      tags: [Document APIs]
+      summary: Get document (GET)
+      description: |
+        Once a JSON document is added to your index, you can retrieve its information and data using the Get Document API. Use the GET method to retrieve a document along with its source or stored fields from a specific index. To check if a document exists, use the HEAD method.
+      operationId: getDocument
+      parameters:
+        - $ref: 'document_api.yml#/components/parameters/preference'
+        - $ref: 'document_api.yml#/components/parameters/realtime'
+        - $ref: 'document_api.yml#/components/parameters/refresh'
+        - $ref: 'document_api.yml#/components/parameters/routing'
+        - $ref: 'document_api.yml#/components/parameters/stored_fields'
+        - $ref: 'document_api.yml#/components/parameters/_source'
+        - $ref: 'document_api.yml#/components/parameters/_source_excludes'
+        - $ref: 'document_api.yml#/components/parameters/_source_includes'
+        - $ref: 'document_api.yml#/components/parameters/version'
+        - $ref: 'document_api.yml#/components/parameters/version_type'
+        - $ref: '#/components/parameters/pretty'
+      requestBody:
+        $ref: 'document_api.yml#/components/requestBodies/GetDocumentRequest'
+      responses:
+        '200':
+          $ref: 'document_api.yml#/components/responses/GetDocumentSuccess'
+        '400':
+          $ref: 'document_api.yml#/components/responses/GetDocumentBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: 'document_api.yml#/components/responses/GetDocumentNotFound'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+    head:
+      tags: [Document APIs]
+      summary: Get document (HEAD)
+      description: |
+        Once a JSON document is added to your index, you can retrieve its information and data using the Get Document API. Use the GET method to retrieve a document along with its source or stored fields from a specific index. To check if a document exists, use the HEAD method.
+      operationId: documentExists
+      parameters:
+        - $ref: 'document_api.yml#/components/parameters/preference'
+        - $ref: 'document_api.yml#/components/parameters/realtime'
+        - $ref: 'document_api.yml#/components/parameters/refresh'
+        - $ref: 'document_api.yml#/components/parameters/routing'
+        - $ref: 'document_api.yml#/components/parameters/stored_fields'
+        - $ref: 'document_api.yml#/components/parameters/_source'
+        - $ref: 'document_api.yml#/components/parameters/_source_excludes'
+        - $ref: 'document_api.yml#/components/parameters/_source_includes'
+        - $ref: 'document_api.yml#/components/parameters/version'
+        - $ref: 'document_api.yml#/components/parameters/version_type'
+        - $ref: '#/components/parameters/pretty'
+      requestBody:
+        $ref: 'document_api.yml#/components/requestBodies/GetDocumentRequest'
+      responses:
+        '200':
+          $ref: 'document_api.yml#/components/responses/GetDocumentSuccess'
+        '400':
+          $ref: 'document_api.yml#/components/responses/GetDocumentBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: 'document_api.yml#/components/responses/GetDocumentNotFound'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
   /{index}/_doc:
     parameters:
       - $ref: 'document_api.yml#/components/parameters/document_index'

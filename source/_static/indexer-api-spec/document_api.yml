@@ -50,14 +50,15 @@ components:
     routing:
       name: routing
       in: query
-      description: Specifies a routing value to determine which shard will process the index operation.
+      description: Routes the request to a specific shard for the operation.
       schema:
         type: string
 
     refresh:
       name: refresh
       in: query
-      description: Controls when the Wazuh indexer refreshes shards to make the document searchable. `wait_for` waits for a refresh before processing.
+      description: |
+        Controls whether the Wazuh indexer refreshes shards before executing the operation. `wait_for` waits for a refresh before processing.
       schema:
         type: string
         enum: [true, false, wait_for]
@@ -83,7 +84,7 @@ components:
       name: version_type
       in: query
       description: |
-        Defines how versioning should be handled. Options are `external` (only index if the new version is higher than the current one) and `external_gte` (only index if the new version is equal to or greater than the current one). Example: `/_doc/1?version=3&version_type=external`.
+        Specifies how to handle document versioning. Options are `external` (retrieves the document if the version number is higher than the current one) and `external_gte` (retrieves the document if the version number is greater than or equal to the current version). Example: `/_doc/1?version=3&version_type=external`.
       schema:
         type: string
         enum: [external, external_gte]
@@ -108,6 +109,51 @@ components:
         type: boolean
         default: false
 
+    preference:
+      name: preference
+      in: query
+      description: Defines which shard should be queried to retrieve the document. Options include `_local` (retrieves data from a locally allocated shard replica) and a custom string to specify a specific shard replica. By default, the Wazuh indexer randomly selects a shard.
+      schema:
+        type: string
+
+    realtime:
+      name: realtime
+      in: query
+      description: Determines whether the operation should run in real-time. If set to `false`, the operation waits for the index to refresh before retrieving data, making it *near real-time*.
+      schema:
+        type: boolean
+        default: true
+
+    stored_fields:
+      name: stored_fields
+      in: query
+      description: Specifies whether to retrieve stored fields from the index instead of `_source`.
+      schema:
+        type: boolean
+        default: false
+
+    _source:
+      name: _source
+      in: query
+      description: Determines whether the `_source` field should be included in the response.
+      schema:
+        type: boolean
+        default: true
+
+    _source_excludes:
+      name: _source_excludes
+      in: query
+      description: A comma-separated list of fields to exclude from the response.
+      schema:
+        type: string
+
+    _source_includes:
+      name: _source_includes
+      in: query
+      description: A comma-separated list of fields to include in the response.
+      schema:
+        type: string
+
   requestBodies:
     IndexDocumentRequest:
       description: The JSON source that defines the document's data.
@@ -121,6 +167,42 @@ components:
             "agent.id": "001"
             "agent.ip": "Windows PC"
             "description": "Malware detected"
+
+    GetDocumentRequest:
+      required: false
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              doc:
+                type: object
+                additionalProperties: true
+                description: A partial document containing the fields to update. Fields not included in `doc` remain unchanged.
+              script:
+                type: object
+                additionalProperties: true
+                description: A script that modifies the document dynamically. If provided, `doc` is ignored.
+              upsert:
+                type: object
+                additionalProperties: true
+                description: Provides a default document to be inserted if the specified document does not exist.
+              doc_as_upsert:
+                type: boolean
+                description: If `true`, Wazuh indexer inserts the document if it does not exist and updates it if it does.
+              detect_noop:
+                type: boolean
+                default: true
+                description: If `true`, Wazuh indexer skips the update if the document's contents remain unchanged.
+              retry_on_conflict:
+                type: integer
+                default: 0
+                description: Specifies the number of retry attempts if the update conflicts with another update.
+              scripted_upsert:
+                type: boolean
+                default: false
+                description: If `true`, it forces the Wazuh indexer to use the script to create a new document if it does not exist.
+            example:
 
   responses:
     IndexDocumentSuccess:
@@ -205,4 +287,116 @@ components:
                   reason: "request body is required"
               type: "parse_exception"
               reason: "request body is required"
+            status: 400
+
+    GetDocumentSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              _index:
+                type: string
+                description: The name of the index where the document was stored.
+              _id:
+                type: string
+                description: The unique identifier assigned to the document.
+              _version:
+                type: integer
+                description: The version number of the document. Each update increases this value.
+              _seq_no:
+                type: integer
+                description: The sequence number assigned to this operation. This is used for optimistic concurrency control.
+              _primary_term:
+                type: integer
+                description: The primary term of the shard that processed the request. Helps in ensuring consistency in case of shard relocations.
+              found:
+                type: boolean
+                description: Indicates whether the document exists (`true` if found, `false` if not).
+              _routing:
+                type: string
+                description: Specifies the shard where the document is routed. If routing is not explicitly defined, this field is omitted.
+              _source:
+                type: object
+                additionalProperties: true
+                description: Contains the document's data if `found` is `true`. If `_source` is disabled (`false`) or `stored_fields` is set to `true`, this field is omitted.
+              _fields:
+                type: object
+                additionalProperties: true
+                description: Holds stored fields of the document (instead of `_source`). This is returned only if both `stored_fields` and `found` are `true`.
+          example:
+            _index: "wazuh-alerts-4.x-2025.03.12"
+            _id: "1"
+            _version: 1
+            _seq_no: 262
+            _primary_term: 3
+            found: true
+            _source:
+              "agent.id": "001"
+              "agent.ip": "Windows PC"
+              "description": "Malware detected"
+
+    GetDocumentNotFound:
+      description: Response to report a request not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              _index:
+                type: string
+              _id:
+                type: string
+              found:
+                type: boolean
+          example:
+            _index: "wazuh-alerts-4.x-2025.03.12"
+            _id: "0"
+            found: false
+
+    GetDocumentBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  root_cause:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        reason:
+                          type: string
+                        index:
+                          type: string
+                        index_uuid:
+                          type: string
+                  type:
+                    type: string
+                  reason:
+                    type: string
+                  index:
+                    type: string
+                  index_uuid:
+                    type: string
+              status:
+                type: integer
+          example:
+            error:
+              root_cause:
+                - type: "invalid_index_name_exception"
+                  reason: "Invalid index name [_wazuh-alerts-4.x-2025.03.12], must not start with '_'."
+                  index: "_wazuh-alerts-4.x-2025.03.12"
+                  index_uuid: "_na_"
+              type: "invalid_index_name_exception"
+              reason: "Invalid index name [_wazuh-alerts-4.x-2025.03.12], must not start with '_'."
+              index: "_wazuh-alerts-4.x-2025.03.12"
+              index_uuid: "_na_"
             status: 400
