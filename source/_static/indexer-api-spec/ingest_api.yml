@@ -264,6 +264,7 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/IngestConflictError'
+          example:
 
     CreatePipelineUnauthorized:
       description: Response to report an unauthorized request
