@@ -228,6 +228,71 @@ components:
         status:
           type: integer
 
+    DocumentBadRequestWithIndex:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            root_cause:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                  reason:
+                    type: string
+                  index:
+                    type: string
+                  index_uuid:
+                    type: string
+            type:
+              type: string
+            reason:
+              type: string
+            index:
+              type: string
+            index_uuid:
+              type: string
+        status:
+          type: integer
+
+    DocumentNotFound:
+      type: object
+      properties:
+        _index:
+          type: string
+        _id:
+          type: string
+        _version:
+          type: integer
+        result:
+          type: string
+        _shards:
+          type: object
+          properties:
+            total:
+              type: integer
+            successful:
+              type: integer
+            failed:
+              type: integer
+        _seq_no:
+          type: integer
+        _primary_term:
+          type: integer
+
+    DocumentNotFoundSimple:
+      type: object
+      properties:
+        _index:
+          type: string
+        _id:
+          type: string
+        found:
+          type: boolean
+
   requestBodies:
     IndexDocumentRequest:
       description: The JSON source that defines the document's data.
@@ -380,14 +445,7 @@ components:
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              _index:
-                type: string
-              _id:
-                type: string
-              found:
-                type: boolean
+            $ref: '#/components/schemas/DocumentNotFoundSimple'
           example:
             _index: "wazuh-alerts-4.x-2025.03.12"
             _id: "0"
@@ -398,34 +456,7 @@ components:
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              error:
-                type: object
-                properties:
-                  root_cause:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        type:
-                          type: string
-                        reason:
-                          type: string
-                        index:
-                          type: string
-                        index_uuid:
-                          type: string
-                  type:
-                    type: string
-                  reason:
-                    type: string
-                  index:
-                    type: string
-                  index_uuid:
-                    type: string
-              status:
-                type: integer
+            $ref: '#/components/schemas/DocumentBadRequestWithIndex'
           example:
             error:
               root_cause:
@@ -477,38 +508,7 @@ components:
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              error:
-                type: object
-                properties:
-                  root_cause:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        type:
-                          type: string
-                        reason:
-                          type: string
-                        index:
-                          type: string
-                        shard:
-                          type: string
-                        index_uuid:
-                          type: string
-                  type:
-                    type: string
-                  reason:
-                    type: string
-                  index:
-                    type: string
-                  shard:
-                    type: string
-                  index_uuid:
-                    type: string
-              status:
-                type: integer
+            $ref: '#/components/schemas/DocumentBadRequestWithIndex'
           example:
             error:
               root_cause:
@@ -523,3 +523,58 @@ components:
               shard: "2"
               index_uuid: "GbPjnHpgTiivnQRY_wCJ1g"
             status: 404
+
+    DeleteDocumentSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DocumentSuccess'
+          example:
+            _index: "wazuh-alerts-4.x-2025.03.12"
+            _id: "2"
+            _version: 2
+            result: "deleted"
+            _shards:
+              total: 1
+              successful: 1
+              failed: 0
+            _seq_no: 279
+            _primary_term: 3
+
+    DeleteDocumentBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DocumentBadRequestWithIndex'
+          example:
+            error:
+              root_cause:
+                - type: "invalid_index_name_exception"
+                  reason: "Invalid index name [_wazuh-alerts-4.x-2025.03.12], must not start with '_'."
+                  index: "_wazuh-alerts-4.x-2025.03.12"
+                  index_uuid: "_na_"
+              type: "invalid_index_name_exception"
+              reason: "Invalid index name [_wazuh-alerts-4.x-2025.03.12], must not start with '_'."
+              index: "_wazuh-alerts-4.x-2025.03.12"
+              index_uuid: "_na_"
+            status: 400
+
+    DeleteDocumentNotFound:
+      description: Response to report a request not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DocumentNotFound'
+          example:
+            _index: "wazuh-alerts-4.x-2025.03.12"
+            _id: "5"
+            _version: 1
+            result: "not_found"
+            _shards:
+              total: 1
+              successful: 1
+              failed: 0
+            _seq_no: 240
+            _primary_term: 3

@@ -1771,6 +1771,37 @@ paths:
         - basicAuth: []
         - jwtAuth: []
 
+    delete:
+      tags: [Document APIs]
+      summary: Delete document
+      description: |
+        If a document is no longer required in your index, you can remove it using the Delete Document API operation.
+      operationId: deleteDocument
+      parameters:
+        - $ref: 'document_api.yml#/components/parameters/if_seq_no'
+        - $ref: 'document_api.yml#/components/parameters/if_primary_term'
+        - $ref: 'document_api.yml#/components/parameters/refresh'
+        - $ref: 'document_api.yml#/components/parameters/routing'
+        - $ref: 'document_api.yml#/components/parameters/timeout'
+        - $ref: 'document_api.yml#/components/parameters/version'
+        - $ref: 'document_api.yml#/components/parameters/version_type'
+        - $ref: 'document_api.yml#/components/parameters/wait_for_active_shards'
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: 'document_api.yml#/components/responses/DeleteDocumentSuccess'
+        '400':
+          $ref: 'document_api.yml#/components/responses/DeleteDocumentBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: 'document_api.yml#/components/responses/DeleteDocumentNotFound'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
   /{index}/_doc:
     parameters:
       - $ref: 'document_api.yml#/components/parameters/document_index'
