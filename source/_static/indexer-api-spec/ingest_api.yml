@@ -7,6 +7,7 @@ components:
       description: The unique identifier of the ingest pipeline to retrieve. This is required if you are retrieving information about a specific pipeline.
       schema:
         type: string
+        example: wazuh-pipeline
 
     cluster_manager_timeout:
       name: cluster_manager_timeout
