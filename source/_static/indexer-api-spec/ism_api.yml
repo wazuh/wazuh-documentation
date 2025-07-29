@@ -410,6 +410,15 @@ components:
         enabled:
           type: boolean
           description: Specifies whether ISM is currently enabled for this index.
+        validate:
+          type: object
+          properties:
+            validation_message:
+              type: string
+              description: This describes the result of the validation.
+            validation_status:
+              type: string
+              description: This refers to the status of the validation.
 
     DeletePolicyResponse:
       type: object
