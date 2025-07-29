@@ -1791,7 +1791,7 @@ paths:
         '200':
           $ref: 'document_api.yml#/components/responses/DeleteDocumentSuccess'
         '400':
-          $ref: 'document_api.yml#/components/responses/DeleteDocumentBadRequest'
+          $ref: 'document_api.yml#/components/responses/DocumentBadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
@@ -2021,7 +2021,7 @@ paths:
   /_mget:
     get:
       tags: [Document APIs]
-      summary: Multi-get documents (GET)
+      summary: Multi-get documents (Global GET)
       description: |
         The multi-get operation enables you to perform multiple GET requests within a single request, allowing you to retrieve multiple documents that match your specified criteria.
       operationId: multiGetDocumentsGet
@@ -2052,7 +2052,7 @@ paths:
 
     post:
       tags: [Document APIs]
-      summary: Multi-get documents (POST)
+      summary: Multi-get documents (Global POST)
       description: |
         The multi-get operation enables you to perform multiple GET requests within a single request, allowing you to retrieve multiple documents that match your specified criteria.
       operationId: multiGetDocumentsPost
@@ -2142,6 +2142,164 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /{index}/_delete_by_query:
+    parameters:
+      - $ref: 'document_api.yml#/components/parameters/document_index'
+    post:
+      tags: [Document APIs]
+      summary: Delete by query
+      description: |
+        You can add a query to your delete request to have the Wazuh indexer remove all documents that match the specified conditions.
+      operationId: deleteByQueryIndex
+      parameters:
+        - $ref: 'document_api.yml#/components/parameters/allow_no_indices'
+        - $ref: 'document_api.yml#/components/parameters/analyzer'
+        - $ref: 'document_api.yml#/components/parameters/analyze_wildcard'
+        - $ref: 'document_api.yml#/components/parameters/conflicts'
+        - $ref: 'document_api.yml#/components/parameters/default_operator'
+        - $ref: 'document_api.yml#/components/parameters/df'
+        - $ref: 'document_api.yml#/components/parameters/expand_wildcards'
+        - $ref: 'document_api.yml#/components/parameters/from'
+        - $ref: 'document_api.yml#/components/parameters/ignore_unavailable'
+        - $ref: 'document_api.yml#/components/parameters/lenient'
+        - $ref: 'document_api.yml#/components/parameters/max_docs'
+        - $ref: 'document_api.yml#/components/parameters/preference_delete'
+        - $ref: 'document_api.yml#/components/parameters/q'
+        - $ref: 'document_api.yml#/components/parameters/request_cache'
+        - $ref: 'document_api.yml#/components/parameters/refresh'
+        - $ref: 'document_api.yml#/components/parameters/requests_per_second'
+        - $ref: 'document_api.yml#/components/parameters/routing'
+        - $ref: 'document_api.yml#/components/parameters/scroll'
+        - $ref: 'document_api.yml#/components/parameters/scroll_size'
+        - $ref: 'document_api.yml#/components/parameters/search_type'
+        - $ref: 'document_api.yml#/components/parameters/search_timeout'
+        - $ref: 'document_api.yml#/components/parameters/slices'
+        - $ref: 'document_api.yml#/components/parameters/sort'
+        - $ref: 'document_api.yml#/components/parameters/_source'
+        - $ref: 'document_api.yml#/components/parameters/_source_excludes'
+        - $ref: 'document_api.yml#/components/parameters/_source_includes'
+        - $ref: 'document_api.yml#/components/parameters/stats'
+        - $ref: 'document_api.yml#/components/parameters/terminate_after'
+        - $ref: 'document_api.yml#/components/parameters/timeout'
+        - $ref: 'document_api.yml#/components/parameters/version_query'
+        - $ref: 'document_api.yml#/components/parameters/wait_for_active_shards'
+        - $ref: 'document_api.yml#/components/parameters/wait_for_completion'
+        - $ref: '#/components/parameters/pretty'
+      requestBody:
+        $ref: 'document_api.yml#/components/requestBodies/DeleteByQueryRequest'
+      responses:
+        '200':
+          $ref: 'document_api.yml#/components/responses/DeleteByQuerySuccess'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: 'document_api.yml#/components/responses/ByQueryDocumentNotFound'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  # Update by query API endpoints
+  /{index1},{index2}/_update_by_query:
+    parameters:
+      - $ref: 'document_api.yml#/components/parameters/document_index_1'
+      - $ref: 'document_api.yml#/components/parameters/document_index_2'
+    post:
+      tags: [Document APIs]
+      summary: Update by query
+      description: |
+        You can provide both a query and a script in your update request, allowing the Wazuh indexer  to execute the script on all documents that match the query criteria.
+      operationId: updateByQueryIndex
+      parameters:
+        - $ref: 'document_api.yml#/components/parameters/allow_no_indices'
+        - $ref: 'document_api.yml#/components/parameters/analyzer'
+        - $ref: 'document_api.yml#/components/parameters/analyze_wildcard'
+        - $ref: 'document_api.yml#/components/parameters/conflicts'
+        - $ref: 'document_api.yml#/components/parameters/default_operator'
+        - $ref: 'document_api.yml#/components/parameters/df'
+        - $ref: 'document_api.yml#/components/parameters/expand_wildcards'
+        - $ref: 'document_api.yml#/components/parameters/from'
+        - $ref: 'document_api.yml#/components/parameters/ignore_unavailable'
+        - $ref: 'document_api.yml#/components/parameters/lenient'
+        - $ref: 'document_api.yml#/components/parameters/max_docs'
+        - $ref: 'document_api.yml#/components/parameters/preference_update'
+        - $ref: 'document_api.yml#/components/parameters/q'
+        - $ref: 'document_api.yml#/components/parameters/request_cache'
+        - $ref: 'document_api.yml#/components/parameters/refresh'
+        - $ref: 'document_api.yml#/components/parameters/requests_per_second'
+        - $ref: 'document_api.yml#/components/parameters/routing'
+        - $ref: 'document_api.yml#/components/parameters/scroll'
+        - $ref: 'document_api.yml#/components/parameters/scroll_size'
+        - $ref: 'document_api.yml#/components/parameters/search_type'
+        - $ref: 'document_api.yml#/components/parameters/search_timeout'
+        - $ref: 'document_api.yml#/components/parameters/slices'
+        - $ref: 'document_api.yml#/components/parameters/sort'
+        - $ref: 'document_api.yml#/components/parameters/_source'
+        - $ref: 'document_api.yml#/components/parameters/_source_excludes'
+        - $ref: 'document_api.yml#/components/parameters/_source_includes'
+        - $ref: 'document_api.yml#/components/parameters/stats'
+        - $ref: 'document_api.yml#/components/parameters/terminate_after'
+        - $ref: 'document_api.yml#/components/parameters/timeout'
+        - $ref: 'document_api.yml#/components/parameters/version_query'
+        - $ref: 'document_api.yml#/components/parameters/wait_for_active_shards'
+        - $ref: 'document_api.yml#/components/parameters/wait_for_completion'
+        - $ref: '#/components/parameters/pretty'
+      requestBody:
+        $ref: 'document_api.yml#/components/requestBodies/UpdateByQueryRequest'
+      responses:
+        '200':
+          $ref: 'document_api.yml#/components/responses/UpdateByQuerySuccess'
+        '400':
+          $ref: 'document_api.yml#/components/responses/DocumentBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: 'document_api.yml#/components/responses/ByQueryDocumentNotFound'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /_reindex:
+    post:
+      tags: [Document APIs]
+      summary: Reindex documents
+      description: |
+        The Reindex API allows you to copy documents from one or more source indexes to a destination index.
+      operationId: reindexDocuments
+      parameters:
+        - $ref: 'document_api.yml#/components/parameters/refresh'
+        - $ref: 'document_api.yml#/components/parameters/timeout'
+        - $ref: 'document_api.yml#/components/parameters/wait_for_active_shards'
+        - $ref: 'document_api.yml#/components/parameters/wait_for_completion'
+        - $ref: 'document_api.yml#/components/parameters/requests_per_second'
+        - $ref: 'document_api.yml#/components/parameters/require_alias'
+        - $ref: 'document_api.yml#/components/parameters/scroll'
+        - $ref: 'document_api.yml#/components/parameters/slices_reindex'
+        - $ref: 'document_api.yml#/components/parameters/scroll'
+        - $ref: 'document_api.yml#/components/parameters/max_docs_reindex'
+        - $ref: '#/components/parameters/pretty'
+      requestBody:
+        $ref: 'document_api.yml#/components/requestBodies/ReindexRequest'
+      responses:
+        '200':
+          $ref: 'document_api.yml#/components/responses/ReindexSuccess'
+        '400':
+          $ref: 'document_api.yml#/components/responses/BulkBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: 'document_api.yml#/components/responses/ByQueryDocumentNotFound'
       security:
         - basicAuth: []
         - jwtAuth: []
