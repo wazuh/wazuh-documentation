@@ -2150,11 +2150,42 @@ paths:
         '403':
           $ref: '#/components/responses/Forbidden'
 
-  /_plugins/_ism/explain/{index}/validate:
+  /_plugins/_ism/explain/{index}?validate_action={value}:
     get:
       tags:
         - ISM error prevention API
       summary: Explain index with validation
+      description: |
+        To enable error prevention validation, set the `plugins.index_state_management.action_validation.enabled` setting to `true`:
+
+        ```json
+        PUT _cluster/settings
+        {
+          "persistent":{
+            "plugins.index_state_management.action_validation.enabled": "true"
+          }
+        }
+        ```
+
+        The response should be as below:
+
+        ```json
+        {
+          "acknowledged": true,
+          "persistent": {
+            "plugins": {
+              "index_state_management": {
+                "action_validation": {
+                  "enabled": "true"
+                }
+              }
+            }
+          },
+          "transient": {}
+        }
+        ```
+
+        To check an error prevention validation status and message, pass `validate_action=true` to the `_plugins/_ism/explain` endpoint.
       operationId: explainIndexWithValidation
       security:
         - basicAuth: []
@@ -2166,6 +2197,12 @@ paths:
           description: The name of the index you want to retrieve the ISM explanation details. You can also use index patterns (wazuh-alerts-4.x-*) to retrieve information for multiple indexes.
           schema:
             type: string
+        - name: validate_action
+          in: query
+          required: false
+          description: When set to true, this parameter checks whether the current action in the ISM policy for the specified index is valid and free of configuration issues.
+          schema:
+            type: boolean
         - $ref: '#/components/parameters/pretty'
       responses:
         '200':
@@ -2427,7 +2464,7 @@ tags:
   - name: Index state management API
     description: The Index State Management (ISM) API operations allow you to programmatically manage index policies and the lifecycle of indexes in the Wazuh indexer.
   - name: ISM error prevention API
-    description: Index State Management (ISM) supports the automatic execution of actions. However, these actions may encounter failures due to various reasons. To help prevent such issues, you can perform error prevention validation to test an action and identify potential failures beforehand. To enable error prevention validation, set the plugins.index_state_management.action_validation.enabled setting to true.
+    description: Index State Management (ISM) supports the automatic execution of actions. However, these actions may encounter failures due to various reasons. To help prevent such issues, you can perform error prevention validation to test an action and identify potential failures beforehand.
   - name: Ingest APIs
     description: |
       The Wazuh indexer Ingest APIs facilitate the transformation and enrichment of data as it is ingested into the system. These APIs allow for the creation and management of ingest pipelines, which consist of a series of processors that execute sequentially to process incoming documents.
