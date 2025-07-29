@@ -196,6 +196,493 @@ paths:
         - basicAuth: []
         - jwtAuth: []
 
+  /_ingest/pipeline/{pipeline_id}:
+    parameters:
+      - $ref: 'ingest_api.yml#/components/parameters/pipeline_id'
+    put:
+      tags: [ Ingest APIs ]
+      summary: Create or Update Pipeline
+      description: |
+        The Create Pipeline API operation is used to define or update pipelines in OpenSearch. Each pipeline must include at least one processor, which determines how documents are modified during ingestion.
+
+        ### Template snippets
+        Some processor parameters support Mustache template snippets. To get the value of a field, surround the field name in three curly braces, for example, `{{{field-name}}}`.
+
+        **Example:** set ingest processor using Mustache template snippet
+
+        The following example sets the field `{{{role}}}` with a value `{{{tenure}}}`:
+
+        ```
+        PUT _ingest/pipeline/wazuh-pipeline
+        {
+          "processors": [
+            {
+              "set": {
+                "field": "{{{role}}}",
+                "value": "{{{tenure}}}"
+              }
+            }
+          ]
+        }
+        ```
+      operationId: createUpdatePipeline
+      parameters:
+        - $ref: 'ingest_api.yml#/components/parameters/cluster_manager_timeout'
+        - $ref: 'ingest_api.yml#/components/parameters/timeout'
+      requestBody:
+        $ref: 'ingest_api.yml#/components/requestBodies/CreatePipelineRequest'
+      responses:
+        '200':
+          $ref: 'ingest_api.yml#/components/responses/CreatePipelineSuccess'
+        '400':
+          $ref: 'ingest_api.yml#/components/responses/CreatePipelineBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '409':
+          $ref: 'ingest_api.yml#/components/responses/CreatePipelineConflict'
+      security:
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
+
+    get:
+      tags: [ Ingest APIs ]
+      summary: Get Pipeline
+      description: |
+        The get ingest pipeline API operation retrieves all the information about the pipeline. The get ingest pipeline API operation retrieves all the information about the pipeline. Use the GET _ingest/pipeline/ to retrieve information about all ingest pipelines.
+      operationId: getPipeline
+      parameters:
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: 'ingest_api.yml#/components/responses/GetPipelineSuccess'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: 'ingest_api.yml#/components/responses/GetPipelineNotFound'
+      security:
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
+
+  /_ingest/pipeline/{pipeline_id}/_simulate:
+    get:
+      tags: [ Ingest APIs ]
+      summary: Simulate pipeline (GET)
+      description: |
+        The following requests simulate a single pipeline based on the pipeline id:
+      operationId: simulatePipeline
+      parameters:
+        - name: pipeline_id
+          in: path
+          required: true
+          description: The unique identifier of the ingest pipeline you want to simulate. The simulation will run the defined processors in the pipeline against sample input documents you provide in the request body.
+          schema:
+            type: string
+        - name: verbose
+          in: query
+          required: false
+          description: |
+            This enables verbose mode, which includes the output data after each processor in the pipeline execution.
+          schema:
+            type: boolean
+        - $ref: '#/components/parameters/pretty'
+      requestBody:
+        $ref: 'ingest_api.yml#/components/requestBodies/SimulatePipelineRequest'
+      responses:
+        '200':
+          $ref: 'ingest_api.yml#/components/responses/SimulatePipelineSuccess'
+        '400':
+          $ref: 'ingest_api.yml#/components/responses/SimulatePipelineBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      security:
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
+
+    post:
+      tags: [ Ingest APIs ]
+      summary: Simulate pipeline (POST)
+      description: |
+        The following requests simulate a single pipeline based on the pipeline id:
+      operationId: simulatePipelinePost
+      parameters:
+        - name: pipeline_id
+          in: path
+          required: true
+          description: The unique identifier of the ingest pipeline you want to simulate. The simulation will run the defined processors in the pipeline against sample input documents you provide in the request body.
+          schema:
+            type: string
+        - name: verbose
+          in: query
+          required: false
+          description: |
+            This enables verbose mode, which includes the output data after each processor in the pipeline execution.
+          schema:
+            type: boolean
+        - $ref: '#/components/parameters/pretty'
+      requestBody:
+        $ref: 'ingest_api.yml#/components/requestBodies/SimulatePipelineRequest'
+      responses:
+        '200':
+          $ref: 'ingest_api.yml#/components/responses/SimulatePipelineSuccess'
+        '400':
+          $ref: 'ingest_api.yml#/components/responses/SimulatePipelineBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      security:
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
+
+  /_ingest/pipeline/_simulate:
+    get:
+      tags: [ Ingest APIs ]
+      summary: Simulate pipeline (GET)
+      description: |
+        The following requests simulate the latest ingest pipeline created
+      operationId: simulateLatestPipeline
+      parameters:
+        - name: verbose
+          in: query
+          required: false
+          description: |
+            This enables verbose mode, which includes the output data after each processor in the pipeline execution.
+          schema:
+            type: boolean
+        - $ref: '#/components/parameters/pretty'
+      requestBody:
+        $ref: 'ingest_api.yml#/components/requestBodies/SimulatePipelineRequest'
+      responses:
+        '200':
+          $ref: 'ingest_api.yml#/components/responses/SimulatePipelineSuccess'
+        '400':
+          $ref: 'ingest_api.yml#/components/responses/SimulatePipelineBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      security:
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
+
+    post:
+      tags: [ Ingest APIs ]
+      summary: Simulate pipeline (POST)
+      description: |
+        The following requests simulate the latest ingest pipeline created
+      operationId: simulateLatestPipelinePost
+      parameters:
+        - name: verbose
+          in: query
+          required: false
+          description: |
+            This enables verbose mode, which includes the output data after each processor in the pipeline execution.
+          schema:
+            type: boolean
+        - $ref: '#/components/parameters/pretty'
+      requestBody:
+        $ref: 'ingest_api.yml#/components/requestBodies/SimulatePipelineRequest'
+      responses:
+        '200':
+          $ref: 'ingest_api.yml#/components/responses/SimulatePipelineSuccess'
+        '400':
+          $ref: 'ingest_api.yml#/components/responses/SimulatePipelineBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      security:
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
+
+  /_ingest/pipeline/{pipeline_id}/_data:
+    get:
+      tags: [ Ingest APIs ]
+      summary: Access Data in a Pipeline
+      description: |
+        In ingest pipelines, the ctx object provides access to the document's data. This object represents the document being processed and enables you to read, update, or enrich its fields. Processors within the pipeline have read and write access to both the document's _source field and its metadata fields.
+
+        ## Accessing document fields
+        The ctx object makes all document fields accessible, allowing you to reference them directly using dot notation.
+
+        **Example: Access a top-level field**
+        Given the following example document:
+        ```json
+        {
+          "user": "alice"
+        }
+        ```
+
+        You can access user as follows:
+        ```json
+        "field": "ctx.user"
+        ```
+
+        **Example: Access a nested field**
+        Given the following example document:
+        ```json
+        {
+          "user": {
+            "name": "alice"
+          }
+        }
+        ```
+
+        You can access user.name as follows:
+        ```json
+        "field": "ctx.user.name"
+        ```
+
+        ## Accessing a field in the source
+        To access a field in the document _source, refer to the field by its name:
+        ```json
+        {
+          "set": {
+            "field": "environment",
+            "value": "production"
+          }
+        }
+        ```
+
+        Alternatively, you can explicitly use _source:
+        ```json
+        {
+          "set": {
+            "field": "_source.environment",
+            "value": "production"
+          }
+        }
+        ```
+
+        ## Accessing metadata fields
+        You can read or write to metadata fields such as _index, _type, _id, _routing.
+
+        **Example: Set _routing dynamically**
+        ```json
+        {
+          "set": {
+            "field": "_routing",
+            "value": "{{region}}"
+          }
+        }
+        ```
+
+        Using {{_id}} is not supported when document IDs are auto-generated.
+
+        ## Accessing ingest metadata fields
+        The _ingest.timestamp field represents the time at which the ingest node received the document. To persist this timestamp, use the set processor:
+        ```json
+        {
+          "set": {
+            "field": "received_at",
+            "value": "{{_ingest.timestamp}}"
+          }
+        }
+        ```
+
+        ## Using ctx in Mustache templates
+        Mustache templates allow you to dynamically insert field values into processor settings. To include unescaped field values, use triple curly braces ({{{ and }}}).
+
+        **Example: Combining source fields**
+        The following processor configuration combines the app and env fields, separated by an underscore (_), and stores the result in the log_label field:
+        ```json
+        {
+          "set": {
+            "field": "log_label",
+            "value": "{{{app}}}_{{{env}}}"
+          }
+        }
+        ```
+
+        **Example: Generating a dynamic greeting using the set processor**
+        If a document's user field is set to alice, use the following syntax to produce the result "greeting": "Hello, alice!":
+        ```json
+        {
+          "set": {
+            "field": "greeting",
+            "value": "Hello, {{{user}}}!"
+          }
+        }
+        ```
+
+        ## Dynamic field names
+        You can use a field's value as the name of a new field:
+        ```json
+        {
+          "set": {
+            "field": "{{service}}",
+            "value": "{{code}}"
+          }
+        }
+        ```
+
+        **Example: Routing to a dynamic index based on status**
+        The following processor configuration sets the target index dynamically by appending -events to the value of the status field:
+        ```json
+        {
+          "set": {
+            "field": "_index",
+            "value": "{{status}}-events"
+          }
+        }
+        ```
+
+        ## Using ctx in the script processor
+        The script processor enables advanced transformations by allowing you to execute custom scripts that modify document fields during ingestion.
+
+        **Example: Adding a field only if another is missing**
+        The following processor adds the error_message field with the value "none" only if the field is missing from the document:
+        ```json
+        {
+          "script": {
+            "lang": "painless",
+            "source": "if (ctx.error_message == null) { ctx.error_message = 'none'; }"
+          }
+        }
+        ```
+
+        **Example: Copying a value from one field to another**
+        The following processor copies the value from the timestamp field into a new field called event_time:
+        ```json
+        {
+          "script": {
+            "lang": "painless",
+            "source": "ctx.event_time = ctx.timestamp;"
+          }
+        }
+        ```
+
+        **Example of a complete pipeline**
+        The example below presents a complete ingest pipeline that sets a value for the tagline field using an existing field from the document, extracts the year from the date field, and captures the document's ingest timestamp in the received_at field.
+        ```json
+        PUT _ingest/pipeline/example-pipeline
+        {
+          "description": "Sets tags, log label, and defaults error message",
+          "processors": [
+            {
+              "set": {
+                "field": "tagline",
+                "value": "{{{user.first}}} from {{{department}}}"
+              }
+            },
+            {
+              "script": {
+                "lang": "painless",
+                "source": "ctx.year = ctx.date.substring(0, 4);"
+              }
+            },
+            {
+              "set": {
+                "field": "received_at",
+                "value": "{{_ingest.timestamp}}"
+              }
+            }
+          ]
+        }
+        ```
+
+        **To test the pipeline, use the following request:**
+        ```json
+        POST _ingest/pipeline/example-pipeline/_simulate
+        {
+          "docs": [
+            {
+              "_source": {
+                "user": {
+                  "first": "Liam"
+                },
+                "department": "Engineering",
+                "date": "2024-12-03T14:05:00Z"
+              }
+            }
+          ]
+        }
+        ```
+
+        **The response shows the enriched document after processing, including the newly added tagline, extracted year, and the received_at timestamp generated by the ingest pipeline:**
+        ```json
+        {
+          "docs": [
+            {
+              "doc": {
+                "_index": "_index",
+                "_id": "_id",
+                "_source": {
+                  "date": "2024-12-03T14:05:00Z",
+                  "year": "2024",
+                  "received_at": "2025-04-22T11:18:50.834050015Z",
+                  "tagline": "Liam from Engineering",
+                  "department": "Engineering",
+                  "user": {
+                    "first": "Liam"
+                  }
+                },
+                "_ingest": {
+                  "timestamp": "2025-04-22T11:18:50.834050015Z"
+                }
+              }
+            }
+          ]
+        }
+        ```
+      operationId: accessPipelineData
+      parameters:
+        - name: pipeline_id
+          in: path
+          required: true
+          description: The unique identifier of the ingest pipeline to access data from.
+          schema:
+            type: string
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: 'ingest_api.yml#/components/responses/AccessPipelineDataSuccess'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: 'ingest_api.yml#/components/responses/AccessPipelineDataNotFound'
+      security:
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
+    
+    
+    delete:
+      tags: [ Ingest APIs ]
+      summary: Delete Pipeline
+      description: |
+        The delete pipeline API operation deletes a pipeline.
+        
+        You can delete a specific pipeline by its ID or use wildcards to delete multiple pipelines.
+      operationId: deletePipeline
+      parameters:
+        - name: pipeline_id
+          in: path
+          required: true
+          description: The unique identifier of the ingest pipeline you want to delete. You can also use wildcards like * to delete multiple pipelines.
+          schema:
+            type: string
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: 'ingest_api.yml#/components/responses/DeletePipelineSuccess'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: 'ingest_api.yml#/components/responses/DeletePipelineNotFound'
+      security:
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
+
   /_search/scroll:
     get:
       tags: [Scroll]
@@ -1663,6 +2150,151 @@ paths:
         '403':
           $ref: '#/components/responses/Forbidden'
 
+  /_plugins/_ism/explain/{index}?validate_action={value}:
+    get:
+      tags:
+        - ISM error prevention API
+      summary: Explain index with validation
+      description: |
+        To enable error prevention validation, set the `plugins.index_state_management.action_validation.enabled` setting to `true`:
+
+        ```json
+        PUT _cluster/settings
+        {
+          "persistent":{
+            "plugins.index_state_management.action_validation.enabled": "true"
+          }
+        }
+        ```
+
+        The response should be as below:
+
+        ```json
+        {
+          "acknowledged": true,
+          "persistent": {
+            "plugins": {
+              "index_state_management": {
+                "action_validation": {
+                  "enabled": "true"
+                }
+              }
+            }
+          },
+          "transient": {}
+        }
+        ```
+
+        To check an error prevention validation status and message, pass `validate_action=true` to the `_plugins/_ism/explain` endpoint.
+      operationId: explainIndexWithValidation
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: index
+          in: path
+          required: true
+          description: The name of the index you want to retrieve the ISM explanation details. You can also use index patterns (wazuh-alerts-4.x-*) to retrieve information for multiple indexes.
+          schema:
+            type: string
+        - name: validate_action
+          in: query
+          required: false
+          description: When set to true, this parameter checks whether the current action in the ISM policy for the specified index is valid and free of configuration issues.
+          schema:
+            type: boolean
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: 'ism_api.yml#/components/schemas/ExplainIndexResponse'
+              example:
+                "wazuh-alerts-4.x-2025.03.22":
+                  "index.plugins.index_state_management.policy_id": "policy_15"
+                  "index.opendistro.index_state_management.policy_id": "policy_15"
+                  index: "wazuh-alerts-4.x-2025.03.22"
+                  index_uuid: "GbPjnHpgTiivnQRY_wCJ1g"
+                  policy_id: "policy_15"
+                  policy_seq_no: 161427
+                  policy_primary_term: 9
+                  rolled_over: false
+                  index_creation_date: 1742198911410
+                  state:
+                    name: "ingest"
+                    start_time: 1745215282309
+                  action:
+                    name: "rollover"
+                    start_time: 1745217086031
+                    index: 0
+                    failed: true
+                    consumed_retries: 3
+                    last_retry_time: 1745217814683
+                  step:
+                    name: "attempt_rollover"
+                    start_time: 1745217086031
+                    step_status: "failed"
+                  retry_info:
+                    failed: false
+                    consumed_retries: 0
+                  info:
+                    message: "Missing rollover_alias index setting [index=wazuh-alerts-4.x-2025.03.22]"
+                  enabled: false
+                  validate:
+                    validation_message: "Missing rollover_alias index setting [index=wazuh-alerts-4.x-2025.03.22]"
+                    validation_status: "re_validating"
+                total_managed_indices: 1
+        '400':
+          description: Response to report a validation bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      root_cause:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            type:
+                              type: string
+                              description: The type of validation error
+                            reason:
+                              type: string
+                              description: The reason for the validation failure
+                      type:
+                        type: string
+                        description: The type of validation error
+                      reason:
+                        type: string
+                        description: The reason for the validation failure
+                      status:
+                        type: integer
+                        description: The HTTP status code
+                  status:
+                    type: integer
+                    description: The HTTP status code
+              example:
+                error:
+                  root_cause:
+                    - type: "action_request_validation_exception"
+                      reason: "Validation Failed: 1: no documents to get;"
+                  type: "action_request_validation_exception"
+                  reason: "Validation Failed: 1: no documents to get;"
+                  status: 400
+                status: 400
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: 'ism_api.yml#/components/responses/PolicyNotFoundRemove'
+
   /{index}/_doc/{id}:
     parameters:
       - $ref: 'document_api.yml#/components/parameters/document_index'
@@ -2420,10 +3052,7 @@ components:
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              root_cause:
-                type: string
+            type: string
           example: "Unauthorized"
 
     ForbiddenApiInfo:
@@ -2480,6 +3109,18 @@ tags:
       These APIs are categorized into single-document operations and multi-document operations. Multi-document operations are more efficient than processing multiple individual requests separately, so it is recommended to use them whenever possible for better performance.
   - name: Index state management API
     description: The Index State Management (ISM) API operations allow you to programmatically manage index policies and the lifecycle of indexes in the Wazuh indexer.
+  - name: ISM error prevention API
+    description: Index State Management (ISM) supports the automatic execution of actions. However, these actions may encounter failures due to various reasons. To help prevent such issues, you can perform error prevention validation to test an action and identify potential failures beforehand.
+  - name: Ingest APIs
+    description: |
+      The Wazuh indexer Ingest APIs facilitate the transformation and enrichment of data as it is ingested into the system. These APIs allow for the creation and management of ingest pipelines, which consist of a series of processors that execute sequentially to process incoming documents.
+
+      **Ingest pipeline APIs**
+      1. **Create or Update Pipeline**: Define a new pipeline or modify an existing one by specifying a sequence of processors.
+      2. **Get Pipeline**: Retrieve the configuration details of a specific pipeline.
+      3. **Simulate Pipeline**: Test a pipeline configuration by simulating the processing of sample documents, aiding in validation before deployment.
+      4. **Delete Pipeline**: Remove an existing pipeline from the system.
+      5. **Access Data in a Pipeline**: Interact with data as it flows through a pipeline, enabling monitoring and debugging of the ingestion process.
   - name: Scroll
     description: |
       You can utilize the scroll operation to obtain a substantial number of results. For instance, when looking for machine learning jobs, you can request an unlimited number of results in separate batches.
