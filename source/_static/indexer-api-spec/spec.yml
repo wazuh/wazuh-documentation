@@ -1952,6 +1952,200 @@ paths:
         - basicAuth: []
         - jwtAuth: []
 
+  /_bulk:
+    post:
+      tags: [Document APIs]
+      summary: Bulk
+      description: |
+        The bulk operation allows you to add, update, or delete multiple documents within a single request. This approach offers significant performance improvements over individual Wazuh indexing requests. Whenever possible, it is recommended to batch indexing operations using bulk requests for better efficiency.
+      operationId: bulkOperations
+      parameters:
+        - $ref: 'document_api.yml#/components/parameters/pipeline_bulk'
+        - $ref: 'document_api.yml#/components/parameters/refresh'
+        - $ref: 'document_api.yml#/components/parameters/require_alias'
+        - $ref: 'document_api.yml#/components/parameters/routing'
+        - $ref: 'document_api.yml#/components/parameters/timeout'
+        - $ref: 'document_api.yml#/components/parameters/type'
+        - $ref: 'document_api.yml#/components/parameters/wait_for_active_shards'
+        - $ref: 'document_api.yml#/components/parameters/batch_size'
+        - $ref: '#/components/parameters/pretty'
+      requestBody:
+        $ref: 'document_api.yml#/components/requestBodies/BulkRequest'
+      responses:
+        '200':
+          $ref: 'document_api.yml#/components/responses/BulkSuccess'
+        '400':
+          $ref: 'document_api.yml#/components/responses/BulkBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /{index}/_bulk:
+    parameters:
+      - $ref: 'document_api.yml#/components/parameters/document_index'
+    post:
+      tags: [Document APIs]
+      summary: Bulk (Index)
+      description: |
+        The bulk operation allows you to add, update, or delete multiple documents within a single request. This approach offers significant performance improvements over individual Wazuh indexing requests. Whenever possible, it is recommended to batch indexing operations using bulk requests for better efficiency.
+      operationId: bulkOperationsIndex
+      parameters:
+        - $ref: 'document_api.yml#/components/parameters/pipeline_bulk'
+        - $ref: 'document_api.yml#/components/parameters/refresh'
+        - $ref: 'document_api.yml#/components/parameters/require_alias'
+        - $ref: 'document_api.yml#/components/parameters/routing'
+        - $ref: 'document_api.yml#/components/parameters/timeout'
+        - $ref: 'document_api.yml#/components/parameters/type'
+        - $ref: 'document_api.yml#/components/parameters/wait_for_active_shards'
+        - $ref: 'document_api.yml#/components/parameters/batch_size'
+        - $ref: '#/components/parameters/pretty'
+      requestBody:
+        $ref: 'document_api.yml#/components/requestBodies/BulkRequest'
+      responses:
+        '200':
+          $ref: 'document_api.yml#/components/responses/BulkSuccess'
+        '400':
+          $ref: 'document_api.yml#/components/responses/BulkBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /_mget:
+    get:
+      tags: [Document APIs]
+      summary: Multi-get documents (GET)
+      description: |
+        The multi-get operation enables you to perform multiple GET requests within a single request, allowing you to retrieve multiple documents that match your specified criteria.
+      operationId: multiGetDocumentsGet
+      parameters:
+        - $ref: 'document_api.yml#/components/parameters/preference_mget'
+        - $ref: 'document_api.yml#/components/parameters/realtime_mget'
+        - $ref: 'document_api.yml#/components/parameters/refresh'
+        - $ref: 'document_api.yml#/components/parameters/routing'
+        - $ref: 'document_api.yml#/components/parameters/stored_fields'
+        - $ref: 'document_api.yml#/components/parameters/_source'
+        - $ref: 'document_api.yml#/components/parameters/_source_excludes'
+        - $ref: 'document_api.yml#/components/parameters/_source_includes'
+        - $ref: '#/components/parameters/pretty'
+      requestBody:
+        $ref: 'document_api.yml#/components/requestBodies/MultiGetRequest'
+      responses:
+        '200':
+          $ref: 'document_api.yml#/components/responses/MultiGetSuccess'
+        '400':
+          $ref: 'document_api.yml#/components/responses/BulkBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+    post:
+      tags: [Document APIs]
+      summary: Multi-get documents (POST)
+      description: |
+        The multi-get operation enables you to perform multiple GET requests within a single request, allowing you to retrieve multiple documents that match your specified criteria.
+      operationId: multiGetDocumentsPost
+      parameters:
+        - $ref: 'document_api.yml#/components/parameters/preference_mget'
+        - $ref: 'document_api.yml#/components/parameters/realtime_mget'
+        - $ref: 'document_api.yml#/components/parameters/refresh'
+        - $ref: 'document_api.yml#/components/parameters/routing'
+        - $ref: 'document_api.yml#/components/parameters/stored_fields'
+        - $ref: 'document_api.yml#/components/parameters/_source'
+        - $ref: 'document_api.yml#/components/parameters/_source_excludes'
+        - $ref: 'document_api.yml#/components/parameters/_source_includes'
+        - $ref: '#/components/parameters/pretty'
+      requestBody:
+        $ref: 'document_api.yml#/components/requestBodies/MultiGetRequest'
+      responses:
+        '200':
+          $ref: 'document_api.yml#/components/responses/MultiGetSuccess'
+        '400':
+          $ref: 'document_api.yml#/components/responses/BulkBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /{index}/_mget:
+    parameters:
+      - $ref: 'document_api.yml#/components/parameters/document_index'
+    get:
+      tags: [Document APIs]
+      summary: Multi-get documents (Index GET)
+      description: |
+        The multi-get operation enables you to perform multiple GET requests within a single request, allowing you to retrieve multiple documents that match your specified criteria.
+      operationId: multiGetDocumentsIndexGet
+      parameters:
+        - $ref: 'document_api.yml#/components/parameters/preference_mget'
+        - $ref: 'document_api.yml#/components/parameters/realtime_mget'
+        - $ref: 'document_api.yml#/components/parameters/refresh'
+        - $ref: 'document_api.yml#/components/parameters/routing'
+        - $ref: 'document_api.yml#/components/parameters/stored_fields'
+        - $ref: 'document_api.yml#/components/parameters/_source'
+        - $ref: 'document_api.yml#/components/parameters/_source_excludes'
+        - $ref: 'document_api.yml#/components/parameters/_source_includes'
+        - $ref: '#/components/parameters/pretty'
+      requestBody:
+        $ref: 'document_api.yml#/components/requestBodies/MultiGetRequest'
+      responses:
+        '200':
+          $ref: 'document_api.yml#/components/responses/MultiGetSuccess'
+        '400':
+          $ref: 'document_api.yml#/components/responses/BulkBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+    post:
+      tags: [Document APIs]
+      summary: Multi-get documents (Index POST)
+      description: |
+        The multi-get operation enables you to perform multiple GET requests within a single request, allowing you to retrieve multiple documents that match your specified criteria.
+      operationId: multiGetDocumentsIndexPost
+      parameters:
+        - $ref: 'document_api.yml#/components/parameters/preference_mget'
+        - $ref: 'document_api.yml#/components/parameters/realtime_mget'
+        - $ref: 'document_api.yml#/components/parameters/refresh'
+        - $ref: 'document_api.yml#/components/parameters/routing'
+        - $ref: 'document_api.yml#/components/parameters/stored_fields'
+        - $ref: 'document_api.yml#/components/parameters/_source'
+        - $ref: 'document_api.yml#/components/parameters/_source_excludes'
+        - $ref: 'document_api.yml#/components/parameters/_source_includes'
+        - $ref: '#/components/parameters/pretty'
+      requestBody:
+        $ref: 'document_api.yml#/components/requestBodies/MultiGetRequest'
+      responses:
+        '200':
+          $ref: 'document_api.yml#/components/responses/MultiGetSuccess'
+        '400':
+          $ref: 'document_api.yml#/components/responses/BulkBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
 components:
   parameters:
     pretty:

@@ -58,7 +58,7 @@ components:
       name: refresh
       in: query
       description: |
-        Controls whether the Wazuh indexer refreshes shards before executing the operation. `wait_for` waits for a refresh before processing.
+        Controls whether the Wazuh indexer refreshes shards before executing the operation. Options: true (refresh immediately), `false` (no immediate refresh), and `wait_for` waits for a refresh before processing.
       schema:
         type: string
         enum: [true, false, wait_for]
@@ -169,6 +169,44 @@ components:
       schema:
         type: integer
         default: 0
+
+    pipeline_bulk:
+      name: pipeline
+      in: query
+      description: The ID of the ingest pipeline used for preprocessing documents before indexing.
+      schema:
+        type: string
+
+    type:
+      name: type
+      in: query
+      description: The default document type for documents that don't specify a type. It is recommended to ignore this parameter use `_doc` for all indexes.
+      schema:
+        type: string
+        default: _doc
+
+    batch_size:
+      name: batch_size
+      in: query
+      description: Specifies how many documents should be processed together in an ingest pipeline. The default value is `2147483647` (all documents are processed at once). This parameter is ignored if an ingest pipeline is not specified. Only applicable for create, index, or update actions.
+      schema:
+        type: integer
+        default: 2147483647
+
+    preference_mget:
+      name: preference
+      in: query
+      description: Defines the specific nodes or shards where the Wazuh indexer should execute the multi-get operation. By default, Wazuh indexer selects a shard randomly.
+      schema:
+        type: string
+
+    realtime_mget:
+      name: realtime
+      in: query
+      description: Determines whether the operation should run in real-time. If set to `false`, Wazuh indexer waits for the index to refresh before retrieving the data, making the operation near real-time.
+      schema:
+        type: boolean
+        default: true
 
   schemas:
     DocumentSuccess:
@@ -357,6 +395,90 @@ components:
           example:
             script:
               source: "ctx._source.location = \"EventChannel\""
+
+    BulkRequest:
+      required: true
+      content:
+        application/x-ndjson:
+          schema:
+            type: object
+            properties:
+              Action-and-Metadata:
+                description: Specifies the type of operation (`index`, `create`, `update`, `delete`) and the document metadata such as `_index` and `_id`.
+                type: object
+                additionalProperties: true
+              Source:
+                description: The actual document data to be indexed or updated. Required for `index`, `create`, and `update` operations. Omitted for `delete` operations.
+                type: object
+                additionalProperties: true
+          example: |
+            { "delete": { "_index": "wazuh-alerts-4.x-2025.03.12", "_id": "3" } }
+            { "index": { "_index": "wazuh-alerts-4.x-2025.03.12", "_id": "4" } }
+            { "agent.id": "001", "agent.ip": "Windows PC" }
+            { "create": { "_index": "wazuh-alerts-4.x-2025.03.12", "_id": "5" } }
+            { "agent.id": "001", "agent.ip": "Windows PC" }
+            { "update": { "_index": "wazuh-alerts-4.x-2025.03.12", "_id": "5" } }
+            { "doc" : { "agent.id": "002" } }
+
+    MultiGetRequest:
+      description: Multi-get documents request body
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              docs:
+                type: array
+                description: A list of documents to retrieve.
+                items:
+                  type: object
+                  properties:
+                    _id:
+                      type: string
+                      description: The unique identifier of the document.
+                    _index:
+                      type: string
+                      description: The name of the index where the document is stored. If the index is specified in the URL, this field can be omitted, and document IDs can be provided directly.
+                    _routing:
+                      type: string
+                      description: The routing value assigned to the document's shard.
+                    _source:
+                      description: Determines whether the `_source` field should be included in the response (`boolean`), which fields should be included (`array`), or which fields should be excluded.
+                      oneOf:
+                        - type: boolean
+                        - type: object
+                          properties:
+                            includes:
+                              description: |
+                                Specifies the fields to include in the response. Example: `{ "_source": { "include": ["Title"] } }` retrieves only the `Title` field.
+                              type: array
+                              items:
+                                type: string
+                            excludes:
+                              description: |
+                                Specifies the fields to exclude from the response. Example: `{ "_source": { "exclude": ["Director"] } }` omits the `Director` field.
+                              type: array
+                              items:
+                                type: string
+                    stored_fields:
+                      type: array
+                      items:
+                        type: string
+                      description: Stored fields to retrieve
+                  required:
+                    - _id
+              ids:
+                type: array
+                items:
+                  type: string
+                description: A list of document IDs to retrieve. This is only allowed when an index is provided in the URL.
+            example:
+              docs:
+                - _id: "1"
+                  _source: false
+                - _id: "5"
+                  _source:  [ "agent.id", "agent.ip" ]
 
   responses:
     IndexDocumentSuccess:
@@ -578,3 +700,240 @@ components:
               failed: 0
             _seq_no: 240
             _primary_term: 3
+    BulkSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              took:
+                type: integer
+                description: The time (in milliseconds) that Wazuh indexer took to process the bulk request.
+              errors:
+                type: boolean
+                description: Indicates whether any errors occurred during the bulk operation. `false` means all operations were successful.
+              items:
+                type: array
+                items:
+                  type: object
+                  additionalProperties:
+                    type: object
+                    properties:
+                      _index:
+                        type: string
+                        description: The name of the index where the document was stored.
+                      _id:
+                        type: string
+                        description: The unique identifier assigned to the document.
+                      _version:
+                        type: integer
+                        description: The version number of the document. Each update increases this value.
+                      result:
+                        type: string
+                        description: Indicates the outcome of the operation. Possible values are `created`, `updated`, `deleted`, or `not_found`.
+                        enum: [created, updated, deleted, not_found]
+                      _shards:
+                        type: object
+                        properties:
+                          total:
+                            type: integer
+                            description: Total number of shards targeted in the request.
+                          successful:
+                            type: integer
+                            description: Number of shards that successfully executed the operation.
+                          failed:
+                            type: integer
+                            description: Number of shards where the operation failed.
+                      _seq_no:
+                        type: integer
+                        description: The sequence number assigned to this operation. This is used for optimistic concurrency control.
+                      _primary_term:
+                        type: integer
+                        description: The primary term of the shard that processed the request. Helps in ensuring consistency in case of shard relocations.
+                      status:
+                        type: integer
+                        description: HTTP status code for the individual operation.
+                description: A list of objects, each representing the result of an individual operation (`delete`, `index`, `create`, `update`).
+          example:
+            took: 69
+            errors: false
+            items:
+              - delete:
+                  _index: "wazuh-alerts-4.x-2025.03.12"
+                  _id: "3"
+                  _version: 2
+                  result: "deleted"
+                  _shards:
+                    total: 1
+                    successful: 1
+                    failed: 0
+                  _seq_no: 281
+                  _primary_term: 3
+                  status: 200
+              - index:
+                  _index: "wazuh-alerts-4.x-2025.03.12"
+                  _id: "4"
+                  _version: 1
+                  result: "created"
+                  _shards:
+                    total: 1
+                    successful: 1
+                    failed: 0
+                  _seq_no: 282
+                  _primary_term: 3
+                  status: 201
+              - create:
+                  _index: "wazuh-alerts-4.x-2025.03.12"
+                  _id: "5"
+                  _version: 1
+                  result: "created"
+                  _shards:
+                    total: 1
+                    successful: 1
+                    failed: 0
+                  _seq_no: 242
+                  _primary_term: 3
+                  status: 201
+              - update:
+                  _index: "wazuh-alerts-4.x-2025.03.12"
+                  _id: "5"
+                  _version: 2
+                  result: "updated"
+                  _shards:
+                    total: 1
+                    successful: 1
+                    failed: 0
+                  _seq_no: 243
+                  _primary_term: 3
+                  status: 200
+
+    BulkBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DocumentBadRequest'
+          example:
+            error:
+              root_cause:
+                - type: "parse_exception"
+                  reason: "request body is required"
+              type: "parse_exception"
+              reason: "request body is required"
+            status: 400
+
+    BulkRequest:
+      description: The bulk request body containing action-and-metadata lines and source lines.
+      required: true
+      content:
+        application/json:
+          schema:
+            type: string
+          example: |
+            { "delete": { "_index": "wazuh-alerts-4.x-2025.03.12", "_id": "3" } }
+            { "index": { "_index": "wazuh-alerts-4.x-2025.03.12", "_id": "4" } }
+            { "agent.id": "001", "agent.ip": "Windows PC" }
+            { "create": { "_index": "wazuh-alerts-4.x-2025.03.12", "_id": "5" } }
+            { "agent.id": "001", "agent.ip": "Windows PC" }
+            { "update": { "_index": "wazuh-alerts-4.x-2025.03.12", "_id": "5" } }
+            { "doc" : { "agent.id": "002" } }
+
+    MultiGetRequest:
+      description: The multi-get request body containing document specifications.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              docs:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    _id:
+                      type: string
+                      description: The unique identifier of the document.
+                    _index:
+                      type: string
+                      description: The name of the index where the document is stored.
+                    _routing:
+                      type: string
+                      description: The routing value assigned to the document's shard.
+                    _source:
+                      oneOf:
+                        - type: boolean
+                        - type: array
+                          items:
+                            type: string
+                      description: Determines whether the _source field should be included in the response.
+              ids:
+                type: array
+                items:
+                  type: string
+                description: A list of document IDs to retrieve. This is only allowed when an index is provided in the URL.
+          example:
+            docs:
+              - _id: "1"
+                _source: false
+              - _id: "5"
+                _source: ["agent.id", "agent.ip"]
+
+    MultiGetSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              docs:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    _index:
+                      type: string
+                      description: The name of the index where the document was stored.
+                    _id:
+                      type: string
+                      description: The unique identifier assigned to the document.
+                    _version:
+                      type: integer
+                      description: The version number of the document. Each update increases this value.
+                    _seq_no:
+                      type: integer
+                      description: The sequence number assigned to this operation. This is used for optimistic concurrency control.
+                    _primary_term:
+                      type: integer
+                      description: The primary term of the shard that processed the request. Helps in ensuring consistency in case of shard relocations.
+                    found:
+                      type: boolean
+                      description: Indicates whether the document was found in the index.
+                    _routing:
+                      type: string
+                      description: Specifies the shard where the document is routed. If routing is not explicitly defined, this field is omitted.
+                    _source:
+                      type: object
+                      additionalProperties: true
+                      description: Contains the document’s data if `found` is `true`. If `_source` is disabled (`false`) or `stored_fields` is set to `true`, this field is omitted.
+                    _fields:
+                      type: object
+                      description: Holds stored fields of the document (instead of `_source`). This is returned only if both `stored_fields`  and `found` are `true`.
+          example:
+            docs:
+              - _index: "wazuh-alerts-4.x-2025.03.12"
+                _id: "1"
+                _version: 5
+                _seq_no: 266
+                _primary_term: 3
+                found: true
+              - _index: "wazuh-alerts-4.x-2025.03.12"
+                _id: "5"
+                _version: 2
+                _seq_no: 243
+                _primary_term: 3
+                found: true
+                _source:
+                  agent.ip: "Windows PC"
+                  agent.id: "002"
+
