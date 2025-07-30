@@ -1082,55 +1082,6 @@ Setting the ``process_priority`` value lower than the default gives the FIM modu
    - Windows: ``Restart-Service -Name wazuh``
    - macOS: ``/Library/Ossec/bin/wazuh-control restart``
 
-Database storage
-----------------
-
-Wazuh uses a SQLite database to store information related to FIM events such as information about creation, modification, and deletion of regular files. When the Wazuh agent starts, the FIM module performs a first scan and generates the database for the agent. By default, the database on the agent is saved on disk to the file ``/var/ossec/queue/fim/db``.
-
-You can configure the database storage options by using the :ref:`database <reference_ossec_syscheck_database>` attribute. The allowed values for the database attribute are ``disk`` and ``memory``. These storage options are available on Windows, macOS, and Linux operating systems.
-
-In the configuration example below, we set the database location to memory.
-
-#. Add the following settings to the Wazuh agent configuration file:
-
-   - Linux: ``/var/ossec/etc/ossec.conf``
-   - Windows: ``C:\Program Files (x86)\ossec-agent\ossec.conf``
-   - macOS: ``/Library/Ossec/etc/ossec.conf``
-
-   .. code-block:: xml
-
-      <syscheck>
-         <database>memory</database>
-      </syscheck>
-
-#. Restart the Wazuh agent with administrator privilege to apply any configuration change:
-
-   - Linux: ``systemctl restart wazuh-agent``
-   - Windows: ``Restart-Service -Name wazuh``
-   - macOS: ``/Library/Ossec/bin/wazuh-control restart``
-
-In the configuration example below, we set the database location to disk.
-
-#. Add the following settings to the Wazuh agent configuration file:
-
-   - Linux: ``/var/ossec/etc/ossec.conf``
-   - Windows: ``C:\Program Files (x86)\ossec-agent\ossec.conf``
-   - macOS: ``/Library/Ossec/etc/ossec.conf``
-
-   .. code-block:: xml
-
-      <syscheck>
-         <database>disk</database>
-      </syscheck>
-
-#. Restart the Wazuh agent with administrator privilege to apply any configuration change:
-
-   - Linux: ``systemctl restart wazuh-agent``
-   - Windows: ``Restart-Service -Name wazuh``
-   - macOS: ``/Library/Ossec/bin/wazuh-control restart``
-
-The main advantage of using an in-memory database is the performance, as reading and writing operations are faster than performing them on disk. The corresponding disadvantage is that the memory must be sufficient to store the data.
-
 Synchronization
 ---------------
 
@@ -1146,9 +1097,7 @@ You can see below the default :ref:`synchronization <reference_ossec_syscheck_sy
         <synchronization>
           <enabled>yes</enabled>
           <interval>5m</interval>
-          <max_interval>1h</max_interval>
           <response_timeout>30</response_timeout>
-          <queue_size>16384</queue_size>
           <max_eps>10</max_eps>
         </synchronization>
       </syscheck>
@@ -1160,13 +1109,9 @@ The table below explains the supported attributes of the synchronization option:
   +=====================+======================+=============================================================================================+=========================================================================================================================================================================================================+
   | enabled             | yes                  | yes, no                                                                                     | Enables FIM database synchronizations.                                                                                                                                                                  |
   +---------------------+----------------------+---------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-  | interval            | 5m                   | Any number greater than or equal to 0. Allowed suffixes (s, m, h, d)                        | Sets the starting number of seconds to wait for a new database synchronization attempt. If synchronization fails the value gets duplicated up to the ``max_interval`` value.                            |
-  +---------------------+----------------------+---------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-  | max_interval        | 1h                   | Any number greater than or equal to the interval. Allowed suffixes (s, m, h, d).            | Specifies the maximum number of seconds to wait between every inventory synchronization attempt.                                                                                                        |
+  | interval            | 5m                   | Any number greater than or equal to 0. Allowed suffixes (s, m, h, d)                        | Sets the starting number of seconds to wait for a new database synchronization attempt.                                                                                                                 |
   +---------------------+----------------------+---------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
   | response_timeout    | 30                   | Any number greater than or equal to 0.                                                      | Specifies the minimum time in seconds that must elapse before considering a message sent to the manager as timed-out. If the agent message times out, the module starts a new synchronization session.  |
   +---------------------+----------------------+---------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-  | queue_size          | 16384                | Integer number between 2 and 1000000.                                                       | Specifies the queue size of the manager synchronization responses.                                                                                                                                      |
-  +---------------------+----------------------+---------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-  | response_timeout    | 10                   | Integer number between 0 and 1000000. 0 means disabled.                                     | Sets the maximum synchronization message throughput.                                                                                                                                                    |
+  | max_eps             | 10                   | Integer number between 0 and 1000000. 0 means disabled.                                     | Sets the maximum synchronization message throughput.                                                                                                                                                    |
   +---------------------+----------------------+---------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+

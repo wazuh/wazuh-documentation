@@ -20,7 +20,6 @@ Configuration options for file integrity monitoring:
 
 - `alert_new_files`_
 - `allow_remote_prefilter_cmd`_
-- `database`_
 - `file_limit`_
 - `registry_limit`_
 - `diff`_
@@ -90,20 +89,6 @@ Example:
 .. note::
 
    This option only can be activated from the agent side, on its own ``ossec.conf``.
-
-.. _reference_ossec_syscheck_database:
-
-database
---------
-
-Specifies where the database is going to be stored.
-
-+--------------------+---------------------------------------+
-| **Default value**  | disk                                  |
-+--------------------+---------------------------------------+
-| **Allowed values** | disk, memory                          |
-+--------------------+---------------------------------------+
-
 
 .. _reference_ossec_syscheck_directories:
 
@@ -241,6 +226,13 @@ Attributes:
 +--------------------------+------------------------------------------------------------+----------------------------------------------------------+
 | **check_inode**          | Check the file inode.                                                                                                 |
 |                          | Available for UNIX. On Windows, inode will always be 0.                                                               |
++                          +------------------------------------------------------------+----------------------------------------------------------+
+|                          | Default value                                              | yes                                                      |
++                          +------------------------------------------------------------+----------------------------------------------------------+
+|                          | Allowed values                                             | yes, no                                                  |
++--------------------------+------------------------------------------------------------+----------------------------------------------------------+
+| **check_device**         | Check the file device.                                                                                                |
+|                          | Available for UNIX.                                                                                                   |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Default value                                              | yes                                                      |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
@@ -726,10 +718,7 @@ The database synchronization settings are configured inside this tag.
     <synchronization>
       <enabled>yes</enabled>
       <interval>5m</interval>
-      <max_interval>1h</max_interval>
       <response_timeout>30</response_timeout>
-      <queue_size>16384</queue_size>
-      <thread_pool>1</thread_pool>
       <max_eps>10</max_eps>
     </synchronization>
 
@@ -744,20 +733,9 @@ Specifies performing periodic inventory synchronizations.
 | **Allowed values** | yes/no                                |
 +--------------------+---------------------------------------+
 
-**registry_enabled**
-
-On Windows agents, enables inventory synchronizations for registry entries. If ``enabled`` is set to no,
-this parameter is ignored.
-
-+--------------------+---------------------------------------+
-| **Default value**  | yes                                   |
-+--------------------+---------------------------------------+
-| **Allowed values** | yes/no                                |
-+--------------------+---------------------------------------+
-
 **interval**
 
-Specifies the initial time interval between every inventory synchronization. If the synchronization fails the value is duplicated until it reaches the value of ``max_interval``. If the synchronization succeds the value is restored.
+Specifies the initial time interval between every inventory synchronization.
 
 +--------------------+-----------------------------------------------------------------------+
 | **Default value**  | 5 m                                                                   |
@@ -765,45 +743,15 @@ Specifies the initial time interval between every inventory synchronization. If 
 | **Allowed values** | Any number greater than or equal to 0. Allowed suffixes (s, m, h, d). |
 +--------------------+-----------------------------------------------------------------------+
 
-**max_interval**
-
-Maximum time interval to trigger a synchronization. When a synchronization fails the interval is duplicated up to this maximum value.
-
-+--------------------+-----------------------------------------------------------------------------------+
-| **Default value**  | 1 h                                                                               |
-+--------------------+-----------------------------------------------------------------------------------+
-| **Allowed values** | Any integer greater than or equal to ``interval``. Allowed suffixes (s, m, h, d). |
-+--------------------+-----------------------------------------------------------------------------------+
-
 **response_timeout**
 
-Waiting time in seconds since a sync message is sent or received for the next synchronization activity. If the agent doesn't send or receive a message in this interval the synchronization is marked as successful. If a synchronization is unsuccessful, the synchronization interval is doubled up to the ``max_interval`` value. This mechanism avoids synchronization overlapping.
+Waiting time in seconds since a sync message is sent or received for the next synchronization activity.
 
 +--------------------+----------------------------------------------------------------------+
 | **Default value**  | 30                                                                   |
 +--------------------+----------------------------------------------------------------------+
 | **Allowed values** | Any number between 0 and ``interval``.                               |
 +--------------------+----------------------------------------------------------------------+
-
-**queue_size**
-
-Specifies the queue size of the manager synchronization responses.
-
-+--------------------+---------------------------------------+
-| **Default value**  | 16384                                 |
-+--------------------+---------------------------------------+
-| **Allowed values** | Integer number between 2 and 1000000. |
-+--------------------+---------------------------------------+
-
-**thread_pool**
-
-Specifies the number of threads that FIM database synchronization uses. FIM uses the lesser value of the configured value and the number of system CPU cores.
-
-+--------------------+-----------------------------------------------------+
-| **Default value**  | 1                                                   |
-+--------------------+-----------------------------------------------------+
-| **Allowed values** |  Any integer greater than 0.                        |
-+--------------------+-----------------------------------------------------+
 
 **max_eps**
 
