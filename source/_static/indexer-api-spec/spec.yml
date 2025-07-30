@@ -652,14 +652,13 @@ paths:
       security:
         - basicAuth: [ ]
         - jwtAuth: [ ]
-    
-    
+
     delete:
       tags: [ Ingest APIs ]
       summary: Delete Pipeline
       description: |
         The delete pipeline API operation deletes a pipeline.
-        
+
         You can delete a specific pipeline by its ID or use wildcards to delete multiple pipelines.
       operationId: deletePipeline
       parameters:
@@ -2936,6 +2935,195 @@ paths:
         - basicAuth: []
         - jwtAuth: []
 
+  /{target}/_count:
+    parameters:
+      - $ref: 'miscellaneous_api.yml#/components/parameters/target'
+    get:
+      tags: [Count]
+      summary: Count (GET)
+      operationId: countDocuments
+      parameters:
+        - $ref: 'miscellaneous_api.yml#/components/parameters/count_allow_no_indices'
+        - $ref: 'miscellaneous_api.yml#/components/parameters/count_analyzer'
+        - $ref: 'miscellaneous_api.yml#/components/parameters/count_analyze_wildcard'
+        - $ref: 'miscellaneous_api.yml#/components/parameters/count_default_operator'
+        - $ref: 'miscellaneous_api.yml#/components/parameters/count_df'
+        - $ref: 'miscellaneous_api.yml#/components/parameters/count_expand_wildcards'
+        - $ref: 'miscellaneous_api.yml#/components/parameters/count_ignore_unavailable'
+        - $ref: 'miscellaneous_api.yml#/components/parameters/count_lenient'
+        - $ref: 'miscellaneous_api.yml#/components/parameters/count_min_score'
+        - $ref: 'miscellaneous_api.yml#/components/parameters/count_routing'
+        - $ref: 'miscellaneous_api.yml#/components/parameters/count_preference'
+        - $ref: 'miscellaneous_api.yml#/components/parameters/count_terminate_after'
+        - $ref: '#/components/parameters/pretty'
+      requestBody:
+        $ref: 'miscellaneous_api.yml#/components/requestBodies/CountRequest'
+      responses:
+        '200':
+          $ref: 'miscellaneous_api.yml#/components/responses/CountSuccess'
+        '400':
+          $ref: 'miscellaneous_api.yml#/components/responses/CountBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: 'miscellaneous_api.yml#/components/responses/CountNotFound'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+    post:
+      tags: [Count]
+      summary: Count (POST)
+      operationId: countDocumentsPost
+      parameters:
+        - $ref: 'miscellaneous_api.yml#/components/parameters/count_allow_no_indices'
+        - $ref: 'miscellaneous_api.yml#/components/parameters/count_analyzer'
+        - $ref: 'miscellaneous_api.yml#/components/parameters/count_analyze_wildcard'
+        - $ref: 'miscellaneous_api.yml#/components/parameters/count_default_operator'
+        - $ref: 'miscellaneous_api.yml#/components/parameters/count_df'
+        - $ref: 'miscellaneous_api.yml#/components/parameters/count_expand_wildcards'
+        - $ref: 'miscellaneous_api.yml#/components/parameters/count_ignore_unavailable'
+        - $ref: 'miscellaneous_api.yml#/components/parameters/count_lenient'
+        - $ref: 'miscellaneous_api.yml#/components/parameters/count_min_score'
+        - $ref: 'miscellaneous_api.yml#/components/parameters/count_routing'
+        - $ref: 'miscellaneous_api.yml#/components/parameters/count_preference'
+        - $ref: 'miscellaneous_api.yml#/components/parameters/count_terminate_after'
+        - $ref: '#/components/parameters/pretty'
+      requestBody:
+        $ref: 'miscellaneous_api.yml#/components/requestBodies/CountRequest'
+      responses:
+        '200':
+          $ref: 'miscellaneous_api.yml#/components/responses/CountSuccess'
+        '400':
+          $ref: 'miscellaneous_api.yml#/components/responses/CountBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: 'miscellaneous_api.yml#/components/responses/CountNotFound'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /{index}/_explain/{id}:
+    parameters:
+      - $ref: 'miscellaneous_api.yml#/components/parameters/index_name'
+      - $ref: 'miscellaneous_api.yml#/components/parameters/document_id'
+    get:
+      tags: [Explain]
+      summary: Explain (GET)
+      operationId: explainDocument
+      parameters:
+        - $ref: 'miscellaneous_api.yml#/components/parameters/explain_analyzer'
+        - $ref: 'miscellaneous_api.yml#/components/parameters/explain_analyze_wildcard'
+        - $ref: 'miscellaneous_api.yml#/components/parameters/explain_default_operator'
+        - $ref: 'miscellaneous_api.yml#/components/parameters/explain_df'
+        - $ref: 'miscellaneous_api.yml#/components/parameters/explain_lenient'
+        - $ref: 'miscellaneous_api.yml#/components/parameters/explain_preference'
+        - $ref: 'miscellaneous_api.yml#/components/parameters/explain_q'
+        - $ref: 'miscellaneous_api.yml#/components/parameters/explain_stored_fields'
+        - $ref: 'miscellaneous_api.yml#/components/parameters/explain_routing'
+        - $ref: 'miscellaneous_api.yml#/components/parameters/explain_source'
+        - $ref: 'miscellaneous_api.yml#/components/parameters/explain_source_excludes'
+        - $ref: 'miscellaneous_api.yml#/components/parameters/explain_source_includes'
+        - $ref: '#/components/parameters/pretty'
+      requestBody:
+        $ref: 'miscellaneous_api.yml#/components/requestBodies/ExplainRequest'
+      responses:
+        '200':
+          $ref: 'miscellaneous_api.yml#/components/responses/ExplainSuccess'
+        '400':
+          $ref: 'miscellaneous_api.yml#/components/responses/ExplainBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: 'miscellaneous_api.yml#/components/responses/ExplainNotFound'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+    post:
+      tags: [Explain]
+      summary: Explain (POST)
+      operationId: explainDocumentPost
+      parameters:
+        - $ref: 'miscellaneous_api.yml#/components/parameters/explain_analyzer'
+        - $ref: 'miscellaneous_api.yml#/components/parameters/explain_analyze_wildcard'
+        - $ref: 'miscellaneous_api.yml#/components/parameters/explain_default_operator'
+        - $ref: 'miscellaneous_api.yml#/components/parameters/explain_df'
+        - $ref: 'miscellaneous_api.yml#/components/parameters/explain_lenient'
+        - $ref: 'miscellaneous_api.yml#/components/parameters/explain_preference'
+        - $ref: 'miscellaneous_api.yml#/components/parameters/explain_q'
+        - $ref: 'miscellaneous_api.yml#/components/parameters/explain_stored_fields'
+        - $ref: 'miscellaneous_api.yml#/components/parameters/explain_routing'
+        - $ref: 'miscellaneous_api.yml#/components/parameters/explain_source'
+        - $ref: 'miscellaneous_api.yml#/components/parameters/explain_source_excludes'
+        - $ref: 'miscellaneous_api.yml#/components/parameters/explain_source_includes'
+        - $ref: '#/components/parameters/pretty'
+      requestBody:
+        $ref: 'miscellaneous_api.yml#/components/requestBodies/ExplainRequest'
+      responses:
+        '200':
+          $ref: 'miscellaneous_api.yml#/components/responses/ExplainSuccess'
+        '400':
+          $ref: 'miscellaneous_api.yml#/components/responses/ExplainBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: 'miscellaneous_api.yml#/components/responses/ExplainNotFound'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /_plugins/_refresh_search_analyzers/{index_or_alias_or_wildcard}:
+    parameters:
+      - $ref: 'miscellaneous_api.yml#/components/parameters/index_or_alias_or_wildcard'
+    post:
+      tags: [Refresh search analyzer]
+      summary: Refresh search analyzer
+      operationId: refreshSearchAnalyzers
+      parameters:
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: 'miscellaneous_api.yml#/components/responses/RefreshAnalyzerSuccess'
+        '400':
+          $ref: 'miscellaneous_api.yml#/components/responses/RefreshAnalyzerBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: 'miscellaneous_api.yml#/components/responses/RefreshAnalyzerNotFound'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /_remote/info:
+    get:
+      tags: [Remote cluster information]
+      summary: Remote cluster information
+      operationId: getRemoteClusterInfo
+      parameters:
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: 'miscellaneous_api.yml#/components/responses/RemoteClusterInfoSuccess'
+        '400':
+          $ref: 'miscellaneous_api.yml#/components/responses/RemoteClusterBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
 components:
   parameters:
     pretty:
@@ -3102,11 +3290,15 @@ tags:
   - name: Analyze API
   - name: Cluster API
     description: The cluster APIs allow you to manage your cluster. You can use them to check cluster health, modify settings, retrieve statistics, and more.
+  - name: Count
+    description: The Count API provides quick access to retrieve the number of documents matching a query. It can also be used to determine the document count for an index, data stream, or cluster.
   - name: Document APIs
     description: |
       Document APIs enable you to manage documents within your index, including adding, updating, and deleting records.
 
       These APIs are categorized into single-document operations and multi-document operations. Multi-document operations are more efficient than processing multiple individual requests separately, so it is recommended to use them whenever possible for better performance.
+  - name: Explain
+    description: The Explain API in Wazuh indexer  provides a detailed breakdown of how a document matches a given query and how its relevance score (`_score`) is calculated. It helps in understanding why certain documents rank higher or lower in search results.
   - name: Index state management API
     description: The Index State Management (ISM) API operations allow you to programmatically manage index policies and the lifecycle of indexes in the Wazuh indexer.
   - name: ISM error prevention API
@@ -3121,6 +3313,38 @@ tags:
       3. **Simulate Pipeline**: Test a pipeline configuration by simulating the processing of sample documents, aiding in validation before deployment.
       4. **Delete Pipeline**: Remove an existing pipeline from the system.
       5. **Access Data in a Pipeline**: Interact with data as it flows through a pipeline, enabling monitoring and debugging of the ingestion process.
+  - name: Refresh search analyzer
+    description: |
+      The Refresh Search Analyzer is an API operation that reloads search-time analyzers in real time, specifically those with updateable components. The ability to refresh search analyzers using this endpoint requires the ISM plugin to be installed in your Wazuh indexer cluster.
+
+      For the refresh to work, the token filter within your analyzer must have the `updateable` flag set to `true` without needing to close or recreate the index. For example:
+
+      ```
+      {
+        "analyzer": {
+          "my_synonyms": {
+            "tokenizer": "whitespace",
+            "filter": [
+              "synonym"
+            ]
+          }
+        },
+        "filter": {
+          "synonym": {
+            "type": "synonym_graph",
+            "synonyms_path": "synonyms.txt",
+            "updateable": true
+          }
+        }
+      }
+      ```
+
+      This configuration ensures that changes to the `synonyms.txt` file are picked up when the analyzer is refreshed. Ensure that the updated resources (e.g., `synonyms.txt`) are accessible to all nodes in the cluster, as the refresh operation will reload these resources across the nodes.
+  - name: Remote cluster information
+    description: |
+      This operation returns detailed connection information for remote Wazuh indexer clusters configured with the local cluster. It includes data such as the remote cluster alias, connection mode (`sniff` or `proxy`), seed node IP addresses, and timeout configurations.
+
+      The response is more comprehensive and useful than a call to `_cluster/settings`, which only includes the cluster alias and seed nodes.
   - name: Scroll
     description: |
       You can utilize the scroll operation to obtain a substantial number of results. For instance, when looking for machine learning jobs, you can request an unlimited number of results in separate batches.
