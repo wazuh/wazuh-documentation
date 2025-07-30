@@ -99,6 +99,7 @@ Wazuh manager
 - `#29624 <https://github.com/wazuh/wazuh/pull/29624>`__ Fixed race condition in agent status synchronization between worker and master.
 - `#30534 <https://github.com/wazuh/wazuh/pull/30534>`__ Fixed agent-group assignment for missing agents with improved error handling.
 - `#30818 <https://github.com/wazuh/wazuh/pull/30818>`__ Fixed missing OS info updates in global inventory after first scan.
+- `#31048 <https://github.com/wazuh/wazuh/pull/31048>`__ Fixed wazuh-db failure during agent restarts by switching the restart query to HTTP.
 
 Wazuh agent
 ^^^^^^^^^^^
