@@ -24,18 +24,20 @@ components:
       in: path
       required: true
       description: |
-        The name of the awareness attribute, usually zone. The attribute name must match
+        The name of the awareness attribute. The attribute name must match
         the values listed in the request body when assigning weights to zones.
       schema:
         type: string
+      example: zone
 
     awareness_attribute_name:
       name: awareness_attribute_name
       in: path
       required: true
-      description: The name of the awareness attribute. The value is usually `zone`.
+      description: The name of the awareness attribute.
       schema:
         type: string
+      example: zone
 
     awareness_attribute_value:
       name: awareness_attribute_value
