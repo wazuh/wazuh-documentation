@@ -652,13 +652,14 @@ paths:
       security:
         - basicAuth: [ ]
         - jwtAuth: [ ]
-
+    
+    
     delete:
       tags: [ Ingest APIs ]
       summary: Delete Pipeline
       description: |
         The delete pipeline API operation deletes a pipeline.
-
+        
         You can delete a specific pipeline by its ID or use wildcards to delete multiple pipelines.
       operationId: deletePipeline
       parameters:
@@ -3124,6 +3125,188 @@ paths:
         - basicAuth: []
         - jwtAuth: []
 
+  /_plugins/_rollup/jobs/{ROLLUP_ID}:
+    put:
+      tags:
+        - Index rollups API
+      summary: Create or update an index rollup job
+      description: |
+        Creates or modifies an index rollup job. The `seq_no` and `primary_term` parameters are required for the update operation.
+      operationId: createOrUpdateRollupJob
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'index_rollup.yml#/components/parameters/RollupId'
+        - $ref: 'index_rollup.yml#/components/parameters/if_seq_no'
+        - $ref: 'index_rollup.yml#/components/parameters/if_primary_term'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: 'index_rollup.yml#/components/schemas/CreateRollupRequest'
+            example:
+              rollup:
+                source_index: "wazuh-alerts-4.x-2025.03.11"
+                target_index: "wazuh-alerts-4.x-2025.03.12"
+                schedule:
+                  interval:
+                    period: 1
+                    unit: "Days"
+                description: "Example rollup job"
+                enabled: true
+                page_size: 200
+                delay: 0
+                roles:
+                  - "rollup_all"
+                  - "nyc_taxi_all"
+                  - "example_rollup_index_all"
+                continuous: false
+                dimensions:
+                  - date_histogram:
+                      source_field: "tpep_pickup_datetime"
+                      fixed_interval: "1h"
+                      timezone: "America/Los_Angeles"
+                  - terms:
+                      source_field: "PULocationID"
+                metrics:
+                  - source_field: "passenger_count"
+                    metrics:
+                      - avg: {}
+                      - sum: {}
+                      - max: {}
+                      - min: {}
+                      - value_count: {}
+      responses:
+        '200':
+          $ref: 'index_rollup.yml#/components/responses/RollupJobCreated'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '409':
+          $ref: 'index_rollup.yml#/components/responses/RollupConflict'
+    get:
+      tags:
+        - Index rollups API
+      summary: Get an index rollup job
+      description: |
+        Retrieves complete details of an index rollup job using the specified `rollup_id`.
+      operationId: getRollupJob
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'index_rollup.yml#/components/parameters/RollupId'
+      responses:
+        '200':
+          $ref: 'index_rollup.yml#/components/responses/RollupJobRetrieved'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: 'index_rollup.yml#/components/responses/RollupNotFound'
+    delete:
+      tags:
+        - Index rollups API
+      summary: Delete an index rollup job
+      description: |
+        Deletes an index rollup job based on the `rollup_id`.
+      operationId: deleteRollupJob
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'index_rollup.yml#/components/parameters/RollupId'
+      responses:
+        '200':
+          $ref: 'index_rollup.yml#/components/responses/RollupJobDeleted'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: 'index_rollup.yml#/components/responses/RollupNotFound'
+
+  /_plugins/_rollup/jobs/{ROLLUP_ID}/_start:
+    post:
+      tags:
+        - Index rollups API
+      summary: Start an index rollup job
+      description: |
+        This API operation start or stop an index rollup job.
+      operationId: startRollupJob
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'index_rollup.yml#/components/parameters/RollupId'
+      responses:
+        '200':
+          $ref: 'index_rollup.yml#/components/responses/RollupJobStarted'
+        '400':
+          $ref: 'index_rollup.yml#/components/responses/RollupBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: 'index_rollup.yml#/components/responses/RollupNotFound'
+
+  /_plugins/_rollup/jobs/{ROLLUP_ID}/_stop:
+    post:
+      tags:
+        - Index rollups API
+      summary: Stop an index rollup job
+      description: |
+        This API operation start or stop an index rollup job.
+      operationId: stopRollupJob
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'index_rollup.yml#/components/parameters/RollupId'
+      responses:
+        '200':
+          $ref: 'index_rollup.yml#/components/responses/RollupJobStopped'
+        '400':
+          $ref: 'index_rollup.yml#/components/responses/RollupBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: 'index_rollup.yml#/components/responses/RollupNotFound'
+
+  /_plugins/_rollup/jobs/{ROLLUP_ID}/_explain:
+    get:
+      tags:
+        - Index rollups API
+      summary: Explain an index rollup job
+      description: |
+        Provides comprehensive metadata about the index rollup job, including its current execution status and progress.
+      operationId: explainRollupJob
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'index_rollup.yml#/components/parameters/RollupId'
+      responses:
+        '200':
+          $ref: 'index_rollup.yml#/components/responses/RollupJobExplained'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: 'index_rollup.yml#/components/responses/RollupNotFound'
+
 components:
   parameters:
     pretty:
@@ -3299,6 +3482,8 @@ tags:
       These APIs are categorized into single-document operations and multi-document operations. Multi-document operations are more efficient than processing multiple individual requests separately, so it is recommended to use them whenever possible for better performance.
   - name: Explain
     description: The Explain API in Wazuh indexer  provides a detailed breakdown of how a document matches a given query and how its relevance score (`_score`) is calculated. It helps in understanding why certain documents rank higher or lower in search results.
+  - name: Index rollups API
+    description: You can use the index rollup operations to programmatically work with index rollup jobs.
   - name: Index state management API
     description: The Index State Management (ISM) API operations allow you to programmatically manage index policies and the lifecycle of indexes in the Wazuh indexer.
   - name: ISM error prevention API
@@ -3313,38 +3498,6 @@ tags:
       3. **Simulate Pipeline**: Test a pipeline configuration by simulating the processing of sample documents, aiding in validation before deployment.
       4. **Delete Pipeline**: Remove an existing pipeline from the system.
       5. **Access Data in a Pipeline**: Interact with data as it flows through a pipeline, enabling monitoring and debugging of the ingestion process.
-  - name: Refresh search analyzer
-    description: |
-      The Refresh Search Analyzer is an API operation that reloads search-time analyzers in real time, specifically those with updateable components. The ability to refresh search analyzers using this endpoint requires the ISM plugin to be installed in your Wazuh indexer cluster.
-
-      For the refresh to work, the token filter within your analyzer must have the `updateable` flag set to `true` without needing to close or recreate the index. For example:
-
-      ```
-      {
-        "analyzer": {
-          "my_synonyms": {
-            "tokenizer": "whitespace",
-            "filter": [
-              "synonym"
-            ]
-          }
-        },
-        "filter": {
-          "synonym": {
-            "type": "synonym_graph",
-            "synonyms_path": "synonyms.txt",
-            "updateable": true
-          }
-        }
-      }
-      ```
-
-      This configuration ensures that changes to the `synonyms.txt` file are picked up when the analyzer is refreshed. Ensure that the updated resources (e.g., `synonyms.txt`) are accessible to all nodes in the cluster, as the refresh operation will reload these resources across the nodes.
-  - name: Remote cluster information
-    description: |
-      This operation returns detailed connection information for remote Wazuh indexer clusters configured with the local cluster. It includes data such as the remote cluster alias, connection mode (`sniff` or `proxy`), seed node IP addresses, and timeout configurations.
-
-      The response is more comprehensive and useful than a call to `_cluster/settings`, which only includes the cluster alias and seed nodes.
   - name: Scroll
     description: |
       You can utilize the scroll operation to obtain a substantial number of results. For instance, when looking for machine learning jobs, you can request an unlimited number of results in separate batches.
