@@ -1,0 +1,955 @@
+paths:
+  /_plugins/_sm/policies/{policy_name}:
+    parameters:
+      - $ref: '#/components/parameters/policy_name'
+    post:
+      tags: [Snapshot management API]
+      summary: Create a policy
+      description: This creates an SM policy.
+      operationId: createSnapshotPolicy
+      parameters:
+        - $ref: '#/components/parameters/if_seq_no'
+        - $ref: '#/components/parameters/if_primary_term'
+        - $ref: '#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/CreatePolicyRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/PolicySuccess'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+    put:
+      tags: [Snapshot management API]
+      summary: Update a policy
+      description: |
+        This updates a policy. You must provide the `seq_no` and `primary_term` parameters for an update request.
+      operationId: updateSnapshotPolicy
+      parameters:
+        - $ref: '#/components/parameters/if_seq_no'
+        - $ref: '#/components/parameters/if_primary_term'
+        - $ref: '#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/CreatePolicyRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/PolicySuccess'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+    get:
+      tags: [Snapshot management API]
+      summary: Get a specific policy
+      description: The Get policies API retrieves snapshot management (SM) policies.
+      operationId: getSnapshotPolicy
+      parameters:
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: '#/components/responses/PolicySuccess'
+        '400':
+          $ref: '#/components/responses/GetBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/PolicyNotFound'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+    delete:
+      tags: [Snapshot management API]
+      summary: Delete a policy
+      description: This API operation deletes the specified SM policy.
+      operationId: deleteSnapshotPolicy
+      parameters:
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: '#/components/responses/DeletePolicySuccess'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/PolicyNotFound'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /_plugins/_sm/policies:
+    get:
+      tags: [Snapshot management API]
+      summary: Get all policies
+      description: The Get policies API retrieves snapshot management (SM) policies.
+      operationId: getAllSnapshotPolicies
+      parameters:
+        - $ref: '#/components/parameters/from'
+        - $ref: '#/components/parameters/size'
+        - $ref: '#/components/parameters/search'
+        - $ref: '#/components/parameters/sortField'
+        - $ref: '#/components/parameters/sortOrder'
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: '#/components/responses/PolicySuccess'
+        '400':
+          $ref: '#/components/responses/GetBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/PolicyNotFound'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /_plugins/_sm/policies/{policy_names}/_explain:
+    parameters:
+      - $ref: '#/components/parameters/policy_names'
+    get:
+      tags: [Snapshot management API]
+      summary: Explain policies
+      description: |
+        The SM explain API returns the enabled or disabled status and metadata for all specified policies. Multiple policy names can be separated by commas (`,`), and wildcard patterns are also supported to select policies.
+
+        ![Snapshot management API state machine – Creation workflow](SM-API-state-machine-creation-workflow.png)
+
+        Snapshot Management (SM) operates using a state machine for both snapshot creation and deletion processes. The diagram above illustrates a single execution cycle of the creation workflow, transitioning from the `CREATION_START` state to the `CREATION_FINISHED` state. The deletion workflow mirrors the same process as the creation workflow.
+
+        The creation workflow begins at the `CREATION_START` state, where it repeatedly checks if the conditions defined in the creation cron schedule are met. Once the conditions are satisfied, the workflow moves to the `CREATION_CONDITION_MET` state and then proceeds to the `CREATING` state. In the `CREATING` state, SM asynchronously calls the create snapshot API and waits for the snapshot creation to complete, transitioning to the `CREATION_FINISHED` state. After completion, the workflow resets to the `CREATION_START` state, repeating the cycle. The `current_state` field under `metadata.creation` and `metadata.deletion` indicates the current position within the state machine.
+      operationId: explainSnapshotPolicies
+      parameters:
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: '#/components/responses/ExplainPoliciesSuccess'
+        '400':
+          $ref: '#/components/responses/ExplainBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /_plugins/_sm/policies/{policy_name}/_start:
+    parameters:
+      - $ref: '#/components/parameters/policy_name_start'
+    post:
+      tags: [Snapshot management API]
+      summary: Start a policy
+      description: This activates the policy by setting its `enabled` flag to `true`.
+      operationId: startSnapshotPolicy
+      parameters:
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: '#/components/responses/StartStopPolicySuccess'
+        '400':
+          $ref: '#/components/responses/StartBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/PolicyNotFound'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /_plugins/_sm/policies/{policy_name}/_stop:
+    parameters:
+      - $ref: '#/components/parameters/policy_name_stop'
+    post:
+      tags: [Snapshot management API]
+      summary: Stop a policy
+      description: |
+        The API operation disables a Snapshot Management (SM) policy by setting its enabled flag to false. Once disabled, the policy will remain inactive and will not execute until it is explicitly started again.
+      operationId: stopSnapshotPolicy
+      parameters:
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: '#/components/responses/StartStopPolicySuccess'
+        '400':
+          $ref: '#/components/responses/StopBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/PolicyNotFound'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+components:
+  parameters:
+    policy_name:
+      name: policy_name
+      in: path
+      required: true
+      description: The unique name of the snapshot management (SM) policy.
+      schema:
+        type: string
+      example: daily-policy
+
+    policy_name_start:
+      name: policy_name
+      in: path
+      required: true
+      description: The name of the snapshot management (SM) policy that you want to start.
+      schema:
+        type: string
+
+    policy_name_stop:
+      name: policy_name
+      in: path
+      required: true
+      description: The name of the snapshot management (SM) policy that you want to stop.
+      schema:
+        type: string
+
+    policy_names:
+      name: policy_names
+      in: path
+      required: true
+      example: daily*
+      description: |
+        A comma-separated list of Snapshot Management (SM) policy names for which to retrieve metadata and status information. Wildcard expressions (`*`) are supported to match multiple policies.
+      schema:
+        type: string
+
+    if_seq_no:
+      name: if_seq_no
+      in: query
+      description: |
+        This is used for optimistic concurrency control. It specifies the expected sequence number for the policy document. The operation only succeeds if the actual sequence number matches this value.
+      schema:
+        type: integer
+
+    if_primary_term:
+      name: if_primary_term
+      in: query
+      description: |
+        This is used with `if_seq_no` to ensure the operation only proceeds if the document's primary term matches the specified value.
+      schema:
+        type: integer
+
+    from:
+      name: from
+      in: query
+      description: The starting index to return results from. It is useful for paginating results.
+      schema:
+        type: integer
+        default: 0
+
+    size:
+      name: size
+      in: query
+      description: The number of SM policies to return.
+      schema:
+        type: integer
+        default: 20
+
+    search:
+      name: search
+      in: query
+      description: The text to search for within the policy name or description.
+      schema:
+        type: string
+
+    sortField:
+      name: sortField
+      in: query
+      description: The field by which to sort the results, such as `name` or `creation.date`.
+      schema:
+        type: string
+
+    sortOrder:
+      name: sortOrder
+      in: query
+      description: This is the sorting order. The valid values are `asc` (ascending) or `desc` (descending).
+      schema:
+        type: string
+        enum: [asc, desc]
+        default: asc
+
+    pretty:
+      name: pretty
+      in: query
+      description: Show results in human-readable format.
+      schema:
+        type: boolean
+        default: false
+
+  requestBodies:
+    CreatePolicyRequest:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreatePolicyRequest'
+          example:
+            description: Daily snapshot policy
+            creation:
+              schedule:
+                cron:
+                  expression: "0 8 * * *"
+                  timezone: UTC
+              time_limit: 1h
+            deletion:
+              schedule:
+                cron:
+                  expression: "0 1 * * *"
+                  timezone: America/Los_Angeles
+              condition:
+                max_age: 7d
+                max_count: 21
+                min_count: 7
+              time_limit: 1h
+            snapshot_config:
+              date_format: yyyy-MM-dd-HH:mm
+              timezone: America/Los_Angeles
+              indices: "*"
+              repository: s3-repo
+              ignore_unavailable: "true"
+              include_global_state: "false"
+              partial: "true"
+              metadata:
+                any_key: any_value
+            notification:
+              channel:
+                id: NC3OpoEBzEoHMX183R3f
+              conditions:
+                creation: true
+                deletion: false
+                failure: false
+                time_limit_exceeded: false
+
+  responses:
+    PolicySuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreatePolicyResponse'
+          example:
+            _id: "daily-policy-sm-policy"
+            _version: 1
+            _seq_no: 169573
+            _primary_term: 9
+            sm_policy:
+              name: "daily-policy"
+              description: "Daily snapshot policy"
+              schema_version: 21
+              creation:
+                schedule:
+                  cron:
+                    expression: "0 8 * * *"
+                    timezone: "UTC"
+                time_limit: "1h"
+              deletion:
+                schedule:
+                  cron:
+                    expression: "0 1 * * *"
+                    timezone: "America/Los_Angeles"
+                condition:
+                  max_age: "7d"
+                  min_count: 7
+                  max_count: 21
+                time_limit: "1h"
+              snapshot_config:
+                indices: "*"
+                metadata:
+                  any_key: "any_value"
+                ignore_unavailable: "true"
+                timezone: "America/Los_Angeles"
+                include_global_state: "false"
+                date_format: "yyyy-MM-dd-HH:mm"
+                repository: "s3-repo"
+                partial: "true"
+              schedule:
+                interval:
+                  start_time: 1745322870894
+                  period: 1
+                  unit: "Minutes"
+              enabled: true
+              last_updated_time: 1745322870931
+              enabled_time: 1745322870894
+              notification:
+                channel:
+                  id: "NC3OpoEBzEoHMX183R3f"
+                conditions:
+                  creation: true
+                  deletion: false
+                  failure: false
+                  time_limit_exceeded: false
+
+    ExplainPoliciesSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ExplainPoliciesResponse'
+          example:
+            policies:
+              - name: "daily-policy"
+                creation:
+                  current_state: "CREATION_START"
+                  trigger:
+                    time: 1745654400000
+                  latest_execution:
+                    status: "FAILED"
+                    start_time: 1745568210930
+                    end_time: null
+                deletion:
+                  current_state: "DELETION_START"
+                  trigger:
+                    time: 1745654400000
+                  latest_execution:
+                    status: "FAILED"
+                    start_time: 1745568210942
+                    end_time: null
+                policy_seq_no: 169573
+                policy_primary_term: 9
+                enabled: true
+
+    StartStopPolicySuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StartStopPolicyResponse'
+          example:
+            acknowledged: true
+
+    DeletePolicySuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DeletePolicyResponse'
+          example:
+            _index: ".opendistro-ism-config"
+            _id: "daily-policy-sm-policy"
+            _version: 4
+            result: "deleted"
+            forced_refresh: true
+            _shards:
+              total: 2
+              successful: 1
+              failed: 0
+            _seq_no: 196133
+            _primary_term: 9
+
+    BadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              root_cause:
+                - type: "illegal_argument_exception"
+                  reason: "snapshot_config field must not be null"
+              type: "illegal_argument_exception"
+              reason: "snapshot_config field must not be null"
+            status: 400
+
+    GetBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              root_cause:
+                - type: "illegal_argument_exception"
+                  reason: "request [/_plugins/_sm/policies/daily-policy] contains unrecognized parameters: [from], [size]"
+              type: "illegal_argument_exception"
+              reason: "request [/_plugins/_sm/policies/daily-policy] contains unrecognized parameters: [from], [size]"
+            status: 400
+
+    ExplainBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              root_cause:
+                - type: "illegal_argument_exception"
+                  reason: "request [/_plugins/_sm/policies/daily*/_explain] contains unrecognized parameter: [filter_enabled] -> did you mean [filter_path]?"
+              type: "illegal_argument_exception"
+              reason: "request [/_plugins/_sm/policies/daily*/_explain] contains unrecognized parameter: [filter_enabled] -> did you mean [filter_path]?"
+            status: 400
+
+    StartBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              root_cause:
+                - type: "illegal_argument_exception"
+                  reason: "request [/_plugins/_sm/policies/daily-policy/_start] contains unrecognized parameter: [cluster_manager_timeout]"
+              type: "illegal_argument_exception"
+              reason: "request [/_plugins/_sm/policies/daily-policy/_start] contains unrecognized parameter: [cluster_manager_timeout]"
+            status: 400
+
+    StopBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              root_cause:
+                - type: "illegal_argument_exception"
+                  reason: "Policy name must not start with '_'."
+              type: "illegal_argument_exception"
+              reason: "Policy name must not start with '_'."
+            status: 400
+
+    NotFound:
+      description: Response to report a request not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/NotFoundResponse'
+          example:
+
+    PolicyNotFound:
+      description: Response to report a request not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              root_cause:
+                - type: "status_exception"
+                  reason: "Snapshot management policy not found"
+              type: "status_exception"
+              reason: "Snapshot management policy not found"
+            status: 404
+
+    Conflict:
+      description: Response to report a conflict
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ConflictResponse'
+          example:
+
+  schemas:
+    CreatePolicyRequest:
+      type: object
+      required:
+        - snapshot_config
+        - creation
+      properties:
+        description:
+          type: string
+          description: A brief explanation of the snapshot management (SM) policy.
+        enabled:
+          type: boolean
+          description: This indicates whether the SM policy should be active upon creation.
+        snapshot_config:
+          type: object
+          required:
+            - repository
+          description: This contains settings for snapshot creation.
+          properties:
+            date_format:
+              type: string
+              description: |
+                Specifies the date format used in the snapshot name, which follows the structure `<POLICY_NAME>-<DATE>-<RANDOM>`. Accepts any valid Wazuh indexer date format.
+              default: "yyyy-MM-dd'T'HH:mm:ss"
+            date_format_timezone:
+              type: string
+              description: Defines the time zone for the date in the snapshot name.
+              default: "UTC"
+            indices:
+              type: string
+              description: |
+                This lists the indexes to include in the snapshot. It supports comma-separated values and wildcards (`*`).
+              default: "*"
+            repository:
+              type: string
+              description: The name of the snapshot repository where snapshots are saved.
+            ignore_unavailable:
+              type: boolean
+              description: This indicates whether to skip unavailable indexes.
+              default: false
+            include_global_state:
+              type: boolean
+              description: |
+                This specifies if the cluster's global state should be included.
+              default: true
+            partial:
+              type: boolean
+              description: This allows partial snapshots if set to `true`.
+              default: false
+            metadata:
+              type: object
+              description: Key-value pairs of additional metadata to include.
+              additionalProperties:
+                type: string
+        creation:
+          type: object
+          required:
+            - schedule
+          description: Defines how snapshots are created.
+          properties:
+            schedule:
+              type: string
+              description: This is a cron expression that schedules snapshot creation.
+            time_limit:
+              type: string
+              description: |
+                The maximum duration allowed for completing a snapshot. If the time limit exceeds the interval between snapshots, overlapping snapshots may be skipped.
+        deletion:
+          type: object
+          description: |
+            Defines how snapshots should be deleted. If omitted, no snapshots are deleted by default.
+          properties:
+            schedule:
+              type: string
+              description: |
+                A cron expression that defines when snapshots are deleted. If not set, the value from `creation.schedule` is used.
+            time_limit:
+              type: string
+              description: The maximum time allowed for deletion to complete.
+            delete_condition:
+              type: object
+              description: This specifies conditions under which snapshots are deleted.
+              properties:
+                max_count:
+                  type: integer
+                  description: The maximum number of snapshots to retain.
+                max_age:
+                  type: string
+                  description: The maximum age a snapshot can reach before being deleted.
+                min_count:
+                  type: integer
+                  description: The minimum number of snapshots to retain.
+                  default: 1
+        notification:
+          type: object
+          description: The settings for sending notifications related to SM policy events.
+          required:
+            - channel
+          properties:
+            channel:
+              type: object
+              required:
+                - id
+              description: |
+                This is the channel configuration for notifications. You must predefine this channel.
+              properties:
+                id:
+                  type: string
+                  description: |
+                    The ID of the notification channel. Retrieve this via `GET _plugins/_notifications/configs`.
+            conditions:
+              type: object
+              description: This specifies the snapshot events for which to send notifications.
+              properties:
+                creation:
+                  type: boolean
+                  description: Notifies when a snapshot is created.
+                  default: true
+                deletion:
+                  type: boolean
+                  description: Notifies when a snapshot is deleted.
+                  default: false
+                failure:
+                  type: boolean
+                  description: Notifies on failure of snapshot creation or deletion.
+                  default: false
+                time_limit_exceeded:
+                  type: boolean
+                  description: Notifies when a snapshot operation exceeds the time limit.
+                  default: false
+
+    CreatePolicyResponse:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The unique ID assigned to the newly created SM policy document.
+        _version:
+          type: integer
+          description: The version number of the SM policy document. Starts at 1 and increments with every update.
+        _seq_no:
+          type: integer
+          description: The sequence number assigned to the policy document for optimistic concurrency control.
+        _primary_term:
+          type: integer
+          description: The primary term number associated with the document, also used for concurrency control.
+        sm_policy:
+          type: object
+          properties:
+            name:
+              type: string
+              description: The name you gave to the SM policy (e.g., `daily-policy`).
+            description:
+              type: string
+              description: A human-readable description of what the policy does.
+            schema_version:
+              type: integer
+              description: The version of the schema used internally for the policy format.
+            creation:
+              type: object
+              description: Defines when and how often snapshots are created, including the cron schedule and time limit for creation.
+            deletion:
+              type: object
+              description: Specifies when and under what conditions snapshots are deleted (schedule, age, count limits, and time limit).
+            snapshot_config:
+              type: object
+              description: Configuration settings for the snapshots, such as targeted indices, repository, and additional metadata.
+            schedule:
+              type: object
+              description: A general interval schedule that can trigger operations, expressed in period and unit.
+            enabled:
+              type: boolean
+              description: Indicates if the SM policy is currently active (`true`) or disabled (`false`).
+            last_updated_time:
+              type: integer
+              format: int64
+              description: The timestamp (epoch millis) of when the policy was last updated.
+            enabled_time:
+              type: integer
+              format: int64
+              description: The timestamp (epoch millis) when the policy was enabled.
+            notification:
+              type: object
+              description: Configuration for notifications, including the notification channel ID and specific conditions to trigger notifications.
+
+    ExplainPoliciesResponse:
+      type: object
+      properties:
+        policies:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: The name of the SM policy.
+              creation:
+                type: object
+                properties:
+                  current_state:
+                    type: string
+                    description: The current state of the snapshot creation state machine (e.g., `CREATION_START`).
+                  trigger:
+                    type: object
+                    properties:
+                      time:
+                        type: integer
+                        format: int64
+                        description: The next scheduled time (epoch milliseconds) for the creation process to trigger.
+                  latest_execution:
+                    type: object
+                    description: Information about the most recent execution of the snapshot creation workflow.
+              deletion:
+                type: object
+                properties:
+                  current_state:
+                    type: string
+                    description: The current state of the snapshot deletion state machine (e.g., `DELETION_START`).
+                  trigger:
+                    type: object
+                    properties:
+                      time:
+                        type: integer
+                        format: int64
+                        description: The next scheduled time for the deletion process to trigger.
+                  latest_execution:
+                    type: object
+                    description: Information about the most recent execution of the snapshot deletion workflow.
+              policy_seq_no:
+                type: integer
+                description: The sequence number of the policy, used for optimistic concurrency control.
+              policy_primary_term:
+                type: integer
+                description: The primary term associated with the policy, also used for concurrency control.
+              enabled:
+                type: boolean
+                description: Indicates whether the SM policy is currently enabled (`true`) or disabled (`false`).
+
+    StartStopPolicyResponse:
+      type: object
+      properties:
+        acknowledged:
+          type: boolean
+          description: |
+            Indicates whether the request to start/stop the snapshot management (SM) policy was successfully received and processed by the Wazuh indexer.
+
+    DeletePolicyResponse:
+      type: object
+      properties:
+        _index:
+          type: string
+          description: The system index where the snapshot management (SM) policy was stored (typically `.opendistro-ism-config`).
+        _id:
+          type: string
+          description: The unique document ID of the deleted policy, usually based on the policy name.
+        _version:
+          type: integer
+          description: The version of the document after the delete operation. Increments with each change.
+        result:
+          type: string
+          description: |
+            Indicates the result of the delete operation. `deleted` confirms the policy was successfully removed.
+        forced_refresh:
+          type: boolean
+          description: Indicates whether a refresh was forced to make the deletion visible to search.
+        _shards:
+          type: object
+          properties:
+            total:
+              type: integer
+              description: Total number of shards involved in the operation.
+            successful:
+              type: integer
+              description: Number of shards where the deletion succeeded.
+            failed:
+              type: integer
+              description: Number of shards where the deletion failed. Should be `0` for a successful operation.
+        _seq_no:
+          type: integer
+          description: The sequence number of the operation, used for concurrency control.
+        _primary_term:
+          type: integer
+          description: The primary term number for the shard. Also used for optimistic concurrency control.
+
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            root_cause:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                  reason:
+                    type: string
+            type:
+              type: string
+            reason:
+              type: string
+        status:
+          type: integer
+
+    SecurityError:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            root_cause:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                  reason:
+                    type: string
+            type:
+              type: string
+            reason:
+              type: string
+        status:
+          type: integer
+
+    NotFoundResponse:
+      type: object
+      properties:
+        _id:
+          type: string
+        found:
+          type: boolean
+
+    ConflictResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            root_cause:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                  reason:
+                    type: string
+                  index:
+                    type: string
+                  shard:
+                    type: string
+                  index_uuid:
+                    type: string
+            type:
+              type: string
+            reason:
+              type: string
+            index:
+              type: string
+            shard:
+              type: string
+            index_uuid:
+              type: string
+        status:
+          type: integer
+
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Basic HTTP authentication
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT Bearer token authentication
