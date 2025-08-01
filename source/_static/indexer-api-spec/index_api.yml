@@ -426,6 +426,137 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 
+  /{source_index}/_clone/{target_index}:
+    parameters:
+      - $ref: '#/components/parameters/source_index'
+      - $ref: '#/components/parameters/target_index'
+    post:
+      tags: [Index APIs]
+      summary: Clone index (POST)
+      description: |
+        The Clone Index API copies all data from an existing read-only index into a new index. The destination index must not already exist.
+      operationId: postSourceIndexCloneTargetIndex
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/wait_for_active_shards'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/wait_for_completion'
+        - $ref: '#/components/parameters/task_execution_timeout'
+      requestBody:
+        $ref: '#/components/requestBodies/CloneIndexRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/CloneIndexSuccess'
+        '400':
+          $ref: '#/components/responses/CloneIndexBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    put:
+      tags: [Index APIs]
+      summary: Clone index (PUT)
+      description: |
+        The Clone Index API copies all data from an existing read-only index into a new index. The destination index must not already exist.
+      operationId: putSourceIndexCloneTargetIndex
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/wait_for_active_shards'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/wait_for_completion'
+        - $ref: '#/components/parameters/task_execution_timeout'
+      requestBody:
+        $ref: '#/components/requestBodies/CloneIndexRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/CloneIndexSuccess'
+        '400':
+          $ref: '#/components/responses/CloneIndexBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /{index}/_close:
+    parameters:
+      - $ref: '#/components/parameters/index'
+    post:
+      tags: [Index APIs]
+      summary: Close index
+      description: |
+        The Close Index API is used to close an index, making it inaccessible for writing or searching. Once closed, the index cannot be updated or queried until it is reopened.
+      operationId: postIndexClose
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/allow_no_indices'
+        - $ref: '#/components/parameters/expand_wildcards'
+        - $ref: '#/components/parameters/ignore_unavailable'
+        - $ref: '#/components/parameters/wait_for_active_shards'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/timeout'
+      responses:
+        '200':
+          $ref: '#/components/responses/CloseIndexSuccess'
+        '400':
+          $ref: '#/components/responses/CloseIndexBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /{index}:
+    parameters:
+      - $ref: '#/components/parameters/single-index'
+    put:
+      tags: [Index APIs]
+      summary: Create index
+      description: |
+        The Create Index API allows you to create an index from scratch without adding a document, allowing you to set it up for future use. During index creation, you can define its mappings, settings, and any associated aliases.
+
+        **Index naming restrictions**
+
+        The Wazuh indexer indexes have the following naming restrictions:
+
+        - All letters must be lowercase.
+        - Index names can't begin with underscores (_) or hyphens (-).
+        - Index names can't contain spaces, commas, or the following characters:
+
+          :, ", *, +, /, \\, |, ?, #, >, or <
+      operationId: putIndex
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/wait_for_active_shards'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/timeout'
+      requestBody:
+        $ref: '#/components/requestBodies/CreateIndexRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/CreateIndexSuccess'
+        '400':
+          $ref: '#/components/responses/CreateIndexBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+
 
 components:
   parameters:
@@ -454,10 +585,20 @@ components:
       in: path
       required: true
       description: |
-        Specifies the index or list of indexes to operate on. You can provide a single index name, a comma-separated list of multiple indexes, or use _all or * to operate on all indexes in the cluster.
+        Specifies the index or list of indexes to operate on. You can provide a single index name, a comma-separated list of multiple indexes, or use `_all` or `*` to operate on all indexes in the cluster.
       schema:
         type: string
       example: "wazuh-alerts-4.x-2025.03.12"
+
+    single-index:
+      name: index
+      in: path
+      required: true
+      description: |
+        The name of the index to be created. It must follow the index naming rules. This parameter is required.
+      schema:
+        type: string
+      example: "wazuh-alerts-4.x-2025.03.5"
 
     block:
       name: block
@@ -526,6 +667,77 @@ components:
         type: string
         enum: [all, open, closed, hidden, none]
         default: open
+
+    source_index:
+      name: source_index
+      in: path
+      required: true
+      description: |
+        The source index to clone.
+      schema:
+        type: string
+      example: "wazuh-alerts-4.x-2025.03.42"
+
+    target_index:
+      name: target_index
+      in: path
+      required: true
+      description: |
+        The index to create and add cloned data to.
+      schema:
+        type: string
+      example: "wazuh-alerts-4.x-2025.03.12-cloned"
+
+    fielddata:
+      name: fielddata
+      in: query
+      required: false
+      description: |
+        When `true`, clears the field data cache. You can use the `fields` parameter to target specific fields.
+      schema:
+        type: boolean
+        default: true
+
+    fields:
+      name: fields
+      in: query
+      required: false
+      description: |
+        A comma-separated list of field names whose field data caches should be cleared. This applies only when fielddata is enabled. Field aliases and objects are not supported. It defaults to all fields.
+      schema:
+        type: string
+
+
+    wait_for_active_shards:
+      name: wait_for_active_shards
+      in: query
+      required: false
+      description: |
+        Specifies the number of active shards required before proceeding with the operation. The default is `1`, meaning only the primary shard is needed. You can set it to `all` or a specific positive integer. If greater than `1`, the index must have the corresponding number of replicas available across different nodes.
+      schema:
+        type: string
+        default: '1'
+
+    wait_for_completion:
+      name: wait_for_completion
+      in: query
+      required: false
+      description: |
+        If false, the API responds immediately without waiting for the operation to finish. Use the Tasks API along with the returned task ID to track progress.
+      schema:
+        type: boolean
+        default: true
+
+    task_execution_timeout:
+      name: task_execution_timeout
+      in: query
+      required: false
+      description: |
+        Sets a specific time limit for how long the task can run. Only applies when `wait_for_completion` is `false`.
+      schema:
+        type: string
+        format: duration
+        default: '1h'
 
 
   requestBodies:
@@ -750,6 +962,63 @@ components:
           example:
             routing: "test"
 
+    CloneIndexRequest:
+      description: |
+        Request body for clone index operations
+      required: false
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              settings:
+                type: object
+                description: |
+                  A set of index settings to apply to the cloned index. Common use cases include removing or updating settings that cannot be carried over.
+              aliases:
+                type: object
+                description: |
+                  Defines one or more aliases to be associated with the newly created target index. You can specify alias names and their configuration (e.g., filters, routing).
+          example:
+            settings:
+              index:
+                number_of_shards: 3
+                number_of_replicas: 1
+            aliases:
+              "wazuh-alerts-4.x-2025.03.12-alias": {}
+
+    CreateIndexRequest:
+      description: |
+        Request body for creating indexes
+      required: false
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              settings:
+                type: object
+                description: |
+                  Defines configuration settings for the index such as the number of shards, replicas, and custom analyzers.
+              mappings:
+                type: object
+                description: |
+                  Specifies the structure of documents in the index, including field types and data formats.
+              aliases:
+                type: object
+                description: |
+                  One or more aliases to associate with the index. You can include alias-specific settings like filters, routing, and write index designation.
+          example:
+            settings:
+              index:
+                number_of_shards: 2
+                number_of_replicas: 1
+            mappings:
+              properties:
+                age:
+                  type: "integer"
+            aliases:
+              "sample-alias1": {}
 
   responses:
     AliasSuccess:
@@ -809,6 +1078,62 @@ components:
               successful: 3
               failed: 0
 
+    CloneIndexSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/ShardsAcknowledgedResponse'
+              - type: object
+                properties:
+                  index:
+                    type: string
+                    description: |
+                      The name of the newly created cloned index.
+          example:
+            acknowledged: true
+            shards_acknowledged: true
+            index: "wazuh-alerts-4.x-2025.03.12-cloned"
+
+    CloseIndexSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/ShardsAcknowledgedResponse'
+              - type: object
+                properties:
+                  indices:
+                    type: object
+                    description: |
+                      Contains the results of the close operation for each index included in the request. The index name is used as the key.
+          example:
+            acknowledged: true
+            shards_acknowledged: true
+            indices:
+              "wazuh-alerts-4.x-2025.03.11":
+                closed: true
+
+    CreateIndexSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/ShardsAcknowledgedResponse'
+              - type: object
+                properties:
+                  index:
+                    type: string
+                    description: |
+                      This indicates the name of the newly created index.
+          example:
+            acknowledged: true
+            shards_acknowledged: true
+            index: "wazuh-alerts-4.x-2025.03.5"
+
     AliasBadRequest:
       description: Response to report a bad request
       content:
@@ -862,6 +1187,43 @@ components:
               index_uuid: "_na_"
             status: 400
 
+    CloseIndexBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IndexErrorResponse'
+          example:
+            error:
+              root_cause:
+                - type: "invalid_index_name_exception"
+                  reason: "Invalid index name [_wazuh-alerts-4.x-2025.03.11], must not start with '_'."
+                  index: "_wazuh-alerts-4.x-2025.03.11"
+                  index_uuid: "_na_"
+              type: "invalid_index_name_exception"
+              reason: "Invalid index name [_wazuh-alerts-4.x-2025.03.11], must not start with '_'."
+              index: "_wazuh-alerts-4.x-2025.03.11"
+              index_uuid: "_na_"
+            status: 400
+
+    CreateIndexBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IndexErrorResponse'
+          example:
+            error:
+              root_cause:
+                - type: "resource_already_exists_exception"
+                  reason: "index [wazuh-alerts-4.x-2025.03.5/iru5_ZTuQp-vK1Q-TNC6Uw] already exists"
+                  index: "wazuh-alerts-4.x-2025.03.5"
+                  index_uuid: "iru5_ZTuQp-vK1Q-TNC6Uw"
+              type: "resource_already_exists_exception"
+              reason: "index [wazuh-alerts-4.x-2025.03.5/iru5_ZTuQp-vK1Q-TNC6Uw] already exists"
+              index: "wazuh-alerts-4.x-2025.03.5"
+              index_uuid: "iru5_ZTuQp-vK1Q-TNC6Uw"
+            status: 400
 
     ClearCacheBadRequest:
       description: Response to report a bad request
@@ -880,6 +1242,21 @@ components:
               reason: "Invalid index name [_wazuh-alerts-4.x-2025.03.12], must not start with '_'."
               index: "_wazuh-alerts-4.x-2025.03.12"
               index_uuid: "_na_"
+            status: 400
+
+    CloneIndexBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              root_cause:
+                - type: "illegal_argument_exception"
+                  reason: "the number of target shards (2) must be the same as the number of source shards (3)"
+              type: "illegal_argument_exception"
+              reason: "the number of target shards (2) must be the same as the number of source shards (3)"
             status: 400
 
     NotFound:
@@ -1011,3 +1388,22 @@ components:
               description: |
                 Confirms that all primary and replica shards acknowledged the operation.
 
+    # Common shards response structure
+    ShardsResponse:
+      type: object
+      properties:
+        _shards:
+          type: object
+          properties:
+            total:
+              type: integer
+              description: |
+                The total number of shards involved in the request.
+            successful:
+              type: integer
+              description: |
+                The number of shards where the operation was completed successfully.
+            failed:
+              type: integer
+              description: |
+                The number of shards where the operation failed.

@@ -164,6 +164,15 @@ paths:
   /{target}/_cache/clear:
     $ref: 'index_api.yml#/paths/~1{target}~1_cache~1clear'
 
+  /{source_index}/_clone/{target_index}:
+    $ref: 'index_api.yml#/paths/~1{source_index}~1_clone~1{target_index}'
+
+  /{index}/_close:
+    $ref: 'index_api.yml#/paths/~1{index}~1_close'
+
+  /{index}:
+    $ref: 'index_api.yml#/paths/~1{index}'
+
   /{index}/_analyze:
     parameters:
       - $ref: 'analyze_api.yml#/components/parameters/index'
