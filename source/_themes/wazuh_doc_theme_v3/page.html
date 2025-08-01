@@ -8,7 +8,8 @@
 
 {% set api_pages = [
   'cloud-service/apis/reference',
-  'user-manual/api/reference'
+  'user-manual/api/reference',
+  'user-manual/indexer-api/reference'
 ] %}
 
 {%- if pagename == 'index' and theme_breadcrumb_root_title == 'Documentation' -%}
@@ -21,6 +22,9 @@
     {% endif %}
     {% if pagename == 'cloud-service/apis/reference' %}
       {% include "cloud-api-redoc.html" %}
+    {% endif %}
+    {% if pagename == 'user-manual/indexer-api/reference' %}
+      {% include "indexer-api-redoc.html" %}
     {% endif %}
   {%- else -%}
     {%- include 'template-parts/body.html' -%}

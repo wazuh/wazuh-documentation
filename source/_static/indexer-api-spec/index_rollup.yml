@@ -1,0 +1,577 @@
+openapi: 3.0.0
+
+components:
+  parameters:
+    RollupId:
+      name: ROLLUP_ID
+      in: path
+      required: true
+      description: The unique identifier for the rollup job you want to work with.
+      schema:
+        type: string
+    if_seq_no:
+      name: if_seq_no
+      in: query
+      description: Required for optimistic concurrency control. The sequence number of the document to compare for update.
+      schema:
+        type: integer
+    if_primary_term:
+      name: if_primary_term
+      in: query
+      description: Required for optimistic concurrency control. The primary term of the document to compare for update.
+      schema:
+        type: integer
+
+  schemas:
+    # Request Body Schemas
+    CreateRollupRequest:
+      type: object
+      properties:
+        rollup:
+          $ref: '#/components/schemas/RollupJob'
+
+    RollupJob:
+      type: object
+      required:
+        - source_index
+        - target_index
+        - schedule
+        - enabled
+        - continuous
+        - page_size
+        - dimensions
+        - metrics
+      properties:
+        source_index:
+          type: string
+          description: The name of the source index from which data will be rolled up. This field is required.
+        target_index:
+          type: string
+          description: Defines the target index for storing the rolled-up data. You can use an existing index or create a new one. It must not contain a mix of raw and rolled-up data. Supports dynamic naming like `rollup_{{ctx.source_index}}`. This field is required.
+        schedule:
+          $ref: '#/components/schemas/RollupSchedule'
+        description:
+          type: string
+          description: A brief description of what this rollup job does.
+        enabled:
+          type: boolean
+          description: Indicates whether the rollup job is active. The default value is true. This field is required.
+        continuous:
+          type: boolean
+          description: Determines if the rollup job runs continuously or executes once over existing data. The default value is false. This field is required.
+        error_notification:
+          type: object
+          description: Defines a Mustache template for sending error alerts, such as notifications to a Slack channel when the job fails. This field is not required.
+        page_size:
+          type: number
+          description: Number of buckets to retrieve in each batch during the rollup process. This field is required.
+        delay:
+          type: integer
+          description: Delay, in milliseconds, before the rollup job runs. This field is not required.
+        dimensions:
+          type: array
+          description: Specifies bucket aggregations to define dimensions over the rollup time window. Supports terms, histogram, and date_histogram. This field is required.
+          items:
+            $ref: '#/components/schemas/RollupDimension'
+        metrics:
+          type: array
+          description: List of metric aggregations to perform on specified fields. Supported metrics include sum, max, min, value_count, and avg. This field is not required.
+          items:
+            $ref: '#/components/schemas/RollupMetric'
+
+    RollupSchedule:
+      type: object
+      description: Specifies when the rollup job should run. Can be based on a time interval or a cron expression. This field is required.
+      properties:
+        interval:
+          $ref: '#/components/schemas/RollupScheduleInterval'
+        cron:
+          $ref: '#/components/schemas/RollupScheduleCron'
+
+    RollupScheduleInterval:
+      type: object
+      required:
+        - start_time
+        - period
+        - unit
+      properties:
+        start_time:
+          type: integer
+          format: epoch
+          description: The timestamp indicating when the interval starts. This field is required.
+        period:
+          type: string
+          description: The duration of the interval. This field is required.
+        unit:
+          type: string
+          description: The unit of time for the interval (e.g., minutes, hours, days). This field is required.
+
+    RollupScheduleCron:
+      type: object
+      properties:
+        expression:
+          type: string
+          description: A valid Unix-style cron expression that determines the job's execution schedule. This field is required.
+        timezone:
+          type: string
+          description: The time zone to apply to the cron schedule. Defaults to UTC. This field is not required.
+
+    RollupDimension:
+      oneOf:
+        - $ref: '#/components/schemas/DimensionDateHistogram'
+        - $ref: '#/components/schemas/DimensionTerms'
+
+    DimensionDateHistogram:
+      type: object
+      properties:
+        date_histogram:
+          type: object
+          properties:
+            source_field: { type: string }
+            fixed_interval: { type: string }
+            timezone: { type: string }
+
+    DimensionTerms:
+      type: object
+      properties:
+        terms:
+          type: object
+          properties:
+            source_field: { type: string }
+
+    RollupMetric:
+      type: object
+      properties:
+        source_field: { type: string }
+        metrics:
+          type: array
+          items:
+            $ref: '#/components/schemas/MetricAggregation'
+
+    MetricAggregation:
+      type: object
+      oneOf:
+        - type: object
+          properties: { avg: { type: object } }
+        - type: object
+          properties: { sum: { type: object } }
+        - type: object
+          properties: { max: { type: object } }
+        - type: object
+          properties: { min: { type: object } }
+        - type: object
+          properties: { value_count: { type: object } }
+
+    # Response Schemas
+    RollupJobResponse:
+      type: object
+      properties:
+        rollup_id: 
+          type: string
+          description: The unique identifier of the rollup job.
+        enabled:
+          type: boolean
+          description: Indicates if the rollup job is currently enabled.
+        schedule:
+          type: object
+          description: Defines when and how often the rollup job runs. It typically includes parameters such as the start time, the interval (e.g., every hour, day, etc.), and the unit of time. This determines the rollup job's execution frequency.
+        last_updated_time: 
+          type: integer
+          format: epoch
+          description: The last time the rollup job was updated.
+        enabled_time: 
+          type: integer
+          format: epoch
+          description: The timestamp when the job was enabled.
+        description:
+          type: string
+          description: A brief description of what this rollup job does.
+        schema_version: 
+          type: integer
+          description: Internal version used to track job schema evolution.
+        source_index:
+          type: string
+          description: The index where raw data resides.
+        target_index:
+          type: string
+          description: The index where the rolled-up data is stored.
+        metadata_id:
+          type: string
+          nullable: true
+          description: Typically contains the ID for job metadata (e.g., tracking status). It may be null until metadata is created.
+        page_size:
+          type: integer
+          description: Number of documents processed per page during rollup.
+        delay:
+          type: integer
+          description: Delay before the job starts processing new data. The default value is 0.
+        continuous:
+          type: boolean
+          description: If true, the job runs continuously. If false, it's a one-time job.
+        dimensions:
+          type: array
+          description: Defines how data is grouped (e.g., by date or terms).
+        metrics:
+          type: object
+          description: Specifies the list of numeric fields and the aggregation operations (like avg, sum, min, max, value_count) that the Wazuh indexer should calculate during the rollup process. This helps reduce storage while retaining key statistical insights from the original data.
+
+    CreateRollupResponse:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The ID of the rollup job you just created or updated.
+        _version:
+          type: integer
+          description: The internal version number of the rollup job document (used for versioning and concurrency control).
+        _seq_no:
+          type: integer
+          description: Sequence number used for optimistic concurrency control in the Wazuh indexer. This is required for updating the job in the future.
+        _primary_term:
+          type: integer
+          description: This is a concurrency control field that works with _seq_no to ensure safe document updates.
+        rollup:
+          $ref: '#/components/schemas/RollupJobResponse'
+
+    ErrorResponseRootCause:
+      type: object
+      properties:
+        type: { type: string }
+        reason: { type: string }
+
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            root_cause:
+              type: array
+              items:
+                $ref: '#/components/schemas/ErrorResponseRootCause'
+            type: { type: string }
+            reason: { type: string }
+        status: { type: integer }
+
+    ErrorResponseConflict:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            root_cause:
+              type: array
+              items:
+                type: object
+                properties:
+                  type: { type: string }
+                  reason: { type: string }
+                  index: { type: string }
+                  shard: { type: integer }
+                  index_uuid: { type: string }
+            type: { type: string }
+            reason: { type: string }
+        status: { type: integer }
+
+    # Delete Response Schemas
+    DeleteRollupResponse:
+      type: object
+      properties:
+        _index:
+          type: string
+          description: Name of the internal system index where the rollup job metadata was stored.
+        _id:
+          type: string
+          description: The unique identifier of the deleted rollup job.
+        _version:
+          type: integer
+          description: The version number of the document after the delete operation. Each update/delete increases this number.
+        result:
+          type: string
+          description: Indicates the outcome of the delete operation. deleted means the rollup job was successfully removed.
+        forced_refresh:
+          type: boolean
+          description: This indicates that the index was forcibly refreshed after the deletion to make the changes visible to search immediately.
+        _shards:
+          type: object
+          properties:
+            total:
+              type: integer
+              description: Total number of shards targeted by the delete request.
+            successful:
+              type: integer
+              description: Number of shards where the delete operation completed successfully.
+            failed:
+              type: integer
+              description: Number of shards where the operation failed. A value of 0 means all targeted shards processed the delete without errors.
+        _seq_no:
+          type: integer
+          description: The sequence number assigned to this delete operation, used for internal versioning and concurrency control.
+        _primary_term:
+          type: integer
+          description: Primary term associated with the primary shard where the document was deleted. Used for conflict resolution during updates/deletes.
+
+    RollupExplainResponse:
+      type: object
+      properties:
+        metadata_id:
+          type: string
+          description: A unique identifier for the metadata document.
+        rollup_metadata:
+          type: object
+          description: This field contains further nested properties related to the rollup job's metadata.
+          properties:
+            rollup_id:
+              type: string
+              description: The ID of the rollup job.
+            last_updated_time:
+              type: number
+              format: int64
+              description: Timestamp of the last update to the rollup metadata.
+            status:
+              type: string
+              description: The current status of the job. Possible values include started, stopped, finished, failed, retry, etc.
+            failure_reason:
+              type: string
+              nullable: true
+              description: The reason for job failure, if any. If null, no error has been logged.
+            stats:
+              type: object
+              description: "Statistics related to the execution of the rollup job. There are several fields like: pages_processed, documents_processed, rollups_indexed, index_time_in_millis, search_time_in_millis."
+              properties:
+                pages_processed:
+                  type: integer
+                  description: Number of pages scanned from the source index.
+                documents_processed:
+                  type: integer
+                  description: Total documents read and processed from the source index.
+                rollups_indexed:
+                  type: integer
+                  description: Total rollup documents written to the target index.
+                index_time_in_millis:
+                  type: integer
+                  description: Time spent indexing the rollup documents, in milliseconds.
+                search_time_in_millis:
+                  type: integer
+                  description: Time spent performing search operations during the rollup job, in milliseconds.
+
+  responses:
+    RollupJobCreated:
+      description: Rollup job created or updated successfully.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateRollupResponse'
+          example:
+            _id: "test-rollup"
+            _version: 1
+            _seq_no: 133321
+            _primary_term: 8
+            rollup:
+              rollup_id: "test-rollup"
+              enabled: true
+              schedule:
+                interval:
+                  start_time: 1744526286733
+                  period: 1
+                  unit: "Days"
+                schedule_delay: 0
+              last_updated_time: 1744526286771
+              enabled_time: 1744526286732
+              description: "Example rollup job"
+              schema_version: 21
+              source_index: "wazuh-alerts-4.x-2025.03.11"
+              target_index: "wazuh-alerts-4.x-2025.03.12"
+              metadata_id: null
+              page_size: 200
+              delay: 0
+              continuous: false
+              dimensions:
+                - date_histogram:
+                    source_field: "tpep_pickup_datetime"
+                    fixed_interval: "1h"
+                    target_field: "tpep_pickup_datetime"
+                    timezone: "America/Los_Angeles"
+                    format: null
+                - terms:
+                    source_field: "PULocationID"
+                    target_field: "PULocationID"
+              metrics:
+                - source_field: "passenger_count"
+                  metrics:
+                    - avg: {}
+                    - sum: {}
+                    - max: {}
+                    - min: {}
+                    - value_count: {}
+
+    RollupConflict:
+      description: Version conflict
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponseConflict'
+          example:
+            error:
+              root_cause:
+                - type: "version_conflict_engine_exception"
+                  reason: "[test-rollup]: version conflict, document already exists (current version [1])"
+                  index_uuid: "Bcf6j1bkSKG5-sKZnV11sg"
+                  shard: "0"
+                  index: ".opendistro-ism-config"
+              type: "version_conflict_engine_exception"
+              reason: "[test-rollup]: version conflict, document already exists (current version [1])"
+              index_uuid: "Bcf6j1bkSKG5-sKZnV11sg"
+              shard: "0"
+              index: ".opendistro-ism-config"
+            status: 409 
+
+    RollupJobDeleted:
+      description: Rollup job deleted successfully.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DeleteRollupResponse'
+          example:
+            _index: ".opendistro-ism-config"
+            _id: "test-rollupss"
+            _version: 2
+            result: "deleted"
+            forced_refresh: true
+            _shards:
+              total: 2
+              successful: 1
+              failed: 0
+            _seq_no: 137966
+            _primary_term: 8
+
+    RollupNotFound:
+      description: Rollup job not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              root_cause:
+                - type: "status_exception"
+                  reason: "Rollup test-rollupss1 is not found"
+              type: "status_exception"
+              reason: "Rollup test-rollupss1 is not found"
+            status: 404
+
+    RollupJobRetrieved:
+      description: Rollup job retrieved successfully.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateRollupResponse'
+          example:
+            _id: "test-rollup"
+            _version: 1
+            _seq_no: 133321
+            _primary_term: 8
+            rollup:
+              rollup_id: "test-rollup"
+              enabled: true
+              schedule:
+                interval:
+                  start_time: 1744526286733
+                  period: 1
+                  unit: "Days"
+                schedule_delay: 0
+              last_updated_time: 1744526286771
+              enabled_time: 1744526286732
+              description: "Example rollup job"
+              schema_version: 21
+              source_index: "wazuh-alerts-4.x-2025.03.11"
+              target_index: "wazuh-alerts-4.x-2025.03.12"
+              metadata_id: null
+              page_size: 200
+              delay: 0
+              continuous: false
+              dimensions:
+                - date_histogram:
+                    source_field: "tpep_pickup_datetime"
+                    fixed_interval: "1h"
+                    target_field: "tpep_pickup_datetime"
+                    timezone: "America/Los_Angeles"
+                    format: null
+                - terms:
+                    source_field: "PULocationID"
+                    target_field: "PULocationID"
+              metrics:
+                - source_field: "passenger_count"
+                  metrics:
+                    - avg: {}
+                    - sum: {}
+                    - max: {}
+                    - min: {}
+                    - value_count: {}
+
+    RollupJobStarted:
+      description: Rollup job started successfully.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              acknowledged:
+                type: boolean
+                description: Indicates whether the request to start or stop the rollup job was successfully received and processed by the Wazuh indexer. A value of `true` means the operation was acknowledged without error.
+          example:
+            acknowledged: true
+
+    RollupJobStopped:
+      description: Rollup job stopped successfully.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              acknowledged:
+                type: boolean
+                description: Indicates whether the request to start or stop the rollup job was successfully received and processed by the Wazuh indexer. A value of `true` means the operation was acknowledged without error.
+          example:
+            acknowledged: true
+
+    RollupBadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              root_cause:
+                - type: "action_request_validation_exception"
+                  reason: "Validation Failed: 1: id is missing;"
+                - type: "action_request_validation_exception"
+                  reason: "Validation Failed: 1: id is missing;"
+              status: 400
+
+    RollupJobExplained:
+      description: Rollup job explanation retrieved successfully.
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties:
+              $ref: '#/components/schemas/RollupExplainResponse'
+          example:
+            test-rollup:
+              metadata_id: "test-rollup"
+              rollup_metadata:
+                rollup_id: "test-rollup"
+                last_updated_time: 1640995200000
+                status: "started"
+                failure_reason: null
+                stats:
+                  pages_processed: 0
+                  documents_processed: 0
+                  rollups_indexed: 0
+                  index_time_in_millis: 0
+                  search_time_in_millis: 0
+            test-rollups:
+              metadata_id: "test-rollups"
+              rollup_metadata: null

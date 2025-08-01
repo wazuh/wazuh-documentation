@@ -1,0 +1,756 @@
+openapi: 3.0.0
+
+components:
+  parameters:
+    target:
+      name: target
+      in: path
+      required: true
+      schema:
+        type: string
+      example: "wazuh-alerts-4.x-2025.02.15"
+
+    document_id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+      example: "1"
+
+    index_name:
+      name: index
+      in: path
+      required: true
+      description: The name of the index.
+      schema:
+        type: string
+      example: "wazuh-alerts-4.x-2025.02.15"
+
+    index_or_alias_or_wildcard:
+      name: index_or_alias_or_wildcard
+      in: path
+      required: true
+      description: Specifies the target index, index alias, or a wildcard pattern to indicate multiple indexes.
+      schema:
+        type: string
+      example: "wazuh-alerts-4.x-2025.03.22"
+
+    # Count API parameters
+    count_allow_no_indices:
+      name: allow_no_indices
+      in: query
+      description: |
+        If set to false, an error is returned if any wildcard expression or index alias targets closed or missing indexes.
+      schema:
+        type: boolean
+        default: false
+
+    count_analyzer:
+      name: analyzer
+      in: query
+      description: Specifies the analyzer to apply when processing the query string.
+      schema:
+        type: string
+
+    count_analyze_wildcard:
+      name: analyze_wildcard
+      in: query
+      description: |
+        Determines whether wildcard and prefix queries should be analyzed.
+      schema:
+        type: boolean
+        default: false
+
+    count_default_operator:
+      name: default_operator
+      in: query
+      description: |
+        Defines the default boolean operator (`AND` or `OR`) for string queries.
+      schema:
+        type: string
+        enum: [AND, OR]
+        default: OR
+
+    count_df:
+      name: df
+      in: query
+      description: |
+        Specifies the default field to search when a field prefix is not included in the query string.
+      schema:
+        type: string
+
+    count_expand_wildcards:
+      name: expand_wildcards
+      in: query
+      description: |
+        Defines the types of indexes that wildcard expressions can match. Accepts comma-separated values: `all` (any index), `open` (open, non-hidden indexes), `closed` (closed, non-hidden indexes), `hidden` (hidden indexes), and `none` (disable wildcard matching).
+      schema:
+        type: string
+        enum: [all, open, closed, hidden, none]
+        default: open
+
+    count_ignore_unavailable:
+      name: ignore_unavailable
+      in: query
+      description: |
+        Determines whether missing or closed indexes should be included in the response.
+      schema:
+        type: boolean
+        default: false
+
+    count_lenient:
+      name: lenient
+      in: query
+      description: |
+        Allows Wazuh indexer to process queries with format inconsistencies, such as searching a text field for numeric values.
+      schema:
+        type: boolean
+        default: false
+
+    count_min_score:
+      name: min_score
+      in: query
+      description: |
+        Filters results to include only documents with a `_score` equal to or greater than the specified value.
+      schema:
+        type: number
+        format: float
+
+    count_routing:
+      name: routing
+      in: query
+      description: Routes the operation to a specific shard.
+      schema:
+        type: string
+
+    count_preference:
+      name: preference
+      in: query
+      description: Specifies the preferred shard or node to execute the count operation.
+      schema:
+        type: string
+
+    count_terminate_after:
+      name: terminate_after
+      in: query
+      description: |
+        Sets the maximum number of documents Wazuh indexer should process before stopping the request.
+      schema:
+        type: integer
+
+    # Explain API parameters
+    explain_analyzer:
+      name: analyzer
+      in: query
+      description: Specifies the analyzer to apply to the query string.
+      schema:
+        type: string
+
+    explain_analyze_wildcard:
+      name: analyze_wildcard
+      in: query
+      description: |
+        Determines whether wildcard and prefix queries should be analyzed.
+      schema:
+        type: boolean
+        default: false
+
+    explain_default_operator:
+      name: default_operator
+      in: query
+      description: |
+        Defines the default boolean operator (`AND` or `OR`) for query strings.
+      schema:
+        type: string
+        enum: [AND, OR]
+        default: OR
+
+    explain_df:
+      name: df
+      in: query
+      description: |
+        Sets the default field to search when no field prefix is provided in the query string.
+      schema:
+        type: string
+
+    explain_lenient:
+      name: lenient
+      in: query
+      description: |
+        Allows Wazuh indexer to process queries with format inconsistencies (e.g., searching a text field for a numeric value).
+      schema:
+        type: boolean
+        default: false
+
+    explain_preference:
+      name: preference
+      in: query
+      description: |
+        Determines which shard should be queried. Options include `_local` (prioritizes locally allocated shard replicas) and a custom string to target a specific replica. By default, Wazuh randomly selects shards.
+      schema:
+        type: string
+
+    explain_q:
+      name: q
+      in: query
+      description: Defines the query using the Lucene query string syntax.
+      schema:
+        type: string
+
+    explain_stored_fields:
+      name: stored_fields
+      in: query
+      description: |
+        If set to `true`, retrieves stored document fields instead of the document's `_source` field.
+      schema:
+        type: boolean
+        default: false
+
+    explain_routing:
+      name: routing
+      in: query
+      description: Routes the query operation to a specific shard.
+      schema:
+        type: string
+
+    explain_source:
+      name: _source
+      in: query
+      description: |
+        Specifies whether to include the `_source` field in the response.
+      schema:
+        type: boolean
+        default: true
+
+    explain_source_excludes:
+      name: _source_excludes
+      in: query
+      description: A comma-separated list of source fields to exclude from the query response.
+      schema:
+        type: string
+
+    explain_source_includes:
+      name: _source_includes
+      in: query
+      description: A comma-separated list of source fields to include in the query response.
+      schema:
+        type: string
+
+  schemas:
+    CountQuery:
+      type: object
+      properties:
+        query:
+          type: object
+          description: Specifies the search criteria to filter documents before counting.
+          properties:
+            term:
+              type: object
+              description: A term query that looks for an exact match in the specified field.
+              additionalProperties:
+                type: string
+                description: Indicates the field being queried.
+
+    CountResponse:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: The number of documents that match the query.
+        _shards:
+          type: object
+          properties:
+            total:
+              type: integer
+              description: The total number of shards queried in the request.
+            successful:
+              type: integer
+              description: The number of shards that successfully executed the count query.
+            skipped:
+              type: integer
+              description: |
+                The number of shards that were skipped, usually due to optimizations (e.g., empty shards or filtered indices).
+            failed:
+              type: integer
+              description: |
+                The number of shards where the query failed. If this is greater than `0`, part of the count request failed.
+
+    ExplainQuery:
+      type: object
+      properties:
+        query:
+          type: object
+          description: Defines the search criteria.
+          properties:
+            match:
+              type: object
+              description: Specifies the field to be searched and the value to match.
+              additionalProperties:
+                type: string
+
+    ExplainResponse:
+      type: object
+      properties:
+        _index:
+          type: string
+          description: The name of the index where the document is stored.
+        _id:
+          type: string
+          description: The unique identifier of the document being explained.
+        matched:
+          type: boolean
+          description: Indicates whether the document matches the query.
+        explanation:
+          type: object
+          description: |
+            Contains details on how the relevance score is calculated.
+          properties:
+            value:
+              type: number
+              description: The computed score.
+            description:
+              type: string
+              description: An explanation of the calculation performed.
+            details:
+              type: array
+              description: Any subcalculations involved.
+              items:
+                type: object
+
+    ExplainNotFoundResponse:
+      type: object
+      properties:
+        _index:
+          type: string
+        _id:
+          type: string
+        matched:
+          type: boolean
+
+    RefreshAnalyzerResponse:
+      type: object
+      properties:
+        _shards:
+          type: object
+          properties:
+            total:
+              type: integer
+              description: The total number of shards involved in the refresh request.
+            successful:
+              type: integer
+              description: The number of shards that successfully refreshed the search analyzers.
+            failed:
+              type: integer
+              description: |
+                The number of shards where the refresh failed. A non-zero value indicates issues during refresh.
+        successful_refresh_details:
+          type: array
+          items:
+            type: object
+            properties:
+              index:
+                type: string
+                description: The name of the index where the refresh was attempted.
+              refreshed_analyzers:
+                type: array
+                description: |
+                  A list of analyzers that were successfully refreshed. If empty, no analyzers met the criteria (e.g., no updateable analyzers).
+                items:
+                  type: string
+
+    RemoteClusterInfo:
+      type: object
+      additionalProperties:
+        type: object
+        properties:
+          connected:
+            type: boolean
+            description: |
+              This indicates whether the local cluster is currently connected to the remote cluster.
+          mode:
+            type: string
+            enum: [sniff, proxy]
+            description: |
+              The connection mode used: either `sniff` (auto-discover nodes) or `proxy` (use proxy addresses).
+          seeds:
+            type: array
+            description: |
+              A list of seed node addresses used to connect to the remote cluster (only present in sniff mode).
+            items:
+              type: string
+          max_connections_per_cluster:
+            type: integer
+            description: Maximum number of allowed connections to the remote cluster.
+          initial_connect_timeout:
+            type: string
+            format: time
+            description: Timeout setting for establishing the first connection.
+          skip_unavailable:
+            type: boolean
+            description: |
+              If set to `true`, the local cluster will skip this remote cluster during operations when it becomes unavailable.
+          num_nodes_connected:
+            type: integer
+            description: The number of currently active connections to nodes in the remote cluster.
+          max_socket_connections:
+            type: integer
+            description: The maximum number of socket connections allowed per cluster.
+
+    BadRequestError:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            root_cause:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                  reason:
+                    type: string
+        status:
+          type: integer
+
+    NotFoundError:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            root_cause:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                  reason:
+                    type: string
+                  index:
+                    type: string
+                  resource.id:
+                    type: string
+                  resource.type:
+                    type: string
+                  index_uuid:
+                    type: string
+            type:
+              type: string
+            reason:
+              type: string
+            index:
+              type: string
+            resource.id:
+              type: string
+            resource.type:
+              type: string
+            index_uuid:
+              type: string
+        status:
+          type: integer
+
+    InvalidIndexNameError:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            root_cause:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                  reason:
+                    type: string
+                  index:
+                    type: string
+                  index_uuid:
+                    type: string
+            type:
+              type: string
+            reason:
+              type: string
+            index:
+              type: string
+            index_uuid:
+              type: string
+        status:
+          type: integer
+
+    RemoteClusterNotFoundError:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            root_cause:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                  reason:
+                    type: string
+                  index:
+                    type: string
+                  resource.id:
+                    type: integer
+                  resource.type:
+                    type: string
+                  index_uuid:
+                    type: string
+            type:
+              type: string
+            reason:
+              type: string
+            index:
+              type: string
+            resource.id:
+              type: integer
+            resource.type:
+              type: string
+            index_uuid:
+              type: string
+
+  requestBodies:
+    CountRequest:
+      description: Query to filter documents before counting
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CountQuery'
+          example:
+
+    ExplainRequest:
+      description: Query to explain document matching
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ExplainQuery'
+          example:
+
+  responses:
+    CountSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CountResponse'
+          example:
+            count: 10
+            _shards:
+              total: 3
+              successful: 3
+              skipped: 0
+              failed: 0
+
+    ExplainSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ExplainResponse'
+          example:
+            _index: "wazuh-alerts-4.x-2025.02.15"
+            _id: "1"
+            matched: true
+            explanation:
+              value: 1.2039728
+              description: "weight(agent.id:001 in 0) [PerFieldSimilarity], result of:"
+              details:
+                - value: 1.2039728
+                  description: "score(freq=1.0), computed as boost * idf * tf from:"
+                  details:
+                    - value: 2.2
+                      description: "boost"
+                      details: []
+                    - value: 1.2039728
+                      description: "idf, computed as log(1 + (N - n + 0.5) / (n + 0.5)) from:"
+                      details:
+                        - value: 1
+                          description: "n, number of documents containing term"
+                          details: []
+                        - value: 4
+                          description: "N, total number of documents with field"
+                          details: []
+                    - value: 0.45454544
+                      description: "tf, computed as freq / (freq + k1 * (1 - b + b * dl / avgdl)) from:"
+                      details:
+                        - value: 1
+                          description: "freq, occurrences of term within document"
+                          details: []
+                        - value: 1.2
+                          description: "k1, term saturation parameter"
+                          details: []
+                        - value: 0.75
+                          description: "b, length normalization parameter"
+                          details: []
+                        - value: 1
+                          description: "dl, length of field"
+                          details: []
+                        - value: 1
+                          description: "avgdl, average length of field"
+                          details: []
+
+    ExplainNotFound:
+      description: Response to report a request not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ExplainNotFoundResponse'
+          example:
+            _index: "wazuh-alerts-4.x-2025.02.15"
+            _id: "0"
+            matched: false
+
+    RefreshAnalyzerSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RefreshAnalyzerResponse'
+          example:
+            _shards:
+              total: 3
+              successful: 3
+              failed: 0
+            successful_refresh_details:
+              - index: "wazuh-alerts-4.x-2025.03.22"
+                refreshed_analyzers: []
+
+    RemoteClusterInfoSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RemoteClusterInfo'
+          example:
+            remote_cluster_1:
+              connected: true
+              mode: "sniff"
+              seeds: ["192.168.1.10:9300", "192.168.1.11:9300"]
+              max_connections_per_cluster: 3
+              initial_connect_timeout: "30s"
+              skip_unavailable: false
+              num_nodes_connected: 2
+
+    CountBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InvalidIndexNameError'
+          example:
+            error:
+              root_cause:
+                - type: "invalid_index_name_exception"
+                  reason: "Invalid index name [_wazuh-alerts-4.x-2025.02.15], must not start with '_'."
+                  index: "_wazuh-alerts-4.x-2025.02.15"
+                  index_uuid: "_na_"
+              type: "invalid_index_name_exception"
+              reason: "Invalid index name [_wazuh-alerts-4.x-2025.02.15], must not start with '_'."
+              index: "_wazuh-alerts-4.x-2025.02.15"
+              index_uuid: "_na_"
+            status: 400
+
+    CountNotFound:
+      description: Response to report a request not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/NotFoundError'
+          example:
+            error:
+              root_cause:
+                - type: "index_not_found_exception"
+                  reason: "no such index [wazuh-alerts-4.x-2025.02.152]"
+                  index: "wazuh-alerts-4.x-2025.02.152"
+                  resource.id: "wazuh-alerts-4.x-2025.02.152"
+                  resource.type: "index_or_alias"
+                  index_uuid: "_na_"
+              type: "index_not_found_exception"
+              reason: "no such index [wazuh-alerts-4.x-2025.02.152]"
+              index: "wazuh-alerts-4.x-2025.02.152"
+              resource.id: "wazuh-alerts-4.x-2025.02.152"
+              resource.type: "index_or_alias"
+              index_uuid: "_na_"
+            status: 404
+
+    ExplainBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BadRequestError'
+          example:
+            error:
+              root_cause:
+                - type: "action_request_validation_exception"
+                  reason: "Validation Failed: 1: query is missing;"
+              type: "action_request_validation_exception"
+              reason: "Validation Failed: 1: query is missing;"
+            status: 400
+
+    RefreshAnalyzerBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InvalidIndexNameError'
+          example:
+            error:
+              root_cause:
+                - type: "invalid_index_name_exception"
+                  reason: "Invalid index name [_wazuh-alerts-4.x-2025.03.22], must not start with '_'."
+                  index: "_wazuh-alerts-4.x-2025.03.22"
+                  index_uuid: "_na_"
+              type: "invalid_index_name_exception"
+              reason: "Invalid index name [_wazuh-alerts-4.x-2025.03.22], must not start with '_'."
+              index: "_wazuh-alerts-4.x-2025.03.22"
+              index_uuid: "_na_"
+            status: 400
+
+    RefreshAnalyzerNotFound:
+      description: Response to report a request not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/NotFoundError'
+          example:
+            error:
+              root_cause:
+                - type: "index_not_found_exception"
+                  reason: "no such index [wazuh-alerts-4.x-2025.03.38]"
+                  index: "wazuh-alerts-4.x-2025.03.38"
+                  resource.id: "wazuh-alerts-4.x-2025.03.38"
+                  resource.type: "index_or_alias"
+                  index_uuid: "_na_"
+              type: "index_not_found_exception"
+              reason: "no such index [wazuh-alerts-4.x-2025.03.38]"
+              index: "wazuh-alerts-4.x-2025.03.38"
+              resource.id: "wazuh-alerts-4.x-2025.03.38"
+              resource.type: "index_or_alias"
+              index_uuid: "_na_"
+            status: 404
+
+    RemoteClusterBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BadRequestError'
+          example:
+            error:
+              root_cause:
+                - type: "illegal_argument_exception"
+                  reason: "request [/_remote/info] contains unrecognized parameter: [timeout]"
+              type: "illegal_argument_exception"
+              reason: "request [/_remote/info] contains unrecognized parameter: [timeout]"
+            status: 400
