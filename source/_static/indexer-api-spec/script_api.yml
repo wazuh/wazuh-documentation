@@ -115,13 +115,13 @@ paths:
         '200':
           $ref: '#/components/responses/ScriptDeleted'
         '400':
-          $ref: 'spec.yml#/components/responses/BadRequest'
+          $ref: '#/components/responses/ScriptDeleteBadRequest'
         '401':
           $ref: 'spec.yml#/components/responses/Unauthorized'
         '403':
-          $ref: 'spec.yml#/components/responses/Forbidden'
+          $ref: '#/components/responses/ScriptDeleteForbidden'
         '404':
-          $ref: '#/components/responses/ScriptNotFound'
+          $ref: '#/components/responses/ScriptDeleteNotFound'
 
   /_scripts/{SCRIPT_ID}/{CONTEXT}:
     put:
@@ -270,7 +270,7 @@ components:
     timeout:
       name: timeout
       in: query
-      description: The period of time to wait for a response. If a response is not received before the timeout value, the request fails and returns an error. Defaults to 30 seconds.
+      description: The period of time to wait for a response. If a response is not received before the timeout value, the request will be dropped.
       schema:
         type: string
         format: time
@@ -309,10 +309,10 @@ components:
               oneOf:
                 - type: string
                 - type: object
-              description: For scripts, a string containing the script's content. For search templates, an object that defines the template, supporting the
+              description: For scripts, a string containing the script's content. For search templates, an object that defines the template, supporting the same parameters as the Search API request body. Additionally, search templates allow the use of Mustache variables.
             params:
               type: object
-              description: Parameters for the script or search template. Uses same parameters as the Search API request body. Search templates allow the use of Mustache variables.
+              description: Parameters for the script or search template.
 
   responses:
     ScriptCreated:
@@ -389,7 +389,7 @@ components:
             properties:
               acknowledged:
                 type: boolean
-                description: Indicates whether the delete script request was received.
+                description: Whether the delete script request was received.
           example:
             acknowledged: true
 
@@ -732,57 +732,183 @@ components:
                 items:
                   type: string
               language_contexts:
-                type: object
-                description: Mapping of scripting languages to their allowed contexts.
-                additionalProperties:
-                  type: array
-                  items:
-                    type: string
+                type: array
+                description: Array of scripting languages and their allowed contexts.
+                items:
+                  type: object
+                  properties:
+                    language:
+                      type: string
+                      description: The scripting language name (e.g., painless, expression, mustache)
+                    contexts:
+                      type: array
+                      description: An array of contexts where the language is allowed (e.g., aggs, score, update)
+                      items:
+                        type: string
           example:
             types_allowed:
               - "inline"
               - "stored"
             language_contexts:
-              expression:
-                - "aggregation_selector"
-                - "aggs"
-                - "bucket_aggregation"
-                - "field"
-                - "filter"
-                - "number_sort"
-                - "score"
-                - "terms_set"
-              knn:
-                - "score"
-              mustache:
-                - "template"
-              opensearch_query_expression:
-                - "aggs"
-                - "filter"
-              painless:
-                - "aggregation_selector"
-                - "aggs"
-                - "aggs_combine"
-                - "aggs_init"
-                - "aggs_map"
-                - "aggs_reduce"
-                - "analysis"
-                - "bucket_aggregation"
-                - "field"
-                - "filter"
-                - "ingest"
-                - "interval"
-                - "moving-function"
-                - "number_sort"
-                - "painless_test"
-                - "processor_conditional"
-                - "score"
-                - "script_heuristic"
-                - "search"
-                - "similarity"
-                - "similarity_weight"
-                - "string_sort"
-                - "template"
-                - "terms_set"
-                - "trigger"
-                - "update" 
+              - language: "expression"
+                contexts:
+                  - "aggregation_selector"
+                  - "aggs"
+                  - "bucket_aggregation"
+                  - "field"
+                  - "filter"
+                  - "number_sort"
+                  - "score"
+                  - "terms_set"
+              - language: "knn"
+                contexts:
+                  - "score"
+              - language: "mustache"
+                contexts:
+                  - "template"
+              - language: "opensearch_query_expression"
+                contexts:
+                  - "aggs"
+                  - "filter"
+              - language: "painless"
+                contexts:
+                  - "aggregation_selector"
+                  - "aggs"
+                  - "aggs_combine"
+                  - "aggs_init"
+                  - "aggs_map"
+                  - "aggs_reduce"
+                  - "analysis"
+                  - "bucket_aggregation"
+                  - "field"
+                  - "filter"
+                  - "ingest"
+                  - "interval"
+                  - "moving-function"
+                  - "number_sort"
+                  - "painless_test"
+                  - "processor_conditional"
+                  - "score"
+                  - "script_heuristic"
+                  - "search"
+                  - "similarity"
+                  - "similarity_weight"
+                  - "string_sort"
+                  - "template"
+                  - "terms_set"
+                  - "trigger"
+                  - "update" 
+
+    ScriptDeleteBadRequest:
+      description: Bad request when deleting script.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  root_cause:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        reason:
+                          type: string
+                        index:
+                          type: string
+                        index_uuid:
+                          type: string
+                  type:
+                    type: string
+                  reason:
+                    type: string
+                  index:
+                    type: string
+                  index_uuid:
+                    type: string
+              status:
+                type: integer
+          example:
+            error:
+              root_cause:
+                - type: "invalid_index_name_exception"
+                  reason: "Invalid index name [_scripts], must not start with '_'."
+                  index: "_scripts"
+                  index_uuid: "_na_"
+              type: "invalid_index_name_exception"
+              reason: "Invalid index name [_scripts], must not start with '_'."
+              index: "_scripts"
+              index_uuid: "_na_"
+            status: 400
+
+    ScriptDeleteForbidden:
+      description: Permission denied when deleting script.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  root_cause:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        reason:
+                          type: string
+                  type:
+                    type: string
+                  reason:
+                    type: string
+              status:
+                type: integer
+          example:
+            error:
+              root_cause:
+                - type: "security_exception"
+                  reason: "no permissions for [indices:admin/analyze] and User [name=test, backend_roles=[], requestedTenant=null]"
+              type: "security_exception"
+              reason: "no permissions for [indices:admin/analyze] and User [name=test, backend_roles=[], requestedTenant=null]"
+            status: 403
+
+    ScriptDeleteNotFound:
+      description: Script not found when deleting.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  root_cause:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        reason:
+                          type: string
+                  type:
+                    type: string
+                  reason:
+                    type: string
+              status:
+                type: integer
+          example:
+            error:
+              root_cause:
+                - type: "resource_not_found_exception"
+                  reason: "stored script [my-script] does not exist and cannot be deleted"
+              type: "resource_not_found_exception"
+              reason: "stored script [my-script] does not exist and cannot be deleted"
+            status: 404 
