@@ -131,6 +131,39 @@ paths:
         - basicAuth: []
         - jwtAuth: []
 
+  /_aliases:
+    $ref: 'index_api.yml#/paths/~1_aliases'
+
+  /{target}/_alias/{alias_name}:
+    $ref: 'index_api.yml#/paths/~1{target}~1_alias~1{alias_name}'
+
+  /_alias/{alias_name}:
+    $ref: 'index_api.yml#/paths/~1_alias~1{alias_name}'
+
+  /{target}/_aliases/{alias_name}:
+    $ref: 'index_api.yml#/paths/~1{target}~1_aliases~1{alias_name}'
+
+  /_aliases/{alias_name}:
+    $ref: 'index_api.yml#/paths/~1_aliases~1{alias_name}'
+
+  /{target}/_alias:
+    $ref: 'index_api.yml#/paths/~1{target}~1_alias'
+
+  /{target}/_aliases:
+    $ref: 'index_api.yml#/paths/~1{target}~1_aliases'
+
+  /_alias:
+    $ref: 'index_api.yml#/paths/~1_alias'
+
+  /{index}/_block/{block}:
+    $ref: 'index_api.yml#/paths/~1{index}~1_block~1{block}'
+
+  /_block/{block}:
+    $ref: 'index_api.yml#/paths/~1_block~1{block}'
+
+  /{target}/_cache/clear:
+    $ref: 'index_api.yml#/paths/~1{target}~1_cache~1clear'
+
   /{index}/_analyze:
     parameters:
       - $ref: 'analyze_api.yml#/components/parameters/index'
@@ -3432,7 +3465,7 @@ components:
     Unauthorized:
       description: Response to report an unauthorized request
       content:
-        application/json:
+        text/plain:
           schema:
             type: string
           example: "Unauthorized"
@@ -3493,6 +3526,8 @@ tags:
       These APIs are categorized into single-document operations and multi-document operations. Multi-document operations are more efficient than processing multiple individual requests separately, so it is recommended to use them whenever possible for better performance.
   - name: Explain
     description: The Explain API in Wazuh indexer  provides a detailed breakdown of how a document matches a given query and how its relevance score (`_score`) is calculated. It helps in understanding why certain documents rank higher or lower in search results.
+  - name: Index APIs
+    description: Index API operations allow you to manage indexes within your cluster. With these operations, you can create, delete, close, and perform various other tasks related to index management.
   - name: Index rollups API
     description: You can use the index rollup operations to programmatically work with index rollup jobs.
   - name: Index state management API

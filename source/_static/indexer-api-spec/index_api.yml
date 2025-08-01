@@ -1,10 +1,1013 @@
 paths:
+  /_aliases:
+    post:
+      tags: [Index APIs]
+      summary: Alias
+      description: |
+        An alias in Wazuh indexer serves as a virtual reference to one or more indexes, enabling seamless reindexing and data management without downtime.
+      operationId: postAliases
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/timeout'
+      requestBody:
+        $ref: '#/components/requestBodies/AliasRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/AliasSuccess'
+        '400':
+          $ref: '#/components/responses/AliasBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /{target}/_alias/{alias_name}:
+    parameters:
+      - $ref: '#/components/parameters/target'
+      - $ref: '#/components/parameters/alias_name'
+    post:
+      tags: [Index APIs]
+      summary: Create or Update Alias (Target POST)
+      description: |
+        The Create or Update Alias API allows you to associate one or more indexes with an alias or update the settings of an existing alias.
+      operationId: postTargetAliasAliasName
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/timeout'
+      requestBody:
+        $ref: '#/components/requestBodies/CreateUpdateAliasRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/CreateUpdateAliasSuccess'
+        '400':
+          $ref: '#/components/responses/CreateUpdateAliasBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    put:
+      tags: [Index APIs]
+      summary: Create or Update Alias (Target PUT)
+      description: |
+        The Create or Update Alias API allows you to associate one or more indexes with an alias or update the settings of an existing alias.
+      operationId: putTargetAliasAliasName
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/timeout'
+      requestBody:
+        $ref: '#/components/requestBodies/CreateUpdateAliasRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/CreateUpdateAliasSuccess'
+        '400':
+          $ref: '#/components/responses/CreateUpdateAliasBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /_alias/{alias_name}:
+    parameters:
+      - $ref: '#/components/parameters/alias_name'
+    post:
+      tags: [Index APIs]
+      summary: Create or Update Alias (Alias POST)
+      description: |
+        The Create or Update Alias API allows you to associate one or more indexes with an alias or update the settings of an existing alias.
+      operationId: postAliasAliasName
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/timeout'
+      requestBody:
+        $ref: '#/components/requestBodies/CreateUpdateAliasRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/CreateUpdateAliasSuccess'
+        '400':
+          $ref: '#/components/responses/CreateUpdateAliasBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    put:
+      tags: [Index APIs]
+      summary: Create or Update Alias (Alias PUT)
+      description: |
+        The Create or Update Alias API allows you to associate one or more indexes with an alias or update the settings of an existing alias.
+      operationId: putAliasAliasName
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/timeout'
+      requestBody:
+        $ref: '#/components/requestBodies/CreateUpdateAliasRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/CreateUpdateAliasSuccess'
+        '400':
+          $ref: '#/components/responses/CreateUpdateAliasBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /{target}/_aliases/{alias_name}:
+    parameters:
+      - $ref: '#/components/parameters/target'
+      - $ref: '#/components/parameters/alias_name'
+    post:
+      tags: [Index APIs]
+      summary: Create or Update Alias (Target Aliases POST)
+      description: |
+        The Create or Update Alias API allows you to associate one or more indexes with an alias or update the settings of an existing alias.
+      operationId: postTargetAliasesAliasName
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/timeout'
+      requestBody:
+        $ref: '#/components/requestBodies/CreateUpdateAliasRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/CreateUpdateAliasSuccess'
+        '400':
+          $ref: '#/components/responses/CreateUpdateAliasBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    put:
+      tags: [Index APIs]
+      summary: Create or Update Alias (Target Aliases PUT)
+      description: |
+        The Create or Update Alias API allows you to associate one or more indexes with an alias or update the settings of an existing alias.
+      operationId: putTargetAliasesAliasName
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/timeout'
+      requestBody:
+        $ref: '#/components/requestBodies/CreateUpdateAliasRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/CreateUpdateAliasSuccess'
+        '400':
+          $ref: '#/components/responses/CreateUpdateAliasBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /_aliases/{alias_name}:
+    parameters:
+      - $ref: '#/components/parameters/alias_name'
+    post:
+      tags: [Index APIs]
+      summary: Create or Update Alias (POST)
+      description: |
+        The Create or Update Alias API allows you to associate one or more indexes with an alias or update the settings of an existing alias.
+      operationId: postAliasesAliasName
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/timeout'
+      requestBody:
+        $ref: '#/components/requestBodies/CreateUpdateAliasRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/CreateUpdateAliasSuccess'
+        '400':
+          $ref: '#/components/responses/CreateUpdateAliasBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    put:
+      tags: [Index APIs]
+      summary: Create or Update Alias (PUT)
+      description: |
+        The Create or Update Alias API allows you to associate one or more indexes with an alias or update the settings of an existing alias.
+      operationId: putAliasesAliasName
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/timeout'
+      requestBody:
+        $ref: '#/components/requestBodies/CreateUpdateAliasRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/CreateUpdateAliasSuccess'
+        '400':
+          $ref: '#/components/responses/CreateUpdateAliasBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /{target}/_alias:
+    parameters:
+      - $ref: '#/components/parameters/target'
+    put:
+      tags: [Index APIs]
+      summary: Create or Update Alias (Target Alias PUT)
+      description: |
+        The Create or Update Alias API allows you to associate one or more indexes with an alias or update the settings of an existing alias.
+      operationId: putTargetAlias
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/timeout'
+      requestBody:
+        $ref: '#/components/requestBodies/CreateUpdateAliasRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/CreateUpdateAliasSuccess'
+        '400':
+          $ref: '#/components/responses/CreateUpdateAliasBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /{target}/_aliases:
+    parameters:
+      - $ref: '#/components/parameters/target'
+    put:
+      tags: [Index APIs]
+      summary: Create or Update Alias (Target Aliases PUT)
+      description: |
+        The Create or Update Alias API allows you to associate one or more indexes with an alias or update the settings of an existing alias.
+      operationId: putTargetAliases
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/timeout'
+      requestBody:
+        $ref: '#/components/requestBodies/CreateUpdateAliasRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/CreateUpdateAliasSuccess'
+        '400':
+          $ref: '#/components/responses/CreateUpdateAliasBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /_alias:
+    put:
+      tags: [Index APIs]
+      summary: Create or Update Alias (Alias PUT)
+      description: |
+        The Create or Update Alias API allows you to associate one or more indexes with an alias or update the settings of an existing alias.
+      operationId: putAlias
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/timeout'
+      requestBody:
+        $ref: '#/components/requestBodies/CreateUpdateAliasRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/CreateUpdateAliasSuccess'
+        '400':
+          $ref: '#/components/responses/CreateUpdateAliasBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /{index}/_block/{block}:
+    parameters:
+      - $ref: '#/components/parameters/index'
+      - $ref: '#/components/parameters/block'
+    put:
+      tags: [Index APIs]
+      summary: Blocks (Index PUT)
+      description: |
+        The Blocks API allows you to restrict specific operations on a given index. You can apply different types of blocks to prevent write, read, or metadata actions. For instance, applying a write block ensures that all shards of the index acknowledge the restriction before confirming success. Any ongoing write operations must finish before the block is enforced.
+      operationId: putIndexBlockBlock
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/ignore_unavailable'
+        - $ref: '#/components/parameters/allow_no_indices'
+        - $ref: '#/components/parameters/expand_wildcards'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/timeout'
+      responses:
+        '200':
+          $ref: '#/components/responses/BlocksSuccess'
+        '400':
+          $ref: '#/components/responses/BlocksBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /_block/{block}:
+    parameters:
+      - $ref: '#/components/parameters/block'
+    put:
+      tags: [Index APIs]
+      summary: Blocks (Global PUT)
+      description: |
+        The Blocks API allows you to restrict specific operations on a given index. You can apply different types of blocks to prevent write, read, or metadata actions. For instance, applying a write block ensures that all shards of the index acknowledge the restriction before confirming success. Any ongoing write operations must finish before the block is enforced.
+      operationId: putBlockBlock
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/ignore_unavailable'
+        - $ref: '#/components/parameters/allow_no_indices'
+        - $ref: '#/components/parameters/expand_wildcards'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/timeout'
+      responses:
+        '200':
+          $ref: '#/components/responses/BlocksSuccess'
+        '400':
+          $ref: '#/components/responses/BlocksBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /{target}/_cache/clear:
+    parameters:
+      - $ref: '#/components/parameters/target'
+    post:
+      tags: [Index APIs]
+      summary: Clear cache
+      description: |
+        The Clear Cache API removes cached data from one or more indexes. If used on a data stream, it clears the caches of all associated backing indexes.
+      operationId: postTargetCacheClear
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/allow_no_indices'
+        - $ref: '#/components/parameters/expand_wildcards'
+        - $ref: '#/components/parameters/fielddata'
+        - $ref: '#/components/parameters/fields'
+        - $ref: '#/components/parameters/ignore_unavailable'
+        - $ref: '#/components/parameters/query'
+        - $ref: '#/components/parameters/request'
+      responses:
+        '200':
+          $ref: '#/components/responses/ClearCacheSuccess'
+        '400':
+          $ref: '#/components/responses/ClearCacheBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
 
 components:
   parameters:
+    target:
+      name: target
+      in: path
+      required: false
+      description: |
+        A comma-separated list of index names. Supports wildcard expressions (`*`). To apply the operation to all indexes in the cluster, use `_all` or `*`.
+      schema:
+        type: string
+      example: "wazuh-alerts-4.x-2025.03.15"
+
+    alias_name:
+      name: alias-name
+      in: path
+      required: false
+      description: |
+        The name of the alias to create or update.
+      schema:
+        type: string
+      example: "wazuh-alerts-4.x-2025.03.15-alias"
+
+    index:
+      name: index
+      in: path
+      required: true
+      description: |
+        Specifies the index or list of indexes to operate on. You can provide a single index name, a comma-separated list of multiple indexes, or use _all or * to operate on all indexes in the cluster.
+      schema:
+        type: string
+      example: "wazuh-alerts-4.x-2025.03.12"
+
+    block:
+      name: block
+      in: path
+      required: true
+      description: |
+        Defines the type of block to set on the specified index. Valid options include:
+        - `metadata`: Disables all metadata changes, such as closing the index.
+        - `read`: Disables any read operations.
+        - `read_only`: Disables any write operations and metadata changes.
+        - `write`: Disables write operations, but still allows metadata updates.
+      schema:
+        type: string
+        enum: [metadata, read, read_only, write]
+      example: "write"
+
+    cluster_manager_timeout:
+      name: cluster_manager_timeout
+      in: query
+      required: false
+      description: |
+        Time to wait for a response from the cluster manager node.
+      schema:
+        type: string
+        format: duration
+        default: '30s'
+
+    timeout:
+      name: timeout
+      in: query
+      required: false
+      description: |
+        Time to wait for a response from the cluster.
+      schema:
+        type: string
+        format: duration
+        default: '30s'
+
+    ignore_unavailable:
+      name: ignore_unavailable
+      in: query
+      required: false
+      description: |
+        If set to `false`, the request will return an error when it targets an index that is either missing or closed.
+      schema:
+        type: boolean
+        default: false
+
+    allow_no_indices:
+      name: allow_no_indices
+      in: query
+      required: false
+      description: |
+        If `false`, the API will return an error when a wildcard pattern, alias, or `_all` only matches closed or nonexistent indexes, even if open indexes are specified.
+      schema:
+        type: boolean
+        default: true
+
+    expand_wildcards:
+      name: expand_wildcards
+      in: query
+      required: false
+      description: |
+        Specifies the types of indexes that wildcard expressions should match. If data streams are included in the request, this also determines whether hidden streams are matched. Accepts comma-separated values like `open,hidden`.
+      schema:
+        type: string
+        enum: [all, open, closed, hidden, none]
+        default: open
+
 
   requestBodies:
+    AliasRequest:
+      description: |
+        Request body for alias operations
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              actions:
+                type: array
+                description: |
+                  List of actions to perform on the index. Valid options includes add, remove, and remove_index. You must have at least one action in the array.
+                items:
+                  type: object
+                  properties:
+                    add:
+                      type: object
+                      description: |
+                        Adds an alias to the specified index.
+                      properties:
+                        index:
+                          type: string
+                          description: |
+                            Name of the index to associate with the alias. Supports wildcard expressions.
+                        indices:
+                          type: array
+                          items:
+                            type: string
+                          description: |
+                            List of index names to associate with the alias.
+                        alias:
+                          type: string
+                          description: |
+                            The name of the alias.
+                        aliases:
+                          type: array
+                          items:
+                            type: string
+                          description: |
+                            List of alias names.
+                        filter:
+                          type: object
+                          description: |
+                            A filter to apply to the alias, allowing it to point to a subset of the index.
+                        is_hidden:
+                          type: boolean
+                          description: |
+                            Indicates if the alias should be hidden from results that include wildcard expressions.
+                        must_exist:
+                          type: boolean
+                          description: |
+                            Specifies whether the alias to remove must exist.
+                        is_write_index:
+                          type: boolean
+                          description: |
+                            Designates the index as a write index. An alias can have only one write index at a time.
+                        routing:
+                          type: string
+                          description: |
+                            Custom value to assign to a shard for specific operations.
+                        index_routing:
+                          type: string
+                          description: |
+                            Custom value to assign to a shard specifically for index operations.
+                        search_routing:
+                          type: string
+                          description: |
+                            Custom value to assign to a shard specifically for search operations.
+                    remove:
+                      type: object
+                      description: |
+                        Removes an alias from the specified index.
+                      properties:
+                        index:
+                          type: string
+                          description: |
+                            Name of the index to associate with the alias. Supports wildcard expressions.
+                        indices:
+                          type: array
+                          items:
+                            type: string
+                          description: |
+                            List of index names to associate with the alias.
+                        alias:
+                          type: string
+                          description: |
+                            The name of the alias.
+                        aliases:
+                          type: array
+                          items:
+                            type: string
+                          description: |
+                            List of alias names.
+                        filter:
+                          type: object
+                          description: |
+                            A filter to apply to the alias, allowing it to point to a subset of the index.
+                        is_hidden:
+                          type: boolean
+                          description: |
+                            Indicates if the alias should be hidden from results that include wildcard expressions.
+                        must_exist:
+                          type: boolean
+                          description: |
+                            Specifies whether the alias to remove must exist.
+                        is_write_index:
+                          type: boolean
+                          description: |
+                            Designates the index as a write index. An alias can have only one write index at a time.
+                        routing:
+                          type: string
+                          description: |
+                            Custom value to assign to a shard for specific operations.
+                        index_routing:
+                          type: string
+                          description: |
+                            Custom value to assign to a shard specifically for index operations.
+                        search_routing:
+                          type: string
+                          description: |
+                            Custom value to assign to a shard specifically for search operations.
+                    remove_index:
+                      type: object
+                      description: |
+                        Deletes an index.
+                      properties:
+                        index:
+                          type: string
+                          description: |
+                            Name of the index to associate with the alias. Supports wildcard expressions.
+                        indices:
+                          type: array
+                          items:
+                            type: string
+                          description: |
+                            List of index names to associate with the alias.
+                        alias:
+                          type: string
+                          description: |
+                            The name of the alias.
+                        aliases:
+                          type: array
+                          items:
+                            type: string
+                          description: |
+                            List of alias names.
+                        filter:
+                          type: object
+                          description: |
+                            A filter to apply to the alias, allowing it to point to a subset of the index.
+                        is_hidden:
+                          type: boolean
+                          description: |
+                            Indicates if the alias should be hidden from results that include wildcard expressions.
+                        must_exist:
+                          type: boolean
+                          description: |
+                            Specifies whether the alias to remove must exist.
+                        is_write_index:
+                          type: boolean
+                          description: |
+                            Designates the index as a write index. An alias can have only one write index at a time.
+                        routing:
+                          type: string
+                          description: |
+                            Custom value to assign to a shard for specific operations.
+                        index_routing:
+                          type: string
+                          description: |
+                            Custom value to assign to a shard specifically for index operations.
+                        search_routing:
+                          type: string
+                          description: |
+                            Custom value to assign to a shard specifically for search operations.
+          example:
+            actions:
+              - add:
+                  index: "wazuh-alerts-4.x-2025.03.12"
+                  alias: "wazuh-alerts-4.x-2025.03.12-alias1"
+
+    CreateUpdateAliasRequest:
+      description: |
+        Request body for creating or updating aliases
+      required: false
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              index:
+                type: string
+                description: |
+                  A comma-separated list of indexes to associate with the alias. If specified, this value overrides the index name in the URL path.
+              alias:
+                type: string
+                description: |
+                  The name of the alias. If provided, it overrides the alias name in the URL path.
+              is_write_index:
+                type: boolean
+                description: |
+                  Indicates whether the associated index should act as the write index. Only one write index is allowed per alias. If an alias points to multiple indexes, write requests are directed only to the designated write index.
+              routing:
+                type: string
+                description: |
+                  Custom value to assign to a shard for specific operations.
+              index_routing:
+                type: string
+                description: |
+                  Custom value to assign to a shard specifically for index operations.
+              search_routing:
+                type: string
+                description: |
+                  Custom value to assign to a shard specifically for search operations.
+              filter:
+                type: object
+                description: |
+                  A query filter that limits the alias to a subset of the index data.
+          example:
+            routing: "test"
+
 
   responses:
+    AliasSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AcknowledgedResponse'
+          example:
+            acknowledged: true
+
+    CreateUpdateAliasSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AcknowledgedResponse'
+          example:
+            acknowledged: true
+
+    BlocksSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/ShardsAcknowledgedResponse'
+              - type: object
+                properties:
+                  indices:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        description: |
+                          The name of the index where the block was applied.
+                      blocked:
+                        type: boolean
+                        description: |
+                          Indicates whether the block was successfully set (true) or not (false) for the specified index.
+          example:
+            acknowledged: true
+            shards_acknowledged: true
+            indices:
+              "wazuh-alerts-4.x-2025.03.12":
+                blocked: true
+
+    ClearCacheSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ShardsResponse'
+          example:
+            _shards:
+              total: 3
+              successful: 3
+              failed: 0
+
+    AliasBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              root_cause:
+                - type: "illegal_argument_exception"
+                  reason: "No action specified"
+              type: "illegal_argument_exception"
+              reason: "No action specified"
+            status: 400
+
+    CreateUpdateAliasBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IndexErrorResponse'
+          example:
+            error:
+              root_cause:
+                - type: "invalid_index_name_exception"
+                  reason: "Invalid index name [_wazuh-alerts-4.x-2025.03.15], must not start with '_'."
+                  index: "_wazuh-alerts-4.x-2025.03.15"
+                  index_uuid: "_na_"
+              type: "invalid_index_name_exception"
+              reason: "Invalid index name [_wazuh-alerts-4.x-2025.03.15], must not start with '_'."
+              index: "_wazuh-alerts-4.x-2025.03.15"
+              index_uuid: "_na_"
+            status: 400
+
+    BlocksBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IndexErrorResponse'
+          example:
+            error:
+              root_cause:
+                - type: "invalid_index_name_exception"
+                  reason: "Invalid index name [_wazuh-alerts-4.x-2025.03.22], must not start with '_'."
+                  index: "_wazuh-alerts-4.x-2025.03.22"
+                  index_uuid: "_na_"
+              type: "invalid_index_name_exception"
+              reason: "Invalid index name [_wazuh-alerts-4.x-2025.03.22], must not start with '_'."
+              index: "_wazuh-alerts-4.x-2025.03.22"
+              index_uuid: "_na_"
+            status: 400
+
+
+    ClearCacheBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IndexErrorResponse'
+          example:
+            error:
+              root_cause:
+                - type: "invalid_index_name_exception"
+                  reason: "Invalid index name [_wazuh-alerts-4.x-2025.03.12], must not start with '_'."
+                  index: "_wazuh-alerts-4.x-2025.03.12"
+                  index_uuid: "_na_"
+              type: "invalid_index_name_exception"
+              reason: "Invalid index name [_wazuh-alerts-4.x-2025.03.12], must not start with '_'."
+              index: "_wazuh-alerts-4.x-2025.03.12"
+              index_uuid: "_na_"
+            status: 400
+
+    NotFound:
+      description: Response to report a request not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  root_cause:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        reason:
+                          type: string
+                        index:
+                          type: string
+                        resource.id:
+                          type: integer
+                        resource.type:
+                          type: string
+                        index_uuid:
+                          type: string
+                  type:
+                    type: string
+                  reason:
+                    type: string
+                  index:
+                    type: string
+                  resource.id:
+                    type: integer
+                  resource.type:
+                    type: string
+                  index_uuid:
+                    type: string
+              status:
+                type: integer
+          example:
+            error:
+              root_cause:
+                - type: "index_not_found_exception"
+                  reason: "no such index [wazuh-alerts-4.x-2025.03.42]"
+                  index: "wazuh-alerts-4.x-2025.03.42"
+                  resource.id: "wazuh-alerts-4.x-2025.03.42"
+                  resource.type: "index_or_alias"
+                  index_uuid: "_na_"
+              type: "index_not_found_exception"
+              reason: "no such index [wazuh-alerts-4.x-2025.03.42]"
+              index: "wazuh-alerts-4.x-2025.03.42"
+              resource.id: "wazuh-alerts-4.x-2025.03.42"
+              resource.type: "index_or_alias"
+              index_uuid: "_na_"
+            status: 404
 
   schemas:
+    # Common error response structure
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            root_cause:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                  reason:
+                    type: string
+            type:
+              type: string
+            reason:
+              type: string
+        status:
+          type: integer
+
+    # Error response with index and index_uuid fields
+    IndexErrorResponse:
+      allOf:
+        - $ref: '#/components/schemas/ErrorResponse'
+        - type: object
+          properties:
+            error:
+              type: object
+              properties:
+                root_cause:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      type:
+                        type: string
+                      reason:
+                        type: string
+                      index:
+                        type: string
+                      index_uuid:
+                        type: string
+                index:
+                  type: string
+                index_uuid:
+                  type: string
+
+    # Common success response structure
+    AcknowledgedResponse:
+      type: object
+      properties:
+        acknowledged:
+          type: boolean
+          description: |
+            Indicates whether the request was successfully received and processed by the cluster.
+
+    # Success response with shards_acknowledged
+    ShardsAcknowledgedResponse:
+      allOf:
+        - $ref: '#/components/schemas/AcknowledgedResponse'
+        - type: object
+          properties:
+            shards_acknowledged:
+              type: boolean
+              description: |
+                Confirms that all primary and replica shards acknowledged the operation.
+
