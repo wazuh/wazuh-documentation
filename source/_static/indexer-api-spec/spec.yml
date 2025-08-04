@@ -173,6 +173,9 @@ paths:
   /{index}:
     $ref: 'index_api.yml#/paths/~1{index}'
 
+  /_index_template/{template_name}:
+    $ref: 'index_api.yml#/paths/~1_index_template~1{template_name}'
+
   /{index}/_analyze:
     parameters:
       - $ref: 'analyze_api.yml#/components/parameters/index'

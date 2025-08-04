@@ -557,6 +557,81 @@ paths:
         '403':
           $ref: 'spec.yml#/components/responses/Forbidden'
 
+  /_index_template/{template_name}:
+    parameters:
+      - $ref: '#/components/parameters/template_name'
+    put:
+      tags: [Index APIs]
+      summary: Create or update index template (PUT)
+      description: |
+        The Create or Update Index Template API allows you to define index templates with preset mappings and settings, or modify existing templates.
+      operationId: putIndexTemplate
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/create'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+      requestBody:
+        $ref: '#/components/requestBodies/IndexTemplateRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/IndexTemplateSuccess'
+        '400':
+          $ref: '#/components/responses/IndexTemplateBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+
+    post:
+      tags: [Index APIs]
+      summary: Create or update index template (POST)
+      description: |
+        The Create or Update Index Template API allows you to define index templates with preset mappings and settings, or modify existing templates.
+      operationId: postIndexTemplate
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/create'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+      requestBody:
+        $ref: '#/components/requestBodies/IndexTemplateRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/IndexTemplateSuccess'
+        '400':
+          $ref: '#/components/responses/IndexTemplateBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+
+    get:
+      tags: [Index APIs]
+      summary: Get index template
+      description: |
+        The Get Index Template API returns information about one or more index templates.
+      operationId: getIndexTemplate
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/create'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/flat_settings'
+      responses:
+        '200':
+          $ref: '#/components/responses/GetIndexTemplateSuccess'
+        '400':
+          $ref: '#/components/responses/GetIndexTemplateBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/GetIndexTemplateNotFound'
 
 components:
   parameters:
@@ -738,6 +813,34 @@ components:
         type: string
         format: duration
         default: '1h'
+
+    flat_settings:
+      name: flat_settings
+      in: query
+      required: false
+      description: |
+        Returns index settings in a simplified flat key-value format if set to `true`. This improves readability, especially for deeply nested configurations. For example, `"index": { "creation_date": "123456789" }` becomes `"index.creation_date": "123456789"`.
+      schema:
+        type: boolean
+
+    include_defaults:
+      name: include_defaults
+      in: query
+      required: false
+      description: |
+        Specifies whether the response should include default index settings. This is helpful for identifying setting names and values that can be customized.
+      schema:
+        type: boolean
+
+    template_name:
+      name: template_name
+      in: path
+      required: true
+      description: |
+        The name of the index template.
+      schema:
+        type: string
+      example: "alias-template"
 
 
   requestBodies:
@@ -1019,6 +1122,102 @@ components:
                   type: "integer"
             aliases:
               "sample-alias1": {}
+
+    IndexTemplateRequest:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              index_patterns:
+                type: array
+                items:
+                  type: string
+                description: |
+                  Array of wildcard patterns used to match the names of data streams and indexes created when the template is applied. This field is required.
+              composed_of:
+                type: array
+                items:
+                  type: string
+                description: |
+                  An ordered list of component template names. These templates are combined in the specified sequence. This field is optional.
+              data_stream:
+                type: object
+                description: |
+                  If included, the request sets up data streams and their backing indexes according to the template. This requires a matching index template. It can also be combined with the hidden setting to make backing indexes hidden when set to `true`. This field is optional.
+              _meta:
+                type: object
+                description: |
+                  A metadata used to describe or add details about the index template. This field is optional.
+              priority:
+                type: integer
+                description: |
+                  A numeric value that determines the priority of index templates when multiple templates match. The one with the highest priority is applied. If not specified, the default is `0`, which is the lowest priority. Optional field.
+              template:
+                type: object
+                description: |
+                  Contains the actual template definition, including aliases, mappings, and settings. Optional field.
+                properties:
+                  aliases:
+                    type: object
+                    description: |
+                      Specify aliases to be linked with the template. This is required when the template field is included in the request body and supports defining multiple aliases.
+                    additionalProperties:
+                      type: object
+                      description: |
+                        The alias object can include the following optional parameters.
+                      properties:
+                        filter:
+                          type: object
+                          description: |
+                            A DSL query that restricts which documents are accessible through the alias.
+                        index_routing:
+                          type: string
+                          description: |
+                            Defines the routing value specifically for indexing operations. If provided, it overrides any general routing value for indexing.
+                        is_hidden:
+                          type: boolean
+                          description: |
+                            If set to `true`, the alias is hidden. All indexes associated with the alias must have the same setting for this parameter.
+                          default: false
+                        is_write_index:
+                          type: boolean
+                          description: |
+                            Specifies whether the index is the write index for the alias.
+                          default: false
+                        routing:
+                          type: string
+                          description: |
+                            Sets a custom routing value used for both indexing and searching operations.
+                        search_routing:
+                          type: string
+                          description: |
+                            A value that routes search operations to a specific shard. If specified, it overrides the general routing setting for searches.
+                  settings:
+                    type: object
+                  mappings:
+                    type: object
+              version:
+                type: integer
+                description: |
+                  This is used to track or manage versions of index templates. Optional field.
+              context:
+                type: object
+                description: |
+                  This parameter defines use-case-specific, predefined templates that can be applied to an index. Among all defined template configurations, those provided via context take precedence. Optional field.
+          example:
+            index_patterns: ["wazuh-alerts-4.x-*"]
+            template:
+              settings:
+                number_of_shards: 1
+              aliases:
+                alias1: {}
+                alias2:
+                  filter:
+                    term:
+                      "user.id": "wazuh"
+                  routing: "shard-1"
+                "{index}-alias": {}
 
   responses:
     AliasSuccess:
@@ -1315,6 +1514,116 @@ components:
               resource.id: "wazuh-alerts-4.x-2025.03.42"
               resource.type: "index_or_alias"
               index_uuid: "_na_"
+            status: 404
+
+    IndexTemplateSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AcknowledgedResponse'
+          example:
+            acknowledged: true
+
+    IndexTemplateBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              root_cause:
+                - type: "parse_exception"
+                  reason: "request body is required"
+              type: "parse_exception"
+              reason: "request body is required"
+            status: 400
+
+    GetIndexTemplateSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              index_templates:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      description: |
+                        The name assigned to the index template.
+                    index_template:
+                      type: object
+                      properties:
+                        index_patterns:
+                          type: array
+                          items:
+                            type: string
+                          description: |
+                            A list of patterns used to match index names. When a new index is created that matches the pattern, this template is automatically applied.
+                        template:
+                          type: object
+                          description: |
+                            Defines the index-level settings, mappings, and aliases that should be applied when an index matches the pattern.
+                        composed_of:
+                          type: array
+                          items:
+                            type: string
+                          description: |
+                            A list of component templates that are combined to form this index template.
+          example:
+            index_templates:
+              - name: "alias-template"
+                index_template:
+                  index_patterns:
+                    - "wazuh-alerts-4.x*"
+                  template:
+                    settings:
+                      index:
+                        number_of_shards: "1"
+                    aliases:
+                      alias1: {}
+                      "{index}-alias": {}
+                      alias2:
+                        filter:
+                          term:
+                            "user.id": "wazuh"
+                        index_routing: "shard-1"
+                        search_routing: "shard-1"
+                  composed_of: []
+
+    GetIndexTemplateBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              root_cause:
+                - type: "illegal_argument_exception"
+                  reason: "request [/_index_template/alias-template] contains unrecognized parameter: [create]"
+              type: "illegal_argument_exception"
+              reason: "request [/_index_template/alias-template] contains unrecognized parameter: [create]"
+            status: 400
+
+    GetIndexTemplateNotFound:
+      description: Response to report a request not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              root_cause:
+                - type: "resource_not_found_exception"
+                  reason: "index template matching [alias-templat] not found"
+              type: "resource_not_found_exception"
+              reason: "index template matching [alias-templat] not found"
             status: 404
 
   schemas:
