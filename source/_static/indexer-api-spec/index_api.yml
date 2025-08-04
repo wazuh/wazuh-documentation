@@ -615,6 +615,41 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 
+  /{target_index}/_mapping:
+    parameters:
+      - $ref: '#/components/parameters/target_index_mapping'
+    put:
+      tags: [Index APIs]
+      summary: Create or update mappings
+      description: |
+        To create or add mappings and fields to an index, you can use the PUT mapping API. If the mapping already exists, this operation will update it.
+
+        However, this operation cannot be used to modify mappings that are already applied to existing data in the index. To update those mappings, you must first create a new index with the desired mappings and then use the [Reindex API](https://documentation.wazuh.com/indexer-api/user-manual/indexer-api/reference.html#operation/reindexDocuments) to transfer the documents from the old index to the new one.
+      operationId: putTargetIndexMapping
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/allow_no_indices'
+        - $ref: '#/components/parameters/expand_wildcards'
+        - $ref: '#/components/parameters/ignore_unavailable'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/write_index_only'
+      requestBody:
+        $ref: '#/components/requestBodies/MappingRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/MappingSuccess'
+        '400':
+          $ref: '#/components/responses/MappingBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
   /_index_template/{template_name}:
     parameters:
       - $ref: '#/components/parameters/template_name'
@@ -690,6 +725,172 @@ paths:
           $ref: 'spec.yml#/components/responses/Forbidden'
         '404':
           $ref: '#/components/responses/GetIndexTemplateNotFound'
+
+    delete:
+      tags: [Index APIs]
+      summary: Delete index template
+      description: |
+        The Delete Index Template API deletes one or more index templates.
+      operationId: deleteIndexTemplate
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/template_name_delete'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/timeout'
+      responses:
+        '200':
+          $ref: '#/components/responses/DeleteIndexTemplateSuccess'
+        '400':
+          $ref: '#/components/responses/DeleteIndexTemplateBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/DeleteIndexTemplateNotFound'
+
+  /_component_template/{component_template_name}:
+    parameters:
+      - $ref: '#/components/parameters/component_template_name'
+    put:
+      tags: [Index APIs]
+      summary: Create or update component template (PUT)
+      description: |
+        The Component Template API allows you to create or update a component template. These templates serve as reusable building blocks that define settings, mappings, and aliases, which can be shared across multiple index templates.
+
+        An index template can include multiple component templates. To use a component template within an index template, it must be listed in the `composed_of` section of the index template. Component templates are only applied to new indexes or data streams that match the conditions defined in the associated index template.
+
+        If an index template or an index creation request specifies its own settings or mappings, those will override any conflicting settings or mappings from the component template.
+
+        Component templates are only applied during index creation. In the case of data streams, this applies both to the creation of the stream itself and to the creation of its backing indexes. Any changes made to component templates do not impact existing indexes, including the backing indexes of already created data streams.
+      operationId: putComponentTemplate
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/create'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/timeout'
+      requestBody:
+        $ref: '#/components/requestBodies/ComponentTemplateRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/ComponentTemplateSuccess'
+        '400':
+          $ref: '#/components/responses/ComponentTemplateBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+
+    get:
+      tags: [Index APIs]
+      summary: Create or update component template (GET)
+      description: |
+        The Component Template API allows you to create or update a component template. These templates serve as reusable building blocks that define settings, mappings, and aliases, which can be shared across multiple index templates.
+
+        An index template can include multiple component templates. To use a component template within an index template, it must be listed in the `composed_of` section of the index template. Component templates are only applied to new indexes or data streams that match the conditions defined in the associated index template.
+
+        If an index template or an index creation request specifies its own settings or mappings, those will override any conflicting settings or mappings from the component template.
+
+        Component templates are only applied during index creation. In the case of data streams, this applies both to the creation of the stream itself and to the creation of its backing indexes. Any changes made to component templates do not impact existing indexes, including the backing indexes of already created data streams.
+      operationId: getComponentTemplate
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/create'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/timeout'
+      requestBody:
+        $ref: '#/components/requestBodies/ComponentTemplateRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/ComponentTemplateSuccess'
+        '400':
+          $ref: '#/components/responses/ComponentTemplateBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+
+  /_dangling:
+    get:
+      tags: [Index APIs]
+      summary: Dangling indexes
+      description: |
+        List dangling indexes. Dangling indexes are created when a node joins a cluster and contains shard data in its local directory that isn't already present in the cluster.
+      operationId: getDangling
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/timeout'
+      responses:
+        '200':
+          $ref: '#/components/responses/DanglingIndexesSuccess'
+        '400':
+          $ref: '#/components/responses/DanglingIndexesBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+
+  /_dangling/{index_uuid}:
+    parameters:
+      - $ref: '#/components/parameters/index_uuid'
+    post:
+      tags: [Index APIs]
+      summary: Dangling indexes (POST)
+      description: |
+        Import a dangling index into the cluster. Dangling indexes are created when a node joins a cluster and contains shard data in its local directory that isn't already present in the cluster.
+      operationId: postDanglingIndexUuid
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/accept_data_loss'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/timeout'
+      responses:
+        '200':
+          $ref: '#/components/responses/DanglingIndexImportSuccess'
+        '400':
+          $ref: '#/components/responses/DanglingIndexImportBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    delete:
+      tags: [Index APIs]
+      summary: Dangling indexes (DELETE)
+      description: |
+        Delete a dangling index from the cluster. Dangling indexes are created when a node joins a cluster and contains shard data in its local directory that isn't already present in the cluster.
+      operationId: deleteDanglingIndexUuid
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/accept_data_loss'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/timeout'
+      responses:
+        '200':
+          $ref: '#/components/responses/DanglingIndexDeleteSuccess'
+        '400':
+          $ref: '#/components/responses/DanglingIndexDeleteBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
 
 components:
   parameters:
@@ -946,6 +1147,26 @@ components:
       schema:
         type: string
       example: "alias-template"
+
+    template_name_delete:
+      name: template_name
+      in: path
+      required: true
+      description: |
+        The name of the index template to be deleted. To delete multiple templates in a single request, separate their names with commas. Note that wildcard expressions are not supported when specifying multiple template names.
+      schema:
+        type: string
+      example: "alias-template"
+
+    target_index_mapping:
+      name: target_index
+      in: path
+      required: true
+      description: |
+        This specifies the name of the index with which to associate the mapping. If you don't specify an index, you will get an error. You can specify a single index, or multiple indexes separated by a comma.
+      schema:
+        type: string
+      example: "wazuh-alerts-4.x-2025.03.18"
 
     create:
       name: create
@@ -1268,49 +1489,7 @@ components:
                 description: |
                   A numeric value that determines the priority of index templates when multiple templates match. The one with the highest priority is applied. If not specified, the default is `0`, which is the lowest priority. Optional field.
               template:
-                type: object
-                description: |
-                  Contains the actual template definition, including aliases, mappings, and settings. Optional field.
-                properties:
-                  aliases:
-                    type: object
-                    description: |
-                      Specify aliases to be linked with the template. This is required when the template field is included in the request body and supports defining multiple aliases.
-                    additionalProperties:
-                      type: object
-                      description: |
-                        The alias object can include the following optional parameters.
-                      properties:
-                        filter:
-                          type: object
-                          description: |
-                            A DSL query that restricts which documents are accessible through the alias.
-                        index_routing:
-                          type: string
-                          description: |
-                            Defines the routing value specifically for indexing operations. If provided, it overrides any general routing value for indexing.
-                        is_hidden:
-                          type: boolean
-                          description: |
-                            If set to `true`, the alias is hidden. All indexes associated with the alias must have the same setting for this parameter.
-                          default: false
-                        is_write_index:
-                          type: boolean
-                          description: |
-                            Specifies whether the index is the write index for the alias.
-                          default: false
-                        routing:
-                          type: string
-                          description: |
-                            Sets a custom routing value used for both indexing and searching operations.
-                        search_routing:
-                          type: string
-                          description: |
-                            A value that routes search operations to a specific shard. If specified, it overrides the general routing setting for searches.
-                  settings:
-                    type: object
-                  mappings:
-                    type: object
+                $ref: '#/components/schemas/TemplateStructure'
               version:
                 type: integer
                 description: |
@@ -1321,6 +1500,74 @@ components:
                   This parameter defines use-case-specific, predefined templates that can be applied to an index. Among all defined template configurations, those provided via context take precedence. Optional field.
           example:
             index_patterns: ["wazuh-alerts-4.x-*"]
+            template:
+              settings:
+                number_of_shards: 1
+              aliases:
+                alias1: {}
+                alias2:
+                  filter:
+                    term:
+                      "user.id": "wazuh"
+                  routing: "shard-1"
+                "{index}-alias": {}
+
+    MappingRequest:
+      description: |
+        Request body for mapping operations
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              properties:
+                type: object
+                description: |
+                  Defines the fields and their data types for documents in the index. This is where you specify field names, types (e.g., `text`, `keyword`, `date`, `integer`), analyzers, formats, etc. This field is required.
+              dynamic:
+                oneOf:
+                  - type: boolean
+                  - type: string
+                description: |
+                  Controls whether new fields not defined in the mapping should be added automatically. This field is optional. The possible options are:
+
+                  - `true`: allows dynamic fields.
+                  - `false`: disables dynamic mapping.
+                  - `strict`: throws an error if an unknown field is encountered.
+          example:
+            properties:
+              level:
+                type: "integer"
+              description:
+                type: "text"
+
+    ComponentTemplateRequest:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              template:
+                $ref: '#/components/schemas/TemplateStructure'
+              version:
+                type: integer
+                description: |
+                  A user-defined version number used for managing index templates. The Wazuh indexer does not automatically assign this value. This field is optional.
+              _meta:
+                type: object
+                description: |
+                  The metadata that describes or provides additional information about the index template. This field is optional.
+              allow_auto_create:
+                type: boolean
+                description: |
+                  If set to `true`, indexes can be automatically created using this template even when `actions.auto_create_index` is disabled. If `false`, matching indexes and data streams will not be automatically created.
+              deprecated:
+                type: boolean
+                description: |
+                  When `true`, marks the component template as deprecated. The Wazuh indexer will display a warning when the deprecated template is used.
+          example:
             template:
               settings:
                 number_of_shards: 1
@@ -1866,6 +2113,195 @@ components:
               reason: "index template matching [alias-templat] not found"
             status: 404
 
+    MappingSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AcknowledgedResponse'
+          example:
+            acknowledged: true
+
+    MappingBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              root_cause:
+                - type: "illegal_argument_exception"
+                  reason: "mapper [agent.name] cannot be changed from type [keyword] to [text]"
+              type: "illegal_argument_exception"
+              reason: "mapper [agent.name] cannot be changed from type [keyword] to [text]"
+            status: 400
+
+    DeleteIndexTemplateSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AcknowledgedResponse'
+          example:
+            acknowledged: true
+
+    DeleteIndexTemplateBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              root_cause:
+                - type: "illegal_argument_exception"
+                  reason: "request [/_index_template/alias-template12] contains unrecognized parameter: [timeout]"
+              type: "illegal_argument_exception"
+              reason: "request [/_index_template/alias-template12] contains unrecognized parameter: [timeout]"
+            status: 400
+
+    DeleteIndexTemplateNotFound:
+      description: Response to report a request not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              root_cause:
+                - type: "index_template_missing_exception"
+                  reason: "index_template [alias-template1] missing"
+              type: "index_template_missing_exception"
+              reason: "index_template [alias-template1] missing"
+            status: 404
+
+    ComponentTemplateSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AcknowledgedResponse'
+          example:
+            acknowledged: true
+
+    ComponentTemplateBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              root_cause:
+                - type: "parse_exception"
+                  reason: "request body is required"
+              type: "parse_exception"
+              reason: "request body is required"
+            status: 400
+
+    DanglingIndexesSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              _nodes:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                    description: |
+                      The total number of nodes involved in the operation.
+                  successful:
+                    type: integer
+                    description: |
+                      The number of nodes that responded successfully.
+                  failed:
+                    type: integer
+                    description: |
+                      The number of nodes that failed to respond or encountered an error.
+              cluster_name:
+                type: string
+                description: |
+                  The name of the Wazuh indexer cluster where the request was executed.
+              dangling_indices:
+                type: array
+                description: |
+                  A list of dangling indexes found on the cluster. An empty array (`[]`) means there are currently no dangling indexes present.
+          example:
+            _nodes:
+              total: 1
+              successful: 1
+              failed: 0
+            cluster_name: "wazuh-cluster"
+            dangling_indices: []
+
+    DanglingIndexesBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              root_cause:
+                - type: "illegal_argument_exception"
+                  reason: "request [/_dangling] contains unrecognized parameter: [timeout]"
+              type: "illegal_argument_exception"
+              reason: "request [/_dangling] contains unrecognized parameter: [timeout]"
+            status: 400
+
+    DanglingIndexImportSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AcknowledgedResponse'
+          example:
+            acknowledged: true
+
+    DanglingIndexImportBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              root_cause:
+                - type: "illegal_argument_exception"
+                  reason: "accept_data_loss must be set to true"
+              type: "illegal_argument_exception"
+              reason: "accept_data_loss must be set to true"
+            status: 400
+
+    DanglingIndexDeleteSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AcknowledgedResponse'
+          example:
+            acknowledged: true
+
+    DanglingIndexDeleteBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              root_cause:
+                - type: "illegal_argument_exception"
+                  reason: "accept_data_loss must be set to true"
+              type: "illegal_argument_exception"
+              reason: "accept_data_loss must be set to true"
+            status: 400
+
+
   schemas:
     # Common error response structure
     ErrorResponse:
@@ -1956,3 +2392,48 @@ components:
               type: integer
               description: |
                 The number of shards where the operation failed.
+
+    TemplateStructure:
+      type: object
+      description: |
+        Contains the actual template definition, including aliases, mappings, and settings.
+      properties:
+        settings:
+          type: object
+        mappings:
+          type: object
+        aliases:
+          type: object
+          description: |
+            Defines one or more aliases to associate with indexes created by this template. This field is required when the template option is present. Aliases act as alternate names and can include filters or routing settings.
+          additionalProperties:
+            type: object
+            description: |
+              The alias object can include the following optional parameters.
+            properties:
+              filter:
+                type: object
+                description: |
+                  A DSL query that restricts which documents are accessible through the alias.
+              index_routing:
+                type: string
+                description: |
+                  Defines the routing value specifically for indexing operations. If provided, it overrides any general routing value for indexing.
+              is_hidden:
+                type: boolean
+                description: |
+                  If set to `true`, the alias is hidden. All indexes associated with the alias must have the same setting for this parameter.
+                default: false
+              is_write_index:
+                type: boolean
+                description: |
+                  Specifies whether the index is the write index for the alias.
+                default: false
+              routing:
+                type: string
+                description: |
+                  Sets a custom routing value used for both indexing and searching operations.
+              search_routing:
+                type: string
+                description: |
+                  A value that routes search operations to a specific shard. If specified, it overrides the general routing setting for searches.

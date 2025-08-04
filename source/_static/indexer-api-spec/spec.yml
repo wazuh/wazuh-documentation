@@ -179,6 +179,18 @@ paths:
   /{index_name}:
     $ref: 'index_api.yml#/paths/~1{index_name}'
 
+  /{target_index}/_mapping:
+    $ref: 'index_api.yml#/paths/~1{target_index}~1_mapping'
+
+  /_component_template/{component_template_name}:
+    $ref: 'index_api.yml#/paths/~1_component_template~1{component_template_name}'
+
+  /_dangling:
+    $ref: 'index_api.yml#/paths/~1_dangling'
+
+  /_dangling/{index_uuid}:
+    $ref: 'index_api.yml#/paths/~1_dangling~1{index_uuid}'
+
   /{index}/_analyze:
     parameters:
       - $ref: 'analyze_api.yml#/components/parameters/index'
