@@ -335,7 +335,7 @@ paths:
 
   /{index}/_block/{block}:
     parameters:
-      - $ref: '#/components/parameters/index'
+      - $ref: '#/components/parameters/index_only'
       - $ref: '#/components/parameters/block'
     put:
       tags: [Index APIs]
@@ -490,7 +490,7 @@ paths:
 
   /{index}/_close:
     parameters:
-      - $ref: '#/components/parameters/index'
+      - $ref: '#/components/parameters/index_only'
     post:
       tags: [Index APIs]
       summary: Close index
@@ -520,8 +520,6 @@ paths:
           $ref: '#/components/responses/NotFound'
 
   /{index}:
-    parameters:
-      - $ref: '#/components/parameters/single-index'
     put:
       tags: [Index APIs]
       summary: Create index
@@ -542,6 +540,7 @@ paths:
         - basicAuth: []
         - jwtAuth: []
       parameters:
+        - $ref: '#/components/parameters/single-index'
         - $ref: '#/components/parameters/wait_for_active_shards'
         - $ref: '#/components/parameters/cluster_manager_timeout'
         - $ref: '#/components/parameters/timeout'
@@ -556,6 +555,65 @@ paths:
           $ref: 'spec.yml#/components/responses/Unauthorized'
         '403':
           $ref: 'spec.yml#/components/responses/Forbidden'
+
+    get:
+      tags: [Index APIs]
+      summary: Get index
+      description: |
+        The Get Index API allows you to retrieve detailed information about a specific index.
+      operationId: getIndex
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/index'
+        - $ref: '#/components/parameters/allow_no_indices'
+        - $ref: '#/components/parameters/expand_wildcards'
+        - $ref: '#/components/parameters/flat_settings'
+        - $ref: '#/components/parameters/include_defaults'
+        - $ref: '#/components/parameters/ignore_unavailable'
+        - $ref: '#/components/parameters/local'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+      responses:
+        '200':
+          $ref: '#/components/responses/GetIndexSuccess'
+        '400':
+          $ref: '#/components/responses/GetIndexBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /{index_name}:
+    parameters:
+      - $ref: '#/components/parameters/index_name'
+    delete:
+      tags: [Index APIs]
+      summary: Delete index
+      description: |
+        If an index is no longer needed, you can delete it using the Delete Index API.
+      operationId: deleteIndexName
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/allow_no_indices'
+        - $ref: '#/components/parameters/expand_wildcards'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/timeout'
+      responses:
+        '200':
+          $ref: '#/components/responses/DeleteIndexSuccess'
+        '400':
+          $ref: '#/components/responses/DeleteIndexBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
 
   /_index_template/{template_name}:
     parameters:
@@ -660,6 +718,16 @@ components:
       in: path
       required: true
       description: |
+        A comma-separated list of indexes, data streams, or index aliases that the operation is applied. Wildcard expressions  such as (`*`) are supported. Use `_all` or `*` to apply the operation to all indexes and data streams in the cluster.
+      schema:
+        type: string
+      example: "wazuh-alerts-4.x-2025.03.12"
+
+    index_only:
+      name: index
+      in: path
+      required: true
+      description: |
         Specifies the index or list of indexes to operate on. You can provide a single index name, a comma-separated list of multiple indexes, or use `_all` or `*` to operate on all indexes in the cluster.
       schema:
         type: string
@@ -670,7 +738,7 @@ components:
       in: path
       required: true
       description: |
-        The name of the index to be created. It must follow the index naming rules. This parameter is required.
+        The name of the index to be created. It must follow the index naming rules.
       schema:
         type: string
       example: "wazuh-alerts-4.x-2025.03.5"
@@ -751,7 +819,7 @@ components:
         The source index to clone.
       schema:
         type: string
-      example: "wazuh-alerts-4.x-2025.03.42"
+      example: "wazuh-alerts-4.x-2025.03.12"
 
     target_index:
       name: target_index
@@ -782,6 +850,25 @@ components:
       schema:
         type: string
 
+    query:
+      name: query
+      in: query
+      required: false
+      description: |
+        Clears the query cache when set to `true`.
+      schema:
+        type: boolean
+        default: true
+
+    request:
+      name: request
+      in: query
+      required: false
+      description: |
+        Clears the request cache when set to `true`.
+      schema:
+        type: boolean
+        default: true
 
     wait_for_active_shards:
       name: wait_for_active_shards
@@ -814,6 +901,14 @@ components:
         format: duration
         default: '1h'
 
+    index_name:
+      name: index_name
+      in: path
+      required: true
+      schema:
+        type: string
+      example: "wazuh-alerts-4.x-2025.03.04"
+
     flat_settings:
       name: flat_settings
       in: query
@@ -832,6 +927,16 @@ components:
       schema:
         type: boolean
 
+    local:
+      name: local
+      in: query
+      required: false
+      description: |
+        If set to `true`, returns index information only from the local node rather than querying the cluster manager node.
+      schema:
+        type: boolean
+        default: false
+
     template_name:
       name: template_name
       in: path
@@ -842,6 +947,15 @@ components:
         type: string
       example: "alias-template"
 
+    create:
+      name: create
+      in: query
+      required: false
+      description: |
+        If set to `true`, the API will not overwrite or modify any existing index templates.
+      schema:
+        type: boolean
+        default: false
 
   requestBodies:
     AliasRequest:
@@ -1333,6 +1447,94 @@ components:
             shards_acknowledged: true
             index: "wazuh-alerts-4.x-2025.03.5"
 
+    DeleteIndexSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AcknowledgedResponse'
+          example:
+            acknowledged: true
+
+    GetIndexSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              aliases:
+                type: object
+                description: |
+                  A list of any aliases assigned to the index.
+              mappings:
+                type: object
+                description: |
+                  The mapping definitions applied to the index.
+              settings:
+                type: object
+                description: |
+                  Configuration settings specific to the index.
+              creation_date:
+                type: string
+                description: |
+                  The timestamp, in Unix epoch format, representing when the index was created.
+              number_of_shards:
+                type: string
+                description: |
+                  The number of primary shards allocated to the index.
+              number_of_replicas:
+                type: string
+                description: |
+                  The number of replica shards configured for the index.
+              uuid:
+                type: string
+                description: |
+                  The unique identifier (UUID) assigned to the index.
+              created:
+                type: string
+                description: |
+                  The version of Wazuh indexer used to create the index.
+              provided_name:
+                type: string
+                description: |
+                  The original name given to the index.
+          example:
+            "sample_target":
+              aliases: {}
+              mappings:
+                _meta:
+                  schema_version: 1
+                dynamic_templates:
+                  - strings:
+                      match_mapping_type: "string"
+                      mapping:
+                        type: "keyword"
+                properties:
+                  day:
+                    type: "date"
+                  quantity:
+                    type: "float"
+                  transform:
+                    properties:
+                      _doc_count:
+                        type: "long"
+                      _id:
+                        type: "keyword"
+                  version:
+                    type: "keyword"
+              settings:
+                index:
+                  replication:
+                    type: "DOCUMENT"
+                  number_of_shards: "1"
+                  provided_name: "sample_target"
+                  creation_date: "1739872000922"
+                  number_of_replicas: "1"
+                  uuid: "Erdstb-2SBaFhH3l3br38A"
+                  version:
+                    created: "136377827"
+
     AliasBadRequest:
       description: Response to report a bad request
       content:
@@ -1458,6 +1660,44 @@ components:
               reason: "the number of target shards (2) must be the same as the number of source shards (3)"
             status: 400
 
+    GetIndexBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IndexErrorResponse'
+          example:
+            error:
+              root_cause:
+                - type: "invalid_index_name_exception"
+                  reason: "Invalid index name [_wazuh-alerts-4.x-2025.03.15], must not start with '_'."
+                  index: "_wazuh-alerts-4.x-2025.03.15"
+                  index_uuid: "_na_"
+              type: "invalid_index_name_exception"
+              reason: "Invalid index name [_wazuh-alerts-4.x-2025.03.15], must not start with '_'."
+              index: "_wazuh-alerts-4.x-2025.03.15"
+              index_uuid: "_na_"
+            status: 400
+
+    DeleteIndexBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IndexErrorResponse'
+          example:
+            error:
+              root_cause:
+                - type: "invalid_index_name_exception"
+                  reason: "Invalid index name [_wazuh-alerts-4.x-2025.03.14], must not start with '_'."
+                  index: "_wazuh-alerts-4.x-2025.03.14"
+                  index_uuid: "_na_"
+              type: "invalid_index_name_exception"
+              reason: "Invalid index name [_wazuh-alerts-4.x-2025.03.14], must not start with '_'."
+              index: "_wazuh-alerts-4.x-2025.03.14"
+              index_uuid: "_na_"
+            status: 400
+
     NotFound:
       description: Response to report a request not found
       content:
@@ -1503,15 +1743,15 @@ components:
             error:
               root_cause:
                 - type: "index_not_found_exception"
-                  reason: "no such index [wazuh-alerts-4.x-2025.03.42]"
-                  index: "wazuh-alerts-4.x-2025.03.42"
-                  resource.id: "wazuh-alerts-4.x-2025.03.42"
+                  reason: "no such index [wazuh-alerts-4.x-2025.03.12]"
+                  index: "wazuh-alerts-4.x-2025.03.12"
+                  resource.id: "wazuh-alerts-4.x-2025.03.12"
                   resource.type: "index_or_alias"
                   index_uuid: "_na_"
               type: "index_not_found_exception"
-              reason: "no such index [wazuh-alerts-4.x-2025.03.42]"
-              index: "wazuh-alerts-4.x-2025.03.42"
-              resource.id: "wazuh-alerts-4.x-2025.03.42"
+              reason: "no such index [wazuh-alerts-4.x-2025.03.12]"
+              index: "wazuh-alerts-4.x-2025.03.12"
+              resource.id: "wazuh-alerts-4.x-2025.03.12"
               resource.type: "index_or_alias"
               index_uuid: "_na_"
             status: 404
