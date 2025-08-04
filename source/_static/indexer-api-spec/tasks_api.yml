@@ -1,0 +1,345 @@
+openapi: 3.0.0
+
+components:
+  parameters:
+    TaskId:
+      name: TASK_ID
+      in: path
+      required: true
+      description: The unique identifier of the task.
+      schema:
+        type: string
+
+    nodes:
+      name: nodes
+      in: query
+      description: A comma-separated list of node IDs or names to filter the returned information. Use _local to retrieve data from the connected node, specify a node name for specific nodes, or leave it empty to include all nodes.
+      schema:
+        type: string
+
+    actions:
+      name: actions
+      in: query
+      description: A comma-separated list of actions to include in the response. Leave empty to return all actions.
+      schema:
+        type: string
+
+    detailed:
+      name: detailed
+      in: query
+      description: Specifies whether to return detailed task information. Default false
+      schema:
+        type: boolean
+        default: false
+
+    parent_task_id:
+      name: parent_task_id
+      in: query
+      description: Returns only tasks associated with a specified parent task ID (node_id:task_number). Leave empty or set to -1 to return all tasks.
+      schema:
+        type: string
+
+    wait_for_completion:
+      name: wait_for_completion
+      in: query
+      description: If true, the request waits for the specified tasks to complete before returning. Default false
+      schema:
+        type: boolean
+        default: false
+
+    group_by:
+      name: group_by
+      in: query
+      description: Determines how tasks are grouped in the response either by parent/child relationships or by nodes. Default nodes
+      schema:
+        type: string
+        enum: [nodes, parents]
+        default: nodes
+
+    timeout:
+      name: timeout
+      in: query
+      description: Specifies the maximum duration for the operation to complete before timing out. Default 30 seconds
+      schema:
+        type: string
+        default: "30s"
+
+    cluster_manager_timeout:
+      name: cluster_manager_timeout
+      in: query
+      description: Defines the waiting period for establishing a connection to the primary node. Default 30 seconds
+      schema:
+        type: string
+        default: "30s"
+
+  responses:
+    TasksSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              nodes:
+                type: object
+                additionalProperties:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      description: The name of the node (e.g., "node-1").
+                    transport_address:
+                      type: string
+                      description: The transport-layer address of the node.
+                    host:
+                      type: string
+                      description: The host IP address of the node.
+                    ip:
+                      type: string
+                      description: The IP address and transport port of the node.
+                    roles:
+                      type: array
+                      items:
+                        type: string
+                      description: The roles assigned to the node. The possible roles include cluster_manager, data, ingest, and remote_cluster_client.
+                    attributes:
+                      type: object
+                      properties:
+                        shard_indexing_pressure_enabled:
+                          type: boolean
+                          description: Indicates if shard indexing pressure tracking is enabled.
+                    tasks:
+                      type: object
+                      additionalProperties:
+                        type: object
+                        properties:
+                          node:
+                            type: string
+                            description: The node ID where the task is running.
+                          id:
+                            type: integer
+                            description: The unique ID of the task.
+                          type:
+                            type: string
+                            description: The type of task execution ("direct" or "transport").
+                          action:
+                            type: string
+                            description: The action being performed.
+                          start_time_in_millis:
+                            type: integer
+                            description: The timestamp when the task started, in milliseconds.
+                          running_time_in_nanos:
+                            type: integer
+                            description: The total time the task has been running.
+                          cancellable:
+                            type: boolean
+                            description: Indicates whether the task can be cancelled.
+                          cancelled:
+                            type: boolean
+                            description: Indicates if the task has been cancelled.
+                          parent_task_id:
+                            type: string
+                            description: The ID of the parent task that triggered this task.
+                          headers:
+                            type: object
+                            description: Contains request headers associated with the task.
+                            properties:
+                              X-Opaque-Id:
+                                type: string
+                                description: A unique ID used for tracking requests across time and performance monitoring.
+          example:
+            nodes:
+              xDC5NqstQh2alB_BedjVmw:
+                name: "node-1"
+                transport_address: "127.0.0.1:9300"
+                host: "127.0.0.1"
+                ip: "127.0.0.1:9300"
+                roles:
+                  - "cluster_manager"
+                  - "data"
+                  - "ingest"
+                  - "remote_cluster_client"
+                attributes:
+                  shard_indexing_pressure_enabled: "true"
+                tasks:
+                  "xDC5NqstQh2alB_BedjVmw:1005798":
+                    node: "xDC5NqstQh2alB_BedjVmw"
+                    id: 1005798
+                    type: "direct"
+                    action: "cluster:monitor/tasks/lists[n]"
+                    start_time_in_millis: 1741259285697
+                    running_time_in_nanos: 5369468
+                    cancellable: false
+                    cancelled: false
+                    parent_task_id: "xDC5NqstQh2alB_BedjVmw:1005797"
+                    headers:
+                      X-Opaque-Id: "e88054d3-f510-4e4f-a321-5f94e1907631"
+                  "xDC5NqstQh2alB_BedjVmw:1005797":
+                    node: "xDC5NqstQh2alB_BedjVmw"
+                    id: 1005797
+                    type: "transport"
+                    action: "cluster:monitor/tasks/lists"
+                    start_time_in_millis: 1741259285689
+                    running_time_in_nanos: 13719486
+                    cancellable: false
+                    cancelled: false
+                    headers:
+                      X-Opaque-Id: "e88054d3-f510-4e4f-a321-5f94e1907631"
+
+    TasksBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  root_cause:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        reason:
+                          type: string
+                        index:
+                          type: string
+                        index_uuid:
+                          type: string
+                  type:
+                    type: string
+                  reason:
+                    type: string
+                  index:
+                    type: string
+                  index_uuid:
+                    type: string
+              status:
+                type: integer
+          example:
+            error:
+              root_cause:
+                - type: "invalid_index_name_exception"
+                  reason: "Invalid index name [_tasks1], must not start with '_'."
+                  index: "_tasks1"
+                  index_uuid: "_na_"
+              type: "invalid_index_name_exception"
+              reason: "Invalid index name [_tasks1], must not start with '_'."
+              index: "_tasks1"
+              index_uuid: "_na_"
+            status: 400
+
+    TasksForbidden:
+      description: Response to report a permission denied request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  root_cause:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        reason:
+                          type: string
+                  type:
+                    type: string
+                  reason:
+                    type: string
+              status:
+                type: integer
+          example:
+            error:
+              root_cause:
+                - type: "security_exception"
+                  reason: "no permissions for [indices:admin/analyze] and User [name=test, backend_roles=[], requestedTenant=null]"
+              type: "security_exception"
+              reason: "no permissions for [indices:admin/analyze] and User [name=test, backend_roles=[], requestedTenant=null]"
+            status: 403
+
+    TasksNotFound:
+      description: Tasks resource not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  root_cause:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        reason:
+                          type: string
+                        index:
+                          type: string
+                        resource.id:
+                          type: string
+                        resource.type:
+                          type: string
+                        index_uuid:
+                          type: string
+                  type:
+                    type: string
+                  reason:
+                    type: string
+                  caused_by:
+                    type: object
+                    properties:
+                      type:
+                        type: string
+                      reason:
+                        type: string
+                      caused_by:
+                        type: object
+                        properties:
+                          type:
+                            type: string
+                          reason:
+                            type: string
+                          index:
+                            type: string
+                          resource.id:
+                            type: string
+                          resource.type:
+                            type: string
+                          index_uuid:
+                            type: string
+              status:
+                type: integer
+          example:
+            error:
+              root_cause:
+                - type: "index_not_found_exception"
+                  reason: "no such index [.tasks]"
+                  index: ".tasks"
+                  resource.id: ".tasks"
+                  resource.type: "index_expression"
+                  index_uuid: "_na_"
+              type: "resource_not_found_exception"
+              reason: "task [oTUltX4IQMOUUVeiohTt8A:124] belongs to the node [oTUltX4IQMOUUVeiohTt8A] which isn't part of the cluster and there is no record of the task"
+              caused_by:
+                type: "resource_not_found_exception"
+                reason: "task [oTUltX4IQMOUUVeiohTt8A:124] isn't running and hasn't stored its results"
+                caused_by:
+                  type: "index_not_found_exception"
+                  reason: "no such index [.tasks]"
+                  index: ".tasks"
+                  resource.id: ".tasks"
+                  resource.type: "index_expression"
+                  index_uuid: "_na_"
+            status: 404

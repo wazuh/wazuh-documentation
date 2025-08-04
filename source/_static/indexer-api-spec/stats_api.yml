@@ -1,0 +1,265 @@
+openapi: 3.0.0
+
+paths:
+  /_plugins/_security_analytics/detectors:
+    post:
+      tags:
+        - Stats API
+      summary: Stats API
+      description: |
+        The Stats API uses the stats operation to track and monitor shard indexing backpressure.
+      operationId: getStatsAPI
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/top'
+        - $ref: '#/components/parameters/include_all'
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: '#/components/responses/StatsSuccess'
+        '400':
+          $ref: '#/components/responses/StatsBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/StatsForbidden'
+        '404':
+          $ref: '#/components/responses/StatsNotFound'
+
+components:
+  parameters:
+    top:
+      name: top
+      in: query
+      description: Returns aggregated shard indexing pressure stats, excluding per-shard details.
+      schema:
+        type: boolean
+        default: false
+
+    include_all:
+      name: include_all
+      in: query
+      description: Includes all available shard indexing pressure statistics in the response.
+      schema:
+        type: boolean
+        default: false
+
+    pretty:
+      name: pretty
+      in: query
+      description: Show results in human-readable format.
+      schema:
+        type: boolean
+        default: false
+
+  responses:
+    StatsSuccess:
+      description: Stats retrieved successfully.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              _nodes:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                    description: Total number of nodes in the cluster.
+                  successful:
+                    type: integer
+                    description: Number of nodes that successfully responded.
+                  failed:
+                    type: integer
+                    description: Number of nodes that failed to respond.
+              cluster_name:
+                type: string
+                description: The name of the Wazuh cluster.
+              nodes:
+                type: object
+                description: Contains details for each node in the cluster. (node_id) is a unique identifier for a node.
+                additionalProperties:
+                  type: object
+                  properties:
+                    timestamp:
+                      type: integer
+                      description: The timestamp when stats were collected (epoch time in milliseconds)
+                    name:
+                      type: string
+                      description: The name of the node.
+                    transport_address:
+                      type: string
+                      description: The transport-layer address of the node
+                    host:
+                      type: string
+                      description: The hostname or IP of the node.
+                    ip:
+                      type: string
+                      description: The IP address of the node, including the transport port.
+                    roles:
+                      type: array
+                      description: Lists the roles assigned to the node (e.g., cluster_manager, data, ingest).
+                      items:
+                        type: string
+                    attributes:
+                      type: object
+                      properties:
+                        shard_indexing_pressure_enabled:
+                          type: boolean
+                          description: Indicates if shard indexing pressure tracking is enabled
+                    shard_indexing_pressure:
+                      type: object
+                      properties:
+                        stats:
+                          type: object
+                          description: Placeholder for indexing pressure statistics.
+                        total_rejections_breakup_shadow_mode:
+                          type: object
+                          properties:
+                            node_limits:
+                              type: integer
+                              description: Number of rejections due to exceeding node-based indexing limits.
+                            no_successful_request_limits:
+                              type: integer
+                              description: Number of rejections when no successful requests are possible.
+                            throughput_degradation_limits:
+                              type: integer
+                              description: Number of rejections due to detected throughput degradation.
+                        enabled:
+                          type: boolean
+                          description: Determines if shard indexing pressure is enabled.
+                        enforced:
+                          type: boolean
+                          description: Determines if shard indexing pressure is enforced.
+          example:
+            _nodes:
+              total: 1
+              successful: 1
+              failed: 0
+            cluster_name: "wazuh-cluster"
+            nodes:
+              xDC5NqstQh2alB_BedjVmw:
+                timestamp: 1739818847891
+                name: "node-1"
+                transport_address: "127.0.0.1:9300"
+                host: "127.0.0.1"
+                ip: "127.0.0.1:9300"
+                roles:
+                  - "cluster_manager"
+                  - "data"
+                  - "ingest"
+                  - "remote_cluster_client"
+                attributes:
+                  shard_indexing_pressure_enabled: "true"
+                shard_indexing_pressure:
+                  stats: {}
+                  total_rejections_breakup_shadow_mode:
+                    node_limits: 0
+                    no_successful_request_limits: 0
+                    throughput_degradation_limits: 0
+                  enabled: false
+                  enforced: false
+
+    StatsBadRequest:
+      description: Bad request for stats operation.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  root_cause:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        reason:
+                          type: string
+                  type:
+                    type: string
+                  reason:
+                    type: string
+              status:
+                type: integer
+          example:
+            error:
+              root_cause:
+                - type: "illegal_argument_exception"
+                  reason: "request [/_nodes/_local/stats/shard_indexing_pressur] contains unrecognized metric: [shard_indexing_pressur] -> did you mean any of [shard_indexing_pressure, indexing_pressure]?"
+              type: "illegal_argument_exception"
+              reason: "request [/_nodes/_local/stats/shard_indexing_pressur] contains unrecognized metric: [shard_indexing_pressur] -> did you mean any of [shard_indexing_pressure, indexing_pressure]?"
+            status: 400
+
+    StatsForbidden:
+      description: Permission denied for stats operation.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  root_cause:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        reason:
+                          type: string
+                  type:
+                    type: string
+                  reason:
+                    type: string
+              status:
+                type: integer
+          example:
+            error:
+              root_cause:
+                - type: "security_exception"
+                  reason: "no permissions for [indices:admin/analyze] and User [name=test, backend_roles=[], requestedTenant=null]"
+              type: "security_exception"
+              reason: "no permissions for [indices:admin/analyze] and User [name=test, backend_roles=[], requestedTenant=null]"
+            status: 403
+
+    StatsNotFound:
+      description: Stats resource not found.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  root_cause:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        reason:
+                          type: string
+                        index:
+                          type: string
+                        resource.id:
+                          type: string
+                        resource.type:
+                          type: string
+                        index_uuid:
+                          type: string
+                  type:
+                    type: string
+                  reason:
+                    type: string
+              status:
+                type: integer
