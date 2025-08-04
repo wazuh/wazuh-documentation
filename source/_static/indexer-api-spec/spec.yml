@@ -1069,6 +1069,322 @@ paths:
         - basicAuth: []
         - jwtAuth: []
 
+  /_plugins/_security_analytics/detectors:
+    post:
+      tags:
+        - Stats API
+      summary: Stats API
+      description: |
+        The Stats API uses the stats operation to track and monitor shard indexing backpressure.
+      operationId: getStatsAPI
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'stats_api.yml#/components/parameters/top'
+        - $ref: 'stats_api.yml#/components/parameters/include_all'
+        - $ref: 'stats_api.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: 'stats_api.yml#/components/responses/StatsSuccess'
+        '400':
+          $ref: 'stats_api.yml#/components/responses/StatsBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'stats_api.yml#/components/responses/StatsForbidden'
+        '404':
+          $ref: 'stats_api.yml#/components/responses/StatsNotFound'
+
+  /_tasks:
+    get:
+      tags:
+        - Tasks
+      summary: Get all tasks
+      description: |
+        Retrieves details about tasks that are currently running within the cluster.
+      operationId: getAllTasks
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'tasks_api.yml#/components/parameters/nodes'
+        - $ref: 'tasks_api.yml#/components/parameters/actions'
+        - $ref: 'tasks_api.yml#/components/parameters/detailed'
+        - $ref: 'tasks_api.yml#/components/parameters/parent_task_id'
+        - $ref: 'tasks_api.yml#/components/parameters/wait_for_completion'
+        - $ref: 'tasks_api.yml#/components/parameters/group_by'
+        - $ref: 'tasks_api.yml#/components/parameters/timeout'
+        - $ref: 'tasks_api.yml#/components/parameters/cluster_manager_timeout'
+      responses:
+        '200':
+          $ref: 'tasks_api.yml#/components/responses/TasksSuccess'
+        '400':
+          $ref: 'tasks_api.yml#/components/responses/TasksBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'tasks_api.yml#/components/responses/TasksForbidden'
+        '404':
+          $ref: 'tasks_api.yml#/components/responses/TasksNotFound'
+
+  /_tasks/{TASK_ID}:
+    get:
+      tags:
+        - Tasks
+      summary: Get specific task
+      description: |
+        Retrieves details about tasks that are currently running within the cluster.
+      operationId: getTaskById
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'tasks_api.yml#/components/parameters/TaskId'
+        - $ref: 'tasks_api.yml#/components/parameters/nodes'
+        - $ref: 'tasks_api.yml#/components/parameters/actions'
+        - $ref: 'tasks_api.yml#/components/parameters/detailed'
+        - $ref: 'tasks_api.yml#/components/parameters/parent_task_id'
+        - $ref: 'tasks_api.yml#/components/parameters/wait_for_completion'
+        - $ref: 'tasks_api.yml#/components/parameters/group_by'
+        - $ref: 'tasks_api.yml#/components/parameters/timeout'
+        - $ref: 'tasks_api.yml#/components/parameters/cluster_manager_timeout'
+      responses:
+        '200':
+          $ref: 'tasks_api.yml#/components/responses/TasksSuccess'
+        '400':
+          $ref: 'tasks_api.yml#/components/responses/TasksBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'tasks_api.yml#/components/responses/TasksForbidden'
+        '404':
+          $ref: 'tasks_api.yml#/components/responses/TasksNotFound'
+
+  /_plugins/_transform/{TRANSFORM_ID}:
+    put:
+      tags:
+        - Transforms API
+      summary: Create a transform job
+      description: |
+        Creates a transform job.
+      operationId: createTransformJob
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'transforms_api.yml#/components/parameters/TransformId'
+        - $ref: 'transforms_api.yml#/components/parameters/defer_validation'
+        - $ref: 'transforms_api.yml#/components/parameters/timeout'
+      requestBody:
+        $ref: 'transforms_api.yml#/components/requestBodies/CreateTransformRequestBody'
+      responses:
+        '200':
+          $ref: 'transforms_api.yml#/components/responses/TransformCreated'
+        '400':
+          $ref: 'transforms_api.yml#/components/responses/TransformBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'transforms_api.yml#/components/responses/TransformForbidden'
+        '404':
+          $ref: 'transforms_api.yml#/components/responses/TransformNotFound'
+        '409':
+          $ref: 'transforms_api.yml#/components/responses/TransformConflict'
+    get:
+      tags:
+        - Transforms API
+      summary: Get a transform job's details
+      description: |
+        Returns a transform job's details. You can also get details of all transform jobs by omitting transform_id.
+      operationId: getTransformJob
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'transforms_api.yml#/components/parameters/TransformId'
+        - $ref: 'transforms_api.yml#/components/parameters/from'
+        - $ref: 'transforms_api.yml#/components/parameters/size'
+        - $ref: 'transforms_api.yml#/components/parameters/search'
+        - $ref: 'transforms_api.yml#/components/parameters/sortField'
+        - $ref: 'transforms_api.yml#/components/parameters/sortDirection'
+      responses:
+        '200':
+          $ref: 'transforms_api.yml#/components/responses/TransformList'
+        '400':
+          $ref: 'transforms_api.yml#/components/responses/TransformBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'transforms_api.yml#/components/responses/TransformForbidden'
+        '404':
+          $ref: 'transforms_api.yml#/components/responses/TransformNotFound'
+    delete:
+      tags:
+        - Transforms API
+      summary: Delete a transform job
+      description: |
+        Deletes a transform job.
+      operationId: deleteTransformJob
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'transforms_api.yml#/components/parameters/TransformId'
+        - $ref: 'transforms_api.yml#/components/parameters/force'
+      responses:
+        '200':
+          $ref: 'transforms_api.yml#/components/responses/TransformDeleted'
+        '400':
+          $ref: 'transforms_api.yml#/components/responses/TransformBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'transforms_api.yml#/components/responses/TransformForbidden'
+        '409':
+          $ref: 'transforms_api.yml#/components/responses/TransformConflict'
+
+  /_plugins/_transform/{TRANSFORM_ID}?if_seq_no={SEQ_NO}&if_primary_term={PRIMARY_TERM}:
+    put:
+      tags:
+        - Transforms API
+      summary: Update a transform job
+      description: |
+        Updates an existing transform job if the specified transform_id already exists. This request requires providing the sequence number and primary term of the transform to be modified.
+      operationId: updateTransformJob
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'transforms_api.yml#/components/parameters/TransformId'
+        - name: if_seq_no
+          in: query
+          required: true
+          description: Executes the transform operation only if the most recent change to the transform job matches the specified sequence number.
+          schema:
+            type: integer
+        - name: if_primary_term
+          in: query
+          required: true
+          description: Executes the transform operation only if the most recent change to the transform job matches the specified primary term.
+          schema:
+            type: integer
+      requestBody:
+        $ref: 'transforms_api.yml#/components/requestBodies/UpdateTransformRequestBody'
+      responses:
+        '200':
+          $ref: 'transforms_api.yml#/components/responses/TransformUpdated'
+        '400':
+          $ref: 'transforms_api.yml#/components/responses/TransformBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'transforms_api.yml#/components/responses/TransformForbidden'
+        '404':
+          $ref: 'transforms_api.yml#/components/responses/TransformNotFound'
+        '409':
+          $ref: 'transforms_api.yml#/components/responses/TransformConflict'
+
+  /_plugins/_transform/{TRANSFORM_ID}/_start:
+    post:
+      tags:
+        - Transforms API
+      summary: Start a transform job
+      description: |
+        Transform jobs created via the API are enabled by default. However, if you need to activate a job manually, you can use the start API operation.
+      operationId: startTransformJob
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'transforms_api.yml#/components/parameters/TransformId'
+      responses:
+        '200':
+          $ref: 'transforms_api.yml#/components/responses/TransformStarted'
+        '400':
+          $ref: 'transforms_api.yml#/components/responses/TransformBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'transforms_api.yml#/components/responses/TransformForbidden'
+        '404':
+          $ref: 'transforms_api.yml#/components/responses/TransformNotFound'
+
+  /_plugins/_transform/{TRANSFORM_ID}/_stop:
+    post:
+      tags:
+        - Transforms API
+      summary: Stop a transform job
+      description: |
+        Transform jobs created via the API are enabled by default. However, if you need to activate a job manually, you can use the start API operation.
+      operationId: stopTransformJob
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'transforms_api.yml#/components/parameters/TransformId'
+      responses:
+        '200':
+          $ref: 'transforms_api.yml#/components/responses/TransformStopped'
+        '400':
+          $ref: 'transforms_api.yml#/components/responses/TransformBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'transforms_api.yml#/components/responses/TransformForbidden'
+        '404':
+          $ref: 'transforms_api.yml#/components/responses/TransformNotFound'
+
+  /_plugins/_transform/{TRANSFORM_ID}/_explain:
+    get:
+      tags:
+        - Transforms API
+      summary: Get the status of a transform job
+      description: |
+        Retrieves the status and metadata of a transform job.
+      operationId: getTransformJobStatus
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'transforms_api.yml#/components/parameters/TransformId'
+      responses:
+        '200':
+          $ref: 'transforms_api.yml#/components/responses/TransformStatus'
+        '400':
+          $ref: 'transforms_api.yml#/components/responses/TransformBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'transforms_api.yml#/components/responses/TransformForbidden'
+        '404':
+          $ref: 'transforms_api.yml#/components/responses/TransformNotFound'
+
+  /_plugins/_transform/_preview:
+    post:
+      tags:
+        - Transforms API
+      summary: Preview a transform job's results
+      description: |
+        Provides a preview of the expected structure and content of a transformed index.
+      operationId: previewTransformJob
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      requestBody:
+        $ref: 'transforms_api.yml#/components/requestBodies/PreviewTransformRequestBody'
+      responses:
+        '200':
+          $ref: 'transforms_api.yml#/components/responses/TransformPreview'
+        '400':
+          $ref: 'transforms_api.yml#/components/responses/TransformBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'transforms_api.yml#/components/responses/TransformForbidden'
+        '404':
+          $ref: 'transforms_api.yml#/components/responses/TransformNotFound'
+
   /_cluster/allocation/explain:
     get:
       tags: [Cluster API]
@@ -3533,3 +3849,10 @@ tags:
       Since search contexts can be memory-intensive, it's advisable to avoid using the scroll operation for frequent user queries. Instead, consider utilizing the sort parameter in conjunction with the search_after parameter to paginate through results for user queries.
   - name: Search
     description: The Search API operation allows you to perform a search request to find data within your cluster.
+  - name: Stats API
+    description: The Stats API uses the stats operation to track and monitor shard indexing backpressure.
+  - name: Tasks
+    description: Retrieves details about tasks that are currently running within the cluster.
+  - name: Transforms API
+    description: |
+      The Transform API is a RESTful interface that enables users to create, manage, and execute transform jobs. These jobs allow you to generate summarized or aggregated views of your existing data, facilitating more efficient analysis and visualization. By defining specific transformations, you can restructure and condense large datasets into more insightful representations.
