@@ -218,6 +218,9 @@ paths:
   /{target_index}/_settings/{setting}:
     $ref: 'index_api.yml#/paths/~1{target_index}~1_settings~1{setting}'
 
+  /{index}/_open:
+    $ref: 'index_api.yml#/paths/~1{index}~1_open'
+
   /{index}/_analyze:
     parameters:
       - $ref: 'analyze_api.yml#/components/parameters/index'

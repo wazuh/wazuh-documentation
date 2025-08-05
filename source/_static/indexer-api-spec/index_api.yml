@@ -1196,6 +1196,39 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 
+  /{index}/_open:
+    parameters:
+      - $ref: '#/components/parameters/index_only'
+    post:
+      tags: [Index APIs]
+      summary: Open index
+      description: |
+        The Open Index API reactivates a previously closed index, allowing data to be added to it or searched from it once again.
+      operationId: postIndexOpen
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/allow_no_indices'
+        - $ref: '#/components/parameters/expand_wildcards'
+        - $ref: '#/components/parameters/ignore_unavailable'
+        - $ref: '#/components/parameters/wait_for_active_shards'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/wait_for_completion'
+        - $ref: '#/components/parameters/task_execution_timeout'
+      responses:
+        '200':
+          $ref: '#/components/responses/OpenIndexSuccess'
+        '400':
+          $ref: '#/components/responses/OpenIndexBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
   /_settings:
     get:
       tags: [Index APIs]
@@ -3772,6 +3805,35 @@ components:
               resource.type: "index_or_alias"
               index_uuid: "_na_"
             status: 404
+
+    OpenIndexSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ShardsAcknowledgedResponse'
+          example:
+            acknowledged: true
+            shards_acknowledged: true
+
+    OpenIndexBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IndexErrorResponse'
+          example:
+            error:
+              root_cause:
+                - type: "invalid_index_name_exception"
+                  reason: "Invalid index name [_wazuh-alerts-4.x-2025.03.14], must not start with '_'."
+                  index: "_wazuh-alerts-4.x-2025.03.14"
+                  index_uuid: "_na_"
+              type: "invalid_index_name_exception"
+              reason: "Invalid index name [_wazuh-alerts-4.x-2025.03.14], must not start with '_'."
+              index: "_wazuh-alerts-4.x-2025.03.14"
+              index_uuid: "_na_"
+            status: 400
 
     IndexExistsSuccess:
       description: Success
