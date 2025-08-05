@@ -209,6 +209,15 @@ paths:
   /{index}/_recovery:
     $ref: 'index_api.yml#/paths/~1{index}~1_recovery'
 
+  /_settings:
+    $ref: 'index_api.yml#/paths/~1_settings'
+
+  /{target_index}/_settings:
+    $ref: 'index_api.yml#/paths/~1{target_index}~1_settings'
+
+  /{target_index}/_settings/{setting}:
+    $ref: 'index_api.yml#/paths/~1{target_index}~1_settings~1{setting}'
+
   /{index}/_analyze:
     parameters:
       - $ref: 'analyze_api.yml#/components/parameters/index'

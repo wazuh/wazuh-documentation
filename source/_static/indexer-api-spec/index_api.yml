@@ -615,6 +615,29 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 
+    head:
+      tags: [Index APIs]
+      summary: Index exists
+      description: |
+        The Index exists API determines if a specified index is present in the cluster, returning a response that indicates whether the index currently exists.
+      operationId: headIndexExists
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/allow_no_indices'
+        - $ref: '#/components/parameters/expand_wildcards'
+        - $ref: '#/components/parameters/flat_settings'
+        - $ref: '#/components/parameters/include_defaults'
+        - $ref: '#/components/parameters/ignore_unavailable'
+        - $ref: '#/components/parameters/local'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+      responses:
+        '200':
+          $ref: '#/components/responses/IndexExistsSuccess'
+        '404':
+          $ref: '#/components/responses/IndexExistsNotFound'
+
   /{target_index}/_mapping:
     parameters:
       - $ref: '#/components/parameters/target_index_mapping'
@@ -1173,6 +1196,100 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 
+  /_settings:
+    get:
+      tags: [Index APIs]
+      summary: Get settings (Global GET)
+      description: |
+        The Get Settings API retrieves all configuration settings associated with a specified index.
+      operationId: getSettingsGlobal
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/expand_wildcards'
+        - $ref: '#/components/parameters/flat_settings'
+        - $ref: '#/components/parameters/include_defaults'
+        - $ref: '#/components/parameters/ignore_unavailable'
+        - $ref: '#/components/parameters/local'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+      responses:
+        '200':
+          $ref: '#/components/responses/GetSettingsSuccess'
+        '400':
+          $ref: '#/components/responses/GetSettingsBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/GetSettingsNotFound'
+
+  /{target_index}/_settings:
+    parameters:
+      - $ref: '#/components/parameters/target_index_settings'
+    get:
+      tags: [Index APIs]
+      summary: Get settings (Target GET)
+      description: |
+        The Get Settings API retrieves all configuration settings associated with a specified index.
+      operationId: getSettingsTarget
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/allow_no_indices'
+        - $ref: '#/components/parameters/expand_wildcards'
+        - $ref: '#/components/parameters/flat_settings'
+        - $ref: '#/components/parameters/include_defaults'
+        - $ref: '#/components/parameters/ignore_unavailable'
+        - $ref: '#/components/parameters/local'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+      responses:
+        '200':
+          $ref: '#/components/responses/GetSettingsSuccess'
+        '400':
+          $ref: '#/components/responses/GetSettingsBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/GetSettingsNotFound'
+
+  /{target_index}/_settings/{setting}:
+    parameters:
+      - $ref: '#/components/parameters/target_index_settings'
+      - $ref: '#/components/parameters/setting'
+    get:
+      tags: [Index APIs]
+      summary: Get settings (Target Setting GET)
+      description: |
+        The Get Settings API retrieves all configuration settings associated with a specified index.
+      operationId: getSettingsTargetSetting
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/allow_no_indices'
+        - $ref: '#/components/parameters/expand_wildcards'
+        - $ref: '#/components/parameters/flat_settings'
+        - $ref: '#/components/parameters/include_defaults'
+        - $ref: '#/components/parameters/ignore_unavailable'
+        - $ref: '#/components/parameters/local'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+      responses:
+        '200':
+          $ref: '#/components/responses/GetSettingsSuccess'
+        '400':
+          $ref: '#/components/responses/GetSettingsBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/GetSettingsNotFound'
+
 components:
   parameters:
     target:
@@ -1449,6 +1566,16 @@ components:
         type: string
       example: "wazuh-alerts-4.x-2025.03.18"
 
+    target_index_settings:
+      name: target_index
+      in: path
+      required: true
+      description: |
+        The name of the index (or a comma-separated list of indexes) from which to retrieve settings or use `_all` to fetch settings from every index in the cluster.
+      schema:
+        type: string
+      example: "wazuh-alerts-4.x-2025.03.12"
+
     write_index_only:
       name: write_index_only
       in: query
@@ -1580,6 +1707,15 @@ components:
       required: false
       description: |
         A comma-separated list or wildcard pattern specifying index names to narrow the scope of the request.
+      schema:
+        type: string
+
+    setting:
+      name: setting
+      in: path
+      required: true
+      description: |
+        An optional filter that allows you to retrieve only specific settings from the target index or indexes.
       schema:
         type: string
 
@@ -2356,42 +2492,7 @@ components:
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              error:
-                type: object
-                properties:
-                  root_cause:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        type:
-                          type: string
-                        reason:
-                          type: string
-                        index:
-                          type: string
-                        resource.id:
-                          type: integer
-                        resource.type:
-                          type: string
-                        index_uuid:
-                          type: string
-                  type:
-                    type: string
-                  reason:
-                    type: string
-                  index:
-                    type: string
-                  resource.id:
-                    type: integer
-                  resource.type:
-                    type: string
-                  index_uuid:
-                    type: string
-              status:
-                type: integer
+            $ref: '#/components/schemas/NotFoundResponse'
           example:
             error:
               root_cause:
@@ -2948,6 +3049,764 @@ components:
               index_uuid: "_na_"
             status: 400
 
+    GetSettingsSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            description: |
+              Contains all configuration settings for the specified index.
+            additionalProperties:
+              type: object
+              properties:
+                settings:
+                  type: object
+                  description: |
+                    Contains all configuration settings related to the index.
+                  properties:
+                    index:
+                      type: object
+                      properties:
+                        replication:
+                          type: object
+                          additionalProperties:
+                            type: object
+                        mapping:
+                          type: object
+                          additionalProperties:
+                            type: object
+                        refresh_interval:
+                          type: string
+                        number_of_shards:
+                          type: string
+                          description: |
+                            The number of primary shards assigned to the index.
+                        auto_expand_replicas:
+                          type: string
+                        provided_name:
+                          type: string
+                          description: |
+                            The original name given to the index at the time of its creation.
+                        query:
+                          type: object
+                          additionalProperties:
+                            type: object
+                    creation_date:
+                      type: string
+                      description: |
+                        The date and time the index was created, in Unix epoch format (milliseconds).
+                    number_of_replicas:
+                      type: string
+                      description: |
+                        The number of replica shards configured for the index.
+                    uuid:
+                      type: string
+                      description: |
+                        The unique identifier (UUID) of the index.
+                    version:
+                      type: object
+                      properties:
+                        created:
+                          type: string
+                          description: |
+                            The Wazuh indexer version in which the index was originally created.
+          example:
+            "wazuh-alerts-4.x-2025.03.01":
+              settings:
+                index:
+                  replication:
+                    type: "DOCUMENT"
+                  mapping:
+                    total_fields:
+                      limit: "10000"
+                  refresh_interval: "5s"
+                  number_of_shards: "3"
+                  auto_expand_replicas: "0-1"
+                  provided_name: "<wazuh-alerts-4.x-{2025.03.01||/d{yyyy.MM.dd|UTC}}>"
+                  query:
+                    default_field:
+                      - "GeoLocation.city_name"
+                      - "GeoLocation.continent_code"
+                      - "GeoLocation.country_code2"
+                      - "GeoLocation.country_code3"
+                      - "GeoLocation.country_name"
+                      - "GeoLocation.ip"
+                      - "GeoLocation.postal_code"
+                      - "GeoLocation.real_region_name"
+                      - "GeoLocation.region_name"
+                      - "GeoLocation.timezone"
+                      - "agent.id"
+                      - "agent.ip"
+                      - "agent.name"
+                      - "cluster.name"
+                      - "cluster.node"
+                      - "command"
+                      - "data"
+                      - "data.action"
+                      - "data.audit"
+                      - "data.audit.acct"
+                      - "data.audit.arch"
+                      - "data.audit.auid"
+                      - "data.audit.command"
+                      - "data.audit.cwd"
+                      - "data.audit.dev"
+                      - "data.audit.directory.inode"
+                      - "data.audit.directory.mode"
+                      - "data.audit.directory.name"
+                      - "data.audit.egid"
+                      - "data.audit.enforcing"
+                      - "data.audit.euid"
+                      - "data.audit.exe"
+                      - "data.audit.execve.a0"
+                      - "data.audit.execve.a1"
+                      - "data.audit.execve.a2"
+                      - "data.audit.execve.a3"
+                      - "data.audit.exit"
+                      - "data.audit.file.inode"
+                      - "data.audit.file.mode"
+                      - "data.audit.file.name"
+                      - "data.audit.fsgid"
+                      - "data.audit.fsuid"
+                      - "data.audit.gid"
+                      - "data.audit.id"
+                      - "data.audit.key"
+                      - "data.audit.list"
+                      - "data.audit.old-auid"
+                      - "data.audit.old-ses"
+                      - "data.audit.old_enforcing"
+                      - "data.audit.old_prom"
+                      - "data.audit.op"
+                      - "data.audit.pid"
+                      - "data.audit.ppid"
+                      - "data.audit.prom"
+                      - "data.audit.res"
+                      - "data.audit.session"
+                      - "data.audit.sgid"
+                      - "data.audit.srcip"
+                      - "data.audit.subj"
+                      - "data.audit.success"
+                      - "data.audit.suid"
+                      - "data.audit.syscall"
+                      - "data.audit.tty"
+                      - "data.audit.uid"
+                      - "data.aws.accountId"
+                      - "data.aws.account_id"
+                      - "data.aws.action"
+                      - "data.aws.actor"
+                      - "data.aws.aws_account_id"
+                      - "data.aws.description"
+                      - "data.aws.dstport"
+                      - "data.aws.errorCode"
+                      - "data.aws.errorMessage"
+                      - "data.aws.eventID"
+                      - "data.aws.eventName"
+                      - "data.aws.eventSource"
+                      - "data.aws.eventType"
+                      - "data.aws.id"
+                      - "data.aws.name"
+                      - "data.aws.requestParameters.accessKeyId"
+                      - "data.aws.requestParameters.bucketName"
+                      - "data.aws.requestParameters.gatewayId"
+                      - "data.aws.requestParameters.groupDescription"
+                      - "data.aws.requestParameters.groupId"
+                      - "data.aws.requestParameters.groupName"
+                      - "data.aws.requestParameters.host"
+                      - "data.aws.requestParameters.hostedZoneId"
+                      - "data.aws.requestParameters.instanceId"
+                      - "data.aws.requestParameters.instanceProfileName"
+                      - "data.aws.requestParameters.loadBalancerName"
+                      - "data.aws.requestParameters.loadBalancerPorts"
+                      - "data.aws.requestParameters.masterUserPassword"
+                      - "data.aws.requestParameters.masterUsername"
+                      - "data.aws.requestParameters.name"
+                      - "data.aws.requestParameters.natGatewayId"
+                      - "data.aws.requestParameters.networkAclId"
+                      - "data.aws.requestParameters.path"
+                      - "data.aws.requestParameters.policyName"
+                      - "data.aws.requestParameters.port"
+                      - "data.aws.requestParameters.stackId"
+                      - "data.aws.requestParameters.stackName"
+                      - "data.aws.requestParameters.subnetId"
+                      - "data.aws.requestParameters.subnetIds"
+                      - "data.aws.requestParameters.volumeId"
+                      - "data.aws.requestParameters.vpcId"
+                      - "data.aws.resource.accessKeyDetails.accessKeyId"
+                      - "data.aws.resource.accessKeyDetails.principalId"
+                      - "data.aws.resource.accessKeyDetails.userName"
+                      - "data.aws.resource.instanceDetails.instanceId"
+                      - "data.aws.resource.instanceDetails.instanceState"
+                      - "data.aws.resource.instanceDetails.networkInterfaces.privateDnsName"
+                      - "data.aws.resource.instanceDetails.networkInterfaces.publicDnsName"
+                      - "data.aws.resource.instanceDetails.networkInterfaces.subnetId"
+                      - "data.aws.resource.instanceDetails.networkInterfaces.vpcId"
+                      - "data.aws.resource.instanceDetails.tags.value"
+                      - "data.aws.responseElements.AssociateVpcCidrBlockResponse.vpcId"
+                      - "data.aws.responseElements.description"
+                      - "data.aws.responseElements.instanceId"
+                      - "data.aws.responseElements.instances.instanceId"
+                      - "data.aws.responseElements.instancesSet.items.instanceId"
+                      - "data.aws.responseElements.listeners.port"
+                      - "data.aws.responseElements.loadBalancerName"
+                      - "data.aws.responseElements.loadBalancers.vpcId"
+                      - "data.aws.responseElements.loginProfile.userName"
+                      - "data.aws.responseElements.networkAcl.vpcId"
+                      - "data.aws.responseElements.ownerId"
+                      - "data.aws.responseElements.publicIp"
+                      - "data.aws.responseElements.user.userId"
+                      - "data.aws.responseElements.user.userName"
+                      - "data.aws.responseElements.volumeId"
+                      - "data.aws.service.serviceName"
+                      - "data.aws.severity"
+                      - "data.aws.source"
+                      - "data.aws.sourceIPAddress"
+                      - "data.aws.srcport"
+                      - "data.aws.userIdentity.accessKeyId"
+                      - "data.aws.userIdentity.accountId"
+                      - "data.aws.userIdentity.userName"
+                      - "data.aws.vpcEndpointId"
+                      - "data.command"
+                      - "data.cis.group"
+                      - "data.cis.rule_title"
+                      - "data.data"
+                      - "data.docker.Actor.Attributes.container"
+                      - "data.docker.Actor.Attributes.image"
+                      - "data.docker.Actor.Attributes.name"
+                      - "data.docker.Actor.ID"
+                      - "data.docker.id"
+                      - "data.docker.message"
+                      - "data.docker.status"
+                      - "data.dstip"
+                      - "data.dstport"
+                      - "data.dstuser"
+                      - "data.extra_data"
+                      - "data.gcp.jsonPayload.queryName"
+                      - "data.gcp.jsonPayload.vmInstanceName"
+                      - "data.gcp.resource.labels.location"
+                      - "data.gcp.resource.labels.project_id"
+                      - "data.gcp.resource.labels.source_type"
+                      - "data.gcp.resource.type"
+                      - "data.github.org"
+                      - "data.github.actor"
+                      - "data.github.action"
+                      - "data.github.repo"
+                      - "data.hardware.serial"
+                      - "data.id"
+                      - "data.integration"
+                      - "data.netinfo.iface.adapter"
+                      - "data.netinfo.iface.ipv4.address"
+                      - "data.netinfo.iface.ipv6.address"
+                      - "data.netinfo.iface.mac"
+                      - "data.netinfo.iface.name"
+                      - "data.office365.Actor.ID"
+                      - "data.office365.UserId"
+                      - "data.office365.Operation"
+                      - "data.office365.ClientIP"
+                      - "data.ms-graph.relationship"
+                      - "data.ms-graph.classification"
+                      - "data.ms-graph.detectionSource"
+                      - "data.ms-graph.determination"
+                      - "data.ms-graph.remediationStatus"
+                      - "data.ms-graph.roles"
+                      - "data.ms-graph.verdict"
+                      - "data.ms-graph.serviceSource"
+                      - "data.ms-graph.severity"
+                      - "data.ms-graph.actorDisplayName"
+                      - "data.ms-graph.alertWebUrl"
+                      - "data.ms-graph.assignedTo"
+                      - "data.ms-graph.category"
+                      - "data.ms-graph.comments"
+                      - "data.ms-graph.description"
+                      - "data.ms-graph.detectorId"
+                      - "data.ms-graph.evidence._comment"
+                      - "data.ms-graph.id"
+                      - "data.ms-graph.incidentId"
+                      - "data.ms-graph.incidentWebUrl"
+                      - "data.ms-graph.mitreTechniques"
+                      - "data.ms-graph.providerAlertId"
+                      - "data.ms-graph.resource"
+                      - "data.ms-graph.status"
+                      - "data.ms-graph.tenantId"
+                      - "data.ms-graph.threatDisplayName"
+                      - "data.ms-graph.threatFamilyName"
+                      - "data.ms-graph.title"
+                      - "data.ms-graph.@odata.type"
+                      - "data.ms-graph.activationLockBypassCode"
+                      - "data.ms-graph.activity"
+                      - "data.ms-graph.activityOperationType"
+                      - "data.ms-graph.activityResult"
+                      - "data.ms-graph.activityType"
+                      - "data.ms-graph.actor.@odata.type"
+                      - "data.ms-graph.actor.applicationDisplayName"
+                      - "data.ms-graph.actor.applicationId"
+                      - "data.ms-graph.actor.auditActorType"
+                      - "data.ms-graph.actor.ipAddress"
+                      - "data.ms-graph.actor.servicePrincipalName"
+                      - "data.ms-graph.actor.type"
+                      - "data.ms-graph.actor.userId"
+                      - "data.ms-graph.actor.userPermissions"
+                      - "data.ms-graph.actor.userPrincipalName"
+                      - "data.ms-graph.androidSecurityPatchLevel"
+                      - "data.ms-graph.appliedConditionalAccessPolicies"
+                      - "data.ms-graph.azureADDeviceId"
+                      - "data.ms-graph.azureADRegistered"
+                      - "data.ms-graph.complianceState"
+                      - "data.ms-graph.componentName"
+                      - "data.ms-graph.configurationManagerClientEnabledFeatures.@odata.type"
+                      - "data.ms-graph.configurationManagerClientEnabledFeatures.compliancePolicy"
+                      - "data.ms-graph.configurationManagerClientEnabledFeatures.deviceConfiguration"
+                      - "data.ms-graph.configurationManagerClientEnabledFeatures.inventory"
+                      - "data.ms-graph.configurationManagerClientEnabledFeatures.modernApps"
+                      - "data.ms-graph.configurationManagerClientEnabledFeatures.resourceAccess"
+                      - "data.ms-graph.configurationManagerClientEnabledFeatures.windowsUpdateForBusiness"
+                      - "data.ms-graph.correlationId"
+                      - "data.ms-graph.deviceActionResults.@odata.type"
+                      - "data.ms-graph.deviceActionResults.actionName"
+                      - "data.ms-graph.deviceActionResults.actionState"
+                      - "data.ms-graph.deviceCategoryDisplayName"
+                      - "data.ms-graph.deviceEnrollmentType"
+                      - "data.ms-graph.deviceHealthAttestationState.@odata.type"
+                      - "data.ms-graph.deviceHealthAttestationState.attestationIdentityKey"
+                      - "data.ms-graph.deviceHealthAttestationState.bitLockerStatus"
+                      - "data.ms-graph.deviceHealthAttestationState.bootAppSecurityVersion"
+                      - "data.ms-graph.deviceHealthAttestationState.bootDebugging"
+                      - "data.ms-graph.deviceHealthAttestationState.bootManagerSecurityVersion"
+                      - "data.ms-graph.deviceHealthAttestationState.bootManagerVersion"
+                      - "data.ms-graph.deviceHealthAttestationState.bootRevisionListInfo"
+                      - "data.ms-graph.deviceHealthAttestationState.codeIntegrity"
+                      - "data.ms-graph.deviceHealthAttestationState.codeIntegrityCheckVersion"
+                      - "data.ms-graph.deviceHealthAttestationState.codeIntegrityPolicy"
+                      - "data.ms-graph.deviceHealthAttestationState.contentNamespaceUrl"
+                      - "data.ms-graph.deviceHealthAttestationState.contentVersion"
+                      - "data.ms-graph.deviceHealthAttestationState.dataExcutionPolicy"
+                      - "data.ms-graph.deviceHealthAttestationState.deviceHealthAttestationStatus"
+                      - "data.ms-graph.deviceHealthAttestationState.earlyLaunchAntiMalwareDriverProtection"
+                      - "data.ms-graph.deviceHealthAttestationState.healthAttestationSupportedStatus"
+                      - "data.ms-graph.deviceHealthAttestationState.healthStatusMismatchInfo"
+                      - "data.ms-graph.deviceHealthAttestationState.operatingSystemKernelDebugging"
+                      - "data.ms-graph.deviceHealthAttestationState.operatingSystemRevListInfo"
+                      - "data.ms-graph.deviceHealthAttestationState.pcr0"
+                      - "data.ms-graph.deviceHealthAttestationState.pcrHashAlgorithm"
+                      - "data.ms-graph.deviceHealthAttestationState.resetCount"
+                      - "data.ms-graph.deviceHealthAttestationState.restartCount"
+                      - "data.ms-graph.deviceHealthAttestationState.safeMode"
+                      - "data.ms-graph.deviceHealthAttestationState.secureBoot"
+                      - "data.ms-graph.deviceHealthAttestationState.secureBootConfigurationPolicyFingerPrint"
+                      - "data.ms-graph.deviceHealthAttestationState.testSigning"
+                      - "data.ms-graph.deviceHealthAttestationState.tpmVersion"
+                      - "data.ms-graph.deviceHealthAttestationState.virtualSecureMode"
+                      - "data.ms-graph.deviceHealthAttestationState.windowsPE"
+                      - "data.ms-graph.deviceName"
+                      - "data.ms-graph.deviceRegistrationState"
+                      - "data.ms-graph.displayName"
+                      - "data.ms-graph.easActivated"
+                      - "data.ms-graph.easDeviceId"
+                      - "data.ms-graph.emailAddress"
+                      - "data.ms-graph.enrollmentProfileName"
+                      - "data.ms-graph.ethernetMacAddress"
+                      - "data.ms-graph.exchangeAccessState"
+                      - "data.ms-graph.exchangeAccessStateReason"
+                      - "data.ms-graph.freeStorageSpaceInBytes"
+                      - "data.ms-graph.iccid"
+                      - "data.ms-graph.imei"
+                      - "data.ms-graph.isEncrypted"
+                      - "data.ms-graph.isSupervised"
+                      - "data.ms-graph.jailBroken"
+                      - "data.ms-graph.managedDeviceName"
+                      - "data.ms-graph.managedDevices.deviceName"
+                      - "data.ms-graph.managedDevices.id"
+                      - "data.ms-graph.managedDeviceOwnerType"
+                      - "data.ms-graph.managementAgent"
+                      - "data.ms-graph.manufacturer"
+                      - "data.ms-graph.meid"
+                      - "data.ms-graph.model"
+                      - "data.ms-graph.notes"
+                      - "data.ms-graph.operatingSystem"
+                      - "data.ms-graph.osVersion"
+                      - "data.ms-graph.partnerReportedThreatState"
+                      - "data.ms-graph.phoneNumber"
+                      - "data.ms-graph.physicalMemoryInBytes"
+                      - "data.ms-graph.platform"
+                      - "data.ms-graph.publisher"
+                      - "data.ms-graph.remoteAssistanceSessionErrorDetails"
+                      - "data.ms-graph.remoteAssistanceSessionUrl"
+                      - "data.ms-graph.requireUserEnrollmentApproval"
+                      - "data.ms-graph.resources.@odata.type"
+                      - "data.ms-graph.resources.auditResourceType"
+                      - "data.ms-graph.resources.displayName"
+                      - "data.ms-graph.resources.modifiedProperties.@odata.type"
+                      - "data.ms-graph.resources.modifiedProperties.displayName"
+                      - "data.ms-graph.resources.modifiedProperties.oldValue"
+                      - "data.ms-graph.resources.modifiedProperties.newValue"
+                      - "data.ms-graph.resources.resourceId"
+                      - "data.ms-graph.resources.type"
+                      - "data.ms-graph.serialNumber"
+                      - "data.ms-graph.sizeInByte"
+                      - "data.ms-graph.subscriberCarrier"
+                      - "data.ms-graph.totalStorageSpaceInBytes"
+                      - "data.ms-graph.udid"
+                      - "data.ms-graph.userDisplayName"
+                      - "data.ms-graph.userId"
+                      - "data.ms-graph.userPrincipalName"
+                      - "data.ms-graph.version"
+                      - "data.ms-graph.wiFiMacAddress"
+                      - "data.os.architecture"
+                      - "data.os.build"
+                      - "data.os.codename"
+                      - "data.os.hostname"
+                      - "data.os.major"
+                      - "data.os.minor"
+                      - "data.os.patch"
+                      - "data.os.name"
+                      - "data.os.platform"
+                      - "data.os.release"
+                      - "data.os.release_version"
+                      - "data.os.display_version"
+                      - "data.os.sysname"
+                      - "data.os.version"
+                      - "data.oscap.check.description"
+                      - "data.oscap.check.id"
+                      - "data.oscap.check.identifiers"
+                      - "data.oscap.check.oval.id"
+                      - "data.oscap.check.rationale"
+                      - "data.oscap.check.references"
+                      - "data.oscap.check.result"
+                      - "data.oscap.check.severity"
+                      - "data.oscap.check.title"
+                      - "data.oscap.scan.benchmark.id"
+                      - "data.oscap.scan.content"
+                      - "data.oscap.scan.id"
+                      - "data.oscap.scan.profile.id"
+                      - "data.oscap.scan.profile.title"
+                      - "data.osquery.columns.address"
+                      - "data.osquery.columns.command"
+                      - "data.osquery.columns.description"
+                      - "data.osquery.columns.dst_ip"
+                      - "data.osquery.columns.gid"
+                      - "data.osquery.columns.hostname"
+                      - "data.osquery.columns.md5"
+                      - "data.osquery.columns.path"
+                      - "data.osquery.columns.sha1"
+                      - "data.osquery.columns.sha256"
+                      - "data.osquery.columns.src_ip"
+                      - "data.osquery.columns.user"
+                      - "data.osquery.columns.username"
+                      - "data.osquery.name"
+                      - "data.osquery.pack"
+                      - "data.port.process"
+                      - "data.port.protocol"
+                      - "data.port.state"
+                      - "data.process.args"
+                      - "data.process.cmd"
+                      - "data.process.egroup"
+                      - "data.process.euser"
+                      - "data.process.fgroup"
+                      - "data.process.name"
+                      - "data.process.rgroup"
+                      - "data.process.ruser"
+                      - "data.process.sgroup"
+                      - "data.process.state"
+                      - "data.process.suser"
+                      - "data.program.architecture"
+                      - "data.program.description"
+                      - "data.program.format"
+                      - "data.program.location"
+                      - "data.program.multiarch"
+                      - "data.program.name"
+                      - "data.program.priority"
+                      - "data.program.section"
+                      - "data.program.source"
+                      - "data.program.vendor"
+                      - "data.program.version"
+                      - "data.protocol"
+                      - "data.pwd"
+                      - "data.sca"
+                      - "data.sca.check.compliance.cis"
+                      - "data.sca.check.compliance.cis_csc"
+                      - "data.sca.check.compliance.pci_dss"
+                      - "data.sca.check.compliance.hipaa"
+                      - "data.sca.check.compliance.nist_800_53"
+                      - "data.sca.check.description"
+                      - "data.sca.check.directory"
+                      - "data.sca.check.file"
+                      - "data.sca.check.id"
+                      - "data.sca.check.previous_result"
+                      - "data.sca.check.process"
+                      - "data.sca.check.rationale"
+                      - "data.sca.check.reason"
+                      - "data.sca.check.references"
+                      - "data.sca.check.registry"
+                      - "data.sca.check.remediation"
+                      - "data.sca.check.result"
+                      - "data.sca.check.title"
+                      - "data.sca.description"
+                      - "data.sca.file"
+                      - "data.sca.invalid"
+                      - "data.sca.name"
+                      - "data.sca.policy"
+                      - "data.sca.policy_id"
+                      - "data.sca.scan_id"
+                      - "data.sca.total_checks"
+                      - "data.scan_id"
+                      - "data.script"
+                      - "data.src_ip"
+                      - "data.src_port"
+                      - "data.srcip"
+                      - "data.srcport"
+                      - "data.srcuser"
+                      - "data.status"
+                      - "data.system_name"
+                      - "data.title"
+                      - "data.tty"
+                      - "data.uid"
+                      - "data.url"
+                      - "data.virustotal.description"
+                      - "data.virustotal.error"
+                      - "data.virustotal.found"
+                      - "data.virustotal.permalink"
+                      - "data.virustotal.scan_date"
+                      - "data.virustotal.sha1"
+                      - "data.virustotal.source.alert_id"
+                      - "data.virustotal.source.file"
+                      - "data.virustotal.source.md5"
+                      - "data.virustotal.source.sha1"
+                      - "data.vulnerability.cve"
+                      - "data.vulnerability.cvss.cvss2.base_score"
+                      - "data.vulnerability.cvss.cvss2.exploitability_score"
+                      - "data.vulnerability.cvss.cvss2.impact_score"
+                      - "data.vulnerability.cvss.cvss2.vector.access_complexity"
+                      - "data.vulnerability.cvss.cvss2.vector.attack_vector"
+                      - "data.vulnerability.cvss.cvss2.vector.authentication"
+                      - "data.vulnerability.cvss.cvss2.vector.availability"
+                      - "data.vulnerability.cvss.cvss2.vector.confidentiality_impact"
+                      - "data.vulnerability.cvss.cvss2.vector.integrity_impact"
+                      - "data.vulnerability.cvss.cvss2.vector.privileges_required"
+                      - "data.vulnerability.cvss.cvss2.vector.scope"
+                      - "data.vulnerability.cvss.cvss2.vector.user_interaction"
+                      - "data.vulnerability.cvss.cvss3.base_score"
+                      - "data.vulnerability.cvss.cvss3.exploitability_score"
+                      - "data.vulnerability.cvss.cvss3.impact_score"
+                      - "data.vulnerability.cvss.cvss3.vector.access_complexity"
+                      - "data.vulnerability.cvss.cvss3.vector.attack_vector"
+                      - "data.vulnerability.cvss.cvss3.vector.authentication"
+                      - "data.vulnerability.cvss.cvss3.vector.availability"
+                      - "data.vulnerability.cvss.cvss3.vector.confidentiality_impact"
+                      - "data.vulnerability.cvss.cvss3.vector.integrity_impact"
+                      - "data.vulnerability.cvss.cvss3.vector.privileges_required"
+                      - "data.vulnerability.cvss.cvss3.vector.scope"
+                      - "data.vulnerability.cvss.cvss3.vector.user_interaction"
+                      - "data.vulnerability.cwe_reference"
+                      - "data.vulnerability.package.source"
+                      - "data.vulnerability.package.architecture"
+                      - "data.vulnerability.package.condition"
+                      - "data.vulnerability.package.generated_cpe"
+                      - "data.vulnerability.package.name"
+                      - "data.vulnerability.package.version"
+                      - "data.vulnerability.rationale"
+                      - "data.vulnerability.severity"
+                      - "data.vulnerability.status"
+                      - "data.vulnerability.title"
+                      - "data.vulnerability.assigner"
+                      - "data.vulnerability.cve_version"
+                      - "data.win.eventdata.auditPolicyChanges"
+                      - "data.win.eventdata.auditPolicyChangesId"
+                      - "data.win.eventdata.binary"
+                      - "data.win.eventdata.category"
+                      - "data.win.eventdata.categoryId"
+                      - "data.win.eventdata.data"
+                      - "data.win.eventdata.image"
+                      - "data.win.eventdata.ipAddress"
+                      - "data.win.eventdata.ipPort"
+                      - "data.win.eventdata.keyName"
+                      - "data.win.eventdata.logonGuid"
+                      - "data.win.eventdata.logonProcessName"
+                      - "data.win.eventdata.operation"
+                      - "data.win.eventdata.parentImage"
+                      - "data.win.eventdata.processId"
+                      - "data.win.eventdata.processName"
+                      - "data.win.eventdata.providerName"
+                      - "data.win.eventdata.returnCode"
+                      - "data.win.eventdata.service"
+                      - "data.win.eventdata.status"
+                      - "data.win.eventdata.subcategory"
+                      - "data.win.eventdata.subcategoryGuid"
+                      - "data.win.eventdata.subcategoryId"
+                      - "data.win.eventdata.subjectDomainName"
+                      - "data.win.eventdata.subjectLogonId"
+                      - "data.win.eventdata.subjectUserName"
+                      - "data.win.eventdata.subjectUserSid"
+                      - "data.win.eventdata.targetDomainName"
+                      - "data.win.eventdata.targetLinkedLogonId"
+                      - "data.win.eventdata.targetLogonId"
+                      - "data.win.eventdata.targetUserName"
+                      - "data.win.eventdata.targetUserSid"
+                      - "data.win.eventdata.workstationName"
+                      - "data.win.system.channel"
+                      - "data.win.system.computer"
+                      - "data.win.system.eventID"
+                      - "data.win.system.eventRecordID"
+                      - "data.win.system.eventSourceName"
+                      - "data.win.system.keywords"
+                      - "data.win.system.level"
+                      - "data.win.system.message"
+                      - "data.win.system.opcode"
+                      - "data.win.system.processID"
+                      - "data.win.system.providerGuid"
+                      - "data.win.system.providerName"
+                      - "data.win.system.securityUserID"
+                      - "data.win.system.severityValue"
+                      - "data.win.system.userID"
+                      - "decoder.ftscomment"
+                      - "decoder.name"
+                      - "decoder.parent"
+                      - "full_log"
+                      - "host"
+                      - "id"
+                      - "input"
+                      - "location"
+                      - "manager.name"
+                      - "message"
+                      - "offset"
+                      - "predecoder.hostname"
+                      - "predecoder.program_name"
+                      - "previous_log"
+                      - "previous_output"
+                      - "program_name"
+                      - "rule.cis"
+                      - "rule.cve"
+                      - "rule.description"
+                      - "rule.gdpr"
+                      - "rule.gpg13"
+                      - "rule.groups"
+                      - "rule.id"
+                      - "rule.info"
+                      - "rule.mitre.id"
+                      - "rule.mitre.tactic"
+                      - "rule.mitre.technique"
+                      - "rule.pci_dss"
+                      - "rule.hipaa"
+                      - "rule.nist_800_53"
+                      - "syscheck.audit.effective_user.id"
+                      - "syscheck.audit.effective_user.name"
+                      - "syscheck.audit.group.id"
+                      - "syscheck.audit.group.name"
+                      - "syscheck.audit.login_user.id"
+                      - "syscheck.audit.login_user.name"
+                      - "syscheck.audit.process.id"
+                      - "syscheck.audit.process.name"
+                      - "syscheck.audit.process.ppid"
+                      - "syscheck.audit.user.id"
+                      - "syscheck.audit.user.name"
+                      - "syscheck.diff"
+                      - "syscheck.event"
+                      - "syscheck.gid_after"
+                      - "syscheck.gid_before"
+                      - "syscheck.gname_after"
+                      - "syscheck.gname_before"
+                      - "syscheck.inode_after"
+                      - "syscheck.inode_before"
+                      - "syscheck.md5_after"
+                      - "syscheck.md5_before"
+                      - "syscheck.path"
+                      - "syscheck.mode"
+                      - "syscheck.perm_after"
+                      - "syscheck.perm_before"
+                      - "syscheck.sha1_after"
+                      - "syscheck.sha1_before"
+                      - "syscheck.sha256_after"
+                      - "syscheck.sha256_before"
+                      - "syscheck.tags"
+                      - "syscheck.uid_after"
+                      - "syscheck.uid_before"
+                      - "syscheck.uname_after"
+                      - "syscheck.uname_before"
+                      - "syscheck.arch"
+                      - "syscheck.value_name"
+                      - "syscheck.value_type"
+                      - "syscheck.changed_attributes"
+                      - "title"
+                creation_date: "1740822568074"
+                number_of_replicas: "0"
+                uuid: "Fy7I0m2MSEy6HbNxm0rdGg"
+                version:
+                  created: "136377827"
+
+    GetSettingsBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IndexErrorResponse'
+          example:
+            error:
+              root_cause:
+                - type: "invalid_index_name_exception"
+                  reason: "Invalid index name [_wazuh-alerts-4.x-2025.03.01], must not start with '_'."
+                  index: "_wazuh-alerts-4.x-2025.03.01"
+                  index_uuid: "_na_"
+              type: "invalid_index_name_exception"
+              reason: "Invalid index name [_wazuh-alerts-4.x-2025.03.01], must not start with '_'."
+              index: "_wazuh-alerts-4.x-2025.03.01"
+              index_uuid: "_na_"
+            status: 400
+
+    GetSettingsNotFound:
+      description: Response to report a request not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/NotFoundResponse'
+          example:
+            error:
+              root_cause:
+                - type: "index_not_found_exception"
+                  reason: "no such index [wazuh-alerts-4.x-2025.03.10]"
+                  index: "wazuh-alerts-4.x-2025.03.10"
+                  resource.id: "wazuh-alerts-4.x-2025.03.10"
+                  resource.type: "index_or_alias"
+                  index_uuid: "_na_"
+              type: "index_not_found_exception"
+              reason: "no such index [wazuh-alerts-4.x-2025.03.10]"
+              index: "wazuh-alerts-4.x-2025.03.10"
+              resource.id: "wazuh-alerts-4.x-2025.03.10"
+              resource.type: "index_or_alias"
+              index_uuid: "_na_"
+            status: 404
+
+    IndexExistsSuccess:
+      description: Success
+      content:
+        text/plain:
+          schema:
+            type: string
+            description: |
+              Indicates the index exists.
+          example: 200 - true
+
+    IndexExistsNotFound:
+      description: Response to report a request not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              statusCode:
+                type: integer
+                description: |
+                  The HTTP status code returned by the API. `404` indicates that the requested resource (in this case, likely an index) was not found.
+              error:
+                type: string
+                description: |
+                  A brief description of the HTTP error. In this case, `"Not Found"` indicates the index does not exist.
+              message:
+                type: string
+                description: |
+                  A more verbose message combining the status code and a boolean-like indication (`false`) showing that the resource (e.g., index) is not available. This can vary slightly depending on the client or wrapper used.
+          example:
+            statusCode: 404
+            error: "Not Found"
+            message: "404 - false"
+
   schemas:
     # Common error response structure
     ErrorResponse:
@@ -3241,3 +4100,57 @@ components:
                 type: string
                 description: |
                   A value that routes search operations to a specific shard. If specified, it overrides the general routing setting for searches.
+
+    SettingsResponse:
+      type: object
+      description: |
+        Contains all configuration settings for an index.
+      properties:
+        settings:
+          type: object
+          description: |
+            The settings for the index.
+          additionalProperties:
+            type: string
+            description: |
+              The value of the setting.
+
+    NotFoundResponse:
+      type: object
+      description: |
+        Standard error response for resource not found scenarios.
+      properties:
+        error:
+          type: object
+          properties:
+            root_cause:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                  reason:
+                    type: string
+                  index:
+                    type: string
+                  resource.id:
+                    type: integer
+                  resource.type:
+                    type: string
+                  index_uuid:
+                    type: string
+            type:
+              type: string
+            reason:
+              type: string
+            index:
+              type: string
+            resource.id:
+              type: integer
+            resource.type:
+              type: string
+            index_uuid:
+              type: string
+        status:
+          type: integer
