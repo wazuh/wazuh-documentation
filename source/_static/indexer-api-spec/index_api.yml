@@ -1229,6 +1229,231 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 
+  /_refresh:
+    get:
+      tags: [Index APIs]
+      summary: Refresh index (Global GET)
+      description: |
+        The Refresh Index API updates one or more indexes in an OpenSearch cluster to make recent changes (such as newly indexed or deleted documents) searchable.
+
+        Once a shard becomes idle, it stops refreshing automatically. In such cases, the next search request or an explicit call to the Refresh Index API will trigger a refresh. If a search request comes first, it will pause until the refresh finishes.
+
+        To execute the Refresh Index API, you must have write permissions for the target indexes.
+      operationId: getRefreshGlobal
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/ignore_unavailable'
+        - $ref: '#/components/parameters/allow_no_indices'
+        - $ref: '#/components/parameters/expand_wildcards'
+      responses:
+        '200':
+          $ref: '#/components/responses/RefreshIndexSuccess'
+        '400':
+          $ref: '#/components/responses/RefreshIndexBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    post:
+      tags: [Index APIs]
+      summary: Refresh index (Global POST)
+      description: |
+        The Refresh Index API updates one or more indexes in an OpenSearch cluster to make recent changes (such as newly indexed or deleted documents) searchable.
+
+        Once a shard becomes idle, it stops refreshing automatically. In such cases, the next search request or an explicit call to the Refresh Index API will trigger a refresh. If a search request comes first, it will pause until the refresh finishes.
+
+        To execute the Refresh Index API, you must have write permissions for the target indexes.
+      operationId: postRefreshGlobal
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/ignore_unavailable'
+        - $ref: '#/components/parameters/allow_no_indices'
+        - $ref: '#/components/parameters/expand_wildcards'
+      responses:
+        '200':
+          $ref: '#/components/responses/RefreshIndexSuccess'
+        '400':
+          $ref: '#/components/responses/RefreshIndexBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /{index}/_refresh:
+    parameters:
+      - $ref: '#/components/parameters/index'
+    get:
+      tags: [Index APIs]
+      summary: Refresh index (Index GET)
+      description: |
+        The Refresh Index API updates one or more indexes in an OpenSearch cluster to make recent changes (such as newly indexed or deleted documents) searchable.
+
+        Once a shard becomes idle, it stops refreshing automatically. In such cases, the next search request or an explicit call to the Refresh Index API will trigger a refresh. If a search request comes first, it will pause until the refresh finishes.
+
+        To execute the Refresh Index API, you must have write permissions for the target indexes.
+      operationId: getIndexRefresh
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/ignore_unavailable'
+        - $ref: '#/components/parameters/allow_no_indices'
+        - $ref: '#/components/parameters/expand_wildcards'
+      responses:
+        '200':
+          $ref: '#/components/responses/RefreshIndexSuccess'
+        '400':
+          $ref: '#/components/responses/RefreshIndexBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    post:
+      tags: [Index APIs]
+      summary: Refresh index (Index POST)
+      description: |
+        The Refresh Index API updates one or more indexes in an OpenSearch cluster to make recent changes (such as newly indexed or deleted documents) searchable.
+
+        Once a shard becomes idle, it stops refreshing automatically. In such cases, the next search request or an explicit call to the Refresh Index API will trigger a refresh. If a search request comes first, it will pause until the refresh finishes.
+
+        To execute the Refresh Index API, you must have write permissions for the target indexes.
+      operationId: postIndexRefresh
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/ignore_unavailable'
+        - $ref: '#/components/parameters/allow_no_indices'
+        - $ref: '#/components/parameters/expand_wildcards'
+      responses:
+        '200':
+          $ref: '#/components/responses/RefreshIndexSuccess'
+        '400':
+          $ref: '#/components/responses/RefreshIndexBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /{rollover_target}/_rollover:
+    parameters:
+      - $ref: '#/components/parameters/rollover_target'
+    post:
+      tags: [Index APIs]
+      summary: Roll over index (Global)
+      description: |
+        The Rollover Index API operation initiates the creation of a new index for a data stream or index alias, depending on the conditions defined by the `wait_for_active_shards` setting.
+
+        **Rollover types**
+
+        You can roll over a data stream, an index alias with one index, or an index alias with a write index.
+
+        **Data Stream**
+
+        When performing a rollover on a data stream, the API creates a new write index for that stream. The existing write index is converted into a standard backing index, and the data stream's generation count is incremented. Note that rollover operations on data streams do not allow specifying index settings in the request body.
+
+        **Index Alias with a Single Index**
+
+        If an index alias is linked to just one index, initiating a rollover will result in the creation of a new index. The original index is then removed from the alias.
+
+        **Index Alias with a Write Index**
+
+        For an alias that points to multiple indexes, one must be identified as the write index. During the rollover process, the API generates a new write index with its `is_write_index` flag set to `true`, while the previous write index has this property updated to `false`.
+
+        **Auto-Incrementing Index Names for Aliases**
+
+        When rolling over an index alias and no custom name is provided, if the current index name ends in a hyphen followed by a numeric sequence (e.g., `my-index-000001` or `my-index-3`), the rollover automatically increments this number in the new index name. For example, rolling over `my-index-000001` results in `my-index-000002`. The numerical suffix is padded with leading zeros to maintain a fixed length of six digits.
+
+        **Using Date Math in Index Rollovers**
+
+        For time-series data, you can incorporate date math into the index name when using an alias. For instance, creating an alias like `my-index-{now/d}-000001` on June 11, 2029, would result in an index named `my-index-2029.06.11-000001`. Performing a rollover on June 12, 2029, would generate `my-index-2029.06.12-000002`.
+      operationId: postRolloverTargetRollover
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/wait_for_active_shards'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/timeout'
+      requestBody:
+        $ref: '#/components/requestBodies/RolloverIndexRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/RolloverIndexSuccess'
+        '400':
+          $ref: '#/components/responses/RolloverIndexBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+
+  /{rollover_target}/_rollover/{target_index}:
+    parameters:
+      - $ref: '#/components/parameters/rollover_target'
+      - $ref: '#/components/parameters/target_index_rollover'
+    post:
+      tags: [Index APIs]
+      summary: Roll over index (Target)
+      description: |
+        The Rollover Index API operation initiates the creation of a new index for a data stream or index alias, depending on the conditions defined by the `wait_for_active_shards` setting.
+
+        **Rollover types**
+
+        You can roll over a data stream, an index alias with one index, or an index alias with a write index.
+
+        **Data Stream**
+
+        When performing a rollover on a data stream, the API creates a new write index for that stream. The existing write index is converted into a standard backing index, and the data stream's generation count is incremented. Note that rollover operations on data streams do not allow specifying index settings in the request body.
+
+        **Index Alias with a Single Index**
+
+        If an index alias is linked to just one index, initiating a rollover will result in the creation of a new index. The original index is then removed from the alias.
+
+        **Index Alias with a Write Index**
+
+        For an alias that points to multiple indexes, one must be identified as the write index. During the rollover process, the API generates a new write index with its `is_write_index` flag set to `true`, while the previous write index has this property updated to `false`.
+
+        **Auto-Incrementing Index Names for Aliases**
+
+        When rolling over an index alias and no custom name is provided, if the current index name ends in a hyphen followed by a numeric sequence (e.g., `my-index-000001` or `my-index-3`), the rollover automatically increments this number in the new index name. For example, rolling over `my-index-000001` results in `my-index-000002`. The numerical suffix is padded with leading zeros to maintain a fixed length of six digits.
+
+        **Using Date Math in Index Rollovers**
+
+        For time-series data, you can incorporate date math into the index name when using an alias. For instance, creating an alias like `my-index-{now/d}-000001` on June 11, 2029, would result in an index named `my-index-2029.06.11-000001`. Performing a rollover on June 12, 2029, would generate `my-index-2029.06.12-000002`.
+      operationId: postRolloverTargetRolloverTargetIndex
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/wait_for_active_shards'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/timeout'
+      requestBody:
+        $ref: '#/components/requestBodies/RolloverIndexRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/RolloverIndexSuccess'
+        '400':
+          $ref: '#/components/responses/RolloverIndexBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+
   /_settings:
     get:
       tags: [Index APIs]
@@ -1752,6 +1977,25 @@ components:
       schema:
         type: string
 
+    rollover_target:
+      name: rollover_target
+      in: path
+      required: true
+      description: |
+        Specifies the name of the data stream or index alias to be rolled over.
+      schema:
+        type: string
+      example: "sample-alias1"
+
+    target_index_rollover:
+      name: target_index
+      in: path
+      required: true
+      description: |
+        Defines the name of the new index to be created during rollover. Supports date math expressions. This parameter is not supported for data streams. It is required if the current write index name for the alias does not end with a hyphen followed by a number (e.g., `my-index-000001` or `my-index-2`).
+      schema:
+        type: string
+
 
   requestBodies:
     AliasRequest:
@@ -2154,6 +2398,77 @@ components:
                       "user.id": "wazuh"
                   routing: "shard-1"
                 "{index}-alias": {}
+
+    RolloverIndexRequest:
+      description: |
+        The following request body fields are supported.
+      required: false
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              alias:
+                type: object
+                description: |
+                  The `alias` parameter defines the alias name as a key and is required when the `template` option is included in the request body.
+                properties:
+                  filter:
+                    type: object
+                    description: |
+                      A DSL query that limits the documents accessible through the alias.
+                  index_routing:
+                    type: string
+                    description: |
+                      Routes indexing operations to a specific shard. Overrides general routing for indexing when specified.
+                  is_hidden:
+                    type: boolean
+                    description: |
+                      Indicates whether the alias should be hidden.
+                    default: false
+                  is_write_index:
+                    type: boolean
+                    description: |
+                      Identifies the write index for the alias. If true, the index is used for write operations.
+                    default: false
+                  routing:
+                    type: string
+                    description: |
+                      A value that directs both indexing and search operations to a particular shard.
+                  search_routing:
+                    type: string
+                    description: |
+                      Routes search operations to a specific shard. Overrides the general routing value for search operations when set.
+              mappings:
+                type: object
+                description: |
+                  The `mappings` parameter specifies the index field mappings. It is optional.
+              conditions:
+                type: object
+                description: |
+                  The `conditions` parameter is an optional object that defines one or more rollover criteria. When specified, OpenSearch performs the rollover only if the current index meets at least one of the listed conditions. If this parameter is not provided, the rollover will proceed unconditionally.
+                properties:
+                  max_age:
+                    type: string
+                    format: duration
+                    description: |
+                      Triggers the rollover after a specified amount of time has passed since the index was created. The time is always measured from the index's creation timestamp, even if a custom origination date is defined using `index.lifecycle.origination_date` or `index.lifecycle.parse_origination_date`.
+                  max_docs:
+                    type: integer
+                    description: |
+                      Rolls over the index once it reaches the specified maximum number of documents. This count excludes documents added since the last refresh and documents stored in replica shards.
+                  max_size:
+                    type: string
+                    description: |
+                      Initiates rollover when the index size reaches the defined limit in byte units. The size is based on the combined total of primary shards only. Replica shards are excluded. You can use the `_cat/indices` API and refer to the `pri.store.size` field to monitor the current size.
+              settings:
+                type: object
+                description: |
+                  The settings parameter defines the configuration options for the new index created by the rollover. For more details, refer to the OpenSearch Index Settings documentation.
+          example:
+            conditions:
+              max_age: "1d"
+              max_docs: 2
 
   responses:
     AliasSuccess:
@@ -3833,6 +4148,98 @@ components:
               reason: "Invalid index name [_wazuh-alerts-4.x-2025.03.14], must not start with '_'."
               index: "_wazuh-alerts-4.x-2025.03.14"
               index_uuid: "_na_"
+            status: 400
+
+    RefreshIndexSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ShardsResponse'
+          example:
+            _shards:
+              total: 3
+              successful: 3
+              failed: 0
+
+    RefreshIndexBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IndexErrorResponse'
+          example:
+            error:
+              root_cause:
+                - type: "invalid_index_name_exception"
+                  reason: "Invalid index name [_wazuh-alerts-4.x-2025.03.14], must not start with '_'."
+                  index: "_wazuh-alerts-4.x-2025.03.14"
+                  index_uuid: "_na_"
+              type: "invalid_index_name_exception"
+              reason: "Invalid index name [_wazuh-alerts-4.x-2025.03.14], must not start with '_'."
+              index: "_wazuh-alerts-4.x-2025.03.14"
+              index_uuid: "_na_"
+            status: 400
+
+    RolloverIndexSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              acknowledged:
+                type: boolean
+                description: |
+                  Indicates whether the rollover request was acknowledged by all involved nodes.
+              shards_acknowledged:
+                type: boolean
+                description: |
+                  Indicates whether the shards of the newly created index were successfully started and acknowledged.
+              old_index:
+                type: string
+                description: |
+                  The name of the current write index before the rollover attempt.
+              new_index:
+                type: string
+                description: |
+                  The name that would be assigned to the new index if rollover had occurred.
+              rolled_over:
+                type: boolean
+                description: |
+                  Indicates whether the rollover actually took place.
+              dry_run:
+                type: boolean
+                description: |
+                  Indicates whether the request was a dry run (i.e., simulated without executing).
+              conditions:
+                type: object
+                description: |
+                  Shows the evaluation of each rollover condition.
+          example:
+            acknowledged: false
+            shards_acknowledged: false
+            old_index: "sample_index-000001"
+            new_index: "sample_index-000002"
+            rolled_over: false
+            dry_run: false
+            conditions:
+              "[max_age: 5d]": false
+              "[max_docs: 10]": true
+
+    RolloverIndexBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              root_cause:
+                - type: "illegal_argument_exception"
+                  reason: "rollover target [sample-alias1] does not point to a write index"
+              type: "illegal_argument_exception"
+              reason: "rollover target [sample-alias1] does not point to a write index"
             status: 400
 
     IndexExistsSuccess:

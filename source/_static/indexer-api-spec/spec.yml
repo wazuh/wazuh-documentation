@@ -221,6 +221,18 @@ paths:
   /{index}/_open:
     $ref: 'index_api.yml#/paths/~1{index}~1_open'
 
+  /_refresh:
+    $ref: 'index_api.yml#/paths/~1_refresh'
+
+  /{index}/_refresh:
+    $ref: 'index_api.yml#/paths/~1{index}~1_refresh'
+
+  /{rollover_target}/_rollover:
+    $ref: 'index_api.yml#/paths/~1{rollover_target}~1_rollover'
+
+  /{rollover_target}/_rollover/{target_index}:
+    $ref: 'index_api.yml#/paths/~1{rollover_target}~1_rollover~1{target_index}'
+
   /{index}/_analyze:
     parameters:
       - $ref: 'analyze_api.yml#/components/parameters/index'
