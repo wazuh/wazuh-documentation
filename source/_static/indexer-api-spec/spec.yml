@@ -191,6 +191,12 @@ paths:
   /_dangling/{index_uuid}:
     $ref: 'index_api.yml#/paths/~1_dangling~1{index_uuid}'
 
+  /_flush:
+    $ref: 'index_api.yml#/paths/~1_flush'
+
+  /{index}/_flush:
+    $ref: 'index_api.yml#/paths/~1{index}~1_flush'
+
   /{index}/_analyze:
     parameters:
       - $ref: 'analyze_api.yml#/components/parameters/index'

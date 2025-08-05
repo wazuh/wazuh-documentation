@@ -819,7 +819,7 @@ paths:
   /_dangling:
     get:
       tags: [Index APIs]
-      summary: Dangling indexes
+      summary: Dangling indexes (GET)
       description: |
         List dangling indexes. Dangling indexes are created when a node joins a cluster and contains shard data in its local directory that isn't already present in the cluster.
       operationId: getDangling
@@ -885,6 +885,124 @@ paths:
           $ref: '#/components/responses/DanglingIndexDeleteSuccess'
         '400':
           $ref: '#/components/responses/DanglingIndexDeleteBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /_flush:
+    get:
+      tags: [Index APIs]
+      summary: Flush (Global GET)
+      description: |
+        The Flush API writes all in-memory operations to disk segments. Once these operations are flushed to index segments, they no longer need to be retained in transaction logs during a cluster restart, as they are now safely stored within the Lucene index.
+
+        The Wazuh indexer automatically performs background flushes based on certain conditions, such as the size of the transaction log, which is managed by the `index.translog.flush_threshold_size` setting. It is recommended to use the Flush API only when necessary—for instance, before performing manual restarts or when aiming to free up memory.
+      operationId: getFlushGlobal
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/expand_wildcards'
+        - $ref: '#/components/parameters/force'
+        - $ref: '#/components/parameters/ignore_unavailable'
+        - $ref: '#/components/parameters/wait_if_ongoing'
+      responses:
+        '200':
+          $ref: '#/components/responses/FlushSuccess'
+        '400':
+          $ref: '#/components/responses/FlushBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    post:
+      tags: [Index APIs]
+      summary: Flush (Global POST)
+      description: |
+        The Flush API writes all in-memory operations to disk segments. Once these operations are flushed to index segments, they no longer need to be retained in transaction logs during a cluster restart, as they are now safely stored within the Lucene index.
+
+        The Wazuh indexer automatically performs background flushes based on certain conditions, such as the size of the transaction log, which is managed by the `index.translog.flush_threshold_size` setting. It is recommended to use the Flush API only when necessary—for instance, before performing manual restarts or when aiming to free up memory.
+      operationId: postFlushGlobal
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/expand_wildcards'
+        - $ref: '#/components/parameters/force'
+        - $ref: '#/components/parameters/ignore_unavailable'
+        - $ref: '#/components/parameters/wait_if_ongoing'
+      responses:
+        '200':
+          $ref: '#/components/responses/FlushSuccess'
+        '400':
+          $ref: '#/components/responses/FlushBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /{index}/_flush:
+    parameters:
+      - $ref: '#/components/parameters/index'
+    get:
+      tags: [Index APIs]
+      summary: Flush (Index GET)
+      description: |
+        The Flush API writes all in-memory operations to disk segments. Once these operations are flushed to index segments, they no longer need to be retained in transaction logs during a cluster restart, as they are now safely stored within the Lucene index.
+
+        The Wazuh indexer automatically performs background flushes based on certain conditions, such as the size of the transaction log, which is managed by the `index.translog.flush_threshold_size` setting. It is recommended to use the Flush API only when necessary—for instance, before performing manual restarts or when aiming to free up memory.
+      operationId: getIndexFlush
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/allow_no_indices'
+        - $ref: '#/components/parameters/expand_wildcards'
+        - $ref: '#/components/parameters/force'
+        - $ref: '#/components/parameters/ignore_unavailable'
+        - $ref: '#/components/parameters/wait_if_ongoing'
+      responses:
+        '200':
+          $ref: '#/components/responses/FlushSuccess'
+        '400':
+          $ref: '#/components/responses/FlushBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    post:
+      tags: [Index APIs]
+      summary: Flush (Index POST)
+      description: |
+        The Flush API writes all in-memory operations to disk segments. Once these operations are flushed to index segments, they no longer need to be retained in transaction logs during a cluster restart, as they are now safely stored within the Lucene index.
+
+        The Wazuh indexer automatically performs background flushes based on certain conditions, such as the size of the transaction log, which is managed by the `index.translog.flush_threshold_size` setting. It is recommended to use the Flush API only when necessary—for instance, before performing manual restarts or when aiming to free up memory.
+      operationId: postIndexFlush
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/allow_no_indices'
+        - $ref: '#/components/parameters/expand_wildcards'
+        - $ref: '#/components/parameters/force'
+        - $ref: '#/components/parameters/ignore_unavailable'
+        - $ref: '#/components/parameters/wait_if_ongoing'
+      responses:
+        '200':
+          $ref: '#/components/responses/FlushSuccess'
+        '400':
+          $ref: '#/components/responses/FlushBadRequest'
         '401':
           $ref: 'spec.yml#/components/responses/Unauthorized'
         '403':
@@ -1167,6 +1285,62 @@ components:
       schema:
         type: string
       example: "wazuh-alerts-4.x-2025.03.18"
+
+    write_index_only:
+      name: write_index_only
+      in: query
+      required: false
+      description: |
+        Determines whether mapping updates should only apply to the write index.
+      schema:
+        type: boolean
+
+    component_template_name:
+      name: component_template_name
+      in: path
+      required: true
+      description: |
+        The name of the component template.
+      schema:
+        type: string
+
+    index_uuid:
+      name: index_uuid
+      in: path
+      required: true
+      description: |
+        The unique identifier (UUID) of the index.
+      schema:
+        type: string
+
+    accept_data_loss:
+      name: accept_data_loss
+      in: query
+      required: false
+      description: |
+        Required to be set to `true` when performing an import or delete operation, as the Wazuh indexer cannot verify the origin of the dangling index data.
+      schema:
+        type: boolean
+
+    force:
+      name: force
+      in: query
+      required: false
+      description: |
+        If true, forces a flush operation even if there are no in-memory changes.
+      schema:
+        type: boolean
+        default: true
+
+    wait_if_ongoing:
+      name: wait_if_ongoing
+      in: query
+      required: false
+      description: |
+        When `true`, the flush operation will wait if another flush is already in progress. If set to `false`, the Wazuh indexer returns an error if another flush is running.
+      schema:
+        type: boolean
+        default: true
 
     create:
       name: create
@@ -2301,6 +2475,36 @@ components:
               reason: "accept_data_loss must be set to true"
             status: 400
 
+    FlushSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ShardsResponse'
+          example:
+            _shards:
+              total: 1
+              successful: 1
+              failed: 0
+
+    FlushBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IndexErrorResponse'
+          example:
+            error:
+              root_cause:
+                - type: "invalid_index_name_exception"
+                  reason: "Invalid index name [_wazuh-alerts-4.x-2025.03.14], must not start with '_'."
+                  index: "_wazuh-alerts-4.x-2025.03.14"
+                  index_uuid: "_na_"
+              type: "invalid_index_name_exception"
+              reason: "Invalid index name [_wazuh-alerts-4.x-2025.03.14], must not start with '_'."
+              index: "_wazuh-alerts-4.x-2025.03.14"
+              index_uuid: "_na_"
+            status: 400
 
   schemas:
     # Common error response structure
