@@ -1548,6 +1548,136 @@ paths:
         '404':
           $ref: '#/components/responses/GetSettingsNotFound'
 
+  /_segments:
+    get:
+      tags: [Index APIs]
+      summary: Segment (Global GET)
+      description: |
+        The Segment API provides detailed information about Lucene segments in index shards and includes information about the backing indexes of data streams.
+      operationId: getSegmentsGlobal
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/ignore_unavailable'
+        - $ref: '#/components/parameters/allow_no_indices'
+        - $ref: '#/components/parameters/expand_wildcards'
+        - $ref: '#/components/parameters/verbose'
+      responses:
+        '200':
+          $ref: '#/components/responses/SegmentSuccess'
+        '400':
+          $ref: '#/components/responses/SegmentBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /{index}/_segments:
+    parameters:
+      - $ref: '#/components/parameters/index'
+    get:
+      tags: [Index APIs]
+      summary: Segment (Index GET)
+      description: |
+        The Segment API provides detailed information about Lucene segments in index shards and includes information about the backing indexes of data streams.
+      operationId: getIndexSegments
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/ignore_unavailable'
+        - $ref: '#/components/parameters/allow_no_indices'
+        - $ref: '#/components/parameters/expand_wildcards'
+        - $ref: '#/components/parameters/verbose'
+      responses:
+        '200':
+          $ref: '#/components/responses/SegmentSuccess'
+        '400':
+          $ref: '#/components/responses/SegmentBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /{index_name}/_shrink/{target_index}:
+    parameters:
+      - $ref: '#/components/parameters/index_name'
+      - $ref: '#/components/parameters/target_index_shrink'
+    post:
+      tags: [Index APIs]
+      summary: Shrink index (POST)
+      description: |
+        The Shrink Index API transfers all data from an existing index into a newly created index that has fewer primary shards.
+
+        When using this operation to create a new index, be mindful of Wazuh indexer index naming rules:
+
+        * All letters must be in lowercase.
+        * Index names cannot begin with an underscore (`_`) or hyphen (`-`).
+        * Index names must not contain spaces, commas, or any of these characters: `:`, `"`, `*`, `+`, `/`, `\`, `|`, `?`, `#`, `>`, `<`
+      operationId: postIndexNameShrinkTargetIndex
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/wait_for_active_shards'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/wait_for_completion'
+        - $ref: '#/components/parameters/task_execution_timeout'
+      requestBody:
+        $ref: '#/components/requestBodies/ShrinkIndexRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/ShrinkIndexSuccess'
+        '400':
+          $ref: '#/components/responses/ShrinkIndexBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    put:
+      tags: [Index APIs]
+      summary: Shrink index (PUT)
+      description: |
+        The Shrink Index API transfers all data from an existing index into a newly created index that has fewer primary shards.
+
+        When using this operation to create a new index, be mindful of Wazuh indexer index naming rules:
+
+        * All letters must be in lowercase.
+        * Index names cannot begin with an underscore (`_`) or hyphen (`-`).
+        * Index names must not contain spaces, commas, or any of these characters: `:`, `"`, `*`, `+`, `/`, `\`, `|`, `?`, `#`, `>`, `<`
+      operationId: putIndexNameShrinkTargetIndex
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/wait_for_active_shards'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/wait_for_completion'
+        - $ref: '#/components/parameters/task_execution_timeout'
+      requestBody:
+        $ref: '#/components/requestBodies/ShrinkIndexRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/ShrinkIndexSuccess'
+        '400':
+          $ref: '#/components/responses/ShrinkIndexBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
 components:
   parameters:
     target:
@@ -1688,6 +1818,16 @@ components:
         type: string
       example: "wazuh-alerts-4.x-2025.03.12-cloned"
 
+    target_index_shrink:
+      name: target_index
+      in: path
+      required: true
+      description: |
+        The target index to shrink the source index into.
+      schema:
+        type: string
+      example: "wazuh-alerts-4.x-2025.03.14"
+
     fielddata:
       name: fielddata
       in: query
@@ -1742,7 +1882,7 @@ components:
       in: query
       required: false
       description: |
-        If false, the API responds immediately without waiting for the operation to finish. Use the Tasks API along with the returned task ID to track progress.
+        If `false`, the API responds immediately without waiting for the operation to finish. Use the Tasks API along with the returned task ID to track progress.
       schema:
         type: boolean
         default: true
@@ -1995,6 +2135,16 @@ components:
         Defines the name of the new index to be created during rollover. Supports date math expressions. This parameter is not supported for data streams. It is required if the current write index name for the alias does not end with a hyphen followed by a number (e.g., `my-index-000001` or `my-index-2`).
       schema:
         type: string
+
+    verbose:
+      name: verbose
+      in: query
+      required: false
+      description: |
+        When set to `true`, the response includes detailed information about Lucene's memory usage.
+      schema:
+        type: boolean
+        default: false
 
 
   requestBodies:
@@ -2469,6 +2619,46 @@ components:
             conditions:
               max_age: "1d"
               max_docs: 2
+
+    ShrinkIndexRequest:
+      required: false
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              settings:
+                type: object
+                description: |
+                  A set of index settings to apply to the target index.
+              aliases:
+                type: object
+                description: |
+                  Defines one or more aliases to be associated with the newly created target index. You can specify alias names and their configuration (e.g., filters, routing).
+              max_shard_size:
+                type: string
+                description: |
+                  Defines the maximum allowed size for each primary shard in the target index. This parameter cannot be used in combination with the `index.number_of_shards setting`, as the two settings are mutually exclusive.
+
+                  **The max_shard_size parameter**
+
+                  The `max_shard_size` parameter sets the maximum size allowed for a primary shard in the target index. OpenSearch uses both `max_shard_size` and the total storage of all primary shards in the source index to determine the appropriate number and size of primary shards in the target index.
+
+                  The primary shard count for the target index is determined as the smallest factor of the source index's primary shard count for which the shard size does not exceed the value of `max_shard_size`.
+
+                  For example, if the source index has 8 primary shards, they occupy a total of 400 GB of storage, and the `max_shard_size` is set to 150 GB, OpenSearch calculates the number of primary shards in the target index as follows:
+
+                  * Calculate the minimum number of primary shards as 400/150, rounded to the nearest whole number. The minimum number of primary shards is 3.
+                  * Determine the number of primary shards as the smallest factor of 8 that is greater than 3. The number of primary shards is 4.
+
+                  The maximum number of primary shards for the target index is equal to the number of primary shards in the source index, since the shrink operation is intended to reduce the number of primary shards. For instance, consider a source index with 5 primary shards that occupy a total of 600 GB of storage. If `max_shard_size` is 100 GB, the minimum number of primary shards is 600/100, which is 6. However, because the source index has only 5 primary shards (which is less than 6), the number of primary shards in the target index is set to 5. The minimum number of primary shards for the target index is 1.
+          example:
+            settings:
+              index:
+                number_of_replicas: 4
+                number_of_shards: 3
+            aliases:
+              "new-index-alias": {}
 
   responses:
     AliasSuccess:
@@ -4275,6 +4465,403 @@ components:
             statusCode: 404
             error: "Not Found"
             message: "404 - false"
+
+    SegmentSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/ShardsResponse'
+              - type: object
+                properties:
+                  indices:
+                    type: object
+                    additionalProperties:
+                      type: object
+                      properties:
+                        shards:
+                          type: object
+                          additionalProperties:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                routing:
+                                  type: object
+                                  properties:
+                                    state:
+                                      type: string
+                                    primary:
+                                      type: boolean
+                                    node:
+                                      type: string
+                                num_committed_segments:
+                                  type: integer
+                                num_search_segments:
+                                  type: integer
+                                segments:
+                                  type: object
+                                  additionalProperties:
+                                    type: object
+                                    properties:
+                                      generation:
+                                        type: integer
+                                        description: |
+                                          Represents the generation number, which increases with each written segment and is used in naming it.
+                                      num_docs:
+                                        type: integer
+                                        description: |
+                                          The count of documents in the segment, based on Lucene data. This count treats nested documents separately from parent documents. Deleted documents and newly indexed ones not yet assigned to a segment are not included.
+                                      deleted_docs:
+                                        type: integer
+                                        description: |
+                                          The number of deleted documents as reported by Lucene. This value may differ from the actual delete operations performed. It excludes documents not yet added to a segment. The Wazuh indexer may also remove additional documents for shard operation tracking.
+                                      size_in_bytes:
+                                        type: integer
+                                        description: |
+                                          Indicates the amount of disk space used by the segment, such as 50kb.
+                                      memory_in_bytes:
+                                        type: integer
+                                        description: |
+                                          The memory (in bytes) used by the segment for search efficiency. A value of `-1` means the Wazuh indexer could not determine the exact size.
+                                      committed:
+                                        type: boolean
+                                        description: |
+                                          If `true`, the segment has been committed (synced) to disk and can survive restarts.  If `false`, its data remains in the transaction log for replay on next startup.
+
+                                      search:
+                                        type: boolean
+                                        description: |
+                                          If `true`, the segment is searchable. If `false`, the segment may be written to disk but requires a refresh to become searchable.
+                                      version:
+                                        type: string
+                                        description: |
+                                          The Lucene version that was used to write the segment.
+                                      compound:
+                                        type: boolean
+                                        description: |
+                                          If `true`, Lucene has combined all the segment's files into a single compound file to reduce the number of file descriptors..
+                                      attributes:
+                                        type: object
+                                        description: |
+                                          Displays segment-level attributes, such as whether high compression is enabled.
+          example:
+            _shards:
+              total: 3
+              successful: 3
+              failed: 0
+            indices:
+              "wazuh-alerts-4.x-2025.03.11":
+                shards:
+                  "0":
+                    - routing:
+                        state: "STARTED"
+                        primary: true
+                        node: "xDC5NqstQh2alB_BedjVmw"
+                      num_committed_segments: 6
+                      num_search_segments: 6
+                      segments:
+                        "_0":
+                          generation: 0
+                          num_docs: 6
+                          deleted_docs: 0
+                          size_in_bytes: 69868
+                          memory_in_bytes: 0
+                          committed: true
+                          search: true
+                          version: "9.11.1"
+                          compound: true
+                          attributes:
+                            "Lucene90StoredFieldsFormat.mode": "BEST_SPEED"
+                        "_1":
+                          generation: 1
+                          num_docs: 65
+                          deleted_docs: 0
+                          size_in_bytes: 178972
+                          memory_in_bytes: 0
+                          committed: true
+                          search: true
+                          version: "9.11.1"
+                          compound: true
+                          attributes:
+                            "Lucene90StoredFieldsFormat.mode": "BEST_SPEED"
+                        "_2":
+                          generation: 2
+                          num_docs: 58
+                          deleted_docs: 0
+                          size_in_bytes: 164043
+                          memory_in_bytes: 0
+                          committed: true
+                          search: true
+                          version: "9.11.1"
+                          compound: true
+                          attributes:
+                            "Lucene90StoredFieldsFormat.mode": "BEST_SPEED"
+                        "_3":
+                          generation: 3
+                          num_docs: 1
+                          deleted_docs: 0
+                          size_in_bytes: 28541
+                          memory_in_bytes: 0
+                          committed: true
+                          search: true
+                          version: "9.11.1"
+                          compound: true
+                          attributes:
+                            "Lucene90StoredFieldsFormat.mode": "BEST_SPEED"
+                        "_4":
+                          generation: 4
+                          num_docs: 1
+                          deleted_docs: 0
+                          size_in_bytes: 21329
+                          memory_in_bytes: 0
+                          committed: true
+                          search: true
+                          version: "9.11.1"
+                          compound: true
+                          attributes:
+                            "Lucene90StoredFieldsFormat.mode": "BEST_SPEED"
+                        "_5":
+                          generation: 5
+                          num_docs: 1
+                          deleted_docs: 0
+                          size_in_bytes: 17905
+                          memory_in_bytes: 0
+                          committed: true
+                          search: true
+                          version: "9.11.1"
+                          compound: true
+                          attributes:
+                            "Lucene90StoredFieldsFormat.mode": "BEST_SPEED"
+                  "1":
+                    - routing:
+                        state: "STARTED"
+                        primary: true
+                        node: "xDC5NqstQh2alB_BedjVmw"
+                      num_committed_segments: 4
+                      num_search_segments: 4
+                      segments:
+                        "_8":
+                          generation: 8
+                          num_docs: 64
+                          deleted_docs: 0
+                          size_in_bytes: 195970
+                          memory_in_bytes: 0
+                          committed: true
+                          search: true
+                          version: "9.11.1"
+                          compound: true
+                          attributes:
+                            "Lucene90StoredFieldsFormat.mode": "BEST_SPEED"
+                        "_b":
+                          generation: 11
+                          num_docs: 80
+                          deleted_docs: 0
+                          size_in_bytes: 268568
+                          memory_in_bytes: 0
+                          committed: true
+                          search: true
+                          version: "9.11.1"
+                          compound: false
+                          attributes:
+                            "Lucene90StoredFieldsFormat.mode": "BEST_SPEED"
+                        "_c":
+                          generation: 12
+                          num_docs: 1
+                          deleted_docs: 0
+                          size_in_bytes: 13974
+                          memory_in_bytes: 0
+                          committed: true
+                          search: true
+                          version: "9.11.1"
+                          compound: true
+                          attributes:
+                            "Lucene90StoredFieldsFormat.mode": "BEST_SPEED"
+                        "_d":
+                          generation: 13
+                          num_docs: 1
+                          deleted_docs: 0
+                          size_in_bytes: 14623
+                          memory_in_bytes: 0
+                          committed: true
+                          search: true
+                          version: "9.11.1"
+                          compound: true
+                          attributes:
+                            "Lucene90StoredFieldsFormat.mode": "BEST_SPEED"
+                  "2":
+                    - routing:
+                        state: "STARTED"
+                        primary: true
+                        node: "xDC5NqstQh2alB_BedjVmw"
+                      num_committed_segments: 9
+                      num_search_segments: 9
+                      segments:
+                        "_0":
+                          generation: 0
+                          num_docs: 2
+                          deleted_docs: 0
+                          size_in_bytes: 39942
+                          memory_in_bytes: 0
+                          committed: true
+                          search: true
+                          version: "9.11.1"
+                          compound: true
+                          attributes:
+                            "Lucene90StoredFieldsFormat.mode": "BEST_SPEED"
+                        "_1":
+                          generation: 1
+                          num_docs: 1
+                          deleted_docs: 0
+                          size_in_bytes: 18069
+                          memory_in_bytes: 0
+                          committed: true
+                          search: true
+                          version: "9.11.1"
+                          compound: true
+                          attributes:
+                            "Lucene90StoredFieldsFormat.mode": "BEST_SPEED"
+                        "_2":
+                          generation: 2
+                          num_docs: 1
+                          deleted_docs: 0
+                          size_in_bytes: 13337
+                          memory_in_bytes: 0
+                          committed: true
+                          search: true
+                          version: "9.11.1"
+                          compound: true
+                          attributes:
+                            "Lucene90StoredFieldsFormat.mode": "BEST_SPEED"
+                        "_3":
+                          generation: 3
+                          num_docs: 53
+                          deleted_docs: 0
+                          size_in_bytes: 156303
+                          memory_in_bytes: 0
+                          committed: true
+                          search: true
+                          version: "9.11.1"
+                          compound: true
+                          attributes:
+                            "Lucene90StoredFieldsFormat.mode": "BEST_SPEED"
+                        "_4":
+                          generation: 4
+                          num_docs: 1
+                          deleted_docs: 0
+                          size_in_bytes: 17119
+                          memory_in_bytes: 0
+                          committed: true
+                          search: true
+                          version: "9.11.1"
+                          compound: true
+                          attributes:
+                            "Lucene90StoredFieldsFormat.mode": "BEST_SPEED"
+                        "_5":
+                          generation: 5
+                          num_docs: 1
+                          deleted_docs: 0
+                          size_in_bytes: 15529
+                          memory_in_bytes: 0
+                          committed: true
+                          search: true
+                          version: "9.11.1"
+                          compound: true
+                          attributes:
+                            "Lucene90StoredFieldsFormat.mode": "BEST_SPEED"
+                        "_6":
+                          generation: 6
+                          num_docs: 65
+                          deleted_docs: 0
+                          size_in_bytes: 179630
+                          memory_in_bytes: 0
+                          committed: true
+                          search: true
+                          version: "9.11.1"
+                          compound: true
+                          attributes:
+                            "Lucene90StoredFieldsFormat.mode": "BEST_SPEED"
+                        "_7":
+                          generation: 7
+                          num_docs: 7
+                          deleted_docs: 0
+                          size_in_bytes: 49760
+                          memory_in_bytes: 0
+                          committed: true
+                          search: true
+                          version: "9.11.1"
+                          compound: true
+                          attributes:
+                            "Lucene90StoredFieldsFormat.mode": "BEST_SPEED"
+                        "_8":
+                          generation: 8
+                          num_docs: 1
+                          deleted_docs: 0
+                          size_in_bytes: 14137
+                          memory_in_bytes: 0
+                          committed: true
+                          search: true
+                          version: "9.11.1"
+                          compound: true
+                          attributes:
+                            "Lucene90StoredFieldsFormat.mode": "BEST_SPEED"
+
+    SegmentBadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IndexErrorResponse'
+          example:
+            error:
+              root_cause:
+                - type: "invalid_index_name_exception"
+                  reason: "Invalid index name [_wazuh-alerts-4.x-2025.03.11], must not start with '_'."
+                  index: "_wazuh-alerts-4.x-2025.03.11"
+                  index_uuid: "_na_"
+              type: "invalid_index_name_exception"
+              reason: "Invalid index name [_wazuh-alerts-4.x-2025.03.11], must not start with '_'."
+              index: "_wazuh-alerts-4.x-2025.03.11"
+              index_uuid: "_na_"
+            status: 400
+
+    ShrinkIndexSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/ShardsAcknowledgedResponse'
+              - type: object
+                properties:
+                  index:
+                    type: string
+                    description: |
+                      The name of the newly created index from the shrink operation.
+          example:
+            acknowledged: true
+            shards_acknowledged: true
+            index: "wazuh-alerts-4.x-2025.03.14"
+
+    ShrinkIndexBadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IndexErrorResponse'
+          example:
+            error:
+              root_cause:
+                - type: "resource_already_exists_exception"
+                  reason: "index [wazuh-alerts-4.x-2025.03.11/_3bNKqwLQxqAZXxr1D3SQA] already exists"
+                  index: "wazuh-alerts-4.x-2025.03.11"
+                  index_uuid: "_3bNKqwLQxqAZXxr1D3SQA"
+              type: "resource_already_exists_exception"
+              reason: "index [wazuh-alerts-4.x-2025.03.11/_3bNKqwLQxqAZXxr1D3SQA] already exists"
+              index: "wazuh-alerts-4.x-2025.03.11"
+              index_uuid: "_3bNKqwLQxqAZXxr1D3SQA"
+            status: 400
 
   schemas:
     # Common error response structure

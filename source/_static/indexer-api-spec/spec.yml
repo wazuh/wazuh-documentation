@@ -218,6 +218,15 @@ paths:
   /{target_index}/_settings/{setting}:
     $ref: 'index_api.yml#/paths/~1{target_index}~1_settings~1{setting}'
 
+  /_segments:
+    $ref: 'index_api.yml#/paths/~1_segments'
+
+  /{index}/_segments:
+    $ref: 'index_api.yml#/paths/~1{index}~1_segments'
+
+  /{index_name}/_shrink/{target_index}:
+    $ref: 'index_api.yml#/paths/~1{index_name}~1_shrink~1{target_index}'
+
   /{index}/_open:
     $ref: 'index_api.yml#/paths/~1{index}~1_open'
 
