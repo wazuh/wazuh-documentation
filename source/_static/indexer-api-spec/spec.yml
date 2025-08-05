@@ -197,6 +197,18 @@ paths:
   /{index}/_flush:
     $ref: 'index_api.yml#/paths/~1{index}~1_flush'
 
+  /_forcemerge:
+    $ref: 'index_api.yml#/paths/~1_forcemerge'
+
+  /{index}/_forcemerge:
+    $ref: 'index_api.yml#/paths/~1{index}~1_forcemerge'
+
+  /_recovery:
+    $ref: 'index_api.yml#/paths/~1_recovery'
+
+  /{index}/_recovery:
+    $ref: 'index_api.yml#/paths/~1{index}~1_recovery'
+
   /{index}/_analyze:
     parameters:
       - $ref: 'analyze_api.yml#/components/parameters/index'

@@ -1010,6 +1010,169 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 
+  /_forcemerge:
+    post:
+      tags: [Index APIs]
+      summary: Force merge (Global POST)
+      description: |
+        The Force Merge API triggers a merge process on the shards of one or more specified indexes. When used with a data stream, it merges the shards of the stream's backing index.
+
+        When the Force Merge API is invoked, the request remains blocked until the merge process finishes. If the connection is lost during this time, the force merge will still continue in the background. Any new force merge requests for the same index will be held until the ongoing merge operation is completed.
+
+        ## Force merging multiple indexes
+
+        You can use the Force Merge API to merge segments across multiple indexes by targeting:
+
+        * Multiple specific indexes
+        * One or more data streams, each with multiple backing indexes
+        * One or more index aliases that reference multiple indexes
+        * All data streams and indexes in the cluster
+
+        When merging multiple indexes, the force merge operation is carried out sequentially on each shard within a node. During this process, the shard's storage usage temporarily increases to accommodate the rewriting of all existing segments into a new one. If `max_num_segments` is set to `1`, the storage required for the shard may temporarily double.
+      operationId: postForcemerge
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/expand_wildcards'
+        - $ref: '#/components/parameters/flush'
+        - $ref: '#/components/parameters/ignore_unavailable'
+        - $ref: '#/components/parameters/max_num_segments'
+        - $ref: '#/components/parameters/only_expunge_deletes'
+        - $ref: '#/components/parameters/primary_only'
+      responses:
+        '200':
+          $ref: '#/components/responses/ForcemergeSuccess'
+        '400':
+          $ref: '#/components/responses/ForcemergeBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /{index}/_forcemerge:
+    post:
+      tags: [Index APIs]
+      summary: Force merge (Index POST)
+      description: |
+        The Force Merge API triggers a merge process on the shards of one or more specified indexes. When used with a data stream, it merges the shards of the stream's backing index.
+
+        When the Force Merge API is invoked, the request remains blocked until the merge process finishes. If the connection is lost during this time, the force merge will still continue in the background. Any new force merge requests for the same index will be held until the ongoing merge operation is completed.
+
+        ## Force merging multiple indexes
+
+        You can use the Force Merge API to merge segments across multiple indexes by targeting:
+
+        * Multiple specific indexes
+        * One or more data streams, each with multiple backing indexes
+        * One or more index aliases that reference multiple indexes
+        * All data streams and indexes in the cluster
+
+        When merging multiple indexes, the force merge operation is carried out sequentially on each shard within a node. During this process, the shard's storage usage temporarily increases to accommodate the rewriting of all existing segments into a new one. If `max_num_segments` is set to `1`, the storage required for the shard may temporarily double.
+      operationId: postIndexForcemerge
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/index'
+        - $ref: '#/components/parameters/allow_no_indices'
+        - $ref: '#/components/parameters/expand_wildcards'
+        - $ref: '#/components/parameters/flush'
+        - $ref: '#/components/parameters/ignore_unavailable'
+        - $ref: '#/components/parameters/max_num_segments'
+        - $ref: '#/components/parameters/only_expunge_deletes'
+        - $ref: '#/components/parameters/primary_only'
+      responses:
+        '200':
+          $ref: '#/components/responses/ForcemergeSuccess'
+        '400':
+          $ref: '#/components/responses/ForcemergeBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /_recovery:
+    get:
+      tags: [Index APIs]
+      summary: Recovery API (Global GET)
+      description: |
+        The Recovery API offers insights into both completed and ongoing shard recovery processes for one or more indexes. When a data stream is specified, the API also returns recovery information for its associated backing indexes.
+
+        Shard recovery is the process of creating a shard copy, either to restore a primary shard from a snapshot or to bring a replica shard in sync with the primary. Once the recovery process finishes, the shard becomes fully available for indexing and search operations.
+
+        Recovery is automatically triggered in several scenarios, including:
+
+        * Node startup (also known as local store recovery)
+        * Replication of a primary shard
+        * Relocation of a shard to another node within the same cluster
+        * Snapshot restoration
+        * Clone, shrink, or split operations
+
+        The Recovery API exclusively displays the latest recovery status for shard copies that currently exist in the cluster. It does not include historical data about past recoveries or information about shards that no longer exist. As a result, if a shard completes recovery and is later moved to a different node, the original recovery details will not appear in the API response.
+      operationId: getRecovery
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/active_only'
+        - $ref: '#/components/parameters/detailed'
+        - $ref: '#/components/parameters/index_query'
+      responses:
+        '200':
+          $ref: '#/components/responses/RecoverySuccess'
+        '400':
+          $ref: '#/components/responses/RecoveryBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /{index}/_recovery:
+    parameters:
+      - $ref: '#/components/parameters/index'
+    get:
+      tags: [Index APIs]
+      summary: Recovery API (Index GET)
+      description: |
+        The Recovery API offers insights into both completed and ongoing shard recovery processes for one or more indexes. When a data stream is specified, the API also returns recovery information for its associated backing indexes.
+
+        Shard recovery is the process of creating a shard copy, either to restore a primary shard from a snapshot or to bring a replica shard in sync with the primary. Once the recovery process finishes, the shard becomes fully available for indexing and search operations.
+
+        Recovery is automatically triggered in several scenarios, including:
+
+        * Node startup (also known as local store recovery)
+        * Replication of a primary shard
+        * Relocation of a shard to another node within the same cluster
+        * Snapshot restoration
+        * Clone, shrink, or split operations
+
+        The Recovery API exclusively displays the latest recovery status for shard copies that currently exist in the cluster. It does not include historical data about past recoveries or information about shards that no longer exist. As a result, if a shard completes recovery and is later moved to a different node, the original recovery details will not appear in the API response.
+      operationId: getIndexRecovery
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/active_only'
+        - $ref: '#/components/parameters/detailed'
+      responses:
+        '200':
+          $ref: '#/components/responses/RecoverySuccess'
+        '400':
+          $ref: '#/components/responses/RecoveryBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
 components:
   parameters:
     target:
@@ -1351,6 +1514,75 @@ components:
       schema:
         type: boolean
         default: false
+
+    flush:
+      name: flush
+      in: query
+      required: false
+      description: |
+        If `true`, performs a flush after the force merge to ensure all data is persisted to disk.
+      schema:
+        type: boolean
+        default: true
+
+    max_num_segments:
+      name: max_num_segments
+      in: query
+      required: false
+      description: |
+        Specifies the number of larger segments into which smaller ones should be merged. Set to `1` to consolidate all segments into a single segment. If not set, merging is done as needed.
+      schema:
+        type: integer
+
+    only_expunge_deletes:
+      name: only_expunge_deletes
+      in: query
+      required: false
+      description: |
+        If `true`, the merge operation only expunges segments containing a certain percentage of deleted documents. The percentage is 10% by default and is configurable in the `index.merge.policy.expunge_deletes_allowed` setting.
+      schema:
+        type: boolean
+        default: false
+
+    primary_only:
+      name: primary_only
+      in: query
+      required: false
+      description: |
+        If set to `true`, the merge operation is executed only on primary shards. This is beneficial when preparing to take a snapshot, as snapshots include data solely from primary shards. Limiting the operation in this way helps minimize resource usage during the merge.
+      schema:
+        type: boolean
+        default: false
+
+    active_only:
+      name: active_only
+      in: query
+      required: false
+      description: |
+        If set to `true`, the response includes only shard recoveries that are currently in progress.
+      schema:
+        type: boolean
+        default: false
+
+    detailed:
+      name: detailed
+      in: query
+      required: false
+      description: |
+        When set to `true`, the response contains additional details about each shard recovery.
+      schema:
+        type: boolean
+        default: false
+
+    index_query:
+      name: index
+      in: query
+      required: false
+      description: |
+        A comma-separated list or wildcard pattern specifying index names to narrow the scope of the request.
+      schema:
+        type: string
+
 
   requestBodies:
     AliasRequest:
@@ -2506,6 +2738,216 @@ components:
               index_uuid: "_na_"
             status: 400
 
+    ForcemergeSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ShardsResponse'
+          example:
+            _shards:
+              total: 1
+              successful: 1
+              failed: 0
+
+    ForcemergeBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IndexErrorResponse'
+          example:
+            error:
+              root_cause:
+                - type: "invalid_index_name_exception"
+                  reason: "Invalid index name [_wazuh-alerts-4.x-2025.03.14], must not start with '_'."
+                  index: "_wazuh-alerts-4.x-2025.03.14"
+                  index_uuid: "_na_"
+              type: "invalid_index_name_exception"
+              reason: "Invalid index name [_wazuh-alerts-4.x-2025.03.14], must not start with '_'."
+              index: "_wazuh-alerts-4.x-2025.03.14"
+              index_uuid: "_na_"
+            status: 400
+
+    RecoverySuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RecoveryResponse'
+          example:
+            "wazuh-alerts-4.x-2025.03.03":
+              shards:
+                - id: 0
+                  type: "EXISTING_STORE"
+                  stage: "DONE"
+                  primary: true
+                  start_time: "2025-04-09T11:12:00.653Z"
+                  start_time_in_millis: 1744197120653
+                  stop_time: "2025-04-09T11:12:00.800Z"
+                  stop_time_in_millis: 1744197120800
+                  total_time: "147ms"
+                  total_time_in_millis: 147
+                  source:
+                    bootstrap_new_history_uuid: false
+                  target:
+                    id: "xDC5NqstQh2alB_BedjVmw"
+                    host: "127.0.0.1"
+                    transport_address: "127.0.0.1:9300"
+                    ip: "127.0.0.1"
+                    name: "node-1"
+                  index:
+                    size:
+                      total: "113.6kb"
+                      total_in_bytes: 116402
+                      reused: "113.6kb"
+                      reused_in_bytes: 116402
+                      recovered: "0b"
+                      recovered_in_bytes: 0
+                      percent: "100.0%"
+                    files:
+                      total: 13
+                      reused: 13
+                      recovered: 0
+                      percent: "100.0%"
+                    total_time: "1ms"
+                    total_time_in_millis: 1
+                    source_throttle_time: "-1"
+                    source_throttle_time_in_millis: 0
+                    target_throttle_time: "-1"
+                    target_throttle_time_in_millis: 0
+                  translog:
+                    recovered: 0
+                    total: 0
+                    percent: "100.0%"
+                    total_on_start: 0
+                    total_time: "112ms"
+                    total_time_in_millis: 112
+                  verify_index:
+                    check_index_time: "0s"
+                    check_index_time_in_millis: 0
+                    total_time: "0s"
+                    total_time_in_millis: 0
+                - id: 1
+                  type: "EXISTING_STORE"
+                  stage: "DONE"
+                  primary: true
+                  start_time: "2025-04-09T11:12:00.684Z"
+                  start_time_in_millis: 1744197120684
+                  stop_time: "2025-04-09T11:12:00.773Z"
+                  stop_time_in_millis: 1744197120773
+                  total_time: "89ms"
+                  total_time_in_millis: 89
+                  source:
+                    bootstrap_new_history_uuid: false
+                  target:
+                    id: "xDC5NqstQh2alB_BedjVmw"
+                    host: "127.0.0.1"
+                    transport_address: "127.0.0.1:9300"
+                    ip: "127.0.0.1"
+                    name: "node-1"
+                  index:
+                    size:
+                      total: "44.9kb"
+                      total_in_bytes: 46028
+                      reused: "44.9kb"
+                      reused_in_bytes: 46028
+                      recovered: "0b"
+                      recovered_in_bytes: 0
+                      percent: "100.0%"
+                    files:
+                      total: 7
+                      reused: 7
+                      recovered: 0
+                      percent: "100.0%"
+                    total_time: "5ms"
+                    total_time_in_millis: 5
+                    source_throttle_time: "-1"
+                    source_throttle_time_in_millis: 0
+                    target_throttle_time: "-1"
+                    target_throttle_time_in_millis: 0
+                  translog:
+                    recovered: 0
+                    total: 0
+                    percent: "100.0%"
+                    total_on_start: 0
+                    total_time: "68ms"
+                    total_time_in_millis: 68
+                  verify_index:
+                    check_index_time: "0s"
+                    check_index_time_in_millis: 0
+                    total_time: "0s"
+                    total_time_in_millis: 0
+                - id: 2
+                  type: "EXISTING_STORE"
+                  stage: "DONE"
+                  primary: true
+                  start_time: "2025-04-09T11:12:00.699Z"
+                  start_time_in_millis: 1744197120699
+                  stop_time: "2025-04-09T11:12:00.820Z"
+                  stop_time_in_millis: 1744197120820
+                  total_time: "121ms"
+                  total_time_in_millis: 121
+                  source:
+                    bootstrap_new_history_uuid: false
+                  target:
+                    id: "xDC5NqstQh2alB_BedjVmw"
+                    host: "127.0.0.1"
+                    transport_address: "127.0.0.1:9300"
+                    ip: "127.0.0.1"
+                    name: "node-1"
+                  index:
+                    size:
+                      total: "46.7kb"
+                      total_in_bytes: 47833
+                      reused: "46.7kb"
+                      reused_in_bytes: 47833
+                      recovered: "0b"
+                      recovered_in_bytes: 0
+                      percent: "100.0%"
+                    files:
+                      total: 10
+                      reused: 10
+                      recovered: 0
+                      percent: "100.0%"
+                    total_time: "11ms"
+                    total_time_in_millis: 11
+                    source_throttle_time: "-1"
+                    source_throttle_time_in_millis: 0
+                    target_throttle_time: "-1"
+                    target_throttle_time_in_millis: 0
+                  translog:
+                    recovered: 0
+                    total: 0
+                    percent: "100.0%"
+                    total_on_start: 0
+                    total_time: "84ms"
+                    total_time_in_millis: 84
+                  verify_index:
+                    check_index_time: "0s"
+                    check_index_time_in_millis: 0
+                    total_time: "0s"
+                    total_time_in_millis: 0
+
+    RecoveryBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IndexErrorResponse'
+          example:
+            error:
+              root_cause:
+                - type: "invalid_index_name_exception"
+                  reason: "Invalid index name [_wazuh-alerts-4.x-2025.03.14], must not start with '_'."
+                  index: "_wazuh-alerts-4.x-2025.03.14"
+                  index_uuid: "_na_"
+              type: "invalid_index_name_exception"
+              reason: "Invalid index name [_wazuh-alerts-4.x-2025.03.14], must not start with '_'."
+              index: "_wazuh-alerts-4.x-2025.03.14"
+              index_uuid: "_na_"
+            status: 400
+
   schemas:
     # Common error response structure
     ErrorResponse:
@@ -2596,6 +3038,164 @@ components:
               type: integer
               description: |
                 The number of shards where the operation failed.
+
+    RecoveryResponse:
+      type: object
+      description: |
+        Recovery information for indexes and their shards.
+      additionalProperties:
+        type: object
+        properties:
+          shards:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  description: |
+                    A unique identifier assigned to the shard undergoing recovery.
+                type:
+                  type: string
+                  description: |
+                    Describes the recovery source. The possible values includes:
+
+                    - `EMPTY_STORE`: A new or forcibly allocated empty primary shard via Cluster Reroute API.
+                    - `EXISTING_STORE`: Recovery from a previously existing primary shard, often after node startup.
+                    - `LOCAL_SHARDS`: Recovery from another index on the same node, such as during clone, shrink, or split.
+                    - `PEER`: Recovery from a primary shard on another node (replication).
+                    - `SNAPSHOT`: Recovery from a snapshot.
+                  enum: [EMPTY_STORE, EXISTING_STORE, LOCAL_SHARDS, PEER, SNAPSHOT]
+                stage:
+                  type: string
+                  description: |
+                    Indicates the current stage of recovery. The possible values includes:
+
+                    - `INIT`: Recovery has not started.
+                    - `INDEX`: Index metadata is read and data is copied.
+                    - `VERIFY_INDEX`: Index integrity check.
+                    - `TRANSLOG`: Transaction log is replayed.
+                    - `FINALIZE`: Final cleanup tasks.
+                    - `DONE`: Recovery is complete
+                  enum: [INIT, INDEX, VERIFY_INDEX, TRANSLOG, FINALIZE, DONE]
+                primary:
+                  type: boolean
+                  description: |
+                    Specifies whether the shard being recovered is a primary shard.
+                start_time:
+                  type: string
+                  format: date-time
+                  description: |
+                    Timestamp showing when the shard recovery started.
+                start_time_in_millis:
+                  type: integer
+                stop_time:
+                  type: string
+                  format: date-time
+                  description: |
+                    Timestamp showing when the shard recovery completed.
+                stop_time_in_millis:
+                  type: integer
+                total_time:
+                  type: string
+                total_time_in_millis:
+                  type: integer
+                  description: |
+                    Total time taken for recovery, measured in milliseconds.
+                source:
+                  type: object
+                  description: |
+                    Information about the recovery source, such as node or repository details.
+                target:
+                  type: object
+                  description: |
+                    Information about the node receiving the shard during recovery.
+                  properties:
+                    id:
+                      type: string
+                    host:
+                      type: string
+                    transport_address:
+                      type: string
+                    ip:
+                      type: string
+                    name:
+                      type: string
+                index:
+                  type: object
+                  description: |
+                    Statistics related to the index-level recovery, including file and byte-level details.
+                  properties:
+                    size:
+                      type: object
+                      properties:
+                        total:
+                          type: string
+                        total_in_bytes:
+                          type: integer
+                        reused:
+                          type: string
+                        reused_in_bytes:
+                          type: integer
+                        recovered:
+                          type: string
+                        recovered_in_bytes:
+                          type: integer
+                        percent:
+                          type: string
+                    files:
+                      type: object
+                      properties:
+                        total:
+                          type: integer
+                        reused:
+                          type: integer
+                        recovered:
+                          type: integer
+                        percent:
+                          type: string
+                    total_time:
+                      type: string
+                    total_time_in_millis:
+                      type: integer
+                    source_throttle_time:
+                      type: string
+                    source_throttle_time_in_millis:
+                      type: integer
+                    target_throttle_time:
+                      type: string
+                    target_throttle_time_in_millis:
+                      type: integer
+                translog:
+                  type: object
+                  description: |
+                    Contains metrics on transaction log replay during recovery.
+                  properties:
+                    recovered:
+                      type: integer
+                    total:
+                      type: integer
+                    percent:
+                      type: string
+                    total_on_start:
+                      type: integer
+                    total_time:
+                      type: string
+                    total_time_in_millis:
+                      type: integer
+                verify_index:
+                  type: object
+                  description: |
+                    Reports on the time taken to initialize and start the index.
+                  properties:
+                    check_index_time:
+                      type: string
+                    check_index_time_in_millis:
+                      type: integer
+                    total_time:
+                      type: string
+                    total_time_in_millis:
+                      type: integer
 
     TemplateStructure:
       type: object
