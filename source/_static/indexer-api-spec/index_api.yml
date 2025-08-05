@@ -1678,6 +1678,68 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 
+  /{source_index}/_split/{target_index}:
+    parameters:
+      - $ref: '#/components/parameters/source_index'
+      - $ref: '#/components/parameters/target_index_split'
+    post:
+      tags: [Index APIs]
+      summary: Split index (POST)
+      description: |
+        The Split Index API operation creates a new index by dividing each primary shard of an existing read-only index into multiple primary shards in the new index.
+      operationId: postSourceIndexSplitTargetIndex
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/wait_for_active_shards'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/wait_for_completion'
+        - $ref: '#/components/parameters/task_execution_timeout'
+      requestBody:
+        $ref: '#/components/requestBodies/SplitIndexRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/SplitIndexSuccess'
+        '400':
+          $ref: '#/components/responses/SplitIndexBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    put:
+      tags: [Index APIs]
+      summary: Split index (PUT)
+      description: |
+        The Split Index API operation creates a new index by dividing each primary shard of an existing read-only index into multiple primary shards in the new index.
+      operationId: putSourceIndexSplitTargetIndex
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/wait_for_active_shards'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/wait_for_completion'
+        - $ref: '#/components/parameters/task_execution_timeout'
+      requestBody:
+        $ref: '#/components/requestBodies/SplitIndexRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/SplitIndexSuccess'
+        '400':
+          $ref: '#/components/responses/SplitIndexBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
 components:
   parameters:
     target:
@@ -1802,8 +1864,6 @@ components:
       name: source_index
       in: path
       required: true
-      description: |
-        The source index to clone.
       schema:
         type: string
       example: "wazuh-alerts-4.x-2025.03.12"
@@ -1824,6 +1884,16 @@ components:
       required: true
       description: |
         The target index to shrink the source index into.
+      schema:
+        type: string
+      example: "wazuh-alerts-4.x-2025.03.14"
+
+    target_index_split:
+      name: target_index
+      in: path
+      required: true
+      description: |
+        The index to create.
       schema:
         type: string
       example: "wazuh-alerts-4.x-2025.03.14"
@@ -2659,6 +2729,31 @@ components:
                 number_of_shards: 3
             aliases:
               "new-index-alias": {}
+
+    SplitIndexRequest:
+      description: |
+        Request body for split index operations
+      required: false
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              settings:
+                type: object
+                description: |
+                  A set of index settings to apply to the target index.
+              aliases:
+                type: object
+                description: |
+                  Defines one or more aliases to be associated with the newly created target index. You can specify alias names and their configuration (e.g., filters, routing).
+          example:
+            settings:
+              index:
+                number_of_shards: 3
+                number_of_replicas: 2
+            aliases:
+              "sample-alias1": {}
 
   responses:
     AliasSuccess:
@@ -4861,6 +4956,39 @@ components:
               reason: "index [wazuh-alerts-4.x-2025.03.11/_3bNKqwLQxqAZXxr1D3SQA] already exists"
               index: "wazuh-alerts-4.x-2025.03.11"
               index_uuid: "_3bNKqwLQxqAZXxr1D3SQA"
+            status: 400
+
+    SplitIndexSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/ShardsAcknowledgedResponse'
+              - type: object
+                properties:
+                  index:
+                    type: string
+                    description: |
+                      The name of the new index that was created as a result of the split operation.
+          example:
+            acknowledged: true
+            shards_acknowledged: true
+            index: "wazuh-alerts-4.x-2025.02.16"
+
+    SplitIndexBadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              root_cause:
+                - type: "illegal_argument_exception"
+                  reason: "the number of source shards [3] must be a factor of [4]"
+              type: "illegal_argument_exception"
+              reason: "the number of source shards [3] must be a factor of [4]"
             status: 400
 
   schemas:

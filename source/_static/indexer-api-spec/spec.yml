@@ -227,6 +227,9 @@ paths:
   /{index_name}/_shrink/{target_index}:
     $ref: 'index_api.yml#/paths/~1{index_name}~1_shrink~1{target_index}'
 
+  /{source_index}/_split/{target_index}:
+    $ref: 'index_api.yml#/paths/~1{source_index}~1_split~1{target_index}'
+
   /{index}/_open:
     $ref: 'index_api.yml#/paths/~1{index}~1_open'
 
