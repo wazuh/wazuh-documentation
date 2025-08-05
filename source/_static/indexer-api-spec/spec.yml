@@ -196,6 +196,1128 @@ paths:
         - basicAuth: []
         - jwtAuth: []
 
+  /_cat/aliases:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get all aliases
+      description: |
+        It provides an overview of all existing aliases within your indexer cluster showing which aliases are associated with which specific indices.
+      operationId: getCatAliases
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'cat_api.yml#/components/parameters/expand_wildcards'
+        - $ref: 'cat_api.yml#/components/parameters/format'
+        - $ref: 'cat_api.yml#/components/parameters/h'
+        - $ref: 'cat_api.yml#/components/parameters/help'
+        - $ref: 'cat_api.yml#/components/parameters/local'
+        - $ref: 'cat_api.yml#/components/parameters/s'
+        - $ref: 'cat_api.yml#/components/parameters/v'
+        - $ref: 'cat_api.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: 'cat_api.yml#/components/responses/CatAliasesSuccess'
+        '400':
+          $ref: 'cat_api.yml#/components/responses/CatBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cat_api.yml#/components/responses/CatForbidden'
+
+  /_cat/aliases/{name}:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get specific alias
+      description: |
+        It provides an overview of all existing aliases within your indexer cluster showing which aliases are associated with which specific indices.
+      operationId: getCatAliasesByName
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'cat_api.yml#/components/parameters/AliasName'
+        - $ref: 'cat_api.yml#/components/parameters/expand_wildcards'
+        - $ref: 'cat_api.yml#/components/parameters/format'
+        - $ref: 'cat_api.yml#/components/parameters/h'
+        - $ref: 'cat_api.yml#/components/parameters/help'
+        - $ref: 'cat_api.yml#/components/parameters/local'
+        - $ref: 'cat_api.yml#/components/parameters/s'
+        - $ref: 'cat_api.yml#/components/parameters/v'
+        - $ref: 'cat_api.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: 'cat_api.yml#/components/responses/CatAliasesSuccess'
+        '400':
+          $ref: 'cat_api.yml#/components/responses/CatBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cat_api.yml#/components/responses/CatForbidden'
+
+  /_cat/allocation:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get all allocation
+      description: |
+        The CAT allocation operation shows how disk space is allocated for indexes and the quantity of shards on each node.
+      operationId: getCatAllocation
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'cat_api.yml#/components/parameters/bytes'
+        - $ref: 'cat_api.yml#/components/parameters/cluster_manager_timeout'
+        - $ref: 'cat_api.yml#/components/parameters/format'
+        - $ref: 'cat_api.yml#/components/parameters/h'
+        - $ref: 'cat_api.yml#/components/parameters/help'
+        - $ref: 'cat_api.yml#/components/parameters/local'
+        - $ref: 'cat_api.yml#/components/parameters/s'
+        - $ref: 'cat_api.yml#/components/parameters/v'
+        - $ref: 'cat_api.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: 'cat_api.yml#/components/responses/CatAllocationSuccess'
+        '400':
+          $ref: 'cat_api.yml#/components/responses/CatAllocationBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cat_api.yml#/components/responses/CatAllocationForbidden'
+        '405':
+          $ref: 'cat_api.yml#/components/responses/CatMethodNotAllowed'
+
+  /_cat/allocation/{node_id}:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get allocation by node
+      description: |
+        The CAT allocation operation shows how disk space is allocated for indexes and the quantity of shards on each node.
+      operationId: getCatAllocationByNode
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'cat_api.yml#/components/parameters/NodeId'
+        - $ref: 'cat_api.yml#/components/parameters/bytes'
+        - $ref: 'cat_api.yml#/components/parameters/cluster_manager_timeout'
+        - $ref: 'cat_api.yml#/components/parameters/format'
+        - $ref: 'cat_api.yml#/components/parameters/h'
+        - $ref: 'cat_api.yml#/components/parameters/help'
+        - $ref: 'cat_api.yml#/components/parameters/local'
+        - $ref: 'cat_api.yml#/components/parameters/s'
+        - $ref: 'cat_api.yml#/components/parameters/v'
+        - $ref: 'cat_api.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: 'cat_api.yml#/components/responses/CatAllocationSuccess'
+        '400':
+          $ref: 'cat_api.yml#/components/responses/CatAllocationBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cat_api.yml#/components/responses/CatAllocationForbidden'
+        '405':
+          $ref: 'cat_api.yml#/components/responses/CatMethodNotAllowed'
+
+  /_cat/count:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get all count
+      description: |
+        The CAT count operation lists the number of documents in your cluster.
+      operationId: getCatCount
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'cat_api.yml#/components/parameters/format'
+        - $ref: 'cat_api.yml#/components/parameters/h'
+        - $ref: 'cat_api.yml#/components/parameters/s'
+        - $ref: 'cat_api.yml#/components/parameters/v_count'
+      responses:
+        '200':
+          $ref: 'cat_api.yml#/components/responses/CatCountSuccess'
+        '400':
+          $ref: 'cat_api.yml#/components/responses/CatCountBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cat_api.yml#/components/responses/CatCountForbidden'
+        '405':
+          $ref: 'cat_api.yml#/components/responses/CatCountMethodNotAllowed'
+
+  /_cat/count/{INDEX}:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get count by index
+      description: |
+        The CAT count operation lists the number of documents in your cluster.
+      operationId: getCatCountByIndex
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'cat_api.yml#/components/parameters/IndexName'
+        - $ref: 'cat_api.yml#/components/parameters/format'
+        - $ref: 'cat_api.yml#/components/parameters/h'
+        - $ref: 'cat_api.yml#/components/parameters/s'
+        - $ref: 'cat_api.yml#/components/parameters/v_count'
+      responses:
+        '200':
+          $ref: 'cat_api.yml#/components/responses/CatCountSuccess'
+        '400':
+          $ref: 'cat_api.yml#/components/responses/CatCountBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cat_api.yml#/components/responses/CatCountForbidden'
+        '405':
+          $ref: 'cat_api.yml#/components/responses/CatCountMethodNotAllowed'
+
+  /_cat/fielddata:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get all field data
+      description: |
+        The CAT field data operation lists the memory size used by each field per node.
+      operationId: getCatFielddata
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'cat_api.yml#/components/parameters/bytes'
+        - $ref: 'cat_api.yml#/components/parameters/format'
+        - $ref: 'cat_api.yml#/components/parameters/h'
+        - $ref: 'cat_api.yml#/components/parameters/help'
+        - $ref: 'cat_api.yml#/components/parameters/local'
+        - $ref: 'cat_api.yml#/components/parameters/s'
+        - $ref: 'cat_api.yml#/components/parameters/v'
+        - $ref: 'cat_api.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: 'cat_api.yml#/components/responses/CatFielddataSuccess'
+        '400':
+          $ref: 'cat_api.yml#/components/responses/CatBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cat_api.yml#/components/responses/CatForbidden'
+        '405':
+          $ref: 'cat_api.yml#/components/responses/CatMethodNotAllowed'
+
+  /_cat/fielddata/{field_name}:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get field data by field
+      description: |
+        The CAT field data operation lists the memory size used by each field per node.
+      operationId: getCatFielddataByField
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'cat_api.yml#/components/parameters/FieldName'
+        - $ref: 'cat_api.yml#/components/parameters/bytes'
+        - $ref: 'cat_api.yml#/components/parameters/format'
+        - $ref: 'cat_api.yml#/components/parameters/h'
+        - $ref: 'cat_api.yml#/components/parameters/help'
+        - $ref: 'cat_api.yml#/components/parameters/local'
+        - $ref: 'cat_api.yml#/components/parameters/s'
+        - $ref: 'cat_api.yml#/components/parameters/v'
+        - $ref: 'cat_api.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: 'cat_api.yml#/components/responses/CatFielddataSuccess'
+        '400':
+          $ref: 'cat_api.yml#/components/responses/CatBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cat_api.yml#/components/responses/CatForbidden'
+        '405':
+          $ref: 'cat_api.yml#/components/responses/CatMethodNotAllowed'
+
+  /_cat/health:
+    get:
+      tags:
+        - Cat APIs
+      summary: Health
+      description: |
+        The CAT health operation provides helpful information for analyzing your cluster's health, including cluster status, uptime, and the number of nodes.
+      operationId: getCatHealth
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'cat_api.yml#/components/parameters/time'
+        - $ref: 'cat_api.yml#/components/parameters/ts'
+        - $ref: 'cat_api.yml#/components/parameters/format'
+        - $ref: 'cat_api.yml#/components/parameters/h'
+        - $ref: 'cat_api.yml#/components/parameters/help'
+        - $ref: 'cat_api.yml#/components/parameters/local'
+        - $ref: 'cat_api.yml#/components/parameters/s'
+        - $ref: 'cat_api.yml#/components/parameters/v'
+        - $ref: 'cat_api.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: 'cat_api.yml#/components/responses/CatHealthSuccess'
+        '400':
+          $ref: 'cat_api.yml#/components/responses/CatBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cat_api.yml#/components/responses/CatForbidden'
+        '405':
+          $ref: 'cat_api.yml#/components/responses/CatMethodNotAllowed'
+
+  /_cat/indices:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get all indices
+      description: |
+        The CAT indices operation provides information on the indexes, including disk space usage, number of shards, and health status.
+      operationId: getCatIndices
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'cat_api.yml#/components/parameters/bytes'
+        - $ref: 'cat_api.yml#/components/parameters/cluster_manager_timeout'
+        - $ref: 'cat_api.yml#/components/parameters/expand_wildcards'
+        - $ref: 'cat_api.yml#/components/parameters/format'
+        - $ref: 'cat_api.yml#/components/parameters/h'
+        - $ref: 'cat_api.yml#/components/parameters/health'
+        - $ref: 'cat_api.yml#/components/parameters/help'
+        - $ref: 'cat_api.yml#/components/parameters/include_unloaded_segments'
+        - $ref: 'cat_api.yml#/components/parameters/local'
+        - $ref: 'cat_api.yml#/components/parameters/pri'
+        - $ref: 'cat_api.yml#/components/parameters/s'
+        - $ref: 'cat_api.yml#/components/parameters/time'
+        - $ref: 'cat_api.yml#/components/parameters/v'
+        - $ref: 'cat_api.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: 'cat_api.yml#/components/responses/CatIndicesSuccess'
+        '400':
+          $ref: 'cat_api.yml#/components/responses/CatBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cat_api.yml#/components/responses/CatForbidden'
+        '405':
+          $ref: 'cat_api.yml#/components/responses/CatMethodNotAllowed'
+
+  /_cat/indices/{index}:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get indices by index
+      description: |
+        The CAT indices operation provides information on the indexes, including disk space usage, number of shards, and health status.
+      operationId: getCatIndicesByIndex
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'cat_api.yml#/components/parameters/IndexName'
+        - $ref: 'cat_api.yml#/components/parameters/bytes'
+        - $ref: 'cat_api.yml#/components/parameters/cluster_manager_timeout'
+        - $ref: 'cat_api.yml#/components/parameters/expand_wildcards'
+        - $ref: 'cat_api.yml#/components/parameters/format'
+        - $ref: 'cat_api.yml#/components/parameters/h'
+        - $ref: 'cat_api.yml#/components/parameters/health'
+        - $ref: 'cat_api.yml#/components/parameters/help'
+        - $ref: 'cat_api.yml#/components/parameters/include_unloaded_segments'
+        - $ref: 'cat_api.yml#/components/parameters/local'
+        - $ref: 'cat_api.yml#/components/parameters/pri'
+        - $ref: 'cat_api.yml#/components/parameters/s'
+        - $ref: 'cat_api.yml#/components/parameters/time'
+        - $ref: 'cat_api.yml#/components/parameters/v'
+        - $ref: 'cat_api.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: 'cat_api.yml#/components/responses/CatIndicesSuccess'
+        '400':
+          $ref: 'cat_api.yml#/components/responses/CatBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cat_api.yml#/components/responses/CatForbidden'
+        '405':
+          $ref: 'cat_api.yml#/components/responses/CatMethodNotAllowed'
+
+  /_cat/cluster_manager:
+    get:
+      tags:
+        - Cat APIs
+      summary: Cluster manager
+      description: |
+        The CAT cluster manager operation lists information that helps identify the elected cluster manager node.
+      operationId: getCatClusterManager
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'cat_api.yml#/components/parameters/cluster_manager_timeout'
+        - $ref: 'cat_api.yml#/components/parameters/format'
+        - $ref: 'cat_api.yml#/components/parameters/h'
+        - $ref: 'cat_api.yml#/components/parameters/help'
+        - $ref: 'cat_api.yml#/components/parameters/local'
+        - $ref: 'cat_api.yml#/components/parameters/s'
+        - $ref: 'cat_api.yml#/components/parameters/v'
+      responses:
+        '200':
+          $ref: 'cat_api.yml#/components/responses/CatClusterManagerSuccess'
+        '400':
+          $ref: 'cat_api.yml#/components/responses/CatBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cat_api.yml#/components/responses/CatForbidden'
+        '405':
+          $ref: 'cat_api.yml#/components/responses/CatMethodNotAllowed'
+
+  /_cat/nodeattrs:
+    get:
+      tags:
+        - Cat APIs
+      summary: Nodeattrs
+      description: |
+        The CAT nodeattrs operation lists the attributes of custom nodes.
+      operationId: getCatNodeattrs
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'cat_api.yml#/components/parameters/cluster_manager_timeout'
+        - $ref: 'cat_api.yml#/components/parameters/format'
+        - $ref: 'cat_api.yml#/components/parameters/h'
+        - $ref: 'cat_api.yml#/components/parameters/help'
+        - $ref: 'cat_api.yml#/components/parameters/local'
+        - $ref: 'cat_api.yml#/components/parameters/s'
+        - $ref: 'cat_api.yml#/components/parameters/v'
+      responses:
+        '200':
+          $ref: 'cat_api.yml#/components/responses/CatNodeattrsSuccess'
+        '400':
+          $ref: 'cat_api.yml#/components/responses/CatBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cat_api.yml#/components/responses/CatForbidden'
+        '405':
+          $ref: 'cat_api.yml#/components/responses/CatMethodNotAllowed'
+
+  /_cat/nodes:
+    get:
+      tags:
+        - Cat APIs
+      summary: Nodes
+      description: |
+        The CAT nodes operation lists node-level information, including node roles and load metrics such as the pid, name, cluster_manager, ip, port, version, build, jdk.
+      operationId: getCatNodes
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'cat_api.yml#/components/parameters/bytes'
+        - $ref: 'cat_api.yml#/components/parameters/cluster_manager_timeout'
+        - $ref: 'cat_api.yml#/components/parameters/format'
+        - $ref: 'cat_api.yml#/components/parameters/full_id'
+        - $ref: 'cat_api.yml#/components/parameters/h'
+        - $ref: 'cat_api.yml#/components/parameters/help'
+        - $ref: 'cat_api.yml#/components/parameters/s'
+        - $ref: 'cat_api.yml#/components/parameters/time'
+        - $ref: 'cat_api.yml#/components/parameters/v'
+      responses:
+        '200':
+          $ref: 'cat_api.yml#/components/responses/CatNodesSuccess'
+        '400':
+          $ref: 'cat_api.yml#/components/responses/CatBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cat_api.yml#/components/responses/CatForbidden'
+        '405':
+          $ref: 'cat_api.yml#/components/responses/CatMethodNotAllowed'
+
+  /_cat/pending_tasks:
+    get:
+      tags:
+        - Cat APIs
+      summary: Pending tasks
+      description: |
+        The CAT pending tasks operation lists the progress of all pending tasks, including the task's priority and its time in the queue.
+      operationId: getCatPendingTasks
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'cat_api.yml#/components/parameters/cluster_manager_timeout'
+        - $ref: 'cat_api.yml#/components/parameters/format'
+        - $ref: 'cat_api.yml#/components/parameters/h'
+        - $ref: 'cat_api.yml#/components/parameters/help'
+        - $ref: 'cat_api.yml#/components/parameters/local'
+        - $ref: 'cat_api.yml#/components/parameters/s'
+        - $ref: 'cat_api.yml#/components/parameters/time'
+        - $ref: 'cat_api.yml#/components/parameters/v'
+      responses:
+        '200':
+          $ref: 'cat_api.yml#/components/responses/CatPendingTasksSuccess'
+        '400':
+          $ref: 'cat_api.yml#/components/responses/CatBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cat_api.yml#/components/responses/CatForbidden'
+        '405':
+          $ref: 'cat_api.yml#/components/responses/CatMethodNotAllowed'
+
+  /_cat/pit_segments:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get all Point-In-Time segments
+      description: |
+        The CAT point-in-time (PIT) segments operation returns information about one or more PIT segments.
+      operationId: getCatPitSegments
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'cat_api.yml#/components/parameters/bytes'
+        - $ref: 'cat_api.yml#/components/parameters/format'
+        - $ref: 'cat_api.yml#/components/parameters/h'
+        - $ref: 'cat_api.yml#/components/parameters/help'
+        - $ref: 'cat_api.yml#/components/parameters/s'
+        - $ref: 'cat_api.yml#/components/parameters/v'
+      requestBody:
+        $ref: 'cat_api.yml#/components/requestBodies/PitSegmentsRequestBody'
+      responses:
+        '200':
+          $ref: 'cat_api.yml#/components/responses/CatPitSegmentsSuccess'
+        '400':
+          $ref: 'cat_api.yml#/components/responses/CatPitSegmentsBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cat_api.yml#/components/responses/CatPitSegmentsForbidden'
+        '405':
+          $ref: 'cat_api.yml#/components/responses/CatPitSegmentsMethodNotAllowed'
+        '500':
+          $ref: 'cat_api.yml#/components/responses/CatPitSegmentsInvalidPitId'
+
+  /_cat/pit_segments/_all:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get all Point-In-Time segments for all PITs
+      description: |
+        The CAT point-in-time (PIT) segments operation returns information about one or more PIT segments.
+      operationId: getCatPitSegmentsAll
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'cat_api.yml#/components/parameters/bytes'
+        - $ref: 'cat_api.yml#/components/parameters/format'
+        - $ref: 'cat_api.yml#/components/parameters/h'
+        - $ref: 'cat_api.yml#/components/parameters/help'
+        - $ref: 'cat_api.yml#/components/parameters/s'
+        - $ref: 'cat_api.yml#/components/parameters/v'
+      requestBody:
+        $ref: 'cat_api.yml#/components/requestBodies/PitSegmentsRequestBody'
+      responses:
+        '200':
+          $ref: 'cat_api.yml#/components/responses/CatPitSegmentsSuccess'
+        '400':
+          $ref: 'cat_api.yml#/components/responses/CatPitSegmentsBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cat_api.yml#/components/responses/CatPitSegmentsForbidden'
+        '405':
+          $ref: 'cat_api.yml#/components/responses/CatPitSegmentsMethodNotAllowed'
+        '500':
+          $ref: 'cat_api.yml#/components/responses/CatPitSegmentsInvalidPitId'
+
+  /_cat/plugins:
+    get:
+      tags:
+        - Cat APIs
+      summary: Plugins
+      description: |
+        The CAT plugins operation lists the names, components, and versions of the installed plugins.
+      operationId: getCatPlugins
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'cat_api.yml#/components/parameters/cluster_manager_timeout'
+        - $ref: 'cat_api.yml#/components/parameters/format'
+        - $ref: 'cat_api.yml#/components/parameters/h'
+        - $ref: 'cat_api.yml#/components/parameters/help'
+        - $ref: 'cat_api.yml#/components/parameters/local'
+        - $ref: 'cat_api.yml#/components/parameters/s'
+        - $ref: 'cat_api.yml#/components/parameters/v'
+      responses:
+        '200':
+          $ref: 'cat_api.yml#/components/responses/CatPluginsSuccess'
+        '400':
+          $ref: 'cat_api.yml#/components/responses/CatBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cat_api.yml#/components/responses/CatForbidden'
+        '405':
+          $ref: 'cat_api.yml#/components/responses/CatMethodNotAllowed'
+
+  /_cat/recovery:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get all recovery
+      description: |
+        The CAT recovery operation lists all completed and ongoing index and shard recoveries.
+      operationId: getCatRecovery
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'cat_api.yml#/components/parameters/active_only'
+        - $ref: 'cat_api.yml#/components/parameters/bytes'
+        - $ref: 'cat_api.yml#/components/parameters/detailed'
+        - $ref: 'cat_api.yml#/components/parameters/format'
+        - $ref: 'cat_api.yml#/components/parameters/h'
+        - $ref: 'cat_api.yml#/components/parameters/help'
+        - $ref: 'cat_api.yml#/components/parameters/s'
+        - $ref: 'cat_api.yml#/components/parameters/time'
+        - $ref: 'cat_api.yml#/components/parameters/v'
+      responses:
+        '200':
+          $ref: 'cat_api.yml#/components/responses/CatRecoverySuccess'
+        '400':
+          $ref: 'cat_api.yml#/components/responses/CatBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cat_api.yml#/components/responses/CatForbidden'
+        '405':
+          $ref: 'cat_api.yml#/components/responses/CatMethodNotAllowed'
+
+  /_cat/recovery/{index}:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get recovery by index
+      description: |
+        The CAT recovery operation lists all completed and ongoing index and shard recoveries.
+      operationId: getCatRecoveryByIndex
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'cat_api.yml#/components/parameters/IndexName'
+        - $ref: 'cat_api.yml#/components/parameters/active_only'
+        - $ref: 'cat_api.yml#/components/parameters/bytes'
+        - $ref: 'cat_api.yml#/components/parameters/detailed'
+        - $ref: 'cat_api.yml#/components/parameters/format'
+        - $ref: 'cat_api.yml#/components/parameters/h'
+        - $ref: 'cat_api.yml#/components/parameters/help'
+        - $ref: 'cat_api.yml#/components/parameters/s'
+        - $ref: 'cat_api.yml#/components/parameters/time'
+        - $ref: 'cat_api.yml#/components/parameters/v'
+      responses:
+        '200':
+          $ref: 'cat_api.yml#/components/responses/CatRecoverySuccess'
+        '400':
+          $ref: 'cat_api.yml#/components/responses/CatBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cat_api.yml#/components/responses/CatForbidden'
+        '405':
+          $ref: 'cat_api.yml#/components/responses/CatMethodNotAllowed'
+
+  /_cat/repositories:
+    get:
+      tags:
+        - Cat APIs
+      summary: Repositories
+      description: |
+        The CAT repositories operation lists all snapshot repositories for a cluster.
+      operationId: getCatRepositories
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'cat_api.yml#/components/parameters/cluster_manager_timeout'
+        - $ref: 'cat_api.yml#/components/parameters/format'
+        - $ref: 'cat_api.yml#/components/parameters/h'
+        - $ref: 'cat_api.yml#/components/parameters/help'
+        - $ref: 'cat_api.yml#/components/parameters/local'
+        - $ref: 'cat_api.yml#/components/parameters/s'
+        - $ref: 'cat_api.yml#/components/parameters/v'
+      responses:
+        '200':
+          $ref: 'cat_api.yml#/components/responses/CatRepositoriesSuccess'
+        '400':
+          $ref: 'cat_api.yml#/components/responses/CatBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cat_api.yml#/components/responses/CatForbidden'
+        '405':
+          $ref: 'cat_api.yml#/components/responses/CatMethodNotAllowed'
+
+  /_cat/segment_replication:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get all segment replication
+      description: |
+        The CAT segment replication operation returns information about active and last completed segment replication events on each replica shard, including related shard-level metrics. These metrics provide information about how far behind the primary shard the replicas are lagging.
+      operationId: getCatSegmentReplication
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'cat_api.yml#/components/parameters/active_only'
+        - $ref: 'cat_api.yml#/components/parameters/allow_no_indices'
+        - $ref: 'cat_api.yml#/components/parameters/bytes'
+        - $ref: 'cat_api.yml#/components/parameters/completed_only'
+        - $ref: 'cat_api.yml#/components/parameters/detailed'
+        - $ref: 'cat_api.yml#/components/parameters/expand_wildcards'
+        - $ref: 'cat_api.yml#/components/parameters/format'
+        - $ref: 'cat_api.yml#/components/parameters/h'
+        - $ref: 'cat_api.yml#/components/parameters/help'
+        - $ref: 'cat_api.yml#/components/parameters/ignore_throttled'
+        - $ref: 'cat_api.yml#/components/parameters/ignore_unavailable'
+        - $ref: 'cat_api.yml#/components/parameters/s'
+        - $ref: 'cat_api.yml#/components/parameters/shards'
+        - $ref: 'cat_api.yml#/components/parameters/time'
+        - $ref: 'cat_api.yml#/components/parameters/timeout'
+        - $ref: 'cat_api.yml#/components/parameters/v'
+      responses:
+        '200':
+          $ref: 'cat_api.yml#/components/responses/CatSegmentReplicationSuccess'
+        '400':
+          $ref: 'cat_api.yml#/components/responses/CatBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cat_api.yml#/components/responses/CatForbidden'
+        '405':
+          $ref: 'cat_api.yml#/components/responses/CatMethodNotAllowed'
+
+  /_cat/segment_replication/{index}:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get segment replication by index
+      description: |
+        The CAT segment replication operation returns information about active and last completed segment replication events on each replica shard, including related shard-level metrics. These metrics provide information about how far behind the primary shard the replicas are lagging.
+      operationId: getCatSegmentReplicationByIndex
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'cat_api.yml#/components/parameters/IndexName'
+        - $ref: 'cat_api.yml#/components/parameters/active_only'
+        - $ref: 'cat_api.yml#/components/parameters/allow_no_indices'
+        - $ref: 'cat_api.yml#/components/parameters/bytes'
+        - $ref: 'cat_api.yml#/components/parameters/completed_only'
+        - $ref: 'cat_api.yml#/components/parameters/detailed'
+        - $ref: 'cat_api.yml#/components/parameters/expand_wildcards'
+        - $ref: 'cat_api.yml#/components/parameters/format'
+        - $ref: 'cat_api.yml#/components/parameters/h'
+        - $ref: 'cat_api.yml#/components/parameters/help'
+        - $ref: 'cat_api.yml#/components/parameters/ignore_throttled'
+        - $ref: 'cat_api.yml#/components/parameters/ignore_unavailable'
+        - $ref: 'cat_api.yml#/components/parameters/s'
+        - $ref: 'cat_api.yml#/components/parameters/shards'
+        - $ref: 'cat_api.yml#/components/parameters/time'
+        - $ref: 'cat_api.yml#/components/parameters/timeout'
+        - $ref: 'cat_api.yml#/components/parameters/v'
+      responses:
+        '200':
+          $ref: 'cat_api.yml#/components/responses/CatSegmentReplicationSuccess'
+        '400':
+          $ref: 'cat_api.yml#/components/responses/CatBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cat_api.yml#/components/responses/CatForbidden'
+        '405':
+          $ref: 'cat_api.yml#/components/responses/CatMethodNotAllowed'
+
+  /_cat/segments:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get all segments
+      description: |
+        The cat segments operation lists Lucene segment-level information for each index.
+      operationId: getCatSegments
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'cat_api.yml#/components/parameters/bytes'
+        - $ref: 'cat_api.yml#/components/parameters/cluster_manager_timeout'
+        - $ref: 'cat_api.yml#/components/parameters/format'
+        - $ref: 'cat_api.yml#/components/parameters/h'
+        - $ref: 'cat_api.yml#/components/parameters/help'
+        - $ref: 'cat_api.yml#/components/parameters/s'
+        - $ref: 'cat_api.yml#/components/parameters/v'
+      responses:
+        '200':
+          $ref: 'cat_api.yml#/components/responses/CatSegmentsSuccess'
+        '400':
+          $ref: 'cat_api.yml#/components/responses/CatBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cat_api.yml#/components/responses/CatForbidden'
+        '405':
+          $ref: 'cat_api.yml#/components/responses/CatMethodNotAllowed'
+
+  /_cat/segments/{index}:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get segments by index
+      description: |
+        The cat segments operation lists Lucene segment-level information for each index.
+      operationId: getCatSegmentsByIndex
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'cat_api.yml#/components/parameters/IndexName'
+        - $ref: 'cat_api.yml#/components/parameters/bytes'
+        - $ref: 'cat_api.yml#/components/parameters/cluster_manager_timeout'
+        - $ref: 'cat_api.yml#/components/parameters/format'
+        - $ref: 'cat_api.yml#/components/parameters/h'
+        - $ref: 'cat_api.yml#/components/parameters/help'
+        - $ref: 'cat_api.yml#/components/parameters/s'
+        - $ref: 'cat_api.yml#/components/parameters/v'
+      responses:
+        '200':
+          $ref: 'cat_api.yml#/components/responses/CatSegmentsSuccess'
+        '400':
+          $ref: 'cat_api.yml#/components/responses/CatBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cat_api.yml#/components/responses/CatForbidden'
+        '405':
+          $ref: 'cat_api.yml#/components/responses/CatMethodNotAllowed'
+
+  /_cat/shards:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get all shards
+      description: |
+        The CAT shards operation lists the state of all primary and replica shards and how they are distributed.
+      operationId: getCatShards
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'cat_api.yml#/components/parameters/bytes'
+        - $ref: 'cat_api.yml#/components/parameters/cluster_manager_timeout'
+        - $ref: 'cat_api.yml#/components/parameters/format'
+        - $ref: 'cat_api.yml#/components/parameters/h'
+        - $ref: 'cat_api.yml#/components/parameters/help'
+        - $ref: 'cat_api.yml#/components/parameters/local'
+        - $ref: 'cat_api.yml#/components/parameters/s'
+        - $ref: 'cat_api.yml#/components/parameters/time'
+        - $ref: 'cat_api.yml#/components/parameters/v'
+      responses:
+        '200':
+          $ref: 'cat_api.yml#/components/responses/CatShardsSuccess'
+        '400':
+          $ref: 'cat_api.yml#/components/responses/CatBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cat_api.yml#/components/responses/CatForbidden'
+        '405':
+          $ref: 'cat_api.yml#/components/responses/CatMethodNotAllowed'
+
+  /_cat/shards/{index}:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get shards by index
+      description: |
+        The CAT shards operation lists the state of all primary and replica shards and how they are distributed.
+      operationId: getCatShardsByIndex
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'cat_api.yml#/components/parameters/IndexName'
+        - $ref: 'cat_api.yml#/components/parameters/bytes'
+        - $ref: 'cat_api.yml#/components/parameters/cluster_manager_timeout'
+        - $ref: 'cat_api.yml#/components/parameters/format'
+        - $ref: 'cat_api.yml#/components/parameters/h'
+        - $ref: 'cat_api.yml#/components/parameters/help'
+        - $ref: 'cat_api.yml#/components/parameters/local'
+        - $ref: 'cat_api.yml#/components/parameters/s'
+        - $ref: 'cat_api.yml#/components/parameters/time'
+        - $ref: 'cat_api.yml#/components/parameters/v'
+      responses:
+        '200':
+          $ref: 'cat_api.yml#/components/responses/CatShardsSuccess'
+        '400':
+          $ref: 'cat_api.yml#/components/responses/CatBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cat_api.yml#/components/responses/CatForbidden'
+        '405':
+          $ref: 'cat_api.yml#/components/responses/CatMethodNotAllowed'
+
+  /_cat/snapshots:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get all snapshots
+      description: |
+        The CAT snapshots operation lists all snapshots for a repository.
+      operationId: getCatSnapshots
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'cat_api.yml#/components/parameters/cluster_manager_timeout'
+        - $ref: 'cat_api.yml#/components/parameters/format'
+        - $ref: 'cat_api.yml#/components/parameters/h'
+        - $ref: 'cat_api.yml#/components/parameters/help'
+        - $ref: 'cat_api.yml#/components/parameters/ignore_unavailable'
+        - $ref: 'cat_api.yml#/components/parameters/s'
+        - $ref: 'cat_api.yml#/components/parameters/time'
+        - $ref: 'cat_api.yml#/components/parameters/v'
+      responses:
+        '200':
+          $ref: 'cat_api.yml#/components/responses/CatSnapshotsSuccess'
+        '400':
+          $ref: 'cat_api.yml#/components/responses/CatBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cat_api.yml#/components/responses/CatForbidden'
+        '405':
+          $ref: 'cat_api.yml#/components/responses/CatMethodNotAllowed'
+
+  /_cat/snapshots/{repository}:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get snapshots by repository
+      description: |
+        The CAT snapshots operation lists all snapshots for a repository.
+      operationId: getCatSnapshotsByRepository
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'cat_api.yml#/components/parameters/RepositoryName'
+        - $ref: 'cat_api.yml#/components/parameters/cluster_manager_timeout'
+        - $ref: 'cat_api.yml#/components/parameters/format'
+        - $ref: 'cat_api.yml#/components/parameters/h'
+        - $ref: 'cat_api.yml#/components/parameters/help'
+        - $ref: 'cat_api.yml#/components/parameters/ignore_unavailable'
+        - $ref: 'cat_api.yml#/components/parameters/s'
+        - $ref: 'cat_api.yml#/components/parameters/time'
+        - $ref: 'cat_api.yml#/components/parameters/v'
+      responses:
+        '200':
+          $ref: 'cat_api.yml#/components/responses/CatSnapshotsSuccess'
+        '400':
+          $ref: 'cat_api.yml#/components/responses/CatBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cat_api.yml#/components/responses/CatForbidden'
+        '405':
+          $ref: 'cat_api.yml#/components/responses/CatMethodNotAllowed'
+
+  /_cat/tasks:
+    get:
+      tags:
+        - Cat APIs
+      summary: Tasks
+      description: |
+        The CAT tasks operation lists the progress of all tasks currently running on your cluster.
+      operationId: getCatTasks
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'cat_api.yml#/components/parameters/actions'
+        - $ref: 'cat_api.yml#/components/parameters/detailed'
+        - $ref: 'cat_api.yml#/components/parameters/format'
+        - $ref: 'cat_api.yml#/components/parameters/h'
+        - $ref: 'cat_api.yml#/components/parameters/help'
+        - $ref: 'cat_api.yml#/components/parameters/nodes'
+        - $ref: 'cat_api.yml#/components/parameters/parent_task_id'
+        - $ref: 'cat_api.yml#/components/parameters/s'
+        - $ref: 'cat_api.yml#/components/parameters/time'
+        - $ref: 'cat_api.yml#/components/parameters/v'
+      responses:
+        '200':
+          $ref: 'cat_api.yml#/components/responses/CatTasksSuccess'
+        '400':
+          $ref: 'cat_api.yml#/components/responses/CatBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cat_api.yml#/components/responses/CatForbidden'
+        '405':
+          $ref: 'cat_api.yml#/components/responses/CatMethodNotAllowed'
+
+  /_cat/templates:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get all templates
+      description: |
+        The CAT templates operation lists the names, patterns, order numbers, and version numbers of index templates.
+      operationId: getCatTemplates
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'cat_api.yml#/components/parameters/cluster_manager_timeout'
+        - $ref: 'cat_api.yml#/components/parameters/format'
+        - $ref: 'cat_api.yml#/components/parameters/h'
+        - $ref: 'cat_api.yml#/components/parameters/help'
+        - $ref: 'cat_api.yml#/components/parameters/local'
+        - $ref: 'cat_api.yml#/components/parameters/s'
+        - $ref: 'cat_api.yml#/components/parameters/v'
+      responses:
+        '200':
+          $ref: 'cat_api.yml#/components/responses/CatTemplatesSuccess'
+        '400':
+          $ref: 'cat_api.yml#/components/responses/CatBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cat_api.yml#/components/responses/CatForbidden'
+        '405':
+          $ref: 'cat_api.yml#/components/responses/CatMethodNotAllowed'
+
+  /_cat/templates/{name}:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get templates by name
+      description: |
+        The CAT templates operation lists the names, patterns, order numbers, and version numbers of index templates.
+      operationId: getCatTemplatesByName
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'cat_api.yml#/components/parameters/TemplateName'
+        - $ref: 'cat_api.yml#/components/parameters/cluster_manager_timeout'
+        - $ref: 'cat_api.yml#/components/parameters/format'
+        - $ref: 'cat_api.yml#/components/parameters/h'
+        - $ref: 'cat_api.yml#/components/parameters/help'
+        - $ref: 'cat_api.yml#/components/parameters/local'
+        - $ref: 'cat_api.yml#/components/parameters/s'
+        - $ref: 'cat_api.yml#/components/parameters/v'
+      responses:
+        '200':
+          $ref: 'cat_api.yml#/components/responses/CatTemplatesSuccess'
+        '400':
+          $ref: 'cat_api.yml#/components/responses/CatBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cat_api.yml#/components/responses/CatForbidden'
+        '405':
+          $ref: 'cat_api.yml#/components/responses/CatMethodNotAllowed'
+
+  /_cat/thread_pool:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get all thread pool
+      description: |
+        The CAT thread pool operation lists the active, queued, and rejected threads of different thread pools on each node.
+      operationId: getCatThreadPool
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'cat_api.yml#/components/parameters/cluster_manager_timeout'
+        - $ref: 'cat_api.yml#/components/parameters/format'
+        - $ref: 'cat_api.yml#/components/parameters/h'
+        - $ref: 'cat_api.yml#/components/parameters/help'
+        - $ref: 'cat_api.yml#/components/parameters/local'
+        - $ref: 'cat_api.yml#/components/parameters/s'
+        - $ref: 'cat_api.yml#/components/parameters/size'
+        - $ref: 'cat_api.yml#/components/parameters/v'
+      responses:
+        '200':
+          $ref: 'cat_api.yml#/components/responses/CatThreadPoolSuccess'
+        '400':
+          $ref: 'cat_api.yml#/components/responses/CatBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cat_api.yml#/components/responses/CatForbidden'
+        '405':
+          $ref: 'cat_api.yml#/components/responses/CatMethodNotAllowed'
+
+  /_cat/thread_pool/{thread_pool_patterns}:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get thread pool by patterns
+      description: |
+        The CAT thread pool operation lists the active, queued, and rejected threads of different thread pools on each node.
+      operationId: getCatThreadPoolByPatterns
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'cat_api.yml#/components/parameters/ThreadPoolPatterns'
+        - $ref: 'cat_api.yml#/components/parameters/cluster_manager_timeout'
+        - $ref: 'cat_api.yml#/components/parameters/format'
+        - $ref: 'cat_api.yml#/components/parameters/h'
+        - $ref: 'cat_api.yml#/components/parameters/help'
+        - $ref: 'cat_api.yml#/components/parameters/local'
+        - $ref: 'cat_api.yml#/components/parameters/s'
+        - $ref: 'cat_api.yml#/components/parameters/size'
+        - $ref: 'cat_api.yml#/components/parameters/v'
+      responses:
+        '200':
+          $ref: 'cat_api.yml#/components/responses/CatThreadPoolSuccess'
+        '400':
+          $ref: 'cat_api.yml#/components/responses/CatBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: 'cat_api.yml#/components/responses/CatForbidden'
+        '405':
+          $ref: 'cat_api.yml#/components/responses/CatMethodNotAllowed'
+
   /_ingest/pipeline/{pipeline_id}:
     parameters:
       - $ref: 'ingest_api.yml#/components/parameters/pipeline_id'
@@ -3811,6 +4933,9 @@ tags:
   - name: Get API info
     description: Wazuh indexer API information
   - name: Analyze API
+  - name: Cat APIs
+    description: |
+      The compact and aligned text (CAT) API provides access to key statistics about your cluster. Instead of complex JSON output, the CAT API delivers information in a clear and concise tabular format, making it easier to read and understand information such as which node is currently leading the cluster, what is the overall status of the cluster, how many documents are stored in each index within the cluster, etc.
   - name: Cluster API
     description: The cluster APIs allow you to manage your cluster. You can use them to check cluster health, modify settings, retrieve statistics, and more.
   - name: Count
