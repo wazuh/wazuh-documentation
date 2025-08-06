@@ -348,7 +348,7 @@ paths:
         - jwtAuth: []
       parameters:
         - $ref: '#/components/parameters/ignore_unavailable'
-        - $ref: '#/components/parameters/allow_no_indices'
+        - $ref: '#/components/parameters/allow_no_indices_op'
         - $ref: '#/components/parameters/expand_wildcards'
         - $ref: '#/components/parameters/cluster_manager_timeout'
         - $ref: '#/components/parameters/timeout'
@@ -378,7 +378,7 @@ paths:
         - jwtAuth: []
       parameters:
         - $ref: '#/components/parameters/ignore_unavailable'
-        - $ref: '#/components/parameters/allow_no_indices'
+        - $ref: '#/components/parameters/allow_no_indices_op'
         - $ref: '#/components/parameters/expand_wildcards'
         - $ref: '#/components/parameters/cluster_manager_timeout'
         - $ref: '#/components/parameters/timeout'
@@ -407,7 +407,7 @@ paths:
         - basicAuth: []
         - jwtAuth: []
       parameters:
-        - $ref: '#/components/parameters/allow_no_indices'
+        - $ref: '#/components/parameters/allow_no_indices_op'
         - $ref: '#/components/parameters/expand_wildcards'
         - $ref: '#/components/parameters/fielddata'
         - $ref: '#/components/parameters/fields'
@@ -928,6 +928,7 @@ paths:
         - basicAuth: []
         - jwtAuth: []
       parameters:
+        - $ref: '#/components/parameters/allow_no_indices'
         - $ref: '#/components/parameters/expand_wildcards'
         - $ref: '#/components/parameters/force'
         - $ref: '#/components/parameters/ignore_unavailable'
@@ -956,6 +957,7 @@ paths:
         - basicAuth: []
         - jwtAuth: []
       parameters:
+        - $ref: '#/components/parameters/allow_no_indices'
         - $ref: '#/components/parameters/expand_wildcards'
         - $ref: '#/components/parameters/force'
         - $ref: '#/components/parameters/ignore_unavailable'
@@ -1057,6 +1059,7 @@ paths:
         - basicAuth: []
         - jwtAuth: []
       parameters:
+        - $ref: '#/components/parameters/allow_no_indices'
         - $ref: '#/components/parameters/expand_wildcards'
         - $ref: '#/components/parameters/flush'
         - $ref: '#/components/parameters/ignore_unavailable'
@@ -1245,7 +1248,7 @@ paths:
         - jwtAuth: []
       parameters:
         - $ref: '#/components/parameters/ignore_unavailable'
-        - $ref: '#/components/parameters/allow_no_indices'
+        - $ref: '#/components/parameters/allow_no_indices_op'
         - $ref: '#/components/parameters/expand_wildcards'
       responses:
         '200':
@@ -1274,7 +1277,7 @@ paths:
         - jwtAuth: []
       parameters:
         - $ref: '#/components/parameters/ignore_unavailable'
-        - $ref: '#/components/parameters/allow_no_indices'
+        - $ref: '#/components/parameters/allow_no_indices_op'
         - $ref: '#/components/parameters/expand_wildcards'
       responses:
         '200':
@@ -1306,7 +1309,7 @@ paths:
         - jwtAuth: []
       parameters:
         - $ref: '#/components/parameters/ignore_unavailable'
-        - $ref: '#/components/parameters/allow_no_indices'
+        - $ref: '#/components/parameters/allow_no_indices_op'
         - $ref: '#/components/parameters/expand_wildcards'
       responses:
         '200':
@@ -1335,7 +1338,7 @@ paths:
         - jwtAuth: []
       parameters:
         - $ref: '#/components/parameters/ignore_unavailable'
-        - $ref: '#/components/parameters/allow_no_indices'
+        - $ref: '#/components/parameters/allow_no_indices_op'
         - $ref: '#/components/parameters/expand_wildcards'
       responses:
         '200':
@@ -1465,6 +1468,7 @@ paths:
         - basicAuth: []
         - jwtAuth: []
       parameters:
+        - $ref: '#/components/parameters/allow_no_indices'
         - $ref: '#/components/parameters/expand_wildcards'
         - $ref: '#/components/parameters/flat_settings'
         - $ref: '#/components/parameters/include_defaults'
@@ -2026,6 +2030,16 @@ components:
         default: false
 
     allow_no_indices:
+      name: allow_no_indices
+      in: query
+      required: false
+      description: |
+        Indicates whether wildcard patterns that don't match any indexes should be ignored. If set to `true`, the request continues without error.
+      schema:
+        type: boolean
+        default: true
+
+    allow_no_indices_op:
       name: allow_no_indices
       in: query
       required: false
