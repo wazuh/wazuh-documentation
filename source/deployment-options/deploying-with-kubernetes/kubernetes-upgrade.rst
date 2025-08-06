@@ -29,9 +29,9 @@ Our Kubernetes deployment uses our Wazuh images from Docker. If we look at the f
     /usr/share/wazuh-dashboard/config/
     /usr/share/wazuh-dashboard/certs/
     /var/lib/wazuh-indexer
-    /usr/share/wazuh-indexer/certs/
-    /usr/share/wazuh-indexer/opensearch.yml
-    /usr/share/wazuh-indexer/opensearch-security/internal_users.yml
+    /usr/share/wazuh-indexer/config/certs/
+    /usr/share/wazuh-indexer/config/opensearch.yml
+    /usr/share/wazuh-indexer/config/opensearch-security/internal_users.yml
 
 
 Any modification related to these files will also be made in the associated volume. When the replica pod is created, it will get those files from the volume, keeping the previous changes.
@@ -67,8 +67,8 @@ Keeping custom manifests
 To upgrade your deployment keeping your custom manifests, do the following.
 
 #. If you are upgrading from version 4.3, :ref:`update the Java Opts variable name <updating_java_opts>` with the new one.
-#. If you are upgrading from version 4.3, :ref:`update old paths <updating_old_paths>` with the new ones.
 #. If you are upgrading from a version earlier than 4.8, :ref:`update configuration parameters <updating_configuraton_parameters>`.
+#. If you are upgrading from version earlier than 4.13, :ref:`update old paths <updating_old_paths>` with the new ones.
 #. :ref:`Modify tags of Wazuh images <modifying_tags>`.
 
 Next, :ref:`apply the new configuration <apply_the_new_configuration>`.
@@ -98,23 +98,59 @@ Updating old paths
 
 #. Edit ``wazuh/indexer_stack/wazuh-dashboard/dashboard-deploy.yaml`` and do the following replacements.
 
-   -  Replace ``/usr/share/wazuh-dashboard/config/certs/`` with ``/usr/share/wazuh-dashboard/certs/``.
+   -  Replace ``/usr/share/wazuh-dashboard/certs/`` with ``/usr/share/wazuh-dashboard/config/certs/``.
 
 #. Edit ``wazuh/indexer_stack/wazuh-dashboard/dashboard_conf/opensearch_dashboards.yml`` and do the following replacements.
 
-   -  Replace ``/usr/share/wazuh-dashboard/config/certs/`` with ``/usr/share/wazuh-dashboard/certs/``.
+   -  Replace ``/usr/share/wazuh-dashboard/certs/`` with ``/usr/share/wazuh-dashboard/config/certs/``.
 
 **Wazuh indexer**
 
-#. Edit ``wazuh/indexer_stack/wazuh-indexer/cluster/indexer-sts.yaml`` and do the following replacements.
+#. Edit ``wazuh/indexer_stack/wazuh-indexer/cluster/indexer-sts.yaml`` and do the following replacements and additions.
 
-   -  Replace ``/usr/share/wazuh-indexer/config/certs/`` with ``/usr/share/wazuh-indexer/certs/``.
-   -  Replace ``/usr/share/wazuh-indexer/config/opensearch.yml`` with ``/usr/share/wazuh-indexer/opensearch.yml``.
+   -  Replace ``/usr/share/wazuh-indexer/certs/`` with ``/usr/share/wazuh-indexer/config/certs/``.
+   -  Replace ``/usr/share/wazuh-indexer/opensearch.yml`` with ``/usr/share/wazuh-indexer/config/opensearch.yml``.
+   -  Replace ``/usr/share/wazuh-indexer/opensearch-security/internal_users.yml`` with ``/usr/share/wazuh-indexer/config/opensearch-security/internal_users.yml``.
    -  Replace ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/`` with ``/usr/share/wazuh-indexer/opensearch-security/``.
+   - Add the following statements:
+
+   .. code-block:: yaml
+      :emphasize-lines: 5, 9
+
+      volumes:
+      - name: indexer-certs
+         secret:
+            secretName: indexer-certs
+            defaultMode: 0600
+      - name: indexer-conf
+         configMap:
+            name: indexer-conf
+            defaultMode: 0600
+
+   .. code-block:: yaml
+      :emphasize-lines: 3
+
+      spec:
+         securityContext:
+         fsGroup: 1000
+         # Set the wazuh-indexer volume permissions so the wazuh-indexer user can use it
+         volumes:
+         - name: indexer-certs
+
+   .. code-block:: yaml
+      :emphasize-lines: 2, 3
+
+      securityContext:
+         runAsUser: 1000
+         runAsGroup: 1000
+         capabilities:
+            add: ["SYS_CHROOT"]
+
+   Add the following options into
 
 #. Edit ``wazuh/indexer_stack/wazuh-indexer/indexer_conf/opensearch.yml`` and do the following replacements.
 
-   -  Replace ``/usr/share/wazuh-indexer/config/certs/`` with ``/usr/share/wazuh-indexer/certs/``.
+   -  Replace ``/usr/share/wazuh-indexer/certs/`` with ``/usr/share/wazuh-indexer/config/certs/``.
 
 .. _updating_configuraton_parameters:
 

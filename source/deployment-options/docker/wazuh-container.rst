@@ -461,9 +461,10 @@ Applying the changes
    .. code-block:: console
 
       export INSTALLATION_DIR=/usr/share/wazuh-indexer
-      CACERT=$INSTALLATION_DIR/certs/root-ca.pem
-      KEY=$INSTALLATION_DIR/certs/admin-key.pem
-      CERT=$INSTALLATION_DIR/certs/admin.pem
+      export CONFIG_DIR=$INSTALLATION_DIR/config
+      CACERT=$CONFIG_DIR/certs/root-ca.pem
+      KEY=$CONFIG_DIR/certs/admin-key.pem
+      CERT=$CONFIG_DIR/certs/admin.pem
       export JAVA_HOME=/usr/share/wazuh-indexer/jdk
 
 #. Wait for the Wazuh indexer to initialize properly. The waiting time can vary from two to five minutes. It depends on the size of the cluster, the assigned resources, and the network speed. Then, run the ``securityadmin.sh`` script to apply all changes.
@@ -474,7 +475,7 @@ Applying the changes
 
          .. code-block:: console
 
-            $ bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -cd /usr/share/wazuh-indexer/opensearch-security/ -nhnv -cacert  $CACERT -cert $CERT -key $KEY -p 9200 -icl
+            $ bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -cd $CONFIG_DIR/opensearch-security/ -nhnv -cacert  $CACERT -cert $CERT -key $KEY -p 9200 -icl
 
       .. tab:: Multi-node cluster
 

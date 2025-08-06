@@ -121,7 +121,7 @@ To upgrade your deployment keeping your custom ``docker-compose.yml`` file, do t
 
       docker-compose -f generate-indexer-certs.yml run --rm generator
 
-#. Update old paths with the new ones, if upgrading from 4.3.
+#. Update old paths with the new ones, if upgrading from 4.13.
 
    .. tabs::
 
@@ -141,13 +141,13 @@ To upgrade your deployment keeping your custom ``docker-compose.yml`` file, do t
 
          #. Edit ``single-node/config/wazuh_indexer/wazuh.indexer.yml`` and do the following replacements.
 
-            -  Replace ``/usr/share/wazuh-indexer/config/certs/`` with ``/usr/share/wazuh-indexer/certs/``.
-            -  Replace ``${OPENSEARCH_PATH_CONF}/certs/`` with ``/usr/share/wazuh-indexer/certs/``.
+            -  Replace ``/usr/share/wazuh-indexer/certs/`` with ``/usr/share/wazuh-indexer/config/certs/``.
 
          #. Edit ``single-node/docker-compose.yml`` and do the following replacements.
 
-            -  Replace ``/usr/share/wazuh-indexer/config/certs/`` with ``/usr/share/wazuh-indexer/certs/``.
-            -  Replace ``/usr/share/wazuh-indexer/config/opensearch.yml`` with ``/usr/share/wazuh-indexer/opensearch.yml``.
+            -  Replace ``/usr/share/wazuh-indexer/certs/`` with ``/usr/share/wazuh-indexer/config/certs/``.
+            -  Replace ``/usr/share/wazuh-indexer/opensearch.yml`` with ``/usr/share/wazuh-indexer/config/opensearch.yml``.
+            -  Replace ``/usr/share/wazuh-indexer/opensearch-security/internal_users.yml`` with ``/usr/share/wazuh-indexer/config/opensearch-security/internal_users.yml``.
             -  Replace ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/`` with ``/usr/share/wazuh-indexer/opensearch-security/``
 
       .. group-tab:: Multi node deployment
@@ -166,13 +166,13 @@ To upgrade your deployment keeping your custom ``docker-compose.yml`` file, do t
 
          #. Edit ``multi-node/config/wazuh_indexer/wazuh1.indexer.yml``, ``wazuh2.indexer.yml``, and ``wazuh3.indexer.yml`` and do the following replacements.
 
-            -  Replace ``/usr/share/wazuh-indexer/config/certs/`` with ``/usr/share/wazuh-indexer/certs/``.
-            -  Replace ``${OPENSEARCH_PATH_CONF}/certs/`` with ``/usr/share/wazuh-indexer/certs/``.
+            -  Replace ``/usr/share/wazuh-indexer/certs/`` with ``/usr/share/wazuh-indexer/config/certs/``.
 
          #. Edit ``multi-node/docker-compose.yml`` and do the following replacements.
 
-            -  Replace ``/usr/share/wazuh-indexer/config/certs/`` with ``/usr/share/wazuh-indexer/certs/``.
-            -  Replace ``/usr/share/wazuh-indexer/config/opensearch.yml`` with ``/usr/share/wazuh-indexer/opensearch.yml``.
+            -  Replace ``/usr/share/wazuh-indexer/certs/`` with ``/usr/share/wazuh-indexer/config/certs/``.
+            -  Replace ``/usr/share/wazuh-indexer/opensearch.yml`` with ``/usr/share/wazuh-indexer/config/opensearch.yml``.
+            -  Replace ``/usr/share/wazuh-indexer/opensearch-security/internal_users.yml`` with ``/usr/share/wazuh-indexer/config/opensearch-security/internal_users.yml``.
             -  Replace ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/`` with ``/usr/share/wazuh-indexer/opensearch-security/``.
 
 #. Edit the ``docker-compose.yml`` file corresponding to your deployment type. Modify the highlighted lines and add the variable related to the ``kibanaserver`` user with the corresponding value.
