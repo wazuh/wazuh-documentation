@@ -245,6 +245,21 @@ paths:
   /{rollover_target}/_rollover/{target_index}:
     $ref: 'index_api.yml#/paths/~1{rollover_target}~1_rollover~1{target_index}'
 
+  /_stats:
+    $ref: 'index_api.yml#/paths/~1_stats'
+
+  /_stats/{metric}:
+    $ref: 'index_api.yml#/paths/~1_stats~1{metric}'
+
+  /{index_ids}/_stats:
+    $ref: 'index_api.yml#/paths/~1{index_ids}~1_stats'
+
+  /{index_ids}/_stats/{metric}:
+    $ref: 'index_api.yml#/paths/~1{index_ids}~1_stats~1{metric}'
+
+  /{index}/_settings:
+    $ref: 'index_api.yml#/paths/~1{index}~1_settings'
+
   /{index}/_analyze:
     parameters:
       - $ref: 'analyze_api.yml#/components/parameters/index'

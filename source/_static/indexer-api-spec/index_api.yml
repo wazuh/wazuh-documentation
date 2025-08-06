@@ -1740,6 +1740,192 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 
+  /_stats:
+    get:
+      tags: [Index APIs]
+      summary: Index stats (Global GET)
+      description: |
+        The Index Stats API offers statistics about indexes. For data streams, it returns statistics for their backing indexes. By default, statistics are provided at the index level. To retrieve shard-level statistics, use the level parameter and set it to shards.
+
+        When a shard is relocated to another node, its shard-level statistics are cleared. However, while the shard no longer resides on the original node, the node retains any node-level statistics that the shard previously contributed to.
+      operationId: getStatsGlobal
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/expand_wildcards'
+        - $ref: '#/components/parameters/stats_fields'
+        - $ref: '#/components/parameters/completion_fields'
+        - $ref: '#/components/parameters/fielddata_fields'
+        - $ref: '#/components/parameters/forbid_closed_indices'
+        - $ref: '#/components/parameters/groups'
+        - $ref: '#/components/parameters/level'
+        - $ref: '#/components/parameters/include_segment_file_sizes'
+        - $ref: '#/components/parameters/include_unloaded_segments'
+      requestBody:
+        $ref: '#/components/requestBodies/IndexStatsRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/IndexStatsSuccess'
+        '400':
+          $ref: '#/components/responses/IndexStatsBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /_stats/{metric}:
+    parameters:
+      - $ref: '#/components/parameters/metric'
+    get:
+      tags: [Index APIs]
+      summary: Index stats (Global Metric GET)
+      description: |
+        The Index Stats API offers statistics about indexes. For data streams, it returns statistics for their backing indexes. By default, statistics are provided at the index level. To retrieve shard-level statistics, use the level parameter and set it to shards.
+
+        When a shard is relocated to another node, its shard-level statistics are cleared. However, while the shard no longer resides on the original node, the node retains any node-level statistics that the shard previously contributed to.
+      operationId: getStatsGlobalMetric
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/expand_wildcards'
+        - $ref: '#/components/parameters/stats_fields'
+        - $ref: '#/components/parameters/completion_fields'
+        - $ref: '#/components/parameters/fielddata_fields'
+        - $ref: '#/components/parameters/forbid_closed_indices'
+        - $ref: '#/components/parameters/groups'
+        - $ref: '#/components/parameters/level'
+        - $ref: '#/components/parameters/include_segment_file_sizes'
+        - $ref: '#/components/parameters/include_unloaded_segments'
+      requestBody:
+        $ref: '#/components/requestBodies/IndexStatsRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/IndexStatsSuccess'
+        '400':
+          $ref: '#/components/responses/IndexStatsBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /{index_ids}/_stats:
+    parameters:
+      - $ref: '#/components/parameters/index_ids'
+    get:
+      tags: [Index APIs]
+      summary: Index stats (Index GET)
+      description: |
+        The Index Stats API offers statistics about indexes. For data streams, it returns statistics for their backing indexes. By default, statistics are provided at the index level. To retrieve shard-level statistics, use the level parameter and set it to shards.
+
+        When a shard is relocated to another node, its shard-level statistics are cleared. However, while the shard no longer resides on the original node, the node retains any node-level statistics that the shard previously contributed to.
+      operationId: getStatsIndex
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/expand_wildcards'
+        - $ref: '#/components/parameters/stats_fields'
+        - $ref: '#/components/parameters/completion_fields'
+        - $ref: '#/components/parameters/fielddata_fields'
+        - $ref: '#/components/parameters/forbid_closed_indices'
+        - $ref: '#/components/parameters/groups'
+        - $ref: '#/components/parameters/level'
+        - $ref: '#/components/parameters/include_segment_file_sizes'
+        - $ref: '#/components/parameters/include_unloaded_segments'
+      requestBody:
+        $ref: '#/components/requestBodies/IndexStatsRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/IndexStatsSuccess'
+        '400':
+          $ref: '#/components/responses/IndexStatsBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /{index_ids}/_stats/{metric}:
+    parameters:
+      - $ref: '#/components/parameters/index_ids'
+      - $ref: '#/components/parameters/metric'
+    get:
+      tags: [Index APIs]
+      summary: Index stats (Index Metric GET)
+      description: |
+        The Index Stats API offers statistics about indexes. For data streams, it returns statistics for their backing indexes. By default, statistics are provided at the index level. To retrieve shard-level statistics, use the level parameter and set it to shards.
+
+        When a shard is relocated to another node, its shard-level statistics are cleared. However, while the shard no longer resides on the original node, the node retains any node-level statistics that the shard previously contributed to.
+      operationId: getStatsIndexMetric
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/expand_wildcards'
+        - $ref: '#/components/parameters/stats_fields'
+        - $ref: '#/components/parameters/completion_fields'
+        - $ref: '#/components/parameters/fielddata_fields'
+        - $ref: '#/components/parameters/forbid_closed_indices'
+        - $ref: '#/components/parameters/groups'
+        - $ref: '#/components/parameters/level'
+        - $ref: '#/components/parameters/include_segment_file_sizes'
+        - $ref: '#/components/parameters/include_unloaded_segments'
+      requestBody:
+        $ref: '#/components/requestBodies/IndexStatsRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/IndexStatsSuccess'
+        '400':
+          $ref: '#/components/responses/IndexStatsBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /{index}/_settings:
+    parameters:
+      - $ref: '#/components/parameters/index_only'
+    put:
+      tags: [Index APIs]
+      summary: Update settings
+      description: |
+        The Update Settings API allows you to modify settings at the index level. You can adjust dynamic settings at any time, while static settings are fixed once the index is created and cannot be changed afterward. For details on the distinction between static and dynamic settings, refer to the Configuring OpenSearch documentation.
+
+        In addition to index settings, you can update configurations specific to individual plugins. To get the full list of updatable settings, run `GET <TARGET-INDEX>/_settings?include_defaults=true`.
+      operationId: putIndexSettings
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/allow_no_indices'
+        - $ref: '#/components/parameters/expand_wildcards'
+        - $ref: '#/components/parameters/ignore_unavailable'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/preserve_existing'
+        - $ref: '#/components/parameters/timeout'
+      requestBody:
+        $ref: '#/components/requestBodies/UpdateSettingsRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/UpdateSettingsSuccess'
+        '400':
+          $ref: '#/components/responses/UpdateSettingsBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
 components:
   parameters:
     target:
@@ -1993,6 +2179,133 @@ components:
         Specifies whether the response should include default index settings. This is helpful for identifying setting names and values that can be customized.
       schema:
         type: boolean
+
+    metric:
+      name: metric
+      in: path
+      required: false
+      description: |
+        A comma-separated list of metric groups that will be included in the response. The default value is all metrics.
+
+        **Available Metrics:**
+
+        - `_all`: Returns all available statistics.
+        - `completion`: Provides completion suggester statistics.
+        - `docs`: Shows the total document count and the number of deleted documents that have not yet been merged. This can change with index refresh operations.
+        - `fielddata`: Returns statistics related to field data usage.
+        - `flush`: Reports flush operation statistics.
+        - `get`: Provides statistics for get operations, including missing document retrievals.
+        - `indexing`: Displays data about indexing operations.
+        - `merge`: Shows merge operation statistics.
+        - `query_cache`: Returns statistics about the query cache.
+        - `refresh`: Reports on refresh operations performed on the index.
+        - `request_cache`: Provides statistics about the shard-level request cache.
+        - `search`: Returns detailed search operation statistics, including suggest operations. To include custom group statistics, use the groups parameter with a comma-separated list. Use `_all` to get stats for all groups.
+        - `segments`: Reports on memory usage for all open segments. If `include_segment_file_sizes` is set to `true`, this also includes total disk space used by Lucene index files.
+        - `store`: Displays the total size of the index in bytes.
+        - `translog`: Provides translog statistics, which relate to durability and write-ahead logs.
+        - `warmer`: Shows statistics about warmer operations, which are used to preload segments for faster search performance.
+      schema:
+        type: string
+        enum: [_all, completion, docs, fielddata, flush, get, indexing, merge, query_cache, refresh, request_cache, search, segments, store, translog, warmer]
+      example: "docs,store"
+
+    index_ids:
+      name: index_ids
+      in: path
+      required: false
+      description: |
+        A comma-separated list of indexes, data streams, or index aliases that the operation is applied. Wildcard expressions such as (`*`) are supported. Use `_all` or `*` to apply the operation to all indexes and data streams in the cluster.
+      schema:
+        type: string
+      example: "wazuh-alerts-4.x-2025.03.11"
+
+    stats_fields:
+      name: fields
+      in: query
+      required: false
+      description: |
+        Comma-separated list or wildcard pattern of fields to include in the statistics. Acts as the default if `completion_fields` and `fielddata_fields` are not specified.
+      schema:
+        type: string
+
+    completion_fields:
+      name: completion_fields
+      in: query
+      required: false
+      description: |
+        Comma-separated list or wildcard pattern of fields for which to include completion statistics at the field level.
+      schema:
+        type: string
+
+    fielddata_fields:
+      name: fielddata_fields
+      in: query
+      required: false
+      description: |
+        Comma-separated list or wildcard pattern of fields for which to include fielddata statistics at the field level.
+      schema:
+        type: string
+
+    forbid_closed_indices:
+      name: forbid_closed_indices
+      in: query
+      required: false
+      description: |
+        When set to `true`, statistics will not be collected from closed indexes. The default value is true.
+      schema:
+        type: boolean
+        default: true
+
+    groups:
+      name: groups
+      in: query
+      required: false
+      description: |
+        Comma-separated list of search groups to include in the search statistics.
+      schema:
+        type: string
+
+    level:
+      name: level
+      in: query
+      required: false
+      description: |
+        Specifies the aggregation level of statistics.
+      schema:
+        type: string
+        enum: [cluster, indices, shards]
+        default: indices
+
+    include_segment_file_sizes:
+      name: include_segment_file_sizes
+      in: query
+      required: false
+      description: |
+        If set to `true`, includes aggregated disk usage statistics for each Lucene index file. Applies only to segment statistics.
+      schema:
+        type: boolean
+        default: false
+
+    include_unloaded_segments:
+      name: include_unloaded_segments
+      in: query
+      required: false
+      description: |
+        If set to `true`, it includes segment information for segments not loaded into memory.
+      schema:
+        type: boolean
+        default: false
+
+    preserve_existing:
+      name: preserve_existing
+      in: query
+      required: false
+      description: |
+        Indicates whether to retain current index settings.
+      schema:
+        type: boolean
+        default: false
 
     local:
       name: local
@@ -2754,6 +3067,35 @@ components:
                 number_of_replicas: 2
             aliases:
               "sample-alias1": {}
+
+    IndexStatsRequest:
+      required: false
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              settings:
+                type: object
+                description: A set of index settings to apply to the target index.
+              aliases:
+                type: object
+                description: Defines one or more aliases to be associated with the newly created target index. You can specify alias names and their configuration (e.g., filters, routing).
+          example:
+
+    UpdateSettingsRequest:
+      required: false
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              settings:
+                type: object
+                description: Defines configuration settings for the index such as the number of shards, replicas, and custom analyzers.
+          example:
+            index:
+              number_of_replicas: 4
 
   responses:
     AliasSuccess:
@@ -4463,6 +4805,685 @@ components:
               type: "invalid_index_name_exception"
               reason: "Invalid index name [_wazuh-alerts-4.x-2025.03.14], must not start with '_'."
               index: "_wazuh-alerts-4.x-2025.03.14"
+              index_uuid: "_na_"
+            status: 400
+
+    IndexStatsSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              _shards:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                    description: |
+                      This indicates the total number of shards that the `_stats` request attempted to gather information from across your entire Wazuh cluster. This includes both primary and replica shards. The scope can be cluster, indices or shards.
+                  successful:
+                    type: integer
+                    description: |
+                      Specifies the total number of shards that the `_stats` request successfully retrieved. A "successful" shard response implies that the data was collected without any errors from that specific shard.
+                  failed:
+                    type: integer
+                    description: |
+                      Specifies the total number of shards that the `_stats` request unsuccessfully retrieved.
+          example:
+            _shards:
+              total: 3
+              successful: 3
+              failed: 0
+            _all:
+              primaries:
+                docs:
+                  count: 410
+                  deleted: 0
+                store:
+                  size_in_bytes: 1479888
+                  reserved_in_bytes: 0
+                indexing:
+                  index_total: 0
+                  index_time_in_millis: 0
+                  index_current: 0
+                  index_failed: 0
+                  delete_total: 0
+                  delete_time_in_millis: 0
+                  delete_current: 0
+                  noop_update_total: 0
+                  is_throttled: false
+                  throttle_time_in_millis: 0
+                  doc_status: {}
+                get:
+                  total: 0
+                  time_in_millis: 0
+                  exists_total: 0
+                  exists_time_in_millis: 0
+                  missing_total: 0
+                  missing_time_in_millis: 0
+                  current: 0
+                search:
+                  open_contexts: 0
+                  query_total: 6
+                  query_time_in_millis: 10
+                  query_current: 0
+                  concurrent_query_total: 0
+                  concurrent_query_time_in_millis: 0
+                  concurrent_query_current: 0
+                  concurrent_avg_slice_count: 0
+                  fetch_total: 0
+                  fetch_time_in_millis: 0
+                  fetch_current: 0
+                  scroll_total: 0
+                  scroll_time_in_millis: 0
+                  scroll_current: 0
+                  point_in_time_total: 0
+                  point_in_time_time_in_millis: 0
+                  point_in_time_current: 0
+                  suggest_total: 0
+                  suggest_time_in_millis: 0
+                  suggest_current: 0
+                  search_idle_reactivate_count_total: 0
+                merges:
+                  current: 0
+                  current_docs: 0
+                  current_size_in_bytes: 0
+                  total: 0
+                  total_time_in_millis: 0
+                  total_docs: 0
+                  total_size_in_bytes: 0
+                  total_stopped_time_in_millis: 0
+                  total_throttled_time_in_millis: 0
+                  total_auto_throttle_in_bytes: 62914560
+                  unreferenced_file_cleanups_performed: 0
+                refresh:
+                  total: 9
+                  total_time_in_millis: 0
+                  external_total: 9
+                  external_total_time_in_millis: 1
+                  listeners: 0
+                flush:
+                  total: 3
+                  periodic: 3
+                  total_time_in_millis: 0
+                warmer:
+                  current: 0
+                  total: 3
+                  total_time_in_millis: 1
+                query_cache:
+                  memory_size_in_bytes: 0
+                  total_count: 0
+                  hit_count: 0
+                  miss_count: 0
+                  cache_size: 0
+                  cache_count: 0
+                  evictions: 0
+                fielddata:
+                  memory_size_in_bytes: 0
+                  evictions: 0
+                completion:
+                  size_in_bytes: 0
+                segments:
+                  count: 19
+                  memory_in_bytes: 0
+                  terms_memory_in_bytes: 0
+                  stored_fields_memory_in_bytes: 0
+                  term_vectors_memory_in_bytes: 0
+                  norms_memory_in_bytes: 0
+                  points_memory_in_bytes: 0
+                  doc_values_memory_in_bytes: 0
+                  index_writer_memory_in_bytes: 0
+                  version_map_memory_in_bytes: 0
+                  fixed_bit_set_memory_in_bytes: 936
+                  max_unsafe_auto_id_timestamp: -1
+                  remote_store:
+                    upload:
+                      total_upload_size:
+                        started_bytes: 0
+                        succeeded_bytes: 0
+                        failed_bytes: 0
+                      refresh_size_lag:
+                        total_bytes: 0
+                        max_bytes: 0
+                      max_refresh_time_lag_in_millis: 0
+                      total_time_spent_in_millis: 0
+                      pressure:
+                        total_rejections: 0
+                    download:
+                      total_download_size:
+                        started_bytes: 0
+                        succeeded_bytes: 0
+                        failed_bytes: 0
+                      total_time_spent_in_millis: 0
+                  segment_replication:
+                    max_bytes_behind: 0
+                    total_bytes_behind: 0
+                    max_replication_lag: 0
+                  file_sizes: {}
+                translog:
+                  operations: 0
+                  size_in_bytes: 165
+                  uncommitted_operations: 0
+                  uncommitted_size_in_bytes: 165
+                  earliest_last_modified_age: 55457529
+                  remote_store:
+                    upload:
+                      total_uploads:
+                        started: 0
+                        failed: 0
+                        succeeded: 0
+                      total_upload_size:
+                        started_bytes: 0
+                        failed_bytes: 0
+                        succeeded_bytes: 0
+                request_cache:
+                  memory_size_in_bytes: 21605
+                  evictions: 0
+                  hit_count: 0
+                  miss_count: 6
+                recovery:
+                  current_as_source: 0
+                  current_as_target: 0
+                  throttle_time_in_millis: 0
+              total:
+                docs:
+                  count: 410
+                  deleted: 0
+                store:
+                  size_in_bytes: 1479888
+                  reserved_in_bytes: 0
+                indexing:
+                  index_total: 0
+                  index_time_in_millis: 0
+                  index_current: 0
+                  index_failed: 0
+                  delete_total: 0
+                  delete_time_in_millis: 0
+                  delete_current: 0
+                  noop_update_total: 0
+                  is_throttled: false
+                  throttle_time_in_millis: 0
+                  doc_status: {}
+                get:
+                  total: 0
+                  time_in_millis: 0
+                  exists_total: 0
+                  exists_time_in_millis: 0
+                  missing_total: 0
+                  missing_time_in_millis: 0
+                  current: 0
+                search:
+                  open_contexts: 0
+                  query_total: 6
+                  query_time_in_millis: 10
+                  query_current: 0
+                  concurrent_query_total: 0
+                  concurrent_query_time_in_millis: 0
+                  concurrent_query_current: 0
+                  concurrent_avg_slice_count: 0
+                  fetch_total: 0
+                  fetch_time_in_millis: 0
+                  fetch_current: 0
+                  scroll_total: 0
+                  scroll_time_in_millis: 0
+                  scroll_current: 0
+                  point_in_time_total: 0
+                  point_in_time_time_in_millis: 0
+                  point_in_time_current: 0
+                  suggest_total: 0
+                  suggest_time_in_millis: 0
+                  suggest_current: 0
+                  search_idle_reactivate_count_total: 0
+                merges:
+                  current: 0
+                  current_docs: 0
+                  current_size_in_bytes: 0
+                  total: 0
+                  total_time_in_millis: 0
+                  total_docs: 0
+                  total_size_in_bytes: 0
+                  total_stopped_time_in_millis: 0
+                  total_throttled_time_in_millis: 0
+                  total_auto_throttle_in_bytes: 62914560
+                  unreferenced_file_cleanups_performed: 0
+                refresh:
+                  total: 9
+                  total_time_in_millis: 0
+                  external_total: 9
+                  external_total_time_in_millis: 1
+                  listeners: 0
+                flush:
+                  total: 3
+                  periodic: 3
+                  total_time_in_millis: 0
+                warmer:
+                  current: 0
+                  total: 3
+                  total_time_in_millis: 1
+                query_cache:
+                  memory_size_in_bytes: 0
+                  total_count: 0
+                  hit_count: 0
+                  miss_count: 0
+                  cache_size: 0
+                  cache_count: 0
+                  evictions: 0
+                fielddata:
+                  memory_size_in_bytes: 0
+                  evictions: 0
+                completion:
+                  size_in_bytes: 0
+                segments:
+                  count: 19
+                  memory_in_bytes: 0
+                  terms_memory_in_bytes: 0
+                  stored_fields_memory_in_bytes: 0
+                  term_vectors_memory_in_bytes: 0
+                  norms_memory_in_bytes: 0
+                  points_memory_in_bytes: 0
+                  doc_values_memory_in_bytes: 0
+                  index_writer_memory_in_bytes: 0
+                  version_map_memory_in_bytes: 0
+                  fixed_bit_set_memory_in_bytes: 936
+                  max_unsafe_auto_id_timestamp: -1
+                  remote_store:
+                    upload:
+                      total_upload_size:
+                        started_bytes: 0
+                        succeeded_bytes: 0
+                        failed_bytes: 0
+                      refresh_size_lag:
+                        total_bytes: 0
+                        max_bytes: 0
+                      max_refresh_time_lag_in_millis: 0
+                      total_time_spent_in_millis: 0
+                      pressure:
+                        total_rejections: 0
+                    download:
+                      total_download_size:
+                        started_bytes: 0
+                        succeeded_bytes: 0
+                        failed_bytes: 0
+                      total_time_spent_in_millis: 0
+                  segment_replication:
+                    max_bytes_behind: 0
+                    total_bytes_behind: 0
+                    max_replication_lag: 0
+                  file_sizes: {}
+                translog:
+                  operations: 0
+                  size_in_bytes: 165
+                  uncommitted_operations: 0
+                  uncommitted_size_in_bytes: 165
+                  earliest_last_modified_age: 55457529
+                  remote_store:
+                    upload:
+                      total_uploads:
+                        started: 0
+                        failed: 0
+                        succeeded: 0
+                      total_upload_size:
+                        started_bytes: 0
+                        failed_bytes: 0
+                        succeeded_bytes: 0
+                request_cache:
+                  memory_size_in_bytes: 21605
+                  evictions: 0
+                  hit_count: 0
+                  miss_count: 6
+                recovery:
+                  current_as_source: 0
+                  current_as_target: 0
+                  throttle_time_in_millis: 0
+            indices:
+              "wazuh-alerts-4.x-2025.03.11":
+                uuid: "_3bNKqwLQxqAZXxr1D3SQA"
+                primaries:
+                  docs:
+                    count: 410
+                    deleted: 0
+                  store:
+                    size_in_bytes: 1479888
+                    reserved_in_bytes: 0
+                  indexing:
+                    index_total: 0
+                    index_time_in_millis: 0
+                    index_current: 0
+                    index_failed: 0
+                    delete_total: 0
+                    delete_time_in_millis: 0
+                    delete_current: 0
+                    noop_update_total: 0
+                    is_throttled: false
+                    throttle_time_in_millis: 0
+                    doc_status: {}
+                  get:
+                    total: 0
+                    time_in_millis: 0
+                    exists_total: 0
+                    exists_time_in_millis: 0
+                    missing_total: 0
+                    missing_time_in_millis: 0
+                    current: 0
+                  search:
+                    open_contexts: 0
+                    query_total: 6
+                    query_time_in_millis: 10
+                    query_current: 0
+                    concurrent_query_total: 0
+                    concurrent_query_time_in_millis: 0
+                    concurrent_query_current: 0
+                    concurrent_avg_slice_count: 0
+                    fetch_total: 0
+                    fetch_time_in_millis: 0
+                    fetch_current: 0
+                    scroll_total: 0
+                    scroll_time_in_millis: 0
+                    scroll_current: 0
+                    point_in_time_total: 0
+                    point_in_time_time_in_millis: 0
+                    point_in_time_current: 0
+                    suggest_total: 0
+                    suggest_time_in_millis: 0
+                    suggest_current: 0
+                    search_idle_reactivate_count_total: 0
+                  merges:
+                    current: 0
+                    current_docs: 0
+                    current_size_in_bytes: 0
+                    total: 0
+                    total_time_in_millis: 0
+                    total_docs: 0
+                    total_size_in_bytes: 0
+                    total_stopped_time_in_millis: 0
+                    total_throttled_time_in_millis: 0
+                    total_auto_throttle_in_bytes: 62914560
+                    unreferenced_file_cleanups_performed: 0
+                  refresh:
+                    total: 9
+                    total_time_in_millis: 0
+                    external_total: 9
+                    external_total_time_in_millis: 1
+                    listeners: 0
+                  flush:
+                    total: 3
+                    periodic: 3
+                    total_time_in_millis: 0
+                  warmer:
+                    current: 0
+                    total: 3
+                    total_time_in_millis: 1
+                  query_cache:
+                    memory_size_in_bytes: 0
+                    total_count: 0
+                    hit_count: 0
+                    miss_count: 0
+                    cache_size: 0
+                    cache_count: 0
+                    evictions: 0
+                  fielddata:
+                    memory_size_in_bytes: 0
+                    evictions: 0
+                  completion:
+                    size_in_bytes: 0
+                  segments:
+                    count: 19
+                    memory_in_bytes: 0
+                    terms_memory_in_bytes: 0
+                    stored_fields_memory_in_bytes: 0
+                    term_vectors_memory_in_bytes: 0
+                    norms_memory_in_bytes: 0
+                    points_memory_in_bytes: 0
+                    doc_values_memory_in_bytes: 0
+                    index_writer_memory_in_bytes: 0
+                    version_map_memory_in_bytes: 0
+                    fixed_bit_set_memory_in_bytes: 936
+                    max_unsafe_auto_id_timestamp: -1
+                    remote_store:
+                      upload:
+                        total_upload_size:
+                          started_bytes: 0
+                          succeeded_bytes: 0
+                          failed_bytes: 0
+                        refresh_size_lag:
+                          total_bytes: 0
+                          max_bytes: 0
+                        max_refresh_time_lag_in_millis: 0
+                        total_time_spent_in_millis: 0
+                        pressure:
+                          total_rejections: 0
+                      download:
+                        total_download_size:
+                          started_bytes: 0
+                          succeeded_bytes: 0
+                          failed_bytes: 0
+                        total_time_spent_in_millis: 0
+                    segment_replication:
+                      max_bytes_behind: 0
+                      total_bytes_behind: 0
+                      max_replication_lag: 0
+                    file_sizes: {}
+                  translog:
+                    operations: 0
+                    size_in_bytes: 165
+                    uncommitted_operations: 0
+                    uncommitted_size_in_bytes: 165
+                    earliest_last_modified_age: 55457529
+                    remote_store:
+                      upload:
+                        total_uploads:
+                          started: 0
+                          failed: 0
+                          succeeded: 0
+                        total_upload_size:
+                          started_bytes: 0
+                          failed_bytes: 0
+                          succeeded_bytes: 0
+                  request_cache:
+                    memory_size_in_bytes: 21605
+                    evictions: 0
+                    hit_count: 0
+                    miss_count: 6
+                  recovery:
+                    current_as_source: 0
+                    current_as_target: 0
+                    throttle_time_in_millis: 0
+                total:
+                  docs:
+                    count: 410
+                    deleted: 0
+                  store:
+                    size_in_bytes: 1479888
+                    reserved_in_bytes: 0
+                  indexing:
+                    index_total: 0
+                    index_time_in_millis: 0
+                    index_current: 0
+                    index_failed: 0
+                    delete_total: 0
+                    delete_time_in_millis: 0
+                    delete_current: 0
+                    noop_update_total: 0
+                    is_throttled: false
+                    throttle_time_in_millis: 0
+                    doc_status: {}
+                  get:
+                    total: 0
+                    time_in_millis: 0
+                    exists_total: 0
+                    exists_time_in_millis: 0
+                    missing_total: 0
+                    missing_time_in_millis: 0
+                    current: 0
+                  search:
+                    open_contexts: 0
+                    query_total: 6
+                    query_time_in_millis: 10
+                    query_current: 0
+                    concurrent_query_total: 0
+                    concurrent_query_time_in_millis: 0
+                    concurrent_query_current: 0
+                    concurrent_avg_slice_count: 0
+                    fetch_total: 0
+                    fetch_time_in_millis: 0
+                    fetch_current: 0
+                    scroll_total: 0
+                    scroll_time_in_millis: 0
+                    scroll_current: 0
+                    point_in_time_total: 0
+                    point_in_time_time_in_millis: 0
+                    point_in_time_current: 0
+                    suggest_total: 0
+                    suggest_time_in_millis: 0
+                    suggest_current: 0
+                    search_idle_reactivate_count_total: 0
+                  merges:
+                    current: 0
+                    current_docs: 0
+                    current_size_in_bytes: 0
+                    total: 0
+                    total_time_in_millis: 0
+                    total_docs: 0
+                    total_size_in_bytes: 0
+                    total_stopped_time_in_millis: 0
+                    total_throttled_time_in_millis: 0
+                    total_auto_throttle_in_bytes: 62914560
+                    unreferenced_file_cleanups_performed: 0
+                  refresh:
+                    total: 9
+                    total_time_in_millis: 0
+                    external_total: 9
+                    external_total_time_in_millis: 1
+                    listeners: 0
+                  flush:
+                    total: 3
+                    periodic: 3
+                    total_time_in_millis: 0
+                  warmer:
+                    current: 0
+                    total: 3
+                    total_time_in_millis: 1
+                  query_cache:
+                    memory_size_in_bytes: 0
+                    total_count: 0
+                    hit_count: 0
+                    miss_count: 0
+                    cache_size: 0
+                    cache_count: 0
+                    evictions: 0
+                  fielddata:
+                    memory_size_in_bytes: 0
+                    evictions: 0
+                  completion:
+                    size_in_bytes: 0
+                  segments:
+                    count: 19
+                    memory_in_bytes: 0
+                    terms_memory_in_bytes: 0
+                    stored_fields_memory_in_bytes: 0
+                    term_vectors_memory_in_bytes: 0
+                    norms_memory_in_bytes: 0
+                    points_memory_in_bytes: 0
+                    doc_values_memory_in_bytes: 0
+                    index_writer_memory_in_bytes: 0
+                    version_map_memory_in_bytes: 0
+                    fixed_bit_set_memory_in_bytes: 936
+                    max_unsafe_auto_id_timestamp: -1
+                    remote_store:
+                      upload:
+                        total_upload_size:
+                          started_bytes: 0
+                          succeeded_bytes: 0
+                          failed_bytes: 0
+                        refresh_size_lag:
+                          total_bytes: 0
+                          max_bytes: 0
+                        max_refresh_time_lag_in_millis: 0
+                        total_time_spent_in_millis: 0
+                        pressure:
+                          total_rejections: 0
+                      download:
+                        total_download_size:
+                          started_bytes: 0
+                          succeeded_bytes: 0
+                          failed_bytes: 0
+                        total_time_spent_in_millis: 0
+                    segment_replication:
+                      max_bytes_behind: 0
+                      total_bytes_behind: 0
+                      max_replication_lag: 0
+                    file_sizes: {}
+                  translog:
+                    operations: 0
+                    size_in_bytes: 165
+                    uncommitted_operations: 0
+                    uncommitted_size_in_bytes: 165
+                    earliest_last_modified_age: 55457529
+                    remote_store:
+                      upload:
+                        total_uploads:
+                          started: 0
+                          failed: 0
+                          succeeded: 0
+                        total_upload_size:
+                          started_bytes: 0
+                          failed_bytes: 0
+                          succeeded_bytes: 0
+                  request_cache:
+                    memory_size_in_bytes: 21605
+                    evictions: 0
+                    hit_count: 0
+                    miss_count: 6
+                  recovery:
+                    current_as_source: 0
+                    current_as_target: 0
+                    throttle_time_in_millis: 0
+
+    IndexStatsBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              root_cause:
+                - type: "invalid_index_name_exception"
+                  reason: "Invalid index name [_wazuh-alerts-4.x-2025.03.11], must not start with '_'."
+                  index: "_wazuh-alerts-4.x-2025.03.11"
+                  index_uuid: "_na_"
+              type: "invalid_index_name_exception"
+              reason: "Invalid index name [_wazuh-alerts-4.x-2025.03.11], must not start with '_'."
+              index: "_wazuh-alerts-4.x-2025.03.11"
+              index_uuid: "_na_"
+            status: 400
+
+    UpdateSettingsSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AcknowledgedResponse'
+          example:
+            acknowledged: true
+
+    UpdateSettingsBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IndexErrorResponse'
+          example:
+            error:
+              root_cause:
+                - type: "invalid_index_name_exception"
+                  reason: "Invalid index name [_wazuh-alerts-4.x-2025.03.11], must not start with '_'."
+                  index: "_wazuh-alerts-4.x-2025.03.11"
+                  index_uuid: "_na_"
+              type: "invalid_index_name_exception"
+              reason: "Invalid index name [_wazuh-alerts-4.x-2025.03.11], must not start with '_'."
+              index: "_wazuh-alerts-4.x-2025.03.11"
               index_uuid: "_na_"
             status: 400
 
