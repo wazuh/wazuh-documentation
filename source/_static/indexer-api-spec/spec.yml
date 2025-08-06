@@ -131,6 +131,135 @@ paths:
         - basicAuth: []
         - jwtAuth: []
 
+  /_aliases:
+    $ref: 'index_api.yml#/paths/~1_aliases'
+
+  /{target}/_alias/{alias_name}:
+    $ref: 'index_api.yml#/paths/~1{target}~1_alias~1{alias_name}'
+
+  /_alias/{alias_name}:
+    $ref: 'index_api.yml#/paths/~1_alias~1{alias_name}'
+
+  /{target}/_aliases/{alias_name}:
+    $ref: 'index_api.yml#/paths/~1{target}~1_aliases~1{alias_name}'
+
+  /_aliases/{alias_name}:
+    $ref: 'index_api.yml#/paths/~1_aliases~1{alias_name}'
+
+  /{target}/_alias:
+    $ref: 'index_api.yml#/paths/~1{target}~1_alias'
+
+  /{target}/_aliases:
+    $ref: 'index_api.yml#/paths/~1{target}~1_aliases'
+
+  /_alias:
+    $ref: 'index_api.yml#/paths/~1_alias'
+
+  /{index}/_block/{block}:
+    $ref: 'index_api.yml#/paths/~1{index}~1_block~1{block}'
+
+  /_block/{block}:
+    $ref: 'index_api.yml#/paths/~1_block~1{block}'
+
+  /{target}/_cache/clear:
+    $ref: 'index_api.yml#/paths/~1{target}~1_cache~1clear'
+
+  /{source_index}/_clone/{target_index}:
+    $ref: 'index_api.yml#/paths/~1{source_index}~1_clone~1{target_index}'
+
+  /{index}/_close:
+    $ref: 'index_api.yml#/paths/~1{index}~1_close'
+
+  /{index}:
+    $ref: 'index_api.yml#/paths/~1{index}'
+
+  /_index_template/{template_name}:
+    $ref: 'index_api.yml#/paths/~1_index_template~1{template_name}'
+
+  /{index_name}:
+    $ref: 'index_api.yml#/paths/~1{index_name}'
+
+  /{target_index}/_mapping:
+    $ref: 'index_api.yml#/paths/~1{target_index}~1_mapping'
+
+  /_component_template/{component_template_name}:
+    $ref: 'index_api.yml#/paths/~1_component_template~1{component_template_name}'
+
+  /_dangling:
+    $ref: 'index_api.yml#/paths/~1_dangling'
+
+  /_dangling/{index_uuid}:
+    $ref: 'index_api.yml#/paths/~1_dangling~1{index_uuid}'
+
+  /_flush:
+    $ref: 'index_api.yml#/paths/~1_flush'
+
+  /{index}/_flush:
+    $ref: 'index_api.yml#/paths/~1{index}~1_flush'
+
+  /_forcemerge:
+    $ref: 'index_api.yml#/paths/~1_forcemerge'
+
+  /{index}/_forcemerge:
+    $ref: 'index_api.yml#/paths/~1{index}~1_forcemerge'
+
+  /_recovery:
+    $ref: 'index_api.yml#/paths/~1_recovery'
+
+  /{index}/_recovery:
+    $ref: 'index_api.yml#/paths/~1{index}~1_recovery'
+
+  /_settings:
+    $ref: 'index_api.yml#/paths/~1_settings'
+
+  /{target_index}/_settings:
+    $ref: 'index_api.yml#/paths/~1{target_index}~1_settings'
+
+  /{target_index}/_settings/{setting}:
+    $ref: 'index_api.yml#/paths/~1{target_index}~1_settings~1{setting}'
+
+  /{index}/_open:
+    $ref: 'index_api.yml#/paths/~1{index}~1_open'
+
+  /_refresh:
+    $ref: 'index_api.yml#/paths/~1_refresh'
+
+  /{index}/_refresh:
+    $ref: 'index_api.yml#/paths/~1{index}~1_refresh'
+
+  /{rollover_target}/_rollover:
+    $ref: 'index_api.yml#/paths/~1{rollover_target}~1_rollover'
+
+  /{rollover_target}/_rollover/{target_index}:
+    $ref: 'index_api.yml#/paths/~1{rollover_target}~1_rollover~1{target_index}'
+
+  /_segments:
+    $ref: 'index_api.yml#/paths/~1_segments'
+
+  /{index}/_segments:
+    $ref: 'index_api.yml#/paths/~1{index}~1_segments'
+
+  /{index_name}/_shrink/{target_index}:
+    $ref: 'index_api.yml#/paths/~1{index_name}~1_shrink~1{target_index}'
+
+  /{source_index}/_split/{target_index}:
+    $ref: 'index_api.yml#/paths/~1{source_index}~1_split~1{target_index}'
+
+  /_stats:
+    $ref: 'index_api.yml#/paths/~1_stats'
+
+  /_stats/{metric}:
+    $ref: 'index_api.yml#/paths/~1_stats~1{metric}'
+
+  /{index_ids}/_stats:
+    $ref: 'index_api.yml#/paths/~1{index_ids}~1_stats'
+
+  /{index_ids}/_stats/{metric}:
+    $ref: 'index_api.yml#/paths/~1{index_ids}~1_stats~1{metric}'
+
+  /{index}/_settings:
+    $ref: 'index_api.yml#/paths/~1{index}~1_settings'
+
   /{index}/_analyze:
     parameters:
       - $ref: 'analyze_api.yml#/components/parameters/index'
@@ -4883,7 +5012,7 @@ components:
     Unauthorized:
       description: Response to report an unauthorized request
       content:
-        application/json:
+        text/plain:
           schema:
             type: string
           example: "Unauthorized"
@@ -4947,6 +5076,8 @@ tags:
       These APIs are categorized into single-document operations and multi-document operations. Multi-document operations are more efficient than processing multiple individual requests separately, so it is recommended to use them whenever possible for better performance.
   - name: Explain
     description: The Explain API in Wazuh indexer  provides a detailed breakdown of how a document matches a given query and how its relevance score (`_score`) is calculated. It helps in understanding why certain documents rank higher or lower in search results.
+  - name: Index APIs
+    description: Index API operations allow you to manage indexes within your cluster. With these operations, you can create, delete, close, and perform various other tasks related to index management.
   - name: Index rollups API
     description: You can use the index rollup operations to programmatically work with index rollup jobs.
   - name: Index state management API
