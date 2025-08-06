@@ -225,6 +225,7 @@ components:
       description: The name of the snapshot management (SM) policy that you want to start.
       schema:
         type: string
+      example: daily-policy
 
     policy_name_stop:
       name: policy_name
@@ -233,16 +234,17 @@ components:
       description: The name of the snapshot management (SM) policy that you want to stop.
       schema:
         type: string
+      example: daily-policy
 
     policy_names:
       name: policy_names
       in: path
       required: true
-      example: daily*
       description: |
         A comma-separated list of Snapshot Management (SM) policy names for which to retrieve metadata and status information. Wildcard expressions (`*`) are supported to match multiple policies.
       schema:
         type: string
+      example: daily*
 
     if_seq_no:
       name: if_seq_no
@@ -638,6 +640,7 @@ components:
               description: This is a cron expression that schedules snapshot creation.
             time_limit:
               type: string
+              format: duration
               description: |
                 The maximum duration allowed for completing a snapshot. If the time limit exceeds the interval between snapshots, overlapping snapshots may be skipped.
         deletion:
@@ -651,6 +654,7 @@ components:
                 A cron expression that defines when snapshots are deleted. If not set, the value from `creation.schedule` is used.
             time_limit:
               type: string
+              format: duration
               description: The maximum time allowed for deletion to complete.
             delete_condition:
               type: object
@@ -661,6 +665,7 @@ components:
                   description: The maximum number of snapshots to retain.
                 max_age:
                   type: string
+                  format: duration
                   description: The maximum age a snapshot can reach before being deleted.
                 min_count:
                   type: integer

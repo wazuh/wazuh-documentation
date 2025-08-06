@@ -1,4 +1,192 @@
-openapi: 3.0.0
+paths:
+  /{target}/_count:
+    parameters:
+      - $ref: '#/components/parameters/target'
+    get:
+      tags: [Count]
+      summary: Count (GET)
+      operationId: countDocuments
+      parameters:
+        - $ref: '#/components/parameters/count_allow_no_indices'
+        - $ref: '#/components/parameters/count_analyzer'
+        - $ref: '#/components/parameters/count_analyze_wildcard'
+        - $ref: '#/components/parameters/count_default_operator'
+        - $ref: '#/components/parameters/count_df'
+        - $ref: '#/components/parameters/count_expand_wildcards'
+        - $ref: '#/components/parameters/count_ignore_unavailable'
+        - $ref: '#/components/parameters/count_lenient'
+        - $ref: '#/components/parameters/count_min_score'
+        - $ref: '#/components/parameters/count_routing'
+        - $ref: '#/components/parameters/count_preference'
+        - $ref: '#/components/parameters/count_terminate_after'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/CountRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/CountSuccess'
+        '400':
+          $ref: '#/components/responses/CountBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/CountNotFound'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+    post:
+      tags: [Count]
+      summary: Count (POST)
+      operationId: countDocumentsPost
+      parameters:
+        - $ref: '#/components/parameters/count_allow_no_indices'
+        - $ref: '#/components/parameters/count_analyzer'
+        - $ref: '#/components/parameters/count_analyze_wildcard'
+        - $ref: '#/components/parameters/count_default_operator'
+        - $ref: '#/components/parameters/count_df'
+        - $ref: '#/components/parameters/count_expand_wildcards'
+        - $ref: '#/components/parameters/count_ignore_unavailable'
+        - $ref: '#/components/parameters/count_lenient'
+        - $ref: '#/components/parameters/count_min_score'
+        - $ref: '#/components/parameters/count_routing'
+        - $ref: '#/components/parameters/count_preference'
+        - $ref: '#/components/parameters/count_terminate_after'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/CountRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/CountSuccess'
+        '400':
+          $ref: '#/components/responses/CountBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/CountNotFound'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /{index}/_explain/{id}:
+    parameters:
+      - $ref: '#/components/parameters/index_name'
+      - $ref: '#/components/parameters/document_id'
+    get:
+      tags: [Explain]
+      summary: Explain (GET)
+      operationId: explainDocument
+      parameters:
+        - $ref: '#/components/parameters/explain_analyzer'
+        - $ref: '#/components/parameters/explain_analyze_wildcard'
+        - $ref: '#/components/parameters/explain_default_operator'
+        - $ref: '#/components/parameters/explain_df'
+        - $ref: '#/components/parameters/explain_lenient'
+        - $ref: '#/components/parameters/explain_preference'
+        - $ref: '#/components/parameters/explain_q'
+        - $ref: '#/components/parameters/explain_stored_fields'
+        - $ref: '#/components/parameters/explain_routing'
+        - $ref: '#/components/parameters/explain_source'
+        - $ref: '#/components/parameters/explain_source_excludes'
+        - $ref: '#/components/parameters/explain_source_includes'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/ExplainRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/ExplainSuccess'
+        '400':
+          $ref: '#/components/responses/ExplainBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/ExplainNotFound'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+    post:
+      tags: [Explain]
+      summary: Explain (POST)
+      operationId: explainDocumentPost
+      parameters:
+        - $ref: '#/components/parameters/explain_analyzer'
+        - $ref: '#/components/parameters/explain_analyze_wildcard'
+        - $ref: '#/components/parameters/explain_default_operator'
+        - $ref: '#/components/parameters/explain_df'
+        - $ref: '#/components/parameters/explain_lenient'
+        - $ref: '#/components/parameters/explain_preference'
+        - $ref: '#/components/parameters/explain_q'
+        - $ref: '#/components/parameters/explain_stored_fields'
+        - $ref: '#/components/parameters/explain_routing'
+        - $ref: '#/components/parameters/explain_source'
+        - $ref: '#/components/parameters/explain_source_excludes'
+        - $ref: '#/components/parameters/explain_source_includes'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/ExplainRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/ExplainSuccess'
+        '400':
+          $ref: '#/components/responses/ExplainBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/ExplainNotFound'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /_plugins/_refresh_search_analyzers/{index_or_alias_or_wildcard}:
+    parameters:
+      - $ref: '#/components/parameters/index_or_alias_or_wildcard'
+    post:
+      tags: [Refresh search analyzer]
+      summary: Refresh search analyzer
+      operationId: refreshSearchAnalyzers
+      parameters:
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: '#/components/responses/RefreshAnalyzerSuccess'
+        '400':
+          $ref: '#/components/responses/RefreshAnalyzerBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/RefreshAnalyzerNotFound'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /_remote/info:
+    get:
+      tags: [Remote cluster information]
+      summary: Remote cluster information
+      operationId: getRemoteClusterInfo
+      parameters:
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: '#/components/responses/RemoteClusterInfoSuccess'
+        '400':
+          $ref: '#/components/responses/RemoteClusterBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
 
 components:
   parameters:

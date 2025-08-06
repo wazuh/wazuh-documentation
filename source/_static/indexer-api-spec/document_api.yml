@@ -1,4 +1,643 @@
-openapi: 3.0.0
+paths:
+  /{index}/_doc/{id}:
+    parameters:
+      - $ref: '#/components/parameters/document_index'
+      - $ref: '#/components/parameters/document_id'
+    put:
+      tags: [Document APIs]
+      summary: Index document (PUT _doc)
+      description: |
+        The Index Document operation allows you to add an individual document to your index.
+      operationId: indexDocumentPut
+      parameters:
+        - $ref: '#/components/parameters/if_seq_no'
+        - $ref: '#/components/parameters/if_primary_term'
+        - $ref: '#/components/parameters/op_type'
+        - $ref: '#/components/parameters/pipeline'
+        - $ref: '#/components/parameters/routing'
+        - $ref: '#/components/parameters/refresh'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/version'
+        - $ref: '#/components/parameters/version_type'
+        - $ref: '#/components/parameters/wait_for_active_shards'
+        - $ref: '#/components/parameters/require_alias'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/IndexDocumentRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/IndexDocumentSuccess'
+        '400':
+          $ref: '#/components/responses/IndexDocumentBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+    get:
+      tags: [Document APIs]
+      summary: Get document (GET)
+      description: |
+        Once a JSON document is added to your index, you can retrieve its information and data using the Get Document API. Use the GET method to retrieve a document along with its source or stored fields from a specific index. To check if a document exists, use the HEAD method.
+      operationId: getDocument
+      parameters:
+        - $ref: '#/components/parameters/preference'
+        - $ref: '#/components/parameters/realtime'
+        - $ref: '#/components/parameters/refresh'
+        - $ref: '#/components/parameters/routing'
+        - $ref: '#/components/parameters/stored_fields'
+        - $ref: '#/components/parameters/_source'
+        - $ref: '#/components/parameters/_source_excludes'
+        - $ref: '#/components/parameters/_source_includes'
+        - $ref: '#/components/parameters/version'
+        - $ref: '#/components/parameters/version_type'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/GetDocumentRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/GetDocumentSuccess'
+        '400':
+          $ref: '#/components/responses/GetDocumentBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/GetDocumentNotFound'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+    head:
+      tags: [Document APIs]
+      summary: Get document (HEAD)
+      description: |
+        Once a JSON document is added to your index, you can retrieve its information and data using the Get Document API. Use the GET method to retrieve a document along with its source or stored fields from a specific index. To check if a document exists, use the HEAD method.
+      operationId: documentExists
+      parameters:
+        - $ref: '#/components/parameters/preference'
+        - $ref: '#/components/parameters/realtime'
+        - $ref: '#/components/parameters/refresh'
+        - $ref: '#/components/parameters/routing'
+        - $ref: '#/components/parameters/stored_fields'
+        - $ref: '#/components/parameters/_source'
+        - $ref: '#/components/parameters/_source_excludes'
+        - $ref: '#/components/parameters/_source_includes'
+        - $ref: '#/components/parameters/version'
+        - $ref: '#/components/parameters/version_type'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/GetDocumentRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/GetDocumentSuccess'
+        '400':
+          $ref: '#/components/responses/GetDocumentBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/GetDocumentNotFound'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+    delete:
+      tags: [Document APIs]
+      summary: Delete document
+      description: |
+        If a document is no longer required in your index, you can remove it using the Delete Document API operation.
+      operationId: deleteDocument
+      parameters:
+        - $ref: '#/components/parameters/if_seq_no'
+        - $ref: '#/components/parameters/if_primary_term'
+        - $ref: '#/components/parameters/refresh'
+        - $ref: '#/components/parameters/routing'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/version'
+        - $ref: '#/components/parameters/version_type'
+        - $ref: '#/components/parameters/wait_for_active_shards'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: '#/components/responses/DeleteDocumentSuccess'
+        '400':
+          $ref: '#/components/responses/DocumentBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/DeleteDocumentNotFound'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /{index}/_doc:
+    parameters:
+      - $ref: '#/components/parameters/document_index'
+    post:
+      tags: [Document APIs]
+      summary: Index document (POST _doc)
+      description: |
+        The Index Document operation allows you to add an individual document to your index.
+      operationId: indexDocumentPost
+      parameters:
+        - $ref: '#/components/parameters/if_seq_no'
+        - $ref: '#/components/parameters/if_primary_term'
+        - $ref: '#/components/parameters/op_type'
+        - $ref: '#/components/parameters/pipeline'
+        - $ref: '#/components/parameters/routing'
+        - $ref: '#/components/parameters/refresh'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/version'
+        - $ref: '#/components/parameters/version_type'
+        - $ref: '#/components/parameters/wait_for_active_shards'
+        - $ref: '#/components/parameters/require_alias'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/IndexDocumentRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/IndexDocumentSuccess'
+        '400':
+          $ref: '#/components/responses/IndexDocumentBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /{index}/_create/{id}:
+    parameters:
+      - $ref: '#/components/parameters/document_index'
+      - $ref: '#/components/parameters/document_id'
+    put:
+      tags: [Document APIs]
+      summary: Index document (PUT _create)
+      description: |
+        The Index Document operation allows you to add an individual document to your index.
+      operationId: createDocumentPut
+      parameters:
+        - $ref: '#/components/parameters/if_seq_no'
+        - $ref: '#/components/parameters/if_primary_term'
+        - $ref: '#/components/parameters/op_type'
+        - $ref: '#/components/parameters/pipeline'
+        - $ref: '#/components/parameters/routing'
+        - $ref: '#/components/parameters/refresh'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/version'
+        - $ref: '#/components/parameters/version_type'
+        - $ref: '#/components/parameters/wait_for_active_shards'
+        - $ref: '#/components/parameters/require_alias'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/IndexDocumentRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/IndexDocumentSuccess'
+        '400':
+          $ref: '#/components/responses/IndexDocumentBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+    post:
+      tags: [Document APIs]
+      summary: Index document (POST _create)
+      description: |
+        The Index Document operation allows you to create a new document with a specific ID. This operation will only succeed if a document with the same ID does not already exist.
+      operationId: createDocumentPost
+      parameters:
+        - $ref: '#/components/parameters/if_seq_no'
+        - $ref: '#/components/parameters/if_primary_term'
+        - $ref: '#/components/parameters/op_type'
+        - $ref: '#/components/parameters/pipeline'
+        - $ref: '#/components/parameters/routing'
+        - $ref: '#/components/parameters/refresh'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/version'
+        - $ref: '#/components/parameters/version_type'
+        - $ref: '#/components/parameters/wait_for_active_shards'
+        - $ref: '#/components/parameters/require_alias'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/IndexDocumentRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/IndexDocumentSuccess'
+        '400':
+          $ref: '#/components/responses/IndexDocumentBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /{index}/_update/{id}:
+    parameters:
+      - $ref: '#/components/parameters/document_index'
+      - $ref: '#/components/parameters/document_id'
+    post:
+      tags: [Document APIs]
+      summary: Update document
+      description: |
+        To modify a document's fields in your index, you can use the Update Document API. This can be done by providing the updated data directly or by including a script in the request body, which Wazuh indexer executes to update the document. By default, the update operation only applies to existing documents in the index. If the document does not exist, the API returns an error.
+      operationId: updateDocument
+      parameters:
+        - $ref: '#/components/parameters/if_seq_no'
+        - $ref: '#/components/parameters/if_primary_term'
+        - $ref: '#/components/parameters/lang'
+        - $ref: '#/components/parameters/require_alias'
+        - $ref: '#/components/parameters/refresh'
+        - $ref: '#/components/parameters/retry_on_conflict'
+        - $ref: '#/components/parameters/routing'
+        - $ref: '#/components/parameters/_source'
+        - $ref: '#/components/parameters/_source_excludes'
+        - $ref: '#/components/parameters/_source_includes'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/wait_for_active_shards'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/UpdateDocumentRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/UpdateDocumentSuccess'
+        '400':
+          $ref: '#/components/responses/UpdateDocumentBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/UpdateDocumentNotFound'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /_bulk:
+    post:
+      tags: [Document APIs]
+      summary: Bulk
+      description: |
+        The bulk operation allows you to add, update, or delete multiple documents within a single request. This approach offers significant performance improvements over individual Wazuh indexing requests. Whenever possible, it is recommended to batch indexing operations using bulk requests for better efficiency.
+      operationId: bulkOperations
+      parameters:
+        - $ref: '#/components/parameters/pipeline_bulk'
+        - $ref: '#/components/parameters/refresh'
+        - $ref: '#/components/parameters/require_alias'
+        - $ref: '#/components/parameters/routing'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/type'
+        - $ref: '#/components/parameters/wait_for_active_shards'
+        - $ref: '#/components/parameters/batch_size'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/BulkRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/BulkSuccess'
+        '400':
+          $ref: '#/components/responses/BulkBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /{index}/_bulk:
+    parameters:
+      - $ref: '#/components/parameters/document_index'
+    post:
+      tags: [Document APIs]
+      summary: Bulk (Index)
+      description: |
+        The bulk operation allows you to add, update, or delete multiple documents within a single request. This approach offers significant performance improvements over individual Wazuh indexing requests. Whenever possible, it is recommended to batch indexing operations using bulk requests for better efficiency.
+      operationId: bulkOperationsIndex
+      parameters:
+        - $ref: '#/components/parameters/pipeline_bulk'
+        - $ref: '#/components/parameters/refresh'
+        - $ref: '#/components/parameters/require_alias'
+        - $ref: '#/components/parameters/routing'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/type'
+        - $ref: '#/components/parameters/wait_for_active_shards'
+        - $ref: '#/components/parameters/batch_size'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/BulkRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/BulkSuccess'
+        '400':
+          $ref: '#/components/responses/BulkBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /_mget:
+    get:
+      tags: [Document APIs]
+      summary: Multi-get documents (Global GET)
+      description: |
+        The multi-get operation enables you to perform multiple GET requests within a single request, allowing you to retrieve multiple documents that match your specified criteria.
+      operationId: multiGetDocumentsGet
+      parameters:
+        - $ref: '#/components/parameters/preference_mget'
+        - $ref: '#/components/parameters/realtime_mget'
+        - $ref: '#/components/parameters/refresh'
+        - $ref: '#/components/parameters/routing'
+        - $ref: '#/components/parameters/stored_fields'
+        - $ref: '#/components/parameters/_source'
+        - $ref: '#/components/parameters/_source_excludes'
+        - $ref: '#/components/parameters/_source_includes'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/MultiGetRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/MultiGetSuccess'
+        '400':
+          $ref: '#/components/responses/BulkBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+    post:
+      tags: [Document APIs]
+      summary: Multi-get documents (Global POST)
+      description: |
+        The multi-get operation enables you to perform multiple GET requests within a single request, allowing you to retrieve multiple documents that match your specified criteria.
+      operationId: multiGetDocumentsPost
+      parameters:
+        - $ref: '#/components/parameters/preference_mget'
+        - $ref: '#/components/parameters/realtime_mget'
+        - $ref: '#/components/parameters/refresh'
+        - $ref: '#/components/parameters/routing'
+        - $ref: '#/components/parameters/stored_fields'
+        - $ref: '#/components/parameters/_source'
+        - $ref: '#/components/parameters/_source_excludes'
+        - $ref: '#/components/parameters/_source_includes'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/MultiGetRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/MultiGetSuccess'
+        '400':
+          $ref: '#/components/responses/BulkBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /{index}/_mget:
+    parameters:
+      - $ref: '#/components/parameters/document_index'
+    get:
+      tags: [Document APIs]
+      summary: Multi-get documents (Index GET)
+      description: |
+        The multi-get operation enables you to perform multiple GET requests within a single request, allowing you to retrieve multiple documents that match your specified criteria.
+      operationId: multiGetDocumentsIndexGet
+      parameters:
+        - $ref: '#/components/parameters/preference_mget'
+        - $ref: '#/components/parameters/realtime_mget'
+        - $ref: '#/components/parameters/refresh'
+        - $ref: '#/components/parameters/routing'
+        - $ref: '#/components/parameters/stored_fields'
+        - $ref: '#/components/parameters/_source'
+        - $ref: '#/components/parameters/_source_excludes'
+        - $ref: '#/components/parameters/_source_includes'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/MultiGetRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/MultiGetSuccess'
+        '400':
+          $ref: '#/components/responses/BulkBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+    post:
+      tags: [Document APIs]
+      summary: Multi-get documents (Index POST)
+      description: |
+        The multi-get operation enables you to perform multiple GET requests within a single request, allowing you to retrieve multiple documents that match your specified criteria.
+      operationId: multiGetDocumentsIndexPost
+      parameters:
+        - $ref: '#/components/parameters/preference_mget'
+        - $ref: '#/components/parameters/realtime_mget'
+        - $ref: '#/components/parameters/refresh'
+        - $ref: '#/components/parameters/routing'
+        - $ref: '#/components/parameters/stored_fields'
+        - $ref: '#/components/parameters/_source'
+        - $ref: '#/components/parameters/_source_excludes'
+        - $ref: '#/components/parameters/_source_includes'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/MultiGetRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/MultiGetSuccess'
+        '400':
+          $ref: '#/components/responses/BulkBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /{index}/_delete_by_query:
+    parameters:
+      - $ref: '#/components/parameters/document_index'
+    post:
+      tags: [Document APIs]
+      summary: Delete by query
+      description: |
+        You can add a query to your delete request to have the Wazuh indexer remove all documents that match the specified conditions.
+      operationId: deleteByQueryIndex
+      parameters:
+        - $ref: '#/components/parameters/allow_no_indices'
+        - $ref: '#/components/parameters/analyzer'
+        - $ref: '#/components/parameters/analyze_wildcard'
+        - $ref: '#/components/parameters/conflicts'
+        - $ref: '#/components/parameters/default_operator'
+        - $ref: '#/components/parameters/df'
+        - $ref: '#/components/parameters/expand_wildcards'
+        - $ref: '#/components/parameters/from'
+        - $ref: '#/components/parameters/ignore_unavailable'
+        - $ref: '#/components/parameters/lenient'
+        - $ref: '#/components/parameters/max_docs'
+        - $ref: '#/components/parameters/preference_delete'
+        - $ref: '#/components/parameters/q'
+        - $ref: '#/components/parameters/request_cache'
+        - $ref: '#/components/parameters/refresh'
+        - $ref: '#/components/parameters/requests_per_second'
+        - $ref: '#/components/parameters/routing'
+        - $ref: '#/components/parameters/scroll'
+        - $ref: '#/components/parameters/scroll_size'
+        - $ref: '#/components/parameters/search_type'
+        - $ref: '#/components/parameters/search_timeout'
+        - $ref: '#/components/parameters/slices'
+        - $ref: '#/components/parameters/sort'
+        - $ref: '#/components/parameters/_source'
+        - $ref: '#/components/parameters/_source_excludes'
+        - $ref: '#/components/parameters/_source_includes'
+        - $ref: '#/components/parameters/stats'
+        - $ref: '#/components/parameters/terminate_after'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/version_query'
+        - $ref: '#/components/parameters/wait_for_active_shards'
+        - $ref: '#/components/parameters/wait_for_completion'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/DeleteByQueryRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/DeleteByQuerySuccess'
+        '400':
+          $ref: 'spec.yml#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/ByQueryDocumentNotFound'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /{index1},{index2}/_update_by_query:
+    parameters:
+      - $ref: '#/components/parameters/document_index_1'
+      - $ref: '#/components/parameters/document_index_2'
+    post:
+      tags: [Document APIs]
+      summary: Update by query
+      description: |
+        You can provide both a query and a script in your update request, allowing the Wazuh indexer  to execute the script on all documents that match the query criteria.
+      operationId: updateByQueryIndex
+      parameters:
+        - $ref: '#/components/parameters/allow_no_indices'
+        - $ref: '#/components/parameters/analyzer'
+        - $ref: '#/components/parameters/analyze_wildcard'
+        - $ref: '#/components/parameters/conflicts'
+        - $ref: '#/components/parameters/default_operator'
+        - $ref: '#/components/parameters/df'
+        - $ref: '#/components/parameters/expand_wildcards'
+        - $ref: '#/components/parameters/from'
+        - $ref: '#/components/parameters/ignore_unavailable'
+        - $ref: '#/components/parameters/lenient'
+        - $ref: '#/components/parameters/max_docs'
+        - $ref: '#/components/parameters/preference_update'
+        - $ref: '#/components/parameters/q'
+        - $ref: '#/components/parameters/request_cache'
+        - $ref: '#/components/parameters/refresh'
+        - $ref: '#/components/parameters/requests_per_second'
+        - $ref: '#/components/parameters/routing'
+        - $ref: '#/components/parameters/scroll'
+        - $ref: '#/components/parameters/scroll_size'
+        - $ref: '#/components/parameters/search_type'
+        - $ref: '#/components/parameters/search_timeout'
+        - $ref: '#/components/parameters/slices'
+        - $ref: '#/components/parameters/sort'
+        - $ref: '#/components/parameters/_source'
+        - $ref: '#/components/parameters/_source_excludes'
+        - $ref: '#/components/parameters/_source_includes'
+        - $ref: '#/components/parameters/stats'
+        - $ref: '#/components/parameters/terminate_after'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/version_query'
+        - $ref: '#/components/parameters/wait_for_active_shards'
+        - $ref: '#/components/parameters/wait_for_completion'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/UpdateByQueryRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/UpdateByQuerySuccess'
+        '400':
+          $ref: '#/components/responses/DocumentBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/ByQueryDocumentNotFound'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /_reindex:
+    post:
+      tags: [Document APIs]
+      summary: Reindex documents
+      description: |
+        The Reindex API allows you to copy documents from one or more source indexes to a destination index.
+      operationId: reindexDocuments
+      parameters:
+        - $ref: '#/components/parameters/refresh'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/wait_for_active_shards'
+        - $ref: '#/components/parameters/wait_for_completion'
+        - $ref: '#/components/parameters/requests_per_second'
+        - $ref: '#/components/parameters/require_alias'
+        - $ref: '#/components/parameters/scroll'
+        - $ref: '#/components/parameters/slices_reindex'
+        - $ref: '#/components/parameters/scroll'
+        - $ref: '#/components/parameters/max_docs_reindex'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/ReindexRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/ReindexSuccess'
+        '400':
+          $ref: '#/components/responses/BulkBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/ByQueryDocumentNotFound'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
 
 components:
   parameters:
@@ -84,7 +723,7 @@ components:
       description: The maximum time to wait for a response from the cluster.
       schema:
         type: string
-        format: time
+        format: duration
         default: 1m
 
     version:
@@ -352,7 +991,7 @@ components:
       description: Defines how long the search context remains open while executing the query.
       schema:
         type: string
-        format: time
+        format: duration
 
     scroll_size:
       name: scroll_size
@@ -377,7 +1016,7 @@ components:
       description: Defines the timeout duration before the Wazuh indexer considers the request as failed. The default value is `No timeout`.
       schema:
         type: string
-        format: time
+        format: duration
 
     slices:
       name: slices
@@ -865,12 +1504,12 @@ components:
                         description: Password used for authentication with the remote cluster.
                       socket_timeout:
                         type: string
-                        format: time
+                        format: duration
                         default: "30s"
                         description: Timeout for reading data from the socket.
                       connect_timeout:
                         type: string
-                        format: time
+                        format: duration
                         default: "30s"
                         description: Timeout for establishing a connection to the remote cluster.
                   size:

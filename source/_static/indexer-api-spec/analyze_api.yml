@@ -1,3 +1,130 @@
+paths:
+  /_analyze:
+    get:
+      tags: [Analyze API]
+      summary: Text analysis (Global GET)
+      description: |
+        The analyze API endpoint enables text analysis by transforming unstructured text into individual tokens, typically words, optimized for search functionality. It processes a text string and returns the corresponding tokens as the output. It helps you debug and fine-tune text analysis settings for indexing and querying, providing insight into how text is broken into tokens and how filters are applied.
+      operationId: analyzeGlobalGet
+      parameters:
+        - $ref: '#/components/parameters/analyzer'
+        - $ref: '#/components/parameters/attributes'
+        - $ref: '#/components/parameters/char_filter'
+        - $ref: '#/components/parameters/filter'
+        - $ref: '#/components/parameters/normalizer'
+        - $ref: '#/components/parameters/tokenizer'
+        - $ref: '#/components/parameters/explain'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/AnalyzeRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/AnalyzeSuccess'
+        '400':
+          $ref: 'spec.yml#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+    post:
+      tags: [Analyze API]
+      summary: Text analysis (Global POST)
+      description: |
+        The analyze API endpoint enables text analysis by transforming unstructured text into individual tokens, typically words, optimized for search functionality. It processes a text string and returns the corresponding tokens as the output. It helps you debug and fine-tune text analysis settings for indexing and querying, providing insight into how text is broken into tokens and how filters are applied.
+      operationId: analyzeGlobalPost
+      parameters:
+        - $ref: '#/components/parameters/analyzer'
+        - $ref: '#/components/parameters/attributes'
+        - $ref: '#/components/parameters/char_filter'
+        - $ref: '#/components/parameters/filter'
+        - $ref: '#/components/parameters/normalizer'
+        - $ref: '#/components/parameters/tokenizer'
+        - $ref: '#/components/parameters/explain'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/AnalyzeRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/AnalyzeSuccess'
+        '400':
+          $ref: 'spec.yml#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /{index}/_analyze:
+    parameters:
+      - $ref: '#/components/parameters/index'
+    get:
+      tags: [Analyze API]
+      summary: Text analysis (Index GET)
+      description: |
+        The analyze API endpoint enables text analysis by transforming unstructured text into individual tokens, typically words, optimized for search functionality. It processes a text string and returns the corresponding tokens as the output. It helps you debug and fine-tune text analysis settings for indexing and querying, providing insight into how text is broken into tokens and how filters are applied.
+      operationId: analyzeIndexedGet
+      parameters:
+        - $ref: '#/components/parameters/analyzer'
+        - $ref: '#/components/parameters/attributes'
+        - $ref: '#/components/parameters/char_filter'
+        - $ref: '#/components/parameters/field'
+        - $ref: '#/components/parameters/filter'
+        - $ref: '#/components/parameters/normalizer'
+        - $ref: '#/components/parameters/tokenizer'
+        - $ref: '#/components/parameters/explain'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/AnalyzeRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/AnalyzeSuccess'
+        '400':
+          $ref: 'spec.yml#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+    post:
+      tags: [Analyze API]
+      summary: Text analysis (Index POST)
+      description: |
+        The analyze API endpoint enables text analysis by transforming unstructured text into individual tokens, typically words, optimized for search functionality. It processes a text string and returns the corresponding tokens as the output. It helps you debug and fine-tune text analysis settings for indexing and querying, providing insight into how text is broken into tokens and how filters are applied.
+      operationId: analyzeIndexedPost
+      parameters:
+        - $ref: '#/components/parameters/analyzer'
+        - $ref: '#/components/parameters/attributes'
+        - $ref: '#/components/parameters/char_filter'
+        - $ref: '#/components/parameters/field'
+        - $ref: '#/components/parameters/filter'
+        - $ref: '#/components/parameters/normalizer'
+        - $ref: '#/components/parameters/tokenizer'
+        - $ref: '#/components/parameters/explain'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/AnalyzeRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/AnalyzeSuccess'
+        '400':
+          $ref: 'spec.yml#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
 components:
   parameters:
     index:
