@@ -1,3 +1,366 @@
+paths:
+  /_search/scroll:
+    get:
+      tags: [Scroll]
+      summary: Scroll search (GET)
+      operationId: scrollSearchGet
+      parameters:
+        - $ref: '#/components/parameters/scroll'
+        - $ref: '#/components/parameters/scroll_id'
+        - $ref: '#/components/parameters/rest_total_hits_as_int'
+      requestBody:
+        $ref: '#/components/requestBodies/ScrollRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/ScrollSuccess'
+        '400':
+          $ref: '#/components/responses/ScrollBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+    post:
+      tags: [Scroll]
+      summary: Scroll search (POST)
+      operationId: scrollSearchPost
+      parameters:
+        - $ref: '#/components/parameters/scroll'
+        - $ref: '#/components/parameters/scroll_id'
+        - $ref: '#/components/parameters/rest_total_hits_as_int'
+      requestBody:
+        $ref: '#/components/requestBodies/ScrollRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/ScrollSuccess'
+        '400':
+          $ref: '#/components/responses/ScrollBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /_search/scroll/{scroll_id}:
+    parameters:
+      - $ref: '#/components/parameters/scroll_id_path'
+    get:
+      tags: [Scroll]
+      summary: Scroll search by ID (GET)
+      operationId: scrollSearchByIdGet
+      parameters:
+        - $ref: '#/components/parameters/scroll'
+        - $ref: '#/components/parameters/rest_total_hits_as_int'
+      requestBody:
+        $ref: '#/components/requestBodies/ScrollRequestByID'
+      responses:
+        '200':
+          $ref: '#/components/responses/ScrollSuccess'
+        '400':
+          $ref: '#/components/responses/ScrollBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+    post:
+      tags: [Scroll]
+      summary: Scroll search by ID (POST)
+      operationId: scrollSearchByIdPost
+      parameters:
+        - $ref: '#/components/parameters/scroll'
+        - $ref: '#/components/parameters/rest_total_hits_as_int'
+      requestBody:
+        $ref: '#/components/requestBodies/ScrollRequestByID'
+      responses:
+        '200':
+          $ref: '#/components/responses/ScrollSuccess'
+        '400':
+          $ref: '#/components/responses/ScrollBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /_search:
+    get:
+      tags: [Search]
+      summary: Global search (GET)
+      operationId: searchGlobalGet
+      parameters:
+        - $ref: '#/components/parameters/allow_partial_search_results'
+        - $ref: '#/components/parameters/searchAnalyzer'
+        - $ref: '#/components/parameters/analyze_wildcard'
+        - $ref: '#/components/parameters/batched_reduce_size'
+        - $ref: '#/components/parameters/cancel_after_time_interval'
+        - $ref: '#/components/parameters/ccs_minimize_roundtrips'
+        - $ref: '#/components/parameters/default_operator'
+        - $ref: '#/components/parameters/df'
+        - $ref: '#/components/parameters/docvalue_fields'
+        - $ref: '#/components/parameters/expand_wildcards'
+        - $ref: '#/components/parameters/searchExplain'
+        - $ref: '#/components/parameters/from'
+        - $ref: '#/components/parameters/ignore_throttled'
+        - $ref: '#/components/parameters/ignore_unavailable'
+        - $ref: '#/components/parameters/lenient'
+        - $ref: '#/components/parameters/max_concurrent_shard_requests'
+        - $ref: '#/components/parameters/phase_took'
+        - $ref: '#/components/parameters/pre_filter_shard_size'
+        - $ref: '#/components/parameters/preference'
+        - $ref: '#/components/parameters/q'
+        - $ref: '#/components/parameters/request_cache'
+        - $ref: '#/components/parameters/rest_total_hits_as_int'
+        - $ref: '#/components/parameters/routing'
+        - $ref: '#/components/parameters/scroll'
+        - $ref: '#/components/parameters/search_type'
+        - $ref: '#/components/parameters/seq_no_primary_term'
+        - $ref: '#/components/parameters/size'
+        - $ref: '#/components/parameters/sort'
+        - $ref: '#/components/parameters/_source'
+        - $ref: '#/components/parameters/_source_excludes'
+        - $ref: '#/components/parameters/_source_includes'
+        - $ref: '#/components/parameters/stats'
+        - $ref: '#/components/parameters/stored_fields'
+        - $ref: '#/components/parameters/suggest_field'
+        - $ref: '#/components/parameters/suggest_mode'
+        - $ref: '#/components/parameters/suggest_size'
+        - $ref: '#/components/parameters/suggest_text'
+        - $ref: '#/components/parameters/terminate_after'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/track_scores'
+        - $ref: '#/components/parameters/track_total_hits'
+        - $ref: '#/components/parameters/typed_keys'
+        - $ref: '#/components/parameters/version'
+        - $ref: '#/components/parameters/include_named_queries_score'
+      requestBody:
+        $ref: '#/components/requestBodies/SearchRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/SearchSuccess'
+        '400':
+          $ref: '#/components/responses/SearchBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/SearchNotFound'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+    post:
+      tags: [Search]
+      summary: Global search (POST)
+      operationId: searchGlobalPost
+      parameters:
+        - $ref: '#/components/parameters/allow_partial_search_results'
+        - $ref: '#/components/parameters/searchAnalyzer'
+        - $ref: '#/components/parameters/analyze_wildcard'
+        - $ref: '#/components/parameters/batched_reduce_size'
+        - $ref: '#/components/parameters/cancel_after_time_interval'
+        - $ref: '#/components/parameters/ccs_minimize_roundtrips'
+        - $ref: '#/components/parameters/default_operator'
+        - $ref: '#/components/parameters/df'
+        - $ref: '#/components/parameters/docvalue_fields'
+        - $ref: '#/components/parameters/expand_wildcards'
+        - $ref: '#/components/parameters/searchExplain'
+        - $ref: '#/components/parameters/from'
+        - $ref: '#/components/parameters/ignore_throttled'
+        - $ref: '#/components/parameters/ignore_unavailable'
+        - $ref: '#/components/parameters/lenient'
+        - $ref: '#/components/parameters/max_concurrent_shard_requests'
+        - $ref: '#/components/parameters/phase_took'
+        - $ref: '#/components/parameters/pre_filter_shard_size'
+        - $ref: '#/components/parameters/preference'
+        - $ref: '#/components/parameters/q'
+        - $ref: '#/components/parameters/request_cache'
+        - $ref: '#/components/parameters/rest_total_hits_as_int'
+        - $ref: '#/components/parameters/routing'
+        - $ref: '#/components/parameters/scroll'
+        - $ref: '#/components/parameters/search_type'
+        - $ref: '#/components/parameters/seq_no_primary_term'
+        - $ref: '#/components/parameters/size'
+        - $ref: '#/components/parameters/sort'
+        - $ref: '#/components/parameters/_source'
+        - $ref: '#/components/parameters/_source_excludes'
+        - $ref: '#/components/parameters/_source_includes'
+        - $ref: '#/components/parameters/stats'
+        - $ref: '#/components/parameters/stored_fields'
+        - $ref: '#/components/parameters/suggest_field'
+        - $ref: '#/components/parameters/suggest_mode'
+        - $ref: '#/components/parameters/suggest_size'
+        - $ref: '#/components/parameters/suggest_text'
+        - $ref: '#/components/parameters/terminate_after'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/track_scores'
+        - $ref: '#/components/parameters/track_total_hits'
+        - $ref: '#/components/parameters/typed_keys'
+        - $ref: '#/components/parameters/version'
+        - $ref: '#/components/parameters/include_named_queries_score'
+      requestBody:
+        $ref: '#/components/requestBodies/SearchRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/SearchSuccess'
+        '400':
+          $ref: '#/components/responses/SearchBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/SearchNotFound'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /{index}/_search:
+    parameters:
+      - $ref: 'analyze_api.yml#/components/parameters/index'
+    get:
+      tags: [Search]
+      summary: Index search (GET)
+      operationId: searchIndexGet
+      parameters:
+        - $ref: '#/components/parameters/allow_partial_search_results'
+        - $ref: '#/components/parameters/searchAnalyzer'
+        - $ref: '#/components/parameters/analyze_wildcard'
+        - $ref: '#/components/parameters/batched_reduce_size'
+        - $ref: '#/components/parameters/cancel_after_time_interval'
+        - $ref: '#/components/parameters/ccs_minimize_roundtrips'
+        - $ref: '#/components/parameters/default_operator'
+        - $ref: '#/components/parameters/df'
+        - $ref: '#/components/parameters/docvalue_fields'
+        - $ref: '#/components/parameters/expand_wildcards'
+        - $ref: '#/components/parameters/searchExplain'
+        - $ref: '#/components/parameters/from'
+        - $ref: '#/components/parameters/ignore_throttled'
+        - $ref: '#/components/parameters/ignore_unavailable'
+        - $ref: '#/components/parameters/lenient'
+        - $ref: '#/components/parameters/max_concurrent_shard_requests'
+        - $ref: '#/components/parameters/phase_took'
+        - $ref: '#/components/parameters/pre_filter_shard_size'
+        - $ref: '#/components/parameters/preference'
+        - $ref: '#/components/parameters/q'
+        - $ref: '#/components/parameters/request_cache'
+        - $ref: '#/components/parameters/rest_total_hits_as_int'
+        - $ref: '#/components/parameters/routing'
+        - $ref: '#/components/parameters/scroll'
+        - $ref: '#/components/parameters/search_type'
+        - $ref: '#/components/parameters/seq_no_primary_term'
+        - $ref: '#/components/parameters/size'
+        - $ref: '#/components/parameters/sort'
+        - $ref: '#/components/parameters/_source'
+        - $ref: '#/components/parameters/_source_excludes'
+        - $ref: '#/components/parameters/_source_includes'
+        - $ref: '#/components/parameters/stats'
+        - $ref: '#/components/parameters/stored_fields'
+        - $ref: '#/components/parameters/suggest_field'
+        - $ref: '#/components/parameters/suggest_mode'
+        - $ref: '#/components/parameters/suggest_size'
+        - $ref: '#/components/parameters/suggest_text'
+        - $ref: '#/components/parameters/terminate_after'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/track_scores'
+        - $ref: '#/components/parameters/track_total_hits'
+        - $ref: '#/components/parameters/typed_keys'
+        - $ref: '#/components/parameters/version'
+        - $ref: '#/components/parameters/include_named_queries_score'
+      requestBody:
+        $ref: '#/components/requestBodies/SearchRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/SearchSuccess'
+        '400':
+          $ref: '#/components/responses/SearchBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/SearchNotFound'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+    post:
+      tags: [Search]
+      summary: Index search (POST)
+      operationId: searchIndexPost
+      parameters:
+        - $ref: '#/components/parameters/allow_partial_search_results'
+        - $ref: '#/components/parameters/searchAnalyzer'
+        - $ref: '#/components/parameters/analyze_wildcard'
+        - $ref: '#/components/parameters/batched_reduce_size'
+        - $ref: '#/components/parameters/cancel_after_time_interval'
+        - $ref: '#/components/parameters/ccs_minimize_roundtrips'
+        - $ref: '#/components/parameters/default_operator'
+        - $ref: '#/components/parameters/df'
+        - $ref: '#/components/parameters/docvalue_fields'
+        - $ref: '#/components/parameters/expand_wildcards'
+        - $ref: '#/components/parameters/searchExplain'
+        - $ref: '#/components/parameters/from'
+        - $ref: '#/components/parameters/ignore_throttled'
+        - $ref: '#/components/parameters/ignore_unavailable'
+        - $ref: '#/components/parameters/lenient'
+        - $ref: '#/components/parameters/max_concurrent_shard_requests'
+        - $ref: '#/components/parameters/phase_took'
+        - $ref: '#/components/parameters/pre_filter_shard_size'
+        - $ref: '#/components/parameters/preference'
+        - $ref: '#/components/parameters/q'
+        - $ref: '#/components/parameters/request_cache'
+        - $ref: '#/components/parameters/rest_total_hits_as_int'
+        - $ref: '#/components/parameters/routing'
+        - $ref: '#/components/parameters/scroll'
+        - $ref: '#/components/parameters/search_type'
+        - $ref: '#/components/parameters/seq_no_primary_term'
+        - $ref: '#/components/parameters/size'
+        - $ref: '#/components/parameters/sort'
+        - $ref: '#/components/parameters/_source'
+        - $ref: '#/components/parameters/_source_excludes'
+        - $ref: '#/components/parameters/_source_includes'
+        - $ref: '#/components/parameters/stats'
+        - $ref: '#/components/parameters/stored_fields'
+        - $ref: '#/components/parameters/suggest_field'
+        - $ref: '#/components/parameters/suggest_mode'
+        - $ref: '#/components/parameters/suggest_size'
+        - $ref: '#/components/parameters/suggest_text'
+        - $ref: '#/components/parameters/terminate_after'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/track_scores'
+        - $ref: '#/components/parameters/track_total_hits'
+        - $ref: '#/components/parameters/typed_keys'
+        - $ref: '#/components/parameters/version'
+        - $ref: '#/components/parameters/include_named_queries_score'
+      requestBody:
+        $ref: '#/components/requestBodies/SearchRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/SearchSuccess'
+        '400':
+          $ref: '#/components/responses/SearchBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/SearchNotFound'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
 components:
   parameters:
     scroll:
