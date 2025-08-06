@@ -218,18 +218,6 @@ paths:
   /{target_index}/_settings/{setting}:
     $ref: 'index_api.yml#/paths/~1{target_index}~1_settings~1{setting}'
 
-  /_segments:
-    $ref: 'index_api.yml#/paths/~1_segments'
-
-  /{index}/_segments:
-    $ref: 'index_api.yml#/paths/~1{index}~1_segments'
-
-  /{index_name}/_shrink/{target_index}:
-    $ref: 'index_api.yml#/paths/~1{index_name}~1_shrink~1{target_index}'
-
-  /{source_index}/_split/{target_index}:
-    $ref: 'index_api.yml#/paths/~1{source_index}~1_split~1{target_index}'
-
   /{index}/_open:
     $ref: 'index_api.yml#/paths/~1{index}~1_open'
 
@@ -244,6 +232,18 @@ paths:
 
   /{rollover_target}/_rollover/{target_index}:
     $ref: 'index_api.yml#/paths/~1{rollover_target}~1_rollover~1{target_index}'
+
+  /_segments:
+    $ref: 'index_api.yml#/paths/~1_segments'
+
+  /{index}/_segments:
+    $ref: 'index_api.yml#/paths/~1{index}~1_segments'
+
+  /{index_name}/_shrink/{target_index}:
+    $ref: 'index_api.yml#/paths/~1{index_name}~1_shrink~1{target_index}'
+
+  /{source_index}/_split/{target_index}:
+    $ref: 'index_api.yml#/paths/~1{source_index}~1_split~1{target_index}'
 
   /_stats:
     $ref: 'index_api.yml#/paths/~1_stats'

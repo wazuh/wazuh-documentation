@@ -2266,7 +2266,7 @@ components:
       in: query
       required: false
       description: |
-        When set to `true`, statistics will not be collected from closed indexes. The default value is true.
+        When set to `true`, statistics will not be collected from closed indexes.
       schema:
         type: boolean
         default: true
@@ -2557,7 +2557,7 @@ components:
               actions:
                 type: array
                 description: |
-                  List of actions to perform on the index. Valid options includes add, remove, and remove_index. You must have at least one action in the array.
+                  List of actions to perform on the index. You must have at least one action in the array.
                 items:
                   type: object
                   properties:
