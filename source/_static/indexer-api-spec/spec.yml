@@ -1903,14 +1903,13 @@ paths:
       security:
         - basicAuth: [ ]
         - jwtAuth: [ ]
-    
-    
+
     delete:
       tags: [ Ingest APIs ]
       summary: Delete Pipeline
       description: |
         The delete pipeline API operation deletes a pipeline.
-        
+
         You can delete a specific pipeline by its ID or use wildcards to delete multiple pipelines.
       operationId: deletePipeline
       parameters:
@@ -1933,6 +1932,17 @@ paths:
       security:
         - basicAuth: [ ]
         - jwtAuth: [ ]
+
+  /_plugins/_sm/policies/{policy_name}:
+    $ref: 'snapshot_management_api.yml#/paths/~1_plugins~1_sm~1policies~1{policy_name}'
+  /_plugins/_sm/policies:
+    $ref: 'snapshot_management_api.yml#/paths/~1_plugins~1_sm~1policies'
+  /_plugins/_sm/policies/{policy_names}/_explain:
+    $ref: 'snapshot_management_api.yml#/paths/~1_plugins~1_sm~1policies~1{policy_names}~1_explain'
+  /_plugins/_sm/policies/{policy_name}/_start:
+    $ref: 'snapshot_management_api.yml#/paths/~1_plugins~1_sm~1policies~1{policy_name}~1_start'
+  /_plugins/_sm/policies/{policy_name}/_stop:
+    $ref: 'snapshot_management_api.yml#/paths/~1_plugins~1_sm~1policies~1{policy_name}~1_stop'
 
   /_scripts/{SCRIPT_ID}:
     put:
@@ -5094,6 +5104,37 @@ tags:
       3. **Simulate Pipeline**: Test a pipeline configuration by simulating the processing of sample documents, aiding in validation before deployment.
       4. **Delete Pipeline**: Remove an existing pipeline from the system.
       5. **Access Data in a Pipeline**: Interact with data as it flows through a pipeline, enabling monitoring and debugging of the ingestion process.
+  - name: Refresh search analyzer
+    description: |
+      The Refresh Search Analyzer is an API operation that reloads search-time analyzers in real time, specifically those with updateable components. The ability to refresh search analyzers using this endpoint requires the ISM plugin to be installed in your Wazuh indexer cluster.
+      For the refresh to work, the token filter within your analyzer must have the `updateable` flag set to `true` without needing to close or recreate the index. For example:
+      ```
+      {
+        "analyzer": {
+          "my_synonyms": {
+            "tokenizer": "whitespace",
+            "filter": [
+              "synonym"
+            ]
+          }
+        },
+        "filter": {
+          "synonym": {
+            "type": "synonym_graph",
+            "synonyms_path": "synonyms.txt",
+            "updateable": true
+          }
+        }
+      }
+      ```
+      This configuration ensures that changes to the `synonyms.txt` file are picked up when the analyzer is refreshed. Ensure that the updated resources (e.g., `synonyms.txt`) are accessible to all nodes in the cluster, as the refresh operation will reload these resources across the nodes.
+  - name: Remote cluster information
+    description: |
+      This operation returns detailed connection information for remote Wazuh indexer clusters configured with the local cluster. It includes data such as the remote cluster alias, connection mode (`sniff` or `proxy`), seed node IP addresses, and timeout configurations.
+      The response is more comprehensive and useful than a call to `_cluster/settings`, which only includes the cluster alias and seed nodes.
+  - name: Snapshot management API
+    description: |
+      The snapshot management (SM) API enables automated snapshot creation in the Wazuh indexer. This API helps streamline the process of backing up index data by allowing you to configure, schedule, and manage snapshots programmatically.
   - name: Script APIs
     description: The Script APIs enable the use of stored scripts, which are maintained as part of the cluster state. These scripts help minimize compilation time and improve search performance. The default scripting language is Painless.
   - name: Scroll
