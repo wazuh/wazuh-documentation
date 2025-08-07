@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 ### Changed
 
 - Replaced `indexer_cluster_initial_master_nodes` with `indexer_initial_cluster_manager_nodes` in Puppet deployment documentation. ([#8666](https://github.com/wazuh/wazuh-documentation/pull/8666))
+- Updated the File Integrity Monitoring documentation to remove deprecated settings (`max_interval`, `queue_size`, `thread_pool`, `database`, and `registry_enabled`), add the missing `check_device` setting, and fix the `max_eps` definition in the synchronization settings table. ([#8735](https://github.com/wazuh/wazuh-documentation/pull/8735))
 
 ### Removed
 
