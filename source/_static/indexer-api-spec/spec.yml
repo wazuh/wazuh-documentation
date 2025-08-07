@@ -608,11 +608,11 @@ paths:
         - basicAuth: []
         - jwtAuth: []
       parameters:
-        - $ref: 'cat_api.yml#/components/parameters/cluster_manager_timeout'
+        - $ref: 'cat_api.yml#/components/parameters/cluster_manager_timeout_nodeattrs'
         - $ref: 'cat_api.yml#/components/parameters/format'
         - $ref: 'cat_api.yml#/components/parameters/h'
         - $ref: 'cat_api.yml#/components/parameters/help'
-        - $ref: 'cat_api.yml#/components/parameters/local'
+        - $ref: 'cat_api.yml#/components/parameters/local_nodeattrs'
         - $ref: 'cat_api.yml#/components/parameters/s'
         - $ref: 'cat_api.yml#/components/parameters/v'
       responses:
@@ -772,8 +772,8 @@ paths:
         - basicAuth: []
         - jwtAuth: []
       parameters:
-        - $ref: 'cat_api.yml#/components/parameters/cluster_manager_timeout'
-        - $ref: 'cat_api.yml#/components/parameters/format'
+        - $ref: 'cat_api.yml#/components/parameters/cluster_manager_timeout_plugins'
+        - $ref: 'cat_api.yml#/components/parameters/format_plugins'
         - $ref: 'cat_api.yml#/components/parameters/h'
         - $ref: 'cat_api.yml#/components/parameters/help'
         - $ref: 'cat_api.yml#/components/parameters/local'
@@ -870,8 +870,8 @@ paths:
         - basicAuth: []
         - jwtAuth: []
       parameters:
-        - $ref: 'cat_api.yml#/components/parameters/cluster_manager_timeout'
-        - $ref: 'cat_api.yml#/components/parameters/format'
+        - $ref: 'cat_api.yml#/components/parameters/cluster_manager_timeout_repositories'
+        - $ref: 'cat_api.yml#/components/parameters/format_repositories'
         - $ref: 'cat_api.yml#/components/parameters/h'
         - $ref: 'cat_api.yml#/components/parameters/help'
         - $ref: 'cat_api.yml#/components/parameters/local'
@@ -901,20 +901,20 @@ paths:
         - basicAuth: []
         - jwtAuth: []
       parameters:
-        - $ref: 'cat_api.yml#/components/parameters/active_only'
+        - $ref: 'cat_api.yml#/components/parameters/active_only_segment_replication'
         - $ref: 'cat_api.yml#/components/parameters/allow_no_indices'
-        - $ref: 'cat_api.yml#/components/parameters/bytes'
+        - $ref: 'cat_api.yml#/components/parameters/bytes_segment_replication'
         - $ref: 'cat_api.yml#/components/parameters/completed_only'
-        - $ref: 'cat_api.yml#/components/parameters/detailed'
+        - $ref: 'cat_api.yml#/components/parameters/detailed_segment_replication'
         - $ref: 'cat_api.yml#/components/parameters/expand_wildcards'
-        - $ref: 'cat_api.yml#/components/parameters/format'
+        - $ref: 'cat_api.yml#/components/parameters/format_segment_replication'
         - $ref: 'cat_api.yml#/components/parameters/h'
         - $ref: 'cat_api.yml#/components/parameters/help'
         - $ref: 'cat_api.yml#/components/parameters/ignore_throttled'
         - $ref: 'cat_api.yml#/components/parameters/ignore_unavailable'
-        - $ref: 'cat_api.yml#/components/parameters/s'
-        - $ref: 'cat_api.yml#/components/parameters/shards'
-        - $ref: 'cat_api.yml#/components/parameters/time'
+        - $ref: 'cat_api.yml#/components/parameters/s_segment_replication'
+        - $ref: 'cat_api.yml#/components/parameters/shards_segment_replication'
+        - $ref: 'cat_api.yml#/components/parameters/time_segment_replication'
         - $ref: 'cat_api.yml#/components/parameters/timeout'
         - $ref: 'cat_api.yml#/components/parameters/v'
       responses:
@@ -942,20 +942,20 @@ paths:
         - jwtAuth: []
       parameters:
         - $ref: 'cat_api.yml#/components/parameters/IndexName'
-        - $ref: 'cat_api.yml#/components/parameters/active_only'
+        - $ref: 'cat_api.yml#/components/parameters/active_only_segment_replication'
         - $ref: 'cat_api.yml#/components/parameters/allow_no_indices'
-        - $ref: 'cat_api.yml#/components/parameters/bytes'
+        - $ref: 'cat_api.yml#/components/parameters/bytes_segment_replication'
         - $ref: 'cat_api.yml#/components/parameters/completed_only'
-        - $ref: 'cat_api.yml#/components/parameters/detailed'
+        - $ref: 'cat_api.yml#/components/parameters/detailed_segment_replication'
         - $ref: 'cat_api.yml#/components/parameters/expand_wildcards'
-        - $ref: 'cat_api.yml#/components/parameters/format'
+        - $ref: 'cat_api.yml#/components/parameters/format_segment_replication'
         - $ref: 'cat_api.yml#/components/parameters/h'
         - $ref: 'cat_api.yml#/components/parameters/help'
         - $ref: 'cat_api.yml#/components/parameters/ignore_throttled'
         - $ref: 'cat_api.yml#/components/parameters/ignore_unavailable'
-        - $ref: 'cat_api.yml#/components/parameters/s'
-        - $ref: 'cat_api.yml#/components/parameters/shards'
-        - $ref: 'cat_api.yml#/components/parameters/time'
+        - $ref: 'cat_api.yml#/components/parameters/s_segment_replication'
+        - $ref: 'cat_api.yml#/components/parameters/shards_segment_replication'
+        - $ref: 'cat_api.yml#/components/parameters/time_segment_replication'
         - $ref: 'cat_api.yml#/components/parameters/timeout'
         - $ref: 'cat_api.yml#/components/parameters/v'
       responses:
@@ -985,9 +985,9 @@ paths:
         - $ref: 'cat_api.yml#/components/parameters/bytes'
         - $ref: 'cat_api.yml#/components/parameters/cluster_manager_timeout'
         - $ref: 'cat_api.yml#/components/parameters/format'
-        - $ref: 'cat_api.yml#/components/parameters/h'
+        - $ref: 'cat_api.yml#/components/parameters/h_segments'
         - $ref: 'cat_api.yml#/components/parameters/help'
-        - $ref: 'cat_api.yml#/components/parameters/s'
+        - $ref: 'cat_api.yml#/components/parameters/s_segments'
         - $ref: 'cat_api.yml#/components/parameters/v'
       responses:
         '200':
@@ -1017,9 +1017,9 @@ paths:
         - $ref: 'cat_api.yml#/components/parameters/bytes'
         - $ref: 'cat_api.yml#/components/parameters/cluster_manager_timeout'
         - $ref: 'cat_api.yml#/components/parameters/format'
-        - $ref: 'cat_api.yml#/components/parameters/h'
+        - $ref: 'cat_api.yml#/components/parameters/h_segments'
         - $ref: 'cat_api.yml#/components/parameters/help'
-        - $ref: 'cat_api.yml#/components/parameters/s'
+        - $ref: 'cat_api.yml#/components/parameters/s_segments'
         - $ref: 'cat_api.yml#/components/parameters/v'
       responses:
         '200':
@@ -1048,10 +1048,10 @@ paths:
         - $ref: 'cat_api.yml#/components/parameters/bytes'
         - $ref: 'cat_api.yml#/components/parameters/cluster_manager_timeout'
         - $ref: 'cat_api.yml#/components/parameters/format'
-        - $ref: 'cat_api.yml#/components/parameters/h'
+        - $ref: 'cat_api.yml#/components/parameters/h_shards'
         - $ref: 'cat_api.yml#/components/parameters/help'
         - $ref: 'cat_api.yml#/components/parameters/local'
-        - $ref: 'cat_api.yml#/components/parameters/s'
+        - $ref: 'cat_api.yml#/components/parameters/s_shards'
         - $ref: 'cat_api.yml#/components/parameters/time'
         - $ref: 'cat_api.yml#/components/parameters/v'
       responses:
@@ -1082,10 +1082,10 @@ paths:
         - $ref: 'cat_api.yml#/components/parameters/bytes'
         - $ref: 'cat_api.yml#/components/parameters/cluster_manager_timeout'
         - $ref: 'cat_api.yml#/components/parameters/format'
-        - $ref: 'cat_api.yml#/components/parameters/h'
+        - $ref: 'cat_api.yml#/components/parameters/h_shards'
         - $ref: 'cat_api.yml#/components/parameters/help'
         - $ref: 'cat_api.yml#/components/parameters/local'
-        - $ref: 'cat_api.yml#/components/parameters/s'
+        - $ref: 'cat_api.yml#/components/parameters/s_shards'
         - $ref: 'cat_api.yml#/components/parameters/time'
         - $ref: 'cat_api.yml#/components/parameters/v'
       responses:
@@ -1114,10 +1114,10 @@ paths:
       parameters:
         - $ref: 'cat_api.yml#/components/parameters/cluster_manager_timeout'
         - $ref: 'cat_api.yml#/components/parameters/format'
-        - $ref: 'cat_api.yml#/components/parameters/h'
+        - $ref: 'cat_api.yml#/components/parameters/h_snapshots'
         - $ref: 'cat_api.yml#/components/parameters/help'
-        - $ref: 'cat_api.yml#/components/parameters/ignore_unavailable'
-        - $ref: 'cat_api.yml#/components/parameters/s'
+        - $ref: 'cat_api.yml#/components/parameters/ignore_unavailable_snapshots'
+        - $ref: 'cat_api.yml#/components/parameters/s_snapshots'
         - $ref: 'cat_api.yml#/components/parameters/time'
         - $ref: 'cat_api.yml#/components/parameters/v'
       responses:
@@ -1147,10 +1147,10 @@ paths:
         - $ref: 'cat_api.yml#/components/parameters/RepositoryName'
         - $ref: 'cat_api.yml#/components/parameters/cluster_manager_timeout'
         - $ref: 'cat_api.yml#/components/parameters/format'
-        - $ref: 'cat_api.yml#/components/parameters/h'
+        - $ref: 'cat_api.yml#/components/parameters/h_snapshots'
         - $ref: 'cat_api.yml#/components/parameters/help'
-        - $ref: 'cat_api.yml#/components/parameters/ignore_unavailable'
-        - $ref: 'cat_api.yml#/components/parameters/s'
+        - $ref: 'cat_api.yml#/components/parameters/ignore_unavailable_snapshots'
+        - $ref: 'cat_api.yml#/components/parameters/s_snapshots'
         - $ref: 'cat_api.yml#/components/parameters/time'
         - $ref: 'cat_api.yml#/components/parameters/v'
       responses:
@@ -1177,14 +1177,14 @@ paths:
         - basicAuth: []
         - jwtAuth: []
       parameters:
-        - $ref: 'cat_api.yml#/components/parameters/actions'
-        - $ref: 'cat_api.yml#/components/parameters/detailed'
+        - $ref: 'cat_api.yml#/components/parameters/actions_tasks'
+        - $ref: 'cat_api.yml#/components/parameters/detailed_tasks'
         - $ref: 'cat_api.yml#/components/parameters/format'
-        - $ref: 'cat_api.yml#/components/parameters/h'
+        - $ref: 'cat_api.yml#/components/parameters/h_tasks'
         - $ref: 'cat_api.yml#/components/parameters/help'
-        - $ref: 'cat_api.yml#/components/parameters/nodes'
+        - $ref: 'cat_api.yml#/components/parameters/nodes_tasks'
         - $ref: 'cat_api.yml#/components/parameters/parent_task_id'
-        - $ref: 'cat_api.yml#/components/parameters/s'
+        - $ref: 'cat_api.yml#/components/parameters/s_tasks'
         - $ref: 'cat_api.yml#/components/parameters/time'
         - $ref: 'cat_api.yml#/components/parameters/v'
       responses:
