@@ -1887,6 +1887,15 @@ paths:
         '404':
           $ref: 'stats_api.yml#/components/responses/StatsNotFound'
 
+  /_plugins/_security_analytics/logtype:
+    $ref: 'logtype_api.yml#/paths/~1_plugins~1_security_analytics~1logtype'
+
+  /_plugins/_security_analytics/logtype/_search:
+    $ref: 'logtype_api.yml#/paths/~1_plugins~1_security_analytics~1logtype~1_search'
+
+  /_plugins/_security_analytics/logtype/{log_type_id}:
+    $ref: 'logtype_api.yml#/paths/~1_plugins~1_security_analytics~1logtype~1{log_type_id}'
+
   /_tasks:
     get:
       tags:
@@ -2702,6 +2711,8 @@ tags:
       Since search contexts can be memory-intensive, it's advisable to avoid using the scroll operation for frequent user queries. Instead, consider utilizing the sort parameter in conjunction with the search_after parameter to paginate through results for user queries.
   - name: Search
     description: The Search API operation allows you to perform a search request to find data within your cluster.
+  - name: Log type APIs
+    description: The log type APIs allow you to create a custom log type, search custom log types, update custom log types, and delete custom log types.
   - name: Stats API
     description: The Stats API uses the stats operation to track and monitor shard indexing backpressure.
   - name: Tasks
