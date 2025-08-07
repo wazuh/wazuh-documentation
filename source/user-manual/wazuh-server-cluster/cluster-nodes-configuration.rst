@@ -8,6 +8,12 @@ Wazuh cluster nodes configuration
 
 In a Wazuh server cluster, there can only be one master node in a cluster while all other Wazuh servers are the worker nodes. For both node types, the configuration file ``/var/ossec/etc/ossec.conf`` contains the cluster configuration values. We show how to configure a cluster with a master node and a single worker node.
 
+.. note::
+
+   Configurations applied to the ``/var/ossec/etc/ossec.conf`` file on the master node are not automatically synchronized with the ``/var/ossec/etc/ossec.conf`` file on the worker nodes. You need to manually replicate the configurations to attain synchronization.
+
+   Additionally, restart nodes to apply configuration changes.
+
 Master node
 -----------
 
