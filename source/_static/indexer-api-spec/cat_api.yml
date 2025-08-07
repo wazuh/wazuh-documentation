@@ -35,9 +35,20 @@ components:
     expand_wildcards:
       name: expand_wildcards
       in: query
-      description: Expands wildcard expressions to concrete indexes. Combine multiple values with commas. Supported values are all, open, closed, hidden, and none.
+      description: |
+        Specifies the type of index that wildcard expressions can match. Supports comma-separated values.
+        Valid values are:
+        - all: Match any index, including hidden ones.
+        - closed: Match closed, non-hidden indexes.
+        - hidden: Match hidden indexes. Must be combined with open, closed, or both.
+        - none: Wildcard expressions are not accepted.
+        - open: Match open, non-hidden indexes.
       schema:
-        type: string
+        oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
 
     format:
       name: format
@@ -51,9 +62,11 @@ components:
       in: query
       description: A comma-separated list of column names to display.
       schema:
-        type: array
-        items:
-          type: string
+        oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
 
     help:
       name: help
@@ -61,20 +74,26 @@ components:
       description: Returns help information.
       schema:
         type: boolean
+        default: false
 
     local:
       name: local
       in: query
-      description: Whether to return information from the local node only instead of from the cluster manager node.
+      description: Returns local information but does not retrieve the state from the cluster manager node.
       schema:
         type: boolean
+        default: false
 
     s:
       name: s
       in: query
       description: A comma-separated list of column names or column aliases to sort by.
       schema:
-        type: string
+        oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
 
     v:
       name: v
@@ -82,6 +101,7 @@ components:
       description: Enables verbose mode, which displays column headers.
       schema:
         type: boolean
+        default: false
 
     pretty:
       name: pretty
@@ -94,7 +114,9 @@ components:
     bytes:
       name: bytes
       in: query
-      description: The units used to display byte values.
+      description: |
+        The units used to display byte values.
+        Valid values are: b, kb, k, mb, m, gb, g, tb, t, pb, p.
       schema:
         type: string
 
@@ -116,7 +138,9 @@ components:
     time:
       name: time
       in: query
-      description: Specifies the unit for time. The supported units for time are d for days, h for hours, m for minutes, s for seconds, ms for milliseconds, micros for microseconds, and nanos for nanoseconds.
+      description: |
+        Specifies the time units, for example, 5d or 7h.
+        Valid values are: nanos, micros, ms, s, m, h, d.
       schema:
         type: string
 
@@ -276,6 +300,213 @@ components:
       description: The multiplier in which to display values.
       schema:
         type: integer
+
+    cluster_manager_timeout_nodeattrs:
+      name: cluster_manager_timeout
+      in: query
+      description: The amount of time allowed to establish a connection to the Wazuh indexer cluster manager node.
+      schema:
+        type: string
+
+    local_nodeattrs:
+      name: local
+      in: query
+      description: Returns local information but does not retrieve the state from the Wazuh indexer cluster manager node.
+      schema:
+        type: boolean
+        default: false
+
+    cluster_manager_timeout_pending_tasks:
+      name: cluster_manager_timeout
+      in: query
+      description: Specifies the amount of time allowed to establish a connection to the cluster manager node.
+      schema:
+        type: string
+
+    format_pending_tasks:
+      name: format
+      in: query
+      description: A short version of the Accept header, such as json or yaml.
+      schema:
+        type: string
+
+    time_pending_tasks:
+      name: time
+      in: query
+      description: |
+        Specifies the time units, for example, 5d or 7h.
+        Valid values are: nanos, micros, ms, s, m, h, d.
+      schema:
+        type: string
+
+    cluster_manager_timeout_plugins:
+      name: cluster_manager_timeout
+      in: query
+      description: The amount of time allowed to establish a connection to the Wazuh indexer cluster manager node.
+      schema:
+        type: string
+
+    format_plugins:
+      name: format
+      in: query
+      description: A short version of the Accept header, such as json or yaml.
+      schema:
+        type: string
+
+    cluster_manager_timeout_repositories:
+      name: cluster_manager_timeout
+      in: query
+      description: The amount of time allowed to establish a connection to the Wazuh indexer node.
+      schema:
+        type: string
+
+    format_repositories:
+      name: format
+      in: query
+      description: A short version of the Accept header, such as json or yaml.
+      schema:
+        type: string
+
+    active_only_segment_replication:
+      name: active_only
+      in: query
+      description: The response will only contain current segment replication events if set to true.
+      schema:
+        type: boolean
+        default: false
+
+    bytes_segment_replication:
+      name: bytes
+      in: query
+      description: |
+        Specifies the units used to display byte values.
+        Valid values are: b, kb, k, mb, m, gb, g, tb, t, pb, p.
+      schema:
+        type: string
+
+    detailed_segment_replication:
+      name: detailed
+      in: query
+      description: When set to true, the response includes additional metrics for each stage of a segment replication event.
+      schema:
+        type: boolean
+        default: false
+
+    format_segment_replication:
+      name: format
+      in: query
+      description: A short version of the Accept header, such as json or yaml.
+      schema:
+        type: string
+
+    s_segment_replication:
+      name: s
+      in: query
+      description: A comma-separated list of column names or column aliases to sort by.
+      schema:
+        type: string
+
+    shards_segment_replication:
+      name: shards
+      in: query
+      description: A comma-separated list of shards to display.
+      schema:
+        type: string
+
+    time_segment_replication:
+      name: time
+      in: query
+      description: |
+        Specifies the time units, for example, 5d or 7h.
+        Valid values are: nanos, micros, ms, s, m, h, d
+      schema:
+        type: string
+
+    h_segments:
+      name: h
+      in: query
+      description: A comma-separated list of column names to display.
+      schema:
+        type: string
+
+    s_segments:
+      name: s
+      in: query
+      description: A comma-separated list of column names or column aliases to sort by.
+      schema:
+        type: string
+
+    h_shards:
+      name: h
+      in: query
+      description: A comma-separated list of column names to display.
+      schema:
+        type: string
+
+    s_shards:
+      name: s
+      in: query
+      description: A comma-separated list of column names or column aliases to sort by.
+      schema:
+        type: string
+
+    h_snapshots:
+      name: h
+      in: query
+      description: A comma-separated list of column names to display.
+      schema:
+        type: string
+
+    ignore_unavailable_snapshots:
+      name: ignore_unavailable
+      in: query
+      description: When set to true, the response does not include information from unavailable snapshots.
+      schema:
+        type: boolean
+        default: false
+
+    s_snapshots:
+      name: s
+      in: query
+      description: A comma-separated list of column names or column aliases to sort by.
+      schema:
+        type: string
+
+    actions_tasks:
+      name: actions
+      in: query
+      description: The task action names used to limit the response.
+      schema:
+        type: string
+
+    detailed_tasks:
+      name: detailed
+      in: query
+      description: If set to true, the response includes detailed information about shard recoveries.
+      schema:
+        type: boolean
+        default: false
+
+    h_tasks:
+      name: h
+      in: query
+      description: A comma-separated list of column names to display.
+      schema:
+        type: string
+
+    nodes_tasks:
+      name: nodes
+      in: query
+      description: A comma-separated list of node IDs or names used to limit the returned information. Use _local to return information from the node to which you are connecting to, specify a specific node from which to get information, or keep the parameter empty to get information from all nodes.
+      schema:
+        type: string
+
+    s_tasks:
+      name: s
+      in: query
+      description: A comma-separated list of column names or column aliases to sort by.
+      schema:
+        type: string
 
   requestBodies:
     PitSegmentsRequestBody:
@@ -753,17 +984,20 @@ components:
                 type: string
                 description: A unique identifier for the index.
               pri:
-                type: string
+                type: integer
                 description: The number of primary shards for the index. A shard is a partition of the index, and primary shards are the original copies of the data.
               rep:
-                type: string
+                type: integer
                 description: The number of replicas for each primary shard. Replicas are copies of primary shards for fault tolerance and improved performance.
-              docs.count:
-                type: string
-                description: The total number of documents stored within the index.
-              docs.deleted:
-                type: string
-                description: The number of documents that have been marked as deleted but not yet physically removed from the index.
+              docs:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    description: The total number of documents stored within the index.
+                  deleted:
+                    type: integer
+                    description: The number of documents that have been marked as deleted but not yet physically removed from the index.
               store.size:
                 type: string
                 description: The total size of the index data on disk, including both primary and replica shards.
@@ -775,10 +1009,11 @@ components:
             status: "open"
             index: "wazuh-alerts-4.x-2025.01.19"
             uuid: "BptQhS5GTMiMokuutBL00g"
-            pri: "3"
-            rep: "0"
-            docs.count: "4"
-            docs.deleted: "0"
+            pri: 3
+            rep: 0
+            docs:
+              count: 4
+              deleted: 0
             store.size: "75kb"
             pri.store.size: "75kb"
 
@@ -847,13 +1082,13 @@ components:
                 type: string
                 description: The IP address of the machine where the Wazuh indexer node is running.
               heap.percent:
-                type: string
+                type: integer
                 description: The percentage of heap memory used by the Java Virtual Machine (JVM) on the Wazuh indexer node.
               ram.percent:
-                type: string
+                type: integer
                 description: The percentage of total system RAM used by the Wazuh indexer node.
               cpu:
-                type: string
+                type: integer
                 description: Displays the CPU usage of the Wazuh indexer node.
               load_1m:
                 type: string
@@ -864,12 +1099,15 @@ components:
               load_15m:
                 type: string
                 description: Displays the average system load over the last 15 minutes.
-              node.role:
-                type: string
-                description: A short, single character representation of the Wazuh indexer node's role (e.g., 'd' for data node, 'm' for master node).
-              node.roles:
-                type: string
-                description: A comma-separated list of all roles assigned to the node.
+              node:
+                type: object
+                properties:
+                  role:
+                    type: string
+                    description: A short, single character representation of the Wazuh indexer node's role (e.g., 'd' for data node, 'm' for master node).
+                  roles:
+                    type: string
+                    description: A comma-separated list of all roles assigned to the node.
               cluster_manager:
                 type: string
                 description: Indicates whether the node is the current cluster manager or not.
@@ -878,14 +1116,15 @@ components:
                 description: The unique name assigned to the Wazuh indexer node within the cluster.
           example:
             ip: "127.0.0.1"
-            heap.percent: "22"
-            ram.percent: "97"
-            cpu: "34"
+            heap.percent: 22
+            ram.percent: 97
+            cpu: 34
             load_1m: "0.40"
             load_5m: "0.37"
             load_15m: "0.80"
-            node.role: "dimr"
-            node.roles: "cluster_manager,data,ingest,remote_cluster_client"
+            node:
+              role: "dimr"
+              roles: "cluster_manager,data,ingest,remote_cluster_client"
             cluster_manager: "*"
             name: "node-1"
 
