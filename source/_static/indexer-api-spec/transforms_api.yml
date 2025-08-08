@@ -104,6 +104,126 @@ paths:
         '409':
           $ref: '#/components/responses/TransformConflict'
 
+    get:
+      tags:
+        - Transforms API
+      summary: Get a transform job's details
+      description: |
+        Returns a transform job's details. You can also get details of all transform jobs by omitting transform_id.
+      operationId: getTransformJob
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/TransformId'
+        - $ref: '#/components/parameters/from'
+        - $ref: '#/components/parameters/size'
+        - $ref: '#/components/parameters/search'
+        - $ref: '#/components/parameters/sortField'
+        - $ref: '#/components/parameters/sortDirection'
+      responses:
+        '200':
+          $ref: '#/components/responses/TransformList'
+        '400':
+          $ref: '#/components/responses/TransformBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/TransformForbidden'
+        '404':
+          $ref: '#/components/responses/TransformNotFound'
+
+    delete:
+      tags:
+        - Transforms API
+      summary: Delete a transform job
+      description: |
+        Deletes a transform job.
+      operationId: deleteTransformJob
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/TransformId'
+        - $ref: '#/components/parameters/force'
+      responses:
+        '200':
+          $ref: '#/components/responses/TransformDeleted'
+        '400':
+          $ref: '#/components/responses/TransformBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/TransformForbidden'
+        '409':
+          $ref: '#/components/responses/TransformConflict'
+
+  /_plugins/_transform/{TRANSFORM_ID}?if_seq_no={SEQ_NO}&if_primary_term={PRIMARY_TERM}:
+    put:
+      tags:
+        - Transforms API
+      summary: Update a transform job
+      description: |
+        Updates an existing transform job if the specified transform_id already exists. This request requires providing the sequence number and primary term of the transform to be modified.
+      operationId: updateTransformJob
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/TransformId'
+        - name: if_seq_no
+          in: query
+          required: true
+          description: Executes the transform operation only if the most recent change to the transform job matches the specified sequence number.
+          schema:
+            type: integer
+        - name: if_primary_term
+          in: query
+          required: true
+          description: Executes the transform operation only if the most recent change to the transform job matches the specified primary term.
+          schema:
+            type: integer
+      requestBody:
+        $ref: '#/components/requestBodies/UpdateTransformRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/TransformUpdated'
+        '400':
+          $ref: '#/components/responses/TransformBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/TransformForbidden'
+        '404':
+          $ref: '#/components/responses/TransformNotFound'
+        '409':
+          $ref: '#/components/responses/TransformConflict'
+
+  /_plugins/_transform/{TRANSFORM_ID}/_explain:
+    get:
+      tags:
+        - Transforms API
+      summary: Get the status of a transform job
+      description: |
+        Retrieves the status and metadata of a transform job.
+      operationId: getTransformJobStatus
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/TransformId'
+      responses:
+        '200':
+          $ref: '#/components/responses/TransformStatus'
+        '400':
+          $ref: '#/components/responses/TransformBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/TransformForbidden'
+        '404':
+          $ref: '#/components/responses/TransformNotFound'
+
 components:
   parameters:
     TransformId:

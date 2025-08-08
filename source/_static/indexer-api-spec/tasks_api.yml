@@ -1,3 +1,69 @@
+paths:
+  /_tasks:
+    get:
+      tags:
+        - Tasks
+      summary: Get all tasks
+      description: |
+        Retrieves details about tasks that are currently running within the cluster.
+      operationId: getAllTasks
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/nodes'
+        - $ref: '#/components/parameters/actions'
+        - $ref: '#/components/parameters/detailed'
+        - $ref: '#/components/parameters/parent_task_id'
+        - $ref: '#/components/parameters/wait_for_completion'
+        - $ref: '#/components/parameters/group_by'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+      responses:
+        '200':
+          $ref: '#/components/responses/TasksSuccess'
+        '400':
+          $ref: '#/components/responses/TasksBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/TasksForbidden'
+        '404':
+          $ref: '#/components/responses/TasksNotFound'
+
+  /_tasks/{TASK_ID}:
+    get:
+      tags:
+        - Tasks
+      summary: Get specific task
+      description: |
+        Retrieves details about tasks that are currently running within the cluster.
+      operationId: getTaskById
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/TaskId'
+        - $ref: '#/components/parameters/nodes'
+        - $ref: '#/components/parameters/actions'
+        - $ref: '#/components/parameters/detailed'
+        - $ref: '#/components/parameters/parent_task_id'
+        - $ref: '#/components/parameters/wait_for_completion'
+        - $ref: '#/components/parameters/group_by'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+      responses:
+        '200':
+          $ref: '#/components/responses/TasksSuccess'
+        '400':
+          $ref: '#/components/responses/TasksBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/TasksForbidden'
+        '404':
+          $ref: '#/components/responses/TasksNotFound'
+
 components:
   parameters:
     TaskId:
