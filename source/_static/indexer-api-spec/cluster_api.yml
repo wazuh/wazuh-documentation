@@ -1,0 +1,1689 @@
+paths:
+  /_cluster/allocation/explain:
+    get:
+      tags: [Cluster API]
+      summary: Cluster allocation explain (GET)
+      description: |
+        The cluster allocation explain request finds an unassigned shard and explains why it cannot be allocated to a node.
+      operationId: clusterAllocationExplainGet
+      parameters:
+        - $ref: '#/components/parameters/include_yes_decisions'
+        - $ref: '#/components/parameters/include_disk_info'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/ClusterAllocationExplainRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/ClusterAllocationExplainSuccess'
+        '400':
+          $ref: '#/components/responses/ClusterAllocExplainBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/IndexNotFound'
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+    post:
+      tags: [Cluster API]
+      summary: Cluster allocation explain (POST)
+      description: |
+        The cluster allocation explain request finds an unassigned shard and explains why it cannot be allocated to a node.
+      operationId: clusterAllocationExplainPost
+      parameters:
+        - $ref: '#/components/parameters/include_yes_decisions'
+        - $ref: '#/components/parameters/include_disk_info'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/ClusterAllocationExplainRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/ClusterAllocationExplainSuccess'
+        '400':
+          $ref: 'spec.yml#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/IndexNotFound'
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /_cluster/routing/awareness/{attribute}/weights:
+    parameters:
+      - $ref: '#/components/parameters/awareness_attribute'
+    get:
+      tags: [Cluster API]
+      summary: Cluster routing and awareness (GET)
+      description: |
+        Cluster routing and awareness is used to control the distribution of search or HTTP traffic. You can use the weights per awareness attribute to control the distribution of search or HTTP traffic across zones. This is commonly used for zonal deployments, heterogeneous instances, and routing traffic away from zones during zonal failure.
+      operationId: getClusterRoutingAwarenessWeights
+      parameters:
+        - $ref: 'spec.yml#/components/parameters/format'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: '#/components/responses/ClusterRoutingWeightsSuccess'
+        '400':
+          $ref: '#/components/responses/ClusterRoutingBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/ClusterRoutingForbidden'
+        '500':
+          $ref: '#/components/responses/ClusterRoutingServerError'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+    put:
+      tags: [Cluster API]
+      summary: Cluster routing and awareness (PUT)
+      description: |
+        Cluster routing and awareness is used to control the distribution of search or HTTP traffic. You can use the weights per awareness attribute to control the distribution of search or HTTP traffic across zones. This is commonly used for zonal deployments, heterogeneous instances, and routing traffic away from zones during zonal failure.
+      operationId: setClusterRoutingAwarenessWeights
+      parameters:
+        - $ref: 'spec.yml#/components/parameters/format'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/ClusterRoutingWeightsRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/ClusterRoutingWeightsSuccess'
+        '400':
+          $ref: '#/components/responses/ClusterRoutingBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/ClusterRoutingForbidden'
+        '500':
+          $ref: '#/components/responses/ClusterRoutingServerError'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+    delete:
+      tags: [Cluster API]
+      summary: Cluster routing and awareness (DELETE)
+      description: |
+        Cluster routing and awareness is used to control the distribution of search or HTTP traffic. You can use the weights per awareness attribute to control the distribution of search or HTTP traffic across zones. This is commonly used for zonal deployments, heterogeneous instances, and routing traffic away from zones during zonal failure.
+      operationId: deleteClusterRoutingAwarenessWeights
+      parameters:
+        - $ref: 'spec.yml#/components/parameters/format'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: '#/components/responses/ClusterRoutingDeleteSuccess'
+        '400':
+          $ref: '#/components/responses/ClusterRoutingBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/ClusterRoutingForbidden'
+        '500':
+          $ref: '#/components/responses/ClusterRoutingServerError'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /_cluster/decommission/awareness/{awareness_attribute_name}/{awareness_attribute_value}:
+    parameters:
+      - $ref: '#/components/parameters/awareness_attribute_name'
+      - $ref: '#/components/parameters/awareness_attribute_value'
+    put:
+      tags: [Cluster API]
+      summary: Cluster decommission (PUT)
+      description: |
+        The cluster decommission operation adds support for awareness based decommissioning. It greatly benefits multi-zone deployments where awareness attributes, such as zones, can aid in applying new upgrades to a cluster in a controlled fashion. This is especially useful during outages, in which case, you can decommission the unhealthy zone to prevent replication requests from stalling and prevent your request backlog from becoming too large.
+      operationId: decommissionAwareness
+      parameters:
+        - $ref: 'spec.yml#/components/parameters/format'
+      responses:
+        '200':
+          $ref: '#/components/responses/DecommissionSuccess'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /_cluster/decommission/awareness/{awareness_attribute_name}/_status:
+    parameters:
+      - $ref: '#/components/parameters/awareness_attribute_name'
+    get:
+      tags: [Cluster API]
+      summary: Cluster decommission (GET)
+      description: |
+        The cluster decommission operation adds support for awareness based decommissioning. It greatly benefits multi-zone deployments where awareness attributes, such as zones, can aid in applying new upgrades to a cluster in a controlled fashion. This is especially useful during outages, in which case, you can decommission the unhealthy zone to prevent replication requests from stalling and prevent your request backlog from becoming too large.
+      operationId: getDecommissionStatus
+      parameters:
+        - $ref: 'spec.yml#/components/parameters/format'
+      responses:
+        '200':
+          $ref: '#/components/responses/DecommissionSuccess'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /_cluster/decommission/awareness:
+    delete:
+      tags: [Cluster API]
+      summary: Cluster decommission (DELETE)
+      description: |
+        The cluster decommission operation adds support for awareness based decommissioning. It greatly benefits multi-zone deployments where awareness attributes, such as zones, can aid in applying new upgrades to a cluster in a controlled fashion. This is especially useful during outages, in which case, you can decommission the unhealthy zone to prevent replication requests from stalling and prevent your request backlog from becoming too large.
+      operationId: cancelDecommission
+      parameters:
+        - $ref: 'spec.yml#/components/parameters/format'
+      responses:
+        '200':
+          $ref: '#/components/responses/DecommissionSuccess'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /_cluster/health:
+    get:
+      tags: [Cluster API]
+      summary: Cluster health
+      description: |
+        The cluster health API returns a simple status of the health of your cluster. The cluster health is represented in three colors: green, yellow, and red. A green status means all primary shards and their replicas are allocated to nodes. A yellow status means all primary shards are allocated to nodes, but some replicas aren't. A red status means at least one primary shard is not allocated to any node.
+      operationId: clusterHealth
+      parameters:
+        - $ref: '#/components/parameters/expand_wildcards'
+        - $ref: '#/components/parameters/level'
+        - $ref: '#/components/parameters/awareness_attribute_health'
+        - $ref: '#/components/parameters/local'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/wait_for_active_shards'
+        - $ref: '#/components/parameters/wait_for_nodes'
+        - $ref: '#/components/parameters/wait_for_events'
+        - $ref: '#/components/parameters/wait_for_no_relocating_shards'
+        - $ref: '#/components/parameters/wait_for_no_initializing_shards'
+        - $ref: '#/components/parameters/wait_for_status'
+        - $ref: '#/components/parameters/weights'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: '#/components/responses/ClusterHealthSuccess'
+        '400':
+          $ref: '#/components/responses/ClusterHealthBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/ClusterHealthForbidden'
+        '405':
+          $ref: '#/components/responses/ClusterHealthMethodNotAllowed'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /_cluster/health/{index}:
+    get:
+      tags: [Cluster API]
+      summary: Cluster health (Index)
+      description: |
+        The cluster health API returns a simple status of the health of your cluster. The cluster health is represented in three colors: green, yellow, and red. A green status means all primary shards and their replicas are allocated to nodes. A yellow status means all primary shards are allocated to nodes, but some replicas aren't. A red status means at least one primary shard is not allocated to any node.
+      operationId: clusterHealthIndex
+      parameters:
+        - $ref: '#/components/parameters/cluster_health_index'
+        - $ref: '#/components/parameters/expand_wildcards'
+        - $ref: '#/components/parameters/level'
+        - $ref: '#/components/parameters/awareness_attribute_health'
+        - $ref: '#/components/parameters/local'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/wait_for_active_shards'
+        - $ref: '#/components/parameters/wait_for_nodes'
+        - $ref: '#/components/parameters/wait_for_events'
+        - $ref: '#/components/parameters/wait_for_no_relocating_shards'
+        - $ref: '#/components/parameters/wait_for_no_initializing_shards'
+        - $ref: '#/components/parameters/wait_for_status'
+        - $ref: '#/components/parameters/weights'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: '#/components/responses/ClusterHealthSuccess'
+        '400':
+          $ref: '#/components/responses/ClusterHealthBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/ClusterHealthForbidden'
+        '405':
+          $ref: '#/components/responses/ClusterHealthMethodNotAllowed'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /_cluster/settings:
+    get:
+      tags: [Cluster API]
+      summary: Cluster settings (GET)
+      description: |
+        The cluster settings operation allows you to view and modify the current settings for your cluster, as well as review the default settings. Any setting updates made through the API are applied to all nodes within the cluster by Wazuh indexer.
+
+        The request body is only supported by PUT operation. Not all settings can be updated via the cluster settings API, some settings are only available in the configuration file. When you try to update a setting that is not supported by the cluster setting API, a `"setting [cluster.some.setting], not dynamically updateable"` response is received.
+
+        The cluster settings API contains three types of settings: persistent, transient, and default. Persistent settings remain after a cluster restart, unlike transient settings, which the Wazuh indexer removes after a restart. When the same setting is specified in multiple places, the following hierarchy is followed by the Wazuh indexer:
+
+        - Transient settings
+        - Persistent settings
+        - Settings from the `/etc/wazuh-indexer/opensearch.yml` file
+        - Default settings
+
+        The cluster setting API PUT operation must contain either `transient` or `persistent` value. To check available settings, you can run the GET request with the `include_defaults` parameter and copy any setting to edit the required setting.
+      operationId: getClusterSettings
+      parameters:
+        - $ref: '#/components/parameters/flat_settings'
+        - $ref: '#/components/parameters/include_defaults'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: '#/components/responses/ClusterSettingsSuccess'
+        '400':
+          $ref: '#/components/responses/ClusterSettingsBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/ClusterSettingsForbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+    put:
+      tags: [Cluster API]
+      summary: Cluster settings (PUT)
+      description: |
+        The cluster settings operation allows you to view and modify the current settings for your cluster, as well as review the default settings. Any setting updates made through the API are applied to all nodes within the cluster by Wazuh indexer.
+
+        The request body is only supported by PUT operation. Not all settings can be updated via the cluster settings API, some settings are only available in the configuration file. When you try to update a setting that is not supported by the cluster setting API, a `"setting [cluster.some.setting], not dynamically updateable"` response is received.
+
+        The cluster settings API contains three types of settings: persistent, transient, and default. Persistent settings remain after a cluster restart, unlike transient settings, which the Wazuh indexer removes after a restart. When the same setting is specified in multiple places, the following hierarchy is followed by the Wazuh indexer:
+
+        - Transient settings
+        - Persistent settings
+        - Settings from the `/etc/wazuh-indexer/opensearch.yml` file
+        - Default settings
+
+        The cluster setting API PUT operation must contain either `transient` or `persistent` value. To check available settings, you can run the GET request with the `include_defaults` parameter and copy any setting to edit the required setting.
+      operationId: putClusterSettings
+      parameters:
+        - $ref: '#/components/parameters/flat_settings'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/ClusterSettingsRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/ClusterSettingsSuccess'
+        '400':
+          $ref: '#/components/responses/ClusterSettingsBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/ClusterSettingsForbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /_cluster/stats:
+    get:
+      tags:
+        - Cluster API
+      summary: Cluster stats
+      description: The cluster stats API operation returns statistics about your cluster.
+      operationId: getClusterStats
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: '#/components/responses/ClusterStatsSuccess'
+        '400':
+          $ref: '#/components/responses/ClusterStatsBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/ClusterStatsForbidden'
+        '405':
+          $ref: '#/components/responses/ClusterStatsMethodNotAllowed'
+
+  /_cluster/stats/nodes/{node_filters}:
+    get:
+      tags:
+        - Cluster API
+      summary: Cluster stats (Node filters)
+      description: The cluster stats API operation returns statistics about your cluster.
+      operationId: getClusterStatsWithNodeFilters
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/node_filters'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: '#/components/responses/ClusterStatsSuccess'
+        '400':
+          $ref: '#/components/responses/ClusterStatsBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/ClusterStatsForbidden'
+        '405':
+          $ref: '#/components/responses/ClusterStatsMethodNotAllowed'
+
+  /_cluster/stats/{metric}/nodes/{node_filters}:
+    get:
+      tags:
+        - Cluster API
+      summary: Cluster stats (Metric and node filters)
+      description: The cluster stats API operation returns statistics about your cluster.
+      operationId: getClusterStatsWithMetricAndNodeFilters
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/node_filters'
+        - $ref: '#/components/parameters/metric'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: '#/components/responses/ClusterStatsSuccess'
+        '400':
+          $ref: '#/components/responses/ClusterStatsBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/ClusterStatsForbidden'
+        '405':
+          $ref: '#/components/responses/ClusterStatsMethodNotAllowed'
+
+  /_cluster/stats/{metric}/{index_metric}/nodes/{node_filters}:
+    get:
+      tags:
+        - Cluster API
+      summary: Cluster stats (Metric, index metric and node filters)
+      description: The cluster stats API operation returns statistics about your cluster.
+      operationId: getClusterStatsWithMetricIndexMetricAndNodeFilters
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/node_filters'
+        - $ref: '#/components/parameters/metric'
+        - $ref: '#/components/parameters/index_metric'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: '#/components/responses/ClusterStatsSuccess'
+        '400':
+          $ref: '#/components/responses/ClusterStatsBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/ClusterStatsForbidden'
+        '405':
+          $ref: '#/components/responses/ClusterStatsMethodNotAllowed'
+
+components:
+  parameters:
+    include_yes_decisions:
+      name: include_yes_decisions
+      in: query
+      description: |
+        Wazuh indexer makes a series of *yes* or *no* decisions when trying to allocate a shard to a node. When set to `true`, the *explain* decision response will always include *yes*.
+      schema:
+        type: boolean
+        default: false
+
+    include_disk_info:
+      name: include_disk_info
+      in: query
+      description: Controls whether to include information about disk usage in the response or not.
+      schema:
+        type: boolean
+        default: false
+
+    awareness_attribute:
+      name: attribute
+      in: path
+      required: true
+      description: |
+        The name of the awareness attribute. The attribute name must match
+        the values listed in the request body when assigning weights to zones.
+      schema:
+        type: string
+      example: zone
+
+    awareness_attribute_name:
+      name: awareness_attribute_name
+      in: path
+      required: true
+      description: The name of the awareness attribute.
+      schema:
+        type: string
+      example: zone
+
+    awareness_attribute_value:
+      name: awareness_attribute_value
+      in: path
+      required: true
+      description: The value of the awareness attribute. For example, if you have shards allocated in two different zones, you can give each zone a value of `zone-a` or `zone-b`. The cluster decommission operation decommissions the zone listed in the method.
+      schema:
+        type: string
+
+    format:
+      name: format
+      in: query
+      description: A short version of the Accept header, such as json or yaml.
+      schema:
+        type: string
+        enum: [json, yaml]
+
+    cluster_health_index:
+      name: index
+      in: path
+      required: true
+      description: The name of the index you want to query for. A single index or a comma-separated list of index names is supported.
+      schema:
+        type: string
+
+    expand_wildcards:
+      name: expand_wildcards
+      in: query
+      description: Expands wildcard expressions to concrete indexes. Combine multiple values with commas.
+      schema:
+        type: string
+        enum: [all, open, closed, hidden, none]
+        default: open
+
+    level:
+      name: level
+      in: query
+      description: The level of detail for returned health information.
+      schema:
+        type: string
+        enum: [cluster, indices, shards, awareness_attributes]
+        default: cluster
+
+    awareness_attribute_health:
+      name: awareness_attribute
+      in: query
+      description: |
+        The name of the awareness attribute, for which to return cluster health (for example, zone). Applicable only if `level` is set to `awareness_attributes`.
+      schema:
+        type: string
+
+    local:
+      name: local
+      in: query
+      description: Whether to return information from the local node only instead of from the cluster manager node.
+      schema:
+        type: boolean
+        default: false
+
+    cluster_manager_timeout:
+      name: cluster_manager_timeout
+      in: query
+      description: The amount of time to wait for a response from the cluster manager node.
+      schema:
+        type: string
+        default: 30s
+
+    timeout:
+      name: timeout
+      in: query
+      description: The amount of time to wait for a response. If the timeout expires, the request fails.
+      schema:
+        type: string
+        default: 30s
+
+    wait_for_active_shards:
+      name: wait_for_active_shards
+      in: query
+      description: Wait until the specified number of shards is active before returning a response. `all` for all shards.
+      schema:
+        type: string
+        default: 0
+
+    wait_for_nodes:
+      name: wait_for_nodes
+      in: query
+      description: Wait for N number of nodes. Use `12` for exact match, `>12` and `<12` for range.
+      schema:
+        type: string
+
+    wait_for_events:
+      name: wait_for_events
+      in: query
+      description: Wait until all currently queued events with the given priority are processed.
+      schema:
+        type: string
+        enum: [immediate, urgent, high, normal, low, languid]
+
+    wait_for_no_relocating_shards:
+      name: wait_for_no_relocating_shards
+      in: query
+      description: Whether to wait until there are no relocating shards in the cluster.
+      schema:
+        type: boolean
+        default: false
+
+    wait_for_no_initializing_shards:
+      name: wait_for_no_initializing_shards
+      in: query
+      description: Whether to wait until there are no initializing shards in the cluster.
+      schema:
+        type: boolean
+        default: false
+
+    wait_for_status:
+      name: wait_for_status
+      in: query
+      description: Wait until the cluster health reaches the specified status or better.
+      schema:
+        type: string
+        enum: [green, yellow, red]
+
+    weights:
+      name: weights
+      in: query
+      description: |
+        JSON. Assigns weights to attributes within the request body of the PUT request. Weights can be set in any ration, for example, 2:3:5. In a 2:3:5 ratio with three zones, for every 100 requests sent to the cluster, each zone would receive either 20, 30, or 50 search requests in a random order. When assigned a weight of 0, the zone does not receive any search traffic.
+      schema:
+        type: object
+
+    flat_settings:
+      name: flat_settings
+      in: query
+      description: |
+        Whether to return settings in the flat form, which can improve readability, especially for heavily nested settings.
+
+        For example, the flat form of `"cluster": { "max_shards_per_node": 500 }` is `"cluster.max_shards_per_node": "500"`.
+      schema:
+        type: boolean
+        default: false
+
+    include_defaults:
+      name: include_defaults
+      in: query
+      description: |
+        Whether to include default settings as part of the response. This parameter is useful for identifying
+        the names and current values of settings you want to update.
+      schema:
+        type: boolean
+
+    node_filters:
+      name: node_filters
+      in: path
+      required: true
+      description: |
+        A comma-separated list of node filters that Wazuh indexer uses to filter results. The following are supported:
+        - Predefined constants: `_local`, `_cluster_manager`, or `_all`
+        - An exact match for `nodeID`
+        - A simple case-sensitive wildcard pattern matching for node-name, host-name, or host-IP-address
+        - A simple case-sensitive wildcard pattern matching for node attributes: `<NODE_ATTRIBUTE*>:<ATTRIBUTE_VALUE*>`
+      schema:
+        type: string
+
+    metric:
+      name: metric
+      in: path
+      required: true
+      description: A comma-separated list of metric groups.
+      schema:
+        type: string
+        enum: [indices, os, process, jvm, fs, plugins, network_types, discovery_type, ingest]
+
+    index_metric:
+      name: index_metric
+      in: path
+      required: true
+      description: A comma-separated list of index metric groups.
+      schema:
+        type: string
+        enum: [shards, docs, store, fielddata, query_cache, completion, segments, mappings, analysis]
+
+  schemas:
+    ClusterAllocationExplainRequest:
+      type: object
+      properties:
+        current_node:
+          type: string
+          description: Specify the name of the node if you only want an explanation for when the shard is on that particular node.
+        index:
+          type: string
+          description: The name of the shard's index.
+        primary:
+          type: boolean
+          description: Indicates if the explanation should be provided for the primary shard (`true`) or its first replica (`false`). Note that both the primary shard and its first replica have the same shard ID.
+        shard:
+          type: integer
+          description: The shard ID that you want an explanation for.
+
+    ClusterAllocationExplainResponse:
+      type: object
+      properties:
+        index:
+          type: string
+          description: The name of the index which the shard belongs to.
+        shard:
+          type: integer
+          description: The numerical identifier of the specific shard being explained.
+        primary:
+          type: boolean
+          description: A boolean value that specifies whether the shard is a primary shard (`true`) or a replica shard (`false`).
+        current_state:
+          type: string
+          description: This field describes the current lifecycle state of the shard.
+        current_node:
+          type: object
+          properties:
+            id:
+              type: string
+              description: The unique identifier of the node where the shard is located.
+            name:
+              type: string
+              description: The human-readable name of the node.
+            transport_address:
+              type: string
+              description: The network address and port used for communication with the node.
+            attributes:
+              type: object
+            weight_ranking:
+              type: integer
+              description: A numerical value showing the ranking of the node regarding its suitability.
+        can_remain_on_current_node:
+          type: string
+          description: Indicates whether the shard is allowed to remain on its current node.
+        can_rebalance_cluster:
+          type: string
+          description: Indicating if the cluster is allowed to rebalance.
+        can_rebalance_to_other_node:
+          type: string
+          description: Indicates if the shard can be rebalanced to another node.
+        rebalance_explanation:
+          type: string
+          description: Explains why the `can_rebalance_to_other_node` field returned the value that it did.
+        node_allocation_decisions:
+          type: array
+          items:
+            type: object
+            properties:
+              node_id:
+                type: string
+                description: The unique identifier of a particular node in the cluster.
+              node_name:
+                type: string
+                description: The human-readable name of the node.
+              transport_address:
+                type: string
+                description: The network address and port used of the node.
+              node_decision:
+                type: string
+                description: Indicates the final allocation decision for the node.
+              weight_ranking:
+                type: integer
+                description: Represents the ranking of the node in the allocation process.
+              deciders:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    decider:
+                      type: string
+                      description: The name of the allocation decider (e.g., `disk`, `same_shard`, `filter`, `max_retry`).
+                    decision:
+                      type: string
+                      description: Indicates the decision made by the decider.
+                    explanation:
+                      type: string
+                      description: A detailed explanation of why the decider made its decision.
+
+    IndexNotFoundError:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            root_cause:
+              type: array
+              items:
+                type: object
+                properties:
+                  type: { type: string }
+                  reason: { type: string }
+                  index: { type: string }
+                  index_uuid: { type: string }
+            type: { type: string }
+            reason: { type: string }
+            index: { type: string }
+            index_uuid: { type: string }
+        status: { type: integer }
+
+    MethodNotAllowedError:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message indicating the HTTP method is not allowed.
+        status:
+          type: integer
+          description: HTTP status code.
+
+    ClusterRoutingWeightsRequest:
+      type: object
+      properties:
+        weights:
+          description: |
+            JSON. Text to assign weights to attributes within the request body of the PUT request. Weights can be set in any ratio, for example, 2:3:5. In a 2:3:5 ratio with 3 zones, for every 100 requests sent to the cluster, each zone would receive either 20, 30, or 50 search requests in a random order. When assigned a weight of 0, the zone does not receive any search traffic.
+          type: array
+          items:
+            type: object
+        _version:
+          type: integer
+          description: |
+            Implements optimistic concurrency control (OCC) through versioning.
+            The parameter uses simple versioning, such as 1, and increments upward
+            based on each subsequent modification. This allows any servers from which
+            a request originates to validate whether or not a zone has been modified.
+
+    ClusterRoutingWeightsResponse:
+      type: object
+      properties:
+        acknowledged:
+          type: boolean
+
+    ClusterException:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            root_cause:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                  reason:
+                    type: string
+            type:
+              type: string
+            reason:
+              type: string
+        status:
+          type: integer
+
+    ClusterHealthResponse:
+      type: object
+      properties:
+        cluster_name:
+          type: string
+          description: The name of the cluster.
+        status:
+          type: string
+          enum: [green, yellow, red]
+          description: The cluster health status, which represents the state of shard allocation in the cluster.
+        timed_out:
+          type: boolean
+          description: Whether the request timed out.
+        number_of_nodes:
+          type: integer
+          description: The number of nodes in the cluster.
+        number_of_data_nodes:
+          type: integer
+          description: The number of data nodes in the cluster.
+        discovered_master:
+          type: boolean
+          description: Specifies whether the master is discovered.
+        discovered_cluster_manager:
+          type: boolean
+          description: Specifies whether the cluster manager is discovered.
+        active_primary_shards:
+          type: integer
+          description: The number of active primary shards.
+        active_shards:
+          type: integer
+          description: The total number of active shards, including primary and replica shards.
+        relocating_shards:
+          type: integer
+          description: The number of relocating shards.
+        initializing_shards:
+          type: integer
+          description: The number of initializing shards.
+        unassigned_shards:
+          type: integer
+          description: The number of unassigned shards.
+        delayed_unassigned_shards:
+          type: integer
+          description: The number of delayed unassigned shards.
+        number_of_pending_tasks:
+          type: integer
+          description: The number of pending tasks in the cluster.
+        number_of_in_flight_fetch:
+          type: integer
+          description: The number of unfinished fetches.
+        task_max_waiting_in_queue_millis:
+          type: integer
+          description: The maximum wait time for all tasks waiting to be performed, in milliseconds.
+        active_shards_percent_as_number:
+          type: number
+          description: The percentage of active shards in the cluster.
+        awareness_attributes:
+          type: object
+          description: Contains cluster health information for each awareness attribute.
+
+    ClusterSettingsResponse:
+      type: object
+      properties:
+        acknowledged:
+          type: boolean
+          description: Returns a value to specify if the settings were acknowledged.
+        persistent:
+          type: object
+          description: Returns the persistent setting that was applied.
+        transient:
+          type: object
+          description: Returns the transient setting that was applied.
+        defaults:
+          type: object
+          description: Returns the default settings (only when `include_defaults=true`).
+
+    ClusterSettingsRequest:
+      type: object
+      properties:
+        persistent:
+          type: object
+        transient:
+          type: object
+
+    ClusterSettingsBadRequest:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            root_cause:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                  reason:
+                    type: string
+            type:
+              type: string
+            reason:
+              type: string
+        status:
+          type: integer
+
+    ClusterStatsResponse:
+      type: object
+      properties:
+        _nodes:
+          type: object
+          description: The number of nodes returned in the response.
+          properties:
+            total:
+              type: integer
+            successful:
+              type: integer
+            failed:
+              type: integer
+        cluster_name:
+          type: string
+          description: The cluster's name.
+        cluster_uuid:
+          type: string
+          description: The cluster's UUID.
+        timestamp:
+          type: integer
+          description: The Unix epoch time indicating when the cluster was last refreshed.
+        status:
+          type: string
+          description: The cluster's health status.
+        indices:
+          type: object
+          properties:
+            count:
+              type: integer
+              description: The number of indexes in the cluster.
+            shards:
+              type: object
+              description: Information about the cluster's shards.
+            docs:
+              type: object
+              description: The number of documents remaining in the cluster and the number of documents that were deleted.
+            store:
+              type: object
+              description: Information about the cluster's storage.
+            fielddata:
+              type: object
+              description: Information about the cluster's field data.
+            query_cache:
+              type: object
+              description: Data about the cluster's query cache.
+            completion:
+              type: object
+              description: The number of bytes in memory that were used to complete operations.
+            segments:
+              type: object
+              description: Information about the cluster's segments, which are small Lucene indexes.
+            mappings:
+              type: object
+              description: Information about mappings in the cluster.
+            analysis:
+              type: object
+              description: Information about analyzers used in the cluster.
+        nodes:
+          type: object
+          properties:
+            count:
+              type: object
+              description: The number of nodes returned by the request.
+            versions:
+              type: array
+              items:
+                type: string
+              description: The Wazuh indexer version number for each node.
+            os:
+              type: object
+              description: Information about the operating systems used by the nodes.
+            process:
+              type: object
+              description: A list of processes used by each node.
+            jvm:
+              type: object
+              description: Statistics about the JVMs in use.
+            fs:
+              type: object
+              description: Information about the node's file storage.
+            plugins:
+              type: array
+              items:
+                type: object
+              description: A list of the Wazuh indexer plugins integrated with the nodes.
+            network_types:
+              type: object
+              description: A list of the transport and HTTP networks connected to the nodes.
+            discovery_types:
+              type: object
+              description: A list of methods used by the nodes to find other nodes in the cluster.
+            packaging_types:
+              type: array
+              items:
+                type: object
+              description: Information about each node's Wazuh indexer distribution.
+            ingest:
+              type: object
+              description: Information about the node's ingest pipelines/nodes, if there are any.
+        total_time_spent:
+          type: integer
+          description: The total amount of download and upload time spent across all shards in the cluster when downloading or uploading from the remote store.
+
+  requestBodies:
+    ClusterAllocationExplainRequest:
+      content:
+        application/json:
+          schema:
+            $ref: 'cluster_api.yml#/components/schemas/ClusterAllocationExplainRequest'
+          example:
+            index: "wazuh-statistics-2025.8w"
+            shard: 0
+            primary: true
+
+    ClusterRoutingWeightsRequest:
+      content:
+        application/json:
+          schema:
+            $ref: 'cluster_api.yml#/components/schemas/ClusterRoutingWeightsRequest'
+          example:
+            weights:
+              zone_1: "1"
+              zone_2: "1"
+              zone_3: "0"
+            _version: 1
+
+    ClusterSettingsRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ClusterSettingsRequest'
+          example:
+            transient:
+              cluster.max_shards_per_node: 500
+
+  responses:
+    ClusterAllocationExplainSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ClusterAllocationExplainResponse'
+          example:
+            index: "wazuh-statistics-2025.8w"
+            shard: 0
+            primary: true
+            current_state: "started"
+            current_node:
+              id: "XyGg_gfbR0-X-5XpDVKxdg"
+              name: "node-1"
+              transport_address: "127.0.0.1:9300"
+              attributes:
+                shard_indexing_pressure_enabled: "true"
+              weight_ranking: 1
+            can_remain_on_current_node: "yes"
+            can_rebalance_cluster: "yes"
+            can_rebalance_to_other_node: "no"
+            rebalance_explanation: "cannot rebalance as no target node exists that can both allocate this shard and improve the cluster balance"
+
+    ClusterAllocExplainBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  root_cause:
+                    type: object
+                    properties:
+                      type: { type: string }
+                      reason: { type: string }
+              status: { type: integer }
+          example:
+            missingText:
+              value:
+                error:
+                  root_cause:
+                    - type: "illegal_argument_exception"
+                      reason: "request [/_cluster/allocation/explain] contains unrecognized parameter: [v1]"
+                  type: "illegal_argument_exception"
+                  reason: "request [/_cluster/allocation/explain] contains unrecognized parameter: [v1]"
+                status: 400
+
+    IndexNotFound:
+      description: Response to report an index not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IndexNotFoundError'
+          example:
+            error:
+              root_cause:
+                - type: "index_not_found_exception"
+                  reason: "no such index [movies]"
+                  index: "movies"
+                  index_uuid: "_na_"
+              type: "index_not_found_exception"
+              reason: "no such index [movies]"
+              index: "movies"
+              index_uuid: "_na_"
+            status: 404
+
+    MethodNotAllowed:
+      description: Response to report an invalid HTTP method
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/MethodNotAllowedError'
+          example:
+            error: "Incorrect HTTP method for uri [/_cluster/allocation/explain?pretty] and method [PUT], allowed: [GET, POST]"
+            status: 405
+
+    ClusterRoutingWeightsSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ClusterRoutingWeightsResponse'
+          example:
+            acknowledged: true
+
+    ClusterRoutingDeleteSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              acknowledged:
+                type: boolean
+          example:
+            acknowledged: true
+
+    ClusterRoutingBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ClusterException'
+          example:
+            error:
+              root_cause:
+                - type: "action_request_validation_exception"
+                  reason: "Validation Failed: 1: invalid awareness attribute zone requested for weighted routing;"
+              type: "action_request_validation_exception"
+              reason: "Validation Failed: 1: invalid awareness attribute zone requested for weighted routing;"
+            status: 400
+
+    ClusterRoutingForbidden:
+      description: Response to report a permission denied request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ClusterException'
+          example:
+            error:
+              root_cause:
+                - type: "security_exception"
+                  reason: "no permissions for [cluster:admin/routing/awareness/weights/get] and User [name=test, backend_roles=[], requestedTenant=null]"
+              type: "security_exception"
+              reason: "no permissions for [cluster:admin/routing/awareness/weights/get] and User [name=test, backend_roles=[], requestedTenant=null]"
+            status: 403
+
+    ClusterRoutingServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ClusterException'
+          example:
+            error:
+              root_cause:
+                - type: "null_pointer_exception"
+                  reason: "Cannot invoke \"org.opensearch.cluster.routing.WeightedRouting.attributeName()\" because \"this.weightedRouting\" is null"
+              type: "null_pointer_exception"
+              reason: "Cannot invoke \"org.opensearch.cluster.routing.WeightedRouting.attributeName()\" because \"this.weightedRouting\" is null"
+            status: 500
+
+    DecommissionSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties:
+              type: string
+              enum: [INIT, DRAINING, IN_PROGRESS, SUCCESSFUL, FAILED]
+          example:
+            zone-1: "INIT"
+
+    BadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: 'spec.yml#/components/schemas/SecurityError'
+          example:
+            scrollError:
+              value:
+                error:
+                  root_cause:
+                    - type: "illegal_argument_exception"
+                      reason: "request [/_cluster/decommission/awareness/zone/_status] contains unrecognized parameter: [vformat] -> did you mean [format]?"
+                  type: "illegal_argument_exception"
+                  reason: "request [/_cluster/decommission/awareness/zone/_status] contains unrecognized parameter: [vformat] -> did you mean [format]?"
+                status: 400
+
+    Forbidden:
+      description: Response to report a permission denied request
+      content:
+        application/json:
+          schema:
+            $ref: 'spec.yml#/components/schemas/SecurityError'
+          example:
+            error:
+              root_cause:
+                - type: "security_exception"
+                  reason: "no permissions for [cluster:admin/decommission/awareness/get] and User [name=test, backend_roles=[], requestedTenant=null]"
+              type: "security_exception"
+              reason: "no permissions for [cluster:admin/decommission/awareness/get] and User [name=test, backend_roles=[], requestedTenant=null]"
+            status: 403
+
+    ClusterHealthSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ClusterHealthResponse'
+          example:
+            cluster_name: "wazuh-cluster"
+            status: "green"
+            timed_out: false
+            number_of_nodes: 1
+            number_of_data_nodes: 1
+            discovered_master: true
+            discovered_cluster_manager: true
+            active_primary_shards: 111
+            active_shards: 111
+            relocating_shards: 0
+            initializing_shards: 0
+            unassigned_shards: 0
+            delayed_unassigned_shards: 0
+            number_of_pending_tasks: 0
+            number_of_in_flight_fetch: 0
+            task_max_waiting_in_queue_millis: 0
+            active_shards_percent_as_number: 100.0
+
+    ClusterHealthBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: 'spec.yml#/components/schemas/SecurityError'
+          example:
+            scrollError:
+              value:
+                error:
+                  root_cause:
+                    - type: "illegal_argument_exception"
+                      reason: "request [/_cluster/health] contains unrecognized parameter: [v]"
+                  type: "illegal_argument_exception"
+                  reason: "request [/_cluster/health] contains unrecognized parameter: [v]"
+                status: 400
+
+    ClusterHealthForbidden:
+      description: Response to report a permission denied request
+      content:
+        application/json:
+          schema:
+            $ref: 'spec.yml#/components/schemas/SecurityError'
+          example:
+            error:
+              root_cause:
+                - type: "security_exception"
+                  reason: "no permissions for [cluster:monitor/health] and User [name=test, backend_roles=[], requestedTenant=null]"
+              type: "security_exception"
+              reason: "no permissions for [cluster:monitor/health] and User [name=test, backend_roles=[], requestedTenant=null]"
+            status: 403
+
+    ClusterHealthMethodNotAllowed:
+      description: Response to report an invalid HTTP method
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/MethodNotAllowedError'
+          example:
+            error: "Incorrect HTTP method for uri [/_cluster/health?format=json&pretty] and method [PUT], allowed: [GET]"
+            status: 405
+
+    ClusterSettingsSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ClusterSettingsResponse'
+          example:
+            acknowledged: true
+            persistent: {}
+            transient:
+              cluster:
+                max_shards_per_node: "500"
+
+    ClusterSettingsBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ClusterSettingsBadRequest'
+          example:
+            error:
+              root_cause:
+                - type: "illegal_argument_exception"
+                  reason: "transient setting [custer.max_shards_per_node], not recognized"
+              type: "illegal_argument_exception"
+              reason: "transient setting [custer.max_shards_per_node], not recognized"
+            status: 400
+
+    ClusterSettingsForbidden:
+      description: Response to report a permission denied request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ClusterException'
+          example:
+            error:
+              root_cause:
+                - type: "security_exception"
+                  reason: "no permissions for [cluster:admin/settings/update] and User [name=test, backend_roles=[], requestedTenant=null]"
+              type: "security_exception"
+              reason: "no permissions for [cluster:admin/settings/update] and User [name=test, backend_roles=[], requestedTenant=null]"
+            status: 403
+
+    ClusterStatsSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ClusterStatsResponse'
+          example:
+            _nodes:
+              total: 1
+              successful: 1
+              failed: 0
+            cluster_name: "wazuh-cluster"
+            cluster_uuid: "WsfeldPUTGukOF2OYtQUQQ"
+            timestamp: 1742951639741
+            status: "green"
+            indices:
+              count: 66
+              shards:
+                total: 146
+                primaries: 146
+                replication: 0.0
+                index:
+                  shards:
+                    min: 1
+                    max: 3
+                    avg: 2.212121212121212
+                  primaries:
+                    min: 1
+                    max: 3
+                    avg: 2.212121212121212
+                  replication:
+                    min: 0.0
+                    max: 0.0
+                    avg: 0.0
+              docs:
+                count: 36182
+                deleted: 77
+              store:
+                size_in_bytes: 76027454
+                reserved_in_bytes: 0
+              fielddata:
+                memory_size_in_bytes: 0
+                evictions: 0
+              query_cache:
+                memory_size_in_bytes: 0
+                total_count: 0
+                hit_count: 0
+                miss_count: 0
+                cache_size: 0
+                cache_count: 0
+                evictions: 0
+              completion:
+                size_in_bytes: 0
+              segments:
+                count: 678
+                memory_in_bytes: 0
+                terms_memory_in_bytes: 0
+                stored_fields_memory_in_bytes: 0
+                term_vectors_memory_in_bytes: 0
+                norms_memory_in_bytes: 0
+                points_memory_in_bytes: 0
+                doc_values_memory_in_bytes: 0
+                index_writer_memory_in_bytes: 0
+                version_map_memory_in_bytes: 0
+                fixed_bit_set_memory_in_bytes: 28920
+                max_unsafe_auto_id_timestamp: 1742919403510
+                remote_store:
+                  upload:
+                    total_upload_size:
+                      started_bytes: 0
+                      succeeded_bytes: 0
+                      failed_bytes: 0
+                    refresh_size_lag:
+                      total_bytes: 0
+                      max_bytes: 0
+                    max_refresh_time_lag_in_millis: 0
+                    total_time_spent_in_millis: 0
+                    pressure:
+                      total_rejections: 0
+                  download:
+                    total_download_size:
+                      started_bytes: 0
+                      succeeded_bytes: 0
+                      failed_bytes: 0
+                    total_time_spent_in_millis: 0
+                segment_replication:
+                  max_bytes_behind: 0
+                  total_bytes_behind: 0
+                  max_replication_lag: 0
+                file_sizes: {}
+              mappings:
+                field_types:
+                  - name: "boolean"
+                    count: 45
+                    index_count: 42
+                  - name: "date"
+                    count: 1258
+                    index_count: 63
+                  - name: "double"
+                    count: 200
+                    index_count: 40
+                  - name: "flat_object"
+                    count: 1
+                    index_count: 1
+                  - name: "float"
+                    count: 3
+                    index_count: 1
+                  - name: "geo_point"
+                    count: 80
+                    index_count: 40
+                  - name: "integer"
+                    count: 182
+                    index_count: 43
+                  - name: "ip"
+                    count: 320
+                    index_count: 40
+                  - name: "keyword"
+                    count: 22779
+                    index_count: 66
+                  - name: "long"
+                    count: 2884
+                    index_count: 59
+                  - name: "nested"
+                    count: 287
+                    index_count: 41
+                  - name: "object"
+                    count: 3520
+                    index_count: 62
+                  - name: "text"
+                    count: 831
+                    index_count: 62
+              analysis:
+                char_filter_types: []
+                tokenizer_types: []
+                filter_types: []
+                analyzer_types: []
+                built_in_char_filters: []
+                built_in_tokenizers: []
+                built_in_filters: []
+                built_in_analyzers:
+                  - name: "whitespace"
+                    count: 1
+                    index_count: 1
+            nodes:
+              count:
+                total: 1
+                cluster_manager: 1
+                coordinating_only: 0
+                data: 1
+                ingest: 1
+                master: 1
+                remote_cluster_client: 1
+                search: 0
+              versions:
+                - "2.16.0"
+              os:
+                available_processors: 2
+                allocated_processors: 2
+                names:
+                  - name: "Linux"
+                    count: 1
+                pretty_names:
+                  - pretty_name: "Ubuntu 22.04.1 LTS"
+                    count: 1
+                mem:
+                  total_in_bytes: 4097409024
+                  free_in_bytes: 105721856
+                  used_in_bytes: 3991687168
+                  free_percent: 3
+                  used_percent: 97
+              process:
+                cpu:
+                  percent: 4
+                open_file_descriptors:
+                  min: 1577
+                  max: 1577
+                  avg: 1577
+              jvm:
+                max_uptime_in_millis: 331659
+                versions:
+                  - version: "21.0.3"
+                    vm_name: "OpenJDK 64-Bit Server VM"
+                    vm_version: "21.0.3+9-LTS"
+                    vm_vendor: "Eclipse Adoptium"
+                    bundled_jdk: true
+                    using_bundled_jdk: true
+                    count: 1
+                mem:
+                  heap_used_in_bytes: 418789984
+                  heap_max_in_bytes: 1073741824
+                threads: 87
+              fs:
+                total_in_bytes: 62692343808
+                free_in_bytes: 38146904064
+                available_in_bytes: 35365666816
+                cache_reserved_in_bytes: 0
+              plugins:
+                - name: "opensearch-neural-search"
+                  version: "2.16.0.0"
+                  opensearch_version: "2.16.0"
+                  java_version: "11"
+                  description: "A plugin that adds dense neural retrieval into the OpenSearch ecosytem"
+                  classname: "org.opensearch.neuralsearch.plugin.NeuralSearch"
+                  custom_foldername: ""
+                  extended_plugins:
+                    - "opensearch-knn"
+                  has_native_controller: false
+                - name: "opensearch-security"
+                  version: "2.16.0.0"
+                  opensearch_version: "2.16.0"
+                  java_version: "11"
+                  description: "Provide access control related features for OpenSearch"
+                  classname: "org.opensearch.security.OpenSearchSecurityPlugin"
+                  custom_foldername: ""
+                  extended_plugins: []
+                  has_native_controller: false
+              network_types:
+                transport_types:
+                  org.opensearch.security.ssl.http.netty.SecuritySSLNettyTransport: 1
+                http_types:
+                  org.opensearch.security.http.SecurityHttpServerTransport: 1
+              discovery_types:
+                zen: 1
+              packaging_types:
+                - type: "deb"
+                  count: 1
+              ingest:
+                number_of_pipelines: 1
+                processor_stats:
+                  date:
+                    count: 374
+                    failed: 0
+                    current: 0
+                    time_in_millis: 17844
+                  date_index_name:
+                    count: 374
+                    failed: 0
+                    current: 0
+                    time_in_millis: 31450
+                  geoip:
+                    count: 2992
+                    failed: 0
+                    current: 0
+                    time_in_millis: 39656
+                  json:
+                    count: 374
+                    failed: 0
+                    current: 0
+                    time_in_millis: 6722
+                  remove:
+                    count: 5610
+                    failed: 0
+                    current: 0
+                    time_in_millis: 6650
+                  set:
+                    count: 748
+                    failed: 0
+                    current: 0
+                    time_in_millis: 16598
+
+    ClusterStatsBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ClusterException'
+          example:
+            error:
+              root_cause:
+                - type: "illegal_argument_exception"
+                  reason: "request [/_cluster/stats] contains unrecognized parameter: [v1]"
+              type: "illegal_argument_exception"
+              reason: "request [/_cluster/stats] contains unrecognized parameter: [v1]"
+            status: 400
+
+    ClusterStatsForbidden:
+      description: Response to report a permission denied request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ClusterException'
+          example:
+            error:
+              root_cause:
+                - type: "security_exception"
+                  reason: "no permissions for [cluster:monitor/stats] and User [name=test, backend_roles=[], requestedTenant=null]"
+              type: "security_exception"
+              reason: "no permissions for [cluster:monitor/stats] and User [name=test, backend_roles=[], requestedTenant=null]"
+            status: 403
+
+    ClusterStatsMethodNotAllowed:
+      description: Response to report an invalid HTTP method
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/MethodNotAllowedError'
+          example:
+            error: "Incorrect HTTP method for uri [/_cluster/stats?pretty] and method [PUT], allowed: [GET]"
+            status: 405
