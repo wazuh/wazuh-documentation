@@ -66,14 +66,11 @@ Below are the files that would be found in this folder on an agent assigned to t
 |    │   ├── custom_rootcheck.txt                     |    ├── debian_ports_check.txt                       |
 |    │   ├── debian_ports_check.txt                   |    ├── debian_test_files.txt                        |
 |    │   ├── debian_test_files.txt                    |    ├── merged.mg                                    |
-|    │   ├── merged.mg                                |    ├── rootkit_files.txt                            |
-|    │   ├── rootkit_files.txt                        |    ├── rootkit_trojans.txt                          |
-|    │   ├── rootkit_trojans.txt                      |    ├── system_audit_rcl.txt                         |
+|    │   ├── merged.mg                                |    ├── system_audit_rcl.txt                         |
 |    │   ├── system_audit_rcl.txt                     |    ├── system_audit_ssh.txt                         |
 |    │   ├── system_audit_ssh.txt                     |    ├── win_applications_rcl.txt                     |
-|    │   ├── win_applications_rcl.txt                 |    ├── win_audit_rcl.txt                            |
-|    │   ├── win_audit_rcl.txt                        |    └── win_malware_rcl.txt                          |
-|    │   └── win_malware_rcl.txt                      |                                                     |
+|    │   ├── win_applications_rcl.txt                 |    └── win_audit_rcl.txt                            |
+|    │   └── win_audit_rcl.txt                        |                                                     |
 |    └── default                                      |                                                     |
 |        ├── agent.conf                               |                                                     |
 |        ├── cis_debian_linux_rcl.txt                 |                                                     |
@@ -84,13 +81,10 @@ Below are the files that would be found in this folder on an agent assigned to t
 |        ├── cis_sles11_linux_rcl.txt                 |                                                     |
 |        ├── cis_sles12_linux_rcl.txt                 |                                                     |
 |        ├── merged.mg                                |                                                     |
-|        ├── rootkit_files.txt                        |                                                     |
-|        ├── rootkit_trojans.txt                      |                                                     |
 |        ├── system_audit_rcl.txt                     |                                                     |
 |        ├── system_audit_ssh.txt                     |                                                     |
 |        ├── win_applications_rcl.txt                 |                                                     |
-|        ├── win_audit_rcl.txt                        |                                                     |
-|        └── win_malware_rcl.txt                      |                                                     |
+|        └── win_audit_rcl.txt                        |                                                     |
 +-----------------------------------------------------+-----------------------------------------------------+
 
 The proper syntax of ``agent.conf`` is shown below along with the process for pushing the configuration from the manager to the agent.
