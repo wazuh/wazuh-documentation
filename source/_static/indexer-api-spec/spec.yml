@@ -367,31 +367,7 @@ paths:
     $ref: 'search_api.yml#/paths/~1{index}~1_search'
 
   /_plugins/_security_analytics/detectors:
-    post:
-      tags:
-        - Stats API
-      summary: Stats API
-      description: |
-        The Stats API uses the stats operation to track and monitor shard indexing backpressure.
-      operationId: getStatsAPI
-      security:
-        - basicAuth: []
-        - jwtAuth: []
-      parameters:
-        - $ref: 'stats_api.yml#/components/parameters/top'
-        - $ref: 'stats_api.yml#/components/parameters/include_all'
-        - $ref: 'stats_api.yml#/components/parameters/pretty'
-      responses:
-        '200':
-          $ref: 'stats_api.yml#/components/responses/StatsSuccess'
-        '400':
-          $ref: 'stats_api.yml#/components/responses/StatsBadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: 'stats_api.yml#/components/responses/StatsForbidden'
-        '404':
-          $ref: 'stats_api.yml#/components/responses/StatsNotFound'
+    $ref: 'stats_api.yml#/paths/~1_plugins~1_security_analytics~1detectors'
 
   /_plugins/_security_analytics/logtype:
     $ref: 'logtype_api.yml#/paths/~1_plugins~1_security_analytics~1logtype'
@@ -403,69 +379,10 @@ paths:
     $ref: 'logtype_api.yml#/paths/~1_plugins~1_security_analytics~1logtype~1{log_type_id}'
 
   /_tasks:
-    get:
-      tags:
-        - Tasks
-      summary: Get all tasks
-      description: |
-        Retrieves details about tasks that are currently running within the cluster.
-      operationId: getAllTasks
-      security:
-        - basicAuth: []
-        - jwtAuth: []
-      parameters:
-        - $ref: 'tasks_api.yml#/components/parameters/nodes'
-        - $ref: 'tasks_api.yml#/components/parameters/actions'
-        - $ref: 'tasks_api.yml#/components/parameters/detailed'
-        - $ref: 'tasks_api.yml#/components/parameters/parent_task_id'
-        - $ref: 'tasks_api.yml#/components/parameters/wait_for_completion'
-        - $ref: 'tasks_api.yml#/components/parameters/group_by'
-        - $ref: 'tasks_api.yml#/components/parameters/timeout'
-        - $ref: 'tasks_api.yml#/components/parameters/cluster_manager_timeout'
-      responses:
-        '200':
-          $ref: 'tasks_api.yml#/components/responses/TasksSuccess'
-        '400':
-          $ref: 'tasks_api.yml#/components/responses/TasksBadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: 'tasks_api.yml#/components/responses/TasksForbidden'
-        '404':
-          $ref: 'tasks_api.yml#/components/responses/TasksNotFound'
+    $ref: 'tasks_api.yml#/paths/~1_tasks'
 
   /_tasks/{TASK_ID}:
-    get:
-      tags:
-        - Tasks
-      summary: Get specific task
-      description: |
-        Retrieves details about tasks that are currently running within the cluster.
-      operationId: getTaskById
-      security:
-        - basicAuth: []
-        - jwtAuth: []
-      parameters:
-        - $ref: 'tasks_api.yml#/components/parameters/TaskId'
-        - $ref: 'tasks_api.yml#/components/parameters/nodes'
-        - $ref: 'tasks_api.yml#/components/parameters/actions'
-        - $ref: 'tasks_api.yml#/components/parameters/detailed'
-        - $ref: 'tasks_api.yml#/components/parameters/parent_task_id'
-        - $ref: 'tasks_api.yml#/components/parameters/wait_for_completion'
-        - $ref: 'tasks_api.yml#/components/parameters/group_by'
-        - $ref: 'tasks_api.yml#/components/parameters/timeout'
-        - $ref: 'tasks_api.yml#/components/parameters/cluster_manager_timeout'
-      responses:
-        '200':
-          $ref: 'tasks_api.yml#/components/responses/TasksSuccess'
-        '400':
-          $ref: 'tasks_api.yml#/components/responses/TasksBadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: 'tasks_api.yml#/components/responses/TasksForbidden'
-        '404':
-          $ref: 'tasks_api.yml#/components/responses/TasksNotFound'
+    $ref: 'tasks_api.yml#/paths/~1_tasks~1{TASK_ID}'
 
   /_plugins/_transform/{TRANSFORM_ID}:
     $ref: 'transforms_api.yml#/paths/~1_plugins~1_transform~1{TRANSFORM_ID}'
@@ -592,186 +509,16 @@ paths:
     $ref: 'miscellaneous_api.yml#/paths/~1_remote~1info'
 
   /_plugins/_rollup/jobs/{ROLLUP_ID}:
-    put:
-      tags:
-        - Index rollups API
-      summary: Create or update an index rollup job
-      description: |
-        Creates or modifies an index rollup job. The `seq_no` and `primary_term` parameters are required for the update operation.
-      operationId: createOrUpdateRollupJob
-      security:
-        - basicAuth: []
-        - jwtAuth: []
-      parameters:
-        - $ref: 'index_rollup.yml#/components/parameters/RollupId'
-        - $ref: 'index_rollup.yml#/components/parameters/if_seq_no'
-        - $ref: 'index_rollup.yml#/components/parameters/if_primary_term'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: 'index_rollup.yml#/components/schemas/CreateRollupRequest'
-            example:
-              rollup:
-                source_index: "wazuh-alerts-4.x-2025.03.11"
-                target_index: "wazuh-alerts-4.x-2025.03.12"
-                schedule:
-                  interval:
-                    period: 1
-                    unit: "Days"
-                description: "Example rollup job"
-                enabled: true
-                page_size: 200
-                delay: 0
-                roles:
-                  - "rollup_all"
-                  - "nyc_taxi_all"
-                  - "example_rollup_index_all"
-                continuous: false
-                dimensions:
-                  - date_histogram:
-                      source_field: "tpep_pickup_datetime"
-                      fixed_interval: "1h"
-                      timezone: "America/Los_Angeles"
-                  - terms:
-                      source_field: "PULocationID"
-                metrics:
-                  - source_field: "passenger_count"
-                    metrics:
-                      - avg: {}
-                      - sum: {}
-                      - max: {}
-                      - min: {}
-                      - value_count: {}
-      responses:
-        '200':
-          $ref: 'index_rollup.yml#/components/responses/RollupJobCreated'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '409':
-          $ref: 'index_rollup.yml#/components/responses/RollupConflict'
-    get:
-      tags:
-        - Index rollups API
-      summary: Get an index rollup job
-      description: |
-        Retrieves complete details of an index rollup job using the specified `rollup_id`.
-      operationId: getRollupJob
-      security:
-        - basicAuth: []
-        - jwtAuth: []
-      parameters:
-        - $ref: 'index_rollup.yml#/components/parameters/RollupId'
-      responses:
-        '200':
-          $ref: 'index_rollup.yml#/components/responses/RollupJobRetrieved'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: 'index_rollup.yml#/components/responses/RollupNotFound'
-    delete:
-      tags:
-        - Index rollups API
-      summary: Delete an index rollup job
-      description: |
-        Deletes an index rollup job based on the `rollup_id`.
-      operationId: deleteRollupJob
-      security:
-        - basicAuth: []
-        - jwtAuth: []
-      parameters:
-        - $ref: 'index_rollup.yml#/components/parameters/RollupId'
-      responses:
-        '200':
-          $ref: 'index_rollup.yml#/components/responses/RollupJobDeleted'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: 'index_rollup.yml#/components/responses/RollupNotFound'
+    $ref: 'index_rollup.yml#/paths/~1_plugins~1_rollup~1jobs~1{ROLLUP_ID}'
 
   /_plugins/_rollup/jobs/{ROLLUP_ID}/_start:
-    post:
-      tags:
-        - Index rollups API
-      summary: Start an index rollup job
-      description: |
-        This API operation start or stop an index rollup job.
-      operationId: startRollupJob
-      security:
-        - basicAuth: []
-        - jwtAuth: []
-      parameters:
-        - $ref: 'index_rollup.yml#/components/parameters/RollupId'
-      responses:
-        '200':
-          $ref: 'index_rollup.yml#/components/responses/RollupJobStarted'
-        '400':
-          $ref: 'index_rollup.yml#/components/responses/RollupBadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: 'index_rollup.yml#/components/responses/RollupNotFound'
+    $ref: 'index_rollup.yml#/paths/~1_plugins~1_rollup~1jobs~1{ROLLUP_ID}~1_start'
 
   /_plugins/_rollup/jobs/{ROLLUP_ID}/_stop:
-    post:
-      tags:
-        - Index rollups API
-      summary: Stop an index rollup job
-      description: |
-        This API operation start or stop an index rollup job.
-      operationId: stopRollupJob
-      security:
-        - basicAuth: []
-        - jwtAuth: []
-      parameters:
-        - $ref: 'index_rollup.yml#/components/parameters/RollupId'
-      responses:
-        '200':
-          $ref: 'index_rollup.yml#/components/responses/RollupJobStopped'
-        '400':
-          $ref: 'index_rollup.yml#/components/responses/RollupBadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: 'index_rollup.yml#/components/responses/RollupNotFound'
+    $ref: 'index_rollup.yml#/paths/~1_plugins~1_rollup~1jobs~1{ROLLUP_ID}~1_stop'
 
   /_plugins/_rollup/jobs/{ROLLUP_ID}/_explain:
-    get:
-      tags:
-        - Index rollups API
-      summary: Explain an index rollup job
-      description: |
-        Provides comprehensive metadata about the index rollup job, including its current execution status and progress.
-      operationId: explainRollupJob
-      security:
-        - basicAuth: []
-        - jwtAuth: []
-      parameters:
-        - $ref: 'index_rollup.yml#/components/parameters/RollupId'
-      responses:
-        '200':
-          $ref: 'index_rollup.yml#/components/responses/RollupJobExplained'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: 'index_rollup.yml#/components/responses/RollupNotFound'
+    $ref: 'index_rollup.yml#/paths/~1_plugins~1_rollup~1jobs~1{ROLLUP_ID}~1_explain'
 
 components:
   parameters:
