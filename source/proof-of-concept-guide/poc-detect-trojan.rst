@@ -32,10 +32,6 @@ By default, the Wazuh rootcheck module is enabled in the Wazuh agent configurati
 
    <rootcheck>
        <disabled>no</disabled>
-       <check_files>yes</check_files>
-
-       <!-- Line for trojans detection -->
-       <check_trojans>yes</check_trojans>
 
        <check_dev>yes</check_dev>
        <check_sys>yes</check_sys>
@@ -45,8 +41,6 @@ By default, the Wazuh rootcheck module is enabled in the Wazuh agent configurati
 
        <!-- Frequency that rootcheck is executed - every 12 hours -->
        <frequency>43200</frequency>
-       <rootkit_files>/var/ossec/etc/shared/rootkit_files.txt</rootkit_files>
-       <rootkit_trojans>/var/ossec/etc/shared/rootkit_trojans.txt</rootkit_trojans>
        <skip_nfs>yes</skip_nfs>
    </rootcheck>
 

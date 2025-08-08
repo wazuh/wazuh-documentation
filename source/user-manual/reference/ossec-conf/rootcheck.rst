@@ -22,27 +22,15 @@ Options
 
 - `base_directory`_
 - `ignore`_
-- `rootkit_files`_
-- `rootkit_trojans`_
-- `windows_audit`_
-- `system_audit`_
-- `windows_apps`_
-- `windows_malware`_
 - `scanall`_
 - `readall`_
 - `frequency`_
 - `disabled`_
 - `check_dev`_
-- `check_files`_
 - `check_if`_
 - `check_pids`_
 - `check_ports`_
 - `check_sys`_
-- `check_trojans`_
-- `check_unixaudit`_
-- `check_winapps`_
-- `check_winaudit`_
-- `check_winmalware`_
 - `skip_nfs`_
 
 base_directory
@@ -71,7 +59,7 @@ List of files or directories to be ignored (one entry per line). Multiple lines 
 +--------------------+-----------------------------------+
 | **Allowed values** | sregex                            |
 +--------------------+-----------------------------------+
-| **Valid for**      | check_sys, check_dev, check_files |
+| **Valid for**      | check_sys, check_dev              |
 +--------------------+-----------------------------------+
 
 Attributes:
@@ -81,81 +69,6 @@ Attributes:
 +          +---------------------+------------------------------------+
 |          | Allowed values      | sregex                             |
 +----------+---------------------+------------------------------------+
-
-.. _reference_ossec_rootcheck_rootkit_files:
-
-rootkit_files
-^^^^^^^^^^^^^
-
-Change the location of the rootkit files database.
-
-+--------------------+------------------------------------------+
-| **Default value**  | etc/shared/rootkit_files.txt             |
-+--------------------+------------------------------------------+
-| **Allowed values** | A file with the rootkit files signatures |
-+--------------------+------------------------------------------+
-
-.. note::
-  Paths can be referred to as relative paths under the Wazuh installation directory or full paths.
-
-.. _reference_ossec_rootcheck_rootkit_trojans:
-
-rootkit_trojans
-^^^^^^^^^^^^^^^
-
-Change the location of the rootkit trojans database.
-
-+--------------------+-------------------------------------------+
-| **Default value**  | etc/shared/rootkit_trojans.txt            |
-+--------------------+-------------------------------------------+
-| **Allowed values** | A file with the trojans signatures        |
-+--------------------+-------------------------------------------+
-
-windows_audit
-^^^^^^^^^^^^^
-
-Specifies the path to a Windows audit definition file.
-
-+--------------------+-----------------------------------------+
-| **Default value**  | n/a                                     |
-+--------------------+-----------------------------------------+
-| **Allowed values** | Path to a Windows audit definition file |
-+--------------------+-----------------------------------------+
-
-.. _reference_ossec_rootcheck_audit:
-
-system_audit
-^^^^^^^^^^^^
-
-Specifies the path to an audit definition file for Unix-like systems.
-
-+--------------------+---------------------------------------------+
-| **Default value**  | n/a                                         |
-+--------------------+---------------------------------------------+
-| **Allowed values** | Audit definition file for Unix-like systems |
-+--------------------+---------------------------------------------+
-
-windows_apps
-^^^^^^^^^^^^
-
-Specifies the path to a Windows application definition file.
-
-+--------------------+-----------------------------------------+
-| **Default value**  | n/a                                     |
-+--------------------+-----------------------------------------+
-| **Allowed values** | Path to a Windows application def. file |
-+--------------------+-----------------------------------------+
-
-windows_malware
-^^^^^^^^^^^^^^^
-
-Specifies the path to a Windows malware definitions file.
-
-+--------------------+--------------------------------------------+
-| **Default value**  | n/a                                        |
-+--------------------+--------------------------------------------+
-| **Allowed values** | Path to a Windows malware definitions file |
-+--------------------+--------------------------------------------+
 
 scanall
 ^^^^^^^
@@ -215,17 +128,6 @@ Enable or disable the checking of /dev.
 | **Allowed values** | yes, no |
 +--------------------+---------+
 
-check_files
-^^^^^^^^^^^
-
-Enable or disable the checking of files.
-
-+--------------------+---------+
-| **Default value**  | yes     |
-+--------------------+---------+
-| **Allowed values** | yes, no |
-+--------------------+---------+
-
 check_if
 ^^^^^^^^
 
@@ -270,61 +172,6 @@ Enable or disable checking for anomalous file system objects.
 | **Allowed values** | yes, no |
 +--------------------+---------+
 
-check_trojans
-^^^^^^^^^^^^^
-
-Enable or disable checking for trojans.
-
-+--------------------+---------+
-| **Default value**  | yes     |
-+--------------------+---------+
-| **Allowed values** | yes, no |
-+--------------------+---------+
-
-check_unixaudit
-^^^^^^^^^^^^^^^
-
-Enable or disable the checking of unixaudit.
-
-+--------------------+---------+
-| **Default value**  | yes     |
-+--------------------+---------+
-| **Allowed values** | yes, no |
-+--------------------+---------+
-
-check_winapps
-^^^^^^^^^^^^^
-
-Enable or disable the checking of winapps.
-
-+--------------------+---------+
-| **Default value**  | yes     |
-+--------------------+---------+
-| **Allowed values** | yes, no |
-+--------------------+---------+
-
-check_winaudit
-^^^^^^^^^^^^^^
-
-Enable or disable the checking of winaudit.
-
-+--------------------+---------+
-| **Default value**  | yes     |
-+--------------------+---------+
-| **Allowed values** | yes, no |
-+--------------------+---------+
-
-check_winmalware
-^^^^^^^^^^^^^^^^
-
-Enable or disable checking for Windows malware.
-
-+--------------------+---------+
-| **Default value**  | yes     |
-+--------------------+---------+
-| **Allowed values** | yes, no |
-+--------------------+---------+
-
 skip_nfs
 ^^^^^^^^
 
@@ -345,9 +192,6 @@ Default Unix configuration
     <!-- Policy monitoring -->
     <rootcheck>
       <disabled>no</disabled>
-      <check_unixaudit>yes</check_unixaudit>
-      <check_files>yes</check_files>
-      <check_trojans>yes</check_trojans>
       <check_dev>yes</check_dev>
       <check_sys>yes</check_sys>
       <check_pids>yes</check_pids>
@@ -357,9 +201,6 @@ Default Unix configuration
 
       <!-- Frequency that rootcheck is executed - every 12 hours -->
       <frequency>43200</frequency>
-
-      <rootkit_files>etc/shared/rootkit_files.txt</rootkit_files>
-      <rootkit_trojans>etc/shared/rootkit_trojans.txt</rootkit_trojans>
 
       <skip_nfs>yes</skip_nfs>
     </rootcheck>

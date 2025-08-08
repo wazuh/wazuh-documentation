@@ -47,8 +47,6 @@ Perform the following steps on the Ubuntu endpoint to emulate a rootkit, and to 
 
       <rootcheck>
         <disabled>no</disabled>
-        <check_files>yes</check_files>
-        <check_trojans>yes</check_trojans>
         <check_dev>yes</check_dev>
         <check_sys>yes</check_sys>
         <check_pids>yes</check_pids>
@@ -59,8 +57,6 @@ Perform the following steps on the Ubuntu endpoint to emulate a rootkit, and to 
 
         <frequency>120</frequency>
 
-        <rootkit_files>etc/shared/rootkit_files.txt</rootkit_files>
-        <rootkit_trojans>etc/shared/rootkit_trojans.txt</rootkit_trojans>
         <skip_nfs>yes</skip_nfs>
       </rootcheck>
 
