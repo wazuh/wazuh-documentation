@@ -19,7 +19,6 @@ Options
 
 - `log_alert_level`_
 - `email_alert_level`_
-- `use_geoip`_
 
 .. _reference_ossec_alerts_ea:
 
@@ -51,19 +50,6 @@ Sets the minimum severity level for an alert to generate an email notification.
 +--------------------+-------------------------+
 | **Allowed values** | Any level from 1 to 16  |
 +--------------------+-------------------------+
-
-use_geoip
-^^^^^^^^^
-
-.. deprecated:: 2.0
-
-This option has no effect, and will result in a parsing error unless compiled with `LIBGEOIP_ENABLED <https://github.com/wazuh/wazuh/blob/master/src/config/alerts-config.c#L61>`_.
-
-+--------------------+-------------+
-| **Default value**  | n/a         |
-+--------------------+-------------+
-| **Allowed values** | yes, no     |
-+--------------------+-------------+
 
 Default configuration
 ---------------------
