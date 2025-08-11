@@ -26,9 +26,9 @@ Preparing the backup
             # bkp_folder=~/wazuh_files_backup/$(date +%F_%H:%M)
             # mkdir -p $bkp_folder && echo $bkp_folder
 
-      .. group-tab:: Windows (CMD Admin)
+      .. group-tab:: Windows (Powershell Admin)
 
-         .. code-block:: doscon
+         .. code-block:: ps1con
 
             > set datetime=%date%-%time%
             > set datetime=%datetime: =_%
@@ -36,8 +36,9 @@ Preparing the backup
             > set datetime=%datetime::=_%
             > set datetime=%datetime:.=_%
             > set bkp_folder=%userprofile%\wazuh_files_backup\%datetime%
-            > mkdir %bkp_folder% && echo %bkp_folder%
-      
+            > mkdir %bkp_folder% ; echo %bkp_folder%
+            > $bkp_folder = "C:\ossec_backup"
+
       .. group-tab:: macOS
 
          .. code-block:: console
@@ -65,18 +66,20 @@ Backing up a Wazuh agent
             /var/ossec/logs/ \
             /var/ossec/queue/rids/ $bkp_folder
 
-      .. group-tab:: Windows (CMD Admin)
+      .. group-tab:: Windows (Powershell Admin)
 
-         .. code-block:: doscon
+         .. code-block:: ps1con
 
-            > xcopy "C:\Program Files (x86)\ossec-agent\client.keys" %bkp_folder% /H /I /K /S /X
-            > xcopy "C:\Program Files (x86)\ossec-agent\ossec.conf" %bkp_folder% /H /I /K /S /X
-            > xcopy "C:\Program Files (x86)\ossec-agent\internal_options.conf" %bkp_folder% /H /I /K /S /X
-            > xcopy "C:\Program Files (x86)\ossec-agent\local_internal_options.conf" %bkp_folder% /H /I /K /S /X
-            > xcopy "C:\Program Files (x86)\ossec-agent\*.pem" %bkp_folder% /H /I /K /S /X
-            > xcopy "C:\Program Files (x86)\ossec-agent\ossec.log" %bkp_folder% /H /I /K /S /X
-            > xcopy "C:\Program Files (x86)\ossec-agent\logs\*"  %bkp_folder%\logs\ /H /I /K /S /X
-            > xcopy "C:\Program Files (x86)\ossec-agent\rids\*"  %bkp_folder%\rids\ /H /I /K /S /X
+            > New-Item -Path $bkp_folder -ItemType Directory -Force | Out-Null
+            > Write-Output $bkp_folder
+            > Copy-Item "C:\Program Files (x86)\ossec-agent\client.keys" $bkp_folder -Recurse -Force
+            > Copy-Item "C:\Program Files (x86)\ossec-agent\ossec.conf" $bkp_folder -Recurse -Force
+            > Copy-Item "C:\Program Files (x86)\ossec-agent\internal_options.conf" $bkp_folder -Recurse -Force
+            > Copy-Item "C:\Program Files (x86)\ossec-agent\local_internal_options.conf" $bkp_folder -Recurse -Force
+            > Copy-Item "C:\Program Files (x86)\ossec-agent\*.pem" $bkp_folder -Recurse -Force
+            > Copy-Item "C:\Program Files (x86)\ossec-agent\ossec.log" $bkp_folder -Recurse -Force
+            > Copy-Item "C:\Program Files (x86)\ossec-agent\logs\*"  "$bkp_folder\logs\" -Recurse -Force
+            > Copy-Item "C:\Program Files (x86)\ossec-agent\rids" "$bkp_folder\rids" -Recurse -Force
 
       .. group-tab:: macOS
 
@@ -103,13 +106,22 @@ Backing up a Wazuh agent
             # rsync -aREz /var/ossec/active-response/bin/<CUSTOM_ACTIVE_RESPONSE_SCRIPT> $bkp_folder
             # rsync -aREz /var/ossec/wodles/<CUSTOM_WODLE_SCRIPT> $bkp_folder
 
-      .. group-tab:: Windows (CMD Admin)
+      .. group-tab:: Windows (Powershell Admin)
 
-         .. code-block:: doscon
+         .. code-block:: powershell
 
-            > xcopy "C:\Program Files (x86)\ossec-agent\<SCA_DIRECTORY>\<CUSTOM_SCA_FILE>" %bkp_folder% /H /I /K /S /X
-            > xcopy "C:\Program Files (x86)\ossec-agent\active-response\bin\<CUSTOM_ACTIVE_RESPONSE_SCRIPT>" %bkp_folder%\active-response\bin\ /H /I /K /S /X
-            > xcopy "C:\Program Files (x86)\ossec-agent\wodles\<CUSTOM_WODLE_SCRIPT>" %bkp_folder%\wodles\ /H /I /K /S /X
+            # Example variables - replace with your actual file names and folders
+
+            $SCA_DIRECTORY = "sca"
+            $CUSTOM_SCA_FILE = "custom_sca.yml"
+            $CUSTOM_ACTIVE_RESPONSE_SCRIPT = "my_response.ps1"
+            $CUSTOM_WODLE_SCRIPT = "custom_wodle.py"
+
+         .. code-block:: ps1con
+
+            > Copy-Item "$SCA_DIRECTORY\$CUSTOM_SCA_FILE" "C:\Program Files (x86)\ossec-agent\$SCA_DIRECTORY" -Recurse -Force
+            > Copy-Item "active-response\bin\$CUSTOM_ACTIVE_RESPONSE_SCRIPT" "C:\Program Files (x86)\ossec-agent\active-response\bin" -Recurse -Force
+            > Copy-Item "wodles\$CUSTOM_WODLE_SCRIPT" "C:\Program Files (x86)\ossec-agent\wodles" -Recurse -Force
 
       .. group-tab:: macOS
 
@@ -133,11 +145,12 @@ Checking the backup
 
             # find $bkp_folder -type f | sed "s|$bkp_folder/||" | less
 
-      .. group-tab:: Windows (CMD Admin)
+      .. group-tab:: Windows (Powershell Admin)
 
-         .. code-block:: doscon
+         .. code-block:: ps1con
 
-            > tree %bkp_folder% /f
+            > cd C:\
+            > tree ossec_backup /f
 
       .. group-tab:: macOS
 
