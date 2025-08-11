@@ -19,6 +19,16 @@ This section guides you through the upgrade process of the Wazuh indexer, the Wa
 
    To avoid data loss, create an :ref:`index snapshot <migrating_indices_take_snapshots>` before upgrading. For more details, refer to the `Opensearch documentation <https://opensearch.org/docs/latest/install-and-configure/upgrade-opensearch/rolling-upgrade/>`__.
 
+.. note::
+
+   Since Wazuh 5.0, the following Rootcheck configuration options and database files have been removed:
+
+   - **File check options:** ``<check_files>``, ``<rootkit_files>``, and the database file ``rootkit_files.txt``.
+   - **Trojan scan options:** ``<check_trojans>``, ``<rootkit_trojans>``, and the database file ``rootkit_trojans.txt``.
+   - **Policy check options:** ``<check_unixaudit>``, ``<check_winaudit>``, ``<check_winapps>``, ``<check_winmalware>``, and the database files ``system_audit_rcl.txt``, ``system_audit_ssh.txt``, ``win_applications_rcl.txt``, ``win_audit_rcl.txt``, and ``win_malware_rcl.txt``.
+
+   These functionalities overlap with, or are replaced by, the Security Configuration Assessment (SCA) and File Integrity Monitoring (FIM) capabilities. If any of these options are configured in your ``ossec.conf`` file, remove them before upgrading to avoid configuration parsing warnings.
+
 .. _preparing-the-upgrade:
 
 Preparing the upgrade
