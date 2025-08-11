@@ -104,8 +104,6 @@ Examples
       agent.conf                [ab73af41699f13fdd81903b5f23d8d00]
       merged.mg                 [4437654d67c9c4ac2e46cf5f73e04518]
       cis_debian_linux_rcl.txt  [38cc9b168dc24576daa76f4502575a4f]
-      system_audit_ssh.txt      [5c4a3180e4b5b3f7bb7b61b0b9d23a4b]
-      system_audit_rcl.txt      [882122c1e9e30e86c80893cbb9482c2d]
 
 
 * Remove agent 002 from all groups except the default:
