@@ -21,6 +21,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Added note about manual replication of `ossec.conf` between master and worker nodes. ([#8720](https://github.com/wazuh/wazuh-documentation/pull/8720))
 - **Post-release**: Added a table describing the possible environment statuses in the cloud service documentation. ([#8407](https://github.com/wazuh/wazuh-documentation/pull/8407))
 - **Post-release**: Added the Wazuh indexer API reference. ([#8756](https://github.com/wazuh/wazuh-documentation/pull/8756))
+- **Post-release**: Added Wazuh tools examples to the user manual reference. ([#8763](https://github.com/wazuh/wazuh-documentation/pull/8763))
 
 ### Changed
 
