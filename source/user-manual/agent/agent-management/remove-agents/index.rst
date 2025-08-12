@@ -6,7 +6,7 @@
 Removing agents
 ===============
 
-There are different ways to remove a Wazuh agent that is enrolled in the Wazuh manager. This includes querying the Wazuh server API.
+To remove a Wazuh agent that is enrolled in the Wazuh manager, you have to query the Wazuh server API.
 
 .. toctree::
    :maxdepth: 2
