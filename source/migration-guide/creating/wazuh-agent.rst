@@ -30,14 +30,9 @@ Preparing the backup
 
          .. code-block:: ps1con
 
-            > set datetime=%date%-%time%
-            > set datetime=%datetime: =_%
-            > set datetime=%datetime:/=-%
-            > set datetime=%datetime::=_%
-            > set datetime=%datetime:.=_%
-            > set bkp_folder=%userprofile%\wazuh_files_backup\%datetime%
+            > $timestamp = Get-Date -Format "yyyy-MM-dd_HH-mm-ss"
             > mkdir %bkp_folder% ; echo %bkp_folder%
-            > $bkp_folder = "C:\ossec_backup"
+            > $bkp_folder = Join-Path -Path $env:USERPROFILE -ChildPath "wazuh_files_backup\$timestamp"
 
       .. group-tab:: macOS
 
@@ -149,8 +144,7 @@ Checking the backup
 
          .. code-block:: ps1con
 
-            > cd C:\
-            > tree ossec_backup /f
+            > tree (Get-ChildItem "$env:USERPROFILE\wazuh_files_backup" -Directory | Sort-Object LastWriteTime -Descending | Select-Object -First 1 -ExpandProperty FullName) /f
 
       .. group-tab:: macOS
 

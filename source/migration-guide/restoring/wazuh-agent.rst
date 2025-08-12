@@ -116,7 +116,6 @@ Perform the steps below to restore Wazuh agent files on a Windows endpoint.
 
    .. code-block:: ps1con
 
-      > $bkp_folder = "C:\ossec_backup"
       > Copy-Item "$bkp_folder\client.keys" "C:\Program Files (x86)\ossec-agent" -Recurse -Force
       > Copy-Item "$bkp_folder\ossec.conf" "C:\Program Files (x86)\ossec-agent" -Recurse -Force
       > Copy-Item "$bkp_folder\internal_options.conf" "C:\Program Files (x86)\ossec-agent" -Recurse -Force
