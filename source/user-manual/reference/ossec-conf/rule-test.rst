@@ -15,7 +15,7 @@ rule_test
 		<rule_test>
 		</rule_test>
 
-Here is how to configure the Wazuh-Logtest solution. It allows to test rules and decoders from Wazuh API and :ref:`wazuh-logtest tool <wazuh-logtest>`
+Here is how to configure the Wazuh-Logtest solution. It allows to test rules and decoders from Wazuh API and :doc:`wazuh-logtest tool </user-manual/reference/tools/wazuh-logtest>`
 
 Options
 -------

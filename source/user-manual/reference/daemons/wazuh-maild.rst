@@ -3,12 +3,10 @@
 .. meta::
   :description: Learn about the wazuh-maild program that sends alerts via email in this section of the documentation.
 
-.. _wazuh-maild:
-
 wazuh-maild
 =============
 
-The wazuh-maild program sends alerts via email.  It is started by :ref:`wazuh-control`.
+The wazuh-maild program sends alerts via email.  It is started by :doc:`../tools/wazuh-control`.
 
 +-----------------+-------------------------------------------------------------------------------------------------+
 | **-c <config>** | Run using <config> as the configuration file.                                                   |

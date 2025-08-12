@@ -2,9 +2,6 @@
 
 .. meta::
   :description: The Wazuh-Logtest solution is distributed by different components of the Wazuh environment: core logtest, wazuh RESTful API, and wazuh-logtest tool. 
-  
-.. _dev-wazuh-logtest:
-
 
 Wazuh-Logtest
 =============
@@ -23,17 +20,14 @@ The Wazuh-Logtest solution is distributed by different components of the Wazuh e
 
      Wazuh-Logtest replacement for ossec-logtest tool.
 
+Wazuh API and :doc:`wazuh-logtest tool </user-manual/reference/tools/wazuh-logtest>` connect to the wazuh-analysisd session manager, this acts as a sandbox with the rules engine, allowing to isolate different users with their own rules and decoders.
 
-Wazuh API and :ref:`wazuh-logtest tool <wazuh-logtest>` connect to the wazuh-analysisd session manager, this acts as a
-sandbox with the rules engine, allowing to isolate different users with their own rules and decoders.
 The below show image illustrations how the user logs test flow through the Wazuh environment.
 
 .. thumbnail:: ../images/development/logtest-flow.png
   :title: Wazuh Logtest
   :align: center
   :width: 100%
-
-
 
 Sessions
 --------
