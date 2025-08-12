@@ -12,9 +12,7 @@ The configuration file shows the default values for all of the possible options.
 
 .. note::
 
-   Starting with Wazuh 5.0.0, the dashboard no longer manages background jobs for monitoring or statistics. The related dashboard settings were removed and these tasks are now handled by Wazuh server and/or Wazuh indexer.
-
-   Removed settings include: ``wazuh.monitoring.*``, ``cron.statistics.*``, and ``cron.prefix``.
+   Starting with Wazuh 5.0.0, the dashboard no longer manages background jobs for monitoring and statistics. The Wazuh server and indexer now handle these tasks. We removed the ``wazuh.monitoring.*``, ``cron.statistics.*``, and ``cron.prefix`` dashboard settings.
 
 The configuration file reference is organized into sections:
 
