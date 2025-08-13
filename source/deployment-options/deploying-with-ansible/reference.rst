@@ -988,6 +988,8 @@ Wazuh Agent
       download_dir: C:\
       install_dir: C:\Program Files\ossec-agent\
       install_dir_x86: C:\Program Files (x86)\ossec-agent\
+      auth_path: C:\Program Files\ossec-agent\agent-auth.exe
+      auth_path_x86: C:\'Program Files (x86)'\ossec-agent\agent-auth.exe
       check_sha512: True
 
 |
