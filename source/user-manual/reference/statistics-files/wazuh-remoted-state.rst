@@ -14,7 +14,7 @@ By default, this file is updated every 5 seconds. This interval can be changed b
 
 Below there is an example of the content of the file:
 
-.. code-block:: pkgconfig
+.. code-block:: ini
 
     # State file for wazuh-remoted
     # Updated every 5 seconds.
