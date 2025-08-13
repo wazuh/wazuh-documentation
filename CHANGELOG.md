@@ -13,12 +13,14 @@ All notable changes to this project will be documented in this file.
 - Added steps for installing a single node stack via Puppet in *Deployment with Puppet*. ([#8611](https://github.com/wazuh/wazuh-documentation/pull/8611))
 - Added information about filters in the Windows agent to block UNC and mapped drive paths to mitigate *NetNTLMv2* vulnerabilities. ([#8665](https://github.com/wazuh/wazuh-documentation/pull/8665))
 - Added the Wazuh global queries documentation. ([#8722](https://github.com/wazuh/wazuh-documentation/pull/8722))
+- Added `remoted.ctrl_msg_queue_size` internal option and new remoted statistics fields. ([#8769](https://github.com/wazuh/wazuh-documentation/pull/8769))
 
 ### Changed
 
 - Updated the Available SCA policies section. ([#8602](https://github.com/wazuh/wazuh-documentation/pull/8602))
 - Added instructions for retrieving the correct Puppet agent node name and to set the ``<PUPPET_AGENT_NODE_NAME>`` placeholder in the manifest. ([#8664](https://github.com/wazuh/wazuh-documentation/pull/8664))
 - Updated the *Deployment on Docker* section. ([#8688](https://github.com/wazuh/wazuh-documentation/pull/8688))
+- Updated default values for `agents_disconnection_time` and `notify_time`. ([#8769](https://github.com/wazuh/wazuh-documentation/pull/8769))
 
 ## [v4.12.0]
 
