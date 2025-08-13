@@ -3,8 +3,6 @@
 .. meta::
   :description: Learn how the wazuh-remoted.state file provides information about the remote daemon as the queue size, discarded messages, and other useful information.
 
-.. _wazuh_remoted_state_file:
-
 wazuh-remoted.state
 ===================
 
@@ -47,3 +45,11 @@ Below there is an example of the content of the file:
 
     # Messages dequeued after the agent closes the connection
     dequeued_after_close='487'
+
+    # Control messages queue usage
+    ctrl_msg_queue_usage='0'
+
+    # Control messages queue breakdown
+    ctrl_msg_queue_inserted='5587'
+    ctrl_msg_queue_replaced='13'
+    ctrl_msg_queue_processed='5587'

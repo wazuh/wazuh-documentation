@@ -870,6 +870,14 @@ Remoted
 +                                   +---------------+--------------------------------------------------------------+
 |                                   | Allowed value | | Any integer between 1 and 60.                              |
 +-----------------------------------+---------------+--------------------------------------------------------------+
+| **remoted.ctrl_msg_queue_size**   | Description   | Maximum number of control messages that can be queued for    |
+|                                   |               | processing. When the queue reaches this limit, backpressure  |
+|                                   |               | is applied to prevent memory exhaustion.                     |
++                                   +---------------+--------------------------------------------------------------+
+|                                   | Default value | 16384                                                        |
++                                   +---------------+--------------------------------------------------------------+
+|                                   | Allowed value | Any integer between 1024 and 1048576.                        |
++-----------------------------------+---------------+--------------------------------------------------------------+
 | **remoted.buffer_relax**          | Description   | | Method for memory deallocation after accepting input data. |
 |                                   |               | | This option applies in TCP mode only.                      |
 +                                   +---------------+--------------------------------------------------------------+
