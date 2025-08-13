@@ -7,8 +7,6 @@
 
 	Since Wazuh 4.0, by default, the agent registers automatically with the manager through enrollment. Configuration details can be found on :ref:`Enrollment section <reference_ossec_client>`.
 
-.. _agent-auth:
-
 agent-auth
 ==========
 
@@ -72,3 +70,22 @@ The ``agent-auth`` program is the client application used along with :ref:`wazuh
 +----------------------------+------------------------------------------------------------------------------------------------------+
 
 .. _`SSL ciphers`: https://www.openssl.org/docs/man1.1.1/man1/ciphers.html
+
+Example
+-------
+
+Add agent with agent name ``Ubuntu24`` to Wazuh manager with IP address ``192.168.0.XX``:
+
+.. code-block:: console
+
+   # /var/ossec/bin/agent-auth -A Ubuntu24 -m 192.168.0.XX
+
+.. code-block:: none
+   :class: output
+
+   2025/08/04 10:57:47 agent-auth: INFO: Started (pid: 111205).
+   2025/08/04 10:57:47 agent-auth: INFO: Requesting a key from server: 192.168.0.XX
+   2025/08/04 10:57:47 agent-auth: INFO: No authentication password provided
+   2025/08/04 10:57:47 agent-auth: INFO: Using agent name as: Ubuntu24
+   2025/08/04 10:57:47 agent-auth: INFO: Waiting for server reply
+   2025/08/04 10:57:47 agent-auth: INFO: Valid key received
