@@ -1,0 +1,912 @@
+paths:
+  /_scripts/{SCRIPT_ID}:
+    put:
+      tags:
+        - Script APIs
+      summary: Create or update stored script (PUT)
+      description: |
+        Creates or updates a stored script or search template.
+      operationId: createOrUpdateScript
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/ScriptId'
+        - $ref: '#/components/parameters/context'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/timeout'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateScriptRequest'
+            example:
+              script:
+                lang: "painless"
+                source: "int total = 0; for (int i = 0; i < doc['ratings'].length; ++i) { total += doc['ratings'][i]; } return total * params['multiplier'];"
+      responses:
+        '200':
+          $ref: '#/components/responses/ScriptCreated'
+        '400':
+          $ref: 'spec.yml#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+
+    post:
+      tags:
+        - Script APIs
+      summary: Create or update stored script (POST)
+      description: |
+        Creates or updates a stored script or search template.
+      operationId: createOrUpdateScriptPost
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/ScriptId'
+        - $ref: '#/components/parameters/context'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/timeout'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateScriptRequest'
+            example:
+              script:
+                lang: "painless"
+                source: "int total = 0; for (int i = 0; i < doc['ratings'].length; ++i) { total += doc['ratings'][i]; } return total * params['multiplier'];"
+      responses:
+        '200':
+          $ref: '#/components/responses/ScriptCreated'
+        '400':
+          $ref: 'spec.yml#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+
+    get:
+      tags:
+        - Script APIs
+      summary: Get stored script
+      description: |
+        Retrieves a stored script.
+      operationId: getStoredScript
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/ScriptId'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+      responses:
+        '200':
+          $ref: '#/components/responses/ScriptRetrieved'
+        '400':
+          $ref: 'spec.yml#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/ScriptNotFound'
+
+    delete:
+      tags:
+        - Script APIs
+      summary: Delete script
+      description: |
+        Deletes a stored script.
+      operationId: deleteStoredScript
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/ScriptId'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/timeout'
+      responses:
+        '200':
+          $ref: '#/components/responses/ScriptDeleted'
+        '400':
+          $ref: '#/components/responses/ScriptDeleteBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/ScriptDeleteForbidden'
+        '404':
+          $ref: '#/components/responses/ScriptDeleteNotFound'
+
+  /_scripts/{SCRIPT_ID}/{CONTEXT}:
+    put:
+      tags:
+        - Script APIs
+      summary: Create or update stored script with context (PUT)
+      description: |
+        Creates or updates a stored script or search template with a specific context.
+      operationId: createOrUpdateScriptWithContext
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/ScriptId'
+        - $ref: '#/components/parameters/context'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/timeout'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateScriptRequest'
+            example:
+              script:
+                lang: "painless"
+                source: "int total = 0; for (int i = 0; i < doc['ratings'].length; ++i) { total += doc['ratings'][i]; } return total * params['multiplier'];"
+      responses:
+        '200':
+          $ref: '#/components/responses/ScriptCreated'
+        '400':
+          $ref: 'spec.yml#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+
+    post:
+      tags:
+        - Script APIs
+      summary: Create or update stored script with context (POST)
+      description: |
+        Creates or updates a stored script or search template with a specific context.
+      operationId: createOrUpdateScriptWithContextPost
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/ScriptId'
+        - $ref: '#/components/parameters/context'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/timeout'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateScriptRequest'
+            example:
+              script:
+                lang: "painless"
+                source: "int total = 0; for (int i = 0; i < doc['ratings'].length; ++i) { total += doc['ratings'][i]; } return total * params['multiplier'];"
+      responses:
+        '200':
+          $ref: '#/components/responses/ScriptCreated'
+        '400':
+          $ref: 'spec.yml#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+
+  /_script_context:
+    get:
+      tags:
+        - Script APIs
+      summary: Get stored script contexts
+      description: |
+        Retrieves all contexts for stored scripts.
+      operationId: getStoredScriptContexts
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/pretty'
+        - $ref: '#/components/parameters/filter_path'
+      responses:
+        '200':
+          $ref: '#/components/responses/ScriptContextsRetrieved'
+        '400':
+          $ref: 'spec.yml#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+
+  /_script_language:
+    get:
+      tags:
+        - Script APIs
+      summary: Get script language
+      description: |
+        The `GET _script_language` API retrieves a list of supported scripting languages and the contexts in which they may be used.
+      operationId: getScriptLanguage
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/pretty'
+        - $ref: '#/components/parameters/filter_path'
+      responses:
+        '200':
+          $ref: '#/components/responses/ScriptLanguageRetrieved'
+        '400':
+          $ref: 'spec.yml#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+
+components:
+  parameters:
+    ScriptId:
+      name: SCRIPT_ID
+      in: path
+      required: true
+      description: Identifier for the stored script or search template. Must be unique within the cluster.
+      schema:
+        type: string
+
+    context:
+      name: context
+      in: query
+      description: Context in which the script or search template is to run. To prevent errors, the API immediately compiles the script or template in this context.
+      schema:
+        type: string
+
+    cluster_manager_timeout:
+      name: cluster_manager_timeout
+      in: query
+      description: Amount of time to wait for a connection to the cluster manager. Defaults to 30 seconds.
+      schema:
+        type: string
+        format: time
+
+    timeout:
+      name: timeout
+      in: query
+      description: The period of time to wait for a response. If a response is not received before the timeout value, the request will be dropped.
+      schema:
+        type: string
+        format: time
+
+    pretty:
+      name: pretty
+      in: query
+      description: If set to true, formats the response for better readability.
+      schema:
+        type: boolean
+
+    filter_path:
+      name: filter_path
+      in: query
+      description: Limits the fields included in the response to reduce output size.
+      schema:
+        type: string
+
+  schemas:
+    CreateScriptRequest:
+      type: object
+      required:
+        - script
+      properties:
+        script:
+          type: object
+          description: Defines the script or search template, its parameters, and its language.
+          required:
+            - lang
+            - source
+          properties:
+            lang:
+              type: string
+              description: Scripting language. Required.
+            source:
+              oneOf:
+                - type: string
+                - type: object
+              description: For scripts, a string containing the script's content. For search templates, an object that defines the template, supporting the same parameters as the Search API request body. Additionally, search templates allow the use of Mustache variables.
+            params:
+              type: object
+              description: Parameters for the script or search template.
+
+  responses:
+    ScriptCreated:
+      description: Script created or updated successfully.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              acknowledged:
+                type: boolean
+                description: This field indicates that the script was successfully stored in the cluster.
+          example:
+            acknowledged: true
+
+    ScriptRetrieved:
+      description: Script retrieved successfully.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: The script's name.
+              found:
+                type: boolean
+                description: The requested script exists and was retrieved.
+              script:
+                type: object
+                description: The script object containing language and source.
+                properties:
+                  lang:
+                    type: string
+                    description: The script's language.
+                  source:
+                    type: string
+                    description: The script's body.
+          example:
+            _id: "myfirst-script"
+            found: true
+            script:
+              lang: "painless"
+              source: |
+                int total = 0;
+                for (int i = 0; i < doc['ratings'].length; ++i) {
+                  total += doc['ratings'][i];
+                }
+                return total * params['multiplier'];
+
+    ScriptNotFound:
+      description: Script not found.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: The script's name.
+              found:
+                type: boolean
+                description: The requested script exists and was retrieved.
+          example:
+            _id: "my-first-script"
+            found: false
+
+    ScriptDeleted:
+      description: Script deleted successfully.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              acknowledged:
+                type: boolean
+                description: Whether the delete script request was received.
+          example:
+            acknowledged: true
+
+    ScriptContextsRetrieved:
+      description: Script contexts retrieved successfully.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              contexts:
+                type: array
+                description: A list of supported script execution contexts.
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      description: The name of the script execution context.
+                    methods:
+                      type: array
+                      description: A list of methods available in the script execution context.
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            description: The name of the method that can be executed within this script context.
+                          return_type:
+                            type: string
+                            description: The data type returned by the method when executed.
+                          params:
+                            type: array
+                            description: The list of parameters required by the method (if any).
+                            items:
+                              type: object
+                              properties:
+                                type:
+                                  type: string
+                                  description: The data type of the method parameter.
+                                name:
+                                  type: string
+                                  description: The name of the method parameter.
+          example:
+            contexts:
+              - name: "aggregation_selector"
+                methods:
+                  - name: "execute"
+                    return_type: "boolean"
+                    params: []
+                  - name: "getParams"
+                    return_type: "java.util.Map"
+                    params: []
+              - name: "aggs"
+                methods:
+                  - name: "execute"
+                    return_type: "java.lang.Object"
+                    params: []
+                  - name: "getDoc"
+                    return_type: "java.util.Map"
+                    params: []
+                  - name: "getParams"
+                    return_type: "java.util.Map"
+                    params: []
+                  - name: "get_score"
+                    return_type: "java.lang.Number"
+                    params: []
+                  - name: "get_value"
+                    return_type: "java.lang.Object"
+                    params: []
+              - name: "aggs_combine"
+                methods:
+                  - name: "execute"
+                    return_type: "java.lang.Object"
+                    params: []
+                  - name: "getParams"
+                    return_type: "java.util.Map"
+                    params: []
+                  - name: "getState"
+                    return_type: "java.util.Map"
+                    params: []
+              - name: "aggs_init"
+                methods:
+                  - name: "execute"
+                    return_type: "void"
+                    params: []
+                  - name: "getParams"
+                    return_type: "java.util.Map"
+                    params: []
+                  - name: "getState"
+                    return_type: "java.lang.Object"
+                    params: []
+              - name: "aggs_map"
+                methods:
+                  - name: "execute"
+                    return_type: "void"
+                    params: []
+                  - name: "getDoc"
+                    return_type: "java.util.Map"
+                    params: []
+                  - name: "getParams"
+                    return_type: "java.util.Map"
+                    params: []
+                  - name: "getState"
+                    return_type: "java.util.Map"
+                    params: []
+                  - name: "get_score"
+                    return_type: "double"
+                    params: []
+              - name: "aggs_reduce"
+                methods:
+                  - name: "execute"
+                    return_type: "java.lang.Object"
+                    params: []
+                  - name: "getParams"
+                    return_type: "java.util.Map"
+                    params: []
+                  - name: "getStates"
+                    return_type: "java.util.List"
+                    params: []
+              - name: "analysis"
+                methods:
+                  - name: "execute"
+                    return_type: "boolean"
+                    params:
+                      - type: "org.opensearch.analysis.common.AnalysisPredicateScript$Token"
+                        name: "token"
+              - name: "bucket_aggregation"
+                methods:
+                  - name: "execute"
+                    return_type: "java.lang.Number"
+                    params: []
+                  - name: "getParams"
+                    return_type: "java.util.Map"
+                    params: []
+              - name: "field"
+                methods:
+                  - name: "execute"
+                    return_type: "java.lang.Object"
+                    params: []
+                  - name: "getDoc"
+                    return_type: "java.util.Map"
+                    params: []
+                  - name: "getParams"
+                    return_type: "java.util.Map"
+                    params: []
+              - name: "filter"
+                methods:
+                  - name: "execute"
+                    return_type: "boolean"
+                    params: []
+                  - name: "getDoc"
+                    return_type: "java.util.Map"
+                    params: []
+                  - name: "getParams"
+                    return_type: "java.util.Map"
+                    params: []
+              - name: "ingest"
+                methods:
+                  - name: "execute"
+                    return_type: "void"
+                    params:
+                      - type: "java.util.Map"
+                        name: "ctx"
+                  - name: "getParams"
+                    return_type: "java.util.Map"
+                    params: []
+              - name: "interval"
+                methods:
+                  - name: "execute"
+                    return_type: "boolean"
+                    params:
+                      - type: "org.opensearch.index.query.IntervalFilterScript$Interval"
+                        name: "interval"
+              - name: "moving-function"
+                methods:
+                  - name: "execute"
+                    return_type: "double"
+                    params:
+                      - type: "java.util.Map"
+                        name: "params"
+                      - type: "double[]"
+                        name: "values"
+              - name: "number_sort"
+                methods:
+                  - name: "execute"
+                    return_type: "double"
+                    params: []
+                  - name: "getDoc"
+                    return_type: "java.util.Map"
+                    params: []
+                  - name: "getParams"
+                    return_type: "java.util.Map"
+                    params: []
+                  - name: "get_score"
+                    return_type: "double"
+                    params: []
+              - name: "painless_test"
+                methods:
+                  - name: "execute"
+                    return_type: "java.lang.Object"
+                    params: []
+                  - name: "getParams"
+                    return_type: "java.util.Map"
+                    params: []
+              - name: "processor_conditional"
+                methods:
+                  - name: "execute"
+                    return_type: "boolean"
+                    params:
+                      - type: "java.util.Map"
+                        name: "ctx"
+                  - name: "getParams"
+                    return_type: "java.util.Map"
+                    params: []
+              - name: "score"
+                methods:
+                  - name: "execute"
+                    return_type: "double"
+                    params:
+                      - type: "org.opensearch.script.ScoreScript$ExplanationHolder"
+                        name: "explanation"
+                  - name: "getDoc"
+                    return_type: "java.util.Map"
+                    params: []
+                  - name: "getParams"
+                    return_type: "java.util.Map"
+                    params: []
+                  - name: "get_score"
+                    return_type: "double"
+                    params: []
+              - name: "script_heuristic"
+                methods:
+                  - name: "execute"
+                    return_type: "double"
+                    params:
+                      - type: "java.util.Map"
+                        name: "params"
+              - name: "search"
+                methods:
+                  - name: "execute"
+                    return_type: "void"
+                    params:
+                      - type: "java.util.Map"
+                        name: "ctx"
+                  - name: "getParams"
+                    return_type: "java.util.Map"
+                    params: []
+              - name: "similarity"
+                methods:
+                  - name: "execute"
+                    return_type: "double"
+                    params:
+                      - type: "double"
+                        name: "weight"
+                      - type: "org.opensearch.index.similarity.ScriptedSimilarity$Query"
+                        name: "query"
+                      - type: "org.opensearch.index.similarity.ScriptedSimilarity$Field"
+                        name: "field"
+                      - type: "org.opensearch.index.similarity.ScriptedSimilarity$Term"
+                        name: "term"
+                      - type: "org.opensearch.index.similarity.ScriptedSimilarity$Doc"
+                        name: "doc"
+              - name: "similarity_weight"
+                methods:
+                  - name: "execute"
+                    return_type: "double"
+                    params:
+                      - type: "org.opensearch.index.similarity.ScriptedSimilarity$Query"
+                        name: "query"
+                      - type: "org.opensearch.index.similarity.ScriptedSimilarity$Field"
+                        name: "field"
+                      - type: "org.opensearch.index.similarity.ScriptedSimilarity$Term"
+                        name: "term"
+              - name: "string_sort"
+                methods:
+                  - name: "execute"
+                    return_type: "java.lang.String"
+                    params: []
+                  - name: "getDoc"
+                    return_type: "java.util.Map"
+                    params: []
+                  - name: "getParams"
+                    return_type: "java.util.Map"
+                    params: []
+                  - name: "get_score"
+                    return_type: "double"
+                    params: []
+              - name: "template"
+                methods:
+                  - name: "execute"
+                    return_type: "java.lang.String"
+                    params: []
+                  - name: "getParams"
+                    return_type: "java.util.Map"
+                    params: []
+              - name: "terms_set"
+                methods:
+                  - name: "execute"
+                    return_type: "java.lang.Number"
+                    params: []
+                  - name: "getDoc"
+                    return_type: "java.util.Map"
+                    params: []
+                  - name: "getParams"
+                    return_type: "java.util.Map"
+                    params: []
+              - name: "trigger"
+                methods:
+                  - name: "execute"
+                    return_type: "boolean"
+                    params:
+                      - type: "org.opensearch.alerting.script.QueryLevelTriggerExecutionContext"
+                        name: "ctx"
+                  - name: "getParams"
+                    return_type: "java.util.Map"
+                    params: []
+              - name: "update"
+                methods:
+                  - name: "execute"
+                    return_type: "void"
+                    params: []
+                  - name: "getCtx"
+                    return_type: "java.util.Map"
+                    params: []
+                  - name: "getParams"
+                    return_type: "java.util.Map"
+                    params: [] 
+
+    ScriptLanguageRetrieved:
+      description: Script language information retrieved successfully.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              types_allowed:
+                type: array
+                description: Array of allowed script types.
+                items:
+                  type: string
+              language_contexts:
+                type: array
+                description: Array of scripting languages and their allowed contexts.
+                items:
+                  type: object
+                  properties:
+                    language:
+                      type: string
+                      description: The scripting language name (e.g., painless, expression, mustache)
+                    contexts:
+                      type: array
+                      description: An array of contexts where the language is allowed (e.g., aggs, score, update)
+                      items:
+                        type: string
+          example:
+            types_allowed:
+              - "inline"
+              - "stored"
+            language_contexts:
+              - language: "expression"
+                contexts:
+                  - "aggregation_selector"
+                  - "aggs"
+                  - "bucket_aggregation"
+                  - "field"
+                  - "filter"
+                  - "number_sort"
+                  - "score"
+                  - "terms_set"
+              - language: "knn"
+                contexts:
+                  - "score"
+              - language: "mustache"
+                contexts:
+                  - "template"
+              - language: "opensearch_query_expression"
+                contexts:
+                  - "aggs"
+                  - "filter"
+              - language: "painless"
+                contexts:
+                  - "aggregation_selector"
+                  - "aggs"
+                  - "aggs_combine"
+                  - "aggs_init"
+                  - "aggs_map"
+                  - "aggs_reduce"
+                  - "analysis"
+                  - "bucket_aggregation"
+                  - "field"
+                  - "filter"
+                  - "ingest"
+                  - "interval"
+                  - "moving-function"
+                  - "number_sort"
+                  - "painless_test"
+                  - "processor_conditional"
+                  - "score"
+                  - "script_heuristic"
+                  - "search"
+                  - "similarity"
+                  - "similarity_weight"
+                  - "string_sort"
+                  - "template"
+                  - "terms_set"
+                  - "trigger"
+                  - "update" 
+
+    ScriptDeleteBadRequest:
+      description: Bad request when deleting script.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  root_cause:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        reason:
+                          type: string
+                        index:
+                          type: string
+                        index_uuid:
+                          type: string
+                  type:
+                    type: string
+                  reason:
+                    type: string
+                  index:
+                    type: string
+                  index_uuid:
+                    type: string
+              status:
+                type: integer
+          example:
+            error:
+              root_cause:
+                - type: "invalid_index_name_exception"
+                  reason: "Invalid index name [_scripts], must not start with '_'."
+                  index: "_scripts"
+                  index_uuid: "_na_"
+              type: "invalid_index_name_exception"
+              reason: "Invalid index name [_scripts], must not start with '_'."
+              index: "_scripts"
+              index_uuid: "_na_"
+            status: 400
+
+    ScriptDeleteForbidden:
+      description: Permission denied when deleting script.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  root_cause:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        reason:
+                          type: string
+                  type:
+                    type: string
+                  reason:
+                    type: string
+              status:
+                type: integer
+          example:
+            error:
+              root_cause:
+                - type: "security_exception"
+                  reason: "no permissions for [indices:admin/analyze] and User [name=test, backend_roles=[], requestedTenant=null]"
+              type: "security_exception"
+              reason: "no permissions for [indices:admin/analyze] and User [name=test, backend_roles=[], requestedTenant=null]"
+            status: 403
+
+    ScriptDeleteNotFound:
+      description: Script not found when deleting.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  root_cause:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        reason:
+                          type: string
+                  type:
+                    type: string
+                  reason:
+                    type: string
+              status:
+                type: integer
+          example:
+            error:
+              root_cause:
+                - type: "resource_not_found_exception"
+                  reason: "stored script [my-script] does not exist and cannot be deleted"
+              type: "resource_not_found_exception"
+              reason: "stored script [my-script] does not exist and cannot be deleted"
+            status: 404 
