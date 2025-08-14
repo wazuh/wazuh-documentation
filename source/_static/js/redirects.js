@@ -78,6 +78,12 @@ newUrls['5.0'] = [
   '/release-notes/index-5x.html',
 ];
 
+/* Pages no longer available in 5.0 */
+
+removedUrls['5.0'] = [
+  '/user-manual/reference/daemons/wazuh-agentlessd.html',
+];
+
 /* *** RELEASE 4.14 ****/
 
 /* Pages added in 4.14 */

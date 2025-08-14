@@ -331,7 +331,6 @@ You can retrieve various details about the Wazuh manager through the Wazuh serve
      "data": {
        "affected_items": [
          {
-           "wazuh-agentlessd": "running",
            "wazuh-analysisd": "running",
            "wazuh-authd": "running",
            "wazuh-csyslogd": "running",

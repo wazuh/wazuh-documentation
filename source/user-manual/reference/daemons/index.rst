@@ -13,8 +13,6 @@ Daemons
 +===================================================+=================================================================+=============================+
 | :doc:`wazuh-agentd <wazuh-agentd>`                | Client side daemon that communicates with the server.           | agent                       |
 +---------------------------------------------------+-----------------------------------------------------------------+-----------------------------+
-| :doc:`wazuh-agentlessd <wazuh-agentlessd>`        | Runs integrity checking on systems where no agent is installed  | manager                     |
-+---------------------------------------------------+-----------------------------------------------------------------+-----------------------------+
 | :doc:`wazuh-analysisd <wazuh-analysisd>`          | Receives log messages and compares them to the rules            | manager                     |
 +---------------------------------------------------+-----------------------------------------------------------------+-----------------------------+
 | :doc:`wazuh-authd <wazuh-authd>`                  | Adds agents to the Wazuh manager                                | manager                     |
@@ -52,7 +50,6 @@ Daemons
     :maxdepth: 1
 
     wazuh-agentd
-    wazuh-agentlessd
     wazuh-analysisd
     wazuh-authd
     wazuh-csyslogd
