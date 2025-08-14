@@ -1,0 +1,1516 @@
+paths:
+  /_plugins/_transform/_preview:
+    post:
+      tags:
+        - Transforms API
+      summary: Preview a transform job's results
+      description: |
+        Provides a preview of the expected structure and content of a transformed index.
+      operationId: previewTransformJob
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      requestBody:
+        $ref: '#/components/requestBodies/PreviewTransformRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/TransformPreview'
+        '400':
+          $ref: '#/components/responses/TransformBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/TransformForbidden'
+        '404':
+          $ref: '#/components/responses/TransformNotFound'
+  /_plugins/_transform/{TRANSFORM_ID}/_start:
+    post:
+      tags:
+        - Transforms API
+      summary: Start a transform job
+      description: |
+        Transform jobs created via the API are enabled by default. However, if you need to activate a job manually, you can use the start API operation.
+      operationId: startTransformJob
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/TransformId'
+      responses:
+        '200':
+          $ref: '#/components/responses/TransformStarted'
+        '400':
+          $ref: '#/components/responses/TransformBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/TransformForbidden'
+        '404':
+          $ref: '#/components/responses/TransformNotFound'
+
+  /_plugins/_transform/{TRANSFORM_ID}/_stop:
+    post:
+      tags:
+        - Transforms API
+      summary: Stop a transform job
+      description: |
+        Transform jobs created via the API are enabled by default. However, if you need to activate a job manually, you can use the start API operation.
+      operationId: stopTransformJob
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/TransformId'
+      responses:
+        '200':
+          $ref: '#/components/responses/TransformStopped'
+        '400':
+          $ref: '#/components/responses/TransformBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/TransformForbidden'
+        '404':
+          $ref: '#/components/responses/TransformNotFound'
+
+  /_plugins/_transform/{TRANSFORM_ID}:
+    put:
+      tags:
+        - Transforms API
+      summary: Create a transform job
+      description: |
+        Creates a transform job.
+      operationId: createTransformJob
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/TransformId'
+        - $ref: '#/components/parameters/defer_validation'
+        - $ref: '#/components/parameters/timeout'
+      requestBody:
+        $ref: '#/components/requestBodies/CreateTransformRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/TransformCreated'
+        '400':
+          $ref: '#/components/responses/TransformBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/TransformForbidden'
+        '404':
+          $ref: '#/components/responses/TransformNotFound'
+        '409':
+          $ref: '#/components/responses/TransformConflict'
+
+    get:
+      tags:
+        - Transforms API
+      summary: Get a transform job's details
+      description: |
+        Returns a transform job's details. You can also get details of all transform jobs by omitting transform_id.
+      operationId: getTransformJob
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/TransformId'
+        - $ref: '#/components/parameters/from'
+        - $ref: '#/components/parameters/size'
+        - $ref: '#/components/parameters/search'
+        - $ref: '#/components/parameters/sortField'
+        - $ref: '#/components/parameters/sortDirection'
+      responses:
+        '200':
+          $ref: '#/components/responses/TransformList'
+        '400':
+          $ref: '#/components/responses/TransformBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/TransformForbidden'
+        '404':
+          $ref: '#/components/responses/TransformNotFound'
+
+    delete:
+      tags:
+        - Transforms API
+      summary: Delete a transform job
+      description: |
+        Deletes a transform job.
+      operationId: deleteTransformJob
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/TransformId'
+        - $ref: '#/components/parameters/force'
+      responses:
+        '200':
+          $ref: '#/components/responses/TransformDeleted'
+        '400':
+          $ref: '#/components/responses/TransformBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/TransformForbidden'
+        '409':
+          $ref: '#/components/responses/TransformConflict'
+
+  /_plugins/_transform/{TRANSFORM_ID}?if_seq_no={SEQ_NO}&if_primary_term={PRIMARY_TERM}:
+    put:
+      tags:
+        - Transforms API
+      summary: Update a transform job
+      description: |
+        Updates an existing transform job if the specified transform_id already exists. This request requires providing the sequence number and primary term of the transform to be modified.
+      operationId: updateTransformJob
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/TransformId'
+        - name: if_seq_no
+          in: query
+          required: true
+          description: Executes the transform operation only if the most recent change to the transform job matches the specified sequence number.
+          schema:
+            type: integer
+        - name: if_primary_term
+          in: query
+          required: true
+          description: Executes the transform operation only if the most recent change to the transform job matches the specified primary term.
+          schema:
+            type: integer
+      requestBody:
+        $ref: '#/components/requestBodies/UpdateTransformRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/TransformUpdated'
+        '400':
+          $ref: '#/components/responses/TransformBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/TransformForbidden'
+        '404':
+          $ref: '#/components/responses/TransformNotFound'
+        '409':
+          $ref: '#/components/responses/TransformConflict'
+
+  /_plugins/_transform/{TRANSFORM_ID}/_explain:
+    get:
+      tags:
+        - Transforms API
+      summary: Get the status of a transform job
+      description: |
+        Retrieves the status and metadata of a transform job.
+      operationId: getTransformJobStatus
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/TransformId'
+      responses:
+        '200':
+          $ref: '#/components/responses/TransformStatus'
+        '400':
+          $ref: '#/components/responses/TransformBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/TransformForbidden'
+        '404':
+          $ref: '#/components/responses/TransformNotFound'
+
+components:
+  parameters:
+    TransformId:
+      name: TRANSFORM_ID
+      in: path
+      required: true
+      description: Identifier for the transform job. Must be unique within the cluster.
+      schema:
+        type: string
+
+    defer_validation:
+      name: defer_validation
+      in: query
+      description: When set to true, deferrable validations are skipped. This can be useful if the source index is expected to be created after the transform is set up.
+      schema:
+        type: boolean
+
+    timeout:
+      name: timeout
+      in: query
+      description: The duration to wait for a response. If no response is received within the specified timeout, the request fails and returns an error. The default value is 30 seconds.
+      schema:
+        type: string
+        format: time
+
+    from:
+      name: from
+      in: query
+      description: Specifies the starting index for retrieving transforms. Defaults to 0.
+      schema:
+        type: integer
+
+    size:
+      name: size
+      in: query
+      description: Defines the number of transform jobs to return. Defaults to 10
+      schema:
+        type: integer
+
+    search:
+      name: search
+      in: query
+      description: Filters results using the specified search term.
+      schema:
+        type: string
+
+    sortField:
+      name: sortField
+      in: query
+      description: Specifies the field used to sort the results.
+      schema:
+        type: string
+
+    sortDirection:
+      name: sortDirection
+      in: query
+      description: Defines the sorting order, either ASC (ascending) or DESC (descending). Defaults to ASC.
+      schema:
+        type: string
+        enum: [ASC, DESC]
+        default: ASC
+
+    force:
+      name: force
+      in: query
+      description: If set to true, the transform is deleted regardless of its current state. By default, this is false, requiring the transform to be stopped before deletion.
+      schema:
+        type: boolean
+
+  schemas:
+    PreviewTransformRequest:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: If set to true, the transform job is activated upon creation.
+        schedule:
+          type: object
+          description: Defines the execution schedule for the transform job.
+          properties:
+            interval:
+              type: object
+              properties:
+                start_time:
+                  type: integer
+                  description: Represents the start time of the transform job in Unix epoch format.
+                period:
+                  type: integer
+                  description: Determines how frequently the transform job runs.
+                unit:
+                  type: string
+                  description: Specifies the time unit for the execution period.
+        description:
+          type: string
+          description: Provides a description of the transform job.
+        metadata_id:
+          type: string
+          description: Includes any metadata linked to the transform job.
+        source_index:
+          type: string
+          description: Identifies the source index that contains the data to be transformed.
+        target_index:
+          type: string
+          description: Specifies the target index where transformed data will be stored. You can create a new index or update an existing one.
+        data_selection_query:
+          type: object
+          description: Defines a query in DSL (Domain-Specific Language) to filter a subset of the source index for transformation. For more details, see the query DSL documentation.
+          properties:
+            match_all:
+              type: object
+        page_size:
+          type: integer
+          description: Indicates the number of buckets processed and indexed concurrently by Index Management (IM). A higher value enhances performance but requires more memory. If memory runs low, IM automatically adjusts this value and retries until the process succeeds.
+        groups:
+          type: array
+          description: Specifies the grouping criteria for the transform job. Supported groups include terms, histogram, and date_histogram. Refer to the Bucket Aggregations documentation for more information.
+          items:
+            type: object
+            properties:
+              terms:
+                type: object
+                properties:
+                  source_field:
+                    type: string
+                    description: Lists the fields to be transformed.
+                  target_field:
+                    type: string
+                    description: The corresponding field in the target index for the transformed data.
+        aggregations:
+          type: object
+          description: Defines the aggregation methods for the transform job. Supported aggregations include sum, max, min, value_count, avg, scripted_metric, and percentiles. See Metric Aggregations for further details.
+          properties:
+            quantity:
+              type: object
+              properties:
+                sum:
+                  type: object
+                  properties:
+                    field:
+                      type: string
+                      description: The field being aggregated.
+
+    CreateTransformRequest:
+      type: object
+      required:
+        - transform
+      properties:
+        transform:
+          type: object
+          description: Defines the transform job configuration.
+          required:
+            - source_index
+            - target_index
+          properties:
+            enabled:
+              type: boolean
+              description: If set to true, the transform job is activated upon creation.
+            continuous:
+              type: boolean
+              description: Determines whether the transform job runs continuously. Continuous jobs execute on a schedule defined in the schedule field, processing newly transformed buckets and any additional data added to the source indexes. Non-continuous jobs run only once. The default setting is false.
+            schedule:
+              type: object
+              description: Defines the execution schedule for the transform job.
+              properties:
+                interval:
+                  type: object
+                  properties:
+                    start_time:
+                      type: integer
+                      description: Represents the start time of the transform job in Unix epoch format.
+                    period:
+                      type: integer
+                      description: The frequency at which the transform job runs.
+                    unit:
+                      type: string
+                      description: The time unit for the scheduling interval (e.g., "Minutes").
+            description:
+              type: string
+              description: Provides a description of the transform job.
+            metadata_id:
+              type: string
+              description: Includes any metadata linked to the transform job.
+            source_index:
+              type: string
+              description: Identifies the source index that contains the data to be transformed.
+            target_index:
+              type: string
+              description: Specifies the target index where transformed data will be stored. You can create a new index or update an existing one.
+            data_selection_query:
+              type: object
+              description: Defines a query in DSL (Domain-Specific Language) to filter a subset of the source index for transformation. For more details, see the query DSL documentation.
+              properties:
+                match_all:
+                  type: object
+                  description: A query that selects all documents with an optional boost value.
+                  properties:
+                    boost:
+                      type: integer
+                      description: The boost factor for query relevance (default is 1).
+            page_size:
+              type: integer
+              description: Indicates the number of buckets processed and indexed concurrently by Index Management (IM). A higher value enhances performance but requires more memory. If memory runs low, IM automatically adjusts this value and retries until the process succeeds.
+            groups:
+              type: array
+              description: Specifies the grouping criteria for the transform job. Supported groups include terms, histogram, and date_histogram. Refer to the Bucket Aggregations documentation for more information.
+              items:
+                type: object
+                properties:
+                  terms:
+                    type: object
+                    description: Specifies how fields from the source index are mapped to target fields.
+                    properties:
+                      source_field:
+                        type: string
+                        description: The field in the source index to group by.
+                      target_field:
+                        type: string
+                        description: The target field name.
+            aggregations:
+              type: object
+              description: Defines the aggregation methods for the transform job. Supported aggregations include sum, max, min, value_count, avg, scripted_metric, and percentiles. See Metric Aggregations for further details.
+              additionalProperties:
+                type: object
+                properties:
+                  sum:
+                    type: object
+                    properties:
+                      field:
+                        type: string
+                        description: The field being aggregated.
+
+    UpdateTransformRequest:
+      type: object
+      required:
+        - transform
+      properties:
+        transform:
+          type: object
+          description: Defines the transform job configuration for update.
+          properties:
+            enabled:
+              type: boolean
+              description: If set to true, the transform job is activated.
+            schedule:
+              type: object
+              description: Defines the execution schedule for the transform job. Includes interval.start_time, interval.period, and interval.unit.
+              properties:
+                interval:
+                  type: object
+                  properties:
+                    start_time:
+                      type: integer
+                      description: Specifies the Unix epoch timestamp when the transform job starts.
+                    period:
+                      type: integer
+                      description: Determines how frequently the transform job runs.
+                    unit:
+                      type: string
+                      description: Specifies the time unit for the execution period. Supported values include Minutes, Hours, and Days.
+            description:
+              type: string
+              description: Provides a brief explanation of the transform job.
+            source_index:
+              type: string
+              description: The name of the index containing the original data to be transformed.
+            target_index:
+              type: string
+              description: The name of the index where transformed data is stored.
+            data_selection_query:
+              type: object
+              description: A query that selects all documents with an optional boost value.
+              properties:
+                match_all:
+                  type: object
+            page_size:
+              type: integer
+              description: Sets the number of buckets processed and indexed concurrently. A higher value improves performance but increases memory usage. If memory runs low, Index Management (IM) automatically adjusts this value and retries the operation.
+            groups:
+              type: array
+              description: Specifies how fields from the source index are mapped to target fields.
+              items:
+                type: object
+                properties:
+                  terms:
+                    type: object
+                    properties:
+                      source_field:
+                        type: string
+                        description: The field in the source index to group by.
+                      target_field:
+                        type: string
+                        description: The corresponding field in the target index for the transformed data.
+            aggregations:
+              type: object
+              description: Specifies the sum aggregation for a given field.
+              properties:
+                quantity:
+                  type: object
+                  properties:
+                    sum:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                          description: The field being aggregated.
+
+  requestBodies:
+    CreateTransformRequestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateTransformRequest'
+          example:
+            transform:
+              enabled: true
+              continuous: true
+              schedule:
+                interval:
+                  period: 1
+                  unit: "Minutes"
+                  start_time: 1602100553
+              description: "Sample transform job"
+              source_index: "wazuh-alerts-4.x-2025.02.15"
+              target_index: "sample_target"
+              data_selection_query:
+                match_all: {}
+              page_size: 1
+              groups:
+                - terms:
+                    source_field: "rule.gpg13"
+                    target_field: "version"
+                - terms:
+                    source_field: "timestamp"
+                    target_field: "day"
+              aggregations:
+                quantity:
+                  sum:
+                    field: "total_quantity"
+
+    UpdateTransformRequestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UpdateTransformRequest'
+          example:
+            transform:
+              enabled: true
+              schedule:
+                interval:
+                  period: 1
+                  unit: "Minutes"
+                  start_time: 1602100553
+              description: "Sample transform job"
+              source_index: "wazuh-alerts-4.x-2025.02.15"
+              target_index: "sample_target"
+              data_selection_query:
+                match_all: {}
+              page_size: 1
+              groups:
+                - terms:
+                    source_field: "rule.gpg13"
+                    target_field: "version"
+                - terms:
+                    source_field: "timestamp"
+                    target_field: "day"
+              aggregations:
+                quantity:
+                  sum:
+                    field: "total_quantity"
+
+    PreviewTransformRequestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PreviewTransformRequest'
+
+  responses:
+    TransformPreview:
+      description: List tokens
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              documents:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    _doc_count:
+                      type: integer
+                      description: The number of source documents that contributed to this transformed document.
+                    quantity:
+                      type: integer
+                      description: The aggregated quantity value from the transform job. It is 0 here, which suggests either an absence of data in the source field or a misconfiguration in the aggregation.
+                    transform._doc_count:
+                      type: integer
+                      description: Represents the number of documents contributing to the transformed data. Similar to _doc_count, but may be specific to transformations.
+                    version:
+                      type: string
+                      nullable: true
+                      description: Represents the transformed value from the rule.gpg13 field (renamed to version). It contains different values ("10.1", "4.11", "7.8"), and null indicates missing or unmapped data.
+                    day:
+                      type: number
+                      description: Represents the timestamp (timestamp field from the source index) transformed into a grouping field (day). Stored as a Unix epoch time in milliseconds (e.g., 1739578932661 translates to a specific date-time).
+          example:
+            documents:
+              - _doc_count: 1
+                quantity: 0
+                transform._doc_count: 1
+                version: null
+                day: 1739578932661
+              - _doc_count: 1
+                quantity: 0
+                transform._doc_count: 1
+                version: "10.1"
+                day: 1739578882931
+              - _doc_count: 1
+                quantity: 0
+                transform._doc_count: 1
+                version: "10.1"
+                day: 1739578890704
+              - _doc_count: 1
+                quantity: 0
+                transform._doc_count: 1
+                version: "10.1"
+                day: 1739579242987
+              - _doc_count: 1
+                quantity: 0
+                transform._doc_count: 1
+                version: "4.11"
+                day: 1739622114700
+              - _doc_count: 1
+                quantity: 0
+                transform._doc_count: 1
+                version: "4.11"
+                day: 1739622114929
+              - _doc_count: 1
+                quantity: 0
+                transform._doc_count: 1
+                version: "4.11"
+                day: 1739622116224
+              - _doc_count: 1
+                quantity: 0
+                transform._doc_count: 1
+                version: "4.11"
+                day: 1739622116225
+              - _doc_count: 1
+                quantity: 0
+                transform._doc_count: 1
+                version: "4.11"
+                day: 1739622118642
+              - _doc_count: 1
+                quantity: 0
+                transform._doc_count: 1
+                version: "7.8"
+                day: 1739578888534
+
+    TransformStarted:
+      description: Transform job started successfully.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              acknowledged:
+                type: boolean
+                description: Specifies whether the request was successfully received and processed. A value of true means the operation was successfully executed
+          example:
+            acknowledged: true
+
+    TransformStopped:
+      description: Transform job stopped successfully.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              acknowledged:
+                type: boolean
+                description: Specifies whether the request was successfully received and processed. A value of true means the operation was successfully executed
+          example:
+            acknowledged: true
+
+    TransformCreated:
+      description: Transform job created successfully.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: The unique identifier of the transform job.
+              _version:
+                type: integer
+                description: The current version of the transform job. Increments with each update.
+              _seq_no:
+                type: integer
+                description: The sequence number assigned to this operation for version control.
+              _primary_term:
+                type: integer
+                description: The primary term assigned to the document in Wazuh indexer for concurrency control.
+              transform:
+                type: object
+                description: The transform job configuration.
+                properties:
+                  transform_id:
+                    type: string
+                    description: The unique ID assigned to the transform job.
+                  schema_version:
+                    type: integer
+                    description: The schema version used for the transform job.
+                  schedule:
+                    type: object
+                    description: Defines the execution schedule of the transform job.
+                    properties:
+                      interval:
+                        type: object
+                        properties:
+                          start_time:
+                            type: integer
+                            description: The Unix timestamp indicating when the schedule starts.
+                          period:
+                            type: integer
+                            description: The frequency at which the transform job runs.
+                          unit:
+                            type: string
+                            description: The time unit for the scheduling interval (e.g., "Minutes").
+                  metadata_id:
+                    type: string
+                    nullable: true
+                    description: Metadata associated with the transform job.
+                  updated_at:
+                    type: integer
+                    description: The timestamp of the last update to the transform job.
+                  enabled:
+                    type: boolean
+                    description: Indicates whether the transform job is currently active (true) or disabled (false).
+                  enabled_at:
+                    type: integer
+                    description: The timestamp when the transform job was last enabled.
+                  description:
+                    type: string
+                    description: A user-defined description of the transform job.
+                  source_index:
+                    type: string
+                    description: The name of the index containing the original data to be transformed.
+                  data_selection_query:
+                    type: object
+                    description: A query that selects all documents with an optional boost value.
+                    properties:
+                      match_all:
+                        type: object
+                        properties:
+                          boost:
+                            type: integer
+                            description: The boost factor for query relevance (default is 1).
+                  target_index:
+                    type: string
+                    description: The name of the index where transformed data is stored.
+                  page_size:
+                    type: integer
+                    description: The number of documents processed per batch during transformation.
+                  groups:
+                    type: array
+                    description: Specifies how fields from the source index are mapped to target fields.
+                    items:
+                      type: object
+                      properties:
+                        terms:
+                          type: object
+                          properties:
+                            source_field:
+                              type: string
+                              description: The field in the source index to group by.
+                            target_field:
+                              type: string
+                              description: The target field name.
+                  aggregations:
+                    type: object
+                    description: Specifies the sum aggregation for a given field.
+                    properties:
+                      quantity:
+                        type: object
+                        properties:
+                          sum:
+                            type: object
+                            properties:
+                              field:
+                                type: string
+                                description: The field being aggregated (total_quantity).
+                  continuous:
+                    type: boolean
+                    description: Indicates whether the transform job runs continuously (true) or only once (false).
+          example:
+            _id: "sample"
+            _version: 1
+            _seq_no: 18
+            _primary_term: 1
+            transform:
+              transform_id: "sample"
+              schema_version: 21
+              schedule:
+                interval:
+                  start_time: 1602100553
+                  period: 1
+                  unit: "Minutes"
+              metadata_id: null
+              updated_at: 1739871974541
+              enabled: true
+              enabled_at: 1739871974541
+              description: "Sample transform job"
+              source_index: "wazuh-alerts-4.x-2025.02.15"
+              data_selection_query:
+                match_all:
+                  boost: 1
+              target_index: "sample_target"
+              page_size: 1
+              groups:
+                - terms:
+                    source_field: "rule.gpg13"
+                    target_field: "version"
+                - terms:
+                    source_field: "timestamp"
+                    target_field: "day"
+              aggregations:
+                quantity:
+                  sum:
+                    field: "total_quantity"
+              continuous: true
+
+    TransformBadRequest:
+      description: Bad request when creating transform job.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  root_cause:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        reason:
+                          type: string
+                  type:
+                    type: string
+                  reason:
+                    type: string
+              status:
+                type: integer
+          example:
+            error:
+              root_cause:
+                - type: "illegal_argument_exception"
+                  reason: "Missing transform ID"
+              type: "illegal_argument_exception"
+              reason: "Missing transform ID"
+            status: 400
+
+    TransformForbidden:
+      description: Permission denied when creating transform job.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  root_cause:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        reason:
+                          type: string
+                  type:
+                    type: string
+                  reason:
+                    type: string
+              status:
+                type: integer
+          example:
+            error:
+              root_cause:
+                - type: "security_exception"
+                  reason: "no permissions for [indices:admin/analyze] and User [name=test, backend_roles=[], requestedTenant=null]"
+              type: "security_exception"
+              reason: "no permissions for [indices:admin/analyze] and User [name=test, backend_roles=[], requestedTenant=null]"
+            status: 403
+
+    TransformNotFound:
+      description: Source index not found when creating transform job.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  root_cause:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        reason:
+                          type: string
+                  type:
+                    type: string
+                  reason:
+                    type: string
+              status:
+                type: integer
+          example:
+            error:
+              root_cause:
+                - type: "status_exception"
+                  reason: "No specified source index exist in the cluster"
+              type: "status_exception"
+              reason: "No specified source index exist in the cluster"
+            status: 404
+
+    TransformConflict:
+      description: Version conflict when creating transform job.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  root_cause:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        reason:
+                          type: string
+                        index:
+                          type: string
+                        shard:
+                          type: string
+                        index_uuid:
+                          type: string
+                  type:
+                    type: string
+                  reason:
+                    type: string
+                  index:
+                    type: string
+                  shard:
+                    type: string
+                  index_uuid:
+                    type: string
+              status:
+                type: integer
+          example:
+            error:
+              root_cause:
+                - type: "version_conflict_engine_exception"
+                  reason: "[sample]: version conflict, document already exists (current version [2])"
+                  index: ".opendistro-ism-config"
+                  shard: "0"
+                  index_uuid: "Bcf6j1bkSKG5-sKZnV11sg"
+              type: "version_conflict_engine_exception"
+              reason: "[sample]: version conflict, document already exists (current version [2])"
+              index: ".opendistro-ism-config"
+              shard: "0"
+              index_uuid: "Bcf6j1bkSKG5-sKZnV11sg"
+            status: 409
+
+    TransformList:
+      description: List of transform jobs retrieved successfully.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              total_transforms:
+                type: integer
+                description: The total number of transform jobs retrieved in the response.
+              transforms:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    _id:
+                      type: string
+                      description: The unique identifier of the transform job.
+                    _version:
+                      type: integer
+                      description: The current version of the transform job. Increments with each update.
+                    _seq_no:
+                      type: integer
+                      description: The sequence number assigned to this operation for version control.
+                    _primary_term:
+                      type: integer
+                      description: The primary term assigned to the document in Wazuh indexer for concurrency control.
+                    transform:
+                      type: object
+                      description: The transform job configuration.
+                      properties:
+                        transform_id:
+                          type: string
+                          description: The unique ID assigned to the transform job.
+                        schema_version:
+                          type: integer
+                          description: The schema version used for the transform job.
+                        schedule:
+                          type: object
+                          description: Defines the execution schedule of the transform job.
+                          properties:
+                            interval:
+                              type: object
+                              properties:
+                                start_time:
+                                  type: integer
+                                  description: The Unix timestamp indicates when the schedule starts.
+                                period:
+                                  type: integer
+                                  description: The frequency at which the transform job runs.
+                                unit:
+                                  type: string
+                                  description: The time unit for the scheduling interval (e.g., "Minutes").
+                        metadata_id:
+                          type: string
+                          description: Metadata associated with the transform job.
+                        updated_at:
+                          type: integer
+                          description: The timestamp of the last update to the transform job.
+                        enabled:
+                          type: boolean
+                          description: Indicates whether the transform job is currently active (true) or disabled (false).
+                        enabled_at:
+                          type: integer
+                          nullable: true
+                          description: The timestamp when the transform job was last enabled.
+                        description:
+                          type: string
+                          description: A user-defined description of the transform job.
+                        source_index:
+                          type: string
+                          description: The name of the index containing the original data to be transformed.
+                        data_selection_query:
+                          type: object
+                          description: A query that selects all documents with an optional boost value.
+                          properties:
+                            match_all:
+                              type: object
+                              properties:
+                                boost:
+                                  type: integer
+                                  description: The boost factor for query relevance (default is 1).
+                        target_index:
+                          type: string
+                          description: The name of the index where transformed data is stored.
+                        page_size:
+                          type: integer
+                          description: The number of documents processed per batch during transformation.
+                        groups:
+                          type: array
+                          description: Specifies how fields from the source index are mapped to target fields.
+                          items:
+                            type: object
+                            properties:
+                              terms:
+                                type: object
+                                properties:
+                                  source_field:
+                                    type: string
+                                    description: The field in the source index to group by.
+                                  target_field:
+                                    type: string
+                                    description: The corresponding field in the target index for the transformed data.
+                        aggregations:
+                          type: object
+                          description: Specifies the sum aggregation for a given field.
+                          properties:
+                            quantity:
+                              type: object
+                              properties:
+                                sum:
+                                  type: object
+                                  properties:
+                                    field:
+                                      type: string
+                                      description: The field being aggregated (total_quantity).
+                        continuous:
+                          type: boolean
+                          description: Indicates whether the transform job runs continuously (true) or only once (false).
+          example:
+            total_transforms: 2
+            transforms:
+              - _id: "sample"
+                _seq_no: 20
+                _primary_term: 1
+                transform:
+                  transform_id: "sample"
+                  schema_version: 21
+                  schedule:
+                    interval:
+                      start_time: 1602100553
+                      period: 1
+                      unit: "Minutes"
+                  metadata_id: "q5Qth4RY2jjivS1WtBeqzg"
+                  updated_at: 1739872000591
+                  enabled: true
+                  enabled_at: 1739871974541
+                  description: "Sample transform job"
+                  source_index: "wazuh-alerts-4.x-2025.02.15"
+                  data_selection_query:
+                    match_all:
+                      boost: 1
+                  target_index: "sample_target"
+                  page_size: 1
+                  groups:
+                    - terms:
+                        source_field: "rule.gpg13"
+                        target_field: "version"
+                    - terms:
+                        source_field: "timestamp"
+                        target_field: "day"
+                  aggregations:
+                    quantity:
+                      sum:
+                        field: "total_quantity"
+                  continuous: true
+              - _id: "sample_data"
+                _seq_no: 2739
+                _primary_term: 1
+                transform:
+                  transform_id: "sample_data"
+                  schema_version: 21
+                  schedule:
+                    interval:
+                      start_time: 1602100553
+                      period: 1
+                      unit: "Minutes"
+                  metadata_id: "dedBF7JCqsGaztkmAWuhIw"
+                  updated_at: 1739933320818
+                  enabled: false
+                  enabled_at: null
+                  description: "Sample transform job"
+                  source_index: "wazuh-alerts-4.x-2025.02.15"
+                  data_selection_query:
+                    match_all:
+                      boost: 1
+                  target_index: "sample_target"
+                  page_size: 1
+                  groups:
+                    - terms:
+                        source_field: "rule.gpg13"
+                        target_field: "version"
+                    - terms:
+                        source_field: "timestamp"
+                        target_field: "day"
+                  aggregations:
+                    quantity:
+                      sum:
+                        field: "total_quantity"
+                  continuous: false
+
+    TransformUpdated:
+      description: Transform job updated successfully.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: The unique identifier of the transform job.
+              _version:
+                type: integer
+                description: The current version of the transform job. Increments with each update.
+              _seq_no:
+                type: integer
+                description: The sequence number assigned to this operation for version control.
+              _primary_term:
+                type: integer
+                description: The primary term assigned to the document in Wazuh indexer for concurrency control.
+              transform:
+                type: object
+                description: The transform job configuration.
+                properties:
+                  transform_id:
+                    type: string
+                    description: The unique ID assigned to the transform job.
+                  schema_version:
+                    type: integer
+                    description: The schema version used for the transform job.
+                  schedule:
+                    type: object
+                    description: Defines the execution schedule of the transform job.
+                    properties:
+                      interval:
+                        type: object
+                        properties:
+                          start_time:
+                            type: integer
+                            description: The Unix timestamp indicates when the schedule starts.
+                          period:
+                            type: integer
+                            description: The frequency at which the transform job runs.
+                          unit:
+                            type: string
+                            description: The time unit for the scheduling interval (e.g., "Minutes").
+                  metadata_id:
+                    type: string
+                    description: Metadata associated with the transform job.
+                  updated_at:
+                    type: integer
+                    description: The timestamp of the last update to the transform job.
+                  enabled:
+                    type: boolean
+                    description: Indicates whether the transform job is currently active (true) or disabled (false).
+                  enabled_at:
+                    type: integer
+                    description: The timestamp when the transform job was last enabled.
+                  description:
+                    type: string
+                    description: A user-defined description of the transform job.
+                  source_index:
+                    type: string
+                    description: The name of the index containing the original data to be transformed.
+                  data_selection_query:
+                    type: object
+                    description: A query that selects all documents with an optional boost value.
+                    properties:
+                      match_all:
+                        type: object
+                        properties:
+                          boost:
+                            type: integer
+                            description: The boost factor for query relevance (default is 1).
+                  target_index:
+                    type: string
+                    description: The name of the index where transformed data is stored.
+                  page_size:
+                    type: integer
+                    description: The number of documents processed per batch during transformation.
+                  groups:
+                    type: array
+                    description: Specifies how fields from the source index are mapped to target fields.
+                    items:
+                      type: object
+                      properties:
+                        terms:
+                          type: object
+                          properties:
+                            source_field:
+                              type: string
+                              description: The field in the source index to group by.
+                            target_field:
+                              type: string
+                              description: The target field name.
+                  aggregations:
+                    type: object
+                    description: Specifies the sum aggregation for a given field.
+                    properties:
+                      quantity:
+                        type: object
+                        properties:
+                          sum:
+                            type: object
+                            properties:
+                              field:
+                                type: string
+                                description: The field being aggregated (total_quantity).
+                  continuous:
+                    type: boolean
+                    description: Indicates whether the transform job runs continuously (true) or only once (false).
+          example:
+            _id: "sample_data"
+            _version: 4
+            _seq_no: 2562
+            _primary_term: 1
+            transform:
+              transform_id: "sample_data"
+              schema_version: 21
+              schedule:
+                interval:
+                  start_time: 1602100553
+                  period: 1
+                  unit: "Minutes"
+              metadata_id: null
+              updated_at: 1739931377622
+              enabled: true
+              enabled_at: 1739931377622
+              description: "Sample transform job"
+              source_index: "wazuh-alerts-4.x-2025.02.15"
+              data_selection_query:
+                match_all:
+                  boost: 1
+              target_index: "sample_target"
+              page_size: 1
+              groups:
+                - terms:
+                    source_field: "rule.gpg13"
+                    target_field: "version"
+                - terms:
+                    source_field: "timestamp"
+                    target_field: "day"
+              aggregations:
+                quantity:
+                  sum:
+                    field: "total_quantity"
+              continuous: false
+
+    TransformStatus:
+      description: Transform job status retrieved successfully.
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties:
+              type: object
+              properties:
+                metadata_id:
+                  type: string
+                  description: Unique identifier for the metadata associated with the transform job.
+                transform_metadata:
+                  type: object
+                  properties:
+                    transform_id:
+                      type: string
+                      description: Unique ID of the transform job.
+                    last_updated_at:
+                      type: integer
+                      description: The Unix timestamp indicates when the transform metadata was last updated.
+                    status:
+                      type: string
+                      description: The current state of the transform job (stopped, finished, etc.).
+                    failure_reason:
+                      type: string
+                      nullable: true
+                      description: Reason for transform job failure. If any. If null, no failures occurred.
+                    stats:
+                      type: object
+                      properties:
+                        pages_processed:
+                          type: integer
+                          description: Number of pages of data processed by the transform job.
+                        documents_processed:
+                          type: integer
+                          description: Number of documents read from the source index.
+                        documents_indexed:
+                          type: integer
+                          description: Number of transformed documents indexed into the target index.
+                        index_time_in_millis:
+                          type: integer
+                          description: Total time spent indexing documents in milliseconds.
+                        search_time_in_millis:
+                          type: integer
+                          description: Total time spent searching the source index in milliseconds.
+                    continuous_stats:
+                      type: object
+                      properties:
+                        last_timestamp:
+                          type: integer
+                          description: The last timestamp when new data was processed.
+                        documents_behind:
+                          type: object
+                          description: Specifies the number of documents yet to be processed in each source index.
+                          additionalProperties:
+                            type: integer
+          example:
+            sample:
+              metadata_id: "q5Qth4RY2jjivS1WtBeqzg"
+              transform_metadata:
+                transform_id: "sample"
+                last_updated_at: 1740043445650
+                status: "stopped"
+                failure_reason: null
+                stats:
+                  pages_processed: 14
+                  documents_processed: 10
+                  documents_indexed: 10
+                  index_time_in_millis: 94
+                  search_time_in_millis: 166
+                continuous_stats:
+                  last_timestamp: 1740043420567
+                  documents_behind:
+                    "wazuh-alerts-4.x-2025.02.15": 0
+            sample_data:
+              metadata_id: "dedBF7JCqsGaztkmAWuhIw"
+              transform_metadata:
+                transform_id: "sample_data"
+                last_updated_at: 1739933320809
+                status: "finished"
+                failure_reason: null
+                stats:
+                  pages_processed: 12
+                  documents_processed: 11
+                  documents_indexed: 11
+                  index_time_in_millis: 34
+                  search_time_in_millis: 36
+
+    TransformDeleted:
+      description: Transform job deleted successfully.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              took:
+                type: integer
+                description: The time (in milliseconds) that the request took to execute.
+              errors:
+                type: boolean
+                description: Indicates whether any errors occurred during the operation. A value of false means no errors were encountered.
+              items:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    delete:
+                      type: object
+                      properties:
+                        _index:
+                          type: string
+                          description: The name of the index from which the document was deleted
+                        _id:
+                          type: string
+                          description: The unique ID of the deleted document
+                        _version:
+                          type: integer
+                          description: The version number of the document after deletion. Each update to a document increments this value.
+                        result:
+                          type: string
+                          description: The outcome of the delete operation.
+                        forced_refresh:
+                          type: boolean
+                          description: Indicates whether a refresh operation was forced after deletion. This ensures the document is immediately removed from search results.
+                        _shards:
+                          type: object
+                          properties:
+                            total:
+                              type: integer
+                              description: The total number of shards affected.
+                            successful:
+                              type: integer
+                              description: The number of shards where the delete operation succeeded
+                            failed:
+                              type: integer
+                              description: The number of shards where the delete operation failed
+                        _seq_no:
+                          type: integer
+                          description: The sequence number assigned to this delete operation
+                        _primary_term:
+                          type: integer
+                          description: The primary term associated with the delete operation.
+                        status:
+                          type: integer
+                          description: The HTTP status code for the operation. A value of 200 means the delete request was successful.
+          example:
+            took: 19
+            errors: false
+            items:
+              - delete:
+                  _index: ".opendistro-ism-config"
+                  _id: "sample_data"
+                  _version: 19
+                  result: "deleted"
+                  forced_refresh: true
+                  _shards:
+                    total: 2
+                    successful: 1
+                    failed: 0
+                  _seq_no: 16056
+                  _primary_term: 2
+                  status: 200

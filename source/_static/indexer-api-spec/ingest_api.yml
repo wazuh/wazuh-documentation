@@ -1,0 +1,903 @@
+paths:
+  /_ingest/pipeline/{pipeline_id}:
+    parameters:
+      - $ref: '#/components/parameters/pipeline_id'
+    put:
+      tags: [ Ingest APIs ]
+      summary: Create or Update Pipeline
+      description: |
+        The Create Pipeline API operation is used to define or update pipelines in OpenSearch. Each pipeline must include at least one processor, which determines how documents are modified during ingestion.
+
+        ### Template snippets
+        Some processor parameters support Mustache template snippets. To get the value of a field, surround the field name in three curly braces, for example, `{{{field-name}}}`.
+
+        **Example:** set ingest processor using Mustache template snippet
+
+        The following example sets the field `{{{role}}}` with a value `{{{tenure}}}`:
+
+        ```
+        PUT _ingest/pipeline/wazuh-pipeline
+        {
+          "processors": [
+            {
+              "set": {
+                "field": "{{{role}}}",
+                "value": "{{{tenure}}}"
+              }
+            }
+          ]
+        }
+        ```
+      operationId: createUpdatePipeline
+      parameters:
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/timeout'
+      requestBody:
+        $ref: '#/components/requestBodies/CreatePipelineRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/CreatePipelineSuccess'
+        '400':
+          $ref: '#/components/responses/CreatePipelineBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '409':
+          $ref: '#/components/responses/CreatePipelineConflict'
+      security:
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
+
+    get:
+      tags: [ Ingest APIs ]
+      summary: Get Pipeline
+      description: |
+        The get ingest pipeline API operation retrieves all the information about the pipeline. The get ingest pipeline API operation retrieves all the information about the pipeline. Use the GET _ingest/pipeline/ to retrieve information about all ingest pipelines.
+      operationId: getPipeline
+      parameters:
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: '#/components/responses/GetPipelineSuccess'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/GetPipelineNotFound'
+      security:
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
+
+    delete:
+      tags: [ Ingest APIs ]
+      summary: Delete Pipeline
+      description: |
+        The delete pipeline API operation deletes a pipeline.
+
+        You can delete a specific pipeline by its ID or use wildcards to delete multiple pipelines.
+      operationId: deletePipeline
+      parameters:
+        - $ref: '#/components/parameters/pipeline_id'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: '#/components/responses/DeletePipelineSuccess'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/DeletePipelineNotFound'
+      security:
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
+
+  /_ingest/pipeline/{pipeline_id}/_simulate:
+    get:
+      tags: [ Ingest APIs ]
+      summary: Simulate pipeline (GET)
+      description: |
+        The following requests simulate a single pipeline based on the pipeline id:
+      operationId: simulatePipeline
+      parameters:
+        - $ref: '#/components/parameters/pipeline_id'
+        - name: verbose
+          in: query
+          required: false
+          description: |
+            This enables verbose mode, which includes the output data after each processor in the pipeline execution.
+          schema:
+            type: boolean
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/SimulatePipelineRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/SimulatePipelineSuccess'
+        '400':
+          $ref: '#/components/responses/SimulatePipelineBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+      security:
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
+
+    post:
+      tags: [ Ingest APIs ]
+      summary: Simulate pipeline (POST)
+      description: |
+        The following requests simulate a single pipeline based on the pipeline id:
+      operationId: simulatePipelinePost
+      parameters:
+        - $ref: '#/components/parameters/pipeline_id'
+        - name: verbose
+          in: query
+          required: false
+          description: |
+            This enables verbose mode, which includes the output data after each processor in the pipeline execution.
+          schema:
+            type: boolean
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/SimulatePipelineRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/SimulatePipelineSuccess'
+        '400':
+          $ref: '#/components/responses/SimulatePipelineBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+      security:
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
+
+  /_ingest/pipeline/_simulate:
+    get:
+      tags: [ Ingest APIs ]
+      summary: Simulate pipeline (GET)
+      description: |
+        The following requests simulate the latest ingest pipeline created
+      operationId: simulateLatestPipeline
+      parameters:
+        - name: verbose
+          in: query
+          required: false
+          description: |
+            This enables verbose mode, which includes the output data after each processor in the pipeline execution.
+          schema:
+            type: boolean
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/SimulatePipelineRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/SimulatePipelineSuccess'
+        '400':
+          $ref: '#/components/responses/SimulatePipelineBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+      security:
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
+
+    post:
+      tags: [ Ingest APIs ]
+      summary: Simulate pipeline (POST)
+      description: |
+        The following requests simulate the latest ingest pipeline created
+      operationId: simulateLatestPipelinePost
+      parameters:
+        - name: verbose
+          in: query
+          required: false
+          description: |
+            This enables verbose mode, which includes the output data after each processor in the pipeline execution.
+          schema:
+            type: boolean
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/SimulatePipelineRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/SimulatePipelineSuccess'
+        '400':
+          $ref: '#/components/responses/SimulatePipelineBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+      security:
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
+
+  /_ingest/pipeline/{pipeline_id}/_data:
+    get:
+      tags: [ Ingest APIs ]
+      summary: Access Data in a Pipeline
+      description: |
+        In ingest pipelines, the ctx object provides access to the document's data. This object represents the document being processed and enables you to read, update, or enrich its fields. Processors within the pipeline have read and write access to both the document's _source field and its metadata fields.
+
+        ## Accessing document fields
+        The ctx object makes all document fields accessible, allowing you to reference them directly using dot notation.
+
+        **Example: Access a top-level field**
+        Given the following example document:
+        ```json
+        {
+          "user": "alice"
+        }
+        ```
+
+        You can access user as follows:
+        ```json
+        "field": "ctx.user"
+        ```
+
+        **Example: Access a nested field**
+        Given the following example document:
+        ```json
+        {
+          "user": {
+            "name": "alice"
+          }
+        }
+        ```
+
+        You can access user.name as follows:
+        ```json
+        "field": "ctx.user.name"
+        ```
+
+        ## Accessing a field in the source
+        To access a field in the document _source, refer to the field by its name:
+        ```json
+        {
+          "set": {
+            "field": "environment",
+            "value": "production"
+          }
+        }
+        ```
+
+        Alternatively, you can explicitly use _source:
+        ```json
+        {
+          "set": {
+            "field": "_source.environment",
+            "value": "production"
+          }
+        }
+        ```
+
+        ## Accessing metadata fields
+        You can read or write to metadata fields such as _index, _type, _id, _routing.
+
+        **Example: Set _routing dynamically**
+        ```json
+        {
+          "set": {
+            "field": "_routing",
+            "value": "{{region}}"
+          }
+        }
+        ```
+
+        Using {{_id}} is not supported when document IDs are auto-generated.
+
+        ## Accessing ingest metadata fields
+        The _ingest.timestamp field represents the time at which the ingest node received the document. To persist this timestamp, use the set processor:
+        ```json
+        {
+          "set": {
+            "field": "received_at",
+            "value": "{{_ingest.timestamp}}"
+          }
+        }
+        ```
+
+        ## Using ctx in Mustache templates
+        Mustache templates allow you to dynamically insert field values into processor settings. To include unescaped field values, use triple curly braces ({{{ and }}}).
+
+        **Example: Combining source fields**
+        The following processor configuration combines the app and env fields, separated by an underscore (_), and stores the result in the log_label field:
+        ```json
+        {
+          "set": {
+            "field": "log_label",
+            "value": "{{{app}}}_{{{env}}}"
+          }
+        }
+        ```
+
+        **Example: Generating a dynamic greeting using the set processor**
+        If a document's user field is set to alice, use the following syntax to produce the result "greeting": "Hello, alice!":
+        ```json
+        {
+          "set": {
+            "field": "greeting",
+            "value": "Hello, {{{user}}}!"
+          }
+        }
+        ```
+
+        ## Dynamic field names
+        You can use a field's value as the name of a new field:
+        ```json
+        {
+          "set": {
+            "field": "{{service}}",
+            "value": "{{code}}"
+          }
+        }
+        ```
+
+        **Example: Routing to a dynamic index based on status**
+        The following processor configuration sets the target index dynamically by appending -events to the value of the status field:
+        ```json
+        {
+          "set": {
+            "field": "_index",
+            "value": "{{status}}-events"
+          }
+        }
+        ```
+
+        ## Using ctx in the script processor
+        The script processor enables advanced transformations by allowing you to execute custom scripts that modify document fields during ingestion.
+
+        **Example: Adding a field only if another is missing**
+        The following processor adds the error_message field with the value "none" only if the field is missing from the document:
+        ```json
+        {
+          "script": {
+            "lang": "painless",
+            "source": "if (ctx.error_message == null) { ctx.error_message = 'none'; }"
+          }
+        }
+        ```
+
+        **Example: Copying a value from one field to another**
+        The following processor copies the value from the timestamp field into a new field called event_time:
+        ```json
+        {
+          "script": {
+            "lang": "painless",
+            "source": "ctx.event_time = ctx.timestamp;"
+          }
+        }
+        ```
+
+        **Example of a complete pipeline**
+        The example below presents a complete ingest pipeline that sets a value for the tagline field using an existing field from the document, extracts the year from the date field, and captures the document's ingest timestamp in the received_at field.
+        ```json
+        PUT _ingest/pipeline/example-pipeline
+        {
+          "description": "Sets tags, log label, and defaults error message",
+          "processors": [
+            {
+              "set": {
+                "field": "tagline",
+                "value": "{{{user.first}}} from {{{department}}}"
+              }
+            },
+            {
+              "script": {
+                "lang": "painless",
+                "source": "ctx.year = ctx.date.substring(0, 4);"
+              }
+            },
+            {
+              "set": {
+                "field": "received_at",
+                "value": "{{_ingest.timestamp}}"
+              }
+            }
+          ]
+        }
+        ```
+
+        **To test the pipeline, use the following request:**
+        ```json
+        POST _ingest/pipeline/example-pipeline/_simulate
+        {
+          "docs": [
+            {
+              "_source": {
+                "user": {
+                  "first": "Liam"
+                },
+                "department": "Engineering",
+                "date": "2024-12-03T14:05:00Z"
+              }
+            }
+          ]
+        }
+        ```
+
+        **The response shows the enriched document after processing, including the newly added tagline, extracted year, and the received_at timestamp generated by the ingest pipeline:**
+        ```json
+        {
+          "docs": [
+            {
+              "doc": {
+                "_index": "_index",
+                "_id": "_id",
+                "_source": {
+                  "date": "2024-12-03T14:05:00Z",
+                  "year": "2024",
+                  "received_at": "2025-04-22T11:18:50.834050015Z",
+                  "tagline": "Liam from Engineering",
+                  "department": "Engineering",
+                  "user": {
+                    "first": "Liam"
+                  }
+                },
+                "_ingest": {
+                  "timestamp": "2025-04-22T11:18:50.834050015Z"
+                }
+              }
+            }
+          ]
+        }
+        ```
+      operationId: accessPipelineData
+      parameters:
+        - $ref: '#/components/parameters/pipeline_id'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: '#/components/responses/AccessPipelineDataSuccess'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/AccessPipelineDataNotFound'
+      security:
+        - basicAuth: [ ]
+        - jwtAuth: [ ]
+
+components:
+  parameters:
+    pipeline_id:
+      name: pipeline_id
+      in: path
+      required: true
+      description: A unique identifier assigned to the ingest pipeline, referred to as the pipeline id
+      schema:
+        type: string
+        example: wazuh-pipeline
+
+    cluster_manager_timeout:
+      name: cluster_manager_timeout
+      in: query
+      description: The time to wait for a connection with the cluster manager node.
+      schema:
+        type: string
+        format: time
+        default: 30s
+
+    timeout:
+      name: timeout
+      in: query
+      description: The time to wait for a response from the operation.
+      schema:
+        type: string
+        format: time
+        default: 30s
+
+  schemas:
+    CreatePipelineRequest:
+      type: object
+      properties:
+        processors:
+          type: array
+          items:
+            type: object
+          description: A list of processors that sequentially transform documents in the pipeline.
+        description:
+          type: string
+          description: A brief explanation or summary of the ingest pipeline.
+      required:
+        - processors
+
+    CreatePipelineResponse:
+      type: object
+      properties:
+        acknowledged:
+          type: boolean
+          description: Indicates whether the request to create or update the ingest pipeline was successfully received and applied by the cluster. A value `true` confirms success.
+
+    GetPipelineResponse:
+      type: object
+      additionalProperties:
+        type: object
+        properties:
+          description:
+            type: string
+            description: A brief explanation or summary of the ingest pipeline.
+          processors:
+            type: array
+            items:
+              type: object
+            description: A list of processors that sequentially transform documents in the pipeline. Each object in the processors array represents a specific transformation.
+
+    IngestError:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            root_cause:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                  reason:
+                    type: string
+            type:
+              type: string
+            reason:
+              type: string
+        status:
+          type: integer
+
+    IngestBadRequestError:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            root_cause:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                  reason:
+                    type: string
+                  property_name:
+                    type: string
+            type:
+              type: string
+            reason:
+              type: string
+            property_name:
+              type: string
+        status:
+          type: integer
+
+    IngestConflictError:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            root_cause:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                  reason:
+                    type: string
+                  index:
+                    type: string
+                  shard:
+                    type: integer
+                  index_uuid:
+                    type: string
+            type:
+              type: string
+            reason:
+              type: string
+            index:
+              type: string
+            shard:
+              type: integer
+            index_uuid:
+              type: string
+        status:
+          type: integer
+
+    SimulatePipelineRequest:
+      type: object
+      properties:
+        pipeline:
+          type: object
+          description: Pipeline definition to simulate (optional).
+        docs:
+          type: array
+          description: List of documents to simulate.
+          items:
+            type: object
+            properties:
+              _index:
+                type: string
+              _id:
+                type: string
+              _source:
+                type: object
+                additionalProperties: true
+      required:
+        - docs
+
+    SimulatePipelineResponse:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            type: object
+            properties:
+              doc:
+                type: object
+                properties:
+                  _index:
+                    type: string
+                  _id:
+                    type: string
+                  _source:
+                    type: object
+                    additionalProperties: true
+                  _ingest:
+                    type: object
+                    properties:
+                      timestamp:
+                        type: string
+                        format: date-time
+
+  requestBodies:
+    CreatePipelineRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreatePipelineRequest'
+          example:
+            description: "This pipeline processes student data"
+            processors:
+              - set:
+                  description: "Sets the graduation year to 2023"
+                  field: "grad_year"
+                  value: 2023
+              - set:
+                  description: "Sets graduated to true"
+                  field: "graduated"
+                  value: true
+              - uppercase:
+                  field: "name"
+
+    SimulatePipelineRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SimulatePipelineRequest'
+          example:
+            docs:
+              - _index: my-index
+                _id: "1"
+                _source:
+                  grad_year: 2024
+                  graduated: false
+                  name: "John Doe"
+              - _index: my-index
+                _id: "2"
+                _source:
+                  grad_year: 2025
+                  graduated: false
+                  name: "Jane Doe"
+
+  responses:
+    CreatePipelineSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreatePipelineResponse'
+          example:
+            acknowledged: true
+
+    CreatePipelineBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IngestBadRequestError'
+          example:
+            error:
+              root_cause:
+                - type: "parse_exception"
+                  reason: "[processors] required property is missing"
+                  property_name: "processors"
+              type: "parse_exception"
+              reason: "[processors] required property is missing"
+              property_name: "processors"
+            status: 400
+
+    CreatePipelineConflict:
+      description: Response to report a version conflict
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IngestConflictError'
+          example:
+
+
+
+
+    GetPipelineSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GetPipelineResponse'
+          example:
+            wazuh-pipeline:
+              description: "This pipeline processes student data"
+              processors:
+                - set:
+                    description: "Sets the graduation year to 2023"
+                    field: "grad_year"
+                    value: 2023
+                - set:
+                    description: "Sets graduated to true"
+                    field: "graduated"
+                    value: 5
+                - uppercase:
+                    field: "name"
+
+
+
+
+    GetPipelineNotFound:
+      description: Response to report a request not found
+      content:
+        application/json:
+          schema:
+            type: string
+          example: "404 - Not Found"
+
+    SimulatePipelineSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              docs:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    doc:
+                      type: object
+                      properties:
+                        _index:
+                          type: string
+                          description: The index where the document would be stored after processing.
+                        _id:
+                          type: string
+                          description: The identifier assigned to the document.
+                        _source:
+                          type: object
+                          description: The content of the document after all pipeline transformations.
+                        _ingest:
+                          type: object
+                          description: This displays metadata about the ingest process.
+                          properties:
+                            timestamp:
+                              type: string
+                              description: The timestamp indicates when the document was processed by the pipeline. It is automatically generated.
+          example:
+            docs:
+              - doc:
+                  _index: my-index
+                  _id: "1"
+                  _source:
+                    name: "JOHN DOE"
+                    grad_year: 2023
+                    graduated: true
+                  _ingest:
+                    timestamp: "2025-04-22T09:00:01.674578946Z"
+              - doc:
+                  _index: my-index
+                  _id: "2"
+                  _source:
+                    name: "JANE DOE"
+                    grad_year: 2023
+                    graduated: true
+                  _ingest:
+                    timestamp: "2025-04-22T09:00:01.674584808Z"
+
+    SimulatePipelineBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IngestError'
+          example:
+            error:
+              root_cause:
+                - type: illegal_argument_exception
+                  reason: pipeline [wazuh-pipelines] does not exist
+              type: illegal_argument_exception
+              reason: pipeline [wazuh-pipelines] does not exist
+            status: 400
+
+
+
+
+
+    AccessPipelineDataSuccess:
+      description: Successfully accessed pipeline data
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true
+          example:
+            pipeline_data:
+              processors:
+                - set:
+                    field: environment
+                    value: production
+                - set:
+                    field: received_at
+                    value: "{{_ingest.timestamp}}"
+              description: "Pipeline for accessing and transforming document data"
+
+
+
+
+
+    AccessPipelineDataNotFound:
+      description: Pipeline not found
+      content:
+        application/json:
+          schema:
+            type: string
+          example: "404 - Not Found"
+
+    DeletePipelineSuccess:
+      description: Pipeline deleted successfully
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              acknowledged:
+                type: boolean
+                description: This indicates whether the pipeline deletion request was successfully received and processed by the Wazuh indexer. A value of true confirms the pipeline was deleted.
+          example:
+            acknowledged: true
+
+
+
+
+
+    DeletePipelineNotFound:
+      description: Pipeline not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IngestError'
+          example:
+            error:
+              root_cause:
+                - type: resource_not_found_exception
+                  reason: pipeline [wazuh-pipeline1] is missing
+              type: resource_not_found_exception
+              reason: pipeline [wazuh-pipeline1] is missing
+            status: 404 
