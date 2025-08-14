@@ -11,6 +11,7 @@ This section summarizes the most important features of each Wazuh 4.x release.
 =============================================  ====================
 Wazuh version                                  Release date
 =============================================  ====================
+:doc:`4.14.1 </release-notes/release-4-14-1>`  TBD
 :doc:`4.14.0 </release-notes/release-4-14-0>`  TBD
 :doc:`4.13.1 </release-notes/release-4-13-1>`  TBD
 :doc:`4.13.0 </release-notes/release-4-13-0>`  TBD
@@ -82,6 +83,7 @@ Wazuh version                                  Release date
 
    .. toctree::
 
+      4.14.1 Release notes <release-4-14-1>
       4.14.0 Release notes <release-4-14-0>
       4.13.1 Release notes <release-4-13-1>
       4.13.0 Release notes <release-4-13-0>
