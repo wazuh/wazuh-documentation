@@ -15,13 +15,9 @@ Tools
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`agent-auth <agent-auth>`                    | Adds agents to a Wazuh manager                                             | agent                       |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :doc:`agent_control <agent-control>`              | Allows queries of the manager to get information about                     | manager                     |
-|                                                   |                                                                            |                             |
-|                                                   | any agent                                                                  |                             |
+| :doc:`agent_control <agent-control>`              | Allows queries of the manager to get information about any agent           | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :doc:`manage_agents <manage-agents>`              | Provides an interface to handle authentication                             | manager, agent              |
-|                                                   |                                                                            |                             |
-|                                                   | keys for  agents                                                           |                             |
+| :doc:`manage_agents <manage-agents>`              | Provides an interface to handle authentication keys for  agents            | manager, agent              |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`wazuh-logtest <wazuh-logtest>`              | Allows testing and verification of rules against provided log records      | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
@@ -48,24 +44,22 @@ Tools
 | :doc:`wazuh-keystore <wazuh-keystore>`            | Stores sensitive information for increased security                        | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 
+.. toctree::
+   :hidden:
+   :maxdepth: 1
 
-
-  .. toctree::
-    :hidden:
-    :maxdepth: 1
-
-    agent-auth
-    agent-control
-    manage-agents
-    wazuh-control
-    wazuh-logtest
-    clear-stats
-    wazuh-regex
-    rbac-control
-    update-ruleset
-    verify-agent-conf
-    agent-groups
-    agent-upgrade
-    cluster-control
-    fim-migrate
-    wazuh-keystore
+   wazuh-control
+   agent-auth
+   agent-control
+   manage-agents
+   wazuh-logtest
+   clear-stats
+   wazuh-regex
+   rbac-control
+   update-ruleset
+   verify-agent-conf
+   agent-groups
+   agent-upgrade
+   cluster-control
+   fim-migrate
+   wazuh-keystore

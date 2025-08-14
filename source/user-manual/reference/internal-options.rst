@@ -863,6 +863,14 @@ Remoted
 |                                   | Allowed value | | Any other integer between 65536 and 1048576.               |
 |                                   |               | | Powers of two are suggested.                               |
 +-----------------------------------+---------------+--------------------------------------------------------------+
+| **remoted.ctrl_msg_queue_size**   | Description   | Maximum number of control messages that can be queued for    |
+|                                   |               | processing. When the queue reaches this limit, backpressure  |
+|                                   |               | is applied to prevent memory exhaustion.                     |
++                                   +---------------+--------------------------------------------------------------+
+|                                   | Default value | 16384                                                        |
++                                   +---------------+--------------------------------------------------------------+
+|                                   | Allowed value | Any integer between 1024 and 1048576.                        |
++-----------------------------------+---------------+--------------------------------------------------------------+
 | **remoted.send_timeout_to_retry** | Description   | | Maximum number of seconds to wait before retrying to       |
 |                                   |               | | queue a packet to send in TCP.                             |
 +                                   +---------------+--------------------------------------------------------------+

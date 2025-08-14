@@ -1,0 +1,748 @@
+paths:
+  /_plugins/_security_analytics/logtype:
+    post:
+      tags:
+        - Log type APIs
+      summary: Create log type
+      description: |
+        To create a new custom log type, you need to provide a name and description, and set the source to Custom.
+      operationId: createLogType
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LogTypeRequest'
+            example:
+              name: "custom-log-type4"
+              description: "custom-log-type-desc"
+              source: "Custom"
+              category: "Other"
+              default: false
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogTypeResponse'
+              example:
+                _id: "eOxde5YBP1I-F2lDGr0A"
+                _version: 1
+                logType:
+                  name: "custom-log-type4"
+                  description: "custom-log-type-desc"
+                  category: "Other"
+                  source: "Custom"
+                  tags:
+                    correlation_id: 25
+        '400':
+          description: Response to report a bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                error:
+                  root_cause:
+                    - type: "action_request_validation_exception"
+                      reason: "Validation Failed: "
+                  type: "action_request_validation_exception"
+                  reason: "Validation Failed: "
+                status: 400
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          description: Response to report a permission denied request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PermissionDenied'
+              example:
+                error:
+                  root_cause:
+                    - type: "security_exception"
+                      reason: "no permissions for [indices:admin/analyze] and User [name=test, backend_roles=[], requestedTenant=null]"
+                  type: "security_exception"
+                  reason: "no permissions for [indices:admin/analyze] and User [name=test, backend_roles=[], requestedTenant=null]"
+                status: 403
+
+  /_plugins/_security_analytics/logtype/_search:
+    post:
+      tags:
+        - Log type APIs
+      summary: Search custom log types
+      description: |
+        This API allows you to search log types in the system.
+      operationId: searchLogTypes
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LogTypeSearchRequest'
+            example:
+              query:
+                match_all: {}
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogTypeSearchResponse'
+              example:
+                took: 9
+                timed_out: false
+                _shards:
+                  total: 1
+                  successful: 1
+                  skipped: 0
+                  failed: 0
+                hits:
+                  total:
+                    value: 24
+                    relation: "eq"
+                  max_score: 2
+                  hits:
+                    - _index: ".opensearch-sap-log-types-config"
+                      _id: "eOxde5YBP1I-F2lDGr0A"
+                      _score: 2
+                      _source:
+                        name: "custom-log-type4"
+                        description: "custom-log-type-desc"
+                        category: "Other"
+                        source: "Custom"
+                        tags:
+                          correlation_id: 25
+                    - _index: ".opensearch-sap-log-types-config"
+                      _id: "s3"
+                      _score: 2
+                      _source:
+                        name: "s3"
+                        description: "S3 logs"
+                        category: "Cloud Services"
+                        source: "Sigma"
+                        tags:
+                          correlation_id: 21
+                    - _index: ".opensearch-sap-log-types-config"
+                      _id: "others_compliance"
+                      _score: 2
+                      _source:
+                        name: "others_compliance"
+                        description: "Compliance logs"
+                        category: "Other"
+                        source: "Sigma"
+                        tags:
+                          correlation_id: 4
+                    - _index: ".opensearch-sap-log-types-config"
+                      _id: "github"
+                      _score: 2
+                      _source:
+                        name: "github"
+                        description: "Github logs"
+                        category: "Applications"
+                        source: "Sigma"
+                        tags:
+                          correlation_id: 16
+                    - _index: ".opensearch-sap-log-types-config"
+                      _id: "others_application"
+                      _score: 2
+                      _source:
+                        name: "others_application"
+                        description: "Application logs"
+                        category: "Other"
+                        source: "Sigma"
+                        tags:
+                          correlation_id: 0
+                    - _index: ".opensearch-sap-log-types-config"
+                      _id: "dns"
+                      _score: 2
+                      _source:
+                        name: "dns"
+                        description: "DNS Raw or Route53 OCSF based logs"
+                        category: "Network Activity"
+                        source: "Sigma"
+                        tags:
+                          correlation_id: 15
+                    - _index: ".opensearch-sap-log-types-config"
+                      _id: "gworkspace"
+                      _score: 2
+                      _source:
+                        name: "gworkspace"
+                        description: "GWorkspace logs"
+                        category: "Applications"
+                        source: "Sigma"
+                        tags:
+                          correlation_id: 18
+                    - _index: ".opensearch-sap-log-types-config"
+                      _id: "others_cloud"
+                      _score: 2
+                      _source:
+                        name: "others_cloud"
+                        description: "Cloud logs"
+                        category: "Other"
+                        source: "Sigma"
+                        tags:
+                          correlation_id: 2
+                    - _index: ".opensearch-sap-log-types-config"
+                      _id: "others_web"
+                      _score: 2
+                      _source:
+                        name: "others_web"
+                        description: "Web logs"
+                        category: "Other"
+                        source: "Sigma"
+                        tags:
+                          correlation_id: 9
+                    - _index: ".opensearch-sap-log-types-config"
+                      _id: "windows"
+                      _score: 2
+                      _source:
+                        name: "windows"
+                        description: "Windows logs"
+                        category: "System Activity"
+                        source: "Sigma"
+                        tags:
+                          correlation_id: 10
+                    - _index: ".opensearch-sap-log-types-config"
+                      _id: "cloudtrail"
+                      _score: 2
+                      _source:
+                        name: "cloudtrail"
+                        description: "Cloudtrail Raw or OCSF based logs"
+                        category: "Cloud Services"
+                        source: "Sigma"
+                        tags:
+                          correlation_id: 14
+                    - _index: ".opensearch-sap-log-types-config"
+                      _id: "others_macos"
+                      _score: 2
+                      _source:
+                        name: "others_macos"
+                        description: "MacOS logs"
+                        category: "System Activity"
+                        source: "Sigma"
+                        tags:
+                          correlation_id: 6
+                    - _index: ".opensearch-sap-log-types-config"
+                      _id: "ad_ldap"
+                      _score: 2
+                      _source:
+                        name: "ad_ldap"
+                        description: "Ad/ldap logs"
+                        category: "Access Management"
+                        source: "Sigma"
+                        tags:
+                          correlation_id: 11
+                    - _index: ".opensearch-sap-log-types-config"
+                      _id: "test_windows"
+                      _score: 2
+                      _source:
+                        name: "test_windows"
+                        description: "Test Windows Log Type for integ tests. Please do not use."
+                        category: "Other"
+                        source: "Sigma"
+                        tags:
+                          correlation_id: 22
+                    - _index: ".opensearch-sap-log-types-config"
+                      _id: "network"
+                      _score: 2
+                      _source:
+                        name: "network"
+                        description: "Network logs"
+                        category: "Network Activity"
+                        source: "Sigma"
+                        tags:
+                          correlation_id: 7
+                    - _index: ".opensearch-sap-log-types-config"
+                      _id: "apache_access"
+                      _score: 2
+                      _source:
+                        name: "apache_access"
+                        description: "Apache Access logs"
+                        category: "Access Management"
+                        source: "Sigma"
+                        tags:
+                          correlation_id: 12
+                    - _index: ".opensearch-sap-log-types-config"
+                      _id: "vpcflow"
+                      _score: 2
+                      _source:
+                        name: "vpcflow"
+                        description: "VPC Flow Raw or OCSF based logs"
+                        category: "Network Activity"
+                        source: "Sigma"
+                        tags:
+                          correlation_id: 23
+                    - _index: ".opensearch-sap-log-types-config"
+                      _id: "linux"
+                      _score: 2
+                      _source:
+                        name: "linux"
+                        description: "Sys logs"
+                        category: "System Activity"
+                        source: "Sigma"
+                        tags:
+                          correlation_id: 5
+                    - _index: ".opensearch-sap-log-types-config"
+                      _id: "m365"
+                      _score: 2
+                      _source:
+                        name: "m365"
+                        description: "M365 logs"
+                        category: "Applications"
+                        source: "Sigma"
+                        tags:
+                          correlation_id: 17
+                    - _index: ".opensearch-sap-log-types-config"
+                      _id: "others_apt"
+                      _score: 2
+                      _source:
+                        name: "others_apt"
+                        description: "Apt logs"
+                        category: "Other"
+                        source: "Sigma"
+                        tags:
+                          correlation_id: 1
+                    - _index: ".opensearch-sap-log-types-config"
+                      _id: "okta"
+                      _score: 2
+                      _source:
+                        name: "okta"
+                        description: "Okta logs"
+                        category: "Access Management"
+                        source: "Sigma"
+                        tags:
+                          correlation_id: 19
+                    - _index: ".opensearch-sap-log-types-config"
+                      _id: "waf"
+                      _score: 2
+                      _source:
+                        name: "waf"
+                        description: "Web Application Firewall based logs"
+                        category: "Security"
+                        source: "Sigma"
+                        tags:
+                          correlation_id: 24
+                    - _index: ".opensearch-sap-log-types-config"
+                      _id: "others_proxy"
+                      _score: 2
+                      _source:
+                        name: "others_proxy"
+                        description: "Proxy logs"
+                        category: "Other"
+                        source: "Sigma"
+                        tags:
+                          correlation_id: 8
+                    - _index: ".opensearch-sap-log-types-config"
+                      _id: "azure"
+                      _score: 2
+                      _source:
+                        name: "azure"
+                        description: "Azure logs"
+                        category: "Cloud Services"
+                        source: "Sigma"
+                        tags:
+                          correlation_id: 20
+        '400':
+          description: Response to report a bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                error:
+                  root_cause:
+                    - type: "parse_exception"
+                      reason: "request body or source parameter is required"
+                  type: "parse_exception"
+                  reason: "request body or source parameter is required"
+                status: 400
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          description: Response to report a permission denied request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PermissionDenied'
+              example:
+                error:
+                  root_cause:
+                    - type: "security_exception"
+                      reason: "no permissions for [indices:admin/analyze] and User [name=test, backend_roles=[], requestedTenant=null]"
+                  type: "security_exception"
+                  reason: "no permissions for [indices:admin/analyze] and User [name=test, backend_roles=[], requestedTenant=null]"
+                status: 403
+
+  /_plugins/_security_analytics/logtype/{log_type_id}:
+    put:
+      tags:
+        - Log type APIs
+      summary: Update custom log type
+      description: |
+        This API enables you to update an existing custom log type.
+      operationId: updateLogType
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: log_type_id
+          in: path
+          required: true
+          description: The unique identifier of the custom log type that you want to update. This ID must correspond to an existing log type previously created using the Security Analytics plugin.
+          schema:
+            type: string
+          example: "eOxde5YBP1I-F2lDGr0A"
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LogTypeUpdateRequest'
+            example:
+              name: "custom-log-type4"
+              description: "custom-log-type-updated-desc"
+              source: "Custom"
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogTypeUpdateResponse'
+              example:
+                _id: "eOxde5YBP1I-F2lDGr0A"
+                _version: 1
+                logType:
+                  name: "custom-log-type4"
+                  description: "custom-log-type-updated-desc"
+                  category: "Other"
+                  source: "Custom"
+                  tags:
+                    correlation_id: 25
+        '400':
+          description: Response to report a bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                error:
+                  root_cause:
+                    - type: "parse_exception"
+                      reason: "request body is required"
+                  type: "parse_exception"
+                  reason: "request body is required"
+                status: 400
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          description: Response to report a permission denied request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PermissionDenied'
+              example:
+                error:
+                  root_cause:
+                    - type: "security_exception"
+                      reason: "no permissions for [indices:admin/analyze] and User [name=test, backend_roles=[], requestedTenant=null]"
+                  type: "security_exception"
+                  reason: "no permissions for [indices:admin/analyze] and User [name=test, backend_roles=[], requestedTenant=null]"
+                status: 403
+
+    delete:
+      tags:
+        - Log type APIs
+      summary: Delete custom log type
+      description: |
+        This API is used to delete a custom log type.
+      operationId: deleteLogType
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: log_type_id
+          in: path
+          required: true
+          description: The unique identifier of the log type to be deleted. This ID is assigned when the log type is created and must be specified in the request path to delete that specific log type.
+          schema:
+            type: string
+          example: "eOxde5YBP1I-F2lDGr0A"
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogTypeDeleteResponse'
+              example:
+                _id: "eOxde5YBP1I-F2lDGr0A"
+                _version: 1
+        '400':
+          description: Response to report a bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+              example:
+                error:
+                  root_cause:
+                    - type: "illegal_argument_exception"
+                      reason: "request [/_plugins/_security_analytics/logtype/m98uk4kBlb9cbROIpEj] contains unrecognized parameter: [timeout]"
+                  type: "illegal_argument_exception"
+                  reason: "request [/_plugins/_security_analytics/logtype/m98uk4kBlb9cbROIpEj] contains unrecognized parameter: [timeout]"
+                status: 400
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          description: Response to report a permission denied request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PermissionDenied'
+              example:
+                error:
+                  root_cause:
+                    - type: "security_exception"
+                      reason: "no permissions for [indices:admin/analyze] and User [name=test, backend_roles=[], requestedTenant=null]"
+                  type: "security_exception"
+                  reason: "no permissions for [indices:admin/analyze] and User [name=test, backend_roles=[], requestedTenant=null]"
+                status: 403
+        '404':
+          description: Response to report a request not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              example:
+                error:
+                  root_cause:
+                    - type: "status_exception"
+                      reason: "Log Type with id eOxde5YBP1I-F2lDGr0A is not found"
+                  type: "status_exception"
+                  reason: "Log Type with id eOxde5YBP1I-F2lDGr0A is not found"
+                status: 404
+
+components:
+  schemas:
+    LogTypeRequest:
+      type: object
+      required:
+        - name
+        - description
+        - source
+      properties:
+        name:
+          type: string
+          description: The unique name of the custom log type. This is required.
+        description:
+          type: string
+          description: A brief description of what the log type represents. This is required.
+        source:
+          type: string
+          description: This must be set to "Custom" for user-defined log types. This is required.
+        category:
+          type: string
+          description: The category of the log type, e.g., "Firewall", "Application", etc. This is optional.
+        default:
+          type: boolean
+          description: This indicates whether this log type should be the default for new configurations. This is optional.
+
+    LogTypeUpdateRequest:
+      type: object
+      required:
+        - name
+        - description
+        - source
+      properties:
+        name:
+          type: string
+          description: The unique name of the custom log type. This is required.
+        description:
+          type: string
+          description: A brief description of what the log type represents. This is required.
+        source:
+          type: string
+          description: This must be set to "Custom" for user-defined log types. This is required.
+        category:
+          type: string
+          description: The category of the log type, e.g., "Firewall", "Application", etc. This is optional.
+
+    LogTypeSearchRequest:
+      type: object
+      properties:
+        query:
+          type: object
+          description: A query DSL object that defines how to match log types (e.g., by name, source, or tags).
+        from:
+          type: integer
+          description: This is the starting offset. The default value is 0. It is useful for pagination.
+        size:
+          type: integer
+          description: This is the number of log types to return. The default value is 10.
+        sort:
+          type: array
+          description: This defines the sorting order for the results (e.g., by name or creation date).
+
+    LogTypeResponse:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The unique identifier for the created log type, assigned by the Wazuh indexer.
+        _version:
+          type: integer
+          description: The version number of the log type document. This starts at 1 and increments on updates.
+        logType:
+          type: object
+          properties:
+            name:
+              type: string
+              description: The name of the log type that was provided in the request.
+            description:
+              type: string
+              description: A brief description of the log type.
+            category:
+              type: string
+              description: The log type category (e.g., Other, Application, Firewall).
+            source:
+              type: string
+              description: The source of the log type, set to "Custom" for user-defined types.
+            tags:
+              type: object
+              description: Key-value pairs for tagging the log type
+
+    LogTypeUpdateResponse:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The unique identifier for the log type that was updated. This is the same as the <LOG_TYPE_ID> used in the request path.
+        _version:
+          type: integer
+          description: The new version number of the log type after the update. Each update increments this number.
+        logType:
+          type: object
+          properties:
+            name:
+              type: string
+              description: The name of the log type that was updated
+            description:
+              type: string
+              description: A brief description of the log type after the update.
+            category:
+              type: string
+              description: The updated category the log type falls under.
+            source:
+              type: string
+              description: The source of the log type, set to "Custom" for user-defined types.
+            tags:
+              type: object
+              description: Key-value metadata pairs associated with the log type (e.g., correlation IDs).
+
+    LogTypeSearchResponse:
+      type: object
+      properties:
+        took:
+          type: integer
+          description: This is the time in milliseconds the Wazuh indexer took to process the search request.
+        timed_out:
+          type: boolean
+          description: This indicates whether the search request timed out.
+        _shards:
+          type: object
+          properties:
+            total:
+              type: integer
+              description: The total number of shards involved in the query.
+            successful:
+              type: integer
+              description: The number of shards that responded successfully.
+            skipped:
+              type: integer
+              description: The number of shards skipped (e.g., due to filters).
+            failed:
+              type: integer
+              description: This refers to the shards that failed to respond.
+        hits:
+          type: object
+          properties:
+            total:
+              type: object
+              properties:
+                value:
+                  type: integer
+                  description: The total number of documents matched.
+                relation:
+                  type: string
+                  description: This indicates whether the value is an exact count (eq) or a lower bound (gte).
+            max_score:
+              type: integer
+              description: The highest relevance score assigned to any matched document.
+            hits:
+              type: array
+              description: The list of matched log types with metadata.
+
+    LogTypeDeleteResponse:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The unique identifier of the deleted log type. This confirms which log type was targeted and successfully deleted.
+        _version:
+          type: integer
+          description: The version of the document after the deletion. Even though the document is deleted, the version is incremented for internal tracking (e.g., for optimistic concurrency control).
+
+    BadRequest:
+      type: object
+      properties:
+        root_cause:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+              reason:
+                type: string
+
+    PermissionDenied:
+      type: object
+      properties:
+        root_cause:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+              reason:
+                type: string
+
+    NotFound:
+      type: object
+      properties:
+        root_cause:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+              reason:
+                type: string

@@ -445,7 +445,7 @@ agents_disconnection_time
 This sets the time after which the manager considers an agent as disconnected since its last keepalive.
 
 +-------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **Default value**       | 10m                                                                                                                                                           |
+| **Default value**       | 15m                                                                                                                                                           |
 +-------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | **Allowed values**      | A positive number that should end with a character indicating a time unit, such as: s (seconds), m (minutes), h (hours), d (days). The minimum allowed is 1s. |
 +-------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -598,7 +598,7 @@ Configuration example
      <email_to>recipient@example.wazuh.com</email_to>
      <email_maxperhour>12</email_maxperhour>
      <email_log_source>alerts.log</email_log_source>
-     <agents_disconnection_time>10m</agents_disconnection_time>
+     <agents_disconnection_time>15m</agents_disconnection_time>
      <agents_disconnection_alert_time>0</agents_disconnection_alert_time>
      <update_check>yes</update_check>
    </global>

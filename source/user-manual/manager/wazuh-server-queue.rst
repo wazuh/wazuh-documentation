@@ -140,6 +140,14 @@ Below is an example of the content of the ``wazuh-remoted.state`` file:
    # Messages dequeued after the agent closes the connection
    dequeued_after_close='0'
 
+   # Control messages queue usage
+   ctrl_msg_queue_usage='0'
+
+   # Control messages queue breakdown
+   ctrl_msg_queue_inserted='5587'
+   ctrl_msg_replaced='13'
+   ctrl_msg_processed='5587'
+
 Wazuh analysis engine queue (queue_and)
 ---------------------------------------
 
@@ -249,7 +257,7 @@ Run the command below on the Wazuh server to read the file:
 
    # cat /var/ossec/var/run/wazuh-analysisd.state
 
-Below is an example of the content of the wazuh-remoted.state file:
+Below is an example of the content of the wazuh-analysisd.state file:
 
 .. code-block:: ini
 

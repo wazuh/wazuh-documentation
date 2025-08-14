@@ -20,12 +20,18 @@ All notable changes to this project will be documented in this file.
 ### Changed
 
 - Replaced `indexer_cluster_initial_master_nodes` with `indexer_initial_cluster_manager_nodes` in Puppet deployment documentation. ([#8666](https://github.com/wazuh/wazuh-documentation/pull/8666))
+- Updated the File Integrity Monitoring documentation to remove deprecated settings (`max_interval`, `queue_size`, `thread_pool`, `database`, and `registry_enabled`), add the missing `check_device` setting, and fix the `max_eps` definition in the synchronization settings table. ([#8735](https://github.com/wazuh/wazuh-documentation/pull/8735))
 
 ### Removed
 
 - Removed `compatibility.override_main_response_version` setting from Wazuh Indexer configuration as it is no longer supported in OpenSearch 3.0. ([#8609](https://github.com/wazuh/wazuh-documentation/pull/8609)) 
+- Removed several Rootcheck configuration options and added a corresponding note to the central components upgrade guide. ([#8759](https://github.com/wazuh/wazuh-documentation/pull/8759))
 
-### [v4.14.0]
+## [v4.14.1]
+
+- Support for Wazuh 4.14.1
+
+## [v4.14.0]
 
 ### Added
 
@@ -35,10 +41,6 @@ All notable changes to this project will be documented in this file.
 
 - Updated the Filebeat package revision number. ([#8627](https://github.com/wazuh/wazuh-documentation/pull/8627))
 - Updated centralized configuration (`agent.conf`) documentation to reflect that agents apply changes automatically (hot reload) without requiring a manual restart. ([#8711](https://github.com/wazuh/wazuh-documentation/pull/8711))
-
-## [v4.13.1]
-
-- Support for Wazuh 4.13.1
 
 ## [v4.13.0]
 
@@ -52,12 +54,14 @@ All notable changes to this project will be documented in this file.
 - Added steps for installing a single node stack via Puppet in *Deployment with Puppet*. ([#8611](https://github.com/wazuh/wazuh-documentation/pull/8611))
 - Added information about filters in the Windows agent to block UNC and mapped drive paths to mitigate *NetNTLMv2* vulnerabilities. ([#8665](https://github.com/wazuh/wazuh-documentation/pull/8665))
 - Added the Wazuh global queries documentation. ([#8722](https://github.com/wazuh/wazuh-documentation/pull/8722))
+- Added `remoted.ctrl_msg_queue_size` internal option and new remoted statistics fields. ([#8769](https://github.com/wazuh/wazuh-documentation/pull/8769))
 
 ### Changed
 
 - Updated the Available SCA policies section. ([#8602](https://github.com/wazuh/wazuh-documentation/pull/8602))
 - Added instructions for retrieving the correct Puppet agent node name and to set the ``<PUPPET_AGENT_NODE_NAME>`` placeholder in the manifest. ([#8664](https://github.com/wazuh/wazuh-documentation/pull/8664))
 - Updated the *Deployment on Docker* section. ([#8688](https://github.com/wazuh/wazuh-documentation/pull/8688))
+- Updated default values for `agents_disconnection_time` and `notify_time`. ([#8769](https://github.com/wazuh/wazuh-documentation/pull/8769))
 
 ## [v4.12.0]
 
@@ -77,6 +81,9 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Added DNF package manager support for installation and configuration steps. ([#8689](https://github.com/wazuh/wazuh-documentation/pull/8689))
 - **Post-release**: Added security update for the `remove-threat.py` script and a warning to the Detecting and removing malware using VirusTotal integration POC guide. ([#8697](https://github.com/wazuh/wazuh-documentation/pull/8697))
 - **Post-release**: Added note about manual replication of `ossec.conf` between master and worker nodes. ([#8720](https://github.com/wazuh/wazuh-documentation/pull/8720))
+- **Post-release**: Added a table describing the possible environment statuses in the cloud service documentation. ([#8407](https://github.com/wazuh/wazuh-documentation/pull/8407))
+- **Post-release**: Added the Wazuh indexer API reference. ([#8756](https://github.com/wazuh/wazuh-documentation/pull/8756))
+- **Post-release**: Added examples of Wazuh tools to the user manual reference. ([#8763](https://github.com/wazuh/wazuh-documentation/pull/8763))
 
 ### Changed
 
@@ -101,6 +108,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Added steps to export and import dashboard customizations in the upgrade guide. ([#8618](https://github.com/wazuh/wazuh-documentation/pull/8618))
 - **Post-release**: Updated the vulnerability detection capability section. ([#8693](https://github.com/wazuh/wazuh-documentation/pull/8693))
 - **Post-release**: Changed the warning note on using the `$` and `&` characters when changing passwords in Docker deployments. ([#8694](https://github.com/wazuh/wazuh-documentation/pull/8694))
+- **Post-release**: Changed Windows commands in the backup guide to PowerShell. ([#8761](https://github.com/wazuh/wazuh-documentation/pull/8761))
 
 ### Fixed
 
