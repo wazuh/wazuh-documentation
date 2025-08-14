@@ -1,0 +1,2384 @@
+paths:
+  /{index}/_doc/{id}:
+    parameters:
+      - $ref: '#/components/parameters/document_index'
+      - $ref: '#/components/parameters/document_id'
+    put:
+      tags: [Document APIs]
+      summary: Index document (PUT _doc)
+      description: |
+        The Index Document operation allows you to add an individual document to your index.
+      operationId: indexDocumentPut
+      parameters:
+        - $ref: '#/components/parameters/if_seq_no'
+        - $ref: '#/components/parameters/if_primary_term'
+        - $ref: '#/components/parameters/op_type'
+        - $ref: '#/components/parameters/pipeline'
+        - $ref: '#/components/parameters/routing'
+        - $ref: '#/components/parameters/refresh'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/version'
+        - $ref: '#/components/parameters/version_type'
+        - $ref: '#/components/parameters/wait_for_active_shards'
+        - $ref: '#/components/parameters/require_alias'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/IndexDocumentRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/IndexDocumentSuccess'
+        '400':
+          $ref: '#/components/responses/IndexDocumentBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+    get:
+      tags: [Document APIs]
+      summary: Get document (GET)
+      description: |
+        Once a JSON document is added to your index, you can retrieve its information and data using the Get Document API. Use the GET method to retrieve a document along with its source or stored fields from a specific index. To check if a document exists, use the HEAD method.
+      operationId: getDocument
+      parameters:
+        - $ref: '#/components/parameters/preference'
+        - $ref: '#/components/parameters/realtime'
+        - $ref: '#/components/parameters/refresh'
+        - $ref: '#/components/parameters/routing'
+        - $ref: '#/components/parameters/stored_fields'
+        - $ref: '#/components/parameters/_source'
+        - $ref: '#/components/parameters/_source_excludes'
+        - $ref: '#/components/parameters/_source_includes'
+        - $ref: '#/components/parameters/version'
+        - $ref: '#/components/parameters/version_type'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/GetDocumentRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/GetDocumentSuccess'
+        '400':
+          $ref: '#/components/responses/GetDocumentBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/GetDocumentNotFound'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+    head:
+      tags: [Document APIs]
+      summary: Get document (HEAD)
+      description: |
+        Once a JSON document is added to your index, you can retrieve its information and data using the Get Document API. Use the GET method to retrieve a document along with its source or stored fields from a specific index. To check if a document exists, use the HEAD method.
+      operationId: documentExists
+      parameters:
+        - $ref: '#/components/parameters/preference'
+        - $ref: '#/components/parameters/realtime'
+        - $ref: '#/components/parameters/refresh'
+        - $ref: '#/components/parameters/routing'
+        - $ref: '#/components/parameters/stored_fields'
+        - $ref: '#/components/parameters/_source'
+        - $ref: '#/components/parameters/_source_excludes'
+        - $ref: '#/components/parameters/_source_includes'
+        - $ref: '#/components/parameters/version'
+        - $ref: '#/components/parameters/version_type'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/GetDocumentRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/GetDocumentSuccess'
+        '400':
+          $ref: '#/components/responses/GetDocumentBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/GetDocumentNotFound'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+    delete:
+      tags: [Document APIs]
+      summary: Delete document
+      description: |
+        If a document is no longer required in your index, you can remove it using the Delete Document API operation.
+      operationId: deleteDocument
+      parameters:
+        - $ref: '#/components/parameters/if_seq_no'
+        - $ref: '#/components/parameters/if_primary_term'
+        - $ref: '#/components/parameters/refresh'
+        - $ref: '#/components/parameters/routing'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/version'
+        - $ref: '#/components/parameters/version_type'
+        - $ref: '#/components/parameters/wait_for_active_shards'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: '#/components/responses/DeleteDocumentSuccess'
+        '400':
+          $ref: '#/components/responses/DocumentBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/DeleteDocumentNotFound'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /{index}/_doc:
+    parameters:
+      - $ref: '#/components/parameters/document_index'
+    post:
+      tags: [Document APIs]
+      summary: Index document (POST _doc)
+      description: |
+        The Index Document operation allows you to add an individual document to your index.
+      operationId: indexDocumentPost
+      parameters:
+        - $ref: '#/components/parameters/if_seq_no'
+        - $ref: '#/components/parameters/if_primary_term'
+        - $ref: '#/components/parameters/op_type'
+        - $ref: '#/components/parameters/pipeline'
+        - $ref: '#/components/parameters/routing'
+        - $ref: '#/components/parameters/refresh'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/version'
+        - $ref: '#/components/parameters/version_type'
+        - $ref: '#/components/parameters/wait_for_active_shards'
+        - $ref: '#/components/parameters/require_alias'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/IndexDocumentRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/IndexDocumentSuccess'
+        '400':
+          $ref: '#/components/responses/IndexDocumentBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /{index}/_create/{id}:
+    parameters:
+      - $ref: '#/components/parameters/document_index'
+      - $ref: '#/components/parameters/document_id'
+    put:
+      tags: [Document APIs]
+      summary: Index document (PUT _create)
+      description: |
+        The Index Document operation allows you to add an individual document to your index.
+      operationId: createDocumentPut
+      parameters:
+        - $ref: '#/components/parameters/if_seq_no'
+        - $ref: '#/components/parameters/if_primary_term'
+        - $ref: '#/components/parameters/op_type'
+        - $ref: '#/components/parameters/pipeline'
+        - $ref: '#/components/parameters/routing'
+        - $ref: '#/components/parameters/refresh'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/version'
+        - $ref: '#/components/parameters/version_type'
+        - $ref: '#/components/parameters/wait_for_active_shards'
+        - $ref: '#/components/parameters/require_alias'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/IndexDocumentRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/IndexDocumentSuccess'
+        '400':
+          $ref: '#/components/responses/IndexDocumentBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+    post:
+      tags: [Document APIs]
+      summary: Index document (POST _create)
+      description: |
+        The Index Document operation allows you to create a new document with a specific ID. This operation will only succeed if a document with the same ID does not already exist.
+      operationId: createDocumentPost
+      parameters:
+        - $ref: '#/components/parameters/if_seq_no'
+        - $ref: '#/components/parameters/if_primary_term'
+        - $ref: '#/components/parameters/op_type'
+        - $ref: '#/components/parameters/pipeline'
+        - $ref: '#/components/parameters/routing'
+        - $ref: '#/components/parameters/refresh'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/version'
+        - $ref: '#/components/parameters/version_type'
+        - $ref: '#/components/parameters/wait_for_active_shards'
+        - $ref: '#/components/parameters/require_alias'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/IndexDocumentRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/IndexDocumentSuccess'
+        '400':
+          $ref: '#/components/responses/IndexDocumentBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /{index}/_update/{id}:
+    parameters:
+      - $ref: '#/components/parameters/document_index'
+      - $ref: '#/components/parameters/document_id'
+    post:
+      tags: [Document APIs]
+      summary: Update document
+      description: |
+        To modify a document's fields in your index, you can use the Update Document API. This can be done by providing the updated data directly or by including a script in the request body, which Wazuh indexer executes to update the document. By default, the update operation only applies to existing documents in the index. If the document does not exist, the API returns an error.
+      operationId: updateDocument
+      parameters:
+        - $ref: '#/components/parameters/if_seq_no'
+        - $ref: '#/components/parameters/if_primary_term'
+        - $ref: '#/components/parameters/lang'
+        - $ref: '#/components/parameters/require_alias'
+        - $ref: '#/components/parameters/refresh'
+        - $ref: '#/components/parameters/retry_on_conflict'
+        - $ref: '#/components/parameters/routing'
+        - $ref: '#/components/parameters/_source'
+        - $ref: '#/components/parameters/_source_excludes'
+        - $ref: '#/components/parameters/_source_includes'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/wait_for_active_shards'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/UpdateDocumentRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/UpdateDocumentSuccess'
+        '400':
+          $ref: '#/components/responses/UpdateDocumentBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/UpdateDocumentNotFound'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /_bulk:
+    post:
+      tags: [Document APIs]
+      summary: Bulk
+      description: |
+        The bulk operation allows you to add, update, or delete multiple documents within a single request. This approach offers significant performance improvements over individual Wazuh indexing requests. Whenever possible, it is recommended to batch indexing operations using bulk requests for better efficiency.
+      operationId: bulkOperations
+      parameters:
+        - $ref: '#/components/parameters/pipeline_bulk'
+        - $ref: '#/components/parameters/refresh'
+        - $ref: '#/components/parameters/require_alias'
+        - $ref: '#/components/parameters/routing'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/type'
+        - $ref: '#/components/parameters/wait_for_active_shards'
+        - $ref: '#/components/parameters/batch_size'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/BulkRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/BulkSuccess'
+        '400':
+          $ref: '#/components/responses/BulkBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /{index}/_bulk:
+    parameters:
+      - $ref: '#/components/parameters/document_index'
+    post:
+      tags: [Document APIs]
+      summary: Bulk (Index)
+      description: |
+        The bulk operation allows you to add, update, or delete multiple documents within a single request. This approach offers significant performance improvements over individual Wazuh indexing requests. Whenever possible, it is recommended to batch indexing operations using bulk requests for better efficiency.
+      operationId: bulkOperationsIndex
+      parameters:
+        - $ref: '#/components/parameters/pipeline_bulk'
+        - $ref: '#/components/parameters/refresh'
+        - $ref: '#/components/parameters/require_alias'
+        - $ref: '#/components/parameters/routing'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/type'
+        - $ref: '#/components/parameters/wait_for_active_shards'
+        - $ref: '#/components/parameters/batch_size'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/BulkRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/BulkSuccess'
+        '400':
+          $ref: '#/components/responses/BulkBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /_mget:
+    get:
+      tags: [Document APIs]
+      summary: Multi-get documents (Global GET)
+      description: |
+        The multi-get operation enables you to perform multiple GET requests within a single request, allowing you to retrieve multiple documents that match your specified criteria.
+      operationId: multiGetDocumentsGet
+      parameters:
+        - $ref: '#/components/parameters/preference_mget'
+        - $ref: '#/components/parameters/realtime_mget'
+        - $ref: '#/components/parameters/refresh'
+        - $ref: '#/components/parameters/routing'
+        - $ref: '#/components/parameters/stored_fields'
+        - $ref: '#/components/parameters/_source'
+        - $ref: '#/components/parameters/_source_excludes'
+        - $ref: '#/components/parameters/_source_includes'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/MultiGetRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/MultiGetSuccess'
+        '400':
+          $ref: '#/components/responses/BulkBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+    post:
+      tags: [Document APIs]
+      summary: Multi-get documents (Global POST)
+      description: |
+        The multi-get operation enables you to perform multiple GET requests within a single request, allowing you to retrieve multiple documents that match your specified criteria.
+      operationId: multiGetDocumentsPost
+      parameters:
+        - $ref: '#/components/parameters/preference_mget'
+        - $ref: '#/components/parameters/realtime_mget'
+        - $ref: '#/components/parameters/refresh'
+        - $ref: '#/components/parameters/routing'
+        - $ref: '#/components/parameters/stored_fields'
+        - $ref: '#/components/parameters/_source'
+        - $ref: '#/components/parameters/_source_excludes'
+        - $ref: '#/components/parameters/_source_includes'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/MultiGetRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/MultiGetSuccess'
+        '400':
+          $ref: '#/components/responses/BulkBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /{index}/_mget:
+    parameters:
+      - $ref: '#/components/parameters/document_index'
+    get:
+      tags: [Document APIs]
+      summary: Multi-get documents (Index GET)
+      description: |
+        The multi-get operation enables you to perform multiple GET requests within a single request, allowing you to retrieve multiple documents that match your specified criteria.
+      operationId: multiGetDocumentsIndexGet
+      parameters:
+        - $ref: '#/components/parameters/preference_mget'
+        - $ref: '#/components/parameters/realtime_mget'
+        - $ref: '#/components/parameters/refresh'
+        - $ref: '#/components/parameters/routing'
+        - $ref: '#/components/parameters/stored_fields'
+        - $ref: '#/components/parameters/_source'
+        - $ref: '#/components/parameters/_source_excludes'
+        - $ref: '#/components/parameters/_source_includes'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/MultiGetRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/MultiGetSuccess'
+        '400':
+          $ref: '#/components/responses/BulkBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+    post:
+      tags: [Document APIs]
+      summary: Multi-get documents (Index POST)
+      description: |
+        The multi-get operation enables you to perform multiple GET requests within a single request, allowing you to retrieve multiple documents that match your specified criteria.
+      operationId: multiGetDocumentsIndexPost
+      parameters:
+        - $ref: '#/components/parameters/preference_mget'
+        - $ref: '#/components/parameters/realtime_mget'
+        - $ref: '#/components/parameters/refresh'
+        - $ref: '#/components/parameters/routing'
+        - $ref: '#/components/parameters/stored_fields'
+        - $ref: '#/components/parameters/_source'
+        - $ref: '#/components/parameters/_source_excludes'
+        - $ref: '#/components/parameters/_source_includes'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/MultiGetRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/MultiGetSuccess'
+        '400':
+          $ref: '#/components/responses/BulkBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /{index}/_delete_by_query:
+    parameters:
+      - $ref: '#/components/parameters/document_index'
+    post:
+      tags: [Document APIs]
+      summary: Delete by query
+      description: |
+        You can add a query to your delete request to have the Wazuh indexer remove all documents that match the specified conditions.
+      operationId: deleteByQueryIndex
+      parameters:
+        - $ref: '#/components/parameters/allow_no_indices'
+        - $ref: '#/components/parameters/analyzer'
+        - $ref: '#/components/parameters/analyze_wildcard'
+        - $ref: '#/components/parameters/conflicts'
+        - $ref: '#/components/parameters/default_operator'
+        - $ref: '#/components/parameters/df'
+        - $ref: '#/components/parameters/expand_wildcards'
+        - $ref: '#/components/parameters/from'
+        - $ref: '#/components/parameters/ignore_unavailable'
+        - $ref: '#/components/parameters/lenient'
+        - $ref: '#/components/parameters/max_docs'
+        - $ref: '#/components/parameters/preference_delete'
+        - $ref: '#/components/parameters/q'
+        - $ref: '#/components/parameters/request_cache'
+        - $ref: '#/components/parameters/refresh'
+        - $ref: '#/components/parameters/requests_per_second'
+        - $ref: '#/components/parameters/routing'
+        - $ref: '#/components/parameters/scroll'
+        - $ref: '#/components/parameters/scroll_size'
+        - $ref: '#/components/parameters/search_type'
+        - $ref: '#/components/parameters/search_timeout'
+        - $ref: '#/components/parameters/slices'
+        - $ref: '#/components/parameters/sort'
+        - $ref: '#/components/parameters/_source'
+        - $ref: '#/components/parameters/_source_excludes'
+        - $ref: '#/components/parameters/_source_includes'
+        - $ref: '#/components/parameters/stats'
+        - $ref: '#/components/parameters/terminate_after'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/version_query'
+        - $ref: '#/components/parameters/wait_for_active_shards'
+        - $ref: '#/components/parameters/wait_for_completion'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/DeleteByQueryRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/DeleteByQuerySuccess'
+        '400':
+          $ref: 'spec.yml#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/ByQueryDocumentNotFound'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /{index1},{index2}/_update_by_query:
+    parameters:
+      - $ref: '#/components/parameters/document_index_1'
+      - $ref: '#/components/parameters/document_index_2'
+    post:
+      tags: [Document APIs]
+      summary: Update by query
+      description: |
+        You can provide both a query and a script in your update request, allowing the Wazuh indexer  to execute the script on all documents that match the query criteria.
+      operationId: updateByQueryIndex
+      parameters:
+        - $ref: '#/components/parameters/allow_no_indices'
+        - $ref: '#/components/parameters/analyzer'
+        - $ref: '#/components/parameters/analyze_wildcard'
+        - $ref: '#/components/parameters/conflicts'
+        - $ref: '#/components/parameters/default_operator'
+        - $ref: '#/components/parameters/df'
+        - $ref: '#/components/parameters/expand_wildcards'
+        - $ref: '#/components/parameters/from'
+        - $ref: '#/components/parameters/ignore_unavailable'
+        - $ref: '#/components/parameters/lenient'
+        - $ref: '#/components/parameters/max_docs'
+        - $ref: '#/components/parameters/preference_update'
+        - $ref: '#/components/parameters/q'
+        - $ref: '#/components/parameters/request_cache'
+        - $ref: '#/components/parameters/refresh'
+        - $ref: '#/components/parameters/requests_per_second'
+        - $ref: '#/components/parameters/routing'
+        - $ref: '#/components/parameters/scroll'
+        - $ref: '#/components/parameters/scroll_size'
+        - $ref: '#/components/parameters/search_type'
+        - $ref: '#/components/parameters/search_timeout'
+        - $ref: '#/components/parameters/slices'
+        - $ref: '#/components/parameters/sort'
+        - $ref: '#/components/parameters/_source'
+        - $ref: '#/components/parameters/_source_excludes'
+        - $ref: '#/components/parameters/_source_includes'
+        - $ref: '#/components/parameters/stats'
+        - $ref: '#/components/parameters/terminate_after'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/version_query'
+        - $ref: '#/components/parameters/wait_for_active_shards'
+        - $ref: '#/components/parameters/wait_for_completion'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/UpdateByQueryRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/UpdateByQuerySuccess'
+        '400':
+          $ref: '#/components/responses/DocumentBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/ByQueryDocumentNotFound'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /_reindex:
+    post:
+      tags: [Document APIs]
+      summary: Reindex documents
+      description: |
+        The Reindex API allows you to copy documents from one or more source indexes to a destination index.
+      operationId: reindexDocuments
+      parameters:
+        - $ref: '#/components/parameters/refresh'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/wait_for_active_shards'
+        - $ref: '#/components/parameters/wait_for_completion'
+        - $ref: '#/components/parameters/requests_per_second'
+        - $ref: '#/components/parameters/require_alias'
+        - $ref: '#/components/parameters/scroll'
+        - $ref: '#/components/parameters/slices_reindex'
+        - $ref: '#/components/parameters/scroll'
+        - $ref: '#/components/parameters/max_docs_reindex'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/ReindexRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/ReindexSuccess'
+        '400':
+          $ref: '#/components/responses/BulkBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/ByQueryDocumentNotFound'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+components:
+  parameters:
+    document_index:
+      name: index
+      in: path
+      required: true
+      schema:
+        type: string
+      example: "wazuh-alerts-4.x-2025.03.12"
+
+    document_index_1:
+      name: index1
+      in: path
+      required: true
+      schema:
+        type: string
+
+    document_index_2:
+      name: index2
+      in: path
+      required: true
+      schema:
+        type: string
+
+    document_id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+      example: "1"
+
+    if_seq_no:
+      name: if_seq_no
+      in: query
+      description: Executes the index operation only if the document has the specified sequence number.
+      schema:
+        type: integer
+
+    if_primary_term:
+      name: if_primary_term
+      in: query
+      description: Executes the index operation only if the document has the specified primary term.
+      schema:
+        type: integer
+
+    op_type:
+      name: op_type
+      in: query
+      description: Defines the type of operation to perform on the document. Options are `create` (only index the document if it does not exist) and `index` (update or insert the document). If a document ID is provided, the default is `index`; otherwise, it defaults to `create`.
+      schema:
+        type: string
+        enum: [create, index]
+
+    pipeline:
+      name: pipeline
+      in: query
+      description: Directs the indexing operation to a specific ingest pipeline for processing.
+      schema:
+        type: string
+
+    routing:
+      name: routing
+      in: query
+      description: Routes the request to a specific shard for the operation.
+      schema:
+        type: string
+
+    refresh:
+      name: refresh
+      in: query
+      description: |
+        Controls whether the Wazuh indexer refreshes shards before executing the operation. Options: `true` (refresh immediately), `false` (no immediate refresh), and `wait_for` waits for a refresh before processing.
+      schema:
+        type: string
+        enum: [true, false, wait_for]
+        default: false
+
+    timeout:
+      name: timeout
+      in: query
+      description: The maximum time to wait for a response from the cluster.
+      schema:
+        type: string
+        format: duration
+        default: 1m
+
+    version:
+      name: version
+      in: query
+      description: Specifies the version number of the document.
+      schema:
+        type: integer
+
+    version_type:
+      name: version_type
+      in: query
+      description: |
+        Specifies how to handle document versioning. Options are `external` (retrieves the document if the version number is higher than the current one) and `external_gte` (retrieves the document if the version number is greater than or equal to the current version). Example: `/_doc/1?version=3&version_type=external`.
+      schema:
+        type: string
+        enum: [external, external_gte]
+
+    wait_for_active_shards:
+      name: wait_for_active_shards
+      in: query
+      description: Specifies the minimum number of active shards required before processing the request. Default is `1` (primary shard only). Values greater than `1` require additional replicas up to the total number of shards in the index.
+      schema:
+        oneOf:
+          - type: string
+            enum: [all]
+          - type: integer
+            minimum: 1
+            default: 1
+
+    require_alias:
+      name: require_alias
+      in: query
+      description: Determines whether the target index must be an index alias.
+      schema:
+        type: boolean
+        default: false
+
+    preference:
+      name: preference
+      in: query
+      description: Defines which shard should be queried to retrieve the document. Options include `_local` (retrieves data from a locally allocated shard replica) and a custom string to specify a specific shard replica. By default, the Wazuh indexer randomly selects a shard.
+      schema:
+        type: string
+
+    preference_update:
+      name: preference
+      in: query
+      description: Defines the specific shard or node on which the Wazuh indexer should execute the update by query operation.
+      schema:
+        type: string
+
+    realtime:
+      name: realtime
+      in: query
+      description: Determines whether the operation should run in real-time. If set to `false`, the operation waits for the index to refresh before retrieving data, making it *near real-time*.
+      schema:
+        type: boolean
+        default: true
+
+    stored_fields:
+      name: stored_fields
+      in: query
+      description: Specifies whether to retrieve stored fields from the index instead of `_source`.
+      schema:
+        type: boolean
+        default: false
+
+    _source:
+      name: _source
+      in: query
+      description: Determines whether the `_source` field should be included in the response.
+      schema:
+        type: boolean
+        default: true
+
+    _source_excludes:
+      name: _source_excludes
+      in: query
+      description: A comma-separated list of fields to exclude from the response.
+      schema:
+        type: string
+
+    _source_includes:
+      name: _source_includes
+      in: query
+      description: A comma-separated list of fields to include in the response.
+      schema:
+        type: string
+
+    lang:
+      name: lang
+      in: query
+      description: Specifies the scripting language used in the update request.
+      schema:
+        type: string
+        default: painless
+
+    retry_on_conflict:
+      name: retry_on_conflict
+      in: query
+      description: Specifies how many times Wazuh indexer should retry the update operation in case of a document conflict.
+      schema:
+        type: integer
+        default: 0
+
+    pipeline_bulk:
+      name: pipeline
+      in: query
+      description: The ID of the ingest pipeline used for preprocessing documents before indexing.
+      schema:
+        type: string
+
+    type:
+      name: type
+      in: query
+      description: The default document type for documents that don't specify a type. It is recommended to ignore this parameter use `_doc` for all indexes.
+      schema:
+        type: string
+        default: _doc
+
+    batch_size:
+      name: batch_size
+      in: query
+      description: Specifies how many documents should be processed together in an ingest pipeline. The default value is `2147483647` (all documents are processed at once). This parameter is ignored if an ingest pipeline is not specified. Only applicable for create, index, or update actions.
+      schema:
+        type: integer
+        default: 2147483647
+
+    preference_mget:
+      name: preference
+      in: query
+      description: Defines the specific nodes or shards where the Wazuh indexer should execute the multi-get operation. By default, Wazuh indexer selects a shard randomly.
+      schema:
+        type: string
+
+    realtime_mget:
+      name: realtime
+      in: query
+      description: Determines whether the operation should run in real-time. If set to `false`, Wazuh indexer waits for the index to refresh before retrieving the data, making the operation near real-time.
+      schema:
+        type: boolean
+        default: true
+
+    allow_no_indices:
+      name: allow_no_indices
+      in: query
+      description: Determines whether to ignore wildcard expressions that do not match any indexes.
+      schema:
+        type: boolean
+        default: true
+
+    analyzer:
+      name: analyzer
+      in: query
+      description: Specifies the analyzer to be used for parsing the query string.
+      schema:
+        type: string
+
+    analyze_wildcard:
+      name: analyze_wildcard
+      in: query
+      description: Defines whether wildcard and prefix queries should be analyzed.
+      schema:
+        type: boolean
+        default: false
+
+    conflicts:
+      name: conflicts
+      in: query
+      description: Specifies the behavior when the operation encounters a version conflict.
+      schema:
+        type: string
+        enum: [abort, proceed]
+        default: abort
+
+    default_operator:
+      name: default_operator
+      in: query
+      description: Defines whether the default logical operator for query strings should be `AND` or `OR`.
+      schema:
+        type: string
+        enum: [AND, OR]
+        default: OR
+
+    df:
+      name: df
+      in: query
+      description: Specifies the default field to search when no field prefix is provided in the query string.
+      schema:
+        type: string
+
+    expand_wildcards:
+      name: expand_wildcards
+      in: query
+      description: |
+        Determines the types of indexes that wildcard expressions can match.
+      schema:
+        type: string
+        enum: [all, open, closed, hidden, none]
+        default: open
+
+    from:
+      name: from
+      in: query
+      description: Specifies the starting index for the search operation.
+      schema:
+        type: integer
+        default: 0
+
+    ignore_unavailable:
+      name: ignore_unavailable
+      in: query
+      description: Indicates whether to ignore missing or closed indexes and unavailable shards during the search request.
+      schema:
+        type: boolean
+        default: false
+
+    lenient:
+      name: lenient
+      in: query
+      description: If `true`, the Wazuh indexer allows queries with format inconsistencies (e.g., searching a text field for a number).
+      schema:
+        type: boolean
+        default: false
+
+    max_docs:
+      name: max_docs
+      in: query
+      description: Specifies the maximum number of documents that the operation can process. The default value is All matching documents.
+      schema:
+        type: integer
+
+    preference_delete:
+      name: preference
+      in: query
+      description: Defines the specific shard or node on which the Wazuh indexer should execute the delete by query operation.
+      schema:
+        type: string
+    q:
+      name: q
+      in: query
+      description: Specifies the query using Lucene query syntax.
+      schema:
+        type: string
+
+    request_cache:
+      name: request_cache
+      in: query
+      description: Defines whether the Wazuh indexer should use the request cache. The default value is based on the index settings.
+      schema:
+        type: boolean
+
+    requests_per_second:
+      name: requests_per_second
+      in: query
+      description: Sets a throttling limit in sub-requests per second. The default value is `-1` meaning no throttling.
+      schema:
+        type: integer
+        default: -1
+
+    scroll:
+      name: scroll
+      in: query
+      description: Defines how long the search context remains open while executing the query.
+      schema:
+        type: string
+        format: duration
+
+    scroll_size:
+      name: scroll_size
+      in: query
+      description: Determines the batch size for scroll requests during the operation.
+      schema:
+        type: integer
+        default: 1000
+
+    search_type:
+      name: search_type
+      in: query
+      description: Specifies whether the Wazuh indexer should use local or global term frequencies when calculating relevance scores. `query_then_fetch` is faster and less accurate while `dfs_query_then_fetch` is slower and more accurate.
+      schema:
+        type: string
+        enum: [query_then_fetch, dfs_query_then_fetch]
+        default: query_then_fetch
+
+    search_timeout:
+      name: search_timeout
+      in: query
+      description: Defines the timeout duration before the Wazuh indexer considers the request as failed. The default value is `No timeout`.
+      schema:
+        type: string
+        format: duration
+
+    slices:
+      name: slices
+      in: query
+      description: Controls how many slices the operation should be divided into for parallel processing. Specify an integer for the number of slices or `auto` for the Wazuh indexer to determine it automatically. The default value is `1` meaning the tasks should not be divided.
+      schema:
+        oneOf:
+          - type: string
+            enum: [auto]
+          - type: integer
+            minimum: 1
+        default: 1
+
+    sort:
+      name: sort
+      in: query
+      description: |
+        Specifies a comma-separated list of `<FIELD>:<DIRECTION>` pairs to sort the documents before the operation.
+      schema:
+        type: string
+
+    stats:
+      name: stats
+      in: query
+      description: Associates a value with the request for additional logging and monitoring.
+      schema:
+        type: string
+
+    terminate_after:
+      name: terminate_after
+      in: query
+      description: Sets the maximum number of documents that Wazuh indexer should process before terminating the request.
+      schema:
+        type: integer
+
+    version_query:
+      name: version
+      in: query
+      description: Specifies whether to include the document version in the response.
+      schema:
+        type: boolean
+
+    wait_for_completion:
+      name: wait_for_completion
+      in: query
+      description: If `false`, the Wazuh indexer does not wait for the request to complete and executes it asynchronously. You can monitor the operation using the Tasks API.
+      schema:
+        type: boolean
+        default: true
+
+    conflicts_reindex:
+      name: conflicts
+      in: query
+      description: Specifies the behavior when the Reindex operation encounters a version conflict. The possible options are abort (stop execution) and proceed (continue deleting). The default value is abort.
+      schema:
+        type: string
+        enum: [abort, proceed]
+        default: abort
+
+    max_docs_reindex:
+      name: max_docs
+      in: query
+      description: Specifies the maximum number of documents that the update by query operation can process. The default value is all documents.
+      schema:
+        type: integer
+
+    slices_reindex:
+      name: slices
+      in: query
+      description: Controls how many slices the operation should be divided into for parallel processing. Specify an integer for the number of slices or `auto` for the Wazuh indexer to determine it automatically. The default value is `1` meaning the tasks should not be divided.
+      schema:
+        oneOf:
+          - type: string
+            enum: [auto]
+          - type: integer
+            minimum: 1
+        default: 1
+
+  schemas:
+    DocumentSuccess:
+      type: object
+      properties:
+        _index:
+          type: string
+          description: The name of the index where the document was stored.
+        _id:
+          type: string
+          description: The unique identifier assigned to the document.
+        _version:
+          type: integer
+          description: The version number of the document. Each update increases this value.
+        result:
+          type: string
+          description: Indicates the outcome of the operation. Possible values are `created` (new document added) or `updated` (existing document modified).
+          enum: [created, updated]
+        _shards:
+          type: object
+          properties:
+            total:
+              type: integer
+              description: Total number of shards targeted in the request.
+            successful:
+              type: integer
+              description: Number of shards that successfully executed the operation.
+            failed:
+              type: integer
+              description: Number of shards where the operation failed.
+        _seq_no:
+          type: integer
+          description: The sequence number assigned to this operation. This is used for optimistic concurrency control.
+        _primary_term:
+          type: integer
+          description: The primary term of the shard that processed the request. Helps in ensuring consistency in case of shard relocations.
+
+    DocumentBadRequest:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            root_cause:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                  reason:
+                    type: string
+            type:
+              type: string
+            reason:
+              type: string
+        status:
+          type: integer
+
+    DocumentBadRequestWithIndex:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            root_cause:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                  reason:
+                    type: string
+                  index:
+                    type: string
+                  index_uuid:
+                    type: string
+            type:
+              type: string
+            reason:
+              type: string
+            index:
+              type: string
+            index_uuid:
+              type: string
+        status:
+          type: integer
+
+    DocumentNotFound:
+      type: object
+      properties:
+        _index:
+          type: string
+        _id:
+          type: string
+        _version:
+          type: integer
+        result:
+          type: string
+        _shards:
+          type: object
+          properties:
+            total:
+              type: integer
+            successful:
+              type: integer
+            failed:
+              type: integer
+        _seq_no:
+          type: integer
+        _primary_term:
+          type: integer
+
+    DocumentNotFoundSimple:
+      type: object
+      properties:
+        _index:
+          type: string
+        _id:
+          type: string
+        found:
+          type: boolean
+
+    DeleteByQueryBadRequest:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            root_cause:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                  reason:
+                    type: string
+                  index:
+                    type: string
+                  resource:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      type:
+                        type: string
+                  index_uuid:
+                    type: string
+            type:
+              type: string
+            reason:
+              type: string
+            index:
+              type: string
+            resource:
+              type: object
+              properties:
+                id:
+                  type: integer
+                type:
+                  type: string
+            index_uuid:
+              type: string
+        status:
+          type: integer
+
+  requestBodies:
+    IndexDocumentRequest:
+      description: The JSON source that defines the document's data.
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true
+          example:
+            "agent.id": "001"
+            "agent.ip": "Windows PC"
+            "description": "Malware detected"
+
+    GetDocumentRequest:
+      required: false
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              doc:
+                type: object
+                additionalProperties: true
+                description: A partial document containing the fields to update. Fields not included in `doc` remain unchanged.
+              script:
+                type: object
+                additionalProperties: true
+                description: A script that modifies the document dynamically. If provided, `doc` is ignored.
+              upsert:
+                type: object
+                additionalProperties: true
+                description: Provides a default document to be inserted if the specified document does not exist.
+              doc_as_upsert:
+                type: boolean
+                description: If `true`, Wazuh indexer inserts the document if it does not exist and updates it if it does.
+              detect_noop:
+                type: boolean
+                default: true
+                description: If `true`, Wazuh indexer skips the update if the document's contents remain unchanged.
+              retry_on_conflict:
+                type: integer
+                default: 0
+                description: Specifies the number of retry attempts if the update conflicts with another update.
+              scripted_upsert:
+                type: boolean
+                default: false
+                description: If `true`, it forces the Wazuh indexer to use the script to create a new document if it does not exist.
+            example:
+
+    UpdateDocumentRequest:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              script:
+                description: A script to modify matching documents. You can use Painless (default) or another supported scripting language.
+                type: object
+                additionalProperties: true
+          example:
+            script:
+              source: "ctx._source.location = \"EventChannel\""
+
+    BulkRequest:
+      required: true
+      content:
+        application/x-ndjson:
+          schema:
+            type: object
+            properties:
+              Action-and-Metadata:
+                description: Specifies the type of operation (`index`, `create`, `update`, `delete`) and the document metadata such as `_index` and `_id`.
+                type: object
+                additionalProperties: true
+              Source:
+                description: The actual document data to be indexed or updated. Required for `index`, `create`, and `update` operations. Omitted for `delete` operations.
+                type: object
+                additionalProperties: true
+          example: |
+            { "delete": { "_index": "wazuh-alerts-4.x-2025.03.12", "_id": "3" } }
+            { "index": { "_index": "wazuh-alerts-4.x-2025.03.12", "_id": "4" } }
+            { "agent.id": "001", "agent.ip": "Windows PC" }
+            { "create": { "_index": "wazuh-alerts-4.x-2025.03.12", "_id": "5" } }
+            { "agent.id": "001", "agent.ip": "Windows PC" }
+            { "update": { "_index": "wazuh-alerts-4.x-2025.03.12", "_id": "5" } }
+            { "doc" : { "agent.id": "002" } }
+
+    MultiGetRequest:
+      description: Multi-get documents request body
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              docs:
+                type: array
+                description: A list of documents to retrieve.
+                items:
+                  type: object
+                  properties:
+                    _id:
+                      type: string
+                      description: The unique identifier of the document.
+                    _index:
+                      type: string
+                      description: The name of the index where the document is stored. If the index is specified in the URL, this field can be omitted, and document IDs can be provided directly.
+                    _routing:
+                      type: string
+                      description: The routing value assigned to the document's shard.
+                    _source:
+                      description: Determines whether the `_source` field should be included in the response (`boolean`), which fields should be included (`array`), or which fields should be excluded.
+                      oneOf:
+                        - type: boolean
+                        - type: object
+                          properties:
+                            includes:
+                              description: |
+                                Specifies the fields to include in the response. Example: `{ "_source": { "include": ["Title"] } }` retrieves only the `Title` field.
+                              type: array
+                              items:
+                                type: string
+                            excludes:
+                              description: |
+                                Specifies the fields to exclude from the response. Example: `{ "_source": { "exclude": ["Director"] } }` omits the `Director` field.
+                              type: array
+                              items:
+                                type: string
+                    stored_fields:
+                      type: array
+                      items:
+                        type: string
+                      description: Stored fields to retrieve
+                  required:
+                    - _id
+              ids:
+                type: array
+                items:
+                  type: string
+                description: A list of document IDs to retrieve. This is only allowed when an index is provided in the URL.
+            example:
+              docs:
+                - _id: "1"
+                  _source: false
+                - _id: "5"
+                  _source:  [ "agent.id", "agent.ip" ]
+
+    DeleteByQueryRequest:
+      description: Delete by query request body
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              query:
+                type: object
+                description: The query that defines which documents to delete. This can be any valid query DSL (e.g., `match`, `term`, `range`, `bool`, etc.).
+            required:
+              - query
+            example:
+              query:
+                match:
+                  agent.id: "002"
+
+    UpdateByQueryRequest:
+      description: Update by query request body
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              query:
+                type: object
+                description: Query to match documents for update
+              script:
+                type: object
+                description: Script to execute on matching documents
+                properties:
+                  source:
+                    type: string
+                    description: Script source code
+                  lang:
+                    type: string
+                    description: Script language
+                    default: "painless"
+                  params:
+                    type: object
+                    description: Script parameters
+            example:
+              query:
+                term:
+                  agent.id: "001"
+
+    ReindexRequest:
+      description: Reindex documents request body
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              conflicts:
+                type: string
+                enum: [abort, proceed]
+                default: abort
+                description: Specifies the behavior when the Reindex operation encounters a version conflict.
+              source:
+                type: object
+                description: Specifies details about the source index to include.
+                properties:
+                  index:
+                    oneOf:
+                      - type: string
+                      - type: array
+                        items:
+                          type: string
+                    description: The name of the source index to copy data from.
+                  max_docs:
+                    type: integer
+                    description: The maximum number of documents to reindex from the source.
+                  query:
+                    type: object
+                    description: The search query to filter which documents to include in the reindex operation.
+                  remote:
+                    type: object
+                    description: Specifies details about a remote Wazuh indexer cluster to copy data from.
+                    properties:
+                      host:
+                        type: string
+                        description: The host URL of the remote Wazuh indexer cluster to copy data from.
+                      username:
+                        type: string
+                        description: Username used to authenticate with the remote cluster.
+                      password:
+                        type: string
+                        description: Password used for authentication with the remote cluster.
+                      socket_timeout:
+                        type: string
+                        format: duration
+                        default: "30s"
+                        description: Timeout for reading data from the socket.
+                      connect_timeout:
+                        type: string
+                        format: duration
+                        default: "30s"
+                        description: Timeout for establishing a connection to the remote cluster.
+                  size:
+                    type: integer
+                    description: The number of documents to reindex.
+                  slice:
+                    oneOf:
+                      - type: string
+                      - type: object
+                    description: Specifies whether to slice the reindex operation manually or automatically for parallel execution. When set to `auto`, the Wazuh indexer determines the number of slices to use, typically one per shard, up to a maximum of 20. If multiple source indexes are provided, the number of slices is based on the index.
+                  _source:
+                    oneOf:
+                      - type: boolean
+                      - type: array
+                        items:
+                          type: string
+                    description: Indicates which source fields to include in the reindex operation. You can provide a list of specific fields or set the value to `true` to reindex all fields.
+                    default: true
+                  id:
+                    type: integer
+                    description: The ID to associate with manual slicing.
+                  max:
+                    type: integer
+                    description: Maximum number of slices to divide the task into.
+                required:
+                  - index
+              dest:
+                type: object
+                description: Specifies information about the destination index.
+                properties:
+                  index:
+                    type: string
+                    description: The name of the destination index to write the documents to.
+                  version_type:
+                    type: string
+                    enum: [internal, external, external_gt, external_gte]
+                    description: Defines the versioning strategy used during the indexing operation. Valid options include `internal`, `external`, `external_gt` and `external_gte`. The `external_gt` option updates the document only if the specified version is greater than the current one while `external_gte` updates the document if the specified version is greater than or equal to the current version.
+                  op_type:
+                    type: string
+                    enum: [index, create]
+                    description: Specifies if documents that are missing are copied to the destination index. Use `create` to skip documents that already exist with the same ID, or `index` to copy all documents from the source, including those with matching IDs.
+                  pipeline:
+                    type: string
+                    description: Specifies an ingest pipeline to use during reindexing.
+                required:
+                  - index
+              script:
+                type: object
+                description: Script to modify documents as they are reindexed.
+                properties:
+                  source:
+                    type: string
+                    description: Script source code
+                  lang:
+                    type: string
+                    description: Specifies the scripting language used in the reindexing operation. The valid options include `painless`, `expression`, `mustache`, `java`.
+                    default: "painless"
+            required:
+              - source
+              - dest
+            example:
+
+  responses:
+    IndexDocumentSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DocumentSuccess'
+          example:
+            _index: "wazuh-alerts-4.x-2025.03.12"
+            _id: "1"
+            _version: 1
+            result: "created"
+            _shards:
+              total: 1
+              successful: 1
+              failed: 0
+            _seq_no: 262
+            _primary_term: 3
+
+    IndexDocumentBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DocumentBadRequest'
+          example:
+            error:
+              root_cause:
+                - type: "parse_exception"
+                  reason: "request body is required"
+              type: "parse_exception"
+              reason: "request body is required"
+            status: 400
+
+    GetDocumentSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              _index:
+                type: string
+                description: The name of the index where the document was stored.
+              _id:
+                type: string
+                description: The unique identifier assigned to the document.
+              _version:
+                type: integer
+                description: The version number of the document. Each update increases this value.
+              _seq_no:
+                type: integer
+                description: The sequence number assigned to this operation. This is used for optimistic concurrency control.
+              _primary_term:
+                type: integer
+                description: The primary term of the shard that processed the request. Helps in ensuring consistency in case of shard relocations.
+              found:
+                type: boolean
+                description: Indicates whether the document exists (`true` if found, `false` if not).
+              _routing:
+                type: string
+                description: Specifies the shard where the document is routed. If routing is not explicitly defined, this field is omitted.
+              _source:
+                type: object
+                additionalProperties: true
+                description: Contains the document's data if `found` is `true`. If `_source` is disabled (`false`) or `stored_fields` is set to `true`, this field is omitted.
+              _fields:
+                type: object
+                additionalProperties: true
+                description: Holds stored fields of the document (instead of `_source`). This is returned only if both `stored_fields` and `found` are `true`.
+          example:
+            _index: "wazuh-alerts-4.x-2025.03.12"
+            _id: "1"
+            _version: 1
+            _seq_no: 262
+            _primary_term: 3
+            found: true
+            _source:
+              "agent.id": "001"
+              "agent.ip": "Windows PC"
+              "description": "Malware detected"
+
+    GetDocumentNotFound:
+      description: Response to report a request not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DocumentNotFoundSimple'
+          example:
+            _index: "wazuh-alerts-4.x-2025.03.12"
+            _id: "0"
+            found: false
+
+    GetDocumentBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DocumentBadRequestWithIndex'
+          example:
+            error:
+              root_cause:
+                - type: "invalid_index_name_exception"
+                  reason: "Invalid index name [_wazuh-alerts-4.x-2025.03.12], must not start with '_'."
+                  index: "_wazuh-alerts-4.x-2025.03.12"
+                  index_uuid: "_na_"
+              type: "invalid_index_name_exception"
+              reason: "Invalid index name [_wazuh-alerts-4.x-2025.03.12], must not start with '_'."
+              index: "_wazuh-alerts-4.x-2025.03.12"
+              index_uuid: "_na_"
+            status: 400
+
+    UpdateDocumentSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DocumentSuccess'
+          example:
+            _index: "wazuh-alerts-4.x-2025.03.12"
+            _id: "1"
+            _version: 5
+            result: "updated"
+            _shards:
+              total: 1
+              successful: 1
+              failed: 0
+            _seq_no: 266
+            _primary_term: 3
+
+    UpdateDocumentBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DocumentBadRequest'
+          example:
+            error:
+              root_cause:
+                - type: "action_request_validation_exception"
+                  reason: "Validation Failed: 1: script or doc is missing;"
+              type: "action_request_validation_exception"
+              reason: "Validation Failed: 1: script or doc is missing;"
+            status: 400
+
+    UpdateDocumentNotFound:
+      description: Response to report a document not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DocumentBadRequestWithIndex'
+          example:
+            error:
+              root_cause:
+                - type: "document_missing_exception"
+                  reason: "[1]: document missing"
+                  index: "wazuh-alerts-4.x-2025.03.22"
+                  shard: "2"
+                  index_uuid: "GbPjnHpgTiivnQRY_wCJ1g"
+              type: "document_missing_exception"
+              reason: "[1]: document missing"
+              index: "wazuh-alerts-4.x-2025.03.22"
+              shard: "2"
+              index_uuid: "GbPjnHpgTiivnQRY_wCJ1g"
+            status: 404
+
+    DeleteDocumentSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DocumentSuccess'
+          example:
+            _index: "wazuh-alerts-4.x-2025.03.12"
+            _id: "2"
+            _version: 2
+            result: "deleted"
+            _shards:
+              total: 1
+              successful: 1
+              failed: 0
+            _seq_no: 279
+            _primary_term: 3
+
+    DocumentBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DocumentBadRequestWithIndex'
+          example:
+            error:
+              root_cause:
+                - type: "invalid_index_name_exception"
+                  reason: "Invalid index name [_wazuh-alerts-4.x-2025.03.12], must not start with '_'."
+                  index: "_wazuh-alerts-4.x-2025.03.12"
+                  index_uuid: "_na_"
+              type: "invalid_index_name_exception"
+              reason: "Invalid index name [_wazuh-alerts-4.x-2025.03.12], must not start with '_'."
+              index: "_wazuh-alerts-4.x-2025.03.12"
+              index_uuid: "_na_"
+            status: 400
+
+    DeleteDocumentNotFound:
+      description: Response to report a request not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DocumentNotFound'
+          example:
+            _index: "wazuh-alerts-4.x-2025.03.12"
+            _id: "5"
+            _version: 1
+            result: "not_found"
+            _shards:
+              total: 1
+              successful: 1
+              failed: 0
+            _seq_no: 240
+            _primary_term: 3
+
+    ByQueryDocumentNotFound:
+      description: Response to report a document not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DeleteByQueryBadRequest'
+          example:
+            error:
+              root_cause:
+                - type: "index_not_found_exception"
+                  reason: "no such index [wazuh-alerts-4.x-2025.03.90]"
+                  index: "wazuh-alerts-4.x-2025.03.90"
+                  resource.id: "wazuh-alerts-4.x-2025.03.90"
+                  resource.type: "index_or_alias"
+                  index_uuid: "_na_"
+              type: "index_not_found_exception"
+              reason: "no such index [wazuh-alerts-4.x-2025.03.90]"
+              index: "wazuh-alerts-4.x-2025.03.90"
+              resource.id: "wazuh-alerts-4.x-2025.03.90"
+              resource.type: "index_or_alias"
+              index_uuid: "_na_"
+            status: 404
+
+    BulkSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              took:
+                type: integer
+                description: The time (in milliseconds) that Wazuh indexer took to process the bulk request.
+              errors:
+                type: boolean
+                description: Indicates whether any errors occurred during the bulk operation. `false` means all operations were successful.
+              items:
+                type: array
+                items:
+                  type: object
+                  additionalProperties:
+                    type: object
+                    properties:
+                      _index:
+                        type: string
+                        description: The name of the index where the document was stored.
+                      _id:
+                        type: string
+                        description: The unique identifier assigned to the document.
+                      _version:
+                        type: integer
+                        description: The version number of the document. Each update increases this value.
+                      result:
+                        type: string
+                        description: Indicates the outcome of the operation. Possible values are `created`, `updated`, `deleted`, or `not_found`.
+                        enum: [created, updated, deleted, not_found]
+                      _shards:
+                        type: object
+                        properties:
+                          total:
+                            type: integer
+                            description: Total number of shards targeted in the request.
+                          successful:
+                            type: integer
+                            description: Number of shards that successfully executed the operation.
+                          failed:
+                            type: integer
+                            description: Number of shards where the operation failed.
+                      _seq_no:
+                        type: integer
+                        description: The sequence number assigned to this operation. This is used for optimistic concurrency control.
+                      _primary_term:
+                        type: integer
+                        description: The primary term of the shard that processed the request. Helps in ensuring consistency in case of shard relocations.
+                      status:
+                        type: integer
+                        description: HTTP status code for the individual operation.
+                description: A list of objects, each representing the result of an individual operation (`delete`, `index`, `create`, `update`).
+          example:
+            took: 69
+            errors: false
+            items:
+              - delete:
+                  _index: "wazuh-alerts-4.x-2025.03.12"
+                  _id: "3"
+                  _version: 2
+                  result: "deleted"
+                  _shards:
+                    total: 1
+                    successful: 1
+                    failed: 0
+                  _seq_no: 281
+                  _primary_term: 3
+                  status: 200
+              - index:
+                  _index: "wazuh-alerts-4.x-2025.03.12"
+                  _id: "4"
+                  _version: 1
+                  result: "created"
+                  _shards:
+                    total: 1
+                    successful: 1
+                    failed: 0
+                  _seq_no: 282
+                  _primary_term: 3
+                  status: 201
+              - create:
+                  _index: "wazuh-alerts-4.x-2025.03.12"
+                  _id: "5"
+                  _version: 1
+                  result: "created"
+                  _shards:
+                    total: 1
+                    successful: 1
+                    failed: 0
+                  _seq_no: 242
+                  _primary_term: 3
+                  status: 201
+              - update:
+                  _index: "wazuh-alerts-4.x-2025.03.12"
+                  _id: "5"
+                  _version: 2
+                  result: "updated"
+                  _shards:
+                    total: 1
+                    successful: 1
+                    failed: 0
+                  _seq_no: 243
+                  _primary_term: 3
+                  status: 200
+
+    BulkBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DocumentBadRequest'
+          example:
+            error:
+              root_cause:
+                - type: "parse_exception"
+                  reason: "request body is required"
+              type: "parse_exception"
+              reason: "request body is required"
+            status: 400
+
+    BulkRequest:
+      description: The bulk request body containing action-and-metadata lines and source lines.
+      required: true
+      content:
+        application/json:
+          schema:
+            type: string
+          example: |
+            { "delete": { "_index": "wazuh-alerts-4.x-2025.03.12", "_id": "3" } }
+            { "index": { "_index": "wazuh-alerts-4.x-2025.03.12", "_id": "4" } }
+            { "agent.id": "001", "agent.ip": "Windows PC" }
+            { "create": { "_index": "wazuh-alerts-4.x-2025.03.12", "_id": "5" } }
+            { "agent.id": "001", "agent.ip": "Windows PC" }
+            { "update": { "_index": "wazuh-alerts-4.x-2025.03.12", "_id": "5" } }
+            { "doc" : { "agent.id": "002" } }
+
+    MultiGetRequest:
+      description: The multi-get request body containing document specifications.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              docs:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    _id:
+                      type: string
+                      description: The unique identifier of the document.
+                    _index:
+                      type: string
+                      description: The name of the index where the document is stored.
+                    _routing:
+                      type: string
+                      description: The routing value assigned to the document's shard.
+                    _source:
+                      oneOf:
+                        - type: boolean
+                        - type: array
+                          items:
+                            type: string
+                      description: Determines whether the _source field should be included in the response.
+              ids:
+                type: array
+                items:
+                  type: string
+                description: A list of document IDs to retrieve. This is only allowed when an index is provided in the URL.
+          example:
+            docs:
+              - _id: "1"
+                _source: false
+              - _id: "5"
+                _source: ["agent.id", "agent.ip"]
+
+    MultiGetSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              docs:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    _index:
+                      type: string
+                      description: The name of the index where the document was stored.
+                    _id:
+                      type: string
+                      description: The unique identifier assigned to the document.
+                    _version:
+                      type: integer
+                      description: The version number of the document. Each update increases this value.
+                    _seq_no:
+                      type: integer
+                      description: The sequence number assigned to this operation. This is used for optimistic concurrency control.
+                    _primary_term:
+                      type: integer
+                      description: The primary term of the shard that processed the request. Helps in ensuring consistency in case of shard relocations.
+                    found:
+                      type: boolean
+                      description: Indicates whether the document was found in the index.
+                    _routing:
+                      type: string
+                      description: Specifies the shard where the document is routed. If routing is not explicitly defined, this field is omitted.
+                    _source:
+                      type: object
+                      additionalProperties: true
+                      description: Contains the document’s data if `found` is `true`. If `_source` is disabled (`false`) or `stored_fields` is set to `true`, this field is omitted.
+                    _fields:
+                      type: object
+                      description: Holds stored fields of the document (instead of `_source`). This is returned only if both `stored_fields`  and `found` are `true`.
+          example:
+            docs:
+              - _index: "wazuh-alerts-4.x-2025.03.12"
+                _id: "1"
+                _version: 5
+                _seq_no: 266
+                _primary_term: 3
+                found: true
+              - _index: "wazuh-alerts-4.x-2025.03.12"
+                _id: "5"
+                _version: 2
+                _seq_no: 243
+                _primary_term: 3
+                found: true
+                _source:
+                  agent.ip: "Windows PC"
+                  agent.id: "002"
+
+    DeleteByQueryRequest:
+      description: The delete by query request body containing the query to match documents for deletion.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              query:
+                type: object
+                additionalProperties: true
+                description: The query that defines which documents to delete. This can be any valid query DSL.
+          example:
+            query:
+              match:
+                agent.id: "002"
+
+    DeleteByQuerySuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              took:
+                type: integer
+                description: The total time, in milliseconds, that Wazuh indexer took to complete the delete operation.
+              timed_out:
+                type: boolean
+                description: Indicates whether any part of the delete operation exceeded the time limit and timed out.
+              total:
+                type: integer
+                description: The total number of documents matched by the query and processed during the operation.
+              deleted:
+                type: integer
+                description: The total number of documents successfully deleted.
+              batches:
+                type: integer
+                description: The number of internal scroll requests (or batches) used to process the delete request.
+              version_conflicts:
+                type: integer
+                description: The number of version conflicts encountered while deleting documents.
+              noops:
+                type: integer
+                description: The number of delete requests that the Wazuh indexer skipped during the operation.
+              retries:
+                type: object
+                properties:
+                  bulk:
+                    type: integer
+                    description: Number of retries for bulk delete operations.
+                  search:
+                    type: integer
+                    description: Number of retries for search operations.
+              throttled_millis:
+                type: integer
+                description: The total time, in milliseconds, the request was delayed due to throttling.
+              requests_per_second:
+                type: number
+                description: The rate of delete operations per second that the Wazuh indexer attempted during throttling.
+              throttled_until_millis:
+                type: integer
+                description: The time in milliseconds until the next throttled request is allowed. Always `0` for delete by query operation. If empty, the operation completed successfully without errors.
+              failures:
+                type: array
+                items:
+                  type: object
+                description: A list of any failures that occurred during the delete operation.
+          example:
+            took: 575
+            timed_out: false
+            total: 1
+            deleted: 1
+            batches: 1
+            version_conflicts: 0
+            noops: 0
+            retries:
+              bulk: 0
+              search: 0
+            throttled_millis: 0
+            requests_per_second: -1
+            throttled_until_millis: 0
+            failures: []
+
+    UpdateByQueryRequest:
+      description: The update by query request body containing the query and script to update matching documents.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              query:
+                type: object
+                additionalProperties: true
+                description: The query that defines which documents to update.
+              script:
+                type: object
+                additionalProperties: true
+                description: A script to modify matching documents.
+          example:
+            query:
+              term:
+                agent.id: "001"
+
+    UpdateByQuerySuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              took:
+                type: integer
+                description: The total time, in milliseconds, that Wazuh indexer took to complete the update operation.
+              timed_out:
+                type: boolean
+                description: Indicates whether any part of the update operation exceeded the time limit and timed out.
+              total:
+                type: integer
+                description: The total number of documents matched by the query and processed during the operation.
+              updated:
+                type: integer
+                description: The total number of documents successfully updated.
+              batches:
+                type: integer
+                description: The number of internal scroll requests (or batches) used to process the update request.
+              version_conflicts:
+                type: integer
+                description: The number of version conflicts encountered while updating documents.
+              noops:
+                type: integer
+                description: The number of update requests that the Wazuh indexer skipped during the operation.
+              retries:
+                type: object
+                properties:
+                  bulk:
+                    type: integer
+                    description: Number of retries for bulk update operations.
+                  search:
+                    type: integer
+                    description: Number of retries for search operations.
+              throttled_millis:
+                type: integer
+                description: The total time, in milliseconds, the request was delayed due to throttling.
+              requests_per_second:
+                type: number
+                description: The rate of update operations per second that the Wazuh indexer attempted during throttling.
+              throttled_until_millis:
+                type: integer
+                description: The time in milliseconds until the next throttled request is allowed.
+              failures:
+                type: array
+                items:
+                  type: object
+                description: A list of any failures that occurred during the update operation. If empty, the operation completed successfully without errors.
+          example:
+            took: 15
+            timed_out: false
+            total: 3
+            updated: 3
+            deleted: 0
+            batches: 1
+            version_conflicts: 0
+            noops: 0
+            retries:
+              bulk: 0
+              search: 0
+            throttled_millis: 0
+            requests_per_second: -1
+            throttled_until_millis: 0
+            failures: []
+
+    ReindexRequest:
+      description: The reindex request body containing source and destination specifications.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              conflicts:
+                type: string
+                description: Specifies the behavior when the Reindex operation encounters a version conflict.
+              source:
+                type: object
+                properties:
+                  index:
+                    type: string
+                    description: The name of the source index to copy data from.
+                  max_docs:
+                    type: integer
+                    description: The maximum number of documents to reindex from the source.
+                  query:
+                    type: object
+                    additionalProperties: true
+                    description: The search query to filter which documents to include in the reindex operation.
+                  remote:
+                    type: object
+                    properties:
+                      host:
+                        type: string
+                        description: The host URL of the remote Wazuh indexer cluster to copy data from.
+                      username:
+                        type: string
+                        description: Username used to authenticate with the remote cluster.
+                      password:
+                        type: string
+                        description: Password used for authentication with the remote cluster.
+                      socket_timeout:
+                        type: string
+                        description: Timeout for reading data from the socket.
+                      connect_timeout:
+                        type: string
+                        description: Timeout for establishing a connection to the remote cluster.
+                  size:
+                    type: integer
+                    description: The number of documents to reindex.
+                  slice:
+                    oneOf:
+                      - type: object
+                      - type: string
+                    description: Specifies whether to slice the reindex operation manually or automatically for parallel execution.
+                  _source:
+                    oneOf:
+                      - type: boolean
+                      - type: array
+                        items:
+                          type: string
+                    description: Indicates which source fields to include in the reindex operation.
+              dest:
+                type: object
+                properties:
+                  index:
+                    type: string
+                    description: The name of the destination index to write the documents to.
+                  version_type:
+                    type: string
+                    description: Defines the versioning strategy used during the indexing operation.
+                  op_type:
+                    type: string
+                    description: Specifies if documents that are missing are copied to the destination index.
+                  pipeline:
+                    type: string
+                    description: Specifies an ingest pipeline to use during reindexing.
+              script:
+                type: object
+                additionalProperties: true
+                description: Script to modify documents as they are reindexed.
+              lang:
+                type: string
+                description: Specifies the scripting language used in the reindexing operation.
+          example:
+            source:
+              index: "wazuh-alerts-4.x-2025.03.12"
+            dest:
+              index: "wazuh-alerts-4.x-2025.03.13"
+
+    ReindexSuccess:
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              took:
+                type: integer
+                description: The total time, in milliseconds, that Wazuh indexer took to complete the reindex operation.
+              timed_out:
+                type: boolean
+                description: Indicate if the reindex operation encountered a timeout.
+              total:
+                type: integer
+                description: The total number of documents processed during the operation.
+              updated:
+                type: integer
+                description: The total number of documents successfully updated in the destination index.
+              created:
+                type: integer
+                description: The total number of documents successfully created in the destination index.
+              deleted:
+                type: integer
+                description: The total number of documents successfully deleted in the destination index.
+              batches:
+                type: integer
+                description: The number of internal scroll requests (or batches) used to process the reindex request.
+              version_conflicts:
+                type: integer
+                description: The number of version conflicts encountered during the reindex operation.
+              noops:
+                type: integer
+                description: The number of documents that the Wazuh indexer skipped during the reindex operation.
+              retries:
+                type: object
+                properties:
+                  bulk:
+                    type: integer
+                    description: Number of retries for bulk reindex operations.
+                  search:
+                    type: integer
+                    description: Number of retries for search operations.
+              throttled_millis:
+                type: integer
+                description: The total time, in milliseconds, the request was delayed due to throttling.
+              requests_per_second:
+                type: number
+                description: The rate of reindex operations per second that the Wazuh indexer attempted during throttling.
+              throttled_until_millis:
+                type: integer
+                description: The time in milliseconds until the next throttled request is allowed.
+              failures:
+                type: array
+                items:
+                  type: object
+                description: A list of any failures that occurred during the reindex operation. If empty, the operation completed successfully without errors.
+          example:
+            took: 1602
+            timed_out: false
+            total: 782
+            updated: 1
+            created: 781
+            deleted: 0
+            batches: 1
+            version_conflicts: 0
+            noops: 0
+            retries:
+              bulk: 0
+              search: 0
+            throttled_millis: 0
+            requests_per_second: -1
+            throttled_until_millis: 0
+            failures: []

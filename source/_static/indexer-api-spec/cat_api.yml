@@ -1,0 +1,2706 @@
+paths:
+  /_cat/aliases:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get all aliases
+      description: |
+        It provides an overview of all existing aliases within your indexer cluster showing which aliases are associated with which specific indices.
+      operationId: getCatAliases
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/expand_wildcards'
+        - $ref: '#/components/parameters/format'
+        - $ref: '#/components/parameters/h'
+        - $ref: '#/components/parameters/help'
+        - $ref: '#/components/parameters/local'
+        - $ref: '#/components/parameters/s'
+        - $ref: '#/components/parameters/v'
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: '#/components/responses/CatAliasesSuccess'
+        '400':
+          $ref: '#/components/responses/CatBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/CatForbidden'
+
+  /_cat/aliases/{name}:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get specific alias
+      description: |
+        It provides an overview of all existing aliases within your indexer cluster showing which aliases are associated with which specific indices.
+      operationId: getCatAliasesByName
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/AliasName'
+        - $ref: '#/components/parameters/expand_wildcards'
+        - $ref: '#/components/parameters/format'
+        - $ref: '#/components/parameters/h'
+        - $ref: '#/components/parameters/help'
+        - $ref: '#/components/parameters/local'
+        - $ref: '#/components/parameters/s'
+        - $ref: '#/components/parameters/v'
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: '#/components/responses/CatAliasesSuccess'
+        '400':
+          $ref: '#/components/responses/CatBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/CatForbidden'
+
+  /_cat/allocation:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get all allocation
+      description: |
+        The CAT allocation operation shows how disk space is allocated for indexes and the quantity of shards on each node.
+      operationId: getCatAllocation
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/bytes'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/format'
+        - $ref: '#/components/parameters/h'
+        - $ref: '#/components/parameters/help'
+        - $ref: '#/components/parameters/local'
+        - $ref: '#/components/parameters/s'
+        - $ref: '#/components/parameters/v'
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: '#/components/responses/CatAllocationSuccess'
+        '400':
+          $ref: '#/components/responses/CatAllocationBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/CatAllocationForbidden'
+        '405':
+          $ref: '#/components/responses/CatMethodNotAllowed'
+
+  /_cat/allocation/{node_id}:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get allocation by node
+      description: |
+        The CAT allocation operation shows how disk space is allocated for indexes and the quantity of shards on each node.
+      operationId: getCatAllocationByNode
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/NodeId'
+        - $ref: '#/components/parameters/bytes'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/format'
+        - $ref: '#/components/parameters/h'
+        - $ref: '#/components/parameters/help'
+        - $ref: '#/components/parameters/local'
+        - $ref: '#/components/parameters/s'
+        - $ref: '#/components/parameters/v'
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: '#/components/responses/CatAllocationSuccess'
+        '400':
+          $ref: '#/components/responses/CatAllocationBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/CatAllocationForbidden'
+        '405':
+          $ref: '#/components/responses/CatMethodNotAllowed'
+
+  /_cat/count:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get all count
+      description: |
+        The CAT count operation provides quick access to the document count of the entire cluster, a specific index, or multiple indices.
+      operationId: getCatCount
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/format'
+        - $ref: '#/components/parameters/h'
+        - $ref: '#/components/parameters/s'
+        - $ref: '#/components/parameters/v_count'
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: '#/components/responses/CatCountSuccess'
+        '400':
+          $ref: '#/components/responses/CatCountBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/CatCountForbidden'
+        '405':
+          $ref: '#/components/responses/CatCountMethodNotAllowed'
+
+  /_cat/count/{INDEX}:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get count by index
+      description: |
+        The CAT count operation provides quick access to the document count of the entire cluster, a specific index, or multiple indices.
+      operationId: getCatCountByIndex
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/IndexName'
+        - $ref: '#/components/parameters/format'
+        - $ref: '#/components/parameters/h'
+        - $ref: '#/components/parameters/s'
+        - $ref: '#/components/parameters/v_count'
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: '#/components/responses/CatCountSuccess'
+        '400':
+          $ref: '#/components/responses/CatCountBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/CatCountForbidden'
+        '405':
+          $ref: '#/components/responses/CatCountMethodNotAllowed'
+
+  /_cat/fielddata:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get all fielddata
+      description: |
+        The CAT fielddata operation shows how much heap memory is being used by fielddata on every data node in the cluster.
+      operationId: getCatFielddata
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/bytes'
+        - $ref: '#/components/parameters/format'
+        - $ref: '#/components/parameters/h'
+        - $ref: '#/components/parameters/help'
+        - $ref: '#/components/parameters/local'
+        - $ref: '#/components/parameters/s'
+        - $ref: '#/components/parameters/v'
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: '#/components/responses/CatFielddataSuccess'
+        '400':
+          $ref: '#/components/responses/CatBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/CatForbidden'
+        '405':
+          $ref: '#/components/responses/CatMethodNotAllowed'
+
+  /_cat/fielddata/{field_name}:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get fielddata by field
+      description: |
+        The CAT fielddata operation shows how much heap memory is being used by fielddata on every data node in the cluster.
+      operationId: getCatFielddataByField
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/FieldName'
+        - $ref: '#/components/parameters/bytes'
+        - $ref: '#/components/parameters/format'
+        - $ref: '#/components/parameters/h'
+        - $ref: '#/components/parameters/help'
+        - $ref: '#/components/parameters/local'
+        - $ref: '#/components/parameters/s'
+        - $ref: '#/components/parameters/v'
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: '#/components/responses/CatFielddataSuccess'
+        '400':
+          $ref: '#/components/responses/CatBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/CatForbidden'
+        '405':
+          $ref: '#/components/responses/CatMethodNotAllowed'
+
+  /_cat/health:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get health
+      description: |
+        The CAT health operation is a concise representation of the same information from the cluster health API.
+      operationId: getCatHealth
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/format'
+        - $ref: '#/components/parameters/h'
+        - $ref: '#/components/parameters/health'
+        - $ref: '#/components/parameters/help'
+        - $ref: '#/components/parameters/ignore_throttled'
+        - $ref: '#/components/parameters/ignore_unavailable'
+        - $ref: '#/components/parameters/s'
+        - $ref: '#/components/parameters/time'
+        - $ref: '#/components/parameters/ts'
+        - $ref: '#/components/parameters/v'
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: '#/components/responses/CatHealthSuccess'
+        '400':
+          $ref: '#/components/responses/CatBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/CatForbidden'
+        '405':
+          $ref: '#/components/responses/CatMethodNotAllowed'
+
+  /_cat/indices:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get all indices
+      description: |
+        The CAT indices operation provides a comprehensive view of all indices in the cluster, including their health status, document counts, and storage information.
+      operationId: getCatIndices
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/format'
+        - $ref: '#/components/parameters/h'
+        - $ref: '#/components/parameters/health'
+        - $ref: '#/components/parameters/help'
+        - $ref: '#/components/parameters/ignore_throttled'
+        - $ref: '#/components/parameters/ignore_unavailable'
+        - $ref: '#/components/parameters/s'
+        - $ref: '#/components/parameters/time'
+        - $ref: '#/components/parameters/v'
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: '#/components/responses/CatIndicesSuccess'
+        '400':
+          $ref: '#/components/responses/CatBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/CatForbidden'
+        '405':
+          $ref: '#/components/responses/CatMethodNotAllowed'
+
+  /_cat/indices/{index}:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get indices by index
+      description: |
+        The CAT indices operation provides a comprehensive view of all indices in the cluster, including their health status, document counts, and storage information.
+      operationId: getCatIndicesByIndex
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/IndexName'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/format'
+        - $ref: '#/components/parameters/h'
+        - $ref: '#/components/parameters/health'
+        - $ref: '#/components/parameters/help'
+        - $ref: '#/components/parameters/ignore_throttled'
+        - $ref: '#/components/parameters/ignore_unavailable'
+        - $ref: '#/components/parameters/s'
+        - $ref: '#/components/parameters/time'
+        - $ref: '#/components/parameters/v'
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: '#/components/responses/CatIndicesSuccess'
+        '400':
+          $ref: '#/components/responses/CatBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/CatForbidden'
+        '405':
+          $ref: '#/components/responses/CatMethodNotAllowed'
+
+  /_cat/cluster_manager:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get cluster manager
+      description: |
+        The CAT cluster manager operation shows the cluster manager node information.
+      operationId: getCatClusterManager
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/format'
+        - $ref: '#/components/parameters/h'
+        - $ref: '#/components/parameters/help'
+        - $ref: '#/components/parameters/s'
+        - $ref: '#/components/parameters/v'
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: '#/components/responses/CatClusterManagerSuccess'
+        '400':
+          $ref: '#/components/responses/CatBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/CatForbidden'
+        '405':
+          $ref: '#/components/responses/CatMethodNotAllowed'
+
+  /_cat/nodeattrs:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get node attributes
+      description: |
+        The CAT node attributes operation shows information about custom node attributes.
+      operationId: getCatNodeattrs
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/format'
+        - $ref: '#/components/parameters/h'
+        - $ref: '#/components/parameters/help'
+        - $ref: '#/components/parameters/local'
+        - $ref: '#/components/parameters/s'
+        - $ref: '#/components/parameters/v'
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: '#/components/responses/CatNodeattrsSuccess'
+        '400':
+          $ref: '#/components/responses/CatBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/CatForbidden'
+        '405':
+          $ref: '#/components/responses/CatMethodNotAllowed'
+
+  /_cat/nodes:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get all nodes
+      description: |
+        The CAT nodes operation provides a comprehensive view of all nodes in the cluster, including their roles, load, and resource usage.
+      operationId: getCatNodes
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/format'
+        - $ref: '#/components/parameters/h'
+        - $ref: '#/components/parameters/help'
+        - $ref: '#/components/parameters/s'
+        - $ref: '#/components/parameters/time'
+        - $ref: '#/components/parameters/v'
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: '#/components/responses/CatNodesSuccess'
+        '400':
+          $ref: '#/components/responses/CatBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/CatForbidden'
+        '405':
+          $ref: '#/components/responses/CatMethodNotAllowed'
+
+  /_cat/pending_tasks:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get pending tasks
+      description: |
+        The CAT pending tasks operation shows cluster-level changes that have not yet been executed.
+      operationId: getCatPendingTasks
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/format'
+        - $ref: '#/components/parameters/h'
+        - $ref: '#/components/parameters/help'
+        - $ref: '#/components/parameters/s'
+        - $ref: '#/components/parameters/time'
+        - $ref: '#/components/parameters/v'
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: '#/components/responses/CatPendingTasksSuccess'
+        '400':
+          $ref: '#/components/responses/CatBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/CatForbidden'
+        '405':
+          $ref: '#/components/responses/CatMethodNotAllowed'
+
+  /_cat/pit_segments:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get PIT segments
+      description: |
+        The CAT PIT segments operation shows information about point-in-time segments.
+      operationId: getCatPitSegments
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/format'
+        - $ref: '#/components/parameters/h'
+        - $ref: '#/components/parameters/help'
+        - $ref: '#/components/parameters/s'
+        - $ref: '#/components/parameters/v'
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: '#/components/responses/CatPitSegmentsSuccess'
+        '400':
+          $ref: '#/components/responses/CatPitSegmentsBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/CatPitSegmentsForbidden'
+        '405':
+          $ref: '#/components/responses/CatPitSegmentsMethodNotAllowed'
+
+  /_cat/pit_segments/_all:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get PIT segments for all
+      description: |
+        The CAT PIT segments operation shows information about point-in-time segments.
+      operationId: getCatPitSegmentsAll
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/format'
+        - $ref: '#/components/parameters/h'
+        - $ref: '#/components/parameters/help'
+        - $ref: '#/components/parameters/s'
+        - $ref: '#/components/parameters/v'
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: '#/components/responses/CatPitSegmentsSuccess'
+        '400':
+          $ref: '#/components/responses/CatPitSegmentsBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/CatPitSegmentsForbidden'
+        '405':
+          $ref: '#/components/responses/CatPitSegmentsMethodNotAllowed'
+
+  /_cat/plugins:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get all plugins
+      description: |
+        The CAT plugins operation shows information about installed plugins.
+      operationId: getCatPlugins
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/format'
+        - $ref: '#/components/parameters/h'
+        - $ref: '#/components/parameters/help'
+        - $ref: '#/components/parameters/s'
+        - $ref: '#/components/parameters/v'
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: '#/components/responses/CatPluginsSuccess'
+        '400':
+          $ref: '#/components/responses/CatBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/CatForbidden'
+        '405':
+          $ref: '#/components/responses/CatMethodNotAllowed'
+
+  /_cat/recovery:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get all recovery
+      description: |
+        The CAT recovery operation shows information about ongoing and completed shard recoveries.
+      operationId: getCatRecovery
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/format'
+        - $ref: '#/components/parameters/h'
+        - $ref: '#/components/parameters/help'
+        - $ref: '#/components/parameters/s'
+        - $ref: '#/components/parameters/v'
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: '#/components/responses/CatRecoverySuccess'
+        '400':
+          $ref: '#/components/responses/CatBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/CatForbidden'
+        '405':
+          $ref: '#/components/responses/CatMethodNotAllowed'
+
+  /_cat/recovery/{index}:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get recovery by index
+      description: |
+        The CAT recovery operation shows information about ongoing and completed shard recoveries.
+      operationId: getCatRecoveryByIndex
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/IndexName'
+        - $ref: '#/components/parameters/format'
+        - $ref: '#/components/parameters/h'
+        - $ref: '#/components/parameters/help'
+        - $ref: '#/components/parameters/s'
+        - $ref: '#/components/parameters/v'
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: '#/components/responses/CatRecoverySuccess'
+        '400':
+          $ref: '#/components/responses/CatBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/CatForbidden'
+        '405':
+          $ref: '#/components/responses/CatMethodNotAllowed'
+
+  /_cat/repositories:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get all repositories
+      description: |
+        The CAT repositories operation shows information about snapshot repositories.
+      operationId: getCatRepositories
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/format'
+        - $ref: '#/components/parameters/h'
+        - $ref: '#/components/parameters/help'
+        - $ref: '#/components/parameters/s'
+        - $ref: '#/components/parameters/v'
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: '#/components/responses/CatRepositoriesSuccess'
+        '400':
+          $ref: '#/components/responses/CatBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/CatForbidden'
+        '405':
+          $ref: '#/components/responses/CatMethodNotAllowed'
+
+  /_cat/segment_replication:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get all segment replication
+      description: |
+        The CAT segment replication operation returns information about active and last completed segment replication events on each replica shard, including related shard-level metrics. These metrics provide information about how far behind the primary shard the replicas are lagging.
+      operationId: getCatSegmentReplication
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/active_only'
+        - $ref: '#/components/parameters/allow_no_indices'
+        - $ref: '#/components/parameters/bytes'
+        - $ref: '#/components/parameters/completed_only'
+        - $ref: '#/components/parameters/detailed'
+        - $ref: '#/components/parameters/expand_wildcards'
+        - $ref: '#/components/parameters/format'
+        - $ref: '#/components/parameters/h'
+        - $ref: '#/components/parameters/help'
+        - $ref: '#/components/parameters/ignore_throttled'
+        - $ref: '#/components/parameters/ignore_unavailable'
+        - $ref: '#/components/parameters/s'
+        - $ref: '#/components/parameters/shards'
+        - $ref: '#/components/parameters/time'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/v'
+      responses:
+        '200':
+          $ref: '#/components/responses/CatSegmentReplicationSuccess'
+        '400':
+          $ref: '#/components/responses/CatBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/CatForbidden'
+        '405':
+          $ref: '#/components/responses/CatMethodNotAllowed'
+
+  /_cat/segment_replication/{index}:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get segment replication by index
+      description: |
+        The CAT segment replication operation returns information about active and last completed segment replication events on each replica shard, including related shard-level metrics. These metrics provide information about how far behind the primary shard the replicas are lagging.
+      operationId: getCatSegmentReplicationByIndex
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/IndexName'
+        - $ref: '#/components/parameters/active_only'
+        - $ref: '#/components/parameters/allow_no_indices'
+        - $ref: '#/components/parameters/bytes'
+        - $ref: '#/components/parameters/completed_only'
+        - $ref: '#/components/parameters/detailed'
+        - $ref: '#/components/parameters/expand_wildcards'
+        - $ref: '#/components/parameters/format'
+        - $ref: '#/components/parameters/h'
+        - $ref: '#/components/parameters/help'
+        - $ref: '#/components/parameters/ignore_throttled'
+        - $ref: '#/components/parameters/ignore_unavailable'
+        - $ref: '#/components/parameters/s'
+        - $ref: '#/components/parameters/shards'
+        - $ref: '#/components/parameters/time'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/v'
+      responses:
+        '200':
+          $ref: '#/components/responses/CatSegmentReplicationSuccess'
+        '400':
+          $ref: '#/components/responses/CatBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/CatForbidden'
+        '405':
+          $ref: '#/components/responses/CatMethodNotAllowed'
+
+  /_cat/segments:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get all segments
+      description: |
+        The cat segments operation lists Lucene segment-level information for each index.
+      operationId: getCatSegments
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/bytes'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/format'
+        - $ref: '#/components/parameters/h'
+        - $ref: '#/components/parameters/help'
+        - $ref: '#/components/parameters/s'
+        - $ref: '#/components/parameters/v'
+      responses:
+        '200':
+          $ref: '#/components/responses/CatSegmentsSuccess'
+        '400':
+          $ref: '#/components/responses/CatBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/CatForbidden'
+        '405':
+          $ref: '#/components/responses/CatMethodNotAllowed'
+
+  /_cat/segments/{index}:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get segments by index
+      description: |
+        The cat segments operation lists Lucene segment-level information for each index.
+      operationId: getCatSegmentsByIndex
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/IndexName'
+        - $ref: '#/components/parameters/bytes'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/format'
+        - $ref: '#/components/parameters/h'
+        - $ref: '#/components/parameters/help'
+        - $ref: '#/components/parameters/s'
+        - $ref: '#/components/parameters/v'
+      responses:
+        '200':
+          $ref: '#/components/responses/CatSegmentsSuccess'
+        '400':
+          $ref: '#/components/responses/CatBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/CatForbidden'
+        '405':
+          $ref: '#/components/responses/CatMethodNotAllowed'
+
+  /_cat/shards:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get all shards
+      description: |
+        The CAT shards operation lists the state of all primary and replica shards and how they are distributed.
+      operationId: getCatShards
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/bytes'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/format'
+        - $ref: '#/components/parameters/h'
+        - $ref: '#/components/parameters/help'
+        - $ref: '#/components/parameters/local'
+        - $ref: '#/components/parameters/s'
+        - $ref: '#/components/parameters/time'
+        - $ref: '#/components/parameters/v'
+      responses:
+        '200':
+          $ref: '#/components/responses/CatShardsSuccess'
+        '400':
+          $ref: '#/components/responses/CatBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/CatForbidden'
+        '405':
+          $ref: '#/components/responses/CatMethodNotAllowed'
+
+  /_cat/shards/{index}:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get shards by index
+      description: |
+        The CAT shards operation lists the state of all primary and replica shards and how they are distributed.
+      operationId: getCatShardsByIndex
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/IndexName'
+        - $ref: '#/components/parameters/bytes'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/format'
+        - $ref: '#/components/parameters/h'
+        - $ref: '#/components/parameters/help'
+        - $ref: '#/components/parameters/local'
+        - $ref: '#/components/parameters/s'
+        - $ref: '#/components/parameters/time'
+        - $ref: '#/components/parameters/v'
+      responses:
+        '200':
+          $ref: '#/components/responses/CatShardsSuccess'
+        '400':
+          $ref: '#/components/responses/CatBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/CatForbidden'
+        '405':
+          $ref: '#/components/responses/CatMethodNotAllowed'
+
+  /_cat/snapshots:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get all snapshots
+      description: |
+        The CAT snapshots operation lists all snapshots for a repository.
+      operationId: getCatSnapshots
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/format'
+        - $ref: '#/components/parameters/h'
+        - $ref: '#/components/parameters/help'
+        - $ref: '#/components/parameters/ignore_unavailable_snapshots'
+        - $ref: '#/components/parameters/s'
+        - $ref: '#/components/parameters/time'
+        - $ref: '#/components/parameters/v'
+      responses:
+        '200':
+          $ref: '#/components/responses/CatSnapshotsSuccess'
+        '400':
+          $ref: '#/components/responses/CatBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/CatForbidden'
+        '405':
+          $ref: '#/components/responses/CatMethodNotAllowed'
+
+  /_cat/snapshots/{repository}:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get snapshots by repository
+      description: |
+        The CAT snapshots operation lists all snapshots for a repository.
+      operationId: getCatSnapshotsByRepository
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/RepositoryName'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/format'
+        - $ref: '#/components/parameters/h'
+        - $ref: '#/components/parameters/help'
+        - $ref: '#/components/parameters/ignore_unavailable_snapshots'
+        - $ref: '#/components/parameters/s'
+        - $ref: '#/components/parameters/time'
+        - $ref: '#/components/parameters/v'
+      responses:
+        '200':
+          $ref: '#/components/responses/CatSnapshotsSuccess'
+        '400':
+          $ref: '#/components/responses/CatBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/CatForbidden'
+        '405':
+          $ref: '#/components/responses/CatMethodNotAllowed'
+
+  /_cat/tasks:
+    get:
+      tags:
+        - Cat APIs
+      summary: Tasks
+      description: |
+        The CAT tasks operation lists the progress of all tasks currently running on your cluster.
+      operationId: getCatTasks
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/actions'
+        - $ref: '#/components/parameters/detailed'
+        - $ref: '#/components/parameters/format'
+        - $ref: '#/components/parameters/h'
+        - $ref: '#/components/parameters/help'
+        - $ref: '#/components/parameters/nodes'
+        - $ref: '#/components/parameters/parent_task_id'
+        - $ref: '#/components/parameters/s'
+        - $ref: '#/components/parameters/time'
+        - $ref: '#/components/parameters/v'
+      responses:
+        '200':
+          $ref: '#/components/responses/CatTasksSuccess'
+        '400':
+          $ref: '#/components/responses/CatBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/CatForbidden'
+        '405':
+          $ref: '#/components/responses/CatMethodNotAllowed'
+
+  /_cat/templates:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get all templates
+      description: |
+        The CAT templates operation lists the names, patterns, order numbers, and version numbers of index templates.
+      operationId: getCatTemplates
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/format'
+        - $ref: '#/components/parameters/h'
+        - $ref: '#/components/parameters/help'
+        - $ref: '#/components/parameters/local'
+        - $ref: '#/components/parameters/s'
+        - $ref: '#/components/parameters/v'
+      responses:
+        '200':
+          $ref: '#/components/responses/CatTemplatesSuccess'
+        '400':
+          $ref: '#/components/responses/CatBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/CatForbidden'
+        '405':
+          $ref: '#/components/responses/CatMethodNotAllowed'
+
+  /_cat/templates/{name}:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get templates by name
+      description: |
+        The CAT templates operation lists the names, patterns, order numbers, and version numbers of index templates.
+      operationId: getCatTemplatesByName
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/TemplateName'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/format'
+        - $ref: '#/components/parameters/h'
+        - $ref: '#/components/parameters/help'
+        - $ref: '#/components/parameters/local'
+        - $ref: '#/components/parameters/s'
+        - $ref: '#/components/parameters/v'
+      responses:
+        '200':
+          $ref: '#/components/responses/CatTemplatesSuccess'
+        '400':
+          $ref: '#/components/responses/CatBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/CatForbidden'
+        '405':
+          $ref: '#/components/responses/CatMethodNotAllowed'
+
+  /_cat/thread_pool:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get all thread pool
+      description: |
+        The CAT thread pool operation lists the active, queued, and rejected threads of different thread pools on each node.
+      operationId: getCatThreadPool
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/format'
+        - $ref: '#/components/parameters/h'
+        - $ref: '#/components/parameters/help'
+        - $ref: '#/components/parameters/s'
+        - $ref: '#/components/parameters/v'
+      responses:
+        '200':
+          $ref: '#/components/responses/CatThreadPoolSuccess'
+        '400':
+          $ref: '#/components/responses/CatBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/CatForbidden'
+        '405':
+          $ref: '#/components/responses/CatMethodNotAllowed'
+
+  /_cat/thread_pool/{thread_pool_patterns}:
+    get:
+      tags:
+        - Cat APIs
+      summary: Get thread pool by patterns
+      description: |
+        The CAT thread pool operation lists the active, queued, and rejected threads of different thread pools on each node.
+      operationId: getCatThreadPoolByPatterns
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/ThreadPoolPatterns'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/format'
+        - $ref: '#/components/parameters/h'
+        - $ref: '#/components/parameters/help'
+        - $ref: '#/components/parameters/local'
+        - $ref: '#/components/parameters/s'
+        - $ref: '#/components/parameters/size'
+        - $ref: '#/components/parameters/v'
+      responses:
+        '200':
+          $ref: '#/components/responses/CatThreadPoolSuccess'
+        '400':
+          $ref: '#/components/responses/CatBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/CatForbidden'
+        '405':
+          $ref: '#/components/responses/CatMethodNotAllowed'
+
+components:
+  parameters:
+    AliasName:
+      name: name
+      in: path
+      required: true
+      description: The name of the alias.
+      schema:
+        type: string
+
+    NodeId:
+      name: node_id
+      in: path
+      required: true
+      description: The ID of the node.
+      schema:
+        type: string
+
+    IndexName:
+      name: INDEX
+      in: path
+      required: true
+      description: The name of the index.
+      schema:
+        type: string
+
+    FieldName:
+      name: field_name
+      in: path
+      required: true
+      description: The name of the field.
+      schema:
+        type: string
+
+    expand_wildcards:
+      name: expand_wildcards
+      in: query
+      description: |
+        Specifies the type of index that wildcard expressions can match. Supports comma-separated values.
+        Valid values are:
+        - all: Match any index, including hidden ones.
+        - closed: Match closed, non-hidden indexes.
+        - hidden: Match hidden indexes. Must be combined with open, closed, or both.
+        - none: Wildcard expressions are not accepted.
+        - open: Match open, non-hidden indexes.
+      schema:
+        oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+
+    format:
+      name: format
+      in: query
+      description: A short version of the HTTP Accept header, such as json or yaml.
+      schema:
+        type: string
+
+    h:
+      name: h
+      in: query
+      description: A comma-separated list of column names to display.
+      schema:
+        oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+
+    help:
+      name: help
+      in: query
+      description: Returns help information.
+      schema:
+        type: boolean
+        default: false
+
+    local:
+      name: local
+      in: query
+      description: Returns local information but does not retrieve the state from the cluster manager node.
+      schema:
+        type: boolean
+        default: false
+
+    s:
+      name: s
+      in: query
+      description: A comma-separated list of column names or column aliases to sort by.
+      schema:
+        oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+
+    v:
+      name: v
+      in: query
+      description: Enables verbose mode, which displays column headers.
+      schema:
+        type: boolean
+        default: false
+
+    pretty:
+      name: pretty
+      in: query
+      description: Show results in human-readable format.
+      schema:
+        type: boolean
+        default: false
+
+    bytes:
+      name: bytes
+      in: query
+      description: |
+        The units used to display byte values.
+        Valid values are: b, kb, k, mb, m, gb, g, tb, t, pb, p.
+      schema:
+        type: string
+
+    cluster_manager_timeout:
+      name: cluster_manager_timeout
+      in: query
+      description: A timeout for connection to the cluster manager node.
+      schema:
+        type: string
+        format: duration
+
+    v_count:
+      name: v
+      in: query
+      description: Enables verbose mode, which displays column headers.
+      schema:
+        type: boolean
+        default: true
+
+    time:
+      name: time
+      in: query
+      description: |
+        Specifies the time units, for example, 5d or 7h.
+        Valid values are: nanos, micros, ms, s, m, h, d.
+      schema:
+        type: string
+        format: duration
+
+    ts:
+      name: ts
+      in: query
+      description: Returns HH:MM:SS and Unix epoch timestamps.
+      schema:
+        type: boolean
+        default: true
+
+    health:
+      name: health
+      in: query
+      description: Limits indexes based on their health status. Supported values are green, yellow, and red. The values are case insensitive.
+      schema:
+        type: string
+
+    include_unloaded_segments:
+      name: include_unloaded_segments
+      in: query
+      description: Whether to include information from segments not loaded into memory.
+      schema:
+        type: boolean
+        default: false
+
+    pri:
+      name: pri
+      in: query
+      description: When true, returns information only from the primary shards.
+      schema:
+        type: boolean
+        default: false
+
+    full_id:
+      name: full_id
+      in: query
+      description: When true, returns the full node ID. When false, returns the shortened node ID.
+      schema:
+        type: boolean
+        default: false
+
+    active_only:
+      name: active_only
+      in: query
+      description: Returns the shard recoveries that are currently in progress, when set to true.
+      schema:
+        type: boolean
+        default: false
+
+    detailed:
+      name: detailed
+      in: query
+      description: Returns detailed information about shard recoveries when set to true.
+      schema:
+        type: boolean
+        default: false
+
+    allow_no_indices:
+      name: allow_no_indices
+      in: query
+      description: Controls whether to ignore the index if a wildcard index expression resolves to no concrete indexes. This includes the _all string or when no indexes have been specified.
+      schema:
+        type: boolean
+        default: false
+
+    completed_only:
+      name: completed_only
+      in: query
+      description: When set to true, the response only includes the last-completed segment replication events.
+      schema:
+        type: boolean
+        default: false
+
+    ignore_throttled:
+      name: ignore_throttled
+      in: query
+      description: Whether specified concrete, expanded, or aliased indexes should be ignored when throttled.
+      schema:
+        type: boolean
+
+    ignore_unavailable:
+      name: ignore_unavailable
+      in: query
+      description: Controls if the specified concrete indexes should be ignored when missing or closed.
+      schema:
+        type: boolean
+
+    shards:
+      name: shards
+      in: query
+      description: A comma-separated list of shards to display.
+      schema:
+        type: array
+        items:
+          type: string
+
+    timeout:
+      name: timeout
+      in: query
+      description: Specifies how long the indexer node should wait before the operation timeout.
+      schema:
+        type: string
+        format: duration
+
+    RepositoryName:
+      name: repository
+      in: path
+      description: The name of the repository to list snapshots for.
+      required: true
+      schema:
+        type: string
+
+    TemplateName:
+      name: name
+      in: path
+      description: The name of the template to retrieve.
+      required: true
+      schema:
+        type: string
+
+    ThreadPoolPatterns:
+      name: thread_pool_patterns
+      in: path
+      description: Comma-separated list of thread pool names or patterns to filter the results.
+      required: true
+      schema:
+        type: string
+
+    actions:
+      name: actions
+      in: query
+      description: The task action names used to limit the response.
+      schema:
+        type: array
+        items:
+          type: string
+
+    nodes:
+      name: nodes
+      in: query
+      description: A comma-separated list of node IDs or names used to limit the returned information. Use _local to return information from the node to which you are connecting to, specify a specific node from which to get information, or keep the parameter empty to get information from all nodes.
+      schema:
+        type: array
+        items:
+          type: string
+
+    parent_task_id:
+      name: parent_task_id
+      in: query
+      description: The parent task identifier, which is used to limit the response.
+      schema:
+        type: string
+
+    size:
+      name: size
+      in: query
+      description: The multiplier in which to display values.
+      schema:
+        type: integer
+
+    ignore_unavailable_snapshots:
+      name: ignore_unavailable
+      in: query
+      description: When set to true, the response does not include information from unavailable snapshots.
+      schema:
+        type: boolean
+        default: false
+
+
+
+  requestBodies:
+    PitSegmentsRequestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              pit_id:
+                oneOf:
+                  - type: string
+                  - type: array
+                    items:
+                      type: string
+                description: The PIT IDs of the PIT whose segments are to be listed. It is required as part of the request and made up of a Base64 encoded binary or an array of binaries.
+          example:
+            pit_id:
+              - "pit_id_1"
+              - "pit_id_2"
+
+  responses:
+    CatAliasesSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              alias:
+                type: string
+                description: The name of the index that the alias points to.
+              index:
+                type: string
+                description: The name of the alias.
+              filter:
+                type: object
+                description: Add a filter to the alias.
+              routing.index:
+                type: string
+                description: Specifies the shard where a document is stored.
+              routing.search:
+                type: string
+                description: Specifies which shards are searched during a search query.
+              is_write_index:
+                type: string
+                description: Specify the index that accepts any write operations to the alias. If this value is not specified, then no write operations are allowed.
+          example:
+            alias: ".kibana"
+            index: ".kibana_1"
+            filter: "-"
+            routing.index: "-"
+            routing.search: "-"
+            is_write_index: "-"
+
+    CatAllocationSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              shards:
+                type: integer
+                description: The number of shard replicas currently assigned to the node.
+              disk.indices:
+                type: string
+                description: The total disk space used by all indices (data) on the node.
+              disk.used:
+                type: string
+                description: The total amount of disk space currently used on the node.
+              disk.avail:
+                type: string
+                description: The total amount of free disk space available on the node.
+              disk.total:
+                type: string
+                description: The total disk space capacity of the node.
+              disk.percent:
+                type: string
+                description: The percentage of disk space used on this node.
+              host:
+                type: string
+                description: The hostname of the node.
+              ip:
+                type: string
+                description: The IP address of the node.
+              node:
+                type: string
+                description: The name of the node.
+          example:
+            shards: "35"
+            disk.indices: "8mb"
+            disk.used: "29.3gb"
+            disk.avail: "28.9gb"
+            disk.total: "58.3gb"
+            disk.percent: "50"
+            host: "127.0.0.1"
+            ip: "127.0.0.1"
+            node: "node-1"
+
+    CatCountSuccess:
+      description: Returns the document count for the specified index/aliases
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              epoch:
+                type: string
+                description: Displays the Unix epoch time.
+              timestamp:
+                type: string
+                description: Displays the human-readable timestamp corresponding to the epoch time.
+              count:
+                type: integer
+                description: Displays the total number of documents found in the specified index or across the entire cluster.
+          example:
+            epoch: "1737469092"
+            timestamp: "14:18:12"
+            count: "3272"
+
+    CatBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  root_cause:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        reason:
+                          type: string
+                  type:
+                    type: string
+                  reason:
+                    type: string
+              status:
+                type: integer
+          example:
+            error:
+              root_cause:
+                - type: "illegal_argument_exception"
+                  reason: "request [/_cat/aliases] contains unrecognized parameter: [v,format] -> did you mean [format]?"
+              type: "illegal_argument_exception"
+              reason: "request [/_cat/aliases] contains unrecognized parameter: [v,format] -> did you mean [format]?"
+            status: 400
+
+    CatForbidden:
+      description: Response to report a permission denied request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  root_cause:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        reason:
+                          type: string
+                  type:
+                    type: string
+                  reason:
+                    type: string
+              status:
+                type: integer
+          example:
+            error:
+              root_cause:
+                - type: "security_exception"
+                  reason: "no permissions for [indices:admin/aliases/get] and User [name=test, backend_roles=[], requestedTenant=null]"
+              type: "security_exception"
+              reason: "no permissions for [indices:admin/aliases/get] and User [name=test, backend_roles=[], requestedTenant=null]"
+            status: 403
+
+    CatMethodNotAllowed:
+      description: Response to report an invalid HTTP method
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+              status:
+                type: integer
+          example:
+            error: "Incorrect HTTP method for uri [/_cat/allocation?v=&pretty=true] and method [PUT], allowed: [GET]"
+            status: 405
+
+    CatAllocationBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  root_cause:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        reason:
+                          type: string
+                  type:
+                    type: string
+                  reason:
+                    type: string
+              status:
+                type: integer
+          example:
+            error:
+              root_cause:
+                - type: "illegal_argument_exception"
+                  reason: "request [/_cat/allocation] contains unrecognized parameter: [v1]"
+              type: "illegal_argument_exception"
+              reason: "request [/_cat/allocation] contains unrecognized parameter: [v1]"
+            status: 400
+
+    CatAllocationForbidden:
+      description: Response to report a permission denied request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  root_cause:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        reason:
+                          type: string
+                  type:
+                    type: string
+                  reason:
+                    type: string
+              status:
+                type: integer
+          example:
+            error:
+              root_cause:
+                - type: "security_exception"
+                  reason: "no permissions for [indices:admin/allocation/get] and User [name=test, backend_roles=[], requestedTenant=null]"
+              type: "security_exception"
+              reason: "no permissions for [indices:admin/allocation/get] and User [name=test, backend_roles=[], requestedTenant=null]"
+            status: 403
+
+    CatCountBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  root_cause:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        reason:
+                          type: string
+                  type:
+                    type: string
+                  reason:
+                    type: string
+              status:
+                type: integer
+          example:
+            error:
+              root_cause:
+                - type: "illegal_argument_exception"
+                  reason: "request [/_cat/count] contains unrecognized parameter: [v1]"
+              type: "illegal_argument_exception"
+              reason: "request [/_cat/count] contains unrecognized parameter: [v1]"
+            status: 400
+
+    CatCountForbidden:
+      description: Response to report a permission denied request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  root_cause:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        reason:
+                          type: string
+                  type:
+                    type: string
+                  reason:
+                    type: string
+              status:
+                type: integer
+          example:
+            error:
+              root_cause:
+                - type: "security_exception"
+                  reason: "no permissions for [indices:admin/count/get] and User [name=test, backend_roles=[], requestedTenant=null]"
+              type: "security_exception"
+              reason: "no permissions for [indices:admin/count/get] and User [name=test, backend_roles=[], requestedTenant=null]"
+            status: 403
+
+    CatCountMethodNotAllowed:
+      description: Response to report an invalid HTTP method
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+              status:
+                type: integer
+          example:
+            error: "Incorrect HTTP method for uri [/_cat/count?v=&pretty=true] and method [PUT], allowed: [GET]"
+            status: 405
+
+    CatFielddataSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+                description: A unique identifier for the node.
+              host:
+                type: string
+                description: The hostname of the node.
+              ip:
+                type: string
+                description: The IP address of the node.
+              node:
+                type: string
+                description: The name of the node.
+              field:
+                type: string
+                description: The name of the field for which field data is being tracked.
+              size:
+                type: string
+                description: The amount of memory used by the field data for that specific field on the node.
+          example:
+            id: "XyGg_gfbR0-X-5XpDVKxdg"
+            host: "127.0.0.1"
+            ip: "127.0.0.1"
+            node: "node-1"
+            field: "log_types"
+            size: "0b"
+
+    CatHealthSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              epoch:
+                type: integer
+                description: Displays the Unix epoch timestamp.
+              timestamp:
+                type: string
+                description: Human-readable timestamp.
+              cluster:
+                type: string
+                description: Displays the name of the Wazuh indexer cluster.
+              status:
+                type: string
+                description: Describes the overall health status of the cluster.
+              node.total:
+                type: string
+                description: Total number of nodes in the cluster.
+              node.data:
+                type: string
+                description: Number of data nodes in the cluster.
+              discovered_cluster_manager:
+                type: string
+                description: Indicates whether the cluster manager node has been successfully discovered by the current node.
+              shards:
+                type: string
+                description: Total number of shard replicas in the cluster.
+              pri:
+                type: string
+                description: Number of primary shards.
+              relo:
+                type: string
+                description: Number of shards being relocated.
+              init:
+                type: string
+                description: Number of shards being initialized.
+              unassign:
+                type: string
+                description: Number of unassigned shards.
+              pending_tasks:
+                type: string
+                description: Number of pending cluster tasks.
+              max_task_wait_time:
+                type: string
+                description: Maximum wait time for a cluster task.
+              active_shards_percent:
+                type: string
+                description: Percentage of active shards.
+          example:
+            epoch: "1737505619"
+            timestamp: "00:26:59"
+            cluster: "wazuh-cluster"
+            status: "green"
+            node.total: "1"
+            node.data: "1"
+            discovered_cluster_manager: "true"
+            shards: "38"
+            pri: "38"
+            relo: "0"
+            init: "0"
+            unassign: "0"
+            pending_tasks: "0"
+            max_task_wait_time: "-"
+            active_shards_percent: "100.0%"
+
+    CatIndicesSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              health:
+                type: string
+                description: Indicates the health status of the index. "green" signifies that the index is healthy and operating normally.
+              status:
+                type: string
+                description: Shows the current state of the index. "open" means the index is active and available for indexing and search operations.
+              index:
+                type: string
+                description: The name of the index.
+              uuid:
+                type: string
+                description: A unique identifier for the index.
+              pri:
+                type: integer
+                description: The number of primary shards for the index. A shard is a partition of the index, and primary shards are the original copies of the data.
+              rep:
+                type: integer
+                description: The number of replicas for each primary shard. Replicas are copies of primary shards for fault tolerance and improved performance.
+              docs:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    description: The total number of documents stored within the index.
+                  deleted:
+                    type: integer
+                    description: The number of documents that have been marked as deleted but not yet physically removed from the index.
+              store.size:
+                type: string
+                description: The total size of the index data on disk, including both primary and replica shards.
+              pri.store.size:
+                type: string
+                description: The size of the data stored on the primary shards.
+          example:
+            health: "green"
+            status: "open"
+            index: "wazuh-alerts-4.x-2025.01.19"
+            uuid: "BptQhS5GTMiMokuutBL00g"
+            pri: 3
+            rep: 0
+            docs:
+              count: 4
+              deleted: 0
+            store.size: "75kb"
+            pri.store.size: "75kb"
+
+    CatClusterManagerSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+                description: The unique identifier for the node.
+              host:
+                type: string
+                description: The hostname of the machine where this node is running.
+              ip:
+                type: string
+                description: The IP address of the machine where this node is running.
+              node:
+                type: string
+                description: The name given to the Wazuh indexer node.
+          example:
+            id: "XyGg_gfbR0-X-5XpDVKxdg"
+            host: "127.0.0.1"
+            ip: "127.0.0.1"
+            node: "node-1"
+
+    CatNodeattrsSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              node:
+                type: string
+                description: The name given to the Wazuh indexer node.
+              host:
+                type: string
+                description: The hostname of the machine where the Wazuh indexer node is running.
+              ip:
+                type: string
+                description: The IP address of the machine where the Wazuh indexer node is running.
+              attr:
+                type: string
+                description: This signifies the name of a custom attribute that has been defined for this node.
+              value:
+                type: string
+                description: This represents the value of the custom attr attribute.
+          example:
+            node: "node-1"
+            host: "127.0.0.1"
+            ip: "127.0.0.1"
+            attr: "shard_indexing_pressure_enabled"
+            value: "true"
+
+    CatNodesSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              ip:
+                type: string
+                description: The IP address of the machine where the Wazuh indexer node is running.
+              heap.percent:
+                type: integer
+                description: The percentage of heap memory used by the Java Virtual Machine (JVM) on the Wazuh indexer node.
+              ram.percent:
+                type: integer
+                description: The percentage of total system RAM used by the Wazuh indexer node.
+              cpu:
+                type: integer
+                description: Displays the CPU usage of the Wazuh indexer node.
+              load_1m:
+                type: string
+                description: Displays the average system load over the last 1 minute.
+              load_5m:
+                type: string
+                description: Displays the average system load over the last 5 minutes.
+              load_15m:
+                type: string
+                description: Displays the average system load over the last 15 minutes.
+              node:
+                type: object
+                properties:
+                  role:
+                    type: string
+                    description: A short, single character representation of the Wazuh indexer node's role (e.g., 'd' for data node, 'm' for master node).
+                  roles:
+                    type: string
+                    description: A comma-separated list of all roles assigned to the node.
+              cluster_manager:
+                type: string
+                description: Indicates whether the node is the current cluster manager or not.
+              name:
+                type: string
+                description: The unique name assigned to the Wazuh indexer node within the cluster.
+          example:
+            ip: "127.0.0.1"
+            heap.percent: 22
+            ram.percent: 97
+            cpu: 34
+            load_1m: "0.40"
+            load_5m: "0.37"
+            load_15m: "0.80"
+            node:
+              role: "dimr"
+              roles: "cluster_manager,data,ingest,remote_cluster_client"
+            cluster_manager: "*"
+            name: "node-1"
+
+    CatPendingTasksSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              insertOrder:
+                type: integer
+                description: This represents the order in which the task was enqueued. It provides a sequential number for each task waiting to be executed.
+              timeInQueue:
+                type: string
+                description: This indicates how long the task has been waiting in the queue before being processed.
+              priority:
+                type: string
+                description: This represents the priority level assigned to the task. Higher priority tasks are executed before lower priority tasks.
+              source:
+                type: string
+                description: This indicates the origin of the task.
+          example:
+            insertOrder: 1786
+            timeInQueue: "1.8s"
+            priority: "URGENT"
+            source: "shard-started"
+
+    CatPitSegmentsSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              index:
+                type: string
+                description: The name of the index.
+              shard:
+                type: integer
+                description: The shard ID within the index.
+              prirep:
+                type: string
+                description: Indicates whether the shard is a primary shard ("p") or a replica shard ("r").
+              ip:
+                type: string
+                description: The IP address of the node where the shard is located.
+              segment:
+                type: string
+                description: The name of the segment that holds the shard's data.
+              generation:
+                type: integer
+                description: The generation number of the segment.
+              docs.count:
+                type: integer
+                description: The number of documents stored in the shard.
+              docs.deleted:
+                type: integer
+                description: The number of documents that have been marked as deleted but not yet removed from the shard.
+              size:
+                type: string
+                description: The size the shard is consuming on the node's disk.
+              size.memory:
+                type: integer
+                description: The estimated memory usage of the shard.
+              committed:
+                type: string
+                description: Indicates whether the shard is committed (i.e., ready for search).
+              searchable:
+                type: boolean
+                description: Indicates whether the shard is searchable.
+              version:
+                type: string
+                description: The version of the Lucene index format used by the shard.
+              compound:
+                type: boolean
+                description: Indicates whether the shard is stored in a compound file format for improved performance.
+          example:
+            index: "index1"
+            shard: 0
+            prirep: "r"
+            ip: "127.0.0.1"
+            segment: "_0"
+            generation: 0
+            docs.count: 4
+            docs.deleted: 0
+            size: "3.8kb"
+            size.memory: 1364
+            committed: "false"
+            searchable: true
+            version: "8.8.2"
+            compound: true
+
+    CatPitSegmentsBadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  root_cause:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        reason:
+                          type: string
+                  type:
+                    type: string
+                  reason:
+                    type: string
+              status:
+                type: integer
+          example:
+            error:
+              root_cause:
+                - type: "action_request_validation_exception"
+                  reason: "Validation Failed: 1: no pit ids specified;"
+              type: "action_request_validation_exception"
+              reason: "Validation Failed: 1: no pit ids specified;"
+            status: 400
+
+    CatPitSegmentsForbidden:
+      description: Response to report a permission denied request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  root_cause:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        reason:
+                          type: string
+                  type:
+                    type: string
+                  reason:
+                    type: string
+              status:
+                type: integer
+          example:
+            error:
+              root_cause:
+                - type: "security_exception"
+                  reason: "no permissions for [indices:monitor/point_in_time/segments] and User [name=test, backend_roles=[], requestedTenant=null]"
+              type: "security_exception"
+              reason: "no permissions for [indices:monitor/point_in_time/segments] and User [name=test, backend_roles=[], requestedTenant=null]"
+            status: 403
+
+    CatPitSegmentsMethodNotAllowed:
+      description: Response to report an invalid HTTP method
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+              status:
+                type: integer
+          example:
+            error: "Incorrect HTTP method for uri [/_cat/pit_segments?v&format=json&pretty] and method [PUT], allowed: [GET]"
+            status: 405
+
+    CatPitSegmentsInvalidPitId:
+      description: Response to report an invalid PIT ID
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  root_cause:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        reason:
+                          type: string
+                  type:
+                    type: string
+                  reason:
+                    type: string
+              status:
+                type: integer
+          example:
+            error:
+              root_cause:
+                - type: "security_exception"
+                  reason: "Unexpected exception indices:monitor/point_in_time/segments"
+              type: "security_exception"
+              reason: "Unexpected exception indices:monitor/point_in_time/segments"
+            status: 500
+
+    CatPluginsSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: The name of the Wazuh indexer node.
+                component:
+                  type: string
+                  description: The name of a referenced plugin.
+                version:
+                  type: string
+                  description: Version number of the plugin.
+          example:
+            - name: "node-1"
+              component: "opensearch-alerting"
+              version: "2.16.0.0"
+            - name: "node-1"
+              component: "opensearch-anomaly-detection"
+              version: "2.16.0.0"
+            - name: "node-1"
+              component: "opensearch-asynchronous-search"
+              version: "2.16.0.0"
+            - name: "node-1"
+              component: "opensearch-cross-cluster-replication"
+              version: "2.16.0.0"
+
+    CatRecoverySuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              index:
+                type: string
+                description: The name of the index being recovered.
+              shard:
+                type: string
+                description: The ID of the shard within the index.
+              time:
+                type: string
+                description: The time taken for the shard recovery process.
+              type:
+                type: string
+                description: The type of recovery operation.
+              stage:
+                type: string
+                description: Indicates recovery from another primary shard or a different node.
+              source_host:
+                type: string
+                description: The hostname or IP address of the source node.
+              source_node:
+                type: string
+                description: The name of the source node.
+              target_host:
+                type: string
+                description: The hostname or IP address of the target node.
+              target_node:
+                type: string
+                description: The name of the target node.
+              repository:
+                type: string
+                description: The name of the snapshot repository.
+              snapshot:
+                type: string
+                description: The name of the snapshot being restored.
+              files:
+                type: string
+                description: The number of files transferred during the recovery process.
+              files_recovered:
+                type: string
+                description: The number of files successfully transferred.
+              files_percent:
+                type: string
+                description: Percentage of files successfully transferred.
+              files_total:
+                type: string
+                description: Total number of files to be transferred.
+              bytes:
+                type: string
+                description: Total size of data to be transferred in bytes.
+              bytes_recovered:
+                type: string
+                description: Number of bytes successfully transferred.
+              bytes_percent:
+                type: string
+                description: Percentage of data successfully transferred.
+              bytes_total:
+                type: string
+                description: Total size of data to be transferred.
+              translog_ops:
+                type: string
+                description: Total number of transaction log operations to be replayed.
+              translog_ops_recovered:
+                type: string
+                description: Number of transaction log operations successfully replayed.
+              translog_ops_percent:
+                type: string
+                description: Percentage of transaction log operations successfully replayed.
+          example:
+            index: "wazuh-alerts-4.x-2025.01.29"
+            shard: "0"
+            time: "49ms"
+            type: "existing_store"
+            stage: "done"
+            source_host: "n/a"
+            source_node: "n/a"
+            target_host: "127.0.0.1"
+            target_node: "node-1"
+            repository: "n/a"
+            snapshot: "n/a"
+            files: "0"
+            files_recovered: "0"
+            files_percent: "100.0%"
+            files_total: "1"
+            bytes: "0"
+            bytes_recovered: "0"
+            bytes_percent: "100.0%"
+            bytes_total: "234"
+            translog_ops: "0"
+            translog_ops_recovered: "0"
+            translog_ops_percent: "100.0%"
+
+    CatRepositoriesSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: This is the unique identifier for the snapshot repository.
+                type:
+                  type: string
+                  description: This indicates the type of repository. Common types include fs (file system), s3 (Amazon S3), hdfs (Hadoop distributed file system), Azure (Azure blob storage), gcs (Google cloud storage).
+          example:
+            - id: "repo1"
+              type: "fs"
+            - id: "repo2"
+              type: "fs"
+
+    CatSegmentReplicationSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                shardId:
+                  type: string
+                  description: The unique identifier of the shard.
+                target_node:
+                  type: string
+                  description: The name of the target node where the shard is located.
+                target_host:
+                  type: string
+                  description: The IP address of the target node.
+                checkpoints_behind:
+                  type: integer
+                  description: Number of checkpoints behind the leader.
+                bytes_behind:
+                  type: integer
+                  description: Number of bytes behind the leader.
+                current_lag:
+                  type: string
+                  description: Current replication lag.
+                last_completed_lag:
+                  type: string
+                  description: Lag at the time of the last successful checkpoint.
+                rejected_requests:
+                  type: integer
+                  description: Number of requests rejected due to replication lag.
+          example:
+            - shardId: "[index-1][0]"
+              target_node: "node1"
+              target_host: "192.168.1.100"
+              checkpoints_behind: 0
+              bytes_behind: 0
+              current_lag: "0s"
+              last_completed_lag: "0s"
+              rejected_requests: 0
+            - shardId: "[index-2][0]"
+              target_node: "node2"
+              target_host: "192.168.1.101"
+              checkpoints_behind: 1
+              bytes_behind: 1024
+              current_lag: "10ms"
+              last_completed_lag: "5ms"
+              rejected_requests: 0
+
+    CatSegmentsSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              index:
+                type: string
+                description: The name of the index.
+              shard:
+                type: string
+                description: The ID of the shard within the index.
+              prirep:
+                type: string
+                description: Indicates whether the shard is a primary shard (p) or a replica shard (r).
+              ip:
+                type: string
+                description: The IP address of the node where the shard is located.
+              segment:
+                type: string
+                description: The name of the segment file where the shard's data is stored.
+              generation:
+                type: string
+                description: The generation number of the segment, which is incremented each time the segment is updated.
+              docs.count:
+                type: string
+                description: The number of documents stored within the shard.
+              docs.deleted:
+                type: string
+                description: The number of documents marked as deleted within the shard.
+              size:
+                type: string
+                description: The size of the shard on disk.
+              size.memory:
+                type: string
+                description: The amount of memory used by the shard in memory.
+              committed:
+                type: string
+                description: Indicates whether the shard's data has been committed to disk.
+              searchable:
+                type: string
+                description: Indicates if the shard is searchable or not.
+              version:
+                type: string
+                description: The version of the Lucene index format used by the shard.
+              compound:
+                type: string
+                description: Indicates whether the shard is stored in a compound file format for improved performance.
+          example:
+            index: "wazuh-monitoring-2025.6w"
+            shard: "0"
+            prirep: "p"
+            ip: "127.0.0.1"
+            segment: "_6j"
+            generation: "235"
+            docs.count: "2"
+            docs.deleted: "0"
+            size: "18.6kb"
+            size.memory: "0"
+            committed: "false"
+            searchable: "true"
+            version: "9.11.1"
+            compound: "true"
+
+    CatShardsSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              index:
+                type: string
+                description: The name of the index.
+              shard:
+                type: string
+                description: The ID of the shard within the index.
+              prirep:
+                type: string
+                description: Indicates whether the shard is a primary shard (p) or a replica shard (r).
+              state:
+                type: string
+                description: "Specifies the current state of the shard. Options include: - STARTED: The shard is active and operational. - RECOVERING: The shard is currently recovering. - UNASSIGNED: The shard has not been assigned to any node. - INITIALIZING: The shard is being initialized. - RELOCATING: The shard is being relocated to a different node. - FAILED: The shard has failed and cannot be accessed."
+              docs:
+                type: string
+                description: The number of documents in the shard.
+              store:
+                type: string
+                description: The size of the shard on disk.
+              ip:
+                type: string
+                description: The IP address of the node hosting the shard.
+              node:
+                type: string
+                description: The name of the node hosting the shard.
+          example:
+            index: "wazuh-states-vulnerabilities-wazuh-virtualbox"
+            shard: "0"
+            prirep: "p"
+            state: "STARTED"
+            docs: "67"
+            store: "67.3kb"
+            ip: "127.0.0.1"
+            node: "node-1"
+
+    CatSnapshotsSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              index:
+                type: string
+                description: The name of the index.
+              shard:
+                type: string
+                description: The ID of the shard within the index.
+              prirep:
+                type: string
+                description: Indicates whether the shard is a primary shard (p) or a replica shard (r).
+              state:
+                type: string
+                description: Indicates the status of the snapshot.
+              docs:
+                type: integer
+                description: The number of documents in the snapshot.
+              store:
+                type: string
+                description: The size of the snapshot on disk.
+              ip:
+                type: string
+                description: The IP address of the node hosting the snapshot.
+              node:
+                type: string
+                description: The name of the node hosting the snapshot.
+          example:
+            index: 0
+            shard: 0
+            prirep: "p"
+            state: "STARTED"
+            docs: 0
+            store: "208b"
+            ip: "127.0.0.1"
+            nodeplugins: "node1"
+
+    CatTasksSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              action:
+                type: string
+                description: The type of action being performed
+              task_id:
+                type: string
+                description: A unique identifier for the task.
+              parent_task_id:
+                type: string
+                description: The ID of the parent task if this task is part of a larger workflow.
+              type:
+                type: string
+                description: The type of task being executed.
+              start_time:
+                type: string
+                description: The timestamp when the task started execution.
+              timestamp:
+                type: string
+                description: The current timestamp.
+              running_time:
+                type: string
+                description: The duration of the task execution.
+              ip:
+                type: string
+                description: The IP address of the node where the task is being executed.
+              node:
+                type: string
+                description: The name of the node where the task is being executed.
+          example:
+            action: "cluster:monitor/tasks/lists[n]"
+            task_id: "XyGg_gfbR0-X-5XpDVKxdg:105605"
+            parent_task_id: "XyGg_gfbR0-X-5XpDVKxdg:105604"
+            type: "direct"
+            start_time: "1739117191884"
+            timestamp: "16:06:31"
+            running_time: "67.8ms"
+            ip: "127.0.0.1"
+            node: "node-1"
+
+    CatTemplatesSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+                description: The name of the index template.
+              index_patterns:
+                type: string
+                description: A list of patterns that define which indices will be matched by this template.
+              order:
+                type: integer
+                description: The order in which this template should be applied, relative to other templates that might match the same index. Lower numbers have higher priority.
+              version:
+                type: integer
+                description: The version of the template.
+              composed_of:
+                type: string
+                description: A list of component templates that this template is composed of.
+          example:
+            name: "wazuh"
+            index_patterns: "[wazuh-alerts-4.x-*, wazuh-archives-4.x-*]"
+            order: "0"
+            version: "1"
+            composed_of: ""
+
+    CatThreadPoolSuccess:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                node_name:
+                  type: string
+                  description: The name of the node where the thread pool is running.
+                name:
+                  type: string
+                  description: The name of the thread pool.
+                active:
+                  type: integer
+                  description: The number of threads currently active in the pool.
+                queue:
+                  type: integer
+                  description: The number of tasks currently waiting in the queue for execution by the thread pool.
+                rejected:
+                  type: integer
+                  description: The number of tasks that have been rejected by the thread pool because it was unable to acquire a thread for execution.
+          example:
+            - node_name: "node-1"
+              name: "warmer"
+              active: "0"
+              queue: "0"
+              rejected: "0"
+            - node_name: "node-1"
+              name: "write"
+              active: "0"
+              queue: "0"
+              rejected: "0"

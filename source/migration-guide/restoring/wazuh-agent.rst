@@ -102,38 +102,46 @@ Preparing the data restoration
 Restoring Wazuh agent files
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Perform the steps below in an elevated Windows Command Prompt (CMD) to restore the Wazuh agent files on a Windows endpoint.
+Perform the steps below to restore Wazuh agent files on a Windows endpoint.
 
-#. Stop the Wazuh agent to prevent any modification to the Wazuh agent files during the restore process by running the following command on the Command Prompt as an administrator:
+#. Stop the Wazuh agent to prevent any modification to the Wazuh agent files during the restore process by running the following command on PowerShell as an administrator:
 
-   .. code-block:: doscon
+   .. code-block:: ps1con
 
-      NET STOP WazuhSvc
+      > NET STOP WazuhSvc
 
-#. Launch the Windows Command Prompt as an administrator and navigate to the ``wazuh_files_backup/<DATE_TIME>`` folder that contains the backup files.
+#. Launch PowerShell as an administrator and navigate to the ``wazuh_files_backup/<DATE_TIME>`` folder that contains the backup files.
 
 #. Run the following commands to copy the Wazuh agent data, certificates, and configurations:
 
-   .. code-block:: doscon
+   .. code-block:: ps1con
 
-      > xcopy client.keys "C:\Program Files (x86)\ossec-agent\" /H /I /K /S /X /Y
-      > xcopy ossec.conf "C:\Program Files (x86)\ossec-agent\" /H /I /K /S /X /Y
-      > xcopy internal_options.conf "C:\Program Files (x86)\ossec-agent\" /H /I /K /S /X /Y
-      > xcopy local_internal_options.conf "C:\Program Files (x86)\ossec-agent\" /H /I /K /S /X /Y
-      > xcopy *.pem "C:\Program Files (x86)\ossec-agent\" /H /I /K /S /X /Y
-      > xcopy ossec.log "C:\Program Files (x86)\ossec-agent\" /H /I /K /S /X /Y
-      > xcopy logs\* "C:\Program Files (x86)\ossec-agent\"  /H /I /K /S /X /Y
-      > xcopy rids\* "C:\Program Files (x86)\ossec-agent\"  /H /I /K /S /X /Y
+      > Copy-Item "$bkp_folder\client.keys" "C:\Program Files (x86)\ossec-agent" -Recurse -Force
+      > Copy-Item "$bkp_folder\ossec.conf" "C:\Program Files (x86)\ossec-agent" -Recurse -Force
+      > Copy-Item "$bkp_folder\internal_options.conf" "C:\Program Files (x86)\ossec-agent" -Recurse -Force
+      > Copy-Item "$bkp_folder\local_internal_options.conf" "C:\Program Files (x86)\ossec-agent" -Recurse -Force
+      > Copy-Item "$bkp_folder\*.pem" "C:\Program Files (x86)\ossec-agent" -Recurse -Force
+      > Copy-Item "$bkp_folder\ossec.log" "C:\Program Files (x86)\ossec-agent" -Recurse -Force
+      > Copy-Item "$bkp_folder\logs\*" "C:\Program Files (x86)\ossec-agent\logs" -Recurse -Force
+      > Copy-Item "$bkp_folder\rids\*" "C:\Program Files (x86)\ossec-agent\rids" -Recurse -Force
 
    You can also copy these files using the *drag and drop* method.
 
 #. Restore your custom files, such as local SCA policies, active response scripts, and wodle commands, if there are any. Adapt the following command accordingly.
 
-   .. code-block:: doscon
+   .. code-block:: powershell
 
-      > xcopy <SCA_DIRECTORY>\<CUSTOM_SCA_FILE> “C:\Program Files (x86)\ossec-agent\<SCA_DIRECTORY>” /H /I /K /S /X /Y
-      > xcopy active-response\bin\<CUSTOM_ACTIVE_RESPONSE_SCRIPT> "C:\Program Files (x86)\ossec-agent\active-response\bin\" /H /I /K /S /X /Y
-      > xcopy wodles\<CUSTOM_WODLE_SCRIPT> "C:\Program Files (x86)\ossec-agent\wodles\" /H /I /K /S /X /Y
+      # Example variables - replace with your actual file names and folders
+      $SCA_DIRECTORY = "sca"
+      $CUSTOM_SCA_FILE = "custom_sca.yml"
+      $CUSTOM_ACTIVE_RESPONSE_SCRIPT = "my_response.ps1"
+      $CUSTOM_WODLE_SCRIPT = "custom_wodle.py"
+
+   .. code-block:: ps1con
+
+      > Copy-Item "$SCA_DIRECTORY\$CUSTOM_SCA_FILE" "C:\Program Files (x86)\ossec-agent\$SCA_DIRECTORY" -Recurse -Force
+      > Copy-Item "active-response\bin\$CUSTOM_ACTIVE_RESPONSE_SCRIPT" "C:\Program Files (x86)\ossec-agent\active-response\bin" -Recurse -Force
+      > Copy-Item "wodles\$CUSTOM_WODLE_SCRIPT" "C:\Program Files (x86)\ossec-agent\wodles" -Recurse -Force
 
 #. Start the Wazuh agent service by running the following command on the Command Prompt as an administrator:
 
