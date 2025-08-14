@@ -83,7 +83,6 @@ newUrls['4.14'] = [
 
 newUrls['4.13'] = [
   '/release-notes/release-4-13-0.html',
-  '/release-notes/release-4-13-1.html',
   '/user-manual/wazuh-dashboard/global-queries.html',
   '/user-manual/capabilities/system-inventory/global-queries.html',
   '/user-manual/capabilities/file-integrity/global-queries.html',
