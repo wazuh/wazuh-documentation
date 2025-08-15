@@ -78,6 +78,21 @@ newUrls['5.0'] = [
   '/release-notes/index-5x.html',
 ];
 
+/* Pages no longer available in 5.0 */
+
+removedUrls['5.0'] = [
+  '/user-manual/reference/daemons/wazuh-agentlessd.html',
+  '/user-manual/reference/daemons/wazuh-csyslogd.html',
+  '/user-manual/reference/daemons/wazuh-dbd.html',
+  '/user-manual/reference/daemons/wazuh-integratord.html',
+  '/user-manual/reference/daemons/wazuh-maild.html',
+  '/user-manual/reference/daemons/wazuh-reportd.html',
+  '/user-manual/reference/tools/clear_stats.html',
+  '/user-manual/reference/tools/update_ruleset.html',
+  '/user-manual/reference/tools/verify-agent-conf.html',
+  '/user-manual/reference/tools/wazuh-regex.html',
+];
+
 /* *** RELEASE 4.14 ****/
 
 /* Pages added in 4.14 */
