@@ -15,13 +15,9 @@ Tools
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`agent-auth <agent-auth>`                    | Adds agents to a Wazuh manager                                             | agent                       |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :doc:`agent_control <agent-control>`              | Allows queries of the manager to get information about                     | manager                     |
-|                                                   |                                                                            |                             |
-|                                                   | any agent                                                                  |                             |
+| :doc:`agent_control <agent-control>`              | Allows queries of the manager to get information about any agent           | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :doc:`manage_agents <manage-agents>`              | Provides an interface to handle authentication                             | manager, agent              |
-|                                                   |                                                                            |                             |
-|                                                   | keys for  agents                                                           |                             |
+| :doc:`manage_agents <manage-agents>`              | Provides an interface to handle authentication keys for  agents            | manager, agent              |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`rbac_control <rbac-control>`                | Manage API RBAC resources and reset RBAC DB                                | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
@@ -36,11 +32,9 @@ Tools
 | :doc:`wazuh-keystore <wazuh-keystore>`            | Stores sensitive information for increased security                        | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 
-
-
-  .. toctree::
-    :hidden:
-    :maxdepth: 1
+.. toctree::
+   :hidden:
+   :maxdepth: 1
 
     agent-auth
     agent-control
@@ -48,7 +42,6 @@ Tools
     wazuh-control
     wazuh-logtest
     rbac-control
-    
     agent-groups
     agent-upgrade
     cluster-control

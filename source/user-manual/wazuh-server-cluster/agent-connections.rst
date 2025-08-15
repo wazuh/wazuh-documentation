@@ -55,7 +55,7 @@ Suppose we have the following IP addresses for the Wazuh server nodes:
               <protocol>tcp</protocol>
           </server>
           <config-profile>ubuntu, ubuntu18, ubuntu18.04</config-profile>
-          <notify_time>10</notify_time>
+          <notify_time>20</notify_time>
           <time-reconnect>60</time-reconnect>
           <auto_restart>yes</auto_restart>
           <crypto_method>aes</crypto_method>
