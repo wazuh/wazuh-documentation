@@ -454,12 +454,6 @@ The Wazuh dashboard requires these indices to display information about agent st
    :align: center
    :width: 80%
 
-In the :doc:`Wazuh dashboard configuration file </user-manual/wazuh-dashboard/settings>`, you can change the settings to do the following:
-
--  Disable inserting and showing connection status data for the agents. Change :doc:`wazuh.monitoring.enabled </user-manual/wazuh-dashboard/settings>` to accomplish this.
-
-- Change the insertion frequency of connection status data for the agents. Change :doc:`wazuh.monitoring.frequency </user-manual/wazuh-dashboard/settings>` to accomplish this.
-
 .. _wazuh_statistics_indices:
 
 The wazuh‑statistics-* indices
@@ -467,7 +461,7 @@ The wazuh‑statistics-* indices
 
 The Wazuh dashboard uses the ``wazuh‑statistics-*`` indices to display statistics about the Wazuh server usage and performance. The information displayed includes the number of events decoded, bytes received, and TCP sessions.
 
-The Wazuh dashboard runs requests to the Wazuh manager API to query usage-related information. It inserts data into the ``wazuh‑statistics-*`` indices from the information collected. The Wazuh indexer creates a ``wazuh‑statistics-*`` index per week by default. Check the documentation on the :doc:`Statistics creation interval </user-manual/wazuh-dashboard/settings>`. These indices store Wazuh server statistics every 5 minutes by default. Check the documentation on the :doc:`Frequency of task execution </user-manual/wazuh-dashboard/settings>`.
+The Wazuh indexer creates a ``wazuh‑statistics-*`` index per week by default. These indices store Wazuh server statistics every 5 minutes by default.
 
 To visualize this information in the Wazuh dashboard, go to **Server management** > **Statistics**.
 
