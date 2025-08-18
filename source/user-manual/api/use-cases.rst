@@ -331,18 +331,12 @@ You can retrieve various details about the Wazuh manager through the Wazuh serve
      "data": {
        "affected_items": [
          {
-           "wazuh-agentlessd": "running",
            "wazuh-analysisd": "running",
            "wazuh-authd": "running",
-           "wazuh-csyslogd": "running",
-           "wazuh-dbd": "stopped",
            "wazuh-monitord": "running",
            "wazuh-execd": "running",
-           "wazuh-integratord": "running",
            "wazuh-logcollector": "running",
-           "wazuh-maild": "running",
            "wazuh-remoted": "running",
-           "wazuh-reportd": "stopped",
            "wazuh-syscheckd": "running",
            "wazuh-clusterd": "running",
            "wazuh-modulesd": "running",
