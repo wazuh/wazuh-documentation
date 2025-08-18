@@ -171,10 +171,10 @@ Get connected nodes
    .. code-block:: none
       :class: output
 
-      NAME     TYPE    VERSION  ADDRESS      
-      wazuh-1  master  4.12.0   172.16.1.13  
-      wazuh-3  worker  4.12.0   172.16.1.15  
-      wazuh-2  worker  4.12.0   172.16.1.14  
+      NAME     TYPE    VERSION  ADDRESS
+      wazuh-1  master  4.12.0   172.16.1.13
+      wazuh-3  worker  4.12.0   172.16.1.15
+      wazuh-2  worker  4.12.0   172.16.1.14
 
 -  **Filter connected nodes by name**
 
@@ -185,9 +185,9 @@ Get connected nodes
    .. code-block:: none
       :class: output
 
-      NAME     TYPE    VERSION  ADDRESS      
-      wazuh-1  master  4.12.0   172.16.1.13  
-      wazuh-3  worker  4.12.0   172.16.1.15  
+      NAME     TYPE    VERSION  ADDRESS
+      wazuh-1  master  4.12.0   172.16.1.13
+      wazuh-3  worker  4.12.0   172.16.1.15
 
 Get agents in cluster
 ^^^^^^^^^^^^^^^^^^^^^
@@ -201,10 +201,10 @@ Get agents in cluster
    .. code-block:: none
       :class: output
 
-      ID   NAME         IP           STATUS  VERSION        NODE NAME  
-      000  centos8a     127.0.0.1    active  Wazuh v4.12.0  wazuh-1    
-      001  ag-centos9s  172.16.1.85  active  Wazuh v4.12.0  wazuh-1    
-      002  ag-ubuntu22  172.16.1.83  active  Wazuh v4.12.0  wazuh-2    
+      ID   NAME         IP           STATUS  VERSION        NODE NAME
+      000  centos8a     127.0.0.1    active  Wazuh v4.12.0  wazuh-1
+      001  ag-centos9s  172.16.1.85  active  Wazuh v4.12.0  wazuh-1
+      002  ag-ubuntu22  172.16.1.83  active  Wazuh v4.12.0  wazuh-2
 
 -  **Get all agents reporting to a node**
 
@@ -215,8 +215,8 @@ Get agents in cluster
    .. code-block:: none
       :class: output
 
-      ID   NAME         IP           STATUS  VERSION        NODE NAME  
-      002  ag-ubuntu22  172.16.1.83  active  Wazuh v4.12.0  wazuh-2    
+      ID   NAME         IP           STATUS  VERSION        NODE NAME
+      002  ag-ubuntu22  172.16.1.83  active  Wazuh v4.12.0  wazuh-2
 
 -  **Get all active disconnected reporting to a node**
 
