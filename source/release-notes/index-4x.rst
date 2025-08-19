@@ -82,6 +82,7 @@ Wazuh version                                  Release date
       4.11.2 Release notes <release-4-11-2>
       4.11.1 Release notes <release-4-11-1>
       4.11.0 Release notes <release-4-11-0>
+      4.10.3 Release notes <release-4-10-3>
       4.10.2 Release notes <release-4-10-2>
       4.10.1 Release notes <release-4-10-1>
       4.10.0 Release notes <release-4-10-0>
