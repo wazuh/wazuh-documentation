@@ -36,6 +36,7 @@ Wazuh manager
 -  `#27320 <https://github.com/wazuh/wazuh/pull/27320>`__ Improved Vulnerability Scanner performance by optimizing the PEP440 version matcher.
 -  `#27324 <https://github.com/wazuh/wazuh/pull/27324>`__ Improved Vulnerability Scanner performance by optimizing version matcher object creation.
 -  `#27321 <https://github.com/wazuh/wazuh/pull/27321>`__ Improved Vulnerability Scanner performance by optimizing global data handling.
+-  `#23266 <https://github.com/wazuh/wazuh/issues/23266>`__ Updated CURL version to 8.10.0.
 
 Wazuh agent
 ^^^^^^^^^^^
