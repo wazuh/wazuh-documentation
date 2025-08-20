@@ -60,6 +60,10 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Fixed incorrect URL and filepaths in the YARA download steps of the *Leveraging LLMs for Alert Enrichment* PoC. ([#8686](https://github.com/wazuh/wazuh-documentation/pull/8686))
 - **Post-release**: Corrected inaccurate references to the Wazuh Syscollector module. ([#8713](https://github.com/wazuh/wazuh-documentation/pull/8713))
 
+### Removed
+
+- **Post-release**: Removed `us-gov-*` AWS regions references. ([#8791](https://github.com/wazuh/wazuh-documentation/pull/8791))
+
 ## [v4.11.2]
 
 ### Added

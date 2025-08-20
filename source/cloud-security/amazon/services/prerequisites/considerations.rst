@@ -245,6 +245,14 @@ Below is an example of different AWS services configuration:
        <aws_profile>default</aws_profile>
      </bucket>
 
+     <!-- CloudTrail, 'dev' profile, and 'us-east-1' region -->
+     <bucket type="cloudtrail">
+       <name><WAZUH_AWS_BUCKET></name>
+       <path>dev-cloudtrail</path>
+       <regions>us-east-1</regions>
+       <aws_profile>dev</aws_profile>
+     </bucket>
+
    </wodle>
 
 Where:
