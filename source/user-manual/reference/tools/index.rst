@@ -13,10 +13,7 @@ Tools
 +===================================================+============================================================================+=============================+
 | :doc:`wazuh-control <wazuh-control>`              | Manages the status of Wazuh processes                                      | manager, agent              |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :doc:`agent_control <agent-control>`              | Allows queries of the manager to get information about                     | manager                     |
-|                                                   |                                                                            |                             |
-|                                                   | any agent                                                                  |                             |
-| :doc:`agent-auth <agent-auth>`                    | Adds agents to a Wazuh manager                                             | agent                       |
+| :doc:`agent_control <agent-control>`              | Allows queries of the manager to get information about any agent           | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`agent_control <agent-control>`              | Allows queries of the manager to get information about any agent           | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
