@@ -360,6 +360,11 @@ With the CLI :doc:`/var/ossec/bin/agent_groups </user-manual/reference/tools/age
    Do you want to add the group 'apache' to the agent '001'? [y/N]: y
    Group 'apache' added to agent '001'.
 
+During agent enrollment
+^^^^^^^^^^^^^^^^^^^^^^^
+
+To assign the Wazuh agent to one or more groups during the enrollment process, refer to :doc:`Agent enrollment </user-manual/agent/agent-enrollment/enrollment-methods/index>`.
+
 Listing groups and configuration
 --------------------------------
 
