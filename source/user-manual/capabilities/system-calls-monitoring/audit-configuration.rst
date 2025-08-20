@@ -67,19 +67,24 @@ Monitored endpoint
 #. To use the Linux Audit system, you must install the audit package on your endpoint. If you do not have this package installed, execute the following command as the root user to install it:
 
    .. tabs::
-   
-      .. group-tab:: Yum
-                   
-         .. code-block:: console
-         
-            # yum install -y auditd
-   
+
       .. group-tab:: APT
-      
+
          .. code-block:: console
-         
+
             # apt install -y auditd
-   
+
+      .. group-tab:: Yum
+
+         .. code-block:: console
+
+            # yum install -y auditd
+
+      .. group-tab:: DNF
+
+         .. code-block:: console
+
+            # dnf install -y auditd
 
    .. Note::
       If the audit package is already present on the endpoint before installing the Wazuh agent, the actions below should not be performed. This configuration will be added by default.

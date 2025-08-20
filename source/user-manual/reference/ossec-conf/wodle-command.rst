@@ -257,7 +257,7 @@ Time of the day to run the scan. It has to be represented in the format *hh:mm*.
 Centralized configuration
 -------------------------
 
-Remote commands may be specified in the :ref:`centralized configuration <reference_agent_conf>`, however, they are disabled by default due to security reasons.
+You can specify remote commands in the :doc:`centralized configuration </user-manual/reference/centralized-configuration>`. However, they are disabled by default due to security reasons.
 
 When setting commands in a shared agent configuration, **you must enable remote commands for Agent Modules**.
 

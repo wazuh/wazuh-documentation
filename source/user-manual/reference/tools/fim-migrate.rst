@@ -2,8 +2,6 @@
 
 .. meta::
   :description: Migrate FIM databases older than Wazuh v3.7.0 to the new format included in Wazuh-DB using the fim_migrate tool. Learn more about it in this section.
-  
-.. _fim_migrate:
 
 fim_migrate
 ===========
@@ -51,8 +49,8 @@ Options
 | ``-d``                   | Debug mode.                                                                            |
 +--------------------------+----------------------------------------------------------------------------------------+
 
-Example of use
---------------
+Examples
+--------
 
 .. code-block:: console
 

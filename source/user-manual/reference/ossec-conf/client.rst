@@ -153,7 +153,7 @@ notify_time
 Specifies the time in seconds between agent checkins to the manager.  More frequent checkins speed up dissemination of an updated ``agent.conf`` file to the agents, but may also put an undo load on the manager if there are a large number of agents.
 
 +--------------------+-----------------------------+
-| **Default value**  | 10                          |
+| **Default value**  | 20                          |
 +--------------------+-----------------------------+
 | **Allowed values** | A positive number (seconds) |
 +--------------------+-----------------------------+
@@ -210,6 +210,8 @@ Any value equal to or lower than the configured ``notify_time`` will cause the I
 +--------------------+-----------------------------+
 
  .. note:: Most systems won't need to modify this value, but on systems with large routing tables this configuration can help lower CPU usage from wazuh-modulesd.
+
+.. _client_auto_restart:
 
 auto_restart
 ^^^^^^^^^^^^
@@ -269,7 +271,7 @@ Sample link-local IPv6 configuration
        <protocol>tcp</protocol>
      </server>
      <config-profile>ubuntu, ubuntu22, ubuntu22.04</config-profile>
-     <notify_time>10</notify_time>
+     <notify_time>20</notify_time>
      <time-reconnect>60</time-reconnect>
      <auto_restart>yes</auto_restart>
      <crypto_method>aes</crypto_method>

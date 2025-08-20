@@ -1,28 +1,30 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Learn more about upgrading the Wazuh deployment on Docker in this section of our documentation. 
+   :description: Learn more about upgrading the Wazuh deployment on Docker in this section of our documentation.
 
 Upgrading Wazuh Docker
 ======================
 
-This section describes how to upgrade your Wazuh Docker deployment, starting from version 4.3.
+This section describes how to upgrade Wazuh Docker deployments starting from version 4.3.
 
-To upgrade to version |WAZUH_CURRENT_MINOR|, you can follow one of two strategies.
+To upgrade to version |WAZUH_CURRENT|, you can follow one of two strategies.
 
-- `Using default docker-compose files`_ : This strategy uses the default docker-compose files for Wazuh |WAZUH_CURRENT_MINOR|. It replaces the docker-compose files of your outdated Wazuh version. 
-- `Keeping custom docker-compose files`_ : This strategy preserves the docker-compose files of your outdated Wazuh deployment. It ignores the docker-compose files of the latest Wazuh version. 
+- `Using default docker-compose files`_ : This strategy uses the default ``docker-compose.yml`` file for Wazuh |WAZUH_CURRENT|. It replaces the ``docker-compose.yml`` file of your outdated Wazuh version.
+- `Keeping custom docker-compose files`_ : This strategy preserves the ``docker-compose.yml`` file of your outdated Wazuh deployment. It ignores the ``docker-compose.yml`` file of the latest Wazuh version.
 
 Using default docker-compose files
 ----------------------------------
 
-#. Run the following command from your wazuh-docker directory, such as ``wazuh-docker/single-node/`` or ``wazuh-docker/multi-node/``, to stop the outdated environment:
+To upgrade your deployment, using the default ``docker-compose.yml`` file, do the following:
+
+#. Run the following command from your ``wazuh-docker/single-node/`` or ``wazuh-docker/multi-node/`` directory to stop the outdated environment:
 
    .. code-block::
 
       # docker-compose down
 
-#. Checkout the tag for the current version of wazuh-docker:
+#. Check out the tag for the current version of ``wazuh-docker``:
 
       .. code-block::
 
@@ -37,15 +39,15 @@ Using default docker-compose files
 Keeping custom docker-compose files
 -----------------------------------
 
-To upgrade your deployment keeping your custom docker-compose files, do the following.
+To upgrade your deployment keeping your custom ``docker-compose.yml`` file, do the following.
 
-#. Run the following command from your wazuh-docker directory, such as ``wazuh-docker/single-node/`` or ``wazuh-docker/multi-node/``, to stop the outdated environment:
+#. Run the following command from your ``wazuh-docker/single-node/`` or ``wazuh-docker/multi-node/`` directory to stop the outdated environment:
 
    .. code-block:: console
 
       # docker-compose down
 
-#. If you are upgrading from a version earlier than 4.8, update the ``defaultRoute`` parameter in the Wazuh dashboard configuration.
+#. Update the ``defaultRoute`` parameter in the Wazuh dashboard configuration, if upgrading from a version earlier than 4.8:
 
    .. tabs::
 
@@ -113,13 +115,13 @@ To upgrade your deployment keeping your custom docker-compose files, do the foll
                   generator:
                      image: wazuh/wazuh-certs-generator:0.0.2
 
-#. After these changes, recreate the certificates.
+#. Recreate the certificates after these changes.
 
    .. code-block:: bash
 
       docker-compose -f generate-indexer-certs.yml run --rm generator
 
-#. If you are upgrading from 4.3, update old paths with the new ones.
+#. Update old paths with the new ones, if upgrading from 4.3.
 
    .. tabs::
 
@@ -227,7 +229,7 @@ To upgrade your deployment keeping your custom docker-compose files, do the foll
                   - DASHBOARD_USERNAME=kibanaserver
                   - DASHBOARD_PASSWORD=kibanaserver
 
-#. Replace the following files in your deployment with the ones from the v|WAZUH_CURRENT_DOCKER| tag of the wazuh-docker repository.
+#. Replace the following files in your deployment with the ones from the ``v|WAZUH_CURRENT_DOCKER|`` tag of the ``wazuh-docker`` repository.
 
    .. tabs::
 

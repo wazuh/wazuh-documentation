@@ -3,8 +3,6 @@
 .. meta::
   :description: The manage_agents program is available in both versions for server and agent installations. Learn more about it in this section of the Wazuh documentation.
 
-.. _manage_agents:
-
 manage_agents
 =============
 
@@ -74,3 +72,51 @@ Options
 |               +-----------------------------+-----------------------------------------+
 |               | **Supported installations** | Manager                                 |
 +---------------+-----------------------------+-----------------------------------------+
+
+Examples
+--------
+
+-  List available agents:
+
+   .. code-block:: console
+
+      # /var/ossec/bin/manage_agents -l
+
+   .. code-block:: none
+      :class: output
+
+      Available agents:
+         ID: 001, Name: Ubuntu2404, IP: any
+         ID: 002, Name: Ubuntu-2404, IP: any
+         ID: 003, Name: ubuntu-desktop, IP: any
+         ID: 004, Name: Ubuntu24, IP: any
+
+-  Remove an agent:
+
+   .. code-block:: console
+
+      # /var/ossec/bin/manage_agents -r 004
+
+   .. code-block:: none
+      :class: output
+
+      ****************************************
+      * Wazuh v4.12.0 Agent manager.         *
+      * The following options are available: *
+      ****************************************
+         (A)dd an agent (A).
+         (E)xtract key for an agent (E).
+         (L)ist already added agents (L).
+         (R)emove an agent (R).
+         (Q)uit.
+      Choose your action: A,E,L,R or Q:
+      Available agents:
+         ID: 001, Name: Ubuntu2404, IP: any
+         ID: 002, Name: Ubuntu-2404, IP: any
+         ID: 003, Name: ubuntu-desktop, IP: any
+         ID: 004, Name: Ubuntu24, IP: any
+      Provide the ID of the agent to be removed (or '\q' to quit): 004
+      Confirm deleting it?(y/n): y
+      Agent '004' removed.
+
+      manage_agents: Exiting.

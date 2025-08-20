@@ -1,0 +1,769 @@
+openapi: 3.0.0
+
+info:
+  title: Wazuh indexer API reference
+  description: |
+    The Wazuh indexer API is an open source RESTful API. It allows interaction with the Wazuh indexer from a web browser, command line tools like cURL or any script or program that can make web requests. The Wazuh indexer API is used to perform actions like adding and querying the indexes, modifying the Wazuh indexer settings, etc.
+
+    # Authentication
+
+    Wazuh indexer API endpoints require authentication to be used. There are multiple options on what authentication mechanism to use including basic HTTP authentication and JSON Web Token (JWT). More information can be seen in [Logging into the Wazuh indexer API](https://documentation.wazuh.com/current/user-manual/indexer-api/getting-started.html#logging-into-the-wazuh-indexer-api).
+  version: 1.0.0
+
+servers:
+  - url: '{protocol}://{host}:{port}'
+    description: Wazuh indexer API server
+    variables:
+      protocol:
+        enum:
+          - http
+          - https
+        default: https
+        description: Protocol for API communication
+      host:
+        default: localhost
+        description: Hostname or IP address
+      port:
+        default: '9200'
+        description: API port number
+
+security:
+  - basicAuth: []
+  - jwtAuth: []
+
+paths:
+  /:
+    get:
+      tags:
+        - Get API info
+      summary: API info
+      description: Return basic information about the API
+      operationId: getApiInfo
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiInfo'
+              example:
+                name: "node-1"
+                cluster_name: "wazuh-cluster"
+                cluster_uuid: "XUqydNCQTuCnvtXobnRZ8w"
+                version:
+                  number: "7.10.2"
+                  build_type: "deb"
+                  build_hash: "9fd1835bba77ae04d48550eb4dc9be4787070806"
+                  build_date: "2024-08-30T10:06:03.028357Z"
+                  build_snapshot: false
+                  lucene_version: "9.10.0"
+                  minimum_wire_compatibility_version: "7.10.0"
+                  minimum_index_compatibility_version: "7.0.0"
+                tagline: "The OpenSearch Project: https://opensearch.org/"
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/ForbiddenApiInfo'
+
+  /_analyze:
+    $ref: 'analyze_api.yml#/paths/~1_analyze'
+
+  /_aliases:
+    $ref: 'index_api.yml#/paths/~1_aliases'
+
+  /{target}/_alias/{alias_name}:
+    $ref: 'index_api.yml#/paths/~1{target}~1_alias~1{alias_name}'
+
+  /_alias/{alias_name}:
+    $ref: 'index_api.yml#/paths/~1_alias~1{alias_name}'
+
+  /{target}/_aliases/{alias_name}:
+    $ref: 'index_api.yml#/paths/~1{target}~1_aliases~1{alias_name}'
+
+  /_aliases/{alias_name}:
+    $ref: 'index_api.yml#/paths/~1_aliases~1{alias_name}'
+
+  /{target}/_alias:
+    $ref: 'index_api.yml#/paths/~1{target}~1_alias'
+
+  /{target}/_aliases:
+    $ref: 'index_api.yml#/paths/~1{target}~1_aliases'
+
+  /_alias:
+    $ref: 'index_api.yml#/paths/~1_alias'
+
+  /{index}/_block/{block}:
+    $ref: 'index_api.yml#/paths/~1{index}~1_block~1{block}'
+
+  /_block/{block}:
+    $ref: 'index_api.yml#/paths/~1_block~1{block}'
+
+  /{target}/_cache/clear:
+    $ref: 'index_api.yml#/paths/~1{target}~1_cache~1clear'
+
+  /{source_index}/_clone/{target_index}:
+    $ref: 'index_api.yml#/paths/~1{source_index}~1_clone~1{target_index}'
+
+  /{index}/_close:
+    $ref: 'index_api.yml#/paths/~1{index}~1_close'
+
+  /{index}:
+    $ref: 'index_api.yml#/paths/~1{index}'
+
+  /_index_template/{template_name}:
+    $ref: 'index_api.yml#/paths/~1_index_template~1{template_name}'
+
+  /{index_name}:
+    $ref: 'index_api.yml#/paths/~1{index_name}'
+
+  /{target_index}/_mapping:
+    $ref: 'index_api.yml#/paths/~1{target_index}~1_mapping'
+
+  /_component_template/{component_template_name}:
+    $ref: 'index_api.yml#/paths/~1_component_template~1{component_template_name}'
+
+  /_dangling:
+    $ref: 'index_api.yml#/paths/~1_dangling'
+
+  /_dangling/{index_uuid}:
+    $ref: 'index_api.yml#/paths/~1_dangling~1{index_uuid}'
+
+  /_flush:
+    $ref: 'index_api.yml#/paths/~1_flush'
+
+  /{index}/_flush:
+    $ref: 'index_api.yml#/paths/~1{index}~1_flush'
+
+  /_forcemerge:
+    $ref: 'index_api.yml#/paths/~1_forcemerge'
+
+  /{index}/_forcemerge:
+    $ref: 'index_api.yml#/paths/~1{index}~1_forcemerge'
+
+  /_recovery:
+    $ref: 'index_api.yml#/paths/~1_recovery'
+
+  /{index}/_recovery:
+    $ref: 'index_api.yml#/paths/~1{index}~1_recovery'
+
+  /_settings:
+    $ref: 'index_api.yml#/paths/~1_settings'
+
+  /{target_index}/_settings:
+    $ref: 'index_api.yml#/paths/~1{target_index}~1_settings'
+
+  /{target_index}/_settings/{setting}:
+    $ref: 'index_api.yml#/paths/~1{target_index}~1_settings~1{setting}'
+
+  /{index}/_open:
+    $ref: 'index_api.yml#/paths/~1{index}~1_open'
+
+  /_refresh:
+    $ref: 'index_api.yml#/paths/~1_refresh'
+
+  /{index}/_refresh:
+    $ref: 'index_api.yml#/paths/~1{index}~1_refresh'
+
+  /{rollover_target}/_rollover:
+    $ref: 'index_api.yml#/paths/~1{rollover_target}~1_rollover'
+
+  /{rollover_target}/_rollover/{target_index}:
+    $ref: 'index_api.yml#/paths/~1{rollover_target}~1_rollover~1{target_index}'
+
+  /_segments:
+    $ref: 'index_api.yml#/paths/~1_segments'
+
+  /{index}/_segments:
+    $ref: 'index_api.yml#/paths/~1{index}~1_segments'
+
+  /{index_name}/_shrink/{target_index}:
+    $ref: 'index_api.yml#/paths/~1{index_name}~1_shrink~1{target_index}'
+
+  /{source_index}/_split/{target_index}:
+    $ref: 'index_api.yml#/paths/~1{source_index}~1_split~1{target_index}'
+
+  /_stats:
+    $ref: 'index_api.yml#/paths/~1_stats'
+
+  /_stats/{metric}:
+    $ref: 'index_api.yml#/paths/~1_stats~1{metric}'
+
+  /{index_ids}/_stats:
+    $ref: 'index_api.yml#/paths/~1{index_ids}~1_stats'
+
+  /{index_ids}/_stats/{metric}:
+    $ref: 'index_api.yml#/paths/~1{index_ids}~1_stats~1{metric}'
+
+  /{index}/_settings:
+    $ref: 'index_api.yml#/paths/~1{index}~1_settings'
+
+  /{index}/_analyze:
+    $ref: 'analyze_api.yml#/paths/~1{index}~1_analyze'
+
+  /_cat/aliases:
+    $ref: 'cat_api.yml#/paths/~1_cat~1aliases'
+
+  /_cat/aliases/{name}:
+    $ref: 'cat_api.yml#/paths/~1_cat~1aliases~1{name}'
+
+  /_cat/allocation:
+    $ref: 'cat_api.yml#/paths/~1_cat~1allocation'
+
+  /_cat/allocation/{node_id}:
+    $ref: 'cat_api.yml#/paths/~1_cat~1allocation~1{node_id}'
+
+  /_cat/count:
+    $ref: 'cat_api.yml#/paths/~1_cat~1count'
+
+  /_cat/count/{INDEX}:
+    $ref: 'cat_api.yml#/paths/~1_cat~1count~1{INDEX}'
+
+  /_cat/fielddata:
+    $ref: 'cat_api.yml#/paths/~1_cat~1fielddata'
+
+  /_cat/fielddata/{field_name}:
+    $ref: 'cat_api.yml#/paths/~1_cat~1fielddata~1{field_name}'
+
+  /_cat/health:
+    $ref: 'cat_api.yml#/paths/~1_cat~1health'
+
+  /_cat/indices:
+    $ref: 'cat_api.yml#/paths/~1_cat~1indices'
+
+  /_cat/indices/{index}:
+    $ref: 'cat_api.yml#/paths/~1_cat~1indices~1{index}'
+
+  /_cat/cluster_manager:
+    $ref: 'cat_api.yml#/paths/~1_cat~1cluster_manager'
+
+  /_cat/nodeattrs:
+    $ref: 'cat_api.yml#/paths/~1_cat~1nodeattrs'
+
+  /_cat/nodes:
+    $ref: 'cat_api.yml#/paths/~1_cat~1nodes'
+
+  /_cat/pending_tasks:
+    $ref: 'cat_api.yml#/paths/~1_cat~1pending_tasks'
+
+  /_cat/pit_segments:
+    $ref: 'cat_api.yml#/paths/~1_cat~1pit_segments'
+
+  /_cat/pit_segments/_all:
+    $ref: 'cat_api.yml#/paths/~1_cat~1pit_segments~1_all'
+
+  /_cat/plugins:
+    $ref: 'cat_api.yml#/paths/~1_cat~1plugins'
+
+  /_cat/recovery:
+    $ref: 'cat_api.yml#/paths/~1_cat~1recovery'
+
+  /_cat/recovery/{index}:
+    $ref: 'cat_api.yml#/paths/~1_cat~1recovery~1{index}'
+
+  /_cat/repositories:
+    $ref: 'cat_api.yml#/paths/~1_cat~1repositories'
+
+  /_cat/segment_replication:
+    $ref: 'cat_api.yml#/paths/~1_cat~1segment_replication'
+
+  /_cat/segment_replication/{index}:
+    $ref: 'cat_api.yml#/paths/~1_cat~1segment_replication~1{index}'
+
+  /_cat/segments:
+    $ref: 'cat_api.yml#/paths/~1_cat~1segments'
+
+  /_cat/segments/{index}:
+    $ref: 'cat_api.yml#/paths/~1_cat~1segments~1{index}'
+
+  /_cat/shards:
+    $ref: 'cat_api.yml#/paths/~1_cat~1shards'
+
+  /_cat/shards/{index}:
+    $ref: 'cat_api.yml#/paths/~1_cat~1shards~1{index}'
+
+  /_cat/snapshots:
+    $ref: 'cat_api.yml#/paths/~1_cat~1snapshots'
+
+  /_cat/snapshots/{repository}:
+    $ref: 'cat_api.yml#/paths/~1_cat~1snapshots~1{repository}'
+
+  /_cat/tasks:
+    $ref: 'cat_api.yml#/paths/~1_cat~1tasks'
+
+  /_cat/templates:
+    $ref: 'cat_api.yml#/paths/~1_cat~1templates'
+
+  /_cat/templates/{name}:
+    $ref: 'cat_api.yml#/paths/~1_cat~1templates~1{name}'
+
+  /_cat/thread_pool:
+    $ref: 'cat_api.yml#/paths/~1_cat~1thread_pool'
+
+  /_cat/thread_pool/{thread_pool_patterns}:
+    $ref: 'cat_api.yml#/paths/~1_cat~1thread_pool~1{thread_pool_patterns}'
+
+  /_ingest/pipeline/{pipeline_id}:
+    $ref: 'ingest_api.yml#/paths/~1_ingest~1pipeline~1{pipeline_id}'
+
+  /_ingest/pipeline/{pipeline_id}/_simulate:
+    $ref: 'ingest_api.yml#/paths/~1_ingest~1pipeline~1{pipeline_id}~1_simulate'
+
+  /_ingest/pipeline/_simulate:
+    $ref: 'ingest_api.yml#/paths/~1_ingest~1pipeline~1_simulate'
+
+  /_ingest/pipeline/{pipeline_id}/_data:
+    $ref: 'ingest_api.yml#/paths/~1_ingest~1pipeline~1{pipeline_id}~1_data'
+
+  /_plugins/_sm/policies/{policy_name}:
+    $ref: 'snapshot_management_api.yml#/paths/~1_plugins~1_sm~1policies~1{policy_name}'
+  /_plugins/_sm/policies:
+    $ref: 'snapshot_management_api.yml#/paths/~1_plugins~1_sm~1policies'
+  /_plugins/_sm/policies/{policy_names}/_explain:
+    $ref: 'snapshot_management_api.yml#/paths/~1_plugins~1_sm~1policies~1{policy_names}~1_explain'
+  /_plugins/_sm/policies/{policy_name}/_start:
+    $ref: 'snapshot_management_api.yml#/paths/~1_plugins~1_sm~1policies~1{policy_name}~1_start'
+  /_plugins/_sm/policies/{policy_name}/_stop:
+    $ref: 'snapshot_management_api.yml#/paths/~1_plugins~1_sm~1policies~1{policy_name}~1_stop'
+
+  /_scripts/{SCRIPT_ID}:
+    put:
+      $ref: 'script_api.yml#/paths/~1_scripts~1{SCRIPT_ID}/put'
+    post:
+      $ref: 'script_api.yml#/paths/~1_scripts~1{SCRIPT_ID}/post'
+    get:
+      $ref: 'script_api.yml#/paths/~1_scripts~1{SCRIPT_ID}/get'
+    delete:
+      $ref: 'script_api.yml#/paths/~1_scripts~1{SCRIPT_ID}/delete'
+
+  /_scripts/{SCRIPT_ID}/{CONTEXT}:
+    put:
+      $ref: 'script_api.yml#/paths/~1_scripts~1{SCRIPT_ID}~1{CONTEXT}/put'
+    post:
+      $ref: 'script_api.yml#/paths/~1_scripts~1{SCRIPT_ID}~1{CONTEXT}/post'
+
+  /_script_context:
+    get:
+      $ref: 'script_api.yml#/paths/~1_script_context/get'
+
+  /_script_language:
+    get:
+      $ref: 'script_api.yml#/paths/~1_script_language/get'
+
+  /_search/scroll:
+    $ref: 'search_api.yml#/paths/~1_search~1scroll'
+
+  /_search/scroll/{scroll_id}:
+    $ref: 'search_api.yml#/paths/~1_search~1scroll~1{scroll_id}'
+
+  /_search:
+    $ref: 'search_api.yml#/paths/~1_search'
+
+  /{index}/_search:
+    $ref: 'search_api.yml#/paths/~1{index}~1_search'
+
+  /_plugins/_security_analytics/detectors:
+    $ref: 'stats_api.yml#/paths/~1_plugins~1_security_analytics~1detectors'
+
+  /_plugins/_security_analytics/logtype:
+    $ref: 'logtype_api.yml#/paths/~1_plugins~1_security_analytics~1logtype'
+
+  /_plugins/_security_analytics/logtype/_search:
+    $ref: 'logtype_api.yml#/paths/~1_plugins~1_security_analytics~1logtype~1_search'
+
+  /_plugins/_security_analytics/logtype/{log_type_id}:
+    $ref: 'logtype_api.yml#/paths/~1_plugins~1_security_analytics~1logtype~1{log_type_id}'
+
+  /_tasks:
+    $ref: 'tasks_api.yml#/paths/~1_tasks'
+
+  /_tasks/{TASK_ID}:
+    $ref: 'tasks_api.yml#/paths/~1_tasks~1{TASK_ID}'
+
+  /_plugins/_transform/{TRANSFORM_ID}:
+    $ref: 'transforms_api.yml#/paths/~1_plugins~1_transform~1{TRANSFORM_ID}'
+
+  /_plugins/_transform/{TRANSFORM_ID}?if_seq_no={SEQ_NO}&if_primary_term={PRIMARY_TERM}:
+    $ref: 'transforms_api.yml#/paths/~1_plugins~1_transform~1{TRANSFORM_ID}?if_seq_no={SEQ_NO}&if_primary_term={PRIMARY_TERM}'
+
+  /_plugins/_transform/{TRANSFORM_ID}/_start:
+    $ref: 'transforms_api.yml#/paths/~1_plugins~1_transform~1{TRANSFORM_ID}~1_start'
+
+  /_plugins/_transform/{TRANSFORM_ID}/_stop:
+    $ref: 'transforms_api.yml#/paths/~1_plugins~1_transform~1{TRANSFORM_ID}~1_stop'
+
+  /_plugins/_transform/{TRANSFORM_ID}/_explain:
+    $ref: 'transforms_api.yml#/paths/~1_plugins~1_transform~1{TRANSFORM_ID}~1_explain'
+
+  /_plugins/_transform/_preview:
+    $ref: 'transforms_api.yml#/paths/~1_plugins~1_transform~1_preview'
+
+  /_cluster/allocation/explain:
+    $ref: 'cluster_api.yml#/paths/~1_cluster~1allocation~1explain'
+
+  /_cluster/routing/awareness/{attribute}/weights:
+    $ref: 'cluster_api.yml#/paths/~1_cluster~1routing~1awareness~1{attribute}~1weights'
+
+  /_cluster/decommission/awareness/{awareness_attribute_name}/{awareness_attribute_value}:
+    $ref: 'cluster_api.yml#/paths/~1_cluster~1decommission~1awareness~1{awareness_attribute_name}~1{awareness_attribute_value}'
+
+  /_cluster/decommission/awareness/{awareness_attribute_name}/_status:
+    $ref: 'cluster_api.yml#/paths/~1_cluster~1decommission~1awareness~1{awareness_attribute_name}~1_status'
+
+  /_cluster/decommission/awareness:
+    $ref: 'cluster_api.yml#/paths/~1_cluster~1decommission~1awareness'
+
+  /_cluster/health:
+    $ref: 'cluster_api.yml#/paths/~1_cluster~1health'
+
+  /_cluster/health/{index}:
+    $ref: 'cluster_api.yml#/paths/~1_cluster~1health~1{index}'
+
+  /_cluster/settings:
+    $ref: 'cluster_api.yml#/paths/~1_cluster~1settings'
+
+  /_cluster/stats:
+    $ref: 'cluster_api.yml#/paths/~1_cluster~1stats'
+
+  /_cluster/stats/nodes/{node_filters}:
+    $ref: 'cluster_api.yml#/paths/~1_cluster~1stats~1nodes~1{node_filters}'
+
+  /_cluster/stats/{metric}/nodes/{node_filters}:
+    $ref: 'cluster_api.yml#/paths/~1_cluster~1stats~1{metric}~1nodes~1{node_filters}'
+
+  /_cluster/stats/{metric}/{index_metric}/nodes/{node_filters}:
+    $ref: 'cluster_api.yml#/paths/~1_cluster~1stats~1{metric}~1{index_metric}~1nodes~1{node_filters}'
+
+  /_plugins/_ism/policies/{policy_id}:
+    $ref: 'ism_api.yml#/paths/~1_plugins~1_ism~1policies~1{policy_id}'
+
+  /_plugins/_ism/add/{index}:
+    $ref: 'ism_api.yml#/paths/~1_plugins~1_ism~1add~1{index}'
+
+  /_plugins/_ism/policies/{policy_id}?if_seq_no={value}&if_primary_term={value}:
+    $ref: 'ism_api.yml#/paths/~1_plugins~1_ism~1policies~1{policy_id}?if_seq_no={value}&if_primary_term={value}'
+
+  /_plugins/_ism/remove/{index}:
+    $ref: 'ism_api.yml#/paths/~1_plugins~1_ism~1remove~1{index}'
+
+  /_plugins/_ism/change_policy/{index}:
+    $ref: 'ism_api.yml#/paths/~1_plugins~1_ism~1change_policy~1{index}'
+
+  /_plugins/_ism/retry/{index}:
+    $ref: 'ism_api.yml#/paths/~1_plugins~1_ism~1retry~1{index}'
+
+  /_plugins/_ism/explain/{index}:
+    $ref: 'ism_api.yml#/paths/~1_plugins~1_ism~1explain~1{index}'
+
+  /_plugins/_ism/explain/{index}?validate_action={value}:
+    $ref: 'ism_api.yml#/paths/~1_plugins~1_ism~1explain~1{index}?validate_action={value}'
+
+  /{index}/_doc/{id}:
+    $ref: 'document_api.yml#/paths/~1{index}~1_doc~1{id}'
+
+  /{index}/_doc:
+    $ref: 'document_api.yml#/paths/~1{index}~1_doc'
+
+  /{index}/_create/{id}:
+    $ref: 'document_api.yml#/paths/~1{index}~1_create~1{id}'
+
+  /{index}/_update/{id}:
+    $ref: 'document_api.yml#/paths/~1{index}~1_update~1{id}'
+
+  /_bulk:
+    $ref: 'document_api.yml#/paths/~1_bulk'
+
+  /{index}/_bulk:
+    $ref: 'document_api.yml#/paths/~1{index}~1_bulk'
+
+  /_mget:
+    $ref: 'document_api.yml#/paths/~1_mget'
+
+  /{index}/_mget:
+    $ref: 'document_api.yml#/paths/~1{index}~1_mget'
+
+  /{index}/_delete_by_query:
+    $ref: 'document_api.yml#/paths/~1{index}~1_delete_by_query'
+
+  # Update by query API endpoints
+  /{index1},{index2}/_update_by_query:
+    $ref: 'document_api.yml#/paths/~1{index1},{index2}~1_update_by_query'
+
+  /_reindex:
+    $ref: 'document_api.yml#/paths/~1_reindex'
+
+  /{target}/_count:
+    $ref: 'miscellaneous_api.yml#/paths/~1{target}~1_count'
+
+  /{index}/_explain/{id}:
+    $ref: 'miscellaneous_api.yml#/paths/~1{index}~1_explain~1{id}'
+
+  /_plugins/_refresh_search_analyzers/{index_or_alias_or_wildcard}:
+    $ref: 'miscellaneous_api.yml#/paths/~1_plugins~1_refresh_search_analyzers~1{index_or_alias_or_wildcard}'
+
+  /_remote/info:
+    $ref: 'miscellaneous_api.yml#/paths/~1_remote~1info'
+
+  /_plugins/_rollup/jobs/{ROLLUP_ID}:
+    $ref: 'index_rollup.yml#/paths/~1_plugins~1_rollup~1jobs~1{ROLLUP_ID}'
+
+  /_plugins/_rollup/jobs/{ROLLUP_ID}/_start:
+    $ref: 'index_rollup.yml#/paths/~1_plugins~1_rollup~1jobs~1{ROLLUP_ID}~1_start'
+
+  /_plugins/_rollup/jobs/{ROLLUP_ID}/_stop:
+    $ref: 'index_rollup.yml#/paths/~1_plugins~1_rollup~1jobs~1{ROLLUP_ID}~1_stop'
+
+  /_plugins/_rollup/jobs/{ROLLUP_ID}/_explain:
+    $ref: 'index_rollup.yml#/paths/~1_plugins~1_rollup~1jobs~1{ROLLUP_ID}~1_explain'
+
+components:
+  parameters:
+    pretty:
+      name: pretty
+      in: query
+      description: Show results in human-readable format.
+      schema:
+        type: boolean
+        default: false
+
+    format:
+      name: format
+      in: query
+      description: A short version of the `Accept` header, such as `json` or `yaml`.
+      schema:
+        type: string
+        enum: [json, yaml]
+
+  schemas:
+    ApiInfo:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The unique name of the specific Wazuh indexer node that responded to the request. In a multi-node cluster, this will be the name of the node that handled the request.
+        cluster_name:
+          type: string
+          description: The name of the cluster which the Wazuh indexer is joined to.
+        cluster_uuid:
+          type: string
+          description: A unique ID that identifies the Wazuh indexer node's cluster. This ID is generated when the cluster is first formed and remains constant.
+        version:
+          $ref: '#/components/schemas/VersionInfo'
+        tagline:
+          type: string
+          description: Project description
+
+    VersionInfo:
+      type: object
+      properties:
+        number:
+          type: string
+          description: The version number of the Wazuh indexer node.
+        build_type:
+          type: string
+          description: Describes how the build was packaged (e.g., `rpm`, `deb`, `tar`).
+        build_hash:
+          type: string
+          description: A short hash of the Git commit from which this build was created. Useful for debugging and identifying the exact source code version.
+        build_date:
+          type: string
+          format: date-time
+          description: The date and time when this particular build was created.
+        build_snapshot:
+          type: boolean
+          description: A boolean indicating if this is a snapshot build (development version) or a release build (`false` for releases).
+        lucene_version:
+          type: string
+          description: The version of Apache Lucene, the underlying search library that Wazuh indexer uses.
+        minimum_wire_compatibility_version:
+          type: string
+          description: The minimum version of Wazuh indexer that this node can communicate with over the network. Ensures backward compatibility.
+        minimum_index_compatibility_version:
+          type: string
+          description: The minimum version of Wazuh indexer that this node can read indices created by. Ensures backward compatibility for stored data.
+
+    SecurityError:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            root_cause:
+              type: array
+              items:
+                type: object
+                properties:
+                  type: { type: string }
+                  reason: { type: string }
+            type: { type: string }
+            reason: { type: string }
+        status: { type: integer }
+
+  responses:
+    BadRequest:
+      description: Response to report a bad request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  root_cause:
+                    type: object
+                    properties:
+                      type: { type: string }
+                      reason: { type: string }
+              status: { type: integer }
+          examples:
+            missingText:
+              value:
+                error:
+                  root_cause:
+                    - type: "action_request_validation_exception"
+                      reason: "Validation Failed: 1: text is missing;"
+                  type: "action_request_validation_exception"
+                  reason: "Validation Failed: 1: text is missing;"
+                status: 400
+
+    Unauthorized:
+      description: Response to report an unauthorized request
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: "Unauthorized"
+
+    ForbiddenApiInfo:
+      description: Response to report a permission denied request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SecurityError'
+          example:
+            error:
+              root_cause:
+                - type: "security_exception"
+                  reason: "no permissions for [/] and User [name=test, backend_roles=[], requestedTenant=null]"
+              type: "security_exception"
+              reason: "no permissions for [/] and User [name=test, backend_roles=[], requestedTenant=null]"
+            status: 403
+
+    Forbidden:
+      description: Response to report a permission denied request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SecurityError'
+          example:
+            error:
+              root_cause:
+                - type: "security_exception"
+                  reason: "no permissions for [indices:admin/analyze] and User [name=test, backend_roles=[], requestedTenant=null]"
+              type: "security_exception"
+              reason: "no permissions for [indices:admin/analyze] and User [name=test, backend_roles=[], requestedTenant=null]"
+            status: 403
+
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Basic HTTP authentication
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT Bearer token authentication
+
+tags:
+  - name: Get API info
+    description: Wazuh indexer API information
+  - name: Analyze API
+  - name: Cat APIs
+    description: |
+      The compact and aligned text (CAT) API provides access to key statistics about your cluster. Instead of complex JSON output, the CAT API delivers information in a clear and concise tabular format, making it easier to read and understand information such as which node is currently leading the cluster, what is the overall status of the cluster, how many documents are stored in each index within the cluster, etc.
+  - name: Cluster API
+    description: The cluster APIs allow you to manage your cluster. You can use them to check cluster health, modify settings, retrieve statistics, and more.
+  - name: Count
+    description: The Count API provides quick access to retrieve the number of documents matching a query. It can also be used to determine the document count for an index, data stream, or cluster.
+  - name: Document APIs
+    description: |
+      Document APIs enable you to manage documents within your index, including adding, updating, and deleting records.
+
+      These APIs are categorized into single-document operations and multi-document operations. Multi-document operations are more efficient than processing multiple individual requests separately, so it is recommended to use them whenever possible for better performance.
+  - name: Explain
+    description: The Explain API in Wazuh indexer  provides a detailed breakdown of how a document matches a given query and how its relevance score (`_score`) is calculated. It helps in understanding why certain documents rank higher or lower in search results.
+  - name: Index APIs
+    description: Index API operations allow you to manage indexes within your cluster. With these operations, you can create, delete, close, and perform various other tasks related to index management.
+  - name: Index rollups API
+    description: You can use the index rollup operations to programmatically work with index rollup jobs.
+  - name: Index state management API
+    description: The Index State Management (ISM) API operations allow you to programmatically manage index policies and the lifecycle of indexes in the Wazuh indexer.
+  - name: ISM error prevention API
+    description: Index State Management (ISM) supports the automatic execution of actions. However, these actions may encounter failures due to various reasons. To help prevent such issues, you can perform error prevention validation to test an action and identify potential failures beforehand.
+  - name: Ingest APIs
+    description: |
+      The Wazuh indexer Ingest APIs facilitate the transformation and enrichment of data as it is ingested into the system. These APIs allow for the creation and management of ingest pipelines, which consist of a series of processors that execute sequentially to process incoming documents.
+
+      **Ingest pipeline APIs**
+      1. **Create or Update Pipeline**: Define a new pipeline or modify an existing one by specifying a sequence of processors.
+      2. **Get Pipeline**: Retrieve the configuration details of a specific pipeline.
+      3. **Simulate Pipeline**: Test a pipeline configuration by simulating the processing of sample documents, aiding in validation before deployment.
+      4. **Delete Pipeline**: Remove an existing pipeline from the system.
+      5. **Access Data in a Pipeline**: Interact with data as it flows through a pipeline, enabling monitoring and debugging of the ingestion process.
+  - name: Refresh search analyzer
+    description: |
+      The Refresh Search Analyzer is an API operation that reloads search-time analyzers in real time, specifically those with updateable components. The ability to refresh search analyzers using this endpoint requires the ISM plugin to be installed in your Wazuh indexer cluster.
+      For the refresh to work, the token filter within your analyzer must have the `updateable` flag set to `true` without needing to close or recreate the index. For example:
+      ```
+      {
+        "analyzer": {
+          "my_synonyms": {
+            "tokenizer": "whitespace",
+            "filter": [
+              "synonym"
+            ]
+          }
+        },
+        "filter": {
+          "synonym": {
+            "type": "synonym_graph",
+            "synonyms_path": "synonyms.txt",
+            "updateable": true
+          }
+        }
+      }
+      ```
+      This configuration ensures that changes to the `synonyms.txt` file are picked up when the analyzer is refreshed. Ensure that the updated resources (e.g., `synonyms.txt`) are accessible to all nodes in the cluster, as the refresh operation will reload these resources across the nodes.
+  - name: Remote cluster information
+    description: |
+      This operation returns detailed connection information for remote Wazuh indexer clusters configured with the local cluster. It includes data such as the remote cluster alias, connection mode (`sniff` or `proxy`), seed node IP addresses, and timeout configurations.
+      The response is more comprehensive and useful than a call to `_cluster/settings`, which only includes the cluster alias and seed nodes.
+  - name: Snapshot management API
+    description: |
+      The snapshot management (SM) API enables automated snapshot creation in the Wazuh indexer. This API helps streamline the process of backing up index data by allowing you to configure, schedule, and manage snapshots programmatically.
+  - name: Script APIs
+    description: The Script APIs enable the use of stored scripts, which are maintained as part of the cluster state. These scripts help minimize compilation time and improve search performance. The default scripting language is Painless.
+  - name: Scroll
+    description: |
+      You can utilize the scroll operation to obtain a substantial number of results. For instance, when looking for machine learning jobs, you can request an unlimited number of results in separate batches.
+
+      To implement the scroll operation, include a scroll parameter in the request header along with a search context that indicates to the indexer how long you wish to continue scrolling. This search context should be sufficiently lengthy to allow for processing a single batch of results.
+
+      Since search contexts can be memory-intensive, it's advisable to avoid using the scroll operation for frequent user queries. Instead, consider utilizing the sort parameter in conjunction with the search_after parameter to paginate through results for user queries.
+  - name: Search
+    description: The Search API operation allows you to perform a search request to find data within your cluster.
+  - name: Log type APIs
+    description: The log type APIs allow you to create a custom log type, search custom log types, update custom log types, and delete custom log types.
+  - name: Stats API
+    description: The Stats API uses the stats operation to track and monitor shard indexing backpressure.
+  - name: Tasks
+    description: Retrieves details about tasks that are currently running within the cluster.
+  - name: Transforms API
+    description: |
+      The Transform API is a RESTful interface that enables users to create, manage, and execute transform jobs. These jobs allow you to generate summarized or aggregated views of your existing data, facilitating more efficient analysis and visualization. By defining specific transformations, you can restructure and condense large datasets into more insightful representations.
