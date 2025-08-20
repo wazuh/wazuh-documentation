@@ -444,7 +444,7 @@ The connection status of an enrolled Wazuh agent at any moment is one of the fol
 -  **Pending**
 -  **Never connected**
 
-Wazuh stores a history of the connection status of all its agents. By default, it indexes the agent connection status using the ``wazuh‑monitoring-*`` indices. The Wazuh indexer creates one of these indices per week by default. These indices store the connection status of all the agents every 15 minutes by default.
+Wazuh stores a history of the connection status of all its agents. By default, it indexes the agent connection status using the ``wazuh‑monitoring-*`` indices.
 
 The Wazuh dashboard requires these indices to display information about agent status. For example, by clicking **☰** > **Agents management** > **Summary**, you can see information such as the Wazuh agent's connection status and historical evolution within set timeframes.
 
