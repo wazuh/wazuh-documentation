@@ -11,5 +11,4 @@ There are different ways to remove a Wazuh agent that is enrolled in the Wazuh m
 .. toctree::
    :maxdepth: 2
 
-   remove
    restful-api-remove

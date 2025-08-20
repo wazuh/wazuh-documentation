@@ -71,6 +71,14 @@ removedUrls['x.y'] = [
 
 /* *** RELEASE 5.0 ****/
 
+/* Pages no longer available in 5.0 */
+
+removedUrls['5.0'] = [
+  '/user-manual/reference/tools/manage_agents.html',
+  '/user-manual/reference/tools/manage-agents.html',
+  '/user-manual/agent/agent-management/remove-agents/remove.html',
+];
+
 /* Pages added in 5.0 */
 
 newUrls['5.0'] = [
