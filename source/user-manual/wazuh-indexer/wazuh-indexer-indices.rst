@@ -461,8 +461,6 @@ The wazuh‑statistics-* indices
 
 The Wazuh dashboard uses the ``wazuh‑statistics-*`` indices to display statistics about the Wazuh server usage and performance. The information displayed includes the number of events decoded, bytes received, and TCP sessions.
 
-The Wazuh indexer creates a ``wazuh‑statistics-*`` index per week by default. These indices store Wazuh server statistics every 5 minutes by default.
-
 To visualize this information in the Wazuh dashboard, go to **Server management** > **Statistics**.
 
 .. thumbnail:: /images/manual/wazuh-indexer/statistics-analysis-engine-dashboard.png
