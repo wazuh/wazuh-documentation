@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Learn how to deploy Wazuh using official Docker images, including the Wazuh manager, indexer, dashboard, and agent in this section of the documentation.
+   :description: Learn how to deploy Wazuh using official Docker images, including the Wazuh manager, indexer, and dashboard in this section of the documentation.
 
 Deployment on Docker
 ====================
@@ -14,12 +14,11 @@ Wazuh provides official Docker images that you can install to streamline deploym
 -  ``wazuh-manager``
 -  ``wazuh-indexer``
 -  ``wazuh-dashboard``
--  ``wazuh-agent``
 
 You can find all available Wazuh Docker images on `Docker Hub <https://hub.docker.com/u/wazuh>`__.
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
    prerequisites
    wazuh-container

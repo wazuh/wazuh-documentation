@@ -14,7 +14,7 @@ Access to services and containers
 This section explains how to interact with your Wazuh deployment by accessing service logs and shell instances of running containers.
 
 #. Access the Wazuh dashboard using the Docker host IP address.
-#. Enroll agents through the the standard :doc:`Wazuh agent enrollment </user-manual/agent/agent-enrollment/index>` process. Use the Docker host address as the Wazuh manager address.
+#. Enroll agents through the standard :doc:`Wazuh agent enrollment </user-manual/agent/agent-enrollment/index>` process. Use the Docker host address as the Wazuh manager address.
 #. List the containers in the directory where the Wazuh ``docker-compose.yml`` file is located:
 
    .. code-block:: console
