@@ -23,6 +23,7 @@ You can find all available Wazuh Docker images on `Docker Hub <https://hub.docke
 
    prerequisites
    wazuh-container
+   build-docker-images-locally
    container-usage
    upgrading-wazuh-docker
    faq-wazuh-container

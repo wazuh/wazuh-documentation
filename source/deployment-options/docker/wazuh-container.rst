@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: In this section of our documentation, you will find more information about Wazuh Docker deployment: its requirements, usage, and exposed ports.
+   :description: Wazuh supports the deployment of the central components on Docker. Learn more in this section of the documentation.
 
 Wazuh Docker deployment
 =======================
@@ -221,9 +221,9 @@ You need to log out of your Wazuh dashboard before starting the password change 
 Setting a new hash
 ..................
 
-.. warning::
+.. note::
 
-   If your password contains the ``$`` character, you must escape it using another ``$``. For example, to set the password ``Secret$Password`` in the ``docker-compose.yml`` file, write it as ``Secret$$Password``.
+   If your password contains the ``$`` character, you must escape it by doubling it. For example, to set the password ``Secret$Password`` in the ``docker-compose.yml`` file, write it as ``Secret$$Password``.
 
 #. Stop the stack if it’s running:
 
