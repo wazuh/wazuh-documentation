@@ -127,6 +127,11 @@ redirections.push(
     '4.11': '/user-manual/capabilities/vulnerability-detection/offline-update.html',
     '4.12': '/user-manual/capabilities/vulnerability-detection/configuring-scans.html#offline-vulnerability-detection',
   },
+  {
+    'target': ['4.11=>4.12', '4.12=>4.11'],
+    '4.11': '/deployment-options/docker/wazuh-container.html#build-docker-images-locally',
+    '4.12': '/deployment-options/docker/build-docker-images-locally.html',
+  },
 );
 
   /* Pages no longer available in 4.12 */
