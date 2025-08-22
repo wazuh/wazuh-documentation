@@ -10,12 +10,14 @@ Wazuh consists of a multi-platform Wazuh agent and three central components: the
 
 **Deployment options**
 
-Wazuh supports the deployment of the central components on Docker.
+Wazuh supports the deployment of the central components and agent on Docker.
 
 -  You can deploy `Wazuh central components`_ as a single-node or multi-node stack.
 
    -  **Single-node stack**: Runs one Wazuh manager, indexer, and dashboard node on the Docker host. Supports persistent storage and configurable certificates for secure communications.
    -  **Multi-node stack**: Runs two Wazuh manager nodes (one master, one worker), three indexer nodes, one dashboard, and one nginx node. Includes persistence, secure communication configuration, and high availability.
+
+-  You can deploy a `Wazuh agent`_ container on a Docker host.
 
 Wazuh central components
 ------------------------
@@ -459,3 +461,58 @@ The ``wazuh-wui`` user is the default user for connecting to the Wazuh server AP
       # docker-compose up -d
 
 Refer to :ref:`log in to the Wazuh server API via the command line <api_log_in>` to learn more.
+
+Wazuh agent
+-----------
+
+Running the Wazuh agent in a Docker container provides a lightweight option for integrations and for collecting logs via syslog, without installing the agent directly on a host. However, when deployed this way, the containerized agent cannot directly access or monitor the host system.
+
+.. _agent_deployment_docker:
+
+Deployment
+^^^^^^^^^^
+
+Follow these steps to deploy the Wazuh agent using Docker.
+
+#. Clone the `Wazuh Docker repository <https://github.com/wazuh/wazuh-docker>`_ to your system:
+
+   .. code-block:: console
+
+      # git clone https://github.com/wazuh/wazuh-docker.git -b v|WAZUH_CURRENT_DOCKER|
+
+#. Navigate to the ``wazuh-docker/wazuh-agent/`` directory within your repository:
+
+   .. code-block:: console
+
+      # cd wazuh-docker/wazuh-agent
+
+#. Edit the ``docker-compose.yml`` file. Replace ``<YOUR_WAZUH_MANAGER_IP>`` with the IP address of your Wazuh manager. Locate the environment section for the agent service and update it:
+
+   .. code-block:: yaml
+      :emphasize-lines: 7
+
+      # Wazuh App Copyright (C) 2017, Wazuh Inc. (License GPLv2)
+      services:
+        wazuh.agent:
+          image: wazuh/wazuh-agent:|WAZUH_CURRENT_DOCKER|
+          restart: always
+          environment:
+            - WAZUH_MANAGER_SERVER=<WAZUH_MANAGER_IP>
+          volumes:
+            - ./config/wazuh-agent-conf:/wazuh-config-mount/etc/ossec.conf
+
+#. Start the Wazuh agent deployment using ``docker-compose``:
+
+   -  **Background**:
+
+      .. code-block:: console
+
+         # docker-compose up -d
+
+   -  **Foreground**:
+
+      .. code-block:: console
+
+         # docker-compose up
+
+#. Verify from your Wazuh dashboard that the Wazuh agent deployment was successful and visible. Navigate to the **Agent management** > **Summary**, and you should see the Wazuh agent container active on your dashboard.

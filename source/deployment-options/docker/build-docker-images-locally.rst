@@ -1,12 +1,12 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: You can modify and build Docker images for the Wazuh central components. Learn more in this section of the documentation.
+   :description: You can modify and build Docker images for the Wazuh central components and the Wazuh agent. Learn more in this section of the documentation.
 
 Build Docker images locally
 ===========================
 
-You can modify and build Docker images for the Wazuh central components (manager, indexer, and dashboard).
+You can modify and build Docker images for the Wazuh central components (manager, indexer, and dashboard) and the Wazuh agent.
 
 #. Clone the `Wazuh Docker repository <https://github.com/wazuh/wazuh-docker>`_ to your system:
 
