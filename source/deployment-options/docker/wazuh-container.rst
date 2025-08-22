@@ -94,23 +94,23 @@ You must provide certificates for each node to secure communication between them
 
       .. code-block:: none
 
-         .. code-block:: none
+         config/wazuh_indexer_ssl_certs/root-ca.pem
+         config/wazuh_indexer_ssl_certs/wazuh.indexer-key.pem
+         config/wazuh_indexer_ssl_certs/wazuh.indexer.pem
+         config/wazuh_indexer_ssl_certs/admin.pem
+         config/wazuh_indexer_ssl_certs/admin-key.pem
 
-            config/wazuh_indexer_ssl_certs/root-ca.pem
-            config/wazuh_indexer_ssl_certs/wazuh.indexer-key.pem
-            config/wazuh_indexer_ssl_certs/wazuh.indexer.pem
-            config/wazuh_indexer_ssl_certs/admin.pem
-            config/wazuh_indexer_ssl_certs/admin-key.pem
+      **Wazuh manager**:
 
-         **Wazuh manager**:
+      .. code-block:: none
 
-         .. code-block:: none
+         config/wazuh_indexer_ssl_certs/root-ca-manager.pem
+         config/wazuh_indexer_ssl_certs/wazuh.manager.pem
+         config/wazuh_indexer_ssl_certs/wazuh.manager-key.pem
 
-            config/wazuh_indexer_ssl_certs/root-ca-manager.pem
-            config/wazuh_indexer_ssl_certs/wazuh.manager.pem
-            config/wazuh_indexer_ssl_certs/wazuh.manager-key.pem
+      **Wazuh dashboard**:
 
-         **Wazuh dashboard**:
+      .. code-block:: none
 
          config/wazuh_indexer_ssl_certs/wazuh.dashboard.pem
          config/wazuh_indexer_ssl_certs/wazuh.dashboard-key.pem
@@ -245,7 +245,7 @@ Setting a new hash
 
 #. Replace ``<NEW_HASH>`` with your hash values.
 
-   .. tabs::
+   -  ``admin`` user
 
       .. code-block:: yaml
          :emphasize-lines: 4
@@ -259,15 +259,9 @@ Setting a new hash
            - "admin"
            description: "Demo admin user"
 
-            ...
-            admin:
-              hash: "$2y$12$K/SpwjtB.wOHJ/Nc6GVRDuc1h0rM1DfvziFRNPtk27P.c4yDr9njO"
-              reserved: true
-              backend_roles:
-              - "admin"
-              description: "Demo admin user"
+         ...
 
-            ...
+   -  ``kibanaserver`` user
 
       .. code-block:: yaml
          :emphasize-lines: 4
@@ -279,20 +273,14 @@ Setting a new hash
            reserved: true
            description: "Demo kibanaserver user"
 
-            ...
-            kibanaserver:
-              hash: "$2a$12$4AcgAt3xwOWadA5s5blL6ev39OXDNhmOesEoo33eZtrq2N0YrU3H."
-              reserved: true
-              description: "Demo kibanaserver user"
-
-            ...
+         ...
 
 Setting the new password
 ........................
 
 #. Open the ``docker-compose.yml`` file. Change all occurrences of the old password with the new one. For example, for a single-node stack:
 
-   .. tabs::
+   -  ``admin`` user
 
       .. code-block:: yaml
          :emphasize-lines: 8, 25
@@ -329,37 +317,7 @@ Setting the new password
                - API_PASSWORD=MyS3cr37P450r.*-
            ...
 
-            ...
-            services:
-              wazuh.manager:
-                ...
-                environment:
-                  - INDEXER_URL=https://wazuh.indexer:9200
-                  - INDEXER_USERNAME=admin
-                  - INDEXER_PASSWORD=SecretPassword
-                  - FILEBEAT_SSL_VERIFICATION_MODE=full
-                  - SSL_CERTIFICATE_AUTHORITIES=/etc/ssl/root-ca.pem
-                  - SSL_CERTIFICATE=/etc/ssl/filebeat.pem
-                  - SSL_KEY=/etc/ssl/filebeat.key
-                  - API_USERNAME=wazuh-wui
-                  - API_PASSWORD=MyS3cr37P450r.*-
-              ...
-              wazuh.indexer:
-                ...
-                environment:
-                  - "OPENSEARCH_JAVA_OPTS=-Xms1024m -Xmx1024m"
-              ...
-              wazuh.dashboard:
-                ...
-                environment:
-                  - INDEXER_USERNAME=admin
-                  - INDEXER_PASSWORD=SecretPassword
-                  - WAZUH_API_URL=https://wazuh.manager
-                  - DASHBOARD_USERNAME=kibanaserver
-                  - DASHBOARD_PASSWORD=kibanaserver
-                  - API_USERNAME=wazuh-wui
-                  - API_PASSWORD=MyS3cr37P450r.*-
-              ...
+   -  ``kibanaserver`` user
 
       .. code-block:: yaml
          :emphasize-lines: 12
