@@ -17,6 +17,8 @@ Tools
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`agent_control <agent-control>`              | Allows queries of the manager to get information about any agent           | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
+| :doc:`manage_agents <manage-agents>`              | Provides an interface to handle authentication keys for  agents            | agent                       |
++---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`wazuh-logtest <wazuh-logtest>`              | Allows testing and verification of rules against provided log records      | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`clear_stats <clear-stats>`                  | Clears the events stats                                                    | manager                     |
@@ -49,6 +51,7 @@ Tools
    wazuh-control
    agent-auth
    agent-control
+   manage-agents
    wazuh-logtest
    clear-stats
    wazuh-regex
