@@ -363,11 +363,7 @@ With the CLI :doc:`/var/ossec/bin/agent_groups </user-manual/reference/tools/age
 During agent enrollment
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-To assign the Wazuh agent to one or more groups during the enrollment process, enroll the agent by setting the groups where the Wazuh agent will be included with the ``-G`` option:
-
-.. code-block:: console
-
-   # /var/ossec/bin/agent-auth -m WAZUH_MANAGER_IP -G webserver,apache
+To assign the Wazuh agent to one or more groups during the enrollment process, refer to :doc:`Agent enrollment </user-manual/agent/agent-enrollment/enrollment-methods/index>`.
 
 Listing groups and configuration
 --------------------------------
