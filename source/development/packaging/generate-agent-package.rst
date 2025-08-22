@@ -20,7 +20,7 @@ Requirements
 
 Ensure that you meet the following requirements to continue:
 
--  :doc:`Docker </deployment-options/docker/docker-installation>`
+-  `Docker <https://www.docker.com/>`__
 -  `Git <https://git-scm.com/book/en/v2/Getting-Started-Installing-Git>`__
 
 Creating the agent package
@@ -488,7 +488,7 @@ Requirements
 
 Ensure that you meet the following requirements to continue.
 
--  :doc:`Docker </deployment-options/docker/docker-installation>`
+-  `Docker <https://www.docker.com/>`__
 -  `Git <https://git-scm.com/book/en/v2/Getting-Started-Installing-Git>`__
 
 Initial steps

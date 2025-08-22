@@ -19,15 +19,26 @@ If the Wazuh server API is running, try to fetch data using the CLI from the Waz
 
 .. code-block:: console
 
-   # curl -k -X GET "https://<api_url>:55000/" -H "Authorization: Bearer $(curl -u <api_user>:<api_password> -k -X POST 'https://<api_url>:55000/security/user/authenticate?raw=true')"
+   # curl -k -X GET "https://<api_url>:55000/?pretty=true" -H "Authorization: Bearer $(curl -u <api_user>:<api_password> -k -X POST 'https://<api_url>:55000/security/user/authenticate?raw=true')"
 
 .. code-block:: none
    :class: output
 
-   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+     % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                     Dload  Upload   Total   Spent    Left  Speed
-   100   404  100   404    0     0   2779      0 --:--:-- --:--:-- --:--:--  2786
-   {"data": {"title": "Wazuh API REST", "api_version": "4.8.0", "revision": 40812, "license_name": "GPL 2.0", "license_url": "https://github.com/wazuh/wazuh/blob/v4.8.0/LICENSE", "hostname": "wazuh-server", "timestamp": "2024-07-18T20:06:45Z"}, "error": 0}
+   100   398  100   398    0     0   3431      0 --:--:-- --:--:-- --:--:--  3431
+   {
+      "data": {
+         "title": "Wazuh API REST",
+         "api_version": "4.12.0",
+         "revision": "rc1",
+         "license_name": "GPL 2.0",
+         "license_url": "https://github.com/wazuh/wazuh/blob/v4.12.0/LICENSE",
+         "hostname": "centos8a",
+         "timestamp": "2025-08-18T19:31:01Z"
+      },
+      "error": 0
+   }
 
 .. code-block:: none
    :class: output

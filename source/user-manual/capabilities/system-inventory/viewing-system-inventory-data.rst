@@ -184,28 +184,30 @@ Follow the steps below to query the endpoint database from the command line usin
 
       curl -k -X GET "https://<WAZUH_SERVER_IP>:55000/syscollector/001/packages?pretty=true&name=wazuh-agent" -H  "Authorization: Bearer $TOKEN"
 
-
    .. code-block:: console
       :class: output
-      :emphasize-lines: 14
-      
+      :emphasize-lines: 9
+
       {
          "data": {
             "affected_items": [
                {
                   "scan": {
                      "id": 0,
-                     "time": "2023-08-09T06:49:25+00:00"
+                     "time": "2025-08-18T16:50:06+00:00"
                   },
-                  "architecture": "x86_64",
-                  "description": "Wazuh helps you to gain security visibility into your infrastructure by monitoring hosts at an operating system and application level. It provides the following capabilities: log analysis, file integrity monitoring, intrusions detection and policy and compliance monitoring",
-                  "format": "rpm",
-                  "size": 25951010,
-                  "install_time": "1691563709",
                   "name": "wazuh-agent",
                   "section": "System Environment/Daemons",
+                  "architecture": "x86_64",
+                  "description": "Wazuh helps you to gain security visibility into your infrastructure by monitoring\nhosts at an operating system and application level. It provides the following capabilities:\nlog analysis, file integrity monitoring, intrusions detection and policy and compliance monitoring",
+                  "location": " ",
+                  "source": " ",
+                  "format": "rpm",
+                  "install_time": "1755535740",
+                  "version": "4.12.0-1",
+                  "size": 30461944,
+                  "priority": " ",
                   "vendor": "Wazuh, Inc <info@wazuh.com>",
-                  "version": "4.5.0-1",
                   "agent_id": "001"
                }
             ],
