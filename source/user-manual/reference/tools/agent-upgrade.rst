@@ -64,15 +64,15 @@ Examples
 
    .. code-block:: console
 
-       # /var/ossec/bin/agent_upgrade -a 002
+      # /var/ossec/bin/agent_upgrade -a 002
 
    .. code-block:: none
-       :class: output
+      :class: output
 
-       Upgrading...
+      Upgrading...
 
-       Upgraded agents:
-           Agent 002 upgraded: Wazuh v4.2.0 -> |WAZUH_CURRENT|
+      Upgraded agents:
+      	Agent 002 upgraded: Wazuh v4.2.0 -> Wazuh v4.12.0
 
 -  Upgrade multiple agents:
 
@@ -86,14 +86,14 @@ Examples
       Upgrading...
 
       Upgraded agents:
-          Agent 003 upgraded: Wazuh v4.2.0 -> |WAZUH_CURRENT|
-          Agent 004 upgraded: Wazuh v4.1.0 -> |WAZUH_CURRENT|
+      	Agent 003 upgraded: Wazuh v4.2.0 -> Wazuh v4.12.0
+      	Agent 004 upgraded: Wazuh v4.1.0 -> Wazuh v4.12.0
 
 -  Upgrade agent using a custom repository:
 
    .. code-block:: console
 
-      # /var/ossec/bin/agent_upgrade -a 002 -v v|WAZUH_CURRENT| -r http://mycompany.wpkrepo.com/
+      # /var/ossec/bin/agent_upgrade -a 002 -v v4.12.0 -r http://mycompany.wpkrepo.com/
 
    .. code-block:: none
       :class: output
@@ -101,7 +101,7 @@ Examples
       Upgrading...
 
       Upgraded agents:
-          Agent 002 upgraded: Wazuh v4.2.0 -> |WAZUH_CURRENT|
+      	Agent 002 upgraded: Wazuh v4.2.0 -> Wazuh v4.12.0
 
 -  Install custom WPK file:
 
@@ -115,6 +115,6 @@ Examples
        Upgrading...
 
        Upgraded agents:
-           Agent 002 upgraded: Wazuh v4.2.0 -> |WAZUH_CURRENT|
+      	Agent 002 upgraded: Wazuh v4.2.0 -> Wazuh v4.12.0
 
 .. note:: When the agent finishes updating, it is automatically restarted to apply the new configuration.

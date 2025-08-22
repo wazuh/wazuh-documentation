@@ -36,175 +36,195 @@ Examples
 Get cluster's healthcheck
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* Summarized version
-    .. code-block:: console
+-  **Summarized version**
 
-        # /var/ossec/bin/cluster_control -i
+   .. code-block:: console
 
-    .. code-block:: none
-        :class: output
+      # /var/ossec/bin/cluster_control -i
 
-        Cluster name: wazuh
+   .. code-block:: none
+      :class: output
 
-        Last completed synchronization for connected nodes (3):
-        node02 (192.168.56.103): Integrity check: 2023-03-28T15:34:38.801440Z | Integrity sync: 2023-03-28T15:33:53.499310Z | Agents-info: 2023-03-28T15:34:16.094609Z | Last keep alive: 2023-03-28T15:33:53.379383Z | Agent-groups: 2023-03-28T15:34:33.444899Z | Agent-groups full: n/a.
-        node03 (192.168.56.105): Integrity check: 2023-03-28T15:34:31.521853Z | Integrity sync: 2023-03-28T15:33:48.943411Z | Agents-info: 2023-03-28T15:34:27.082314Z | Last keep alive: 2023-03-28T15:33:54.379334Z | Agent-groups: 2023-03-28T15:34:32.321787Z | Agent-groups full: n/a.
+      Cluster name: wazuh_cluster
 
-* Extended version
-    .. code-block:: console
+      Last completed synchronization for connected nodes (2):
+          wazuh-2 (172.16.1.14): Integrity check: 2025-08-18T17:10:41.432055Z | Integrity sync: 2025-08-18T17:05:07.390796Z | Agents-info: 2025-08-18T17:10:40.847664Z | Agent-groups: n/a | Agent-groups full: 2025-08-18T17:05:23.954292Z | Last keep alive: 2025-08-18T17:10:40.325416Z.
+          wazuh-3 (172.16.1.15): Integrity check: 2025-08-18T17:10:41.005503Z | Integrity sync: 2025-08-18T17:05:07.015033Z | Agents-info: n/a | Agent-groups: n/a | Agent-groups full: 2025-08-18T17:05:23.954485Z | Last keep alive: 2025-08-18T17:10:39.970344Z.
 
-        # /var/ossec/bin/cluster_control -i more
+-  **Extended version**
 
-    .. code-block:: none
-        :class: output
+   .. code-block:: console
 
-        Cluster name: wazuh
+      # /var/ossec/bin/cluster_control -i more
 
-        Connected nodes (3):
+   .. code-block:: none
+      :class: output
 
-        node01 (192.168.56.101)
-            Version: |WAZUH_CURRENT|
-            Type: master
-            Active agents: 1
+      Cluster name: wazuh_cluster
 
-        node02 (192.168.56.103)
-            Version: |WAZUH_CURRENT|
-            Type: worker
-            Active agents: 1
-            Status:
-                Integrity
-                    Last synchronization: 2018-05-15 17:28:35.17 - 2018-05-15 17:28:35.17.
-                    Synchronized files: Shared: 0 | Missing: 0 | Extra: 0 | Extra valid: 0.
-                    Permission to synchronize: True.
-                Agents-info
-                    Last synchronization: 2018-05-15 17:28:33.35 - 2018-05-15 17:28:33.35.
-                    Synchronized files: 1.
-                    Permission to synchronize: True.
-                Agents-groups:
-                        Last synchronization: 0.001s (2018-05-15 17:28:33.35 - 2018-05-15 17:28:33.35).
-                        Number of synchronized chunks: 1.
-                Agents-groups full:
-                        Last synchronization: n/a (n/a - n/a).
-                        Number of synchronized chunks: 0.
+      Connected nodes (2):
 
-        node03 (192.168.56.105)
-            Version: |WAZUH_CURRENT|
-            Type: worker
-            Active agents: 0
-            Status:
-                Integrity
-                    Last synchronization: 2018-05-15 17:28:37.84 - 2018-05-15 17:28:37.85.
-                    Synchronized files: Shared: 0 | Missing: 0 | Extra: 0 | Extra valid: 0.
-                    Permission to synchronize: True.
-                Agents-info
-                    Last synchronization: n/a - n/a.
-                    Synchronized files: 0.
-                    Permission to synchronize: True.
-                Agents-groups:
-                        Last synchronization: 0.001s (2018-05-15 17:28:33.35 - 2018-05-15 17:28:33.35).
-                        Number of synchronized chunks: 1.
-                Agents-groups full:
-                        Last synchronization: n/a (n/a - n/a).
-                        Number of synchronized chunks: 0.
+          wazuh-1 (172.16.1.13)
+              Version: 4.12.0
+              Type: master
+              Active agents: 1
 
-* Getting healthcheck of multiple nodes
-    .. code-block:: console
+          wazuh-2 (172.16.1.14)
+              Version: 4.12.0
+              Type: worker
+              Active agents: 1
+              Status:
+                  Last keep Alive:
+                      Last received: 2025-08-18T17:05:40.275469Z.
+                  Integrity check:
+                      Last integrity check: 0.013s (2025-08-18T17:06:28.638405Z - 2025-08-18T17:06:28.651010Z).
+                      Permission to check integrity: True.
+                  Integrity sync:
+                      Last integrity synchronization: 0.015s (2025-08-18T17:05:07.376177Z - 2025-08-18T17:05:07.390796Z).
+                      Synchronized files: Shared: 1 | Missing: 0 | Extra: 0.
+                  Agents-info:
+                      Last synchronization: 0.008s (2025-08-18T17:06:20.389530Z - 2025-08-18T17:06:20.397984Z).
+                      Number of synchronized chunks: 1.
+                      Permission to synchronize agent-info: True.
+                  Agents-groups:
+                      Last synchronization: n/a (2025-08-18T17:06:24.011490Z - n/a).
+                      Number of synchronized chunks: 0.
+                  Agents-groups full:
+                      Last synchronization: 0.01s (2025-08-18T17:05:23.944439Z - 2025-08-18T17:05:23.954292Z).
+                      Number of synchronized chunks: 1.
 
-        # /var/ossec/bin/cluster_control -i more -fn node02 node01
+          wazuh-3 (172.16.1.15)
+              Version: 4.12.0
+              Type: worker
+              Active agents: 0
+              Status:
+                  Last keep Alive:
+                      Last received: 2025-08-18T17:05:39.950325Z.
+                  Integrity check:
+                      Last integrity check: 0.014s (2025-08-18T17:06:28.238423Z - 2025-08-18T17:06:28.252409Z).
+                      Permission to check integrity: True.
+                  Integrity sync:
+                      Last integrity synchronization: 0.003s (2025-08-18T17:05:07.011863Z - 2025-08-18T17:05:07.015033Z).
+                      Synchronized files: Shared: 1 | Missing: 0 | Extra: 0.
+                  Agents-info:
+                      Last synchronization: n/a (n/a - n/a).
+                      Number of synchronized chunks: 0.
+                      Permission to synchronize agent-info: True.
+                  Agents-groups:
+                      Last synchronization: n/a (2025-08-18T17:06:24.009932Z - n/a).
+                      Number of synchronized chunks: 0.
+                  Agents-groups full:
+                      Last synchronization: 0.008s (2025-08-18T17:05:23.946172Z - 2025-08-18T17:05:23.954485Z).
+                      Number of synchronized chunks: 1.
 
-    .. code-block:: none
-        :class: output
+-  **Getting healthcheck of multiple nodes**
 
-        Cluster name: wazuh
+   .. code-block:: console
 
-        Connected nodes (3):
+      # /var/ossec/bin/cluster_control -i more -fn wazuh-2 wazuh-1
 
-        node01 (192.168.56.101)
-            Version: |WAZUH_CURRENT|
-            Type: master
-            Active agents: 1
+   .. code-block:: none
+      :class: output
 
-        node02 (192.168.56.103)
-            Version: |WAZUH_CURRENT|
-            Type: worker
-            Active agents: 1
-            Status:
-                Integrity
-                    Last synchronization: 2018-05-15 17:31:07.04 - 2018-05-15 17:31:07.04.
-                    Synchronized files: Shared: 0 | Missing: 0 | Extra: 0 | Extra valid: 0.
-                    Permission to synchronize: True.
-                Agents-info
-                    Last synchronization: 2018-05-15 17:30:45.74 - 2018-05-15 17:30:45.75.
-                    Synchronized files: 1.
-                    Permission to synchronize: True.
-                Agents-groups:
-                        Last synchronization: 0.001s (2018-05-15 17:28:33.35 - 2018-05-15 17:28:33.35).
-                        Number of synchronized chunks: 1.
-                Agents-groups full:
-                        Last synchronization: n/a (n/a - n/a).
-                        Number of synchronized chunks: 0.
+      Cluster name: wazuh_cluster
 
+      Connected nodes (1):
+
+          wazuh-1 (172.16.1.13)
+              Version: 4.12.0
+              Type: master
+              Active agents: 1
+
+          wazuh-2 (172.16.1.14)
+              Version: 4.12.0
+              Type: worker
+              Active agents: 1
+              Status:
+                  Last keep Alive:
+                      Last received: 2025-08-18T17:13:40.354898Z.
+                  Integrity check:
+                      Last integrity check: 0.004s (2025-08-18T17:14:00.037058Z - 2025-08-18T17:14:00.040772Z).
+                      Permission to check integrity: True.
+                  Integrity sync:
+                      Last integrity synchronization: 0.015s (2025-08-18T17:05:07.376177Z - 2025-08-18T17:05:07.390796Z).
+                      Synchronized files: Shared: 1 | Missing: 0 | Extra: 0.
+                  Agents-info:
+                      Last synchronization: 0.008s (2025-08-18T17:14:01.197572Z - 2025-08-18T17:14:01.205289Z).
+                      Number of synchronized chunks: 1.
+                      Permission to synchronize agent-info: True.
+                  Agents-groups:
+                      Last synchronization: n/a (2025-08-18T17:14:04.406802Z - n/a).
+                      Number of synchronized chunks: 0.
+                  Agents-groups full:
+                      Last synchronization: 0.01s (2025-08-18T17:05:23.944439Z - 2025-08-18T17:05:23.954292Z).
+                      Number of synchronized chunks: 1.
 
 Get connected nodes
 ^^^^^^^^^^^^^^^^^^^
 
-* Get all connected nodes
-    .. code-block:: console
+-  **Get all connected nodes**
 
-        # /var/ossec/bin/cluster_control -l
+   .. code-block:: console
 
-    .. code-block:: none
-        :class: output
+      # /var/ossec/bin/cluster_control -l
 
-        NAME      TYPE    VERSION  ADDRESS
-        worker-1  worker  |WAZUH_CURRENT|    172.17.0.101
-        worker-2  worker  |WAZUH_CURRENT|    172.17.0.102
-        master    master  |WAZUH_CURRENT|    172.17.0.100
+   .. code-block:: none
+      :class: output
 
-* Filter connected nodes by name
-    .. code-block:: console
+      NAME     TYPE    VERSION  ADDRESS
+      wazuh-1  master  4.12.0   172.16.1.13
+      wazuh-3  worker  4.12.0   172.16.1.15
+      wazuh-2  worker  4.12.0   172.16.1.14
 
-        # /var/ossec/bin/cluster_control -l -fn master worker-1
+-  **Filter connected nodes by name**
 
-    .. code-block:: none
-        :class: output
+   .. code-block:: console
 
-        NAME      TYPE    VERSION  ADDRESS
-        worker-1  worker  |WAZUH_CURRENT|    172.17.0.101
-        master    master  |WAZUH_CURRENT|    172.17.0.100
+      # /var/ossec/bin/cluster_control -l -fn wazuh-1 wazuh-3
+
+   .. code-block:: none
+      :class: output
+
+      NAME     TYPE    VERSION  ADDRESS
+      wazuh-1  master  4.12.0   172.16.1.13
+      wazuh-3  worker  4.12.0   172.16.1.15
 
 Get agents in cluster
 ^^^^^^^^^^^^^^^^^^^^^
 
-* Get all agents
-    .. code-block:: console
+-  **Get all agents**
 
-        # /var/ossec/bin/cluster_control -a
+   .. code-block:: console
 
-    .. code-block:: none
-        :class: output
+      # /var/ossec/bin/cluster_control -a
 
-        NAME    IP         ID   STATUS  VERSION       NODE NAME
-        master  127.0.0.1  000  Active  Wazuh v|WAZUH_CURRENT|  master
-        agent1  any        001  Active  Wazuh v|WAZUH_CURRENT|  worker-2
+   .. code-block:: none
+      :class: output
 
-* Get all agents reporting to a node
-    .. code-block:: console
+      ID   NAME         IP           STATUS  VERSION        NODE NAME
+      000  centos8a     127.0.0.1    active  Wazuh v4.12.0  wazuh-1
+      001  ag-centos9s  172.16.1.85  active  Wazuh v4.12.0  wazuh-1
+      002  ag-ubuntu22  172.16.1.83  active  Wazuh v4.12.0  wazuh-2
 
-        # /var/ossec/bin/cluster_control -a -fn worker-2
+-  **Get all agents reporting to a node**
 
-    .. code-block:: none
-        :class: output
+   .. code-block:: console
 
-        NAME    IP         ID   STATUS  VERSION       NODE NAME
-        agent1  any        001  Active  Wazuh v|WAZUH_CURRENT|  worker-2
+           # /var/ossec/bin/cluster_control -a -fn wazuh-2
 
-* Get all active disconnected reporting to a node
-    .. code-block:: console
+   .. code-block:: none
+      :class: output
 
-        # /var/ossec/bin/cluster_control -a -fn node02 -fs Disconnected
+      ID   NAME         IP           STATUS  VERSION        NODE NAME
+      002  ag-ubuntu22  172.16.1.83  active  Wazuh v4.12.0  wazuh-2
 
-    .. code-block:: none
-        :class: output
+-  **Get all active disconnected reporting to a node**
 
-        NAME    IP         ID   STATUS  VERSION       NODE NAME
+   .. code-block:: console
+
+      # /var/ossec/bin/cluster_control -a -fn wazuh-2 -fs Disconnected
+
+   .. code-block:: none
+      :class: output
+
+      ID  NAME  IP  STATUS  VERSION  NODE NAME

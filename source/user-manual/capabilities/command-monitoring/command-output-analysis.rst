@@ -106,16 +106,16 @@ Wazuh server
       :emphasize-lines: 11
 
       # /var/ossec/bin/wazuh-logtest
-      Starting wazuh-logtest v|WAZUH_CURRENT|
+      Starting wazuh-logtest v4.12.0
       Type one log per line
 
       MemFree:       	90008 kB
 
       **Phase 1: Completed pre-decoding.
-          	full event: 'MemFree:       	90008 kB'
+      	full event: 'MemFree:       	90008 kB'
 
       **Phase 2: Completed decoding.
-          	No decoder matched.
+      	No decoder matched.
 
    You can see that there is no decoder available to decode the log as highlighted. You need to create a decoder to extract information from the log.
 
@@ -135,18 +135,18 @@ Wazuh server
       :emphasize-lines: 11,12,13
 
       # /var/ossec/bin/wazuh-logtest
-      Starting wazuh-logtest v|WAZUH_CURRENT|
+      Starting wazuh-logtest v4.12.0
       Type one log per line
 
       MemFree:       	90008 kB
 
       **Phase 1: Completed pre-decoding.
-          	full event: 'MemFree:       	90008 kB'
+      	full event: 'MemFree:       	90008 kB'
 
       **Phase 2: Completed decoding.
-          	name: 'unused-memory'
-          	free_memory: '90008'
-          	unit_of_measurment: 'kB'
+      	name: 'unused-memory'
+      	free_memory: '90008'
+      	unit_of_measurment: 'kB'
 
 #. The decoded output of the command needs to trigger a rule to generate an alert. Add the custom rule below to the ``/var/ossec/etc/rules/local_rules.xml`` file to generate an alert when the Command module executes the ``grep MemFree /proc/meminfo`` command. The rule uses the ``<decoded_as>`` tag to reference the ``unused-memory`` decoder created above:
 
