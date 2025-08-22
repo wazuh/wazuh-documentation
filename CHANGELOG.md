@@ -17,6 +17,7 @@ All notable changes to this project will be documented in this file.
 - Removed `compatibility.override_main_response_version` setting from Wazuh Indexer configuration as it is no longer supported in OpenSearch 3.0. ([#8609](https://github.com/wazuh/wazuh-documentation/pull/8609)) 
 - Removed several Rootcheck configuration options and added a corresponding note to the central components upgrade guide. ([#8759](https://github.com/wazuh/wazuh-documentation/pull/8759))
 - Removed references to the server version of the `manage_agents` tool. ([#8792](https://github.com/wazuh/wazuh-documentation/pull/8792))
+- Removed `cron.prefix`, `cron.statistics.*`, and `wazuh.monitoring.*` configuration settings from the Wazuh dashboard. ([#8790](https://github.com/wazuh/wazuh-documentation/pull/8790))
 
 ## [v4.14.1]
 
