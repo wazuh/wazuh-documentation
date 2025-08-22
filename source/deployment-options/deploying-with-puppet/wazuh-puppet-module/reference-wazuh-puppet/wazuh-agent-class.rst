@@ -648,6 +648,13 @@ $ossec_syscheck_process_priority
 
   `Type String`
 
+$ossec_syscheck_max_eps
+  Sets the maximum event reporting throughput. Events are messages that will produce an alert.
+
+  `Default 50`
+
+  `Type String`
+
 $ossec_syscheck_synchronization_enabled
   Specifies whether there will be periodic inventory synchronizations or not.
 
@@ -662,6 +669,13 @@ $ossec_syscheck_synchronization_interval
 
   `Type String`
 
+$ossec_syscheck_synchronization_response_timeout
+  Waiting time in seconds since a sync message is sent or received for the next synchronization activity.
+
+  `Default 30`
+
+  `Type String`
+
 $ossec_syscheck_synchronization_max_eps
   Sets the maximum synchronization message throughput.
 
@@ -669,10 +683,10 @@ $ossec_syscheck_synchronization_max_eps
 
   `Type String`
 
-$ossec_syscheck_synchronization_max_interval
-  Specifies the maximum number of seconds between every inventory synchronization.
+$ossec_syscheck_notify_first_scan
+  Specifies if the first syscheck (FIM) scan reports stateless events or not.
 
-  `Default 1h`
+  `Default no`
 
   `Type String`
 
@@ -795,6 +809,48 @@ $wodle_syscollector_processes
   Enables the scan of the processes.
 
   `Default yes`
+
+  `Type String`
+
+$wodle_syscollector_max_eps
+  Sets the maximum event reporting throughput. Events are messages that will produce an alert.
+
+  `Default 50`
+
+  `Type String`
+
+$wodle_syscollector_synchronization_enabled
+  Specifies performing periodic inventory synchronizations.
+
+  `Default yes`
+
+  `Type String`
+
+$wodle_syscollector_synchronization_interval
+  Specifies the initial time interval between every inventory synchronization.
+
+  `Default 5m`
+
+  `Type String`
+
+$wodle_syscollector_synchronization_response_timeout
+  Waiting time in seconds since a sync message is sent or received for the next synchronization activity.
+
+  `Default 30`
+
+  `Type String`
+
+$wodle_syscollector_synchronization_max_eps
+  Sets the maximum synchronization message throughput.
+
+  `Default 10`
+
+  `Type String`
+
+$wodle_syscollector_notify_first_scan
+  Specifies if the first scan reports stateless events or not.
+
+  `Default no`
 
   `Type String`
 
