@@ -1,12 +1,6 @@
 Install Wazuh components using the assisted method
 --------------------------------------------------
 
-Install and configure the different Wazuh components on a 64-bit (x86_64/AMD64) architecture with the aid of the Wazuh installation assistant.
-
-.. note:: You need root user privileges to run all the commands described below.
-
-Please, make sure that a copy of the ``wazuh-install-files.tar`` and ``wazuh-offline.tar.gz`` files, created during the initial configuration step, is placed in your working directory.
-
 Single-node offline installation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -41,16 +35,16 @@ The following dependencies must be installed on the Wazuh single node.
 
       # bash wazuh-install.sh --offline-installation -a
 
-Once the installation is finished, the output shows the access credentials and a message that confirms that the installation was successful.
-
-.. code-block:: none
-   :emphasize-lines: 3,4
-
-   INFO: --- Summary ---
-   INFO: You can access the web interface https://<WAZUH_DASHBOARD_IP_ADDRESS>
-       User: admin
-       Password: <ADMIN_PASSWORD>
-   INFO: Installation finished.
+   Once the installation is finished, the output shows the access credentials and a message that confirms that the installation was successful.
+   
+   .. code-block:: none
+      :emphasize-lines: 3,4
+   
+      INFO: --- Summary ---
+      INFO: You can access the web interface https://<WAZUH_DASHBOARD_IP_ADDRESS>
+          User: admin
+          Password: <ADMIN_PASSWORD>
+      INFO: Installation finished.
 
 #. Access the Wazuh web interface with your admin user credentials. This is the default administrator account for the Wazuh indexer and it allows you to access the Wazuh dashboard.
 
@@ -87,9 +81,9 @@ The following dependencies must be installed on the Wazuh indexer nodes.
 
       # bash wazuh-install.sh --offline-installation --wazuh-indexer node-1
 
-   Repeat this step for every Wazuh indexer node in your cluster. Then proceed with initializing your single-node or multi-node cluster in the next step.
+   Repeat this step for every Wazuh indexer node in your cluster. Then proceed with initializing your multi-node cluster in the next step.
 
-#. Run the Wazuh installation assistant with option ``--start-cluster`` on any Wazuh indexer node to load the new certificates information and start the cluster.
+#. Run the Wazuh assisted installation option ``--start-cluster`` on any Wazuh indexer node to load the new certificates information and start the cluster.
 
    .. code-block:: console
 
