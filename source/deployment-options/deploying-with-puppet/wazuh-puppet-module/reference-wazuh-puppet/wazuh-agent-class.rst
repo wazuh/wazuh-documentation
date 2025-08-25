@@ -649,9 +649,16 @@ $ossec_syscheck_process_priority
   `Type String`
 
 $ossec_syscheck_max_eps
-  Sets the maximum event reporting throughput. Events are messages that will produce an alert.
+  Sets the maximum throughput for reporting events. Events are messages that trigger alerts.
 
   `Default 50`
+
+  `Type String`
+
+$ossec_syscheck_notify_first_scan
+  Specifies whether the first Syscheck (FIM) scan reports stateless events.
+
+  `Default no`
 
   `Type String`
 
@@ -670,7 +677,7 @@ $ossec_syscheck_synchronization_interval
   `Type String`
 
 $ossec_syscheck_synchronization_response_timeout
-  Waiting time in seconds since a sync message is sent or received for the next synchronization activity.
+  Waiting time in seconds between a sync message and the next synchronization.
 
   `Default 30`
 
@@ -680,13 +687,6 @@ $ossec_syscheck_synchronization_max_eps
   Sets the maximum synchronization message throughput.
 
   `Default 10`
-
-  `Type String`
-
-$ossec_syscheck_notify_first_scan
-  Specifies if the first syscheck (FIM) scan reports stateless events or not.
-
-  `Default no`
 
   `Type String`
 
@@ -813,44 +813,44 @@ $wodle_syscollector_processes
   `Type String`
 
 $wodle_syscollector_max_eps
-  Sets the maximum event reporting throughput. Events are messages that will produce an alert.
+  Sets the maximum throughput for reporting events. Events are messages that trigger alerts.
 
   `Default 50`
 
   `Type String`
 
+$wodle_syscollector_notify_first_scan
+  Specifies whether the first scan reports stateless events.
+
+  `Default no`
+
+  `Type String`
+
 $wodle_syscollector_synchronization_enabled
-  Specifies performing periodic inventory synchronizations.
+  Specifies whether to perform periodic inventory synchronizations.
 
   `Default yes`
 
   `Type String`
 
 $wodle_syscollector_synchronization_interval
-  Specifies the initial time interval between every inventory synchronization.
+  Specifies the initial interval between inventory synchronizations.
 
   `Default 5m`
 
   `Type String`
 
 $wodle_syscollector_synchronization_response_timeout
-  Waiting time in seconds since a sync message is sent or received for the next synchronization activity.
+  Waiting time in seconds between a sync message and the next synchronization.
 
   `Default 30`
 
   `Type String`
 
 $wodle_syscollector_synchronization_max_eps
-  Sets the maximum synchronization message throughput.
+  Sets the maximum throughput for synchronization messages.
 
   `Default 10`
-
-  `Type String`
-
-$wodle_syscollector_notify_first_scan
-  Specifies if the first scan reports stateless events or not.
-
-  `Default no`
 
   `Type String`
 

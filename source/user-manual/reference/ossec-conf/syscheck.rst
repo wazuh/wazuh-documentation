@@ -405,6 +405,25 @@ Example:
  <max_files_per_second>100</max_files_per_second>
 
 
+.. _reference_ossec_syscheck_notify_first_scan:
+
+notify_first_scan
+------------------
+
+Specifies whether the first scan reports stateless events.
+
++--------------------+----------+
+| **Default value**  | no       |
++--------------------+----------+
+| **Allowed values** | yes, no  |
++--------------------+----------+
+
+Example:
+
+.. code-block:: xml
+
+   <notify_first_scan>no</notify_first_scan>
+
 .. _reference_ossec_syscheck_prefilter_cmd:
 
 prefilter_cmd
@@ -763,25 +782,6 @@ Sets the maximum synchronization message throughput.
 +--------------------+---------------------------------------------------------+
 | **Allowed values** | Integer number between 0 and 1000000. 0 means disabled. |
 +--------------------+---------------------------------------------------------+
-
-.. _reference_ossec_syscheck_notify_first_scan:
-
-notify_first_scan
-------------------
-
-Specifies if the first scan reports stateless events or not.
-
-+--------------------+----------+
-| **Default value**  | no       |
-+--------------------+----------+
-| **Allowed values** | yes, no  |
-+--------------------+----------+
-
-Example:
-
-.. code-block:: xml
-
- <notify_first_scan>no</notify_first_scan>
 
 .. _reference_ossec_syscheck_diff:
 
