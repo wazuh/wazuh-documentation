@@ -29,6 +29,8 @@ From a Linux system with Internet access, run the script below to download all f
    .. code-block:: console
 
       # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-install.sh
+      
+      # chmod 744 wazuh-install.sh
 
 #. Download packages by architecture and format
 
