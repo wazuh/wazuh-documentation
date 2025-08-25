@@ -20,43 +20,38 @@ Configuration options of the Syscollector wodle for :ref:`system inventory <syst
 Options
 -------
 
-- `disabled`_
-- `interval`_
-- `scan_on_start`_
-- `hardware`_
-- `os`_
-- `network`_
-- `packages`_
-- `ports`_
-- `hotfixes`_
-- `synchronization`_
+.. contents::
+   :local:
+   :depth: 2
+   :backlinks: none
 
-
-+----------------------+-----------------------------+
-| Options              | Allowed values              |
-+======================+=============================+
-| `disabled`_          | yes, no                     |
-+----------------------+-----------------------------+
-| `interval`_          | A positive number (seconds) |
-+----------------------+-----------------------------+
-| `scan_on_start`_     | yes, no                     |
-+----------------------+-----------------------------+
-| `hardware`_          | yes, no                     |
-+----------------------+-----------------------------+
-| `os`_                | yes, no                     |
-+----------------------+-----------------------------+
-| `network`_           | yes, no                     |
-+----------------------+-----------------------------+
-| `packages`_          | yes, no                     |
-+----------------------+-----------------------------+
-| `ports`_             | yes, no                     |
-+----------------------+-----------------------------+
-| `processes`_         | yes, no                     |
-+----------------------+-----------------------------+
-| `hotfixes`_          | yes, no                     |
-+----------------------+-----------------------------+
-
-
++-------------------------------------------------+-----------------------------+
+| Options                                         | Allowed values              |
++=================================================+=============================+
+| `disabled`_                                     | yes, no                     |
++-------------------------------------------------+-----------------------------+
+| :ref:`interval <wodle_syscollector_interval>`   | A positive number (seconds) |
++-------------------------------------------------+-----------------------------+
+| `scan_on_start`_                                | yes, no                     |
++-------------------------------------------------+-----------------------------+
+| `hardware`_                                     | yes, no                     |
++-------------------------------------------------+-----------------------------+
+| `os`_                                           | yes, no                     |
++-------------------------------------------------+-----------------------------+
+| `network`_                                      | yes, no                     |
++-------------------------------------------------+-----------------------------+
+| `packages`_                                     | yes, no                     |
++-------------------------------------------------+-----------------------------+
+| `ports`_                                        | yes, no                     |
++-------------------------------------------------+-----------------------------+
+| `processes`_                                    | yes, no                     |
++-------------------------------------------------+-----------------------------+
+| `hotfixes`_                                     | yes, no                     |
++-------------------------------------------------+-----------------------------+
+| :ref:`max_eps <wodle_syscollector_max_eps>`     | Integer (0-1000000)         |
++-------------------------------------------------+-----------------------------+
+| `notify_first_scan`_                            | yes, no                     |
++-------------------------------------------------+-----------------------------+
 
 disabled
 ^^^^^^^^
@@ -69,7 +64,7 @@ Disable the Syscollector wodle.
 | **Allowed values** | yes, no                     |
 +--------------------+-----------------------------+
 
-.. _syscollector_interval:
+.. _wodle_syscollector_interval:
 
 interval
 ^^^^^^^^
@@ -185,6 +180,42 @@ Enables the hotfixes scan. It reports the Windows updates installed.
   This option is enabled by default but not included in the initial configuration.
 
 
+.. _wodle_syscollector_max_eps:
+
+max_eps
+^^^^^^^
+
+Sets the maximum throughput for reporting events. Events are messages that trigger alerts.
+
++--------------------+---------------------------------------------------------+
+| **Default value**  | 50                                                      |
++--------------------+---------------------------------------------------------+
+| **Allowed values** | Integer number between 0 and 1000000. 0 means disabled. |
++--------------------+---------------------------------------------------------+
+
+Example:
+
+.. code-block:: xml
+
+   <max_eps>50</max_eps>
+
+notify_first_scan
+^^^^^^^^^^^^^^^^^
+
+Specifies whether the first scan reports stateless events.
+
++--------------------+----------+
+| **Default value**  | no       |
++--------------------+----------+
+| **Allowed values** | yes, no  |
++--------------------+----------+
+
+Example:
+
+.. code-block:: xml
+
+   <notify_first_scan>no</notify_first_scan>
+
 synchronization
 ^^^^^^^^^^^^^^^
 
@@ -194,14 +225,58 @@ The database synchronization settings are configured inside this tag.
 
 	<wodle name="syscollector">
 	  <synchronization>
+	    <enabled>yes</enabled>
+	    <interval>5m</interval>
+	    <response_timeout>30</response_timeout>
 	    <max_eps>10</max_eps>
 	  </synchronization>
 	</wodle>
 
-max_eps
-^^^^^^^
+.. _wodle_syscollector_synchronization_enabled:
 
-Sets the maximum event reporting throughput.
+enabled
+~~~~~~~
+
+Specifies whether to perform periodic inventory synchronizations.
+
++--------------------+--------------+
+| **Default value**  | yes          |
++--------------------+--------------+
+| **Allowed values** | yes, no      |
++--------------------+--------------+
+
+.. _wodle_syscollector_synchronization_interval:
+
+interval
+~~~~~~~~
+
+Specifies the initial interval between inventory synchronizations.
+
++--------------------+-----------------------------------------------------------------------+
+| **Default value**  | 5 m                                                                   |
++--------------------+-----------------------------------------------------------------------+
+| **Allowed values** | Any number greater than or equal to 0. Allowed suffixes (s, m, h, d). |
++--------------------+-----------------------------------------------------------------------+
+
+.. _wodle_syscollector_synchronization_response_timeout:
+
+response_timeout
+~~~~~~~~~~~~~~~~
+
+Waiting time in seconds between a sync message and the next synchronization.
+
++--------------------+----------------------------------------------------------------------+
+| **Default value**  | 30                                                                   |
++--------------------+----------------------------------------------------------------------+
+| **Allowed values** | Any number between 0 and ``interval``.                               |
++--------------------+----------------------------------------------------------------------+
+
+.. _wodle_syscollector_synchronization_max_eps:
+
+max_eps
+~~~~~~~
+
+Sets the maximum throughput for synchronization messages.
 
 +--------------------+--------------------------------------------------------------+
 | **Default value**  | 10                                                           |
@@ -225,9 +300,14 @@ Example of configuration
 	  <packages>yes</packages>
 	  <ports all="no">yes</ports>
 	  <processes>yes</processes>
+	  <max_eps>50</max_eps>
+	  <notify_first_scan>no</notify_first_scan>
 
 	  <!-- Database synchronization settings -->
 	  <synchronization>
+	    <enabled>yes</enabled>
+	    <interval>5m</interval>
+	    <response_timeout>30</response_timeout>
 	    <max_eps>10</max_eps>
 	  </synchronization>
 	</wodle>
