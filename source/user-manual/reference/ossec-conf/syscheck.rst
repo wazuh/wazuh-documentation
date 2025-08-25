@@ -29,6 +29,7 @@ Configuration options for file integrity monitoring:
 - `ignore`_
 - `max_eps`_
 - `max_files_per_second`_
+- `notify_first_scan`_
 - `prefilter_cmd`_
 - `process_priority`_
 - `registry_ignore`_
@@ -403,6 +404,25 @@ Example:
 
  <max_files_per_second>100</max_files_per_second>
 
+
+.. _reference_ossec_syscheck_notify_first_scan:
+
+notify_first_scan
+------------------
+
+Specifies whether the first scan reports stateless events.
+
++--------------------+----------+
+| **Default value**  | no       |
++--------------------+----------+
+| **Allowed values** | yes, no  |
++--------------------+----------+
+
+Example:
+
+.. code-block:: xml
+
+   <notify_first_scan>no</notify_first_scan>
 
 .. _reference_ossec_syscheck_prefilter_cmd:
 
