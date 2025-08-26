@@ -354,7 +354,7 @@ Perform the following steps to enable who-data monitoring using the audit mode. 
 
    .. note::
 
-      If the ``<provider>`` tag is not configured, the FIM module defaults to using the ``audit`` mode.
+      If the ``<provider>`` tag is not configured, the FIM module defaults to using the ``ebpf`` mode.
 
 #. Restart the Wazuh agent to apply the changes. This action adds an audit rule for the monitored directory:
 
