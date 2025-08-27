@@ -184,9 +184,6 @@ The padded data is encrypted using AES::
 
 The initialization vector and the encryption key are described in `Encryption system`_.
 
-.. note::
-
-    The default encryption method is AES, although Blowfish is available as an alternative encryption method.
 
 Payload
 +++++++
@@ -194,39 +191,23 @@ Payload
 The payload is the final message that will be sent to the peer (secure manager or agent). It starts with ``:`` and, if and only if the agent entry allows more than one host (address ``any`` or netmask different from 32), the agent ID between two ``!`` symbols::
 
     <Payload> =
-        ":" <Encrypted>,                    if <Netmask> = 32
-        "!" <Agent ID> "!:" <Encrypted>,    otherwise
+        "#AES:" <Encrypted>,                    if <netmask> = 32
+        "!" <Agent ID> "!#AES:" <Encrypted>,    otherwise
 
 Complete encryption formula
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-For agents with restricted address:
+-  For agents with a restricted address (netmask 32):
 
-    a) Blowfish encryption
+   .. code-block:: console
 
-    .. code-block:: console
+      "#AES:" Aes(<!-padding> Gzip(MD5(<Random> <Global> ":" <Local> ":" <Event>) <Random> <Global> ":" <Local> ":" <Event>))
 
-        ":" Blowfish(<!-padding> Gzip(MD5(<Random> <Global> ":" <Local> ":" <Event>) <Random> <Global> ":" <Local> ":" <Event>))
+-  For agents with an unrestricted address (address ``any`` or netmask different from 32):
 
-    b) AES encryption
+   .. code-block:: console
 
-    .. code-block:: console
-
-        "#AES:" Aes(<!-padding> Gzip(MD5(<Random> <Global> ":" <Local> ":" <Event>) <Random> <Global> ":" <Local> ":" <Event>))
-
-For agents with unrestricted address (address ``any`` or netmask different from 32):
-
-    a) Blowfish encryption
-
-    .. code-block:: console
-
-        "!" <ID> "!:" Blowfish(<!-padding> Gzip(MD5(<Random> <Global> ":" <Local> ":" <Event>) <Random> <Global> ":" <Local> ":" <Event>))
-
-    b) AES encryption
-
-    .. code-block:: console
-
-        "!" <ID> "!#AES:" Aes(<!-padding> Gzip(MD5(<Random> <Global> ":" <Local> ":" <Event>) <Random> <Global> ":" <Local> ":" <Event>))
+      "!" <ID> "!#AES:" Aes(<!-padding> Gzip(MD5(<Random> <Global> ":" <Local> ":" <Event>) <Random> <Global> ":" <Local> ":" <Event>))
 
 This is the **encryption flow chart**:
 
@@ -238,15 +219,7 @@ This is the **encryption flow chart**:
 Network protocol
 ~~~~~~~~~~~~~~~~
 
-The procedure to send a payload via network depends on the connection protocol:
-
-**UDP protocol**
-
-    The datagram is the payload itself::
-
-        Send(<Payload>)
-
-**TCP protocol**
+The procedure to send a payload via network uses the TCP protocol.
 
     Messages are not delimited by the network, so the payload size must be prefixed to the payload::
 
@@ -265,17 +238,15 @@ The procedure to send a payload via network depends on the connection protocol:
 Encryption system
 ~~~~~~~~~~~~~~~~~
 
-The encryption system uses a constant initialization vector and a key:
+The encryption system uses a constant initialization vector and a key. The method is always AES.
 
 **Initialization vector**
 
-    8-byte hexadecimal array for Blowfish method::
+8-byte hexadecimal array:
 
-        <IV> = FE DC BA 98 76 54 32 10
+.. code-block:: none
 
-    8-byte hexadecimal array for AES method::
-
-        <IV> = FE DC BA 09 87 65 43 21
+   <IV> = FE DC BA 09 87 65 43 21
 
 **Encryption key**
 
