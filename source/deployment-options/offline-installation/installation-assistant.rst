@@ -58,7 +58,7 @@ Multi-node offline installation
 Installing the Wazuh indexer
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Install and configure the Wazuh indexer nodes.
+Install and configure the Wazuh indexer nodes on a 64-bit (x86_64/AMD64 or AARCH64/ARM64) architecture.
 
 The following dependencies must be installed on the Wazuh indexer nodes.
 
