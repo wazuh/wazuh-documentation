@@ -7,6 +7,10 @@ All notable changes to this project will be documented in this file.
 
 - Updated the API host default value. ([#7933](https://github.com/wazuh/wazuh-documentation/pull/7933))
 
+### Changed
+
+- **Post-release**: Updated the offline installation guide. ([#8803](https://github.com/wazuh/wazuh-documentation/pull/8803))
+
 ## [v4.9.1]
 
 ### Added
