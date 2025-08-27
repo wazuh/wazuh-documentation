@@ -50,6 +50,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated 4.12.0 command output examples. ([#8779](https://github.com/wazuh/wazuh-documentation/pull/8779)) ([#8780](https://github.com/wazuh/wazuh-documentation/pull/8780))
 - **Post-release**: Updated the *Deployment on Docker* documentation. ([#8793](https://github.com/wazuh/wazuh-documentation/pull/8793))
 - **Post-release**: Updated the Windows logo in the documentation. ([#8804](https://github.com/wazuh/wazuh-documentation/pull/8804))
+- **Post-release**: Updated the offline installation guide. ([#8803](https://github.com/wazuh/wazuh-documentation/pull/8803))
 
 ### Fixed
 
