@@ -1,43 +1,89 @@
-Install Wazuh components using the assistant
---------------------------------------------
+Install Wazuh components using the assisted method
+--------------------------------------------------
 
-Install and configure the different Wazuh components with the aid of the Wazuh installation assistant.
+Single-node offline installation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Install and configure the single-node server on a 64-bit (x86_64/AMD64 or AARCH64/ARM64) architecture with the aid of the Wazuh assisted installation method.
 
 .. note:: You need root user privileges to run all the commands described below.
 
 Please, make sure that a copy of the ``wazuh-install-files.tar`` and ``wazuh-offline.tar.gz`` files, created during the initial configuration step, is placed in your working directory.
 
-Installing the Wazuh indexer
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Install and configure the Wazuh indexer nodes.
+The following dependencies must be installed on the Wazuh single node.
 
 .. tabs::
 
    .. group-tab:: RPM
 
-      The following dependencies must be installed on the Wazuh indexer nodes.
+      -  coreutils
+      -  libcap
+
+   .. group-tab:: DEB
+
+      -  debconf
+      -  adduser
+      -  procps
+      -  apt-transport-https
+      -  gnupg
+      -  debhelper (version 9 or later)
+      -  libcap2-bin
+
+#. To perform the offline installation with the ``--offline-installation`` of Wazuh server on a single-node using the assisted method, run:
+
+   .. code-block:: console
+
+      # bash wazuh-install.sh --offline-installation -a
+
+   Once the installation is finished, the output shows the access credentials and a message that confirms that the installation was successful.
+   
+   .. code-block:: none
+      :emphasize-lines: 3,4
+   
+      INFO: --- Summary ---
+      INFO: You can access the web interface https://<WAZUH_DASHBOARD_IP_ADDRESS>
+          User: admin
+          Password: <ADMIN_PASSWORD>
+      INFO: Installation finished.
+
+#. Access the Wazuh web interface with your admin user credentials. This is the default administrator account for the Wazuh indexer and it allows you to access the Wazuh dashboard.
+
+   -  **URL**: ``https://<WAZUH_NODE_IP_ADDRESS>``
+   -  **Username**: ``admin``
+   -  **Password**: ``<ADMIN_PASSWORD>``
+
+Multi-node offline installation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Installing the Wazuh indexer
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Install and configure the Wazuh indexer nodes on a 64-bit (x86_64/AMD64 or AARCH64/ARM64) architecture.
+
+The following dependencies must be installed on the Wazuh indexer nodes.
+
+.. tabs::
+
+   .. group-tab:: RPM
 
       -  coreutils
 
    .. group-tab:: DEB
-
-      The following dependencies must be installed on the Wazuh indexer nodes.
 
       -  debconf
       -  adduser
       -  procps
       -  apt-transport-https
 
-#. Run the assistant with the ``--offline-installation`` to perform an offline installation. Use the option ``--wazuh-indexer`` and the node name to install and configure the Wazuh indexer. The node name must be the same one used in ``config.yml`` for the initial configuration, for example, ``node-1``.
+#. Run the multi-node assisted method with the ``--offline-installation`` to perform an offline installation. Use the option ``--wazuh-indexer`` and the node name to install and configure the Wazuh indexer. The node name must be the same one used in ``config.yml`` for the initial configuration, for example, ``node-1``.
 
    .. code-block:: console
 
       # bash wazuh-install.sh --offline-installation --wazuh-indexer node-1
 
-   Repeat this step for every Wazuh indexer node in your cluster. Then proceed with initializing your single-node or multi-node cluster in the next step.
+   Repeat this step for every Wazuh indexer node in your cluster. Then proceed with initializing your multi-node cluster in the next step.
 
-#. Run the Wazuh installation assistant with option ``--start-cluster`` on any Wazuh indexer node to load the new certificates information and start the cluster.
+#. Run the Wazuh assisted installation option ``--start-cluster`` on any Wazuh indexer node to load the new certificates information and start the cluster.
 
    .. code-block:: console
 
@@ -46,7 +92,7 @@ Install and configure the Wazuh indexer nodes.
    .. note:: You only have to initialize the cluster `once`, there is no need to run this command on every node.
 
 Testing the cluster installation
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #. Run the following command to get the *admin* password:
 
@@ -80,14 +126,14 @@ Testing the cluster installation
         "tagline" : "The OpenSearch Project: https://opensearch.org/"
       }
 
-#. Replace ``<WAZUH_INDEXER_IP_ADDRESS>`` and ``<ADMIN_PASSWORD>``, and run the following command to check if the cluster is working correctly:
+#. Verify that the cluster is running correctly. Replace ``<WAZUH_INDEXER_IP_ADDRESS>`` and ``<ADMIN_PASSWORD>`` in the following command, then execute it:
 
    .. code-block:: console
 
       # curl -k -u admin:<ADMIN_PASSWORD> https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cat/nodes?v
 
 Installing the Wazuh server
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. tabs::
 
@@ -101,47 +147,42 @@ Installing the Wazuh server
 
       On systems with *apt* as package manager, the following dependencies must be installed on the Wazuh server nodes.
 
-      -  gnupg
       -  apt-transport-https
+      -  gnupg
 
-#. Run the assistant with the ``--offline-installation`` to perform an offline installation. Use the option ``--wazuh-server`` followed by the node name to install the Wazuh server. The node name must be the same one used in ``config.yml`` for the initial configuration, for example, ``wazuh-1``.
+#. Run the assisted method with ``--offline-installation`` to perform an offline installation. Use the option ``--wazuh-server`` followed by the node name to install the Wazuh server. The node name must be the same one used in ``config.yml`` for the initial configuration, for example, ``wazuh-1``.
 
    .. code-block:: console
 
       # bash wazuh-install.sh --offline-installation --wazuh-server wazuh-1
 
-Your Wazuh server is now successfully installed.
-
--  If you want a Wazuh server multi-node cluster, repeat this step on every Wazuh server node.
--  If you want a Wazuh server single-node cluster, everything is set and you can proceed directly with the next stage.
+Your Wazuh server is now successfully installed. Repeat this step on every Wazuh server node.
 
 Installing the Wazuh dashboard
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following dependencies must be installed on the Wazuh dashboard node.
 
 .. tabs::
 
    .. group-tab:: RPM
 
-      The following dependencies must be installed on the Wazuh dashboard node.
-
       -  libcap
 
    .. group-tab:: DEB
 
-      The following dependencies must be installed on the Wazuh dashboard node.
-
-      -  debhelper version 9 or later
+      -  debhelper (version 9 or later)
       -  tar
       -  curl
       -  libcap2-bin
 
-#. Run the assistant with the ``--offline-installation`` to perform an offline installation. Use the option ``--wazuh-dashboard`` and the node name to install and configure the Wazuh dashboard. The node name must be the same one used in ``config.yml`` for the initial configuration, for example, ``dashboard``.
+#. Run the assisted method with ``--offline-installation`` to perform an offline installation. Use the option ``--wazuh-dashboard`` and the node name to install and configure the Wazuh dashboard. The node name must be the same one used in ``config.yml`` for the initial configuration, for example, ``dashboard``.
 
    .. code-block:: console
 
       # bash wazuh-install.sh --offline-installation --wazuh-dashboard dashboard
 
-   The default Wazuh web user interface port is 443, used by the Wazuh dashboard. You can change this port using the optional parameter ``-p|--port <PORT_NUMBER>``. Some recommended ports are 8443, 8444, 8080, 8888, and 9000.
+   The default TCP port for the Wazuh web user interface (dashboard) is 443. You can change this port using the optional parameter ``-p|--port <PORT_NUMBER>``. Some recommended ports are 8443, 8444, 8080, 8888, and 9000.
 
    Once the assistant finishes the installation, the output shows the access credentials and a message that confirms that the installation was successful.
 
@@ -161,7 +202,7 @@ Installing the Wazuh dashboard
 
       # tar -O -xvf wazuh-install-files.tar wazuh-install-files/wazuh-passwords.txt
 
-#. Access the Wazuh web interface with your credentials.
+#. Access the Wazuh web interface with your ``admin`` user credentials. This is the default administrator account for the Wazuh indexer and it allows you to access the Wazuh dashboard.
 
    -  **URL**: ``https://<WAZUH_DASHBOARD_IP_ADDRESS>``
    -  **Username**: ``admin``
