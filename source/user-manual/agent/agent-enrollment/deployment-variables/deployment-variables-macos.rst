@@ -18,8 +18,6 @@ Below is a table describing the variables used by Wazuh agent packages on macOS 
 +----------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |   WAZUH_MANAGER_PORT             |  Specifies the Wazuh manager connection port. See :ref:`port <server_port>`.                                                                                                                         |
 +----------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   WAZUH_PROTOCOL                 |  Sets the communication protocol between the Wazuh manager and the Wazuh agent. Accepts UDP and TCP. The default is TCP. See :ref:`protocol <server_protocol>`.                                      |
-+----------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |   WAZUH_REGISTRATION_SERVER      |  Specifies the Wazuh enrollment server, used for the Wazuh agent enrollment. See :ref:`manager_address <enrollment_manager_address>`. If empty, the value set in ``WAZUH_MANAGER`` will be used.     |
 +----------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |   WAZUH_REGISTRATION_PORT        |  Specifies the port used by the Wazuh enrollment server. See :ref:`port <enrollment_manager_port>`.                                                                                                  |
@@ -98,24 +96,6 @@ Examples:
 
             # echo "WAZUH_MANAGER='10.0.0.2' && WAZUH_REGISTRATION_SERVER='10.0.0.2' && WAZUH_AGENT_NAME='macos-agent' && \
             WAZUH_REGISTRATION_CA='rootCA.pem'" > /tmp/wazuh_envs && installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.arm64.pkg -target /
-
--  Enrollment with protocol:
-
-   .. tabs::
-
-      .. group-tab:: Intel
-
-         .. code-block:: console
-
-            # echo "WAZUH_MANAGER='10.0.0.2' && WAZUH_REGISTRATION_SERVER='10.0.0.2' && WAZUH_AGENT_NAME='macos-agent' && \
-            WAZUH_PROTOCOL='udp'" > /tmp/wazuh_envs && installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.intel64.pkg -target /
-
-      .. group-tab:: Apple silicon
-
-         .. code-block:: console
-
-            # echo "WAZUH_MANAGER='10.0.0.2' && WAZUH_REGISTRATION_SERVER='10.0.0.2' && WAZUH_AGENT_NAME='macos-agent' && \
-            WAZUH_PROTOCOL='udp'" > /tmp/wazuh_envs && installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.arm64.pkg -target /
 
 -  Enrollment and adding multiple addresses:
 

@@ -78,10 +78,10 @@ To achieve this configuration, follow these steps:
 
       .. code-block::
 
-         WAZUH_MANAGER_IP=<NGINX_IP_ADDRESS> WAZUH_PROTOCOL="tcp" \
+         WAZUH_MANAGER_IP=<NGINX_IP_ADDRESS> \
          WAZUH_PASSWORD="<PASSWORD>" \
          yum install wazuh-agent|WAZUH_AGENT_RPM_PKG_INSTALL|
-         
+
       Replace <PASSWORD> with your Wazuh server enrollment password.
 
 Using AWS Private Link
@@ -90,13 +90,13 @@ Using AWS Private Link
 In case your agents are located in AWS, you can access our Wazuh Cloud service securely by keeping your network traffic within the AWS network. For that purpose, we use AWS Private Link.
 
 1. Log in to the `Wazuh Cloud Console <https://console.cloud.wazuh.com/>`_.
-   
+
 2. Go to the **Help** section to contact the Wazuh team requesting your VPC endpoint service name. It has this format:
 
    ``com.amazonaws.vpce.<REGION>.vpce-svc-<AWS_SERVICE_ID>``
 
 3. Select your endpoints in AWS:
-   
+
    #. Navigate to your AWS Console.
 
    #. Select **VPC**.
@@ -115,7 +115,7 @@ In case your agents are located in AWS, you can access our Wazuh Cloud service s
 
    .. code-block::
 
-      WAZUH_MANAGER_IP=vpce-<AWS_ENDPOINT_ID>.vpce-svc-<AWS_SERVICE_ID>.<REGION>.vpce.amazonaws.com WAZUH_PROTOCOL="tcp" \
+      WAZUH_MANAGER_IP=vpce-<AWS_ENDPOINT_ID>.vpce-svc-<AWS_SERVICE_ID>.<REGION>.vpce.amazonaws.com \
       WAZUH_PASSWORD="<PASSWORD>>" \
       yum install wazuh-agent|WAZUH_AGENT_RPM_PKG_INSTALL|
 

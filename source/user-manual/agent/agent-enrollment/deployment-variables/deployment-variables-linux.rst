@@ -16,8 +16,6 @@ Below is a table describing the variables used by Wazuh agent packages on Linux 
 +----------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |   WAZUH_MANAGER_PORT             |  Specifies the Wazuh manager connection port. See :ref:`port <server_port>`.                                                                                                                            |
 +----------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   WAZUH_PROTOCOL                 |  Sets the communication protocol between the Wazuh manager and the Wazuh agent. Accepts UDP and TCP. The default is TCP. See :ref:`protocol <server_protocol>`.                                         |
-+----------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |   WAZUH_REGISTRATION_SERVER      |  Specifies the Wazuh enrollment server, used for the Wazuh agent enrollment. See :ref:`manager_address <enrollment_manager_address>`. If empty, the value set in ``WAZUH_MANAGER`` will be used.        |
 +----------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |   WAZUH_REGISTRATION_PORT        |  Specifies the port used by the Wazuh enrollment server. See :ref:`port <enrollment_manager_port>`.                                                                                                     |
@@ -138,38 +136,6 @@ Examples:
 
             # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_AGENT_NAME="zypper-agent" \
                  WAZUH_REGISTRATION_CA="rootCA.pem" zypper install wazuh-agent
-
--  Enrollment with protocol:
-
-   .. tabs::
-
-      .. group-tab:: APT
-
-         .. code-block:: console
-
-            # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_AGENT_NAME="apt-agent" \
-                 WAZUH_PROTOCOL="udp" apt-get install wazuh-agent
-
-      .. group-tab:: Yum
-
-         .. code-block:: console
-
-            # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_AGENT_NAME="yum-agent" \
-                 WAZUH_PROTOCOL="udp" yum install wazuh-agent
-
-      .. group-tab:: DNF
-
-         .. code-block:: console
-
-            # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_AGENT_NAME="dnf-agent" \
-                 WAZUH_PROTOCOL="udp" dnf install wazuh-agent
-
-      .. group-tab:: ZYpp
-
-         .. code-block:: console
-
-            # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_AGENT_NAME="zypper-agent" \
-                 WAZUH_PROTOCOL="udp" zypper install wazuh-agent
 
 -  Enrollment and adding multiple addresses:
 

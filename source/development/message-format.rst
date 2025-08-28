@@ -184,7 +184,6 @@ The padded data is encrypted using AES::
 
 The initialization vector and the encryption key are described in `Encryption system`_.
 
-
 Payload
 +++++++
 

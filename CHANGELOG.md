@@ -20,6 +20,7 @@ All notable changes to this project will be documented in this file.
 - Removed several Rootcheck configuration options and added a corresponding note to the central components upgrade guide. ([#8759](https://github.com/wazuh/wazuh-documentation/pull/8759))
 - Removed references to the server version of the `manage_agents` tool. ([#8792](https://github.com/wazuh/wazuh-documentation/pull/8792))
 - Removed `cron.prefix`, `cron.statistics.*`, and `wazuh.monitoring.*` configuration settings from the Wazuh dashboard. ([#8790](https://github.com/wazuh/wazuh-documentation/pull/8790))
+- Removed references to deprecated client communication and FIM configuration options. ([#8809](https://github.com/wazuh/wazuh-documentation/pull/8809))
 
 ## [v4.14.1]
 
