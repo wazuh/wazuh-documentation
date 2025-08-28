@@ -28,7 +28,7 @@ The :doc:`Wazuh agent <components/wazuh-agent>` continuously sends events to the
 -  The file ``/var/ossec/logs/archives/archives.json`` contains all events whether they tripped a rule or not.
 -  The file ``/var/ossec/logs/alerts/alerts.json`` contains only events that tripped a rule with high enough priority (the threshold is configurable).
 
-The Wazuh messages protocol uses AES encryption by default, with 128 bits per block and 256-bit keys. Blowfish encryption is optional.
+The Wazuh messages protocol uses AES encryption with 128 bits per block and 256-bit keys.
 
 .. note::
    
@@ -44,7 +44,7 @@ The Vulnerability Detection module updates the vulnerability inventory. It also 
 The Wazuh dashboard queries the Wazuh RESTful API (by default listening on port 55000/TCP on the Wazuh server) to display configuration and status-related information of the :doc:`Wazuh server <components/wazuh-server>` and :doc:`agents <components/wazuh-agent>`. It can also modify agents or server configuration settings through API calls. This communication is encrypted with TLS and authenticated with a username and password.
 
 .. _default_ports:
-  
+
 Required ports
 --------------
 
@@ -53,9 +53,7 @@ Several services are used for the communication of Wazuh components. Below is th
 +-----------------+-----------+----------------+------------------------------------------------+
 |  Component      | Port      | Protocol       | Purpose                                        |
 +=================+===========+================+================================================+
-|                 | 1514      | TCP (default)  | Agent connection service                       |
-+                 +-----------+----------------+------------------------------------------------+
-|                 | 1514      | UDP (optional) | Agent connection service (disabled by default) |
+|                 | 1514      | TCP            | Agent connection service                       |
 +                 +-----------+----------------+------------------------------------------------+
 | Wazuh server    | 1515      | TCP            | Agent enrollment service                       |
 +                 +-----------+----------------+------------------------------------------------+

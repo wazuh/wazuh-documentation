@@ -19,7 +19,6 @@ syscheck
 Configuration options for file integrity monitoring:
 
 - `alert_new_files`_
-- `allow_remote_prefilter_cmd`_
 - `file_limit`_
 - `registry_limit`_
 - `diff`_
@@ -30,7 +29,6 @@ Configuration options for file integrity monitoring:
 - `max_eps`_
 - `max_files_per_second`_
 - `notify_first_scan`_
-- `prefilter_cmd`_
 - `process_priority`_
 - `registry_ignore`_
 - `scan_day`_
@@ -66,30 +64,6 @@ Example:
 .. note::
 
 	This setting is applied in the manager configuration, but it only takes effect on agents with versions lower than 3.12.
-
-.. _reference_ossec_syscheck_allow_remote_prefilter_cmd:
-
-allow_remote_prefilter_cmd
---------------------------
-
-Allows ``prefilter_cmd`` option apply in remote configuration (*agent.conf*).
-
-+--------------------+--------------------------------+
-| **Default value**  | no                             |
-+--------------------+--------------------------------+
-| **Allowed values** | yes, no                        |
-+--------------------+--------------------------------+
-
-Example:
-
-.. code-block:: xml
-
-  <allow_remote_prefilter_cmd>yes</allow_remote_prefilter_cmd>
-
-
-.. note::
-
-   This option only can be activated from the agent side, on its own ``ossec.conf``.
 
 .. _reference_ossec_syscheck_directories:
 
@@ -423,35 +397,6 @@ Example:
 .. code-block:: xml
 
    <notify_first_scan>no</notify_first_scan>
-
-.. _reference_ossec_syscheck_prefilter_cmd:
-
-prefilter_cmd
--------------
-
-Run to prevent prelinking from creating false positives.
-
-+--------------------+--------------------------------+
-| **Default value**  | n/a                            |
-+--------------------+--------------------------------+
-| **Allowed values** | Command to prevent prelinking. |
-+--------------------+--------------------------------+
-
-Example:
-
-.. code-block:: xml
-
- <prefilter_cmd>/usr/sbin/prelink -y</prefilter_cmd>
-
-
-.. note::
-
-  This option may negatively impact performance as the configured command will be run for each file checked.
-
-.. note::
-
-  This option is ignored when defined at *agent.conf* if ``allow_remote_prefilter_cmd`` is set to ``no`` at *ossec.conf*.
-
 
 .. _reference_ossec_syscheck_process_priority:
 
@@ -1176,8 +1121,6 @@ However, the second line does enable hash checking for ``TEST_KEY``. This is a s
 Default syscheck configuration:
 -------------------------------
 
-
-
 .. tabs::
 
  .. group-tab:: Wazuh manager
@@ -1189,7 +1132,6 @@ Default syscheck configuration:
     <disabled>no</disabled>
     <!-- Frequency that syscheck is executed default every 12 hours -->
     <frequency>43200</frequency>
-    <scan_on_start>yes</scan_on_start>
     <!-- Generate alert when new file detected -->
     <alert_new_files>yes</alert_new_files>
     <!-- Don't ignore files that change more than 'frequency' times -->
@@ -1239,7 +1181,6 @@ Default syscheck configuration:
     <disabled>no</disabled>
     <!-- Frequency that syscheck is executed default every 12 hours -->
     <frequency>43200</frequency>
-    <scan_on_start>yes</scan_on_start>
     <!-- Directories to check  (perform all possible verifications) -->
     <directories>/etc,/usr/bin,/usr/sbin</directories>
     <directories>/bin,/sbin,/boot</directories>
@@ -1364,7 +1305,6 @@ Default syscheck configuration:
     <disabled>no</disabled>
     <!-- Frequency that syscheck is executed default every 12 hours -->
     <frequency>43200</frequency>
-    <scan_on_start>yes</scan_on_start>
     <!-- Directories to check  (perform all possible verifications) -->
     <directories>/etc,/usr/bin,/usr/sbin</directories>
     <directories>/bin,/sbin</directories>
