@@ -3,9 +3,7 @@ All notable changes to this project will be documented in this file.
 
 ## [v4.10.3]
 
-### Changed
-
-- **Post-release**: Updated the offline installation guide. ([#8807](https://github.com/wazuh/wazuh-documentation/pull/8807))
+- Support for Wazuh 4.10.3
 
 ## [v4.10.2]
 
