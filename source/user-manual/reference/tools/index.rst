@@ -46,9 +46,9 @@ Tools
    :hidden:
    :maxdepth: 1
 
+   wazuh-control
    agent-control
    manage-agents
-   wazuh-control
    wazuh-logtest
    clear-stats
    wazuh-regex
