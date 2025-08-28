@@ -13,8 +13,6 @@ Tools
 +===================================================+============================================================================+=============================+
 | :doc:`wazuh-control <wazuh-control>`              | Manages the status of Wazuh processes                                      | manager, agent              |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :doc:`agent-auth <agent-auth>`                    | Adds agents to a Wazuh manager                                             | agent                       |
-+---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`agent_control <agent-control>`              | Allows queries of the manager to get information about any agent           | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`manage_agents <manage-agents>`              | Provides an interface to handle authentication keys for  agents            | agent                       |
@@ -49,7 +47,6 @@ Tools
    :maxdepth: 1
 
    wazuh-control
-   agent-auth
    agent-control
    manage-agents
    wazuh-logtest

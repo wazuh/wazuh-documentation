@@ -16,6 +16,7 @@ All notable changes to this project will be documented in this file.
 
 ### Removed
 
+- Removed all `agent-auth` references as this tool is now deprecated. ([#8718](https://github.com/wazuh/wazuh/pull/8718))
 - Removed `compatibility.override_main_response_version` setting from Wazuh Indexer configuration as it is no longer supported in OpenSearch 3.0. ([#8609](https://github.com/wazuh/wazuh-documentation/pull/8609)) 
 - Removed several Rootcheck configuration options and added a corresponding note to the central components upgrade guide. ([#8759](https://github.com/wazuh/wazuh-documentation/pull/8759))
 - Removed references to the server version of the `manage_agents` tool. ([#8792](https://github.com/wazuh/wazuh-documentation/pull/8792))
