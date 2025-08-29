@@ -13,7 +13,7 @@ Requirements
 
 Ensure that these dependencies are installed on the system:
 
--  :doc:`Docker </deployment-options/docker/docker-installation>`
+-  `Docker <https://www.docker.com/>`__
 -  `Git <https://git-scm.com/book/en/v2/Getting-Started-Installing-Git>`__
 
 Creating the Wazuh server package
