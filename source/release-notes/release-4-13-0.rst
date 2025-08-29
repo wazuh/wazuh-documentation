@@ -38,6 +38,8 @@ Wazuh manager
 - `#30504 <https://github.com/wazuh/wazuh/pull/30504>`__ Added sanity checks for hotfix values in Vulnerability Detector.
 - `#27894 <https://github.com/wazuh/wazuh/issues/27894>`__ Added support for global queries of FIM and system inventory data.
 - `#30851 <https://github.com/wazuh/wazuh/pull/30851>`__ Improved exception handling in the ``run_local`` SDK function.
+- `#29135 <https://github.com/wazuh/wazuh/pull/29135>`__ Improved Authd connection management using epoll to handle concurrent agent registration requests more efficiently.
+- `#31114 <https://github.com/wazuh/wazuh/pull/31114>`__ Added a single writer buffer manager instance for each indexer connector instance.
 
 Wazuh agent
 ^^^^^^^^^^^
@@ -52,11 +54,16 @@ Wazuh agent
 - `#29930 <https://github.com/wazuh/wazuh/pull/29930>`__ Enhanced Azure module logging.
 - `#29940 <https://github.com/wazuh/wazuh/pull/29940>`__ Improved restart behavior on macOS agents after upgrade.
 - `#29443 <https://github.com/wazuh/wazuh/pull/29443>`__ Standardized service timeouts across components.
+- `#30377 <https://github.com/wazuh/wazuh/pull/30377>`__ Added MS Graph token validation before performing requests.
+- `#30763 <https://github.com/wazuh/wazuh/pull/30763>`__ Added support for UTF-8 characters in file paths in FIM.
+- `#30637 <https://github.com/wazuh/wazuh/pull/30637>`__ Removed ``internal_key`` from query filters.
 
 RESTful API
 ^^^^^^^^^^^
 
-- `#29524 <https://github.com/wazuh/wazuh/pull/29524>`__ Added server UUID to the `/manager/info` endpoint.
+- `#29524 <https://github.com/wazuh/wazuh/pull/29524>`__ Added server UUID to the ``/manager/info`` endpoint.
+- `#29589 <https://github.com/wazuh/wazuh/pull/29589>`__ Added ``/agents/summary`` endpoint.
+- `#31459 <https://github.com/wazuh/wazuh/pull/31459>`__ Added ruleset reload endpoints.
 
 Ruleset
 ^^^^^^^
@@ -69,9 +76,9 @@ Ruleset
 Other
 ^^^^^
 
-- `#29610 <https://github.com/wazuh/wazuh/pull/29610>`__ Updated Python dependencies: `setuptools`, `Jinja2`, and `PyJWT`.
+- `#29610 <https://github.com/wazuh/wazuh/pull/29610>`__ Updated Python dependencies: ``setuptools``, ``Jinja2``, and ``PyJWT``.
 - `#28646 <https://github.com/wazuh/wazuh/pull/28646>`__ Upgraded embedded Python interpreter to 3.10.16.
-- `#29735 <https://github.com/wazuh/wazuh/pull/29735>`__ Upgraded `h11` to 0.16.0 and `httpcore` to 1.0.9.
+- `#29735 <https://github.com/wazuh/wazuh/pull/29735>`__ Upgraded ``h11`` to 0.16.0 and ``httpcore`` to 1.0.9.
 - `#28564 <https://github.com/wazuh/wazuh/pull/28564>`__ Removed unused Azure Python dependencies.
 
 Wazuh dashboard
@@ -91,6 +98,9 @@ Wazuh dashboard
 - `#7368 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7368>`__ Removed ``GET /api/syscollector`` API endpoint.
 - `#7368 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7368>`__ Removed inventory data report and ``POST /reports/agents/{agentID}/inventory`` API endpoint.
 - `#7483 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7483>`__ Removed the ``enrollment.password`` field from the ``/utils/configuration`` endpoint response to prevent unauthorized agent registration by users with read-only API roles.
+- `#7620 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7620>`__ Removed the cluster restart warning from **Rules**, **Decoders**, and **CDB lists**.
+- `#7657 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7657>`__ Changed the manager reset button to reload in **Rules**, **Decoders**, and **CDB list**. `#7677 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7677>`__
+- `#7484 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7484>`__ Reduced the number of API calls to retrieve agent summary information.
 
 Resolved issues
 ---------------
@@ -105,6 +115,9 @@ Wazuh manager
 - `#30534 <https://github.com/wazuh/wazuh/pull/30534>`__ Fixed agent-group assignment for missing agents with improved error handling.
 - `#30818 <https://github.com/wazuh/wazuh/pull/30818>`__ Fixed missing OS info updates in global inventory after first scan.
 - `#31048 <https://github.com/wazuh/wazuh/pull/31048>`__ Fixed wazuh-db failure during agent restarts by switching the restart query to HTTP.
+- `#30627 <https://github.com/wazuh/wazuh/pull/30627>`__ Fixed DFM graceful shutdown.
+- `#30718 <https://github.com/wazuh/wazuh/pull/30718>`__ Fixed ``inode`` field as string in FIM JSON messages to ensure schema consistency.
+- `#30837 <https://github.com/wazuh/wazuh/pull/30837>`__ Fixed duplicate OS vulnerabilities detected after an OS version change.
 
 Wazuh agent
 ^^^^^^^^^^^
@@ -114,9 +127,12 @@ Wazuh agent
 - `#28962 <https://github.com/wazuh/wazuh/pull/28962>`__ Fixed false FIM reports and configuration upload issues.
 - `#29502 <https://github.com/wazuh/wazuh/pull/29502>`__ Fixed incorrect IPv6 format reported by WindowsHelper.
 - `#29561 <https://github.com/wazuh/wazuh/pull/29561>`__ Fixed hidden port detection and netstat fallback.
-- `#29905 <https://github.com/wazuh/wazuh/pull/29905>`__ Replaced `select()` with `sleep()` in Logcollector to avoid Docker-related errors.
+- `#29905 <https://github.com/wazuh/wazuh/pull/29905>`__ Replaced ``select()`` with ``sleep()`` in Logcollector to avoid Docker-related errors.
 - `#30060 <https://github.com/wazuh/wazuh/pull/30060>`__ Fixed NetNTLMv2 exposure by filtering UNC paths and mapped drives in Windows agent.
 - `#29820 <https://github.com/wazuh/wazuh/pull/29820>`__ Fixed Windows agent not starting after manual upgrade by deferring service start to post-install.
+- `#30552 <https://github.com/wazuh/wazuh/pull/30552>`__ Fixed precision loss in the FIM ``inode`` field for values greater than 2^53.
+- `#30614 <https://github.com/wazuh/wazuh/pull/30614>`__ Fixed expanded file list in the logcollector ``getconfig`` output.
+- `#31187 <https://github.com/wazuh/wazuh/pull/31187>`__ Fixed ``authd.pass`` ACL permissions to match ``client.keys`` security level in the Windows agent installer.
 
 RESTful API
 ^^^^^^^^^^^
@@ -131,15 +147,19 @@ Ruleset
 - `#29040 <https://github.com/wazuh/wazuh/pull/29040>`__ Fixed multiple SCA check errors in RHEL 9/10 and Rocky Linux 8/9.
 - `#28982 <https://github.com/wazuh/wazuh/pull/28982>`__ Fixed diff logic in rootcheck that caused false negatives.
 - `#28711 <https://github.com/wazuh/wazuh/pull/28711>`__ Fixed incorrect SCA results for RHEL 8 and CentOS 7.
+- `#30827 <https://github.com/wazuh/wazuh/pull/30827>`__ Fixed false positives in Ubuntu 24.04 benchmark.
 
 Wazuh dashboard
 ^^^^^^^^^^^^^^^
 
-- `#7368 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7368>`__ Fixed a problem in Vulnerabilities > Dashboard and Inventory when there are no indices matching with the index pattern.
+- `#7368 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7368>`__ Fixed a problem in **Vulnerabilities** > **Dashboard and Inventory** when there are no indices matching with the index pattern.
 - `#7425 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7425>`__ Fixed double backslash warning on xml editor.
 - `#7422 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7422>`__ Fixed the X-axis label in the ``Vulnerabilities by year of publication`` visualization.
 - `#7501 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7501>`__ Fixed a bug in Rule details flyout, where it didn't map all the compliances.
 - `#7540 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7540>`__ Fixed the Windows service name in Deploy new agent.
+- `#7552 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7552>`__ Fixed an issue where filter values could change on navigation or pin/unpin actions, causing unexpected search results.
+- `#7544 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7544>`__ Fixed an issue in the expanded table row where outdated information could appear when using the refresh button.
+- `#7550 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7550>`__ Fixed a bug causing format issues in CSV reports.
 
 Changelogs
 ----------
