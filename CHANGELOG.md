@@ -22,6 +22,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Added a table describing the possible environment statuses in the cloud service documentation. ([#8407](https://github.com/wazuh/wazuh-documentation/pull/8407))
 - **Post-release**: Added the Wazuh indexer API reference. ([#8756](https://github.com/wazuh/wazuh-documentation/pull/8756))
 - **Post-release**: Added examples of Wazuh tools to the user manual reference. ([#8763](https://github.com/wazuh/wazuh-documentation/pull/8763))
+- **Post-release**: Added the `ap-northeast-1` (Tokyo) region. ([#8818](https://github.com/wazuh/wazuh-documentation/pull/8818))
 
 ### Changed
 
