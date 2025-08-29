@@ -1,45 +1,45 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Learn more about upgrading the Wazuh deployment on Docker in this section of our documentation.
+   :description: Learn how to upgrade Wazuh Docker deployments in this section of our documentation.
 
 Upgrading Wazuh Docker
 ======================
 
 This section describes how to upgrade Wazuh Docker deployments starting from version 4.3.
 
-To upgrade to version |WAZUH_CURRENT|, you can follow one of two strategies.
+To upgrade to version |WAZUH_CURRENT_DOCKER|, choose one of the following strategies.
 
-- `Using default docker-compose files`_ : This strategy uses the default ``docker-compose.yml`` file for Wazuh |WAZUH_CURRENT|. It replaces the ``docker-compose.yml`` file of your outdated Wazuh version.
-- `Keeping custom docker-compose files`_ : This strategy preserves the ``docker-compose.yml`` file of your outdated Wazuh deployment. It ignores the ``docker-compose.yml`` file of the latest Wazuh version.
+-  `Using the default Docker Compose files`_: Replace the existing ``docker-compose.yml`` file with the default one provided for Wazuh |WAZUH_CURRENT_DOCKER|.
+-  `Keeping your custom Docker Compose files`_: Retain your existing ``docker-compose.yml`` file of your outdated Wazuh Docker deployment and apply the upgrade without replacing it.
 
-Using default docker-compose files
-----------------------------------
+Using the default Docker Compose files
+--------------------------------------
 
-To upgrade your deployment, using the default ``docker-compose.yml`` file, do the following:
+To upgrade your deployment, using the default ``docker-compose.yml`` file, follow these steps:
 
 #. Run the following command from your ``wazuh-docker/single-node/`` or ``wazuh-docker/multi-node/`` directory to stop the outdated environment:
 
-   .. code-block::
+   .. code-block:: console
 
       # docker-compose down
 
 #. Check out the tag for the current version of ``wazuh-docker``:
 
-      .. code-block::
+   .. code-block:: console
 
-         # git checkout v|WAZUH_CURRENT_DOCKER|
+      # git checkout v|WAZUH_CURRENT_DOCKER|
 
-#. Start the new version of Wazuh using ``docker-compose``:
+#. Start the upgraded Wazuh Docker environment using ``docker-compose``
 
-   .. code-block::
+   .. code-block:: console
 
       # docker-compose up -d
 
-Keeping custom docker-compose files
------------------------------------
+Keeping your custom Docker Compose files
+----------------------------------------
 
-To upgrade your deployment keeping your custom ``docker-compose.yml`` file, do the following.
+To upgrade your deployment while preserving your custom ``docker-compose.yml`` file, follow these steps:
 
 #. Run the following command from your ``wazuh-docker/single-node/`` or ``wazuh-docker/multi-node/`` directory to stop the outdated environment:
 
@@ -49,201 +49,179 @@ To upgrade your deployment keeping your custom ``docker-compose.yml`` file, do t
 
 #. Update the ``defaultRoute`` parameter in the Wazuh dashboard configuration, if upgrading from a version earlier than 4.8:
 
-   .. tabs::
+   -  **Single-node deployment**
 
-      .. group-tab:: Single node deployment
+      ``single-node/config/wazuh_dashboard/opensearch_dashboards.yml``
 
-         -  ``single-node/config/wazuh_dashboard/opensearch_dashboards.yml``
+      .. code-block:: yaml
 
-            .. code-block:: yaml
+         uiSettings.overrides.defaultRoute: /app/wz-home
 
-               uiSettings.overrides.defaultRoute: /app/wz-home
+   -  **Multi-node deployment**
 
-      .. group-tab:: Multi node deployment
+      ``multi-node/config/wazuh_dashboard/opensearch_dashboards.yml``
 
-         -  ``multi-node/config/wazuh_dashboard/opensearch_dashboards.yml``
+      .. code-block:: yaml
 
-            .. code-block:: yaml
-
-               uiSettings.overrides.defaultRoute: /app/wz-home
+         uiSettings.overrides.defaultRoute: /app/wz-home
 
 #. Modify the ``OPENSEARCH_JAVA_OPTS`` environment variable to allocate more RAM to the Wazuh indexer container.
 
-   .. tabs::
+   -  **Single-node deployment**
 
-      .. group-tab:: Single node deployment
+      ``single-node/docker-compose.yml``
 
-         -  ``single-node/docker-compose.yml``
+      .. code-block:: yaml
 
-            .. code-block:: yaml
+         environment:
+         - "OPENSEARCH_JAVA_OPTS=-Xms1g -Xmx1g"
 
-               environment:
-               - "OPENSEARCH_JAVA_OPTS=-Xms1g -Xmx1g"
+   -  **Multi-node deployment**
 
-      .. group-tab:: Multi node deployment
+      ``multi-node/docker-compose.yml``
 
-         -  ``multi-node/docker-compose.yml``
+      .. code-block:: yaml
 
-            .. code-block:: yaml
+         environment:
+         - "OPENSEARCH_JAVA_OPTS=-Xms1g -Xmx1g"
 
-               environment:
-               - "OPENSEARCH_JAVA_OPTS=-Xms1g -Xmx1g"
+#. Modify the tag of the image generator.
 
-#. Modify the the tag of image generator.
+   -  **Single-node deployment**
 
-   .. tabs::
+      ``single-node/generate-indexer-certs.yml``
 
-      .. group-tab:: Single node deployment
+      .. code-block:: yaml
 
-         -  ``single-node/generate-indexer-certs.yml``
+         services:
+            generator:
+               image: wazuh/wazuh-certs-generator:0.0.2
 
-            .. code-block:: yaml
-               :emphasize-lines: 3
+   -  **Multi-node deployment**
 
-               services:
-                  generator:
-                     image: wazuh/wazuh-certs-generator:0.0.2
+      ``multi-node/generate-indexer-certs.yml``
 
-      .. group-tab:: Multi node deployment
+      .. code-block:: yaml
 
-         -  ``multi-node/generate-indexer-certs.yml``
-
-            .. code-block:: yaml
-               :emphasize-lines: 3
-
-               services:
-                  generator:
-                     image: wazuh/wazuh-certs-generator:0.0.2
+         services:
+            generator:
+               image: wazuh/wazuh-certs-generator:0.0.2
 
 #. Recreate the certificates after these changes.
 
-   .. code-block:: bash
+   .. code-block:: console
 
       docker-compose -f generate-indexer-certs.yml run --rm generator
 
 #. Update old paths with the new ones, if upgrading from 4.3.
 
-   .. tabs::
+   -  **Single-node deployment**
 
-      .. group-tab:: Single node deployment
+      **Wazuh dashboard**
 
-         **Wazuh dashboard**
+      #. Edit the ``single-node/config/wazuh_dashboard/opensearch_dashboards.yml`` file and replace ``/usr/share/wazuh-dashboard/config/certs/`` with ``/usr/share/wazuh-dashboard/certs/``.
+      #. Edit the ``single-node/docker-compose.yml`` file and replace ``/usr/share/wazuh-dashboard/config/certs/ with /usr/share/wazuh-dashboard/certs/``.
 
-         #. Edit ``single-node/config/wazuh_dashboard/opensearch_dashboards.yml`` and do the following replacements.
+      **Wazuh indexer**
 
-            -  Replace ``/usr/share/wazuh-dashboard/config/certs/`` with ``/usr/share/wazuh-dashboard/certs/``.
+      #. Edit the ``single-node/config/wazuh_indexer/wazuh.indexer.yml`` file and do the following replacements.
 
-         #. Edit ``single-node/docker-compose.yml`` and do the following replacements.
+         -  Replace ``/usr/share/wazuh-indexer/config/certs/`` with ``/usr/share/wazuh-indexer/certs/``.
+         -  Replace ``${OPENSEARCH_PATH_CONF}/certs/`` with ``/usr/share/wazuh-indexer/certs/``.
+      #. Edit the ``single-node/docker-compose.yml`` file and do the following replacements.
 
-            -  Replace ``/usr/share/wazuh-dashboard/config/certs/`` with ``/usr/share/wazuh-dashboard/certs/``.
+         -  Replace ``/usr/share/wazuh-indexer/config/certs/`` with ``/usr/share/wazuh-indexer/certs/``.
+         -  Replace ``/usr/share/wazuh-indexer/config/opensearch.yml`` with ``/usr/share/wazuh-indexer/opensearch.yml``.
+         -  Replace ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/`` with ``/usr/share/wazuh-indexer/opensearch-security/``.
 
-         **Wazuh indexer**
+   -  **Multi-node deployment**
 
-         #. Edit ``single-node/config/wazuh_indexer/wazuh.indexer.yml`` and do the following replacements.
+      **Wazuh dashboard**
 
-            -  Replace ``/usr/share/wazuh-indexer/config/certs/`` with ``/usr/share/wazuh-indexer/certs/``.
-            -  Replace ``${OPENSEARCH_PATH_CONF}/certs/`` with ``/usr/share/wazuh-indexer/certs/``.
+      #. Edit the ``multi-node/config/wazuh_dashboard/opensearch_dashboards.yml`` file and replace ``/usr/share/wazuh-dashboard/config/certs/`` with ``/usr/share/wazuh-dashboard/certs/``.
+      #. Edit the ``multi-node/docker-compose.yml`` file and replace ``/usr/share/wazuh-dashboard/config/certs/`` with ``/usr/share/wazuh-dashboard/certs/``.
 
-         #. Edit ``single-node/docker-compose.yml`` and do the following replacements.
+      **Wazuh indexer**
 
-            -  Replace ``/usr/share/wazuh-indexer/config/certs/`` with ``/usr/share/wazuh-indexer/certs/``.
-            -  Replace ``/usr/share/wazuh-indexer/config/opensearch.yml`` with ``/usr/share/wazuh-indexer/opensearch.yml``.
-            -  Replace ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/`` with ``/usr/share/wazuh-indexer/opensearch-security/``
+      #. Edit the ``multi-node/config/wazuh_indexer/wazuh1.indexer.yml``, ``multi-node/config/wazuh_indexer/wazuh2.indexer.yml``, and ``multi-node/config/wazuh_indexer/wazuh3.indexer.yml`` files and do the following replacements.
 
-      .. group-tab:: Multi node deployment
+         -  Replace ``/usr/share/wazuh-indexer/config/certs/`` with ``/usr/share/wazuh-indexer/certs/``.
+         -  Replace ``${OPENSEARCH_PATH_CONF}/certs/`` with ``/usr/share/wazuh-indexer/certs/``.
 
-         **Wazuh dashboard**
+      #. Edit the ``multi-node/docker-compose.yml`` file and do the following replacements.
 
-         #. Edit ``multi-node/config/wazuh_dashboard/opensearch_dashboards.yml`` and do the following replacements.
-
-            -  Replace ``/usr/share/wazuh-dashboard/config/certs/`` with ``/usr/share/wazuh-dashboard/certs/``.
-
-         #. Edit ``multi-node/docker-compose.yml`` and do the following replacements.
-
-            -  Replace ``/usr/share/wazuh-dashboard/config/certs/`` with ``/usr/share/wazuh-dashboard/certs/``.
-
-         **Wazuh indexer**
-
-         #. Edit ``multi-node/config/wazuh_indexer/wazuh1.indexer.yml``, ``wazuh2.indexer.yml``, and ``wazuh3.indexer.yml`` and do the following replacements.
-
-            -  Replace ``/usr/share/wazuh-indexer/config/certs/`` with ``/usr/share/wazuh-indexer/certs/``.
-            -  Replace ``${OPENSEARCH_PATH_CONF}/certs/`` with ``/usr/share/wazuh-indexer/certs/``.
-
-         #. Edit ``multi-node/docker-compose.yml`` and do the following replacements.
-
-            -  Replace ``/usr/share/wazuh-indexer/config/certs/`` with ``/usr/share/wazuh-indexer/certs/``.
-            -  Replace ``/usr/share/wazuh-indexer/config/opensearch.yml`` with ``/usr/share/wazuh-indexer/opensearch.yml``.
-            -  Replace ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/`` with ``/usr/share/wazuh-indexer/opensearch-security/``.
+         -  Replace ``/usr/share/wazuh-indexer/config/certs/`` with ``/usr/share/wazuh-indexer/certs/``.
+         -  Replace ``/usr/share/wazuh-indexer/config/opensearch.yml`` with ``/usr/share/wazuh-indexer/opensearch.yml``.
+         -  Replace ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/`` with ``/usr/share/wazuh-indexer/opensearch-security/``.
 
 #. Edit the ``docker-compose.yml`` file corresponding to your deployment type. Modify the highlighted lines and add the variable related to the ``kibanaserver`` user with the corresponding value.
 
-   .. tabs::
+   -  **Single-node deployment**
 
-      .. group-tab:: Single node deployment
+      .. code-block:: yaml
+         :emphasize-lines: 2,5,8,13,14
 
-         .. code-block:: yaml
-            :emphasize-lines: 2, 5, 8, 13-14
+         wazuh.manager:
+            image: wazuh/wazuh-manager:4.13.0
+         ...
+         wazuh.indexer:
+            image: wazuh/wazuh-indexer:4.13.0
+         ...
+         wazuh.dashboard:
+            image: wazuh/wazuh-dashboard:4.13.0
+            environment:
+               - INDEXER_USERNAME=admin
+               - INDEXER_PASSWORD=SecretPassword
+               - WAZUH_API_URL=https://wazuh.manager
+               - DASHBOARD_USERNAME=kibanaserver
+               - DASHBOARD_PASSWORD=kibanaserver
 
-            wazuh.manager:
-               image: wazuh/wazuh-manager:|WAZUH_CURRENT_DOCKER|
-            ...
-            wazuh.indexer:
-               image: wazuh/wazuh-indexer:|WAZUH_CURRENT_DOCKER|
-            ...
-            wazuh.dashboard:
-               image: wazuh/wazuh-dashboard:|WAZUH_CURRENT_DOCKER|
-               environment:
-                  - INDEXER_USERNAME=admin
-                  - INDEXER_PASSWORD=SecretPassword
-                  - WAZUH_API_URL=https://wazuh.manager
-                  - DASHBOARD_USERNAME=kibanaserver
-                  - DASHBOARD_PASSWORD=kibanaserver
+   -  **Multi-node deployment**
 
-      .. group-tab:: Multi node deployment
+      .. code-block:: yaml
+         :emphasize-lines: 2,5,8,11,14,17,23,24
 
-         .. code-block:: yaml
-            :emphasize-lines:  2, 5, 8, 11, 14, 17, 23-24
+         wazuh.master:
+            image: wazuh/wazuh-manager:4.13.0
+         ...
+         wazuh.worker:
+            image: wazuh/wazuh-manager:4.13.0
+         ...
+         wazuh1.indexer:
+            image: wazuh/wazuh-manager:4.13.0
+         ...
+         wazuh2.indexer:
+            image: wazuh/wazuh-manager:4.13.0
+         ...
+         wazuh3.indexer:
+            image: wazuh/wazuh-manager:4.13.0
+         ...
+         wazuh.master:
+            image: wazuh/wazuh-manager:4.13.0
+            environment:
+               - OPENSEARCH_HOSTS="https://wazuh1.indexer:9200"
+               - WAZUH_API_URL="https://wazuh.master"
+               - API_USERNAME=wazuh-wui
+               - API_PASSWORD=MyS3cr37P450r.*-
+               - DASHBOARD_USERNAME=kibanaserver
+               - DASHBOARD_PASSWORD=kibanaserver
 
-            wazuh.master:
-               image: wazuh/wazuh-manager:|WAZUH_CURRENT_DOCKER|
-            ...
-            wazuh.worker:
-               image: wazuh/wazuh-manager:|WAZUH_CURRENT_DOCKER|
-            ...
-            wazuh1.indexer:
-               image: wazuh/wazuh-manager:|WAZUH_CURRENT_DOCKER|
-            ...
-            wazuh2.indexer:
-               image: wazuh/wazuh-manager:|WAZUH_CURRENT_DOCKER|
-            ...
-            wazuh3.indexer:
-               image: wazuh/wazuh-manager:|WAZUH_CURRENT_DOCKER|
-            ...
-            wazuh.master:
-               image: wazuh/wazuh-manager:|WAZUH_CURRENT_DOCKER|
-               environment:
-                  - OPENSEARCH_HOSTS="https://wazuh1.indexer:9200"
-                  - WAZUH_API_URL="https://wazuh.master"
-                  - API_USERNAME=wazuh-wui
-                  - API_PASSWORD=MyS3cr37P450r.*-
-                  - DASHBOARD_USERNAME=kibanaserver
-                  - DASHBOARD_PASSWORD=kibanaserver
+#. Replace the following files in your stack with the ones from the ``v|WAZUH_CURRENT_DOCKER|`` tag of the ``wazuh-docker`` repository.
 
-#. Replace the following files in your deployment with the ones from the ``v|WAZUH_CURRENT_DOCKER|`` tag of the ``wazuh-docker`` repository.
+   -  **Single-node deployment**
 
-   .. tabs::
+      ``single-node/config/wazuh_cluster/wazuh_manager.conf``
 
-      .. group-tab:: Single node deployment
+   -  **Multi-node deployment**
 
-         -  ``single-node/config/wazuh_cluster/wazuh_manager.conf``
+      ``multi-node/config/wazuh_cluster/wazuh_manager.conf``
+      ``multi-node/config/wazuh_cluster/wazuh_worker.conf``
 
-      .. group-tab:: Multi node deployment
-
-         -  ``multi-node/config/wazuh_cluster/wazuh_manager.conf``
-         -  ``multi-node/config/wazuh_cluster/wazuh_worker.conf``
-
-#. Start the new version of Wazuh using ``docker-compose``.
+#. Start the new version of Wazuh using ``docker-compose``:
 
    .. code-block:: console
 
       # docker-compose up -d
+
+
+

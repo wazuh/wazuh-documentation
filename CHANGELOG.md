@@ -26,6 +26,7 @@ All notable changes to this project will be documented in this file.
 - Added information about filters in the Windows agent to block UNC and mapped drive paths to mitigate *NetNTLMv2* vulnerabilities. ([#8665](https://github.com/wazuh/wazuh-documentation/pull/8665))
 - Added the Wazuh global queries documentation. ([#8722](https://github.com/wazuh/wazuh-documentation/pull/8722))
 - Added `remoted.ctrl_msg_queue_size` internal option and new remoted statistics fields. ([#8769](https://github.com/wazuh/wazuh-documentation/pull/8769))
+- Added Wazuh agent deployment on Docker documentation. ([#8798](https://github.com/wazuh/wazuh-documentation/pull/8798))
 
 ### Changed
 
@@ -80,6 +81,12 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated the vulnerability detection capability section. ([#8693](https://github.com/wazuh/wazuh-documentation/pull/8693))
 - **Post-release**: Changed the warning note on using the `$` and `&` characters when changing passwords in Docker deployments. ([#8694](https://github.com/wazuh/wazuh-documentation/pull/8694))
 - **Post-release**: Changed Windows commands in the backup guide to PowerShell. ([#8761](https://github.com/wazuh/wazuh-documentation/pull/8761))
+- **Post-release**: Updated 4.12.0 command output examples. ([#8779](https://github.com/wazuh/wazuh-documentation/pull/8779)) ([#8780](https://github.com/wazuh/wazuh-documentation/pull/8780))
+- **Post-release**: Updated the *Deployment on Docker* documentation. ([#8793](https://github.com/wazuh/wazuh-documentation/pull/8793))
+- **Post-release**: Updated the Windows logo in the documentation. ([#8804](https://github.com/wazuh/wazuh-documentation/pull/8804))
+- **Post-release**: Updated the offline installation guide. ([#8803](https://github.com/wazuh/wazuh-documentation/pull/8803))
+- **Post-release**: Updated the instruction and images in Wazuh server API getting started documentation to reflect the new navigation path (**Server management** > **Dev Tools**). ([#8811](https://github.com/wazuh/wazuh-documentation/pull/8811))
+
 
 ### Fixed
 
@@ -91,6 +98,10 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Fixed incorrect reference from **Ubuntu** to **Windows** endpoint in the SCA use case documentation. ([#8629](https://github.com/wazuh/wazuh-documentation/pull/8629))
 - **Post-release**: Fixed incorrect URL and filepaths in the YARA download steps of the *Leveraging LLMs for Alert Enrichment* PoC. ([#8686](https://github.com/wazuh/wazuh-documentation/pull/8686))
 - **Post-release**: Corrected inaccurate references to the Wazuh Syscollector module. ([#8713](https://github.com/wazuh/wazuh-documentation/pull/8713))
+
+### Removed
+
+- **Post-release**: Removed `us-gov-*` AWS regions references. ([#8791](https://github.com/wazuh/wazuh-documentation/pull/8791))
 
 ## [v4.11.2]
 
