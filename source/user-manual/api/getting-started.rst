@@ -30,7 +30,7 @@ When you install the Wazuh manager, the Wazuh server API is also installed by de
 Using the Wazuh server API via the Wazuh dashboard
 --------------------------------------------------
 
-You can interact with the Wazuh server API via the Wazuh dashboard. To do this, you need to log into the Wazuh dashboard with a user that has administrator privileges. For example, the default ``admin`` user has administrator privileges. To access the Wazuh server API console on the dashboard, click on the menu icon and navigate to **Tools** > **API Console**.
+You can interact with the Wazuh server API via the Wazuh dashboard. To do this, you need to log into the Wazuh dashboard with a user that has administrator privileges. For example, the default ``admin`` user has administrator privileges. To access the Wazuh server API console on the dashboard, click on the menu icon and navigate to **Server management** > **Dev Tools**.
 
 .. thumbnail:: /images/manual/api/access-wazuh-server-api.png
    :title: Access the Wazuh server API console on the dashboard
@@ -84,20 +84,21 @@ To ensure secure access, all Wazuh server API endpoints require authentication. 
 
    .. code-block:: console
 
-      # curl -k -X GET "https://localhost:55000/" -H "Authorization: Bearer $TOKEN"
+      # curl -k -X GET "https://localhost:55000/?pretty=true" -H "Authorization: Bearer $TOKEN"
 
    .. code-block:: none
       :class: output
 
       {
-          "data": {
-              "title": "Wazuh API REST",
-              "api_version": "4.7.4",
-              "revision": 40717,
-              "license_name": "GPL 2.0",
-              "license_url": "https://github.com/wazuh/wazuh/blob/master/LICENSE",
-              "hostname": "wazuh-master",
-              "timestamp": "2024-05-14T21:34:15Z"},
+         "data": {
+            "title": "Wazuh API REST",
+            "api_version": "4.12.0",
+            "revision": "rc1",
+            "license_name": "GPL 2.0",
+            "license_url": "https://github.com/wazuh/wazuh/blob/v4.12.0/LICENSE",
+            "hostname": "centos8a",
+            "timestamp": "2025-08-18T19:05:19Z"
+         },
          "error": 0
       }
 
@@ -489,22 +490,22 @@ The following GET request retrieves basic information about the Wazuh server API
 
 .. code-block:: console
 
-   # curl -k -X GET "https://localhost:55000/" -H  "Authorization: Bearer $TOKEN"
+   # curl -k -X GET "https://localhost:55000/?pretty=true" -H  "Authorization: Bearer $TOKEN"
 
 .. code-block:: none
    :class: output
 
    {
-       "data": {
-           "title": "Wazuh API",
-           "api_version": "4.7.4",
-           "revision": 40717,
-           "license_name": "GPL 2.0",
-           "license_url": "https://github.com/wazuh/wazuh/blob/master/LICENSE",
-           "hostname": "wazuh-master",
-           "timestamp": "2024-05-14T21:34:15Z"
-       },
-       "error": 0
+      "data": {
+         "title": "Wazuh API REST",
+         "api_version": "4.12.0",
+         "revision": "rc1",
+         "license_name": "GPL 2.0",
+         "license_url": "https://github.com/wazuh/wazuh/blob/v4.12.0/LICENSE",
+         "hostname": "centos8a",
+         "timestamp": "2025-08-18T19:19:56Z"
+      },
+      "error": 0
    }
 
 POST

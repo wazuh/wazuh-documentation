@@ -16,7 +16,7 @@ The ``docker/builder/builder.sh`` script controls the package generation process
 Setting up the environment
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Install :doc:`Docker Engine </deployment-options/docker/docker-installation>`.
+#. Install `Docker Engine <https://www.docker.com/>`__.
 #. Clone the Wazuh indexer GitHub repository and switch to the ``v|WAZUH_CURRENT|`` tag.
 
    .. code:: console

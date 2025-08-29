@@ -34,16 +34,3 @@ The ``/var/ossec/bin/agent_control`` tool on the Wazuh server, used with ``-l`` 
 
    List of agentless devices:
       ID: 010, Name: agentless-ubuntu, IP: 10.0.0.135, Active
-
-Also, users can retrieve a list of the connected agents by using the :doc:`/var/ossec/bin/manage_agents </user-manual/reference/tools/manage-agents>` tool with ``-l`` option:
-
-.. code-block:: console
-
-   # /var/ossec/bin/manage_agents -l
-
-.. code-block:: none
-   :class: output
-
-   Available agents:
-      ID: 001, Name: agent-ubuntu2, IP: any
-      ID: 002, Name: agent-ubuntu1, IP: any
