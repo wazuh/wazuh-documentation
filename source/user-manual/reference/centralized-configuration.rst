@@ -125,29 +125,29 @@ Options
 
    To get the agent name and operating system information, you can run the ``agent_control`` utility.
 
-    .. code-block:: console
+   .. code-block:: console
 
-        agent_control -i <AGENT_ID>
+      agent_control -i <AGENT_ID>
 
-    Where ``<AGENT_ID>`` corresponds to the agent ID of the endpoint.
+   Where ``<AGENT_ID>`` corresponds to the agent ID of the endpoint.
 
-    .. code-block:: none
-        :class: output
+   .. code-block:: none
+      :class: output
 
-        Wazuh agent_control. Agent information:
-        Agent ID:   001
-        Agent Name: agent01
-        IP address: any
-        Status:     Active
+      Wazuh agent_control. Agent information:
+         Agent ID:   001
+         Agent Name: agent01
+         IP address: any
+         Status:     Active
 
-        Operating system:    Linux |centos9 |5.14.0-366.el9.x86_64 |#1 SMP PREEMPT_DYNAMIC Thu Sep 14 23:37:14 UTC 2023 |x86_64
-        Client version:      Wazuh v4.5.2
-        Configuration hash:  ab73af41699f13fdd81903b5f23d8d00
-        Shared file hash:    4a8724b20dee0124ff9656783c490c4e
-        Last keep alive:     1696963366
+         Operating system:    Linux |centos9 |5.14.0-391.el9.x86_64 |#1 SMP PREEMPT_DYNAMIC Tue Nov 28 20:35:49 UTC 2023 |x86_64
+         Client version:      Wazuh v4.12.0
+         Configuration hash:  ab73af41699f13fdd81903b5f23d8d00
+         Shared file hash:    cb5dc59d195320bb20b6039a519a8c0e
+         Last keep alive:     1755529825
 
-        Syscheck last started at:  Tue Oct 10 12:37:43 2023
-        Syscheck last ended at:    Tue Oct 10 12:37:46 2023
+         Syscheck last started at:  Mon Aug 18 15:03:05 2025
+         Syscheck last ended at:    Mon Aug 18 15:03:07 2025
 
 Centralized configuration process
 ---------------------------------
