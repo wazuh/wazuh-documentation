@@ -30,7 +30,7 @@ When you install the Wazuh manager, the Wazuh server API is also installed by de
 Using the Wazuh server API via the Wazuh dashboard
 --------------------------------------------------
 
-You can interact with the Wazuh server API via the Wazuh dashboard. To do this, you need to log into the Wazuh dashboard with a user that has administrator privileges. For example, the default ``admin`` user has administrator privileges. To access the Wazuh server API console on the dashboard, click on the menu icon and navigate to **Tools** > **API Console**.
+You can interact with the Wazuh server API via the Wazuh dashboard. To do this, you need to log into the Wazuh dashboard with a user that has administrator privileges. For example, the default ``admin`` user has administrator privileges. To access the Wazuh server API console on the dashboard, click on the menu icon and navigate to **Server management** > **Dev Tools**.
 
 .. thumbnail:: /images/manual/api/access-wazuh-server-api.png
    :title: Access the Wazuh server API console on the dashboard
