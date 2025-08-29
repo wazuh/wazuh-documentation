@@ -45,6 +45,8 @@ The table below shows SCA policies pre-installed in Wazuh out-of-the-box. The Wa
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_rocky_linux_9           |  CIS Benchmark for Rocky Linux 9                           | Rocky Linux 9                 |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_rocky_linux_10          |  CIS Benchmark for Rocky Linux 10                          | Rocky Linux 10                |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_oracle_linux_9          |  CIS Benchmark for Oracle Linux 9                          | Oracle Linux 9                |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_centos6_linux           |  CIS Benchmark for CentOS Linux 6                          | CentOS Linux 6                |

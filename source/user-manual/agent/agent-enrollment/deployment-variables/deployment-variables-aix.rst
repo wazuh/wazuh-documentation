@@ -22,8 +22,6 @@ Below is a table describing the variables used by Wazuh agent packages on AIX en
 +----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | WAZUH_MANAGER_PORT               | Specifies the Wazuh manager connection port. See :ref:`port <server_port>`.                                                                                                                              |
 +----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| WAZUH_PROTOCOL                   | Sets the communication protocol between the Wazuh manager and the Wazuh agent. Accepts UDP and TCP. The default is TCP. See :ref:`protocol <server_protocol>`.                                           |
-+----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | WAZUH_REGISTRATION_SERVER        | Specifies the Wazuh enrollment server, used for the Wazuh agent enrollment. See :ref:`manager_address <enrollment_manager_address>`. If empty, the value set in ``WAZUH_MANAGER`` will be used.          |
 +----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | WAZUH_REGISTRATION_PORT          | Specifies the port used by the Wazuh enrollment server. See :ref:`port <enrollment_manager_port>`.                                                                                                       |
@@ -69,13 +67,6 @@ Examples:
 
       # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_AGENT_NAME="aix-agent" \
            WAZUH_REGISTRATION_CA="rootCA.pem" rpm -i wazuh-agent-|WAZUH_CURRENT_AIX|-|WAZUH_REVISION_AIX|.aix.ppc.rpm
-
--  Enrollment with protocol:
-
-   .. code-block:: console
-
-      # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_AGENT_NAME="aix-agent" \
-           WAZUH_PROTOCOL="tcp" rpm -i wazuh-agent-|WAZUH_CURRENT_AIX|-|WAZUH_REVISION_AIX|.aix.ppc.rpm
 
 -  Enrollment and adding multiple address:
 

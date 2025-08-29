@@ -19,7 +19,6 @@ syscheck
 Configuration options for file integrity monitoring:
 
 - `alert_new_files`_
-- `allow_remote_prefilter_cmd`_
 - `file_limit`_
 - `registry_limit`_
 - `diff`_
@@ -29,7 +28,7 @@ Configuration options for file integrity monitoring:
 - `ignore`_
 - `max_eps`_
 - `max_files_per_second`_
-- `prefilter_cmd`_
+- `notify_first_scan`_
 - `process_priority`_
 - `registry_ignore`_
 - `scan_day`_
@@ -65,30 +64,6 @@ Example:
 .. note::
 
 	This setting is applied in the manager configuration, but it only takes effect on agents with versions lower than 3.12.
-
-.. _reference_ossec_syscheck_allow_remote_prefilter_cmd:
-
-allow_remote_prefilter_cmd
---------------------------
-
-Allows ``prefilter_cmd`` option apply in remote configuration (*agent.conf*).
-
-+--------------------+--------------------------------+
-| **Default value**  | no                             |
-+--------------------+--------------------------------+
-| **Allowed values** | yes, no                        |
-+--------------------+--------------------------------+
-
-Example:
-
-.. code-block:: xml
-
-  <allow_remote_prefilter_cmd>yes</allow_remote_prefilter_cmd>
-
-
-.. note::
-
-   This option only can be activated from the agent side, on its own ``ossec.conf``.
 
 .. _reference_ossec_syscheck_directories:
 
@@ -404,34 +379,24 @@ Example:
  <max_files_per_second>100</max_files_per_second>
 
 
-.. _reference_ossec_syscheck_prefilter_cmd:
+.. _reference_ossec_syscheck_notify_first_scan:
 
-prefilter_cmd
--------------
+notify_first_scan
+------------------
 
-Run to prevent prelinking from creating false positives.
+Specifies whether the first scan reports stateless events.
 
-+--------------------+--------------------------------+
-| **Default value**  | n/a                            |
-+--------------------+--------------------------------+
-| **Allowed values** | Command to prevent prelinking. |
-+--------------------+--------------------------------+
++--------------------+----------+
+| **Default value**  | no       |
++--------------------+----------+
+| **Allowed values** | yes, no  |
++--------------------+----------+
 
 Example:
 
 .. code-block:: xml
 
- <prefilter_cmd>/usr/sbin/prelink -y</prefilter_cmd>
-
-
-.. note::
-
-  This option may negatively impact performance as the configured command will be run for each file checked.
-
-.. note::
-
-  This option is ignored when defined at *agent.conf* if ``allow_remote_prefilter_cmd`` is set to ``no`` at *ossec.conf*.
-
+   <notify_first_scan>no</notify_first_scan>
 
 .. _reference_ossec_syscheck_process_priority:
 
@@ -899,12 +864,12 @@ The Whodata options will be configured inside this tag.
 
 **provider**
 
-Specifies the who-data mode used by the FIM module. If the ``<provider>`` tag is not configured, the FIM module defaults to the ``audit`` mode. If the provider is set to ``ebpf`` but unavailable due to kernel version incompatibility, it also falls back to the ``audit`` mode. This option is only available for Linux endpoints.
+Specifies the who-data mode used by the FIM module. If the ``<provider>`` tag is not configured, the FIM module defaults to the ``ebpf`` mode. If ``ebpf`` is not supported due to kernel version incompatibility, you must configure ``audit`` mode. This option is only available for Linux endpoints.
 
 +--------------------+---------------------+
-| **Default value**  | ``audit``           |
+| **Default value**  | ``ebpf``            |
 +--------------------+---------------------+
-| **Allowed values** | ``audit``, ``ebpf`` |
+| **Allowed values** | ``ebpf``, ``audit`` |
 +--------------------+---------------------+
 
 **restart_audit**
@@ -1156,8 +1121,6 @@ However, the second line does enable hash checking for ``TEST_KEY``. This is a s
 Default syscheck configuration:
 -------------------------------
 
-
-
 .. tabs::
 
  .. group-tab:: Wazuh manager
@@ -1169,7 +1132,6 @@ Default syscheck configuration:
     <disabled>no</disabled>
     <!-- Frequency that syscheck is executed default every 12 hours -->
     <frequency>43200</frequency>
-    <scan_on_start>yes</scan_on_start>
     <!-- Generate alert when new file detected -->
     <alert_new_files>yes</alert_new_files>
     <!-- Don't ignore files that change more than 'frequency' times -->
@@ -1219,7 +1181,6 @@ Default syscheck configuration:
     <disabled>no</disabled>
     <!-- Frequency that syscheck is executed default every 12 hours -->
     <frequency>43200</frequency>
-    <scan_on_start>yes</scan_on_start>
     <!-- Directories to check  (perform all possible verifications) -->
     <directories>/etc,/usr/bin,/usr/sbin</directories>
     <directories>/bin,/sbin,/boot</directories>
@@ -1344,7 +1305,6 @@ Default syscheck configuration:
     <disabled>no</disabled>
     <!-- Frequency that syscheck is executed default every 12 hours -->
     <frequency>43200</frequency>
-    <scan_on_start>yes</scan_on_start>
     <!-- Directories to check  (perform all possible verifications) -->
     <directories>/etc,/usr/bin,/usr/sbin</directories>
     <directories>/bin,/sbin</directories>

@@ -8,7 +8,7 @@
 wazuh-authd
 ===========
 
-The ``wazuh-authd`` program can automatically add a Wazuh agent to a Wazuh manager and provide the key to the agent. It's used along with the ``agent-auth`` application. The program creates an agent with an IP address of ``any`` instead of using a specific IP address.
+The ``wazuh-authd`` program can automatically add a Wazuh agent to a Wazuh manager and provide the key to the agent. The program creates an agent with an IP address of ``any`` instead of using a specific IP address.
 
 .. warning::
   By default, there is no authentication or authorization involved in this transaction, so it is recommended that this daemon only be run when a new agent is being added.

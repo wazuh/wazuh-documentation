@@ -23,7 +23,7 @@ If the S3 bucket contains a long history of logs and its directory structure is 
 
 -  ``only_logs_after``: Allows filtering logs produced after a given date. The date format must be ``YYYY-MMM-DD``. For example, ``2018-AUG-21`` would filter logs generated on or after the 21st of August 2018.
 -  ``aws_account_id``: This option will only work on CloudTrail, VPC, and Config buckets. If you have logs from multiple accounts, you can filter which ones will be read by Wazuh. You can specify multiple IDs separating them by commas.
--  ``regions``: This option will only work on CloudTrail, VPC, Config buckets, and Inspector service. If you have logs from multiple regions, you can filter which ones will be read by Wazuh. You can specify multiple regions separating them by commas. It is mandatory to specify the region when configuring an S3 bucket from an AWS GovCloud region (available GovCloud regions are ``us-gov-east-1`` and ``us-gov-west-1``).
+-  ``regions``: Works only with CloudTrail, VPC, Config buckets, and Inspector service. Use it to filter which regions Wazuh reads when you have logs from multiple regions. Separate multiple regions with commas.
 -  ``path``: If your logs are stored in a given path in an S3 bucket, this option can be specified. For example, to read logs stored in the directory ``vpclogs/``, it is necessary to specify the path ``vpclogs`` in the Wazuh module for AWS configuration. It can also be specified with ``/`` or ``\``.
 -  ``aws_organization_id``: This option will only work on CloudTrail buckets. If you have configured an organization, you need to specify the name of the AWS organization by using this parameter.
 
@@ -241,20 +241,12 @@ Below is an example of different AWS services configuration:
        <aws_profile>default</aws_profile>
      </bucket>
 
-     <!-- CloudTrail, 'gov1' profile, and 'us-gov-east-1' GovCloud region -->
+     <!-- CloudTrail, 'dev' profile, and 'us-east-1' region -->
      <bucket type="cloudtrail">
        <name><WAZUH_AWS_BUCKET></name>
-       <path>cloudtrail-govcloud</path>
-       <regions>us-gov-east-1</regions>
-       <aws_profile>gov1</aws_profile>
-     </bucket>
-
-     <!-- CloudTrail, 'gov2' profile, and 'us-gov-west-1' GovCloud region -->
-     <bucket type="cloudtrail">
-       <name><WAZUH_AWS_BUCKET></name>
-       <path>cloudtrail-govcloud</path>
-       <regions>us-gov-west-1</regions>
-       <aws_profile>gov2</aws_profile>
+       <path>dev-cloudtrail</path>
+       <regions>us-east-1</regions>
+       <aws_profile>dev</aws_profile>
      </bucket>
 
    </wodle>
