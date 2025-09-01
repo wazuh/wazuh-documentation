@@ -53,7 +53,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated the Windows logo in the documentation. ([#8804](https://github.com/wazuh/wazuh-documentation/pull/8804))
 - **Post-release**: Updated the offline installation guide. ([#8803](https://github.com/wazuh/wazuh-documentation/pull/8803))
 - **Post-release**: Updated the instruction and images in Wazuh server API getting started documentation to reflect the new navigation path (**Server management** > **Dev Tools**). ([#8811](https://github.com/wazuh/wazuh-documentation/pull/8811))
-
+- **Post-release**: Updated the *Getting started with Wazuh - Architecture* documentation. ([#8819](https://github.com/wazuh/wazuh-documentation/pull/8819))
 
 ### Fixed
 
