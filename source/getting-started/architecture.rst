@@ -3,8 +3,8 @@
 .. meta::
   :description: Learn more about the architecture of Wazuh, our open source cybersecurity platform, in this section of our documentation. 
   
-Getting started with Wazuh - Architecture
-=========================================
+Architecture
+============
 
 The Wazuh architecture is composed of a multi-platform Wazuh :doc:`agent <components/wazuh-agent>` and three central components: the Wazuh :doc:`server <components/wazuh-server>`, Wazuh :doc:`indexer <components/wazuh-indexer>`, and Wazuh :doc:`dashboard <components/wazuh-dashboard>`. The agent is deployed on endpoints to collect and forward security data to the Wazuh server for analysis. The analyzed data is then forwarded to the Wazuh indexer for indexing and storage, and subsequently to the Wazuh dashboard for alerting and visualization.
 
@@ -29,10 +29,10 @@ The diagram below represents a Wazuh deployment architecture. It shows how the W
    :width: 80%
 
 Component communication
-=======================
+-----------------------
 
 Wazuh agent - Wazuh server
---------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The :doc:`Wazuh agent <components/wazuh-agent>` continuously sends events to the :doc:`Wazuh server <components/wazuh-server>` for analysis and threat detection. To start shipping this data, the agent establishes a connection with the Wazuh server service for agent connection, which listens on TCP port 1514 by default (this is configurable). The Wazuh server then decodes and matches rules against the received events, utilizing the Wazuh Analysis engine. 
 
@@ -43,12 +43,12 @@ The Wazuh messages protocol uses AES encryption by default, with 128 bits per bl
    Read the `Benefits of using AES in the Wazuh communications <https://wazuh.com/blog/benefits-of-using-aes-in-our-communications>`_ document for more information.
 
 Wazuh server - Wazuh indexer
------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The Wazuh server uses Filebeat to send alert and event data to the Wazuh indexer, using TLS encryption. Filebeat reads the Wazuh server output data and sends it to the Wazuh indexer (by default listening on port 9200/TCP). Once the data is indexed by the Wazuh indexer, the Wazuh dashboard is used to query and visualize the security information.
 
 Wazuh dashboard - Wazuh dashboard/Wazuh indexer
------------------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The Wazuh dashboard queries the Wazuh server API (by default listening on port 55000/TCP on the Wazuh server) to display configuration and status-related information of the :doc:`Wazuh server <components/wazuh-server>` and :doc:`agents <components/wazuh-agent>`. This communication is encrypted with TLS and authenticated with a username and password.
 
@@ -57,7 +57,7 @@ The Wazuh dashboard visualizes and queries the information indexed on the Wazuh 
 .. _default_ports:
 
 Required ports
-==============
+--------------
 
 Wazuh components communicate using several services. The list of default ports used by these services is shown below. Users can modify these port numbers when necessary.
 
@@ -86,7 +86,7 @@ Wazuh components communicate using several services. The list of default ports u
 +-----------------+-----------+----------------+------------------------------------------------+
 
 Wazuh CTI
-=========
+---------
 
 The Wazuh Cyber Threat Intelligence (CTI) service is a publicly accessible platform that collects, analyzes, and disseminates actionable information on emerging cyber threats and vulnerabilities. This service currently focuses on vulnerability intelligence, delivering timely updates on Common Vulnerabilities and Exposures (CVEs), severity scores, exploitability insights, and mitigation strategies. It aggregates and sanitizes data from trusted sources, including operating system vendors and major vulnerability databases, to ensure high-quality, relevant intelligence. 
 
