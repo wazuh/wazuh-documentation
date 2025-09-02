@@ -22,6 +22,9 @@ All notable changes to this project will be documented in this file.
 - Removed references to the server version of the `manage_agents` tool. ([#8792](https://github.com/wazuh/wazuh-documentation/pull/8792))
 - Removed `cron.prefix`, `cron.statistics.*`, and `wazuh.monitoring.*` configuration settings from the Wazuh dashboard. ([#8790](https://github.com/wazuh/wazuh-documentation/pull/8790))
 - Removed references to deprecated client communication and FIM configuration options. ([#8809](https://github.com/wazuh/wazuh-documentation/pull/8809))
+- Removed documentation and references to deprecated Wazuh Manager daemons: `wazuh-agentlessd`, `wazuh-csyslogd`, `wazuh-dbd`, `wazuh-integratord`, `wazuh-maild`, and `wazuh-reportd`. ([#8778](https://github.com/wazuh/wazuh-documentation/pull/8778))
+- Removed documentation and references to deprecated CLI tools: `clear_stats`, `update_ruleset`, and `wazuh-regex`. ([#8778](https://github.com/wazuh/wazuh-documentation/pull/8778))
+- Removed documentation to deprecated `fluent-forward` tool. ([#8778](https://github.com/wazuh/wazuh-documentation/pull/8778))
 
 ## [v4.14.1]
 
