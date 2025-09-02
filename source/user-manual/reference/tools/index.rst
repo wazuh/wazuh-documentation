@@ -17,6 +17,8 @@ Tools
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`manage_agents <manage-agents>`              | Provides an interface to handle authentication keys for  agents            | agent                       |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
+| :doc:`wazuh-logtest <wazuh-logtest>`              | Allows testing and verification of rules against provided log records      | manager                     |
++---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`rbac_control <rbac-control>`                | Manage API RBAC resources and reset RBAC DB                                | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`verify-agent-conf <verify-agent-conf>`      | Verifies the Wazuh agent.conf configuration                                | manager                     |
