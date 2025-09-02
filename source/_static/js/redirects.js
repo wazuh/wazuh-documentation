@@ -92,6 +92,7 @@ removedUrls['5.0'] = [
   '/user-manual/reference/tools/wazuh-regex.html', 
   '/user-manual/reference/tools/agent-auth.html', 
   '/user-manual/agent/agent-management/remove-agents/remove.html',
+  '/user-manual/reference/ossec-conf/fluent-forward.html',
   
 ];
 
