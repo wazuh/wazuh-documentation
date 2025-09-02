@@ -36,14 +36,14 @@ Tools
    :hidden:
    :maxdepth: 1
 
-    agent-control
-    manage-agents
-    wazuh-control
-    wazuh-logtest
-    rbac-control
-    verify-agent-conf
-    agent-groups
-    agent-upgrade
-    cluster-control
-    fim-migrate
-    wazuh-keystore
+   wazuh-control
+   agent-control
+   manage-agents
+   wazuh-logtest
+   rbac-control
+   verify-agent-conf
+   agent-groups
+   agent-upgrade
+   cluster-control
+   fim-migrate
+   wazuh-keystore
