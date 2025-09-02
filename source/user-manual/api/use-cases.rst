@@ -408,31 +408,31 @@ The following request enumerates two active agents:
    :class: output
 
    {
-     "data": {
-       "affected_items": [
-         {
-           "node_name": "worker2",
-           "status": "active",
-           "manager": "wazuh-worker2",
-           "version": "Wazuh v4.7.4",
-           "id": "001",
-           "name": "wazuh-agent1"
-         },
-         {
-           "node_name": "worker2",
-           "status": "active",
-           "manager": "wazuh-worker2",
-           "version": "Wazuh v4.7.4",
-           "id": "002",
-           "name": "wazuh-agent2"
-         }
-       ],
-       "total_affected_items": 9,
-       "total_failed_items": 0,
-       "failed_items": []
-     },
-     "message": "All selected agents information was returned",
-     "error": 0
+      "data": {
+         "affected_items": [
+            {
+               "manager": "centos8a",
+               "name": "ag-centos9s",
+               "id": "001",
+               "node_name": "wazuh-1",
+               "status": "active",
+               "version": "Wazuh v4.12.0"
+            },
+            {
+               "manager": "centos8b",
+               "name": "ag-ubuntu22",
+               "id": "002",
+               "node_name": "wazuh-2",
+               "status": "active",
+               "version": "Wazuh v4.12.0"
+            }
+         ],
+         "total_affected_items": 3,
+         "total_failed_items": 0,
+         "failed_items": []
+      },
+      "message": "All selected agents information was returned",
+      "error": 0
    }
 
 Add a new Wazuh agent by sending an API request with the agent name and its IP address:

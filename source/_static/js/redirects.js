@@ -89,7 +89,10 @@ removedUrls['5.0'] = [
   '/user-manual/reference/daemons/wazuh-reportd.html',
   '/user-manual/reference/tools/clear_stats.html',
   '/user-manual/reference/tools/update_ruleset.html',
-  '/user-manual/reference/tools/wazuh-regex.html',
+  '/user-manual/reference/tools/wazuh-regex.html', 
+  '/user-manual/reference/tools/agent-auth.html', 
+  '/user-manual/agent/agent-management/remove-agents/remove.html',
+  
 ];
 
 /* *** RELEASE 4.14 ****/
@@ -122,6 +125,8 @@ newUrls['4.12'] = [
   '/development/packaging/generate-server-package.html',
   '/development/packaging/generate-agent-package.html',
   '/cloud-service/ai-analyst.html',
+  '/deployment-options/docker/prerequisites.html',
+  '/deployment-options/docker/build-docker-images-locally.html',
 ]
 /* Redirections from 4.9 to 4.10  */
 
@@ -171,6 +176,11 @@ redirections.push(
     '4.11': '/user-manual/capabilities/vulnerability-detection/offline-update.html',
     '4.12': '/user-manual/capabilities/vulnerability-detection/configuring-scans.html#offline-vulnerability-detection',
   },
+  {
+    'target': ['4.11=>4.12', '4.12=>4.11'],
+    '4.11': '/deployment-options/docker/wazuh-container.html#build-docker-images-locally',
+    '4.12': '/deployment-options/docker/build-docker-images-locally.html',
+  },
 );
 
   /* Pages no longer available in 4.12 */
@@ -184,6 +194,8 @@ removedUrls['4.12'] = [
   '/development/packaging/generate-hpux-package.html',
   '/development/packaging/generate-wpk-package.html',
   '/user-manual/capabilities/vulnerability-detection/offline-update.html',
+  '/deployment-options/docker/docker-installation.html',
+  '/deployment-options/docker/faq-wazuh-container.html',
 ];
 
 /* *** RELEASE 4.11 ****/
@@ -329,6 +341,7 @@ newUrls['4.10'] = [
   '/release-notes/release-4-10-0.html',
   '/release-notes/release-4-10-1.html',
   '/release-notes/release-4-10-2.html',
+  '/release-notes/release-4-10-3.html',
   '/user-manual/reference/ossec-conf/anti-tampering.html',
   '/user-manual/capabilities/vulnerability-detection/troubleshooting.html',
   '/user-manual/capabilities/vulnerability-detection/FAQ.html',

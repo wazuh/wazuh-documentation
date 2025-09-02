@@ -200,21 +200,21 @@ Using the RESTful API
       :class: output
 
       {
-        "data": {
-      	"affected_items": [
-        	{
-          	"id": "002",
-          	"version": "Wazuh 4.8.0"
-        	},
-        	{
-          	"id": "003",
-          	"version": "Wazuh 4.8.0"
-        	}
-      	],
-      	"total_affected_items": 2,
-      	"total_failed_items": 0,
-      	"failed_items": []
-        },
-        "message": "All selected agents information was returned",
-        "error": 0
+         "data": {
+            "affected_items": [
+               {
+                  "id": "002",
+                  "version": "Wazuh v4.12.0"
+               },
+               {
+                  "id": "003",
+                  "version": "Wazuh v4.12.0"
+               }
+            ],
+            "total_affected_items": 2,
+            "total_failed_items": 0,
+            "failed_items": []
+         },
+         "message": "All selected agents information was returned",
+         "error": 0
       }

@@ -42,23 +42,19 @@ Suppose we have the following IP addresses for the Wazuh server nodes:
           <server>
               <address>172.0.0.4</address>
               <port>1514</port>
-              <protocol>tcp</protocol>
           </server>
           <server>
               <address>172.0.0.5</address>
               <port>1514</port>
-              <protocol>tcp</protocol>
           </server>
           <server>
               <address>172.0.0.3</address>
               <port>1514</port>
-              <protocol>tcp</protocol>
           </server>
           <config-profile>ubuntu, ubuntu18, ubuntu18.04</config-profile>
           <notify_time>20</notify_time>
           <time-reconnect>60</time-reconnect>
           <auto_restart>yes</auto_restart>
-          <crypto_method>aes</crypto_method>
       </client>
 
 #. Restart the Wazuh agent to apply changes:

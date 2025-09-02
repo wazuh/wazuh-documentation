@@ -17,9 +17,6 @@ client
 
 This section explains how to configure the connection to the manager.
 
-.. note::
-  To avoid a permanent loss of communication with the manager, the only setting included in the shared configuration of this section is **force_reconnect_interval**.
-
 Subsections
 -----------
 
@@ -36,7 +33,6 @@ Server subsection options
 
 - `address`_
 - :ref:`port <server_port>`
-- :ref:`protocol <server_protocol>`
 - `interface_index`_
 - `max_retries`_
 - `retry_interval`_
@@ -66,19 +62,6 @@ Specifies the port to send events to the manager.  This must match the associate
 +--------------------+---------------------------------------------+
 | **Allowed values** | Any port number from 1 to 65535 is allowed. |
 +--------------------+---------------------------------------------+
-
-.. _server_protocol:
-
-protocol
-^^^^^^^^
-
-Specifies the protocol to use when connecting to the manager.
-
-+--------------------+----------+
-| **Default value**  | tcp      |
-+--------------------+----------+
-| **Allowed values** | udp, tcp |
-+--------------------+----------+
 
 .. _interface_index:
 
@@ -127,10 +110,8 @@ Options
 - `config-profile`_
 - `notify_time`_
 - `time-reconnect`_
-- `force_reconnect_interval`_
 - `ip_update_interval`_
 - `auto_restart`_
-- `crypto_method`_
 
 .. _reference_ossec_client_config_profile:
 
@@ -180,19 +161,6 @@ For example, a ``notify_time`` setting of 60 combined with a time-reconnect of 3
 .. warning::
 	Notice that the ``notify_time`` value uses an underscore while the ``time-reconnect`` value uses a dash.  This is an unfortunate legacy naming inconsistency that is easy to mix up.
 
-  .. _force_reconnect_interval:
-
-force_reconnect_interval
-^^^^^^^^^^^^^^^^^^^^^^^^
-
-Specifies the time after which the agent is forced to be reconnected to the manager. The reconnection is forced to be done even if the agent is having a successful two-way communication with the manager.
-
-+--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
-| **Default value**  | 0s (disabled)                                                                                                                                    |
-+--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
-| **Allowed values** | A positive number that should end with a character indicating a time unit, such as: s (seconds), m (minutes), h (hours), d (days), or w (weeks). |
-+--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
-
 .. _ip_update_interval:
 
 ip_update_interval
@@ -224,17 +192,6 @@ Toggles on and off the automatic restart of agents when a new valid configuratio
 | **Allowed values** | yes, no             |
 +--------------------+---------------------+
 
-crypto_method
-^^^^^^^^^^^^^
-
-Choose the encryption of the messages that the agent sends to the manager.
-
-+--------------------+---------------------+
-| **Default value**  | aes                 |
-+--------------------+---------------------+
-| **Allowed values** | blowfish, aes       |
-+--------------------+---------------------+
-
 Sample configuration
 --------------------
 
@@ -244,13 +201,11 @@ Sample configuration
       <server>
         <address>192.168.1.100</address>
         <port>1514</port>
-        <protocol>tcp</protocol>
         <max_retries>5</max_retries>
         <retry_interval>5</retry_interval>
       </server>
       <server>
         <address>example.hostname</address>
-        <protocol>udp</protocol>
       </server>
       <config-profile>webserver, debian8</config-profile>
       <notify_time>30</notify_time>
@@ -268,13 +223,11 @@ Sample link-local IPv6 configuration
        <address>fe80:0000:0000:0000:a00:27ff:feff:6b0b</address>
        <interface_index>3</interface_index>
        <port>1514</port>
-       <protocol>tcp</protocol>
      </server>
      <config-profile>ubuntu, ubuntu22, ubuntu22.04</config-profile>
      <notify_time>20</notify_time>
      <time-reconnect>60</time-reconnect>
      <auto_restart>yes</auto_restart>
-     <crypto_method>aes</crypto_method>
    </client>
 
 .. _enrollment:

@@ -66,4 +66,4 @@ Follow the steps below to upgrade a Wazuh agent using a custom WPK file in a WPK
       Upgrading...
 
       Upgraded agents:
-          Agent 001 upgraded: Wazuh v4.7.2 -> Wazuh v4.8.0
+      	Agent 001 upgraded: Wazuh v4.7.2 -> Wazuh v4.12.0
