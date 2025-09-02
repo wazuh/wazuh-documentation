@@ -21,6 +21,8 @@ Tools
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`rbac_control <rbac-control>`                | Manage API RBAC resources and reset RBAC DB                                | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
+| :doc:`verify-agent-conf <verify-agent-conf>`      | Verifies the Wazuh agent.conf configuration                                | manager                     |
++---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`agent_groups <agent-groups>`                | Manages and assigns groups                                                 | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`agent_upgrade <agent-upgrade>`              | List outdated agents and upgrade them                                      | manager                     |
@@ -42,6 +44,7 @@ Tools
     wazuh-control
     wazuh-logtest
     rbac-control
+    verify-agent-conf
     agent-groups
     agent-upgrade
     cluster-control
