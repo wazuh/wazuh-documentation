@@ -99,21 +99,7 @@ A region is a geographic area where the data center of the cloud provider that h
 
 Available regions:
 
-* North Virginia: ``us-east-1``
-  
-* Ohio: ``us-east-2``
-
-* London: ``eu-west-2``
-
-* Frankfurt: ``eu-central-1``
-
-* Mumbai: ``ap-south-1``
-
-* Singapore: ``ap-southeast-1``
-
-* Sydney: ``ap-southeast-2``
-
-* Canada: ``ca-central-1``
+.. include:: /_templates/cloud-service-regions.rst
 
 .. _cloud_glossary_wazuh_cloud_api:
 
