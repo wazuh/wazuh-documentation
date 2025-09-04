@@ -14,12 +14,12 @@ Access to services and containers
 This section explains how to interact with your Wazuh deployment by accessing service logs and shell instances of running containers.
 
 #. Access the Wazuh dashboard using the Docker host IP address.
-#. Enroll agents through the standard :doc:`Wazuh agent enrollment </user-manual/agent/agent-enrollment/index>` process. Use the Docker host address as the Wazuh manager address.
+#. Enroll agents through the :doc:`Wazuh agent Docker deployment </deployment-options/docker/wazuh-agent>` or the standard :doc:`Wazuh agent enrollment </user-manual/agent/agent-enrollment/index>` process. Use the Docker host address as the Wazuh manager address.
 #. List the containers in the directory where the Wazuh ``docker-compose.yml`` file is located:
 
    .. code-block:: console
 
-      # docker-compose ps
+      # docker compose ps
 
    .. code-block:: none
       :class: output
@@ -33,7 +33,7 @@ This section explains how to interact with your Wazuh deployment by accessing se
 
    .. code-block:: console
 
-      # docker-compose exec <SERVICE> bash
+      # docker compose exec <SERVICE> bash
 
 Tuning Wazuh services
 ---------------------
@@ -78,24 +78,7 @@ Refer to the OpenSearch documentation on `Modifying the YAML files <https://docs
 Wazuh service data volumes
 --------------------------
 
-You can set Wazuh configuration and log files to exist outside their containers. This allows the files to persist after containers are removed, and you can provision custom configuration files to your containers.
-
-Adding a persistent volume
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-You need multiple volumes to ensure persistence on a Wazuh container. Here’s an example of defining a persistent volume in your ``docker-compose.yml`` file:
-
-.. code-block:: console
-   :emphasize-lines: 4,5,7,8
-
-   services:
-     wazuh.manager:
-       . . .
-       volumes:
-         - wazuh_api_configuration:/var/ossec/api/configuration
-       . . .
-   volumes:
-     wazuh_api_configuration:
+You can set Wazuh configuration and log files to exist outside their containers on the host system. This allows the files to persist after containers are removed, and you can provision custom configuration files to your containers.
 
 Listing existing volumes
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -111,6 +94,24 @@ Run the following to see the persistent volumes on your Docker host:
 
    DRIVER    VOLUME NAME
    local     single-node_wazuh_api_configuration
+
+You can also view these volumes in the ``volumes`` section directly from the ``docker-compose.yml`` file.
+
+Adding a custom volume
+^^^^^^^^^^^^^^^^^^^^^^
+
+You need multiple volumes to ensure persistence on the Wazuh server, Wazuh indexer, and Wazuh dashboard containers. Investigate the ``volumes`` section in your ``docker-compose.yml`` file and modify it to include your custom volumes:
+
+.. code-block:: yaml
+
+   services:
+     wazuh.manager:
+       . . .
+       volumes:
+         - wazuh_api_configuration:/var/ossec/api/configuration
+       . . .
+   volumes:
+     wazuh_api_configuration:
 
 Wazuh indexer volumes
 ^^^^^^^^^^^^^^^^^^^^^
@@ -157,7 +158,11 @@ Run the command below to execute commands inside the containers. We use the Wazu
 
    # docker exec -it single-node-wazuh.manager-1 bash
 
-Every change made on this shell persists if you properly configure data volumes.
+Every change made on this shell persists because of the data volumes.
+
+.. note::
+
+   The actions you can perform inside the containers are limited.
 
 Modifying the Wazuh configuration file
 --------------------------------------
@@ -168,27 +173,29 @@ To customize the Wazuh configuration file ``/var/ossec/etc/ossec.conf``, modify 
 
    .. code-block:: console
 
-      # docker-compose down
+      # docker compose down
 
 #. The following are the locations of the Wazuh configuration files on the Docker host that you can modify:
 
-   .. tabs::
+   -  **Single-node deployment:**
 
-      .. group-tab:: Single-node deployment
+      ``wazuh-docker/single-node/config/wazuh_cluster/wazuh_manager.conf``
 
-         ``wazuh-docker/single-node/config/wazuh_cluster/wazuh_manager.conf``
+   -  **Multi-node deployment:**
 
-      .. group-tab:: Multi-node deployment
+      -  **Manager**: ``wazuh-docker/multi-node/config/wazuh_cluster/wazuh_manager.conf``
+      -  **Worker**: ``wazuh-docker/multi-node/config/wazuh_cluster/wazuh_worker.conf``
 
-         -  **Manager**: ``wazuh-docker/multi-node/config/wazuh_cluster/wazuh_manager.conf``
-         -  **Worker**: ``wazuh-docker/multi-node/config/wazuh_cluster/wazuh_worker.conf``
+   -  **Wazuh agent container:**
 
-   Save the changes in the configuration files.
+      ``wazuh-docker/wazuh-agent/config/wazuh-agent-conf``
+
+   Save the changes made in the configuration files.
 
 #. Restart the stack:
 
    .. code-block:: console
 
-      # docker-compose up -d
+      # docker compose up -d
 
-These files are mounted into the container at runtime (``/wazuh-config-mount/etc/ossec.``), ensuring your changes take effect when the containers start.
+These files are mounted into the container at runtime (``wazuh-config-mount/etc/ossec.conf``), ensuring your changes take effect when the containers start.

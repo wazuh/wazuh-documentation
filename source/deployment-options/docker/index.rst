@@ -20,8 +20,8 @@ You can find all available Wazuh Docker images on `Docker Hub <https://hub.docke
 .. toctree::
    :maxdepth: 2
 
-   prerequisites
    wazuh-container
+   changing-default-password
    build-docker-images-locally
    container-usage
    upgrading-wazuh-docker
