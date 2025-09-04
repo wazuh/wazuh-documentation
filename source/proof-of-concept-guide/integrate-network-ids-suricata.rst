@@ -31,7 +31,7 @@ Configure your environment as follows to test the POC.
         curl -LO https://rules.emergingthreats.net/open/suricata-5.0.7/emerging.rules.tar.gz
         tar -xvzf emerging.rules.tar.gz && mv rules/*.rules /etc/suricata/rules/
         chown suricata:suricata /etc/suricata/rules/*.rules
-        chmod 640 /etc/suricata/rules/*.rules
+        chmod 777 /etc/suricata/rules/*.rules
 
 #. Modify Suricata settings in the ``/etc/suricata/suricata.yaml`` file.
 
