@@ -38,7 +38,7 @@ Take the following steps to configure Suricata on the Ubuntu endpoint and send t
 
       $ cd /tmp/ && curl -LO https://rules.emergingthreats.net/open/suricata-6.0.8/emerging.rules.tar.gz
       $ sudo tar -xvzf emerging.rules.tar.gz && sudo mkdir /etc/suricata/rules && sudo mv rules/*.rules /etc/suricata/rules/
-      $ sudo chmod 640 /etc/suricata/rules/*.rules
+      $ sudo chmod 777 /etc/suricata/rules/*.rules
 
 #. Modify Suricata settings in the ``/etc/suricata/suricata.yaml`` file and set the following variables:
 

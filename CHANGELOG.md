@@ -44,6 +44,8 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Added a table describing the possible environment statuses in the cloud service documentation. ([#8407](https://github.com/wazuh/wazuh-documentation/pull/8407))
 - **Post-release**: Added the Wazuh indexer API reference. ([#8756](https://github.com/wazuh/wazuh-documentation/pull/8756))
 - **Post-release**: Added examples of Wazuh tools to the user manual reference. ([#8763](https://github.com/wazuh/wazuh-documentation/pull/8763))
+- **Post-release**: Added the `ap-northeast-1` (Tokyo) region. ([#8818](https://github.com/wazuh/wazuh-documentation/pull/8818))
+- **Post-release**: Added a Q&A to the Cloud service FAQ section. ([#8832](https://github.com/wazuh/wazuh-documentation/pull/8832))
 
 ### Changed
 
@@ -74,7 +76,8 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated the Windows logo in the documentation. ([#8804](https://github.com/wazuh/wazuh-documentation/pull/8804))
 - **Post-release**: Updated the offline installation guide. ([#8803](https://github.com/wazuh/wazuh-documentation/pull/8803))
 - **Post-release**: Updated the instruction and images in Wazuh server API getting started documentation to reflect the new navigation path (**Server management** > **Dev Tools**). ([#8811](https://github.com/wazuh/wazuh-documentation/pull/8811))
-
+- **Post-release**: Updated the *Getting started with Wazuh - Architecture* documentation. ([#8819](https://github.com/wazuh/wazuh-documentation/pull/8819))
+- **Post-release**: Changed Suricata ruleset file permission in POC guide. ([#8821](https://github.com/wazuh/wazuh-documentation/pull/8821))
 
 ### Fixed
 
