@@ -61,7 +61,7 @@ Required software
 
 -  **Docker Engine**: Use the latest stable version.
 
--  **Docker Compose**: Latest stable version (included with Docker Desktop on Windows; install separately on Linux if needed).
+-  **Docker Compose**: Latest stable version (install separately on Linux if needed).
 
 -  **Git**: For cloning the Wazuh Docker repository.
 
