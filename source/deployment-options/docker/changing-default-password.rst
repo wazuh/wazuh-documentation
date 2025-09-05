@@ -132,7 +132,7 @@ Follow the steps below to generate and set a new password hash for your Wazuh us
 
    .. code-block:: console
 
-      # docker run --rm -ti wazuh/wazuh-indexer:4.13.0 bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/hash.sh
+      # docker run --rm -ti wazuh/wazuh-indexer:|WAZUH_CURRENT_DOCKER| bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/hash.sh
 
    Once the container launches, input the new password and press Enter.
 
