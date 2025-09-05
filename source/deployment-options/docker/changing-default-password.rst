@@ -209,22 +209,24 @@ After updating ``docker-compose.yml`` file, restart the Wazuh Docker stack and r
 
 #. Wait for the Wazuh indexer to initialize properly. The waiting time can vary from one to five minutes. It depends on the size of the cluster, the assigned resources, and the network speed. Then, run the ``securityadmin.sh`` script to apply all changes.
 
-   -  Single-node stack
+   .. tabs::
 
-      .. code-block:: console
+      .. group-tab:: Single-node stack
 
-         $ bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -cd /usr/share/wazuh-indexer/opensearch-security/ -nhnv -cacert  $CACERT -cert $CERT -key $KEY -p 9200 -icl
+         .. code-block:: console
 
-   -  Multi-node stack
+            $ bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -cd /usr/share/wazuh-indexer/opensearch-security/ -nhnv -cacert  $CACERT -cert $CERT -key $KEY -p 9200 -icl
 
-      .. code-block:: console
+      .. group-tab:: Multi-node stack
 
-         $ HOST=$(grep node.name $INSTALLATION_DIR/opensearch.yml | awk '{printf $2}')
-         $ bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -cd /usr/share/wazuh-indexer/opensearch-security/ -nhnv -cacert  $CACERT -cert $CERT -key $KEY -p 9200 -icl -h $HOST
+         .. code-block:: console
 
-      .. note::
+            $ HOST=$(grep node.name $INSTALLATION_DIR/opensearch.yml | awk '{printf $2}')
+            $ bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -cd /usr/share/wazuh-indexer/opensearch-security/ -nhnv -cacert  $CACERT -cert $CERT -key $KEY -p 9200 -icl -h $HOST
 
-         When working on Docker Desktop with a multi-node stack, use the ``multi-node-wazuh1.indexer-1`` IP address instead of the ``$HOST`` variable.
+         .. note::
+
+            When working on Docker Desktop with a multi-node stack, use the ``multi-node-wazuh1.indexer-1`` IP address instead of the ``$HOST`` variable.
 
 #. Exit the Wazuh indexer container. Refresh the Wazuh dashboard and log in with the new credentials.
 

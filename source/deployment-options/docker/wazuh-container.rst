@@ -212,17 +212,19 @@ Deployment
 
 #. Start the Wazuh Docker deployment using the ``docker compose`` command:
 
-   -  **Background**:
+   .. tabs::
 
-      .. code-block:: console
+      .. group-tab:: Background
 
-         # docker compose up -d
+         .. code-block:: console
 
-   -  **Foreground**:
+            # docker compose up -d
 
-      .. code-block:: console
+      .. group-tab:: Foreground
 
-         # docker compose up
+         .. code-block:: console
+
+            # docker compose up
 
 .. note::
 
