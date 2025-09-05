@@ -74,42 +74,6 @@ You need multiple volumes to ensure persistence on the Wazuh server, Wazuh index
    volumes:
      wazuh_api_configuration:
 
-Wazuh indexer volumes
-^^^^^^^^^^^^^^^^^^^^^
-
-By default, single‑node and multi‑node deployments include preconfigured volumes for the Wazuh indexer.
-
-For example, in a multi-node deployment, the ``wazuh1.indexer`` service uses the following volume (as defined in ``wazuh-docker/multi-node/docker-compose.yml``):
-
-.. code-block:: yaml
-   :emphasize-lines: 4
-
-   wazuh1.indexer:
-     ...
-     volumes:
-       - wazuh-indexer-data-1:/var/lib/wazuh-indexer
-
-This ensures that Wazuh indexer data remains available even if the container is restarted or rebuilt.
-
-Storage volume for Wazuh indexer and dashboard
-----------------------------------------------
-
-You can also attach volumes to store Wazuh indexer data. By default, single‑node and multi‑node Docker deployments include preconfigured volumes.
-
-The example below shows a single-node Wazuh indexer volume in the ``docker-compose.yml`` file:
-
-.. code-block:: yaml
-
-   wazuh.indexer:
-       . . .
-        volumes:
-          - wazuh-indexer-data:/var/lib/wazuh-indexer
-
-       . . .
-
-   volumes:
-     wazuh-indexer-data
-
 Custom commands and scripts
 ---------------------------
 
@@ -148,10 +112,6 @@ To customize the Wazuh configuration file ``/var/ossec/etc/ossec.conf``, modify 
 
          -  **Manager**: ``wazuh-docker/multi-node/config/wazuh_cluster/wazuh_manager.conf``
          -  **Worker**: ``wazuh-docker/multi-node/config/wazuh_cluster/wazuh_worker.conf``
-
-      .. group-tab::  Wazuh agent container
-
-         ``wazuh-docker/wazuh-agent/config/wazuh-agent-conf``
 
    Save the changes made in the configuration files.
 

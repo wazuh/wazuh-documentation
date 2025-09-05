@@ -73,6 +73,7 @@ Single-node stack
    **Optional**: Modify the ``OPENSEARCH_JAVA_OPTS`` environment variable in the ``single-node/docker-compose.yml`` file to allocate more RAM to the Wazuh indexer container.
 
    .. code-block:: yaml
+      :emphasize-lines: 2
 
       environment:
       - "OPENSEARCH_JAVA_OPTS=-Xms1g -Xmx1g"
@@ -80,6 +81,7 @@ Single-node stack
 #. Modify the tag of the image generator in the ``single-node/generate-indexer-certs.yml`` file to the latest.
 
    .. code-block:: yaml
+      :emphasize-lines: 3
 
       services:
          generator:
@@ -107,9 +109,9 @@ Single-node stack
       -  Replace ``${OPENSEARCH_PATH_CONF}/certs/`` with ``/usr/share/wazuh-indexer/certs/``.
    #. Edit the ``single-node/docker-compose.yml`` file and do the following replacements.
 
-   -  Replace ``/usr/share/wazuh-indexer/config/certs/`` with ``/usr/share/wazuh-indexer/certs/``.
-   -  Replace ``/usr/share/wazuh-indexer/config/opensearch.yml`` with ``/usr/share/wazuh-indexer/opensearch.yml``.
-   -  Replace ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/`` with ``/usr/share/wazuh-indexer/opensearch-security/``.
+      -  Replace ``/usr/share/wazuh-indexer/config/certs/`` with ``/usr/share/wazuh-indexer/certs/``.
+      -  Replace ``/usr/share/wazuh-indexer/config/opensearch.yml`` with ``/usr/share/wazuh-indexer/opensearch.yml``.
+      -  Replace ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/`` with ``/usr/share/wazuh-indexer/opensearch-security/``.
 
 #. Edit the ``docker-compose.yml`` file and update the highlighted lines to the latest images.
 
@@ -128,7 +130,7 @@ Single-node stack
    **Optional**: If you are upgrading from Wazuh version 4.3, add the variable related to the ``kibanaserver`` user.
 
    .. code-block:: yaml
-      :emphasize-lines: 5,6
+      :emphasize-lines: 8,9
 
       ...
       wazuh.dashboard:
@@ -166,6 +168,7 @@ Multi-node stack
    **Optional**: Modify the ``OPENSEARCH_JAVA_OPTS`` environment variable in the ``multi-node/docker-compose.yml`` file to allocate more RAM to the Wazuh indexer container.
 
    .. code-block:: yaml
+      :emphasize-lines: 2
 
       environment:
       - "OPENSEARCH_JAVA_OPTS=-Xms1g -Xmx1g"
@@ -173,6 +176,7 @@ Multi-node stack
 #. Modify the tag of the image generator to the latest tag ``wazuh/wazuh-certs-generator:0.0.2`` in the ``multi-node/generate-indexer-certs.yml`` file.
 
    .. code-block:: yaml
+      :emphasize-lines: 3
 
       services:
          generator:
@@ -207,7 +211,7 @@ Multi-node stack
 #. Edit the ``docker-compose.yml`` file and update the highlighted lines to the latest images.
 
    .. code-block:: yaml
-      :emphasize-lines: 2,5,8,11,14,17,20
+      :emphasize-lines: 2,5,8,11,14,17
 
       wazuh.master:
          image: wazuh/wazuh-manager:4.13.0
@@ -230,7 +234,7 @@ Multi-node stack
    **Optional**: If you are updating from Wazuh version 4.3, add the variable related to the ``kibanaserver`` user.
 
    .. code-block:: yaml
-      :emphasize-lines: 5,6
+      :emphasize-lines: 9,10
 
       ...
       wazuh.dashboard:
