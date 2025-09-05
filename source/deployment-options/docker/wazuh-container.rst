@@ -11,7 +11,7 @@ Wazuh consists of a multi-platform Wazuh agent and three central components: the
 Deployment options
 ------------------
 
-Wazuh supports the deployment of its central components and agent on Docker.
+Wazuh supports the deployment of its central components on Docker.
 
 -  :ref:`Single-node stack <single-node-stack>`: This stack deploys one of each Wazuh central component as a separate container. It includes:
 
