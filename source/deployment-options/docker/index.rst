@@ -11,18 +11,22 @@ Deployment on Docker
 
 Wazuh provides official Docker images that you can install to streamline deployment. These include:
 
--  ``wazuh-manager``
--  ``wazuh-indexer``
--  ``wazuh-dashboard``
+-  `wazuh-manager <https://hub.docker.com/r/wazuh/wazuh-manager>`__
+-  `wazuh-indexer <https://hub.docker.com/r/wazuh/wazuh-indexer>`__
+-  `wazuh-dashboard <https://hub.docker.com/r/wazuh/wazuh-dashboard>`__
 -  ``wazuh-agent``
 
 You can find all available Wazuh Docker images on `Docker Hub <https://hub.docker.com/u/wazuh>`__.
 
+Content
+-------
+
 .. toctree::
    :maxdepth: 2
 
-   prerequisites
    wazuh-container
+   changing-default-password
    build-docker-images-locally
    container-usage
    upgrading-wazuh-docker
+   uninstalling-wazuh-docker

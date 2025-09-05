@@ -46,6 +46,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Added examples of Wazuh tools to the user manual reference. ([#8763](https://github.com/wazuh/wazuh-documentation/pull/8763))
 - **Post-release**: Added the `ap-northeast-1` (Tokyo) region. ([#8818](https://github.com/wazuh/wazuh-documentation/pull/8818))
 - **Post-release**: Added a Q&A to the Cloud service FAQ section. ([#8832](https://github.com/wazuh/wazuh-documentation/pull/8832))
+- **Post-release**: Added agent restart commands to Agent enrollment methods section. ([#8836](https://github.com/wazuh/wazuh-documentation/pull/8836))
 
 ### Changed
 
@@ -72,7 +73,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Changed the warning note on using the `$` and `&` characters when changing passwords in Docker deployments. ([#8694](https://github.com/wazuh/wazuh-documentation/pull/8694))
 - **Post-release**: Changed Windows commands in the backup guide to PowerShell. ([#8761](https://github.com/wazuh/wazuh-documentation/pull/8761))
 - **Post-release**: Updated 4.12.0 command output examples. ([#8779](https://github.com/wazuh/wazuh-documentation/pull/8779)) ([#8780](https://github.com/wazuh/wazuh-documentation/pull/8780))
-- **Post-release**: Updated the *Deployment on Docker* documentation. ([#8793](https://github.com/wazuh/wazuh-documentation/pull/8793))
+- **Post-release**: Updated the *Deployment on Docker* documentation. ([#8793](https://github.com/wazuh/wazuh-documentation/pull/8793)) ([#8839](https://github.com/wazuh/wazuh-documentation/pull/8839))
 - **Post-release**: Updated the Windows logo in the documentation. ([#8804](https://github.com/wazuh/wazuh-documentation/pull/8804))
 - **Post-release**: Updated the offline installation guide. ([#8803](https://github.com/wazuh/wazuh-documentation/pull/8803))
 - **Post-release**: Updated the instruction and images in Wazuh server API getting started documentation to reflect the new navigation path (**Server management** > **Dev Tools**). ([#8811](https://github.com/wazuh/wazuh-documentation/pull/8811))
