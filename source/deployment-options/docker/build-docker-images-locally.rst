@@ -6,7 +6,7 @@
 Building Docker images locally
 ==============================
 
-You can modify and build Docker images for the Wazuh central components (manager, indexer, and dashboard) and the Wazuh agent.
+You can modify and build Docker images for the Wazuh central components (manager, indexer, and dashboard).
 
 #. Clone the `Wazuh Docker repository <https://github.com/wazuh/wazuh-docker>`_ to your system:
 

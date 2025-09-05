@@ -41,8 +41,8 @@ System requirements
 Single-node stack deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
--  **Operating system**: Linux or Windows
--  **Architecture**: AMD64 or ARM64
+-  **Operating system**: Linux
+-  **Architecture**: AMD64
 -  **CPU**: At least 4 cores
 -  **Memory**: At least 8 GB of RAM for the Docker host
 -  **Disk space**: At least 50 GB storage for Docker images and data volumes
@@ -50,8 +50,8 @@ Single-node stack deployment
 Multi-node stack deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
--  **Operating system**: Linux or Windows
--  **Architecture**: AMD64 or ARM64
+-  **Operating system**: Linux
+-  **Architecture**: AMD64
 -  **CPU**: At least 4 cores
 -  **Memory**: At least 16 GB for the Docker host
 -  **Disk space**: At least 100 GB storage for Docker images and data volumes
@@ -59,10 +59,7 @@ Multi-node stack deployment
 Required software
 ^^^^^^^^^^^^^^^^^
 
--  **Docker Engine / Docker Desktop**: Use the latest stable version.
-
-   -  **Linux**: Docker Engine
-   -  **Windows**: Docker Desktop (requires WSL 2)
+-  **Docker Engine**: Use the latest stable version.
 
 -  **Docker Compose**: Latest stable version (included with Docker Desktop on Windows; install separately on Linux if needed).
 
@@ -96,21 +93,21 @@ Exposed ports
 
 The following ports are exposed when the Wazuh central components are deployed.
 
-+-------+-----------------------------+
-| Port  | Component                   |
-+-------+-----------------------------+
-| 1514  | Wazuh TCP                   |
-+-------+-----------------------------+
-| 1515  | Wazuh TCP                   |
-+-------+-----------------------------+
-| 514   | Wazuh UDP                   |
-+-------+-----------------------------+
-| 55000 | Wazuh server API            |
-+-------+-----------------------------+
-| 9200  | Wazuh indexer API           |
-+-------+-----------------------------+
-| 443   | Wazuh dashboard HTTPS       |
-+-------+-----------------------------+
++-----------+-----------------------------+
+| **Port**  | **Component**               |
++-----------+-----------------------------+
+| 1514      | Wazuh TCP                   |
++-----------+-----------------------------+
+| 1515      | Wazuh TCP                   |
++-----------+-----------------------------+
+| 514       | Wazuh UDP                   |
++-----------+-----------------------------+
+| 55000     | Wazuh server API            |
++-----------+-----------------------------+
+| 9200      | Wazuh indexer API           |
++-----------+-----------------------------+
+| 443       | Wazuh dashboard HTTPS       |
++-----------+-----------------------------+
 
 Wazuh central components
 ------------------------
@@ -128,12 +125,8 @@ Single-node stack deployment
 
 Follow the steps below to deploy the Wazuh central components in a single-node stack.
 
-.. note::
-
-   All deployment commands provided apply to both Windows and Linux environments.
-
 Cloning the repository
-^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~
 
 #. Clone the `Wazuh Docker repository <https://github.com/wazuh/wazuh-docker>`__ to your system:
 
@@ -143,9 +136,9 @@ Cloning the repository
 
 #. Navigate to the single-node directory to execute all the following commands.
 
-      .. code-block:: console
+   .. code-block:: console
 
-         # cd wazuh-docker/single-node/
+      # cd wazuh-docker/single-node/
 
 Certificate generation
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -267,10 +260,6 @@ Multi-node stack deployment
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Follow the steps below to deploy the Wazuh central components in a multi-node stack.
-
-.. note::
-
-   All deployment commands provided apply to both Windows and Linux environments.
 
 Cloning the repository
 ^^^^^^^^^^^^^^^^^^^^^^

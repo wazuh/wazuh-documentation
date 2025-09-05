@@ -119,13 +119,13 @@ Single-node stack
       :emphasize-lines: 2,5,8
 
       wazuh.manager:
-         image: wazuh/wazuh-manager:4.13.0
+         image: wazuh/wazuh-manager:|WAZUH_CURRENT_DOCKER|
       ...
       wazuh.indexer:
-         image: wazuh/wazuh-indexer:4.13.0
+         image: wazuh/wazuh-indexer:|WAZUH_CURRENT_DOCKER|
       ...
       wazuh.dashboard:
-         image: wazuh/wazuh-dashboard:4.13.0
+         image: wazuh/wazuh-dashboard:|WAZUH_CURRENT_DOCKER|
 
    **Optional**: If you are upgrading from Wazuh version 4.3, add the variable related to the ``kibanaserver`` user.
 
@@ -134,7 +134,7 @@ Single-node stack
 
       ...
       wazuh.dashboard:
-         image: wazuh/wazuh-dashboard:4.13.0
+         image: wazuh/wazuh-dashboard:|WAZUH_CURRENT_DOCKER|
          environment:
             - INDEXER_USERNAME=admin
             - INDEXER_PASSWORD=SecretPassword
@@ -142,7 +142,7 @@ Single-node stack
             - DASHBOARD_USERNAME=kibanaserver
             - DASHBOARD_PASSWORD=kibanaserver
 
-#. Replace the content of ``single-node/config/wazuh_cluster/wazuh_manager.conf`` file in your stack with the one from the ``v4.13.0`` tag of the `Wazuh Docker repository <https://github.com/wazuh/wazuh-docker>`_.
+#. Replace the content of ``single-node/config/wazuh_cluster/wazuh_manager.conf`` file in your stack with the one from the ``v|WAZUH_CURRENT_DOCKER|`` tag of the `Wazuh Docker repository <https://github.com/wazuh/wazuh-docker>`_.
 
 #. Start the new version of Wazuh using the ``docker compose`` command:
 
@@ -214,22 +214,22 @@ Multi-node stack
       :emphasize-lines: 2,5,8,11,14,17
 
       wazuh.master:
-         image: wazuh/wazuh-manager:4.13.0
+         image: wazuh/wazuh-manager:|WAZUH_CURRENT_DOCKER|
       ...
       wazuh.worker:
-         image: wazuh/wazuh-manager:4.13.0
+         image: wazuh/wazuh-manager:|WAZUH_CURRENT_DOCKER|
       ...
       wazuh1.indexer:
-         image: wazuh/wazuh-indexer:4.13.0
+         image: wazuh/wazuh-indexer:|WAZUH_CURRENT_DOCKER|
       ...
       wazuh2.indexer:
-         image: wazuh/wazuh-indexer:4.13.0
+         image: wazuh/wazuh-indexer:|WAZUH_CURRENT_DOCKER|
       ...
       wazuh3.indexer:
-         image: wazuh/wazuh-indexer:4.13.0
+         image: wazuh/wazuh-indexer:|WAZUH_CURRENT_DOCKER|
       ...
       wazuh.dashboard:
-         image: wazuh/wazuh-dashboard:4.13.0
+         image: wazuh/wazuh-dashboard:|WAZUH_CURRENT_DOCKER|
 
    **Optional**: If you are updating from Wazuh version 4.3, add the variable related to the ``kibanaserver`` user.
 
@@ -238,7 +238,7 @@ Multi-node stack
 
       ...
       wazuh.dashboard:
-         image: wazuh/wazuh-dashboard:4.13.0
+         image: wazuh/wazuh-dashboard:|WAZUH_CURRENT_DOCKER|
          environment:
             - OPENSEARCH_HOSTS="https://wazuh1.indexer:9200"
             - WAZUH_API_URL="https://wazuh.master"
@@ -257,6 +257,3 @@ Multi-node stack
    .. code-block:: console
 
       # docker compose up -d
-
-
-
