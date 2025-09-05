@@ -413,6 +413,107 @@ $ossec_rootcheck_system_audit
 
   `Type String`
 
+.. _ref_server_vars_sca:
+
+SCA variables
+-------------
+
+$configure_sca
+  Enables SCA section render on this host.
+
+  `Default true`
+
+  `Type Boolean`
+
+$sca_enabled
+  Enable SCA on this host.
+
+  `Default yes`
+
+  `Type String`
+
+   Depends on **configure_sca**
+
+$sca_scan_on_start
+  The SCA module will perform the scan immediately when started.
+
+  `Default yes`
+
+  `Type String`
+
+   Depends on **configure_sca**
+
+$sca_interval
+  The interval between module executions.
+
+  `Default 12h`
+
+  `Type String`
+
+   Depends on **configure_sca**
+
+$sca_skip_nfs
+  Enable or disable the scanning of network mounted filesystems (Works on Linux and FreeBSD). Currently, skip_nfs will exclude checking files on CIFS or NFS mounts.
+
+  `Default yes`
+
+  `Type String`
+
+   Depends on **configure_sca**
+
+$sca_policies
+  A list of policies to run assessments can be included in this section.
+
+  `Default []`
+
+  `Type List`
+
+   Depends on **configure_sca**
+
+$sca_max_eps
+  Sets the maximum event reporting throughput. Events are messages that will produce an alert.
+
+  `Default 50`
+
+  `Type String`
+
+   Depends on **configure_sca**
+
+$sca_synchronization_enabled
+  Specifies performing periodic inventory synchronizations.
+
+  `Default yes`
+
+  `Type String`
+
+   Depends on **configure_sca**
+
+$sca_synchronization_interval
+  Specifies the initial time interval between every inventory synchronization.
+
+  `Default 5m`
+
+  `Type String`
+
+   Depends on **configure_sca**
+
+$sca_synchronization_response_timeout
+  Waiting time in seconds since a sync message is sent or received for the next synchronization activity.
+
+  `Default 30`
+
+  `Type String`
+
+   Depends on **configure_sca**
+
+$sca_synchronization_max_eps
+  Sets the maximum synchronization message throughput.
+
+  `Default 10`
+
+  `Type String`
+
+   Depends on **configure_sca**
 
 .. _ref_server_vars_syscheck:
 

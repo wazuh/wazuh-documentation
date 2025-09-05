@@ -530,6 +530,51 @@ $sca_else_policies
 
    Depends on **configure_sca and apply_template_os**
 
+$sca_max_eps
+  Sets the maximum event reporting throughput. Events are messages that will produce an alert.
+
+  `Default 50`
+
+  `Type String`
+
+   Depends on **configure_sca**
+
+$sca_synchronization_enabled
+  Specifies performing periodic inventory synchronizations.
+
+  `Default yes`
+
+  `Type String`
+
+   Depends on **configure_sca**
+
+$sca_synchronization_interval
+  Specifies the initial time interval between every inventory synchronization.
+
+  `Default 5m`
+
+  `Type String`
+
+   Depends on **configure_sca**
+
+$sca_synchronization_response_timeout
+  Waiting time in seconds since a sync message is sent or received for the next synchronization activity.
+
+  `Default 30`
+
+  `Type String`
+
+   Depends on **configure_sca**
+
+$sca_synchronization_max_eps
+  Sets the maximum synchronization message throughput.
+
+  `Default 10`
+
+  `Type String`
+
+   Depends on **configure_sca**
+
 
 .. _ref_agent_vars_syscheck:
 

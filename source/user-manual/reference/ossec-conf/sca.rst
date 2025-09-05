@@ -28,6 +28,8 @@ Main options
 - `enabled`_
 - `skip_nfs`_
 - `policies`_
+- `max_eps`_
+- `synchronization`_
 
 
 +----------------------+-----------------------------+
@@ -38,6 +40,10 @@ Main options
 | `skip_nfs`_          | yes, no                     |
 +----------------------+-----------------------------+
 | `policies`_          | N/A                         |
++----------------------+-----------------------------+
+| `max_eps`_           | Integer (0-1000000)         |
++----------------------+-----------------------------+
+| `synchronization`_   | N/A                         |
 +----------------------+-----------------------------+
 
 Scheduling options
@@ -136,6 +142,77 @@ Example
     <policy>/path/to/my/policy.yml</policy>
   </policies>
 
+max_eps
+^^^^^^^
+
+Sets the maximum event reporting throughput. Events are messages that will produce an alert.
+
++--------------------+---------------------------------------------------------+
+| **Default value**  | 50                                                      |
++--------------------+---------------------------------------------------------+
+| **Allowed values** | Integer number between 0 and 1000000. 0 means disabled. |
++--------------------+---------------------------------------------------------+
+
+Example:
+
+.. code-block:: xml
+
+ <max_eps>50</max_eps>
+
+synchronization
+^^^^^^^^^^^^^^^
+
+The database synchronization settings are configured inside this tag.
+
+.. code-block:: xml
+
+    <!-- Database synchronization settings -->
+    <synchronization>
+      <enabled>yes</enabled>
+      <interval>5m</interval>
+      <response_timeout>30</response_timeout>
+      <max_eps>10</max_eps>
+    </synchronization>
+
+**enabled**
+
+Specifies performing periodic inventory synchronizations.
+
++--------------------+---------------------------------------+
+| **Default value**  | yes                                   |
++--------------------+---------------------------------------+
+| **Allowed values** | yes, no                               |
++--------------------+---------------------------------------+
+
+**interval**
+
+Specifies the initial time interval between every inventory synchronization.
+
++--------------------+-----------------------------------------------------------------------+
+| **Default value**  | 5m                                                                    |
++--------------------+-----------------------------------------------------------------------+
+| **Allowed values** | Any number greater than or equal to 0. Allowed suffixes (s, m, h, d). |
++--------------------+-----------------------------------------------------------------------+
+
+**response_timeout**
+
+Waiting time in seconds since a sync message is sent or received for the next synchronization activity.
+
++--------------------+----------------------------------------------------------------------+
+| **Default value**  | 30                                                                   |
++--------------------+----------------------------------------------------------------------+
+| **Allowed values** | Any number between 0 and ``interval``.                               |
++--------------------+----------------------------------------------------------------------+
+
+**max_eps**
+
+Sets the maximum synchronization message throughput.
+
++--------------------+---------------------------------------------------------+
+| **Default value**  | 10                                                      |
++--------------------+---------------------------------------------------------+
+| **Allowed values** | Integer number between 0 and 1000000. 0 means disabled. |
++--------------------+---------------------------------------------------------+
 
 scan_on_start
 ^^^^^^^^^^^^^
@@ -224,10 +301,20 @@ Configuration example
         <scan_on_start>yes</scan_on_start>
         <time>04:00</time>
         <skip_nfs>yes</skip_nfs>
+        <!-- Maximum output throughput -->
+        <max_eps>50</max_eps>
 
         <policies>
           <policy>etc/shared/cis_debian10.yml</policy>
           <policy enabled="no">ruleset/sca/cis_debian9.yml</policy>
           <policy>/my/custom/policy/path/my_policy.yaml</policy>
         </policies>
+
+        <!-- Database synchronization settings -->
+        <synchronization>
+          <enabled>yes</enabled>
+          <interval>5m</interval>
+          <response_timeout>30</response_timeout>
+          <max_eps>10</max_eps>
+        </synchronization>
       </sca>
