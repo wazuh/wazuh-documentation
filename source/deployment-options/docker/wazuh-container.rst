@@ -21,7 +21,7 @@ Wazuh supports the deployment of its central components and agent on Docker.
 
    It provides persistent storage and configurable certificates for secure communication.
 
--  `Multi-node stack <multi-node-stack>`_: This stack deploys each Wazuh component as a separate container. It includes:
+-  :ref:`Multi-node stack <multi-node-stack>`: This stack deploys each Wazuh component as a separate container. It includes:
 
    -  Three Wazuh indexer containers: Work together in a cluster to store and replicate indexed data, ensuring scalability and fault tolerance.
    -  Two Wazuh manager containers: One master and one worker node. The master coordinates agent management and rule updates, while the worker provides redundancy and load distribution.
@@ -46,8 +46,6 @@ Single-node stack deployment
 -  **CPU**: At least 4 cores
 -  **Memory**: At least 8 GB of RAM for the Docker host
 -  **Disk space**: At least 50 GB storage for Docker images and data volumes
-
-.. _multi-node-stack:
 
 Multi-node stack deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -126,7 +124,7 @@ The following ports are exposed when the Wazuh central components are deployed.
 Wazuh central components
 ------------------------
 
-Below are the steps for deploying the Wazuh central components in :ref:`single-node <single-node-stack>` and multi-node stacks.
+Below are the steps for deploying the Wazuh central components in :ref:`single-node <single-node-stack>` and :ref:`multi-node <multi-node-stack>` stacks.
 
 .. warning::
 
@@ -294,9 +292,9 @@ Cloning the repository
 
 #. Navigate to the multi-node directory to execute all the following commands.
 
-      .. code-block:: console
+   .. code-block:: console
 
-         # cd wazuh-docker/multi-node/
+      # cd wazuh-docker/multi-node/
 
 Certificate generation
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -333,37 +331,37 @@ You must provide certificates for each node to secure communication between them
 
             # docker compose -f generate-indexer-certs.yml run --rm generator
 
-      The generated certificates will be stored in the ``wazuh-docker/single-node/config/wazuh_indexer_ssl_certs`` directory.
+      The generated certificates will be stored in the ``wazuh-docker/multi-node/config/wazuh_indexer_ssl_certs`` directory.
 
    .. group-tab:: Your own certificates
 
-      If you already have valid certificates for each node, place them in the ``wazuh-docker/single-node/config/wazuh_indexer_ssl_certs/`` directory using the following file names. Note your stack for the right path.
+      If you already have valid certificates for each node, place them in the ``wazuh-docker/multi-node/config/wazuh_indexer_ssl_certs/`` directory using the following file names. Note your stack for the right path.
 
       **Wazuh indexer**:
 
       .. code-block:: none
 
-         wazuh-docker/single-node/config/wazuh_indexer_ssl_certs/root-ca.pem
-         wazuh-docker/single-node/config/wazuh_indexer_ssl_certs/wazuh.indexer-key.pem
-         wazuh-docker/single-node/config/wazuh_indexer_ssl_certs/wazuh.indexer.pem
-         wazuh-docker/single-node/config/wazuh_indexer_ssl_certs/admin.pem
-         wazuh-docker/single-node/config/wazuh_indexer_ssl_certs/admin-key.pem
+         wazuh-docker/multi-node/config/wazuh_indexer_ssl_certs/root-ca.pem
+         wazuh-docker/multi-node/config/wazuh_indexer_ssl_certs/wazuh.indexer-key.pem
+         wazuh-docker/multi-node/config/wazuh_indexer_ssl_certs/wazuh.indexer.pem
+         wazuh-docker/multi-node/config/wazuh_indexer_ssl_certs/admin.pem
+         wazuh-docker/multi-node/config/wazuh_indexer_ssl_certs/admin-key.pem
 
       **Wazuh manager**:
 
       .. code-block:: none
 
-         wazuh-docker/single-node/config/wazuh_indexer_ssl_certs/root-ca-manager.pem
-         wazuh-docker/single-node/config/wazuh_indexer_ssl_certs/wazuh.manager.pem
-         wazuh-docker/single-node/config/wazuh_indexer_ssl_certs/wazuh.manager-key.pem
+         wazuh-docker/multi-node/config/wazuh_indexer_ssl_certs/root-ca-manager.pem
+         wazuh-docker/multi-node/config/wazuh_indexer_ssl_certs/wazuh.manager.pem
+         wazuh-docker/multi-node/config/wazuh_indexer_ssl_certs/wazuh.manager-key.pem
 
       **Wazuh dashboard**:
 
       .. code-block:: none
 
-         wazuh-docker/single-node/config/wazuh_indexer_ssl_certs/wazuh.dashboard.pem
-         wazuh-docker/single-node/config/wazuh_indexer_ssl_certs/wazuh.dashboard-key.pem
-         wazuh-docker/single-node/config/wazuh_indexer_ssl_certs/root-ca.pem
+         wazuh-docker/multi-node/config/wazuh_indexer_ssl_certs/wazuh.dashboard.pem
+         wazuh-docker/multi-node/config/wazuh_indexer_ssl_certs/wazuh.dashboard-key.pem
+         wazuh-docker/multi-node/config/wazuh_indexer_ssl_certs/root-ca.pem
 
 Deployment
 ^^^^^^^^^^
@@ -391,7 +389,7 @@ Deployment
 Accessing the Wazuh dashboard
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-After deploying the single-node stack, you can access the Wazuh dashboard using your Docker host's IP address or localhost.
+After deploying the multi-node stack, you can access the Wazuh dashboard using your Docker host's IP address or localhost.
 
 .. code-block:: none
 
