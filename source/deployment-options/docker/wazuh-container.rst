@@ -208,7 +208,7 @@ You must provide certificates for each node to secure communication between them
          wazuh-docker/single-node/config/wazuh_indexer_ssl_certs/root-ca.pem
 
 Deployment
-^^^^^^^^^^
+~~~~~~~~~~
 
 #. Start the Wazuh Docker deployment using the ``docker compose`` command:
 
@@ -233,7 +233,7 @@ Deployment
 
 
 Accessing the Wazuh dashboard
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 After deploying the single-node stack, you can access the Wazuh dashboard using your Docker host's IP address or localhost.
 
@@ -346,21 +346,23 @@ You must provide certificates for each node to secure communication between them
          wazuh-docker/multi-node/config/wazuh_indexer_ssl_certs/root-ca.pem
 
 Deployment
-^^^^^^^^^^
+~~~~~~~~~~
 
 #. Start the Wazuh Docker deployment using the ``docker compose`` command:
 
-   -  **Background**:
+   .. tabs::
+
+      .. group-tab:: Background
 
       .. code-block:: console
 
-         # docker compose up -d
+            # docker compose up -d
 
-   -  **Foreground**:
+      .. group-tab:: Foreground
 
-      .. code-block:: console
+         .. code-block:: console
 
-         # docker compose up
+            # docker compose up
 
 .. note::
 
@@ -369,7 +371,7 @@ Deployment
 
 
 Accessing the Wazuh dashboard
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 After deploying the multi-node stack, you can access the Wazuh dashboard using your Docker host's IP address or localhost.
 
