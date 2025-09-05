@@ -84,9 +84,9 @@ Additional configuration is required to ensure proper functionality when running
 
    .. code-block:: console
 
-      # usermod -aG docker your-user
+      # usermod -aG docker <USER>
 
-   Log out and back in for changes to take effect.
+   Replace ``<USER>`` with your username.  Log out and back in for changes to take effect.
 
 Exposed ports
 -------------
