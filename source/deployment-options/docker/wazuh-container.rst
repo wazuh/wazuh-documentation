@@ -56,15 +56,6 @@ Multi-node stack deployment
 -  **Memory**: At least 16 GB for the Docker host
 -  **Disk space**: At least 100 GB storage for Docker images and data volumes
 
-Wazuh agent deployment
-~~~~~~~~~~~~~~~~~~~~~~
-
--  **Operating system**: Linux or Windows
--  **Architecture**: AMD64 or ARM64
--  **CPU**: At least 2 cores
--  **Memory**: At least 1 GB of RAM for the Docker host
--  **Disk space**: At least 10 GB storage for Docker images and logs
-
 Required software
 ^^^^^^^^^^^^^^^^^
 
