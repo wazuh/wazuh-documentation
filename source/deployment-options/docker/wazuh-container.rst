@@ -141,7 +141,7 @@ Cloning the repository
       # cd wazuh-docker/single-node/
 
 Certificate generation
-^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~
 
 You must provide certificates for each node to secure communication between them in the Wazuh stack. You have two alternatives:
 
@@ -262,7 +262,7 @@ Multi-node stack deployment
 Follow the steps below to deploy the Wazuh central components in a multi-node stack.
 
 Cloning the repository
-^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~
 
 #. Clone the `Wazuh Docker repository <https://github.com/wazuh/wazuh-docker>`__ to your system:
 
@@ -277,7 +277,7 @@ Cloning the repository
       # cd wazuh-docker/multi-node/
 
 Certificate generation
-^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~
 
 You must provide certificates for each node to secure communication between them in the Wazuh stack. You have two alternatives:
 
