@@ -41,14 +41,14 @@ To change these credentials, you must:
 .. _log-out-of-your-wazuh-dashboard:
 
 Logging out of your Wazuh dashboard
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 You must log out of your Wazuh dashboard before starting the password change process. If you don't, persistent session cookies will cause errors when accessing Wazuh after changing user passwords.
 
 .. _set-a-new-password-in-the-docker-compose-file:
 
 Setting the new password in the Docker Compose file
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. note::
 
@@ -118,7 +118,7 @@ Setting the new password in the Docker Compose file
 .. _create-and-set-the-hash-of-your-new-password:
 
 Setting a new hash
-~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^
 
 Follow the steps below to generate and set a new password hash for your Wazuh users.
 
@@ -179,7 +179,7 @@ Follow the steps below to generate and set a new password hash for your Wazuh us
 .. _apply-the-changes:
 
 Applying the changes
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^
 
 After updating ``docker-compose.yml`` file, restart the Wazuh Docker stack and reapply settings using the ``securityadmin.sh`` tool.
 
