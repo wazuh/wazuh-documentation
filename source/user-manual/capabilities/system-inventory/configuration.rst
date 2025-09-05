@@ -28,7 +28,7 @@ The block below is the default Syscollector configuration present in the Wazuh a
         <os>yes</os>
         <network>yes</network>
         <packages>yes</packages>
-        <ports all="no">yes</ports>
+        <ports all="yes">yes</ports>
         <processes>yes</processes>
 
         <!-- Database synchronization settings -->
@@ -49,7 +49,12 @@ Where:
 - ``<os>`` option enables or disables the operating system scan. The default value is ``yes``. The allowed values are ``yes`` and ``no``.
 - ``<network>`` enables or disables the network scan. The default value is ``yes``. The allowed values are ``yes`` and ``no``.
 - ``<packages>`` enables or disables the scanning of packages with a default value of ``yes``. The allowed values are ``yes`` and ``no``.
-- ``<ports all="no">`` enables or disables the port scan. The default value is ``yes``. You can configure two allowed values of ``yes`` and ``no``. This option also accepts an additional parameter ``all``, with which you can restrict the scan to only listening ports using ``<ports all="no">``. If you want Syscollector to scan all ports, then you change the value to ``yes``.
+- ``<ports>`` enables or disables the port scan. Default is ``yes``. Allowed values are ``yes`` and ``no``.
+
+  You can also use the ``all`` attribute to target all ports or only listening ports:
+
+  -  ``<ports all="yes">`` all ports.
+  -  ``<ports all="no">`` only listening ports.
 - ``<processes>`` enables or disables the scanning for running processes on a monitored endpoint. The default value is ``yes``. The allowed values are ``yes`` and ``no``.
 - ``<max_eps>`` allows you to set the maximum event reporting throughput. The default value is 10, which signifies 10 events per second. The allowed value is an Integer number between 0 and 1000000.
 

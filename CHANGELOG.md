@@ -22,6 +22,7 @@ All notable changes to this project will be documented in this file.
 - Added instructions for retrieving the correct Puppet agent node name and to set the ``<PUPPET_AGENT_NODE_NAME>`` placeholder in the manifest. ([#8664](https://github.com/wazuh/wazuh-documentation/pull/8664))
 - Updated the *Deployment on Docker* section. ([#8688](https://github.com/wazuh/wazuh-documentation/pull/8688))
 - Updated default values for `agents_disconnection_time` and `notify_time`. ([#8769](https://github.com/wazuh/wazuh-documentation/pull/8769))
+- Updated the default value of the `all` attribute in the `ports` Syscollector configuration option. ([#8840](https://github.com/wazuh/wazuh-documentation/pull/8840))
 
 ## [v4.12.0]
 
