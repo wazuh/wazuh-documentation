@@ -14,7 +14,7 @@ Access to services and containers
 This section explains how to interact with your Wazuh deployment by accessing service logs and shell instances of running containers.
 
 #. Access the Wazuh dashboard using the Docker host IP address.
-#. Enroll agents through the :doc:`Wazuh agent Docker deployment </deployment-options/docker/wazuh-agent>` or the standard :doc:`Wazuh agent enrollment </user-manual/agent/agent-enrollment/index>` process. Use the Docker host address as the Wazuh manager address.
+#. Enroll agents through the standard :doc:`Wazuh agent enrollment </user-manual/agent/agent-enrollment/index>` process. Use the Docker host address as the Wazuh manager address.
 #. List the containers in the directory where the Wazuh ``docker-compose.yml`` file is located:
 
    .. code-block:: console
@@ -34,46 +34,6 @@ This section explains how to interact with your Wazuh deployment by accessing se
    .. code-block:: console
 
       # docker compose exec <SERVICE> bash
-
-Tuning Wazuh services
----------------------
-
-You can tune the Wazuh indexer and Wazuh dashboard by replacing their default configuration with custom parameters. This allows you to adjust performance settings, change the dashboard interface, or override default options.
-
-Tuning the Wazuh indexer
-^^^^^^^^^^^^^^^^^^^^^^^^
-
-The Wazuh indexer uses a default internal configuration that is not exposed by default. Follow the steps below to override the default configuration:
-
-#. Create a new configuration file:
-
-   .. code-block:: none
-
-      # touch config/wazuh_indexer/<new_wazuh_indexer>.yml
-
-   Replace ``<new_wazuh_indexer>`` with your new service name.
-
-#. Map your configuration file inside the container in the ``docker-compose.yml`` file. Update the Wazuh indexer container declaration to:
-
-   .. code-block:: yaml
-      :emphasize-lines: 4,5,7
-
-      <new_wazuh_indexer>:
-       image: wazuh/wazuh-indexer:latest
-       ports:
-         - "9200:9200"
-         - "9300:9300"
-       environment:
-         ES_JAVA_OPTS: "-Xms6g -Xmx6g"
-       networks:
-         - docker_wazuh
-
-Tuning the Wazuh dashboard
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-The Wazuh dashboard reads its configuration from ``config/wazuh_dashboard/opensearch_dashboards.yml``. Edit this file to customize the Wazuh dashboard with your desired settings. After making changes, restart the Wazuh Docker container for the updates to take effect.
-
-Refer to the OpenSearch documentation on `Modifying the YAML files <https://docs.opensearch.org/latest/security/configuration/yaml/>`__ for details about the available variables you can override in this configuration.
 
 Wazuh service data volumes
 --------------------------
@@ -103,6 +63,7 @@ Adding a custom volume
 You need multiple volumes to ensure persistence on the Wazuh server, Wazuh indexer, and Wazuh dashboard containers. Investigate the ``volumes`` section in your ``docker-compose.yml`` file and modify it to include your custom volumes:
 
 .. code-block:: yaml
+   :emphasize-lines: 4,5,7,8
 
    services:
      wazuh.manager:
@@ -177,18 +138,20 @@ To customize the Wazuh configuration file ``/var/ossec/etc/ossec.conf``, modify 
 
 #. The following are the locations of the Wazuh configuration files on the Docker host that you can modify:
 
-   -  **Single-node deployment:**
+   .. tabs::
 
-      ``wazuh-docker/single-node/config/wazuh_cluster/wazuh_manager.conf``
+      .. group-tab:: Single-node deployment
 
-   -  **Multi-node deployment:**
+         ``wazuh-docker/single-node/config/wazuh_cluster/wazuh_manager.conf``
 
-      -  **Manager**: ``wazuh-docker/multi-node/config/wazuh_cluster/wazuh_manager.conf``
-      -  **Worker**: ``wazuh-docker/multi-node/config/wazuh_cluster/wazuh_worker.conf``
+      .. group-tab:: Multi-node deployment
 
-   -  **Wazuh agent container:**
+         -  **Manager**: ``wazuh-docker/multi-node/config/wazuh_cluster/wazuh_manager.conf``
+         -  **Worker**: ``wazuh-docker/multi-node/config/wazuh_cluster/wazuh_worker.conf``
 
-      ``wazuh-docker/wazuh-agent/config/wazuh-agent-conf``
+      .. group-tab::  Wazuh agent container
+
+         ``wazuh-docker/wazuh-agent/config/wazuh-agent-conf``
 
    Save the changes made in the configuration files.
 
@@ -199,3 +162,12 @@ To customize the Wazuh configuration file ``/var/ossec/etc/ossec.conf``, modify 
       # docker compose up -d
 
 These files are mounted into the container at runtime (``wazuh-config-mount/etc/ossec.conf``), ensuring your changes take effect when the containers start.
+
+Tuning Wazuh services
+---------------------
+
+Tuning the Wazuh indexer and dashboard is **optional**. You can apply custom configurations only if you need to adjust performance, customize the dashboard interface, or override default settings.
+
+-  The Wazuh indexer reads its configuration from the file(s) in the ``config/wazuh_indexer/`` directory in your respective deployment stack. Edit the appropriate configuration file(s) with your desired parameters, and ensure any changes made are properly mapped in your ``docker-compose.yml`` so the container loads the updated configuration.
+
+-  The Wazuh dashboard reads its configuration from the ``config/wazuh_dashboard/opensearch_dashboards.yml`` file. You can adjust dashboard behavior or appearance by modifying parameters in this file. Refer to the OpenSearch documentation on `Modifying the YAML files <https://docs.opensearch.org/latest/security/configuration/yaml/>`__ for details about the available variables you can override in this configuration.

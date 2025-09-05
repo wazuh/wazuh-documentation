@@ -11,12 +11,24 @@ Wazuh consists of a multi-platform Wazuh agent and three central components: the
 Deployment options
 ------------------
 
-Wazuh supports the deployment of the central components on Docker.
+Wazuh supports the deployment of its central components and agent on Docker.
 
--  You can deploy `Wazuh central components`_ as a single-node or multi-node stack.
+-  :ref:`Single-node stack <single-node-stack>`: This stack deploys one of each Wazuh central component as a separate container. It includes:
 
-   -  **Single-node stack**: Runs one Wazuh manager, indexer, and dashboard node on the Docker host. Supports persistent storage and configurable certificates for secure communications.
-   -  **Multi-node stack**: Runs two Wazuh manager nodes (one master, one worker), three indexer nodes, one dashboard, and one nginx node. Includes persistence, secure communication configuration, and high availability.
+   -  Wazuh indexer container: Stores and indexes security data collected by the Wazuh manager.
+   -  Wazuh manager container: Analyzes collected security events, applies detection rules, and manages Wazuh agents.
+   -  Wazuh dashboard container: Centralized web interface for monitoring, searching, and managing Wazuh.
+
+   It provides persistent storage and configurable certificates for secure communication.
+
+-  `Multi-node stack <multi-node-stack>`_: This stack deploys each Wazuh component as a separate container. It includes:
+
+   -  Three Wazuh indexer containers: Work together in a cluster to store and replicate indexed data, ensuring scalability and fault tolerance.
+   -  Two Wazuh manager containers: One master and one worker node. The master coordinates agent management and rule updates, while the worker provides redundancy and load distribution.
+   -  One Wazuh dashboard container.
+   -  One Nginx proxy container: This provides a single secure entry point that load balances traffic between multiple Wazuh manager nodes for high availability. The Nginx container acts as a reverse proxy, distributing incoming requests across the available manager nodes and providing SSL termination for secure communication.
+
+This deployment stack provides persistent storage, secure communication, and high availability.
 
 Prerequisites
 -------------
@@ -29,41 +41,43 @@ System requirements
 Single-node stack deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
--  Operating system: Linux or Windows
--  Architecture: AMD64 or ARM64
--  CPU: At least 4 cores
--  Memory: At least 8 GB of RAM for the Docker host
--  Disk space: At least 50 GB storage for Docker images and data volumes
+-  **Operating system**: Linux or Windows
+-  **Architecture**: AMD64 or ARM64
+-  **CPU**: At least 4 cores
+-  **Memory**: At least 8 GB of RAM for the Docker host
+-  **Disk space**: At least 50 GB storage for Docker images and data volumes
+
+.. _multi-node-stack:
 
 Multi-node stack deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
--  Operating system: Linux or Windows
--  Architecture: AMD64 or ARM64
--  CPU: At least 4 cores
--  Memory: At least 16 GB for the Docker host
--  Disk space: At least 100 GB storage for Docker images and data volumes
+-  **Operating system**: Linux or Windows
+-  **Architecture**: AMD64 or ARM64
+-  **CPU**: At least 4 cores
+-  **Memory**: At least 16 GB for the Docker host
+-  **Disk space**: At least 100 GB storage for Docker images and data volumes
 
 Wazuh agent deployment
 ~~~~~~~~~~~~~~~~~~~~~~
 
--  Operating system: Linux or Windows
--  Architecture: AMD64 or ARM64
--  CPU: At least 2 cores
--  Memory: At least 1 GB of RAM for the Docker host
--  Disk space: At least 10 GB storage for Docker images and logs
+-  **Operating system**: Linux or Windows
+-  **Architecture**: AMD64 or ARM64
+-  **CPU**: At least 2 cores
+-  **Memory**: At least 1 GB of RAM for the Docker host
+-  **Disk space**: At least 10 GB storage for Docker images and logs
 
 Required software
 ^^^^^^^^^^^^^^^^^
 
-Docker Engine / Docker Desktop: Use the latest stable version.
+-  **Docker Engine / Docker Desktop**: Use the latest stable version.
 
--  Linux: Docker Engine
--  Windows: Docker Desktop (requires WSL 2)
+   -  **Linux**: Docker Engine
+   -  **Windows**: Docker Desktop (requires WSL 2)
 
-Docker Compose: Latest stable version (included with Docker Desktop on Windows; install separately on Linux if needed).
+-  **Docker Compose**: Latest stable version (included with Docker Desktop on Windows; install separately on Linux if needed).
 
-Git: For cloning the Wazuh Docker repository.
+-  **Git**: For cloning the Wazuh Docker repository.
 
 Linux/Unix host requirements
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -112,7 +126,9 @@ The following ports are exposed when the Wazuh central components are deployed.
 Wazuh central components
 ------------------------
 
-Below are the steps for deploying the Wazuh central components in single-node and multi-node stacks.
+Below are the steps for deploying the Wazuh central components in :ref:`single-node <single-node-stack>` and multi-node stacks.
+
+.. _single-node-stack:
 
 Single-node stack deployment
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
