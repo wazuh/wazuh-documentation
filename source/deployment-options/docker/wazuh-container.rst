@@ -134,7 +134,7 @@ Cloning the repository
 
       # git clone https://github.com/wazuh/wazuh-docker.git -b v|WAZUH_CURRENT_DOCKER|
 
-#. Navigate to the single-node directory to execute all the following commands.
+#. Navigate to the ``single-node`` directory to execute all the following commands.
 
    .. code-block:: console
 
