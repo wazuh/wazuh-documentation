@@ -3,8 +3,8 @@
 .. meta::
    :description: You can modify and build Docker images for the Wazuh central components. Learn more in this section of the documentation.
 
-Build Docker images locally
-===========================
+Building Docker images locally
+==============================
 
 You can modify and build Docker images for the Wazuh central components (manager, indexer, and dashboard).
 
@@ -20,4 +20,4 @@ You can modify and build Docker images for the Wazuh central components (manager
 
       # build-docker-images/build-images.sh
 
-This generates updated Docker images for all Wazuh components on your local system.
+This builds Docker images for all Wazuh components on your local system.
