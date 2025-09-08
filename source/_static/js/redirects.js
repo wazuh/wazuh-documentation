@@ -98,8 +98,9 @@ newUrls['4.12'] = [
   '/development/packaging/generate-server-package.html',
   '/development/packaging/generate-agent-package.html',
   '/cloud-service/ai-analyst.html',
-  '/deployment-options/docker/prerequisites.html',
   '/deployment-options/docker/build-docker-images-locally.html',
+  '/deployment-options/docker/changing-default-password.html',
+  '/deployment-options/docker/uninstalling-wazuh-docker.html',
 ]
 /* Redirections from 4.9 to 4.10  */
 
