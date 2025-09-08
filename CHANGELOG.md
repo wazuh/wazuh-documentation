@@ -57,6 +57,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated the instruction and images in Wazuh server API getting started documentation to reflect the new navigation path (**Server management** > **Dev Tools**). ([#8811](https://github.com/wazuh/wazuh-documentation/pull/8811))
 - **Post-release**: Updated the *Getting started with Wazuh - Architecture* documentation. ([#8819](https://github.com/wazuh/wazuh-documentation/pull/8819))
 - **Post-release**: Changed Suricata ruleset file permission in POC guide. ([#8821](https://github.com/wazuh/wazuh-documentation/pull/8821))
+- **Post-release**: Adjusted the Data analysis documentation. ([#8850](https://github.com/wazuh/wazuh-documentation/pull/8850))
 
 ### Fixed
 
