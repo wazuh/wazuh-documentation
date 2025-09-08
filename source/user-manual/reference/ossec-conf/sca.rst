@@ -41,7 +41,7 @@ Main options
 +----------------------+-----------------------------+
 | `policies`_          | N/A                         |
 +----------------------+-----------------------------+
-| `max_eps`_           | Integer (0-1000000)         |
+| `max_eps`_           | Integer (0-1,000,000)       |
 +----------------------+-----------------------------+
 | `synchronization`_   | N/A                         |
 +----------------------+-----------------------------+
@@ -147,12 +147,12 @@ Example
 max_eps
 ^^^^^^^
 
-Sets the maximum event reporting throughput. Events are messages that will produce an alert.
+Sets the maximum throughput for event reporting. Events are messages that generate alerts.
 
 +--------------------+---------------------------------------------------------+
 | **Default value**  | 50                                                      |
 +--------------------+---------------------------------------------------------+
-| **Allowed values** | Integer number between 0 and 1000000. 0 means disabled. |
+| **Allowed values** | Integer between 0 and 1,000,000. 0 disables it.         |
 +--------------------+---------------------------------------------------------+
 
 Example:
@@ -164,7 +164,7 @@ Example:
 synchronization
 ^^^^^^^^^^^^^^^
 
-The database synchronization settings are configured inside this tag.
+Database synchronization settings go inside this tag.
 
 .. code-block:: xml
 
@@ -178,7 +178,7 @@ The database synchronization settings are configured inside this tag.
 
 **enabled**
 
-Specifies performing periodic inventory synchronizations.
+Enables periodic inventory synchronization.
 
 +--------------------+---------------------------------------+
 | **Default value**  | yes                                   |
@@ -188,32 +188,32 @@ Specifies performing periodic inventory synchronizations.
 
 **interval**
 
-Specifies the initial time interval between every inventory synchronization.
+Specifies the initial time between inventory synchronizations.
 
 +--------------------+-----------------------------------------------------------------------+
 | **Default value**  | 5m                                                                    |
 +--------------------+-----------------------------------------------------------------------+
-| **Allowed values** | Any number greater than or equal to 0. Allowed suffixes (s, m, h, d). |
+| **Allowed values** | Any number greater than or equal to 0. Allowed suffixes: s, m, h, d.  |
 +--------------------+-----------------------------------------------------------------------+
 
 **response_timeout**
 
-Waiting time in seconds since a sync message is sent or received for the next synchronization activity.
+Waiting time in seconds between a sync message and the next synchronization.
 
 +--------------------+----------------------------------------------------------------------+
 | **Default value**  | 30                                                                   |
 +--------------------+----------------------------------------------------------------------+
-| **Allowed values** | Any number between 0 and ``interval``.                               |
+| **Allowed values** | Any number between 0 and the value of ``interval``.                  |
 +--------------------+----------------------------------------------------------------------+
 
 **max_eps**
 
-Sets the maximum synchronization message throughput.
+Sets the maximum throughput for synchronization messages.
 
 +--------------------+---------------------------------------------------------+
 | **Default value**  | 10                                                      |
 +--------------------+---------------------------------------------------------+
-| **Allowed values** | Integer number between 0 and 1000000. 0 means disabled. |
+| **Allowed values** | Integer between 0 and 1,000,000. 0 disables it.         |
 +--------------------+---------------------------------------------------------+
 
 scan_on_start
