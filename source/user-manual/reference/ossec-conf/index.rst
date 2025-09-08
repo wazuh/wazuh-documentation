@@ -55,8 +55,6 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 +---------------------------------------------------------------------+------------------------+
 | :doc:`email_alerts <email-alerts>`                                  | manager                |
 +---------------------------------------------------------------------+------------------------+
-| :doc:`fluent-forward <fluent-forward>`                              | manager, agent         |
-+---------------------------------------------------------------------+------------------------+
 | :doc:`global  <global>`                                             | manager                |
 +---------------------------------------------------------------------+------------------------+
 | :doc:`github <github-module>`                                       | manager, agent         |
@@ -157,7 +155,6 @@ All of the above sections must be located within the top-level ``<ossec_config>`
    syscheck
    syslog-output
    task-manager
-   fluent-forward
    gcp-pubsub
    gcp-bucket
    vuln-detector
