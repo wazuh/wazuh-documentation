@@ -168,6 +168,7 @@ You must provide certificates for each node to secure communication between them
       #. **Optional**: Add the following to the ``generate-indexer-certs.yml`` file if your system uses a proxy. If not, skip this step. Replace ``<YOUR_PROXY_ADDRESS_OR_DNS>`` with your proxy information.
 
          .. code-block:: yaml
+            :emphasize-lines: 9,10
 
             # Wazuh App Copyright (C) 2017, Wazuh Inc. (License GPLv2)
             services:
@@ -306,6 +307,7 @@ You must provide certificates for each node to secure communication between them
       #. **Optional**: Add the following to the ``generate-indexer-certs.yml`` file if your system uses a proxy. If not, skip this step. Replace ``<YOUR_PROXY_ADDRESS_OR_DNS>`` with your proxy information.
 
          .. code-block:: yaml
+            :emphasize-lines: 9,10
 
             # Wazuh App Copyright (C) 2017, Wazuh Inc. (License GPLv2)
             services:
@@ -365,7 +367,7 @@ Deployment
 
       .. group-tab:: Background
 
-      .. code-block:: console
+         .. code-block:: console
 
             # docker compose up -d
 
@@ -432,7 +434,7 @@ Follow these steps to deploy the Wazuh agent using Docker.
 #. Edit the ``docker-compose.yml`` file. Replace ``<YOUR_WAZUH_MANAGER_IP>`` with the IP address of your Wazuh manager. Locate the environment section for the agent service and update it:
 
    .. code-block:: yaml
-      :emphasize-lines: 7
+      :emphasize-lines: 6,7
 
       # Wazuh App Copyright (C) 2017, Wazuh Inc. (License GPLv2)
       services:
@@ -446,16 +448,18 @@ Follow these steps to deploy the Wazuh agent using Docker.
 
 #. Start the Wazuh agent deployment using ``docker compose``:
 
-   -  **Background**:
+   .. tabs::
 
-      .. code-block:: console
+      .. group-tab:: Background
 
-         # docker compose up -d
+         .. code-block:: console
 
-   -  **Foreground**:
+            # docker compose up -d
 
-      .. code-block:: console
+      .. group-tab:: Foreground
 
-         # docker compose up
+         .. code-block:: console
+
+            # docker compose up
 
 #. Verify from your Wazuh dashboard that the Wazuh agent deployment was successful and visible. Navigate to the **Agent management** > **Summary**, and you should see the Wazuh agent container active on your dashboard.
