@@ -8,7 +8,7 @@ Configuring an S3 Bucket
 
 Amazon Simple Storage Service (Amazon S3) is an object storage service that delivers industry-leading scalability, data availability, security, and performance.
 
-The Wazuh module for AWS requires every supported AWS service except ``Inspector Classic``, ``CloudWatch Logs``, and ``Security Lake`` to store their logs in an S3 bucket. However, you can use a single S3 bucket for all these services, eliminating the need to create individual buckets for them. Wazuh retrieves these logs from the bucket for analysis.
+The Wazuh module for AWS requires all supported AWS services, except Inspector, CloudWatch Logs, and Security Lake, to store their logs in an S3 bucket. You can use a single S3 bucket for all these services, avoiding the need to create separate buckets. Wazuh retrieves the logs from this bucket for analysis.
 
 In this section we describe how to create an Amazon S3 bucket:
 
