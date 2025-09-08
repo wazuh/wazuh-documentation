@@ -30,7 +30,7 @@ Wazuh meets the architecture, infrastructure, and security software aspects of t
          <os>yes</os>
          <network>yes</network>
          <packages>yes</packages>
-         <ports all="no">yes</ports>
+         <ports all="yes">yes</ports>
          <processes>yes</processes>
 
          <!-- Database synchronization settings -->

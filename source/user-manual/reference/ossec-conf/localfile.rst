@@ -681,35 +681,46 @@ For example, to restrict syslog events related to a particular user name:
 .. note::
   The `eventchannel` format already provides a way to filter logs through queries. Therefore, `ignore` and `restrict` settings don't apply to this format.
 
-
 filter
 ^^^^^^
 
 Collects ``journald`` logs selectively by filtering specific fields.
 
-You must specify a PCRE2 regex pattern as your filter. Use the ``field`` attribute to define the journald field where to apply the regular expression.
+Specify a PCRE2 regular expression as the filter. Use the ``field`` attribute to select the journald field to match.
 
 +--------------------+---------------------------------------------------------------+
-| **Default Value**  | n/a                                                           |
+| **Default value**  | n/a                                                           |
 +--------------------+---------------------------------------------------------------+
 | **Allowed values** | Any :ref:`PCRE2 <pcre2_syntax>` expression.                   |
 +--------------------+---------------------------------------------------------------+
 
-You can use the ``ignore_if_missing`` attribute to ignore the filtering condition for logs without the specified field.
+Use the ``ignore_if_missing`` attribute to control logs that lack the specified field:
 
-+-----------------------+--------------------------------------------------------------------------------------------------------------+
-| **ignore_if_missing** | When set to ``yes``, it accepts logs without the specified field. Conversely, when set to ``no``,            |
-|                       | logs without the specified field fail to meet the filtering criteria and are disregarded.                    |
-+                       +------------------+-------------------------------------------------------------------------------------------+
-|                       | Default value    | no                                                                                        |
-|                       +------------------+-------------------------------------------------------------------------------------------+
-|                       | Allowed values   | no, yes                                                                                   |
-+-----------------------+------------------+-------------------------------------------------------------------------------------------+
+-  ``yes``: Wazuh ignores the filter and *accepts logs even if the field is missing*.
+-  ``no``: Logs without the field *do not match the filter* and are filtered out.
 
-In the following configuration example Wazuh collects the ``journald`` logs if any of the following conditions are met.
++-----------------------+------------------+----------------+
+| **ignore_if_missing** | Default value    | no             |
+|                       +------------------+----------------+
+|                       | Allowed values   | no, yes        |
++-----------------------+------------------+----------------+
 
--  The field ``_SYSTEMD_UNIT`` is present with the value ``ssh.service``.
--  The field ``_SYSTEMD_UNIT`` is present with the value ``cron.service`` and the field ``PRIORITY`` is present with the value ``0``, ``1``, ``2``, or ``3``.
+Multiple ``<localfile>`` blocks combine with *OR* logic.
+
+Filters inside the same ``<localfile>`` block combine with *AND* logic. A log entry must match *all* filters in that block to be collected.
+
+In the following example, Wazuh collects ``journald`` logs if *any* of these conditions hold:
+
+-  The field ``_SYSTEMD_UNIT`` equals ``ssh.service``.
+-  The field ``_SYSTEMD_UNIT`` equals ``cron.service`` *and* either:
+
+   -  The field ``PRIORITY`` matches ``0``, ``1``, ``2``, or ``3``, or
+   -  the ``PRIORITY`` field is missing.
+
+This configuration captures:
+
+-  All SSH logs
+-  High-severity cron messages and anomalous cron entries that lack priority information.
 
 .. code-block:: xml
 
@@ -727,10 +738,10 @@ In the following configuration example Wazuh collects the ``journald`` logs if a
       <filter field="PRIORITY" ignore_if_missing="yes">[0-3]</filter>
     </localfile>
 
-.. note::
+When multiple ``journald`` blocks are present:
 
-   Filters within the same ``<localfile>`` block follow an AND logic, while multiple blocks are evaluated in OR logic regarding log collection.
-
+-  If no block has filters, Wazuh collects *all* journald logs.
+-  If at least one block has filters, Wazuh applies filters *only from blocks that include them*. Blocks without filters are ignored. This lets restrictive blocks override the default 'collect everything' behavior.
 
 Configuration examples
 ----------------------
