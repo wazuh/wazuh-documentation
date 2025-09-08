@@ -51,9 +51,7 @@ Follow the steps below to configure a Linux/Unix endpoint for enrollment via the
 
 #. Restart the Wazuh agent to make the changes effective:
 
-   .. code-block:: console
-
-      # systemctl restart wazuh-agent
+   .. include:: /_templates/common/restart_agent_more.rst
 
 #. Click on the upper-left menu icon and navigate to **Agents management** > **Summary** on the Wazuh dashboard to check for the newly enrolled Wazuh agent and its connection status. If the enrollment was successful, you will have an interface similar to the image below.
 
