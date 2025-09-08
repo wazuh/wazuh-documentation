@@ -153,7 +153,7 @@ In the configuration below, the ``ls -la /etc`` command will execute every ``200
 .. Note::   
    To use ``su`` in a command, ``use_su`` must be set before the hostname. In the previous example, this would appear as ``<host>use_su user@test.com</host>``
 
-Checking the agentless monitoring setup
+Applying the configuration
 ---------------------------------------
 
 After  you configure the agentless monitoring on the Wazuh server, restart the Wazuh manager with the following command to apply the configuration: 
