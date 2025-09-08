@@ -6,13 +6,21 @@
 Architecture
 ============
 
-The Wazuh architecture is based on :doc:`agents <components/wazuh-agent>`, running on the monitored endpoints, that forward security data to a central :doc:`server <components/wazuh-server>`. Agentless devices such as firewalls, switches, routers, and access points are supported and can actively submit log data via Syslog, SSH, or using their API. The central server decodes and analyzes the incoming information and passes the results along to the Wazuh indexer for indexing and storage.
+The Wazuh architecture is composed of a multi-platform Wazuh :doc:`agent <components/wazuh-agent>` and three central components: the Wazuh :doc:`server <components/wazuh-server>`, Wazuh :doc:`indexer <components/wazuh-indexer>`, and Wazuh :doc:`dashboard <components/wazuh-dashboard>`. The agent is deployed on endpoints to collect and forward security data to the Wazuh server for analysis. The analyzed data is then forwarded to the Wazuh indexer for indexing and storage, and subsequently to the Wazuh dashboard for alerting and visualization.
 
-The Wazuh indexer cluster is a collection of one or more nodes that communicate with each other to perform read and write operations on indices. Small Wazuh deployments, which do not require processing large amounts of data, can easily be handled by a single-node cluster. Multi-node clusters are recommended when there are many monitored endpoints, when a large volume of data is anticipated, or when high availability is required.
+Wazuh also supports agentless monitoring for systems and devices where installing the Wazuh agent is not possible. Network devices such as firewalls, switches, routers, and access points can actively forward log data via Syslog and SSH.
 
-For production environments, it is recommended to deploy the Wazuh server and Wazuh indexer to different hosts. In this scenario, Filebeat is used to securely forward Wazuh alerts and archived events to the Wazuh indexer cluster (single-node or multi-node) using TLS encryption.
+The Wazuh central components can be deployed in different ways, depending on scalability and availability needs:
 
-The diagram below represents a Wazuh deployment architecture. It shows the solution components and how the :doc:`Wazuh server <components/wazuh-server>` and the :doc:`Wazuh indexer <components/wazuh-indexer>` nodes can be configured as clusters, providing load balancing and high availability.
+-  **All-in-one deployment:** All Wazuh components (server, indexer, and dashboard) are installed on a single server. Best suited for labs and small environments with a limited number of monitored endpoints.
+
+-  **Single-node deployment:** The Wazuh server, indexer, and dashboard are each deployed on separate servers. Recommended for medium environments that require higher performance than an all-in-one setup.
+
+-  **Multi-node deployment:** Typically, one instance of the Wazuh dashboard and multiple instances of the Wazuh server (Wazuh server cluster) and indexer (Wazuh indexer cluster) are deployed on their individual servers, respectively. The number of instances varies depending on your needs. This deployment is recommended for large environments with high event throughput, or when fault tolerance and high availability are required.
+
+Visit the :doc:`installation guide </installation-guide/index>` and :doc:`installation alternatives </deployment-options/index>` documentation to learn about the different ways to deploy Wazuh.
+
+The diagram below represents a Wazuh deployment architecture. It shows how the Wazuh server and the Wazuh indexer nodes can be configured as clusters, providing load balancing and high availability.
 
 .. thumbnail:: /images/getting-started/deployment-architecture.png    
    :title: Deployment architecture
@@ -20,13 +28,13 @@ The diagram below represents a Wazuh deployment architecture. It shows the solut
    :align: center
    :width: 80%
 
-Wazuh agent - Wazuh server communication
-----------------------------------------
+Component communication
+-----------------------
 
-The :doc:`Wazuh agent <components/wazuh-agent>` continuously sends events to the :doc:`Wazuh server <components/wazuh-server>` for analysis and threat detection. To start shipping this data, the agent establishes a connection with the server service for agent connection, which listens on port 1514 by default (this is configurable). The Wazuh server then decodes and rule-checks the received events, utilizing the analysis engine. Events that trip a rule are augmented with alert data such as rule ID and rule name. Events can be spooled to one or both of the following files, depending on whether or not a rule is tripped:
+Wazuh agent - Wazuh server
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
--  The file ``/var/ossec/logs/archives/archives.json`` contains all events whether they tripped a rule or not.
--  The file ``/var/ossec/logs/alerts/alerts.json`` contains only events that tripped a rule with high enough priority (the threshold is configurable).
+The :doc:`Wazuh agent <components/wazuh-agent>` continuously sends events to the :doc:`Wazuh server <components/wazuh-server>` for analysis and threat detection. To start shipping this data, the agent establishes a connection with the Wazuh server service for agent connection, which listens on TCP port 1514 by default (this is configurable). The Wazuh server then decodes and matches rules against the received events, utilizing the Wazuh Analysis engine. 
 
 The Wazuh messages protocol uses AES encryption with 128 bits per block and 256-bit keys.
 
@@ -34,21 +42,24 @@ The Wazuh messages protocol uses AES encryption with 128 bits per block and 256-
    
    Read the `Benefits of using AES in the Wazuh communications <https://wazuh.com/blog/benefits-of-using-aes-in-our-communications>`_ document for more information.
 
-Wazuh server - Wazuh indexer communication
-------------------------------------------
+Wazuh server - Wazuh indexer
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The Wazuh server uses Filebeat to securely transmit alert and event data to the Wazuh indexer via TLS encryption. Filebeat monitors output data from the Wazuh server and forwards it to the Wazuh indexer, which listens on port 9200/TCP by default. Once indexed, you can analyze and visualize the data through the Wazuh dashboard.
+The Wazuh server uses Filebeat to send alert and event data to the Wazuh indexer, using TLS encryption. Filebeat reads the Wazuh server output data and sends it to the Wazuh indexer (by default listening on port 9200/TCP). Once the data is indexed by the Wazuh indexer, the Wazuh dashboard is used to query and visualize the security information.
 
-The Vulnerability Detection module updates the vulnerability inventory. It also generates alerts, providing insights into system vulnerabilities.
+Wazuh dashboard - Wazuh dashboard/Wazuh indexer
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The Wazuh dashboard queries the Wazuh RESTful API (by default listening on port 55000/TCP on the Wazuh server) to display configuration and status-related information of the :doc:`Wazuh server <components/wazuh-server>` and :doc:`agents <components/wazuh-agent>`. It can also modify agents or server configuration settings through API calls. This communication is encrypted with TLS and authenticated with a username and password.
+The Wazuh dashboard queries the Wazuh server API (by default listening on port 55000/TCP on the Wazuh server) to display configuration and status-related information of the :doc:`Wazuh server <components/wazuh-server>` and :doc:`agents <components/wazuh-agent>`. This communication is encrypted with TLS and authenticated with a username and password.
+
+The Wazuh dashboard visualizes and queries the information indexed on the Wazuh indexer.
 
 .. _default_ports:
 
 Required ports
 --------------
 
-Several services are used for the communication of Wazuh components. Below is the list of default ports used by these services. Users can modify these port numbers when necessary.
+Wazuh components communicate using several services. The list of default ports used by these services is shown below. Users can modify these port numbers when necessary.
 
 +-----------------+-----------+----------------+------------------------------------------------+
 |  Component      | Port      | Protocol       | Purpose                                        |
@@ -72,32 +83,9 @@ Several services are used for the communication of Wazuh components. Below is th
 | Wazuh dashboard | 443       | TCP            | Wazuh web user interface                       |
 +-----------------+-----------+----------------+------------------------------------------------+
 
-Archival data storage
----------------------
+Wazuh CTI
+---------
 
-Both alerts and non-alert events are stored in files on the Wazuh server, in addition to being sent to the Wazuh indexer. These files can be written in JSON format (``.json``), or plain text format (``.log``). These files are daily compressed and signed using MD5, SHA1, and SHA256 checksums. The directory and filename structure is as follows:
+The Wazuh Cyber Threat Intelligence (CTI) service is a publicly accessible platform that collects, analyzes, and disseminates actionable information on emerging cyber threats and vulnerabilities. This service currently focuses on vulnerability intelligence, delivering timely updates on Common Vulnerabilities and Exposures (CVEs), severity scores, exploitability insights, and mitigation strategies. It aggregates and sanitizes data from trusted sources, including operating system vendors and major vulnerability databases, to ensure high-quality, relevant intelligence. 
 
-.. code-block:: bash
-
-   root@wazuh-manager:/var/ossec/logs/archives/2022/Jan# ls -l
-
-.. code-block:: none
-   :class: output
-  
-   total 176
-   -rw-r----- 1 wazuh wazuh 234350 Jan  2 00:00 ossec-archive-01.json.gz
-   -rw-r----- 1 wazuh wazuh    350 Jan  2 00:00 ossec-archive-01.json.sum
-   -rw-r----- 1 wazuh wazuh 176221 Jan  2 00:00 ossec-archive-01.log.gz
-   -rw-r----- 1 wazuh wazuh    346 Jan  2 00:00 ossec-archive-01.log.sum
-   -rw-r----- 1 wazuh wazuh 224320 Jan  2 00:00 ossec-archive-02.json.gz
-   -rw-r----- 1 wazuh wazuh    350 Jan  2 00:00 ossec-archive-02.json.sum
-   -rw-r----- 1 wazuh wazuh 151642 Jan  2 00:00 ossec-archive-02.log.gz
-   -rw-r----- 1 wazuh wazuh    346 Jan  2 00:00 ossec-archive-02.log.sum
-   -rw-r----- 1 wazuh wazuh 315251 Jan  2 00:00 ossec-archive-03.json.gz
-   -rw-r----- 1 wazuh wazuh    350 Jan  2 00:00 ossec-archive-03.json.sum
-   -rw-r----- 1 wazuh wazuh 156296 Jan  2 00:00 ossec-archive-03.log.gz
-   -rw-r----- 1 wazuh wazuh    346 Jan  2 00:00 ossec-archive-03.log.sum
-
-Rotation and backups of archive files are recommended according to the storage capacity of the :doc:`Wazuh server <components/wazuh-server>`. By using cron jobs, you can easily manage to keep only a specific time window of archive files locally on the server, for example, last year or the last three months.
-
-On the other hand, you may choose to dispense with storing archive files and simply rely on the Wazuh indexer for archive storage. This alternative might be preferred if you run periodic Wazuh indexer snapshot backups and/or have a multi-node Wazuh indexer cluster with shard replicas for high availability. You could even use a cron job to move snapshotted indices to a final data storage server and sign them using MD5, SHA1, and SHA256 hashing algorithms.
+This service is integrated directly with the Wazuh Vulnerability Detection module, but is also publicly available at the `Wazuh CTI website <https://cti.wazuh.com/>`_.

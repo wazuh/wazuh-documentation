@@ -298,7 +298,7 @@ Example of configuration
 	  <os>yes</os>
 	  <network>yes</network>
 	  <packages>yes</packages>
-	  <ports all="no">yes</ports>
+	  <ports all="yes">yes</ports>
 	  <processes>yes</processes>
 	  <max_eps>50</max_eps>
 	  <notify_first_scan>no</notify_first_scan>
