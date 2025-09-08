@@ -104,3 +104,12 @@ Can I cancel at any time?
 -------------------------
 
 Yes, you can cancel at any time with no penalty. You can keep using your environment until the end of your :doc:`current billing cycle </cloud-service/account-billing/billing-history>`, and no future charges are incurred after this period.
+
+How do I convert my environment from trial to production?
+---------------------------------------------------------
+
+-  Login to your Wazuh Cloud Console
+-  Click **Manage** on the top right corner
+-  Select **Purchase environment**
+-  Follow the prompt to provide your billing details which includes your contact details and card details
+-  Click **Next** to complete your purchase
