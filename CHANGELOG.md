@@ -33,6 +33,8 @@ All notable changes to this project will be documented in this file.
 
 - Added AlmaLinux 10 to the Wazuh agent packages list and the vulnerability detection compatibility matrix. ([#8691](https://github.com/wazuh/wazuh-documentation/pull/8691))
 - Added Rocky Linux 10 to the Wazuh agent packages list and the available SCA policies. ([#8799](https://github.com/wazuh/wazuh-documentation/pull/8799))
+- Updated monitoring Amazon Inspector documentation to include Inspector v2. ([#8820](https://github.com/wazuh/wazuh-documentation/pull/8820))
+- Updated the `filter` option in the `localfile` reference section. ([#8837](https://github.com/wazuh/wazuh-documentation/pull/8837))
 
 ### Changed
 
@@ -60,6 +62,7 @@ All notable changes to this project will be documented in this file.
 - Added instructions for retrieving the correct Puppet agent node name and to set the ``<PUPPET_AGENT_NODE_NAME>`` placeholder in the manifest. ([#8664](https://github.com/wazuh/wazuh-documentation/pull/8664))
 - Updated the *Deployment on Docker* section. ([#8688](https://github.com/wazuh/wazuh-documentation/pull/8688))
 - Updated default values for `agents_disconnection_time` and `notify_time`. ([#8769](https://github.com/wazuh/wazuh-documentation/pull/8769))
+- Updated the default value of the `all` attribute in the `ports` Syscollector configuration option. ([#8840](https://github.com/wazuh/wazuh-documentation/pull/8840))
 
 ## [v4.12.0]
 
@@ -82,6 +85,9 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Added a table describing the possible environment statuses in the cloud service documentation. ([#8407](https://github.com/wazuh/wazuh-documentation/pull/8407))
 - **Post-release**: Added the Wazuh indexer API reference. ([#8756](https://github.com/wazuh/wazuh-documentation/pull/8756))
 - **Post-release**: Added examples of Wazuh tools to the user manual reference. ([#8763](https://github.com/wazuh/wazuh-documentation/pull/8763))
+- **Post-release**: Added the `ap-northeast-1` (Tokyo) region. ([#8818](https://github.com/wazuh/wazuh-documentation/pull/8818))
+- **Post-release**: Added a Q&A to the Cloud service FAQ section. ([#8832](https://github.com/wazuh/wazuh-documentation/pull/8832))
+- **Post-release**: Added agent restart commands to Agent enrollment methods section. ([#8836](https://github.com/wazuh/wazuh-documentation/pull/8836))
 
 ### Changed
 
@@ -108,11 +114,12 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Changed the warning note on using the `$` and `&` characters when changing passwords in Docker deployments. ([#8694](https://github.com/wazuh/wazuh-documentation/pull/8694))
 - **Post-release**: Changed Windows commands in the backup guide to PowerShell. ([#8761](https://github.com/wazuh/wazuh-documentation/pull/8761))
 - **Post-release**: Updated 4.12.0 command output examples. ([#8779](https://github.com/wazuh/wazuh-documentation/pull/8779)) ([#8780](https://github.com/wazuh/wazuh-documentation/pull/8780))
-- **Post-release**: Updated the *Deployment on Docker* documentation. ([#8793](https://github.com/wazuh/wazuh-documentation/pull/8793))
+- **Post-release**: Updated the *Deployment on Docker* documentation. ([#8793](https://github.com/wazuh/wazuh-documentation/pull/8793)) ([#8839](https://github.com/wazuh/wazuh-documentation/pull/8839)) ([#8843](https://github.com/wazuh/wazuh-documentation/pull/8843))
 - **Post-release**: Updated the Windows logo in the documentation. ([#8804](https://github.com/wazuh/wazuh-documentation/pull/8804))
 - **Post-release**: Updated the offline installation guide. ([#8803](https://github.com/wazuh/wazuh-documentation/pull/8803))
 - **Post-release**: Updated the instruction and images in Wazuh server API getting started documentation to reflect the new navigation path (**Server management** > **Dev Tools**). ([#8811](https://github.com/wazuh/wazuh-documentation/pull/8811))
-
+- **Post-release**: Updated the *Getting started with Wazuh - Architecture* documentation. ([#8819](https://github.com/wazuh/wazuh-documentation/pull/8819))
+- **Post-release**: Changed Suricata ruleset file permission in POC guide. ([#8821](https://github.com/wazuh/wazuh-documentation/pull/8821))
 
 ### Fixed
 
