@@ -17,7 +17,7 @@ Let’s consider the following log sample:
 
 .. code-block:: none
 
-   Apr 14 19:28:21 gorilla sshd[31274]: Connection closed by 192.168.1.33
+   Sep 08 11:25:52 wazuh-server sudo[4543]: pam_unix(sudo-i:session): session opened for user root(uid=0) by wazuh-user(uid=1000)
 
 The first step should always be to run the ``/var/ossec/bin/wazuh-logtest`` utility and  input the event log to test the current decoder and rule before creating your own decoder.
 
@@ -27,22 +27,24 @@ With the event log above, we obtain the following result:
 
    Type one log per line
 
-   Apr 14 19:28:21 gorilla sshd[31274]: Connection closed by 192.168.1.33
+   Sep 08 11:25:52 wazuh-server sudo[4543]: pam_unix(sudo-i:session): session opened for user root(uid=0) by wazuh-user(uid=1000)
 
    **Phase 1: Completed pre-decoding.
-           full event: 'Apr 14 19:28:21 gorilla sshd[31274]: Connection closed by 192.168.1.33'
-           timestamp: 'Apr 14 19:28:21'
-           hostname: 'gorilla'
-           program_name: 'sshd'
+           full event: 'Sep 08 11:25:52 wazuh-server sudo[4543]: pam_unix(sudo-i:session): session opened for user root(uid=0) by wazuh-user(uid=1000)'
+           timestamp: 'Sep 08 11:25:52'
+           hostname: 'wazuh-server'
+           program_name: 'sudo'
 
    **Phase 2: Completed decoding.
-           name: 'sshd'
-           parent: 'sshd'
-           srcip: '192.168.1.33'
+           name: 'pam'
+           parent: 'pam'
+           dstuser: 'root(uid=0)'
+           srcuser: 'wazuh-user'
+           uid: '1000'
 
 We can observe two phases of decoding. The input log first goes through the pre-decoding phase, during which general information, such as a timestamp, a hostname, and a program name, are extracted when a Syslog-like header is present.
 
-In the decoding phase, the decoder extracts information from the remaining log. In this example, the decoder only analyzes the message: ``Connection closed by 192.168.1.33``.
+In the decoding phase, the decoder extracts information from the remaining log. In this example, the decoder only analyzes the message: ``pam_unix(sudo-i:session): session opened for user root(uid=0) by wazuh-user(uid=1000)``.
 
 Options
 -------
