@@ -272,6 +272,10 @@ Multi-node stack deployment
 
 Follow the steps below to deploy the Wazuh central components in a multi-node stack.
 
+.. note::
+
+   All deployment commands provided apply to both Windows and Linux environments.
+
 Cloning the repository
 ~~~~~~~~~~~~~~~~~~~~~~
 
