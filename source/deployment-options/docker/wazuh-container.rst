@@ -41,7 +41,7 @@ System requirements
 Single-node stack deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
--  **Operating system**: Linux
+-  **Operating system**: Linux or Windows
 -  **Architecture**: AMD64
 -  **CPU**: At least 4 cores
 -  **Memory**: At least 8 GB of RAM for the Docker host
@@ -50,7 +50,7 @@ Single-node stack deployment
 Multi-node stack deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
--  **Operating system**: Linux
+-  **Operating system**: Linux or Windows
 -  **Architecture**: AMD64
 -  **CPU**: At least 4 cores
 -  **Memory**: At least 16 GB for the Docker host
@@ -59,9 +59,13 @@ Multi-node stack deployment
 Required software
 ^^^^^^^^^^^^^^^^^
 
--  **Docker Engine**: Use the latest stable version.
+-  **Docker Engine / Docker Desktop**: Use the latest stable version.
 
--  **Docker Compose**: Latest stable version (install separately on Linux if needed).
+   -  **Linux**: Docker Engine
+
+   -  **Windows**: Docker Desktop (requires WSL 2)
+
+-  **Docker Compose**: Latest stable version (included with Docker Desktop on Windows; install separately on Linux if needed).
 
 -  **Git**: For cloning the Wazuh Docker repository.
 
