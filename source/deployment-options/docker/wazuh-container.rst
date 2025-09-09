@@ -43,7 +43,7 @@ System requirements
 Single-node stack deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
--  **Operating system**: Linux
+-  **Operating system**: Linux or Windows
 -  **Architecture**: AMD64
 -  **CPU**: At least 4 cores
 -  **Memory**: At least 8 GB of RAM for the Docker host
@@ -52,7 +52,7 @@ Single-node stack deployment
 Multi-node stack deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
--  **Operating system**: Linux
+-  **Operating system**: Linux or Windows
 -  **Architecture**: AMD64
 -  **CPU**: At least 4 cores
 -  **Memory**: At least 16 GB for the Docker host
@@ -61,7 +61,7 @@ Multi-node stack deployment
 Wazuh agent deployment
 ~~~~~~~~~~~~~~~~~~~~~~
 
--  **Operating system**: Linux
+-  **Operating system**: Linux or Windows
 -  **Architecture**: AMD64
 -  **CPU**: At least 2 cores
 -  **Memory**: At least 1 GB of RAM for the Docker host
@@ -70,9 +70,13 @@ Wazuh agent deployment
 Required software
 ^^^^^^^^^^^^^^^^^
 
--  **Docker Engine**: Use the latest stable version.
+-  **Docker Engine / Docker Desktop**: Use the latest stable version.
 
--  **Docker Compose**: Latest stable version (install separately on Linux if needed).
+   -  **Linux**: Docker Engine
+
+   -  **Windows**: Docker Desktop (requires WSL 2)
+
+-  **Docker Compose**: Latest stable version (included with Docker Desktop on Windows; install separately on Linux if needed).
 
 -  **Git**: For cloning the Wazuh Docker repository.
 
@@ -135,6 +139,10 @@ Single-node stack deployment
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Follow the steps below to deploy the Wazuh central components in a single-node stack.
+
+.. note::
+
+   All deployment commands provided apply to both Windows and Linux environments.
 
 Cloning the repository
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -245,6 +253,7 @@ Deployment
 
 
 Accessing the Wazuh dashboard
+
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 After deploying the single-node stack, you can access the Wazuh dashboard using your Docker host's IP address or localhost.
@@ -274,6 +283,10 @@ Multi-node stack deployment
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Follow the steps below to deploy the Wazuh central components in a multi-node stack.
+
+.. note::
+
+   All deployment commands provided apply to both Windows and Linux environments.
 
 Cloning the repository
 ~~~~~~~~~~~~~~~~~~~~~~
