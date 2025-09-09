@@ -15,11 +15,11 @@ from settings import version, is_latest_release, release
 
 custom_replacements = {
     # === URLs and base URLs
-    "|CHECKSUMS_URL|" : "https://packages.wazuh.com/5.x/checksums/wazuh/",
-    "|RPM_AGENT_URL|" : "https://packages.wazuh.com/5.x/yum/wazuh-agent",
-    "|RPM_MANAGER_URL|" : "https://packages.wazuh.com/5.x/yum/wazuh-manager",
-    "|DEB_AGENT_URL|" : "https://packages.wazuh.com/5.x/apt/pool/main/w/wazuh-agent/wazuh-agent",
-    "|DEB_MANAGER_URL|" : "https://packages.wazuh.com/5.x/apt/pool/main/w/wazuh-manager/wazuh-manager",
+    "|CHECKSUMS_URL|" : "https://packages.wazuh.com/6.x/checksums/wazuh/",
+    "|RPM_AGENT_URL|" : "https://packages.wazuh.com/6.x/yum/wazuh-agent",
+    "|RPM_MANAGER_URL|" : "https://packages.wazuh.com/6.x/yum/wazuh-manager",
+    "|DEB_AGENT_URL|" : "https://packages.wazuh.com/6.x/apt/pool/main/w/wazuh-agent/wazuh-agent",
+    "|DEB_MANAGER_URL|" : "https://packages.wazuh.com/6.x/apt/pool/main/w/wazuh-manager/wazuh-manager",
     #
     "|CTI_URL|" : "https://cti.wazuh.com/api/v1/catalog/contexts/vd_1.0.0/consumers/vd_4.8.0",
     #
@@ -29,7 +29,7 @@ custom_replacements = {
     "|WAZUH_DASHBOARD_YARN_VERSION|": "1.22.22",
     #
     # === Global and Wazuh version (wazuh agent, manager, indexer, and dashboard)
-    "|WAZUH_CURRENT_MAJOR|" : "5.x",
+    "|WAZUH_CURRENT_MAJOR|" : "6.x",
     "|WAZUH_CURRENT_MINOR|" : version,
     "|WAZUH_CURRENT|" : release,
 
@@ -81,7 +81,7 @@ custom_replacements = {
     #"|WAZUH_CURRENT_MAJOR_AMI|" :
     #"|WAZUH_CURRENT_MINOR_AMI|" :
     "|WAZUH_CURRENT_AMI|" : release,
-    "|WAZUH_CURRENT_MAJOR_OVA|" : "5.x",
+    "|WAZUH_CURRENT_MAJOR_OVA|" : "6.x",
     #"|WAZUH_CURRENT_MINOR_OVA|" :
     "|WAZUH_CURRENT_OVA|" : release,
     #"|WAZUH_CURRENT_MAJOR_DOCKER|" :
@@ -105,47 +105,47 @@ custom_replacements = {
     "|WAZUH_CURRENT_WIN_FROM_SOURCES_REV|" : "1",
     #
     # === Versions and revisions for packages of specific operating systems
-    "|WAZUH_CURRENT_MAJOR_WINDOWS|" : "5.x",
+    "|WAZUH_CURRENT_MAJOR_WINDOWS|" : "6.x",
     #"|WAZUH_CURRENT_MINOR_WINDOWS|" :
     "|WAZUH_CURRENT_WINDOWS|" : release,
     "|WAZUH_REVISION_WINDOWS|" : "1",
-    "|WAZUH_CURRENT_MAJOR_OSX|" : "5.x",
+    "|WAZUH_CURRENT_MAJOR_OSX|" : "6.x",
     #"|WAZUH_CURRENT_MINOR_OSX|" :
     "|WAZUH_CURRENT_OSX|" : release,
     "|WAZUH_REVISION_OSX|" : "1",
-    "|WAZUH_CURRENT_MAJOR_SOLARIS|" : "5.x",
+    "|WAZUH_CURRENT_MAJOR_SOLARIS|" : "6.x",
     #"|WAZUH_CURRENT_MINOR_SOLARIS|" :
     "|WAZUH_CURRENT_SOLARIS|" : release, # Set here the lesser of WAZUH_CURRENT_MAJOR_SOLARIS10 and 11 values
     #"|WAZUH_REVISION_SOLARIS|" : "1",
-    "|WAZUH_CURRENT_MAJOR_SOLARIS10|" : "5.x",
+    "|WAZUH_CURRENT_MAJOR_SOLARIS10|" : "6.x",
     #"|WAZUH_CURRENT_MINOR_SOLARIS10|" :
     "|WAZUH_CURRENT_SOLARIS10|" : release,
     #"|WAZUH_REVISION_SOLARIS10|" : "1",
-    "|WAZUH_CURRENT_MAJOR_SOLARIS11|" : "5.x",
+    "|WAZUH_CURRENT_MAJOR_SOLARIS11|" : "6.x",
     #"|WAZUH_CURRENT_MINOR_SOLARIS11|" :
     "|WAZUH_CURRENT_SOLARIS11|" : release,
     #"|WAZUH_REVISION_SOLARIS11|" : "1",
-    "|WAZUH_CURRENT_MAJOR_SOLARIS10_i386|" : "5.x",
+    "|WAZUH_CURRENT_MAJOR_SOLARIS10_i386|" : "6.x",
     #"|WAZUH_CURRENT_MINOR_SOLARIS10_i386|" :
     "|WAZUH_CURRENT_SOLARIS10_i386|" : release,
     #"|WAZUH_REVISION_SOLARIS10_i386|" : "1",
-    "|WAZUH_CURRENT_MAJOR_SOLARIS10_SPARC|" : "5.x",
+    "|WAZUH_CURRENT_MAJOR_SOLARIS10_SPARC|" : "6.x",
     #"|WAZUH_CURRENT_MINOR_SOLARIS10_SPARC|" :
     "|WAZUH_CURRENT_SOLARIS10_SPARC|" : release,
     #"|WAZUH_REVISION_SOLARIS10_SPARC|" : "1",
-    "|WAZUH_CURRENT_MAJOR_SOLARIS11_i386|" : "5.x",
+    "|WAZUH_CURRENT_MAJOR_SOLARIS11_i386|" : "6.x",
     #"|WAZUH_CURRENT_MINOR_SOLARIS11_i386|" :
     "|WAZUH_CURRENT_SOLARIS11_i386|" : release,
     #"|WAZUH_REVISION_SOLARIS11_i386|" : "1",
-    "|WAZUH_CURRENT_MAJOR_SOLARIS11_SPARC|" : "5.x",
+    "|WAZUH_CURRENT_MAJOR_SOLARIS11_SPARC|" : "6.x",
     #"|WAZUH_CURRENT_MINOR_SOLARIS11_SPARC|" :
     "|WAZUH_CURRENT_SOLARIS11_SPARC|" : release,
     #"|WAZUH_REVISION_SOLARIS11_SPARC|" : "1",
-    "|WAZUH_CURRENT_MAJOR_AIX|" : "5.x",
+    "|WAZUH_CURRENT_MAJOR_AIX|" : "6.x",
     #"|WAZUH_CURRENT_MINOR_AIX|" :
     "|WAZUH_CURRENT_AIX|" : release,
     "|WAZUH_REVISION_AIX|" : "1",
-    "|WAZUH_CURRENT_MAJOR_HPUX|" : "5.x",
+    "|WAZUH_CURRENT_MAJOR_HPUX|" : "6.x",
     #"|WAZUH_CURRENT_MINOR_HPUX|" :
     "|WAZUH_CURRENT_HPUX|" : release,
     "|WAZUH_REVISION_HPUX|" : "1",

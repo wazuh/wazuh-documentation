@@ -122,7 +122,7 @@ The following table shows the configuration options for the Wazuh dashboard:
 +---------------------------------+---------------------------------------------------------+-----------------------------------------------------+-------------------------+
 |                                 | .. _alerts.sample.prefix:                               |                                                     |                         |
 |                                 |                                                         |                                                     |                         |
-| alerts.sample.prefix            | This property defines the index name prefix of sample   | ``wazuh-alerts-5.x-``                               | Any valid index pattern |
+| alerts.sample.prefix            | This property defines the index name prefix of sample   | ``wazuh-alerts-6.x-``                               | Any valid index pattern |
 |                                 | alerts. It must match the template used by the index    |                                                     |                         |
 |                                 | pattern to avoid unknown fields in dashboards.          |                                                     |                         |
 +---------------------------------+---------------------------------------------------------+-----------------------------------------------------+-------------------------+
