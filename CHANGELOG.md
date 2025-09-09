@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 ### Changed
 
 - Changed from ``3600`` to ``43200`` the maximum value of the ``iam_role_duration`` parameter in the AWS module. ([#7029](https://github.com/wazuh/wazuh-documentation/pull/7029))
+- Updated references in steps and links to 6.x. ([#8855](https://github.com/wazuh/wazuh-documentation/pull/8855))
 
 ### Removed
 
