@@ -161,6 +161,7 @@ You must provide certificates for each node to secure communication between them
       #. **Optional**: Add the following to the ``generate-indexer-certs.yml`` file if your system uses a proxy. If not, skip this step. Replace ``<YOUR_PROXY_ADDRESS_OR_DNS>`` with your proxy information.
 
          .. code-block:: yaml
+            :emphasize-lines: 9,10
 
             # Wazuh App Copyright (C) 2017, Wazuh Inc. (License GPLv2)
             services:
@@ -299,6 +300,7 @@ You must provide certificates for each node to secure communication between them
       #. **Optional**: Add the following to the ``generate-indexer-certs.yml`` file if your system uses a proxy. If not, skip this step. Replace ``<YOUR_PROXY_ADDRESS_OR_DNS>`` with your proxy information.
 
          .. code-block:: yaml
+            :emphasize-lines: 9,10
 
             # Wazuh App Copyright (C) 2017, Wazuh Inc. (License GPLv2)
             services:
@@ -358,7 +360,7 @@ Deployment
 
       .. group-tab:: Background
 
-      .. code-block:: console
+         .. code-block:: console
 
             # docker compose up -d
 
