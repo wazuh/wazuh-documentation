@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 - Added documentation for the reporting plugin in the Wazuh dashboard package generation guide. ([#8682](https://github.com/wazuh/wazuh-documentation/pull/8682))
 - Added references for FIM (Syscheck) and inventory (Syscollector) state persistence settings. ([#8801](https://github.com/wazuh/wazuh-documentation/pull/8801))
 - Added documentation for SCA state persistence settings. ([#8841](https://github.com/wazuh/wazuh-documentation/pull/8841))
+- Added support for ARM64 WPK packages for Linux and macOS systems. ([#8851](https://github.com/wazuh/wazuh-documentation/pull/8851))
 
 ### Changed
 
