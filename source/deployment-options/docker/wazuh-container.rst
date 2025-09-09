@@ -41,7 +41,7 @@ System requirements
 Single-node stack deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
--  **Operating system**: Linux
+-  **Operating system**: Linux or Windows
 -  **Architecture**: AMD64
 -  **CPU**: At least 4 cores
 -  **Memory**: At least 8 GB of RAM for the Docker host
@@ -50,7 +50,7 @@ Single-node stack deployment
 Multi-node stack deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
--  **Operating system**: Linux
+-  **Operating system**: Linux or Windows
 -  **Architecture**: AMD64
 -  **CPU**: At least 4 cores
 -  **Memory**: At least 16 GB for the Docker host
@@ -59,9 +59,13 @@ Multi-node stack deployment
 Required software
 ^^^^^^^^^^^^^^^^^
 
--  **Docker Engine**: Use the latest stable version.
+-  **Docker Engine / Docker Desktop**: Use the latest stable version.
 
--  **Docker Compose**: Latest stable version (install separately on Linux if needed).
+   -  **Linux**: Docker Engine
+
+   -  **Windows**: Docker Desktop (requires WSL 2)
+
+-  **Docker Compose**: Latest stable version (included with Docker Desktop on Windows; install separately on Linux if needed).
 
 -  **Git**: For cloning the Wazuh Docker repository.
 
@@ -125,6 +129,10 @@ Single-node stack deployment
 
 Follow the steps below to deploy the Wazuh central components in a single-node stack.
 
+.. note::
+
+   All deployment commands provided apply to both Windows and Linux environments.
+
 Cloning the repository
 ~~~~~~~~~~~~~~~~~~~~~~
 
@@ -157,6 +165,7 @@ You must provide certificates for each node to secure communication between them
       #. **Optional**: Add the following to the ``generate-indexer-certs.yml`` file if your system uses a proxy. If not, skip this step. Replace ``<YOUR_PROXY_ADDRESS_OR_DNS>`` with your proxy information.
 
          .. code-block:: yaml
+            :emphasize-lines: 9,10
 
             # Wazuh App Copyright (C) 2017, Wazuh Inc. (License GPLv2)
             services:
@@ -263,6 +272,10 @@ Multi-node stack deployment
 
 Follow the steps below to deploy the Wazuh central components in a multi-node stack.
 
+.. note::
+
+   All deployment commands provided apply to both Windows and Linux environments.
+
 Cloning the repository
 ~~~~~~~~~~~~~~~~~~~~~~
 
@@ -295,6 +308,7 @@ You must provide certificates for each node to secure communication between them
       #. **Optional**: Add the following to the ``generate-indexer-certs.yml`` file if your system uses a proxy. If not, skip this step. Replace ``<YOUR_PROXY_ADDRESS_OR_DNS>`` with your proxy information.
 
          .. code-block:: yaml
+            :emphasize-lines: 9,10
 
             # Wazuh App Copyright (C) 2017, Wazuh Inc. (License GPLv2)
             services:
@@ -354,7 +368,7 @@ Deployment
 
       .. group-tab:: Background
 
-      .. code-block:: console
+         .. code-block:: console
 
             # docker compose up -d
 

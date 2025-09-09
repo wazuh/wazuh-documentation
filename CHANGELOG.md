@@ -25,6 +25,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Added the `ap-northeast-1` (Tokyo) region. ([#8818](https://github.com/wazuh/wazuh-documentation/pull/8818))
 - **Post-release**: Added a Q&A to the Cloud service FAQ section. ([#8832](https://github.com/wazuh/wazuh-documentation/pull/8832))
 - **Post-release**: Added agent restart commands to Agent enrollment methods section. ([#8836](https://github.com/wazuh/wazuh-documentation/pull/8836))
+- **Post-release**: Added Wazuh Docker support for Windows. ([#8852](https://github.com/wazuh/wazuh-documentation/pull/8852))
 
 ### Changed
 
