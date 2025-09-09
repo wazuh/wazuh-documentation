@@ -14,7 +14,7 @@ All notable changes to this project will be documented in this file.
 - Added information about filters in the Windows agent to block UNC and mapped drive paths to mitigate *NetNTLMv2* vulnerabilities. ([#8665](https://github.com/wazuh/wazuh-documentation/pull/8665))
 - Added the Wazuh global queries documentation. ([#8722](https://github.com/wazuh/wazuh-documentation/pull/8722))
 - Added `remoted.ctrl_msg_queue_size` internal option and new remoted statistics fields. ([#8769](https://github.com/wazuh/wazuh-documentation/pull/8769))
-- Added Wazuh agent deployment on Docker documentation. ([#8798](https://github.com/wazuh/wazuh-documentation/pull/8798))
+- Added Wazuh agent deployment on Docker documentation. ([#8798](https://github.com/wazuh/wazuh-documentation/pull/8798)) ([#8845](https://github.com/wazuh/wazuh-documentation/pull/8845))
 
 ### Changed
 
