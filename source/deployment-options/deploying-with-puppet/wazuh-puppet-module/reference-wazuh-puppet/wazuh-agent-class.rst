@@ -378,7 +378,7 @@ $ossec_rootcheck_rootkit_trojans
   `Type String`
 
 $ossec_rootcheck_skip_nfs
-  Enable or disable the scanning of network mounted filesystems (Works on Linux and FreeBSD). Currently, skip_nfs will exclude checking files on CIFS or NFS mounts.
+  Enable or disable the scanning of network mounted filesystems (Works on Linux and FreeBSD). Currently, skip_nfs will exclude checking files on CephFS, CIFS or NFS mounts.
 
   `Default yes`
 
@@ -445,7 +445,7 @@ $sca_amazon_interval
    Depends on **configure_sca and apply_template_os**
 
 $sca_amazon_skip_nfs
-  Enable or disable the scanning of network mounted filesystems (Works on Linux and FreeBSD). Currently, skip_nfs will exclude checking files on CIFS or NFS mounts.
+  Enable or disable the scanning of network mounted filesystems (Works on Linux and FreeBSD). Currently, skip_nfs will exclude checking files on CephFS, CIFS or NFS mounts.
 
   `Default yes`
 
@@ -484,7 +484,7 @@ $sca_rhel_interval
    Depends on **configure_sca and apply_template_os**
 
 $sca_rhel_skip_nfs
-  Enable or disable the scanning of network mounted filesystems (Works on Linux and FreeBSD). Currently, skip_nfs will exclude checking files on CIFS or NFS mounts.
+  Enable or disable the scanning of network mounted filesystems (Works on Linux and FreeBSD). Currently, skip_nfs will exclude checking files on CephFS, CIFS or NFS mounts.
 
   `Default yes`
 
@@ -517,7 +517,7 @@ $sca_else_interval
    Depends on **configure_sca and apply_template_os**
 
 $sca_else_skip_nfs
-  Enable or disable the scanning of network mounted filesystems (Works on Linux and FreeBSD). Currently, `skip_nfs` will exclude checking files on CIFS or NFS mounts.
+  Enable or disable the scanning of network mounted filesystems (Works on Linux and FreeBSD). Currently, `skip_nfs` will exclude checking files on CephFS, CIFS or NFS mounts.
 
   `Default yes`
 
@@ -736,7 +736,7 @@ $ossec_syscheck_synchronization_max_eps
   `Type String`
 
 $ossec_syscheck_skip_nfs
-  Specifies if syscheck should scan network mounted filesystems. This option works on Linux and FreeBSD systems. Currently, `skip_nfs` will exclude checking files on CIFS or NFS mounts.
+  Specifies if syscheck should scan network mounted filesystems. This option works on Linux and FreeBSD systems. Currently, `skip_nfs` will exclude checking files on CephFS, CIFS or NFS mounts.
 
   `Default yes`
 
