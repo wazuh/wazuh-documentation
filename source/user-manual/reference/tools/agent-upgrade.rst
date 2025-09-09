@@ -14,6 +14,7 @@ The agent_upgrade program allows you to list outdated agents and upgrade them.
 
    Since v4.1.0, the upgrade procedure is performed by the :doc:`Agent upgrade module </user-manual/agent/agent-management/remote-upgrading/agent-upgrade-module>` and the agent_upgrade script can be executed on any node.
 
+.. |WAZUH_CUR_MAJ| replace:: |WAZUH_CURRENT_MAJOR|
 
 +--------------------------------------------+--------------------------------------------------------------------------------+
 | Option                                     | Description                                                                    |
@@ -30,7 +31,7 @@ The agent_upgrade program allows you to list outdated agents and upgrade them.
 +--------------------------------------------+--------------------------------------------------------------------------------+
 | -v VERSION, --version VERSION              | Version to upgrade. [Default: latest Wazuh version]                            |
 +--------------------------------------------+--------------------------------------------------------------------------------+
-| -r REPOSITORY, --repository REPOSITORY     | Specify a repository URL. [Default: packages.wazuh.com/4.x/wpk/]               |
+| -r REPOSITORY, --repository REPOSITORY     | Specify a repository URL. [Default: packages.wazuh.com/|WAZUH_CUR_MAJ|/wpk/]   |
 +--------------------------------------------+--------------------------------------------------------------------------------+
 | -f FILE, --file FILE                       | Custom WPK filename.                                                           |
 +--------------------------------------------+--------------------------------------------------------------------------------+

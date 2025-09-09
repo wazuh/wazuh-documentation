@@ -117,7 +117,7 @@ To build a WPK for Windows, you need to first download an MSI package of the des
 
 .. code-block:: console
 
-   # curl -O https://packages.wazuh.com/4.x/windows/wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi
+   # curl -O https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/windows/wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi
 
 Run the command below to build a Windows WPK:
 
@@ -138,7 +138,7 @@ To build a WPK for macOS, you need to first download a PKG package of the desire
 
 .. code-block:: console
 
-   # curl -O https://packages.wazuh.com/4.x/macos/wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.intel64.pkg
+   # curl -O https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/macos/wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.intel64.pkg
 
 Run the command below to build a macOS WPK:
 
@@ -261,7 +261,7 @@ Windows WPK
 
    .. code-block:: console
 
-      # curl -Ls https://packages.wazuh.com/4.x/windows/wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi --output wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi
+      # curl -Ls https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/windows/wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi --output wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi
 
 #. Install the root CA if you want to overwrite the root CA with the file you created previously:
 
@@ -314,7 +314,7 @@ macOS WPK
 
    .. code-block:: console
 
-      # curl -Ls https://packages.wazuh.com/4.x/macos/wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.pkg --output wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.pkg
+      # curl -Ls https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/macos/wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.pkg --output wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.pkg
 
 #. Install the root CA if you want to overwrite the root CA with the file you created previously:
 
