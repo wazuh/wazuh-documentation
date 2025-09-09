@@ -17,12 +17,14 @@ All notable changes to this project will be documented in this file.
 
 - Added documentation for the reporting plugin in the Wazuh dashboard package generation guide. ([#8682](https://github.com/wazuh/wazuh-documentation/pull/8682))
 - Added references for FIM (Syscheck) and inventory (Syscollector) state persistence settings. ([#8801](https://github.com/wazuh/wazuh-documentation/pull/8801))
+- Added documentation for SCA state persistence settings. ([#8841](https://github.com/wazuh/wazuh-documentation/pull/8841))
 
 ### Changed
 
 - Replaced `indexer_cluster_initial_master_nodes` with `indexer_initial_cluster_manager_nodes` in Puppet deployment documentation. ([#8666](https://github.com/wazuh/wazuh-documentation/pull/8666))
 - Updated the File Integrity Monitoring documentation to remove deprecated settings (`max_interval`, `queue_size`, `thread_pool`, `database`, and `registry_enabled`), add the missing `check_device` setting, and fix the `max_eps` definition in the synchronization settings table. ([#8735](https://github.com/wazuh/wazuh-documentation/pull/8735))
 - Updated the FIM documentation to change the default FIM who-data mode provider to eBPF. ([#8805](https://github.com/wazuh/wazuh-documentation/pull/8805))
+- Updated references in steps and links to 5.x. ([#8853](https://github.com/wazuh/wazuh-documentation/pull/8853))
 
 ### Removed
 
@@ -32,6 +34,9 @@ All notable changes to this project will be documented in this file.
 - Removed references to the server version of the `manage_agents` tool. ([#8792](https://github.com/wazuh/wazuh-documentation/pull/8792))
 - Removed `cron.prefix`, `cron.statistics.*`, and `wazuh.monitoring.*` configuration settings from the Wazuh dashboard. ([#8790](https://github.com/wazuh/wazuh-documentation/pull/8790))
 - Removed references to deprecated client communication and FIM configuration options. ([#8809](https://github.com/wazuh/wazuh-documentation/pull/8809))
+- Removed documentation and references to deprecated Wazuh Manager daemons: `wazuh-agentlessd`, `wazuh-csyslogd`, `wazuh-dbd`, `wazuh-integratord`, `wazuh-maild`, and `wazuh-reportd`. ([#8778](https://github.com/wazuh/wazuh-documentation/pull/8778))
+- Removed documentation and references to deprecated CLI tools: `clear_stats`, `update_ruleset`, and `wazuh-regex`. ([#8778](https://github.com/wazuh/wazuh-documentation/pull/8778))
+- Removed documentation to deprecated `fluent-forward` tool. ([#8778](https://github.com/wazuh/wazuh-documentation/pull/8778))
 
 ## [v4.14.1]
 

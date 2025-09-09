@@ -211,7 +211,7 @@ Perform the following steps on the Wazuh dashboard console.
 
       GET _cat/nodeattrs?v&h=node,attr,value
 
-#. Create an ISM policy to assign indices using the ``wazuh-alerts-4.x-*`` index pattern to hot nodes and move them to warm nodes after a defined time:
+#. Create an ISM policy to assign indices using the ``wazuh-alerts-|WAZUH_CURRENT_MAJOR|-*`` index pattern to hot nodes and move them to warm nodes after a defined time:
 
    .. code-block:: none
       :emphasize-lines: 16
@@ -281,7 +281,7 @@ Perform the following steps on the Wazuh dashboard console.
 
    Adjust the ``min_index_age`` from ``30d`` to your preferred number of days to define the minimum number of days to store the indices on a hot node.
 
-Now all future indices created using the ``wazuh-alerts-4.x-*`` index pattern will be allocated to a hot node. After the ``min_index_age`` condition is met, the indices are moved to a warm node and all replicas removed. The removal of the replicas ensures that storage is managed on the warm node since the data will not be queried frequently.
+Now all future indices created using the ``wazuh-alerts-|WAZUH_CURRENT_MAJOR|-*`` index pattern will be allocated to a hot node. After the ``min_index_age`` condition is met, the indices are moved to a warm node and all replicas removed. The removal of the replicas ensures that storage is managed on the warm node since the data will not be queried frequently.
 
 Apply the ISM policy to existing indices
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

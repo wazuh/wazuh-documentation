@@ -10,7 +10,7 @@
 
     .. code-block:: console
 
-      # echo "deb [signed-by=/usr/share/keyrings/wazuh.gpg] https://packages.wazuh.com/4.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
+      # echo "deb [signed-by=/usr/share/keyrings/wazuh.gpg] https://packages.wazuh.com/5.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
 
 #. Update the package information:
 
@@ -26,6 +26,6 @@
 
       # apt-get install gnupg apt-transport-https
       # curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | apt-key add -
-      # echo "deb https://packages.wazuh.com/4.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
+      # echo "deb https://packages.wazuh.com/5.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
 
 .. End of include file
