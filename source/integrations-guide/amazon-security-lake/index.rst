@@ -24,7 +24,7 @@ Prerequisites
 --------------
 
 -  Amazon Security Lake is enabled.
--  At least one up and running Wazuh Indexer instance with populated ``wazuh-alerts-4.x-*`` indices.
+-  At least one up and running Wazuh Indexer instance with populated ``wazuh-alerts-|WAZUH_CURRENT_MAJOR|-*`` indices.
 -  A Logstash instance.
 -  An S3 bucket to store raw events.
 -  An AWS Lambda function, using the Python 3.12 runtime.

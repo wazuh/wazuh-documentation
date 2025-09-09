@@ -78,7 +78,7 @@ Wazuh offers out-of-the-box detection rules that are mapped against relevant MIT
 
 For this example, we require the following infrastructure:
 
-.. |WAZUH_OVA| replace:: `Wazuh OVA <https://packages.wazuh.com/4.x/vm/wazuh-|WAZUH_CURRENT|.ova>`__
+.. |WAZUH_OVA| replace:: `Wazuh OVA <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/vm/wazuh-|WAZUH_CURRENT|.ova>`__
 
 +------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Endpoint         | Example description                                                                                                                                                                                                                  |

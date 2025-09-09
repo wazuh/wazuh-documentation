@@ -81,12 +81,6 @@ newUrls['6.0'] = [
 
 /* *** RELEASE 5.0 ****/
 
-/* Pages no longer available in 5.0 */
-
-removedUrls['5.0'] = [
-  '/user-manual/agent/agent-management/remove-agents/remove.html',
-];
-
 /* Pages added in 5.0 */
 
 newUrls['5.0'] = [
@@ -94,8 +88,21 @@ newUrls['5.0'] = [
   '/release-notes/index-5x.html',
 ];
 
+/* Pages no longer available in 5.0 */
+
 removedUrls['5.0'] = [
-  '/user-manual/reference/tools/agent-auth.html',
+  '/user-manual/reference/daemons/wazuh-agentlessd.html',
+  '/user-manual/reference/daemons/wazuh-csyslogd.html',
+  '/user-manual/reference/daemons/wazuh-dbd.html',
+  '/user-manual/reference/daemons/wazuh-integratord.html',
+  '/user-manual/reference/daemons/wazuh-maild.html',
+  '/user-manual/reference/daemons/wazuh-reportd.html',
+  '/user-manual/reference/tools/clear_stats.html',
+  '/user-manual/reference/tools/update_ruleset.html',
+  '/user-manual/reference/tools/wazuh-regex.html', 
+  '/user-manual/reference/tools/agent-auth.html', 
+  '/user-manual/agent/agent-management/remove-agents/remove.html',
+  '/user-manual/reference/ossec-conf/fluent-forward.html',
 ];
 
 /* *** RELEASE 4.14 ****/
