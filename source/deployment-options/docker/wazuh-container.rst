@@ -253,7 +253,6 @@ Deployment
 
 
 Accessing the Wazuh dashboard
-
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 After deploying the single-node stack, you can access the Wazuh dashboard using your Docker host's IP address or localhost.
