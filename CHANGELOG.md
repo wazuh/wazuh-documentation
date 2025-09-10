@@ -59,6 +59,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated the *Getting started with Wazuh - Architecture* documentation. ([#8819](https://github.com/wazuh/wazuh-documentation/pull/8819))
 - **Post-release**: Changed Suricata ruleset file permission in POC guide. ([#8821](https://github.com/wazuh/wazuh-documentation/pull/8821))
 - **Post-release**: Adjusted the Data analysis documentation. ([#8850](https://github.com/wazuh/wazuh-documentation/pull/8850))
+- **Post-release**: Updated images and powershell command in **Leveraging LLMs for alert enrichment** PoC. [#8888](https://github.com/wazuh/wazuh-documentation/pull/8888)
 
 ### Fixed
 
