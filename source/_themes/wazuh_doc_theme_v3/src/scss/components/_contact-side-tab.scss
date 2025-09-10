@@ -1,0 +1,169 @@
+/* -------------------------------------------------------------------------------------------------
+  Component - Contact side-tab
+  ------------------------------------------------------------------------------------------------- */
+
+.contact-side-tab {
+  width: 57px;
+  height: 180px;
+  background-color: $light-color-primary-lighter;
+  position: fixed;
+  z-index: 100;
+  right: 0;
+  bottom: calc(70% - 230px);
+  border-radius: 10px 0 0 10px;
+  border-top: 2px solid $light-color-primary-lighter;
+  border-left: 2px solid $light-color-primary-lighter;
+  border-bottom: 2px solid $light-color-primary-lighter;
+  box-shadow: -2px 1px 5px 2px rgba($light-color-shadow, 0.15);
+  transition: border-color .15s ease-in-out;
+  @include media-max(xxl) {
+    width: 40px;
+  }
+  @include media-max(sm) {
+    height: 40px;
+  }
+  @include media-only(sm,xl) {
+    height: 150px;
+  }
+  @media (min-width: 1200px) and (max-width: 1259px) {
+    height: 40px;
+  }
+  @media (min-width: 1259px) and (max-width: 1399px) {
+    height: 150px;
+  }
+  @include media-only(mid-xxl,xxl) {
+    height: 40px;
+  }
+  @media (min-width: 1600px) and (max-width: 1699px) {
+    height: 40px;
+  }
+  @media (min-width: 1700px) and (max-width: 1779px) {
+    height: 150px;
+  }
+  @media (min-width: 1780px) and (max-width: 1879px) {
+    height: 40px;
+  }
+  &:hover {
+    background-color: $light-color-primary;
+  }
+  button {
+    border: none;
+    background-color: none;
+    outline: none;
+    &:focus {
+      outline: none;
+      box-shadow: none;
+    }
+  }
+  a,
+  form button,
+  i,svg {
+    color: $dark-color-main-text;
+    font-size: 17px;
+    @include media-only(wzh-xl,xxl) {
+      font-size: 15px;
+    }
+  }
+  i,svg {
+    width: 40px;
+    text-align: center;
+    &.icon {
+      display: inline-block;
+      height: 17px;
+      width: 21px;
+    }
+  }
+  a,
+  form {
+    display: flex; 
+    align-items: center;
+    height: 100%;
+    padding: 20px 5px;
+    &:hover {
+      text-decoration: none;
+    }
+    button {
+      &:hover {
+        color: $dark-color-main-text;
+        background-color: $light-color-primary;
+      }
+    }
+  }
+  .vertical-text {
+    white-space: nowrap;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    .text {
+      font-family: 'Manrope', sans-serif;
+      position: absolute;
+      top: 58px;
+      transform: rotate(-90deg);
+      font-weight: 600;
+      margin-left: 20px;
+      margin-right: 20px;
+      word-spacing: 3px;
+      @include media-max(sm) {
+        display: none;
+      }
+      @include media-only(sm,xl) {
+        display: flex;
+        top: 50px;
+      }
+      @media (min-width: 1200px) and (max-width: 1259px) {
+        display: none;
+      }
+      @media (min-width: 1259px) and (max-width: 1399px) {
+        display: flex;
+        top: 50px;
+      }
+      @include media-only(mid-xxl,xxl) {
+        display: none;
+      }
+      @media (min-width: 1600px) and (max-width: 1699px) {
+        display: none;
+      }
+      @media (min-width: 1700px) and (max-width: 1779px) {
+        display: flex;
+        top: 50px;
+      }
+      @media (min-width: 1780px) and (max-width: 1879px) {
+        display: none;
+      }
+    }
+    i,svg {
+      position: absolute;
+      bottom: 10px;
+      left: calc(50% - 10px);
+      
+      @include media-max(sm) {
+        bottom: 8px;
+      }
+      @include media-only(xl,wzh-xl) {
+        bottom: 8px;
+      }
+      @include media-min(xxl) {
+        bottom: 20px;
+      }
+      @media (min-width: 1600px) and (max-width: 1879px) {
+        bottom: 8px;
+      }
+    }
+  }
+}
+
+.icon-envelope {
+  fill: $dark-color-main-text;
+  display: block;
+  width: 21px;
+  height: 17px;
+  margin: 0 auto;
+}
