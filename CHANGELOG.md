@@ -16,8 +16,6 @@ All notable changes to this project will be documented in this file.
 - Added `remoted.ctrl_msg_queue_size` internal option and new remoted statistics fields. ([#8769](https://github.com/wazuh/wazuh-documentation/pull/8769))
 - Added Wazuh agent deployment on Docker documentation. ([#8798](https://github.com/wazuh/wazuh-documentation/pull/8798)) ([#8845](https://github.com/wazuh/wazuh-documentation/pull/8845)) ([#8857](https://github.com/wazuh/wazuh-documentation/pull/8857))
 
-- Added Wazuh Docker support for Windows. ([#8857](https://github.com/wazuh/wazuh-documentation/pull/8857))
-
 ### Changed
 
 - Updated the Available SCA policies section. ([#8602](https://github.com/wazuh/wazuh-documentation/pull/8602))
