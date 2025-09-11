@@ -63,40 +63,6 @@ To perform the upgrade locally, select your operating system and follow the inst
 
       </a>
     </div>
-    <div class="link-boxes-item">
-      <a class="link-boxes-link" href="./wazuh-agent/solaris.html">
-        <p class="link-boxes-label">Solaris</p>
-
-.. image:: /images/installation/solaris.png
-      :align: center
-      :width: 150px
-
-.. raw:: html
-
-      </a>
-    </div>
-    <div class="link-boxes-item">
-      <a class="link-boxes-link" href="./wazuh-agent/aix.html">
-        <p class="link-boxes-label">AIX</p>
-
-.. image:: /images/installation/AIX.png
-      :align: center
-
-.. raw:: html
-
-      </a>
-    </div>
-    <div class="link-boxes-item">
-      <a class="link-boxes-link" href="./wazuh-agent/hp-ux.html">
-        <p class="link-boxes-label">HP-UX</p>
-
-.. image:: /images/installation/hpux.png
-      :align: center
-
-.. raw:: html
-
-      </a>
-    </div>
   </div>
 
 .. toctree::

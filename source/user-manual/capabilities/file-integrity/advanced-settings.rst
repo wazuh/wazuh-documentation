@@ -593,7 +593,7 @@ Who-data monitoring on Windows
 How it works
 ~~~~~~~~~~~~
 
-The who-data monitoring functionality uses the Microsoft Windows auditing subsystem. It gets the related information about who makes modifications in a monitored directory. These changes produce audit events. The FIM module processes these events and reports them to the Wazuh server. This feature is only compatible with Windows operating systems later than Windows Vista.
+The who-data monitoring functionality uses the Microsoft Windows auditing subsystem. It gets the related information about who makes modifications in a monitored directory. These changes produce audit events. The FIM module processes these events and reports them to the Wazuh server. This feature is only compatible with Windows 7 and later.
 
 Configuration
 ~~~~~~~~~~~~~
@@ -617,7 +617,7 @@ The FIM module configures the required Local Audit Policies and SACLs when launc
 
 #. Periodically, Wazuh checks that the Audit Policies and the SACLs are configured as expected. You can modify the frequency of this verification with :ref:`windows_audit_interval <reference_ossec_syscheck_windows_audit_interval>`.
 
-If your Windows OS version is later than Windows Vista but the system didn’t automatically configure the audit policies, see the :ref:`manual_configuration_of_the_local_audit_policies_in_windows` guide.
+If your Windows system didn’t automatically configure the audit policies, see the :ref:`manual_configuration_of_the_local_audit_policies_in_windows` guide.
 
 The following table establishes a correspondence between audit fields and their equivalent fields in an alert when who-data is enabled:
 
@@ -868,7 +868,7 @@ Alert in JSON:
 Manual configuration of the Windows Audit Policies
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-For Windows versions later than Windows Vista and Windows Server 2008, when you monitor a file or directory with the ``whodata`` option, Wazuh automatically configures the Local Audit Policies and the System Access Control List (SACL) for the file or directory. If this is not done automatically or you have an earlier version of Windows such as Windows Vista and Windows Server 2008, you have to manually configure the audit policies and the SACL.
+When monitoring a file or directory with the ``whodata`` option, Wazuh configures the Local Audit Policies and the System Access Control List (SACL) automatically. If it does not, you must configure the audit policies and the SACL manually.
 
 Local Audit Policies in Windows
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

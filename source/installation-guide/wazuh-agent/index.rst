@@ -67,40 +67,6 @@ To install a Wazuh agent, select your operating system and follow the instructio
 
       </a>
     </div>
-    <div class="link-boxes-item">
-      <a class="link-boxes-link" href="./wazuh-agent-package-solaris.html">
-        <p class="link-boxes-label">Solaris</p>
-
-.. image:: /images/installation/solaris.png
-      :align: center
-      :width: 150px
-
-.. raw:: html
-
-      </a>
-    </div>
-    <div class="link-boxes-item">
-      <a class="link-boxes-link" href="./wazuh-agent-package-aix.html">
-        <p class="link-boxes-label">AIX</p>
-
-.. image:: /images/installation/AIX.png
-      :align: center
-
-.. raw:: html
-
-      </a>
-    </div>
-    <div class="link-boxes-item">
-      <a class="link-boxes-link" href="./wazuh-agent-package-hpux.html">
-        <p class="link-boxes-label">HP-UX</p>
-
-.. image:: /images/installation/hpux.png
-      :align: center
-
-.. raw:: html
-
-      </a>
-    </div>
   </div>
 
 
@@ -133,7 +99,4 @@ Then the Wazuh dashboard will show you the steps to deploy a new agent.
     Linux <wazuh-agent-package-linux>
     Windows <wazuh-agent-package-windows>
     macOS <wazuh-agent-package-macos>
-    Solaris <wazuh-agent-package-solaris>
-    AIX <wazuh-agent-package-aix>
-    HP-UX <wazuh-agent-package-hpux>
 
