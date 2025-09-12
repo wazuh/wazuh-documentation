@@ -370,9 +370,10 @@ The ``messages`` field shows the session token ``95375d4c``. You must add this t
 Repeating the request with the same session
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Add the session token to the request and send it seven more times within two minutes. You can see that rule ID ``5710`` matches multiple times. In the ``rule`` object of the response, inside the ``output`` field, you can see the ``firedtimes`` counter increases with each repetition. But in the last request, rule ID ``5712`` triggers and captures the eighth event that rule ID ``5710`` matched previously for the same IP address.
+Add the session token to the request and send it seven more times within two minutes. You can see that rule ID ``5710`` matches multiple times. In the ``rule`` object of the response, inside the ``output`` field, you can see the ``firedtimes`` counter increases with each repetition. But in the last request, rule ID ``5712`` triggers and captures the eighth event that rule ID ``5710`` matched previously for the same IP address. Change the token below to your own session token generated.
 
-.. code-block:: console
+.. code-block:: bash
+   :emphasize-lines: 3
 
    LOGTEST_REQ=$(echo '{'\
 
@@ -486,7 +487,7 @@ Add the session token to the request and send it seven more times within two min
 Closing the session
 ^^^^^^^^^^^^^^^^^^^
 
-If you don't need the session any longer, you can close it to release the history of events, and rules and decoders loaded.
+If you don't need the session any longer, you can close it to release the history of events, and rules and decoders loaded. The token in command below should also be changed to your own session token.
 
 .. code-block:: console
 

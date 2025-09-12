@@ -21,6 +21,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Included checkout command in Amazon Security Lake integration guide. ([#8423](https://github.com/wazuh/wazuh-documentation/pull/8423))
 - **Post-release**: Updated Vulnerability Detection Proof of Concept. ([#8422](https://github.com/wazuh/wazuh-documentation/pull/8422))
 - **Post-release**: Updated images and powershell command in **Leveraging LLMs for alert enrichment** PoC. [#8889](https://github.com/wazuh/wazuh-documentation/pull/8889)
+- **Post-release**: Adjusted the Data analysis documentation. ([#8899](https://github.com/wazuh/wazuh-documentation/pull/8899))
 
 ### Fixed
 

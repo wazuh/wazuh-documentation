@@ -107,11 +107,13 @@ We use PCRE to match on which host a password change is made using the hostname 
 
 .. code-block:: xml
 
-   <rule id="100101" level="5">
-      <if_sid>5555</if_sid>
-      <hostname type="pcre2">web</hostname>
-      <description>Password changed on $(hostname).</description>
-   </rule>
+   <group name="sshd,">
+     <rule id="100101" level="5">
+       <if_sid>5555</if_sid>
+       <hostname type="pcre2">web</hostname>
+       <description>Password changed on $(hostname).</description>
+     </rule>
+   </group>
 
 Use case: Accurate PAM user alerts
 ----------------------------------
@@ -120,11 +122,13 @@ Use case: Accurate PAM user alerts
 
 .. code-block:: xml
 
-   <rule id="100002" level="5">
-      <if_sid>5501</if_sid>
-      <description>foo user logged in.</description>
-      <user type="pcre2">foo</user>
-   </rule>
+   <group name="sshd,">
+     <rule id="100002" level="5">
+       <if_sid>5501</if_sid>
+       <description>foo user logged in.</description>
+       <user type="pcre2">foo</user>
+     </rule>
+   </group>
 
 The ``/var/ossec/bin/wazuh-logtest`` output shows the triggered alert.
 
