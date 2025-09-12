@@ -40,6 +40,7 @@ Wazuh manager
 - `#30851 <https://github.com/wazuh/wazuh/pull/30851>`__ Improved exception handling in the ``run_local`` SDK function.
 - `#29135 <https://github.com/wazuh/wazuh/pull/29135>`__ Improved Authd connection management using epoll to handle concurrent agent registration requests more efficiently.
 - `#31114 <https://github.com/wazuh/wazuh/pull/31114>`__ Added a single writer buffer manager instance for each indexer connector instance.
+- `#31856 <https://github.com/wazuh/wazuh/pull/31856>`__ Disabled FIM Global Queries.
 
 Wazuh agent
 ^^^^^^^^^^^
@@ -84,21 +85,19 @@ Other
 Wazuh dashboard
 ^^^^^^^^^^^^^^^
 
-- `#7368 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7368>`__ Added ``It Hygiene`` application. `#7461 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7461>`__ `#7476 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7476>`__ `#7475 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7475>`__ `#7513 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7513>`__ `#7582 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7582>`__ `#7588 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7588>`__ `#7692 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7692>`__
+- `#7368 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7368>`__ Added ``It Hygiene`` application. `#7461 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7461>`__ `#7476 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7476>`__ `#7475 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7475>`__ `#7513 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7513>`__ `#7582 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7582>`__ `#7588 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7588>`__ `#7692 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7692>`__ `#7717 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7717>`__
 - `#7368 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7368>`__ Added hardware and system information to the agent overview.
-- `#7379 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7379>`__ `#7513 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7513>`__ Added persistence for selected columns and page size in data grid settings.
-- `#7373 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7373>`__ `#7449 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7449>`__ `#7475 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7475>`__ Added the ability to manage the sample data from FIM, IT Hygiene and vulnerabilities inventories prefixes.
+- `#7379 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7379>`__ Added persistence for selected columns and page size in data grid settings. `#7513 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7513>`__
+- `#7373 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7373>`__ Added the ability to manage the sample data from IT Hygiene and vulnerabilities. `#7449 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7449>`__ `#7475 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7475>`__ `#7718 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7718>`__
 - `#7443 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7443>`__ Added back button to Deploy Agent page that redirects to Endpoints Summary.
 - `#7412 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7412>`__ Added UUID field to the APIs table.
 - `#7373 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7373>`__ Moved ``/elastic/samplealerts`` API endpoints to ``/indexer/samplealerts``.
-- `#7368 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7368>`__ `#7482 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7482>`__ `#7538 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7538>`__ Changed FIM inventory to display information ingested by the indexer.
 - `#7430 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7430>`__ Changed macOS agent startup command.
 - `#7368 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7368>`__ Removed ``Inventory data`` view from agent overview.
 - `#7475 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7475>`__ Removed ``vulnerability.pattern`` setting.
 - `#7368 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7368>`__ Removed ``GET /api/syscollector`` API endpoint.
 - `#7368 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7368>`__ Removed inventory data report and ``POST /reports/agents/{agentID}/inventory`` API endpoint.
 - `#7483 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7483>`__ Removed the ``enrollment.password`` field from the ``/utils/configuration`` endpoint response to prevent unauthorized agent registration by users with read-only API roles.
-- `#7620 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7620>`__ Removed the cluster restart warning from **Rules**, **Decoders**, and **CDB lists**.
 - `#7657 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7657>`__ Changed the manager reset button to reload in **Rules**, **Decoders**, and **CDB list**. `#7677 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7677>`__
 - `#7484 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7484>`__ Reduced the number of API calls to retrieve agent summary information.
 
