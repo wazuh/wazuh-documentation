@@ -57,7 +57,12 @@ Your application needs specific API permissions to retrieve logs and events from
 
 To configure the application permissions, go to the **API permissions** page and choose **Add a permission**.
 
-#. Select **Microsoft Graph API** and click on **Application permissions**.
+#. Select **Microsoft Graph API** and click on **Application permissions**:
+
+   .. thumbnail:: /images/cloud-security/ms-graph/select-api-permissions.png
+      :align: center
+      :width: 80%
+
 #. Add the following relationships' permissions under the **SecurityAlert** and **SecurityIncident** sections:
 
    -  ``SecurityAlert.Read.All``: This permission is required to read security alerts from the ``/security/alerts_v2`` API on your tenant.
@@ -74,6 +79,14 @@ To configure the application permissions, go to the **API permissions** page and
    - ``DeviceManagementManagedDevices.Read.All``. Read `auditEvents` & `managedDevices` relationship data from your tenant.
 
    .. thumbnail:: /images/cloud-security/ms-graph/4-azure-wazuh-app-configure-permissions-intune.png
+      :title: API permissions Intune
+      :alt: API permissions Intune
+      :align: center
+      :width: 100%
+      
+#. Use an admin user to **Grant admin consent** for the tenant:
+
+   .. thumbnail:: /images/cloud-security/ms-graph/grant-admin-consent.png
       :title: API permissions Intune
       :alt: API permissions Intune
       :align: center
@@ -133,6 +146,22 @@ Next, we will see the necessary configuration to allow the integration to succes
    -  ``<name>`` specifies the resource's name (i.e., specific API endpoint) to query for logs.
    -  ``<relationship>`` specifies the types of content (relationships) to obtain logs for.
 
+#. Restart your Wazuh server or agent, depending on where you configured the Wazuh module for Microsoft Graph.
+
+   .. tabs::
+   
+      .. tab:: Wazuh agent
+   
+         .. code-block:: console
+   
+            # systemctl restart wazuh-agent
+   
+      .. tab:: Wazuh manager
+   
+         .. code-block:: console
+   
+            # systemctl restart wazuh-manager
+       
    .. note::
 
       Multi-tenant is not supported. You can only configure one block of ``api_auth``. To learn more about the Wazuh module for Microsoft Graph options, see the :doc:`ms-graph </user-manual/reference/ossec-conf/ms-graph-module>` reference.
