@@ -68,7 +68,9 @@ Check out this example on how to create new decoders and rules. The following lo
 Modify default decoders
 -----------------------
 
-To modify a default decoder, you can rewrite its file in the ``/var/ossec/etc/decoders/`` directory on the Wazuh server, make the changes, and exclude the original decoder file from the loading list.
+Default decoders may not parse custom or non-standard log formats correctly, so modifying them ensures accurate analysis for your specific environment.
+
+To modify a default decoder, you can rewrite its file in the ``/var/ossec/etc/decoders/`` directory on the Wazuh server, make the changes, and exclude the original decoder file from the loading list. This approach avoids editing core files, preventing conflicts during Wazuh updates, and allows tailored log processing to extract specific fields or handle unique application logs effectively.
 
 For example, if you want to customize decoders in the ``/var/ossec/ruleset/decoders/0310-ssh_decoders.xml`` file, follow these steps:
 
