@@ -89,10 +89,17 @@ removedUrls['5.0'] = [
   '/user-manual/reference/daemons/wazuh-reportd.html',
   '/user-manual/reference/tools/clear_stats.html',
   '/user-manual/reference/tools/update_ruleset.html',
-  '/user-manual/reference/tools/wazuh-regex.html', 
-  '/user-manual/reference/tools/agent-auth.html', 
+  '/user-manual/reference/tools/wazuh-regex.html',
+  '/user-manual/reference/tools/agent-auth.html',
   '/user-manual/agent/agent-management/remove-agents/remove.html',
   '/user-manual/reference/ossec-conf/fluent-forward.html',
+  '/user-manual/agent/agent-enrollment/deployment-variables/deployment-variables-aix.html',
+  '/installation-guide/wazuh-agent/wazuh-agent-package-aix.html',
+  '/installation-guide/wazuh-agent/wazuh-agent-package-hpux.html',
+  '/installation-guide/wazuh-agent/wazuh-agent-package-solaris.html',
+  '/upgrade-guide/wazuh-agent/aix.html',
+  '/upgrade-guide/wazuh-agent/hp-ux.html',
+  '/upgrade-guide/wazuh-agent/solaris.html',
 ];
 
 /* *** RELEASE 4.14 ****/

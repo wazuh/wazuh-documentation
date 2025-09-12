@@ -6,7 +6,7 @@
 Wazuh agent
 ===========
 
-The Wazuh agent runs on Linux, Windows, macOS, Solaris, AIX, and other operating systems. It can be deployed to laptops, desktops, servers, cloud instances, containers, or virtual machines. The agent helps to protect your system by providing threat prevention, detection, and response capabilities. It is also used to collect different types of system and application data that it forwards to the :doc:`Wazuh server <wazuh-server>` through an encrypted and authenticated channel.
+The Wazuh agent runs on Linux, Windows, and macOS operating systems. It can be deployed to laptops, desktops, servers, cloud instances, containers, or virtual machines. The agent helps to protect your system by providing threat prevention, detection, and response capabilities. It is also used to collect different types of system and application data that it forwards to the :doc:`Wazuh server <wazuh-server>` through an encrypted and authenticated channel.
 
 Agent architecture
 ------------------
