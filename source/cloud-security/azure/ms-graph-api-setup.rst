@@ -92,9 +92,9 @@ To configure the application permissions, go to the **API permissions** page and
       :align: center
       :width: 100%
 
-.. note::
-
-   Admin consent is required for API permission changes.
+   .. note::
+   
+      Admin consent is required for API permission changes.
 
 Wazuh server or agent
 ---------------------
