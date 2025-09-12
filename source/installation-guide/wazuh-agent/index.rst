@@ -31,6 +31,10 @@ The Wazuh agent provides :ref:`key features <agents_modules>` to enhance your sy
 
 To install a Wazuh agent, select your operating system and follow the instructions.
 
+.. warning::
+
+   Support for the following operating systems ends in Wazuh 5.0.0: Red Hat 5, CentOS 5, Oracle Linux 5, SUSE Linux Enterprise Server 11, Windows XP, Windows Vista, Windows Server 2003, Solaris, AIX, and HP-UX.
+
 .. raw:: html
 
   <div class="link-boxes-group layout-6">
