@@ -53,7 +53,7 @@ Follow the steps below to build the packages:
 
    .. code:: console
 
-      $ git clone -b v|WAZUH_CURRENT| https://github.com/wazuh/wazuh-dashboard.git && && cd wazuh-dashboard/ && git checkout v|WAZUH_CURRENT|
+      $ git clone -b v|WAZUH_CURRENT| https://github.com/wazuh/wazuh-dashboard.git && cd wazuh-dashboard/
       $ nvm install $(cat .nvmrc)
       $ nvm use $(cat .nvmrc)
       $ yarn osd bootstrap
