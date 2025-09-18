@@ -576,7 +576,7 @@ The following steps demonstrate the build process for an intel64 architecture, b
 
    Replace ``/PATH/TO/KEYS`` with the full path to where the X509 certificate and root CA are stored.
 
-This script builds a Wazuh 4.12.1 macOS WPK package named ``macOSAgent.wpk`` and stores it in ``/tmp/wpk``. This action is done using the previously generated keys that are saved in ``/tmp/keys``.
+This script builds a Wazuh |WAZUH_CURRENT| macOS WPK package named ``macOSAgent.wpk`` and stores it in ``/tmp/wpk``. This action is done using the previously generated keys that are saved in ``/tmp/keys``.
 
 If the ``-c`` or ``--checksum`` option is used, a file is created containing the SHA512 checksum in the same output path. This location is configurable, and you can indicate where you want to store it.
 
