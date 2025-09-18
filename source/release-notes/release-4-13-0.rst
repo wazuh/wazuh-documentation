@@ -11,9 +11,9 @@ This section lists the changes in version 4.13.0. Every update of the Wazuh solu
 Highlights
 ----------
 
-The 4.13.0 release improves deployment flexibility, enhances centralized data access, and strengthens platform resilience. Key updates include:
+The 4.13.0 release improves deployment flexibility, enhances centralized data access, and strengthens platform resilience. Key highlights include the introduction of the IT Hygiene dashboard, which provides users with the ability to centrally view and query IT Hygiene data.
 
--  `Global queries for IT Hygiene data <https://github.com/wazuh/wazuh/issues/27894>`__: Added support for global queries which allows users to centrally search and visualize IT Hygiene data from multiple endpoints directly on the Wazuh dashboard. This enhances the security and compliance capabilities of Wazuh and provides deeper insights into system status and configuration.
+-  `Global queries for IT Hygiene data <https://github.com/wazuh/wazuh/issues/27894>`__: Wazuh now supports global queries for IT Hygiene data through a newly dedicated IT Hygiene dashboard
 -  Reliability and performance improvements across the platform.
 -  Multiple bug fixes in core components and the UI.
 -  Updates based on recent security scans.
