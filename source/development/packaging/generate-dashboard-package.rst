@@ -272,6 +272,6 @@ Building the Wazuh dashboard package using Docker
 
    .. code-block:: console
 
-      $ ./launcher.sh -v 4.12.0 -r 1 -p file:///wazuh-dashboard-4.11.1-1-linux-x64.tar.gz
+      $ ./launcher.sh -v |WAZUH_CURRENT| -r |WAZUH_DASHBOARD_CURRENT_REV_DEB| -p file:///wazuh-dashboard-|WAZUH_CURRENT|-|WAZUH_DASHBOARD_CURRENT_REV_DEB|-linux-x64.tar.gz
 
    The package will be generated in the ``output`` folder of the ``rpm`` or ``deb`` folder.
