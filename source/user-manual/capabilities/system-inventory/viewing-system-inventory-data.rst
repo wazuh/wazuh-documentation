@@ -1,39 +1,131 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: You can view the system inventory of each monitored endpoint from the Wazuh dashboard. Learn more about it in this section of the Wazuh documentation.
+  :description: You can query and visualize centralized system inventory data from all monitored endpoints in the **IT Hygiene** section on the Wazuh dashboard. Learn more about it in this section of the Wazuh documentation.
 
 Viewing system inventory data
 =============================
 
-Wazuh dashboard
----------------
+You can query and visualize centralized system inventory data from all monitored endpoints in the **IT Hygiene** section on the Wazuh dashboard. This provides a unified view of your environment's status across all monitored endpoints.
 
-You can view the system inventory of each monitored endpoint from the Wazuh dashboard. To do this, select an agent from your Wazuh dashboard and navigate to the **Inventory data** module as displayed below. The inventory data page for each monitored endpoint shows its operating system, hardware, processes, network interface, and packages.
+The IT Hygiene section organizes data into multiple categories:
 
-.. thumbnail:: /images/manual/system-inventory/inventory-data.png
-   :title: Inventory data
-   :alt: Inventory data
+-  **Dashboard**: View an overview of key metrics and a summary of your environment.
+-  **System**: Analyze operating system and hardware information.
+-  **Software**: Review installed packages and software vendors.
+-  **Processes**: Monitor running processes.
+-  **Network**: Inspect network configurations, interfaces, and traffic.
+
+To access the IT hygiene section, navigate to **Security operations** > **IT Hygiene** on the Wazuh dashboard.
+
+Dashboard
+---------
+
+Shows a consolidated view of the system inventory data across multiple or selected monitored endpoints. It visualizes key metrics such as operating system families, package types, installed packages, running packages, operating systems, host CPUs, source ports, and process start times.
+
+.. thumbnail:: /images/manual/system-inventory/system-inventory-dashboard.png
+   :title: System inventory dashboard
+   :alt: System inventory dashboard
    :align: center
    :width: 80%
 
-.. thumbnail:: /images/manual/system-inventory/inventory-data-software-tab.png
-   :title: Inventory data module - Software tab
-   :alt: Inventory data module - Software tab
+System
+------
+
+Provides a detailed breakdown of the operating systems and hardware in your environment.
+
+-  The **OS** tab provides an operating system and hardware information breakdown across all monitored endpoints.
+
+   .. thumbnail:: /images/manual/system-inventory/system-inventory-system-os-tab.png
+      :title: System inventory - System OS tab
+      :alt: System inventory - System OS tab
+      :align: center
+      :width: 80%
+
+-  The **Hardware** tab displays top CPU models, CPU cores, the most used memory, and a summary data table.
+
+   .. thumbnail:: /images/manual/system-inventory/system-inventory-system-hardware-tab.png
+      :title: System inventory - System Hardware tab
+      :alt: System inventory - System Hardware tab
+      :align: center
+      :width: 80%
+
+Software
+--------
+
+Contains an overview of software packages and Windows KBs on monitored endpoints.
+
+-  The **Packages** tab displays package data, including top software vendors, the number of installed packages, the types of packages, and a summary data table.
+
+   .. thumbnail:: /images/manual/system-inventory/system-inventory-software-packages-tab.png
+      :title: System inventory - Software Packages tab
+      :alt: System inventory - Software Packages tab
+      :align: center
+      :width: 80%
+
+-  The **Windows KBs** tab displays the Windows Knowledge Base data, including the most and least common Knowledge Bases.
+
+   .. thumbnail:: /images/manual/system-inventory/system-inventory-software-windows-kbs-tab.png
+      :title: System inventory - Software Windows KBs tab
+      :alt: System inventory - Software Windows KBs tab
+      :align: center
+      :width: 80%
+
+Processess
+----------
+
+Displays running processes, process start times, and a summary data table containing process details for the monitored endpoints.
+
+.. thumbnail:: /images/manual/system-inventory/system-inventory-processes.png
+   :title: System inventory - Processes
+   :alt: System inventory - Processes
    :align: center
    :width: 80%
 
-.. thumbnail:: /images/manual/system-inventory/inventory-data-network-tab.png
-   :title: Inventory data module - Network tab
-   :alt: Inventory data module - Network tab
-   :align: center
-   :width: 80%
+Network
+-------
 
-.. thumbnail:: /images/manual/system-inventory/inventory-data-processes-tab.png
-   :title: Inventory data module - Processes tab
-   :alt: Inventory data module - Processes tab
-   :align: center
-   :width: 80%
+Contains the **Addresses**, **Interfaces**, **Protocols**, **Services**, and **Traffic** tabs.
+
+-  The **Addresses** tab provides a detailed view of network types, unique network IP addresses, interface names, and a summary data table containing detailed network address information.
+
+   .. thumbnail:: /images/manual/system-inventory/system-inventory-network-addresses-tab.png
+      :title: System inventory - Network Addresses tab
+      :alt: System inventory - Network Addresses tab
+      :align: center
+      :width: 80%
+
+-  The **Interfaces** tab offers a detailed view of network interfaces, displaying average packet loss, interface states, interface types, and a summary data table of interface-level details.
+
+   .. thumbnail:: /images/manual/system-inventory/system-inventory-network-interfaces-tab.png
+      :title: System inventory - Network Interfaces tab
+      :alt: System inventory - Network Interfaces tab
+      :align: center
+      :width: 80%
+
+-  The **Protocols** tab offers a detailed view of network types, network metrics, and DHCP status, and a summary table with more protocol-level details.
+
+   .. thumbnail:: /images/manual/system-inventory/system-inventory-network-protocols-tab.png
+      :title: System inventory - Network Protocols tab
+      :alt: System inventory - Network Protocols tab
+      :align: center
+      :width: 80%
+
+-  The **Services** tab presents a detailed view of source ports, transport protocols, processes, and a summary data table for each endpoint.
+
+   .. thumbnail:: /images/manual/system-inventory/system-inventory-network-services-tab.png
+      :title: System inventory - Network Services tab
+      :alt: System inventory - Network Services tab
+      :align: center
+      :width: 80%
+
+-  The **Traffic** tab provides a detailed view of active listening ports, including source ports, destination ports, transport protocols, processes, and a summary data table for each endpoint.
+
+   .. thumbnail:: /images/manual/system-inventory/system-inventory-network-traffic-tab.png
+      :title: System inventory - Network Traffic tab
+      :alt: System inventory - Network Traffic tab
+      :align: center
+      :width: 80%
 
 Query the agent inventory database
 ----------------------------------

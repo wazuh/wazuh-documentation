@@ -26,6 +26,7 @@ All notable changes to this project will be documented in this file.
 - Updated default values for `agents_disconnection_time` and `notify_time`. ([#8769](https://github.com/wazuh/wazuh-documentation/pull/8769))
 - Updated the default value of the `all` attribute in the `ports` Syscollector configuration option. ([#8840](https://github.com/wazuh/wazuh-documentation/pull/8840))
 - Replaced version references with replacement variables in Wazuh package generation. ([#8906](https://github.com/wazuh/wazuh-documentation/pull/8906))
+- Updated System inventory documentation. ([#8910](https://github.com/wazuh/wazuh-documentation/pull/8910))
 
 ## [v4.12.0]
 
