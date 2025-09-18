@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: You can view the system inventory of each monitored endpoint from the Wazuh dashboard. Learn more about it in this section of the Wazuh documentation.
+  :description: You can query and visualize centralized system inventory data from all monitored endpoints in the **IT Hygiene** section on the Wazuh dashboard. Learn more about it in this section of the Wazuh documentation.
 
 Viewing system inventory data
 =============================
