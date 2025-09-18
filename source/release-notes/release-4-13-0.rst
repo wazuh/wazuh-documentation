@@ -11,10 +11,9 @@ This section lists the changes in version 4.13.0. Every update of the Wazuh solu
 Highlights
 ----------
 
-The 4.13.0 release improves deployment flexibility, enhances centralized data access, and strengthens platform resilience. Key updates include a more stable and secure Docker deployment process and support for global queries in the File Integrity Monitoring (FIM) and system inventory modules among others.
+The 4.13.0 release improves deployment flexibility, enhances centralized data access, and strengthens platform resilience. Key highlights include the introduction of the IT Hygiene dashboard, which provides users with the ability to centrally view and query IT Hygiene data.
 
--  `Agent Docker images <https://github.com/wazuh/wazuh-docker/issues/1790>`__: Docker images for the Wazuh agent are now available.
--  `Global queries for FIM and system inventory <https://github.com/wazuh/wazuh/issues/27894>`__: Added support for global queries on data collected by the Wazuh agent. The FIM and inventory modules can now perform advanced searches and filtering on data stored in the Wazuh indexer. This enhances Wazuh's security and compliance capabilities and provides deeper insights into system status and configuration.
+-  `Global queries for IT Hygiene data <https://github.com/wazuh/wazuh/issues/27894>`__: Wazuh now supports global queries for IT Hygiene data through a newly dedicated IT Hygiene dashboard
 -  Reliability and performance improvements across the platform.
 -  Multiple bug fixes in core components and the UI.
 -  Updates based on recent security scans.
