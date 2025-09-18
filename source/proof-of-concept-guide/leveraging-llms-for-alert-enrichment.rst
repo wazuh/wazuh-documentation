@@ -265,7 +265,7 @@ Perform the following steps to install Python, YARA, and download YARA rules.
    .. code-block:: powershell
 
       > mkdir 'C:\Program Files (x86)\ossec-agent\active-response\bin\yara\'
-      > cp .\yara64.exe 'C:\Program Files (x86)\ossec-agent\active-response\bin\yara\'
+      > cp .\yara-v4.5.1-2298-win64\yara64.exe 'C:\Program Files (x86)\ossec-agent\active-response\bin\yara\'
 
 #. Download YARA rules using valhallaAPI. Valhalla is a YARA and Sigma rule `repository <https://valhalla.nextron-systems.com/>`__ provided by Nextron Systems:
 

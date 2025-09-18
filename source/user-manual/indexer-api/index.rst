@@ -33,3 +33,4 @@ Take a look at the :doc:`Wazuh indexer API use cases <use-case>` for practical e
       configuration
       securing-indexer-api
       use-case
+      reference

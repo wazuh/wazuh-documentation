@@ -46,6 +46,8 @@ Technical FAQ
 
 - `What are the available regions?`_
 
+- `What status can my environment have?`_
+
 How can I send data to my environment?
 --------------------------------------
 
@@ -148,20 +150,29 @@ What are the available regions?
 
 Available regions:
 
-* North Virginia: ``us-east-1``
-  
-* Ohio: ``us-east-2``
-
-* London: ``eu-west-2``
-
-* Frankfurt: ``eu-central-1``
-
-* Mumbai: ``ap-south-1``
-
-* Singapore: ``ap-southeast-1``
-
-* Sydney: ``ap-southeast-2``
-
-* Canada: ``ca-central-1``
+.. include:: /_templates/cloud-service-regions.rst
 
 When selecting a region to host your environment, if you are not sure which one is the best option for you, select one that is the closest to your location since this typically reduces latency for indexing and search requests.
+
+What status can my environment have?
+------------------------------------
+
++---------------+----------------------------------------------------------------------------------------+
+| Status        | Description                                                                            |
++===============+========================================================================================+
+| Creating      | Your environment is being created.                                                     |
++---------------+----------------------------------------------------------------------------------------+
+| Ready         | Your environment was created successfully and is ready to use.                         |
++---------------+----------------------------------------------------------------------------------------+
+| Failed        | The creation of your environment failed.                                               |
++---------------+----------------------------------------------------------------------------------------+
+| Maintenance   | Your environment is under maintenance. It will be available when finished.             |
++---------------+----------------------------------------------------------------------------------------+
+| Suspending    | Your environment is being suspended due to lack of payment.                            |
++---------------+----------------------------------------------------------------------------------------+
+| Suspended     | Your environment is suspended.                                                         |
++---------------+----------------------------------------------------------------------------------------+
+| Resuming      | Your environment is resuming after suspension. It will be available soon.              |
++---------------+----------------------------------------------------------------------------------------+
+| Terminated    | Your environment was deleted.                                                          |
++---------------+----------------------------------------------------------------------------------------+

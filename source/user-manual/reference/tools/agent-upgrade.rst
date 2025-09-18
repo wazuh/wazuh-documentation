@@ -2,8 +2,6 @@
 
 .. meta::
   :description: List outdated agents and upgrade them using the agent_upgrade program. Learn more about it in this section of the Wazuh documentation.
-  
-.. _agent_upgrade:
 
 agent_upgrade
 ==============
@@ -46,82 +44,77 @@ The agent_upgrade program allows you to list outdated agents and upgrade them.
 Examples
 ----------
 
-* List outdated agents:
+-  List outdated agents:
 
-.. code-block:: console
+   .. code-block:: console
 
-    # /var/ossec/bin/agent_upgrade -l
+       # /var/ossec/bin/agent_upgrade -l
 
-.. code-block:: none
-    :class: output
+   .. code-block:: none
+      :class: output
 
-    ID    Name                               Version
-    002   VM_Debian9                         Wazuh v3.13.2
-    003   VM_Debian8                         Wazuh v3.13.2
-    009   VM_WinServ2016                     Wazuh v3.10.1
+      ID    Name                               Version
+      002   VM_Debian9                         Wazuh v4.2.0
+      003   VM_Debian8                         Wazuh v4.2.0
+      004   VM_WinServ2016                     Wazuh v4.1.0
 
-    Total outdated agents: 3
+      Total outdated agents: 3
 
+-  Upgrade agent:
 
-* Upgrade agent:
+   .. code-block:: console
 
-.. code-block:: console
+      # /var/ossec/bin/agent_upgrade -a 002
 
-    # /var/ossec/bin/agent_upgrade -a 002
+   .. code-block:: none
+      :class: output
 
-.. code-block:: none
-    :class: output
+      Upgrading...
 
-    Upgrading...
+      Upgraded agents:
+      	Agent 002 upgraded: Wazuh v4.2.0 -> Wazuh v4.12.0
 
-    Upgraded agents:
-        Agent 002 upgraded: Wazuh v3.13.2 -> |WAZUH_CURRENT|
+-  Upgrade multiple agents:
 
+   .. code-block:: console
 
-* Upgrade multiple agents:
+       # /var/ossec/bin/agent_upgrade -a 003 004
 
-.. code-block:: console
+   .. code-block:: none
+      :class: output
 
-    # /var/ossec/bin/agent_upgrade -a 001 002
+      Upgrading...
 
-.. code-block:: none
-   :class: output
+      Upgraded agents:
+      	Agent 003 upgraded: Wazuh v4.2.0 -> Wazuh v4.12.0
+      	Agent 004 upgraded: Wazuh v4.1.0 -> Wazuh v4.12.0
 
-   Upgrading...
+-  Upgrade agent using a custom repository:
 
-   Upgraded agents:
-       Agent 001 upgraded: Wazuh v4.2.0 -> |WAZUH_CURRENT|
-       Agent 002 upgraded: Wazuh v4.0.0 -> |WAZUH_CURRENT|
+   .. code-block:: console
 
+      # /var/ossec/bin/agent_upgrade -a 002 -v v4.12.0 -r http://mycompany.wpkrepo.com/
 
-* Upgrade agent using a custom repository:
+   .. code-block:: none
+      :class: output
 
-.. code-block:: console
+      Upgrading...
 
-    # /var/ossec/bin/agent_upgrade -a 002 -v v4.0.0 -r http://mycompany.wpkrepo.com/
+      Upgraded agents:
+      	Agent 002 upgraded: Wazuh v4.2.0 -> Wazuh v4.12.0
 
-.. code-block:: none
-    :class: output
+-  Install custom WPK file:
 
-    Upgrading...
+   .. code-block:: console
 
-    Upgraded agents:
-        Agent 002 upgraded: Wazuh v3.13.2 -> 4.0.0
+      # /var/ossec/bin/agent_upgrade -a 002 -d -f /root/upgrade_openscap_debian.wpk -x install.sh
 
+   .. code-block:: none
+       :class: output
 
-* Install custom WPK file:
+       Upgrading...
 
-.. code-block:: console
-
-    # /var/ossec/bin/agent_upgrade -a 002 -d -f /root/upgrade_openscap_debian.wpk -x install.sh
-
-.. code-block:: none
-    :class: output
-
-    Upgrading...
-
-    Upgraded agents:
-        Agent 002 upgraded: Wazuh v3.13.2 -> 4.0.0
-
+       Upgraded agents:
+      	Agent 002 upgraded: Wazuh v4.2.0 -> Wazuh v4.12.0
 
 .. note:: When the agent finishes updating, it is automatically restarted to apply the new configuration.
