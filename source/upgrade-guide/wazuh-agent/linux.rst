@@ -7,6 +7,10 @@
 Upgrading Wazuh agents on Linux endpoints
 =========================================
 
+.. warning::
+
+   Support for Red Hat 5, CentOS 5, Oracle Linux 5, and SUSE Linux Enterprise Server 11 systems ends in Wazuh 5.0.0.
+
 Select your package manager and follow the instructions to upgrade the Wazuh agent locally.
 
 .. note:: You need root user privileges to run all the commands described below.

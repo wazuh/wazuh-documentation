@@ -34,7 +34,7 @@ Below, we show the structure of the ruleset directory on the Wazuh server:
                    └─ rules/
 
 .. note::
-   
+
    You can find all the out-of-the-box rules and decoders inside the ``/var/ossec/ruleset/ directory``. All files within this directory are overwritten or modified during the Wazuh upgrade process. Therefore, we do not recommend editing or adding your custom files here. Instead, we recommend making custom changes in the ``/var/ossec/etc/`` directory. Here, you can add your own decoders and rules files or use the default ``/var/ossec/etc/decoders/local_decoder.xml`` and ``/var/ossec/etc/rules/local_rules.xml`` files.
 
 GitHub repository
@@ -50,7 +50,7 @@ In the repository, you will find:
 
 -  **Tools**
 
-   We provide useful tools such as the `wazuh-logtest </user-manual/reference/tools/wazuh-logtest>`__, which allows for testing rules and decoders before using them. This tool processes only log per line and is available in ``/var/ossec/bin/wazuh-logtest`` on the Wazuh server, along with various other binaries which help in managing the Wazuh server and agents. For more information you can take a look at `Wazuh tools </user-manual/reference/tools/index>`__ documentation.
+   We provide useful tools such as the :doc:`wazuh-logtest </user-manual/reference/tools/wazuh-logtest>`, which allows for testing rules and decoders before using them. This tool processes only one-liner (no line breaks) logs and is available in ``/var/ossec/bin/wazuh-logtest`` on the Wazuh server, along with various other binaries which help in managing the Wazuh server and agents. For more information you can take a look at :doc:`Wazuh tools </user-manual/reference/tools/index>` documentation.
 
 .. topic:: Content
 

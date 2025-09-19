@@ -6,6 +6,10 @@
 Installing Wazuh agents on Solaris endpoints
 ============================================
 
+.. warning::
+
+   Support for Solaris systems ends in Wazuh 5.0.0.
+
 The agent runs on the host you want to monitor and communicates with the Wazuh manager, sending data in near real-time through an encrypted and authenticated channel.
 
 To start the installation process, select your architecture: i386 or SPARC.
