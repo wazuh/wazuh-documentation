@@ -6,7 +6,7 @@
 Wazuh agent
 ===========
 
-In this section, we show how to generate the Wazuh agent package for different environments using dedicated automation scripts. We show package generation for Linux, macOS, Windows, Solaris, and Wazuh signed packages (WPK).
+In this section, we show how to generate the Wazuh agent package for different environments using dedicated automation scripts. We show package generation for Linux, macOS, Windows, and Wazuh signed packages (WPK).
 
 Follow the steps outlined in each sub-section to build the Wazuh agent package for your preferred environment.
 
@@ -220,11 +220,11 @@ The process of successfully generating the Windows Microsoft Software Installer 
 Compiling the Windows package
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Clone the `wazuh <https://github.com/wazuh/wazuh>`__ repository from GitHub and navigate to the ``windows/`` directory. Select the version, ``v4.12.0``.
+#. Clone the `wazuh <https://github.com/wazuh/wazuh>`__ repository from GitHub and navigate to the ``windows/`` directory. Select the version, ``v|WAZUH_CURRENT|``.
 
    .. code-block:: console
 
-      $ git clone https://github.com/wazuh/wazuh && cd wazuh/packages && git checkout v4.12.0 && cd windows
+      $ git clone https://github.com/wazuh/wazuh && cd wazuh/packages && git checkout v|WAZUH_CURRENT| && cd windows
 
 #. Execute the ``generate_compiled_windows_agent.sh`` script. This script will build a Docker image with all the necessary tools to compile and obtain the Windows agent compiled in a ZIP file.
 
@@ -321,157 +321,6 @@ If the ``WIX_TOOLS`` and/or ``SIGN_TOOLS`` binaries are not added to the environ
 
    > ./generate_wazuh_msi.ps1 -MSI_NAME mypackage.msi -SIGN yes -WIX_TOOLS_PATH C:\PATH_TO_WIX_TOOL_FILES -SIGN_TOOLS_PATH C:\PATH_TO_SIGN_TOOL_FILES
 
-Solaris endpoint
-----------------
-
-Using the script
-^^^^^^^^^^^^^^^^
-
-Wazuh provides an automated way of building the Wazuh agent package for Solaris 10 and 11 environments.
-
-Requirements
-~~~~~~~~~~~~
-
-Ensure that you meet the following requirements to continue.
-
--  `Git <https://git-scm.com/book/en/v2/Getting-Started-Installing-Git>`__
--  cmake
-
-.. note::
-
-   To build a Solaris package, you must run the automated script in a Solaris environment.
-
-Creating the agent package
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Follow the steps below to create a Solaris package:
-
-#. Clone the `wazuh <https://github.com/wazuh/wazuh>`__ repository from GitHub and select the version, ``v4.12.0``.
-
-   .. code-block:: console
-
-      # git clone https://github.com/wazuh/wazuh && cd wazuh/packages && git checkout v4.12.0
-
-#. Choose the version of Solaris you want to build the package for and go to that directory. Make the  ``generate_wazuh_packages.sh`` script executable and run it to build the package. Here you can see all the different parameters:
-
-   .. code-block:: console
-
-      # cd solaris/solaris11
-      # chmod +x generate_wazuh_packages.sh && ./generate_wazuh_packages.sh -h
-
-   .. code-block:: none
-      :class: output
-
-      NAME
-              generate_wazuh_packages.sh - Generate a Solaris 11 package
-
-      SYNOPSIS
-              generate_wazuh_packages.sh [OPTIONS]
-
-      DESCRIPTION
-              -b, --branch <branch>
-                      Select Git branch or tag e.g. master.
-
-              -c, --checksum
-                      Compute the SHA512 checksum of the package.
-
-              -e, --environment
-                      Install all the packages necessary to build the package.
-
-              -h, --help
-                      Shows this help.
-
-              -p, --install-path <pkg_home>
-                      Installation path for the package. By default: /var.
-
-              -s, --store  <pkg_directory>
-                      Directory to store the resulting package. By default, an output folder will be created.
-
-Follow the steps below  to build a Solaris package.
-
-#. First, install the needed dependencies:
-
-   .. code-block::console
-
-      $ ./generate_wazuh_packages.sh -e
-
-#. Download and build the sources:
-
-   .. code-block:: console
-
-      $ ./generate_wazuh_packages.sh -b v4.12.0
-
-.. note::
-
-   To build a Solaris package for a SPARC-based system, the same command above could be run in a SPARC system. SPARC (Scalable Processor Architecture) is a 32-bit and 64-bit microprocessor architecture, developed by Sun Microsystems. It is a Reduced Instruction Set Computing (RISC) type computer architecture, often used with UNIX-based operating systems like Solaris.
-
-Using Vagrant
-^^^^^^^^^^^^^
-
-Wazuh also provides an automated way of building packages for i386 Solaris systems using Vagrant.
-
-Requirements
-~~~~~~~~~~~~
-
--  Virtual Box
--  Vagrant
-
-Creating the agent package
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Follow the steps described below to build the Solaris package corresponding to your environment:
-
-.. tabs::
-
-   .. group-tab:: Solaris 10
-
-      #. Clone the `wazuh <https://github.com/wazuh/wazuh>`__ repository and switch to your target branch. Copy the source files for your Solaris 10 into ``wazuh/packages/solaris/package_generation/src``, then change to the ``wazuh/packages/solaris/package_generation`` directory:
-
-         .. code-block:: console
-
-            # git clone https://github.com/wazuh/wazuh && cd wazuh/packages && git checkout v4.12.0
-            # cd solaris && cp -r solaris10 package_generation/src/ && cd package_generation
-
-      #. Build the Solaris package using Vagrant:
-
-         .. code-block:: console
-
-            # vagrant --branch-tag=v4.12.0 up solaris10_cmake
-
-   .. group-tab:: Solaris 11
-
-      #. Clone the `wazuh <https://github.com/wazuh/wazuh>`__ repository and switch to your target branch. Copy the source files for your Solaris 11 into ``wazuh/packages/solaris/package_generation/src``, then change to the ``wazuh/packages/solaris/package_generation`` directory.
-
-         .. code-block:: console
-
-            # git clone https://github.com/wazuh/wazuh && cd wazuh/packages && git checkout v4.12.0
-            # cd solaris && cp -r solaris11 package_generation/src/ && cd package_generation
-
-      #. Build the Solaris package using Vagrant:
-
-         .. code-block:: console
-
-            # vagrant --branch-tag=v4.12.0 up solaris11_cmake
-
-.. note::
-
-   You can generate both packages in a single command as follows:
-
-   .. code-block:: console
-
-      # vagrant --branch-tag=v4.12.0 up solaris10_cmake solaris11_cmake
-
-   The generated packages are stored in the ``wazuh/packages/solaris/package_generation/src/`` directory.
-
-Destroying the VMs
-~~~~~~~~~~~~~~~~~~
-
-Run the command below to destroy the VMs once the package generation is completed.
-
-.. code-block:: console
-
-   # vagrant destroy solaris10_cmake solaris11_cmake
-
 Wazuh signed package (WPK)
 --------------------------
 
@@ -494,11 +343,11 @@ Ensure that you meet the following requirements to continue.
 Initial steps
 ^^^^^^^^^^^^^
 
-#. Clone the `wazuh <https://github.com/wazuh/wazuh>`__ repository and navigate to the ``wpk/`` directory. Select the version, ``v4.12.0``.
+#. Clone the `wazuh <https://github.com/wazuh/wazuh>`__ repository and navigate to the ``wpk/`` directory. Select the version, ``v|WAZUH_CURRENT|``.
 
    .. code-block:: console
 
-      # git clone https://github.com/wazuh/wazuh && cd wazuh/packages && git checkout v4.12.0 && cd wpk
+      # git clone https://github.com/wazuh/wazuh && cd wazuh/packages && git checkout v|WAZUH_CURRENT| && cd wpk
 
 #. Execute the ``generate_wpk_package.sh`` script:
 
@@ -541,17 +390,17 @@ The following steps demonstrate the build process for Debian ``amd64``, but you 
 
    .. code-block:: console
 
-      # curl -O https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-agent/wazuh-agent_4.12.0-1_amd64.deb
+      # curl -O https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-agent/wazuh-agent_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_AGENT_X86|_amd64.deb
 
 #. Run the ``generate_wpk_package.sh`` script to build the Linux WPK package:
 
    .. code-block:: console
 
-      # ./generate_wpk_package.sh -t linux -b v4.12.0 -d /tmp/wpk -k <PATH_TO_KEYS> -o LinuxAgent.wpk -pn Wazuh-agent_4.12.0-1_amd64.deb
+      # ./generate_wpk_package.sh -t linux -b v|WAZUH_CURRENT| -d /tmp/wpk -k <PATH_TO_KEYS> -o LinuxAgent.wpk -pn Wazuh-agent_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_AGENT_X86|_amd64.deb
 
    Replace ``<PATH_TO_KEYS>`` with the full path to where the X509 certificate and root CA are stored.
 
-This script builds a Wazuh 4.12.0 Linux WPK package named ``LinuxAgent.wpk`` and stores it in ``/tmp/wpk``. This action is done using the previously generated keys that are saved in ``/tmp/keys``.
+This script builds a Wazuh |WAZUH_CURRENT| Linux WPK package named ``LinuxAgent.wpk`` and stores it in ``/tmp/wpk``. This action is done using the previously generated keys that are saved in ``/tmp/keys``.
 
 If you use the ``-c`` or ``--checksum`` option, a file containing the SHA512 checksum is created in the same output path. This location is configurable, allowing you to indicate where you want to store it.
 
@@ -566,17 +415,17 @@ The following steps demonstrate the build process for an intel64 architecture, b
 
    .. code-block:: console
 
-      # curl -O https://packages.wazuh.com/4.x/macos/wazuh-agent-4.12.0-1.intel64.pkg
+      # curl -O https://packages.wazuh.com/4.x/macos/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_OSX|.intel64.pkg
 
 #. Run the ``generate_wpk_package.sh`` script to build the macOS WPK package:
 
    .. code-block:: console
 
-      # ./generate_wpk_package.sh -t macos -b v4.12.0 -d /tmp/wpk -k /PATH/TO/KEYS -o macOSAgent.wpk -pn wazuh-agent-4.12.0-1.intel64.pkg
+      # ./generate_wpk_package.sh -t macos -b v|WAZUH_CURRENT| -d /tmp/wpk -k /PATH/TO/KEYS -o macOSAgent.wpk -pn wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_OSX|.intel64.pkg
 
    Replace ``/PATH/TO/KEYS`` with the full path to where the X509 certificate and root CA are stored.
 
-This script builds a Wazuh 4.12.1 macOS WPK package named ``macOSAgent.wpk`` and stores it in ``/tmp/wpk``. This action is done using the previously generated keys that are saved in ``/tmp/keys``.
+This script builds a Wazuh |WAZUH_CURRENT| macOS WPK package named ``macOSAgent.wpk`` and stores it in ``/tmp/wpk``. This action is done using the previously generated keys that are saved in ``/tmp/keys``.
 
 If the ``-c`` or ``--checksum`` option is used, a file is created containing the SHA512 checksum in the same output path. This location is configurable, and you can indicate where you want to store it.
 
@@ -589,17 +438,17 @@ To build a WPK for Windows, you need to first download an MSI package of the des
 
    .. code-block:: console
 
-      # curl -O https://packages.wazuh.com/4.x/windows/wazuh-agent-4.12.0-1.msi
+      # curl -O https://packages.wazuh.com/4.x/windows/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_WINDOWS|.msi
 
 #. Run the ``generate_wpk_package.sh`` script to build the Windows WPK package:
 
    .. code-block:: console
 
-      # ./generate_wpk_package.sh -t windows -b v4.12.0 -d /tmp/wpk -k /<PATH_TO_KEYS> -o WindowsAgent.wpk -pn /tmp/wazuh-agent-4.12.0-1.msi
+      # ./generate_wpk_package.sh -t windows -b v|WAZUH_CURRENT| -d /tmp/wpk -k /<PATH_TO_KEYS> -o WindowsAgent.wpk -pn /tmp/wazuh-agent-|WAZUH_CURRENT|-1.msi
 
    Replace ``<PATH_TO_KEYS>`` with the full path to where the X509 certificate and root CA are stored.
 
-This script builds a Wazuh 4.12.0 Windows WPK package named ``WindowsAgent.wpk`` and stores it in ``/tmp/wpk``. This action is done using the previously generated keys that are saved in ``/tmp/keys``.
+This script builds a Wazuh |WAZUH_CURRENT| Windows WPK package named ``WindowsAgent.wpk`` and stores it in ``/tmp/wpk``. This action is done using the previously generated keys that are saved in ``/tmp/keys``.
 
 If the ``-c`` or ``--checksum`` option is used, a file is created containing the SHA512 checksum in the same output path. This location is configurable, and you can indicate where you want to store it
 
@@ -610,6 +459,6 @@ Run the command below  to build a WPK with a checksum:
 
 .. code-block:: console
 
-   # ./generate_wpk_package.sh -t linux -b v4.12.0 -d /tmp/wpk -k /<PATH_TO_KEYS> -o LinuxAgent.wpk -pn wazuh-agent_4.12.0-1_amd64.deb -c /tmp/wpk_checksum
+   # ./generate_wpk_package.sh -t linux -b v|WAZUH_CURRENT| -d /tmp/wpk -k /<PATH_TO_KEYS> -o LinuxAgent.wpk -pn wazuh-agent_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_AGENT_X86|_amd64.deb -c /tmp/wpk_checksum
 
 Replace ``<PATH_TO_KEYS>`` with the full path to where the X509 certificate and root CA are stored.

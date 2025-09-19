@@ -61,8 +61,6 @@ The table below shows SCA policies pre-installed in Wazuh out-of-the-box. The Wa
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_centos10_linux          |  CIS Benchmark for CentOS Stream 10                        | CentOS Stream 10              |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | cis_rhel5_linux             |  CIS Benchmark for Red Hat Enterprise Linux 5              | Red Hat Enterprise Linux 5    |
-    +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_rhel6_linux             |  CIS Benchmark for Red Hat Enterprise Linux 6              | Red Hat Enterprise Linux 6    |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_rhel7_linux             |  CIS Benchmark for Red Hat Enterprise Linux 7              | Red Hat Enterprise Linux 7    |
@@ -97,8 +95,6 @@ The table below shows SCA policies pre-installed in Wazuh out-of-the-box. The Wa
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_ubuntu24-04             |  CIS Checks for Ubuntu Linux 24.04 LTS                     | Ubuntu 24.04                  |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | cis_sles11_linux            |  CIS SUSE Linux Enterprise 11 Benchmark                    | SUSE 11                       |
-    +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_sles12_linux            |  CIS SUSE Linux Enterprise 12 Benchmark                    | SUSE 12                       |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_sles15_linux            |  CIS Checks for SUSE SLES 15                               | SUSE 15                       |
@@ -108,14 +104,6 @@ The table below shows SCA policies pre-installed in Wazuh out-of-the-box. The Wa
     | cis_amazon_linux_2          |  CIS Checks for Amazon Linux 2                             | Amazon Linux 2                |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_amazon_linux_2023       |  CIS Checks for Amazon Linux 2023                          | Amazon Linux 2023             |
-    +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | cis_solaris11               |  CIS Benchmark for Oracle Solaris 11                       | Solaris 11                    |
-    +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | cis_solaris11.4             |  CIS Checks for Oracle Solaris 11.4                        | Solaris 11.4                  |
-    +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | cis_hpux                    |  CIS Benchmark for HP-UX 11i                               | HPUX 11i                      |
-    +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | cis_hpux_bastille           |  CIS Benchmark for HP-UX 11i using Bastille                | HPUX 11i                      |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_apple_macOS_10.11       |  CIS Apple macOS 10.11 Benchmark                           | macOS 10.11 (El Capitan)      |
     +-----------------------------+------------------------------------------------------------+-------------------------------+

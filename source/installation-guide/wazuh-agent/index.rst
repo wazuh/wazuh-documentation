@@ -31,6 +31,10 @@ The Wazuh agent provides :ref:`key features <agents_modules>` to enhance your sy
 
 To install a Wazuh agent, select your operating system and follow the instructions.
 
+.. warning::
+
+   Support for the following operating systems ends in Wazuh 5.0.0: Red Hat 5, CentOS 5, Oracle Linux 5, SUSE Linux Enterprise Server 11, Windows XP, Windows Vista, Windows Server 2003, Solaris, AIX, and HP-UX.
+
 .. raw:: html
 
   <div class="link-boxes-group layout-6">
@@ -61,40 +65,6 @@ To install a Wazuh agent, select your operating system and follow the instructio
         <p class="link-boxes-label">macOS</p>
 
 .. image:: /images/installation/macOS-logo.png
-      :align: center
-
-.. raw:: html
-
-      </a>
-    </div>
-    <div class="link-boxes-item">
-      <a class="link-boxes-link" href="./wazuh-agent-package-solaris.html">
-        <p class="link-boxes-label">Solaris</p>
-
-.. image:: /images/installation/solaris.png
-      :align: center
-      :width: 150px
-
-.. raw:: html
-
-      </a>
-    </div>
-    <div class="link-boxes-item">
-      <a class="link-boxes-link" href="./wazuh-agent-package-aix.html">
-        <p class="link-boxes-label">AIX</p>
-
-.. image:: /images/installation/AIX.png
-      :align: center
-
-.. raw:: html
-
-      </a>
-    </div>
-    <div class="link-boxes-item">
-      <a class="link-boxes-link" href="./wazuh-agent-package-hpux.html">
-        <p class="link-boxes-label">HP-UX</p>
-
-.. image:: /images/installation/hpux.png
       :align: center
 
 .. raw:: html
@@ -133,7 +103,4 @@ Then the Wazuh dashboard will show you the steps to deploy a new agent.
     Linux <wazuh-agent-package-linux>
     Windows <wazuh-agent-package-windows>
     macOS <wazuh-agent-package-macos>
-    Solaris <wazuh-agent-package-solaris>
-    AIX <wazuh-agent-package-aix>
-    HP-UX <wazuh-agent-package-hpux>
 

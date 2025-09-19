@@ -27,6 +27,10 @@ You can upgrade the Wazuh agents either remotely or locally. For remote upgrades
 
 To perform the upgrade locally, select your operating system and follow the instructions.
 
+.. warning::
+
+   Support for the following operating systems ends in Wazuh 5.0.0: Red Hat 5, CentOS 5, Oracle Linux 5, SUSE Linux Enterprise Server 11, Windows XP, Windows Vista, Windows Server 2003, Solaris, AIX, and HP-UX.
+
 .. raw:: html
 
   <div class="link-boxes-group layout-6">
@@ -57,40 +61,6 @@ To perform the upgrade locally, select your operating system and follow the inst
         <p class="link-boxes-label">macOS</p>
 
 .. image:: /images/installation/macOS-logo.png
-      :align: center
-
-.. raw:: html
-
-      </a>
-    </div>
-    <div class="link-boxes-item">
-      <a class="link-boxes-link" href="./wazuh-agent/solaris.html">
-        <p class="link-boxes-label">Solaris</p>
-
-.. image:: /images/installation/solaris.png
-      :align: center
-      :width: 150px
-
-.. raw:: html
-
-      </a>
-    </div>
-    <div class="link-boxes-item">
-      <a class="link-boxes-link" href="./wazuh-agent/aix.html">
-        <p class="link-boxes-label">AIX</p>
-
-.. image:: /images/installation/AIX.png
-      :align: center
-
-.. raw:: html
-
-      </a>
-    </div>
-    <div class="link-boxes-item">
-      <a class="link-boxes-link" href="./wazuh-agent/hp-ux.html">
-        <p class="link-boxes-label">HP-UX</p>
-
-.. image:: /images/installation/hpux.png
       :align: center
 
 .. raw:: html
