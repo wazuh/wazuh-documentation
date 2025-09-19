@@ -58,6 +58,9 @@ The :doc:`/installation-guide/wazuh-agent/index` is a single and lightweight mon
 
 If the Wazuh central components are already installed in your environment, select your operating system below and follow the installation steps to deploy the agent on the endpoints. 
 
+.. warning::
+
+   Support for the following operating systems ends in Wazuh 5.0.0: Red Hat 5, CentOS 5, Oracle Linux 5, SUSE Linux Enterprise Server 11, Windows XP, Windows Vista, Windows Server 2003, Solaris, AIX, and HP-UX.
 
 .. raw:: html
 
