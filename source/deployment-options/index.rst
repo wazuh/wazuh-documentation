@@ -58,6 +58,9 @@ The :doc:`/installation-guide/wazuh-agent/index` is a single and lightweight mon
 
 If the Wazuh central components are already installed in your environment, select your operating system below and follow the installation steps to deploy the agent on the endpoints. 
 
+.. warning::
+
+   Support for the following operating systems ends in Wazuh 5.0.0: Red Hat 5, CentOS 5, Oracle Linux 5, SUSE Linux Enterprise Server 11, Windows XP, Windows Vista, Windows Server 2003, Solaris, AIX, and HP-UX.
 
 .. raw:: html
 
@@ -89,40 +92,6 @@ If the Wazuh central components are already installed in your environment, selec
         <p class="link-boxes-label">macOS</p>
 
 .. image:: /images/installation/macOS-logo.png
-      :align: center
-
-.. raw:: html
-
-      </a>
-    </div>
-    <div class="link-boxes-item">
-      <a class="link-boxes-link" href="../installation-guide/wazuh-agent/wazuh-agent-package-solaris.html">
-        <p class="link-boxes-label">Solaris</p>
-
-.. image:: /images/installation/solaris.png
-      :align: center
-      :width: 150px
-
-.. raw:: html
-
-      </a>
-    </div>
-    <div class="link-boxes-item">
-      <a class="link-boxes-link" href="../installation-guide/wazuh-agent/wazuh-agent-package-aix.html">
-        <p class="link-boxes-label">AIX</p>
-
-.. image:: /images/installation/AIX.png
-      :align: center
-
-.. raw:: html
-
-      </a>
-    </div>
-    <div class="link-boxes-item">
-      <a class="link-boxes-link" href="../installation-guide/wazuh-agent/wazuh-agent-package-hpux.html">
-        <p class="link-boxes-label">HP-UX</p>
-
-.. image:: /images/installation/hpux.png
       :align: center
 
 .. raw:: html
