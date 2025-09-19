@@ -7,6 +7,10 @@
 Upgrading Wazuh agents on HP-UX endpoints
 =========================================
 
+.. warning::
+
+   Support for HP-UX systems ends in Wazuh 5.0.0.
+
 Follow the steps to upgrade the Wazuh agent on HP-UX endpoints.
 
 #. Download the latest `HP-UX installer <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_HPUX|/hp-ux/wazuh-agent-|WAZUH_CURRENT_HPUX|-|WAZUH_REVISION_HPUX|-hpux-11v3-ia64.tar.gz>`_.

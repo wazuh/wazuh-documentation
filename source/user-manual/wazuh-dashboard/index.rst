@@ -28,7 +28,6 @@ The following section provides an overview of the Wazuh dashboard, covering topi
 
    navigating-the-wazuh-dashboard
    creating-custom-dashboards
-   global-queries
    queries
    multi-tenancy
    configuring-third-party-certs/index

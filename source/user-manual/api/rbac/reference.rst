@@ -550,14 +550,14 @@ vulnerability:run
 Default policies
 ----------------
 
-agents_all
-^^^^^^^^^^
+agents_all_*
+^^^^^^^^^^^^
 
 Grant full access to all agents related functionalities.
 
 .. code-block:: yaml
 
-   resourceless:
+   agents_all_resourceless:
      actions:
        - agent:create
        - group:create
@@ -565,7 +565,7 @@ Grant full access to all agents related functionalities.
      resources:
        - '*:*:*'
      effect: allow
-   agents:
+   agents_all_agents:
      actions:
        - agent:read
        - agent:delete
@@ -577,7 +577,7 @@ Grant full access to all agents related functionalities.
        - agent:id:*
        - agent:group:*
      effect: allow
-   groups:
+   agents_all_groups:
      actions:
        - group:read
        - group:delete
@@ -587,49 +587,49 @@ Grant full access to all agents related functionalities.
        - group:id:*
      effect: allow
 
-agents_commands
-^^^^^^^^^^^^^^^
+agents_commands_*
+^^^^^^^^^^^^^^^^^
 
 Allow sending active response commands to Wazuh agents.
 
 .. code-block:: yaml
 
-   agents:
+   agents_commands_agents:
      actions:
        - active-response:command
      resources:
        - agent:id:*
      effect: allow
 
-agents_read
-^^^^^^^^^^^
+agents_read_*
+^^^^^^^^^^^^^
 
 Grant read access to all agents related functionalities.
 
 .. code-block:: yaml
 
-   agents:
+   agents_read_agents:
      actions:
        - agent:read
      resources:
        - agent:id:*
        - agent:group:*
      effect: allow
-   groups:
+   agents_read_groups:
      actions:
        - group:read
      resources:
        - group:id:*
      effect: allow
 
-cluster_all
-^^^^^^^^^^^
+cluster_all_*
+^^^^^^^^^^^^^
 
 Provide full access to all cluster/manager related functionalities.
 
 .. code-block:: yaml
 
-   resourceless:
+   cluster_all_resourceless:
      actions:
        - cluster:status
        - manager:read
@@ -639,7 +639,7 @@ Provide full access to all cluster/manager related functionalities.
      resources:
        - '*:*:*'
      effect: allow
-   nodes:
+   cluster_all_nodes:
      actions:
        - cluster:read_api_config
        - cluster:read
@@ -649,14 +649,14 @@ Provide full access to all cluster/manager related functionalities.
        - node:id:*
      effect: allow
 
-cluster_read
-^^^^^^^^^^^^
+cluster_read_*
+^^^^^^^^^^^^^^
 
 Provide read access to all cluster/manager related functionalities.
 
 .. code-block:: yaml
 
-   resourceless:
+   cluster_read_resourceless:
      actions:
        - cluster:status
        - manager:read
@@ -664,7 +664,7 @@ Provide read access to all cluster/manager related functionalities.
      resources:
        - '*:*:*'
      effect: allow
-   nodes:
+   cluster_read_nodes:
      actions:
        - cluster:read_api_config
        - cluster:read
@@ -673,126 +673,126 @@ Provide read access to all cluster/manager related functionalities.
        - node:id:*
      effect: allow
 
-decoders_all
-^^^^^^^^^^^^
+decoders_all_*
+^^^^^^^^^^^^^^
 
 Allow managing all decoder files in the Wazuh server.
 
 .. code-block:: yaml
 
-   files:
+   decoders_all_files:
      actions:
        - decoders:read
        - decoders:delete
      resources:
        - decoder:file:*
      effect: allow
-   resourceless:
+   decoders_all_resourceless:
      actions:
        - decoders:update
      resources:
        - '*:*:*'
      effect: allow
 
-decoders_read
-^^^^^^^^^^^^^
+decoders_read_*
+^^^^^^^^^^^^^^^
 
 Allow reading all decoder files in the Wazuh server.
 
 .. code-block:: yaml
 
-   decoders:
+   decoders_read_decoders:
      actions:
        - decoders:read
      resources:
        - decoder:file:*
      effect: allow
 
-events_ingest
-^^^^^^^^^^^^^
+events_ingest_*
+^^^^^^^^^^^^^^^
 
 Allow sending events to the Wazuh analysis engine.
 
 .. code-block:: yaml
 
-   resourceless:
+   events_ingest_resourceless:
      actions:
        - event:ingest
      resources:
        - '*:*:*'
      effect: allow
 
-lists_all
-^^^^^^^^^
+lists_all_*
+^^^^^^^^^^^
 
 Allow managing all CDB lists files on the Wazuh server.
 
 .. code-block:: yaml
 
-   files:
+   lists_all_files:
      actions:
        - lists:read
        - lists:delete
      resources:
        - list:file:*
      effect: allow
-   resourceless:
+   lists_all_resourceless:
      actions:
        - lists:update
      resources:
        - '*:*:*'
      effect: allow
 
-lists_read
-^^^^^^^^^^
+lists_read_*
+^^^^^^^^^^^^
 
 Allow reading the path of  all the lists in the Wazuh server.
 
 .. code-block:: yaml
 
-   lists:
+   lists_read_lists:
      actions:
        - lists:read
      resources:
        - list:file:*
      effect: allow
 
-logtest_all
-^^^^^^^^^^^
+logtest_all_*
+^^^^^^^^^^^^^
 
 Provide access to all logtest related functionalities.
 
 .. code-block:: yaml
 
-   logtest:
+   logtest_all_logtest:
      actions:
        - logtest:run
      resources:
        - '*:*:*'
      effect: allow
 
-mitre_read
-^^^^^^^^^^
+mitre_read_*
+^^^^^^^^^^^^
 
 Allow reading MITRE database information.
 
 .. code-block:: yaml
 
-   mitre:
+   mitre_read_mitre:
      actions:
        - mitre:read
      resources:
        - '*:*:*'
      effect: allow
 
-rootcheck_all
-^^^^^^^^^^^^^
+rootcheck_all_*
+^^^^^^^^^^^^^^^
 
 Allow reading, running and clearing rootcheck information.
 
 .. code-block:: yaml
 
-   rootcheck:
+   rootcheck_all_rootcheck:
      actions:
        - rootcheck:clear
        - rootcheck:read
@@ -801,77 +801,77 @@ Allow reading, running and clearing rootcheck information.
        - agent:id:*
      effect: allow
 
-rootcheck_read
-^^^^^^^^^^^^^^^
+rootcheck_read_*
+^^^^^^^^^^^^^^^^
 
 Allow reading all rootcheck information.
 
 .. code-block:: yaml
 
-   rootcheck:
+   rootcheck_read_rootcheck:
      actions:
        - rootcheck:read
      resources:
        - agent:id:*
      effect: allow
 
-rules_all
-^^^^^^^^^
+rules_all_*
+^^^^^^^^^^^
 
 Allow managing all rule files in the Wazuh server.
 
 .. code-block:: yaml
 
-   files:
+   rules_all_files:
      actions:
        - rules:read
        - rules:delete
      resources:
        - rule:file:*
      effect: allow
-   resourceless:
+   rules_all_resourceless:
      actions:
        - rules:update
      resources:
        - '*:*:*'
      effect: allow
 
-rules_read
-^^^^^^^^^^
+rules_read_*
+^^^^^^^^^^^^
 
 Allow reading all rule files in the system.
 
 .. code-block:: yaml
 
-   rules:
+   rules_read_rules:
      actions:
        - rules:read
      resources:
        - rule:file:*
      effect: allow
 
-sca_read
-^^^^^^^^
+sca_read_*
+^^^^^^^^^^
 
 Allow reading the agent sca information.
 
 .. code-block:: yaml
 
-   sca:
+   sca_read_sca:
      actions:
        - sca:read
      resources:
        - agent:id:*
      effect: allow
 
-security_all
-^^^^^^^^^^^^
+security_all_*
+^^^^^^^^^^^^^^
 
 Provide full access to all security related functionalities.
 
 .. code-block:: yaml
 
-   resourceless:
+   security_all_resourceless:
      actions:
        - security:create
        - security:create_user
@@ -882,7 +882,7 @@ Provide full access to all security related functionalities.
      resources:
        - '*:*:*'
      effect: allow
-   security:
+   security_all_security:
      actions:
        - security:read
        - security:update
@@ -894,14 +894,14 @@ Provide full access to all security related functionalities.
        - rule:id:*
      effect: allow
 
-syscheck_all
-^^^^^^^^^^^^
+syscheck_all_*
+^^^^^^^^^^^^^^
 
 Allow reading, running and clearing syscheck information.
 
 .. code-block:: yaml
 
-   syscheck:
+   syscheck_all_syscheck:
      actions:
        - syscheck:clear
        - syscheck:read
@@ -910,56 +910,56 @@ Allow reading, running and clearing syscheck information.
        - agent:id:*
      effect: allow
 
-syscheck_read
-^^^^^^^^^^^^^
+syscheck_read_*
+^^^^^^^^^^^^^^^
 
 Allow reading syscheck information.
 
 .. code-block:: yaml
 
-   syscheck:
+   syscheck_read_syscheck:
      actions:
        - syscheck:read
      resources:
        - agent:id:*
      effect: allow
 
-syscollector_read
-^^^^^^^^^^^^^^^^^
+syscollector_read_*
+^^^^^^^^^^^^^^^^^^^
 
 Allow reading agents information.
 
 .. code-block:: yaml
 
-   syscollector:
+   syscollector_read_syscollector:
      actions:
        - syscollector:read
      resources:
        - agent:id:*
      effect: allow
 
-task_status
-^^^^^^^^^^^
+task_status_*
+^^^^^^^^^^^^^
 
 Allow reading tasks information.
 
 .. code-block:: yaml
 
-   task:
+   task_status_task:
      actions:
        - task:status
      resources:
        - '*:*:*'
      effect: allow
 
-users_all
-^^^^^^^^^
+users_all_*
+^^^^^^^^^^^
 
 Provide full access to all users related functionalities.
 
 .. code-block:: yaml
 
-   resourceless:
+   users_all_resourceless:
      actions:
        - security:create_user
        - security:edit_run_as
@@ -967,7 +967,7 @@ Provide full access to all users related functionalities.
      resources:
        - '*:*:*'
      effect: allow
-   users:
+   users_all_users:
      actions:
        - security:read
        - security:update
@@ -976,42 +976,42 @@ Provide full access to all users related functionalities.
        - user:id:*
      effect: allow
 
-users_modify_run_as
-^^^^^^^^^^^^^^^^^^^
+users_modify_run_as_*
+^^^^^^^^^^^^^^^^^^^^^
 
 Provides the capability to modify the users' run_as parameter.
 
 .. code-block:: yaml
 
-   flag:
+   users_modify_run_as_flag:
      actions:
        - security:edit_run_as
      resources:
        - '*:*:*'
      effect: allow
 
-vulnerability_read
-^^^^^^^^^^^^^^^^^^
+vulnerability_read_*
+^^^^^^^^^^^^^^^^^^^^
 
 Allow reading agents' vulnerabilities information.
 
 .. code-block:: yaml
 
-   vulnerability:
+   vulnerability_read_vulnerability:
      actions:
        - vulnerability:read
      resources:
        - agent:id:*
      effect: allow
 
-vulnerability_run
-^^^^^^^^^^^^^^^^^^
+vulnerability_run_*
+^^^^^^^^^^^^^^^^^^^
 
 Allow running a vulnerability detector scan.
 
 .. code-block:: yaml
 
-   resourceless:
+   vulnerability_run_resourceless:
      actions:
        - vulnerability:run
      resources:
@@ -1030,22 +1030,22 @@ The administrator role has full access to all endpoints in the Wazuh server API.
 
 **Policies**
 
-   -  `agents_all`_
-   -  `agents_commands`_
-   -  `cluster_all`_
-   -  `decoders_all`_
-   -  `lists_all`_
-   -  `logtest_all`_
-   -  `mitre_read`_
-   -  `rootcheck_all`_
-   -  `rules_all`_
-   -  `sca_read`_
-   -  `security_all`_
-   -  `syscheck_all`_
-   -  `syscollector_read`_
-   -  `task_status`_
-   -  `vulnerability_read`_
-   -  `vulnerability_run`_
+   -  `agents_all_*`_
+   -  `agents_commands_*`_
+   -  `cluster_all_*`_
+   -  `decoders_all_*`_
+   -  `lists_all_*`_
+   -  `logtest_all_*`_
+   -  `mitre_read_*`_
+   -  `rootcheck_all_*`_
+   -  `rules_all_*`_
+   -  `sca_read_*`_
+   -  `security_all_*`_
+   -  `syscheck_all_*`_
+   -  `syscollector_read_*`_
+   -  `task_status_*`_
+   -  `vulnerability_read_*`_
+   -  `vulnerability_run_*`_
 
 **Rules**
 
@@ -1059,7 +1059,7 @@ The agent administrator role has full access to all agents related functionaliti
 
 **Policies**
 
-   -  `agents_all`_
+   -  `agents_all_*`_
 
 agents_readonly
 ^^^^^^^^^^^^^^^
@@ -1068,7 +1068,7 @@ Read only role for agents related functionalities.
 
 **Policies**
 
-   -  `agents_read`_
+   -  `agents_read_*`_
 
 cluster_admin
 ^^^^^^^^^^^^^
@@ -1077,7 +1077,7 @@ Manager administrator of the Wazuh server cluster, this role has full access to 
 
 **Policies**
 
-   -  `cluster_all`_
+   -  `cluster_all_*`_
 
 cluster_readonly
 ^^^^^^^^^^^^^^^^
@@ -1086,7 +1086,7 @@ Read only role for manager related functionalities.
 
 **Policies**
 
-   -  `cluster_read`_
+   -  `cluster_read_*`_
 
 readonly
 ^^^^^^^^
@@ -1095,17 +1095,17 @@ Read only role, this role can read all the information of the system.
 
 **Policies**
 
-   -  `agents_read`_
-   -  `cluster_read`_
-   -  `decoders_read`_
-   -  `lists_read`_
-   -  `mitre_read`_
-   -  `rootcheck_read`_
-   -  `rules_read`_
-   -  `sca_read`_
-   -  `syscheck_read`_
-   -  `syscollector_read`_
-   -  `vulnerability_read`_
+   -  `agents_read_*`_
+   -  `cluster_read_*`_
+   -  `decoders_read_*`_
+   -  `lists_read_*`_
+   -  `mitre_read_*`_
+   -  `rootcheck_read_*`_
+   -  `rules_read_*`_
+   -  `sca_read_*`_
+   -  `syscheck_read_*`_
+   -  `syscollector_read_*`_
+   -  `vulnerability_read_*`_
 
 users_admin
 ^^^^^^^^^^^
@@ -1114,7 +1114,7 @@ Users administrator of the system, this role provides full access to all users r
 
 **Policies**
 
-   -  `users_all`_
+   -  `users_all_*`_
 
 Default rules
 -------------

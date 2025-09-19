@@ -30,9 +30,11 @@ All notable changes to this project will be documented in this file.
 - Added the CentOS Stream 9 SCA policy reference to the Available SCA policies section. ([#8602](https://github.com/wazuh/wazuh-documentation/pull/8602))
 - Added steps for installing a single node stack via Puppet in *Deployment with Puppet*. ([#8611](https://github.com/wazuh/wazuh-documentation/pull/8611))
 - Added information about filters in the Windows agent to block UNC and mapped drive paths to mitigate *NetNTLMv2* vulnerabilities. ([#8665](https://github.com/wazuh/wazuh-documentation/pull/8665))
-- Added the Wazuh global queries documentation. ([#8722](https://github.com/wazuh/wazuh-documentation/pull/8722))
+- Prepared the Wazuh global queries documentation for publication. ([#8722](https://github.com/wazuh/wazuh-documentation/pull/8722)) ([#8909](https://github.com/wazuh/wazuh-documentation/pull/8909))
 - Added `remoted.ctrl_msg_queue_size` internal option and new remoted statistics fields. ([#8769](https://github.com/wazuh/wazuh-documentation/pull/8769))
-- Added Wazuh agent deployment on Docker documentation. ([#8798](https://github.com/wazuh/wazuh-documentation/pull/8798))
+- Added Wazuh agent deployment on Docker documentation. ([#8798](https://github.com/wazuh/wazuh-documentation/pull/8798)) ([#8845](https://github.com/wazuh/wazuh-documentation/pull/8845)) ([#8857](https://github.com/wazuh/wazuh-documentation/pull/8857))
+- Added Wazuh indexer indices. ([#8887](https://github.com/wazuh/wazuh-documentation/pull/8887))
+- Added deprecation warnings for legacy operating systems. ([#8897](https://github.com/wazuh/wazuh-documentation/pull/8897))
 
 ### Changed
 
@@ -41,6 +43,8 @@ All notable changes to this project will be documented in this file.
 - Updated the *Deployment on Docker* section. ([#8688](https://github.com/wazuh/wazuh-documentation/pull/8688))
 - Updated default values for `agents_disconnection_time` and `notify_time`. ([#8769](https://github.com/wazuh/wazuh-documentation/pull/8769))
 - Updated the default value of the `all` attribute in the `ports` Syscollector configuration option. ([#8840](https://github.com/wazuh/wazuh-documentation/pull/8840))
+- Replaced version references with replacement variables in Wazuh package generation. ([#8906](https://github.com/wazuh/wazuh-documentation/pull/8906))
+- Updated System inventory documentation. ([#8910](https://github.com/wazuh/wazuh-documentation/pull/8910))
 
 ## [v4.12.0]
 
@@ -66,6 +70,8 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Added the `ap-northeast-1` (Tokyo) region. ([#8818](https://github.com/wazuh/wazuh-documentation/pull/8818))
 - **Post-release**: Added a Q&A to the Cloud service FAQ section. ([#8832](https://github.com/wazuh/wazuh-documentation/pull/8832))
 - **Post-release**: Added agent restart commands to Agent enrollment methods section. ([#8836](https://github.com/wazuh/wazuh-documentation/pull/8836))
+- **Post-release**: Added Wazuh Docker support for Windows. ([#8852](https://github.com/wazuh/wazuh-documentation/pull/8852))
+- **Post-release**: Added new steps and images to the API Permission section of the *Wazuh Microsoft Graph API* setup documentation. ([#8898](https://github.com/wazuh/wazuh-documentation/pull/8898))
 
 ### Changed
 
@@ -98,6 +104,9 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated the instruction and images in Wazuh server API getting started documentation to reflect the new navigation path (**Server management** > **Dev Tools**). ([#8811](https://github.com/wazuh/wazuh-documentation/pull/8811))
 - **Post-release**: Updated the *Getting started with Wazuh - Architecture* documentation. ([#8819](https://github.com/wazuh/wazuh-documentation/pull/8819))
 - **Post-release**: Changed Suricata ruleset file permission in POC guide. ([#8821](https://github.com/wazuh/wazuh-documentation/pull/8821))
+- **Post-release**: Adjusted the Data analysis documentation. ([#8850](https://github.com/wazuh/wazuh-documentation/pull/8850))
+- **Post-release**: Updated images and powershell command in **Leveraging LLMs for alert enrichment** PoC. [#8888](https://github.com/wazuh/wazuh-documentation/pull/8888)
+- **Post-release**: Updated RBAC reference to show actual policy names with wildcards. ([#8904](https://github.com/wazuh/wazuh-documentation/pull/8904))
 
 ### Fixed
 
@@ -109,6 +118,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Fixed incorrect reference from **Ubuntu** to **Windows** endpoint in the SCA use case documentation. ([#8629](https://github.com/wazuh/wazuh-documentation/pull/8629))
 - **Post-release**: Fixed incorrect URL and filepaths in the YARA download steps of the *Leveraging LLMs for Alert Enrichment* PoC. ([#8686](https://github.com/wazuh/wazuh-documentation/pull/8686))
 - **Post-release**: Corrected inaccurate references to the Wazuh Syscollector module. ([#8713](https://github.com/wazuh/wazuh-documentation/pull/8713))
+- **Post-release**: Corrected git command syntax in the Wazuh dashboard package generation guide. ([#8903](https://github.com/wazuh/wazuh-documentation/pull/8903))
 
 ### Removed
 
