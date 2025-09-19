@@ -7,6 +7,10 @@
 Upgrading Wazuh agents on AIX endpoints
 =======================================
 
+.. warning::
+
+   Support for AIX systems ends in Wazuh 5.0.0.
+
 Follow the steps to upgrade the Wazuh agent on AIX endpoints.  
   
 #. Download the latest `AIX installer <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_AIX|/aix/wazuh-agent-|WAZUH_CURRENT_AIX|-|WAZUH_REVISION_AIX|.aix.ppc.rpm>`_. 
