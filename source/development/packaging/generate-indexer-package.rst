@@ -22,7 +22,7 @@ Prerequisites
 
    .. code-block:: console
 
-      $ git clone https://github.com/wazuh/wazuh-indexer && cd wazuh-indexer && git checkout v4.12.0
+      $ git clone https://github.com/wazuh/wazuh-indexer && cd wazuh-indexer && git checkout v|WAZUH_CURRENT|
 
 Build stage
 -----------

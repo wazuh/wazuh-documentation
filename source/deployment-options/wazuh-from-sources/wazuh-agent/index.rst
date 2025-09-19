@@ -8,6 +8,10 @@ Installing the Wazuh agent from sources
 
 The Wazuh agent is a single and lightweight monitoring software. It is a multi-platform component that provides visibility into the endpoint’s security by collecting critical system and application records. The following section explains how to install it from sources.
 
+.. warning::
+
+   Support for the following operating systems ends in Wazuh 5.0.0: Red Hat 5, CentOS 5, Oracle Linux 5, SUSE Linux Enterprise Server 11, Windows XP, Windows Vista, Windows Server 2003, Solaris, AIX, and HP-UX.
+
 .. tabs::
 
     .. group-tab:: Linux
