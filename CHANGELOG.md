@@ -29,10 +29,6 @@ All notable changes to this project will be documented in this file.
 - Replaced version references with replacement variables in Wazuh package generation. ([#8906](https://github.com/wazuh/wazuh-documentation/pull/8906))
 - Updated System inventory documentation. ([#8910](https://github.com/wazuh/wazuh-documentation/pull/8910))
 
-### Removed
-
-- **Post-release**: Removed 4.13.0 release notes entry. ([#8923](https://github.com/wazuh/wazuh-documentation/pull/8923))
-
 ## [v4.12.0]
 
 ### Added
