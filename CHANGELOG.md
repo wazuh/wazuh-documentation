@@ -17,6 +17,7 @@ All notable changes to this project will be documented in this file.
 - Added Wazuh agent deployment on Docker documentation. ([#8798](https://github.com/wazuh/wazuh-documentation/pull/8798)) ([#8845](https://github.com/wazuh/wazuh-documentation/pull/8845)) ([#8857](https://github.com/wazuh/wazuh-documentation/pull/8857))
 - Added Wazuh indexer indices. ([#8887](https://github.com/wazuh/wazuh-documentation/pull/8887))
 - Added deprecation warnings for legacy operating systems. ([#8897](https://github.com/wazuh/wazuh-documentation/pull/8897))
+- **Post-release**: Added the `wazuh_modules.rlimit_nofile` internal configuration option. ([#8922](https://github.com/wazuh/wazuh-documentation/pull/8922))
 
 ### Changed
 
