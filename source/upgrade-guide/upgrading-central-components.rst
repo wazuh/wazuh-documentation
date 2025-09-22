@@ -41,7 +41,7 @@ Perform the steps below before upgrading any of the Wazuh components. In case Wa
 #. (Recommended) Export customizations from the Wazuh dashboard. This step helps to preserve visualizations, dashboards, and other saved objects in case there are any issues during the upgrade process.
 
    #. Navigate to **Dashboard management** > **Dashboards Management** > **Saved objects** on the Wazuh dashboard.
-   #. Select the objects to export and click **Export**, or click **Export all objects** to export everything.
+   #. Select which objects to export and click **Export**, or click **Export all objects** to export everything.
 
    .. image:: /images/upgrade-guide/saved-objects-export.png
 
