@@ -26,7 +26,7 @@ This release resolves known issues as the following:
 Wazuh dashboard
 ^^^^^^^^^^^^^^^
 
-- `#7753 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7753>`__ Fixed RBAC validation for reload button to prevent API failures when users lack cluster:restart permission.
+- `#7753 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7753>`__ Fixed RBAC validation for reload button to prevent API failures when users lack ``cluster:restart`` permission.
 
 Changelogs
 ----------
