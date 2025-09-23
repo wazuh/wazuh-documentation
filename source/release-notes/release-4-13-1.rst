@@ -16,7 +16,7 @@ This release includes new features or enhancements as the following:
 Wazuh dashboard
 ^^^^^^^^^^^^^^^
 
-- `#7752 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7752>`__ Changed the label from ``Packages`` to ``Unique packages`` in the ``KPI`` for IT Hygiene > Software.
+- `#7752 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7752>`__ Changed the label from ``Packages`` to ``Unique packages`` in the ``KPI`` for **IT Hygiene** > **Software**.
 
 Resolved issues
 ---------------
