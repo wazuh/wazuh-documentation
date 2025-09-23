@@ -18,6 +18,12 @@ Resolved issues
 
 This release resolves known issues as the following:
 
+Wazuh dashboard
+^^^^^^^^^^^^^^^
+
+- Changed the label from `Packages` to `Unique packages` in the `KPI` for IT Hygiene > Software [#7752](https://github.com/wazuh/wazuh-dashboard-plugins/pull/7752)
+- Fixed RBAC validation for reload button to prevent API failures when users lack cluster:restart permission [#7753](https://github.com/wazuh/wazuh-dashboard-plugins/pull/7753)
+
 Changelogs
 ----------
 
