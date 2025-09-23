@@ -35,11 +35,10 @@ Wazuh manager
 - `#29916 <https://github.com/wazuh/wazuh/pull/29916>`__ Enabled CVE re-indexing when documents change in Vulnerability Detector.
 - `#29153 <https://github.com/wazuh/wazuh/pull/29153>`__ Separated control messages from remoted's connection handling.
 - `#30504 <https://github.com/wazuh/wazuh/pull/30504>`__ Added sanity checks for hotfix values in Vulnerability Detector.
-- `#27894 <https://github.com/wazuh/wazuh/issues/27894>`__ Added support for global queries of FIM and system inventory data.
+- `#27894 <https://github.com/wazuh/wazuh/issues/27894>`__ Added support for global queries. `#31856 <https://github.com/wazuh/wazuh/pull/31856>`__
 - `#30851 <https://github.com/wazuh/wazuh/pull/30851>`__ Improved exception handling in the ``run_local`` SDK function.
 - `#29135 <https://github.com/wazuh/wazuh/pull/29135>`__ Improved Authd connection management using epoll to handle concurrent agent registration requests more efficiently.
 - `#31114 <https://github.com/wazuh/wazuh/pull/31114>`__ Added a single writer buffer manager instance for each indexer connector instance.
-- `#31856 <https://github.com/wazuh/wazuh/pull/31856>`__ Disabled FIM Global Queries.
 
 Wazuh agent
 ^^^^^^^^^^^
