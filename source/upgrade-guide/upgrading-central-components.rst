@@ -77,13 +77,13 @@ Perform the following steps on any of the Wazuh indexer nodes replacing ``<WAZUH
 
    .. code-block:: bash
 
-      curl -X PUT "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cluster/settings" \
-      -u <USERNAME>:<PASSWORD> -k -H "Content-Type: application/json" -d '
+      curl -X PUT "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cluster/settings"  -u <USERNAME> -k -H 'Content-Type: application/json' -d'
       {
-         "persistent": {
-            "cluster.routing.allocation.enable": "primaries"
-         }
-      }'
+        "persistent": {
+          "cluster.routing.allocation.enable": "primaries"
+        }
+      }
+      '
 
    .. code-block:: json
       :class: output
@@ -106,7 +106,7 @@ Perform the following steps on any of the Wazuh indexer nodes replacing ``<WAZUH
 
    .. code-block:: console
 
-      # curl -X POST "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_flush" -u <USERNAME>:<PASSWORD> -k
+      # curl -X POST "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_flush" -u <USERNAME> -k
 
    .. code-block:: json
       :class: output
@@ -146,7 +146,7 @@ Perform the following steps on each Wazuh indexer node to upgrade them. Upgrade 
 
    .. code-block:: console
 
-      # curl -k -u <USERNAME>:<PASSWORD> https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cat/nodes?v
+      # curl -k -u <USERNAME> https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cat/nodes?v
 
 #. Stop the Wazuh indexer service.
 
@@ -209,18 +209,17 @@ Perform the following steps on any of the Wazuh indexer nodes replacing ``<WAZUH
 
    .. code-block:: console
 
-      # curl -k -u <USERNAME>:<PASSWORD> https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cat/nodes?v
+      # curl -k -u <USERNAME> https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cat/nodes?v
 
 #. Re-enable shard allocation.
 
    .. code-block:: bash
 
-      curl -X PUT "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cluster/settings" \
-      -u <USERNAME>:<PASSWORD> -k -H "Content-Type: application/json" -d '
+      curl -X PUT "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cluster/settings" -u <USERNAME> -k -H 'Content-Type: application/json' -d'
       {
-         "persistent": {
-            "cluster.routing.allocation.enable": "all"
-         }
+        "persistent": {
+          "cluster.routing.allocation.enable": "all"
+        }
       }
       '
 
@@ -245,11 +244,11 @@ Perform the following steps on any of the Wazuh indexer nodes replacing ``<WAZUH
 
    .. code-block:: console
 
-      # curl -k -u <USERNAME>:<PASSWORD> https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cat/nodes?v
+      # curl -k -u <USERNAME> https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cat/nodes?v
 
    .. code-block:: console
       :class: output
-      
+
       ip         heap.percent ram.percent cpu load_1m load_5m load_15m node.role node.roles                                        cluster_manager name
       172.18.0.3           34          86  32    6.67    5.30     2.53 dimr      cluster_manager,data,ingest,remote_cluster_client -               wazuh2.indexer
       172.18.0.4           21          86  32    6.67    5.30     2.53 dimr      cluster_manager,data,ingest,remote_cluster_client *               wazuh1.indexer
@@ -424,29 +423,27 @@ When upgrading Wazuh, you must also update the Wazuh Filebeat module and the ale
 
    .. code-block:: bash
 
-      curl -X PUT "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/wazuh-states-vulnerabilities-*/_mapping" \
-      -u <USERNAME>:<PASSWORD> -k -H "Content-Type: application/json" -d '
+      curl -X PUT "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/wazuh-states-vulnerabilities-*/_mapping"  -u <USERNAME> -k -H 'Content-Type: application/json' -d'
       {
-         "properties": {
-            "vulnerability": {
-               "properties": {
-                  "under_evaluation": {
-                     "type": "boolean"
-                  },
-                  "scanner": {
-                     "properties": {
-                        "source": {
-                           "type": "keyword",
-                           "ignore_above": 1024
-                        }
-                     }
+        "properties": {
+          "vulnerability": {
+            "properties": {
+              "under_evaluation": {
+                "type": "boolean"
+              },
+              "scanner": {
+                "properties": {
+                  "source": {
+                    "type": "keyword",
+                    "ignore_above": 1024
                   }
-               }
+                }
+              }
             }
-         }
+          }
+        }
       }
       '
-
 
 Upgrading the Wazuh dashboard
 -----------------------------
