@@ -15,6 +15,30 @@ All notable changes to this project will be documented in this file.
 - Updated the Filebeat package revision number. ([#8627](https://github.com/wazuh/wazuh-documentation/pull/8627))
 - Updated centralized configuration (`agent.conf`) documentation to reflect that agents apply changes automatically (hot reload) without requiring a manual restart. ([#8711](https://github.com/wazuh/wazuh-documentation/pull/8711))
 
+## [v4.13.1]
+
+- Support for Wazuh 4.13.1
+
+<<<<<<< HEAD
+## [v4.14.0]
+
+### Added
+
+- Added AlmaLinux 10 to the Wazuh agent packages list and the vulnerability detection compatibility matrix. ([#8691](https://github.com/wazuh/wazuh-documentation/pull/8691))
+- Added Rocky Linux 10 to the Wazuh agent packages list and the available SCA policies. ([#8799](https://github.com/wazuh/wazuh-documentation/pull/8799))
+- Updated monitoring Amazon Inspector documentation to include Inspector v2. ([#8820](https://github.com/wazuh/wazuh-documentation/pull/8820))
+- Updated the `filter` option in the `localfile` reference section. ([#8837](https://github.com/wazuh/wazuh-documentation/pull/8837))
+
+### Changed
+
+- Updated the Filebeat package revision number. ([#8627](https://github.com/wazuh/wazuh-documentation/pull/8627))
+- Updated centralized configuration (`agent.conf`) documentation to reflect that agents apply changes automatically (hot reload) without requiring a manual restart. ([#8711](https://github.com/wazuh/wazuh-documentation/pull/8711))
+=======
+## [v4.13.1]
+
+- Support for Wazuh 4.13.1
+>>>>>>> 4.13
+
 ## [v4.13.0]
 
 ### Added
@@ -31,6 +55,7 @@ All notable changes to this project will be documented in this file.
 - Added Wazuh agent deployment on Docker documentation. ([#8798](https://github.com/wazuh/wazuh-documentation/pull/8798)) ([#8845](https://github.com/wazuh/wazuh-documentation/pull/8845)) ([#8857](https://github.com/wazuh/wazuh-documentation/pull/8857))
 - Added Wazuh indexer indices. ([#8887](https://github.com/wazuh/wazuh-documentation/pull/8887))
 - Added deprecation warnings for legacy operating systems. ([#8897](https://github.com/wazuh/wazuh-documentation/pull/8897))
+- **Post-release**: Added the `wazuh_modules.rlimit_nofile` internal configuration option. ([#8922](https://github.com/wazuh/wazuh-documentation/pull/8922))
 
 ### Changed
 
@@ -41,6 +66,13 @@ All notable changes to this project will be documented in this file.
 - Updated the default value of the `all` attribute in the `ports` Syscollector configuration option. ([#8840](https://github.com/wazuh/wazuh-documentation/pull/8840))
 - Replaced version references with replacement variables in Wazuh package generation. ([#8906](https://github.com/wazuh/wazuh-documentation/pull/8906))
 - Updated System inventory documentation. ([#8910](https://github.com/wazuh/wazuh-documentation/pull/8910))
+- **Post-release**: Updated 4.13.0 release notes entry. ([#8923](https://github.com/wazuh/wazuh-documentation/pull/8923)) ([#8925](https://github.com/wazuh/wazuh-documentation/pull/8925)) ([#8928](https://github.com/wazuh/wazuh-documentation/pull/8928))
+- **Post-release**: Updated steps in Upgrade Guide for exporting customizations from the Wazuh Dashboard. ([#8921](https://github.com/wazuh/wazuh-documentation/pull/8921))
+- **Post-release**: Updated references to Twitter. ([#8933](https://github.com/wazuh/wazuh-documentation/pull/8933))
+- **Post-release**: Added the `wazuh_modules.rlimit_nofile` internal configuration option. ([#8922](https://github.com/wazuh/wazuh-documentation/pull/8922))
+- **Post-release**: Updated 4.13.0 release notes entry. ([#8923](https://github.com/wazuh/wazuh-documentation/pull/8923)) ([#8925](https://github.com/wazuh/wazuh-documentation/pull/8925)) ([#8928](https://github.com/wazuh/wazuh-documentation/pull/8928))
+- **Post-release**: Updated steps in Upgrade Guide for exporting customizations from the Wazuh Dashboard. ([#8921](https://github.com/wazuh/wazuh-documentation/pull/8921))
+- **Post-release**: Updated references to Twitter. ([#8933](https://github.com/wazuh/wazuh-documentation/pull/8933))
 
 ## [v4.12.0]
 
