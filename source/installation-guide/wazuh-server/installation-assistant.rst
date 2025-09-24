@@ -32,6 +32,9 @@ Your Wazuh server is now successfully installed.
       
 - If you want a Wazuh server multi-node cluster, repeat this process on every Wazuh server node.
 
+Disable Wazuh updates
+---------------------
+
 .. include:: /_templates/installations/disable-wazuh-updates.rst
 
 Next steps
