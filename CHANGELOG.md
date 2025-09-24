@@ -19,7 +19,6 @@ All notable changes to this project will be documented in this file.
 
 - Support for Wazuh 4.13.1
 
-<<<<<<< HEAD
 ## [v4.14.0]
 
 ### Added
@@ -37,7 +36,6 @@ All notable changes to this project will be documented in this file.
 ## [v4.13.1]
 
 - Support for Wazuh 4.13.1
->>>>>>> 4.13
 
 ## [v4.13.0]
 
