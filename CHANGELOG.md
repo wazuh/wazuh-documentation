@@ -30,6 +30,7 @@ All notable changes to this project will be documented in this file.
 - Updated System inventory documentation. ([#8910](https://github.com/wazuh/wazuh-documentation/pull/8910))
 - **Post-release**: Updated 4.13.0 release notes entry. ([#8923](https://github.com/wazuh/wazuh-documentation/pull/8923)) ([#8925](https://github.com/wazuh/wazuh-documentation/pull/8925)) ([#8928](https://github.com/wazuh/wazuh-documentation/pull/8928))
 - **Post-release**: Updated steps in Upgrade Guide for exporting customizations from the Wazuh Dashboard. ([#8921](https://github.com/wazuh/wazuh-documentation/pull/8921))
+- **Post-release**: Updated curl commands in the Upgrade guide. ([#8934](https://github.com/wazuh/wazuh-documentation/pull/8934))
 
 ## [v4.12.0]
 
