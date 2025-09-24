@@ -12,7 +12,7 @@ The installation process is divided into three stages.
 
 #. Certificates creation
 
-#. Nodes installation
+#. Wazuh indexer nodes installation
 
 #. Cluster initialization
 

@@ -10,9 +10,9 @@ Installing Wazuh agents on Windows endpoints
 
    Support for Windows XP, Windows Vista, and Windows Server 2003 systems ends in Wazuh 5.0.0.
 
-The agent runs on the endpoint you want to monitor and communicates with the Wazuh server, sending data in near real-time through an encrypted and authenticated channel. Monitor your Windows systems with Wazuh, from Windows XP to the latest available versions including Windows 11 and Windows Server 2022.
+The Wazuh agent runs on the endpoint you want to monitor and communicates with the Wazuh manager, sending data in near real-time through an encrypted and authenticated channel. You can deploy the Wazuh agent on Windows systems ranging from Windows XP to the latest versions, including Windows 11 and Windows Server 2022.
 
-.. note:: To perform the installation, administrator privileges are required.
+.. note:: You must have administrator privileges to perform the installation.
 
 #. To start the installation process, download the `Windows installer <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_WINDOWS|/windows/wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi>`_. 
 

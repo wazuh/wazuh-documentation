@@ -10,16 +10,13 @@ Deploying Wazuh agents on AIX endpoints
 
    Support for AIX systems ends in Wazuh 5.0.0.
 
-The agent runs on the endpoint you want to monitor and communicates with the Wazuh server, sending data in near real-time through an encrypted and authenticated channel.
+The Wazuh agent runs on the endpoint you want to monitor and communicates with the Wazuh manager, sending data in near real-time through an encrypted and authenticated channel.
 
-The deployment of a Wazuh agent on an AIX system uses deployment variables that facilitate the task of installing, registering, and configuring the agent.
+The deployment of a Wazuh agent on an AIX system uses deployment variables that facilitate the task of installing, enrolling, and configuring the Wazuh agent.
 
 .. note::
 
-   You need root user privileges to run all the commands described below.
-
-   Required dependencies:
-      * bash
+   You need root user privileges and Bash to run all the commands described below.
 
 #. To start the deployment process, download the `AIX installer <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_AIX|/aix/wazuh-agent-|WAZUH_CURRENT_AIX|-|WAZUH_REVISION_AIX|.aix.ppc.rpm>`_.
 

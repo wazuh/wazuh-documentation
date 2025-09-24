@@ -17,17 +17,17 @@ Wazuh dashboard installation
 
       # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-install.sh
 
-#. Run the Wazuh installation assistant with the option ``--wazuh-dashboard`` and the node name to install and configure the Wazuh dashboard. The node name must be the same one used in ``config.yml`` for the initial configuration, for example, ``dashboard``.
+#. Run the Wazuh installation assistant with the option ``--wazuh-dashboard`` and the node name to install and configure the Wazuh dashboard. The node name must be the same one used in ``config.yml`` for the initial configuration, for example, ``dashboard``:
    
    .. note::
       
-      Make sure that a copy of the ``wazuh-install-files.tar`` file, created during the initial configuration step, is placed in your working directory.
+      Make sure that a copy of ``wazuh-install-files.tar`` created during the Wazuh indexer installation is placed in your working directory.
 
    .. code-block:: console
 
       # bash wazuh-install.sh --wazuh-dashboard dashboard
 
-   The default Wazuh web user interface port is 443, used by the Wazuh dashboard. You can change this port using the optional parameter ``-p|--port <PORT_NUMBER>``. Some recommended ports are 8443, 8444, 8080, 8888, and 9000.
+   The default Wazuh web user interface port is 443, used by the Wazuh dashboard. You can change this port using the optional parameter ``-p <PORT_NUMBER>`` or ``--port <PORT_NUMBER>``. Some recommended ports are 8443, 8444, 8080, 8888, and 9000.
 
    Once the Wazuh installation is completed, the output shows the access credentials and a message that confirms that the installation was successful.
 

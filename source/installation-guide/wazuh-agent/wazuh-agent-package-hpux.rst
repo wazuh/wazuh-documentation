@@ -10,7 +10,7 @@ Installing Wazuh agents on HP-UX endpoints
 
    Support for HP-UX systems ends in Wazuh 5.0.0.
 
-The installed agent runs on the endpoint you want to monitor and communicates with the Wazuh server, sending data in near real-time through an encrypted and authenticated channel.
+The installed agent runs on the endpoint you want to monitor and communicates with the Wazuh manager, sending data in near real-time through an encrypted and authenticated channel.
 
 .. note:: You need root user privileges to run all the commands described below.
 

@@ -15,6 +15,8 @@ Install and configure the Wazuh dashboard following step-by-step instructions. T
 Wazuh dashboard installation
 ----------------------------
 
+Follow these steps to install the Wazuh dashboard.
+
 Installing package dependencies
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
