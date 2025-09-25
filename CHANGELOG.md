@@ -7,6 +7,10 @@ All notable changes to this project will be documented in this file.
 
 - **Post-release**: Updated curl commands in the Upgrade guide. ([#8934](https://github.com/wazuh/wazuh-documentation/pull/8934))
 
+### Added
+
+- **Post-release**: Update the Wazuh Amazon Machine Images (AMI) documentation. ([#8938](https://github.com/wazuh/wazuh-documentation/pull/8938))
+
 ## [v4.13.0]
 
 ### Added
