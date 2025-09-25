@@ -118,9 +118,9 @@ When the instance is launched, the user passwords are automatically changed to t
 
 Once the instance runs and the process to initialize passwords is complete, you can access the Wazuh dashboard with your credentials.
 
-- **URL**: ``https://<YOUR_INSTANCE_IP>``
-- **Username**: ``admin``
-- **Password**: ``<YOUR_INSTANCE_ID>``
+- URL: ``https://<YOUR_INSTANCE_IP>``
+- Username: ``admin``
+- Password: ``<YOUR_INSTANCE_ID>``
 
 .. note::
    :class: not-long
