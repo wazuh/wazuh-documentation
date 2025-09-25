@@ -9,8 +9,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
-- **Post-release**: Updated curl commands in the Upgrade guide. ([#8934](https://github.com/wazuh/wazuh-documentation/pull/8934))
-- **Post-release**: Updated the upgrade guide steps for upgrading the Wazuh indexer. ([#8941](https://github.com/wazuh/wazuh-documentation/pull/8941))
+- **Post-release**: Updated the upgrade guide for Wazuh central components.. ([#8934](https://github.com/wazuh/wazuh-documentation/pull/8934)) ([#8941](https://github.com/wazuh/wazuh-documentation/pull/8941)) ([#8944](https://github.com/wazuh/wazuh-documentation/pull/8944))
 
 ## [v4.13.0]
 
