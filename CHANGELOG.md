@@ -6,6 +6,8 @@ All notable changes to this project will be documented in this file.
 ### Changed
 
 - **Post-release**: Updated curl commands in the Upgrade guide. ([#8934](https://github.com/wazuh/wazuh-documentation/pull/8934))
+- **Post-release**: Added indexer connector configuration steps to vulnerability detection documentation. ([#8942](https://github.com/wazuh/wazuh-documentation/pull/8942))
+
 
 ### Added
 
