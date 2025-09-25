@@ -13,6 +13,7 @@ Wazuh version                                  Release date
 =============================================  ====================
 :doc:`4.14.1 </release-notes/release-4-14-1>`  TBD
 :doc:`4.14.0 </release-notes/release-4-14-0>`  TBD
+:doc:`4.13.1 </release-notes/release-4-13-1>`  24 September 2025
 :doc:`4.13.0 </release-notes/release-4-13-0>`  18 September 2025
 :doc:`4.12.0 </release-notes/release-4-12-0>`  7 May 2025
 :doc:`4.11.2 </release-notes/release-4-11-2>`  1 April 2025
@@ -85,6 +86,7 @@ Wazuh version                                  Release date
 
       4.14.1 Release notes <release-4-14-1>
       4.14.0 Release notes <release-4-14-0>
+      4.13.1 Release notes <release-4-13-1>
       4.13.0 Release notes <release-4-13-0>
       4.12.0 Release notes <release-4-12-0>
       4.11.2 Release notes <release-4-11-2>
