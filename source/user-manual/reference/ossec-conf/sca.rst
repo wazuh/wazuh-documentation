@@ -104,7 +104,7 @@ skip_nfs
 .. deprecated:: 5.0.0
 
 Enable or disable the scanning of network mounted filesystems (Works on Linux and FreeBSD).
-Currently, ``skip_nfs`` will exclude checking files on CIFS or NFS mounts.
+Currently, ``skip_nfs`` will exclude checking files on CephFS, CIFS or NFS mounts.
 
 +--------------------+---------+
 | **Default value**  | yes     |

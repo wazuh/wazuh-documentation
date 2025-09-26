@@ -540,7 +540,7 @@ Example:
 skip_nfs
 --------
 
-Specifies if syscheck should scan network mounted filesystems. This option works on Linux and FreeBSD systems. Currently, ``skip_nfs`` will exclude checking files on CIFS or NFS mounts.
+Specifies if syscheck should scan network mounted filesystems. This option works on Linux and FreeBSD systems. Currently, ``skip_nfs`` will exclude checking files on CephFS, CIFS or NFS mounts.
 
 +--------------------+----------+
 | **Default value**  | yes      |
