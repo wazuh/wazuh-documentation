@@ -990,9 +990,9 @@ Syscheck
 |                                      |               |                                                                                |
 |                                      |               | .. versionadded:: 3.4.0                                                        |
 +                                      +---------------+--------------------------------------------------------------------------------+
-|                                      | Default value | 10                                                                             |
+|                                      | Default value | 5                                                                              |
 +                                      +---------------+--------------------------------------------------------------------------------+
-|                                      | Allowed value | Any integer between 1 and 1000                                                 |
+|                                      | Allowed value | Any integer between 0 and 1000                                                 |
 +--------------------------------------+---------------+--------------------------------------------------------------------------------+
 | **syscheck.max_fd_win_rt**           | Description   | Maximum numbers of directories can be configured in ossec.conf for Windows     |
 |                                      |               | in realtime and whodata mode.                                                  |
