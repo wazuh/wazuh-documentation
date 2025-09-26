@@ -105,7 +105,7 @@ Configuring who-data monitoring
 
 .. versionadded:: 3.4.0
 
-Who-data monitoring is configured with the ``whodata`` attribute of the :ref:`directories <reference_ossec_syscheck_directories>` option. This attribute replaces the ``realtime`` attribute, which means that ``whodata`` implies real-time monitoring but adding the who-data information.
+Who-data monitoring is configured with the ``whodata`` attribute of the :ref:`directories <reference_ossec_syscheck_directories>` option. This attribute replaces the ``realtime`` attribute, which means that ``whodata`` implies real-time monitoring by adding the who-data information.
 This functionality uses Linux Audit subsystem and the Microsoft Windows SACL, so additional configurations might be necessary. Check the :ref:`auditing who-data <auditing-whodata>` entry to get further information:
 
 .. code-block:: xml
