@@ -56,6 +56,11 @@ Recommended changes to securize Wazuh API
 #. Change the default password of the admin users (**wazuh** and **wazuh-wui**): 
 
     The default password can be changed using the following Wazuh API request: :api-ref:`PUT /security/users/{user_id} <operation/api.controllers.security_controller.update_user>`
+    
+    Where {user-id} is 001 for wazuh and 002 for wazuh-wui.
+    
+    Example curl request:
+    ``curl -k -X PUT "https://localhost:55000/security/users/{user-id}" -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d "{\"password\":\"examplePassword1$\",\"allow_run_as\":false}"``
 
     .. note::
       The password for users must have a minimum length of 8 characters and also use at least one uppercase and one lowercase letter, a number, and a symbol.
