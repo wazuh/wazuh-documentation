@@ -73,6 +73,46 @@ Preparing the Wazuh indexer cluster for upgrade
 
 Perform the following steps on any of the Wazuh indexer nodes replacing ``<WAZUH_INDEXER_IP_ADDRESS>``, ``<USERNAME>``, and ``<PASSWORD>``.
 
+#. Backup the existing Wazuh indexer security configuration files:
+
+   .. code-block:: console
+
+      # /usr/share/wazuh-indexer/bin/indexer-security-init.sh --options "-backup /etc/wazuh-indexer/opensearch-security -icl -nhnv"
+
+   .. code-block:: none
+      :class: output
+
+      Security Admin v7
+      Will connect to 127.0.0.1:9200 ... done
+      Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
+      OpenSearch Version: 2.19.1
+      Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
+      Clustername: wazuh-cluster
+      Clusterstate: GREEN
+      Number of nodes: 1
+      Number of data nodes: 1
+      .opendistro_security index already exists, so we do not need to create one.
+      Will retrieve '/config' into /etc/wazuh-indexer/opensearch-security/config.yml
+         SUCC: Configuration for 'config' stored in /etc/wazuh-indexer/opensearch-security/config.yml
+      Will retrieve '/roles' into /etc/wazuh-indexer/opensearch-security/roles.yml
+         SUCC: Configuration for 'roles' stored in /etc/wazuh-indexer/opensearch-security/roles.yml
+      Will retrieve '/rolesmapping' into /etc/wazuh-indexer/opensearch-security/roles_mapping.yml
+         SUCC: Configuration for 'rolesmapping' stored in /etc/wazuh-indexer/opensearch-security/roles_mapping.yml
+      Will retrieve '/internalusers' into /etc/wazuh-indexer/opensearch-security/internal_users.yml
+         SUCC: Configuration for 'internalusers' stored in /etc/wazuh-indexer/opensearch-security/internal_users.yml
+      Will retrieve '/actiongroups' into /etc/wazuh-indexer/opensearch-security/action_groups.yml
+         SUCC: Configuration for 'actiongroups' stored in /etc/wazuh-indexer/opensearch-security/action_groups.yml
+      Will retrieve '/tenants' into /etc/wazuh-indexer/opensearch-security/tenants.yml
+         SUCC: Configuration for 'tenants' stored in /etc/wazuh-indexer/opensearch-security/tenants.yml
+      Will retrieve '/nodesdn' into /etc/wazuh-indexer/opensearch-security/nodes_dn.yml
+         SUCC: Configuration for 'nodesdn' stored in /etc/wazuh-indexer/opensearch-security/nodes_dn.yml
+      Will retrieve '/whitelist' into /etc/wazuh-indexer/opensearch-security/whitelist.yml
+         SUCC: Configuration for 'whitelist' stored in /etc/wazuh-indexer/opensearch-security/whitelist.yml
+      Will retrieve '/allowlist' into /etc/wazuh-indexer/opensearch-security/allowlist.yml
+         SUCC: Configuration for 'allowlist' stored in /etc/wazuh-indexer/opensearch-security/allowlist.yml
+      Will retrieve '/audit' into /etc/wazuh-indexer/opensearch-security/audit.yml
+         SUCC: Configuration for 'audit' stored in /etc/wazuh-indexer/opensearch-security/audit.yml
+
 #. Disable shard replication to prevent shard replicas from being created while Wazuh indexer nodes are being taken offline for the upgrade.
 
    .. code-block:: bash
@@ -164,7 +204,7 @@ Perform the following steps on each Wazuh indexer node to upgrade them. Upgrade 
 
             # service wazuh-indexer stop
 
-#. Backup the ``/etc/wazuh-indexer/jvm.options`` file to preserve your custom JVM settings. For example, create a copy of the file using the following command:
+#. Backup the ``/etc/wazuh-indexer/jvm.options`` file to preserve your custom JVM settings. Create a copy of the file using the following command:
 
    .. code-block:: console
 
@@ -204,6 +244,49 @@ Post-upgrade actions
 ^^^^^^^^^^^^^^^^^^^^
 
 Perform the following steps on any of the Wazuh indexer nodes replacing ``<WAZUH_INDEXER_IP_ADDRESS>``, ``<USERNAME>``, and ``<PASSWORD>``.
+
+#. Run the ``indexer-security-init.sh`` script to apply the security configuration files from backup into the new Wazuh indexer:
+
+   .. code-block:: console
+
+      # /usr/share/wazuh-indexer/bin/indexer-security-init.sh
+
+   .. code-block:: none
+      :class: output
+
+      Security Admin v7
+      Will connect to 127.0.0.1:9200 ... done
+      Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
+      OpenSearch Version: 2.19.2
+      Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
+      Clustername: wazuh-cluster
+      Clusterstate: GREEN
+      Number of nodes: 1
+      Number of data nodes: 1
+      .opendistro_security index already exists, so we do not need to create one.
+      Populate config from /etc/wazuh-indexer/opensearch-security/
+      Will update '/config' with /etc/wazuh-indexer/opensearch-security/config.yml
+         SUCC: Configuration for 'config' created or updated
+      Will update '/roles' with /etc/wazuh-indexer/opensearch-security/roles.yml
+         SUCC: Configuration for 'roles' created or updated
+      Will update '/rolesmapping' with /etc/wazuh-indexer/opensearch-security/roles_mapping.yml
+         SUCC: Configuration for 'rolesmapping' created or updated
+      Will update '/internalusers' with /etc/wazuh-indexer/opensearch-security/internal_users.yml
+         SUCC: Configuration for 'internalusers' created or updated
+      Will update '/actiongroups' with /etc/wazuh-indexer/opensearch-security/action_groups.yml
+         SUCC: Configuration for 'actiongroups' created or updated
+      Will update '/tenants' with /etc/wazuh-indexer/opensearch-security/tenants.yml
+         SUCC: Configuration for 'tenants' created or updated
+      Will update '/nodesdn' with /etc/wazuh-indexer/opensearch-security/nodes_dn.yml
+         SUCC: Configuration for 'nodesdn' created or updated
+      Will update '/whitelist' with /etc/wazuh-indexer/opensearch-security/whitelist.yml
+         SUCC: Configuration for 'whitelist' created or updated
+      Will update '/audit' with /etc/wazuh-indexer/opensearch-security/audit.yml
+         SUCC: Configuration for 'audit' created or updated
+      Will update '/allowlist' with /etc/wazuh-indexer/opensearch-security/allowlist.yml
+         SUCC: Configuration for 'allowlist' created or updated
+      SUCC: Expected 10 config types for node {"updated_config_types":["allowlist","tenants","rolesmapping","nodesdn","audit","roles","whitelist","actiongroups","config","internalusers"],"updated_config_size":10,"message":null} is 10 (["allowlist","tenants","rolesmapping","nodesdn","audit","roles","whitelist","actiongroups","config","internalusers"]) due to: null
+      Done with success
 
 #. Check that the newly upgraded Wazuh indexer nodes are in the cluster.
 
@@ -296,24 +379,54 @@ Upgrading the Wazuh manager
 #. Upgrade the Wazuh manager to the latest version:
 
    .. tabs::
-   
+
       .. group-tab:: Yum
-   
+
          .. code-block:: console
-   
+
             # yum upgrade wazuh-manager|WAZUH_MANAGER_RPM_PKG_INSTALL|
-   
+
       .. group-tab:: APT
-   
+
          .. code-block:: console
-   
+
             # apt-get install wazuh-manager|WAZUH_MANAGER_DEB_PKG_INSTALL|
-   
+
    .. warning::
-   
+
       If the ``/var/ossec/etc/ossec.conf`` configuration file was modified, it will not be replaced by the upgrade. You will therefore have to add the settings of the new capabilities manually. More information can be found in the :doc:`/user-manual/index`.
 
 #. Run the following command on the Wazuh manager node(s) to start the Wazuh manager service if you stopped it earlier:
+
+   .. include:: /_templates/common/start_manager.rst
+
+Configuring CDB lists
+^^^^^^^^^^^^^^^^^^^^^
+
+When upgrading from Wazuh 4.12.x or earlier, follow these steps to configure the newly added CDB lists.
+
+#. Edit the ``/var/ossec/etc/ossec.conf`` file and update the ``<ruleset>`` block with the CDB lists highlighted below. 
+
+   .. code-block:: xml
+      :emphasize-lines: 9-11
+
+      <ruleset>
+          <!-- Default ruleset -->
+          <decoder_dir>ruleset/decoders</decoder_dir>
+          <rule_dir>ruleset/rules</rule_dir>
+          <rule_exclude>0215-policy_rules.xml</rule_exclude>
+          <list>etc/lists/audit-keys</list>
+          <list>etc/lists/amazon/aws-eventnames</list>
+          <list>etc/lists/security-eventchannel</list>
+          <list>etc/lists/malicious-ioc/malware-hashes</list>
+          <list>etc/lists/malicious-ioc/malicious-ip</list>
+          <list>etc/lists/malicious-ioc/malicious-domains</list>
+          <!-- User-defined ruleset -->
+          <decoder_dir>etc/decoders</decoder_dir>
+          <rule_dir>etc/rules</rule_dir>
+      </ruleset>
+
+#. Restart the Wazuh manager to apply the configuration changes
 
    .. include:: /_templates/common/start_manager.rst
 
@@ -384,6 +497,10 @@ When upgrading from Wazuh version 4.7.x or earlier, follow these steps to config
       # echo '<INDEXER_PASSWORD>' | /var/ossec/bin/wazuh-keystore -f indexer -k password
 
    If you have forgotten your Wazuh indexer password, refer to the :doc:`password management guide </user-manual/user-administration/password-management>` to reset it.
+
+#. Restart the Wazuh manager to apply the configuration changes
+
+   .. include:: /_templates/common/start_manager.rst
 
 .. _configuring_filebeat:
 

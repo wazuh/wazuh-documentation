@@ -3,15 +3,14 @@ All notable changes to this project will be documented in this file.
 
 ## [v4.13.1]
 
-### Changed
-
-- **Post-release**: Updated curl commands in the Upgrade guide. ([#8934](https://github.com/wazuh/wazuh-documentation/pull/8934))
-- **Post-release**: Added indexer connector configuration steps to vulnerability detection documentation and removed troubleshooting section. ([#8942](https://github.com/wazuh/wazuh-documentation/pull/8942))
-
-
 ### Added
 
 - **Post-release**: Updated the Wazuh Amazon Machine Images (AMI) documentation. ([#8938](https://github.com/wazuh/wazuh-documentation/pull/8938))
+
+### Changed
+
+- **Post-release**: Updated the upgrade guide for Wazuh central components. ([#8934](https://github.com/wazuh/wazuh-documentation/pull/8934)) ([#8941](https://github.com/wazuh/wazuh-documentation/pull/8941)) ([#8944](https://github.com/wazuh/wazuh-documentation/pull/8944))
+- **Post-release**: Added indexer connector configuration steps to vulnerability detection documentation and removed troubleshooting section. ([#8942](https://github.com/wazuh/wazuh-documentation/pull/8942))
 
 ## [v4.13.0]
 
