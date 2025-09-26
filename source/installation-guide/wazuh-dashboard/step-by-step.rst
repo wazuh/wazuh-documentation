@@ -104,7 +104,7 @@ Starting the Wazuh dashboard service
 
    .. include:: /_templates/installations/dashboard/enable_dashboard.rst
 
-#. Edit the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` file and replace the ``url`` value with the IP address or hostname of the Wazuh server master node.
+#. Edit the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` file and replace ``<WAZUH_SERVER_IP_ADDRESS>`` with the IP address or hostname of the Wazuh server master node.
 
    .. code-block:: yaml
       :emphasize-lines: 3
@@ -124,7 +124,7 @@ Starting the Wazuh dashboard service
    - **Username**: ``admin``
    - **Password**: ``admin``
 
-   When you access the Wazuh dashboard for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser. For increased security, the ``root-ca.pem``  file previously generated can be imported to the certificate manager of the browser. Alternatively, a certificate from a trusted authority can be configured.
+   When you access the Wazuh dashboard for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser. For increased security, the ``root-ca.pem``  file previously generated can be imported to the certificate manager of the browser. Alternatively, you can :doc:`configure a certificate </user-manual/wazuh-dashboard/configuring-third-party-certs/index>` from a trusted authority.
 
 Disable Wazuh updates
 ---------------------
@@ -198,7 +198,7 @@ Select your deployment type and follow the instructions to change the default pa
             INFO: The password for Wazuh API user wazuh is ivLOfmj7.jL6*7Ev?UJoFjrkGy9t6Je.
             INFO: The password for Wazuh API user wazuh-wui is fL+f?sFRPEv5pYRE559rqy9b6G4Z5pVi
 
-      #. On `all your Wazuh server nodes`, run the following command to update the `admin` password in the Filebeat keystore. Replace ``<ADMIN_PASSWORD>`` with the random password generated in the first step.
+      #. On `all your Wazuh server nodes`, run the following command to update the admin password in the Filebeat keystore. Replace ``<ADMIN_PASSWORD>`` with the random password generated for the ``admin`` user  in the first step:
 
          .. code-block:: console
 
@@ -210,13 +210,13 @@ Select your deployment type and follow the instructions to change the default pa
 
          .. note:: Repeat steps 3 and 4 on `every Wazuh server node`.
 
-      #. On your `Wazuh dashboard node`, run the following command to update the `kibanaserver` password in the Wazuh dashboard keystore. Replace ``<KIBANASERVER_PASSWORD>`` with the random password generated in the first step.
+      #. On your Wazuh dashboard node, run the following command to update the ``kibanaserver`` password in the Wazuh dashboard keystore. Replace ``<KIBANASERVER_PASSWORD>`` with the random password generated for the ``kibanaserver`` user in the first step:
 
          .. code-block:: console
 
             # echo <KIBANASERVER_PASSWORD> | /usr/share/wazuh-dashboard/bin/opensearch-dashboards-keystore --allow-root add -f --stdin opensearch.password
 
-      #. Update the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file with the new `wazuh-wui` password generated in the second step.
+      #. Replace ``<WAZUH_WUI_PASSWORD>`` in the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` file with the new ``wazuh-wui`` password generated in the second step.
 
          .. code-block:: yaml
             :emphasize-lines: 6
