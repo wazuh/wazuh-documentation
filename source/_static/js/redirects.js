@@ -69,6 +69,12 @@ removedUrls['x.y'] = [
 
 /* *** RELEASE 4.13 ****/
 
+removedUrls['4.13'] = [
+  '/user-manual/capabilities/vulnerability-detection/troubleshooting.html',
+  '/user-manual/capabilities/vulnerability-detection/FAQ.html',
+  '/user-manual/capabilities/vulnerability-detection/known-issues.html',
+];
+
 /* Pages added in 4.13 */
 
 newUrls['4.13'] = [
