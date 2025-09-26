@@ -8,6 +8,16 @@
 Troubleshooting
 ===============
 
+- `"Incorrect Kibana version in plugin [wazuh]" when installing the Wazuh Kibana plugin`_
+- `No template found for the selected index pattern`_
+- `Wazuh API seems to be down`_
+- `I do not see alerts in the Wazuh Kibana plugin`_
+- `Could not connect to API with id: default: 3003 - Missing param: API USERNAME`_
+- `Wazuh Kibana plugin page goes blank`_
+- `"Conflict with the Wazuh app version" error is displayed`_
+- `"Agent evolution graph shows incorrect data"`_
+- `None of the above solutions are fixing my problem`_
+
 This section collects common installation or usage issues on the Wazuh Kibana plugin, and some basic steps to solve them.
 
 "Incorrect Kibana version in plugin [wazuh]" when installing the Wazuh Kibana plugin
@@ -196,6 +206,43 @@ Sometimes, after an upgrade, the Wazuh Kibana plugin displays the "Conflict with
 To fix this you need to:
 
   .. include:: ../../_templates/common/clear_cache.rst
+
+"Agent evolution graph shows incorrect data"
+--------------------------------------------
+Sometimes, after connecting two o more Wazuh APIs to the Wazuh Kibana plugin, the agent evolution graph may show data as if there were more agents than expected for that selected API.
+
+.. thumbnail:: ../../images/kibana-app/troubleshooting/agent_evolution_graph_incorrect.png
+    :title: Graph showing more agents than expected
+    :align: left
+    :width: 100%
+
+This is caused by the way agent data is stored in the Elasticsearch indices. Agent monitoring data references its manager or cluster by name only, so when two clusters or managers share the same name, data can be displayed incorrectly in this graph.
+In order to solve it, each cluster (even every node) or manager must have different names:
+
+.. tabs::
+  .. group-tab:: Changing name of a manager
+
+    For managers that don't form part of a cluster, the data shown in the graph is filtered using the name of the manager, which is its :code:`hostname`.
+    Make sure each manager that connects to your Elastic Server has an unique hostname, you may change it by running
+
+    .. code-block:: console
+
+        # hostname newHostName
+    
+    Make sure that the master nodes in your clusters also have distinct manager names.
+
+  .. group-tab:: Changing the name of the cluster
+
+    For clusters, make sure each cluster has an unique name. The name of the cluster can be changed in each of the :code:`ossec.conf` files for each manager in the cluster.
+    
+    .. code-block:: xml
+
+        <cluster>
+          <name>unique cluster name</name>
+          ...
+        </cluster>
+    
+    All members of the cluster must have the same cluster name.
 
 None of the above solutions are fixing my problem
 -------------------------------------------------
