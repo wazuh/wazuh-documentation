@@ -35,6 +35,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated 4.13.0 release notes entry. ([#8923](https://github.com/wazuh/wazuh-documentation/pull/8923)) ([#8925](https://github.com/wazuh/wazuh-documentation/pull/8925)) ([#8928](https://github.com/wazuh/wazuh-documentation/pull/8928))
 - **Post-release**: Updated steps in Upgrade Guide for exporting customizations from the Wazuh Dashboard. ([#8921](https://github.com/wazuh/wazuh-documentation/pull/8921))
 - **Post-release**: Updated references to Twitter. ([#8933](https://github.com/wazuh/wazuh-documentation/pull/8933))
+- **Post-release**: Updated the installation guide. ([#8936](https://github.com/wazuh/wazuh-documentation/pull/8936))
 
 ## [v4.12.0]
 
