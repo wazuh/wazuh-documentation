@@ -17,7 +17,14 @@ All notable changes to this project will be documented in this file.
 
 ## [v4.13.1]
 
-- Support for Wazuh 4.13.1
+### Added
+
+- **Post-release**: Updated the Wazuh Amazon Machine Images (AMI) documentation. ([#8938](https://github.com/wazuh/wazuh-documentation/pull/8938))
+
+### Changed
+
+- **Post-release**: Updated curl commands in the Upgrade guide. ([#8934](https://github.com/wazuh/wazuh-documentation/pull/8934))
+- **Post-release**: Updated the upgrade guide steps for upgrading the Wazuh indexer. ([#8941](https://github.com/wazuh/wazuh-documentation/pull/8941))
 
 ## [v4.13.0]
 
