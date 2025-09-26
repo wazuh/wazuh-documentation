@@ -72,9 +72,6 @@ An SCA policy looks like the following:
        condition: all
        rules:
          - 'f:$sshd_file -> !r:^# && r:Port && !r:\s*\t*22$'
-
-     - id: 3001
-       title: "SSH Hardening: Protocol should be set to 2"
        
 .. note:: 
    If the ``requirements`` aren't satisfied for a specific policy file, the scan for that file won't start.
