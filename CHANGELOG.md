@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 - **Post-release**: Updated the Wazuh Amazon Machine Images (AMI) documentation. ([#8938](https://github.com/wazuh/wazuh-documentation/pull/8938))
-- **Post-release**: Added the Wazuh global queries documentation. . ([#8949](https://github.com/wazuh/wazuh-documentation/pull/8949))
+- **Post-release**: Added the Wazuh global queries documentation. ([#8949](https://github.com/wazuh/wazuh-documentation/pull/8949))
 
 ### Changed
 
