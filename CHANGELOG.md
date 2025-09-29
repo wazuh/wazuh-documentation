@@ -9,7 +9,7 @@ All notable changes to this project will be documented in this file.
 - Added Rocky Linux 10 to the Wazuh agent packages list and the available SCA policies. ([#8799](https://github.com/wazuh/wazuh-documentation/pull/8799))
 - Updated monitoring Amazon Inspector documentation to include Inspector v2. ([#8820](https://github.com/wazuh/wazuh-documentation/pull/8820))
 - Updated the `filter` option in the `localfile` reference section. ([#8837](https://github.com/wazuh/wazuh-documentation/pull/8837))
-- Added support for Debian 13. ([#8946](https://github.com/wazuh/wazuh-documentation/pull/8946))
+- Added Wazuh agent support for Debian 13. ([#8946](https://github.com/wazuh/wazuh-documentation/pull/8946))
 
 ### Changed
 
