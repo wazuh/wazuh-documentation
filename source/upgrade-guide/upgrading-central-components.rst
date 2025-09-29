@@ -428,7 +428,7 @@ When upgrading from Wazuh 4.12.x or earlier, follow these steps to configure the
 
 #. Restart the Wazuh manager to apply the configuration changes
 
-   .. include:: /_templates/common/start_manager.rst
+   .. include:: /_templates/common/restart_manager.rst
 
 .. _configuring_vulnerability_detection:
 
@@ -500,7 +500,7 @@ When upgrading from Wazuh version 4.7.x or earlier, follow these steps to config
 
 #. Restart the Wazuh manager to apply the configuration changes
 
-   .. include:: /_templates/common/start_manager.rst
+   .. include:: /_templates/common/restart_manager.rst
 
 .. _configuring_filebeat:
 
