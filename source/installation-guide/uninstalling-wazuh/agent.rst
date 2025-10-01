@@ -20,12 +20,11 @@ This section describes how to uninstall Wazuh agents installed across the differ
 Uninstalling a Linux Wazuh agent
 --------------------------------
 
+Run the following commands to uninstall a Linux agent.
+
 .. note::
 
    To uninstall Wazuh agent from a Linux endpoint with the anti-tampering feature enabled, refer to :ref:`uninstalling_an_agent_with_anti_tampering_enabled`.
-
-Run the following commands to uninstall a Linux agent.
-
 
 #. Remove the Wazuh agent installation.
 
@@ -58,11 +57,11 @@ The Wazuh agent is now completely removed from your Linux endpoint.
 Uninstalling a Windows Wazuh agent
 ----------------------------------
 
-To uninstall the agent, the original Windows installer file is required to perform the unattended process:
+To uninstall the Wazuh agent, ensure the original Windows installer file is in your working directory and run the following command:
 
-  .. code-block:: none
+.. code-block:: doscon
 
-      msiexec.exe /x wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi /qn
+   > msiexec.exe /x wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi /qn
 
 The Wazuh agent is now completely removed from your Windows endpoint.
 
@@ -133,9 +132,11 @@ Uninstalling an AIX Wazuh agent
 
 Follow the steps below to uninstall the Wazuh agent from the AIX endpoint.
 
-.. code-block:: console
+#. Run the following commands to uninstall an AIX agent:
 
-   # rpm -e wazuh-agent
+   .. code-block:: console
+
+      # rpm -e wazuh-agent
 
 Some files are not removed from the filesystem by the package manager. Delete the ``/var/ossec/`` folder if you want to remove all files completely.
 
