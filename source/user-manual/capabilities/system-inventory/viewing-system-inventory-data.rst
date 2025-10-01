@@ -130,51 +130,55 @@ Contains the **Addresses**, **Interfaces**, **Protocols**, **Services**, and **T
 Query the agent inventory database
 ----------------------------------
 
-The Syscollector module runs periodic scans and sends the updated data in JSON format to the Wazuh server. The Wazuh server analyzes and stores this data in a separate database for each endpoint. The databases contain tables that store each type of system information. You can query the database for specific information using the Wazuh API or the ``SQLite`` tool.
+The Syscollector module runs periodic scans and sends the updated data in JSON format to the Wazuh server. The Wazuh server analyzes and stores this data in a separate database for each endpoint. The databases contain tables that store each type of system information. The system inventory databases on the Wazuh server are then processed and forwarded to the Wazuh indexer, where it is stored as the global state data. You can query the system inventory data for specific information using the Wazuh indexer API, Wazuh server API, or the ``SQLite`` tool.
 
 Using the Wazuh API
 ^^^^^^^^^^^^^^^^^^^
 
-You can query the Wazuh inventory data using the `Wazuh API <https://documentation.wazuh.com/current/user-manual/api/reference.html#tag/Syscollector>`_, which retrieves nested data in JSON format. You can use the Wazuh API GUI on the dashboard or a command line tool like ``cURL`` to query the inventory database. 
+The :doc:`Wazuh indexer API </user-manual/indexer-api/index>` enables you to perform actions such as adding new indices, querying existing indices, and modifying the Wazuh indexer settings. It can retrieve system inventory data from global state indices for selected or multiple monitored endpoints and display it in a human‑readable format. You can perform these queries through the Wazuh indexer API interface on the dashboard or by using command‑line tools such as ``cURL``.
 
-Wazuh API GUI
-~~~~~~~~~~~~~
+Wazuh indexer API GUI
+~~~~~~~~~~~~~~~~~~~~~
 
-On the Wazuh dashboard, navigate to **Server management** > **Dev Tools**. On the **Console**, type the following:
+Follow these steps to access the Wazuh indexer API from the Wazuh dashboard.
 
-.. code-block:: none
+#. On the Wazuh dashboard, click the hamburger icon from the top left side and navigate to **Indexer management** > **Dev Tools**.
 
-   GET /syscollector/<AGENT_ID>/
+   .. thumbnail:: /images/manual/system-inventory/dev-tools.png
+      :title: Indexer management > Dev Tools
+      :alt: Indexer management > Dev Tools
+      :align: center
+      :width: 80%
 
-Where ``<AGENT_ID>`` corresponds to the agent ID of the endpoint.
+#. Type the following command in the console and click the play icon to run the query:
 
-The Wazuh dashboard will suggest a list of available tables that you can query via the API.
+   .. code-block:: none
 
-.. thumbnail:: /images/manual/system-inventory/api-console.png
-  :title: Server management > Dev Tools
-  :alt: Server management > Dev Tools
-  :align: center
-  :width: 80%
+      GET /_cat/indices/wazuh-states-inventory-*?v
 
-For example, you can use the command ``GET /syscollector/<AGENT_ID>/packages`` to query the inventory data for installed packages on the endpoint. After typing, click the play icon to run the query.
+   The command retrieves information about the system inventory indices
 
-Furthermore, you can query the inventory data for specific information about any property. For example, the command below queries the package inventory to check for the ``wazuh-agent`` package: 
+   .. thumbnail:: /images/manual/system-inventory/get-states-inventory-indices.png
+      :title: Get inventory indices
+      :alt: Get inventory indices
+      :align: center
+      :width: 80%
 
-.. code-block:: none
+#. Use the command below to query the system inventory index for installed packages within your infrastructure. After typing, click the play icon to run the query.
 
-   GET /syscollector/<AGENT_ID>/packages?pretty=true&name=wazuh-agent 
+   .. code-block:: none
 
-Where: 
+      GET /wazuh-states-inventory-packages-*/_search?pretty
 
-- ``packages`` reference the package table in the inventory database, which stores information about the currently installed software on an endpoint. You can reference the table of your interest.
-- ``name=wazuh-agent`` specifies the ``wazuh-agent`` package name. You can use different properties and values.
-- ``pretty=true`` ensures the output is properly formatted and easy to read.
+   .. thumbnail:: /images/manual/system-inventory/get-inventory-packages.png
+      :title: Get inventory packages
+      :alt: Get inventory packages
+      :align: center
+      :width: 80%
 
-.. thumbnail:: /images/manual/system-inventory/query-the-inventory-data.png
-  :title: Query the inventory data
-  :alt: Query the inventory data
-  :align: center
-  :width: 80%
+#. 
+
+
 
 .. _inventory_wazuh_api_curl:
 
