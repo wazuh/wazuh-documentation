@@ -84,3 +84,9 @@ Users can query and visualize global state data directly from the Wazuh dashboar
    :width: 80%
    :title: Global queries visualization
    :alt: Global queries visualization
+   
+.. thumbnail:: /images/wazuh-dashboard/global-queries/vulnerability-detection.png
+   :align: center
+   :width: 80%
+   :title: Global queries visualization
+   :alt: Global queries visualization
