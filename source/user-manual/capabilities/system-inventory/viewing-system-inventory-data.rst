@@ -71,8 +71,8 @@ Contains an overview of software packages and Windows KBs on monitored endpoints
       :align: center
       :width: 80%
 
-Processess
-----------
+Processes
+---------
 
 Displays running processes, process start times, and a summary data table containing process details for the monitored endpoints.
 
@@ -127,13 +127,13 @@ Contains the **Addresses**, **Interfaces**, **Protocols**, **Services**, and **T
       :align: center
       :width: 80%
 
-Query the agent inventory database
-----------------------------------
+Query the agent inventory data
+------------------------------
 
 The Syscollector module runs periodic scans and sends the updated data in JSON format to the Wazuh server. The Wazuh server analyzes and stores this data in a separate database for each endpoint. The databases contain tables that store each type of system information. The system inventory databases on the Wazuh server are then processed and forwarded to the Wazuh indexer, where it is stored as the global state data. You can query the system inventory data for specific information using the Wazuh indexer API, Wazuh server API, or the ``SQLite`` tool.
 
-Using the Wazuh API
-^^^^^^^^^^^^^^^^^^^
+Using the Wazuh indexer API
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The :doc:`Wazuh indexer API </user-manual/indexer-api/index>` enables you to perform actions such as adding new indices, querying existing indices, and modifying the Wazuh indexer settings. It can retrieve system inventory data from global state indices for selected or multiple monitored endpoints and display it in a human‑readable format. You can perform these queries through the Wazuh indexer API interface on the dashboard or by using command‑line tools such as ``cURL``.
 
@@ -164,7 +164,7 @@ Follow these steps to access the Wazuh indexer API from the Wazuh dashboard.
       :align: center
       :width: 80%
 
-#. Use the command below to query the system inventory index for installed packages within your infrastructure. After typing, click the play icon to run the query.
+#. Use the command below to query the system inventory index for installed packages within your infrastructure. After typing, click the **play** icon to run the query.
 
    .. code-block:: none
 
@@ -176,25 +176,600 @@ Follow these steps to access the Wazuh indexer API from the Wazuh dashboard.
       :align: center
       :width: 80%
 
-#. 
+#. You can query the system inventory index to look up specific details, such as whether a particular package is installed on any monitored endpoints. For example, the following command checks the package inventory for the presence of the ``wazuh-agent`` package.
 
+   .. code-block:: none
 
+      GET /wazuh-states-inventory-packages-*/_search?pretty
+      {
+        "query": {
+          "match": {
+            "package.name": "wazuh-agent"
+          }
+        }
+      }
+
+   .. thumbnail:: /images/manual/system-inventory/look-up-inventory-packages.png
+      :title: Look up inventory packages
+      :alt: Look up inventory packages
+      :align: center
+      :width: 80%
+
+#. Furthermore, you can check whether a package is installed on a specific endpoint. In the command below, we check if the Wazuh agent is installed on a Windows endpoint. Replace ``<AGENT_NAME>`` with the name of the Wazuh endpoint.
+
+   .. code-block:: console
+
+      GET /wazuh-states-inventory-packages-*/_search?pretty
+      {
+        "query": {
+          "bool": {
+            "must": [
+              { "term": { "agent.name": "<AGENT_NAME>" }},
+              { "match": { "package.name": "Wazuh Agent" }}
+            ]
+          }
+        }
+      }
+
+   .. thumbnail:: /images/manual/system-inventory/look-up-inventory-packages-on-endpoint.png
+      :title: Look up inventory packages
+      :alt: Look up inventory packages
+      :align: center
+      :width: 80%
+
+cURL
+~~~~
+
+Follow the steps below to query the system inventory indices from the command line using ``cURL``.
+
+#. Run the command below to retrieve information about the system inventory indices. Replace ``<WAZUH_INDEXER_USERNAME>`` with the Wazuh indexer username and type the Wazuh indexer password when prompted:
+
+   .. code-block:: console
+
+      # curl -k -u "<WAZUH_INDEXER_USERNAME>" https://<WAZUH_INDEXER_IP>:9200/_cat/indices/wazuh-states-inventory-*?v
+
+   .. code-block:: none
+      :class: output
+
+      health status index                                                           uuid                   pri rep docs.count docs.deleted store.size pri.store.size
+      green  open   wazuh-states-inventory-system-wazuh-vmware-virtual-platform     quLOzlY1RFGsDSrTHo-MFw   1   0          3            4     61.7kb         61.7kb
+      green  open   wazuh-states-inventory-protocols-wazuh-vmware-virtual-platform  jnhsOwQyTlW-RYnaS7D7RQ   1   0         14            0     25.3kb         25.3kb
+      green  open   wazuh-states-inventory-processes-wazuh-vmware-virtual-platform  -8IsddyrQp6r8erH54MFxw   1   0        690          655    253.3kb        253.3kb
+      green  open   wazuh-states-inventory-networks-wazuh-vmware-virtual-platform   W8iWE0G_QqKiDID9cgPnqA   1   0         14            0     26.8kb         26.8kb
+      green  open   wazuh-states-inventory-packages-wazuh-vmware-virtual-platform   zPc4yGKsRxCfxqbB0QuSjQ   1   0       1585            8    972.8kb        972.8kb
+      green  open   wazuh-states-inventory-interfaces-wazuh-vmware-virtual-platform KiXJsZfaSO2kZvFFahYbIw   1   0          9            5     80.2kb         80.2kb
+      green  open   wazuh-states-inventory-hardware-wazuh-vmware-virtual-platform   TNAH5VcUTHKQz-3e4EXBig   1   0          3            5     76.8kb         76.8kb
+      green  open   wazuh-states-inventory-ports-wazuh-vmware-virtual-platform      J9_a35ZgTFu2S7XvVHUDwQ   1   0         84           10     99.8kb         99.8kb
+      green  open   wazuh-states-inventory-hotfixes-wazuh-vmware-virtual-platform   BeJOrf4cTlOEM_VCWmeDIw   1   0         18            0      7.3kb          7.3kb
+
+#. Use the command below to query the system inventory index for the packages on the endpoints. Replace ``<WAZUH_INDEXER_USERNAME>`` with the Wazuh indexer username and type the Wazuh indexer password when prompted.
+
+   .. code-block:: console
+
+      # curl -k -u "<WAZUH_INDEXER_USERNAME>" https://<WAZUH_INDEXER_IP>:9200/wazuh-states-inventory-packages-*/_search?pretty
+
+   .. code-block:: none
+      :class: output
+
+      {
+        "took" : 1,
+        "timed_out" : false,
+        "_shards" : {
+          "total" : 1,
+          "successful" : 1,
+          "skipped" : 0,
+          "failed" : 0
+        },
+        "hits" : {
+          "total" : {
+            "value" : 1585,
+            "relation" : "eq"
+          },
+          "max_score" : 1.0,
+          "hits" : [
+            {
+              "_index" : "wazuh-states-inventory-packages-wazuh-vmware-virtual-platform",
+              "_id" : "006_041f8e6a4f5473b6ad05a32d8cbcc6fba389cabb",
+              "_score" : 1.0,
+              "_source" : {
+                "agent" : {
+                  "id" : "006",
+                  "name" : "Cent_Stream",
+                  "version" : "v4.13.0"
+                },
+                "package" : {
+                  "architecture" : "x86_64",
+                  "description" : "A library that wraps other spell checking backends.",
+                  "installed" : "2025-06-30T19:18:17.000Z",
+                  "name" : "enchant2",
+                  "size" : 167594,
+                  "type" : "rpm",
+                  "vendor" : "CentOS",
+                  "version" : "2.2.15-6.el9"
+                },
+                "wazuh" : {
+                  "cluster" : {
+                    "name" : "wazuh-VMware-Virtual-Platform"
+                  },
+                  "schema" : {
+                    "version" : "1.0"
+                  }
+                }
+              }
+            },
+            {
+              "_index" : "wazuh-states-inventory-packages-wazuh-vmware-virtual-platform",
+              "_id" : "006_044fc408c207df2320ea52d29231919b2616f4ce",
+              "_score" : 1.0,
+              "_source" : {
+                "agent" : {
+                  "id" : "006",
+                  "name" : "Cent_Stream",
+                  "version" : "v4.13.0"
+                },
+                "package" : {
+                  "architecture" : "x86_64",
+                  "description" : "The ATK library provides a set of interfaces for adding accessibility\nsupport to applications and graphical user interface toolkits. By\nsupporting the ATK interfaces, an application or toolkit can be used\nwith tools such as screen readers, magnifiers, and alternative input\ndevices.",
+                  "installed" : "2025-06-30T19:18:17.000Z",
+                  "name" : "atk",
+                  "size" : 1304627,
+                  "type" : "rpm",
+                  "vendor" : "CentOS",
+                  "version" : "2.36.0-5.el9"
+                },
+                "wazuh" : {
+                  "cluster" : {
+                    "name" : "wazuh-VMware-Virtual-Platform"
+                  },
+                  "schema" : {
+                    "version" : "1.0"
+                  }
+                }
+              }
+            },
+            {
+              "_index" : "wazuh-states-inventory-packages-wazuh-vmware-virtual-platform",
+              "_id" : "006_045d1c99dc4f5c48377352432af35e0cd2c2451c",
+              "_score" : 1.0,
+              "_source" : {
+                "agent" : {
+                  "id" : "006",
+                  "name" : "Cent_Stream",
+                  "version" : "v4.13.0"
+                },
+                "package" : {
+                  "architecture" : "x86_64",
+                  "description" : "A backend implementation for xdg-desktop-portal that is using various pieces of\nGNOME infrastructure, such as the org.gnome.Shell.Screenshot or\norg.gnome.SessionManager D-Bus interfaces.",
+                  "installed" : "2025-06-30T19:31:26.000Z",
+                  "name" : "xdg-desktop-portal-gnome",
+                  "size" : 568978,
+                  "type" : "rpm",
+                  "vendor" : "CentOS",
+                  "version" : "41.2-3.el9"
+                },
+                "wazuh" : {
+                  "cluster" : {
+                    "name" : "wazuh-VMware-Virtual-Platform"
+                  },
+                  "schema" : {
+                    "version" : "1.0"
+                  }
+                }
+              }
+            },
+            {
+              "_index" : "wazuh-states-inventory-packages-wazuh-vmware-virtual-platform",
+              "_id" : "006_0467d452f839f61a318267d502b6c81154316e40",
+              "_score" : 1.0,
+              "_source" : {
+                "agent" : {
+                  "id" : "006",
+                  "name" : "Cent_Stream",
+                  "version" : "v4.13.0"
+                },
+                "package" : {
+                  "architecture" : "x86_64",
+                  "description" : "This package contains the shared library for sqlite.",
+                  "installed" : "2025-06-30T19:30:06.000Z",
+                  "name" : "sqlite-libs",
+                  "size" : 1368872,
+                  "type" : "rpm",
+                  "vendor" : "CentOS",
+                  "version" : "3.34.1-8.el9"
+                },
+                "wazuh" : {
+                  "cluster" : {
+                    "name" : "wazuh-VMware-Virtual-Platform"
+                  },
+                  "schema" : {
+                    "version" : "1.0"
+                  }
+                }
+              }
+            },
+            {
+              "_index" : "wazuh-states-inventory-packages-wazuh-vmware-virtual-platform",
+              "_id" : "006_0480a23ae60e573ec6b243b3a6068723fda63ee2",
+              "_score" : 1.0,
+              "_source" : {
+                "agent" : {
+                  "id" : "006",
+                  "name" : "Cent_Stream",
+                  "version" : "v4.13.0"
+                },
+                "package" : {
+                  "architecture" : "x86_64",
+                  "description" : "Cheese is a Photobooth-inspired GNOME application for taking pictures and\nvideos from a webcam. It can also apply fancy graphical effects.",
+                  "installed" : "2025-06-30T19:19:07.000Z",
+                  "name" : "cheese",
+                  "size" : 378533,
+                  "type" : "rpm",
+                  "vendor" : "CentOS",
+                  "version" : "2:3.38.0-6.el9"
+                },
+                "wazuh" : {
+                  "cluster" : {
+                    "name" : "wazuh-VMware-Virtual-Platform"
+                  },
+                  "schema" : {
+                    "version" : "1.0"
+                  }
+                }
+              }
+            },
+            {
+              "_index" : "wazuh-states-inventory-packages-wazuh-vmware-virtual-platform",
+              "_id" : "006_048923b45c38753ce27dc4346d16612a6e9fa6bc",
+              "_score" : 1.0,
+              "_source" : {
+                "agent" : {
+                  "id" : "006",
+                  "name" : "Cent_Stream",
+                  "version" : "v4.13.0"
+                },
+                "package" : {
+                  "architecture" : "x86_64",
+                  "description" : "The filesystem package is one of the basic packages that is installed\non a Linux system. Filesystem contains the basic directory layout\nfor a Linux operating system, including the correct permissions for\nthe directories.",
+                  "installed" : "2025-06-30T19:30:05.000Z",
+                  "name" : "filesystem",
+                  "size" : 106,
+                  "type" : "rpm",
+                  "vendor" : "CentOS",
+                  "version" : "3.16-5.el9"
+                },
+                "wazuh" : {
+                  "cluster" : {
+                    "name" : "wazuh-VMware-Virtual-Platform"
+                  },
+                  "schema" : {
+                    "version" : "1.0"
+                  }
+                }
+              }
+            },
+            {
+              "_index" : "wazuh-states-inventory-packages-wazuh-vmware-virtual-platform",
+              "_id" : "006_04c8813e7928463fee47e0006c90e16e5d924ca6",
+              "_score" : 1.0,
+              "_source" : {
+                "agent" : {
+                  "id" : "006",
+                  "name" : "Cent_Stream",
+                  "version" : "v4.13.0"
+                },
+                "package" : {
+                  "architecture" : "x86_64",
+                  "description" : "The POSIX module permits you to access all (or nearly all) the standard POSIX\n1003.1 identifiers. Many of these identifiers have been given Perl interfaces.",
+                  "installed" : "2025-07-17T14:42:06.000Z",
+                  "name" : "perl-POSIX",
+                  "size" : 240020,
+                  "type" : "rpm",
+                  "vendor" : "CentOS",
+                  "version" : "1.94-483.el9"
+                },
+                "wazuh" : {
+                  "cluster" : {
+                    "name" : "wazuh-VMware-Virtual-Platform"
+                  },
+                  "schema" : {
+                    "version" : "1.0"
+                  }
+                }
+              }
+            },
+            {
+              "_index" : "wazuh-states-inventory-packages-wazuh-vmware-virtual-platform",
+              "_id" : "006_0507d1d203a41466eddaf4e8ea773427f6137e4b",
+              "_score" : 1.0,
+              "_source" : {
+                "agent" : {
+                  "id" : "006",
+                  "name" : "Cent_Stream",
+                  "version" : "v4.13.0"
+                },
+                "package" : {
+                  "architecture" : "x86_64",
+                  "description" : "A library to handle bidirectional scripts (for example Hebrew, Arabic),\nso that the display is done in the proper way; while the text data itself\nis always written in logical order.",
+                  "installed" : "2025-06-30T19:18:13.000Z",
+                  "name" : "fribidi",
+                  "size" : 347380,
+                  "type" : "rpm",
+                  "vendor" : "CentOS",
+                  "version" : "1.0.10-6.el9.2"
+                },
+                "wazuh" : {
+                  "cluster" : {
+                    "name" : "wazuh-VMware-Virtual-Platform"
+                  },
+                  "schema" : {
+                    "version" : "1.0"
+                  }
+                }
+              }
+            },
+            {
+              "_index" : "wazuh-states-inventory-packages-wazuh-vmware-virtual-platform",
+              "_id" : "006_050946eb0960e99615ecf95988f96aa67b278099",
+              "_score" : 1.0,
+              "_source" : {
+                "agent" : {
+                  "id" : "006",
+                  "name" : "Cent_Stream",
+                  "version" : "v4.13.0"
+                },
+                "package" : {
+                  "architecture" : "x86_64",
+                  "description" : "lxml is a Pythonic, mature binding for the libxml2 and libxslt libraries. It\nprovides safe and convenient access to these libraries using the ElementTree It\nextends the ElementTree API significantly to offer support for XPath, RelaxNG,\nXML Schema, XSLT, C14N and much more.To contact the project, go to the project\nhome page < or see our bug tracker at case you want to use the current ...\n\nPython 3 version.",
+                  "installed" : "2025-06-30T19:18:20.000Z",
+                  "name" : "python3-lxml",
+                  "size" : 4351883,
+                  "type" : "rpm",
+                  "vendor" : "CentOS",
+                  "version" : "4.6.5-3.el9"
+                },
+                "wazuh" : {
+                  "cluster" : {
+                    "name" : "wazuh-VMware-Virtual-Platform"
+                  },
+                  "schema" : {
+                    "version" : "1.0"
+                  }
+                }
+              }
+            },
+            {
+              "_index" : "wazuh-states-inventory-packages-wazuh-vmware-virtual-platform",
+              "_id" : "006_054268e7568db7e74481fec3f76cabba9612d810",
+              "_score" : 1.0,
+              "_source" : {
+                "agent" : {
+                  "id" : "006",
+                  "name" : "Cent_Stream",
+                  "version" : "v4.13.0"
+                },
+                "package" : {
+                  "architecture" : "noarch",
+                  "description" : "Python3 bindings for firewalld.",
+                  "installed" : "2025-06-30T19:30:16.000Z",
+                  "name" : "python3-firewall",
+                  "size" : 2193288,
+                  "type" : "rpm",
+                  "vendor" : "CentOS",
+                  "version" : "1.3.4-9.el9"
+                },
+                "wazuh" : {
+                  "cluster" : {
+                    "name" : "wazuh-VMware-Virtual-Platform"
+                  },
+                  "schema" : {
+                    "version" : "1.0"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+
+#. You can query the system inventory index to look up specific details, such as whether a particular package is installed on any monitored endpoints. For example, the following command checks the package inventory for the presence of the ``wazuh-agent`` package. Replace ``<WAZUH_INDEXER_USERNAME>`` with the Wazuh indexer username and type the Wazuh indexer password when prompted:
+
+   .. code-block:: bash
+
+      curl -k -u "<WAZUH_INDEXER_USERNAME>" "https://<WAZUH_INDEXER_IP>:9200/wazuh-states-inventory-packages-*/_search?pretty" \
+      -H 'Content-Type: application/json' \
+      -d '{
+        "query": {
+          "term": {
+            "package.name": "wazuh-agent"
+          }
+        }
+      }'
+
+   .. code-block:: none
+      :class: output
+
+      {
+        "took" : 1,
+        "timed_out" : false,
+        "_shards" : {
+          "total" : 1,
+          "successful" : 1,
+          "skipped" : 0,
+          "failed" : 0
+        },
+        "hits" : {
+          "total" : {
+            "value" : 1,
+            "relation" : "eq"
+          },
+          "max_score" : 6.9660244,
+          "hits" : [
+            {
+              "_index" : "wazuh-states-inventory-packages-wazuh-vmware-virtual-platform",
+              "_id" : "006_1cdcea1b59fb2fd59b3de004d393bcbcfea352ee",
+              "_score" : 6.9660244,
+              "_source" : {
+                "agent" : {
+                  "id" : "006",
+                  "name" : "Cent_Stream",
+                  "version" : "v4.13.0"
+                },
+                "package" : {
+                  "architecture" : "x86_64",
+                  "description" : "Wazuh helps you to gain security visibility into your infrastructure by monitoring\nhosts at an operating system and application level. It provides the following capabilities:\nlog analysis, file integrity monitoring, intrusions detection and policy and compliance monitoring",
+                  "installed" : "2025-09-12T18:04:48.000Z",
+                  "name" : "wazuh-agent",
+                  "size" : 31169915,
+                  "type" : "rpm",
+                  "vendor" : "Wazuh",
+                  "version" : "4.13.0-1"
+                },
+                "wazuh" : {
+                  "cluster" : {
+                    "name" : "wazuh-VMware-Virtual-Platform"
+                  },
+                  "schema" : {
+                    "version" : "1.0"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+
+#. Furthermore, you can check whether a package is installed on a specific endpoint. In the command below, we check if the Wazuh agent is installed on a Windows endpoint. Replace ``<WAZUH_INDEXER_USERNAME>`` with the Wazuh indexer username, ``<AGENT_NAME>`` with the name of the Wazuh endpoint, and type the Wazuh indexer password when prompted.
+
+   .. code-block:: bash
+
+      curl -k -u "<WAZUH_INDEXER_USERNAME>" "https://<WAZUH_INDEXER_IP>:9200/wazuh-states-inventory-packages-*/_search?pretty" \
+      -H 'Content-Type: application/json' \
+      -d '{
+        "query": {
+          "bool": {
+            "must": [
+              { "term": { "agent.name": "Windows-11" }},
+              { "match": { "package.name": "Wazuh Agent" }}
+            ]
+          }
+        }
+      }'
+
+   .. code-block:: none
+      :class: output
+
+      {
+        "took" : 2,
+        "timed_out" : false,
+        "_shards" : {
+          "total" : 1,
+          "successful" : 1,
+          "skipped" : 0,
+          "failed" : 0
+        },
+        "hits" : {
+          "total" : {
+            "value" : 1,
+            "relation" : "eq"
+          },
+          "max_score" : 10.26218,
+          "hits" : [
+            {
+              "_index" : "wazuh-states-inventory-packages-wazuh-vmware-virtual-platform",
+              "_id" : "005_717e026c55c0e6b98d7a00d73963ca70cba8609f",
+              "_score" : 10.26218,
+              "_source" : {
+                "agent" : {
+                  "id" : "005",
+                  "name" : "Windows-11",
+                  "version" : "v4.13.0"
+                },
+                "package" : {
+                  "architecture" : "i686",
+                  "name" : "Wazuh Agent",
+                  "size" : 0,
+                  "type" : "win",
+                  "vendor" : "Wazuh",
+                  "version" : "4.13.0"
+                },
+                "wazuh" : {
+                  "cluster" : {
+                    "name" : "wazuh-VMware-Virtual-Platform"
+                  },
+                  "schema" : {
+                    "version" : "1.0"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+
+Using the Wazuh server API
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You can query the Wazuh inventory data using the `Wazuh server API <https://documentation.wazuh.com/current/user-manual/api/reference.html#tag/Syscollector>`__, which retrieves nested data in JSON format. You can use the Wazuh server API GUI on the dashboard or a command-line tool like ``cURL`` to query the inventory database of a Wazuh agent.
+
+Wazuh server API GUI
+~~~~~~~~~~~~~~~~~~~~
+
+On the Wazuh dashboard, navigate to **Wazuh** > **Tools** > **API Console**. On the **Console**, type the following:
+
+.. code-block:: none
+
+   GET /syscollector/<AGENT_ID>/
+
+Where ``<AGENT_ID>`` corresponds to the agent ID of the endpoint.
+
+The Wazuh dashboard will suggest a list of available tables that you can query via the API.
+
+.. thumbnail:: /images/manual/system-inventory/api-console.png
+   :title: Server management > Dev Tools
+   :alt: Server management > Dev Tools
+   :align: center
+   :width: 80%
+
+For example, you can use the command ``GET /syscollector/<AGENT_ID>/packages`` to query the inventory data for installed packages on the endpoint. After typing, click the **play** icon to run the query.
+
+Furthermore, you can query the inventory data for specific information about any property. For example, the command below queries the package inventory to check for the ``wazuh-agent`` package:
+
+.. code-block:: none
+
+   GET /syscollector/<AGENT_ID>/packages?pretty=true&name=wazuh-agent
+
+Where:
+
+-  ``packages`` reference the package table in the inventory database, which stores information about the currently installed software on an endpoint. You can reference the table of your interest.
+-  ``name=wazuh-agent`` specifies the ``wazuh-agent`` package name. You can use different properties and values.
+-  ``pretty=true`` ensures the output is properly formatted and easy to read.
+
+.. thumbnail:: /images/manual/system-inventory/query-the-inventory-data.png
+   :title: Query the inventory data
+   :alt: Query the inventory data
+   :align: center
+   :width: 80%
 
 .. _inventory_wazuh_api_curl:
 
 cURL
 ~~~~
 
-Follow the steps below to query the endpoint database from the command line using ``cURL``:
+Follow the steps below to query the system inventory indices from the command line using ``cURL``:
 
-- Generate a JSON Web Token (JWT) for authenticating to the Wazuh server by running the following command. The default API credentials are ``wazuh:wazuh``. Replace ``<WAZUH_SERVER_IP>`` with your Wazuh server IP address.
+- Generate a JSON Web Token (JWT) for authenticating to the Wazuh server by running the following command. Enter the Wazuh server API password when prompted:
 
    .. code-block:: console
 
-      TOKEN=$(curl -u <USER>:<PASSWORD> -k -X GET "https://<WAZUH_SERVER_IP>:55000/security/user/authenticate?raw=true")
+      TOKEN=$(curl -u <USER> -k -X GET "https://<WAZUH_SERVER_IP>:55000/security/user/authenticate?raw=true")
+
+   Where:
+
+   -  ``<USER>`` is the Wazuh server API username. The default username is ``wazuh``.
+   -  ``<WAZUH_SERVER_IP>`` is the Wazuh server IP address.
 
    Run the command ``echo $TOKEN`` to confirm that you successfully generated the token. The output should be like this:
-   
+
    .. code-block:: console
       :class: output
 
@@ -272,7 +847,7 @@ Follow the steps below to query the endpoint database from the command line usin
                   "architecture": "amd64",
                   "agent_id": "010"
                },
-      …            
+      …
 
    Furthermore, you can query the inventory data to find specific information about any property. For example, the command below queries the package inventory to check if the ``wazuh-agent`` package is present.
 
@@ -332,7 +907,7 @@ Where ``<AGENT_ID>`` corresponds to the agent ID of the monitored endpoint.
    SQLite version 3.7.17 2013-05-20 00:56:22
    Enter ".help" for instructions
    Enter SQL statements terminated with a ";"
-   sqlite> 
+   sqlite>
 
 After connecting to the database, you can query the list of tables in it using the command below:
 
@@ -343,14 +918,14 @@ After connecting to the database, you can query the list of tables in it using t
 .. code-block:: console
    :class: output
 
-   ciscat_results        sca_scan_info         sys_osinfo          
-   fim_entry             scan_info             sys_ports           
-   metadata              sync_info             sys_processes       
-   pm_event              sys_hotfixes          sys_programs        
-   sca_check             sys_hwinfo            vuln_cves           
-   sca_check_compliance  sys_netaddr           vuln_metadata       
-   sca_check_rules       sys_netiface        
-   sca_policy            sys_netproto 
+   ciscat_results        sca_scan_info         sys_osinfo
+   fim_entry             scan_info             sys_ports
+   metadata              sync_info             sys_processes
+   pm_event              sys_hotfixes          sys_programs
+   sca_check             sys_hwinfo
+   sca_check_compliance  sys_netaddr
+   sca_check_rules       sys_netiface
+   sca_policy            sys_netproto
 
 You can further query the tables for any information you are interested in. For example, if you want to know if a particular software is present on an endpoint, you can query the ``sys_programs`` table using  ``sqlite>select * from sys_programs where name="<SOFTWARE_NAME>";``. The command below checks whether the ``wazuh-agent`` program is present on a monitored Linux endpoint and shows the captured details:
 
