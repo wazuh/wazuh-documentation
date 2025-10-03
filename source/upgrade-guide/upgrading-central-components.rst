@@ -432,12 +432,14 @@ When upgrading from Wazuh 4.12.x or earlier, follow these steps to configure the
 
 .. _configuring_vulnerability_detection:
 
-Configuring vulnerability detection
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Configuring the vulnerability detection and indexer connector
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If upgrading from version 4.8.x or later, skip the vulnerability detection configuration and proceed to :ref:`configuring_filebeat`. No action is needed as the vulnerability detection block is already configured.
+The Wazuh Inventory Harvester and Vulnerability Detection modules rely on the :doc:`indexer connector </user-manual/reference/ossec-conf/indexer>` setting to forward system inventory data and detected vulnerabilities to the Wazuh indexer.
 
-When upgrading from Wazuh version 4.7.x or earlier, follow these steps to configure the vulnerability detection block.
+If upgrading from version 4.8.x or later, skip the vulnerability detection and indexer connector configurations and proceed to :ref:`configuring_filebeat`. No action is needed as the vulnerability detection and indexer connector blocks are already configured.
+
+When upgrading from Wazuh version 4.7.x or earlier, follow these steps to configure the vulnerability detection and indexer connector blocks.
 
 #. Update the configuration file
 
