@@ -224,7 +224,7 @@ Wazuh Manager
 
 |
 | **Variable**: ``wazuh_manager_osquery``
-| **Description**: Configures the :doc:`wodle</user-manual/reference/ossec-conf/wodle-osquery>` item named ``osquery`` from ``ossec.conf``.
+| **Description**: Configures the wodle item named ``osquery`` from ``ossec.conf``.
 | **Default values**:
 
 .. code-block:: yaml
@@ -1039,7 +1039,7 @@ Wazuh Agent
 
 |
 | **Variable**: ``wazuh_agent_osquery``
-| **Description**: Configures the :doc:`wodle</user-manual/reference/ossec-conf/wodle-osquery>` item named ``osquery`` from ``ossec.conf``.
+| **Description**: Configures the wodle item named ``osquery`` from ``ossec.conf``.
 | **Default values**:
 
 .. code-block:: yaml
@@ -1056,7 +1056,7 @@ Wazuh Agent
 
 |
 | **Variable**: ``wazuh_agent_syscollector``
-| **Description**: Configures the :doc:`wodle </user-manual/reference/ossec-conf/wodle-syscollector>` item named ``syscollector`` from ``ossec.conf``.
+| **Description**: Configures the wodle item named ``syscollector`` from ``ossec.conf``.
 | **Default values**:
 
 .. code-block:: yaml

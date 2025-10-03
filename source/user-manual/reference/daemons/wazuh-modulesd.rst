@@ -45,10 +45,6 @@ The wazuh-modulesd program manages the Wazuh modules described below.
 
   The Vulnerability Detector module detects applications that are known to be vulnerable (affected by a CVE).
 
-.. topic:: Osquery wodle
-
-  The Osquery wodle provides the user with an operating system instrumentation tool that makes low-level operating system analytics and monitoring both efficient and intuitive using SQL-based queries. For more information, read through the documentation for :doc:`osquery integration </user-manual/capabilities/system-inventory/osquery>`.
-
 .. topic:: SCA module
 
   The :ref:`SCA module <manual_sec_config_assessment>` allows users to check the system configuration against policy files to determine vulnerabilities and misconfigurations.
