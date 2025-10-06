@@ -14,6 +14,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Added indexer connector configuration steps to vulnerability detection documentation and removed troubleshooting section. ([#8942](https://github.com/wazuh/wazuh-documentation/pull/8942))
 - **Post-release**: Updated the *Navigating the Wazuh dashboard* section. ([#8950](https://github.com/wazuh/wazuh-documentation/pull/8950))
 - **Post-release**: Updated the System inventory documentation. ([#8955](https://github.com/wazuh/wazuh-documentation/pull/8955))
+- **Post-release**: Updated the Wazuh agent section in the *Getting started* guide. ([#8962](https://github.com/wazuh/wazuh-documentation/pull/8962))
 
 ### Fixed
 
