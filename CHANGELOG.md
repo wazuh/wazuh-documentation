@@ -16,6 +16,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated the System inventory documentation. ([#8955](https://github.com/wazuh/wazuh-documentation/pull/8955))
 - **Post-release**: Updated the Wazuh server section in the *Getting started* guide. ([#8963](https://github.com/wazuh/wazuh-documentation/pull/8963))
 - **Post-release**: Updated the Wazuh indexer section in the *Getting started* guide. ([#8965](https://github.com/wazuh/wazuh-documentation/pull/8965))
+- **Post-release**: Updated the Wazuh dashboard section in the *Getting started* guide. ([#8964](https://github.com/wazuh/wazuh-documentation/pull/8964))
 
 ### Fixed
 
