@@ -15,6 +15,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated the *Navigating the Wazuh dashboard* section. ([#8950](https://github.com/wazuh/wazuh-documentation/pull/8950))
 - **Post-release**: Updated the System inventory documentation. ([#8955](https://github.com/wazuh/wazuh-documentation/pull/8955))
 - **Post-release**: Updated the *Getting started* guide. ([#8962](https://github.com/wazuh/wazuh-documentation/pull/8962)) ([#8963](https://github.com/wazuh/wazuh-documentation/pull/8963)) ([#8964](https://github.com/wazuh/wazuh-documentation/pull/8964)) ([#8965](https://github.com/wazuh/wazuh-documentation/pull/8965))
+- **Post-release**: Updated the URLs of malware samples. ([#8961](https://github.com/wazuh/wazuh-documentation/pull/8961))
 
 ### Fixed
 
