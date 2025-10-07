@@ -59,13 +59,13 @@ Wazuh server API
 .. thumbnail::  /images/getting-started/server-api-console.png 
       :align: center
       :width: 100% 
-      :title: Wazuh server API
-      :alt: Wazuh server API
+      :title: Wazuh server API console
+      :alt: Wazuh server API console
 
 Wazuh indexer API
 
 .. thumbnail::  /images/getting-started/indexer-api-console.png  
       :align: center
       :width: 100% 
-      :title: Wazuh indexer API
-      :alt: Wazuh indexer API
+      :title: Wazuh indexer API console
+      :alt: Wazuh indexer API console
