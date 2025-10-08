@@ -26,28 +26,14 @@ Advance filtering is possible using the Wazuh API's queries. Queries are specifi
 .. note::
     Reserved characters need to be percent-encoded, especially semicolons (``;`` → ``%3B``). You can use ``--data-urlencode`` inside cURL to make the process easier.
 
-Example: Sending WQL queries with cURL
----------------------------------------
+Examples
+--------
 
-Generate a token to be used to interact with the API:
-
-.. code-block:: console
-
-   # TOKEN=$(curl -u <WAZUH_API_USERNAME>:<WAZUH_API_PASSWORD> -k -X GET "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/security/user/authenticate?raw=true")
-
-Replace:
-
-- ``<WAZUH_API_USERNAME>`` with your Wazuh server API user.
-- ``<WAZUH_API_PASSWORD>`` with your Wazuh server API password.
-- ``<WAZUH_MANAGER_IP_ADDRESS>`` with your Wazuh server IP address.
-
-For example, the following query would be used to filter Ubuntu endpoints with a version higher than 18.
-
-We encode the value of the parameter ``q`` with the ``--data-urlencode`` flag:
+For example, to filter Ubuntu agents with a version higher than 18, the following query would be used. Remember that the value of the parameter q is being encoded with ``--data-urlencode``:
 
 .. code-block:: console
 
-    # curl -G --data-urlencode "q=os.name=ubuntu;os.version>18" -k -X GET "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/agents?limit=500&pretty=true&select=id,name,os.name,os.version,os.codename,os.major" -H  "Authorization: Bearer $TOKEN"
+    # curl -G --data-urlencode "q=os.name=ubuntu;os.version>18" -k -X GET "https://localhost:55000/agents?limit=500&pretty=true&select=id,name,os.name,os.version,os.codename,os.major" -H  "Authorization: Bearer $TOKEN"
 
 .. code-block:: json
     :class: output
@@ -144,11 +130,11 @@ We encode the value of the parameter ``q`` with the ``--data-urlencode`` flag:
        "error": 0
     }
 
-You can use the same field multiple times for more accurate results. For example, filtering Wazuh agents running on a Ubuntu endpoint with a version higher than 18 but lower than 18.04.4:
+The same field can be used multiple times to get a more accurate result. For example, filtering agents with a version higher than Ubuntu 18 but lower than Ubuntu 18.04.4:
 
 .. code-block:: console
 
-    # curl -G --data-urlencode "q=os.name=ubuntu;os.version>18;os.version<18.04.4" -k -X GET "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/agents?limit=500&pretty=true&select=id,name,os.name,os.version,os.codename,os.major" -H  "Authorization: Bearer $TOKEN"
+    # curl -G --data-urlencode "q=os.name=ubuntu;os.version>18;os.version<18.04.4" -k -X GET "https://localhost:55000/agents?limit=500&pretty=true&select=id,name,os.name,os.version,os.codename,os.major" -H  "Authorization: Bearer $TOKEN"
 
 .. code-block:: json
     :class: output
@@ -185,11 +171,11 @@ You can use the same field multiple times for more accurate results. For example
        "error": 0
     }
 
-An example of using the **or** (``,``) separator and **like as** (``~``) operator can be filtering Wazuh agents whose operating system name contains ``windows`` or ``centos``.
+An example of using the OR (``,``) operator and LIKE AS (``~``) can be filtering agents whose operating system name contains *windows* or *centos*.
 
 .. code-block:: console
 
-    # curl -G --data-urlencode "q=os.name~centos,os.name~windows" -k -X GET "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/agents?limit=500&pretty=true&select=id,name,os.name,os.version,os.codename,os.major" -H  "Authorization: Bearer $TOKEN"
+    # curl -G --data-urlencode "q=os.name~centos,os.name~windows" -k -X GET "https://localhost:55000/agents?limit=500&pretty=true&select=id,name,os.name,os.version,os.codename,os.major" -H  "Authorization: Bearer $TOKEN"
 
 .. code-block:: json
     :class: output
@@ -215,11 +201,11 @@ An example of using the **or** (``,``) separator and **like as** (``~``) operato
        "error": 0
     }
 
-Getting Wazuh agents installed on Ubuntu endpoints with ID greater than 0 and lower than 4, whose name contains the substring ``waz`` and whose major version is 16 or 18:
+Getting the ubuntu agents with id other than 0 and lower than 4, whose name contains the substring ``waz`` and whose major version is 16 or 18, is an example that involves multiple operators at the same time:
 
 .. code-block:: console
 
-    # curl -G --data-urlencode "q=id!=0;id<4;name~waz;(os.major=16,os.major=18)" -k -X GET "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/agents?limit=500&pretty=true&select=id,name,os.name,os.version,os.codename,os.major" -H  "Authorization: Bearer $TOKEN"
+    # curl -G --data-urlencode "q=id!=0;id<4;name~waz;(os.major=16,os.major=18)" -k -X GET "https://localhost:55000/agents?limit=500&pretty=true&select=id,name,os.name,os.version,os.codename,os.major" -H  "Authorization: Bearer $TOKEN"
 
 .. code-block:: json
     :class: output
@@ -266,11 +252,12 @@ Getting Wazuh agents installed on Ubuntu endpoints with ID greater than 0 and lo
        "error": 0
     }
 
-Getting Wazuh agents with an ID higher than ``007`` that run on Windows or whose operating system major version is either 14 or 18:
+Getting agents with an ID higher than ``007`` that run on *Windows* or whose operating system major version is either 14 or 18:
+
 
 .. code-block:: console
 
-    # curl -G --data-urlencode "q=id>007;(os.name~windows,(os.major=14,os.major=18))" -k -X GET "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/agents?limit=500&pretty=true&select=id,name,os.name,os.version,os.codename,os.major" -H  "Authorization: Bearer $TOKEN"
+    # curl -G --data-urlencode "q=id>007;(os.name~windows,(os.major=14,os.major=18))" -k -X GET "https://localhost:55000/agents?limit=500&pretty=true&select=id,name,os.name,os.version,os.codename,os.major" -H  "Authorization: Bearer $TOKEN"
 
 .. code-block:: json
     :class: output
