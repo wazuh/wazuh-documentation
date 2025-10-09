@@ -14,7 +14,6 @@ This guide shows the specifics of operators, values, separators, and the unique 
 
 The WQL expands the search bar functionality to specialized tabs on the Wazuh dashboard. These tabs include the following:
 
--  Security Configuration Assessment
 -  Endpoint summary
 -  MITRE ATT&CK Intelligence
 -  Agent Inventory data
