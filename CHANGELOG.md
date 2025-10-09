@@ -3,7 +3,9 @@ All notable changes to this project will be documented in this file.
 
 ## [v4.10.3]
 
-- Support for Wazuh 4.10.3
+### Changed
+
+- **Post-release**: Updated user manual documentation for Wazuh dashboard. ([#8973](https://github.com/wazuh/wazuh-documentation/pull/8973))
 
 ## [v4.10.2]
 
@@ -45,7 +47,6 @@ All notable changes to this project will be documented in this file.
 - Updated references to the ``wazuh-packages`` repository in commands for building agent packages to reflect the latest repository structure. ([#7995](https://github.com/wazuh/wazuh-documentation/pull/7995))
 - Updated dashboard query configuration screenshots. ([#8027](https://github.com/wazuh/wazuh-documentation/pull/8027))
 - Improved Password management section. ([#8026](https://github.com/wazuh/wazuh-documentation/pull/8026))
-- **Post-release**: Updated user manual documentation for Wazuh dashboard. ([#8973](https://github.com/wazuh/wazuh-documentation/pull/8973))
 
 ### Fixed
 
