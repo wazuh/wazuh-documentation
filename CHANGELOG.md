@@ -27,6 +27,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Added agent restart commands to Agent enrollment methods section. ([#8836](https://github.com/wazuh/wazuh-documentation/pull/8836))
 - **Post-release**: Added Wazuh Docker support for Windows. ([#8852](https://github.com/wazuh/wazuh-documentation/pull/8852))
 - **Post-release**: Added new steps and images to the API Permission section of the *Wazuh Microsoft Graph API* setup documentation. ([#8898](https://github.com/wazuh/wazuh-documentation/pull/8898))
+- **Post-release**: Updated user manual documentation for Wazuh dashboard. ([#8970](https://github.com/wazuh/wazuh-documentation/pull/8970))
 
 ### Changed
 
