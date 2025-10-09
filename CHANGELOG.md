@@ -7,6 +7,10 @@ All notable changes to this project will be documented in this file.
 
 - Updated the API host default value. ([#7933](https://github.com/wazuh/wazuh-documentation/pull/7933))
 
+### Changed
+
+- **Post-release**: Updated user manual documentation for Wazuh dashboard. ([#8974](https://github.com/wazuh/wazuh-documentation/pull/8974))
+
 ## [v4.9.1]
 
 ### Added
@@ -21,7 +25,6 @@ All notable changes to this project will be documented in this file.
 
 - Replaced  Wazuh keystore password insertion commands with a safer method and added a new parameter to the list of available options. ([#7593](https://github.com/wazuh/wazuh-documentation/pull/7593))
 - Restored Wazuh dashboard package revision number. ([#7762](https://github.com/wazuh/wazuh-documentation/pull/7762))
-- **Post-release**: Updated user manual documentation for Wazuh dashboard. ([#8974](https://github.com/wazuh/wazuh-documentation/pull/8974))
 
 ### Fixed
 
