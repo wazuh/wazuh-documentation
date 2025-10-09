@@ -379,35 +379,67 @@ Upgrading the Wazuh manager
 #. Upgrade the Wazuh manager to the latest version:
 
    .. tabs::
-   
+
       .. group-tab:: Yum
-   
+
          .. code-block:: console
-   
+
             # yum upgrade wazuh-manager|WAZUH_MANAGER_RPM_PKG_INSTALL|
-   
+
       .. group-tab:: APT
-   
+
          .. code-block:: console
-   
+
             # apt-get install wazuh-manager|WAZUH_MANAGER_DEB_PKG_INSTALL|
-   
+
    .. warning::
-   
+
       If the ``/var/ossec/etc/ossec.conf`` configuration file was modified, it will not be replaced by the upgrade. You will therefore have to add the settings of the new capabilities manually. More information can be found in the :doc:`/user-manual/index`.
 
 #. Run the following command on the Wazuh manager node(s) to start the Wazuh manager service if you stopped it earlier:
 
    .. include:: /_templates/common/start_manager.rst
 
+Configuring CDB lists
+^^^^^^^^^^^^^^^^^^^^^
+
+When upgrading from Wazuh 4.12.x or earlier, follow these steps to configure the newly added CDB lists.
+
+#. Edit the ``/var/ossec/etc/ossec.conf`` file and update the ``<ruleset>`` block with the CDB lists highlighted below. 
+
+   .. code-block:: xml
+      :emphasize-lines: 9-11
+
+      <ruleset>
+          <!-- Default ruleset -->
+          <decoder_dir>ruleset/decoders</decoder_dir>
+          <rule_dir>ruleset/rules</rule_dir>
+          <rule_exclude>0215-policy_rules.xml</rule_exclude>
+          <list>etc/lists/audit-keys</list>
+          <list>etc/lists/amazon/aws-eventnames</list>
+          <list>etc/lists/security-eventchannel</list>
+          <list>etc/lists/malicious-ioc/malware-hashes</list>
+          <list>etc/lists/malicious-ioc/malicious-ip</list>
+          <list>etc/lists/malicious-ioc/malicious-domains</list>
+          <!-- User-defined ruleset -->
+          <decoder_dir>etc/decoders</decoder_dir>
+          <rule_dir>etc/rules</rule_dir>
+      </ruleset>
+
+#. Restart the Wazuh manager to apply the configuration changes
+
+   .. include:: /_templates/common/restart_manager.rst
+
 .. _configuring_vulnerability_detection:
 
-Configuring vulnerability detection
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Configuring the vulnerability detection and indexer connector
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If upgrading from version 4.8.x or later, skip the vulnerability detection configuration and proceed to :ref:`configuring_filebeat`. No action is needed as the vulnerability detection block is already configured.
+The Wazuh Inventory Harvester and Vulnerability Detection modules rely on the :doc:`indexer connector </user-manual/reference/ossec-conf/indexer>` setting to forward system inventory data and detected vulnerabilities to the Wazuh indexer.
 
-When upgrading from Wazuh version 4.7.x or earlier, follow these steps to configure the vulnerability detection block.
+If upgrading from version 4.8.x or later, skip the vulnerability detection and indexer connector configurations and proceed to :ref:`configuring_filebeat`. No action is needed as the vulnerability detection and indexer connector blocks are already configured.
+
+When upgrading from Wazuh version 4.7.x or earlier, follow these steps to configure the vulnerability detection and indexer connector blocks.
 
 #. Update the configuration file
 
@@ -467,6 +499,10 @@ When upgrading from Wazuh version 4.7.x or earlier, follow these steps to config
       # echo '<INDEXER_PASSWORD>' | /var/ossec/bin/wazuh-keystore -f indexer -k password
 
    If you have forgotten your Wazuh indexer password, refer to the :doc:`password management guide </user-manual/user-administration/password-management>` to reset it.
+
+#. Restart the Wazuh manager to apply the configuration changes
+
+   .. include:: /_templates/common/restart_manager.rst
 
 .. _configuring_filebeat:
 

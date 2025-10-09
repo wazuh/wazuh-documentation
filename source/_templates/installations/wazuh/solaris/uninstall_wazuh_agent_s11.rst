@@ -1,6 +1,6 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
-Run the following command to uninstall the Wazuh agent in Solaris 11.
+Uninstall Wazuh agent from Solaris 11:
 
 .. code-block:: console
 
