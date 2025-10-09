@@ -63,6 +63,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated images and powershell command in **Leveraging LLMs for alert enrichment** PoC. [#8888](https://github.com/wazuh/wazuh-documentation/pull/8888)
 - **Post-release**: Updated RBAC reference to show actual policy names with wildcards. ([#8904](https://github.com/wazuh/wazuh-documentation/pull/8904))
 - **Post-release**: Updated steps in Upgrade Guide for exporting customizations from the Wazuh Dashboard. ([#8929](https://github.com/wazuh/wazuh-documentation/pull/8929))
+- **Post-release**: Updated user manual documentation for Wazuh dashboard. ([#8970](https://github.com/wazuh/wazuh-documentation/pull/8970))
 
 ### Fixed
 
