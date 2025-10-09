@@ -22,6 +22,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated Vulnerability Detection Proof of Concept. ([#8422](https://github.com/wazuh/wazuh-documentation/pull/8422))
 - **Post-release**: Updated images and powershell command in **Leveraging LLMs for alert enrichment** PoC. [#8889](https://github.com/wazuh/wazuh-documentation/pull/8889)
 - **Post-release**: Adjusted the Data analysis documentation. ([#8899](https://github.com/wazuh/wazuh-documentation/pull/8899))
+- **Post-release**: Updated user manual documentation for Wazuh dashboard. ([#8972](https://github.com/wazuh/wazuh-documentation/pull/8972))
 
 ### Fixed
 
