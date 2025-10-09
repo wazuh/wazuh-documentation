@@ -6,6 +6,16 @@
 Configuration
 =============
 
+The Wazuh system inventory requires both Wazuh agent and Wazuh manager configurations to collect, process, and store system inventory data.
+
+.. contents::
+   :local:
+   :depth: 1
+   :backlinks: none
+
+Wazuh agent configuration
+-------------------------
+
 The Syscollector module is enabled by default on all endpoints where the Wazuh agent is installed. You can find the Syscollector configuration in the Wazuh agent configuration file at:
 
 - ``/var/ossec/etc/ossec.conf`` for Linux endpoints.
@@ -63,3 +73,104 @@ In Windows systems, you can use the ``<hotfixes>`` option. Check :ref:`wodle_sys
 .. note::
 
    Restart the agent if you edited the local ``ossec.conf`` file to ensure the changes take effect. If you used centralized configuration, no manual restart is required because the agent reloads automatically after receiving the update.
+
+Wazuh manager configuration
+---------------------------
+
+The Wazuh Inventory Harvester module on the Wazuh manager processes the collected system inventory data and forwards it to the Wazuh indexer using the :doc:`indexer connector </user-manual/reference/ossec-conf/indexer>` setting. The indexer connector setting is enabled by default in the ``/var/ossec/etc/ossec.conf`` file of the Wazuh manager.
+
+The indexer connector may be missing if the Wazuh manager is using an old configuration file or if vulnerability detection was disabled during installation. In such cases,  follow the steps below to add the indexer connector setting.
+
+#. Add the indexer connector configuration block below to the ``/var/ossec/etc/ossec.conf`` file on the Wazuh manager:
+
+   .. code-block:: xml
+
+      <indexer>
+        <enabled>yes</enabled>
+        <hosts>
+          <host>https://0.0.0.0:9200</host>
+        </hosts>
+        <ssl>
+          <certificate_authorities>
+            <ca>/etc/filebeat/certs/root-ca.pem</ca>
+          </certificate_authorities>
+          <certificate>/etc/filebeat/certs/filebeat.pem</certificate>
+          <key>/etc/filebeat/certs/filebeat-key.pem</key>
+        </ssl>
+      </indexer>
+
+   Ensure:
+
+   -  The ``<hosts>`` section contains the IP address or hostname of your Wazuh indexer node. You can find this value in the Filebeat configuration file at ``/etc/filebeat/filebeat.yml``.
+   -  The ``<ca>``, ``<certificate>``, and ``<key>`` names match the files located in ``/etc/filebeat/certs/``.
+
+#. If you are running a Wazuh indexer cluster infrastructure, add a ``<hosts>`` entry for each one of your Wazuh indexer nodes. For example, in a two-node configuration:
+
+   .. code-block:: xml
+
+      <hosts>
+        <host>https://10.0.0.1:9200</host>
+        <host>https://10.0.0.2:9200</host>
+      </hosts>
+
+   The Wazuh server will prioritize reporting to the first Wazuh indexer node in the list and switch to the next available node if the first one becomes unavailable.
+
+#. Save the Wazuh indexer username and password into the Wazuh manager keystore using the :doc:`Wazuh-keystore </user-manual/reference/tools/wazuh-keystore>` tool:
+
+   .. code-block:: console
+
+      # echo '<WAZUH_INDEXER_USERNAME>' | /var/ossec/bin/wazuh-keystore -f indexer -k username
+      # echo '<WAZUH_INDEXER_PASSWORD>' | /var/ossec/bin/wazuh-keystore -f indexer -k password
+
+   If you have forgotten your Wazuh indexer password, refer to the :doc:`password management </user-manual/user-administration/password-management>` guide to reset it.
+
+#. Run the command below to verify the connection to the Wazuh indexer using the curl command from the Wazuh server. Enter the Wazuh indexer password when prompted:
+
+   .. code-block:: console
+
+      # curl --cacert <ROOT_CA> --cert <CERTIFICATE_PEM> --key <CERTIFICATE_KEY> -u <WAZUH_INDEXER_USER> -XGET https://<INDEXER_IP_ADDRESS>:9200/_cluster/health
+
+   Where:
+
+   -  ``<ROOT_CA>``, ``<CERTIFICATE_PEM>``, ``<CERTIFICATE_KEY>``: Certificate paths.
+   -  ``<USER>`` and ``<PASS>``: Admin username of the Wazuh indexer.
+   -  ``<WAZUH_INDEXER_IP_ADDRESS>``: IP address of the Wazuh indexer.
+
+   If this command fails, the vulnerability detector module won't be able to connect to the Wazuh indexer.
+
+   To check if the issue is related to certificates, bypass certificate verification using the -k option. Enter the Wazuh indexer password when prompted:
+
+   .. code-block:: console
+
+      # curl -k -u <WAZUH_INDEXER_USERNAME> -XGET https://<INDEXER_IP_ADDRESS>:9200/_cluster/health
+
+   A successful connection returns a result similar to the following:
+
+   .. code-block:: none
+      :class: output
+
+      {
+          "cluster_name": "opensearch",
+          "status": "green",
+          "timed_out": false,
+          "number_of_nodes": 1,
+          "number_of_data_nodes": 1,
+          "discovered_master": true,
+          "discovered_cluster_manager": true,
+          "active_primary_shards": 9,
+          "active_shards": 9,
+          "relocating_shards": 0,
+          "initializing_shards": 0,
+          "unassigned_shards": 0,
+          "delayed_unassigned_shards": 0,
+          "number_of_pending_tasks": 0,
+          "number_of_in_flight_fetch": 0,
+          "task_max_waiting_in_queue_millis": 0,
+          "active_shards_percent_as_number": 100.0
+      }
+
+#. Restart the Wazuh manager to apply the configuration:
+
+   .. code-block:: console
+
+      # sudo systemctl restart wazuh-manager

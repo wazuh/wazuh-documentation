@@ -1,22 +1,22 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
-Configure the cluster node by editing the following settings in the ``/var/ossec/etc/ossec.conf`` file.
+Configure the cluster node by editing the following settings in the ``/var/ossec/etc/ossec.conf`` file and configure the necessary parameters:
 
 .. code-block:: xml
 
-  <cluster>
-      <name>wazuh</name>
-      <node_name>worker-node</node_name>
-      <node_type>worker</node_type>
-      <key>c98b62a9b6169ac5f67dae55ae4a9088</key>      
-      <port>1516</port>
-      <bind_addr>0.0.0.0</bind_addr>
-      <nodes>
-          <node><WAZUH_MASTER_ADDRESS></node>
-      </nodes>
-      <hidden>no</hidden>
-      <disabled>no</disabled>
-  </cluster>
+   <cluster>
+       <name>wazuh</name>
+       <node_name>worker-node</node_name>
+       <node_type>worker</node_type>
+       <key>c98b62a9b6169ac5f67dae55ae4a9088</key>
+       <port>1516</port>
+       <bind_addr>0.0.0.0</bind_addr>
+       <nodes>
+           <node><WAZUH_MASTER_ADDRESS></node>
+       </nodes>
+       <hidden>no</hidden>
+       <disabled>no</disabled>
+   </cluster>
 
 Parameters to be configured:
 

@@ -1,6 +1,6 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
-#. Install the following packages if missing:
+#. Run the following command to install the following packages if missing:
 
    .. tabs::
 

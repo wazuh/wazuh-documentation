@@ -633,9 +633,9 @@ Run the following commands on the Ubuntu endpoint to download malware samples to
 
 .. code-block:: console
 
-   # curl "https://wazuh-demo.s3-us-west-1.amazonaws.com/mirai" > /home/mirai
-   # curl "https://wazuh-demo.s3-us-west-1.amazonaws.com/xbash" > /home/xbash
-   # curl "https://wazuh-demo.s3-us-west-1.amazonaws.com/webshell" > /home/webshell
+   # curl "https://raw.githubusercontent.com/wazuh/wazuh-documentation/refs/heads/|WAZUH_CURRENT_MINOR|/resources/samples/mirai" > /home/mirai
+   # curl "https://raw.githubusercontent.com/wazuh/wazuh-documentation/refs/heads/|WAZUH_CURRENT_MINOR|/resources/samples/xbash" > /home/xbash
+   # curl "https://raw.githubusercontent.com/wazuh/wazuh-documentation/refs/heads/|WAZUH_CURRENT_MINOR|/resources/samples/webshell" > /home/webshell
 
 You can visualize the alert data in the Wazuh dashboard. To do this, go to the **Modules** > **Security events** tab and add the ``rule.groups:yara`` filter in the search bar to query the alerts.
 
@@ -668,9 +668,9 @@ Run the following commands via PowerShell to download malware samples to the mon
 
 .. code-block:: powershell
 
-   > curl "https://wazuh-demo.s3-us-west-1.amazonaws.com/mirai" -o   $env:USERPROFILE\Downloads\mirai
-   > curl "https://wazuh-demo.s3-us-west-1.amazonaws.com/xbash" -o   $env:USERPROFILE\Downloads\xbash
-   > curl "https://wazuh-demo.s3-us-west-1.amazonaws.com/webshell" -o $env:USERPROFILE\Downloads\webshell
+   > curl "https://raw.githubusercontent.com/wazuh/wazuh-documentation/refs/heads/|WAZUH_CURRENT_MINOR|/resources/samples/mirai" -o   $env:USERPROFILE\Downloads\mirai
+   > curl "https://raw.githubusercontent.com/wazuh/wazuh-documentation/refs/heads/|WAZUH_CURRENT_MINOR|/resources/samples/xbash" -o   $env:USERPROFILE\Downloads\xbash
+   > curl "https://raw.githubusercontent.com/wazuh/wazuh-documentation/refs/heads/|WAZUH_CURRENT_MINOR|/resources/samples/webshell" -o $env:USERPROFILE\Downloads\webshell
 
 You can visualize the alert data in the Wazuh dashboard. To do this, go to the **Security events** module and add the filter in the search bar to query the alerts.
 
