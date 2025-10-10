@@ -7,10 +7,6 @@ All notable changes to this project will be documented in this file.
 
 - Updated the API host default value. ([#7933](https://github.com/wazuh/wazuh-documentation/pull/7933))
 
-### Changed
-
-- **Post-release**: Updated user manual documentation for Wazuh dashboard. ([#8974](https://github.com/wazuh/wazuh-documentation/pull/8974))
-
 ## [v4.9.1]
 
 ### Added
