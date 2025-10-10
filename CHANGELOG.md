@@ -3,9 +3,7 @@ All notable changes to this project will be documented in this file.
 
 ## [v4.10.3]
 
-### Changed
-
-- **Post-release**: Updated user manual documentation for Wazuh dashboard. ([#8973](https://github.com/wazuh/wazuh-documentation/pull/8973))
+- Support for Wazuh 4.10.3
 
 ## [v4.10.2]
 
