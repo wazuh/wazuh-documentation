@@ -495,7 +495,7 @@ Creating a Metric
 Goal
 ~~~~
 
-This refers to the desired target that an individual or organization aims to achieve. It represents a specific purpose and serves as a benchmark for measuring progress and achieving a final goal.
+This refers to the desired target that an individual or organization aims to achieve. It represents a specific purpose and serves as a benchmark for measuring progress and achieving a final goal. Goal visualization helps display progress toward a defined target, often represented as a percentage or count, making it easier to interpret key metrics at a glance.
 
 The steps below show how to create Goals to visualize the :doc:`Security Configuration Assessment </user-manual/capabilities/sec-config-assessment/index>` (SCA) policy status in percentage and counts.
 
@@ -513,7 +513,7 @@ Creating a Goal
    -  ``Aggregation`` = ``Terms``
    -  ``Field`` = ``data.sca.total_checks``
 
-#. Customize the ``Ranges`` to match the range of existing SCA rules in the **Options** section.
+#. Customize the ``Ranges`` to match the range of existing SCA rules in the **Options** section. This ensures the visualization accurately reflects the scale of checks (e.g., from 0 to the maximum number of checks).
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-goal-visualization.png
       :align: center
