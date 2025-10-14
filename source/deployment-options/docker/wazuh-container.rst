@@ -85,8 +85,7 @@ Docker host requirements
 
 You need to configure your Docker host to run Wazuh correctly on any system that uses a Linux kernel. This includes native Linux distributions and Windows with WSL 2 (Windows Subsystem for Linux version 2).
 
-#. Set ``max_map_count`` to ``262144`` on your Docker host.
-   The Wazuh indexer creates many virtual memory areas (VMAs), so the kernel must allow more than the Linux default limit of ``65530``. A VMA is a region of memory that lets applications like the Wazuh indexer access files directly from disk as if they were in RAM.
+#. Set ``max_map_count`` to ``262144`` on your Docker host. The Wazuh indexer creates many virtual memory areas (VMAs), so the kernel must allow more than the Linux default limit of ``65530``. A VMA is a region of memory that lets applications like the Wazuh indexer access files directly from disk as if they were in RAM.
 
    .. note::
 
