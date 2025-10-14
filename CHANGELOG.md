@@ -18,6 +18,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated the URLs of malware samples. ([#8961](https://github.com/wazuh/wazuh-documentation/pull/8961))
 - **Post-release**: Updated the installation guide. ([#8936](https://github.com/wazuh/wazuh-documentation/pull/8936))
 - **Post-release**: Updated user manual documentation for Wazuh dashboard. ([#8967](https://github.com/wazuh/wazuh-documentation/pull/8967))
+- **Post-release**: Updated the prerequisites sub-section in *Deployment on Docker*. ([#8977](https://github.com/wazuh/wazuh-documentation/pull/8977))
 
 ### Fixed
 
