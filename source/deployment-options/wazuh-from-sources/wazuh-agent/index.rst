@@ -1,12 +1,14 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about how to install the Wazuh agent from sources. Wazuh can be installed on all major operating systems, including Linux, Windows, macOS, among others.
+   :description: The following section explains how to install the Wazuh agent from sources across different operating systems.
 
 Installing the Wazuh agent from sources
 =======================================
 
-The Wazuh agent is a single and lightweight monitoring software. It is a multi-platform component that provides visibility into the endpoint’s security by collecting critical system and application records. The following section explains how to install it from sources.
+The Wazuh agent is a lightweight monitoring software. It is a multi-platform component that provides visibility into the endpoint’s security by collecting critical system and application logs/events. The following section explains how to install it from sources across different operating systems.
+
+This section covers installing dependencies, downloading and compiling the source code, running the installation wizard, and uninstalling the Wazuh agent if necessary.
 
 .. warning::
 
