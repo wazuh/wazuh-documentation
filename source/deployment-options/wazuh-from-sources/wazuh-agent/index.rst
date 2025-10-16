@@ -393,143 +393,112 @@ Before compiling Wazuh from sources, you need to install the required build tool
 
          .. tab:: Solaris 11
 
-                #.  Install development tools and build the needed compilers.
+            #. Install pkgutil and update it.
 
-                    #.  Install pkgutil and update it.
+               .. code-block:: console
 
-                        .. code-block:: console
+                  # pkgadd -d http://get.opencsw.org/now
+                  # export PATH="${PATH}:/usr/sfw/bin:/opt/csw/bin:/opt/ccs/bin"
+                  # pkgutil -y -U
 
-                            # pkgadd -d http://get.opencsw.org/now
-                            # export PATH="${PATH}:/usr/sfw/bin:/opt/csw/bin:/opt/ccs/bin"
-                            # pkgutil -y -U
+            #. Install python 2.7.
 
-                    #.  Install python 2.7.
+               .. code-block:: console
 
-                        .. code-block:: console
+                  # /opt/csw/bin/pkgutil -y -i python27
+                  # ln -sf /opt/csw/bin/python2.7 /usr/bin/python
 
-                            # /opt/csw/bin/pkgutil -y -i python27
-                            # ln -sf /opt/csw/bin/python2.7 /usr/bin/python
+            #. Install the following tools:
 
-                    #.  Install the following tools:
+               .. code-block:: console
 
-                        .. code-block:: console
+                  # /opt/csw/bin/pkgutil -y -i git gmake cmake gcc5core gcc5g++
 
-                            # /opt/csw/bin/pkgutil -y -i git gmake cmake gcc5core gcc5g++
+            #. Install a gcc version to include all files needed in the next step:
 
-                    #.  Install a gcc version to include all files needed in the next step:
+               .. code-block:: console
 
-                        .. code-block:: console
+                  # pkg install gcc-45
 
-                            # pkg install gcc-45
+            #. Download and build the gcc/g++ 5.5 compiler:
 
-                    #.  Download and build the gcc/g++ 5.5 compiler:
+               .. code-block:: console
 
-                        .. code-block:: console
+                  # curl -O https://packages.wazuh.com/utils/gcc/gcc-5.5.0.tar.gz && gtar xzf gcc-5.5.0.tar.gz
+                  # ln -sf gcc-5.5.0 gcc
+                  # cd gcc && ./contrib/download_prerequisites
+                  # cd .. && mkdir -p gcc-build && cd gcc-build
+                  # ../gcc/configure --prefix=/usr/local/gcc-5.5.0 --enable-languages=c,c++ --disable-multilib --disable-libsanitizer --disable-bootstrap --with-ld=/usr/ccs/bin/ld --without-gnu-ld --with-gnu-as --with-as=/opt/csw/bin/gas
+                  # gmake
+                  # gmake install
+                  # export PATH=/usr/local/gcc-5.5.0/bin/:/usr/local/bin/:/usr/bin/:/usr/sbin/:$PATH
+                  # export CPLUS_INCLUDE_PATH=/usr/local/gcc-5.5.0/include/c++/5.5.0/
+                  # export LD_LIBRARY_PATH=/usr/local/gcc-5.5.0/lib/
+                  # cd ..
 
-                            # curl -O https://packages.wazuh.com/utils/gcc/gcc-5.5.0.tar.gz && gtar xzf gcc-5.5.0.tar.gz
-                            # ln -sf gcc-5.5.0 gcc
-                            # cd gcc && ./contrib/download_prerequisites
-                            # cd .. && mkdir -p gcc-build && cd gcc-build
-                            # ../gcc/configure --prefix=/usr/local/gcc-5.5.0 --enable-languages=c,c++ --disable-multilib --disable-libsanitizer --disable-bootstrap --with-ld=/usr/ccs/bin/ld --without-gnu-ld --with-gnu-as --with-as=/opt/csw/bin/gas
-                            # gmake
-                            # gmake install
-                            # export PATH=/usr/local/gcc-5.5.0/bin/:/usr/local/bin/:/usr/bin/:/usr/sbin/:$PATH
-                            # export CPLUS_INCLUDE_PATH=/usr/local/gcc-5.5.0/include/c++/5.5.0/
-                            # export LD_LIBRARY_PATH=/usr/local/gcc-5.5.0/lib/
-                            # cd ..
+               .. note::
 
-                        .. note::
+                  The ``gmake`` step will take several minutes to complete. This is normal behavior.
 
-                            The ``gmake`` step will take several minutes to complete. This is normal behavior.
+            #. Install cmake library:
 
-                    #.  Install cmake library:
+               .. code-block:: console
 
-                        .. code-block:: console
+                  # curl -O -L https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && gtar xzf cmake-3.18.3.tar.gz && ln -sf cmake-3.18.3 cmake
+                  # cd cmake && ./bootstrap
+                  # gmake
+                  # gmake install
+                  # cd .. && rm -rf cmake-*
 
-                            # curl -O -L https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && gtar xzf cmake-3.18.3.tar.gz && ln -sf cmake-3.18.3 cmake
-                            # cd cmake && ./bootstrap
-                            # gmake
-                            # gmake install
-                            # cd .. && rm -rf cmake-*
+Installing the Wazuh agent
+--------------------------
 
-                #.  Download the latest version.
+This section walks you through downloading the Wazuh source code, compiling it, and running the installation wizard to set up the Wazuh agent on your system.
 
-                    .. code-block:: console
+.. tabs::
 
-                        # git clone -b v|WAZUH_CURRENT_FROM_SOURCES| https://github.com/wazuh/wazuh.git
+   .. group-tab:: Linux
 
-                    .. note::
+      #. Download and extract the latest version:
 
-                        If you can’t download the file due to an Open SSL error, then you should copy the directory with the scp utility.
+         .. code-block:: console
 
-                #.  Run the ``install.sh`` script. This will run a wizard that will guide you through the installation process using the Wazuh sources:
+            # curl -Ls https://github.com/wazuh/wazuh/archive/v|WAZUH_CURRENT|.tar.gz | tar zx
+            # cd wazuh-|WAZUH_CURRENT|
 
-                    .. code-block:: console
+      #. If you have previously compiled for another platform, you must clean the build using the Makefile in ``src/``:
 
-                        # cd wazuh*
-                        # ./install.sh
+         .. code-block:: console
 
-                    If you have previously compiled for another platform, you must clean the build using the Makefile in ``src``:
+            # make -C src clean
+            # make -C src clean-deps
 
-                    .. code-block:: console
+      #. Build the Wazuh agent with gcc-14 and g++-14, this only applies to distributions with the Pacman package manager:
 
-                        # gmake -C src clean
-                        # gmake -C src clean-deps
+         .. code-block:: console
 
-                    .. note::
+            # cd wazuh-|WAZUH_CURRENT|/src
+            # make TARGET=agent deps
+            # make TARGET=agent CC=gcc-14 CXX=g++-14
+            # cd ..
 
-                        During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``. When choosing a different path than the default, if the directory already exists, the installer will ask to delete the directory or proceed by installing Wazuh inside it. You can also run an :doc:`unattended installation </user-manual/reference/unattended-installation>`.
+      #. Run the ``install.sh`` script. This will run a wizard that will guide you through the installation process using the Wazuh sources:
+
+         .. code-block:: console
+
+            # cd wazuh-|WAZUH_CURRENT|
+            # ./install.sh
 
 
-                #.  The script will ask about what kind of installation you want. Type ``agent`` in order to install a Wazuh agent:
+         .. note::
 
-                    .. code-block:: none
-                        :class: output
+            During the installation, users can decide the installation path. Execute the ``./install.sh`` script and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default installation path is ``/var/ossec``. A commonly used custom path is ``/opt``. When choosing a different path than the default, if the directory already exists, the installer will ask to delete the directory or proceed by installing Wazuh inside it. You can also run an :doc:`unattended installation </user-manual/reference/unattended-installation>`.
 
-                        1- What kind of installation do you want (manager, agent, local, hybrid, or help)? agent
+      #. The script will ask about what kind of installation you want. Type ``agent`` to install a Wazuh agent:
 
-                .. rubric:: Next steps
-                   :class: h2
+         .. code-block:: output
 
-                Now that the agent is installed, the next step is to enroll the agent with the Wazuh server. For more information about this process, please check the :doc:`/user-manual/agent/agent-enrollment/index` section.
+            1- What kind of installation do you want (manager, agent, local, hybrid or help)? agent
 
-                .. raw:: html
+   .. group-tab:: Windows
 
-                    <h3>Uninstall</h3>
-
-                To uninstall the Wazuh agent, set WAZUH_HOME with the current installation path:
-
-                .. code-block:: console
-
-                    # WAZUH_HOME="/WAZUH/INSTALLATION/PATH"
-
-                Stop the service:
-
-                .. code-block:: console
-
-                    # service wazuh-agent stop 2> /dev/null
-
-                Stop the daemon:
-
-                .. code-block:: console
-
-                    # $WAZUH_HOME/bin/wazuh-control stop 2> /dev/null
-
-                Remove the installation folder and all its content:
-
-                .. code-block:: console
-
-                    # rm -rf $WAZUH_HOME
-
-                Delete the service:
-
-                .. code-block:: console
-
-                    # find /etc/{init.d,rc*.d} -name "*wazuh*" | xargs rm -f
-
-                Remove Wazuh user and group:
-
-                .. code-block:: console
-
-                    # userdel wazuh 2> /dev/null
-                    # groupdel wazuh 2> /dev/null
