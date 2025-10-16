@@ -6,14 +6,16 @@
 Virtual Machine (OVA)
 =====================
 
-Wazuh provides a pre-built virtual machine image in Open Virtual Appliance (OVA) format. This can be directly imported to VirtualBox or other OVA compatible virtualization systems. Take into account that this VM only runs on 64-bit systems with x86_64/AMD64 architecture. It does not provide high availability and scalability out of the box. However, these can be implemented by using :doc:`distributed deployment </installation-guide/index>`.
-
-Download the `virtual appliance (OVA) <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_OVA|/vm/wazuh-|WAZUH_CURRENT_OVA|.ova>`_, which includes Amazon Linux 2023 and the Wazuh central components.
+Wazuh provides a pre-built virtual machine image in Open Virtual Appliance (OVA) format.  It includes the Amazon Linux 2023 operating system and the Wazuh central components.
 
 -  Wazuh manager |WAZUH_CURRENT_OVA|
 -  Filebeat-OSS |FILEBEAT_LATEST_OVA|
 -  Wazuh indexer |WAZUH_CURRENT_OVA|
 -  Wazuh dashboard |WAZUH_CURRENT_OVA|
+
+You can import the Wazuh virtual machine image to VirtualBox or other OVA-compatible virtualization systems. This VM runs only on 64-bit systems with x86_64/AMD64 architecture. It does not provide high availability or scalability out of the box. However, you can implement these using :doc:`distributed deployment </installation-guide/index>`.
+
+Download the `virtual appliance (OVA) <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_OVA|/vm/wazuh-|WAZUH_CURRENT_OVA|.ova>`_.
 
 Open Virtual Appliances
 -----------------------
@@ -32,11 +34,11 @@ Hardware requirements
 
 The following requirements have to be in place before the Wazuh VM can be imported into a host operating system:
 
--  The host operating system has to be a 64-bit system with x86_64/AMD64 or AARCH64/ARM64 architecture.
--  Hardware virtualization has to be enabled on the firmware of the host.
--  A virtualization platform, such as VirtualBox, should be installed on the host system.
+-  The host operating system must be 64-bit with x86_64/AMD64 architecture.
+-  Enable hardware virtualization in the host firmware.
+-  Install a virtualization platform, such as VirtualBox, on the host system.
 
-Out of the box, the Wazuh VM is configured with the following specifications:
+The Wazuh VM is configured with these specifications by default:
 
 .. |OVA_COMPONENT| replace:: Wazuh v|WAZUH_CURRENT_OVA| OVA
 
@@ -46,28 +48,30 @@ Out of the box, the Wazuh VM is configured with the following specifications:
 | |OVA_COMPONENT|  |       4        |      8       |     50       |
 +------------------+----------------+--------------+--------------+
 
-However, this hardware configuration can be modified depending on the number of protected endpoints and indexed alert data. More information about requirements can be found :doc:`here </quickstart>`. 
+The hardware configuration can be modified depending on the number of protected endpoints and indexed alert data. For more information about requirements, see :doc:`Quickstart </quickstart>`. 
 
 Import and access the virtual machine
 -------------------------------------
 
-#. Import the OVA to the virtualization platform.
+#. Import the `wazuh-|WAZUH_CURRENT_OVA|.ova <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_OVA|/vm/wazuh-|WAZUH_CURRENT_OVA|.ova>`_ file to your virtualization platform.
 
-#. If you're using VirtualBox, set the ``VMSVGA`` graphic controller. Setting another graphic controller freezes the VM window.
+#. If you use VirtualBox, set the Graphics Controller to ``VMSVGA``. Other controllers can freeze the VM window.
 
-   #. Select the imported VM.
+   #. Select the imported VM
    #. Click **Settings** > **Display**
-   #. In **Graphic controller**, select the ``VMSVGA`` option.
+   #. Switch from **Basic** to **Expert** mode at the top-left of the settings window.
+   #. From the **Graphic controller** dropdown, select the ``VMSVGA`` option.
 
-#. Start the machine.
-#. Access the virtual machine using the following user and password. You can use the virtualization platform or access it via SSH.
+#. Start the VM.
+
+#. Log in using these credentials. You can use the virtualization platform or access it via SSH.
 
    .. code-block:: none
 
       user: wazuh-user
       password: wazuh
 
-   SSH ``root`` user login has been deactivated; nevertheless, the ``wazuh-user`` retains sudo privileges. Root privilege escalation can be achieved by executing the following command:
+   The SSH ``root`` user login is disabled. The ``wazuh-user`` has sudo privileges. To switch to root, execute the following command:
 
    .. code-block:: console
 
@@ -76,16 +80,15 @@ Import and access the virtual machine
 Access the Wazuh dashboard
 --------------------------
 
-Shortly after starting the VM, the Wazuh dashboard can be accessed from the web interface by using the following credentials:
+After starting the VM, access the Wazuh dashboard in a web browser using these credentials:
 
   .. code-block:: none
 
-     URL: https://<wazuh_server_ip>
+     URL: https://<WAZUH_SERVER_IP>
      user: admin
      password: admin
 
-
-You can find ``<wazuh_server_ip>``  by typing the following command in the VM:
+It might take a few seconds to minutes for the Wazuh dashboard to complete initialization. You can find ``<WAZUH_SERVER_IP>`` by typing the following command in the VM:
 
   .. code-block:: none
 
@@ -95,7 +98,7 @@ You can find ``<wazuh_server_ip>``  by typing the following command in the VM:
 Configuration files
 -------------------
 
-All components included in this virtual image are configured to work out-of-the-box, without the need to modify any settings. However, all components can be fully customized. These are the configuration files locations:
+All components in this virtual image are configured to work out of the box. However, all components can be fully customized. These are the configuration file locations:
 
   - Wazuh manager: ``/var/ossec/etc/ossec.conf``
 
@@ -112,10 +115,16 @@ All components included in this virtual image are configured to work out-of-the-
 VirtualBox time configuration
 -----------------------------
 
-In case of using VirtualBox, once the virtual machine is imported it may run into issues caused by time skew when VirtualBox synchronizes the time of the guest machine. To avoid this situation, enable the ``Hardware Clock in UTC Time`` option in the ``System`` tab of the virtual machine configuration.
+If you use VirtualBox, the VM might experience time skew when VirtualBox synchronizes the guest machine time. Follow the steps below to avoid this:
+
+#. Select the imported Wazuh VM 
+#. Click on **Settings** > **System**.
+#. Switch from **Basic** to **Expert** mode at the top-left of the settings window.
+#. Click on the **Motherboard** sub-tab.
+#. Enable the ``Hardware Clock in UTC Time`` option under **Features**.
 
 .. note::
-  By default, the network interface type is set to Bridged Adapter. The VM will attempt to obtain an IP address from the network DHCP server. Alternatively, a static IP address can be set by configuring the appropriate network files in the Amazon Linux operating system on which the VM is based.
+   By default, the network interface type is set to **Bridged Adapter**. The VM attempts to obtain an IP address from the network DHCP server. Alternatively, you can set a static IP address by configuring the network files in Amazon Linux.
 
 
 Once the virtual machine is imported and running, the next step is to :doc:`deploy the Wazuh agents </installation-guide/wazuh-agent/index>` on the systems to be monitored.
@@ -132,11 +141,11 @@ VM fails to start on AMD processors with VMware
 
    .. code-block:: none
 
-      The CPU has been disabled by the guest operating system. Power off or reset the virtual machine.
+      The guest operating system has disabled the CPU. Power off or reset the virtual machine.
 
 **Workaround**:
 
-#. Locate and edit the VM’s ``.vmx`` file after importing the OVA.
+#. Locate and edit the VM's ``.vmx`` file after importing the OVA.
 #. Add the following lines to the end of the file to resolve compatibility issues between the VM and AMD processors.
 
    .. code-block:: ini
