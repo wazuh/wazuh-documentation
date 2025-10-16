@@ -249,7 +249,7 @@ Setting a new hash
              backend_roles:
              - "admin"
              description: "Demo admin user"
- 
+
          ...
 
    -  ``kibanaserver`` user
@@ -262,7 +262,7 @@ Setting a new hash
              hash: "$2a$12$4AcgAt3xwOWadA5s5blL6ev39OXDNhmOesEoo33eZtrq2N0YrU3H."
              reserved: true
              description: "Demo kibanaserver user"
- 
+
          ...
 
 Setting the new password
@@ -274,8 +274,8 @@ Setting the new password
 
 #. Encode your new password in base64 format. Avoid inserting a trailing newline character to maintain the hash value. For example, use the ``-n`` option with the ``echo`` command as follows.
 
-   .. code-block::
-      
+   .. code-block:: console
+
       # echo -n "NewPassword" | base64
 
 #. Edit the indexer or dashbboard secrets configuration file as follows. Replace the value of the ``password`` field with your new encoded password.
@@ -349,6 +349,12 @@ Applying the changes
 
       $ bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -cd /usr/share/wazuh-indexer/opensearch-security/ -nhnv -cacert  $CACERT -cert $CERT -key $KEY -p 9200 -icl -h $NODE_NAME
 
+#. Force the Wazuh dashboard deployment rollout to update the component credentials.
+
+   .. code-block:: console
+
+      $ kubectl rollout restart deploy/wazuh-dashboard -n wazuh
+
 #. Delete all Wazuh manager pods to update the component credentials.
 
    .. code-block:: console
@@ -368,8 +374,8 @@ The ``wazuh-wui`` user is the user to connect with the Wazuh API by default. Fol
 
 #. Encode your new password in base64 format. Avoid inserting a trailing newline character to maintain the hash value. For example, use the ``-n`` option with the ``echo`` command as follows.
 
-   .. code-block::
-      
+   .. code-block:: console
+
       # echo -n "NewPassword" | base64
 
 #. Edit the ``wazuh/secrets/wazuh-api-cred-secret.yaml`` file and replace the value of the ``password`` field.
