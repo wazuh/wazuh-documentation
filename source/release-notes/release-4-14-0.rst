@@ -72,8 +72,15 @@ Other
 Wazuh dashboard
 ^^^^^^^^^^^^^^^
 
-- `#843 <https://github.com/wazuh/wazuh-dashboard/pull/843>`__ Added Anomaly Detection plugins to the default installation. `#905 <https://github.com/wazuh/wazuh-dashboard/pull/905>`__ `#909 <https://github.com/wazuh/wazuh-dashboard/pull/909>`__ `#913 <https://github.com/wazuh/wazuh-dashboard/pull/913>`__
-- `#919 <https://github.com/wazuh/wazuh-dashboard/pull/919>`__ Added a directive to the dashboard service to automatically restart it on crash.
+-  `#7777 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7777>`__ Added visualizations field validations when creating ``wazuh-states`` index patterns.
+-  `#7554 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7554>`__ `#7587 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7587>`__ `#7792 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7792>`__ `#7787 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7787>`__ Created **Users & Groups** inventories.
+-  `#7586 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7586>`__ Added the ability to set the Wazuh data path (``wazuh`` directory) within the directory defined through the ``path.data`` setting.
+-  `#7641 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7641>`__ `#7696 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7696>`__ `#7729 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7729>`__ `#7774 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7774>`__ `#7785 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7785>`__ Added a new **Browser Extensions** tab in **IT Hygiene**.
+-  `#7516 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7516>`__ `#7644 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7644>`__ `#7661 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7661>`__ Added Microsoft Graph API module.
+-  `#7646 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7646>`__ `#7695 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7695>`__ `#7729 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7729>`__ `#7773 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7773>`__ `#7790 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7790>`__ Added a new **Services** tab in **IT Hygiene**.
+-  `#7711 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7711>`__ Added a final step in the **Deploy new agent** section to navigate back to the agent list.
+-  `#7712 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7712>`__ Updated OS logos.
+-  `#7742 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7742>`__ Changed the **Services** tab label to **Listeners** in **IT Hygiene** > **Networks**.
 
 Resolved issues
 ---------------
@@ -122,6 +129,16 @@ Ruleset
 - `#32102 <https://github.com/wazuh/wazuh/pull/32102>`__ Fixed Windows SCA user account checks.
 - `#32106 <https://github.com/wazuh/wazuh/pull/32106>`__ Fixed inaccuracies in Ubuntu 24.04 SCA policy.
 - `#32143 <https://github.com/wazuh/wazuh/pull/32143>`__ Fixed incorrect service name in Ubuntu firewall service check.
+
+Wazuh dashboard
+^^^^^^^^^^^^^^^
+
+-  `#7811 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7811>`__ Fixed missing scan settings in **Inventory Data**.
+-  `#7796 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7796>`__ Fixed the **Endpoint summary** to correctly display outdated agents without filters, resolving previous inconsistencies.
+-  `#7596 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7596>`__ Fixed missing ``provider`` and ``queue_size`` fields in whodata configuration.
+-  `#7630 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7630>`__ Fixed an error that caused PDF report tables to overflow the page width.
+-  `#7611 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/7611>`__ Fixed ``TypeError`` when changing API host ID in ``wazuh.yml`` configuration.
+-  `#7669 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/7669>`__ Fixed behavior and appearance alignment with OpenSearch (Wazuh Indexer) **Dev Tools**.
 
 Changelogs
 ----------
