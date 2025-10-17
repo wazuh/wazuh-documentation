@@ -6,7 +6,7 @@
 Upgrading Wazuh Docker
 ======================
 
-This section describes how to upgrade Wazuh Docker deployments starting from version 4.3.
+This section describes how to upgrade different versions of Wazuh Docker deployments.
 
 To upgrade to version |WAZUH_CURRENT_DOCKER|, choose one of the following strategies.
 
@@ -98,12 +98,18 @@ Single-node stack
 
    .. tabs::
 
-      .. group-tab:: Upgrading from 4.3-4.12
+      .. group-tab:: Upgrading from 4.3 and earlier
 
          **Wazuh dashboard**
 
-         #. Edit the ``single-node/config/wazuh_dashboard/opensearch_dashboards.yml`` file and replace ``/usr/share/wazuh-dashboard/config/certs/`` with ``/usr/share/wazuh-dashboard/certs/``.
-         #. Edit the ``single-node/docker-compose.yml`` file and replace ``/usr/share/wazuh-dashboard/config/certs/ with /usr/share/wazuh-dashboard/certs/``.
+          #. Edit ``single-node/config/wazuh_dashboard/opensearch_dashboards.yml`` and do the following replacements.
+          
+            -  Replace ``/usr/share/wazuh-dashboard/config/certs/`` with ``/usr/share/wazuh-dashboard/certs/``.
+             
+          #. Edit ``single-node/docker-compose.yml`` and do the following replacements.
+          
+            -  Replace ``/usr/share/wazuh-dashboard/config/certs/`` with ``/usr/share/wazuh-dashboard/certs/``.
+
 
          **Wazuh indexer**
 
@@ -117,12 +123,17 @@ Single-node stack
             -  Replace ``/usr/share/wazuh-indexer/config/opensearch.yml`` with ``/usr/share/wazuh-indexer/opensearch.yml``.
             -  Replace ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/`` with ``/usr/share/wazuh-indexer/opensearch-security/``.
 
-      .. group-tab:: Upgrading from 4.13
+      .. group-tab:: Upgrading from 4.4–4.13
 
          **Wazuh dashboard**
 
-         #. Edit the ``single-node/config/wazuh_dashboard/opensearch_dashboards.yml`` file and replace ``/usr/share/wazuh-dashboard/config/certs/`` with ``/usr/share/wazuh-dashboard/certs/``.
-         #. Edit the ``single-node/docker-compose.yml`` file and replace ``/usr/share/wazuh-dashboard/config/certs/ with /usr/share/wazuh-dashboard/certs/``.
+          #. Edit ``single-node/config/wazuh_dashboard/opensearch_dashboards.yml`` and do the following replacements.
+          
+            -  Replace ``/usr/share/wazuh-dashboard/config/certs/`` with ``/usr/share/wazuh-dashboard/certs/``.
+             
+          #. Edit ``single-node/docker-compose.yml`` and do the following replacements.
+          
+            -  Replace ``/usr/share/wazuh-dashboard/config/certs/`` with ``/usr/share/wazuh-dashboard/certs/``.
 
          **Wazuh indexer**
 
