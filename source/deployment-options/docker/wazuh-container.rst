@@ -80,12 +80,16 @@ Required software
 
 -  **Git**: For cloning the Wazuh Docker repository.
 
-Linux/Unix host requirements
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Docker host requirements
+^^^^^^^^^^^^^^^^^^^^^^^^
 
-Additional configuration is required to ensure proper functionality when running Wazuh Docker on a Linux/Unix operating system.
+You need to configure your Docker host to run Wazuh correctly on any system that uses a Linux kernel. This includes native Linux distributions and Windows with WSL 2 (Windows Subsystem for Linux version 2).
 
-#. Run the following command to set the ``max_map_count`` on your Docker host to ``262144``. The Wazuh indexer creates a large number of virtual memory-mapped areas (VMAs), so the kernel must be configured above the Linux default limit of ``65530``. A VMA is a region of memory that the kernel reserves to let applications like the Wazuh indexer access files directly from disk as if they were in RAM.
+#. Set ``max_map_count`` to ``262144`` on your Docker host. The Wazuh indexer creates many virtual memory areas (VMAs), so the kernel must allow more than the Linux default limit of ``65530``. A VMA is a region of memory that lets applications like the Wazuh indexer access files directly from disk as if they were in RAM.
+
+   .. note::
+
+      On Windows systems using WSL 2, run this command within the WSL 2 environment.
 
    .. code-block:: console
 
@@ -93,15 +97,15 @@ Additional configuration is required to ensure proper functionality when running
 
    .. warning::
 
-      This configuration allows more files and index segments to be mapped to memory simultaneously without errors or crashes. If you don't set a minimum value of at least ``262144`` for ``max_map_count`` on your Linux host, the Wazuh indexer will not work correctly.
+      If you don’t set ``vm.max_map_count`` to at least ``262144``, the Wazuh indexer might fail due to limited virtual memory mapping. This value lets the indexer map more files and index segments to memory, preventing errors or crashes.
 
-#. If you want to use Docker as a non-root user, you should add your user to the ``docker`` group using the following command:
+#. On native Linux systems, add your user to the ``docker`` group if you want to run Docker without root privileges:
 
    .. code-block:: console
 
       # usermod -aG docker <USER>
 
-   Replace ``<USER>`` with your username.  Log out and back in for changes to take effect.
+   Replace ``<USER>`` with your username. Log out and back in for the change to take effect.
 
 Exposed ports
 -------------
