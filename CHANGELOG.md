@@ -19,7 +19,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated the installation guide. ([#8936](https://github.com/wazuh/wazuh-documentation/pull/8936))
 - **Post-release**: Updated user manual documentation for Wazuh dashboard. ([#8967](https://github.com/wazuh/wazuh-documentation/pull/8967))
 - **Post-release**: Updated the prerequisites sub-section in *Deployment on Docker*. ([#8977](https://github.com/wazuh/wazuh-documentation/pull/8977))
-- **Post-release**: Updated the Virtual Machine (VMI) documentation. ([#8981](https://github.com/wazuh/wazuh-documentation/pull/8981))
+- **Post-release**: Updated the Virtual Machine (VM) documentation. ([#8981](https://github.com/wazuh/wazuh-documentation/pull/8981))
 
 ### Fixed
 
