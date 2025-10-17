@@ -3,8 +3,8 @@
 .. meta::
    :description: The pre-built Wazuh Virtual Machine includes all Wazuh components ready-to-use. Test all Wazuh capabilities with our OVA.  
 
-Virtual Machine (OVA)
-=====================
+Virtual machine (VM)
+====================
 
 Wazuh provides a pre-built virtual machine image in Open Virtual Appliance (OVA) format.  It includes the Amazon Linux 2023 operating system and the Wazuh central components.
 
@@ -15,16 +15,13 @@ Wazuh provides a pre-built virtual machine image in Open Virtual Appliance (OVA)
 
 You can import the Wazuh virtual machine image to VirtualBox or other OVA-compatible virtualization systems. This VM runs only on 64-bit systems with x86_64/AMD64 architecture. It does not provide high availability or scalability out of the box. However, you can implement these using :doc:`distributed deployment </installation-guide/index>`.
 
-Download the `virtual appliance (OVA) <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_OVA|/vm/wazuh-|WAZUH_CURRENT_OVA|.ova>`_.
-
-Open Virtual Appliances
------------------------
+Download the `virtual appliance (OVA) <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_OVA|/vm/wazuh-|WAZUH_CURRENT_OVA|.ova>`__.
 
 .. |VM_AL_64_OVA| replace:: `wazuh-|WAZUH_CURRENT_OVA|.ova <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_OVA|/vm/wazuh-|WAZUH_CURRENT_OVA|.ova>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_OVA|/checksums/wazuh/|WAZUH_CURRENT_OVA|/wazuh-|WAZUH_CURRENT_OVA|.ova.sha512>`__)
 .. |WAZUH_OVA_VERSION| replace:: |WAZUH_CURRENT_OVA|
 
 +-------------------+-----------------------------------+--------------+----------------------+-----------------+
-|  Distribution     | Architecture                      | VM Format    | Version              | Package         |
+|  OS               | Architecture                      | VM Format    | Version              | Package         |
 +===================+===================================+==============+======================+=================+
 | Amazon Linux 2023 | 64-bit x86_64/AMD64 architecture  |      OVA     | |WAZUH_OVA_VERSION|  | |VM_AL_64_OVA|  |
 +-------------------+-----------------------------------+--------------+----------------------+-----------------+
@@ -145,7 +142,7 @@ VM fails to start on AMD processors with VMware
 
 **Workaround**:
 
-#. Locate and edit the VM's ``.vmx`` file after importing the OVA.
+#. Locate and edit the VM ``.vmx`` file after importing the OVA.
 #. Add the following lines to the end of the file to resolve compatibility issues between the VM and AMD processors.
 
    .. code-block:: ini
