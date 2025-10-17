@@ -15,7 +15,7 @@ Our Kubernetes deployment uses our Wazuh images from Docker. If we look at the f
 
 .. tabs::
 
-   .. group-tab:: 4.3-4.12
+   .. group-tab:: 4.3 and earlier
 
       .. code-block:: none
           
@@ -37,7 +37,7 @@ Our Kubernetes deployment uses our Wazuh images from Docker. If we look at the f
           /usr/share/wazuh-indexer/opensearch.yml
           /usr/share/wazuh-indexer/opensearch-security/internal_users.yml
 
-   .. group-tab:: 4.13 and above
+   .. group-tab:: 4.4 - 4.13
 
       .. code-block:: none
           

@@ -123,7 +123,7 @@ Single-node stack
             -  Replace ``/usr/share/wazuh-indexer/config/opensearch.yml`` with ``/usr/share/wazuh-indexer/opensearch.yml``.
             -  Replace ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/`` with ``/usr/share/wazuh-indexer/opensearch-security/``.
 
-      .. group-tab:: Upgrading from 4.4–4.13
+      .. group-tab:: Upgrading from 4.4 – 4.13
 
          **Wazuh dashboard**
 
@@ -227,7 +227,7 @@ Multi-node stack
 
    .. tabs::
 
-      .. group-tab:: Upgrading from 4.3-4.12
+      .. group-tab:: Upgrading from 4.3 and earlier
 
          **Wazuh dashboard**
 
@@ -247,7 +247,7 @@ Multi-node stack
             -  Replace ``/usr/share/wazuh-indexer/config/opensearch.yml`` with ``/usr/share/wazuh-indexer/opensearch.yml``.
             -  Replace ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/`` with ``/usr/share/wazuh-indexer/opensearch-security/``.
 
-      .. group-tab:: Upgrading from 4.13
+      .. group-tab:: Upgrading from 4.4 - 4.13
 
          **Wazuh dashboard**
 

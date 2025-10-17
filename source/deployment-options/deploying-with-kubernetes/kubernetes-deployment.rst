@@ -337,7 +337,7 @@ Applying the changes
 
    .. tabs::
 
-      .. group-tab:: 4.3-4.12
+      .. group-tab:: 4.3 and earlier
 
          .. code-block:: console
 
@@ -347,7 +347,7 @@ Applying the changes
             CERT=$INSTALLATION_DIR/certs/admin.pem
             export JAVA_HOME=/usr/share/wazuh-indexer/jdk
 
-      .. group-tab:: 4.13 and above
+      .. group-tab:: 4.4 - 4.13
 
          .. code-block:: console
 
@@ -362,13 +362,13 @@ Applying the changes
 
    .. tabs::
 
-      .. group-tab:: 4.3-4.12
+      .. group-tab:: 4.3 and earlier
 
          .. code-block:: console
 
             $ bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -cd /usr/share/wazuh-indexer/opensearch-security/ -nhnv -cacert  $CACERT -cert $CERT -key $KEY -p 9200 -icl -h $NODE_NAME
 
-      .. group-tab:: 4.13 and above
+      .. group-tab:: 4.4 - 4.13
 
          .. code-block:: console
 
