@@ -230,9 +230,13 @@ Multi-node stack
       .. group-tab:: Upgrading from 4.3 and earlier
 
          **Wazuh dashboard**
-
-         #. Edit the ``multi-node/config/wazuh_dashboard/opensearch_dashboards.yml`` file and replace ``/usr/share/wazuh-dashboard/config/certs/`` with ``/usr/share/wazuh-dashboard/certs/``.
-         #. Edit the ``multi-node/docker-compose.yml`` file and replace ``/usr/share/wazuh-dashboard/config/certs/`` with ``/usr/share/wazuh-dashboard/certs/``.
+          #. Edit ``multi-node/config/wazuh_dashboard/opensearch_dashboards.yml`` and do the following replacements.
+          
+            -  Replace ``/usr/share/wazuh-dashboard/config/certs/`` with ``/usr/share/wazuh-dashboard/certs/``.
+             
+          #. Edit ``multi-node/docker-compose.yml`` and do the following replacements.
+          
+            -  Replace ``/usr/share/wazuh-dashboard/config/certs/`` with ``/usr/share/wazuh-dashboard/certs/``.
 
          **Wazuh indexer**
 
@@ -251,9 +255,14 @@ Multi-node stack
 
          **Wazuh dashboard**
 
-         #. Edit the ``multi-node/config/wazuh_dashboard/opensearch_dashboards.yml`` file and replace ``/usr/share/wazuh-dashboard/config/certs/`` with ``/usr/share/wazuh-dashboard/certs/``.
-         #. Edit the ``multi-node/docker-compose.yml`` file and replace ``/usr/share/wazuh-dashboard/config/certs/`` with ``/usr/share/wazuh-dashboard/certs/``.
-
+          #. Edit ``multi-node/config/wazuh_dashboard/opensearch_dashboards.yml`` and do the following replacements.
+          
+            -  Replace ``/usr/share/wazuh-dashboard/config/certs/`` with ``/usr/share/wazuh-dashboard/certs/``.
+             
+          #. Edit ``multi-node/docker-compose.yml`` and do the following replacements.
+          
+            -  Replace ``/usr/share/wazuh-dashboard/config/certs/`` with ``/usr/share/wazuh-dashboard/certs/``.
+            
          **Wazuh indexer**
 
          #. Edit the ``multi-node/config/wazuh_indexer/wazuh1.indexer.yml``, ``multi-node/config/wazuh_indexer/wazuh2.indexer.yml``, and ``multi-node/config/wazuh_indexer/wazuh3.indexer.yml`` files and do the following replacements.
