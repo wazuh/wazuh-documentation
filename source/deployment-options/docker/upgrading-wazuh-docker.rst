@@ -119,8 +119,6 @@ Single-node stack
 
          #. Edit the ``single-node/docker-compose.yml`` file and do the following replacements.
 
-            -  Replace ``/usr/share/wazuh-indexer/config/certs/`` with ``/usr/share/wazuh-indexer/certs/``.
-            -  Replace ``/usr/share/wazuh-indexer/config/opensearch.yml`` with ``/usr/share/wazuh-indexer/opensearch.yml``.
             -  Replace ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/`` with ``/usr/share/wazuh-indexer/opensearch-security/``.
 
       .. group-tab:: Upgrading from 4.4 – 4.13
