@@ -25,7 +25,7 @@ custom_replacements = {
     #
     # === Environment
     "|PYTHON_CLOUD_CONTAINERS_MIN|": "3.8",
-    "|PYTHON_CLOUD_CONTAINERS_MAX|": "3.12",
+    "|PYTHON_CLOUD_CONTAINERS_MAX|": "3.13",
     "|WAZUH_DASHBOARD_YARN_VERSION|": "1.22.22",
     #
     # === Global and Wazuh version (wazuh agent, manager, indexer, and dashboard)
