@@ -106,7 +106,7 @@ Single-node stack
           
             -  Replace ``/usr/share/wazuh-dashboard/config/certs/`` with ``/usr/share/wazuh-dashboard/certs/``.
              
-          #. Edit ``single-node/docker-compose.yml`` and do the following replacements.
+         #. Edit ``single-node/docker-compose.yml`` and do the following replacements.
           
             -  Replace ``/usr/share/wazuh-dashboard/config/certs/`` with ``/usr/share/wazuh-dashboard/certs/``.
 
