@@ -914,3 +914,118 @@ Uninstall
             # dscl . -delete "/Groups/wazuh" > /dev/null 2>&1
 
    .. group-tab:: AIX
+
+      #. To uninstall the Wazuh agent, set ``WAZUH_HOME`` to the current installation path:
+
+         .. code-block:: console
+
+            # WAZUH_HOME="/WAZUH/INSTALLATION/PATH"
+
+      #. Stop the service:
+
+         .. code-block:: console
+
+            # service wazuh-agent stop 2> /dev/null
+
+      #. Stop the daemon:
+
+         .. code-block:: console
+
+            # $WAZUH_HOME/bin/wazuh-control stop 2> /dev/null
+
+      #. Remove the installation folder and all its content:
+
+         .. code-block:: console
+
+            # rm -rf $WAZUH_HOME
+
+      #. Delete the service:
+
+         .. code-block:: console
+
+            # find /etc/rc.d -name "*wazuh*" | xargs rm -f
+
+      #. Remove Wazuh user and group:
+
+         .. code-block:: console
+
+            # userdel wazuh 2> /dev/null
+            # groupdel wazuh 2> /dev/null
+
+   .. group-tab:: HP-UX
+
+      #. To uninstall the Wazuh agent, set ``WAZUH_HOME`` to the current installation path:
+
+         .. code-block:: console
+
+            # WAZUH_HOME="/WAZUH/INSTALLATION/PATH"
+
+      #. Stop the service:
+
+         .. code-block:: console
+
+            # service wazuh-agent stop 2> /dev/null
+
+      #. Stop the daemon:
+
+         .. code-block:: console
+
+            # $WAZUH_HOME/bin/wazuh-control stop 2> /dev/null
+
+      #. Remove the installation folder and all its content:
+
+         .. code-block:: console
+
+            # rm -rf $WAZUH_HOME
+
+      #. Delete the service:
+
+         .. code-block:: console
+
+            # find /sbin/{init.d,rc*.d} -name "*wazuh*" | xargs rm -f
+
+      #. Remove the Wazuh user and group
+
+         .. code-block:: console
+
+            # userdel wazuh 2> /dev/null
+            # groupdel wazuh 2> /dev/null
+
+   .. group-tab:: Solaris
+
+      #. To uninstall the Wazuh agent, set ``WAZUH_HOME`` to the current installation path:
+
+         .. code-block:: console
+
+            # WAZUH_HOME="/WAZUH/INSTALLATION/PATH"
+
+      #. Stop the service:
+
+         .. code-block:: console
+
+            # service wazuh-agent stop 2> /dev/null
+
+      #. Stop the daemon:
+
+         .. code-block:: console
+
+            # $WAZUH_HOME/bin/wazuh-control stop 2> /dev/null
+
+      #. Remove the installation folder and all its content:
+
+         .. code-block:: console
+
+            # rm -rf $WAZUH_HOME
+
+      #. Delete the service:
+
+         .. code-block:: console
+
+            # find /etc/{init.d,rc*.d} -name "*wazuh*" | xargs rm -f
+
+      #. Remove Wazuh user and group:
+
+         .. code-block:: console
+
+            # userdel wazuh 2> /dev/null
+            # groupdel wazuh 2> /dev/null
