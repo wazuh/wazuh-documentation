@@ -77,7 +77,7 @@ You need the libraries in the command below to set up your Wazuh agent endpoint 
 
          .. code-block:: console
 
-            # pip3 install --break-system-packages azure-storage-blob==12.20.0 azure-storage-common==2.1.0 azure-common==1.1.25 cryptography==3.3.2 cffi==1.14.4 pycparser==2.20 six==1.16.0 python-dateutil==2.9.0.post0 requests==2.25.1 certifi==2022.12.07 chardet==3.0.4 idna==2.9 urllib3==1.26.18 SQLAlchemy==2.0.44 pytz==2020.1`
+            # pip3 install --break-system-packages azure-storage-blob==12.20.0 azure-storage-common==2.1.0 azure-common==1.1.25 cryptography==3.3.2 cffi==1.14.4 pycparser==2.20 six==1.16.0 python-dateutil==2.9.0.post0 requests==2.25.1 certifi==2022.12.07 chardet==3.0.4 idna==2.9 urllib3==1.26.18 SQLAlchemy==2.0.44 pytz==2020.1
 
       .. note::
 
