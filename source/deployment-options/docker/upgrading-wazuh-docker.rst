@@ -136,7 +136,6 @@ Single-node stack
             -  Replace ``/usr/share/wazuh-indexer/certs/`` with ``/usr/share/wazuh-indexer/config/certs/``.
             -  Replace ``/usr/share/wazuh-indexer/opensearch.yml`` with ``/usr/share/wazuh-indexer/config/opensearch.yml``.
             -  Replace ``/usr/share/wazuh-indexer/opensearch-security/internal_users.yml`` with ``/usr/share/wazuh-indexer/config/opensearch-security/internal_users.yml``.
-            -  Replace ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/`` with ``/usr/share/wazuh-indexer/opensearch-security/``.
 
 #. Edit the ``docker-compose.yml`` file and update the highlighted lines to the latest images.
 
