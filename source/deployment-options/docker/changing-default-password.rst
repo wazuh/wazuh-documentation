@@ -222,8 +222,8 @@ After updating ``docker-compose.yml`` file, restart the Wazuh Docker stack and r
 
          .. code-block:: console
 
-            $ HOST=$(grep node.name $INSTALLATION_DIR/opensearch.yml | awk '{printf $2}')
-            $ bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -cd /usr/share/wazuh-indexer/opensearch-security/ -nhnv -cacert  $CACERT -cert $CERT -key $KEY -p 9200 -icl -h $HOST
+            $ HOST=$(grep node.name $INSTALLATION_DIR/config/opensearch.yml | awk '{printf $2}')
+            $ bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -cd $CONFIG_DIR/opensearch-security/ -nhnv -cacert  $CACERT -cert $CERT -key $KEY -p 9200 -icl -h $HOST
 
          .. note::
 

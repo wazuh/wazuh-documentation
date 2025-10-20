@@ -13,51 +13,23 @@ Checking which files are exported to the volume
 
 Our Kubernetes deployment uses our Wazuh images from Docker. If we look at the following code extracted from the Wazuh configuration using Docker, we can see which directories and files are used in the upgrade.
 
-.. tabs::
-
-   .. group-tab:: 4.3 and earlier
-
-      .. code-block:: none
-          
-          /var/ossec/api/configuration
-          /var/ossec/etc
-          /var/ossec/logs
-          /var/ossec/queue
-          /var/ossec/var/multigroups
-          /var/ossec/integrations
-          /var/ossec/active-response/bin
-          /var/ossec/agentless
-          /var/ossec/wodles
-          /etc/filebeat
-          /var/lib/filebeat
-          /usr/share/wazuh-dashboard/config/
-          /usr/share/wazuh-dashboard/certs/
-          /var/lib/wazuh-indexer
-          /usr/share/wazuh-indexer/certs/
-          /usr/share/wazuh-indexer/opensearch.yml
-          /usr/share/wazuh-indexer/opensearch-security/internal_users.yml
-
-   .. group-tab:: 4.4 - 4.13
-
-      .. code-block:: none
-          
-          /var/ossec/api/configuration
-          /var/ossec/etc
-          /var/ossec/logs
-          /var/ossec/queue
-          /var/ossec/var/multigroups
-          /var/ossec/integrations
-          /var/ossec/active-response/bin
-          /var/ossec/agentless
-          /var/ossec/wodles
-          /etc/filebeat
-          /var/lib/filebeat
-          /usr/share/wazuh-dashboard/config/
-          /usr/share/wazuh-dashboard/certs/
-          /var/lib/wazuh-indexer
-          /usr/share/wazuh-indexer/config/certs/
-          /usr/share/wazuh-indexer/config/opensearch.yml
-          /usr/share/wazuh-indexer/config/opensearch-security/internal_users.yml
+   /var/ossec/api/configuration
+   /var/ossec/etc
+   /var/ossec/logs
+   /var/ossec/queue
+   /var/ossec/var/multigroups
+   /var/ossec/integrations
+   /var/ossec/active-response/bin
+   /var/ossec/agentless
+   /var/ossec/wodles
+   /etc/filebeat
+   /var/lib/filebeat
+   /usr/share/wazuh-dashboard/config/
+   /usr/share/wazuh-dashboard/certs/
+   /var/lib/wazuh-indexer
+   /usr/share/wazuh-indexer/config/certs/
+   /usr/share/wazuh-indexer/config/opensearch.yml
+   /usr/share/wazuh-indexer/config/opensearch-security/internal_users.yml
 
 Any modification related to these files will also be made in the associated volume. When the replica pod is created, it will get those files from the volume, keeping the previous changes.
 
