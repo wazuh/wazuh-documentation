@@ -125,16 +125,6 @@ Single-node stack
 
       .. group-tab:: Upgrading from 4.4 – 4.13
 
-         **Wazuh dashboard**
-
-          #. Edit ``single-node/config/wazuh_dashboard/opensearch_dashboards.yml`` and do the following replacements.
-          
-            -  Replace ``/usr/share/wazuh-dashboard/config/certs/`` with ``/usr/share/wazuh-dashboard/certs/``.
-             
-          #. Edit ``single-node/docker-compose.yml`` and do the following replacements.
-          
-            -  Replace ``/usr/share/wazuh-dashboard/config/certs/`` with ``/usr/share/wazuh-dashboard/certs/``.
-
          **Wazuh indexer**
 
          #. Edit the ``single-node/config/wazuh_indexer/wazuh.indexer.yml`` file and do the following replacements.
