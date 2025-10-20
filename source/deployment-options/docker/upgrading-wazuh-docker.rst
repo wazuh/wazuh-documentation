@@ -102,7 +102,7 @@ Single-node stack
 
          **Wazuh dashboard**
 
-          #. Edit ``single-node/config/wazuh_dashboard/opensearch_dashboards.yml`` and do the following replacements.
+         #. Edit ``single-node/config/wazuh_dashboard/opensearch_dashboards.yml`` and do the following replacements.
           
             -  Replace ``/usr/share/wazuh-dashboard/config/certs/`` with ``/usr/share/wazuh-dashboard/certs/``.
              
