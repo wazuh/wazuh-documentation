@@ -156,7 +156,7 @@ Install Logstash on a dedicated server or on the server hosting the Wazuh Indexe
 
    .. code-block:: console
 
-      $ sudo chmod 755 </PATH/TO/LOGSTASH_CERTS>/root-ca.pem
+      $ sudo chmod -R 755 </PATH/TO/WAZUH_INDEXER/CERTIFICATE>/root-ca.pem
       $ sudo chown -R logstash:logstash /var/log/logstash
       $ sudo chmod -R 755 /var/log/logstash
       $ sudo chown -R logstash:logstash /var/lib/logstash
