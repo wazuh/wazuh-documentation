@@ -152,11 +152,15 @@ Install Logstash on a dedicated server or on the server hosting the Wazuh Indexe
       $ sudo /usr/share/logstash/bin/logstash-plugin install logstash-input-opensearch
 
 #. Copy the Wazuh Indexer root certificate on the Logstash server, to any folder of your choice (e.g, ``/usr/share/logstash/root-ca.pem``).
-#. Give the ``logstash`` user the required permissions to read the certificate.
+#. Grant the ``logstash`` user the required permission to access certificates, log directories, data directories, and configuration files.
 
    .. code-block:: console
 
       $ sudo chmod -R 755 </PATH/TO/WAZUH_INDEXER/CERTIFICATE>/root-ca.pem
+      $ sudo chown -R logstash:logstash /var/log/logstash
+      $ sudo chmod -R 755 /var/log/logstash
+      $ sudo chown -R logstash:logstash /var/lib/logstash
+      $ sudo chown -R logstash:logstash /etc/logstash
 
 Configuring the Logstash pipeline
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -229,12 +233,21 @@ The Logstash pipeline requires access to the following secrets:
 Running Logstash
 ^^^^^^^^^^^^^^^^^
 
-#. Once you have everything set, run Logstash from the CLI with your configuration:
+#. Run Logstash from the CLI with your configuration:
 
-   .. code-block:: console
+   -  Logstash 8.x and earlier versions:
 
-      $ sudo systemctl stop logstash
-      $ sudo -E /usr/share/logstash/bin/logstash -f /etc/logstash/conf.d/indexer-to-s3.conf --path.settings /etc/logstash --config.test_and_exit
+      .. code-block:: console
+
+         $ sudo systemctl stop logstash
+         $ sudo -E /usr/share/logstash/bin/logstash -f /etc/logstash/conf.d/indexer-to-s3.conf --path.settings /etc/logstash --config.test_and_exit
+
+   -  Logstash 9.x and later versions:
+
+      .. code-block:: console
+
+         $ sudo systemctl stop logstash
+         $ sudo -u logstash /usr/share/logstash/bin/logstash -f /etc/logstash/conf.d/indexer-to-s3.conf --path.settings /etc/logstash --config.test_and_exit
 
 #. After confirming that the configuration loads correctly without errors, run Logstash as a service.
 
@@ -347,4 +360,23 @@ Troubleshooting
 | The Wazuh alert data is available in the Amazon Security Lake S3 bucket, but the Glue Crawler fails to parse the data into the Security Lake. | This issue typically occurs when the custom source that is created for the integration is using the wrong event class. Make sure you create the custom source with the Security Finding event class.                      |
 +-----------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | The Wazuh alerts data is available in the Auxiliar S3 bucket, but the Lambda function does not trigger or fails.                              | This usually happens if the Lambda is not properly configured, or if the data is not in the correct format. Test the Lambda following `this guide <https://docs.aws.amazon.com/lambda/latest/dg/with-s3-example.html>`__. |
++-----------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Logstash fails to start with the message: ``Path "/var/lib/logstash/queue" must be a writable directory. It is not writable.``                | The logstash user does not have permission to write to one or more required directories. Grant the necessary permissions:                                                                                                 |
+|                                                                                                                                               |                                                                                                                                                                                                                           |
+|                                                                                                                                               | .. code-block:: console                                                                                                                                                                                                   |
+|                                                                                                                                               |                                                                                                                                                                                                                           |
+|                                                                                                                                               |    sudo chown -R logstash:logstash /var/log/logstash                                                                                                                                                                      |
+|                                                                                                                                               |    sudo chmod -R 755 /var/log/logstash                                                                                                                                                                                    |
+|                                                                                                                                               |    sudo chown -R logstash:logstash /var/lib/logstash                                                                                                                                                                      |
+|                                                                                                                                               |    sudo chown -R logstash:logstash /etc/logstash                                                                                                                                                                          |
+|                                                                                                                                               |                                                                                                                                                                                                                           |
++-----------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Logstash 9.0+ fails with: ``Running Logstash as a superuser is not allowed``                                                                  | Starting from Logstash 9.0, running as the root user is blocked for security reasons. Run Logstash using the logstash system account:                                                                                     |
+|                                                                                                                                               |                                                                                                                                                                                                                           |
+|                                                                                                                                               | .. code-block:: console                                                                                                                                                                                                   |
+|                                                                                                                                               |                                                                                                                                                                                                                           |
+|                                                                                                                                               |    sudo -u logstash /usr/share/logstash/bin/logstash \                                                                                                                                                                    |
+|                                                                                                                                               |           -f /etc/logstash/conf.d/indexer-to-s3.conf \                                                                                                                                                                    |
+|                                                                                                                                               |           --path.settings /etc/logstash --config.test_and_exit                                                                                                                                                            |
+|                                                                                                                                               |                                                                                                                                                                                                                           |
 +-----------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
