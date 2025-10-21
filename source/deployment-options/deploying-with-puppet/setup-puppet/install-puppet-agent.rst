@@ -55,29 +55,29 @@ The manifest supports the following releases for installing Wazuh.
 
 -  **Ubuntu**: 12.04 (Precise Pangolin), 14.04 (Trusty Tahr), 15.04 (Vivid Vervet), 15.10 (Wily Werewolf), 16.04 (Xenial Xerus), 16.10 (Yakkety Yak), 18.04 (Bionic Beaver), 20.04 (Focal Fossa), 22.04 (Jammy Jellyfish), 24.04 (Noble Numbat).
 
-Install ``curl``, ``apt-transport-https`` and ``lsb-release``:
+#. Install ``curl``, ``apt-transport-https`` and ``lsb-release``:
 
-.. code-block:: console
-
-    # apt-get update
-    # apt-get install curl apt-transport-https lsb-release wget
-
-
-Install the appropriate Puppet apt repository, and then the “puppet-agent” package. See https://apt.puppetlabs.com for the correct Debian file to install the Puppet repo for your Linux distribution.
-
-.. code-block:: console
-
-    # wget https://apt.puppet.com/puppet7-release-focal.deb
-    # dpkg -i puppet7-release-focal.deb
-    # apt-get update
-    # apt-get install -y puppet-agent
+   .. code-block:: console
+   
+       # apt-get update
+       # apt-get install curl apt-transport-https lsb-release wget
 
 
-Create a symbolic link between the installed binary file and your default binary file:
+#. Install the appropriate Puppet apt repository, and then the “puppet-agent” package. See https://apt.puppetlabs.com for the correct Debian file to install the Puppet repo for your Linux distribution.
 
-.. code-block:: console
+   .. code-block:: console
+   
+       # wget https://apt.puppet.com/puppet7-release-focal.deb
+       # dpkg -i puppet7-release-focal.deb
+       # apt-get update
+       # apt-get install -y puppet-agent
 
-    # ln -s /opt/puppetlabs/bin/puppet /bin
+
+#. Create a symbolic link between the installed binary file and your default binary file:
+
+   .. code-block:: console
+   
+       # ln -s /opt/puppetlabs/bin/puppet /bin
 
 
 Installation on Windows
