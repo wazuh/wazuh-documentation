@@ -8,47 +8,54 @@
 Installing Puppet agent
 =======================
 
-In this section it is explained how to install *puppet-agent*. Follow this link to check the `official installation guide <https://puppet.com/docs/puppet/6.4/install_agents.html>`_.
+This section explains how to install Puppet Agent. Follow this link to check the `official installation guide <https://puppet.com/docs/puppet/6.4/install_agents.html>`_.
 
 We assume that you have already installed the ``apt`` or ``yum`` Puppet repository on your agent system in the same way that you did on your Puppet Server.
 
-If you do not have DNS configured, you must use your hosts file for name resolution.
+If you do not have DNS configured, use your hosts file for name resolution.
 
 Edit the ``/etc/hosts`` file, and add the IP address and hostname of the Puppet master and agent:
 
 .. code-block:: console
 
-    [puppet master ip] puppet puppet-master
-    [puppet agent ip] puppet-agent
+    <PUPPET_MASTER_IP> puppet puppet-master
+    <PUPPET_AGENT_IP> puppet-agent
+
+Where:
+
+- ``PUPPET_MASTER_IP`` is the IP address of your Puppet master.
+- ``PUPPET_AGENT_IP`` is the IP address of your Puppet agent.
 
 
 Installation on CentOS/RHEL/Fedora
 ----------------------------------
 
-Install the Puppet yum repository and then the "puppet-agent" package. See this `index <https://yum.puppetlabs.com/>`_ to find the correct rpm file needed to install the puppet repo for your Linux distribution. For example, to install Puppet 7 for CentOS 7 or RHEL 7, do the following:
+See this `index <https://yum.puppetlabs.com/>`_ to find the correct rpm file to install the Puppet repo for your Linux distribution. For example, to install Puppet 7 for RHEL 9, do the following:
 
-.. code-block:: console
+#. Install the Puppet yum repository and the puppet-agent package:
 
-    # sudo rpm -Uvh https://yum.puppetlabs.com/puppet7-release-el-8.noarch.rpm
-    # yum -y install puppet-agent
+   .. code-block:: console
 
+      # rpm -Uvh https://yum.puppetlabs.com/puppet7-release-el-9.noarch.rpm
+      # yum -y install puppet-agent
 
-Create a symbolic link between the installed binary file and your default binary file:
+#. Create a symbolic link between the installed binary file and your default binary file:
 
-.. code-block:: console
+   .. code-block:: console
 
-    # ln -s /opt/puppetlabs/bin/puppet /bin
+      # ln -s /opt/puppetlabs/bin/puppet /usr/local/bin
 
 
 Installation on Debian/Ubuntu
 -----------------------------
 
-The manifest supports the following releases to install wazuh.
+The manifest supports the following releases for installing Wazuh.
 
--  **Debian**: 7 (wheezy), 8 (jessie), 9 (stretch), 10 (buster), 11 (bullseye), 12 (bookworm)
--  **Ubuntu**: 12.04 (Precise Pangolin), 14.04 (Trusty Tahr), 15.04 (Vivid Vervet), 15.10 (Wily Werewolf), 16.04 (Xenial Xerus), 16.10 (Yakkety Yak), 18.04 (Bionic Beaver), 20.04 (Focal Fossa), 22.04 (Jammy Jellyfish)
+- Debian: 7 (wheezy), 8 (jessie), 9 (stretch), 10 (buster), 11 (bullseye), 12 (bookworm)
 
-Install ``curl``, ``apt-transport-https`` and ``lsb-release``:
+- Ubuntu: 12.04 (Precise Pangolin), 14.04 (Trusty Tahr), 15.04 (Vivid Vervet), 15.10 (Wily Werewolf), 16.04 (Xenial Xerus), 16.10 (Yakkety Yak), 18.04 (Bionic Beaver), 20.04 (Focal Fossa), 22.04 (Jammy Jellyfish), 24.04 (Noble Numbat).
+
+#. Install ``curl``, ``apt-transport-https`` and ``lsb-release``:
 
 .. code-block:: console
 
@@ -56,7 +63,7 @@ Install ``curl``, ``apt-transport-https`` and ``lsb-release``:
     # apt-get install curl apt-transport-https lsb-release wget
 
 
-Install the appropriate Puppet apt repository, and then the “puppet-agent” package. See https://apt.puppetlabs.com to find the correct deb file to install the puppet repo for your Linux distribution.
+#. Install the appropriate Puppet apt repository, and then the “puppet-agent” package. See https://apt.puppetlabs.com to find the correct deb file to install the puppet repo for your Linux distribution.
 
 .. code-block:: console
 
@@ -66,7 +73,7 @@ Install the appropriate Puppet apt repository, and then the “puppet-agent” p
     # apt-get install -y puppet-agent
 
 
-Create a symbolic link between the installed binary file and your default binary file:
+#. Create a symbolic link between the installed binary file and your default binary file:
 
 .. code-block:: console
 
