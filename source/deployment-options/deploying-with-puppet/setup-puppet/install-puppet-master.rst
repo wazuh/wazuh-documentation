@@ -10,8 +10,8 @@ Installing Puppet master
 
 
 
-Installing Puppet master on CentOS/RHEL/Fedora
-----------------------------------------------
+Installation on CentOS/RHEL/Fedora
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 #. Install the Puppet yum repository and then the "puppetserver" package. See this `index <https://yum.puppetlabs.com/>`_ for the correct RPM file to install the Puppet repo for your Linux distribution. For example, to install Puppet 7 for RHEL 9, do the following:
 
@@ -59,7 +59,7 @@ The manifest supports the following releases for installing Wazuh.
       # ln -s /opt/puppetlabs/server/bin/puppetserver /usr/local/bin
 
 
-Memory Allocation
+Memory allocation
 -----------------
 
 By default, Puppet Server will be configured to use 2GB of RAM. However, if you want to experiment with Puppet Server on a VM, you can safely allocate as little as 512MB of memory. To change Puppet Server memory allocation, you can edit the following init config file.
@@ -72,7 +72,7 @@ Replace 2g in the ``JAVA_ARGS`` variable with the amount of memory you want to a
 Configuration
 -------------
 
-Edit the ``/etc/puppetlabs/puppet/puppet.conf`` file to configure the Puppet server. Add the following settings to the ``[main]`` section. You need to create the section if it doesn't exist. If you have set up your own DNS, replace ``puppet`` and ``puppet-master`` with your Fully Qualified Domain Names (FQDNs).
+Edit the ``/etc/puppetlabs/puppet/puppet.conf`` file to configure the Puppet server. Add the following settings to the ``[server]`` section. You need to create the section if it doesn't exist. If you have set up your own DNS, replace ``puppet`` and ``puppet-master`` with your Fully Qualified Domain Names (FQDNs).
 
    .. code-block:: none
 
@@ -104,7 +104,8 @@ Start your Puppet Server:
                # update-rc.d puppetserver
 
 .. note:: 
-   For Ubuntu/Debian machines, in case puppetserver does not start. Edit the puppetserver file, ``/etc/default/puppetserver``. Modify the following line to change the memory size to 1G or 512MB:
+   
+   For Ubuntu/Debian machines, in case puppetserver does not start due to a lack of memory. Edit the ``/etc/default/puppetserver`` config file. Modify the following line to change the memory size to 1GB or 512MB:
 
    .. code-block:: console
 
