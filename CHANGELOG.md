@@ -21,6 +21,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated the prerequisites sub-section in *Deployment on Docker*. ([#8977](https://github.com/wazuh/wazuh-documentation/pull/8977))
 - **Post-release**: Updated the Virtual Machine (VM) documentation. ([#8981](https://github.com/wazuh/wazuh-documentation/pull/8981))
 - **Post-release**: Removed duplicated introductory bullets from source/cloud-security/azure/index.rst ([#8987](https://github.com/wazuh/wazuh-documentation/pull/8987))
+- **Post-release**: Updated the *Installation from sources* documentation. ([#8980](https://github.com/wazuh/wazuh-documentation/pull/8980))
 
 ### Fixed
 
