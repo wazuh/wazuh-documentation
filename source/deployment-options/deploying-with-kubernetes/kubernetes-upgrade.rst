@@ -13,6 +13,8 @@ Checking which files are exported to the volume
 
 Our Kubernetes deployment uses our Wazuh images from Docker. If we look at the following code extracted from the Wazuh configuration using Docker, we can see which directories and files are used in the upgrade.
 
+.. code-block:: none
+   
    /var/ossec/api/configuration
    /var/ossec/etc
    /var/ossec/logs
@@ -64,8 +66,7 @@ Keeping custom manifests
 To upgrade your deployment keeping your custom manifests, do the following.
 
 #. If you are upgrading from version 4.3, :ref:`update the Java Opts variable name <updating_java_opts>` with the new one.
-#. If you are upgrading from version 4.3, :ref:`update old paths <updating_old_paths>` with the new ones.
-#. If you are upgrading from version 4.13, :ref:`update old paths <updating_old_paths>` with the new ones.
+#. :ref:`Update old paths <updating_old_paths>` with the new ones.
 #. If you are upgrading from a version earlier than 4.8, :ref:`update configuration parameters <updating_configuraton_parameters>`.
 #. :ref:`Modify tags of Wazuh images <modifying_tags>`.
 
