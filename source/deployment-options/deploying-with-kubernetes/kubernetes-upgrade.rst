@@ -110,10 +110,39 @@ Updating old paths
       #. Edit ``wazuh/indexer_stack/wazuh-indexer/cluster/indexer-sts.yaml`` and do the following replacements.
 
          -  Replace ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/`` with ``/usr/share/wazuh-indexer/opensearch-security/``.
+         -  Add the following statements:
 
-      #. Edit ``wazuh/indexer_stack/wazuh-indexer/indexer_conf/opensearch.yml`` and do the following replacements.
+            .. code-block:: yaml
+               :emphasize-lines: 5, 9
 
-         -  Replace ``/usr/share/wazuh-indexer/config/certs/`` with ``/usr/share/wazuh-indexer/certs/``.
+               volumes:
+               - name: indexer-certs
+                  secret:
+                     secretName: indexer-certs
+                     defaultMode: 0600
+               - name: indexer-conf
+                  configMap:
+                     name: indexer-conf
+                     defaultMode: 0600
+
+            .. code-block:: yaml
+               :emphasize-lines: 3
+
+               spec:
+                  securityContext:
+                  fsGroup: 1000
+                  # Set the wazuh-indexer volume permissions so the wazuh-indexer user can use it
+                  volumes:
+                  - name: indexer-certs
+
+            .. code-block:: yaml
+               :emphasize-lines: 2, 3
+
+               securityContext:
+                  runAsUser: 1000
+                  runAsGroup: 1000
+                  capabilities:
+                     add: ["SYS_CHROOT"]
 
    .. group-tab:: Upgrading from 4.4 to 4.13
 
@@ -124,7 +153,6 @@ Updating old paths
          -  Replace ``/usr/share/wazuh-indexer/certs/`` with ``/usr/share/wazuh-indexer/config/certs/``.
          -  Replace ``/usr/share/wazuh-indexer/opensearch.yml`` with ``/usr/share/wazuh-indexer/config/opensearch.yml``.
          -  Replace ``/usr/share/wazuh-indexer/opensearch-security/internal_users.yml`` with ``/usr/share/wazuh-indexer/config/opensearch-security/internal_users.yml``.
-
          -  Add the following statements:
 
             .. code-block:: yaml
