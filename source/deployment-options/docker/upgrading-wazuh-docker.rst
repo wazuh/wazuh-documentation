@@ -6,7 +6,7 @@
 Upgrading Wazuh Docker
 ======================
 
-This section describes how to upgrade different versions of Wazuh Docker deployments.
+This section describes how to upgrade the Wazuh deployment on Docker.
 
 To upgrade to version |WAZUH_CURRENT_DOCKER|, choose one of the following strategies.
 
