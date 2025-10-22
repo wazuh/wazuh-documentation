@@ -95,7 +95,7 @@ Updating old paths
 
 .. tabs::
 
-   .. group-tab:: Upgrading from 4.3-4.12
+   .. group-tab:: Upgrading from 4.3 and earlier
 
       **Wazuh dashboard**
 
@@ -119,7 +119,7 @@ Updating old paths
 
          -  Replace ``/usr/share/wazuh-indexer/config/certs/`` with ``/usr/share/wazuh-indexer/certs/``.
 
-   .. group-tab:: Upgrading from 4.13
+   .. group-tab:: Upgrading from 4.4 to 4.13
 
       **Wazuh dashboard**
 
