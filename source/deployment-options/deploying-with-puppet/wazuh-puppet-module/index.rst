@@ -63,8 +63,7 @@ To configure the manager before deployment, check the :ref:`Wazuh puppet referen
 
          .. code-block:: console
 
-            # apt-get install debhelper tar curl libcap2-bin
-            #debhelper version 9 or later
+            # apt-get install debhelper tar curl libcap2-bin #debhelper version 9 or later
 
       .. group-tab:: Yum
 
@@ -166,8 +165,7 @@ You must include the server's hostname where you are installing each application
 
          .. code-block:: console
 
-            # apt-get install debhelper tar curl libcap2-bin
-            #debhelper version 9 or later
+            # apt-get install debhelper tar curl libcap2-bin #debhelper version 9 or later
 
       .. group-tab:: Yum
 
@@ -419,8 +417,7 @@ The agent is configured by installing the ``wazuh::agent`` class. Here is an exa
 
          .. code-block:: console
 
-            # apt-get install debhelper tar curl libcap2-bin
-            #debhelper version 9 or later
+            # apt-get install debhelper tar curl libcap2-bin #debhelper version 9 or later
 
       .. group-tab:: Yum
 
@@ -437,6 +434,7 @@ The agent is configured by installing the ``wazuh::agent`` class. Here is an exa
 #. Create the ``wazuh_agent_stack.pp`` file at ``/etc/puppetlabs/code/environments/production/manifests/`` with the contents below:
 
    .. code-block:: puppet
+      :emphasize-lines: 1, 4, 5
 
       node "<PUPPET_AGENT_NODE_NAME>" {
         class { 'wazuh::repo':
@@ -515,7 +513,7 @@ Wazuh Puppet module reference
 |                                                                 |                                                                 |                                             |
 +-----------------------------------------------------------------+-----------------------------------------------------------------+---------------------------------------------+
 
-.. topic:: Contents
+.. topic:: Content
 
  .. toctree::
     :maxdepth: 1

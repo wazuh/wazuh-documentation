@@ -27,8 +27,8 @@ Installation on CentOS/RHEL/Fedora
       # ln -s /opt/puppetlabs/bin/puppet /usr/local/bin
       # ln -s /opt/puppetlabs/server/bin/puppetserver /usr/local/bin
 
-Installing on Debian/Ubuntu
----------------------------
+Installation on Debian/Ubuntu
+------------------------------
 
 The manifest supports the following releases for installing Wazuh.
 
@@ -62,12 +62,23 @@ The manifest supports the following releases for installing Wazuh.
 Memory allocation
 -----------------
 
-By default, Puppet Server will be configured to use 2GB of RAM. However, if you want to experiment with Puppet Server on a VM, you can safely allocate as little as 512MB of memory. To change Puppet Server memory allocation, you can edit the following init config file.
+By default, Puppet Server will be configured to use 2GB of RAM. However, if you want to experiment with Puppet Server on a VM, you can safely allocate as little as 512MB of memory. You can edit the init config file to change Puppet Server memory allocation.
 
-  * ``/etc/sysconfig/puppetserver`` -- CentOS/RHEL/Fedora
-  * ``/etc/default/puppetserver`` -- Debian/Ubuntu
+.. tabs::
 
-Replace 2g in the ``JAVA_ARGS`` variable with the amount of memory you want to allocate to Puppet Server. For example, to allocate 1GB of memory, use ``JAVA_ARGS="-Xms1g -Xmx1g"``; for 512MB, use ``JAVA_ARGS="-Xms512m -Xmx512m"``.
+   .. group-tab:: CentOS/RHEL/Fedora
+
+      .. code-block:: none
+
+         /etc/sysconfig/puppetserver
+
+   .. group-tab:: Debian/Ubuntu
+
+      .. code-block:: none
+
+         /etc/default/puppetserver
+
+Replace 2g in the ``JAVA_ARGS`` variable with the memory you want to allocate to Puppet Server. For example, to allocate 1GB of memory, use ``JAVA_ARGS="-Xms1g -Xmx1g"``; for 512MB, use ``JAVA_ARGS="-Xms512m -Xmx512m"``.
 
 Configuration
 -------------

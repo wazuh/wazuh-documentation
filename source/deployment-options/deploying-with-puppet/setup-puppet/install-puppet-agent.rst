@@ -77,7 +77,7 @@ The manifest supports the following releases for installing Wazuh.
 
    .. code-block:: console
    
-       # ln -s /opt/puppetlabs/bin/puppet /bin
+       # ln -s /opt/puppetlabs/bin/puppet /usr/local/bin
 
 
 Installation on Windows
@@ -97,7 +97,7 @@ Installation on Windows
 
       - Execute the GUI with elevated privileges.
       - During installation, Puppet asks you for the hostname of your Puppet master server.
-      - For standalone Puppet nodes that won’t connect to a master, use the default hostname (`puppet`). You might also want to install it on the command line and set the agent startup mode to `Disabled`.
+      - For standalone Puppet nodes that won't connect to a master, use the default hostname (puppet). You might also want to install it on the command line and set the agent startup mode to Disabled.
       - Once the installer finishes, Puppet will be installed and running.
 
 
@@ -107,7 +107,7 @@ Installation on Windows
 
            > msiexec /qn /norestart /i puppet-agent-<VERSION>-x64.msi
 
-      Specify``/l*v install.txt`` to log the installation's progress to a file. You can also set several MSI properties to pre-configure Puppet as you install it.     
+      Specify ``/l*v install.txt`` to log the installation's progress to a file. You can also set several MSI properties to pre-configure Puppet as you install it.     
 
 
 Agent configuration
