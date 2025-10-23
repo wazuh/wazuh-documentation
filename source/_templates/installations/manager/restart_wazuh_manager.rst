@@ -2,20 +2,17 @@
 
 .. tabs::
 
+   .. group-tab:: Systemd
 
-  .. group-tab:: Systemd
+      .. code-block:: console
 
+         # systemctl restart wazuh-manager
 
-    .. code-block:: console
+   .. group-tab:: SysV init
 
-      # systemctl restart wazuh-manager
+      .. code-block:: console
 
-
-  .. group-tab:: SysV init
-
-    .. code-block:: console
-
-      # service wazuh-manager restart
+         # service wazuh-manager restart
 
 .. End of include file
 

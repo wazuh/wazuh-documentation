@@ -8,24 +8,22 @@ Installing the Wazuh indexer step by step
 
 Install and configure the Wazuh indexer as a single-node or multi-node cluster following step-by-step instructions. Wazuh indexer is a highly scalable full-text search engine and offers advanced security, alerting, index management, deep performance analysis, and several other features.
 
-The installation process is divided into three stages.
+The installation process is divided into three stages:
 
-#. Certificates creation
+#. `Certificate creation`_
+#. `Wazuh indexer nodes installation`_
+#. `Cluster initialization`_
 
-#. Nodes installation
+.. note::
 
-#. Cluster initialization
-
-
-.. note:: You need root user privileges to run all the commands described below.
+   You need root user privileges to run all the commands described below.
 
 .. _certificates_creation:
 
-1. Certificates creation
-------------------------
-.. raw:: html
+Certificate creation
+--------------------
 
-    <div class="accordion-section open">
+Wazuh uses certificates to establish confidentiality and encrypt communications between its central components. Follow these steps to create certificates for the Wazuh central components.
 
 Generating the SSL certificates
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -34,50 +32,51 @@ Generating the SSL certificates
 
    .. code-block:: console
 
-    # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-certs-tool.sh
-    # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/config.yml
+      # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-certs-tool.sh
+      # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/config.yml
 
 #. Edit ``./config.yml`` and replace the node names and IP values with the corresponding names and IP addresses. You need to do this for all Wazuh server, Wazuh indexer, and Wazuh dashboard nodes. Add as many node fields as needed.
 
-      .. code-block:: yaml
+   .. code-block:: yaml
+      :emphasize-lines: 4-5, 15-16, 27-28
 
-        nodes:
-          # Wazuh indexer nodes
-          indexer:
-            - name: indexer-1
-              ip: "<indexer-node-ip>"
-            #- name: indexer-2
-            #  ip: "<indexer-node-ip>"
-            #- name: indexer-3
-            #  ip: "<indexer-node-ip>"
+      nodes:
+        # Wazuh indexer nodes
+        indexer:
+          - name: indexer-1
+            ip: "<indexer-node-ip>"
+          #- name: indexer-2
+          #  ip: "<indexer-node-ip>"
+          #- name: indexer-3
+          #  ip: "<indexer-node-ip>"
 
-          # Wazuh server nodes
-          # If there is more than one Wazuh server
-          # node, each one must have a node_type
-          server:
-            - name: server-1
-              ip: "<server-node-ip>"
-            #  node_type: master
-            #- name: server-2
-            #  ip: "<server-node-ip>"
-            #  node_type: worker
-            #- name: server-3
-            #  ip: "<server-node-ip>"
-            #  node_type: worker
+        # Wazuh server nodes
+        # If there is more than one Wazuh server
+        # node, each one must have a node_type
+        server:
+          - name: server-1
+            ip: "<server-node-ip>"
+          #  node_type: master
+          #- name: server-2
+          #  ip: "<server-node-ip>"
+          #  node_type: worker
+          #- name: server-3
+          #  ip: "<server-node-ip>"
+          #  node_type: worker
 
-          # Wazuh dashboard nodes
-          dashboard:
-            - name: dashboard
-              ip: "<dashboard-node-ip>"
+        # Wazuh dashboard nodes
+        dashboard:
+          - name: dashboard
+            ip: "<dashboard-node-ip>"
 
 
-      To learn more about how to create and configure the certificates, see the :doc:`/user-manual/wazuh-indexer-cluster/certificate-deployment` section.
+   To learn more about how to create and configure the certificates, see the :doc:`/user-manual/wazuh-indexer-cluster/certificate-deployment` section.
 
 #. Run ``./wazuh-certs-tool.sh`` to create the certificates. For a multi-node cluster, these certificates need to be later deployed to all Wazuh instances in your cluster.
 
    .. code-block:: console
 
-     #  bash ./wazuh-certs-tool.sh -A
+      # bash ./wazuh-certs-tool.sh -A
 
    .. note::
 
@@ -87,19 +86,15 @@ Generating the SSL certificates
 
    .. code-block:: console
 
-     # tar -cvf ./wazuh-certificates.tar -C ./wazuh-certificates/ .
-     # rm -rf ./wazuh-certificates
-
+      # tar -cvf ./wazuh-certificates.tar -C ./wazuh-certificates/ .
+      # rm -rf ./wazuh-certificates
 
 #. Copy the ``wazuh-certificates.tar`` file to all the nodes, including the Wazuh indexer, Wazuh server, and Wazuh dashboard nodes. This can be done by using the ``scp`` utility.
 
+Wazuh indexer nodes installation
+--------------------------------
 
-2. Nodes installation
----------------------
-.. raw:: html
-
-    <div class="accordion-section open">
-
+Follow these steps to install and configure a single-node or multi-node Wazuh indexer.
 
 Installing package dependencies
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -151,7 +146,7 @@ Installing the Wazuh indexer
 Configuring the Wazuh indexer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-  .. include:: /_templates/installations/indexer/common/configure_indexer_nodes.rst
+.. include:: /_templates/installations/indexer/common/configure_indexer_nodes.rst
 
 .. include:: /_templates/installations/common/firewall-ports-note.rst
 
@@ -160,7 +155,7 @@ Deploying certificates
 
 .. note::
 
-   Make sure that a copy of the ``wazuh-certificates.tar`` file, created during the initial configuration step, is placed in your working directory.
+   Make sure that a copy of ``wazuh-certificates.tar``, created in the previous stage of the installation process, is placed in your working directory.
 
 .. include:: /_templates/installations/indexer/common/deploy_certificates.rst
 
@@ -175,15 +170,17 @@ Starting the service
 
       .. include:: /_templates/installations/indexer/common/enable_indexer.rst
 
-Repeat this stage of the installation process for every Wazuh indexer node in your cluster. Then proceed with initializing your single-node or multi-node cluster in the next stage.
+Repeat this stage of the installation process for every Wazuh indexer node in your multi-node cluster. Then proceed with initializing your single-node or multi-node cluster in the next stage.
+
+Disable Wazuh updates
+---------------------
 
 .. include:: /_templates/installations/disable-wazuh-updates.rst
 
-3. Cluster initialization
--------------------------
-.. raw:: html
+Cluster initialization
+----------------------
 
-    <div class="accordion-section open">
+The final stage of installing the Wazuh indexer single-node or multi-node cluster consists of running the security admin script.
 
 #. Run the Wazuh indexer ``indexer-security-init.sh`` script on `any` Wazuh indexer node to load the new certificates information and start the single-node or multi-node cluster.
 
@@ -193,16 +190,16 @@ Repeat this stage of the installation process for every Wazuh indexer node in yo
 
    .. note::
 
-      You only have to initialize the cluster *once*, there is no need to run this command on every node.
+      You only have to initialize the cluster once, there is no need to run this command on every node.
 
 Testing the cluster installation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Replace ``<WAZUH_INDEXER_IP_ADDRESS>`` and run the following commands to confirm that the installation is successful.
+#. Run the following commands to confirm that the installation is successful. Replace ``<WAZUH_INDEXER_IP_ADDRESS>``  with the IP address of the Wazuh indexer and enter admin as the password when prompted:
 
    .. code-block:: console
 
-      # curl -k -u admin:admin https://<WAZUH_INDEXER_IP_ADDRESS>:9200
+      # curl -k -u admin https://<WAZUH_INDEXER_IP_ADDRESS>:9200
 
    .. code-block:: none
       :class: output accordion-output
@@ -224,15 +221,23 @@ Testing the cluster installation
         "tagline" : "The OpenSearch Project: https://opensearch.org/"
       }
 
-#. Replace ``<WAZUH_INDEXER_IP_ADDRESS>`` and run the following command to check if the single-node or multi-node cluster is working correctly.
+#. Run the following command to check if the cluster is working correctly. Replace ``<WAZUH_INDEXER_IP_ADDRESS>``  with the IP address of the Wazuh indexer and enter admin as the password when prompted:
 
    .. code-block:: console
 
-      # curl -k -u admin:admin https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cat/nodes?v
+      # curl -k -u admin https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cat/nodes?v
+
+   The command produces output similar to the following:
+
+   .. code-block:: none
+      :class: output
+
+      ip              heap.percent ram.percent cpu load_1m load_5m load_15m node.role node.roles                               cluster_manager name
+      192.168.107.240           19          94   4    0.22    0.21     0.20 dimr      data,ingest,master,remote_cluster_client *               node-1
 
 Next steps
 ----------
 
 The Wazuh indexer is now successfully installed on your single-node or multi-node cluster, and you can proceed with installing the Wazuh server. To perform this action, see the :doc:`../wazuh-server/step-by-step` section.
 
-If you want to uninstall the Wazuh indexer, see :ref:`uninstall_indexer`.
+To uninstall the Wazuh indexer, see :ref:`uninstall_indexer`.
