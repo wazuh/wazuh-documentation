@@ -11,13 +11,13 @@ This section lists the changes in version 4.14.0. Every update of the Wazuh solu
 Highlights
 ----------
 
-The 4.14.0 release enhances configuration flexibility, expands cloud visibility, and strengthens endpoint inventory capabilities. Key updates include agent hot reload configuration, which allows agents to apply configuration changes without breaking connectivity; a new Azure dashboard to monitor Microsoft cloud events; and expanded inventory categories covering browser extensions, services, and users & groups. This version also introduces multiple stability, performance, and security improvements across the platform.
+The 4.14.0 release enhances the IT Hygiene capability with an expanded inventory that now includes browser extensions, endpoint services, users, and groups. It also introduces a new Microsoft Graph API dashboard for monitoring activity and audit events from Microsoft cloud services, and adds support for hot reload of Wazuh agent configuration. In addition, this release introduces multiple stability, performance, and security improvements across the platform.
 
--  `Agent hot reload configuration <https://github.com/wazuh/wazuh/issues/29641>`__: The Wazuh Agent can now apply remote configuration changes dynamically without breaking its connection to the server. All daemons except ``agentd`` are restarted during reload, improving resilience and reducing disruptions across large deployments.
--  `Azure dashboard <https://github.com/wazuh/wazuh-dashboard-plugins/issues/7451>`__: A new dashboard has been added to visualize and query Microsoft Azure cloud events. This includes built-in queries, CSV export, GeoIP processing, and geolocation maps, aligning with AWS and Google Cloud dashboards for a consistent multi-cloud experience.
 -  `Inventory – Browser Extensions <https://github.com/wazuh/wazuh/issues/29690>`__: Added a unified inventory model to track browser extensions across Windows, macOS, and Linux systems. Enables security auditing and compliance monitoring for Chrome, Firefox, Safari, and other browsers.
 -  `Inventory – Services <https://github.com/wazuh/wazuh/issues/29692>`__: Introduced a normalized inventory of Windows services and Linux systemd units. Provides visibility into service states, startup types, and critical services across endpoints.
 -  `Inventory – Users & Groups <https://github.com/wazuh/wazuh/issues/30223>`__: Implemented a cross-platform inventory for system users and groups. Supports normalized data structures, relationships, and consistent queries across agents, Wazuh-DB, and the Dashboard.
+-  `Wazuh agent configuration hot reload <https://github.com/wazuh/wazuh/issues/29641>`__: The Wazuh Agent can now apply remote configuration changes dynamically without breaking its connection to the server. All daemons except ``agentd`` are restarted during reload, improving resilience and reducing disruptions across large deployments.
+-  `Microsoft Graph API dashboard <https://github.com/wazuh/wazuh-dashboard-plugins/issues/7451>`__: A new dashboard has been added to visualize and query Microsoft Graph services, including Microsoft Azure cloud events.
 
 What's new
 ----------
