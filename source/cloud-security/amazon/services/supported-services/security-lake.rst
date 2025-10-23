@@ -179,9 +179,6 @@ Authentication
 -  ``<iam_role_duration>`` - Optional: The session duration in seconds.
 -  ``<sts_endpoint>`` - Optional: The URL of the VPC endpoint of the AWS Security Token Service.
 
-.. note::
-
-   This authentication method requires adding credentials to the configuration using the ``/root/.aws/credentials`` file.
 
 More information about the different authentication methods can be found in the :doc:`../prerequisites/credentials` documentation.
 
