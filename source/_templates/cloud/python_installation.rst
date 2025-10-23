@@ -4,17 +4,16 @@ The Wazuh module for |service| is compatible with Python |py_cloud_cont_min|–|
 
 .. tabs::
 
-   .. group-tab:: Yum
-
-      .. code-block:: console
-
-         # yum update && yum install python3
-
    .. group-tab:: APT
 
       .. code-block:: console
 
          # apt-get update && apt-get install python3
 
+   .. group-tab:: Yum
+
+      .. code-block:: console
+
+         # yum update && yum install python3
 
 .. End of include file

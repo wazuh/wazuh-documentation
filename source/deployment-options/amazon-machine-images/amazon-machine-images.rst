@@ -29,7 +29,7 @@ Packages list
 Deployment alternatives
 -----------------------
 
-There are two alternatives for deploying a Wazuh instance. You can launch the `Wazuh All-In-One Deployment AMI <https://aws.amazon.com/marketplace/pp/B09J56274H>`_ directly from the AWS Marketplace or you can configure and deploy an instance using the AWS Management Console.
+You can deploy a Wazuh instance in two ways. Launch the `Wazuh All-In-One Deployment AMI <https://aws.amazon.com/marketplace/pp/B09J56274H>`_ directly from the AWS Marketplace or configure and deploy an instance using the AWS Management Console.
 
 - `Launch an instance from the AWS Marketplace`_
 - `Deploy an instance using the AWS Management Console`_
@@ -41,17 +41,21 @@ There are two alternatives for deploying a Wazuh instance. You can launch the `W
 Launch an instance from the AWS Marketplace
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Go to `Wazuh All-In-One Deployment <https://aws.amazon.com/marketplace/pp/prodview-eju4flv5eqmgq?ref=hmpg_recommendations_widget>`_ in the AWS Marketplace, then click **Continue to Subscribe**.
+#. Go to `Wazuh All-In-One Deployment <https://aws.amazon.com/marketplace/pp/prodview-eju4flv5eqmgq?ref=hmpg_recommendations_widget>`_ in the AWS Marketplace, then click **View purchase options**.
 
-#. Review the information and accept the terms for the software. Click **Continue to Configuration** to confirm subscribing to our Server product.
+#. Review the information and the terms for the software. Click **Subscribe** to confirm subscribing to our product. You will receive an email notification that your offer has been accepted.
 
-#. Select a **Software Version** and the **Region** where the instance is going to be deployed. Then, click **Continue to Launch**.
+#. Click **Launch your software** to continue your setup.
 
-#. Review your configuration, making sure that all settings are correct before launching the software. Adapt the default configuration values to your needs.
+#. Select the service **Amazon EC2**, **Launch from EC2 console**, and a **Region**.
 
-    #. When selecting the **EC2 Instance Type**, we recommend that you use an instance type ``c5a.xlarge``.
+#. Click **Launch from EC2** to take you to the AWS Management Console.
 
-    #. When selecting the **Security Group**, it must be one with the appropriate :ref:`settings for your Wazuh instance <default_ports>` to guarantee the correct operation. You can create a new security group by choosing **Create new based on seller settings**. This new group will have the appropriate settings by default.
+#. Review your configuration, ensuring all settings are correct, before launching the software. Adapt the default configuration to your needs.
+
+    #. When selecting the **EC2 Instance Type**, we recommend ``c5a.xlarge`` because it offers an ideal balance of high compute performance and cost-efficiency.
+
+    #. To guarantee the correct operation, the **Security Group** must have the appropriate :ref:`settings for your Wazuh instance <default_ports>`. You can create a new security group by choosing **Create security group**. This new group will have the appropriate settings by default.
 
 #. Click **Launch** to generate the instance.
 
@@ -61,35 +65,39 @@ Once your instance is successfully launched and a few minutes have elapsed, you 
 Deploy an instance using the AWS Management Console
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Select **Launch instance** from your `AWS Management Console <https://aws.amazon.com/console/>`_ dashboard.
+#. Select **EC2** from your `AWS Management Console <https://aws.amazon.com/console/>`_ dashboard.
 
-#. Find Wazuh All-In-One Deployment by Wazuh Inc., and click **Select** to subscribe.
+#. Click **Launch instance**.
 
-#. Review the Server product characteristics, then click **Continue**. This allows subscribing to our Server product.
+#. Click on **Browse more AMIs**.
 
-#. Select the instance type according to your needs, then click **Next: Configure Instance Details**. We recommend that you use an instance type ``c5a.xlarge``.
+#. Search **Wazuh All-In-One Deployment** by Wazuh Inc under the **AWS Marketplace AMIs** tab, and click **Select**. This brings up a description of the Wazuh All-In-One Deployment with the option to either **Subscribe on instance launch** or **Subscribe now**.
 
-#. Configure your instance as needed, then click **Next: Add Storage**.
+#. Select the instance type that best fits your needs. We recommend ``c5a.xlarge``.
 
-#. Set the storage capacity of your instance under the **Size (GiB)** column, then click **Next: Add Tags**. We recommend 100 GiB GP3 or more.
+   You can use either of these three configuration alternatives available regarding the key pair settings:
 
-#. Add as many tags as you need, then click **Next: Configure Security Group**.
+    - **Choose an existing key pair**
 
-#. Check that the ports and protocols are the :ref:`ports and protocols <default_ports>` for Wazuh. Check the security measures for your instance. This will establish the Security Group (SG). Then, click **Review and Launch**.
+    - **Create a new key pair**
 
-#. Review the instance configuration and click **Launch**.
+    - **Proceed without a key pair** (Not recommended)
 
-#. Select one of three configuration alternatives available regarding the key pair settings: **Choose an existing key pair**, **Create a new key pair**, **Proceed without a key pair**. You need to choose an existing key pair or create a new one to access the instance with SSH.
+    You need to choose an existing key pair or create a new one to access the instance with SSH.
 
-#. Click **Launch instances** to complete the process and deploy your instance.
+#. When selecting the **Security Group**, ensure it has the appropriate :ref:`settings for your Wazuh instance <default_ports>` to guarantee correct operation. You can create a new security group by choosing **Create security group**. This new group will have the appropriate settings by default. Check that the ports and protocols are the :ref:`ports and protocols <default_ports>` for Wazuh. Check the security measures for your instance. This will establish the Security Group (SG).
 
-Once your instance is fully configured and ready after a few minutes since launch, you can :ref:`access the Wazuh dashboard <ami_wazuh_ui>`.
+#. Under the **Size (GiB)** column, set your instance's storage capacity, then click **Next: Add Tags**. We recommend 100 GiB gp3 or more.
+
+#. Review the instance configuration and click **Launch instance**.
+
+After a few minutes, the instance will be ready. You can :ref:`access the Wazuh dashboard <ami_wazuh_ui>`.
 
 
 Configuration files
 -------------------
 
-All components included in this AMI are configured to work out-of-the-box without the need to modify any settings. However, all components can be fully customized. The configuration files locations are the following.
+All components included in this AMI are configured to work out-of-the-box without the need to modify any settings. However, all components can be fully customized. These are the configuration file locations:
 
 - Wazuh manager: ``/var/ossec/etc/ossec.conf``
 - Wazuh indexer: ``/etc/wazuh-indexer/opensearch.yml``
@@ -106,34 +114,35 @@ To learn more about configuring Wazuh, see the :doc:`User manual </user-manual/i
 Access the Wazuh dashboard
 --------------------------
 
-When the instance is launched, the user passwords are automatically changed to the instance ID with the first letter capitalized. For example: ``I-07f25f6afe4789342``. This ensures that only the creator has access to the interface. This process can take an average of five minutes, depending on the type of instance. During this time, both SSH access and access to the Wazuh dashboard are disabled.
+When the instance is launched, the user passwords are automatically changed to the instance ID with the first letter capitalized. For example: ``I-07f25f6afe4789342``. This ensures that only the creator has access to the interface. This process can take an average of five minutes, depending on the type of instance. During this time, SSH access and Wazuh dashboard access are disabled.
 
-Once the instance is running and the process to initialize passwords is complete, you can access the Wazuh dashboard with your credentials.
+Once the instance runs and the process to initialize passwords is complete, you can access the Wazuh dashboard with your credentials.
 
-- URL: *https://<YOUR_INSTANCE_IP>*
-- **Username**: *admin*
-- **Password**: *<YOUR_INSTANCE_ID>*
+- URL: ``https://<YOUR_INSTANCE_IP>``
+- Username: ``admin``
+- Password: ``<YOUR_INSTANCE_ID>``
 
 .. note::
    :class: not-long
 
-   The password is the instance ID with the first letter capitalized. For example: ``I-07f25f6afe4789342``.
+   The password is the instance ID with the first letter capitalized. For example, if the instance ID is: ``i-07f25f6afe4789342``, the default password will be ``I-07f25f6afe4789342``.
 
 .. warning::
 
-   The password for the server API users ``wazuh`` and ``wazuh-wui`` is the same  as the ``admin`` user's password. We highly recommend to change the default passwords in the first SSH access. To perform this action, refer to the :doc:`/user-manual/user-administration/password-management` section.
+   The passwords for the Wazuh server API users ``wazuh`` and ``wazuh-wui`` are the same as those for the ``admin`` user. We highly recommend changing the default passwords on the first SSH access. To perform this action, refer to the :doc:`/user-manual/user-administration/password-management` section.
 
 Security considerations about SSH
 ---------------------------------
 
-- The ``root`` user cannot be identified by SSH and the instance can only be accessed through the user: ``wazuh-user``.
-- SSH authentication through passwords is disabled and the instance can only be accessed through a key pair. This means that only the user with the key pair has access to the instance.
-- To access the instance with a key pair, you need to download the key generated or stored in AWS. Then, run the following command to connect with the instance.
+- The ``root`` user cannot be identified by SSH, and the instance can only be accessed through the user: ``wazuh-user``.
+- The instance can only be accessed through a key pair, which is provided to the user with the key pair.
+- You must download the key generated or stored in AWS to access the instance with a key pair. Then, run the following command to connect with the instance.
 
   .. code-block:: console
 
       # ssh -i "<KEY_PAIR_NAME>" wazuh-user@<YOUR_INSTANCE_IP>
-- Access during the initial password change process is disabled to prevent potential problems. This process may take a few minutes to complete. Any access attempt before completion will show ``wazuh-user@<INSTANCE_IP>: Permission denied (publickey,gssapi-keyex,gssapi-with-mic)``.
+
+- Access during the initial password change is disabled to prevent potential problems. This process might take a few minutes to complete. Any access attempt before completion shows: ``wazuh-user@<INSTANCE_IP>: Permission denied (publickey,gssapi-keyex,gssapi-with-mic)``.
 
 
 Next steps

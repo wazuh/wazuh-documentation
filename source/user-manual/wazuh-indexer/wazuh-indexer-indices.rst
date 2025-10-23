@@ -13,8 +13,6 @@ An index is a collection of documents that relate to each other. The Wazuh index
 -  :ref:`wazuh‑monitoring-* <wazuh_monitoring_indices>`: This is the index pattern for the status of the Wazuh agents.
 -  :ref:`wazuh‑statistics-* <wazuh_statistics_indices>`: This is the index pattern that shows the performance metrics of the Wazuh server. It contains information that shows how many events are received, processed and dropped by the Wazuh server.
 -  :ref:`wazuh-states-vulnerabilities-* <wazuh_states_vulnerabilities_indices>`: This is the index pattern for information about vulnerabilities detected in the endpoints being monitored.
--  :ref:`wazuh-states-fim-files-* <wazuh_states_fim_files_indices>`: This is the index pattern for monitored files and directories on monitored endpoints.
--  :ref:`wazuh-states-fim-registries-* <wazuh_states_fim_registries_indices>`: This is the index pattern for Windows registry files on a monitored endpoint.
 -  :ref:`wazuh-states-inventory-hardware-* <wazuh_states_inventory_hardware_indices>`: This is the index pattern for basic information about hardware components on a monitored endpoint.
 -  :ref:`wazuh-states-inventory-hotfixes-* <wazuh_states_inventory_hotfixes_indices>`: This is the index pattern for updates installed on a Windows endpoint. The Wazuh vulnerability detection module uses this to discover what vulnerabilities have been patched on a Windows endpoint.
 -  :ref:`wazuh-states-inventory-interfaces-* <wazuh_states_inventory_interfaces_indices>`: This is the index pattern for ``up`` and ``down`` status information, and packet transfer information about network interfaces on a monitored endpoint.
@@ -498,46 +496,6 @@ To visualize this information in the Wazuh dashboard, click on **Vulnerability D
 .. thumbnail:: /images/manual/wazuh-indexer/wazuh-states-vulnerabilities-indices-2.png
    :title: Wazuh states vulnerabilities indices
    :alt: Wazuh states vulnerabilities indices
-   :align: center
-   :width: 80%
-
-.. _wazuh_states_fim_files_indices:
-
-The wazuh-states-fim-files-* indices
-------------------------------------
-
-The ``wazuh-states-fim-files-*`` index stores information about files and directories being monitored by the Wazuh File Integrity Monitoring (FIM) module. Each record within this index represents the state of a file or directory on an endpoint at the time it was scanned. This includes metadata such as file paths, permissions, ownership, and cryptographic hashes.
-
-By keeping track of these details, the index provides a baseline snapshot of the monitored file systems. When changes occur, like a file being created, modified, or deleted, Wazuh can compare the new state against the information in this index to quickly detect anomalies.
-
-In practical terms, this index serves as a historical ledger of the monitored endpoint's file system, ensuring that system integrity can be validated and investigated whenever suspicious activity arises. For example, if you navigate to **File Integrity Monitoring** > **Inventory** > **Files**, you will see information relating to monitored files.
-
-.. thumbnail:: /images/manual/wazuh-indexer/wazuh-states-fim-files-indices.png
-   :title: Wazuh states FIM files indices
-   :alt: Wazuh states FIM files indices
-   :align: center
-   :width: 80%
-
-.. _wazuh_states_fim_registries_indices:
-
-The wazuh-states-fim-registries-* indices
------------------------------------------
-
-The ``wazuh-states-fim-registries-*`` index stores information collected by the Wazuh File Integrity Monitoring (FIM) module for the Windows Registry on the monitored endpoint. Each document in this index represents the state of a monitored registry key or value, including details such as key paths, permissions, and associated values.
-
-This index acts as a reference point for detecting changes in the Windows Registry. When a key or value is created, modified, or removed, Wazuh compares the new state against the records stored here, allowing administrators to spot unauthorized or suspicious changes.
-
-The Windows Registry is often a target for persistence mechanisms, privilege escalation, and configuration tampering; therefore, this index is important for monitoring system integrity on Windows endpoints. For example, if you navigate to **File Integrity Monitoring** > **Inventory** > **Registry keys** or **Registry values**, you will see information relating to Windows registry keys and values.
-
-.. thumbnail:: /images/manual/wazuh-indexer/wazuh-states-fim-registries-indices1.png
-   :title: Wazuh states FIM registries indices
-   :alt: Wazuh states FIM registries indices
-   :align: center
-   :width: 80%
-
-.. thumbnail:: /images/manual/wazuh-indexer/wazuh-states-fim-registries-indices2.png
-   :title: Wazuh states FIM registries indices
-   :alt: Wazuh states FIM registries indices
    :align: center
    :width: 80%
 
