@@ -41,10 +41,12 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Removed duplicated introductory bullets from source/cloud-security/azure/index.rst ([#8987](https://github.com/wazuh/wazuh-documentation/pull/8987))
 - **Post-release**: Updated the *Installation from sources* documentation. ([#8980](https://github.com/wazuh/wazuh-documentation/pull/8980))
 - **Post-release**: Updated the Amazon Security Lake integration documentation. ([#8989](https://github.com/wazuh/wazuh-documentation/pull/8989))
+- **Post-release**: Updated the *Deployment with Puppet* documentation. ([#8994](https://github.com/wazuh/wazuh-documentation/pull/8994))
 
 ### Fixed
 
 - **Post-release**: Removed wazuh-states-fim index references. ([#8948](https://github.com/wazuh/wazuh-documentation/pull/8948))
+- **Post-release**: Removed unnecessary code block from agent installation from sources. ([#9000](https://github.com/wazuh/wazuh-documentation/pull/9000))
 
 ## [v4.13.0]
 
