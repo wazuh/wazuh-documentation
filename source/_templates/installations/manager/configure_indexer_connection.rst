@@ -23,7 +23,7 @@ By default, the indexer settings have one host configured. It's set to ``0.0.0.0
 
 - Ensure the Filebeat certificate and key name match the certificate files in ``/etc/filebeat/certs``.
 
-If you are running a cluster infrastructure, add a ``<host>`` entry for each one of your nodes. For example, in a two-node configuration:
+If you are running a Wazuh indexer cluster infrastructure, add a ``<host>`` entry for each one of your nodes. For example, in a two-node configuration:
 
 .. code-block:: xml
 
@@ -32,6 +32,6 @@ If you are running a cluster infrastructure, add a ``<host>`` entry for each one
      <host>https://10.0.0.2:9200</host>
    </hosts>
 
-Vulnerability detection prioritizes reporting to the first node in the list. It switches to the next node in case it is not available.
+The Wazuh server prioritizes reporting to the first Wazuh indexer node in the list. It switches to the next node in case it is not available.
 
 .. End of include file

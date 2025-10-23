@@ -6,9 +6,9 @@
 Wazuh server
 ============
 
-The Wazuh server analyzes the data received from the Wazuh agents, triggering alerts when threats or anomalies are detected. It is also used to remotely manage the agents' configuration and monitor their status. If you want to learn more about the Wazuh components, check the :doc:`Getting started <../../getting-started/components/index>` section.
+The Wazuh server analyzes the data received from the Wazuh agents, triggering alerts when threats or anomalies are detected. It is also used to remotely manage the configurations of Wazuh agents and monitor their status. If you want to learn more about the Wazuh components, check the :doc:`Getting started <../../getting-started/components/index>` section.
 
-You can install the Wazuh server on a single host. Alternatively, you can install it distributed in multiple nodes in a cluster configuration. Multi-node configurations provide high availability and improved performance. And if combined with a network load balancer an efficient use of its capacity can be achieved. 
+You can install the Wazuh server on a single host or distribute it across multiple nodes in a cluster configuration. Multi-node configurations provide high availability and improved performance. When combined with a network load balancer, you can achieve efficient use of its capacity.
 
 Check the requirements below and choose an installation method to start installing the Wazuh server.
 
@@ -81,7 +81,7 @@ The Wazuh server requires a 64-bit Intel, AMD, or ARM Linux processor (x86_64/AM
 Hardware requirements
 ^^^^^^^^^^^^^^^^^^^^^
 
-The Wazuh server can be installed as a single-node or as a multi-node cluster.
+You can install the Wazuh server as a single-node or multi-node cluster.
 
 - Hardware recommendations
                           
@@ -122,9 +122,7 @@ To determine if a Wazuh server requires more resources, monitor these files:
 - ``/var/ossec/var/run/wazuh-remoted.state``: the variable ``discarded_count`` indicates if messages from the agents were discarded.
 
 
-These two variables should be zero if the environment is working properly. If it is not the case, additional nodes can be added to the cluster. 
-
-
+These two variables should be zero if the environment is working properly. If it is not the case, you can add additional nodes to the cluster.
 
 .. toctree::
     :hidden:
