@@ -249,7 +249,7 @@ Setting a new hash
              backend_roles:
              - "admin"
              description: "Demo admin user"
- 
+
          ...
 
    -  ``kibanaserver`` user
@@ -262,7 +262,7 @@ Setting a new hash
              hash: "$2a$12$4AcgAt3xwOWadA5s5blL6ev39OXDNhmOesEoo33eZtrq2N0YrU3H."
              reserved: true
              description: "Demo kibanaserver user"
- 
+
          ...
 
 Setting the new password
@@ -274,8 +274,8 @@ Setting the new password
 
 #. Encode your new password in base64 format. Avoid inserting a trailing newline character to maintain the hash value. For example, use the ``-n`` option with the ``echo`` command as follows.
 
-   .. code-block::
-      
+   .. code-block:: console
+
       # echo -n "NewPassword" | base64
 
 #. Edit the indexer or dashbboard secrets configuration file as follows. Replace the value of the ``password`` field with your new encoded password.
@@ -338,16 +338,23 @@ Applying the changes
    .. code-block:: console
 
       export INSTALLATION_DIR=/usr/share/wazuh-indexer
-      CACERT=$INSTALLATION_DIR/certs/root-ca.pem
-      KEY=$INSTALLATION_DIR/certs/admin-key.pem
-      CERT=$INSTALLATION_DIR/certs/admin.pem
+      export CONFIG_DIR=$INSTALLATION_DIR/config
+      CACERT=$CONFIG_DIR/certs/root-ca.pem
+      KEY=$CONFIG_DIR/certs/admin-key.pem
+      CERT=$CONFIG_DIR/certs/admin.pem
       export JAVA_HOME=/usr/share/wazuh-indexer/jdk
 
 #. Wait for the Wazuh indexer to initialize properly. The waiting time can vary from two to five minutes. It depends on the size of the cluster, the assigned resources, and the speed of the network. Then, run the ``securityadmin.sh`` script to apply all changes.
 
    .. code-block:: console
 
-      $ bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -cd /usr/share/wazuh-indexer/opensearch-security/ -nhnv -cacert  $CACERT -cert $CERT -key $KEY -p 9200 -icl -h $NODE_NAME
+      $ bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -cd $CONFIG_DIR/opensearch-security/ -nhnv -cacert  $CACERT -cert $CERT -key $KEY -p 9200 -icl -h $NODE_NAME
+
+#. Force the Wazuh dashboard deployment rollout to update the component credentials.
+
+   .. code-block:: console
+
+      $ kubectl rollout restart deploy/wazuh-dashboard -n wazuh
 
 #. Delete all Wazuh manager pods to update the component credentials.
 
@@ -368,8 +375,8 @@ The ``wazuh-wui`` user is the user to connect with the Wazuh API by default. Fol
 
 #. Encode your new password in base64 format. Avoid inserting a trailing newline character to maintain the hash value. For example, use the ``-n`` option with the ``echo`` command as follows.
 
-   .. code-block::
-      
+   .. code-block:: console
+
       # echo -n "NewPassword" | base64
 
 #. Edit the ``wazuh/secrets/wazuh-api-cred-secret.yaml`` file and replace the value of the ``password`` field.

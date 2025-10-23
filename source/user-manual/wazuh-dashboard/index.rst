@@ -33,5 +33,6 @@ The following section provides an overview of the Wazuh dashboard, covering topi
    configuring-third-party-certs/index
    custom-branding
    settings
+   global-queries
    troubleshooting
    certificates

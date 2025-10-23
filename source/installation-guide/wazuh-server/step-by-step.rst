@@ -10,17 +10,15 @@ Install and configure the Wazuh server as a single-node or multi-node cluster fo
 
 The installation process is divided into two stages.
 
-#. Wazuh server node installation
-
-#. Cluster configuration for multi-node deployment
+#. `Wazuh server node installation`_
+#. `Cluster configuration for multi-node deployment`_
 
 .. note:: You need root user privileges to run all the commands described below.
 
-1. Wazuh server node installation
-----------------------------------
-.. raw:: html
+Wazuh server node installation
+------------------------------
 
-  <div class="accordion-section open">
+Follow these steps to install a single-node or multi-node cluster Wazuh server.
 
 Adding the Wazuh repository
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -102,52 +100,53 @@ Installing Filebeat
 Configuring Filebeat
 ^^^^^^^^^^^^^^^^^^^^
 
-  #. Download the preconfigured Filebeat configuration file.
+#. Download the preconfigured Filebeat configuration file.
 
-      .. code-block:: console
+   .. code-block:: console
 
-        # curl -so /etc/filebeat/filebeat.yml https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/tpl/wazuh/filebeat/filebeat.yml
+      # curl -so /etc/filebeat/filebeat.yml https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/tpl/wazuh/filebeat/filebeat.yml
 
 
-  #. Edit the ``/etc/filebeat/filebeat.yml`` configuration file and replace the following value:
+#. Edit the ``/etc/filebeat/filebeat.yml`` configuration file and replace the following value:
 
-     .. include:: /_templates/installations/filebeat/opensearch/configure_filebeat.rst
+   .. include:: /_templates/installations/filebeat/opensearch/configure_filebeat.rst
 
-  #. Create a Filebeat keystore to securely store authentication credentials.
+#. Create a Filebeat keystore to securely store authentication credentials.
 
-      .. code-block:: console
+   .. code-block:: console
 
-        # filebeat keystore create
+      # filebeat keystore create
 
-  #. Add the default username and password ``admin``:``admin`` to the secrets keystore.
+#. Add the default username and password ``admin``:``admin`` to the secrets keystore.
 
-      .. code-block:: console
+   .. code-block:: console
 
-        # echo admin | filebeat keystore add username --stdin --force
-        # echo admin | filebeat keystore add password --stdin --force
+      # echo admin | filebeat keystore add username --stdin --force
+      # echo admin | filebeat keystore add password --stdin --force
 
-  #. Download the alerts template for the Wazuh indexer.
+#. Download the alerts template for the Wazuh indexer.
 
-     .. code-block:: console
+   .. code-block:: console
 
-        # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_CURRENT|/extensions/elasticsearch/7.x/wazuh-template.json
-        # chmod go+r /etc/filebeat/wazuh-template.json
+      # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_CURRENT|/extensions/elasticsearch/7.x/wazuh-template.json
+      # chmod go+r /etc/filebeat/wazuh-template.json
 
-  #. Install the Wazuh module for Filebeat.
+#. Install the Wazuh module for Filebeat.
 
-      .. code-block:: console
+   .. code-block:: console
 
-        # curl -s https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/filebeat/wazuh-filebeat-0.4.tar.gz | tar -xvz -C /usr/share/filebeat/module
+      # curl -s https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/filebeat/wazuh-filebeat-0.4.tar.gz | tar -xvz -C /usr/share/filebeat/module
 
 Deploying certificates
 ^^^^^^^^^^^^^^^^^^^^^^
 
-  .. note::
-    Make sure that a copy of the ``wazuh-certificates.tar`` file, created during the initial configuration step, is placed in your working directory.
+.. note::
 
-  #. Replace ``<SERVER_NODE_NAME>`` with your Wazuh server node certificate name, the same one used in ``config.yml`` when creating the certificates. Then, move the certificates to their corresponding location.
+   Make sure that a copy of the ``wazuh-certificates.tar`` file, created during the initial configuration step, is placed in your working directory.
 
-      .. include:: /_templates/installations/filebeat/opensearch/copy_certificates_filebeat_wazuh_cluster.rst
+#. Replace ``<SERVER_NODE_NAME>`` with your Wazuh server node certificate name, the same one used in ``config.yml`` when creating the certificates. Then, move the certificates to their corresponding location.
+
+   .. include:: /_templates/installations/filebeat/opensearch/copy_certificates_filebeat_wazuh_cluster.rst
 
 Configuring the Wazuh indexer connection
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -156,7 +155,7 @@ Configuring the Wazuh indexer connection
 
    You can skip this step if you are not going to use the vulnerability detection capability.
 
-#. Save the Wazuh indexer username and password into the Wazuh manager keystore using the wazuh-keystore tool:
+#. Save the Wazuh indexer username and password into the Wazuh manager keystore using the wazuh-keystore tool. Replace ``<WAZUH_INDEXER_USERNAME>`` and ``<WAZUH_INDEXER_PASSWORD>`` with the Wazuh indexer username and password:
 
    .. code-block:: console
 
@@ -185,46 +184,45 @@ Starting the Wazuh manager
 Starting the Filebeat service
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-  #. Enable and start the Filebeat service.
+#. Enable and start the Filebeat service.
 
-      .. include:: /_templates/installations/filebeat/common/enable_filebeat.rst
+   .. include:: /_templates/installations/filebeat/common/enable_filebeat.rst
 
-  #. Run the following command to verify that Filebeat is successfully installed.
+#. Run the following command to verify that Filebeat is successfully installed.
 
-     .. code-block:: console
+   .. code-block:: console
 
-        # filebeat test output
+      # filebeat test output
 
-     Expand the output to see an example response.
+   Expand the output to see an example response.
 
-     .. code-block:: none
-          :class: output accordion-output
+   .. code-block:: none
+      :class: output accordion-output
 
-          elasticsearch: https://127.0.0.1:9200...
-            parse url... OK
-            connection...
-              parse host... OK
-              dns lookup... OK
-              addresses: 127.0.0.1
-              dial up... OK
-            TLS...
-              security: server's certificate chain verification is enabled
-              handshake... OK
-              TLS version: TLSv1.3
-              dial up... OK
-            talk to server... OK
-            version: 7.10.2
-
+      elasticsearch: https://127.0.0.1:9200...
+        parse url... OK
+        connection...
+          parse host... OK
+          dns lookup... OK
+          addresses: 127.0.0.1
+          dial up... OK
+        TLS...
+          security: server's certificate chain verification is enabled
+          handshake... OK
+          TLS version: TLSv1.3
+          dial up... OK
+        talk to server... OK
+        version: 7.10.2
 
 Your Wazuh server node is now successfully installed. Repeat this stage of the installation process for every Wazuh server node in your Wazuh cluster, then proceed with configuring the Wazuh cluster. If you want a Wazuh server single-node cluster, everything is set and you can proceed directly with :doc:`../wazuh-dashboard/step-by-step`.
 
+Disable Wazuh updates
+---------------------
+
 .. include:: /_templates/installations/disable-wazuh-updates.rst
 
-2. Cluster configuration for multi-node deployment
---------------------------------------------------
-.. raw:: html
-
-  <div class="accordion-section">
+Cluster configuration for multi-node deployment
+-----------------------------------------------
 
 After completing the installation of the Wazuh server on every node, you need to configure one server node only as the master and the rest as workers.
 
@@ -233,33 +231,33 @@ After completing the installation of the Wazuh server on every node, you need to
 Configuring the Wazuh server master node
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-  #. Edit the following settings in the ``/var/ossec/etc/ossec.conf`` configuration file.
+#. Edit the following settings in the ``/var/ossec/etc/ossec.conf`` file and configure the necessary parameters:
 
-      .. include:: /_templates/installations/manager/configure_wazuh_master_node.rst
+   .. include:: /_templates/installations/manager/configure_wazuh_master_node.rst
 
-  #. Restart the Wazuh manager.
+#. Restart the Wazuh manager.
 
-      .. include:: /_templates/installations/manager/restart_wazuh_manager.rst
+   .. include:: /_templates/installations/manager/restart_wazuh_manager.rst
 
 .. _wazuh_server_worker_nodes:
 
 Configuring the Wazuh server worker nodes
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-  #. .. include:: /_templates/installations/manager/configure_wazuh_worker_node.rst
+#. .. include:: /_templates/installations/manager/configure_wazuh_worker_node.rst
 
-  #. Restart the Wazuh manager.
+#. Restart the Wazuh manager.
 
-      .. include:: /_templates/installations/manager/restart_wazuh_manager.rst
+   .. include:: /_templates/installations/manager/restart_wazuh_manager.rst
 
   Repeat these configuration steps for every Wazuh server worker node in your cluster.
 
 Testing Wazuh server cluster
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-To verify that the Wazuh cluster is enabled and all the nodes are connected, execute the following command:
+Run the following command to verify that the Wazuh cluster is enabled and all the nodes are connected:
 
-  .. code-block:: console
+.. code-block:: console
 
     # /var/ossec/bin/cluster_control -l
 
