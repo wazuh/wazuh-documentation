@@ -834,11 +834,6 @@ Uninstall
 
       #. Delete the service:
 
-         .. code-block:: console
-
-            # [ -f /etc/rc.local ] && sed -i'' '/wazuh-control start/d' /etc/rc.local
-            # find /etc/{init.d,rc*.d} -name "*wazuh*" | xargs rm -f
-
          .. tabs::
 
             .. group-tab:: SysV init
