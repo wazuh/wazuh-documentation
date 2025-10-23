@@ -50,3 +50,13 @@ Execute the following command to install the dependencies:
       .. note::
 
          If you're using a virtual environment, remove the ``--break-system-packages`` parameter from the command above.
+
+   .. group-tab:: Python 3.13
+
+      .. code-block:: console
+
+         # pip3 install --break-system-packages "numpy==2.1.0" "pyarrow==18.0.0" "boto3==1.34.135"
+
+      .. note::
+
+         If you're using a virtual environment, remove the ``--break-system-packages`` parameter from the command above.

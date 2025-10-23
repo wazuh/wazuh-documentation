@@ -55,6 +55,34 @@ You need the libraries in the command below to set up your Wazuh agent endpoint 
 
          If you use a virtual environment, remove the ``--break-system-packages`` parameter from the above command.
 
+   .. group-tab:: Python 3.13
+
+      #. Install system-level package libffi.
+
+         .. tabs::
+
+            .. group-tab:: APT
+
+               .. code-block:: console
+
+                  # apt-get update && apt-get install -y libffi-dev
+
+            .. group-tab:: Yum
+
+               .. code-block:: console
+
+                  # yum update && yum install -y libffi-devel
+
+      #. Install the Python packages.
+
+         .. code-block:: console
+
+            # pip3 install --break-system-packages azure-storage-blob==12.20.0 azure-storage-common==2.1.0 azure-common==1.1.25 cryptography==3.3.2 cffi==1.14.4 pycparser==2.20 six==1.16.0 python-dateutil==2.9.0.post0 requests==2.25.1 certifi==2022.12.07 chardet==3.0.4 idna==2.9 urllib3==1.26.18 SQLAlchemy==2.0.44 pytz==2020.1
+
+      .. note::
+
+         If you use a virtual environment, remove the ``--break-system-packages`` parameter from the above command.
+
 .. _configure_azure_credentials:
 
 Configuring Azure credentials

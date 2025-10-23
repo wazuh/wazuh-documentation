@@ -1,32 +1,28 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
-.. note::
+We recommend disabling the Wazuh package repositories after installing all components on this server to prevent accidental upgrades.
 
-   **Recommended Action**: Disable Wazuh Updates.
+Execute the following command only after completing all installations:
 
-   We recommend disabling the Wazuh package repositories after installing all components on this server to prevent accidental upgrades.
+.. tabs::
 
-   Execute the following command only after completing all installations:
+   .. group-tab:: APT
 
-   .. tabs::
+      .. code-block:: console
 
-      .. group-tab:: APT
+         # sed -i "s/^deb /#deb /" /etc/apt/sources.list.d/wazuh.list
+         # apt update
 
-         .. code-block:: console
+   .. group-tab:: YUM
 
-            # sed -i "s/^deb /#deb /" /etc/apt/sources.list.d/wazuh.list
-            # apt update
+      .. code-block:: console
 
-      .. group-tab:: YUM
+         # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
 
-         .. code-block:: console
+   .. group-tab:: DNF
 
-            # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
+      .. code-block:: console
 
-      .. group-tab:: DNF
-
-         .. code-block:: console
-
-            # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
+         # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
 
 .. End of include file

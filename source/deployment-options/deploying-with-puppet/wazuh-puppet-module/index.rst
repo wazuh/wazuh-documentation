@@ -12,50 +12,76 @@ This `module <https://github.com/wazuh/wazuh-puppet>`_ has been authored by Nico
 Install Wazuh module
 --------------------
 
-Download and install the Wazuh module from Puppet Forge:
+#. Download and install the Wazuh module from Puppet Forge:
 
-  .. code-block:: console
+   .. code-block:: console
 
-    # puppet module install wazuh-wazuh --version |WAZUH_CURRENT_PUPPET|
+      # puppet module install wazuh-wazuh --version |WAZUH_CURRENT_PUPPET|
 
-  .. code-block:: none
-    :class: output
+   .. code-block:: none
+      :class: output
 
-    Notice: Preparing to install into /etc/puppetlabs/code/environments/production/modules ...
-    Notice: Downloading from https://forgeapi.puppet.com ...
-    Notice: Installing -- do not interrupt ...
-    /etc/puppetlabs/code/environments/production/modules
-    └─┬ wazuh-wazuh (v|WAZUH_CURRENT|)
-      ├── puppet-nodejs (v7.0.1)
-      ├── puppet-selinux (v3.4.1)
-      ├── puppetlabs-apt (v7.7.1)
-      ├─┬ puppetlabs-concat (v6.4.0)
-      │ └── puppetlabs-translate (v2.2.0)
-      ├── puppetlabs-firewall (v2.8.1)
-      ├─┬ puppetlabs-powershell (v4.1.0)
-      │ └── puppetlabs-pwshlib (v0.10.1)
-      └── puppetlabs-stdlib (v6.6.0)
+      Notice: Preparing to install into /etc/puppetlabs/code/environments/production/modules ...
+      Notice: Downloading from https://forgeapi.puppet.com ...
+      Notice: Installing -- do not interrupt ...
+      /etc/puppetlabs/code/environments/production/modules
+      └─┬ wazuh-wazuh (v|WAZUH_CURRENT|)
+        ├── puppet-archive (v8.0.0)
+        ├── puppet-nodejs (v10.0.0)
+        ├── puppet-selinux (v4.1.0)
+        ├── puppet-zypprepo (v5.0.0)
+        ├── puppetlabs-apt (v10.0.1)
+        ├── puppetlabs-concat (v9.0.2)
+        ├── puppetlabs-firewall (v8.1.7)
+        ├─┬ puppetlabs-powershell (v6.0.1)
+        │ └── puppetlabs-pwshlib (v1.2.3)
+        └── puppetlabs-stdlib (v9.6.0)
 
-
-This module installs and configures Wazuh agent and manager.
+This module is used to install and configure the Wazuh agent and manager.
 
 
 Install a stack via Puppet
 --------------------------
 
-Single Node
+Single-node
 ^^^^^^^^^^^
 
-You can follow the steps below to deploy a single-node stack. This stack consists of:
+You can use the manifest shown below to deploy a single-node stack. This stack consists of:
 
--  Wazuh dashboard
--  Wazuh indexer
--  Wazuh manager
--  Filebeat
+- Wazuh dashboard
+- Wazuh indexer
+- Wazuh manager
+- Filebeat
 
-#. Create the ``stack.pp`` file in ``/etc/puppetlabs/code/environments/production/manifests/`` with the following content.
+To configure the manager before deployment, check the :ref:`Wazuh puppet reference <ref_wazuh_puppet>`.
+
+#. Install the following packages if missing on the Puppet agent. The Wazuh central components require these packages:
+
+   .. tabs::
+
+      .. group-tab:: APT
+
+         .. code-block:: console
+
+            # apt-get install debhelper tar curl libcap2-bin #debhelper version 9 or later
+
+      .. group-tab:: Yum
+
+         .. code-block:: console
+
+            # yum install libcap
+
+      .. group-tab:: DNF
+
+         .. code-block:: console
+
+            # dnf install libcap
+
+#. Create the ``stack.pp`` file on the Puppet master at ``/etc/puppetlabs/code/environments/production/manifests/`` with the code below:
 
    .. code-block:: puppet
+      :emphasize-lines: 12, 20
+
 
       $discovery_type = 'single-node'
       stage { 'certificates': }
@@ -68,7 +94,7 @@ You can follow the steps below to deploy a single-node stack. This stack consist
       Exec {
       timeout => 0,
       }
-      node "puppet-server" {
+      node "<PUPPET_MASTER>" {
       class { 'wazuh::certificates':
         indexer_certs => [['node-1','127.0.0.1']],
         manager_certs => [['master','127.0.0.1']],
@@ -76,7 +102,7 @@ You can follow the steps below to deploy a single-node stack. This stack consist
         stage => certificates,
       }
       }
-      node "puppet-aio-node" {
+      node "<PUPPET_AGENT>" {
       class { 'wazuh::repo':
       stage => repo,
       }
@@ -99,202 +125,245 @@ You can follow the steps below to deploy a single-node stack. This stack consist
 
    Where:
 
-   -  ``puppet-aio-node``: Hostname or IP address of the Puppet agent.
-   -  ``puppet-server``: Hostname or IP address of the Puppet server when the Wazuh module was installed.
+   - ``PUPPET_MASTER`` is the hostname of the Puppet server where the Wazuh module was installed.
+   - ``PUPPET_AGENT`` is the hostname of the Puppet agent.
 
-   To configure the manager before deployment, check the configuration variables for the Wazuh manager class section in :ref:`ref_wazuh_puppet`.
-
-#. Trigger a Puppet run on the Puppet server to generate the Wazuh certificates.
+#. Trigger a Puppet run on the Puppet server to generate the Wazuh certificates. Skip this step if you want the stack to run on the specified node once the run interval time, as set in ``puppet.conf`` elapses:
 
    .. code-block:: console
 
       # puppet agent -t
 
-#. Perform a Puppet run on the Puppet agent to start the deployment of the Wazuh stack.
+#. Perform a Puppet run on the Puppet agent to start the deployment of the Wazuh stack. Skip this step if you want the stack to run on the specified node once the run interval time, as set in ``puppet.conf`` elapses:
 
    .. code-block:: console
 
       # puppet agent -t
 
-Multi Node
+.. note:: The default login credentials are ``admin``:``admin``. It is advised to `change the password <https://documentation.wazuh.com/current/user-manual/user-administration/password-management.html>`_ after installation.
+
+Multi-node
 ^^^^^^^^^^
 
-Using the multi-node manifest below, you can deploy a distributed stack consisting of the following nodes on three different servers or Virtual Machines (VM).
+Using the multi-node manifest below, you can deploy a distributed stack consisting of the following nodes on three servers or Virtual Machines (VMs).
 
--  3 indexer nodes
--  Manager master node
--  Manager worker node
--  Dashboard node
+- 3 indexer nodes
 
-You must include the IP addresses of the servers where you are installing each application.
+- Manager master node
 
-.. code-block:: puppet
-   :emphasize-lines: 1-6
+- Manager worker node
 
-   $node1host   = '<WAZUH_INDEXER_NODE1_IP_ADDRESS>'
-   $node2host   = '<WAZUH_INDEXER_NODE2_IP_ADDRESS>'
-   $node3host   = '<WAZUH_INDEXER_NODE3_IP_ADDRESS>'
-   $masterhost    = '<WAZUH_MANAGER_MASTER_IP_ADDRESS>'
-   $workerhost    = '<WAZUH_MANAGER_WORKER_IP_ADDRESS>'
-   $dashboardhost = '<WAZUH_DASHBOARD_IP_ADDRESS>'
-   $indexer_node1_name = 'node1'
-   $indexer_node2_name = 'node2'
-   $indexer_node3_name = 'node3'
-   $master_name = 'master'
-   $worker_name = 'worker'
-   $cluster_size = '3'
-   $indexer_discovery_hosts = [$node1host, $node2host, $node3host]
-   $indexer_initial_cluster_manager_nodes = [$node1host, $node2host, $node3host]
-   $indexer_cluster_CN = [$indexer_node1_name, $indexer_node2_name, $indexer_node3_name]
-   # Define stage for order execution
-   stage { 'certificates': }
-   stage { 'repo': }
-   stage { 'indexerdeploy': }
-   stage { 'securityadmin': }
-   stage { 'dashboard': }
-   stage { 'manager': }
-   Stage[certificates] -> Stage[repo] -> Stage[indexerdeploy] -> Stage[securityadmin] -> Stage[manager] -> Stage[dashboard]
-   Exec {
-   timeout => 0,
-   }
-   node "puppet-server" {
-   class { 'wazuh::certificates':
-     indexer_certs => [["$indexer_node1_name","$node1host" ],["$indexer_node2_name","$node2host" ],["$indexer_node3_name","$node3host" ]],
-     manager_master_certs => [["$master_name","$masterhost"]],
-     manager_worker_certs => [["$worker_name","$workerhost"]],
-     dashboard_certs => ["$dashboardhost"],
-     stage => certificates
-   }
-   class { 'wazuh::repo':
-   stage => repo
-   }
-   }
-   node "puppet-wazuh-indexer-node1" {
-   class { 'wazuh::repo':
-   stage => repo
-   }
-   class { 'wazuh::indexer':
-     indexer_node_name => "$indexer_node1_name",
-     indexer_network_host => "$node1host",
-     indexer_node_max_local_storage_nodes => "$cluster_size",
-     indexer_discovery_hosts => $indexer_discovery_hosts,
-     indexer_initial_cluster_manager_nodes => $indexer_initial_cluster_manager_nodes,
-     indexer_cluster_CN => $indexer_cluster_CN,
-     stage => indexerdeploy
-   }
-   class { 'wazuh::securityadmin':
-   indexer_network_host => "$node1host",
-   stage => securityadmin
-   }
-   }
-   node "puppet-wazuh-indexer-node2" {
-   class { 'wazuh::repo':
-   stage => repo
-   }
-   class { 'wazuh::indexer':
-     indexer_node_name => "$indexer_node2_name",
-     indexer_network_host => "$node2host",
-     indexer_node_max_local_storage_nodes => "$cluster_size",
-     indexer_discovery_hosts => $indexer_discovery_hosts,
-     indexer_initial_cluster_manager_nodes => $indexer_initial_cluster_manager_nodes,
-     indexer_cluster_CN => $indexer_cluster_CN,
-     stage => indexerdeploy
-   }
-   }
-   node "puppet-wazuh-indexer-node3" {
-   class { 'wazuh::repo':
-   stage => repo
-   }
-   class { 'wazuh::indexer':
-     indexer_node_name => "$indexer_node3_name",
-     indexer_network_host => "$node3host",
-     indexer_node_max_local_storage_nodes => "$cluster_size",
-     indexer_discovery_hosts => $indexer_discovery_hosts,
-     indexer_initial_cluster_manager_nodes => $indexer_initial_cluster_manager_nodes,
-     indexer_cluster_CN => $indexer_cluster_CN,
-     stage => indexerdeploy
-   }
-   }
-   node "puppet-wazuh-manager-master" {
-   class { 'wazuh::repo':
-   stage => repo
-   }
-   class { 'wazuh::manager':
-     ossec_cluster_name => 'wazuh-cluster',
-     ossec_cluster_node_name => 'wazuh-master',
-     ossec_cluster_node_type => 'master',
-     ossec_cluster_key => '01234567890123456789012345678912',
-     ossec_cluster_bind_addr => "$masterhost",
-     ossec_cluster_nodes => ["$masterhost"],
-     ossec_cluster_disabled => 'no',
-     stage => manager
-   }
-   class { 'wazuh::filebeat_oss':
-     filebeat_oss_indexer_ip => "$node1host",
-     wazuh_node_name => "$master_name",
-     stage => manager
-   }
-   }
-   node "puppet-wazuh-manager-worker" {
-   class { 'wazuh::repo':
-   stage => repo
-   }
-   class { 'wazuh::manager':
-     ossec_cluster_name => 'wazuh-cluster',
-     ossec_cluster_node_name => 'wazuh-worker',
-     ossec_cluster_node_type => 'worker',
-     ossec_cluster_key => '01234567890123456789012345678912',
-     ossec_cluster_bind_addr => "$masterhost",
-     ossec_cluster_nodes => ["$masterhost"],
-     ossec_cluster_disabled => 'no',
-     stage => manager
-   }
-   class { 'wazuh::filebeat_oss':
-     filebeat_oss_indexer_ip => "$node1host",
-     wazuh_node_name => "$worker_name",
-     stage => manager
-   }
-   }
-   node "puppet-wazuh-dashboard" {
-   class { 'wazuh::repo':
-   stage => repo,
-   }
-   class { 'wazuh::dashboard':
-     indexer_server_ip  => "$node1host",
-     manager_api_host   => "$masterhost",
-     stage => dashboard
-   }
-   }
+- Dashboard node
 
-The correspondence of the IP addresses with the puppet nodes described in the manifest is as follows:
+You must include the server's hostname where you are installing each application.
 
--  ``puppet-wazuh-indexer-node1`` = ``node1host``. Wazuh indexer node1.
--  ``puppet-wazuh-indexer-node2`` = ``node2host``. Wazuh indexer node2.
--  ``puppet-wazuh-indexer-node3`` = ``node3host``. Wazuh indexer node3.
--  ``puppet-wazuh-manager-master`` = ``masterhost``. Wazuh manager master.
--  ``puppet-wazuh-manager-worker`` = ``workerhost``. Wazuh manager worker.
--  ``puppet-wazuh-dashboard`` = ``dashboardhost``. Wazuh dashboard node.
+#. Install the following packages if missing. These packages are required by the Wazuh central components:
 
-The ``wazuh::certificates`` class needs to be applied on the Puppet server (``puppet-server``) where the Wazuh module is installed. This is necessary because the archives module is used to distribute files to all servers in the Wazuh stack deployment.
+   .. tabs::
 
-If you need more Wazuh indexer nodes, add new variables. For example ``indexer_node4_name`` and ``node4host``. Add them to the following arrays:
+      .. group-tab:: APT
 
--  ``indexer_discovery_hosts``
--  ``indexer_initial_cluster_manager_nodes``
--  ``indexer_cluster_CN``
--  ``indexer_certs``
+         .. code-block:: console
 
-In addition, you need to add a new node instance similar to ``puppet-wazuh-indexer-node2`` or ``puppet-wazuh-indexer-node3``. Unlike the instance for Wazuh indexer node1, these instances don't run ``securityadmin``.
+            # apt-get install debhelper tar curl libcap2-bin #debhelper version 9 or later
 
-In case you need to add a Wazuh manager worker server, add a new variable such as ``worker2host``. Add the variable to the ``manager_worker_certs`` array. For example, ``['worker',"$worker2host"]``. Then, replicate the node instance ``puppet-wazuh-manager-worker`` with the new server.
+      .. group-tab:: Yum
 
-Place the file at ``/etc/puppetlabs/code/environments/production/manifests/`` in your Puppet master. It executes on the specified node once the ``runinterval`` time, as set in ``puppet.conf``, elapses. However, if you want to run the manifest immediately on a specific node, run the following command on the node:
+         .. code-block:: console
 
-.. code-block:: console
+            # yum install libcap
 
-   # puppet agent -t
+      .. group-tab:: DNF
 
-Change Password for Wazuh users
+         .. code-block:: console
+
+            # dnf install libcap
+
+#. Create the ``stack.pp`` file at ``/etc/puppetlabs/code/environments/production/manifests/`` with the code below:
+
+   .. code-block:: puppet
+      :emphasize-lines: 1-6
+
+      $node1host   = '<WAZUH_INDEXER_NODE1>'
+      $node2host   = '<WAZUH_INDEXER_NODE2>'
+      $node3host   = '<WAZUH_INDEXER_NODE3>'
+      $masterhost    = '<WAZUH_MANAGER_MASTER>'
+      $workerhost    = '<WAZUH_MANAGER_WORKER>'
+      $dashboardhost = '<WAZUH_DASHBOARD>'
+      $indexer_node1_name = 'node1'
+      $indexer_node2_name = 'node2'
+      $indexer_node3_name = 'node3'
+      $master_name = 'master'
+      $worker_name = 'worker'
+      $cluster_size = '3'
+      $indexer_discovery_hosts = [$node1host, $node2host, $node3host]
+      $indexer_initial_cluster_manager_nodes = [$node1host, $node2host, $node3host]
+      $indexer_cluster_CN = [$indexer_node1_name, $indexer_node2_name, $indexer_node3_name]
+      # Define stage for order execution
+      stage { 'certificates': }
+      stage { 'repo': }
+      stage { 'indexerdeploy': }
+      stage { 'securityadmin': }
+      stage { 'dashboard': }
+      stage { 'manager': }
+      Stage[certificates] -> Stage[repo] -> Stage[indexerdeploy] -> Stage[securityadmin] -> Stage[manager] -> Stage[dashboard]
+      Exec {
+      timeout => 0,
+      }
+      node "puppet-server" {
+      class { 'wazuh::certificates':
+        indexer_certs => [["$indexer_node1_name","$node1host" ],["$indexer_node2_name","$node2host" ],["$indexer_node3_name","$node3host" ]],
+        manager_master_certs => [["$master_name","$masterhost"]],
+        manager_worker_certs => [["$worker_name","$workerhost"]],
+        dashboard_certs => ["$dashboardhost"],
+        stage => certificates
+      }
+      class { 'wazuh::repo':
+      stage => repo
+      }
+      }
+      node "puppet-wazuh-indexer-node1" {
+      class { 'wazuh::repo':
+      stage => repo
+      }
+      class { 'wazuh::indexer':
+        indexer_node_name => "$indexer_node1_name",
+        indexer_network_host => "$node1host",
+        indexer_node_max_local_storage_nodes => "$cluster_size",
+        indexer_discovery_hosts => $indexer_discovery_hosts,
+        indexer_initial_cluster_manager_nodes => $indexer_initial_cluster_manager_nodes,
+        indexer_cluster_CN => $indexer_cluster_CN,
+        stage => indexerdeploy
+      }
+      class { 'wazuh::securityadmin':
+      indexer_network_host => "$node1host",
+      stage => securityadmin
+      }
+      }
+      node "puppet-wazuh-indexer-node2" {
+      class { 'wazuh::repo':
+      stage => repo
+      }
+      class { 'wazuh::indexer':
+        indexer_node_name => "$indexer_node2_name",
+        indexer_network_host => "$node2host",
+        indexer_node_max_local_storage_nodes => "$cluster_size",
+        indexer_discovery_hosts => $indexer_discovery_hosts,
+        indexer_initial_cluster_manager_nodes => $indexer_initial_cluster_manager_nodes,
+        indexer_cluster_CN => $indexer_cluster_CN,
+        stage => indexerdeploy
+      }
+      }
+      node "puppet-wazuh-indexer-node3" {
+      class { 'wazuh::repo':
+      stage => repo
+      }
+      class { 'wazuh::indexer':
+        indexer_node_name => "$indexer_node3_name",
+        indexer_network_host => "$node3host",
+        indexer_node_max_local_storage_nodes => "$cluster_size",
+        indexer_discovery_hosts => $indexer_discovery_hosts,
+        indexer_initial_cluster_manager_nodes => $indexer_initial_cluster_manager_nodes,
+        indexer_cluster_CN => $indexer_cluster_CN,
+        stage => indexerdeploy
+      }
+      }
+      node "puppet-wazuh-manager-master" {
+      class { 'wazuh::repo':
+      stage => repo
+      }
+      class { 'wazuh::manager':
+        ossec_cluster_name => 'wazuh-cluster',
+        ossec_cluster_node_name => 'wazuh-master',
+        ossec_cluster_node_type => 'master',
+        ossec_cluster_key => '01234567890123456789012345678912',
+        ossec_cluster_bind_addr => "$masterhost",
+        ossec_cluster_nodes => ["$masterhost"],
+        ossec_cluster_disabled => 'no',
+        stage => manager
+      }
+      class { 'wazuh::filebeat_oss':
+        filebeat_oss_indexer_ip => "$node1host",
+        wazuh_node_name => "$master_name",
+        stage => manager
+      }
+      }
+      node "puppet-wazuh-manager-worker" {
+      class { 'wazuh::repo':
+      stage => repo
+      }
+      class { 'wazuh::manager':
+        ossec_cluster_name => 'wazuh-cluster',
+        ossec_cluster_node_name => 'wazuh-worker',
+        ossec_cluster_node_type => 'worker',
+        ossec_cluster_key => '01234567890123456789012345678912',
+        ossec_cluster_bind_addr => "$masterhost",
+        ossec_cluster_nodes => ["$masterhost"],
+        ossec_cluster_disabled => 'no',
+        stage => manager
+      }
+      class { 'wazuh::filebeat_oss':
+        filebeat_oss_indexer_ip => "$node1host",
+        wazuh_node_name => "$worker_name",
+        stage => manager
+      }
+      }
+      node "puppet-wazuh-dashboard" {
+      class { 'wazuh::repo':
+      stage => repo,
+      }
+      class { 'wazuh::dashboard':
+        indexer_server_ip  => "$node1host",
+        manager_api_host   => "$masterhost",
+        stage => dashboard
+      }
+      }
+
+   Where:
+
+   - ``WAZUH_INDEXER_NODE1`` is the hostname of the Wazuh indexer node1.
+
+   - ``WAZUH_INDEXER_NODE2`` is the hostname of the Wazuh indexer node2.
+
+   - ``WAZUH_INDEXER_NODE3`` is the hostname of the Wazuh indexer node3.
+
+   - ``WAZUH_MANAGER_MASTER`` is the hostname of the Wazuh manager master node.
+
+   - ``WAZUH_MANAGER_WORKER`` is the hostname of the Wazuh manager worker node.
+
+   - ``WAZUH_DASHBOARD`` is the hostname of the Wazuh dashboard.
+
+   .. note:: ``ossec_cluster_key`` is a unique 32-character-long key. You can generate a unique key with the command ``openssl rand -hex 16``.
+
+   The ``wazuh::certificates`` class must be applied on the Puppet server (``puppet-server``) where the Wazuh module is installed. This is necessary because the archives module distributes files to all servers in the Wazuh stack deployment.
+
+   If you need more Wazuh indexer nodes, add new variables. For example, ``WAZUH_INDEXER_NODE4``. Add them to the following arrays:
+
+   - ``indexer_discovery_hosts``
+
+   - ``indexer_initial_cluster_manager_nodes``
+
+   - ``indexer_cluster_CN``
+
+   - ``indexer_certs``
+
+   In addition, you need to add a new node instance similar to ``WAZUH_INDEXER_NODE2`` or ``WAZUH_INDEXER_NODE3``. Unlike the example for ``WAZUH_INDEXER_NODE1``, these instances don't run securityadmin.
+
+   In case you need to add a Wazuh manager worker server, add a new variable such as ``WAZUH_MANAGER_WORKER2``. Add the variable to the ``manager_worker_certs`` array. For example, ``['worker',"$worker2host"]``. Then, replicate the node instance ``WAZUH_MANAGER_WORKER`` with the new server.
+
+#. Trigger a Puppet run on the Puppet server to generate the Wazuh certificates. Skip this step if you want the stack to run on the specified node once the run interval time, as set in ``puppet.conf`` elapses:
+
+   .. code-block:: console
+
+      # puppet agent -t
+
+#. Perform a Puppet run on the Puppet agents to start the deployment of the Wazuh stack. Skip this step if you want the stack to run on the specified node once the run interval time, as set in ``puppet.conf`` elapses:
+
+   .. code-block:: console
+
+      # puppet agent -t
+
+Change password for Wazuh users
 -------------------------------
 
 Follow the instructions in the :doc:`Password Management </user-manual/user-administration/password-management>` section to change your Wazuh user passwords. Once you change them, set the new passwords within the classes used for deploying the Wazuh Stack.
@@ -335,49 +404,63 @@ Wazuh API users
         }
       }
 
-Retrieving the Puppet node name
--------------------------------
-
-The ``<PUPPET_AGENT_NODE_NAME>`` placeholder in your Puppet manifest represents the name under which the Puppet Server catalogs the agent (the VM or server added as a Puppet agent).
-
-You can obtain this node name by running the following command on the agent:
-
-  .. code-block:: console
-
-    # puppet config print certname
-
-Replace ``<PUPPET_AGENT_NODE_NAME>`` in your manifest with the value returned by this command.
-
-
 Install Wazuh agent via Puppet
 ------------------------------
 
-The agent is configured by installing the ``wazuh::agent`` class.
+The agent is configured by installing the ``wazuh::agent`` class. Here is an example of a manifest ``wazuh-agent.pp`` (please replace ``<MANAGER_IP_ADDRESS>`` with your manager IP address).
 
-Here is an example of a manifest ``wazuh-agent.pp`` (please replace  ``<MANAGER_IP_ADDRESS>`` with your manager IP address).
+#. Install the following packages if missing on the Puppet agent. The Wazuh central components require these packages:
 
-  .. code-block:: puppet
+   .. tabs::
 
-   node "<PUPPET_AGENT_NODE_NAME>" {
-     class { 'wazuh::repo':
-     }
-     class { "wazuh::agent":
-       wazuh_register_endpoint => "<MANAGER_IP_ADDRESS>",
-       wazuh_reporting_endpoint => "<MANAGER_IP_ADDRESS>"
-     }
-   }
+      .. group-tab:: APT
 
+         .. code-block:: console
 
-Place the file at ``/etc/puppetlabs/code/environments/production/manifests/`` in your Puppet master and it will be executed in the specified node after the ``runinterval`` time set in ``puppet.conf``. However, if you want to run it first, try the following command in the Puppet agent.
+            # apt-get install debhelper tar curl libcap2-bin #debhelper version 9 or later
 
-  .. code-block:: console
+      .. group-tab:: Yum
 
-    # puppet agent -t
+         .. code-block:: console
+
+            # yum install libcap
+
+      .. group-tab:: DNF
+
+         .. code-block:: console
+
+            # dnf install libcap
+
+#. Create the ``wazuh_agent_stack.pp`` file at ``/etc/puppetlabs/code/environments/production/manifests/`` with the contents below:
+
+   .. code-block:: puppet
+      :emphasize-lines: 1,5,6
+
+      node "<PUPPET_AGENT_NODE_NAME>" {
+        class { 'wazuh::repo':
+        }
+        class { "wazuh::agent":
+          wazuh_register_endpoint => "<MANAGER_IP_ADDRESS>",
+          wazuh_reporting_endpoint => "<MANAGER_IP_ADDRESS>"
+        }
+      }
+
+   Where:
+
+   - ``WAZUH_AGENT_NODE_NAME`` is the hostname of the Wazuh agent host.
+
+   - ``MANAGER_IP_ADDRESS`` is the hostname of the Wazuh server node.
+
+#. Perform a Puppet run on the Puppet agent to start the deployment of the Wazuh stack. Skip this step if you want the stack to run on the specified node once the run interval time, as set in ``puppet.conf`` elapses:
+
+   .. code-block:: console
+
+      # puppet agent -t
 
 .. _ref_wazuh_puppet:
 
-Reference Wazuh puppet
-----------------------
+Wazuh Puppet module reference
+-----------------------------
 
 +-----------------------------------------------------------------+-----------------------------------------------------------------+---------------------------------------------+
 | Sections                                                        | Variables                                                       | Functions                                   |
@@ -430,7 +513,7 @@ Reference Wazuh puppet
 |                                                                 |                                                                 |                                             |
 +-----------------------------------------------------------------+-----------------------------------------------------------------+---------------------------------------------+
 
-.. topic:: Contents
+.. topic:: Content
 
  .. toctree::
     :maxdepth: 1
