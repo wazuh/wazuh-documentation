@@ -6,18 +6,18 @@
 Wazuh server
 ============
 
-The Wazuh server component analyzes the data received from the :doc:`agents <wazuh-agent>`, triggering alerts when threats or anomalies are detected. It is also used to manage the agents configuration remotely and monitor their status.
+The Wazuh server is the central component responsible for analyzing data collected from :doc:`Wazuh agents </getting-started/components/wazuh-agent>` and agentless devices. It detects threats, anomalies, and regulatory compliance violations in real time, generating alerts when suspicious activity is identified. Beyond detection, the Wazuh server enables centralized management by remotely configuring Wazuh agents and continuously monitoring their operational status.
 
-The Wazuh server uses threat intelligence sources to improve its detection capabilities. It also enriches alert data by using the `MITRE ATT&CK <https://attack.mitre.org//>`_ framework and regulatory compliance requirements such as PCI DSS, GDPR, HIPAA, CIS, and NIST 800-53, providing helpful context for security analytics.
+The Wazuh server leverages multiple threat intelligence sources and enriches alerts with contextual data to enhance detection accuracy. This includes mapping events to the MITRE ATT&CK framework, detecting vulnerabilities with the Wazuh CTI service, and aligning findings with regulatory standards such as PCI DSS, GDPR, HIPAA, CIS benchmarks, and NIST 800-53. These capabilities provide security teams with actionable insights for threat hunting, vulnerability detection, and regulatory compliance monitoring.
 
-Additionally, the Wazuh server can be integrated with external software, including ticketing systems such as `ServiceNow <https://www.servicenow.com/>`_, `Jira <https://www.atlassian.com/software/jira>`_, and `PagerDuty <https://www.pagerduty.com/>`_, as well as instant messaging platforms like `Slack <https://slack.com//>`_. These integrations are convenient for streamlining security operations.
+The Wazuh server integrates with external platforms to support streamlined workflows. Examples include ticketing systems such as ServiceNow, Jira, and PagerDuty, as well as communication tools like Slack. These integrations help automate incident tracking, accelerate response times, and improve collaboration within security operations teams.
 
 Server architecture
 -------------------
 
-The Wazuh server runs the analysis engine, the Wazuh RESTful API, the agent enrollment service, the agent connection service, the Wazuh cluster daemon, and Filebeat. The server is installed on a Linux operating system and usually runs on a stand-alone physical machine, virtual machine, docker container, or cloud instance.
+The Wazuh server includes the Analysis engine, Wazuh server API, agent enrollment service, agent connection service, cluster daemon, and Filebeat. It runs on Linux across physical endpoints, virtual machines, containers, or cloud instances. On Windows endpoints, deploy using Wazuh Docker.
 
-The diagram below represents the server architecture and components:
+The diagram below shows the Wazuh server architecture and components.
 
 .. thumbnail:: /images/getting-started/wazuh-server-architecture.png
    :title: Wazuh server architecture
@@ -28,16 +28,28 @@ The diagram below represents the server architecture and components:
 Server components
 -----------------
 
-The Wazuh server comprises several components listed below that have different functions, such as enrolling new agents, validating each agent identity, and encrypting the communications between the Wazuh agent and the Wazuh server.
+The Wazuh server comprises several components listed below that have different functions, such as enrolling new agents, validating each agent's identity, and encrypting the communications between the Wazuh agent and the Wazuh server.
 
--  **Agent enrollment service:** It is used to enroll new agents. This service provides and distributes unique authentication keys to each agent. The process runs as a network service and supports authentication via TLS/SSL certificates or by providing a fixed password.
+-  **Agent enrollment service:** Registers new Wazuh agents and generates and distributes unique authentication keys to each agent. It runs as a network service and supports TLS and SSL certificate–based authentication, or enrollment using a fixed password.
 
--  **Agent connection service:** This service receives data from the agents. It uses the keys shared by the enrollment service to validate each agent identity and encrypt the communications between the Wazuh agent and the Wazuh server. Additionally, this service provides centralized configuration management, enabling you to push new agent settings remotely.
+-  **Agent connection service:** Manages communication between Wazuh agents and the Wazuh server. It validates Wazuh agent identities using enrollment keys, enforces encryption for secure data transfer, and enables centralized configuration management to push updated agent settings remotely.
 
--  **Analysis engine:** This is the server component that performs the data analysis. It uses decoders to identify the type of information being processed (Windows events, SSH logs, web server logs, and others). These decoders also extract relevant data elements from the log messages, such as source IP address, event ID, or username. Then, by using rules, the engine identifies specific patterns in the decoded events that could trigger alerts and possibly even call for automated countermeasures (e.g., banning an IP address, stopping a running process, or removing a malware artifact).
+-  **Analysis engine:** At the core of Wazuh threat detection capabilities, the Analysis engine processes received security data using decoders and rules:
 
--  **Wazuh RESTful API:** This service provides an interface to interact with the Wazuh infrastructure. It is used to manage configuration settings of agents and servers, monitor the infrastructure status and overall health, manage and edit Wazuh decoders and rules, and query about the state of the monitored endpoints. The Wazuh dashboard also uses it.
+   -  Decoders classify log types (for example, Windows events, SSH logs, web server logs) and extract relevant fields such as IP addresses, usernames, and event IDs.
+   -  Rules match decoded events against known patterns to detect threats and anomalies. When triggered, rules generate alerts and invoke incident response actions such as blocking IP addresses, terminating malicious processes, or removing malware artifacts.
 
--  **Wazuh cluster daemon:** This service is used to scale Wazuh servers horizontally, deploying them as a cluster. This kind of configuration, combined with a network load balancer, provides high availability and load balancing. The Wazuh cluster daemon is what Wazuh servers use to communicate with each other and to keep synchronized.
+-  **Wazuh server API:** Provides a programmatic interface for interacting with the Wazuh server. It allows administrators using the Wazuh dashboard or command line to perform the following, but not limited to:
 
--  **Filebeat:** It is used to send events and alerts to the Wazuh indexer. It reads the output of the Wazuh analysis engine and ships events in real time. It also provides load balancing when connected to a multi-node Wazuh indexer cluster.
+   -  Configure and manage agents or servers
+   -  Monitor system health and infrastructure status
+   -  Query alerts and endpoint data
+   -  Create or update decoders and rules
+
+To learn more, visit the :doc:`Wazuh server API </user-manual/api/index>` documentation.
+
+-  **Wazuh cluster daemon:** Enables horizontal scaling by linking multiple Wazuh servers into a cluster. Using a load balancer provides high availability, fault tolerance, and load distribution.
+
+-  **Filebeat:** Forwards events and alerts from the Wazuh analysis engine to the Wazuh indexer.
+
+Visit the :doc:`installation guide </installation-guide/wazuh-server/index>` and :doc:`user manual </user-manual/manager/index>` for more information about the Wazuh server.
