@@ -115,7 +115,7 @@ Single-node stack
 
          #. Edit the ``single-node/config/wazuh_indexer/wazuh.indexer.yml`` file and do the following replacements.
 
-            -  Replace ``${OPENSEARCH_PATH_CONF}/certs/`` with ``/usr/share/wazuh-indexer/certs/``.
+            -  Replace ``${OPENSEARCH_PATH_CONF}/certs/`` with ``/usr/share/wazuh-indexer/config/certs/``.
 
          #. Edit the ``single-node/docker-compose.yml`` file and do the following replacements.
 
@@ -230,7 +230,7 @@ Multi-node stack
 
          #. Edit the ``multi-node/config/wazuh_indexer/wazuh1.indexer.yml``, ``multi-node/config/wazuh_indexer/wazuh2.indexer.yml``, and ``multi-node/config/wazuh_indexer/wazuh3.indexer.yml`` files and do the following replacements.
 
-            -  Replace ``${OPENSEARCH_PATH_CONF}/certs/`` with ``/usr/share/wazuh-indexer/certs/``.
+            -  Replace ``${OPENSEARCH_PATH_CONF}/certs/`` with ``/usr/share/wazuh-indexer/config/certs/``.
 
          #. Edit the ``multi-node/docker-compose.yml`` file and do the following replacements.
 
