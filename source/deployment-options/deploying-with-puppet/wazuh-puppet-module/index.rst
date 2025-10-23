@@ -434,7 +434,7 @@ The agent is configured by installing the ``wazuh::agent`` class. Here is an exa
 #. Create the ``wazuh_agent_stack.pp`` file at ``/etc/puppetlabs/code/environments/production/manifests/`` with the contents below:
 
    .. code-block:: puppet
-      :emphasize-lines: 1, 4, 5
+      :emphasize-lines: 1,5,6
 
       node "<PUPPET_AGENT_NODE_NAME>" {
         class { 'wazuh::repo':
