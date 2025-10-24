@@ -30,6 +30,10 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Removed wazuh-states-fim index references. ([#8948](https://github.com/wazuh/wazuh-documentation/pull/8948))
 - **Post-release**: Removed unnecessary code block from agent installation from sources. ([#9000](https://github.com/wazuh/wazuh-documentation/pull/9000))
 
+### Removed
+
+- **Post-release**: Removed deprecation warnings for legacy operating systems. ([#9013](https://github.com/wazuh/wazuh-documentation/pull/9013))
+
 ## [v4.13.0]
 
 ### Added
