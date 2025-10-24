@@ -10,10 +10,6 @@ The Wazuh agent is a lightweight monitoring software. It is a multi-platform com
 
 This section covers installing dependencies, downloading and compiling the source code, running the installation wizard, and uninstalling the Wazuh agent if necessary.
 
-.. warning::
-
-   Support for the following operating systems ends in Wazuh 5.0.0: Red Hat 5, CentOS 5, Oracle Linux 5, SUSE Linux Enterprise Server 11, Windows XP, Windows Vista, Windows Server 2003, Solaris, AIX, and HP-UX.
-
 Installing dependencies
 -----------------------
 
