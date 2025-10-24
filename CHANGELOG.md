@@ -20,6 +20,10 @@ All notable changes to this project will be documented in this file.
 - Updated the cloud security module dependencies for Python 3.13 compatibility. ([#8985](https://github.com/wazuh/wazuh-documentation/pull/8985))
 - Updated Docker and Kubernetes configurations to reflect new Wazuh indexer file paths. ([#8982](https://github.com/wazuh/wazuh-documentation/pull/8982))
 
+### Removed
+
+- **Post-release**: Removed deprecation warnings for legacy operating systems. ([#9011](https://github.com/wazuh/wazuh-documentation/pull/9011))
+
 ## [v4.13.1]
 
 ### Added
