@@ -468,10 +468,12 @@ Wodle Syscollector variables
 Misc Variables
 --------------
 
+.. |WAZUH_CURRENT_PUPPET_HOLDER| replace:: ``|WAZUH_CURRENT_PUPPET|-1``
+
 +------------------------------+---------------------------------------------------------------------------------------------------------------------------+--------------------------------------+-----------------+
 | **Parameter**                | **Description**                                                                                                           | **Default value**                    | **Data type**   |
 +==============================+===========================================================================================================================+======================================+=================+
-|   ``$server_package_version``| Modifies the ``client.pp`` and ``server.pp`` Puppet configuration files to accept package versions as a parameter.        | ``4.13.0-1``                         | String          |
+|   ``$server_package_version``| Modifies the ``client.pp`` and ``server.pp`` Puppet configuration files to accept package versions as a parameter.        | |WAZUH_CURRENT_PUPPET_HOLDER|        | String          |
 +------------------------------+---------------------------------------------------------------------------------------------------------------------------+--------------------------------------+-----------------+
 |   ``$manage_repos``          | Install Wazuh through Wazuh repositories.                                                                                 | ``true``                             | Boolean         |
 +------------------------------+---------------------------------------------------------------------------------------------------------------------------+--------------------------------------+-----------------+
@@ -499,7 +501,7 @@ Misc Variables
 +-------------------+------------------------------------------+--------------------+-----------------+
 
 .. note::
-   No email will be sent for alerts with a severity below the global ``$ossec_email_alert_level``, unless the rule has alert_email set.
+  No email will be sent for alerts with a severity below the global ``$ossec_email_alert_level``, unless the rule has alert_email set.
 
 .. _ref_server_command:
 
