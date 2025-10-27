@@ -26,3 +26,6 @@ api_tag = 'v4.11.2'
 
 
 apiURL = 'https://raw.githubusercontent.com/wazuh/wazuh/'+api_tag+'/api/api/spec/spec.yaml'
+apiURL_server = '../../_static/server-api-spec/spec-'+api_tag+'.yaml'  
+
+apiURL_indexer = ''
