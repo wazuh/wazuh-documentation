@@ -20,6 +20,7 @@ All notable changes to this project will be documented in this file.
 - Updated the cloud security module dependencies for Python 3.13 compatibility. ([#8985](https://github.com/wazuh/wazuh-documentation/pull/8985))
 - Updated Docker and Kubernetes configurations to reflect new Wazuh indexer file paths. ([#8982](https://github.com/wazuh/wazuh-documentation/pull/8982))
 - **Post-release**: Updated step in *Keeping your custom Docker Compose files* section. ([#9010](https://github.com/wazuh/wazuh-documentation/pull/9010))
+- **Post-release**: Updated the *Deployment with Puppet* documentation. ([#9012](https://github.com/wazuh/wazuh-documentation/pull/9012)) ([#9016](https://github.com/wazuh/wazuh-documentation/pull/9016))
 
 ### Removed
 

@@ -17,31 +17,18 @@ This contains variables that can be used to configure the Wazuh agent.
 
 Active-Response variables
 -------------------------
-$configure_active_response
-  Enables Active Response on this host.
-
-  `Default true`
-
-  `Type Boolean`
-
-$active_response_disabled
-  Toggles the active-response capability on and off.
-
-  `Default no`
-
-  `Type String`
-
-$active_response_ca_verification
-  This option enables or disables the WPK validation using the root CA certificate. If this parameter is set to no, the agent will accept any WPK package coming from the manager.
-
-  `Default yes`
-
-  `Type String`
-
-$active_response_repeated_offenders
-  Sets timeouts in minutes for repeat offenders. This is a list of increasing timeouts that can contain a maximum of 5 entries.
-
-  `Default []`
++------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------+---------------------+
+|     **Parameter**                              |     **Description**                                                                                                       |     **Default value**   |     **Data type**   |
++================================================+===========================================================================================================================+=========================+=====================+
+|     ``$configure_active_response``             | Enables Active Response on this host.                                                                                     |     ``true``            | Boolean             |
++------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------+---------------------+
+|     ``$active_response_disabled``              | Toggles the active-response capability on and off.                                                                        |     ``no``              | String              |
++------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------+---------------------+
+|     ``$active_response_ca_verification``       | This option enables or disables the WPK validation using the root CA certificate. If this parameter is set to no, the     |     ``yes``             | String              |
+|                                                | agent will accept any WPK package from the manager.                                                                       |                         |                     |
++------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------+---------------------+
+|     ``$active_response_repeated_offenders``    | Sets timeouts in minutes for repeat offenders. This list of increasing timeouts can contain a maximum of 5 entries.       |     ``[]``              | Integer             |
++------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------+---------------------+
 
 
 .. _ref_agent_vars_enroll:
@@ -49,224 +36,102 @@ $active_response_repeated_offenders
 Agent enrollment variables
 --------------------------
 
-$wazuh_enrollment_enabled
-  Enables/disables agent enrollment. If this variable is not set to ‘yes’ the complete enrollment tag will not be added to `ossec.conf`.
-
-  `Default undef`
-
-  `Type String`
-
-$wazuh_enrollment_manager_address
-  Hostname or IP address of the manager where the agent will be enrolled.
-
-  `Default undef`
-
-  `Type String`
-
-$wazuh_enrollment_port
-  Specifies the port on the manager to send enrollment request.
-
-  `Default undef`
-
-  `Type String`
-   
-   Depends on **wazuh_enrollment_enabled**
-
-$wazuh_enrollment_agent_name
-  Agent name that will be used for enrollment.
-
-  `Default undef`
-
-  `Type String`
-  
-   Depends on **wazuh_enrollment_enabled**
-
-
-$wazuh_enrollment_groups
-  Groups name to which the agent belongs.
-
-  `Default undef`
-
-  `Type String`
-  
-   Depends on **wazuh_enrollment_enabled**
-
-$wazuh_enrollment_agent_address
-  Force IP address from the agent. If this is not set, the manager will extract the source IP address from the enrollment message.
-
-  `Default undef`
-
-  `Type String`
-  
-   Depends on **wazuh_enrollment_enabled**
-
-$wazuh_enrollment_ssl_cipher
-  Override SSL used ciphers.
-
-  `Default undef`
-
-  `Type String`
-  
-   Depends on **wazuh_enrollment_enabled**
-
-$wazuh_enrollment_server_ca_path
-  Used for manager verification. If no CA certificate is set server will not be verified.
-
-  `Default undef`
-
-  `Type String`
-  
-   Depends on **wazuh_enrollment_enabled**
-
-$wazuh_enrollment_agent_cert_path
-  Required when agent verification is enabled in the manager.
-
-  `Default undef`
-
-  `Type String`
-  
-   Depends on **wazuh_enrollment_enabled**
-
-$wazuh_enrollment_agent_key_path
-  Required when agent verification is enabled in the manager.
-
-  `Default undef`
-
-  `Type String`
-  
-   Depends on **wazuh_enrollment_enabled**
-
-$wazuh_enrollment_auth_pass
-  Enrollment password.
-
-  `Default undef`
-
-  `Type String`
-  
-   Depends on **wazuh_enrollment_enabled**
-
-$wazuh_enrollment_auth_pass_path
-  Required when enrollment is using password verification.
-
-  `Default '/var/ossec/etc/authd.pass'`
-
-  `Type String`
-  
-   Depends on **wazuh_enrollment_enabled**
-
-$wazuh_enrollment_auto_method
-  Auto negotiates the most secure common SSL/TLS method with the manager, use “yes” for auto negotiate or “no” for TLS v1.2 only.
-
-  `Default undef`
-
-  `Type String`
-  
-   Depends on **wazuh_enrollment_enabled**
-
-$wazuh_delay_after_enrollment
-  Specifies the time agents should wait after a successful registration.
-
-   Related parameter :ref:`delay_after_enrollment <enrollment_delay_after_enrollment>`
-        
-  `Default undef`
-
-  `Type String`
-  
-   Depends on **wazuh_enrollment_enabled**
-
-$wazuh_enrollment_use_source_ip
-  Force manager to compute IP address from agent message.
-
-  `Default undef`
-
-  `Type String`
-  
-   Depends on **wazuh_enrollment_enabled**
++------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------------------+---------------------+
+|     **Parameter**                              |     **Description**                                                                                                       |     **Default value**               |     **Data type**   |
++================================================+===========================================================================================================================+=====================================+=====================+
+|     ``$wazuh_enrollment_enabled``              | Enables/disables agent enrollment. If this variable is not set to '``yes``  ', the complete enrollment tag will not be    |     ``undef``                       | String              |
+|                                                | added to ``/var/ossec/etc/ossec.conf``.                                                                                   |                                     |                     |
++------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------------------+---------------------+
+|     ``$wazuh_enrollment_manager_address``      | Hostname or IP address of the manager where the agent will be enrolled.                                                   |     ``undef``                       | String              |
++------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------------------+---------------------+
+|     ``$wazuh_enrollment_port``                 | Specifies the port on which the manager will send enrollment requests.                                                    |     ``undef``                       | String              |
+|                                                |                                                                                                                           |                                     |                     |
+|                                                | Depends on ``wazuh_enrollment_enabled``                                                                                   |                                     |                     |
++------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------------------+---------------------+
+|     ``$wazuh_enrollment_agent_name``           | Specifies the agent name that will be used for enrollment.                                                                |     ``undef``                       | String              |
+|                                                |                                                                                                                           |                                     |                     |
+|                                                | *Depends on* ``wazuh_enrollment_enabled``                                                                                 |                                     |                     |
++------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------------------+---------------------+
+|     ``$wazuh_enrollment_groups``               | Group name to which the agent belongs.                                                                                    |     ``undef``                       | String              |
+|                                                |                                                                                                                           |                                     |                     |
+|                                                | *Depends on* ``wazuh_enrollment_enabled``                                                                                 |                                     |                     |
++------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------------------+---------------------+
+|     ``$wazuh_enrollment_agent_address``        | Force IP address from the agent. The manager will extract the source IP address from the enrollment message if this is    |     ``undef``                       | String              |
+|                                                | not set.                                                                                                                  |                                     |                     |
+|                                                |                                                                                                                           |                                     |                     |
+|                                                | *Depends on* ``wazuh_enrollment_enabled``                                                                                 |                                     |                     |
++------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------------------+---------------------+
+|     ``$wazuh_enrollment_ssl_cipher``           | Override SSL used ciphers.                                                                                                |     ``undef``                       | String              |
+|                                                |                                                                                                                           |                                     |                     |
+|                                                | *Depends on* ``wazuh_enrollment_enabled``                                                                                 |                                     |                     |
++------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------------------+---------------------+
+|     ``$wazuh_enrollment_server_ca_path``       | Used for manager verification. If no CA certificate is set, the server will not be verified. Depends on                   |     ``undef``                       | String              |
+|                                                | ``wazuh_enrollment_enabled``                                                                                              |                                     |                     |
++------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------------------+---------------------+
+|     ``$wazuh_enrollment_agent_cert_path``      | Required when agent verification is enabled in the manager.                                                               |     ``undef``                       | String              |
+|                                                |                                                                                                                           |                                     |                     |
+|                                                | *Depends on* ``wazuh_enrollment_enabled``                                                                                 |                                     |                     |
++------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------------------+---------------------+
+|     ``$wazuh_enrollment_agent_key_path``       | Required when agent verification is enabled in the manager.                                                               |     ``undef``                       | String              |
+|                                                |                                                                                                                           |                                     |                     |
+|                                                | *Depends on* ``wazuh_enrollment_enabled``                                                                                 |                                     |                     |
++------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------------------+---------------------+
+|     ``$wazuh_enrollment_auth_pass``            | Enrollment password.                                                                                                      |     ``undef``                       | String              |
+|                                                |                                                                                                                           |                                     |                     |
+|                                                | *Depends on* ``wazuh_enrollment_enabled``                                                                                 |                                     |                     |
++------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------------------+---------------------+
+|     ``$wazuh_enrollment_auth_pass_path``       | Required when enrollment is using password verification.                                                                  |     ``'/var/ossec/etc/authd.pass'`` | String              |
+|                                                |                                                                                                                           |                                     |                     |
+|                                                | Depends on ``wazuh_enrollment_enabled``                                                                                   |                                     |                     |
++------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------------------+---------------------+
+|     ``$wazuh_enrollment_auto_method``          | Auto negotiates the most secure common SSL/TLS method with the manager, use "``yes``  " for auto negotiate or "``no``  "  |     ``undef``                       | String              |
+|                                                | for TLS v1.2 only.                                                                                                        |                                     |                     |
+|                                                |                                                                                                                           |                                     |                     |
+|                                                | Depends on ``wazuh_enrollment_enabled``                                                                                   |                                     |                     |
++------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------------------+---------------------+
+|     ``$wazuh_delay_after_enrollment``          | Specifies the time agents should wait after a successful registration. Related parameter ``delay_after_enrollment``       |     ``undef``                       | String              |
+|                                                | Depends on ``wazuh_enrollment_enabled``                                                                                   |                                     |                     |
++------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------------------+---------------------+
+|     ``$wazuh_enrollment_use_source_ip``        | Force the manager to compute the IP address from the agent message.                                                       |     ``undef``                       | String              |
+|                                                |                                                                                                                           |                                     |                     |
+|                                                | Depends on ``wazuh_enrollment_enabled``                                                                                   |                                     |                     |
++------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------------------+---------------------+
 
 .. _ref_agent_vars_client:
 
 Client variables
 ----------------
 
-$wazuh_reporting_endpoint
-  Specifies the IP address or the hostname of the Wazuh manager to report.
-
-  `Default undef`
-
-  `Type String`
-  
-$wazuh_register_endpoint
-  Specifies the IP address or the hostname of the Wazuh manager to register against. It is used to run the **agent-auth** tool.
-
-  `Type String`
-
-$ossec_port
-  Specifies the port to send events to the manager. This must match the associated listening port configured on the Wazuh manager.
-
-  `Default 1514`
-
-  `Type String`
-
-$ossec_protocol
-  Specifies the protocol to use when connecting to the manager.
-
-  `Default tcp`
-
-  `Type String`
-  
-$wazuh_max_retries
-  The number of connection retries.
-
-  `Default 5`
-
-  `Type String`
-  
-$wazuh_retry_interval
-  Time interval between connection attempts (seconds).
-
-  `Default 5`
-
-  `Type String`
-  
-$ossec_notify_time
-  Specifies the time in seconds between agent check-ins to the manager.
-
-  `Default 10`
-
-  `Type String`
-  
-$ossec_time_reconnect
-  Specifies the time in seconds before a reconnection is attempted. This should be set to a higher number than the `notify_time` parameter.
-
-  `Default 60`
-
-  `Type String`
-
-$ossec_auto_restart
-  Toggles on and off the automatic restart of agents when a new valid configuration is received from the manager.
-
-  `Default yes`
-
-  `Type String`
-
-$ossec_crypto_method
-  Choose the encryption of the messages that the agent sends to the manager.
-
-  `Default aes`
-
-  `Type String`
-  
-$client_buffer_queue_size
-  Sets the capacity of the agent buffer in number of events.
-
-  `Default 5000`
-
-$client_buffer_events_per_second
-  Specifies the number of events that can be sent to the manager per second.
-
-  `Default 500`
-
-  `Type String`
++------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------+---------------------+
+|     **Parameter**                        |     **Description**                                                                                                       |     **Default value**   |     **Data type**   |
++==========================================+===========================================================================================================================+=========================+=====================+
+|     ``$wazuh_reporting_endpoint``        | Specifies the IP address or the hostname of the Wazuh manager to report.                                                  |     ``undef``           | String              |
++------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------+---------------------+
+|     ``$wazuh_register_endpoint``         | Specifies the IP address or the hostname of the Wazuh manager against which to register. It is used to run the            |     n/a                 | String              |
+|                                          | agent-auth tool.                                                                                                          |                         |                     |
++------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------+---------------------+
+|     ``$ossec_port``                      | Specifies the port to send events to the manager. This must match the associated listening port configured on the Wazuh   |     ``1514``            | String              |
+|                                          | manager.                                                                                                                  |                         |                     |
++------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------+---------------------+
+|     ``$ossec_protocol``                  | Specifies the protocol to use when connecting to the manager.                                                             |     ``tcp``             | String              |
++------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------+---------------------+
+|     ``$wazuh_max_retries``               | The number of connection retries.                                                                                         |     ``5``               | String              |
++------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------+---------------------+
+|     ``$wazuh_retry_interval``            | Time interval between connection attempts (seconds).                                                                      |     ``5``               | String              |
++------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------+---------------------+
+|     ``$ossec_notify_time``               | Specifies the time in seconds between agent check-ins to the manager.                                                     |     ``10``              | String              |
++------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------+---------------------+
+|     ``$ossec_time_reconnect``            | Specifies the time in seconds before a reconnection is attempted. This should be set to a higher number than the          |     ``60``              | String              |
+|                                          | ``notify_time``   parameter.                                                                                              |                         |                     |
++------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------+---------------------+
+|     ``$ossec_auto_restart``              | Toggles on and off the automatic restart of agents when a new valid configuration is received from the manager.           |     ``yes``             | String              |
++------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------+---------------------+
+|     ``$ossec_crypto_method``             | Choose the encryption of the messages that the agent sends to the manager.                                                |     ``aes``             | String              |
++------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------+---------------------+
+|     ``$client_buffer_queue_size``        | Sets the capacity of the agent buffer in number of events.                                                                |     ``5000``            | Integer             |
++------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------+---------------------+
+|     ``$client_buffer_events_per_second`` | Specifies the number of events sent to the manager per second.                                                            |     ``500``             | String              |
++------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------+---------------------+
 
 
 .. _ref_agent_vars_localfile:
@@ -274,141 +139,56 @@ $client_buffer_events_per_second
 Localfile variables
 -------------------
 
-$ossec_local_files
-  Files list for log analysis
-
-  These files are listed in params_agent.pp in section $default_local_files. If a change is needed it should be modified in the params_agent.pp.
-
-  Default depends on the OS family.
++---------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------------+---------------------+
+|     **Parameter**         |     **Description**                                                                                                       |     **Default value**         |     **Data type**   |
++===========================+===========================================================================================================================+===============================+=====================+
+|  ``$ossec_local_files``   | Files list for log analysis These files are listed in ``params_agent.pp``   in section ``$default_local_files``  . If a   |     Depends on the OS family. | List                |
+|                           | change is needed, it should be modified in the ``params_agent.pp``  .                                                     |                               |                     |
++---------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------------+---------------------+
 
 .. _ref_agent_vars_rootcheck:
 
 Rootcheck variables
 -------------------
 
-$configure_rootcheck
-  Enables rootcheck section render on this host.
-
-  `Default true`
-
-  `Type Boolean`
-
-$ossec_rootcheck_disabled
-  Disable rootcheck on this host (Linux).
-
-  `Default no`
-
-  `Type String`
-
-$ossec_rootcheck_check_files
-  Enable rootcheck checkfiles option.
-
-  `Default yes`
-
-  `Type String`
-
-$ossec_rootcheck_check_trojans
-  Enable rootcheck checktrojans option.
-
-  `Default yes`
-
-  `Type String`
-
-$ossec_rootcheck_check_dev
-  Enable rootcheck checkdev option.
-
-  `Default yes`
-
-  `Type String`
-
-$ossec_rootcheck_check_sys
-  Enable rootcheck checksys option.
-
-  `Default yes`
-
-  `Type String`
-
-$ossec_rootcheck_check_pids
-  Enable rootcheck checkpids option.
-
-  `Default yes`
-
-  `Type String`
-
-$ossec_rootcheck_check_ports
-  Enable rootcheck checkports option.
-
-  `Default yes`
-
-  `Type String`
-
-$ossec_rootcheck_check_if
-  Enable rootcheck checkif option.
-
-  `Default yes`
-
-  `Type String`
-
-$ossec_rootcheck_frequency
-  How often the rootcheck scan will run (in seconds).
-
-  `Default 36000`
-
-  `Type String`
-
-$ossec_rootcheck_ignore_list
-  List of files or directories to be ignored. These files and directories will be ignored during scans.
- 
-  `Default []`
-
-  `Type List`
-
-$ossec_rootcheck_rootkit_files
-  Change the location of the rootkit files database.
-
-  `Default '/var/ossec/etc/shared/rootkit_files.txt'`
-
-  `Type String`
-
-$ossec_rootcheck_rootkit_trojans
-  Change the location of the rootkit trojans database.
-
-  `Default 'etc/shared/rootkit_trojans.txt'`
-
-  `Type String`
-
-$ossec_rootcheck_skip_nfs
-  Enable or disable the scanning of network mounted filesystems (Works on Linux and FreeBSD). Currently, skip_nfs will exclude checking files on CIFS or NFS mounts.
-
-  `Default yes`
-
-  `Type String`
-
-$ossec_rootcheck_system_audit
-  Specifies the path to an audit definition file for Unix-like systems.
-
-  `Default []`
-
-  `Type List`
-
-$ossec_rootcheck_windows_disabled
-  Disables rootcheck if host has Windows OS.
-
-  `Default no`
-
-  `Type String`
-
-$ossec_rootcheck_windows_windows_apps
-  Specifies the path to a Windows application definition file.
-
-  `Default './shared/win_applications_rcl.txt'`
-
-$ossec_rootcheck_windows_windows_malware
-  Specifies the path to a Windows malware definitions file.
-
-  `Default './shared/win_applications_rcl.txt'`
-
-  `Type String`
++--------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------+---------------------+
+|     **Parameter**                                      |     **Description**                                                                                                       |     **Default value**                                       |     **Data type**   |
++========================================================+===========================================================================================================================+=============================================================+=====================+
+|     ``$ossec_rootcheck_disabled``                      | Disable rootcheck on this host (Linux).                                                                                   |     ``no``                                                  | String              |
++--------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------+---------------------+
+|     ``$ossec_rootcheck_check_files``                   | Enable the rootcheck checkfiles option.                                                                                   |     ``yes``                                                 | String              |
++--------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------+---------------------+
+|     ``$ossec_rootcheck_check_trojans``                 | Enable rootcheck checktrojans option.                                                                                     |     ``yes``                                                 | String              |
++--------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------+---------------------+
+|     ``$ossec_rootcheck_check_dev``                     | Enable rootcheck checkdev option.                                                                                         |     ``yes``                                                 | String              |
++--------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------+---------------------+
+|     ``$ossec_rootcheck_check_sys``                     | Enable the rootcheck checksys option.                                                                                     |     ``yes``                                                 | String              |
++--------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------+---------------------+
+|     ``$ossec_rootcheck_check_pids``                    | Enable rootcheck checkpids option.                                                                                        |     ``yes``                                                 | String              |
++--------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------+---------------------+
+|     ``$ossec_rootcheck_check_ports``                   | Enable the rootcheck checkports option.                                                                                   |     ``yes``                                                 | String              |
++--------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------+---------------------+
+|     ``$ossec_rootcheck_check_if``                      | Enable rootcheck check_if option.                                                                                         |     ``yes``                                                 | String              |
++--------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------+---------------------+
+|     ``$ossec_rootcheck_frequency``                     | How often the rootcheck scan will run (in seconds).                                                                       |     ``36000``                                               | String              |
++--------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------+---------------------+
+|     ``$ossec_rootcheck_ignore_list``                   | List of files or directories to be ignored. These files and directories will be ignored during scans.                     |     ``[]``                                                  | List                |
++--------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------+---------------------+
+|     ``$ossec_rootcheck_rootkit_files``                 | Change the location of the rootkit files database.                                                                        |     ``'/var/ossec/etc/shared/rootkit_files.txt'``           | String              |
++--------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------+---------------------+
+|     ``$ossec_rootcheck_rootkit_trojans``               | Change the location of the rootkit trojan's database.                                                                     |     ``'etc/shared/rootkit_trojans.txt'``                    | String              |
++--------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------+---------------------+
+|     ``$ossec_rootcheck_skip_nfs``                      | Enable or disable the scanning of network-mounted filesystems (Works on Linux and FreeBSD). Currently, ``skip_nfs``   will|     ``yes``                                                 | String              |
+|                                                        | exclude checking files on CIFS or NFS mounts.                                                                             |                                                             |                     |
++--------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------+---------------------+
+|     ``$ossec_rootcheck_system_audit``                  | Specifies the path to an audit definition file for Unix-like systems.                                                     |     ``[]``                                                  | List                |
++--------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------+---------------------+
+|     ``$ossec_rootcheck_windows_disabled``              | Disables rootcheck if the host has a Windows OS.                                                                          |     ``no``                                                  | String              |
++--------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------+---------------------+
+|     ``$ossec_rootcheck_windows_windows_apps``          | Specifies the path to a Windows application definition file.                                                              |     ``'./shared/win_applications_rcl.txt'``                 | String              |
++--------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------+---------------------+
+|     ``$ossec_rootcheck_windows_windows_malware``       | Specifies the path to a Windows malware definitions file.                                                                 |     ``'./shared/win_applications_rcl.txt'``                 | String              |
++--------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------+---------------------+
 
 
 .. _ref_agent_vars_sca:
@@ -416,119 +196,66 @@ $ossec_rootcheck_windows_windows_malware
 SCA variables
 -------------
 
-$configure_sca
-  Enables SCA section render on this host.
-
-  `Default true`
-
-  `Type boolean`
-
-$sca_amazon_enabled
-  Enable SCA on this host (Amazon Linux 2).
-
-  `Default yes`
-
-   Depends on **configure_sca and apply_template_os**
-
-$sca_amazon_scan_on_start
-  The SCA module will perform the scan immediately when started (Amazon Linux 2).
-
-  `Default yes`
-
-   Depends on **configure_sca and apply_template_os**
-
-$sca_amazon_interval
-  The interval between module executions.
-
-  `Default 12h`
-
-   Depends on **configure_sca and apply_template_os**
-
-$sca_amazon_skip_nfs
-  Enable or disable the scanning of network mounted filesystems (Works on Linux and FreeBSD). Currently, skip_nfs will exclude checking files on CIFS or NFS mounts.
-
-  `Default yes`
-
-   Depends on **configure_sca and apply_template_os**
-
-$sca_amazon_policies
-  A list of policies to run assessments can be included in this section.
-
-  `Default []`
-
-   Depends on **configure_sca and apply_template_os**
-
-$sca_rhel_enabled
-  Enable SCA on this host (RHEL).
-
-  `Default true`
-
-  `Type Boolean`
-
-   Depends on **configure_sca and apply_template_os**
-
-$sca_rhel_scan_on_start
-  The SCA module will perform the scan immediately when started (RHEL).
-
-  `Default yes`
-
-  `Type String`
-
-   Depends on **configure_sca and apply_template_os**
-
-$sca_rhel_interval
-  The interval between module executions.
-
-  `Default 12h`
-
-   Depends on **configure_sca and apply_template_os**
-
-$sca_rhel_skip_nfs
-  Enable or disable the scanning of network mounted filesystems (Works on Linux and FreeBSD). Currently, skip_nfs will exclude checking files on CIFS or NFS mounts.
-
-  `Default yes`
-
-   Depends on **configure_sca and apply_template_os**
-
-$sca_rhel_policies
-  A list of policies to run assessments can be included in this section.
-
-  `Default []`
-
-   Depends on **configure_sca and apply_template_os**
-
-$sca_else_enabled
-  Enable SCA on this host (Linux).
-
-  `Default yes`
-
-$sca_else_scan_on_start
-  The SCA module will perform the scan immediately when started (Linux).
-
-  `Default yes`
-
-   Depends on **configure_sca and apply_template_os**
-
-$sca_else_interval
-  The interval between module executions.
-
-  `Default 12h`
-
-   Depends on **configure_sca and apply_template_os**
-
-$sca_else_skip_nfs
-  Enable or disable the scanning of network mounted filesystems (Works on Linux and FreeBSD). Currently, `skip_nfs` will exclude checking files on CIFS or NFS mounts.
-
-  `Default yes`
-
-   Depends on **configure_sca and apply_template_os**
-
-$sca_else_policies
-  A list of policies to run assessments can be included in this section.
-
-  `Default []`
-
-   Depends on **configure_sca and apply_template_os**
++--------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------+---------------------+
+|     **Parameter**                    |     **Description**                                                                                                       |     **Default value**   |     **Data type**   |
++======================================+===========================================================================================================================+=========================+=====================+
+|     ``$configure_sca``               | Enables SCA section render on this host.                                                                                  |     ``true``            | boolean             |
++--------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------+---------------------+
+|     ``$sca_amazon_enabled``          | Enable SCA on this host (Amazon Linux 2).                                                                                 |     ``yes``             | String              |
+|                                      |                                                                                                                           |                         |                     |
+|                                      | Depends on ``configure_sca``   and ``apply_template_os``                                                                  |                         |                     |
++--------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------+---------------------+
+|     ``$sca_amazon_scan_on_start``    | The SCA module will perform the scan immediately when started (Amazon Linux 2).                                           |     ``yes``             | String              |
+|                                      |                                                                                                                           |                         |                     |
+|                                      | Depends on ``configure_sca``   and ``apply_template_os``                                                                  |                         |                     |
++--------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------+---------------------+
+|     ``$sca_amazon_interval``         | The interval between module executions.                                                                                   |     ``12h``             | String              |
+|                                      |                                                                                                                           |                         |                     |
+|                                      | Depends on ``configure_sca``   and ``apply_template_os``                                                                  |                         |                     |
++--------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------+---------------------+
+|     ``$sca_amazon_skip_nfs``         | Enable or disable the scanning of network-mounted filesystems (Works on Linux and FreeBSD). Currently, ``skip_nfs``   will|     ``yes``             | String              |
+|                                      | exclude checking files on CIFS or NFS mounts.                                                                             |                         |                     |
+|                                      |                                                                                                                           |                         |                     |
+|                                      | Depends on ``configure_sca``   and ``apply_template_os``                                                                  |                         |                     |
++--------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------+---------------------+
+|     ``$sca_amazon_policies``         | A list of policies to run assessments can be included in this section.                                                    |     ``[]``              | List                |
+|                                      |                                                                                                                           |                         |                     |
+|                                      | Depends on ``configure_sca``   and ``apply_template_os``                                                                  |                         |                     |
++--------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------+---------------------+
+|     ``$sca_rhel_scan_on_start``      | The SCA module will perform the scan immediately when started (RHEL).                                                     |     ``yes``             | String              |
+|                                      |                                                                                                                           |                         |                     |
+|                                      | Depends on ``configure_sca``   and ``apply_template_os``                                                                  |                         |                     |
++--------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------+---------------------+
+|     ``$sca_rhel_interval``           | The interval between module executions.                                                                                   |     ``12h``             | String              |
+|                                      |                                                                                                                           |                         |                     |
+|                                      | Depends on ``configure_sca``   and ``apply_template_os``                                                                  |                         |                     |
++--------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------+---------------------+
+|     ``$sca_rhel_skip_nfs``           | Enable or disable the scanning of network-mounted filesystems (Works on Linux and FreeBSD). Currently, ``skip_nfs``       |     ``yes``             | String              |
+|                                      | excludes checking files on CIFS or NFS mounts.                                                                            |                         |                     |
+|                                      |                                                                                                                           |                         |                     |
+|                                      | Depends on ``configure_sca``   and ``apply_template_os``                                                                  |                         |                     |
++--------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------+---------------------+
+|     ``$sca_rhel_policies``           | A list of policies to run assessments can be included in this section.                                                    |     ``[]``              | List                |
+|                                      |                                                                                                                           |                         |                     |
+|                                      | Depends on ``configure_sca``   and ``apply_template_os``                                                                  |                         |                     |
++--------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------+---------------------+
+|     ``$sca_else_scan_on_start``      | The SCA module will perform the scan immediately when started (Linux).                                                    |     ``yes``             | String              |
+|                                      |                                                                                                                           |                         |                     |
+|                                      | Depends on ``configure_sca``   and ``apply_template_os``                                                                  |                         |                     |
++--------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------+---------------------+
+|     ``$sca_else_interval``           | The interval between module executions.                                                                                   |     ``12h``             | String              |
+|                                      |                                                                                                                           |                         |                     |
+|                                      | Depends on ``configure_sca``   and ``apply_template_os``                                                                  |                         |                     |
++--------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------+---------------------+
+|     ``$sca_else_skip_nfs``           | Enable or disable the scanning of network-mounted filesystems (Works on Linux and FreeBSD). Currently, ``skip_nfs``       |     ``yes``             | String              |
+|                                      | excludes checking files on CIFS or NFS mounts.                                                                            |                         |                     |
+|                                      |                                                                                                                           |                         |                     |
+|                                      | Depends on ``configure_sca``   and ``apply_template_os``                                                                  |                         |                     |
++--------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------+---------------------+
+|     ``$sca_else_policies``           | A list of policies to run assessments can be included in this section.                                                    |     ``[]``              | List                |
+|                                      |                                                                                                                           |                         |                     |
+|                                      | Depends on ``configure_sca``   and ``apply_template_os``                                                                  |                         |                     |
++--------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------+---------------------+
 
 
 .. _ref_agent_vars_syscheck:
@@ -536,320 +263,142 @@ $sca_else_policies
 Syscheck variables
 ------------------
 
-$configure_syscheck
-  Enables syscheck section rendering on this host. If this variable is not set to ‘true’ the complete `syscheck` tag will not be added to `ossec.conf`.
-
-  `Default true`
-
-  `Type Boolean`
-
-$ossec_syscheck_disabled
-  Disable syscheck on this host.
-
-  `Default no`
-
-  `Type String`
-
-$ossec_syscheck_frequency
-  Enables syscheck section rendering on this host.
-
-  `Default 43200`
-
-  `Type String`
-
-$ossec_syscheck_scan_on_start
-  Specifies if syscheck scans immediately when started.
-
-  `Default yes`
-
-  `Type String`
-
-$ossec_syscheck_auto_ignore
-  Specifies whether or not syscheck will ignore files that change too many times (manager only).
-
-  `Default undef`
-  
-  `Type String`
-
-$ossec_syscheck_directories_1
-  List of directories to be monitored. The directories should be comma-separated.
-
-  `Default '/etc,/usr/bin,/usr/sbin'`
-
-  `Type String`
-
-$ossec_syscheck_realtime_directories_1
-  This will enable real-time/continuous monitoring on directories listed on `ossec_syscheck_directories_1`. Real time only works with directories, not individual files.
-
-  `Default no`
-
-  `Type String`
-
-$ossec_syscheck_whodata_directories_1
-  This will enable who-data monitoring on directories listed on `ossec_syscheck_directories_1`.
-
-  `Default no`
-
-  `Type String`
-
-$ossec_syscheck_directories_2
-  List of directories to be monitored. The directories should be comma-separated.
-
-  `Default '/etc,/usr/bin,/usr/sbin'`
-
-  `Type String`
-
-$ossec_syscheck_realtime_directories_2
-  This will enable real-time/continuous monitoring on directories listed on `ossec_syscheck_directories_2`. Real time only works with directories, not individual files.
-
-  `Default no`
-
-  `Type String`
-
-$ossec_syscheck_whodata_directories_2
-  This will enable who-data monitoring on directories listed on `ossec_syscheck_directories_2`.
-
-  `Default no`
-
-  `Type String`
-
-$ossec_syscheck_report_changes_directories_2
-  Report file changes. This is limited to text files at this time.
-
-  `Default no`
-
-  `Type String`
-
-$ossec_syscheck_ignore_list
-  List of files or directories to be ignored. Ignored files and directories are still being scanned, but the results are not reported.
-
-  `[‘/etc/mtab’,’/etc/hosts.deny’,’/etc/mail/statistics’,’/etc/random-seed’,’/etc/random.seed’,’/etc/adjtime’,’/etc/httpd/logs’,’/etc/utmpx’,’/etc/wtmpx’,’/etc/cups/certs’,’/etc/dumpdates’,’/etc/svc/volatile’,’/sys/kernel/security’,’/sys/kernel/debug’,’/dev/core’,]`
-  
-  `Type String`
-
-$ossec_syscheck_ignore_type_1
-  Simple regex pattern to filter out files.
-
-  `Default '^/proc'`
-
-  `Type String`
-
-$ossec_syscheck_ignore_type_2
-  Another simple regex pattern to filter out files.
-
-  `Default '.log$|.swp$'`
-
-  `Type String`
-
-$ossec_syscheck_process_priority
-  Sets the nice value for Syscheck process.
-
-  `Default 10`
-
-  `Type String`
-
-$ossec_syscheck_synchronization_enabled
-  Specifies whether there will be periodic inventory synchronizations or not.
-
-  `Default yes`
-
-  `Type String`
-
-$ossec_syscheck_synchronization_interval
-  Specifies the initial number of seconds between every inventory synchronization. If synchronization fails the value will be duplicated until it reaches the value of `max_interval`.
-
-  `Default 5m`
-
-  `Type String`
-
-$ossec_syscheck_synchronization_max_eps
-  Sets the maximum synchronization message throughput.
-
-  `Default 10`
-
-  `Type String`
-
-$ossec_syscheck_synchronization_max_interval
-  Specifies the maximum number of seconds between every inventory synchronization.
-
-  `Default 1h`
-
-  `Type String`
-
-$ossec_syscheck_skip_nfs
-  Specifies if syscheck should scan network mounted filesystems. This option works on Linux and FreeBSD systems. Currently, `skip_nfs` will exclude checking files on CIFS or NFS mounts.
-
-  `Default yes`
-
-  `Type String`
++------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+------------------------------------------+---------------------+
+|     **Parameter**                                    |     **Description**                                                                                                       |     **Default value**                    |     **Data type**   |
++======================================================+===========================================================================================================================+==========================================+=====================+
+|     ``$configure_syscheck``                          | Enables syscheck section rendering on this host. If this variable is not set to 'true', the complete ``syscheck``   tag   |     ``true``                             | Boolean             |
+|                                                      | will not be added to ``/var/ossec/etc/ossec.conf``.                                                                       |                                          |                     |
++------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+------------------------------------------+---------------------+
+|     ``$ossec_syscheck_disabled``                     | Disables syscheck on this host.                                                                                           |     ``no``                               | String              |
++------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+------------------------------------------+---------------------+
+|     ``$ossec_syscheck_frequency``                    | Enables syscheck section rendering on this host.                                                                          |     ``43200``                            | String              |
++------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+------------------------------------------+---------------------+
+|     ``$ossec_syscheck_scan_on_start``                | Specifies if syscheck scans immediately when started.                                                                     |     ``yes``                              | String              |
++------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+------------------------------------------+---------------------+
+|     ``$ossec_syscheck_auto_ignore``                  | Specifies whether or not syscheck will ignore files that change too many times (manager only).                            |     ``undef``                            | String              |
++------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+------------------------------------------+---------------------+
+|     ``$ossec_syscheck_directories_1``                | List of directories to be monitored. The directories should be comma-separated.                                           |     ``'/etc,/usr/bin,/usr/sbin'``        | String              |
++------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+------------------------------------------+---------------------+
+|     ``$ossec_syscheck_realtime_directories_1``       | This will enable real-time/continuous monitoring on directories listed on ``ossec_syscheck_directories_1``  . Real time   |     ``no``                               | String              |
+|                                                      | only works with directories, not individual files.                                                                        |                                          |                     |
++------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+------------------------------------------+---------------------+
+|     ``$ossec_syscheck_whodata_directories_1``        | This will enable who-data monitoring on directories listed on ``ossec_syscheck_directories_1``  .                         |     ``no``                               | String              |
++------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+------------------------------------------+---------------------+
+|     ``$ossec_syscheck_directories_2``                | List of directories to be monitored. The directories should be comma-separated.                                           |     ``'/etc,/usr/bin,/usr/sbin'``        | String              |
++------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+------------------------------------------+---------------------+
+|     ``$ossec_syscheck_realtime_directories_2``       | This will enable real-time/continuous monitoring on directories listed on ``ossec_syscheck_directories_2``  . The         |     ``no``                               | String              |
+|                                                      | real-time settings work with directories, not individual files.                                                           |                                          |                     |
++------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+------------------------------------------+---------------------+
+|     ``$ossec_syscheck_whodata_directories_2``        | This will enable who-data monitoring on directories listed on ``ossec_syscheck_directories_2``  .                         |     ``no``                               | String              |
++------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+------------------------------------------+---------------------+
+|     ``$ossec_syscheck_report_changes_directories_2`` | Report file changes. This is limited to text files at this time.                                                          |     ``no``                               | String              |
++------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+------------------------------------------+---------------------+
+|     ``$ossec_syscheck_ignore_list``                  | List of files or directories to be ignored. Ignored files and directories are still being scanned, but the results are    |     ``['/etc/mtab','/etc/hosts.deny',``  | String              |
+|                                                      | not reported.                                                                                                             |     ``'/etc/mail/statistics',``          |                     |
+|                                                      |                                                                                                                           |     ``'/etc/random-seed',``              |                     |
+|                                                      |                                                                                                                           |     ``'/etc/random.seed',``              |                     |
+|                                                      |                                                                                                                           |     ``'/etc/adjtime',``                  |                     |
+|                                                      |                                                                                                                           |     ``'/etc/httpd/logs',``               |                     |
+|                                                      |                                                                                                                           |     ``'/etc/utmpx','/etc/wtmpx',``       |                     |
+|                                                      |                                                                                                                           |     ``'/etc/cups/certs',``               |                     |
+|                                                      |                                                                                                                           |     ``'/etc/dumpdates',``                |                     |
+|                                                      |                                                                                                                           |     ``'/etc/svc/volatile',``             |                     |
+|                                                      |                                                                                                                           |     ``'/sys/kernel/security',``          |                     |
+|                                                      |                                                                                                                           |     ``'/sys/kernel/debug',``             |                     |
+|                                                      |                                                                                                                           |     ``'/dev/core',]``                    |                     |
++------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+------------------------------------------+---------------------+
+|     ``$ossec_syscheck_ignore_type_1``                | Simple regex pattern to filter out files.                                                                                 |     ``'^/proc'``                         | String              |
++------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+------------------------------------------+---------------------+
+|     ``$ossec_syscheck_ignore_type_2``                | Another simple regex pattern to filter out files.                                                                         |     ``'.log$|.swp$'``                    | String              |
++------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+------------------------------------------+---------------------+
+|     ``$ossec_syscheck_process_priority``             | Sets the nice value for the syscheck process.                                                                             |     ``10``                               | String              |
++------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+------------------------------------------+---------------------+
+|     ``$ossec_syscheck_synchronization_enabled``      | Specifies whether there will be periodic inventory synchronizations or not.                                               |     ``yes``                              | String              |
++------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+------------------------------------------+---------------------+
+|     ``$ossec_syscheck_synchronization_interval``     | Specifies the initial number of seconds between every inventory synchronization. If synchronization fails, the value will |     ``5m``                               | String              |
+|                                                      | be duplicated until it reaches the value of ``max_interval``  .                                                           |                                          |                     |
++------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+------------------------------------------+---------------------+
+|     ``$ossec_syscheck_synchronization_max_eps``      | Sets the maximum synchronization message throughput.                                                                      |     ``10``                               | String              |
++------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+------------------------------------------+---------------------+
+|     ``$ossec_syscheck_synchronization_max_interval`` | Specifies the maximum number of seconds between every inventory synchronization.                                          |     ``1h``                               | String              |
++------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+------------------------------------------+---------------------+
+|     ``$ossec_syscheck_skip_nfs``                     | Specifies if syscheck should scan network-mounted filesystems. This option works on Linux and FreeBSD systems.            |     ``yes``                              | String              |
+|                                                      | Currently, ``skip_nfs``   will exclude checking files on CIFS or NFS mounts.                                              |                                          |                     |
++------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+------------------------------------------+---------------------+
 
 .. _ref_agent_vars_wodle_osquery:
 
 Wodle osquery variables
 -----------------------
 
-$configure_wodle_osquery
-  Enables the Wodle osquery section rendering on this host. If this variable is not set to ‘true’, the complete *osquery wodle tag* will not be added to *ossec.conf*.
-
-  `Default true`
-
-  `Type String`
-
-$wodle_osquery_disabled
-  Disable the osquery wodle.
-
-  `Default yes`
-
-  `Type String`
-
-$wodle_osquery_run_daemon
-  Make the module run osqueryd as a subprocess or let the module monitor the results log without running Osquery.
-
-  `Default yes`
-
-  `Type String`
-
-$wodle_osquery_log_path
-  Full path to the results log written by Osquery.
-
-  `Default '/var/log/osquery/osqueryd.results.log'`
-
-  `Type String`
-
-$wodle_osquery_config_path
-  Path to the Osquery configuration file. This path can be relative to the folder where the Wazuh agent is running.
-
-  `Default '/etc/osquery/osquery.conf'`
-
-  `Type String`
-
-$wodle_osquery_add_labels
-  Add the agent labels defined as decorators.
-
-  `Default yes`
-
-  `Type String`
++----------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------+---------------------+
+|     **Parameter**                |     **Description**                                                                                                       |     **Default value**                           |     **Data type**   |
++==================================+===========================================================================================================================+=================================================+=====================+
+|     ``$configure_wodle_osquery`` | Enables the Wodle osquery section rendering on this host. If this variable is not set to '``true``  ', the complete       |     ``true``                                    | String              |
+|                                  | osquery wodle tag will not be added to ``/var/ossec/etc/ossec.conf``.                                                     |                                                 |                     |
++----------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------+---------------------+
+|     ``$wodle_osquery_disabled``  | Disables the osquery wodle.                                                                                               |     ``yes``                                     | String              |
++----------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------+---------------------+
+|  ``$wodle_osquery_run_daemon``   | Makes the module run osqueryd as a subprocess or let the module monitor the results log without running Osquery.          |     ``yes``                                     | String              |
++----------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------+---------------------+
+|     ``$wodle_osquery_log_path``  | This defines the full path to the results log written by Osquery.                                                         |  ``'/var/log/osquery/osqueryd.results.log'``    | String              |
++----------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------+---------------------+
+| ``$wodle_osquery_config_path``   | Path to the Osquery configuration file. This path can be relative to the folder where the Wazuh agent is running.         |     ``'/etc/osquery/osquery.conf'``             | String              |
++----------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------+---------------------+
+| ``$wodle_osquery_add_labels``    | Add the agent labels defined as decorators.                                                                               |     ``yes``                                     | String              |
++----------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------+---------------------+
 
 .. _ref_agent_vars_wodle_syscollector:
 
 Wodle Syscollector
 ------------------
 
-$wodle_syscollector_disabled
-  Disable the Syscollector wodle.
-
-  `Default no`
-
-  `Type String`
-
-$wodle_syscollector_interval
-  Time between system scans.
-
-  `Default 1h`
-
-  `Type String`
-
-$wodle_syscollector_scan_on_start
-  Run a system scan immediately when service is started.
-
-  `Default yes`
-
-  `Type String`
-
-$wodle_syscollector_hardware
-  Enables the hardware scan.
-
-  `Default yes`
-
-  `Type String`
-
-$wodle_syscollector_os
-  Enables the scan of the OS.
-
-  `Default yes`
-
-  `Type String`
-
-$wodle_syscollector_network
-  Enables the network scan.
-
-  `Default yes`
-
-  `Type String`
-
-$wodle_syscollector_packages
-  Enables the scan of the packages.
-
-  `Default yes`
-
-  `Type String`
-
-$wodle_syscollector_ports
-  Enables the scan of the ports.
-
-  `Default yes`
-
-  `Type String`
-
-$wodle_syscollector_processes
-  Enables the scan of the processes.
-
-  `Default yes`
-
-  `Type String`
++----------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------+---------------------+
+|     **Parameter**                      |     **Description**                                                                                                       |     **Default value**   |     **Data type**   |
++========================================+===========================================================================================================================+=========================+=====================+
+|     ``$wodle_syscollector_disabled``   | Disable the Syscollector wodle.                                                                                           |     ``no``              | String              |
++----------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------+---------------------+
+|     ``$wodle_syscollector_interval``   | Time between system scans.                                                                                                |     ``1h``              | String              |
++----------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------+---------------------+
+| ``$wodle_syscollector_scan_on_start``  | Run a system scan immediately when the service is started.                                                                |     ``yes``             | String              |
++----------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------+---------------------+
+|     ``$wodle_syscollector_hardware``   | Enables the hardware scan.                                                                                                |     ``yes``             | String              |
++----------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------+---------------------+
+|     ``$wodle_syscollector_os``         | Enables the scan of the OS.                                                                                               |     ``yes``             | String              |
++----------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------+---------------------+
+|     ``$wodle_syscollector_network``    | Enables the network scan.                                                                                                 |     ``yes``             | String              |
++----------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------+---------------------+
+|     ``$wodle_syscollector_packages``   | Enables the scan of the packages.                                                                                         |     ``yes``             | String              |
++----------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------+---------------------+
+|     ``$wodle_syscollector_ports``      | Enables the scanning of the ports.                                                                                        |     ``yes``             | String              |
++----------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------+---------------------+
+|     ``$wodle_syscollector_processes``  | Enables the scan of the processes.                                                                                        |     ``yes``             | String              |
++----------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------+---------------------+
 
 .. _ref_agent_vars_misc:
 
 Misc Variables
 --------------
 
-$agent_package_name
-  Define package name defined in `params_agent.pp`
+.. |WAZUH_CURRENT_PUPPET_HOLDER| replace:: ``|WAZUH_CURRENT_PUPPET|-1``
 
-  `Default wazuh-agent`
 
-  `Type String`
-
-$agent_package_version
-  Define package version
-
-  `Default |WAZUH_CURRENT_PUPPET|-1`
-
-  `Type String`
-
-$selinux
-  Whether to install a SELinux policy to allow rotation of OSSEC logs.
-
-  `Default false`
-
-  `Type Boolean`
-
-$agent_name
-  Configure agent name.
-
-  `Default undef`
-
-  `Type String`
-
-$manage_repo
-  Install Wazuh through Wazuh repositories.
-
-  `Default true`
-
-  `Type Boolean`
-
-$manage_client_keys
-  Manage client keys option.
-
-  `Default yes`
-
-  `Type String`
-
-$agent_auth_password
-  Define password for agent-auth
-
-  `Default undef`
-  
-  `Type String`
++------------------------------+---------------------------------------------------------------------------------------------------------------------------+----------------------------------------+---------------------+
+|     **Parameter**            |     **Description**                                                                                                       |     **Default value**                  |     **Data type**   |
++==============================+===========================================================================================================================+========================================+=====================+
+|     ``$agent_package_name``  | Defines the package name using ``params_agent.pp``                                                                        |     ``wazuh-agent``                    | String              |
++------------------------------+---------------------------------------------------------------------------------------------------------------------------+----------------------------------------+---------------------+
+| ``$agent_package_version``   | Defines package version                                                                                                   |     |WAZUH_CURRENT_PUPPET_HOLDER|      | String              |
++------------------------------+---------------------------------------------------------------------------------------------------------------------------+----------------------------------------+---------------------+
+|     ``$selinux``             | Whether to install a SELinux policy to allow rotation of OSSEC logs.                                                      |     ``false``                          | Boolean             |
++------------------------------+---------------------------------------------------------------------------------------------------------------------------+----------------------------------------+---------------------+
+|     ``$agent_name``          | Configure agent name.                                                                                                     |     ``undef``                          | String              |
++------------------------------+---------------------------------------------------------------------------------------------------------------------------+----------------------------------------+---------------------+
+|     ``$manage_repo``         | Install Wazuh through Wazuh repositories.                                                                                 |     ``true``                           | Boolean             |
++------------------------------+---------------------------------------------------------------------------------------------------------------------------+----------------------------------------+---------------------+
+|     ``$manage_client_keys``  | Manage client keys option.                                                                                                |     ``yes``                            | String              |
++------------------------------+---------------------------------------------------------------------------------------------------------------------------+----------------------------------------+---------------------+
+|     ``$agent_auth_password`` | Define a password for agent-auth                                                                                          |     ``undef``                          | String              |
++------------------------------+---------------------------------------------------------------------------------------------------------------------------+----------------------------------------+---------------------+
 
 .. _ref_agent_addlog:
