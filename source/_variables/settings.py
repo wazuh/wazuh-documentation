@@ -23,3 +23,5 @@ is_latest_release = False
 release = version
 api_tag = ''
 apiURL = ''
+apiURL_server = ''  
+apiURL_indexer = ''
