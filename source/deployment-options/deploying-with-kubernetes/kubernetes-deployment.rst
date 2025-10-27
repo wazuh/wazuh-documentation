@@ -116,7 +116,7 @@ The provisioner column displays ``microk8s.io/hostpath``.
 Apply all manifests
 ^^^^^^^^^^^^^^^^^^^
 
-There are two variants of the manifest: one for EKS clusters located in envs/eks and the second for other cluster types located in ``envs/local-env``.
+There are two variants of the manifest: one for EKS clusters located in ``envs/eks`` and the second for other cluster types located in ``envs/local-env``.
 
 You can adjust cluster resources by editing patches in ``envs/eks/`` or ``envs/local-env/``. You can also tune CPU, memory, and storage for persistent volumes of each cluster object. Remove patches from ``kustomization.yml`` or modify patch values to undo changes.
 
@@ -137,104 +137,120 @@ Deploy the cluster using the ``kustomization.yml`` file:
 Verifying the deployment
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-**Namespace**
+Namespace
+~~~~~~~~~
 
-    .. code-block:: console
+Run the following command to check that the Wazuh namespace is active:
 
-        $ kubectl get namespaces | grep wazuh
-
-    .. code-block:: none
-        :class: output
-
-        wazuh         Active    12m
-
-**Services**
-
-    .. code-block:: console
-
-        $ kubectl get services -n wazuh
-
-    .. code-block:: none
-        :class: output
-
-        NAME                  TYPE           CLUSTER-IP       EXTERNAL-IP        PORT(S)                          AGE
-        indexer               ClusterIP      xxx.yy.zzz.24    <none>             9200/TCP                         12m
-        dashboard             ClusterIP      xxx.yy.zzz.76    <none>             5601/TCP                         11m
-        wazuh                 LoadBalancer   xxx.yy.zzz.209   internal-a7a8...   1515:32623/TCP,55000:30283/TCP   9m
-        wazuh-cluster         ClusterIP      None             <none>             1516/TCP                         9m
-        Wazuh-indexer         ClusterIP      None             <none>             9300/TCP                         12m
-        wazuh-workers         LoadBalancer   xxx.yy.zzz.26    internal-a7f9...   1514:31593/TCP                   9m
-
-
-**Deployments**
-
-    .. code-block:: console
-
-        $ kubectl get deployments -n wazuh
-
-    .. code-block:: none
-        :class: output
-
-        NAME             DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
-        wazuh-dashboard  1         1         1            1           11m
-
-**Statefulset**
-
-    .. code-block:: console
-
-        $ kubectl get statefulsets -n wazuh
-
-    .. code-block:: none
-        :class: output
-
-        NAME                   READY   AGE
-        wazuh-indexer          3/3     15m
-        wazuh-manager-master   1/1     15m
-        wazuh-manager-worker   2/2     15m
-
-**Pods**
-
-    .. code-block:: console
-
-        $ kubectl get pods -n wazuh
-
-    .. code-block:: none
-        :class: output
-
-        NAME                              READY     STATUS    RESTARTS   AGE
-        wazuh-indexer-0                   1/1       Running   0          15m
-        wazuh-dashboard-f4d9c7944-httsd   1/1       Running   0          14m
-        wazuh-manager-master-0            1/1       Running   0          12m
-        wazuh-manager-worker-0-0          1/1       Running   0          11m
-        wazuh-manager-worker-1-0          1/1       Running   0          11m
-
-
-**Accessing Wazuh dashboard**
-
-In case you created domain names for the services, you should be able to access the dashboard using the proposed domain name: ``https://wazuh.your-domain.com``. Cloud providers usually provide an external IP address or hostname for direct access to the dashboard. This can be viewed by checking the services:
-
-    .. code-block:: console
- 
-         $ kubectl get services -o wide -n wazuh
-
-
-
-    .. code-block:: none
-        :class: output
-
-         NAME                  TYPE           CLUSTER-IP       EXTERNAL-IP                      PORT(S)                          AGE       SELECTOR
-         dashboard             LoadBalancer   xxx.xx.xxx.xxx   xxx.xx.xxx.xxx                   80:31831/TCP,443:30974/TCP       15m       app=wazuh-dashboard
-
-
-**Optional**: On a local cluster deployment where the external IP address is not accessible, you can use ``port-forward``:
- 
 .. code-block:: console
 
-   $ kubectl -n wazuh port-forward --address <INTERFACE_IP_ADDRESS> service/dashboard 8443:443
-  
-Where ``<INTERFACE_IP_ADDRESS>`` is the IP address of the Kubernetes host.
+   $ kubectl get namespaces | grep wazuh
 
-The Wazuh dashboard is accessible on ``https://<INTERFACE_IP_ADDRESS>:8443``.
+.. code-block:: none
+   :class: output
+
+   wazuh         Active    12m
+
+Services
+~~~~~~~~
+
+Run the command below to view all running services in the Wazuh namespace:
+
+.. code-block:: console
+
+   $ kubectl get services -n wazuh
+
+.. code-block:: none
+   :class: output
+
+   NAME                  TYPE           CLUSTER-IP       EXTERNAL-IP        PORT(S)                          AGE
+   indexer               ClusterIP      xxx.yy.zzz.24    <none>             9200/TCP                         12m
+   dashboard             ClusterIP      xxx.yy.zzz.76    <none>             5601/TCP                         11m
+   wazuh                 LoadBalancer   xxx.yy.zzz.209   internal-a7a8...   1515:32623/TCP,55000:30283/TCP   9m
+   wazuh-cluster         ClusterIP      None             <none>             1516/TCP                         9m
+   Wazuh-indexer         ClusterIP      None             <none>             9300/TCP                         12m
+   wazuh-workers         LoadBalancer   xxx.yy.zzz.26    internal-a7f9...   1514:31593/TCP                   9m
+
+Deployments
+~~~~~~~~~~~
+
+Run the command below to check for the deployments in the Wazuh namespace:
+
+.. code-block:: console
+
+   $ kubectl get deployments -n wazuh
+
+.. code-block:: none
+   :class: output
+
+   NAME             DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+   wazuh-dashboard  1         1         1            1           11m
+
+Statefulset
+~~~~~~~~~~~
+
+Run the command below to check the active StatefulSets in the Wazuh namespace:
+
+.. code-block:: console
+
+   $ kubectl get statefulsets -n wazuh
+
+.. code-block:: none
+   :class: output
+
+   NAME                   READY   AGE
+   wazuh-indexer          3/3     15m
+   wazuh-manager-master   1/1     15m
+   wazuh-manager-worker   2/2     15m
+
+Pods
+~~~~
+
+Run the command below to view the pods status in the Wazuh namespace:
+
+.. code-block:: console
+
+   $ kubectl get pods -n wazuh
+
+.. code-block:: none
+   :class: output
+
+   NAME                              READY     STATUS    RESTARTS   AGE
+   wazuh-indexer-0                   1/1       Running   0          15m
+   wazuh-dashboard-f4d9c7944-httsd   1/1       Running   0          14m
+   wazuh-manager-master-0            1/1       Running   0          12m
+   wazuh-manager-worker-0-0          1/1       Running   0          11m
+   wazuh-manager-worker-1-0          1/1       Running   0          11m
+
+
+Accessing Wazuh dashboard
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If you created domain names for the services, access the dashboard using the URL ``https://wazuh.<YOUR_DOMAIN>.com``. Otherwise, access the Wazuh dashboard using the external IP address or hostname that your cloud provider assigned.
+
+Check the services to view the external IP:
+
+.. code-block:: console
+
+   $ kubectl get services -o wide -n wazuh
+
+.. code-block:: none
+   :class: output
+
+   NAME                  TYPE           CLUSTER-IP       EXTERNAL-IP                      PORT(S)                          AGE       SELECTOR
+   dashboard             LoadBalancer   xxx.xx.xxx.xxx   xxx.xx.xxx.xxx                   80:31831/TCP,443:30974/TCP       15m       app=wazuh-dashboard
+
+.. note::
+
+   For a local cluster deployment where the external IP address is not accessible, you can access the Wazuh dashboard using a ``port-forward`` as shown below:
+
+   .. code-block:: console
+
+      # kubectl -n wazuh port-forward --address <KUBERNETES_HOST> service/dashboard 8443:443
+
+   Replace ``<KUBERNETES_HOST>`` with the IP address of the Kubernetes host.
+
+The Wazuh dashboard is accessible at ``https://<KUBERNETES_HOST>:8443``.
 
 The default credentials are ``admin:SecretPassword``.
 
