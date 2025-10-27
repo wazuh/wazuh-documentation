@@ -1,91 +1,138 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Learn more about Kubernetes deployment with Wazuh in this section of the Wazuh documentation. 
+   :description: This section covers deploying Wazuh on Kubernetes for Amazon EKS and Local Kubernetes clusters, from environment preparation to verifying that all components are running correctly.
 
 Deployment
 ==========
 
-Clone this repository to deploy the necessary services and pods.
+This section covers deploying Wazuh on Kubernetes for Amazon EKS and Local Kubernetes clusters, from environment preparation to verifying that all components are running correctly.
 
-    .. code-block:: console
+Clone the Wazuh Kubernetes repository for the necessary services and pods:
 
-        $ git clone https://github.com/wazuh/wazuh-kubernetes.git -b v|WAZUH_CURRENT_KUBERNETES| --depth=1
-        $ cd wazuh-kubernetes
+.. code-block:: console
+
+   $ git clone https://github.com/wazuh/wazuh-kubernetes.git -b v|WAZUH_CURRENT_KUBERNETES| --depth=1
+   $ cd wazuh-kubernetes
 
 .. _kubernetes_ssl_certificates:
 
 Setup SSL certificates
 ^^^^^^^^^^^^^^^^^^^^^^
 
-You can generate self-signed certificates for the Wazuh indexer cluster using the script at ``wazuh/certs/indexer_cluster/generate_certs.sh`` or provide your own.
+Perform the steps below to generate the required certificates for the deployment:
 
-You can generate self-signed certificates for the Wazuh dashboard cluster using the script at ``wazuh/certs/dashboard_http/generate_certs.sh`` or provide your own.
+#. Generate self-signed certificates for the Wazuh indexer cluster using the script at ``wazuh/certs/indexer_cluster/generate_certs.sh`` or provide your own certificates.
 
-The required certificates are imported via secretGenerator on the ``kustomization.yml`` file:
+   .. code-block:: console
 
+      # wazuh/certs/indexer_cluster/generate_certs.sh
 
-    .. code-block:: yaml
+   .. code-block:: none
+      :class: output
 
-        secretGenerator:
-            - name: indexer-certs
-              files:
-                - certs/indexer_cluster/root-ca.pem
-                - certs/indexer_cluster/node.pem
-                - certs/indexer_cluster/node-key.pem
-                - certs/indexer_cluster/dashboard.pem
-                - certs/indexer_cluster/dashboard-key.pem
-                - certs/indexer_cluster/admin.pem
-                - certs/indexer_cluster/admin-key.pem
-                - certs/indexer_cluster/filebeat.pem
-                - certs/indexer_cluster/filebeat-key.pem
-            - name: dashboard-certs
-              files:
-                - certs/dashboard_http/cert.pem
-                - certs/dashboard_http/key.pem
-                - certs/indexer_cluster/root-ca.pem
+      Root CA
+      Admin cert
+      create: admin-key-temp.pem
+      create: admin-key.pem
+      create: admin.csr
+      Ignoring -days without -x509; not generating a certificate
+      create: admin.pem
+      Certificate request self-signature ok
+      subject=C=US, L=California, O=Company, CN=admin
+      * Node cert
+      create: node-key-temp.pem
+      create: node-key.pem
+      create: node.csr
+      Ignoring -days without -x509; not generating a certificate
+      create: node.pem
+      Certificate request self-signature ok
+      subject=C=US, L=California, O=Company, CN=indexer
+      * dashboard cert
+      create: dashboard-key-temp.pem
+      create: dashboard-key.pem
+      create: dashboard.csr
+      Ignoring -days without -x509; not generating a certificate
+      create: dashboard.pem
+      Certificate request self-signature ok
+      subject=C=US, L=California, O=Company, CN=dashboard
+      * Filebeat cert
+      create: filebeat-key-temp.pem
+      create: filebeat-key.pem
+      create: filebeat.csr
+      Ignoring -days without -x509; not generating a certificate
+      create: filebeat.pem
+      Certificate request self-signature ok
+      subject=C=US, L=California, O=Company, CN=filebeat
 
+#. Generate self-signed certificates for the Wazuh dashboard using the script at ``wazuh/certs/dashboard_http/generate_certs.sh`` or provide your own certificates.
+
+   .. code-block:: console
+
+      # wazuh/certs/dashboard_http/generate_certs.sh
+
+   The required certificates are imported via ``secretGenerator`` in the ``kustomization.yml`` file:
+
+   .. code-block:: yaml
+
+      secretGenerator:
+          - name: indexer-certs
+            files:
+              - certs/indexer_cluster/root-ca.pem
+              - certs/indexer_cluster/node.pem
+              - certs/indexer_cluster/node-key.pem
+              - certs/indexer_cluster/dashboard.pem
+              - certs/indexer_cluster/dashboard-key.pem
+              - certs/indexer_cluster/admin.pem
+              - certs/indexer_cluster/admin-key.pem
+              - certs/indexer_cluster/filebeat.pem
+              - certs/indexer_cluster/filebeat-key.pem
+          - name: dashboard-certs
+            files:
+              - certs/dashboard_http/cert.pem
+              - certs/dashboard_http/key.pem
+              - certs/indexer_cluster/root-ca.pem
 
 Setup storage class (optional for non-EKS cluster)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Depending on the type of cluster you’re running, the Storage Class may have a different provisioner.
+The storage class provisioner varies depending on your cluster. Edit the ``envs/local-env/storage-class.yaml`` file to set the provisioner that matches your cluster type.
 
-You can check yours by running ``kubectl get sc``. You will see something like this:
+Check your storage class by running ``kubectl get sc``:
+
+.. code-block:: console
+
+   # kubectl get sc
+
+.. code-block:: none
+   :class: output
+
+   NAME                          PROVISIONER            RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
+   elk-gp2                       microk8s.io/hostpath   Delete          Immediate           false                  67d
+   microk8s-hostpath (default)   microk8s.io/hostpath   Delete          Immediate           false                  54d
+
+The provisioner column displays ``microk8s.io/hostpath``.
+
+Apply all manifests
+^^^^^^^^^^^^^^^^^^^
+
+There are two variants of the manifest: one for EKS clusters located in envs/eks and the second for other cluster types located in ``envs/local-env``.
+
+You can adjust cluster resources by editing patches in ``envs/eks/`` or ``envs/local-env/``. You can also tune CPU, memory, and storage for persistent volumes of each cluster object. Remove patches from ``kustomization.yml`` or modify patch values to undo changes.
+
+Deploy the cluster using the ``kustomization.yml`` file:
+
+-  EKS cluster
 
    .. code-block:: console
 
-        $ kubectl get sc
-        NAME                          PROVISIONER            RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
-        elk-gp2                       microk8s.io/hostpath   Delete          Immediate           false                  67d
-        microk8s-hostpath (default)   microk8s.io/hostpath   Delete          Immediate           false                  54d
+      # kubectl apply -k envs/eks/
 
- 
-The provisioner column displays microk8s.io/hostpath, you must edit the file ``envs/local-env/storage-class.yaml`` and set up this provisioner.
+-  Other cluster types
 
+   .. code-block:: console
 
-Apply all manifests using kustomize
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-There are two variants of the manifest: ``eks`` and ``local-env``. The eks manifest should be used if you are using the EKS cluster, while the local-env manifest should be used for other cluster types.
-
-It is possible to adjust resources for the cluster by editing patches on ``envs/eks/`` or ``envs/local-env/``, depending on which manifest you want to deploy. You can tune CPU, memory as well as storage for persistent volumes of each of the cluster objects. This could be undone by removing these patches from the ``kustomization.yaml`` or altering the patches themselves with different values.
-
-We can deploy the cluster with a single command by using the customization file:
-
-- EKS cluster
-
-  .. code-block:: console
-
-      $ kubectl apply -k envs/eks/
-
- 
-- Other cluster types
-
-  .. code-block:: console
-
-      $ kubectl apply -k envs/local-env/
-
+      # kubectl apply -k envs/local-env/
 
 Verifying the deployment
 ^^^^^^^^^^^^^^^^^^^^^^^^

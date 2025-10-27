@@ -50,7 +50,7 @@ A Pod is the smallest and most fundamental deployable unit in Kubernetes. It rep
 
 **Wazuh master**
 
-This pod contains the master node of the Wazuh cluster. The master node centralizes and coordinates worker nodes, making sure the critical and required data is consistent across all nodes. The management is performed only in this node, so the agent enrollment service (authd) is placed here.
+The master pod contains the master node of the Wazuh server cluster. The master node centralizes and coordinates worker nodes. It ensures critical data remains consistent across the Wazuh server cluster. Management operations occur only on this node, so the agent enrollment service (``authd``) runs here.
 
 +-------------------------------+-------------+
 | Image                         | Controller  |
@@ -58,9 +58,9 @@ This pod contains the master node of the Wazuh cluster. The master node centrali
 | wazuh/wazuh-manager           | StatefulSet |
 +-------------------------------+-------------+
 
-**Wazuh worker 0 / 1**
+**Wazuh worker**
 
-These pods contain a worker node of the Wazuh cluster. They will receive the agent events.
+The Wazuh worker pods contain the worker nodes of the Wazuh server cluster. They receive agent events.
 
 +-------------------------------+-------------+
 | Image                         | Controller  |
@@ -80,7 +80,7 @@ The Wazuh indexer pod ingests events received from Filebeat.
 
 **Wazuh dashboard**
 
-The Wazuh dashboard pod lets you visualize your Wazuh indexer data, along with Wazuh agents information and server configuration.
+The Wazuh dashboard pod provides visualization of Wazuh indexer data, Wazuh agent information, and Wazuh server configuration.
 
 +--------------------------------------+-------------+
 | Image                                | Controller  |
@@ -100,20 +100,20 @@ Services
 +----------------------+-------------------------------------------------------------------------------------+
 | indexer              | This is the Wazuh indexer API used by the Wazuh dashboard to read/write alerts.     |
 +----------------------+-------------------------------------------------------------------------------------+
-| dashboard            | Wazuh dashboard service. \https://wazuh.your-domain.com:443                         |
+| dashboard            | Wazuh dashboard service. \https://wazuh.<YOUR_DOMAIN>.com:443                       |
 +----------------------+-------------------------------------------------------------------------------------+
 
-**Wazuh**
+**Wazuh server**
 
-+----------------------+-------------------------------------------------------------------------+
-| Name                 | Description                                                             |
-+======================+=========================================================================+
-| wazuh                | Wazuh API: wazuh-master.your-domain.com:55000                           |
-|                      +-------------------------------------------------------------------------+
-|                      | Agent registration service (authd): wazuh-master.your-domain.com:1515   |
-+----------------------+-------------------------------------------------------------------------+
-| wazuh-workers        | Reporting service: wazuh-manager.your-domain.com:1514                   |
-+----------------------+-------------------------------------------------------------------------+
-| wazuh-cluster        | Communication for Wazuh manager nodes.                                  |
-+----------------------+-------------------------------------------------------------------------+
++----------------------+-------------------------------------------------------------------------------+
+| Name                 | Description                                                                   |
++======================+===============================================================================+
+| wazuh                | Wazuh API: wazuh-master.<YOUR_DOMAIN>.com:55000                               |
+|                      +-------------------------------------------------------------------------------+
+|                      | Agent registration service (``authd``): wazuh-master.<YOUR_DOMAIN>.com:1515   |
++----------------------+-------------------------------------------------------------------------------+
+| wazuh-workers        | Reporting service: wazuh-manager.<YOUR_DOMAIN>.com:1514                       |
++----------------------+-------------------------------------------------------------------------------+
+| wazuh-cluster        | Communication for Wazuh manager nodes.                                        |
++----------------------+-------------------------------------------------------------------------------+
 
