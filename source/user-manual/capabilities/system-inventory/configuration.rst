@@ -27,7 +27,7 @@ You can also use the :doc:`centralized configuration </user-manual/reference/cen
 The block below is the default Syscollector configuration present in the Wazuh agent configuration file:
 
 .. code-block:: xml
-   :emphasize-lines: 3,4,5,6,7,8,9,10,11,15
+   :emphasize-lines: 3,4,5,6,7,8,9,10,11,12,13,14,15,19
 
       <!-- System inventory -->
       <wodle name="syscollector">
@@ -38,8 +38,12 @@ The block below is the default Syscollector configuration present in the Wazuh a
         <os>yes</os>
         <network>yes</network>
         <packages>yes</packages>
-        <ports all="yes">yes</ports>
+        <ports all="no">yes</ports>
         <processes>yes</processes>
+        <users>yes</users>
+        <groups>yes</groups>
+        <services>yes</services>
+        <browser_extensions>yes</browser_extensions>
 
         <!-- Database synchronization settings -->
         <synchronization>
@@ -58,21 +62,20 @@ Where:
 - ``<hardware>`` option enables or disables the hardware information collection by Syscollector. The default value is ``yes``. The allowed values are ``yes`` and ``no``.
 - ``<os>`` option enables or disables the operating system scan. The default value is ``yes``. The allowed values are ``yes`` and ``no``.
 - ``<network>`` enables or disables the network scan. The default value is ``yes``. The allowed values are ``yes`` and ``no``.
-- ``<packages>`` enables or disables the scanning of packages with a default value of ``yes``. The allowed values are ``yes`` and ``no``.
-- ``<ports>`` enables or disables the port scan. Default is ``yes``. Allowed values are ``yes`` and ``no``.
-
-  You can also use the ``all`` attribute to target all ports or only listening ports:
-
-  -  ``<ports all="yes">`` all ports.
-  -  ``<ports all="no">`` only listening ports.
+- ``<packages>`` enables or disables the scanning of packages, with a default value of ``yes``. The allowed values are ``yes`` and ``no``.
+- ``<ports all="no">`` enables or disables the port scan. The default value is ``yes``. You can configure two allowed values is ``yes`` and ``no``. This option also accepts an additional parameter ``all``, with which you can restrict the scan to only listening ports using ``<ports all="no">``. If you want Syscollector to scan all ports, then you change the value to ``yes``.
 - ``<processes>`` enables or disables the scanning for running processes on a monitored endpoint. The default value is ``yes``. The allowed values are ``yes`` and ``no``.
+- ``<users>`` enables or disables the scanning for user accounts on a monitored endpoint. The default value is ``yes``. The allowed values are ``yes`` and ``no``.
+- ``<groups>`` enables or disables the scanning for user account groups on a monitored endpoint. The default value is ``yes``. The allowed values are ``yes`` and ``no``.
+- ``<services>`` enables or disables the scanning for services. The default value is ``yes``. The allowed values are ``yes`` and ``no``.
+- ``<browser_extensions>`` enables or disables the scanning for browser extensions. The default value is ``yes``. The allowed values are ``yes`` and ``no``.
 - ``<max_eps>`` allows you to set the maximum event reporting throughput. The default value is 10, which signifies 10 events per second. The allowed value is an Integer number between 0 and 1000000.
 
 In Windows systems, you can use the ``<hotfixes>`` option. Check :ref:`wodle_syscollector_hotfixes` for the details.
 
 .. note::
 
-   Restart the agent if you edited the local ``ossec.conf`` file to ensure the changes take effect. If you used centralized configuration, no manual restart is required because the agent reloads automatically after receiving the update.
+   Restart the agent when you make any changes to the configuration file. This will ensure that the changes take effect.
 
 Wazuh manager configuration
 ---------------------------

@@ -15,6 +15,8 @@ The IT Hygiene section organizes data into multiple categories:
 -  **Software**: Review installed packages and software vendors.
 -  **Processes**: Monitor running processes.
 -  **Network**: Inspect network configurations, interfaces, and traffic.
+-  **Identity**: View user accounts and groups information.
+-  **Services**: Monitor running services across endpoints.
 
 To access the IT hygiene section, navigate to **Security operations** > **IT Hygiene** on the Wazuh dashboard.
 
@@ -66,6 +68,14 @@ Contains an overview of software packages and Windows KBs on monitored endpoints
 -  The **Windows KBs** tab displays the Windows Knowledge Base data, including the most and least common Knowledge Bases.
 
    .. thumbnail:: /images/manual/system-inventory/system-inventory-software-windows-kbs-tab.png
+      :title: System inventory - Software Windows KBs tab
+      :alt: System inventory - Software Windows KBs tab
+      :align: center
+      :width: 80%
+      
+-  The **Browser extensions** tab displays top browsers and packages, and a summary data table containing the browser and extension details.
+
+   .. thumbnail:: /images/manual/system-inventory/system-inventory-browser-extension.png
       :title: System inventory - Software Windows KBs tab
       :alt: System inventory - Software Windows KBs tab
       :align: center
@@ -126,6 +136,38 @@ Contains the **Addresses**, **Interfaces**, **Protocols**, **Services**, and **T
       :alt: System inventory - Network Traffic tab
       :align: center
       :width: 80%
+
+Identity
+--------
+
+Provides a detailed breakdown of the users and groups in your environment.
+
+-  The **Users** tab displays user account information, including top users, user groups, user shells and a summary data table.
+
+   .. thumbnail:: /images/manual/system-inventory/system-inventory-identity-users-tab.png
+      :title: System inventory - Identity Users tab
+      :alt: System inventory - Identity Users tab
+      :align: center
+      :width: 80%
+
+-  The **Groups** tab displays information about the user account groups, including top groups, the number of unique groups and a summary data table.
+
+   .. thumbnail:: /images/manual/system-inventory/system-inventory-identity-groups-tab.png
+      :title: System inventory - Identity Groups tab
+      :alt: System inventory - Identity Groups tab
+      :align: center
+      :width: 80%
+
+Services
+--------
+
+Displays top running services, total unique services and a summary data containing service details for the monitored endpoints.
+
+.. thumbnail:: /images/manual/system-inventory/system-inventory-services.png
+   :title: System inventory - Services
+   :alt: System inventory - Services
+   :align: center
+   :width: 80%
 
 Query the agent inventory data
 ------------------------------
@@ -232,15 +274,19 @@ Follow the steps below to query the system inventory indices from the command li
       :class: output
 
       health status index                                                           uuid                   pri rep docs.count docs.deleted store.size pri.store.size
-      green  open   wazuh-states-inventory-system-wazuh-vmware-virtual-platform     quLOzlY1RFGsDSrTHo-MFw   1   0          3            4     61.7kb         61.7kb
-      green  open   wazuh-states-inventory-protocols-wazuh-vmware-virtual-platform  jnhsOwQyTlW-RYnaS7D7RQ   1   0         14            0     25.3kb         25.3kb
-      green  open   wazuh-states-inventory-processes-wazuh-vmware-virtual-platform  -8IsddyrQp6r8erH54MFxw   1   0        690          655    253.3kb        253.3kb
-      green  open   wazuh-states-inventory-networks-wazuh-vmware-virtual-platform   W8iWE0G_QqKiDID9cgPnqA   1   0         14            0     26.8kb         26.8kb
-      green  open   wazuh-states-inventory-packages-wazuh-vmware-virtual-platform   zPc4yGKsRxCfxqbB0QuSjQ   1   0       1585            8    972.8kb        972.8kb
-      green  open   wazuh-states-inventory-interfaces-wazuh-vmware-virtual-platform KiXJsZfaSO2kZvFFahYbIw   1   0          9            5     80.2kb         80.2kb
-      green  open   wazuh-states-inventory-hardware-wazuh-vmware-virtual-platform   TNAH5VcUTHKQz-3e4EXBig   1   0          3            5     76.8kb         76.8kb
-      green  open   wazuh-states-inventory-ports-wazuh-vmware-virtual-platform      J9_a35ZgTFu2S7XvVHUDwQ   1   0         84           10     99.8kb         99.8kb
-      green  open   wazuh-states-inventory-hotfixes-wazuh-vmware-virtual-platform   BeJOrf4cTlOEM_VCWmeDIw   1   0         18            0      7.3kb          7.3kb
+      green  open   wazuh-states-inventory-hotfixes-localhost.localdomain           0VISw7egSCOqS4_iW6lF-A   1   0         24            0      7.5kb          7.5kb
+      green  open   wazuh-states-inventory-networks-localhost.localdomain           2VeQaHbKQGyGAw-zsBBG-Q   1   0          6            0       17kb           17kb
+      green  open   wazuh-states-inventory-services-localhost.localdomain           8ZMbiB4eSvmQXxFhBOF3Wg   1   0        860            4    469.7kb        469.7kb
+      green  open   wazuh-states-inventory-users-localhost.localdomain              Gj_vVwsORSW75SSNHRLo5A   1   0         60            1     89.2kb         89.2kb
+      green  open   wazuh-states-inventory-browser-extensions-localhost.localdomain lmd4L0CKQVSZ6MkHPggKOg   1   0         22            0     56.7kb         56.7kb
+      green  open   wazuh-states-inventory-system-localhost.localdomain             1KLOw7tZTc2mrLXigyAgOA   1   0          2            0     18.5kb         18.5kb
+      green  open   wazuh-states-inventory-interfaces-localhost.localdomain         26kqFEdaQT6zLXCexqOm2g   1   0          3            0       21kb           21kb
+      green  open   wazuh-states-inventory-packages-localhost.localdomain           OKQau-AmQd2XYKtMTbIiAA   1   0       1576           18    522.3kb        522.3kb
+      green  open   wazuh-states-inventory-groups-localhost.localdomain             mKSYvXZ3QgWyP4gK3xymlA   1   0        101            0       62kb           62kb
+      green  open   wazuh-states-inventory-ports-localhost.localdomain              GG3ZzWV8SbaLFmCDOymy8A   1   0        104            9     56.4kb         56.4kb
+      green  open   wazuh-states-inventory-hardware-localhost.localdomain           pHS7eI08QAW7oEiDLSO2LA   1   0          2            0     16.1kb         16.1kb
+      green  open   wazuh-states-inventory-protocols-localhost.localdomain          55hrDEMMTIS9UzzteTjnBQ   1   0          6            0     16.2kb         16.2kb
+      green  open   wazuh-states-inventory-processes-localhost.localdomain          G-vbdw1WRsaRmNdoqqcaqQ   1   0        528          100    138.7kb        138.7kb
 
 #. Use the command below to query the system inventory index for the packages on the endpoints. Replace ``<WAZUH_INDEXER_USERNAME>`` with the Wazuh indexer username and type the Wazuh indexer password when prompted.
 
@@ -893,21 +939,39 @@ Follow the steps below to query the system inventory indices from the command li
 Using SQLite
 ^^^^^^^^^^^^
 
-The location of the database for each monitored endpoint is on the Wazuh server at ``/var/ossec/queue/db/``. You can query each database directly. To connect to the database of an endpoint, use the command below:
+The location of the database for each monitored endpoint is on the Wazuh server at ``/var/ossec/queue/db/``. You can query each database directly by following these steps.
 
-.. code-block:: console
+#. If SQLite is not already installed, install it with this command:
 
-   $ sqlite3 /var/ossec/queue/db/<AGENT_ID>.db
+   .. tabs::
 
-Where ``<AGENT_ID>`` corresponds to the agent ID of the monitored endpoint.
+      .. group-tab:: APT
 
-.. code-block:: console
-   :class: output
+         .. code-block:: console
 
-   SQLite version 3.7.17 2013-05-20 00:56:22
-   Enter ".help" for instructions
-   Enter SQL statements terminated with a ";"
-   sqlite>
+            $ sudo apt install sqlite3
+
+      .. group-tab:: YUM
+
+         .. code-block:: console
+
+            $ sudo yum install sqlite3
+
+#. Use the command below to connect to the database of an endpoint:
+
+   .. code-block:: console
+
+      $ sqlite3 /var/ossec/queue/db/<AGENT_ID>.db
+
+   Where ``<AGENT_ID>`` corresponds to the agent ID of the monitored endpoint.
+
+   .. code-block:: none
+      :class: output
+
+      SQLite version 3.7.17 2013-05-20 00:56:22
+      Enter ".help" for instructions
+      Enter SQL statements terminated with a ";"
+      sqlite>
 
 After connecting to the database, you can query the list of tables in it using the command below:
 
@@ -915,17 +979,17 @@ After connecting to the database, you can query the list of tables in it using t
 
    sqlite>.tables
 
-.. code-block:: console
+.. code-block:: none
    :class: output
 
-   ciscat_results        sca_scan_info         sys_osinfo
-   fim_entry             scan_info             sys_ports
-   metadata              sync_info             sys_processes
-   pm_event              sys_hotfixes          sys_programs
-   sca_check             sys_hwinfo
-   sca_check_compliance  sys_netaddr
-   sca_check_rules       sys_netiface
-   sca_policy            sys_netproto
+   ciscat_results          sca_scan_info           sys_netiface
+   fim_entry               scan_info               sys_netproto
+   metadata                sync_info               sys_osinfo
+   pm_event                sys_browser_extensions  sys_ports
+   sca_check               sys_groups              sys_processes
+   sca_check_compliance    sys_hotfixes            sys_programs
+   sca_check_rules         sys_hwinfo              sys_services
+   sca_policy              sys_netaddr             sys_users
 
 You can further query the tables for any information you are interested in. For example, if you want to know if a particular software is present on an endpoint, you can query the ``sys_programs`` table using  ``sqlite>select * from sys_programs where name="<SOFTWARE_NAME>";``. The command below checks whether the ``wazuh-agent`` program is present on a monitored Linux endpoint and shows the captured details:
 
