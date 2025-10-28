@@ -207,7 +207,7 @@ Follow the instructions below to change the passwords for all the Wazuh indexer 
    .. code-block:: console
 
       # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-passwords-tool.sh
-      # bash wazuh-passwords-tool.sh --api -u wazuh -p <NEW_WAZUH_USER_PASSWORD> --admin-user wazuh-wui --admin-password <WAZUH_WUI_USER_PASSWORD>
+      # bash wazuh-passwords-tool.sh --api -u wazuh -p <NEW_PASSWORD> --admin-user wazuh-wui --admin-password <WAZUH_WUI_USER_PASSWORD>
 
    .. code-block:: none
       :class: output
@@ -216,7 +216,7 @@ Follow the instructions below to change the passwords for all the Wazuh indexer 
 
    Where:
 
-   -  ``<NEW_WAZUH_USER_PASSWORD>`` is the new password for the ``wazuh`` server API user.
+   -  ``<NEW_PASSWORD>`` is the new password for the server API user.
    -  ``<WAZUH_WUI_USER_PASSWORD>`` is the password of the ``wazuh-wui`` user. You can retrieve it by running:
 
       .. code-block:: console
