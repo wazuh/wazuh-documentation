@@ -438,22 +438,23 @@ def setup(app):
     if html_theme == 'wazuh_doc_theme_v3':
         
         # Download spec file if the file is missing or older that spec_max_age
-        spec_max_age = 60*15 # 15 minutes
-        spec_current_age = 0
-        current_time = time.time()
-        server_api_spec_path = os.fspath(static_path_str+'/server-api-spec/spec-'+api_tag+'.yaml')
-        download_needed = False
-        try:
-            spec_current_age = current_time-os.path.getmtime(server_api_spec_path)
-            if spec_current_age > spec_max_age:
+        if api_tag != '' and apiURL != '':
+            spec_max_age = 60*15 # 15 minutes
+            spec_current_age = 0
+            current_time = time.time()
+            server_api_spec_path = os.fspath(static_path_str+'/server-api-spec/spec-'+api_tag+'.yaml')
+            download_needed = False
+            try:
+                spec_current_age = current_time-os.path.getmtime(server_api_spec_path)
+                if spec_current_age > spec_max_age:
+                    download_needed = True
+            except FileNotFoundError:
+                print(server_api_spec_path + " not found")
                 download_needed = True
-        except FileNotFoundError:
-            print(server_api_spec_path + " not found")
-            download_needed = True
-        
-        if download_needed == True:
-            print ('Downloading ' + 'spec-'+api_tag+'.yaml')
-            spec_path, url_retrieve_headers = urlretrieve(apiURL, server_api_spec_path)
+            
+            if download_needed == True:
+                print ('Downloading ' + 'spec-'+api_tag+'.yaml')
+                spec_path, url_retrieve_headers = urlretrieve(apiURL, server_api_spec_path)
 
         # Minify redirects.js
         if html_theme_options['include_version_selector'] == True:
