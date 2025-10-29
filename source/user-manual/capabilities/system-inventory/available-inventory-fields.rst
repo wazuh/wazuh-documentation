@@ -6,7 +6,7 @@
 Available inventory fields
 ==========================
 
-The Wazuh server stores the data collected by the Wazuh agents in separate databases for each agent. Each database contains tables for specific inventory information. In this section, you can find a description of the information in each table. The tables in the database are filled based on the scan configuration you have specified.
+The Wazuh server stores the data collected by the Wazuh agents in separate databases for each agent. Each database contains tables with distinct inventory information types, such as hardware, software, and network data. This inventory information is then forwarded to the Wazuh indexer, where it is consolidated for querying, visualization, and deeper analysis. The following section details the structure of the tables within the Wazuh server database and the corresponding indices in the Wazuh indexer. The data in these tables depends directly on the scan configuration defined for the Syscollector module.
 
 .. _syscollector_hardware:
 

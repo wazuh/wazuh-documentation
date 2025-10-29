@@ -15,8 +15,8 @@ The IT Hygiene section organizes data into multiple categories:
 -  **Software**: Review installed packages and software vendors.
 -  **Processes**: Monitor running processes.
 -  **Network**: Inspect network configurations, interfaces, and traffic.
--  **Identity**: View user accounts and groups information.
--  **Services**: Monitor running services across endpoints.
+-  **Identity**: View users and groups.
+-  **Services**: Analyze services related information.
 
 To access the IT hygiene section, navigate to **Security operations** > **IT Hygiene** on the Wazuh dashboard.
 
@@ -55,7 +55,7 @@ Provides a detailed breakdown of the operating systems and hardware in your envi
 Software
 --------
 
-Contains an overview of software packages and Windows KBs on monitored endpoints.
+Contains an overview of software packages, Windows KBs and browser extensions on monitored endpoints.
 
 -  The **Packages** tab displays package data, including top software vendors, the number of installed packages, the types of packages, and a summary data table.
 
