@@ -75,7 +75,7 @@ In Windows systems, you can use the ``<hotfixes>`` option. Check :ref:`wodle_sys
 
 .. note::
 
-   Restart the agent when you make any changes to the configuration file. This will ensure that the changes take effect.
+   Restart the agent if you edited the local ``ossec.conf`` file to ensure the changes take effect. If you used centralized configuration, no manual restart is required because the agent reloads automatically after receiving the update.
 
 Wazuh manager configuration
 ---------------------------
