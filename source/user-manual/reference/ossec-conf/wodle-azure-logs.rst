@@ -5,8 +5,6 @@
 wodle name="azure-logs"
 =======================
 
-.. versionadded:: 3.7.0
-
 .. topic:: XML section name
 
 	.. code-block:: xml

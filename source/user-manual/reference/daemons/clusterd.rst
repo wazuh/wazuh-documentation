@@ -5,8 +5,6 @@
 wazuh-clusterd
 ==============
 
-.. versionadded:: 3.0.0
-
 The wazuh-clusterd program manages the Wazuh cluster communications between the managers belonging to the cluster and synchronizes all files.
 
 
