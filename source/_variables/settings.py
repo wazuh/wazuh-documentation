@@ -20,6 +20,9 @@ is_latest_release = False
 
 # The full version, including alpha/beta/rc tags
 # Important: use a valid branch (4.0) or, preferably, tag name (v4.0.0)
-release = 'version'
+
+release = version
 api_tag = ''
 apiURL = ''
+apiURL_server = ''  
+apiURL_indexer = ''
