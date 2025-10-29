@@ -27,7 +27,7 @@ You can also use the :doc:`centralized configuration </user-manual/reference/cen
 The block below is the default Syscollector configuration present in the Wazuh agent configuration file:
 
 .. code-block:: xml
-   :emphasize-lines: 3,4,5,6,7,8,9,10,11,12,13,14,15,19
+   :emphasize-lines: 3-15,19
 
       <!-- System inventory -->
       <wodle name="syscollector">
