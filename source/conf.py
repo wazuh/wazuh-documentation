@@ -17,6 +17,7 @@ import datetime
 import time
 import json
 import atexit
+from urllib.request import urlretrieve
 try:
     from jsmin import jsmin
 except ImportError:
@@ -24,7 +25,7 @@ except ImportError:
     sys.exit()
 from requests.utils import requote_uri
 sys.path.append(os.path.abspath("_variables"))
-from settings import version, is_latest_release, release, apiURL
+from settings import version, is_latest_release, release, api_tag, apiURL, apiURL_indexer, apiURL_server
 from replacements import custom_replacements
 from empty_toc_nodes import emptyTocNodes
 from redirect_same_release import redirectSameRelease
@@ -430,10 +431,29 @@ def setup(app):
     current_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), theme_assets_path)
     static_path_str = os.path.join(os.path.dirname(os.path.realpath(__file__)), html_static_path[0])
 
-    if not os.path.exists(os.path.join(os.path.realpath(app.srcdir), html_static_path[0])):
-        os.mkdir(app.srcdir + '/' + html_static_path[0] + '/')
+    if not os.path.exists(static_path_str):
+        os.mkdir(static_path_str)
 
     if html_theme == 'wazuh_doc_theme_v3':
+        
+        # Download spec file if the file is missing or older that spec_max_age
+        if api_tag != '' and apiURL != '':
+            spec_max_age = 60*15 # 15 minutes
+            spec_current_age = 0
+            current_time = time.time()
+            server_api_spec_path = os.fspath(static_path_str+'/server-api-spec/spec-'+api_tag+'.yaml')
+            download_needed = False
+            try:
+                spec_current_age = current_time-os.path.getmtime(server_api_spec_path)
+                if spec_current_age > spec_max_age:
+                    download_needed = True
+            except FileNotFoundError:
+                print(server_api_spec_path + " not found")
+                download_needed = True
+            
+            if download_needed == True:
+                print ('Downloading ' + 'spec-'+api_tag+'.yaml')
+                spec_path, url_retrieve_headers = urlretrieve(apiURL, server_api_spec_path)
 
         # Minify redirects.js
         if html_theme_options['include_version_selector'] == True:
@@ -655,12 +675,14 @@ def creating_file_list(app, exception):
         sitemap += '</urlset>'
 
         # Create .doclist file
-        with open(os.path.join(os.path.dirname(os.path.realpath(build_path)),'html', '.doclist'), 'w') as doclist_file:
+        doclist_path = os.path.join(os.path.dirname(os.path.realpath(build_path)), 'html','.doclist')
+        with open(doclist_path, 'w') as doclist_file:
             list_text = separator.join(list_compiled_html)
             doclist_file.write(list_text)
 
         # Create release sitemap file
-        with open(os.path.join(os.path.dirname(os.path.realpath(build_path)),'html', sitemap_version+'-sitemap.xml'), 'w') as sitemap_file:
+        sitemap_path = os.path.join(os.path.dirname(os.path.realpath(build_path)), 'html',sitemap_version+'-sitemap.xml')
+        with open(sitemap_path, 'w') as sitemap_file:
             sitemap_file.write(sitemap)
 
 # -- Additional configuration ------------------------------------------------
@@ -678,7 +700,8 @@ html_context = {
     "conf_py_path": "/source/",
     "github_version": version,
     "production": production,
-    "apiURL": apiURL,
+    "apiURL_server": apiURL_server,
+    "apiURL_indexer": apiURL_indexer,
     "compilation_ts": compilation_time,
     "empty_toc_nodes": emptyTocNodes,
     "redirectSameRelease": redirectSameRelease,
