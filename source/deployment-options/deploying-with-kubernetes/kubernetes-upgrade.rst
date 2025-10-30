@@ -64,7 +64,9 @@ To upgrade your deployment using the default manifests, perform the following st
 Keeping custom manifests
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-To upgrade your deployment keeping your custom manifests, do the following.
+The following approach allows administrators to preserve their existing deployment configurations instead of overwriting them with the default manifests from the new version. This method is ideal for environments with custom settings, resource allocations, network policies, or integrations that must remain intact during the upgrade.
+
+The upgrade process differs slightly depending on your current Wazuh version.
 
 #. If you are upgrading from version 4.3, :ref:`update the Java Opts variable name <updating_java_opts>` with the new one.
 #. :ref:`Update old paths <updating_old_paths>` with the new ones.
@@ -96,7 +98,7 @@ Updating old paths
 
 .. tabs::
 
-   .. group-tab:: Upgrading from 4.3 and earlier
+   .. group-tab:: Upgrading from 4.3
 
       **Wazuh dashboard**
 
