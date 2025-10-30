@@ -42,6 +42,12 @@ Deploy a Wazuh agent
 
 Follow these steps to deploy the Wazuh agent on your Linux endpoint.
 
+#. On Debian-based operating systems, install the following packages if missing:
+
+   .. code-block:: console
+
+      # apt-get install gnupg apt-transport-https
+
 #. Select your package manager and run the command below. Replace the ``WAZUH_MANAGER`` value with your Wazuh manager IP address or hostname:
 
    .. tabs::
