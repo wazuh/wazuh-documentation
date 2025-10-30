@@ -1,15 +1,17 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Check out how to upgrade Wazuh installed in Kubernetes, creating a new pod linked to the same volume but with the new updated version.
+   :description: This section provides a guide to upgrading your Wazuh deployment in a Kubernetes environment while preserving existing configurations and data.
 
 Upgrade Wazuh installed in Kubernetes
 =====================================
 
-Checking which files are exported to the volume
------------------------------------------------
+This section provides a guide to upgrading your Wazuh deployment in a Kubernetes environment while preserving existing configurations and data. Because Wazuh uses persistent volumes and Docker-based components, updates can be performed seamlessly without losing prior settings or logs.
 
-Our Kubernetes deployment uses our Wazuh images from Docker. If we look at the following code extracted from the Wazuh configuration using Docker, we can see which directories and files are used in the upgrade.
+Check files exported to the volume
+----------------------------------
+
+The Kubernetes deployment uses Wazuh Docker images. The following directories and files are used in the upgrade:
 
 .. code-block:: none
 
@@ -31,24 +33,25 @@ Our Kubernetes deployment uses our Wazuh images from Docker. If we look at the f
    /usr/share/wazuh-indexer/config/opensearch.yml
    /usr/share/wazuh-indexer/config/opensearch-security/internal_users.yml
 
-Any modification related to these files will also be made in the associated volume. When the replica pod is created, it will get those files from the volume, keeping the previous changes.
-
+Any modifications to these files are also made in the associated volume. When a replica pod is created, it gets those files from the volume, keeping the previous changes.
 
 Recreating certificates
 -----------------------
 
-Upgrading from a version earlier than v4.8.0 requires you to recreate the SSL certificates. Clone the  *wazuh-kubernetes* repository and check out the v|WAZUH_CURRENT_KUBERNETES| tag. Then, follow the instructions in :ref:`kubernetes_ssl_certificates`.
+Upgrading from a version earlier than v4.8.0 requires you to recreate the SSL certificates. Clone the wazuh-kubernetes repository and check out the ``v|WAZUH_CURRENT_KUBERNETES|`` tag. Then, follow the instructions in :ref:`kubernetes_ssl_certificates`.
 
 Configuring the upgrade
 -----------------------
 
-To upgrade to version |WAZUH_CURRENT_MINOR|, you can follow one of two strategies.
+To upgrade to version |WAZUH_CURRENT_KUBERNETES|, you can follow one of two strategies.
 
--  `Using default manifests`_ : This strategy uses the default manifests for Wazuh |WAZUH_CURRENT_MINOR|. It replaces the wazuh-kubernetes manifests of your outdated Wazuh version.
--  `Keeping custom manifests`_ : This strategy preserves the wazuh-kubernetes manifests of your outdated Wazuh deployment. It ignores the manifests of the latest Wazuh version.
+-  `Using default manifests`_ : This strategy uses the default manifests for Wazuh |WAZUH_CURRENT_MINOR|. It replaces the ``wazuh-kubernetes`` manifests of your outdated Wazuh version.
+-  `Keeping custom manifests`_ : This strategy preserves the ``wazuh-kubernetes`` manifests of your outdated Wazuh deployment. It ignores the manifests of the latest Wazuh version.
 
 Using default manifests
 ^^^^^^^^^^^^^^^^^^^^^^^
+
+To upgrade your deployment using the default manifests, perform the following steps.
 
 #. Checkout the tag for the current version of wazuh-kubernetes:
 
@@ -56,12 +59,14 @@ Using default manifests
 
       # git checkout v|WAZUH_CURRENT_DOCKER|
 
-Next, :ref:`apply the new configuration <apply_the_new_configuration>`.
+#. :ref:`Apply the new configuration <apply_the_new_configuration>`.
 
 Keeping custom manifests
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-To upgrade your deployment keeping your custom manifests, do the following.
+The following approach allows administrators to preserve their existing deployment configurations instead of overwriting them with the default manifests from the new version. This method is ideal for environments with custom settings, resource allocations, network policies, or integrations that must remain intact during the upgrade.
+
+The upgrade process differs slightly depending on your current Wazuh version.
 
 #. If you are upgrading from version 4.3, :ref:`update the Java Opts variable name <updating_java_opts>` with the new one.
 #. :ref:`Update old paths <updating_old_paths>` with the new ones.
@@ -93,7 +98,7 @@ Updating old paths
 
 .. tabs::
 
-   .. group-tab:: Upgrading from 4.3 and earlier
+   .. group-tab:: Upgrading from 4.3
 
       **Wazuh dashboard**
 
