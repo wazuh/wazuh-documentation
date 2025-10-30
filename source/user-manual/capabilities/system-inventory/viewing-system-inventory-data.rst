@@ -321,7 +321,7 @@ Follow the steps below to query the system inventory indices from the command li
                 "agent" : {
                   "id" : "006",
                   "name" : "Cent_Stream",
-                  "version" : "v|WAZUH_CURRENT|"
+                  "version" : "v4.14.0"
                 },
                 "package" : {
                   "architecture" : "x86_64",
@@ -351,7 +351,7 @@ Follow the steps below to query the system inventory indices from the command li
                 "agent" : {
                   "id" : "006",
                   "name" : "Cent_Stream",
-                  "version" : "v|WAZUH_CURRENT|"
+                  "version" : "v4.14.0"
                 },
                 "package" : {
                   "architecture" : "x86_64",
@@ -381,7 +381,7 @@ Follow the steps below to query the system inventory indices from the command li
                 "agent" : {
                   "id" : "006",
                   "name" : "Cent_Stream",
-                  "version" : "v|WAZUH_CURRENT|"
+                  "version" : "v4.14.0"
                 },
                 "package" : {
                   "architecture" : "x86_64",
@@ -411,7 +411,7 @@ Follow the steps below to query the system inventory indices from the command li
                 "agent" : {
                   "id" : "006",
                   "name" : "Cent_Stream",
-                  "version" : "v|WAZUH_CURRENT|"
+                  "version" : "v4.14.0"
                 },
                 "package" : {
                   "architecture" : "x86_64",
@@ -441,7 +441,7 @@ Follow the steps below to query the system inventory indices from the command li
                 "agent" : {
                   "id" : "006",
                   "name" : "Cent_Stream",
-                  "version" : "v|WAZUH_CURRENT|"
+                  "version" : "v4.14.0"
                 },
                 "package" : {
                   "architecture" : "x86_64",
@@ -471,7 +471,7 @@ Follow the steps below to query the system inventory indices from the command li
                 "agent" : {
                   "id" : "006",
                   "name" : "Cent_Stream",
-                  "version" : "v|WAZUH_CURRENT|"
+                  "version" : "v4.14.0"
                 },
                 "package" : {
                   "architecture" : "x86_64",
@@ -501,7 +501,7 @@ Follow the steps below to query the system inventory indices from the command li
                 "agent" : {
                   "id" : "006",
                   "name" : "Cent_Stream",
-                  "version" : "v|WAZUH_CURRENT|"
+                  "version" : "v4.14.0"
                 },
                 "package" : {
                   "architecture" : "x86_64",
@@ -531,7 +531,7 @@ Follow the steps below to query the system inventory indices from the command li
                 "agent" : {
                   "id" : "006",
                   "name" : "Cent_Stream",
-                  "version" : "v|WAZUH_CURRENT|"
+                  "version" : "v4.14.0"
                 },
                 "package" : {
                   "architecture" : "x86_64",
@@ -561,7 +561,7 @@ Follow the steps below to query the system inventory indices from the command li
                 "agent" : {
                   "id" : "006",
                   "name" : "Cent_Stream",
-                  "version" : "v|WAZUH_CURRENT|"
+                  "version" : "v4.14.0"
                 },
                 "package" : {
                   "architecture" : "x86_64",
@@ -591,7 +591,7 @@ Follow the steps below to query the system inventory indices from the command li
                 "agent" : {
                   "id" : "006",
                   "name" : "Cent_Stream",
-                  "version" : "v|WAZUH_CURRENT|"
+                  "version" : "v4.14.0"
                 },
                 "package" : {
                   "architecture" : "noarch",
@@ -658,7 +658,7 @@ Follow the steps below to query the system inventory indices from the command li
                 "agent" : {
                   "id" : "006",
                   "name" : "Cent_Stream",
-                  "version" : "v|WAZUH_CURRENT|"
+                  "version" : "v4.14.0"
                 },
                 "package" : {
                   "architecture" : "x86_64",
@@ -728,7 +728,7 @@ Follow the steps below to query the system inventory indices from the command li
                 "agent" : {
                   "id" : "005",
                   "name" : "Windows-11",
-                  "version" : "v|WAZUH_CURRENT|"
+                  "version" : "v4.14.0"
                 },
                 "package" : {
                   "architecture" : "i686",
