@@ -105,7 +105,7 @@ header {
     padding-top: 50px;
     padding-bottom: 60px;
     background-color: $light-color-primary-lighter;
-    background-image: url("#{$img-path}waves.png");
+    background-image: url("#{$img-path}waves-full.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: bottom;
@@ -166,12 +166,13 @@ header {
     }
     .form-control {
       box-shadow: none;
+      width: calc(100% - 70px);
     }
     .search-form {
       height: 60px;
       .btn-search {
         width: 70px;
-        height: 60px;
+        height: 62px;
         background-size: 30px 30px;
         background-color: $light-color-main-text;
         background-image: url("#{$ico-path}svg-icons.svg#search-white");
