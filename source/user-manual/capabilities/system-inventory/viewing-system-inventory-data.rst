@@ -755,7 +755,7 @@ Follow the steps below to query the system inventory indices from the command li
 Using the Wazuh server API
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You can query the Wazuh inventory data using the `Wazuh server API <https://documentation.wazuh.com/current/user-manual/api/reference.html#tag/Syscollector>`__, which retrieves nested data in JSON format. You can use the Wazuh server API GUI on the dashboard or a command-line tool like ``cURL`` to query the inventory database of a Wazuh agent.
+You can query the Wazuh inventory data using the :doc:`Wazuh server API </user-manual/api/reference>`, which retrieves nested data in JSON format. You can use the Wazuh server API GUI on the dashboard or a command-line tool like ``cURL`` to query the inventory database of a Wazuh agent.
 
 Wazuh server API GUI
 ~~~~~~~~~~~~~~~~~~~~
@@ -833,7 +833,7 @@ Follow the steps below to query the system inventory indices from the command li
 
       curl -k -X GET "https://<WAZUH_SERVER_IP>:55000/syscollector/010/packages?pretty=true" -H  "Authorization: Bearer $TOKEN"
 
-   The other inventory properties are ``hardware``, ``hotfixes``, ``netaddr``, ``netiface``, ``netproto``, ``os``, ``ports``, and ``processes``. These all correspond to the tables in the :doc:`inventory database </user-manual/capabilities/system-inventory/available-inventory-fields>`. You can learn more about these options in our `API documentation <https://documentation.wazuh.com/current/user-manual/api/reference.html#tag/Syscollector>`_.
+   The other inventory properties are ``hardware``, ``hotfixes``, ``netaddr``, ``netiface``, ``netproto``, ``os``, ``ports``, and ``processes``. These all correspond to the tables in the :doc:`inventory database </user-manual/capabilities/system-inventory/available-inventory-fields>`. You can learn more about these options in our :doc:`API documentation </user-manual/api/reference>`.
 
    .. code-block:: console
       :class: output

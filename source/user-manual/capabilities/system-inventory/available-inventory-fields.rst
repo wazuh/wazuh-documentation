@@ -13,9 +13,9 @@ The Wazuh server stores the data collected by the Wazuh agents in separate datab
 Hardware
 --------
 
-This scan collects baseline hardware information from monitored endpoints, including CPU, memory, and serial number. The data is stored in the ``sys_hwinfo`` table on the Wazuh server and is indexed in the Wazuh indexer under the `wazuh-states-inventory-hardware-* <https://documentation.wazuh.com/current/user-manual/wazuh-indexer/wazuh-indexer-indices.html#the-wazuh-states-inventory-hardware-indices>`__ indices.
+This scan collects baseline hardware information from monitored endpoints, including CPU, memory, and serial number. The data is stored in the ``sys_hwinfo`` table on the Wazuh server and is indexed in the Wazuh indexer under the :ref:`wazuh-states-inventory-hardware-* <wazuh_states_inventory_hardware_indices>` indices.
 
-The table below maps the fields from the ``sys_hwinfo`` table on the Wazuh server to their corresponding fields in the `wazuh-states-inventory-hardware-* <https://documentation.wazuh.com/current/user-manual/wazuh-indexer/wazuh-indexer-indices.html#the-wazuh-states-inventory-hardware-indices>`__ index on the Wazuh indexer.
+The table below maps the fields from the ``sys_hwinfo`` table on the Wazuh server to their corresponding fields in the :ref:`wazuh-states-inventory-hardware-* <wazuh_states_inventory_hardware_indices>` index on the Wazuh indexer.
 
 +--------------------+------------------------------+--------------+-------------------------------------------+-----------------------------------------------+------------+
 | Syscollector field | Wazuh indexer field          | Type         | Description                               | Example                                       | Available  |
@@ -64,9 +64,9 @@ The table below maps the fields from the ``sys_hwinfo`` table on the Wazuh serve
 Operating system
 ----------------
 
-This scan collects system-level details about each monitored endpoint, including the operating system, version, hostname, and architecture. This data is stored in the ``sys_osinfo`` table on the Wazuh server and is indexed in the Wazuh indexer under the `wazuh-states-inventory-system-* <https://documentation.wazuh.com/current/user-manual/wazuh-indexer/wazuh-indexer-indices.html#the-wazuh-states-inventory-system-indices>`__ indices.
+This scan collects system-level details about each monitored endpoint, including the operating system, version, hostname, and architecture. This data is stored in the ``sys_osinfo`` table on the Wazuh server and is indexed in the Wazuh indexer under the :ref:`wazuh-states-inventory-system-* <wazuh_states_inventory_system_indices>` indices.
 
-The table below maps the fields from the ``sys_osinfo`` table on the Wazuh server to their corresponding fields in the `wazuh-states-inventory-system-* <https://documentation.wazuh.com/current/user-manual/wazuh-indexer/wazuh-indexer-indices.html#the-wazuh-states-inventory-system-indices>`__ index on the Wazuh indexer.
+The table below maps the fields from the ``sys_osinfo`` table on the Wazuh server to their corresponding fields in the :ref:`wazuh-states-inventory-system-* <wazuh_states_inventory_system_indices>` index on the Wazuh indexer.
 
 +-----------------------+-----------------------------------+---------+---------------------------------------------------------------------------------+-------------------------------------------------------+------------+
 | Syscollector field    | Wazuh indexer field               | Type    | Description                                                                     | Example                                               | Available  |
@@ -133,9 +133,9 @@ The table below maps the fields from the ``sys_osinfo`` table on the Wazuh serve
 Packages
 --------
 
-This scan collects details about the currently installed software on a monitored endpoint, including the package name, installation date, and version. The Vulnerability Detector module uses information from this table to scan and detect vulnerable software. On Linux systems, retrieved packages can be deb, pacman, or rpm. This data is stored in the ``sys_programs`` table on the Wazuh server and is indexed in the Wazuh indexer under the `wazuh-states-inventory-packages-* <http://documentation.wazuh.com/current/user-manual/wazuh-indexer/wazuh-indexer-indices.html#the-wazuh-states-inventory-packages-indices>`__ indices.
+This scan collects details about the currently installed software on a monitored endpoint, including the package name, installation date, and version. The Vulnerability Detector module uses information from this table to scan and detect vulnerable software. On Linux systems, retrieved packages can be deb, pacman, or rpm. This data is stored in the ``sys_programs`` table on the Wazuh server and is indexed in the Wazuh indexer under the :ref:`wazuh-states-inventory-packages-* <wazuh_states_inventory_packages_indices>` indices.
 
-The table below maps the fields from the ``sys_programs`` table on the Wazuh server database to their corresponding fields in the `wazuh-states-inventory-packages-* <http://documentation.wazuh.com/current/user-manual/wazuh-indexer/wazuh-indexer-indices.html#the-wazuh-states-inventory-packages-indices>`__ index on the Wazuh indexer.
+The table below maps the fields from the ``sys_programs`` table on the Wazuh server database to their corresponding fields in the :ref:`wazuh-states-inventory-packages-* <wazuh_states_inventory_packages_indices>` index on the Wazuh indexer.
 
 +--------------------+----------------------------+---------+-------------------------------------------+-----------------------------------------------+------------------------------------------+
 | Syscollector field | Wazuh indexer field        | Type    | Description                               | Example                                       | Available                                |
@@ -191,14 +191,23 @@ The table below maps the fields from the ``sys_programs`` table on the Wazuh ser
 | ``schema_version`` | ``wazuh.schema.version``   | keyword | Wazuh schema version                      | 1.0                                           | All                                      |
 +--------------------+----------------------------+---------+-------------------------------------------+-----------------------------------------------+------------------------------------------+
 
+Networks
+--------
+
+The network scan retrieves information about the network configuration of a monitored endpoint. It includes details about the existing network interfaces (up and down interfaces), IP addresses, and the routing configuration. The information is organized into three categories of network scans, ensuring the data is structured and easy to interpret.
+
+-  :ref:`Network interfaces <syscollector_interfaces>`
+-  :ref:`Network addresses <syscollector_netaddr>`
+-  :ref:`Network protocols <syscollector_netproto>`
+
 .. _syscollector_interfaces:
 
 Network interfaces
-------------------
+^^^^^^^^^^^^^^^^^^
 
-This scan collects details about the network interfaces on monitored endpoints. This information is stored in the ``sys_netiface`` table on the Wazuh server and indexed in the Wazuh indexer under the `wazuh-states-inventory-interfaces-* <https://documentation.wazuh.com/current/user-manual/wazuh-indexer/wazuh-indexer-indices.html#the-wazuh-states-inventory-interfaces-indices>`__ indices.
+This scan collects details about the network interfaces on monitored endpoints. This information is stored in the ``sys_netiface`` table on the Wazuh server and indexed in the Wazuh indexer under the :ref:`wazuh-states-inventory-interfaces-* <wazuh_states_inventory_interfaces_indices>` indices.
 
-The table below maps the fields from the ``sys_netiface`` table on the Wazuh server database to their corresponding fields in the `wazuh-states-inventory-interfaces-* <https://documentation.wazuh.com/current/user-manual/wazuh-indexer/wazuh-indexer-indices.html#the-wazuh-states-inventory-interfaces-indices>`__ index on the Wazuh indexer.
+The table below maps the fields from the ``sys_netiface`` table on the Wazuh server database to their corresponding fields in the :ref:`wazuh-states-inventory-interfaces-* <wazuh_states_inventory_interfaces_indices>` index on the Wazuh indexer.
 
 +--------------------+-----------------------------------+---------+----------------------------------------------+----------------------------------------------+------------+
 | Syscollector Field | Wazuh indexer field               | Type    | Description                                  | Example                                      | Available  |
@@ -261,9 +270,9 @@ The table below maps the fields from the ``sys_netiface`` table on the Wazuh ser
 Network addresses
 ^^^^^^^^^^^^^^^^^
 
-Network address scan collects information about the IPv4 and IPv6 addresses assigned to network interfaces on monitored endpoints. This information is stored in the ``sys_netaddr`` table on the Wazuh server and indexed in the Wazuh indexer under the `wazuh-states-inventory-networks-* <https://documentation.wazuh.com/current/user-manual/wazuh-indexer/wazuh-indexer-indices.html#the-wazuh-states-inventory-networks-indices>`__ indices.
+Network address scan collects information about the IPv4 and IPv6 addresses assigned to network interfaces on monitored endpoints. This information is stored in the ``sys_netaddr`` table on the Wazuh server and indexed in the Wazuh indexer under the :ref:`wazuh-states-inventory-networks-* <wazuh_states_inventory_netwworks_indices>` indices.
 
-The table below maps the fields from the ``sys_netaddr`` table on the Wazuh server database to their corresponding fields in the `wazuh-states-inventory-networks-* <https://documentation.wazuh.com/current/user-manual/wazuh-indexer/wazuh-indexer-indices.html#the-wazuh-states-inventory-networks-indices>`__ index on the Wazuh indexer.
+The table below maps the fields from the ``sys_netaddr`` table on the Wazuh server database to their corresponding fields in the :ref:`wazuh-states-inventory-networks-* <wazuh_states_inventory_netwworks_indices>` index on the Wazuh indexer.
 
 +--------------------+-----------------------------+---------+------------------------------------------------------+----------------------------------------------+---------------------+
 | Syscollector field | Wazuh indexer field         | Type    | Description                                          | Example                                      | Available           |
@@ -312,9 +321,9 @@ The table below maps the fields from the ``sys_netaddr`` table on the Wazuh serv
 Network protocols
 ^^^^^^^^^^^^^^^^^
 
-This scan stores details about network routing and supported protocols for each interface on monitored endpoints, including protocol types, routing tables, and interface associations. This information is stored in the ``sys_netproto`` table on the Wazuh server and indexed in the Wazuh indexer under the `wazuh-states-inventory-protocols-* <https://documentation.wazuh.com/current/user-manual/wazuh-indexer/wazuh-indexer-indices.html#the-wazuh-states-inventory-protocols-indices>`__ indices.
+This scan stores details about network routing and supported protocols for each interface on monitored endpoints, including protocol types, routing tables, and interface associations. This information is stored in the ``sys_netproto`` table on the Wazuh server and indexed in the Wazuh indexer under the :ref:`wazuh-states-inventory-protocols-* <wazuh_states_inventory_protocols_indices>` indices.
 
-The table below maps the fields from the ``sys_netproto`` table on the Wazuh server database to their corresponding fields in the `wazuh-states-inventory-protocols-* <https://documentation.wazuh.com/current/user-manual/wazuh-indexer/wazuh-indexer-indices.html#the-wazuh-states-inventory-protocols-indices>`__ index on the Wazuh indexer.
+The table below maps the fields from the ``sys_netproto`` table on the Wazuh server database to their corresponding fields in the :ref:`wazuh-states-inventory-protocols-* <wazuh_states_inventory_protocols_indices>` index on the Wazuh indexer.
 
 +--------------------+-----------------------------+---------+------------------------------------------------------+----------------------------------------------+---------------------+
 | Syscollector Field | Wazuh indexer field         | Type    | Description                                          | Example                                      | Available           |
@@ -359,9 +368,9 @@ The table below maps the fields from the ``sys_netproto`` table on the Wazuh ser
 Ports
 -----
 
-This scan retrieves information about the open ports on a monitored endpoint, including the port number, port protocol, associated services, and listening states. This information is stored in the ``sys_ports`` table on the Wazuh server and indexed in the Wazuh indexer under the `wazuh-states-inventory-ports-* <https://documentation.wazuh.com/current/user-manual/wazuh-indexer/wazuh-indexer-indices.html#the-wazuh-states-inventory-ports-indices>`__ indices.
+This scan retrieves information about the open ports on a monitored endpoint, including the port number, port protocol, associated services, and listening states. This information is stored in the ``sys_ports`` table on the Wazuh server and indexed in the Wazuh indexer under the :ref:`wazuh-states-inventory-ports-* <wazuh_states_inventory_ports_indices>` indices.
 
-The table below maps the fields from the ``sys_ports`` table on the Wazuh server database to their corresponding fields in the `wazuh-states-inventory-ports-* <https://documentation.wazuh.com/current/user-manual/wazuh-indexer/wazuh-indexer-indices.html#the-wazuh-states-inventory-ports-indices>`__ index on the Wazuh indexer.
+The table below maps the fields from the ``sys_ports`` table on the Wazuh server database to their corresponding fields in the :ref:`wazuh-states-inventory-ports-* <wazuh_states_inventory_ports_indices>` index on the Wazuh indexer.
 
 +--------------------+-----------------------------------+---------+------------------------------------------------------+----------------------------------------------+------------------+
 | Syscollector Field | Wazuh indexer field               | Type    | Description                                          | Example                                      | Available        |
@@ -418,9 +427,9 @@ The table below maps the fields from the ``sys_ports`` table on the Wazuh server
 Processes
 ---------
 
-The processes scan collects details about processes running on monitored endpoints, including the process name, process ID (PID), and the associated user. This information is stored in the ``sys_processes`` table on the Wazuh server and indexed in the Wazuh indexer under the `wazuh-states-inventory-processes-* <https://documentation.wazuh.com/current/user-manual/wazuh-indexer/wazuh-indexer-indices.html#the-wazuh-states-inventory-processes-indices>`__ indices.
+The processes scan collects details about processes running on monitored endpoints, including the process name, process ID (PID), and the associated user. This information is stored in the ``sys_processes`` table on the Wazuh server and indexed in the Wazuh indexer under the :ref:`wazuh-states-inventory-processes-* <wazuh_states_inventory_processes_indices>` indices.
 
-The table below maps the fields from the ``sys_processes`` table on the Wazuh server database to their corresponding fields in the `wazuh-states-inventory-processes-* <https://documentation.wazuh.com/current/user-manual/wazuh-indexer/wazuh-indexer-indices.html#the-wazuh-states-inventory-processes-indices>`__ index on the Wazuh indexer.
+The table below maps the fields from the ``sys_processes`` table on the Wazuh server database to their corresponding fields in the :ref:`wazuh-states-inventory-processes-* <wazuh_states_inventory_processes_indices>` index on the Wazuh indexer.
 
 +--------------------+-----------------------------+---------+------------------------------------------------------+----------------------------------------------+---------------+
 | Syscollector Field | Wazuh indexer field         | Type    | Description                                          | Example                                      | Available     |
@@ -509,9 +518,9 @@ The table below maps the fields from the ``sys_processes`` table on the Wazuh se
 Windows updates
 ---------------
 
-This scan collects details about the updates installed on Windows endpoints. The Vulnerability Detector module uses the hotfix identifier to discover what vulnerabilities exist on Windows endpoints and the patches you have applied. This information is stored in the ``sys_hotfixes`` table on the Wazuh server and indexed in the Wazuh indexer under the `wazuh-states-inventory-hotfixes-* <https://documentation.wazuh.com/current/user-manual/wazuh-indexer/wazuh-indexer-indices.html#the-wazuh-states-inventory-hotfixes-indices>`__ indices.
+This scan collects details about the updates installed on Windows endpoints. The Vulnerability Detector module uses the hotfix identifier to discover what vulnerabilities exist on Windows endpoints and the patches you have applied. This information is stored in the ``sys_hotfixes`` table on the Wazuh server and indexed in the Wazuh indexer under the :ref:`wazuh-states-inventory-hotfixes-* <wazuh_states_inventory_hotfixes_indices>` indices.
 
-The table below maps the fields from the ``sys_hotfixes`` table on the Wazuh server database to their corresponding fields in the `wazuh-states-inventory-hotfixes-* <https://documentation.wazuh.com/current/user-manual/wazuh-indexer/wazuh-indexer-indices.html#the-wazuh-states-inventory-hotfixes-indices>`__ index on the Wazuh indexer.
+The table below maps the fields from the ``sys_hotfixes`` table on the Wazuh server database to their corresponding fields in the :ref:`wazuh-states-inventory-hotfixes-* <wazuh_states_inventory_hotfixes_indices>` index on the Wazuh indexer.
 
 +--------------------+-----------------------------+---------+------------------------------------------------------+----------------------------------------------+------------+
 | Syscollector Field | Wazuh indexer field         | Type    | Description                                          | Example                                      | Available  |
@@ -544,9 +553,9 @@ The table below maps the fields from the ``sys_hotfixes`` table on the Wazuh ser
 Users
 -----
 
-This scan collects user account information on monitored endpoints, including username, login status, and ID. The data is stored in the ``sys_users`` table on the Wazuh server and is indexed in the Wazuh indexer under `wazuh-states-inventory-users <https://docs.google.com/document/d/11MOUYHWqWYMlqcuDdh9SFSuo39QniiQx_BORinaEx9I/edit?tab=t.0#bookmark=id.4rljrm8q19kh>`__ the  indices.
+This scan collects user account information on monitored endpoints, including username, login status, and ID. The data is stored in the ``sys_users`` table on the Wazuh server and is indexed in the Wazuh indexer under the :ref:`wazuh-states-inventory-users-* <wazuh_states_inventory_users>` indices.
 
-The table below maps the fields from the ``sys_users`` table on the Wazuh server to their corresponding fields in the `wazuh-states-inventory-users <https://docs.google.com/document/d/11MOUYHWqWYMlqcuDdh9SFSuo39QniiQx_BORinaEx9I/edit?tab=t.0#bookmark=id.4rljrm8q19kh>`__ index on the Wazuh indexer.
+The table below maps the fields from the ``sys_users`` table on the Wazuh server to their corresponding fields in the :ref:`wazuh-states-inventory-users-* <wazuh_states_inventory_users>` index on the Wazuh indexer.
 
 +--------------------------------------------------+--------------------------------------------------+--------------+--------------------------------------------------------------------------------------+----------------------------------------------+--------------+
 | Syscollector field                               | Wazuh indexer field                              | Type         | Description                                                                          | Example                                      | Available    |
@@ -637,9 +646,9 @@ The table below maps the fields from the ``sys_users`` table on the Wazuh server
 Groups
 ------
 
-The scan collects details about user account groups on monitored endpoints, such as group identifiers, names, associated users. The data is stored in the ``sys_groups`` table on the Wazuh server and is indexed in the Wazuh indexer under `wazuh-states-inventory-groups <https://docs.google.com/document/d/11MOUYHWqWYMlqcuDdh9SFSuo39QniiQx_BORinaEx9I/edit?tab=t.0#bookmark=id.hlczs53wn7rj>`__ the  indices.
+The scan collects details about user account groups on monitored endpoints, such as group identifiers, names, associated users. The data is stored in the ``sys_groups`` table on the Wazuh server and is indexed in the Wazuh indexer under the :ref:`wazuh-states-inventory-groups-* <wazuh_states_inventory_groups>` indices.
 
-The table below maps the fields from the ``sys_groups`` table on the Wazuh server to their corresponding fields in the `wazuh-states-inventory-groups <https://docs.google.com/document/d/11MOUYHWqWYMlqcuDdh9SFSuo39QniiQx_BORinaEx9I/edit?tab=t.0#bookmark=id.hlczs53wn7rj>`__ index on the Wazuh indexer.
+The table below maps the fields from the ``sys_groups`` table on the Wazuh server to their corresponding fields in the :ref:`wazuh-states-inventory-groups-* <wazuh_states_inventory_groups>` index on the Wazuh indexer.
 
 +------------------------+-----------------------------+--------------+------------------------------------------------------+----------------------------------------------+----------------+
 | Syscollector field     | Wazuh indexer field         | Type         | Description                                          | Example                                      | Available      |
@@ -682,9 +691,9 @@ The table below maps the fields from the ``sys_groups`` table on the Wazuh serve
 Services
 --------
 
-This scan collects services information from monitored endpoints, including service name, description and state. The data is stored in the ``sys_services`` table on the Wazuh server and is indexed in the Wazuh indexer under `wazuh-states-inventory-services <https://docs.google.com/document/d/11MOUYHWqWYMlqcuDdh9SFSuo39QniiQx_BORinaEx9I/edit?tab=t.0#bookmark=id.kork284uyype>`__ the  indices.
+This scan collects services information from monitored endpoints, including service name, description and state. The data is stored in the ``sys_services`` table on the Wazuh server and is indexed in the Wazuh indexer under the :ref:`wazuh-states-inventory-services-* <wazuh_states_inventory_services>` indices.
 
-The table below maps the fields from the ``sys_services`` table on the Wazuh server to their corresponding fields in the `wazuh-states-inventory-services <https://docs.google.com/document/d/11MOUYHWqWYMlqcuDdh9SFSuo39QniiQx_BORinaEx9I/edit?tab=t.0#bookmark=id.kork284uyype>`__ index on the Wazuh indexer.
+The table below maps the fields from the ``sys_services`` table on the Wazuh server to their corresponding fields in the :ref:`wazuh-states-inventory-services-* <wazuh_states_inventory_services>` index on the Wazuh indexer.
 
 +--------------------------------------------+--------------------------------------------+---------+--------------------------------------------------------------------------------------------+----------------------------------------------------+------------------+
 | Syscollector field                         | Wazuh indexer field                        | Type    | Description                                                                                | Example                                            | Available        |
@@ -777,9 +786,9 @@ The table below maps the fields from the ``sys_services`` table on the Wazuh ser
 Browser extensions
 ------------------
 
-This scan collects browser extensions details from monitored endpoints, including browser name, extension description and status. The data is stored in the ``sys_browser_extensions`` table on the Wazuh server and is indexed in the Wazuh indexer under `wazuh-states-inventory-browser-extensions <https://docs.google.com/document/d/11MOUYHWqWYMlqcuDdh9SFSuo39QniiQx_BORinaEx9I/edit?tab=t.0#bookmark=id.d09des9fgj42>`__ the  indices.
+This scan collects browser extensions details from monitored endpoints, including browser name, extension description and status. The data is stored in the ``sys_browser_extensions`` table on the Wazuh server and is indexed in the Wazuh indexer under the :ref:`wazuh-states-inventory-browser-extensions-* <wazuh_states_inventory_browser_extensions>` indices.
 
-The table below maps the fields from the ``sys_browser_extensions`` table on the Wazuh server to their corresponding fields in the `wazuh-states-inventory-browser-extensions <https://docs.google.com/document/d/11MOUYHWqWYMlqcuDdh9SFSuo39QniiQx_BORinaEx9I/edit?tab=t.0#bookmark=id.d09des9fgj42>`__ index on the Wazuh indexer.
+The table below maps the fields from the ``sys_browser_extensions`` table on the Wazuh server to their corresponding fields in the :ref:`wazuh-states-inventory-browser-extensions-* <wazuh_states_inventory_browser_extensions>` index on the Wazuh indexer.
 
 +--------------------------------+--------------------------------+---------+----------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------+-----------------------+
 | Syscollector field             | Wazuh indexer field            | Type    | Description                                                                                        | Example                                                                        | Browser / OS          |
