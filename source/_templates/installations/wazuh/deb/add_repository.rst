@@ -1,10 +1,16 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+#. Install the following packages if missing:
+
+   .. code-block:: console
+
+     # apt-get install gnupg apt-transport-https
+
 #. Install the GPG key:
 
-    .. code-block:: console
+   .. code-block:: console
 
-      # curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | gpg --no-default-keyring --keyring gnupg-ring:/usr/share/keyrings/wazuh.gpg --import && chmod 644 /usr/share/keyrings/wazuh.gpg
+     # curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | gpg --no-default-keyring --keyring gnupg-ring:/usr/share/keyrings/wazuh.gpg --import && chmod 644 /usr/share/keyrings/wazuh.gpg
 
 #. Add the repository:
 
@@ -20,7 +26,7 @@
 
 .. note::
 
-   For Debian 7, 8, and Ubuntu 14 systems import the GCP key and add the Wazuh repository (steps 1 and 2) using the following commands.
+   For Debian 7, 8, and Ubuntu 14 systems import the GCP key and add the Wazuh repository (steps 2 and 3) using the following commands.
 
    .. code-block:: console
 
