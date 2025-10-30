@@ -13,6 +13,7 @@ All notable changes to this project will be documented in this file.
 - Added a *Change the password of Wazuh users* step in Deployment on Kubernetes documentation. ([#8979](https://github.com/wazuh/wazuh-documentation/pull/8979))
 - **Post-release**: Added Wazuh indexer indices. ([#9009](https://github.com/wazuh/wazuh-documentation/pull/9009))
 - **Post-release**: Updated the Deployment on Kubernetes documentation. ([#9022](https://github.com/wazuh/wazuh-documentation/pull/9022))
+- **Post-release**: Updated System Inventory Documentation. ([#9052](https://github.com/wazuh/wazuh-documentation/pull/9052)) ([#9053](https://github.com/wazuh/wazuh-documentation/pull/9053))
 
 ### Changed
 
