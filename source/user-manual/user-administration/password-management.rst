@@ -10,17 +10,17 @@ Password management
 
    If you deployed Wazuh on Docker, read :doc:`/deployment-options/docker/changing-default-password` for specific instructions.
 
-Learn how to use the Wazuh passwords tool to manage your passwords. This tool allows you to change the passwords of both the :doc:`Wazuh indexer </getting-started/components/wazuh-indexer>` users, also known as internal users, and the :doc:`Wazuh manager API </user-manual/api/index>`  users.
+Learn how to use the Wazuh passwords tool to manage your passwords. This tool allows you to change the passwords of both the :doc:`Wazuh indexer </getting-started/components/wazuh-indexer>` users, also known as internal users, and the :doc:`Wazuh server API </user-manual/api/index>`  users.
 
 Among the Wazuh indexer users, it is worth mentioning the following:
 
 -  ``admin``: is the default administrator account of the Wazuh indexer. It's used to log in to the Wazuh dashboard and for communications between Filebeat and the Wazuh indexer. If you change the *admin* password, you must update it in Filebeat and the Wazuh server.
 -  ``kibanaserver``: is used for communications between the Wazuh dashboard and the Wazuh indexer. If you change the *kibanaserver* password, you must update it in the Wazuh dashboard.
 
-On the other hand, the Wazuh manager API has two default users:
+On the other hand, the Wazuh server API has two default users:
 
--  ``wazuh``: is the default Wazuh manager API administrator user.
--  ``wazuh-wui``: is an admin user used for communications between Wazuh dashboard and the Wazuh manager API. If you change the *wazuh-wui* password, you must update it in the Wazuh dashboard.
+-  ``wazuh``: is the default Wazuh server API administrator user.
+-  ``wazuh-wui``: is an admin user used for communications between Wazuh dashboard and the Wazuh server API. If you change the ``wazuh-wui`` password, you must ensure it updates in the Wazuh dashboard.
 
 If you use the tool in an all-in-one deployment, it automatically updates the passwords where necessary.  If you use it in a distributed environment, depending on the user whose password you change, you may have to update the password on other components. See  :ref:`Changing the passwords in a distributed environment <passwords_distributed>` for more details.
 
@@ -36,17 +36,17 @@ All the available options to run the script are:
 +--------------------------------------------------+--------------------------------------------------------------------------------------------------------------------+
 | Options                                          | Purpose                                                                                                            |
 +==================================================+====================================================================================================================+
-| ``-a|--change-all``                              | Changes all the Wazuh indexer and Wazuh API user passwords and prints them on screen.                              |
+| ``-a|--change-all``                              | Changes all the Wazuh indexer and Wazuh server API user passwords and prints them on screen.                       |
 |                                                  | Changing API passwords requires ``-au|--admin-user <ADMIN_USER>`` and ``-ap|--admin-password <ADMIN_PASSWORD>``.   |
 +--------------------------------------------------+--------------------------------------------------------------------------------------------------------------------+
-| ``-A|--api``                                     | Change the Wazuh API password given the current password.                                                          |
+| ``-A|--api``                                     | Change the Wazuh server API password given the current password.                                                   |
 |                                                  | Requires ``-u|--user <USER>``, ``-p|--password <PASSWORD>``, ``-au|--admin-user <ADMIN_USER>``, and                |
 |                                                  | ``-ap|--admin-password <ADMIN_PASSWORD>``.                                                                         |
 +--------------------------------------------------+--------------------------------------------------------------------------------------------------------------------+
-| ``-au|--admin-user <ADMIN_USER>``                | Admin user for the Wazuh API. Required for changing the Wazuh API passwords.                                       |
+| ``-au|--admin-user <ADMIN_USER>``                | Admin user for the Wazuh server API. Required for changing the Wazuh server API passwords.                         |
 |                                                  | Requires ``-A|--api``.                                                                                             |
 +--------------------------------------------------+--------------------------------------------------------------------------------------------------------------------+
-| ``-ap|--admin-password <ADMIN_PASSWORD>``        | Password for the Wazuh API admin user. Required for changing the Wazuh API passwords.                              |
+| ``-ap|--admin-password <ADMIN_PASSWORD>``        | Password for the Wazuh server API admin user. Required for changing the Wazuh server API passwords.                |
 |                                                  | Requires ``-A|--api``.                                                                                             |
 +--------------------------------------------------+--------------------------------------------------------------------------------------------------------------------+
 | ``-u|--user <USER>``                             | Indicates the name of the user whose password will be changed.                                                     |
@@ -71,7 +71,7 @@ All the available options to run the script are:
 |                                                  |                                                                                                                    |
 |                                                  |      indexer_password: <PASSWORD>                                                                                  |
 |                                                  |                                                                                                                    |
-|                                                  | Wazuh API users must have this format:                                                                             |
+|                                                  | Wazuh server API users must have this format:                                                                      |
 |                                                  |                                                                                                                    |
 |                                                  | .. code-block:: yaml                                                                                               |
 |                                                  |                                                                                                                    |
@@ -103,8 +103,7 @@ To change the password for a single Wazuh indexer user, run the script with the 
 
 If you use the tool in an all-in-one deployment, it automatically updates the passwords where necessary.  If you use it in a distributed environment, depending on the user whose password you change, you may have to update the password on other components. See :ref:`Changing the passwords in a distributed environment <passwords_distributed>` for more details.
 
-If you want to change the password for a Wazuh manager API user, run the script on a Wazuh server node and use option ``-A|--api``. Alternatively, you can change the Wazuh manager API passwords following the instructions in the :doc:`Securing the Wazuh API </user-manual/api/securing-api>` documentation.
-
+If you want to change the password for a Wazuh server API user, run the script on a Wazuh server node and use option ``-A|--api``. Alternatively, you can change the Wazuh server API passwords following the instructions in the :doc:`/user-manual/api/securing-api` documentation.
 
 Changing the passwords for all users
 ------------------------------------
@@ -130,7 +129,7 @@ To generate and change passwords for all the Wazuh indexer users, run the script
 
 If you use the tool in an all-in-one deployment, it automatically updates the passwords where necessary. If you use it in a distributed environment, you have to update the password on other components. See :ref:`Changing the passwords in a distributed environment <passwords_distributed>` for more details.
 
-On an all-in-one deployment, use options ``-a|--change-all``, ``-A|--api``, ``-au|--admin-user <ADMIN_USER>``, and ``-ap|--admin-password <ADMIN_PASSWORD>`` to also change the passwords for all the Wazuh indexer and the Wazuh manager API users.
+On an all-in-one deployment, use options ``-a|--change-all``, ``-A|--api``, ``-au|--admin-user <ADMIN_USER>``, and ``-ap|--admin-password <ADMIN_PASSWORD>`` to also change the passwords for all the Wazuh indexer and the Wazuh server API users.
 
    .. code-block:: console
 
@@ -165,7 +164,7 @@ For Wazuh indexer users:
      indexer_username: <USER>
      indexer_password: <PASSWORD>
 
-For Wazuh manager API users:
+For Wazuh server API users:
 
 .. code-block:: none
 
@@ -182,7 +181,7 @@ The options ``-au|--admin-user <ADMIN_USER>`` and ``-ap|--admin-password <ADMIN_
 Changing the passwords in a distributed environment
 ---------------------------------------------------
 
-Follow the instructions below to change the passwords for all the Wazuh indexer users as well as the Wazuh manager API users.
+Follow the instructions below to change the passwords for all the Wazuh indexer users as well as the Wazuh server API users.
 
 #. On `any Wazuh indexer node`, use the Wazuh passwords tool to change the passwords of the Wazuh indexer users.
 
@@ -203,18 +202,26 @@ Follow the instructions below to change the passwords for all the Wazuh indexer 
       INFO: The password for user snapshotrestore is Mb2EHw8SIc1d.oz.nM?dHiPBGk7s?UZB
       WARNING: Wazuh indexer passwords changed. Remember to update the password in the Wazuh dashboard, Wazuh server, and Filebeat nodes if necessary, and restart the services.
 
-#. On your `Wazuh server master node`, download the Wazuh passwords tool and use it to change the passwords of the Wazuh API users. Replace ``<WAZUH_PASSWORD>`` with the *wazuh* user password.
+#. On the *Wazuh server master node*, download the Wazuh passwords tool and use it to change the passwords of the Wazuh server API users. For example, to change the password of the ``wazuh`` server API user, run:
 
    .. code-block:: console
 
       # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-passwords-tool.sh
-      # bash wazuh-passwords-tool.sh --api --admin-user wazuh --admin-password <WAZUH_PASSWORD>
+      # bash wazuh-passwords-tool.sh --api -u wazuh -p <NEW_PASSWORD> --admin-user wazuh-wui --admin-password <WAZUH_WUI_USER_PASSWORD>
 
-   .. code-block:: console
+   .. code-block:: none
       :class: output
 
       INFO: The password for Wazuh API user wazuh is ivLOfmj7.jL6*7Ev?UJoFjrkGy9t6Je.
-      INFO: The password for Wazuh API user wazuh-wui is fL+f?sFRPEv5pYRE559rqy9b6G4Z5pVi
+
+   Where:
+
+   -  ``<NEW_PASSWORD>`` is the new password for the server API user.
+   -  ``<WAZUH_WUI_USER_PASSWORD>`` is the password of the ``wazuh-wui`` user. You can retrieve it by running:
+
+      .. code-block:: console
+
+         $ sudo tail /usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml
 
 #. If you've set up a user other than ``admin`` for Filebeat, manually add the username and password using the following commands. Replace ``<CUSTOM_USERNAME>`` and ``<CUSTOM_PASSWORD>`` with your custom username and password.
 
