@@ -140,7 +140,7 @@ To configure the manager before deployment, check the :ref:`Wazuh puppet referen
 
       # puppet agent -t
 
-.. note:: The default login credentials are ``admin``:``admin``. It is advised to `change the password <https://documentation.wazuh.com/current/user-manual/user-administration/password-management.html>`_ after installation.
+.. note:: The default login credentials are ``admin``:``admin``. It is advised to :doc:`change the password </user-manual/user-administration/password-management>` after installation.
 
 Multi-node
 ^^^^^^^^^^
