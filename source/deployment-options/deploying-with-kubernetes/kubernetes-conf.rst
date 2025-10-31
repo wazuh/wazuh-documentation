@@ -1,55 +1,56 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Learn more about Kubernetes configuration for Wazuh: prerequisites, overview, how to verify the deployment, and more. 
-
-.. _kubernetes_conf:
+   :description: This section outlines how to configure Wazuh components within a Kubernetes cluster, including the manager, indexer, and dashboard.
 
 Kubernetes configuration
-========================   
+========================
+
+This section outlines how to configure Wazuh components within a Kubernetes cluster, including the manager, indexer, and dashboard. It describes the resource requirements, storage setup, and controller types used for each component.
 
 Pre-requisites
 --------------
 
--  A Kubernetes cluster already deployed.
--  For Amazon EKS deployments using Kubernetes version 1.23 and later, an Amazon EBS CSI driver IAM role. The CSI driver requires that you assign an IAM role to work properly. Read AWS documentation to find instructions on `Creating the Amazon EBS CSI driver IAM role <https://docs.aws.amazon.com/eks/latest/userguide/csi-iam-role.html>`__. You need to install the CSI driver for both, new and old deployments. The CSI driver is an essential Kubernetes feature.
-   
+Before you begin, ensure that the following requirements are met:
+
+-  A running Kubernetes cluster.
+-  An Amazon EBS CSI driver IAM role for Amazon EKS deployments using Kubernetes version 1.23 and later. The CSI driver requires that you assign an IAM role to work properly. For detailed instructions, refer to AWS documentation on `Creating the Amazon EBS CSI driver IAM role <https://docs.aws.amazon.com/eks/latest/userguide/csi-iam-role.html>`__. You need to install the CSI driver for both new and old deployments. The CSI driver is an essential Kubernetes feature.
+
 Resource Requirement
 --------------------
 
-To deploy Wazuh on Kubernetes, the cluster should have at least the following resources available:
+Your cluster must have at least the following resources available:
 
-- 2 CPU units
-- 3 Gi of memory
-- 2 Gi of storage
-   
-   
+-  2 CPU units
+-  3 Gi of memory
+-  2 Gi of storage
+
 Overview
 --------
 
-StatefulSet and deployment controllers
+StatefulSet and Deployment controllers
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-As a *Deployment*, a *StatefulSet* manages Pods that are based on an identical container specification, but it maintains an identity attached to each of its pods. These pods are created from the same specification, but they are not interchangeable: each one has a persistent identifier maintained across any rescheduling.
+A StatefulSet manages pods based on identical container specifications. Unlike Deployments, StatefulSets maintain a persistent identity for each pod. Pods are created from the same specification, but are not interchangeable. Each pod retains a persistent identifier that survives rescheduling.
 
-It is useful for stateful applications like databases that save the data to persistent storage. The states of each Wazuh manager and each Wazuh indexer should be maintained, so we declare them using StatefulSet to ensure that they maintain their states in every startup.
+StatefulSets are useful for stateful applications like databases that save data to persistent storage. Wazuh manager and Wazuh indexer components maintain their states, so we use StatefulSets to ensure state persistence across Pod restarts.
 
-Deployments are intended for stateless use and are quite lightweight, and seem to be appropriate for the Wazuh dashboard, where it is not necessary to maintain the states.
+Deployments are intended for stateless applications and are lightweight. The Wazuh dashboard doesn't need to maintain state, so it is deployed using a Deployment controller.
 
-Persistent volumes (PV) are pieces of storage in the provisioned cluster. It is a resource in the cluster just like a node is a cluster resource. Persistent volumes are volume plugins like Volumes but have a lifecycle independent of any individual pod that uses the PV. This API object captures the details of the implementation of the storage, be that NFS, iSCSI, or a cloud-provider-specific storage system.
+Persistent volumes (PV) are storage resources in the cluster. They have a lifecycle independent of any individual pod that uses them. This API object captures storage implementation details for NFS, iSCSI, or cloud-provider-specific storage systems.
 
-Here, we use persistent volumes to store data from both the Wazuh manager and the Wazuh indexer.
+We use persistent volumes to store data from both the Wazuh manager and the Wazuh indexer.
 
-Refer to the `persistent volumes <https://kubernetes.io/docs/concepts/storage/persistent-volumes/>`_ page for more information.
+For more information, see the `Kubernetes persistent volumes <https://kubernetes.io/docs/concepts/storage/persistent-volumes/>`__ documentation.
 
 Pods
 ^^^^
 
-You can check how we build our Wazuh docker containers in our `repository <https://github.com/wazuh/wazuh-docker>`_.
+A Pod is the smallest and most fundamental deployable unit in Kubernetes. It represents a single instance of a running process in your cluster. You can view how we build Wazuh Docker containers in our `repository <https://github.com/wazuh/wazuh-docker>`__.
 
 **Wazuh master**
 
-This pod contains the master node of the Wazuh cluster. The master node centralizes and coordinates worker nodes, making sure the critical and required data is consistent across all nodes. The management is performed only in this node, so the agent enrollment service (authd) is placed here.
+The master pod contains the master node of the Wazuh server cluster. The master node centralizes and coordinates worker nodes. It ensures critical data remains consistent across the Wazuh server cluster. Management operations occur only on this node, so the agent enrollment service (``authd``) runs here.
 
 +-------------------------------+-------------+
 | Image                         | Controller  |
@@ -57,9 +58,9 @@ This pod contains the master node of the Wazuh cluster. The master node centrali
 | wazuh/wazuh-manager           | StatefulSet |
 +-------------------------------+-------------+
 
-**Wazuh worker 0 / 1**
+**Wazuh worker**
 
-These pods contain a worker node of the Wazuh cluster. They will receive the agent events.
+The Wazuh worker pods contain the worker nodes of the Wazuh server cluster. They receive agent events.
 
 +-------------------------------+-------------+
 | Image                         | Controller  |
@@ -79,7 +80,7 @@ The Wazuh indexer pod ingests events received from Filebeat.
 
 **Wazuh dashboard**
 
-The Wazuh dashboard pod lets you visualize your Wazuh indexer data, along with Wazuh agents information and server configuration.
+The Wazuh dashboard pod provides visualization of Wazuh indexer data, Wazuh agent information, and Wazuh server configuration.
 
 +--------------------------------------+-------------+
 | Image                                | Controller  |
@@ -99,20 +100,20 @@ Services
 +----------------------+-------------------------------------------------------------------------------------+
 | indexer              | This is the Wazuh indexer API used by the Wazuh dashboard to read/write alerts.     |
 +----------------------+-------------------------------------------------------------------------------------+
-| dashboard            | Wazuh dashboard service. \https://wazuh.your-domain.com:443                         |
+| dashboard            | Wazuh dashboard service. \https://wazuh.<YOUR_DOMAIN>.com:443                       |
 +----------------------+-------------------------------------------------------------------------------------+
 
-**Wazuh**
+**Wazuh server**
 
-+----------------------+-------------------------------------------------------------------------+
-| Name                 | Description                                                             |
-+======================+=========================================================================+
-| wazuh                | Wazuh API: wazuh-master.your-domain.com:55000                           |
-|                      +-------------------------------------------------------------------------+
-|                      | Agent registration service (authd): wazuh-master.your-domain.com:1515   |
-+----------------------+-------------------------------------------------------------------------+
-| wazuh-workers        | Reporting service: wazuh-manager.your-domain.com:1514                   |
-+----------------------+-------------------------------------------------------------------------+
-| wazuh-cluster        | Communication for Wazuh manager nodes.                                  |
-+----------------------+-------------------------------------------------------------------------+
++----------------------+-------------------------------------------------------------------------------+
+| Name                 | Description                                                                   |
++======================+===============================================================================+
+| wazuh-master         | Wazuh API: wazuh-master.<YOUR_DOMAIN>.com:55000                               |
+|                      +-------------------------------------------------------------------------------+
+|                      | Agent registration service (``authd``): wazuh-master.<YOUR_DOMAIN>.com:1515   |
++----------------------+-------------------------------------------------------------------------------+
+| wazuh-workers        | Reporting service: wazuh-manager.<YOUR_DOMAIN>.com:1514                       |
++----------------------+-------------------------------------------------------------------------------+
+| wazuh-cluster        | Communication for Wazuh manager nodes.                                        |
++----------------------+-------------------------------------------------------------------------------+
 
