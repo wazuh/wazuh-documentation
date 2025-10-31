@@ -6,6 +6,8 @@
 Configuring existing components to connect with the new node
 ============================================================
 
+Before deploying an additional Wazuh node, it’s essential to reconfigure existing components to ensure communication within the cluster. This step involves updating configuration files and connection parameters so that the Wazuh manager, indexer, and dashboard recognize and properly interact with the newly added Wazuh server node.
+
 All-in-one deployment
 ---------------------
 
