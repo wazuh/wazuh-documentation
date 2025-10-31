@@ -7,10 +7,6 @@
 Upgrading Wazuh agents on Solaris endpoints
 ===========================================
 
-.. warning::
-
-   Support for Solaris systems ends in Wazuh 5.0.0.
-
 Select your Solaris version and follow the steps to upgrade the Wazuh agent on Solaris endpoints.
 
 .. tabs::

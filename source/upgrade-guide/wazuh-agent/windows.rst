@@ -7,10 +7,6 @@
 Upgrading Wazuh agents on Windows endpoints
 ===========================================
 
-.. warning::
-
-   Support for Windows XP, Windows Vista, and Windows Server 2003 systems ends in Wazuh 5.0.0.
-
 Follow these steps to upgrade Wazuh agents locally on Windows endpoints.
 
 .. note:: You need administrator privileges to upgrade the agent.

@@ -6,10 +6,6 @@
 Deploying Wazuh agents on Linux endpoints
 =========================================
 
-.. warning::
-
-   Support for Red Hat 5, CentOS 5, Oracle Linux 5, and SUSE Linux Enterprise Server 11 systems ends in Wazuh 5.0.0.
-
 The Wazuh agent runs on the endpoint you want to monitor and communicates with the Wazuh manager, sending data in near real-time through an encrypted and authenticated channel.
 
 The deployment of a Wazuh agent on a Linux endpoint uses deployment variables that facilitate the task of installing, enrolling, and configuring the Wazuh agent. Alternatively, if you want to download the Wazuh agent package directly, see the :doc:`packages list </installation-guide/packages-list>` section.
