@@ -101,10 +101,6 @@ Now that your Wazuh installation is ready, you can start deploying the Wazuh age
 
 Instructions on how to deploy the Wazuh agent can be found in the Wazuh web user interface, or in our :doc:`documentation </installation-guide/wazuh-agent/index>`.
 
-.. warning::
-
-   Support for the following operating systems ends in Wazuh 5.0.0: Red Hat 5, CentOS 5, Oracle Linux 5, SUSE Linux Enterprise Server 11, Windows XP, Windows Vista, Windows Server 2003, Solaris, AIX, and HP-UX.
-
 .. raw:: html
 
   <div class="link-boxes-group layout-6">
