@@ -66,6 +66,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated user manual documentation for Wazuh dashboard. ([#8970](https://github.com/wazuh/wazuh-documentation/pull/8970))
 - **Post-release**: Updated the *Installation from sources* documentation. ([#8988](https://github.com/wazuh/wazuh-documentation/pull/8988))
 - **Post-release**: Updated the Amazon Security Lake integration documentation. ([#8990](https://github.com/wazuh/wazuh-documentation/pull/8990))
+- **Post-release**: Updated the vulnerability detection compatibility matrix. ([#9062](https://github.com/wazuh/wazuh-documentation/pull/9062))
 
 ### Fixed
 
