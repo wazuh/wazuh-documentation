@@ -25,6 +25,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated the *Deployment with Puppet* documentation. ([#9012](https://github.com/wazuh/wazuh-documentation/pull/9012)) ([#9016](https://github.com/wazuh/wazuh-documentation/pull/9016))
 - **Post-release**: Updated the command for changing Wazuh server API user passwords in the *Password management* documentation. ([#9051](https://github.com/wazuh/wazuh-documentation/pull/9051))
 - **Post-release**: Updated the *Configuring existing components to connect with the new node* sections. ([#9057](https://github.com/wazuh/wazuh-documentation/pull/9057))
+- **Post-release**: Updated the vulnerability detection compatibility matrix. ([#9060](https://github.com/wazuh/wazuh-documentation/pull/9060))
 
 ### Removed
 
