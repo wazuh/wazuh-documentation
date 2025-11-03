@@ -120,7 +120,7 @@ Contains the **Addresses**, **Interfaces**, **Protocols**, **Services**, and **T
       :alt: System inventory - Network Protocols tab
       :align: center
       :width: 80%
-summary table with more protocol-level details
+
 -  The **Services** tab presents a detailed view of source ports, transport protocols, processes, and a summary data table for each endpoint.
 
    .. thumbnail:: /images/manual/system-inventory/system-inventory-network-services-tab.png
