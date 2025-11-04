@@ -26,12 +26,13 @@
 
 .. note::
 
-   For Debian 7, 8, and Ubuntu 14 systems import the GCP key and add the Wazuh repository (steps 2 and 3) using the following commands.
+   For Debian 7, 8, and Ubuntu 14 systems use the following commands.
 
    .. code-block:: console
 
       # apt-get install gnupg apt-transport-https
       # curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | apt-key add -
       # echo "deb https://packages.wazuh.com/4.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
+      # apt-get update
 
 .. End of include file
