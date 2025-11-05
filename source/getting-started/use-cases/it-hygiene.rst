@@ -6,16 +6,16 @@
 IT hygiene
 ==========
 
-IT hygiene refers to the measures that organizations and individuals undertake to maintain the health and security of their IT assets. IT hygiene requires continuous adaptation of practices and processes to counter emerging cybersecurity threats and challenges, fostering a secure and resilient IT environment. Organizations implement robust IT hygiene practices to prevent cyberattacks, data breaches, and other security concerns that may result in data loss, service disruption, reputational harm, or financial instability.
+IT hygiene refers to the measures that organizations and individuals undertake to maintain the health and security of their IT assets. IT hygiene requires continuous adaptation of practices and processes to counter emerging cybersecurity threats and challenges, fostering a secure and resilient IT environment. Organizations implement IT hygiene practices to prevent cyberattacks, data breaches, and other security concerns that may result in data loss, service disruption, reputational harm, or financial instability.
 
 .. _system_inventory_gs_use_case:
 
 System inventory
 ----------------
 
-An up-to-date :doc:`system inventory </user-manual/capabilities/system-inventory/index>` helps organizations optimize asset visibility in their environment, and is essential for maintaining good IT hygiene. Wazuh collects system inventory data that includes hardware and operating system information, installed software, network interfaces, ports, and running processes. Wazuh agents use the :doc:`Syscollector </user-manual/capabilities/system-inventory/configuration>` module to collect inventory data from monitored endpoints and send them to the Wazuh server.
+An up-to-date :doc:`system inventory </user-manual/capabilities/system-inventory/index>` helps organizations optimize asset visibility in their environment, and is essential for maintaining good IT hygiene. hardware and operating system information, user accounts, installed packages, running processes and services, network ports, users, groups, and browser extensions. Wazuh agents use the Wazuh :doc:`Syscollector </user-manual/capabilities/system-inventory/configuration>` module to collect inventory data from monitored endpoints and send them to the Wazuh server. All data is aggregated into dedicated indices in the Wazuh indexer and accessible through the Wazuh dashboard, enabling rapid detection and remediation without endpoint-by-endpoint inspection.
 
-You can generate system inventory reports from the **Inventory data** module on the Wazuh dashboard. The information contained in the report helps identify unwanted applications, processes, services, and malicious artifacts.
+Navigate to **Security operations** > **IT Hygiene** to generate system inventory reports from the Wazuh IT hygiene module on the Wazuh dashboard.
 
 .. thumbnail:: /images/getting-started/use-cases/it-hygiene/inventory-data-dashboard.png
    :title: Inventory data on the Wazuh dashboard
@@ -31,7 +31,7 @@ You can also generate property-specific reports for a monitored endpoint. For ex
    :align: center
    :width: 80%
 
-The inventory data collected can be queried using the `Wazuh API <https://documentation.wazuh.com/|WAZUH_CURRENT_MINOR|/user-manual/api/reference.html#tag/Syscollector>`__, which retrieves nested data in JSON format. For example, you can query the package inventory to check for the ``wazuh-agent`` package on a monitored endpoint using the **Server management** > **Dev Tools** module on the Wazuh dashboard. Command line tools like :ref:`cURL <inventory_wazuh_api_curl>` can also be used to query the inventory database.
+The inventory data collected can be queried using the `Wazuh server API <https://documentation.wazuh.com/|WAZUH_CURRENT_MINOR|/user-manual/api/reference.html#tag/Syscollector>`__ or Wazuh indexer API, which retrieves nested data in JSON format. For example, you can query the package inventory to check for the wazuh-agent package on a monitored endpoint using the **Wazuh** > **Tools** > **API Console** module on the Wazuh dashboard. Command line tools like :ref:`cURL <inventory_wazuh_api_curl>` can also be used to query the inventory database.
 
 .. thumbnail:: /images/getting-started/use-cases/it-hygiene/inventory-querying-api.png
    :title: Querying the package inventory using the Dev Tools
@@ -67,11 +67,7 @@ The SCA scan result above indicates a failure because the endpoint allows you to
 Vulnerability management
 ------------------------
 
-Vulnerability management aims to identify and remediate vulnerabilities to prevent cyber attacks. By taking proactive steps to remediate vulnerabilities, your organization can significantly reduce its attack surface, thereby improving its IT hygiene.
-
-The Wazuh :doc:`vulnerability detection </user-manual/capabilities/vulnerability-detection/index>` module identifies vulnerable applications by using :doc:`vulnerability information available in our Wazuh CTI </user-manual/capabilities/vulnerability-detection/how-it-works>`. The vulnerability detection module generates alerts for vulnerabilities discovered on monitored endpoints. This provides a comprehensive view of vulnerabilities identified across all monitored endpoints, allowing you to view, analyze, fix, and track the remediation of vulnerabilities.
-
-The vulnerabilities discovered are grouped into severity levels, and a summary is provided based on the application name, CVE, and CVSS3 score on the Wazuh dashboard.
+The Wazuh :doc:`vulnerability detection </user-manual/capabilities/vulnerability-detection/index>` module identifies vulnerable applications by using vulnerability information available in our `Wazuh CTI <https://cti.wazuh.com/vulnerabilities/cves>`__. Links to specific vulnerabilities on our Wazuh CTI are also available on each vulnerability ID.
 
 .. thumbnail:: /images/getting-started/use-cases/it-hygiene/vulnerabilities-inventory-dashboard.png
    :title: Vulnerability Detection inventory dashboard
@@ -169,7 +165,7 @@ Regulatory compliance
 
 Regulatory standards provide a global benchmark for best business practices to help improve customer trust and business reputation. Compliance with regulatory standards also helps organizations to enhance their IT hygiene.
 
-Wazuh streamlines the process of meeting :doc:`regulatory compliance </compliance/index>` obligations by offering a robust solution that addresses requirements of industry standards such as PCI DSS, HIPAA, GDPR, and others.
+Wazuh streamlines the process of meeting :doc:`regulatory compliance </compliance/index>` obligations by offering a solution that addresses requirements of industry standards such as PCI DSS, HIPAA, GDPR, and others.
 
 .. thumbnail:: /images/getting-started/use-cases/it-hygiene/security-operations-module.png
    :title: Security operations module
