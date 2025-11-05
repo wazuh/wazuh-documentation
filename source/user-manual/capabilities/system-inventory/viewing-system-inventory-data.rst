@@ -760,41 +760,44 @@ You can query the Wazuh inventory data using the `Wazuh server API <https://docu
 Wazuh server API GUI
 ~~~~~~~~~~~~~~~~~~~~
 
-On the Wazuh dashboard, navigate to **Wazuh** > **Tools** > **API Console**. On the **Console**, type the following:
+Follow these steps to access the Wazuh server API from the Wazuh dashboard.
 
-.. code-block:: none
+#. On the Wazuh dashboard, click the hamburger icon from the top left side and navigate to **Server management** > **Dev Tools**.
+#. Type the following command in the console and click the **play** icon to run the query:
 
-   GET /syscollector/<AGENT_ID>/
+   .. code-block:: none
 
-Where ``<AGENT_ID>`` corresponds to the agent ID of the endpoint.
+      GET /syscollector/<AGENT_ID>/
 
-The Wazuh dashboard will suggest a list of available tables that you can query via the API.
+   Where ``<AGENT_ID>`` corresponds to the agent ID of the endpoint.
 
-.. thumbnail:: /images/manual/system-inventory/api-console.png
-   :title: Server management > Dev Tools
-   :alt: Server management > Dev Tools
-   :align: center
-   :width: 80%
+   The Wazuh dashboard will suggest a list of available tables that you can query via the API.
 
-For example, you can use the command ``GET /syscollector/<AGENT_ID>/packages`` to query the inventory data for installed packages on the endpoint. After typing, click the **play** icon to run the query.
+   .. thumbnail:: /images/manual/system-inventory/api-console.png
+      :title: Server management > Dev Tools
+      :alt: Server management > Dev Tools
+      :align: center
+      :width: 80%
 
-Furthermore, you can query the inventory data for specific information about any property. For example, the command below queries the package inventory to check for the ``wazuh-agent`` package:
+#. You can use the command ``GET /syscollector/<AGENT_ID>/packages`` to query the inventory data for installed packages on the endpoint. After typing, click the **play** icon to run the query.
 
-.. code-block:: none
+   Furthermore, you can query the inventory data for specific information about any property. For example, the command below queries the package inventory to check for the ``wazuh-agent`` package:
 
-   GET /syscollector/<AGENT_ID>/packages?pretty=true&name=wazuh-agent
+   .. code-block:: none
 
-Where:
+      GET /syscollector/<AGENT_ID>/packages?pretty=true&name=wazuh-agent
 
--  ``packages`` reference the package table in the inventory database, which stores information about the currently installed software on an endpoint. You can reference the table of your interest.
--  ``name=wazuh-agent`` specifies the ``wazuh-agent`` package name. You can use different properties and values.
--  ``pretty=true`` ensures the output is properly formatted and easy to read.
+   Where:
 
-.. thumbnail:: /images/manual/system-inventory/query-the-inventory-data.png
-   :title: Query the inventory data
-   :alt: Query the inventory data
-   :align: center
-   :width: 80%
+   -  ``packages`` reference the package table in the inventory database, which stores information about the currently installed software on an endpoint. You can reference the table of your interest.
+   -  ``name=wazuh-agent`` specifies the ``wazuh-agent`` package name. You can use different properties and values.
+   -  ``pretty=true`` ensures the output is properly formatted and easy to read.
+
+   .. thumbnail:: /images/manual/system-inventory/query-the-inventory-data.png
+      :title: Query the inventory data
+      :alt: Query the inventory data
+      :align: center
+      :width: 80%
 
 .. _inventory_wazuh_api_curl:
 
