@@ -899,7 +899,7 @@ Follow the steps below to query the system inventory indices from the command li
 
    .. code-block:: console
 
-      curl -k -X GET "https://<WAZUH_SERVER_IP>:55000/syscollector/001/packages?pretty=true&name=wazuh-agent" -H  "Authorization: Bearer $TOKEN"
+      curl -k -X GET "https://<WAZUH_SERVER_IP>:55000/syscollector/010/packages?pretty=true&name=wazuh-agent" -H  "Authorization: Bearer $TOKEN"
 
    .. code-block:: console
       :class: output
@@ -925,7 +925,7 @@ Follow the steps below to query the system inventory indices from the command li
                   "size": 30461944,
                   "priority": " ",
                   "vendor": "Wazuh, Inc <info@wazuh.com>",
-                  "agent_id": "001"
+                  "agent_id": "010"
                }
             ],
             "total_affected_items": 1,
