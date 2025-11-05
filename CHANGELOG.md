@@ -28,6 +28,10 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated the *Configuring existing components to connect with the new node* sections. ([#9057](https://github.com/wazuh/wazuh-documentation/pull/9057))
 - **Post-release**: Updated the vulnerability detection compatibility matrix. ([#9060](https://github.com/wazuh/wazuh-documentation/pull/9060))
 
+### Fixed
+
+- **Post-release**: Added missing step to *Updating old paths* in *Upgrading Wazuh on Kubernetes*. ([#9069](https://github.com/wazuh/wazuh-documentation/pull/9069))
+
 ### Removed
 
 - **Post-release**: Removed deprecation warnings for legacy operating systems. ([#9011](https://github.com/wazuh/wazuh-documentation/pull/9011))

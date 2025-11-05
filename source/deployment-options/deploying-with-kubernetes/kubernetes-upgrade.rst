@@ -192,6 +192,10 @@ Updating old paths
                   capabilities:
                      add: ["SYS_CHROOT"]
 
+      #. Edit ``wazuh/indexer_stack/wazuh-indexer/indexer_conf/opensearch.yml`` and do the following replacements.
+
+         -  Replace ``/usr/share/wazuh-indexer/certs/`` with ``/usr/share/wazuh-indexer/config/certs/``.
+
 .. _updating_configuraton_parameters:
 
 Updating configuration parameters
