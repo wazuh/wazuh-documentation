@@ -27,6 +27,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated the command for changing Wazuh server API user passwords in the *Password management* documentation. ([#9051](https://github.com/wazuh/wazuh-documentation/pull/9051))
 - **Post-release**: Updated the *Configuring existing components to connect with the new node* sections. ([#9057](https://github.com/wazuh/wazuh-documentation/pull/9057))
 - **Post-release**: Updated the vulnerability detection compatibility matrix. ([#9060](https://github.com/wazuh/wazuh-documentation/pull/9060))
+- **Post-release**: Updated the IT hygiene use cases in the *Getting started* guide. ([#9071](https://github.com/wazuh/wazuh-documentation/pull/9071))
 
 ### Fixed
 
