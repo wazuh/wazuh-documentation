@@ -35,6 +35,7 @@ All notable changes to this project will be documented in this file.
 
 - **Post-release**: Added missing step to *Updating old paths* in *Upgrading Wazuh on Kubernetes*. ([#9069](https://github.com/wazuh/wazuh-documentation/pull/9069))
 - **Post-release**: Updated the referenced OpenSearch version in the upgrade guide. ([#9068](https://github.com/wazuh/wazuh-documentation/pull/9068))
+- **Post-release**: Fixed indentation in ``remove-threat.py`` code line. ([#9078](https://github.com/wazuh/wazuh-documentation/pull/9078))
 
 ### Removed
 
