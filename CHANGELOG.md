@@ -25,6 +25,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated user manual documentation for Wazuh dashboard. ([#8972](https://github.com/wazuh/wazuh-documentation/pull/8972))
 - **Post-release**: Updated the Amazon Security Lake integration documentation. ([#8991](https://github.com/wazuh/wazuh-documentation/pull/8991))
 - **Post-release**: Updated the vulnerability detection compatibility matrix. ([#9063](https://github.com/wazuh/wazuh-documentation/pull/9063))
+- **Post-release**: Fixed indentation in ``remove-threat.py`` code line. ([#9081](https://github.com/wazuh/wazuh-documentation/pull/9081))
 
 ### Fixed
 
