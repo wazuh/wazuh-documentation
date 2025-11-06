@@ -6,7 +6,7 @@
 System inventory
 ================
 
-Wazuh uses the Syscollector module to gather information about a monitored endpoint. This information includes hardware details, OS information, network details, services, browser extensions, running processes, users, and groups. and running processes. The agent runs periodic scans on the endpoint and sends the information to the manager. The manager then updates the appropriate system information. See the :doc:`System inventory section </user-manual/capabilities/system-inventory/index>` for more information about the Wazuh Syscollector module.
+Wazuh uses the Syscollector module to gather information about a monitored endpoint. This information includes hardware details, OS information, network details, services, browser extensions, running processes, users, and groups. The agent runs periodic scans on the endpoint and sends the information to the manager. The manager then updates the appropriate system information. See the :doc:`System inventory section </user-manual/capabilities/system-inventory/index>` for more information about the Wazuh Syscollector module.
 
 The Wazuh Syscollector module helps to meet the following PCI DSS requirement:
 
@@ -17,20 +17,10 @@ The Wazuh Syscollector module helps to achieve some of the objectives of this re
 Use cases
 ---------
 
--  PCI DSS 2.2.4 requires keeping only necessary services, protocols, daemons, and functions enabled and removing or disabling all unnecessary functionality. Using the Wazuh Syscollector module, you can see what processes are running on a specific endpoint and determine if the running process or protocol is necessary for the operation of the asset. You can find this information in the IT Hygiene section on the Wazuh dashboard.
+PCI DSS 2.2.4 requires keeping only necessary services, protocols, daemons, and functions enabled and removing or disabling all unnecessary functionality. Using the Wazuh Syscollector module, you can see what processes are running on a specific endpoint and determine if the running process or protocol is necessary for the operation of the asset. You can find this information in the **IT Hygiene** section on the Wazuh dashboard.
 
-   .. thumbnail:: /images/compliance/pci/processes-are-running-on-a-specific-endpoint-01.png
-      :title: Processes running on a specific endpoint
-      :align: center
-      :width: 80%
-
-   .. thumbnail:: /images/compliance/pci/processes-are-running-on-a-specific-endpoint-02.png
-      :title: Processes running on a specific endpoint
-      :align: center
-      :width: 80%
-
-   .. thumbnail:: /images/compliance/pci/processes-are-running-on-a-specific-endpoint-03.png
-      :title: Processes running on a specific endpoint
+   .. thumbnail:: /images/compliance/pci/it-hygiene-dashboard.png
+      :title: IT Hygiene dashboard
       :align: center
       :width: 80%
 
