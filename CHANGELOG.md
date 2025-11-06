@@ -30,6 +30,7 @@ All notable changes to this project will be documented in this file.
 
 - **Post-release**: Removed wazuh-states-fim index references. ([#8948](https://github.com/wazuh/wazuh-documentation/pull/8948))
 - **Post-release**: Removed unnecessary code block from agent installation from sources. ([#9000](https://github.com/wazuh/wazuh-documentation/pull/9000))
+- **Post-release**: Fixed indentation in ``remove-threat.py`` code line. ([#9079](https://github.com/wazuh/wazuh-documentation/pull/9079))
 
 ### Removed
 
