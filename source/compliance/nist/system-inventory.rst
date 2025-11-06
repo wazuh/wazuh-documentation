@@ -38,7 +38,7 @@ Using the Wazuh Syscollector module for this use case, you can see all packages 
             > net stop wazuh
             > net start wazuh
 
-#. Select your agent in the Wazuh dashboard and click **Inventory data**.
+#. Go to **IT Hygiene** on the Wazuh dashboard and select your endpoint.
 
    .. thumbnail:: /images/compliance/nist/inventory-data.png
       :title: Inventory data
