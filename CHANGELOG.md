@@ -29,6 +29,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated the Deployment on Kubernetes documentation. ([#9022](https://github.com/wazuh/wazuh-documentation/pull/9022))
 - **Post-release**: Updated the System Inventory documentation. ([#9052](https://github.com/wazuh/wazuh-documentation/pull/9052)) ([#9053](https://github.com/wazuh/wazuh-documentation/pull/9053)) ([#9067](https://github.com/wazuh/wazuh-documentation/pull/9067)) ([#9070](https://github.com/wazuh/wazuh-documentation/pull/9070)) ([#9073](https://github.com/wazuh/wazuh-documentation/pull/9073))
 - **Post-release**: Updated regulatory compliance documentation. ([#9074](https://github.com/wazuh/wazuh-documentation/pull/9074))
+- **Post-release**: Updated clarification on ``sca.remote_commands`` flag. ([#9077](https://github.com/wazuh/wazuh-documentation/pull/9077))
 
 ### Fixed
 
