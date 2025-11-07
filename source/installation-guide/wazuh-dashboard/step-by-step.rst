@@ -3,8 +3,6 @@
 .. meta::
    :description: Learn how to install Wazuh dashboard, a flexible and intuitive web interface for mining and visualizing the events and archives.
 
-.. _wazuh_dashboard_step_by_step:
-
 Installing the Wazuh dashboard step by step
 ===========================================
 
@@ -208,7 +206,17 @@ Select your deployment type and follow the instructions to change the default pa
 
          .. include:: /_templates/common/restart_filebeat.rst
 
-         .. note:: Repeat steps 3 and 4 on `every Wazuh server node`.
+      #. On *all your Wazuh server nodes*, run the following command to update the admin password in the Wazuh Manager keystore. Replace ``<ADMIN_PASSWORD>`` with the random password generated for the ``admin`` user in the first step:
+
+         .. code-block:: console
+
+            # echo '<ADMIN_PASSWORD>' | /var/ossec/bin/wazuh-keystore -f indexer -k password
+
+      #. Restart the Wazuh manager to apply the change:
+
+         .. include:: /_templates/common/restart_manager.rst
+
+         .. note:: Repeat steps 3–6 on *every Wazuh server node*.
 
       #. On your Wazuh dashboard node, run the following command to update the ``kibanaserver`` password in the Wazuh dashboard keystore. Replace ``<KIBANASERVER_PASSWORD>`` with the random password generated for the ``kibanaserver`` user in the first step:
 
