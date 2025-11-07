@@ -4,7 +4,7 @@
 
    .. group-tab:: Systemd
 
-      .. code-block:: console         
+      .. code-block:: console
 
          # systemctl restart wazuh-manager
 

@@ -45,8 +45,8 @@ All notable changes to this project will be documented in this file.
 - Added Wazuh agent support for Debian 13. ([#8946](https://github.com/wazuh/wazuh-documentation/pull/8946))
 - Added a *Change the password of Wazuh users* step in Deployment on Kubernetes documentation. ([#8979](https://github.com/wazuh/wazuh-documentation/pull/8979))
 - **Post-release**: Added Wazuh indexer indices. ([#9009](https://github.com/wazuh/wazuh-documentation/pull/9009))
-- **Post-release**: Updated the Deployment on Kubernetes documentation. ([#9022](https://github.com/wazuh/wazuh-documentation/pull/9022))
-- **Post-release**: Updated System Inventory Documentation. ([#9052](https://github.com/wazuh/wazuh-documentation/pull/9052)) ([#9053](https://github.com/wazuh/wazuh-documentation/pull/9053))
+- **Post-release**: Added mandatory dependency installation step for Debian-based operating systems in the *Deploying Wazuh agents on Linux endpoints* documentation. ([#9054](https://github.com/wazuh/wazuh-documentation/pull/9054))
+- **Post-release**: Added keystore update command in the section on installing the Wazuh dashboard. ([#9091](https://github.com/wazuh/wazuh-documentation/pull/9091))
 
 ### Changed
 
@@ -57,6 +57,19 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated step in *Keeping your custom Docker Compose files* section. ([#9010](https://github.com/wazuh/wazuh-documentation/pull/9010))
 - **Post-release**: Updated the *Deployment with Puppet* documentation. ([#9012](https://github.com/wazuh/wazuh-documentation/pull/9012)) ([#9016](https://github.com/wazuh/wazuh-documentation/pull/9016))
 - **Post-release**: Updated the command for changing Wazuh server API user passwords in the *Password management* documentation. ([#9051](https://github.com/wazuh/wazuh-documentation/pull/9051))
+- **Post-release**: Updated the *Configuring existing components to connect with the new node* sections. ([#9057](https://github.com/wazuh/wazuh-documentation/pull/9057))
+- **Post-release**: Updated the vulnerability detection compatibility matrix. ([#9060](https://github.com/wazuh/wazuh-documentation/pull/9060))
+- **Post-release**: Updated the IT hygiene use cases in the *Getting started* guide. ([#9071](https://github.com/wazuh/wazuh-documentation/pull/9071))
+- **Post-release**: Updated the Deployment on Kubernetes documentation. ([#9022](https://github.com/wazuh/wazuh-documentation/pull/9022))
+- **Post-release**: Updated the System Inventory documentation. ([#9052](https://github.com/wazuh/wazuh-documentation/pull/9052)) ([#9053](https://github.com/wazuh/wazuh-documentation/pull/9053)) ([#9067](https://github.com/wazuh/wazuh-documentation/pull/9067)) ([#9070](https://github.com/wazuh/wazuh-documentation/pull/9070)) ([#9073](https://github.com/wazuh/wazuh-documentation/pull/9073))
+- **Post-release**: Updated regulatory compliance documentation. ([#9074](https://github.com/wazuh/wazuh-documentation/pull/9074))
+- **Post-release**: Updated clarification on ``sca.remote_commands`` flag. ([#9077](https://github.com/wazuh/wazuh-documentation/pull/9077))
+
+### Fixed
+
+- **Post-release**: Added missing step to *Updating old paths* in *Upgrading Wazuh on Kubernetes*. ([#9069](https://github.com/wazuh/wazuh-documentation/pull/9069))
+- **Post-release**: Updated the referenced OpenSearch version in the upgrade guide. ([#9068](https://github.com/wazuh/wazuh-documentation/pull/9068))
+- **Post-release**: Fixed indentation in ``remove-threat.py`` code line. ([#9078](https://github.com/wazuh/wazuh-documentation/pull/9078))
 
 ### Removed
 

@@ -2,7 +2,7 @@
 
 .. meta::
    :description: This section covers adding Wazuh indexer nodes to increase capacity and resilience.
-   
+
 Adding Wazuh indexer nodes
 ==========================
 
@@ -181,7 +181,7 @@ Perform the steps below on one indexer node only.
 Configuring existing components to connect with the new node
 ------------------------------------------------------------
 
-In this section, we configure the Wazuh components of your existing deployment to connect and communicate with the new Wazuh indexer node.
+Before deploying an additional Wazuh node, it’s essential to reconfigure existing components to ensure communication within the cluster. This step involves updating configuration files and connection parameters so that the Wazuh manager, indexer, and dashboard recognize and properly interact with the newly added Wazuh indexer node.
 
 All-in-one deployment
 ^^^^^^^^^^^^^^^^^^^^^
