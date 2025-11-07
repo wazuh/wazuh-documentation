@@ -15,31 +15,35 @@ The use case below shows how Wazuh assists in meeting this requirement.
 Use case: Maintaining asset inventory on a Windows endpoint
 -----------------------------------------------------------
 
-Wazuh meets the architecture, infrastructure, and security software aspects of the *common criteria CC6.1* by providing several modules. One of these is the Syscollector module. In this use case, we show how to use the Wazuh Syscollector module to collect system information on a Windows 10 endpoint. You can use this module to monitor specific components, protocols, services, or applications running on an endpoint.
+Wazuh meets the architecture, infrastructure, and security software aspects of the *common criteria CC6.1* by providing several modules. One of these is the Syscollector module. In this use case, we show how to use the Wazuh Syscollector module to collect system information on a Windows 11 endpoint. You can use this module to monitor specific components, protocols, services, or applications running on an endpoint.
 
 #. Open the Wazuh agent configuration file ``C:\Program Files (x86)\ossec-agent\ossec.conf`` and scroll to the ``syscollector`` block to verify that you have the same configuration below:
 
    .. code-block:: XML
 
       <!-- System inventory -->
-       <wodle name="syscollector">
-         <disabled>no</disabled>
-         <interval>1h</interval>
-         <scan_on_start>yes</scan_on_start>
-         <hardware>yes</hardware>
-         <os>yes</os>
-         <network>yes</network>
-         <packages>yes</packages>
-         <ports all="yes">yes</ports>
-         <processes>yes</processes>
+         <wodle name="syscollector">
+           <disabled>no</disabled>
+           <interval>1h</interval>
+           <scan_on_start>yes</scan_on_start>
+           <hardware>yes</hardware>
+           <os>yes</os>
+           <network>yes</network>
+           <packages>yes</packages>
+           <ports all="no">yes</ports>
+           <processes>yes</processes>
+           <users>yes</users>
+           <groups>yes</groups>
+           <services>yes</services>
+           <browser_extensions>yes</browser_extensions>
 
-         <!-- Database synchronization settings -->
-         <synchronization>
-           <max_eps>10</max_eps>
-         </synchronization>
-       </wodle>
+           <!-- Database synchronization settings -->
+           <synchronization>
+             <max_eps>10</max_eps>
+           </synchronization>
+         </wodle>
 
-#. Navigate to **Agents management** > **Summary** > **AGENT_NAME** > **Inventory data** on the Wazuh dashboard. Where **AGENT_NAME** is the monitored endpoint. Click **Software**, **Network**, and **Processes** to see details about the installed software, network services, and running processes on the endpoint.
+#. Navigate to **IT Hygiene** on the Wazuh dashboard and select your endpoint. You can see details about installed applications, network services, and used ports on the monitored endpoint.
 
    .. thumbnail:: /images/compliance/tsc/common-criteria/agent-inventory-data.png
       :title: Agent inventory data

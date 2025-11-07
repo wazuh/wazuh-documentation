@@ -61,7 +61,7 @@ The alerts for a port opening operation are displayed in the Wazuh dashboard as 
    The initial scan does not generate alerts. Alerts are triggered after a difference in results between the first and second Syscollector scans is detected. This second scan will occur when the configured :ref:`interval <interval_syscollector>` is reached.
 
 New searchable fields on the Wazuh dashboard
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+---------------------------------------------
 
 You can create Syscollector custom rules using any of the discussed methods, then search for Syscollector alerts on the Wazuh dashboard. The Wazuh indexer saves the Syscollector fields as ``data.type.value``. For example, for hardware type, the ``cpu_name`` field is ``data.hardware.cpu_name``. The table lists all searchable fields for the different Syscollector properties.
 
