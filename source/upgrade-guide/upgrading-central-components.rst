@@ -85,7 +85,7 @@ Perform the following steps on any of the Wazuh indexer nodes replacing ``<WAZUH
       Security Admin v7
       Will connect to 127.0.0.1:9200 ... done
       Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
-      OpenSearch Version: 2.19.1
+      OpenSearch Version: 2.19.2
       Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
       Clustername: wazuh-cluster
       Clusterstate: GREEN
@@ -257,7 +257,7 @@ Perform the following steps on any of the Wazuh indexer nodes replacing ``<WAZUH
       Security Admin v7
       Will connect to 127.0.0.1:9200 ... done
       Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
-      OpenSearch Version: 2.19.2
+      OpenSearch Version: 2.19.3
       Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
       Clustername: wazuh-cluster
       Clusterstate: GREEN

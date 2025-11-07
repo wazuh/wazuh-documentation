@@ -69,17 +69,18 @@ As described in the :doc:`centralized configuration </user-manual/reference/cent
 
 You can enable this feature to push policy files to the Wazuh agents in defined groups. By default, every Wazuh agent belongs to the ``default`` group, which is used here as an example:
 
-#. On the Wazuh agent, edit the ``local_internal_options.conf`` file to allow the execution of commands in SCA policies sent from the Wazuh server:
+#. On the Wazuh agent, edit the ``local_internal_options.conf`` file to allow the execution of commands in SCA policies that use the ``c`` (command) rule type sent from the Wazuh server:
 
-     .. code-block:: console
+   .. code-block:: console
 
-        # echo "sca.remote_commands=1" >> /var/ossec/etc/local_internal_options.conf
+      # echo "sca.remote_commands=1" >> /var/ossec/etc/local_internal_options.conf
 
 
-    .. note::
-        By enabling remote command execution, the Wazuh server gains the ability to execute commands on the monitored endpoint. Remote commands are disabled by default as a security measure, which helps reduce the attack surface in case the Wazuh server is compromised.
+   .. note::
 
-        You do not need to enable remote commands if you add the policy files to each agent without using the Wazuh server to push them. For example, you can manually create the policy file directly on the monitored endpoint, or use ``scp`` to copy the policy file to the monitored endpoint.    
+      By enabling the ``sca.remote_commands`` flag, the Wazuh server can execute commands on the monitored endpoint for SC policies that include rules of type ``c`` (command). This setting is only required for SCA policies using the ``c`` rule type; policies with other rule types (e.g., ``f`` for file, ``p`` for process, or ``r`` for registry) are not affected by the ``sca.remote_commands`` flag and will function without enabling it.
+
+      Remote command execution is disabled by default as a security measure to reduce the attack surface in case the Wazuh server is compromised. If you prefer not to enable remote commands, you can manually deploy policy files to each agent without using the Wazuh server to push them. For example, you can create the policy file directly on the monitored endpoint or use ``scp`` to copy the policy file to the endpoint.
 
 #. On the Wazuh server, place a new policy file in the ``/var/ossec/etc/shared/default`` folder and change its ownership. Replace ``<NEW_POLICY_FILE>`` with your policy name. 
 
