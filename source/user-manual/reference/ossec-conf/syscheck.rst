@@ -683,10 +683,10 @@ The database synchronization settings are configured inside this tag.
     <synchronization>
       <enabled>yes</enabled>
       <interval>5m</interval>
-      <response_timeout>30</response_timeout>
+      <response_timeout>60</response_timeout>
       <max_eps>10</max_eps>
+      <integrity_interval>86400</integrity_interval>
     </synchronization>
-
 
 **enabled**
 
@@ -713,7 +713,7 @@ Specifies the initial time interval between every inventory synchronization.
 Waiting time in seconds since a sync message is sent or received for the next synchronization activity.
 
 +--------------------+----------------------------------------------------------------------+
-| **Default value**  | 30                                                                   |
+| **Default value**  | 60                                                                   |
 +--------------------+----------------------------------------------------------------------+
 | **Allowed values** | Any number between 0 and ``interval``.                               |
 +--------------------+----------------------------------------------------------------------+
@@ -727,6 +727,16 @@ Sets the maximum synchronization message throughput.
 +--------------------+---------------------------------------------------------+
 | **Allowed values** | Integer number between 0 and 1000000. 0 means disabled. |
 +--------------------+---------------------------------------------------------+
+
+**integrity_interval**
+
+Controls how often the agent performs a periodic integrity validation for FIM databases. When the interval elapses, the agent calculates checksums and compares them with the manager. On mismatch, the agent triggers a recovery mechanism to resolve synchronization inconsistencies.
+
++--------------------+---------------------------------------------+
+| **Default value**  | ``86400`` (24 hours)                        |
++--------------------+---------------------------------------------+
+| **Allowed values** | Any non-negative integer (seconds).         |
++--------------------+---------------------------------------------+
 
 .. _reference_ossec_syscheck_diff:
 

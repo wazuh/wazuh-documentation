@@ -1098,8 +1098,9 @@ You can see below the default :ref:`synchronization <reference_ossec_syscheck_sy
         <synchronization>
           <enabled>yes</enabled>
           <interval>5m</interval>
-          <response_timeout>30</response_timeout>
+          <response_timeout>60</response_timeout>
           <max_eps>10</max_eps>
+          <integrity_interval>86400</integrity_interval>
         </synchronization>
       </syscheck>
 
@@ -1112,7 +1113,7 @@ The table below explains the supported attributes of the synchronization option:
   +---------------------+----------------------+---------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
   | interval            | 5m                   | Any number greater than or equal to 0. Allowed suffixes (s, m, h, d)                        | Sets the starting number of seconds to wait for a new database synchronization attempt.                                                                                                                 |
   +---------------------+----------------------+---------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-  | response_timeout    | 30                   | Any number greater than or equal to 0.                                                      | Specifies the minimum time in seconds that must elapse before considering a message sent to the manager as timed-out. If the agent message times out, the module starts a new synchronization session.  |
+  | response_timeout    | 60                   | Any number greater than or equal to 0.                                                      | Specifies the minimum time in seconds that must elapse before considering a message sent to the manager as timed-out. If the agent message times out, the module starts a new synchronization session.  |
   +---------------------+----------------------+---------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
   | max_eps             | 10                   | Integer number between 0 and 1000000. 0 means disabled.                                     | Sets the maximum synchronization message throughput.                                                                                                                                                    |
   +---------------------+----------------------+---------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
