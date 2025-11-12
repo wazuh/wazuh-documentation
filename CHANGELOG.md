@@ -3,7 +3,9 @@ All notable changes to this project will be documented in this file.
 
 ## [v4.14.1]
 
-- Support for Wazuh 4.14.1
+### Added
+
+- **Post-release**: Added clarification to the ``field`` option in the *Rules syntax* section. ([#9103](https://github.com/wazuh/wazuh-documentation/pull/9103))
 
 ## [v4.14.0]
 
