@@ -408,7 +408,21 @@ Upgrading the Wazuh manager
 
 #. Run the following command on the Wazuh manager node(s) to start the Wazuh manager service if you stopped it earlier:
 
-   .. include:: /_templates/common/start_manager.rst
+   .. tabs::
+
+      .. group-tab:: Systemd
+
+         .. code-block:: console
+
+            # systemctl daemon-reload
+            # systemctl enable wazuh-manager
+            # systemctl start wazuh-manager
+
+      .. group-tab:: SysV init
+
+         .. code-block:: console
+
+            # service wazuh-manager start
 
 Configuring CDB lists
 ^^^^^^^^^^^^^^^^^^^^^
@@ -534,6 +548,33 @@ When upgrading Wazuh, you must also update the Wazuh Filebeat module and the ale
       # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_CURRENT|/extensions/elasticsearch/7.x/wazuh-template.json
       # chmod go+r /etc/filebeat/wazuh-template.json
 
+#. Backup the ``/etc/filebeat/filebeat.yml`` file to preserve your custom Filebeat configuration settings. Create a copy of the file using the following command:
+
+   .. code-block:: console
+
+      # cp /etc/filebeat/filebeat.yml  /etc/filebeat/filebeat.yml.old
+
+#. Upgrade Filebeat to the latest version:
+
+   .. tabs::
+
+      .. group-tab:: Yum
+
+         .. code-block:: console
+
+            # yum upgrade filebeat
+
+      .. group-tab:: APT
+
+         .. code-block:: console
+
+            # apt-get install filebeat
+
+#. Restore your custom Filebeat configuration settings:
+
+   .. code-block:: console
+
+      # cp /etc/filebeat/filebeat.yml.old  /etc/filebeat/filebeat.yml
 
 #. Restart Filebeat:
 
