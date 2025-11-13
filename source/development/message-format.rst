@@ -69,14 +69,14 @@ Queue
 
     The most common queue types are:
 
-        **1** Local file log, including Syslog messages, Windows event logs, outputs from commands, OpenSCAP results and custom logs.
-        
+        **1** Local file log, including Syslog messages, Windows event logs, outputs from commands, and custom logs.
+
         **2** Remote Syslog messages, received by the Syslog server at *Remote daemon*.
-        
+
         **4** Secure messages. They are events from *Remote daemon* to *Analysis daemon*, that contain a standard OSSEC message plus the source agent ID.
-        
+
         **8** Syscheck event. *Analysis daemon* parses it using the Syscheck decoder.
-        
+
         **9** Rootcheck event. *Analysis daemon* parses it using the Rootcheck decoder.
 
 **Location**

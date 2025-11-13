@@ -108,7 +108,7 @@ Examples
 
    .. code-block:: console
 
-      # /var/ossec/bin/agent_upgrade -a 002 -d -f /root/upgrade_openscap_debian.wpk -x install.sh
+      # /var/ossec/bin/agent_upgrade -a 002 -d -f /root/wazuh-agent_v|WAZUH_CURRENT|_debian.wpk -x install.sh
 
    .. code-block:: none
        :class: output
