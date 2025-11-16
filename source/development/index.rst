@@ -8,7 +8,7 @@
 Development
 ===========
 
-This section contains documentation for developers. Here developers can learn about topics such as how to create a Wazuh cluster, the Standard OSSEC message format, and can find instructions to customize the installation of Wazuh, among others.
+This section of the documentation helps developers to understand Wazuh at the development level. It provides the technical resources required to understand the Wazuh architecture, extend its capabilities, and tailor the platform to specific operational requirements.
 
 .. topic:: Contents
 

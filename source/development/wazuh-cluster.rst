@@ -3,8 +3,8 @@
 .. meta::
     :description: Learn more about how to deploy a Wazuh cluster: introduction, architecture overview, code structure and troubleshooting.
 
-Wazuh cluster
-=============
+Wazuh server cluster
+====================
 
 - `Introduction`_
 - `Architecture overview`_
@@ -14,24 +14,28 @@ Wazuh cluster
 Introduction
 ------------
 
-Recommended reading: :doc:`Deploying a Wazuh cluster </user-manual/wazuh-server-cluster/index>`.
+We recommend reading: :doc:`Wazuh server cluster </user-manual/wazuh-server-cluster/index>`.
 
-Today's environments usually have thousands of new agents every day. A single manager architecture is not capable of managing so many events and, in consequence, the workload needs to be balanced among multiple nodes. Therefore, horizontal scaling arises as the proper approach to balance the load for a large number of agents.
+In high-demand environments, Wazuh agents are enrolled at scale and at a rapid pace. A single Wazuh server node has limited capacity to process such large volumes of events, making workload distribution necessary.  Therefore, horizontal scaling becomes the proper approach to balance the workload for a large number of agents.
 
-Wazuh's main workload is processing events from the agents and raise alerts. This is why all required information to receive events from the agents needs to be synchronized. This information is:
+The Wazuh server processes security events received from Wazuh agents and generates alerts. To ensure accurate event handling, all information required to receive and manage agent data must remain synchronized across Wazuh server nodes. This information includes:
 
-* The agents' keys so the nodes can accept incoming connections from agents.
-* The agents' shared configuration so the nodes can send the agents their configuration.
-* The agents' groups assignments, so every node knows which configuration to send to the agents.
-* The custom decoders, rules and CDB lists so the nodes can correctly process events from the agents.
-* The agents' last keep alive and OS information, which is received once the agents connect to a node and it's necessary to know whether an agent is reporting or not.
+- **Agent keys:** This allows Wazuh server nodes to accept incoming connections from the Wazuh agents.
 
-Having all this information synchronized, any cluster node is capable of processing and raising alerts from the agents, making it possible to horizontally scale a Wazuh environment when new agents are added.
+- **Agent shared configuration:** This allows the Wazuh server nodes to send the Wazuh agents their configuration.
+
+- **Agent group assignment:** This allows every Wazuh server node to know which configuration to send to the Wazuh agents.
+
+- **Custom decoders, rules and CDB lists:** This allows the Wazuh server nodes to correctly process events from the Wazuh agents.
+
+- **Agent last keep alive and OS information:** This is received once a Wazuh agent connects to a Wazuh server node. This helps to know whether the Wazuh agent is reporting or not.
+
+With this information synchronized, any node in the Wazuh server cluster can process data and generate alerts from connected Wazuh agents. This synchronization enables horizontal scaling, allowing the Wazuh environment to expand seamlessly as new agents are added.
 
 Architecture overview
 ---------------------
 
-The following diagram shows a typical Wazuh cluster architecture:
+The following diagram shows a typical Wazuh server cluster architecture:
 
 .. thumbnail:: ../images/manual/cluster/cluster-infrastructure.png
     :title: Wazuh cluster architecture
@@ -39,41 +43,48 @@ The following diagram shows a typical Wazuh cluster architecture:
     :align: center
     :width: 80%
 
-Agents are usually configured to report to a load balancer which is configured to send network packets to all nodes in the cluster. This way, new nodes can be added without modifying agents' configuration.
+Wazuh agents are configured to report to a load balancer, which distributes network traffic across all Wazuh server nodes in the cluster. This approach allows new server nodes to be added without modifying the agent configuration, as all agents communicate through a single load balancer IP address.
 
 .. note::
-    The wazuh cluster doesn't manage the load balancer.
+
+   The Wazuh server cluster doesn't manage the load balancer.
 
 Types of nodes
 ^^^^^^^^^^^^^^
 
-There are two different types of nodes inside the Wazuh cluster. These node types define the node's tasks inside the cluster and also, they define a hierarchy of nodes used to know which information prevails when doing synchronizations.
+There are two types of Wazuh server cluster nodes. The node types define the tasks performed by the node within the cluster, and also defines a hierarchy of nodes used to know which information prevails when doing synchronizations.
 
 Master
 ~~~~~~
 
-The master node is in charge of:
+The master node is responsible for:
 
-* Receive and manage agent registration requests.
-* Creating shared configuration groups.
-* Updating custom rules, decoders and CDB lists.
-* Synchronizing all this information to the workers.
+- Receiving and managing agent registration requests.
 
-All this information is called *Integrity* and is synchronized **from** the master **to** the workers no matter if the workers have a more recent modification time or a higher size.
+- Creating shared configuration groups.
+
+- Updating custom rules, decoders and CDB lists.
+
+- Synchronizing all this information to the workers nodes.
+
+All the outlined responsibilities of the master node listed above is called ``Integrity``. It is synchronized from the master to the workers even if the workers have a more recent modification time or a higher size.
 
 Master nodes can also receive and process events from agents the same way a worker would do.
 
 Worker
 ~~~~~~
 
-A worker node is in charge of:
+A worker node is responsible for:
 
-* Redirecting agent registration requests to the master.
-* Receiving updates from the master.
-* Receiving and processing events from agents.
-* Sending the master last keepalives from agents and remoted's group assignments.
+- Redirecting agent registration requests to the master node.
 
-If any integrity file is modified in a worker node, its content will be replaced with the contents the master node has.
+- Receiving updates from the master node.
+
+- Receiving and processing events from agents.
+
+- Sending last keep alive messages from agents and remoted group assignments to the master node.
+
+If any integrity file is modified in a worker node, its content will be replaced with the version on the master node.
 
 Workflow
 ^^^^^^^^
@@ -116,86 +127,105 @@ The following tasks can be found in the cluster, depending on the type of node t
 Keep alive thread
 ~~~~~~~~~~~~~~~~~
 
-The worker nodes send a keep-alive message to the master every so often. The master keeps the date of the last received keep alive and knows the interval the worker is using to send its keepalives. If the last keep alive received by a worker is older than a determined amount of time, the master considers the worker is disconnected and immediately closes the connection. When a worker realizes the connection has been closed, it automatically tries to reconnect again.
+Worker nodes in the Wazuh server cluster periodically send keep-alive messages to the master node. The master node records the timestamp of the last keep-alive received and monitors the expected interval for each worker. If a worker node fails to send a keep-alive within the defined time limit, the master marks it as disconnected and closes the connection. Once the worker node detects the disconnection, it automatically attempts to reconnect to the master node.
 
-This feature is very useful to drop nodes that are facing a network issue or aren't available at the moment.
+This mechanism helps maintain cluster stability by automatically removing nodes that are unreachable or experiencing network issues.
 
 
 Integrity thread
 ~~~~~~~~~~~~~~~~
 
-This thread is in charge of synchronizing master's integrity information among all worker nodes. The communication is started by the worker node and it has the following stages:
+The integrity thread is responsible for synchronizing integrity data between the Wazuh server master node and all worker nodes. The synchronization process is initiated by the worker node and occurs in the following stages:
 
-1. The worker asks the master for permission. The permission will be granted only after any previous synchronization process is finished. This is important to prevent overlapping, where a new synchronization process starts while another one is still running. Synchronization processes taking too long are considered locked due to errors. Once the process is flagged as locked, new integrity synchronization permissions can be granted. The maximum time a synchronization process is allowed to run is 1000 seconds by default. This can be modified with the ``max_locked_integrity_time`` variable in the `cluster.json <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|/framework/wazuh/core/cluster/cluster.json>`__ file.
-2. The worker sends the master a JSON file containing the following information:
+1. The worker node requests permission from the master node to start the synchronization process. Permission is granted only after any ongoing synchronization process has completed. This prevents overlap between concurrent synchronization operations. Synchronization processes that take too long are considered locked due to errors. When a process is marked as locked, new integrity synchronization requests can be approved.
 
-    * Path
-    * Modification time
-    * Blake2b checksum
-    * Whether the file is a merged file or not. And if it's merged:
+   By default, the maximum time allowed for a synchronization process is 1000 seconds. This value can be modified with the ``max_locked_integrity_time`` variable in the `cluster.json <https://github.com/wazuh/wazuh/blob/v4.12.0/framework/wazuh/core/cluster/cluster.json>`_ file.
 
-        * The merge type
-        * The filename
+2. The worker node sends the master node a JSON file containing the following information:
 
-3. The master compares the received checksums with its own and creates three different groups of files:
+   - Path
 
-    * Missing: Files that are present in the master node but missing in the worker. They must be created in the worker.
-    * Extra: Files that are present in the worker node but missing in the master. They must be removed in the worker node as well.
-    * Shared: Files that are present in both master and worker but have a different checksum. They must be updated in the worker node.
+   - Modification time
 
-   Then the master prepares a zip package with a JSON containing all this information and the required files the worker needs to update. The maximum zip size is specified in the ``max_zip_size`` variable of the `cluster.json <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|/framework/wazuh/core/cluster/cluster.json>`__ file. In case it is exceeded, the remaining files will be synced in the next iteration of Integrity.
+   - Blake2b checksum
 
-4. Once the worker receives the package, it updates the necessary files.
+   - Information showing whether the file is a merged file or not. If it is a merged file, it shows the following information:
 
-If there is no data to synchronize or there has been an error reading data from the worker, the worker is always notified about it. Also, if a timeout error occurs while the worker is waiting to receive the zip, the master will cancel the current task and reduce the zip size limit. The limit will gradually increase again if no new timeout errors occur.
+     - The merge type
+
+     - The filename
+
+3. The master node compares the received checksums with its own and creates three different file groups:
+
+   - **Missing:** Files that are present in the master node but are missing in the worker node. They must be created in the worker.
+
+   - **Extra:** Files that are present in the worker node but missing in the master. They must be removed from the worker node.
+
+   - **Shared:** Files that are present in both master and worker but have a different checksum. They must be updated on the worker node with the version from the master node.
+
+   The master node then creates a ZIP package containing a JSON file with the required integrity information and any files the worker node needs to update. The maximum size of this package is defined by the ``max_zip_size`` variable in the `cluster.json <https://github.com/wazuh/wazuh/blob/v4.12.0/framework/wazuh/core/cluster/cluster.json>`_ file. If the package exceeds this limit, the remaining files are synchronized during the next integrity synchronization cycle.
+
+4. Once the worker node receives the package, it updates the necessary files. If there is no data to synchronize or there has been an error reading data from the worker, the worker is always notified about it. Also, if a timeout error occurs while the worker node is waiting to receive the zip, the master node will cancel the current task and reduce the zip size limit. The limit will gradually increase again if no new timeout errors occur.
 
 .. _agent-info:
 
 Agent info thread
 ~~~~~~~~~~~~~~~~~
 
-This thread is in charge of synchronizing the agent's last keepalives and operating system information with the master. The communication here is also started by the worker and it has the following stages:
+The agent info thread synchronizes the last keep-alive messages and operating system information from worker nodes with the Wazuh server master node. The synchronization process is initiated by the worker node and occurs in the following stages:
 
-1. The worker asks the master for permission. This is important to prevent a new synchronization process to start if there is already one synchronization process at the moment.
-2. The worker asks to its local :ref:`wazuh-db <wazuh-db>` service for the information of agents marked as not synchronized.
-3. The worker sends the master a JSON string containing the information retrieved from wazuh-db.
-4. The master sends the received information to its local wazuh-db service, where it is updated.
+1. The worker node requests permission from the master node before starting synchronization. This prevents multiple synchronization processes from running at the same time.
 
-If there is an error during the update process of one of the chunks in the master's database, the worker is notified.
+2. The worker node queries the local :ref:`wazuh-db <wazuh-db>` service to retrieve information about agents marked as not synchronized.
+
+3. The worker node sends the master node a JSON string containing the information retrieved from wazuh-db.
+
+4. The master node sends the received information to its local wazuh-db service, where it is updated.
+
+.. note::
+
+   If there is an error during the update process of one of the chunks in the database of the master node, the worker node is notified.
 
 .. _agent-groups-sync:
 
 Agent groups send thread
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-This thread is in charge of synchronizing information of agents' groups assignment (abbr. agent-groups) in the master to all the workers. The aim is that every agent-group received in the master ends up in the database of all the worker nodes. The communication is started by the master node (behaving like a broadcast) and it follows these stages:
+The agent groups send thread synchronizes Wazuh agent group assignments (agent-groups) from the master node to all worker nodes in the Wazuh server cluster. Its purpose is to ensure that agent-group information stored on the master node is replicated in the databases of all worker nodes. The communication is initiated by the master node and follows these stages:
 
-1. When there is new agent-groups information, the master sends a JSON string with it to each worker. This is done only once per node.
-2. The workers send the received information to their local :ref:`wazuh-db <wazuh-db>` service, where it is updated.
-3. The worker compares the checksum of its database with the checksum of the master.
-4. If the checksum has been different for 10 consecutive times, the worker notifies the master.
-5. When notified, the master sends to the worker all the agent-groups information.
-6. The worker overwrites its database with the agent-groups information it has received from the master.
+1. When there is new agent-groups information, the master node sends a JSON string with it to each worker node. This is done only once per worker node.
+
+2. The worker nodes send the received information to their local :ref:`wazuh-db <wazuh-db>` service, where it is updated.
+
+3. The worker nodes compare the checksum of their database with the checksum of the master node.
+
+4. If the checksum has been different for 10 consecutive times, the worker node notifies the master node.
+
+5. When notified, the master node sends all the agent-groups information to the worker node.
+
+6. The worker node overwrites its database with the agent-groups information it has received from the master node.
 
 Local agent-groups thread
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This thread is only executed by the master. It periodically asks to its local :ref:`wazuh-db <wazuh-db>` service new information (since the last time this task was run) of agent-groups. The task is not repeated until such information is sent to all worker nodes.
+The local agent-groups thread runs exclusively on the Wazuh server master node. It periodically queries the local :ref:`wazuh-db <wazuh-db>` service for any new or updated agent-group information since the last execution. The process doesn't repeat until all updated agent-group data has been successfully distributed to every worker node in the cluster.
 
 Local integrity thread
 ~~~~~~~~~~~~~~~~~~~~~~
 
-This thread is only executed by the master. It periodically reads all its integrity files and calculates their checksums. Calculating a checksum is a slow process, and it can reduce performance when there are multiple workers in the cluster since the checksums would need to be calculated for every worker. To fix that problem, this thread calculates the necessary integrity checksums and stores it in a global variable which is periodically updated.
+The local integrity thread runs exclusively on the Wazuh server master node. It periodically reads all integrity files and calculates their checksums. Checksum calculation is slow and reduces performance in clusters with many worker nodes, since each worker node requires its own checksum. To optimize performance, this thread calculates the required integrity checksums once and stores them in a global variable that is periodically updated.
 
 Sendsync thread
 ~~~~~~~~~~~~~~~
 
-Although not shown in the workflow schema above, Sendsync is another Wazuh cluster task. It is only executed on the master and allows redirection of messages coming from worker nodes to master services. For example, this process makes possible pointing to the IP address of a worker node when registering an agent. In this case, Sendsync takes the registration request from the worker node and redirects it to the master's Authd service.
+The sendsync thread is a Wazuh server cluster task executed exclusively on the master node. Although not shown in the workflow diagram, it enables the redirection of messages received from worker nodes to the appropriate master node services.
+
+This mechanism allows agent registration requests to be processed even when agents are configured to connect to a worker node. In such cases, the sendsync thread receives the registration request from the worker node and forwards it to the master node's `Authd <https://documentation.wazuh.com/current/user-manual/reference/daemons/wazuh-authd.html>`_ service.
 
 Distributed API thread
 ~~~~~~~~~~~~~~~~~~~~~~
 
-This thread isn't shown in the schema either. It runs in both master and worker since it's independent of the node type. It's used to receive API requests and forward them to the most suitable node to process the request. The operation of this thread will be explained later.
+This thread isn't shown in the schema either. It runs in both master and worker nodes since it is independent of the node type. It is used to receive API requests and forward them to the most suitable node to process the request. The operation of this thread will be explained in later sections.
 
 Code structure
 --------------

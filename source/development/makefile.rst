@@ -8,42 +8,41 @@
 Makefile options
 ================
 
-This section contains instructions to customize the installation of Wazuh by compiling the source code before executing the installation script.
-
-You can also find here the different settings available for the ``Makefile``. Each setting is described and includes the default and allowed values that you can use.
-
+This section contains instructions to customize the installation of Wazuh by compiling the source code before executing the installation script. It also details the available ``Makefile`` configuration options, including descriptions, default values, and allowed values for each setting.
 
 Compiling the source code
 -------------------------
 
-When following the official documentation to install the Wazuh :doc:`server </deployment-options/wazuh-from-sources/wazuh-server/index>` or the :doc:`agent </deployment-options/wazuh-from-sources/wazuh-agent/index>` from sources, the user runs the ``install.sh`` script. This will automatically compile the source code before installing it, but some customizations can be made prior to the script execution.
+When following the official documentation to install the :doc:`Wazuh server </deployment-options/wazuh-from-sources/wazuh-server/index>` or the :doc:`Wazuh agent </deployment-options/wazuh-from-sources/wazuh-agent/index>` from sources, the user runs the ``install.sh`` script. This script automatically compiles the source code before installing it, but some customizations can be made prior to the script execution.
 
-To compile the code with ``make``, the working directory must be where the ``MAKEFILE`` resides, in this case, the ``/src`` directory of the installation folder:
+To compile the code with ``make``, the working directory must be where the ``Makefile`` resides. In this case, the ``/src`` directory of the installation folder:
 
 .. code-block:: console
 
-  # cd wazuh/src
-  # make deps
-  # make <OPTIONS>
+   # cd wazuh/src
+   # make deps
+   # make <OPTIONS>
 
 .. note::
-      By default, the ``make deps`` command will download the necessary pre-compiled dependencies for manager nodes. To download the dependencies of the agent type nodes, it is necessary to indicate ``TARGET=agent`` or ``TARGET=winagent`` in case it is a Windows agent.
 
-.. note::
-      To download the external dependencies without pre-compiled files, the ``make deps`` command will need to be executed with the ``EXTERNAL_SRC_ONLY=yes`` flag. The external dependencies will be built as part of the Wazuh compilation process.
+   By default, the ``make deps`` command will download the necessary pre-compiled dependencies for Wazuh manager nodes. To download the dependencies for the  Wazuh agent type nodes, it is necessary to indicate ``TARGET=agent`` or ``TARGET=winagent`` in case it is a Windows agent. 
+   To download the external dependencies without pre-compiled files, the ``make deps`` command needs to be executed with the ``EXTERNAL_SRC_ONLY=yes flag``. The external dependencies will be built as part of the Wazuh compilation process.
 
 After compiling the source code, now you can execute the installation script:
 
 .. code-block:: console
 
-  # cd ../
-  # ./install.sh
+   # cd ../
+   # ./install.sh
 
 .. warning::
-  Some dependencies must be downloaded before compiling. If ``make deps`` is not executed before that, an error message will appear asking the user to do it.
+
+   Some dependencies must be downloaded before compiling. If ``make deps`` is not executed before that, an error message will appear asking the user to do it.
 
 Makefile reference
 ------------------
+
+We show available targets and flags for using the ``Makefile`` command.
 
 Available targets
 ^^^^^^^^^^^^^^^^^
@@ -103,13 +102,13 @@ Available flags
 |                           +------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
 |                           | Allowed values   | server, local, hybrid, agent, winagent                                                                                                       |
 +---------------------------+------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
-| **V**                     | Display full compiler messages.                                                                                                                                 |
+| **V**                     | Displays full compiler messages.                                                                                                                                |
 |                           +------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
 |                           | Default value    | n/a                                                                                                                                          |
 |                           +------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
 |                           | Allowed values   | 1, yes, YES, y, Y                                                                                                                            |
 +---------------------------+------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
-| **DEBUG**                 | Build with symbols and without optimization.                                                                                                                    |
+| **DEBUG**                 | Builds with symbols and without optimization.                                                                                                                   |
 |                           +------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
 |                           | Default value    | n/a                                                                                                                                          |
 |                           +------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
@@ -121,13 +120,13 @@ Available flags
 |                           +------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
 |                           | Allowed values   | 1, yes, YES, y, Y                                                                                                                            |
 +---------------------------+------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
-| **INSTALLDIR**            | Wazuh's installation path. Mandatory when compiling the python interpreter from sources using ``PYTHON_SOURCE``.                                                |
+| **INSTALLDIR**            | Wazuh installation path. Mandatory when compiling the python interpreter from sources using ``PYTHON_SOURCE``.                                                  |
 |                           +------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
 |                           | Default value    | n/a                                                                                                                                          |
 |                           +------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
 |                           | Allowed values   | Any valid absolute path.                                                                                                                     |
 +---------------------------+------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
-| **ONEWAY**                | Disables the manager ACK towards the agent. It allows connecting agents without a backward connection from the manager.                                         |
+| **ONEWAY**                | Disables the Wazuh manager ACK towards the agent. It allows connecting agents without a backward connection from the manager.                                   |
 |                           +------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
 |                           | Default value    | n/a                                                                                                                                          |
 |                           +------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
@@ -139,79 +138,79 @@ Available flags
 |                           +------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
 |                           | Allowed values   | 1, yes, YES, y, Y                                                                                                                            |
 +---------------------------+------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
-| **RESOURCES_URL**         | Set the Wazuh resources URL.                                                                                                                                    |
+| **RESOURCES_URL**         | Sets the Wazuh resources URL.                                                                                                                                   |
 |                           +------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
 |                           | Default value    | ``https://packages.wazuh.com/deps/$(VERSION)``                                                                                               |
 |                           +------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
 |                           | Allowed values   | Any valid URL string.                                                                                                                        |
 +---------------------------+------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
-| **USE_ZEROMQ**            | Build with ZeroMQ support.                                                                                                                                      |
+| **USE_ZEROMQ**            | Builds with ZeroMQ support.                                                                                                                                     |
 |                           +------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
 |                           | Default value    | n/a                                                                                                                                          |
 |                           +------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
 |                           | Allowed values   | 1, yes, YES, y, Y                                                                                                                            |
 +---------------------------+------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
-| **USE_PRELUDE**           | Build with Prelude support.                                                                                                                                     |
+| **USE_PRELUDE**           | Builds with Prelude support.                                                                                                                                    |
 |                           +------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
 |                           | Default value    | n/a                                                                                                                                          |
 |                           +------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
 |                           | Allowed values   | 1, yes, YES, y, Y                                                                                                                            |
 +---------------------------+------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
-| **USE_INOTIFY**           | Build with Inotify support.                                                                                                                                     |
+| **USE_INOTIFY**           | Builds with Inotify support.                                                                                                                                    |
 |                           +------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
 |                           | Default value    | n/a                                                                                                                                          |
 |                           +------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
 |                           | Allowed values   | 1, yes, YES, y, Y                                                                                                                            |
 +---------------------------+------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
-| **USE_MSGPACK_OPT**       | Build with Msgpack full optimization.                                                                                                                           |
+| **USE_MSGPACK_OPT**       | Builds with Msgpack full optimization.                                                                                                                          |
 |                           +------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
 |                           | Default value    | n/a                                                                                                                                          |
 |                           +------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
 |                           | Allowed values   | 1, yes, YES, y, Y                                                                                                                            |
 +---------------------------+------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
-| **BIG_ENDIAN**            | Build with big endian support.                                                                                                                                  |
+| **BIG_ENDIAN**            | Builds with big endian support.                                                                                                                                 |
 |                           +------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
 |                           | Default value    | n/a                                                                                                                                          |
 |                           +------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
 |                           | Allowed values   | 1, yes, YES, y, Y                                                                                                                            |
 +---------------------------+------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
-| **USE_SELINUX**           | Build with SELinux policies.                                                                                                                                    |
+| **USE_SELINUX**           | Builds with SELinux policies.                                                                                                                                   |
 |                           +------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
 |                           | Default value    | n/a                                                                                                                                          |
 |                           +------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
 |                           | Allowed values   | 1, yes, YES, y, Y                                                                                                                            |
 +---------------------------+------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
-| **USE_AUDIT**             | Build with audit service support.                                                                                                                               |
+| **USE_AUDIT**             | Builds with audit service support.                                                                                                                              |
 |                           +------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
 |                           | Default value    | n/a                                                                                                                                          |
 |                           +------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
 |                           | Allowed values   | 1, yes, YES, y, Y                                                                                                                            |
 +---------------------------+------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
-| **DISABLE_JEMALLOC**      | Disable the integration of jemalloc library.                                                                                                                    |
+| **DISABLE_JEMALLOC**      | Disables the integration of the jemalloc library.                                                                                                               |
 |                           +------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
 |                           | Default value    | n/a                                                                                                                                          |
 |                           +------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
 |                           | Allowed values   | 1, yes, YES, y, Y                                                                                                                            |
 +---------------------------+------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
-| **PYTHON_SOURCE**         | Used along the ``deps`` target. Downloads the sources needed to build the python interpreter.                                                                   |
+| **PYTHON_SOURCE**         | Used along with the ``deps`` target. Downloads the sources needed to build the python interpreter.                                                              |
 |                           +------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
 |                           | Default value    | n/a                                                                                                                                          |
 |                           +------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
 |                           | Allowed values   | 1, yes, YES, y, Y                                                                                                                            |
 +---------------------------+------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
-| **USE_GEOIP**             | Build with GeoIP support.                                                                                                                                       |
+| **USE_GEOIP**             | Builds with GeoIP support.                                                                                                                                      |
 |                           +------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
 |                           | Default value    | n/a                                                                                                                                          |
 |                           +------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
 |                           | Allowed values   | 1, yes, YES, y, Y                                                                                                                            |
 +---------------------------+------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
-| **OPTIMIZE_CPYTHON**      | Enable this flag to optimize the python interpreter build, which is performed when used ``PYTHON_SOURCE``.                                                      |
+| **OPTIMIZE_CPYTHON**      | Enable this flag to optimize the python interpreter build, which is performed when using ``PYTHON_SOURCE``.                                                     |
 |                           +------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
 |                           | Default value    | n/a                                                                                                                                          |
 |                           +------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
 |                           | Allowed values   | 1, yes, YES, y, Y                                                                                                                            |
 +---------------------------+------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
-| **DATABASE**              | Build with database support. Allows support for MySQL or PostgreSQL.                                                                                            |
+| **DATABASE**              | Builds with database support. Allows support for MySQL or PostgreSQL.                                                                                           |
 |                           +------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
 |                           | Default value    | n/a                                                                                                                                          |
 |                           +------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
@@ -229,7 +228,7 @@ Available flags
 |                           +------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
 |                           | Allowed values   | Any string.                                                                                                                                  |
 +---------------------------+------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
-| **DISABLE_SYSC**          | Disable the compilation of the Syscollector module.                                                                                                             |
+| **DISABLE_SYSC**          | Disables the compilation of the Syscollector module.                                                                                                            |
 |                           +------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
 |                           | Default value    | n/a                                                                                                                                          |
 |                           +------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
