@@ -6,19 +6,21 @@
 Configuring core dump generation
 ================================
 
-A *core dump* or *crash dump* is a snapshot of a process's memory taken when a serious or unhandled error occurs. The operating system on a monitored endpoint can automatically generate core dumps. These dumps are valuable for diagnosing hanging processes. Alongside environment information, such as the operating system version, they can offer insights into the cause of a crash.
+A core dump or crash dump is a snapshot of the memory of a process taken when a program terminates abnormally, such as due to a crash or unhandled error. The operating system on a monitored endpoint can automatically generate core dumps. These dumps are valuable for diagnosing frozen processes. Alongside environment information, such as the operating system version, they offer insights into the cause of a crash.
 
 Red Hat based OSs
 -----------------
 
-#. Edit the Systemd ``/etc/systemd/system.conf`` file. Add the following lines.
+Follow the steps below to enable core dump on RedHat based systems:
+
+#. Edit the ``/etc/systemd/system.conf`` file and add the following lines.
 
    .. code-block:: console
 
       DumpCore=yes
       DefaultLimitCORE=infinity
 
-#. Edit the Systemd ``/etc/sysctl.d/core.conf`` file. Add the following lines.
+#. Edit the ``/etc/sysctl.d/core.conf`` file and add the following lines:
 
    .. code-block:: console
 
@@ -26,22 +28,27 @@ Red Hat based OSs
       kernel.core_uses_pid = 1
       fs.suid_dumpable = 2
 
-#. Create directory ``/var/lib/coredumps`` and grant it permissions ``773``.
+#. Create the ``/var/lib/coredumps`` directory and grant it permissions ``773``:
 
-#. Reboot the system
+   .. code-block:: console
 
-#. After system reboot set the core ``ulimit`` to ``unlimited`` in your terminal.
+      # mkdir /var/lib/coredumps
+      # chmod 700 /var/lib/coredumps
+
+#. Reboot the system.
+
+#. After system reboot, set the core ``ulimit`` to ``unlimited`` in your terminal:
 
    .. code-block:: console
 
       # ulimit -c unlimited
       # sysctl -p
 
-#. Restart wazuh agent:
+#. Restart the Wazuh agent:
 
    .. code-block:: console
 
-      # ./var/ossec/bin/wazuh-control restart
+      # /var/ossec/bin/wazuh-control restart
       
 
 Debian based OSs
@@ -49,39 +56,38 @@ Debian based OSs
 
 In Linux version 2.41 and later, a template defines the location and name of the generated `core dump files <https://man7.org/linux/man-pages/man5/core.5.html>`__. Earlier versions generate the core dump files next to the location of the file that caused the error.
 
-Using `systemd`
-^^^^^^^^^^^^^^^
+Using systemd
+^^^^^^^^^^^^^
 
-Systemd allows centralized management and configuration of core dumps across your system. To set up core dump generation with systemd, use the built-in features as follows.
+Systemd allows centralized management and configuration of core dumps across your system. To set up core dump generation with systemd, use the built-in features as follows:
 
-#. Check that the Systemd core dump unit socket is active.
+#. Install the Systemd core dump package:
 
    .. code-block:: console
 
-      # systemctl status systemd-coredump*
+      # apt install systemd-coredump
+
+#. Check that the Systemd core dump unit socket is active:
+
+   .. code-block:: console
+
+      # systemctl status systemd-coredump.socket
 
    .. code-block:: none
       :class: output
-      :emphasize-lines: 3
 
-      ● systemd-coredump.socket - Process Core Dump Socket
+      systemd-coredump.socket - Process Core Dump Socket
            Loaded: loaded (/lib/systemd/system/systemd-coredump.socket; static)
-           Active: active (listening) ...
+          Active: active (listening)...
 
-#. Edit the Systemd ``/etc/systemd/coredump.conf`` file.
-
-   .. code-block:: console
-
-      # systemctl edit systemd-coredump
-
-#. Add the following lines in the editor that opens to enable core dump collection and set external core dump storage. To disable core dump generation you must set ``Storage=none``.
+#. Edit the ``/etc/systemd/coredump.conf`` file, and add the following lines to enable core dump collection and set external core dump storage. To disable core dump generation you must set ``Storage=none``.
 
    .. code-block:: console
 
       [Coredump]
       Storage=external
 
-#. **Recommended** – Set a size limit for core dump files. For example, 2 GB.
+#. **Recommended** – Add this configuration to the ``/etc/systemd/coredump.conf`` file to set a size limit for core dump files. For example, 2 GB.
 
    .. code-block:: console
 
@@ -91,13 +97,13 @@ Systemd allows centralized management and configuration of core dumps across you
 
    .. code-block:: console
 
-      # systemctl restart systemd-coredump
+      # systemctl restart systemd-coredump.socket
 
-#. Check the status of the systemd-coredump service to ensure it is running without errors.
+#. Check the status of the systemd-coredump service to ensure it is running without errors:
 
    .. code-block:: console
 
-      # systemctl status systemd-coredump
+      # systemctl status systemd-coredump.socket
 
 #. To check the generated core dump files, take a look at the default ``/var/lib/systemd/coredump/`` directory. To find out the filename pattern for these files, run the following command.
 
@@ -108,7 +114,7 @@ Systemd allows centralized management and configuration of core dumps across you
    .. code-block:: none
       :class: output
 
-      │|/lib/systemd/systemd-coredump %P %u %g %s %t
+      |/lib/systemd/systemd-coredump %P %u %g %s %t 9223372036854775808 %h %d
 
 Manual configuration
 ^^^^^^^^^^^^^^^^^^^^
@@ -121,7 +127,7 @@ Setting up core dump generation without using systemd involves configuring the o
 
       # ulimit -c unlimited
 
-#. Set the core dump file location and pattern. For example, to set the  the ``/var/core/`` directory and the filename pattern ``core.%e.%p``, where ``%e`` represents the executable name and ``%p`` represents the process ID, run the following command.
+#. Set the core dump file location and pattern. For example, to set the ``/var/core/`` directory and the filename pattern ``core.%e.%p``, where ``%e`` represents the executable name and ``%p`` represents the process ID, run the following command.
 
    .. code-block:: console
 
@@ -129,16 +135,16 @@ Setting up core dump generation without using systemd involves configuring the o
 
    To discard core dumps, you can run ``echo "/dev/null" > /proc/sys/kernel/core_pattern``.
 
-   .. note::
+.. note::
 
-      Consider restarting relevant processes to ensure that the changes take effect.
+   Consider restarting relevant processes to ensure that the changes take effect.
 
-#. **Recommended** – To preserve these changes across reboots, add the ``ulimit`` and ``echo`` commands above to a startup or system initialization script such as ``/etc/rc.local``.
+#. We recommend preserving these changes across reboots. Add the ``ulimit`` and ``echo`` commands above to a startup or system initialization script such as ``/etc/rc.local``.
 
 macOS endpoints
 ---------------
 
-On macOS, most applications have core dump generation disabled by default. However, you can enable it using the ``ulimit`` command. To enable core dump generation on macOS follow these steps.
+On macOS, most applications have core dump generation disabled by default. However, you can enable it using the ``ulimit`` command. To enable core dump generation on macOS follow these steps:
 
 #. Set the core dump size limit to ``unlimited`` to enable core dump generation with complete debugging information. To disable it, set it to zero by running ``ulimit -c 0``. To check the current core dump size limit, run ``ulimit -c``.
 
@@ -146,7 +152,7 @@ On macOS, most applications have core dump generation disabled by default. Howev
 
       # ulimit -c unlimited
 
-#. Set the core dump generation path and filename pattern. For example, to set the ``/cores/`` directory and the filename pattern ``core.%P``, where ``%P`` is the process ID, run the following command.
+#. Set the core dump generation path and filename pattern. For example, to set the ``/cores/`` directory and the filename pattern ``core.%P``. Where ``%P`` is the process ID, run the following command.
 
    .. code-block:: console
 
@@ -162,7 +168,7 @@ To collect user-mode crash dumps on Windows, you can use the Windows Error Repor
 Accessing the Windows Registry
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Press **Windows + R** keys on your keyboard to open the **Run** dialog box.
+#. Press **Windows** + **R** keys on your keyboard to open the Run dialog box.
 
 #. Type ``regedit`` in the search box and click **OK** to open the Registry editor.
 
@@ -177,15 +183,15 @@ Configuring Windows Error Reporting
 
       HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\Windows Error Reporting\LocalDumps
 
-#. Right-click on the ``LocalDumps`` key and choose **New** > **Key**. Name the new key ``wazuh-agent.exe``.
+#. Right-click on the ``LocalDumps`` key and choose **New > Key**. Name the new key ``wazuh-agent.exe``.
 
-#. Right-click inside the ``wazuh-agent.exe`` key and choose **New** > **Expandable String Value**. Name the new value ``DumpFolder``.
+#. Right-click inside the ``wazuh-agent.exe`` key and choose **New > Expandable String Value**. Name the new value ``DumpFolder``.
 
 #. Right-click the ``DumpFolder`` value and select **Modify**. Change it to ``%LOCALAPPDATA%\WazuhCrashDumps``.
 
-#. Right-click inside the ``wazuh-agent.exe`` key again and choose **New** > **DWORD (32-bit) Value**. Name the new value ``DumpType``.
+#. Right-click inside the ``wazuh-agent.exe`` key again and choose **New > DWORD (32-bit) Value**. Name the new value as ``DumpType``.
 
-#. Right-click the ``DumpType`` value and select **Modify**. Change it to  ``2``.
+#. Right-click the ``DumpType`` value and select **Modify**. Change it to ``2``.
 
 #. Close the regedit tool and restart the Wazuh agent using PowerShell with administrator privileges.
 
