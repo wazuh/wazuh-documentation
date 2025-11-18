@@ -232,9 +232,9 @@ Code structure
 
 The cluster is built on top of `asyncio.Protocol <https://docs.python.org/3/library/asyncio-protocol.html>`_. This Python framework helps us to develop asynchronous communication protocols by just defining a few functions:
 
-* ``connection_made``: Defines what to do when a client connects to a Wazuh server and when the Wazuh server receives a new connection.
-* ``connection_lost``: Defines what to do when the connection is closed. It includes an argument containing an exception in case the connection was closed due to an error.
-* ``data_received``: Defines what to do when data is received from the other peers.
+- ``connection_made``: Defines what to do when a client connects to a Wazuh server and when the Wazuh server receives a new connection.
+- ``connection_lost``: Defines what to do when the connection is closed. It includes an argument containing an exception in case the connection was closed due to an error.
+- ``data_received``: Defines what to do when data is received from the other peers.
 
 The wazuh cluster protocol is defined on top of this framework. The following diagram shows all Python classes defined based on ``asyncio.Protocol``:
 
@@ -278,10 +278,10 @@ The protocol message has two parts: a header and a payload. The payload will be 
 
 The header has four subparts:
 
-* **Counter**: It specifies the message ID. It's randomly generated for every new sent request. It's very useful when receiving a response, so it indicates which sent request it is replying to.
-* **Payload length**: Specifies the amount of data contained in the message payload. Used to know how much data to expect to receive.
-* **Command**: Specifies protocol message. This string will always be 11 characters long. If the command is not 11 characters long, a padding of ``-`` is added until the string reaches the expected length. All available commands in the protocol are shown below.
-* **Flag message divided**: Specifies whether the message has been divided because its initial payload length was more than 5242880 bytes or not. The flag value can be ``d`` if the message is a divided one, or nothing (it will be ``-`` due to the padding mentioned above) if the message is the end of a divided message or a single message.
+- **Counter**: It specifies the message ID. It's randomly generated for every new sent request. It's very useful when receiving a response, so it indicates which sent request it is replying to.
+- **Payload length**: Specifies the amount of data contained in the message payload. Used to know how much data to expect to receive.
+- **Command**: Specifies protocol message. This string will always be 11 characters long. If the command is not 11 characters long, a padding of ``-`` is added until the string reaches the expected length. All available commands in the protocol are shown below.
+- **Flag message divided**: Specifies whether the message has been divided because its initial payload length was more than 5242880 bytes or not. The flag value can be ``d`` if the message is a divided one, or nothing (it will be ``-`` due to the padding mentioned above) if the message is the end of a divided message or a single message.
 
 
 Wazuh cluster protocol
@@ -458,13 +458,13 @@ Child processes are created when the parent wazuh-clusterd starts. They stay in 
 
 Master node
 ###########
-* **Local integrity thread**: This calculates the hash of all the files to be synchronized. This requires high CPU usage.
-* **Agent info thread**: A section of this task sends all the Wazuh agent information to the wazuh-db. The communication is done in small chunks so as not to saturate the service socket. This turned this task into a somewhat slow process and not a good candidate for asyncio.
-* **Integrity thread**: Compressing files, which is done inside this task, is fully synchronous and can block the parent cluster process.
+- **Local integrity thread**: This calculates the hash of all the files to be synchronized. This requires high CPU usage.
+- **Agent info thread**: A section of this task sends all the Wazuh agent information to the wazuh-db. The communication is done in small chunks so as not to saturate the service socket. This turned this task into a somewhat slow process and not a good candidate for asyncio.
+- **Integrity thread**: Compressing files, which is done inside this task, is fully synchronous and can block the parent cluster process.
 
 Worker nodes
 ############
-* **Integrity thread**: This is the only task in the Wazuh server worker nodes that uses multiprocessing. It carries out the following CPU intensive actions:
+- **Integrity thread**: This is the only task in the Wazuh server worker nodes that uses multiprocessing. It carries out the following CPU intensive actions:
 
    * **Hash calculation**: This calculates the hash of all the files to be synchronized every time Integrity check is started.
    * **Unzip files**: This extracts files and can take too long when the zip is large.
@@ -489,13 +489,13 @@ This section explains the integrity synchronization process and how asyncio task
     :width: 80%
 
 
-* **1**: The ``sync_integrity`` task on the worker wakes up after sleeping during interval seconds (which is defined in the `cluster.json <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|/framework/wazuh/core/cluster/cluster.json>`__ file). The first thing it does is checking whether the previous synchronization process is finished or not using the ``syn_i_w_m_p`` command. The master replies with a boolean value specifying that the previous synchronization process is finished, and the worker can start a new one.
-* **2**: The worker starts the synchronization process using the ``syn_i_w_m`` command. When the master receives the command, it creates an asyncio task to process the received integrity from the worker. But since no file has been received yet, the task keeps waiting until the worker sends the file. The master sends the worker the task ID so the worker can notify the master to wake it up once the file has been sent.
-* **3**: The worker node starts the sending file process. Which has three steps: ``new_file``, ``file_upd`` and ``file_end``.
-* **4**: The worker notifies the master that the integrity file has already been sent. At that moment, the master wakes the previously created task up and compares the worker files with its own. In this example the master finds out the worker's integrity  is outdated.
-* **5**: The master starts a sync integrity process with the worker using the ``syn_m_c`` command. The worker creates a task to process the integrity received from the master, but the task is sleeping since it has not been received yet. This is the same process the worker has done with the master but changing directions.
-* **6**: The master sends all information to the worker through the sending file process.
-* **7**: The master notifies the worker that the integrity information has already been sent using the ``syn_m_c_e`` command. The worker wakes the previously created task up to process and update the required files.
+- **1**: The ``sync_integrity`` task on the worker wakes up after sleeping during interval seconds (which is defined in the `cluster.json <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|/framework/wazuh/core/cluster/cluster.json>`__ file). The first thing it does is checking whether the previous synchronization process is finished or not using the ``syn_i_w_m_p`` command. The master replies with a boolean value specifying that the previous synchronization process is finished, and the worker can start a new one.
+- **2**: The worker starts the synchronization process using the ``syn_i_w_m`` command. When the master receives the command, it creates an asyncio task to process the received integrity from the worker. But since no file has been received yet, the task keeps waiting until the worker sends the file. The master sends the worker the task ID so the worker can notify the master to wake it up once the file has been sent.
+- **3**: The worker node starts the sending file process. Which has three steps: ``new_file``, ``file_upd`` and ``file_end``.
+- **4**: The worker notifies the master that the integrity file has already been sent. At that moment, the master wakes the previously created task up and compares the worker files with its own. In this example the master finds out the worker's integrity  is outdated.
+- **5**: The master starts a sync integrity process with the worker using the ``syn_m_c`` command. The worker creates a task to process the integrity received from the master, but the task is sleeping since it has not been received yet. This is the same process the worker has done with the master but changing directions.
+- **6**: The master sends all information to the worker through the sending file process.
+- **7**: The master notifies the worker that the integrity information has already been sent using the ``syn_m_c_e`` command. The worker wakes the previously created task up to process and update the required files.
 
 To sum up, asynchronous tasks are created only when the received request needs to wait for some data to be available (for example, synchronization tasks waiting for the zip file from the other peer). If the request can be solved instantly, no asynchronous tasks are created for it.
 
@@ -504,9 +504,9 @@ Distributed API requests
 
 Another example that can show how asynchronous tasks are used is Distributed API requests. Before explaining the example, we review the different type of requests that can be done in the distributed API:
 
-* ``local_any``: The request can be solved by any Wazuh server node. These requests are usually information that the Wazuh server master node distributes to all nodes such as rules, decoders or CDB lists. These requests will never be forwarded or solved remotely.
-* ``local_master``: The request can be solved by the Wazuh server master node. These requests are usually information about the global status and management of the cluster such as agent information/status/management, agent groups management, cluster information, etc.
-* ``distributed_master``: The Wazuh server master node must forward the request to the most suitable node to solve it.
+- ``local_any``: The request can be solved by any Wazuh server node. These requests are usually information that the Wazuh server master node distributes to all nodes such as rules, decoders or CDB lists. These requests will never be forwarded or solved remotely.
+- ``local_master``: The request can be solved by the Wazuh server master node. These requests are usually information about the global status and management of the cluster such as agent information/status/management, agent groups management, cluster information, etc.
+- ``distributed_master``: The Wazuh server master node must forward the request to the most suitable node to solve it.
 
 The type association with every endpoint can be found here: `API controllers <https://github.com/wazuh/wazuh/tree/v|WAZUH_CURRENT|/api/api/controllers>`__.
 
@@ -517,15 +517,15 @@ Imagine a Wazuh server cluster with two nodes, where there is an agent reporting
     :align: center
     :width: 80%
 
-* **1**: The user does an API request. The API server receives the connection and calls ``distribute_function``. Since the requested endpoint is ``distributed_master`` the worker node realizes it can't solve the request locally and proceeds to forward the request to the master node.
-* **2**: The API server doesn't have direct contact with the Wazuh server cluster master node. So the API process forwards the request to a Unix socket, because the cluster has to receive API requests locally. This Unix server is running inside the cluster process, so it can send requests to the master node. In order to identify the API request when the master node sends a response back, the local server adds an ID (``local_client1``  in this example).
-* **3**: When the master node receives the API request, it is added to a queue where all pending requests from all nodes are stored. Since this queue is shared with all other nodes, the master node adds the node ID to the request (``node2`` in this example).
-* **4**: The master node pops the received request out of its queue. It then realizes that agent 020 is reporting in the worker node ``node2``, so it forwards the request to ``node2``. This is because the master node is the one with the most updated information about the agent.
-* **5**: The master node creates a new request to get the necessary information from the worker node. This request includes a new ID (``request1`` in the example) so the master can identify the response when the worker sends it. The original request sent by the worker node remains in the master node awaiting to be solved.
-* **6**: The worker node receives the request from the master node and adds it to its request queue. The worker solves the request locally and sends the request response to the master using the long string process. Once the response has been sent, the worker notifies the master using the ``dapi_res`` command. The ``task_id`` is necessary since the master can receive multiple long strings at the same time and it needs a way to identify each one.
-* **7**: Once the master  node receives the required information from the worker node, it is  able to solve the originally received request from the worker node. The master node notifies the distributed API that the response has already been received.
-* **8**: The master node uses the long string process to send the response to the worker node.
-* **9**: The worker node receives the response from the master node and starts a new *send long string* process to forward it to the API process. Once the API receives the response over the Unix socket connection it had with the cluster process, the response is returned to the user.
+- **1**: The user does an API request. The API server receives the connection and calls ``distribute_function``. Since the requested endpoint is ``distributed_master`` the worker node realizes it can't solve the request locally and proceeds to forward the request to the master node.
+- **2**: The API server doesn't have direct contact with the Wazuh server cluster master node. So the API process forwards the request to a Unix socket, because the cluster has to receive API requests locally. This Unix server is running inside the cluster process, so it can send requests to the master node. In order to identify the API request when the master node sends a response back, the local server adds an ID (``local_client1``  in this example).
+- **3**: When the master node receives the API request, it is added to a queue where all pending requests from all nodes are stored. Since this queue is shared with all other nodes, the master node adds the node ID to the request (``node2`` in this example).
+- **4**: The master node pops the received request out of its queue. It then realizes that agent 020 is reporting in the worker node ``node2``, so it forwards the request to ``node2``. This is because the master node is the one with the most updated information about the agent.
+- **5**: The master node creates a new request to get the necessary information from the worker node. This request includes a new ID (``request1`` in the example) so the master can identify the response when the worker sends it. The original request sent by the worker node remains in the master node awaiting to be solved.
+- **6**: The worker node receives the request from the master node and adds it to its request queue. The worker solves the request locally and sends the request response to the master using the long string process. Once the response has been sent, the worker notifies the master using the ``dapi_res`` command. The ``task_id`` is necessary since the master can receive multiple long strings at the same time and it needs a way to identify each one.
+- **7**: Once the master  node receives the required information from the worker node, it is  able to solve the originally received request from the worker node. The master node notifies the distributed API that the response has already been received.
+- **8**: The master node uses the long string process to send the response to the worker node.
+- **9**: The worker node receives the response from the master node and starts a new *send long string* process to forward it to the API process. Once the API receives the response over the Unix socket connection it had with the cluster process, the response is returned to the user.
 
 In summary, asynchronous tasks are created to forward requests from one node to the other, enabling Wazuh server nodes to be available to receive new requests. None of the objects shown in the diagram remain blocked waiting for a response, they just wait to be notified when the response is available. That is achieved using `Events <https://docs.python.org/3/library/asyncio-sync.html#asyncio.Event>`_.
 
@@ -585,5 +585,5 @@ If the error log message doesn't provide enough detail to identify the issue, yo
 Having the traceback usually helps to understand what's happening.
 
 There are two ways of configuring the log level:
-* Modifying the ``wazuh_clusterd.debug`` variable in the ``internal_options.conf`` file.
-* Using the argument ``-d`` in the ``wazuh-clusterd`` binary.
+- Modifying the ``wazuh_clusterd.debug`` variable in the ``internal_options.conf`` file.
+- Using the argument ``-d`` in the ``wazuh-clusterd`` binary.

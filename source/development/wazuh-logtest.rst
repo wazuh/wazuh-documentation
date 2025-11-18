@@ -10,11 +10,11 @@ The Wazuh Logtest tool is designed to help users test and validate decoders, rul
 
 The Wazuh-Logtest tool is accessible across different components within the Wazuh ecosystem:
 
-* Core Logtest engine: This is the underlying engine that powers Wazuh log testing. It is integrated directly into the :ref:`wazuh-analysisd <wazuh-analysisd>` daemon, which is responsible for log analysis and rule evaluation.
+- Core Logtest engine: This is the underlying engine that powers Wazuh log testing. It is integrated directly into the :ref:`wazuh-analysisd <wazuh-analysisd>` daemon, which is responsible for log analysis and rule evaluation.
 
-* Wazuh Server API: This provides a remote interface to the Core Logtest engine, allowing users to send sample log messages and receive parsing results. This is particularly useful for automating rule testing or integrating with external tools.
+- Wazuh Server API: This provides a remote interface to the Core Logtest engine, allowing users to send sample log messages and receive parsing results. This is particularly useful for automating rule testing or integrating with external tools.
 
-* Wazuh CLI Logtest tool: This is a command-line utility that provides a user-friendly way to test log messages locally, leveraging the same Core Logtest engine used by the Wazuh server API.
+- Wazuh CLI Logtest tool: This is a command-line utility that provides a user-friendly way to test log messages locally, leveraging the same Core Logtest engine used by the Wazuh server API.
 
 Wazuh server API and :doc:`Wazuh-Logtest tool </user-manual/reference/tools/wazuh-logtest>` connect to the wazuh-analysisd session manager. This session manager works as a sandbox with the rules engine, isolating different users with their own rules and decoders.
 

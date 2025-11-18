@@ -33,7 +33,7 @@ The ``client.keys`` file is formatted as described in the table below:
 
 Where:
 
-* **ID** - represents the Wazuh  agent identification number with the following considerations:
+- **ID** - represents the Wazuh  agent identification number with the following considerations:
 
 +--------------------+---------------+
 | Allowed characters | Digits only   |
@@ -47,7 +47,7 @@ Where:
 | Reserved values    | ID "000"      |
 +--------------------+---------------+
 
-* **Name**  - represents the name of the agent with the following considerations:
+- **Name**  - represents the name of the agent with the following considerations:
 
 +--------------------+--------------------------------------------------+
 | Allowed characters | Alphanumeric characters, ``-``, ``_`` and ``.``  |
@@ -57,7 +57,7 @@ Where:
 | Unique value       | Yes                                              |
 +--------------------+--------------------------------------------------+
 
-* **Address** - represents the allowed source IP address range in CIDR format. If the IP address is explicitly provided, the Wazuh manager will only enroll the agent if the provided IP address matches the source IP address.
+- **Address** - represents the allowed source IP address range in CIDR format. If the IP address is explicitly provided, the Wazuh manager will only enroll the agent if the provided IP address matches the source IP address.
 
 +--------------------+----------------------------+
 | Format             | CIDR. Netmask is optional. |
@@ -69,7 +69,7 @@ Where:
 | Aliases            | ``any`` = ``0.0.0.0/0``    |
 +--------------------+----------------------------+
 
-* **Password** - represents a base64 encoded string that is used for external message encryption.
+- **Password** - represents a base64 encoded string that is used for external message encryption.
 
 +--------------------+----------------------+
 | Allowed characters | Printable characters |
@@ -84,9 +84,9 @@ Void entries
 
 Key entries can be invalidated, causing the associated Wazuh agent to be considered as unenrolled. This can occur in the following cases:
 
-* The entire line is deleted.
-* The line begins with ``#`` or whitespace.
-* The agent name starts with ``#`` or ``!``.
+- The entire line is deleted.
+- The line begins with ``#`` or whitespace.
+- The agent name starts with ``#`` or ``!``.
 
 .. note::
 

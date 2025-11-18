@@ -60,7 +60,7 @@ The format of these events is as follows:
 
 Where:
 
-- **Queue** - is a ``1-byte`` character and represents the event type. It defines the decoding mode for the Analysis daemon. The most common queue types are:
+- **Queue** - is a 1-byte character and represents the event type. It defines the decoding mode for the Analysis daemon. The most common queue types are:
 
   - ``1`` - Local file log, including Syslog messages, Windows event logs, outputs from commands, custom logs, and integrations.
 
@@ -157,7 +157,7 @@ The hash is the 32-byte MD5 digest:
 Compressed data
 +++++++++++++++
 
-This object is the result of compressing the *hash* and the *block* (appended) through the *DEFLATE* algorithm, using *``zlib``*:
+This object is the result of compressing the *hash* and the *block* (appended) through the *DEFLATE* algorithm, using *zlib*:
 
 ::
 
@@ -168,8 +168,8 @@ Padding
 
 The compressed data is a byte array that must:
 
-1. Have a size multiple of 8.
-2. Start with one or more ``!``.
+#. Have a size multiple of 8.
+#. Start with one or more ``!``.
 
 So the ``<Padding>`` object is a string of 1 to 8 ``!`` symbols, so that the array resulting from appending both ``<Padding>`` and ``<CData>`` has a size multiple of 8.
 
@@ -211,13 +211,13 @@ Below, we show the encryption formula used in the secure message format, using b
 
 For agents with restricted address:
 
-    a) Blowfish encryption
+a) Blowfish encryption
 
     .. code-block:: console
 
         ":" Blowfish(<!-padding> Gzip(MD5(<Random> <Global> ":" <Local> ":" <Event>) <Random> <Global> ":" <Local> ":" <Event>))
 
-    b) AES encryption
+b) AES encryption
 
     .. code-block:: console
 
@@ -225,13 +225,13 @@ For agents with restricted address:
 
 For agents with unrestricted address (address ``any`` or netmask different from 32):
 
-    a) Blowfish encryption
+a) Blowfish encryption
 
     .. code-block:: console
 
         "!" <ID> "!:" Blowfish(<!-padding> Gzip(MD5(<Random> <Global> ":" <Local> ":" <Event>) <Random> <Global> ":" <Local> ":" <Event>))
 
-    b) AES encryption
+b) AES encryption
 
     .. code-block:: console
 
