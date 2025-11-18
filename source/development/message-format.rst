@@ -211,13 +211,13 @@ Below, we show the encryption formula used in the secure message format, using b
 
 For agents with restricted address:
 
-- Blowfish encryption
+-  Blowfish encryption
 
    .. code-block:: console
 
       ":" Blowfish(<!-padding> Gzip(MD5(<Random> <Global> ":" <Local> ":" <Event>) <Random> <Global> ":" <Local> ":" <Event>))
 
-- AES encryption
+-  AES encryption
 
    .. code-block:: console
 
@@ -225,13 +225,13 @@ For agents with restricted address:
 
 For agents with unrestricted address (address ``any`` or netmask different from 32):
 
-- Blowfish encryption
+-  Blowfish encryption
 
    .. code-block:: console
 
       "!" <ID> "!:" Blowfish(<!-padding> Gzip(MD5(<Random> <Global> ":" <Local> ":" <Event>) <Random> <Global> ":" <Local> ":" <Event>))
 
-- AES encryption
+-  AES encryption
 
    .. code-block:: console
 
