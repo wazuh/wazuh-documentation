@@ -211,31 +211,31 @@ Below, we show the encryption formula used in the secure message format, using b
 
 For agents with restricted address:
 
-a) Blowfish encryption
+- Blowfish encryption
 
-    .. code-block:: console
+   .. code-block:: console
 
-        ":" Blowfish(<!-padding> Gzip(MD5(<Random> <Global> ":" <Local> ":" <Event>) <Random> <Global> ":" <Local> ":" <Event>))
+      ":" Blowfish(<!-padding> Gzip(MD5(<Random> <Global> ":" <Local> ":" <Event>) <Random> <Global> ":" <Local> ":" <Event>))
 
-b) AES encryption
+- AES encryption
 
-    .. code-block:: console
+   .. code-block:: console
 
-        "#AES:" Aes(<!-padding> Gzip(MD5(<Random> <Global> ":" <Local> ":" <Event>) <Random> <Global> ":" <Local> ":" <Event>))
+      "#AES:" Aes(<!-padding> Gzip(MD5(<Random> <Global> ":" <Local> ":" <Event>) <Random> <Global> ":" <Local> ":" <Event>))
 
 For agents with unrestricted address (address ``any`` or netmask different from 32):
 
-a) Blowfish encryption
+- Blowfish encryption
 
-    .. code-block:: console
+   .. code-block:: console
 
-        "!" <ID> "!:" Blowfish(<!-padding> Gzip(MD5(<Random> <Global> ":" <Local> ":" <Event>) <Random> <Global> ":" <Local> ":" <Event>))
+      "!" <ID> "!:" Blowfish(<!-padding> Gzip(MD5(<Random> <Global> ":" <Local> ":" <Event>) <Random> <Global> ":" <Local> ":" <Event>))
 
-b) AES encryption
+- AES encryption
 
-    .. code-block:: console
+   .. code-block:: console
 
-        "!" <ID> "!#AES:" Aes(<!-padding> Gzip(MD5(<Random> <Global> ":" <Local> ":" <Event>) <Random> <Global> ":" <Local> ":" <Event>))
+      "!" <ID> "!#AES:" Aes(<!-padding> Gzip(MD5(<Random> <Global> ":" <Local> ":" <Event>) <Random> <Global> ":" <Local> ":" <Event>))
 
 This is the encryption flow chart:
 
