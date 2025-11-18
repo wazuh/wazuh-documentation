@@ -7,6 +7,10 @@ All notable changes to this project will be documented in this file.
 
 - **Post-release**: Added clarification to the ``field`` option in the *Rules syntax* section. ([#9103](https://github.com/wazuh/wazuh-documentation/pull/9103))
 
+### Changed
+
+- **Post-release**: Updated the *Navigating the Wazuh dashboard* section. ([#9105](https://github.com/wazuh/wazuh-documentation/pull/9105))
+
 ## [v4.14.0]
 
 ### Added
