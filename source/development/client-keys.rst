@@ -80,7 +80,7 @@ Where:
 +--------------------+----------------------+
 
 Void entries
-~~~~~~~~~~~~
+------------
 
 Key entries can be invalidated, causing the associated Wazuh agent to be considered as unenrolled. This can occur in the following cases:
 
@@ -93,7 +93,7 @@ Key entries can be invalidated, causing the associated Wazuh agent to be conside
    The Wazuh manager needs to be stopped before invalidating a key to ensure proper un-enrolling.
 
 Examples
-~~~~~~~~
+--------
 
 Below is an example of the content of the ``client.keys`` file. The last agent ``004`` meets one of the conditions for a void entry because the agent name ``!data3`` starts with ``!``.
 
