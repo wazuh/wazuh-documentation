@@ -21,6 +21,5 @@ This section of the documentation helps developers to understand Wazuh at the de
         wazuh-cluster
         packaging/index
         wazuh-logtest
-        selinux-wazuh-context
         rbac-database-integrity
         coredump
