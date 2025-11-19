@@ -196,7 +196,7 @@ $wazuh_reporting_endpoint
   `Type String`
   
 $wazuh_register_endpoint
-  Specifies the IP address or the hostname of the Wazuh manager to register against. It is used to run the **agent-auth** tool.
+  Specifies the IP address or the hostname of the Wazuh manager to register against.
 
   `Type String`
 
@@ -742,53 +742,6 @@ $ossec_syscheck_skip_nfs
 
   `Type String`
 
-.. _ref_agent_vars_wodle_osquery:
-
-Wodle osquery variables
------------------------
-
-$configure_wodle_osquery
-  Enables the Wodle osquery section rendering on this host. If this variable is not set to ‘true’, the complete *osquery wodle tag* will not be added to *ossec.conf*.
-
-  `Default true`
-
-  `Type String`
-
-$wodle_osquery_disabled
-  Disable the osquery wodle.
-
-  `Default yes`
-
-  `Type String`
-
-$wodle_osquery_run_daemon
-  Make the module run osqueryd as a subprocess or let the module monitor the results log without running Osquery.
-
-  `Default yes`
-
-  `Type String`
-
-$wodle_osquery_log_path
-  Full path to the results log written by Osquery.
-
-  `Default '/var/log/osquery/osqueryd.results.log'`
-
-  `Type String`
-
-$wodle_osquery_config_path
-  Path to the Osquery configuration file. This path can be relative to the folder where the Wazuh agent is running.
-
-  `Default '/etc/osquery/osquery.conf'`
-
-  `Type String`
-
-$wodle_osquery_add_labels
-  Add the agent labels defined as decorators.
-
-  `Default yes`
-
-  `Type String`
-
 .. _ref_agent_vars_wodle_syscollector:
 
 Wodle Syscollector
@@ -945,12 +898,3 @@ $manage_client_keys
   `Default yes`
 
   `Type String`
-
-$agent_auth_password
-  Define password for agent-auth
-
-  `Default undef`
-  
-  `Type String`
-
-.. _ref_agent_addlog:

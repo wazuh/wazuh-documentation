@@ -422,8 +422,6 @@ Reference Wazuh puppet
 |                                                                 |                                                                 |                                             |
 |                                                                 | :ref:`Syscheck <ref_agent_vars_syscheck>`                       |                                             |
 |                                                                 |                                                                 |                                             |
-|                                                                 | :ref:`Wodle osquery <ref_agent_vars_wodle_osquery>`             |                                             |
-|                                                                 |                                                                 |                                             |
 |                                                                 | :ref:`Wodle Syscollector <ref_agent_vars_wodle_syscollector>`   |                                             |
 |                                                                 |                                                                 |                                             |
 |                                                                 | :ref:`Misc <ref_agent_vars_misc>`                               |                                             |
