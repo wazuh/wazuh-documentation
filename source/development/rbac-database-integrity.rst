@@ -25,9 +25,9 @@ Here is an abridged list of steps performed during the database upgrade process:
 
 #. In case a user-created RBAC resource coincides with one of the new default Wazuh RBAC resources, the following actions are carried out:
 
-   #. If the user-created *user* has the same *name* as a default user, the user-created user is renamed appending *‘_user’* to its name.
+   #. If the user-created *user* has the same *name* as a default user, the user-created user is renamed appending ``'_user'`` to its name.
 
-   #. If the user-created *role* has the same *name* as a default role, the first one is renamed appending *'_user'* to its name.
+   #. If the user-created *role* has the same *name* as a default role, the first one is renamed appending ``'_user'`` to its name.
 
    #. If the user-created *rule* has the same *name* or *body* as a default rule, the relationships of the first one are migrated to the new default rule.
 

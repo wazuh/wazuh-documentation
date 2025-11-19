@@ -119,31 +119,31 @@ The *block* is the result of joining a header and the input event:
 
 Where:
 
-- **Random** - 5-byte 0-padded random unsigned integer.
+-  **Random** - 5-byte 0-padded random unsigned integer.
 
-+---------+----------+
-| Size    | 5 digits |
-+---------+----------+
-| Padding | 0-padded |
-+---------+----------+
+   +---------+----------+
+   | Size    | 5 digits |
+   +---------+----------+
+   | Padding | 0-padded |
+   +---------+----------+
 
-- **Global counter** - Most significant part of the message counter.
+-  **Global counter** - Most significant part of the message counter.
 
-+---------+-----------+
-| Size    | 10 digits |
-+---------+-----------+
-| Padding | 0-padded  |
-+---------+-----------+
+   +---------+-----------+
+   | Size    | 10 digits |
+   +---------+-----------+
+   | Padding | 0-padded  |
+   +---------+-----------+
 
-- **Local counter** - Least significant part of the message counter.
+-  **Local counter** - Least significant part of the message counter.
 
-+---------+----------+
-| Size    | 4 digits |
-+---------+----------+
-| Padding | 0-padded |
-+---------+----------+
+   +---------+----------+
+   | Size    | 4 digits |
+   +---------+----------+
+   | Padding | 0-padded |
+   +---------+----------+
 
-- **Event** - Is the input message.
+-  **Event** - Is the input message.
 
 Hash
 ++++
@@ -157,7 +157,7 @@ The hash is the 32-byte MD5 digest:
 Compressed data
 +++++++++++++++
 
-This object is the result of compressing the *hash* and the *block* (appended) through the *DEFLATE* algorithm, using *zlib*:
+This object is the result of compressing the *hash* and the *block* (appended) through the *DEFLATE* algorithm, using ``zlib``:
 
 ::
 

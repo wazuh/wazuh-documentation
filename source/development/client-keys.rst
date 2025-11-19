@@ -35,49 +35,49 @@ Where:
 
 - **ID** - represents the Wazuh  agent identification number with the following considerations:
 
-+--------------------+---------------+
-| Allowed characters | Digits only   |
-+--------------------+---------------+
-| Allowed size       | 3 to 8 digits |
-+--------------------+---------------+
-| Padding            | 0-padded      |
-+--------------------+---------------+
-| Unique value       | Yes           |
-+--------------------+---------------+
-| Reserved values    | ID "000"      |
-+--------------------+---------------+
+   +--------------------+---------------+
+   | Allowed characters | Digits only   |
+   +--------------------+---------------+
+   | Allowed size       | 3 to 8 digits |
+   +--------------------+---------------+
+   | Padding            | 0-padded      |
+   +--------------------+---------------+
+   | Unique value       | Yes           |
+   +--------------------+---------------+
+   | Reserved values    | ID "000"      |
+   +--------------------+---------------+
 
 - **Name**  - represents the name of the agent with the following considerations:
 
-+--------------------+--------------------------------------------------+
-| Allowed characters | Alphanumeric characters, ``-``, ``_`` and ``.``  |
-+--------------------+--------------------------------------------------+
-| Allowed size       | Up to 128 bytes                                  |
-+--------------------+--------------------------------------------------+
-| Unique value       | Yes                                              |
-+--------------------+--------------------------------------------------+
+   +--------------------+--------------------------------------------------+
+   | Allowed characters | Alphanumeric characters, ``-``, ``_`` and ``.``  |
+   +--------------------+--------------------------------------------------+
+   | Allowed size       | Up to 128 bytes                                  |
+   +--------------------+--------------------------------------------------+
+   | Unique value       | Yes                                              |
+   +--------------------+--------------------------------------------------+
 
 - **Address** - represents the allowed source IP address range in CIDR format. If the IP address is explicitly provided, the Wazuh manager will only enroll the agent if the provided IP address matches the source IP address.
 
-+--------------------+----------------------------+
-| Format             | CIDR. Netmask is optional. |
-+--------------------+----------------------------+
-| Unique value       | Yes                        |
-+--------------------+----------------------------+
-| Reserved values    | None                       |
-+--------------------+----------------------------+
-| Aliases            | ``any`` = ``0.0.0.0/0``    |
-+--------------------+----------------------------+
+   +--------------------+----------------------------+
+   | Format             | CIDR. Netmask is optional. |
+   +--------------------+----------------------------+
+   | Unique value       | Yes                        |
+   +--------------------+----------------------------+
+   | Reserved values    | None                       |
+   +--------------------+----------------------------+
+   | Aliases            | ``any`` = ``0.0.0.0/0``    |
+   +--------------------+----------------------------+
 
 - **Password** - represents a base64 encoded string that is used for external message encryption.
 
-+--------------------+----------------------+
-| Allowed characters | Printable characters |
-+--------------------+----------------------+
-| Allowed size       | Up to 128 bytes      |
-+--------------------+----------------------+
-| Unique value       | No                   |
-+--------------------+----------------------+
+   +--------------------+----------------------+
+   | Allowed characters | Printable characters |
+   +--------------------+----------------------+
+   | Allowed size       | Up to 128 bytes      |
+   +--------------------+----------------------+
+   | Unique value       | No                   |
+   +--------------------+----------------------+
 
 Void entries
 ------------

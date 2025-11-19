@@ -274,14 +274,16 @@ The communication protocol used in all communications (both cluster and API) is 
     :align: center
     :width: 80%
 
-The protocol message has two parts: a header and a payload. The payload will be 5242880 bytes long at maximum and the header will be exactly 22 bytes long.
+The protocol message has two parts:
 
-The header has four subparts:
+#. **The header:** This is usually 22 bytes long. The header has four subparts:
 
-- **Counter**: It specifies the message ID. It's randomly generated for every new sent request. It's very useful when receiving a response, so it indicates which sent request it is replying to.
-- **Payload length**: Specifies the amount of data contained in the message payload. Used to know how much data to expect to receive.
-- **Command**: Specifies protocol message. This string will always be 11 characters long. If the command is not 11 characters long, a padding of ``-`` is added until the string reaches the expected length. All available commands in the protocol are shown below.
-- **Flag message divided**: Specifies whether the message has been divided because its initial payload length was more than 5242880 bytes or not. The flag value can be ``d`` if the message is a divided one, or nothing (it will be ``-`` due to the padding mentioned above) if the message is the end of a divided message or a single message.
+   * **Counter**: It specifies the message ID. This is randomly generated for every new sent request. It is very useful when receiving a response, so it indicates which sent request it is replying to.
+   * **Payload length**: It specifies the amount of data contained in the message payload. It is used to know how much data to expect to receive.
+   * **Command**: It specifies the protocol message. This string will always be 11 characters long. If the command is not 11 characters long, a padding of ``-`` is added until the string reaches the expected length. All available commands in the protocol are shown below.
+   * **Flag message divided**: This specifies whether the message has been divided depending on if the initial payload length was more than 5242880 bytes or not. The flag value can be ``d`` if the message is a divided one, or nothing if the message is the end of a divided message or a single message.
+
+#. **The payload:** This will be 5242880 bytes long at maximum.
 
 
 Wazuh cluster protocol
@@ -350,10 +352,10 @@ This communication protocol is used by all cluster nodes to synchronize the nece
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
 | ``syn_m_c``       | Worker      | None                  | The master node will send the worker node integrity files to update.                            |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
-| ``syn_m_c_e``     | Worker      | - Error msg <str> or  | Master node has finished sending integrity files.                                               |
-|                   |             |   Task name <str>     | The files were received in the task name previously created by the worker node in syn_m_c.      |
-|                   |             | - Filename <str>      | If the master node has issues sending/processing/receiving worker node integrity an error       |
-|                   |             |                       | message will be sent instead of the task name and filename.                                     |
+| ``syn_m_c_e``     | Worker      | - Error msg <str> or  | Master node has finished sending integrity files. The files were received in the task name      |
+|                   |             |   Task name <str>     | previously created by the worker node in ``syn_m_c``. If the master node has issues             |
+|                   |             | - Filename <str>      | sending/processing/receiving worker node integrity, an error message will be sent instead of    |
+|                   |             |                       | the task name and filename.                                                                     |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
 | ``syn_m_a_e``     | Worker      | Arguments<Dict>       | Master node has finished updating agent-info. Number of updated chunks and chunks with          |
 |                   |             |                       | errors (if any) will be sent.                                                                   |
@@ -454,7 +456,7 @@ The master node in the Wazuh server cluster executes a heavy workload, especiall
 
 Multiprocessing is implemented in the cluster process of both the Wazuh server master node and the worker nodes, and the `concurrent.futures.ProcessPoolExecutor <https://docs.python.org/3/library/concurrent.futures.html#concurrent.futures.ProcessPoolExecutor>`_ is used for this purpose. Cluster tasks can use any available process in the pool to delegate and run in parallel, the parts of their logic that are CPU intensive. With this, it is possible to take advantage of more CPU cores and increase the overall performance of the cluster process. When combined with asyncio, best results are obtained.
 
-Child processes are created when the parent wazuh-clusterd starts. They stay in the process pool waiting for new jobs to be assigned to them. There are two child processes by default within the master node pool. This value can be changed in the `process_pool_size` variable in the `cluster.json <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|/framework/wazuh/core/cluster/cluster.json>`__ file. The worker nodes, on the other hand, create a single child process and this number is not modifiable. The tasks that use multiprocessing in the cluster are the following.
+Child processes are created when the parent wazuh-clusterd starts. They stay in the process pool waiting for new jobs to be assigned to them. There are two child processes by default within the master node pool. This value can be changed in the ``process_pool_size`` variable in the `cluster.json <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|/framework/wazuh/core/cluster/cluster.json>`__ file. The worker nodes, on the other hand, create a single child process and this number is not modifiable. The tasks that use multiprocessing in the cluster are the following.
 
 Master node
 ###########
@@ -585,5 +587,7 @@ If the error log message doesn't provide enough detail to identify the issue, yo
 Having the traceback usually helps to understand what's happening.
 
 There are two ways of configuring the log level:
-- Modifying the ``wazuh_clusterd.debug`` variable in the ``internal_options.conf`` file.
-- Using the argument ``-d`` in the ``wazuh-clusterd`` binary.
+
+-  Modifying the ``wazuh_clusterd.debug`` variable in the ``internal_options.conf`` file.
+
+-  Using the argument ``-d`` in the ``wazuh-clusterd`` binary.
