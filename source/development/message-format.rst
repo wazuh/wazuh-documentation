@@ -288,7 +288,7 @@ The encryption system uses a constant initialization vector and an encryption ke
 
 **Encryption key**
 
-    They key is built by appending and cutting hexadecimal strings depending on some agent attributes (see :ref:`client-keys`)::
+    The key is built by appending and cutting hexadecimal strings depending on some agent attributes (see :ref:`client-keys`)::
 
         <Key> = MD5(<Pass>) MD5(MD5(<Name>) MD5(<ID>))[0:15]
 

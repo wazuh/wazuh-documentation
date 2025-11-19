@@ -236,7 +236,7 @@ The cluster is built on top of `asyncio.Protocol <https://docs.python.org/3/libr
 - ``connection_lost``: Defines what to do when the connection is closed. It includes an argument containing an exception in case the connection was closed due to an error.
 - ``data_received``: Defines what to do when data is received from the other peers.
 
-The wazuh cluster protocol is defined on top of this framework. The following diagram shows all Python classes defined based on ``asyncio.Protocol``:
+The Wazuh cluster protocol is defined on top of this framework. The following diagram shows all Python classes defined based on ``asyncio.Protocol``:
 
 .. thumbnail:: ../images/development/cluster-protocol-handler.png
     :title: Wazuh cluster protocol class inheritance
@@ -257,9 +257,9 @@ There are abstract server and client classes to handle multiple connections from
     :align: center
     :width: 80%
 
-When the ``wazuh-clusterd`` process starts in the master, it creates a ``Master`` object. Every time a new worker connects to the master, a ``MasterHandler`` object is created to handle the connection with that worker (incoming requests, synchronization processes, etc). That means there will always be at least a ``Master`` object and as many ``MasterHandler`` objects as connected workers. The ``Master`` object will be the one managing all ``MasterHandler`` objects created.
+When the ``wazuh-clusterd`` process starts in the Wazuh server master node, it creates a ``Master`` object. Every time a new Wazuh server worker node connects to the master node, a ``MasterHandler`` object is created to handle the connection with that worker node (incoming requests, synchronization processes, etc). This means that there will always be at least a ``Master`` object and as many ``MasterHandler`` objects to match the number of connected worker nodes. The ``Master`` object is responsible for managing all ``MasterHandler`` objects created.
 
-In the worker side, when the ``wazuh-clusterd`` process starts it creates a ``Worker`` object. This object is in charge of initializing worker variables to connect to the master. A ``WorkerHandler`` object is created when connecting to the master node. This object will be the one sending requests to the master and managing synchronization processes.
+When the ``wazuh-clusterd`` process starts on the Wazuh server worker node,  it creates a ``Worker`` object. This object is in charge of initializing worker variables to connect to the master node. A ``WorkerHandler`` object is created when connecting to the Wazuh server master node. This object is responsible for sending requests to the master node and managing synchronization processes.
 
 Protocols
 ^^^^^^^^^
@@ -267,7 +267,7 @@ Protocols
 Protocol definition
 ~~~~~~~~~~~~~~~~~~~
 
-The communication protocol used in all communications (both cluster and API) is defined in the ``wazuh.core.cluster.common.Handler``. Each message in the protocol has the following structure:
+The communication protocol used for all communications (both cluster and API) is defined in ``wazuh.core.cluster.common.Handler``. Each message in the protocol has the following structure:
 
 .. thumbnail:: ../images/development/structure-message-protocol.png
     :title: Structure for each message in the protocol
@@ -289,7 +289,7 @@ The protocol message has two parts:
 Wazuh cluster protocol
 ~~~~~~~~~~~~~~~~~~~~~~
 
-This communication protocol is used by all cluster nodes to synchronize the necessary information to receive reports from the agents. All communications are made through TCP. These commands are defined in ``wazuh.core.cluster.master.MasterHandler.process_request`` and in ``wazuh.core.cluster.worker.WorkerHandler.process_request``.
+This communication protocol is used by all Wazuh server cluster nodes to synchronize information required to receive reports from the Wazuh agents. All communications are made through TCP. These commands are defined in ``wazuh.core.cluster.master.MasterHandler.process_request`` and in ``wazuh.core.cluster.worker.WorkerHandler.process_request``.
 
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
 | Message           | Received in | Arguments             | Description                                                                                     |
@@ -436,7 +436,7 @@ Asynchronous tasks
 ~~~~~~~~~~~~~~~~~~
 A key factor contributing to the performance of the Wazuh server cluster is the use of asynchronous tasks. Similar to threads in Python, asynchronous tasks run concurrently with the main process and other tasks, but they are significantly more lightweight and faster to create. Their efficiency comes from leveraging the latency of I/O operations. This means that while one task is waiting for data to be transmitted or received through a socket, another can continue executing.
 
-Each of the "threads" described in the `Workflow`_ section are implemented as asynchronous tasks. These tasks are started in ``wazuh.core.cluster.client.AbstractClientManager.start``, ``wazuh.core.cluster.server.AbstractServer.start``, and ``wazuh.core.cluster.local_server.LocalServer.start`` and they are all implemented using infinite loops.
+Each of the threads described in the `Workflow`_ section are implemented as asynchronous tasks. These tasks are started in ``wazuh.core.cluster.client.AbstractClientManager.start``, ``wazuh.core.cluster.server.AbstractServer.start``, and ``wazuh.core.cluster.local_server.LocalServer.start`` and they are all implemented using infinite loops.
 
 In addition to the tasks already described, additional tasks are created whenever an incoming request requires more complex processing. These tasks are instantiated specifically to handle the request and are terminated once the corresponding response has been sent. This architectural approach ensures that the server is not blocked by a single request and can continue serving others efficiently.
 
@@ -584,7 +584,7 @@ If the error log message doesn't provide enough detail to identify the issue, yo
         with open(fname, "rb") as f:
     PermissionError: [Errno 13] Permission denied: '/var/ossec/etc/client.keys'
 
-Having the traceback usually helps to understand what's happening.
+Having the traceback usually helps to understand what is happening.
 
 There are two ways of configuring the log level:
 
