@@ -135,9 +135,9 @@ Setting up core dump generation without using systemd involves configuring the o
 
    To discard core dumps, you can run ``echo "/dev/null" > /proc/sys/kernel/core_pattern``.
 
-.. note::
+   .. note::
 
-   Consider restarting relevant processes to ensure that the changes take effect.
+      Consider restarting relevant processes to ensure that the changes take effect.
 
 #. We recommend preserving these changes across reboots. Add the ``ulimit`` and ``echo`` commands above to a startup or system initialization script such as ``/etc/rc.local``.
 
