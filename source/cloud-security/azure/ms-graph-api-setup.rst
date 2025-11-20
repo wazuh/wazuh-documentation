@@ -46,7 +46,7 @@ Certificates & secrets
 
    .. note::
 
-      Ensure you write down the secret's value section because the UI won't let you copy it afterward.
+      Ensure you write down the secret's value section, as the UI won't let you copy it later.
 
 .. _permissions-ms-graph-api-setup:
 
@@ -94,17 +94,16 @@ To configure the application permissions, go to the **API permissions** page and
 
    .. note::
    
-      Admin consent is required for API permission changes.
+      An Admin account is required to Grant admin consent for Default Directory.
 
 Wazuh server or agent
 ---------------------
 
-Next, we will see the necessary configuration to allow the integration to successfully pull logs from the Microsoft Graph API.
+Next, we will set the necessary configurations to allow the Wazuh module for Microsoft Graph to pull logs from the Microsoft Graph API successfully.
 
 #. Apply the following configuration to the local configuration file ``/var/ossec/etc/ossec.conf``:
 
    .. code-block:: xml
-      :emphasize-lines: 15-17,20,21
 
       <ms-graph>
           <enabled>yes</enabled>
@@ -114,9 +113,9 @@ Next, we will see the necessary configuration to allow the integration to succes
           <interval>5m</interval>
           <version>v1.0</version>
           <api_auth>
-            <client_id>your_client_id</client_id>
-            <tenant_id>your_tenant_id</tenant_id>
-            <secret_value>your_secret_value</secret_value>
+            <client_id><YOUR_APPLICATION_ID></client_id>
+            <tenant_id><YOUR_TENANT_ID></tenant_id>
+            <secret_value><YOUR_SECRET_VALUE></secret_value>
             <api_type>global</api_type>
           </api_auth>
           <resource>
@@ -166,18 +165,18 @@ Next, we will see the necessary configuration to allow the integration to succes
 
       Multi-tenant is not supported. You can only configure one block of ``api_auth``. To learn more about the Wazuh module for Microsoft Graph options, see the :doc:`ms-graph </user-manual/reference/ossec-conf/ms-graph-module>` reference.
 
-Use case
---------
+Use cases
+---------
 
-Using the configuration mentioned above, you can examine two examples as follows.
+Using the configuration mentioned above, we examine the following use cases:
 
--  Malicious email as an example of a security event.
--  Change enrollment configuration as an example of an Intune event.
+-  Monitoring security resources.
+-  Monitoring Microsoft Intune device management audit events.
 
 Monitoring security resources
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-One of the more ubiquitous alerts that an organization of any size receives is spam emails. In this case, we can specifically examine an example of a spam email containing malicious content and examine how Microsoft Graph & Wazuh report on this information.
+One ubiquitous alert an organisation of any size receives is spam email. In this case, we can examine a spam email containing malicious content and see how Microsoft Graph and Wazuh report on this information.
 
 We can set up the Wazuh module for Microsoft Graph to monitor the security resource and the ``alerts_v2`` relationship within our Microsoft 365 tenant described in :ref:`Retrieving content <retrieving_content>`. We also enable **Microsoft Defender for Office 365** within the Microsoft 365 tenant. Microsoft Defender for Office 365 monitors email messages for threats such as spam and malicious attachments.
 
@@ -186,7 +185,7 @@ Detect malicious email
 
 Enable Microsoft Defender for Office 365 and send a malicious email to an email address in the monitored domain. A malicious email detection activity will produce a log that can be accessed using the ``alerts_v2`` relationship within the Microsoft 365 tenant.
 
-#. Login to `Microsoft 365 Defender portal <https://security.microsoft.com/>`__ using an admin account.
+#. Log in to `Microsoft 365 Defender portal <https://security.microsoft.com/>`__ using an admin account.
 #. Navigate to **Policies & rules** > **Threat policies** > **Preset Security Policies**.
 #. Toggle the **Standard protection is off** button under **Standard protection**.
 #. Click on **Manage protection settings** and follow the prompt to set up the policies.
@@ -237,7 +236,7 @@ When Microsoft Defender for Office 365 detects a malicious email event, a log si
       }
 
 
-The Wazuh module for Microsoft Graph retrieves this log via Microsoft Graph API. This log matches an out-of-the-box rule with ID ``99506``. This triggers an alert with the following details:
+The Wazuh module for Microsoft Graph retrieves this log via the Microsoft Graph API. This log matches an out-of-the-box rule with ID ``99506``. This triggers an alert with the following details:
 
    .. code-block:: none
       :class: output
