@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file.
 
 - **Post-release**: Updated the *Navigating the Wazuh dashboard* section. ([#9105](https://github.com/wazuh/wazuh-documentation/pull/9105))
 - **Post-release**: Updated the *Development* section. ([#9104](https://github.com/wazuh/wazuh-documentation/pull/9104))
+- **Post-release**: Updated the *Agents* manifests in the *Deployment on Kubernetes* section. ([#9111](https://github.com/wazuh/wazuh-documentation/pull/9111))
 
 ## [v4.14.0]
 
