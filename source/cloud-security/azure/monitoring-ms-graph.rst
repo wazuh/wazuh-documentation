@@ -23,6 +23,10 @@ The Wazuh module for Microsoft Graph allows you to monitor the following:
 
 The data from these services is visualised using the Wazuh Microsoft API Dashboard
 
+.. thumbnail:: /images/cloud-security/ms-graph/ms-graph-dashboard.png
+   :align: center
+   :width: 80%
+
 While these are fundamental to the security resource, you can monitor many additional resources using the Microsoft Graph API. See the `Overview of Microsoft Graph <https://learn.microsoft.com/en-us/graph/overview?view=graph-rest-1.0>`__ documentation to learn more.
 
 .. note::
@@ -31,7 +35,8 @@ While these are fundamental to the security resource, you can monitor many addit
 
 .. _retrieving_content:
 
-**Retrieving content**
+Retrieving content
+__________________
 
 To retrieve a set of logs from Microsoft Graph, make a ``GET`` request using the URL below:
 

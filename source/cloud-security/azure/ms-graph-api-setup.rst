@@ -71,18 +71,6 @@ To configure the application permissions, go to the **API permissions** page and
    .. thumbnail:: /images/cloud-security/ms-graph/add-api-permissions.png
       :align: center
       :width: 80%
-
-#. Add the following relationships' permissions under the **DeviceManagementApps** and **DeviceManagementManagedDevices** sections:
-
-   - ``DeviceManagementApps.Read.All``. Read `auditEvents` & `detectedApps` relationship data from your tenant.
-
-   - ``DeviceManagementManagedDevices.Read.All``. Read `auditEvents` & `managedDevices` relationship data from your tenant.
-
-   .. thumbnail:: /images/cloud-security/ms-graph/4-azure-wazuh-app-configure-permissions-intune.png
-      :title: API permissions Intune
-      :alt: API permissions Intune
-      :align: center
-      :width: 100%
       
 #. Use an admin user to **Grant admin consent** for the tenant:
 
@@ -129,41 +117,34 @@ Next, we will set the necessary configurations to allow the Wazuh module for Mic
           </resource>
       </ms-graph>
 
-   The configuration monitors specific events at an interval of ``5m``.
-
-   -  ``alerts_v2`` and ``incidents`` within the ``security`` resource.
-   -  ``auditEvents`` within the ``deviceManagement`` resource.
-
-   Only logs created after the Wazuh module for Microsoft Graph starts are monitored.
+   In this case, we will search for ``alerts_v2`` and incidents within the security resource at an interval of ``5m``. The logs will only be created after the Wazuh module for Microsoft Graph starts.
 
    Where:
 
-   -  ``<client_id>`` (also known as an Application ID) is the unique identifier of your registered application.
-   -  ``<tenant_id>`` (also known as Directory ID) is the unique identifier for your Azure tenant
-   -  ``<secret_value>`` is the value of the client secret. It is used to authenticate the registered app on the Azure tenant.
-   -  ``<api_type>`` specifies the type of Microsoft 365 subscription plan the tenant uses. global refers to either a commercial or GCC tenant.
-   -  ``<name>`` specifies the resource's name (i.e., specific API endpoint) to query for logs.
+   -  ``<client_id>`` (also known as an Application ID) is the unique identifier of your registered application.  
+   -  ``<tenant_id>`` (also known as Directory ID) is the unique identifier for your Azure tenant  
+   -  ``<secret_value>`` is the value of the client secret. It is used to authenticate the registered app on the Azure tenant.  
+   -  ``<api_type>`` specifies the type of Microsoft 365 subscription plan the tenant uses. ``global`` refers to either a commercial or GCC tenant.  
+   -  ``<name>`` specifies the resource's name (i.e., specific API endpoint) to query for logs.  
    -  ``<relationship>`` specifies the types of content (relationships) to obtain logs for.
 
-#. Restart your Wazuh server or agent, depending on where you configured the Wazuh module for Microsoft Graph.
+2. Restart your Wazuh server or agent, depending on where you configured the Wazuh module for Microsoft Graph.
 
-   .. tabs::
-   
-      .. tab:: Wazuh agent
-   
-         .. code-block:: console
-   
-            # systemctl restart wazuh-agent
-   
-      .. tab:: Wazuh manager
-   
-         .. code-block:: console
-   
-            # systemctl restart wazuh-manager
+Wazuh agent:
+
+.. code-block:: console
+
+   # systemctl restart wazuh-agent
+
+Wazuh server:
+
+.. code-block:: console
+
+   # systemctl restart wazuh-manager
        
-   .. note::
+.. note::
 
-      Multi-tenant is not supported. You can only configure one block of ``api_auth``. To learn more about the Wazuh module for Microsoft Graph options, see the :doc:`ms-graph </user-manual/reference/ossec-conf/ms-graph-module>` reference.
+   Multi-tenant is not supported. You can only configure one block of ``api_auth``. To learn more about the Wazuh module for Microsoft Graph options, see the :doc:`ms-graph </user-manual/reference/ossec-conf/ms-graph-module>` reference.
 
 Use cases
 ---------
@@ -318,12 +299,17 @@ The alert is seen on the Wazuh dashboard.
    :align: center
    :width: 80%
 
+Monitoring device management audit events
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 Intune event
-^^^^^^^^^^^^
+~~~~~~~~~~~~
 
-Mobile Device Management (MDM) tools like Microsoft Intune enable organizations to manage devices. By integrating Microsoft Graph with Wazuh, organizations can monitor Microsoft Intune logs.
+Mobile Device Management (MDM) tools, such as Microsoft Intune, enable organizations to manage devices. By integrating Microsoft Graph with Wazuh, organizations can monitor Microsoft Intune logs.
 
-For instance, if a user updates the enrollment settings, configuring the module to monitor the ``deviceManagement`` resource and the ``auditEvents`` relationship might generate a JSON like the following one:
+For instance, if a user updates the enrollment settings, configuring the module to monitor the ``deviceManagement`` resource, the ``auditEvents`` relationship generates a JSON like the following:
+
+**Output**
 
 .. code-block:: json
    :class: output
@@ -412,7 +398,7 @@ For instance, if a user updates the enrollment settings, configuring the module 
        ]
    }
 
-In this example, you can take a look at the rule id ``99652``, which corresponds to ``MS Graph message: MDM Intune audit event.``.
+In this example, you can look at rule ID ``99652``, which corresponds to the ``Microsoft Graph message "MDM Intune audit event.``
 
 .. code-block:: xml
 
@@ -423,7 +409,9 @@ In this example, you can take a look at the rule id ``99652``, which corresponds
        <description>MS Graph message: MDM Intune audit event.</description>
    </rule>
 
-Once Wazuh connects with the Microsoft Graph API, the previous log triggers the rule and raises the following alert:
+Once Wazuh connects with the Microsoft Graph API, the previous log triggers the rule and raises the following Wazuh alert:
+
+**Output**
 
 .. code-block:: json
    :emphasize-lines: 5
@@ -542,3 +530,8 @@ Once Wazuh connects with the Microsoft Graph API, the previous log triggers the 
        },
        "location": "ms-graph"
    }
+
+
+.. thumbnail:: /images/cloud-security/ms-graph/ms-graph-intune-details.png
+      :align: center
+      :width: 100%
