@@ -196,22 +196,3 @@ In the example below, we configure the Wazuh module for AWS to pull Amazon Cloud
    <bucket type="cloudtrail">
      <name><WAZUH_AWS_BUCKET></name>
    </bucket>
-
-Environment variables
-^^^^^^^^^^^^^^^^^^^^^
-
-If you're using a single AWS account for all your buckets this could be the most suitable option for you. You have to define the following environment variables:
-
--  **AWS_ACCESS_KEY_ID**
--  **AWS_SECRET_ACCESS_KEY**
-
-Run the following command on the Wazuh server or agent to configure environment variables for the IAM user. Replace ``<PASTE-ACCESS-KEY>``  and ``<PASTE-SECRET-KEY>`` with the appropriate credentials.
-
-.. code-block:: console
-
-   export AWS_ACCESS_KEY_ID=<PASTE-ACCESS-KEY>
-   export AWS_SECRET_ACCESS_KEY=<PASTE-SECRET-KEY>
-
-.. note::
-
-   This option can only be used when running the Wazuh module for AWS manually.
