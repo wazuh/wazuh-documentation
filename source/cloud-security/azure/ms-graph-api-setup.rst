@@ -128,23 +128,23 @@ Next, we will set the necessary configurations to allow the Wazuh module for Mic
    -  ``<name>`` specifies the resource's name (i.e., specific API endpoint) to query for logs.  
    -  ``<relationship>`` specifies the types of content (relationships) to obtain logs for.
 
-2. Restart your Wazuh server or agent, depending on where you configured the Wazuh module for Microsoft Graph.
+#. Restart your Wazuh server or agent, depending on where you configured the Wazuh module for Microsoft Graph.
 
-Wazuh agent:
+   Wazuh agent:
+   
+   .. code-block:: console
+   
+      # systemctl restart wazuh-agent
 
-.. code-block:: console
-
-   # systemctl restart wazuh-agent
-
-Wazuh server:
-
-.. code-block:: console
-
-   # systemctl restart wazuh-manager
-       
-.. note::
-
-   Multi-tenant is not supported. You can only configure one block of ``api_auth``. To learn more about the Wazuh module for Microsoft Graph options, see the :doc:`ms-graph </user-manual/reference/ossec-conf/ms-graph-module>` reference.
+   Wazuh server:
+   
+   .. code-block:: console
+   
+      # systemctl restart wazuh-manager
+          
+   .. note::
+   
+      Multi-tenant is not supported. You can only configure one block of ``api_auth``. To learn more about the Wazuh module for Microsoft Graph options, see the :doc:`ms-graph </user-manual/reference/ossec-conf/ms-graph-module>` reference.
 
 Use cases
 ---------
@@ -162,7 +162,7 @@ One ubiquitous alert an organisation of any size receives is spam email. In this
 We can set up the Wazuh module for Microsoft Graph to monitor the security resource and the ``alerts_v2`` relationship within our Microsoft 365 tenant described in :ref:`Retrieving content <retrieving_content>`. We also enable **Microsoft Defender for Office 365** within the Microsoft 365 tenant. Microsoft Defender for Office 365 monitors email messages for threats such as spam and malicious attachments.
 
 Detect malicious email
-^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~
 
 Enable Microsoft Defender for Office 365 and send a malicious email to an email address in the monitored domain. A malicious email detection activity will produce a log that can be accessed using the ``alerts_v2`` relationship within the Microsoft 365 tenant.
 
@@ -309,8 +309,6 @@ Mobile Device Management (MDM) tools, such as Microsoft Intune, enable organizat
 
 For instance, if a user updates the enrollment settings, configuring the module to monitor the ``deviceManagement`` resource, the ``auditEvents`` relationship generates a JSON like the following:
 
-**Output**
-
 .. code-block:: json
    :class: output
 
@@ -411,10 +409,7 @@ In this example, you can look at rule ID ``99652``, which corresponds to the ``M
 
 Once Wazuh connects with the Microsoft Graph API, the previous log triggers the rule and raises the following Wazuh alert:
 
-**Output**
-
 .. code-block:: json
-   :emphasize-lines: 5
    :class: output
 
    {
