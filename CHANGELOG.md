@@ -13,6 +13,10 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated the *Navigating the Wazuh dashboard* section. ([#9105](https://github.com/wazuh/wazuh-documentation/pull/9105))
 - **Post-release**: Updated the *Development* section. ([#9104](https://github.com/wazuh/wazuh-documentation/pull/9104))
 
+### Removed
+
+- **Post-release**: Removed the *Environment variables* sub-section in *Configuring AWS credentials*. ([#9110](https://github.com/wazuh/wazuh-documentation/pull/9110))
+
 ## [v4.14.0]
 
 ### Added
