@@ -17,6 +17,7 @@ All notable changes to this project will be documented in this file.
 ### Removed
 
 - **Post-release**: Removed the *Environment variables* sub-section in *Configuring AWS credentials*. ([#9110](https://github.com/wazuh/wazuh-documentation/pull/9110))
+- **Post-release**: Removed note about the credentials file in *Amazon Security Lake* section. ([#9112](https://github.com/wazuh/wazuh-documentation/pull/9112))
 
 ## [v4.14.0]
 
