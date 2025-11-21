@@ -483,7 +483,7 @@ This is the most common approach for full-cluster monitoring. Each node runs one
 #. Create the Wazuh Agent DaemonSet manifest ``wazuh-agent-daemonset.yaml``:
 
    .. code-block:: yaml
-      :emphasize-lines: 28,34
+      :emphasize-lines: 79,85,139
 
       apiVersion: v1
       kind: Namespace
@@ -506,10 +506,61 @@ This is the most common approach for full-cluster monitoring. Each node runs one
           spec:
             serviceAccountName: default
             terminationGracePeriodSeconds: 20
-            containers:
-              - name: wazuh-agent
-                image: wazuh/wazuh-agent:4.13.1
-                imagePullPolicy: IfNotPresent
+
+            ################################
+            #        INIT CONTAINERS
+            ################################
+            initContainers:
+
+              # 1) Clean stale PID / lock files
+              - name: cleanup-ossec-stale
+                image: busybox:1.36
+                command: ["/bin/sh", "-lc"]
+                args:
+                  - |
+                    echo "[init] Cleaning old locks..."
+                    mkdir -p /agent/var/run /agent/queue/ossec
+                    rm -f /agent/var/run/*.pid /agent/queue/ossec/*.lock || true
+                volumeMounts:
+                  - name: ossec-data
+                    mountPath: /agent
+
+              # 2) Seed /var/ossec into node storage (first run only)
+              - name: seed-ossec-tree
+                image: wazuh/wazuh-agent:|WAZUH_CURRENT_KUBERNETES|
+                command: ["/bin/sh", "-lc"]
+                args:
+                  - |
+                    echo "[init] Checking if seeding is required..."
+                    if [ ! -d /agent/bin ]; then
+                      echo "[init] Seeding /var/ossec to hostPath..."
+                      tar -C /var/ossec -cf - . | tar -C /agent -xpf -
+                    else
+                      echo "[init] Existing data found, skipping seed"
+                    fi
+                volumeMounts:
+                  - name: ossec-data
+                    mountPath: /agent
+
+              # 3) Fix ownership/permissions
+              - name: fix-permissions
+                image: busybox:1.36
+                command: ["/bin/sh", "-lc"]
+                args:
+                  - |
+                    echo "[init] Fixing permissions..."
+                    for d in etc logs queue var rids tmp "active-response"; do
+                      [ -d "/agent/$d" ] && chown -R 999:999 "/agent/$d"
+                    done
+                    chown -R 0:0 /agent/bin /agent/lib || true
+                    find /agent/bin -type f -exec chmod 0755 {} \; || true
+                volumeMounts:
+                  - name: ossec-data
+                    mountPath: /agent
+
+              # 4) Write ossec.conf with prefixed agent name
+              - name: write-ossec-config
+                image: busybox:1.36
                 env:
                   - name: WAZUH_MANAGER
                     value: "<WAZUH_MANAGER_IP_OR_HOSTNAME>"
@@ -521,33 +572,102 @@ This is the most common approach for full-cluster monitoring. Each node runs one
                     value: "<WAZUH_MANAGER_IP_OR_HOSTNAME>"
                   - name: WAZUH_REGISTRATION_PORT
                     value: "1515"
+
                   - name: WAZUH_AGENT_NAME
                     valueFrom:
                       fieldRef:
                         fieldPath: spec.nodeName
+
+
+                command: ["/bin/sh","-lc"]
+                args:
+                  - |
+                    echo "[init] Writing ossec.conf..."
+                    mkdir -p /agent/etc
+
+                    printf '%s\n' \
+                    "<ossec_config>" \
+                    "  <client>" \
+                    "    <server>" \
+                    "      <address>${WAZUH_MANAGER}</address>" \
+                    "      <port>${WAZUH_PORT}</port>" \
+                    "      <protocol>${WAZUH_PROTOCOL}</protocol>" \
+                    "    </server>" \
+                    "" \
+                    "    <enrollment>" \
+                    "      <enabled>yes</enabled>" \
+                    "      <agent_name>${WAZUH_AGENT_NAME}</agent_name>" \
+                    "      <manager_address>${WAZUH_REGISTRATION_SERVER}</manager_address>" \
+                    "      <port>${WAZUH_REGISTRATION_PORT}</port>" \
+                    "    </enrollment>" \
+                    "  </client>" \
+                    "</ossec_config>" > /agent/etc/ossec.conf
+
+                    chown 999:999 /agent/etc/ossec.conf
+                    chmod 0640 /agent/etc/ossec.conf
                 volumeMounts:
-                  - name: varlog
-                    mountPath: /var/log
-                    readOnly: true
-                  - name: dockersock
-                    mountPath: /var/run/docker.sock
-                    readOnly: true
                   - name: ossec-data
-                    mountPath: /var/ossec
+                    mountPath: /agent
+
+            ################################
+            #         MAIN CONTAINER
+            ################################
+            containers:
+              - name: wazuh-agent
+                image: wazuh/wazuh-agent:|WAZUH_CURRENT_KUBERNETES|
+                imagePullPolicy: IfNotPresent
+                command: ["/bin/sh", "-lc"]
+                args:
+                  - |
+                    ln -sf /var/ossec/etc/ossec.conf /etc/ossec.conf || true
+                    exec /init
+                env:
+                  - name: WAZUH_MANAGER
+                    value: "<WAZUH_MANAGER_IP_OR_HOSTNAME>"
+
+                  - name: WAZUH_AGENT_NAME
+                    valueFrom:
+                      fieldRef:
+                        fieldPath: spec.nodeName
+
                 securityContext:
                   runAsUser: 0
                   allowPrivilegeEscalation: true
                   capabilities:
                     add: ["SETGID","SETUID"]
+
+                volumeMounts:
+                  - name: varlog
+                    mountPath: /var/log
+                    readOnly: true
+
+                  - name: dockersock
+                    mountPath: /var/run/docker.sock
+                    readOnly: true
+
+                  - name: ossec-data
+                    mountPath: /var/ossec
+
+            ################################
+            #            VOLUMES
+            ################################
             volumes:
+
               - name: varlog
                 hostPath:
                   path: /var/log
+                  type: Directory
+
               - name: dockersock
                 hostPath:
                   path: /var/run/docker.sock
+                  type: Socket
+
+              # Local node storage for Wazuh identity
               - name: ossec-data
-                emptyDir: {}
+                hostPath:
+                  path: /var/lib/wazuh
+                  type: DirectoryOrCreate
 
    Replace ``<WAZUH_MANAGER_IP_OR_HOSTNAME>`` with the Wazuh manager IP address or hostname.
 
@@ -631,7 +751,7 @@ The sidecar approach is ideal for targeted monitoring of sensitive applications 
                     mountPath: /agent
 
               - name: seed-ossec-tree
-                image: wazuh/wazuh-agent:4.13.0
+                image: wazuh/wazuh-agent:|WAZUH_CURRENT_KUBERNETES|
                 imagePullPolicy: IfNotPresent
                 securityContext:
                   runAsUser: 0
@@ -716,7 +836,7 @@ The sidecar approach is ideal for targeted monitoring of sensitive applications 
                     mountPath: /usr/local/tomcat/logs
 
               - name: wazuh-agent
-                image: wazuh/wazuh-agent:4.13.0
+                image: wazuh/wazuh-agent:|WAZUH_CURRENT_KUBERNETES|
                 imagePullPolicy: IfNotPresent
                 lifecycle:
                   preStop:
