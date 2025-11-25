@@ -77,6 +77,12 @@ newUrls['4.14'] = [
   '/release-notes/release-4-14-0.html',
 ]
 
+/* Pages no longer available in x.y (this is not required if there is a redirection for this url) */
+
+removedUrls['4.14'] = [
+  '/development/selinux-wazuh-context.html'
+];
+
 /* *** RELEASE 4.13 ****/
 
 /* Pages added in 4.13 */

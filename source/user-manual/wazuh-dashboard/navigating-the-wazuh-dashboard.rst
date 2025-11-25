@@ -77,6 +77,7 @@ This section shows dashboards for:
 -  :doc:`Google Cloud </cloud-security/gcp/index>`
 -  :doc:`GitHub </cloud-security/github/index>`
 -  :doc:`Office 365 </cloud-security/office365/index>`
+-  :doc:`Microsoft Graph Services </cloud-security/azure/monitoring-ms-graph>`
 
 .. thumbnail:: /images/wazuh-dashboard/navigating/cloud-security.png
    :align: center
