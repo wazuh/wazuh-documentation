@@ -142,9 +142,9 @@ Next, we will set the necessary configurations to allow the Wazuh module for Mic
    
       # systemctl restart wazuh-manager
           
-   .. note::
-   
-      Multi-tenant is not supported. You can only configure one block of ``api_auth``. To learn more about the Wazuh module for Microsoft Graph options, see the :doc:`ms-graph </user-manual/reference/ossec-conf/ms-graph-module>` reference.
+.. note::
+
+   Multi-tenant is not supported. You can only configure one block of ``api_auth``. To learn more about the Wazuh module for Microsoft Graph options, see the :doc:`ms-graph </user-manual/reference/ossec-conf/ms-graph-module>` reference.
 
 Use cases
 ---------
