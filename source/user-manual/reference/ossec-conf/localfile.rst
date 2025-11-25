@@ -357,7 +357,7 @@ Set the format of the log to be read. **field is required**
 +                    +--------------------+--------------------------------------------------------------------------------------------------+
 |                    | iis                | Used for ``iis`` (Windows Web Server) logs.                                                      |
 +                    +--------------------+--------------------------------------------------------------------------------------------------+
-|                    | apache             | Used for Apache access/error logs.                                                               |
+|                    | apache             | Used for Apache access and error logs.                                                           |
 +                    +--------------------+--------------------------------------------------------------------------------------------------+
 |                    | command            | Used to read the output from the command (as run by root) specified by the command tag.          |
 |                    |                    |                                                                                                  |
