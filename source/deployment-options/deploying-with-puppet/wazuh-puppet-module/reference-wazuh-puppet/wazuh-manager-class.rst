@@ -196,107 +196,6 @@ Rootcheck variables
 | ``$ossec_rootcheck_system_audit``   | Specifies the path to an audit definition file for Unix-like systems.                                                     | ``[]``                                   | String        |
 +-------------------------------------+---------------------------------------------------------------------------------------------------------------------------+------------------------------------------+---------------+
 
-.. _ref_server_vars_sca:
-
-SCA variables
--------------
-
-$configure_sca
-  Enables rendering of the SCA section on this host.
-
-  `Default true`
-
-  `Type Boolean`
-
-$sca_enabled
-  Enables SCA on this host.
-
-  `Default yes`
-
-  `Type String`
-
-   Depends on **configure_sca**
-
-$sca_scan_on_start
-  The SCA module performs a scan immediately on start.
-
-  `Default yes`
-
-  `Type String`
-
-   Depends on **configure_sca**
-
-$sca_interval
-  Sets the interval between module executions.
-
-  `Default 12h`
-
-  `Type String`
-
-   Depends on **configure_sca**
-
-$sca_skip_nfs
-  On Linux and FreeBSD, enables or disables scanning of network-mounted filesystems. This excludes CIFS and NFS mounts.
-
-  `Default yes`
-
-  `Type String`
-
-   Depends on **configure_sca**
-
-$sca_policies
-  List of policies to run during assessments.
-
-  `Default []`
-
-  `Type List`
-
-   Depends on **configure_sca**
-
-$sca_max_eps
-  Sets the maximum throughput for event reporting. Events are messages that generate alerts.
-
-  `Default 50`
-
-  `Type String`
-
-   Depends on **configure_sca**
-
-$sca_synchronization_enabled
-  Enables periodic inventory synchronization.
-
-  `Default yes`
-
-  `Type String`
-
-   Depends on **configure_sca**
-
-$sca_synchronization_interval
-  Specifies the initial time between inventory synchronizations.
-
-  `Default 5m`
-
-  `Type String`
-
-   Depends on **configure_sca**
-
-$sca_synchronization_response_timeout
-  Waiting time in seconds between a sync message and the next synchronization.
-
-  `Default 30`
-
-  `Type String`
-
-   Depends on **configure_sca**
-
-$sca_synchronization_max_eps
-  Sets the maximum throughput for synchronization messages.
-
-  `Default 10`
-
-  `Type String`
-
-   Depends on **configure_sca**
 
 .. _ref_server_vars_syscheck:
 
@@ -358,19 +257,6 @@ Syscheck variables
 |                                                  | skip_nfs will exclude checking files on CIFS or NFS mounts.                                                               |                                                                                                                                                                                                                                                                                                                                                                                              |               |
 +--------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------+
 
-$ossec_syscheck_notify_first_scan
-  Specifies whether the first Syscheck (FIM) scan reports stateless events.
-
-  `Default no`
-
-  `Type String`
-
-$ossec_syscheck_synchronization_response_timeout
-  Waiting time in seconds between a sync message and the next synchronization.
-
-  `Default 30`
-
-  `Type String`
 
 .. _ref_server_vars_syslog_output:
 
@@ -576,47 +462,6 @@ Wodle Syscollector variables
 |   ``$wodle_syscollector_processes``    | Enables the scan of the processes.                                                                                        | ``yes``             | String          |
 +----------------------------------------+---------------------------------------------------------------------------------------------------------------------------+---------------------+-----------------+
 
-$wodle_syscollector_max_eps
-  Sets the maximum throughput for reporting events. Events are messages that trigger alerts.
-
-  `Default 50`
-
-  `Type String`
-
-$wodle_syscollector_notify_first_scan
-  Specifies whether the first scan reports stateless events.
-
-  `Default no`
-
-  `Type String`
-
-$wodle_syscollector_synchronization_enabled
-  Specifies whether to perform periodic inventory synchronizations.
-
-  `Default yes`
-
-  `Type String`
-
-$wodle_syscollector_synchronization_interval
-  Specifies the initial interval between inventory synchronizations.
-
-  `Default 5m`
-
-  `Type String`
-
-$wodle_syscollector_synchronization_response_timeout
-  Waiting time in seconds between a sync message and the next synchronization.
-
-  `Default 30`
-
-  `Type String`
-
-$wodle_syscollector_synchronization_max_eps
-  Sets the maximum throughput for synchronization messages.
-
-  `Default 10`
-
-  `Type String`
 
 .. _ref_server_vars_misc:
 

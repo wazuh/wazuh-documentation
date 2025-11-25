@@ -517,6 +517,10 @@ syscollector:read
 -  :api-ref:`GET /syscollector/{agent_id}/packages <operation/api.controllers.syscollector_controller.get_packages_info>` (:ref:`agent:id <api_rbac_reference_resources>`, :ref:`agent:group <api_rbac_reference_resources>`)
 -  :api-ref:`GET /syscollector/{agent_id}/ports <operation/api.controllers.syscollector_controller.get_ports_info>` (:ref:`agent:id <api_rbac_reference_resources>`, :ref:`agent:group <api_rbac_reference_resources>`)
 -  :api-ref:`GET /syscollector/{agent_id}/processes <operation/api.controllers.syscollector_controller.get_processes_info>` (:ref:`agent:id <api_rbac_reference_resources>`, :ref:`agent:group <api_rbac_reference_resources>`)
+-  :api-ref:`GET /syscollector/{agent_id}/users <operation/api.controllers.syscollector_controller.get_user_info>` (:ref:`agent:id <api_rbac_reference_resources>`, :ref:`agent:group <api_rbac_reference_resources>`)
+-  :api-ref:`GET /syscollector/{agent_id}/groups <operation/api.controllers.syscollector_controller.get_group_info>` (:ref:`agent:id <api_rbac_reference_resources>`, :ref:`agent:group <api_rbac_reference_resources>`)
+-  :api-ref:`GET /syscollector/{agent_id}/browser_extensions <operation/api.controllers.syscollector_controller.get_browser_extensions_info>` (:ref:`agent:id <api_rbac_reference_resources>`, :ref:`agent:group <api_rbac_reference_resources>`)
+-  :api-ref:`GET /syscollector/{agent_id}/services <operation/api.controllers.syscollector_controller.get_services_info>` (:ref:`agent:id <api_rbac_reference_resources>`, :ref:`agent:group <api_rbac_reference_resources>`)
 
 Task
 ^^^^^

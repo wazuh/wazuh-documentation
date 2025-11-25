@@ -3,9 +3,9 @@
 RBAC database integrity
 =======================
 
-The integrity of the RBAC database is checked when the API starts. The result of this check determines whether the database needs an update or not. The integrity check allows us the following:
+The integrity of the role based access control (RBAC) database is checked when the Wazuh server API starts. The result of this check determines whether the database needs an update or not. The integrity check allows the following:
 
--  Upgrade to a Wazuh version when this version includes breaking changes in the RBAC database structure or new default resources.
+-  Upgrade to a Wazuh version where this version includes breaking changes in the RBAC database structure or new default resources.
 -  Restore the RBAC database with its default RBAC resources if it was manually deleted. This allows restoring the RBAC database to a fresh install state if needed.
 
    .. warning::
@@ -21,27 +21,27 @@ Here is an abridged list of steps performed during the database upgrade process:
 
 #. A new RBAC database file is created and the default Wazuh RBAC resources for the installed version are added to it.
 
-#. Every user-created RBAC resource is migrated from the old database to the new one, maintaining its ID, name and so forth.
+#. Every user created RBAC resource is migrated from the old database to the new one, maintaining its ID, name and other details.
 
-#. In case a user-created RBAC resource coincides with one of the new default Wazuh RBAC resources:
+#. In case a user-created RBAC resource coincides with one of the new default Wazuh RBAC resources, the following actions are carried out:
 
-   #. If the user-created *user* has the same *name* as a default user, the first one is renamed appending *‘_user’* to its name.
+   #. If the user-created *user* has the same *name* as a default user, the user-created user is renamed appending ``'_user'`` to its name.
 
-   #. If the user-created *role* has the same *name* as a default role, the first one is renamed appending *'_user'* to its name.
+   #. If the user-created *role* has the same *name* as a default role, the first one is renamed appending ``'_user'`` to its name.
 
    #. If the user-created *rule* has the same *name* or *body* as a default rule, the relationships of the first one are migrated to the new default rule.
 
    #. If the user-created *policy* has the same *name* or *body* as a default policy, the relationships of the first one are migrated to the new default policy.
 
-#. Any relationships between RBAC user-created resources are added to the new database.
+#. Relationships between RBAC user-created resources are added to the new database.
 
-#. Any relationships between RBAC user-created resources and default ones are updated:
+#. Relationships between RBAC user created resources and default ones are updated:
 
-   #. If the default resource does not exist in the new version, the relationships between user-created resources and the deleted resource are removed.
+   #. If the default resource does not exist in the new version, the relationships between user created resources and the deleted resources are removed.
 
-   #. If the default resource has a different ID in the new version, the relationships between user-created resources and the default resource are updated to match the new ID and keep the old functionality.
+   #. If the default resource has a different ID in the new version, the relationships between user created resources and the default resource are updated to match the new ID and keep the old functionality.
 
-   #. In any other case, the relationships between user-created resources and the default resources are kept.
+   #. In any other case, the relationships between user created resources and the default resources are kept.
 
 #. The old RBAC database file is replaced by the new one.
 

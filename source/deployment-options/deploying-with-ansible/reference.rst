@@ -253,6 +253,10 @@ Wazuh Manager
       packages: 'yes'
       ports_no: 'yes'
       processes: 'yes'
+      users: 'yes'
+      groups: 'yes'
+      services: 'yes'
+      browser_extensions: 'yes'
 
 |
 | **Variable**: ``wazuh_manager_monitor_aws``
@@ -1071,6 +1075,10 @@ Wazuh Agent
       packages: 'yes'
       ports_no: 'yes'
       processes: 'yes'
+      users: 'yes'
+      groups: 'yes'
+      services: 'yes'
+      browser_extensions: 'yes'
 
 |
 | **Variable**: ``wazuh_agent_sca``
