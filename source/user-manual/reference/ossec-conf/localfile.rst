@@ -349,6 +349,8 @@ Set the format of the log to be read. **field is required**
 |                    |                    |                                                                                                  |
 |                    |                    | This format chains consecutive logs with the same ID into a single event.                        |
 +                    +--------------------+--------------------------------------------------------------------------------------------------+
+|                    | apache              | Used for Apache access/error logs.                                                              |
++                    +--------------------+--------------------------------------------------------------------------------------------------+
 |                    | mysql_log          | Used for ``MySQL`` logs, however, this value does not support multi-line logs.                   |
 +                    +--------------------+--------------------------------------------------------------------------------------------------+
 |                    | postgresql_log     | Used for ``PostgreSQL`` logs, however, this value does not support multi-line logs.              |
