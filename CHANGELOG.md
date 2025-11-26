@@ -15,6 +15,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated the *Development* section. ([#9104](https://github.com/wazuh/wazuh-documentation/pull/9104))
 - **Post-release**: Updated the *Agents* manifests in the *Deployment on Kubernetes* section. ([#9111](https://github.com/wazuh/wazuh-documentation/pull/9111))
 - **Post-release**: Updated the *Monitoring Microsoft Graph services with Wazuh* section. ([#9107](https://github.com/wazuh/wazuh-documentation/pull/9107))
+- **Post-release**: Updated the *log_format* reference sub-section. ([#9117](https://github.com/wazuh/wazuh-documentation/pull/9117))
 
 ### Removed
 
