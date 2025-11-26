@@ -22,8 +22,8 @@ Resources
 +--------------------+---------------------------------------------------------+--------------------------------------+
 | Resources          | Description                                             | Example                              |
 +====================+=========================================================+======================================+
-| \*:\*              | Reference resources that do not yet exist in the system |                                      |
-|                    | (futures). Actions using these resources are called     |                                      |
+| \*:\*              | References "any" or "all" resources across all          |                                      |
+|                    | scopes. Actions using these resources are called        |                                      |
 |                    | resourceless.                                           |                                      |
 +--------------------+---------------------------------------------------------+--------------------------------------+
 | agent:group        | Reference agents via group name. This resource is       | agent:group:web                      |
