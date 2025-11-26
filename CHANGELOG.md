@@ -67,6 +67,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated the *Installation from sources* documentation. ([#8988](https://github.com/wazuh/wazuh-documentation/pull/8988))
 - **Post-release**: Updated the Amazon Security Lake integration documentation. ([#8990](https://github.com/wazuh/wazuh-documentation/pull/8990))
 - **Post-release**: Updated the vulnerability detection compatibility matrix. ([#9062](https://github.com/wazuh/wazuh-documentation/pull/9062))
+- **Post-release**: Updated the *Resources* table in the *RBAC reference* guide. ([#9119](https://github.com/wazuh/wazuh-documentation/pull/9119))
 
 ### Fixed
 
