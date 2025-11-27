@@ -313,107 +313,98 @@ Target specifies the name of the socket where the output will be redirected. The
 log_format
 ^^^^^^^^^^
 
-Set the format of the log to be read. **field is required**
+Specifies the format of the log to be read. **This field is required.**
 
-.. note:: For most of the text log files that only have one entry per line, syslog may be used.
+.. note::
 
-+--------------------+-----------------------------------------------------------------------------------------------------------------------+
-| **Default value**  | n/a                                                                                                                   |
-+--------------------+--------------------+--------------------------------------------------------------------------------------------------+
-| **Allowed values** | syslog             | Used for plain text files in a syslog-like format.                                               |
-+                    +--------------------+--------------------------------------------------------------------------------------------------+
-|                    | json               | Used for single-line JSON files and allows for customized labels to be added to JSON events.     |
-|                    |                    |                                                                                                  |
-|                    |                    | See also the tag `label`_ for more information.                                                  |
-+                    +--------------------+--------------------------------------------------------------------------------------------------+
-|                    | snort-full         | Used for Snort’s full-output format.                                                             |
-+                    +--------------------+--------------------------------------------------------------------------------------------------+
-|                    | squid              | Used for squid logs.                                                                             |
-+                    +--------------------+--------------------------------------------------------------------------------------------------+
-|                    | eventlog           | Used for the classic Microsoft Windows event log format.                                         |
-+                    +--------------------+--------------------------------------------------------------------------------------------------+
-|                    | eventchannel       | Used for Microsoft Windows event logs, gets the events in JSON format.                           |
-|                    |                    |                                                                                                  |
-|                    |                    | Monitors every channel specified in the configuration file and shows every field included in it. |
-|                    |                    |                                                                                                  |
-|                    |                    | This can be used to monitor standard “Windows” event logs and "Application and Services" logs.   |
-+                    +--------------------+--------------------------------------------------------------------------------------------------+
-|                    | macos              | Used for macOS ULS logs, gets the logs in syslog format.                                         |
-|                    |                    |                                                                                                  |
-|                    |                    | Monitors all the logs that match the query filter.                                               |
-|                    |                    | See :ref:`How to collect macOS ULS logs <how-to-collect-macoslogs>`.                             |
-+                    +--------------------+--------------------------------------------------------------------------------------------------+
-|                    | journald           | Required to monitor systemd-journal events. Events are collected in syslog format.               |
-+                    +--------------------+--------------------------------------------------------------------------------------------------+
-|                    | audit              | Used for events from Auditd.                                                                     |
-|                    |                    |                                                                                                  |
-|                    |                    | This format chains consecutive logs with the same ID into a single event.                        |
-+                    +--------------------+--------------------------------------------------------------------------------------------------+
-|                    | mysql_log          | Used for ``MySQL`` logs, however, this value does not support multi-line logs.                   |
-+                    +--------------------+--------------------------------------------------------------------------------------------------+
-|                    | postgresql_log     | Used for ``PostgreSQL`` logs, however, this value does not support multi-line logs.              |
-+                    +--------------------+--------------------------------------------------------------------------------------------------+
-|                    | nmapg              | Used for monitoring files conforming to the grep-able output from ``nmap``.                      |
-+                    +--------------------+--------------------------------------------------------------------------------------------------+
-|                    | iis                | Used for ``iis`` (Windows Web Server) logs.                                                      |
-+                    +--------------------+--------------------------------------------------------------------------------------------------+
-|                    | apache             | Used for Apache access and error logs.                                                           |
-+                    +--------------------+--------------------------------------------------------------------------------------------------+
-|                    | command            | Used to read the output from the command (as run by root) specified by the command tag.          |
-|                    |                    |                                                                                                  |
-|                    |                    | Each line of output is treated as a separate log.                                                |
-+                    +--------------------+--------------------------------------------------------------------------------------------------+
-|                    | full_command       | Used to read the output from the command (as run by root) specified by the command tag.          |
-|                    |                    |                                                                                                  |
-|                    |                    | The entire output will be treated as a single log item.                                          |
-+                    +--------------------+--------------------------------------------------------------------------------------------------+
-|                    | djb-multilog       | Used to read files in the format produced by the multi-log service logger in daemon tools.       |
-+                    +--------------------+--------------------------------------------------------------------------------------------------+
-|                    | multi-line         | Used to monitor applications that log multiple lines per event.                                  |
-|                    |                    |                                                                                                  |
-|                    |                    | The number of lines must be consistent in order to use this value.                               |
-|                    |                    |                                                                                                  |
-|                    |                    | The number of lines in each log entry must be specified following the ``multi-line:`` value.     |
-|                    |                    |                                                                                                  |
-|                    |                    | Each line will be combined with the previous lines until all lines are gathered which means there|
-|                    |                    |                                                                                                  |
-|                    |                    | may be multiple timestamps in the final event.                                                   |
-|                    |                    |                                                                                                  |
-|                    |                    | The format for this value is: <log_format>multi-line: NUMBER</log_format>                        |
-+                    +--------------------+--------------------------------------------------------------------------------------------------+
-|                    | multi-line-regex   | Used to monitor applications that log variable amount lines with variable length per event.      |
-|                    |                    |                                                                                                  |
-|                    |                    | The behavior depends on `multiline_regex`_ option.                                               |
-+--------------------+--------------------+--------------------------------------------------------------------------------------------------+
+   For most text log files with one entry per line, use the ``syslog`` format.
+
++--------------------+----------------------------------------------------------------------------------------------------------------------+
+| **Default value**  | n/a                                                                                                                  |
++--------------------+--------------------+-------------------------------------------------------------------------------------------------+
+| **Allowed values** | apache             | Used for Apache web server access and error logs.                                               |
++                    +--------------------+-------------------------------------------------------------------------------------------------+
+|                    | audit              | Used for Auditd events. Chains consecutive logs with the same ID into a single event.           |
++                    +--------------------+-------------------------------------------------------------------------------------------------+
+|                    | command            | Executes a command as root and treats each line of output as a separate log entry.              |
+|                    |                    | Requires ``logcollector.remote_commands=1`` in internal options.                                |
++                    +--------------------+-------------------------------------------------------------------------------------------------+
+|                    | djb-multilog       | Reads files in the format produced by the daemontools multi-log service logger.                 |
++                    +--------------------+-------------------------------------------------------------------------------------------------+
+|                    | eventchannel       | Used for Microsoft Windows event channels (Vista+). Monitors specified channels and includes    |
+|                    |                    | all fields in JSON format. Supports standard Windows logs and Application/Service logs.         |
++                    +--------------------+-------------------------------------------------------------------------------------------------+
+|                    | eventlog           | Used for the classic Microsoft Windows event log format.                                        |
++                    +--------------------+-------------------------------------------------------------------------------------------------+
+|                    | full_command       | Executes a command as root and treats the entire output as a single log entry.                  |
+|                    |                    | Requires ``logcollector.remote_commands=1`` in internal options.                                |
++                    +--------------------+-------------------------------------------------------------------------------------------------+
+|                    | generic            | Used for generic text log files.                                                                |
++                    +--------------------+-------------------------------------------------------------------------------------------------+
+|                    | iis                | Used for Microsoft Internet Information Services (IIS) web server logs.                         |
++                    +--------------------+-------------------------------------------------------------------------------------------------+
+|                    | journald           | Used for systemd-journal events. Events are collected in syslog format.                         |
++                    +--------------------+-------------------------------------------------------------------------------------------------+
+|                    | json               | Used for single-line JSON files. Supports custom labels via the `label`_ tag.                   |
++                    +--------------------+-------------------------------------------------------------------------------------------------+
+|                    | macos              | Used for macOS Unified Logging System (ULS) logs in syslog format. Monitors logs matching the   |
+|                    |                    | query filter. See :ref:`how to collect macOS ULS logs <how-to-collect-macoslogs>`.              |
++                    +--------------------+-------------------------------------------------------------------------------------------------+
+|                    | multi-line         | Used for applications that log multiple fixed lines per event.                                  |
+|                    |                    | Format: ``multi-line: <NUMBER>``. Combines lines until the specified count is reached.          |
++                    +--------------------+-------------------------------------------------------------------------------------------------+
+|                    | multi-line-regex   | Used for applications with variable numbers of lines per event.                                 |
+|                    |                    | Behavior depends on the `multiline_regex`_ option.                                              |
++                    +--------------------+-------------------------------------------------------------------------------------------------+
+|                    | mysql_log          | Used for MySQL database logs. Does not support multi-line logs.                                 |
++                    +--------------------+-------------------------------------------------------------------------------------------------+
+|                    | mssql_log          | Used for Microsoft SQL Server logs.                                                             |
++                    +--------------------+-------------------------------------------------------------------------------------------------+
+|                    | nmapg              | Used for grep-able output from the Nmap security scanner.                                       |
++                    +--------------------+-------------------------------------------------------------------------------------------------+
+|                    | ossecalert         | Used for OSSEC alert logs.                                                                      |
++                    +--------------------+-------------------------------------------------------------------------------------------------+
+|                    | postgresql_log     | Used for PostgreSQL database logs. Does not support multi-line logs.                            |
++                    +--------------------+-------------------------------------------------------------------------------------------------+
+|                    | snort-fast         | Used for Snort intrusion detection system fast-output format.                                   |
++                    +--------------------+-------------------------------------------------------------------------------------------------+
+|                    | snort-full         | Used for Snort intrusion detection system full-output format.                                   |
++                    +--------------------+-------------------------------------------------------------------------------------------------+
+|                    | squid              | Used for Squid proxy server logs.                                                               |
++                    +--------------------+-------------------------------------------------------------------------------------------------+
+|                    | syslog             | Used for plain text files in syslog-like format (one entry per line).                           |
++                    +--------------------+-------------------------------------------------------------------------------------------------+
+|                    | syslog-pipe        | Used for reading from named pipes in syslog format.                                             |
++--------------------+--------------------+-------------------------------------------------------------------------------------------------+
 
 .. warning::
 
-    Only one configuration block with ``log_format`` set as ``macos`` is allowed. If more blocks are added, the last one will be used.
+   Only one configuration block with ``log_format`` set to ``macos`` is allowed. If multiple blocks are present, only the last one is used.
 
 .. warning::
 
-    The ``eventchannel`` log format cannot be used on Windows agents prior to the Vista OS as they do not produce this type of log.
+   The ``eventchannel`` format is not supported on Windows versions prior to Vista, as they do not support event channels.
 
 .. warning::
 
-    Agents will ignore ``command`` and ``full_command`` log sources unless they have ``logcollector.remote_commands=1`` set in their **/var/ossec/etc/internal_options.conf** or **/var/ossec/etc/local_internal_options.conf** file. This is a security precaution to prevent the Wazuh manager from running arbitrary commands on agents in their root security context.
+   Agents ignore ``command`` and ``full_command`` log sources unless ``logcollector.remote_commands=1`` is set in ``/var/ossec/etc/internal_options.conf`` or ``/var/ossec/etc/local_internal_options.conf``. This prevents the manager from executing arbitrary commands on agents with root privileges.
 
-Sample of Multi-line log message in original log file:
+Sample of multi-line log message in the original log file:
 
 .. code-block:: none
 
-    Aug 9 14:22:47 hostname log line one
-    Aug 9 14:22:47 hostname log line two
-    Aug 9 14:22:47 hostname log line four
-    Aug 9 14:22:47 hostname log line three
-    Aug 9 14:22:47 hostname log line five
+   Aug 9 14:22:47 hostname log line one
+   Aug 9 14:22:47 hostname log line two
+   Aug 9 14:22:47 hostname log line four
+   Aug 9 14:22:47 hostname log line three
+   Aug 9 14:22:47 hostname log line five
 
-Sample Log message as analyzed by wazuh-analysisd:
+Sample of log message as processed by wazuh-analysisd:
 
 .. code-block:: none
-    :class: output
+   :class: output
 
-    Aug 9 14:22:47 hostname log line one Aug 9 14:22:47 hostname log line two Aug 9 14:22:47 hostname log line three Aug 9 14:22:47 hostname log line four Aug 9 14:22:47 hostname log line five
+   Aug 9 14:22:47 hostname log line one Aug 9 14:22:47 hostname log line two Aug 9 14:22:47 hostname log line three Aug 9 14:22:47 hostname log line four Aug 9 14:22:47 hostname log line five
 
 .. _ossec_localfile_out_format:
 
