@@ -169,7 +169,7 @@ Resources
 ^^^^^^
 
 +-----------------+---------------------------------------------------------------------------------------------------------------------------+
-| **Description** | Reference resources that do not yet exist in the system (futures). Actions using these resources are called resourceless. |
+| **Description** | References "any" or "all" resources across all scopes. Actions using these resources are called resourceless.             |
 +-----------------+---------------------------------------------------------------------------------------------------------------------------+
 
 agent:group
