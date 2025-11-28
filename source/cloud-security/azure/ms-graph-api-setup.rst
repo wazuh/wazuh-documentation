@@ -46,7 +46,7 @@ Certificates & secrets
 
    .. note::
 
-      Ensure you write down the secret's value section because the UI won't let you copy it afterward.
+      Ensure you write down the secret's value section, as the UI won't let you copy it later.
 
 .. _permissions-ms-graph-api-setup:
 
@@ -71,18 +71,6 @@ To configure the application permissions, go to the **API permissions** page and
    .. thumbnail:: /images/cloud-security/ms-graph/add-api-permissions.png
       :align: center
       :width: 80%
-
-#. Add the following relationships' permissions under the **DeviceManagementApps** and **DeviceManagementManagedDevices** sections:
-
-   - ``DeviceManagementApps.Read.All``. Read `auditEvents` & `detectedApps` relationship data from your tenant.
-
-   - ``DeviceManagementManagedDevices.Read.All``. Read `auditEvents` & `managedDevices` relationship data from your tenant.
-
-   .. thumbnail:: /images/cloud-security/ms-graph/4-azure-wazuh-app-configure-permissions-intune.png
-      :title: API permissions Intune
-      :alt: API permissions Intune
-      :align: center
-      :width: 100%
       
 #. Use an admin user to **Grant admin consent** for the tenant:
 
@@ -94,17 +82,16 @@ To configure the application permissions, go to the **API permissions** page and
 
    .. note::
    
-      Admin consent is required for API permission changes.
+      An Admin account is required to Grant admin consent for Default Directory.
 
 Wazuh server or agent
 ---------------------
 
-Next, we will see the necessary configuration to allow the integration to successfully pull logs from the Microsoft Graph API.
+Next, we will set the necessary configurations to allow the Wazuh module for Microsoft Graph to pull logs from the Microsoft Graph API successfully.
 
 #. Apply the following configuration to the local configuration file ``/var/ossec/etc/ossec.conf``:
 
    .. code-block:: xml
-      :emphasize-lines: 15-17,20,21
 
       <ms-graph>
           <enabled>yes</enabled>
@@ -114,9 +101,9 @@ Next, we will see the necessary configuration to allow the integration to succes
           <interval>5m</interval>
           <version>v1.0</version>
           <api_auth>
-            <client_id>your_client_id</client_id>
-            <tenant_id>your_tenant_id</tenant_id>
-            <secret_value>your_secret_value</secret_value>
+            <client_id><YOUR_APPLICATION_ID></client_id>
+            <tenant_id><YOUR_TENANT_ID></tenant_id>
+            <secret_value><YOUR_SECRET_VALUE></secret_value>
             <api_type>global</api_type>
           </api_auth>
           <resource>
@@ -130,63 +117,56 @@ Next, we will see the necessary configuration to allow the integration to succes
           </resource>
       </ms-graph>
 
-   The configuration monitors specific events at an interval of ``5m``.
-
-   -  ``alerts_v2`` and ``incidents`` within the ``security`` resource.
-   -  ``auditEvents`` within the ``deviceManagement`` resource.
-
-   Only logs created after the Wazuh module for Microsoft Graph starts are monitored.
+   In this case, we will search for ``alerts_v2`` and incidents within the security resource at an interval of ``5m``. The logs will only be created after the Wazuh module for Microsoft Graph starts.
 
    Where:
 
-   -  ``<client_id>`` (also known as an Application ID) is the unique identifier of your registered application.
-   -  ``<tenant_id>`` (also known as Directory ID) is the unique identifier for your Azure tenant
-   -  ``<secret_value>`` is the value of the client secret. It is used to authenticate the registered app on the Azure tenant.
-   -  ``<api_type>`` specifies the type of Microsoft 365 subscription plan the tenant uses. global refers to either a commercial or GCC tenant.
-   -  ``<name>`` specifies the resource's name (i.e., specific API endpoint) to query for logs.
+   -  ``<client_id>`` (also known as an Application ID) is the unique identifier of your registered application.  
+   -  ``<tenant_id>`` (also known as Directory ID) is the unique identifier for your Azure tenant  
+   -  ``<secret_value>`` is the value of the client secret. It is used to authenticate the registered app on the Azure tenant.  
+   -  ``<api_type>`` specifies the type of Microsoft 365 subscription plan the tenant uses. ``global`` refers to either a commercial or GCC tenant.  
+   -  ``<name>`` specifies the resource's name (i.e., specific API endpoint) to query for logs.  
    -  ``<relationship>`` specifies the types of content (relationships) to obtain logs for.
 
 #. Restart your Wazuh server or agent, depending on where you configured the Wazuh module for Microsoft Graph.
 
-   .. tabs::
+   Wazuh agent:
    
-      .. tab:: Wazuh agent
+   .. code-block:: console
    
-         .. code-block:: console
-   
-            # systemctl restart wazuh-agent
-   
-      .. tab:: Wazuh manager
-   
-         .. code-block:: console
-   
-            # systemctl restart wazuh-manager
-       
-   .. note::
+      # systemctl restart wazuh-agent
 
-      Multi-tenant is not supported. You can only configure one block of ``api_auth``. To learn more about the Wazuh module for Microsoft Graph options, see the :doc:`ms-graph </user-manual/reference/ossec-conf/ms-graph-module>` reference.
+   Wazuh server:
+   
+   .. code-block:: console
+   
+      # systemctl restart wazuh-manager
+          
+.. note::
 
-Use case
---------
+   Multi-tenant is not supported. You can only configure one block of ``api_auth``. To learn more about the Wazuh module for Microsoft Graph options, see the :doc:`ms-graph </user-manual/reference/ossec-conf/ms-graph-module>` reference.
 
-Using the configuration mentioned above, you can examine two examples as follows.
+Use cases
+---------
 
--  Malicious email as an example of a security event.
--  Change enrollment configuration as an example of an Intune event.
+Using the configuration mentioned above, we examine the following use cases:
+
+-  Monitoring security resources.
+-  Monitoring Microsoft Intune device management audit events.
 
 Monitoring security resources
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-One of the more ubiquitous alerts that an organization of any size receives is spam emails. In this case, we can specifically examine an example of a spam email containing malicious content and examine how Microsoft Graph & Wazuh report on this information.
+One ubiquitous alert an organisation of any size receives is spam email. In this case, we can examine a spam email containing malicious content and see how Microsoft Graph and Wazuh report on this information.
 
 We can set up the Wazuh module for Microsoft Graph to monitor the security resource and the ``alerts_v2`` relationship within our Microsoft 365 tenant described in :ref:`Retrieving content <retrieving_content>`. We also enable **Microsoft Defender for Office 365** within the Microsoft 365 tenant. Microsoft Defender for Office 365 monitors email messages for threats such as spam and malicious attachments.
 
 Detect malicious email
-^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~
 
 Enable Microsoft Defender for Office 365 and send a malicious email to an email address in the monitored domain. A malicious email detection activity will produce a log that can be accessed using the ``alerts_v2`` relationship within the Microsoft 365 tenant.
 
-#. Login to `Microsoft 365 Defender portal <https://security.microsoft.com/>`__ using an admin account.
+#. Log in to `Microsoft 365 Defender portal <https://security.microsoft.com/>`__ using an admin account.
 #. Navigate to **Policies & rules** > **Threat policies** > **Preset Security Policies**.
 #. Toggle the **Standard protection is off** button under **Standard protection**.
 #. Click on **Manage protection settings** and follow the prompt to set up the policies.
@@ -237,7 +217,7 @@ When Microsoft Defender for Office 365 detects a malicious email event, a log si
       }
 
 
-The Wazuh module for Microsoft Graph retrieves this log via Microsoft Graph API. This log matches an out-of-the-box rule with ID ``99506``. This triggers an alert with the following details:
+The Wazuh module for Microsoft Graph retrieves this log via the Microsoft Graph API. This log matches an out-of-the-box rule with ID ``99506``. This triggers an alert with the following details:
 
    .. code-block:: none
       :class: output
@@ -319,12 +299,15 @@ The alert is seen on the Wazuh dashboard.
    :align: center
    :width: 80%
 
+Monitoring device management audit events
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 Intune event
-^^^^^^^^^^^^
+~~~~~~~~~~~~
 
-Mobile Device Management (MDM) tools like Microsoft Intune enable organizations to manage devices. By integrating Microsoft Graph with Wazuh, organizations can monitor Microsoft Intune logs.
+Mobile Device Management (MDM) tools, such as Microsoft Intune, enable organizations to manage devices. By integrating Microsoft Graph with Wazuh, organizations can monitor Microsoft Intune logs.
 
-For instance, if a user updates the enrollment settings, configuring the module to monitor the ``deviceManagement`` resource and the ``auditEvents`` relationship might generate a JSON like the following one:
+For instance, if a user updates the enrollment settings, configuring the module to monitor the ``deviceManagement`` resource, the ``auditEvents`` relationship generates a JSON like the following:
 
 .. code-block:: json
    :class: output
@@ -413,7 +396,7 @@ For instance, if a user updates the enrollment settings, configuring the module 
        ]
    }
 
-In this example, you can take a look at the rule id ``99652``, which corresponds to ``MS Graph message: MDM Intune audit event.``.
+In this example, you can look at rule ID ``99652``, which corresponds to the ``Microsoft Graph message "MDM Intune audit event.``
 
 .. code-block:: xml
 
@@ -424,10 +407,9 @@ In this example, you can take a look at the rule id ``99652``, which corresponds
        <description>MS Graph message: MDM Intune audit event.</description>
    </rule>
 
-Once Wazuh connects with the Microsoft Graph API, the previous log triggers the rule and raises the following alert:
+Once Wazuh connects with the Microsoft Graph API, the previous log triggers the rule and raises the following Wazuh alert:
 
 .. code-block:: json
-   :emphasize-lines: 5
    :class: output
 
    {
@@ -543,3 +525,8 @@ Once Wazuh connects with the Microsoft Graph API, the previous log triggers the 
        },
        "location": "ms-graph"
    }
+
+
+.. thumbnail:: /images/cloud-security/ms-graph/ms-graph-intune-details.png
+      :align: center
+      :width: 100%
