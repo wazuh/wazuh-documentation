@@ -175,9 +175,9 @@ These are the steps to deploy a production grade Wazuh cluster using the "Open D
         - SSL_CERTIFICATE=/etc/filebeat/filebeat.pem
         - SSL_KEY=/etc/filebeat/filebeat.key
       volumes:
-        - ./ssl_certs/root-ca.pem:/etc/filebeat/root-ca.pem
-        - ./ssl_certs/filebeat.pem:/etc/filebeat/filebeat.pem
-        - ./ssl_certs/filebeat.key:/etc/filebeat/filebeat.key
+        - ./production_cluster/ssl_certs/root-ca.pem:/etc/filebeat/root-ca.pem
+        - ./production_cluster/ssl_certs/filebeat.pem:/etc/filebeat/filebeat.pem
+        - ./production_cluster/ssl_certs/filebeat.key:/etc/filebeat/filebeat.key
 
   2.4 Setup SSL certificates for Kibana
 
