@@ -164,7 +164,7 @@ Single-node stack
             - DASHBOARD_USERNAME=kibanaserver
             - DASHBOARD_PASSWORD=kibanaserver
 
-#. Replace the content of ``single-node/config/wazuh_cluster/wazuh_manager.conf`` file in your stack with the one from the v4.13.0 tag of the `Wazuh Docker repository <https://github.com/wazuh/wazuh-docker>`__.
+#. Replace the content of ``single-node/config/wazuh_cluster/wazuh_manager.conf`` file in your stack with the one from the v|WAZUH_CURRENT_DOCKER| tag of the `Wazuh Docker repository <https://github.com/wazuh/wazuh-docker>`__.
 
    .. code-block:: console
 
@@ -293,7 +293,7 @@ Multi-node stack
             - DASHBOARD_USERNAME=kibanaserver
             - DASHBOARD_PASSWORD=kibanaserver
 
-#. Replace the content of the following files in your stack with the ones from the v4.13.0 tag of the `Wazuh Docker repository <https://github.com/wazuh/wazuh-docker>`__.
+#. Replace the content of the following files in your stack with the ones from the v|WAZUH_CURRENT_DOCKER| tag of the `Wazuh Docker repository <https://github.com/wazuh/wazuh-docker>`__.
 
    -  ``multi-node/config/wazuh_cluster/wazuh_manager.conf``
 
