@@ -75,6 +75,13 @@ To modify a default decoder, you can rewrite its file in the ``/var/ossec/etc/de
 For example, if you want to customize decoders in the ``/var/ossec/ruleset/decoders/0310-ssh_decoders.xml`` file, follow these steps:
 
 #. Copy the decoder file ``/var/ossec/ruleset/decoders/0310-ssh_decoders.xml`` to the user directory ``/var/ossec/etc/decoders/``. This ensures that your changes are saved when upgrading to a newer version.
+#. Change the ownership and permission of the copied file to ``wazuh:wazuh`` to ensure the Wazuh manager service can read it:
+
+   .. code-block:: console
+
+      # chown wazuh:wazuh /var/ossec/etc/decoders/0310-ssh_decoders.xml
+      # chmod 660 /var/ossec/etc/decoders/0310-ssh_decoders.xml
+
 #. Edit the Wazuh server ``/var/ossec/etc/ossec.conf`` configuration file. Set the ``<decoder_exclude>`` tag to exclude the original ``/var/ossec/ruleset/decoders/0310-ssh_decoders.xml`` decoder file from the loading list. With this configuration, Wazuh loads the decoder file located in the ``/var/ossec/etc/decoders/`` user directory instead of the file in the default directory.
 
    .. code-block:: xml
