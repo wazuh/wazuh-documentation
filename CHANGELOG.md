@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Added clarification to the ``field`` option in the *Rules syntax* section. ([#9103](https://github.com/wazuh/wazuh-documentation/pull/9103))
 - **Post-release**: Added Syscollector parameter references. ([#9108](https://github.com/wazuh/wazuh-documentation/pull/9108)) ([#9109](https://github.com/wazuh/wazuh-documentation/pull/9109))
 - **Post-release**: Added ``apache`` to the allowed ``log_format`` values in the localfile configuration documentation. ([#9114](https://github.com/wazuh/wazuh-documentation/pull/9114))
+- **Post-release**: Added step to set file ownership and permissions when modifying default decoders. ([#9141](https://github.com/wazuh/wazuh-documentation/pull/9141))
 
 ### Changed
 
