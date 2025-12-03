@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Added clarification to the ``field`` option in the *Rules syntax* section. ([#9103](https://github.com/wazuh/wazuh-documentation/pull/9103))
 - **Post-release**: Added Syscollector parameter references. ([#9108](https://github.com/wazuh/wazuh-documentation/pull/9108)) ([#9109](https://github.com/wazuh/wazuh-documentation/pull/9109))
 - **Post-release**: Added ``apache`` to the allowed ``log_format`` values in the localfile configuration documentation. ([#9114](https://github.com/wazuh/wazuh-documentation/pull/9114))
+- **Post-release**: Added step to set file ownership and permissions when modifying default decoders. ([#9141](https://github.com/wazuh/wazuh-documentation/pull/9141))
 
 ### Changed
 
@@ -16,6 +17,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated the *Agents* manifests in the *Deployment on Kubernetes* section. ([#9111](https://github.com/wazuh/wazuh-documentation/pull/9111))
 - **Post-release**: Updated the *Monitoring Microsoft Graph services with Wazuh* section. ([#9107](https://github.com/wazuh/wazuh-documentation/pull/9107))
 - **Post-release**: Updated the *log_format* reference sub-section. ([#9117](https://github.com/wazuh/wazuh-documentation/pull/9117))
+- **Post-release**: Updated deployment on Docker documentation. ([#9138](https://github.com/wazuh/wazuh-documentation/pull/9138))
 - **Post-release**: Updated the auditd restart command. ([#9140](https://github.com/wazuh/wazuh-documentation/pull/9140))
 
 ### Removed
