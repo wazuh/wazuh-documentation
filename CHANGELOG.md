@@ -18,6 +18,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated the *Monitoring Microsoft Graph services with Wazuh* section. ([#9107](https://github.com/wazuh/wazuh-documentation/pull/9107))
 - **Post-release**: Updated the *log_format* reference sub-section. ([#9117](https://github.com/wazuh/wazuh-documentation/pull/9117))
 - **Post-release**: Updated deployment on Docker documentation. ([#9138](https://github.com/wazuh/wazuh-documentation/pull/9138))
+- **Post-release**: Updated the auditd restart command. ([#9140](https://github.com/wazuh/wazuh-documentation/pull/9140))
 - **Post-release**: Updated the *Resources* table in the *RBAC reference* guide. ([#9118](https://github.com/wazuh/wazuh-documentation/pull/9118))
 
 ### Removed
