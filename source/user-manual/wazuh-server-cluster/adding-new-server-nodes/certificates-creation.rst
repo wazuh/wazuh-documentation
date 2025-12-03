@@ -50,7 +50,7 @@ We generate new certificates for the Wazuh components in an all-in-one deploymen
 
    You can assign a different ``node_type`` in your installation. In this documentation, we assign the master role to the existing node and the worker role to the new node.
 
-#. Download and run ``wazuh-certs-tool.sh`` to create the certificates for the new node and recreate for the existing one:
+#. Download and run ``wazuh-certs-tool.sh`` from your ``/root`` directory to create the certificates for the new node and recreate for the existing one:
 
    .. code-block:: console
 
