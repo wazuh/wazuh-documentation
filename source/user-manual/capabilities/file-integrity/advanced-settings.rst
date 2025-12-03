@@ -50,7 +50,7 @@ You need to install the ``audit`` daemon if you don’t have it already installe
       .. code-block:: console
 
          # yum install audispd-plugins
-         # systemctl restart auditd
+         # service auditd restart
 
    .. group-tab:: Debian-based
 
@@ -63,7 +63,7 @@ You need to install the ``audit`` daemon if you don’t have it already installe
       .. code-block:: console
 
          # apt-get install audispd-plugins
-         # systemctl restart auditd
+         # service auditd restart
 
 In most systems, ``auditd`` includes a rule to skip processing of every audit rule by default. This setting prevents the reporting of any who-data information. To ensure that ``auditd`` is not `DISABLED BY DEFAULT <https://man7.org/linux/man-pages/man8/auditctl.8.html#DISABLED_BY_DEFAULT>`__, follow these steps.
 
@@ -79,7 +79,7 @@ In most systems, ``auditd`` includes a rule to skip processing of every audit ru
 
    .. code-block:: console
 
-      # systemctl restart auditd
+      # service auditd restart
       # systemctl restart wazuh-agent
 
 Configuration
