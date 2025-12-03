@@ -3,30 +3,13 @@
 .. meta::
   :description: Get answers to the most frequently asked questions about billing in this FAQ. Explore the potential of Wazuh Cloud and the Wazuh Cloud Console.
 
-.. _cloud_account_billing_faq:
-
 Billing FAQ
 ===========
 
-- `When is my credit card charged?`_
-
-- `Is my credit card information safe?`_
-
-- `Where can I see the next payment for an environment?`_
-
-- `What happens to my payments if I want to upgrade or downgrade a setting?`_
-
-- `How do I view previous receipts and billing history?`_
-
-- `How can I configure who receives receipts and billing notifications?`_
-
-- `What are the available payment methods on Wazuh Cloud?`_
-
-- `Can I get a refund?`_
-
-- `What is included in my Wazuh Cloud environment?`_
-
-- `How can I request more information?`_
+.. contents::
+   :local:
+   :depth: 1
+   :backlinks: none
 
 When is my credit card charged?
 -------------------------------
@@ -58,12 +41,10 @@ How can I configure who receives receipts and billing notifications?
 
 Go to :doc:`Update billing and operational contacts </cloud-service/account-billing/update-billing>` section to learn how to configure who receives receipts and billing notifications.
 
-
 What are the available payment methods on Wazuh Cloud?
 --------------------------------------------------------------
 
 Credit or debit card payments are supported. To learn more about Wazuh supported cards, see the certified payment processor list of card brands in the `Stripe documentation <https://stripe.com/docs/payments/cards/supported-card-brands>`_.
-
 
 Can I get a refund?
 -------------------
