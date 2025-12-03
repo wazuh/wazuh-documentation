@@ -758,7 +758,7 @@ Run the PowerShell script on a Windows endpoint to  retrieve information about t
 
 .. code-block:: doscon
 
-   # powershell .\get_agent_keep_alive.py
+   # powershell .\get_agent_keep_alive.ps1
 
 .. code-block:: none
    :class: output
