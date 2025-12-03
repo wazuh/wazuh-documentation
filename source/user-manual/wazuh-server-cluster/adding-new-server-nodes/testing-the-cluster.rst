@@ -44,7 +44,7 @@ Access the Wazuh dashboard using the credentials below.
 
 Navigate to **Server management** > **Dev Tools**.  On the console, run the query below:
 
-.. code-block:: API
+.. code-block:: none
 
    GET /cluster/healthcheck
 
