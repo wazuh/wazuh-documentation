@@ -3,8 +3,6 @@
 .. meta::
   :description: The Wazuh Cloud Command Line Interface lets you interact with Wazuh Cloud using commands in your command-line shell. Learn more about it in this section. 
 
-.. _cloud_wazuh_cloud_cli:
-
 CLI
 ===
 
@@ -15,63 +13,63 @@ Requirements
 
 To use ``wcloud-cli``, you need to install the following components:
 
-- Python 3.x
-- ``boto3`` Python package
-- ``requests`` Python package
-  
+-  Python 3.x
+-  ``boto3`` Python package
+-  ``requests`` Python package
+
 Installation
 ------------
 
-1. Use the following command to download the CLI tool.
+#. Use the following command to download the CLI tool.
 
-  .. code-block:: console
+   .. code-block:: console
 
-    # curl -so ~/wcloud-cli https://packages.wazuh.com/resources/cloud/wcloud-cli && chmod 500  ~/wcloud-cli 
+      # curl -so ~/wcloud-cli https://packages.wazuh.com/resources/cloud/wcloud-cli && chmod 500  ~/wcloud-cli 
 
-2. Run it with the version argument to confirm that the installation was successful.
+#. Run it with the version argument to confirm that the installation was successful.
 
-  .. code-block:: console
+   .. code-block:: console
 
-    # ./wcloud-cli version
+      # ./wcloud-cli version
 
-  .. code-block:: none
-    :class: output
+   .. code-block:: none
+      :class: output
 
-    Wazuh Cloud CLI - "version": "1.0.1"
-
+      Wazuh Cloud CLI - "version": "1.0.1"
 
 Configuration
 -------------
 
 You can configure the settings that the Wazuh Cloud CLI (``wcloud-cli``) uses to interact with Wazuh Cloud.
 
-By default, the Wazuh Cloud CLI reads the credential information from a local file named `credentials`, located in the `.wazuh-cloud` folder of your home directory. The location of your home directory varies based on the operating system, but you can find it using the environment variables `%UserProfile%` in Windows, and `$HOME` or `~ (tilde)` in Unix-based systems. 
+By default, the Wazuh Cloud CLI reads the credential information from a local file named ``credentials``, located in the ``.wazuh-cloud`` folder of your home directory. The location of your home directory varies based on the operating system, but you can find it using the environment variables ``%UserProfile%`` in Windows, and ``$HOME`` or ``~`` (tilde) in Unix-based systems.
 
-A non-default location can be specified for the config file by setting the `WAZUH_CLOUD_CREDENTIALS_FILE` environment variable to another local path.
+A non-default location can be specified for the config file by setting the ``WAZUH_CLOUD_CREDENTIALS_FILE`` environment variable to another local path.
 
-1. Create the credentials file and add your :doc:`API key </cloud-service/apis/authentication>`.
+#. Create the credentials file and add your :doc:`API key </cloud-service/apis/authentication>`.
 
-  ``~/.wazuh-cloud/credentials``
+   .. code-block:: console
 
-  .. code-block:: none
+      # touch ~/.wazuh-cloud/credentials
 
-    [default]
-    wazuh_cloud_api_key_name = Test
-    wazuh_cloud_api_key_secret = MDAwMDAwMDQ2T047Q4JVY1Sm5dDOqpDtkCQiY89fHjuZT3c90zs2
+   .. code-block:: none
 
-  The file is organized in profiles, a collection of credentials. When you specify a profile to run a command, the credentials are used to run that command. You can specify one default profile that is used when no profile is explicitly referenced. 
+      [default]
+      wazuh_cloud_api_key_name = Test
+      wazuh_cloud_api_key_secret = MDAwMDAwMDQ2T047Q4JVY1Sm5dDOqpDtkCQiY89fHjuZT3c90zs2
 
-2. Use the following command to test your credentials. Optionally, you can specify the profile.
+   The file is organized in profiles, a collection of credentials. When you specify a profile to run a command, the credentials are used to run that command. You can specify one default profile that is used when no profile is explicitly referenced.
 
-  .. code-block:: console
+#. Use the following command to test your credentials. Optionally, you can specify the profile.
 
-    # wcloud-cli test-credentials --profile <PROFILE_NAME>
+   .. code-block:: console
 
-  .. code-block:: none
-    :class: output
+      # wcloud-cli test-credentials --profile <PROFILE_NAME>
 
-    The API key 'Test' in the profile 'default' is valid.
+   .. code-block:: none
+      :class: output
 
+      The API key 'Test' in the profile 'default' is valid.
 
 Examples
 --------
@@ -79,52 +77,52 @@ Examples
 Getting S3 token for archive data
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This command generates an AWS token to access the archive data of the environment with Cloud ID `012345678ab`.
+This command generates an AWS token to access the archive data of the environment with Cloud ID ``012345678ab``.
 
 .. code-block:: console
 
-  # wcloud-cli cold-storage get-aws-s3-token 012345678ab
+   # wcloud-cli cold-storage get-aws-s3-token 012345678ab
 
 .. code-block:: none
-  :class: output
+   :class: output
 
-  Environment Cloud ID: '012345678ab'
-  Region: 'us-east-1'
-  S3 path: 'wazuh-cloud-cold-us-east-1/012345678ab'
+   Environment Cloud ID: '012345678ab'
+   Region: 'us-east-1'
+   S3 path: 'wazuh-cloud-cold-us-east-1/012345678ab'
 
-  The following AWS credentials will be valid until 2024-04-22 13:55:27:
-  [wazuh_cloud_storage]
-  aws_access_key_id = A...M
-  aws_secret_access_key = L...0
-  aws_session_token = F...Q==
+   The following AWS credentials will be valid until 2024-04-22 13:55:27:
+   [wazuh_cloud_storage]
+   aws_access_key_id = A...M
+   aws_secret_access_key = L...0
+   aws_session_token = F...Q==
 
 Listing archive data
 ^^^^^^^^^^^^^^^^^^^^^
 
-This command lists the archive data files of the environment `012345678ab` between the specified dates.
+This command lists the archive data files of the environment ``012345678ab`` between the specified dates.
 
 .. code-block:: console
 
-  # wcloud-cli cold-storage list 012345678ab --start 2021-05-07 --end 2021-05-07
+   # wcloud-cli cold-storage list 012345678ab --start 2021-05-07 --end 2021-05-07
 
 .. code-block:: none
-  :class: output
+   :class: output
 
-  Environment '012345678ab' files from 2021-05-07 to 2021-05-07:
-  012345678ab/output/alerts/2021/05/07/012345678ab_output_alerts_20210507T1040_mXSoDTf5Pgyr8b8D.json.gz
+   Environment '012345678ab' files from 2021-05-07 to 2021-05-07:
+   012345678ab/output/alerts/2021/05/07/012345678ab_output_alerts_20210507T1040_mXSoDTf5Pgyr8b8D.json.gz
 
 Downloading archive data
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This command downloads in the `/home/test` directory the archive data files of the environment `012345678ab` between the specified dates.
+This command downloads in the ``/home/test`` directory the archive data files of the environment ``012345678ab`` between the specified dates.
 
 .. code-block:: console
 
-  # wcloud-cli cold-storage download 012345678ab /home/test --start 2021-05-07 --end 2021-05-07
+   # wcloud-cli cold-storage download 012345678ab /home/test --start 2021-05-07 --end 2021-05-07
 
 .. code-block:: none
-  :class: output
+   :class: output
 
-  Environment '012345678ab' files from 2021-05-07 to 2021-05-07:
-  Downloading object 012345678ab/output/alerts/2021/05/07/012345678ab_output_alerts_20210507T1040_mXSoDTf5Pgyr8b8D.json.gz
-  Downloaded object 012345678ab/output/alerts/2021/05/07/012345678ab_output_alerts_20210507T1040_mXSoDTf5Pgyr8b8D.json.gz
+   Environment '012345678ab' files from 2021-05-07 to 2021-05-07:
+   Downloading object 012345678ab/output/alerts/2021/05/07/012345678ab_output_alerts_20210507T1040_mXSoDTf5Pgyr8b8D.json.gz
+   Downloaded object 012345678ab/output/alerts/2021/05/07/012345678ab_output_alerts_20210507T1040_mXSoDTf5Pgyr8b8D.json.gz
