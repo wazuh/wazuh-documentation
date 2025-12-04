@@ -164,9 +164,11 @@ Single-node stack
             - DASHBOARD_USERNAME=kibanaserver
             - DASHBOARD_PASSWORD=kibanaserver
 
-#. Replace the content of the following file in your stack with the one from the Wazuh Docker repository.
+#. Replace the content of ``single-node/config/wazuh_cluster/wazuh_manager.conf`` file in your stack with the one from the v|WAZUH_CURRENT_DOCKER| tag of the `Wazuh Docker repository <https://github.com/wazuh/wazuh-docker>`__.
 
-   -  ``single-node/config/wazuh_cluster/wazuh_manager.conf`` (see `wazuh_manager.conf <https://github.com/wazuh/wazuh-docker/blob/v|WAZUH_CURRENT_DOCKER|/single-node/config/wazuh_cluster/wazuh_manager.conf>`__ in tag ``v|WAZUH_CURRENT_DOCKER|``)
+   .. code-block:: console
+
+      # curl -sL https://raw.githubusercontent.com/wazuh/wazuh-docker/v|WAZUH_CURRENT_DOCKER|/single-node/config/wazuh_cluster/wazuh_manager.conf > single-node/config/wazuh_cluster/wazuh_manager.conf
 
 #. Start the new version of Wazuh using the ``docker compose`` command:
 
@@ -291,10 +293,19 @@ Multi-node stack
             - DASHBOARD_USERNAME=kibanaserver
             - DASHBOARD_PASSWORD=kibanaserver
 
-#. Replace the content of the following files in your stack with the ones from the Wazuh Docker repository.
+#. Replace the content of the following files in your stack with the ones from the v|WAZUH_CURRENT_DOCKER| tag of the `Wazuh Docker repository <https://github.com/wazuh/wazuh-docker>`__.
 
-   -  ``multi-node/config/wazuh_cluster/wazuh_manager.conf`` (see `wazuh_manager.conf <https://github.com/wazuh/wazuh-docker/blob/v|WAZUH_CURRENT_DOCKER|/multi-node/config/wazuh_cluster/wazuh_manager.conf>`__ in tag ``v|WAZUH_CURRENT_DOCKER|``)
-   -  ``multi-node/config/wazuh_cluster/wazuh_worker.conf`` (see `wazuh_worker.conf <https://github.com/wazuh/wazuh-docker/blob/v|WAZUH_CURRENT_DOCKER|/multi-node/config/wazuh_cluster/wazuh_worker.conf>`__ in tag ``v|WAZUH_CURRENT_DOCKER|``)
+   -  ``multi-node/config/wazuh_cluster/wazuh_manager.conf``
+
+      .. code-block:: console
+
+         # curl -sL https://raw.githubusercontent.com/wazuh/wazuh-docker/v|WAZUH_CURRENT_DOCKER|/multi-node/config/wazuh_cluster/wazuh_manager.conf > multi-node/config/wazuh_cluster/wazuh_manager.conf
+
+   -  ``multi-node/config/wazuh_cluster/wazuh_worker.conf``
+
+      .. code-block:: console
+
+         # curl -sL https://raw.githubusercontent.com/wazuh/wazuh-docker/v|WAZUH_CURRENT_DOCKER|/multi-node/config/wazuh_cluster/wazuh_worker.conf > multi-node/config/wazuh_cluster/wazuh_worker.conf
 
 #. Start the new version of Wazuh using the ``docker compose`` command:
 

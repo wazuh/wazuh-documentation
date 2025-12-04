@@ -42,13 +42,19 @@ Access the Wazuh dashboard using the credentials below.
 -  Username: ``admin``
 -  Password: ``<ADMIN_PASSWORD>`` or ``admin`` in case you already have a distributed architecture and using the default password.
 
-Navigate to **Tools** and select **API Console**.  On the console, run the query below:
+Navigate to **Server management** > **Dev Tools**.  On the console, run the query below:
 
 .. code-block:: none
 
    GET /cluster/healthcheck
 
-.. thumbnail:: /images/manual/wazuh-server/running-api-console-query.gif
+.. thumbnail:: /images/manual/wazuh-server/running-api-console-query1.png
+   :title: Running query in the API console
+   :alt: Running query in the API console
+   :align: center
+   :width: 80%
+
+.. thumbnail:: /images/manual/wazuh-server/running-api-console-query2.png
    :title: Running query in the API console
    :alt: Running query in the API console
    :align: center
