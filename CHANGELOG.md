@@ -3,7 +3,9 @@ All notable changes to this project will be documented in this file.
 
 ## [v4.14.2]
 
-- Support for Wazuh 4.14.2
+### Changed
+
+- Updated the Wazuh module for Filebeat version references to ``0.5``. ([#9149](https://github.com/wazuh/wazuh-documentation/pull/9149))
 
 ## [v4.14.1]
 
