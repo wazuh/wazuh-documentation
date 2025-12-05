@@ -23,6 +23,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated the command in the Wazuh sever API *Getting started* guide. ([#9143](https://github.com/wazuh/wazuh-documentation/pull/9143))
 - **Post-release**: Updated the *Adding new Wazuh server nodes* section. ([#9144](https://github.com/wazuh/wazuh-documentation/pull/9144)) ([#9145](https://github.com/wazuh/wazuh-documentation/pull/9145))
 - **Post-release**: Updated the *Wazuh Cloud service* documentation. ([#9136](https://github.com/wazuh/wazuh-documentation/pull/9136))
+- **Post-release**: Updated the version references for the Wazuh certificates generation tool. ([#9152](https://github.com/wazuh/wazuh-documentation/pull/9152))
 
 ### Removed
 
