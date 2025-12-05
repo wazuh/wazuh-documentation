@@ -176,6 +176,9 @@ custom_replacements = {
     "|SPLUNK_LATEST_MINOR|" : "8.2",
     "|WAZUH_SPLUNK_REV_CURRENT_LATEST|" : "1", # 8.2
     "|WAZUH_SPLUNK_REV_CURRENT_8.1|" : "1",
+    #
+    # === Tools
+    "|WAZUH_CERTS_GENERATOR|": "0.0.3",
 }
 
 if is_latest_release:
