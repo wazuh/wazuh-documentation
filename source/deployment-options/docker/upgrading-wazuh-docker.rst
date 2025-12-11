@@ -78,14 +78,16 @@ Single-node stack
       environment:
       - "OPENSEARCH_JAVA_OPTS=-Xms1g -Xmx1g"
 
-#. Modify the tag of the image generator in the ``single-node/generate-indexer-certs.yml`` file to the latest.
+#. In ``single-node/generate-indexer-certs.yml``, update the image generator tag to the latest version and add the ``CERT_TOOL_VERSION`` environment variable.
 
    .. code-block:: yaml
-      :emphasize-lines: 3
+      :emphasize-lines: 3,5
 
       services:
          generator:
             image: wazuh/wazuh-certs-generator:|WAZUH_CERTS_GENERATOR|
+            environment:
+              - CERT_TOOL_VERSION=|CERT_TOOL_VERSION|
 
 #. Recreate the certificates after these changes.
 
@@ -199,14 +201,16 @@ Multi-node stack
       environment:
       - "OPENSEARCH_JAVA_OPTS=-Xms1g -Xmx1g"
 
-#. Modify the tag of the image generator to the latest tag ``wazuh/wazuh-certs-generator:|WAZUH_CERTS_GENERATOR|`` in the ``multi-node/generate-indexer-certs.yml`` file.
+#. In ``multi-node/generate-indexer-certs.yml``, update the image generator tag to the latest version and add the ``CERT_TOOL_VERSION`` environment variable.
 
    .. code-block:: yaml
-      :emphasize-lines: 3
+      :emphasize-lines: 3,5
 
       services:
          generator:
             image: wazuh/wazuh-certs-generator:|WAZUH_CERTS_GENERATOR|
+            environment:
+              - CERT_TOOL_VERSION=|CERT_TOOL_VERSION|
 
 #. Recreate the certificates after these changes.
 
