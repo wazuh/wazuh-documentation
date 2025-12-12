@@ -78,14 +78,16 @@ Single-node stack
       environment:
       - "OPENSEARCH_JAVA_OPTS=-Xms1g -Xmx1g"
 
-#. Modify the tag of the image generator in the ``single-node/generate-indexer-certs.yml`` file to the latest.
+#. In ``single-node/generate-indexer-certs.yml``, update the image generator tag to the latest version and add the ``CERT_TOOL_VERSION`` environment variable.
 
    .. code-block:: yaml
-      :emphasize-lines: 3
+      :emphasize-lines: 3,5
 
       services:
          generator:
-            image: wazuh/wazuh-certs-generator:0.0.2
+            image: wazuh/wazuh-certs-generator:|WAZUH_CERTS_GENERATOR|
+            environment:
+              - CERT_TOOL_VERSION=|CERT_TOOL_VERSION|
 
 #. Recreate the certificates after these changes.
 
@@ -164,9 +166,11 @@ Single-node stack
             - DASHBOARD_USERNAME=kibanaserver
             - DASHBOARD_PASSWORD=kibanaserver
 
-#. Replace the content of the following file in your stack with the one from the Wazuh Docker repository.
+#. Replace the content of ``single-node/config/wazuh_cluster/wazuh_manager.conf`` file in your stack with the one from the v|WAZUH_CURRENT_DOCKER| tag of the `Wazuh Docker repository <https://github.com/wazuh/wazuh-docker>`__.
 
-   -  ``single-node/config/wazuh_cluster/wazuh_manager.conf`` (see `wazuh_manager.conf <https://github.com/wazuh/wazuh-docker/blob/v|WAZUH_CURRENT_DOCKER|/single-node/config/wazuh_cluster/wazuh_manager.conf>`__ in tag ``v|WAZUH_CURRENT_DOCKER|``)
+   .. code-block:: console
+
+      # curl -sL https://raw.githubusercontent.com/wazuh/wazuh-docker/v|WAZUH_CURRENT_DOCKER|/single-node/config/wazuh_cluster/wazuh_manager.conf > single-node/config/wazuh_cluster/wazuh_manager.conf
 
 #. Start the new version of Wazuh using the ``docker compose`` command:
 
@@ -197,14 +201,16 @@ Multi-node stack
       environment:
       - "OPENSEARCH_JAVA_OPTS=-Xms1g -Xmx1g"
 
-#. Modify the tag of the image generator to the latest tag ``wazuh/wazuh-certs-generator:0.0.2`` in the ``multi-node/generate-indexer-certs.yml`` file.
+#. In ``multi-node/generate-indexer-certs.yml``, update the image generator tag to the latest version and add the ``CERT_TOOL_VERSION`` environment variable.
 
    .. code-block:: yaml
-      :emphasize-lines: 3
+      :emphasize-lines: 3,5
 
       services:
          generator:
-            image: wazuh/wazuh-certs-generator:0.0.2
+            image: wazuh/wazuh-certs-generator:|WAZUH_CERTS_GENERATOR|
+            environment:
+              - CERT_TOOL_VERSION=|CERT_TOOL_VERSION|
 
 #. Recreate the certificates after these changes.
 
@@ -291,10 +297,19 @@ Multi-node stack
             - DASHBOARD_USERNAME=kibanaserver
             - DASHBOARD_PASSWORD=kibanaserver
 
-#. Replace the content of the following files in your stack with the ones from the Wazuh Docker repository.
+#. Replace the content of the following files in your stack with the ones from the v|WAZUH_CURRENT_DOCKER| tag of the `Wazuh Docker repository <https://github.com/wazuh/wazuh-docker>`__.
 
-   -  ``multi-node/config/wazuh_cluster/wazuh_manager.conf`` (see `wazuh_manager.conf <https://github.com/wazuh/wazuh-docker/blob/v|WAZUH_CURRENT_DOCKER|/multi-node/config/wazuh_cluster/wazuh_manager.conf>`__ in tag ``v|WAZUH_CURRENT_DOCKER|``)
-   -  ``multi-node/config/wazuh_cluster/wazuh_worker.conf`` (see `wazuh_worker.conf <https://github.com/wazuh/wazuh-docker/blob/v|WAZUH_CURRENT_DOCKER|/multi-node/config/wazuh_cluster/wazuh_worker.conf>`__ in tag ``v|WAZUH_CURRENT_DOCKER|``)
+   -  ``multi-node/config/wazuh_cluster/wazuh_manager.conf``
+
+      .. code-block:: console
+
+         # curl -sL https://raw.githubusercontent.com/wazuh/wazuh-docker/v|WAZUH_CURRENT_DOCKER|/multi-node/config/wazuh_cluster/wazuh_manager.conf > multi-node/config/wazuh_cluster/wazuh_manager.conf
+
+   -  ``multi-node/config/wazuh_cluster/wazuh_worker.conf``
+
+      .. code-block:: console
+
+         # curl -sL https://raw.githubusercontent.com/wazuh/wazuh-docker/v|WAZUH_CURRENT_DOCKER|/multi-node/config/wazuh_cluster/wazuh_worker.conf > multi-node/config/wazuh_cluster/wazuh_worker.conf
 
 #. Start the new version of Wazuh using the ``docker compose`` command:
 
