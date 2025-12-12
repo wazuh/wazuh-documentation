@@ -3,8 +3,6 @@
 .. meta::
   :description: Learn more about managing your cloud environments and the actions that can be performed in your account using the Wazuh Cloud Console in this section. 
 
-.. _cloud_account_billing:
-
 Account and billing
 ===================
 

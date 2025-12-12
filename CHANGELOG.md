@@ -31,6 +31,18 @@ All notable changes to this project will be documented in this file.
 - Removed documentation to deprecated `fluent-forward` tool. ([#8778](https://github.com/wazuh/wazuh-documentation/pull/8778))
 - Removed support for legacy operating systems, including Red Hat 5, CentOS 5, Oracle Linux 5, SUSE Linux Enterprise Server 11, AIX, HP-UX, Solaris, Windows XP, Windows Vista, and Windows Server 2003. ([#8894](https://github.com/wazuh/wazuh-documentation/pull/8894))
 
+## [v4.14.3]
+
+### Added
+
+- Added the macOS 26 (Tahoe) SCA policy reference to the *Available SCA policies* section. ([#9158](https://github.com/wazuh/wazuh-documentation/pull/9158))
+
+## [v4.14.2]
+
+### Changed
+
+- Updated the Wazuh module for Filebeat version references to ``0.5``. ([#9149](https://github.com/wazuh/wazuh-documentation/pull/9149))
+
 ## [v4.14.1]
 
 ### Added
@@ -38,6 +50,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Added clarification to the ``field`` option in the *Rules syntax* section. ([#9103](https://github.com/wazuh/wazuh-documentation/pull/9103))
 - **Post-release**: Added Syscollector parameter references. ([#9108](https://github.com/wazuh/wazuh-documentation/pull/9108)) ([#9109](https://github.com/wazuh/wazuh-documentation/pull/9109))
 - **Post-release**: Added ``apache`` to the allowed ``log_format`` values in the localfile configuration documentation. ([#9114](https://github.com/wazuh/wazuh-documentation/pull/9114))
+- **Post-release**: Added step to set file ownership and permissions when modifying default decoders. ([#9141](https://github.com/wazuh/wazuh-documentation/pull/9141))
 
 ### Changed
 
@@ -46,6 +59,15 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated the *Agents* manifests in the *Deployment on Kubernetes* section. ([#9111](https://github.com/wazuh/wazuh-documentation/pull/9111))
 - **Post-release**: Updated the *Monitoring Microsoft Graph services with Wazuh* section. ([#9107](https://github.com/wazuh/wazuh-documentation/pull/9107))
 - **Post-release**: Updated the *log_format* reference sub-section. ([#9117](https://github.com/wazuh/wazuh-documentation/pull/9117))
+- **Post-release**: Updated deployment on Docker documentation. ([#9138](https://github.com/wazuh/wazuh-documentation/pull/9138))
+- **Post-release**: Updated the auditd restart command. ([#9140](https://github.com/wazuh/wazuh-documentation/pull/9140))
+- **Post-release**: Updated the *Resources* table in the *RBAC reference* guide. ([#9118](https://github.com/wazuh/wazuh-documentation/pull/9118))
+- **Post-release**: Updated the command in the Wazuh sever API *Getting started* guide. ([#9143](https://github.com/wazuh/wazuh-documentation/pull/9143))
+- **Post-release**: Updated the *Adding new Wazuh server nodes* section. ([#9144](https://github.com/wazuh/wazuh-documentation/pull/9144)) ([#9145](https://github.com/wazuh/wazuh-documentation/pull/9145))
+- **Post-release**: Updated the *Wazuh Cloud service* documentation. ([#9136](https://github.com/wazuh/wazuh-documentation/pull/9136))
+- **Post-release**: Updated the version references for the Wazuh certificates generation tool. ([#9152](https://github.com/wazuh/wazuh-documentation/pull/9152))
+- **Post-release**: Updated steps on the *Upgrading Wazuh Docker* section. ([#9155](https://github.com/wazuh/wazuh-documentation/pull/9155))
+- **Post-release**: Updated the Deployment on Kubernetes documentation. ([#9154](https://github.com/wazuh/wazuh-documentation/pull/9154))
 
 ### Removed
 

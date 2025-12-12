@@ -150,6 +150,9 @@ custom_replacements = {
     "|WAZUH_CURRENT_HPUX|" : release,
     "|WAZUH_REVISION_HPUX|" : "1",
     #
+    # === Wazuh module for Filebeat
+    "|WAZUH_FILEBEAT|": "0.5",
+    #
     # === OpenSearch
     "|OPENSEARCH_DASHBOARDS_VERSION|": "2.16.0",
     #
@@ -176,6 +179,10 @@ custom_replacements = {
     "|SPLUNK_LATEST_MINOR|" : "8.2",
     "|WAZUH_SPLUNK_REV_CURRENT_LATEST|" : "1", # 8.2
     "|WAZUH_SPLUNK_REV_CURRENT_8.1|" : "1",
+    #
+    # === Tools
+    "|WAZUH_CERTS_GENERATOR|": "0.0.3",
+    "|CERT_TOOL_VERSION|": version,
 }
 
 if is_latest_release:
