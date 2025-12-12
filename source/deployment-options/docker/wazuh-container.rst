@@ -185,7 +185,7 @@ You must provide certificates for each node to secure communication between them
             # Wazuh App Copyright (C) 2017, Wazuh Inc. (License GPLv2)
             services:
               generator:
-                image: wazuh/wazuh-certs-generator:0.0.2
+                image: wazuh/wazuh-certs-generator:|WAZUH_CERTS_GENERATOR|
                 hostname: wazuh-certs-generator
                 volumes:
                   - ./config/wazuh_indexer_ssl_certs/:/certificates/
@@ -328,7 +328,7 @@ You must provide certificates for each node to secure communication between them
             # Wazuh App Copyright (C) 2017, Wazuh Inc. (License GPLv2)
             services:
               generator:
-                image: wazuh/wazuh-certs-generator:0.0.2
+                image: wazuh/wazuh-certs-generator:|WAZUH_CERTS_GENERATOR|
                 hostname: wazuh-certs-generator
                 volumes:
                   - ./config/wazuh_indexer_ssl_certs/:/certificates/
