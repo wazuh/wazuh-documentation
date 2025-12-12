@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [v4.14.2]
 
+### Fixed
+
+- Fixed code block highlighting and indentation for ``securityContext`` in *Upgrading Wazuh on Kubernetes*. ([#9161](https://github.com/wazuh/wazuh-documentation/pull/9161))
+
 ### Changed
 
 - Updated the Wazuh module for Filebeat version references to ``0.5``. ([#9149](https://github.com/wazuh/wazuh-documentation/pull/9149))
