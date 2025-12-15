@@ -7,6 +7,10 @@ All notable changes to this project will be documented in this file.
 
 - Added the macOS 26 (Tahoe) SCA policy reference to the *Available SCA policies* section. ([#9158](https://github.com/wazuh/wazuh-documentation/pull/9158))
 
+### Changed
+
+- Added ARM64 to Deployment on Docker prerequisites and updated certificate generator version. ([#9163](https://github.com/wazuh/wazuh-documentation/pull/9163))
+
 ## [v4.14.2]
 
 ### Changed
