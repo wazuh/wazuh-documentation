@@ -48,6 +48,7 @@ The block below is the default Syscollector configuration present in the Wazuh a
         <!-- Database synchronization settings -->
         <synchronization>
           <max_eps>10</max_eps>
+          <integrity_interval>86400</integrity_interval>
         </synchronization>
       </wodle>
 
