@@ -451,10 +451,13 @@ def setup(app):
             print(server_api_spec_path + " not found")
             download_needed = True
         
-        if download_needed == True:
-            print ('Downloading ' + 'spec-'+api_tag+'.yaml')
-            spec_path, url_retrieve_headers = urlretrieve(apiURL, server_api_spec_path)
-
+        try:
+           if download_needed == True:
+               print ('Downloading ' + 'spec-'+api_tag+'.yaml')
+               spec_path, url_retrieve_headers = urlretrieve(apiURL, server_api_spec_path)
+        except:
+            print ('Using local file')
+         
         # Minify redirects.js
         if html_theme_options['include_version_selector'] == True:
             with open(os.path.join(static_path_str, "js/redirects.js")) as redirects_file:

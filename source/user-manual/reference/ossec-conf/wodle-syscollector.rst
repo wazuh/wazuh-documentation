@@ -249,6 +249,7 @@ The database synchronization settings are configured inside this tag.
 	<wodle name="syscollector">
 	  <synchronization>
 	    <max_eps>10</max_eps>
+	    <integrity_interval>86400</integrity_interval>
 	  </synchronization>
 	</wodle>
 
@@ -262,6 +263,17 @@ Sets the maximum event reporting throughput.
 +--------------------+--------------------------------------------------------------+
 | **Allowed values** | Integer number between 0 and 1000000. 0 means default value. |
 +--------------------+--------------------------------------------------------------+
+
+integrity_interval
+^^^^^^^^^^^^^^^^^^
+
+Defines how often the agent performs a periodic integrity validation for IT Hygiene databases. When the interval elapses, the agent calculates checksums and compares them with the manager. On mismatch, the agent triggers a recovery mechanism to resolve synchronization inconsistencies.
+
++--------------------+---------------------------------------------+
+| **Default value**  | ``86400`` (24 hours)                        |
++--------------------+---------------------------------------------+
+| **Allowed values** | Any non-negative integer (seconds).         |
++--------------------+---------------------------------------------+
 
 
 Example of configuration
@@ -288,5 +300,6 @@ Example of configuration
 	  <!-- Database synchronization settings -->
 	  <synchronization>
 	    <max_eps>10</max_eps>
+	    <integrity_interval>86400</integrity_interval>
 	  </synchronization>
 	</wodle>
