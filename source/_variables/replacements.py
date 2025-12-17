@@ -180,6 +180,7 @@ custom_replacements = {
     # === Tools
     "|WAZUH_CERTS_GENERATOR|": "0.0.3",
     "|CERT_TOOL_VERSION|": version,
+    "|YARA_VERSION|": "4.5.5",
 }
 
 if is_latest_release:
