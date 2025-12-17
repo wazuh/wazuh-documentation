@@ -219,7 +219,7 @@ Sets the maximum throughput for synchronization messages.
 
 **integrity_interval**
 
-Defines how often the agent performs a periodic integrity validation for SCA databases. When the interval elapses, the agent calculates checksums and compares them with the manager. On mismatch, the agent triggers a recovery mechanism to resolve synchronization inconsistencies.
+Sets the time interval for periodic database integrity validation.
 
 +--------------------+---------------------------------------------+
 | **Default value**  | ``86400`` (24 hours)                        |
