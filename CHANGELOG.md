@@ -10,8 +10,6 @@ All notable changes to this project will be documented in this file.
 - Added documentation for SCA state persistence settings. ([#8841](https://github.com/wazuh/wazuh-documentation/pull/8841))
 - Added ARM64 support for Linux and macOS WPK packages. ([#8851](https://github.com/wazuh/wazuh-documentation/pull/8851))
 - Added ``integrity_interval`` to the syscheck ``synchronization`` configuration and updated the ``response_timeout`` default value. ([#9099](https://github.com/wazuh/wazuh-documentation/pull/9099))
-- Added ``integrity_interval`` to the SCA ``synchronization`` configuration. ([#XXXX](https://github.com/wazuh/wazuh-documentation/pull/XXXX))
-- Added ``integrity_interval`` to the syscollector ``synchronization`` configuration. ([#XXXX](https://github.com/wazuh/wazuh-documentation/pull/XXXX))
 
 ### Changed
 
