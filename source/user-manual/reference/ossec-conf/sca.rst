@@ -174,7 +174,7 @@ Database synchronization settings go inside this tag.
       <interval>5m</interval>
       <response_timeout>30</response_timeout>
       <max_eps>10</max_eps>
-      <integrity_interval>86400</integrity_interval>
+      <integrity_interval>24h</integrity_interval>
     </synchronization>
 
 **enabled**
@@ -222,7 +222,7 @@ Sets the maximum throughput for synchronization messages.
 Sets the time interval for periodic database integrity validation.
 
 +--------------------+---------------------------------------------+
-| **Default value**  | ``86400`` (24 hours)                        |
+| **Default value**  | ``24h``                                     |
 +--------------------+---------------------------------------------+
 | **Allowed values** | Any non-negative integer (seconds).         |
 +--------------------+---------------------------------------------+
@@ -329,6 +329,6 @@ Configuration example
           <interval>5m</interval>
           <response_timeout>30</response_timeout>
           <max_eps>10</max_eps>
-          <integrity_interval>86400</integrity_interval>
+          <integrity_interval>24h</integrity_interval>
         </synchronization>
       </sca>

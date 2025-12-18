@@ -249,7 +249,7 @@ The database synchronization settings are configured inside this tag.
 	<wodle name="syscollector">
 	  <synchronization>
 	    <max_eps>10</max_eps>
-	    <integrity_interval>86400</integrity_interval>
+	    <integrity_interval>24h</integrity_interval>
 	  </synchronization>
 	</wodle>
 
@@ -270,7 +270,7 @@ integrity_interval
 Sets the time interval for periodic database integrity validation.
 
 +--------------------+---------------------------------------------+
-| **Default value**  | ``86400`` (24 hours)                        |
+| **Default value**  | ``24h``                                     |
 +--------------------+---------------------------------------------+
 | **Allowed values** | Any non-negative integer (seconds).         |
 +--------------------+---------------------------------------------+
@@ -300,6 +300,6 @@ Example of configuration
 	  <!-- Database synchronization settings -->
 	  <synchronization>
 	    <max_eps>10</max_eps>
-	    <integrity_interval>86400</integrity_interval>
+	    <integrity_interval>24h</integrity_interval>
 	  </synchronization>
 	</wodle>
