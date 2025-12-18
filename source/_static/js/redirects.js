@@ -81,6 +81,8 @@ newUrls['5.0'] = [
 /* Pages no longer available in 5.0 */
 
 removedUrls['5.0'] = [
+  '/user-manual/capabilities/system-inventory/osquery.html',
+  '/user-manual/reference/ossec-conf/wodle-osquery.html',
   '/user-manual/reference/daemons/wazuh-agentlessd.html',
   '/user-manual/reference/daemons/wazuh-csyslogd.html',
   '/user-manual/reference/daemons/wazuh-dbd.html',

@@ -485,8 +485,6 @@ Wazuh Puppet module reference
 |                                                                 |                                                                 |                                             |
 |                                                                 | :ref:`Wazuh API <ref_server_vars_wazuh_api>`                    |                                             |
 |                                                                 |                                                                 |                                             |
-|                                                                 | :ref:`Wodle osquery <ref_server_vars_wodle_osquery>`            |                                             |
-|                                                                 |                                                                 |                                             |
 |                                                                 | :ref:`Wodle Syscollector <ref_server_vars_wodle_syscollector>`  |                                             |
 |                                                                 |                                                                 |                                             |
 |                                                                 | :ref:`Misc <ref_server_vars_misc>`                              |                                             |
@@ -504,8 +502,6 @@ Wazuh Puppet module reference
 |                                                                 | :ref:`SCA <ref_agent_vars_sca>`                                 |                                             |
 |                                                                 |                                                                 |                                             |
 |                                                                 | :ref:`Syscheck <ref_agent_vars_syscheck>`                       |                                             |
-|                                                                 |                                                                 |                                             |
-|                                                                 | :ref:`Wodle osquery <ref_agent_vars_wodle_osquery>`             |                                             |
 |                                                                 |                                                                 |                                             |
 |                                                                 | :ref:`Wodle Syscollector <ref_agent_vars_wodle_syscollector>`   |                                             |
 |                                                                 |                                                                 |                                             |
