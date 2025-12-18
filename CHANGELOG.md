@@ -30,6 +30,7 @@ All notable changes to this project will be documented in this file.
 - Removed documentation and references to deprecated CLI tools: `clear_stats`, `update_ruleset`, and `wazuh-regex`. ([#8778](https://github.com/wazuh/wazuh-documentation/pull/8778))
 - Removed documentation to deprecated `fluent-forward` tool. ([#8778](https://github.com/wazuh/wazuh-documentation/pull/8778))
 - Removed support for legacy operating systems, including Red Hat 5, CentOS 5, Oracle Linux 5, SUSE Linux Enterprise Server 11, AIX, HP-UX, Solaris, Windows XP, Windows Vista, and Windows Server 2003. ([#8894](https://github.com/wazuh/wazuh-documentation/pull/8894))
+- Removed Osquery references as this capability is now deprecated. ([#]())
 
 ## [v4.14.3]
 
