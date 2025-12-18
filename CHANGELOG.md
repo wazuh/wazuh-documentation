@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Added ``apache`` to the allowed ``log_format`` values in the localfile configuration documentation. ([#9114](https://github.com/wazuh/wazuh-documentation/pull/9114))
 - **Post-release**: Added step to set file ownership and permissions when modifying default decoders. ([#9141](https://github.com/wazuh/wazuh-documentation/pull/9141))
 
+test signing
 ### Changed
 
 - **Post-release**: Updated the *Navigating the Wazuh dashboard* section. ([#9105](https://github.com/wazuh/wazuh-documentation/pull/9105))
