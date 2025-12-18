@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file.
 - Added references for FIM (Syscheck) and inventory (Syscollector) state persistence settings. ([#8801](https://github.com/wazuh/wazuh-documentation/pull/8801))
 - Added documentation for SCA state persistence settings. ([#8841](https://github.com/wazuh/wazuh-documentation/pull/8841))
 - Added ARM64 support for Linux and macOS WPK packages. ([#8851](https://github.com/wazuh/wazuh-documentation/pull/8851))
+- Added ``integrity_interval`` to the syscheck ``synchronization`` configuration and updated the ``response_timeout`` default value. ([#9099](https://github.com/wazuh/wazuh-documentation/pull/9099))
 
 ### Changed
 
@@ -30,9 +31,48 @@ All notable changes to this project will be documented in this file.
 - Removed documentation to deprecated `fluent-forward` tool. ([#8778](https://github.com/wazuh/wazuh-documentation/pull/8778))
 - Removed support for legacy operating systems, including Red Hat 5, CentOS 5, Oracle Linux 5, SUSE Linux Enterprise Server 11, AIX, HP-UX, Solaris, Windows XP, Windows Vista, and Windows Server 2003. ([#8894](https://github.com/wazuh/wazuh-documentation/pull/8894))
 
+## [v4.14.3]
+
+### Added
+
+- Added the macOS 26 (Tahoe) SCA policy reference to the *Available SCA policies* section. ([#9158](https://github.com/wazuh/wazuh-documentation/pull/9158))
+
+## [v4.14.2]
+
+### Changed
+
+- Updated the Wazuh module for Filebeat version references to ``0.5``. ([#9149](https://github.com/wazuh/wazuh-documentation/pull/9149))
+
 ## [v4.14.1]
 
-- Support for Wazuh 4.14.1
+### Added
+
+- **Post-release**: Added clarification to the ``field`` option in the *Rules syntax* section. ([#9103](https://github.com/wazuh/wazuh-documentation/pull/9103))
+- **Post-release**: Added Syscollector parameter references. ([#9108](https://github.com/wazuh/wazuh-documentation/pull/9108)) ([#9109](https://github.com/wazuh/wazuh-documentation/pull/9109))
+- **Post-release**: Added ``apache`` to the allowed ``log_format`` values in the localfile configuration documentation. ([#9114](https://github.com/wazuh/wazuh-documentation/pull/9114))
+- **Post-release**: Added step to set file ownership and permissions when modifying default decoders. ([#9141](https://github.com/wazuh/wazuh-documentation/pull/9141))
+
+### Changed
+
+- **Post-release**: Updated the *Navigating the Wazuh dashboard* section. ([#9105](https://github.com/wazuh/wazuh-documentation/pull/9105))
+- **Post-release**: Updated the *Development* section. ([#9104](https://github.com/wazuh/wazuh-documentation/pull/9104))
+- **Post-release**: Updated the *Agents* manifests in the *Deployment on Kubernetes* section. ([#9111](https://github.com/wazuh/wazuh-documentation/pull/9111))
+- **Post-release**: Updated the *Monitoring Microsoft Graph services with Wazuh* section. ([#9107](https://github.com/wazuh/wazuh-documentation/pull/9107))
+- **Post-release**: Updated the *log_format* reference sub-section. ([#9117](https://github.com/wazuh/wazuh-documentation/pull/9117))
+- **Post-release**: Updated deployment on Docker documentation. ([#9138](https://github.com/wazuh/wazuh-documentation/pull/9138))
+- **Post-release**: Updated the auditd restart command. ([#9140](https://github.com/wazuh/wazuh-documentation/pull/9140))
+- **Post-release**: Updated the *Resources* table in the *RBAC reference* guide. ([#9118](https://github.com/wazuh/wazuh-documentation/pull/9118))
+- **Post-release**: Updated the command in the Wazuh sever API *Getting started* guide. ([#9143](https://github.com/wazuh/wazuh-documentation/pull/9143))
+- **Post-release**: Updated the *Adding new Wazuh server nodes* section. ([#9144](https://github.com/wazuh/wazuh-documentation/pull/9144)) ([#9145](https://github.com/wazuh/wazuh-documentation/pull/9145))
+- **Post-release**: Updated the *Wazuh Cloud service* documentation. ([#9136](https://github.com/wazuh/wazuh-documentation/pull/9136))
+- **Post-release**: Updated the version references for the Wazuh certificates generation tool. ([#9152](https://github.com/wazuh/wazuh-documentation/pull/9152))
+- **Post-release**: Updated steps on the *Upgrading Wazuh Docker* section. ([#9155](https://github.com/wazuh/wazuh-documentation/pull/9155))
+- **Post-release**: Updated the Deployment on Kubernetes documentation. ([#9154](https://github.com/wazuh/wazuh-documentation/pull/9154))
+
+### Removed
+
+- **Post-release**: Removed the *Environment variables* sub-section in *Configuring AWS credentials*. ([#9110](https://github.com/wazuh/wazuh-documentation/pull/9110))
+- **Post-release**: Removed note about the credentials file in *Amazon Security Lake* section. ([#9112](https://github.com/wazuh/wazuh-documentation/pull/9112))
 
 ## [v4.14.0]
 
@@ -42,15 +82,68 @@ All notable changes to this project will be documented in this file.
 - Added Rocky Linux 10 to the Wazuh agent packages list and the available SCA policies. ([#8799](https://github.com/wazuh/wazuh-documentation/pull/8799))
 - Updated monitoring Amazon Inspector documentation to include Inspector v2. ([#8820](https://github.com/wazuh/wazuh-documentation/pull/8820))
 - Updated the `filter` option in the `localfile` reference section. ([#8837](https://github.com/wazuh/wazuh-documentation/pull/8837))
+- Added Wazuh agent support for Debian 13. ([#8946](https://github.com/wazuh/wazuh-documentation/pull/8946))
+- Added a *Change the password of Wazuh users* step in Deployment on Kubernetes documentation. ([#8979](https://github.com/wazuh/wazuh-documentation/pull/8979))
+- **Post-release**: Added Wazuh indexer indices. ([#9009](https://github.com/wazuh/wazuh-documentation/pull/9009))
+- **Post-release**: Added mandatory dependency installation step for Debian-based operating systems in the *Deploying Wazuh agents on Linux endpoints* documentation. ([#9054](https://github.com/wazuh/wazuh-documentation/pull/9054))
+- **Post-release**: Added keystore update command in the section on installing the Wazuh dashboard. ([#9091](https://github.com/wazuh/wazuh-documentation/pull/9091))
 
 ### Changed
 
 - Updated the Filebeat package revision number. ([#8627](https://github.com/wazuh/wazuh-documentation/pull/8627))
 - Updated centralized configuration (`agent.conf`) documentation to reflect that agents apply changes automatically (hot reload) without requiring a manual restart. ([#8711](https://github.com/wazuh/wazuh-documentation/pull/8711))
+- Updated the cloud security module dependencies for Python 3.13 compatibility. ([#8985](https://github.com/wazuh/wazuh-documentation/pull/8985))
+- Updated Docker and Kubernetes configurations to reflect new Wazuh indexer file paths. ([#8982](https://github.com/wazuh/wazuh-documentation/pull/8982))
+- **Post-release**: Updated step in *Keeping your custom Docker Compose files* section. ([#9010](https://github.com/wazuh/wazuh-documentation/pull/9010))
+- **Post-release**: Updated the *Deployment with Puppet* documentation. ([#9012](https://github.com/wazuh/wazuh-documentation/pull/9012)) ([#9016](https://github.com/wazuh/wazuh-documentation/pull/9016))
+- **Post-release**: Updated the command for changing Wazuh server API user passwords in the *Password management* documentation. ([#9051](https://github.com/wazuh/wazuh-documentation/pull/9051))
+- **Post-release**: Updated the *Configuring existing components to connect with the new node* sections. ([#9057](https://github.com/wazuh/wazuh-documentation/pull/9057))
+- **Post-release**: Updated the vulnerability detection compatibility matrix. ([#9060](https://github.com/wazuh/wazuh-documentation/pull/9060))
+- **Post-release**: Updated the IT hygiene use cases in the *Getting started* guide. ([#9071](https://github.com/wazuh/wazuh-documentation/pull/9071))
+- **Post-release**: Updated the Deployment on Kubernetes documentation. ([#9022](https://github.com/wazuh/wazuh-documentation/pull/9022))
+- **Post-release**: Updated the System Inventory documentation. ([#9052](https://github.com/wazuh/wazuh-documentation/pull/9052)) ([#9053](https://github.com/wazuh/wazuh-documentation/pull/9053)) ([#9067](https://github.com/wazuh/wazuh-documentation/pull/9067)) ([#9070](https://github.com/wazuh/wazuh-documentation/pull/9070)) ([#9073](https://github.com/wazuh/wazuh-documentation/pull/9073))
+- **Post-release**: Updated regulatory compliance documentation. ([#9074](https://github.com/wazuh/wazuh-documentation/pull/9074))
+- **Post-release**: Updated clarification on ``sca.remote_commands`` flag. ([#9077](https://github.com/wazuh/wazuh-documentation/pull/9077))
+- **Post-release**: Updated steps in the *Upgrading the Wazuh server* section. ([#9094](https://github.com/wazuh/wazuh-documentation/pull/9094))
+
+### Fixed
+
+- **Post-release**: Added missing step to *Updating old paths* in *Upgrading Wazuh on Kubernetes*. ([#9069](https://github.com/wazuh/wazuh-documentation/pull/9069))
+- **Post-release**: Updated the referenced OpenSearch version in the upgrade guide. ([#9068](https://github.com/wazuh/wazuh-documentation/pull/9068))
+- **Post-release**: Fixed indentation in ``remove-threat.py`` code line. ([#9078](https://github.com/wazuh/wazuh-documentation/pull/9078))
+
+### Removed
+
+- **Post-release**: Removed deprecation warnings for legacy operating systems. ([#9011](https://github.com/wazuh/wazuh-documentation/pull/9011))
 
 ## [v4.13.1]
 
-- Support for Wazuh 4.13.1
+### Added
+
+- **Post-release**: Updated the Wazuh Amazon Machine Images (AMI) documentation. ([#8938](https://github.com/wazuh/wazuh-documentation/pull/8938))
+- **Post-release**: Added the Wazuh global queries documentation. ([#8949](https://github.com/wazuh/wazuh-documentation/pull/8949))
+
+### Changed
+
+- **Post-release**: Updated the upgrade guide for Wazuh central components. ([#8934](https://github.com/wazuh/wazuh-documentation/pull/8934)) ([#8941](https://github.com/wazuh/wazuh-documentation/pull/8941)) ([#8944](https://github.com/wazuh/wazuh-documentation/pull/8944)) ([#8947](https://github.com/wazuh/wazuh-documentation/pull/8947)) ([#8956](https://github.com/wazuh/wazuh-documentation/pull/8956))
+- **Post-release**: Added indexer connector configuration steps to vulnerability detection documentation and removed troubleshooting section. ([#8942](https://github.com/wazuh/wazuh-documentation/pull/8942))
+- **Post-release**: Updated the *Navigating the Wazuh dashboard* section. ([#8950](https://github.com/wazuh/wazuh-documentation/pull/8950))
+- **Post-release**: Updated the System inventory documentation. ([#8955](https://github.com/wazuh/wazuh-documentation/pull/8955))
+- **Post-release**: Updated the *Getting started* guide. ([#8962](https://github.com/wazuh/wazuh-documentation/pull/8962)) ([#8963](https://github.com/wazuh/wazuh-documentation/pull/8963)) ([#8964](https://github.com/wazuh/wazuh-documentation/pull/8964)) ([#8965](https://github.com/wazuh/wazuh-documentation/pull/8965))
+- **Post-release**: Updated the URLs of malware samples. ([#8961](https://github.com/wazuh/wazuh-documentation/pull/8961))
+- **Post-release**: Updated the installation guide. ([#8936](https://github.com/wazuh/wazuh-documentation/pull/8936))
+- **Post-release**: Updated user manual documentation for Wazuh dashboard. ([#8967](https://github.com/wazuh/wazuh-documentation/pull/8967))
+- **Post-release**: Updated the prerequisites sub-section in *Deployment on Docker*. ([#8977](https://github.com/wazuh/wazuh-documentation/pull/8977))
+- **Post-release**: Updated the Virtual Machine (VM) documentation. ([#8981](https://github.com/wazuh/wazuh-documentation/pull/8981))
+- **Post-release**: Removed duplicated introductory bullets from source/cloud-security/azure/index.rst ([#8987](https://github.com/wazuh/wazuh-documentation/pull/8987))
+- **Post-release**: Updated the *Installation from sources* documentation. ([#8980](https://github.com/wazuh/wazuh-documentation/pull/8980))
+- **Post-release**: Updated the Amazon Security Lake integration documentation. ([#8989](https://github.com/wazuh/wazuh-documentation/pull/8989))
+- **Post-release**: Updated the *Deployment with Puppet* documentation. ([#8994](https://github.com/wazuh/wazuh-documentation/pull/8994))
+
+### Fixed
+
+- **Post-release**: Removed wazuh-states-fim index references. ([#8948](https://github.com/wazuh/wazuh-documentation/pull/8948))
+- **Post-release**: Removed unnecessary code block from agent installation from sources. ([#9000](https://github.com/wazuh/wazuh-documentation/pull/9000))
 
 ## [v4.13.0]
 

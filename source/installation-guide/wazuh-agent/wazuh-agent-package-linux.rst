@@ -6,13 +6,9 @@
 Deploying Wazuh agents on Linux endpoints
 =========================================
 
-.. warning::
+The Wazuh agent runs on the endpoint you want to monitor and communicates with the Wazuh manager, sending data in near real-time through an encrypted and authenticated channel.
 
-   Support for Red Hat 5, CentOS 5, Oracle Linux 5, and SUSE Linux Enterprise Server 11 systems ends in Wazuh 5.0.0.
-
-The agent runs on the host you want to monitor and communicates with the Wazuh server, sending data in near real-time through an encrypted and authenticated channel.
-
-The deployment of a Wazuh agent on a Linux system uses deployment variables that facilitate the task of installing, registering, and configuring the agent. Alternatively, if you want to download the Wazuh agent package directly, see the :doc:`packages list </installation-guide/packages-list>` section.
+The deployment of a Wazuh agent on a Linux endpoint uses deployment variables that facilitate the task of installing, enrolling, and configuring the Wazuh agent. Alternatively, if you want to download the Wazuh agent package directly, see the :doc:`packages list </installation-guide/packages-list>` section.
 
 .. note:: You need root user privileges to run all the commands described below.
 
@@ -44,7 +40,9 @@ Add the Wazuh repository to download the official packages.
 Deploy a Wazuh agent
 --------------------
 
-#. To deploy the Wazuh agent on your endpoint, select your package manager and edit the ``WAZUH_MANAGER`` variable to contain your Wazuh manager IP address or hostname.
+Follow these steps to deploy the Wazuh agent on your Linux endpoint.
+
+#. Select your package manager and run the command below. Replace the ``WAZUH_MANAGER`` value with your Wazuh manager IP address or hostname:
 
    .. tabs::
 
@@ -72,7 +70,7 @@ Deploy a Wazuh agent
 
             # WAZUH_MANAGER="10.0.0.2" zypper install wazuh-agent|WAZUH_AGENT_ZYPP_PKG_INSTALL|
 
-   For additional deployment options such as agent name, agent group, and registration password, see the :doc:`Deployment variables for Linux </user-manual/agent/agent-enrollment/deployment-variables/deployment-variables-linux>` section.
+   For additional deployment options such as agent name, agent group, and enrollment password, see the :doc:`Deployment variables for Linux </user-manual/agent/agent-enrollment/deployment-variables/deployment-variables-linux>` section.
 
    .. note::
 
@@ -84,24 +82,25 @@ Deploy a Wazuh agent
 
 The deployment process is now complete, and the Wazuh agent is successfully running on your Linux system.
 
--  **Recommended action** -  Disable Wazuh updates
+Disable Wazuh updates
+---------------------
 
-   Compatibility between the Wazuh agent and the Wazuh manager is guaranteed when the Wazuh manager version is later than or equal to that of the Wazuh agent. Therefore, we recommend disabling the Wazuh repository to prevent accidental upgrades. To do so, use the following command:
+Compatibility between the Wazuh agent and the Wazuh manager is guaranteed when the Wazuh manager version is later than or equal to that of the Wazuh agent. Therefore, we recommend disabling the Wazuh repository to prevent accidental upgrades. To do so, use the following command:
 
-   .. tabs::
+.. tabs::
 
-      .. group-tab:: APT
+   .. group-tab:: APT
 
-         .. include:: /_templates/installations/wazuh/deb/disabling_repository.rst
+      .. include:: /_templates/installations/wazuh/deb/disabling_repository.rst
 
-      .. group-tab:: Yum
+   .. group-tab:: Yum
 
-         .. include:: /_templates/installations/wazuh/yum/disabling_repository.rst
+      .. include:: /_templates/installations/wazuh/yum/disabling_repository.rst
 
-      .. group-tab:: DNF
+   .. group-tab:: DNF
 
-         .. include:: /_templates/installations/wazuh/dnf/disabling_repository.rst
+      .. include:: /_templates/installations/wazuh/dnf/disabling_repository.rst
 
-      .. group-tab:: ZYpp
+   .. group-tab:: ZYpp
 
-         .. include:: /_templates/installations/wazuh/zypp/disabling_repository.rst
+      .. include:: /_templates/installations/wazuh/zypp/disabling_repository.rst

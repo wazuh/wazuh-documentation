@@ -4,17 +4,17 @@ You can install the required modules with Pip, the Python package manager. Most 
 
 .. tabs::
 
-   .. group-tab:: Yum
-
-      .. code-block:: console
-
-         # yum update && yum install python3-pip
-
    .. group-tab:: APT
 
       .. code-block:: console
 
          # apt-get update && apt-get install python3-pip
+
+   .. group-tab:: Yum
+
+      .. code-block:: console
+
+         # yum update && yum install python3-pip
 
 We recommend using Pip 19.3 or later to simplify the installation of the dependencies. Run this command to check your pip version.
 
@@ -39,7 +39,7 @@ If your pip version is less than 19.3, run the following command to upgrade the 
 
          # pip3 install --upgrade pip
 
-   .. group-tab:: Python 3.11–3.12
+   .. group-tab:: Python 3.11–3.13
 
       .. code-block:: console
 

@@ -107,9 +107,18 @@ removedUrls['5.0'] = [
 /* Pages added in 4.14 */
 
 newUrls['4.14'] = [
+  '/release-notes/release-4-14-3.html',
+  '/release-notes/release-4-14-2.html',
   '/release-notes/release-4-14-1.html',
   '/release-notes/release-4-14-0.html',
+  '/cloud-service/your-environment/limitations.html',
 ]
+
+/* Pages no longer available in x.y (this is not required if there is a redirection for this url) */
+
+removedUrls['4.14'] = [
+  '/development/selinux-wazuh-context.html'
+];
 
 /* *** RELEASE 4.13 ****/
 
@@ -121,7 +130,16 @@ newUrls['4.13'] = [
   '/user-manual/wazuh-dashboard/global-queries.html',
   '/user-manual/capabilities/system-inventory/global-queries.html',
   '/user-manual/capabilities/file-integrity/global-queries.html',
+  '/user-manual/capabilities/system-inventory/use-cases.html',
 ]
+
+/* Pages no longer available in x.y (this is not required if there is a redirection for this url) */
+
+removedUrls['4.13'] = [
+  '/user-manual/capabilities/vulnerability-detection/troubleshooting.html',
+  '/user-manual/capabilities/vulnerability-detection/FAQ.html',
+  '/user-manual/capabilities/vulnerability-detection/known-issues.html',
+];
 
 /* *** RELEASE 4.12 ****/
 

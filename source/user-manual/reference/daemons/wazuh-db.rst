@@ -181,28 +181,35 @@ The ``key`` field can also store the following values:
 Syscollector tables
 -------------------
 
-+-----------------------------------------------+--------------------------------------------------------------------------------+
-| Table                                         | Description                                                                    |
-+===============================================+================================================================================+
-| :ref:`sys_hwinfo <syscollector_hardware>`     | Stores information about the hardware of the system                            |
-+-----------------------------------------------+--------------------------------------------------------------------------------+
-| :ref:`sys_netiface <syscollector_interfaces>` | Stores information about the existing network interfaces of the system         |
-+-----------------------------------------------+--------------------------------------------------------------------------------+
-| :ref:`sys_netaddr <syscollector_netaddr>`     | Stores information about the IPv4 and IPv6 of the existing network interfaces  |
-+-----------------------------------------------+--------------------------------------------------------------------------------+
-| :ref:`sys_netproto <syscollector_netproto>`   | Stores information about routing configuration for each interface              |
-+-----------------------------------------------+--------------------------------------------------------------------------------+
-| :ref:`sys_osinfo <syscollector_system>`       | Stores information about the operating system                                  |
-+-----------------------------------------------+--------------------------------------------------------------------------------+
-| :ref:`sys_ports <syscollector_ports>`         | Stores information about the opened ports of a system                          |
-+-----------------------------------------------+--------------------------------------------------------------------------------+
-| :ref:`sys_processes <syscollector_processes>` | Stores information about the current processes running in the system           |
-+-----------------------------------------------+--------------------------------------------------------------------------------+
-| :ref:`sys_programs <syscollector_packages>`   | Stores information about the packages installed in the system                  |
-+-----------------------------------------------+--------------------------------------------------------------------------------+
-| :ref:`sys_hotfixes <syscollector_hotfixes>`   | Stores information about the Windows updates installed on the agent            |
-+-----------------------------------------------+--------------------------------------------------------------------------------+
-
++-------------------------------------------------------+--------------------------------------------------------------------------------+
+| Table                                                 | Description                                                                    |
++=======================================================+================================================================================+
+| :ref:`sys_hwinfo <syscollector_hardware>`             | Stores information about the hardware of the system                            |
++-------------------------------------------------------+--------------------------------------------------------------------------------+
+| :ref:`sys_netiface <syscollector_interfaces>`         | Stores information about the existing network interfaces of the system         |
++-------------------------------------------------------+--------------------------------------------------------------------------------+
+| :ref:`sys_netaddr <syscollector_netaddr>`             | Stores information about the IPv4 and IPv6 of the existing network interfaces  |
++-------------------------------------------------------+--------------------------------------------------------------------------------+
+| :ref:`sys_netproto <syscollector_netproto>`           | Stores information about routing configuration for each interface              |
++-------------------------------------------------------+--------------------------------------------------------------------------------+
+| :ref:`sys_osinfo <syscollector_system>`               | Stores information about the operating system                                  |
++-------------------------------------------------------+--------------------------------------------------------------------------------+
+| :ref:`sys_ports <syscollector_ports>`                 | Stores information about the opened ports of a system                          |
++-------------------------------------------------------+--------------------------------------------------------------------------------+
+| :ref:`sys_processes <syscollector_processes>`         | Stores information about the current processes running in the system           |
++-------------------------------------------------------+--------------------------------------------------------------------------------+
+| :ref:`sys_programs <syscollector_packages>`           | Stores information about the packages installed in the system                  |
++-------------------------------------------------------+--------------------------------------------------------------------------------+
+| :ref:`sys_hotfixes <syscollector_hotfixes>`           | Stores information about the Windows updates installed on the agent            |
++-------------------------------------------------------+--------------------------------------------------------------------------------+
+| :ref:`sys_users <syscollector_users>`                 | Stores user account information on monitored endpoints                         |
++-------------------------------------------------------+--------------------------------------------------------------------------------+
+| :ref:`sys_groups <syscollector_groups>`               | Stores information about user account groups on monitored endpoints            |
++-------------------------------------------------------+--------------------------------------------------------------------------------+
+| :ref:`sys_services <syscollector_services>`           | Stores information about services on monitored endpoints                       |
++-------------------------------------------------------+--------------------------------------------------------------------------------+
+| :ref:`sys_browser_extensions <syscollector_browser>`  | Stores browser extensions details on monitored endpoints                       |
++-------------------------------------------------------+--------------------------------------------------------------------------------+
 
 tasks
 -----

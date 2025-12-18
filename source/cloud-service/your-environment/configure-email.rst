@@ -3,8 +3,6 @@
 .. meta::
   :description: Wazuh can be configured to send email alerts to one or more email addresses when certain rules are triggered. Learn more about it here. 
 
-.. _cloud_your_environment_configure_email_alerts:
-
 SMTP configuration
 ==================
 

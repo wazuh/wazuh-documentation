@@ -459,6 +459,27 @@ Example:
 
 This rule groups events decoded from json that belong to an integration called :doc:`VirusTotal </user-manual/capabilities/malware-detection/virus-total-integration>`. It checks the field decoded as ``integration`` and if its content is ``virustotal``, the rule is triggered.
 
+If the ``field`` option is declared multiple times within a rule, Wazuh evaluates them as *logical AND* conditions. This means that each field requirement must be met for the rule to trigger.
+
+Example:
+
+.. code-block:: xml
+   :emphasize-lines: 3,4
+
+   <rule id="100001" level="5">
+       <decoded_as>json</decoded_as>
+       <field name="program_name">powershell.exe</field>
+       <field name="command">Set-MpPreference -DisableRealtimeMonitoring</field>
+       <description>PowerShell used to disable Windows Defender real-time protection.</description>
+   </rule>
+
+This rule triggers only when both of the following field values are present in a log:
+
+-  The field decoded as ``program_name`` contains ``powershell.exe``.
+-  The field decoded as ``command`` contains ``Set-MpPreference -DisableRealtimeMonitoring``.
+
+By combining two fields, the rule ensures higher precision and reduces false positives.
+
 srcip
 ^^^^^
 

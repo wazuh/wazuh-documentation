@@ -1,57 +1,57 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Check out how to upgrade Wazuh installed in Kubernetes, creating a new pod linked to the same volume but with the new updated version.
-
-.. _kubernetes_upgrade:
+   :description: This section provides a guide to upgrading your Wazuh deployment in a Kubernetes environment while preserving existing configurations and data.
 
 Upgrade Wazuh installed in Kubernetes
 =====================================
 
-Checking which files are exported to the volume
------------------------------------------------
+This section provides a guide to upgrading your Wazuh deployment in a Kubernetes environment while preserving existing configurations and data. Because Wazuh uses persistent volumes and Docker-based components, updates can be performed seamlessly without losing prior settings or logs.
 
-Our Kubernetes deployment uses our Wazuh images from Docker. If we look at the following code extracted from the Wazuh configuration using Docker, we can see which directories and files are used in the upgrade.
+Check files exported to the volume
+----------------------------------
+
+The Kubernetes deployment uses Wazuh Docker images. The following directories and files are used in the upgrade:
 
 .. code-block:: none
-    
-    /var/ossec/api/configuration
-    /var/ossec/etc
-    /var/ossec/logs
-    /var/ossec/queue
-    /var/ossec/var/multigroups
-    /var/ossec/integrations
-    /var/ossec/active-response/bin
-    /var/ossec/agentless
-    /var/ossec/wodles
-    /etc/filebeat
-    /var/lib/filebeat
-    /usr/share/wazuh-dashboard/config/
-    /usr/share/wazuh-dashboard/certs/
-    /var/lib/wazuh-indexer
-    /usr/share/wazuh-indexer/certs/
-    /usr/share/wazuh-indexer/opensearch.yml
-    /usr/share/wazuh-indexer/opensearch-security/internal_users.yml
 
+   /var/ossec/api/configuration
+   /var/ossec/etc
+   /var/ossec/logs
+   /var/ossec/queue
+   /var/ossec/var/multigroups
+   /var/ossec/integrations
+   /var/ossec/active-response/bin
+   /var/ossec/agentless
+   /var/ossec/wodles
+   /etc/filebeat
+   /var/lib/filebeat
+   /usr/share/wazuh-dashboard/config/
+   /usr/share/wazuh-dashboard/certs/
+   /var/lib/wazuh-indexer
+   /usr/share/wazuh-indexer/config/certs/
+   /usr/share/wazuh-indexer/config/opensearch.yml
+   /usr/share/wazuh-indexer/config/opensearch-security/internal_users.yml
 
-Any modification related to these files will also be made in the associated volume. When the replica pod is created, it will get those files from the volume, keeping the previous changes.
-
+Any modifications to these files are also made in the associated volume. When a replica pod is created, it gets those files from the volume, keeping the previous changes.
 
 Recreating certificates
 -----------------------
 
-Upgrading from a version earlier than v4.8.0 requires you to recreate the SSL certificates. Clone the  *wazuh-kubernetes* repository and check out the v|WAZUH_CURRENT_KUBERNETES| tag. Then, follow the instructions in :ref:`kubernetes_ssl_certificates`.
+Upgrading from a version earlier than v4.8.0 requires you to recreate the SSL certificates. Clone the wazuh-kubernetes repository and check out the ``v|WAZUH_CURRENT_KUBERNETES|`` tag. Then, follow the instructions in :ref:`kubernetes_ssl_certificates`.
 
 Configuring the upgrade
 -----------------------
 
-To upgrade to version |WAZUH_CURRENT_MINOR|, you can follow one of two strategies.
+To upgrade to version |WAZUH_CURRENT_KUBERNETES|, you can follow one of two strategies.
 
--  `Using default manifests`_ : This strategy uses the default manifests for Wazuh |WAZUH_CURRENT_MINOR|. It replaces the wazuh-kubernetes manifests of your outdated Wazuh version.
--  `Keeping custom manifests`_ : This strategy preserves the wazuh-kubernetes manifests of your outdated Wazuh deployment. It ignores the manifests of the latest Wazuh version.
+-  `Using default manifests`_ : This strategy uses the default manifests for Wazuh |WAZUH_CURRENT_MINOR|. It replaces the ``wazuh-kubernetes`` manifests of your outdated Wazuh version.
+-  `Keeping custom manifests`_ : This strategy preserves the ``wazuh-kubernetes`` manifests of your outdated Wazuh deployment. It ignores the manifests of the latest Wazuh version.
 
 Using default manifests
 ^^^^^^^^^^^^^^^^^^^^^^^
+
+To upgrade your deployment using the default manifests, perform the following steps.
 
 #. Checkout the tag for the current version of wazuh-kubernetes:
 
@@ -59,15 +59,17 @@ Using default manifests
 
       # git checkout v|WAZUH_CURRENT_DOCKER|
 
-Next, :ref:`apply the new configuration <apply_the_new_configuration>`.
+#. :ref:`Apply the new configuration <apply_the_new_configuration>`.
 
 Keeping custom manifests
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-To upgrade your deployment keeping your custom manifests, do the following.
+The following approach allows administrators to preserve their existing deployment configurations instead of overwriting them with the default manifests from the new version. This method is ideal for environments with custom settings, resource allocations, network policies, or integrations that must remain intact during the upgrade.
+
+The upgrade process differs slightly depending on your current Wazuh version.
 
 #. If you are upgrading from version 4.3, :ref:`update the Java Opts variable name <updating_java_opts>` with the new one.
-#. If you are upgrading from version 4.3, :ref:`update old paths <updating_old_paths>` with the new ones.
+#. :ref:`Update old paths <updating_old_paths>` with the new ones.
 #. If you are upgrading from a version earlier than 4.8, :ref:`update configuration parameters <updating_configuraton_parameters>`.
 #. :ref:`Modify tags of Wazuh images <modifying_tags>`.
 
@@ -94,27 +96,105 @@ Updating Java Opts variable name
 Updating old paths
 ~~~~~~~~~~~~~~~~~~
 
-**Wazuh dashboard**
+.. tabs::
 
-#. Edit ``wazuh/indexer_stack/wazuh-dashboard/dashboard-deploy.yaml`` and do the following replacements.
+   .. group-tab:: Upgrading from 4.3
 
-   -  Replace ``/usr/share/wazuh-dashboard/config/certs/`` with ``/usr/share/wazuh-dashboard/certs/``.
+      **Wazuh dashboard**
 
-#. Edit ``wazuh/indexer_stack/wazuh-dashboard/dashboard_conf/opensearch_dashboards.yml`` and do the following replacements.
+      #. Edit ``wazuh/indexer_stack/wazuh-dashboard/dashboard-deploy.yaml`` and do the following replacements.
 
-   -  Replace ``/usr/share/wazuh-dashboard/config/certs/`` with ``/usr/share/wazuh-dashboard/certs/``.
+         -  Replace ``/usr/share/wazuh-dashboard/config/certs/`` with ``/usr/share/wazuh-dashboard/certs/``.
 
-**Wazuh indexer**
+      #. Edit ``wazuh/indexer_stack/wazuh-dashboard/dashboard_conf/opensearch_dashboards.yml`` and do the following replacements.
 
-#. Edit ``wazuh/indexer_stack/wazuh-indexer/cluster/indexer-sts.yaml`` and do the following replacements.
+         -  Replace ``/usr/share/wazuh-dashboard/config/certs/`` with ``/usr/share/wazuh-dashboard/certs/``.
 
-   -  Replace ``/usr/share/wazuh-indexer/config/certs/`` with ``/usr/share/wazuh-indexer/certs/``.
-   -  Replace ``/usr/share/wazuh-indexer/config/opensearch.yml`` with ``/usr/share/wazuh-indexer/opensearch.yml``.
-   -  Replace ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/`` with ``/usr/share/wazuh-indexer/opensearch-security/``.
+      **Wazuh indexer**
 
-#. Edit ``wazuh/indexer_stack/wazuh-indexer/indexer_conf/opensearch.yml`` and do the following replacements.
+      #. Edit ``wazuh/indexer_stack/wazuh-indexer/cluster/indexer-sts.yaml`` and do the following replacements.
 
-   -  Replace ``/usr/share/wazuh-indexer/config/certs/`` with ``/usr/share/wazuh-indexer/certs/``.
+         -  Replace ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/`` with ``/usr/share/wazuh-indexer/opensearch-security/``.
+         -  Add the following statements:
+
+            .. code-block:: yaml
+               :emphasize-lines: 5, 9
+
+               volumes:
+               - name: indexer-certs
+                  secret:
+                     secretName: indexer-certs
+                     defaultMode: 0600
+               - name: indexer-conf
+                  configMap:
+                     name: indexer-conf
+                     defaultMode: 0600
+
+            .. code-block:: yaml
+               :emphasize-lines: 3
+
+               spec:
+                  securityContext:
+                  fsGroup: 1000
+                  # Set the wazuh-indexer volume permissions so the wazuh-indexer user can use it
+                  volumes:
+                  - name: indexer-certs
+
+            .. code-block:: yaml
+               :emphasize-lines: 2, 3
+
+               securityContext:
+                  runAsUser: 1000
+                  runAsGroup: 1000
+                  capabilities:
+                     add: ["SYS_CHROOT"]
+
+   .. group-tab:: Upgrading from 4.4 to 4.13
+
+      **Wazuh indexer**
+
+      #. Edit ``wazuh/indexer_stack/wazuh-indexer/cluster/indexer-sts.yaml`` and do the following replacements and additions.
+
+         -  Replace ``/usr/share/wazuh-indexer/certs/`` with ``/usr/share/wazuh-indexer/config/certs/``.
+         -  Replace ``/usr/share/wazuh-indexer/opensearch.yml`` with ``/usr/share/wazuh-indexer/config/opensearch.yml``.
+         -  Replace ``/usr/share/wazuh-indexer/opensearch-security/internal_users.yml`` with ``/usr/share/wazuh-indexer/config/opensearch-security/internal_users.yml``.
+         -  Add the following statements:
+
+            .. code-block:: yaml
+               :emphasize-lines: 5, 9
+
+               volumes:
+               - name: indexer-certs
+                  secret:
+                     secretName: indexer-certs
+                     defaultMode: 0600
+               - name: indexer-conf
+                  configMap:
+                     name: indexer-conf
+                     defaultMode: 0600
+
+            .. code-block:: yaml
+               :emphasize-lines: 3
+
+               spec:
+                  securityContext:
+                  fsGroup: 1000
+                  # Set the wazuh-indexer volume permissions so the wazuh-indexer user can use it
+                  volumes:
+                  - name: indexer-certs
+
+            .. code-block:: yaml
+               :emphasize-lines: 2, 3
+
+               securityContext:
+                  runAsUser: 1000
+                  runAsGroup: 1000
+                  capabilities:
+                     add: ["SYS_CHROOT"]
+
+      #. Edit ``wazuh/indexer_stack/wazuh-indexer/indexer_conf/opensearch.yml`` and do the following replacements.
+
+         -  Replace ``/usr/share/wazuh-indexer/certs/`` with ``/usr/share/wazuh-indexer/config/certs/``.
 
 .. _updating_configuraton_parameters:
 

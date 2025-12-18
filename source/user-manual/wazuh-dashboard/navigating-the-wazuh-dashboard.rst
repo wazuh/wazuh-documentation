@@ -42,7 +42,6 @@ This section shows dashboards for:
 -  :doc:`Threat Hunting </getting-started/use-cases/threat-hunting>`
 -  :doc:`Vulnerability Detection </user-manual/capabilities/vulnerability-detection/index>`
 -  :doc:`MITRE ATT&CK </user-manual/ruleset/mitre>`
--  :doc:`VirusTotal </user-manual/capabilities/malware-detection/virus-total-integration>`
 
 .. thumbnail:: /images/wazuh-dashboard/navigating/threat-intelligence.png
    :align: center
@@ -53,8 +52,9 @@ This section shows dashboards for:
 Security operations
 ^^^^^^^^^^^^^^^^^^^
 
-This section shows the dashboards for regulatory standards including:
+This section shows the dashboards for IT hygiene data such as system inventory data and vulnerabilities, and regulatory standards including:
 
+-  :doc:`IT Hygiene </getting-started/use-cases/it-hygiene>`
 -  :doc:`PCI DSS </compliance/pci-dss/index>`
 -  :doc:`GDPR </compliance/gdpr/index>`
 -  :doc:`HIPAA </compliance/hipaa/index>`
@@ -77,6 +77,7 @@ This section shows dashboards for:
 -  :doc:`Google Cloud </cloud-security/gcp/index>`
 -  :doc:`GitHub </cloud-security/github/index>`
 -  :doc:`Office 365 </cloud-security/office365/index>`
+-  :doc:`Microsoft Graph Services </cloud-security/azure/monitoring-ms-graph>`
 
 .. thumbnail:: /images/wazuh-dashboard/navigating/cloud-security.png
    :align: center

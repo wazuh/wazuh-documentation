@@ -1,417 +1,782 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about how to install the Wazuh agent from sources. Wazuh can be installed on all major operating systems, including Linux, Windows, macOS, among others.
+   :description: The following section explains how to install the Wazuh agent from sources across different operating systems.
 
 Installing the Wazuh agent from sources
 =======================================
 
-The Wazuh agent is a single and lightweight monitoring software. It is a multi-platform component that provides visibility into the endpoint’s security by collecting critical system and application records. The following section explains how to install it from sources.
+The Wazuh agent is a lightweight monitoring software. It is a multi-platform component that provides visibility into the endpoint’s security by collecting critical system and application logs/events. The following section explains how to install it from sources across different operating systems.
 
-.. warning::
+This section covers installing dependencies, downloading and compiling the source code, running the installation wizard, and uninstalling the Wazuh agent if necessary.
 
-   Support for the following operating systems ends in Wazuh 5.0.0: Red Hat 5, CentOS 5, Oracle Linux 5, SUSE Linux Enterprise Server 11, Windows XP, Windows Vista, Windows Server 2003, Solaris, AIX, and HP-UX.
+Installing dependencies
+-----------------------
+
+Before compiling Wazuh from sources, you need to install the required build tools and libraries for the destination operating system. This section covers the essential development tools, compilers, and build utilities needed to compile the Wazuh agent successfully on different platforms.
 
 .. tabs::
 
-    .. group-tab:: Linux
+   .. group-tab:: Linux
 
-        .. note::
+      .. note::
 
-           You need root user privileges to run all the commands described below. Since Wazuh 3.5, it is necessary to have an Internet connection when following this process.
+         You need root user privileges to run all the commands described below. Since Wazuh 3.5, an Internet connection is required to follow this process.
 
-        .. note::
+      .. note::
 
-            CMake 3.12.4 is the minimal library version required to build the Wazuh agent solution.
+         CMake 3.12.4 is the minimal library version required to build the Wazuh agent solution.
 
-        .. note::
+      .. note::
 
-            GCC 9.4 is the minimal compiler version required to build the Wazuh agent solution.
+         GCC 9.4 is the minimal compiler version required to build the Wazuh agent solution.
 
-        #.  Install development tools and compilers. In Linux, this can easily be done using your distribution’s package manager:
+      #.  Install development tools and compilers. In Linux, this can easily be done using your distribution’s package manager:
 
-            .. tabs::
+         .. tabs::
 
-                .. group-tab:: APT
+            .. group-tab:: APT
 
-                    .. code-block:: console
+               .. code-block:: console
 
-                        # apt-get install python gcc g++ make libc6-dev curl policycoreutils automake autoconf libtool libssl-dev procps
+                  # apt-get install python3 gcc g++ make libc6-dev curl policycoreutils automake autoconf libtool libssl-dev procps build-essential
 
-                    CMake 3.18 installation
+               CMake 3.18 installation
 
-                    .. code-block:: console
+               .. code-block:: console
 
-                        # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz && cd cmake-3.18.3 && ./bootstrap --no-system-curl && make -j$(nproc) && make install
+                  # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz && cd cmake-3.18.3 && ./bootstrap --no-system-curl && make -j$(nproc) && make install
+                  # cd .. && rm -rf cmake-*
+
+            .. group-tab:: Yum
+
+               .. tabs::
+
+                  .. tab:: CentOS 6/7
+
+                     .. code-block:: console
+
+                        # yum update -y
+                        # yum install make gcc gcc-c++ policycoreutils-python automake autoconf libtool centos-release-scl openssl-devel wget bzip2 procps -y
+                        # curl -OL http://packages.wazuh.com/utils/gcc/gcc-9.4.0.tar.gz && tar xzf gcc-9.4.0.tar.gz  && cd gcc-9.4.0/ && ./contrib/download_prerequisites && ./configure --enable-languages=c,c++ --prefix=/usr --disable-multilib --disable-libsanitizer && make -j$(nproc) && make install && ln -fs /bin/g++ /usr/bin/c++ && ln -fs /bin/gcc /usr/bin/cc && cd .. && rm -rf gcc-*
+
+                     CMake 3.18 installation
+
+                     .. code-block:: console
+
+                        # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
+                        # cd cmake-3.18.3 && ./bootstrap --no-system-curl
+                        # make -j$(nproc) && make install
                         # cd .. && rm -rf cmake-*
 
-                .. group-tab:: Yum
+                  .. tab:: CentOS 8
 
-                    .. tabs::
+                     .. code-block:: console
 
-                        .. tab:: CentOS 6/7
+                        # yum install make gcc gcc-c++ python3 python3-policycoreutils automake autoconf libtool openssl-devel cmake procps -y
+                        # curl -OL http://packages.wazuh.com/utils/gcc/gcc-9.4.0.tar.gz && tar xzf gcc-9.4.0.tar.gz  && cd gcc-9.4.0/ && ./contrib/download_prerequisites && ./configure --enable-languages=c,c++ --prefix=/usr --disable-multilib --disable-libsanitizer && make -j$(nproc) && make install && ln -fs /bin/g++ /usr/bin/c++ && ln -fs /bin/gcc /usr/bin/cc && cd .. && rm -rf gcc-*
+                        # yum-config-manager --enable PowerTools
+                        # yum install libstdc++-static -y
 
-                            .. code-block:: console
+                     CMake 3.18 installation
 
-                                # yum update -y
-                                # yum install make gcc gcc-c++ policycoreutils-python automake autoconf libtool centos-release-scl openssl-devel wget bzip2 procps -y
-                                # curl -OL http://packages.wazuh.com/utils/gcc/gcc-9.4.0.tar.gz && tar xzf gcc-9.4.0.tar.gz  && cd gcc-9.4.0/ && ./contrib/download_prerequisites && ./configure --enable-languages=c,c++ --prefix=/usr --disable-multilib --disable-libsanitizer && make -j$(nproc) && make install && ln -fs /bin/g++ /usr/bin/c++ && ln -fs /bin/gcc /usr/bin/cc && cd .. && rm -rf gcc-*
-
-                            CMake 3.18 installation
-
-                            .. code-block:: console
-
-                                # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz
-                                # cd cmake-3.18.3 && ./bootstrap --no-system-curl
-                                # make -j$(nproc) && make install
-                                # cd .. && rm -rf cmake-*
-
-                        .. tab:: CentOS 8
-
-                            .. code-block:: console
-
-                                # yum install make gcc gcc-c++ python3 python3-policycoreutils automake autoconf libtool openssl-devel cmake procps -y
-                                # curl -OL http://packages.wazuh.com/utils/gcc/gcc-9.4.0.tar.gz && tar xzf gcc-9.4.0.tar.gz  && cd gcc-9.4.0/ && ./contrib/download_prerequisites && ./configure --enable-languages=c,c++ --prefix=/usr --disable-multilib --disable-libsanitizer && make -j$(nproc) && make install && ln -fs /bin/g++ /usr/bin/c++ && ln -fs /bin/gcc /usr/bin/cc && cd .. && rm -rf gcc-*
-                                # yum-config-manager --enable powertools
-                                # yum install libstdc++-static -y
-
-                            CMake 3.18 installation
-
-                            .. code-block:: console
-
-                                # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz && cd cmake-3.18.3 && ./bootstrap --no-system-curl && make -j$(nproc) && make install
-                                # cd .. && rm -rf cmake-*
-                                # export PATH=/usr/local/bin:$PATH
-
-                .. group-tab:: DNF
-
-                    .. code-block:: console
-
-                        # dnf update -y
-                        # dnf install make cmake gcc gcc-c++ python3 python3-policycoreutils automake autoconf libtool openssl-devel yum-utils procps -y
-                        # curl -OL http://packages.wazuh.com/utils/gcc/gcc-9.4.0.tar.gz && tar xzf gcc-9.4.0.tar.gz && cd gcc-9.4.0/ && ./contrib/download_prerequisites && ./configure --enable-languages=c,c++ --prefix=/usr --disable-multilib --disable-libsanitizer && make -j$(nproc) && make install && ln -fs /usr/bin/g++ /bin/c++ && ln -fs /usr/bin/gcc /bin/cc && cd .. && rm -rf gcc-*
-                        # dnf config-manager --set-enabled crb
-                        # dnf install libstdc++-static -y
-
-                    CMake 3.18 installation
-
-                    .. code-block:: console
+                     .. code-block:: console
 
                         # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz && cd cmake-3.18.3 && ./bootstrap --no-system-curl && make -j$(nproc) && make install
                         # cd .. && rm -rf cmake-*
                         # export PATH=/usr/local/bin:$PATH
 
-                .. group-tab:: ZYpp
+                  .. tab:: CentOS 9
 
-                    .. code-block:: console
+                     .. code-block:: console
 
-                        # zypper install -y make gcc gcc-c++ policycoreutils-python automake autoconf libtool libopenssl-devel curl
+                        # yum install make gcc gcc-c++ python3 python3-policycoreutils automake autoconf libtool openssl-devel cmake procps -y
+                        # curl -OL http://packages.wazuh.com/utils/gcc/gcc-9.4.0.tar.gz && tar xzf gcc-9.4.0.tar.gz  && cd gcc-9.4.0/ && ./contrib/download_prerequisites && ./configure --enable-languages=c,c++ --prefix=/usr --disable-multilib --disable-libsanitizer && make -j$(nproc) && make install && ln -fs /bin/g++ /usr/bin/c++ && ln -fs /bin/gcc /usr/bin/cc && cd .. && rm -rf gcc-*
+                        # yum config-manager --set-enabled crb
+                        # yum install libstdc++-static -y
 
-                    CMake 3.18 installation
+                     CMake 3.18 installation
 
-                    .. code-block:: console
+                     .. code-block:: console
 
                         # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz && cd cmake-3.18.3 && ./bootstrap --no-system-curl && make -j$(nproc) && make install
                         # cd .. && rm -rf cmake-*
+                        # export PATH=/usr/local/bin:$PATH
 
-                .. group-tab:: Pacman
+            .. group-tab:: DNF
 
-                    GCC/G++ 9.4 is the recommended version to build wazuh.
+               .. code-block:: console
 
-                    .. code-block:: console
+                  # dnf update -y
+                  # dnf groupinstall "Development Tools"
+                  # dnf install gmp-devel mpfr-devel libmpc-devel isl-devel make cmake gcc gcc-c++ python3 python3-policycoreutils automake autoconf libtool openssl-devel yum-utils procps -y
+                  # curl -OL http://packages.wazuh.com/utils/gcc/gcc-9.4.0.tar.gz && tar xzf gcc-9.4.0.tar.gz && cd gcc-9.4.0/ && ./configure --enable-languages=c,c++ --prefix=/usr --disable-multilib --disable-libsanitizer && make -j$(nproc) && make install && ln -fs /usr/bin/g++ /bin/c++ && ln -fs /usr/bin/gcc /bin/cc && cd .. && rm -rf gcc-*
+                  # dnf config-manager --set-enabled crb
+                  # dnf install libstdc++-static -y
 
-                        # pacman --noconfirm -Syu curl gcc make sudo wget expect gnupg perl-base perl fakeroot python brotli automake autoconf libtool gawk libsigsegv nodejs base-devel inetutils cmake
+               CMake 3.18 installation
 
-        #.  Download and extract the latest version:
+               .. code-block:: console
 
-            .. code-block:: console
+                  # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz && cd cmake-3.18.3 && ./bootstrap --no-system-curl && make -j$(nproc) && make install
+                  # cd .. && rm -rf cmake-*
+                  # export PATH=/usr/local/bin:$PATH
 
-                # curl -Ls https://github.com/wazuh/wazuh/archive/v|WAZUH_CURRENT_FROM_SOURCES|.tar.gz | tar zx
+            .. group-tab:: ZYpp
 
-        #.  Run the ``install.sh`` script. This will run a wizard that will guide you through the installation process using the Wazuh sources:
+               .. code-block:: console
 
-            .. code-block:: console
+                  # zypper install -y make gcc12 gcc12-c++ policycoreutils-python automake autoconf libtool libopenssl-devel curl
+                  # ln -sf /usr/bin/gcc-12 /usr/bin/gcc
+                  # ln -sf /usr/bin/g++-12 /usr/bin/g++
 
-                # cd wazuh-|WAZUH_CURRENT_FROM_SOURCES|
-                # ./install.sh
+               CMake 3.18 installation
 
-            If you have previously compiled for another platform, you must clean the build using the Makefile in ``src``:
+               .. code-block:: console
 
-            .. code-block:: console
+                  # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz && cd cmake-3.18.3 && ./bootstrap --no-system-curl && make -j$(nproc) && make install
+                  # cd .. && rm -rf cmake-*
 
-                # cd wazuh-|WAZUH_CURRENT_FROM_SOURCES|
-                # make -C src clean
-                # make -C src clean-deps
+               .. note::
+
+                  For Suse 11, it is possible that some of the tools are not found in the package manager. In that case, you can add the following official repository:
+
+                  .. code-block:: console
+
+                     # zypper addrepo http://download.opensuse.org/distribution/11.4/repo/oss/ oss
+
+            .. group-tab:: Pacman
+
+               GCC/G++ 14 is the recommended version to build Wazuh.
+
+               .. code-block:: console
+
+                  # pacman --noconfirm -Syu curl gcc14 make sudo wget expect gnupg perl-base perl fakeroot python brotli automake autoconf libtool gawk libsigsegv nodejs base-devel inetutils cmake
+
+   .. group-tab:: Windows
+
+      This section covers installing dependencies on Ubuntu and Windows endpoints. For Windows agent installation, Wazuh uses cross-compilation from a Linux environment to build the Windows installer package.
+
+      .. note::
+
+         This procedure is tested on Ubuntu 22.04 and might work with other Debian/Ubuntu versions as well. It is required to use MinGW 10.
+
+      #. Set up the Ubuntu build environment. Install these dependencies to build the Windows Wazuh agent installer on Ubuntu:
+
+         .. code-block:: console
+
+            # apt-get install curl gcc-mingw-w64 g++-mingw-w64-i686 g++-mingw-w64-x86-64 nsis make cmake
+
+      #. Set up Windows build environment. To generate the installer, the following dependencies must be in place on the Windows machine:
+
+         -  `WIX Toolset v3.11 <http://wixtoolset.org/>`_.
 
             .. note::
 
-                During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``. When choosing a different path than the default, if the directory already exists, the installer will ask to delete the directory or proceed by installing Wazuh inside it. You can also run an :doc:`unattended installation </user-manual/reference/unattended-installation>`.
+               If you install a WiX Toolset version other than v3.11 on your Windows endpoint, update the batch file at: ``wazuh-|WAZUH_CURRENT|/src/win32/wazuh-installer-build-msi.bat``. On line 3, replace ``"WiX Toolset v3.11"`` with the exact version you installed.
 
-        #.  The script will ask about what kind of installation you want. Type agent in order to install a Wazuh agent:
+         -  .NET Framework 3.5.1.
+         -  Microsoft Windows SDK.
 
-            .. code-block:: none
-                :class: output
+   .. group-tab:: macOS
 
-                1- What kind of installation do you want (manager, agent, local, hybrid or help)? agent
+      This section covers installing dependencies on macOS systems. The process involves installing Homebrew and setting up build tools.
+
+      #. Install Homebrew, the package manager for macOS.
+
+         .. code-block:: console
+
+            $ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+         .. note::
+
+            On some macOS versions, this command may fail with a message indicating that ``homebrew/core`` is a shallow clone.
+            To fix this issue, run:
+
+            .. code-block:: console
+
+               $ rm -rf "/usr/local/Homebrew/Library/Taps/homebrew/homebrew-core"
+               $ brew tap homebrew/core
+
+            Then, re-run the Homebrew installation command above.
+
+      #. Install development tools and compilers through Brew:
+
+         .. code-block:: console
+
+            $ brew install automake autoconf libtool cmake
+
+Installing the Wazuh agent
+--------------------------
+
+This section walks you through downloading the Wazuh source code, compiling it, and running the installation wizard to set up the Wazuh agent on your system.
+
+.. tabs::
+
+   .. group-tab:: Linux
+
+      #. Download and extract the latest version:
+
+         .. code-block:: console
+
+            # curl -Ls https://github.com/wazuh/wazuh/archive/v|WAZUH_CURRENT|.tar.gz | tar zx
+            # cd wazuh-|WAZUH_CURRENT|
+
+      #. If you have previously compiled for another platform, you must clean the build using the Makefile in ``src/``:
+
+         .. code-block:: console
+
+            # make -C src clean
+            # make -C src clean-deps
+
+      #. Build the Wazuh agent with gcc-14 and g++-14, this only applies to distributions with the Pacman package manager:
+
+         .. code-block:: console
+
+            # cd wazuh-|WAZUH_CURRENT|/src
+            # make TARGET=agent deps
+            # make TARGET=agent CC=gcc-14 CXX=g++-14
+            # cd ..
+
+      #. Run the ``install.sh`` script. This will run a wizard that will guide you through the installation process using the Wazuh sources:
+
+         .. code-block:: console
+
+            # cd wazuh-|WAZUH_CURRENT|
+            # ./install.sh
 
 
-        .. rubric:: Next steps
-           :class: h2
+         .. note::
 
-        Now that the agent is installed, the next step is to enroll the agent with the Wazuh server. For more information about this process, please check the :doc:`/user-manual/agent/agent-enrollment/index` section.
+            During the installation, users can decide the installation path. Execute the ``./install.sh`` script and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default installation path is ``/var/ossec``. A commonly used custom path is ``/opt``. When choosing a different path than the default, if the directory already exists, the installer will ask to delete the directory or proceed by installing Wazuh inside it. You can also run an :doc:`unattended installation </user-manual/reference/unattended-installation>`.
 
-        .. raw:: html
+      #. The script will ask about what kind of installation you want. Type ``agent`` to install a Wazuh agent:
 
-            <h2>Uninstall</h2>
+         .. code-block:: output
 
-        To uninstall the Wazuh agent, set WAZUH_HOME with the current installation path:
+            1- What kind of installation do you want (manager, agent, local, hybrid or help)? agent
 
-        .. code-block:: console
+   .. group-tab:: Windows
+
+      This process involves compiling the Wazuh agent and generating an MSI installer package.
+
+      #. Download the Wazuh source code on the Ubuntu machine and unzip it:
+
+         .. code-block:: console
+
+            # curl -Ls https://github.com/wazuh/wazuh/archive/v|WAZUH_CURRENT|.tar.gz | tar zx
+            # cd wazuh-|WAZUH_CURRENT|/src
+
+      #. Compile the Agent by running the ``make`` command:
+
+         .. code-block:: console
+
+            # make deps TARGET=winagent
+            # make TARGET=winagent
+
+         The following output will appear at the end of the building process:
+
+         .. code-block:: none
+            :class: output
+
+            Done building winagent
+
+      #. Move the repository to the Windows machine. We recommend compressing it to speed up the process:
+
+         .. code-block:: console
+
+            # cd ../.. && zip -r wazuh.zip wazuh-|WAZUH_CURRENT|
+
+      #. Decompress the repository on the Windows machine, run the ``wazuh-installer-build-msi.bat`` script from the win32 folder:
+
+         .. code-block:: doscon
+
+            > cd wazuh-|WAZUH_CURRENT|\src\win32
+            > .\wazuh-installer-build-msi.bat
+
+         If you do not want to sign the installer, you will have to comment out or delete the signtool line in the previous script.
+
+      #. Specify the version and the revision number when prompted. This will also generate the Windows installer file. In the following output, the version is set as |WAZUH_CURRENT|, and the revision is set as 1. This generates the Windows installer ``wazuh-agent-|WAZUH_CURRENT|-1.msi``
+
+         .. code-block:: doscon
+
+            C:\wazuh\wazuh-|WAZUH_CURRENT|\src\win32>REM IF VERSION or REVISION are empty, ask for their value
+
+            C:\wazuh\wazuh-|WAZUH_CURRENT|\src\win32>IF [] == [] set /p VERSION=Enter the version of the Wazuh agent (x.y.z):
+            Enter the version of the Wazuh agent (x.y.z):|WAZUH_CURRENT|
+
+            C:\wazuh\wazuh-|WAZUH_CURRENT|\src\win32>IF [] == [] set /p REVISION=Enter the revision of the Wazuh agent:
+            Enter the revision of the Wazuh agent:1
+
+            C:\wazuh\wazuh-|WAZUH_CURRENT|\src\win32>SET MSI_NAME=wazuh-agent-|WAZUH_CURRENT|-1.msi
+
+      #. Install ``wazuh-agent-|WAZUH_CURRENT|-1.msi``. See the :doc:`installation guide </installation-guide/wazuh-agent/wazuh-agent-package-windows>`.
+
+   .. group-tab:: macOS
+
+      This section covers installing the Wazuh agent from sources on macOS systems
+
+      #. Download and extract the latest version:
+
+         .. code-block:: console
+
+            # curl -Ls https://github.com/wazuh/wazuh/archive/v|WAZUH_CURRENT|.tar.gz | tar zx
+
+         .. note::
+
+            All the commands described below need to be executed with root user privileges.
+
+      #. If you have previously compiled for another platform, you must clean the build using the Makefile in ``src``:
+
+         .. code-block:: console
+
+            # cd wazuh-|WAZUH_CURRENT|
+            # make -C src clean
+            # make -C src clean-deps
+
+      #. Run the ``install.sh`` script. This will run a wizard that will guide you through the installation process using the Wazuh sources:
+
+         .. code-block:: console
+
+            # cd wazuh-|WAZUH_CURRENT|
+            # USER_DIR="/Library/Ossec" ./install.sh
+
+         .. note::
+
+            Note that with the variable ``USER_DIR``, it has been indicated that the agent installation path is ``/Library/Ossec``
+
+      #. The script will ask about what kind of installation you want. Type ``agent`` to install a Wazuh agent:
+
+         .. code-block:: none
+            :class: output
+
+            1- What kind of installation do you want (manager, agent, local, hybrid, or help)? agent
+
+         .. note::
+
+            During the installation, users can decide on the installation path. Execute the ``./install.sh`` script and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/Library/Ossec]``). The default installation path is ``/Library/Ossec``. When choosing a different path than the default, if the directory already exists, the installer will ask to delete the directory or proceed by installing Wazuh inside it. You can also run an :doc:`unattended installation </user-manual/reference/unattended-installation>`.
+
+   .. group-tab:: AIX
+
+      #. Download the latest version:
+
+         .. code-block:: console
+
+            # wget -O wazuh.tar.gz --no-check-certificate https://api.github.com/repos/wazuh/wazuh/tarball/v|WAZUH_CURRENT|
+            # gunzip -c wazuh.tar.gz | tar -xvf -
+
+         .. note::
+
+            If you can't download the repository this way, then you should copy it via the scp utility.
+
+      #. Compile the sources:
+
+         .. code-block:: console
+
+            # cd wazuh-|WAZUH_CURRENT|
+            # cd src
+            # gmake clean-deps
+            # gmake clean
+            # gmake deps TARGET=agent RESOURCES_URL=http://packages.wazuh.com/deps/27
+            # gmake TARGET=agent USE_SELINUX=no PREFIX=/var/ossec
+
+      #. If you have previously compiled for another platform, you must clean the build using the Makefile in ``src/``:
+
+         .. code-block:: console
+
+            # gmake -C src clean-deps
+            # gmake -C src clean
+
+      #. Run the ``install.sh`` script. This will run a wizard that will guide you through the installation process using the Wazuh sources:
+
+         .. code-block:: console
+
+            # cd ..
+            # ./install.sh
+
+         .. note::
+
+            During the installation, users can decide on the installation path. Execute the ``./install.sh`` script and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default installation path is ``/var/ossec``. A commonly used custom path is ``/opt``. When choosing a different path than the default, if the directory already exists, the installer will ask to delete the directory or proceed by installing Wazuh inside it. You can also run an :doc:`unattended installation </user-manual/reference/unattended-installation>`.
+
+      #. Finally, apply the following configuration:
+
+         .. code-block:: console
+
+            # sed '/System inventory/,/^$/{/^$/!d;}' /var/ossec/etc/ossec.conf > /var/ossec/etc/ossec.conf.tmp
+            # mv /var/ossec/etc/ossec.conf.tmp /var/ossec/etc/ossec.conf
+
+      .. note::
+
+         Note that the above commands have been executed for the default installation path ``/var/ossec``. If you have installed the agent in another path, you will have to modify the path of those commands.
+
+   .. group-tab:: HP-UX
+
+      #. Download the latest version:
+
+         .. code-block:: console
+
+            # /usr/local/bin/curl -k -L -O https://github.com/wazuh/wazuh/archive/v|WAZUH_CURRENT|.zip && /usr/local/bin/unzip v|WAZUH_CURRENT|
+
+         .. note::
+
+            If you can't download the repository this way, then you should copy it via the scp utility.
+
+      #. Compile the sources:
+
+         .. code-block:: console
+
+            # cd wazuh-|WAZUH_CURRENT|
+            # /usr/local/bin/gmake -C src deps RESOURCES_URL=http://packages.wazuh.com/deps/27 TARGET=agent
+            # /usr/local/bin/gmake -C src TARGET=agent USE_SELINUX=no
+
+      #. If you have previously compiled for another platform, you must clean the build using the Makefile in ``src/``:
+
+         .. code-block:: console
+
+            # /usr/local/bin/gmake -C src clean-deps
+            # /usr/local/bin/gmake -C src clean
+
+      #. Run the ``install.sh`` script. This will run a wizard that will guide you through the installation process using the Wazuh sources:
+
+         .. code-block:: console
+
+            # ./install.sh
+
+         .. note::
+
+            During the installation, users can decide the installation path. Execute the ``./install.sh`` script and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default installation path is ``/var/ossec``. A commonly used custom path is ``/opt``. When choosing a different path than the default, if the directory already exists, the installer will ask to delete the directory or proceed by installing Wazuh inside it. You can also run an :doc:`unattended installation </user-manual/reference/unattended-installation>`.
+
+   .. group-tab:: Solaris
+
+      .. tabs::
+
+         .. group-tab:: Solaris 10
+
+            #. Download the latest version of Wazuh:
+
+               .. code-block:: console
+
+                  # /opt/csw/bin/git clone -b v|WAZUH_CURRENT| https://github.com/wazuh/wazuh.git
+
+            #. Compile the sources.
+
+               -  For Solaris 10 i386:
+
+                  .. code-block:: console
+
+                     # export PATH=/usr/local/gcc-5.5.0/bin:/usr/sbin:/usr/bin:/usr/ccs/bin:/opt/csw/bin:/opt/csw/gnu
+                     # export CPLUS_INCLUDE_PATH=/usr/local/gcc-5.5.0/include/c++/5.5.0
+                     # export LD_LIBRARY_PATH=/usr/local/gcc-5.5.0/lib
+                     # cd wazuh/src
+                     # gmake clean
+                     # gmake deps TARGET=agent
+                     # gmake -j 4 TARGET=agent PREFIX=/var/ossec USE_SELINUX=no
+                     # cd ..
+
+               -  For Solaris 10 SPARC:
+
+                  .. code-block:: console
+
+                     # export PATH=/usr/local/gcc-5.5.0/bin:/usr/sbin:/usr/bin:/usr/ccs/bin:/opt/csw/bin:/opt/csw/gnu
+                     # export CPLUS_INCLUDE_PATH=/usr/local/gcc-5.5.0/include/c++/5.5.0
+                     # export LD_LIBRARY_PATH=/usr/local/gcc-5.5.0/lib
+                     # cd wazuh/src
+                     # gmake clean
+                     # gmake deps TARGET=agent RESOURCES_URL=http://packages.wazuh.com/deps/27
+                     # gmake -j 4 TARGET=agent PREFIX=/var/ossec USE_SELINUX=no USE_BIG_ENDIAN=yes
+                     # cd ..
+
+            #. Patch Solaris 10 ``sh`` files to change the shebang:
+
+               .. code-block:: console
+
+                  # for file in $(find . -name "*.sh");do
+                  sed 's:#!/bin/sh:#!/usr/xpg4/bin/sh:g' $file > $file.new
+                  mv $file.new $file && chmod +x $file
+                  done
+
+            #. If you have previously compiled for another platform, you must clean the build using the   Makefile in ``src/``:
+
+               .. code-block:: console
+
+                  # gmake -C src clean
+                  # gmake -C src clean-deps
+
+            #. Run the ``install.sh`` script. This will run a wizard that will guide you through the installation process using the Wazuh sources:
+
+               .. code-block:: console
+
+                  # bash install.sh
+
+               .. note::
+
+                  During the installation, users can decide on the installation path. Execute the ``./install.sh`` script and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default installation path is ``/var/ossec``. A commonly used custom path is ``/opt``. When choosing a different path than the default, if the directory already exists, the installer will ask to delete the directory or proceed by installing Wazuh inside it. You can also run an :doc:`unattended installation </user-manual/reference/unattended-installation>`.
+
+            #. The script will ask about what kind of installation you want. Type ``agent`` to install a Wazuh agent:
+
+               .. code-block:: none
+                  :class: output
+
+                  1- What kind of installation do you want (manager, agent, local, hybrid, or help)? agent
+
+         .. group-tab:: Solaris 11
+
+            #. Download the latest version.
+
+               .. code-block:: console
+
+                  # git clone -b v|WAZUH_CURRENT| https://github.com/wazuh/wazuh.git
+
+               .. note::
+
+                  If you can’t download the file due to an OpenSSL error, then you should copy the directory with the scp utility.
+
+            #. If you have previously compiled for another platform, you must clean the build using the Makefile in ``src/``:
+
+               .. code-block:: console
+
+                  # gmake -C src clean
+                  # gmake -C src clean-deps
+
+            #. Run the ``install.sh`` script. This will run a wizard that will guide you through the installation process using the Wazuh sources:
+
+               .. code-block:: console
+
+                  # cd wazuh*
+                  # ./install.sh
+
+               .. note::
+
+                  During the installation, users can decide on the installation path. Execute the ``./install.sh`` script and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default installation path is ``/var/ossec``. A commonly used custom path is ``/opt``. When choosing a different path than the default, if the directory already exists, the installer will ask to delete the directory or proceed by installing Wazuh inside it. You can also run an :doc:`unattended installation </user-manual/reference/unattended-installation>`.
+
+            #. The script will ask about what kind of installation you want. Type ``agent`` to install a Wazuh agent:
+
+               .. code-block:: none
+                  :class: output
+
+                  1- What kind of installation do you want (manager, agent, local, hybrid, or help)? agent
+
+Next steps
+----------
+
+Now that the agent is installed, the next step is to enroll the agent with the Wazuh server. For more information about this process, please check the :doc:`Wazuh agent enrollment </user-manual/agent/agent-enrollment/index>` section.
+
+Uninstall
+---------
+
+.. tabs::
+
+   .. group-tab:: Linux
+
+      #. To uninstall the Wazuh agent, set ``WAZUH_HOME`` with the current installation path:
+
+         .. code-block:: console
 
             # WAZUH_HOME="/WAZUH/INSTALLATION/PATH"
 
-        Stop the service:
+      #. Stop the service:
 
-        .. code-block:: console
+         .. code-block:: console
 
             # service wazuh-agent stop 2> /dev/null
 
-        Stop the daemon:
+      #. Stop the daemon:
 
-        .. code-block:: console
+         .. code-block:: console
 
             # $WAZUH_HOME/bin/wazuh-control stop 2> /dev/null
 
-        Remove the installation folder and all its content:
+      #. Remove the installation folder and all its content:
 
-        .. code-block:: console
+         .. code-block:: console
 
             # rm -rf $WAZUH_HOME
 
-        Delete the service:
+      #. Delete the service:
 
-        .. tabs::
+         .. tabs::
 
-            .. tab:: SysV init
+            .. group-tab:: SysV init
 
-                .. code-block:: console
+               .. code-block:: console
 
-                    # [ -f /etc/rc.local ] && sed -i'' '/wazuh-control start/d' /etc/rc.local
-                    # find /etc/{init.d,rc*.d} -name "*wazuh*" | xargs rm -f
+                  # [ -f /etc/rc.local ] && sed -i'' '/wazuh-control start/d' /etc/rc.local
+                  # find /etc/{init.d,rc*.d} -name "*wazuh*" | xargs rm -f
 
-            .. tab:: Systemd
+            .. group-tab:: Systemd
 
-                .. code-block:: console
+               .. code-block:: console
 
-                    # find /etc/systemd/system -name "wazuh*" | xargs rm -f
-                    # systemctl daemon-reload
+                  # find /etc/systemd/system -name "wazuh*" | xargs rm -f
+                  # systemctl daemon-reload
 
-        Remove Wazuh user and group:
+      #. Remove Wazuh user and group:
 
-            .. code-block:: console
+         .. code-block:: console
 
-                # userdel wazuh 2> /dev/null
-                # groupdel wazuh 2> /dev/null
+            # userdel wazuh 2> /dev/null
+            # groupdel wazuh 2> /dev/null
 
-    .. group-tab:: Windows
+   .. group-tab:: Windows
 
-        .. note::
+      To uninstall the agent, the original MSI file will be needed to perform the unattended process:
 
-            The following procedure has been tested on Ubuntu 22.04 and may work with other Debian/Ubuntu versions as well. It is required to use MinGW 10.
+      .. code-block:: console
 
-        #.  Set up the Ubuntu build environment. Install these dependencies to build the Windows Wazuh agent installer on Ubuntu:
+         msiexec.exe /x wazuh-agent-|WAZUH_CURRENT|-1.msi /qn
 
-            .. code-block:: console
+   .. group-tab:: macOS
 
-                # apt-get install curl gcc-mingw-w64 g++-mingw-w64-i686 g++-mingw-w64-x86-64 nsis make cmake
+      #. To uninstall the Wazuh agent, set ``WAZUH_HOME`` to the current installation path:
 
-        #.  Set up Windows build environment. To generate the installer, the following dependencies must be in place on the Windows machine:
-
-            -   `WiX Toolset <http://wixtoolset.org/>`_.
-            -   .NET framework 3.5.1.
-            -   Microsoft Windows SDK.
-
-        #.  Download the Wazuh source code on the Ubuntu machine and unzip it:
-
-            .. code-block:: console
-
-                # curl -Ls https://github.com/wazuh/wazuh/archive/v|WAZUH_CURRENT_FROM_SOURCES|.tar.gz | tar zx
-                # cd wazuh-|WAZUH_CURRENT_FROM_SOURCES|/src
-
-        #.  Compile the Agent by running the ``make`` command:
-
-            .. code-block:: console
-
-                # make deps TARGET=winagent
-                # make TARGET=winagent
-
-            The following output will appear at the end of the building process:
-
-            .. code-block:: none
-                :class: output
-
-                Done building winagent
-
-        #.  Moves the entire repository to the Windows machine. It is recommended to compress it to speed up the process.
-
-            .. code-block:: console
-
-                # cd ../.. && zip -r wazuh.zip wazuh-|WAZUH_CURRENT_FROM_SOURCES|
-
-        #.  Decompress the repository on the Windows machine, run the ``wazuh-installer-build-msi.bat`` script from the win32 folder.
-
-            .. code-block:: doscon
-
-                > cd wazuh-|WAZUH_CURRENT_FROM_SOURCES|\src\win32
-                > .\wazuh-installer-build-msi.bat
-
-            If you do not want to sign the installer, you will have to comment or delete the signtool line in the previous script.
-
-            .. code-block:: doscon
-
-                :: signtool sign /a /tr http://timestamp.digicert.com /d "%MSI_NAME%" /fd SHA256 /td SHA256 "%MSI_NAME%"
-
-        #.  Specify the version and the revision number when prompted. This will also generate the Windows installer file. In the following output, the version is set as |WAZUH_CURRENT_WIN_FROM_SOURCES| and the revision is set as |WAZUH_CURRENT_WIN_FROM_SOURCES_REV|. This generates the Windows installer ``wazuh-agent-|WAZUH_CURRENT_WIN_FROM_SOURCES|-|WAZUH_CURRENT_WIN_FROM_SOURCES_REV|.msi``
-
-            .. code-block:: doscon
-
-                C:\wazuh\wazuh-|WAZUH_CURRENT_FROM_SOURCES|\src\win32>REM IF VERSION or REVISION are empty, ask for their value
-
-                C:\wazuh\wazuh-|WAZUH_CURRENT_FROM_SOURCES|\src\win32>IF [] == [] set /p VERSION=Enter the version of the Wazuh agent (x.y.z):
-                Enter the version of the Wazuh agent (x.y.z):|WAZUH_CURRENT_WIN_FROM_SOURCES|
-
-                C:\wazuh\wazuh-|WAZUH_CURRENT_FROM_SOURCES|\src\win32>IF [] == [] set /p REVISION=Enter the revision of the Wazuh agent:
-                Enter the revision of the Wazuh agent:1
-
-                C:\wazuh\wazuh-|WAZUH_CURRENT_FROM_SOURCES|\src\win32>SET MSI_NAME=wazuh-agent-|WAZUH_CURRENT_WIN_FROM_SOURCES|-|WAZUH_CURRENT_WIN_FROM_SOURCES_REV|.msi
-
-        #.   Proceed to install wazuh-agent-|WAZUH_CURRENT_FROM_SOURCES|-|WAZUH_CURRENT_WIN_FROM_SOURCES_REV|.msi  by following the :doc:`installation guide </installation-guide/wazuh-agent/wazuh-agent-package-windows>`.
-
-        .. rubric:: Next steps
-           :class: h2
-
-        Now that the agent is installed, the next step is to enroll the agent with the Wazuh server. For more information about this process, please check the :doc:`/user-manual/agent/agent-enrollment/index` section.
-
-        .. raw:: html
-
-            <h2>Uninstall</h2>
-
-        To uninstall the agent, the original MSI file will be needed to perform the unattended process:
-
-        .. code-block:: doscon
-
-            msiexec.exe /x wazuh-agent-|WAZUH_CURRENT_WIN_FROM_SOURCES|-|WAZUH_CURRENT_WIN_FROM_SOURCES_REV|.msi /qn
-
-    .. group-tab:: macOS
-
-        #. Install brew, a package manager for macOS:
-
-            .. code-block:: console
-
-                $ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-            .. warning::
-                In some macOS versions, this first command may fail reporting that `homebrew/core` is shallow clone. If this happens, run the following commands to solve it.
-
-                .. code-block:: console
-
-                    $ rm -rf "/usr/local/Homebrew/Library/Taps/homebrew/homebrew-core"
-                    $ brew tap homebrew/core
-
-                After that, run again the first one to properly install brew:
-
-                .. code-block:: console
-
-                    $ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-        #. Install development tools and compilers through brew.
-
-            .. code-block:: console
-
-                $ brew install automake autoconf libtool cmake
-
-        #.  Download and extract the latest version:
-
-            .. code-block:: console
-
-                # curl -Ls https://github.com/wazuh/wazuh/archive/v|WAZUH_CURRENT_FROM_SOURCES|.tar.gz | tar zx
-
-            .. note::
-
-                All the commands described below need to be executed with root user privileges.
-
-        #.  Run the ``install.sh`` script. This will run a wizard that will guide you through the installation process using the Wazuh sources:
-
-            .. code-block:: console
-
-                # cd wazuh-|WAZUH_CURRENT_FROM_SOURCES|
-                # USER_DIR="/Library/Ossec" ./install.sh
-
-            .. note::
-
-                Note that with the variable ``USER_DIR``, it has been indicated that the agent installation path is ``/Library/Ossec``
-
-            If you have previously compiled for another platform, you must clean the build using the Makefile in ``src``:
-
-            .. code-block:: console
-
-                # cd wazuh-|WAZUH_CURRENT_FROM_SOURCES|
-                # make -C src clean
-                # make -C src clean-deps
-
-            .. note::
-
-                During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/Library/Ossec]``). The default path of installation is ``/Library/Ossec``. When choosing a different path than the default, if the directory already exists, the installer will ask to delete the directory or proceed by installing Wazuh inside it. You can also run an :doc:`unattended installation </user-manual/reference/unattended-installation>`.
-
-        #. The script will ask about what kind of installation you want. Type agent in order to install a Wazuh agent:
-
-            .. code-block:: none
-                :class: output
-
-                1- What kind of installation do you want (manager, agent, local, hybrid, or help)? agent
-
-        .. rubric:: Next steps
-           :class: h2
-
-        Now that the agent is installed, the next step is to enroll the agent with the Wazuh server. For more information about this process, please check the :doc:`/user-manual/agent/agent-enrollment/index` section.
-
-        .. raw:: html
-
-            <h2>Uninstall</h2>
-
-        To uninstall Wazuh agent, set ``WAZUH_HOME`` with the current installation path:
-
-        .. code-block:: console
+         .. code-block:: console
 
             # WAZUH_HOME="/WAZUH/INSTALLATION/PATH"
 
-        Stop the service:
+      #. Stop the service:
 
-        .. code-block:: console
+         .. code-block:: console
 
             # service wazuh-agent stop 2> /dev/null
 
-        Stop the daemon:
+      #. Stop the daemon:
 
-        .. code-block:: console
+         .. code-block:: console
 
             # $WAZUH_HOME/bin/wazuh-control stop 2> /dev/null
 
-        Remove the installation folder and all its content:
+      #. Remove the installation folder and all its content:
 
-        .. code-block:: console
+         .. code-block:: console
 
             # rm -rf $WAZUH_HOME
 
-        Delete the service:
+      #. Delete the service:
 
-        .. code-block:: console
+         .. code-block:: console
 
             # rm -rf /Library/StartupItems/WAZUH
 
-        Remove Wazuh user and group:
+      #. Remove Wazuh user and group:
 
-        .. code-block:: console
+         .. code-block:: console
 
             # dscl . -delete "/Users/wazuh" > /dev/null 2>&1
             # dscl . -delete "/Groups/wazuh" > /dev/null 2>&1
+
+   .. group-tab:: AIX
+
+      #. To uninstall the Wazuh agent, set ``WAZUH_HOME`` to the current installation path:
+
+         .. code-block:: console
+
+            # WAZUH_HOME="/WAZUH/INSTALLATION/PATH"
+
+      #. Stop the service:
+
+         .. code-block:: console
+
+            # service wazuh-agent stop 2> /dev/null
+
+      #. Stop the daemon:
+
+         .. code-block:: console
+
+            # $WAZUH_HOME/bin/wazuh-control stop 2> /dev/null
+
+      #. Remove the installation folder and all its content:
+
+         .. code-block:: console
+
+            # rm -rf $WAZUH_HOME
+
+      #. Delete the service:
+
+         .. code-block:: console
+
+            # find /etc/rc.d -name "*wazuh*" | xargs rm -f
+
+      #. Remove Wazuh user and group:
+
+         .. code-block:: console
+
+            # userdel wazuh 2> /dev/null
+            # groupdel wazuh 2> /dev/null
+
+   .. group-tab:: HP-UX
+
+      #. To uninstall the Wazuh agent, set ``WAZUH_HOME`` to the current installation path:
+
+         .. code-block:: console
+
+            # WAZUH_HOME="/WAZUH/INSTALLATION/PATH"
+
+      #. Stop the service:
+
+         .. code-block:: console
+
+            # service wazuh-agent stop 2> /dev/null
+
+      #. Stop the daemon:
+
+         .. code-block:: console
+
+            # $WAZUH_HOME/bin/wazuh-control stop 2> /dev/null
+
+      #. Remove the installation folder and all its content:
+
+         .. code-block:: console
+
+            # rm -rf $WAZUH_HOME
+
+      #. Delete the service:
+
+         .. code-block:: console
+
+            # find /sbin/{init.d,rc*.d} -name "*wazuh*" | xargs rm -f
+
+      #. Remove the Wazuh user and group
+
+         .. code-block:: console
+
+            # userdel wazuh 2> /dev/null
+            # groupdel wazuh 2> /dev/null
+
+   .. group-tab:: Solaris
+
+      #. To uninstall the Wazuh agent, set ``WAZUH_HOME`` to the current installation path:
+
+         .. code-block:: console
+
+            # WAZUH_HOME="/WAZUH/INSTALLATION/PATH"
+
+      #. Stop the service:
+
+         .. code-block:: console
+
+            # service wazuh-agent stop 2> /dev/null
+
+      #. Stop the daemon:
+
+         .. code-block:: console
+
+            # $WAZUH_HOME/bin/wazuh-control stop 2> /dev/null
+
+      #. Remove the installation folder and all its content:
+
+         .. code-block:: console
+
+            # rm -rf $WAZUH_HOME
+
+      #. Delete the service:
+
+         .. code-block:: console
+
+            # find /etc/{init.d,rc*.d} -name "*wazuh*" | xargs rm -f
+
+      #. Remove Wazuh user and group:
+
+         .. code-block:: console
+
+            # userdel wazuh 2> /dev/null
+            # groupdel wazuh 2> /dev/null

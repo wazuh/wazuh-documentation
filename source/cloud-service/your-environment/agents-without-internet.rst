@@ -3,16 +3,15 @@
 .. meta::
   :description: Wazuh provides different approaches to connecting your private network securely. Learn more about how to connect agents without Internet here.
 
-.. _cloud_your_environment_agents_without_internet:
-
 Agents without Internet access
 ===============================
 
-Even if an agent does not have Internet access, Wazuh provides different approaches to securely connect your private network to your environment:
+In many organizations, certain systems, especially those in restricted, segmented, or highly secure networks do not have direct access to the Internet. These systems still generate important security events that need to be monitored by Wazuh.
 
-- `Using a forwarding proxy`_
+Wazuh Cloud supports secure methods to ensure that such isolated or private network agents can still send their data to your cloud environment. This enables visibility across your infrastructure, even for systems operating in air-gapped or compliance-restricted environments. The following options are available for this purpose:
 
-- `Using AWS Private Link`_
+-  `Using a forwarding proxy`_
+-  `Using AWS PrivateLink`_
 
 Using a forwarding proxy
 ------------------------
@@ -28,43 +27,40 @@ It is possible to access your environment using an NGINX forwarding proxy.
 
 To achieve this configuration, follow these steps:
 
-1. Deploy a new instance in a public subnet with internet access.
+#. Deploy a new instance in a public subnet with internet access.
+#. Install NGINX on your instance following the `NGINX documentation <https://docs.nginx.com/nginx/admin-guide/installing-nginx/installing-nginx-open-source/>`_.
+#. Configure NGINX.
 
-2. Install NGINX on your instance following the `NGINX documentation <https://docs.nginx.com/nginx/admin-guide/installing-nginx/installing-nginx-open-source/>`_.
-
-3. Configure NGINX.
-
-   #. Add the following lines to the HTTP section in your NGINX configuration, located in the ``/etc/nginx/nginx.conf`` file. This configuration enables Nginx to extract and use the real client IP address from the X-Forwarded-For header and sets restrictions on which real IP addresses are accepted as valid.
-
+   #. Add the following lines to the HTTP section in your NGINX configuration, located in the ``/etc/nginx/nginx.conf`` file. This configuration enables Nginx to extract and use the real client IP address from the ``X-Forwarded-For`` header and sets restrictions on which real IP addresses are accepted as valid.
 
       .. code-block::
 
          http{
-         ...
          real_ip_header X-Forwarded-For;
-         set_real_ip_from nginx_ip;
+         set_real_ip_from <nginx_ip>;
             }
 
-   #. Add the following block to the end of the NGINX configuration file ``/etc/nginx/nginx.conf`` and replace ``<CLOUD_ID>`` with the Cloud ID of your environment. This configuration enables stream proxying, where incoming traffic on specific ports is forwarded to the corresponding upstream servers (master or mycluster). This is based on the port numbers, 1515 and 1514 specified in the listen directive.
+   #. Add the following block to the end of the NGINX configuration file ``/etc/nginx/nginx.conf`` and replace ``<CLOUD_ID>`` with the Cloud ID of your environment. This configuration enables stream proxying, where incoming traffic on specific ports is forwarded to the corresponding upstream servers (master or mycluster). This is based on the port numbers, ``1515`` and ``1514`` specified in the listen directive.
 
-      .. code-block::
+      .. code-block:: nginx
+         :emphasize-lines: 3, 6
 
-	 stream {
-	   upstream master {
-	     server <CLOUD_ID>.cloud.wazuh.com:1515;
-	   }
-	   upstream mycluster {
-	     server <CLOUD_ID>.cloud.wazuh.com:1514;
-	     }
-	   server {
-	     listen nginx_ip:1515;
-	     proxy_pass master;
-	   }
-	   server {
-	     listen nginx_ip:1514;
-	     proxy_pass mycluster;
-	   }
-	 }
+   	   stream {
+   	     upstream master {
+   	       server <CLOUD_ID>.cloud.wazuh.com:1515;
+   	     }
+   	     upstream mycluster {
+   	       server <CLOUD_ID>.cloud.wazuh.com:1514;
+   	       }
+   	     server {
+   	       listen nginx_ip:1515;
+   	       proxy_pass master;
+   	     }
+   	     server {
+   	       listen nginx_ip:1514;
+   	       proxy_pass mycluster;
+   	     }
+   	   }
 
    #. Restart the NGINX service.
 
@@ -76,46 +72,51 @@ To achieve this configuration, follow these steps:
 
       Example:
 
-      .. code-block::
+      .. code-block:: console
 
-         WAZUH_MANAGER_IP=<NGINX_IP_ADDRESS> \
+         # WAZUH_MANAGER_IP=<NGINX_IP_ADDRESS> \
          WAZUH_PASSWORD="<PASSWORD>" \
          yum install wazuh-agent|WAZUH_AGENT_RPM_PKG_INSTALL|
 
-      Replace <PASSWORD> with your Wazuh server enrollment password.
+      Replace ``<PASSWORD>`` with your Wazuh server enrollment password.
 
-Using AWS Private Link
-----------------------
+Using AWS PrivateLink
+---------------------
 
-In case your agents are located in AWS, you can access our Wazuh Cloud service securely by keeping your network traffic within the AWS network. For that purpose, we use AWS Private Link.
+If your agents are deployed within AWS, you can connect them securely to your Wazuh Cloud environment without sending traffic over the public Internet. Wazuh Cloud supports AWS PrivateLink, which keeps all communication within the AWS internal network. This approach enhances security, simplifies compliance, and reduces the risk of data exposure.
 
-1. Log in to the `Wazuh Cloud Console <https://console.cloud.wazuh.com/>`_.
+Follow the below steps to connect using AWS PrivateLink:
 
-2. Go to the **Help** section to contact the Wazuh team requesting your VPC endpoint service name. It has this format:
+#. Request your Wazuh Virtual Private Cloud (VPC)  endpoint service name
 
-   ``com.amazonaws.vpce.<REGION>.vpce-svc-<AWS_SERVICE_ID>``
+   #. Log in to the `Wazuh Cloud Console <https://console.cloud.wazuh.com/>`_.
+   #. Navigate to the Help section and contact the Wazuh Support team.
+   #. Request your VPC endpoint service name, which follows this format:  ``com.amazonaws.vpce.<REGION>.vpce-svc-<AWS_SERVICE_ID>``
 
-3. Select your endpoints in AWS:
+#. Create a VPC endpoint in your AWS account
 
-   #. Navigate to your AWS Console.
+   #. Log in to your AWS Management Console.
+   #. Go to **VPC**, select **Endpoints**.
+   #. Click **Create endpoint**.
+   #. Choose the endpoint service provided by the Wazuh team.
+   #. Ensure the endpoint is created in the same AWS Region as the Wazuh service. For more details, see the `AWS documentation <https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html#create-interface-endpoint>`__.
 
-   #. Select **VPC**.
+#. Wait for Wazuh to approve the connection
 
-   #. Select **Endpoints**.
+   -  Once your endpoint is created, the Wazuh team will approve the connection.
+   -  You will receive a notification when the PrivateLink connection is ready for use.
 
-4. Create a new endpoint pointing to the endpoint service you requested from the Wazuh team. Keep in mind that the endpoint must be located in the same AWS Region as the endpoint service. For more information on AWS PrivateLink and VPC endpoints, see the  `AWS documentation <https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html#create-interface-endpoint>`_.
+#. Enroll your Wazuh agent
 
-5. After the endpoint is created, Wazuh approves the connection and sends a notification when it is ready to use.
+   -  When configuring your agent, replace the ``WAZUH_MANAGER_IP`` value with your endpoint’s DNS name: ``vpce-<AWS_ENDPOINT_ID>.vpce-svc-<AWS_SERVICE_ID>.<REGION>.vpce.amazonaws.com``.
 
-6. You can now enroll your Wazuh agent but replace the *WAZUH_MANAGER_IP* value with the endpoint's DNS (``vpce-<AWS_ENDPOINT_ID>.vpce-svc-<AWS_SERVICE_ID>.<REGION>.vpce.amazonaws.com``).
-
-   If the agents are located in a different region than your endpoint, use VPC Peerings to connect them to the endpoint service.
+#. If the agents are located in a different region than your endpoint, use VPC Peerings to connect them to the endpoint service. This allows them to send data securely through the PrivateLink connection.
 
    Example:
 
-   .. code-block::
+   .. code-block:: console
 
-      WAZUH_MANAGER_IP=vpce-<AWS_ENDPOINT_ID>.vpce-svc-<AWS_SERVICE_ID>.<REGION>.vpce.amazonaws.com \
+      # WAZUH_MANAGER_IP=vpce-<AWS_ENDPOINT_ID>.vpce-svc-<AWS_SERVICE_ID>.<REGION>.vpce.amazonaws.com \
       WAZUH_PASSWORD="<PASSWORD>>" \
       yum install wazuh-agent|WAZUH_AGENT_RPM_PKG_INSTALL|
 

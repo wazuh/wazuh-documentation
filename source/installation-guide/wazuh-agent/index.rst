@@ -3,14 +3,12 @@
 .. meta::
   :description: Find out in this section more about the Wazuh agent, its capabilities, and the options for installing the agent on different operating systems.
 
-.. _installation_agents:
-
 Wazuh agent
 ===========
 
-The Wazuh agent is multi-platform and runs on the endpoints that the user wants to monitor. It communicates with the Wazuh server, sending data in near real-time through an encrypted and authenticated channel.
+The Wazuh agent is multi-platform and runs on the endpoints that you want to monitor. It communicates with the Wazuh server, sending data in near real-time through an encrypted and authenticated channel.
 
-The agent was developed considering the need to monitor a wide variety of different endpoints without impacting their performance. It is supported on the most popular operating systems, and it requires 35 MB of RAM on average.
+The Wazuh agent was developed considering the need to monitor a wide variety of different endpoints without impacting their performance. It is supported on the most popular operating systems, and it requires 35 MB of RAM on average.
 
 The Wazuh agent provides :ref:`key features <agents_modules>` to enhance your system’s security.
 
@@ -30,10 +28,6 @@ The Wazuh agent provides :ref:`key features <agents_modules>` to enhance your sy
      -
 
 To install a Wazuh agent, select your operating system and follow the instructions.
-
-.. warning::
-
-   Support for the following operating systems ends in Wazuh 5.0.0: Red Hat 5, CentOS 5, Oracle Linux 5, SUSE Linux Enterprise Server 11, Windows XP, Windows Vista, Windows Server 2003, Solaris, AIX, and HP-UX.
 
 .. raw:: html
 
@@ -86,7 +80,7 @@ You can also deploy a new agent following the instructions in the Wazuh dashboar
     :title: Deploy new agent button
     :alt: Deploy new agent button
 
-Then the Wazuh dashboard will show you the steps to deploy a new agent.
+Then follow the steps on the Wazuh dashboard to deploy a new agent.
 
   .. thumbnail::  /images/installation/deploy-new-agent-from-ui-options.png
     :align: center
