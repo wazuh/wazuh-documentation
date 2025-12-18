@@ -223,20 +223,6 @@ Wazuh Manager
       frequency: 43200
 
 |
-| **Variable**: ``wazuh_manager_osquery``
-| **Description**: Configures the wodle item named ``osquery`` from ``ossec.conf``.
-| **Default values**:
-
-.. code-block:: yaml
-
-    wazuh_manager_osquery:
-      disable: 'yes'
-      run_daemon: 'yes'
-      log_path: '/var/log/osquery/osqueryd.results.log'
-      config_path: '/etc/osquery/osquery.conf'
-      ad_labels: 'yes'
-
-|
 | **Variable**: ``wazuh_manager_syscollector``
 | **Description**: Configures the :doc:`wodle </user-manual/reference/ossec-conf/wodle-syscollector>` item named ``syscollector`` from ``ossec.conf``.
 | **Default values**:

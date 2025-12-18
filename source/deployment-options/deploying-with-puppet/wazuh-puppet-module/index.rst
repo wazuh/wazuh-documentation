@@ -485,8 +485,6 @@ Wazuh Puppet module reference
 |                                                                 |                                                                 |                                             |
 |                                                                 | :ref:`Wazuh API <ref_server_vars_wazuh_api>`                    |                                             |
 |                                                                 |                                                                 |                                             |
-|                                                                 | :ref:`Wodle osquery <ref_server_vars_wodle_osquery>`            |                                             |
-|                                                                 |                                                                 |                                             |
 |                                                                 | :ref:`Wodle Syscollector <ref_server_vars_wodle_syscollector>`  |                                             |
 |                                                                 |                                                                 |                                             |
 |                                                                 | :ref:`Misc <ref_server_vars_misc>`                              |                                             |
