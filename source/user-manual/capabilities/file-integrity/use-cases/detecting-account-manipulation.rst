@@ -1,12 +1,12 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The Wazuh FIM module monitors directories to detect file changes, additions, and deletions. Discover some FIM use cases in this section of our documentation. 
-  
+   :description: The Wazuh FIM module monitors directories to detect file changes, additions, and deletions. Discover some FIM use cases in this section of our documentation.
+
 Detecting account manipulation
 ==============================
 
-Account manipulation refers to the creation, modification, or deletion of user accounts or other credentials within an organization's IT infrastructure. Monitoring this activity is critical to the cybersecurity of an organization. Unauthorized account manipulations might grant an attacker access to sensitive systems and data. 
+Account manipulation refers to the creation, modification, or deletion of user accounts or other credentials within an organization's IT infrastructure. Monitoring this activity is critical to the cybersecurity of an organization. Unauthorized account manipulations might grant an attacker access to sensitive systems and data.
 
 To maintain persistence on a victim endpoint, adversaries can alter the SSH ``authorized_keys`` file in Linux. The ``.ssh`` directory within a user home directory holds this file. For example, for a user named smith, you can find the ``authorized_keys`` file located at ``/home/smith/.ssh/authorized_keys``. This file defines the public keys this user uses to login into some of their accounts. Each line in the file represents a single public key.
 
@@ -15,11 +15,11 @@ You can configure the Wazuh FIM module to monitor the ``authorized_keys`` file. 
 Use case description
 --------------------
 
-  +---------------------+-----------------------------------------------------------------------------------------------+
-  | Endpoint            | Description                                                                                   |
-  +=====================+===============================================================================================+
-  | Ubuntu 20.04        | The FIM module detects SSH key modification on this endpoint.                                 |                                                                                                                               
-  +---------------------+-----------------------------------------------------------------------------------------------+
++---------------------+-----------------------------------------------------------------------------------------------+
+| Endpoint            | Description                                                                                   |
++=====================+===============================================================================================+
+| Cent OS Stream 10   | The FIM module detects SSH key modification on this endpoint.                                 |
++---------------------+-----------------------------------------------------------------------------------------------+
 
 Configuration
 -------------
@@ -49,22 +49,21 @@ Test the configuration
 
       ssh-keygen -f .ssh/test_key
 
-#. Run the following command to copy the content of the generated SSH public key ``test_key.pub`` and add it to the ``authorized_keys`` file in the target Ubuntu user ``.ssh`` directory:
+#. Run the following command to copy your generated SSH public key ``test_key.pub`` and append it to the target CentOS user’s ``authorized_keys`` file. It will also create the ``.ssh`` directory with proper permissions if it doesn’t exist:
 
    .. code-block:: console
 
-      cat ~/.ssh/test_key.pub | ssh <UBUNTU_USER>@<UBUNTU_IP> "sudo tee -a /home/<UBUNTU_USER>/.ssh/authorized_keys"
+      cat ~/.ssh/test_key.pub | ssh -t <USERNAME>@<IP_ADDRESS> "[ -d ~/.ssh ] || mkdir -m 700 ~/.ssh; tee -a ~/.ssh/authorized_keys > /dev/null"
 
-Replace ``<UBUNTU_USER>`` and ``<UBUNTU_IP>`` with the user and IP address for your Ubuntu endpoint respectively.
+   Replace ``<USERNAME>`` and ``<IP_ADDRESS>`` with the username and IP address for your CentOS endpoint respectively.
 
 Visualize the alert
 -------------------
 
 Navigate to **File Integrity Monitoring** on the Wazuh dashboard to view the alert generated when the FIM module detects changes to the ``authorized_keys`` file.
 
-.. thumbnail:: /images/manual/fim/changes-windows-authorized-keys-file.png
-  :title: Changes to the authorized_keys file
-  :alt: Changes to the authorized_keys file
-  :align: center
-  :width: 80%
-
+.. thumbnail:: /images/manual/fim/changes-authorized-keys-file.png
+   :title: Changes to the authorized_keys file
+   :alt: Changes to the authorized_keys file
+   :align: center
+   :width: 80%
