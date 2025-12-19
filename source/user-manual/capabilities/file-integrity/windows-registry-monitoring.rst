@@ -6,7 +6,7 @@
 Windows Registry monitoring
 ===========================
 
-The Windows Registry is a vital part of the Windows operating system. It’s a database that stores configuration information for programs and hardware installed on Microsoft Windows operating systems. When you install a program, Windows creates a new subkey in the registry. This subkey contains information such as the program location, version, and startup instructions.
+The Windows Registry is a vital part of the Windows operating system. It is a database that stores configuration information for programs and hardware installed on Microsoft Windows operating systems. When you install a program, Windows creates a new subkey in the registry. This subkey contains information such as the program location, version, and startup instructions.
 
 An unauthorized or unexpected change to the registry might result in system instability, application failures, and security breaches. Attackers might modify registry keys to execute malicious code or to maintain persistence on the system. In addition, legitimate software and system updates might also modify the registry. It's essential to track these changes to ensure system stability and security.
 
@@ -148,7 +148,13 @@ You must use the ``report_changes`` attribute with caution. Wazuh copies every s
 
 Follow these steps to configure the FIM module to report changes made to ``HKEY_LOCAL_MACHINE\SYSTEM\Setup`` key.
 
-#. Create a subkey ``Custom Key`` under the ``HKEY_LOCAL_MACHINE\SYSTEM\Setup`` registry key.
+#. Open Registry Editor and create a subkey named ``Custom Key`` under the ``HKEY_LOCAL_MACHINE\SYSTEM\Setup`` registry key.
+
+   .. thumbnail:: /images/manual/fim/create-custom-key.png
+      :title: Create custom key
+      :alt: Create custom key
+      :align: center
+      :width: 80%
 
 #. Edit the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file and add the configuration below:
 
@@ -167,23 +173,29 @@ Follow these steps to configure the FIM module to report changes made to ``HKEY_
 
 #. Modify the ``Custom Key`` subkey and add a new string value ``FIM`` and data ``cmd``.
 
+   .. thumbnail:: /images/manual/fim/modify-custom-key.png
+      :title: Add new string value and data
+      :alt: Add new string value and data
+      :align: center
+      :width: 80%
+
 #. Wait for 5 minutes which is the time configured for the FIM scan.
 
 Navigate to **File Integrity Monitoring** on the Wazuh dashboard to view the alert generated when the FIM module detects a modification of the monitored registry value.
 
 .. thumbnail:: /images/manual/fim/modification-of-the-monitored-registry-value.png
-  :title: Modification of the monitored registry value
-  :alt: Modification of the monitored registry value
-  :align: center
-  :width: 80%
+   :title: Modification of the monitored registry value
+   :alt: Modification of the monitored registry value
+   :align: center
+   :width: 80%
 
 Expand the alert to see the changed fields.
 
 .. thumbnail:: /images/manual/fim/changed-fields-expanded-alert.png
-  :title: Changed fields expanded alert
-  :alt: Changed fields expanded alert
-  :align: center
-  :width: 80%
+   :title: Changed fields expanded alert
+   :alt: Changed fields expanded alert
+   :align: center
+   :width: 80%
 
 Adding exclusions
 ^^^^^^^^^^^^^^^^^
@@ -217,11 +229,11 @@ With the Wazuh FIM module, you can detect any suspicious or unknown programs add
 Use case description
 ^^^^^^^^^^^^^^^^^^^^
 
-  +---------------------+-----------------------------------------------------------------------------------------------+
-  | Endpoint            | Description                                                                                   |
-  +=====================+===============================================================================================+
-  | Windows 10          | The FIM module monitors startup registry keys on this endpoint.                               |
-  +---------------------+-----------------------------------------------------------------------------------------------+
++---------------------+-----------------------------------------------------------------------------------------------+
+| Endpoint            | Description                                                                                   |
++=====================+===============================================================================================+
+| Windows 11          | The FIM module monitors startup registry keys on this endpoint.                               |
++---------------------+-----------------------------------------------------------------------------------------------+
 
 Configuration
 ^^^^^^^^^^^^^
@@ -243,9 +255,21 @@ Test the configuration
 
    You must carry this out in a sandbox environment. Delete the added registry keys after running the test.
 
-#. Add the registry value name ``DemoValue`` and registry value data ``cmd`` to the ``HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run`` key.
+#. Open Registry Editor then add the string value name ``DemoValue`` and registry value data ``cmd`` to the ``HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run`` key.
 
-#. Add the registry value name ``DemoValue`` and registry value data ``cmd`` to the ``HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\RunOne`` registry keys.
+   .. thumbnail:: /images/manual/fim/add-to-run-key.png
+      :title: Add string value and data
+      :alt: Add string value and data
+      :align: center
+      :width: 80%
+
+#. Open Registry Editor then add the string value name ``DemoValue`` and registry value data ``cmd`` to the ``HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\RunOnce`` registry keys.
+
+   .. thumbnail:: /images/manual/fim/add-to-run-once-key.png
+      :title: Add string value and data
+      :alt: Add string value and data
+      :align: center
+      :width: 80%
 
 #. Wait for 5 minutes which is the time configured for the FIM scan.
 
@@ -255,7 +279,7 @@ Visualize the alert
 Navigate to **File Integrity Monitoring** on the Wazuh dashboard to view the alert generated when the FIM module detects changes in the Windows startup registries.
 
 .. thumbnail:: /images/manual/fim/changed-windows-startup-registries.png
-  :title: Changes in the Windows startup registries
-  :alt: Changes in the Windows startup registries
-  :align: center
-  :width: 80%
+   :title: Changes in the Windows startup registries
+   :alt: Changes in the Windows startup registries
+   :align: center
+   :width: 80%

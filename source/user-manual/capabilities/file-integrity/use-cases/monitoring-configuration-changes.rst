@@ -1,8 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The Wazuh FIM module monitors directories to detect file changes, additions, and deletions. Discover some FIM use cases in this section of our documentation. 
-  
+   :description: The Wazuh FIM module monitors directories to detect file changes, additions, and deletions. Discover some FIM use cases in this section of our documentation.
+
 Monitoring configuration changes
 ================================
 
@@ -10,20 +10,20 @@ Monitoring configuration changes helps to establish accountability for changes m
 
 You can configure the FIM module to monitor configuration files and report any changes. The Wazuh FIM module uses the :ref:`whodata <who-data-monitoring>` and :ref:`report_changes <reporting-changes-in-registry-values>` attributes to record the following information about such changes:
 
-- The login user that made the changes.
-- The time of the changes.
-- The process that the user executed.
-- The changes made to the file.
+-  The login user that made the changes.
+-  The time of the changes.
+-  The process that the user executed.
+-  The changes made to the file.
 
 Use case description
 --------------------
 
-  +---------------------+-----------------------------------------------------------------------------------------------+
-  | Endpoint            | Description                                                                                   |
-  +=====================+===============================================================================================+
-  | Ubuntu 20.04        | The FIM module monitors a configuration file on this endpoint to detect file changes.         |                                                                                                                               
-  +---------------------+-----------------------------------------------------------------------------------------------+
- 
++---------------------+-----------------------------------------------------------------------------------------------+
+| Endpoint            | Description                                                                                   |
++=====================+===============================================================================================+
+| CentOS Stream 10    | The FIM module monitors a configuration file on this endpoint to detect file changes.         |
++---------------------+-----------------------------------------------------------------------------------------------+
+
 Configuration
 -------------
 
@@ -33,12 +33,12 @@ Perform the following steps to configure the FIM module to monitor the ``/etc/ap
 
    .. code-block:: console
 
-      # touch /etc/app.conf 
+      # touch /etc/app.conf
 
 #. Edit the ``/var/ossec/etc/ossec.conf`` configuration file and add the configuration below:
 
    .. code-block:: xml
-      
+
       <syscheck>
         <directories check_all="yes" report_changes="yes" whodata="yes">/etc/app.conf</directories>
       </syscheck>
@@ -66,12 +66,12 @@ Visualize the alert
 Navigate to **File Integrity Monitoring** on the Wazuh dashboard to view the alert generated when the FIM module detects modification of the configuration file.
 
 .. thumbnail:: /images/manual/fim/modification-of-the-configuration-file.png
-  :title: Modification of the configuration file
-  :alt: Modification of the configuration file
-  :align: center
-  :width: 80%
+   :title: Modification of the configuration file
+   :alt: Modification of the configuration file
+   :align: center
+   :width: 80%
 
-Expand the alert to get more information about the event. In this example, the ``nano`` text editor modified the configuration file. The logged-in user on the endpoint was ``ubuntu``. The user modified the file using root privilege. The content added to the file is ``updated image to V2``.
+Expand the alert to get more information about the event. In this example, the ``nano`` text editor modified the configuration file. The logged-in user on the endpoint was ``wazuh``. The user modified the file using root privilege. The content added to the file is ``updated image to V2``.
 
 .. thumbnail:: /images/manual/fim/get-more-information-about-the-event.png
   :title: Get more information about the event
