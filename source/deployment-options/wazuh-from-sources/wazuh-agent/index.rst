@@ -159,7 +159,7 @@ Before compiling Wazuh from sources, you need to install the required build tool
 
       .. note::
 
-         This procedure is tested on Ubuntu 22.04 and might work with other Debian/Ubuntu versions as well. It is required to use MinGW 10.
+         This procedure is tested on Ubuntu 24.04 and might work with other Debian/Ubuntu versions as well. It is required to use MinGW 10.
 
       #. Set up the Ubuntu build environment. Install these dependencies to build the Windows Wazuh agent installer on Ubuntu:
 
@@ -167,7 +167,7 @@ Before compiling Wazuh from sources, you need to install the required build tool
 
             # apt-get install curl gcc-mingw-w64 g++-mingw-w64-i686 g++-mingw-w64-x86-64 nsis make cmake
 
-      #. Set up Windows build environment. To generate the installer, the following dependencies must be in place on the Windows machine:
+      #. Set up the Windows build environment. To generate the installer, the following dependencies must be in place on the Windows machine:
 
          -  `WIX Toolset v3.11 <http://wixtoolset.org/>`_.
 
@@ -182,7 +182,7 @@ Before compiling Wazuh from sources, you need to install the required build tool
 
       This section covers installing dependencies on macOS systems. The process involves installing Homebrew and setting up build tools.
 
-      #. Install Homebrew, the package manager for macOS.
+      #. Install brew, a package manager for macOS:
 
          .. code-block:: console
 
@@ -190,8 +190,7 @@ Before compiling Wazuh from sources, you need to install the required build tool
 
          .. note::
 
-            On some macOS versions, this command may fail with a message indicating that ``homebrew/core`` is a shallow clone.
-            To fix this issue, run:
+            In some macOS versions, this first command may fail, reporting that ``homebrew/core`` is a shallow clone. If this happens, run the following commands to solve it.
 
             .. code-block:: console
 
@@ -355,7 +354,7 @@ Before compiling Wazuh from sources, you need to install the required build tool
 
                   The ``gmake`` step will take several minutes to complete. This is normal behavior.
 
-            #. Install cmake library:
+            #. Install CMake library:
 
                .. code-block:: console
 
@@ -436,7 +435,7 @@ Before compiling Wazuh from sources, you need to install the required build tool
 
                   The ``gmake`` step will take several minutes to complete. This is normal behavior.
 
-            #. Install cmake library:
+            #. Install the CMake library:
 
                .. code-block:: console
 
@@ -799,7 +798,7 @@ This section walks you through downloading the Wazuh source code, compiling it, 
 Next steps
 ----------
 
-Now that the agent is installed, the next step is to enroll the agent with the Wazuh server. For more information about this process, please check the :doc:`Wazuh agent enrollment </user-manual/agent/agent-enrollment/index>` section.
+Now that the agent is installed, the next step is to enroll the agent with the Wazuh server. Check the :doc:`Wazuh agent enrollment </user-manual/agent/agent-enrollment/index>` section for more information about this process.
 
 Uninstall
 ---------
