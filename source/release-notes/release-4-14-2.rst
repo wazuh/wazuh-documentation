@@ -35,6 +35,7 @@ Wazuh dashboard
 -  `#7878 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7878>`__ Improved text size consistency and visual hierarchy across the Agent Overview page by implementing standardized typography styling.
 -  `#7896 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7896>`__ Improved Agent Overview resilience by rendering each available system inventory field.
 -  `#7897 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7897>`__ Upgraded ``cookie`` dependency to 0.7.0.
+-  `#7963 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7963>`__ Removed the **SCA Agent** card subtitle.
 
 Resolved issues
 ---------------
@@ -46,6 +47,9 @@ Wazuh manager
 
 -  `#33046 <https://github.com/wazuh/wazuh/pull/33046>`__ Prevented Azure Log Analytics bookmarks from being overwritten across similar configurations.
 -  `#33330 <https://github.com/wazuh/wazuh/pull/33330>`__ Fixed discrepancy in the API certificate files.
+-  `#33589 <https://github.com/wazuh/wazuh/pull/33589>`__ Made analysisd ruleset reload endpoints fully asynchronous to avoid blocking the API event loop.
+-  `#33580 <https://github.com/wazuh/wazuh/pull/33580>`__ Improved analysisd ruleset hot reload performance.
+-  `#33602 <https://github.com/wazuh/wazuh/pull/33602>`__ Avoided using ``systemctl`` in restart scripts when systemd is not running as PID 1.
 
 Wazuh agent
 ^^^^^^^^^^^
@@ -67,6 +71,7 @@ Wazuh dashboard
 ^^^^^^^^^^^^^^^
 
 -  `#7883 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7883>`__ Removed sorting for Program name and Order columns in the Related decoders table, and the Groups column in the Related rules table, to prevent API errors.
+-  `#7962 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7962>`__ Fixed text alignment and column distribution in the **System inventory** card within the Agent view.
 
 Changelogs
 ----------
