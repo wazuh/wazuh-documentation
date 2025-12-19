@@ -40,6 +40,7 @@ Wazuh meets the architecture, infrastructure, and security software aspects of t
            <!-- Database synchronization settings -->
            <synchronization>
              <max_eps>10</max_eps>
+             <integrity_interval>24h</integrity_interval>
            </synchronization>
          </wodle>
 
