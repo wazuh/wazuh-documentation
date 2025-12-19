@@ -98,7 +98,7 @@ Before compiling Wazuh from sources, you need to install the required build tool
 
 **Optional**. Install the following dependencies only when compiling the CPython from sources. Since v4.2.0, ``make deps TARGET=server`` will download a portable version of CPython ready to be installed. Nevertheless, you can download the CPython sources by adding the ``PYTHON_SOURCE`` flag when running ``make deps``.
 
-To install the required dependencies to build the Python interpreter, follow these steps:
+Follow these steps to install the required dependencies to build the Python interpreter:
 
 .. tabs::
 

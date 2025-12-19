@@ -159,7 +159,7 @@ Before compiling Wazuh from sources, you need to install the required build tool
 
       .. note::
 
-         This procedure is tested on Ubuntu 22.04 and might work with other Debian/Ubuntu versions as well. It is required to use MinGW 10.
+         This procedure is tested on Ubuntu 24.04 and might work with other Debian/Ubuntu versions as well. It is required to use MinGW 10.
 
       #. Set up the Ubuntu build environment. Install these dependencies to build the Windows Wazuh agent installer on Ubuntu:
 
@@ -799,7 +799,7 @@ This section walks you through downloading the Wazuh source code, compiling it, 
 Next steps
 ----------
 
-Now that the agent is installed, the next step is to enroll the agent with the Wazuh server. For more information about this process, please check the :doc:`Wazuh agent enrollment </user-manual/agent/agent-enrollment/index>` section.
+Now that the agent is installed, the next step is to enroll the agent with the Wazuh server. Check the :doc:`Wazuh agent enrollment </user-manual/agent/agent-enrollment/index>` section for more information about this process.
 
 Uninstall
 ---------
