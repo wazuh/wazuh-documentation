@@ -167,7 +167,7 @@ Before compiling Wazuh from sources, you need to install the required build tool
 
             # apt-get install curl gcc-mingw-w64 g++-mingw-w64-i686 g++-mingw-w64-x86-64 nsis make cmake
 
-      #. Set up Windows build environment. To generate the installer, the following dependencies must be in place on the Windows machine:
+      #. Set up the Windows build environment. To generate the installer, the following dependencies must be in place on the Windows machine:
 
          -  `WIX Toolset v3.11 <http://wixtoolset.org/>`_.
 
@@ -182,7 +182,7 @@ Before compiling Wazuh from sources, you need to install the required build tool
 
       This section covers installing dependencies on macOS systems. The process involves installing Homebrew and setting up build tools.
 
-      #. Install Homebrew, the package manager for macOS.
+      #. Install brew, a package manager for macOS:
 
          .. code-block:: console
 
@@ -355,7 +355,7 @@ Before compiling Wazuh from sources, you need to install the required build tool
 
                   The ``gmake`` step will take several minutes to complete. This is normal behavior.
 
-            #. Install cmake library:
+            #. Install CMake library:
 
                .. code-block:: console
 
@@ -436,7 +436,7 @@ Before compiling Wazuh from sources, you need to install the required build tool
 
                   The ``gmake`` step will take several minutes to complete. This is normal behavior.
 
-            #. Install cmake library:
+            #. Install the CMake library:
 
                .. code-block:: console
 
