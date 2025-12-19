@@ -29,6 +29,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated the *Detecting malware using YARA integration* PoC guide. ([#9165](https://github.com/wazuh/wazuh-documentation/pull/9165))
 - **Post-release**: Updated the *File integrity monitoring and YARA* section. ([#9166](https://github.com/wazuh/wazuh-documentation/pull/9166))
 - **Post-release**: Updated the *File integrity monitoring* capability documentation. ([#9167](https://github.com/wazuh/wazuh-documentation/pull/9167))
+- **Post-release**: Updated the *Installation from sources* documentation. ([#9168](https://github.com/wazuh/wazuh-documentation/pull/9168))
 
 ### Removed
 
