@@ -6,7 +6,7 @@
 Installing the Wazuh manager from sources
 =========================================
 
-The Wazuh manager is the core component of the Wazuh server that processes and analyzes security data from Wazuh agents and other sources. It includes the analysis engine for log processing, rule evaluation, and alert generation, along with services for agent enrollment and connection management.
+The Wazuh manager is the core component of the Wazuh server that processes and analyzes security data from Wazuh agents and other sources. It includes the analysis engine for log processing, rule evaluation, and alert generation, along with services for the Wazuh agent enrollment and connection.
 
 This section covers installing dependencies, downloading and compiling the source code, running the installation wizard, and uninstalling the manager if needed.
 
@@ -45,7 +45,7 @@ Before compiling Wazuh from sources, you need to install the required build tool
                # yum install make gcc gcc-c++ policycoreutils-python automake autoconf libtool centos-release-scl openssl-devel wget bzip2 devtoolset-7 procps -y
                # curl -OL http://packages.wazuh.com/utils/gcc/gcc-9.4.0.tar.gz && tar xzf gcc-9.4.0.tar.gz  && cd gcc-9.4.0/ && ./contrib/download_prerequisites && ./configure --enable-languages=c,c++ --prefix=/usr --disable-multilib --disable-libsanitizer && make -j$(nproc) && make install && ln -fs /usr/bin/g++ /bin/c++ && ln -fs /usr/bin/gcc /bin/cc && cd .. && rm -rf gcc-* && scl enable devtoolset-7 bash
 
-            CMake 3.18 installation.
+            CMake 3.18 installation
 
             .. code-block:: console
 
@@ -61,7 +61,7 @@ Before compiling Wazuh from sources, you need to install the required build tool
                # yum-config-manager --enable PowerTools
                # yum install libstdc++-static -y
 
-            **Optional** CMake 3.18 installation from sources
+            CMake 3.18 installation
 
             .. code-block:: console
 
@@ -96,7 +96,7 @@ Before compiling Wazuh from sources, you need to install the required build tool
          # cd .. && rm -rf cmake-*
          # export PATH=/usr/local/bin:$PATH
 
-**Optional**. Install the following dependencies only when compiling the CPython from sources. Since v4.2.0, ``make deps TARGET=server`` will download a portable version of CPython ready to be installed. Nevertheless, you can download the CPython sources by adding the ``PYTHON_SOURCE`` flag when running ``make deps``.
+**Optional**: Install the following dependencies only when compiling the CPython from sources. Since v4.2.0, ``make deps TARGET=server`` will download a portable version of CPython ready to be installed. Nevertheless, you can download the CPython sources by adding the ``PYTHON_SOURCE`` flag when running ``make deps``.
 
 Follow these steps to install the required dependencies to build the Python interpreter:
 
@@ -140,7 +140,7 @@ This section walks you through downloading the Wazuh source code, compiling it, 
       # curl -Ls https://github.com/wazuh/wazuh/archive/v|WAZUH_CURRENT_FROM_SOURCES|.tar.gz | tar zx
       # cd wazuh-|WAZUH_CURRENT_FROM_SOURCES|
 
-#. If you have previously compiled for another platform, clean the build using the Makefile  in ``src/``:
+#. If you have previously compiled for another platform, clean the build using the Makefile in ``src/``:
 
    .. code-block:: console
 
@@ -171,7 +171,7 @@ This section walks you through downloading the Wazuh source code, compiling it, 
 
    .. note::
 
-      During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``manager``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path is ``/opt``.
+      During the installation, users can decide the installation path. Execute the ``./install.sh`` script and select the language, set the installation mode to ``manager``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default installation path is ``/var/ossec``. A commonly used custom path is ``/opt``.
 
    .. warning::
 
