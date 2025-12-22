@@ -3,22 +3,20 @@
 .. meta::
   :description: Wazuh provides two types of storage for your data: indexed and archive. Learn more about the archive data in this section. 
 
-.. _cloud_archive_data_access:
-
 Access
 ======
 
 To access your archive data, you need an AWS token that grants permission on the AWS S3 bucket of your environment. This token can be generated using the Wazuh Cloud API.
 
-   .. note::
-      See the :doc:`Wazuh Cloud CLI </cloud-service/cli/index>` section to learn how to list and download your archive data automatically.
+.. note::
+
+   See the :doc:`Wazuh Cloud CLI </cloud-service/cli/index>` section to learn how to list and download your archive data automatically.
 
 
 Getting your API key and the AWS token
 --------------------------------------
 
 #. Obtain your Wazuh Cloud API key by following the steps outlined in the API :doc:`Authentication </cloud-service/apis/authentication>` section.
-
 #. Use the :cloud-api-ref:`POST /storage/token <tag/storage>` API endpoint with your key to get a temporary AWS token. For example, the following request generates an AWS token valid for ``3600`` seconds that grants access to the environment archive data with ID ``012345678ab``.
 
    .. code-block::
@@ -47,8 +45,6 @@ Getting your API key and the AWS token
          }
       }
 
-
-
 Generating the AWS `wazuh_cloud_storage` profile
 ------------------------------------------------
 
@@ -56,7 +52,7 @@ Add the token to the AWS credentials file ``~/.aws/credentials``.
 
    .. code-block:: console
       :emphasize-lines: 4
-      
+
       [wazuh_cloud_storage]
       aws_access_key_id = mUdT2dBjlHd...Gh7Ni1yZKR5If
       aws_secret_access_key = qEzCk63a224...5aB+e4fC1BR0G
@@ -94,7 +90,6 @@ This command downloads the archive data files of the environment ``012345678ab``
 
    download: s3://wazuh-cloud-cold-us-east-1/012345678ab/output/alerts/2024/04/19/012345678ab_output_alerts_20240419T2050_VqaWCpX9oPfDkRpD.json.gz to output/alerts/2024/04/19/012345678ab_output_alerts_20240419T2050_VqaWCpX9oPfDkRpD.json.gz
    download: s3://wazuh-cloud-cold-us-east-1/012345678ab/output/alerts/2024/04/19/012345678ab_output_alerts_20240419T2100_kdBY42OvE9QJuiia.json.gz to output/alerts/2024/04/19/012345678ab_output_alerts_20240419T2100_kdBY42OvE9QJuiia.json.gz
-
 
 Downloading archive data – Single file
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

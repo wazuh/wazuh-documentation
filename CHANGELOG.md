@@ -1,6 +1,41 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [v4.14.1]
+
+### Added
+
+- **Post-release**: Added clarification to the ``field`` option in the *Rules syntax* section. ([#9103](https://github.com/wazuh/wazuh-documentation/pull/9103))
+- **Post-release**: Added Syscollector parameter references. ([#9108](https://github.com/wazuh/wazuh-documentation/pull/9108)) ([#9109](https://github.com/wazuh/wazuh-documentation/pull/9109))
+- **Post-release**: Added ``apache`` to the allowed ``log_format`` values in the localfile configuration documentation. ([#9114](https://github.com/wazuh/wazuh-documentation/pull/9114))
+- **Post-release**: Added step to set file ownership and permissions when modifying default decoders. ([#9141](https://github.com/wazuh/wazuh-documentation/pull/9141))
+
+### Changed
+
+- **Post-release**: Updated the *Navigating the Wazuh dashboard* section. ([#9105](https://github.com/wazuh/wazuh-documentation/pull/9105))
+- **Post-release**: Updated the *Development* section. ([#9104](https://github.com/wazuh/wazuh-documentation/pull/9104))
+- **Post-release**: Updated the *Agents* manifests in the *Deployment on Kubernetes* section. ([#9111](https://github.com/wazuh/wazuh-documentation/pull/9111))
+- **Post-release**: Updated the *Monitoring Microsoft Graph services with Wazuh* section. ([#9107](https://github.com/wazuh/wazuh-documentation/pull/9107))
+- **Post-release**: Updated the *log_format* reference sub-section. ([#9117](https://github.com/wazuh/wazuh-documentation/pull/9117))
+- **Post-release**: Updated deployment on Docker documentation. ([#9138](https://github.com/wazuh/wazuh-documentation/pull/9138))
+- **Post-release**: Updated the auditd restart command. ([#9140](https://github.com/wazuh/wazuh-documentation/pull/9140))
+- **Post-release**: Updated the *Resources* table in the *RBAC reference* guide. ([#9118](https://github.com/wazuh/wazuh-documentation/pull/9118))
+- **Post-release**: Updated the command in the Wazuh sever API *Getting started* guide. ([#9143](https://github.com/wazuh/wazuh-documentation/pull/9143))
+- **Post-release**: Updated the *Adding new Wazuh server nodes* section. ([#9144](https://github.com/wazuh/wazuh-documentation/pull/9144)) ([#9145](https://github.com/wazuh/wazuh-documentation/pull/9145))
+- **Post-release**: Updated the *Wazuh Cloud service* documentation. ([#9136](https://github.com/wazuh/wazuh-documentation/pull/9136))
+- **Post-release**: Updated the version references for the Wazuh certificates generation tool. ([#9152](https://github.com/wazuh/wazuh-documentation/pull/9152))
+- **Post-release**: Updated steps on the *Upgrading Wazuh Docker* section. ([#9155](https://github.com/wazuh/wazuh-documentation/pull/9155))
+- **Post-release**: Updated the Deployment on Kubernetes documentation. ([#9154](https://github.com/wazuh/wazuh-documentation/pull/9154))
+- **Post-release**: Updated the *Detecting malware using YARA integration* PoC guide. ([#9165](https://github.com/wazuh/wazuh-documentation/pull/9165))
+- **Post-release**: Updated the *File integrity monitoring and YARA* section. ([#9166](https://github.com/wazuh/wazuh-documentation/pull/9166))
+- **Post-release**: Updated the *File integrity monitoring* capability documentation. ([#9167](https://github.com/wazuh/wazuh-documentation/pull/9167))
+- **Post-release**: Updated the *Installation from sources* documentation. ([#9168](https://github.com/wazuh/wazuh-documentation/pull/9168))
+
+### Removed
+
+- **Post-release**: Removed the *Environment variables* sub-section in *Configuring AWS credentials*. ([#9110](https://github.com/wazuh/wazuh-documentation/pull/9110))
+- **Post-release**: Removed note about the credentials file in *Amazon Security Lake* section. ([#9112](https://github.com/wazuh/wazuh-documentation/pull/9112))
+
 ## [v4.14.0]
 
 ### Added

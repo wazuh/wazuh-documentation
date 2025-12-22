@@ -29,6 +29,10 @@ Options
 - `packages`_
 - `ports`_
 - `hotfixes`_
+- `users`_
+- `groups`_
+- `services`_
+- `browser_extensions`_
 - `synchronization`_
 
 
@@ -55,8 +59,14 @@ Options
 +----------------------+-----------------------------+
 | `hotfixes`_          | yes, no                     |
 +----------------------+-----------------------------+
-
-
+| `users`_             | yes, no                     |
++----------------------+-----------------------------+
+| `groups`_            | yes, no                     |
++----------------------+-----------------------------+
+| `services`_          | yes, no                     |
++----------------------+-----------------------------+
+| `browser_extensions`_| yes, no                     |
++----------------------+-----------------------------+
 
 disabled
 ^^^^^^^^
@@ -185,6 +195,50 @@ Enables the hotfixes scan. It reports the Windows updates installed.
   This option is enabled by default but not included in the initial configuration.
 
 
+users
+^^^^^
+
+Enables the user account information scan
+
++--------------------+---------+
+| **Default value**  | yes     |
++--------------------+---------+
+| **Allowed values** | yes, no |
++--------------------+---------+
+
+groups
+^^^^^^
+
+Enables the user account groups scan
+
++--------------------+---------+
+| **Default value**  | yes     |
++--------------------+---------+
+| **Allowed values** | yes, no |
++--------------------+---------+
+
+services
+^^^^^^^^
+
+Enables the services scan
+
++--------------------+---------+
+| **Default value**  | yes     |
++--------------------+---------+
+| **Allowed values** | yes, no |
++--------------------+---------+
+
+browser_extensions
+^^^^^^^^^^^^^^^^^^
+
+Enables the browser extensions scan
+
++--------------------+---------+
+| **Default value**  | yes     |
++--------------------+---------+
+| **Allowed values** | yes, no |
++--------------------+---------+
+
 synchronization
 ^^^^^^^^^^^^^^^
 
@@ -215,6 +269,7 @@ Example of configuration
 
 .. code-block:: xml
 
+	<!-- System inventory -->
 	<wodle name="syscollector">
 	  <disabled>no</disabled>
 	  <interval>1h</interval>
@@ -223,8 +278,12 @@ Example of configuration
 	  <os>yes</os>
 	  <network>yes</network>
 	  <packages>yes</packages>
-	  <ports all="yes">yes</ports>
+	  <ports all="no">yes</ports>
 	  <processes>yes</processes>
+	  <users>yes</users>
+	  <groups>yes</groups>
+	  <services>yes</services>
+	  <browser_extensions>yes</browser_extensions>
 
 	  <!-- Database synchronization settings -->
 	  <synchronization>

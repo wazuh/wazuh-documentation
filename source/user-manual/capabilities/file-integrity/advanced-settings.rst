@@ -50,7 +50,7 @@ You need to install the ``audit`` daemon if you don’t have it already installe
       .. code-block:: console
 
          # yum install audispd-plugins
-         # systemctl restart auditd
+         # service auditd restart
 
    .. group-tab:: Debian-based
 
@@ -63,7 +63,7 @@ You need to install the ``audit`` daemon if you don’t have it already installe
       .. code-block:: console
 
          # apt-get install audispd-plugins
-         # systemctl restart auditd
+         # service auditd restart
 
 In most systems, ``auditd`` includes a rule to skip processing of every audit rule by default. This setting prevents the reporting of any who-data information. To ensure that ``auditd`` is not `DISABLED BY DEFAULT <https://man7.org/linux/man-pages/man8/auditctl.8.html#DISABLED_BY_DEFAULT>`__, follow these steps.
 
@@ -79,7 +79,7 @@ In most systems, ``auditd`` includes a rule to skip processing of every audit ru
 
    .. code-block:: console
 
-      # systemctl restart auditd
+      # service auditd restart
       # systemctl restart wazuh-agent
 
 Configuration
@@ -194,7 +194,7 @@ Test the configuration
 
    .. code-block:: console
 
-      # useradd smith
+      # adduser smith
 
 #. Log out of the Linux endpoint and log in as ``smith``.
 
@@ -226,109 +226,149 @@ Expand the alert to view more information. In the alert fields below, you can se
 Alert in JSON format:
 
    .. code-block:: json
-      :emphasize-lines: 9,28,32,33,36,37,40,41
+      :emphasize-lines: 13,32,36,37,40,41,44,45
 
       {
-        "syscheck": {
-          "size_before": "411",
-          "uname_after": "root",
-          "mtime_after": "2023-02-06T18:21:50",
-          "size_after": "423",
-          "gid_after": "0",
-          "md5_before": "d0cfb796d371b0182cd39d589b1c1ce3",
-          "diff": "10c10\n< \n---\n> 192.168.32.5\n",
-          "sha256_before": "9eadbcd7ec16f4e5961ad2035c0228de7c22b2ba0f6761df63b1b3d9bad9d0a7",
-          "mtime_before": "2023-02-06T18:21:33",
-          "mode": "whodata",
-          "path": "/etc/hosts.allow",
-          "sha1_after": "a488ebb6fb615aa58c3cbf2363fd50e6f12b1990",
-          "changed_attributes": [
-            "size",
-            "mtime",
-            "md5",
-            "sha1",
-            "sha256"
-          ],
-          "gname_after": "root",
-          "audit": {
-            "process": {
-              "parent_name": "/usr/bin/bash",
-              "cwd": "/home/smith",
-              "parent_cwd": "/home/smith",
-              "name": "/usr/bin/nano",
-              "id": "18451",
-              "ppid": "13824"
+        "_index": "wazuh-alerts-4.x-2025.12.15",
+        "_id": "-ynvIpsBhUkrkhLo429p",
+        "_score": null,
+        "_source": {
+          "syscheck": {
+            "size_before": "1",
+            "uname_after": "root",
+            "mtime_after": "2025-12-15T11:54:54",
+            "size_after": "13",
+            "gid_after": "0",
+            "md5_before": "68b329da9893e34099c7d8ad5cb9c940",
+            "diff": "1c1\n< \n---\n> 192.168.32.5\n",
+            "sha256_before": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+            "mtime_before": "2025-12-15T11:53:17",
+            "mode": "whodata",
+            "path": "/etc/hosts.allow",
+            "sha1_after": "3c832d37ef2fa9f85931b072054464123f6125a2",
+            "changed_attributes": [
+              "size",
+              "mtime",
+              "md5",
+              "sha1",
+              "sha256"
+            ],
+            "gname_after": "root",
+            "audit": {
+              "process": {
+                "parent_name": "/usr/bin/bash",
+                "cwd": "/home/smith",
+                "parent_cwd": "/home/smith",
+                "name": "/usr/bin/nano",
+                "id": "20337",
+                "ppid": "20274"
+              },
+              "login_user": {
+                "name": "smith",
+                "id": "1001"
+              },
+              "effective_user": {
+                "name": "root",
+                "id": "0"
+              },
+              "user": {
+                "name": "root",
+                "id": "0"
+              },
+              "group": {
+                "name": "root",
+                "id": "0"
+              }
             },
-            "login_user": {
-              "name": "smith",
-              "id": "1001"
-            },
-            "effective_user": {
-              "name": "root",
-              "id": "0"
-            },
-            "user": {
-              "name": "root",
-              "id": "0"
-            },
-            "group": {
-              "name": "root",
-              "id": "0"
-            }
+            "uid_after": "0",
+            "perm_after": "rw-r--r--",
+            "event": "modified",
+            "md5_after": "3016df224717bfd1f51a8edaf6aa89ae",
+            "sha1_before": "adc83b19e793491b1c6ea0fd8b46cd9f32e592fc",
+            "sha256_after": "cf34fb40d08b630d166bf03fdfe4b82bfc6f593e19ef7bd713186be84d5e4874",
+            "inode_after": 34715907
           },
-          "uid_after": "0",
-          "perm_after": "rw-r--r--",
-          "event": "modified",
-          "md5_after": "56bf94e8c0b0ff9c5efb258d85d68bba",
-          "sha1_before": "2964c8d9f69c7261de20877392bc7393d471f4ed",
-          "sha256_after": "be0f64dc44ddc87f6ba4922e124078071cd65d27d9e25f988d5c9b4c8fa60ca0",
-          "inode_after": 263955
-        },
-        "agent": {
-          "ip": "192.168.33.157",
-          "name": "Ubuntu20.04",
-          "id": "014"
-        },
-        "manager": {
-          "name": "wazuh"
-        },
-        "rule": {
-          "mail": false,
-          "level": 7,
-          "description": "Integrity checksum changed.",
-          "groups": [
-            "ossec",
-            "syscheck",
-            "syscheck_entry_modified",
-            "syscheck_file"
-          ],
-          "nist_800_53": [
-            "SI.7"
-          ],
-          "gdpr": [
-            "II_5.1.f"
-          ],
-          "firedtimes": 171,
-          "mitre": {
-            "technique": [
-              "Stored Data Manipulation"
+          "input": {
+            "type": "log"
+          },
+          "agent": {
+            "ip": "192.168.33.134",
+            "name": "CentOS_Stream_10",
+            "id": "005"
+          },
+          "manager": {
+            "name": "ubuntu-VMware-Virtual-Platform"
+          },
+          "rule": {
+            "mail": false,
+            "level": 7,
+            "pci_dss": [
+              "11.5"
             ],
-            "id": [
-              "T1565.001"
+            "hipaa": [
+              "164.312.c.1",
+              "164.312.c.2"
             ],
-            "tactic": [
-              "Impact"
+            "tsc": [
+              "PI1.4",
+              "PI1.5",
+              "CC6.1",
+              "CC6.8",
+              "CC7.2",
+              "CC7.3"
+            ],
+            "description": "Integrity checksum changed.",
+            "groups": [
+              "ossec",
+              "syscheck",
+              "syscheck_entry_modified",
+              "syscheck_file"
+            ],
+            "nist_800_53": [
+              "SI.7"
+            ],
+            "gdpr": [
+              "II_5.1.f"
+            ],
+            "firedtimes": 3,
+            "mitre": {
+              "technique": [
+                "Stored Data Manipulation"
+              ],
+              "id": [
+                "T1565.001"
+              ],
+              "tactic": [
+                "Impact"
+              ]
+            },
+            "id": "550",
+            "gpg13": [
+              "4.11"
             ]
           },
-          "id": "550",
-          "gpg13": [
-            "4.11"
+          "location": "syscheck",
+          "decoder": {
+            "name": "syscheck_integrity_changed"
+          },
+          "id": "1765817694.1028827",
+          "full_log": "File '/etc/hosts.allow' modified\nMode: whodata\nChanged attributes: size,mtime,md5,sha1,sha256\nSize changed from '1' to '13'\nOld modification time was: '1765817597', now it is '1765817694'\nOld md5sum was: '68b329da9893e34099c7d8ad5cb9c940'\nNew md5sum is : '3016df224717bfd1f51a8edaf6aa89ae'\nOld sha1sum was: 'adc83b19e793491b1c6ea0fd8b46cd9f32e592fc'\nNew sha1sum is : '3c832d37ef2fa9f85931b072054464123f6125a2'\nOld sha256sum was: '01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b'\nNew sha256sum is : 'cf34fb40d08b630d166bf03fdfe4b82bfc6f593e19ef7bd713186be84d5e4874'\n",
+          "timestamp": "2025-12-15T11:54:54.192-0500"
+        },
+        "fields": {
+          "syscheck.mtime_after": [
+            "2025-12-15T11:54:54.000Z"
+          ],
+          "syscheck.mtime_before": [
+            "2025-12-15T11:53:17.000Z"
+          ],
+          "timestamp": [
+            "2025-12-15T16:54:54.192Z"
           ]
         },
-        "decoder": {
-          "name": "syscheck_integrity_changed"
-        },
-        "full_log": "File '/etc/hosts.allow' modified\nMode: whodata\nChanged attributes: size,mtime,md5,sha1,sha256\nSize changed from '411' to '423'\nOld modification time was: '1675696893', now it is '1675696910'\nOld md5sum was: 'd0cfb796d371b0182cd39d589b1c1ce3'\nNew md5sum is : '56bf94e8c0b0ff9c5efb258d85d68bba'\nOld sha1sum was: '2964c8d9f69c7261de20877392bc7393d471f4ed'\nNew sha1sum is : 'a488ebb6fb615aa58c3cbf2363fd50e6f12b1990'\nOld sha256sum was: '9eadbcd7ec16f4e5961ad2035c0228de7c22b2ba0f6761df63b1b3d9bad9d0a7'\nNew sha256sum is : 'be0f64dc44ddc87f6ba4922e124078071cd65d27d9e25f988d5c9b4c8fa60ca0'\n",
+        "sort": [
+          1765817694192
+        ]
       }
 
 The eBPF mode
@@ -662,15 +702,15 @@ Visualize the alert
 
 Navigate to **File Integrity Monitoring** on the Wazuh dashboard and find the alert generated when the FIM module detects changes in the monitored directory.
 
-.. thumbnail:: ../../../images/manual/fim/test-the-configuration.png
+.. thumbnail:: /images/manual/fim/test-the-configuration.png
    :title: Test the configuration
    :alt: Test the configuration
    :align: center
    :width: 80%
 
-Expand the alert with ``rule.id:550`` to view all the information. In the alert fields below, you can see the user ``wazuh`` added the word *“Hello”* to the ``audit_docu.txt`` file using the ``Notepad`` text editor.
+Expand the alert with ``rule.id:550`` to view all the information. In the alert fields below, you can see the user ``admin`` added the word *“Hello”* to the ``audit_docu.txt`` file using the ``Notepad`` text editor.
 
-.. thumbnail:: ../../../images/manual/fim/expand-the-alert-with-rule.id-550.png
+.. thumbnail:: /images/manual/fim/expand-the-alert-with-rule.id-550.png
    :title: Expand the alert with rule.id:550
    :alt: Expand the alert with rule.id:550
    :align: center

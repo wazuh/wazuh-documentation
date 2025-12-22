@@ -171,6 +171,12 @@ Run the command below to view all running services in the Wazuh namespace:
    Wazuh-indexer         ClusterIP      None             <none>             9300/TCP                         12m
    wazuh-workers         LoadBalancer   xxx.yy.zzz.26    internal-a7f9...   1514:31593/TCP                   9m
 
+.. note::
+
+   Take note of the External IP addresses for the ``wazuh`` and ``wazuh-workers`` services, as they are required during the Wazuh agent installation.
+
+   The ``wazuh`` External IP is used as the Wazuh Registration Server IP address (port ``1515``), while the ``wazuh-workers`` External IP is used as the Wazuh Manager IP address for event transmission (port ``1514``) after enrollment.
+
 Deployments
 ~~~~~~~~~~~
 
@@ -222,6 +228,59 @@ Run the command below to view the pods status in the Wazuh namespace:
    wazuh-manager-worker-0-0          1/1       Running   0          11m
    wazuh-manager-worker-1-0          1/1       Running   0          11m
 
+Enrolling a Wazuh agent
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Follow the steps below to enroll a Wazuh agent to a Wazuh manager running in a Kubernetes environment.
+
+#. Execute this command on the Kubernetes cluster and note the External IP of the ``wazuh`` and ``wazuh-workers`` load balancers:
+
+   .. code-block:: console
+
+      # kubectl get services -n wazuh
+
+   .. code-block:: none
+      :class: output
+
+      NAME                  TYPE           CLUSTER-IP       EXTERNAL-IP        PORT(S)                          AGE
+      indexer               ClusterIP      xxx.yy.zzz.24    <none>             9200/TCP                         12m
+      dashboard             ClusterIP      xxx.yy.zzz.76    <none>             5601/TCP                         11m
+      wazuh                 LoadBalancer   xxx.yy.zzz.209   internal-a7a8...   1515:32623/TCP,55000:30283/TCP   9m
+      wazuh-cluster         ClusterIP      None             <none>             1516/TCP                         9m
+      Wazuh-indexer         ClusterIP      None             <none>             9300/TCP                         12m
+      wazuh-workers         LoadBalancer   xxx.yy.zzz.26    internal-a7f9...   1514:31593/TCP                   9m
+
+#. Set the following Wazuh agent :doc:`deployment variables </user-manual/agent/agent-enrollment/deployment-variables/index>` to simplify the installation, enrollment, and configuration process of the Wazuh agent.
+
+   -  ``WAZUH_MANAGER``: External IP of the ``wazuh-workers`` load balancer.
+   -  ``WAZUH_REGISTRATION_SERVER``: External IP of the ``wazuh`` load balancer.
+   -  ``WAZUH_REGISTRATION_PASSWORD``: The default password for deploying agents in Wazuh on Kubernetes is ``password``. This password is used for enrolling new agents. The ``/var/ossec/etc/authd.pass`` file contains this password. For more information, see :doc:`/user-manual/agent/agent-enrollment/security-options/using-password-authentication`.
+   -  ``WAZUH_AGENT_NAME``: Name of the new Wazuh agent to be enrolled.
+
+#. After setting the deployment variables, install the Wazuh agent using the :doc:`Wazuh agent installation </installation-guide/wazuh-agent/index>` guide.
+#. The example below shows the command you must run to set the deployment variables and install the Wazuh agent on a Linux endpoint after adding the :ref:`Wazuh repository <agent-installation-add-wazuh-repository>`.
+
+   .. code-block:: console
+
+      # WAZUH_MANAGER="<EXTERNAL_IP_WAZUH_WORKER>" WAZUH_REGISTRATION_SERVER="<EXTERNAL_IP_WAZUH>" WAZUH_REGISTRATION_PASSWORD="<PASSWORD>" WAZUH_AGENT_NAME="WAZUH_K8S_AGENT"  \
+        apt-get install wazuh-agent
+
+   Replace:
+
+   -  ``EXTERNAL_IP_WAZUH_WORKER`` with the external IP address of the ``wazuh-workers`` load balancer service.
+   -  ``EXTERNAL_IP_WAZUH`` with the external IP address of the ``wazuh`` load balancer service.
+   -  ``PASSWORD`` with the password used to enroll agents.
+   -  ``WAZUH_K8S_AGENT`` with the Wazuh agent name that will be used for enrollment
+
+#. Enable and start the Wazuh agent service.
+
+   .. code-block:: console
+
+      # systemctl daemon-reload
+      # systemctl enable wazuh-agent
+      # systemctl start wazuh-agent
+
+To learn more about enrolling Wazuh agents, see the :doc:`/user-manual/agent/agent-enrollment/index` section of the documentation.
 
 Accessing Wazuh dashboard
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -483,7 +542,7 @@ This is the most common approach for full-cluster monitoring. Each node runs one
 #. Create the Wazuh Agent DaemonSet manifest ``wazuh-agent-daemonset.yaml``:
 
    .. code-block:: yaml
-      :emphasize-lines: 28,34
+      :emphasize-lines: 84,90,167
 
       apiVersion: v1
       kind: Namespace
@@ -506,25 +565,161 @@ This is the most common approach for full-cluster monitoring. Each node runs one
           spec:
             serviceAccountName: default
             terminationGracePeriodSeconds: 20
-            containers:
-              - name: wazuh-agent
-                image: wazuh/wazuh-agent:4.13.1
+
+            #        INIT CONTAINERS
+            initContainers:
+              # 1) Clean stale PID / lock files
+              - name: cleanup-ossec-stale
+                image: busybox:1.36
+                imagePullPolicy: IfNotPresent
+                command: ["/bin/sh", "-lc"]
+                args:
+                  - |
+                    set -e
+                    echo "[init] Cleaning old locks..."
+                    mkdir -p /agent/var/run /agent/queue/ossec
+                    rm -f /agent/var/run/*.pid || true
+                    rm -f /agent/queue/ossec/*.lock || true
+                volumeMounts:
+                  - name: ossec-data
+                    mountPath: /agent
+
+              # 2) Seed /var/ossec into hostPath (first run only)
+              - name: seed-ossec-tree
+                image: wazuh/wazuh-agent:|WAZUH_CURRENT_KUBERNETES|
+                imagePullPolicy: IfNotPresent
+                command: ["/bin/sh", "-lc"]
+                args:
+                  - |
+                    set -e
+                    echo "[init] Checking if seeding is required..."
+                    if [ ! -d /agent/bin ]; then
+                      echo "[init] Seeding /var/ossec to hostPath..."
+                      tar -C /var/ossec -cf - . | tar -C /agent -xpf -
+                    else
+                      echo "[init] Existing data found, skipping seed"
+                    fi
+                volumeMounts:
+                  - name: ossec-data
+                    mountPath: /agent
+
+              # 3) Fix ownership/permissions
+              - name: fix-permissions
+                image: busybox:1.36
+                imagePullPolicy: IfNotPresent
+                command: ["/bin/sh", "-lc"]
+                args:
+                  - |
+                    set -e
+                    echo "[init] Fixing permissions..."
+                    for d in etc logs queue var rids tmp "active-response"; do
+                      [ -d "/agent/$d" ] && chown -R 999:999 "/agent/$d"
+                    done
+                    chown -R 0:0 /agent/bin /agent/lib || true
+                    find /agent/bin -type f -exec chmod 0755 {} \; || true
+                volumeMounts:
+                  - name: ossec-data
+                    mountPath: /agent
+
+              # 4) Write ossec.conf with PASSWORD ENROLLMENT
+              - name: write-ossec-config
+                image: busybox:1.36
                 imagePullPolicy: IfNotPresent
                 env:
                   - name: WAZUH_MANAGER
-                    value: "<WAZUH_MANAGER_IP_OR_HOSTNAME>"
+                    value: "<EXTERNAL_IP_WAZUH_WORKER>"
                   - name: WAZUH_PORT
                     value: "1514"
                   - name: WAZUH_PROTOCOL
                     value: "tcp"
                   - name: WAZUH_REGISTRATION_SERVER
-                    value: "<WAZUH_MANAGER_IP_OR_HOSTNAME>"
+                    value: "<EXTERNAL_IP_WAZUH>"
                   - name: WAZUH_REGISTRATION_PORT
                     value: "1515"
-                  - name: WAZUH_AGENT_NAME
+                  - name: NODE_NAME
                     valueFrom:
                       fieldRef:
                         fieldPath: spec.nodeName
+                command: ["/bin/sh", "-lc"]
+                args:
+                  - |
+                    set -e
+                    echo "[init] Writing ossec.conf..."
+                    mkdir -p /agent/etc
+
+
+                    cat > /agent/etc/ossec.conf <<EOF
+                    <ossec_config>
+                       <client>
+                          <server>
+                            <address>${WAZUH_MANAGER}</address>
+                            <port>${WAZUH_PORT}</port>
+                            <protocol>${WAZUH_PROTOCOL}</protocol>
+                          </server>
+
+                          <enrollment>
+                            <enabled>yes</enabled>
+                            <agent_name>${NODE_NAME}</agent_name>
+                            <manager_address>${WAZUH_REGISTRATION_SERVER}</manager_address>
+                            <port>${WAZUH_REGISTRATION_PORT}</port>
+                            <authorization_pass_path>/var/ossec/etc/authd.pass</authorization_pass_path>
+                          </enrollment>
+                       </client>
+                    </ossec_config>
+                    EOF
+
+                    chown 999:999 /agent/etc/ossec.conf
+                    chmod 0640 /agent/etc/ossec.conf
+                volumeMounts:
+                  - name: ossec-data
+                    mountPath: /agent
+
+              # 5) Copy authd.pass from Secret and fix ownership
+              - name: fix-authd-pass-perms
+                image: busybox:1.36
+                imagePullPolicy: IfNotPresent
+                command: ["/bin/sh", "-lc"]
+                args:
+                  - |
+                    set -e
+                    echo "[init] Copying authd.pass from Secret..."
+                    mkdir -p /agent/etc
+                    cp /secret/authd.pass /agent/etc/authd.pass
+                    chown 0:999 /agent/etc/authd.pass
+                    chmod 0640 /agent/etc/authd.pass
+                    ls -l /agent/etc/authd.pass
+                volumeMounts:
+                  - name: ossec-data
+                    mountPath: /agent
+                  - name: wazuh-authd-pass
+                    mountPath: /secret/authd.pass
+                    subPath: authd.pass
+                    readOnly: true
+
+
+            #        MAIN CONTAINER
+            containers:
+              - name: wazuh-agent
+                image: wazuh/wazuh-agent:|WAZUH_CURRENT_KUBERNETES|
+                imagePullPolicy: IfNotPresent
+                command: ["/bin/sh", "-lc"]
+                args:
+                  - |
+                    set -e
+                    ln -sf /var/ossec/etc/ossec.conf /etc/ossec.conf || true
+                    exec /init
+                env:
+                  - name: WAZUH_MANAGER
+                    value: "<EXTERNAL_IP_WAZUH_WORKER>"
+                  - name: NODE_NAME
+                    valueFrom:
+                      fieldRef:
+                        fieldPath: spec.nodeName
+                securityContext:
+                  runAsUser: 0
+                  allowPrivilegeEscalation: true
+                  capabilities:
+                    add: ["SETGID","SETUID"]
                 volumeMounts:
                   - name: varlog
                     mountPath: /var/log
@@ -534,47 +729,66 @@ This is the most common approach for full-cluster monitoring. Each node runs one
                     readOnly: true
                   - name: ossec-data
                     mountPath: /var/ossec
-                securityContext:
-                  runAsUser: 0
-                  allowPrivilegeEscalation: true
-                  capabilities:
-                    add: ["SETGID","SETUID"]
+
+
+            #            VOLUMES
             volumes:
               - name: varlog
                 hostPath:
                   path: /var/log
+                  type: Directory
               - name: dockersock
                 hostPath:
                   path: /var/run/docker.sock
+                  type: Socket
               - name: ossec-data
-                emptyDir: {}
+                hostPath:
+                  path: /var/lib/wazuh
+                  type: DirectoryOrCreate
+              - name: wazuh-authd-pass
+                secret:
+                  secretName: wazuh-authd-pass
 
-   Replace ``<WAZUH_MANAGER_IP_OR_HOSTNAME>`` with the Wazuh manager IP address or hostname.
+   Replace:
+
+   -  ``<EXTERNAL_IP_WAZUH_WORKER>`` with the External IP of the ``wazuh-workers`` load balancer.
+   -  ``<EXTERNAL_IP_WAZUH>`` with the External IP of the ``wazuh`` load balancer.
 
 #. Create the namespace:
 
    .. code-block:: console
 
-      # kubectl create namespace wazuh-daemonset
+      $ kubectl create namespace wazuh-daemonset
+
+#. Create the Kubernetes secret for the enrollment password:
+
+   .. code-block:: console
+
+      $ kubectl create secret generic wazuh-authd-pass \
+        -n wazuh-daemonset \
+        --from-literal=authd.pass=password
+
+   .. note::
+
+      The default password for enrolling the Wazuh agent in your Kubernetes cluster is ``password``. This value is stored in the ``/var/ossec/etc/authd.pass`` file on the Wazuh Manager. For more information, see :doc:`/user-manual/agent/agent-enrollment/security-options/using-password-authentication` documentation.
 
 #. Deploy the Wazuh agent:
 
    .. code-block:: console
 
-      # kubectl apply -f wazuh-agent-daemonset.yaml
+      $ kubectl apply -f wazuh-agent-daemonset.yaml
 
 #. Verify that the Wazuh agent was deployed across all nodes with the following command:
 
    .. code-block:: console
 
-      # kubectl get pods -n wazuh-daemonset -o wide
+      $ kubectl get pods -n wazuh-daemonset -o wide
 
    .. code-block:: none
       :class: output
 
-      NAME                               READY   STATUS             RESTARTS        AGE   IP            NODE           NOMINATED NODE   READINESS GATES
-      wazuh-agent-jmqrx                  1/1     Running            2 (3m27s ago)   10h   10.xxx.x.35   minikube       <none>           <none>
-      wazuh-agent-xjg7b                  1/1     Running            2 (83s ago)   10h   <none>        minikube-m02   <none>           <none>
+      NAME                READY   STATUS    RESTARTS   AGE   IP          NODE     NOMINATED NODE   READINESS GATES
+      wazuh-agent-t2fwl   1/1     Running   0          21m   10.42.0.9   server   <none>           <none>
 
 Deploying the Wazuh Agent as a Sidecar
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -584,7 +798,7 @@ The sidecar approach is ideal for targeted monitoring of sensitive applications 
 #. Modify your application’s deployment to include the Wazuh agent container. In the example below, we deploy Wazuh alongside the Apache Tomcat application from the ``wazuh-agent-sidecar.yaml`` deployment file:
 
    .. code-block:: yaml
-      :emphasize-lines: 69,75,145,151
+      :emphasize-lines: 72,78,178,184
 
       apiVersion: v1
       kind: Namespace
@@ -612,6 +826,7 @@ The sidecar approach is ideal for targeted monitoring of sensitive applications 
               fsGroup: 999
               fsGroupChangePolicy: OnRootMismatch
 
+            #        INIT CONTAINERS
             initContainers:
               - name: cleanup-ossec-stale
                 image: busybox:1.36
@@ -631,7 +846,7 @@ The sidecar approach is ideal for targeted monitoring of sensitive applications 
                     mountPath: /agent
 
               - name: seed-ossec-tree
-                image: wazuh/wazuh-agent:4.13.0
+                image: wazuh/wazuh-agent:|WAZUH_CURRENT_KUBERNETES|
                 imagePullPolicy: IfNotPresent
                 securityContext:
                   runAsUser: 0
@@ -642,6 +857,8 @@ The sidecar approach is ideal for targeted monitoring of sensitive applications 
                     if [ ! -d /agent/bin ]; then
                       echo "Seeding /var/ossec into PVC..."
                       tar -C /var/ossec -cf - . | tar -C /agent -xpf -
+                    else
+                      echo "Existing Wazuh data found, skipping seed."
                     fi
                 volumeMounts:
                   - name: wazuh-agent-data
@@ -654,13 +871,13 @@ The sidecar approach is ideal for targeted monitoring of sensitive applications 
                   runAsUser: 0
                 env:
                   - name: WAZUH_MANAGER
-                    value: "<WAZUH_MANAGER_IP_OR_HOSTNAME>"
+                    value: "<EXTERNAL_IP_WAZUH_WORKER>"
                   - name: WAZUH_PORT
                     value: "1514"
                   - name: WAZUH_PROTOCOL
                     value: "tcp"
                   - name: WAZUH_REGISTRATION_SERVER
-                    value: "<WAZUH_MANAGER_IP_OR_HOSTNAME>"
+                    value: "<EXTERNAL_IP_WAZUH>"
                   - name: WAZUH_REGISTRATION_PORT
                     value: "1515"
                   - name: WAZUH_AGENT_NAME
@@ -685,6 +902,7 @@ The sidecar approach is ideal for targeted monitoring of sensitive applications 
                           <agent_name>${WAZUH_AGENT_NAME}</agent_name>
                           <manager_address>${WAZUH_REGISTRATION_SERVER}</manager_address>
                           <port>${WAZUH_REGISTRATION_PORT}</port>
+                          <authorization_pass_path>/var/ossec/etc/authd.pass</authorization_pass_path>
                         </enrollment>
                       </client>
                       <localfile>
@@ -693,6 +911,7 @@ The sidecar approach is ideal for targeted monitoring of sensitive applications 
                       </localfile>
                     </ossec_config>
                     EOF
+
                     sed -i \
                       -e "s|\${WAZUH_MANAGER}|${WAZUH_MANAGER}|g" \
                       -e "s|\${WAZUH_PORT}|${WAZUH_PORT}|g" \
@@ -701,10 +920,38 @@ The sidecar approach is ideal for targeted monitoring of sensitive applications 
                       -e "s|\${WAZUH_REGISTRATION_PORT}|${WAZUH_REGISTRATION_PORT}|g" \
                       -e "s|\${WAZUH_AGENT_NAME}|${WAZUH_AGENT_NAME}|g" \
                       /agent/etc/ossec.conf
+
+                    chown 999:999 /agent/etc/ossec.conf
+                    chmod 0640 /agent/etc/ossec.conf
                 volumeMounts:
                   - name: wazuh-agent-data
                     mountPath: /agent
 
+              - name: fix-authd-pass-perms
+                image: busybox:1.36
+                imagePullPolicy: IfNotPresent
+                securityContext:
+                  runAsUser: 0
+                command: ["/bin/sh", "-lc"]
+                args:
+                  - |
+                    set -e
+                    echo "Copying authd.pass from Secret..."
+                    mkdir -p /agent/etc
+                    cp /secret/authd.pass /agent/etc/authd.pass
+                    chown 0:999 /agent/etc/authd.pass
+                    chmod 0640 /agent/etc/authd.pass
+                    ls -l /agent/etc/authd.pass
+                volumeMounts:
+                  - name: wazuh-agent-data
+                    mountPath: /agent
+                  - name: wazuh-authd-pass
+                    mountPath: /secret/authd.pass
+                    subPath: authd.pass
+                    readOnly: true
+
+
+            #        MAIN CONTAINERS
             containers:
               - name: tomcat
                 image: tomcat:10.1-jdk17
@@ -716,7 +963,7 @@ The sidecar approach is ideal for targeted monitoring of sensitive applications 
                     mountPath: /usr/local/tomcat/logs
 
               - name: wazuh-agent
-                image: wazuh/wazuh-agent:4.13.0
+                image: wazuh/wazuh-agent:|WAZUH_CURRENT_KUBERNETES|
                 imagePullPolicy: IfNotPresent
                 lifecycle:
                   preStop:
@@ -730,13 +977,13 @@ The sidecar approach is ideal for targeted monitoring of sensitive applications 
                     exec /init
                 env:
                   - name: WAZUH_MANAGER
-                    value: "<WAZUH_MANAGER_IP_OR_HOSTNAME>"
+                    value: "<EXTERNAL_IP_WAZUH_WORKER>"
                   - name: WAZUH_PORT
                     value: "1514"
                   - name: WAZUH_PROTOCOL
                     value: "tcp"
                   - name: WAZUH_REGISTRATION_SERVER
-                    value: "<WAZUH_MANAGER_IP_OR_HOSTNAME>"
+                    value: "<EXTERNAL_IP_WAZUH>"
                   - name: WAZUH_REGISTRATION_PORT
                     value: "1515"
                   - name: WAZUH_AGENT_NAME
@@ -752,12 +999,17 @@ The sidecar approach is ideal for targeted monitoring of sensitive applications 
                   - name: application-data
                     mountPath: /usr/local/tomcat/logs
 
+            #            VOLUMES
+            volumes:
+              - name: wazuh-authd-pass
+                secret:
+                  secretName: wazuh-authd-pass
+
         volumeClaimTemplates:
           - metadata:
               name: wazuh-agent-data
             spec:
               accessModes: ["ReadWriteOnce"]
-              storageClassName: standard
               resources:
                 requests:
                   storage: 3Gi
@@ -765,7 +1017,6 @@ The sidecar approach is ideal for targeted monitoring of sensitive applications 
               name: application-data
             spec:
               accessModes: ["ReadWriteOnce"]
-              storageClassName: standard
               resources:
                 requests:
                   storage: 5Gi
@@ -785,13 +1036,28 @@ The sidecar approach is ideal for targeted monitoring of sensitive applications 
             targetPort: 8080
             nodePort: 30013
 
-   Replace ``<WAZUH_MANAGER_IP_OR_HOSTNAME>`` with the Wazuh manager IP address or hostname.
+   Replace:
+
+   -  ``<EXTERNAL_IP_WAZUH_WORKER>`` with the External IP of the ``wazuh-workers`` load balancer.
+   -  ``<EXTERNAL_IP_WAZUH>`` with the External IP of the ``wazuh`` load balancer.
 
 #. Create the namespace for the Wazuh agent and the Node.js application:
 
    .. code-block:: console
 
       # kubectl create namespace wazuh-sidecar
+
+#. Create the Kubernetes secret for the enrollment password:
+
+   .. code-block:: console
+
+      $ kubectl create secret generic wazuh-authd-pass \
+        -n wazuh-sidecar \
+        --from-literal=authd.pass=password
+
+   .. note::
+
+      The default password for enrolling the Wazuh agent in your Kubernetes cluster is ``password``. This value is stored in the ``/var/ossec/etc/authd.pass`` file on the Wazuh Manager. For more information, see :doc:`/user-manual/agent/agent-enrollment/security-options/using-password-authentication` documentation.
 
 #. Deploy the sidecar setup:
 

@@ -16,6 +16,7 @@ Learn more about your environment in the sections below.
    manage-auth
    settings
    limits
+   limitations
    cancel-environment
    monitor-environment-usage
    send-syslog-data
