@@ -159,7 +159,7 @@ Before compiling Wazuh from sources, you need to install the required build tool
 
       .. note::
 
-         This procedure is tested on Ubuntu 22.04 and might work with other Debian/Ubuntu versions as well. It is required to use MinGW 10.
+         This procedure is tested on Ubuntu 24.04 and might work with other Debian/Ubuntu versions as well. It is required to use MinGW 10.
 
       #. Set up the Ubuntu build environment. Install these dependencies to build the Windows Wazuh agent installer on Ubuntu:
 
@@ -167,7 +167,7 @@ Before compiling Wazuh from sources, you need to install the required build tool
 
             # apt-get install curl gcc-mingw-w64 g++-mingw-w64-i686 g++-mingw-w64-x86-64 nsis make cmake
 
-      #. Set up Windows build environment. To generate the installer, the following dependencies must be in place on the Windows machine:
+      #. Set up the Windows build environment. To generate the installer, the following dependencies must be in place on the Windows machine:
 
          -  `WIX Toolset v3.11 <http://wixtoolset.org/>`_.
 
@@ -182,7 +182,7 @@ Before compiling Wazuh from sources, you need to install the required build tool
 
       This section covers installing dependencies on macOS systems. The process involves installing Homebrew and setting up build tools.
 
-      #. Install Homebrew, the package manager for macOS.
+      #. Install brew, a package manager for macOS:
 
          .. code-block:: console
 
@@ -190,8 +190,7 @@ Before compiling Wazuh from sources, you need to install the required build tool
 
          .. note::
 
-            On some macOS versions, this command may fail with a message indicating that ``homebrew/core`` is a shallow clone.
-            To fix this issue, run:
+            In some macOS versions, this first command may fail, reporting that ``homebrew/core`` is a shallow clone. If this happens, run the following commands to solve it.
 
             .. code-block:: console
 
@@ -216,13 +215,13 @@ Before compiling Wazuh from sources, you need to install the required build tool
 
          All the commands described below need to be executed with root user privileges. Since Wazuh 3.5, an Internet connection is required for this process.
 
-      #. Download the ``wget`` tool.
+      #. Download the ``wget`` tool:
 
          .. code-block:: console
 
             # rpm -Uvh --nodeps http://packages-dev.wazuh.com/deps/aix/wget-1.19-1.aix6.1.ppc.rpm
 
-      #. Download the following script.
+      #. Download the following script:
 
          .. code-block:: console
 
@@ -230,16 +229,16 @@ Before compiling Wazuh from sources, you need to install the required build tool
 
          .. note::
 
-            If you can’t download the script this way, then you should download it using another machine and copy it to the AIX machine via the scp utility.
+            If you can't download the script this way, then you should download it using another machine and copy it to the AIX machine via the scp utility.
 
-      #. Download bash and libiconv.
+      #. Download ``bash`` and ``libiconv``:
 
          .. code-block:: console
 
             # rpm -Uvh --nodeps http://packages-dev.wazuh.com/deps/aix/bash-4.4-4.aix6.1.ppc.rpm
             # rpm -Uvh --nodeps http://packages-dev.wazuh.com/deps/aix/libiconv-1.14-22.aix6.1.ppc.rpm
 
-      #. Install the necessary dependencies using the script.
+      #. Install the necessary dependencies using the script:
 
          .. code-block:: console
 
@@ -258,7 +257,7 @@ Before compiling Wazuh from sources, you need to install the required build tool
 
          All the commands described below need to be executed with root user privileges. Since Wazuh 3.5, an internet connection is required for this process.
 
-      #. Download the ``depothelper-2.10-hppa_32-11.31.depot`` file.
+      #. Download the ``depothelper-2.10-hppa_32-11.31.depot`` file:
 
          .. code-block:: console
 
@@ -266,21 +265,21 @@ Before compiling Wazuh from sources, you need to install the required build tool
 
          .. note::
 
-            If you can’t download the script this way, then you should download it using another machine and copy it to the HP-UX machine via the scp utility.
+            If you can't download the script this way, then you should download it using another machine and copy it to the HP-UX machine via the scp utility.
 
-      #. Install the package manager. The absolute path to the depot file is used.
+      #. Install the package manager. The absolute path to the depot file is used:
 
          .. code-block:: console
 
             # swinstall -s /ABSOLUTE/PATH/depothelper-2.10-hppa_32-11.31.depot \*
 
-      #. Download the ``wget`` tool (If it is not installed).
+      #. Download the ``wget`` tool (If it is not installed):
 
          .. code-block:: console
 
             # /usr/local/bin/depothelper -f wget
 
-      #. Download the following script
+      #. Download the following script:
 
          .. code-block:: console
 
@@ -290,7 +289,7 @@ Before compiling Wazuh from sources, you need to install the required build tool
 
             If you can't download the script this way, then you should copy it via the scp utility.
 
-      #. Install the necessary dependencies using the script.
+      #. Install the necessary dependencies using the script:
 
          .. code-block:: console
 
@@ -313,7 +312,7 @@ Before compiling Wazuh from sources, you need to install the required build tool
 
          .. tab:: Solaris 10
 
-            #. Run the bash shell and install pkgutil.
+            #. Run the bash shell and install pkgutil:
 
                .. code-block:: console
 
@@ -355,7 +354,7 @@ Before compiling Wazuh from sources, you need to install the required build tool
 
                   The ``gmake`` step will take several minutes to complete. This is normal behavior.
 
-            #. Install cmake library:
+            #. Install CMake library:
 
                .. code-block:: console
 
@@ -366,7 +365,7 @@ Before compiling Wazuh from sources, you need to install the required build tool
                   # cd .. && rm -rf cmake-3.18.3
                   # ln -sf /usr/local/bin/cmake /usr/bin/cmake
 
-            #. Download and install perl 5.10.1.
+            #. Download and install Perl 5.10.1:
 
                .. code-block:: console
 
@@ -378,7 +377,7 @@ Before compiling Wazuh from sources, you need to install the required build tool
                   # gmake install -d -s
                   # cd ..
 
-            #. Remove the old version of perl and replace it with perl 5.10.1.
+            #. Remove the old version of Perl and replace it with Perl 5.10.1:
 
                .. code-block:: console
 
@@ -389,7 +388,7 @@ Before compiling Wazuh from sources, you need to install the required build tool
 
          .. tab:: Solaris 11
 
-            #. Install pkgutil and update it.
+            #. Install pkgutil and update it:
 
                .. code-block:: console
 
@@ -397,7 +396,7 @@ Before compiling Wazuh from sources, you need to install the required build tool
                   # export PATH="${PATH}:/usr/sfw/bin:/opt/csw/bin:/opt/ccs/bin"
                   # pkgutil -y -U
 
-            #. Install python 2.7.
+            #. Install Python 2.7:
 
                .. code-block:: console
 
@@ -410,7 +409,7 @@ Before compiling Wazuh from sources, you need to install the required build tool
 
                   # /opt/csw/bin/pkgutil -y -i git gmake cmake gcc5core gcc5g++
 
-            #. Install a gcc version to include all files needed in the next step:
+            #. Install a GCC version to include all files needed in the next step:
 
                .. code-block:: console
 
@@ -436,7 +435,7 @@ Before compiling Wazuh from sources, you need to install the required build tool
 
                   The ``gmake`` step will take several minutes to complete. This is normal behavior.
 
-            #. Install cmake library:
+            #. Install the CMake library:
 
                .. code-block:: console
 
@@ -799,7 +798,7 @@ This section walks you through downloading the Wazuh source code, compiling it, 
 Next steps
 ----------
 
-Now that the agent is installed, the next step is to enroll the agent with the Wazuh server. For more information about this process, please check the :doc:`Wazuh agent enrollment </user-manual/agent/agent-enrollment/index>` section.
+Now that the agent is installed, the next step is to enroll the agent with the Wazuh server. Check the :doc:`Wazuh agent enrollment </user-manual/agent/agent-enrollment/index>` section for more information about this process.
 
 Uninstall
 ---------
