@@ -69,6 +69,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated the vulnerability detection compatibility matrix. ([#9062](https://github.com/wazuh/wazuh-documentation/pull/9062))
 - **Post-release**: Updated the *Resources* table in the *RBAC reference* guide. ([#9120](https://github.com/wazuh/wazuh-documentation/pull/9120))
 - **Post-release**: Updated the *Installation from sources* documentation. ([#9173](https://github.com/wazuh/wazuh-documentation/pull/9173))
+- **Post-release**: Updated the *Wazuh signed package (WPK) files* section. ([#9177](https://github.com/wazuh/wazuh-documentation/pull/9177))
 
 ### Fixed
 
