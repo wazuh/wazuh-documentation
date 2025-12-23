@@ -8,16 +8,22 @@ Building Docker images locally
 
 You can modify and build Docker images for the Wazuh central components (manager, indexer, and dashboard) and the Wazuh agent.
 
-#. Clone the `Wazuh Docker repository <https://github.com/wazuh/wazuh-docker>`_ to your system:
+#. Clone the `Wazuh Docker repository <https://github.com/wazuh/wazuh-docker>`__ to your system:
 
    .. code-block:: console
 
       # git clone https://github.com/wazuh/wazuh-docker.git -b v|WAZUH_CURRENT_DOCKER|
 
-#. Navigate to the ``wazuh-docker`` directory and run the build script:
+#. Navigate to the ``build-docker-images`` directory:
 
    .. code-block:: console
 
-      # build-docker-images/build-images.sh
+      # cd wazuh-docker/build-docker-images
 
-This builds Docker images for all Wazuh components on your local system.
+#. Run the build script:
+
+   .. code-block:: console
+
+      # ./build-images.sh
+
+This process builds Docker images for all Wazuh components on your local system.

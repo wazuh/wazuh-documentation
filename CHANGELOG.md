@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 ### Changed
 
 - Added ARM64 to Deployment on Docker prerequisites and updated certificate generator version. ([#9163](https://github.com/wazuh/wazuh-documentation/pull/9163))
+- Updated steps in the *Building Docker images locally* section. ([#9174](https://github.com/wazuh/wazuh-documentation/pull/9174))
 
 ## [v4.14.2]
 
