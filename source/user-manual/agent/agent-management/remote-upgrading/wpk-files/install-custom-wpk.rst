@@ -25,6 +25,28 @@ Follow the steps below to upgrade a Wazuh agent using a custom WPK file in a WPK
            </ca_verification>
          </agent-upgrade>
 
+      Then restart the Wazuh agent:
+
+      .. tabs::
+
+         .. group-tab:: Linux
+
+            .. code-block:: console
+
+               # systemctl restart wazuh-agent
+
+         .. group-tab:: Windows
+
+            .. code-block:: console
+
+               # Restart-Service -Name wazuh
+
+         .. group-tab:: MacOS
+
+            .. code-block:: console
+
+               # /Library/Ossec/bin/wazuh-control restart
+
    -  Overwrite the shipped root CA with your certificate.
 
       .. note::
