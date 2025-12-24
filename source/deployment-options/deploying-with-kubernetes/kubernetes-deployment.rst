@@ -569,7 +569,7 @@ This is the most common approach for full-cluster monitoring. Each node runs one
                 spec:
                   serviceAccountName: default
                   terminationGracePeriodSeconds: 20
-                  
+
                   #        INIT CONTAINERS
                   initContainers:
                     # 1) Clean stale PID / lock files
@@ -670,7 +670,7 @@ This is the most common approach for full-cluster monitoring. Each node runs one
                       volumeMounts:
                         - name: ossec-data
                           mountPath: /agent
-                          
+
                     # 5) Copy authd.pass from Secret and fix ownership
                     - name: fix-authd-pass-perms
                       image: busybox:1.36
@@ -692,7 +692,7 @@ This is the most common approach for full-cluster monitoring. Each node runs one
                           mountPath: /secret/authd.pass
                           subPath: authd.pass
                           readOnly: true
-                          
+
                   #        MAIN CONTAINER
                   containers:
                     - name: wazuh-agent
@@ -722,7 +722,7 @@ This is the most common approach for full-cluster monitoring. Each node runs one
                           readOnly: true
                         - name: ossec-data
                           mountPath: /var/ossec
-                          
+
                   #            VOLUMES
                   volumes:
                     - name: varlog
@@ -737,15 +737,10 @@ This is the most common approach for full-cluster monitoring. Each node runs one
                       secret:
                         secretName: wazuh-authd-pass
 
-         Replace:
-
-         -  ``<EXTERNAL_IP_WAZUH_WORKER>`` with the External IP of the ``wazuh-workers`` load balancer.
-         -  ``<EXTERNAL_IP_WAZUH>`` with the External IP of the ``wazuh`` load balancer.
-
       .. group-tab:: Other cluster types
 
          .. code-block:: yaml
-            :emphasize-lines: 84,90,163
+            :emphasize-lines: 84,90,167
 
             apiVersion: v1
             kind: Namespace
@@ -768,7 +763,7 @@ This is the most common approach for full-cluster monitoring. Each node runs one
                 spec:
                   serviceAccountName: default
                   terminationGracePeriodSeconds: 20
-                  
+
                   #        INIT CONTAINERS
                   initContainers:
                     # 1) Clean stale PID / lock files
@@ -786,7 +781,7 @@ This is the most common approach for full-cluster monitoring. Each node runs one
                       volumeMounts:
                         - name: ossec-data
                           mountPath: /agent
-                          
+
                     # 2) Seed /var/ossec into hostPath (first run only)
                     - name: seed-ossec-tree
                       image: wazuh/wazuh-agent:|WAZUH_CURRENT_KUBERNETES|
@@ -805,7 +800,7 @@ This is the most common approach for full-cluster monitoring. Each node runs one
                       volumeMounts:
                         - name: ossec-data
                           mountPath: /agent
-                          
+
                     # 3) Fix ownership/permissions
                     - name: fix-permissions
                       image: busybox:1.36
@@ -823,7 +818,7 @@ This is the most common approach for full-cluster monitoring. Each node runs one
                       volumeMounts:
                         - name: ossec-data
                           mountPath: /agent
-                          
+
                     # 4) Write ossec.conf with PASSWORD ENROLLMENT
                     - name: write-ossec-config
                       image: busybox:1.36
@@ -849,8 +844,8 @@ This is the most common approach for full-cluster monitoring. Each node runs one
                           set -e
                           echo "[init] Writing ossec.conf..."
                           mkdir -p /agent/etc
-                          
-                          
+
+
                           cat > /agent/etc/ossec.conf <<EOF
                           <ossec_config>
                             <client>
@@ -859,7 +854,7 @@ This is the most common approach for full-cluster monitoring. Each node runs one
                                 <port>${WAZUH_PORT}</port>
                                 <protocol>${WAZUH_PROTOCOL}</protocol>
                               </server>
-                               
+
                               <enrollment>
                                 <enabled>yes</enabled>
                                 <agent_name>${NODE_NAME}</agent_name>
@@ -870,13 +865,13 @@ This is the most common approach for full-cluster monitoring. Each node runs one
                             </client>
                           </ossec_config>
                           EOF
-                          
+
                           chown 999:999 /agent/etc/ossec.conf
                           chmod 0640 /agent/etc/ossec.conf
                       volumeMounts:
                         - name: ossec-data
                           mountPath: /agent
-                          
+
                     # 5) Copy authd.pass from Secret and fix ownership
                     - name: fix-authd-pass-perms
                       image: busybox:1.36
@@ -898,8 +893,8 @@ This is the most common approach for full-cluster monitoring. Each node runs one
                           mountPath: /secret/authd.pass
                           subPath: authd.pass
                           readOnly: true
-                          
-                          
+
+
                   #        MAIN CONTAINER
                   containers:
                     - name: wazuh-agent
@@ -932,8 +927,8 @@ This is the most common approach for full-cluster monitoring. Each node runs one
                           readOnly: true
                         - name: ossec-data
                           mountPath: /var/ossec
-                          
-                          
+
+
                   #            VOLUMES
                   volumes:
                     - name: varlog
@@ -956,10 +951,10 @@ This is the most common approach for full-cluster monitoring. Each node runs one
 
             The manifest in this example is for the Docker container runtime.
 
-         Replace:
+   Replace:
 
-         -  ``<EXTERNAL_IP_WAZUH_WORKER>`` with the External IP of the ``wazuh-workers`` load balancer.
-         -  ``<EXTERNAL_IP_WAZUH>`` with the External IP of the ``wazuh`` load balancer.
+   -  ``<EXTERNAL_IP_WAZUH_WORKER>`` with the External IP of the ``wazuh-workers`` load balancer.
+   -  ``<EXTERNAL_IP_WAZUH>`` with the External IP of the ``wazuh`` load balancer.
 
 #. Create the namespace:
 
@@ -1036,7 +1031,7 @@ The sidecar approach is ideal for targeted monitoring of sensitive applications 
                   securityContext:
                     fsGroup: 999
                     fsGroupChangePolicy: OnRootMismatch
-                    
+
                   #        INIT CONTAINERS
                   initContainers:
                     - name: cleanup-ossec-stale
@@ -1055,7 +1050,7 @@ The sidecar approach is ideal for targeted monitoring of sensitive applications 
                       volumeMounts:
                         - name: wazuh-agent-data
                           mountPath: /agent
-                          
+
                     - name: seed-ossec-tree
                       image: wazuh/wazuh-agent:|WAZUH_CURRENT_KUBERNETES|
                       imagePullPolicy: IfNotPresent
@@ -1074,7 +1069,7 @@ The sidecar approach is ideal for targeted monitoring of sensitive applications 
                       volumeMounts:
                         - name: wazuh-agent-data
                           mountPath: /agent
-                          
+
                     - name: write-ossec-config
                       image: busybox:1.36
                       imagePullPolicy: IfNotPresent
@@ -1122,7 +1117,7 @@ The sidecar approach is ideal for targeted monitoring of sensitive applications 
                             </localfile>
                           </ossec_config>
                           EOF
-                          
+
                           sed -i \
                             -e "s|\${WAZUH_MANAGER}|${WAZUH_MANAGER}|g" \
                             -e "s|\${WAZUH_PORT}|${WAZUH_PORT}|g" \
@@ -1131,13 +1126,13 @@ The sidecar approach is ideal for targeted monitoring of sensitive applications 
                             -e "s|\${WAZUH_REGISTRATION_PORT}|${WAZUH_REGISTRATION_PORT}|g" \
                             -e "s|\${WAZUH_AGENT_NAME}|${WAZUH_AGENT_NAME}|g" \
                             /agent/etc/ossec.conf
-                            
+
                           chown 999:999 /agent/etc/ossec.conf
                           chmod 0640 /agent/etc/ossec.conf
                       volumeMounts:
                         - name: wazuh-agent-data
                           mountPath: /agent
-                          
+
                     - name: fix-authd-pass-perms
                       image: busybox:1.36
                       imagePullPolicy: IfNotPresent
@@ -1160,8 +1155,8 @@ The sidecar approach is ideal for targeted monitoring of sensitive applications 
                           mountPath: /secret/authd.pass
                           subPath: authd.pass
                           readOnly: true
-                          
-                          
+
+
                   #        MAIN CONTAINERS
                   containers:
                     - name: tomcat
@@ -1208,7 +1203,7 @@ The sidecar approach is ideal for targeted monitoring of sensitive applications 
                           mountPath: /var/ossec
                         - name: application-data
                           mountPath: /usr/local/tomcat/logs
-                          
+
                   #            VOLUMES
                   volumes:
                     - name: wazuh-authd-pass
@@ -1257,11 +1252,6 @@ The sidecar approach is ideal for targeted monitoring of sensitive applications 
 
             Before applying the manifest, confirm the StorageClass names in your cluster by running the command ``kubectl get sc``. In this example, the cluster uses the ``gp2`` StorageClass.
 
-         Replace:
-
-         -  ``<EXTERNAL_IP_WAZUH_WORKER>`` with the External IP of the ``wazuh-workers`` load balancer.
-         -  ``<EXTERNAL_IP_WAZUH>`` with the External IP of the ``wazuh`` load balancer.
-
       .. group-tab:: Other cluster types
 
          .. code-block:: yaml
@@ -1292,7 +1282,7 @@ The sidecar approach is ideal for targeted monitoring of sensitive applications 
                   securityContext:
                     fsGroup: 999
                     fsGroupChangePolicy: OnRootMismatch
-                  
+
                   #        INIT CONTAINERS
                   initContainers:
                     - name: cleanup-ossec-stale
@@ -1329,7 +1319,7 @@ The sidecar approach is ideal for targeted monitoring of sensitive applications 
                       volumeMounts:
                         - name: wazuh-agent-data
                           mountPath: /agent
-                          
+
                     - name: write-ossec-config
                       image: busybox:1.36
                       imagePullPolicy: IfNotPresent
@@ -1377,7 +1367,7 @@ The sidecar approach is ideal for targeted monitoring of sensitive applications 
                             </localfile>
                           </ossec_config>
                           EOF
-                          
+
                           sed -i \
                             -e "s|\${WAZUH_MANAGER}|${WAZUH_MANAGER}|g" \
                             -e "s|\${WAZUH_PORT}|${WAZUH_PORT}|g" \
@@ -1386,13 +1376,13 @@ The sidecar approach is ideal for targeted monitoring of sensitive applications 
                             -e "s|\${WAZUH_REGISTRATION_PORT}|${WAZUH_REGISTRATION_PORT}|g" \
                             -e "s|\${WAZUH_AGENT_NAME}|${WAZUH_AGENT_NAME}|g" \
                             /agent/etc/ossec.conf
-                            
+
                           chown 999:999 /agent/etc/ossec.conf
                           chmod 0640 /agent/etc/ossec.conf
                       volumeMounts:
                         - name: wazuh-agent-data
                           mountPath: /agent
-                          
+
                     - name: fix-authd-pass-perms
                       image: busybox:1.36
                       imagePullPolicy: IfNotPresent
@@ -1426,7 +1416,7 @@ The sidecar approach is ideal for targeted monitoring of sensitive applications 
                       volumeMounts:
                         - name: application-data
                           mountPath: /usr/local/tomcat/logs
-                          
+
                     - name: wazuh-agent
                       image: wazuh/wazuh-agent:|WAZUH_CURRENT_KUBERNETES|
                       imagePullPolicy: IfNotPresent
@@ -1463,7 +1453,7 @@ The sidecar approach is ideal for targeted monitoring of sensitive applications 
                           mountPath: /var/ossec
                         - name: application-data
                           mountPath: /usr/local/tomcat/logs
-                          
+
                   #            VOLUMES
                   volumes:
                     - name: wazuh-authd-pass
@@ -1504,10 +1494,10 @@ The sidecar approach is ideal for targeted monitoring of sensitive applications 
 
             The manifest in this example is for the Docker container runtime.
 
-         Replace:
+   Replace:
 
-         -  ``<EXTERNAL_IP_WAZUH_WORKER>`` with the External IP of the ``wazuh-workers`` load balancer.
-         -  ``<EXTERNAL_IP_WAZUH>`` with the External IP of the ``wazuh`` load balancer.
+   -  ``<EXTERNAL_IP_WAZUH_WORKER>`` with the External IP of the ``wazuh-workers`` load balancer.
+   -  ``<EXTERNAL_IP_WAZUH>`` with the External IP of the ``wazuh`` load balancer.
 
 #. Create the namespace for the Wazuh agent and the Node.js application:
 
