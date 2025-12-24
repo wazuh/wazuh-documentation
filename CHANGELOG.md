@@ -14,6 +14,10 @@ All notable changes to this project will be documented in this file.
 
 ## [v4.14.2]
 
+### Fixed
+
+- Fixed code block highlighting and indentation for ``securityContext`` in *Upgrading Wazuh on Kubernetes*. ([#9161](https://github.com/wazuh/wazuh-documentation/pull/9161))
+
 ### Changed
 
 - Updated the Wazuh module for Filebeat version references to ``0.5``. ([#9149](https://github.com/wazuh/wazuh-documentation/pull/9149))
@@ -43,6 +47,12 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated the version references for the Wazuh certificates generation tool. ([#9152](https://github.com/wazuh/wazuh-documentation/pull/9152))
 - **Post-release**: Updated steps on the *Upgrading Wazuh Docker* section. ([#9155](https://github.com/wazuh/wazuh-documentation/pull/9155))
 - **Post-release**: Updated the Deployment on Kubernetes documentation. ([#9154](https://github.com/wazuh/wazuh-documentation/pull/9154))
+- **Post-release**: Updated the *Detecting malware using YARA integration* PoC guide. ([#9165](https://github.com/wazuh/wazuh-documentation/pull/9165))
+- **Post-release**: Updated the *File integrity monitoring and YARA* section. ([#9166](https://github.com/wazuh/wazuh-documentation/pull/9166))
+- **Post-release**: Updated the *File integrity monitoring* capability documentation. ([#9167](https://github.com/wazuh/wazuh-documentation/pull/9167))
+- **Post-release**: Updated the *Installation from sources* documentation. ([#9168](https://github.com/wazuh/wazuh-documentation/pull/9168))
+- **Post-release**: Updated diagram images in the documentation. ([#9097](https://github.com/wazuh/wazuh-documentation/pull/9097))
+- **Post-release**: Updated the Wazuh signed package (WPK) files section. ([#9175](https://github.com/wazuh/wazuh-documentation/pull/9175))
 
 ### Removed
 
