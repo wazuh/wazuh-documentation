@@ -159,6 +159,8 @@ Wazuh dashboard
 Wazuh agent
 -----------
 
+.. _wazuh_agent_packages_list_linux:
+
 Linux
 ^^^^^
 

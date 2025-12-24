@@ -181,8 +181,9 @@ custom_replacements = {
     "|WAZUH_SPLUNK_REV_CURRENT_8.1|" : "1",
     #
     # === Tools
-    "|WAZUH_CERTS_GENERATOR|": "0.0.3",
+    "|WAZUH_CERTS_GENERATOR|": "0.0.4",
     "|CERT_TOOL_VERSION|": version,
+    "|YARA_VERSION|": "4.5.5",
 }
 
 if is_latest_release:

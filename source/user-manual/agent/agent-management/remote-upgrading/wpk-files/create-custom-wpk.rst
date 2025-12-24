@@ -100,11 +100,17 @@ To use this tool, the previously created :ref:`certificate and key <create-wpk-k
 Linux WPK
 ~~~~~~~~~
 
+Download the latest version of the Wazuh DEB or RPM package :ref:`here <wazuh_agent_packages_list_linux>`. For example, for Debian:
+
+.. code-block:: console
+
+   # curl -O https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/apt/pool/main/w/wazuh-agent/wazuh-agent_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_AGENT_X86|_amd64.deb
+
 Run the command below to build a Linux WPK:
 
 .. code-block:: console
 
-   # ./generate_wpk_package.sh -t linux -b v|WAZUH_CURRENT| -d /<DESTINATION_PATH> -k /<PATH_TO_GENERATED_WPK_KEYS> -o wazuh-agent_v|WAZUH_CURRENT|_linux.wpk
+   # ./generate_wpk_package.sh -t linux -b v|WAZUH_CURRENT| -d /<DESTINATION_PATH> -k /<PATH_TO_GENERATED_WPK_KEYS> -pn wazuh-agent_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_AGENT_X86|_amd64.deb -o wazuh-agent_v|WAZUH_CURRENT|_linux.wpk
 
 This script builds a Wazuh version |WAZUH_CURRENT| Linux WPK file named ``wazuh-agent_v|WAZUH_CURRENT|_linux.wpk`` and stores it in ``/<DESTINATION_PATH>`` (You can use a destination path of your choice).  It does this using the previously generated keys saved in ``/<PATH_TO_GENERATED_WPK_KEYS>`` (See :ref:`prerequisites <create-wpk-key>`).
 
@@ -134,17 +140,37 @@ If the ``-c`` or ``--checksum`` option is used, a file is created containing the
 macOS WPK
 ~~~~~~~~~
 
-To build a WPK for macOS, you need to first download a PKG package of the desired version, for the intel64 package case:
+To build a WPK for macOS, you need to first download a PKG package of the desired version:
 
-.. code-block:: console
+.. tabs::
 
-   # curl -O https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/macos/wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.intel64.pkg
+   .. group-tab:: Intel
+
+      .. code-block:: console
+
+         # curl -O https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/macos/wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.intel64.pkg
+
+   .. group-tab:: Apple Silicon
+
+      .. code-block:: console
+
+         # curl -O https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/macos/wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.arm64.pkg
 
 Run the command below to build a macOS WPK:
 
-.. code-block:: console
+.. tabs::
 
-   # ./generate_wpk_package.sh -t macos -b v|WAZUH_CURRENT_OSX| -d /<DESTINATION_PATH> -k /<PATH_TO_GENERATED_WPK_KEYS> -o wazuh-agent_v|WAZUH_CURRENT_OSX|_macOS.wpk -pn /tmp/wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.intel64.pkg
+   .. group-tab:: Intel
+
+      .. code-block:: console
+
+         # ./generate_wpk_package.sh -t macos -b v|WAZUH_CURRENT_OSX| -d /<DESTINATION_PATH> -k /<PATH_TO_GENERATED_WPK_KEYS> -o wazuh-agent_v|WAZUH_CURRENT_OSX|_macOS.wpk -pn /<PATH_TO_WPK_FILE>/wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.intel64.pkg
+
+   .. group-tab:: Apple Silicon
+
+      .. code-block:: console
+
+         # ./generate_wpk_package.sh -t macos -b v|WAZUH_CURRENT_OSX| -d /<DESTINATION_PATH> -k /<PATH_TO_GENERATED_WPK_KEYS> -o wazuh-agent_v|WAZUH_CURRENT_OSX|_macOS.wpk -pn /<PATH_TO_WPK_FILE>/wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.arm64.pkg
 
 This script builds a Wazuh |WAZUH_CURRENT_OSX| macOS WPK package named ``wazuh-agent_v|WAZUH_CURRENT_OSX|_macOS.wpk`` and stores it in ``/<DESTINATION_PATH>``. (You can use a destination path of your choice). It does this using the previously generated keys saved in ``/<PATH_TO_GENERATED_WPK_KEYS>``.
 
@@ -198,11 +224,11 @@ Linux WPK
       # curl -Ls https://github.com/wazuh/wazuh/archive/v|WAZUH_CURRENT|.tar.gz | tar zx
       # cd wazuh-|WAZUH_CURRENT|
 
-#. Download the latest version of the Wazuh DEB or RPM package. For example, for Debian:
+#. Download the latest version of the Wazuh DEB or RPM package :ref:`here <wazuh_agent_packages_list_linux>`. For example, for Debian:
 
    .. code-block:: console
 
-      # curl -Ls |DEB_AGENT_URL|_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_AGENT_X86|_amd64.deb --output wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_AGENT_X86|_amd64.deb
+      # curl -O https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/apt/pool/main/w/wazuh-agent/wazuh-agent_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_AGENT_X86|_amd64.deb
 
 #. Install the root CA if you want to overwrite the root CA with the file you :ref:`created previously <create-wpk-key>`:
 
@@ -312,9 +338,19 @@ macOS WPK
 
 #. Download the latest version of the Wazuh PKG package:
 
-   .. code-block:: console
+   .. tabs::
 
-      # curl -Ls https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/macos/wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.pkg --output wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.pkg
+      .. group-tab:: Intel
+
+         .. code-block:: console
+
+            # curl -O https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/macos/wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.intel64.pkg
+
+      .. group-tab:: Apple Silicon
+
+         .. code-block:: console
+
+            # curl -O https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/macos/wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.arm64.pkg
 
 #. Install the root CA if you want to overwrite the root CA with the file you created previously:
 

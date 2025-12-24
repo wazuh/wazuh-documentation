@@ -44,7 +44,7 @@ Single-node stack deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 -  **Operating system**: Linux or Windows
--  **Architecture**: AMD64
+-  **Architecture**: AMD64 (x86_64) or ARM64 (AARCH64)
 -  **CPU**: At least 4 cores
 -  **Memory**: At least 8 GB of RAM for the Docker host
 -  **Disk space**: At least 50 GB storage for Docker images and data volumes
@@ -53,7 +53,7 @@ Multi-node stack deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 -  **Operating system**: Linux or Windows
--  **Architecture**: AMD64
+-  **Architecture**: AMD64 or ARM64
 -  **CPU**: At least 4 cores
 -  **Memory**: At least 16 GB for the Docker host
 -  **Disk space**: At least 100 GB storage for Docker images and data volumes
