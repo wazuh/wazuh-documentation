@@ -34,6 +34,12 @@ Elasticsearch
 
   *Default 127.0.0.1*
 
+**elasticsearch_reachable_host**
+
+  ElasticSearch, ip address to perform test request after install
+
+  *Default 127.0.0.1*
+
 **elasticsearch_jvm_xms**
 
   JVM heap size
@@ -46,23 +52,192 @@ Elasticsearch
 
   *Default |ELASTICSEARCH_LATEST_ANSIBLE|*
 
-**elasticsearch_shards**
+**elasticsearch_lower_disk_requirements**
 
-  Set number of shards for indices
+  Enable/Disable Disk-Based Shard allocation
 
-  *Default 5*
+  *Default false*
 
-**elasticsearch_replicas**
+**elasticsearch_cluster_nodes**
 
-  Set number of shards for indices
+  Elasticsearch cluster nodes list
 
-  *Default 1*
+  *Default 127.0.0.1*
 
-**elasticsearch_install_java**
+**elasticsearch_discovery_nodes**
 
-  When it's present will install Oracle Java.
+  Elasticsearch cluster discovery nodes list
 
-  *Default yes*
+  *Default 127.0.0.1*
+
+**single_node**
+
+  Elasticsearch single node deploy
+
+  *Default true*
+
+
+.. _wazuh_ansible_reference_opendistro_elasticsearch:
+
+Opendistro for Elasticsearch
+=============================
+
+
+**certs_gen_tool_url**
+
+  Certificates generation tool url
+
+  *Default https://wazuh-demo.s3-us-west-1.amazonaws.com/search-guard-tlstool-1.7.zip*
+
+**certs_gen_tool_version**
+
+  Certificates generation tool version
+
+  *Default 1.7*
+
+**domain_name**
+
+  Configure hostnames for ODFE nodes
+
+*Default wazuh.com*
+
+**elasticsearch_cluster_name**
+
+  Name of the ODFE cluster
+
+  *Default wazuh-cluster*
+
+**elasticsearch_node_name**
+
+  Name of the ODFE node
+
+  *Default null*
+
+**elasticsearch_http_port**
+
+  ODFE listening port
+
+  *Default 9200*
+
+**elasticsearch_network_host**
+
+  ODFE, listening ip address
+
+  *Default 127.0.0.1*
+
+**elasticsearch_cluster_nodes**
+
+  ODFE cluster nodes list
+
+  *Default 127.0.0.1*
+
+**elasticsearch_discovery_nodes**
+
+  ODFE cluster discovery nodes list
+
+  *Default 127.0.0.1*
+
+**elasticsearch_node_master**
+
+  Set the ODFE node as master node
+
+  *Default null*
+
+**elasticsearch_node_data**
+
+  Set the ODFE node as data node
+
+  *Default true*
+
+**elasticsearch_node_ingest**
+
+  Set the ODFE node as ingest node
+
+  *Default true*
+
+**elasticsearch_lower_disk_requirements**
+
+  Enable/Disable Disk-Based Shard allocation
+
+  *Default false*
+
+**generate_certs**
+
+  Certificate generation switch
+
+  *Default true*
+
+**local_certs_path**
+
+  Local path where certs will be generated
+
+  *Default ./opendistro/certificates*
+
+**minimum_master_nodes**
+
+  Set minimum master nodes in ODFE cluster
+
+  *Default 2*
+
+**opendistro_jvm_xms**
+
+  JVM heap size
+
+  *Default null*
+
+**opendistro_version**
+
+  ODFE version to install
+
+  *Default 1.10.1*
+
+**opendistro_custom_user**
+
+  Sets custom ODFE user ID
+
+  *Default wazuh*
+
+**opendistro_admin_password**
+
+  Sets custom ODFE user password
+
+  *Default changeme*
+
+**opendistro_custom_user_role**
+
+  Sets custom ODFE user role
+
+  *Default admin*
+
+**opendistro_sec_plugin_conf_path**
+
+  Sets path for security plugin configuration
+
+  *Default /usr/share/elasticsearch/plugins/opendistro_security/securityconfig*
+
+**opendistro_sec_plugin_tools_path**
+
+  Sets path for security plugin tools
+
+  *Default /usr/share/elasticsearch/plugins/opendistro_security/tools*
+
+**opendistro_conf_path**
+
+  Sets path for ODFE configuration
+
+  *Default /etc/elasticsearch*
+
+**perform_installation**
+
+  Enables ODFE installation
+
+  *Default true*
+
+**single_node**
+
+  ODFE single node deploy
+
+  *Default true*
 
 .. _wazuh_ansible_reference_kibana:
 
@@ -81,6 +256,24 @@ Kibana
 
   *Default 127.0.0.1*
 
+**elastic_api_protocol**
+
+  Elasticsearch API used protocol
+
+  *Default https*
+
+**elasticsearch_http_port**
+
+  Port of Elasticsearch node.
+
+  *Default 9200*
+
+**elastic_stack_version**
+
+  Version of Kibana to install
+
+  *Default |ELASTICSEARCH_LATEST_ANSIBLE|*
+
 **kibana_server_host**
 
   Listening IP address of Kibana.
@@ -93,11 +286,23 @@ Kibana
 
   *Default 5601*
 
-**elastic_stack_version**
+**kibana_node_name**
 
-  Version of Kibana to install
+  Name of the kibana node
 
-  *Default |ELASTICSEARCH_LATEST_ANSIBLE|*
+  *Default node-1*
+
+**kibana_conf_path**
+
+  Kibana configuration path
+  
+  *Default /etc/kibana*
+
+**node_options**
+
+  NodeJS execution options
+
+  *Default --no-warnings --max-old-space-size=2048 --max-http-header-size=65536*
 
 **wazuh_version**
 
@@ -105,11 +310,58 @@ Kibana
 
   *Default |WAZUH_LATEST_ANSIBLE|*
 
+*wazuh_app_url*
+
+  Wazuh APP base URL
+  
+  *Default https://packages.wazuh.com/wazuhapp/wazuhapp*
+
+**wazuh_api_credentials:**
+
+  Set Wazuh API credentials.
+
+  *Example:* ::
+
+    - id: "default"
+      url: "http://localhost"
+      port: 55000
+      user: "foo"
+      password: "bar"
+
+.. _wazuh_ansible_reference_opendistro_kibana:
+
+Opendistro Kibana
+===================
+
+**build_from_sources**
+
+  Enables building from sources
+
+  *Default false*
+
+**elasticsearch_http_port**
+
+  Elasticsearch-oss node port.
+
+  *Default 9200*
+
 **elasticsearch_network_host**
 
-  Ip address or hostname of Elasticsearch node.
+  IP address or hostname of Elasticsearch-oss node.
 
   *Default 127.0.0.1*
+
+**elastic_stack_version**
+
+  Version of Kibana-oss to match compatible Wazuh APP
+
+  *Default |ELASTICSEARCH_LATEST_ANSIBLE|*
+
+**elastic_api_protocol**
+
+  Elasticsearch API used protocol
+
+  *Default https*
 
 **elasticsearch_http_port**
 
@@ -117,22 +369,166 @@ Kibana
 
   *Default 9200*
 
-**elasticsearch_shards**
+**kibana_server_host**
 
-  Set number of shards for indices
+  Listening IP address of Kibana-oss.
 
-  *Default 5*
+  *Default 0.0.0.0*
 
-**elasticsearch_replicas**
+**kibana_server_port**
 
-  Set number of shards for indices
+  Listening port of Kibana-oss.
 
-  *Default 1*
+  *Default 5601*
+
+**kibana_conf_path**
+
+  Kibana configuration path
+  
+  *Default /etc/kibana*
+
+**kibana_node_name**
+
+  Name of the kibana node
+
+  *Default node-1*
+
+**kibana_max_payload_bytes**
+
+  The maximum payload size in bytes for incoming server requests 
+
+  *Default 1048576*
+
+**kibana_opendistro_version**
+
+  Opendistro version
+  
+  *Default -1.10.1-1*
+
+**kibana_server_name**
+
+  Kibana server name
+  
+  *Default kibana*
+
+**kibana_opendistro_security**
+
+  Enable opendistro security
+  
+  *Default true*
+  
+**kibana_newsfeed_enabled**
+
+  Enables Kibana news feed
+  
+  *Default false*
+
+**kibana_telemetry_optin**
+
+  Enables automatically opt into reporting cluster statistics
+  
+  *Default false*
+
+**kibana_telemetry_enabled**
+
+  Enables usage collection
+  
+  *Default false*
+
+**node_options**
+
+  NodeJS execution options
+
+  *Default --no-warnings --max-old-space-size=2048 --max-http-header-size=65536*
+
+**opendistro_admin_password**
+
+  Sets custom ODFE user password
+
+  *Default changeme*
+
+**opendistro_kibana_user**
+
+  Elasticsearch user to login
+
+  *Default kibanaserver*
+
+**opendistro_kibana_password**
+
+  Elasticsearch password to login
+
+  *Default changeme*
+
+*wazuh_app_url*
+
+  Wazuh APP base URL
+  
+  *Default https://packages.wazuh.com/wazuhapp/wazuhapp*
+
+**wazuh_api_credentials:**
+
+  Set Wazuh API credentials.
+
+  *Example:* ::
+
+    - id: "default"
+      url: "http://localhost"
+      port: 55000
+      user: "foo"
+      password: "bar"
+
+**wazuh_plugin_branch**
+
+  Wazuh plugin branch
+
+  *Default 3.13-7.8*
+
+**wazuh_version**
+
+  Wazuh APP compatible version to install
+
+  *Default |WAZUH_LATEST_ANSIBLE|*
 
 .. _wazuh_ansible_reference_filebeat:
 
 Filebeat
 ===================
+
+**filebeat_version:**
+
+  Filebeat version to install
+
+  *Default |ELASTICSEARCH_LATEST_ANSIBLE|*
+
+**filebeat_module_package_url**
+
+  Filebeat module package URL to download
+
+  *Default https://packages.wazuh.com/3.x/filebeat*
+
+**filebeat_module_package_url**
+
+  Filebeat module package name to download
+
+  *Default wazuh-filebeat-0.1.tar.gz*
+
+**filebeat_module_package_path**
+
+  Path to download the Filebeat module package
+
+  *Default /tmp*
+
+**filebeat_module_destination**
+
+  Path to install the Filebeat module package
+
+  *Default /usr/share/filebeat/module*
+
+**filebeat_module_folder**
+
+  Path for Wazuh Filebeat module
+
+  *Default /usr/share/filebeat/module/wazuh*
 
 **filebeat_create_config:**
 
@@ -171,30 +567,6 @@ Filebeat
     - "localhost:9200"
     - "10.1.1.10:9200"
 
-**filebeat_enable_logging:**
-
-  Enable/disable logging.
-
-  *Default true*
-
-**filebeat_log_level:**
-
-  Set filebeat log level.
-
-  *Default debug*
-
-**filebeat_log_dir:**
-
-  Set filebeat log directory.
-
-  *Default: /var/log/mybeat*
-
-**filebeat_log_filename:**
-
-  Set filebeat log filename.
-
-  *Default mybeat.log*
-
 **filebeat_ssl_dir:**
 
   Set the folder containing SSL certs.
@@ -207,17 +579,134 @@ Filebeat
 
   *Default null*
 
-**filebeat_ssl_key_file:**
-
-  Set certificate key filename.
-
-  *Default null*
-
 **filebeat_ssl_insecure:**
 
   Verify validity of the server certificate hostname.
 
   *Default false*
+
+**filebeat_node_name**
+
+  Name of the Filebeat node
+
+  *Default node-1*
+
+**wazuh_template_branch:**
+
+  Wazuh branch to fetch the latest Wazuh alerts template.
+
+  *Default |WAZUH_LATEST_ANSIBLE|*
+
+.. _wazuh_ansible_reference_filebeat_oss:
+
+Filebeat-oss
+===================
+
+**elasticsearch_security_user:**
+
+  Username for secure communication
+
+  *Default admin*
+
+**elasticsearch_security_password:**
+
+  Password for secure communication
+
+  *Default changeme*
+
+**filebeat_version:**
+
+  Filebeat version to install
+
+  *Default |ELASTICSEARCH_LATEST_ANSIBLE|*
+
+**filebeat_module_package_url**
+
+  Filebeat module package URL to download
+
+  *Default https://packages.wazuh.com/3.x/filebeat*
+
+**filebeat_module_package_url**
+
+  Filebeat module package name to download
+
+  *Default wazuh-filebeat-0.1.tar.gz*
+
+**filebeat_module_package_path**
+
+  Path to download the Filebeat module package
+
+  *Default /tmp*
+
+**filebeat_module_destination**
+
+  Path to install the Filebeat module package
+
+  *Default /usr/share/filebeat/module*
+
+**filebeat_module_folder**
+
+  Path for Wazuh Filebeat module
+
+  *Default /usr/share/filebeat/module/wazuh*
+
+**filebeat_create_config:**
+
+  Generate or not Filebeat config.
+
+  *Default true*
+
+**filebeat_output_elasticsearch_enabled:**
+
+  Send output to Elasticsearch node(s).
+
+  *Default false*
+
+**filebeat_output_elasticsearch_hosts:**
+
+  Elasticsearch node(s) to send output.
+
+  *Example:* ::
+
+    filebeat_output_elasticsearch_hosts:
+    - "localhost:9200"
+    - "10.1.1.10:9200"
+
+**filebeat_ssl_dir:**
+
+  Set the folder containing SSL certs.
+
+  *Default /etc/pki/filebeat*
+
+**filebeat_security:**
+
+  Enables secure communication with Elasticsearch.
+
+  *Default true*
+
+**filebeat_security:**
+
+  Enables secure communication with Elasticsearch.
+
+  *Default true*
+
+**filebeat_node_name**
+
+  Name of the Filebeat node
+
+  *Default null*
+
+**local_certs_path**
+
+  Local path where certs will be generated
+
+  *Default ./opendistro/certificates*
+
+**wazuh_template_branch:**
+
+  Wazuh branch to fetch the latest Wazuh alerts template.
+
+  *Default |WAZUH_LATEST_ANSIBLE|*
 
 .. _wazuh_ansible_reference_manager:
 
