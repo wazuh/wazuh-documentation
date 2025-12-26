@@ -76,7 +76,7 @@ potential event flooding.
     sca.check.result: failed
 
 
-Scan results summaries are then shown on the Wazuh App, within the **SCA** tab.
+Scan results summaries are then shown on the Wazuh App, within the **SCA** tab **for a particular agent**:
 
 .. thumbnail:: ../../../images/sca/sca_agent_overview.png
     :title: SCA summary
