@@ -42,6 +42,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated the *Installation from sources* documentation. ([#9168](https://github.com/wazuh/wazuh-documentation/pull/9168))
 - **Post-release**: Updated diagram images in the documentation. ([#9097](https://github.com/wazuh/wazuh-documentation/pull/9097))
 - **Post-release**: Updated the Wazuh signed package (WPK) files section. ([#9175](https://github.com/wazuh/wazuh-documentation/pull/9175))
+- **Post-release**: Updated the *Deployment on Kubernetes* section to include separate configurations for EKS and other cluster types. ([#9181](https://github.com/wazuh/wazuh-documentation/pull/9181))
 
 ### Removed
 
