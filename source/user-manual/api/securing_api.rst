@@ -61,6 +61,8 @@ Recommended changes to securize Wazuh API
       The password for users must have a minimum length of 8 characters and also use at least one uppercase and one lowercase letter, a number, and a symbol.
 
     After changing the password, there is no need to restart the Wazuh API but a new :api-ref:`authentication <operation/api.controllers.security_controller.login_user>` will be required for the affected users.
+    
+    After changing the password, Kibana will be broken until you change the credentials in this file: ``/usr/share/kibana/data/wazuh/config/wazuh.yml``
 
 #. Change the default host and port:
 
