@@ -25,7 +25,7 @@ Follow these steps to create an internal user, create a new role mapping, and gi
 
 #. Log into the Wazuh dashboard as administrator.
 
-#. Click the upper-left menu icon **☰** to open the options, go to **Indexer management** > **Security**, and then **Internal users** to open the internal users' page.
+#. Click the upper-left menu icon **☰** to open the options, go to **Index management** > **Security**, and then **Internal users** to open the internal users' page.
 
    .. thumbnail:: /images/manual/user-administration/rbac/internal-user.gif
       :title: Internal users page 
@@ -37,7 +37,7 @@ Follow these steps to create an internal user, create a new role mapping, and gi
 
 #. To map the user to the admin role, follow these steps:
 
-   #. Click the upper-left menu icon **☰** to open the options, go to **Indexer management** > **Security**, and then **Roles** to open the roles page.
+   #. Click the upper-left menu icon **☰** to open the options, go to **Index management** > **Security**, and then **Roles** to open the roles page.
 
    #. Search for the **all_access** role in the roles list and select it to open the details window.
 
@@ -78,7 +78,7 @@ Follow these steps to create an internal user, create a new role mapping, and gi
 
 #. Log into the Wazuh dashboard as administrator.
 
-#. Click the upper-left menu icon **☰** to open the options, go to **Indexer management** > **Security**, and then **Internal users** to open the internal users' page.
+#. Click the upper-left menu icon **☰** to open the options, go to **Index management** > **Security**, and then **Internal users** to open the internal users' page.
 
    .. thumbnail:: /images/manual/user-administration/rbac/internal-user.gif
       :title: Internal users page 
@@ -90,7 +90,7 @@ Follow these steps to create an internal user, create a new role mapping, and gi
 
 #. To map the user to the appropriate role, follow these steps:
 
-   #. Click the upper-left menu icon **☰** to open the options, go to **Indexer management** > **Security**, and then **Roles** to open the roles page.
+   #. Click the upper-left menu icon **☰** to open the options, go to **Index management** > **Security**, and then **Roles** to open the roles page.
 
    #. Click **Create role**, complete the empty fields with the following parameters, and then click **Create** to complete the task. 
      
@@ -136,7 +136,7 @@ Follow these steps to create an internal user and map it to a role of your choic
 
 #. Log into the Wazuh dashboard as administrator.
 
-#. Click the upper-left menu icon **☰** to open the options, go to **Indexer management** > **Security**, and then **Internal users** to open the internal users' page.
+#. Click the upper-left menu icon **☰** to open the options, go to **Index management** > **Security**, and then **Internal users** to open the internal users' page.
 
    .. thumbnail:: /images/manual/user-administration/rbac/internal-user.gif
       :title: Internal users page 
@@ -230,7 +230,7 @@ Creating and mapping an internal user
 
 Follow these steps to create an internal user, create a custom role and map it to the new user.  
 
-#. Click the upper-left menu icon **☰** to open the available options, go to **Indexer management** > **Security**, and then **Internal users** to open the internal users' page.
+#. Click the upper-left menu icon **☰** to open the available options, go to **Index management** > **Security**, and then **Internal users** to open the internal users' page.
 
 #. Click **Create internal user**, provide a username and password, and click **Create** to complete the action.
 
