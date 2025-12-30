@@ -104,11 +104,20 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated the *Installation from sources* documentation. ([#8980](https://github.com/wazuh/wazuh-documentation/pull/8980))
 - **Post-release**: Updated the Amazon Security Lake integration documentation. ([#8989](https://github.com/wazuh/wazuh-documentation/pull/8989))
 - **Post-release**: Updated the *Deployment with Puppet* documentation. ([#8994](https://github.com/wazuh/wazuh-documentation/pull/8994))
+- **Post-release**: Updated the vulnerability detection compatibility matrix. ([#9061](https://github.com/wazuh/wazuh-documentation/pull/9061))
+- **Post-release**: Updated the *Resources* table in the *RBAC reference* guide. ([#9119](https://github.com/wazuh/wazuh-documentation/pull/9119))
+- **Post-release**: Updated the *Installation from sources* documentation. ([#9170](https://github.com/wazuh/wazuh-documentation/pull/9170))
+- **Post-release**: Updated the *Wazuh signed package (WPK) files* section. ([#9176](https://github.com/wazuh/wazuh-documentation/pull/9176))
 
 ### Fixed
 
 - **Post-release**: Removed wazuh-states-fim index references. ([#8948](https://github.com/wazuh/wazuh-documentation/pull/8948))
 - **Post-release**: Removed unnecessary code block from agent installation from sources. ([#9000](https://github.com/wazuh/wazuh-documentation/pull/9000))
+- **Post-release**: Fixed indentation in ``remove-threat.py`` code line. ([#9079](https://github.com/wazuh/wazuh-documentation/pull/9079))
+
+### Removed
+
+- **Post-release**: Removed deprecation warnings for legacy operating systems. ([#9013](https://github.com/wazuh/wazuh-documentation/pull/9013))
 
 ## [v4.13.0]
 
@@ -140,7 +149,6 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated 4.13.0 release notes entry. ([#8923](https://github.com/wazuh/wazuh-documentation/pull/8923)) ([#8925](https://github.com/wazuh/wazuh-documentation/pull/8925)) ([#8928](https://github.com/wazuh/wazuh-documentation/pull/8928))
 - **Post-release**: Updated steps in Upgrade Guide for exporting customizations from the Wazuh Dashboard. ([#8921](https://github.com/wazuh/wazuh-documentation/pull/8921))
 - **Post-release**: Updated references to Twitter. ([#8933](https://github.com/wazuh/wazuh-documentation/pull/8933))
-- **Post-release**: Added the `wazuh_modules.rlimit_nofile` internal configuration option. ([#8922](https://github.com/wazuh/wazuh-documentation/pull/8922))
 
 ## [v4.12.0]
 
@@ -203,6 +211,14 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Adjusted the Data analysis documentation. ([#8850](https://github.com/wazuh/wazuh-documentation/pull/8850))
 - **Post-release**: Updated images and powershell command in **Leveraging LLMs for alert enrichment** PoC. [#8888](https://github.com/wazuh/wazuh-documentation/pull/8888)
 - **Post-release**: Updated RBAC reference to show actual policy names with wildcards. ([#8904](https://github.com/wazuh/wazuh-documentation/pull/8904))
+- **Post-release**: Updated steps in Upgrade Guide for exporting customizations from the Wazuh Dashboard. ([#8929](https://github.com/wazuh/wazuh-documentation/pull/8929))
+- **Post-release**: Updated user manual documentation for Wazuh dashboard. ([#8970](https://github.com/wazuh/wazuh-documentation/pull/8970))
+- **Post-release**: Updated the *Installation from sources* documentation. ([#8988](https://github.com/wazuh/wazuh-documentation/pull/8988))
+- **Post-release**: Updated the Amazon Security Lake integration documentation. ([#8990](https://github.com/wazuh/wazuh-documentation/pull/8990))
+- **Post-release**: Updated the vulnerability detection compatibility matrix. ([#9062](https://github.com/wazuh/wazuh-documentation/pull/9062))
+- **Post-release**: Updated the *Resources* table in the *RBAC reference* guide. ([#9120](https://github.com/wazuh/wazuh-documentation/pull/9120))
+- **Post-release**: Updated the *Installation from sources* documentation. ([#9173](https://github.com/wazuh/wazuh-documentation/pull/9173))
+- **Post-release**: Updated the *Wazuh signed package (WPK) files* section. ([#9177](https://github.com/wazuh/wazuh-documentation/pull/9177))
 
 ### Fixed
 
@@ -215,6 +231,8 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Fixed incorrect URL and filepaths in the YARA download steps of the *Leveraging LLMs for Alert Enrichment* PoC. ([#8686](https://github.com/wazuh/wazuh-documentation/pull/8686))
 - **Post-release**: Corrected inaccurate references to the Wazuh Syscollector module. ([#8713](https://github.com/wazuh/wazuh-documentation/pull/8713))
 - **Post-release**: Corrected git command syntax in the Wazuh dashboard package generation guide. ([#8903](https://github.com/wazuh/wazuh-documentation/pull/8903))
+- **Post-release**: Removed unnecessary code block from agent installation from sources. ([#9002](https://github.com/wazuh/wazuh-documentation/pull/9002))
+- **Post-release**: Fixed indentation in ``remove-threat.py`` code line. ([#9080](https://github.com/wazuh/wazuh-documentation/pull/9080))
 
 ### Removed
 
@@ -227,6 +245,10 @@ All notable changes to this project will be documented in this file.
 - Added the ``authentication_pool_size`` option to the Wazuh server API configuration section. ([#8287](https://github.com/wazuh/wazuh-documentation/pull/8287))
 - Added clarifications that `<disabled>` is required in `active-response` blocks in *Use cases* and *Active response* reference sections. ([#8428](https://github.com/wazuh/wazuh-documentation/pull/8428))
 - Added new section on creating agent groups. ([#8436](https://github.com/wazuh/wazuh-documentation/pull/8436))
+- **Post-release**: Backported troubleshooting steps to the *Virtual Machine (OVA)* installation guide. ([#8563](https://github.com/wazuh/wazuh-documentation/pull/8563))
+- **Post-release**: Added security update for the `remove-threat.py` script and a warning to the Detecting and removing malware using VirusTotal integration POC guide. ([#8705](https://github.com/wazuh/wazuh-documentation/pull/8705))
+- **Post-release**: Changed Windows commands in the backup guide to PowerShell. ([#8764](https://github.com/wazuh/wazuh-documentation/pull/8764))
+- **Post-release**: Updated the offline installation guide. ([#8806](https://github.com/wazuh/wazuh-documentation/pull/8806))
 
 ### Changed
 
@@ -235,6 +257,13 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Moved the note in the **Configuring vulnerability detection** documentation to appear after the `<indexer>` block. ([#8427](https://github.com/wazuh/wazuh-documentation/pull/8427))
 - **Post-release**: Included checkout command in Amazon Security Lake integration guide. ([#8423](https://github.com/wazuh/wazuh-documentation/pull/8423))
 - **Post-release**: Updated Vulnerability Detection Proof of Concept. ([#8422](https://github.com/wazuh/wazuh-documentation/pull/8422))
+- **Post-release**: Updated images and powershell command in **Leveraging LLMs for alert enrichment** PoC. [#8889](https://github.com/wazuh/wazuh-documentation/pull/8889)
+- **Post-release**: Adjusted the Data analysis documentation. ([#8899](https://github.com/wazuh/wazuh-documentation/pull/8899))
+- **Post-release**: Updated user manual documentation for Wazuh dashboard. ([#8972](https://github.com/wazuh/wazuh-documentation/pull/8972))
+- **Post-release**: Updated the Amazon Security Lake integration documentation. ([#8991](https://github.com/wazuh/wazuh-documentation/pull/8991))
+- **Post-release**: Updated the vulnerability detection compatibility matrix. ([#9063](https://github.com/wazuh/wazuh-documentation/pull/9063))
+- **Post-release**: Fixed indentation in ``remove-threat.py`` code line. ([#9081](https://github.com/wazuh/wazuh-documentation/pull/9081))
+- **Post-release**: Updated the *Resources* table in the *RBAC reference* guide. ([#9121](https://github.com/wazuh/wazuh-documentation/pull/9121))
 
 ### Fixed
 
@@ -258,6 +287,7 @@ All notable changes to this project will be documented in this file.
 - Added CISA to the vulnerability source enumerations and compatibility matrix. ([#8201](https://github.com/wazuh/wazuh-documentation/pull/8201))
 - **Post-release**: Added new configuration options to the MS Graph integration documentation. ([#8226](https://github.com/wazuh/wazuh-documentation/pull/8226))
 - **Post-release**: Added Wazuh indexer API documentation. ([#8231](https://github.com/wazuh/wazuh-documentation/pull/8231))
+- **Post-release**: Added a table describing the possible environment statuses in the cloud service documentation. ([#8407](https://github.com/wazuh/wazuh-documentation/pull/8407))
 
 ### Changed
 
@@ -266,6 +296,7 @@ All notable changes to this project will be documented in this file.
 - Updated the Virtual Machine (OVA) and Amazon Machine Images (AMI) sections. Updated the operating system component to AL2023. ([#8201](https://github.com/wazuh/wazuh-documentation/pull/8201))
 - **Post-release**: Updated the explanation of the `frequency` option in the `localfile` documentation.
 - **Post-release**: Updated the Filebeat installation commands. ([#8390](https://github.com/wazuh/wazuh-documentation/pull/8390))
+- **Post-release**: Changed Suricata ruleset file permissions in POC guide. ([#8822](https://github.com/wazuh/wazuh-documentation/pull/8822))
 
 ### Removed
 
