@@ -541,213 +541,415 @@ This is the most common approach for full-cluster monitoring. Each node runs one
 
 #. Create the Wazuh Agent DaemonSet manifest ``wazuh-agent-daemonset.yaml``:
 
-   .. code-block:: yaml
-      :emphasize-lines: 84,90,167
+   .. tabs::
 
-      apiVersion: v1
-      kind: Namespace
-      metadata:
-        name: wazuh-daemonset
-      ---
-      apiVersion: apps/v1
-      kind: DaemonSet
-      metadata:
-        name: wazuh-agent
-        namespace: wazuh-daemonset
-      spec:
-        selector:
-          matchLabels:
-            app: wazuh-agent
-        template:
-          metadata:
-            labels:
-              app: wazuh-agent
-          spec:
-            serviceAccountName: default
-            terminationGracePeriodSeconds: 20
+      .. group-tab:: EKS user
 
-            #        INIT CONTAINERS
-            initContainers:
-              # 1) Clean stale PID / lock files
-              - name: cleanup-ossec-stale
-                image: busybox:1.36
-                imagePullPolicy: IfNotPresent
-                command: ["/bin/sh", "-lc"]
-                args:
-                  - |
-                    set -e
-                    echo "[init] Cleaning old locks..."
-                    mkdir -p /agent/var/run /agent/queue/ossec
-                    rm -f /agent/var/run/*.pid || true
-                    rm -f /agent/queue/ossec/*.lock || true
-                volumeMounts:
-                  - name: ossec-data
-                    mountPath: /agent
+         .. code-block:: yaml
+            :emphasize-lines: 81,87,159
 
-              # 2) Seed /var/ossec into hostPath (first run only)
-              - name: seed-ossec-tree
-                image: wazuh/wazuh-agent:|WAZUH_CURRENT_KUBERNETES|
-                imagePullPolicy: IfNotPresent
-                command: ["/bin/sh", "-lc"]
-                args:
-                  - |
-                    set -e
-                    echo "[init] Checking if seeding is required..."
-                    if [ ! -d /agent/bin ]; then
-                      echo "[init] Seeding /var/ossec to hostPath..."
-                      tar -C /var/ossec -cf - . | tar -C /agent -xpf -
-                    else
-                      echo "[init] Existing data found, skipping seed"
-                    fi
-                volumeMounts:
-                  - name: ossec-data
-                    mountPath: /agent
+            apiVersion: v1
+            kind: Namespace
+            metadata:
+              name: wazuh-daemonset
+            ---
+            apiVersion: apps/v1
+            kind: DaemonSet
+            metadata:
+              name: wazuh-agent
+              namespace: wazuh-daemonset
+            spec:
+              selector:
+                matchLabels:
+                  app: wazuh-agent
+              template:
+                metadata:
+                  labels:
+                    app: wazuh-agent
+                spec:
+                  serviceAccountName: default
+                  terminationGracePeriodSeconds: 20
 
-              # 3) Fix ownership/permissions
-              - name: fix-permissions
-                image: busybox:1.36
-                imagePullPolicy: IfNotPresent
-                command: ["/bin/sh", "-lc"]
-                args:
-                  - |
-                    set -e
-                    echo "[init] Fixing permissions..."
-                    for d in etc logs queue var rids tmp "active-response"; do
-                      [ -d "/agent/$d" ] && chown -R 999:999 "/agent/$d"
-                    done
-                    chown -R 0:0 /agent/bin /agent/lib || true
-                    find /agent/bin -type f -exec chmod 0755 {} \; || true
-                volumeMounts:
-                  - name: ossec-data
-                    mountPath: /agent
+                  #        INIT CONTAINERS
+                  initContainers:
+                    # 1) Clean stale PID / lock files
+                    - name: cleanup-ossec-stale
+                      image: busybox:1.36
+                      imagePullPolicy: IfNotPresent
+                      command: ["/bin/sh", "-lc"]
+                      args:
+                        - |
+                          set -e
+                          echo "[init] Cleaning old locks..."
+                          mkdir -p /agent/var/run /agent/queue/ossec
+                          rm -f /agent/var/run/*.pid || true
+                          rm -f /agent/queue/ossec/*.lock || true
+                      volumeMounts:
+                        - name: ossec-data
+                          mountPath: /agent
+                    # 2) Seed /var/ossec into hostPath (first run only)
+                    - name: seed-ossec-tree
+                      image: wazuh/wazuh-agent:|WAZUH_CURRENT_KUBERNETES|
+                      imagePullPolicy: IfNotPresent
+                      command: ["/bin/sh", "-lc"]
+                      args:
+                        - |
+                          set -e
+                          echo "[init] Checking if seeding is required..."
+                          if [ ! -d /agent/bin ]; then
+                            echo "[init] Seeding /var/ossec to hostPath..."
+                            tar -C /var/ossec -cf - . | tar -C /agent -xpf -
+                          else
+                            echo "[init] Existing data found, skipping seed"
+                          fi
+                      volumeMounts:
+                        - name: ossec-data
+                          mountPath: /agent
+                    # 3) Fix ownership/permissions
+                    - name: fix-permissions
+                      image: busybox:1.36
+                      imagePullPolicy: IfNotPresent
+                      command: ["/bin/sh", "-lc"]
+                      args:
+                        - |
+                          set -e
+                          echo "[init] Fixing permissions..."
+                          for d in etc logs queue var rids tmp "active-response"; do
+                            [ -d "/agent/$d" ] && chown -R 999:999 "/agent/$d"
+                          done
+                          chown -R 0:0 /agent/bin /agent/lib || true
+                          find /agent/bin -type f -exec chmod 0755 {} \; || true
+                      volumeMounts:
+                        - name: ossec-data
+                          mountPath: /agent
+                    # 4) Write ossec.conf with PASSWORD ENROLLMENT
+                    - name: write-ossec-config
+                      image: busybox:1.36
+                      imagePullPolicy: IfNotPresent
+                      env:
+                        - name: WAZUH_MANAGER
+                          value: "<EXTERNAL_IP_WAZUH_WORKER>"
+                        - name: WAZUH_PORT
+                          value: "1514"
+                        - name: WAZUH_PROTOCOL
+                          value: "tcp"
+                        - name: WAZUH_REGISTRATION_SERVER
+                          value: "<EXTERNAL_IP_WAZUH>"
+                        - name: WAZUH_REGISTRATION_PORT
+                          value: "1515"
+                        - name: NODE_NAME
+                          valueFrom:
+                            fieldRef:
+                              fieldPath: spec.nodeName
+                      command: ["/bin/sh", "-lc"]
+                      args:
+                        - |
+                          set -e
+                          echo "[init] Writing ossec.conf..."
+                          mkdir -p /agent/etc
+                          cat > /agent/etc/ossec.conf <<EOF
+                          <ossec_config>
+                            <client>
+                              <server>
+                                <address>${WAZUH_MANAGER}</address>
+                                <port>${WAZUH_PORT}</port>
+                                <protocol>${WAZUH_PROTOCOL}</protocol>
+                              </server>
+                              <enrollment>
+                                <enabled>yes</enabled>
+                                <agent_name>${NODE_NAME}</agent_name>
+                                <manager_address>${WAZUH_REGISTRATION_SERVER}</manager_address>
+                                <port>${WAZUH_REGISTRATION_PORT}</port>
+                                <authorization_pass_path>/var/ossec/etc/authd.pass</authorization_pass_path>
+                              </enrollment>
+                            </client>
+                          </ossec_config>
+                          EOF
+                          chown 999:999 /agent/etc/ossec.conf
+                          chmod 0640 /agent/etc/ossec.conf
+                      volumeMounts:
+                        - name: ossec-data
+                          mountPath: /agent
 
-              # 4) Write ossec.conf with PASSWORD ENROLLMENT
-              - name: write-ossec-config
-                image: busybox:1.36
-                imagePullPolicy: IfNotPresent
-                env:
-                  - name: WAZUH_MANAGER
-                    value: "<EXTERNAL_IP_WAZUH_WORKER>"
-                  - name: WAZUH_PORT
-                    value: "1514"
-                  - name: WAZUH_PROTOCOL
-                    value: "tcp"
-                  - name: WAZUH_REGISTRATION_SERVER
-                    value: "<EXTERNAL_IP_WAZUH>"
-                  - name: WAZUH_REGISTRATION_PORT
-                    value: "1515"
-                  - name: NODE_NAME
-                    valueFrom:
-                      fieldRef:
-                        fieldPath: spec.nodeName
-                command: ["/bin/sh", "-lc"]
-                args:
-                  - |
-                    set -e
-                    echo "[init] Writing ossec.conf..."
-                    mkdir -p /agent/etc
+                    # 5) Copy authd.pass from Secret and fix ownership
+                    - name: fix-authd-pass-perms
+                      image: busybox:1.36
+                      imagePullPolicy: IfNotPresent
+                      command: ["/bin/sh", "-lc"]
+                      args:
+                        - |
+                          set -e
+                          echo "[init] Copying authd.pass from Secret..."
+                          mkdir -p /agent/etc
+                          cp /secret/authd.pass /agent/etc/authd.pass
+                          chown 0:999 /agent/etc/authd.pass
+                          chmod 0640 /agent/etc/authd.pass
+                          ls -l /agent/etc/authd.pass
+                      volumeMounts:
+                        - name: ossec-data
+                          mountPath: /agent
+                        - name: wazuh-authd-pass
+                          mountPath: /secret/authd.pass
+                          subPath: authd.pass
+                          readOnly: true
+
+                  #        MAIN CONTAINER
+                  containers:
+                    - name: wazuh-agent
+                      image: wazuh/wazuh-agent:|WAZUH_CURRENT_KUBERNETES|
+                      imagePullPolicy: IfNotPresent
+                      command: ["/bin/sh", "-lc"]
+                      args:
+                        - |
+                          set -e
+                          ln -sf /var/ossec/etc/ossec.conf /etc/ossec.conf || true
+                          exec /init
+                      env:
+                        - name: WAZUH_MANAGER
+                          value: "<EXTERNAL_IP_WAZUH_WORKER>"
+                        - name: NODE_NAME
+                          valueFrom:
+                            fieldRef:
+                              fieldPath: spec.nodeName
+                      securityContext:
+                        runAsUser: 0
+                        allowPrivilegeEscalation: true
+                        capabilities:
+                          add: ["SETGID","SETUID"]
+                      volumeMounts:
+                        - name: varlog
+                          mountPath: /var/log
+                          readOnly: true
+                        - name: ossec-data
+                          mountPath: /var/ossec
+
+                  #            VOLUMES
+                  volumes:
+                    - name: varlog
+                      hostPath:
+                        path: /var/log
+                        type: Directory
+                    - name: ossec-data
+                      hostPath:
+                        path: /var/lib/wazuh
+                        type: DirectoryOrCreate
+                    - name: wazuh-authd-pass
+                      secret:
+                        secretName: wazuh-authd-pass
+
+      .. group-tab:: Other cluster types
+
+         .. code-block:: yaml
+            :emphasize-lines: 84,90,167
+
+            apiVersion: v1
+            kind: Namespace
+            metadata:
+              name: wazuh-daemonset
+            ---
+            apiVersion: apps/v1
+            kind: DaemonSet
+            metadata:
+              name: wazuh-agent
+              namespace: wazuh-daemonset
+            spec:
+              selector:
+                matchLabels:
+                  app: wazuh-agent
+              template:
+                metadata:
+                  labels:
+                    app: wazuh-agent
+                spec:
+                  serviceAccountName: default
+                  terminationGracePeriodSeconds: 20
+
+                  #        INIT CONTAINERS
+                  initContainers:
+                    # 1) Clean stale PID / lock files
+                    - name: cleanup-ossec-stale
+                      image: busybox:1.36
+                      imagePullPolicy: IfNotPresent
+                      command: ["/bin/sh", "-lc"]
+                      args:
+                        - |
+                          set -e
+                          echo "[init] Cleaning old locks..."
+                          mkdir -p /agent/var/run /agent/queue/ossec
+                          rm -f /agent/var/run/*.pid || true
+                          rm -f /agent/queue/ossec/*.lock || true
+                      volumeMounts:
+                        - name: ossec-data
+                          mountPath: /agent
+
+                    # 2) Seed /var/ossec into hostPath (first run only)
+                    - name: seed-ossec-tree
+                      image: wazuh/wazuh-agent:|WAZUH_CURRENT_KUBERNETES|
+                      imagePullPolicy: IfNotPresent
+                      command: ["/bin/sh", "-lc"]
+                      args:
+                        - |
+                          set -e
+                          echo "[init] Checking if seeding is required..."
+                          if [ ! -d /agent/bin ]; then
+                            echo "[init] Seeding /var/ossec to hostPath..."
+                            tar -C /var/ossec -cf - . | tar -C /agent -xpf -
+                          else
+                            echo "[init] Existing data found, skipping seed"
+                          fi
+                      volumeMounts:
+                        - name: ossec-data
+                          mountPath: /agent
+
+                    # 3) Fix ownership/permissions
+                    - name: fix-permissions
+                      image: busybox:1.36
+                      imagePullPolicy: IfNotPresent
+                      command: ["/bin/sh", "-lc"]
+                      args:
+                        - |
+                          set -e
+                          echo "[init] Fixing permissions..."
+                          for d in etc logs queue var rids tmp "active-response"; do
+                            [ -d "/agent/$d" ] && chown -R 999:999 "/agent/$d"
+                          done
+                          chown -R 0:0 /agent/bin /agent/lib || true
+                          find /agent/bin -type f -exec chmod 0755 {} \; || true
+                      volumeMounts:
+                        - name: ossec-data
+                          mountPath: /agent
+
+                    # 4) Write ossec.conf with PASSWORD ENROLLMENT
+                    - name: write-ossec-config
+                      image: busybox:1.36
+                      imagePullPolicy: IfNotPresent
+                      env:
+                        - name: WAZUH_MANAGER
+                          value: "<EXTERNAL_IP_WAZUH_WORKER>"
+                        - name: WAZUH_PORT
+                          value: "1514"
+                        - name: WAZUH_PROTOCOL
+                          value: "tcp"
+                        - name: WAZUH_REGISTRATION_SERVER
+                          value: "<EXTERNAL_IP_WAZUH>"
+                        - name: WAZUH_REGISTRATION_PORT
+                          value: "1515"
+                        - name: NODE_NAME
+                          valueFrom:
+                            fieldRef:
+                              fieldPath: spec.nodeName
+                      command: ["/bin/sh", "-lc"]
+                      args:
+                        - |
+                          set -e
+                          echo "[init] Writing ossec.conf..."
+                          mkdir -p /agent/etc
 
 
-                    cat > /agent/etc/ossec.conf <<EOF
-                    <ossec_config>
-                       <client>
-                          <server>
-                            <address>${WAZUH_MANAGER}</address>
-                            <port>${WAZUH_PORT}</port>
-                            <protocol>${WAZUH_PROTOCOL}</protocol>
-                          </server>
+                          cat > /agent/etc/ossec.conf <<EOF
+                          <ossec_config>
+                            <client>
+                              <server>
+                                <address>${WAZUH_MANAGER}</address>
+                                <port>${WAZUH_PORT}</port>
+                                <protocol>${WAZUH_PROTOCOL}</protocol>
+                              </server>
 
-                          <enrollment>
-                            <enabled>yes</enabled>
-                            <agent_name>${NODE_NAME}</agent_name>
-                            <manager_address>${WAZUH_REGISTRATION_SERVER}</manager_address>
-                            <port>${WAZUH_REGISTRATION_PORT}</port>
-                            <authorization_pass_path>/var/ossec/etc/authd.pass</authorization_pass_path>
-                          </enrollment>
-                       </client>
-                    </ossec_config>
-                    EOF
+                              <enrollment>
+                                <enabled>yes</enabled>
+                                <agent_name>${NODE_NAME}</agent_name>
+                                <manager_address>${WAZUH_REGISTRATION_SERVER}</manager_address>
+                                <port>${WAZUH_REGISTRATION_PORT}</port>
+                                <authorization_pass_path>/var/ossec/etc/authd.pass</authorization_pass_path>
+                              </enrollment>
+                            </client>
+                          </ossec_config>
+                          EOF
 
-                    chown 999:999 /agent/etc/ossec.conf
-                    chmod 0640 /agent/etc/ossec.conf
-                volumeMounts:
-                  - name: ossec-data
-                    mountPath: /agent
+                          chown 999:999 /agent/etc/ossec.conf
+                          chmod 0640 /agent/etc/ossec.conf
+                      volumeMounts:
+                        - name: ossec-data
+                          mountPath: /agent
 
-              # 5) Copy authd.pass from Secret and fix ownership
-              - name: fix-authd-pass-perms
-                image: busybox:1.36
-                imagePullPolicy: IfNotPresent
-                command: ["/bin/sh", "-lc"]
-                args:
-                  - |
-                    set -e
-                    echo "[init] Copying authd.pass from Secret..."
-                    mkdir -p /agent/etc
-                    cp /secret/authd.pass /agent/etc/authd.pass
-                    chown 0:999 /agent/etc/authd.pass
-                    chmod 0640 /agent/etc/authd.pass
-                    ls -l /agent/etc/authd.pass
-                volumeMounts:
-                  - name: ossec-data
-                    mountPath: /agent
-                  - name: wazuh-authd-pass
-                    mountPath: /secret/authd.pass
-                    subPath: authd.pass
-                    readOnly: true
-
-
-            #        MAIN CONTAINER
-            containers:
-              - name: wazuh-agent
-                image: wazuh/wazuh-agent:|WAZUH_CURRENT_KUBERNETES|
-                imagePullPolicy: IfNotPresent
-                command: ["/bin/sh", "-lc"]
-                args:
-                  - |
-                    set -e
-                    ln -sf /var/ossec/etc/ossec.conf /etc/ossec.conf || true
-                    exec /init
-                env:
-                  - name: WAZUH_MANAGER
-                    value: "<EXTERNAL_IP_WAZUH_WORKER>"
-                  - name: NODE_NAME
-                    valueFrom:
-                      fieldRef:
-                        fieldPath: spec.nodeName
-                securityContext:
-                  runAsUser: 0
-                  allowPrivilegeEscalation: true
-                  capabilities:
-                    add: ["SETGID","SETUID"]
-                volumeMounts:
-                  - name: varlog
-                    mountPath: /var/log
-                    readOnly: true
-                  - name: dockersock
-                    mountPath: /var/run/docker.sock
-                    readOnly: true
-                  - name: ossec-data
-                    mountPath: /var/ossec
+                    # 5) Copy authd.pass from Secret and fix ownership
+                    - name: fix-authd-pass-perms
+                      image: busybox:1.36
+                      imagePullPolicy: IfNotPresent
+                      command: ["/bin/sh", "-lc"]
+                      args:
+                        - |
+                          set -e
+                          echo "[init] Copying authd.pass from Secret..."
+                          mkdir -p /agent/etc
+                          cp /secret/authd.pass /agent/etc/authd.pass
+                          chown 0:999 /agent/etc/authd.pass
+                          chmod 0640 /agent/etc/authd.pass
+                          ls -l /agent/etc/authd.pass
+                      volumeMounts:
+                        - name: ossec-data
+                          mountPath: /agent
+                        - name: wazuh-authd-pass
+                          mountPath: /secret/authd.pass
+                          subPath: authd.pass
+                          readOnly: true
 
 
-            #            VOLUMES
-            volumes:
-              - name: varlog
-                hostPath:
-                  path: /var/log
-                  type: Directory
-              - name: dockersock
-                hostPath:
-                  path: /var/run/docker.sock
-                  type: Socket
-              - name: ossec-data
-                hostPath:
-                  path: /var/lib/wazuh
-                  type: DirectoryOrCreate
-              - name: wazuh-authd-pass
-                secret:
-                  secretName: wazuh-authd-pass
+                  #        MAIN CONTAINER
+                  containers:
+                    - name: wazuh-agent
+                      image: wazuh/wazuh-agent:|WAZUH_CURRENT_KUBERNETES|
+                      imagePullPolicy: IfNotPresent
+                      command: ["/bin/sh", "-lc"]
+                      args:
+                        - |
+                          set -e
+                          ln -sf /var/ossec/etc/ossec.conf /etc/ossec.conf || true
+                          exec /init
+                      env:
+                        - name: WAZUH_MANAGER
+                          value: "<EXTERNAL_IP_WAZUH_WORKER>"
+                        - name: NODE_NAME
+                          valueFrom:
+                            fieldRef:
+                              fieldPath: spec.nodeName
+                      securityContext:
+                        runAsUser: 0
+                        allowPrivilegeEscalation: true
+                        capabilities:
+                          add: ["SETGID","SETUID"]
+                      volumeMounts:
+                        - name: varlog
+                          mountPath: /var/log
+                          readOnly: true
+                        - name: dockersock
+                          mountPath: /var/run/docker.sock
+                          readOnly: true
+                        - name: ossec-data
+                          mountPath: /var/ossec
+
+
+                  #            VOLUMES
+                  volumes:
+                    - name: varlog
+                      hostPath:
+                        path: /var/log
+                        type: Directory
+                    - name: dockersock
+                      hostPath:
+                        path: /var/run/docker.sock
+                        type: Socket
+                    - name: ossec-data
+                      hostPath:
+                        path: /var/lib/wazuh
+                        type: DirectoryOrCreate
+                    - name: wazuh-authd-pass
+                      secret:
+                        secretName: wazuh-authd-pass
+
+         .. note::
+
+            The manifest in this example is for the Docker container runtime.
 
    Replace:
 
@@ -795,246 +997,502 @@ Deploying the Wazuh Agent as a Sidecar
 
 The sidecar approach is ideal for targeted monitoring of sensitive applications or workloads that require isolated log collection. Perform the steps below to deploy Wazuh as a Sidecar:
 
-#. Modify your application’s deployment to include the Wazuh agent container. In the example below, we deploy Wazuh alongside the Apache Tomcat application from the ``wazuh-agent-sidecar.yaml`` deployment file:
+#. Modify your application's deployment to include the Wazuh agent container. In the example below, we deploy Wazuh alongside the Apache Tomcat application from the ``wazuh-agent-sidecar.yaml`` deployment file:
 
-   .. code-block:: yaml
-      :emphasize-lines: 72,78,178,184
+   .. tabs::
 
-      apiVersion: v1
-      kind: Namespace
-      metadata:
-        name: wazuh-sidecar
-      ---
-      apiVersion: apps/v1
-      kind: StatefulSet
-      metadata:
-        name: tomcat-wazuh-agent
-        namespace: wazuh-sidecar
-      spec:
-        serviceName: tomcat-app
-        replicas: 1
-        selector:
-          matchLabels:
-            app: tomcat-wazuh-agent
-        template:
-          metadata:
-            labels:
-              app: tomcat-wazuh-agent
-          spec:
-            terminationGracePeriodSeconds: 20
-            securityContext:
-              fsGroup: 999
-              fsGroupChangePolicy: OnRootMismatch
+      .. group-tab:: EKS user
 
-            #        INIT CONTAINERS
-            initContainers:
-              - name: cleanup-ossec-stale
-                image: busybox:1.36
-                imagePullPolicy: IfNotPresent
-                securityContext:
-                  runAsUser: 0
-                command: ["/bin/sh", "-lc"]
-                args:
-                  - |
-                    set -e
-                    mkdir -p /agent/var/run /agent/queue/ossec
-                    rm -f /agent/var/run/*.pid || true
-                    rm -f /agent/queue/ossec/*.lock || true
-                    echo "Cleanup complete. Ready for next init step."
-                volumeMounts:
-                  - name: wazuh-agent-data
-                    mountPath: /agent
+         .. code-block:: yaml
+            :emphasize-lines: 72,78,177,183
 
-              - name: seed-ossec-tree
-                image: wazuh/wazuh-agent:|WAZUH_CURRENT_KUBERNETES|
-                imagePullPolicy: IfNotPresent
-                securityContext:
-                  runAsUser: 0
-                command: ["/bin/sh", "-lc"]
-                args:
-                  - |
-                    set -e
-                    if [ ! -d /agent/bin ]; then
-                      echo "Seeding /var/ossec into PVC..."
-                      tar -C /var/ossec -cf - . | tar -C /agent -xpf -
-                    else
-                      echo "Existing Wazuh data found, skipping seed."
-                    fi
-                volumeMounts:
-                  - name: wazuh-agent-data
-                    mountPath: /agent
-
-              - name: write-ossec-config
-                image: busybox:1.36
-                imagePullPolicy: IfNotPresent
-                securityContext:
-                  runAsUser: 0
-                env:
-                  - name: WAZUH_MANAGER
-                    value: "<EXTERNAL_IP_WAZUH_WORKER>"
-                  - name: WAZUH_PORT
-                    value: "1514"
-                  - name: WAZUH_PROTOCOL
-                    value: "tcp"
-                  - name: WAZUH_REGISTRATION_SERVER
-                    value: "<EXTERNAL_IP_WAZUH>"
-                  - name: WAZUH_REGISTRATION_PORT
-                    value: "1515"
-                  - name: WAZUH_AGENT_NAME
-                    valueFrom:
-                      fieldRef:
-                        fieldPath: metadata.name
-                command: ["/bin/sh", "-lc"]
-                args:
-                  - |
-                    set -e
-                    mkdir -p /agent/etc
-                    cat > /agent/etc/ossec.conf <<'EOF'
-                    <ossec_config>
-                      <client>
-                        <server>
-                          <address>${WAZUH_MANAGER}</address>
-                          <port>${WAZUH_PORT}</port>
-                          <protocol>${WAZUH_PROTOCOL}</protocol>
-                        </server>
-                        <enrollment>
-                          <enabled>yes</enabled>
-                          <agent_name>${WAZUH_AGENT_NAME}</agent_name>
-                          <manager_address>${WAZUH_REGISTRATION_SERVER}</manager_address>
-                          <port>${WAZUH_REGISTRATION_PORT}</port>
-                          <authorization_pass_path>/var/ossec/etc/authd.pass</authorization_pass_path>
-                        </enrollment>
-                      </client>
-                      <localfile>
-                        <log_format>syslog</log_format>
-                        <location>/usr/local/tomcat/logs/catalina.out</location>
-                      </localfile>
-                    </ossec_config>
-                    EOF
-
-                    sed -i \
-                      -e "s|\${WAZUH_MANAGER}|${WAZUH_MANAGER}|g" \
-                      -e "s|\${WAZUH_PORT}|${WAZUH_PORT}|g" \
-                      -e "s|\${WAZUH_PROTOCOL}|${WAZUH_PROTOCOL}|g" \
-                      -e "s|\${WAZUH_REGISTRATION_SERVER}|${WAZUH_REGISTRATION_SERVER}|g" \
-                      -e "s|\${WAZUH_REGISTRATION_PORT}|${WAZUH_REGISTRATION_PORT}|g" \
-                      -e "s|\${WAZUH_AGENT_NAME}|${WAZUH_AGENT_NAME}|g" \
-                      /agent/etc/ossec.conf
-
-                    chown 999:999 /agent/etc/ossec.conf
-                    chmod 0640 /agent/etc/ossec.conf
-                volumeMounts:
-                  - name: wazuh-agent-data
-                    mountPath: /agent
-
-              - name: fix-authd-pass-perms
-                image: busybox:1.36
-                imagePullPolicy: IfNotPresent
-                securityContext:
-                  runAsUser: 0
-                command: ["/bin/sh", "-lc"]
-                args:
-                  - |
-                    set -e
-                    echo "Copying authd.pass from Secret..."
-                    mkdir -p /agent/etc
-                    cp /secret/authd.pass /agent/etc/authd.pass
-                    chown 0:999 /agent/etc/authd.pass
-                    chmod 0640 /agent/etc/authd.pass
-                    ls -l /agent/etc/authd.pass
-                volumeMounts:
-                  - name: wazuh-agent-data
-                    mountPath: /agent
-                  - name: wazuh-authd-pass
-                    mountPath: /secret/authd.pass
-                    subPath: authd.pass
-                    readOnly: true
-
-
-            #        MAIN CONTAINERS
-            containers:
-              - name: tomcat
-                image: tomcat:10.1-jdk17
-                imagePullPolicy: IfNotPresent
-                ports:
-                  - containerPort: 8080
-                volumeMounts:
-                  - name: application-data
-                    mountPath: /usr/local/tomcat/logs
-
-              - name: wazuh-agent
-                image: wazuh/wazuh-agent:|WAZUH_CURRENT_KUBERNETES|
-                imagePullPolicy: IfNotPresent
-                lifecycle:
-                  preStop:
-                    exec:
-                      command: ["/bin/sh", "-lc", "/var/ossec/bin/ossec-control stop || true; sleep 2"]
-                command: ["/bin/sh", "-lc"]
-                args:
-                  - |
-                    set -e
-                    ln -sf /var/ossec/etc/ossec.conf /etc/ossec.conf
-                    exec /init
-                env:
-                  - name: WAZUH_MANAGER
-                    value: "<EXTERNAL_IP_WAZUH_WORKER>"
-                  - name: WAZUH_PORT
-                    value: "1514"
-                  - name: WAZUH_PROTOCOL
-                    value: "tcp"
-                  - name: WAZUH_REGISTRATION_SERVER
-                    value: "<EXTERNAL_IP_WAZUH>"
-                  - name: WAZUH_REGISTRATION_PORT
-                    value: "1515"
-                  - name: WAZUH_AGENT_NAME
-                    valueFrom:
-                      fieldRef:
-                        fieldPath: metadata.name
-                securityContext:
-                  runAsUser: 0
-                  runAsGroup: 0
-                volumeMounts:
-                  - name: wazuh-agent-data
-                    mountPath: /var/ossec
-                  - name: application-data
-                    mountPath: /usr/local/tomcat/logs
-
-            #            VOLUMES
-            volumes:
-              - name: wazuh-authd-pass
-                secret:
-                  secretName: wazuh-authd-pass
-
-        volumeClaimTemplates:
-          - metadata:
-              name: wazuh-agent-data
+            apiVersion: v1
+            kind: Namespace
+            metadata:
+              name: wazuh-sidecar
+            ---
+            apiVersion: apps/v1
+            kind: StatefulSet
+            metadata:
+              name: tomcat-wazuh-agent
+              namespace: wazuh-sidecar
             spec:
-              accessModes: ["ReadWriteOnce"]
-              resources:
-                requests:
-                  storage: 3Gi
-          - metadata:
-              name: application-data
+              serviceName: tomcat-app
+              replicas: 1
+              selector:
+                matchLabels:
+                  app: tomcat-wazuh-agent
+              template:
+                metadata:
+                  labels:
+                    app: tomcat-wazuh-agent
+                spec:
+                  terminationGracePeriodSeconds: 20
+                  securityContext:
+                    fsGroup: 999
+                    fsGroupChangePolicy: OnRootMismatch
+
+                  #        INIT CONTAINERS
+                  initContainers:
+                    - name: cleanup-ossec-stale
+                      image: busybox:1.36
+                      imagePullPolicy: IfNotPresent
+                      securityContext:
+                        runAsUser: 0
+                      command: ["/bin/sh", "-lc"]
+                      args:
+                        - |
+                          set -e
+                          mkdir -p /agent/var/run /agent/queue/ossec
+                          rm -f /agent/var/run/*.pid || true
+                          rm -f /agent/queue/ossec/*.lock || true
+                          echo "Cleanup complete. Ready for next init step."
+                      volumeMounts:
+                        - name: wazuh-agent-data
+                          mountPath: /agent
+
+                    - name: seed-ossec-tree
+                      image: wazuh/wazuh-agent:|WAZUH_CURRENT_KUBERNETES|
+                      imagePullPolicy: IfNotPresent
+                      securityContext:
+                        runAsUser: 0
+                      command: ["/bin/sh", "-lc"]
+                      args:
+                        - |
+                          set -e
+                          if [ ! -d /agent/bin ]; then
+                            echo "Seeding /var/ossec into PVC..."
+                            tar -C /var/ossec -cf - . | tar -C /agent -xpf -
+                          else
+                            echo "Existing Wazuh data found, skipping seed."
+                          fi
+                      volumeMounts:
+                        - name: wazuh-agent-data
+                          mountPath: /agent
+
+                    - name: write-ossec-config
+                      image: busybox:1.36
+                      imagePullPolicy: IfNotPresent
+                      securityContext:
+                        runAsUser: 0
+                      env:
+                        - name: WAZUH_MANAGER
+                          value: "<EXTERNAL_IP_WAZUH_WORKER>"
+                        - name: WAZUH_PORT
+                          value: "1514"
+                        - name: WAZUH_PROTOCOL
+                          value: "tcp"
+                        - name: WAZUH_REGISTRATION_SERVER
+                          value: "<EXTERNAL_IP_WAZUH>"
+                        - name: WAZUH_REGISTRATION_PORT
+                          value: "1515"
+                        - name: WAZUH_AGENT_NAME
+                          valueFrom:
+                            fieldRef:
+                              fieldPath: metadata.name
+                      command: ["/bin/sh", "-lc"]
+                      args:
+                        - |
+                          set -e
+                          mkdir -p /agent/etc
+                          cat > /agent/etc/ossec.conf <<'EOF'
+                          <ossec_config>
+                            <client>
+                              <server>
+                                <address>${WAZUH_MANAGER}</address>
+                                <port>${WAZUH_PORT}</port>
+                                <protocol>${WAZUH_PROTOCOL}</protocol>
+                              </server>
+                              <enrollment>
+                                <enabled>yes</enabled>
+                                <agent_name>${WAZUH_AGENT_NAME}</agent_name>
+                                <manager_address>${WAZUH_REGISTRATION_SERVER}</manager_address>
+                                <port>${WAZUH_REGISTRATION_PORT}</port>
+                                <authorization_pass_path>/var/ossec/etc/authd.pass</authorization_pass_path>
+                              </enrollment>
+                            </client>
+                            <localfile>
+                              <log_format>syslog</log_format>
+                              <location>/usr/local/tomcat/logs/catalina.out</location>
+                            </localfile>
+                          </ossec_config>
+                          EOF
+
+                          sed -i \
+                            -e "s|\${WAZUH_MANAGER}|${WAZUH_MANAGER}|g" \
+                            -e "s|\${WAZUH_PORT}|${WAZUH_PORT}|g" \
+                            -e "s|\${WAZUH_PROTOCOL}|${WAZUH_PROTOCOL}|g" \
+                            -e "s|\${WAZUH_REGISTRATION_SERVER}|${WAZUH_REGISTRATION_SERVER}|g" \
+                            -e "s|\${WAZUH_REGISTRATION_PORT}|${WAZUH_REGISTRATION_PORT}|g" \
+                            -e "s|\${WAZUH_AGENT_NAME}|${WAZUH_AGENT_NAME}|g" \
+                            /agent/etc/ossec.conf
+
+                          chown 999:999 /agent/etc/ossec.conf
+                          chmod 0640 /agent/etc/ossec.conf
+                      volumeMounts:
+                        - name: wazuh-agent-data
+                          mountPath: /agent
+
+                    - name: fix-authd-pass-perms
+                      image: busybox:1.36
+                      imagePullPolicy: IfNotPresent
+                      securityContext:
+                        runAsUser: 0
+                      command: ["/bin/sh", "-lc"]
+                      args:
+                        - |
+                          set -e
+                          echo "Copying authd.pass from Secret..."
+                          mkdir -p /agent/etc
+                          cp /secret/authd.pass /agent/etc/authd.pass
+                          chown 0:999 /agent/etc/authd.pass
+                          chmod 0640 /agent/etc/authd.pass
+                          ls -l /agent/etc/authd.pass
+                      volumeMounts:
+                        - name: wazuh-agent-data
+                          mountPath: /agent
+                        - name: wazuh-authd-pass
+                          mountPath: /secret/authd.pass
+                          subPath: authd.pass
+                          readOnly: true
+
+
+                  #        MAIN CONTAINERS
+                  containers:
+                    - name: tomcat
+                      image: tomcat:10.1-jdk17
+                      imagePullPolicy: IfNotPresent
+                      ports:
+                        - containerPort: 8080
+                      volumeMounts:
+                        - name: application-data
+                          mountPath: /usr/local/tomcat/logs
+                    - name: wazuh-agent
+                      image: wazuh/wazuh-agent:|WAZUH_CURRENT_KUBERNETES|
+                      imagePullPolicy: IfNotPresent
+                      lifecycle:
+                        preStop:
+                          exec:
+                            command: ["/bin/sh", "-lc", "/var/ossec/bin/ossec-control stop || true; sleep 2"]
+                      command: ["/bin/sh", "-lc"]
+                      args:
+                        - |
+                          set -e
+                          ln -sf /var/ossec/etc/ossec.conf /etc/ossec.conf
+                          exec /init
+                      env:
+                        - name: WAZUH_MANAGER
+                          value: "<EXTERNAL_IP_WAZUH_WORKER>"
+                        - name: WAZUH_PORT
+                          value: "1514"
+                        - name: WAZUH_PROTOCOL
+                          value: "tcp"
+                        - name: WAZUH_REGISTRATION_SERVER
+                          value: "<EXTERNAL_IP_WAZUH>"
+                        - name: WAZUH_REGISTRATION_PORT
+                          value: "1515"
+                        - name: WAZUH_AGENT_NAME
+                          valueFrom:
+                            fieldRef:
+                              fieldPath: metadata.name
+                      securityContext:
+                        runAsUser: 0
+                        runAsGroup: 0
+                      volumeMounts:
+                        - name: wazuh-agent-data
+                          mountPath: /var/ossec
+                        - name: application-data
+                          mountPath: /usr/local/tomcat/logs
+
+                  #            VOLUMES
+                  volumes:
+                    - name: wazuh-authd-pass
+                      secret:
+                        secretName: wazuh-authd-pass
+              volumeClaimTemplates:
+                - metadata:
+                    name: wazuh-agent-data
+                  spec:
+                    accessModes: ["ReadWriteOnce"]
+                    storageClassName: gp2  # Adjust according to your cluster's StorageClass
+                    resources:
+                      requests:
+                        storage: 3Gi
+                - metadata:
+                    name: application-data
+                  spec:
+                    accessModes: ["ReadWriteOnce"]
+                    storageClassName: gp2  # Adjust according to your cluster's StorageClass
+                    resources:
+                      requests:
+                        storage: 5Gi
+            ---
+            apiVersion: v1
+            kind: Service
+            metadata:
+              name: tomcat-app
+              namespace: wazuh-sidecar
             spec:
-              accessModes: ["ReadWriteOnce"]
-              resources:
-                requests:
-                  storage: 5Gi
-      ---
-      apiVersion: v1
-      kind: Service
-      metadata:
-        name: tomcat-app
-        namespace: wazuh-sidecar
-      spec:
-        selector:
-          app: tomcat-wazuh-agent
-        type: NodePort
-        ports:
-          - protocol: TCP
-            port: 80
-            targetPort: 8080
-            nodePort: 30013
+              selector:
+                app: tomcat-wazuh-agent
+              type: NodePort
+              ports:
+                - protocol: TCP
+                  port: 80
+                  targetPort: 8080
+                  nodePort: 30013
+              type: NodePort
+              ports:
+                - protocol: TCP
+                  port: 80
+                  targetPort: 8080
+                  nodePort: 30013
+
+         .. note::
+
+            Before applying the manifest, confirm the StorageClass names in your cluster by running the command ``kubectl get sc``. In this example, the cluster uses the ``gp2`` StorageClass.
+
+      .. group-tab:: Other cluster types
+
+         .. code-block:: yaml
+            :emphasize-lines: 71,77,176,182
+
+            apiVersion: v1
+            kind: Namespace
+            metadata:
+              name: wazuh-sidecar
+            ---
+            apiVersion: apps/v1
+            kind: StatefulSet
+            metadata:
+              name: tomcat-wazuh-agent
+              namespace: wazuh-sidecar
+            spec:
+              serviceName: tomcat-app
+              replicas: 1
+              selector:
+                matchLabels:
+                  app: tomcat-wazuh-agent
+              template:
+                metadata:
+                  labels:
+                    app: tomcat-wazuh-agent
+                spec:
+                  terminationGracePeriodSeconds: 20
+                  securityContext:
+                    fsGroup: 999
+                    fsGroupChangePolicy: OnRootMismatch
+
+                  #        INIT CONTAINERS
+                  initContainers:
+                    - name: cleanup-ossec-stale
+                      image: busybox:1.36
+                      imagePullPolicy: IfNotPresent
+                      securityContext:
+                        runAsUser: 0
+                      command: ["/bin/sh", "-lc"]
+                      args:
+                        - |
+                          set -e
+                          mkdir -p /agent/var/run /agent/queue/ossec
+                          rm -f /agent/var/run/*.pid || true
+                          rm -f /agent/queue/ossec/*.lock || true
+                          echo "Cleanup complete. Ready for next init step."
+                      volumeMounts:
+                        - name: wazuh-agent-data
+                          mountPath: /agent
+                    - name: seed-ossec-tree
+                      image: wazuh/wazuh-agent:|WAZUH_CURRENT_KUBERNETES|
+                      imagePullPolicy: IfNotPresent
+                      securityContext:
+                        runAsUser: 0
+                      command: ["/bin/sh", "-lc"]
+                      args:
+                        - |
+                          set -e
+                          if [ ! -d /agent/bin ]; then
+                            echo "Seeding /var/ossec into PVC..."
+                            tar -C /var/ossec -cf - . | tar -C /agent -xpf -
+                          else
+                            echo "Existing Wazuh data found, skipping seed."
+                          fi
+                      volumeMounts:
+                        - name: wazuh-agent-data
+                          mountPath: /agent
+
+                    - name: write-ossec-config
+                      image: busybox:1.36
+                      imagePullPolicy: IfNotPresent
+                      securityContext:
+                        runAsUser: 0
+                      env:
+                        - name: WAZUH_MANAGER
+                          value: "<EXTERNAL_IP_WAZUH_WORKER>"
+                        - name: WAZUH_PORT
+                          value: "1514"
+                        - name: WAZUH_PROTOCOL
+                          value: "tcp"
+                        - name: WAZUH_REGISTRATION_SERVER
+                          value: "<EXTERNAL_IP_WAZUH>"
+                        - name: WAZUH_REGISTRATION_PORT
+                          value: "1515"
+                        - name: WAZUH_AGENT_NAME
+                          valueFrom:
+                            fieldRef:
+                              fieldPath: metadata.name
+                      command: ["/bin/sh", "-lc"]
+                      args:
+                        - |
+                          set -e
+                          mkdir -p /agent/etc
+                          cat > /agent/etc/ossec.conf <<'EOF'
+                          <ossec_config>
+                            <client>
+                              <server>
+                                <address>${WAZUH_MANAGER}</address>
+                                <port>${WAZUH_PORT}</port>
+                                <protocol>${WAZUH_PROTOCOL}</protocol>
+                              </server>
+                              <enrollment>
+                                <enabled>yes</enabled>
+                                <agent_name>${WAZUH_AGENT_NAME}</agent_name>
+                                <manager_address>${WAZUH_REGISTRATION_SERVER}</manager_address>
+                                <port>${WAZUH_REGISTRATION_PORT}</port>
+                                <authorization_pass_path>/var/ossec/etc/authd.pass</authorization_pass_path>
+                              </enrollment>
+                            </client>
+                            <localfile>
+                              <log_format>syslog</log_format>
+                              <location>/usr/local/tomcat/logs/catalina.out</location>
+                            </localfile>
+                          </ossec_config>
+                          EOF
+
+                          sed -i \
+                            -e "s|\${WAZUH_MANAGER}|${WAZUH_MANAGER}|g" \
+                            -e "s|\${WAZUH_PORT}|${WAZUH_PORT}|g" \
+                            -e "s|\${WAZUH_PROTOCOL}|${WAZUH_PROTOCOL}|g" \
+                            -e "s|\${WAZUH_REGISTRATION_SERVER}|${WAZUH_REGISTRATION_SERVER}|g" \
+                            -e "s|\${WAZUH_REGISTRATION_PORT}|${WAZUH_REGISTRATION_PORT}|g" \
+                            -e "s|\${WAZUH_AGENT_NAME}|${WAZUH_AGENT_NAME}|g" \
+                            /agent/etc/ossec.conf
+
+                          chown 999:999 /agent/etc/ossec.conf
+                          chmod 0640 /agent/etc/ossec.conf
+                      volumeMounts:
+                        - name: wazuh-agent-data
+                          mountPath: /agent
+
+                    - name: fix-authd-pass-perms
+                      image: busybox:1.36
+                      imagePullPolicy: IfNotPresent
+                      securityContext:
+                        runAsUser: 0
+                      command: ["/bin/sh", "-lc"]
+                      args:
+                        - |
+                          set -e
+                          echo "Copying authd.pass from Secret..."
+                          mkdir -p /agent/etc
+                          cp /secret/authd.pass /agent/etc/authd.pass
+                          chown 0:999 /agent/etc/authd.pass
+                          chmod 0640 /agent/etc/authd.pass
+                          ls -l /agent/etc/authd.pass
+                      volumeMounts:
+                        - name: wazuh-agent-data
+                          mountPath: /agent
+                        - name: wazuh-authd-pass
+                          mountPath: /secret/authd.pass
+                          subPath: authd.pass
+                          readOnly: true
+
+                  #        MAIN CONTAINERS
+                  containers:
+                    - name: tomcat
+                      image: tomcat:10.1-jdk17
+                      imagePullPolicy: IfNotPresent
+                      ports:
+                        - containerPort: 8080
+                      volumeMounts:
+                        - name: application-data
+                          mountPath: /usr/local/tomcat/logs
+
+                    - name: wazuh-agent
+                      image: wazuh/wazuh-agent:|WAZUH_CURRENT_KUBERNETES|
+                      imagePullPolicy: IfNotPresent
+                      lifecycle:
+                        preStop:
+                          exec:
+                            command: ["/bin/sh", "-lc", "/var/ossec/bin/ossec-control stop || true; sleep 2"]
+                      command: ["/bin/sh", "-lc"]
+                      args:
+                        - |
+                          set -e
+                          ln -sf /var/ossec/etc/ossec.conf /etc/ossec.conf
+                          exec /init
+                      env:
+                        - name: WAZUH_MANAGER
+                          value: "<EXTERNAL_IP_WAZUH_WORKER>"
+                        - name: WAZUH_PORT
+                          value: "1514"
+                        - name: WAZUH_PROTOCOL
+                          value: "tcp"
+                        - name: WAZUH_REGISTRATION_SERVER
+                          value: "<EXTERNAL_IP_WAZUH>"
+                        - name: WAZUH_REGISTRATION_PORT
+                          value: "1515"
+                        - name: WAZUH_AGENT_NAME
+                          valueFrom:
+                            fieldRef:
+                              fieldPath: metadata.name
+                      securityContext:
+                        runAsUser: 0
+                        runAsGroup: 0
+                      volumeMounts:
+                        - name: wazuh-agent-data
+                          mountPath: /var/ossec
+                        - name: application-data
+                          mountPath: /usr/local/tomcat/logs
+
+                  #            VOLUMES
+                  volumes:
+                    - name: wazuh-authd-pass
+                      secret:
+                        secretName: wazuh-authd-pass
+              volumeClaimTemplates:
+                - metadata:
+                    name: wazuh-agent-data
+                  spec:
+                    accessModes: ["ReadWriteOnce"]
+                    resources:
+                      requests:
+                        storage: 3Gi
+                - metadata:
+                    name: application-data
+                  spec:
+                    accessModes: ["ReadWriteOnce"]
+                    resources:
+                      requests:
+                        storage: 5Gi
+            ---
+            apiVersion: v1
+            kind: Service
+            metadata:
+              name: tomcat-app
+              namespace: wazuh-sidecar
+            spec:
+              selector:
+                app: tomcat-wazuh-agent
+              type: NodePort
+              ports:
+                - protocol: TCP
+                  port: 80
+                  targetPort: 8080
+                  nodePort: 30013
+
+         .. note::
+
+            The manifest in this example is for the Docker container runtime.
 
    Replace:
 
