@@ -154,7 +154,7 @@ custom_replacements = {
     "|WAZUH_FILEBEAT|": "0.5",
     #
     # === OpenSearch
-    "|OPENSEARCH_DASHBOARDS_VERSION|": "2.16.0",
+    "|OPENSEARCH_DASHBOARDS_VERSION|": "3.3.0",
     #
     # === Elastic
     # --- Filebeat
