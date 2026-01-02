@@ -34,6 +34,10 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated the Wazuh signed package (WPK) files section. ([#9175](https://github.com/wazuh/wazuh-documentation/pull/9175))
 - **Post-release**: Updated the *Deployment on Kubernetes* section to include separate configurations for EKS and other cluster types. ([#9181](https://github.com/wazuh/wazuh-documentation/pull/9181))
 
+### Fixed
+
+- **Post-release**: Updated  the OpenSearch Dashboards version references. ([#9190](https://github.com/wazuh/wazuh-documentation/pull/9190))
+
 ### Removed
 
 - **Post-release**: Removed the *Environment variables* sub-section in *Configuring AWS credentials*. ([#9110](https://github.com/wazuh/wazuh-documentation/pull/9110))
