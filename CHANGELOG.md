@@ -36,7 +36,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
-- **Post-release**: Updated  the OpenSearch Dashboards version references. ([#9190](https://github.com/wazuh/wazuh-documentation/pull/9190))
+- **Post-release**: Updated the OpenSearch Dashboards version references. ([#9190](https://github.com/wazuh/wazuh-documentation/pull/9190))
 
 ### Removed
 
