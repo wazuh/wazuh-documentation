@@ -76,54 +76,68 @@ JSON Web Token (JWT)
 
 The JSON Web Token (JWT) is another method of authenticating to the Wazuh indexer API. JWT is an open standard (RFC 7519) that defines a compact and self-contained method for securely transmitting information between parties as a JSON object.
 
-A JWT can be self-generated, and the validation key can be stored in the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file or generated and validated through a JSON Web Key Set (JWKS) endpoint to retrieve the key from its location on the issuer’s server.
+A JWT can be self-generated using validation keys stored in the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file or generated and validated through a JSON Web Key Set (JWKS) endpoint to retrieve the key from its location on the issuer's server.
 
-JWT authentication is not enabled by default, and its settings are specified within the ``jwt_auth_domain`` section in the ``/etc/wazuh-indexer/opensearch-security/config.yml`` configuration file. Follow the steps below to enable and log into the Wazuh indexer using JWT authentication:
+JWT authentication is not enabled by default, and its settings are specified within the ``dynamic`` section in the ``/etc/wazuh-indexer/opensearch-security/config.yml`` configuration file. Follow the steps below to enable and log into the Wazuh indexer using JWT authentication:
 
-#. Open the ``/etc/wazuh-indexer/opensearch-security/config.yml`` configuration file and update the highlighted settings:
+#. Run the following command twice to generate 64 bytes of cryptographically secure random data and output it as a Base64-encoded string:
+
+   .. code-block:: console
+
+      # openssl rand -base64 64
+      # openssl rand -base64 64
+
+#. Open the ``/etc/wazuh-indexer/opensearch-security/config.yml`` configuration file and update the highlighted settings. Use the first output as a signing key, replacing the ``<SIGNING_KEY>`` variable. Use the second output as an encryption key, replacing the ``<ENCRYPTION_KEY>`` variable below:
 
    .. code-block:: yaml
-      :emphasize-lines: 3,10,14,15
-   
-      jwt_auth_domain:
-        description: "Authenticate via Json Web Token"
-        http_enabled: true
-        transport_enabled: false
-        order: 0
-        http_authenticator:
-          type: jwt
-          challenge: false
-          config:
-            signing_key: "<ENCODED_SIGNING_KEY>"
-            jwt_header: "Authorization"
-            jwt_url_parameter: null
-            jwt_clock_skew_tolerance_seconds: 30
-            roles_key: <ROLES_KEY>
-            subject_key: <SUBJECT_KEY>
-        authentication_backend:
-          type: noop
-   
-   .. note::
-   
-      Replace ``<ENCODED_SIGNING_KEY>`` with your base64 encoded HMAC key or public RSA/ECDSA pem key. Update the values of ``<ROLES_KEY>`` with the name of a backend user the JWT should attach to, and ``<SUBJECT_KEY>`` to a descriptive subject name that identifies the JWT. For example, setting the values to **admin** and **automationUser** respectively will attach the JWT to the internal admin user and name the JWT as automationUser.
+      :emphasize-lines: 3,4,5,6
+
+      config:
+        dynamic:
+          on_behalf_of:
+            enabled: 'true'
+            signing_key: <SIGNING_KEY>
+            encryption_key: <ENCRYPTION_KEY>
 
 #. Run the ``/usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh`` script to load the configuration changes made in the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file:
 
    .. code-block:: console
-   
+
       # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /etc/wazuh-indexer/opensearch-security/config.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h 127.0.0.1 -nhnv
+
+#. Run the command below to fetch a JSON web token.
+
+   .. code-block:: console
+
+      # curl -k -u <WAZUH_INDEXER_USER>:<WAZUH_INDEXER_PASSWORD> -XPOST "https://localhost:9200/_plugins/_security/api/generateonbehalfoftoken" -H 'Content-Type: application/json' -d
+      '
+      {
+         "description":"Testing",
+         "service":"Testing Service",
+         "durationSeconds":"180"
+      }
+      '
+
+   Below is an example of an output.
+
+   .. code-block:: json
+      :class: output
+
+      {"user":"admin","authenticationToken":"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1ZCI6IlRlc3RpbmcgU2VydmljZSIsIm5iZiI6MTc2Nzc5Njc1NiwiaXNzIjoid2F6dWgtY2x1c3RlciIsImV4cCI6MTc2Nzc5NjkzNiwiaWF0IjoxNzY3Nzk2NzU2LCJlciI6Illid1JkVGxKVDZWRXdvR2lSZS8rblNNalVyNG9zZFM3SnlSZkg5S09LTlE9In0.oUOVhPB6WCidAIp3O9W6GQnngq0dednQQNtBIHExhMhtJcNw9h1aL6MwZ42kGr4JORbA-a-wc9IpKcrUV2omGg","durationSeconds":180}
+
+   Replace the variables ``<WAZUH_INDEXER_USER>:<WAZUH_INDEXER_PASSWORD>`` with your Wazuh indexer username and password.
 
 #. Authenticate to the Wazuh indexer API using your JWT, as seen below. In this example, we use cURL to connect and authenticate:
 
    .. code-block:: console
-   
-      # curl -k -XGET "https://localhost:9200" -H "Authorization: Bearer <WAZUH_INDEXER_JWT>"
 
-   Replace ``<WAZUH_INDEXER_JWT>`` with your JWT. The expected output is as seen below:
-   
+      # curl -k -XGET "https://localhost:9200"   -H "Authorization: Bearer <WAZUH_INDEXER_JWT>"
+
+   Replace ``<WAZUH_INDEXER_JWT>`` with your generated JWT. The expected output is as seen below:
+
    .. code-block:: none
       :class: output
-   
+
       {
         "name" : "node-1",
         "cluster_name" : "wazuh-cluster",
@@ -143,11 +157,13 @@ JWT authentication is not enabled by default, and its settings are specified wit
 
 Optionally, you can use your JWT as an environment variable.
 
-You can access any API endpoint using the below structure. Replace ``<METHOD>`` with the desired method, ``<ENDPOINT>`` with the string corresponding to the endpoint you wish to access, and ``<WAZUH_INDEXER_JWT>`` with your JWT. If you are using an environment variable, replace ``<WAZUH_INDEXER_JWT>`` with your environment variable, for example ``$TOKEN``.
+You can access any API endpoint using the below structure. Replace ``<METHOD>`` with the desired method, ``<ENDPOINT>`` with the string corresponding to the endpoint you wish to access, and ``<WAZUH_INDEXER_JWT>`` with your JWT.
 
 .. code-block:: console
 
-   # curl -k -X <METHOD> "https://localhost:9200/<ENDPOINT>" -H "Authorization: Bearer <WAZUH_INDEXER_JWT>"
+   # curl -k -X <METHOD> "https://localhost:9200/<ENDPOINT>"   -H "Authorization: Bearer <WAZUH_INDEXER_JWT>"
+
+If you are using an environment variable, replace ``<WAZUH_INDEXER_JWT>`` with your environment variable e.g. ``$TOKEN``.
 
 Configuration options
 ~~~~~~~~~~~~~~~~~~~~~
@@ -282,7 +298,7 @@ The Python ``requests`` library allows us to send HTTP requests to the Wazuh Ind
    from requests.auth import HTTPBasicAuth
 
    # Base URL and endpoint
-   Wazuh_indexer_url = "https://localhost:9200"
+   wazuh_indexer_url = "https://localhost:9200"
    endpoint = "/_cluster/health"
 
    # Full URL
@@ -349,63 +365,71 @@ Using Bash
 
 You can also interact with the Wazuh indexer API using a bash script. A bash script is preferable when you do not want to install additional programs like Python. In the following ``check_wazuh_indexer_health.sh`` bash script, we query the Wazuh indexer API to retrieve the cluster health status.
 
-.. code-block:: bash
-   :emphasize-lines: 7,8
+#. Create a bash script called ``check_wazuh_indexer_health.sh`` and paste the content below:
 
-   #!/bin/bash
+   .. code-block:: bash
+      :emphasize-lines: 7,8
 
-   # Base URL and endpoint for Wazuh Indexer API
-   WAZUH_INDEXER_URL="https://localhost:9200"
-   ENDPOINT="/_cluster/health"
-   FULL_URL="${WAZUH_INDEXER_URL}${ENDPOINT}"
-   USERNAME="<WAZUH_INDEXER_USERNAME>"
-   PASSWORD="<WAZUH_INDEXER_PASSWORD>"
+      #!/bin/bash
 
-   # Make the API request using basic authentication
-   response=$(curl -s -k -u "$USERNAME:$PASSWORD" "$FULL_URL")
-   # Check if the request was successful
-   if [ $? -eq 0 ]; then
-     echo "Cluster Health Status:"
-     # Check if jq is installed
-     if command -v jq > /dev/null; then
-       echo "$response" | jq .
-     else
-       echo "Warning: 'jq' is not installed. Displaying raw JSON response:"
-       echo "$response"
-     fi
-   else
-     echo "Error: Failed to retrieve cluster health."
-   fi
+      # Base URL and endpoint for Wazuh Indexer API
+      WAZUH_INDEXER_URL="https://localhost:9200"
+      ENDPOINT="/_cluster/health"
+      FULL_URL="${WAZUH_INDEXER_URL}${ENDPOINT}"
+      USERNAME="<WAZUH_INDEXER_USERNAME>"
+      PASSWORD="<WAZUH_INDEXER_PASSWORD>"
 
-Run the ``check_wazuh_indexer_health`` script:
+      # Make the API request using basic authentication
+      response=$(curl -s -k -u "$USERNAME:$PASSWORD" "$FULL_URL")
+      # Check if the request was successful
+      if [ $? -eq 0 ]; then
+        echo "Cluster Health Status:"
+        # Check if jq is installed
+        if command -v jq > /dev/null; then
+          echo "$response" | jq .
+        else
+          echo "Warning: 'jq' is not installed. Displaying raw JSON response:"
+          echo "$response"
+        fi
+      else
+        echo "Error: Failed to retrieve cluster health."
+      fi
 
-.. code-block:: console
+#. Run the following command to make the above script executable:
 
-   # ./check_wazuh_indexer_health
+   .. code-block:: console
 
-.. code-block:: none
-   :class: output
+      # chmod +x check_wazuh_indexer_health.sh
 
-   Cluster Health Status:
-   {
-     "cluster_name": "wazuh-cluster",
-     "status": "green",
-     "timed_out": false,
-     "number_of_nodes": 1,
-     "number_of_data_nodes": 1,
-     "discovered_master": true,
-     "discovered_cluster_manager": true,
-     "active_primary_shards": 30,
-     "active_shards": 30,
-     "relocating_shards": 0,
-     "initializing_shards": 0,
-     "unassigned_shards": 0,
-     "delayed_unassigned_shards": 0,
-     "number_of_pending_tasks": 0,
-     "number_of_in_flight_fetch": 0,
-     "task_max_waiting_in_queue_millis": 0,
-     "active_shards_percent_as_number": 100
-   }
+#. Run the ``check_wazuh_indexer_health`` script:
+
+   .. code-block:: console
+
+      # ./check_wazuh_indexer_health.sh
+
+   .. code-block:: none
+      :class: output
+
+      Cluster Health Status:
+      {
+        "cluster_name": "wazuh-cluster",
+        "status": "green",
+        "timed_out": false,
+        "number_of_nodes": 1,
+        "number_of_data_nodes": 1,
+        "discovered_master": true,
+        "discovered_cluster_manager": true,
+        "active_primary_shards": 30,
+        "active_shards": 30,
+        "relocating_shards": 0,
+        "initializing_shards": 0,
+        "unassigned_shards": 0,
+        "delayed_unassigned_shards": 0,
+        "number_of_pending_tasks": 0,
+        "number_of_in_flight_fetch": 0,
+        "task_max_waiting_in_queue_millis": 0,
+        "active_shards_percent_as_number": 100
+      }
 
 .. note::
 
