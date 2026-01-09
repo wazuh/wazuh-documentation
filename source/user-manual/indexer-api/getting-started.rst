@@ -131,7 +131,7 @@ JWT authentication is not enabled by default, and its settings are specified wit
 
    .. code-block:: console
 
-      # curl -k -XGET "https://localhost:9200"   -H "Authorization: Bearer <WAZUH_INDEXER_JWT>"
+      # curl -k -XGET "https://localhost:9200" -H "Authorization: Bearer <WAZUH_INDEXER_JWT>"
 
    Replace ``<WAZUH_INDEXER_JWT>`` with your generated JWT. The expected output is as seen below:
 
