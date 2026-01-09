@@ -22,7 +22,7 @@ Here is a list of some of the Wazuh indexer API capabilities:
 -  Configuration management
 -  Index lifecycle management
 
-Take a look at the :doc:`Wazuh indexer API use cases <use-case>` for practical examples of how the Wazuh indexer API can be utilized.
+Refer to the :doc:`Wazuh indexer API reference <reference>` for details about all the Wazuh indexer API endpoints. Take a look at the :doc:`Wazuh indexer API use cases <use-case>` for practical examples of how the Wazuh indexer API can be utilized.
 
 .. topic:: Contents
 
