@@ -155,7 +155,7 @@ JWT authentication is not enabled by default, and its settings are specified wit
         "tagline" : "The OpenSearch Project: https://opensearch.org/"
       }
 
-Optionally, you can use your JWT as an environment variable.
+   Optionally, you can use your JWT as an environment variable.
 
 You can access any API endpoint using the below structure. Replace ``<METHOD>`` with the desired method, ``<ENDPOINT>`` with the string corresponding to the endpoint you wish to access, and ``<WAZUH_INDEXER_JWT>`` with your JWT.
 
