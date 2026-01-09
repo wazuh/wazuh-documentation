@@ -614,7 +614,7 @@ The Wazuh indexer API is helpful during threat hunting exercises where you have 
 
    .. code-block:: console
 
-      # ./ip_threat_hunt.sh
+      # ./ip_reputation_check.sh
 
 Upon successful execution of the script, a report is created as seen in the image below.
 
