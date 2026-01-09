@@ -538,7 +538,7 @@ Example response to report a resource not found exception (HTTPS status code 404
        "reason" : "no such index [testindex]",
        "index" : "testindex",
        "resource.id" : "testindex",
-       "resourcez.type" : "index_or_alias",
+       "resource.type" : "index_or_alias",
        "index_uuid" : "_na_"
      },      
      "status" : 404
