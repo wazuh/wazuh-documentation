@@ -161,7 +161,7 @@ You can access any API endpoint using the below structure. Replace ``<METHOD>`` 
 
 .. code-block:: console
 
-   # curl -k -X <METHOD> "https://localhost:9200/<ENDPOINT>"   -H "Authorization: Bearer <WAZUH_INDEXER_JWT>"
+   # curl -k -X <METHOD> "https://localhost:9200/<ENDPOINT>" -H "Authorization: Bearer <WAZUH_INDEXER_JWT>"
 
 If you are using an environment variable, replace ``<WAZUH_INDEXER_JWT>`` with your environment variable e.g. ``$TOKEN``.
 
