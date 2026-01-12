@@ -35,6 +35,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated the Wazuh signed package (WPK) files section. ([#9175](https://github.com/wazuh/wazuh-documentation/pull/9175))
 - **Post-release**: Updated `offline-url` setting reference in the vulnerability detection capability section. ([#9197](https://github.com/wazuh/wazuh-documentation/pull/9197))
 - **Post-release**: Updated the Wazuh Indexer API documentation. ([#9200](https://github.com/wazuh/wazuh-documentation/pull/9200))
+- **Post-release**: Updated the *How to configure SCA* section. ([#9202](https://github.com/wazuh/wazuh-documentation/pull/9202))
 
 ### Fixed
 
