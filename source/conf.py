@@ -55,7 +55,8 @@ extensions = [
     'sphinx.ext.extlinks', # Sphinx built-in extension
     'sphinx_tabs.tabs',
     'wazuh-doc-images', # Custom extension
-    'sphinx_reredirects'
+    'sphinx_reredirects',
+    'sphinx_markdown_builder'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -149,7 +150,7 @@ if html_theme == 'wazuh_doc_theme_v3':
                 current_release[0] == v3_release[0] and
                 current_release[1] < v3_release[1])
     html_theme_options['is_pre_v3'] = is_pre_v3
-    
+
     # Allow dark mode is set to false by default
     html_theme_options['include_mode'] = True
     # Allow switching between modes is set to false by default
@@ -242,7 +243,7 @@ html_show_copyright = True
 # Add link anchors for each heading and description environment. Default: True.
 html_permalinks = True
 
-# Text for link anchors for each heading and description environment. HTML entities 
+# Text for link anchors for each heading and description environment. HTML entities
 # and Unicode are allowed. Default: a paragraph sign; ¶
 html_permalinks_icon = ''
 
@@ -371,6 +372,13 @@ epub_copyright = copyright
 # A list of files that should not be packed into the epub file.
 epub_exclude_files = ['search.html', 'not_found.html']
 
+# -- Options for Markdown output --------------------------------------------
+
+# Options for sphinx-markdown-builder
+markdown_http_base = html_theme_options.get('wazuh_doc_url', 'https://documentation.wazuh.com')
+markdown_uri_doc_suffix = '.html'  # Links will point to HTML docs by default
+markdown_anchor_sections = True
+markdown_anchor_signatures = True
 
 # -- Extension configuration -------------------------------------------------
 
@@ -436,7 +444,7 @@ def setup(app):
         os.mkdir(static_path_str)
 
     if html_theme == 'wazuh_doc_theme_v3':
-        
+
         # Download spec file if the file is missing or older that spec_max_age
         spec_max_age = 60*15 # 15 minutes
         spec_current_age = 0
@@ -450,7 +458,7 @@ def setup(app):
         except FileNotFoundError:
             print(server_api_spec_path + " not found")
             download_needed = True
-        
+
         if download_needed == True:
             print ('Downloading ' + 'spec-'+api_tag+'.yaml')
             spec_path, url_retrieve_headers = urlretrieve(apiURL, server_api_spec_path)
@@ -639,7 +647,7 @@ def finish_and_clean(app, exception):
                     os.remove(mapFilePath)
                 except:
                     print("Error while deleting file : ", mapFilePath)
-            
+
             # Remove the source mapping URLs
             for assetsFilePath in assetsFiles:
                 try:
@@ -647,8 +655,8 @@ def finish_and_clean(app, exception):
                         lines = f.readlines()
                     with open(assetsFilePath, "w") as f:
                         for line in lines:
-                            line = re.sub("//# sourceMappingURL=.*\.map", "", line)
-                            line = re.sub("/\*# sourceMappingURL=.*\.map \*/", "", line)
+                            line = re.sub(r"//# sourceMappingURL=.*\.map", "", line)
+                            line = re.sub(r"/\*# sourceMappingURL=.*\.map \*/", "", line)
                             f.write(line)
                 except:
                     print("Error while removing source mapping from file: ", assetsFilePath)
