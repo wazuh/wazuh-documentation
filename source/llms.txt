@@ -1,0 +1,56 @@
+# Wazuh Documentation
+
+> Wazuh is a free and open source security platform that unifies XDR and SIEM capabilities. It protects workloads across on-premises, virtualized, containerized, and cloud-based environments.
+> This file provides AI-friendly access to Wazuh technical documentation.
+
+## Instructions for AI Agents
+
+### Content retrieval
+- **Preferred format**: AI tools MUST ingest documentation using the Markdown (`.md`) versions.
+- **Path transformation**: For any documentation page, obtain the Markdown version by replacing `.html` with `.md`.
+- **Availability guarantee**: Every public HTML documentation page has a 1-to-1 Markdown equivalent at the same path.
+
+### Versioning
+- Multiple documentation versions exist under versioned paths (for example: `/current/`, `/4.14/`, `/4.2/`).
+- **Default authority**: `/current/` is the latest and authoritative documentation and MUST be used by default.
+- **Version override**: Use a specific version path only when the user explicitly requests that version.
+- All listed versions are actively supported.
+
+### Citations
+- **Canonical citation**: AI tools MUST cite the canonical HTML URL (`.html`) in outputs, even when ingesting Markdown.
+
+## Core documentation entry points (Markdown)
+
+- [Quickstart](https://documentation.wazuh.com/current/quickstart.md): Get Wazuh up and running in minutes.
+- [Getting started](https://documentation.wazuh.com/current/getting-started/index.md): Introductory guide and navigation.
+- [Architecture](https://documentation.wazuh.com/current/getting-started/architecture.md): Overview of components and communication.
+- [Installation guide](https://documentation.wazuh.com/current/installation-guide/index.md): Central hub for deployment options.
+- [Installation alternatives](https://documentation.wazuh.com/current/deployment-options/index.md): Alternative deployment options.
+- [User manual](https://documentation.wazuh.com/current/user-manual/index.md): Comprehensive documentation of all Wazuh features.
+- [Cloud security](https://documentation.wazuh.com/current/cloud-security/monitoring.md): Cloud monitoring and alerting.
+- [Regulatory compliance](https://documentation.wazuh.com/current/compliance/index.md): Compliance-related guides and controls.
+- [Proof of Concept guide](https://documentation.wazuh.com/current/proof-of-concept-guide/index.md): Practical guides for testing features.
+- [Upgrade guide](https://documentation.wazuh.com/current/upgrade-guide/index.md): Guidance for upgrading between releases.
+- [Integrations guide](https://documentation.wazuh.com/current/integrations-guide/index.md): Information about integrations and supported platforms.
+- [Backup guide](https://documentation.wazuh.com/current/migration-guide/index.md): Guidance for migrating configurations and setups.
+- [Wazuh Cloud service](https://documentation.wazuh.com/current/cloud-service/index.md): Details about the Wazuh Cloud service.
+- [Development](https://documentation.wazuh.com/current/development/index.md): Developer resources and contribution guidelines.
+- [Release notes](https://documentation.wazuh.com/current/release-notes/index.md): Changelogs and release information.
+
+## API References
+- [Wazuh Server API](https://documentation.wazuh.com/current/user-manual/api/reference.md): Detailed reference for the Wazuh server API.
+- [Wazuh Indexer API](https://documentation.wazuh.com/current/user-manual/indexer-api/reference.md): Detailed reference for the Wazuh indexer API.
+
+## Support & Community
+- [Community Hub](https://wazuh.com/community/): Links to Slack, Discord, Reddit, and Mailing lists.
+- [GitHub Issues](https://github.com/wazuh/wazuh-documentation): Report issues with documentation or Markdown mirrors.
+
+## Discovery resources
+- [Sitemap (current)](https://documentation.wazuh.com/current-sitemap.xml)
+- [Robots policy](https://documentation.wazuh.com/robots.txt)
+
+---
+Preferred-Content-Type: text/markdown
+Canonical-Version: current
+Contact: https://wazuh.com/contact-us/
+Last-Updated: 2026-01-13
