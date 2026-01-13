@@ -375,10 +375,7 @@ epub_exclude_files = ['search.html', 'not_found.html']
 # -- Options for Markdown output --------------------------------------------
 
 # Options for sphinx-markdown-builder
-markdown_http_base = html_theme_options.get('wazuh_doc_url', 'https://documentation.wazuh.com')
-markdown_uri_doc_suffix = '.html'  # Links will point to HTML docs by default
-markdown_anchor_sections = True
-markdown_anchor_signatures = True
+markdown_http_base = '' # Use relative links
 
 # -- Extension configuration -------------------------------------------------
 
