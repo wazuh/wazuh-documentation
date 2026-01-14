@@ -14,13 +14,13 @@ All notable changes to this project will be documented in this file.
 
 ## [v4.14.2]
 
-### Fixed
-
-- Fixed code block highlighting and indentation for ``securityContext`` in *Upgrading Wazuh on Kubernetes*. ([#9161](https://github.com/wazuh/wazuh-documentation/pull/9161))
-
 ### Changed
 
 - Updated the Wazuh module for Filebeat version references to ``0.5``. ([#9149](https://github.com/wazuh/wazuh-documentation/pull/9149))
+
+### Fixed
+
+- Fixed code block highlighting and indentation for ``securityContext`` in *Upgrading Wazuh on Kubernetes*. ([#9161](https://github.com/wazuh/wazuh-documentation/pull/9161))
 
 ## [v4.14.1]
 
@@ -36,6 +36,8 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated the *Navigating the Wazuh dashboard* section. ([#9105](https://github.com/wazuh/wazuh-documentation/pull/9105))
 - **Post-release**: Updated the *Development* section. ([#9104](https://github.com/wazuh/wazuh-documentation/pull/9104))
 - **Post-release**: Updated the *Agents* manifests in the *Deployment on Kubernetes* section. ([#9111](https://github.com/wazuh/wazuh-documentation/pull/9111))
+- **Post-release**: Updated the *Deployment on Kubernetes* section to include separate configurations for EKS and other cluster types. ([#9181](https://github.com/wazuh/wazuh-documentation/pull/9181))
+- **Post-release**: Updated the Deployment on Kubernetes documentation. ([#9154](https://github.com/wazuh/wazuh-documentation/pull/9154)) ([#9195](https://github.com/wazuh/wazuh-documentation/pull/9195))
 - **Post-release**: Updated the *Monitoring Microsoft Graph services with Wazuh* section. ([#9107](https://github.com/wazuh/wazuh-documentation/pull/9107))
 - **Post-release**: Updated the *log_format* reference sub-section. ([#9117](https://github.com/wazuh/wazuh-documentation/pull/9117))
 - **Post-release**: Updated deployment on Docker documentation. ([#9138](https://github.com/wazuh/wazuh-documentation/pull/9138))
@@ -46,14 +48,19 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated the *Wazuh Cloud service* documentation. ([#9136](https://github.com/wazuh/wazuh-documentation/pull/9136))
 - **Post-release**: Updated the version references for the Wazuh certificates generation tool. ([#9152](https://github.com/wazuh/wazuh-documentation/pull/9152))
 - **Post-release**: Updated steps on the *Upgrading Wazuh Docker* section. ([#9155](https://github.com/wazuh/wazuh-documentation/pull/9155))
-- **Post-release**: Updated the Deployment on Kubernetes documentation. ([#9154](https://github.com/wazuh/wazuh-documentation/pull/9154))
 - **Post-release**: Updated the *Detecting malware using YARA integration* PoC guide. ([#9165](https://github.com/wazuh/wazuh-documentation/pull/9165))
 - **Post-release**: Updated the *File integrity monitoring and YARA* section. ([#9166](https://github.com/wazuh/wazuh-documentation/pull/9166))
 - **Post-release**: Updated the *File integrity monitoring* capability documentation. ([#9167](https://github.com/wazuh/wazuh-documentation/pull/9167))
 - **Post-release**: Updated the *Installation from sources* documentation. ([#9168](https://github.com/wazuh/wazuh-documentation/pull/9168))
 - **Post-release**: Updated diagram images in the documentation. ([#9097](https://github.com/wazuh/wazuh-documentation/pull/9097))
 - **Post-release**: Updated the Wazuh signed package (WPK) files section. ([#9175](https://github.com/wazuh/wazuh-documentation/pull/9175))
-- **Post-release**: Updated the *Deployment on Kubernetes* section to include separate configurations for EKS and other cluster types. ([#9181](https://github.com/wazuh/wazuh-documentation/pull/9181))
+- **Post-release**: Updated `offline-url` setting reference in the vulnerability detection capability section. ([#9197](https://github.com/wazuh/wazuh-documentation/pull/9197))
+- **Post-release**: Updated the Wazuh Indexer API documentation. ([#9200](https://github.com/wazuh/wazuh-documentation/pull/9200))
+- **Post-release**: Updated the *How to configure SCA* section. ([#9202](https://github.com/wazuh/wazuh-documentation/pull/9202))
+
+### Fixed
+
+- **Post-release**: Updated the OpenSearch Dashboards version references. ([#9190](https://github.com/wazuh/wazuh-documentation/pull/9190))
 
 ### Removed
 

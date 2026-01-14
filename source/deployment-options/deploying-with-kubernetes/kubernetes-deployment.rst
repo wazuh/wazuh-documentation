@@ -228,6 +228,12 @@ Run the command below to view the pods status in the Wazuh namespace:
    wazuh-manager-worker-0-0          1/1       Running   0          11m
    wazuh-manager-worker-1-0          1/1       Running   0          11m
 
+Please note that the Wazuh server assigns a Wazuh agent enrollment password by default. Run the command below to confirm the password string.
+
+.. code-block:: console
+
+   # kubectl exec -it wazuh-manager-master-0 -n wazuh -- cat /var/ossec/etc/authd.pass
+
 Enrolling a Wazuh agent
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -395,7 +401,9 @@ Setting the new password
 
    .. code-block:: console
 
-      # echo -n "NewPassword" | base64
+      # echo -n "<NEW_PASSWORD>" | base64
+
+   Replace the variable ``<NEW_PASSWORD>`` with your password.
 
 #. Edit the indexer or dashbboard secrets configuration file as follows. Replace the value of the ``password`` field with the base64 encoded password.
 
@@ -411,7 +419,7 @@ Setting the new password
              name: indexer-cred
          data:
              username: YWRtaW4=              # string "admin" base64 encoded
-             password: U2VjcmV0UGFzc3dvcmQ=  # string "SecretPassword" base64 encoded
+             password: <NEW_PASSWORD>  # Paste the string of the base64 encoded password
          ...
 
    -  To change the ``kibanaserver`` user password, edit the ``wazuh/secrets/dashboard-cred-secret.yaml`` file.
@@ -468,6 +476,7 @@ Applying the changes
    .. code-block:: console
 
       $ bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -cd $CONFIG_DIR/opensearch-security/ -nhnv -cacert  $CACERT -cert $CERT -key $KEY -p 9200 -icl -h $NODE_NAME
+      $ exit
 
 #. Force the Wazuh dashboard deployment rollout to update the component credentials.
 
@@ -496,7 +505,9 @@ The ``wazuh-wui`` user is the default user used to connect to the Wazuh server A
 
    .. code-block:: console
 
-      # echo -n "NewPassword" | base64
+      # echo -n "<NEW_PASSWORD>" | base64
+
+   Replace the variable ``<NEW_PASSWORD>`` with your password.
 
 #. Edit the ``wazuh/secrets/wazuh-api-cred-secret.yaml`` file and replace the value of the ``password`` field.
 
@@ -510,7 +521,7 @@ The ``wazuh-wui`` user is the default user used to connect to the Wazuh server A
           namespace: wazuh
       data:
           username: d2F6dWgtd3Vp          # string "wazuh-wui" base64 encoded
-          password: UGFzc3dvcmQxMjM0LmE=  # string "MyS3cr37P450r.*-" base64 encoded
+          password: <NEW_PASSWORD>  # Paste the string of the base64 encoded password
 
 #. Apply the manifest changes.
 
