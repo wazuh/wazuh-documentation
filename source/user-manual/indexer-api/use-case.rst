@@ -6,7 +6,7 @@
 Use cases
 =========
 
-This section provides several use cases to demonstrate some of the potentials of the Wazuh indexer API.
+This section provides several use cases to demonstrate some of the potentials of the Wazuh indexer API. You can find details about all possible API requests in the :doc:`reference` document.
 
 Exploring alerts
 ----------------
@@ -391,6 +391,12 @@ Keeping track of the Wazuh indexer health and associated node statistics is impo
       generate_html_report "\$cluster_health" "\$index_stats" "\$node_stats"
       echo "Report generated at \$OUTPUT_FILE"
 
+#. Run the command below to make the script executable:
+
+   .. code-block:: console
+
+      # chmod +x indexer_check_report.sh
+
 #. Execute the ``indexer_check_report.sh`` script:
 
    .. code-block:: console
@@ -522,7 +528,7 @@ The Wazuh indexer API is helpful during threat hunting exercises where you have 
 
    Replace ``<WAZUH_INDEXER_USERNAME>`` and ``<WAZUH_INDEXER_PASSWORD>`` with your Wazuh indexer username and password. Replace ``ABUSEIPDB_KEY`` with your AbuseIPDB API key collected in step 1.
 
-#. Create a file ``ip_reputation_check.sh`` and input the following script to the file:
+#. Create a script called ``ip_reputation_check.sh`` and input the following to the file:
 
    .. code-block:: bash
 
@@ -598,11 +604,17 @@ The Wazuh indexer API is helpful during threat hunting exercises where you have 
 
       echo "Report generated: $OUTPUT_FILE"
 
+#. Run the command below to make the script executable:
+
+   .. code-block:: console
+
+      # chmod +x ip_reputation_check.sh
+
 #. Execute the ``ip_reputation_check.sh`` script:
 
    .. code-block:: console
 
-      # ./ip_threat_hunt.sh
+      # ./ip_reputation_check.sh
 
 Upon successful execution of the script, a report is created as seen in the image below.
 
@@ -611,3 +623,8 @@ Upon successful execution of the script, a report is created as seen in the imag
    :alt: AbuseIPDB Report for Source IPs
    :align: center
    :width: 100%
+
+Conclusion
+----------
+
+In conclusion, these examples showcase the capabilities of the Wazuh indexer API. Explore the :doc:`reference <reference>` document to discover the full range of available Wazuh indexer API requests.
