@@ -36,6 +36,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated `offline-url` setting reference in the vulnerability detection capability section. ([#9197](https://github.com/wazuh/wazuh-documentation/pull/9197))
 - **Post-release**: Updated the Wazuh Indexer API documentation. ([#9200](https://github.com/wazuh/wazuh-documentation/pull/9200))
 - **Post-release**: Updated the *How to configure SCA* section. ([#9202](https://github.com/wazuh/wazuh-documentation/pull/9202))
+- **Post-release**: Updated the *Use case: Detecting malware on Windows endpoints using YARA* section. ([#9205](https://github.com/wazuh/wazuh-documentation/pull/9205))
 
 ### Fixed
 
