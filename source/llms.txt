@@ -32,9 +32,9 @@
 - [Proof of Concept guide](https://documentation.wazuh.com/current/proof-of-concept-guide/index.md): Practical guides for testing features.
 - [Upgrade guide](https://documentation.wazuh.com/current/upgrade-guide/index.md): Guidance for upgrading between releases.
 - [Integrations guide](https://documentation.wazuh.com/current/integrations-guide/index.md): Information about integrations and supported platforms.
-- [Backup guide](https://documentation.wazuh.com/current/migration-guide/index.md): Guidance for migrating configurations and setups.
+- [Backup guide](https://documentation.wazuh.com/current/migration-guide/index.md): Guidance for creating and restoring a backup of a Wazuh installation.
 - [Wazuh Cloud service](https://documentation.wazuh.com/current/cloud-service/index.md): Details about the Wazuh Cloud service.
-- [Development](https://documentation.wazuh.com/current/development/index.md): Developer resources and contribution guidelines.
+- [Development](https://documentation.wazuh.com/current/development/index.md): Developer resources.
 - [Release notes](https://documentation.wazuh.com/current/release-notes/index.md): Changelogs and release information.
 
 ## API References
