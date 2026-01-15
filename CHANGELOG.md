@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 
 - Updated the Wazuh module for Filebeat version references to ``0.5``. ([#9149](https://github.com/wazuh/wazuh-documentation/pull/9149))
 - **Post-release**: Updated the *Use case: Detecting malware on Windows endpoints using YARA* section. ([#9205](https://github.com/wazuh/wazuh-documentation/pull/9205))
+- **Post-release**: Added new step in *Disk space utilization on Linux endpoint* documentation. ([#9210](https://github.com/wazuh/wazuh-documentation/pull/9210))
 
 ### Fixed
 
