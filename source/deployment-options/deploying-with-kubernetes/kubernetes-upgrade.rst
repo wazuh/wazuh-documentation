@@ -131,11 +131,11 @@ Updating old paths
                      defaultMode: 0600
 
             .. code-block:: yaml
-               :emphasize-lines: 3
+               :emphasize-lines: 2, 3
 
                spec:
                   securityContext:
-                  fsGroup: 1000
+                    fsGroup: 1000
                   # Set the wazuh-indexer volume permissions so the wazuh-indexer user can use it
                   volumes:
                   - name: indexer-certs
@@ -174,11 +174,11 @@ Updating old paths
                      defaultMode: 0600
 
             .. code-block:: yaml
-               :emphasize-lines: 3
+               :emphasize-lines: 2, 3
 
                spec:
                   securityContext:
-                  fsGroup: 1000
+                    fsGroup: 1000
                   # Set the wazuh-indexer volume permissions so the wazuh-indexer user can use it
                   volumes:
                   - name: indexer-certs

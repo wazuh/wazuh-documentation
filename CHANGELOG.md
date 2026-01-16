@@ -1,6 +1,19 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [v4.14.2]
+
+### Changed
+
+- Updated the Wazuh module for Filebeat version references to ``0.5``. ([#9149](https://github.com/wazuh/wazuh-documentation/pull/9149))
+- **Post-release**: Updated the *Use case: Detecting malware on Windows endpoints using YARA* section. ([#9205](https://github.com/wazuh/wazuh-documentation/pull/9205))
+- **Post-release**: Added new step in *Disk space utilization on Linux endpoint* documentation. ([#9210](https://github.com/wazuh/wazuh-documentation/pull/9210))
+
+### Fixed
+
+- Fixed code block highlighting and indentation for ``securityContext`` in *Upgrading Wazuh on Kubernetes*. ([#9161](https://github.com/wazuh/wazuh-documentation/pull/9161))
+- **Post-release**: Fixed command syntax in the *Monitoring GitHub audit logs* section. ([#9213](https://github.com/wazuh/wazuh-documentation/pull/9213))
+
 ## [v4.14.1]
 
 ### Added
@@ -35,6 +48,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated the Wazuh signed package (WPK) files section. ([#9175](https://github.com/wazuh/wazuh-documentation/pull/9175))
 - **Post-release**: Updated `offline-url` setting reference in the vulnerability detection capability section. ([#9197](https://github.com/wazuh/wazuh-documentation/pull/9197))
 - **Post-release**: Updated the Wazuh Indexer API documentation. ([#9200](https://github.com/wazuh/wazuh-documentation/pull/9200))
+- **Post-release**: Updated the *How to configure SCA* section. ([#9202](https://github.com/wazuh/wazuh-documentation/pull/9202))
 
 ### Fixed
 

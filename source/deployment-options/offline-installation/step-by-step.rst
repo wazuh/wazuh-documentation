@@ -239,7 +239,7 @@ Filebeat must be installed and configured on the same server as the Wazuh manage
 
     .. code-block:: console
 
-        # tar -xzf ./wazuh-offline/wazuh-files/wazuh-filebeat-0.4.tar.gz -C /usr/share/filebeat/module
+        # tar -xzf ./wazuh-offline/wazuh-files/wazuh-filebeat-|WAZUH_FILEBEAT|.tar.gz -C /usr/share/filebeat/module
 
 #.  Replace ``<SERVER_NODE_NAME>`` with your Wazuh server node certificate name, the same used in ``config.yml`` when creating the certificates. For example, ``wazuh-1``. Then, move the certificates to their corresponding location.
 
