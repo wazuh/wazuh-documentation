@@ -124,77 +124,6 @@ Installing the Wazuh manager
 
             # service wazuh-manager status
 
-Install and configure Filebeat
-------------------------------
-
-#. Install the Filebeat package.
-
-   .. tabs::
-
-      .. group-tab:: YUM
-
-         .. code-block:: console
-                  
-            # yum -y install filebeat|FILEBEAT_LATEST_YUM_PKG_INSTALL|
-
-      .. group-tab:: APT
-
-         .. code-block:: console
-                  
-            # apt-get -y install filebeat|FILEBEAT_LATEST_APT_PKG_INSTALL|
-
-#. Download the preconfigured Filebeat configuration file:
-
-   .. code-block:: console
-
-      # curl -so /etc/filebeat/filebeat.yml https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/tpl/wazuh/filebeat/filebeat.yml
-
-#. Edit the ``/etc/filebeat/filebeat.yml`` configuration file and replace the following value:
-
-   -  ``hosts`` which represents the list of Wazuh indexer nodes to connect to. You can use either IP addresses or hostnames. By default, the host is set to localhost ``hosts: ["127.0.0.1:9200"]``. Replace it with your Wazuh indexer IP address accordingly.
-
-      If you have more than one Wazuh indexer node, you can separate the addresses using commas. For example, ``hosts: ["10.0.0.1:9200", "10.0.0.2:9200", "10.0.0.3:9200"]``:
-
-   .. code-block:: yaml
-      :emphasize-lines: 3
-
-      # Wazuh - Filebeat configuration file
-      output.elasticsearch:
-        hosts: <WAZUH_INDEXER_IP_ADDRESS>:9200
-        protocol: https
-
-#. Create a Filebeat keystore to securely store authentication credentials:
-
-   .. code-block:: console
-
-      # filebeat keystore create
-
-#. Add the admin user and password to the secrets keystore:
-
-   .. code-block:: console
-
-      # echo admin | filebeat keystore add username --stdin --force
-      # echo <ADMIN_PASSWORD> | filebeat keystore add password --stdin --force
-
-   In case you are running an all-in-one deployment and using the default admin password, you could get it by running the following command:
-
-   .. code-block:: console
-
-      # sudo tar -O -xvf wazuh-install-files.tar wazuh-install-files/wazuh-passwords.txt
-
-#. Download the alerts template for the Wazuh indexer:
-
-   .. code-block:: console
-
-      # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_CURRENT|/extensions/elasticsearch/7.x/wazuh-template.json
-      # chmod go+r /etc/filebeat/wazuh-template.json
-
-#. Install the Wazuh module for Filebeat:
-
-   .. code-block:: console
-
-      # curl -s https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/filebeat/wazuh-filebeat-|WAZUH_FILEBEAT|.tar.gz | tar -xvz -C /usr/share/filebeat/module
-
 Deploying certificates
 ----------------------
 
@@ -210,68 +139,13 @@ Run the following commands in the directory where the ``wazuh-certificates.tar``
 
    .. code-block:: console
 
-      # mkdir /etc/filebeat/certs
-      # tar -xf ./wazuh-certificates.tar -C /etc/filebeat/certs/ ./$NODE_NAME.pem ./$NODE_NAME-key.pem ./root-ca.pem
-      # mv -n /etc/filebeat/certs/$NODE_NAME.pem /etc/filebeat/certs/filebeat.pem
-      # mv -n /etc/filebeat/certs/$NODE_NAME-key.pem /etc/filebeat/certs/filebeat-key.pem
-      # chmod 500 /etc/filebeat/certs
-      # chmod 400 /etc/filebeat/certs/*
-      # chown -R root:root /etc/filebeat/certs
-
-Starting the service
---------------------
-
-.. tabs::
-
-   .. group-tab:: SystemD
-
-      .. code-block:: console
-
-         # systemctl daemon-reload
-         # systemctl enable filebeat
-         # systemctl start filebeat
-
-   .. group-tab:: SysV init
-
-      -  RPM based operating system:
-
-         .. code-block:: console
-
-            # chkconfig --add filebeat
-            # service filebeat start
-
-      -  Debian-based operating system:
-
-         .. code-block:: console
-
-            # update-rc.d filebeat defaults 95 10
-            # service filebeat start
-
-Run the following command to verify that Filebeat is successfully installed:
-
-.. code-block:: console
-
-   # filebeat test output
-
-An example output is shown below:
-
-.. code-block:: none
-   :class: output
-
-   elasticsearch: https://10.0.0.1:9200...
-     parse url... OK
-     connection...
-       parse host... OK
-       dns lookup... OK
-       addresses: 10.0.0.1
-       dial up... OK
-     TLS...
-       security: server's certificate chain verification is enabled
-       handshake... OK
-       TLS version: TLSv1.3
-       dial up... OK
-     talk to server... OK
-     version: 7.10.2
+      # mkdir /var/ossec/etc/certs
+      # tar -xf ./wazuh-certificates.tar -C /var/ossec/etc/certs/ ./$NODE_NAME.pem ./$NODE_NAME-key.pem ./root-ca.pem
+      # mv -n /var/ossec/etc/certs/$NODE_NAME.pem /var/ossec/etc/certs/server.pem
+      # mv -n /var/ossec/etc/certs/$NODE_NAME-key.pem /var/ossec/etc/certs/server-key.pem
+      # chmod 500 /var/ossec/etc/certs
+      # chmod 400 /var/ossec/etc/certs/*
+      # chown -R root:root /var/ossec/etc/certs
 
 Configuring the Wazuh server worker nodes
 -----------------------------------------
