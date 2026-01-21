@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [v4.14.2]
 
+### Added
+
+- **Post-release**: Added LLMs-ready documentation. ([#9201](https://github.com/wazuh/wazuh-documentation/pull/9201))
+
 ### Changed
 
 - Updated the Wazuh module for Filebeat version references to ``0.5``. ([#9149](https://github.com/wazuh/wazuh-documentation/pull/9149))
