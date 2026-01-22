@@ -77,7 +77,6 @@ Check the :ref:`credentials <getting_access_credentials>` section for guidance o
                       <blobs>.json</blobs>
                       <content_type>json_inline</content_type>
                       <time_offset>24h</time_offset>
-                      <path>info-logs</path>
                   </container>
 
           </storage>
