@@ -43,6 +43,10 @@ Configuring the activity log export
       :align: center
       :width: 80%
 
+.. note::
+
+   Starting from October 1st, 2025, configuring Azure activity logs requires an additional configuration step for Azure Storage lifecycle management. Please follow the official guide, `migrate from diagnostic settings storage retention to Azure Storage lifecycle management <https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/migrate-to-azure-storage-lifecycle-policy>`__.
+
 Wazuh server or agent
 ^^^^^^^^^^^^^^^^^^^^^
 
@@ -69,7 +73,7 @@ Check the :ref:`credentials <getting_access_credentials>` section for guidance o
                   <auth_path>/home/manager/Azure/storage_auth.txt</auth_path>
                   <tag>azure-activity</tag>
 
-                  <container name="insights-activity-logs">
+                  <container name="insights-logs-auditlogs">
                       <blobs>.json</blobs>
                       <content_type>json_inline</content_type>
                       <time_offset>24h</time_offset>
@@ -83,7 +87,7 @@ Check the :ref:`credentials <getting_access_credentials>` section for guidance o
 
    -  ``<auth_path>`` is the full path of where the workspace secret key is stored.
    -  ``<container>`` contains useful parameters while fetching blog storage contents.
-   -  ``<container name="insights-activity-logs">`` the log container that will be streamed.
+   -  ``<container name="insights-logs-auditlogs">`` the log container that will be streamed.
    -  ``<blobs>.json</blobs>`` is the blob format that will be downloaded.
    -  ``<time_offset>`` is the timeframe dated backward. In this case, all logs within a 24-hour timeframe will be downloaded.
    -  ``<content_type>`` is the format for storing the content of the blobs.

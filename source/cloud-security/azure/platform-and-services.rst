@@ -35,7 +35,7 @@ Python
 Azure Storage client library for Python
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You need the libraries in the command below to set up your Wazuh agent endpoint and monitor your Microsoft Azure platform and services.
+You need the libraries in the command below to set up your Wazuh agent endpoint and monitor your Microsoft Azure platform and services. We recommend creating a `virtual Python environment <https://docs.python.org/3/library/venv.html>`__ for these installations.
 
 .. tabs::
 
