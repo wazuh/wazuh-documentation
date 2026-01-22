@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 - Added the macOS 26 (Tahoe) SCA policy reference to the *Available SCA policies* section. ([#9158](https://github.com/wazuh/wazuh-documentation/pull/9158))
+- Added a reference for the macOS ARM WPK package to the WPK list. ([#9215](https://github.com/wazuh/wazuh-documentation/pull/9215))
 
 ### Changed
 
