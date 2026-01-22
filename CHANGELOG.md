@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Added security update for the `remove-threat.py` script and a warning to the Detecting and removing malware using VirusTotal integration POC guide. ([#8705](https://github.com/wazuh/wazuh-documentation/pull/8705))
 - **Post-release**: Changed Windows commands in the backup guide to PowerShell. ([#8764](https://github.com/wazuh/wazuh-documentation/pull/8764))
 - **Post-release**: Updated the offline installation guide. ([#8806](https://github.com/wazuh/wazuh-documentation/pull/8806))
+- **Post-release**: Added LLMs-ready documentation. ([#9223](https://github.com/wazuh/wazuh-documentation/pull/9223))
 
 ### Changed
 
