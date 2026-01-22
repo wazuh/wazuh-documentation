@@ -47,5 +47,4 @@ macOS
 
 .. note::
 
-   -  In Wazuh 4.14.2 and earlier, official WPKs for macOS are available only for Intel-based architectures.
-   -  These versions do not provide Apple Silicon (ARM) WPKs, and the remote upgrade process is not architecture-aware. Use WPK packages only on Intel-based systems.
+   In Wazuh 4.14.2 and earlier, official WPKs for macOS are available only for Intel-based architectures. These versions do not provide Apple Silicon (ARM) WPKs, and the remote upgrade process is not architecture-aware. Use WPK packages only on Intel-based systems.
