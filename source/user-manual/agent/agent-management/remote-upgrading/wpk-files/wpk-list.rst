@@ -36,11 +36,18 @@ Windows
 macOS
 -----
 
-.. |WPK_macOS| replace:: `wazuh_agent_v|WAZUH_CURRENT_OSX|_macos_intel64.pkg.wpk <https://packages.wazuh.com/4.x/wpk/macos/pkg/intel64/wazuh_agent_v|WAZUH_CURRENT_OSX|_macos_intel64.pkg.wpk>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_OSX|/checksums/wazuh/|WAZUH_CURRENT_OSX|/wazuh_agent_v|WAZUH_CURRENT_OSX|_macos_intel64.pkg.wpk.sha512>`__)
+.. |WPK_macOS_Intel| replace:: `wazuh_agent_v|WAZUH_CURRENT_OSX|_macos_intel64.pkg.wpk <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/wpk/macos/pkg/intel64/wazuh_agent_v|WAZUH_CURRENT_OSX|_macos_intel64.pkg.wpk>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_OSX|/checksums/wazuh/|WAZUH_CURRENT_OSX|/wazuh_agent_v|WAZUH_CURRENT_OSX|_macos_intel64.pkg.wpk.sha512>`__)
+.. |WPK_macOS_ARM64| replace:: `wazuh_agent_v|WAZUH_CURRENT_OSX|_macos_arm64.pkg.wpk <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/wpk/macos/pkg/arm64/wazuh_agent_v|WAZUH_CURRENT_OSX|_macos_arm64.pkg.wpk>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_OSX|/checksums/wazuh/|WAZUH_CURRENT_OSX|/wazuh_agent_v|WAZUH_CURRENT_OSX|_macos_arm64.pkg.wpk.sha512>`__)
 .. |WAZUH_CUR_OSX| replace:: |WAZUH_CURRENT_OSX|
 
 +--------------+---------------------+--------------+---------------------------------------------+
 | Distribution | Version             | Architecture | WPK Package                                 |
 +==============+=====================+==============+=============================================+
-|    macOS     | |WAZUH_CUR_OSX|     |  Intel 64    | |WPK_macOS|                                 |
+|    macOS     | |WAZUH_CUR_OSX|     |  Intel 64    | |WPK_macOS_Intel|                           |
 +--------------+---------------------+--------------+---------------------------------------------+
+|    macOS     | |WAZUH_CUR_OSX|     |  ARM64       | |WPK_macOS_ARM64|                           |
++--------------+---------------------+--------------+---------------------------------------------+
+
+.. note::
+
+   In Wazuh 4.14.2 and earlier, official WPKs for macOS are available only for Intel-based architectures. These versions do not provide Apple Silicon (ARM) WPKs, and the remote upgrade process is not architecture-aware. Use WPK packages only on Intel-based systems.
