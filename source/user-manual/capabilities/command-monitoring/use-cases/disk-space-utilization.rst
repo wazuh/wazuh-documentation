@@ -114,6 +114,14 @@ Perform the following steps on the Linux endpoint.
 
       wazuh_command.remote_commands=1
 
+#. Run the following commands to get the hashes for ``<MD5_HASH>``, ``<SHA1_HASH>``, and ``<SHA256_HASH>``:
+
+   .. code-block:: console
+
+      # md5sum /bin/bash
+      # sha1sum /bin/bash
+      # sha256sum /bin/bash
+
 #. Restart the Wazuh agent to apply the changes:
 
    .. code-block:: console

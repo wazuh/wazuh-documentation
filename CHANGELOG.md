@@ -33,11 +33,16 @@ All notable changes to this project will be documented in this file.
 - Removed support for legacy operating systems, including Red Hat 5, CentOS 5, Oracle Linux 5, SUSE Linux Enterprise Server 11, AIX, HP-UX, Solaris, Windows XP, Windows Vista, and Windows Server 2003. ([#8894](https://github.com/wazuh/wazuh-documentation/pull/8894))
 - Removed Osquery references as this capability is now deprecated. ([#]())
 
+## [v4.14.4]
+
+- Support for Wazuh 4.14.4
+
 ## [v4.14.3]
 
 ### Added
 
 - Added the macOS 26 (Tahoe) SCA policy reference to the *Available SCA policies* section. ([#9158](https://github.com/wazuh/wazuh-documentation/pull/9158))
+- Added a reference for the macOS ARM WPK package to the WPK list. ([#9215](https://github.com/wazuh/wazuh-documentation/pull/9215))
 
 ### Changed
 
@@ -46,13 +51,22 @@ All notable changes to this project will be documented in this file.
 
 ## [v4.14.2]
 
+### Added
+
+- **Post-release**: Added LLMs-ready documentation. ([#9201](https://github.com/wazuh/wazuh-documentation/pull/9201))
+- **Post-release**: Added note about macOS WPK ARM packages in 4.14.2 and earlier versions. ([#9224](https://github.com/wazuh/wazuh-documentation/pull/9224))
+
 ### Changed
 
 - Updated the Wazuh module for Filebeat version references to ``0.5``. ([#9149](https://github.com/wazuh/wazuh-documentation/pull/9149))
+- **Post-release**: Updated the *Use case: Detecting malware on Windows endpoints using YARA* section. ([#9205](https://github.com/wazuh/wazuh-documentation/pull/9205))
+- **Post-release**: Added new step in *Disk space utilization on Linux endpoint* documentation. ([#9210](https://github.com/wazuh/wazuh-documentation/pull/9210))
+- **Post-release**: Updated step in *Upgrading the Wazuh dashboard* documentation. ([#9217](https://github.com/wazuh/wazuh-documentation/pull/9217))
 
 ### Fixed
 
 - Fixed code block highlighting and indentation for ``securityContext`` in *Upgrading Wazuh on Kubernetes*. ([#9161](https://github.com/wazuh/wazuh-documentation/pull/9161))
+- **Post-release**: Fixed command syntax in the *Monitoring GitHub audit logs* section. ([#9213](https://github.com/wazuh/wazuh-documentation/pull/9213))
 
 ## [v4.14.1]
 
