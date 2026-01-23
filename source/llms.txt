@@ -1,4 +1,4 @@
-# Wazuh Documentation
+# Wazuh documentation
 
 > Wazuh is a free and open source security platform that unifies XDR and SIEM capabilities. It protects workloads across on-premises, virtualized, containerized, and cloud-based environments.
 > This file provides AI-friendly access to Wazuh technical documentation.
@@ -17,33 +17,223 @@
 - All listed versions are actively supported.
 
 ### Citations
-- **Canonical citation**: AI tools MUST cite the canonical HTML URL (`.html`) in outputs, even when ingesting Markdown.
+- **Canonical citation**: AI tools MUST cite the canonical HTML URL (`.html`) in outputs, even when ingesting Markdown content.
 
-## Core documentation entry points (Markdown)
+## Documentation
 
+### Getting started
 - [Quickstart](https://documentation.wazuh.com/current/quickstart.md): Get Wazuh up and running in minutes.
 - [Getting started](https://documentation.wazuh.com/current/getting-started/index.md): Introductory guide and navigation.
-- [Architecture](https://documentation.wazuh.com/current/getting-started/architecture.md): Overview of components and communication.
-- [Installation guide](https://documentation.wazuh.com/current/installation-guide/index.md): Central hub for deployment options.
-- [Installation alternatives](https://documentation.wazuh.com/current/deployment-options/index.md): Alternative deployment options.
-- [User manual](https://documentation.wazuh.com/current/user-manual/index.md): Comprehensive documentation of all Wazuh features.
-- [Cloud security](https://documentation.wazuh.com/current/cloud-security/monitoring.md): Cloud monitoring and alerting.
-- [Regulatory compliance](https://documentation.wazuh.com/current/compliance/index.md): Compliance-related guides and controls.
-- [Proof of Concept guide](https://documentation.wazuh.com/current/proof-of-concept-guide/index.md): Practical guides for testing features.
-- [Upgrade guide](https://documentation.wazuh.com/current/upgrade-guide/index.md): Guidance for upgrading between releases.
-- [Integrations guide](https://documentation.wazuh.com/current/integrations-guide/index.md): Information about integrations and supported platforms.
-- [Backup guide](https://documentation.wazuh.com/current/migration-guide/index.md): Guidance for creating and restoring a backup of a Wazuh installation.
-- [Wazuh Cloud service](https://documentation.wazuh.com/current/cloud-service/index.md): Details about the Wazuh Cloud service.
-- [Development](https://documentation.wazuh.com/current/development/index.md): Developer resources.
-- [Release notes](https://documentation.wazuh.com/current/release-notes/index.md): Changelogs and release information.
+  - [Components](https://documentation.wazuh.com/current/getting-started/components/index.md): Detailed information about Wazuh components (Agent, Dashboard, Indexer, Server).
+    - [Wazuh indexer](https://documentation.wazuh.com/current/getting-started/components/wazuh-indexer.md)
+    - [Wazuh server](https://documentation.wazuh.com/current/getting-started/components/wazuh-server.md)
+    - [Wazuh dashboard](https://documentation.wazuh.com/current/getting-started/components/wazuh-dashboard.md)
+    - [Wazuh agent](https://documentation.wazuh.com/current/getting-started/components/wazuh-agent.md)
+  - [Architecture](https://documentation.wazuh.com/current/getting-started/architecture.md): Overview of components and communication.
+  - [Use cases](https://documentation.wazuh.com/current/getting-started/use-cases/index.md): Scenarios like cloud security, FIM, incident response, and vulnerability detection.
+    - [Configuration assessment](https://documentation.wazuh.com/current/getting-started/use-cases/configuration-assessment.md)
+    - [Malware detection](https://documentation.wazuh.com/current/getting-started/use-cases/malware-detection.md)
+    - [File integrity monitoring](https://documentation.wazuh.com/current/getting-started/use-cases/file-integrity.md)
+    - [Threat hunting](https://documentation.wazuh.com/current/getting-started/use-cases/threat-hunting.md)
+    - [Log data analysis](https://documentation.wazuh.com/current/getting-started/use-cases/log-analysis.md)
+    - [Vulnerability detection](https://documentation.wazuh.com/current/getting-started/use-cases/vulnerability-detection.md)
+    - [Incident response](https://documentation.wazuh.com/current/getting-started/use-cases/incident-response.md)
+    - [Regulatory compliance](https://documentation.wazuh.com/current/getting-started/use-cases/regulatory-compliance.md)
+    - [IT hygiene](https://documentation.wazuh.com/current/getting-started/use-cases/it-hygiene.md)
+    - [Container security](https://documentation.wazuh.com/current/getting-started/use-cases/container-security.md)
+    - [Posture management](https://documentation.wazuh.com/current/getting-started/use-cases/posture-management.md)
+    - [Cloud workload protection](https://documentation.wazuh.com/current/getting-started/use-cases/cloud-workload-protection.md)
+- [Proof of Concept guide](https://documentation.wazuh.com/current/proof-of-concept-guide/index.md): 15+ practical guides for testing core features (YARA, VirusTotal, Suricata, Docker monitoring, etc.).
+  - [Blocking a known malicious actor](https://documentation.wazuh.com/current/proof-of-concept-guide/block-malicious-actor-ip-reputation.md)
+  - [File integrity monitoring](https://documentation.wazuh.com/current/proof-of-concept-guide/poc-file-integrity-monitoring.md)
+  - [Detecting a brute-force attack](https://documentation.wazuh.com/current/proof-of-concept-guide/detect-brute-force-attack.md)
+  - [Monitoring Docker events](https://documentation.wazuh.com/current/proof-of-concept-guide/monitoring-docker.md)
+  - [Monitoring AWS infrastructure](https://documentation.wazuh.com/current/proof-of-concept-guide/aws-infrastructure-monitoring.md)
+  - [Detecting unauthorized processes](https://documentation.wazuh.com/current/proof-of-concept-guide/detect-unauthorized-processes-netcat.md)
+  - [Network IDS integration](https://documentation.wazuh.com/current/proof-of-concept-guide/integrate-network-ids-suricata.md)
+  - [Detecting a SQL injection attack](https://documentation.wazuh.com/current/proof-of-concept-guide/detect-web-attack-sql-injection.md)
+  - [Detecting suspicious binaries](https://documentation.wazuh.com/current/proof-of-concept-guide/poc-detect-trojan.md)
+  - [Detecting and removing malware using VirusTotal integration](https://documentation.wazuh.com/current/proof-of-concept-guide/detect-remove-malware-virustotal.md)
+  - [Vulnerability detection](https://documentation.wazuh.com/current/proof-of-concept-guide/poc-vulnerability-detection.md)
+  - [Detecting malware using YARA Integration](https://documentation.wazuh.com/current/proof-of-concept-guide/detect-malware-yara-integration.md)
+  - [Detecting hdden processes](https://documentation.wazuh.com/current/proof-of-concept-guide/poc-detect-hidden-process.md)
+  - [Monitoring execution of malicious commands](https://documentation.wazuh.com/current/proof-of-concept-guide/audit-commands-run-by-user.md)
+  - [Detecting a Shellshock attack](https://documentation.wazuh.com/current/proof-of-concept-guide/detect-web-attack-shellshock.md)
+  - [Leveraging LLMs for alert enrichment](https://documentation.wazuh.com/current/proof-of-concept-guide/leveraging-llms-for-alert-enrichment.md)
 
-## API References
-- [Wazuh Server API](https://documentation.wazuh.com/current/user-manual/api/reference.md): Detailed reference for the Wazuh server API.
-- [Wazuh Indexer API](https://documentation.wazuh.com/current/user-manual/indexer-api/reference.md): Detailed reference for the Wazuh indexer API.
+### Installation & Deployment
+- [Installation guide](https://documentation.wazuh.com/current/installation-guide/index.md): Central hub for deployment options.
+  - [Wazuh indexer](https://documentation.wazuh.com/current/installation-guide/wazuh-indexer/index.md)
+    - [Step-by-Step](https://documentation.wazuh.com/current/installation-guide/wazuh-indexer/step-by-step.md)
+    - [Installation assistant](https://documentation.wazuh.com/current/installation-guide/wazuh-indexer/installation-assistant.md)
+  - [Wazuh server](https://documentation.wazuh.com/current/installation-guide/wazuh-server/index.md)
+    - [Step-by-Step](https://documentation.wazuh.com/current/installation-guide/wazuh-server/step-by-step.md)
+    - [Installation assistant](https://documentation.wazuh.com/current/installation-guide/wazuh-server/installation-assistant.md)
+  - [Wazuh dashboard](https://documentation.wazuh.com/current/installation-guide/wazuh-dashboard/index.md)
+    - [Step-by-Step](https://documentation.wazuh.com/current/installation-guide/wazuh-dashboard/step-by-step.md)
+    - [Installation assistant](https://documentation.wazuh.com/current/installation-guide/wazuh-dashboard/installation-assistant.md)
+  - [Wazuh agent](https://documentation.wazuh.com/current/installation-guide/wazuh-agent/index.md)
+    - [Linux package](https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-linux.md)
+    - [Windows package](https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-windows.md)
+    - [macOS package](https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-macos.md)
+    - [AIX package](https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-aix.md)
+    - [HP-UX package](https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-hpux.md)
+    - [Solaris package](https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-solaris.md)
+  - [Packages list](https://documentation.wazuh.com/current/installation-guide/packages-list.md)
+  - [Uninstalling Wazuh](https://documentation.wazuh.com/current/installation-guide/uninstalling-wazuh/index.md)
+    - [Central components](https://documentation.wazuh.com/current/installation-guide/uninstalling-wazuh/central-components.md)
+    - [Agent](https://documentation.wazuh.com/current/installation-guide/uninstalling-wazuh/agent.md)
+- [Installation alternatives](https://documentation.wazuh.com/current/deployment-options/index.md):
+  - [Virtual Machine (OVA)](https://documentation.wazuh.com/current/deployment-options/virtual-machine/virtual-machine.md)
+  - [Amazon Machine Images (AMI)](https://documentation.wazuh.com/current/deployment-options/amazon-machine-images/amazon-machine-images.md)
+  - [Deployment on Docker](https://documentation.wazuh.com/current/deployment-options/docker/index.md)
+    - [Wazuh Docker deployment](https://documentation.wazuh.com/current/deployment-options/docker/wazuh-container.md)
+    - [Changing the default password of Wazuh users](https://documentation.wazuh.com/current/deployment-options/docker/changing-default-password.md)
+    - [Building Docker images locally](https://documentation.wazuh.com/current/deployment-options/docker/build-docker-images-locally.md)
+    - [Wazuh Docker utilities](https://documentation.wazuh.com/current/deployment-options/docker/container-usage.md)
+    - [Upgrading Wazuh Docker](https://documentation.wazuh.com/current/deployment-options/docker/upgrading-wazuh-docker.md)
+    - [Uninstalling the Wazuh Docker deployment](https://documentation.wazuh.com/current/deployment-options/docker/uninstalling-wazuh-docker.md)
+  - [Kubernetes](https://documentation.wazuh.com/current/deployment-options/deploying-with-kubernetes/index.md)
+    - [Kubernetes configuration](https://documentation.wazuh.com/current/deployment-options/deploying-with-kubernetes/kubernetes-conf.md)
+    - [Deployment](https://documentation.wazuh.com/current/deployment-options/deploying-with-kubernetes/kubernetes-deployment.md)
+    - [Upgrade Wazuh installed in Kubernetes](https://documentation.wazuh.com/current/deployment-options/deploying-with-kubernetes/kubernetes-upgrade.md)
+    - [Clean up](https://documentation.wazuh.com/current/deployment-options/deploying-with-kubernetes/kubernetes-clean-up.md)
+  - [Offline installation guide](https://documentation.wazuh.com/current/deployment-options/offline-installation/index.md)
+    - [Install Wazuh components using the assisted method](https://documentation.wazuh.com/current/deployment-options/offline-installation/installation-assistant.md)
+    - [Install Wazuh components step by step](https://documentation.wazuh.com/current/deployment-options/offline-installation/step-by-step.md)
+  - [Installation from sources](https://documentation.wazuh.com/current/deployment-options/wazuh-from-sources/index.md)
+    - [Installing the Wazuh manager from sources](https://documentation.wazuh.com/current/deployment-options/wazuh-from-sources/wazuh-server/index.md)
+    - [Installing the Wazuh agent from sources](https://documentation.wazuh.com/current/deployment-options/wazuh-from-sources/wazuh-agent/index.md)
+  - [Deployment with Ansible](https://documentation.wazuh.com/current/deployment-options/deploying-with-ansible/index.md)
+    - [Installation guide](https://documentation.wazuh.com/current/deployment-options/deploying-with-ansible/installation-guide.md)
+      - [Install Ansible](https://documentation.wazuh.com/current/deployment-options/deploying-with-ansible/guide/install-ansible.md)
+      - [Install Wazuh indexer and dashboard](https://documentation.wazuh.com/current/deployment-options/deploying-with-ansible/guide/install-indexer-dashboard.md)
+      - [Install Wazuh manager](https://documentation.wazuh.com/current/deployment-options/deploying-with-ansible/guide/install-wazuh-manager.md)
+      - [Install a Wazuh cluster](https://documentation.wazuh.com/current/deployment-options/deploying-with-ansible/guide/install-wazuh-cluster.md)
+      - [Install Wazuh agent](https://documentation.wazuh.com/current/deployment-options/deploying-with-ansible/guide/install-wazuh-agent.md)
+    - [Remote endpoints connection](https://documentation.wazuh.com/current/deployment-options/deploying-with-ansible/setup-remote-systems.md)
+    - [Roles](https://documentation.wazuh.com/current/deployment-options/deploying-with-ansible/roles/index.md)
+      - [Wazuh indexer](https://documentation.wazuh.com/current/deployment-options/deploying-with-ansible/roles/wazuh-indexer.md)
+      - [Wazuh dashboard](https://documentation.wazuh.com/current/deployment-options/deploying-with-ansible/roles/wazuh-dashboard.md)
+      - [Filebeat](https://documentation.wazuh.com/current/deployment-options/deploying-with-ansible/roles/wazuh-filebeat.md)
+      - [Wazuh manager](https://documentation.wazuh.com/current/deployment-options/deploying-with-ansible/roles/wazuh-manager.md)
+      - [Wazuh agent](https://documentation.wazuh.com/current/deployment-options/deploying-with-ansible/roles/wazuh-agent.md)
+    - [Variable references](https://documentation.wazuh.com/current/deployment-options/deploying-with-ansible/reference.md)
+  - [Deployment with Puppet](https://documentation.wazuh.com/current/deployment-options/deploying-with-puppet/index.md)
+    - [Setup Puppet](https://documentation.wazuh.com/current/deployment-options/deploying-with-puppet/setup-puppet/index.md)
+      - [Installing Puppet master](https://documentation.wazuh.com/current/deployment-options/deploying-with-puppet/setup-puppet/install-puppet-master.md)
+      - [Installing Puppet agent](https://documentation.wazuh.com/current/deployment-options/deploying-with-puppet/setup-puppet/install-puppet-agent.md)
+      - [Setting up Puppet certificates](https://documentation.wazuh.com/current/deployment-options/deploying-with-puppet/setup-puppet/setup-puppet-certificates.md)
+    - [Wazuh Puppet module](https://documentation.wazuh.com/current/deployment-options/deploying-with-puppet/wazuh-puppet-module/index.md)
+      - [Reference: Wazuh manager class](https://documentation.wazuh.com/current/deployment-options/deploying-with-puppet/wazuh-puppet-module/reference-wazuh-puppet/wazuh-manager-class.md)
+      - [Reference: Wazuh agent class](https://documentation.wazuh.com/current/deployment-options/deploying-with-puppet/wazuh-puppet-module/reference-wazuh-puppet/wazuh-agent-class.md)
+- [Upgrade guide](https://documentation.wazuh.com/current/upgrade-guide/index.md): Procedures for updating Wazuh components.
+  - [Wazuh central components](https://documentation.wazuh.com/current/upgrade-guide/upgrading-central-components.md)
+  - [Wazuh agent](https://documentation.wazuh.com/current/upgrade-guide/wazuh-agent/index.md)
+    - [Linux](https://documentation.wazuh.com/current/upgrade-guide/wazuh-agent/linux.md)
+    - [Windows](https://documentation.wazuh.com/current/upgrade-guide/wazuh-agent/windows.md)
+    - [macOS](https://documentation.wazuh.com/current/upgrade-guide/wazuh-agent/macos.md)
+    - [Solaris](https://documentation.wazuh.com/current/upgrade-guide/wazuh-agent/solaris.md)
+    - [AIX](https://documentation.wazuh.com/current/upgrade-guide/wazuh-agent/aix.md)
+    - [HP-UX](https://documentation.wazuh.com/current/upgrade-guide/wazuh-agent/hp-ux.md)
+  - [Troubleshooting](https://documentation.wazuh.com/current/upgrade-guide/troubleshooting.md)
+- [Backup and migration](https://documentation.wazuh.com/current/migration-guide/index.md): Methods for data persistence and recovery.
+  - [Creating a backup](https://documentation.wazuh.com/current/migration-guide/creating/index.md)
+    - [Wazuh central components](https://documentation.wazuh.com/current/migration-guide/creating/wazuh-central-components.md)
+    - [Wazuh agent](https://documentation.wazuh.com/current/migration-guide/creating/wazuh-agent.md)
+  - [Restoring Wazuh from backup](https://documentation.wazuh.com/current/migration-guide/restoring/index.md)
+    - [Wazuh central components](https://documentation.wazuh.com/current/migration-guide/restoring/wazuh-central-components.md)
+    - [Wazuh agent](https://documentation.wazuh.com/current/migration-guide/restoring/wazuh-agent.md)
+
+### Capabilities
+- [Capabilities overview](https://documentation.wazuh.com/current/user-manual/capabilities/index.md): Comprehensive guide to what Wazuh can do.
+- [File integrity monitoring](https://documentation.wazuh.com/current/user-manual/capabilities/file-integrity/index.md): Detecting changes in the filesystem (Syscheck).
+  - [How it works](https://documentation.wazuh.com/current/user-manual/capabilities/file-integrity/how-it-works.md)
+  - [How to configure FIM module](https://documentation.wazuh.com/current/user-manual/capabilities/file-integrity/how-to-configure-fim.md)
+  - [Interpreting the FIM module analysis](https://documentation.wazuh.com/current/user-manual/capabilities/file-integrity/interpreting-fim-module-analysis.md)
+  - [Basic settings](https://documentation.wazuh.com/current/user-manual/capabilities/file-integrity/basic-settings.md)
+  - [Creating custom FIM rules](https://documentation.wazuh.com/current/user-manual/capabilities/file-integrity/creating-custom-fim-rules.md)
+  - [Advanced settings](https://documentation.wazuh.com/current/user-manual/capabilities/file-integrity/advanced-settings.md)
+  - [Use cases](https://documentation.wazuh.com/current/user-manual/capabilities/file-integrity/use-cases/index.md)
+    - [Detecting malware persistence technique](https://documentation.wazuh.com/current/user-manual/capabilities/file-integrity/use-cases/detecting-malware-persistence-technique.md)
+    - [Detecting account manipulation](https://documentation.wazuh.com/current/user-manual/capabilities/file-integrity/use-cases/detecting-account-manipulation.md)
+    - [Monitoring files at specific intervals](https://documentation.wazuh.com/current/user-manual/capabilities/file-integrity/use-cases/monitoring-files-at-specific-intervals.md)
+    - [Reporting file changes](https://documentation.wazuh.com/current/user-manual/capabilities/file-integrity/use-cases/reporting-file-changes.md)
+    - [Monitoring configuration changes](https://documentation.wazuh.com/current/user-manual/capabilities/file-integrity/use-cases/monitoring-configuration-changes.md)
+  - [Windows Registry monitoring](https://documentation.wazuh.com/current/user-manual/capabilities/file-integrity/windows-registry-monitoring.md)
+- [Malware detection](https://documentation.wazuh.com/current/user-manual/capabilities/malware-detection/index.md): Integration with VirusTotal, YARA, and rootkit detection.
+  - [FIM and threat detection rules](https://documentation.wazuh.com/current/user-manual/capabilities/malware-detection/fim-threat-detection-rules.md)
+  - [Rootkits behavior detection](https://documentation.wazuh.com/current/user-manual/capabilities/malware-detection/rootkits-behavior-detection.md)
+  - [CDB Lists and threat intelligence](https://documentation.wazuh.com/current/user-manual/capabilities/malware-detection/cdb-lists-threat-intelligence.md)
+  - [VirusTotal integration](https://documentation.wazuh.com/current/user-manual/capabilities/malware-detection/virus-total-integration.md)
+  - [FIM monitoring and YARA](https://documentation.wazuh.com/current/user-manual/capabilities/malware-detection/fim-yara.md)
+  - [ClamAV logs collection](https://documentation.wazuh.com/current/user-manual/capabilities/malware-detection/clam-av-logs-collection.md)
+  - [Windows Defender logs collection](https://documentation.wazuh.com/current/user-manual/capabilities/malware-detection/win-defender-logs-collection.md)
+  - [Custom rules to detect malware IOC](https://documentation.wazuh.com/current/user-manual/capabilities/malware-detection/custom-rules-malware-ioc.md)
+- [Security Configuration Assessment (SCA)](https://documentation.wazuh.com/current/user-manual/capabilities/sec-config-assessment/index.md): Security compliance auditing.
+  - [How SCA works](https://documentation.wazuh.com/current/user-manual/capabilities/sec-config-assessment/how-it-works.md)
+  - [How to configure SCA](https://documentation.wazuh.com/current/user-manual/capabilities/sec-config-assessment/how-to-configure.md)
+  - [Available SCA policies](https://documentation.wazuh.com/current/user-manual/capabilities/sec-config-assessment/available-sca-policies.md)
+  - [Creating custom SCA policies](https://documentation.wazuh.com/current/user-manual/capabilities/sec-config-assessment/creating-custom-policies.md)
+  - [Use cases](https://documentation.wazuh.com/current/user-manual/capabilities/sec-config-assessment/use-cases.md)
+- [Active Response](https://documentation.wazuh.com/current/user-manual/capabilities/active-response/index.md): Automated triggers for threat mitigation.
+  - [How to configure Active Response](https://documentation.wazuh.com/current/user-manual/capabilities/active-response/how-to-configure.md)
+  - [Default active response scripts](https://documentation.wazuh.com/current/user-manual/capabilities/active-response/default-active-response-scripts.md)
+  - [Custom active response scripts](https://documentation.wazuh.com/current/user-manual/capabilities/active-response/custom-active-response-scripts.md)
+  - [Use cases](https://documentation.wazuh.com/current/user-manual/capabilities/active-response/ar-use-cases/index.md)
+    - [Blocking SSH brute-force attack with Active Response](https://documentation.wazuh.com/current/user-manual/capabilities/active-response/ar-use-cases/blocking-ssh-brute-force.md)
+    - [Restarting the Wazuh agent with Active Response](https://documentation.wazuh.com/current/user-manual/capabilities/active-response/ar-use-cases/restarting-wazuh-agent.md)
+    - [Disabling a Linux user account with Active Response](https://documentation.wazuh.com/current/user-manual/capabilities/active-response/ar-use-cases/disabling-user-account.md)
+  - [Additional information](https://documentation.wazuh.com/current/user-manual/capabilities/active-response/additional-information.md)
+- [Log data collection](https://documentation.wazuh.com/current/user-manual/capabilities/log-data-collection/index.md): Analysis of events and logs.
+- [Vulnerability detection](https://documentation.wazuh.com/current/user-manual/capabilities/vulnerability-detection/index.md): Identifying OS and application vulnerabilities.
+
+### Management & Operations
+- [Server cluster setup](https://documentation.wazuh.com/current/user-manual/wazuh-server-cluster/index.md): High availability for the Wazuh server.
+- [Agent management](https://documentation.wazuh.com/current/user-manual/agent/index.md): Enrollment, grouping, and remote configuration.
+- [Rules and decoders](https://documentation.wazuh.com/current/user-manual/ruleset/index.md): Customizing detection logic and CDB lists.
+- [User administration](https://documentation.wazuh.com/current/user-manual/user-administration/index.md): RBAC, SSO, and multi-tenancy.
+- [Configuration reference](https://documentation.wazuh.com/current/user-manual/reference/index.md): Detailed settings for `ossec.conf`, internal options, and CLI tools.
+
+### Cloud security
+- [Cloud monitoring](https://documentation.wazuh.com/current/cloud-security/monitoring.md): AWS, Azure, GCP, GitHub, and Office 365 monitoring.
+  - [AWS integration](https://documentation.wazuh.com/current/cloud-security/amazon/index.md): Monitor AWS environments.
+  - [Azure integration](https://documentation.wazuh.com/current/cloud-security/azure/index.md): Monitor Azure environments.
+
+### Regulatory compliance
+- [Regulatory compliance](https://documentation.wazuh.com/current/compliance/index.md): Mapping Wazuh to PCI DSS, GDPR, HIPAA, NIST, and TSC.
+  - [PCI DSS compliance](https://documentation.wazuh.com/current/compliance/pci/index.md): PCI DSS requirements and use cases.
+  - [GDPR compliance](https://documentation.wazuh.com/current/compliance/gdpr/index.md): GDPR requirements and use cases.
+  - [HIPAA compliance](https://documentation.wazuh.com/current/compliance/hipaa/index.md): HIPAA requirements and use cases.
+  - [NIST compliance](https://documentation.wazuh.com/current/compliance/nist/index.md): NIST requirements and use cases.
+  - [TSC compliance](https://documentation.wazuh.com/current/compliance/tsc/index.html): TSC requirements and use cases.
+
+### Integrations
+- [Integrations guide](https://documentation.wazuh.com/current/integrations-guide/index.md): Information about integrations and supported platforms.
+- [Indexer integration](https://documentation.wazuh.com/current/user-manual/manager/indexer-integration.md): Forward data from the Wazuh manager to Wazuh or third-party indexers.
+- [External API integration](https://documentation.wazuh.com/current/user-manual/manager/integration-with-external-apis.md): Integrate with external tools.
+
+### Wazuh cloud
+- [Wazuh Cloud service](https://documentation.wazuh.com/current/cloud-service/index.md): Documentation for the Wazuh Cloud (SaaS) offering.
+
+### API documentation
+- [Wazuh Server API](https://documentation.wazuh.com/current/user-manual/api/index.md): Wazuh server API configuration and use cases.
+- [Wazuh Indexer API](https://documentation.wazuh.com/current/user-manual/indexer-api/index.md): Wazuh indexer API  configuration and use cases.
+
+#### API references (HTML)
+- [Wazuh Server API](https://documentation.wazuh.com/current/user-manual/api/reference.html): Detailed reference for the Wazuh server API.
+- [Wazuh Indexer API](https://documentation.wazuh.com/current/user-manual/indexer-api/reference.html): Detailed reference for the Wazuh indexer API.
+
+### Development
+- [Development resources](https://documentation.wazuh.com/current/development/index.md): Source code compilation, packaging, and internal protocols.
+- [Release notes](https://documentation.wazuh.com/current/release-notes/index.md): Changelogs for all current and past versions.
 
 ## Support & Community
 - [Community Hub](https://wazuh.com/community/): Links to Slack, Discord, Reddit, and Mailing lists.
 - [GitHub Issues](https://github.com/wazuh/wazuh-documentation): Report issues with documentation or Markdown mirrors.
+- [Professional support](https://wazuh.com/services/professional-support/): Enterprise support options.
+- [Consulting services](https://wazuh.com/services/consulting-services/): Expert assistance for deployments and custom integrations.
+- [Training courses](https://wazuh.com/services/training-courses/): Official training programs.
 
 ## Discovery resources
 - [Sitemap (current)](https://documentation.wazuh.com/current-sitemap.xml)
@@ -53,4 +243,3 @@
 Preferred-Content-Type: text/markdown
 Canonical-Version: current
 Contact: https://wazuh.com/contact-us/
-Last-Updated: 2026-01-13
