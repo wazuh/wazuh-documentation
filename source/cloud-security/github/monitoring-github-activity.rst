@@ -197,7 +197,7 @@ Take the following steps to invite a member to your organization.
         -H "Authorization: Bearer <API_TOKEN>" \
         -H "X-GitHub-Api-Version: 2022-11-28" \
         https://api.github.com/orgs/<ORG_NAME>/invitations \
-        -d '{"email":"<USER_EMAIL>","role":"direct_member"'
+        -d '{"email":"<USER_EMAIL>","role":"direct_member"}'
 
    Where:
 
