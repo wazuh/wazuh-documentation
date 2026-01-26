@@ -235,12 +235,80 @@
   - [Use Cases](https://documentation.wazuh.com/current/user-manual/capabilities/agentless-monitoring/use-cases.md)
 
 ### Management & Operations
-- [Server cluster setup](https://documentation.wazuh.com/current/user-manual/wazuh-server-cluster/index.md): High availability for the Wazuh server.
-- [Agent management](https://documentation.wazuh.com/current/user-manual/agent/index.md): Enrollment, grouping, and remote configuration.
-- [Rules and decoders](https://documentation.wazuh.com/current/user-manual/ruleset/index.md): Customizing detection logic and CDB lists.
-- [User administration](https://documentation.wazuh.com/current/user-manual/user-administration/index.md): RBAC, SSO, and multi-tenancy.
-- [Configuration reference](https://documentation.wazuh.com/current/user-manual/reference/index.md): Detailed settings for `ossec.conf`, internal options, and CLI tools.
+- [User manual](https://documentation.wazuh.com/current/user-manual/index.md): Comprehensive user guide.
+  - [Wazuh server](https://documentation.wazuh.com/current/user-manual/manager/index.md): Manager component management.
+    - [Wazuh manager](https://documentation.wazuh.com/current/user-manual/manager/wazuh-manager.md)
 
+    - [Alert management](https://documentation.wazuh.com/current/user-manual/manager/alert-management.md)
+    - [Event logging](https://documentation.wazuh.com/current/user-manual/manager/event-logging.md)
+
+    - [Queuing mechanisms](https://documentation.wazuh.com/current/user-manual/manager/wazuh-server-queue.md)
+  - [Wazuh server cluster](https://documentation.wazuh.com/current/user-manual/wazuh-server-cluster/index.md): High availability for the Wazuh server.
+    - [Architecture overview](https://documentation.wazuh.com/current/user-manual/wazuh-server-cluster/architecture-overview.md)
+    - [Types of nodes in a Wazuh server cluster](https://documentation.wazuh.com/current/user-manual/wazuh-server-cluster/types-of-nodes.md)
+    - [How the Wazuh server cluster works](https://documentation.wazuh.com/current/user-manual/wazuh-server-cluster/how-server-cluster-works.md)
+    - [Wazuh cluster nodes configuration](https://documentation.wazuh.com/current/user-manual/wazuh-server-cluster/cluster-nodes-configuration.md)
+    - [Data synchronization](https://documentation.wazuh.com/current/user-manual/wazuh-server-cluster/data-synchronization.md)
+    - [Certificates deployment](https://documentation.wazuh.com/current/user-manual/wazuh-server-cluster/certificates-deployment.md)
+    - [Adding new Wazuh server nodes](https://documentation.wazuh.com/current/user-manual/wazuh-server-cluster/adding-new-server-nodes/index.md)
+      - [Certificates creation](https://documentation.wazuh.com/current/user-manual/wazuh-server-cluster/adding-new-server-nodes/certificates-creation.md)
+      - [Configuring existing components to connect with the new node](https://documentation.wazuh.com/current/user-manual/wazuh-server-cluster/adding-new-server-nodes/configuration-to-connect-with-new-node.md)
+      - [Wazuh server node(s) installation](https://documentation.wazuh.com/current/user-manual/wazuh-server-cluster/adding-new-server-nodes/server-nodes-installation.md)
+      - [Testing the cluster](https://documentation.wazuh.com/current/user-manual/wazuh-server-cluster/adding-new-server-nodes/testing-the-cluster.md)
+    - [Agent connections](https://documentation.wazuh.com/current/user-manual/wazuh-server-cluster/agent-connections.md)
+    - [Load Balancers](https://documentation.wazuh.com/current/user-manual/wazuh-server-cluster/load-balancers.md)
+  - [Wazuh indexer](https://documentation.wazuh.com/current/user-manual/wazuh-indexer/index.md): Data storage and indexing component.
+    - [Wazuh indexer indices](https://documentation.wazuh.com/current/user-manual/wazuh-indexer/wazuh-indexer-indices.md)
+    - [Re-indexing](https://documentation.wazuh.com/current/user-manual/wazuh-indexer/re-indexing.md)
+    - [Wazuh indexer tuning](https://documentation.wazuh.com/current/user-manual/wazuh-indexer/wazuh-indexer-tuning.md)
+    - [Migrating Wazuh indices](https://documentation.wazuh.com/current/user-manual/wazuh-indexer/migrating-wazuh-indices.md)
+    - [Wazuh indexer configuration on hardened endpoints](https://documentation.wazuh.com/current/user-manual/wazuh-indexer/wazuh-indexer-on-hardened-endpoints.md)
+  - [Wazuh indexer cluster](https://documentation.wazuh.com/current/user-manual/wazuh-indexer-cluster/index.md): High availability for the indexer.
+    - [Certificate deployment](https://documentation.wazuh.com/current/user-manual/wazuh-indexer-cluster/certificate-deployment.md)
+    - [Adding Wazuh indexer nodes](https://documentation.wazuh.com/current/user-manual/wazuh-indexer-cluster/add-wazuh-indexer-nodes.md)
+    - [Wazuh indexer cluster tuning](https://documentation.wazuh.com/current/user-manual/wazuh-indexer-cluster/wazuh-indexer-cluster-tuning.md)
+    - [Index lifecycle management](https://documentation.wazuh.com/current/user-manual/wazuh-indexer-cluster/index-lifecycle-management.md)
+    - [Cluster management](https://documentation.wazuh.com/current/user-manual/wazuh-indexer-cluster/cluster-management.md)
+  - [Wazuh dashboard](https://documentation.wazuh.com/current/user-manual/wazuh-dashboard/index.md): Web interface configuration and usage.
+    - [Navigating the Wazuh dashboard](https://documentation.wazuh.com/current/user-manual/wazuh-dashboard/navigating-the-wazuh-dashboard.md)
+    - [Creating custom dashboards](https://documentation.wazuh.com/current/user-manual/wazuh-dashboard/creating-custom-dashboards.md)
+    - [Filtering data using Wazuh Query Language (WQL)](https://documentation.wazuh.com/current/user-manual/wazuh-dashboard/queries.md)
+    - [Enabling multi-tenancy](https://documentation.wazuh.com/current/user-manual/wazuh-dashboard/multi-tenancy.md)
+    - [Configuring third-party SSL certificates](https://documentation.wazuh.com/current/user-manual/wazuh-dashboard/configuring-third-party-certs/index.md)
+      - [Configuring SSL certificates on the Wazuh dashboard using Let’s Encrypt](https://documentation.wazuh.com/current/user-manual/wazuh-dashboard/configuring-third-party-certs/ssl.md)
+      - [Configuring SSL certificates on the Wazuh dashboard using NGINX](https://documentation.wazuh.com/current/user-manual/wazuh-dashboard/configuring-third-party-certs/ssl-nginx.md)
+    - [Setting up custom branding](https://documentation.wazuh.com/current/user-manual/wazuh-dashboard/custom-branding.md)
+    - [Wazuh dashboard settings](https://documentation.wazuh.com/current/user-manual/wazuh-dashboard/settings.md)
+    - [Wazuh global queries](https://documentation.wazuh.com/current/user-manual/wazuh-dashboard/global-queries.md)
+    - [Troubleshooting](https://documentation.wazuh.com/current/user-manual/wazuh-dashboard/troubleshooting.md)
+    - [Certificates deployment](https://documentation.wazuh.com/current/user-manual/wazuh-dashboard/certificates.md)
+  - [Wazuh agent](https://documentation.wazuh.com/current/user-manual/agent/index.md): Enrollment, grouping, and remote configuration.
+    - [Wazuh agent enrollment](https://documentation.wazuh.com/current/user-manual/agent/agent-enrollment/index.md)
+    - [Wazuh agent management](https://documentation.wazuh.com/current/user-manual/agent/agent-management/index.md)
+  - [Data analysis](https://documentation.wazuh.com/current/user-manual/ruleset/index.md): Customizing detection logic and CDB lists.
+    - [Decoders](https://documentation.wazuh.com/current/user-manual/ruleset/decoders/index.md)
+    - [Rules](https://documentation.wazuh.com/current/user-manual/ruleset/rules/index.md)
+    - [Ruleset XML syntax](https://documentation.wazuh.com/current/user-manual/ruleset/ruleset-xml-syntax/index.md)
+    - [Testing decoders and rules](https://documentation.wazuh.com/current/user-manual/ruleset/testing.md)
+    - [Using CDB Lists](https://documentation.wazuh.com/current/user-manual/ruleset/cdb-list.md)
+    - [MITRE ATT&CK framework](https://documentation.wazuh.com/current/user-manual/ruleset/mitre.md)
+  - [User administration](https://documentation.wazuh.com/current/user-manual/user-administration/index.md): RBAC, SSO, and multi-tenancy.
+    - [Password management](https://documentation.wazuh.com/current/user-manual/user-administration/password-management.md)
+    - [Wazuh RBAC - How to create and map internal users](https://documentation.wazuh.com/current/user-manual/user-administration/rbac.md)
+    - [Single sign-On (SSO)](https://documentation.wazuh.com/current/user-manual/user-administration/single-sign-on/index.md)
+    - [LDAP Integration](https://documentation.wazuh.com/current/user-manual/user-administration/ldap.md)
+  - [Configuration reference](https://documentation.wazuh.com/current/user-manual/reference/index.md): Detailed settings for `ossec.conf`, internal options, and CLI tools.
+    - [Local configuration (ossec.conf)](https://documentation.wazuh.com/current/user-manual/reference/ossec-conf/index.md)
+    - [Centralized configuration (agent.conf)](https://documentation.wazuh.com/current/user-manual/reference/centralized-configuration.md)
+    - [Internal configuration](https://documentation.wazuh.com/current/user-manual/reference/internal-options.md)
+    - [Daemons](https://documentation.wazuh.com/current/user-manual/reference/daemons/index.md)
+    - [Tools](https://documentation.wazuh.com/current/user-manual/reference/tools/index.md)
+    - [Unattended installation](https://documentation.wazuh.com/current/user-manual/reference/unattended-installation.md)
+    - [Statistics files](https://documentation.wazuh.com/current/user-manual/reference/statistics-files/index.md)
+      - [wzuh-agentd.state](https://documentation.wazuh.com/current/user-manual/reference/statistics-files/wazuh-agentd-state.md)
+      - [wazuh-remoted.state](https://documentation.wazuh.com/current/user-manual/reference/statistics-files/wazuh-remoted-state.md)
+      - [wazuh-analysisd.state](https://documentation.wazuh.com/current/user-manual/reference/statistics-files/wazuh-analysisd-state.md)
+      - [wazuh-logcollector.state](https://documentation.wazuh.com/current/user-manual/reference/statistics-files/wazuh-logcollector-state.md)
 ### Cloud security
 - [Cloud security](https://documentation.wazuh.com/current/cloud-security/monitoring.md): AWS, Azure, GCP, GitHub, and Office 365 monitoring.
   - [Monitoring Amazon Web Services (AWS)](https://documentation.wazuh.com/current/cloud-security/amazon/index.md): Monitor AWS environments.
