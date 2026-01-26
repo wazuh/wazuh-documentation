@@ -14,6 +14,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated the *Use case: Detecting malware on Windows endpoints using YARA* section. ([#9205](https://github.com/wazuh/wazuh-documentation/pull/9205))
 - **Post-release**: Added new step in *Disk space utilization on Linux endpoint* documentation. ([#9210](https://github.com/wazuh/wazuh-documentation/pull/9210))
 - **Post-release**: Updated step in *Upgrading the Wazuh dashboard* documentation. ([#9217](https://github.com/wazuh/wazuh-documentation/pull/9217))
+- **Post-release**: Updated *Wazuh server configuration* section in *Malware Detection* documentation. ([#9236](https://github.com/wazuh/wazuh-documentation/pull/9236))
 
 ### Fixed
 
