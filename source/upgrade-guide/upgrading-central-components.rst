@@ -646,7 +646,7 @@ Backup the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file to save your 
 
 #. Manually reapply any configuration changes to the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file. Ensure that the values of ``server.ssl.key`` and ``server.ssl.certificate`` match the files located in ``/etc/wazuh-dashboard/certs/``.
 
-#. Ensure the value of ``uiSettings.overrides.defaultRoute`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file is set to ``/app/wz-home`` as shown below:
+#. If you are upgrading from Wazuh versions 4.7 and earlier, ensure the value of ``uiSettings.overrides.defaultRoute`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file is set to ``/app/wz-home`` as shown below:
 
    .. code-block:: yaml
 
