@@ -186,7 +186,53 @@
     - [Disabling a Linux user account with Active Response](https://documentation.wazuh.com/current/user-manual/capabilities/active-response/ar-use-cases/disabling-user-account.md)
   - [Additional information](https://documentation.wazuh.com/current/user-manual/capabilities/active-response/additional-information.md)
 - [Log data collection](https://documentation.wazuh.com/current/user-manual/capabilities/log-data-collection/index.md): Analysis of events and logs.
+  - [How it works](https://documentation.wazuh.com/current/user-manual/capabilities/log-data-collection/how-it-works.md)
+  - [Configuration for monitoring log files](https://documentation.wazuh.com/current/user-manual/capabilities/log-data-collection/monitoring-log-files.md)
+  - [Configuring syslog on the Wazuh server](https://documentation.wazuh.com/current/user-manual/capabilities/log-data-collection/syslog.md)
+  - [Journald log collection](https://documentation.wazuh.com/current/user-manual/capabilities/log-data-collection/journald.md)
+  - [Using multiple socket outputs](https://documentation.wazuh.com/current/user-manual/capabilities/log-data-collection/multiple-socket-outputs.md)
+  - [Configuring log collection for different operating systems](https://documentation.wazuh.com/current/user-manual/capabilities/log-data-collection/configuration.md)
+  - [Log data analysis](https://documentation.wazuh.com/current/user-manual/capabilities/log-data-collection/log-data-analysis.md)
+  - [Use cases](https://documentation.wazuh.com/current/user-manual/capabilities/log-data-collection/use-cases.md)
 - [Vulnerability detection](https://documentation.wazuh.com/current/user-manual/capabilities/vulnerability-detection/index.md): Identifying OS and application vulnerabilities.
+  - [How it works](https://documentation.wazuh.com/current/user-manual/capabilities/vulnerability-detection/how-it-works.md)
+  - [Configuration](https://documentation.wazuh.com/current/user-manual/capabilities/vulnerability-detection/configuring-scans.md)
+- [Command monitoring](https://documentation.wazuh.com/current/user-manual/capabilities/command-monitoring/index.md): Monitoring command outputs.
+  - [How it works](https://documentation.wazuh.com/current/user-manual/capabilities/command-monitoring/how-it-works.md)
+  - [Configuration](https://documentation.wazuh.com/current/user-manual/capabilities/command-monitoring/configuration.md)
+  - [Command output analysis](https://documentation.wazuh.com/current/user-manual/capabilities/command-monitoring/command-output-analysis.md)
+  - [Use cases](https://documentation.wazuh.com/current/user-manual/capabilities/command-monitoring/use-cases/index.md)
+    - [Monitoring running processes](https://documentation.wazuh.com/current/user-manual/capabilities/command-monitoring/use-cases/monitoring-running-processes.md)
+    - [Disk space utilization](https://documentation.wazuh.com/current/user-manual/capabilities/command-monitoring/use-cases/disk-space-utilization.md)
+    - [Check if the output changed](https://documentation.wazuh.com/current/user-manual/capabilities/command-monitoring/use-cases/check-if-the-output-changed.md)
+    - [Detect USB storage](https://documentation.wazuh.com/current/user-manual/capabilities/command-monitoring/use-cases/detect-usb-storage.md)
+    - [Load average](https://documentation.wazuh.com/current/user-manual/capabilities/command-monitoring/use-cases/load-average.md)
+- [Container Security](https://documentation.wazuh.com/current/user-manual/capabilities/container-security/index.md): Docker container monitoring.
+  - [Using Wazuh to monitor Docker](https://documentation.wazuh.com/current/user-manual/capabilities/container-security/monitoring-docker.md)
+  - [Use cases](https://documentation.wazuh.com/current/user-manual/capabilities/container-security/use-cases.md)
+- [System inventory](https://documentation.wazuh.com/current/user-manual/capabilities/system-inventory/index.md): Asset discovery and management.
+  - [How it works](https://documentation.wazuh.com/current/user-manual/capabilities/system-inventory/how-it-works.md)
+  - [Configuration](https://documentation.wazuh.com/current/user-manual/capabilities/system-inventory/configuration.md)
+  - [Viewing system inventory data](https://documentation.wazuh.com/current/user-manual/capabilities/system-inventory/viewing-system-inventory-data.md)
+  - [Generating system inventory reports](https://documentation.wazuh.com/current/user-manual/capabilities/system-inventory/generating-system-inventory-reports.md)
+  - [Available inventory fields](https://documentation.wazuh.com/current/user-manual/capabilities/system-inventory/available-inventory-fields.md)
+  - [Compatibility matrix](https://documentation.wazuh.com/current/user-manual/capabilities/system-inventory/compatibility-matrix.md)
+  - [Using Syscollector information to trigger alerts](https://documentation.wazuh.com/current/user-manual/capabilities/system-inventory/using-syscollector-information-to-trigger-alerts.md)
+  - [Use cases](https://documentation.wazuh.com/current/user-manual/capabilities/system-inventory/use-cases.md)
+  - [OSQuery](https://documentation.wazuh.com/current/user-manual/capabilities/system-inventory/osquery.md)
+- [Monitoring system calls](https://documentation.wazuh.com/current/user-manual/capabilities/system-calls-monitoring/index.md): Auditd integration for system call monitoring.
+  - [How it works](https://documentation.wazuh.com/current/user-manual/capabilities/system-calls-monitoring/how-it-works.md)
+  - [Configuration](https://documentation.wazuh.com/current/user-manual/capabilities/system-calls-monitoring/audit-configuration.md)
+  - [Use cases](https://documentation.wazuh.com/current/user-manual/capabilities/system-calls-monitoring/use-cases/index.md)
+    - [Monitoring file and directory access](https://documentation.wazuh.com/current/user-manual/capabilities/system-calls-monitoring/use-cases/monitoring-file-and-directory-access.md)
+    - [Monitoring commands run as root](https://documentation.wazuh.com/current/user-manual/capabilities/system-calls-monitoring/use-cases/monitoring-commands-run-as-root.md)
+    - [Privilege abuse](https://documentation.wazuh.com/current/user-manual/capabilities/system-calls-monitoring/use-cases/privilege-abuse.md)
+- [Agentless monitoring](https://documentation.wazuh.com/current/user-manual/capabilities/agentless-monitoring/index.md): Monitoring without installing agents.
+  - [How it works](https://documentation.wazuh.com/current/user-manual/capabilities/agentless-monitoring/how-it-works.md)
+  - [Connection](https://documentation.wazuh.com/current/user-manual/capabilities/agentless-monitoring/connection.md)
+  - [Configuration](https://documentation.wazuh.com/current/user-manual/capabilities/agentless-monitoring/agentless-configuration.md)
+  - [Visualization](https://documentation.wazuh.com/current/user-manual/capabilities/agentless-monitoring/visualization.md)
+  - [Use Cases](https://documentation.wazuh.com/current/user-manual/capabilities/agentless-monitoring/use-cases.md)
 
 ### Management & Operations
 - [Server cluster setup](https://documentation.wazuh.com/current/user-manual/wazuh-server-cluster/index.md): High availability for the Wazuh server.
@@ -196,29 +242,134 @@
 - [Configuration reference](https://documentation.wazuh.com/current/user-manual/reference/index.md): Detailed settings for `ossec.conf`, internal options, and CLI tools.
 
 ### Cloud security
-- [Cloud monitoring](https://documentation.wazuh.com/current/cloud-security/monitoring.md): AWS, Azure, GCP, GitHub, and Office 365 monitoring.
-  - [AWS integration](https://documentation.wazuh.com/current/cloud-security/amazon/index.md): Monitor AWS environments.
-  - [Azure integration](https://documentation.wazuh.com/current/cloud-security/azure/index.md): Monitor Azure environments.
+- [Cloud security](https://documentation.wazuh.com/current/cloud-security/monitoring.md): AWS, Azure, GCP, GitHub, and Office 365 monitoring.
+  - [Monitoring Amazon Web Services (AWS)](https://documentation.wazuh.com/current/cloud-security/amazon/index.md): Monitor AWS environments.
+    - [Monitoring AWS instances](https://documentation.wazuh.com/current/cloud-security/amazon/instances.md)
+    - [Monitoring AWS based services](https://documentation.wazuh.com/current/cloud-security/amazon/services/index.md)
+  - [Monitoring Microsoft Azure with Wazuh](https://documentation.wazuh.com/current/cloud-security/azure/index.md): Monitor Azure environments.
+    - [Monitoring instances](https://documentation.wazuh.com/current/cloud-security/azure/monitoring-instances.md)
+    - [Monitoring Azure platform and services](https://documentation.wazuh.com/current/cloud-security/azure/platform-and-services.md)
+    - [Microsoft Azure Log Analytics](https://documentation.wazuh.com/current/cloud-security/azure/log-analytics.md)
+    - [Microsoft Azure Storage](https://documentation.wazuh.com/current/cloud-security/azure/storage.md)
+    - [Microsoft Graph](https://documentation.wazuh.com/current/cloud-security/azure/graph.md)
+    - [Monitoring Microsoft Graph services with Wazuh](https://documentation.wazuh.com/current/cloud-security/azure/monitoring-ms-graph.md)
+    - [MS Intune integration](https://documentation.wazuh.com/current/cloud-security/azure/ms-intune-integration.md)
+  - [Monitoring GitHub](https://documentation.wazuh.com/current/cloud-security/github/index.md)
+    - [Monitoring GitHub audit logs](https://documentation.wazuh.com/current/cloud-security/github/monitoring-github-activity.md)
+  - [Monitoring Google Cloud](https://documentation.wazuh.com/current/cloud-security/gcp/index.md)
+    - [Monitoring Google Cloud instances](https://documentation.wazuh.com/current/cloud-security/gcp/instances.md)
+    - [Monitoring Google Cloud services](https://documentation.wazuh.com/current/cloud-security/gcp/services.md)
+    - [Cloud Security Posture Management](https://documentation.wazuh.com/current/cloud-security/gcp/posture-management.md)
+  - [Monitoring Office 365](https://documentation.wazuh.com/current/cloud-security/office365/index.md)
+    - [Monitoring Office 365 audit logs](https://documentation.wazuh.com/current/cloud-security/office365/monitoring-office365-activity.md)
 
 ### Regulatory compliance
 - [Regulatory compliance](https://documentation.wazuh.com/current/compliance/index.md): Mapping Wazuh to PCI DSS, GDPR, HIPAA, NIST, and TSC.
-  - [PCI DSS compliance](https://documentation.wazuh.com/current/compliance/pci/index.md): PCI DSS requirements and use cases.
-  - [GDPR compliance](https://documentation.wazuh.com/current/compliance/gdpr/index.md): GDPR requirements and use cases.
-  - [HIPAA compliance](https://documentation.wazuh.com/current/compliance/hipaa/index.md): HIPAA requirements and use cases.
-  - [NIST compliance](https://documentation.wazuh.com/current/compliance/nist/index.md): NIST requirements and use cases.
-  - [TSC compliance](https://documentation.wazuh.com/current/compliance/tsc/index.html): TSC requirements and use cases.
+  - [Using Wazuh for PCI DSS compliance](https://documentation.wazuh.com/current/compliance/pci-dss/index.md): PCI DSS requirements and use cases.
+    - [Log data analysis](https://documentation.wazuh.com/current/compliance/pci-dss/log-analysis.md)
+    - [Configuration assessment](https://documentation.wazuh.com/current/compliance/pci-dss/configuration-assessment.md)
+    - [Malware detection](https://documentation.wazuh.com/current/compliance/pci-dss/malware-detection.md)
+    - [File integrity monitoring](https://documentation.wazuh.com/current/compliance/pci-dss/file-integrity-monitoring.md)
+    - [Vulnerability detection](https://documentation.wazuh.com/current/compliance/pci-dss/vulnerability-detection.md)
+    - [Active response](https://documentation.wazuh.com/current/compliance/pci-dss/active-response.md)
+    - [System inventory](https://documentation.wazuh.com/current/compliance/pci-dss/system-inventory.md)
+    - [Visualization and dashboard](https://documentation.wazuh.com/current/compliance/pci-dss/dashboard.md)
+  - [Using Wazuh for GDPR compliance](https://documentation.wazuh.com/current/compliance/gdpr/index.md): GDPR requirements and use cases.
+    - [GDPR II, Principles <gdpr_II>](https://documentation.wazuh.com/current/compliance/gdpr/gdpr-II.md)
+    - [GDPR III, Rights of the data subject <gdpr_III>](https://documentation.wazuh.com/current/compliance/gdpr/gdpr-III.md)
+    - [GDPR IV, Controller and processor <gdpr_IV>](https://documentation.wazuh.com/current/compliance/gdpr/gdpr-IV.md)
+  - [Using Wazuh for HIPAA compliance](https://documentation.wazuh.com/current/compliance/hipaa/index.md): HIPAA requirements and use cases.
+    - [Visualization and dashboard](https://documentation.wazuh.com/current/compliance/hipaa/visualization-and-dashboard.md)
+    - [Log data analysis](https://documentation.wazuh.com/current/compliance/hipaa/log-data-analysis.md)
+    - [Configuration assessment](https://documentation.wazuh.com/current/compliance/hipaa/configuration-assessment.md)
+    - [Malware detection](https://documentation.wazuh.com/current/compliance/hipaa/malware-detection.md)
+    - [File integrity monitoring](https://documentation.wazuh.com/current/compliance/hipaa/file-integrity-monitoring.md)
+    - [Vulnerability detection](https://documentation.wazuh.com/current/compliance/hipaa/vulnerability-detection.md)
+    - [Active response](https://documentation.wazuh.com/current/compliance/hipaa/active-response.md)
+  - [Using Wazuh for NIST 800-53 compliance](https://documentation.wazuh.com/current/compliance/nist/index.md): NIST requirements and use cases.
+    - [Visualization and dashboard](https://documentation.wazuh.com/current/compliance/nist/visualization-and-dashboard.md)
+    - [Log data analysis](https://documentation.wazuh.com/current/compliance/nist/log-data-analysis.md)
+    - [Security configuration assessment](https://documentation.wazuh.com/current/compliance/nist/configuration-assessment.md)
+    - [Malware detection](https://documentation.wazuh.com/current/compliance/nist/malware-detection.md)
+    - [File integrity monitoring](https://documentation.wazuh.com/current/compliance/nist/file-integrity-monitoring.md)
+    - [System inventory](https://documentation.wazuh.com/current/compliance/nist/system-inventory.md)
+    - [Vulnerability detection](https://documentation.wazuh.com/current/compliance/nist/vulnerability-detection.md)
+    - [Active response](https://documentation.wazuh.com/current/compliance/nist/active-response.md)
+    - [Threat Intelligence](https://documentation.wazuh.com/current/compliance/nist/threat-intelligence.md)
+  - [Using Wazuh for TSC compliance](https://documentation.wazuh.com/current/compliance/tsc/index.md): TSC requirements and use cases.
+    - The COSO Principle and Common Criteria
+      - [Common criteria 2.1](https://documentation.wazuh.com/current/compliance/tsc/common-criteria/cc2.1.md)
+      - [Common criteria 3.1](https://documentation.wazuh.com/current/compliance/tsc/common-criteria/cc3.1.md)
+      - [Common criteria 5.1](https://documentation.wazuh.com/current/compliance/tsc/common-criteria/cc5.1.md)
+      - [Common criteria 6.1](https://documentation.wazuh.com/current/compliance/tsc/common-criteria/cc6.1.md)
+      - [Common criteria 7.1](https://documentation.wazuh.com/current/compliance/tsc/common-criteria/cc7.1.md)
+      - [Common criteria 8.1](https://documentation.wazuh.com/current/compliance/tsc/common-criteria/cc8.1.md)
+    - [Additional Criteria](https://documentation.wazuh.com/current/compliance/tsc/additional-criteria/additional-criteria.md)
+      - [Availability - A1.1](https://documentation.wazuh.com/current/compliance/tsc/additional-criteria/a1.1.md)
+      - [Processing integrity - PI1.4](https://documentation.wazuh.com/current/compliance/tsc/additional-criteria/pi1.4.md)
 
 ### Integrations
 - [Integrations guide](https://documentation.wazuh.com/current/integrations-guide/index.md): Information about integrations and supported platforms.
+  - [Elastic Stack](https://documentation.wazuh.com/current/integrations-guide/elastic-stack/index.md)
+  - [OpenSearch](https://documentation.wazuh.com/current/integrations-guide/opensearch/index.md)
+  - [Splunk](https://documentation.wazuh.com/current/integrations-guide/splunk/index.md)
+  - [Amazon Security Lake](https://documentation.wazuh.com/current/integrations-guide/amazon-security-lake/index.md)
 - [Indexer integration](https://documentation.wazuh.com/current/user-manual/manager/indexer-integration.md): Forward data from the Wazuh manager to Wazuh or third-party indexers.
 - [External API integration](https://documentation.wazuh.com/current/user-manual/manager/integration-with-external-apis.md): Integrate with external tools.
 
 ### Wazuh cloud
 - [Wazuh Cloud service](https://documentation.wazuh.com/current/cloud-service/index.md): Documentation for the Wazuh Cloud (SaaS) offering.
+  - [Getting started](https://documentation.wazuh.com/current/cloud-service/getting-started/index.md)
+    - [Sign up for a trial](https://documentation.wazuh.com/current/cloud-service/getting-started/sign-up-trial.md)
+    - [Accessing the Wazuh dashboard](https://documentation.wazuh.com/current/cloud-service/getting-started/access-wazuh-wui.md)
+    - [Enrolling agents](https://documentation.wazuh.com/current/cloud-service/getting-started/enroll-agents.md)
+    - [Cloud service FAQ](https://documentation.wazuh.com/current/cloud-service/getting-started/starting-faq.md)
+  - [Your environment](https://documentation.wazuh.com/current/cloud-service/your-environment/index.md)
+    - [Authentication and authorization](https://documentation.wazuh.com/current/cloud-service/your-environment/manage-auth.md)
+    - [Settings](https://documentation.wazuh.com/current/cloud-service/your-environment/settings.md)
+    - [Limits](https://documentation.wazuh.com/current/cloud-service/your-environment/limits.md)
+    - [Limitations](https://documentation.wazuh.com/current/cloud-service/your-environment/limitations.md)
+    - [Cancellation](https://documentation.wazuh.com/current/cloud-service/your-environment/cancel-environment.md)
+    - [Monitor usage](https://documentation.wazuh.com/current/cloud-service/your-environment/monitor-environment-usage.md)
+    - [Forward syslog events](https://documentation.wazuh.com/current/cloud-service/your-environment/send-syslog-data.md)
+    - [Agents without Internet access](https://documentation.wazuh.com/current/cloud-service/your-environment/agents-without-internet.md)
+    - [SMTP configuration](https://documentation.wazuh.com/current/cloud-service/your-environment/configure-email.md)
+    - [Custom DNS](https://documentation.wazuh.com/current/cloud-service/your-environment/custom-dns.md)
+    - [Technical FAQ](https://documentation.wazuh.com/current/cloud-service/your-environment/technical-faq.md)
+  - [AI Analyst](https://documentation.wazuh.com/current/cloud-service/ai-analyst.md)
+  - [Account and billing](https://documentation.wazuh.com/current/cloud-service/account-billing/index.md)
+    - [Edit user settings](https://documentation.wazuh.com/current/cloud-service/account-billing/user-settings.md)
+    - [Manage your billing details](https://documentation.wazuh.com/current/cloud-service/account-billing/manage-billing-details.md)
+    - [See your billing cycle and history](https://documentation.wazuh.com/current/cloud-service/account-billing/billing-history.md)
+    - [Update billing and operational contacts](https://documentation.wazuh.com/current/cloud-service/account-billing/update-billing.md)
+    - [Stop charges for an environment](https://documentation.wazuh.com/current/cloud-service/account-billing/stop-charges.md)
+    - [Billing FAQ](https://documentation.wazuh.com/current/cloud-service/account-billing/billing-faq.md)
+  - [Archive data](https://documentation.wazuh.com/current/cloud-service/archive-data/index.md)
+    - [Configuration](https://documentation.wazuh.com/current/cloud-service/archive-data/configuration.md)
+    - [Filename Format](https://documentation.wazuh.com/current/cloud-service/archive-data/filename-format.md)
+    - [Access](https://documentation.wazuh.com/current/cloud-service/archive-data/access.md)
+  - [Wazuh Cloud API](https://documentation.wazuh.com/current/cloud-service/apis/index.md)
+    - [Authentication](https://documentation.wazuh.com/current/cloud-service/apis/authentication.md)
+    - [Reference](https://documentation.wazuh.com/current/cloud-service/apis/reference.md)
+  - [CLI](https://documentation.wazuh.com/current/cloud-service/cli/index.md)
+  - [Glossary](https://documentation.wazuh.com/current/cloud-service/glossary.md)
 
 ### API documentation
-- [Wazuh Server API](https://documentation.wazuh.com/current/user-manual/api/index.md): Wazuh server API configuration and use cases.
-- [Wazuh Indexer API](https://documentation.wazuh.com/current/user-manual/indexer-api/index.md): Wazuh indexer API  configuration and use cases.
+- [Wazuh server API](https://documentation.wazuh.com/current/user-manual/api/index.md): Wazuh server API configuration and use cases.
+  - [Getting Started](https://documentation.wazuh.com/current/user-manual/api/getting-started.md)
+  - [Configuration](https://documentation.wazuh.com/current/user-manual/api/configuration.md)
+  - [Securing the Wazuh server API](https://documentation.wazuh.com/current/user-manual/api/securing-api.md)
+  - [Role-Based Access Control](https://documentation.wazuh.com/current/user-manual/api/rbac/index.md)
+    - [How it works](https://documentation.wazuh.com/current/user-manual/api/rbac/how-it-works.md)
+    - [Authorization Context](https://documentation.wazuh.com/current/user-manual/api/rbac/auth-context.md)
+    - [RBAC Reference](https://documentation.wazuh.com/current/user-manual/api/rbac/reference.md)
+  - [Filtering data using Wazuh Query Language (WQL)](https://documentation.wazuh.com/current/user-manual/api/queries.md)
+  - [Use cases](https://documentation.wazuh.com/current/user-manual/api/use-cases.md)
+- [Wazuh indexer API](https://documentation.wazuh.com/current/user-manual/indexer-api/index.md): Wazuh indexer API configuration and use cases.
+  - [Getting started](https://documentation.wazuh.com/current/user-manual/indexer-api/getting-started.md)
+  - [Configuration](https://documentation.wazuh.com/current/user-manual/indexer-api/configuration.md)
+  - [Securing the Wazuh indexer API](https://documentation.wazuh.com/current/user-manual/indexer-api/securing-indexer-api.md)
+  - [Use cases](https://documentation.wazuh.com/current/user-manual/indexer-api/use-case.md)
 
 #### API references (HTML)
 - [Wazuh Server API](https://documentation.wazuh.com/current/user-manual/api/reference.html): Detailed reference for the Wazuh server API.
@@ -226,7 +377,26 @@
 
 ### Development
 - [Development resources](https://documentation.wazuh.com/current/development/index.md): Source code compilation, packaging, and internal protocols.
+  - [Client keys file](https://documentation.wazuh.com/current/development/client-keys.md)
+  - [Standard Wazuh message format](https://documentation.wazuh.com/current/development/message-format.md)
+  - [Makefile options](https://documentation.wazuh.com/current/development/makefile.md)
+  - [Wazuh server cluster](https://documentation.wazuh.com/current/development/wazuh-cluster.md)
+  - [Wazuh package generation](https://documentation.wazuh.com/current/development/packaging/index.md)
+    - [Virtual machine](https://documentation.wazuh.com/current/development/packaging/generate-ova.md)
+    - [Wazuh server](https://documentation.wazuh.com/current/development/packaging/generate-server-package.md)
+    - [Wazuh indexer](https://documentation.wazuh.com/current/development/packaging/generate-indexer-package.md)
+    - [Wazuh dashboard](https://documentation.wazuh.com/current/development/packaging/generate-dashboard-package.md)
+    - [Wazuh agent](https://documentation.wazuh.com/current/development/packaging/generate-agent-package.md)
+  - [Wazuh-Logtest](https://documentation.wazuh.com/current/development/wazuh-logtest.md)
+  - [RBAC database integrity](https://documentation.wazuh.com/current/development/rbac-database-integrity.md)
+  - [Configuring core dump generation](https://documentation.wazuh.com/current/development/coredump.md)
 - [Release notes](https://documentation.wazuh.com/current/release-notes/index.md): Changelogs for all current and past versions.
+  - [Index 2.x](https://documentation.wazuh.com/current/release-notes/index-2x.md)
+  - [Index 3.x](https://documentation.wazuh.com/current/release-notes/index-3x.md)
+  - [Index 4.x](https://documentation.wazuh.com/current/release-notes/index-4x.md)
+  - [Release 2.1](https://documentation.wazuh.com/current/release-notes/release-2-1.md)
+  - [Release 3.x.x](https://documentation.wazuh.com/current/release-notes/release-3-0-0.md) through [Release 3.13.6](https://documentation.wazuh.com/current/release-notes/release-3-13-6.md)
+  - [Release 4.x.x](https://documentation.wazuh.com/current/release-notes/release-4-0-0.md) through [Release 4.14.2](https://documentation.wazuh.com/current/release-notes/release-4-14-2.md)
 
 ## Support & Community
 - [Community Hub](https://wazuh.com/community/): Links to Slack, Discord, Reddit, and Mailing lists.
