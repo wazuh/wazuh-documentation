@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- **Post-release**: Added LLMs-ready documentation. ([#9201](https://github.com/wazuh/wazuh-documentation/pull/9201)) ([#9232](https://github.com/wazuh/wazuh-documentation/pull/9232))
+- **Post-release**: Added LLMs-ready documentation. ([#9201](https://github.com/wazuh/wazuh-documentation/pull/9201)) ([#9232](https://github.com/wazuh/wazuh-documentation/pull/9232)) ([#9238](https://github.com/wazuh/wazuh-documentation/pull/9238))
 - **Post-release**: Added note about macOS WPK ARM packages in 4.14.2 and earlier versions. ([#9224](https://github.com/wazuh/wazuh-documentation/pull/9224))
 
 ### Changed
