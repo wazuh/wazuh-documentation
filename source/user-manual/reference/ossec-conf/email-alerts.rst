@@ -148,7 +148,7 @@ This disables grouping of multiple alerts into the same email.
 +--------------------+-----------------------+
 
 
-.. warning::
+.. note::
 	Notice that **do_not_delay** and **do_not_group** are special empty-element XML tags, so they stand alone, not having a starting and ending version of the tag.  This is indicated by the tag name containing "/" at the end of the name.
 
 Example of configuration

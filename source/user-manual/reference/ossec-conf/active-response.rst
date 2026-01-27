@@ -172,7 +172,7 @@ Sets timeouts in minutes for repeat offenders. This is a comma-separated list of
 | **Allowed values** | A positive number (minutes) |
 +--------------------+-----------------------------+
 
-.. warning::
+.. note::
     This option must be configured directly in the **ossec.conf** file of the agent (currently not supported by agents running on Windows), even when using a manager/agent setup with a centralized configuration of other settings via **agent.conf**. Apart from that, it has to be defined in the upper ``<active-response>`` section found in the configuration file.
 
 Sample Configuration

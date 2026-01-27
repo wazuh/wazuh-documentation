@@ -174,7 +174,7 @@ You will use the ``key`` and ``ID`` of the application saved during the previous
 
 Check the :doc:`Wazuh module for Azure </user-manual/reference/ossec-conf/wodle-azure-logs>` reference for more information about using the different available parameters. Please see the :ref:`wazuh_azure_authentication_file` section for guidance on how to set up credentials to monitor your Microsoft Entra ID.
 
-.. warning::
+.. note::
 
    The field ``tenantdomain`` is mandatory. You can obtain it from the **Overview** section in **Microsoft Entra ID**.
 

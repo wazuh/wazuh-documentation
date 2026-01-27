@@ -133,7 +133,7 @@ This block configures the credential for the **authentication** with the GitHub 
 - `api_auth\\org_name`_
 - `api_auth\\api_token`_
 
-.. warning::
+.. note::
 
     In case of invalid configuration, after the third scan attempt, a warning message is generated in the log file and an alert is triggered.
 

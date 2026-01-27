@@ -180,7 +180,7 @@ This block configures the credentials used for authenticating with the Microsoft
 - `api_auth\\secret_value`_
 - `api_auth\\api_type`_
 
-.. warning:: In the case of an invalid configuration, a warning message will be generated in the log file.
+.. note:: In the case of an invalid configuration, a warning message will be generated in the log file.
 
 +----------------------------------------+----------------------------------------------+
 | Options                                | Allowed values                               |
