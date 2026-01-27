@@ -86,7 +86,7 @@ Check the :ref:`credentials <getting_access_credentials>` section for guidance o
 
    -  ``<auth_path>`` is the full path of where the workspace secret key is stored.
    -  ``<container>`` contains useful parameters while fetching blog storage contents.
-   -  ``<container name="insights-activity-logs">`` the log container that will be streamed.
+   -  ``<container name="insights-logs-auditlogs">`` the log container that will be streamed.
    -  ``<blobs>.json</blobs>`` is the blob format that will be downloaded.
    -  ``<time_offset>`` is the timeframe dated backward. In this case, all logs within a 24-hour timeframe will be downloaded.
    -  ``<content_type>`` is the format for storing the content of the blobs.
