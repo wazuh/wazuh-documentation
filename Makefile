@@ -66,12 +66,14 @@ search-index:
 	npx -y pagefind@v1.1.0 --site $(BUILDDIR)/html --force-language en
 
 html-production:
+	rm -rf $(BUILDDIR)/doctrees/*
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html -t production
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html. (production mode)"
 	@echo
 
 html-development:
+	rm -rf $(BUILDDIR)/doctrees/*
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html -t dev
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html. (dev mode)"
