@@ -15,17 +15,19 @@ If this PR resolves an issue, use the `closes` keyword followed by the issue num
 -->
 
 ## Documentation compilation
-- [ ] Verified that documentation compiles without warnings.
+- [ ] Verify that documentation compiles without warnings.
 
 ## Changelog
-- [ ] Updated `CHANGELOG.md`.
+- [ ] Update `CHANGELOG.md`.
 
-## Code formatting & web optimization
-- [ ] Added or updated meta descriptions.
-- [ ] Updated `redirects.js` if necessary ([guide](https://github.com/wazuh/wazuh-documentation/blob/master/NEW_RELEASE.md)).
-- [ ] Used three-space indentation in `.rst` files.
+## Web optimization & code formatting
+- Page references
+  - [ ] Update `/_static/js/redirects.js` if necessary ([guide](https://github.com/wazuh/wazuh-documentation/blob/master/NEW_RELEASE.md)).
+  - [ ] Update `/llms.txt` if necessary.
+- [ ] Add or update meta descriptions.
+- [ ] Use three-space indentation in `.rst` files.
 
 ## Writing style
-- [ ] Used **bold** for UI elements, _italics_ for key terms or emphasis, and `code` font for Bash commands, file names, REST paths, and code.
-- [ ] Followed present tense, active voice, and a semi-formal tone.
-- [ ] Wrote short, clear, and concise sentences.
+- [ ] Use **bold** for UI elements, _italics_ for key terms and emphasis, and `code` font for Bash commands, file names, REST paths, and code.
+- [ ] Follow present tense, active voice, and a semi-formal tone.
+- [ ] Write short, clear, and concise sentences.
