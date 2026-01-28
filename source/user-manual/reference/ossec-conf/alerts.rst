@@ -43,7 +43,7 @@ email_alert_level
 
 Sets the minimum severity level for an alert to generate an email notification.
 
-.. warning::
+.. note::
 	This is the minimum level for an alert to trigger an email.
 	This setting overrides granular email alert configuration.
 	Setting this to 10 will prevent the sending of emails for alerts with levels lower than 10, even when there are settings in the granular email configuration referencing levels lower than 10.

@@ -181,7 +181,7 @@ Restart the Wazuh manager service to apply the changes after every configuration
 
 .. include:: /_templates/common/restart_manager.rst
 
-.. warning::
+.. note::
 
    Wazuh doesn't handle SMTP authentication. If your email service uses this, you need to :ref:`configure a server relay <smtp_server_with_authentication>`.
 
@@ -194,7 +194,7 @@ Wazuh allows granular configuration options for email alerts. This setting exten
 
 Below are some sample granular configurations for sending alerts via email. For more information, see the :ref:`email_alerts <reference_ossec_email_alerts>` section.
 
-.. warning::
+.. note::
 
    The minimum severity level configured in the ``<alerts>`` section applies to and overrides these granular email configurations. For example, if you configure the Wazuh manager to send an email when rule ``526`` is triggered, but the rule has a level lower than the minimum level specified in the ``<alerts>`` section, the alert will not be sent.
 

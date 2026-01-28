@@ -21,7 +21,7 @@ By default, the Wazuh agent runs scans for every policy (``.yaml`` or ``.yml`` f
 - Windows agents: ``C:\Program Files (x86)\ossec-agent\ruleset\sca``.
 - macOS agents: ``/Library/Ossec/ruleset/sca``.
 
-.. warning::
+.. note::
     The contents of the aforementioned default ruleset folders are neither kept across installations nor updates. Place them under an alternative folder if you wish to modify or add new policies.
 
 To enable a policy file outside the Wazuh agent installation folder, add the policy file path to the ``<sca>`` block in the Wazuh agent configuration file. An example is shown below:

@@ -184,7 +184,7 @@ The following table shows the configuration options for the Wazuh dashboard:
 | wazuh.monitoring.enabled        | Enables or disables the ``wazuh-monitoring`` index      | ``True``                                            | true,false              |
 |                                 | creation and/or visualization:                          |                                                     |                         |
 |                                 |                                                         |                                                     |                         |
-|                                 | - When the value is set to ``true``, the Wazuh          | .. warning:: The Wazuh dashboard user interface     |                         |
+|                                 | - When the value is set to ``true``, the Wazuh          | .. note:: The Wazuh dashboard user interface        |                         |
 |                                 |   dashboard will show the *Agents connection states*    |     allows selecting either ``true`` or             |                         |
 |                                 |   visualization and will insert monitoring-related data.|     ``false`` option.                               |                         |
 |                                 | - When the value is set to ``false``, the Wazuh         |                                                     |                         |
@@ -195,7 +195,7 @@ The following table shows the configuration options for the Wazuh dashboard:
 |                                 |                                                         |                                                     |                         |
 | wazuh.monitoring.frequency      | This property defines the frequency (in seconds) of     | ``900``                                             | Any number starting     |
 |                                 | API requests to get the state of the agents to create   |                                                     | from 60                 |
-|                                 | a new document in the ``wazuh-monitoring-*`` index with | .. warning:: Although the minimum value can be      |                         |
+|                                 | a new document in the ``wazuh-monitoring-*`` index with | .. note:: Although the minimum value can be         |                         |
 |                                 | the returned data.                                      |    ``60``, we recommend adjusting it to at least    |                         |
 |                                 |                                                         |    ``300`` seconds to avoid overloading resources   |                         |
 |                                 |                                                         |    due to the excessive creation of documents       |                         |
@@ -288,7 +288,7 @@ The following table shows the configuration options for the Wazuh dashboard:
 |                                                                                                                                                                           |
 | **Advanced index options**                                                                                                                                                |
 |                                                                                                                                                                           |
-| .. warning::                                                                                                                                                              |
+| .. note::                                                                                                                                                                 |
 |                                                                                                                                                                           |
 |    These options are only valid if they're modified before starting the Wazuh dashboard for the first time                                                                |
 |                                                                                                                                                                           |
