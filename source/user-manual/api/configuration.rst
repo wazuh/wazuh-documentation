@@ -328,7 +328,7 @@ For more information on each of the settings, please check the :ref:`security co
    auth_token_exp_timeout: 900
    rbac_mode: white
 
-.. warning::
+.. note::
 
    For security reasons, changing the security configuration revokes all JWTs. You will need to log in and obtain a new token after the change.
 
