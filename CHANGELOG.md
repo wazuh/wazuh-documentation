@@ -18,6 +18,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated the *Monitoring Microsoft Azure with Wazuh* documentation. ([#9231](https://github.com/wazuh/wazuh-documentation/pull/9231))
 - **Post-release**: Changed warnings to notes across the documentation. ([#9240](https://github.com/wazuh/wazuh-documentation/pull/9240))
 - **Post-release**: Updated *Monitoring Google Cloud services* documentation. ([#9251](https://github.com/wazuh/wazuh-documentation/pull/9251))
+- **Post-release**: Updated step in the Wazuh RBAC *Creating and setting a Wazuh admin user* section. ([#9252](https://github.com/wazuh/wazuh-documentation/pull/9252))
 
 ### Fixed
 
