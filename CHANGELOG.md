@@ -15,7 +15,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Added new step in *Disk space utilization on Linux endpoint* documentation. ([#9210](https://github.com/wazuh/wazuh-documentation/pull/9210))
 - **Post-release**: Updated step in *Upgrading the Wazuh dashboard* documentation. ([#9217](https://github.com/wazuh/wazuh-documentation/pull/9217))
 - **Post-release**: Updated *Wazuh server configuration* section in *Malware Detection* documentation. ([#9236](https://github.com/wazuh/wazuh-documentation/pull/9236))
-- **Post-release**: Updated the *Monitoring Microsoft Azure with Wazuh* documentation. ([#9231](https://github.com/wazuh/wazuh-documentation/pull/9231)) ([#9255](https://github.com/wazuh/wazuh-documentation/pull/9255))
+- **Post-release**: Updated the *Monitoring Microsoft Azure with Wazuh* documentation. ([#9231](https://github.com/wazuh/wazuh-documentation/pull/9231)) ([#9255](https://github.com/wazuh/wazuh-documentation/pull/9255)) ([#9264](https://github.com/wazuh/wazuh-documentation/pull/9264))
 - **Post-release**: Changed warnings to notes across the documentation. ([#9240](https://github.com/wazuh/wazuh-documentation/pull/9240))
 - **Post-release**: Updated *Monitoring Google Cloud services* documentation. ([#9251](https://github.com/wazuh/wazuh-documentation/pull/9251))
 - **Post-release**: Updated step in the Wazuh RBAC *Creating and setting a Wazuh admin user* section. ([#9252](https://github.com/wazuh/wazuh-documentation/pull/9252))
