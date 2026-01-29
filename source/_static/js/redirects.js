@@ -77,12 +77,38 @@ newUrls['4.14'] = [
   '/release-notes/release-4-14-1.html',
   '/release-notes/release-4-14-0.html',
   '/cloud-service/your-environment/limitations.html',
+  '/cloud-security/azure/platform-and-services/log-analytics.html',
+  '/cloud-security/azure/platform-and-services/storage.html',
+  '/cloud-security/azure/platform-and-services/graph.html',
 ]
 
-/* Pages no longer available in x.y (this is not required if there is a redirection for this url) */
+/* Redirections 4.13—4.14  */
+
+redirections.push(
+    {
+      'target': ['4.13=>4.14', '4.14=>4.13'],
+      '4.13': '/cloud-security/azure/log-analytics.html',
+      '4.14': '/cloud-security/azure/platform-and-services/log-analytics.html',
+    }
+    {
+      'target': ['4.13=>4.14', '4.14=>4.13'],
+      '4.13': '/cloud-security/azure/storage.html',
+      '4.14': '/cloud-security/azure/platform-and-services/storage.html',
+    }
+    {
+      'target': ['4.13=>4.14', '4.14=>4.13'],
+      '4.13': '/cloud-security/azure/graph.html',
+      '4.14': '/cloud-security/azure/platform-and-services/graph.html',
+    }
+);
+
+/* Pages no longer available in 4.14 (this is not required if there is a redirection for this url) */
 
 removedUrls['4.14'] = [
-  '/development/selinux-wazuh-context.html'
+  '/development/selinux-wazuh-context.html',
+  '/cloud-security/azure/log-analytics.html',
+  '/cloud-security/azure/storage.html',
+  '/cloud-security/azure/graph.html',
 ];
 
 /* *** RELEASE 4.13 ****/

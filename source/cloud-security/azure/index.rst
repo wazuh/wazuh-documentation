@@ -13,12 +13,9 @@ Wazuh, an open source security monitoring platform, offers solutions for collect
 This section provides instructions for monitoring Microsoft Azure infrastructures.
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    monitoring-instances
    platform-and-services
-   log-analytics
-   storage
-   graph
    monitoring-ms-graph
    ms-intune-integration
