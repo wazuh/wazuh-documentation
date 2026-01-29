@@ -284,7 +284,25 @@ Set the value of ``data.gcp.logName`` field to ``projects/<YOUR_PROJECT_ID>/logs
    :align: center
    :width: 80%
 
-Available logs must appear as shown in the picture below.
+You can write custom rules for your VPC Flow logs use cases. For example, the following custom rules show all VPC Flow logs where the ``dest_instance.vm_name is instance-20260122-120105``.
+
+#. Add the following rules to your Wazuh server ``/var/ossec/etc/rules/local_rules.xml`` file.
+
+   .. code-block:: xml
+
+      <group name="gcp_custom,">
+        <rule id="165050" level="5">
+          <if_group>gcp</if_group>
+          <field name="gcp.jsonPayload.dest_instance.vm_name">^<INSTANCE-XXXXXXXX-XXXXXX>$</field>
+          <description>GCP VPC flow involving VM <INSTANCE-XXXXXXXX-XXXXXX></description>
+          <options>no_full_log</options>
+          <group>gcp,vm_instance_monitor,</group>
+        </rule>
+      </group>
+
+   Where:
+
+   ``<INSTANCE-XXXXXXXX-XXXXXX>``: is the monitored instance ID. Please replace this with the virtual machine instance ID you intend to monitor.
 
 .. thumbnail:: /images/cloud-security/gcp/vpc-flow-available-logs.png
    :title: VPC flow available logs

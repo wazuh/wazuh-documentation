@@ -33,7 +33,7 @@ Follow these steps to create an internal user, create a new role mapping, and gi
       :align: center
       :width: 80%
 
-#. Click **Create internal user**, provide a username and password, and click **Create** to complete the action.
+#. Click **Create internal user**, provide a username and password, type ``admin`` as the Backend role, and click **Create** to complete the action.
 
 #. To map the user to the admin role, follow these steps:
 
