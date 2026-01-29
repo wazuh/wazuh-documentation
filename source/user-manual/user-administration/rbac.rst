@@ -35,22 +35,6 @@ Follow these steps to create an internal user, create a new role mapping, and gi
 
 #. Click **Create internal user**, provide a username and password, type ``admin`` as the Backend role, and click **Create** to complete the action.
 
-#. To map the user to the admin role, follow these steps:
-
-   #. Click the upper-left menu icon **☰** to open the options, go to **Indexer management** > **Security**, and then **Roles** to open the roles page.
-
-   #. Search for the **all_access** role in the roles list and select it to open the details window.
-
-   #. Click **Duplicate role**, assign a name to the new role, then click **Create** to confirm the action.
-
-   #. Select the newly created role.
-
-   #. Select the **Mapped users** tab and click **Manage mapping**.
-
-   #. Add the user you created in the previous steps and click **Map** to confirm the action.
-
-   .. note:: Reserved roles are restricted for any permission customizations. You can create a custom role with the same permissions or duplicate a reserved role for further customization.
-
 #. To map the user with Wazuh, follow these steps:
 
    #. Click the upper-left menu icon **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **Security**, and then **Roles mapping** to open the page.
