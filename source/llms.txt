@@ -317,9 +317,9 @@
   - [Monitoring Microsoft Azure with Wazuh](https://documentation.wazuh.com/current/cloud-security/azure/index.md): Monitor Azure environments.
     - [Monitoring instances](https://documentation.wazuh.com/current/cloud-security/azure/monitoring-instances.md)
     - [Monitoring Azure platform and services](https://documentation.wazuh.com/current/cloud-security/azure/platform-and-services.md)
-    - [Microsoft Azure Log Analytics](https://documentation.wazuh.com/current/cloud-security/azure/log-analytics.md)
-    - [Microsoft Azure Storage](https://documentation.wazuh.com/current/cloud-security/azure/storage.md)
-    - [Microsoft Graph](https://documentation.wazuh.com/current/cloud-security/azure/graph.md)
+      - [Microsoft Azure Log Analytics](https://documentation.wazuh.com/current/cloud-security/azure/platform-and-services/log-analytics.md)
+      - [Microsoft Azure Storage](https://documentation.wazuh.com/current/cloud-security/azure/platform-and-services/storage.md)
+      - [Microsoft Graph](https://documentation.wazuh.com/current/cloud-security/azure/platform-and-services/graph.md)
     - [Monitoring Microsoft Graph services with Wazuh](https://documentation.wazuh.com/current/cloud-security/azure/monitoring-ms-graph.md)
     - [MS Intune integration](https://documentation.wazuh.com/current/cloud-security/azure/ms-intune-integration.md)
   - [Monitoring GitHub](https://documentation.wazuh.com/current/cloud-security/github/index.md)

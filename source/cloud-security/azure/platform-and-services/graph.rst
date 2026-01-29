@@ -6,6 +6,8 @@
 Microsoft Graph
 ===============
 
+You can use the Wazuh module for Azure to collect Microsoft Graph activity logs from multiple Azure services (including Microsoft Entra ID) via the Microsoft Graph REST API.
+
 In this section, you will learn how to monitor your Microsoft Entra ID activity using the Microsoft Graph REST API. This section contains:
 
 -  :ref:`Azure configuration <azure_configuration>`
