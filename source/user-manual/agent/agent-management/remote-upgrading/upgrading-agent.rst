@@ -8,7 +8,7 @@ Upgrading the Wazuh agent
 
 A Wazuh agent can be upgraded remotely using the command line and through the Wazuh server API.
 
-.. warning::
+.. note::
 
    It is recommended to use the Wazuh server API to upgrade agents if running a Wazuh cluster.
 

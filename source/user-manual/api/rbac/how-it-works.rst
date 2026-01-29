@@ -79,7 +79,7 @@ Here is an example of how to change RBAC mode using a cURL command. We recommend
       "error": 0
    }
 
-.. warning::
+.. note::
 
    For security reasons, changing the RBAC mode revokes all tokens. You will need to log in again to obtain a new token after the change.
 

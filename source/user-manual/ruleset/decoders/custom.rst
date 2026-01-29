@@ -105,6 +105,6 @@ For example, if you want to customize decoders in the ``/var/ossec/ruleset/decod
 
    .. include:: /_templates/installations/manager/restart_wazuh_manager.rst
 
-.. warning::
+.. note::
    
    By excluding the original decoder file, you won't receive the updates it may receive. Your custom file will remain unchanged during upgrades. So, consider applying relevant changes manually.

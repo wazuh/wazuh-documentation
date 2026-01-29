@@ -182,7 +182,7 @@ The attributes below are optional.
 |             | and GB units are supported            |              |               |
 +-------------+---------------------------------------+--------------+---------------+
 
-.. warning::
+.. note::
   If collecting logs with ``<log_format>`` set as ``macos``, then ``max-size`` is ignored.
 
 .. note::
@@ -377,15 +377,15 @@ Specifies the format of the log to be read. **This field is required.**
 |                    | syslog-pipe        | Used for reading from named pipes in syslog format.                                             |
 +--------------------+--------------------+-------------------------------------------------------------------------------------------------+
 
-.. warning::
+.. note::
 
    Only one configuration block with ``log_format`` set to ``macos`` is allowed. If multiple blocks are present, only the last one is used.
 
-.. warning::
+.. note::
 
    The ``eventchannel`` format is not supported on Windows versions prior to Vista, as they do not support event channels.
 
-.. warning::
+.. note::
 
    Agents ignore ``command`` and ``full_command`` log sources unless ``logcollector.remote_commands=1`` is set in ``/var/ossec/etc/internal_options.conf`` or ``/var/ossec/etc/local_internal_options.conf``. This prevents the manager from executing arbitrary commands on agents with root privileges.
 

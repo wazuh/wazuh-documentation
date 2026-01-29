@@ -8,6 +8,12 @@ Monitoring Azure platform and services
 
 The `Azure Monitor Logs <https://docs.microsoft.com/en-us/azure/azure-monitor/logs/data-platform-logs>`__ collects and organizes logs and performance data from monitored resources, including Azure services, virtual machines, and applications. This insight is sent to Wazuh using the Azure Log Analytics REST API or by directly accessing the contents of a Microsoft Azure Storage account. The Wazuh module for Azure enables centralized logging, threat detection, and compliance management of your Microsoft Azure environments from your Wazuh deployment.
 
+This section focuses on:
+
+-  :doc:`Microsoft Azure Log Analytics <platform-and-services/log-analytics>`
+-  :doc:`Microsoft Azure Storage <platform-and-services/storage>`
+-  :doc:`Microsoft Graph <platform-and-services/graph>`
+
 The Wazuh module for Azure requires dependencies and credentials to access your Microsoft Azure logs. These dependencies are available by default on the Wazuh manager, but you must install them when you use a Wazuh agent for the integration. Take a look at the `Prerequisites`_ section before proceeding.
 
 Prerequisites
@@ -35,7 +41,7 @@ Python
 Azure Storage client library for Python
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You need the libraries in the command below to set up your Wazuh agent endpoint and monitor your Microsoft Azure platform and services.
+You need the libraries in the command below to set up your Wazuh agent endpoint and monitor your Microsoft Azure platform and services. We recommend creating a `virtual Python environment <https://docs.python.org/3/library/venv.html>`__ for these installations.
 
 .. tabs::
 
@@ -45,7 +51,7 @@ You need the libraries in the command below to set up your Wazuh agent endpoint 
 
          # pip3 install azure-storage-blob==12.20.0 azure-storage-common==2.1.0 azure-common==1.1.25 cryptography==3.3.2 cffi==1.14.4 pycparser==2.20 six==1.14.0 python-dateutil==2.8.1 requests==2.25.1 certifi==2022.12.07 chardet==3.0.4 idna==2.9 urllib3==1.26.18 SQLAlchemy==2.0.23 pytz==2020.1
 
-   .. group-tab:: Python 3.11–3.12
+   .. group-tab:: Python 3.11
 
       .. code-block:: console
 
@@ -55,7 +61,7 @@ You need the libraries in the command below to set up your Wazuh agent endpoint 
 
          If you use a virtual environment, remove the ``--break-system-packages`` parameter from the above command.
 
-   .. group-tab:: Python 3.13
+   .. group-tab:: Python 3.12–3.13
 
       #. Install system-level package libffi.
 
@@ -65,7 +71,7 @@ You need the libraries in the command below to set up your Wazuh agent endpoint 
 
                .. code-block:: console
 
-                  # apt-get update && apt-get install -y libffi-dev
+                  # apt-get update && apt-get install -y libffi-dev build-essential python3-dev
 
             .. group-tab:: Yum
 
@@ -77,7 +83,7 @@ You need the libraries in the command below to set up your Wazuh agent endpoint 
 
          .. code-block:: console
 
-            # pip3 install --break-system-packages azure-storage-blob==12.20.0 azure-storage-common==2.1.0 azure-common==1.1.25 cryptography==3.3.2 cffi==1.14.4 pycparser==2.20 six==1.16.0 python-dateutil==2.9.0.post0 requests==2.25.1 certifi==2022.12.07 chardet==3.0.4 idna==2.9 urllib3==1.26.18 SQLAlchemy==2.0.44 pytz==2020.1
+            # pip3 install --break-system-packages azure-storage-blob==2.1.0 azure-storage-common==2.1.0 azure-common==1.1.25 cryptography==3.3.2 cffi==1.14.4 pycparser==2.20 six==1.14.0 python-dateutil==2.8.1 requests==2.25.1 certifi==2022.12.07 chardet==3.0.4 idna==2.9 urllib3==1.26.5 SQLAlchemy==1.3.11 pytz==2020.1
 
       .. note::
 
@@ -244,3 +250,10 @@ The following code block shows an example of running the Wazuh module for Azure 
    # /var/ossec/wodles/azure/azure-logs --log_analytics --la_auth_path credentials_example --la_tenant_domain 'wazuh.example.domain' --la_tag azure-activity --la_query "AzureActivity" --workspace example-workspace --la_time_offset 50d --debug 2 --reparse
 
 The ``--debug 2`` parameter gets a verbose output. This output is helpful to show that the script works, especially when handling a large amount of data.
+
+.. toctree::
+   :hidden:
+
+   platform-and-services/log-analytics
+   platform-and-services/storage
+   platform-and-services/graph

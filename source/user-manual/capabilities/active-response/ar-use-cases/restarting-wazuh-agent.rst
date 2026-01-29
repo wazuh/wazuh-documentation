@@ -100,7 +100,7 @@ Test the configuration
 
    This addition allows monitoring file changes in the ``/root`` directory of the monitored endpoint. You don’t need to actually add or modify files. It’s just to test the configuration.
 
-   .. warning::
+   .. note::
 
       Incorrect modifications to the Wazuh agent configuration file might cause the service to crash. It’s important to thoroughly review any changes before implementing them in a production environment.
 

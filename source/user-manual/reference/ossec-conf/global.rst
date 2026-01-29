@@ -63,7 +63,7 @@ This toggles the writing of alerts to ``/var/ossec/logs/alerts/alerts.log``.
 | **Allowed values** | yes, no |
 +--------------------+---------+
 
-.. warning::
+.. note::
   Disabling JSON and plain text formatted alerts simultaneously is not compatible with the integrator, syslog client or email features.
 
 email_notification
@@ -450,7 +450,7 @@ This sets the time after which the manager considers an agent as disconnected si
 | **Allowed values**      | A positive number that should end with a character indicating a time unit, such as: s (seconds), m (minutes), h (hours), d (days). The minimum allowed is 1s. |
 +-------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-.. warning::
+.. note::
 
   This setting should always be greater than :ref:`notify-time <notify_time>` configured in the agents. This allows them to always notify the manager before it would consider them disconnected.
 

@@ -158,7 +158,7 @@ Specifies the time in seconds between agent checkins to the manager.  More frequ
 | **Allowed values** | A positive number (seconds) |
 +--------------------+-----------------------------+
 
-.. warning::
+.. note::
 
   This setting should always be lower than :ref:`disconnection time <reference_agents_disconnection_time>` configured for the agents in the manager. This allows them to always notify the manager before it would consider them disconnected.
 
@@ -177,7 +177,7 @@ For example, a ``notify_time`` setting of 60 combined with a time-reconnect of 3
 | **Allowed values** | A positive number (seconds) |
 +--------------------+-----------------------------+
 
-.. warning::
+.. note::
 	Notice that the ``notify_time`` value uses an underscore while the ``time-reconnect`` value uses a dash.  This is an unfortunate legacy naming inconsistency that is easy to mix up.
 
   .. _force_reconnect_interval:

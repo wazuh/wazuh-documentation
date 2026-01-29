@@ -33,7 +33,7 @@ To change these credentials, you must:
 -  :ref:`Create and set the hash of your new password <create-and-set-the-hash-of-your-new-password>`
 -  :ref:`Apply the changes <apply-the-changes>`
 
-.. warning::
+.. note::
 
    -  You can only change one user's password at a time.
    -  If you have custom users, add them to the ``config/wazuh_indexer/internal_users.yml`` file in the deployment model directory. Otherwise, executing this procedure deletes them.
