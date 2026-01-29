@@ -31,7 +31,7 @@ Follow these steps to uninstall your Wazuh Docker deployment from your Docker ho
 
 #. You can also perform steps 2 and 3 in a single command.
 
-   .. warning::
+   .. note::
 
       The **-v** flag will permanently delete all your Wazuh data, configurations, and logs. Use this only when you want to remove the deployment and start fresh completely.
 

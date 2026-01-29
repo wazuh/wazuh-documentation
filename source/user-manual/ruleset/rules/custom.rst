@@ -81,7 +81,7 @@ Perform the following steps on the Wazuh server.
 Changing existing rules
 -----------------------
 
-.. warning::
+.. note::
    
    Modifications made to any rule file within the ``/var/ossec/ruleset/rules`` directory are overwritten during the upgrade process. Follow the procedure below to preserve your changes.
 
@@ -126,7 +126,7 @@ Perform the steps below on the Wazuh server.
         </rule>
       </group>
 
-   .. warning:: To maintain consistency across loaded rules, it is currently not possible to overwrite the ``if_sid``, ``if_group``, ``if_level``, ``if_matched_sid``, and ``if_matched_group`` labels. These tags are ignored when present in an overwrite rule, preserving the original values.
+   .. note:: To maintain consistency across loaded rules, it is currently not possible to overwrite the ``if_sid``, ``if_group``, ``if_level``, ``if_matched_sid``, and ``if_matched_group`` labels. These tags are ignored when present in an overwrite rule, preserving the original values.
 
 #. Restart the Wazuh manager to load the updated rules:
 

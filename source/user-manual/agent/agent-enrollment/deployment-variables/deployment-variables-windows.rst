@@ -93,7 +93,7 @@ Enrollment and adding multiple addresses:
 
    wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi /q WAZUH_MANAGER="10.0.0.2,10.0.0.3" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_AGENT_NAME="W2016"
 
-.. warning::
+.. note::
 
    To avoid compatibility issues when installing the Wazuh agent on Windows versions older than Windows Server 2008 or Windows 7, use either of these options.
 

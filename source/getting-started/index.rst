@@ -68,6 +68,42 @@ Screenshots
           :title: PCI DSS 
           :alt: PCI DSS 
 
+Building with AI and LLMs
+-------------------------
+
+You can use large language models (LLMs) to assist in building, managing, and troubleshooting your Wazuh deployment. To support accurate and efficient AI-assisted workflows, Wazuh provides plain text documentation and machine-readable guidance optimized for LLM consumption.
+
+Plain text documentation (.md)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You can access most of the Wazuh documentation as plain text Markdown files by replacing ``.html`` with ``.md`` in the URL of any documentation page.
+
+For example:
+
+-  HTML page: https://documentation.wazuh.com/current/quickstart.html
+-  Markdown version: https://documentation.wazuh.com/current/quickstart.md
+
+Using the Markdown version is recommended when working with LLMs because it provides:
+
+-  **Cleaner content**: Complete documentation text with minimal formatting noise and no navigation elements.
+-  **Full visibility**: Content hidden behind tabs or expandable sections in the web UI is rendered linearly.
+-  **Structural clarity**: Headings, lists, and code blocks preserve document hierarchy for better parsing.
+-  **Efficient context sharing**: You can copy and paste entire guides into an LLM without losing structure or meaning.
+
+AI agent standard (/llms.txt)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Wazuh hosts an ``/llms.txt`` file at the root of the documentation domain. This file follows an emerging standard to guide AI tools and agents on how to retrieve and prioritize Wazuh documentation content. It also instructs agents to prefer the ``current`` documentation version unless another version is explicitly required.
+
+You can access it here:
+https://documentation.wazuh.com/llms.txt
+
+Start exploring (Markdown)
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+-  https://documentation.wazuh.com/current/quickstart.md
+-  https://documentation.wazuh.com/current/user-manual/index.md
+
 .. toctree::
    :hidden:
 

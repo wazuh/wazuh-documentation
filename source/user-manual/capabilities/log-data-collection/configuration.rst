@@ -270,7 +270,7 @@ Wazuh interfaces with the CLI log tool using the ``–style syslog`` format to c
         <query type="trace,log,activity" level="info">(process == "sudo") or (process == "sessionlogoutd" and message contains "logout is complete.") or (process == "sshd") or (process == "tccd" and message contains "Update Access Record") or (message contains "SessionAgentNotificationCenter") or (process == "screensharingd" and message contains "Authentication") or (process == "securityd" and eventMessage contains "Session" and subsystem == "com.apple.securityd")</query>
       </localfile>
 
-.. warning:: You can only have one configuration block with ``log_format`` set as ``macos``. If you add more blocks, only the last one will be used.
+.. note:: You can only have one configuration block with ``log_format`` set as ``macos``. If you add more blocks, only the last one will be used.
 
 To filter the system logs, it's necessary, but not mandatory, to use the ``<query>`` label. This label allows setting different filtering options such as:
 
@@ -280,7 +280,7 @@ To filter the system logs, it's necessary, but not mandatory, to use the ``<quer
 
 - ``<query>``: Filters the macOS logs. It is used as the ULS predicate. Check the :ref:`macOS ULS predicates <macos_uls_predicates>` section to learn more about the predicates.
 
-.. warning:: Be sure to be as restrictive as possible when filtering the logs. macOS ULS produces a lot of log data that may be overwhelming, and some logs of interest could be lost in the noise.
+.. note:: Be sure to be as restrictive as possible when filtering the logs. macOS ULS produces a lot of log data that may be overwhelming, and some logs of interest could be lost in the noise.
 
 .. _macos_uls_log_levels:
 

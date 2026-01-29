@@ -47,7 +47,7 @@ You can use the ``<socket>`` tag to add new output sockets and then configure th
         <target>agent,custom_socket</target>
       </localfile>
    
-   .. warning:: To keep the output to the default socket, we need to specify it using 'agent' as the target. Otherwise, the output will be redirected only to the specified targets.
+   .. note:: To keep the output to the default socket, we need to specify it using 'agent' as the target. Otherwise, the output will be redirected only to the specified targets.
 
 #. Restart the Wazuh agent with administrator privileges to apply the configuration change:
 

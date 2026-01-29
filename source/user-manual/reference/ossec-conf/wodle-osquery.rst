@@ -17,7 +17,7 @@ wodle name="osquery"
 
 Configuration options of the osquery wodle.
 
-.. warning::
+.. note::
     Osquery is not installed by default. It is an open source software that you have to obtain for using this module.
 
 

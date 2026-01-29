@@ -207,7 +207,7 @@ If the conditions in number 2 above are met, where the buffer stays above the ``
    :align: center
    :width: 80%
 
-.. warning::
+.. note::
 
    The alert description warns the user to check the Wazuh agent since it is probable that it will not recover to normal status by itself. Remember that **a flooded agent is dropping events**.
 

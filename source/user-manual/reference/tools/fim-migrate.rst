@@ -28,7 +28,7 @@ Add execution permission and run this tool on the manager instance as follows:
 
     # ./fim_migrate
 
-.. warning::
+.. note::
     After completing the migration process, the old FIM databases won't be removed automatically. To do so, remove the ``/var/ossec/queue/syscheck`` folder.
 
 Options
