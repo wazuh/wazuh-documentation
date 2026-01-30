@@ -90,12 +90,12 @@ redirections.push(
       'target': ['4.13=>4.14', '4.14=>4.13'],
       '4.13': '/cloud-security/azure/log-analytics.html',
       '4.14': '/cloud-security/azure/platform-and-services/log-analytics.html',
-    }
+    },
     {
       'target': ['4.13=>4.14', '4.14=>4.13'],
       '4.13': '/cloud-security/azure/storage.html',
       '4.14': '/cloud-security/azure/platform-and-services/storage.html',
-    }
+    },
     {
       'target': ['4.13=>4.14', '4.14=>4.13'],
       '4.13': '/cloud-security/azure/graph.html',
