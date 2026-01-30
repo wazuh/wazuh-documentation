@@ -80,7 +80,7 @@ To configure forced awareness, specify all the possible values for your zone att
 
 In case there are other zones, add the other zones to the ``cluster.routing.allocation.awareness.force.zone.values`` field.
 
-.. warning::
+.. note::
 
    If a node fails, forced awareness does not allocate the replicas to another node in the same zone. Instead, the cluster enters a yellow state and only allocates the replicas when nodes in the other zone(s) come online.
 

@@ -21,7 +21,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- **Post-release**: Added LLMs-ready documentation. ([#9201](https://github.com/wazuh/wazuh-documentation/pull/9201))
+- **Post-release**: Added LLMs-ready documentation. ([#9201](https://github.com/wazuh/wazuh-documentation/pull/9201)) ([#9232](https://github.com/wazuh/wazuh-documentation/pull/9232)) ([#9238](https://github.com/wazuh/wazuh-documentation/pull/9238))
 - **Post-release**: Added note about macOS WPK ARM packages in 4.14.2 and earlier versions. ([#9224](https://github.com/wazuh/wazuh-documentation/pull/9224))
 
 ### Changed
@@ -30,6 +30,12 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated the *Use case: Detecting malware on Windows endpoints using YARA* section. ([#9205](https://github.com/wazuh/wazuh-documentation/pull/9205))
 - **Post-release**: Added new step in *Disk space utilization on Linux endpoint* documentation. ([#9210](https://github.com/wazuh/wazuh-documentation/pull/9210))
 - **Post-release**: Updated step in *Upgrading the Wazuh dashboard* documentation. ([#9217](https://github.com/wazuh/wazuh-documentation/pull/9217))
+- **Post-release**: Updated *Wazuh server configuration* section in *Malware Detection* documentation. ([#9236](https://github.com/wazuh/wazuh-documentation/pull/9236))
+- **Post-release**: Updated the *Monitoring Microsoft Azure with Wazuh* documentation. ([#9231](https://github.com/wazuh/wazuh-documentation/pull/9231)) ([#9255](https://github.com/wazuh/wazuh-documentation/pull/9255)) ([#9264](https://github.com/wazuh/wazuh-documentation/pull/9264))
+- **Post-release**: Changed warnings to notes across the documentation. ([#9240](https://github.com/wazuh/wazuh-documentation/pull/9240))
+- **Post-release**: Updated *Monitoring Google Cloud services* documentation. ([#9251](https://github.com/wazuh/wazuh-documentation/pull/9251))
+- **Post-release**: Updated step in the Wazuh RBAC *Creating and setting a Wazuh admin user* section. ([#9252](https://github.com/wazuh/wazuh-documentation/pull/9252))
+- **Post-release**: Updated the *Active Response* documentation. ([#9254](https://github.com/wazuh/wazuh-documentation/pull/9254)) ([#9258](https://github.com/wazuh/wazuh-documentation/pull/9258)) ([#9262](https://github.com/wazuh/wazuh-documentation/pull/9262))
 
 ### Fixed
 

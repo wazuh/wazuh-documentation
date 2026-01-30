@@ -81,7 +81,7 @@ Here are all the available settings for the ``/var/ossec/api/configuration/api.y
                allow: yes
                minimum_quota: 240
 
-.. warning::
+.. note::
 
    When running a Wazuh server cluster, the master node does not automatically send its local Wazuh server API configuration file to the worker nodes. Each node maintains its own Wazuh server API configuration. Therefore, if any changes are made to the configuration file on the master node, you must manually update the configuration on each worker node to ensure consistency. Ensure that the IP address and port are not overwritten in the local configuration of each worker.
 
@@ -328,7 +328,7 @@ For more information on each of the settings, please check the :ref:`security co
    auth_token_exp_timeout: 900
    rbac_mode: white
 
-.. warning::
+.. note::
 
    For security reasons, changing the security configuration revokes all JWTs. You will need to log in and obtain a new token after the change.
 
