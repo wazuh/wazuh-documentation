@@ -149,7 +149,7 @@ connection_overtake_time
 
 Sets the time to wait before considering a connection with a TCP client down when a new connection with the same key arrives. A value of 0 disables this assessment of connection activity.
 
-.. warning::
+.. note::
 
    The ``connection_overtake_time`` must be higher than the agent :ref:`notify-time <notify_time>`.
 

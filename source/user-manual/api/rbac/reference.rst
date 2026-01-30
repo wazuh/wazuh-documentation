@@ -1123,7 +1123,7 @@ Users administrator of the system, this role provides full access to all users r
 Default rules
 -------------
 
-.. warning::
+.. note::
 
    run_as permissions through these mapping rules can only be obtained with ``wazuh-wui`` user. These rules will never match an authorization context for any other Wazuh server API user.
 

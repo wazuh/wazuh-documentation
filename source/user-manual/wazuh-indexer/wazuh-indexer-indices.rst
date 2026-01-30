@@ -98,7 +98,7 @@ This section describes how to create a custom index pattern, for example, ``my-c
       ``{"acknowledged":true}`` indicates that the template was inserted correctly.
 
 
-   .. warning::
+   .. note::
 
       Perform step 5 only if you want to replace the default alert index pattern ``wazuh-alerts-*`` and/or the default archive index pattern ``wazuh‑archives-*`` with ``my-custom-alerts-*``.
 
@@ -139,7 +139,7 @@ This section describes how to create a custom index pattern, for example, ``my-c
       # systemctl restart wazuh-indexer
       # systemctl restart wazuh-dashboard
 
-.. warning::
+.. note::
 
    If you already have indices created with the previous name, they won't be changed. You can still change to the previous index pattern to see them, or you can perform :doc:`reindexing <re-indexing>` to rename the existing indices.
 

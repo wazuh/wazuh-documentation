@@ -6,6 +6,8 @@
 Microsoft Graph
 ===============
 
+You can use the Wazuh module for Azure to collect Microsoft Graph activity logs from multiple Azure services (including Microsoft Entra ID) via the Microsoft Graph REST API.
+
 In this section, you will learn how to monitor your Microsoft Entra ID activity using the Microsoft Graph REST API. This section contains:
 
 -  :ref:`Azure configuration <azure_configuration>`
@@ -174,7 +176,7 @@ You will use the ``key`` and ``ID`` of the application saved during the previous
 
 Check the :doc:`Wazuh module for Azure </user-manual/reference/ossec-conf/wodle-azure-logs>` reference for more information about using the different available parameters. Please see the :ref:`wazuh_azure_authentication_file` section for guidance on how to set up credentials to monitor your Microsoft Entra ID.
 
-.. warning::
+.. note::
 
    The field ``tenantdomain`` is mandatory. You can obtain it from the **Overview** section in **Microsoft Entra ID**.
 

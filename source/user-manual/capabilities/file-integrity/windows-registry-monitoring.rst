@@ -251,7 +251,7 @@ Wazuh monitors the startup registry keys automatically, out-of-the-box, without 
 Test the configuration
 ^^^^^^^^^^^^^^^^^^^^^^
 
-.. warning::
+.. note::
 
    You must carry this out in a sandbox environment. Delete the added registry keys after running the test.
 

@@ -44,7 +44,7 @@ Follow the :ref:`creating an AWS policy <creating_an_AWS_policy>` guide to creat
 
 You need the permissions listed below inside the sections for ``RoleCreator`` and ``PassRole`` to create and delete the stack based on the template.
 
-.. warning::
+.. note::
 
    These permissions must be bound to the specific resources due to overly permissive actions.
 

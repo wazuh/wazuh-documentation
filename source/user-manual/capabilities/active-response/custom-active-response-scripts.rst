@@ -213,9 +213,12 @@ We show how to configure the sample ``custom-ar.py`` Python script below as an a
    import json
    import datetime
    from pathlib import PureWindowsPath, PurePosixPath
+   import platform
 
    if os.name == 'nt':
        LOG_FILE = "C:\\Program Files (x86)\\ossec-agent\\active-response\\active-responses.log"
+   elif platform.system() == 'Darwin':
+       LOG_FILE = "/Library/Ossec/logs/active-responses.log"
    else:
        LOG_FILE = "/var/ossec/logs/active-responses.log"
 
@@ -457,7 +460,7 @@ macOS custom active response configuration
 
       $ sudo /Library/Ossec/bin/wazuh-control restart
 
-#. Add the ``<command>`` and ``<active-response>`` blocks below to the Wazuh server ``/Library/Ossec/etc/ossec.conf`` file to use this active response Python script:
+#. Add the ``<command>`` and ``<active-response>`` blocks below to the Wazuh server ``/var/ossec/etc/ossec.conf`` file to use this active response Python script:
 
    .. code-block:: xml
       :emphasize-lines: 12

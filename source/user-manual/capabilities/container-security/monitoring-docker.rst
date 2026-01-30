@@ -33,7 +33,7 @@ The Docker container module requires `Python 3 <https://www.python.org/>`__. Spe
 Docker library for Python
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. warning::
+.. note::
 
    The Wazuh manager includes all dependencies installed. These steps are only necessary when configuring the integration in a Wazuh agent.
 
