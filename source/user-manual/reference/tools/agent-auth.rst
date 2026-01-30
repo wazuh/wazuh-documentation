@@ -12,7 +12,7 @@ agent-auth
 
 The ``agent-auth`` program is the client application used along with :ref:`wazuh-authd` to automatically add agents to a Wazuh manager.
 
-.. warning::
+.. note::
   By default there is no authentication or authorization involved in this transaction, so it is recommended that this daemon only be run when a new agent is being added.
 
 +----------------------------+------------------------------------------------------------------------------------------------------+

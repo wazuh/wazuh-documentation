@@ -1737,7 +1737,7 @@ Specifies that the events of all agents will be contemplated when using the freq
 | Example of use     | <global_frequency /> |
 +--------------------+----------------------+
 
-.. warning::
+.. note::
 
    Although the label contains the word global, this option works at manager level, not at cluster level.
 

@@ -78,7 +78,7 @@ When the system is swapping memory, the Wazuh indexer may not work as expected. 
    -  ``-Xms4g`` - initial size is set to 4Gb of RAM.
    -  ``-Xmx4g`` - maximum size is to 4Gb of RAM.
 
-   .. warning::
+   .. note::
 
       To prevent performance degradation due to JVM heap resizing at runtime, the minimum (Xms) and maximum (Xmx) size values must be the same.
 
@@ -155,7 +155,7 @@ The image below shows a Wazuh indexer cluster with three nodes, each containing 
 Setting the number of shards
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. warning::
+.. note::
 
    The number of shards and replicas are defined per index at the time of index creation. Once the index is created, although the number of replicas can be changed dynamically, the number of shards cannot be changed without :doc:`re-indexing <re-indexing>`.
 

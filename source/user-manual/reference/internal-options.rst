@@ -12,7 +12,7 @@ The main configuration is located in the ``ossec.conf`` file, however some inter
 
 Generally, this file is reserved for debugging issues and for troubleshooting. **Any error in this file may cause your installation to malfunction or fail to run.**
 
-.. warning::
+.. note::
     This file will be overwritten during upgrades.  In order to maintain custom changes, you must use the ``/var/ossec/etc/local_internal_options.conf`` file.
 
 - `Agent`_

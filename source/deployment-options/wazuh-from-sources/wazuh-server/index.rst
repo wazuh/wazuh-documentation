@@ -149,7 +149,7 @@ This section walks you through downloading the Wazuh source code, compiling it, 
 
 #. Run the ``install.sh`` script. This will display a wizard to guide you through the installation process using the Wazuh sources:
 
-   .. warning::
+   .. note::
 
       If you want to enable the database output, check out the :ref:`Alert management <configuring_database_output>` section before running the installation script.
 

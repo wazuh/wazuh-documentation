@@ -73,7 +73,7 @@ Specifies the role of the node.
 | **Allowed values** | master, worker   |
 +--------------------+------------------+
 
-.. warning::
+.. note::
 
 	Using ``client`` as ``node_type`` in configuration is still valid, but a warning message will be shown in logs.
 

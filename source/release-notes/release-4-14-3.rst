@@ -58,22 +58,32 @@ Wazuh manager
 -  `#33803 <https://github.com/wazuh/wazuh/pull/33803>`__ Added query size checks to Syscollector delta sync SQL generation to prevent buffer overflows.
 -  `#33756 <https://github.com/wazuh/wazuh/pull/33756>`__ Replaced unsafe ``sprintf`` calls in the SCA decoder to prevent buffer overflows.
 -  `#33739 <https://github.com/wazuh/wazuh/pull/33739>`__ Fixed a memory leak in the CIS-CAT decoder when database operations fail.
+-  `#34184 <https://github.com/wazuh/wazuh/pull/34184>`__ Fixed ruleset hot reload on workers by awaiting the ``send_reload_ruleset_msg`` call.
 
 Wazuh agent
 ^^^^^^^^^^^
 
 -  `#33495 <https://github.com/wazuh/wazuh/pull/33495>`__ Fixed UTF-16 casting when updating ``report_changes``.
 -  `#33665 <https://github.com/wazuh/wazuh/pull/33665>`__ Improved Active Response key handling in ``wazuh-execd``.
+-  `#33704 <https://github.com/wazuh/wazuh/pull/33704>`__ Added bounds checking to Logcollector ``max-size`` configuration serialization.
 -  `#33926 <https://github.com/wazuh/wazuh/pull/33926>`__ Hardened Logcollector multiline backup handling by using full-buffer copies.
 -  `#33708 <https://github.com/wazuh/wazuh/pull/33708>`__ Fixed label formatting edge cases in keep-alive notify messages.
 -  `#33922 <https://github.com/wazuh/wazuh/pull/33922>`__ Fixed incorrect permissions on router and socket UNIX sockets.
 -  `#33583 <https://github.com/wazuh/wazuh/pull/33583>`__ Fixed a false positive in vulnerability detection for Oracle Linux 8.
+-  `#34115 <https://github.com/wazuh/wazuh/pull/34115>`__ Extended Windows network path restrictions to block extended-length UNC paths.
+-  `#34162 <https://github.com/wazuh/wazuh/pull/34162>`__ Fixed a crash in network path detection on Windows.
+-  `#34064 <https://github.com/wazuh/wazuh/pull/34064>`__ Fixed agent reload failure on Linux systems with systemd version 219 or lower.
 
 RESTful API
 ^^^^^^^^^^^
 
 -  `#33683 <https://github.com/wazuh/wazuh/pull/33683>`__ Improved configuration upload validation by reliably parsing and comparing Wazuh XML configurations.
 -  `#33807 <https://github.com/wazuh/wazuh/pull/33807>`__ Fixed protected settings checks when multiple ``<ossec_config>`` blocks are present.
+
+Ruleset
+^^^^^^^
+
+-  `#34141 <https://github.com/wazuh/wazuh/pull/34141>`__ Fixed SCA policy execution on Windows Server 2019 by using the correct PowerShell path.
 
 Wazuh dashboard
 ^^^^^^^^^^^^^^^
