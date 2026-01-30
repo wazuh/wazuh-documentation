@@ -2,7 +2,7 @@
 
 .. meta::
    :description: Learn how the Wazuh module for Google Cloud Storage buckets collects access logs from the bucket and processes the events in this section of the documentation.
-  
+
 Monitoring Google Cloud Storage buckets
 =======================================
 
@@ -30,29 +30,29 @@ In the following steps, we use the Google Cloud Shell to create a bucket and ena
 
 #. Create a bucket to store your logs using the following command:
 
-   .. code-block:: none
+   .. code-block:: console
 
       $ gcloud storage buckets create gs://<YOUR_BUCKET_NAME>
 
    Replace ``<YOUR_BUCKET_NAME>`` with your bucket name.
-   
+
    Make sure to follow the `Google naming guidelines <https://cloud.google.com/storage/docs/buckets?hl=en&_ga=2.141378354.-1842411037.1699881597#naming>`__ to name your bucket.
 
 #. Grant Google Cloud Storage the ``roles/storage.objectCreator`` role to the bucket:
 
-   .. code-block:: none
+   .. code-block:: console
 
       $ gcloud storage buckets add-iam-policy-binding gs://<YOUR_BUCKET_NAME> --member=group:cloud-storage-analytics@google.com --role=roles/storage.objectCreator
 
 #. Enable logging for your bucket using the ``--log-bucket`` flag:
 
-   .. code-block:: none
+   .. code-block:: console
 
       $ gcloud storage buckets update  gs://<YOUR_BUCKET_NAME> --log-bucket=gs://<YOUR_BUCKET_NAME>
 
 #. Check logging status:
 
-   .. code-block:: none
+   .. code-block:: console
 
       $ gcloud storage buckets describe gs://<YOUR_BUCKET_NAME> --format="default(logging_config)"
 
@@ -90,7 +90,7 @@ Perform the following steps to configure the Wazuh module for Google Cloud Stora
 
    Where:
 
-   -  ``<run_on_start>``: Schedules the module to run on the start or restart of the Wazuh manager or agent service, depending on where the module is configured. 
+   -  ``<run_on_start>``: Schedules the module to run on the start or restart of the Wazuh manager or agent service, depending on where the module is configured.
    -  ``<interval>``: Sets a time interval between module execution.
    -  ``<name>``: Contains the name of the Google Cloud Storage bucket from which logs are read.
    -  ``<credentials_file>``: Contains the path to the Google Cloud credentials file. If you do not have credentials yet, follow the steps in the :doc:`configuring Google Cloud credentials <../prerequisites/credentials>` section.
@@ -188,7 +188,7 @@ Where:
 -  ``<remove_from_bucket>``: Sets whether the logs should be removed from the Google Cloud Storage bucket once they are read. The possible values are ``no`` and ``yes``.
 
 .. note::
-   
+
    Only the ``<name>`` and ``<credentials_file>`` options are mandatory. Take a close look at :doc:`bucket options </user-manual/reference/ossec-conf/gcp-bucket>`.
 
 Restart the Wazuh manager or agent service to apply the changes:
@@ -235,7 +235,7 @@ Reparse
 Using the reparse option will re-fetch all Google Cloud Storage bucket logs from the starting date of the integration until the present.
 
 .. warning::
-   
+
    Using this option will generate duplicate alerts.
 
 To fetch and process older logs, manually run the ``/var/ossec/wodles/gcloud/gcloud`` tool using the ``--reparse`` option.

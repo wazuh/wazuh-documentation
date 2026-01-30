@@ -15,7 +15,7 @@ and when it finishes reading, it will try to read the next available log (file o
 
 In addition, the interlocking problem that existed in the one-threaded version when it took a long time to read a log while the rest were left unattended, is avoided.
 
-.. warning:: The advantages of the multithreaded logcollector are only available from version 3.6.0 and higher.
+.. note:: The advantages of the multithreaded logcollector are only available from version 3.6.0 and higher.
 
 
 +-----------------+-------------------------------------------------------------------------------------------------+

@@ -402,7 +402,7 @@ Upgrading the Wazuh manager
 
             # apt-get install wazuh-manager|WAZUH_MANAGER_DEB_PKG_INSTALL|
 
-   .. warning::
+   .. note::
 
       If the ``/var/ossec/etc/ossec.conf`` configuration file was modified, it will not be replaced by the upgrade. You will therefore have to add the settings of the new capabilities manually. More information can be found in the :doc:`/user-manual/index`.
 

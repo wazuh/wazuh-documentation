@@ -35,7 +35,7 @@ After compiling the source code, now you can execute the installation script:
    # cd ../
    # ./install.sh
 
-.. warning::
+.. note::
 
    Some dependencies must be downloaded before compiling. If ``make deps`` is not executed before that, an error message will appear asking the user to do it.
 

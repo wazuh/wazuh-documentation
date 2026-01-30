@@ -19,7 +19,7 @@ If the Wazuh deployment was performed using the installation assistant script, t
 
 Therefore, securing the Wazuh server API is crucial after installing the Wazuh manager.
 
-.. warning::
+.. note::
 
    We highly recommend changing the default passwords and to use your own certificate since the one created by the Wazuh server API is self-signed.
 

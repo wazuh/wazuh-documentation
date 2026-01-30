@@ -568,7 +568,7 @@ Wazuh Manager
     - foo:$apr1$/axqZYWQ$Xo/nz/IG3PdwV82EnfYKh/
     - bar:$apr1$hXE97ag.$8m0koHByattiGKUKPUgcZ1
 
-.. warning::
+.. note::
 
     We recommend the use of `Ansible Vault <https://docs.ansible.com/ansible/latest/user_guide/vault.html>`_ to protect Wazuh agentless and authd credentials.
 
@@ -803,7 +803,7 @@ Wazuh Manager
         audit-wazuh-x:execute
         audit-wazuh-c:command
 
-.. warning::
+.. note::
 
     We recommend the use of `Ansible Vault <https://docs.ansible.com/ansible/latest/user_guide/vault.html>`_ to protect Wazuh agentless and authd credentials.
 
@@ -822,7 +822,7 @@ Wazuh Manager
         arguments: '/bin /etc/ /sbin'
         passwd: qwerty
 
-.. warning::
+.. note::
 
     We recommend the use of `Ansible Vault <https://docs.ansible.com/ansible/latest/user_guide/vault.html>`_ to protect Wazuh agentless and authd credentials.
 
@@ -1265,7 +1265,7 @@ Wazuh Agent
 
 |
 
-.. Warning::
+.. note::
   
     We recommend the use of `Ansible Vault <https://docs.ansible.com/ansible/latest/user_guide/vault.html>`_ to protect authd credentials.
 

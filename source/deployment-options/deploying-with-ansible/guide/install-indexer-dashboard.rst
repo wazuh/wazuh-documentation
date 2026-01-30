@@ -13,7 +13,7 @@ In the Wazuh Ansible repository, we can find the playbooks and roles necessary t
    :depth: 1
    :backlinks: none
 
-.. warning::
+.. note::
 
 	In previous versions of this guide, playbooks were used pointing to roles to install Opendistro. Starting with Wazuh v.4.3.0 those roles have been replaced by the Wazuh indexer and dashboard.
 

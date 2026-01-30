@@ -157,7 +157,7 @@ Perform the following steps on the Wazuh indexer node (s) to complete the shared
 
       # systemctl restart wazuh-indexer
 
-.. warning::
+.. note::
 
    Make sure to confirm that the ``/mnt/snapshots`` directory has the ``wazuh-indexer:wazuh-indexer`` ownership on the Wazuh indexer nodes using the ``ll`` utility.
 
