@@ -20,6 +20,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated *Monitoring Google Cloud services* documentation. ([#9251](https://github.com/wazuh/wazuh-documentation/pull/9251))
 - **Post-release**: Updated step in the Wazuh RBAC *Creating and setting a Wazuh admin user* section. ([#9252](https://github.com/wazuh/wazuh-documentation/pull/9252))
 - **Post-release**: Updated the *Active Response* documentation. ([#9254](https://github.com/wazuh/wazuh-documentation/pull/9254)) ([#9258](https://github.com/wazuh/wazuh-documentation/pull/9258)) ([#9262](https://github.com/wazuh/wazuh-documentation/pull/9262))
+- **Post-release**: Updated the *Monitoring system calls* documentation. ([#9271](https://github.com/wazuh/wazuh-documentation/pull/9271))
 
 ### Fixed
 
