@@ -148,14 +148,14 @@ We can create a similar YAML file or modify the one we already have to adapt it 
       .. code-block:: yaml
 
          [wazuh-agents]
-         agent_1 ansible_host=<WAZUH_AGENT_IP_ADDRESS> ansible_ssh_user=<USERNAME>
+         agent_1 ansible_host=<WAZUH_MANAGER_IP_ADDRESS> ansible_ssh_user=<USERNAME>
 
    .. group-tab:: Windows
 
       .. code-block:: yaml
 
          [wazuh-agents]
-         agent_1 ansible_host=<WAZUH_AGENT_IP_ADDRESS>
+         agent_1 ansible_host=<WAZUH_MANAGER_IP_ADDRESS>
 
          [wazuh-agents:vars]
          ansible_user=<USERNAME>
