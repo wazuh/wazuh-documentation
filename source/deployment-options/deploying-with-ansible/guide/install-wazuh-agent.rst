@@ -13,6 +13,19 @@ We can install the Wazuh agent on endpoints using the roles and playbooks availa
    :depth: 1
    :backlinks: none
 
+Prerequisites
+-------------
+
+Before deploying Wazuh agents with Ansible, check your Ansible version:
+
+-  Ansible-core 2.10 or later requires installing additional collections from Ansible Galaxy. Without these collections, running the Wazuh agent playbook may fail with an invalid characters error in ``roles/wazuh/ansible-wazuh-agent/handlers/main.yml``:
+
+   .. code-block:: console
+
+      # ansible-galaxy collection install ansible.windows community.windows
+
+-  Ansible 2.9 or earlier does not require these collections.
+
 .. note::
 
 	- 	SSH key-pairing should already be configured between the ansible deployment server and the endpoints.
@@ -135,14 +148,14 @@ We can create a similar YAML file or modify the one we already have to adapt it 
       .. code-block:: yaml
 
          [wazuh-agents]
-         agent_1 ansible_host=<WAZUH_MANAGER_IP_ADDRESS> ansible_ssh_user=<USERNAME>
+         agent_1 ansible_host=<WAZUH_AGENT_IP_ADDRESS> ansible_ssh_user=<USERNAME>
 
    .. group-tab:: Windows
 
       .. code-block:: yaml
 
          [wazuh-agents]
-         agent_1 ansible_host=<WAZUH_MANAGER_IP_ADDRESS>
+         agent_1 ansible_host=<WAZUH_AGENT_IP_ADDRESS>
 
          [wazuh-agents:vars]
          ansible_user=<USERNAME>
