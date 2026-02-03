@@ -55,7 +55,8 @@ extensions = [
     'sphinx.ext.extlinks', # Sphinx built-in extension
     'sphinx_tabs.tabs',
     'wazuh-doc-images', # Custom extension
-    'sphinx_reredirects'
+    'sphinx_reredirects',
+    'sphinx_markdown_builder'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -148,7 +149,7 @@ if html_theme == 'wazuh_doc_theme_v3':
                 current_release[0] == v3_release[0] and
                 current_release[1] < v3_release[1])
     html_theme_options['is_pre_v3'] = is_pre_v3
-    
+
     # Allow dark mode is set to false by default
     html_theme_options['include_mode'] = True
     # Allow switching between modes is set to false by default
@@ -241,7 +242,7 @@ html_show_copyright = True
 # Add link anchors for each heading and description environment. Default: True.
 html_permalinks = True
 
-# Text for link anchors for each heading and description environment. HTML entities 
+# Text for link anchors for each heading and description environment. HTML entities
 # and Unicode are allowed. Default: a paragraph sign; ¶
 html_permalinks_icon = ''
 
@@ -370,6 +371,91 @@ epub_copyright = copyright
 # A list of files that should not be packed into the epub file.
 epub_exclude_files = ['search.html', 'not_found.html']
 
+# -- Options for Markdown output --------------------------------------------
+
+def fix_markdown_links(app, exception):
+    """
+    Post-process markdown files to replace .html extensions with .md extensions.
+
+    This function runs after the markdown build completes and converts all
+    relative .html links to .md links while preserving absolute URLs.
+
+    Features:
+    - Converts href="file.html" to href="file.md"
+    - Converts href="file.html#anchor" to href="file.md#anchor"
+    - Handles both single and double quotes
+    - Handles markdown-style links [text](file.html)
+    - Preserves absolute URLs (http://, https://, //, etc.)
+
+    Args:
+        app: Sphinx application object
+        exception: Exception raised during build (None if successful)
+    """
+    if app.builder.name == 'markdown' and not exception:
+        from pathlib import Path
+
+        build_dir = Path(app.outdir)
+        modified_count = 0
+        total_count = 0
+
+        print("\n" + "="*70)
+        print("Post-processing markdown files: Converting .html links to .md")
+        print("="*70)
+
+        # Process all markdown files recursively
+        for md_file in build_dir.rglob('*.md'):
+            total_count += 1
+
+            try:
+                with open(md_file, 'r', encoding='utf-8') as f:
+                    content = f.read()
+
+                original_content = content
+
+                # Pattern 1: href="...html" (but not absolute URLs)
+                # Matches: href="path/to/file.html"
+                # Skips: href="https://example.com/file.html"
+                content = re.sub(
+                    r'href="(?!(?:[a-zA-Z][a-zA-Z0-9+.-]*:)?//)([^"]*?)\.html"',
+                    r'href="\1.md"',
+                    content
+                )
+
+                # Pattern 2: href='...html' (single quotes, not absolute URLs)
+                # Matches: href='path/to/file.html'
+                content = re.sub(
+                    r"href='(?!(?:[a-zA-Z][a-zA-Z0-9+.-]*:)?//)([^']*?)\.html'",
+                    r"href='\1.md'",
+                    content
+                )
+
+                # Pattern 3: [text](link.html) markdown links (not absolute URLs)
+                # Matches: [Link](path/to/file.html) and [Link](file.html#anchor)
+                content = re.sub(
+                    r'\[([^\]]+)\]\((?!(?:[a-zA-Z][a-zA-Z0-9+.-]*:)?//)([^\)]*?)\.html((?:#[^\)]+)?)\)',
+                    r'[\1](\2.md\3)',
+                    content
+                )
+
+                # Only write if changes were made
+                if content != original_content:
+                    with open(md_file, 'w', encoding='utf-8') as f:
+                        f.write(content)
+                    modified_count += 1
+                    print(f"  ✓ Fixed links in: {md_file.relative_to(build_dir)}")
+
+            except Exception as e:
+                print(f"  ✗ Error processing {md_file.relative_to(build_dir)}: {e}")
+
+        print("-"*70)
+        print(f"Processing complete!")
+        print(f"  Total files: {total_count}")
+        print(f"  Modified files: {modified_count}")
+        print(f"  Unchanged files: {total_count - modified_count}")
+        print("="*70 + "\n")
+
+# Options for sphinx-markdown-builder
+markdown_http_base = '' # Use relative links
 
 # -- Extension configuration -------------------------------------------------
 
@@ -435,7 +521,7 @@ def setup(app):
         os.mkdir(static_path_str)
 
     if html_theme == 'wazuh_doc_theme_v3':
-        
+
         # Download spec file if the file is missing or older that spec_max_age
         if api_tag != '' and apiURL != '':
             spec_max_age = 60*15 # 15 minutes
@@ -450,7 +536,7 @@ def setup(app):
             except FileNotFoundError:
                 print(server_api_spec_path + " not found")
                 download_needed = True
-            
+
             if download_needed == True:
                 print ('Downloading ' + 'spec-'+api_tag+'.yaml')
                 spec_path, url_retrieve_headers = urlretrieve(apiURL, server_api_spec_path)
@@ -484,6 +570,8 @@ def setup(app):
         app.connect('html-page-context', insert_inline_js)
         app.connect('html-page-context', manage_assets)
     app.connect('build-finished', finish_and_clean)
+
+    app.connect('build-finished', fix_markdown_links) # Connect the markdown link fixer to post-process generated markdown files
 
     app.connect('html-page-context', pagefind_custom_weights)
 
@@ -633,7 +721,7 @@ def finish_and_clean(app, exception):
                     os.remove(mapFilePath)
                 except:
                     print("Error while deleting file : ", mapFilePath)
-            
+
             # Remove the source mapping URLs
             for assetsFilePath in assetsFiles:
                 try:
@@ -641,8 +729,8 @@ def finish_and_clean(app, exception):
                         lines = f.readlines()
                     with open(assetsFilePath, "w") as f:
                         for line in lines:
-                            line = re.sub("//# sourceMappingURL=.*\.map", "", line)
-                            line = re.sub("/\*# sourceMappingURL=.*\.map \*/", "", line)
+                            line = re.sub(r"//# sourceMappingURL=.*\.map", "", line)
+                            line = re.sub(r"/\*# sourceMappingURL=.*\.map \*/", "", line)
                             f.write(line)
                 except:
                     print("Error while removing source mapping from file: ", assetsFilePath)
