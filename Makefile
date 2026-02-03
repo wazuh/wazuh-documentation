@@ -19,10 +19,11 @@ ALLSPHINXOPTS   = -d $(BUILDDIR)/doctrees $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) sou
 # the i18n builder cannot share the environment and doctrees with the others
 I18NSPHINXOPTS  = $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) source
 
-.PHONY: help clean html dirhtml singlehtml pickle json htmlhelp qthelp devhelp epub latex latexpdf text man changes linkcheck doctest coverage gettext
+.PHONY: help clean html dirhtml singlehtml pickle json htmlhelp qthelp devhelp epub latex latexpdf text man changes linkcheck doctest coverage gettext markdown
 
 help:
 	@echo "Please use \`make <target>' where <target> is one of"
+	@echo "  markdown   to make Markdown files"
 	@echo "  html-prod  to make standalone HTML files, including GA code. Production only"
 	@echo "  html-dev   to make standalone HTML files, without GA code. Development only"
 	@echo "  html-quick to make standalone HTML files using parallel processing"
@@ -56,13 +57,19 @@ clean:
 
 theme:
 	@cd source/_themes/wazuh_doc_theme_v3 && npm run build-all
-	@echo 
+	@echo
 	@echo Build finished. The main theme assets has been updated.
 	@cd ../../..
 	@echo
 
 search-index:
 	npx -y pagefind@v1.1.0 --site $(BUILDDIR)/html --force-language en
+
+markdown:
+	$(SPHINXBUILD) -b markdown $(ALLSPHINXOPTS) $(BUILDDIR)/markdown
+	@echo
+	@echo "Build finished. The Markdown files are in $(BUILDDIR)/markdown."
+	@echo
 
 html-production:
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html -t production
@@ -80,7 +87,7 @@ html-quick:
 	$(SPHINXBUILD) -j auto -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
-	
+
 html:
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
 	@echo
@@ -88,9 +95,9 @@ html:
 	@echo
 
 html-prod: html-production search-index
-	
+
 html-dev: html-development search-index
-	
+
 html-search: html search-index
 
 dirhtml:
