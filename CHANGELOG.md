@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Added the Wazuh global queries documentation. ([#8949](https://github.com/wazuh/wazuh-documentation/pull/8949))
 - **Post-release**: Added LLMs-ready documentation. ([#9218](https://github.com/wazuh/wazuh-documentation/pull/9218))
 - **Post-release**: Added note about macOS WPK ARM packages in 4.13 and earlier versions. ([#9225](https://github.com/wazuh/wazuh-documentation/pull/9225))
+- **Post-release**: Added *Prerequisites* section to *Install Wazuh Agent* documentation. ([#9279](https://github.com/wazuh/wazuh-documentation/pull/9279))
 
 ### Changed
 
