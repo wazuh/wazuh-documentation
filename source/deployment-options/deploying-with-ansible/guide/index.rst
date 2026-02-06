@@ -28,7 +28,7 @@ The following section describes how to use Ansible to install the Wazuh central 
 
 .. contents::
    :local:
-   :depth: 4
+   :depth: 1
    :backlinks: none
 
 Installing the Wazuh central components
@@ -37,6 +37,11 @@ Installing the Wazuh central components
 The Wazuh central components include the Wazuh indexer, Wazuh dashboard, and Wazuh manager. You can deploy these components with Ansible using predefined playbooks or roles, depending on your desired architecture.
 
 The following sections explain how to deploy the Wazuh central components based on the deployment option:
+
+.. contents::
+   :local:
+   :depth: 1
+   :backlinks: none
 
 All-in-one deployment
 ^^^^^^^^^^^^^^^^^^^^^
@@ -262,12 +267,13 @@ Run the playbook
 
 .. note::
 
-   The Wazuh dashboard can be accessed by visiting ``https://<WAZUH_SERVER_IP>``
+   -  The Wazuh dashboard can be accessed by visiting
+      ``https://<WAZUH_SERVER_IP>``
+   -  The default credentials for Wazuh deployed using Ansible is:
 
-   The default credentials for Wazuh deployed using Ansible is:
-
-   -  Username: ``admin``
-   -  Password: ``changeme``
+      Username: ``admin``
+      
+      Password: ``changeme``
 
    Refer to the :doc:`Password management </user-manual/user-administration/password-management>` section to change the default credentials.
 
@@ -432,12 +438,13 @@ Run the playbook
 
 .. note::
 
-   The Wazuh dashboard can be accessed by visiting ``https://<WAZUH_DASHBOARD_IP_ADDRESS>``
+   -  The Wazuh dashboard can be accessed by visiting
+      ``https://<WAZUH_DASHBOARD_IP_ADDRESS>``
+   -  The default credentials for Wazuh deployed using Ansible is:
 
-   The default credentials for Wazuh deployed using Ansible is:
+      Username: ``admin``
 
-   -  Username: ``admin``
-   -  Password: ``changeme``
+      Password: ``changeme``
 
    Refer to the :doc:`Password management </user-manual/user-administration/password-management>` section to change the default credentials.
 
@@ -795,12 +802,13 @@ Run the playbook
 
 .. note::
 
-   The Wazuh dashboard can be accessed by visiting ``https://<DASHBOARD_SERVER_IP>``
+   -  The Wazuh dashboard can be accessed by visiting
+      ``https://<DASHBOARD_SERVER_IP>``
+   -  The default credentials for Wazuh deployed using Ansible is:
 
-   The default credentials for Wazuh deployed using Ansible is:
+      Username: ``admin``
 
-   -  Username: ``admin``
-   -  Password: ``changeme``
+      Password: ``changeme``
 
    Refer to the :doc:`Password management </user-manual/user-administration/password-management>` section to change the default credentials.
 
@@ -831,7 +839,8 @@ Before deploying Wazuh agents with Ansible, check your Ansible version:
 
 .. note::
 
-   SSH key-pairing should already be configured between the Ansible control server and the endpoints. Add the endpoints where the agent will be deployed in the ``/etc/ansible/hosts`` Ansible hosts file under the ``[wazuh-agents]`` hosts group.
+   -  SSH key-pairing should already be configured between the Ansible control server and the endpoints.
+   -  Add the endpoints where the agent will be deployed in the ``/etc/ansible/hosts`` Ansible hosts file under the ``[wazuh-agents]`` hosts group.
 
    .. code-block:: ini
 

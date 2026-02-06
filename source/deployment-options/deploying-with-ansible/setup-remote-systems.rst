@@ -50,13 +50,15 @@ You can set up an SSH key-pair to provide a passwordless authentication mechanis
 
    #. Generate an authentication key pair for SSH:
 
-.. code-block:: console
+      .. code-block:: console
 
          # ssh-keygen
 
       .. note::
 
-         To improve security on this setup, please ensure you provide a passphrase for this key. Using ssh-agent, we can avoid repeatedly asking for the key password on every Ansible deployment. Ssh-agent will cache the key to be used in further actions, until you log out.
+         -  To improve security on this setup, please ensure you provide a passphrase for this key.
+
+         -  Using ssh-agent, we can avoid repeatedly asking for the key password on every Ansible deployment. Ssh-agent will cache the key to be used in further actions, until you log out.
 
    #. Verify the permissions of the generated keys:
 
@@ -85,47 +87,51 @@ You can set up an SSH key-pair to provide a passwordless authentication mechanis
 
    #. Install OpenSSH server if it is not present.
 
-      -  CentOS/RHEL/Fedora
+      .. tabs::
 
-         .. code-block:: console
+         .. group-tab:: CentOS/RHEL/Fedora
 
-            # yum install openssh-server
+            .. code-block:: console
 
-      -  Ubuntu/Debian
+               # yum install openssh-server
 
-         .. code-block:: console
+         .. group-tab:: Ubuntu/Debian
 
-            # apt-get install openssh-server
+            .. code-block:: console
+
+               # apt-get install openssh-server
 
    #. Start the SSH service.
 
-      -  Systemd
+      .. tabs::
 
-         -  CentOS / RHEL / Fedora:
+         .. group-tab:: Systemd
 
-            .. code-block:: console
+            -  CentOS / RHEL / Fedora:
 
-               # systemctl start sshd
+               .. code-block:: console
 
-         -  Ubuntu/Debian:
+                  # systemctl start sshd
 
-            .. code-block:: console
+            -  Ubuntu/Debian:
 
-               # systemctl start ssh
+               .. code-block:: console
 
-      -  SysV Init
+                  # systemctl start ssh
 
-         -  CentOS / RHEL / Fedora:
+         .. group-tab:: SysV Init
 
-            .. code-block:: console
+            -  CentOS / RHEL / Fedora:
 
-               # service sshd start
+               .. code-block:: console
 
-         -  Ubuntu/Debian:
+                  # service sshd start
 
-            .. code-block:: console
+            -  Ubuntu/Debian:
 
-               # service ssh start
+               .. code-block:: console
+
+                  # service ssh start
 
    #. Navigate to the ``$HOME`` directory of the remote endpoint, create the ``.ssh`` directory, and assign the appropriate permissions to it:
 
@@ -165,33 +171,35 @@ You can set up an SSH key-pair to provide a passwordless authentication mechanis
 
 5. Restart the SSH service:
 
-   -  Systemd
+   .. tabs::
 
-      -  CentOS / RHEL / Fedora:
+      .. group-tab:: Systemd
 
-         .. code-block:: console
+         -  CentOS / RHEL / Fedora:
 
-            # systemctl start sshd
+            .. code-block:: console
 
-      -  Ubuntu/Debian:
+               # systemctl start sshd
 
-         .. code-block:: console
+         -  Ubuntu/Debian:
 
-            # systemctl start ssh
+            .. code-block:: console
 
-   -  SysV Init
+               # systemctl start ssh
 
-      -  CentOS / RHEL / Fedora:
+      .. group-tab:: SysV Init
 
-         .. code-block:: console
+         -  CentOS / RHEL / Fedora:
 
-            # service sshd start
+            .. code-block:: console
 
-      -  Ubuntu/Debian:
+               # service sshd start
 
-         .. code-block:: console
+         -  Ubuntu/Debian:
 
-            # service ssh start
+            .. code-block:: console
+
+               # service ssh start
 
 6. Test the connection from the Ansible server:
 

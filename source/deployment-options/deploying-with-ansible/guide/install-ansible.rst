@@ -48,20 +48,20 @@ Installation on CentOS/RHEL/Fedora
 
             You have to create the default configuration file ``/etc/ansible/ansible.cfg`` and ``/etc/ansible/hosts`` inventory file if they are not created automatically. Please follow the steps below:
 
-            Create the ``/etc/ansible/ansible.cfg`` config file.
+            #. Create the ``/etc/ansible/ansible.cfg`` config file.
 
-            .. code-block:: console
+               .. code-block:: console
 
-               # sudo mkdir -p /etc/ansible
-               # sudo touch /etc/ansible/ansible.cfg
+                  # sudo mkdir -p /etc/ansible
+                  # sudo touch /etc/ansible/ansible.cfg
 
-            Edit ``/etc/ansible/ansible.cfg`` and add the following content.
+            #. Edit ``/etc/ansible/ansible.cfg`` and add the following content.
 
-            .. code-block:: ini
+               .. code-block:: ini
 
-               [defaults]
-               inventory = /etc/ansible/hosts
-               host_key_checking = False
+                  [defaults]
+                  inventory = /etc/ansible/hosts
+                  host_key_checking = False
 
 Installation on Debian/Ubuntu
 -----------------------------
