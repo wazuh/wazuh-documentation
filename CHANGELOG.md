@@ -40,6 +40,7 @@ All notable changes to this project will be documented in this file.
 
 - Fixed code block highlighting and indentation for ``securityContext`` in *Upgrading Wazuh on Kubernetes*. ([#9161](https://github.com/wazuh/wazuh-documentation/pull/9161))
 - **Post-release**: Fixed command syntax in the *Monitoring GitHub audit logs* section. ([#9213](https://github.com/wazuh/wazuh-documentation/pull/9213))
+- **Post-release**: Fixed Change the password of Wazuh users steps in the *Deployment on Kubernetes* guide. ([#9296](https://github.com/wazuh/wazuh-documentation/pull/9296))
 
 ## [v4.14.1]
 
