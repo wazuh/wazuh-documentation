@@ -19,6 +19,7 @@ All notable changes to this project will be documented in this file.
 
 - **Post-release**: Added LLMs-ready documentation. ([#9201](https://github.com/wazuh/wazuh-documentation/pull/9201)) ([#9232](https://github.com/wazuh/wazuh-documentation/pull/9232)) ([#9238](https://github.com/wazuh/wazuh-documentation/pull/9238))
 - **Post-release**: Added note about macOS WPK ARM packages in 4.14.2 and earlier versions. ([#9224](https://github.com/wazuh/wazuh-documentation/pull/9224))
+- **Post-release**: Added note about disabling Wazuh repositories in the *Wazuh central components* section of the *Uprade guide*. ([#9224](https://github.com/wazuh/wazuh-documentation/pull/9224))
 
 ### Changed
 
@@ -32,6 +33,8 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated *Monitoring Google Cloud services* documentation. ([#9251](https://github.com/wazuh/wazuh-documentation/pull/9251))
 - **Post-release**: Updated step in the Wazuh RBAC *Creating and setting a Wazuh admin user* section. ([#9252](https://github.com/wazuh/wazuh-documentation/pull/9252))
 - **Post-release**: Updated the *Active Response* documentation. ([#9254](https://github.com/wazuh/wazuh-documentation/pull/9254)) ([#9258](https://github.com/wazuh/wazuh-documentation/pull/9258)) ([#9262](https://github.com/wazuh/wazuh-documentation/pull/9262))
+- **Post-release**: Updated the *Monitoring system calls* documentation. ([#9271](https://github.com/wazuh/wazuh-documentation/pull/9271))
+- **Post-release**: Updated the *Installing the Wazuh dashboard step by step* documentation. ([#9260](https://github.com/wazuh/wazuh-documentation/pull/9260))
 
 ### Fixed
 
