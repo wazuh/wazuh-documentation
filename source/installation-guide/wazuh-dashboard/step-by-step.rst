@@ -89,10 +89,24 @@ Configuring the Wazuh dashboard
 Deploying certificates
 ^^^^^^^^^^^^^^^^^^^^^^
 
-  .. note::
-    Make sure that a copy of the ``wazuh-certificates.tar`` file, created during the initial configuration step, is placed in your working directory.
+   .. note::
+     Make sure that a copy of the ``wazuh-certificates.tar`` file, created during the initial configuration step, is placed in your working directory.
 
-  .. include:: /_templates/installations/dashboard/deploy_certificates.rst
+   #. Replace ``<DASHBOARD_NODE_NAME>`` with your Wazuh dashboard node name, the same one used in ``config.yml`` to create the certificates, and move the certificates to their corresponding location. 
+   
+       .. code-block:: console
+   
+         # NODE_NAME=<DASHBOARD_NODE_NAME>
+         
+       .. code-block:: console  
+       
+         # mkdir /etc/wazuh-dashboard/certs
+         # tar -xf ./wazuh-certificates.tar -C /etc/wazuh-dashboard/certs/ ./$NODE_NAME.pem ./$NODE_NAME-key.pem ./root-ca.pem
+         # [ ! -e /etc/wazuh-dashboard/certs/dashboard.pem ] && mv -n /etc/wazuh-dashboard/certs/$NODE_NAME.pem /etc/wazuh-dashboard/certs/dashboard.pem
+         # [ ! -e /etc/wazuh-dashboard/certs/dashboard-key.pem ] && mv -n /etc/wazuh-dashboard/certs/$NODE_NAME-key.pem /etc/wazuh-dashboard/certs/dashboard-key.pem
+         # chmod 500 /etc/wazuh-dashboard/certs
+         # chmod 400 /etc/wazuh-dashboard/certs/*
+         # chown -R wazuh-dashboard:wazuh-dashboard /etc/wazuh-dashboard/certs
 
 
 Starting the Wazuh dashboard service
