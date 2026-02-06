@@ -8,6 +8,10 @@ Monitoring file and directory access
 
 In this example, we monitor various types of access to the ``/home`` directory of the monitored endpoint. This includes write, read, execution access, and changes in the directory's attributes.
 
+.. note::
+
+   Please complete the prerequisite :doc:`Wazuh agent configuration <../audit-configuration>` before performing this use case below.
+
 Ubuntu endpoint
 ---------------
 
