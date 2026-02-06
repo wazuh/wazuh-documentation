@@ -529,11 +529,17 @@ The ``wazuh-wui`` user is the default user used to connect to the Wazuh server A
 
         # kubectl apply -k envs/eks/
 
-#. Restart the Wazuh dashboard and Wazuh manager master pods.
+#. Force the Wazuh dashboard deployment rollout to update the component credentials.
 
    .. code-block:: console
 
-      # kubectl delete pod wazuh-manager-master-0 wazuh-manager-worker-0-0 wazuh-manager-worker-1-0 wazuh-dashboard-f4d9c7944-httsd
+      $ kubectl rollout restart deploy/wazuh-dashboard -n wazuh
+
+#. Delete all Wazuh manager pods to update the component credentials.
+
+   .. code-block:: console
+
+      $ kubectl delete -n wazuh pod/wazuh-manager-master-0 pod/wazuh-manager-worker-0 pod/wazuh-manager-worker-1
 
 Agents
 ^^^^^^

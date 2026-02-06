@@ -8,6 +8,10 @@ Monitoring commands run as root
 
 In this use case, we use Wazuh and Linux Audit system to monitor all commands executed using root privileges. 
 
+.. note::
+
+   Please complete the prerequisite :doc:`Wazuh agent configuration <../audit-configuration>` before performing this use case below.
+
 Ubuntu endpoint
 ---------------
 

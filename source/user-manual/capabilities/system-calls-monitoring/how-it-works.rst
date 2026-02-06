@@ -144,8 +144,9 @@ For example, the following configuration defines a rule that creates a log entry
 
 .. code-block:: console
 
-   # auditctl -a always,exit -S unlink -S unlinkat -S rename -S renameat -F auid>=500 -F auid!=4294967295 -k delete
+   # auditctl -a always,exit -F arch=b64 -S unlink -S unlinkat -S rename -S renameat -F "auid>=500" -F auid!=4294967295 -k delete
 
+The above command is executed on a Linux system with the Linux Audit subsystem (auditd) enabled and a 64‑bit architecture. To run the command on a 32-bit system, set ``-F arch=32``.
 
 .. Note::
    ``-F auid!=4294967295`` option is used to exclude users whose login UID is not set.
