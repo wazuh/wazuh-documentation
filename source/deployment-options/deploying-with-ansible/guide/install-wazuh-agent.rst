@@ -3,198 +3,187 @@
 .. meta::
    :description: Check out this guide to learn how to install the Wazuh agent if you are deploying Wazuh with Ansible, an open source platform designed for automating tasks.
 
-Install Wazuh Agent
-===================
+Installing the Wazuh agent
+==========================
 
-We can install the Wazuh agent on endpoints using the roles and playbooks available in the Wazuh Ansible repository. The Ansible server must have access to the endpoints where the agents are to be installed.
+The ``ansible-wazuh-agent`` role installs Wazuh agents on Linux endpoints. The Ansible control server requires SSH access to each endpoint.
 
 .. contents::
    :local:
    :depth: 1
    :backlinks: none
 
+Prerequisites
+-------------
+
+Before deploying Wazuh agents with Ansible, check your Ansible version:
+
+-  Ansible-core 2.10 or later requires installing additional collections from Ansible Galaxy. Without these collections, running the Wazuh agent playbook may fail with an invalid characters error in ``roles/wazuh/ansible-wazuh-agent/handlers/main.yml``:
+
+   .. code-block:: console
+
+      # ansible-galaxy collection install ansible.windows community.windows
+
+-  Ansible 2.9 or earlier does not require these collections.
+
 .. note::
 
-	- 	SSH key-pairing should already be configured between the ansible deployment server and the endpoints.
-	- 	Add the endpoints where the agent will be deployed in the Ansible hosts file under the ``[wazuh-agents]`` hosts group.
+   SSH key-pairing should already be configured between the Ansible control server and the endpoints. Add the endpoints where the agent will be deployed in the ``/etc/ansible/hosts`` Ansible hosts file under the ``[wazuh-agents]`` hosts group.
 
-1 - Accessing the wazuh-ansible directory
------------------------------------------
+   .. code-block:: ini
 
-We access the contents of the directory on the Ansible server where we have cloned the repository to. We can see the roles we have by running the command below in the cloned directory:
+      [wazuh-agents]
+      agent_1 ansible_host=<WAZUH_AGENT_IP_ADDRESS> ansible_ssh_user=<USERNAME>
 
-.. code-block:: console
+Access the wazuh-ansible directory
+----------------------------------
 
-	# cd /etc/ansible/roles/wazuh-ansible/
-	# tree roles -d
-
-.. code-block:: none
-	:class: output
-
-	roles
-	├── ansible-galaxy
-	│   └── meta
-	└── wazuh
-	    ├── ansible-filebeat-oss
-	    │   ├── defaults
-	    │   ├── handlers
-	    │   ├── meta
-	    │   ├── tasks
-	    │   └── templates
-	    ├── ansible-wazuh-agent
-	    │   ├── defaults
-	    │   ├── handlers
-	    │   ├── meta
-	    │   ├── tasks
-	    │   └── templates
-	    ├── ansible-wazuh-manager
-	    │   ├── defaults
-	    │   ├── files
-	    │   │   └── custom_ruleset
-	    │   │       ├── decoders
-	    │   │       └── rules
-	    │   ├── handlers
-	    │   ├── meta
-	    │   ├── tasks
-	    │   ├── templates
-	    │   └── vars
-	    ├── wazuh-dashboard
-	    │   ├── defaults
-	    │   ├── handlers
-	    │   ├── tasks
-	    │   ├── templates
-	    │   └── vars
-	    └── wazuh-indexer
-	        ├── defaults
-	        ├── handlers
-	        ├── meta
-	        ├── tasks
-	        └── templates
-
-And we can see the preconfigured playbooks we have by running the command below:
+Change to the directory where you cloned the Wazuh Ansible repository:
 
 .. code-block:: console
 
-	# tree playbooks/
+   # cd /etc/ansible/roles/wazuh-ansible/
+   # tree roles -d
 
 .. code-block:: none
-	:class: output
+   :class: output
 
-	playbooks
-	├── ansible.cfg
-	├── wazuh-agent.yml
-	├── wazuh-dashboard.yml
-	├── wazuh-indexer.yml
-	├── wazuh-manager-oss.yml
-	├── wazuh-production-ready.yml
-	└── wazuh-single.yml
+   roles
+   ├── ansible-galaxy
+   │   └── meta
+   └── wazuh
+       ├── ansible-filebeat-oss
+       │   ├── defaults
+       │   ├── handlers
+       │   ├── meta
+       │   ├── tasks
+       │   └── templates
+       ├── ansible-wazuh-agent
+       │   ├── defaults
+       │   ├── handlers
+       │   ├── meta
+       │   ├── tasks
+       │   └── templates
+       ├── ansible-wazuh-manager
+       │   ├── defaults
+       │   ├── files
+       │   │   └── custom_ruleset
+       │   │       ├── decoders
+       │   │       └── rules
+       │   ├── handlers
+       │   ├── meta
+       │   ├── tasks
+       │   ├── templates
+       │   └── vars
+       ├── wazuh-dashboard
+       │   ├── defaults
+       │   ├── handlers
+       │   ├── tasks
+       │   ├── templates
+       │   └── vars
+       └── wazuh-indexer
+           ├── defaults
+           ├── handlers
+           ├── meta
+           ├── tasks
+           └── templates
 
-For the agent deployment, we are going to use the role of wazuh-agent, which contains the necessary commands to install an agent and register it in our Wazuh environment. Below is the content of the YAML file ``/etc/ansible/roles/wazuh-ansible/playbooks/wazuh-agent.yml`` we are going to run for a complete installation of the Wazuh agent.
+You can see the preconfigured playbooks by running the command below:
+
+.. code-block:: console
+
+   # tree playbooks/
+
+.. code-block:: none
+   :class: output
+
+   playbooks
+   ├── ansible.cfg
+   ├── wazuh-agent.yml
+   ├── wazuh-dashboard.yml
+   ├── wazuh-indexer.yml
+   ├── wazuh-manager-oss.yml
+   ├── wazuh-production-ready.yml
+   └── wazuh-single.yml
+
+The ``/etc/ansible/roles/wazuh-ansible/playbooks/wazuh-agent.yml`` file contains the necessary commands to install a Wazuh agent and register it to the Wazuh manager. Below is the content of the ``/etc/ansible/roles/wazuh-ansible/playbooks/wazuh-agent.yml`` file:
 
 .. code-block:: yaml
 
-	---
-	- hosts: <WAZUH_AGENT_IP_ADDRESS>
-	  become: yes
-	  become_user: root
-	  roles:
-	    - ../roles/wazuh/ansible-wazuh-agent
-	  vars:
-	    wazuh_managers:
-	      - address: <WAZUH_MANAGER_IP_ADDRESS>
-	        port: 1514
-	        protocol: tcp
-	        api_port: 55000
-	        api_proto: 'https'
-	        api_user: wazuh
-	        max_retries: 5
-	        retry_interval: 5
+   ---
+   - hosts: <WAZUH_AGENT_IP_ADDRESS> OR <WAZUH_AGENT_GROUP_NAME>
+     become: yes
+     become_user: root
+     roles:
+       - ../roles/wazuh/ansible-wazuh-agent
+     vars:
+       wazuh_managers:
+         - address: <WAZUH_MANAGER_IP_ADDRESS>
+           port: 1514
+           protocol: tcp
+           api_port: 55000
+           api_proto: 'https'
+           api_user: wazuh
+           max_retries: 5
+           retry_interval: 5
 
-Let’s take a closer look at the content.
+**Where:**
 
-- 	The first line ``hosts``: indicates the machines where the commands in the playbook will be executed.
-- 	The ``roles``: section indicates the roles that will be executed on the hosts specified. In this case, we are going to install the role of wazuh-agent.
-- 	The variables list ``wazuh_managers``: indicates details for the connection with the Wazuh manager. This list overwrites the default configuration.
+-  ``hosts:`` indicates the endpoints where the commands in the playbook will be executed.
 
-There are several variables we can use to customize the installation or configuration. If we want to change the default configuration:
+-  ``roles:`` section indicates the roles that will be executed on the hosts specified. In this case, the role of the wazuh-agent will be installed. Replace the ``<WAZUH_AGENT_IP_ADDRESS>`` OR ``<WAZUH_AGENT_GROUP_NAME>`` with the IP address of the Wazuh agent or the Wazuh agent group name.
 
-- 	We can change the ``/etc/ansible/roles/wazuh-ansible/roles/wazuh/ansible-wazuh-agent/defaults/main.yml`` file directly.
-- 	Alternatively, we can create another YAML file with the content we want to change in the configuration. If we want to do this, we can find more information about the :doc:`Wazuh agent role <../roles/wazuh-agent>`.
+-  ``wazuh_managers:`` indicates details for the connection with the Wazuh manager. This list overwrites the default configuration. Replace ``<WAZUH_MANAGER_IP_ADDRESS>`` with the actual IP address of the Wazuh manager.
+
+There are several variables that you can use to customize the installation or configuration. You can change the default configuration by modifying the ``/etc/ansible/roles/wazuh-ansible/roles/wazuh/ansible-wazuh-agent/defaults/main.yml`` file.
+
+Alternatively, you can create another YAML file with the content you want to change in the configuration. You can find more information in the :doc:`Wazuh agent role <../roles/wazuh-agent>` section.
 
 More details on default configuration variables can be found in the :doc:`variables references section <../reference>`.
 
-2 - Preparing to run the playbook
----------------------------------
+Prepare the playbook
+--------------------
 
-We can create a similar YAML file or modify the one we already have to adapt it to our configuration. We will use the host group of the endpoints where we are going to install the Wazuh agent in the hosts section. In this case, it is ``wazuh-agents``. Make sure to replace these values with your agents actual data. Add and remove lines accordingly. The hosts file will look like this:
-
-.. tabs::
-   
-   .. group-tab:: Generic
-
-      .. code-block:: yaml
-
-         [wazuh-agents]
-         agent_1 ansible_host=<WAZUH_MANAGER_IP_ADDRESS> ansible_ssh_user=<USERNAME>
-
-   .. group-tab:: Windows
-
-      .. code-block:: yaml
-
-         [wazuh-agents]
-         agent_1 ansible_host=<WAZUH_MANAGER_IP_ADDRESS>
-
-         [wazuh-agents:vars]
-         ansible_user=<USERNAME>
-         ansible_password=<PASSWORD>
-         ansible_connection=winrm
-         ansible_winrm_server_cert_validation=ignore
-         ansible_ssh_port=5986
-
-We will also add the IP address of the Wazuh server to the ``wazuh_managers:`` section.
-
-Our resulting file is:
+Add ``wazuh-agents`` as host group of the endpoints where the installation of the Wazuh agent will be done in the hosts section and the IP address of the Wazuh server in the ``wazuh_managers:`` section of the ``/etc/ansible/roles/wazuh-ansible/playbooks/wazuh-agent.yml`` file.
 
 .. code-block:: yaml
 
-	---
-	- hosts: wazuh-agents
-	  become: yes
-	  become_user: root
-	  roles:
-	    - ../roles/wazuh/ansible-wazuh-agent
-	  vars:
-	    wazuh_managers:
-	      - address: <WAZUH_MANAGER_IP_ADDRESS>
-	        port: 1514
-	        protocol: tcp
-	        api_port: 55000
-	        api_proto: 'https'
-	        api_user: wazuh
-	        max_retries: 5
-	        retry_interval: 5
+   ---
+   - hosts: wazuh-agents
+     become: yes
+     become_user: root
+     roles:
+       - ../roles/wazuh/ansible-wazuh-agent
+     vars:
+       wazuh_managers:
+         - address: <WAZUH_MANAGER_IP_ADDRESS>
+           port: 1514
+           protocol: tcp
+           api_port: 55000
+           api_proto: 'https'
+           api_user: wazuh
+           max_retries: 5
+           retry_interval: 5
 
-3 - Running the playbook
-------------------------
+Run the playbook
+----------------
 
-Now, we are ready to run the playbook and start the installation. However, some of the operations to be  performed on the remote systems will need sudo permissions. We can solve this in several ways, either by opting to enter the password when Ansible requests it or using the `become <https://docs.ansible.com/ansible/latest/user_guide/become.html#id1>`_ option (to avoid entering passwords one by one).
+#. Switch to the playbooks folder on the Ansible server and run the command below:
 
-#.	Let’s run the playbook.
+   .. code-block:: console
 
-	Switch to the playbooks folder on the Ansible server and proceed to run the command below:
+      # ansible-playbook wazuh-agent.yml -b -K
 
-	.. code-block:: console
+#. Check the status of Wazuh agent:
 
-		# ansible-playbook wazuh-agent.yml -b -K
+   -  Wazuh agent status on the endpoint
 
-#. Once the deployment completes, we can check the status of the Wazuh agent on the endpoints.
+      .. code-block:: console
 
-	.. code-block:: console
+         # systemctl status wazuh-agent
 
-		# systemctl status wazuh-agent
+   -  Wazuh agent status on the Wazuh server
 
-	We can also view agent information from the Wazuh server.
+      .. code-block:: console
 
-	.. code-block:: console
-
-		# /var/ossec/bin/agent_control -l
+         # /var/ossec/bin/agent_control -l

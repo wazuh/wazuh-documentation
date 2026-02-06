@@ -3,20 +3,22 @@
 .. meta::
    :description: Deploying a Wazuh cluster with Ansible.
 
-Install a Wazuh cluster
-=======================
+Wazuh cluster deployment
+========================
 
-Wazuh can be deployed as a distributed cluster with Ansible playbooks. The installation will follow the steps below:
+A Wazuh cluster is a distributed deployment where multiple Wazuh manager and indexer nodes work together to provide horizontal scalability, performance, and high availability. In a clustered setup, data and workloads are shared across nodes, ensuring redundancy and load balancing.
+
+You can deploy a Wazuh cluster using Ansible playbooks from the Wazuh Ansible repository.
 
 .. contents::
    :local:
    :depth: 1
    :backlinks: none
 
-1 - Accessing the wazuh-ansible directory
------------------------------------------
+Access the wazuh-ansible directory
+-----------------------------------
 
-We access the contents of the directory on the Ansible server where we have cloned the repository to. We can see the roles we have by running the command below in the cloned directory:
+Change to the directory where you cloned the Wazuh Ansible repository and list available playbooks:
 
 .. code-block:: console
 
@@ -66,7 +68,7 @@ We access the contents of the directory on the Ansible server where we have clon
          ├── tasks
          └── templates
 
-And we can see the preconfigured playbooks we have by running the command below.:
+You can see the preconfigured playbooks by running the command below:
 
 .. code-block:: console
 
@@ -277,12 +279,12 @@ Let’s take a closer look at the content.
 
 More details on  default configuration variables can be found in the :doc:`variables references section <../reference>`.
 
-2 - Preparing to run the playbook
----------------------------------
+Prepare the playbook
+--------------------
 
-The YAML file wazuh-production-ready.yml will provision a production-ready distributed Wazuh environment. We will add the public and private IP addresses of the endpoints where the various components of the cluster will be installed to the Ansible hosts file. For this guide, the architecture includes 2 Wazuh nodes, 3 Wazuh indexer nodes, and a Wazuh dashboard node.
+The ``wazuh-production-ready.yml`` file allows you to deploy a distributed Wazuh environment. For this guide, the architecture includes 2 Wazuh manager nodes, 3 Wazuh indexer nodes and a Wazuh dashboard node. Add the public and private IP addresses of the endpoints where the various components of the cluster will be installed to the ``/etc/ansible/hosts`` Ansible hosts file.
 
-The contents of the host file is:
+The contents of the Ansible host file below:
 
 .. code-block:: yaml
 
@@ -305,25 +307,29 @@ The contents of the host file is:
  
 Let’s take a closer look at the content.
 
--  The ``ansible_host`` variable should contain the public IP address/FQDN for each node.
--  The ``private_ip`` variable should contain the private IP address/FQDN used for the internal cluster communications.
+-  ``ansible_host`` variable should contain the public IP address/FQDN for each node.
+
+-  ``private_ip`` variable should contain the private IP address/FQDN used for the internal cluster communications.
+
 -  If the environment is located in a local subnet, ``ansible_host`` and ``private_ip`` variables should match.
--  The ansible_ssh variable specifies the ssh user for the nodes.
 
-3 - Running the playbook
-------------------------
+-  ``ansible_ssh_user`` variable specifies the SSH user for the nodes when it's the same. Specify this variable for each ``ansible_host`` if the SSH users are different. For example:
 
-Now, we are ready to run the playbook and start the installation. However, some of the operations to be performed on the remote systems will need sudo permissions. We can solve this in several ways, either by opting to enter the password when Ansible requests it or using  the `become <https://docs.ansible.com/ansible/latest/user_guide/become.html#id1>`_ option (to avoid entering passwords one by one).
+   .. code-block:: yaml
 
-#. Let's run the playbook.
+      wi1 ansible_host=<WI1_EC2_PUBLIC_IP> private_ip=<WI1_EC2_PRIVATE_IP> indexer_node_name=node-1 ansible_user=ubuntu
+      wi2 ansible_host=<WI2_EC2_PUBLIC_IP> private_ip=<WI2_EC2_PRIVATE_IP> indexer_node_name=node-2 ansible_user=admin
 
-   Switch to the playbooks folder on the Ansible server and proceed to run the command below:
+Run the playbook
+----------------
+
+#. Switch to the playbooks folder on the Ansible server and proceed to run the command below:
 
    .. code-block:: console
 
       # ansible-playbook wazuh-production-ready.yml -b -K
 
-#. We can check the status of the new services on our respective nodes.
+#. The commands below check the status of Wazuh indexer, Wazuh dashboard, Wazuh manager, and filebeat services.
 
    -  Wazuh indexer.
 
@@ -350,11 +356,12 @@ Now, we are ready to run the playbook and start the installation. However, some 
          # systemctl status filebeat
 
 .. note::
-	
-	- 	The Wazuh dashboard can be accessed by visiting ``https://<WAZUH_DASHBOARD_IP_ADDRESS>``
 
-	- 	The default credentials for Wazuh deployed using ansible is:
+   The Wazuh dashboard can be accessed by visiting ``https://<DASHBOARD_SERVER_IP>``
 
-		| Username: admin
-		|	Password: changeme
-		| These credentials should be changed using the password changing tool.
+   The default credentials for Wazuh deployed using Ansible is:
+
+   | Username: ``admin``
+   | Password: ``changeme``
+
+   Refer to the :doc:`Password management </user-manual/user-administration/password-management>` section to change the default credentials.

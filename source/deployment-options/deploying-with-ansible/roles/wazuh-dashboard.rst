@@ -34,7 +34,7 @@ Custom variable definitions for different environments can be set. For example:
 
       indexer_network_host: '<WAZUH_INDEXER_DEV_IP_ADDRESS>'
 
-To run the playbook for a specific environment, the command below is run:
+To execute the playbook for a specific environment, run the command below:
 
 .. code-block:: console
 

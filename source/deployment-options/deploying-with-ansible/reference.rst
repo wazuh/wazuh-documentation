@@ -50,7 +50,7 @@ Wazuh dashboard
 |
 | **Variable**: ``dashboard_server_port``
 | **Description**: Listening port of the Wazuh dashboard.
-| **Default value**: ``443``
+| **Default value**: ``5601``
 |
 | **Variable**: ``wazuh_version``
 | **Description**: Wazuh dashboard compatible version to install.
@@ -253,6 +253,10 @@ Wazuh Manager
       packages: 'yes'
       ports_no: 'yes'
       processes: 'yes'
+      users: 'yes'
+      groups: 'yes'
+      services: 'yes'
+      browser_extensions: 'yes'
       users: 'yes'
       groups: 'yes'
       services: 'yes'
@@ -1075,6 +1079,10 @@ Wazuh Agent
       packages: 'yes'
       ports_no: 'yes'
       processes: 'yes'
+      users: 'yes'
+      groups: 'yes'
+      services: 'yes'
+      browser_extensions: 'yes'
       users: 'yes'
       groups: 'yes'
       services: 'yes'

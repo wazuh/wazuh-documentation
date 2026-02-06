@@ -92,7 +92,7 @@ Finally, the ``authd`` service password can be set in the file ``ansible-wazuh-m
 
    We recommend the use of `Ansible Vault <http://docs.ansible.com/ansible/playbooks_vault.html>`_ to protect Wazuh API and agentless credentials.
 
-To run the playbook for a specific environment, the command below is run:
+To execute the playbook for a specific environment, run the command below:
 
 .. code-block:: console
 

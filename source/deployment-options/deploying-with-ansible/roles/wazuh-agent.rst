@@ -51,7 +51,7 @@ You can maintain different environments using a variable definition YAML file fo
      ssl_agent_ca: null
      ssl_auto_negotiate: 'no'
 
-To run the playbook for a specific environment, the command below is run:
+To execute the playbook for a specific environment, run the command below:
 
 .. code-block:: console
 
