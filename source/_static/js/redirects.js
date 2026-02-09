@@ -80,6 +80,7 @@ newUrls['4.14'] = [
   '/cloud-security/azure/platform-and-services/log-analytics.html',
   '/cloud-security/azure/platform-and-services/storage.html',
   '/cloud-security/azure/platform-and-services/graph.html',
+  '/deployment-options/deploying-with-ansible/guide/index.html',
 ]
 
 /* Redirections 4.13—4.14  */
@@ -109,6 +110,9 @@ removedUrls['4.14'] = [
   '/cloud-security/azure/log-analytics.html',
   '/cloud-security/azure/storage.html',
   '/cloud-security/azure/graph.html',
+  '/deployment-options/deploying-with-ansible/installation-guide.html',
+  '/deployment-options/deploying-with-ansible/guide/install-wazuh-agent.html',
+  '/deployment-options/deploying-with-ansible/guide/install-wazuh-cluster.html',
 ];
 
 /* *** RELEASE 4.13 ****/
