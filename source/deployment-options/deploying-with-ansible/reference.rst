@@ -224,23 +224,32 @@ Wazuh manager
 
 |
 | **Variable**: ``wazuh_manager_openscap``
-| **Description**: Configures the OpenSCAP wodle from ``ossec.conf``.
-| **Default value**:
+| **Description**: Configures the :doc:`wodle </user-manual/reference/ossec-conf/wodle-osquery>` item named ``open-scap`` from ``ossec.conf``.
+| **Default values**:
 
 .. code-block:: yaml
 
     wazuh_manager_openscap:
+      disable: 'yes'
       timeout: 1800
+      interval: '1d'
+      scan_on_start: 'yes'
 
 |
 | **Variable**: ``wazuh_manager_ciscat``
-| **Description**: Configures the CIS-CAT wodle from ``ossec.conf``.
+| **Description**: Configures the :doc:`wodle </user-manual/reference/ossec-conf/wodle-osquery>` item named ``cis-cat`` from ``ossec.conf``.
 | **Default value**:
 
 .. code-block:: yaml
 
     wazuh_manager_ciscat:
+      disable: 'yes'
+      install_java: 'yes'
       timeout: 1800
+      interval: '1d'
+      scan_on_start: 'yes'
+      java_path: '/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/bin'
+      ciscat_path: 'wodles/ciscat'
 
 |
 | **Variable**: ``wazuh_manager_osquery``
@@ -276,7 +285,7 @@ Wazuh manager
       users: 'yes'
       groups: 'yes'
       services: 'yes'
-      browser_extensions: 'yes'
+      browser_extensions:'yes'
 
 |
 | **Variable**: ``wazuh_manager_monitor_aws``
@@ -1098,7 +1107,7 @@ Wazuh agent
       users: 'yes'
       groups: 'yes'
       services: 'yes'
-      browser_extensions: 'yes'
+      browser_extensions:'yes'
 
 |
 | **Variable**: ``wazuh_agent_sca``
