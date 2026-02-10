@@ -3,10 +3,10 @@
 .. meta::
    :description: Learn how to use a preconfigured role to install the Wazuh Manager and customize the installation with different variables in this section.
 
-Wazuh Manager
+Wazuh manager
 -------------
 
-This role will install and configure the Wazuh Manager and API. There are several variables you can use to customize the installation or configuration. They include:
+This role will install and configure the Wazuh manager and Wazuh server API. There are several variables you can use to customize the installation or configuration. They include:
 
 -  ``wazuh_manager_config_overlay``: This enables configuring the manager by overlaying sections of configs on top of defaults (default: ``true``)
 -  ``wazuh_manager_json_output``: This parameter specifies whether JSON output should be enabled or not (default: ``yes``)
@@ -28,7 +28,7 @@ Custom variable definitions for different environments can be set when configuri
 
 .. code-block:: yaml
 
-   filebeat_output_indexer_hosts: '<WAZUH_INDEXER_IP_ADDRESS>:9200'
+   filebeat_output_indexer_hosts: '10.1.1.11:9200'
 
    wazuh_manager_fqdn: "wazuh-manager"
 
@@ -98,6 +98,6 @@ To execute the playbook for a specific environment, run the command below:
 
    $ ansible-playbook wazuh-manager.yml -e@vars-production.yml
 
-The example above will install Wazuh Manager and Filebeat, Filebeat will be configured to forward data to ``<WAZUH_INDEXER_IP_ADDRESS>:9200`` as the Indexer node, also it will set various ``agentless`` hosts configurations including their credentials, the Wazuh API, and the ``authd`` will be configured as well.
+The example above will install the Wazuh manager and Filebeat. Filebeat will be configured to forward data to ``10.1.1.11:9200`` as the Indexer node, also it will set various ``agentless`` hosts configurations including their credentials, the Wazuh API, and the ``authd`` will be configured as well.
 
 Please review the :ref:`variables references <wazuh_ansible_reference_manager>` section to see all variables available for this role.

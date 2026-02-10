@@ -87,7 +87,7 @@ Filebeat
 
 .. _wazuh_ansible_reference_manager:
 
-Wazuh Manager
+Wazuh manager
 =============
 
 | **Variable**: ``wazuh_manager_fqdn``
@@ -223,6 +223,26 @@ Wazuh Manager
       frequency: 43200
 
 |
+| **Variable**: ``wazuh_manager_openscap``
+| **Description**: Configures the OpenSCAP wodle from ``ossec.conf``.
+| **Default value**:
+
+.. code-block:: yaml
+
+    wazuh_manager_openscap:
+      timeout: 1800
+
+|
+| **Variable**: ``wazuh_manager_ciscat``
+| **Description**: Configures the CIS-CAT wodle from ``ossec.conf``.
+| **Default value**:
+
+.. code-block:: yaml
+
+    wazuh_manager_ciscat:
+      timeout: 1800
+
+|
 | **Variable**: ``wazuh_manager_osquery``
 | **Description**: Configures the :doc:`wodle</user-manual/reference/ossec-conf/wodle-osquery>` item named ``osquery`` from ``ossec.conf``.
 | **Default values**:
@@ -253,10 +273,6 @@ Wazuh Manager
       packages: 'yes'
       ports_no: 'yes'
       processes: 'yes'
-      users: 'yes'
-      groups: 'yes'
-      services: 'yes'
-      browser_extensions: 'yes'
       users: 'yes'
       groups: 'yes'
       services: 'yes'
@@ -856,7 +872,7 @@ Wazuh Manager
 
 .. _wazuh_ansible_reference_agent:
 
-Wazuh Agent
+Wazuh agent
 ===========
 
 | **Variable**: ``wazuh_managers``
@@ -953,7 +969,7 @@ Wazuh Agent
     
 |
 | **Variable**: ``wazuh_agent_authd``
-| **Description**: Set the agent-authd facility. This will enable or not the automatic agent registration, you could set various options in accordance with the authd service configured in the Wazuh Manager. This Ansible role will use the address defined on ``registration_address`` as the authd registration server.
+| **Description**: Set the agent-authd facility. This option enables or disables automatic agent registration. You can set various options in accordance with the authd service configured in the Wazuh Manager. This Ansible role will use the address defined on ``registration_address`` as the authd registration server.
 | **Example**:
 
 .. code-block:: yaml
@@ -1079,10 +1095,6 @@ Wazuh Agent
       packages: 'yes'
       ports_no: 'yes'
       processes: 'yes'
-      users: 'yes'
-      groups: 'yes'
-      services: 'yes'
-      browser_extensions: 'yes'
       users: 'yes'
       groups: 'yes'
       services: 'yes'

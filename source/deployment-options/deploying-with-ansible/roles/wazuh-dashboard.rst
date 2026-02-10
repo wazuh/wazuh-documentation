@@ -26,13 +26,13 @@ Custom variable definitions for different environments can be set. For example:
 
    .. code-block:: yaml
 
-      indexer_network_host: '<WAZUH_INDEXER_PROD_IP_ADDRESS>'
+      indexer_network_host: '10.1.1.10'
 
 -  For a development environment, the variables can be saved in ``vars-development.yml``:
 
    .. code-block:: yaml
 
-      indexer_network_host: '<WAZUH_INDEXER_DEV_IP_ADDRESS>'
+      indexer_network_host: '192.168.0.10'
 
 To execute the playbook for a specific environment, run the command below:
 
@@ -40,6 +40,6 @@ To execute the playbook for a specific environment, run the command below:
 
    $ ansible-playbook wazuh-dashboard.yml -e@vars-production.yml
 
-The example above will install the Wazuh dashboard and configure ``<WAZUH_INDEXER_PROD_IP_ADDRESS>`` as the Indexer node.
+The example above will install the Wazuh dashboard and configure ``10.1.1.10`` as the Indexer node.
 
 Please review the :ref:`variable references <wazuh_ansible_reference_dashboard>` section to see all variables available for this role.

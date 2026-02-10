@@ -700,11 +700,24 @@ Using the wazuh-production-ready playbook, we deploy a Wazuh manager and indexer
    # Wazuh dashboard node
      - hosts: dashboard
        roles:
+         - role: "../roles/wazuh/wazuh-indexer"
          - role: "../roles/wazuh/wazuh-dashboard"
        become: yes
        become_user: root
        vars:
-         indexer_network_host: "{{ hostvars.wi1.private_ip }}"
+         indexer_network_host: "{{ hostvars.dashboard.private_ip }}"
+         indexer_node_name: node-6
+         indexer_node_master: false
+         indexer_node_ingest: false
+         indexer_node_data: false
+         indexer_cluster_nodes:
+             - "{{ hostvars.wi1.private_ip }}"
+             - "{{ hostvars.wi2.private_ip }}"
+             - "{{ hostvars.wi3.private_ip }}"
+         indexer_discovery_nodes:
+             - "{{ hostvars.wi1.private_ip }}"
+             - "{{ hostvars.wi2.private_ip }}"
+             - "{{ hostvars.wi3.private_ip }}"
          dashboard_node_name: node-6
          wazuh_api_credentials:
            - id: default
@@ -712,6 +725,33 @@ Using the wazuh-production-ready playbook, we deploy a Wazuh manager and indexer
              port: 55000
              username: custom-user
              password: SecretPassword1!
+         instances:
+           node1:
+             name: node-1
+             ip: "{{ hostvars.wi1.private_ip }}"
+             role: indexer
+           node2:
+             name: node-2
+             ip: "{{ hostvars.wi2.private_ip }}"
+             role: indexer
+           node3:
+             name: node-3
+             ip: "{{ hostvars.wi3.private_ip }}"
+             role: indexer
+           node4:
+             name: node-4
+             ip: "{{ hostvars.manager.private_ip }}"
+             role: wazuh
+             node_type: master
+           node5:
+             name: node-5
+             ip: "{{ hostvars.worker.private_ip }}"
+             role: wazuh
+             node_type: worker
+           node6:
+             name: node-6
+             ip: "{{ hostvars.dashboard.private_ip }}"
+             role: dashboard
          ansible_shell_allow_world_readable_temp: true
 
 **Where:**
@@ -819,10 +859,12 @@ The ``ansible-wazuh-agent`` role installs Wazuh agents on Linux endpoints. The A
 
 To install the Wazuh agent, perform the following:
 
-.. contents::
-   :local:
-   :depth: 1
-   :backlinks: none
+-  :ref:`Check your Ansible version <agent-prerequisites>`
+-  :ref:`Access the wazuh-ansible directory <agent-access-wazuh-ansible-directory>`
+-  :ref:`Prepare the playbook <agent-prepare-playbook>`
+-  :ref:`Run the playbook <agent-run-playbook>`
+
+.. _agent-prerequisites:
 
 Prerequisites
 ^^^^^^^^^^^^^
@@ -846,6 +888,8 @@ Before deploying Wazuh agents with Ansible, check your Ansible version:
 
       [wazuh-agents]
       agent_1 ansible_host=<WAZUH_AGENT_IP_ADDRESS> ansible_ssh_user=<USERNAME>
+
+.. _agent-access-wazuh-ansible-directory:
 
 Access the wazuh-ansible directory
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -953,6 +997,8 @@ Alternatively, you can create another YAML file with the content you want to cha
 
 More details on default configuration variables can be found in the :doc:`variables references </deployment-options/deploying-with-ansible/reference>` section.
 
+.. _agent-prepare-playbook:
+
 Prepare the playbook
 ^^^^^^^^^^^^^^^^^^^^
 
@@ -976,6 +1022,8 @@ Add ``wazuh-agents`` as host group of the endpoints where the installation of th
            api_user: wazuh
            max_retries: 5
            retry_interval: 5
+
+.. _agent-run-playbook:
 
 Run the playbook
 ^^^^^^^^^^^^^^^^
