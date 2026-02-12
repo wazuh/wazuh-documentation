@@ -291,11 +291,11 @@ Wazuh dashboard configuration
 
 #. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **Security**, and then **Roles mapping** to open the page.
 
-      .. thumbnail:: /images/single-sign-on/Wazuh-role-mapping.gif
-         :title: Wazuh role mapping
-         :alt: Wazuh role mapping
-         :align: center
-         :width: 80%
+   .. thumbnail:: /images/single-sign-on/Wazuh-role-mapping.gif
+      :title: Wazuh role mapping
+      :alt: Wazuh role mapping
+      :align: center
+      :width: 80%
 
    #. Click **Create Role mapping** and complete the empty fields with the following parameters:
 
