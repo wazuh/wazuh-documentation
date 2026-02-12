@@ -25,7 +25,7 @@ Select your package manager and follow the instructions to upgrade the Wazuh age
 
          .. code-block:: console
 
-            # echo "deb [signed-by=/usr/share/keyrings/wazuh.gpg] https://packages.wazuh.com/4.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
+            # echo "deb [signed-by=/usr/share/keyrings/wazuh.gpg] https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
 
       #. Upgrade the Wazuh agent to the latest version.
 
@@ -50,7 +50,7 @@ Select your package manager and follow the instructions to upgrade the Wazuh age
 
             # apt-get install gnupg apt-transport-https
             # curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | apt-key add -
-            # echo "deb https://packages.wazuh.com/4.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
+            # echo "deb https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
 
    .. group-tab:: Yum
 
@@ -70,7 +70,7 @@ Select your package manager and follow the instructions to upgrade the Wazuh age
             gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
             enabled=1
             name=EL-\$releasever - Wazuh
-            baseurl=https://packages.wazuh.com/4.x/yum/
+            baseurl=https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/yum/
             protect=1
             EOF
 
@@ -110,7 +110,7 @@ Select your package manager and follow the instructions to upgrade the Wazuh age
             gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
             enabled=1
             name=EL-\$releasever - Wazuh
-            baseurl=https://packages.wazuh.com/4.x/yum/
+            baseurl=https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/yum/
             priority=1
             EOF
 
@@ -150,7 +150,7 @@ Select your package manager and follow the instructions to upgrade the Wazuh age
             gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
             enabled=1
             name=EL-$releasever - Wazuh
-            baseurl=https://packages.wazuh.com/4.x/yum/
+            baseurl=https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/yum/
             protect=1
             EOF
 

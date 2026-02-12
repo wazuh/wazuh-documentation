@@ -26,4 +26,3 @@ Users can generate system inventory reports from the Wazuh dashboard, which can 
       compatibility-matrix
       using-syscollector-information-to-trigger-alerts
       use-cases
-      osquery

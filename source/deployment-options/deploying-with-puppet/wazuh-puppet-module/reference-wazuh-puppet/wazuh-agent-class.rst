@@ -107,8 +107,7 @@ Client variables
 +==========================================+===========================================================================================================================+=========================+=====================+
 |     ``$wazuh_reporting_endpoint``        | Specifies the IP address or the hostname of the Wazuh manager to report.                                                  |     ``undef``           | String              |
 +------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------+---------------------+
-|     ``$wazuh_register_endpoint``         | Specifies the IP address or the hostname of the Wazuh manager against which to register. It is used to run the            |     n/a                 | String              |
-|                                          | agent-auth tool.                                                                                                          |                         |                     |
+|     ``$wazuh_register_endpoint``         | Specifies the IP address or the hostname of the Wazuh manager against which to register.                                  |     n/a                 | String              |
 +------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------+---------------------+
 |     ``$ossec_port``                      | Specifies the port to send events to the manager. This must match the associated listening port configured on the Wazuh   |     ``1514``            | String              |
 |                                          | manager.                                                                                                                  |                         |                     |
@@ -257,6 +256,51 @@ SCA variables
 |                                      | Depends on ``configure_sca``   and ``apply_template_os``                                                                  |                         |                     |
 +--------------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------+---------------------+
 
+$sca_max_eps
+  Sets the maximum throughput for event reporting. Events are messages that generate alerts.
+
+  `Default 50`
+
+  `Type String`
+
+   Depends on **configure_sca**
+
+$sca_synchronization_enabled
+  Enables periodic inventory synchronization.
+
+  `Default yes`
+
+  `Type String`
+
+   Depends on **configure_sca**
+
+$sca_synchronization_interval
+  Specifies the initial time between inventory synchronizations.
+
+  `Default 5m`
+
+  `Type String`
+
+   Depends on **configure_sca**
+
+$sca_synchronization_response_timeout
+  Waiting time in seconds between a sync message and the next synchronization.
+
+  `Default 30`
+
+  `Type String`
+
+   Depends on **configure_sca**
+
+$sca_synchronization_max_eps
+  Sets the maximum throughput for synchronization messages.
+
+  `Default 10`
+
+  `Type String`
+
+   Depends on **configure_sca**
+
 
 .. _ref_agent_vars_syscheck:
 
@@ -326,27 +370,26 @@ Syscheck variables
 |                                                      | Currently, ``skip_nfs``   will exclude checking files on CIFS or NFS mounts.                                              |                                          |                     |
 +------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+------------------------------------------+---------------------+
 
-.. _ref_agent_vars_wodle_osquery:
+$ossec_syscheck_max_eps
+  Sets the maximum throughput for reporting events. Events are messages that trigger alerts.
 
-Wodle osquery variables
------------------------
+  `Default 50`
 
-+----------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------+---------------------+
-|     **Parameter**                |     **Description**                                                                                                       |     **Default value**                           |     **Data type**   |
-+==================================+===========================================================================================================================+=================================================+=====================+
-|     ``$configure_wodle_osquery`` | Enables the Wodle osquery section rendering on this host. If this variable is not set to '``true``  ', the complete       |     ``true``                                    | String              |
-|                                  | osquery wodle tag will not be added to ``/var/ossec/etc/ossec.conf``.                                                     |                                                 |                     |
-+----------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------+---------------------+
-|     ``$wodle_osquery_disabled``  | Disables the osquery wodle.                                                                                               |     ``yes``                                     | String              |
-+----------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------+---------------------+
-|  ``$wodle_osquery_run_daemon``   | Makes the module run osqueryd as a subprocess or let the module monitor the results log without running Osquery.          |     ``yes``                                     | String              |
-+----------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------+---------------------+
-|     ``$wodle_osquery_log_path``  | This defines the full path to the results log written by Osquery.                                                         |  ``'/var/log/osquery/osqueryd.results.log'``    | String              |
-+----------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------+---------------------+
-| ``$wodle_osquery_config_path``   | Path to the Osquery configuration file. This path can be relative to the folder where the Wazuh agent is running.         |     ``'/etc/osquery/osquery.conf'``             | String              |
-+----------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------+---------------------+
-| ``$wodle_osquery_add_labels``    | Add the agent labels defined as decorators.                                                                               |     ``yes``                                     | String              |
-+----------------------------------+---------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------+---------------------+
+  `Type String`
+
+$ossec_syscheck_notify_first_scan
+  Specifies whether the first Syscheck (FIM) scan reports stateless events.
+
+  `Default no`
+
+  `Type String`
+
+$ossec_syscheck_synchronization_response_timeout
+  Waiting time in seconds between a sync message and the next synchronization.
+
+  `Default 30`
+
+  `Type String`
 
 .. _ref_agent_vars_wodle_syscollector:
 
@@ -383,6 +426,48 @@ Wodle Syscollector
 |  ``$wodle_syscollector_browser_extensions``   | Enables the scanning of browser extensions.                       |     ``yes``             | String              |
 +-----------------------------------------------+-------------------------------------------------------------------+-------------------------+---------------------+
 
+$wodle_syscollector_max_eps
+  Sets the maximum throughput for reporting events. Events are messages that trigger alerts.
+
+  `Default 50`
+
+  `Type String`
+
+$wodle_syscollector_notify_first_scan
+  Specifies whether the first scan reports stateless events.
+
+  `Default no`
+
+  `Type String`
+
+$wodle_syscollector_synchronization_enabled
+  Specifies whether to perform periodic inventory synchronizations.
+
+  `Default yes`
+
+  `Type String`
+
+$wodle_syscollector_synchronization_interval
+  Specifies the initial interval between inventory synchronizations.
+
+  `Default 5m`
+
+  `Type String`
+
+$wodle_syscollector_synchronization_response_timeout
+  Waiting time in seconds between a sync message and the next synchronization.
+
+  `Default 30`
+
+  `Type String`
+
+$wodle_syscollector_synchronization_max_eps
+  Sets the maximum throughput for synchronization messages.
+
+  `Default 10`
+
+  `Type String`
+
 .. _ref_agent_vars_misc:
 
 Misc Variables
@@ -408,5 +493,3 @@ Misc Variables
 +------------------------------+---------------------------------------------------------------------------------------------------------------------------+----------------------------------------+---------------------+
 |     ``$agent_auth_password`` | Define a password for agent-auth                                                                                          |     ``undef``                          | String              |
 +------------------------------+---------------------------------------------------------------------------------------------------------------------------+----------------------------------------+---------------------+
-
-.. _ref_agent_addlog:

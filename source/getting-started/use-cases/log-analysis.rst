@@ -124,7 +124,7 @@ Wazuh uses four indices to store several event types:
       :align: center
       :width: 80%
 
--  **wazuh-monitoring** index stores data about the state of Wazuh agents over a period of time. The state of the agent could be ``Active``, ``Disconnected``, or ``Never connected``. This information is very useful in tracking Wazuh agents that are not reporting to the dashboard for several reasons that need investigation. The image below shows the connection status of the agents on the Wazuh dashboard. The agent information as shown in the image is collected from the ``wazuh-monitoring`` index.
+-  **wazuh-monitoring** index stores data about the state of Wazuh agents over a period of time. The state of the agent could be ``Active``, ``Disconnected``, or ``Never connected``. This information is very useful in tracking Wazuh agents that are not reporting for several reasons that need investigation. The image below shows the connection status of the agents on the Wazuh dashboard. The agent information as shown in the image is collected from the ``wazuh-monitoring`` index.
 
    .. thumbnail:: /images/getting-started/use-cases/log-data-analysis/agent-monitoring-information.png
       :title: Agent information from wazuh-monitoring index

@@ -1,6 +1,38 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [v5.0.0]
+
+### Added
+
+- Added documentation for the reporting plugin in the Wazuh dashboard package generation guide. ([#8682](https://github.com/wazuh/wazuh-documentation/pull/8682))
+- Added references for FIM (Syscheck) and inventory (Syscollector) state persistence settings. ([#8801](https://github.com/wazuh/wazuh-documentation/pull/8801))
+- Added documentation for SCA state persistence settings. ([#8841](https://github.com/wazuh/wazuh-documentation/pull/8841))
+- Added ARM64 support for Linux and macOS WPK packages. ([#8851](https://github.com/wazuh/wazuh-documentation/pull/8851))
+- Added ``integrity_interval`` to the syscheck ``synchronization`` configuration and updated the ``response_timeout`` default value. ([#9099](https://github.com/wazuh/wazuh-documentation/pull/9099))
+- Added ``integrity_interval`` to the SCA and the syscollector ``synchronization`` configuration. ([#9164](https://github.com/wazuh/wazuh-documentation/pull/9164))
+
+### Changed
+
+- Replaced `indexer_cluster_initial_master_nodes` with `indexer_initial_cluster_manager_nodes` in Puppet deployment documentation. ([#8666](https://github.com/wazuh/wazuh-documentation/pull/8666))
+- Updated the File Integrity Monitoring documentation to remove deprecated settings (`max_interval`, `queue_size`, `thread_pool`, `database`, and `registry_enabled`), add the missing `check_device` setting, and fix the `max_eps` definition in the synchronization settings table. ([#8735](https://github.com/wazuh/wazuh-documentation/pull/8735))
+- Updated the FIM documentation to change the default FIM who-data mode provider to eBPF. ([#8805](https://github.com/wazuh/wazuh-documentation/pull/8805))
+- Updated references in steps and links to 5.x. ([#8853](https://github.com/wazuh/wazuh-documentation/pull/8853))
+
+### Removed
+
+- Removed all `agent-auth` references as this tool is now deprecated. ([#8718](https://github.com/wazuh/wazuh/pull/8718))
+- Removed `compatibility.override_main_response_version` setting from Wazuh Indexer configuration as it is no longer supported in OpenSearch 3.0. ([#8609](https://github.com/wazuh/wazuh-documentation/pull/8609)) 
+- Removed several Rootcheck configuration options and added a corresponding note to the central components upgrade guide. ([#8759](https://github.com/wazuh/wazuh-documentation/pull/8759))
+- Removed references to the server version of the `manage_agents` tool. ([#8792](https://github.com/wazuh/wazuh-documentation/pull/8792))
+- Removed `cron.prefix`, `cron.statistics.*`, and `wazuh.monitoring.*` configuration settings from the Wazuh dashboard. ([#8790](https://github.com/wazuh/wazuh-documentation/pull/8790))
+- Removed references to deprecated client communication and FIM configuration options. ([#8809](https://github.com/wazuh/wazuh-documentation/pull/8809))
+- Removed documentation and references to deprecated Wazuh Manager daemons: `wazuh-agentlessd`, `wazuh-csyslogd`, `wazuh-dbd`, `wazuh-integratord`, `wazuh-maild`, and `wazuh-reportd`. ([#8778](https://github.com/wazuh/wazuh-documentation/pull/8778))
+- Removed documentation and references to deprecated CLI tools: `clear_stats`, `update_ruleset`, and `wazuh-regex`. ([#8778](https://github.com/wazuh/wazuh-documentation/pull/8778))
+- Removed documentation to deprecated `fluent-forward` tool. ([#8778](https://github.com/wazuh/wazuh-documentation/pull/8778))
+- Removed support for legacy operating systems, including Red Hat 5, CentOS 5, Oracle Linux 5, SUSE Linux Enterprise Server 11, AIX, HP-UX, Solaris, Windows XP, Windows Vista, and Windows Server 2003. ([#8894](https://github.com/wazuh/wazuh-documentation/pull/8894))
+- Removed Osquery references as this capability is now deprecated. ([#]())
+
 ## [v4.14.4]
 
 - Support for Wazuh 4.14.4

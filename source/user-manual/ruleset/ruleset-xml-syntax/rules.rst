@@ -1149,22 +1149,8 @@ The following components use a static location:
 +----------------------+------------------------+
 | Docker integration   | Wazuh-Docker           |
 +----------------------+------------------------+
-| Osquery integration  | osquery                |
-+----------------------+------------------------+
 | SCA module           | sca                    |
 +----------------------+------------------------+
-
-Example:
-
-.. code-block:: xml
-   :emphasize-lines: 2
-
-   <rule id="24000" level="3">
-     <location>osquery$</location>
-     <description>osquery message</description>
-   </rule>
-
-This rule groups logs that come from the ``osquery`` location.
 
 The attributes below are optional.
 

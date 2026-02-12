@@ -55,8 +55,6 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 +---------------------------------------------------------------------+------------------------+
 | :doc:`email_alerts <email-alerts>`                                  | manager                |
 +---------------------------------------------------------------------+------------------------+
-| :doc:`fluent-forward <fluent-forward>`                              | manager, agent         |
-+---------------------------------------------------------------------+------------------------+
 | :doc:`global  <global>`                                             | manager                |
 +---------------------------------------------------------------------+------------------------+
 | :doc:`github <github-module>`                                       | manager, agent         |
@@ -109,8 +107,6 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 +---------------------------------------------------------------------+------------------------+
 | :doc:`wodle name="docker-listener" <wodle-docker>`                  | manager, agent         |
 +---------------------------------------------------------------------+------------------------+
-| :doc:`wodle name="osquery" <wodle-osquery>`                         | manager, agent         |
-+---------------------------------------------------------------------+------------------------+
 | :doc:`wodle name="syscollector" <wodle-syscollector>`               | manager, agent         |
 +---------------------------------------------------------------------+------------------------+
 | :doc:`gcp-pubsub <gcp-pubsub>`                                      | manager, agent         |
@@ -157,7 +153,6 @@ All of the above sections must be located within the top-level ``<ossec_config>`
    syscheck
    syslog-output
    task-manager
-   fluent-forward
    gcp-pubsub
    gcp-bucket
    vuln-detector
@@ -165,7 +160,6 @@ All of the above sections must be located within the top-level ``<ossec_config>`
    wodle-s3
    wodle-syscollector
    wazuh-db-config
-   wodle-osquery
    wodle-docker
    wodle-azure-logs
    wodle-agent-key-polling

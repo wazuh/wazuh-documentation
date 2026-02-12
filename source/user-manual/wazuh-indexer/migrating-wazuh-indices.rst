@@ -150,8 +150,6 @@ Perform the following steps on the Wazuh indexer node (s) to complete the shared
 
       plugins.security.system_indices.enabled: true
       plugins.security.system_indices.indices: [".opendistro-alerting-config", ".opendistro-alert>
-      ### Option to allow Filebeat-oss 7.10.2 to work ###
-      compatibility.override_main_response_version: true
 
 #. Restart the Wazuh indexer to apply the configuration changes:
 

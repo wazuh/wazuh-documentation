@@ -36,7 +36,7 @@ Wazuh agent - Wazuh server
 
 The :doc:`Wazuh agent <components/wazuh-agent>` continuously sends events to the :doc:`Wazuh server <components/wazuh-server>` for analysis and threat detection. To start shipping this data, the agent establishes a connection with the Wazuh server service for agent connection, which listens on TCP port 1514 by default (this is configurable). The Wazuh server then decodes and matches rules against the received events, utilizing the Wazuh Analysis engine. 
 
-The Wazuh messages protocol uses AES encryption by default, with 128 bits per block and 256-bit keys. Blowfish encryption is optional.
+The Wazuh messages protocol uses AES encryption with 128 bits per block and 256-bit keys.
 
 .. note::
    
@@ -64,9 +64,7 @@ Wazuh components communicate using several services. The list of default ports u
 +-----------------+-----------+----------------+------------------------------------------------+
 |  Component      | Port      | Protocol       | Purpose                                        |
 +=================+===========+================+================================================+
-|                 | 1514      | TCP (default)  | Agent connection service                       |
-+                 +-----------+----------------+------------------------------------------------+
-|                 | 1514      | UDP (optional) | Agent connection service (disabled by default) |
+|                 | 1514      | TCP            | Agent connection service                       |
 +                 +-----------+----------------+------------------------------------------------+
 | Wazuh server    | 1515      | TCP            | Agent enrollment service                       |
 +                 +-----------+----------------+------------------------------------------------+

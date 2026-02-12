@@ -19,8 +19,6 @@ Agents can be configured remotely by using the ``agent.conf`` file. The followin
 -  :doc:`Security Configuration Assessment <../capabilities/sec-config-assessment/index>` (**sca**)
 -  :doc:`System inventory <../capabilities/system-inventory/index>` (**syscollector**)
 -  :doc:`Avoid events flooding <ossec-conf/client-buffer>` (**client_buffer**)
--  :doc:`Configure osquery wodle <ossec-conf/wodle-osquery>` (**wodle name="osquery"**)
--  :doc:`force_reconnect_interval setting <ossec-conf/client>` (**client**)
 
 .. note::
   When setting up remote commands in the shared agent configuration, **you must enable remote commands for Agent Modules**. This is enabled by adding the following line to the ``/var/ossec/etc/local_internal_options.conf`` file in the agent:
@@ -56,41 +54,23 @@ Below are the files that would be found in this folder on an agent assigned to t
 |    ├── ar.conf                                      |    ├── ar.conf                                      |
 |    ├── debian                                       |    ├── agent.conf                                   |
 |    │   ├── agent.conf                               |    ├── cis_debian_linux_rcl.txt                     |
-|    │   ├── cis_debian_linux_rcl.txt                 |    ├── cis_rhel5_linux_rcl.txt                      |
-|    │   ├── cis_rhel5_linux_rcl.txt                  |    ├── cis_rhel6_linux_rcl.txt                      |
+|    │   ├── cis_debian_linux_rcl.txt                 |    ├── cis_rhel6_linux_rcl.txt                      |
 |    │   ├── cis_rhel6_linux_rcl.txt                  |    ├── cis_rhel7_linux_rcl.txt                      |
 |    │   ├── cis_rhel7_linux_rcl.txt                  |    ├── cis_rhel_linux_rcl.txt                       |
-|    │   ├── cis_rhel_linux_rcl.txt                   |    ├── cis_sles11_linux_rcl.txt                     |
-|    │   ├── cis_sles11_linux_rcl.txt                 |    ├── cis_sles12_linux_rcl.txt                     |
+|    │   ├── cis_rhel_linux_rcl.txt                   |    ├── cis_sles12_linux_rcl.txt                     |
 |    │   ├── cis_sles12_linux_rcl.txt                 |    ├── custom_rootcheck.txt                         |
 |    │   ├── custom_rootcheck.txt                     |    ├── debian_ports_check.txt                       |
 |    │   ├── debian_ports_check.txt                   |    ├── debian_test_files.txt                        |
-|    │   ├── debian_test_files.txt                    |    ├── merged.mg                                    |
-|    │   ├── merged.mg                                |    ├── rootkit_files.txt                            |
-|    │   ├── rootkit_files.txt                        |    ├── rootkit_trojans.txt                          |
-|    │   ├── rootkit_trojans.txt                      |    ├── system_audit_rcl.txt                         |
-|    │   ├── system_audit_rcl.txt                     |    ├── system_audit_ssh.txt                         |
-|    │   ├── system_audit_ssh.txt                     |    ├── win_applications_rcl.txt                     |
-|    │   ├── win_applications_rcl.txt                 |    ├── win_audit_rcl.txt                            |
-|    │   ├── win_audit_rcl.txt                        |    └── win_malware_rcl.txt                          |
-|    │   └── win_malware_rcl.txt                      |                                                     |
+|    │   ├── debian_test_files.txt                    |    └── merged.mg                                    |
+|    │   └── merged.mg                                |                                                     |
 |    └── default                                      |                                                     |
 |        ├── agent.conf                               |                                                     |
 |        ├── cis_debian_linux_rcl.txt                 |                                                     |
-|        ├── cis_rhel5_linux_rcl.txt                  |                                                     |
 |        ├── cis_rhel6_linux_rcl.txt                  |                                                     |
 |        ├── cis_rhel7_linux_rcl.txt                  |                                                     |
 |        ├── cis_rhel_linux_rcl.txt                   |                                                     |
-|        ├── cis_sles11_linux_rcl.txt                 |                                                     |
 |        ├── cis_sles12_linux_rcl.txt                 |                                                     |
-|        ├── merged.mg                                |                                                     |
-|        ├── rootkit_files.txt                        |                                                     |
-|        ├── rootkit_trojans.txt                      |                                                     |
-|        ├── system_audit_rcl.txt                     |                                                     |
-|        ├── system_audit_ssh.txt                     |                                                     |
-|        ├── win_applications_rcl.txt                 |                                                     |
-|        ├── win_audit_rcl.txt                        |                                                     |
-|        └── win_malware_rcl.txt                      |                                                     |
+|        └── merged.mg                                |                                                     |
 +-----------------------------------------------------+-----------------------------------------------------+
 
 The proper syntax of ``agent.conf`` is shown below along with the process for pushing the configuration from the manager to the agent.

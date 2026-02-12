@@ -120,40 +120,6 @@ Select your endpoint operating system below and follow the installation steps to
 
       </a>
     </div>
-    <div class="link-boxes-item">
-      <a class="link-boxes-link" href="./wazuh-agent/wazuh-agent-package-solaris.html">
-        <p class="link-boxes-label">Solaris</p>
-
-.. image:: /images/installation/solaris.png
-      :align: center
-      :width: 150px
-
-.. raw:: html
-
-      </a>
-    </div>
-    <div class="link-boxes-item">
-      <a class="link-boxes-link" href="./wazuh-agent/wazuh-agent-package-aix.html">
-        <p class="link-boxes-label">AIX</p>
-
-.. image:: /images/installation/AIX.png
-      :align: center
-
-.. raw:: html
-
-      </a>
-    </div>
-    <div class="link-boxes-item">
-      <a class="link-boxes-link" href="./wazuh-agent/wazuh-agent-package-hpux.html">
-        <p class="link-boxes-label">HP-UX</p>
-
-.. image:: /images/installation/hpux.png
-      :align: center
-
-.. raw:: html
-
-      </a>
-    </div>
   </div>
 
 Packages list

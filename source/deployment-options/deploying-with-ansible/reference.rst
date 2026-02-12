@@ -223,20 +223,6 @@ Wazuh Manager
       frequency: 43200
 
 |
-| **Variable**: ``wazuh_manager_osquery``
-| **Description**: Configures the :doc:`wodle</user-manual/reference/ossec-conf/wodle-osquery>` item named ``osquery`` from ``ossec.conf``.
-| **Default values**:
-
-.. code-block:: yaml
-
-    wazuh_manager_osquery:
-      disable: 'yes'
-      run_daemon: 'yes'
-      log_path: '/var/log/osquery/osqueryd.results.log'
-      config_path: '/etc/osquery/osquery.conf'
-      ad_labels: 'yes'
-
-|
 | **Variable**: ``wazuh_manager_syscollector``
 | **Description**: Configures the :doc:`wodle </user-manual/reference/ossec-conf/wodle-syscollector>` item named ``syscollector`` from ``ossec.conf``.
 | **Default values**:
@@ -946,24 +932,6 @@ Wazuh Agent
 .. code-block:: yaml
 
     wazuh_profile: "ubuntu, ubuntu18"
-    
-|
-| **Variable**: ``wazuh_agent_authd``
-| **Description**: Set the agent-authd facility. This will enable or not the automatic agent registration, you could set various options in accordance with the authd service configured in the Wazuh Manager. This Ansible role will use the address defined on ``registration_address`` as the authd registration server.
-| **Example**:
-
-.. code-block:: yaml
-
-    wazuh_agent_authd:
-      registration_address: 10.1.1.12
-      enable: false
-      port: 1515
-      agent_name: null
-      groups: []
-      ssl_agent_ca: null
-      ssl_agent_cert: null
-      ssl_agent_key: null
-      ssl_auto_negotiate: 'no'
 
 |
 | **Variable**: ``wazuh_auto_restart``
@@ -992,8 +960,6 @@ Wazuh Agent
       download_dir: C:\
       install_dir: C:\Program Files\ossec-agent\
       install_dir_x86: C:\Program Files (x86)\ossec-agent\
-      auth_path: C:\Program Files\ossec-agent\agent-auth.exe
-      auth_path_x86: C:\'Program Files (x86)'\ossec-agent\agent-auth.exe
       check_sha512: True
 
 |
@@ -1042,25 +1008,8 @@ Wazuh Agent
       frequency: 43200
 
 |
-| **Variable**: ``wazuh_agent_osquery``
-| **Description**: Configures the :doc:`wodle</user-manual/reference/ossec-conf/wodle-osquery>` item named ``osquery`` from ``ossec.conf``.
-| **Default values**:
-
-.. code-block:: yaml
-
-    wazuh_agent_osquery:
-      disable: 'yes'
-      run_daemon: 'yes'
-      bin_path_win: 'C:\Program Files\osquery\osqueryd'
-      log_path: '/var/log/osquery/osqueryd.results.log'
-      log_path_win: 'C:\Program Files\osquery\log\osqueryd.results.log'
-      config_path: '/etc/osquery/osquery.conf'
-      config_path_win: 'C:\Program Files\osquery\osquery.conf'
-      add_labels: 'yes'
-
-|
 | **Variable**: ``wazuh_agent_syscollector``
-| **Description**: Configures the :doc:`wodle </user-manual/reference/ossec-conf/wodle-syscollector>` item named ``syscollector`` from ``ossec.conf``.
+| **Description**: Configures the wodle item named ``syscollector`` from ``ossec.conf``.
 | **Default values**:
 
 .. code-block:: yaml
@@ -1307,10 +1256,8 @@ Wazuh Agent
 
       rootcheck: '{{ wazuh_agent_rootcheck }}'
 
-      osquery: '{{ wazuh_agent_osquery }}'
       syscollector: '{{ wazuh_agent_syscollector }}'
       sca: '{{ wazuh_agent_sca }}'
-      cis_cat: '{{ wazuh_agent_cis_cat }}'
       localfiles: '{{ wazuh_agent_localfiles }}'
 
       labels: '{{ wazuh_agent_labels }}'

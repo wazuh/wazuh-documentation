@@ -197,7 +197,7 @@ You must include the server's hostname where you are installing each application
       $worker_name = 'worker'
       $cluster_size = '3'
       $indexer_discovery_hosts = [$node1host, $node2host, $node3host]
-      $indexer_cluster_initial_master_nodes = [$node1host, $node2host, $node3host]
+      $indexer_initial_cluster_manager_nodes = [$node1host, $node2host, $node3host]
       $indexer_cluster_CN = [$indexer_node1_name, $indexer_node2_name, $indexer_node3_name]
       # Define stage for order execution
       stage { 'certificates': }
@@ -231,7 +231,7 @@ You must include the server's hostname where you are installing each application
         indexer_network_host => "$node1host",
         indexer_node_max_local_storage_nodes => "$cluster_size",
         indexer_discovery_hosts => $indexer_discovery_hosts,
-        indexer_cluster_initial_master_nodes => $indexer_cluster_initial_master_nodes,
+        indexer_initial_cluster_manager_nodes => $indexer_initial_cluster_manager_nodes,
         indexer_cluster_CN => $indexer_cluster_CN,
         stage => indexerdeploy
       }
@@ -249,7 +249,7 @@ You must include the server's hostname where you are installing each application
         indexer_network_host => "$node2host",
         indexer_node_max_local_storage_nodes => "$cluster_size",
         indexer_discovery_hosts => $indexer_discovery_hosts,
-        indexer_cluster_initial_master_nodes => $indexer_cluster_initial_master_nodes,
+        indexer_initial_cluster_manager_nodes => $indexer_initial_cluster_manager_nodes,
         indexer_cluster_CN => $indexer_cluster_CN,
         stage => indexerdeploy
       }
@@ -263,7 +263,7 @@ You must include the server's hostname where you are installing each application
         indexer_network_host => "$node3host",
         indexer_node_max_local_storage_nodes => "$cluster_size",
         indexer_discovery_hosts => $indexer_discovery_hosts,
-        indexer_cluster_initial_master_nodes => $indexer_cluster_initial_master_nodes,
+        indexer_initial_cluster_manager_nodes => $indexer_initial_cluster_manager_nodes,
         indexer_cluster_CN => $indexer_cluster_CN,
         stage => indexerdeploy
       }
@@ -341,7 +341,7 @@ You must include the server's hostname where you are installing each application
 
    - ``indexer_discovery_hosts``
 
-   - ``indexer_cluster_initial_master_nodes``
+   - ``indexer_initial_cluster_manager_nodes``
 
    - ``indexer_cluster_CN``
 
@@ -485,8 +485,6 @@ Wazuh Puppet module reference
 |                                                                 |                                                                 |                                             |
 |                                                                 | :ref:`Wazuh API <ref_server_vars_wazuh_api>`                    |                                             |
 |                                                                 |                                                                 |                                             |
-|                                                                 | :ref:`Wodle osquery <ref_server_vars_wodle_osquery>`            |                                             |
-|                                                                 |                                                                 |                                             |
 |                                                                 | :ref:`Wodle Syscollector <ref_server_vars_wodle_syscollector>`  |                                             |
 |                                                                 |                                                                 |                                             |
 |                                                                 | :ref:`Misc <ref_server_vars_misc>`                              |                                             |
@@ -504,8 +502,6 @@ Wazuh Puppet module reference
 |                                                                 | :ref:`SCA <ref_agent_vars_sca>`                                 |                                             |
 |                                                                 |                                                                 |                                             |
 |                                                                 | :ref:`Syscheck <ref_agent_vars_syscheck>`                       |                                             |
-|                                                                 |                                                                 |                                             |
-|                                                                 | :ref:`Wodle osquery <ref_agent_vars_wodle_osquery>`             |                                             |
 |                                                                 |                                                                 |                                             |
 |                                                                 | :ref:`Wodle Syscollector <ref_agent_vars_wodle_syscollector>`   |                                             |
 |                                                                 |                                                                 |                                             |

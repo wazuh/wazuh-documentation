@@ -19,8 +19,6 @@ syscheck
 Configuration options for file integrity monitoring:
 
 - `alert_new_files`_
-- `allow_remote_prefilter_cmd`_
-- `database`_
 - `file_limit`_
 - `registry_limit`_
 - `diff`_
@@ -30,7 +28,7 @@ Configuration options for file integrity monitoring:
 - `ignore`_
 - `max_eps`_
 - `max_files_per_second`_
-- `prefilter_cmd`_
+- `notify_first_scan`_
 - `process_priority`_
 - `registry_ignore`_
 - `scan_day`_
@@ -66,44 +64,6 @@ Example:
 .. note::
 
 	This setting is applied in the manager configuration, but it only takes effect on agents with versions lower than 3.12.
-
-.. _reference_ossec_syscheck_allow_remote_prefilter_cmd:
-
-allow_remote_prefilter_cmd
---------------------------
-
-Allows ``prefilter_cmd`` option apply in remote configuration (*agent.conf*).
-
-+--------------------+--------------------------------+
-| **Default value**  | no                             |
-+--------------------+--------------------------------+
-| **Allowed values** | yes, no                        |
-+--------------------+--------------------------------+
-
-Example:
-
-.. code-block:: xml
-
-  <allow_remote_prefilter_cmd>yes</allow_remote_prefilter_cmd>
-
-
-.. note::
-
-   This option only can be activated from the agent side, on its own ``ossec.conf``.
-
-.. _reference_ossec_syscheck_database:
-
-database
---------
-
-Specifies where the database is going to be stored.
-
-+--------------------+---------------------------------------+
-| **Default value**  | disk                                  |
-+--------------------+---------------------------------------+
-| **Allowed values** | disk, memory                          |
-+--------------------+---------------------------------------+
-
 
 .. _reference_ossec_syscheck_directories:
 
@@ -241,6 +201,13 @@ Attributes:
 +--------------------------+------------------------------------------------------------+----------------------------------------------------------+
 | **check_inode**          | Check the file inode.                                                                                                 |
 |                          | Available for UNIX. On Windows, inode will always be 0.                                                               |
++                          +------------------------------------------------------------+----------------------------------------------------------+
+|                          | Default value                                              | yes                                                      |
++                          +------------------------------------------------------------+----------------------------------------------------------+
+|                          | Allowed values                                             | yes, no                                                  |
++--------------------------+------------------------------------------------------------+----------------------------------------------------------+
+| **check_device**         | Check the file device.                                                                                                |
+|                          | Available for UNIX.                                                                                                   |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Default value                                              | yes                                                      |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
@@ -412,34 +379,24 @@ Example:
  <max_files_per_second>100</max_files_per_second>
 
 
-.. _reference_ossec_syscheck_prefilter_cmd:
+.. _reference_ossec_syscheck_notify_first_scan:
 
-prefilter_cmd
--------------
+notify_first_scan
+------------------
 
-Run to prevent prelinking from creating false positives.
+Specifies whether the first scan reports stateless events.
 
-+--------------------+--------------------------------+
-| **Default value**  | n/a                            |
-+--------------------+--------------------------------+
-| **Allowed values** | Command to prevent prelinking. |
-+--------------------+--------------------------------+
++--------------------+----------+
+| **Default value**  | no       |
++--------------------+----------+
+| **Allowed values** | yes, no  |
++--------------------+----------+
 
 Example:
 
 .. code-block:: xml
 
- <prefilter_cmd>/usr/sbin/prelink -y</prefilter_cmd>
-
-
-.. note::
-
-  This option may negatively impact performance as the configured command will be run for each file checked.
-
-.. note::
-
-  This option is ignored when defined at *agent.conf* if ``allow_remote_prefilter_cmd`` is set to ``no`` at *ossec.conf*.
-
+   <notify_first_scan>no</notify_first_scan>
 
 .. _reference_ossec_syscheck_process_priority:
 
@@ -726,13 +683,10 @@ The database synchronization settings are configured inside this tag.
     <synchronization>
       <enabled>yes</enabled>
       <interval>5m</interval>
-      <max_interval>1h</max_interval>
-      <response_timeout>30</response_timeout>
-      <queue_size>16384</queue_size>
-      <thread_pool>1</thread_pool>
+      <response_timeout>60</response_timeout>
       <max_eps>10</max_eps>
+      <integrity_interval>86400</integrity_interval>
     </synchronization>
-
 
 **enabled**
 
@@ -744,20 +698,9 @@ Specifies performing periodic inventory synchronizations.
 | **Allowed values** | yes/no                                |
 +--------------------+---------------------------------------+
 
-**registry_enabled**
-
-On Windows agents, enables inventory synchronizations for registry entries. If ``enabled`` is set to no,
-this parameter is ignored.
-
-+--------------------+---------------------------------------+
-| **Default value**  | yes                                   |
-+--------------------+---------------------------------------+
-| **Allowed values** | yes/no                                |
-+--------------------+---------------------------------------+
-
 **interval**
 
-Specifies the initial time interval between every inventory synchronization. If the synchronization fails the value is duplicated until it reaches the value of ``max_interval``. If the synchronization succeds the value is restored.
+Specifies the initial time interval between every inventory synchronization.
 
 +--------------------+-----------------------------------------------------------------------+
 | **Default value**  | 5 m                                                                   |
@@ -765,45 +708,15 @@ Specifies the initial time interval between every inventory synchronization. If 
 | **Allowed values** | Any number greater than or equal to 0. Allowed suffixes (s, m, h, d). |
 +--------------------+-----------------------------------------------------------------------+
 
-**max_interval**
-
-Maximum time interval to trigger a synchronization. When a synchronization fails the interval is duplicated up to this maximum value.
-
-+--------------------+-----------------------------------------------------------------------------------+
-| **Default value**  | 1 h                                                                               |
-+--------------------+-----------------------------------------------------------------------------------+
-| **Allowed values** | Any integer greater than or equal to ``interval``. Allowed suffixes (s, m, h, d). |
-+--------------------+-----------------------------------------------------------------------------------+
-
 **response_timeout**
 
-Waiting time in seconds since a sync message is sent or received for the next synchronization activity. If the agent doesn't send or receive a message in this interval the synchronization is marked as successful. If a synchronization is unsuccessful, the synchronization interval is doubled up to the ``max_interval`` value. This mechanism avoids synchronization overlapping.
+Waiting time in seconds since a sync message is sent or received for the next synchronization activity.
 
 +--------------------+----------------------------------------------------------------------+
-| **Default value**  | 30                                                                   |
+| **Default value**  | 60                                                                   |
 +--------------------+----------------------------------------------------------------------+
 | **Allowed values** | Any number between 0 and ``interval``.                               |
 +--------------------+----------------------------------------------------------------------+
-
-**queue_size**
-
-Specifies the queue size of the manager synchronization responses.
-
-+--------------------+---------------------------------------+
-| **Default value**  | 16384                                 |
-+--------------------+---------------------------------------+
-| **Allowed values** | Integer number between 2 and 1000000. |
-+--------------------+---------------------------------------+
-
-**thread_pool**
-
-Specifies the number of threads that FIM database synchronization uses. FIM uses the lesser value of the configured value and the number of system CPU cores.
-
-+--------------------+-----------------------------------------------------+
-| **Default value**  | 1                                                   |
-+--------------------+-----------------------------------------------------+
-| **Allowed values** |  Any integer greater than 0.                        |
-+--------------------+-----------------------------------------------------+
 
 **max_eps**
 
@@ -814,6 +727,16 @@ Sets the maximum synchronization message throughput.
 +--------------------+---------------------------------------------------------+
 | **Allowed values** | Integer number between 0 and 1000000. 0 means disabled. |
 +--------------------+---------------------------------------------------------+
+
+**integrity_interval**
+
+Defines how often the agent performs a periodic integrity validation for FIM databases. When the interval elapses, the agent calculates checksums and compares them with the manager. On mismatch, the agent triggers a recovery mechanism to resolve synchronization inconsistencies.
+
++--------------------+---------------------------------------------+
+| **Default value**  | ``86400`` (24 hours)                        |
++--------------------+---------------------------------------------+
+| **Allowed values** | Any non-negative integer (seconds).         |
++--------------------+---------------------------------------------+
 
 .. _reference_ossec_syscheck_diff:
 
@@ -951,12 +874,12 @@ The Whodata options will be configured inside this tag.
 
 **provider**
 
-Specifies the who-data mode used by the FIM module. If the ``<provider>`` tag is not configured, the FIM module defaults to the ``audit`` mode. If the provider is set to ``ebpf`` but unavailable due to kernel version incompatibility, it also falls back to the ``audit`` mode. This option is only available for Linux endpoints.
+Specifies the who-data mode used by the FIM module. If the ``<provider>`` tag is not configured, the FIM module defaults to the ``ebpf`` mode. If ``ebpf`` is not supported due to kernel version incompatibility, you must configure ``audit`` mode. This option is only available for Linux endpoints.
 
 +--------------------+---------------------+
-| **Default value**  | ``audit``           |
+| **Default value**  | ``ebpf``            |
 +--------------------+---------------------+
-| **Allowed values** | ``audit``, ``ebpf`` |
+| **Allowed values** | ``ebpf``, ``audit`` |
 +--------------------+---------------------+
 
 **restart_audit**
@@ -1208,8 +1131,6 @@ However, the second line does enable hash checking for ``TEST_KEY``. This is a s
 Default syscheck configuration:
 -------------------------------
 
-
-
 .. tabs::
 
  .. group-tab:: Wazuh manager
@@ -1221,7 +1142,6 @@ Default syscheck configuration:
     <disabled>no</disabled>
     <!-- Frequency that syscheck is executed default every 12 hours -->
     <frequency>43200</frequency>
-    <scan_on_start>yes</scan_on_start>
     <!-- Generate alert when new file detected -->
     <alert_new_files>yes</alert_new_files>
     <!-- Don't ignore files that change more than 'frequency' times -->
@@ -1271,7 +1191,6 @@ Default syscheck configuration:
     <disabled>no</disabled>
     <!-- Frequency that syscheck is executed default every 12 hours -->
     <frequency>43200</frequency>
-    <scan_on_start>yes</scan_on_start>
     <!-- Directories to check  (perform all possible verifications) -->
     <directories>/etc,/usr/bin,/usr/sbin</directories>
     <directories>/bin,/sbin,/boot</directories>
@@ -1396,7 +1315,6 @@ Default syscheck configuration:
     <disabled>no</disabled>
     <!-- Frequency that syscheck is executed default every 12 hours -->
     <frequency>43200</frequency>
-    <scan_on_start>yes</scan_on_start>
     <!-- Directories to check  (perform all possible verifications) -->
     <directories>/etc,/usr/bin,/usr/sbin</directories>
     <directories>/bin,/sbin</directories>

@@ -16,4 +16,3 @@ Select your operating system to learn how to make an automatic deployment using 
    Linux <deployment-variables-linux>
    Windows <deployment-variables-windows>
    macOS <deployment-variables-macos>
-   AIX <deployment-variables-aix>

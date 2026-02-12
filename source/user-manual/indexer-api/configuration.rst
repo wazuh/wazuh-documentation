@@ -54,8 +54,6 @@ For more information on each of the available settings, check the :ref:`configur
    plugins.security.system_indices.enabled: true
    plugins.security.system_indices.indices: [".opendistro-alerting-config", ".opendistro-alerting-alert*", ".opendistro-anomaly-results*", ".opendistro-anomaly-detector*", ".opendistro-anomaly-checkpoints", ".opendistro-anomaly-detection-state", ".opendistro-reports-*", ".opendistro-notifications-*", ".opendistro-notebooks", ".opensearch-observability", ".opendistro-asynchronous-search-response*", ".replication-metadata-store"]
 
-   ### Option to allow Filebeat-oss 7.10.2 to work ###
-   compatibility.override_main_response_version: true
 
 .. warning::
 

@@ -65,8 +65,10 @@ wpk_repository
 
 Repository where the WPK files will be downloaded.
 
+.. |WAZUH_CUR_MAJ| replace:: |WAZUH_CURRENT_MAJOR|
+
 +--------------------+--------------------------------------------------+
-| **Default value**  | packages.wazuh.com/4.x/wpk/                      |
+| **Default value**  | packages.wazuh.com/|WAZUH_CUR_MAJ|/wpk/          |
 +--------------------+--------------------------------------------------+
 | **Allowed values** | Any repository URL that contains the WPK files.  |
 +--------------------+--------------------------------------------------+
