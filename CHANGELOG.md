@@ -1,6 +1,19 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [v4.14.3]
+
+### Added
+
+- Added the macOS 26 (Tahoe) SCA policy reference to the *Available SCA policies* section. ([#9158](https://github.com/wazuh/wazuh-documentation/pull/9158))
+- Added a reference for the macOS ARM WPK package to the WPK list. ([#9215](https://github.com/wazuh/wazuh-documentation/pull/9215))
+- **Post-release**: Added note about Linux WPK ARM packages in 4.14.3 and earlier versions. ([#9304](https://github.com/wazuh/wazuh-documentation/pull/9304))
+
+### Changed
+
+- Added ARM64 to Deployment on Docker prerequisites and updated certificate generator version. ([#9163](https://github.com/wazuh/wazuh-documentation/pull/9163))
+- Updated steps in the *Building Docker images locally* section. ([#9174](https://github.com/wazuh/wazuh-documentation/pull/9174))
+
 ## [v4.14.2]
 
 ### Added
