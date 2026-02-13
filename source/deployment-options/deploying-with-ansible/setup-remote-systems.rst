@@ -43,7 +43,7 @@ You can set up an SSH key-pair to provide a passwordless authentication mechanis
 
    #. Switch to root and navigate to the ``$HOME`` directory of the Ansible server:
 
-      .. code-block:: console
+      .. code-block:: consoleF
 
          $ sudo su
          # cd ~
@@ -351,7 +351,7 @@ Run the following commands in PowerShell as Administrator on the Windows endpoin
       Basic authentication must be used only with HTTPS enabled. For production environments, we recommend more secure authentication methods such as Kerberos, NTLM or certificate-based authentication.
 
 Adding endpoints to the inventory
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------------
 
 Define the remote endpoints that Ansible will manage by adding them to the inventory file ``/etc/ansible/hosts`` on the Ansible control server. You can group endpoints to run tasks and roles on multiple endpoints at once.
 
@@ -396,7 +396,7 @@ Where:
    You can check the `Ansible inventory documentation <http://docs.ansible.com/ansible/intro_inventory.html>`_ for more info regarding hosts and groups.
 
 Testing the Ansible connection to remote endpoints
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+--------------------------------------------------
 
 You can verify Ansible connectivity to remote endpoints before deploying Wazuh components.
 

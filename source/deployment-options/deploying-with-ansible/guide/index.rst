@@ -8,7 +8,7 @@
 Deploying Wazuh
 ===============
 
-The `Wazuh Ansible <https://github.com/wazuh/wazuh-ansible.git>`_ repository provides playbooks and roles for installing Wazuh central components and agents. Clone the repository into the Ansible roles directory at ``/etc/ansible/roles``.
+The `Wazuh Ansible <https://github.com/wazuh/wazuh-ansible>`_ repository provides playbooks and roles for installing Wazuh central components and agents. Clone the repository into the Ansible roles directory at ``/etc/ansible/roles``.
 
 Run the following commands on the Ansible server:
 
