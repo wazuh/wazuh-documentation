@@ -22,7 +22,7 @@ Installation on CentOS/RHEL/Fedora
 
    .. tab:: CentOS/RHEL 7 and Fedora
 
-      #. Install the EPEL repository:
+      #. Install the `EPEL <http://fedoraproject.org/wiki/EPEL>`__ repository:
 
          .. code-block:: console
          

@@ -6,7 +6,7 @@
 Roles
 =====
 
-You can use our preconfigured roles to deploy the Wazuh indexer and dashboard components, Wazuh manager, and Wazuh agents. You have to clone the Wazuh GitHub repository to your Ansible roles folder:
+You can use our preconfigured roles to deploy the Wazuh indexer and dashboard components, Wazuh manager, and Wazuh agents. You have to clone the `Wazuh GitHub repository <https://github.com/wazuh/wazuh-ansible>`_ to your Ansible roles folder:
 
 .. code-block:: console
 

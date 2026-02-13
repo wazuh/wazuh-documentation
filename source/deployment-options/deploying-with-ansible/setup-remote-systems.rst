@@ -39,7 +39,7 @@ Authenticate with SSH key-pairing
 
 You can set up an SSH key-pair to provide a passwordless authentication mechanism. Perform the following steps to set up SSH key-pairing between the Ansible control server and the managed endpoint.
 
-1. Generate the SSH authentication key pair for the root user of the Ansible control server using the ssh-keygen tool.
+#. Generate the SSH authentication key pair for the root user of the Ansible control server using the ssh-keygen tool.
 
    #. Switch to root and navigate to the ``$HOME`` directory of the Ansible server:
 
@@ -83,7 +83,7 @@ You can set up an SSH key-pair to provide a passwordless authentication mechanis
 
          # chmod 700 ~/.ssh/
 
-2. Follow the steps below to prepare the remote endpoint to receive the Ansible server public key.
+#. Follow the steps below to prepare the remote endpoint to receive the Ansible server public key.
 
    #. Install OpenSSH server if it is not present.
 
@@ -148,7 +148,7 @@ You can set up an SSH key-pair to provide a passwordless authentication mechanis
          $ touch .ssh/authorized_keys
          $ chmod 644 .ssh/authorized_keys
 
-3. Follow the steps below to add the public key (``id_rsa.pub``) of the Ansible server to the ``~/.ssh/authorized_keys`` file in the ``$HOME`` directory of the remote endpoint using SSH.
+#. Follow the steps below to add the public key (``id_rsa.pub``) of the Ansible server to the ``~/.ssh/authorized_keys`` file in the ``$HOME`` directory of the remote endpoint using SSH.
 
    #. Run the command below from the Ansible server:
 
@@ -162,14 +162,14 @@ You can set up an SSH key-pair to provide a passwordless authentication mechanis
 
          # cat ~/.ssh/authorized_keys
 
-4. Confirm SSH configuration allows public key authentication. Edit ``/etc/ssh/sshd_config`` on the remote endpoint and ensure the following settings are uncommented:
+#. Confirm SSH configuration allows public key authentication. Edit ``/etc/ssh/sshd_config`` on the remote endpoint and ensure the following settings are uncommented:
 
    .. code-block:: none
 
       PubkeyAuthentication yes
       AuthorizedKeysFile .ssh/authorized_keys
 
-5. Restart the SSH service:
+#. Restart the SSH service:
 
    .. tabs::
 
@@ -201,7 +201,7 @@ You can set up an SSH key-pair to provide a passwordless authentication mechanis
 
                # service ssh start
 
-6. Test the connection from the Ansible server:
+#. Test the connection from the Ansible server:
 
    .. code-block:: console
 

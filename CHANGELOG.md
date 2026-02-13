@@ -13,6 +13,7 @@ All notable changes to this project will be documented in this file.
 
 - Added ARM64 to Deployment on Docker prerequisites and updated certificate generator version. ([#9163](https://github.com/wazuh/wazuh-documentation/pull/9163))
 - Updated steps in the *Building Docker images locally* section. ([#9174](https://github.com/wazuh/wazuh-documentation/pull/9174))
+- **Post-release**: Updated the *Deployment with Ansible* documentation. ([#9295](https://github.com/wazuh/wazuh-documentation/pull/9295))
 
 ## [v4.14.2]
 
@@ -36,7 +37,6 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated the *Active Response* documentation. ([#9254](https://github.com/wazuh/wazuh-documentation/pull/9254)) ([#9258](https://github.com/wazuh/wazuh-documentation/pull/9258)) ([#9262](https://github.com/wazuh/wazuh-documentation/pull/9262))
 - **Post-release**: Updated the *Monitoring system calls* documentation. ([#9271](https://github.com/wazuh/wazuh-documentation/pull/9271))
 - **Post-release**: Updated the *Installing the Wazuh dashboard step by step* documentation. ([#9260](https://github.com/wazuh/wazuh-documentation/pull/9260))
-- **Post-release**: Updated the *Deployment with Ansible* documentation. ([#9295](https://github.com/wazuh/wazuh-documentation/pull/9295))
 
 
 ### Fixed
