@@ -422,7 +422,7 @@ Perform the following steps using the ``ping`` module to confirm that the Ansibl
       }
 
 Windows endpoints
-#################
+^^^^^^^^^^^^^^^^^
 
 Perform the following steps using the ``win_ping`` module to confirm that the Ansible control server can connect to Windows endpoints over WinRM:
 
