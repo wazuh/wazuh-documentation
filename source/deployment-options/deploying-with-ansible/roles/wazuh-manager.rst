@@ -15,7 +15,7 @@ This role will install and configure the Wazuh manager and Wazuh server API. The
 -  ``wazuh_manager_email_smtp_server``: This parameter specifies the SMTP server to be used by email notifications ( defaults: ``localhost``)
 -  ``wazuh_manager_email_from``: This parameter specifies the email notification sender identifier ( defaults: ``wazuh@example.com``)
 
-To use the role in a playbook, a YAML file ``wazuh-manager.yml`` can be created with the contents below:
+To use the role in a playbook, the ``wazuh-manager.yml`` file can be created with the contents below:
 
 .. code-block:: yaml
 
@@ -24,7 +24,7 @@ To use the role in a playbook, a YAML file ``wazuh-manager.yml`` can be created 
        - ansible-wazuh-manager
        - ansible-filebeat-oss
 
-Custom variable definitions for different environments can be set when configuring the installation. For example: ``vars-production.yml``:
+Custom variable definitions for different environments can be set when performing configuration during the installation. For example: ``vars-production.yml``:
 
 .. code-block:: yaml
 
@@ -98,6 +98,6 @@ To execute the playbook for a specific environment, run the command below:
 
    $ ansible-playbook wazuh-manager.yml -e@vars-production.yml
 
-The example above will install the Wazuh manager and Filebeat. The Filebeat is configured to forward data to ``10.1.1.11:9200`` as the Indexer node. The configuration set various ``agentless`` hosts configurations including their credentials, the Wazuh API and the ``authd`` will be configured as well.
+The example above will install the Wazuh manager and Filebeat. The Filebeat is configured to forward data to ``10.1.1.11:9200`` as the indexer node. The configuration set various ``agentless`` hosts configurations including their credentials, the Wazuh API and the ``authd`` will be configured as well.
 
 Please review the :ref:`variables references <wazuh_ansible_reference_manager>` section to see all variables available for this role.

@@ -10,9 +10,9 @@ This role is intended to deploy the Wazuh indexer to a specified node. The follo
 
 -  ``indexer_network_hosts``: This defines the listening IP address (default: ``127.0.0.1``).
 -  ``indexer_http_port``: This defines the listening port (default: ``9200``).
--  ``indexer_jvm_xms``: This specifies amount of memory to be used for java (default: ``null``).
+-  ``indexer_jvm_xms``: This specifies the amount of memory to be used for java (default: ``null``).
 
-To use the role in a playbook, a YAML file ``wazuh-indexer.yml`` can be created with the contents below:
+To use the role in a playbook, the ``wazuh-indexer.yml`` file can be created with the contents below:
 
 .. code-block:: yaml
 
@@ -40,6 +40,6 @@ To execute the playbook for a specific environment, run the command below:
 
    $ ansible-playbook wazuh-indexer.yml -e@vars-production.yml
 
-The example above will install the Wazuh Indexer and set the listening address to: ``10.1.1.10`` using ``vars-production.yml``.
+The example above will install the Wazuh indexer and set the listening address to: ``10.1.1.10`` using ``vars-production.yml``.
 
 Please review the :ref:`variables references <wazuh_ansible_reference_indexer>` section to see all variables available for this role.

@@ -9,9 +9,9 @@ Wazuh agent
 This role is designed to install and configure the Wazuh agent on different hosts. There are agent installer packages for Linux, macOS, and Windows endpoints. This role can also enroll the agent in the Wazuh manager. Below are some variables you can use to customize the installation:
 
 -  ``wazuh_managers``: This specifies a list of Wazuh manager node(s) for Wazuh agents to report to.
--  ``wazuh_agent_authd``: This specifies a set of options to register the Wazuh agent on the Wazuh server. This requires the ``wazuh-authd`` service to be running on the Wazuh server.
+-  ``wazuh_agent_authd``: This specifies a set of options to register the Wazuh agent on the Wazuh server with. This requires the ``wazuh-authd`` service to be running on the Wazuh server.
 
-To use the role in a playbook, a YAML file ``wazuh-agent.yml`` can be created with the contents below:
+To use the role in a playbook, the ``wazuh-agent.yml`` file can be created with the contents below:
 
 .. code-block:: yaml
 

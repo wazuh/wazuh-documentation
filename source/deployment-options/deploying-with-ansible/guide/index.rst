@@ -546,6 +546,7 @@ Using the wazuh-production-ready playbook, we deploy a Wazuh manager and indexer
      - hosts: wi1
        roles:
          - role: ../roles/wazuh/wazuh-indexer
+           indexer_network_host: "{{ private_ip }}"
            indexer_cluster_nodes:
              - "{{ hostvars.wi1.private_ip }}"
              - "{{ hostvars.wi2.private_ip }}"
@@ -556,7 +557,6 @@ Using the wazuh-production-ready playbook, we deploy a Wazuh manager and indexer
              - "{{ hostvars.wi3.private_ip }}"
            perform_installation: false
        become: no
-           indexer_network_host: "{{ private_ip }}"
        vars:
          indexer_node_master: true
          instances:

@@ -24,7 +24,7 @@ This method authenticate via SSH with a username and password. Ansible provides 
 
 -  ``-b`` execute task and operations with a privilege user.
 
--  ``-K`` prompt for the sudo password
+-  ``-K`` prompt for the sudo password.
 
 You can use the above arguments as follows:
 
@@ -32,7 +32,7 @@ You can use the above arguments as follows:
 
    # ansible -m setup all -u foo -k -b -K
 
-This command sets the connection user as ``foo``. Also, it requests for the connection user password and privileged user password.
+This command sets the connection user as ``foo``. Also, it requests the connection user password and privileged user password.
 
 Authenticate with SSH key-pairing
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
