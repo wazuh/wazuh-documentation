@@ -43,7 +43,7 @@ You can set up an SSH key-pair to provide a passwordless authentication mechanis
 
    #. Switch to root and navigate to the ``$HOME`` directory of the Ansible server:
 
-      .. code-block:: consoleF
+      .. code-block:: console
 
          $ sudo su
          # cd ~
