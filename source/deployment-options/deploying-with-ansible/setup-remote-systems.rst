@@ -401,7 +401,7 @@ Testing the Ansible connection to remote endpoints
 You can verify Ansible connectivity to remote endpoints before deploying Wazuh components.
 
 Linux endpoints
-^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~
 
 Perform the following steps using the ``ping`` module to confirm that the Ansible control server can connect to Linux endpoints over SSH:
 
@@ -422,7 +422,7 @@ Perform the following steps using the ``ping`` module to confirm that the Ansibl
       }
 
 Windows endpoints
-^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~
 
 Perform the following steps using the ``win_ping`` module to confirm that the Ansible control server can connect to Windows endpoints over WinRM:
 
