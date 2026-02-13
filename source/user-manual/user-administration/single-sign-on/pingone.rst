@@ -595,7 +595,7 @@ Wazuh dashboard configuration
       -  **Value**: Assign the name you gave to your group in PingOne configuration, in our case, this is ``wazuh-readonly``.
       -  Click **Save role mapping** to save and map the backend role with Wazuh as *read-only*.
 
-      .. thumbnail:: /images/single-sign-on/pingone/Wazuh-role-mapping-RO.png
+      .. thumbnail:: /images/single-sign-on/Wazuh-role-mapping-RO.png
          :title: Create Wazuh role mapping
          :alt: Create Wazuh role mapping
          :align: center
