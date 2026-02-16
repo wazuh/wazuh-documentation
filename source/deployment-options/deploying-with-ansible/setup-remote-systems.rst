@@ -14,7 +14,7 @@ Managing Linux endpoints with Ansible
 Ansible manages Linux endpoints using SSH for remote execution. The Ansible control server must have network access to the target remote endpoints and authenticate using either passwords or SSH keys.
 
 Authenticate with passwords
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 This method authenticate via SSH with a username and password. Ansible provides several useful options that can be used for SSH authentication with passwords:
 
@@ -35,7 +35,7 @@ You can use the above arguments as follows:
 This command sets the connection user as ``foo``. Also, it requests the connection user password and privileged user password.
 
 Authenticate with SSH key-pairing
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 You can set up an SSH key-pair to provide a passwordless authentication mechanism. Perform the following steps to set up SSH key-pairing between the Ansible control server and the managed endpoint.
 
@@ -219,7 +219,7 @@ Managing Windows endpoints with Ansible
 Windows endpoints are supported by Ansible from version 1.7 via the remote execution of PowerShell. As opposed to Linux endpoints, it is necessary to do some pre-work before being able to use Ansible on Windows endpoints. Please refer to the `Windows guide <https://docs.ansible.com/ansible/latest/user_guide/windows.html>`_ in the official documentation of Ansible.
 
 Requirements
-~~~~~~~~~~~~
+^^^^^^^^^^^^
 
 The following minimum requirements should be met to use Ansible on Windows endpoints:
 
@@ -236,7 +236,7 @@ The following minimum requirements should be met to use Ansible on Windows endpo
    Configuring WinRM over HTTPS requires a server authentication certificate. WinRM HTTPS cannot be enabled without a certificate. This guide uses a self-signed certificate, but certificates issued by a trusted Certificate Authority are recommended for production environments.
 
 Configuring WinRM on Windows endpoints
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Run the following commands in PowerShell as Administrator on the Windows endpoint.
 
@@ -401,7 +401,7 @@ Testing the Ansible connection to remote endpoints
 You can verify Ansible connectivity to remote endpoints before deploying Wazuh components.
 
 Linux endpoints
-~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^
 
 Perform the following steps using the ``ping`` module to confirm that the Ansible control server can connect to Linux endpoints over SSH:
 
@@ -422,7 +422,7 @@ Perform the following steps using the ``ping`` module to confirm that the Ansibl
       }
 
 Windows endpoints
-~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^
 
 Perform the following steps using the ``win_ping`` module to confirm that the Ansible control server can connect to Windows endpoints over WinRM:
 
