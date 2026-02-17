@@ -28,6 +28,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Added Wazuh Docker support for Windows. ([#8852](https://github.com/wazuh/wazuh-documentation/pull/8852))
 - **Post-release**: Added new steps and images to the API Permission section of the *Wazuh Microsoft Graph API* setup documentation. ([#8898](https://github.com/wazuh/wazuh-documentation/pull/8898))
 - **Post-release**: Added LLMs-ready documentation. ([#9219](https://github.com/wazuh/wazuh-documentation/pull/9219))
+- **Post-release**: Added note about Linux and macOS WPK ARM packages in 4.12 and earlier versions. ([#9308](https://github.com/wazuh/wazuh-documentation/pull/9308))
 
 ### Changed
 
