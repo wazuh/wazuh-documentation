@@ -4,7 +4,6 @@ All notable changes to this project will be documented in this file.
 ## [v4.10.3]
 
 - Support for Wazuh 4.10.3
-- Added note about Linux and macOS WPK ARM packages in 4.10 and earlier versions. ([#9310](https://github.com/wazuh/wazuh-documentation/pull/9310))
 
 ## [v4.10.2]
 
