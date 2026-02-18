@@ -15,6 +15,7 @@ All notable changes to this project will be documented in this file.
 - Updated steps in the *Building Docker images locally* section. ([#9174](https://github.com/wazuh/wazuh-documentation/pull/9174))
 - **Post-release**: Updated the *Deployment with Ansible* documentation. ([#9295](https://github.com/wazuh/wazuh-documentation/pull/9295))
 - **Post-release**: Updated the *Configure Python and YARA* section of the *Proof of concept guide* documentation. ([#9315](https://github.com/wazuh/wazuh-documentation/pull/9315))
+- **Post-release**: Updated the *Network IDS integration* section of the *Proof of concept guide* documentation. ([#9314](https://github.com/wazuh/wazuh-documentation/pull/9314))
 
 ## [v4.14.2]
 
@@ -38,7 +39,6 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated the *Active Response* documentation. ([#9254](https://github.com/wazuh/wazuh-documentation/pull/9254)) ([#9258](https://github.com/wazuh/wazuh-documentation/pull/9258)) ([#9262](https://github.com/wazuh/wazuh-documentation/pull/9262))
 - **Post-release**: Updated the *Monitoring system calls* documentation. ([#9271](https://github.com/wazuh/wazuh-documentation/pull/9271))
 - **Post-release**: Updated the *Installing the Wazuh dashboard step by step* documentation. ([#9260](https://github.com/wazuh/wazuh-documentation/pull/9260))
-
 
 ### Fixed
 
