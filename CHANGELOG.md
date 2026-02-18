@@ -13,6 +13,8 @@ All notable changes to this project will be documented in this file.
 
 - Added ARM64 to Deployment on Docker prerequisites and updated certificate generator version. ([#9163](https://github.com/wazuh/wazuh-documentation/pull/9163))
 - Updated steps in the *Building Docker images locally* section. ([#9174](https://github.com/wazuh/wazuh-documentation/pull/9174))
+- **Post-release**: Updated the *Deployment with Ansible* documentation. ([#9295](https://github.com/wazuh/wazuh-documentation/pull/9295))
+- **Post-release**: Updated the *Configure Python and YARA* section of the *Proof of concept guide* documentation. ([#9315](https://github.com/wazuh/wazuh-documentation/pull/9315))
 - **Post-release**: Updated the *Network IDS integration* section of the *Proof of concept guide* documentation. ([#9314](https://github.com/wazuh/wazuh-documentation/pull/9314))
 
 ## [v4.14.2]

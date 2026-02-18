@@ -12,7 +12,7 @@ This role deploys the Wazuh dashboard. You can customize the installation with t
 -  ``indexer_http_port``: This defines the Elasticsearch node listening port (default: ``9200``).
 -  ``dashboard_server_host``: This defines the Wazuh dashboard listening node address (default: ``0.0.0.0``).
 
-To use the role in a playbook, a YAML file ``wazuh-dashboard.yml`` can be created with the contents below:
+To use the role in a playbook, the ``wazuh-dashboard.yml`` file can be created with the contents below:
 
 .. code-block:: yaml
 
@@ -26,20 +26,20 @@ Custom variable definitions for different environments can be set. For example:
 
    .. code-block:: yaml
 
-      indexer_network_host: '<WAZUH_INDEXER_PROD_IP_ADDRESS>'
+      indexer_network_host: '10.1.1.10'
 
 -  For a development environment, the variables can be saved in ``vars-development.yml``:
 
    .. code-block:: yaml
 
-      indexer_network_host: '<WAZUH_INDEXER_DEV_IP_ADDRESS>'
+      indexer_network_host: '192.168.0.10'
 
-To run the playbook for a specific environment, the command below is run:
+To execute the playbook for a specific environment, run the command below:
 
 .. code-block:: console
 
    $ ansible-playbook wazuh-dashboard.yml -e@vars-production.yml
 
-The example above will install the Wazuh dashboard and configure ``<WAZUH_INDEXER_PROD_IP_ADDRESS>`` as the Indexer node.
+The example above will install the Wazuh dashboard and configure ``10.1.1.10`` as the indexer node.
 
-Please review the :ref:`variable references <wazuh_ansible_reference_dashboard>` section to see all variables available for this role.
+Please review the :ref:`variables references <wazuh_ansible_reference_dashboard>` section to see all variables available for this role.
