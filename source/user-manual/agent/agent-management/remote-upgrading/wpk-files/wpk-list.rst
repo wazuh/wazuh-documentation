@@ -21,6 +21,10 @@ Linux
 |  Linux (rpm) | |WAZUH_CUR_VER| |    64bit     | |WPK_Linux_RPM|               |
 +--------------+-----------------+--------------+-------------------------------+
 
+.. note::
+
+   In Wazuh |WAZUH_CURRENT_MINOR| and earlier, official WPKs for Linux are available only for x86_64/AMD64 architectures. These versions do not provide Linux ARM WPKs, and the remote upgrade process is not architecture-aware. Use Linux WPK packages only on x86_64-based systems.
+
 Windows
 -------
 
@@ -44,3 +48,7 @@ macOS
 +==============+=====================+==============+=============================================+
 |    macOS     | |WAZUH_CUR_OSX|     |    64bit     | |WPK_macOS|                                 |
 +--------------+---------------------+--------------+---------------------------------------------+
+
+.. note::
+
+   In Wazuh |WAZUH_CURRENT_MINOR| and earlier, official WPKs for macOS are available only for Intel-based architectures. These versions do not provide Apple Silicon (ARM) WPKs, and the remote upgrade process is not architecture-aware. Use WPK packages only on Intel-based systems.
