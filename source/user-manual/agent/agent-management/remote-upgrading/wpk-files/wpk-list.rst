@@ -10,7 +10,9 @@ Linux
 -----
 
 .. |WPK_Linux_DEB| replace:: `wazuh_agent_v|WAZUH_CURRENT|_linux_amd64.deb.wpk <https://packages.wazuh.com/4.x/wpk/linux/deb/amd64/wazuh_agent_v|WAZUH_CURRENT|_linux_amd64.deb.wpk>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_agent_v|WAZUH_CURRENT|_linux_amd64.deb.wpk.sha512>`__)
+.. |WPK_Linux_DEB_ARM64| replace:: `wazuh_agent_v|WAZUH_CURRENT|_linux_.deb.wpk <https://packages.wazuh.com/4.x/wpk/linux/deb//wazuh_agent_v|WAZUH_CURRENT|_linux_.deb.wpk>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_agent_v|WAZUH_CURRENT|_linux_.deb.wpk.sha512>`__)
 .. |WPK_Linux_RPM| replace:: `wazuh_agent_v|WAZUH_CURRENT|_linux_x86_64.rpm.wpk <https://packages.wazuh.com/4.x/wpk/linux/rpm/x86_64/wazuh_agent_v|WAZUH_CURRENT|_linux_x86_64.rpm.wpk>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_agent_v|WAZUH_CURRENT|_linux_x86_64.rpm.wpk.sha512>`__)
+.. |WPK_Linux_RPM_ARM64| replace:: `wazuh_agent_v|WAZUH_CURRENT|_linux_.rpm.wpk <https://packages.wazuh.com/4.x/wpk/linux/rpm//wazuh_agent_v|WAZUH_CURRENT|_linux_.rpm.wpk>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_agent_v|WAZUH_CURRENT|_linux_.rpm.wpk.sha512>`__)
 .. |WAZUH_CUR_VER| replace:: |WAZUH_CURRENT|
 
 +--------------+-----------------+---------------------+-------------------------------+
@@ -18,7 +20,11 @@ Linux
 +==============+=================+=====================+===============================+
 |  Linux (deb) | |WAZUH_CUR_VER| |    x86_64/AMD64     | |WPK_Linux_DEB|               |
 +--------------+-----------------+---------------------+-------------------------------+
+|  Linux (deb) | |WAZUH_CUR_VER| |    ARM64            | |WPK_Linux_DEB_ARM64|         |
++--------------+-----------------+---------------------+-------------------------------+
 |  Linux (rpm) | |WAZUH_CUR_VER| |    x86_64/AMD64     | |WPK_Linux_RPM|               |
++--------------+-----------------+---------------------+-------------------------------+
+|  Linux (rpm) | |WAZUH_CUR_VER| |    ARM64            | |WPK_Linux_RPM_ARM64|         |
 +--------------+-----------------+---------------------+-------------------------------+
 
 Windows
