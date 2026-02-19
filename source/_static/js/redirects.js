@@ -73,6 +73,7 @@ removedUrls['x.y'] = [
 /* Pages added in 4.14 */
 
 newUrls['4.14'] = [
+  '/release-notes/release-4-14-3.html',
   '/release-notes/release-4-14-2.html',
   '/release-notes/release-4-14-1.html',
   '/release-notes/release-4-14-0.html',
@@ -80,26 +81,58 @@ newUrls['4.14'] = [
   '/cloud-security/azure/platform-and-services/log-analytics.html',
   '/cloud-security/azure/platform-and-services/storage.html',
   '/cloud-security/azure/platform-and-services/graph.html',
+  '/deployment-options/deploying-with-ansible/guide/index.html',
+  '/deployment-options/deploying-with-ansible/guide/requirements.html',
 ]
 
 /* Redirections 4.13—4.14  */
 
 redirections.push(
-    {
-      'target': ['4.13=>4.14', '4.14=>4.13'],
-      '4.13': '/cloud-security/azure/log-analytics.html',
-      '4.14': '/cloud-security/azure/platform-and-services/log-analytics.html',
-    },
-    {
-      'target': ['4.13=>4.14', '4.14=>4.13'],
-      '4.13': '/cloud-security/azure/storage.html',
-      '4.14': '/cloud-security/azure/platform-and-services/storage.html',
-    },
-    {
-      'target': ['4.13=>4.14', '4.14=>4.13'],
-      '4.13': '/cloud-security/azure/graph.html',
-      '4.14': '/cloud-security/azure/platform-and-services/graph.html',
-    }
+  {
+    'target': ['4.13=>4.14', '4.14=>4.13'],
+    '4.13': '/cloud-security/azure/log-analytics.html',
+    '4.14': '/cloud-security/azure/platform-and-services/log-analytics.html',
+  },
+  {
+    'target': ['4.13=>4.14', '4.14=>4.13'],
+    '4.13': '/cloud-security/azure/storage.html',
+    '4.14': '/cloud-security/azure/platform-and-services/storage.html',
+  },
+  {
+    'target': ['4.13=>4.14', '4.14=>4.13'],
+    '4.13': '/cloud-security/azure/graph.html',
+    '4.14': '/cloud-security/azure/platform-and-services/graph.html',
+  },
+  {
+    'target': ['4.13=>4.14'],
+    '4.13': '/deployment-options/deploying-with-ansible/installation-guide.html',
+    '4.14': '/deployment-options/deploying-with-ansible/index.html',
+  },
+  {
+    'target': ['4.13=>4.14', '4.14=>4.13'],
+    '4.13': '/deployment-options/deploying-with-ansible/installation-guide.html#requirements',
+    '4.14': '/deployment-options/deploying-with-ansible/guide/requirements.html',
+  },
+  {
+    'target': ['4.13=>4.14', '4.14=>4.13'],
+    '4.13': '/deployment-options/deploying-with-ansible/guide/install-wazuh-agent.html',
+    '4.14': '/deployment-options/deploying-with-ansible/guide/index.html#installing-the-wazuh-agent',
+  },
+  {
+    'target': ['4.13=>4.14', '4.14=>4.13'],
+    '4.13': '/deployment-options/deploying-with-ansible/guide/install-wazuh-cluster.html',
+    '4.14': '/deployment-options/deploying-with-ansible/guide/index.html#wazuh-cluster-deployment',
+  },
+  {
+    'target': ['4.13=>4.14', '4.14=>4.13'],
+    '4.13': '/deployment-options/deploying-with-ansible/guide/install-indexer-dashboard.html',
+    '4.14': '/deployment-options/deploying-with-ansible/guide/index.html#installing-the-wazuh-indexer-and-dashboard',
+  },
+  {
+    'target': ['4.13=>4.14', '4.14=>4.13'],
+    '4.13': '/deployment-options/deploying-with-ansible/guide/install-wazuh-manager.html',
+    '4.14': '/deployment-options/deploying-with-ansible/guide/index.html#installing-the-wazuh-manager',
+  }
 );
 
 /* Pages no longer available in 4.14 (this is not required if there is a redirection for this url) */
@@ -109,6 +142,11 @@ removedUrls['4.14'] = [
   '/cloud-security/azure/log-analytics.html',
   '/cloud-security/azure/storage.html',
   '/cloud-security/azure/graph.html',
+  '/deployment-options/deploying-with-ansible/installation-guide.html',
+  '/deployment-options/deploying-with-ansible/guide/install-wazuh-agent.html',
+  '/deployment-options/deploying-with-ansible/guide/install-wazuh-cluster.html',
+  '/deployment-options/deploying-with-ansible/guide/install-indexer-dashboard.html',
+  '/deployment-options/deploying-with-ansible/guide/install-wazuh-manager.html',
 ];
 
 /* *** RELEASE 4.13 ****/
@@ -201,7 +239,7 @@ redirections.push(
   },
 );
 
-  /* Pages no longer available in 4.12 */
+/* Pages no longer available in 4.12 */
 
 removedUrls['4.12'] = [
   '/development/packaging/generate-deb-rpm-package.html',
