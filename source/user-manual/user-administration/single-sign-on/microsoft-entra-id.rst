@@ -345,7 +345,7 @@ Follow these steps to integrate Microsoft Entra ID IdP with Wazuh for single sig
 .. _configuration_entra_id_ro:
 
 Microsoft Entra ID Configuration
---------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 #. Go to `Microsoft Azure Portal <https://portal.azure.com/>`_, sign up or sign in if you already have an Azure Portal account.
 #. Create an app in **Microsoft Entra ID**.
@@ -450,7 +450,7 @@ Microsoft Entra ID Configuration
 .. _indexer_configuration_entra_id_ro:
 
 Wazuh indexer configuration
----------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Edit the Wazuh indexer security configuration files. We recommend that you back up these files before you carry out the configuration.
 
@@ -543,7 +543,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 .. _dashboard_configuration_entra_id_ro:
 
 Wazuh dashboard configuration
------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 #. Create a new role mapping for the backend role. Follow these steps to create a new role mapping, and grant read-only permissions to the backend role.
 
