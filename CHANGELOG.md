@@ -3,7 +3,9 @@ All notable changes to this project will be documented in this file.
 
 ## [v4.14.4]
 
-- Support for Wazuh 4.14.4
+### Added
+
+- Added a reference for the Linux ARM WPK packages to the WPK list. ([#9317](https://github.com/wazuh/wazuh-documentation/pull/9317))
 
 ## [v4.14.3]
 
