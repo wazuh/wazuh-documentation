@@ -6,7 +6,7 @@
 Filebeat
 --------
 
-Filebeat can be used in conjunction with Wazuh Manager to send events and alerts to the Wazuh indexer. This role will install Filebeat, you can customize the installation with these variables:
+Filebeat can be used in conjunction with the Wazuh manager to send events and alerts to the Wazuh indexer. This role will install Filebeat. You can customize the installation with these variables:
 
 -  ``filebeat_output_indexer_hosts``: This defines the indexer node(s) to be used (default: ``127.0.0.1:9200``).
 
