@@ -14,6 +14,10 @@ Linux
 |    Linux     | |WAZUH_LATEST|            |    64bit     | `wazuh_agent_v|WAZUH_LATEST|_linux_x86_64.wpk <https://packages.wazuh.com/4.x/wpk/linux/x86_64/wazuh_agent_v|WAZUH_LATEST|_linux_x86_64.wpk>`_ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_LATEST|/wazuh_agent_v|WAZUH_LATEST|_linux_x86_64.wpk.sha512>`__)                          |
 +--------------+------------------+--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
+.. note::
+
+   In Wazuh |WAZUH_CURRENT_MINOR| and earlier, official WPKs for Linux are available only for x86_64/AMD64 architectures. These versions do not provide Linux ARM WPKs, and the remote upgrade process is not architecture-aware. Use Linux WPK packages only on x86_64-based systems.
+
 Windows
 -------
 
