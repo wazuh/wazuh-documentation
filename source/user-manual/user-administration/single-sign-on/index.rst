@@ -3,7 +3,7 @@
 .. meta::
    :description: Wazuh can be integrated with several Identity Providers (IdP) to implement Single Sign-On (SSO). Learn more about it in this section of the Wazuh documentation.
 
-Single sign-on
+Single Sign-On
 ==============
 
 Wazuh supports the Security Assertion Markup Language (SAML) standard for Single Sign-On (SSO) in addition to the internal user database used for authentication. This allows organizations to use their existing Identity Providers (IdP) to manage access to the Wazuh platform.
@@ -34,7 +34,7 @@ The following parameters are required to make the configurations on the Wazuh da
    -  Each group that is generated in the IDPs can only be used as one  ``backend_role``. In a case where other roles such as ``read-only`` are needed, a new group will have to be created for this purpose.
    -  You need an account with administrator privileges on the Wazuh dashboard.
 
-Identity providers
+Identity Providers
 ------------------
 
 .. toctree::

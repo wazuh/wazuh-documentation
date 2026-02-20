@@ -748,7 +748,7 @@ Wazuh dashboard configuration
       -  **Cluster permissions**: ``cluster_composite_ops_ro``
       -  **Index**: ``*``
       -  **Index permissions**: ``read``
-      -  **Tenant permissions**: Select ``global_tenant`` and the ``Read only`` option.
+      -  **Tenant permissions**: ``global_tenant`` and select the ``Read only`` option.
    #. Select the newly created role.
    #. Select the **Mapped users** tab and click **Manage mapping**.
    #. Under **Backend roles**, add the value of the **Role name** attribute in Keycloak configuration and click **Map** to confirm the action. In our case, the backend role is ``wazuh-readonly``.
