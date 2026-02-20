@@ -16,7 +16,7 @@ Linux
 
 .. note::
 
-   In Wazuh |WAZUH_CURRENT_MINOR| and earlier, official WPKs for Linux are available only for x86_64/AMD64 architectures. These versions do not provide Linux ARM WPKs, and the remote upgrade process is not architecture-aware. Use Linux WPK packages only on x86_64-based systems.
+   In Wazuh 4.1 and earlier, official WPKs for Linux are available only for x86_64/AMD64 architectures. These versions do not provide Linux ARM WPKs, and the remote upgrade process is not architecture-aware. Use Linux WPK packages only on x86_64-based systems.
 
 Windows
 -------
