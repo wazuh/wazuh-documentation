@@ -27,6 +27,10 @@ Linux
 |  Linux (rpm) | |WAZUH_CUR_VER| |    ARM64/aarch64    | |WPK_Linux_RPM_AARCH64|       |
 +--------------+-----------------+---------------------+-------------------------------+
 
+.. note::
+
+   In Wazuh 4.14.3 and earlier, official WPKs for Linux are available only for x86_64/AMD64 architectures. These versions do not provide Linux ARM WPKs, and the remote upgrade process is not architecture-aware. Use Linux WPK packages only on x86_64-based systems.
+
 Windows
 -------
 
