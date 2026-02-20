@@ -1,10 +1,10 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: This section covers adding Wazuh indexer nodes to increase capacity and resilience.
+   :description: This section covers adding new Wazuh indexer nodes to increase capacity and resilience.
 
-Adding Wazuh indexer nodes
-==========================
+Adding new Wazuh indexer nodes
+==============================
 
 Adding a new node to the Wazuh indexer cluster can enhance the capacity and resilience of the security monitoring infrastructure.
 
@@ -26,13 +26,13 @@ If you are unsure which method aligns with your infrastructure, we recommend rev
 
    You need root user privileges to execute the commands below.
 
-Certificates creation
+All-in-one deployment
 ---------------------
 
-Perform the outlined steps on your existing Wazuh indexer node to generate the certificates required for secure communication among the Wazuh central components.
-
-All-in-one deployment
+Certificates creation
 ^^^^^^^^^^^^^^^^^^^^^
+
+Perform the outlined steps on your existing Wazuh indexer node to generate the certificates required for secure communication among the Wazuh central components.
 
 We recommend creating entirely new certificates for your Wazuh indexer nodes. Perform the following steps to create new certificates.
 
@@ -82,7 +82,10 @@ We recommend creating entirely new certificates for your Wazuh indexer nodes. Pe
    This will copy the certificates to the home directory of the logged-in user on the target system. You can change this to specify a path to your installation directory.
 
 Distributed deployment
-^^^^^^^^^^^^^^^^^^^^^^
+----------------------
+
+Certificates creation
+^^^^^^^^^^^^^^^^^^^^^
 
 We recommend you utilize pre-existing root CA keys to generate certificates for new nodes.
 
@@ -178,13 +181,13 @@ Perform the steps below on one indexer node only.
 
    This will copy the certificates to the home directory of the logged-in user on the target system. You can change this to specify a path to your installation directory.
 
+All-in-one deployment
+---------------------
+
 Configuring existing components to connect with the new node
-------------------------------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Before deploying an additional Wazuh node, it’s essential to reconfigure existing components to ensure communication within the cluster. This step involves updating configuration files and connection parameters so that the Wazuh manager, indexer, and dashboard recognize and properly interact with the newly added Wazuh indexer node.
-
-All-in-one deployment
-^^^^^^^^^^^^^^^^^^^^^
 
 #. Create a file, ``env_variables.sh``, in the ``/root`` directory of the existing node where you define your environment variables as follows:
 
@@ -307,7 +310,10 @@ All-in-one deployment
             # service wazuh-dashboard restart
 
 Distributed deployment
-^^^^^^^^^^^^^^^^^^^^^^
+----------------------
+
+Configuring existing components to connect with the new node
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 #. Edit the indexer configuration file at ``/etc/wazuh-indexer/opensearch.yml`` to include the new node(s) as follows. Uncomment or add more lines, according to your ``/root/config.yml`` definitions. Create the ``discovery.seed_hosts`` section if it doesn’t exist:
 
