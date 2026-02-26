@@ -16,6 +16,8 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated the *Deployment with Ansible* documentation. ([#9295](https://github.com/wazuh/wazuh-documentation/pull/9295))
 - **Post-release**: Updated the *Configure Python and YARA* section of the *Proof of concept guide* documentation. ([#9315](https://github.com/wazuh/wazuh-documentation/pull/9315))
 - **Post-release**: Updated the *Network IDS integration* section of the *Proof of concept guide* documentation. ([#9314](https://github.com/wazuh/wazuh-documentation/pull/9314))
+- **Post-release**: Updated the *Single sign-on* documentation. ([#9300](https://github.com/wazuh/wazuh-documentation/pull/9300)) ([#9332](https://github.com/wazuh/wazuh-documentation/pull/9332))
+- **Post-release**: Updated images in the *File integrity monitoring* documentation. ([#9326](https://github.com/wazuh/wazuh-documentation/pull/9326))
 - **Post-release**: Updated the *Adding new Wazuh indexer nodes* section. ([#9331](https://github.com/wazuh/wazuh-documentation/pull/9331))
 
 ## [v4.14.2]
