@@ -190,11 +190,12 @@ Configuration
 Test the configuration
 ''''''''''''''''''''''
 
-#. Create the user ``smith`` on a Linux endpoint:
+#. Create the user ``smith`` on a Linux endpoint and assign sudo privileges:
 
    .. code-block:: console
 
       # adduser smith
+      # sudo usermod -aG sudo smith
 
 #. Log out of the Linux endpoint and log in as ``smith``.
 

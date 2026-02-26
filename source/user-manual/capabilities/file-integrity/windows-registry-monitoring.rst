@@ -248,6 +248,12 @@ Wazuh monitors the startup registry keys automatically, out-of-the-box, without 
         <windows_registry arch="both">HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\RunOnce</windows_registry>
       </syscheck>
 
+Restart the Wazuh agent to apply the configuration:
+
+.. code-block:: PowerShell
+
+   Restart-Service -Name wazuh
+
 Test the configuration
 ^^^^^^^^^^^^^^^^^^^^^^
 

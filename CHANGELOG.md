@@ -19,6 +19,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated the *Single sign-on* documentation. ([#9300](https://github.com/wazuh/wazuh-documentation/pull/9300)) ([#9332](https://github.com/wazuh/wazuh-documentation/pull/9332))
 - **Post-release**: Updated images in the *File integrity monitoring* documentation. ([#9326](https://github.com/wazuh/wazuh-documentation/pull/9326))
 - **Post-release**: Updated the *Adding new Wazuh indexer nodes* section. ([#9331](https://github.com/wazuh/wazuh-documentation/pull/9331))
+- **Post-release**: Updated the *File integrity monitoring* documentation. ([#9326](https://github.com/wazuh/wazuh-documentation/pull/9326)) ([#9333](https://github.com/wazuh/wazuh-documentation/pull/9333))
 
 ## [v4.14.2]
 
