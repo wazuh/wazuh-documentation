@@ -206,7 +206,7 @@ Decoding is the process of analyzing structured or unstructured data, such as lo
               hostname: '192.168.1.1'
               program_name: 'sshd'
 
--  **Decoding**: In this phase, the Wazuh analysis engine applies a decoder that matches the log. Decoders extract fields such as user names, IP addresses, error codes, URLs, and any other relevant information contained in the logs. The decoders below match the sample log. These decoders are in the ``/var/ossec/rulesets/decoders/0310-ssh_decoders.xml`` file on the Wazuh server:
+-  **Decoding**: In this phase, the Wazuh analysis engine applies a decoder that matches the log. Decoders extract fields such as user names, IP addresses, error codes, URLs, and any other relevant information contained in the logs. The decoders below match the sample log. These decoders are in the ``/var/ossec/ruleset/decoders/0310-ssh_decoders.xml`` file on the Wazuh server:
 
    .. code-block:: console
 
