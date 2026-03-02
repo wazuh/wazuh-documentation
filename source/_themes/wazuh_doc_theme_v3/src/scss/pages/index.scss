@@ -47,10 +47,10 @@ header {
             padding: 0 20px;
             margin-left: 10px;
           }
-          @include media-only(xl,xxl) {
+          @include media-only(xl,wzh-xl) {
             font-size: 15px;
           }
-          @include media-min(xxl) {
+          @include media-min(wzh-xl) {
             font-size: 16px;
           }
         }
@@ -72,7 +72,7 @@ header {
 
   [class*=wzh-btn-] {
     align-items: center;
-    border: 2px solid;
+    border: 1px solid;
     border-radius: 10px;
     color: #000;
     display: flex;
