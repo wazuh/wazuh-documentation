@@ -80,10 +80,6 @@ email_to
 
 This specifies the email recipient for alerts.
 
-.. note::
-
-  A base configuration must be included in the section in order to use granular email configurations.
-
 +--------------------+-------------------------+
 | **Default value**  | n/a                     |
 +--------------------+-------------------------+
