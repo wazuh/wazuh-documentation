@@ -1453,8 +1453,98 @@ A response similar to the one below is expected when the command runs:
 .. code-block:: json
    :class: output
 
-   { "error": 0, "data": { "messages": [ "INFO: (7202): Session initialized with token '1f8ec388'" ], "token": "1f8ec388", "output": { "timestamp": "2026-01-23T09:20:51.969000Z", "rule": { "level": 5, "description": "sshd: Attempt to login using a non-existent user", "id": "5710", "mitre": { "id": [ "T1110.001", "T1021.004" ], "tactic": [ "Credential Access", "Lateral Movement" ], "technique": [ "Password Guessing", "SSH" ] }, "firedtimes": 1, "mail": false, "groups": [ "syslog", "sshd", "authentication_failed", "invalid_login" ], "gdpr": [ "IV_35.7.d", "IV_32.2" ], "gpg13": [ "7.1" ], "hipaa": [ "164.312.b" ], "nist_800_53": [ "AU.14", "AC.7", "AU.6" ], "pci_dss": [ "10.2.4", "10.2.5", "10.6.1" ], "tsc": [ "CC6.1", "CC6.8", "CC7.2", "CC7.3" ] }, "agent": { "id": "000", "name": "wazuh.manager" }, "manager": { "name": "wazuh.manager" }, "id": "1769160011.119294", "full_log": "Jan 23 10:00:00 myhost sshd[12345]: Failed password for invalid user admin from 10.0.0.5 port 54321 ssh2", "predecoder": { "program_name": "sshd", "timestamp": "Jan 23 10:00:00", "hostname": "myhost" }, "decoder": { "parent": "sshd", "name": "sshd" }, "data": { "srcip": "10.0.0.5", "srcuser": "admin" }, "location": "myhost->/var/log/auth.log" }, "alert": true, "codemsg": 0 } }%
+   {
+      "error": 0,
+      "data": {
+         "messages": [
+            "INFO: (7202): Session initialized with token '1f8ec388'"
+         ],
+         "token": "1f8ec388",
+         "output": {
+            "timestamp": "2026-01-23T09:20:51.969000Z",
+            "rule": {
+               "level": 5,
+               "description": "sshd: Attempt to login using a non-existent user",
+               "id": "5710",
+               "mitre": {
+                  "id": [
+                     "T1110.001",
+                     "T1021.004"
+                  ],
+                  "tactic": [
+                     "Credential Access",
+                     "Lateral Movement"
+                  ],
+                  "technique": [
+                     "Password Guessing",
+                     "SSH"
+                  ]
+               },
+               "firedtimes": 1,
+               "mail": false,
+               "groups": [
+                  "syslog",
+                  "sshd",
+                  "authentication_failed",
+                  "invalid_login"
+               ],
+               "gdpr": [
+                  "IV_35.7.d",
+                  "IV_32.2"
+               ],
+               "gpg13": [
+                  "7.1"
+               ],
+               "hipaa": [
+                  "164.312.b"
+               ],
+               "nist_800_53": [
+                  "AU.14",
+                  "AC.7",
+                  "AU.6"
+               ],
+               "pci_dss": [
+                  "10.2.4",
+                  "10.2.5",
+                  "10.6.1"
+               ],
+               "tsc": [
+                  "CC6.1",
+                  "CC6.8",
+                  "CC7.2",
+                  "CC7.3"
+               ]
+            },
+            "agent": {
+               "id": "000",
+               "name": "wazuh.manager"
+            },
+            "manager": {
+               "name": "wazuh.manager"
+            },
+            "id": "1769160011.119294",
+            "full_log": "Jan 23 10:00:00 myhost sshd[12345]: Failed password for invalid user admin from 10.0.0.5 port 54321 ssh2",
+            "predecoder": {
+               "program_name": "sshd",
+               "timestamp": "Jan 23 10:00:00",
+               "hostname": "myhost"
+            },
+            "decoder": {
+               "parent": "sshd",
+               "name": "sshd"
+            },
+            "data": {
+               "srcip": "10.0.0.5",
+               "srcuser": "admin"
+            },
+            "location": "myhost->/var/log/auth.log"
+         },
+         "alert": true,
+         "codemsg": 0
+      }
+   }
 
+   
 The output above shows rules that match the log test event you submitted through the Wazuh server API.
 
 Wazuh agent management
@@ -2127,8 +2217,7 @@ A response similar to the one below is expected when the command is executed:
 
 .. code-block:: json
    :class: output
-   
-   Output
+
    {
       "data": {
          "affected_items": [
