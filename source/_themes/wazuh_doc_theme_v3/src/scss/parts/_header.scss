@@ -94,8 +94,10 @@ header {
         display: flex;
         flex-direction: row;
         align-items: center;
+        justify-content: flex-end;
         margin-left: auto;
         width: calc(100% - 30px);
+        gap: 10px;
       }
       @include media-only(xl,wzh-xl) {
         max-width: calc(900px - 273px);
@@ -108,8 +110,8 @@ header {
       }
     }
     .nav-item {
-      flex-grow: 1;
-      flex-shrink: 0;
+      // flex-grow: 1;
+      // flex-shrink: 0;
       a.nav-link {
         @include media-min(xl){
           padding-bottom: 24px;
@@ -128,10 +130,9 @@ header {
         &.dropdown-toggle {
           padding: 0 10px;
           @include media-only(xl,wzh-xl){
-            padding-left: 8px;
-            padding-right: 2px;
+            padding: 24px 2px 24px 8px;
           }
-          @include media-min (xl) {
+          @include media-min (wzh-xl) {
             padding: 24px 10px;
           }
         }
@@ -149,6 +150,7 @@ header {
       @include media-min(xl){
         padding-left: 0;
         padding-right: 0;
+        justify-content: flex-end;
       }
     }
   }
@@ -313,7 +315,7 @@ header {
       label {
         display: flex;
         align-items: center;
-        height: 26px;
+        height: 30px;
         width: 268px;
         border-radius: 10px;
         padding: 5px 10px;
