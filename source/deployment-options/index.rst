@@ -156,7 +156,8 @@ These alternatives guide you to install the Wazuh central components along with 
     
     virtual-machine/virtual-machine
     amazon-machine-images/amazon-machine-images
-    docker/index 
+    docker/index
+    helm/index
     deploying-with-kubernetes/index
     offline-installation/index
     wazuh-from-sources/index
