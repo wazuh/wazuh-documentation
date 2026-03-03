@@ -8,6 +8,13 @@
 
 header {
 
+  #menu-top-right-corner {
+    margin-left: 10px;
+    li:last-of-type {
+      margin-right: 0;
+    }
+  }
+
   .navbar-nav .nav-item {
     .nav-link {
       display: inline;
@@ -24,31 +31,45 @@ header {
     }
     &.login {
       svg {
+        transition: all .3s ease-out;
         width: 13px;
         height: 19px;
       }
       .nav-link {
-        @include media-only(xl,wzh-xl) {
-          width: 111.5px;
-        }
-        @include media-only(wzh-xl,xxl) {
-          width: 106.5px;
+        height: 30px;
+        padding: 0 20px;
+        transition: all .3s ease-out;
+        // @include media-only(xl,wzh-xl) {
+        //   width: 111.5px;
+        // }
+        @include media-only(xl,xxl) {
+          width: 107px;
         }
         @include media-min(xxl) {
           width: 112.1px;
+        }
+        &:hover,
+        &:focus {
+          border-color: $light-color-primary-lighter;
+          background-color: $light-color-primary-lighter;
+          color: #fff;
+          svg {
+            fill: #fff;
+          }
+        }
+        span {
+          transition: all .3s ease-out;
+          margin-left: 7px;
         }
       }
     }
     &.install {
       .nav-link {
-        @include media-only(xl,wzh-xl) {
-          width: 141.8px;
+        @include media-only(lg,xl) {
+          width: 160px;
         }
-        @include media-only(wzh-xl,xxl) {
-          width: 136.8px;
-        }
-        @include media-min(xxl) {
-          width: 146px;
+        @include media-min(xl) {
+          width: 180px;
         }
       }
     }
@@ -57,7 +78,7 @@ header {
 
 .navbar-nav {
   .nav-item {
-    &.show {
+    .show {
       svg {
         transform: rotate(180deg);
       }
@@ -77,6 +98,12 @@ header {
   .nav-link {
     padding: 0 10px;
     font-size: 17px;
+    @include media-only(xl,wzh-xl) {
+      font-size: 15px;
+    }
+    @include media-only(wzh-xl,xxl) {
+      font-size: 16px;
+    }
     &:hover,
     &:focus {
       text-decoration: none;
@@ -100,7 +127,7 @@ header {
   }
   .dropdown-menu {
     min-width: 100%;
-    padding: 15px;
+    padding: 20px;
     margin-top: 0;
     border: 1px solid;
     border-radius: 10px;
@@ -117,10 +144,24 @@ header {
       transform: rotate(45deg);
       clip-path: inset(-15px 0 0 -15px);
     }
+    .nav-item {
+      @include media-min(xl) {
+        margin-bottom: 29px;
+      }
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+    }
     .dropdown-item {
-      padding: .9rem .75rem;
+      padding: 0;
       font-size: 17px;
       font-weight: 500;
+      @include media-only(xl,wzh-xl) {
+        font-size: 15px;
+      }
+      @include media-only(wzh-xl,xxl) {
+        font-size: 16px;
+      }
       &:hover {
         text-decoration: none;
       }
@@ -133,6 +174,11 @@ header {
 .light-theme {
   .navbar-nav {
     background-color: $light-color-base-space;
+    .login {
+      .nav-link {
+        border-color: $light-color-primary;
+      }
+    }
     .nav-link {
       color: $light-color-main-text-extra;
       &.active,
