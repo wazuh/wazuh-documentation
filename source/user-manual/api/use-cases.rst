@@ -1511,7 +1511,7 @@ You can use the Wazuh server API to perform a log test and see exactly which dec
 
    .. code-block:: console
 
-      # curl -k -X PUT "https://localhost:55000/logtest?pretty=true" \
+      curl -k -X PUT "https://localhost:55000/logtest?pretty=true" \
         -H "Authorization: Bearer $TOKEN" \
         -H "Content-Type: application/json" \
         -d '{
