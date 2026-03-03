@@ -126,6 +126,14 @@ if "%1" == "html" (
 	goto end
 )
 
+if "%1" == "markdown" (
+	%SPHINXBUILD% -b markdown %ALLSPHINXOPTS% %BUILDDIR%/markdown
+	if errorlevel 1 exit /b 1
+	echo.
+	echo.Build finished. The Markdown files are in %BUILDDIR%/markdown.
+	goto end
+)
+
 if "%1" == "dirhtml" (
 	%SPHINXBUILD% -b dirhtml %ALLSPHINXOPTS% %BUILDDIR%/dirhtml
 	if errorlevel 1 exit /b 1
