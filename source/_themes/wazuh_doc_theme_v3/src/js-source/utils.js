@@ -82,7 +82,7 @@ $('.desktop-search-form .header-search .form-control').on('focus', function(e){ 
 
   if (!searchbar.hasClass('expanded')) {
       /* Hide top navigation */
-      $('.nav-top nav').addClass('d-none');
+      $('.nav-top nav:not(.no-hide)').addClass('d-none');
 
         /* Change icon */
       $('.desktop-search-form .header-search svg').addClass('d-none');
