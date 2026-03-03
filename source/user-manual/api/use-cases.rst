@@ -1915,33 +1915,74 @@ A response similar to the one below is expected when the command is executed:
       :class: output
    
       {
-         "data": {
-            "affected_items": [
-               {
-                  "cpu": {
-                     "cores": 2,
-                     "mhz": 2593,
-                     "name": "Intel(R) Core(TM) i7-8850H CPU @ 2.60GHz"
-                  },
-                  "ram": {
-                     "free": 1455508,
-                     "total": 1965964,
-                     "usage": 26
-                  },
-                  "scan": {
-                     "id": 0,
-                     "time": "2026-02-05T16:36:32+00:00"
-                  },
-                  "board_serial": "None",
-                  "agent_id": "001"
-               }
-            ],
-            "total_affected_items": 1,
-            "total_failed_items": 0,
-            "failed_items": []
-         },
-         "message": "All specified syscollector information was returned",
-         "error": 0
+        "data": {
+         "affected_items": [
+           {
+            "scan": {
+              "id": 0,
+              "time": "2026-01-06T14:03:22+00:00"
+            },
+            "size": 29901824,
+            "name": "python-babel-localedata",
+            "architecture": "all",
+            "multiarch": "foreign",
+            "description": "tools for internationalizing Python applications - locale data files",
+            "vendor": "Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>",
+            "format": "deb",
+            "location": " ",
+            "install_time": " ",
+            "section": "python",
+            "version": "2.10.3-3build1",
+            "source": "python-babel",
+            "priority": "optional",
+            "agent_id": "001"
+           },
+           {
+            "scan": {
+              "id": 0,
+              "time": "2026-01-06T14:03:24+00:00"
+            },
+            "size": 114688,
+            "name": "python3-minimal",
+            "architecture": "amd64",
+            "multiarch": "allowed",
+            "description": "minimal subset of the Python language (default python3 version)",
+            "vendor": "Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>",
+            "format": "deb",
+            "location": " ",
+            "install_time": " ",
+            "section": "python",
+            "version": "3.12.3-0ubuntu2.1",
+            "source": "python3-defaults",
+            "priority": "optional",
+            "agent_id": "001"
+           },
+           {
+            "scan": {
+              "id": 0,
+              "time": "2026-01-06T14:03:24+00:00"
+            },
+            "size": 1061888,
+            "name": "python3-boto3",
+            "architecture": "all",
+            "description": "Python interface to Amazon's Web Services - Python 3.x",
+            "vendor": "Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>",
+            "format": "deb",
+            "location": " ",
+            "install_time": " ",
+            "section": "python",
+            "version": "1.34.46+dfsg-1ubuntu1",
+            "source": "python-boto3",
+            "priority": "optional",
+            "agent_id": "001"
+           }
+         ],
+         "total_affected_items": 96,
+         "total_failed_items": 0,
+         "failed_items": []
+        },
+        "message": "All specified syscollector information was returned",
+        "error": 0
       }
 
 Retrieving software packages
