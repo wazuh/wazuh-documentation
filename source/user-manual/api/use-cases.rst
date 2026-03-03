@@ -1299,7 +1299,10 @@ Follow the steps below to generate a key for enrolling a new Wazuh agent:
 
    .. code-block:: none
 
-      POST /agents { "name": "UBUNTU_AGENT_01" }
+      POST /agents
+      {
+        "name": "UBUNTU_AGENT_01"
+      }
 
    Where:
 
