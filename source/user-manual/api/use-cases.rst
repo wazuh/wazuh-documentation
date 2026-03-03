@@ -1509,9 +1509,13 @@ You can use the Wazuh server API to perform a log test and see exactly which dec
    .. code-block:: console
 
       # curl -k -X PUT "https://localhost:55000/logtest?pretty=true" \
-         -H "Authorization: Bearer $TOKEN" \
-         -H "Content-Type: application/json" \
-         -d '{ "log_format": "syslog", "location": "myhost->/var/log/auth.log", "event": "Jan 23 10:00:00 myhost sshd[12345]: Failed password for invalid user admin from 10.0.0.5 port 54321 ssh2" }'
+        -H "Authorization: Bearer $TOKEN" \
+        -H "Content-Type: application/json" \
+        -d '{
+              "log_format": "syslog",
+              "location": "myhost->/var/log/auth.log",
+              "event": "Jan 23 10:00:00 myhost sshd[12345]: Failed password for invalid user admin from 10.0.0.5 port 54321 ssh2"
+            }'
 
    A response similar to the one below is expected when the command runs:
 
