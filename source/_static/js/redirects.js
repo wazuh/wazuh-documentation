@@ -220,6 +220,11 @@ redirections.push(
     '4.13': '/user-manual/user-administration/single-sign-on/read-only/pingone.html',
     '4.14': '/user-manual/user-administration/single-sign-on/pingone.html#setup-pingone-single-sign-on-with-read-only-role',
   },
+  {
+    'target': ['4.13=>4.14'],
+    '4.13': '/user-manual/agent/agent-management/index.html',
+    '4.14': '/user-manual/agent/index.html',
+  },
 );
 
 /* Pages no longer available in 4.14 (this is not required if there is a redirection for this url) */
@@ -250,6 +255,7 @@ removedUrls['4.14'] = [
   '/user-manual/user-administration/single-sign-on/read-only/okta.html',
   '/user-manual/user-administration/single-sign-on/read-only/onelogin.html',
   '/user-manual/user-administration/single-sign-on/read-only/pingone.html',
+  '/user-manual/agent/agent-management/index.html',
 ];
 
 /* *** RELEASE 4.13 ****/
