@@ -23,6 +23,10 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated the *File integrity monitoring* documentation. ([#9326](https://github.com/wazuh/wazuh-documentation/pull/9326)) ([#9333](https://github.com/wazuh/wazuh-documentation/pull/9333))
 - **Post-release**: Updated the *Use Cases* section of the *Wazuh server API* documentation. ([#9335](https://github.com/wazuh/wazuh-documentation/pull/9335))
 
+### Fixed
+
+- **Post-release**: Fixed Wazuh Server image rendering in *Installation Guide* documentation. ([#9369](https://github.com/wazuh/wazuh-documentation/pull/9369))
+
 ## [v4.14.2]
 
 ### Added
