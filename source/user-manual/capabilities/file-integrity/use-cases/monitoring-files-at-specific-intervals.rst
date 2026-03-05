@@ -31,9 +31,8 @@ Configuration
 
 Perform the following steps to configure the FIM module to monitor a ``user_details.txt`` file every 5 minutes.
 
-1. Create a text file ``user_details.txt`` and save it in the ``Documents`` directory.
-
-2. Edit the Wazuh agent ``/var/ossec/etc/ossec.conf`` configuration file and add the ``user_details.txt`` file for monitoring:
+#. Create a text file ``user_details.txt`` and save it in the ``Documents`` directory.
+#. Edit the Wazuh agent ``/Library/Ossec/etc/ossec.conf`` configuration file and add the ``user_details.txt`` file for monitoring:
 
    .. code-block:: xml
 
@@ -42,7 +41,7 @@ Perform the following steps to configure the FIM module to monitor a ``user_deta
         <directories>/Users/*/Documents/user_details.txt</directories>
       </syscheck>
 
-3. Restart the Wazuh agent to apply the configuration:
+#. Restart the Wazuh agent to apply the configuration:
 
    .. code-block:: console
 

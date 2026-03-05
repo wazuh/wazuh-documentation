@@ -14,6 +14,7 @@ All notable changes to this project will be documented in this file.
 - Added the macOS 26 (Tahoe) SCA policy reference to the *Available SCA policies* section. ([#9158](https://github.com/wazuh/wazuh-documentation/pull/9158))
 - Added a reference for the macOS ARM WPK package to the WPK list. ([#9215](https://github.com/wazuh/wazuh-documentation/pull/9215))
 - **Post-release**: Added note about Linux WPK ARM packages in 4.14.3 and earlier versions. ([#9304](https://github.com/wazuh/wazuh-documentation/pull/9304))
+- **Post-release**: Updated the Agent documentation structure. ([#9367](https://github.com/wazuh/wazuh-documentation/pull/9367))
 
 ### Changed
 
@@ -22,6 +23,15 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated the *Deployment with Ansible* documentation. ([#9295](https://github.com/wazuh/wazuh-documentation/pull/9295))
 - **Post-release**: Updated the *Configure Python and YARA* section of the *Proof of concept guide* documentation. ([#9315](https://github.com/wazuh/wazuh-documentation/pull/9315))
 - **Post-release**: Updated the *Network IDS integration* section of the *Proof of concept guide* documentation. ([#9314](https://github.com/wazuh/wazuh-documentation/pull/9314))
+- **Post-release**: Updated the *Single sign-on* documentation. ([#9300](https://github.com/wazuh/wazuh-documentation/pull/9300)) ([#9332](https://github.com/wazuh/wazuh-documentation/pull/9332))
+- **Post-release**: Updated images in the *File integrity monitoring* documentation. ([#9326](https://github.com/wazuh/wazuh-documentation/pull/9326))
+- **Post-release**: Updated the *Adding new Wazuh indexer nodes* section. ([#9331](https://github.com/wazuh/wazuh-documentation/pull/9331))
+- **Post-release**: Updated the *File integrity monitoring* documentation. ([#9326](https://github.com/wazuh/wazuh-documentation/pull/9326)) ([#9333](https://github.com/wazuh/wazuh-documentation/pull/9333))
+- **Post-release**: Updated the *Use Cases* section of the *Wazuh server API* documentation. ([#9335](https://github.com/wazuh/wazuh-documentation/pull/9335))
+
+### Fixed
+
+- **Post-release**: Fixed Wazuh Server image rendering in *Installation Guide* documentation. ([#9369](https://github.com/wazuh/wazuh-documentation/pull/9369)) ([#9371](https://github.com/wazuh/wazuh-documentation/pull/9371))
 
 ## [v4.14.2]
 
