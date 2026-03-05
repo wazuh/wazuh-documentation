@@ -25,7 +25,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
-- **Post-release**: Fixed Wazuh Server image rendering in *Installation Guide* documentation. ([#9369](https://github.com/wazuh/wazuh-documentation/pull/9369))
+- **Post-release**: Fixed Wazuh Server image rendering in *Installation Guide* documentation. ([#9369](https://github.com/wazuh/wazuh-documentation/pull/9369)) ([#9371](https://github.com/wazuh/wazuh-documentation/pull/9371))
 
 ## [v4.14.2]
 
