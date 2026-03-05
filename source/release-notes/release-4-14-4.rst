@@ -18,6 +18,13 @@ Resolved issues
 
 This release resolves known issues as the following:
 
+Wazuh dashboard
+^^^^^^^^^^^^^^^
+
+-  `#8047 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8047>`__ Fixed ``indexDate`` function to correctly handle ISO week-year calculation for weekly indices.
+-  `#8052 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8052>`__ Fixed the status code and body displayed in failed requests in **Server management** > **Dev tools**.
+-  `#8087 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8087>`__ Fixed saving of valid Windows EventChannel ``QueryList`` queries in the ``agent.conf`` editor.
+
 Changelogs
 ----------
 
