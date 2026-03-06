@@ -51,7 +51,7 @@ Restart the Wazuh manager via the command line interface with the following comm
 Forwarding alerts
 -----------------
 
-The Wazuh manager forwards alerts to the Wazuh indexer by default for indexing and analytics capabilities. Additionally, the Wazuh manager provides the capability of configuring and forwarding alerts to other systems for analysis and backup.
+The Wazuh manager forwards alerts to the Wazuh indexer by default for indexing and analytics. Additionally, the Wazuh manager provides the capability of configuring and forwarding alerts to other systems for analysis and backup.
 
 .. _configuring_syslog_output:
 
@@ -78,7 +78,7 @@ The code block below shows a sample configuration to forward alerts to a syslog 
 
 The configuration options are defined as follows:
 
--  The ``<level>`` tag sets the minimum severity level of the alerts to be forwarded to the syslog server. The example value ``9`` indicates the Wazuh server only forwards alerts to the syslog server if the alert level is higher than ``9``. If this option is not defined, the Wazuh server forwards all alerts to the syslog server.
+-  The ``<level>`` tag sets the minimum severity level of the alerts to be forwarded to the syslog server. The example value ``9`` indicates the Wazuh server only forwards alerts to the syslog server if the alert level is greater than ``9``. If this option is not defined, the Wazuh server forwards all alerts to the syslog server.
 -  The ``<server>`` tag sets the IP address or hostname of the syslog server to forward the alerts. The IP address ``192.168.1.241`` in the configuration is used as an example.
 
 You can learn more about the available configuration options in the :ref:`syslog_output <reference_ossec_syslog_output>` reference guide.
@@ -102,7 +102,7 @@ You can also forward alerts to multiple syslog servers by defining multiple ``<s
      </syslog_output>
    </ossec_config>
 
-In the configuration above,
+Where:
 
 -  The first ``<syslog_output>`` block sends all alerts without filtering to the syslog server with IP address ``192.168.1.240``.
 -  The second ``<syslog_output>`` block sends alerts to the syslog server ``192.168.1.241`` only if the alert level is higher than ``9``.
@@ -110,16 +110,16 @@ In the configuration above,
 .. _configuring_email_alerts:
 
 Configuring email alerts
-^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^
 
-Wazuh provides a feature to send alerts to email systems when they are generated on a Wazuh server. You can configure it to send email alerts to one or more email addresses when rules are triggered or based on customized settings. This configuration can help you for daily event reports and more.
+Wazuh provides a feature to send alerts to email systems when they are generated on a Wazuh server. You can configure it to send email alerts to one or more email addresses when rules are triggered or based on customized settings. This configuration is useful for daily event reports and operational monitoring.
 
 A sample email sent by Wazuh when the rule ID ``553`` is triggered is shown below:
 
 .. code-block:: none
 
    Wazuh Notification.
-   2024 Apr 29 08:58:30
+   2026 Jan 19 09:52:40
 
    Received From: wazuh-server->syscheck
    Rule: 553 fired (level 7) -> "File deleted."
@@ -132,7 +132,7 @@ A sample email sent by Wazuh when the rule ID ``553`` is triggered is shown belo
    Attributes:
     - Size: 0
     - Permissions: rw-r--r--
-    - Date: Mon Apr 29 08:46:12 2024
+    - Date: Mon Jan 19 09:57:18 2024
     - Inode: 841858
     - User: root (0)
     - Group: root (0)
@@ -141,7 +141,14 @@ A sample email sent by Wazuh when the rule ID ``553`` is triggered is shown belo
     - SHA256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 
 
- --END OF NOTIFICATION
+   --END OF NOTIFICATION
+
+Email alerts can be configured using the following options:
+
+-  :ref:`Generic email options <generic_email_options>`
+-  :ref:`Granular email options <granular_email_options>`
+
+.. _generic_email_options:
 
 Generic email options
 ~~~~~~~~~~~~~~~~~~~~~
@@ -162,9 +169,9 @@ A sample email configuration to send alerts to the email address ``me@test.com``
      ...
    </ossec_config>
 
-Once the above has been configured, the ``email_alert_level`` option needs to be set to the minimum alert level to trigger an email. By default, this level is set to ``12``.
+After completing the configuration above, set the ``email_alert_level`` option to define the minimum alert severity required to trigger an email notification. By default, this value is set to ``12``.
 
-This example configuration below sets the minimum level to send email alerts to ``10``:
+The following example configures the Wazuh manager to send email alerts for events with a severity level of ``10`` or higher:
 
 .. code-block:: xml
 
@@ -183,20 +190,20 @@ Restart the Wazuh manager service to apply the changes after every configuration
 
 .. note::
 
-   Wazuh doesn't handle SMTP authentication. If your email service uses this, you need to :ref:`configure a server relay <smtp_server_with_authentication>`.
+   Wazuh does not handle SMTP authentication. If your email service uses this, you need to :ref:`configure a server relay <smtp_server_with_authentication>`.
 
 .. _granular_email_options:
 
 Granular email options
 ~~~~~~~~~~~~~~~~~~~~~~
 
-Wazuh allows granular configuration options for email alerts. This setting extends the `generic email options`_ configured in the ``<global>`` section of the ``/var/ossec/etc/ossec.conf`` file. Granular email configurations are defined within the ``<email_alerts>`` tag of the ``/var/ossec/etc/ossec.conf`` file.
-
-Below are some sample granular configurations for sending alerts via email. For more information, see the :ref:`email_alerts <reference_ossec_email_alerts>` section.
+Wazuh allows granular configuration options for email alerts. This setting extends the :ref:`generic email options <generic_email_options>` configured in the ``<global>`` section of the ``/var/ossec/etc/ossec.conf`` file. Granular email configurations are defined within the ``<email_alerts>`` tag of the ``/var/ossec/etc/ossec.conf`` file.
 
 .. note::
 
    The minimum severity level configured in the ``<alerts>`` section applies to and overrides these granular email configurations. For example, if you configure the Wazuh manager to send an email when rule ``526`` is triggered, but the rule has a level lower than the minimum level specified in the ``<alerts>`` section, the alert will not be sent.
+
+Below are some sample granular configurations for sending alerts via email. For more information, see the :ref:`email_alerts <reference_ossec_email_alerts>` section.
 
 Email alert based on level
 ''''''''''''''''''''''''''
@@ -318,7 +325,7 @@ This configuration sends:
 Force forwarding an alert by email
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The minimum severity level to send an alert via email is ``12`` by default. You can configure the Wazuh manager to forcefully send an email alert below the configured minimum severity level. To do so, you need to use one of the :ref:`rule <rules_options>` options below:
+The minimum severity level to send an alert via email is ``12`` by default. You can configure the Wazuh manager to forcefully send an email alert below the configured minimum severity level. To do so, you need to use one of the :ref:`rule  options <rules_options>` below:
 
 -  ``alert_by_email`` to always alert by email.
 -  ``no_email_alert`` to never alert by email.
@@ -327,6 +334,7 @@ The minimum severity level to send an alert via email is ``12`` by default. You 
 For example, the rule definition below sends an email every time rule ``502`` is triggered, regardless of what the minimum severity level is set to:
 
 .. code-block:: xml
+   :emphasize-lines: 3
 
    <rule id="502" level="3">
      <if_sid>500</if_sid>
@@ -344,7 +352,7 @@ Wazuh email alerts do not support SMTP servers with authentication, such as Gmai
 
 Perform the steps below on your relay server to configure Postfix with Gmail.
 
-#. Run this command to install the required packages. Select *No configuration*, if prompted about the mail server configuration type.
+#. Run this command to install the required packages. Select **No configuration**, if prompted about the mail server configuration type.
 
    .. tabs::
 
@@ -366,7 +374,7 @@ Perform the steps below on your relay server to configure Postfix with Gmail.
 
       .. group-tab:: CentOS
 
-         .. code-block:: console
+         .. code-block:: none
 
             relayhost = [smtp.gmail.com]:587
             smtp_sasl_auth_enable = yes
@@ -377,7 +385,7 @@ Perform the steps below on your relay server to configure Postfix with Gmail.
 
       .. group-tab:: Ubuntu
 
-         .. code-block:: console
+         .. code-block:: none
 
             relayhost = [smtp.gmail.com]:587
             smtp_sasl_auth_enable = yes
@@ -387,7 +395,7 @@ Perform the steps below on your relay server to configure Postfix with Gmail.
             smtp_use_tls = yes
             smtpd_relay_restrictions = permit_mynetworks, permit_sasl_authenticated, defer_unauth_destination
 
-#. Set the credentials of the sender in the ``/etc/postfix/sasl_passwd`` file and create a database file for Postfix. Replace the ``<USERNAME>`` and ``<PASSWORD>`` variables with sender’s email address username and password respectively.
+#. Set the credentials of the sender in the ``/etc/postfix/sasl_passwd`` file and create a database file for Postfix. Replace the ``<USERNAME>`` and ``<PASSWORD>`` variables with sender's email address username and password respectively.
 
    .. code-block:: console
 
@@ -432,7 +440,7 @@ Perform the steps below on your relay server to configure Postfix with Gmail.
    -  ``<CONFIGURED_EMAIL>`` with your configured email address.
    -  ``<RECEIVER_EMAIL>`` with the email address of the recipient.
 
-   The command sends an email to the receiver’s email with subject ``Test Postfix`` and body ``Test mail from postfix``.
+   The command sends an email to the receiver's email with subject ``Test Postfix`` and body ``Test mail from postfix``.
 
    If you get the error message ``fatal: tls_fprint: error computing md5 message digest`` in the ``/var/log/maillog`` file, run the following commands to switch Postfix from the default ``MD5`` hashing function to ``SHA-256``:
 
@@ -441,10 +449,9 @@ Perform the steps below on your relay server to configure Postfix with Gmail.
       # postconf -e smtp_tls_fingerprint_digest=sha256
       # postconf -e smtpd_tls_fingerprint_digest=sha256
 
-#. Configure email notifications within the ``<global>`` tag of the Wazuh server’s ``/var/ossec/etc/ossec.conf`` file as follows:
+#. Configure email notifications within the ``<global>`` tag of the Wazuh server's ``/var/ossec/etc/ossec.conf`` file as follows:
 
    .. code-block:: xml
-      :emphasize-lines: 4,5
 
       <global>
         <email_notification>yes</email_notification>
@@ -473,7 +480,7 @@ Wazuh supports forwarding alerts to database systems. You can configure the Wazu
 
 .. note::
 
-   This guide assumes you have already installed MySQL or PostgreSQL and know how to create the users and the databases.
+   This guide assumes you have already installed MySQL or PostgreSQL and that you are familiar with creating databases and database users.
 
 Prerequisites
 ~~~~~~~~~~~~~
@@ -482,37 +489,39 @@ You need to install the development libraries for the database system you want t
 
 #. Install the development libraries for the database system:
 
-   -  **For MySQL**:
+   .. tabs::
 
-      .. tabs::
+      .. group-tab:: For MySQL
 
-         .. group-tab:: Yum
+         .. tabs::
 
-            .. code-block:: console
+            .. group-tab:: Yum
 
-               # yum install mysql-devel
+               .. code-block:: console
 
-         .. group-tab:: APT
+                  # yum install mysql-devel
 
-            .. code-block:: console
+            .. group-tab:: APT
 
-               # apt-get install libmysqlclient-dev
+               .. code-block:: console
 
-   -  **For PostgreSQL**:
+                  # apt-get install libmysqlclient-dev
 
-      .. tabs::
+      .. group-tab:: For PostgreSQL
 
-         .. group-tab:: Yum
+         .. tabs::
 
-            .. code-block:: console
+            .. group-tab:: Yum
 
-               # yum install postgresql-devel
+               .. code-block:: console
 
-         .. group-tab:: APT
+                  # yum install postgresql-devel
 
-            .. code-block:: console
+            .. group-tab:: APT
 
-               # apt-get install libpq-dev
+               .. code-block:: console
+
+                  # apt-get install libpq-dev
 
 #. Install the dependencies as outlined in the :ref:`installing dependencies <installing_manager_from_sources_dependencies>` section.
 
@@ -563,51 +572,81 @@ Database configuration
 
 According to your database system, create a new database, set up the database user, and add the schema located in the ``src/os_dbd`` directory of the source code with the following commands:
 
--  **For MySQL**:
+   .. tabs::
 
-   .. code-block:: console
+      .. group-tab:: For MySQL
 
-      # mysql -u root -p
+         Perform the following steps on the MySQL server to create the database and user required for Wazuh database output:
 
-   .. code-block:: mysql
+         #. Log in to the MySQL shell as the root user:
 
-      mysql> CREATE DATABASE Alerts_DB;
-      Query OK, 1 row affected (2.34 sec)
+            .. code-block:: console
 
-      mysql> CREATE USER '<DATABASE_USER>'@'<DATABASE_SERVER_IP_ADDRESS>' IDENTIFIED BY '<DATABASE_USER_PASSWORD>';
-      Query OK, 0 rows affected (0.00 sec)
+               # mysql -u root -p
 
-      mysql> GRANT INSERT,SELECT,UPDATE,CREATE,DELETE,EXECUTE on Alerts_DB.* to '<DATABASE_USER>'@'<DATABASE_SERVER_IP_ADDRESS>';
-      Query OK, 0 rows affected (0.00 sec)
+         #. Create a database to store Wazuh alerts:
 
-      mysql> FLUSH PRIVILEGES;
-      Query OK, 0 rows affected (0.00 sec)
+            .. code-block:: none
 
-      mysql> quit;
+               mysql> CREATE DATABASE Alerts_DB;
 
-   Replace the following variables in the commands above:
+         #. Create a dedicated database user:
 
-   -  ``<DATABASE_USER>`` with the user you want to create for the database server.
-   -  ``<DATABASE_SERVER_IP_ADDRESS>`` with the IP address of the database server.
-   -  ``<DATABASE_USER_PASSWORD>`` with the user password to access the database server.
+            .. code-block:: none
 
-   .. code-block:: console
+               mysql> CREATE USER '<DATABASE_USER>'@'<DATABASE_SERVER_IP>' IDENTIFIED BY '<DATABASE_USER_PASSWORD>';
 
-      # mysql -u root -p Alerts_DB < src/os_dbd/mysql.schema
+         #. Grant the required permissions to the user:
 
--  **For PostgreSQL**:
+            .. code-block:: none
 
-   .. code-block:: console
+               mysql> GRANT INSERT,SELECT,UPDATE,CREATE,DELETE,EXECUTE on Alerts_DB.* to '<DATABASE_USER>'@'<DATABASE_SERVER_IP>';
 
-      # sudo -u postgres createuser -P <DATABASE_USER>
-      # sudo -u postgres createdb -O <DATABASE_USER> Alerts_DB
-      # psql -U <DATABASE_USER> -d Alerts_DB -f src/os_dbd/postgresql.schema
+            Replace the following variables in the commands above:
 
-   Replace ``<DATABASE_USER>`` with the user you want to create for the database server.
+            -  ``<DATABASE_USER>`` with the user you want to create for the database server.
+            -  ``<DATABASE_SERVER_IP>`` with the IP address of the database server.
+            -  ``<DATABASE_USER_PASSWORD>`` with the user password to access the database server.
 
-.. note::
+         #. Apply the privilege changes and exit the MySQL shell:
 
-   You will be prompted twice to provide a password when creating the user. Note this password as it is required when configuring the Wazuh manager.
+            .. code-block:: none
+
+               mysql> FLUSH PRIVILEGES;
+
+               mysql> quit;
+
+         #. Import the Wazuh database schema:
+
+            .. code-block:: console
+
+               # mysql -u root -p Alerts_DB < src/os_dbd/mysql.schema
+
+      .. group-tab:: For PostgreSQL
+
+         #. Create a database user and assign a password:
+
+            .. code-block:: console
+
+               # sudo -u postgres createuser -P <DATABASE_USER>
+
+         #. Create the database and assign ownership to the user:
+
+            .. code-block:: console
+
+               # sudo -u postgres createdb -O <DATABASE_USER> Alerts_DB
+
+         #. Import the Wazuh database schema:
+
+            .. code-block:: console
+
+               # psql -U <DATABASE_USER> -d Alerts_DB -f src/os_dbd/postgresql.schema
+
+            Replace ``<DATABASE_USER>`` with the username you want to create for the database server.
+
+   .. note::
+
+      You will be prompted twice to provide a password when creating the user. Note this password as it is required when configuring the Wazuh manager.
 
 Wazuh manager configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -616,41 +655,44 @@ Perform the following steps to configure the Wazuh manager to send alerts and ot
 
 #. Add the following block of code within the ``<ossec_config>`` block of the ``/var/ossec/etc/ossec.conf`` file on the Wazuh server:
 
-   -  **For MySQL**:
+   .. tabs::
 
-      .. code-block:: xml
-         :emphasize-lines: 2-4
+      .. group-tab:: For MySQL
 
-         <database_output>
-           <hostname><DATABASE_SERVER_IP_ADDRESS></hostname>
-           <username><DATABASE_USER></username>
-           <password><DATABASE_USER_PASSWORD></password>
-           <database>Alerts_DB</database>
-           <type>mysql</type>
-         </database_output>
 
-   -  **For PostgreSQL**:
+         .. code-block:: xml
+            :emphasize-lines: 2-4
 
-      .. code-block:: xml
-         :emphasize-lines: 2-4
+            <database_output>
+              <hostname><DATABASE_SERVER_IP></hostname>
+              <username><DATABASE_USER></username>
+              <password><DATABASE_USER_PASSWORD></password>
+              <database>Alerts_DB</database>
+              <type>mysql</type>
+            </database_output>
 
-         <database_output>
-           <hostname><DATABASE_SERVER_IP_ADDRESS></hostname>
-           <username><DATABASE_USER></username>
-           <password><DATABASE_USER_PASSWORD></password>
-           <database>Alerts_DB</database>
-           <type>postgresql</type>
-         </database_output>
+      .. group-tab:: For PostgreSQL
+
+         .. code-block:: xml
+            :emphasize-lines: 2-4
+
+            <database_output>
+              <hostname><DATABASE_SERVER_IP></hostname>
+              <username><DATABASE_USER></username>
+              <password><DATABASE_USER_PASSWORD></password>
+              <database>Alerts_DB</database>
+              <type>postgresql</type>
+            </database_output>
 
    Where:
 
-   -  ``<hostname>`` specifies the IP address of the database server. Replace ``<DATABASE_SERVER_IP_ADDRESS>`` the IP address of the database server.
+   -  ``<hostname>`` specifies the IP address of the database server. Replace ``<DATABASE_SERVER_IP>`` the IP address of the database server.
    -  ``<username>`` specifies the user to access the database. Replace ``<DATABASE_USER>`` with the database user created above.
    -  ``<password>`` specifies the user password to access the database. Replace ``<DATABASE_USER_PASSWORD>`` with the user password created above.
    -  ``<database>`` specifies the name of the database in which to store the alerts. For example, ``Alerts_DB`` as specified in the configuration above.
-   -  ``<type>`` specifies the type of database (MySQL or PostgreSQL). The allowed values are  ``mysql`` or ``pgsql``.
+   -  ``<type>`` specifies the type of database (MySQL or PostgreSQL). The allowed values are ``mysql`` or ``pgsql``.
 
-   For more information on the database_output option, see the :ref:`database_output <reference_ossec_database_output>` section of the reference guide.
+   For more information on the ``database_output`` option, see the :ref:`database_output <reference_ossec_database_output>` section of the reference guide.
 
 #. Restart the Wazuh manager service to apply the changes:
 
@@ -665,6 +707,6 @@ Perform the following steps to configure the Wazuh manager to send alerts and ot
    .. code-block:: none
       :class: output
 
-      2024/06/24 14:49:11 wazuh-dbd: INFO: Connected to database 'Alerts_DB' at '127.0.0.1'.
+      2026/01/20 15:40:13 wazuh-dbd: INFO: Connected to database 'Alerts_DB' at '127.0.0.1'.
 
 The database will now start receiving data from the Wazuh manager.
