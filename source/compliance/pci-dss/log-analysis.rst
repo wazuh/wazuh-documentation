@@ -113,7 +113,7 @@ Use cases
 			:align: center
 			:width: 80%
 		
-- PCI DSS requirement  10.4.1 requires that the following audit logs be reviewed at least once daily:
+- PCI DSS requirement 10.4.1 requires that the following audit logs be reviewed at least once daily:
   
    -  All security events.
    -  Logs of all system components that store, process, or transmit cardholder data (CHD) and/or sensitive authentication data (SAD).
