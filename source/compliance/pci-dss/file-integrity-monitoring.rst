@@ -125,7 +125,7 @@ In this use case, we configure SysCheck to detect changes to monitored files wit
 
 **On the agent**
 
-#.  Determine the full file path for the file to be monitored. In this case, we are monitoring the file ``/root/credit_cards/cardholder_data.txt`` for changes.
+#. Determine the full file path for the file to be monitored. In this case, we are monitoring the file ``/root/credit_cards/cardholder_data.txt`` for changes.
 
    Showing changes in a file is currently limited to text files.
 

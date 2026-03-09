@@ -17,7 +17,7 @@ The SCA module helps to meet the following PCI DSS requirements:
 
 To achieve the above requirements, SCA runs assessment checks. These checks assess whether it is necessary to change password-related configuration to ensure strong passwords, remove unnecessary software, disable unnecessary services, or audit the TCP/IP stack configuration. Sources of system hardening standards accepted by the industry include, but are not limited to: the Center for Internet Security (CIS), the International Organization for Standardization (ISO), the SysAdmin, Audit, Network Security (SANS), and the National Institute of Standards and Technology (NIST).
 
-Out-of-the-box, Wazuh includes CIS baselines for a wide range of operating systems and applications. This includes Debian, MacOS, Red Hat, and Windows operating systems. For more information, see a :ref:`list of the available SCA policies <share_policy_files_and_configuration_with_the_Wazuh_agents>`. You can create other baselines for other systems or applications as well. Find more details on configuring SCA checks in the :doc:`SCA documentation section </user-manual/capabilities/sec-config-assessment/index>`.
+Out-of-the-box, Wazuh includes CIS baselines for a wide range of operating systems and applications. This includes Debian, MacOS, Red Hat, and Windows operating systems. For more information, see a :doc:`list of the available SCA policies </user-manual/capabilities/sec-config-assessment/available-sca-policies>`. You can create other baselines for other systems or applications as well. Find more details on configuring SCA checks in the :doc:`SCA documentation section </user-manual/capabilities/sec-config-assessment/index>`.
 
 
 Use cases
