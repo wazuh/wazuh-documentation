@@ -59,8 +59,3 @@ Use cases
    	:align: center
    	:width: 80%
 
-   .. thumbnail:: /images/compliance/pci/rule-5710-generates-an-alert-04.png
-   	:title: Rule 651 Host Blocked by firewall-drop Active Response
-   	:align: center
-   	:width: 80%
-

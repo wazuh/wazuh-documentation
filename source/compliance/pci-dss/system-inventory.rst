@@ -24,4 +24,9 @@ PCI DSS 2.2.4 requires keeping only necessary services, protocols, daemons, and 
       :align: center
       :width: 80%
 
+   .. thumbnail:: /images/compliance/pci/it-hygiene-dashboard-2.png
+      :title: IT Hygiene dashboard
+      :align: center
+      :width: 80%
+
    The Wazuh Syscollector module is enabled with all available scans by default in all compatible systems.
