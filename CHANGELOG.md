@@ -9,7 +9,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
-- Added a step to start the Docker service upon installation in Monitoring Docker events PoC. ([#9376](https://github.com/wazuh/wazuh-documentation/pull/9376))
+- Added a step to start the Docker service upon installation in the *Monitoring Docker events* PoC. ([#9376](https://github.com/wazuh/wazuh-documentation/pull/9376))
 
 ## [v4.14.3]
 
