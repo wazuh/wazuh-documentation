@@ -62,14 +62,18 @@ Use cases
 			archives:
 			enabled: true
 
-	#. Restart Filebeat: 
+	#. Restart filebeat: 
 
-		.. include:: /_templates/common/restart_filebeat.rst
+		.. code-block:: console
+
+			# systemctl restart filebeat
 
 
-	#. Restart the Wazuh manager:
+	#. Restart the Wazuh manager: 
 
-		.. include:: /_templates/common/restart_manager.rst
+		.. code-block:: console
+
+			# systemctl restart wazuh-manager
 
 	#. Go to the **Dashboard management** > **Dashboard Management**.
 

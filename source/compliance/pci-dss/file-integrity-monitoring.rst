@@ -80,7 +80,9 @@ For this use case, we configure Wazuh to detect changes to files in the ``/root/
 
 #. Restart the Wazuh agent to apply the changes.
 
-   .. include:: /_templates/common/restart_agent.rst
+   .. code-block:: console
+
+      # systemctl restart wazuh-agent
 
 #. You can check if the Audit rule for monitoring the selected folder is applied. To check that, you need to execute the following command:
 
@@ -159,7 +161,9 @@ In this use case, we configure SysCheck to detect changes to monitored files wit
 
 #. Restart the Wazuh agent to apply the changes.
 
-   .. include:: /_templates/common/restart_agent.rst
+   .. code-block:: console
+
+      # systemctl restart wazuh-agent
 
 #. Proceed to modify the file. In this case, we removed some content. An alert is generated on the next Syscheck scan about the modified file.
 
@@ -193,7 +197,9 @@ In this scenario, Syscheck detects when a file in a monitored directory is delet
 
 #. Restart the Wazuh agent to apply the changes.
 
-   .. include:: /_templates/common/restart_agent.rst
+   .. code-block:: console
+
+      # systemctl restart wazuh-agent
 
 #. Proceed to delete a file from the directory. In this case, we deleted the file ``cardholder_data.txt``. You can see an alert generated for the file deleted.
 

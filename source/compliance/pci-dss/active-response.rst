@@ -14,7 +14,7 @@ The active response module helps to meet the following PCI DSS requirements:
 
 -  **Requirement 11: Test the security of systems and networks regularly**. Vulnerabilities are continually discovered by malicious individuals and researchers and introduced by new software. System components, processes, and bespoke and custom software should be tested frequently to ensure security controls continue to reflect a changing environment. 
 
-This requirement ensures you test your systems and networks regularly. Testing allows you to detect and respond to security status and possible intrusions. With the active response module, you can respond to intrusions and unauthorized changes to files. You will find more details on configuring the active response module in the :doc:`active response </user-manual/capabilities/active-response/index>` documentation section.
+   This requirement ensures you test your systems and networks regularly. Testing allows you to detect and respond to security status and possible intrusions. With the active response module, you can respond to intrusions and unauthorized changes to files. You will find more details on configuring the active response module in the :doc:`active response </user-manual/capabilities/active-response/index>` documentation section.
 
 
 Use cases
@@ -40,7 +40,9 @@ Use cases
 
    #. Restart the Wazuh manager to apply the configuration:
 
-      .. include:: /_templates/common/restart_manager.rst
+      .. code-block:: console
+
+         # systemctl restart wazuh-manager
 
       When we attempt to SSH with a non-existent user, rule 5710 generates an alert, followed by the active response getting triggered.
 
