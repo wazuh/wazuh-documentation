@@ -61,7 +61,7 @@ For example, a ``/var/ossec/logs/archives/archives.log`` file compressed on the 
 
 As seen in the output above, the string ``ossec`` and suffix ``day of the current month`` are prepended and appended respectively to the name of the compressed file and its checksum.
 
-Based on your needs, you might configure the compressed files for removal after a specified period. Additionally, you can move them to log management systems, backup servers, or cloud-based storage devices for longer-term retention.
+Based on your needs, you might configure the compressed files for removal after a specified period. Additionally, you can move them to log management systems, backup servers, or cloud-based storage devices for long-term retention.
 
 .. _archiving_event_logs:
 
