@@ -161,7 +161,7 @@ Perform the following steps to verify the operation of the connection service be
         TCP    192.168.71.125:51703   20.231.121.79:http     SYN_SENT
         TCP    192.168.71.125:51704   192.168.20.125:ms-do   SYN_SENT
 
-   The ``ESTABLISHED`` state confirmed that the Wazuh agent has successfully connected to the Wazuh manager on TCP port ``1514``, indicating that the agent connection service is functioning correctly.
+   The ``ESTABLISHED`` state confirms that the Wazuh agent has successfully connected to the Wazuh manager on TCP port ``1514``, indicating that the agent connection service is functioning correctly.
 
 Analysis engine
 ---------------

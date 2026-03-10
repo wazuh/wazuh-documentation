@@ -132,7 +132,7 @@ A sample email sent by Wazuh when the rule ID ``553`` is triggered is shown belo
    Attributes:
     - Size: 0
     - Permissions: rw-r--r--
-    - Date: Mon Jan 19 09:57:18 2024
+    - Date: Mon Jan 19 09:57:18 2026
     - Inode: 841858
     - User: root (0)
     - Group: root (0)
