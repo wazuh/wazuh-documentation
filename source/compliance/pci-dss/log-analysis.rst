@@ -62,7 +62,7 @@ Use cases
 			archives:
 			enabled: true
 
-	#. Restart filebeat: 
+	#. Restart Filebeat: 
 
 		.. code-block:: console
 
