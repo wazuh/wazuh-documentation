@@ -264,7 +264,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 Wazuh dashboard configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Check the value of ``run_as`` in the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file. If ``run_as`` is set to ``false``, change it to ``true``. This is required to create a role mapping in the Wazuh dashboard, ensuring the backend role provided by the IdP is correctly mapped to the corresponding Wazuh role.
+#. Verify that ``run_as`` is set to ``true`` in the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the backend role provided by the IdP is correctly mapped to the corresponding Wazuh role.
 
    .. code-block:: yaml
       :emphasize-lines: 7
@@ -539,7 +539,7 @@ Wazuh dashboard configuration
    #. Select the **Mapped users** tab and click **Manage mapping**.
    #. Under **Backend roles**, add the value of the **Department** field you created in Google Workspace and click **Map** to confirm the action. In our case, the backend role is ``wazuh-readonly``.
 
-#. Check the value of ``run_as`` in the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file. If ``run_as`` is set to ``false``, change it to true. This is required to create a role mapping in the Wazuh dashboard, ensuring the backend role provided by the IdP is correctly mapped to the corresponding Wazuh role.
+#. Verify that ``run_as`` is set to ``true`` in the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the backend role provided by the IdP is correctly mapped to the corresponding Wazuh role.
 
    .. code-block:: yaml
       :emphasize-lines: 7
