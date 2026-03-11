@@ -256,7 +256,7 @@ The ``wazuh-wui`` user is the default user for connecting to the Wazuh server AP
 
            password: "MyS3cr37P450r.*-"
 
-           run_as: false
+           run_as: true
       ...
 
 #. Open the ``docker-compose.yml`` file. Change all occurrences of the old password with the new one.

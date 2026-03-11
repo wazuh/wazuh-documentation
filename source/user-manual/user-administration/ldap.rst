@@ -244,7 +244,7 @@ Follow these steps to create a new role mapping and grant administrator permissi
             port: 55000
             username: wazuh-wui
             password: "<WAZUH_WUI_PASSWORD>"
-            run_as: false
+            run_as: true
 
    If ``run_as`` is set to ``true``, you need to add a role mapping on the Wazuh dashboard. To map the backend role to Wazuh, follow these steps:
 
@@ -310,7 +310,7 @@ Setup read-only role
             port: 55000
             username: wazuh-wui
             password: "<WAZUH_WUI_PASSWORD>"
-            run_as: false
+            run_as: true
 
    If ``run_as`` is set to ``true``, you need to add a role mapping on the Wazuh dashboard. To map the backend role to Wazuh, follow these steps:
 
