@@ -24,6 +24,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated the *Use Cases* section of the *Wazuh server API* documentation. ([#9335](https://github.com/wazuh/wazuh-documentation/pull/9335))
 - **Post-release**: Updated the *Regulatory compliance* documentation. ([#9375](https://github.com/wazuh/wazuh-documentation/pull/9375))
 - **Post-release**: Updated the *Wazuh server* documentation. ([#9374](https://github.com/wazuh/wazuh-documentation/pull/9374))
+- **Post-release**: Updated the default value of `run_as` to `true` in the Wazuh dashboard configuration. ([#9377](https://github.com/wazuh/wazuh-documentation/pull/9377))
 
 ### Fixed
 
