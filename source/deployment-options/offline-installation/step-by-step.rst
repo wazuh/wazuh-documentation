@@ -427,7 +427,7 @@ Installing the Wazuh dashboard
                      port: 55000
                      username: wazuh-wui
                      password: wazuh-wui
-                     run_as: false
+                     run_as: true
 
 #.  Run the following command to verify the Wazuh dashboard service is active.
 
@@ -568,7 +568,7 @@ Select your deployment type and follow the instructions to change the default pa
                   port: 55000
                   username: wazuh-wui
                   password: "<WAZUH_WUI_PASSWORD>"
-                  run_as: false
+                  run_as: true
 
       #. Restart the Wazuh dashboard to apply the changes.
 

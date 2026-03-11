@@ -127,7 +127,7 @@ Starting the Wazuh dashboard service
             port: 55000
             username: wazuh-wui
             password: wazuh-wui
-            run_as: false
+            run_as: true
 
 
 #. Access the Wazuh web interface with your ``admin`` user credentials. This is the default administrator account for the Wazuh indexer and it allows you to access the Wazuh dashboard.
@@ -263,7 +263,7 @@ Select your deployment type and follow the instructions to change the default pa
                   port: 55000
                   username: wazuh-wui
                   password: "<WAZUH_WUI_PASSWORD>"
-                  run_as: false
+                  run_as: true
 
       #. Restart the Wazuh dashboard to apply the changes.
 
