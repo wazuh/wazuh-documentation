@@ -24,6 +24,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated the *Use Cases* section of the *Wazuh server API* documentation. ([#9335](https://github.com/wazuh/wazuh-documentation/pull/9335))
 - **Post-release**: Updated the *Regulatory compliance* documentation. ([#9375](https://github.com/wazuh/wazuh-documentation/pull/9375))
 - **Post-release**: Updated the *Wazuh server* documentation. ([#9374](https://github.com/wazuh/wazuh-documentation/pull/9374))
+- **Post-release**: Updated securing your Wazuh installation steps in *Installing the Wazuh dashboard step by step* documentation. ([#9379](https://github.com/wazuh/wazuh-documentation/pull/9379))
 
 ### Fixed
 
