@@ -26,6 +26,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated the *Wazuh server* documentation. ([#9374](https://github.com/wazuh/wazuh-documentation/pull/9374))
 - **Post-release**: Updated securing your Wazuh installation steps in *Installing the Wazuh dashboard step by step* documentation. ([#9379](https://github.com/wazuh/wazuh-documentation/pull/9379))
 - **Post-release**: Updated the default value of `run_as` to `true` in the Wazuh dashboard configuration. ([#9377](https://github.com/wazuh/wazuh-documentation/pull/9377))
+- **Post-release**: Updated the RBAC configuration. ([#9380](https://github.com/wazuh/wazuh-documentation/pull/9380))
 
 ### Fixed
 
