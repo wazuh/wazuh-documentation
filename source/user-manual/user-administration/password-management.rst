@@ -251,7 +251,7 @@ Follow the instructions below to change the passwords for all the Wazuh indexer 
             port: 55000
             username: wazuh-wui
             password: "<WAZUH_WUI_PASSWORD>"
-            run_as: false
+            run_as: true
 
 #. Restart the Wazuh dashboard to apply the changes.
 
