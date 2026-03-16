@@ -31,6 +31,8 @@ The agent_upgrade program allows you to list outdated agents and upgrade them.
 | ``-x EXECUTE, --execute EXECUTE``          | Executable filename in the WPK custom file.             |
 |                                            | By default it will try to launch upgrade.sh.            |
 +--------------------------------------------+---------------------------------------------------------+
+| ``--http``                                 | Uses http protocol instead of https.                    |
++--------------------------------------------+---------------------------------------------------------+
 
 .. note:: By default, the timeout will be the maximum allowed by the agent with the ``execd.max_restart_lock`` option in :doc:`internal_options.conf<../internal-options>`.
 
