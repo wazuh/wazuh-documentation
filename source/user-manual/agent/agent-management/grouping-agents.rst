@@ -244,13 +244,10 @@ On the Wazuh server, the file is located at ``var/ossec/etc/shared/merged.mg``.
 
 On the Wazuh agent, it is located at ``/var/ossec/etc/shared/merged.mg`` for Linux and ``C:\Program Files (x86)\ossec-agent\shared\merged.mg`` on Windows.
 
-Multiple groups
----------------
-
-Agents can be members of multiple groups. When a Wazuh agent is associated with multiple groups, it will receive configuration files from each group. However, the configuration received from the most recently assigned group takes precedence over those from other groups.
-
 Managing multiple groups
 ------------------------
+
+Agents can be members of multiple groups. When a Wazuh agent is associated with multiple groups, it will receive configuration files from each group. However, the configuration received from the most recently assigned group takes precedence over those from other groups.
 
 The following activities can be carried out when managing multiple Wazuh agent groups.
 

@@ -120,7 +120,7 @@ All-in-one deployment
             port: 55000
             username: wazuh-wui
             password: <WAZUH_WUI_PASSWORD>
-            run_as: false
+            run_as: true
 
 #. Edit the Wazuh server configuration file at ``/var/ossec/etc/ossec.conf`` to enable the Wazuh server cluster:
 
@@ -290,7 +290,7 @@ Distributed deployment
             port: 55000
             username: wazuh-wui
             password: <WAZUH_WUI_PASSWORD>
-            run_as: false
+            run_as: true
 
 #. Edit the Wazuh server configuration file at ``/var/ossec/etc/ossec.conf`` to enable cluster mode:
 

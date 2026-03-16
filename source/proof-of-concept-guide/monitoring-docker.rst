@@ -60,6 +60,13 @@ Perform the following steps to install Docker on the Ubuntu endpoint and configu
 
             To prevent the modification, you can run ``pip3 install --upgrade pip`` within a virtual environment. You must update the docker ``/var/ossec/wodles/docker/DockerListener`` script shebang with your virtual environment interpreter. For example: ``#!</path/to/your/virtual/environment>/bin/python3``.
 
+#. Start and enable the Docker service.
+
+   .. code-block:: console
+
+      $ sudo systemctl start docker.service
+      $ sudo systemctl enable docker.service
+
 #. Edit the Wazuh agent configuration file ``/var/ossec/etc/ossec.conf`` and add this block to enable the ``docker-listener`` module:
 
    .. code-block:: xml

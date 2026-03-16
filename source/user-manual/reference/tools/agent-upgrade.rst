@@ -37,6 +37,8 @@ The agent_upgrade program allows you to list outdated agents and upgrade them.
 +--------------------------------------------+--------------------------------------------------------------------------------+
 | -x EXECUTE, --execute EXECUTE              | Executable filename in the WPK custom file. [Default ``upgrade.sh``]           |
 +--------------------------------------------+--------------------------------------------------------------------------------+
+| -d, --debug                                | Debug mode.                                                                    |
++--------------------------------------------+--------------------------------------------------------------------------------+
 | --http                                     | Uses http protocol instead of https.                                           |
 +--------------------------------------------+--------------------------------------------------------------------------------+
 
@@ -73,7 +75,7 @@ Examples
       Upgrading...
 
       Upgraded agents:
-      	Agent 002 upgraded: Wazuh v4.2.0 -> Wazuh v4.12.0
+      	Agent 002 upgraded: Wazuh v4.2.0 -> Wazuh v|WAZUH_CURRENT|
 
 -  Upgrade multiple agents:
 
@@ -87,14 +89,14 @@ Examples
       Upgrading...
 
       Upgraded agents:
-      	Agent 003 upgraded: Wazuh v4.2.0 -> Wazuh v4.12.0
-      	Agent 004 upgraded: Wazuh v4.1.0 -> Wazuh v4.12.0
+      	Agent 003 upgraded: Wazuh v4.2.0 -> Wazuh v|WAZUH_CURRENT|
+      	Agent 004 upgraded: Wazuh v4.1.0 -> Wazuh v|WAZUH_CURRENT|
 
 -  Upgrade agent using a custom repository:
 
    .. code-block:: console
 
-      # /var/ossec/bin/agent_upgrade -a 002 -v v4.12.0 -r http://mycompany.wpkrepo.com/
+      # /var/ossec/bin/agent_upgrade -a 002 -v v|WAZUH_CURRENT| -r http://mycompany.wpkrepo.com/
 
    .. code-block:: none
       :class: output
@@ -102,7 +104,7 @@ Examples
       Upgrading...
 
       Upgraded agents:
-      	Agent 002 upgraded: Wazuh v4.2.0 -> Wazuh v4.12.0
+      	Agent 002 upgraded: Wazuh v4.2.0 -> Wazuh v|WAZUH_CURRENT|
 
 -  Install custom WPK file:
 
@@ -116,6 +118,6 @@ Examples
        Upgrading...
 
        Upgraded agents:
-      	Agent 002 upgraded: Wazuh v4.2.0 -> Wazuh v4.12.0
+      	Agent 002 upgraded: Wazuh v4.2.0 -> Wazuh v|WAZUH_CURRENT|
 
 .. note:: When the agent finishes updating, it is automatically restarted to apply the new configuration.
