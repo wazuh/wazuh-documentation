@@ -6,14 +6,16 @@
 Queuing mechanisms
 ==================
 
-The Wazuh server includes a queue mechanism that streamlines the collection of events from monitored endpoints. It ensures continuous data flow from the Wazuh agents, syslog endpoints, and agentless devices to the Wazuh server thereby preventing event flooding. The Wazuh server queue utilizes the First In, First Out (FIFO) methodology; therefore, the first queued event is the first to be removed from the queue and processed. It is based on distributed processing, allowing for the parallelization of log analysis tasks. This improves the scalability and performance of the log processing pipeline enabling Wazuh to handle large volumes of log data effectively.
+The Wazuh server includes a queue mechanism that streamlines the collection of events from monitored endpoints. It ensures continuous data flow from the Wazuh agents, syslog endpoints, and agentless devices to the Wazuh server, thereby preventing event flooding.
+
+The Wazuh server queue utilizes the First In, First Out (FIFO) methodology; therefore, the first queued event is the first to be removed from the queue and processed. It is based on distributed processing, allowing for the parallelization of log analysis tasks. This improves the scalability and performance of the log processing pipeline, enabling Wazuh to handle large volumes of log data effectively.
 
 The Wazuh server has two native queues for managing event flows:
 
 -  `Wazuh agent communication queue (queue_rd)`_
 -  `Wazuh analysis engine queue (queue_and)`_
 
-The Wazuh agent uses the `Wazuh agent queue (queue_ad)`_ to prevent event congestion. This queue ensures the Wazuh agent does not send events faster than the Wazuh server can process.
+The Wazuh agent uses the :ref:`Wazuh agent queue (queue_ad) <wazuh_agent_queue_ad>` to prevent event congestion. This queue ensures the Wazuh agent does not send events faster than the Wazuh server can process.
 
 Wazuh agent communication queue (queue_rd)
 ------------------------------------------
@@ -23,7 +25,9 @@ The ``queue_rd`` queue resides in the server-side :doc:`agent communication serv
 How to configure the Wazuh agent communication queue
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Configure the Wazuh agent communication queue by editing the ``<queue_size>`` in the remote section of the ``/var/ossec/etc/ossec.conf`` file on the Wazuh server:
+This section explains how to configure the ``queue_rd`` to control the capacity and processing of incoming agent events on the Wazuh server:
+
+#. Configure the Wazuh agent communication queue by editing the ``<queue_size>`` in the ``<remote>`` block of the ``/var/ossec/etc/ossec.conf`` file on the Wazuh server:
 
    .. code-block:: xml
       :emphasize-lines: 5
@@ -40,35 +44,35 @@ How to configure the Wazuh agent communication queue
         </agents>
       </remote>
 
-   The ``<queue_size>`` variable sets the queue capacity of the Wazuh agent communication queue. The table below shows the configuration for the ``<queue_size>`` variable.
+   The ``<queue_size>`` variable sets the queue capacity of the Wazuh agent communication queue. The table below shows the configuration for the ``<queue_size>`` variable:
 
-   =============== ================================
-   Default value   Allowed values
-   =============== ================================
-   131072          Any number between 1 and 262144.
-   =============== ================================
+   +-----------------+------------------------------------------+
+   | Default value   | Allowed values                           |
+   +=================+==========================================+
+   | 131072          | Any number between 1 and 262144.         |
+   +-----------------+------------------------------------------+
 
    .. note::
 
       The Wazuh agent communication queue (``queue_rd``) is only available for Wazuh agent events, not remote syslog events. This option only works when the connection is set to ``secure``.
 
-#. Restart the Wazuh manager service to apply the changes
+#. Restart the Wazuh manager service to apply the changes:
 
    .. code-block:: console
 
       # systemctl restart wazuh-manager
 
-When event drops are observed you can increase the value of the ``queue_size`` in the ``<remote>`` block of the ``/var/ossec/etc/ossec.conf`` file, and the ``worker_pool`` size in the ``/var/ossec/etc/internal_options.conf``.
+If event drops occur, increase the ``queue_size`` value in the ``<remote>`` block of the ``/var/ossec/etc/ossec.conf`` file, and adjust the ``worker_pool`` size in the ``/var/ossec/etc/internal_options.conf`` file.
 
-The table below shows the configuration of the ``worker_pool`` size on the Wazuh server.
+The table below shows the configuration of the ``worker_pool`` size on the Wazuh server:
 
-+--------------------------+----------------+--------------------------------------------------------+
-| **remoted.worker_pool**  | Description    | Number of threads that process the payload reception   |
-|                          +----------------+--------------------------------------------------------+
-|                          | Default value  | 4                                                      |
-|                          +----------------+--------------------------------------------------------+
-|                          | Allowed value  | Any integer between 1 and 16                           |
-+--------------------------+----------------+--------------------------------------------------------+
++-------------------------+---------------+--------------------------------------------------------+
+| **remoted.worker_pool** | Description   | Number of threads that process the payload reception   |
++-------------------------+---------------+--------------------------------------------------------+
+|                         | Default value | 4                                                      |
++-------------------------+---------------+--------------------------------------------------------+
+|                         | Allowed value | Any integer between 1 and 16                           |
++-------------------------+---------------+--------------------------------------------------------+
 
 You can monitor for event drops in the ``wazuh-remoted`` by querying the :doc:`Wazuh server API </user-manual/api/reference>` or reading the daemon statistical state file.
 
@@ -77,8 +81,9 @@ Querying the Wazuh server API
 
 You can query the statistical information of the ``wazuh-remoted`` by following the steps below:
 
-#. On the Wazuh dashboard, navigate to **Tools**, then **API Console**.
-#. Add the following to the API console and click the green arrow to send the request to query the Wazuh server API:
+#. On the Wazuh dashboard, navigate to **Server management** > **Dev Tools**.
+
+#. Add the following to the console and click the green arrow to send the request to query the Wazuh server API:
 
    .. code-block:: none
 
@@ -123,19 +128,19 @@ Below is an example of the content of the ``wazuh-remoted.state`` file:
    tcp_sessions='1'
 
    # Events sent to Analysisd
-   evt_count='126714'
+   evt_count='14048'
 
    # Control messages received
-   ctrl_msg_count='2637'
+   ctrl_msg_count='68'
 
    # Discarded messages
    discarded_count='0'
 
    # Total number of bytes sent
-   sent_bytes='4434745'
+   sent_bytes='763604'
 
    # Total number of bytes received
-   recv_bytes='93866086'
+   recv_bytes='7520088'
 
    # Messages dequeued after the agent closes the connection
    dequeued_after_close='0'
@@ -144,9 +149,9 @@ Below is an example of the content of the ``wazuh-remoted.state`` file:
    ctrl_msg_queue_usage='0'
 
    # Control messages queue breakdown
-   ctrl_msg_queue_inserted='5587'
-   ctrl_msg_replaced='13'
-   ctrl_msg_processed='5587'
+   ctrl_msg_queue_inserted='68'
+   ctrl_msg_queue_replaced='0'
+   ctrl_msg_queue_processed='68'
 
 Wazuh analysis engine queue (queue_and)
 ---------------------------------------
@@ -165,13 +170,13 @@ The Wazuh analysis engine queue receives logs from Wazuh agents for analysis usi
 -  Event decoder queue.
 -  Windows event decoder queue.
 
-Each queue category has a set of threads responsible for their First In, First Out (FIFO) event management. The number of threads is individually configurable per event type through the ``/var/ossec/etc/internal_options.conf`` file on the Wazuh server.
+Each queue category has a set of threads responsible for its First In, First Out (FIFO) event management. The number of threads is individually configurable per event type through the ``/var/ossec/etc/internal_options.conf`` file on the Wazuh server.
 
 .. note::
 
    To ensure that upgrades do not overwrite queue configurations, use the ``/var/ossec/etc/local_internal_options.conf`` file instead of the ``/var/ossec/etc/internal_options.conf`` file.
 
-The table below shows the configuration options available for the Wazuh analysis engine queue (``queue_and``).
+The table below shows the configuration options available for the Wazuh analysis engine queue (``queue_and``):
 
 +--------------------------------+------------------------------------------+---------+-----+---------+
 | Queues (wazuh-analysisd.state) | Setting (local_internal_options.conf)    | Default | Min | Max     |
@@ -213,7 +218,7 @@ The table below shows the configuration options available for the Wazuh analysis
 |                                | analysisd.decoder_order_size             | 256     | 32  | 1024    |
 +--------------------------------+------------------------------------------+---------+-----+---------+
 
-The queue settings should be adjusted when “event drops” are observed on the Wazuh analysis engine. You can monitor for event drops in the wazuh-analysisd by querying the :doc:`Wazuh server API </user-manual/api/reference>` or reading the daemon statistical state file.
+Adjust the queue settings when event drops are observed in the Wazuh analysis engine. You can monitor for event drops in the Wazuh analysis engine by querying the :doc:`Wazuh server API </user-manual/api/reference>` or reading the daemon statistical state file.
 
 Querying the Wazuh server API
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -222,8 +227,8 @@ The log category state can be queried using the Wazuh server API to check the st
 
 You can query the statistical information of the Wazuh analysis engine by following the steps below:
 
+#. On the Wazuh dashboard, navigate to **Server management** > **Dev Tools**.
 
-#. On the Wazuh dashboard, navigate to **Tools**, then **API Console**.
 #. Add the following to the Console and click the green arrow to send the request to query the Wazuh server API:
 
    .. code-block:: none
@@ -257,7 +262,7 @@ Run the command below on the Wazuh server to read the file:
 
    # cat /var/ossec/var/run/wazuh-analysisd.state
 
-Below is an example of the content of the wazuh-analysisd.state file:
+Below is an example of the content of the ``wazuh-analysisd.state`` file:
 
 .. code-block:: ini
 
@@ -265,40 +270,40 @@ Below is an example of the content of the wazuh-analysisd.state file:
    # THIS FILE WILL BE DEPRECATED IN FUTURE VERSIONS
 
    # Total events decoded
-   total_events_decoded='137726'
+   total_events_decoded='18889'
 
    # Syscheck events decoded
-   syscheck_events_decoded='3935'
+   syscheck_events_decoded='2'
 
    # Syscollector events decoded
-   syscollector_events_decoded='2590'
+   syscollector_events_decoded='1462'
 
    # Rootcheck events decoded
-   rootcheck_events_decoded='37'
+   rootcheck_events_decoded='24'
 
    # Security configuration assessment events decoded
-   sca_events_decoded='8991'
+   sca_events_decoded='1936'
 
    # Winevt events decoded
-   winevt_events_decoded='87993'
+   winevt_events_decoded='4614'
 
    # Database synchronization messages dispatched
-   dbsync_messages_dispatched='26004'
+   dbsync_messages_dispatched='9824'
 
    # Other events decoded
-   other_events_decoded='8176'
+   other_events_decoded='1027'
 
    # Events processed (Rule matching)
-   events_processed='112252'
+   events_processed='9064'
 
    # Events received
-   events_received='138283'
+   events_received='18890'
 
    # Events dropped
    events_dropped='0'
 
    # Alerts written to disk
-   alerts_written='6707'
+   alerts_written='218'
 
    # Firewall alerts written to disk
    firewall_written='0'
@@ -390,18 +395,20 @@ Below is an example of the content of the wazuh-analysisd.state file:
    # Archives log queue size
    archives_queue_size='16384'
 
+.. _wazuh_agent_queue_ad:
+
 Wazuh agent queue (queue_ad)
 ----------------------------
 
 The ``queue_ad`` queue resides in the agent-side :doc:`agent connection service </user-manual/reference/daemons/wazuh-agentd>` and manages event forwarding from the Wazuh agent to the Wazuh server. The queue collects logs like system events and security configuration assessment outputs before forwarding them to the Wazuh server. It also includes an anti-flooding mechanism that throttles event forwarding based on configurable parameters, mitigating the risk of overwhelming the processing capacity of the Wazuh server.
 
 Wazuh queue decoder and rules
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-----------------------------
 
-Wazuh provides an out-of-the-box decoder and rules to analyze the event flooding output and generate alerts on the Wazuh dashboard.
+Wazuh provides an out-of-the-box decoder and rules to analyze the event flooding output and generate alerts on the Wazuh dashboard. These components work together by first decoding queue-related messages and then applying rules to assess impact and trigger alerts when thresholds are exceeded.
 
 Decoder
-~~~~~~~
+^^^^^^^
 
 The decoder is available in the ``/var/ossec/ruleset/decoders/0005-wazuh_decoders.xml`` file on the Wazuh server. The decoder is responsible for analyzing flooding events on the Wazuh server.
 
@@ -415,7 +422,7 @@ The decoder is available in the ``/var/ossec/ruleset/decoders/0005-wazuh_decoder
    </decoder>
 
 Rules
-~~~~~
+^^^^^
 
 As shown below, the rules are defined with IDs from ``201`` to ``205`` and are available in the ``/var/ossec/ruleset/rules/0016-wazuh_rules.xml`` file on the Wazuh server.
 

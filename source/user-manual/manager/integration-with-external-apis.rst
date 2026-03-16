@@ -36,10 +36,10 @@ Where:
 -  ``<api_key>`` is the key you would have retrieved from the PagerDuty, VirusTotal, or Maltiverse API. This is mandatory for PagerDuty, VirusTotal, and Maltiverse.
 -  ``<alert_format>`` writes the alert file in the JSON format. The Integrator module makes use of this alert file to fetch field values. The allowed value is ``json``.
 -  ``<rule_id>`` filters alerts by rule ID. The allowed values are comma-separated rule IDs.
--  ``<level>`` filters alerts by rule level so only alerts with the specified level or above are pushed. The allowed value is any alert level from ``0`` to ``16``.
+-  ``<level>`` filters alerts by rule level, so only alerts with the specified level or above are pushed. The allowed value is any alert level from ``0`` to ``16``.
 -  ``<group>`` filters alerts by rule group. For the VirusTotal integration, only rules from the syscheck group are available. The allowed values are any rule group or comma-separated rule groups.
 -  ``<event_location>`` filters alerts by where the event originated. The allowed value is any sregex expression.
--  ``<options>`` overwrites the previous fields or adds customization fields according to the information provided in the JSON object. The allowed value is json.
+-  ``<options>`` overwrites the previous fields or adds customization fields according to the information provided in the JSON object. The allowed value is ``json``.
 
 .. note::
 
@@ -52,13 +52,13 @@ Restart the Wazuh manager via the command line interface with the following comm
 Optional filters
 ^^^^^^^^^^^^^^^^
 
-The Wazuh Integrator module uses the optional filters fields to determine which alerts should be sent to the external platforms. Only the alerts that meet the filter conditions are sent. If no filters are specified, all alerts are sent.
+The Wazuh Integrator module uses the optional filter fields to determine which alerts should be sent to the external platforms. Only the alerts that meet the filter conditions are sent. If no filters are specified, all alerts are sent.
 
 The following considerations must be taken into account when the filters are set:
 
--  It is possible to specify multiple group names using the ``<group>`` tag with a comma-separated list. If the alert's group matches any of the groups in the list, the alert is sent, otherwise, it is ignored.
--  It is possible to specify multiple rule IDs using the ``<rule_id>`` tag with a comma-separated list. The alert is sent if the alert's rule ID matches any of the IDs in the list, otherwise, it is ignored.
--  It is possible to specify the previously described fields together. The alert is sent if both the alert's rule ID and group match any of the IDs and groups in the lists, otherwise, it is ignored.
+-  You can specify multiple group names using the ``<group>`` tag with a comma-separated list. If the alert's group matches any of the groups in the list, the alert is sent, otherwise, it is ignored.
+-  You can specify multiple rule IDs using the ``<rule_id>`` tag with a comma-separated list. The alert is sent if the alert's rule ID matches any of the IDs in the list, otherwise, it is ignored.
+-  You can specify the previously described fields together. The alert is sent if both the alert's rule ID and group match any of the IDs and groups in the lists, otherwise, it is ignored.
 
 .. note::
 
@@ -71,13 +71,13 @@ You can find the full configuration options for the Integrator module in the :do
 Slack
 -----
 
-Slack is a cloud-based collaboration platform that facilitates communication and teamwork within organizations. This integration uses Slack incoming webhooks and allows security professionals to receive real-time alerts directly within designated channels.
+`Slack <https://slack.com/intl/en-gb>`__ is a cloud-based collaboration platform that facilitates communication and teamwork within organizations. This integration uses Slack incoming webhooks and allows security professionals to receive real-time alerts directly within designated channels.
 
 To set up this integration, perform the following steps:
 
 #. Enable incoming webhooks and create one for your Slack channel. Follow the Slack guide on `incoming webhooks <https://api.slack.com/messaging/webhooks>`__ for this.
 
-#. Append the configuration below to the ``/var/ossec/etc/ossec.conf`` file on the Wazuh server. Replace ``<WEBHOOK_URL>`` with your incoming webhook.
+#. Append the configuration below to the ``/var/ossec/etc/ossec.conf`` file on the Wazuh server within the ``<ossec_config>`` block. Replace ``<WEBHOOK_URL>`` with your incoming webhook.
 
    .. code-block:: xml
       :emphasize-lines: 4
@@ -117,7 +117,7 @@ To set up this integration, perform the following steps:
 
 #. Get your Events API v2 integration key by creating a `PagerDuty new service <https://support.pagerduty.com/docs/services-and-integrations#create-a-service>`__.
 
-#. Append the configuration below to the ``/var/ossec/etc/ossec.conf`` file on the Wazuh server. Replace ``PAGERDUTY_API_KEY`` with your PagerDuty integration key. The rule level filter is optional, and you can remove it or set another level value for the integration.
+#. Append the configuration below to the ``/var/ossec/etc/ossec.conf`` file on the Wazuh server within the ``<ossec_config>`` block. Replace ``PAGERDUTY_API_KEY`` with your PagerDuty integration key. The rule level filter is optional, and you can remove it or set another level value for the integration.
 
    .. code-block:: xml
       :emphasize-lines: 4
@@ -156,7 +156,7 @@ To set up this integration, follow these steps:
 
 #. Get your API key from the `VirusTotal API key <https://www.virustotal.com/gui/my-apikey>`__ page.
 
-#. Edit ``/var/ossec/etc/ossec.conf`` in the Wazuh server and include a configuration block such as the following. Replace ``<VIRUSTOTAL_API_KEY>`` with your VirusTotal API key.
+#. Edit ``/var/ossec/etc/ossec.conf`` in the Wazuh server and include a configuration block such as the below within the ``<ossec_config>`` block. Replace ``<VIRUSTOTAL_API_KEY>`` with your VirusTotal API key.
 
    .. code-block:: xml
       :emphasize-lines: 3
@@ -179,17 +179,47 @@ Shuffle
 
 To set up this integration, do the following:
 
-#. Go to Shuffle, make a Workflow using the Email app, and select version ``1.0.1``.
+#. Go to Shuffle, navigate to **Automate** > **Workflows**, and click **+ Create Workflow** to create a new workflow. Name it as ``Wazuh-Test`` (or any name you prefer), add an optional description, then click **Create from scratch**.
 
-#. Set **Recipients** and **Subject** in the email configuration. Put ``$exec`` in the Body to include the alert information.
+   .. thumbnail:: /images/manual/wazuh-server/shuffle-create-workflow.jpg
+      :title: Create a new workflow in Shuffle
+      :alt: Create a new workflow in Shuffle
+      :align: center
+      :width: 80%
 
-#. Add a webhook to the Workflow.
+#. Drag the ``Webhook`` node under **Triggers** to the workspace. The node automatically connects with an existing ``Change Me`` node on the workspace.
 
-#. Start the webhook and copy the webhook URL.
+   .. thumbnail:: /images/manual/wazuh-server/shuffle-webhook-node.jpg
+      :title: Webhook node in Shuffle
+      :alt: Webhook node in Shuffle
+      :align: center
+      :width: 80%
 
-#. Edit ``/var/ossec/etc/ossec.conf`` in the Wazuh server and include a configuration block such as the following. 
+#. Click on the ``Webhook`` node and rename it to ``Wazuh alerts``.
 
-#. Replace ``<SHUFFLE_WEBHOOK_ID>`` with the Shuffle webhook ID. The rule level filter is optional. You can remove it or set another level value for the integration.
+   #. Copy and save the webhook URL to use it when configuring the Wazuh server. The webhook URL looks like ``https://shuffle.io/api/v1/hooks/<WEBHOOK>``.
+   #. Click on **Start** to run the webhook.
+
+   .. thumbnail:: /images/manual/wazuh-server/shuffle-webhook-url.jpg
+      :title: Webhook URL in Shuffle
+      :alt: Webhook URL in Shuffle
+      :align: center
+      :width: 80%
+
+#. Click on the **Change Me** node and configure it repeat Wazuh alerts
+
+   -  Ensure the action is **repeat back to me.**
+   -  Enter the ``$exec`` in the **Code** section.
+
+   .. thumbnail:: /images/manual/wazuh-server/shuffle-change-me-node.jpg
+      :title: Change Me node in Shuffle
+      :alt: Change Me node in Shuffle
+      :align: center
+      :width: 80%
+
+#. Save the workflow.
+
+#. Edit ``/var/ossec/etc/ossec.conf`` in the Wazuh server and include a configuration block such as the below within the ``<ossec_config>`` block. Replace ``<SHUFFLE_WEBHOOK_ID>`` with the Shuffle webhook ID. The rule level filter is optional. You can remove it or set another level value for the integration.
 
    .. code-block:: xml
       :emphasize-lines: 3
@@ -209,13 +239,21 @@ To set up this integration, do the following:
 
    .. include:: /_templates/common/restart_manager.rst
 
-Once the configuration is complete, alerts start showing in the email inbox.
+#. Once the configuration is complete, click the play button to run an execution for alerts to start showing on the Shuffle dashboard.
 
-.. thumbnail:: /images/manual/wazuh-server/alerts-in-shuffle.png
-   :title: Alerts in Shuffle
-   :alt: Alerts in Shuffle
-   :align: center
-   :width: 80%
+   .. thumbnail:: /images/manual/wazuh-server/shuffle-execution.jpg
+      :title: Shuffle execution
+      :alt: Shuffle execution
+      :align: center
+      :width: 80%
+
+#. Select an alert to get more information.
+
+   .. thumbnail:: /images/manual/wazuh-server/shuffle-alert-details.jpg
+      :title: Alert details in Shuffle
+      :alt: Alert details in Shuffle
+      :align: center
+      :width: 80%
 
 Maltiverse
 ----------
@@ -224,7 +262,7 @@ Maltiverse
 
 This integration identifies IoCs in Wazuh alerts via the Maltiverse API. It generates new alerts enriched with Maltiverse data. The Maltiverse data fields are based on the threat taxonomy of the ECS standard (Elastic Common Schema).
 
-Perform the following steps to setup this integration:
+Perform the following steps to set up this integration:
 
 #. Get your API key from the `Maltiverse <https://www.maltiverse.com/>`__ page.
 
@@ -245,11 +283,21 @@ Perform the following steps to setup this integration:
 
    .. include:: /_templates/common/restart_manager.rst
 
-Once the configuration is complete, enriched alerts start showing in the Wazuh Dashboard if applicable.
+Once the integration is configured, alerts enriched with Maltiverse threat intelligence are displayed in the Wazuh dashboard when matching indicators of compromise (IoCs) are detected.
+
+To view these alerts in the Wazuh dashboard, click the upper-left menu icon and navigate to **Threat Hunting** > **Events**, then optionally apply a filter using the ``maltiverse`` rule group to display only Maltiverse-related alerts.
 
 .. thumbnail:: /images/manual/wazuh-server/enriched-alerts.png
    :title: Enriched alerts in the Wazuh dashboard
    :alt: Enriched alerts in the Wazuh dashboard
+   :align: center
+   :width: 80%
+
+You can expand the alert to get more enriched information.
+
+.. thumbnail:: /images/manual/wazuh-server/enriched-alert-details.png
+   :title: Enriched alert details
+   :alt: Enriched alert details
    :align: center
    :width: 80%
 
@@ -270,7 +318,7 @@ Below is an example of a configuration block in the ``/var/ossec/etc/ossec.conf`
      <group>multiple_drops,authentication_failures</group>
      <api_key><API_KEY></api_key> <!-- Replace with your external service API key -->
      <alert_format>json</alert_format>
-    <options>{"data": "Custom data"}</options> <!-- Replace with your custom JSON object -->
+     <options>{"data": "Custom data"}</options> <!-- Replace with your custom JSON object -->
    </integration>
 
 Replace:
@@ -283,18 +331,18 @@ You can get detailed information on the :doc:`configuration options </user-manua
 Creating an integration script
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You are recommended to follow the instructions below when creating an integration script:
+We recommend following the instructions below when creating an integration script:
 
 #. Create the script in ``/var/ossec/integrations/`` directory on the Wazuh server with the same name indicated in the configuration block.
 
-#. The script  must contain execution permissions and belong to the ``root`` user of the ``wazuh`` group. The commands below assign permissions and ownership to the ``/var/ossec/integrations/custom-script`` script.
+#. The script must contain execution permissions and belong to the ``root`` user of the ``wazuh`` group. The commands below assign permissions and ownership to the ``/var/ossec/integrations/custom-script`` script.
 
    .. code-block:: console
 
       # chmod 750 /var/ossec/integrations/custom-script
       # chown root:wazuh /var/ossec/integrations/custom-script
 
-#. The first line of the integration script must indicate its interpreter, or else Wazuh won’t know how to read and execute the script. The following example line indicates the Python interpreter:
+#. The first line of the integration script must indicate its interpreter, or else Wazuh won't know how to read and execute the script. The following example line indicates the Python interpreter:
 
    .. code-block:: python
 
@@ -302,19 +350,19 @@ You are recommended to follow the instructions below when creating an integratio
 
 #. The script checks the following arguments because it will receive configuration options from them.
 
-   -  The first parameter includes the location of the file that contains the alert. The  parameter is the ``/logs/alerts/alerts.json`` file passed by default in the Wazuh Integrator module:
+   -  The first parameter includes the location of the file that contains the alert. The parameter is the ``/logs/alerts/alerts.json`` file passed by default in the Wazuh Integrator module:
 
       .. code-block:: python
 
          alert_file = open(sys.argv[1])
 
-   -  The second parameter contains the API key which is the ``api_key`` option defined in the ``<integration>`` block:
+   -  The second parameter contains the API key, which is the ``api_key`` option defined in the ``<integration>`` block:
 
       .. code-block:: python
 
          api_key = sys.argv[2]
 
-   -  The third parameter contains the webhook URL which is the ``hook_url`` option defined in the ``<integration>`` block:
+   -  The third parameter contains the webhook URL, which is the ``hook_url`` option defined in the ``<integration>`` block:
 
       .. code-block:: python
 
@@ -322,7 +370,7 @@ You are recommended to follow the instructions below when creating an integratio
 
    If none of the above are indicated, the parameters will be received empty.
 
-#. Read the contents of the file indicated in the first parameter and extract, from the alert, the fields that are relevant for the integration. If JSON was used in the ``alert_format`` option, the information has to be loaded as a JSON object.
+#. Read the contents of the file indicated in the first parameter and extract, from the alert, the fields that are relevant for the integration. If JSON is used in the ``alert_format`` option, the information has to be loaded as a JSON object.
 
    .. code-block:: python
 
@@ -333,6 +381,6 @@ You are recommended to follow the instructions below when creating an integratio
       agentname = alert_json['agent']['name']
       path = alert_json['syscheck']['path']
 
-We recommend that you check the file ``/logs/alerts/alerts.json`` before starting the development of the integration script to find the format of the alerts to be interpreted.
+We recommend that you check the ``/logs/alerts/alerts.json`` file before starting the development of the integration script to find the format of the alerts to be interpreted.
 
-You can see the example integration script for Jira in the `How to integrate external software using Integrator <https://wazuh.com/blog/how-to-integrate-external-software-using-integrator/>`__ blog post.
+You can see an example integration script for Jira in the `How to integrate external software using Integrator <https://wazuh.com/blog/how-to-integrate-external-software-using-integrator//>`__ blog post.

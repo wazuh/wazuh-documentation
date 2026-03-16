@@ -20,4 +20,5 @@ In the Wazuh agent management section, you can find instructions on how to manag
       :maxdepth: 3
 
       agent-enrollment/index
-      agent-management/index
+      agent-management/agent-connection
+      agent-management/agent-administration
