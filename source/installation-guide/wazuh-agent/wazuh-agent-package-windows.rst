@@ -33,6 +33,13 @@ The agent runs on the endpoint you want to monitor and communicates with the Waz
                 .. code-block:: none
 
                   .\wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi /q WAZUH_MANAGER="10.0.0.2"
+                  
+             -  Using [Chocolatey](https://chocolatey.org):
+
+                .. code-block:: none
+
+                  choco install wazuh-agent --params="'/Manager:10.0.0.2'"
+
 
 
               For additional deployment options such as agent name, agent group, and registration password, see the :doc:`Deployment variables for Windows </user-manual/deployment-variables/deployment-variables-windows>` section.
