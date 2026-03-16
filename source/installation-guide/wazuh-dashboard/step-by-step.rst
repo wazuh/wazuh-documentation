@@ -92,14 +92,14 @@ Deploying certificates
    .. note::
      Make sure that a copy of the ``wazuh-certificates.tar`` file, created during the initial configuration step, is placed in your working directory.
 
-   #. Replace ``<DASHBOARD_NODE_NAME>`` with your Wazuh dashboard node name, the same one used in ``config.yml`` to create the certificates, and move the certificates to their corresponding location. 
-   
+   #. Replace ``<DASHBOARD_NODE_NAME>`` with your Wazuh dashboard node name, the same one used in ``config.yml`` to create the certificates, and move the certificates to their corresponding location.
+
        .. code-block:: console
-   
+
          # NODE_NAME=<DASHBOARD_NODE_NAME>
-         
-       .. code-block:: console  
-       
+
+       .. code-block:: console
+
          # mkdir /etc/wazuh-dashboard/certs
          # tar -xf ./wazuh-certificates.tar -C /etc/wazuh-dashboard/certs/ ./$NODE_NAME.pem ./$NODE_NAME-key.pem ./root-ca.pem
          # [ ! -e /etc/wazuh-dashboard/certs/dashboard.pem ] && mv -n /etc/wazuh-dashboard/certs/$NODE_NAME.pem /etc/wazuh-dashboard/certs/dashboard.pem
@@ -127,7 +127,7 @@ Starting the Wazuh dashboard service
             port: 55000
             username: wazuh-wui
             password: wazuh-wui
-            run_as: false
+            run_as: true
 
 
 #. Access the Wazuh web interface with your ``admin`` user credentials. This is the default administrator account for the Wazuh indexer and it allows you to access the Wazuh dashboard.
@@ -146,11 +146,9 @@ Disable Wazuh updates
 Securing your Wazuh installation
 --------------------------------
 
-
 You have now installed and configured all the Wazuh central components. We recommend changing the default credentials to protect your infrastructure from possible attacks.
 
 Select your deployment type and follow the instructions to change the default passwords for both the Wazuh API and the Wazuh indexer users.
-
 
 .. tabs::
 
@@ -188,14 +186,18 @@ Select your deployment type and follow the instructions to change the default pa
          .. code-block:: console
             :class: output
 
-            INFO: Wazuh API admin credentials not provided, Wazuh API passwords not changed.
-            INFO: The password for user admin is wcAny.XUwOVWHFy.+7tW9l8gUW1L8N3j
-            INFO: The password for user kibanaserver is qy6fBrNOI4fD9yR9.Oj03?pihN6Ejfpp
-            INFO: The password for user kibanaro is Nj*sSXSxwntrx3O7m8ehrgdHkxCc0dna
-            INFO: The password for user logstash is nQg1Qw0nIQFZXUJc8r8+zHVrkelch33h
-            INFO: The password for user readall is s0iWAei?RXObSDdibBfzSgXdhZCD9kH4
-            INFO: The password for user snapshotrestore is Mb2EHw8SIc1d.oz.nM?dHiPBGk7s?UZB
-            WARNING: Wazuh indexer passwords changed. Remember to update the password in the Wazuh dashboard and Filebeat nodes if necessary, and restart the services.
+            09/03/2026 21:57:57 INFO: Updating the internal users.
+            09/03/2026 21:58:10 INFO: A backup of the internal users has been saved in the /etc/wazuh-indexer/internalusers-backup folder.
+            09/03/2026 21:58:10 INFO: Wazuh API admin credentials not provided, Wazuh API passwords not changed.
+            09/03/2026 21:58:50 INFO: The filebeat.yml file has been updated to use the Filebeat Keystore username and password.
+            09/03/2026 21:59:49 INFO: The password for user admin is KgR9vJii*APPNLYz3j5tUA8UQfT5.PHH
+            09/03/2026 21:59:49 INFO: The password for user anomalyadmin is lRBMU?sH9RlKJyZujBi8ym+?Dp?IJ?g*
+            09/03/2026 21:59:49 INFO: The password for user kibanaserver is UQTxOd6MYUJH?tUmEykLD?Sh5b5C0Qtp
+            09/03/2026 21:59:49 INFO: The password for user kibanaro is v977y9ImuX*Tj4feoQXaLagu3Sy3nV?7
+            09/03/2026 21:59:49 INFO: The password for user logstash is ?9Pouf*+O62no7BwC7TktbX9I4OYJHVR
+            09/03/2026 21:59:49 INFO: The password for user readall is yc9tuN0*NCah4eXUeRaEuZJU.e7y+Bcm
+            09/03/2026 21:59:49 INFO: The password for user snapshotrestore is l+*+QhKd8QXOjE1gdpJpR0dkgay6vaLI
+            09/03/2026 21:59:49 WARNING: Wazuh indexer passwords changed. Remember to update the password in the Wazuh dashboard, Wazuh server, and Filebeat nodes if necessary, and restart the services.
 
       #. On your `Wazuh server master node`, download the Wazuh passwords tool and use it to change the passwords of the Wazuh API users.
 
@@ -207,10 +209,22 @@ Select your deployment type and follow the instructions to change the default pa
          .. code-block:: console
             :class: output
 
-            INFO: The password for Wazuh API user wazuh is ivLOfmj7.jL6*7Ev?UJoFjrkGy9t6Je.
-            INFO: The password for Wazuh API user wazuh-wui is fL+f?sFRPEv5pYRE559rqy9b6G4Z5pVi
+            11/03/2026 13:24:16 INFO: Updating the internal users.
+            11/03/2026 13:24:23 INFO: A backup of the internal users has been saved in the /etc/wazuh-indexer/internalusers-backup folder.
+            11/03/2026 13:24:48 INFO: The filebeat.yml file has been updated to use the Filebeat Keystore username and password.
+            11/03/2026 13:25:50 INFO: The password for user admin is 1rUc0EBkGyy?X3ow+32lv7Uwav?y8Fpk
+            11/03/2026 13:25:50 INFO: The password for user anomalyadmin is Yx7jSZwo+aJ3t*Gw6TaE13v2Qz?d4B9D
+            11/03/2026 13:25:50 INFO: The password for user kibanaserver is yHN8n9l?DTIHG+rMsNN*9t2*6Lvj26UF
+            11/03/2026 13:25:50 INFO: The password for user kibanaro is qwaFjN1GUxLmnbrcTflPWD4*pm0q6G9E
+            11/03/2026 13:25:50 INFO: The password for user logstash is bS.Tkj78u7+XDaIJN9VCV3n3rF?3d??r
+            11/03/2026 13:25:50 INFO: The password for user readall is v8nsDXUgm1Me9D?rp00Gfc5.?litbl?+
+            11/03/2026 13:25:50 INFO: The password for user snapshotrestore is K3n*+1xG2MgnyiCHd.R?v5vvrOFIH4OL
+            11/03/2026 13:25:50 WARNING: Wazuh indexer passwords changed. Remember to update the password in the Wazuh dashboard, Wazuh server, and Filebeat nodes if necessary, and restart the services.
+            11/03/2026 13:26:15 INFO: The password for Wazuh API user wazuh is GZ6zx?LHmVD+Pk.8IRYg2GY7ucp4C?L8
+            11/03/2026 13:26:16 INFO: The password for Wazuh API user wazuh-wui is SZL45qjN+qM3hcIu6Ig05mN*y.BHTSDM
+            11/03/2026 13:26:16 INFO: Updated wazuh-wui user password in wazuh dashboard. Remember to restart the service
 
-      #. On `all your Wazuh server nodes`, run the following command to update the admin password in the Filebeat keystore. Replace ``<ADMIN_PASSWORD>`` with the random password generated for the ``admin`` user  in the first step:
+      #. On `all your Wazuh server nodes`, run the following command to update the admin password in the Filebeat keystore. Replace ``<ADMIN_PASSWORD>`` with the random password generated for the ``admin`` user  in the second step:
 
          .. code-block:: console
 
@@ -249,7 +263,7 @@ Select your deployment type and follow the instructions to change the default pa
                   port: 55000
                   username: wazuh-wui
                   password: "<WAZUH_WUI_PASSWORD>"
-                  run_as: false
+                  run_as: true
 
       #. Restart the Wazuh dashboard to apply the changes.
 

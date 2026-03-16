@@ -6,12 +6,14 @@
 Indexer integration
 ===================
 
-The indexer integration describes data forwarders that forward data from the Wazuh manager to the Wazuh indexer or third-party indexers.
+The indexer integration describes data forwarders that forward data from the Wazuh manager to the `Wazuh indexer`_ or `Third-party indexers`_.
+
+.. _indexer_integration_wazuh_indexer:
 
 Wazuh indexer
 -------------
 
-This integration provides a bridge between the Wazuh manager and the Wazuh indexer. It forwards data from the Wazuh manager to the Wazuh indexer for indexing. The Wazuh indexer integration consists of two forwarders: `Filebeat`_ and `Wazuh indexer connector`_.
+This integration provides a bridge between the Wazuh manager and the Wazuh indexer. It forwards data from the Wazuh manager to the Wazuh indexer for indexing and storing. The Wazuh indexer integration consists of two forwarders: :ref:`Filebeat <indexer_integration_filebeat>` and :ref:`Wazuh indexer connector <wazuh_indexer_connector>`.
 
 .. _indexer_integration_filebeat:
 
@@ -23,7 +25,7 @@ This component is a lightweight data shipper designed to securely forward alerts
 Configuration
 ~~~~~~~~~~~~~
 
-The code block below shows the default Filebeat configuration on the Wazuh server ``/etc/filebeat/filebeat.yml`` file. This configuration file is downloaded while performing step by step Wazuh server installation. To learn how to download, configure, and install Filebeat, refer to the :ref:`configuring Filebeat <installation_configuring_filebeat>` section in the documentation.
+The code block below shows an expanded Filebeat configuration on the Wazuh server ``/etc/filebeat/filebeat.yml`` file. This configuration file is downloaded while performing step by step Wazuh server installation. To learn how to download, configure, and install Filebeat, refer to the :ref:`configuring Filebeat <installation_configuring_filebeat>` section in the documentation.
 
 .. code-block:: yaml
 
@@ -76,7 +78,7 @@ Where:
 -  ``<protocol>`` specifies the protocol to use for the connection. The default value is ``https``. The allowed values are ``http`` and ``https``.
 -  ``<username>`` and ``<password>`` specifies the environment variable used to authenticate to the Wazuh indexer securely.
 -  ``<ssl.certificate_authorities>`` specifies the path to the root certificates for HTTPS server verifications. The default value is ``/etc/filebeat/certs/root-ca.pem``. The possible value is any valid path
--  ``<ssl.certificate>`` specifies the path to the Filebeat SSL certificate.  The default value is ``/etc/filebeat/certs/wazuh-server.pem``. The possible value is any valid path.
+-  ``<ssl.certificate>`` specifies the path to the Filebeat SSL certificate. The default value is ``/etc/filebeat/certs/wazuh-server.pem``. The possible value is any valid path.
 -  ``<ssl.key>`` specifies the path to the SSL key used by Filebeat. The default value is ``/etc/filebeat/certs/wazuh-server-key.pem``. The possible value is any valid path.
 -  ``<setup.template.json.enabled>`` enables or disables the use of custom templates. The default value is ``true``.
 -  ``<setup.template.json.path>`` specifies the file path to the template JSON file. The default value is ``/etc/filebeat/wazuh-template.json``. The possible value is any valid path.
@@ -94,11 +96,13 @@ Where:
 -  ``<logging.files.keepfiles>`` specifies the number of recently rotated log files to retain. The default value is ``7``. The allowed value is an integer number between ``1`` and ``1024``.
 -  ``<logging.files.permissions>`` sets the file permissions for the log files. The default value is ``0644``, which implies that the owner of the log files can read and write to them, while others can only read.
 -  ``<logging.metrics.enabled>`` enables or disables the logging of internal metrics. The default value is ``true``. The possible values are ``true`` and ``false``.
--  ``<seccomp>`` specifies a secomp (secure computing mode) policy that restricts the number of system calls filebeat process can issue.
+-  ``<seccomp>`` specifies a seccomp (secure computing mode) policy that restricts the number of system calls filebeat process can issue.
 -  ``<default_action>`` sets the default action for system calls to allow. This means that any system call not explicitly specified in the syscalls list will be allowed by default.
--  ``<syscalls>`` defines a list of system call  names and the corresponding actions.
+-  ``<syscalls>`` defines a list of system call names and the corresponding actions.
 -  ``<action>`` specifies the action to take when any of the system calls listed in ``names`` is executed. The default value is ``allow``. The other values are ``errno``, ``trace``, ``trap``, ``kill_thread``, ``kill_process``, and ``log``.
--  ``<names>`` defines a list of system call names. A minimum of one system call must be defined in the list. The ``rseq`` (restartable sequences) system call is used to accelerate user-space operations on shared memory across multiple threads. The ``rseq``  system call is allowed in this configuration. 
+-  ``<names>`` defines a list of system call names. A minimum of one system call must be defined in the list. The ``rseq`` (restartable sequences) system call is used to accelerate user-space operations on shared memory across multiple threads. The ``rseq`` system call is allowed in this configuration.
+
+.. _wazuh_indexer_connector:
 
 Wazuh indexer connector
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -110,7 +114,7 @@ The standard configuration for the indexer connector is specified in the ``/var/
 .. code-block:: xml
 
    <ossec_config>
-    <indexer>
+     <indexer>
        <enabled>yes</enabled>
        <hosts>
          <host>https://127.0.0.1:9200</host>
@@ -142,7 +146,7 @@ You can learn more about the available configuration options in the :doc:`indexe
 Third-party indexers
 --------------------
 
-The Wazuh manager can forward alerts to third-party indexers. If you are using the Wazuh managers solely for log analysis and wish to forward alerts to third-party solutions for indexing and storage, there are alternative options available. Wazuh allows you to install the data forwarder of your choice on each Wazuh manager node to transfer the alerts to your desired solution. At the moment, Wazuh provides documentation for the following third-party solutions:
+Wazuh supports forwarding alerts to third-party indexers. When Wazuh managers are used solely for log analysis, alerts can be forwarded to third-party solutions for indexing and storage. To achieve this, install the data forwarder of your choice on each Wazuh manager node and configure it to send alerts to the target platform. At the moment, Wazuh provides documentation for the following third-party solutions:
 
 .. |MANAGER_ELK_STACK| replace:: :ref:`ELK stack <elastic_stack_wazuh_server_integration_using_logstash>`
 .. |MANAGER_OPENSEARCH| replace:: :ref:`OpenSearch <opensearch_wazuh_server_integration_using_logstash>`
