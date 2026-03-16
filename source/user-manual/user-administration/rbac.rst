@@ -3,14 +3,12 @@
 .. meta::
   :description: This section of the Wazuh documentation explains what a role-based access control system is and how you can use it with Wazuh.
 
-.. _wazuh-rbac:
-
 Wazuh RBAC - How to create and map internal users
 =================================================
 
 Wazuh RBAC allows access to Wazuh resources based on the roles and policies assigned to the users. It is an easy-to-use administration system that enables to manage users' or entities' permissions to the system resources. To learn more, see the :doc:`Role-Based Access Control </user-manual/api/rbac/index>` section.
 
-The Wazuh platform includes an internal user database that can be used for authentication. It can also be used in addition to an external authentication system such as LDAP or Active Directory.  Learn how to create users and map them with Wazuh in the below sections.
+The Wazuh platform includes an internal user database that can be used for authentication. It can also be used in addition to an external authentication system such as SAML, LDAP, or Active Directory. Learn how to create users and map them with Wazuh in the below sections.
 
 - `Creating and setting a Wazuh admin user`_
 - `Creating and setting a Wazuh read-only user`_
@@ -53,7 +51,11 @@ Follow these steps to create an internal user, create a new role mapping, and gi
 
    #. Click **Save role mapping** to save and map the user with Wazuh as *administrator*.
 
-   For the role mapping to take effect, make sure that ``run_as`` is set to ``true`` in the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file. Restart the Wazuh dashboard service and clear your browser cache and cookies.
+   #. For the role mapping to take effect, ensure that the ``run_as`` value is set to ``true`` in the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file.
+
+   #. Restart the Wazuh dashboard service and clear your browser cache and cookies.
+
+      .. include:: /_templates/common/restart_dashboard.rst
 
 Creating and setting a Wazuh read-only user
 -------------------------------------------
@@ -110,8 +112,11 @@ Follow these steps to create an internal user, create a new role mapping, and gi
 
    #. Click **Save role mapping** to save and map the user with Wazuh as *read-only*.
 
-   For the role mapping to take effect, make sure that ``run_as`` is set to ``true`` in the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file. Restart the Wazuh dashboard service and clear your browser cache and cookies.
+   #. For the role mapping to take effect, ensure that ``run_as`` value is set to ``true`` in the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file.
 
+   #. Restart the Wazuh dashboard service and clear your browser cache and cookies.
+
+      .. include:: /_templates/common/restart_dashboard.rst
 
 Creating an internal user and mapping it to Wazuh
 -------------------------------------------------
@@ -156,8 +161,11 @@ Follow these steps to create an internal user and map it to a role of your choic
 
    #. Click **Save role mapping** to save and map the user with Wazuh.
 
-   For the role mapping to take effect, make sure that ``run_as`` is set to ``true`` in the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file. Restart the Wazuh dashboard service and clear your browser cache and cookies.
+   #. For the role mapping to take effect, ensure that the ``run_as`` value is set to ``true`` in the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file.
 
+   #. Restart the Wazuh dashboard service and clear your browser cache and cookies.
+
+      .. include:: /_templates/common/restart_dashboard.rst
 
 .. _wazuh-rbac-use-case-agents-group:
 
@@ -172,8 +180,7 @@ It also involves mapping this user with the Wazuh API, creating a custom policy 
 
 As a final result, we will have a new user with permission to manage a group of agents and read the documents regarding the said group.
 
-In this example, we have an environment with three agents. Agents ``001`` and ``003`` belong to the ``Team_A`` group whereas agents ``002`` and ``003`` belong to the ``Team_B`` group. To learn more about creating agents' groups, see :doc:`Grouping agents </user-manual/agent/agent-management/grouping-agents>`. We will describe how to create a new user and give it permission to manage agents from ``Team_A``.
-
+In this example, we have an environment with five agents. Agents ``002``, ``003``, and ``006`` belong to the ``Team_A`` group, whereas agents ``004``, ``005``, and ``006`` belong to the ``Team_B`` group. To learn more about creating agent groups, see :doc:`Grouping agents </user-manual/agent/agent-management/grouping-agents>`. We will describe how to create a new user and grant that user permission to manage agents in ``Team_A``.
 
 .. thumbnail:: /images/manual/user-administration/rbac/environment.png
     :title: Use case: Give a user permissions to manage a group of agents - Environment
@@ -181,6 +188,33 @@ In this example, we have an environment with three agents. Agents ``001`` and ``
     :align: center
     :width: 100%
 
+Creating agent groups
+^^^^^^^^^^^^^^^^^^^^^
+
+Follow these steps to create agent groups and add agents to the groups using the Wazuh dashboard.
+
+#. Navigate to **Agents management** > **Groups** and click the **Add new group** button.
+#. Enter a name for the agent group, then click the **Save new group** button. In our case, we name the groups ``Team_A`` and ``Team_B``.
+
+   .. thumbnail:: /images/manual/user-administration/rbac/creating-agent-group.png
+      :title: Use case: Give a user permissions to manage a group of agents - Creating agent group
+      :alt: Use case: Give a user permissions to manage a group of agents - Creating agent group
+      :align: center
+      :width: 80%
+
+#. Select your group, for example, ``Team_A``, and click **Manage Agents**. Add agents to their respective groups and click **Apply changes**. In our case, agents ``002``, ``003``, and ``006`` are added to the ``Team_A`` group, whereas agents ``004``, ``005``, and ``006`` are added to the ``Team_B`` group.
+
+   .. thumbnail:: /images/manual/user-administration/rbac/creating-agent-group2.png
+      :title: Use case: Give a user permissions to manage a group of agents - Creating agent group
+      :alt: Use case: Give a user permissions to manage a group of agents - Creating agent group
+      :align: center
+      :width: 80%
+
+   .. thumbnail:: /images/manual/user-administration/rbac/creating-agent-group3.png
+      :title: Use case: Give a user permissions to manage a group of agents - Creating agent group
+      :alt: Use case: Give a user permissions to manage a group of agents - Creating agent group
+      :align: center
+      :width: 80%
 
 Adding an agents group label
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -189,7 +223,7 @@ To prepare the environment, add a label in the ``Team_A`` centralized configurat
 
 #. Log into the Wazuh dashboard as administrator.
 
-#. Select **Agents management** > **Endpoint Groups** to open the page.
+#. Select **Agents management** > **Groups** to open the page.
 
 #. Select your group, for example, ``Team_A``.
 
@@ -329,7 +363,11 @@ To map the user with Wazuh, follow these steps:
 
 #. Click **Save role mapping** to finish the action.
 
-  For the role mapping to take effect, make sure that ``run_as`` is set to ``true`` in the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file. Restart the Wazuh dashboard service and clear your browser cache and cookies.
+#. For the role mapping to take effect, ensure that ``run_as`` is set to ``true`` in the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file.
+
+#. Restart the Wazuh dashboard service and clear your browser cache and cookies.
+
+   .. include:: /_templates/common/restart_dashboard.rst
 
 You have now created a new internal user and mapped it to manage a Wazuh agents' group. Authenticate with the new user and open the Wazuh dashboard, see that only ``Team_A`` agents' alerts and information are displayed.
 
