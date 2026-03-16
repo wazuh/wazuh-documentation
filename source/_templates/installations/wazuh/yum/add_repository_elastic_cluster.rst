@@ -1,5 +1,11 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+#. Install the necessary packages for the installation:
+
+    .. code-block:: console
+
+      # yum install curl unzip wget
+
 #. Import the GPG key:
 
     .. code-block:: console
