@@ -109,6 +109,7 @@ removedUrls['5.0'] = [
 /* Pages added in 4.14 */
 
 newUrls['4.14'] = [
+  '/release-notes/release-4-14-5.html',
   '/release-notes/release-4-14-4.html',
   '/release-notes/release-4-14-3.html',
   '/release-notes/release-4-14-2.html',
@@ -120,6 +121,13 @@ newUrls['4.14'] = [
   '/cloud-security/azure/platform-and-services/graph.html',
   '/deployment-options/deploying-with-ansible/guide/index.html',
   '/deployment-options/deploying-with-ansible/guide/requirements.html',
+  '/user-manual/user-administration/single-sign-on/google.html',
+  '/user-manual/user-administration/single-sign-on/jumpcloud.html',
+  '/user-manual/user-administration/single-sign-on/keycloak.html',
+  '/user-manual/user-administration/single-sign-on/microsoft-entra-id.html',
+  '/user-manual/user-administration/single-sign-on/okta.html',
+  '/user-manual/user-administration/single-sign-on/onelogin.html',
+  '/user-manual/user-administration/single-sign-on/pingone.html',
 ]
 
 /* Redirections 4.13—4.14  */
@@ -169,7 +177,92 @@ redirections.push(
     'target': ['4.13=>4.14', '4.14=>4.13'],
     '4.13': '/deployment-options/deploying-with-ansible/guide/install-wazuh-manager.html',
     '4.14': '/deployment-options/deploying-with-ansible/guide/index.html#installing-the-wazuh-manager',
-  }
+  },
+  {
+    'target': ['4.13=>4.14'],
+    '4.13': '/user-manual/user-administration/single-sign-on/administrator/index.html',
+    '4.14': '/user-manual/user-administration/single-sign-on/index.html',
+  },
+  {
+    'target': ['4.13=>4.14', '4.14=>4.13'],
+    '4.13': '/user-manual/user-administration/single-sign-on/administrator/google.html',
+    '4.14': '/user-manual/user-administration/single-sign-on/google.html#setup-google-workspace-single-sign-on-with-administrator-role',
+  },
+  {
+    'target': ['4.13=>4.14', '4.14=>4.13'],
+    '4.13': '/user-manual/user-administration/single-sign-on/administrator/jumpcloud.html',
+    '4.14': '/user-manual/user-administration/single-sign-on/jumpcloud.html#setup-jumpcloud-single-sign-on-with-administrator-role',
+  },
+  {
+    'target': ['4.13=>4.14', '4.14=>4.13'],
+    '4.13': '/user-manual/user-administration/single-sign-on/administrator/keycloak.html',
+    '4.14': '/user-manual/user-administration/single-sign-on/keycloak.html#setup-keycloak-single-sign-on-with-administrator-role',
+  },
+  {
+    'target': ['4.13=>4.14', '4.14=>4.13'],
+    '4.13': '/user-manual/user-administration/single-sign-on/administrator/microsoft-entra-id.html',
+    '4.14': '/user-manual/user-administration/single-sign-on/microsoft-entra-id.html#setup-microsoft-entra-id-single-sign-on-with-administrator-role',
+  },
+  {
+    'target': ['4.13=>4.14', '4.14=>4.13'],
+    '4.13': '/user-manual/user-administration/single-sign-on/administrator/okta.html',
+    '4.14': '/user-manual/user-administration/single-sign-on/okta.html#setup-okta-single-sign-on-with-administrator-role',
+  },
+  {
+    'target': ['4.13=>4.14', '4.14=>4.13'],
+    '4.13': '/user-manual/user-administration/single-sign-on/administrator/onelogin.html',
+    '4.14': '/user-manual/user-administration/single-sign-on/onelogin.html#setup-onelogin-single-sign-on-with-administrator-role',
+  },
+  {
+    'target': ['4.13=>4.14', '4.14=>4.13'],
+    '4.13': '/user-manual/user-administration/single-sign-on/administrator/pingone.html',
+    '4.14': '/user-manual/user-administration/single-sign-on/pingone.html#setup-pingone-single-sign-on-with-administrator-role',
+  },
+  {
+    'target': ['4.13=>4.14'],
+    '4.13': '/user-manual/user-administration/single-sign-on/read-only/index.html',
+    '4.14': '/user-manual/user-administration/single-sign-on/index.html',
+  },
+  {
+    'target': ['4.13=>4.14', '4.14=>4.13'],
+    '4.13': '/user-manual/user-administration/single-sign-on/read-only/google.html',
+    '4.14': '/user-manual/user-administration/single-sign-on/google.html#setup-google-workspace-single-sign-on-with-read-only-role',
+  },
+  {
+    'target': ['4.13=>4.14', '4.14=>4.13'],
+    '4.13': '/user-manual/user-administration/single-sign-on/read-only/jumpcloud.html',
+    '4.14': '/user-manual/user-administration/single-sign-on/jumpcloud.html#setup-jumpcloud-single-sign-on-with-read-only-role',
+  },
+  {
+    'target': ['4.13=>4.14', '4.14=>4.13'],
+    '4.13': '/user-manual/user-administration/single-sign-on/read-only/keycloak.html',
+    '4.14': '/user-manual/user-administration/single-sign-on/keycloak.html#setup-keycloak-single-sign-on-with-read-only-role',
+  },
+  {
+    'target': ['4.13=>4.14', '4.14=>4.13'],
+    '4.13': '/user-manual/user-administration/single-sign-on/read-only/microsoft-entra-id.html',
+    '4.14': '/user-manual/user-administration/single-sign-on/microsoft-entra-id.html#setup-microsoft-entra-id-single-sign-on-with-read-only-role',
+  },
+  {
+    'target': ['4.13=>4.14', '4.14=>4.13'],
+    '4.13': '/user-manual/user-administration/single-sign-on/read-only/okta.html',
+    '4.14': '/user-manual/user-administration/single-sign-on/okta.html#setup-okta-single-sign-on-with-read-only-role',
+  },
+  {
+    'target': ['4.13=>4.14', '4.14=>4.13'],
+    '4.13': '/user-manual/user-administration/single-sign-on/read-only/onelogin.html',
+    '4.14': '/user-manual/user-administration/single-sign-on/onelogin.html#setup-onelogin-single-sign-on-with-read-only-role',
+  },
+  {
+    'target': ['4.13=>4.14', '4.14=>4.13'],
+    '4.13': '/user-manual/user-administration/single-sign-on/read-only/pingone.html',
+    '4.14': '/user-manual/user-administration/single-sign-on/pingone.html#setup-pingone-single-sign-on-with-read-only-role',
+  },
+  {
+    'target': ['4.13=>4.14'],
+    '4.13': '/user-manual/agent/agent-management/index.html',
+    '4.14': '/user-manual/agent/index.html',
+  },
 );
 
 /* Pages no longer available in 4.14 (this is not required if there is a redirection for this url) */
@@ -184,6 +277,23 @@ removedUrls['4.14'] = [
   '/deployment-options/deploying-with-ansible/guide/install-wazuh-cluster.html',
   '/deployment-options/deploying-with-ansible/guide/install-indexer-dashboard.html',
   '/deployment-options/deploying-with-ansible/guide/install-wazuh-manager.html',
+  '/user-manual/user-administration/single-sign-on/administrator/index.html',
+  '/user-manual/user-administration/single-sign-on/administrator/google.html',
+  '/user-manual/user-administration/single-sign-on/administrator/jumpcloud.html',
+  '/user-manual/user-administration/single-sign-on/administrator/keycloak.html',
+  '/user-manual/user-administration/single-sign-on/administrator/microsoft-entra-id.html',
+  '/user-manual/user-administration/single-sign-on/administrator/okta.html',
+  '/user-manual/user-administration/single-sign-on/administrator/onelogin.html',
+  '/user-manual/user-administration/single-sign-on/administrator/pingone.html',
+  '/user-manual/user-administration/single-sign-on/read-only/index.html',
+  '/user-manual/user-administration/single-sign-on/read-only/google.html',
+  '/user-manual/user-administration/single-sign-on/read-only/jumpcloud.html',
+  '/user-manual/user-administration/single-sign-on/read-only/keycloak.html',
+  '/user-manual/user-administration/single-sign-on/read-only/microsoft-entra-id.html',
+  '/user-manual/user-administration/single-sign-on/read-only/okta.html',
+  '/user-manual/user-administration/single-sign-on/read-only/onelogin.html',
+  '/user-manual/user-administration/single-sign-on/read-only/pingone.html',
+  '/user-manual/agent/agent-management/index.html',
 ];
 
 /* *** RELEASE 4.13 ****/

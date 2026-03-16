@@ -66,13 +66,13 @@ This is an example of a multi-host configuration:
            port: 55000
            username: wazuh-wui
            password: secret_password
-           run_as: false
+           run_as: true
        - wazuh_test:
            url: https://localhost
            port: 55000
            username: wazuh-wui
            password: wazuh-wui
-           run_as: false
+           run_as: true
 
 The following table shows the configuration options for the Wazuh dashboard:
 

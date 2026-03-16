@@ -34,11 +34,19 @@ All notable changes to this project will be documented in this file.
 - Removed deprecated configuration variables in the *Deployment with Puppet* documentation. ([#9378](https://github.com/wazuh/wazuh-documentation/pull/9378))
 - Removed Osquery references as this capability is now deprecated. ([#]())
 
+## [v4.14.5]
+
+- Support for Wazuh 4.14.5
+
 ## [v4.14.4]
 
 ### Added
 
 - Added a reference for the Linux ARM WPK packages to the WPK list. ([#9317](https://github.com/wazuh/wazuh-documentation/pull/9317))
+
+### Fixed
+
+- Added a step to start the Docker service upon installation in the *Monitoring Docker events* PoC. ([#9376](https://github.com/wazuh/wazuh-documentation/pull/9376))
 
 ## [v4.14.3]
 
@@ -47,6 +55,7 @@ All notable changes to this project will be documented in this file.
 - Added the macOS 26 (Tahoe) SCA policy reference to the *Available SCA policies* section. ([#9158](https://github.com/wazuh/wazuh-documentation/pull/9158))
 - Added a reference for the macOS ARM WPK package to the WPK list. ([#9215](https://github.com/wazuh/wazuh-documentation/pull/9215))
 - **Post-release**: Added note about Linux WPK ARM packages in 4.14.3 and earlier versions. ([#9304](https://github.com/wazuh/wazuh-documentation/pull/9304))
+- **Post-release**: Updated the Agent documentation structure. ([#9367](https://github.com/wazuh/wazuh-documentation/pull/9367))
 
 ### Changed
 
@@ -55,6 +64,21 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated the *Deployment with Ansible* documentation. ([#9295](https://github.com/wazuh/wazuh-documentation/pull/9295))
 - **Post-release**: Updated the *Configure Python and YARA* section of the *Proof of concept guide* documentation. ([#9315](https://github.com/wazuh/wazuh-documentation/pull/9315))
 - **Post-release**: Updated the *Network IDS integration* section of the *Proof of concept guide* documentation. ([#9314](https://github.com/wazuh/wazuh-documentation/pull/9314))
+- **Post-release**: Updated the *Single sign-on* documentation. ([#9300](https://github.com/wazuh/wazuh-documentation/pull/9300)) ([#9332](https://github.com/wazuh/wazuh-documentation/pull/9332))
+- **Post-release**: Updated images in the *File integrity monitoring* documentation. ([#9326](https://github.com/wazuh/wazuh-documentation/pull/9326))
+- **Post-release**: Updated the *Adding new Wazuh indexer nodes* section. ([#9331](https://github.com/wazuh/wazuh-documentation/pull/9331))
+- **Post-release**: Updated the *File integrity monitoring* documentation. ([#9326](https://github.com/wazuh/wazuh-documentation/pull/9326)) ([#9333](https://github.com/wazuh/wazuh-documentation/pull/9333))
+- **Post-release**: Updated the *Use Cases* section of the *Wazuh server API* documentation. ([#9335](https://github.com/wazuh/wazuh-documentation/pull/9335))
+- **Post-release**: Updated the *Regulatory compliance* documentation. ([#9375](https://github.com/wazuh/wazuh-documentation/pull/9375))
+- **Post-release**: Updated the *Wazuh server* documentation. ([#9374](https://github.com/wazuh/wazuh-documentation/pull/9374))
+- **Post-release**: Updated securing your Wazuh installation steps in *Installing the Wazuh dashboard step by step* documentation. ([#9379](https://github.com/wazuh/wazuh-documentation/pull/9379))
+- **Post-release**: Updated the default value of `run_as` to `true` in the Wazuh dashboard configuration. ([#9377](https://github.com/wazuh/wazuh-documentation/pull/9377))
+- **Post-release**: Updated the RBAC configuration. ([#9380](https://github.com/wazuh/wazuh-documentation/pull/9380))
+- **Post-release**: Updated the *agent_upgrade* tool reference documentation to show current version and added the ``-d, --debug`` option. ([#9382](https://github.com/wazuh/wazuh-documentation/pull/9382))
+
+### Fixed
+
+- **Post-release**: Fixed Wazuh Server image rendering in *Installation Guide* documentation. ([#9369](https://github.com/wazuh/wazuh-documentation/pull/9369)) ([#9371](https://github.com/wazuh/wazuh-documentation/pull/9371))
 
 ## [v4.14.2]
 

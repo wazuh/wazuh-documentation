@@ -182,9 +182,9 @@ The ``report_changes`` attribute allows the FIM module to report the exact conte
 
 You must use the ``report_changes`` attribute with caution when you enable this option.  Wazuh copies every monitored file to a private location increasing storage usage. You can find the copy of the files at: 
 
-- ``/var/ossec/queue/diff/local/``  on Linux.
-- ``Library/Ossec/queue/diff/local/`` on macOS.
-- ``C:\Program Files (x86)\ossec-agent\queue\diff\local\`` on Windows.
+-  ``/var/ossec/queue/diff/*``  on Linux.
+-  ``Library/Ossec/queue/diff/*`` on macOS.
+-  ``C:\Program Files (x86)\ossec-agent\queue\diff\file\`` on Windows.
 
 Below, you can see how to configure the FIM module to report file changes. Replace ``<FILEPATH_OF_MONITORED_FILE>`` with your own filepath.
 
