@@ -37,7 +37,6 @@ Backing up the Wazuh server
    .. code-block:: console
 
       # rsync -aREz \
-      /etc/filebeat/ \
       /etc/postfix/ \
       /var/ossec/api/configuration/ \
       /var/ossec/etc/client.keys \
