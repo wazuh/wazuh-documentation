@@ -3,8 +3,8 @@
 .. meta::
    :description: Wazuh 4.14.4 has been released. Check out our release notes to discover the changes and additions of this release.
 
-4.14.4 Release notes - TBD
-==========================
+4.14.4 Release notes - 17 March 2026
+====================================
 
 This section lists the changes in version 4.14.4. Every update of the Wazuh solution is cumulative and includes all enhancements and fixes from previous releases.
 
@@ -46,6 +46,7 @@ Wazuh agent
 -  `#34517 <https://github.com/wazuh/wazuh/pull/34517>`__ Retained MSI installer logs after Windows agent upgrades to improve troubleshooting visibility.
 -  `#34530 <https://github.com/wazuh/wazuh/pull/34530>`__ Fixed incorrect Windows 11 edition detection after upgrading the agent to version 4.14.3.
 -  `#34274 <https://github.com/wazuh/wazuh/pull/34274>`__ Fixed a macOS agent crash during Syscollector reload caused by invalid ``pthread_cond_destroy()`` usage.
+-  `#34900 <https://github.com/wazuh/wazuh/pull/34900>`__ Fixed ``pthread_mutex_destroy`` invalid argument error on AIX in **Syscollector**.
 -  `#34540 <https://github.com/wazuh/wazuh/pull/34540>`__ Fixed Windows OS edition detection.
 
 RESTful API
