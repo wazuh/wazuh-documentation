@@ -65,7 +65,7 @@ PingOne Configuration
 
             # openssl req -x509 -newkey rsa:2048 -keyout private.key -out certificate.pem -days 365 -nodes
 
-         The private key will be the ``sp.signature_private_key_filepath`` of the ``config.yml`` configuration file on the Wazuh indexer instance. This is necessary as all the logout requests must be signed.
+         Upload the ``certificate.pem`` file as the **VERIFICATION CERTIFICATE** in PingOne. The full path of the  private.key will be used later in the Wazuh indexer configuration file ``/etc/wazuh-indexer/opensearch-security/config.yml`` as the ``sp.signature_private_key_filepath`` parameter. This is necessary as all the logout requests must be signed.
 
       .. thumbnail:: /images/single-sign-on/pingone/03-on-the-configuration-tab.png
           :title: On the Configuration tab
@@ -132,6 +132,12 @@ Wazuh indexer configuration
 
 Edit the Wazuh indexer security configuration files. We recommend that you back up these files before you carry out the configuration.
 
+#. Backup the existing Wazuh indexer security configuration files:
+
+   .. code-block:: console
+
+      # /usr/share/wazuh-indexer/bin/indexer-security-init.sh --options "-backup /etc/wazuh-indexer/opensearch-security -icl -nhnv"
+
 #. Generate a 64-character long random key using the following command.
 
    .. code-block:: console
@@ -140,11 +146,11 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
    The output will be used as the ``exchange_key`` in the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file.
 
-#. Place the private key file within the ``/etc/wazuh-indexer/opensearch-security/`` directory. Set the file ownership to ``wazuh-indexer`` using the following command:
+#. Place the private key file within the ``/etc/wazuh-indexer/opensearch-security/`` directory. Set the file ownership to ``wazuh-indexer`` using the following command. Replace ``<PRIVATE_KEY>`` with your private key.
 
    .. code-block:: console
 
-      # chown wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/opensearch-security/securityconfig/PRIVATE_KEY
+      # chown wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/opensearch-security/securityconfig/<PRIVATE_KEY>
 
 #. Edit the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file and change the following values:
 
@@ -180,7 +186,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
                     entity_id: ISSUER ID
                   sp:
                     entity_id: wazuh-saml
-                    signature_private_key_filepath: /etc/wazuh-indexer/opensearch-security/PRIVATE_KEY
+                    signature_private_key_filepath: /etc/wazuh-indexer/opensearch-security/<PRIVATE_KEY>
                     forceAuthn: true
                   kibana_url: https://<WAZUH_DASHBOARD_URL>
                   roles_key: Roles
@@ -379,7 +385,7 @@ PingOne Configuration
 
          # openssl req -x509 -newkey rsa:2048 -keyout private.key -out certificate.pem -days 365 -nodes
 
-      The private key will be the ``sp.signature_private_key_filepath`` of the ``config.yml`` configuration file on the Wazuh indexer instance. This is necessary as all the logout requests must be signed.
+      Upload the ``certificate.pem`` file as the **VERIFICATION CERTIFICATE** in PingOne. The full path of the  ``private.key`` will be used later in the Wazuh indexer configuration file ``/etc/wazuh-indexer/opensearch-security/config.yml`` as the ``sp.signature_private_key_filepath`` parameter. This is necessary as all the logout requests must be signed.
 
       .. thumbnail:: /images/single-sign-on/pingone/03-on-the-configuration-tab.png
          :title: On the Configuration tab
@@ -446,6 +452,12 @@ Wazuh indexer configuration
 
 Edit the Wazuh indexer security configuration files. We recommend that you back up these files before you carry out the configuration.
 
+#. Backup the existing Wazuh indexer security configuration files:
+
+   .. code-block:: console
+
+      # /usr/share/wazuh-indexer/bin/indexer-security-init.sh --options "-backup /etc/wazuh-indexer/opensearch-security -icl -nhnv"
+
 #. Generate a 64-character long random key using the following command.
 
    .. code-block:: console
@@ -454,11 +466,11 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
    The output will be used as the ``exchange_key`` in the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file.
 
-#. Place the private key file within the ``/etc/wazuh-indexer/opensearch-security/`` directory. Set the file ownership to ``wazuh-indexer`` using the following command:
+#. Place the private key file within the ``/etc/wazuh-indexer/opensearch-security/`` directory. Set the file ownership to ``wazuh-indexer`` using the following command. Replace ``<PRIVATE_KEY>`` with your private key.
 
    .. code-block:: console
 
-      # chown wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/opensearch-security/securityconfig/PRIVATE_KEY
+      # chown wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/opensearch-security/securityconfig/<PRIVATE_KEY>
 
 #. Edit the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file and change the following values:
 
@@ -494,7 +506,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
                     entity_id: ISSUER ID
                   sp:
                     entity_id: wazuh-saml
-                    signature_private_key_filepath: /etc/wazuh-indexer/opensearch-security/PRIVATE_KEY
+                    signature_private_key_filepath: /etc/wazuh-indexer/opensearch-security/<PRIVATE_KEY>
                     forceAuthn: true
                   kibana_url: https://<WAZUH_DASHBOARD_URL>
                   roles_key: Roles

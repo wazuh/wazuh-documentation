@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 
 - Added a step to start the Docker service upon installation in the *Monitoring Docker events* PoC. ([#9376](https://github.com/wazuh/wazuh-documentation/pull/9376))
+- **Post-release**: Added steps to the Single Sign-On documentation. ([#9392](https://github.com/wazuh/wazuh-documentation/pull/9392))
 
 ## [v4.14.3]
 
