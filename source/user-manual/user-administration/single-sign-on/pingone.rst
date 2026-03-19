@@ -65,7 +65,7 @@ PingOne Configuration
 
             # openssl req -x509 -newkey rsa:2048 -keyout private.key -out certificate.pem -days 365 -nodes
 
-         Upload the ``certificate.pem`` file as the **VERIFICATION CERTIFICATE** in PingOne. The full path of the  private.key will be used later in the Wazuh indexer configuration file ``/etc/wazuh-indexer/opensearch-security/config.yml`` as the ``sp.signature_private_key_filepath`` parameter. This is necessary as all the logout requests must be signed.
+         Upload the ``certificate.pem`` file as the **VERIFICATION CERTIFICATE** in PingOne. The full path of the ``private.key`` will be used later in the Wazuh indexer configuration file ``/etc/wazuh-indexer/opensearch-security/config.yml`` as the ``sp.signature_private_key_filepath`` parameter. This is necessary as all the logout requests must be signed.
 
       .. thumbnail:: /images/single-sign-on/pingone/03-on-the-configuration-tab.png
           :title: On the Configuration tab
