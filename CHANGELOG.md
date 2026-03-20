@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file.
 
 - Added a step to start the Docker service upon installation in the *Monitoring Docker events* PoC. ([#9376](https://github.com/wazuh/wazuh-documentation/pull/9376))
 - **Post-release**: Added steps to the Single Sign-On documentation. ([#9392](https://github.com/wazuh/wazuh-documentation/pull/9392)) ([#9395](https://github.com/wazuh/wazuh-documentation/pull/9395))
+- **Post-release**: Fixed AARCH64 WPK package download links. ([#9392](https://github.com/wazuh/wazuh-documentation/pull/9392)) ([#9398](https://github.com/wazuh/wazuh-documentation/pull/9398))
 
 ## [v4.14.3]
 
