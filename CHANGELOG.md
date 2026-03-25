@@ -13,6 +13,10 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Added steps to the Single Sign-On documentation. ([#9392](https://github.com/wazuh/wazuh-documentation/pull/9392)) ([#9395](https://github.com/wazuh/wazuh-documentation/pull/9395))
 - **Post-release**: Fixed AARCH64 WPK package download links. ([#9392](https://github.com/wazuh/wazuh-documentation/pull/9392)) ([#9398](https://github.com/wazuh/wazuh-documentation/pull/9398))
 
+### Changed
+
+- **Post-release**: Updated the *Using Wazuh for GDPR compliance* documentation. ([#9431](https://github.com/wazuh/wazuh-documentation/pull/9431))
+
 ## [v4.14.3]
 
 ### Added
