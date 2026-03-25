@@ -26,11 +26,11 @@ Before compiling Wazuh from sources, you need to install the required build tool
          # apt-get update
          # apt-get install python3 gcc g++ make libc6-dev curl policycoreutils automake autoconf libtool libssl-dev procps build-essential
 
-      CMake 3.18 installation
+      CMake 3.22 installation
 
       .. code-block:: console
 
-         # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz && cd cmake-3.18.3 && ./bootstrap --no-system-curl && make -j$(nproc) && make install
+         # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.22.0.tar.gz && tar -zxf cmake-3.22.0.tar.gz && cd cmake-3.22.0 && ./bootstrap --no-system-curl && make -j$(nproc) && make install
          # cd .. && rm -rf cmake-*
 
    .. group-tab:: Yum
@@ -43,13 +43,13 @@ Before compiling Wazuh from sources, you need to install the required build tool
 
                # yum update -y
                # yum install make gcc gcc-c++ policycoreutils-python automake autoconf libtool centos-release-scl openssl-devel wget bzip2 devtoolset-7 procps -y
-               # curl -OL http://packages.wazuh.com/utils/gcc/gcc-9.4.0.tar.gz && tar xzf gcc-9.4.0.tar.gz  && cd gcc-9.4.0/ && ./contrib/download_prerequisites && ./configure --enable-languages=c,c++ --prefix=/usr --disable-multilib --disable-libsanitizer && make -j$(nproc) && make install && ln -fs /usr/bin/g++ /bin/c++ && ln -fs /usr/bin/gcc /bin/cc && cd .. && rm -rf gcc-* && scl enable devtoolset-7 bash
+               # curl -OL http://packages.wazuh.com/utils/gcc/gcc-14.3.0.tar.gz && tar xzf gcc-14.3.0.tar.gz  && cd gcc-14.3.0/ && ./contrib/download_prerequisites && ./configure --enable-languages=c,c++ --prefix=/usr --disable-multilib --disable-libsanitizer && make -j$(nproc) && make install && ln -fs /usr/bin/g++ /bin/c++ && ln -fs /usr/bin/gcc /bin/cc && cd .. && rm -rf gcc-* && scl enable devtoolset-7 bash
 
-            CMake 3.18 installation
+            CMake 3.22 installation
 
             .. code-block:: console
 
-               # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz && cd cmake-3.18.3 && ./bootstrap --no-system-curl && make -j$(nproc) && make install
+               # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.22.0.tar.gz && tar -zxf cmake-3.22.0.tar.gz && cd cmake-3.22.0 && ./bootstrap --no-system-curl && make -j$(nproc) && make install
                # cd .. && rm -rf cmake-*
 
          .. tab:: CentOS 8
@@ -57,15 +57,15 @@ Before compiling Wazuh from sources, you need to install the required build tool
             .. code-block:: console
 
                # yum install make cmake gcc gcc-c++ python3 python3-policycoreutils automake autoconf libtool openssl-devel yum-utils procps -y
-               # curl -OL http://packages.wazuh.com/utils/gcc/gcc-9.4.0.tar.gz && tar xzf gcc-9.4.0.tar.gz  && cd gcc-9.4.0/ && ./contrib/download_prerequisites && ./configure --enable-languages=c,c++ --prefix=/usr --disable-multilib --disable-libsanitizer && make -j$(nproc) && make install && ln -fs /usr/bin/g++ /bin/c++ && ln -fs /usr/bin/gcc /bin/cc && cd .. && rm -rf gcc-* && scl enable devtoolset-7 bash
+               # curl -OL http://packages.wazuh.com/utils/gcc/gcc-14.3.0.tar.gz && tar xzf gcc-14.3.0.tar.gz  && cd gcc-14.3.0/ && ./contrib/download_prerequisites && ./configure --enable-languages=c,c++ --prefix=/usr --disable-multilib --disable-libsanitizer && make -j$(nproc) && make install && ln -fs /usr/bin/g++ /bin/c++ && ln -fs /usr/bin/gcc /bin/cc && cd .. && rm -rf gcc-* && scl enable devtoolset-7 bash
                # yum-config-manager --enable PowerTools
                # yum install libstdc++-static -y
 
-            CMake 3.18 installation
+            CMake 3.22 installation
 
             .. code-block:: console
 
-               # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz && cd cmake-3.18.3 && ./bootstrap --no-system-curl && make -j$(nproc) && make install
+               # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.22.0.tar.gz && tar -zxf cmake-3.22.0.tar.gz && cd cmake-3.22.0 && ./bootstrap --no-system-curl && make -j$(nproc) && make install
                # cd .. && rm -rf cmake-*
                # export PATH=/usr/local/bin:$PATH
 
@@ -74,7 +74,7 @@ Before compiling Wazuh from sources, you need to install the required build tool
             .. code-block:: console
 
                # yum install make cmake gcc gcc-c++ python3 python3-policycoreutils automake autoconf libtool openssl-devel yum-utils procps -y
-               # curl -OL http://packages.wazuh.com/utils/gcc/gcc-9.4.0.tar.gz && tar xzf gcc-9.4.0.tar.gz  && cd gcc-9.4.0/ && ./contrib/download_prerequisites && ./configure --enable-languages=c,c++ --prefix=/usr --disable-multilib --disable-libsanitizer && make -j$(nproc) && make install && ln -fs /usr/bin/g++ /bin/c++ && ln -fs /usr/bin/gcc /bin/cc && cd .. && rm -rf gcc-* && scl enable devtoolset-7 bash
+               # curl -OL http://packages.wazuh.com/utils/gcc/gcc-14.3.0.tar.gz && tar xzf gcc-14.3.0.tar.gz  && cd gcc-14.3.0/ && ./contrib/download_prerequisites && ./configure --enable-languages=c,c++ --prefix=/usr --disable-multilib --disable-libsanitizer && make -j$(nproc) && make install && ln -fs /usr/bin/g++ /bin/c++ && ln -fs /usr/bin/gcc /bin/cc && cd .. && rm -rf gcc-* && scl enable devtoolset-7 bash
                # yum config-manager --set-enabled crb
                # yum install libstdc++-static -y
 
@@ -84,15 +84,15 @@ Before compiling Wazuh from sources, you need to install the required build tool
 
          # dnf update -y
          # dnf install make cmake gcc gcc-c++ python3 python3-policycoreutils automake autoconf libtool openssl-devel yum-utils procps -y
-         # curl -OL http://packages.wazuh.com/utils/gcc/gcc-9.4.0.tar.gz && tar xzf gcc-9.4.0.tar.gz && cd gcc-9.4.0/ && ./contrib/download_prerequisites && ./configure --enable-languages=c,c++ --prefix=/usr --disable-multilib --disable-libsanitizer && make -j$(nproc) && make install && ln -fs /usr/bin/g++ /bin/c++ && ln -fs /usr/bin/gcc /bin/cc && cd .. && rm -rf gcc-*
+         # curl -OL http://packages.wazuh.com/utils/gcc/gcc-14.3.0.tar.gz && tar xzf gcc-14.3.0.tar.gz && cd gcc-14.3.0/ && ./contrib/download_prerequisites && ./configure --enable-languages=c,c++ --prefix=/usr --disable-multilib --disable-libsanitizer && make -j$(nproc) && make install && ln -fs /usr/bin/g++ /bin/c++ && ln -fs /usr/bin/gcc /bin/cc && cd .. && rm -rf gcc-*
          # dnf config-manager --set-enabled crb
          # dnf install libstdc++-static -y
 
-      CMake 3.18 installation
+      CMake 3.22 installation
 
       .. code-block:: console
 
-         # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz && cd cmake-3.18.3 && ./bootstrap --no-system-curl && make -j$(nproc) && make install
+         # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.22.0.tar.gz && tar -zxf cmake-3.22.0.tar.gz && cd cmake-3.22.0 && ./bootstrap --no-system-curl && make -j$(nproc) && make install
          # cd .. && rm -rf cmake-*
          # export PATH=/usr/local/bin:$PATH
 
