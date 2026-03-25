@@ -150,7 +150,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
    .. code-block:: console
 
-      # chown wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/opensearch-security/securityconfig/<PRIVATE_KEY>
+      # chown wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/opensearch-security/<PRIVATE_KEY>
 
 #. Edit the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file and change the following values:
 
@@ -470,7 +470,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
    .. code-block:: console
 
-      # chown wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/opensearch-security/securityconfig/<PRIVATE_KEY>
+      # chown wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/opensearch-security/<PRIVATE_KEY>
 
 #. Edit the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file and change the following values:
 
