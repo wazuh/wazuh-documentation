@@ -25,7 +25,7 @@ Before compiling Wazuh from sources, you need to install the required build tool
 
       .. note::
 
-         CMake 3.12.4 is the minimal library version required to build the Wazuh agent solution.
+         CMake 3.22 is the minimal library version required to build the Wazuh agent solution.
 
       .. note::
 
@@ -126,9 +126,9 @@ Before compiling Wazuh from sources, you need to install the required build tool
 
                .. code-block:: console
 
-                  # zypper install -y make gcc12 gcc12-c++ policycoreutils-python automake autoconf libtool libopenssl-devel curl
-                  # ln -sf /usr/bin/gcc-12 /usr/bin/gcc
-                  # ln -sf /usr/bin/g++-12 /usr/bin/g++
+                  # zypper install -y make gcc14 gcc14-c++ policycoreutils-python automake autoconf libtool libopenssl-devel curl
+                  # ln -sf /usr/bin/gcc-14 /usr/bin/gcc
+                  # ln -sf /usr/bin/g++-14 /usr/bin/g++
 
                CMake 3.22 installation
 
@@ -464,9 +464,9 @@ This section walks you through downloading the Wazuh source code, compiling it, 
 
                   .. code-block:: console
 
-                     # export PATH=/usr/local/gcc-5.5.0/bin:/usr/sbin:/usr/bin:/usr/ccs/bin:/opt/csw/bin:/opt/csw/gnu
-                     # export CPLUS_INCLUDE_PATH=/usr/local/gcc-5.5.0/include/c++/5.5.0
-                     # export LD_LIBRARY_PATH=/usr/local/gcc-5.5.0/lib
+                     # export PATH=/usr/local/gcc-14.3.0/bin:/usr/sbin:/usr/bin:/usr/ccs/bin:/opt/csw/bin:/opt/csw/gnu
+                     # export CPLUS_INCLUDE_PATH=/usr/local/gcc-14.3.0/include/c++/14.3.0
+                     # export LD_LIBRARY_PATH=/usr/local/gcc-14.3.0/lib
                      # cd wazuh/src
                      # gmake clean
                      # gmake deps TARGET=agent
@@ -477,9 +477,9 @@ This section walks you through downloading the Wazuh source code, compiling it, 
 
                   .. code-block:: console
 
-                     # export PATH=/usr/local/gcc-5.5.0/bin:/usr/sbin:/usr/bin:/usr/ccs/bin:/opt/csw/bin:/opt/csw/gnu
-                     # export CPLUS_INCLUDE_PATH=/usr/local/gcc-5.5.0/include/c++/5.5.0
-                     # export LD_LIBRARY_PATH=/usr/local/gcc-5.5.0/lib
+                     # export PATH=/usr/local/gcc-14.3.0/bin:/usr/sbin:/usr/bin:/usr/ccs/bin:/opt/csw/bin:/opt/csw/gnu
+                     # export CPLUS_INCLUDE_PATH=/usr/local/gcc-14.3.0/include/c++/14.3.0
+                     # export LD_LIBRARY_PATH=/usr/local/gcc-14.3.0/lib
                      # cd wazuh/src
                      # gmake clean
                      # gmake deps TARGET=agent RESOURCES_URL=http://packages.wazuh.com/deps/27
