@@ -8,6 +8,10 @@ All notable changes to this project will be documented in this file.
 - Added a reference for the Linux ARM WPK packages to the WPK list. ([#9317](https://github.com/wazuh/wazuh-documentation/pull/9317))
 - Added note to the *Installing the Wazuh agent* section in the *Deploying with Ansible* documentation about Amazon Linux 2 systems. ([#9430](https://github.com/wazuh/wazuh-documentation/pull/9430))
 
+### Changed
+
+- **Post-release**: Updated command to change ownership of the private key file in the *PingOne* Single Sign-On documentation. ([#9432](https://github.com/wazuh/wazuh-documentation/pull/9432))
+
 ### Fixed
 
 - Added a step to start the Docker service upon installation in the *Monitoring Docker events* PoC. ([#9376](https://github.com/wazuh/wazuh-documentation/pull/9376))
