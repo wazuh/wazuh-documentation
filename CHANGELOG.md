@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 - Added a reference for the Linux ARM WPK packages to the WPK list. ([#9317](https://github.com/wazuh/wazuh-documentation/pull/9317))
+- Added note to the *Installing the Wazuh agent* section in the *Deploying with Ansible* documentation about Amazon Linux 2 systems. ([#9430](https://github.com/wazuh/wazuh-documentation/pull/9430))
 
 ### Fixed
 
