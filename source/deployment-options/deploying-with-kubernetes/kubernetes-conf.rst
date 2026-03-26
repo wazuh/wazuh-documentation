@@ -70,7 +70,7 @@ The Wazuh worker pods contain the worker nodes of the Wazuh server cluster. They
 
 **Wazuh indexer**
 
-The Wazuh indexer pod ingests events received from Filebeat.
+The Wazuh indexer pod ingests events received from Indexer Connector.
 
 +--------------------------------------------+-------------+
 | Image                                      | Controller  |

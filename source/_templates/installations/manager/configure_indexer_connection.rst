@@ -3,27 +3,25 @@
 By default, the indexer settings have one host configured. It's set to ``0.0.0.0`` as highlighted below.
 
 .. code-block:: xml
-   :emphasize-lines: 4
+   :emphasize-lines: 3
 
    <indexer>
-     <enabled>yes</enabled>
      <hosts>
        <host>https://0.0.0.0:9200</host>
      </hosts>
      <ssl>
        <certificate_authorities>
-         <ca>/etc/filebeat/certs/root-ca.pem</ca>
+         <ca>/var/ossec/etc/certs/root-ca.pem</ca>
        </certificate_authorities>
-       <certificate>/etc/filebeat/certs/filebeat.pem</certificate>
-       <key>/etc/filebeat/certs/filebeat-key.pem</key>
+       <certificate>/var/ossec/etc/certs/server.pem</certificate>
+       <key>/var/ossec/etc/certs/server-key.pem</key>
      </ssl>
    </indexer>
 
-- Replace ``0.0.0.0`` with your Wazuh indexer node IP address or hostname. You can find this value in the Filebeat config file ``/etc/filebeat/filebeat.yml``.
+-  Replace ``0.0.0.0`` with your Wazuh indexer node IP address or hostname. You can find this value in the Wazuh indexer config file ``/etc/wazuh-indexer/opensearch.yml``.
+-  Ensure the Wazuh server certificate and key name match the certificate files in ``/var/ossec/etc/certs``.
 
-- Ensure the Filebeat certificate and key name match the certificate files in ``/etc/filebeat/certs``.
-
-If you are running a Wazuh indexer cluster infrastructure, add a ``<host>`` entry for each one of your nodes. For example, in a two-node configuration:
+If you are running a Wazuh indexer cluster infrastructure, add a ``<host>`` entry for each one of your Wazuh indexer nodes. For example, in a two-node configuration:
 
 .. code-block:: xml
 

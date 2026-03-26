@@ -6,12 +6,12 @@
 
 .. code-block:: console
 
-   # mkdir /etc/filebeat/certs
-   # tar -xf ./wazuh-certificates.tar -C /etc/filebeat/certs/ ./$NODE_NAME.pem ./$NODE_NAME-key.pem ./root-ca.pem
-   # mv -n /etc/filebeat/certs/$NODE_NAME.pem /etc/filebeat/certs/filebeat.pem
-   # mv -n /etc/filebeat/certs/$NODE_NAME-key.pem /etc/filebeat/certs/filebeat-key.pem
-   # chmod 500 /etc/filebeat/certs
-   # chmod 400 /etc/filebeat/certs/*
-   # chown -R root:root /etc/filebeat/certs
+   # mkdir /var/ossec/etc/certs
+   # tar -xf ./wazuh-certificates.tar -C /var/ossec/etc/certs/ ./$NODE_NAME.pem ./$NODE_NAME-key.pem ./root-ca.pem
+   # mv -n /var/ossec/etc/certs/$NODE_NAME.pem /var/ossec/etc/certs/server.pem
+   # mv -n /var/ossec/etc/certs/$NODE_NAME-key.pem /var/ossec/etc/certs/server-key.pem
+   # chmod 500 /var/ossec/etc/certs
+   # chmod 400 /var/ossec/etc/certs/*
+   # chown -R root:root /var/ossec/etc/certs
 
 .. End of copy_certificates_filebeat_wazuh_cluster.rst
