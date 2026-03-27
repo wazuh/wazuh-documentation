@@ -61,8 +61,6 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 +---------------------------------------------------------------------+------------------------+
 | :doc:`indexer <indexer>`                                            | manager                |
 +---------------------------------------------------------------------+------------------------+
-| :doc:`integration  <integration>`                                   | manager                |
-+---------------------------------------------------------------------+------------------------+
 | :doc:`labels  <labels>`                                             | manager, agent         |
 +---------------------------------------------------------------------+------------------------+
 | :doc:`localfile <localfile>`                                        | manager, agent         |
@@ -137,7 +135,6 @@ All of the above sections must be located within the top-level ``<ossec_config>`
    global
    github-module
    indexer
-   integration
    labels
    localfile
    logging
