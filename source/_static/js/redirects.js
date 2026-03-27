@@ -76,12 +76,15 @@ removedUrls['x.y'] = [
 newUrls['5.0'] = [
   '/release-notes/release-5-0-0.html',
   '/release-notes/index-5x.html',
+  '/user-manual/reference/certs-tools.html',
+  '/user-manual/reference/installation-assistant.html',
 ];
 
 /* Pages no longer available in 5.0 */
 
 removedUrls['5.0'] = [
   '/user-manual/capabilities/system-inventory/osquery.html',
+  '/user-manual/reference/ossec-conf/integration.html',
   '/user-manual/reference/ossec-conf/wodle-osquery.html',
   '/user-manual/reference/daemons/wazuh-agentlessd.html',
   '/user-manual/reference/daemons/wazuh-csyslogd.html',
