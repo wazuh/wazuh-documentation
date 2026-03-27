@@ -173,7 +173,6 @@ header {
 
 .light-theme {
   .navbar-nav {
-    background-color: $light-color-base-space;
     .login {
       .nav-link {
         border-color: $light-color-primary;
@@ -222,7 +221,6 @@ header {
 
 .dark-theme {
   .navbar-nav {
-    background-color: $dark-color-index-header-background;
     .nav-link {
       color: $dark-color-main-text;
       &.active,
