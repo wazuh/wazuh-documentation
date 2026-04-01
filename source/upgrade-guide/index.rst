@@ -37,16 +37,15 @@ Before upgrading, clean up the ``ossec.conf`` file on managers and agents. Remov
 
 -  ``<rootcheck>``:
 
-   -  Remove: ``check_files``, ``check_trojans``, ``check_policy``
-   -  Use the :doc:`SCA module </user-manual/capabilities/sec-config-assessment/index>` instead
+   -  Remove: ``check_files``, ``rootkit_files``, ``check_trojans``, ``rootkit_trojans``, ``check_unixaudit``, ``system_audit``, ``check_winaudit``, ``windows_audit``, ``check_winapps``, ``windows_apps``, ``check_winmalware``, ``windows_malware``
 
 -  ``<client>``:
 
    -  Remove: ``protocol``, ``crypto_method``, ``force_reconnect_interval``
    -  Only TCP and AES are supported.
 
-         -  Agents configured to use UDP do not connect.
-         -  Configurations using Blowfish are rejected.
+      -  Agents configured to use UDP do not connect.
+      -  Configurations using Blowfish are rejected.
 
 -  Modules:
 
@@ -59,7 +58,7 @@ Removed components
 
 -  CIS-CAT and OpenSCAP
 
-   -  Use the :doc:`SCA module </user-manual/capabilities/sec-config-assessment/index>`
+   -  Use the :doc:`SCA module </user-manual/capabilities/sec-config-assessment/index>` instead
 
 -  Osquery
 
