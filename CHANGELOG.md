@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file.
 - Added ARM64 support for Linux and macOS WPK packages. ([#8851](https://github.com/wazuh/wazuh-documentation/pull/8851))
 - Added ``integrity_interval`` to the syscheck ``synchronization`` configuration and updated the ``response_timeout`` default value. ([#9099](https://github.com/wazuh/wazuh-documentation/pull/9099))
 - Added ``integrity_interval`` to the SCA and the syscollector ``synchronization`` configuration. ([#9164](https://github.com/wazuh/wazuh-documentation/pull/9164))
+- Added *Upgrading to Wazuh 5.x* sub-section to the Upgrade guide. ([#9435](https://github.com/wazuh/wazuh-documentation/pull/9435))
 
 ### Changed
 
