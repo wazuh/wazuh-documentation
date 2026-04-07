@@ -70,7 +70,7 @@ Perform the following steps on the Wazuh server.
               firedtimes: '1'
               mail: 'False'
 
-   To test your rules using ``/var/ossec/bin/wazuh-logtest`` tool, saving the changes made to the rule files is enough. However, you need to restart the Wazuh manager to generate alerts based on these changes.
+   To test your rules using ``/var/ossec/bin/wazuh-logtest`` tool, saving the changes made to the rule file and restarting the logtest tool is enough. However, you need to restart the Wazuh manager to generate alerts based on these changes.
 
 #. Restart the Wazuh manager to apply the changes:
 
