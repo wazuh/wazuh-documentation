@@ -11,7 +11,7 @@ This guide provides the essential information needed to utilize the Wazuh server
 Starting and stopping the Wazuh server API
 ------------------------------------------
 
-When you install the Wazuh manager, the Wazuh server API is also installed by default as part of the process. You can manage or monitor the Wazuh server API by executing the ``systemctl`` or ``service`` commands with the Wazuh manager service:
+The Wazuh server API is automatically installed and runs as part of the Wazuh manager service. You can manage or monitor the Wazuh server API by executing the ``systemctl`` or ``service`` commands with the Wazuh manager service:
 
 .. tabs::
 
@@ -21,37 +21,52 @@ When you install the Wazuh manager, the Wazuh server API is also installed by de
 
          # systemctl start/status/stop/restart wazuh-manager
 
-   .. group-tab:: SysV init
+   .. group-tab:: SysV Init
 
       .. code-block:: console
 
          # service wazuh-manager start/status/stop/restart
 
-Using the Wazuh server API via the Wazuh dashboard
---------------------------------------------------
+Using the Wazuh server API console in the Wazuh dashboard
+---------------------------------------------------------
 
-You can interact with the Wazuh server API via the Wazuh dashboard. To do this, you need to log into the Wazuh dashboard with a user that has administrator privileges. For example, the default ``admin`` user has administrator privileges. To access the Wazuh server API console on the dashboard, click on the menu icon and navigate to **Server management** > **Dev Tools**.
+You can interact with the Wazuh server API via the built-in API Console in the Wazuh dashboard. To do this, follow the steps below:
 
-.. thumbnail:: /images/manual/api/access-wazuh-server-api.png
-   :title: Access the Wazuh server API console on the dashboard
-   :alt: Access the Wazuh server API console on the dashboard
-   :align: center
-   :width: 80%
+#. Log into the Wazuh dashboard with a user that has administrator privileges. For example, the default ``admin`` user has administrator privileges.
 
-In the **API Console**, input the method, request endpoint, and any query parameters, then click the play button to execute the request. See `Understanding the Wazuh server API request and response`_ to learn more about the basic concepts.
+#. Navigate to **Server management** > **Dev Tools** to access the Wazuh server API console on the dashboard, click on the menu icon and navigate.
 
-.. thumbnail:: /images/manual/api/execute-api-request.png
-   :title: Execute API request
-   :alt: Execute API request
+   .. thumbnail:: /images/manual/api/api-console-access.png
+      :title: Access the Wazuh server API console
+      :alt: Access the Wazuh server API console
+      :align: center
+      :width: 80%
+
+#. In the **API Console**:
+
+   -  Select HTTP method (GET, POST, PUT, DELETE)
+   -  Enter the endpoint (e.g. ``/agents``, ``/manager/info``)
+   -  Add any query parameters (e.g. ``?pretty=true&limit=10``)
+   -  Click the **Play** button.
+
+All requests are automatically authenticated using your current dashboard session. See :doc:`requests-responses` to learn more about the basic concepts.
+
+.. thumbnail:: /images/manual/api/api-console-execution.gif
+   :title: Execute API request in console
+   :alt: Execute API request in console
    :align: center
    :width: 80%
 
 .. _api_log_in:
 
-Logging into the Wazuh server API via command line
---------------------------------------------------
+Authentication – Obtaining a JWT token
+--------------------------------------
 
-To ensure secure access, all Wazuh server API endpoints require authentication. Users must include a JSON Web Token (JWT) in every request. JWT is an open standard (RFC 7519) that defines a compact and self-contained method for securely transmitting information between parties as a JSON object. Follow the steps below to log into the Wazuh server API using :api-ref:`POST /security/user/authenticate <operation/api.controllers.security_controller.login_user>` and obtain a token necessary for accessing the API endpoints:
+All API endpoints (except the login endpoint itself) require authentication using a JSON Web Token (JWT). Users must include a JSON Web Token (JWT) in every request. JWT is an open standard (RFC 7519) that defines a compact and self-contained method for securely transmitting information between parties as a JSON object.
+
+Authenticate the Wazuh server API via command line
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 
 #. Run the following command to send a user authentication POST request to the Wazuh server API  and store the returned JWT in the ``TOKEN`` variable. Replace ``<WAZUH_API_USER>`` and ``<WAZUH_API_PASSWORD>`` with your credentials.
 
