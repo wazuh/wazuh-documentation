@@ -446,7 +446,7 @@ Install and configure Filebeat
       # echo admin | filebeat keystore add username --stdin --force
       # echo <ADMIN_PASSWORD> | filebeat keystore add password --stdin --force
 
-   If you are run an all-in-one Wazuh deployment and have not changed the default admin password, you can retrieve the current admin password by running the following command:
+   If you are running an all-in-one Wazuh deployment and have not changed the default admin password, you can retrieve the current admin password by running the following command:
 
    .. code-block:: console
 
@@ -463,7 +463,7 @@ Install and configure Filebeat
 
    .. code-block:: console
 
-      # curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.4.tar.gz | tar -xvz -C /usr/share/filebeat/module
+      # curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-|WAZUH_FILEBEAT|.tar.gz | tar -xvz -C /usr/share/filebeat/module
 
 Deploying certificates
 ^^^^^^^^^^^^^^^^^^^^^^^

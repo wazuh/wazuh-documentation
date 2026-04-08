@@ -187,7 +187,7 @@ Before adding a new Wazuh server node, existing components must be adjusted to m
 
    .. note::
 
-      If the certificates were recreated as recommended in the :ref:`note <generating_new_certificates>` above.
+      If the certificates were recreated as recommended in the :ref:`generating_new_certificates` above.
 
       You will also have to redeploy the certificates on all your existing Wazuh nodes (indexer and dashboard).
 
@@ -556,14 +556,14 @@ Install and configure Filebeat
 
    .. code-block:: console
 
-      # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v4.14.2/extensions/elasticsearch/7.x/wazuh-template.json
+      # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_CURRENT|/extensions/elasticsearch/7.x/wazuh-template.json
       # chmod go+r /etc/filebeat/wazuh-template.json
 
 #. Install the Wazuh module for Filebeat:
 
    .. code-block:: console
 
-      # curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.4.tar.gz | tar -xvz -C /usr/share/filebeat/module
+      # curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-|WAZUH_FILEBEAT|.tar.gz | tar -xvz -C /usr/share/filebeat/module
 
 Deploying certificates
 ^^^^^^^^^^^^^^^^^^^^^^^

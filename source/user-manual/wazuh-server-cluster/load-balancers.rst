@@ -40,7 +40,6 @@ Perform the steps below to configure NGINX as a load balancer.
          }
          upstream mycluster {
          hash $remote_addr consistent;
-             server <MASTER_NODE_IP_ADDRESS>:1514;
              server <WORKER_NODE_IP_ADDRESS>:1514;
              server <WORKER_NODE_IP_ADDRESS>:1514;
          }
@@ -119,10 +118,10 @@ There are two main ways to install HAProxy.
          .. code-block:: none
             :class: output
 
-            HAProxy version 2.8.5-1ubuntu3 2024/04/01 - https://haproxy.org/
+            HAProxy version 2.8.16-0ubuntu0.24.04.1 2025/12/03 - https://haproxy.org/
             Status: long-term supported branch - will stop receiving fixes around Q2 2028.
-            Known bugs: http://www.haproxy.org/bugs/bugs-2.8.5.html
-            Running on: Linux 6.8.0-76060800daily20240311-generic #202403110203~1714077665~22.04~4c8e9a0 SMP PREEMPT_DYNAMIC Thu A x86_64
+            Known bugs: http://www.haproxy.org/bugs/bugs-2.8.16.html
+            Running on: Linux 6.14.0-1017-azure #17~24.04.1-Ubuntu SMP Mon Dec  1 20:10:50 UTC 2025 x86_64
 
    .. group-tab:: PPA Package
 
@@ -521,7 +520,7 @@ Perform the following steps to configure HAProxy to work with a Wazuh server clu
 
    The configuration above is made of the following sections defined below.
 
-   -  A *backend* section which is a set of Wazuh server cluster nodes that receive forwarded agent connections. It includes the following parameters:
+   -  A ``backend`` section, which is a set of Wazuh server cluster nodes that receive forwarded agent connections. It includes the following parameters:
 
       -  The load balancing mode.
       -  The load balance algorithm to use.
@@ -535,7 +534,7 @@ Perform the following steps to configure HAProxy to work with a Wazuh server clu
             balance leastconn
             server master_node <WAZUH_REGISTRY_HOST>:1515 check
 
-   -  A *frontend* section defines how to forward requests to backends. It's composed of the following parameters:
+   -  A ``frontend`` section defines how to forward requests to backends. It's composed of the following parameters:
 
       -  The type of load balancing.
       -  The port to bind the connections.
@@ -558,7 +557,7 @@ Perform the following steps to configure HAProxy to work with a Wazuh server clu
       :class: output
 
       * Starting haproxy haproxy
-      [NOTICE]   (13231) : haproxy version is 2.8.9-1ppa1~jammy
+      [NOTICE]   (13231) : haproxy version is 2.8.16-0ubuntu0.24.04.1
       [NOTICE]   (13231) : path to executable is /usr/sbin/haproxy
       [ALERT]    (13231) : config : parsing [/etc/haproxy/haproxy.cfg:3] : 'pidfile' already specified. Continuing.
 
@@ -567,7 +566,7 @@ Perform the following steps to configure HAProxy to work with a Wazuh server clu
 HAProxy helper
 ^^^^^^^^^^^^^^
 
-This is an optional tool to manage HAProxy configuration depending on the Wazuh server cluster status in real time. It provides the Wazuh manager with the ability to automatically balance the Wazuh agent TCP sessions.
+This is an optional tool that manages HAProxy configuration in real time based on the status of the Wazuh server cluster. It enables the Wazuh manager to automatically balance TCP sessions for Wazuh agents.
 
 Key features of HAProxy helper
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -604,9 +603,9 @@ To use this feature, you need a :ref:`HAProxy <lb_haproxy>` instance balancing t
 Dataplane API configuration
 ...........................
 
-The HAProxy helper uses the Dataplane API to communicate with HAProxy and update the configuration according to the changes in the Wazuh server cluster.
+The HAProxy helper uses the Dataplane API to communicate with HAProxy and update its configuration in response to changes in the Wazuh server cluster.
 
-This is the basic configuration for the Dataplane API. Replace ``<DATAPLANE_USER>`` and ``<DATAPLANE_PASSWORD>`` with the chosen user and password.
+To set this up, create a file at ``/etc/haproxy/dataplaneapi.yml`` and add the basic configuration for the Dataplane API. Replace ``<DATAPLANE_USER>`` and ``<DATAPLANE_PASSWORD>`` with the chosen user and password.
 
 .. tabs::
 
@@ -634,15 +633,13 @@ This is the basic configuration for the Dataplane API. Replace ``<DATAPLANE_USER
 
    .. group-tab:: HTTPS
 
-      .. note::
+      If you use HTTPS as the Dataplane API communication protocol, you must set the ``tls`` field and related subfields: ``tls_port``, ``tls_certificate``, and ``tls_key`` in the configuration. The ``tls_ca`` field is only necessary when using client-side certificates.
 
-         If you use HTTPS as the Dataplane API communication protocol, you must set the ``tls`` field and related subfields: ``tls_port``, ``tls_certificate`` and ``tls_key`` in the configuration. The ``tls_ca`` field is only necessary when using client-side certificates.
+      Run the following command to generate the certificate files for both the HAProxy instance and the Wazuh server:
 
-         Run the following command to generate the certificate files for both the HAProxy instance and the Wazuh server:
+      .. code-block:: console
 
-         .. code-block:: console
-
-            # openssl req -x509 -newkey rsa:4096 -keyout <KEY_FILE_NAME> -out <CERTIFICATE_FILE_NAME> -sha256 -nodes -addext "subjectAltName=DNS:<FQDN>" -subj "/C=US/ST=CA/O=Wazuh>/CN=<CommonName>"
+         # openssl req -x509 -newkey rsa:4096 -keyout <KEY_FILE_NAME> -out <CERTIFICATE_FILE_NAME> -sha256 -nodes -addext "subjectAltName=DNS:<FQDN>" -subj "/C=US/ST=CA/O=Wazuh>/CN=<CommonName>"
 
       .. code-block:: yaml
          :emphasize-lines: 15,16

@@ -26,7 +26,7 @@ The master node centralizes and coordinates worker nodes, ensuring the critical 
 
 -  Receiving and managing agent registration and deletion requests.
 -  Creating shared configuration groups.
--  Updating custom rules, decoders, SCA policies and CDB lists.
+-  Updating custom rules, decoders, SCA policies, and CDB lists.
 
 The Wazuh agent registration details, shared configuration, CDB list, custom SCA policies, custom decoders, and rules are synchronized from the master to the workers, ensuring that all Wazuh server nodes have the same configuration and rulesets. During synchronization, every version of these files on the worker node is overwritten with the files from the master node.
 

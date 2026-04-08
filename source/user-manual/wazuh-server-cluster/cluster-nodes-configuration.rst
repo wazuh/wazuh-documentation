@@ -80,7 +80,7 @@ Worker node
 
 #. Restart the worker node to apply the configuration changes:
 
-   .. code-block: console
+   .. code-block:: console
 
       # systemctl restart wazuh-manager
 
