@@ -6,18 +6,16 @@
 Configuration
 =============
 
-.. note::
-
-   Please review :doc:`securing the Wazuh server API <securing-api>` section for more information on how to protect the Wazuh server API.
+This section covers how to configure and secure the Wazuh server API. Proper configuration and hardening are essential for production environments to prevent unauthorized access and ensure reliable operation.
 
 .. _api_configuration_file:
 
 Wazuh server API configuration file
 -----------------------------------
 
-The Wazuh server API configuration is located in the ``/var/ossec/api/configuration/api.yaml`` file on the Wazuh server. By default, all settings are commented out. To apply a different configuration, uncomment and edit the desired line.
+The Wazuh server API configuration file is located at ``/var/ossec/api/configuration/api.yaml`` on the Wazuh server. By default, most settings are commented out. To apply a different configuration, uncomment and edit the desired line.
 
-Here are all the available settings for the ``/var/ossec/api/configuration/api.yaml`` configuration file. For more information on each of the settings, check the :ref:`configuration options <api_configuration_options>`:
+Below are some of the available settings for the ``/var/ossec/api/configuration/api.yaml`` configuration file. For more information on each of the settings, check the :ref:`configuration options <api_configuration_options>`:
 
 .. code-block:: yaml
 
@@ -92,7 +90,7 @@ Make sure to restart the Wazuh server API using the Wazuh manager service after 
 .. _api_configuration_options:
 
 API configuration options
--------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 host
 ^^^^
@@ -100,7 +98,7 @@ host
 +-------------------------------------------+---------------------+------------------------------------------------------------------------------------------+
 | Allowed values                            | Default value       | Description                                                                              |
 +===========================================+=====================+==========================================================================================+
-| A list of valid IP addresses or hostnames | ['0.0.0.0', '::']   | IP addresses or hostnames of the Wazuh manager where the Wazuh server API is running.    |
+| A list of valid IP addresses or hostnames | 0.0.0.0             | IP addresses or hostnames of the Wazuh manager where the Wazuh server API is running.    |
 +-------------------------------------------+---------------------+------------------------------------------------------------------------------------------+
 
 port
@@ -113,7 +111,7 @@ port
 +-------------------------------+---------------+----------------------------------------------+
 
 use_only_authd
-^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~
 
 .. deprecated:: 4.3.0
 
@@ -124,7 +122,7 @@ use_only_authd
 +----------------------+---------------+--------------------------------------------------------------------+
 
 drop_privileges
-^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~
 
 +----------------------+---------------+----------------------------------------------+
 | Allowed values       | Default value | Description                                  |
@@ -133,7 +131,7 @@ drop_privileges
 +----------------------+---------------+----------------------------------------------+
 
 experimental_features
-^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~
 
 +----------------------+---------------+-----------------------------------+
 | Allowed values       | Default value | Description                       |
@@ -142,7 +140,7 @@ experimental_features
 +----------------------+---------------+-----------------------------------+
 
 max_upload_size
-^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~
 
 +----------------------+---------------+------------------------------------------------------------------------------+
 | Allowed values       | Default value | Description                                                                  |
@@ -162,7 +160,7 @@ authentication_pool_size
 +------------------------------+---------------+------------------------------------------------------------------------------+
 
 intervals
-^^^^^^^^^^
+~~~~~~~~~
 
 +-----------------+----------------------+---------------+-----------------------------------------------------------------+
 | Sub-fields      | Allowed values       | Default value | Description                                                     |
@@ -171,7 +169,7 @@ intervals
 +-----------------+----------------------+---------------+-----------------------------------------------------------------+
 
 https
-^^^^^
+~~~~~
 
 +--------------+------------------------------------+----------------------------------+------------------------------------------------------------------------------------------------------------+
 | Sub-fields   | Allowed values                     | Default value                    | Description                                                                                                |
@@ -194,7 +192,7 @@ https
 +--------------+------------------------------------+----------------------------------+------------------------------------------------------------------------------------------------------------+
 
 logs
-^^^^
+~~~~
 
 +---------------------------+----------------------------------------------------------------------------------------+---------------+--------------------------------------------------------+
 | Sub-fields                | Allowed values                                                                         | Default value | Description                                            |
@@ -211,7 +209,7 @@ logs
 +---------------------------+----------------------------------------------------------------------------------------+---------------+--------------------------------------------------------+
 
 max_size
-^^^^^^^^
+~~~~~~~~
 
 +------------+-----------------------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------------+
 | Sub-fields | Allowed values                                | Default value | Description                                                                                                                |
@@ -225,7 +223,7 @@ max_size
 
 
 cors
-^^^^
+~~~~
 
 +-------------------+----------------------+---------------+-----------------------------------------------------------------------------------------------+
 | Sub-fields        | Allowed values       | Default value | Description                                                                                   |
@@ -244,7 +242,7 @@ cors
 .. _api_configuration_access:
 
 access
-^^^^^^
+~~~~~~
 +------------------------+----------------------+---------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Sub-fields             | Allowed values       | Default value | Description                                                                                                                                                                                                                                                                                                                                                                                   |
 +========================+======================+===============+===============================================================================================================================================================================================================================================================================================================================================================================================+
@@ -264,7 +262,7 @@ remote_commands (localfile and wodle "command")
 +------------+----------------------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Sub-fields | Allowed values       | Default value | Description                                                                                                                                                                                                                                                                                                                                 |
 +============+======================+===============+=============================================================================================================================================================================================================================================================================================================================================+
-| allow      | yes, true, no, false | true          | Allow uploading configurations with remote commands through the Wazuh server API. Setting this option to ``false`` prevents uploading ``ossec.conf`` files that contain the :ref:`wodle "command" option <wodle_command>` or the ``<command>`` option inside the :ref:`localfile tag <reference_ossec_localfile>`.                          |
+| allow      | yes, true, no, false | true          | Allow uploading configurations with remote commands through the Wazuh server API. Setting this option to ``false`` prevents uploading ``ossec.conf`` files that contain the :ref:`wodle "command" option <wodle_command>` or the ``<command>`` option inside the :ref:`localfile <reference_ossec_localfile>` tag.                          |
 +------------+----------------------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | exceptions | command list         | [ ]           | Set a list of commands allowed to be uploaded through the API. These exceptions can always be uploaded regardless of the ``allow`` configuration.                                                                                                                                                                                           |
 +------------+----------------------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -278,7 +276,7 @@ limits
 +------------+----------------------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Sub-fields | Allowed values       | Default value | Description                                                                                                                                                                                                                                                                                                                                 |
 +============+======================+===============+=============================================================================================================================================================================================================================================================================================================================================+
-| allow      | yes, true, no, false | true          | Allow uploading configurations with modified EPS limits through the Wazuh server API. Setting this option to ``false`` prevents uploading ``ossec.conf`` files if the ``<limits><eps>`` section inside the :ref:`global tag <reference_ossec_global>` has changed.                                                                          |
+| allow      | yes, true, no, false | true          | Allow uploading configurations with modified EPS limits through the Wazuh server API. Setting this option to ``false`` prevents uploading ``ossec.conf`` files if the ``<limits><eps>`` section inside the :ref:`global <reference_ossec_global>` tag has changed.                                                                          |
 +------------+----------------------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 agents
@@ -293,20 +291,20 @@ agents
 | allow      | yes, true, no, false | true          | Allow uploading configurations that accept higher agent versions through the Wazuh server API. Setting this option to ``false`` prevents uploading ``ossec.conf`` files that contain the ``<allow_higher_versions>`` section with the ``yes`` value inside the :ref:`auth <reference_ossec_auth>` or :ref:`remote <reference_ossec_remote>` tags.  |
 +------------+----------------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-indexer
-~~~~~~~
+.. rubric:: indexer
+   :class: h5
 
 +------------+----------------------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Sub-fields | Allowed values       | Default value | Description                                                                                                                                                                                                                                                                                                                                 |
 +============+======================+===============+=============================================================================================================================================================================================================================================================================================================================================+
-| allow      | yes, true, no, false | true          | Allows uploading an updated :doc:`indexer configuration section </user-manual/reference/ossec-conf/indexer>` through the Wazuh server API. Setting this option to ``false`` prevents updating the indexer configuration when uploading ``ossec.conf``.                                                                                      |
+| allow      | yes, true, no, false | true          | Allows uploading an updated :doc:`indexer configuration </user-manual/reference/ossec-conf/indexer>` section through the Wazuh server API. Setting this option to ``false`` prevents updating the indexer configuration when uploading ``ossec.conf``.                                                                                      |
 +------------+----------------------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-integrations
-~~~~~~~~~~~~
+.. rubric:: integrations
+   :class: h5
 
 .. rubric:: virustotal (public_key)
-   :class: h5
+   :class: h6
 
 +-----------------+----------------------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Sub-fields      | Allowed values       | Default value | Description                                                                                                                                                                                                                                                                                                                                 |
@@ -319,16 +317,74 @@ integrations
 Wazuh server API security configuration
 ---------------------------------------
 
-You can query and modify the security configuration, including ``auth_token_exp_timeout`` and ``rbac_mode`` settings, exclusively through the Wazuh server API endpoints: :api-ref:`GET /security/config <operation/api.controllers.security_controller.get_security_config>`, :api-ref:`PUT /security/config <operation/api.controllers.security_controller.put_security_config>`, and :api-ref:`DELETE /security/config <operation/api.controllers.security_controller.delete_security_config>`. The ``auth_token_exp_timeout`` defines the duration in seconds before an authentication token expires and requires renewal. The ``rbac_mode`` determines the overall behavior of the Role-Based Access Control system, which can be configured to either broadly permit or restrict access to resources and endpoints based on user roles and permissions. Refer to the :doc:`Role-Based Access Control <rbac/index>` documentation for more details. The configuration is applied to every Wazuh server API in a cluster if applicable.
+Security-related settings such as token expiration ``auth_token_exp_timeout``, and RBAC behavior ``rbac_mode`` are managed exclusively through the Wazuh server API endpoints:
+
+-  :api-ref:`GET /security/config <operation/api.controllers.security_controller.get_security_config>` - View current security configuration
+-  :api-ref:`PUT /security/config <operation/api.controllers.security_controller.put_security_config>` - Update security settings
+-  :api-ref:`DELETE /security/config <operation/api.controllers.security_controller.delete_security_config>` - Reset to default values
+
+The ``auth_token_exp_timeout`` defines the duration in seconds before an authentication token expires and requires renewal. The ``rbac_mode`` determines the overall behavior of the Role-Based Access Control system, which can be configured to either broadly permit or restrict access to resources and endpoints based on user roles and permissions. Refer to the :doc:`Role-Based Access Control <rbac/index>` documentation for more details. The configuration is applied to every Wazuh server API in a cluster if applicable.
 
 For more information on each of the settings, please check the :ref:`security configuration options <api_security_configuration_options>`.
 
-.. code-block:: none
+Example security configuration settings
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-   auth_token_exp_timeout: 900
-   rbac_mode: white
+Use the following API endpoints (requires administrator privileges and a valid JWT token).
 
-.. note::
+All examples assume you have ``$TOKEN`` set from :ref:`authentication steps <api_log_in>`.
+
+**View current settings (GET /security/config)**
+
+.. code-block:: console
+
+   # curl -k -X GET "https://<WAZUH_MANAGER_IP>:55000/security/config?pretty=true" \
+        -H "Authorization: Bearer $TOKEN"
+
+.. code-block:: json
+   :class: output
+
+   {
+     "data": {
+       "auth_token_exp_timeout": 900,
+       "rbac_mode": "white"
+     },
+     "error": 0
+   }
+
+**Update settings (PUT /security/config)**
+
+-  For ``auth_token_exp_timeout``: Set the token expiration time in seconds (for example, 1800 for 30 minutes).
+-  For ``rbac_mode``: Choose ``white`` (allow only permitted resources – more secure) or ``black`` (deny only restricted resources).
+
+**Example: Update token expiration to 30 minutes**
+
+.. code-block:: console
+
+   # curl -k -X PUT "https://<WAZUH_MANAGER_IP>:55000/security/config" \
+        -H "Authorization: Bearer $TOKEN" \
+        -H "Content-Type: application/json" \
+        -d '{"auth_token_exp_timeout": 1800}'
+
+**Example: Change RBAC mode to black**
+
+.. code-block:: console
+
+   # curl -k -X PUT "https://<WAZUH_MANAGER_IP>:55000/security/config" \
+        -H "Authorization: Bearer $TOKEN" \
+        -H "Content-Type: application/json" \
+        -d '{"rbac_mode": "black"}'
+
+**Reset to defaults (DELETE /security/config)**
+
+This resets both settings back to defaults (``auth_token_exp_timeout``: ``900``, ``rbac_mode``: ``white``).
+
+.. code-block:: console
+
+   # curl -k -X DELETE "https://<WAZUH_MANAGER_IP>:55000/security/config?pretty=true" \
+        -H "Authorization: Bearer $TOKEN"
+
+.. warning::
 
    For security reasons, changing the security configuration revokes all JWTs. You will need to log in and obtain a new token after the change.
 
