@@ -98,7 +98,7 @@ host
 +-------------------------------------------+---------------------+------------------------------------------------------------------------------------------+
 | Allowed values                            | Default value       | Description                                                                              |
 +===========================================+=====================+==========================================================================================+
-| A list of valid IP addresses or hostnames | 0.0.0.0             | IP addresses or hostnames of the Wazuh manager where the Wazuh server API is running.    |
+| A list of valid IP addresses or hostnames | ['0.0.0.0', '::']   | IP addresses or hostnames of the Wazuh manager where the Wazuh server API is running.    |
 +-------------------------------------------+---------------------+------------------------------------------------------------------------------------------+
 
 port
