@@ -232,7 +232,7 @@ You assign one or more policies to a role using the :api-ref:`POST /security/rol
 
 The :api-ref:`POST /security/roles/{role_id}/policies <operation/api.controllers.security_controller.set_role_policy>` endpoint includes an optional ``position`` parameter that determines the order of policy application, as some policies may conflict. For details on managing these conflicts, see the :ref:`rbac_priority` section.
 
-For example, to assign the ``customer_x_agents`` policy created in the :ref:`create a new policy <create-a-new-policy>` section to the ``team-alpha`` role with *role_id* ``100`` and *policy_id* ``100``, use the following request:
+For example, to assign the ``customer_x_agents`` policy created in the `Create a new policy`_ section to the ``team-alpha`` role with *role_id* ``100`` and *policy_id* ``100``, use the following request:
 
 .. code-block:: console
 
