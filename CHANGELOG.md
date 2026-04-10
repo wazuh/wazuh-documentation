@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file.
 ### Changed
 
 - **Post-release**: Updated command to change ownership of the private key file in the *PingOne* Single Sign-On documentation. ([#9432](https://github.com/wazuh/wazuh-documentation/pull/9432))
+- **Post-release**: Updated the **Wazuh server API** documentation. ([#9468](https://github.com/wazuh/wazuh-documentation/pull/9468))
 
 ### Fixed
 
