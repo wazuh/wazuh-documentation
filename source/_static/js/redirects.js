@@ -229,30 +229,15 @@ redirections.push(
     '4.14': '/user-manual/agent/index.html',
   },
   {
-    'target': ['4.13=>4.14'],
-    '4.13': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/certificates-creation.html',
-    '4.14': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/all-in-one-deployment.html#certificate-creation',
-  },
-  {
-    'target': ['4.13=>4.14'],
-    '4.13': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/configuration-to-connect-with-new-node.html',
-    '4.14': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/all-in-one-deployment.html#configuring-existing-components-to-connect-with-the-new-node',
-  },
-  {
-    'target': ['4.13=>4.14'],
-    '4.13': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/server-nodes-installation.html',
-    '4.14': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/all-in-one-deployment.html#wazuh-server-worker-node-s-installation',
-  },
-  {
-    'target': ['4.13=>4.14'],
-    '4.13': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/testing-the-cluster.html',
-    '4.14': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/all-in-one-deployment.html#testing-the-cluster',
-  },
-  {
     'target': ['4.14=>4.13'],
     '4.13': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/certificates-creation.html',
     '4.14': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/index.html',
   },
+  {
+    'target': ['4.14=>4.13'],
+    '4.13': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/distributed-deployment.html',
+    '4.14': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/index.html',
+  },    
   {
     'target': ['4.13=>4.14', '4.14=>4.13'],
     '4.13': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/certificates-creation.html#all-in-one-deployment',
