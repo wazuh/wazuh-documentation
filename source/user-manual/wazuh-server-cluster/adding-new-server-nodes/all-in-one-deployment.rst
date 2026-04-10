@@ -17,6 +17,8 @@ To add a Wazuh server node to your all-in-one Wazuh deployment, complete the fol
 -  `Wazuh server worker node(s) installation`_
 -  `Testing the cluster`_
 
+.. _server_nodes_certificate_creation_all_in_one:
+
 Certificate creation
 --------------------
 

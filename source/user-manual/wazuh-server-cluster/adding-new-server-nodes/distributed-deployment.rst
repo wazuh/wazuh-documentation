@@ -17,6 +17,8 @@ To scale your distributed deployment by adding a node, complete these steps:
 -  `Wazuh server worker node(s) installation`_
 -  `Testing the cluster`_
 
+.. _server_nodes_certificate_creation_distributed:
+
 Certificate creation
 --------------------
 
