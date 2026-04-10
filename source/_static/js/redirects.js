@@ -234,7 +234,7 @@ redirections.push(
     '4.14': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/index.html',
   },
   {
-    'target': ['4.14=>4.13'],
+    'target': ['4.13=>4.14'],
     '4.13': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/distributed-deployment.html',
     '4.14': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/index.html',
   },    
