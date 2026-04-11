@@ -287,3 +287,29 @@ Check the following log files:
 .. note::
 
    The Wazuh indexer uses the ``/var/log`` folder to store logs by default.
+
+
+Indexer-connector bulk indexing failures
+-----------------------------------------
+
+When the indexer-connector processes a bulk indexing operation, individual
+documents may fail even when the server returns a general success response.
+These failures are logged in ``/var/ossec/logs/ossec.log``.
+
+To check for bulk indexing failures, run:
+
+.. code-block:: console
+
+   # cat /var/ossec/logs/ossec.log | grep -i "Indexing failure"
+
+A failure log entry looks like:
+
+.. code-block:: none
+
+   ERROR: Indexing failure for index operation (status 400): document missing field
+
+To check for version conflicts that were automatically handled:
+
+.. code-block:: console
+
+   # cat /var/ossec/logs/ossec.log | grep -i "version conflict"
