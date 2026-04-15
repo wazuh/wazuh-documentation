@@ -58,7 +58,7 @@ To uninstall the Wazuh agent, ensure the original Windows installer file is in y
 
 .. code-block:: doscon
 
-   > msiexec.exe /x wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi /qn
+   > Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* , HKLM:\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Where-Object { $_.DisplayName -like "*Wazuh Agent*" } | ForEach-Object { msiexec.exe /x $_.PSChildName /qn }
 
 The Wazuh agent is now completely removed from your Windows endpoint.
 
