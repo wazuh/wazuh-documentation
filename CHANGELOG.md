@@ -14,10 +14,23 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 - Added a reference for the Linux ARM WPK packages to the WPK list. ([#9317](https://github.com/wazuh/wazuh-documentation/pull/9317))
+- Added note to the *Installing the Wazuh agent* section in the *Deploying with Ansible* documentation about Amazon Linux 2 systems. ([#9430](https://github.com/wazuh/wazuh-documentation/pull/9430))
+
+### Changed
+
+- **Post-release**: Updated command to change ownership of the private key file in the *PingOne* Single Sign-On documentation. ([#9432](https://github.com/wazuh/wazuh-documentation/pull/9432))
+- **Post-release**: Updated the **Wazuh server API** documentation. ([#9468](https://github.com/wazuh/wazuh-documentation/pull/9468))
+- **Post-release**: Updated the *Wazuh server cluster* documentation. ([#9436](https://github.com/wazuh/wazuh-documentation/pull/9436))
 
 ### Fixed
 
 - Added a step to start the Docker service upon installation in the *Monitoring Docker events* PoC. ([#9376](https://github.com/wazuh/wazuh-documentation/pull/9376))
+- **Post-release**: Added steps to the Single Sign-On documentation. ([#9392](https://github.com/wazuh/wazuh-documentation/pull/9392)) ([#9395](https://github.com/wazuh/wazuh-documentation/pull/9395))
+- **Post-release**: Fixed AARCH64 WPK package download links. ([#9392](https://github.com/wazuh/wazuh-documentation/pull/9392)) ([#9398](https://github.com/wazuh/wazuh-documentation/pull/9398))
+
+### Changed
+
+- **Post-release**: Updated the *Using Wazuh for GDPR compliance* documentation. ([#9431](https://github.com/wazuh/wazuh-documentation/pull/9431))
 
 ## [v4.14.3]
 
