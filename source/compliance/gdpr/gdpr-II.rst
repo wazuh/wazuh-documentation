@@ -6,14 +6,14 @@
 GDPR II, Principles <gdpr_II>
 =============================
 
-This chapter describes requirements concerning the basic principles of GDPR for processing personal data.
+This chapter describes the GDPR requirements for processing personal data.
 
-Chapter II, Article 5 Head 1(f)
--------------------------------
+Chapter II, Article 5 Head 1 (f)
+--------------------------------
 
-**Principles relating to processing of personal data, Head 1 (f)**: *“Personal data shall be processed in a manner that ensures appropriate security of the personal data, including protection against unauthorized or unlawful processing and against accidental loss, destruction or damage, using appropriate technical or organizational measures (integrity and confidentiality).”*
+**Principles relating to the processing of personal data, Head 1 (f)**: *“Personal data shall be processed in a manner that ensures appropriate security of the personal data, including protection against unauthorized or unlawful processing and against accidental loss, destruction or damage, using appropriate technical or organizational measures (integrity and confidentiality).”*
 
-The article requires confidentiality and integrity when processing user data. The :doc:`File Integrity Monitoring (FIM) </user-manual/capabilities/file-integrity/index>` module of Wazuh helps with this requirement by monitoring files and folders. The Wazuh FIM module generates alerts when it detects file creation, modification, or deletion events. The FIM module keeps a record of the cryptographic checksum and other attributes from a file or a registry key in the case of a Windows endpoint, and regularly compares them to the current attributes of the file.
+The article requires confidentiality and integrity in the processing of user data. The :doc:`File Integrity Monitoring (FIM) </user-manual/capabilities/file-integrity/index>` module of Wazuh helps with this requirement by monitoring files and folders. The Wazuh FIM module generates alerts when it detects file creation, modification, or deletion events. The FIM module maintains records of cryptographic checksums and other attributes for a file or registry key on a Windows endpoint and regularly compares them against the file's current attributes.
 
 Below are some examples of Wazuh rules tagged as ``gdpr_II_5.1.f``:
 

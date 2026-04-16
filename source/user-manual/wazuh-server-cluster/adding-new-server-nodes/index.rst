@@ -6,30 +6,29 @@
 Adding new Wazuh server nodes
 =============================
 
-You can upscale your Wazuh server cluster horizontally by adding new nodes. This allows for better handling of a larger number of Wazuh agents. Configuring :doc:`failover mode or using a load balancer to point agents </user-manual/wazuh-server-cluster/agent-connections>` to the Wazuh server cluster can provide redundancy in case of node failures. It also improves the scalability and resilience of your security monitoring infrastructure.
+You can upscale your Wazuh server cluster horizontally by adding new Wazuh server nodes. This allows for better handling of a larger number of Wazuh agents. Configuring :doc:`failover mode or using a load balancer to direct Wazuh agents </user-manual/wazuh-server-cluster/agent-connections>` to the Wazuh server cluster provides redundancy in case of node failures. It also improves the scalability, availability, and resilience of your security monitoring infrastructure.
 
-The upscaling process involves creating certificates necessary for installation, followed by configuring existing components to establish connections with the new Wazuh server node(s). Then installing and configuring the new Wazuh server node(s), and finally testing the cluster to ensure the new nodes have joined.
+The upscaling process involves creating the certificates required for installation, followed by configuring existing components to establish connections to the new Wazuh server node(s). Then, install and configure the new Wazuh server node(s), and finally test the cluster to ensure the new nodes have joined.
 
-We have organized the steps for upscaling the Wazuh server into two subsections: one for an all-in-one deployment and the other for a distributed deployment. Your choice between these methods depends on your existing deployment.
+The steps for scaling the Wazuh server are divided into two subsections: all-in-one and distributed deployments. The appropriate method depends on your existing deployment model and the target infrastructure for scaling.
 
--  **All-in-one deployment**:
+-  :ref:`All-in-one deployment <all-in-one-deployment>`:
 
-   An all-in-one deployment refers to using the :ref:`Wazuh installation assistant <quickstart_installing_wazuh>` or the pre-built virtual machine image in Open Virtual Appliance (OVA) format provided by Wazuh. This deployment method installs all the Wazuh central components on a single endpoint. If you have a Wazuh all-in-one setup, follow the steps outlined in the "All-in-one deployment" subsections to upscale your Wazuh server cluster.
+   Follow the steps outlined in the "All-in-one deployment" subsection to scale up your Wazuh server.
 
--  **Distributed deployment**:
+-  :ref:`Distributed deployment <distributed-deployment>`:
 
-   The distributed deployment refers to when the Wazuh components are installed as separate entities following the step-by-step installation guide (applicable to the Wazuh :doc:`indexer </installation-guide/wazuh-indexer/step-by-step>`, :doc:`server </installation-guide/wazuh-server/step-by-step>`, and :doc:`dashboard </installation-guide/wazuh-dashboard/step-by-step>`) or using the install assistant (for the Wazuh :doc:`indexer </installation-guide/wazuh-indexer/installation-assistant>`, :doc:`server </installation-guide/wazuh-server/installation-assistant>`, and :doc:`dashboard </installation-guide/wazuh-dashboard/installation-assistant>`). For an existing distributed deployment, refer to the "Distributed deployment" subsections to upscale your Wazuh server.
+   Follow the steps outlined in the "Distributed deployment" subsections to scale up your server.
 
-Ensure you select the appropriate sub-section based on your existing deployment. If you are unsure which method aligns with your infrastructure, consider reviewing your deployment architecture before proceeding.
+If you are unsure which method aligns with your infrastructure, we recommend reviewing your deployment architecture before proceeding.
 
 .. note::
 
-   You need root user privileges to execute the commands in the next sub-sections.
+   You need root user privileges to execute the commands below.
 
 .. toctree::
    :titlesonly:
+   :hidden:
 
-   certificates-creation
-   configuration-to-connect-with-new-node
-   server-nodes-installation
-   testing-the-cluster
+   all-in-one-deployment
+   distributed-deployment

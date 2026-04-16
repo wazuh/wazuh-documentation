@@ -92,6 +92,11 @@ newUrls['4.14'] = [
   '/user-manual/user-administration/single-sign-on/okta.html',
   '/user-manual/user-administration/single-sign-on/onelogin.html',
   '/user-manual/user-administration/single-sign-on/pingone.html',
+  '/user-manual/api/requests-responses.html',
+  '/user-manual/api/api-examples.html',
+  '/user-manual/api/rbac/configuration.html',
+  '/user-manual/wazuh-server-cluster/adding-new-server-nodes/all-in-one-deployment.html',
+  '/user-manual/wazuh-server-cluster/adding-new-server-nodes/distributed-deployment.html',
 ]
 
 /* Redirections 4.13—4.14  */
@@ -227,6 +232,121 @@ redirections.push(
     '4.13': '/user-manual/agent/agent-management/index.html',
     '4.14': '/user-manual/agent/index.html',
   },
+  {
+    'target': ['4.13=>4.14', '4.14=>4.13'],
+    '4.13': '/user-manual/api/getting-started.html#understanding-the-wazuh-server-api-request-and-response',
+    '4.14': '/user-manual/api/requests-responses.html',
+  },
+  {
+    'target': ['4.13=>4.14', '4.14=>4.13'],
+    '4.13': 'user-manual/api/getting-started.html#practical-examples-of-wazuh-server-api-usage',
+    '4.14': '/user-manual/api/api-examples.html',
+  },
+  {
+    'target': ['4.14=>4.13'],
+    '4.13': '/user-manual/api/rbac/how-it-works.html',
+    '4.14': '/user-manual/api/rbac/configuration.html',
+  },
+  {
+    'target': ['4.13=>4.14', '4.14=>4.13'],
+    '4.13': '/user-manual/api/rbac/how-it-works.html#set-rbac-mode',
+    '4.14': '/user-manual/api/rbac/configuration.html#set-rbac-mode',
+  },
+  {
+    'target': ['4.13=>4.14', '4.14=>4.13'],
+    '4.13': '/user-manual/api/rbac/how-it-works.html#create-a-new-policy',
+    '4.14': '/user-manual/api/rbac/configuration.html#create-a-new-policy',
+  },
+  {
+    'target': ['4.13=>4.14', '4.14=>4.13'],
+    '4.13': '/user-manual/api/rbac/how-it-works.html#create-a-new-role',
+    '4.14': '/user-manual/api/rbac/configuration.html#create-a-new-role',
+  },
+  {
+    'target': ['4.13=>4.14', '4.14=>4.13'],
+    '4.13': '/user-manual/api/rbac/how-it-works.html#create-a-new-user',
+    '4.14': '/user-manual/api/rbac/configuration.html#create-a-new-user',
+  },
+  {
+    'target': ['4.13=>4.14', '4.14=>4.13'],
+    '4.13': '/user-manual/api/rbac/how-it-works.html#edit-allow-run-as',
+    '4.14': '/user-manual/api/rbac/configuration.html#edit-allow-run-as',
+  },
+  {
+    'target': ['4.13=>4.14', '4.14=>4.13'],
+    '4.13': '/user-manual/api/rbac/how-it-works.html#assign-policies-to-roles',
+    '4.14': '/user-manual/api/rbac/configuration.html#assign-policies-to-roles',
+  },
+  {
+    'target': ['4.13=>4.14', '4.14=>4.13'],
+    '4.13': '/user-manual/api/rbac/how-it-works.html#create-a-new-rule',
+    '4.14': '/user-manual/api/rbac/configuration.html#create-a-new-rule',
+  },
+  {
+    'target': ['4.13=>4.14', '4.14=>4.13'],
+    '4.13': '/user-manual/api/rbac/how-it-works.html#assign-rules-to-roles',
+    '4.14': '/user-manual/api/rbac/configuration.html#assign-rules-to-roles',
+  },
+  {
+    'target': ['4.13=>4.14', '4.14=>4.13'],
+    '4.13': '/user-manual/api/rbac/how-it-works.html#assign-roles-to-a-user',
+    '4.14': '/user-manual/api/rbac/configuration.html#assign-roles-to-a-user',
+  },
+  {
+    'target': ['4.13=>4.14', '4.14=>4.13'],
+    '4.13': '/user-manual/api/rbac/how-it-works.html#priority-of-roles-and-policies',
+    '4.14': '/user-manual/api/rbac/configuration.html#priority-of-roles-and-policies',
+  },
+  {
+    'target': ['4.13=>4.14'],
+    '4.13': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/certificates-creation.html',
+    '4.14': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/index.html',
+  },
+  {
+    'target': ['4.13=>4.14'],
+    '4.13': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/distributed-deployment.html',
+    '4.14': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/index.html',
+  },    
+  {
+    'target': ['4.13=>4.14', '4.14=>4.13'],
+    '4.13': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/certificates-creation.html#all-in-one-deployment',
+    '4.14': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/all-in-one-deployment.html#certificate-creation',
+  },
+  {
+    'target': ['4.13=>4.14', '4.14=>4.13'],
+    '4.13': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/configuration-to-connect-with-new-node.html#all-in-one-deployment',
+    '4.14': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/all-in-one-deployment.html#configuring-existing-components-to-connect-with-the-new-node',
+  },
+  {
+    'target': ['4.13=>4.14', '4.14=>4.13'],
+    '4.13': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/server-nodes-installation.html#all-in-one-deployment',
+    '4.14': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/all-in-one-deployment.html#wazuh-server-worker-node-s-installation',
+  },
+  {
+    'target': ['4.13=>4.14', '4.14=>4.13'],
+    '4.13': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/testing-the-cluster.html#all-in-one-deployment',
+    '4.14': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/all-in-one-deployment.html#testing-the-cluster',
+  },
+  {
+    'target': ['4.13=>4.14', '4.14=>4.13'],
+    '4.13': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/certificates-creation.html#distributed-deployment',
+    '4.14': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/distributed-deployment.html#certificate-creation',
+  },
+  {
+    'target': ['4.13=>4.14', '4.14=>4.13'],
+    '4.13': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/configuration-to-connect-with-new-node.html#distributed-deployment',
+    '4.14': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/distributed-deployment.html#configuring-existing-components-to-connect-with-the-new-node',
+  },
+  {
+    'target': ['4.13=>4.14', '4.14=>4.13'],
+    '4.13': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/server-nodes-installation.html#distributed-deployment',
+    '4.14': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/distributed-deployment.html#wazuh-server-worker-node-s-installation',
+  },
+  {
+    'target': ['4.13=>4.14', '4.14=>4.13'],
+    '4.13': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/testing-the-cluster.html#distributed-deployment',
+    '4.14': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/distributed-deployment.html#testing-the-cluster',
+  },
 );
 
 /* Pages no longer available in 4.14 (this is not required if there is a redirection for this url) */
@@ -258,6 +378,10 @@ removedUrls['4.14'] = [
   '/user-manual/user-administration/single-sign-on/read-only/onelogin.html',
   '/user-manual/user-administration/single-sign-on/read-only/pingone.html',
   '/user-manual/agent/agent-management/index.html',
+  '/user-manual/wazuh-server-cluster/adding-new-server-nodes/certificates-creation.html',
+  '/user-manual/wazuh-server-cluster/adding-new-server-nodes/configuration-to-connect-with-new-node.html',
+  '/user-manual/wazuh-server-cluster/adding-new-server-nodes/server-nodes-installation.html',
+  '/user-manual/wazuh-server-cluster/adding-new-server-nodes/testing-the-cluster.html',
 ];
 
 /* *** RELEASE 4.13 ****/
