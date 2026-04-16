@@ -9,22 +9,39 @@ WPK List
 Linux
 -----
 
+<<<<<<< HEAD
 .. |WPK_Linux_DEB_AMD64| replace:: `wazuh_agent_v|WAZUH_CURRENT|_linux_amd64.deb.wpk <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/wpk/linux/deb/amd64/wazuh_agent_v|WAZUH_CURRENT|_linux_amd64.deb.wpk>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_agent_v|WAZUH_CURRENT|_linux_amd64.deb.wpk.sha512>`__)
 .. |WPK_Linux_RPM_X86_64| replace:: `wazuh_agent_v|WAZUH_CURRENT|_linux_x86_64.rpm.wpk <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/wpk/linux/rpm/x86_64/wazuh_agent_v|WAZUH_CURRENT|_linux_x86_64.rpm.wpk>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_agent_v|WAZUH_CURRENT|_linux_x86_64.rpm.wpk.sha512>`__)
 .. |WPK_Linux_DEB_ARM64| replace:: `wazuh_agent_v|WAZUH_CURRENT|_linux_arm64.deb.wpk <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/wpk/linux/deb/arm64/wazuh_agent_v|WAZUH_CURRENT|_linux_arm64.deb.wpk>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_agent_v|WAZUH_CURRENT|_linux_arm64.deb.wpk.sha512>`__)
 .. |WPK_Linux_RPM_AARCH64| replace:: `wazuh_agent_v|WAZUH_CURRENT|_linux_aarch64.rpm.wpk <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/wpk/linux/rpm/aarch64/wazuh_agent_v|WAZUH_CURRENT|_linux_aarch64.rpm.wpk>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_agent_v|WAZUH_CURRENT|_linux_aarch64.rpm.wpk.sha512>`__)
+=======
+.. |WPK_Linux_DEB| replace:: `wazuh_agent_v|WAZUH_CURRENT|_linux_amd64.deb.wpk <https://packages.wazuh.com/4.x/wpk/linux/deb/amd64/wazuh_agent_v|WAZUH_CURRENT|_linux_amd64.deb.wpk>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_agent_v|WAZUH_CURRENT|_linux_amd64.deb.wpk.sha512>`__)
+.. |WPK_Linux_DEB_ARM64| replace:: `wazuh_agent_v|WAZUH_CURRENT|_linux_arm64.deb.wpk <https://packages.wazuh.com/4.x/wpk/linux/deb/arm64/wazuh_agent_v|WAZUH_CURRENT|_linux_arm64.deb.wpk>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_agent_v|WAZUH_CURRENT|_linux_arm64.deb.wpk.sha512>`__)
+.. |WPK_Linux_RPM| replace:: `wazuh_agent_v|WAZUH_CURRENT|_linux_x86_64.rpm.wpk <https://packages.wazuh.com/4.x/wpk/linux/rpm/x86_64/wazuh_agent_v|WAZUH_CURRENT|_linux_x86_64.rpm.wpk>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_agent_v|WAZUH_CURRENT|_linux_x86_64.rpm.wpk.sha512>`__)
+.. |WPK_Linux_RPM_AARCH64| replace:: `wazuh_agent_v|WAZUH_CURRENT|_linux_aarch64.rpm.wpk <https://packages.wazuh.com/4.x/wpk/linux/rpm/aarch64/wazuh_agent_v|WAZUH_CURRENT|_linux_aarch64.rpm.wpk>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_agent_v|WAZUH_CURRENT|_linux_aarch64.rpm.wpk.sha512>`__)
+>>>>>>> origin/4.14.6
 .. |WAZUH_CUR_VER| replace:: |WAZUH_CURRENT|
 
 +--------------+-----------------+---------------------+-------------------------------+
 | Distribution | Version         |     Architecture    | WPK Package                   |
 +==============+=================+=====================+===============================+
+<<<<<<< HEAD
 |  Linux (deb) | |WAZUH_CUR_VER| |    x86_64/AMD64     | |WPK_Linux_DEB_AMD64|         |
+=======
+|  Linux (deb) | |WAZUH_CUR_VER| |    AMD64            | |WPK_Linux_DEB|               |
+>>>>>>> origin/4.14.6
 +--------------+-----------------+---------------------+-------------------------------+
 |  Linux (deb) | |WAZUH_CUR_VER| |    ARM64/aarch64    | |WPK_Linux_DEB_ARM64|         |
 +--------------+-----------------+---------------------+-------------------------------+
+<<<<<<< HEAD
 |  Linux (rpm) | |WAZUH_CUR_VER| |    x86_64/AMD64     | |WPK_Linux_RPM_X86_64|        |
 +--------------+-----------------+---------------------+-------------------------------+
 |  Linux (rpm) | |WAZUH_CUR_VER| |    ARM64/aarch64    | |WPK_Linux_RPM_AARCH64|       |
+=======
+|  Linux (rpm) | |WAZUH_CUR_VER| |    x86_64           | |WPK_Linux_RPM|               |
++--------------+-----------------+---------------------+-------------------------------+
+|  Linux (rpm) | |WAZUH_CUR_VER| |    AARCH64          | |WPK_Linux_RPM_AARCH64|       |
+>>>>>>> origin/4.14.6
 +--------------+-----------------+---------------------+-------------------------------+
 
 .. note::
