@@ -40,7 +40,6 @@ Perform the steps below to configure NGINX as a load balancer.
          }
          upstream mycluster {
          hash $remote_addr consistent;
-             server <MASTER_NODE_IP_ADDRESS>:1514;
              server <WORKER_NODE_IP_ADDRESS>:1514;
              server <WORKER_NODE_IP_ADDRESS>:1514;
          }
@@ -119,10 +118,10 @@ There are two main ways to install HAProxy.
          .. code-block:: none
             :class: output
 
-            HAProxy version 2.8.5-1ubuntu3 2024/04/01 - https://haproxy.org/
+            HAProxy version 2.8.16-0ubuntu0.24.04.1 2025/12/03 - https://haproxy.org/
             Status: long-term supported branch - will stop receiving fixes around Q2 2028.
-            Known bugs: http://www.haproxy.org/bugs/bugs-2.8.5.html
-            Running on: Linux 6.8.0-76060800daily20240311-generic #202403110203~1714077665~22.04~4c8e9a0 SMP PREEMPT_DYNAMIC Thu A x86_64
+            Known bugs: http://www.haproxy.org/bugs/bugs-2.8.16.html
+            Running on: Linux 6.14.0-1017-azure #17~24.04.1-Ubuntu SMP Mon Dec  1 20:10:50 UTC 2025 x86_64
 
    .. group-tab:: PPA Package
 
@@ -521,7 +520,7 @@ Perform the following steps to configure HAProxy to work with a Wazuh server clu
 
    The configuration above is made of the following sections defined below.
 
-   -  A *backend* section which is a set of Wazuh server cluster nodes that receive forwarded agent connections. It includes the following parameters:
+   -  A ``backend`` section, which is a set of Wazuh server cluster nodes that receive forwarded agent connections. It includes the following parameters:
 
       -  The load balancing mode.
       -  The load balance algorithm to use.
@@ -535,7 +534,7 @@ Perform the following steps to configure HAProxy to work with a Wazuh server clu
             balance leastconn
             server master_node <WAZUH_REGISTRY_HOST>:1515 check
 
-   -  A *frontend* section defines how to forward requests to backends. It's composed of the following parameters:
+   -  A ``frontend`` section defines how to forward requests to backends. It's composed of the following parameters:
 
       -  The type of load balancing.
       -  The port to bind the connections.
@@ -558,7 +557,7 @@ Perform the following steps to configure HAProxy to work with a Wazuh server clu
       :class: output
 
       * Starting haproxy haproxy
-      [NOTICE]   (13231) : haproxy version is 2.8.9-1ppa1~jammy
+      [NOTICE]   (13231) : haproxy version is 2.8.16-0ubuntu0.24.04.1
       [NOTICE]   (13231) : path to executable is /usr/sbin/haproxy
       [ALERT]    (13231) : config : parsing [/etc/haproxy/haproxy.cfg:3] : 'pidfile' already specified. Continuing.
 
@@ -567,7 +566,7 @@ Perform the following steps to configure HAProxy to work with a Wazuh server clu
 HAProxy helper
 ^^^^^^^^^^^^^^
 
-This is an optional tool to manage HAProxy configuration depending on the Wazuh server cluster status in real time. It provides the Wazuh manager with the ability to automatically balance the Wazuh agent TCP sessions.
+This is an optional tool that manages HAProxy configuration in real time based on the status of the Wazuh server cluster. It enables the Wazuh manager to automatically balance TCP sessions for Wazuh agents.
 
 Key features of HAProxy helper
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -604,9 +603,9 @@ To use this feature, you need a :ref:`HAProxy <lb_haproxy>` instance balancing t
 Dataplane API configuration
 ...........................
 
-The HAProxy helper uses the Dataplane API to communicate with HAProxy and update the configuration according to the changes in the Wazuh server cluster.
+The HAProxy helper uses the Dataplane API to communicate with HAProxy and update its configuration in response to changes in the Wazuh server cluster.
 
-This is the basic configuration for the Dataplane API. Replace ``<DATAPLANE_USER>`` and ``<DATAPLANE_PASSWORD>`` with the chosen user and password.
+To set this up, create a file at ``/etc/haproxy/dataplaneapi.yml`` and add the basic configuration for the Dataplane API. Replace ``<DATAPLANE_USER>`` and ``<DATAPLANE_PASSWORD>`` with the chosen user and password.
 
 .. tabs::
 
@@ -634,15 +633,13 @@ This is the basic configuration for the Dataplane API. Replace ``<DATAPLANE_USER
 
    .. group-tab:: HTTPS
 
-      .. note::
+      If you use HTTPS as the Dataplane API communication protocol, you must set the ``tls`` field and related subfields: ``tls_port``, ``tls_certificate``, and ``tls_key`` in the configuration. The ``tls_ca`` field is only necessary when using client-side certificates.
 
-         If you use HTTPS as the Dataplane API communication protocol, you must set the ``tls`` field and related subfields: ``tls_port``, ``tls_certificate`` and ``tls_key`` in the configuration. The ``tls_ca`` field is only necessary when using client-side certificates.
+      Run the following command to generate the certificate files for both the HAProxy instance and the Wazuh server:
 
-         To generate the certificate files for both the HAProxy instance and the Wazuh server, use the following command.
+      .. code-block:: console
 
-         .. code-block:: console
-
-            # openssl req -x509 -newkey rsa:4096 -keyout <KEY_FILE_NAME> -out <CERTIFICATE_FILE_NAME> -sha256 -nodes -addext "subjectAltName=DNS:<FQDN>" -subj "/C=US/ST=CA/O=Wazuh>/CN=<CommonName>"
+         # openssl req -x509 -newkey rsa:4096 -keyout <KEY_FILE_NAME> -out <CERTIFICATE_FILE_NAME> -sha256 -nodes -addext "subjectAltName=DNS:<FQDN>" -subj "/C=US/ST=CA/O=Wazuh>/CN=<CommonName>"
 
       .. code-block:: yaml
          :emphasize-lines: 15,16
@@ -681,19 +678,19 @@ Depending on the :ref:`HAProxy installation method <haproxy_installation>`, foll
 
    .. group-tab:: Packages
 
-      #. Download the binary file for the installed HAProxy version. You can find the available versions `here <https://github.com/haproxytech/dataplaneapi/releases/>`__.
+      1. Download the binary file for the installed HAProxy version. You can find the available versions `here <https://github.com/haproxytech/dataplaneapi/releases/>`__.
 
          .. code-block:: console
 
             # curl -sL https://github.com/haproxytech/dataplaneapi/releases/download/v2.8.X/dataplaneapi_2.8.X_linux_x86_64.tar.gz | tar xz && cp dataplaneapi /usr/local/bin/
 
-      #. Put the configuration in ``/etc/haproxy/dataplaneapi.yml`` and start the process
+      2. Put the configuration in ``/etc/haproxy/dataplaneapi.yml`` and start the process:
 
          .. code-block:: console
 
             # dataplaneapi -f /etc/haproxy/dataplaneapi.yml &
 
-      #. Verify the API is running properly. Replace ``<DATAPLANE_USER>`` and ``<DATAPLANE_PASSWORD>`` with the chosen user and password.
+      3. Verify the API is running properly. Replace ``<DATAPLANE_USER>`` and ``<DATAPLANE_PASSWORD>`` with the chosen user and password.
 
          .. tabs::
 
@@ -721,7 +718,7 @@ Depending on the :ref:`HAProxy installation method <haproxy_installation>`, foll
 
    .. group-tab:: Docker
 
-      #. Put the configuration into ``dataplaneapi.yaml``
+      1. Put the configuration into ``dataplaneapi.yaml``:
 
          .. code-block:: console
 
@@ -733,7 +730,7 @@ Depending on the :ref:`HAProxy installation method <haproxy_installation>`, foll
             ├── haproxy.cfg
             └── haproxy-service
 
-      #. Modify ``Dockerfile`` to include ``dataplaneapi.yaml`` during the build
+      2. Modify ``Dockerfile`` to include ``dataplaneapi.yaml`` during the build:
 
          .. tabs::
 
@@ -775,7 +772,7 @@ Depending on the :ref:`HAProxy installation method <haproxy_installation>`, foll
 
                   ENTRYPOINT [ "/entrypoint.sh" ]
 
-      #. Modify the ``entrypoint.sh`` to start the dataplaneapi process
+      3. Modify the ``entrypoint.sh`` to start the Dataplane API process:
 
          .. code-block:: bash
             :emphasize-lines: 6
@@ -789,7 +786,7 @@ Depending on the :ref:`HAProxy installation method <haproxy_installation>`, foll
 
             tail -f /dev/null
 
-      #. Build and run the image
+      4. Build and run the image:
 
          .. code-block:: console
 
@@ -818,7 +815,7 @@ Depending on the :ref:`HAProxy installation method <haproxy_installation>`, foll
             [NOTICE]   (33) : path to executable is /usr/sbin/haproxy
             [ALERT]    (33) : config : parsing [/etc/haproxy/haproxy.cfg:3] : 'pidfile' already specified. Continuing.
 
-      #. Verify the API is running properly. Replace ``<DATAPLANE_USER>`` and ``<DATAPLANE_PASSWORD>`` with the chosen user and password.
+      5. Verify the API is running properly. Replace ``<DATAPLANE_USER>`` and ``<DATAPLANE_PASSWORD>`` with the chosen user and password.
 
          .. tabs::
 
@@ -837,10 +834,10 @@ Depending on the :ref:`HAProxy installation method <haproxy_installation>`, foll
          .. code-block:: none
             :class: output
 
-            {"api":{"build_date":"2024-05-13T14:06:03.000Z","version":"v2.9.3 59f34ea1"},"system":{}}
+            {"api":{"build_date":"2026-01-26T14:06:03.000Z","version":"v2.9.3 59f34ea1"},"system":{}}
 
 
-As an example, you can configure a basic HAProxy helper within an already configured Wazuh server cluster master node. Perform the following steps on the Wazuh server master node only.
+As an example, you can configure a basic HAProxy helper within an already configured Wazuh server cluster master node. Perform the following steps only on the Wazuh server master node.
 
 #. Add the highlighted :ref:`HAProxy helper <haproxy_helper>` configuration section to the ``/var/ossec/etc/ossec.conf`` file:
 
@@ -854,7 +851,7 @@ As an example, you can configure a basic HAProxy helper within an already config
             <cluster>
                <name>wazuh</name>
                <node_name>master-node</node_name>
-               <key>c98b62a9b6169ac5f67dae55ae4a9088</key>
+               <key>756c70a151ad0b73b20e9f8cd37fe24c</key>
                <node_type>master</node_type>
                <port>1516</port>
                <bind_addr>0.0.0.0</bind_addr>
@@ -873,10 +870,10 @@ As an example, you can configure a basic HAProxy helper within an already config
 
          Where:
 
-         -  :ref:`haproxy_disabled <haproxy_disabled>` indicates whether the helper is disabled or not in the master node.
-         -  :ref:`haproxy_address <haproxy_address>` specifies the IP or DNS address to connect with HAProxy.
-         -  :ref:`haproxy_user <haproxy_user>` specifies the username to authenticate with HAProxy.
-         -  :ref:`haproxy_password <haproxy_password>` specifies the password to authenticate with HAProxy.
+         -  ``<haproxy_disabled>`` indicates whether the helper is disabled on the master node.
+         -  ``<haproxy_address>`` specifies the IP address or DNS address to connect with HAProxy.
+         -  ``<haproxy_user>`` specifies the username to authenticate with HAProxy.
+         -  ``<haproxy_password>`` specifies the password to authenticate with HAProxy.
 
          Learn more about :ref:`haproxy_helper` options in the reference guide.
 
@@ -888,7 +885,7 @@ As an example, you can configure a basic HAProxy helper within an already config
             <cluster>
                <name>wazuh</name>
                <node_name>master-node</node_name>
-               <key>c98b62a9b6169ac5f67dae55ae4a9088</key>
+               <key>756c70a151ad0b73b20e9f8cd37fe24c</key>
                <node_type>master</node_type>
                <port>1516</port>
                <bind_addr>0.0.0.0</bind_addr>
@@ -912,15 +909,15 @@ As an example, you can configure a basic HAProxy helper within an already config
 
          Where:
 
-         -  :ref:`haproxy_disabled <haproxy_disabled>` indicates whether the helper is disabled or not in the master node.
-         -  :ref:`haproxy_address <haproxy_address>` specifies the IP or DNS address to connect with HAProxy.
-         -  :ref:`haproxy_user <haproxy_user>` specifies the username to authenticate with HAProxy.
-         -  :ref:`haproxy_password <haproxy_password>` specifies the password to authenticate with HAProxy.
-         -  :ref:`haproxy_protocol <haproxy_protocol>` specifies the protocol to use for the HAProxy Dataplane API communication. It is recommended to set it to ``https``.
-         -  :ref:`haproxy_port <haproxy_port>` specifies the port used for the HAProxy Dataplane API communication.
-         -  :ref:`haproxy_cert` <haproxy_cert> specifies the certificate file used for the HTTPS communication. It must be the same as the one defined in the ``tls_certificate`` parameter in the ``dataplaneapi.yml`` file.
-         -  :ref:`client_cert` <client_cert> specifies the certificate file used in the client side of the HTTPS communication. It must be the same as the one defined in the ``tls_ca`` parameter in the ``dataplaneapi.yml`` file.
-         -  :ref:`client_cert_key` <client_cert_key> specifies the certificate key file used in the client side of the HTTPS communication.
+         -  ``<haproxy_disabled>`` indicates whether the helper is disabled on the master node.
+         -  ``<haproxy_address>`` specifies the IP address or DNS address to connect with HAProxy.
+         -  ``<haproxy_user>`` specifies the username to authenticate with HAProxy.
+         -  ``<haproxy_password>`` specifies the password to authenticate with HAProxy.
+         -  ``<haproxy_protocol>`` specifies the protocol to use for the HAProxy Dataplane API communication. It is recommended to set it to ``https``.
+         -  ``<haproxy_port>`` specifies the port used for the HAProxy Dataplane API communication.
+         -  ``<haproxy_cert>`` specifies the certificate file used for the HTTPS communication. It must match the one defined in the ``tls_certificate`` parameter in the ``dataplaneapi.yml`` file.
+         -  ``<client_cert>`` specifies the certificate file used on the client side of the HTTPS communication. It must be the same as the one defined in the ``tls_ca`` parameter in the ``dataplaneapi.yml`` file.
+         -  ``<client_cert_key>`` specifies the certificate key file used on the client side of the HTTPS communication.
 
          Learn more about :ref:`haproxy_helper` options in the reference guide.
 
@@ -940,22 +937,22 @@ As an example, you can configure a basic HAProxy helper within an already config
       :class: output
       :emphasize-lines: 11
 
-      2024/04/05 19:23:06 DEBUG: [Cluster] [Main] Removing '/var/ossec/queue/cluster/'.
-      2024/04/05 19:23:06 DEBUG: [Cluster] [Main] Removed '/var/ossec/queue/cluster/'.
-      2024/04/05 19:23:06 INFO: [Local Server] [Main] Serving on /var/ossec/queue/cluster/c-internal.sock
-      2024/04/05 19:23:06 DEBUG: [Local Server] [Keep alive] Calculating.
-      2024/04/05 19:23:06 DEBUG: [Local Server] [Keep alive] Calculated.
-      2024/04/05 19:23:06 INFO: [Master] [Main] Serving on ('0.0.0.0', 1516)
-      2024/04/05 19:23:06 DEBUG: [Master] [Keep alive] Calculating.
-      2024/04/05 19:23:06 DEBUG: [Master] [Keep alive] Calculated.
-      2024/04/05 19:23:06 INFO: [Master] [Local integrity] Starting.
-      2024/04/05 19:23:06 INFO: [Master] [Local agent-groups] Sleeping 30s before starting the agent-groups task, waiting for the workers connection.
-      2024/04/05 19:23:06 INFO: [HAPHelper] [Main] Proxy was initialized
-      2024/04/05 19:23:06 INFO: [HAPHelper] [Main] Ensuring only exists one HAProxy process. Sleeping 12s before start...
-      2024/04/05 19:23:06 INFO: [Master] [Local integrity] Finished in 0.090s. Calculated metadata of 34 files.
-      2024/04/05 19:23:14 INFO: [Master] [Local integrity] Starting.
-      2024/04/05 19:23:14 INFO: [Master] [Local integrity] Finished in 0.005s. Calculated metadata of 34 files.
-      2024/04/05 19:23:18 DEBUG2: [HAPHelper] [Proxy] Obtained proxy backends
-      2024/04/05 19:23:18 DEBUG2: [HAPHelper] [Proxy] Obtained proxy frontends
-      2024/04/05 19:23:18 INFO: [HAPHelper] [Main] Starting HAProxy Helper
-      2024/04/05 19:23:18 DEBUG2: [HAPHelper] [Proxy] Obtained proxy servers
+      2026/01/26 19:23:06 DEBUG: [Cluster] [Main] Removing '/var/ossec/queue/cluster/'.
+      2026/01/26 19:23:06 DEBUG: [Cluster] [Main] Removed '/var/ossec/queue/cluster/'.
+      2026/01/26 19:23:06 INFO: [Local Server] [Main] Serving on /var/ossec/queue/cluster/c-internal.sock
+      2026/01/26 19:23:06 DEBUG: [Local Server] [Keep alive] Calculating.
+      2026/01/26 19:23:06 DEBUG: [Local Server] [Keep alive] Calculated.
+      2026/01/26 19:23:06 INFO: [Master] [Main] Serving on ('0.0.0.0', 1516)
+      2026/01/26 19:23:06 DEBUG: [Master] [Keep alive] Calculating.
+      2026/01/26 19:23:06 DEBUG: [Master] [Keep alive] Calculated.
+      2026/01/26 19:23:06 INFO: [Master] [Local integrity] Starting.
+      2026/01/26 19:23:06 INFO: [Master] [Local agent-groups] Sleeping 30s before starting the agent-groups task, waiting for the workers connection.
+      2026/01/26 19:23:06 INFO: [HAPHelper] [Main] Proxy was initialized
+      2026/01/26 19:23:06 INFO: [HAPHelper] [Main] Ensuring only exists one HAProxy process. Sleeping 12s before start...
+      2026/01/26 19:23:06 INFO: [Master] [Local integrity] Finished in 0.090s. Calculated metadata of 34 files.
+      2026/01/26 19:23:14 INFO: [Master] [Local integrity] Starting.
+      2026/01/26 19:23:14 INFO: [Master] [Local integrity] Finished in 0.005s. Calculated metadata of 34 files.
+      2026/01/26 19:23:18 DEBUG2: [HAPHelper] [Proxy] Obtained proxy backends
+      2026/01/26 19:23:18 DEBUG2: [HAPHelper] [Proxy] Obtained proxy frontends
+      2026/01/26 19:23:18 INFO: [HAPHelper] [Main] Starting HAProxy Helper
+      2026/01/26 19:23:18 DEBUG2: [HAPHelper] [Proxy] Obtained proxy servers

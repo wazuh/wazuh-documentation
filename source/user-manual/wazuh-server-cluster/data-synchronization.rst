@@ -6,12 +6,12 @@
 Data synchronization
 ====================
 
-The Wazuh server processes events from the Wazuh agents, external APIs, and network devices, raising alerts for threats and anomalies detected. Hence, all required information to receive events from the agents needs to be synchronized. This information is:
+The Wazuh server processes events from Wazuh agents, external APIs, and network devices, and raises alerts for threats and anomalies detected. Hence, all the required information to receive events from the Wazuh agents needs to be synchronized. This information is:
 
--  The Wazuh agents' keys, so the Wazuh server nodes can accept incoming connections from agents.
--  The Wazuh agents' shared configuration so the Wazuh server nodes can send the agents their configuration.
--  The Wazuh agents' groups assignments, so every Wazuh server node knows which configuration to send to the agents.
--  The custom decoders, rules, SCA policies and CDB lists so the Wazuh server nodes can correctly process events from the agents.
--  The Wazuh agents' last keep alive and OS information, which is received once the agents connect to a Wazuh server node and it's necessary to know whether an agent is reporting or not.
+-  The Wazuh agents' keys, so the Wazuh server nodes can accept incoming connections from the Wazuh agents.
+-  The Wazuh agents' shared configuration so that the Wazuh server nodes can send their configuration to the Wazuh agents.
+-  The Wazuh agents' group assignments, so every Wazuh server node knows which configuration to send to the Wazuh agents.
+-  The custom decoders, rules, SCA policies, and CDB lists allow the Wazuh server nodes to correctly process events from the Wazuh agents.
+-  The Wazuh agents' last keep-alive and OS information, received when the Wazuh agent connects to a Wazuh server node, is necessary to determine whether an agent is reporting.
 
-Having all this information synchronized allows any Wazuh server cluster nodes to process and raise alerts from the Wazuh agents properly. Data synchronization makes it possible to horizontally scale a Wazuh environment when new Wazuh agents are added.
+Synchronizing this information enables any Wazuh server cluster node to properly process events and generate alerts from Wazuh agents. It also allows a Wazuh environment to scale horizontally as new Wazuh agents are added.

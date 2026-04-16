@@ -134,6 +134,19 @@ agent:uninstall
 
 -  :api-ref:`GET /agents/uninstall <operation/api.controllers.agent_controller.get_agent_uninstall_permission>` (:ref:`*:* <api_rbac_reference_resources>`)
 
+CIS-CAT
+^^^^^^^
+
+.. deprecated:: 5.0
+
+The :api-ref:`/ciscat <tag/Ciscat>` endpoint of the Wazuh server API enables users to retrieve specific information from the results of CIS-CAT scans carried out on the Wazuh agents.
+
+ciscat:read
+~~~~~~~~~~~
+
+-  :api-ref:`GET /ciscat/{agent_id}/results <operation/api.controllers.ciscat_controller.get_agents_ciscat_results>` (:ref:`agent:id <api_rbac_reference_resources>`, :ref:`agent:group <api_rbac_reference_resources>`)
+-  :api-ref:`GET /experimental/ciscat/results <operation/api.controllers.experimental_controller.get_cis_cat_results>` (:ref:`agent:id <api_rbac_reference_resources>`, :ref:`agent:group <api_rbac_reference_resources>`)
+
 Cluster
 ^^^^^^^
 
@@ -626,6 +639,22 @@ Grant read access to all agents related functionalities.
        - group:id:*
      effect: allow
 
+ciscat_read_*
+^^^^^^^^^^^^^
+
+.. deprecated:: 5.0
+
+Allow reading the agent ciscat results information.
+
+.. code-block:: yaml
+
+   ciscat_read_agents:
+     actions:
+       - ciscat:read
+     resources:
+       - agent:id:*
+     effect: allow
+
 cluster_all_*
 ^^^^^^^^^^^^^
 
@@ -1100,6 +1129,7 @@ Read only role, this role can read all the information of the system.
 **Policies**
 
    -  `agents_read_*`_
+   -  `ciscat_read_*`_
    -  `cluster_read_*`_
    -  `decoders_read_*`_
    -  `lists_read_*`_
