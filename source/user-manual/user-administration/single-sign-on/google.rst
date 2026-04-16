@@ -123,6 +123,12 @@ Wazuh indexer configuration
 
 Edit the Wazuh indexer security configuration files. We recommend that you back up these files before you carry out the configuration.
 
+#. Backup the existing Wazuh indexer security configuration files:
+
+   .. code-block:: console
+
+      # /usr/share/wazuh-indexer/bin/indexer-security-init.sh --options "-backup /etc/wazuh-indexer/opensearch-security -icl -nhnv"
+
 #. Generate a 64-character long random key using the following command.
 
    .. code-block:: console
@@ -424,6 +430,12 @@ Wazuh indexer configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Edit the Wazuh indexer security configuration files. We recommend that you back up these files before you carry out the configuration.
+
+#. Backup the existing Wazuh indexer security configuration files:
+
+   .. code-block:: console
+
+      # /usr/share/wazuh-indexer/bin/indexer-security-init.sh --options "-backup /etc/wazuh-indexer/opensearch-security -icl -nhnv"
 
 #. Generate a 64-character long random key using the following command.
 

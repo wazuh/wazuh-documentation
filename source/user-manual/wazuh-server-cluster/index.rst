@@ -6,7 +6,7 @@
 Wazuh server cluster
 ====================
 
-The Wazuh server cluster is made up of multiple Wazuh server nodes in a distributed environment. This deployment strategy helps to provide horizontal scalability and improved performance. In an environment with many endpoints to monitor, you can combine this deployment strategy with a :ref:`network load balancer <connecting_with_load_balancer>` to distribute the Wazuh agent connection load effectively across multiple nodes. This approach enables the Wazuh server to manage a large number of Wazuh agents more efficiently and ensure high availability.
+The Wazuh server cluster consists of multiple Wazuh server nodes in a distributed environment. This deployment strategy helps to provide horizontal scalability, high availability, and improved performance. In an environment with many endpoints to monitor, you can combine this deployment strategy with :ref:`network load balancer <connecting_with_load_balancer>` to distribute Wazuh agent connections effectively across multiple nodes. This approach enables the Wazuh server to manage a large number of Wazuh agents more efficiently and ensure high availability.
 
 .. topic:: Content
 

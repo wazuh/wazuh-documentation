@@ -3,8 +3,6 @@
 .. meta::
    :description: Learn how to deploy Wazuh components using Ansible playbooks and roles.
 
-.. _wazuh_ansible_deploying:
-
 Deploying Wazuh
 ===============
 
@@ -856,6 +854,10 @@ Installing the Wazuh agent
 --------------------------
 
 The ``ansible-wazuh-agent`` role installs Wazuh agents on Linux endpoints. The Ansible control server requires SSH access to each endpoint.
+
+.. note::
+
+   Amazon Linux 2 (AL2) is not supported for Wazuh agent deployment using Ansible 2.17 or later. This limitation is due to the removal of yum support in newer Ansible versions following the deprecation of Python 2, while AL2 does not support dnf. Although Ansible 2.16 includes yum support, it has reached end of life (EOL) and is no longer recommended for production environments. As a result, deploying the Wazuh agent on AL2 using Ansible is not supported. :doc:`Manual installation of the Wazuh agent </installation-guide/wazuh-agent/wazuh-agent-package-linux>` on AL2 remains possible.
 
 To install the Wazuh agent, perform the following:
 

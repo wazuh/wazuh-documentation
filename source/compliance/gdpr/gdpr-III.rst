@@ -6,16 +6,16 @@
 GDPR III, Rights of the data subject <gdpr_III>
 ===============================================
 
-In this chapter, GDPR describes the rights of individuals regarding personal data management by third-party entities.
+In this chapter, the GDPR sets out individuals' rights regarding the management of their personal data by third parties.
 
-Chapter III, Article 14, Head 2 (c)
------------------------------------
+Chapter III, Article 18, Head 2
+-------------------------------
 
-**Information to be provided where personal data have not been obtained from the data subject, Head 2 (c)**: *“In addition to the information referred to in paragraph 1, the controller shall provide the data subject with the following information necessary to ensure fair and transparent processing in respect of the data subject: the existence of the right to request from the controller access to and rectification or erasure of personal data or restriction of processing concerning the data subject and to object to processing as well as the right to data portability.”*
+**Information to be provided where personal data have not been obtained from the data subject, Head 2 (c)**: *“Where processing has been restricted under paragraph 1, such personal data shall, with the exception of storage, only be processed with the data subject’s consent or for the establishment, exercise or defence of legal claims or for the protection of the rights of another natural or legal person or for reasons of important public interest of the Union or of a Member State.”*
 
-This article requires that when an individual requests a temporary restriction on processing his user data, there is no access to that data during the period specified.
+This article requires that, when an individual requests a temporary restriction on processing his user data, there be no access to that data unless explicit consent has been granted.
 
-Using :doc:`File Integrity Monitoring (FIM) </user-manual/capabilities/file-integrity/index>` and the Wazuh dashboard, you can perform searches to confirm that there has been no modification or deletion of user data during the specified period of restriction.
+Using :doc:`File Integrity Monitoring (FIM) </user-manual/capabilities/file-integrity/index>` and the Wazuh dashboard, you can perform searches to confirm that no user data has been modified or deleted during the specified restriction period.
 
 Use case: Search for FIM events within a certain time frame
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -27,12 +27,14 @@ In this use case, from the Wazuh dashboard, filter for ``syscheck`` events to co
     :align: center
     :width: 80%
 
+We can see that an event exists from the previous use case.
+
 Chapter III, Article 17, Head 1
 -------------------------------
 
-**Right to erasure (right to be forgotten)**: *“The data subject shall have the right to obtain from the controller the erasure of personal data concerning him or her without undue delay and the controller shall have the obligation to erase personal data without undue delay.”*
+**Right to erasure (right to be forgotten)**: *“The data subject shall have the right to obtain from the controller the erasure of personal data concerning him or her without undue delay, and the controller shall have the obligation to erase personal data without undue delay.”*
 
-The Wazuh :doc:`File Integrity Monitoring </user-manual/capabilities/file-integrity/index>` module assists in meeting this GDPR requirement. It monitors specified files and folders containing personal data and generates alerts when modification or deletion occurs. File deletion alerts can provide individuals with confirmation that their personal data has been permanently deleted in response to their request.
+The Wazuh :doc:`File Integrity Monitoring </user-manual/capabilities/file-integrity/index>` module helps meet this GDPR requirement. It monitors specified files and folders containing personal data and generates alerts when modifications or deletions occur. File deletion alerts can confirm that an individual’s personal data has been permanently deleted in response to their request.
 
 Use case: Detect file deletion
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -61,7 +63,7 @@ Ubuntu endpoint
 		# touch /root/personal_data/subject_data.txt
 		# echo "User01= user03_ID" >> /root/personal_data/subject_data.txt
 
-#. Add the configuration highlighted to the ``<syscheck>`` block of the Wazuh agent configuration file ``/var/ossec/etc/ossec.conf``:
+#. Add the configuration highlighted to the ``syscheck`` block of the Wazuh agent configuration file ``/var/ossec/etc/ossec.conf``:
 
 	.. code-block:: xml
 		:emphasize-lines: 2
