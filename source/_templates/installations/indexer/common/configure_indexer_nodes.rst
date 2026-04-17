@@ -7,7 +7,7 @@
 
       Use the same node address set in ``config.yml`` to create the SSL certificates.
 
-   #. ``node.name``: Name of the Wazuh indexer node as defined in the ``config.yml`` file. For example, ``node-1``.
+   #. ``node.name``: Name of the Wazuh indexer node as defined in the ``config.yml`` file. For example, ``indexer``.
 
    #. ``cluster.initial_master_nodes``: List of the names of the master-eligible nodes. These names are defined in the ``config.yml`` file. Uncomment the ``node-2`` and ``node-3`` lines, change the names, or add more lines, according to your ``config.yml`` definitions.
 
@@ -32,7 +32,7 @@
       .. code-block:: yaml
 
         plugins.security.nodes_dn:
-        - "CN=node-1,OU=Wazuh,O=Wazuh,L=California,C=US"
+        - "CN=indexer,OU=Wazuh,O=Wazuh,L=California,C=US"
         - "CN=node-2,OU=Wazuh,O=Wazuh,L=California,C=US"
         - "CN=node-3,OU=Wazuh,O=Wazuh,L=California,C=US"
 

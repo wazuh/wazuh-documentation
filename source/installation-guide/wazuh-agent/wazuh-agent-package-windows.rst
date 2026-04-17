@@ -24,13 +24,13 @@ The Wazuh agent runs on the endpoint you want to monitor and communicates with t
 
                .. code-block:: doscon
 
-                  > wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi /q WAZUH_MANAGER="10.0.0.2"
+                  > wazuh-agent-5.0.0-beta1.msi /q WAZUH_MANAGER="10.0.0.2"
 
             -  Using PowerShell:
 
                .. code-block:: ps1con
 
-                  > .\wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi /q WAZUH_MANAGER="10.0.0.2"
+                  > .\wazuh-agent-5.0.0-beta1.msi /q WAZUH_MANAGER="10.0.0.2"
 
             For additional deployment options such as agent name, agent group, and registration password, see the :doc:`Deployment variables for Windows </user-manual/agent/agent-enrollment/deployment-variables/deployment-variables-windows>` section.
 

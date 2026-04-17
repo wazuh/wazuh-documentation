@@ -35,35 +35,32 @@ custom_replacements = {
 
     # --- Revision numbers for Wazuh agent and manager packages versions
     # Yum packages revisions
-    "|WAZUH_REVISION_YUM_AGENT_I386|" : "beta1",
-    "|WAZUH_REVISION_YUM_MANAGER_I386|" : "beta1",
-    "|WAZUH_REVISION_YUM_AGENT_I386_EL5|" : "beta1",
+    "|WAZUH_REVISION_YUM_AGENT_I386|" : "1",
+    "|WAZUH_REVISION_YUM_MANAGER_I386|" : "1",
+    "|WAZUH_REVISION_YUM_AGENT_I386_EL5|" : "1",
     #"|WAZUH_REVISION_YUM_MANAGER_I386_EL5|" :
-    "|WAZUH_REVISION_YUM_AGENT_X86|" : "beta1",
-    "|WAZUH_REVISION_YUM_MANAGER_X86|" : "beta1",
-    "|WAZUH_REVISION_YUM_AGENT_X86_EL5|" : "beta1",
+    "|WAZUH_REVISION_YUM_AGENT_X86|" : "1",
+    "|WAZUH_REVISION_YUM_MANAGER_X86|" : "1",
+    "|WAZUH_REVISION_YUM_AGENT_X86_EL5|" : "1",
     #|WAZUH_REVISION_YUM_MANAGER_X86_EL5|
-    "|WAZUH_REVISION_YUM_AGENT_AARCH64|" : "beta1",
-    "|WAZUH_REVISION_YUM_AGENT_ARMHF|" : "beta1",
-    #"|WAZUH_REVISION_YUM_MANAGER_ARMHF|" : "beta1",
-    "|WAZUH_REVISION_YUM_AGENT_PPC|" : "beta1",
+    "|WAZUH_REVISION_YUM_AGENT_AARCH64|" : "1",
+    "|WAZUH_REVISION_YUM_AGENT_ARMHF|" : "1",
+    #"|WAZUH_REVISION_YUM_MANAGER_ARMHF|" : "1",
+    "|WAZUH_REVISION_YUM_AGENT_PPC|" : "1",
     #|WAZUH_REVISION_YUM_MANAGER_PPC|" :
     # Deb packages revisions
-    "|WAZUH_REVISION_DEB_AGENT_I386|" : "beta1",
-    "|WAZUH_REVISION_DEB_MANAGER_I386|" : "beta1",
-    "|WAZUH_REVISION_DEB_AGENT_X86|" : "beta1",
-    "|WAZUH_REVISION_DEB_MANAGER_X86|" : "beta1",
-    "|WAZUH_REVISION_DEB_AGENT_AARCH64|" : "beta1",
-    "|WAZUH_REVISION_DEB_AGENT_ARMHF|" : "beta1",
-    "|WAZUH_REVISION_DEB_MANAGER_ARMHF|" : "beta1",
-    "|WAZUH_REVISION_DEB_AGENT_PPC|" : "beta1",
+    "|WAZUH_REVISION_DEB_AGENT_I386|" : "1",
+    "|WAZUH_REVISION_DEB_MANAGER_I386|" : "1",
+    "|WAZUH_REVISION_DEB_AGENT_X86|" : "1",
+    "|WAZUH_REVISION_DEB_MANAGER_X86|" : "1",
+    "|WAZUH_REVISION_DEB_AGENT_AARCH64|" : "1",
+    "|WAZUH_REVISION_DEB_AGENT_ARMHF|" : "1",
+    "|WAZUH_REVISION_DEB_MANAGER_ARMHF|" : "1",
+    "|WAZUH_REVISION_DEB_AGENT_PPC|" : "1",
     #"|WAZUH_REVISION_DEB_MANAGER_PPC|" :
     #
-    # --- Revision for the Wazuh installation assistant and related tools/config
-    "|WAZUH_INSTALL_ASSISTANT_REV|" : "beta1",
-    #
     # === Wazuh indexer version revisions
-    "|WAZUH_INDEXER_CURRENT_REV|" : "beta1", # RPM and Deb
+    "|WAZUH_INDEXER_CURRENT_REV|" : "1", # RPM and Deb
     #"|WAZUH_INDEXER_CURRENT_REV_DEB|" :
     # --- Architectures for Wazuh indexer packages
     "|WAZUH_INDEXER_x64_RPM|" : "x86_64",
@@ -72,8 +69,8 @@ custom_replacements = {
     "|WAZUH_INDEXER_ARM64_DEB|" : "arm64",
     #
     # === Wazuh dashboard version revisions
-    "|WAZUH_DASHBOARD_CURRENT_REV_RPM|" : "beta1",
-    "|WAZUH_DASHBOARD_CURRENT_REV_DEB|" : "beta1",
+    "|WAZUH_DASHBOARD_CURRENT_REV_RPM|" : "1",
+    "|WAZUH_DASHBOARD_CURRENT_REV_DEB|" : "1",
     # --- Architectures for Wazuh dashboard packages
     "|WAZUH_DASHBOARD_x64_RPM|" : "x86_64",
     "|WAZUH_DASHBOARD_x64_DEB|" : "amd64",
@@ -105,17 +102,17 @@ custom_replacements = {
     #"|WAZUH_CURRENT_MAJOR_WIN_FROM_SOURCES|" :
     #"|WAZUH_CURRENT_MINOR_WIN_FROM_SOURCES|" :
     "|WAZUH_CURRENT_WIN_FROM_SOURCES|" : release,
-    "|WAZUH_CURRENT_WIN_FROM_SOURCES_REV|" : "beta1",
+    "|WAZUH_CURRENT_WIN_FROM_SOURCES_REV|" : "1",
     #
     # === Versions and revisions for packages of specific operating systems
     "|WAZUH_CURRENT_MAJOR_WINDOWS|" : "5.x",
     #"|WAZUH_CURRENT_MINOR_WINDOWS|" :
     "|WAZUH_CURRENT_WINDOWS|" : release,
-    "|WAZUH_REVISION_WINDOWS|" : "beta1",
+    "|WAZUH_REVISION_WINDOWS|" : "1",
     "|WAZUH_CURRENT_MAJOR_OSX|" : "5.x",
     #"|WAZUH_CURRENT_MINOR_OSX|" :
     "|WAZUH_CURRENT_OSX|" : release,
-    "|WAZUH_REVISION_OSX|" : "beta1",
+    "|WAZUH_REVISION_OSX|" : "1",
     "|WAZUH_CURRENT_MAJOR_SOLARIS|" : "5.x",
     #"|WAZUH_CURRENT_MINOR_SOLARIS|" :
     "|WAZUH_CURRENT_SOLARIS|" : release, # Set here the lesser of WAZUH_CURRENT_MAJOR_SOLARIS10 and 11 values
@@ -147,11 +144,11 @@ custom_replacements = {
     "|WAZUH_CURRENT_MAJOR_AIX|" : "5.x",
     #"|WAZUH_CURRENT_MINOR_AIX|" :
     "|WAZUH_CURRENT_AIX|" : release,
-    "|WAZUH_REVISION_AIX|" : "beta1",
+    "|WAZUH_REVISION_AIX|" : "1",
     "|WAZUH_CURRENT_MAJOR_HPUX|" : "5.x",
     #"|WAZUH_CURRENT_MINOR_HPUX|" :
     "|WAZUH_CURRENT_HPUX|" : release,
-    "|WAZUH_REVISION_HPUX|" : "beta1",
+    "|WAZUH_REVISION_HPUX|" : "1",
     #
     # === Wazuh module for Filebeat
     "|WAZUH_FILEBEAT|": "0.5",
@@ -210,6 +207,6 @@ else:
     custom_replacements["|WAZUH_DASHBOARD_DEB_PKG_INSTALL|"] = '=' + custom_replacements["|WAZUH_CURRENT|"] + '-' + custom_replacements["|WAZUH_DASHBOARD_CURRENT_REV_DEB|"]
     custom_replacements["|WAZUH_AGENT_RPM_PKG_INSTALL|"] = '-' + custom_replacements["|WAZUH_CURRENT|"] + '-' + custom_replacements["|WAZUH_REVISION_YUM_AGENT_X86|"]
     custom_replacements["|WAZUH_AGENT_DEB_PKG_INSTALL|"] = '=' + custom_replacements["|WAZUH_CURRENT|"] + '-' + custom_replacements["|WAZUH_REVISION_DEB_AGENT_X86|"]
-    custom_replacements["|WAZUH_AGENT_ZYPP_PKG_INSTALL|"] = '-' + custom_replacements["|WAZUH_CURRENT|"] + '-' + 'beta1'
+    custom_replacements["|WAZUH_AGENT_ZYPP_PKG_INSTALL|"] = '-' + custom_replacements["|WAZUH_CURRENT|"] + '-' + '1'
     custom_replacements["|FILEBEAT_LATEST_APT_PKG_INSTALL|"] = '=' + custom_replacements["|FILEBEAT_LATEST_APT_PKG_INSTALL|"] + '-' + custom_replacements["|FILEBEAT_CURRENT_REV|"]
     custom_replacements["|FILEBEAT_LATEST_YUM_PKG_INSTALL|"] = '-' + custom_replacements["|FILEBEAT_LATEST_YUM_PKG_INSTALL|"] + '-' + custom_replacements["|FILEBEAT_CURRENT_REV|"]

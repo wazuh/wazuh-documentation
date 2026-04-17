@@ -15,5 +15,5 @@ This section describes how to uninstall the Wazuh central components and the Waz
 .. toctree::
    :maxdepth: 1
 
-   central-components
    agent
+   central-components

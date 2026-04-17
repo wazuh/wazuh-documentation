@@ -203,8 +203,8 @@ Select your deployment type and follow the instructions to change the default pa
 
          .. code-block:: console
 
-            # curl -sO https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-passwords-tool-|WAZUH_CURRENT|-|WAZUH_INSTALL_ASSISTANT_REV|.sh
-            # bash wazuh-passwords-tool-|WAZUH_CURRENT|-|WAZUH_INSTALL_ASSISTANT_REV|.sh --api --change-all --admin-user wazuh --admin-password wazuh
+            # curl -sO https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-passwords-tool-5.0.0-beta1.sh
+            # bash wazuh-passwords-tool-5.0.0-beta1.sh --api --change-all --admin-user wazuh --admin-password wazuh
 
          .. code-block:: console
             :class: output
