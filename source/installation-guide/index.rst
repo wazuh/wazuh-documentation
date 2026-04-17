@@ -9,7 +9,7 @@
 Installation guide
 ==================
 
-Wazuh is a security platform that provides unified XDR and SIEM protection for endpoints and cloud workloads. The solution is composed of the :doc:`Wazuh agent </getting-started/components/wazuh-agent>` and three central components: the :doc:`Wazuh server </getting-started/components/wazuh-server>`, the :doc:`Wazuh indexer </getting-started/components/wazuh-indexer>`, and the :doc:`Wazuh dashboard </getting-started/components/wazuh-dashboard>`. For more information, check the :doc:`Getting Started </getting-started/index>` documentation.
+Wazuh is a security platform that provides unified XDR and SIEM protection for endpoints and cloud workloads. The solution is composed of the :doc:`Wazuh agent </getting-started/components/wazuh-agent>` and three central components: the :doc:`Wazuh manager </getting-started/components/wazuh-server>`, the :doc:`Wazuh indexer </getting-started/components/wazuh-indexer>`, and the :doc:`Wazuh dashboard </getting-started/components/wazuh-dashboard>`. For more information, check the :doc:`Getting Started </getting-started/index>` documentation.
 
 Wazuh is free and open source. Its components abide by the `GNU General Public License, version 2 <https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html>`_, and the `Apache License, Version 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_ (ALv2).
 
@@ -19,9 +19,9 @@ In this installation guide, you will learn how to install Wazuh in your infrastr
 Installing the Wazuh central components
 ---------------------------------------
 
-You can install the Wazuh indexer, Wazuh server, and Wazuh dashboard on a single host or distribute them in cluster configurations. Each Wazuh central component supports two installation methods and both methods provide instructions to install the central components on a single host or on separate hosts.
+You can install the Wazuh indexer, Wazuh manager, and Wazuh dashboard on a single host or distribute them in cluster configurations. Each Wazuh central component supports two deployment methods: Assisted installation, and Step-by-step installation. Both methods provide instructions to install the central components on a single host or on separate hosts.
 
-You can check our :doc:`Quickstart </quickstart>` documentation to perform an all-in-one installation. This is the fastest way to get the Wazuh central components up and running.
+You can check our :doc:`Quickstart </quickstart>` documentation to perform an all-in-one installation of the Wazuh central components. This is the fastest way to get the Wazuh central components up and running.
 
 For more deployment flexibility and customization, install the Wazuh central components by starting with the :doc:`Wazuh indexer <wazuh-indexer/index>` deployment. This deployment method supports both an all-in-one installation and installing components on separate hosts.
 
@@ -50,7 +50,7 @@ Follow this installation workflow:
 
     <div class="link-boxes-item future-step">
       <a class="link-boxes-link" href="wazuh-server/index.html">
-        <p class="link-boxes-label">Install the Wazuh server</p>
+        <p class="link-boxes-label">Install the Wazuh manager</p>
 
 .. image:: ../images/installation/Server-noBG.png
      :align: center
@@ -83,6 +83,10 @@ Installing the Wazuh agent
 The Wazuh agent is a single, lightweight monitoring software. It is a multi-platform component that you can deploy to laptops, desktops, servers, cloud instances, containers, or virtual machines. It provides visibility into the monitored endpoint by collecting critical system and application records, inventory data, and detecting potential anomalies.
 
 Select your endpoint operating system below and follow the installation steps to deploy the Wazuh agent.
+
+.. warning::
+
+   Support for HP-UX, Solaris, AIX, CentOS 5, RHEL 5 derivatives, SUSE Linux Enterprise Server 11, Windows XP, Windows Vista, and Windows Server 2003 is discontinued in Wazuh 5.0.0. Wazuh agents on these platforms cannot be upgraded to 5.x but can still connect to a Wazuh 5.0.0 manager. Keep them on 4.x or migrate to a supported system.
 
 .. raw:: html
 

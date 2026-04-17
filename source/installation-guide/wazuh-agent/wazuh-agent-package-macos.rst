@@ -33,13 +33,13 @@ The Wazuh agent runs on the endpoint you want to monitor and communicates with t
 
                   .. code-block:: console
 
-                     # echo "WAZUH_MANAGER='10.0.0.2'" > /tmp/wazuh_envs && sudo installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.intel64.pkg -target /
+                     # echo "WAZUH_MANAGER='10.0.0.2'" > /tmp/wazuh_envs && sudo installer -pkg wazuh-agent-5.0.0-beta1.intel64.pkg -target /
 
                .. group-tab:: Apple silicon
 
                   .. code-block:: console
 
-                     # echo "WAZUH_MANAGER='10.0.0.2'" > /tmp/wazuh_envs && sudo installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.arm64.pkg -target /
+                     # echo "WAZUH_MANAGER='10.0.0.2'" > /tmp/wazuh_envs && sudo installer -pkg wazuh-agent-5.0.0-beta1.arm64.pkg -target /
 
             For additional deployment options such as agent name, agent group, and enrollment password, see the :doc:`Deployment variables for macOS </user-manual/agent/agent-enrollment/deployment-variables/deployment-variables-macos>` section.
 
@@ -70,6 +70,6 @@ The Wazuh agent runs on the endpoint you want to monitor and communicates with t
 
                # launchctl bootstrap system /Library/LaunchDaemons/com.wazuh.agent.plist
 
-         The installation process is now complete, and the Wazuh agent is successfully installed on your macOS endpoint. The next step is to register and configure the agent to communicate with the Wazuh server. To perform this action, see the :doc:`Wazuh agent enrollment </user-manual/agent/agent-enrollment/index>` section.  
+         The installation process is now complete, and the Wazuh agent is successfully installed on your macOS endpoint. The next step is to register and configure the agent to communicate with the Wazuh manager. To perform this action, see the :doc:`Wazuh agent enrollment </user-manual/agent/agent-enrollment/index>` section.  
 
 By default, all agent files are stored in ``/Library/Ossec/`` after the installation.

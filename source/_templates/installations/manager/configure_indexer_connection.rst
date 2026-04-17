@@ -1,6 +1,6 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
-By default, the indexer settings have one host configured. It's set to ``0.0.0.0`` as highlighted below.
+By default, the indexer settings have one host configured. It's set to ``127.0.0.1`` as highlighted below.
 
 .. code-block:: xml
    :emphasize-lines: 4
@@ -8,7 +8,7 @@ By default, the indexer settings have one host configured. It's set to ``0.0.0.0
    <indexer>
      <enabled>yes</enabled>
      <hosts>
-       <host>https://0.0.0.0:9200</host>
+       <host>https://127.0.0.1:9200</host>
      </hosts>
      <ssl>
        <certificate_authorities>
@@ -19,7 +19,7 @@ By default, the indexer settings have one host configured. It's set to ``0.0.0.0
      </ssl>
    </indexer>
 
-- Replace ``0.0.0.0`` with your Wazuh indexer node IP address or hostname. You can find this value in the Filebeat config file ``/etc/filebeat/filebeat.yml``.
+- Replace ``127.0.0.1`` with your Wazuh indexer node IP address or hostname. You can find this value in the Filebeat config file ``/etc/filebeat/filebeat.yml``.
 
 - Ensure the Filebeat certificate and key name match the certificate files in ``/etc/filebeat/certs``.
 
@@ -32,6 +32,6 @@ If you are running a Wazuh indexer cluster infrastructure, add a ``<host>`` entr
      <host>https://10.0.0.2:9200</host>
    </hosts>
 
-The Wazuh server prioritizes reporting to the first Wazuh indexer node in the list. It switches to the next node in case it is not available.
+The Wazuh manager prioritizes reporting to the first Wazuh indexer node in the list. It switches to the next node in case it is not available.
 
 .. End of include file

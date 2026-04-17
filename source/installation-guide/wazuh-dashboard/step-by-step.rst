@@ -6,7 +6,7 @@
 Installing the Wazuh dashboard step by step
 ===========================================
 
-Install and configure the Wazuh dashboard following step-by-step instructions. The Wazuh dashboard is a web interface for mining and visualizing the Wazuh server alerts and archived events.
+Install and configure the Wazuh dashboard following step-by-step instructions. The Wazuh dashboard is a web interface for mining and visualizing the Wazuh manager alerts and archived events.
 
 .. note:: You need root user privileges to run all the commands described below.
 
@@ -25,7 +25,7 @@ Adding the Wazuh repository
 
 .. note::
 
-   If you are installing the Wazuh dashboard on the same host as the Wazuh indexer or the Wazuh server, you may skip these steps as you may have added the Wazuh repository already.
+   If you are installing the Wazuh dashboard on the same host as the Wazuh indexer or the Wazuh manager, you may skip these steps as you may have added the Wazuh repository already.
 
 .. tabs::
 
@@ -92,7 +92,7 @@ Deploying certificates
    .. note::
      Make sure that a copy of the ``wazuh-certificates.tar`` file, created during the initial configuration step, is placed in your working directory.
 
-   #. Replace ``<DASHBOARD_NODE_NAME>`` with your Wazuh dashboard node name, the same one used in ``config.yml`` to create the certificates, and move the certificates to their corresponding location.
+   #. Replace ``<DASHBOARD_NODE_NAME>`` with your Wazuh dashboard node name, the same one used in ``config.yml`` to create the certificates. In our case, the node name is, ``manager``. Then move the certificates to their corresponding location.
 
        .. code-block:: console
 
@@ -116,14 +116,14 @@ Starting the Wazuh dashboard service
 
    .. include:: /_templates/installations/dashboard/enable_dashboard.rst
 
-#. Edit the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` file and replace ``<WAZUH_SERVER_IP_ADDRESS>`` with the IP address or hostname of the Wazuh server master node.
+#. Edit the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` file and replace ``<WAZUH_MANAGER_IP_ADDRESS>`` with the IP address or hostname of the Wazuh manager master node.
 
    .. code-block:: yaml
       :emphasize-lines: 3
 
       hosts:
          - default:
-            url: https://<WAZUH_SERVER_IP_ADDRESS>
+            url: https://<WAZUH_MANAGER_IP_ADDRESS>
             port: 55000
             username: wazuh-wui
             password: wazuh-wui
@@ -203,8 +203,8 @@ Select your deployment type and follow the instructions to change the default pa
 
          .. code-block:: console
 
-            # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-passwords-tool.sh
-            # bash wazuh-passwords-tool.sh --api --change-all --admin-user wazuh --admin-password wazuh
+            # curl -sO https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-passwords-tool-5.0.0-beta1.sh
+            # bash wazuh-passwords-tool-5.0.0-beta1.sh --api --change-all --admin-user wazuh --admin-password wazuh
 
          .. code-block:: console
             :class: output
@@ -298,7 +298,7 @@ All the Wazuh central components are successfully installed and secured.
 
     <div class="link-boxes-item past-step">
       <a class="link-boxes-link" href="../wazuh-server/index.html">
-        <p class="link-boxes-label">Install the Wazuh server</p>
+        <p class="link-boxes-label">Install the Wazuh manager</p>
 
 .. image:: ../../images/installation/Server-Circle.png
      :align: center

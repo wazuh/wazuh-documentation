@@ -6,7 +6,7 @@
 Wazuh dashboard
 ===============
 
-This Wazuh central component is a flexible and intuitive web interface for mining, analyzing, and visualizing security data. It provides out-of-the-box dashboards, allowing you to seamlessly navigate through the user interface.
+This Wazuh central component is a flexible and intuitive web interface for mining, analyzing, and visualizing security data. It provides out-of-the-box dashboards, allowing you to seamlessly navigate through the user interface. It also enables centralized management of the Wazuh manager and Wazuh agents, giving you full control from a single unified console.
 
 With the Wazuh dashboard, you can visualize security events, detected vulnerabilities, file integrity monitoring data, configuration assessment results, cloud infrastructure monitoring events, and regulatory compliance standards. If you want to learn more about the Wazuh components, see the :doc:`Getting started <../../getting-started/components/index>` section.
 
@@ -39,7 +39,7 @@ Check the requirements below and choose an installation method to start installi
   
     <div class="link-boxes-item past-step">
       <a class="link-boxes-link" href="../wazuh-server/index.html">
-        <p class="link-boxes-label">Install the Wazuh server</p>
+        <p class="link-boxes-label">Install the Wazuh manager</p>
 
 .. image:: ../../images/installation/Server-Circle.png
      :align: center
@@ -73,7 +73,7 @@ Check the supported operating systems and the recommended hardware requirements 
 Recommended operating systems
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The Wazuh dashboard requires a 64-bit Intel, AMD, or ARM Linux processor (x86_64/AMD64 or AARCH64/ARM64 architecture). Wazuh supports the following operating system versions:
+The Wazuh dashboard requires a 64-bit Intel, AMD, or ARM Linux processor (x86_64/AMD64 or AARCH64/ARM64 architecture). Wazuh recommends the following operating system versions:
 
 .. include:: /_templates/installations/wazuh/recommended-operating-systems.rst
 

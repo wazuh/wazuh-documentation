@@ -1,31 +1,31 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: The Wazuh server is in charge of analyzing the data received from the Wazuh agents. Install the Wazuh server in a single-node or multi-node configuration according to your environment needs.
+   :description: The Wazuh manager analyzes event data received from Wazuh agents and forwards the processed events to the Wazuh indexer. Install the Wazuh manager in a single-node or multi-node configuration according to your environment needs.
 
-Installing the Wazuh server step by step
-========================================
+Installing the Wazuh manager step by step
+=========================================
 
-Install and configure the Wazuh server as a single-node or multi-node cluster following step-by-step instructions. The Wazuh server is a central component that includes the Wazuh manager and Filebeat. The Wazuh manager collects and analyzes data from the deployed Wazuh agents. It triggers alerts when threats or anomalies are detected. Filebeat securely forwards alerts and archived events to the Wazuh indexer.
+Install and configure the Wazuh manager as a single-node or multi-node cluster following step-by-step instructions. The Wazuh manager analyzes event data received from Wazuh agents and forwards the processed events to the Wazuh indexer.
 
 The installation process is divided into two stages.
 
-#. `Wazuh server node installation`_
+#. `Wazuh manager node installation`_
 #. `Cluster configuration for multi-node deployment`_
 
 .. note:: You need root user privileges to run all the commands described below.
 
-Wazuh server node installation
-------------------------------
+Wazuh manager node installation
+-------------------------------
 
-Follow these steps to install a single-node or multi-node cluster Wazuh server.
+Follow these steps to install a single-node or multi-node cluster Wazuh manager.
 
 Adding the Wazuh repository
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. note::
 
-   If you are installing the Wazuh server on the same host as the Wazuh indexer, you may skip these steps only if the Wazuh repository is already configured and enabled.
+   If you are installing the Wazuh manager on the same host as the Wazuh indexer, you may skip these steps only if the Wazuh repository is already configured and enabled.
 
 .. tabs::
 
@@ -144,7 +144,7 @@ Deploying certificates
 
    Make sure that a copy of the ``wazuh-certificates.tar`` file, created during the initial configuration step, is placed in your working directory.
 
-#. Replace ``<SERVER_NODE_NAME>`` with your Wazuh server node certificate name, the same one used in ``config.yml`` when creating the certificates. Then, move the certificates to their corresponding location.
+#. Replace ``<MANAGER_NODE_NAME>`` with your Wazuh manager node certificate name, the same one used in ``config.yml`` when creating the certificates. In our case, the node name is, ``manager``. Then move the certificates to their corresponding location.
 
    .. include:: /_templates/installations/filebeat/opensearch/copy_certificates_filebeat_wazuh_cluster.rst
 
@@ -214,7 +214,7 @@ Starting the Filebeat service
         talk to server... OK
         version: 7.10.2
 
-Your Wazuh server node is now successfully installed. Repeat this stage of the installation process for every Wazuh server node in your Wazuh cluster, then proceed with configuring the Wazuh cluster. If you want a Wazuh server single-node cluster, everything is set and you can proceed directly with :doc:`../wazuh-dashboard/step-by-step`.
+Your Wazuh manager node is now successfully installed. Repeat this stage of the installation process for every Wazuh manager node in your Wazuh cluster, then proceed with configuring the Wazuh cluster. If you want a Wazuh manager single-node cluster, everything is set and you can proceed directly with :doc:`../wazuh-dashboard/step-by-step`.
 
 Disable Wazuh updates
 ---------------------
@@ -224,12 +224,12 @@ Disable Wazuh updates
 Cluster configuration for multi-node deployment
 -----------------------------------------------
 
-After completing the installation of the Wazuh server on every node, you need to configure one server node only as the master and the rest as workers.
+After completing the installation of the Wazuh manager on every node, you need to configure one server node only as the master and the rest as workers.
 
 .. _wazuh_server_master_node:
 
-Configuring the Wazuh server master node
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Configuring the Wazuh manager master node
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 #. Edit the following settings in the ``/var/ossec/etc/ossec.conf`` file and configure the necessary parameters:
 
@@ -241,8 +241,8 @@ Configuring the Wazuh server master node
 
 .. _wazuh_server_worker_nodes:
 
-Configuring the Wazuh server worker nodes
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Configuring the Wazuh manager worker nodes
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 #. .. include:: /_templates/installations/manager/configure_wazuh_worker_node.rst
 
@@ -250,10 +250,10 @@ Configuring the Wazuh server worker nodes
 
    .. include:: /_templates/installations/manager/restart_wazuh_manager.rst
 
-  Repeat these configuration steps for every Wazuh server worker node in your cluster.
+  Repeat these configuration steps for every Wazuh manager worker node in your cluster.
 
-Testing Wazuh server cluster
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Testing Wazuh manager cluster
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Run the following command to verify that the Wazuh cluster is enabled and all the nodes are connected:
 
@@ -276,6 +276,6 @@ Note that ``10.0.0.3``, ``10.0.0.4``, ``10.0.0.5`` are example IPs.
 Next steps
 ----------
 
-The Wazuh server installation is now complete, and you can proceed with :doc:`../wazuh-dashboard/step-by-step`.
+The Wazuh manager installation is now complete, and you can proceed with :doc:`../wazuh-dashboard/step-by-step`.
 
-If you want to uninstall the Wazuh server, see :ref:`uninstall_server`.
+If you want to uninstall the Wazuh manager, see :ref:`uninstall_server`.

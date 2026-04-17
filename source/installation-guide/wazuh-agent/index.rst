@@ -6,7 +6,7 @@
 Wazuh agent
 ===========
 
-The Wazuh agent is multi-platform and runs on the endpoints that you want to monitor. It communicates with the Wazuh server, sending data in near real-time through an encrypted and authenticated channel.
+The Wazuh agent is multi-platform and runs on the endpoints that you want to monitor. It communicates with the Wazuh manager, sending data in near real-time through an encrypted and authenticated channel.
 
 The Wazuh agent was developed considering the need to monitor a wide variety of different endpoints without impacting their performance. It is supported on the most popular operating systems, and it requires 35 MB of RAM on average.
 

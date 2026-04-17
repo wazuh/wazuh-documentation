@@ -11,11 +11,12 @@ Install and configure the Wazuh dashboard on a 64-bit (x86_64/AMD64 or AARCH64/A
 Wazuh dashboard installation
 -----------------------------
 
-#. Download the Wazuh installation assistant. You can skip this step if you have already installed Wazuh indexer on the same server.
+#. Download the Wazuh installation assistant and the installation artifacts. Skip this step if you installed Wazuh indexer on the same server and the Wazuh installation assistant and artifacts files are already in your working directory:
 
    .. code-block:: console
 
-      # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-install.sh
+      # curl -o artifact_urls.yaml https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/artifact_urls_5.0.0-beta1.yaml
+      # curl -sO https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-install-5.0.0-beta1.sh
 
 #. Run the Wazuh installation assistant with the option ``--wazuh-dashboard`` and the node name to install and configure the Wazuh dashboard. The node name must be the same one used in ``config.yml`` for the initial configuration, for example, ``dashboard``:
 
@@ -25,27 +26,23 @@ Wazuh dashboard installation
 
    .. code-block:: console
 
-      # bash wazuh-install.sh --wazuh-dashboard dashboard
+      # bash wazuh-install-5.0.0-beta1.sh --wazuh-dashboard dashboard -d local
 
    The default Wazuh web user interface port is 443, used by the Wazuh dashboard. You can change this port using the optional parameter ``-p <PORT_NUMBER>`` or ``--port <PORT_NUMBER>``. Some recommended ports are 8443, 8444, 8080, 8888, and 9000.
 
-   Once the Wazuh installation is completed, the output shows the access credentials and a message that confirms that the installation was successful.
+   Once the Wazuh installation is completed, the output shows the access credentials and a message that confirms that the installation was successful. The default password is ``admin``.
 
    .. code-block:: none
       :emphasize-lines: 3,4
 
       INFO: --- Summary ---
-      INFO: You can access the web interface https://<WAZUH_DASHBOARD_IP_ADDRESS>
+      INFO: You can access the web interface https://<WAZUH_DASHBOARD_IP_ADDRESS>:443
          User: admin
          Password: <ADMIN_PASSWORD>
 
       INFO: Installation finished.
 
-   You now have installed and configured Wazuh. Find all passwords that the Wazuh installation assistant generated in the ``wazuh-passwords.txt`` file inside the ``wazuh-install-files.tar`` archive. Run the following command to print them:
-
-   .. code-block:: console
-
-      # tar -O -xvf wazuh-install-files.tar wazuh-install-files/wazuh-passwords.txt
+   You now have installed and configured Wazuh. 
 
 #. Access the Wazuh web interface with your ``admin`` user credentials. This is the default administrator account for the Wazuh indexer and it allows you to access the Wazuh dashboard.
 
@@ -88,7 +85,7 @@ All the Wazuh central components are successfully installed.
 
     <div class="link-boxes-item past-step">
       <a class="link-boxes-link" href="../wazuh-server/index.html">
-        <p class="link-boxes-label">Install the Wazuh server</p>
+        <p class="link-boxes-label">Install the Wazuh manager</p>
 
 .. image:: ../../images/installation/Server-Circle.png
      :align: center

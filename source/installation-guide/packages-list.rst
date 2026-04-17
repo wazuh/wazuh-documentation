@@ -28,11 +28,8 @@ Wazuh indexer
 |              |    arm64     | |Indexer_ARM64_DEB|       |
 +--------------+--------------+---------------------------+
 
-Wazuh server
-------------
-
 Wazuh manager
-^^^^^^^^^^^^^
+-------------
 
 .. |Amazon_x86_64_manager| replace:: `wazuh-manager-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_MANAGER_X86|.x86_64.rpm <|RPM_MANAGER_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_MANAGER_X86|.x86_64.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-manager-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_MANAGER_X86|.x86_64.rpm.sha512>`__)
 

@@ -12,15 +12,15 @@ Follow these steps to uninstall the Wazuh central components using the Wazuh ins
 
    .. code-block:: console
 
-      # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-install.sh
+      # curl -sO https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-install-5.0.0-beta1.sh
 
 #. Run the Wazuh installation assistant with the option ``-u`` or ``--uninstall`` as follows:
 
    .. code-block:: console
 
-      # bash wazuh-install.sh --uninstall
+      # bash wazuh-install-5.0.0-beta1.sh --uninstall
 
-This will remove the Wazuh indexer, the Wazuh server, and the Wazuh dashboard.
+This will remove the Wazuh indexer, the Wazuh manager, and the Wazuh dashboard.
 
 Uninstalling Wazuh components
 -----------------------------
@@ -69,8 +69,8 @@ Follow the step below to uninstall the Wazuh dashboard using your package manage
 
 .. _uninstall_server:
 
-Uninstalling the Wazuh server
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Uninstalling the Wazuh manager
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Follow these steps to uninstall the Wazuh manager and filebeat using your package manager.
 
