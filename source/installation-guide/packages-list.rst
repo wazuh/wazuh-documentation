@@ -111,26 +111,6 @@ Wazuh manager
 | Raspbian OS           | Buster and later  |    aarch64   | |Raspbian_aarch64_manager|               |
 +-----------------------+-------------------+--------------+------------------------------------------+
 
-Filebeat
-^^^^^^^^
-
-.. |Filebeat_x86_64_RPM| replace:: `filebeat-|FILEBEAT_LATEST|-|FILEBEAT_CURRENT_REV|.x86_64.rpm <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/yum/filebeat-|FILEBEAT_LATEST|-|FILEBEAT_CURRENT_REV|.x86_64.rpm>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/elasticsearch/|FILEBEAT_LATEST|/filebeat-|FILEBEAT_LATEST|-|FILEBEAT_CURRENT_REV|.x86_64.rpm.sha512>`__)
-.. |Filebeat_AARCH64_RPM| replace:: `filebeat-|FILEBEAT_LATEST|-|FILEBEAT_CURRENT_REV|.aarch64.rpm <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/yum/filebeat-|FILEBEAT_LATEST|-|FILEBEAT_CURRENT_REV|.aarch64.rpm>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/elasticsearch/|FILEBEAT_LATEST|/filebeat-|FILEBEAT_LATEST|-|FILEBEAT_CURRENT_REV|.aarch64.rpm.sha512>`__)
-.. |Filebeat_AMD64_DEB| replace:: `filebeat_|FILEBEAT_LATEST|-|FILEBEAT_CURRENT_REV|_amd64.deb <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/apt/pool/main/f/filebeat/filebeat_|FILEBEAT_LATEST|-|FILEBEAT_CURRENT_REV|_amd64.deb>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/elasticsearch/|FILEBEAT_LATEST|/filebeat_|FILEBEAT_LATEST|-|FILEBEAT_CURRENT_REV|_amd64.deb.sha512>`__)
-.. |Filebeat_ARM64_DEB| replace:: `filebeat_|FILEBEAT_LATEST|-|FILEBEAT_CURRENT_REV|_arm64.deb <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/apt/pool/main/f/filebeat/filebeat_|FILEBEAT_LATEST|-|FILEBEAT_CURRENT_REV|_arm64.deb>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/elasticsearch/|FILEBEAT_LATEST|/filebeat_|FILEBEAT_LATEST|-|FILEBEAT_CURRENT_REV|_arm64.deb.sha512>`__)
-
-+--------------+--------------+----------------------------+
-| Package type | Architecture | Package                    |
-+==============+==============+============================+
-|     RPM      |    x86_64    | |Filebeat_x86_64_RPM|      |
-|              +--------------+----------------------------+
-|              |    aarch64   | |Filebeat_AARCH64_RPM|     |
-+--------------+--------------+----------------------------+
-|     DEB      |    amd64     | |Filebeat_AMD64_DEB|       |
-|              +--------------+----------------------------+
-|              |    arm64     | |Filebeat_ARM64_DEB|       |
-+--------------+--------------+----------------------------+
-
 Wazuh dashboard
 ---------------
 

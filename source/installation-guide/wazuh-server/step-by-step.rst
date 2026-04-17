@@ -68,75 +68,6 @@ Installing the Wazuh manager
 
 .. include:: /_templates/installations/common/firewall-ports-note.rst
 
-.. _wazuh_server_multi_node_filebeat:
-
-Installing Filebeat
-^^^^^^^^^^^^^^^^^^^
-
-#. Install the Filebeat package.
-
-   .. tabs::
-
-      .. group-tab:: APT
-
-         .. code-block:: console
-
-            # apt-get -y install filebeat|FILEBEAT_LATEST_APT_PKG_INSTALL|
-
-      .. group-tab:: Yum
-
-         .. code-block:: console
-
-            # yum -y install filebeat|FILEBEAT_LATEST_YUM_PKG_INSTALL|
-
-      .. group-tab:: DNF
-
-         .. code-block:: console
-
-            # dnf -y install filebeat|FILEBEAT_LATEST_YUM_PKG_INSTALL|
-
-.. _installation_configuring_filebeat:
-
-Configuring Filebeat
-^^^^^^^^^^^^^^^^^^^^
-
-#. Download the preconfigured Filebeat configuration file.
-
-   .. code-block:: console
-
-      # curl -so /etc/filebeat/filebeat.yml https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/tpl/wazuh/filebeat/filebeat.yml
-
-
-#. Edit the ``/etc/filebeat/filebeat.yml`` configuration file and replace the following value:
-
-   .. include:: /_templates/installations/filebeat/opensearch/configure_filebeat.rst
-
-#. Create a Filebeat keystore to securely store authentication credentials.
-
-   .. code-block:: console
-
-      # filebeat keystore create
-
-#. Add the default username and password ``admin``:``admin`` to the secrets keystore.
-
-   .. code-block:: console
-
-      # echo admin | filebeat keystore add username --stdin --force
-      # echo admin | filebeat keystore add password --stdin --force
-
-#. Download the alerts template for the Wazuh indexer.
-
-   .. code-block:: console
-
-      # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_CURRENT|/extensions/elasticsearch/7.x/wazuh-template.json
-      # chmod go+r /etc/filebeat/wazuh-template.json
-
-#. Install the Wazuh module for Filebeat.
-
-   .. code-block:: console
-
-      # curl -s https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/filebeat/wazuh-filebeat-|WAZUH_FILEBEAT|.tar.gz | tar -xvz -C /usr/share/filebeat/module
-
 Deploying certificates
 ^^^^^^^^^^^^^^^^^^^^^^
 
@@ -144,9 +75,21 @@ Deploying certificates
 
    Make sure that a copy of the ``wazuh-certificates.tar`` file, created during the initial configuration step, is placed in your working directory.
 
-#. Replace ``<MANAGER_NODE_NAME>`` with your Wazuh manager node certificate name, the same one used in ``config.yml`` when creating the certificates. In our case, the node name is, ``manager``. Then move the certificates to their corresponding location.
+#. Replace ``<MANAGER_NODE_NAME>`` with your Wazuh manager node certificate name, the same one used in ``config.yml`` when creating the certificates. In our case, the node name is ``manager``. Then move the certificates to their corresponding location.
 
-   .. include:: /_templates/installations/filebeat/opensearch/copy_certificates_filebeat_wazuh_cluster.rst
+   .. code-block:: console
+
+      # NODE_NAME=<MANAGER_NODE_NAME>
+
+   .. code-block:: console
+
+      # mkdir /var/wazuh-manager/etc/certs
+      # tar -xf ./wazuh-certificates.tar -C /var/wazuh-manager/etc/certs/ ./$NODE_NAME.pem ./$NODE_NAME-key.pem ./root-ca.pem
+      # mv -n /var/wazuh-manager/etc/certs/$NODE_NAME.pem /var/wazuh-manager/etc/certs/manager.pem
+      # mv -n /var/wazuh-manager/etc/certs/$NODE_NAME-key.pem /var/wazuh-manager/etc/certs/manager-key.pem
+      # chmod 500 /var/wazuh-manager/etc/certs
+      # chmod 400 /var/wazuh-manager/etc/certs/*
+      # chown -R root:root /var/wazuh-manager/etc/certs
 
 Configuring the Wazuh indexer connection
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -159,14 +102,14 @@ Configuring the Wazuh indexer connection
 
    .. code-block:: console
 
-      # echo '<INDEXER_USERNAME>' | /var/ossec/bin/wazuh-keystore -f indexer -k username
-      # echo '<INDEXER_PASSWORD>' | /var/ossec/bin/wazuh-keystore -f indexer -k password
+      # echo '<INDEXER_USERNAME>' | /var/wazuh-manager/bin/wazuh-manager-keystore -f indexer -k username
+      # echo '<INDEXER_PASSWORD>' | /var/wazuh-manager/bin/wazuh-manager-keystore -f indexer -k password
 
    .. note::
 
       The default step-by-step installation credentials are ``admin``:``admin``
 
-#. Edit ``/var/ossec/etc/ossec.conf`` to configure the indexer connection.
+#. Edit ``/var/wazuh-manager/etc/wazuh-manager.conf`` to configure the indexer connection.
 
    .. include:: /_templates/installations/manager/configure_indexer_connection.rst
 
@@ -180,39 +123,6 @@ Starting the Wazuh manager
 #. Run the following command to verify the Wazuh manager status.
 
    .. include:: /_templates/installations/wazuh/common/check_wazuh_manager.rst
-
-Starting the Filebeat service
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-#. Enable and start the Filebeat service.
-
-   .. include:: /_templates/installations/filebeat/common/enable_filebeat.rst
-
-#. Run the following command to verify that Filebeat is successfully installed.
-
-   .. code-block:: console
-
-      # filebeat test output
-
-   Expand the output to see an example response.
-
-   .. code-block:: none
-      :class: output accordion-output
-
-      elasticsearch: https://127.0.0.1:9200...
-        parse url... OK
-        connection...
-          parse host... OK
-          dns lookup... OK
-          addresses: 127.0.0.1
-          dial up... OK
-        TLS...
-          security: server's certificate chain verification is enabled
-          handshake... OK
-          TLS version: TLSv1.3
-          dial up... OK
-        talk to server... OK
-        version: 7.10.2
 
 Your Wazuh manager node is now successfully installed. Repeat this stage of the installation process for every Wazuh manager node in your Wazuh cluster, then proceed with configuring the Wazuh cluster. If you want a Wazuh manager single-node cluster, everything is set and you can proceed directly with :doc:`../wazuh-dashboard/step-by-step`.
 
@@ -231,7 +141,7 @@ After completing the installation of the Wazuh manager on every node, you need t
 Configuring the Wazuh manager master node
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Edit the following settings in the ``/var/ossec/etc/ossec.conf`` file and configure the necessary parameters:
+#. Edit the following settings in the ``/var/wazuh-manager/etc/wazuh-manager.conf`` file and configure the necessary parameters:
 
    .. include:: /_templates/installations/manager/configure_wazuh_master_node.rst
 
@@ -259,7 +169,7 @@ Run the following command to verify that the Wazuh cluster is enabled and all th
 
 .. code-block:: console
 
-    # /var/ossec/bin/cluster_control -l
+    # /var/wazuh-manager/bin/cluster_control -l
 
 An example output of the command looks as follows:
 

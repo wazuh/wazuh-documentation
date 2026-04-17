@@ -12,16 +12,16 @@ By default, the indexer settings have one host configured. It's set to ``127.0.0
      </hosts>
      <ssl>
        <certificate_authorities>
-         <ca>/etc/filebeat/certs/root-ca.pem</ca>
+         <ca>/var/wazuh-manager/etc/certs/root-ca.pem</ca>
        </certificate_authorities>
-       <certificate>/etc/filebeat/certs/filebeat.pem</certificate>
-       <key>/etc/filebeat/certs/filebeat-key.pem</key>
+       <certificate>/var/wazuh-manager/etc/certs/manager.pem</certificate>
+       <key>/var/wazuh-manager/etc/certs/manager-key.pem</key>
      </ssl>
    </indexer>
 
-- Replace ``127.0.0.1`` with your Wazuh indexer node IP address or hostname. You can find this value in the Filebeat config file ``/etc/filebeat/filebeat.yml``.
+- Replace ``127.0.0.1`` with your Wazuh indexer node IP address or hostname.
 
-- Ensure the Filebeat certificate and key name match the certificate files in ``/etc/filebeat/certs``.
+- Ensure the Wazuh manager certificate and key name match the certificate files in ``/var/wazuh-manager/etc/certs``.
 
 If you are running a Wazuh indexer cluster infrastructure, add a ``<host>`` entry for each one of your nodes. For example, in a two-node configuration:
 
