@@ -12,13 +12,13 @@ Follow these steps to uninstall the Wazuh central components using the Wazuh ins
 
    .. code-block:: console
 
-      # curl -sO https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-install-5.0.0-beta1.sh
+      # curl -sO https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-install-|WAZUH_CURRENT|-|WAZUH_INSTALL_ASSISTANT_REV|.sh
 
 #. Run the Wazuh installation assistant with the option ``-u`` or ``--uninstall`` as follows:
 
    .. code-block:: console
 
-      # bash wazuh-install-5.0.0-beta1.sh --uninstall
+      # bash wazuh-install-|WAZUH_CURRENT|-|WAZUH_INSTALL_ASSISTANT_REV|.sh --uninstall
 
 This will remove the Wazuh indexer, the Wazuh manager, and the Wazuh dashboard.
 

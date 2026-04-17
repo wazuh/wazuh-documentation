@@ -15,8 +15,8 @@ Wazuh manager cluster installation
 
    .. code-block:: console
 
-       # curl -o artifact_urls.yaml https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/artifact_urls_5.0.0-beta1.yaml
-       # curl -sO https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-install-5.0.0-beta1.sh
+       # curl -o artifact_urls.yaml https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/artifact_urls_|WAZUH_CURRENT|-|WAZUH_INSTALL_ASSISTANT_REV|.yaml
+       # curl -sO https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-install-|WAZUH_CURRENT|-|WAZUH_INSTALL_ASSISTANT_REV|.sh
 
 #. Run the Wazuh installation assistant with the option ``--wazuh-manager`` followed by the node name to install the Wazuh manager. The node name must be the same one used in config.yml for the initial configuration, for example, ``manager``:
  
@@ -24,7 +24,7 @@ Wazuh manager cluster installation
 
    .. code-block:: console
   
-       # bash wazuh-install-5.0.0-beta1.sh --wazuh-manager manager -d local
+       # bash wazuh-install-|WAZUH_CURRENT|-|WAZUH_INSTALL_ASSISTANT_REV|.sh --wazuh-manager manager -d local
 
 
 Your Wazuh manager is now successfully installed. 

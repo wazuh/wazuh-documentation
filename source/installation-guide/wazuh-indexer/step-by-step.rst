@@ -32,8 +32,8 @@ Generating the SSL certificates
 
    .. code-block:: console
 
-      # curl -sO https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-certs-tool-5.0.0-beta1.sh
-      # curl -o config.yml https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/config-5.0.0-beta1.yml
+      # curl -sO https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-certs-tool-|WAZUH_CURRENT|-|WAZUH_INSTALL_ASSISTANT_REV|.sh
+      # curl -o config.yml https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/config-|WAZUH_CURRENT|-|WAZUH_INSTALL_ASSISTANT_REV|.yml
 
 #. Edit ``./config.yml`` and replace the node names and IP values with the corresponding names and IP addresses. You need to do this for all Wazuh manager, Wazuh indexer, and Wazuh dashboard nodes. Add as many node fields as needed.
 
@@ -80,11 +80,11 @@ Generating the SSL certificates
 
    To learn more about how to create and configure the certificates, see the :doc:`/user-manual/wazuh-indexer-cluster/certificate-deployment` section.
 
-#. Run ``./wazuh-certs-tool-5.0.0-beta1.sh`` to create the certificates. For a multi-node cluster, these certificates need to be later deployed to all Wazuh instances in your cluster.
+#. Run ``./wazuh-certs-tool-|WAZUH_CURRENT|-|WAZUH_INSTALL_ASSISTANT_REV|.sh`` to create the certificates. For a multi-node cluster, these certificates need to be later deployed to all Wazuh instances in your cluster.
 
    .. code-block:: console
 
-      # bash ./wazuh-certs-tool-5.0.0-beta1.sh -A
+      # bash ./wazuh-certs-tool-|WAZUH_CURRENT|-|WAZUH_INSTALL_ASSISTANT_REV|.sh -A
 
 #. Compress all the necessary files.
 
