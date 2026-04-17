@@ -25,7 +25,7 @@ This component is a lightweight data shipper designed to securely forward alerts
 Configuration
 ~~~~~~~~~~~~~
 
-The code block below shows an expanded Filebeat configuration on the Wazuh server ``/etc/filebeat/filebeat.yml`` file. This configuration file is downloaded while performing step by step Wazuh server installation. To learn how to download, configure, and install Filebeat, refer to the :ref:`configuring Filebeat <installation_configuring_filebeat>` section in the documentation.
+The code block below shows an expanded Filebeat configuration on the Wazuh server ``/etc/filebeat/filebeat.yml`` file. This configuration file is downloaded while performing step by step Wazuh server installation.
 
 .. code-block:: yaml
 

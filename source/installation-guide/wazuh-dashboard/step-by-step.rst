@@ -154,109 +154,109 @@ Select your deployment type and follow the instructions to change the default pa
 
    .. group-tab:: All-in-one deployment
 
-      Changing the password for a Wazuh indexer user
-      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      .. tabs::
 
-      Wazuh indexer users are defined in ``/etc/wazuh-indexer/opensearch-security/internal_users.yml``.
+         .. group-tab:: Changing the password for a Wazuh indexer user
 
-      #. Download the Wazuh passwords tool:
+            Wazuh indexer users are defined in ``/etc/wazuh-indexer/opensearch-security/internal_users.yml``.
 
-         .. code-block:: console
+            #. Download the Wazuh passwords tool:
 
-            # wget https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-passwords-tool-5.0.0-beta1.sh
+               .. code-block:: console
 
-      #. To change the password for a Wazuh indexer user, run the passwords tool with the ``-u`` option and indicate the new password with the ``-p`` option. The password must have a length between 8 and 64 characters and contain at least one upper case letter, one lower case letter, a number, and one of the following symbols: ``.*+?-``.
+                  # wget https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-passwords-tool-5.0.0-beta1.sh
 
-         .. code-block:: console
+            #. To change the password for a Wazuh indexer user, run the passwords tool with the ``-u`` option and indicate the new password with the ``-p`` option. The password must have a length between 8 and 64 characters and contain at least one upper case letter, one lower case letter, a number, and one of the following symbols: ``.*+?-``.
 
-            # bash wazuh-passwords-tool-5.0.0-beta1.sh -u <USER> -p <PASSWORD>
+               .. code-block:: console
 
-         Where ``<USER>`` is the name of the user whose password you want to change and ``<PASSWORD>`` is the new password. If ``<PASSWORD>`` is not specified, the tool will generate a random password.
+                  # bash wazuh-passwords-tool-5.0.0-beta1.sh -u <USER> -p <PASSWORD>
 
-         For example, to change the password of the ``admin`` user to ``Secr3tP4ssw*rd``, run the following command:
+               Where ``<USER>`` is the name of the user whose password you want to change and ``<PASSWORD>`` is the new password. If ``<PASSWORD>`` is not specified, the tool will generate a random password.
 
-         .. code-block:: console
+               For example, to change the password of the ``admin`` user to ``Secr3tP4ssw*rd``, run the following command:
 
-            # bash wazuh-passwords-tool-5.0.0-beta1.sh -u admin -p Secr3tP4ssw*rd
+               .. code-block:: console
 
-         .. code-block:: console
-            :class: output
+                  # bash wazuh-passwords-tool-5.0.0-beta1.sh -u admin -p Secr3tP4ssw*rd
 
-            10/04/2026 13:40:45 INFO: Updating the internal users.
-            10/04/2026 13:41:04 INFO: A backup of the internal users has been saved in the /etc/wazuh-indexer/internalusers-backup folder.
-            10/04/2026 13:41:05 INFO: Generating password hash
-            10/04/2026 13:42:28 WARNING: Password changed. Remember to update the password in the Wazuh dashboard and the Wazuh manager nodes if necessary, and restart the services.
+               .. code-block:: console
+                  :class: output
 
-      Changing the password for a Wazuh manager API user
-      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                  10/04/2026 13:40:45 INFO: Updating the internal users.
+                  10/04/2026 13:41:04 INFO: A backup of the internal users has been saved in the /etc/wazuh-indexer/internalusers-backup folder.
+                  10/04/2026 13:41:05 INFO: Generating password hash
+                  10/04/2026 13:42:28 WARNING: Password changed. Remember to update the password in the Wazuh dashboard and the Wazuh manager nodes if necessary, and restart the services.
 
-      To change the password for a Wazuh manager API user, use the following syntax:
+         .. group-tab:: Changing the password for a Wazuh manager API user
 
-      .. code-block:: console
+            To change the password for a Wazuh manager API user, use the following syntax:
 
-         # bash wazuh-passwords-tool-5.0.0-beta1.sh -A -au <ADMIN_USER> -ap <ADMIN_PASSWORD> -u <USER> -p <PASSWORD>
+            .. code-block:: console
 
-      Where ``<ADMIN_USER>`` and ``<ADMIN_PASSWORD>`` are the Wazuh manager API administrator user and password, respectively. ``<USER>`` is the name of the user whose password you want to change, and ``<PASSWORD>`` is the new password. If ``<PASSWORD>`` is not specified, the tool will generate a random password.
+               # bash wazuh-passwords-tool-5.0.0-beta1.sh -A -au <ADMIN_USER> -ap <ADMIN_PASSWORD> -u <USER> -p <PASSWORD>
 
-      For example, to change the password of the ``wazuh`` user to ``Hello*123``, run the following command:
+            Where ``<ADMIN_USER>`` and ``<ADMIN_PASSWORD>`` are the Wazuh manager API administrator user and password, respectively. ``<USER>`` is the name of the user whose password you want to change, and ``<PASSWORD>`` is the new password. If ``<PASSWORD>`` is not specified, the tool will generate a random password.
 
-      .. code-block:: console
+            For example, to change the password of the ``wazuh`` user to ``Hello*123``, run the following command:
 
-         # bash wazuh-passwords-tool-5.0.0-beta1.sh -A -au wazuh -ap wazuh -u wazuh -p Hello*123
+            .. code-block:: console
 
-      .. code-block:: console
-         :class: output
+               # bash wazuh-passwords-tool-5.0.0-beta1.sh -A -au wazuh -ap wazuh -u wazuh -p Hello*123
 
-         10/04/2026 13:52:43 INFO: The password for Wazuh API user wazuh is Hello*123
+            .. code-block:: console
+               :class: output
+
+               10/04/2026 13:52:43 INFO: The password for Wazuh API user wazuh is Hello*123
 
 
    .. group-tab:: Distributed deployment
 
-      Changing the password for a Wazuh indexer user
-      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      .. tabs::
 
-      #. Download the Wazuh passwords tool on any Wazuh indexer node:
+         .. group-tab:: Changing the password for a Wazuh indexer user
 
-         .. code-block:: console
+            #. Download the Wazuh passwords tool on any Wazuh indexer node:
 
-            # wget https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-passwords-tool-5.0.0-beta1.sh
+               .. code-block:: console
 
-      #. Use the Wazuh passwords tool to change the passwords of a specific Wazuh indexer user:
+                  # wget https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-passwords-tool-5.0.0-beta1.sh
 
-         .. code-block:: console
+            #. Use the Wazuh passwords tool to change the passwords of a specific Wazuh indexer user:
 
-            # bash wazuh-passwords-tool-5.0.0-beta1.sh -u <USER> -p <PASSWORD>
+               .. code-block:: console
 
-         Where ``<USER>`` is the name of the user whose password you want to change and ``<PASSWORD>`` is the new password. If ``<PASSWORD>`` is not specified, the tool will generate a random password.
+                  # bash wazuh-passwords-tool-5.0.0-beta1.sh -u <USER> -p <PASSWORD>
 
-         For example, to change the password of the ``admin`` user to ``Secr3tP4ssw*rd``, run the following command:
+               Where ``<USER>`` is the name of the user whose password you want to change and ``<PASSWORD>`` is the new password. If ``<PASSWORD>`` is not specified, the tool will generate a random password.
 
-         .. code-block:: console
+               For example, to change the password of the ``admin`` user to ``Secr3tP4ssw*rd``, run the following command:
 
-            # bash wazuh-passwords-tool-5.0.0-beta1.sh -u admin -p Secr3tP4ssw*rd
+               .. code-block:: console
 
-         .. code-block:: console
-            :class: output
+                  # bash wazuh-passwords-tool-5.0.0-beta1.sh -u admin -p Secr3tP4ssw*rd
 
-            10/04/2026 13:40:45 INFO: Updating the internal users.
-            10/04/2026 13:41:04 INFO: A backup of the internal users has been saved in the /etc/wazuh-indexer/internalusers-backup folder.
-            10/04/2026 13:41:05 INFO: Generating password hash
-            10/04/2026 13:42:28 WARNING: Password changed. Remember to update the password in the Wazuh dashboard and the Wazuh manager nodes if necessary, and restart the services.
+               .. code-block:: console
+                  :class: output
 
-      Changing the password for a Wazuh manager API user
-      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                  10/04/2026 13:40:45 INFO: Updating the internal users.
+                  10/04/2026 13:41:04 INFO: A backup of the internal users has been saved in the /etc/wazuh-indexer/internalusers-backup folder.
+                  10/04/2026 13:41:05 INFO: Generating password hash
+                  10/04/2026 13:42:28 WARNING: Password changed. Remember to update the password in the Wazuh dashboard and the Wazuh manager nodes if necessary, and restart the services.
 
-      #. On your Wazuh manager master node, download the Wazuh passwords tool and use it to change the password for a Wazuh manager API user:
+         .. group-tab:: Changing the password for a Wazuh manager API user
 
-         .. code-block:: console
+            #. On your Wazuh manager master node, download the Wazuh passwords tool and use it to change the password for a Wazuh manager API user:
 
-            # wget https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-passwords-tool-5.0.0-beta1.sh
-            # bash wazuh-passwords-tool-5.0.0-beta1.sh -A -au wazuh -ap Hello*123 -u wazuh-wui -p P3ssword+098
+               .. code-block:: console
 
-         .. code-block:: console
-            :class: output
+                  # wget https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-passwords-tool-5.0.0-beta1.sh
+                  # bash wazuh-passwords-tool-5.0.0-beta1.sh -A -au wazuh -ap Hello*123 -u wazuh-wui -p P3ssword+098
 
-            10/04/2026 13:56:47 INFO: The password for Wazuh API user wazuh-wui is P3ssword+098
+               .. code-block:: console
+                  :class: output
+
+                  10/04/2026 13:56:47 INFO: The password for Wazuh API user wazuh-wui is P3ssword+098
 
       #. Replace ``<WAZUH_WUI_PASSWORD>`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file with the new ``wazuh-wui`` password.
 
