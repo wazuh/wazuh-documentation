@@ -8,7 +8,7 @@
 
          # systemctl restart wazuh-manager
 
-   .. group-tab:: SysV init
+   .. group-tab:: SysV Init
 
       .. code-block:: console
 

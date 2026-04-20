@@ -19,7 +19,7 @@ Wazuh manager cluster installation
 
 #. Run the Wazuh installation assistant with the option ``--wazuh-manager`` followed by the node name to install the Wazuh manager. The node name must be the same one used in config.yml for the initial configuration, for example, ``manager``:
  
-   .. note:: Make sure that a copy of ``wazuh-install-files.tar``, created during the initial configuration step, is placed in your working directory.
+   .. note:: Make sure that a copy of the ``wazuh-install-files.tar``, created during the initial configuration step, is placed in your working directory.
 
    .. code-block:: console
   
@@ -40,4 +40,4 @@ Disable Wazuh updates
 Next steps
 ----------
   
-The Wazuh manager installation is now complete, and you can proceed with installing the Wazuh dashboard. To perform this action, see the :doc:`../wazuh-dashboard/installation-assistant` section.  
+The Wazuh manager installation is now complete and you can proceed with installing the Wazuh dashboard. To perform this action, see the :doc:`../wazuh-dashboard/installation-assistant` section.  

@@ -3,7 +3,7 @@
 .. meta::
    :description: Wazuh indexer is a highly scalable full-text search engine. Install the Wazuh indexer in a single-node or multi-node configuration according to your environment needs.
 
-Installing the Wazuh indexer step by step
+Installing the Wazuh indexer step-by-step
 =========================================
 
 Install and configure the Wazuh indexer as a single-node or multi-node cluster following step-by-step instructions. The Wazuh indexer is a scalable search and analytics engine that stores and indexes events forwarded by the Wazuh manager, enabling near real-time data analysis and several other features.
@@ -28,14 +28,14 @@ Wazuh uses certificates to establish confidentiality and encrypt communications 
 Generating the SSL certificates
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Download the ``wazuh-certs-tool.sh`` script and the ``config.yml`` configuration file. This creates the certificates that encrypt communications between the Wazuh central components.
+#. Download the ``wazuh-certs-tool-5.0.0-beta1.sh`` script and the ``config.yml`` configuration file. This creates the certificates that encrypt communications between the Wazuh central components:
 
    .. code-block:: console
 
       # curl -sO https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-certs-tool-5.0.0-beta1.sh
       # curl -o config.yml https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/config-5.0.0-beta1.yml
 
-#. Edit ``./config.yml`` and replace the node names and IP values with the corresponding names and IP addresses. You need to do this for all Wazuh manager, Wazuh indexer, and Wazuh dashboard nodes. Add as many node fields as needed.
+#. Edit ``./config.yml`` and replace the node names and IP values with the corresponding names and IP addresses. You need to do this for all Wazuh manager, Wazuh indexer, and Wazuh dashboard nodes. Add as many node fields as needed:
 
    .. code-block:: yaml
       :emphasize-lines: 4-5, 15-16, 27-28
@@ -80,13 +80,13 @@ Generating the SSL certificates
 
    To learn more about how to create and configure the certificates, see the :doc:`/user-manual/wazuh-indexer-cluster/certificate-deployment` section.
 
-#. Run ``./wazuh-certs-tool-5.0.0-beta1.sh`` to create the certificates. For a multi-node cluster, these certificates need to be later deployed to all Wazuh instances in your cluster.
+#. Run ``./wazuh-certs-tool-5.0.0-beta1.sh`` to create the certificates. For a multi-node cluster, these certificates need to be later deployed to all Wazuh instances in your cluster:
 
    .. code-block:: console
 
       # bash ./wazuh-certs-tool-5.0.0-beta1.sh -A
 
-#. Compress all the necessary files.
+#. Compress all the necessary files:
 
    .. code-block:: console
 

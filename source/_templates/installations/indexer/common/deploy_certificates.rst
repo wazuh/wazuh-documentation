@@ -1,6 +1,6 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
-#. Run the following commands, replacing ``<INDEXER_NODE_NAME>`` with the name of the Wazuh indexer node you are configuring as defined in ``config.yml``. In our case, the node name is ``indexer``. This deploys the SSL certificates to encrypt communications between the Wazuh central components.
+#. Run the following commands, replacing ``<INDEXER_NODE_NAME>`` with the name of the Wazuh indexer node you are configuring as defined in ``config.yml``. In our case, the node name is ``indexer``. This is to deploy the SSL certificates to encrypt communication between the Wazuh central components:
 
    .. code-block:: console
 

@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn how to deploy the Wazuh agent on Linux with deployment variables that facilitate the task of installing, registering, and configuring the agent.
+  :description: Learn how to deploy the Wazuh agent on Linux with deployment variables that facilitate the task of installing, enrolling, and configuring the agent.
 
 Deploying Wazuh agents on Linux endpoints
 =========================================
@@ -74,13 +74,13 @@ Follow these steps to deploy the Wazuh agent on your Linux endpoint.
 
    .. note::
 
-      Alternatively, if you want to install an agent without registering it, omit the deployment variables. To learn more about the different registration methods, see the :doc:`Wazuh agent enrollment </user-manual/agent/agent-enrollment/index>` section.
+      Alternatively, if you want to install an agent without enrolling it, omit the deployment variables. To learn more about the different enrollment methods, see the :doc:`Wazuh agent enrollment </user-manual/agent/agent-enrollment/index>` section.
 
 #. Enable and start the Wazuh agent service.
 
    .. include:: ../../_templates/installations/wazuh/common/enable_wazuh_agent_service.rst
 
-The deployment process is now complete, and the Wazuh agent is successfully running on your Linux system.
+The deployment process is now complete and the Wazuh agent is successfully running on your Linux endpoint.
 
 Disable Wazuh updates
 ---------------------

@@ -3,12 +3,12 @@
 .. meta::
    :description: The Wazuh manager analyzes event data received from Wazuh agents and forwards the processed events to the Wazuh indexer. Install the Wazuh manager in a single-node or multi-node configuration according to your environment needs.
 
-Installing the Wazuh manager step by step
+Installing the Wazuh manager step-by-step
 =========================================
 
 Install and configure the Wazuh manager as a single-node or multi-node cluster following step-by-step instructions. The Wazuh manager analyzes event data received from Wazuh agents and forwards the processed events to the Wazuh indexer.
 
-The installation process is divided into two stages.
+The installation process is divided into two stages:
 
 #. `Wazuh manager node installation`_
 #. `Cluster configuration for multi-node deployment`_
@@ -75,7 +75,7 @@ Deploying certificates
 
    Make sure that a copy of the ``wazuh-certificates.tar`` file, created during the initial configuration step, is placed in your working directory.
 
-#. Replace ``<MANAGER_NODE_NAME>`` with your Wazuh manager node certificate name, the same one used in ``config.yml`` when creating the certificates. In our case, the node name is ``manager``. Then move the certificates to their corresponding location.
+#. Replace ``<MANAGER_NODE_NAME>`` with your Wazuh manager node certificate name, the same used in ``config.yml`` when creating the certificates. In our case, the node name is, ``manager``. Then move the certificates to their corresponding location:
 
    .. code-block:: console
 
@@ -94,22 +94,18 @@ Deploying certificates
 Configuring the Wazuh indexer connection
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. note::
-
-   You can skip this step if you are not going to use the vulnerability detection capability.
-
-#. Save the Wazuh indexer username and password into the Wazuh manager keystore using the wazuh-keystore tool. Replace ``<WAZUH_INDEXER_USERNAME>`` and ``<WAZUH_INDEXER_PASSWORD>`` with the Wazuh indexer username and password:
+#. Save the Wazuh indexer username and password into the Wazuh manager keystore using the wazuh-manager-keystore tool. Replace ``<WAZUH_INDEXER_USERNAME>`` and ``<WAZUH_INDEXER_PASSWORD>`` with the Wazuh indexer username and password:
 
    .. code-block:: console
 
-      # echo '<INDEXER_USERNAME>' | /var/wazuh-manager/bin/wazuh-manager-keystore -f indexer -k username
-      # echo '<INDEXER_PASSWORD>' | /var/wazuh-manager/bin/wazuh-manager-keystore -f indexer -k password
+      # echo '<WAZUH_INDEXER_USERNAME>' | /var/wazuh-manager/bin/wazuh-manager-keystore -f indexer -k username
+      # echo '<WAZUH_INDEXER_PASSWORD>' | /var/wazuh-manager/bin/wazuh-manager-keystore -f indexer -k password
 
    .. note::
 
-      The default step-by-step installation credentials are ``admin``:``admin``
+      The default step-by-step installation credentials are ``admin``:``admin``.
 
-#. Edit ``/var/wazuh-manager/etc/wazuh-manager.conf`` to configure the indexer connection.
+#. Edit ``/var/wazuh-manager/etc/wazuh-manager.conf`` file to configure the indexer connection.
 
    .. include:: /_templates/installations/manager/configure_indexer_connection.rst
 
@@ -120,7 +116,7 @@ Starting the Wazuh manager
 
    .. include:: /_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
 
-#. Run the following command to verify the Wazuh manager status.
+#. Run the following command to verify the Wazuh manager status:
 
    .. include:: /_templates/installations/wazuh/common/check_wazuh_manager.rst
 
@@ -177,11 +173,11 @@ An example output of the command looks as follows:
    :class: output
 
    NAME         TYPE    VERSION  ADDRESS
-   master-node  master  4.12.0   10.0.0.3
-   worker-node1 worker  4.12.0   10.0.0.4
-   worker-node2 worker  4.12.0   10.0.0.5
+   master-node  master  5.0.0    10.0.0.3
+   worker-node1 worker  5.0.0    10.0.0.4
+   worker-node2 worker  5.0.0    10.0.0.5
 
-Note that ``10.0.0.3``, ``10.0.0.4``, ``10.0.0.5`` are example IPs.
+Note that the IP addresses ``10.0.0.3``, ``10.0.0.4``, and ``10.0.0.5`` are used as examples.
 
 Next steps
 ----------

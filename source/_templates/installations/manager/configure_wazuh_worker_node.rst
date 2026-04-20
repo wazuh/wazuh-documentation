@@ -29,7 +29,7 @@ Parameters to be configured:
 +-------------------------------------+-------------------------------------------------------------------------------------------------+
 | :ref:`key <cluster_key>`            | The key created previously for the ``master`` node. It has to be the same for all the nodes.    |
 +-------------------------------------+-------------------------------------------------------------------------------------------------+
-| :ref:`nodes <cluster_nodes>`        | It has to contain the address of the ``master node`` and can be either an IP or a DNS.          |
+| :ref:`nodes <cluster_nodes>`        | It has to specify the address of the ``master node`` and can be either an IP or a DNS.          |
 +-------------------------------------+-------------------------------------------------------------------------------------------------+
 | :ref:`disabled <cluster_disabled>`  | It indicates whether the node is enabled or disabled in the cluster. It has to be set to ``no``.|
 +-------------------------------------+-------------------------------------------------------------------------------------------------+

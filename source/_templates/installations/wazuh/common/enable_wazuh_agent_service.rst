@@ -13,7 +13,7 @@
       # systemctl start wazuh-agent
 
 
-  .. group-tab:: SysV init
+  .. group-tab:: SysV Init
 
     Choose one option according to your operating system.
 
@@ -35,7 +35,7 @@
 
   .. group-tab:: No service manager
 
-     On some systems, you need to start the agent manually:
+     On some systems, you need to start the Wazuh agent manually:
 
      .. code-block:: console
 

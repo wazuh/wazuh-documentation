@@ -72,7 +72,7 @@ Follow the step below to uninstall the Wazuh dashboard using your package manage
 Uninstalling the Wazuh manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Follow these steps to uninstall the Wazuh manager and filebeat using your package manager.
+Follow these steps to uninstall the Wazuh manager using your package manager.
 
 #. Remove the Wazuh manager installation.
 
@@ -89,42 +89,14 @@ Follow these steps to uninstall the Wazuh manager and filebeat using your packag
          .. code-block:: console
 
             # yum remove wazuh-manager -y
-            # rm -rf /var/ossec/
+            # rm -rf /var/wazuh-manager/
 
       .. group-tab:: DNF
 
          .. code-block:: console
 
             # dnf remove wazuh-manager -y
-            # rm -rf /var/ossec/
-
-#. Remove the Filebeat installation.
-
-   .. tabs::
-
-      .. group-tab:: APT
-
-         .. code:: console
-
-            # apt-get remove --purge filebeat -y
-
-      .. group-tab:: Yum
-
-         .. code:: console
-
-            # yum remove filebeat -y
-            # rm -rf /var/lib/filebeat/
-            # rm -rf /usr/share/filebeat/
-            # rm -rf /etc/filebeat/
-
-      .. group-tab:: DNF
-
-         .. code:: console
-
-            # dnf remove filebeat -y
-            # rm -rf /var/lib/filebeat/
-            # rm -rf /usr/share/filebeat/
-            # rm -rf /etc/filebeat/
+            # rm -rf /var/wazuh-manager/
 
 .. _uninstall_indexer:
 

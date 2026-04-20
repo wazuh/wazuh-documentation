@@ -6,7 +6,6 @@ By default, the indexer settings have one host configured. It's set to ``127.0.0
    :emphasize-lines: 4
 
    <indexer>
-     <enabled>yes</enabled>
      <hosts>
        <host>https://127.0.0.1:9200</host>
      </hosts>
@@ -19,11 +18,11 @@ By default, the indexer settings have one host configured. It's set to ``127.0.0
      </ssl>
    </indexer>
 
-- Replace ``127.0.0.1`` with your Wazuh indexer node IP address or hostname.
+- Replace ``127.0.0.1`` with your Wazuh indexer node IP address or hostname. You can find this value in the Wazuh indexer config file ``/etc/wazuh-indexer/opensearch.yml``
 
 - Ensure the Wazuh manager certificate and key name match the certificate files in ``/var/wazuh-manager/etc/certs``.
 
-If you are running a Wazuh indexer cluster infrastructure, add a ``<host>`` entry for each one of your nodes. For example, in a two-node configuration:
+If you are running a Wazuh indexer cluster infrastructure, add a ``<host>`` entry for each one of your Wazuh indexer nodes. For example, in a two-node configuration:
 
 .. code-block:: xml
 

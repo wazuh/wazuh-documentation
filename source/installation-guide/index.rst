@@ -11,7 +11,7 @@ Installation guide
 
 Wazuh is a security platform that provides unified XDR and SIEM protection for endpoints and cloud workloads. The solution is composed of the :doc:`Wazuh agent </getting-started/components/wazuh-agent>` and three central components: the :doc:`Wazuh manager </getting-started/components/wazuh-server>`, the :doc:`Wazuh indexer </getting-started/components/wazuh-indexer>`, and the :doc:`Wazuh dashboard </getting-started/components/wazuh-dashboard>`. For more information, check the :doc:`Getting Started </getting-started/index>` documentation.
 
-Wazuh is free and open source. Its components abide by the `GNU General Public License, version 2 <https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html>`_, and the `Apache License, Version 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_ (ALv2).
+Wazuh is a free and open source platform. Its components abide by the `GNU General Public License, version 2 <https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html>`_, and the `Apache License, Version 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_ (ALv2).
 
 In this installation guide, you will learn how to install Wazuh in your infrastructure. We also offer `Wazuh Cloud <https://wazuh.com/cloud/>`_, our software as a service (SaaS) solution. Wazuh Cloud is ready to use, with no additional hardware or software required, reducing the cost and complexity. Check the :doc:`Wazuh Cloud service </cloud-service/index>` documentation for more information and take advantage of the `Wazuh Cloud trial <https://console.cloud.wazuh.com/sign-up?landing=trial>`_ to explore this service.
 
@@ -21,7 +21,7 @@ Installing the Wazuh central components
 
 You can install the Wazuh indexer, Wazuh manager, and Wazuh dashboard on a single host or distribute them in cluster configurations. Each Wazuh central component supports two deployment methods: Assisted installation, and Step-by-step installation. Both methods provide instructions to install the central components on a single host or on separate hosts.
 
-You can check our :doc:`Quickstart </quickstart>` documentation to perform an all-in-one installation of the Wazuh central components. This is the fastest way to get the Wazuh central components up and running.
+Check our :doc:`Quickstart </quickstart>` documentation to perform an all-in-one installation of the Wazuh central components. This is the fastest way to get the Wazuh central components up and running.
 
 For more deployment flexibility and customization, install the Wazuh central components by starting with the :doc:`Wazuh indexer <wazuh-indexer/index>` deployment. This deployment method supports both an all-in-one installation and installing components on separate hosts.
 

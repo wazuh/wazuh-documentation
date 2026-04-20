@@ -8,18 +8,18 @@
 
          .. code-block:: console
 
-            # apt-get install debhelper tar curl libcap2-bin #debhelper version 9 or later
+            # apt-get install -y debhelper tar curl libcap2-bin #debhelper version 9 or later
 
       .. group-tab:: Yum
 
          .. code-block:: console
 
-            # yum install libcap
+            # yum -y install libcap
 
       .. group-tab:: DNF
 
          .. code-block:: console
 
-            # dnf install libcap
+            # dnf -y install libcap
 
 .. End of include file

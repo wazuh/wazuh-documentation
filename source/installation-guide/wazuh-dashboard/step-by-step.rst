@@ -83,6 +83,18 @@ Configuring the Wazuh dashboard
              opensearch.hosts: https://localhost:9200
              opensearch.ssl.verificationMode: certificate
 
+     #. ``wazuh_core.hosts.url``: This setting specifies the Wazuh manager master node. Replace ``<WAZUH_MANAGER_IP_ADDRESS>`` with the IP address or hostname of the Wazuh manager master node.
+
+        .. code-block:: yaml
+
+             wazuh_core.hosts:
+               default:
+                 url: https://<WAZUH_MANAGER_IP_ADDRESS>
+                 port: 55000
+                 username: wazuh-wui
+                 password: wazuh-wui
+                 run_as: true
+
 .. include:: /_templates/installations/common/firewall-ports-note.rst
 
 
@@ -90,9 +102,9 @@ Deploying certificates
 ^^^^^^^^^^^^^^^^^^^^^^
 
    .. note::
-     Make sure that a copy of the ``wazuh-certificates.tar`` file, created during the initial configuration step, is placed in your working directory.
+     Make sure that a copy of ``wazuh-certificates.tar`` file, created during the initial configuration step, is placed in your working directory.
 
-   #. Replace ``<DASHBOARD_NODE_NAME>`` with your Wazuh dashboard node name, the same one used in ``config.yml`` to create the certificates. In our case, the node name is, ``manager``. Then move the certificates to their corresponding location.
+   #. Replace ``<DASHBOARD_NODE_NAME>`` with your Wazuh dashboard node name, the same one used in the ``config.yml`` file to create the certificates. In our case, the node name is, ``dashboard``. Then move the certificates to their corresponding location:
 
        .. code-block:: console
 
@@ -115,20 +127,6 @@ Starting the Wazuh dashboard service
 #. Enable and start the Wazuh dashboard service.
 
    .. include:: /_templates/installations/dashboard/enable_dashboard.rst
-
-#. Edit the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` file and replace ``<WAZUH_MANAGER_IP_ADDRESS>`` with the IP address or hostname of the Wazuh manager master node.
-
-   .. code-block:: yaml
-      :emphasize-lines: 3
-
-      hosts:
-         - default:
-            url: https://<WAZUH_MANAGER_IP_ADDRESS>
-            port: 55000
-            username: wazuh-wui
-            password: wazuh-wui
-            run_as: true
-
 
 #. Access the Wazuh web interface with your ``admin`` user credentials. This is the default administrator account for the Wazuh indexer and it allows you to access the Wazuh dashboard.
 
@@ -246,7 +244,7 @@ Select your deployment type and follow the instructions to change the default pa
 
          .. group-tab:: Changing the password for a Wazuh manager API user
 
-            #. On your Wazuh manager master node, download the Wazuh passwords tool and use it to change the password for a Wazuh manager API user:
+            #. On your Wazuh manager master node, download the Wazuh passwords tool and use it to change the password of the ``wazuh-wui`` Wazuh API user:
 
                .. code-block:: console
 
@@ -258,7 +256,7 @@ Select your deployment type and follow the instructions to change the default pa
 
                   10/04/2026 13:56:47 INFO: The password for Wazuh API user wazuh-wui is P3ssword+098
 
-      #. Replace ``<WAZUH_WUI_PASSWORD>`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file with the new ``wazuh-wui`` password.
+      #. Replace ``<WAZUH_WUI_PASSWORD>`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file with the new ``wazuh-wui`` password generated in the previous step:
 
          .. code-block:: yaml
             :emphasize-lines: 6
