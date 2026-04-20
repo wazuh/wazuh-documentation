@@ -11,10 +11,10 @@ This download page contains packages required for the Wazuh installation.
 Wazuh indexer
 -------------
 
-.. |Indexer_x86_64_RPM| replace:: `wazuh-indexer-|WAZUH_CURRENT|-|WAZUH_INDEXER_CURRENT_REV|.|WAZUH_INDEXER_x64_RPM|.rpm <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/yum/wazuh-indexer-|WAZUH_CURRENT|-|WAZUH_INDEXER_CURRENT_REV|.|WAZUH_INDEXER_x64_RPM|.rpm>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh-indexer-|WAZUH_CURRENT|-|WAZUH_INDEXER_CURRENT_REV|.|WAZUH_INDEXER_x64_RPM|.rpm.sha512>`__)
-.. |Indexer_AARCH64_RPM| replace:: `wazuh-indexer-|WAZUH_CURRENT|-|WAZUH_INDEXER_CURRENT_REV|.|WAZUH_INDEXER_AARCH64_RPM|.rpm <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/yum/wazuh-indexer-|WAZUH_CURRENT|-|WAZUH_INDEXER_CURRENT_REV|.|WAZUH_INDEXER_AARCH64_RPM|.rpm>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh-indexer-|WAZUH_CURRENT|-|WAZUH_INDEXER_CURRENT_REV|.|WAZUH_INDEXER_AARCH64_RPM|.rpm.sha512>`__)
-.. |Indexer_AMD64_DEB| replace:: `wazuh-indexer_|WAZUH_CURRENT|-|WAZUH_INDEXER_CURRENT_REV|_|WAZUH_INDEXER_x64_DEB|.deb <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/apt/pool/main/w/wazuh-indexer/wazuh-indexer_|WAZUH_CURRENT|-|WAZUH_INDEXER_CURRENT_REV|_|WAZUH_INDEXER_x64_DEB|.deb>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh-indexer_|WAZUH_CURRENT|-|WAZUH_INDEXER_CURRENT_REV|_|WAZUH_INDEXER_x64_DEB|.deb.sha512>`__)
-.. |Indexer_ARM64_DEB| replace:: `wazuh-indexer_|WAZUH_CURRENT|-|WAZUH_INDEXER_CURRENT_REV|_|WAZUH_INDEXER_ARM64_DEB|.deb <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/apt/pool/main/w/wazuh-indexer/wazuh-indexer_|WAZUH_CURRENT|-|WAZUH_INDEXER_CURRENT_REV|_|WAZUH_INDEXER_ARM64_DEB|.deb>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh-indexer_|WAZUH_CURRENT|-|WAZUH_INDEXER_CURRENT_REV|_|WAZUH_INDEXER_ARM64_DEB|.deb.sha512>`__)
+.. |Indexer_x86_64_RPM| replace:: `wazuh-indexer-5.0.0-beta1.x86_64.rpm <https://packages-staging.xdrsiem.wazuh.info/nightly/5.0.0/yum/wazuh-indexer-5.0.0-latest.x86_64.rpm>`__ (sha512)
+.. |Indexer_AARCH64_RPM| replace:: `wazuh-indexer-5.0.0-beta1.aarch64.rpm <https://packages-staging.xdrsiem.wazuh.info/nightly/5.0.0/yum/wazuh-indexer-5.0.0-latest.aarch64.rpm>`__ (sha512)
+.. |Indexer_AMD64_DEB| replace:: `wazuh-indexer_5.0.0-beta1_amd64.deb <https://packages-staging.xdrsiem.wazuh.info/nightly/5.0.0/apt/pool/main/w/wazuh-indexer/wazuh-indexer_5.0.0-latest_amd64.deb>`__ (sha512)
+.. |Indexer_ARM64_DEB| replace:: `wazuh-indexer_5.0.0-beta1_arm64.deb <https://packages-staging.xdrsiem.wazuh.info/nightly/5.0.0/apt/pool/main/w/wazuh-indexer/wazuh-indexer_5.0.0-latest_arm64.deb>`__ (sha512)
 
 +--------------+--------------+---------------------------+
 | Package type | Architecture | Package                   |
@@ -31,17 +31,17 @@ Wazuh indexer
 Wazuh manager
 -------------
 
-.. |Amazon_x86_64_manager| replace:: `wazuh-manager-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_MANAGER_X86|.x86_64.rpm <|RPM_MANAGER_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_MANAGER_X86|.x86_64.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-manager-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_MANAGER_X86|.x86_64.rpm.sha512>`__)
+.. |Amazon_x86_64_manager| replace:: `wazuh-manager-5.0.0-beta1.x86_64.rpm <https://packages-staging.xdrsiem.wazuh.info/nightly/5.0.0/yum/wazuh-manager-5.0.0-latest.x86_64.rpm>`__ (sha512)
 
-.. |Amazon_aarch64_manager| replace:: `wazuh-manager-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_MANAGER_X86|.aarch64.rpm <|RPM_MANAGER_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_MANAGER_X86|.aarch64.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-manager-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_MANAGER_X86|.aarch64.rpm.sha512>`__)
+.. |Amazon_aarch64_manager| replace:: `wazuh-manager-5.0.0-beta1.aarch64.rpm <https://packages-staging.xdrsiem.wazuh.info/nightly/5.0.0/yum/wazuh-manager-5.0.0-latest.aarch64.rpm>`__ (sha512)
 
-.. |RHEL_x86_64_manager| replace:: `wazuh-manager-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_MANAGER_X86|.x86_64.rpm <|RPM_MANAGER_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_MANAGER_X86|.x86_64.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-manager-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_MANAGER_X86|.x86_64.rpm.sha512>`__)
+.. |RHEL_x86_64_manager| replace:: `wazuh-manager-5.0.0-beta1.x86_64.rpm <https://packages-staging.xdrsiem.wazuh.info/nightly/5.0.0/yum/wazuh-manager-5.0.0-latest.x86_64.rpm>`__ (sha512)
 
-.. |RHEL_aarch64_manager| replace:: `wazuh-manager-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_MANAGER_X86|.aarch64.rpm <|RPM_MANAGER_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_MANAGER_X86|.aarch64.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-manager-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_MANAGER_X86|.aarch64.rpm.sha512>`__)
+.. |RHEL_aarch64_manager| replace:: `wazuh-manager-5.0.0-beta1.aarch64.rpm <https://packages-staging.xdrsiem.wazuh.info/nightly/5.0.0/yum/wazuh-manager-5.0.0-latest.aarch64.rpm>`__ (sha512)
 
-.. |Ubuntu_x86_64_manager| replace:: `wazuh-manager_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_MANAGER_X86|_amd64.deb <|DEB_MANAGER_URL|_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_MANAGER_X86|_amd64.deb>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-manager_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_MANAGER_X86|_amd64.deb.sha512>`__)
+.. |Ubuntu_x86_64_manager| replace:: `wazuh-manager_5.0.0-beta1_amd64.deb <https://packages-staging.xdrsiem.wazuh.info/nightly/5.0.0/apt/pool/main/w/wazuh-manager/wazuh-manager_5.0.0-latest_amd64.deb>`__ (sha512)
 
-.. |Ubuntu_aarch64_manager| replace:: `wazuh-manager_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_MANAGER_X86|_arm64.deb <|DEB_MANAGER_URL|_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_MANAGER_X86|_arm64.deb>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-manager_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_MANAGER_X86|_arm64.deb.sha512>`__)
+.. |Ubuntu_aarch64_manager| replace:: `wazuh-manager_5.0.0-beta1_arm64.deb <https://packages-staging.xdrsiem.wazuh.info/nightly/5.0.0/apt/pool/main/w/wazuh-manager/wazuh-manager_5.0.0-latest_arm64.deb>`__ (sha512)
 
 +-----------------------+-------------------+--------------+------------------------------------------+
 | Distribution          | Version           | Architecture | Package                                  |
@@ -62,10 +62,10 @@ Wazuh manager
 Wazuh dashboard
 ---------------
 
-.. |Dashboard_x86_64_RPM| replace:: `wazuh-dashboard-|WAZUH_CURRENT|-|WAZUH_DASHBOARD_CURRENT_REV_RPM|.|WAZUH_DASHBOARD_x64_RPM|.rpm <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/yum/wazuh-dashboard-|WAZUH_CURRENT|-|WAZUH_DASHBOARD_CURRENT_REV_RPM|.|WAZUH_DASHBOARD_x64_RPM|.rpm>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh-dashboard-|WAZUH_CURRENT|-|WAZUH_DASHBOARD_CURRENT_REV_RPM|.|WAZUH_DASHBOARD_x64_RPM|.rpm.sha512>`__)
-.. |Dashboard_AARCH64_RPM| replace:: `wazuh-dashboard-|WAZUH_CURRENT|-|WAZUH_DASHBOARD_CURRENT_REV_RPM|.|WAZUH_DASHBOARD_AARCH64_RPM|.rpm <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/yum/wazuh-dashboard-|WAZUH_CURRENT|-|WAZUH_DASHBOARD_CURRENT_REV_RPM|.|WAZUH_DASHBOARD_AARCH64_RPM|.rpm>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh-dashboard-|WAZUH_CURRENT|-|WAZUH_DASHBOARD_CURRENT_REV_RPM|.|WAZUH_DASHBOARD_AARCH64_RPM|.rpm.sha512>`__)
-.. |Dashboard_AMD64_DEB| replace:: `wazuh-dashboard_|WAZUH_CURRENT|-|WAZUH_DASHBOARD_CURRENT_REV_DEB|_|WAZUH_DASHBOARD_x64_DEB|.deb <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/apt/pool/main/w/wazuh-dashboard/wazuh-dashboard_|WAZUH_CURRENT|-|WAZUH_DASHBOARD_CURRENT_REV_DEB|_|WAZUH_DASHBOARD_x64_DEB|.deb>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh-dashboard_|WAZUH_CURRENT|-|WAZUH_DASHBOARD_CURRENT_REV_DEB|_|WAZUH_DASHBOARD_x64_DEB|.deb.sha512>`__)
-.. |Dashboard_ARM64_DEB| replace:: `wazuh-dashboard_|WAZUH_CURRENT|-|WAZUH_DASHBOARD_CURRENT_REV_DEB|_|WAZUH_DASHBOARD_ARM64_DEB|.deb <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/apt/pool/main/w/wazuh-dashboard/wazuh-dashboard_|WAZUH_CURRENT|-|WAZUH_DASHBOARD_CURRENT_REV_DEB|_|WAZUH_DASHBOARD_ARM64_DEB|.deb>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh-dashboard_|WAZUH_CURRENT|-|WAZUH_DASHBOARD_CURRENT_REV_DEB|_|WAZUH_DASHBOARD_ARM64_DEB|.deb.sha512>`__)
+.. |Dashboard_x86_64_RPM| replace:: `wazuh-dashboard-5.0.0-beta1.x86_64.rpm <https://packages-staging.xdrsiem.wazuh.info/nightly/5.0.0/yum/wazuh-dashboard-5.0.0-latest.x86_64.rpm>`__ (sha512)
+.. |Dashboard_AARCH64_RPM| replace:: `wazuh-dashboard-5.0.0-beta1.aarch64.rpm <https://packages-staging.xdrsiem.wazuh.info/nightly/5.0.0/yum/wazuh-dashboard-5.0.0-latest.aarch64.rpm>`__ (sha512)
+.. |Dashboard_AMD64_DEB| replace:: `wazuh-dashboard_5.0.0-beta1_amd64.deb <https://packages-staging.xdrsiem.wazuh.info/nightly/5.0.0/apt/pool/main/w/wazuh-dashboard/wazuh-dashboard_5.0.0-latest_amd64.deb>`__ (sha512)
+.. |Dashboard_ARM64_DEB| replace:: `wazuh-dashboard_5.0.0-beta1_arm64.deb <https://packages-staging.xdrsiem.wazuh.info/nightly/5.0.0/apt/pool/main/w/wazuh-dashboard/wazuh-dashboard_5.0.0-latest_arm64.deb>`__ (sha512)
 
 +--------------+--------------+---------------------------+
 | Package type | Architecture | Package                   |
