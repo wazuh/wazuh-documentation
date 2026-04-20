@@ -31,7 +31,7 @@ Follow these steps to upgrade Wazuh agents locally on Windows endpoints.
 
          Open the installer and follow the instructions to upgrade the Wazuh agent.
 
-            .. thumbnail:: /images/installation/windows.png
+            .. thumbnail:: /images/installation/windows-agent.png
               :title: Windows agent setup window
               :alt: Windows agent setup Window
               :align: center
