@@ -89,49 +89,49 @@ Wazuh agent
 Linux
 ^^^^^
 
-.. |Amazon_x86_64_agent| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm <|RPM_AGENT_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm.sha512>`__)
+.. |Amazon_x86_64_agent| replace:: `wazuh-agent-5.0.0-beta1.x86_64.rpm <https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/yum/wazuh-agent-5.0.0-beta1.x86_64.rpm>`__ (sha512)
 
-.. |Amazon_aarch64_agent| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_AARCH64|.aarch64.rpm <|RPM_AGENT_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_AARCH64|.aarch64.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_AARCH64|.aarch64.rpm.sha512>`__)
+.. |Amazon_aarch64_agent| replace:: `wazuh-agent-5.0.0-beta1.aarch64.rpm <https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/yum/wazuh-agent-5.0.0-beta1.aarch64.rpm>`__ (sha512)
 
-.. |CentOS_x86_64_agent| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm <|RPM_AGENT_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm.sha512>`__)
+.. |CentOS_x86_64_agent| replace:: `wazuh-agent-5.0.0-beta1.x86_64.rpm <https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/yum/wazuh-agent-5.0.0-beta1.x86_64.rpm>`__ (sha512)
 
-.. |CentOS_aarch64_agent| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_AARCH64|.aarch64.rpm <|RPM_AGENT_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_AARCH64|.aarch64.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_AARCH64|.aarch64.rpm.sha512>`__)
+.. |CentOS_aarch64_agent| replace:: `wazuh-agent-5.0.0-beta1.aarch64.rpm <https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/yum/wazuh-agent-5.0.0-beta1.aarch64.rpm>`__ (sha512)
 
-.. |CentOSStream_x86_64_agent| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm <|RPM_AGENT_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm.sha512>`__)
+.. |CentOSStream_x86_64_agent| replace:: `wazuh-agent-5.0.0-beta1.x86_64.rpm <https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/yum/wazuh-agent-5.0.0-beta1.x86_64.rpm>`__ (sha512)
 
-.. |CentOSStream_aarch64_agent| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_AARCH64|.aarch64.rpm <|RPM_AGENT_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_AARCH64|.aarch64.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_AARCH64|.aarch64.rpm.sha512>`__)
+.. |CentOSStream_aarch64_agent| replace:: `wazuh-agent-5.0.0-beta1.aarch64.rpm <https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/yum/wazuh-agent-5.0.0-beta1.aarch64.rpm>`__ (sha512)
 
-.. |Debian_x86_64_agent| replace:: `wazuh-agent_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_AGENT_X86|_amd64.deb <|DEB_AGENT_URL|_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_AGENT_X86|_amd64.deb>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-agent_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_AGENT_X86|_amd64.deb.sha512>`__)
+.. |Debian_x86_64_agent| replace:: `wazuh-agent_5.0.0-beta1_amd64.deb <https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/apt/pool/main/w/wazuh-agent/wazuh-agent_5.0.0-beta1_amd64.deb>`__ (sha512)
 
-.. |Debian_aarch64_agent| replace:: `wazuh-agent_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_AGENT_AARCH64|_arm64.deb <|DEB_AGENT_URL|_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_AGENT_AARCH64|_arm64.deb>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-agent_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_AGENT_AARCH64|_arm64.deb.sha512>`__)
+.. |Debian_aarch64_agent| replace:: `wazuh-agent_5.0.0-beta1_arm64.deb <https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/apt/pool/main/w/wazuh-agent/wazuh-agent_5.0.0-beta1_arm64.deb>`__ (sha512)
 
-.. |Fedora_x86_64_agent| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm <|RPM_AGENT_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm.sha512>`__)
+.. |Fedora_x86_64_agent| replace:: `wazuh-agent-5.0.0-beta1.x86_64.rpm <https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/yum/wazuh-agent-5.0.0-beta1.x86_64.rpm>`__ (sha512)
 
-.. |Fedora_aarch64_agent| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_AARCH64|.aarch64.rpm <|RPM_AGENT_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_AARCH64|.aarch64.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_AARCH64|.aarch64.rpm.sha512>`__)
+.. |Fedora_aarch64_agent| replace:: `wazuh-agent-5.0.0-beta1.aarch64.rpm <https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/yum/wazuh-agent-5.0.0-beta1.aarch64.rpm>`__ (sha512)
 
-.. |OpenSUSELeap_x86_64_agent| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm <|RPM_AGENT_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm.sha512>`__)
+.. |OpenSUSELeap_x86_64_agent| replace:: `wazuh-agent-5.0.0-beta1.x86_64.rpm <https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/yum/wazuh-agent-5.0.0-beta1.x86_64.rpm>`__ (sha512)
 
-.. |OpenSUSELeap_aarch64_agent| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_AARCH64|.aarch64.rpm <|RPM_AGENT_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_AARCH64|.aarch64.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_AARCH64|.aarch64.rpm.sha512>`__)
+.. |OpenSUSELeap_aarch64_agent| replace:: `wazuh-agent-5.0.0-beta1.aarch64.rpm <https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/yum/wazuh-agent-5.0.0-beta1.aarch64.rpm>`__ (sha512)
 
-.. |Oracle7_x86_64_agent| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm <|RPM_AGENT_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm.sha512>`__)
+.. |Oracle7_x86_64_agent| replace:: `wazuh-agent-5.0.0-beta1.x86_64.rpm <https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/yum/wazuh-agent-5.0.0-beta1.x86_64.rpm>`__ (sha512)
 
-.. |Oracle89_x86_64_agent| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm <|RPM_AGENT_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm.sha512>`__)
+.. |Oracle89_x86_64_agent| replace:: `wazuh-agent-5.0.0-beta1.x86_64.rpm <https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/yum/wazuh-agent-5.0.0-beta1.x86_64.rpm>`__ (sha512)
 
-.. |Oracle89_aarch64_agent| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_AARCH64|.aarch64.rpm <|RPM_AGENT_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_AARCH64|.aarch64.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_AARCH64|.aarch64.rpm.sha512>`__)
+.. |Oracle89_aarch64_agent| replace:: `wazuh-agent-5.0.0-beta1.aarch64.rpm <https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/yum/wazuh-agent-5.0.0-beta1.aarch64.rpm>`__ (sha512)
 
-.. |RHEL7_x86_64_agent| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm <|RPM_AGENT_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm.sha512>`__)
+.. |RHEL7_x86_64_agent| replace:: `wazuh-agent-5.0.0-beta1.x86_64.rpm <https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/yum/wazuh-agent-5.0.0-beta1.x86_64.rpm>`__ (sha512)
 
-.. |RHEL8910_x86_64_agent| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm <|RPM_AGENT_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm.sha512>`__)
+.. |RHEL8910_x86_64_agent| replace:: `wazuh-agent-5.0.0-beta1.x86_64.rpm <https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/yum/wazuh-agent-5.0.0-beta1.x86_64.rpm>`__ (sha512)
 
-.. |RHEL8910_aarch64_agent| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_AARCH64|.aarch64.rpm <|RPM_AGENT_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_AARCH64|.aarch64.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_AARCH64|.aarch64.rpm.sha512>`__)
+.. |RHEL8910_aarch64_agent| replace:: `wazuh-agent-5.0.0-beta1.aarch64.rpm <https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/yum/wazuh-agent-5.0.0-beta1.aarch64.rpm>`__ (sha512)
 
-.. |SLES_x86_64_agent| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm <|RPM_AGENT_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm.sha512>`__)
+.. |SLES_x86_64_agent| replace:: `wazuh-agent-5.0.0-beta1.x86_64.rpm <https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/yum/wazuh-agent-5.0.0-beta1.x86_64.rpm>`__ (sha512)
 
-.. |SLES_aarch64_agent| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_AARCH64|.aarch64.rpm <|RPM_AGENT_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_AARCH64|.aarch64.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_AARCH64|.aarch64.rpm.sha512>`__)
+.. |SLES_aarch64_agent| replace:: `wazuh-agent-5.0.0-beta1.aarch64.rpm <https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/yum/wazuh-agent-5.0.0-beta1.aarch64.rpm>`__ (sha512)
 
-.. |Ubuntu_x86_64_agent| replace:: `wazuh-agent_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_AGENT_X86|_amd64.deb <|DEB_AGENT_URL|_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_AGENT_X86|_amd64.deb>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-agent_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_AGENT_X86|_amd64.deb.sha512>`__)
+.. |Ubuntu_x86_64_agent| replace:: `wazuh-agent_5.0.0-beta1_amd64.deb <https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/apt/pool/main/w/wazuh-agent/wazuh-agent_5.0.0-beta1_amd64.deb>`__ (sha512)
 
-.. |Ubuntu_aarch64_agent| replace:: `wazuh-agent_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_AGENT_AARCH64|_arm64.deb <|DEB_AGENT_URL|_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_AGENT_AARCH64|_arm64.deb>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-agent_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_AGENT_AARCH64|_arm64.deb.sha512>`__)
+.. |Ubuntu_aarch64_agent| replace:: `wazuh-agent_5.0.0-beta1_arm64.deb <https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/apt/pool/main/w/wazuh-agent/wazuh-agent_5.0.0-beta1_arm64.deb>`__ (sha512)
 
 +--------------------------+---------------------------------+--------------+------------------------------------------+
 | Distribution             | Version                         | Architecture | Package                                  |
@@ -186,7 +186,7 @@ Linux
 Windows
 ^^^^^^^
 
-.. |Windows7Plus_32_64| replace:: `wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_WINDOWS|/windows/wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_WINDOWS|/checksums/wazuh/|WAZUH_CURRENT_WINDOWS|/wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi.sha512>`__)
+.. |Windows7Plus_32_64| replace:: `wazuh-agent-5.0.0-beta1.msi <https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/windows/wazuh-agent-5.0.0-beta1.msi>`__ (sha512)
 
 +---------------------+--------------+---------------------------+
 | Version             | Architecture | Package                   |
@@ -199,8 +199,8 @@ Windows
 macOS
 ^^^^^
 
-.. |macOS_intel_64| replace:: `wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.intel64.pkg <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_OSX|/macos/wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.intel64.pkg>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_OSX|/checksums/wazuh/|WAZUH_CURRENT_OSX|/wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.intel64.pkg.sha512>`__)
-.. |macOS_arm64| replace:: `wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.arm64.pkg <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_OSX|/macos/wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.arm64.pkg>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_OSX|/checksums/wazuh/|WAZUH_CURRENT_OSX|/wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.arm64.pkg.sha512>`__)
+.. |macOS_intel_64| replace:: `wazuh-agent-5.0.0-beta1.intel64.pkg <https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/macos/wazuh-agent-5.0.0-beta1.intel64.pkg>`__ (sha512)
+.. |macOS_arm64| replace:: `wazuh-agent-5.0.0-beta1.arm64.pkg <https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/macos/wazuh-agent-5.0.0-beta1.arm64.pkg>`__ (sha512)
 
 +---------------+-------------------------+
 | Architecture  | Package                 |
