@@ -11,11 +11,10 @@ Install the Wazuh manager as a single-node or multi-node cluster on a 64-bit (x8
 Wazuh manager cluster installation
 ----------------------------------
 
-#. Download the Wazuh installation assistant and the installation artifacts. Skip this step if you installed Wazuh indexer on the same server and the Wazuh installation assistant and artifacts files are already in your working directory:
+#. Download the Wazuh installation assistant. Skip this step if you performed the initial configuration on the same server and the Wazuh installation assistant is already in your working directory:
 
    .. code-block:: console
 
-       # curl -o artifact_urls.yaml https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/artifact_urls_5.0.0-beta1.yaml
        # curl -sO https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-install-5.0.0-beta1.sh
 
 #. Run the Wazuh installation assistant with the option ``--wazuh-manager`` followed by the node name to install the Wazuh manager. The node name must be the same one used in config.yml for the initial configuration, for example, ``manager``:
@@ -24,7 +23,7 @@ Wazuh manager cluster installation
 
    .. code-block:: console
   
-       # bash wazuh-install-5.0.0-beta1.sh --wazuh-manager manager -d local
+       # bash wazuh-install-5.0.0-beta1.sh --wazuh-manager manager -d pre-release
 
 
 Your Wazuh manager is now successfully installed. 

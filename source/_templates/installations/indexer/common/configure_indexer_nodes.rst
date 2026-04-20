@@ -14,7 +14,7 @@
       .. code-block:: yaml
 
         cluster.initial_master_nodes:
-        - "node-1"
+        - "indexer"
         - "node-2"
         - "node-3"
 

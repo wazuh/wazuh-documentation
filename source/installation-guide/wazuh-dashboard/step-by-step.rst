@@ -258,22 +258,22 @@ Select your deployment type and follow the instructions to change the default pa
 
                   10/04/2026 13:56:47 INFO: The password for Wazuh API user wazuh-wui is P3ssword+098
 
-            #. Replace ``<WAZUH_WUI_PASSWORD>`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file with the new ``wazuh-wui`` password.
+      #. Replace ``<WAZUH_WUI_PASSWORD>`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file with the new ``wazuh-wui`` password.
 
-               .. code-block:: yaml
-                  :emphasize-lines: 6
+         .. code-block:: yaml
+            :emphasize-lines: 6
 
-                  wazuh_core.hosts:
-                    default:
-                      url: https://127.0.0.1
-                      port: 55000
-                      username: wazuh-wui
-                      password: "<WAZUH_WUI_PASSWORD>"
-                      run_as: true
+            wazuh_core.hosts:
+              default:
+                url: https://127.0.0.1
+                port: 55000
+                username: wazuh-wui
+                password: "<WAZUH_WUI_PASSWORD>"
+                run_as: true
 
-            #. Restart the Wazuh dashboard to apply the changes.
+      #. Restart the Wazuh dashboard to apply the changes.
 
-               .. include:: /_templates/common/restart_dashboard.rst
+         .. include:: /_templates/common/restart_dashboard.rst
 
 
 Next steps

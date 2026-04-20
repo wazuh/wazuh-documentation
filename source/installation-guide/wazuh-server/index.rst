@@ -67,7 +67,7 @@ Check the requirements below and choose an installation method to start installi
 Requirements
 ------------
 
-Check the supported operating systems and the recommended hardware requirements for the Wazuh manager installation. Make sure that your system environment meets all requirements and that you have root user privileges.
+Check the recommended operating systems and hardware requirements for the Wazuh manager installation. Make sure that your system environment meets all requirements and that you have root user privileges.
 
 .. _supported_operating_systems:
 

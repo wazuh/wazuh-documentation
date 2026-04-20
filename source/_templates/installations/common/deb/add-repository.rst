@@ -16,7 +16,7 @@
 
     .. code-block:: console
 
-       # echo "deb [signed-by=/usr/share/keyrings/wazuh.gpg] https://packages.wazuh.com/5.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
+       # echo "deb [signed-by=/usr/share/keyrings/wazuh.gpg] https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/apt/ unstable main" | tee -a /etc/apt/sources.list.d/wazuh.list
 
 #. Update the packages information.
 

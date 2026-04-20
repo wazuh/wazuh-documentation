@@ -163,10 +163,6 @@ Deploying certificates
 
 .. include:: /_templates/installations/indexer/common/deploy_certificates.rst
 
-.. note::
-
-   For Wazuh indexer installation on hardened endpoints with ``noexec`` flag on the ``/tmp`` directory, additional setup is required. See the :doc:`/user-manual/wazuh-indexer/wazuh-indexer-on-hardened-endpoints` section for necessary configuration.
-
 Starting the service
 ^^^^^^^^^^^^^^^^^^^^
 
@@ -186,15 +182,15 @@ Cluster initialization
 
 The final stage of installing the Wazuh indexer single-node or multi-node cluster consists of running the security admin script.
 
-#. Run the Wazuh indexer ``indexer-security-init.sh`` script on `any` Wazuh indexer node to load the new certificates information and start the single-node or multi-node cluster.
+.. note::
+
+   You only have to initialize the cluster once, there is no need to run this command on every node.
+
+#. Run the Wazuh indexer ``indexer-security-init.sh`` script on *any* Wazuh indexer node to load the new certificates information and start the single-node or multi-node cluster:
 
    .. code-block:: console
 
       # /usr/share/wazuh-indexer/bin/indexer-security-init.sh
-
-   .. note::
-
-      You only have to initialize the cluster once, there is no need to run this command on every node.
 
 Testing the cluster installation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

@@ -11,11 +11,10 @@ Install and configure the Wazuh dashboard on a 64-bit (x86_64/AMD64 or AARCH64/A
 Wazuh dashboard installation
 -----------------------------
 
-#. Download the Wazuh installation assistant and the installation artifacts. Skip this step if you installed Wazuh indexer on the same server and the Wazuh installation assistant and artifacts files are already in your working directory:
+#. Download the Wazuh installation assistant. Skip this step if you installed Wazuh indexer on the same server and the Wazuh installation assistant is already in your working directory:
 
    .. code-block:: console
 
-      # curl -o artifact_urls.yaml https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/artifact_urls_5.0.0-beta1.yaml
       # curl -sO https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-install-5.0.0-beta1.sh
 
 #. Run the Wazuh installation assistant with the option ``--wazuh-dashboard`` and the node name to install and configure the Wazuh dashboard. The node name must be the same one used in ``config.yml`` for the initial configuration, for example, ``dashboard``:
@@ -26,7 +25,7 @@ Wazuh dashboard installation
 
    .. code-block:: console
 
-      # bash wazuh-install-5.0.0-beta1.sh --wazuh-dashboard dashboard -d local
+      # bash wazuh-install-5.0.0-beta1.sh --wazuh-dashboard dashboard -d pre-release
 
    The default Wazuh web user interface port is 443, used by the Wazuh dashboard. You can change this port using the optional parameter ``-p <PORT_NUMBER>`` or ``--port <PORT_NUMBER>``. Some recommended ports are 8443, 8444, 8080, 8888, and 9000.
 

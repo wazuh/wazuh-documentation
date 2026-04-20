@@ -24,15 +24,9 @@ The installation process is divided into three stages.
 Initial configuration
 ---------------------
 
-Follow these steps to configure your Wazuh deployment, create SSL certificates to encrypt communications between the Wazuh components, and generate random passwords to secure your installation.
+Follow these steps on a Linux host to configure your Wazuh deployment, create SSL certificates to encrypt communications between the Wazuh components, and generate random passwords to secure your installation.
 
-#. Download the installation artifacts.
-
-      .. code-block:: console
-
-          # curl -o artifact_urls.yaml https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/artifact_urls_5.0.0-beta1.yaml
-
-#. Download the Wazuh installation assistant and the configuration file.
+#. Download the Wazuh installation assistant and the configuration file:
 
       .. code-block:: console
 
@@ -88,7 +82,7 @@ Follow these steps to configure your Wazuh deployment, create SSL certificates t
         # bash wazuh-install-5.0.0-beta1.sh --generate-config-files
 
 
-#. Copy the ``wazuh-install-files.tar`` file to all the servers of the distributed deployment, including the Wazuh manager, the Wazuh indexer, and the Wazuh dashboard nodes. This can be done by using the ``scp`` utility.
+#. Copy the ``wazuh-install-files.tar`` file from the host where you generated it to all the servers of the distributed deployment including the Wazuh manager, the Wazuh indexer, and the Wazuh dashboard nodes. This can be done by using the ``scp`` utility.
 
 
 Wazuh indexer node installation
@@ -96,7 +90,7 @@ Wazuh indexer node installation
 
 Follow these steps to install and configure a single-node or multi-node Wazuh indexer.
 
-#. Download the Wazuh installation assistant. Skip this step if you performed the initial configuration on the same server and the Wazuh installation assistant is already in your working directory:
+#. Download the Wazuh installation assistant. Skip this step if you performed the initial configuration on the same host and the Wazuh installation assistant is already in your working directory:
 
       .. code-block:: console
 
@@ -109,27 +103,23 @@ Follow these steps to install and configure a single-node or multi-node Wazuh in
 
       .. code-block:: console
 
-        # bash wazuh-install-5.0.0-beta1.sh --wazuh-indexer indexer -d local -id
+        # bash wazuh-install-5.0.0-beta1.sh --wazuh-indexer indexer -d pre-release
 
 
-Repeat this stage of the installation process for every Wazuh indexer node in your cluster. Then proceed with initializing your single-node or multi-node cluster in the next stage.
-
-.. note::
-
-   For Wazuh indexer installation on hardened endpoints with ``noexec`` flag on the ``/tmp`` directory, additional setup is required. See the :doc:`/user-manual/wazuh-indexer/wazuh-indexer-on-hardened-endpoints` section for necessary configuration.
+Repeat this stage of the installation process for every Wazuh indexer node in your cluster. The command installs, configures and starts the Wazuh indexer on the host. Then proceed with initializing your single-node or multi-node cluster in the next stage.
 
 Cluster initialization
 ----------------------
 
-The final stage of installing the Wazuh indexer single-node or multi-node cluster consists of running the security admin script.
+The final stage of installing the Wazuh indexer single-node or multi-node cluster consists of running the security admin script. The security admin script loads the new certificates and initializes the single-node or multi-node cluster.
 
-#. Run the Wazuh installation assistant with option ``--start-cluster`` on any Wazuh indexer node to load the new certificates information and start the cluster.
+.. note:: You only have to initialize the cluster *once*, there is no need to run this command on every node.
+
+#. Run the Wazuh installation assistant with option ``--start-cluster`` on any Wazuh indexer node to run the security admin script:
 
    .. code-block:: console
 
      # bash wazuh-install-5.0.0-beta1.sh --start-cluster
-
-   .. note:: You only have to initialize the cluster `once`, there is no need to run this command on every node.
 
 Testing the cluster installation
 --------------------------------

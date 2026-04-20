@@ -84,10 +84,6 @@ The Wazuh agent is a single, lightweight monitoring software. It is a multi-plat
 
 Select your endpoint operating system below and follow the installation steps to deploy the Wazuh agent.
 
-.. warning::
-
-   Support for HP-UX, Solaris, AIX, CentOS 5, RHEL 5 derivatives, SUSE Linux Enterprise Server 11, Windows XP, Windows Vista, and Windows Server 2003 is discontinued in Wazuh 5.0.0. Wazuh agents on these platforms cannot be upgraded to 5.x but can still connect to a Wazuh 5.0.0 manager. Keep them on 4.x or migrate to a supported system.
-
 .. raw:: html
 
   <div class="link-boxes-group layout-6">
