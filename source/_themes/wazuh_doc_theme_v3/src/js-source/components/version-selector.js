@@ -61,6 +61,15 @@ jQuery(function($) {
   /* Adds the current version to the selector button */
   checkCurrentVersion();
 
+  function formatVersionLabel(version) {
+    const path = window.location.pathname || '';
+    const isBetaPath = /\/5\.0(?:\.0)?-beta1(\/|$)/.test(path);
+    if (version === '5.0' && isBetaPath) {
+      return '5.0 (Beta 1)';
+    }
+    return version;
+  }
+
   /* Creates the correct links to all the releases */
   let documentHistory = addVersions();
   $(window).on('hashchange', function() {
@@ -95,10 +104,11 @@ jQuery(function($) {
   function checkCurrentVersion() {
     const selectVersionCurrent = $('#version-selector .current');
     const thisVersion = DOCUMENTATION_OPTIONS.VERSION;
+    const label = formatVersionLabel(thisVersion);
     if ( listOfVersions.length > 0 ) {
-      selectVersionCurrent.html('Version ' + thisVersion + (thisVersion == listOfVersions[0] ? ' (current)' : ''));
+      selectVersionCurrent.html('Version ' + label + (thisVersion == listOfVersions[0] ? ' (current)' : ''));
     } else {
-      selectVersionCurrent.html('Version ' + thisVersion);
+      selectVersionCurrent.html('Version ' + label);
     }
   }
 
@@ -219,13 +229,14 @@ jQuery(function($) {
       if ( !hasHttpProtocol && href.length > 0 ) {
         href = 'https://documentation.wazuh.com' + href;
       }
+      const versionLabel = formatVersionLabel(listOfVersions[i]);
       aEle = $(document.createElement('a'));
-      aEle.attr('href', href).text(listOfVersions[i] + ((i == 0) ? ' (current)' : ''));
+      aEle.attr('href', href).text(versionLabel + ((i == 0) ? ' (current)' : ''));
       if ( tooltip !== false ){
         aEle.addClass('disabled')
         .attr('data-bs-toggle', 'tooltip')
         .attr('data-placement', 'right')
-        .attr('title', 'This page is not available in version ' + listOfVersions[i] + ((i == 0) ? ' (current)' : ''));
+        .attr('title', 'This page is not available in version ' + versionLabel + ((i == 0) ? ' (current)' : ''));
       }
       ele = $(document.createElement('li'));
       ele.append(aEle);
