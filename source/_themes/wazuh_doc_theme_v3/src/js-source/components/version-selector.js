@@ -62,10 +62,10 @@ jQuery(function($) {
   checkCurrentVersion();
 
   function formatVersionLabel(version) {
-    const path = window.location.pathname || '';
-    const isBetaPath = /\/5\.0(?:\.0)?-beta1(\/|$)/.test(path);
-    if (version === '5.0' && isBetaPath) {
-      return '5.0 (Beta 1)';
+    const releasePath = window.location.pathname || '';
+    const isBetaRelease = releasePath.includes('/5.0-beta1/') || releasePath.includes('/5.0.0-beta1/');
+    if (version === '5.0' && isBetaRelease) {
+      return '5.0 (Beta)';
     }
     return version;
   }
