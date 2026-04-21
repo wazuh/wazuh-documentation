@@ -10,7 +10,7 @@ The Wazuh agent is multi-platform and runs on the endpoints that you want to mon
 
 The Wazuh agent was developed considering the need to monitor a wide variety of different endpoints without impacting their performance. It is supported on the most popular operating systems, and it requires 35 MB of RAM on average.
 
-The Wazuh agent provides :ref:`key features <agents_modules>` to enhance your system’s security.
+The Wazuh agent provides key features to enhance your system’s security.
 
 .. list-table::
    :width: 100%

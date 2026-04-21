@@ -7,7 +7,7 @@ Wazuh indexer
 =============
 
 
-The Wazuh indexer is a scalable search and analytics engine that stores and indexes events forwarded by the Wazuh manager, enabling near real-time data analysis. It manages threat intelligence updates, including decoders, detection rules, vulnerability feeds, and Indicators of Compromise (IoCs) from the Wazuh Cyber Threat Intelligence (CTI) platform. If you want to learn more about Wazuh components, check the :doc:`Getting started <../../getting-started/components/index>` section.
+The Wazuh indexer is a scalable search and analytics engine that stores and indexes events forwarded by the Wazuh manager, enabling near real-time data analysis. It manages threat intelligence updates, including decoders, detection rules, vulnerability feeds, and Indicators of Compromise (IoCs) from the Wazuh Cyber Threat Intelligence (CTI) platform.
 
 You can install the Wazuh indexer on a single host or distribute it across multiple nodes in a cluster configuration. The cluster configuration provides scalability, high availability, and improved performance.
 

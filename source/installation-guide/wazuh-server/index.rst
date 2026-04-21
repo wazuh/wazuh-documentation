@@ -6,7 +6,7 @@
 Wazuh manager
 =============
 
-The Wazuh manager analyzes event data received from Wazuh agents and forwards the processed events to the Wazuh indexer. It is also used to remotely manage the configurations of Wazuh agents and monitor their status. If you want to learn more about the Wazuh components, check the :doc:`Getting started <../../getting-started/components/index>` section.
+The Wazuh manager analyzes event data received from Wazuh agents and forwards the processed events to the Wazuh indexer. It is also used to remotely manage the configurations of Wazuh agents and monitor their status.
 
 You can install the Wazuh manager on a single host or distribute it across multiple nodes in a cluster configuration. Multi-node configurations provide high availability and improved performance. When combined with a network load balancer, you can achieve efficient use of its capacity.
 

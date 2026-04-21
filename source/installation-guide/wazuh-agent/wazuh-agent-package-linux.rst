@@ -70,12 +70,6 @@ Follow these steps to deploy the Wazuh agent on your Linux endpoint.
 
             # WAZUH_MANAGER="10.0.0.2" zypper install wazuh-agent|WAZUH_AGENT_ZYPP_PKG_INSTALL|
 
-   For additional deployment options such as agent name, agent group, and enrollment password, see the :doc:`Deployment variables for Linux </user-manual/agent/agent-enrollment/deployment-variables/deployment-variables-linux>` section.
-
-   .. note::
-
-      Alternatively, if you want to install an agent without enrolling it, omit the deployment variables. To learn more about the different enrollment methods, see the :doc:`Wazuh agent enrollment </user-manual/agent/agent-enrollment/index>` section.
-
 #. Enable and start the Wazuh agent service.
 
    .. include:: ../../_templates/installations/wazuh/common/enable_wazuh_agent_service.rst

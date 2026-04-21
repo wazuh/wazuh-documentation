@@ -152,8 +152,6 @@ Configuring the Wazuh indexer
 
 .. include:: /_templates/installations/indexer/common/configure_indexer_nodes.rst
 
-.. include:: /_templates/installations/common/firewall-ports-note.rst
-
 Deploying certificates
 ^^^^^^^^^^^^^^^^^^^^^^
 

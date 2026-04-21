@@ -66,8 +66,6 @@ Installing the Wazuh manager
 
             # dnf -y install wazuh-manager|WAZUH_MANAGER_RPM_PKG_INSTALL|
 
-.. include:: /_templates/installations/common/firewall-ports-note.rst
-
 Deploying certificates
 ^^^^^^^^^^^^^^^^^^^^^^
 

@@ -10,7 +10,7 @@ The Wazuh agent runs on the endpoint you want to monitor and communicates with t
 
 .. note:: You must have administrator privileges to perform the installation.
 
-#. Download the `Windows installer <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_WINDOWS|/windows/wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi>`_  to start the installation process.
+#. Download the `Windows installer <https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/windows/wazuh-agent-5.0.0-beta1.msi>`_  to start the installation process.
 
 #. Select the installation method you want to follow: command line interface (CLI) or graphical user interface (GUI).
 

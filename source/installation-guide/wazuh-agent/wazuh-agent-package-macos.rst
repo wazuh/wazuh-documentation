@@ -10,8 +10,8 @@ The Wazuh agent runs on the endpoint you want to monitor and communicates with t
 
 .. note:: You need root user privileges to run all the commands described below.
 
-.. |macOS_intel_64| replace:: `wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.intel64.pkg <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_OSX|/macos/wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.intel64.pkg>`__
-.. |macOS_arm64| replace:: `wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.arm64.pkg <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_OSX|/macos/wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.arm64.pkg>`__
+.. |macOS_intel_64| replace:: `wazuh-agent-5.0.0-beta1.intel64.pkg <https://packages-staging.xdrsiem.wazuh.info/nightly/5.0.0/macos/wazuh-agent-5.0.0-latest.intel64.pkg>`__
+.. |macOS_arm64| replace:: `wazuh-agent-5.0.0-beta1.arm64.pkg <https://packages-staging.xdrsiem.wazuh.info/nightly/5.0.0/macos/wazuh-agent-5.0.0-latest.arm64.pkg>`__
 
 
 #. To start the installation process, download the Wazuh agent according to your architecture:
