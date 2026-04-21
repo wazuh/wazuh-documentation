@@ -9,6 +9,15 @@
 Index
 ================
 
+.. raw:: html
+
+   <style>
+     .index main .toctree-wrapper > ul {
+       justify-content: center;
+       gap: 20px;
+     }
+   </style>
+
 .. toctree::
    :titlesonly:
    :includehidden:

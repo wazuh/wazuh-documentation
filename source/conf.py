@@ -95,7 +95,21 @@ language = 'en-US'
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path .
-exclude_patterns = ['redirects.js']
+exclude_patterns = [
+    'redirects.js',
+    'getting-started/**',
+    'deployment-options/**',
+    'user-manual/**',
+    'cloud-security/**',
+    'compliance/**',
+    'proof-of-concept-guide/**',
+    'upgrade-guide/**',
+    'integrations-guide/**',
+    'migration-guide/**',
+    'cloud-service/**',
+    'development/**',
+    'release-notes/**',
+]
 
 # The reST default role (used for this markup: `text`) to use for all
 # documents.
