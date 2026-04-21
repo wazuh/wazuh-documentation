@@ -62,7 +62,7 @@ jQuery(function($) {
   checkCurrentVersion();
 
   function versionSuffix(version) {
-    if (version === '5.0') return ' (Beta)';
+    if (version === '5.0') return ' (Beta 1)';
     if (version === '4.14') return ' (current)';
     return '';
   }
