@@ -10,7 +10,7 @@ Wazuh is a free and open source security platform that unifies XDR and SIEM capa
 
 Wazuh helps individuals and organizations of all sizes to protect their data assets against security threats and is widely used worldwide, from small businesses to large enterprises.
 
-This guide provides an overview of the Wazuh platform, including its :doc:`components <components/index>`, :doc:`architecture <architecture>`, and common :doc:`use cases <use-cases/index>`.
+This guide provides an overview of the Wazuh platform, including its :doc:`components <components/index>` and :doc:`architecture <architecture>`.
 
 Community and support
 ---------------------
