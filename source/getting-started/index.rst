@@ -34,27 +34,27 @@ The following screenshots show dashboards of some of the Wazuh capabilities, inc
    :width: 100%
    :widths: 50 50
 
-   * - .. thumbnail:: ../images/getting-started/threat-hunting.png
-          :title: Threat Hunting 
-          :alt: Threat Hunting 
+   * - .. thumbnail:: ../images/getting-started/threat-hunting-dashboard.png
+          :title: Threat Hunting
+          :alt: Threat Hunting
      - .. thumbnail:: ../images/getting-started/malware-detection.png
           :title: Malware detection
-          :alt: Malware detection 
+          :alt: Malware detection
    * - .. thumbnail:: ../images/getting-started/file-integrity-monitoring.png
           :title: File Integrity Monitoring
-          :alt: File Integrity Monitoring 
-     - .. thumbnail:: ../images/getting-started/vulnerability-detection.png
-          :title: Vulnerability Detection  
-          :alt: Vulnerability Detection  
-   * - .. thumbnail:: ../images/getting-started/mitre-attack.png
+          :alt: File Integrity Monitoring
+     - .. thumbnail:: ../images/getting-started/vulnerability-detection-dashboard.png
+          :title: Vulnerability Detection
+          :alt: Vulnerability Detection
+   * - .. thumbnail:: ../images/getting-started/mitre-attack-dashboard.png
           :title: Mitre Att&ck
           :alt: Mitre Att&ck
-     - .. thumbnail:: ../images/getting-started/configuration-assessment.png
-          :title: Security configuration assessment   
-          :alt: Security configuration assessment   
-   * - .. thumbnail:: ../images/getting-started/endpoints-summary.png
-          :title: Summary 
-          :alt: Summary 
+     - .. thumbnail:: ../images/getting-started/configuration-assessment-dashboard.png
+          :title: Security configuration assessment
+          :alt: Security configuration assessment
+   * - .. thumbnail:: ../images/getting-started/dashboard-endpoints-summary.png
+          :title: Summary
+          :alt: Summary
      - .. thumbnail:: ../images/getting-started/aws.png
           :title: Amazon Web Services 
           :alt: Amazon Web Services 

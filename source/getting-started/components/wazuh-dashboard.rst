@@ -20,7 +20,7 @@ Data visualization and analysis
 
 The Wazuh dashboard enables users to navigate security data collected from Wazuh agents and agentless devices. It includes dashboards for configuration assessment, threat hunting, malware detection, file integrity monitoring, IT hygiene, and regulatory compliance (for example, PCI DSS, GDPR, HIPAA, and NIST 800-53), among others. You can generate reports and create custom visualizations and dashboards.
 
-.. thumbnail::  /images/getting-started/data-visualization.png 
+.. thumbnail::  /images/getting-started/dashboard-overview.png
    :align: center
    :width: 80% 
    :title: Data visualization
@@ -48,7 +48,7 @@ The Wazuh dashboard allows users to manage Wazuh agents in several ways includin
 -  Monitoring and troubleshooting Wazuh agent status
 -  Wazuh agent upgrades
 
-.. thumbnail::  /images/getting-started/agents-monitoring.png 
+.. thumbnail::  /images/getting-started/dashboard-endpoints.png
    :align: center
    :width: 80% 
    :title: Wazuh agents management
@@ -73,7 +73,7 @@ Health checks, notifications and alerting integrations
 
 The Wazuh dashboard provides the ability to monitor performance and cluster health of the Wazuh components.
 
-.. thumbnail::  /images/getting-started/cluster-health.png
+.. thumbnail::  /images/getting-started/component-status.png
    :align: center
    :width: 100%
    :title: Wazuh components health monitoring
@@ -81,7 +81,7 @@ The Wazuh dashboard provides the ability to monitor performance and cluster heal
 
 The Wazuh dashboard provides the ability to integrate external APIs and services for enhanced alerting, incident management, and threat intelligence capabilities. It supports integration with Slack, PagerDuty, Shuffle, and others.
 
-.. thumbnail::  /images/getting-started/notifications-integrations.png
+.. thumbnail::  /images/getting-started/dashboard-alerting-int.png
    :align: center
    :width: 100%
    :title: Notifications and alerting integrations
@@ -92,7 +92,7 @@ Developer tools
 
 The Wazuh dashboard includes a ruleset testing tool (Log Test) that processes log messages to show how they are decoded by the Wazuh normalization engine and whether they match a detection rule. This tool is useful for testing custom decoders and rules.
 
-.. thumbnail::  /images/getting-started/ruleset-test.png
+.. thumbnail::  /images/getting-started/dashboard-logtest.png
    :align: center
    :width: 80% 
    :title: Log test
@@ -100,7 +100,7 @@ The Wazuh dashboard includes a ruleset testing tool (Log Test) that processes lo
 
 The Wazuh dashboard also provides API consoles for interacting with the Wazuh manager API and the Wazuh indexer API. These consoles are used to manage Wazuh manager capabilities and interact with Wazuh indexer indices.
 
-.. thumbnail::  /images/getting-started/api-consoles.png
+.. thumbnail::  /images/getting-started/dashboard-dev-tools.png
    :align: center
    :width: 100%
    :title: API consoles

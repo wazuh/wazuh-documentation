@@ -27,7 +27,7 @@ Visit the :doc:`installation guide </installation-guide/index>` to learn how to 
 
 The diagram below represents a Wazuh deployment architecture. It shows how the Wazuh manager and the Wazuh indexer nodes can be configured as clusters, providing load balancing and high availability.
 
-.. thumbnail:: /images/getting-started/deployment-architecture.png    
+.. thumbnail:: /images/getting-started/architecture.png
    :title: Deployment architecture
    :alt: Deployment architecture
    :align: center

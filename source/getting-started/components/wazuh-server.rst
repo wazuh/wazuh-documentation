@@ -17,7 +17,7 @@ The Wazuh manager includes the normalization engine, Wazuh manager API, agent en
 
 The diagram below shows the Wazuh manager architecture and its components.
 
-.. thumbnail:: /images/getting-started/wazuh-server-architecture.png
+.. thumbnail:: /images/getting-started/server-architecture.png
    :title: Wazuh manager architecture
    :alt: Wazuh manager architecture
    :align: center

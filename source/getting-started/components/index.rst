@@ -19,7 +19,7 @@ In addition to agent-based monitoring capabilities, the Wazuh platform can monit
 
 The diagram below represents the Wazuh components and data flow.
 
-.. thumbnail:: /images/getting-started/wazuh-components-and-data-flow.png
+.. thumbnail:: /images/getting-started/components-data-flow.jpg
    :title: Wazuh components and data flow
    :alt: Wazuh components and data flow
    :align: center

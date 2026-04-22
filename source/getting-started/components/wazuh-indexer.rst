@@ -12,7 +12,7 @@ The Wazuh indexer can be deployed as a single-node instance for development and 
 
 We show an image of the Wazuh indexer cluster below:
 
-.. thumbnail:: /images/getting-started/wazuh-indexer.png
+.. thumbnail:: /images/getting-started/indexer-cluster.png
    :title: Wazuh indexer
    :alt: Wazuh indexer
    :align: center
