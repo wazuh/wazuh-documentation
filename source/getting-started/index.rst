@@ -34,30 +34,30 @@ The following screenshots show dashboards of some of the Wazuh capabilities, inc
    :width: 100%
    :widths: 50 50
 
-   * - .. thumbnail:: ../images/getting-started/threat-hunting-dashboard.png
-          :title: Threat Hunting
-          :alt: Threat Hunting
-     - .. thumbnail:: ../images/getting-started/malware-detection.png
-          :title: Malware detection
-          :alt: Malware detection
-   * - .. thumbnail:: ../images/getting-started/file-integrity-monitoring.png
-          :title: File Integrity Monitoring
-          :alt: File Integrity Monitoring
-     - .. thumbnail:: ../images/getting-started/vulnerability-detection-dashboard.png
-          :title: Vulnerability Detection
-          :alt: Vulnerability Detection
-   * - .. thumbnail:: ../images/getting-started/mitre-attack-dashboard.png
-          :title: Mitre Att&ck
-          :alt: Mitre Att&ck
-     - .. thumbnail:: ../images/getting-started/configuration-assessment-dashboard.png
+   * - .. thumbnail:: ../images/getting-started/configuration-assessment-dashboard.png
           :title: Security configuration assessment
           :alt: Security configuration assessment
-   * - .. thumbnail:: ../images/getting-started/dashboard-endpoints-summary.png
-          :title: Summary
-          :alt: Summary
-     - .. thumbnail:: ../images/getting-started/aws.png
-          :title: Amazon Web Services 
-          :alt: Amazon Web Services 
+     - .. thumbnail:: ../images/getting-started/fim-dashboard.png
+          :title: File integrity monitoring
+          :alt: File integrity monitoring
+   * - .. thumbnail:: ../images/getting-started/it-hygiene-dashboard.png
+          :title: IT hygiene
+          :alt: IT hygiene
+     - .. thumbnail:: ../images/getting-started/mitre-attack-dashboard.png
+          :title: MITRE ATT&CK
+          :alt: MITRE ATT&CK
+   * - .. thumbnail:: ../images/getting-started/regulatory-compliance-gdpr.png
+          :title: Regulatory compliance - GDPR
+          :alt: Regulatory compliance - GDPR
+     - .. thumbnail:: ../images/getting-started/regulatory-compliance-nist.png
+          :title: Regulatory compliance - NIST
+          :alt: Regulatory compliance - NIST
+   * - .. thumbnail:: ../images/getting-started/threat-hunting-dashboard.png
+          :title: Threat hunting
+          :alt: Threat hunting
+     - .. thumbnail:: ../images/getting-started/vulnerability-detection-dashboard.png
+          :title: Vulnerability detection
+          :alt: Vulnerability detection
 
 .. toctree::
    :hidden:
