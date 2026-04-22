@@ -24,6 +24,7 @@ Index
    :maxdepth: 3
 
    quickstart
+   Getting started <getting-started/index>
    installation-guide/index
 
 ..
