@@ -6,7 +6,7 @@
 Wazuh dashboard
 ===============
 
-The Wazuh dashboard is a flexible and intuitive web interface for visualizing security data. It queries the Wazuh indexer to visualize alerts, events, and security analytics. It enables users to perform the following tasks:
+The Wazuh dashboard is a flexible and intuitive web interface for visualizing security data. It queries the Wazuh indexer to visualize alerts, events, and security analytics. It enables users to perform the following tasks.
 
 -  Investigate events and alerts.
 -  Wazuh manager configuration and API tooling.
@@ -39,7 +39,7 @@ The Wazuh dashboard provides a user interface to manage a Wazuh deployment. This
 
 Monitoring performance and cluster health of the Wazuh components.
 
-.. thumbnail::  /images/getting-started/platform-management.png
+.. thumbnail::  /images/getting-started/cluster-health.png
    :align: center
    :width: 100%
    :title: Wazuh components health monitoring
@@ -62,15 +62,15 @@ The Wazuh dashboard allows users to manage Wazuh agents in several ways includin
    :title: Wazuh agents management
    :alt: Wazuh agents management
 
-.. thumbnail::  /images/getting-started/agents-monitoring.png
+.. thumbnail::  /images/getting-started/agent-upgrades.png
    :align: center
    :width: 80%
-   :title: Agent lifecycle management
-   :alt: Agent lifecycle management
+   :title: Agent upgrades
+   :alt: Agent upgrades
 
 For each monitored endpoint, users can define which Wazuh agent modules are enabled, which log files are read, which files are monitored for integrity changes, and which configuration checks are performed.
 
-.. thumbnail::  /images/getting-started/agents-monitoring.png
+.. thumbnail::  /images/getting-started/agent-modules-config.png
    :align: center
    :width: 80%
    :title: Endpoint agent configuration
@@ -81,7 +81,7 @@ Notifications and alerting integrations
 
 The Wazuh dashboard provides the ability to integrate external APIs and services for enhanced alerting, incident management, and threat intelligence capabilities. It supports integration with Slack, PagerDuty, Shuffle, and others.
 
-.. thumbnail::  /images/getting-started/platform-management.png
+.. thumbnail::  /images/getting-started/notifications-integrations.png
    :align: center
    :width: 100%
    :title: Notifications and alerting integrations
@@ -100,18 +100,8 @@ The Wazuh dashboard includes a ruleset testing tool (Log Test) that processes lo
 
 The Wazuh dashboard also provides API consoles for interacting with the Wazuh manager API and the Wazuh indexer API. These consoles are used to manage Wazuh manager capabilities and interact with Wazuh indexer indices.
 
-Wazuh manager API
-
-.. thumbnail::  /images/getting-started/server-api-console.png 
-      :align: center
-      :width: 100% 
-      :title: Wazuh manager API console
-      :alt: Wazuh manager API console
-
-Wazuh indexer API
-
-.. thumbnail::  /images/getting-started/indexer-api-console.png  
-      :align: center
-      :width: 100% 
-      :title: Wazuh indexer API console
-      :alt: Wazuh indexer API console
+.. thumbnail::  /images/getting-started/api-consoles.png
+   :align: center
+   :width: 100%
+   :title: API consoles
+   :alt: API consoles
