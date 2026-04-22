@@ -144,6 +144,7 @@ jQuery(function($) {
     const selectVersionUl = $('#version-selector .dropdown-menu');
     const fullUrl = window.location.href || document.URL; /* Use document.URL as fix for Firefox */
     const hasHttpProtocol = fullUrl.indexOf('http') >= 0;
+    const urlRoot = hasHttpProtocol ? 'https://' + document.location.host + '/' : DOCUMENTATION_OPTIONS.URL_ROOT; 
     let paramDivision = [];
     let ele = '';
     let page = '';
@@ -241,7 +242,7 @@ jQuery(function($) {
      */
     if (betaVersions != undefined && betaVersions.length > 0) {
       for (let i = betaVersions.length - 1; i >=  0; i--) {
-        href = DOCUMENTATION_OPTIONS.URL_ROOT + betaVersions[i][1] + betaVersions[i][2];
+        href = urlRoot + betaVersions[i][1] + betaVersions[i][2];
         aEle = $(document.createElement('a'));
         aEle.attr('href', href).text('Version ' + betaVersions[i][0]);
         ele = $(document.createElement('li'));
