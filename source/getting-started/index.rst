@@ -8,9 +8,9 @@ Getting started with Wazuh
 
 Wazuh is a free and open source security platform that unifies XDR and SIEM capabilities. It protects workloads across on-premises, virtualized, containerized, and cloud-based environments.
 
-Wazuh helps organizations and individuals to protect their data assets against security threats. It is widely used by thousands of organizations worldwide, from small businesses to large enterprises.
+Wazuh helps individuals and organizations of all sizes to protect their data assets against security threats and is widely used worldwide, from small businesses to large enterprises.
 
-Check this Getting Started for an overview of the Wazuh platform :doc:`components <components/index>`, :doc:`architecture <architecture>`, and common :doc:`use cases <use-cases/index>`.
+This guide provides an overview of the Wazuh platform, including its :doc:`components <components/index>`, :doc:`architecture <architecture>`, and common :doc:`use cases <use-cases/index>`.
 
 Community and support
 ---------------------
@@ -20,10 +20,10 @@ Community and support
 How to install Wazuh
 --------------------
 
-The Wazuh solution is composed of three :doc:`central platform components <components/index>` and a single universal :doc:`agent </installation-guide/wazuh-agent/index>`. For installing Wazuh in your infrastructure, you can check the following sections of our documentation:
+The Wazuh solution is composed of three :doc:`central platform components <components/index>` and a single universal :doc:`agent </installation-guide/wazuh-agent/index>`. To install Wazuh in your infrastructure, refer to the following sections of our documentation:
 
--  The :doc:`Quickstart </quickstart>` is an automated way of installing Wazuh in just a few minutes.
--  The :doc:`Installation guide </installation-guide/index>` provides instructions on how to install each central component and how to deploy the Wazuh agents.
+-  The :doc:`Quickstart </quickstart>` provides an automated way to install Wazuh on a single server in just a few minutes.
+-  The :doc:`Installation guide </installation-guide/index>` provides instructions on how to install each central component and how to deploy Wazuh agents.
 
 Wazuh Cloud
 -----------
