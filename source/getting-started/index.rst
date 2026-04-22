@@ -58,12 +58,6 @@ The following screenshots show dashboards of some of the Wazuh capabilities, inc
      - .. thumbnail:: ../images/getting-started/aws.png
           :title: Amazon Web Services 
           :alt: Amazon Web Services 
-   * - .. thumbnail:: ../images/getting-started/github.png
-          :title: GitHub 
-          :alt: GitHub 
-     - .. thumbnail:: ../images/getting-started/pci-dss.png
-          :title: PCI DSS
-          :alt: PCI DSS
 
 .. toctree::
    :hidden:

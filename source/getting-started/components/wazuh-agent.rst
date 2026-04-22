@@ -30,13 +30,13 @@ All agent modules are configurable and perform different security tasks. This mo
 
 -  **Log collector:** Reads flat log files and Windows events, collecting operating system and application log messages. It supports XPath filters for Windows events and recognizes multi-line formats like Linux Audit logs. It can also enrich JSON events with additional metadata.
 
--  **Command execution:** Runs authorized commands periodically, collecting their output and reporting it back to the Wazuh manager for further analysis. You can use this module for different purposes, such as monitoring available disk space or getting a list of recently logged-in users.
+-  **Command execution:** Runs authorized commands periodically, collecting their output and reporting it back to the Wazuh manager. You can use this module for different purposes, such as monitoring available disk space or getting a list of recently logged-in users.
 
 -  **File integrity monitoring (FIM):** Monitors the file system, reporting when files are created, deleted, or modified. It keeps track of changes in file attributes, permissions, ownership, and content. When an event occurs, it captures who, what, and when details in real time.
 
 -  **Security configuration assessment (SCA):** Provides continuous configuration assessment, utilizing out-of-the-box checks based on the Center of Internet Security (CIS) benchmarks. Users can also create their own SCA checks to monitor and enforce their security policies.
 
--  **System inventory:** Periodically runs scans to collect inventory data such as operating system version, network interfaces, running processes, installed applications, and a list of open ports. Scan results are stored in local SQLite databases that can be queried remotely.
+-  **System inventory:** Periodically runs scans to collect inventory data such as operating system version, network interfaces, running processes, installed applications, and a list of open ports. The inventory data is stored locally on the agent in a SQLite database to support change detection and state persistence.
 
 -  **Malware detection:** Uses a non-signature-based approach to detect anomalies and the possible presence of rootkits. It also looks for hidden processes, hidden files, and hidden ports while monitoring system calls.
 
@@ -49,8 +49,8 @@ All agent modules are configurable and perform different security tasks. This mo
 Communication with Wazuh manager
 --------------------------------
 
-The Wazuh agent communicates with the :doc:`Wazuh manager <wazuh-server>` to ship collected data and security-related events. The Wazuh agent also sends operational data, reporting its configuration and status. Once connected, the agent can be upgraded, monitored, and configured remotely from the Wazuh manager.
+The Wazuh agent communicates with the :doc:`Wazuh manager <wazuh-server>` to ship collected data and security-related events. The Wazuh agent also sends operational data, reporting its configuration and status. Once connected, the Wazuh agent can be upgraded, monitored, and configured remotely from the Wazuh manager.
 
 The communication between the Wazuh agent and the Wazuh manager takes place through a secure channel (TCP or UDP), providing data encryption and compression in real time. Additionally, it includes flow control mechanisms to avoid flooding, queueing events when necessary, and protecting the network bandwidth.
 
-You need to install the Wazuh agent before enrolling it in the Wazuh manager for the first time. This process provides the agent with a unique key used for authentication and data encryption.
+You need to install the Wazuh agent before enrolling it in the Wazuh manager for the first time. This process provides the Wazuh agent with a unique key used for authentication and data encryption.

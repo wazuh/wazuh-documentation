@@ -9,11 +9,11 @@ Wazuh dashboard
 The Wazuh dashboard is a flexible and intuitive web interface for visualizing security data. It queries the Wazuh indexer to visualize alerts, events, and security analytics. It enables users to perform the following tasks.
 
 -  Investigate events and alerts.
--  Wazuh manager configuration and API tooling.
+-  Configure the Wazuh manager and Wazuh indexer.
 -  Enforce role-based access control (RBAC) and single sign-on (SSO).
 -  Manage Wazuh agents and enrollment workflows.
 -  Health checks, notifications, and alerting integrations.
--  Custom branding.
+-  Test custom rules and decoders (Developer tools).
 
 Data visualization and analysis
 -------------------------------
@@ -26,8 +26,8 @@ The Wazuh dashboard enables users to navigate security data collected from Wazuh
    :title: Data visualization
    :alt: Data visualization
 
-Wazuh manager and indexer management
-------------------------------------
+Wazuh manager and Wazuh indexer management
+------------------------------------------
 
 The Wazuh dashboard provides a user interface to manage a Wazuh deployment. This includes monitoring the status, logs, and statistics of Wazuh components, configuring the Wazuh manager, and creating custom rules and decoders for log analysis and threat detection.
 
@@ -37,14 +37,6 @@ The Wazuh dashboard provides a user interface to manage a Wazuh deployment. This
    :title: Wazuh manager and indexer management
    :alt: Wazuh manager and indexer management
 
-Monitoring performance and cluster health of the Wazuh components.
-
-.. thumbnail::  /images/getting-started/cluster-health.png
-   :align: center
-   :width: 100%
-   :title: Wazuh components health monitoring
-   :alt: Wazuh components health monitoring
-
 Wazuh agents management
 -----------------------
 
@@ -52,9 +44,9 @@ The Wazuh dashboard allows users to manage Wazuh agents in several ways includin
 
 -  Deployment and registration
 -  Centralized configuration
--  Grouping agents
--  Monitoring and troubleshooting agent status
--  Agent upgrades
+-  Grouping Wazuh agents
+-  Monitoring and troubleshooting Wazuh agent status
+-  Wazuh agent upgrades
 
 .. thumbnail::  /images/getting-started/agents-monitoring.png 
    :align: center
@@ -76,8 +68,16 @@ For each monitored endpoint, users can define which Wazuh agent modules are enab
    :title: Endpoint agent configuration
    :alt: Endpoint agent configuration
 
-Notifications and alerting integrations
----------------------------------------
+Health checks, notifications and alerting integrations
+------------------------------------------------------
+
+The Wazuh dashboard provides the ability to monitor performance and cluster health of the Wazuh components.
+
+.. thumbnail::  /images/getting-started/cluster-health.png
+   :align: center
+   :width: 100%
+   :title: Wazuh components health monitoring
+   :alt: Wazuh components health monitoring
 
 The Wazuh dashboard provides the ability to integrate external APIs and services for enhanced alerting, incident management, and threat intelligence capabilities. It supports integration with Slack, PagerDuty, Shuffle, and others.
 
@@ -90,7 +90,7 @@ The Wazuh dashboard provides the ability to integrate external APIs and services
 Developer tools
 ---------------
 
-The Wazuh dashboard includes a ruleset testing tool (Log Test) that processes log messages to show how they are decoded by the Wazuh Normalization engine and whether they match a detection rule. This tool is useful for testing custom decoders and rules.
+The Wazuh dashboard includes a ruleset testing tool (Log Test) that processes log messages to show how they are decoded by the Wazuh normalization engine and whether they match a detection rule. This tool is useful for testing custom decoders and rules.
 
 .. thumbnail::  /images/getting-started/ruleset-test.png
    :align: center
