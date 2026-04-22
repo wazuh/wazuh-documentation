@@ -23,8 +23,8 @@ Index
    :includehidden:
    :maxdepth: 3
 
-   quickstart
    Getting started <getting-started/index>
+   quickstart
    installation-guide/index
 
 ..
