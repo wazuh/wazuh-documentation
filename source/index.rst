@@ -27,7 +27,6 @@ Index
    installation-guide/index
 
 ..
-   Getting started <getting-started/index>
    deployment-options/index
    user-manual/index
    cloud-security/monitoring
