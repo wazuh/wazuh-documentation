@@ -12,6 +12,12 @@ The deployment of a Wazuh agent on a Linux endpoint uses deployment variables th
 
 .. note:: You need root user privileges to run all the commands described below.
 
+.. warning::
+
+   Do not install the Wazuh agent on a host that already runs the Wazuh manager. The ``wazuh-agent`` and ``wazuh-manager`` packages share the ``/var/ossec/`` directory and provide conflicting files, so installing one silently removes the other through the package manager's ``Conflicts`` / ``Replaces`` metadata. On a manager host, running ``apt-get install wazuh-agent`` (or the DNF/Yum/ZYpp equivalent) results in ``wazuh-manager`` being uninstalled without any explicit warning, which takes the manager offline along with every agent that depends on it.
+
+   If you deploy agents with configuration management (Ansible, Puppet, Chef, Salt, etc.), make sure the manager host is **explicitly excluded** from the agent-install target — both in the ``hosts:`` pattern *and* in any ``--limit``/equivalent override.
+
 .. _agent-installation-add-wazuh-repository:
 
 Add the Wazuh repository
