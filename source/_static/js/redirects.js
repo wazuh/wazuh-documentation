@@ -1,6 +1,7 @@
 const removedUrls = [];
 const newUrls = [];
 const redirections = [];
+const betaVersions = []; // Important: betaVersions won't redirect between similar versions but to a especific page in the beta folder
 
 /* Note: new release versions must always be inserted in the first position of the array "versions" */
 const versions = [
@@ -23,6 +24,11 @@ const versions = [
   '3.0',
   '2.1',
 ];
+
+betaVersions.push(
+  /* [ LABEL , BETA_FOLDER, FILE_PATH ] */
+  ['5.0 (Beta 1)', '5.0-beta1', '/index.html']
+);
 
 /* Data structure for every release
 
