@@ -11,10 +11,13 @@ if ( $('.index') ) {
   const arrowMore = document.createElement('span');
   const useElement = document.createElement('use');
   arrowMore.setAttribute('class', 'ico-long-arrow-right');
-  $('.toctree-wrapper:last-of-type .toctree-l1:last-of-type .toctree-l2:first-of-type > a').text('More').append(arrowMore);
 
   /* Set .release-notes-card */
-  $('.index [href*="release-notes/index.html"]').closest('.toctree-l1').addClass('release-notes-card');
+  const releaseNotesCard = $('.index [href*="release-notes/index.html"]').closest('.toctree-l1');
+  if ( releaseNotesCard.length ) {
+    releaseNotesCard.addClass('release-notes-card');
+    releaseNotesCard.find('.toctree-l2:first-of-type > a').text('More').append(arrowMore);
+  }
 
 
   /* Move Quickstart */
