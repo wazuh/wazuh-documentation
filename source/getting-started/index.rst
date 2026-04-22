@@ -70,4 +70,3 @@ The following screenshots show dashboards of some of the Wazuh capabilities, inc
 
    components/index
    architecture
-   use-cases/index
