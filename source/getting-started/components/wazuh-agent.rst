@@ -11,7 +11,7 @@ The Wazuh agent runs on most popular operating systems such as Linux, Windows, a
 Wazuh agent architecture
 ------------------------
 
-The Wazuh agent has a modular architecture. Each module is in charge of its own tasks, including monitoring the file system, reading log files, collecting inventory data, scanning the system configuration, and looking for malware. Users can manage agent modules through configuration settings, adapting the solution to their specific use cases.
+The Wazuh agent has a modular architecture. Each module is in charge of its own tasks, including monitoring the file system, reading log files, collecting inventory data, scanning the system configuration, and looking for malware. Users can manage Wazuh agent modules through configuration settings, adapting the solution to their specific use cases.
 
 The diagram below shows the Wazuh agent architecture and modules.
 
@@ -36,7 +36,7 @@ All agent modules are configurable and perform different security tasks. This mo
 
 -  **Security configuration assessment (SCA):** Provides continuous configuration assessment, utilizing out-of-the-box checks based on the Center of Internet Security (CIS) benchmarks. Users can also create their own SCA checks to monitor and enforce their security policies.
 
--  **System inventory:** Periodically runs scans to collect inventory data such as operating system version, network interfaces, running processes, installed applications, and a list of open ports. The inventory data is stored locally on the agent in a SQLite database to support change detection and state persistence.
+-  **System inventory:** Periodically runs scans to collect inventory data such as operating system version, network interfaces, running processes, installed applications, and a list of open ports. Scan results are stored in local SQLite databases that can be queried remotely.
 
 -  **Malware detection:** Uses a non-signature-based approach to detect anomalies and the possible presence of rootkits. It also looks for hidden processes, hidden files, and hidden ports while monitoring system calls.
 

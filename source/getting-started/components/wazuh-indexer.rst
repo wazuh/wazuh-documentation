@@ -10,10 +10,6 @@ The Wazuh indexer is a highly scalable, full-text search and analytics engine. I
 
 The Wazuh indexer can be deployed as a single-node instance for development and small environments, or as a multi-node cluster for production workloads requiring high availability and horizontal scalability.
 
-The Wazuh indexer stores data as JSON documents. Each document correlates a set of keys, field names, or properties with their corresponding values, which can be strings, numbers, Boolean values, dates, arrays of values, geolocations, or other types of data.
-
-An index is a collection of related documents. The documents stored in the Wazuh indexer are distributed across different containers known as shards. By distributing the documents across multiple shards and distributing those shards across various nodes, the Wazuh indexer can ensure redundancy. This protects your system against hardware failures and increases query capacity as nodes are added to a cluster. Wazuh uses several types of indices to store different event types.
-
 We show an image of the Wazuh indexer cluster below:
 
 .. thumbnail:: /images/getting-started/wazuh-indexer.png
@@ -21,6 +17,10 @@ We show an image of the Wazuh indexer cluster below:
    :alt: Wazuh indexer
    :align: center
    :width: 80%
+
+The Wazuh indexer stores data as JSON documents. Each document correlates a set of keys, field names, or properties with their corresponding values, which can be strings, numbers, Boolean values, dates, arrays of values, geolocations, or other types of data.
+
+An index is a collection of related documents. The documents stored in the Wazuh indexer are distributed across different containers known as shards. By distributing the documents across multiple shards and distributing those shards across various nodes, the Wazuh indexer can ensure redundancy. This protects your system against hardware failures and increases query capacity as nodes are added to a cluster. Wazuh uses several types of indices to store different event types.
 
 The Wazuh indexer is well-suited for time-sensitive use cases like security analytics and infrastructure monitoring, as it is a near real-time search platform. The latency from the time a document is indexed until it becomes searchable is very short, typically one second.
 

@@ -13,7 +13,7 @@ The Wazuh manager leverages multiple threat intelligence sources and enriches ev
 Architecture
 ------------
 
-The Wazuh manager includes the normalization engine, Wazuh manager API, agent enrollment service, agent connection service, cluster daemon, and indexer connector. It runs on Linux across physical endpoints, virtual machines, containers, or cloud instances. On Windows endpoints, Wazuh Docker is supported for deployment.
+The Wazuh manager includes the normalization engine, Wazuh manager API, agent enrollment service, agent connection service, cluster daemon, and indexer connector. It runs on Linux across physical endpoints, virtual machines, containers, or cloud instances. On Windows endpoints, the Wazuh Docker is supported for deployment.
 
 The diagram below shows the Wazuh manager architecture and its components.
 
