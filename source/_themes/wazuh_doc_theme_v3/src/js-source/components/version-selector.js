@@ -234,6 +234,22 @@ jQuery(function($) {
       }
       selectVersionUl.append(ele);
     }
+
+    /* Add temporary beta versions
+      betaVersions is an array that must exist in redirects.js
+      and each item in that array must an array of three elements: [ LABEL , BETA_FOLDER, /FILE_PATH ]
+     */
+    if (betaVersions != undefined && betaVersions.length > 0) {
+      for (let i = betaVersions.length - 1; i >=  0; i--) {
+        href = DOCUMENTATION_OPTIONS.URL_ROOT + betaVersions[i][1] + betaVersions[i][2];
+        aEle = $(document.createElement('a'));
+        aEle.attr('href', href).text('Version ' + betaVersions[i][0]);
+        ele = $(document.createElement('li'));
+        ele.append(aEle);
+        selectVersionUl.prepend(ele);
+      }
+    }
+
     return redirHistory;
   }
 
