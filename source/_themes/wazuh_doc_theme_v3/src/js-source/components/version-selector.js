@@ -244,7 +244,7 @@ jQuery(function($) {
       for (let i = betaVersions.length - 1; i >=  0; i--) {
         href = urlRoot + betaVersions[i][1] + betaVersions[i][2];
         aEle = $(document.createElement('a'));
-        aEle.attr('href', href).text('Version ' + betaVersions[i][0]);
+        aEle.attr('href', href).text(betaVersions[i][0]);
         ele = $(document.createElement('li'));
         ele.append(aEle);
         selectVersionUl.prepend(ele);
