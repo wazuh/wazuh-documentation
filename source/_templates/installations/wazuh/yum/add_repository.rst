@@ -4,7 +4,7 @@
 
    .. code-block:: console
 
-      # rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH
+      # rpm --import https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH
 
 #. Add the repository:
 
@@ -15,7 +15,7 @@
          # cat > /etc/yum.repos.d/wazuh.repo << EOF
          [wazuh]
          gpgcheck=1
-         gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
+         gpgkey=https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH
          enabled=1
          name=EL-\$releasever - Wazuh
          baseurl=https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/yum/
@@ -29,7 +29,7 @@
          # cat > /etc/yum.repos.d/wazuh.repo << EOF
          [wazuh]
          gpgcheck=1
-         gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
+         gpgkey=https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH
          enabled=1
          name=EL-\$releasever - Wazuh
          baseurl=https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/yum/

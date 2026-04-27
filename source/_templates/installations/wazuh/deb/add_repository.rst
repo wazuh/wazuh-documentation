@@ -10,7 +10,7 @@
 
    .. code-block:: console
 
-     # curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | gpg --no-default-keyring --keyring gnupg-ring:/usr/share/keyrings/wazuh.gpg --import && chmod 644 /usr/share/keyrings/wazuh.gpg
+     # curl -s https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH | gpg --no-default-keyring --keyring gnupg-ring:/usr/share/keyrings/wazuh.gpg --import && chmod 644 /usr/share/keyrings/wazuh.gpg
 
 #. Add the repository:
 
@@ -31,7 +31,7 @@
    .. code-block:: console
 
       # apt-get install gnupg apt-transport-https
-      # curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | apt-key add -
+      # curl -s https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH | apt-key add -
       # echo "deb https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/apt/ unstable main" | tee -a /etc/apt/sources.list.d/wazuh.list
 
 .. End of include file
