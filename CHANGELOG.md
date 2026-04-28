@@ -3,7 +3,9 @@ All notable changes to this project will be documented in this file.
 
 ## [v4.14.5]
 
-- Support for Wazuh 4.14.5
+### Changed
+
+- **Post-release**: Updated the *Active Directory and LDAP integration* section. ([#9533](https://github.com/wazuh/wazuh-documentation/pull/9533))
 
 ## [v4.14.4]
 
