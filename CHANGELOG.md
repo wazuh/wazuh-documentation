@@ -3,7 +3,9 @@ All notable changes to this project will be documented in this file.
 
 ## [v4.14.5]
 
-- Support for Wazuh 4.14.5
+### Changed
+
+- **Post-release**: Updated the *User administration* index page. ([#9528](https://github.com/wazuh/wazuh-documentation/pull/9528))
 
 ## [v4.14.4]
 
