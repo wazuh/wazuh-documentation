@@ -88,6 +88,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Removed unnecessary code block from agent installation from sources. ([#9002](https://github.com/wazuh/wazuh-documentation/pull/9002))
 - **Post-release**: Fixed indentation in ``remove-threat.py`` code line. ([#9080](https://github.com/wazuh/wazuh-documentation/pull/9080))
 - **Post-release**: Updated the OpenSearch Dashboards version references. ([#9193](https://github.com/wazuh/wazuh-documentation/pull/9193))
+- **Post-release**: Fixed the Apache ``access_log`` path on the Windows endpoint in the *Blocking a known malicious actor* section of the *Proof of Concept guide*. ([#9535](https://github.com/wazuh/wazuh-documentation/pull/9535))
 
 ### Removed
 
