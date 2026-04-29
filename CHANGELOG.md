@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 ### Changed
 
 - **Post-release**: Updated the *User administration* index page. ([#9528](https://github.com/wazuh/wazuh-documentation/pull/9528))
+- **Post-release**: Updated the *Active Directory and LDAP integration* section. ([#9533](https://github.com/wazuh/wazuh-documentation/pull/9533))
 
 ## [v4.14.4]
 
