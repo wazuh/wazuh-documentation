@@ -112,7 +112,7 @@ Perform the steps below to configure the Wazuh agent to monitor Apache web serve
 
       <localfile>
         <log_format>syslog</log_format>
-        <location>C:\Apache24\logs\access.log</location>
+        <location>C:\Apache24\logs\access_log</location>
       </localfile>
 
 #. Restart the Wazuh agent in a PowerShell terminal with administrator privileges to apply the changes:
