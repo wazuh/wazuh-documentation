@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 
 - Support for Wazuh 4.8.2
 
+### Fixed
+
+- Fixed the Apache ``access_log`` path on the Windows endpoint in the *Blocking a known malicious actor* section of the *Proof of Concept guide*. ([#9539](https://github.com/wazuh/wazuh-documentation/pull/9539))
+
 ## [v4.8.1]
 
 ### Added
