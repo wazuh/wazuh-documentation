@@ -7,6 +7,10 @@ All notable changes to this project will be documented in this file.
 
 - Updated the API host default value. ([#7933](https://github.com/wazuh/wazuh-documentation/pull/7933))
 
+### Fixed
+
+- Fixed the Apache ``access_log`` path on the Windows endpoint in the *Blocking a known malicious actor* section of the *Proof of Concept guide*. ([#9538](https://github.com/wazuh/wazuh-documentation/pull/9538))
+
 ## [v4.9.1]
 
 ### Added
