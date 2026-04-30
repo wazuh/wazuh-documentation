@@ -33,19 +33,19 @@ custom_replacements = {
     "|WAZUH_CURRENT_MINOR|" : version,
     "|WAZUH_CURRENT|" : release,
 
-    # --- Revision numbers for Wazuh manager package versions
+    # --- Revision numbers for Wazuh manager package version
     # RPM and Deb manager package revisions
     "|WAZUH_MANAGER_CURRENT_REV|" : "beta1", # RPM and Deb
-    # --- Architectures for Wazuh agent and manager packages
+    # --- Architectures for Wazuh manager packages
     "|WAZUH_MANAGER_x64_RPM|" : "x86_64",
     "|WAZUH_MANAGER_x64_DEB|" : "amd64",
     "|WAZUH_MANAGER_AARCH64_RPM|" : "aarch64",
     "|WAZUH_MANAGER_ARM64_DEB|" : "arm64",
 
-    # --- Revision numbers for Wazuh agent package versions
+    # --- Revision numbers for Wazuh agent package version
     # RPM and Deb agent package revisions
     "|WAZUH_AGENT_CURRENT_REV|" : "beta1", # RPM and Deb
-    # --- Architectures for Wazuh agent and manager packages
+    # --- Architectures for Wazuh agent packages
     "|WAZUH_AGENT_x64_RPM|" : "x86_64",
     "|WAZUH_AGENT_x64_DEB|" : "amd64",
     "|WAZUH_AGENT_AARCH64_RPM|" : "aarch64",
