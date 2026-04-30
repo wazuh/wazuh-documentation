@@ -20,6 +20,7 @@ All notable changes to this project will be documented in this file.
 - Updated the FIM documentation to change the default FIM who-data mode provider to eBPF. ([#8805](https://github.com/wazuh/wazuh-documentation/pull/8805))
 - Updated references in steps and links to 5.x. ([#8853](https://github.com/wazuh/wazuh-documentation/pull/8853))
 - Updated version numbers in commands in the *Installation from sources* documentation. ([#9397](https://github.com/wazuh/wazuh-documentation/pull/9397))
+- Updated the *Installation guide*.  ([#9545](https://github.com/wazuh/wazuh-documentation/pull/9545))
 
 ### Removed
 
