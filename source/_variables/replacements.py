@@ -33,34 +33,27 @@ custom_replacements = {
     "|WAZUH_CURRENT_MINOR|" : version,
     "|WAZUH_CURRENT|" : release,
 
-    # --- Revision numbers for Wazuh agent and manager packages versions
-    # Yum packages revisions
-    "|WAZUH_REVISION_YUM_AGENT_I386|" : "1",
-    "|WAZUH_REVISION_YUM_MANAGER_I386|" : "1",
-    "|WAZUH_REVISION_YUM_AGENT_I386_EL5|" : "1",
-    #"|WAZUH_REVISION_YUM_MANAGER_I386_EL5|" :
-    "|WAZUH_REVISION_YUM_AGENT_X86|" : "1",
-    "|WAZUH_REVISION_YUM_MANAGER_X86|" : "1",
-    "|WAZUH_REVISION_YUM_AGENT_X86_EL5|" : "1",
-    #|WAZUH_REVISION_YUM_MANAGER_X86_EL5|
-    "|WAZUH_REVISION_YUM_AGENT_AARCH64|" : "1",
-    "|WAZUH_REVISION_YUM_AGENT_ARMHF|" : "1",
-    #"|WAZUH_REVISION_YUM_MANAGER_ARMHF|" : "1",
-    "|WAZUH_REVISION_YUM_AGENT_PPC|" : "1",
-    #|WAZUH_REVISION_YUM_MANAGER_PPC|" :
-    # Deb packages revisions
-    "|WAZUH_REVISION_DEB_AGENT_I386|" : "1",
-    "|WAZUH_REVISION_DEB_MANAGER_I386|" : "1",
-    "|WAZUH_REVISION_DEB_AGENT_X86|" : "1",
-    "|WAZUH_REVISION_DEB_MANAGER_X86|" : "1",
-    "|WAZUH_REVISION_DEB_AGENT_AARCH64|" : "1",
-    "|WAZUH_REVISION_DEB_AGENT_ARMHF|" : "1",
-    "|WAZUH_REVISION_DEB_MANAGER_ARMHF|" : "1",
-    "|WAZUH_REVISION_DEB_AGENT_PPC|" : "1",
-    #"|WAZUH_REVISION_DEB_MANAGER_PPC|" :
+    # --- Revision numbers for Wazuh manager package versions
+    # RPM and Deb manager package revisions
+    "|WAZUH_MANAGER_CURRENT_REV|" : "beta1", # RPM and Deb
+    # --- Architectures for Wazuh agent and manager packages
+    "|WAZUH_MANAGER_x64_RPM|" : "x86_64",
+    "|WAZUH_MANAGER_x64_DEB|" : "amd64",
+    "|WAZUH_MANAGER_AARCH64_RPM|" : "aarch64",
+    "|WAZUH_MANAGER_ARM64_DEB|" : "arm64",
+
+    # --- Revision numbers for Wazuh agent package versions
+    # RPM and Deb agent package revisions
+    "|WAZUH_AGENT_CURRENT_REV|" : "beta1", # RPM and Deb
+    # --- Architectures for Wazuh agent and manager packages
+    "|WAZUH_AGENT_x64_RPM|" : "x86_64",
+    "|WAZUH_AGENT_x64_DEB|" : "amd64",
+    "|WAZUH_AGENT_AARCH64_RPM|" : "aarch64",
+    "|WAZUH_AGENT_ARM64_DEB|" : "arm64",
+
     #
     # === Wazuh indexer version revisions
-    "|WAZUH_INDEXER_CURRENT_REV|" : "1", # RPM and Deb
+    "|WAZUH_INDEXER_CURRENT_REV|" : "beta1", # RPM and Deb
     #"|WAZUH_INDEXER_CURRENT_REV_DEB|" :
     # --- Architectures for Wazuh indexer packages
     "|WAZUH_INDEXER_x64_RPM|" : "x86_64",
@@ -69,8 +62,7 @@ custom_replacements = {
     "|WAZUH_INDEXER_ARM64_DEB|" : "arm64",
     #
     # === Wazuh dashboard version revisions
-    "|WAZUH_DASHBOARD_CURRENT_REV_RPM|" : "1",
-    "|WAZUH_DASHBOARD_CURRENT_REV_DEB|" : "1",
+    "|WAZUH_DASHBOARD_CURRENT_REV|" : "beta1", # RPM and Deb
     # --- Architectures for Wazuh dashboard packages
     "|WAZUH_DASHBOARD_x64_RPM|" : "x86_64",
     "|WAZUH_DASHBOARD_x64_DEB|" : "amd64",
