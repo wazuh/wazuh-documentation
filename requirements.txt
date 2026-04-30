@@ -6,3 +6,4 @@ Jinja2==3.1.6
 Pygments==2.20.0
 sphinx-reredirects==0.1.5
 sphinx-markdown-builder==0.6.9
+requests==2.33.0
