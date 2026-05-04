@@ -97,7 +97,6 @@ language = 'en-US'
 # This pattern also affects html_static_path and html_extra_path .
 exclude_patterns = [
     'redirects.js',
-    'deployment-options/**',
     'user-manual/**',
     'cloud-security/**',
     'compliance/**',

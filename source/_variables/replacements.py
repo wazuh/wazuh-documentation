@@ -76,6 +76,7 @@ custom_replacements = {
     "|WAZUH_CURRENT_MAJOR_OVA|" : "5.x",
     #"|WAZUH_CURRENT_MINOR_OVA|" :
     "|WAZUH_CURRENT_OVA|" : release,
+    "|WAZUH_CURRENT_OVA_REV|" : "beta1",
     #"|WAZUH_CURRENT_MAJOR_DOCKER|" :
     "|WAZUH_CURRENT_MINOR_DOCKER|" : version,
     "|WAZUH_CURRENT_DOCKER|" : release,
