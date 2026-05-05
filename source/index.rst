@@ -26,9 +26,9 @@ Index
    Getting started <getting-started/index>
    quickstart
    installation-guide/index
+   deployment-options/index
 
 ..
-   deployment-options/index
    user-manual/index
    cloud-security/monitoring
    compliance/index
