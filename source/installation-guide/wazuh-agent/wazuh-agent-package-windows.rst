@@ -32,7 +32,7 @@ The Wazuh agent runs on the endpoint you want to monitor and communicates with t
 
                   > .\wazuh-agent-5.0.0-beta1.msi /q WAZUH_MANAGER="10.0.0.2"
 
-            For additional deployment options such as agent name, agent group, and enrollment password, see the :doc:`Deployment variables for Windows </user-manual/agent/agent-enrollment/deployment-variables/deployment-variables-windows>` section.
+            For additional deployment options such as agent name, agent group, and enrollment password, see the `Deployment variables for Windows </user-manual/agent/agent-enrollment/deployment-variables/deployment-variables-windows>`__ section.
 
          #. Start the Wazuh agent from the GUI or by running:
 
@@ -52,7 +52,7 @@ The Wazuh agent runs on the endpoint you want to monitor and communicates with t
 
             .. note::
 
-               Alternatively, if you want to install an agent without enrolling it, omit the deployment variables. To learn more about the different enrollment methods, see the :doc:`Wazuh agent enrollment </user-manual/agent/agent-enrollment/index>` section.
+               Alternatively, if you want to install an agent without enrolling it, omit the deployment variables. To learn more about the different enrollment methods, see the `Wazuh agent enrollment </user-manual/agent/agent-enrollment/index>`__ section.
 
       .. group-tab:: GUI
 
@@ -64,6 +64,6 @@ The Wazuh agent runs on the endpoint you want to monitor and communicates with t
                :title: Windows agent manager
                :alt: Windows agent manager
 
-         The installation process is now complete, and the Wazuh agent is successfully installed on your Windows endpoint. The next step is to enroll and configure the Wazuh agent to communicate with the Wazuh manager. To perform this action, see the :doc:`Wazuh agent enrollment </user-manual/agent/agent-enrollment/index>` section.
+         The installation process is now complete, and the Wazuh agent is successfully installed on your Windows endpoint. The next step is to enroll and configure the Wazuh agent to communicate with the Wazuh manager. To perform this action, see the `Wazuh agent enrollment </user-manual/agent/agent-enrollment/index>`__ section.
 
 By default, all agent files are stored in ``C:\Program Files (x86)\ossec-agent`` after the installation.
