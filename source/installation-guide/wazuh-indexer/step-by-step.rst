@@ -78,7 +78,7 @@ Generating the SSL certificates
           #  dns: "<dashboard-node-dns>"
 
 
-   To learn more about how to create and configure the certificates, see the :doc:`/user-manual/wazuh-indexer-cluster/certificate-deployment` section.
+   To learn more about how to create and configure the certificates, see the `Certificates deployment </user-manual/wazuh-indexer-cluster/certificate-deployment>`__ section.
 
 #. Run ``./wazuh-certs-tool-5.0.0-beta1.sh`` to create the certificates. For a multi-node cluster, these certificates need to be later deployed to all Wazuh instances in your cluster:
 
