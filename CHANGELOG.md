@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 
 - **Post-release**: Fixed the Apache ``access_log`` path on the Windows endpoint in the *Blocking a known malicious actor* section of the *Proof of Concept guide*. ([#9530](https://github.com/wazuh/wazuh-documentation/pull/9530))
+- **Post-release**: Fixed the ``opensearch_dashboards.yml`` configuration for Google Workspace in the *Single Sign-On* documentation. ([#9586](https://github.com/wazuh/wazuh-documentation/pull/9586))
 
 ## [v4.14.4]
 
