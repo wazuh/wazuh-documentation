@@ -50,6 +50,13 @@ You can change these HTTPS options, including their status or the path to the ce
      ssl_protocol: "auto"
      ssl_ciphers: ""
 
+.. note::
+
+   Keep ``ssl_protocol`` set to ``auto`` when you want the Wazuh server API to negotiate the highest TLS version
+   supported by Python and OpenSSL on the host, including TLS 1.3 where available. If you pin this value to
+   ``TLSv1.2``, the API uses TLS 1.2 only. To use TLS 1.3, verify that the operating system OpenSSL or crypto policy
+   allows it before restarting the Wazuh manager service.
+
 Restart the Wazuh server API using the Wazuh manager service to apply the changes:
 
 .. include:: /_templates/common/restart_manager.rst
