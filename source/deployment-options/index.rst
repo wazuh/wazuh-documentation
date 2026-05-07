@@ -1,27 +1,26 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-    :description: You can install Wazuh using different deployment options. Learn more about Wazuh installation alternatives in this section of the Wazuh documentation.
+   :description: You can install Wazuh using different deployment options. Learn more about Wazuh installation alternatives in this section of the Wazuh documentation.
 
 Installation alternatives
 =========================
 
+You can install Wazuh using other deployment options. These are complementary to the installation methods you can find in the  :doc:`/installation-guide/index` and the :doc:`/quickstart`.
+
+Installing the Wazuh central components
+---------------------------------------
+
+All the alternatives include instructions on how to install the :doc:`Wazuh central components </getting-started/components/index>`. After these are installed, you then need to deploy agents to your endpoints.
+
+.. raw:: html
+
+   <h3>Ready-to-use machines</h3>
+
+-  :doc:`virtual-machine/virtual-machine`: Wazuh provides a pre-built virtual machine image (OVA) that you can directly import using VirtualBox or other OVA compatible virtualization systems.
+
 ..
-   You can install Wazuh using other deployment options. These are complementary to the installation methods you can find in the  :doc:`/installation-guide/index` and the :doc:`/quickstart`. 
-
-   Installing the Wazuh central components
-   ---------------------------------------
-
-   All the alternatives include instructions on how to install the :doc:`Wazuh central components </getting-started/components/index>`. After these are installed, you then need to deploy agents to your endpoints.  
-
-   .. raw:: html
-
-       <h3>Ready-to-use machines</h3>
-
-   - :doc:`virtual-machine/virtual-machine`: Wazuh provides a pre-built virtual machine image (OVA) that you can directly import using VirtualBox or other OVA compatible virtualization systems. 
-   
-   - :doc:`amazon-machine-images/amazon-machine-images`: This is a pre-built Amazon Machine Image (AMI) you can directly launch on an AWS cloud instance.
-
+   -  :doc:`amazon-machine-images/amazon-machine-images`: This is a pre-built Amazon Machine Image (AMI) you can directly launch on an AWS cloud instance.
 
    .. raw:: html
 
@@ -50,52 +49,53 @@ Installation alternatives
 
       To integrate Wazuh with Elastic or Splunk, refer to our :doc:`/integrations-guide/index`.
 
-   Installing the Wazuh agent
-   --------------------------
+Installing the Wazuh agent
+--------------------------
 
-   The :doc:`/installation-guide/wazuh-agent/index` is a single and lightweight monitoring software. It is a multi-platform component that can be deployed to laptops, desktops, servers, cloud instances, containers, or virtual machines. It provides visibility into the endpoint security by collecting critical system and application records, inventory data, and detecting potential anomalies. 
+The :doc:`/installation-guide/wazuh-agent/index` is a single and lightweight monitoring software. It is a multi-platform component that can be deployed to laptops, desktops, servers, cloud instances, containers, or virtual machines. It provides visibility into the endpoint security by collecting critical system and application records, inventory data, and detecting potential anomalies.
 
-   If the Wazuh central components are already installed in your environment, select your operating system below and follow the installation steps to deploy the agent on the endpoints. 
+If the Wazuh central components are already installed in your environment, select your operating system below and follow the installation steps to deploy the agent on the endpoints.
 
-   .. raw:: html
+.. raw:: html
 
-     <div class="link-boxes-group layout-6">
-       <div class="link-boxes-item">
-         <a class="link-boxes-link" href="../installation-guide/wazuh-agent/wazuh-agent-package-linux.html">
-           <p class="link-boxes-label">Linux</p>
+   <div class="link-boxes-group layout-6">
+     <div class="link-boxes-item">
+       <a class="link-boxes-link" href="../installation-guide/wazuh-agent/wazuh-agent-package-linux.html">
+         <p class="link-boxes-label">Linux</p>
 
-   .. image:: /images/installation/linux.png
-         :align: center
+.. image:: /images/installation/linux.png
+   :align: center
 
-   .. raw:: html
+.. raw:: html
 
-         </a>
-       </div>
-       <div class="link-boxes-item">
-         <a class="link-boxes-link" href="../installation-guide/wazuh-agent/wazuh-agent-package-windows.html">
-           <p class="link-boxes-label">Windows</p>
-
-   .. image:: /images/installation/windows-logo.png
-         :align: center
-
-   .. raw:: html
-
-         </a>
-       </div>
-       <div class="link-boxes-item">
-         <a class="link-boxes-link" href="../installation-guide/wazuh-agent/wazuh-agent-package-macos.html">
-           <p class="link-boxes-label">macOS</p>
-
-   .. image:: /images/installation/macOS-logo.png
-         :align: center
-
-   .. raw:: html
-
-         </a>
-       </div>
+       </a>
      </div>
+     <div class="link-boxes-item">
+       <a class="link-boxes-link" href="../installation-guide/wazuh-agent/wazuh-agent-package-windows.html">
+         <p class="link-boxes-label">Windows</p>
+
+.. image:: /images/installation/windows-logo.png
+   :align: center
+
+.. raw:: html
+
+       </a>
+     </div>
+     <div class="link-boxes-item">
+       <a class="link-boxes-link" href="../installation-guide/wazuh-agent/wazuh-agent-package-macos.html">
+         <p class="link-boxes-label">macOS</p>
+
+.. image:: /images/installation/macOS-logo.png
+   :align: center
+
+.. raw:: html
+
+       </a>
+     </div>
+   </div>
 
 
+..
    .. raw:: html
 
        <h3>From sources</h3>
