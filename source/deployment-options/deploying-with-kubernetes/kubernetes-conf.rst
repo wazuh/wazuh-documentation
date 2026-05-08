@@ -131,29 +131,50 @@ The Wazuh dashboard pod provides visualization of Wazuh indexer data, Wazuh agen
 Services
 ^^^^^^^^
 
-**Wazuh indexer and dashboard**
+Wazuh indexer and dashboard
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-+----------------------+-------------------------------------------------------------------------------------+
-| Name                 | Description                                                                         |
-+======================+=====================================================================================+
-| wazuh-indexer        | Communication for Wazuh indexer nodes.                                              |
-+----------------------+-------------------------------------------------------------------------------------+
-| indexer              | This is the Wazuh indexer API used by the Wazuh dashboard to read/write alerts.     |
-+----------------------+-------------------------------------------------------------------------------------+
-| dashboard            | Wazuh dashboard service. \https://wazuh.<YOUR_DOMAIN>.com:443                       |
-+----------------------+-------------------------------------------------------------------------------------+
++---------------+-------------------------------------------------------------------------------------------------------+
+| Name          | Description                                                                                           |
++===============+=======================================================================================================+
+| wazuh-indexer | -  Communication for Wazuh indexer nodes.                                                             |
+|               | -  Exposes ports 9200 (REST API) and 9300 (cluster transport) inside the Kubernetes cluster.          |
++---------------+-------------------------------------------------------------------------------------------------------+
+| dashboard     | -  Wazuh dashboard service running at: ``https://<WAZUH_DASHBOARD_IP>:443``                           |
+|               | -  Exposed externally through the Traefik ingress controller (wazuh-ingress) at the configured FQDN.  |
++---------------+-------------------------------------------------------------------------------------------------------+
 
-**Wazuh server**
+Wazuh manager
+~~~~~~~~~~~~~
 
-+----------------------+-------------------------------------------------------------------------------+
-| Name                 | Description                                                                   |
-+======================+===============================================================================+
-| wazuh-master         | Wazuh API: wazuh-master.<YOUR_DOMAIN>.com:55000                               |
-|                      +-------------------------------------------------------------------------------+
-|                      | Agent registration service (``authd``): wazuh-master.<YOUR_DOMAIN>.com:1515   |
-+----------------------+-------------------------------------------------------------------------------+
-| wazuh-workers        | Reporting service: wazuh-manager.<YOUR_DOMAIN>.com:1514                       |
-+----------------------+-------------------------------------------------------------------------------+
-| wazuh-cluster        | Communication for Wazuh manager nodes.                                        |
-+----------------------+-------------------------------------------------------------------------------+
++--------------------+-------------------------------------------------------------------------------------------+
+| Name               | Description                                                                               |
++====================+===========================================================================================+
+| wazuh-api          | Internal service for the Wazuh manager API ``<YOUR_DOMAIN>.com:55000``                    |
++--------------------+-------------------------------------------------------------------------------------------+
+| wazuh-registration | Wazuh agent registration service (``authd``): ``<YOUR_DOMAIN>.com:1515``                  |
++--------------------+-------------------------------------------------------------------------------------------+
+| wazuh-events       | Reporting service: ``wazuh-manager.<YOUR_DOMAIN>.com:1514``                               |
++--------------------+-------------------------------------------------------------------------------------------+
+| wazuh-cluster      | Headless service for internal communication between Wazuh manager nodes on port ``1516``  |
++--------------------+-------------------------------------------------------------------------------------------+
 
+Network policies
+^^^^^^^^^^^^^^^^
+
+Wazuh uses Kubernetes network policies to control communication between components and to restrict unauthorized traffic. Each policy defines specific allowed connections, while all other traffic is blocked by default.
+
+The following network policies are included:
+
+-  ``Allow-dns``: Allows DNS traffic within the Wazuh cluster so that pods can resolve service names.
+-  ``Allow-ingress-to-dashboard``: Permits incoming traffic from the ingress controller to port ``443`` of the Wazuh dashboard.
+-  ``Allow-ingress-to-manager-master``: Permits incoming traffic from the ingress controller to port ``1515`` of the Wazuh manager master node for agent enrollment.
+-  ``Allow-ingress-to-manager-worker``: Permits incoming traffic from the ingress controller to port ``1514`` of the Wazuh manager worker nodes for agent event communication.
+-  ``Dashboard-egress``: Allows outgoing traffic from Wazuh dashboard pods to port ``9200`` of the Wazuh indexer and port ``55000`` of the Wazuh manager master.
+-  ``Default-deny-all``: Blocks all incoming and outgoing traffic that is not explicitly allowed by another network policy. This ensures a secure-by-default configuration.
+-  ``Indexer-egress``: Allows outgoing traffic from Wazuh indexer pods to ports ``9200`` and ``9300`` of other indexer nodes for cluster communication.
+-  ``Indexer-ingress``: Allows incoming traffic to Wazuh indexer pods from the dashboard (port ``9200``), manager (port ``9200``), and other indexer nodes (port ``9300``).
+-  ``Manager-egress-external``: Allows outgoing traffic from Wazuh manager pods to the internet for CTI updates and external resources.
+-  ``Manager-egress``: Allows outgoing traffic from Wazuh manager pods to the Wazuh indexer on port ``9200``.
+-  ``Wazuh-api-ingress``: Allows incoming traffic from the Wazuh dashboard (port ``55000``) and other manager pods to port ``1516`` of the manager master for internal API communication.
+-  ``Wazuh-worker-egress``: Allows outgoing traffic from Wazuh manager worker pods to manager ports ``1516`` and ``55000`` for cluster coordination.
