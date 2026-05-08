@@ -1,16 +1,14 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: In this section, we show the process of installing, upgrading, and uninstalling Wazuh on Kubernetes.
+   :description: In this section, we provide an overview of the Wazuh Kubernetes architecture and how to deploy Wazuh central components and agents on Kubernetes.
 
 Deployment on Kubernetes
 ========================
 
-In this section, we show the process of installing, upgrading, and uninstalling Wazuh on Kubernetes.
+`Kubernetes <https://kubernetes.io/>`__ is an open source container orchestration engine. Containers are microservices packaged with their dependencies and configurations. Kubernetes runs across a cluster, automating deployment, scaling, and managing containerized applications. It simplifies the management of applications composed of multiple containers running across different servers by automating deployment, scaling, networking, and recovery. For easy management and discovery, containers are grouped into pods, the basic operational unit for Kubernetes. Kubernetes pods are distributed among nodes to provide high availability. Kubernetes helps with networking, load balancing, security, and scaling across all Kubernetes nodes running your containers.
 
-`Kubernetes <https://kubernetes.io/>`__ is an open source container orchestration engine. Containers are microservices packaged with their dependencies and configurations. Kubernetes is meant to run across a cluster, automating deployment, scaling, and management of containerized applications. It simplifies the operation of applications that span multiple containers deployed across multiple servers. For easy management and discovery, containers are grouped into pods, the basic operational unit for Kubernetes. Kubernetes pods are distributed among nodes to provide high availability. Kubernetes helps with networking, load balancing, security, and scaling across all Kubernetes nodes running your containers.
-
-In this section of the documentation, we show how to clone the `Wazuh Kubernetes repository <https://github.com/wazuh/wazuh-kubernetes>`__, and set up SSL certificates. We also show how to apply the manifests and deploy the necessary pods and services for installing Wazuh on Kubernetes in the cloud and local environments. The other subsection in this documentation covers :doc:`Kubernetes configuration <kubernetes-conf>`, how to :doc:`Upgrade Wazuh installed in Kubernetes <kubernetes-upgrade>`, and how to :doc:`Clean Up <kubernetes-clean-up>` both clusters and volumes.
+In this section, we provide an overview of the :doc:`Wazuh Kubernetes architecture <kubernetes-conf>`. It also describes how to :doc:`deploy Wazuh central components <kubernetes-deployment>` on Amazon EKS and local Kubernetes clusters. We also include steps for enrolling and deploying a Wazuh agent on Kubernetes. Other subsections in this documentation cover :doc:`changing the password of Wazuh users <kubernetes-password>` and how to :doc:`clean up <kubernetes-clean-up>` both clusters and volumes.
 
 .. toctree::
    :maxdepth: 1
@@ -18,5 +16,5 @@ In this section of the documentation, we show how to clone the `Wazuh Kubernetes
 
    kubernetes-conf
    kubernetes-deployment
-   kubernetes-upgrade
+   kubernetes-password
    kubernetes-clean-up
