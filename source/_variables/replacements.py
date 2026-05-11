@@ -83,6 +83,7 @@ custom_replacements = {
     #"|WAZUH_CURRENT_MAJOR_KUBERNETES|" :
     #"|WAZUH_CURRENT_MINOR_KUBERNETES|" :
     "|WAZUH_CURRENT_KUBERNETES|" : release,
+    "|WAZUH_CURRENT_KUBERNETES_REV|" : "beta1",
     #"|WAZUH_CURRENT_MAJOR_ANSIBLE|" :
     "|WAZUH_CURRENT_MINOR_ANSIBLE|" : version,
     "|WAZUH_CURRENT_ANSIBLE|" : release,
