@@ -14,23 +14,32 @@ Follow the steps below to delete all deployments, services, and volumes.
 
 #. Remove the entire cluster
 
-   The deployment of the Wazuh cluster of managers involves the use of different `StatefulSet <https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/>`__ elements as well as configuration maps and services.
+   The deployment of the Wazuh cluster of managers involves the use of different `StatefulSet <https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/>`__ elements, as well as configuration maps and services.
 
    To delete your Wazuh cluster, execute the following command from the repository directory.
 
-   -  EKS cluster
+   .. tabs::
 
-      .. code-block:: console
+      .. group-tab:: EKS cluster
 
-         $ kubectl delete -k envs/eks/
+         .. code-block:: console
 
-   - Other cluster types
+            $ kubectl delete -k envs/eks/
 
-      .. code-block:: console
+      .. group-tab:: Other cluster types
 
-         $ kubectl delete -k envs/local-env/
+         .. code-block:: console
+
+            $ kubectl delete -k envs/local-env/
 
    This will remove every resource defined on the ``kustomization.yml`` file.
+
+#. Run the following command from your repository directory to delete the Traefik ingress controller.
+
+   .. code-block:: console
+
+      # kubectl delete -k traefik/runtime/
+      # kubectl delete -f traefik/crd/kubernetes-crd-definition-v1.yml
 
 #. Remove the persistent volumes.
 
@@ -49,9 +58,11 @@ Follow the steps below to delete all deployments, services, and volumes.
 
    .. code-block:: console
 
-      $ kubectl delete persistentvolume pvc-b3226ad3-f7c4-11e8-b9b8-022ada63b4ac
+      $ kubectl delete persistentvolume <PV_NAME>
 
-   Repeat the kubectl delete  command to delete all Wazuh related persistent volumes.
+   Replace ``<PV_NAME>`` with the name of the persistent volume, for example ``pvc-b3226ad3-f7c4-11e8-b9b8-022ada63b4ac``.
+
+   Repeat the ``kubectl delete``  command to delete all Wazuh related persistent volumes.
 
 .. warning::
 
