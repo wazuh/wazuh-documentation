@@ -81,6 +81,7 @@ removedUrls['x.y'] = [
 newUrls['5.0'] = [
   '/release-notes/release-5-0-0.html',
   '/release-notes/index-5x.html',
+  '/deployment-options/deploying-with-kubernetes/kubernetes-password.html',
 ];
 
 /* Pages no longer available in 5.0 */
@@ -104,6 +105,7 @@ removedUrls['5.0'] = [
   '/installation-guide/wazuh-agent/wazuh-agent-package-aix.html',
   '/installation-guide/wazuh-agent/wazuh-agent-package-hpux.html',
   '/installation-guide/wazuh-agent/wazuh-agent-package-solaris.html',
+  '/deployment-options/deploying-with-kubernetes/kubernetes-upgrade.html',
   '/upgrade-guide/wazuh-agent/aix.html',
   '/upgrade-guide/wazuh-agent/hp-ux.html',
   '/upgrade-guide/wazuh-agent/solaris.html',
