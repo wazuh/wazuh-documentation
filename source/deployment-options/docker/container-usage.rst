@@ -1,12 +1,12 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Perform several tasks to manage and customize your installation after deploying Wazuh with Docker.
+   :description: Perform several tasks to manage your installation after deploying Wazuh with Docker.
 
 Wazuh Docker utilities
 ======================
 
-After deploying Wazuh with Docker, you can perform several tasks to manage and customize your installation. Wazuh components are deployed as separate containers built from their corresponding Docker image. You can access these containers using the service names defined in your ``docker-compose.yml`` file, which are specific to your deployment type.
+After deploying Wazuh with Docker, you can perform several tasks to manage your installation. Wazuh components are deployed as separate containers built from their corresponding Docker image. You can access these containers using the service names defined in your ``docker-compose.yml`` file, which are specific to your deployment type.
 
 Access to services and containers
 ---------------------------------
@@ -14,7 +14,7 @@ Access to services and containers
 This section explains how to interact with your Wazuh deployment by accessing service logs and shell instances of running containers.
 
 #. Access the Wazuh dashboard using the Docker host IP address.
-#. Enroll agents through the :ref:`Wazuh agent Docker deployment <agent_deployment_docker>` or the standard :doc:`Wazuh agent enrollment </user-manual/agent/agent-enrollment/index>` process. Use the Docker host address as the Wazuh manager address.
+#. Enroll Wazuh agents through the :ref:`Wazuh agent Docker deployment <agent_deployment_docker>` or the standard :doc:`Wazuh agent enrollment </user-manual/agent/agent-enrollment/index>` process. Use the Docker host address as the Wazuh manager address.
 #. List the containers in the directory where the Wazuh ``docker-compose.yml`` file is located:
 
    .. code-block:: console
@@ -24,21 +24,29 @@ This section explains how to interact with your Wazuh deployment by accessing se
    .. code-block:: none
       :class: output
 
-      NAME                            COMMAND                  SERVICE             STATUS              PORTS
-      single-node-wazuh.dashboard-1   "/entrypoint.sh"         wazuh.dashboard     running             443/tcp, 0.0.0.0:443->5601/tcp
-      single-node-wazuh.indexer-1     "/entrypoint.sh open…"   wazuh.indexer       running             0.0.0.0:9200->9200/tcp
-      single-node-wazuh.manager-1     "/init"                  wazuh.manager       running             0.0.0.0:1514-1515->1514-1515/tcp, 0.0.0.0:514->514/udp, 0.0.0.0:55000->55000/tcp, 1516/tcp
+      NAME                            IMAGE                                          COMMAND                  SERVICE           CREATED          STATUS          PORTS
+      single-node-wazuh.dashboard-1   wazuh/wazuh-dashboard:|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|-latest   "/entrypoint.sh"         wazuh.dashboard   58 minutes ago   Up 58 minutes   443/tcp, 0.0.0.0:443->5601/tcp
+      single-node-wazuh.indexer-1     wazuh/wazuh-indexer:|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|-latest     "/entrypoint.sh open…"   wazuh.indexer     58 minutes ago   Up 58 minutes   0.0.0.0:9200->9200/tcp, [::]:9200->9200/tcp
+      single-node-wazuh.manager-1     wazuh/wazuh-manager:|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|-latest     "/init"                  wazuh.manager     58 minutes ago   Up 58 minutes   0.0.0.0:1514-1515->1514-1515/tcp, [::]:1514-1515->1514-1515/tcp, 0.0.0.0:514->514/udp, [::]:514->514/udp, 0.0.0.0:55000->55000/tcp, [::]:55000->55000/tcp, 1516/tcp
 
-#. Run the command below from the directory where the ``docker-compose.yml`` file is located  to open a shell inside the container:
+#. Run the command below from the directory where the ``docker-compose.yml`` file is located to open a shell inside the container:
 
    .. code-block:: console
 
       # docker compose exec <SERVICE> bash
 
+   Replace ``<SERVICE>`` with the name of the service you want to access. A bash shell allows you to interact directly with the container's operating system to run commands, inspect configurations, and troubleshoot issues.
+
+   When you are done using the shell, exit it to return to your normal terminal:
+
+   .. code-block:: console
+
+      bash-5.2# exit
+
 Wazuh service data volumes
 --------------------------
 
-You can set Wazuh configuration and log files to exist outside their containers on the host system. This allows the files to persist after containers are removed, and you can provision custom configuration files to your containers.
+You can configure Wazuh to store its configuration and log files outside its containers on the host system. This allows the files to persist after containers are removed, and you can provision configuration files to your containers.
 
 Listing existing volumes
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -53,17 +61,23 @@ Run the following to see the persistent volumes on your Docker host:
    :class: output
 
    DRIVER    VOLUME NAME
+   local     single-node_wazuh-dashboard-config
+   local     single-node_wazuh-dashboard-custom
+   local     single-node_wazuh-indexer-data
    local     single-node_wazuh_api_configuration
+   local     single-node_wazuh_etc
+   local     single-node_wazuh_logs
+   local     single-node_wazuh_queue
+   local     single-node_wazuh_var_multigroups
 
-You can also view these volumes in the ``volumes`` section directly from the ``docker-compose.yml`` file.
+You can also view these volumes directly in the ``volumes`` section of the ``docker-compose.yml`` file.
 
 Adding a custom volume
 ^^^^^^^^^^^^^^^^^^^^^^
 
-You need multiple volumes to ensure persistence on the Wazuh server, Wazuh indexer, and Wazuh dashboard containers. Investigate the ``volumes`` section in your ``docker-compose.yml`` file and modify it to include your custom volumes:
+You need multiple volumes to ensure persistence on the Wazuh manager, Wazuh indexer, and Wazuh dashboard containers. Investigate the ``volumes`` section in your ``docker-compose.yml`` file and modify it to include your custom volumes:
 
 .. code-block:: yaml
-   :emphasize-lines: 4,5,7,8
 
    services:
      wazuh.manager:
@@ -77,61 +91,14 @@ You need multiple volumes to ensure persistence on the Wazuh server, Wazuh index
 Custom commands and scripts
 ---------------------------
 
-Run the command below to execute commands inside the containers. We use the Wazuh manager ``single-node-wazuh.manager-1`` container in this example:
+Run the command below to execute commands inside the containers. We use the Wazuh manager ``single-node-wazuh.manager`` container in this example:
 
 .. code-block:: console
 
-   # docker exec -it single-node-wazuh.manager-1 bash
+   # docker exec -it single-node-wazuh.manager bash
 
-Every change made on this shell persists because of the data volumes.
+Every change made to this shell persists due to the data volumes.
 
 .. note::
 
    The actions you can perform inside the containers are limited.
-
-Modifying the Wazuh configuration file
---------------------------------------
-
-To customize the Wazuh configuration file ``/var/ossec/etc/ossec.conf``, modify the appropriate configuration file on the Docker host according to your business needs. These local files are mounted into the containers at runtime, allowing your custom settings to persist across container restarts or rebuilds.
-
-#. Run the following command in your deployment directory to stop the running containers:
-
-   .. code-block:: console
-
-      # docker compose down
-
-#. The following are the locations of the Wazuh configuration files on the Docker host that you can modify:
-
-   .. tabs::
-
-      .. group-tab:: Single-node deployment
-
-         ``wazuh-docker/single-node/config/wazuh_cluster/wazuh_manager.conf``
-
-      .. group-tab:: Multi-node deployment
-
-         -  **Manager**: ``wazuh-docker/multi-node/config/wazuh_cluster/wazuh_manager.conf``
-         -  **Worker**: ``wazuh-docker/multi-node/config/wazuh_cluster/wazuh_worker.conf``
-
-      .. group-tab:: Wazuh agent container
-
-         ``wazuh-docker/wazuh-agent/config/wazuh-agent-conf``
-
-   Save the changes made in the configuration files.
-
-#. Restart the stack:
-
-   .. code-block:: console
-
-      # docker compose up -d
-
-These files are mounted into the container at runtime (``wazuh-config-mount/etc/ossec.conf``), ensuring your changes take effect when the containers start.
-
-Tuning Wazuh services
----------------------
-
-Tuning the Wazuh indexer and dashboard is **optional**. You can apply custom configurations only if you need to adjust performance, customize the dashboard interface, or override default settings.
-
--  The Wazuh indexer reads its configuration from the file(s) in the ``config/wazuh_indexer/`` directory in your respective deployment stack. Edit the appropriate configuration file(s) with your desired parameters, and ensure any changes made are properly mapped in your ``docker-compose.yml`` so the container loads the updated configuration.
-
--  The Wazuh dashboard reads its configuration from the ``config/wazuh_dashboard/opensearch_dashboards.yml`` file. You can adjust dashboard behavior or appearance by modifying parameters in this file. Refer to the OpenSearch documentation on `Modifying the YAML files <https://docs.opensearch.org/latest/security/configuration/yaml/>`__ for details about the available variables you can override in this configuration.
