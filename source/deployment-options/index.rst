@@ -27,7 +27,6 @@ All the alternatives include instructions on how to install the :doc:`Wazuh cent
    <h3>Containers</h3>
 
 -  :doc:`docker/index`: Docker is a set of platform-as-a-service (PaaS) products that deliver software in packages called containers. Using Docker, you can install and configure the Wazuh deployment as a single-host architecture.
-
 -  :doc:`deploying-with-kubernetes/index`: Kubernetes is an open-source system for automating deployment, scaling, and managing containerized applications. This deployment type uses Wazuh images from Docker and allows you to build the Wazuh environment.
 
 ..

@@ -14,7 +14,7 @@ You can modify and build Docker images for the Wazuh central components (manager
 
       # git clone https://github.com/wazuh/wazuh-docker.git -b v|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|
 
-#. Navigate to the ``build-docker-images`` directory:
+#. Navigate to the ``wazuh-docker/build-docker-images`` directory:
 
    .. code-block:: console
 

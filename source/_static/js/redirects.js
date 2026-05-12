@@ -87,7 +87,6 @@ newUrls['5.0'] = [
 /* Pages no longer available in 5.0 */
 
 removedUrls['5.0'] = [
-  '/deployment-options/docker/changing-default-password.html',
   '/user-manual/capabilities/system-inventory/osquery.html',
   '/user-manual/reference/ossec-conf/wodle-osquery.html',
   '/user-manual/reference/daemons/wazuh-agentlessd.html',
@@ -107,6 +106,7 @@ removedUrls['5.0'] = [
   '/installation-guide/wazuh-agent/wazuh-agent-package-hpux.html',
   '/installation-guide/wazuh-agent/wazuh-agent-package-solaris.html',
   '/deployment-options/deploying-with-kubernetes/kubernetes-upgrade.html',
+  '/deployment-options/docker/changing-default-password.html',
   '/upgrade-guide/wazuh-agent/aix.html',
   '/upgrade-guide/wazuh-agent/hp-ux.html',
   '/upgrade-guide/wazuh-agent/solaris.html',

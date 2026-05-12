@@ -194,6 +194,10 @@ Perform the following to clone the Wazuh Docker repository:
 
       # cd wazuh-docker/single-node/
 
+.. note::
+
+   When testing Wazuh Docker |WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|, update the image tags in the ``docker-compose.yml`` file to use the ``-latest`` suffix. For example: ``image: wazuh/wazuh-manager:|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|-latest``.
+
 Prepare certificate
 ~~~~~~~~~~~~~~~~~~~
 
@@ -306,6 +310,10 @@ Perform the following to clone the Wazuh Docker repository:
    .. code-block:: console
 
       # cd wazuh-docker/multi-node/
+
+.. note::
+
+   When testing Wazuh Docker |WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|, update the image tags in the ``docker-compose.yml`` file to use the ``-latest`` suffix. For example: ``image: wazuh/wazuh-manager:|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|-latest``.
 
 Prepare certificate
 ~~~~~~~~~~~~~~~~~~~
