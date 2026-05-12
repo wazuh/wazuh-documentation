@@ -35,6 +35,8 @@ Follow the steps below to create the Wazuh virtual machine:
 
       $ ./generate_ova.sh
 
+   The command returns output similar to the following example:
+
    .. code-block:: none
       :class: output
       :emphasize-lines: 22, 24

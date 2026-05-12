@@ -102,6 +102,8 @@ To ensure secure access, all Wazuh server API endpoints require authentication. 
 
       # curl -k -X GET "https://localhost:55000/" -H "Authorization: Bearer $TOKEN"
 
+   The command returns output similar to the following example:
+
    .. code-block:: none
       :class: output
 
@@ -213,6 +215,8 @@ You can authenticate to the Wazuh server API and obtain a JWT using a Python scr
 
       # python3 wazuh_api_authenticator.py
 
+   The command returns output similar to the following example:
+
    .. code-block:: none
       :class: output
 
@@ -285,6 +289,8 @@ You can also authenticate to the Wazuh server API using a Bash script. The follo
    .. code-block:: console
 
       # bash wazuh_api_authenticator.sh
+
+   The command returns output similar to the following example:
 
    .. code-block:: none
       :class: output
