@@ -80,6 +80,7 @@ custom_replacements = {
     #"|WAZUH_CURRENT_MAJOR_DOCKER|" :
     "|WAZUH_CURRENT_MINOR_DOCKER|" : version,
     "|WAZUH_CURRENT_DOCKER|" : release,
+    "|WAZUH_CURRENT_DOCKER_REV|" : "beta1",
     #"|WAZUH_CURRENT_MAJOR_KUBERNETES|" :
     #"|WAZUH_CURRENT_MINOR_KUBERNETES|" :
     "|WAZUH_CURRENT_KUBERNETES|" : release,

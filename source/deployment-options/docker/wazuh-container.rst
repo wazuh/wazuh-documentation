@@ -6,31 +6,31 @@
 Wazuh Docker deployment
 =======================
 
-Wazuh consists of a multi-platform Wazuh agent and three central components: the Wazuh server, the Wazuh indexer, and the Wazuh dashboard. Refer to the :doc:`Wazuh components </getting-started/components/index>` documentation for more information.
+Wazuh consists of a multi-platform Wazuh agent and three central components: the Wazuh manager, the Wazuh indexer, and the Wazuh dashboard. For more information, refer to the :doc:`Wazuh components </getting-started/components/index>` documentation.
 
 Deployment options
 ------------------
 
-Wazuh supports the deployment of its central components and agent on Docker.
+Wazuh supports deploying its central components and agent on Docker.
 
 -  :ref:`Single-node stack <single-node-stack>`: This stack deploys one of each Wazuh central component as a separate container. It includes:
 
-   -  Wazuh indexer container: Stores and indexes security data collected by the Wazuh manager.
-   -  Wazuh manager container: Analyzes collected security events, applies detection rules, and manages Wazuh agents.
-   -  Wazuh dashboard container: Centralized web interface for monitoring, searching, and managing Wazuh.
+   -  Wazuh indexer container: Stores and indexes security data collected by the Wazuh manager. It also provides near real-time search and security analytics.
+   -  Wazuh manager container: Transforms data received from Wazuh agents and agentless devices into standardized schema documents using the Wazuh Common Schema (WCS).
+   -  Wazuh dashboard container: Centralized web interface for monitoring and searching security data, and managing Wazuh.
 
-   It provides persistent storage and configurable certificates for secure communication.
+   It provides persistent storage and certificates for secure communication.
 
 -  :ref:`Multi-node stack <multi-node-stack>`: This stack deploys each Wazuh component as a separate container. It includes:
 
    -  Three Wazuh indexer containers: Work together in a cluster to store and replicate indexed data, ensuring scalability and fault tolerance.
-   -  Two Wazuh manager containers: One master and one worker node. The master coordinates agent management and rule updates, while the worker provides redundancy and load distribution.
+   -  Two Wazuh manager containers: One master and one worker node. The master coordinates Wazuh agent management and rule updates, while the worker provides redundancy and load distribution.
    -  One Wazuh dashboard container.
-   -  One Nginx proxy container: This provides a single secure entry point that load balances traffic between multiple Wazuh manager nodes for high availability. The Nginx container acts as a reverse proxy, distributing incoming requests across the available manager nodes and providing SSL termination for secure communication.
+   -  One Nginx proxy container: This provides a single secure entry point that load-balances traffic across multiple Wazuh manager nodes for high availability. The Nginx container acts as a reverse proxy, distributing incoming requests across the available manager nodes and providing SSL termination for secure communication.
 
-This deployment stack provides persistent storage, secure communication, and high availability.
+   This deployment stack provides persistent storage, secure communication, and high availability.
 
--  `Wazuh agent`_: This deploys the Wazuh agent as a container on your Docker host.
+-  :ref:`Wazuh agent <agent_deployment_docker>`: This deploys the Wazuh agent as a container on your Docker host.
 
 Prerequisites
 -------------
@@ -43,8 +43,8 @@ System requirements
 Single-node stack deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
--  **Operating system**: Linux or Windows
--  **Architecture**: AMD64 (x86_64) or ARM64 (AARCH64)
+-  **Operating system**: Linux, Windows, or macOS
+-  **Architecture**: AMD64 or ARM64 (AARCH64)
 -  **CPU**: At least 4 cores
 -  **Memory**: At least 8 GB of RAM for the Docker host
 -  **Disk space**: At least 50 GB storage for Docker images and data volumes
@@ -52,8 +52,8 @@ Single-node stack deployment
 Multi-node stack deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
--  **Operating system**: Linux or Windows
--  **Architecture**: AMD64 or ARM64
+-  **Operating system**: Linux, Windows, or macOS
+-  **Architecture**: AMD64 or ARM64 (AARCH64)
 -  **CPU**: At least 4 cores
 -  **Memory**: At least 16 GB for the Docker host
 -  **Disk space**: At least 100 GB storage for Docker images and data volumes
@@ -61,35 +61,64 @@ Multi-node stack deployment
 Wazuh agent deployment
 ~~~~~~~~~~~~~~~~~~~~~~
 
--  **Operating system**: Linux or Windows
--  **Architecture**: AMD64
+-  **Operating system**: Linux, Windows, or macOS
+-  **Architecture**: AMD64 or ARM64 (AARCH64)
 -  **CPU**: At least 2 cores
 -  **Memory**: At least 1 GB of RAM for the Docker host
 -  **Disk space**: At least 10 GB storage for Docker images and logs
 
-Required software
-^^^^^^^^^^^^^^^^^
+Software requirements
+^^^^^^^^^^^^^^^^^^^^^
 
--  **Docker Engine / Docker Desktop**: Use the latest stable version.
+.. tabs::
 
-   -  **Linux**: Docker Engine
+   .. group-tab:: Linux
 
-   -  **Windows**: Docker Desktop (requires WSL 2)
+      -  **Docker Engine**:
 
--  **Docker Compose**: Latest stable version (included with Docker Desktop on Windows; install separately on Linux if needed).
+         -  `Install Docker Engine <https://docs.docker.com/engine/install/>`__ (requires version 20.10.0 or newer)
 
--  **Git**: For cloning the Wazuh Docker repository.
+      -  **Docker Compose**: Latest stable version
+      -  **Git**: Required for cloning the Wazuh Docker repository
 
-Docker host requirements
-^^^^^^^^^^^^^^^^^^^^^^^^
+         -  `Install the latest version of Git <https://git-scm.com/install/>`__
 
-You need to configure your Docker host to run Wazuh correctly on any system that uses a Linux kernel. This includes native Linux distributions and Windows with WSL 2 (Windows Subsystem for Linux version 2).
+   .. group-tab:: Windows
 
-#. Set ``max_map_count`` to ``262144`` on your Docker host. The Wazuh indexer creates many virtual memory areas (VMAs), so the kernel must allow more than the Linux default limit of ``65530``. A VMA is a region of memory that lets applications like the Wazuh indexer access files directly from disk as if they were in RAM.
+      -  **Docker Desktop**:
 
-   .. note::
+         -  `Install Docker Desktop <https://docs.docker.com/desktop/setup/install/windows-install/>`__ (requires WSL 2)
+         -  Docker Compose is included with Docker Desktop on Windows
 
-      On Windows systems using WSL 2, run this command within the WSL 2 environment.
+      -  **Git**: Required for cloning the Wazuh Docker repository
+
+         -  `Install the latest version of Git <https://git-scm.com/install/>`__
+
+   .. group-tab:: macOS
+
+      -  **Docker Desktop**:
+
+         -  `Install Docker Desktop <https://docs.docker.com/desktop/setup/install/mac-install/>`__
+         -  Docker Compose
+
+      -  **Git**: Required for cloning the Wazuh Docker repository
+
+         -  `Install the latest version of Git <https://git-scm.com/install/>`__
+
+      -  **Bash shell**
+      -  `Install OpenSSL <https://formulae.brew.sh/formula/openssl@3>`__
+      -  **GNU versions of apps**:
+
+         -  `Install GNU sed <https://formulae.brew.sh/formula/gnu-sed>`__
+         -  `Install GNU awk <https://formulae.brew.sh/formula/gawk>`__
+         -  `Install GNU grep <https://formulae.brew.sh/formula/grep>`__
+
+Linux/Unix host requirements
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Additional configuration is required to ensure proper functionality when running Wazuh Docker on a Linux/Unix operating system.
+
+#. Run the following command to set the ``max_map_count`` on your Docker host to ``262144``. The Wazuh indexer creates a large number of virtual memory-mapped areas (VMAs), so the kernel must be configured above the Linux default limit of ``65530``. A VMA is a region of memory that the kernel reserves for applications like the Wazuh indexer to access files directly from disk as if they were in RAM.
 
    .. code-block:: console
 
@@ -97,15 +126,15 @@ You need to configure your Docker host to run Wazuh correctly on any system that
 
    .. warning::
 
-      If you don’t set ``vm.max_map_count`` to at least ``262144``, the Wazuh indexer might fail due to limited virtual memory mapping. This value lets the indexer map more files and index segments to memory, preventing errors or crashes.
+      This configuration allows more files and index segments to be mapped to memory simultaneously without errors or crashes. If you don't set a minimum value of at least ``262144`` for ``max_map_count`` on your Linux host, the Wazuh indexer will not work correctly.
 
-#. On native Linux systems, add your user to the ``docker`` group if you want to run Docker without root privileges:
+#. If you want to use Docker as a non-root user, you should add the user to the ``docker`` group using the following command:
 
    .. code-block:: console
 
       # usermod -aG docker <USER>
 
-   Replace ``<USER>`` with your username. Log out and back in for the change to take effect.
+   Replace ``<USER>`` with your username. Log out and back in for changes to take effect.
 
 Exposed ports
 -------------
@@ -121,7 +150,7 @@ The following ports are exposed when the Wazuh central components are deployed.
 +-----------+-----------------------------+
 | 514       | Wazuh UDP                   |
 +-----------+-----------------------------+
-| 55000     | Wazuh server API            |
+| 55000     | Wazuh manager API           |
 +-----------+-----------------------------+
 | 9200      | Wazuh indexer API           |
 +-----------+-----------------------------+
@@ -135,27 +164,29 @@ Below are the steps for deploying the Wazuh central components in :ref:`single-n
 
 .. warning::
 
-   Do not run the single-node and multi-node stacks at the same time on the same Docker host. Both stacks use overlapping resources (such as container names, ports, and volumes), which can lead to conflicts, unexpected behavior, or data corruption.
+   Do not run the single-node and multi-node stacks simultaneously on the same Docker host. Both stacks use overlapping resources (such as container names, ports, and volumes), which can lead to conflicts, unexpected behavior, or data corruption.
 
 .. _single-node-stack:
 
 Single-node stack deployment
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Follow the steps below to deploy the Wazuh central components in a single-node stack.
+Follow the steps below to deploy the Wazuh central components in a single-node stack:
 
 .. note::
 
-   All deployment commands provided apply to both Windows and Linux environments.
+   All deployment commands provided apply to Windows, macOS, and Linux environments. Some commands may require minor syntax adjustments depending on the shell or terminal in use.
 
 Cloning the repository
 ~~~~~~~~~~~~~~~~~~~~~~
 
-#. Clone the `Wazuh Docker repository <https://github.com/wazuh/wazuh-docker>`__ to your system:
+Perform the following to clone the Wazuh Docker repository:
+
+#. Clone the `Wazuh Docker <https://github.com/wazuh/wazuh-docker>`__ repository to your system:
 
    .. code-block:: console
 
-      # git clone https://github.com/wazuh/wazuh-docker.git -b v|WAZUH_CURRENT_DOCKER|
+      # git clone https://github.com/wazuh/wazuh-docker.git -b v|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|
 
 #. Navigate to the ``single-node`` directory to execute all the following commands.
 
@@ -163,98 +194,72 @@ Cloning the repository
 
       # cd wazuh-docker/single-node/
 
-Certificate generation
-~~~~~~~~~~~~~~~~~~~~~~
+.. note::
 
-You must provide certificates for each node to secure communication between them in the Wazuh stack. You have two alternatives:
+   When testing Wazuh Docker |WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|, update the image tags in the ``docker-compose.yml`` file to use the ``-latest`` suffix. For example: ``image: wazuh/wazuh-manager:|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|-latest``.
 
--  Wazuh self-signed certificates
--  Your own certificates
+Prepare certificate
+~~~~~~~~~~~~~~~~~~~
 
-.. tabs::
+Secure communication between Wazuh components requires the use of certificates. Follow the steps below to prepare and generate the certificates:
 
-   .. group-tab:: Wazuh self‑signed certificates
+#. Run the following command to download the certificate creation script:
 
-      You must use the ``wazuh-certs-generator`` Docker image to generate self-signed certificates for each node of the stack.
+   .. code-block:: console
 
-      #. **Optional**: Add the following to the ``generate-indexer-certs.yml`` file if your system uses a proxy. If not, skip this step. Replace ``<YOUR_PROXY_ADDRESS_OR_DNS>`` with your proxy information.
+      # curl -o wazuh-certs-tool.sh https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-certs-tool-|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|.sh
 
-         .. code-block:: yaml
-            :emphasize-lines: 9,10
+#. Create a ``config.yml`` file with the following content:
 
-            # Wazuh App Copyright (C) 2017, Wazuh Inc. (License GPLv2)
-            services:
-              generator:
-                image: wazuh/wazuh-certs-generator:|WAZUH_CERTS_GENERATOR|
-                hostname: wazuh-certs-generator
-                volumes:
-                  - ./config/wazuh_indexer_ssl_certs/:/certificates/
-                  - ./config/certs.yml:/config/certs.yml
-                environment:
-                  - HTTP_PROXY=<YOUR_PROXY_ADDRESS_OR_DNS>
+   .. code-block:: yaml
 
-      #. Run the following command to generate the desired certificates:
+      nodes:
+        # Wazuh indexer server nodes
+        indexer:
+          - name: wazuh.indexer
+            dns: "wazuh.indexer"
 
-         .. code-block:: console
+        # Wazuh manager nodes
+        # Use node_type only with more than one Wazuh manager
+        manager:
+          - name: wazuh.manager
+            dns: "wazuh.manager"
 
-            # docker compose -f generate-indexer-certs.yml run --rm generator
+        # Wazuh dashboard node
+        dashboard:
+          - name: wazuh.dashboard
+            dns: "wazuh.dashboard"
 
-      The generated certificates will be stored in the ``wazuh-docker/single-node/config/wazuh_indexer_ssl_certs`` directory.
+#. Run the certificate creation script:
 
-   .. group-tab:: Your own certificates
+   .. code-block:: console
 
-      If you already have valid certificates for each node, place them in the ``wazuh-docker/single-node/config/wazuh_indexer_ssl_certs/`` directory using the following file names. Note your stack for the right path.
-
-      **Wazuh indexer**:
-
-      .. code-block:: none
-
-         wazuh-docker/single-node/config/wazuh_indexer_ssl_certs/root-ca.pem
-         wazuh-docker/single-node/config/wazuh_indexer_ssl_certs/wazuh.indexer-key.pem
-         wazuh-docker/single-node/config/wazuh_indexer_ssl_certs/wazuh.indexer.pem
-         wazuh-docker/single-node/config/wazuh_indexer_ssl_certs/admin.pem
-         wazuh-docker/single-node/config/wazuh_indexer_ssl_certs/admin-key.pem
-
-      **Wazuh manager**:
-
-      .. code-block:: none
-
-         wazuh-docker/single-node/config/wazuh_indexer_ssl_certs/root-ca-manager.pem
-         wazuh-docker/single-node/config/wazuh_indexer_ssl_certs/wazuh.manager.pem
-         wazuh-docker/single-node/config/wazuh_indexer_ssl_certs/wazuh.manager-key.pem
-
-      **Wazuh dashboard**:
-
-      .. code-block:: none
-
-         wazuh-docker/single-node/config/wazuh_indexer_ssl_certs/wazuh.dashboard.pem
-         wazuh-docker/single-node/config/wazuh_indexer_ssl_certs/wazuh.dashboard-key.pem
-         wazuh-docker/single-node/config/wazuh_indexer_ssl_certs/root-ca.pem
+      # bash ../tools/utils/deployment/certificates-conf.sh --cert --copy --priv
 
 Deployment
 ~~~~~~~~~~
 
-#. Start the Wazuh Docker deployment using the ``docker compose`` command:
+Start the Wazuh Docker deployment using the ``docker compose`` command:
 
-   .. tabs::
+.. tabs::
 
-      .. group-tab:: Background
+   .. group-tab:: Background
 
-         .. code-block:: console
+      .. code-block:: console
 
-            # docker compose up -d
+         # docker compose up -d
 
-      .. group-tab:: Foreground
+   .. group-tab:: Foreground
 
-         .. code-block:: console
+      .. code-block:: console
 
-            # docker compose up
+         # docker compose up
 
 .. note::
 
    Docker does not dynamically reload the configuration. After changing a component's configuration, you need to restart the stack.
 
-
+   Allow a minute or two for the Wazuh indexer and other components to initialize, especially on the first run.
 
 Accessing the Wazuh dashboard
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -272,33 +277,33 @@ After deploying the single-node stack, you can access the Wazuh dashboard using 
 This is the default username and password to access the Wazuh dashboard:
 
 -  Username: ``admin``
--  Password: ``SecretPassword``
-
-Refer to the :doc:`changing the default password of Wazuh users <changing-default-password>` section to learn more about additional security.
+-  Password: ``admin``
 
 .. note::
 
-   To determine when the Wazuh indexer is up, the Wazuh dashboard container uses ``curl`` to repeatedly send queries to the Wazuh indexer API (port 9200). You can expect to see several ``Failed to connect to Wazuh indexer port 9200`` log messages or ``Wazuh dashboard server is not ready yet`` until the Wazuh indexer is started. Then the setup process continues normally. It takes about one minute for the Wazuh indexer to start up. You can find the default Wazuh indexer credentials in the ``docker-compose.yml`` file.
+   To determine when the Wazuh indexer is up, the Wazuh dashboard container uses ``curl`` to repeatedly query the Wazuh indexer API (port 9200). You can expect to see several ``Failed to connect to Wazuh indexer port 9200`` log messages or ``Wazuh dashboard server is not ready yet`` until the Wazuh indexer is started. Then the setup process continues normally. It takes about one minute for the Wazuh indexer to start up. You can find the default Wazuh indexer credentials in the ``docker-compose.yml`` file.
 
 .. _multi-node-stack:
 
 Multi-node stack deployment
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Follow the steps below to deploy the Wazuh central components in a multi-node stack.
+Follow the steps below to deploy the Wazuh central components in a multi-node stack:
 
 .. note::
 
-   All deployment commands provided apply to both Windows and Linux environments.
+   All deployment commands provided apply to Windows, macOS, and Linux environments. Some commands may require minor syntax adjustments depending on the shell or terminal in use.
 
 Cloning the repository
 ~~~~~~~~~~~~~~~~~~~~~~
 
-#. Clone the `Wazuh Docker repository <https://github.com/wazuh/wazuh-docker>`__ to your system:
+Perform the following to clone the Wazuh Docker repository:
+
+#. Clone the `Wazuh Docker <https://github.com/wazuh/wazuh-docker>`__ repository to your system:
 
    .. code-block:: console
 
-      # git clone https://github.com/wazuh/wazuh-docker.git -b v|WAZUH_CURRENT_DOCKER|
+      # git clone https://github.com/wazuh/wazuh-docker.git -b v|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|
 
 #. Navigate to the ``multi-node`` directory to execute all the following commands.
 
@@ -306,73 +311,55 @@ Cloning the repository
 
       # cd wazuh-docker/multi-node/
 
-Certificate generation
-~~~~~~~~~~~~~~~~~~~~~~
+.. note::
 
-You must provide certificates for each node to secure communication between them in the Wazuh stack. You have two alternatives:
+   When testing Wazuh Docker |WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|, update the image tags in the ``docker-compose.yml`` file to use the ``-latest`` suffix. For example: ``image: wazuh/wazuh-manager:|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|-latest``.
 
--  Wazuh self-signed certificates
--  Your own certificates
+Prepare certificate
+~~~~~~~~~~~~~~~~~~~
 
-.. tabs::
+Secure communication between Wazuh components requires the use of certificates. Follow the steps below to prepare and generate the certificates:
 
-   .. group-tab:: Wazuh self‑signed certificates
+#. Run the following command to download the certificate creation script:
 
-      You must use the ``wazuh-certs-generator`` Docker image to generate self-signed certificates for each node of the stack.
+   .. code-block:: console
 
-      #. **Optional**: Add the following to the ``generate-indexer-certs.yml`` file if your system uses a proxy. If not, skip this step. Replace ``<YOUR_PROXY_ADDRESS_OR_DNS>`` with your proxy information.
+      # curl -o wazuh-certs-tool.sh https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-certs-tool-|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|.sh
 
-         .. code-block:: yaml
-            :emphasize-lines: 9,10
+#. Create a ``config.yml`` file with the following content:
 
-            # Wazuh App Copyright (C) 2017, Wazuh Inc. (License GPLv2)
-            services:
-              generator:
-                image: wazuh/wazuh-certs-generator:|WAZUH_CERTS_GENERATOR|
-                hostname: wazuh-certs-generator
-                volumes:
-                  - ./config/wazuh_indexer_ssl_certs/:/certificates/
-                  - ./config/certs.yml:/config/certs.yml
-                environment:
-                  - HTTP_PROXY=<YOUR_PROXY_ADDRESS_OR_DNS>
+   .. code-block:: yaml
 
-      #. Run the following command to generate the desired certificates:
+      nodes:
+        # Wazuh indexer server nodes
+        indexer:
+          - name: wazuh1.indexer
+            dns: "wazuh1.indexer"
+          - name: wazuh2.indexer
+            dns: "wazuh2.indexer"
+          - name: wazuh3.indexer
+            dns: "wazuh3.indexer"
 
-         .. code-block:: console
+        # Wazuh manager nodes
+        # Use node_type only with more than one Wazuh manager
+        manager:
+          - name: wazuh.master
+            dns: "wazuh.master"
+            node_type: master
+          - name: wazuh.worker
+            dns: "wazuh.worker"
+            node_type: worker
 
-            # docker compose -f generate-indexer-certs.yml run --rm generator
+        # Wazuh dashboard node
+        dashboard:
+          - name: wazuh.dashboard
+            dns: "wazuh.dashboard"
 
-      The generated certificates will be stored in the ``wazuh-docker/multi-node/config/wazuh_indexer_ssl_certs`` directory.
+#. Run the certificate creation script:
 
-   .. group-tab:: Your own certificates
+   .. code-block:: console
 
-      If you already have valid certificates for each node, place them in the ``wazuh-docker/multi-node/config/wazuh_indexer_ssl_certs/`` directory using the following file names. Note your stack for the right path.
-
-      **Wazuh indexer**:
-
-      .. code-block:: none
-
-         wazuh-docker/multi-node/config/wazuh_indexer_ssl_certs/root-ca.pem
-         wazuh-docker/multi-node/config/wazuh_indexer_ssl_certs/wazuh.indexer-key.pem
-         wazuh-docker/multi-node/config/wazuh_indexer_ssl_certs/wazuh.indexer.pem
-         wazuh-docker/multi-node/config/wazuh_indexer_ssl_certs/admin.pem
-         wazuh-docker/multi-node/config/wazuh_indexer_ssl_certs/admin-key.pem
-
-      **Wazuh manager**:
-
-      .. code-block:: none
-
-         wazuh-docker/multi-node/config/wazuh_indexer_ssl_certs/root-ca-manager.pem
-         wazuh-docker/multi-node/config/wazuh_indexer_ssl_certs/wazuh.manager.pem
-         wazuh-docker/multi-node/config/wazuh_indexer_ssl_certs/wazuh.manager-key.pem
-
-      **Wazuh dashboard**:
-
-      .. code-block:: none
-
-         wazuh-docker/multi-node/config/wazuh_indexer_ssl_certs/wazuh.dashboard.pem
-         wazuh-docker/multi-node/config/wazuh_indexer_ssl_certs/wazuh.dashboard-key.pem
-         wazuh-docker/multi-node/config/wazuh_indexer_ssl_certs/root-ca.pem
+      # bash ../tools/utils/deployment/certificates-conf.sh --cert --copy --priv
 
 Deployment
 ~~~~~~~~~~
@@ -397,8 +384,6 @@ Deployment
 
    Docker does not dynamically reload the configuration. After changing a component's configuration, you need to restart the stack.
 
-
-
 Accessing the Wazuh dashboard
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -415,18 +400,16 @@ After deploying the multi-node stack, you can access the Wazuh dashboard using y
 This is the default username and password to access the Wazuh dashboard:
 
 -  Username: ``admin``
--  Password: ``SecretPassword``
-
-Refer to the :doc:`changing the default password of Wazuh users <changing-default-password>` section to learn more about additional security.
+-  Password: ``admin``
 
 .. note::
 
-   To determine when the Wazuh indexer is up, the Wazuh dashboard container uses ``curl`` to repeatedly send queries to the Wazuh indexer API (port 9200). You can expect to see several ``Failed to connect to Wazuh indexer port 9200`` log messages or ``Wazuh dashboard server is not ready yet`` until the Wazuh indexer is started. Then the setup process continues normally. It takes about one minute for the Wazuh indexer to start up. You can find the default Wazuh indexer credentials in the ``docker-compose.yml`` file.
+   To determine when the Wazuh indexer is up, the Wazuh dashboard container uses ``curl`` to repeatedly query the Wazuh indexer API (port 9200). You can expect to see several ``Failed to connect to Wazuh indexer port 9200`` log messages or ``Wazuh dashboard server is not ready yet`` until the Wazuh indexer is started. Then the setup process continues normally. It takes about one minute for the Wazuh indexer to start up. You can find the default Wazuh indexer credentials in the ``docker-compose.yml`` file.
 
 Wazuh agent
 -----------
 
-Running the Wazuh agent in a Docker container provides a lightweight option for integrations and for collecting logs via syslog, without installing the agent directly on a host. However, when deployed this way, the containerized agent cannot directly access or monitor the host system.
+Running the Wazuh agent in a Docker container provides a lightweight option for integrations and log collection via syslog without installing the Wazuh agent directly on a host. However, when deployed this way, the containerized Wazuh agent cannot directly access or monitor the host system.
 
 .. _agent_deployment_docker:
 
@@ -435,11 +418,11 @@ Deployment
 
 Follow these steps to deploy the Wazuh agent using Docker.
 
-#. Clone the `Wazuh Docker repository <https://github.com/wazuh/wazuh-docker>`_ to your system:
+#. Clone the `Wazuh Docker <https://github.com/wazuh/wazuh-docker>`__ repository to your system:
 
    .. code-block:: console
 
-      # git clone https://github.com/wazuh/wazuh-docker.git -b v|WAZUH_CURRENT_DOCKER|
+      # git clone https://github.com/wazuh/wazuh-docker.git -b v|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|
 
 #. Navigate to the ``wazuh-docker/wazuh-agent/`` directory within your repository:
 
@@ -447,7 +430,7 @@ Follow these steps to deploy the Wazuh agent using Docker.
 
       # cd wazuh-docker/wazuh-agent
 
-#. Edit the ``docker-compose.yml`` file. Replace ``<YOUR_WAZUH_MANAGER_IP>`` with the IP address of your Wazuh manager. Locate the environment section for the agent service and update it:
+#. Edit the ``docker-compose.yml`` file. Replace ``<WAZUH_MANAGER_IP>`` with the IP address of your Wazuh manager:
 
    .. code-block:: yaml
       :emphasize-lines: 6,7
@@ -455,7 +438,7 @@ Follow these steps to deploy the Wazuh agent using Docker.
       # Wazuh App Copyright (C) 2017, Wazuh Inc. (License GPLv2)
       services:
         wazuh.agent:
-          image: wazuh/wazuh-agent:|WAZUH_CURRENT_DOCKER|
+          image: wazuh/wazuh-agent:|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|-latest
           restart: always
           environment:
             - WAZUH_MANAGER_SERVER=<WAZUH_MANAGER_IP>
@@ -478,4 +461,4 @@ Follow these steps to deploy the Wazuh agent using Docker.
 
             # docker compose up
 
-#. Verify from your Wazuh dashboard that the Wazuh agent deployment was successful and visible. Navigate to the **Agent management** > **Summary**, and you should see the Wazuh agent container active on your dashboard.
+#. Verify from your Wazuh dashboard that the Wazuh agent deployment was successful and visible. Navigate to **Agent management** > **Summary**, and you should see the Wazuh agent container active on your dashboard.
