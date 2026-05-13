@@ -6,33 +6,33 @@
 Offline installation guide
 ==========================
 
-You can install Wazuh even without an Internet connection. Installing the solution offline involves first downloading the Wazuh central components on a system with Internet access, then transferring and installing them on the offline system. Wazuh supports both all-in-one and distributed deployments. The Wazuh server, indexer, and dashboard can run on the same host in an all-in-one setup, or be installed on separate hosts for a distributed deployment. It supports 64-bit architectures, including x86_64/AMD64 and AARCH64/ARM64.
+You can install Wazuh without an Internet connection. To install Wazuh offline, download the central components on a system with Internet access, then transfer and install them on the offline system. Wazuh supports both all-in-one and distributed deployments. The Wazuh manager, Wazuh indexer, and Wazuh dashboard can run on the same host in an all-in-one setup, or be installed on separate hosts for a distributed deployment. Wazuh supports 64-bit architectures, including x86_64/AMD64 and AARCH64/ARM64.
 
-For more information about the hardware requirements and the recommended operating systems, check the :ref:`Requirements <installation_requirements>` section.
+Check the :ref:`Requirements <installation_requirements>` section for more information about the hardware requirements and the recommended operating systems.
 
-.. note:: You need root user privileges to run all the commands described below.
+.. note::
+
+   Root user privileges are required to run all the commands in this guide.
 
 Prerequisites
 -------------
 
-- ``curl``, ``tar``, and ``setcap`` need to be installed in the target system where the offline installation will be carried out. ``gnupg`` might need to be installed as well for some Debian-based systems.
-
-- In some systems, the command ``cp`` is an alias for ``cp -i`` — you can check this by running ``alias cp``. If this is your case, use ``unalias cp`` to avoid being asked for confirmation to overwrite files.
+-  Install ``curl``, ``tar``, ``openssl``, and ``setcap`` on the target system before performing the offline installation. ``gnupg`` might need to be installed as well for some Debian-based systems.
+-  In some systems, the command ``cp`` is an alias for ``cp -i`` — verify this by running ``alias cp``. If this is your case, use ``unalias cp`` to avoid being asked for confirmation to overwrite files.
 
 Download the packages and configuration files
 ---------------------------------------------
 
-From a Linux system with Internet access, run the script below to download all files needed for offline installation. Choose the package format (RPM or DEB) and architecture (x86_64/AMD64 or AARCH64/ARM64).
+Run the Wazuh installation assistant on any Linux system with Internet access to download all files needed for offline installation. Choose the package format (RPM or DEB) and architecture (x86_64/AMD64 or AARCH64/ARM64).
 
-#. Run the command on any Linux system with Internet access to download and prepare the Wazuh offline installer script
+#. Run the following commands on any Linux system with Internet access to download and prepare the Wazuh installation assistant:
 
    .. code-block:: console
 
-      # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-install.sh
-      
-      # chmod 744 wazuh-install.sh
+      # curl -sO https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-install-5.0.0-beta1.sh
+      # chmod 744 wazuh-install-5.0.0-beta1.sh
 
-#. Download packages by architecture and format
+#. Download packages by architecture and format:
 
    .. tabs::
 
@@ -42,13 +42,13 @@ From a Linux system with Internet access, run the script below to download all f
 
          .. code-block:: console
 
-            # ./wazuh-install.sh -dw rpm -da x86_64
+            # ./wazuh-install-5.0.0-beta1.sh -dw rpm -da x86_64 -d pre-release
 
          **AARCH64 / ARM64**
 
          .. code-block:: console
 
-            # ./wazuh-install.sh -dw rpm -da aarch64
+            # ./wazuh-install-5.0.0-beta1.sh -dw rpm -da aarch64 -d pre-release
 
       .. group-tab:: DEB
 
@@ -56,46 +56,86 @@ From a Linux system with Internet access, run the script below to download all f
 
          .. code-block:: console
 
-            # ./wazuh-install.sh -dw deb -da amd64
+            # ./wazuh-install-5.0.0-beta1.sh -dw deb -da amd64 -d pre-release
 
          **AARCH64 / ARM64**
 
          .. code-block:: console
 
-            # ./wazuh-install.sh -dw deb -da arm64
+            # ./wazuh-install-5.0.0-beta1.sh -dw deb -da arm64 -d pre-release
 
-#. Download the certificates configuration file.
+#. Download the certificate configuration file.
 
    .. code-block:: console
 
-      # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/config.yml
+      # curl -o config.yml https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/config-5.0.0-beta1.yml
 
-#. Edit ``config.yml`` to prepare the certificates creation.
+#. Edit the ``config.yml`` file to prepare for certificate creation.
 
    -  If you are performing an all-in-one deployment, replace ``"<indexer-node-ip>"``, ``"<wazuh-manager-ip>"``, and ``"<dashboard-node-ip>"`` with ``127.0.0.1``.
-        
-   -  If you are performing a distributed deployment, replace the node names and IP values with the corresponding names and IP addresses. You need to do this for all the Wazuh server, Wazuh indexer, and Wazuh dashboard nodes. Add as many node fields as needed.
+   -  If you are performing a distributed deployment, replace the node names and IP addresses with the corresponding values. Do this for all the Wazuh manager, Wazuh indexer, and Wazuh dashboard nodes. Add as many node fields as needed. The tag ``node_type`` needs to be specified for all Wazuh manager nodes.
 
-#. Run the ``./wazuh-install.sh -g`` command to create the certificates. For a multi-node cluster, these certificates need to be later deployed to all Wazuh instances in your cluster.
+   .. code-block:: yaml
+
+      nodes:
+        # Wazuh indexer nodes
+        indexer:
+          - name: indexer
+            ip: "<indexer-node-ip>"
+          #  dns: "<indexer-node-dns>"
+          #- name: indexer-2
+          #  ip: "<indexer-node-ip>"
+          #  dns: "<indexer-node-dns>"
+          #- name: indexer-3
+          #  ip: "<indexer-node-ip>"
+          #  dns:
+          #    - "<indexer-node-dns>"
+
+        # Wazuh manager nodes
+        # If there is more than one Wazuh manager
+        # node, each one must have a node_type
+        manager:
+          - name: manager
+            ip: "<wazuh-manager-ip>"
+          #  dns: "<wazuh-manager-dns>"
+          #  node_type: master
+          #- name: manager-2
+          #  dns: "<wazuh-manager-dns>"
+          #  node_type: worker
+          #- name: manager-3
+          #  ip: "<wazuh-manager-ip>"
+          #  dns:
+          #    - "<wazuh-manager-dns>"
+          #  node_type: worker
+
+        # Wazuh dashboard nodes
+        dashboard:
+          - name: dashboard
+            ip: "<dashboard-node-ip>"
+          #  dns: "<dashboard-node-dns>"
+
+#. Run the following command to create the certificates. For a multi-node cluster, these certificates need to be later deployed to all Wazuh instances in your cluster.
 
    .. code-block:: console
 
-      # ./wazuh-install.sh -g
+      # ./wazuh-install-5.0.0-beta1.sh -g
 
-#. Copy or move the following files to a directory on the host(s) from where the offline installation will be carried out. You can use ``scp`` for this.
+#. Copy the following files to a directory on the host(s) from where the offline installation will be carried out. You can use ``scp`` for this.
 
-   -  ``wazuh-install.sh``
+   -  ``wazuh-install-5.0.0-beta1.sh``
    -  ``wazuh-offline.tar.gz``
    -  ``wazuh-install-files.tar``
 
 Next steps
 ----------
 
-Once the Wazuh files are ready and copied to the specified hosts, it is necessary to install the Wazuh components.
+After the Wazuh files are ready and copied to the specified hosts, install the Wazuh components.
 
-Please make sure that a copy of the ``wazuh-install-files.tar`` and ``wazuh-offline.tar.gz`` files, created during the initial configuration step, is placed in your working directory.
+-  :doc:`Install Wazuh components using the assisted method <installation-assistant>`
+-  :doc:`Install Wazuh components step by step <step-by-step>`
 
 .. toctree::
+  :hidden:
   :maxdepth: 1
 
   installation-assistant
