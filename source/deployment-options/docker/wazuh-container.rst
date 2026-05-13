@@ -30,7 +30,7 @@ Wazuh supports deploying its central components and agent on Docker.
 
    This deployment stack provides persistent storage, secure communication, and high availability.
 
--  :ref:`Wazuh agent <agent_deployment_docker>`: This deploys the Wazuh agent as a container on your Docker host.
+-  `Wazuh agent`_: This deploys the Wazuh agent as a container on your Docker host.
 
 Prerequisites
 -------------
@@ -461,4 +461,4 @@ Follow these steps to deploy the Wazuh agent using Docker.
 
             # docker compose up
 
-#. Verify from your Wazuh dashboard that the Wazuh agent deployment was successful and visible. Navigate to **Agent management** > **Summary**, and you should see the Wazuh agent container active on your dashboard.
+#. Verify from your Wazuh dashboard that the Wazuh agent deployment was successful and visible. Navigate to the **Agent management** > **Summary**, and you should see the Wazuh agent container active on your dashboard.
