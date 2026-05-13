@@ -24,10 +24,10 @@ This section explains how to interact with your Wazuh deployment by accessing se
    .. code-block:: none
       :class: output
 
-      NAME                            IMAGE                                          COMMAND                  SERVICE           CREATED          STATUS          PORTS
-      single-node-wazuh.dashboard-1   wazuh/wazuh-dashboard:|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|-latest   "/entrypoint.sh"         wazuh.dashboard   58 minutes ago   Up 58 minutes   443/tcp, 0.0.0.0:443->5601/tcp
-      single-node-wazuh.indexer-1     wazuh/wazuh-indexer:|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|-latest     "/entrypoint.sh open…"   wazuh.indexer     58 minutes ago   Up 58 minutes   0.0.0.0:9200->9200/tcp, [::]:9200->9200/tcp
-      single-node-wazuh.manager-1     wazuh/wazuh-manager:|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|-latest     "/init"                  wazuh.manager     58 minutes ago   Up 58 minutes   0.0.0.0:1514-1515->1514-1515/tcp, [::]:1514-1515->1514-1515/tcp, 0.0.0.0:514->514/udp, [::]:514->514/udp, 0.0.0.0:55000->55000/tcp, [::]:55000->55000/tcp, 1516/tcp
+      NAME                            IMAGE                                          COMMAND                  SERVICE           CREATED          STATUS                          PORTS
+      single-node-wazuh.dashboard-1   wazuh/wazuh-dashboard:|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|-latest   "/entrypoint.sh"         wazuh.dashboard   58 minutes ago   Restarting (1) 55 seconds ago
+      single-node-wazuh.indexer-1     wazuh/wazuh-indexer:|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|-latest     "/entrypoint.sh open…"   wazuh.indexer     58 minutes ago   Up 3 seconds                    0.0.0.0:9200->9200/tcp, [::]:9200->9200/tcp
+      single-node-wazuh.manager-1     wazuh/wazuh-manager:|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|-latest     "/init"                  wazuh.manager     58 minutes ago   Up 58 minutes                   0.0.0.0:1514-1515->1514-1515/tcp, [::]:1514-1515->1514-1515/tcp, 0.0.0.0:514->514/udp, [::]:514->514/udp, 0.0.0.0:55000->55000/tcp, [::]:55000->55000/tcp, 1516/tcp
 
 #. Run the command below from the directory where the ``docker-compose.yml`` file is located to open a shell inside the container:
 
