@@ -97,6 +97,8 @@ Examples
 
       # /var/ossec/bin/manage_agents -r 004
 
+   The command returns output similar to the following example:
+
    .. code-block:: none
       :class: output
 

@@ -57,6 +57,8 @@ Get cluster's healthcheck
 
       # /var/ossec/bin/cluster_control -i more
 
+   The command returns output similar to the following example:
+
    .. code-block:: none
       :class: output
 
@@ -123,6 +125,8 @@ Get cluster's healthcheck
 
       # /var/ossec/bin/cluster_control -i more -fn wazuh-2 wazuh-1
 
+   The command returns output similar to the following example:
+
    .. code-block:: none
       :class: output
 
@@ -168,6 +172,8 @@ Get connected nodes
 
       # /var/ossec/bin/cluster_control -l
 
+   The command returns output similar to the following example:
+
    .. code-block:: none
       :class: output
 
@@ -181,6 +187,8 @@ Get connected nodes
    .. code-block:: console
 
       # /var/ossec/bin/cluster_control -l -fn wazuh-1 wazuh-3
+
+   The command returns output similar to the following example:
 
    .. code-block:: none
       :class: output
@@ -198,6 +206,8 @@ Get agents in cluster
 
       # /var/ossec/bin/cluster_control -a
 
+   The command returns output similar to the following example:
+
    .. code-block:: none
       :class: output
 
@@ -211,6 +221,8 @@ Get agents in cluster
    .. code-block:: console
 
            # /var/ossec/bin/cluster_control -a -fn wazuh-2
+
+   The command returns output similar to the following example:
 
    .. code-block:: none
       :class: output

@@ -41,6 +41,8 @@ Test decoding and rule matching for an SSH invalid login attempt:
 
    # /var/ossec/bin/wazuh-logtest
 
+The command returns output similar to the following example:
+
 .. code-block:: none
    :class: output
 

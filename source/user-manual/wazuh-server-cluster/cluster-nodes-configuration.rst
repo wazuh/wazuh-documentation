@@ -90,6 +90,8 @@ Worker node
 
       # /var/ossec/bin/cluster_control -l
 
+   The command returns output similar to the following example:
+
    .. code-block:: none
       :class: output
 
