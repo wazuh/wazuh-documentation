@@ -2,7 +2,7 @@
 
 .. meta::
    :description: Custom rules in Wazuh allow users to define specific conditions or patterns in log data that are relevant to their unique requirements. Learn more in this section of the documentation.
-  
+
 Custom rules
 ============
 
@@ -17,11 +17,11 @@ Adding custom rules
 -------------------
 
 .. note::
-   
-   Use ID numbers between 100000 and 120000 for custom rules.
+
+   Use ID numbers between 100000 and 120000 for custom rules to avoid conflicts with out-of-the-box system rules.
 
 .. note::
-   
+
    To make minor adjustments in your rules, use the ``/var/ossec/etc/rules/local_rules.xml`` file. We recommend creating new rule files in ``/var/ossec/etc/rules/`` directory for changes on a larger scale.
 
 Check out this example on how to create new rules. The following log corresponds to a program called ``example``. We already created a custom decoder for this event in the :doc:`Custom decoder </user-manual/ruleset/decoders/custom>` section.

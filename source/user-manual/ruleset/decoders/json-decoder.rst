@@ -58,7 +58,7 @@ Suricata event log:
       "host": "suricata.com"
    }
 
-The JSON decoder extracts each field from the JSON log data for comparison against the rules, eliminating the need for a specific Suricata decoder.
+The JSON decoder extracts each field from the JSON log data for comparison against the rules, eliminating the need for a specific Suricata decoder. Ensure to convert the multiline JSON log above to single-line, just as seen from the output below.
 
 We can now run the ``/var/ossec/bin/wazuh-logtest`` tool on the Wazuh server to test the log sample and have insights into the current decoding.
 
