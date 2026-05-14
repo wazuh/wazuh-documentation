@@ -136,18 +136,20 @@ Testing the cluster installation
 Installing the Wazuh manager
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-On systems with ``yum`` as the package manager, the following dependencies must be installed on the Wazuh manager nodes.
+.. tabs::
 
--  **RPM**
+   .. group-tab:: RPM
 
-   -  libcap
+      On systems with ``yum`` as the package manager, the following dependencies must be installed on the Wazuh manager nodes.
 
-On systems with ``apt`` as the package manager, the following dependencies must be installed on the Wazuh manager nodes.
+      -  libcap
 
--  **DEB**
+   .. group-tab:: DEB
 
-   -  apt-transport-https
-   -  gnupg
+      On systems with ``apt`` as the package manager, the following dependencies must be installed on the Wazuh manager nodes.
+
+      -  apt-transport-https
+      -  gnupg
 
 #. Run the installation assistant with the ``--offline-installation`` option to perform an offline installation. Use the option ``--wazuh-manager`` followed by the node name to install the Wazuh manager. The node name must be the same one used in the ``config.yml`` file for the initial configuration, for example, ``manager-1``.
 

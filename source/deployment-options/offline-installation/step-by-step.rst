@@ -142,18 +142,20 @@ The following dependencies must be installed on the Wazuh indexer nodes.
 Installing the Wazuh manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-On systems with ``yum`` as the package manager, the following dependencies must be installed on the Wazuh manager nodes.
+.. tabs::
 
--  **RPM**
+   .. group-tab:: RPM
 
-   -  libcap
+      On systems with ``yum`` as the package manager, the following dependencies must be installed on the Wazuh manager nodes.
 
-On systems with ``apt`` as the package manager, the following dependencies must be installed on the Wazuh manager nodes.
+      -  libcap
 
--  **DEB**
+   .. group-tab:: DEB
 
-   -  apt-transport-https
-   -  gnupg
+      On systems with ``apt`` as the package manager, the following dependencies must be installed on the Wazuh manager nodes.
+
+      -  apt-transport-https
+      -  gnupg
 
 #. Run the following commands to install the Wazuh manager.
 
