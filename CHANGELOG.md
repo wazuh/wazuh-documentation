@@ -21,8 +21,7 @@ All notable changes to this project will be documented in this file.
 - Updated references in steps and links to 5.x. ([#8853](https://github.com/wazuh/wazuh-documentation/pull/8853))
 - Updated version numbers in commands in the *Installation from sources* documentation. ([#9397](https://github.com/wazuh/wazuh-documentation/pull/9397))
 - Updated the *Installation guide*. ([#9545](https://github.com/wazuh/wazuh-documentation/pull/9545))
-- Updated the *Installation alternatives* documentation. ([#9587](https://github.com/wazuh/wazuh-documentation/pull/9587)) ([#9576](https://github.com/wazuh/wazuh-documentation/pull/9576)) ([#9589](https://github.com/wazuh/wazuh-documentation/pull/9589)) ([#9591](https://github.com/wazuh/wazuh-documentation/pull/9591)) ([#9591](https://github.com/wazuh/wazuh-documentation/pull/9595))
-- Updated the *Offline installation guide* documentation. ([#9597](https://github.com/wazuh/wazuh-documentation/pull/9597))
+- Updated the *Installation alternatives* documentation. ([#9587](https://github.com/wazuh/wazuh-documentation/pull/9587)) ([#9576](https://github.com/wazuh/wazuh-documentation/pull/9576)) ([#9589](https://github.com/wazuh/wazuh-documentation/pull/9589)) ([#9591](https://github.com/wazuh/wazuh-documentation/pull/9591)) ([#9591](https://github.com/wazuh/wazuh-documentation/pull/9595)) ([#9597](https://github.com/wazuh/wazuh-documentation/pull/9597))
 
 ### Removed
 

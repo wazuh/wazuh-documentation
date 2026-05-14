@@ -29,8 +29,8 @@ Run the Wazuh installation assistant on any Linux system with Internet access to
 
    .. code-block:: console
 
-      # curl -sO https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-install-5.0.0-beta1.sh
-      # chmod 744 wazuh-install-5.0.0-beta1.sh
+      # curl -sO https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-install-|WAZUH_CURRENT|-|WAZUH_CURRENT_INSTALL_ASSISTANT_REV|.sh
+      # chmod 744 wazuh-install-|WAZUH_CURRENT|-|WAZUH_CURRENT_INSTALL_ASSISTANT_REV|.sh
 
 #. Download packages by architecture and format:
 
@@ -42,13 +42,13 @@ Run the Wazuh installation assistant on any Linux system with Internet access to
 
          .. code-block:: console
 
-            # ./wazuh-install-5.0.0-beta1.sh -dw rpm -da x86_64 -d pre-release
+            # ./wazuh-install-|WAZUH_CURRENT|-|WAZUH_CURRENT_INSTALL_ASSISTANT_REV|.sh -dw rpm -da x86_64 -d pre-release
 
          **AARCH64 / ARM64**
 
          .. code-block:: console
 
-            # ./wazuh-install-5.0.0-beta1.sh -dw rpm -da aarch64 -d pre-release
+            # ./wazuh-install-|WAZUH_CURRENT|-|WAZUH_CURRENT_INSTALL_ASSISTANT_REV|.sh -dw rpm -da aarch64 -d pre-release
 
       .. group-tab:: DEB
 
@@ -56,19 +56,19 @@ Run the Wazuh installation assistant on any Linux system with Internet access to
 
          .. code-block:: console
 
-            # ./wazuh-install-5.0.0-beta1.sh -dw deb -da amd64 -d pre-release
+            # ./wazuh-install-|WAZUH_CURRENT|-|WAZUH_CURRENT_INSTALL_ASSISTANT_REV|.sh -dw deb -da amd64 -d pre-release
 
          **AARCH64 / ARM64**
 
          .. code-block:: console
 
-            # ./wazuh-install-5.0.0-beta1.sh -dw deb -da arm64 -d pre-release
+            # ./wazuh-install-|WAZUH_CURRENT|-|WAZUH_CURRENT_INSTALL_ASSISTANT_REV|.sh -dw deb -da arm64 -d pre-release
 
 #. Download the certificate configuration file.
 
    .. code-block:: console
 
-      # curl -o config.yml https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/config-5.0.0-beta1.yml
+      # curl -o config.yml https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/config-|WAZUH_CURRENT|-|WAZUH_CURRENT_INSTALL_ASSISTANT_REV|.yml
 
 #. Edit the ``config.yml`` file to prepare for certificate creation.
 
@@ -76,6 +76,7 @@ Run the Wazuh installation assistant on any Linux system with Internet access to
    -  If you are performing a distributed deployment, replace the node names and IP addresses with the corresponding values. Do this for all the Wazuh manager, Wazuh indexer, and Wazuh dashboard nodes. Add as many node fields as needed. The tag ``node_type`` needs to be specified for all Wazuh manager nodes.
 
    .. code-block:: yaml
+      :emphasize-lines: 5, 20, 35
 
       nodes:
         # Wazuh indexer nodes
@@ -118,11 +119,11 @@ Run the Wazuh installation assistant on any Linux system with Internet access to
 
    .. code-block:: console
 
-      # ./wazuh-install-5.0.0-beta1.sh -g
+      # ./wazuh-install-|WAZUH_CURRENT|-|WAZUH_CURRENT_INSTALL_ASSISTANT_REV|.sh -g
 
 #. Copy the following files to a directory on the host(s) from where the offline installation will be carried out. You can use ``scp`` for this.
 
-   -  ``wazuh-install-5.0.0-beta1.sh``
+   -  ``wazuh-install-|WAZUH_CURRENT|-|WAZUH_CURRENT_INSTALL_ASSISTANT_REV|.sh``
    -  ``wazuh-offline.tar.gz``
    -  ``wazuh-install-files.tar``
 
@@ -131,11 +132,7 @@ Next steps
 
 After the Wazuh files are ready and copied to the specified hosts, install the Wazuh components.
 
--  :doc:`Install Wazuh components using the assisted method <installation-assistant>`
--  :doc:`Install Wazuh components step by step <step-by-step>`
-
 .. toctree::
-  :hidden:
   :maxdepth: 1
 
   installation-assistant

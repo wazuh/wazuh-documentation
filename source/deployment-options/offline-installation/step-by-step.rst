@@ -252,6 +252,8 @@ To verify that the Wazuh cluster is enabled and all the nodes are connected, run
 
    # /var/wazuh-manager/bin/cluster_control -l
 
+The command returns output similar to the following example:
+
 .. code-block:: none
    :class: output
 
@@ -364,7 +366,7 @@ The Wazuh passwords tool is available at ``/usr/share/wazuh-indexer/plugins/open
 
 .. code-block:: console
 
-   # wget https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-passwords-tool-5.0.0-beta1.sh
+   # wget https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-passwords-tool-|WAZUH_CURRENT|-|WAZUH_CURRENT_INSTALL_ASSISTANT_REV|.sh
 
 .. note::
 
