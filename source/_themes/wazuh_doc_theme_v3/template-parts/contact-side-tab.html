@@ -1,0 +1,16 @@
+{#-
+    wazuh_doc_theme_v3/template-parts/contact-side-tab.html
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    Contact us tab at the side of the page
+-#}
+
+<div class="contact-side-tab">
+  <form target="_blank" name="contact_us_form" action="{{ theme_wazuh_web_url }}/contact-us/" method="post">
+    <input type="hidden" name="preselect" value="support">
+    <button type="submit" class="btn vertical-text">
+      <span class="text">Contact us</span>
+      <svg class="ícon icon-envelope"><use xlink:href="#ico-envelope-contact"/></svg>
+    </button>
+  </form>
+</div>

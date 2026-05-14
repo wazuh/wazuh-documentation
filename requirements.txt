@@ -1,7 +1,9 @@
-Sphinx==7.2.6
+Sphinx==7.3.7
 sphinx-tabs==3.4.5
 docutils==0.18.1
 jsmin==3.0.1
 Jinja2==3.1.6
-Pygments==2.15.1
+Pygments==2.20.0
 sphinx-reredirects==0.1.5
+sphinx-markdown-builder==0.6.9
+requests==2.33.0
