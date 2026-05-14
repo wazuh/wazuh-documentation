@@ -10,7 +10,7 @@ Use the Wazuh assisted installation method to install and configure the single-n
 
    You need root user privileges to run all the commands described below.
 
-Make sure that copies of the ``wazuh-install-|WAZUH_CURRENT|-|WAZUH_CURRENT_INSTALL_ASSISTANT_REV|.sh``, ``wazuh-install-files.tar``, and ``wazuh-offline.tar.gz`` files created during the initial configuration step are placed in your working directory.
+Make sure that copies of the ``wazuh-install-|WAZUH_CURRENT|-|WAZUH_CURRENT_OFFLINE_INSTALL_REV|.sh``, ``wazuh-install-files.tar``, and ``wazuh-offline.tar.gz`` files created during the initial configuration step are placed in your working directory.
 
 The following dependencies must be installed on the Wazuh single node.
 
@@ -36,7 +36,7 @@ The following dependencies must be installed on the Wazuh single node.
 
    .. code-block:: console
 
-      # bash wazuh-install-|WAZUH_CURRENT|-|WAZUH_CURRENT_INSTALL_ASSISTANT_REV|.sh --offline-installation -a
+      # bash wazuh-install-|WAZUH_CURRENT|-|WAZUH_CURRENT_OFFLINE_INSTALL_REV|.sh --offline-installation -a
 
    After the installation completes, the output shows the access credentials and a message confirming the installation was successful.
 
@@ -84,7 +84,7 @@ The following dependencies must be installed on the Wazuh indexer nodes.
 
    .. code-block:: console
 
-      # bash wazuh-install-|WAZUH_CURRENT|-|WAZUH_CURRENT_INSTALL_ASSISTANT_REV|.sh --offline-installation --wazuh-indexer indexer-1
+      # bash wazuh-install-|WAZUH_CURRENT|-|WAZUH_CURRENT_OFFLINE_INSTALL_REV|.sh --offline-installation --wazuh-indexer indexer-1
 
    Repeat this step for every Wazuh indexer node in your cluster. Then, proceed with initializing your multi-node cluster in the next step.
 
@@ -92,7 +92,7 @@ The following dependencies must be installed on the Wazuh indexer nodes.
 
    .. code-block:: console
 
-      # bash wazuh-install-|WAZUH_CURRENT|-|WAZUH_CURRENT_INSTALL_ASSISTANT_REV|.sh --offline-installation --start-cluster
+      # bash wazuh-install-|WAZUH_CURRENT|-|WAZUH_CURRENT_OFFLINE_INSTALL_REV|.sh --offline-installation --start-cluster
 
    .. note::
 
@@ -155,7 +155,7 @@ Installing the Wazuh manager
 
    .. code-block:: console
 
-      # bash wazuh-install-|WAZUH_CURRENT|-|WAZUH_CURRENT_INSTALL_ASSISTANT_REV|.sh --offline-installation --wazuh-manager manager-1
+      # bash wazuh-install-|WAZUH_CURRENT|-|WAZUH_CURRENT_OFFLINE_INSTALL_REV|.sh --offline-installation --wazuh-manager manager-1
 
 Your Wazuh manager is now successfully installed. Repeat this step on every Wazuh manager node.
 
@@ -181,7 +181,7 @@ The following dependencies must be installed on the Wazuh dashboard node.
 
    .. code-block:: console
 
-      # bash wazuh-install-|WAZUH_CURRENT|-|WAZUH_CURRENT_INSTALL_ASSISTANT_REV|.sh --offline-installation --wazuh-dashboard dashboard
+      # bash wazuh-install-|WAZUH_CURRENT|-|WAZUH_CURRENT_OFFLINE_INSTALL_REV|.sh --offline-installation --wazuh-dashboard dashboard
 
    The Wazuh dashboard uses port ``443`` by default. You can change this port using the optional parameter ``-p|--port <PORT_NUMBER>``. Some recommended ports are 8443, 8444, 8080, 8888, and 9000.
 

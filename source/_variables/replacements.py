@@ -81,7 +81,7 @@ custom_replacements = {
     "|WAZUH_CURRENT_MINOR_DOCKER|" : version,
     "|WAZUH_CURRENT_DOCKER|" : release,
     "|WAZUH_CURRENT_DOCKER_REV|" : "beta1",
-    "|WAZUH_CURRENT_INSTALL_ASSISTANT_REV|" : "beta1",
+    "|WAZUH_CURRENT_OFFLINE_INSTALL_REV|" : "beta1",
     #"|WAZUH_CURRENT_MAJOR_KUBERNETES|" :
     #"|WAZUH_CURRENT_MINOR_KUBERNETES|" :
     "|WAZUH_CURRENT_KUBERNETES|" : release,

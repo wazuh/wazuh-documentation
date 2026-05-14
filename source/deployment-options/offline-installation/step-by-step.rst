@@ -366,7 +366,7 @@ The Wazuh passwords tool is available at ``/usr/share/wazuh-indexer/plugins/open
 
 .. code-block:: console
 
-   # wget https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-passwords-tool-|WAZUH_CURRENT|-|WAZUH_CURRENT_INSTALL_ASSISTANT_REV|.sh
+   # wget https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-passwords-tool-|WAZUH_CURRENT|-|WAZUH_CURRENT_OFFLINE_INSTALL_REV|.sh
 
 .. note::
 

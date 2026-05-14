@@ -29,8 +29,8 @@ Run the Wazuh installation assistant on any Linux system with Internet access to
 
    .. code-block:: console
 
-      # curl -sO https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-install-|WAZUH_CURRENT|-|WAZUH_CURRENT_INSTALL_ASSISTANT_REV|.sh
-      # chmod 744 wazuh-install-|WAZUH_CURRENT|-|WAZUH_CURRENT_INSTALL_ASSISTANT_REV|.sh
+      # curl -sO https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-install-|WAZUH_CURRENT|-|WAZUH_CURRENT_OFFLINE_INSTALL_REV|.sh
+      # chmod 744 wazuh-install-|WAZUH_CURRENT|-|WAZUH_CURRENT_OFFLINE_INSTALL_REV|.sh
 
 #. Download packages by architecture and format:
 
@@ -42,13 +42,13 @@ Run the Wazuh installation assistant on any Linux system with Internet access to
 
          .. code-block:: console
 
-            # ./wazuh-install-|WAZUH_CURRENT|-|WAZUH_CURRENT_INSTALL_ASSISTANT_REV|.sh -dw rpm -da x86_64 -d pre-release
+            # ./wazuh-install-|WAZUH_CURRENT|-|WAZUH_CURRENT_OFFLINE_INSTALL_REV|.sh -dw rpm -da x86_64 -d pre-release
 
          **AARCH64 / ARM64**
 
          .. code-block:: console
 
-            # ./wazuh-install-|WAZUH_CURRENT|-|WAZUH_CURRENT_INSTALL_ASSISTANT_REV|.sh -dw rpm -da aarch64 -d pre-release
+            # ./wazuh-install-|WAZUH_CURRENT|-|WAZUH_CURRENT_OFFLINE_INSTALL_REV|.sh -dw rpm -da aarch64 -d pre-release
 
       .. group-tab:: DEB
 
@@ -56,19 +56,19 @@ Run the Wazuh installation assistant on any Linux system with Internet access to
 
          .. code-block:: console
 
-            # ./wazuh-install-|WAZUH_CURRENT|-|WAZUH_CURRENT_INSTALL_ASSISTANT_REV|.sh -dw deb -da amd64 -d pre-release
+            # ./wazuh-install-|WAZUH_CURRENT|-|WAZUH_CURRENT_OFFLINE_INSTALL_REV|.sh -dw deb -da amd64 -d pre-release
 
          **AARCH64 / ARM64**
 
          .. code-block:: console
 
-            # ./wazuh-install-|WAZUH_CURRENT|-|WAZUH_CURRENT_INSTALL_ASSISTANT_REV|.sh -dw deb -da arm64 -d pre-release
+            # ./wazuh-install-|WAZUH_CURRENT|-|WAZUH_CURRENT_OFFLINE_INSTALL_REV|.sh -dw deb -da arm64 -d pre-release
 
 #. Download the certificate configuration file.
 
    .. code-block:: console
 
-      # curl -o config.yml https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/config-|WAZUH_CURRENT|-|WAZUH_CURRENT_INSTALL_ASSISTANT_REV|.yml
+      # curl -o config.yml https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/config-|WAZUH_CURRENT|-|WAZUH_CURRENT_OFFLINE_INSTALL_REV|.yml
 
 #. Edit the ``config.yml`` file to prepare for certificate creation.
 
@@ -119,11 +119,11 @@ Run the Wazuh installation assistant on any Linux system with Internet access to
 
    .. code-block:: console
 
-      # ./wazuh-install-|WAZUH_CURRENT|-|WAZUH_CURRENT_INSTALL_ASSISTANT_REV|.sh -g
+      # ./wazuh-install-|WAZUH_CURRENT|-|WAZUH_CURRENT_OFFLINE_INSTALL_REV|.sh -g
 
 #. Copy the following files to a directory on the host(s) from where the offline installation will be carried out. You can use ``scp`` for this.
 
-   -  ``wazuh-install-|WAZUH_CURRENT|-|WAZUH_CURRENT_INSTALL_ASSISTANT_REV|.sh``
+   -  ``wazuh-install-|WAZUH_CURRENT|-|WAZUH_CURRENT_OFFLINE_INSTALL_REV|.sh``
    -  ``wazuh-offline.tar.gz``
    -  ``wazuh-install-files.tar``
 
