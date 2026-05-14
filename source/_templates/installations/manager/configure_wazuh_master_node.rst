@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. code-block:: xml
-   :emphasize-lines: 2, 3, 5, 9
+  :emphasize-lines: 2, 3, 5, 9
 
   <cluster>
     <name>wazuh</name>
