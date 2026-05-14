@@ -99,7 +99,6 @@ exclude_patterns = [
     'redirects.js',
     'getting-started/use-cases/**',
     'deployment-options/amazon-machine-images/**',
-    'deployment-options/offline-installation/**',
     'deployment-options/wazuh-from-sources/**',
     'deployment-options/deploying-with-ansible/**',
     'deployment-options/deploying-with-puppet/**',

@@ -29,14 +29,13 @@ All the alternatives include instructions on how to install the :doc:`Wazuh cent
 -  :doc:`docker/index`: Docker is a set of platform-as-a-service (PaaS) products that deliver software in packages called containers. Using Docker, you can install and configure the Wazuh deployment as a single-host architecture.
 -  :doc:`deploying-with-kubernetes/index`: Kubernetes is an open-source system for automating deployment, scaling, and managing containerized applications. This deployment type uses Wazuh images from Docker and allows you to build the Wazuh environment.
 
+.. raw:: html
+
+   <h3>Offline</h3>
+
+-  :doc:`offline-installation/index`: Installing the solution offline involves downloading the Wazuh components to later install them on a system with no internet connection.
+
 ..
-   .. raw:: html
-
-       <h3>Offline</h3>
-
-   - :doc:`offline-installation/index`: Installing the solution offline involves downloading the Wazuh components to later install them on a system with no internet connection. 
-
-
    .. raw:: html
 
        <h3>From sources</h3>
@@ -117,9 +116,9 @@ If the Wazuh central components are already installed in your environment, selec
    virtual-machine/virtual-machine
    docker/index
    deploying-with-kubernetes/index
+   offline-installation/index
 ..
    amazon-machine-images/amazon-machine-images
-   offline-installation/index
    wazuh-from-sources/index
    deploying-with-ansible/index
    deploying-with-puppet/index
