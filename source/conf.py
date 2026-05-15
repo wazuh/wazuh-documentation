@@ -736,8 +736,8 @@ def finish_and_clean(app, exception):
     if html_theme == 'wazuh_doc_theme_v3':
         # Remove map files and sourcMapping line in production
         if production or html_theme_options['breadcrumb_root_title'] == 'Training':
-            mapFiles = glob.glob(app.outdir + '/_static/*/min/*.map')
-            assetsFiles = glob.glob(app.outdir + '/_static/js/min/*.min.js') + glob.glob(app.outdir + '/_static/css/min/*.min.css')
+            mapFiles = glob.glob(str(app.outdir) + '/_static/*/min/*.map')
+            assetsFiles = glob.glob(str(app.outdir) + '/_static/js/min/*.min.js') + glob.glob(str(app.outdir) + '/_static/css/min/*.min.css')
             # Remove map files
             for mapFilePath in mapFiles:
                 try:

@@ -311,9 +311,9 @@ Wazuh dashboard configuration
 
    .. code-block:: console
 
-      opensearch_security.auth.multiple_auth_enabled: true      opensearch_security.auth.type: "saml"
-      opensearch_security.auth.type: ["basicauth","saml"]      server.xsrf.allowlist: ["/_opendistro/_security/saml/acs", "/_opendistro/_security/saml/logout", "/_opendistro/_security/saml/acs/idpinitiated"]
-      server.xsrf.allowlist: ["/_opendistro/_security/saml/acs", "/_opendistro/_security/saml/logout", "/_opendistro/_security/saml/acs/idpinitiated"]      opensearch_security.session.keepalive: false
+      opensearch_security.auth.multiple_auth_enabled: true
+      opensearch_security.auth.type: ["basicauth","saml"]
+      server.xsrf.allowlist: ["/_opendistro/_security/saml/acs", "/_opendistro/_security/saml/logout", "/_opendistro/_security/saml/acs/idpinitiated"]
 
 #. Restart the Wazuh dashboard service using this command:
 

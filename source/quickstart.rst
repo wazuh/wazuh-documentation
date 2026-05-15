@@ -40,12 +40,12 @@ Following this quickstart implies deploying the Wazuh manager, the Wazuh indexer
   +-------------+---------+---------+-----------------------+
 
 
-For larger environments, we recommend a distributed deployment. Multi-node cluster configuration is available for the Wazuh manager and for the Wazuh indexer, providing high availability and load balancing.
+For larger environments we recommend a distributed deployment. Multi-node cluster configuration is available for the Wazuh server and for the Wazuh indexer, providing high availability and load balancing.
 
 Operating system
 ^^^^^^^^^^^^^^^^
 
-You can install the Wazuh central components on 64-bit Linux systems using Intel, AMD, or ARM architectures (x86_64/AMD64 or AARCH64/ARM64). Wazuh recommends any of the following operating system versions:
+The Wazuh central components require a 64-bit Intel, AMD, or ARM Linux processor (x86_64/AMD64 or AARCH64/ARM64 architecture) to run. Wazuh recommends any of the following operating system versions:
 
 .. include:: /_templates/installations/wazuh/recommended-operating-systems.rst
 
@@ -60,7 +60,7 @@ Installing Wazuh
 
       # wget https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-install-5.0.0-beta1.sh && sudo bash ./wazuh-install-5.0.0-beta1.sh -a -d pre-release
 
-   Once the assistant finishes the installation, the output shows the access credentials and a message that confirms that the installation was successful. The default password is ``admin``.
+   Once the assistant finishes the installation, the output shows the access credentials and a message that confirms that the installation was successful.
 
    .. code-block:: none
       :emphasize-lines: 4
@@ -76,7 +76,16 @@ Installing Wazuh
    -  **Username:** ``admin``
    -  **Password:** ``admin``
 
-When you access the Wazuh dashboard for the first time, the browser shows a warning message stating that a trusted authority did not issue the certificate. This is expected, and the user can either accept the certificate as an exception or configure the system to use a certificate from a trusted authority.
+When you access the Wazuh dashboard for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. This is expected and the user has the option to accept the certificate as an exception or, alternatively, configure the system to use a certificate from a trusted authority.
+
+.. note::
+   :class: not-long
+  
+   You can find the passwords for all the Wazuh indexer and Wazuh API users in the ``wazuh-passwords.txt`` file inside ``wazuh-install-files.tar``. To print them, run the following command:
+
+      .. code-block:: console
+      
+         $ sudo tar -O -xvf wazuh-install-files.tar wazuh-install-files/wazuh-passwords.txt
 
 If you want to uninstall the Wazuh central components, run the Wazuh installation assistant using the option ``-u`` or ``–-uninstall``.
 
@@ -85,7 +94,7 @@ Next steps
 
 Now that your Wazuh installation is ready, you can start deploying the Wazuh agent. This can be used to protect laptops, desktops, servers, cloud instances, containers, or virtual machines. The Wazuh agent is lightweight and multi-purpose, providing a variety of security capabilities.
 
-Instructions on how to deploy the Wazuh agent can be found in the Wazuh web user interface or in our :doc:`documentation </installation-guide/wazuh-agent/index>`.
+Instructions on how to deploy the Wazuh agent can be found in the Wazuh web user interface, or in our :doc:`documentation </installation-guide/wazuh-agent/index>`.
 
 .. raw:: html
 
