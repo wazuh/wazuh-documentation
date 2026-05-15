@@ -244,6 +244,9 @@ jQuery(function($) {
      */
     if (betaVersions != undefined && betaVersions.length > 0) {
       for (let i = betaVersions.length - 1; i >=  0; i--) {
+        if (betaVersions[i][0].includes(thisVersion)) {
+          continue;
+        }
         href = urlRoot + betaVersions[i][1] + betaVersions[i][2];
         aEle = $(document.createElement('a'));
         aEle.attr('href', href).text(betaVersions[i][0]);
@@ -445,6 +448,9 @@ jQuery(function($) {
    */
   function getInfoNewsUrl(page, newUrls) {
     let newUrlsTemp = false;
+    if (!page) {
+      return false;
+    }
     for (forRelease in newUrls) {
       if ({}.hasOwnProperty.call(newUrls, forRelease)) {
         for (forUrl in newUrls[forRelease]) {
@@ -470,6 +476,9 @@ jQuery(function($) {
    */
   function getInfoRemovedUrl(page, removedUrls) {
     let removedUrlsTemp = false;
+    if (!page) {
+      return false;
+    }
     for (forRelease in removedUrls) {
       if ({}.hasOwnProperty.call(removedUrls, forRelease)) {
         for (forUrl in removedUrls[forRelease]) {
