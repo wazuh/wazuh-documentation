@@ -22,6 +22,8 @@ The following GET request retrieves basic information about the Wazuh server API
 
    # curl -k -X GET "https://localhost:55000/?pretty=true" -H  "Authorization: Bearer $TOKEN"
 
+The command returns output similar to the following example:
+
 .. code-block:: none
    :class: output
 

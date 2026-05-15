@@ -21,6 +21,8 @@ If the Wazuh server API is running, try to fetch data using the CLI from the Waz
 
    # curl -k -X GET "https://<api_url>:55000/?pretty=true" -H "Authorization: Bearer $(curl -u <api_user>:<api_password> -k -X POST 'https://<api_url>:55000/security/user/authenticate?raw=true')"
 
+The command returns output similar to the following example:
+
 .. code-block:: none
    :class: output
 

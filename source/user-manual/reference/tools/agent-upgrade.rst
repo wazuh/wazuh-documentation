@@ -69,13 +69,15 @@ Examples
 
       # /var/ossec/bin/agent_upgrade -a 002
 
+   The command returns output similar to the following example:
+
    .. code-block:: none
       :class: output
 
       Upgrading...
 
       Upgraded agents:
-      	Agent 002 upgraded: Wazuh v4.2.0 -> Wazuh v|WAZUH_CURRENT|
+      	Agent 002 upgraded: Wazuh v4.2.0 -> Wazuh v4.14.5
 
 -  Upgrade multiple agents:
 
@@ -83,14 +85,16 @@ Examples
 
        # /var/ossec/bin/agent_upgrade -a 003 004
 
+   The command returns output similar to the following example:
+
    .. code-block:: none
       :class: output
 
       Upgrading...
 
       Upgraded agents:
-      	Agent 003 upgraded: Wazuh v4.2.0 -> Wazuh v|WAZUH_CURRENT|
-      	Agent 004 upgraded: Wazuh v4.1.0 -> Wazuh v|WAZUH_CURRENT|
+      	Agent 003 upgraded: Wazuh v4.2.0 -> Wazuh v4.14.5
+      	Agent 004 upgraded: Wazuh v4.1.0 -> Wazuh v4.14.5
 
 -  Upgrade agent using a custom repository:
 
@@ -98,13 +102,15 @@ Examples
 
       # /var/ossec/bin/agent_upgrade -a 002 -v v|WAZUH_CURRENT| -r http://mycompany.wpkrepo.com/
 
+   The command returns output similar to the following example:
+
    .. code-block:: none
       :class: output
 
       Upgrading...
 
       Upgraded agents:
-      	Agent 002 upgraded: Wazuh v4.2.0 -> Wazuh v|WAZUH_CURRENT|
+      	Agent 002 upgraded: Wazuh v4.2.0 -> Wazuh v4.14.5
 
 -  Install custom WPK file:
 
@@ -112,12 +118,14 @@ Examples
 
       # /var/ossec/bin/agent_upgrade -a 002 -d -f /root/wazuh-agent_v|WAZUH_CURRENT|_debian.wpk -x install.sh
 
+   The command returns output similar to the following example:
+
    .. code-block:: none
        :class: output
 
        Upgrading...
 
        Upgraded agents:
-      	Agent 002 upgraded: Wazuh v4.2.0 -> Wazuh v|WAZUH_CURRENT|
+      	Agent 002 upgraded: Wazuh v4.2.0 -> Wazuh v4.14.5
 
 .. note:: When the agent finishes updating, it is automatically restarted to apply the new configuration.
