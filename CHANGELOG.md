@@ -7,7 +7,16 @@ All notable changes to this project will be documented in this file.
 
 ## [v4.14.5]
 
-- Support for Wazuh 4.14.5
+### Changed
+
+- **Post-release**: Updated the *User administration* index page. ([#9528](https://github.com/wazuh/wazuh-documentation/pull/9528))
+- **Post-release**: Updated the *Active Directory and LDAP integration* section. ([#9533](https://github.com/wazuh/wazuh-documentation/pull/9533))
+- **Post-release**: Added a clarification about expected command outputs. ([#9593](https://github.com/wazuh/wazuh-documentation/pull/9593))
+
+### Fixed
+
+- **Post-release**: Fixed the Apache ``access_log`` path on the Windows endpoint in the *Blocking a known malicious actor* section of the *Proof of Concept guide*. ([#9530](https://github.com/wazuh/wazuh-documentation/pull/9530))
+- **Post-release**: Fixed the ``opensearch_dashboards.yml`` configuration for Google Workspace in the *Single Sign-On* documentation. ([#9586](https://github.com/wazuh/wazuh-documentation/pull/9586))
 
 ## [v4.14.4]
 

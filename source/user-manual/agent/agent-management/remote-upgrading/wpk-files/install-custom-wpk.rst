@@ -82,6 +82,8 @@ Follow the steps below to upgrade a Wazuh agent using a custom WPK file in a WPK
 
       To upgrade a Windows agent, you must use ``upgrade.bat`` instead of ``upgrade.sh``.
 
+   The command returns output similar to the following example:
+
    .. code-block:: none
       :class: output
 
