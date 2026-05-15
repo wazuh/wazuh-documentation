@@ -126,6 +126,8 @@ Options
 
    Where ``<AGENT_ID>`` corresponds to the agent ID of the endpoint.
 
+   The command returns output similar to the following example:
+
    .. code-block:: none
       :class: output
 
