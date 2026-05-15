@@ -18,6 +18,8 @@ Install Wazuh module
 
       # puppet module install wazuh-wazuh --version |WAZUH_CURRENT_PUPPET|
 
+   The command returns output similar to the following example:
+
    .. code-block:: none
       :class: output
 
@@ -25,7 +27,7 @@ Install Wazuh module
       Notice: Downloading from https://forgeapi.puppet.com ...
       Notice: Installing -- do not interrupt ...
       /etc/puppetlabs/code/environments/production/modules
-      └─┬ wazuh-wazuh (v|WAZUH_CURRENT|)
+      └─┬ wazuh-wazuh (v4.14.5)
         ├── puppet-archive (v8.0.0)
         ├── puppet-nodejs (v10.0.0)
         ├── puppet-selinux (v4.1.0)

@@ -294,6 +294,8 @@ Follow the steps below to query the system inventory indices from the command li
 
       # curl -k -u "<WAZUH_INDEXER_USERNAME>" https://<WAZUH_INDEXER_IP>:9200/wazuh-states-inventory-packages-*/_search?pretty
 
+   The command returns output similar to the following example:
+
    .. code-block:: none
       :class: output
 
@@ -631,6 +633,8 @@ Follow the steps below to query the system inventory indices from the command li
         }
       }'
 
+   The command returns output similar to the following example:
+
    .. code-block:: none
       :class: output
 
@@ -700,6 +704,8 @@ Follow the steps below to query the system inventory indices from the command li
           }
         }
       }'
+
+   The command returns output similar to the following example:
 
    .. code-block:: none
       :class: output

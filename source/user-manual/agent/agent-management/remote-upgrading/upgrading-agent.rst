@@ -39,6 +39,8 @@ To upgrade agents using the command line, use the :doc:`/var/ossec/bin/agent_upg
 
       # /var/ossec/bin/agent_upgrade -a 003
 
+   The command returns output similar to the following example:
+
    .. code-block:: none
       :class: output
 
@@ -52,6 +54,8 @@ To upgrade agents using the command line, use the :doc:`/var/ossec/bin/agent_upg
    .. code-block:: console
 
       # /var/ossec/bin/agent_upgrade -a 001 002
+
+   The command returns output similar to the following example:
 
    .. code-block:: none
       :class: output
@@ -67,6 +71,8 @@ To upgrade agents using the command line, use the :doc:`/var/ossec/bin/agent_upg
    .. code-block:: console
 
       # /var/ossec/bin/agent_control -i 002
+
+   The command returns output similar to the following example:
 
    .. code-block:: none
       :class: output
@@ -195,6 +201,8 @@ Using the RESTful API
    .. code-block:: console
 
       # curl -k -X GET "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/agents?agents_list=002,003&pretty=true&select=version" -H  "Authorization: Bearer $TOKEN"
+
+   The command returns output similar to the following example:
 
    .. code-block:: json
       :class: output
