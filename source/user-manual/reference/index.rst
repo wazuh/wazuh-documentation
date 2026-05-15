@@ -2,8 +2,6 @@
 
 .. meta::
   :description: Check out this section to see a complete reference of all the configurations and settings that can be customized on Wazuh, for both managers and agents.
-  
-.. _reference_files:
 
 Reference
 =========
@@ -13,13 +11,15 @@ This part of the user manual will cover the configuration files used by Wazuh an
 
 .. topic:: Contents
 
-    .. toctree::
-       :maxdepth: 1
+   .. toctree::
+      :maxdepth: 1
 
-       ossec-conf/index
-       centralized-configuration.rst
-       internal-options
-       daemons/index
-       tools/index
-       unattended-installation
-       statistics-files/index
+      ossec-conf/index
+      centralized-configuration.rst
+      internal-options
+      daemons/index
+      tools/index
+      certs-tools
+      installation-assistant
+      unattended-installation
+      statistics-files/index
