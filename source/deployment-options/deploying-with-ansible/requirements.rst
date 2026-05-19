@@ -8,8 +8,6 @@ Requirements
 
 Before deploying Wazuh with Ansible, ensure your environment meets the following requirements.
 
-.. _ansible_control_node_requirements:
-
 Control node requirements
 -------------------------
 
@@ -25,8 +23,6 @@ The control node is the endpoint where you install Ansible and run the playbooks
 
 -  **Inventory file is configured**: Create and configure the ``/etc/ansible/hosts`` file that defines your target endpoints and connection variables. You can verify connectivity for Linux/macOS endpoints using ``ansible all -m ping`` and for Windows endpoints using ``ansible -i all -m win_ping``.
 -  **Git is installed**: Required to clone the ``wazuh-ansible`` repository.
-
-.. _ansible_target_node_requirements:
 
 Target node requirements
 ------------------------
