@@ -100,7 +100,6 @@ exclude_patterns = [
     'getting-started/use-cases/**',
     'deployment-options/amazon-machine-images/**',
     'deployment-options/wazuh-from-sources/**',
-    'deployment-options/deploying-with-ansible/**',
     'deployment-options/deploying-with-puppet/**',
     'user-manual/**',
     'cloud-security/**',

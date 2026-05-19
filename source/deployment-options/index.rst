@@ -99,14 +99,14 @@ If the Wazuh central components are already installed in your environment, selec
 
    - :doc:`Installing the Wazuh agent from sources <wazuh-from-sources/wazuh-agent/index>`: Installing Wazuh from sources means installing the Wazuh agent without using a package manager. You compile the source code and copy the binaries to your computer instead.
 
-   Orchestration tools
-   -------------------
+Orchestration tools
+-------------------
 
-   These alternatives guide you to install the Wazuh central components along with the single universal agent.
+These alternatives guide you to install the Wazuh central components along with the single universal agent.
 
+- :doc:`deploying-with-ansible/index`: Ansible is an open source platform designed for automating tasks. Its deployment tool is used to deploy the Wazuh infrastructure on AWS. The Wazuh environment consists of the Wazuh central components and a Wazuh agent.
 
-   - :doc:`deploying-with-ansible/index`: Ansible is an open source platform designed for automating tasks. Its deployment tool is used to deploy the Wazuh infrastructure on AWS. The Wazuh environment consists of the Wazuh central components and a Wazuh agent.
-
+..
    - :doc:`deploying-with-puppet/index`: Puppet is an open-source software tool that gives you an automatic way to inspect, deliver, operate, and future-proof all of your software, no matter where it is executed. It is very simple to use and allows you to install and configure Wazuh easily.
 
 .. toctree::
@@ -117,8 +117,8 @@ If the Wazuh central components are already installed in your environment, selec
    docker/index
    deploying-with-kubernetes/index
    offline-installation/index
+   deploying-with-ansible/index
 ..
    amazon-machine-images/amazon-machine-images
    wazuh-from-sources/index
-   deploying-with-ansible/index
    deploying-with-puppet/index
