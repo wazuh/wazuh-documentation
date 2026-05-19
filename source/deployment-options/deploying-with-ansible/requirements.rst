@@ -15,8 +15,8 @@ Control node requirements
 
 The control node is the endpoint where you install Ansible and run the playbooks. The control node must meet the following requirements before you proceed with the deployment:
 
--  **Ansible is installed and configured**: Install ansible-core version 2.16 or later. Verify the installed version with ``ansible --version``. Ensure the version is compatible with the operating systems of your target endpoints.
--  **Python is installed**: Install Python 3.10 or later. Verify the version with ``python3 --version``.
+-  **Ansible is installed and configured**: Install ansible-core version 2.16 or later. Verify the installed version with the command ``ansible --version``. Ensure the version is compatible with the operating systems of your target endpoints.
+-  **Python is installed**: Install Python 3.10 or later. Verify the version with the command ``python3 --version``.
 -  **Required Ansible Galaxy collections are installed**: Install the collections listed in the ``requirements.yml`` file of the ``wazuh-ansible`` repository:
 
    .. code-block:: console
