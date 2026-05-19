@@ -13,7 +13,7 @@ This installation guide shows how to use Ansible to deploy a Wazuh environment t
 .. toctree::
    :maxdepth: 1
 
-   requirements
-   deploying-wazuh
+   guide/requirements
+   guide/index
    roles/index
    reference
