@@ -137,7 +137,7 @@ Where:
 -  ``private_ip`` specifies the private IP address used for internal communication between the Wazuh components deployed on the AIO node. Replace ``<AIO_PRIVATE_IP>`` with the actual private IP address assigned to the endpoint.
 -  If the environment is located in a local subnet, ``ansible_host`` and ``private_ip`` variables should match.
 -  ``ansible_user`` specifies the remote user account Ansible uses to connect over SSH. Replace ``<USERNAME>`` with a valid user account that has the required privileges on the endpoints.
--  ``ansible_ssh_private_key_file`` specifies the full path to the SSH private key used by Ansible to connect to the target hosts. Replace ``<PATH_TO_PRIVATE_KEY>`` with the directory path where the private key file is stored on the Ansible control node.
+-  ``ansible_ssh_private_key_file`` specifies the SSH private key used by Ansible to connect to the target hosts. Replace ``<PATH_TO_PRIVATE_KEY>`` with the directory path where the private key file is stored on the Ansible control node.
 
 Run the playbook
 ~~~~~~~~~~~~~~~~
@@ -367,7 +367,7 @@ Where:
 -  ``ansible_host`` specifies the public IP address or hostname Ansible uses to connect to the target node. Replace ``<WI1_EC2_PUBLIC_IP>``, ``<WI2_EC2_PUBLIC_IP>``, ``<WI3_EC2_PUBLIC_IP>``, ``<MANAGER_NODE_PUBLIC_IP>``, ``<WORKER_NODE_PUBLIC_IP>``, and ``<DASHBOARD_NODE_PUBLIC_IP>`` with the actual public IP addresses or hostnames of the Wazuh indexer, manager, worker, and dashboard nodes.
 -  ``private_ip`` variable contains the private IP address/FQDN used for the internal cluster communication. Replace ``<WI1_EC2_PRIVATE_IP>``, ``<WI2_EC2_PRIVATE_IP>``, ``<WI3_EC2_PRIVATE_IP>``, ``<MANAGER_EC2_PRIVATE_IP>``, ``<WORKER_EC2_PRIVATE_IP>``, and ``<DASHBOARD_EC2_PRIVATE_IP>`` with the actual private IP addresses assigned to the endpoints.
 -  If the environment is within a local subnet, ``ansible_host`` and ``private_ip`` variables should match.
--  ``ansible_ssh_private_key_file`` specifies the full path to the SSH private key used by Ansible to connect to the target hosts. Replace ``<PATH_TO_PRIVATE_KEY>`` with the directory path where the private key file is stored on the Ansible control node.
+-  ``ansible_ssh_private_key_file`` specifies the SSH private key used by Ansible to connect to the target hosts. Replace ``<PATH_TO_PRIVATE_KEY>`` with the directory path where the private key file is stored on the Ansible control node.
 -  ``ansible_ssh_user`` variable specifies the SSH user for the nodes when it's the same. Replace ``<USERNAME>`` with a valid user account that has the required privileges on the endpoints. Specify this variable for each ``ansible_host`` if the SSH users are different. For example:
 
    .. code-block:: ini
