@@ -105,7 +105,7 @@ Perform the following steps to create a CDB list of malicious programs and rules
 
    .. code-block:: xml
 
-      <list>etc/lists/suspicious-programs</list>
+      <list>/etc/lists/suspicious-programs</list>
 
 #. Create a high severity rule to fire when a "red" program is executed. Add this new rule to the ``/var/ossec/etc/rules/local_rules.xml`` file on the Wazuh server.
 
@@ -114,7 +114,7 @@ Perform the following steps to create a CDB list of malicious programs and rules
       <group name="audit">
         <rule id="100210" level="12">
             <if_sid>80792</if_sid>
-        <list field="audit.command" lookup="match_key_value" check_value="red">etc/lists/suspicious-programs</list>
+        <list field="audit.command" lookup="match_key_value" check_value="red">/etc/lists/suspicious-programs</list>
           <description>Audit: Highly Suspicious Command executed: $(audit.exe)</description>
             <group>audit_command,</group>
         </rule>
