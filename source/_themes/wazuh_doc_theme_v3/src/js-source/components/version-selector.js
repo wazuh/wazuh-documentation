@@ -61,12 +61,6 @@ jQuery(function($) {
   /* Adds the current version to the selector button */
   checkCurrentVersion();
 
-  function versionSuffix(version) {
-    if (version === '5.0') return ' (Beta 1)';
-    if (version === '4.14') return ' (current)';
-    return '';
-  }
-
   /* Creates the correct links to all the releases */
   let documentHistory = addVersions();
   $(window).on('hashchange', function() {
@@ -100,8 +94,18 @@ jQuery(function($) {
    */
   function checkCurrentVersion() {
     const selectVersionCurrent = $('#version-selector .current');
-    const thisVersion = DOCUMENTATION_OPTIONS.VERSION;
-    selectVersionCurrent.html('Version ' + thisVersion + versionSuffix(thisVersion));
+    const thisVersion = DOCUMENTATION_OPTIONS.VERSION;  
+    if (!listOfVersions.includes(thisVersion)) {
+      betaVersions.forEach(beta_info => {
+        if (beta_info[0].includes(thisVersion)) {
+          selectVersionCurrent.html('Version ' + beta_info[0]);
+        }
+      });
+    } else if ( listOfVersions.length > 0 ) {
+      selectVersionCurrent.html('Version ' + thisVersion + (thisVersion == listOfVersions[0] ? ' (current)' : ''));
+    } else  {
+      selectVersionCurrent.html('Version ' + thisVersion);
+    }
   }
 
   /**
@@ -209,6 +213,8 @@ jQuery(function($) {
       href = '';
       tooltip = false;
       ver = versionsCopy[i];
+      verNoDot = ver.replace('.','_');
+      aEle = $('#to'+verNoDot);
       
       if ( redirHistory[ver] != null && redirHistory[ver].length ) {
         if ( i == 0 ) { // the latest release version
@@ -222,20 +228,28 @@ jQuery(function($) {
       if ( !hasHttpProtocol && href.length > 0 ) {
         href = 'https://documentation.wazuh.com' + href;
       }
-      aEle = $(document.createElement('a'));
-      aEle.attr('href', href).text(listOfVersions[i] + versionSuffix(listOfVersions[i]));
+      if (aEle.length == 0) {
+        aEle = $(document.createElement('a'));
+        aEle.text(listOfVersions[i] + ((i == 0) ? ' (current)' : ''));
+        aEle.attr('id','to'+verNoDot);
+      }
+      aEle.attr('href', href);
       if ( tooltip !== false ){
         aEle.addClass('disabled')
         .attr('data-bs-toggle', 'tooltip')
         .attr('data-placement', 'right')
-        .attr('title', 'This page is not available in version ' + listOfVersions[i] + versionSuffix(listOfVersions[i]));
+        .attr('title', 'This page is not available in version ' + listOfVersions[i] + ((i == 0) ? ' (current)' : ''));
       }
-      ele = $(document.createElement('li'));
-      ele.append(aEle);
+      
+      if (aEle.parent().length == 0) {
+        ele = $(document.createElement('li'));
+        ele.append(aEle);
+        selectVersionUl.append(ele);
+      }
+
       if (ver == listOfVersions[0]) {
         $('.no-latest-notice .link-latest').attr('href', href);
       }
-      selectVersionUl.append(ele);
     }
 
     /* Add temporary beta versions
@@ -244,15 +258,26 @@ jQuery(function($) {
      */
     if (betaVersions != undefined && betaVersions.length > 0) {
       for (let i = betaVersions.length - 1; i >=  0; i--) {
-        if (betaVersions[i][0].includes(thisVersion)) {
+        ver = betaVersions[i][1].match(/\d{1,3}\.\d{1,2}/);
+        /* the version in "ver" must have some version indicator */
+        if ( ver == null ) {
           continue;
         }
+        ver = ver[0];
+        verNoDot = ver.replace('.','_');
+        aEle = $('#to'+verNoDot);
         href = urlRoot + betaVersions[i][1] + betaVersions[i][2];
-        aEle = $(document.createElement('a'));
-        aEle.attr('href', href).text(betaVersions[i][0]);
-        ele = $(document.createElement('li'));
-        ele.append(aEle);
-        selectVersionUl.prepend(ele);
+        if (aEle.length == 0) {
+          aEle = $(document.createElement('a'));
+          aEle.text(betaVersions[i][0]);
+          aEle.attr('id','to'+verNoDot);
+        }
+        aEle.attr('href', href);
+        if (aEle.parent().length == 0) {
+          ele = $(document.createElement('li'));
+          ele.append(aEle);
+          selectVersionUl.prepend(ele);
+        }
       }
     }
 
@@ -303,6 +328,11 @@ jQuery(function($) {
   function getRedirectionHistory(listOfVersions, verCurrent, page, newUrls, redirections, removedUrls) {
     const rtn = [];
     const historyArray = [];
+    let infoUrl,logic;
+    if (!listOfVersions.includes(verCurrent)) {
+      /* If verCurrent is not currently in listOfVersions let's suppose that it's similar to the latest release in the list */
+      verCurrent = listOfVersions[0];
+    }
     historyArray[verCurrent] = page;
     let cellTemp = [];
     listOfVersions = listOfVersions.reverse();
@@ -325,8 +355,8 @@ jQuery(function($) {
     let count = 0;
     while (cellTemp.length) {
       const analyzeUrl = cellTemp.pop();
-      let infoUrl = getInfoRedirectUrl(analyzeUrl['page'], redirections);
-      let logic = getLogicRedirects(analyzeUrl, infoUrl, listOfVersions);
+      infoUrl = getInfoRedirectUrl(analyzeUrl['page'], redirections);
+      logic = getLogicRedirects(analyzeUrl, infoUrl, listOfVersions);
       if (logic.length == 0) {
         const pageHashArray = analyzeUrl['page'].split('#');
         if ( pageHashArray.length > 1 ) {
@@ -446,11 +476,8 @@ jQuery(function($) {
    * @param {array} newUrls A list with all the new pages
    * @return {array|boolean} A list with the new pages related with the page URL
    */
-  function getInfoNewsUrl(page, newUrls) {
+  function getInfoNewsUrl(page, newUrls) { 
     let newUrlsTemp = false;
-    if (!page) {
-      return false;
-    }
     for (forRelease in newUrls) {
       if ({}.hasOwnProperty.call(newUrls, forRelease)) {
         for (forUrl in newUrls[forRelease]) {
@@ -476,9 +503,6 @@ jQuery(function($) {
    */
   function getInfoRemovedUrl(page, removedUrls) {
     let removedUrlsTemp = false;
-    if (!page) {
-      return false;
-    }
     for (forRelease in removedUrls) {
       if ({}.hasOwnProperty.call(removedUrls, forRelease)) {
         for (forUrl in removedUrls[forRelease]) {
