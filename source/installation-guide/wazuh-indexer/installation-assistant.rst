@@ -30,8 +30,8 @@ Follow these steps on a Linux host to configure your Wazuh deployment, create SS
 
       .. code-block:: console
 
-          # curl -sO https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-install-5.0.0-beta1.sh
-          # curl -o config.yml https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/config-5.0.0-beta1.yml
+          # curl -sO https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh
+          # curl -o config.yml https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/config-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.yml
 
 #. Edit ``./config.yml`` and replace the node names and IP values with the corresponding names and IP addresses. You need to do this for all Wazuh manager, Wazuh indexer, and Wazuh dashboard nodes. Add as many node fields as needed:
 
@@ -79,7 +79,7 @@ Follow these steps on a Linux host to configure your Wazuh deployment, create SS
 
       .. code-block:: console
 
-        # bash wazuh-install-5.0.0-beta1.sh --generate-config-files
+        # bash wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh --generate-config-files
 
 
 #. Copy the ``wazuh-install-files.tar`` file from the host where you generated it to all the servers of the distributed deployment including the Wazuh manager, the Wazuh indexer, and the Wazuh dashboard nodes. This can be done by using the ``scp`` utility.
@@ -94,7 +94,7 @@ Follow these steps to install and configure a single-node or multi-node Wazuh in
 
       .. code-block:: console
 
-        # curl -sO https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-install-5.0.0-beta1.sh
+        # curl -sO https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh
 
 
 #. Run the Wazuh installation assistant with the option ``--wazuh-indexer`` and the node name to install and configure the Wazuh indexer. The node name must be the same one used in the ``config.yml`` file for the initial configuration, for example, ``indexer``.
@@ -103,7 +103,7 @@ Follow these steps to install and configure a single-node or multi-node Wazuh in
 
       .. code-block:: console
 
-        # bash wazuh-install-5.0.0-beta1.sh --wazuh-indexer indexer -d pre-release
+        # bash wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh --wazuh-indexer indexer -d pre-release
 
 
 Repeat this stage of the installation process for every Wazuh indexer node in your cluster. The command installs, configures and starts the Wazuh indexer on the host. Then proceed with initializing your single-node or multi-node cluster in the next stage.
@@ -119,7 +119,7 @@ The final stage of installing the Wazuh indexer single-node or multi-node cluste
 
    .. code-block:: console
 
-     # bash wazuh-install-5.0.0-beta1.sh --start-cluster
+     # bash wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh --start-cluster
 
 Testing the cluster installation
 --------------------------------

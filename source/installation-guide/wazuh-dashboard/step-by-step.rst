@@ -159,13 +159,13 @@ Select your deployment type and follow the instructions to change the default pa
 
                .. code-block:: console
 
-                  # wget https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-passwords-tool-5.0.0-beta1.sh
+                  # wget https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-passwords-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh
 
             #. To change the password for a Wazuh indexer user, run the passwords tool with the ``-u`` option and indicate the new password with the ``-p`` option. The password must have a length between 8 and 64 characters and contain at least one upper case letter, one lower case letter, a number, and one of the following symbols: ``.*+?-``.
 
                .. code-block:: console
 
-                  # bash wazuh-passwords-tool-5.0.0-beta1.sh -u <USER> -p <PASSWORD>
+                  # bash wazuh-passwords-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -u <USER> -p <PASSWORD>
 
                Where ``<USER>`` is the name of the user whose password you want to change and ``<PASSWORD>`` is the new password. If ``<PASSWORD>`` is not specified, the tool will generate a random password.
 
@@ -173,7 +173,7 @@ Select your deployment type and follow the instructions to change the default pa
 
                .. code-block:: console
 
-                  # bash wazuh-passwords-tool-5.0.0-beta1.sh -u admin -p Secr3tP4ssw*rd
+                  # bash wazuh-passwords-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -u admin -p Secr3tP4ssw*rd
 
                .. code-block:: console
                   :class: output
@@ -189,7 +189,7 @@ Select your deployment type and follow the instructions to change the default pa
 
             .. code-block:: console
 
-               # bash wazuh-passwords-tool-5.0.0-beta1.sh -A -au <ADMIN_USER> -ap <ADMIN_PASSWORD> -u <USER> -p <PASSWORD>
+               # bash wazuh-passwords-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -A -au <ADMIN_USER> -ap <ADMIN_PASSWORD> -u <USER> -p <PASSWORD>
 
             Where ``<ADMIN_USER>`` and ``<ADMIN_PASSWORD>`` are the Wazuh manager API administrator user and password, respectively. ``<USER>`` is the name of the user whose password you want to change, and ``<PASSWORD>`` is the new password. If ``<PASSWORD>`` is not specified, the tool will generate a random password.
 
@@ -197,7 +197,7 @@ Select your deployment type and follow the instructions to change the default pa
 
             .. code-block:: console
 
-               # bash wazuh-passwords-tool-5.0.0-beta1.sh -A -au wazuh -ap wazuh -u wazuh -p Hello*123
+               # bash wazuh-passwords-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -A -au wazuh -ap wazuh -u wazuh -p Hello*123
 
             .. code-block:: console
                :class: output
@@ -215,13 +215,13 @@ Select your deployment type and follow the instructions to change the default pa
 
                .. code-block:: console
 
-                  # wget https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-passwords-tool-5.0.0-beta1.sh
+                  # wget https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-passwords-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh
 
             #. Use the Wazuh passwords tool to change the passwords of a specific Wazuh indexer user:
 
                .. code-block:: console
 
-                  # bash wazuh-passwords-tool-5.0.0-beta1.sh -u <USER> -p <PASSWORD>
+                  # bash wazuh-passwords-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -u <USER> -p <PASSWORD>
 
                Where ``<USER>`` is the name of the user whose password you want to change and ``<PASSWORD>`` is the new password. If ``<PASSWORD>`` is not specified, the tool will generate a random password.
 
@@ -229,7 +229,7 @@ Select your deployment type and follow the instructions to change the default pa
 
                .. code-block:: console
 
-                  # bash wazuh-passwords-tool-5.0.0-beta1.sh -u admin -p Secr3tP4ssw*rd
+                  # bash wazuh-passwords-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -u admin -p Secr3tP4ssw*rd
 
                .. code-block:: console
                   :class: output
@@ -245,8 +245,8 @@ Select your deployment type and follow the instructions to change the default pa
 
                .. code-block:: console
 
-                  # wget https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-passwords-tool-5.0.0-beta1.sh
-                  # bash wazuh-passwords-tool-5.0.0-beta1.sh -A -au wazuh -ap Hello*123 -u wazuh-wui -p P3ssword+098
+                  # wget https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-passwords-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh
+                  # bash wazuh-passwords-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -A -au wazuh -ap Hello*123 -u wazuh-wui -p P3ssword+098
 
                .. code-block:: console
                   :class: output

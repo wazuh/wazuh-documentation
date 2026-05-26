@@ -35,7 +35,7 @@ custom_replacements = {
 
     # --- Revision numbers for Wazuh manager package version
     # RPM and Deb manager package revisions
-    "|WAZUH_MANAGER_CURRENT_REV|" : "beta1", # RPM and Deb
+    "|WAZUH_MANAGER_CURRENT_REV|" : "beta2", # RPM and Deb
     # --- Architectures for Wazuh manager packages
     "|WAZUH_MANAGER_x64_RPM|" : "x86_64",
     "|WAZUH_MANAGER_x64_DEB|" : "amd64",
@@ -44,7 +44,7 @@ custom_replacements = {
 
     # --- Revision numbers for Wazuh agent package version
     # RPM and Deb agent package revisions
-    "|WAZUH_AGENT_CURRENT_REV|" : "beta1", # RPM and Deb
+    "|WAZUH_AGENT_CURRENT_REV|" : "beta2", # RPM and Deb
     # --- Architectures for Wazuh agent packages
     "|WAZUH_AGENT_x64_RPM|" : "x86_64",
     "|WAZUH_AGENT_x64_DEB|" : "amd64",
@@ -53,7 +53,7 @@ custom_replacements = {
 
     #
     # === Wazuh indexer version revisions
-    "|WAZUH_INDEXER_CURRENT_REV|" : "beta1", # RPM and Deb
+    "|WAZUH_INDEXER_CURRENT_REV|" : "beta2", # RPM and Deb
     #"|WAZUH_INDEXER_CURRENT_REV_DEB|" :
     # --- Architectures for Wazuh indexer packages
     "|WAZUH_INDEXER_x64_RPM|" : "x86_64",
@@ -62,7 +62,7 @@ custom_replacements = {
     "|WAZUH_INDEXER_ARM64_DEB|" : "arm64",
     #
     # === Wazuh dashboard version revisions
-    "|WAZUH_DASHBOARD_CURRENT_REV|" : "beta1", # RPM and Deb
+    "|WAZUH_DASHBOARD_CURRENT_REV|" : "beta2", # RPM and Deb
     # --- Architectures for Wazuh dashboard packages
     "|WAZUH_DASHBOARD_x64_RPM|" : "x86_64",
     "|WAZUH_DASHBOARD_x64_DEB|" : "amd64",
@@ -76,20 +76,20 @@ custom_replacements = {
     "|WAZUH_CURRENT_MAJOR_OVA|" : "5.x",
     #"|WAZUH_CURRENT_MINOR_OVA|" :
     "|WAZUH_CURRENT_OVA|" : release,
-    "|WAZUH_CURRENT_OVA_REV|" : "beta1",
+    "|WAZUH_CURRENT_OVA_REV|" : "beta2",
     #"|WAZUH_CURRENT_MAJOR_DOCKER|" :
     "|WAZUH_CURRENT_MINOR_DOCKER|" : version,
     "|WAZUH_CURRENT_DOCKER|" : release,
-    "|WAZUH_CURRENT_DOCKER_REV|" : "beta1",
-    "|WAZUH_CURRENT_OFFLINE_INSTALL_REV|" : "beta1",
+    "|WAZUH_CURRENT_DOCKER_REV|" : "beta2",
+    "|WAZUH_CURRENT_OFFLINE_INSTALL_REV|" : "beta2",
     #"|WAZUH_CURRENT_MAJOR_KUBERNETES|" :
     #"|WAZUH_CURRENT_MINOR_KUBERNETES|" :
     "|WAZUH_CURRENT_KUBERNETES|" : release,
-    "|WAZUH_CURRENT_KUBERNETES_REV|" : "beta1",
+    "|WAZUH_CURRENT_KUBERNETES_REV|" : "beta2",
     #"|WAZUH_CURRENT_MAJOR_ANSIBLE|" :
     "|WAZUH_CURRENT_MINOR_ANSIBLE|" : version,
     "|WAZUH_CURRENT_ANSIBLE|" : release,
-    "|WAZUH_CURRENT_ANSIBLE_REV|" : "beta1",
+    "|WAZUH_CURRENT_ANSIBLE_REV|" : "beta2",
     #"|WAZUH_CURRENT_MAJOR_PUPPET|" :
     #"|WAZUH_CURRENT_MINOR_PUPPET|" :
     "|WAZUH_CURRENT_PUPPET|" : release,
@@ -105,11 +105,11 @@ custom_replacements = {
     "|WAZUH_CURRENT_MAJOR_WINDOWS|" : "5.x",
     #"|WAZUH_CURRENT_MINOR_WINDOWS|" :
     "|WAZUH_CURRENT_WINDOWS|" : release,
-    "|WAZUH_REVISION_WINDOWS|" : "1",
+    "|WAZUH_REVISION_WINDOWS|" : "beta2",
     "|WAZUH_CURRENT_MAJOR_OSX|" : "5.x",
     #"|WAZUH_CURRENT_MINOR_OSX|" :
     "|WAZUH_CURRENT_OSX|" : release,
-    "|WAZUH_REVISION_OSX|" : "1",
+    "|WAZUH_REVISION_OSX|" : "beta2",
     "|WAZUH_CURRENT_MAJOR_SOLARIS|" : "5.x",
     #"|WAZUH_CURRENT_MINOR_SOLARIS|" :
     "|WAZUH_CURRENT_SOLARIS|" : release, # Set here the lesser of WAZUH_CURRENT_MAJOR_SOLARIS10 and 11 values
