@@ -109,7 +109,7 @@ custom_replacements = {
     "|WAZUH_CURRENT_MAJOR_OSX|" : "5.x",
     #"|WAZUH_CURRENT_MINOR_OSX|" :
     "|WAZUH_CURRENT_OSX|" : release,
-    "|WAZUH_REVISION_OSX|" : "beta2",
+    "|WAZUH_REVISION_OSX|" : "latest",
     "|WAZUH_CURRENT_MAJOR_SOLARIS|" : "5.x",
     #"|WAZUH_CURRENT_MINOR_SOLARIS|" :
     "|WAZUH_CURRENT_SOLARIS|" : release, # Set here the lesser of WAZUH_CURRENT_MAJOR_SOLARIS10 and 11 values
