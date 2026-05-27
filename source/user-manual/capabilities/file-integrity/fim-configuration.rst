@@ -85,8 +85,6 @@ Real-time monitoring is configured with the ``realtime`` attribute of the :ref:`
 Configuring who-data monitoring
 -------------------------------
 
-.. versionadded:: 3.4.0
-
 Who-data monitoring is configured with the ``whodata`` attribute of the :ref:`directories <reference_ossec_syscheck_directories>` option. This attribute replaces the ``realtime`` attribute, which means that ``whodata`` implies real-time monitoring but adding the who-data information.
 This functionality uses Linux Audit subsystem and the Microsoft Windows SACL, so additional configurations might be necessary. Check the :ref:`auditing who-data <auditing-whodata>` entry to get further information:
 
@@ -292,8 +290,6 @@ With a custom rule, the level of a syscheck alert can be altered when changes to
 Configuring maximum recursion level allowed
 -------------------------------------------
 
-.. versionadded:: 3.6.0
-
 It is possible to configure the maximum recursion level allowed for a specific directory by using the ``recursion_level`` attribute of the :ref:`directories <reference_ossec_syscheck_directories>` option. ``recursion_level`` value must be an integer between 0 and 320.
 
 An example configuration may look as follows:
@@ -336,8 +332,6 @@ To disable the recursion and generate the alerts only for the files in the monit
 Configuring syscheck process priority
 -------------------------------------
 
-.. versionadded:: 3.12.0
-
 To adjust syscheck CPU usage on the monitored system the :ref:`process_priority <reference_ossec_syscheck_process_priority>` option can be used. It sets the nice value for syscheck process. The default ``process_priority`` is set to 10.
 
 Setting ``process_priority`` value higher than the default, will give syscheck lower priority, less CPU resources and make it run slower. In the example below the nice value for syscheck process is set to maximum:
@@ -361,8 +355,6 @@ Setting ``process_priority`` value lower than the default, will give syscheck hi
 Configuring where the database is to be stored
 ----------------------------------------------
 
-.. versionadded:: 3.12.0
-
 When the Wazuh agent starts it performs a first scan and generates its database. By default, the database is created in disk:
 
 .. code-block:: xml
@@ -385,8 +377,6 @@ The main advantage of using in memory database is the performance as reading and
 
 Configuring synchronization
 ---------------------------
-
-.. versionadded:: 3.12.0
 
 :ref:`Synchronization <reference_ossec_syscheck_synchronization>` can be configured to change the synchronization interval, the number of events per second, the queue size and the response timeout:
 
