@@ -39,7 +39,7 @@ const versions = [
 
 betaVersions.push(
   /* [ LABEL , BETA_FOLDER, FILE_PATH ] */
-  ['5.0 (Beta 1)', '5.0-beta', '/index.html']
+  ['5.0 (Beta 2)', '5.0-beta', '/index.html']
 );
 
 /* Data structure for every release
@@ -99,6 +99,7 @@ newUrls['4.14'] = [
   '/user-manual/user-administration/single-sign-on/okta.html',
   '/user-manual/user-administration/single-sign-on/onelogin.html',
   '/user-manual/user-administration/single-sign-on/pingone.html',
+  '/user-manual/user-administration/single-sign-on/authentik.html',
   '/user-manual/api/requests-responses.html',
   '/user-manual/api/api-examples.html',
   '/user-manual/api/rbac/configuration.html',
