@@ -27,9 +27,9 @@ Index
    quickstart
    installation-guide/index
    deployment-options/index
+   user-manual/index
 
 ..
-   user-manual/index
    cloud-security/monitoring
    compliance/index
    proof-of-concept-guide/index

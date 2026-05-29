@@ -6,20 +6,17 @@
 Wazuh agent enrollment
 ======================
 
-Wazuh agent enrollment is the process of registering a Wazuh agent to a Wazuh manager. This enrollment allows the Wazuh agents to communicate securely with the Wazuh manager and become authorized members of the Wazuh security platform.
+Wazuh agent enrollment is the process of registering a Wazuh agent with a Wazuh manager. Enrollment authorizes the Wazuh agent to communicate securely with the Wazuh manager and become part of the Wazuh security platform.
 
-The Wazuh agent enrollment process allows:
+The Wazuh agent enrollment process allows the Wazuh manager to generate a unique client key for each Wazuh agent. The Wazuh agent uses the client key to encrypt communication with the Wazuh manager and validate its identity.
 
--  The Wazuh manager to enroll Wazuh agents and generate unique client keys for them.
--  The use of the client key to encrypt communication between the Wazuh agent and the Wazuh manager.
--  The validation of the identity of the Wazuh agents communicating with the Wazuh manager.
--  The Wazuh agent to collect security information from the monitored endpoint and send it to the Wazuh manager for analysis.
+After enrollment, the Wazuh agent collects security information from the monitored endpoint and sends it to the Wazuh manager for analysis.
 
 .. note::
 
-   When following our :ref:`installation guide <installing_the_wazuh_agent>`, we recommend you use environment variables to configure the Wazuh agent automatically. This allows the Wazuh agent to enroll and connect to the Wazuh manager.
+   When you follow the :ref:`installation guide <installing_the_wazuh_agent>`, we recommend that you use environment variables to configure the Wazuh agent automatically. This method allows the Wazuh agent to enroll with the Wazuh manager and connect to it.
 
-Learn about the different enrollment options and additional information needed for Wazuh agent enrollment in the sections below.
+Learn about the different enrollment options and the information required for Wazuh agent enrollment in these sections.
 
 .. toctree::
    :maxdepth: 1
@@ -27,6 +24,8 @@ Learn about the different enrollment options and additional information needed f
    requirements
    agent-life-cycle
    enrollment-methods/index
+   troubleshooting
+
+..
    security-options/index
    deployment-variables/index
-   troubleshooting
