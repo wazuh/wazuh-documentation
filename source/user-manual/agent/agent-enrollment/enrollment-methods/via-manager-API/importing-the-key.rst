@@ -8,7 +8,7 @@ Importing the client key to the Wazuh agent
 
 Configure the Wazuh agent with the client key that you received from the Wazuh manager. The Wazuh agent uses this key to authenticate and communicate with the Wazuh manager.
 
-You can retrieve the client key by using the ``GET /agents/{agent_id}/key <operation/api.controllers.agent_controller.get_agent_key>`` endpoint in **Server management** > **Dev Tools** on the Wazuh dashboard. Replace ``<WAZUH_AGENT_ID>`` with the Wazuh agent ID.
+You can retrieve the client key by using the :api-ref:`GET /agents/{agent_id}/key <operation/api.controllers.agent_controller.get_agent_key>` endpoint in **Server management** > **Dev Tools** on the Wazuh dashboard. Replace ``<WAZUH_AGENT_ID>`` with the Wazuh agent ID.
 
 .. thumbnail:: /images/manual/agent/api-get-agent-key.png
    :title: GET /agents/{agent_id}/key request

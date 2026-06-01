@@ -197,7 +197,7 @@ Below are the steps to assign agents to a group with a specific configuration:
       1 agent(s) in group 'dbms':
         ID: 016  Name: CentOS.
 
-   Using the **Wazuh manager API** endpoint ``GET /groups/{group_id}/agents <operation/api.controllers.agent_controller.get_agents_in_group>``:
+   Using the **Wazuh manager API** endpoint :api-ref:`GET /groups/{group_id}/agents <operation/api.controllers.agent_controller.get_agents_in_group>`:
 
    .. code-block:: console
 
