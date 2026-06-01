@@ -59,7 +59,7 @@ Linux/Unix and macOS
 
    .. note::
 
-      You can :doc:`reset the password </user-manual/user-administration/password-management>` for the Wazuh manager API user if you forget it.
+      You can `reset the password </user-manual/user-administration/password-management>`__ for the Wazuh manager API user if you forget it.
 
 #. Request the client key and agent ID. Replace ``<WAZUH_AGENT_NAME>`` with the Wazuh agent name:
 
@@ -134,7 +134,7 @@ Follow these steps to send a Wazuh agent enrollment request from a Windows endpo
 
    .. note::
 
-      You can :doc:`reset the password </user-manual/user-administration/password-management>` for the Wazuh manager API user if you forget it.
+      You can `reset the password </user-manual/user-administration/password-management>`__ for the Wazuh manager API user if you forget it.
 
 #. Create variables to store the generated token and the agent name.
 

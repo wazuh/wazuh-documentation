@@ -16,7 +16,7 @@ The examples use an authentication token. To get your token, replace ``<USER>:<P
 
 .. note::
 
-   You can :doc:`reset the password </user-manual/user-administration/password-management>` for the Wazuh manager API user if you forget it.
+   You can `reset the password </user-manual/user-administration/password-management>`__ for the Wazuh manager API user if you forget it.
 
 Removing agents in a list
 ^^^^^^^^^^^^^^^^^^^^^^^^^

@@ -228,4 +228,4 @@ Output
       "error": 0
    }
 
-Refer to the following documentation for other information on the :doc:`Wazuh manager API </user-manual/api/reference>`.
+Refer to the following documentation for other information on the `Wazuh manager API </user-manual/api/reference>`__.
