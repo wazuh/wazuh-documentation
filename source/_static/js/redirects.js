@@ -83,6 +83,7 @@ newUrls['5.0'] = [
   '/release-notes/release-5-0-0.html',
   '/release-notes/index-5x.html',
   '/deployment-options/deploying-with-kubernetes/kubernetes-password.html',
+  '/user-manual/agent/agent-management/remove-agents/remove-using-the-dashboard.html',
 ];
 
 /* Pages no longer available in 5.0 */
