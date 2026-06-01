@@ -1,20 +1,27 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: In this section, you can find instructions on configuring the Wazuh agent with the client key received from the Wazuh manager.
+   :description: Configure the Wazuh agent with the client key received from the Wazuh manager. Learn more in this section of the documentation.
 
 Importing the client key to the Wazuh agent
 ===========================================
 
-In this section, you can find instructions on configuring the Wazuh agent with the client key received from the Wazuh manager. This allows the Wazuh agent to communicate with the Wazuh manager.
+Configure the Wazuh agent with the client key that you received from the Wazuh manager. The Wazuh agent uses this key to authenticate and communicate with the Wazuh manager.
 
-The steps below shows how to configure the Wazuh agent on different operating systems using the client key:
+You can retrieve the client key by using the ``GET /agents/{agent_id}/key <operation/api.controllers.agent_controller.get_agent_key>`` endpoint in **Server management** > **Dev Tools** on the Wazuh dashboard. Replace ``<WAZUH_AGENT_ID>`` with the Wazuh agent ID.
 
--  :ref:`linux-unix-endpoint`
--  :ref:`this-windows-endpoint`
--  :ref:`this-macos-endpoint`
+.. thumbnail:: /images/manual/agent/api-get-agent-key.png
+   :title: GET /agents/{agent_id}/key request
+   :alt: GET /agents/{agent_id}/key request
+   :align: center
+   :width: 80%
 
-.. _linux-unix-endpoint:
+The following sections show how to import the client key on different operating systems:
+
+.. contents::
+   :local:
+   :depth: 1
+   :backlinks: none
 
 Linux/Unix
 ----------
@@ -26,6 +33,63 @@ Follow the steps below to import the client key to a Linux/Unix endpoint:
    .. code-block:: console
 
       # /var/ossec/bin/manage_agents -i <KEY>
+
+   The output looks like this:
+
+   .. code-block:: none
+      :class: output
+
+   	Agent information:
+       	ID:001
+       	Name:agent_1
+       	IP Address:any
+   	Confirm adding it?(y/n): y
+   	Added.
+
+#. Add the Wazuh manager IP address or fully qualified domain name (FQDN)  to the Wazuh agent configuration file at ``/var/ossec/etc/ossec.conf``. Replace ``<WAZUH_MANAGER_IP>`` with the Wazuh manager IP address or FQDN.
+
+   .. code-block:: xml
+      :emphasize-lines: 3
+
+      <client>
+        <manager>
+          <address><WAZUH_MANAGER_IP></address>
+          ...
+        </manager>
+      </client>
+
+#. Restart the Wazuh agent to make the changes effective:
+
+   .. code-block:: console
+
+      # systemctl restart wazuh-agent
+
+#. Click on the upper-left menu icon and navigate to **Agents management** > **Summary** on the Wazuh dashboard to check for the newly enrolled Wazuh agent and its connection status. If the enrollment was successful, you will have an interface similar to the image below.
+
+   .. thumbnail:: /images/manual/agent/linux-check-newly-enrolled.png
+      :title: Check newly enrolled Wazuh agent - Linux
+      :alt: Check newly enrolled Wazuh agent - Linux
+      :align: center
+      :width: 80%
+
+Windows
+-------
+
+Follow the steps below to import the client key to a Windows endpoint.
+
+#. From the Wazuh agent, launch the CMD or PowerShell as an administrator and import the client key. Replace ``<KEY>`` with the client key received from the Wazuh manager:
+
+   For 64-bit systems:
+
+   .. code-block:: powershell
+
+      > "C:\Program Files (x86)\ossec-agent\manage_agents.exe" -i <KEY>
+
+   For 32-bit systems:
+
+   .. code-block:: powershell
+
+      > "C:\Program Files\ossec-agent\manage_agents.exe" -i <KEY>
 
    The output should look like this:
 
@@ -39,74 +103,17 @@ Follow the steps below to import the client key to a Linux/Unix endpoint:
    	Confirm adding it?(y/n): y
    	Added.
 
-#. Add the Wazuh manager IP address or FQDN (Fully Qualified Domain Name)  to the Wazuh agent configuration file in ``/var/ossec/etc/ossec.conf``. Replace ``<WAZUH_MANAGER_IP_ADDRESS>`` with the IP address or FQDN (Fully Qualified Domain Name) of the Wazuh manager.
+#. Add the Wazuh manager IP address or fully qualified domain name (FQDN) to the Wazuh agent configuration file in ``C:\Program Files (x86)\ossec-agent\ossec.conf``. Replace ``<WAZUH_MANAGER_IP>`` with the IP address or FQDN of the Wazuh manager.
 
    .. code-block:: xml
       :emphasize-lines: 3
 
       <client>
-        <server>
-          <address><WAZUH_MANAGER_IP_ADDRESS></address>
+        <manager>
+          <address><WAZUH_MANAGER_IP></address>
           ...
-        </server>
+        </manager>
       </client>
-
-#. Restart the Wazuh agent to make the changes effective:
-
-   .. include:: /_templates/common/restart_agent_more.rst
-
-#. Click on the upper-left menu icon and navigate to **Agents management** > **Summary** on the Wazuh dashboard to check for the newly enrolled Wazuh agent and its connection status. If the enrollment was successful, you will have an interface similar to the image below.
-
-   .. thumbnail:: /images/manual/agent/linux-check-newly-enrolled.png
-     :title: Check newly enrolled Wazuh agent - Linux
-     :alt: Check newly enrolled Wazuh agent - Linux
-     :align: center
-     :width: 80%
-
-.. _this-windows-endpoint:
-
-Windows
--------
-
-Follow the steps below to import the client key to a Windows endpoint.
-
-#. From the Wazuh agent, launch the CMD or PowerShell as an administrator and import the client key. Replace ``<KEY>`` with the client key received from the Wazuh manager:
-
-
-   For 64-bit systems:
-
-   .. code-block:: pwsh-session
-
-      # "C:\Program Files (x86)\ossec-agent\manage_agents.exe" -i <KEY>
-
-   For 32-bit systems:
-
-   .. code-block:: pwsh-session
-
-      # "C:\Program Files\ossec-agent\manage_agents.exe" -i <KEY>
-
-   The output should look like this:
-
-   .. code-block:: output
-
-      Agent information:
-       	ID:001
-       	Name:agent_1
-       	IP Address:any
-      Confirm adding it?(y/n): y
-      Added.
-
-#. Add the Wazuh manager IP address or FQDN (Fully Qualified Domain Name) to the Wazuh agent configuration file in ``C:\Program Files (x86)\ossec-agent\ossec.conf``. Replace ``<WAZUH_MANAGER_IP_ADDRESS>`` with the IP address or FQDN of the Wazuh manager.
-
-   .. code-block:: xml
-      :emphasize-lines: 3
-
-      <client>
-         <server>
-           <address><WAZUH_MANAGER_IP_ADDRESS></address>
-           ...
-         </server>
-       </client>
 
 #. Restart the Wazuh agent to make the changes effective.
 
@@ -114,16 +121,16 @@ Follow the steps below to import the client key to a Windows endpoint.
 
       .. group-tab:: PowerShell (as an administrator):
 
-         .. code-block:: pwsh-session
+         .. code-block:: powershell
 
-            # Restart-Service -Name wazuh
+            > Restart-Service -Name wazuh
 
       .. group-tab:: CMD (as an administrator):
 
          .. code-block:: doscon
 
-            # net stop wazuh
-            # net start wazuh
+            > net stop wazuh
+            > net start wazuh
 
 #. Click on the upper-left menu icon and navigate to **Agents management** > **Summary** on the Wazuh dashboard to check for the newly enrolled Wazuh agent and its connection status. If the enrollment was successful, you will have an interface similar to the image below.
 
@@ -132,8 +139,6 @@ Follow the steps below to import the client key to a Windows endpoint.
       :alt: Check newly enrolled Wazuh agent - Windows
       :align: center
       :width: 80%
-
-.. _this-macos-endpoint:
 
 macOS
 -----
@@ -158,16 +163,16 @@ Follow the steps below to import the client key to a macOS endpoint:
    	Confirm adding it?(y/n): y
    	Added.
 
-#. Add the Wazuh manager IP address or FQDN (Fully Qualified Domain Name) to the Wazuh agent configuration file in ``/Library/Ossec/etc/ossec.conf``. Replace ``<WAZUH_MANAGER_IP_ADDRESS>`` with the IP address or FQDN of the Wazuh manager.
+#. Add the Wazuh manager IP address or fully qualified domain name (FQDN) to the Wazuh agent configuration file in ``/Library/Ossec/etc/ossec.conf``. Replace ``<WAZUH_MANAGER_IP>`` with the IP address or FQDN of the Wazuh manager.
 
    .. code-block:: xml
       :emphasize-lines: 3
 
       <client>
-        <server>
-          <address><WAZUH_MANAGER_IP_ADDRESS></address>
+        <manager>
+          <address><WAZUH_MANAGER_IP></address>
           ...
-        </server>
+        </manager>
       </client>
 
 #. Restart the Wazuh agent to make the changes effective:
