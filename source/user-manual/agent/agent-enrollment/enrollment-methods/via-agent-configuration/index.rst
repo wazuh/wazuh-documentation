@@ -1,21 +1,22 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: With this option, the Wazuh agent is automatically enrolled. Learn more in this section of the documentation.
+   :description: With this option, the Wazuh agent enrolls automatically after you configure the Wazuh manager IP address or FQDN. Learn more in this section of the documentation.
 
-Enrollment via agent configuration
-==================================
+Enrollment through agent configuration
+======================================
 
-With this option, the Wazuh agent is automatically enrolled after you have configured the Wazuh manager IP address or FQDN (Fully Qualified Domain Name). When using :doc:`additional security options <../../security-options/index>`, you might need to configure other settings.
+With this method, the Wazuh agent enrolls automatically after you configure the Wazuh manager IP address or fully qualified domain name (FQDN). If you use additional security options, you must configure the required authentication or certificate settings.
 
-You can configure the Wazuh manager IP address or FQDN (Fully Qualified Domain Name) in one of two ways on the Wazuh agent:
+You can configure the Wazuh manager IP address or FQDN on the Wazuh agent in one of two ways:
 
--  Using environment variables during the Wazuh agent installation process. The guide to this process can be found :doc:`here </installation-guide/wazuh-agent/index>`.
--  Manually configuring the Wazuh manager IP address or FQDN (Fully Qualified Domain Name) in the Wazuh agent configuration file.
+#. Using environment variables during the Wazuh agent installation. For more information, see the :doc:`installation guide </installation-guide/wazuh-agent/index>`.
 
-Enrollment with additional security options involves the use of passwords for enrollment authorization or certificates for identity validation of the Wazuh agent and Wazuh manager. See the :doc:`additional security options <../../security-options/index>` section for guidance on enrolling a Wazuh agent to a Wazuh manager with additional security options enabled.
+#. Manually editing the Wazuh agent configuration file.
 
-The steps below show how to enroll the Wazuh agent for different operating systems:
+Enrollment with additional security options uses passwords for enrollment authorization or certificates to validate the identity of the Wazuh agent and Wazuh manager.
+
+The following sections show how to enroll the Wazuh agent on different operating systems:
 
 .. toctree::
    :maxdepth: 1

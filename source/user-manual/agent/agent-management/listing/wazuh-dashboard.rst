@@ -1,10 +1,10 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description:  You can list and view basic information about all enrolled agents in the Wazuh dashboard. Learn more in this section of the documentation.
+   :description: You can list and view basic information about all enrolled agents in the Wazuh dashboard. Learn more in this section of the documentation.
 
-Listing agents using the Wazuh dashboard
-----------------------------------------
+List agents using the Wazuh dashboard
+-------------------------------------
 
 You can list and view basic information about all enrolled agents by navigating to **Agents management** > **Summary** in the Wazuh dashboard:
 

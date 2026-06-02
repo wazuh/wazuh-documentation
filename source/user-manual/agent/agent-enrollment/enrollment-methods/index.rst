@@ -6,10 +6,11 @@
 Enrollment methods
 ==================
 
-This section describes the two methods available for enrolling Wazuh agents. It guides in configuring the necessary settings to ensure a successful connection of the Wazuh agent to the Wazuh server.
+Wazuh supports two methods for enrolling Wazuh agents. Both methods configure the Wazuh agent to request or receive a client key and use it to connect to the Wazuh manager.
 
--  :doc:`Enrollment via agent configuration <via-agent-configuration/index>`: Once the IP address or FQDN (Fully Qualified Domain Name) of the Wazuh server has been set, the Wazuh agent can request the client key and import it automatically. This is the recommended enrollment method.
--  :doc:`Enrollment via Wazuh server API <via-manager-API/index>`: The user requests the client key from the Wazuh server API and then manually imports it to the Wazuh agent.
+#. :doc:`Enrollment through agent configuration <via-agent-configuration/index>`: Configure the IP address or fully qualified domain name (FQDN) of the Wazuh manager on the Wazuh agent. The Wazuh agent requests the client key from the Wazuh manager and imports it automatically. This is the recommended enrollment method.
+
+#. :doc:`Enrollment through the Wazuh manager API <via-manager-API/index>`: Request the client key from the Wazuh manager API and import it manually on the Wazuh agent.
 
 .. toctree::
    :hidden:
