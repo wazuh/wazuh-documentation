@@ -83,8 +83,34 @@ newUrls['5.0'] = [
   '/release-notes/release-5-0-0.html',
   '/release-notes/index-5x.html',
   '/deployment-options/deploying-with-kubernetes/kubernetes-password.html',
-  '/user-manual/agent/agent-management/remove-agents/remove-using-the-dashboard.html',
+  '/user-manual/agent/agent-management/remove-agents.html',
+  '/user-manual/agent/agent-management/list-agents.html',
 ];
+
+/* Redirections 4.14—5.0  */
+
+redirections.push(
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/user-manual/agent/agent-management/listing/index.html',
+    '5.0': '/user-manual/agent/agent-management/list-agents.html',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/user-manual/agent/agent-management/listing/wazuh-dashboard.html',
+    '5.0': '/user-manual/agent/agent-management/list-agents.html#list-agents-using-the-wazuh-dashboard',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/user-manual/agent/agent-management/remove-agents/index.html',
+    '5.0': '/user-manual/agent/agent-management/remove-agents.html',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/user-manual/agent/agent-management/remove-agents/restful-api-remove.html',
+    '5.0': '/user-manual/agent/agent-management/remove-agents.html#remove-agents-using-the-wazuh-manager-api',
+  }
+);
 
 /* Pages no longer available in 5.0 */
 
@@ -101,6 +127,11 @@ removedUrls['5.0'] = [
   '/user-manual/reference/tools/update_ruleset.html',
   '/user-manual/reference/tools/wazuh-regex.html',
   '/user-manual/reference/tools/agent-auth.html',
+  '/user-manual/agent/agent-management/listing/index.html',
+  '/user-manual/agent/agent-management/listing/using-command-line.html',
+  '/user-manual/agent/agent-management/listing/wazuh-dashboard.html',
+  '/user-manual/agent/agent-management/remove-agents/index.html',
+  '/user-manual/agent/agent-management/remove-agents/remove-using-the-dashboard.html',
   '/user-manual/agent/agent-management/remove-agents/remove.html',
   '/user-manual/reference/ossec-conf/fluent-forward.html',
   '/user-manual/agent/agent-enrollment/deployment-variables/deployment-variables-aix.html',
