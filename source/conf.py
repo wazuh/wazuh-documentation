@@ -110,7 +110,6 @@ exclude_patterns = [
     'user-manual/agent/agent-management/remote-upgrading/**',
     'user-manual/agent/agent-management/anti-tampering.rst',
     'user-manual/agent/agent-management/key-request.rst',
-    'user-manual/agent/agent-management/listing/using-command-line.rst',
     'user-manual/agent/agent-management/antiflooding.rst',
     'user-manual/agent/agent-management/labels.rst',
     'user-manual/reference/**',

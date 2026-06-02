@@ -1,7 +1,28 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: The GET /agents request returns a list of available Wazuh agents. Learn more in this section of the documentation.
+   :description: There are different ways to list the Wazuh agents enrolled in the Wazuh manager. Learn more in this section of the documentation.
+
+List agents
+===========
+
+There are different ways to list the Wazuh agents enrolled in the Wazuh manager. These include querying the Wazuh manager API and using the Wazuh dashboard.
+
+.. contents::
+   :local:
+   :depth: 1
+   :backlinks: none
+
+List agents using the Wazuh dashboard
+-------------------------------------
+
+You can list and view basic information about all enrolled agents by navigating to **Agents management** > **Summary** in the Wazuh dashboard:
+
+.. thumbnail:: /images/wazuh-dashboard/agent-management/agents-preview.png
+   :title: Listing agents from the Wazuh dashboard
+   :alt: Listing agents from the Wazuh dashboard
+   :align: center
+   :width: 80%
 
 List agents using the Wazuh manager API
 ---------------------------------------

@@ -39,4 +39,4 @@ After enrollment, the Wazuh manager stores information about the Wazuh agent and
 Removal
 -------
 
-The Wazuh agent life cycle ends when you remove the Wazuh agent from the Wazuh manager. You can remove a Wazuh agent through the :doc:`Wazuh dashboard <../agent-management/remove-agents/index>` or the :doc:`Wazuh manager API <../agent-management/remove-agents/restful-api-remove>`.
+The Wazuh agent life cycle ends when you remove the Wazuh agent from the Wazuh manager. You can remove a Wazuh agent through the :ref:`Wazuh dashboard <remove_agents_dashboard>` or the :ref:`Wazuh manager API <remove_agents_api>`.

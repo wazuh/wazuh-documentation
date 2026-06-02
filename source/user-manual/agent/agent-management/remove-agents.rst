@@ -1,7 +1,37 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: This section includes examples of using the DELETE /agents request to delete agents.
+   :description: There are different ways to remove a Wazuh agent that is enrolled in the Wazuh manager. Learn more in this section of the documentation.
+
+Removing agents
+===============
+
+There are different ways to remove a Wazuh agent that is enrolled in the Wazuh manager. This includes using the Wazuh dashboard or querying the Wazuh manager API.
+
+.. contents::
+   :local:
+   :depth: 2
+   :backlinks: none
+
+.. _remove_agents_dashboard:
+
+Remove agents using the Wazuh dashboard
+---------------------------------------
+
+You can remove Wazuh agents directly from the Wazuh dashboard.
+
+#. In the Wazuh dashboard, go to **Agents management** > **Endpoints**.
+#. In the **Actions** column, click the selection icon for the Wazuh agent that you want to remove.
+#. Select **Remove**.
+#. When prompted, click **Remove**.
+
+.. thumbnail:: /images/manual/agent/remove-agent-dashboard.gif
+   :title: Remove agent from the Wazuh dashboard
+   :alt: Remove agent from the Wazuh dashboard
+   :align: center
+   :width: 80%
+
+.. _remove_agents_api:
 
 Remove agents using the Wazuh manager API
 -----------------------------------------
