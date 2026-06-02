@@ -104,7 +104,6 @@ newUrls['4.14'] = [
   '/user-manual/api/rbac/configuration.html',
   '/user-manual/wazuh-server-cluster/adding-new-server-nodes/all-in-one-deployment.html',
   '/user-manual/wazuh-server-cluster/adding-new-server-nodes/distributed-deployment.html',
-  '/user-manual/wazuh-server-cluster/security-requirements.html',
 ]
 
 /* Redirections 4.13—4.14  */
