@@ -13,7 +13,7 @@ Wazuh agent administration involves the management of the enrolled Wazuh agents.
 
    query-configuration
    grouping-agents
-   listing
+   list-agents
    remove-agents
 ..
    anti-tampering
