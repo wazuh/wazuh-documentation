@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Added LLMs-ready documentation. ([#9218](https://github.com/wazuh/wazuh-documentation/pull/9218))
 - **Post-release**: Added note about Linux and macOS WPK ARM packages in 4.13 and earlier versions. ([#9225](https://github.com/wazuh/wazuh-documentation/pull/9225)) ([#9293](https://github.com/wazuh/wazuh-documentation/pull/9293))
 - **Post-release**: Added *Prerequisites* section to *Install Wazuh Agent* documentation. ([#9279](https://github.com/wazuh/wazuh-documentation/pull/9279))
+- **Post-release**: Backport: Added the *System requirements* section to the *Wazuh server cluster* documentation. ([#9670](https://github.com/wazuh/wazuh-documentation/pull/9670))
 
 ### Changed
 
