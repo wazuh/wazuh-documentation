@@ -49,10 +49,6 @@ The Wazuh VM is configured with these specifications by default:
 | |OVA_COMPONENT|  |       8        |      16      |     50       |
 +------------------+----------------+--------------+--------------+
 
-.. warning::
-
-   Change the VirtualBox system setting to 8 CPU cores and 16 GB RAM.
-
 The hardware configuration can be modified depending on the number of protected endpoints and indexed alert data. For more information about requirements, see :doc:`/quickstart`.
 
 Import and access the virtual machine
