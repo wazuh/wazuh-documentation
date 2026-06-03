@@ -1,14 +1,14 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Wazuh provides a pre-built virtual machine image in Open Virtual Appliance (OVA) format.  It includes the Amazon Linux 2023 operating system and the Wazuh central components.
+   :description: Wazuh provides a pre-built virtual machine (VM) image in Open Virtual Appliance (OVA) format.  It includes the Amazon Linux 2023 operating system and the Wazuh central components.
 
 Virtual machine (VM)
 ====================
 
-Wazuh provides a pre-built virtual machine image in Open Virtual Appliance (OVA) format. The ``.ova`` file contains a descriptor file (``.ovf``), which describes the structure and configuration of the virtual machine, as well as the virtual disks (``.vmdk``) required for its operation.
+Wazuh provides a pre-built virtual machine (VM) image in Open Virtual Appliance (OVA) format. The ``.ova`` file contains a descriptor file (``.ovf``), which describes the structure and configuration of the virtual machine, as well as the virtual disks (``.vmdk``) required for its operation.
 
-It includes the Amazon Linux 2023 operating system and the Wazuh components:
+It includes the Amazon Linux 2023 operating system and the Wazuh central components.
 
 -  Wazuh manager |WAZUH_CURRENT_OVA|-|WAZUH_CURRENT_OVA_REV|
 -  Wazuh indexer |WAZUH_CURRENT_OVA|-|WAZUH_CURRENT_OVA_REV|
@@ -21,7 +21,7 @@ You can import the Wazuh virtual machine image to VirtualBox or other OVA-compat
 
 Download the `virtual appliance (OVA) <https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR_OVA|/vm/wazuh-|WAZUH_CURRENT_OVA|-|WAZUH_CURRENT_OVA_REV|.ova>`__.
 
-.. |VM_AL_64_OVA| replace:: `wazuh-|WAZUH_CURRENT_OVA|-|WAZUH_CURRENT_OVA_REV|.ova <https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR_OVA|/vm/wazuh-|WAZUH_CURRENT_OVA|-|WAZUH_CURRENT_OVA_REV|.ova>`__ (`sha512 <https://www.google.com/url?q=https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR_OVA|/checksums/wazuh/|WAZUH_CURRENT_OVA|/wazuh-|WAZUH_CURRENT_OVA|-|WAZUH_CURRENT_OVA_REV|.ova.sha512>`__)
+.. |VM_AL_64_OVA| replace:: `wazuh-|WAZUH_CURRENT_OVA|-|WAZUH_CURRENT_OVA_REV|.ova <https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR_OVA|/vm/wazuh-|WAZUH_CURRENT_OVA|-|WAZUH_CURRENT_OVA_REV|.ova>`__ (`sha512 <https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR_OVA|/checksums/wazuh/|WAZUH_CURRENT_OVA|/wazuh-|WAZUH_CURRENT_OVA|-|WAZUH_CURRENT_OVA_REV|.ova.sha512>`__)
 .. |WAZUH_OVA_VERSION| replace:: |WAZUH_CURRENT_OVA|-|WAZUH_CURRENT_OVA_REV|
 
 +-------------------+-----------------------------------+--------------+----------------------+-----------------+
@@ -46,19 +46,15 @@ The Wazuh VM is configured with these specifications by default:
 +------------------+----------------+--------------+--------------+
 |    Component     |   CPU (cores)  |   RAM (GB)   | Storage (GB) |
 +==================+================+==============+==============+
-| |OVA_COMPONENT|  |       4        |      8       |     50       |
+| |OVA_COMPONENT|  |       8        |      16      |     50       |
 +------------------+----------------+--------------+--------------+
-
-.. warning::
-
-   Change the VirtualBox system setting to 8 CPU cores and 16 GB RAM.
 
 The hardware configuration can be modified depending on the number of protected endpoints and indexed alert data. For more information about requirements, see :doc:`/quickstart`.
 
 Import and access the virtual machine
 -------------------------------------
 
-#. Import the `wazuh-|WAZUH_CURRENT_OVA|-|WAZUH_CURRENT_OVA_REV|.ova <https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR_OVA|/vm/wazuh-|WAZUH_CURRENT_OVA|-|WAZUH_CURRENT_OVA_REV|.ova>`_ file to your virtualization platform.
+#. Download and import the `wazuh-|WAZUH_CURRENT_OVA|-|WAZUH_CURRENT_OVA_REV|.ova <https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR_OVA|/vm/wazuh-|WAZUH_CURRENT_OVA|-|WAZUH_CURRENT_OVA_REV|.ova>`_ file to your virtualization platform.
 
 #. If you use VirtualBox, set the Graphics Controller to ``VMSVGA``. Other controllers can freeze the VM window.
 
@@ -78,12 +74,12 @@ Import and access the virtual machine
 
    .. code-block:: console
 
-      sudo -i
+      # sudo -i
 
 Access the Wazuh dashboard
 --------------------------
 
-It might take a few seconds to minutes for the Wazuh dashboard to complete initialization. Find ``<WAZUH_MANAGER_IP>`` by typing the following command in the VM:
+It might take a few seconds to minutes for the Wazuh dashboard to complete initialization. Find the ``<WAZUH_MANAGER_IP>`` by typing the following command in the VM:
 
 .. code-block:: console
 
