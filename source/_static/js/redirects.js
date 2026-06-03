@@ -177,6 +177,7 @@ newUrls['4.14'] = [
   '/user-manual/user-administration/single-sign-on/okta.html',
   '/user-manual/user-administration/single-sign-on/onelogin.html',
   '/user-manual/user-administration/single-sign-on/pingone.html',
+  '/user-manual/user-administration/single-sign-on/authentik.html',
   '/user-manual/api/requests-responses.html',
   '/user-manual/api/api-examples.html',
   '/user-manual/api/rbac/configuration.html',

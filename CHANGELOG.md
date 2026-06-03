@@ -45,6 +45,11 @@ All notable changes to this project will be documented in this file.
 
 ## [v4.14.5]
 
+### Added
+
+- Added authentik to the Single Sign-On documentation. ([#9656](https://github.com/wazuh/wazuh-documentation/pull/9656))
+- **Post-release**: Added the *System requirements* section to the *Wazuh server cluster* documentation. ([#9668](https://github.com/wazuh/wazuh-documentation/pull/9668))
+
 ### Changed
 
 - **Post-release**: Updated the *User administration* index page. ([#9528](https://github.com/wazuh/wazuh-documentation/pull/9528))
@@ -55,6 +60,7 @@ All notable changes to this project will be documented in this file.
 
 - **Post-release**: Fixed the Apache ``access_log`` path on the Windows endpoint in the *Blocking a known malicious actor* section of the *Proof of Concept guide*. ([#9530](https://github.com/wazuh/wazuh-documentation/pull/9530))
 - **Post-release**: Fixed the ``opensearch_dashboards.yml`` configuration for Google Workspace in the *Single Sign-On* documentation. ([#9586](https://github.com/wazuh/wazuh-documentation/pull/9586))
+- **Post-release**: Fixed the ``cluster`` reference values in the *ossec.conf* documentation. ([#9666](https://github.com/wazuh/wazuh-documentation/pull/9666))
 
 ## [v4.14.4]
 
