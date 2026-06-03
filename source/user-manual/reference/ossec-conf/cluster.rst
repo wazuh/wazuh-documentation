@@ -87,11 +87,11 @@ Defines the key used to encrypt the communication between the nodes. This key mu
 .. note::
 	This key must be the same for all of the cluster nodes.
 
-+--------------------+---------------------------------------------+
-| **Default value**  | n/a                                         |
-+--------------------+---------------------------------------------+
-| **Allowed values** | Any alphanumeric string of 32 characters.   |
-+--------------------+---------------------------------------------+
++--------------------+---------------------------------------------------+
+| **Default value**  | n/a                                               |
++--------------------+---------------------------------------------------+
+| **Allowed values** | Letters, digits, and underscores (32 characters). |
++--------------------+---------------------------------------------------+
 
 .. _cluster_port:
 
@@ -100,11 +100,11 @@ port
 
 Specifies the port to use for the cluster communications.
 
-+--------------------+----------------------------------+
-| **Default value**  | 1516                             |
-+--------------------+----------------------------------+
-| **Allowed values** | Any port number from 1 to 65535. |
-+--------------------+----------------------------------+
++--------------------+---------------+
+| **Default value**  | 1516          |
++--------------------+---------------+
+| **Allowed values** | 1025 to 65534 |
++--------------------+---------------+
 
 .. _cluster_bind_addr:
 
@@ -114,7 +114,7 @@ bind_addr
 Specifies which IP address will communicate with the cluster when the node has multiple network interfaces.
 
 +--------------------+-----------------------+
-| **Default value**  | 0.0.0.0               |
+| **Default value**  | 127.0.0.1             |
 +--------------------+-----------------------+
 | **Allowed values** | Any valid IP address. |
 +--------------------+-----------------------+
@@ -127,7 +127,7 @@ nodes
 Lists all master nodes in the cluster using the ``<node>`` tag for each one.
 
 +--------------------+--------------------------------------------------+
-| **Default value**  | NODE_IP                                          |
+| **Default value**  | 127.0.0.1                                        |
 +--------------------+--------------------------------------------------+
 | **Allowed values** | Any valid address (IP or DNS) of a cluster node. |
 +--------------------+--------------------------------------------------+

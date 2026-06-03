@@ -47,3 +47,4 @@ Identity Providers
    jumpcloud
    onelogin
    keycloak
+   authentik

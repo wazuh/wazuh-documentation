@@ -14,6 +14,7 @@ The Wazuh server cluster consists of multiple Wazuh server nodes in a distribute
       :titlesonly:
 
       architecture-overview
+      security-requirements
       types-of-nodes
       how-server-cluster-works
       cluster-nodes-configuration
