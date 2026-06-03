@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 - Added authentik to the Single Sign-On documentation. ([#9656](https://github.com/wazuh/wazuh-documentation/pull/9656))
+- **Post-release**: Added the *System requirements* section to the *Wazuh server cluster* documentation. ([#9668](https://github.com/wazuh/wazuh-documentation/pull/9668))
 
 ### Changed
 
