@@ -23,6 +23,7 @@ All notable changes to this project will be documented in this file.
 - Updated the *Installation guide*. ([#9545](https://github.com/wazuh/wazuh-documentation/pull/9545))
 - Updated the *Installation alternatives* documentation. ([#9587](https://github.com/wazuh/wazuh-documentation/pull/9587)) ([#9576](https://github.com/wazuh/wazuh-documentation/pull/9576)) ([#9589](https://github.com/wazuh/wazuh-documentation/pull/9589)) ([#9591](https://github.com/wazuh/wazuh-documentation/pull/9591)) ([#9591](https://github.com/wazuh/wazuh-documentation/pull/9595)) ([#9597](https://github.com/wazuh/wazuh-documentation/pull/9597)) ([#9606](https://github.com/wazuh/wazuh-documentation/pull/9606)) ([#9607](https://github.com/wazuh/wazuh-documentation/pull/9607)) ([#9674](https://github.com/wazuh/wazuh-documentation/pull/9674))
 - Updated the *Wazuh agent* documentation in *User manual*. ([#9665](https://github.com/wazuh/wazuh-documentation/pull/9665)) ([#9669](https://github.com/wazuh/wazuh-documentation/pull/9669))
+- Updated the *Quickstart* documentation. ([#9680](https://github.com/wazuh/wazuh-documentation/pull/9680))
 
 ### Removed
 
