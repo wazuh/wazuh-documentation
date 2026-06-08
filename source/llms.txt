@@ -48,7 +48,7 @@ Learn the fundamentals of the Wazuh platform.
 Install, configure, and maintain the Wazuh platform in your environment.
 
 ### Installation & Deployment:
-Step-by-step guides for installing Wazuh central components and agents across various operating systems and cloud environments[citation:2].
+Step-by-step guides for installing Wazuh central components and agents across various operating systems and cloud environments.
 
 - **[Quickstart](https://documentation.wazuh.com/current/quickstart.md)** The fastest way to perform an all-in-one installation of Wazuh central components on a single host.
 - **[Installation Guide](https://documentation.wazuh.com/current/installation-guide/index.md)** Central hub for deploying all Wazuh components, including indexer, server, dashboard, and agent, on single or multiple hosts.
@@ -150,7 +150,7 @@ Wazuh maps security alerts to specific regulatory frameworks to simplify complia
 
 - **[Regulatory Compliance](https://documentation.wazuh.com/current/compliance/index.md)** Use Wazuh to help meet various compliance requirements.
 - **[PCI DSS Compliance](https://documentation.wazuh.com/current/compliance/pci-dss/index.md)** Map Wazuh capabilities to PCI DSS requirements.
-- **[GDPR Compliance](https://docs.wazuh.com/current/compliance/gdpr/index.md)** Map Wazuh capabilities to GDPR requirements.
+- **[GDPR Compliance](https://documentation.wazuh.com/current/compliance/gdpr/index.md)** Map Wazuh capabilities to GDPR requirements.
 - **[HIPAA Compliance](https://documentation.wazuh.com/current/compliance/hipaa/index.md)** Map Wazuh capabilities to HIPAA requirements.
 - **[NIST 800-53 Compliance](https://documentation.wazuh.com/current/compliance/nist/index.md)** Map Wazuh capabilities to NIST 800-53 controls.
 - **[TSC Compliance](https://documentation.wazuh.com/current/compliance/tsc/index.md)** Map Wazuh capabilities to Trust Services Criteria.
