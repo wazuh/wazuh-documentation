@@ -157,6 +157,7 @@ removedUrls['5.0'] = [
 /* Pages added in 4.14 */
 
 newUrls['4.14'] = [
+  '/release-notes/release-4-14-7.html',
   '/release-notes/release-4-14-6.html',
   '/release-notes/release-4-14-5.html',
   '/release-notes/release-4-14-4.html',
