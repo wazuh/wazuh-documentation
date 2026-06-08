@@ -45,14 +45,10 @@ Generating the SSL certificates
         indexer:
           - name: indexer
             ip: "<indexer-node-ip>"
-          #  dns: "<indexer-node-dns>"
           #- name: indexer-2
           #  ip: "<indexer-node-ip>"
-          #  dns: "<indexer-node-dns>"
           #- name: indexer-3
           #  ip: "<indexer-node-ip>"
-          #  dns:
-          #    - "<indexer-node-dns>"
 
         # Wazuh manager nodes
         # If there is more than one Wazuh manager
@@ -60,22 +56,18 @@ Generating the SSL certificates
         manager:
           - name: manager
             ip: "<wazuh-manager-ip>"
-          #  dns: "<wazuh-manager-dns>"
           #  node_type: master
           #- name: manager-2
-          #  dns: "<wazuh-manager-dns>"
+          #  ip: "<wazuh-manager-ip>"
           #  node_type: worker
           #- name: manager-3
           #  ip: "<wazuh-manager-ip>"
-          #  dns:
-          #    - "<wazuh-manager-dns>"
           #  node_type: worker
 
         # Wazuh dashboard nodes
         dashboard:
           - name: dashboard
             ip: "<dashboard-node-ip>"
-          #  dns: "<dashboard-node-dns>"
 
 
    To learn more about how to create and configure the certificates, see the `Certificates deployment </user-manual/wazuh-indexer-cluster/certificate-deployment>`__ section.
@@ -93,7 +85,7 @@ Generating the SSL certificates
       # tar -cvf ./wazuh-certificates.tar -C ./wazuh-certificates/ .
       # rm -rf ./wazuh-certificates
 
-#. Copy the ``wazuh-certificates.tar`` file to all the nodes, including the Wazuh indexer, Wazuh manager, and Wazuh dashboard nodes. This can be done by using the ``scp`` utility.
+#. Copy the ``wazuh-certificates.tar`` file to all the nodes, including the Wazuh indexer, Wazuh manager, and Wazuh dashboard nodes. You can use the ``scp`` utility or any other secure file transfer method available in your environment.
 
 Wazuh indexer nodes installation
 --------------------------------
@@ -208,7 +200,7 @@ Testing the cluster installation
         "cluster_uuid" : "rM3vIXsSS0qgW0fkwHGolg",
         "version" : {
           "distribution" : "opensearch",
-          "number" : "3.5.0",
+          "number" : "3.6.0",
           "build_type" : "rpm",
           "build_hash" : "0688bb0c0d4d2384772311ab88edcd2a18a67774",
           "build_date" : "2026-04-09T12:10:10.126706914Z",

@@ -125,7 +125,7 @@ Starting the Wazuh dashboard service
 
    .. include:: /_templates/installations/dashboard/enable_dashboard.rst
 
-#. Access the Wazuh web interface with your ``admin`` user credentials. This is the default administrator account for the Wazuh indexer and it allows you to access the Wazuh dashboard.
+#. After deployment, the web interface may take one to two minutes to become available while the Wazuh services finish initializing. Access the Wazuh web interface with your ``admin`` user credentials. This is the default administrator account for the Wazuh indexer and it allows you to access the Wazuh dashboard.
 
    - **URL**: ``https://<WAZUH_DASHBOARD_IP_ADDRESS>``
    - **Username**: ``admin``
