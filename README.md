@@ -1,39 +1,40 @@
 # Wazuh documentation
 
-[![Slack](https://img.shields.io/badge/slack-join-blue.svg)](https://wazuh.com/community/join-us-on-slack/)
-[![Mailing list](https://img.shields.io/badge/email-join-blue.svg)](https://groups.google.com/forum/#!forum/wazuh)
-[![Documentation](https://img.shields.io/badge/docs-view-green.svg)](https://documentation.wazuh.com/)
-[![Website](https://img.shields.io/badge/web-view-green.svg)](https://wazuh.com/)
+Wazuh is a free and open source security platform that unifies XDR and SIEM capabilities. It protects workloads across on-premises, virtualized, containerized, and cloud-based environments.
 
-Wazuh is a free, open source and enterprise-ready security monitoring solution for threat detection, integrity monitoring, incident response and compliance.
+Wazuh helps organizations and individuals to protect their data assets against security threats. It is widely used by thousands of organizations worldwide, from small businesses to large enterprises.
 
-The online documentation for this project is available in this repository. Members of the Wazuh team and community users contribute to its development and daily improvement.
+This repository contains the source files for the official Wazuh documentation, available at [documentation.wazuh.com](https://documentation.wazuh.com).
 
-## Online documentation
+## Branches
 
-- [Current version (4.x)](https://documentation.wazuh.com/current/)
-- [Legacy version (2.1)](https://documentation.wazuh.com/2.1/)
+| Branch | Content |
+|--------|---------|
+| `main` | Documentation for the [latest development version](https://github.com/wazuh/wazuh-documentation/blob/main/source/_variables/settings.py#L24) |
+| `4.14`, `4.13`, `4.12`, ..., `2.1` | Documentation for each stable release |
 
-## Contribute to this project
+If you are looking for the documentation source of a specific Wazuh release, switch to the corresponding version branch.
 
-If you want to contribute to this documentation, please read our [CONTRIBUTING](CONTRIBUTING.md) file to learn more about how to deploy a development environment and submit a pull request.
+## Built with
 
-You can also join our [users mailing list](https://groups.google.com/d/forum/wazuh), by sending an email to `wazuh+subscribe@googlegroups.com`, to ask questions and participate in discussions.
+- [Sphinx](https://www.sphinx-doc.org/) — documentation generator
+- [reStructuredText](https://docutils.sourceforge.io/rst.html) — markup language
+- [Pagefind](https://pagefind.app/) — optional alternative search engine
 
-## Software and libraries used
+## Contributing
 
-- [Python](https://www.python.org/) 3.10+
-- [Sphinx](http://www.sphinx-doc.org/) 7.2.6
-- [sphinx-tabs](https://github.com/djungelorm/sphinx-tabs) 3.4.5
-- [jsmin](https://github.com/tikitu/jsmin) 3.0.1
-- [sphinx-reredirects](https://gitlab.com/documatt/sphinx-reredirects) 0.1.5
+Read [CONTRIBUTING.md](CONTRIBUTING.md) to set up a local Python environment, build the docs with `make html`, and submit a pull request.
 
-### Optional software to run the alternative Pagefind search engine
+To report a bug or typo in the documentation, open an issue in this repository.
 
-- [NodeJS](https://nodejs.org/) 16+
+If you have found a problem with Wazuh itself rather than its documentation, please report it in the [appropriate component repository](https://github.com/wazuh).
 
-## Copyright & License
+## Community
 
-Copyright © 2023 Wazuh, Inc.
+Join the conversation and get help at [wazuh.com/community](https://wazuh.com/community/).
 
-Wazuh is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+## License
+
+Copyright (C) 2015, Wazuh, Inc.
+
+This documentation is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 2 of the License, or (at your option) any later version.
