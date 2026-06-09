@@ -162,11 +162,6 @@ Starting the service
 
 Repeat this stage of the installation process for every Wazuh indexer node in your multi-node cluster. Then proceed with initializing your single-node or multi-node cluster in the next stage.
 
-Disable Wazuh updates
----------------------
-
-.. include:: /_templates/installations/disable-wazuh-updates.rst
-
 Cluster initialization
 ----------------------
 
@@ -225,6 +220,11 @@ Testing the cluster installation
 
       ip             heap.percent ram.percent cpu load_1m load_5m load_15m node.role node.roles                                        cluster_manager name
       192.168.33.147           33          69  17    0.09    0.61     0.50 dimr      cluster_manager,data,ingest,remote_cluster_client *               indexer
+
+Disable Wazuh updates
+---------------------
+
+.. include:: /_templates/installations/disable-wazuh-updates.rst
 
 Next steps
 ----------
