@@ -22,10 +22,10 @@ The following Wazuh capabilities collect and store information as global state d
 -  File Integrity Monitoring (FIM)
 -  Security Configuration Assessment (SCA)
 
-System inventory (IT Hygiene)
+System inventory (IT hygiene)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-System inventory provides visibility into the hardware, software, network, and operating system information of monitored endpoints. It collects information such as installed software packages, running processes, open ports, network interfaces, users, groups, services, browser extensions, operating system details, and hardware characteristics.
+System Inventory provides visibility into the hardware, software, network, and operating system information of monitored endpoints. It collects information such as installed software packages, running processes, open ports, network interfaces, users, groups, services, browser extensions, operating system details, and hardware characteristics.
 
 Wazuh agents use the Syscollector module to periodically collect inventory information from monitored endpoints. The collected data is sent to the Wazuh manager, where it is processed and synchronized to the Wazuh indexer. The inventory information is stored as global state data in dedicated ``wazuh-states-inventory-*`` indices and can be queried and visualized from the Wazuh dashboard.
 
@@ -66,7 +66,7 @@ The following index patterns store system inventory data:
    * - ``wazuh-states-inventory-users-*``
      - Stores information about users configured on monitored endpoints.
 
-Navigate to **Security operations** > **IT Hygiene** on the Wazuh dashboard to view system inventory information, including hardware, operating system, software, network, user, and service data collected from monitored endpoints.
+Navigate to **Security operation** > **IT Hygiene** on the Wazuh dashboard to view system inventory information, including hardware, operating system, software, network, user, and service data collected from monitored endpoints.
 
 .. thumbnail:: /images/wazuh-dashboard/global-queries/system-inventory.png
    :align: center
@@ -83,7 +83,7 @@ The Wazuh agent collects inventory data such as installed packages, operating sy
 
 The Vulnerability Scanner retrieves CVE feeds from the Wazuh indexer through the Content Manager and Indexer Connector. It then correlates the vulnerability information with the inventory data collected from monitored endpoints to identify affected systems and software packages. Vulnerability state information is stored as global state data in the ``wazuh-states-vulnerabilities-*`` index and can be queried and visualized from the Wazuh dashboard.
 
-The following index pattern stores vulnerability detection data:
+The following index pattern stores Vulnerability Detection data:
 
 .. list-table::
    :header-rows: 1
@@ -134,8 +134,8 @@ Navigate to **Endpoint Security** > **File Integrity Monitoring** on the Wazuh d
    :title: File integrity monitoring on the Wazuh dashboard
    :alt: File integrity monitoring on the Wazuh dashboard
 
-Security Configuration Assessment (SCA)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Security configurations assessment (SCA)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Security Configuration Assessment (SCA) provides visibility into the security and compliance posture of monitored endpoints. It evaluates endpoint configurations against predefined security policies and benchmarks, helping organizations identify misconfigurations, verify compliance requirements, and monitor adherence to security best practices.
 
@@ -154,7 +154,7 @@ The following index pattern stores Security Configuration Assessment data:
    * - ``wazuh-states-sca-*``
      - Stores Security Configuration Assessment (SCA) scan results and compliance evaluation data.
 
-Navigate to **Endpoint Security** > **Configuration Assessment** on the Wazuh dashboard to view and query security configuration assessment (SCA) data collected from monitored endpoints.
+Navigate to **Endpoint Security** > **File Integrity Monitoring** on the Wazuh dashboard to view and query security configuration assessment (SCA) data collected from monitored endpoints.
 
 .. thumbnail:: /images/wazuh-dashboard/global-queries/security-configuration-assessment.png
    :align: center
