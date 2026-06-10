@@ -78,6 +78,8 @@ The Normalization section manages the following components:
 - Decoder
 - Key-Value database (KVDB)
 
+.. _dashboard_configurations_integration:
+
 Integration
 ~~~~~~~~~~~
 

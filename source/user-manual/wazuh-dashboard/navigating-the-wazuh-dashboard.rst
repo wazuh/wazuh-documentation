@@ -155,7 +155,7 @@ Wazuh **Security Analytics** section provides options to manage the full lifecyc
 Integrations
 ~~~~~~~~~~~~
 
-This section allows users to view and manage integrations available across the active spaces (Draft, Test, Custom, and Standard). An integration is the top-level organizational unit in Security Analytics that groups related decoders and rules for a specific log source or use case. This section displays all integrations available across the active spaces, along with their status and associated metadata.
+This section allows users to view and manage integrations available across the active spaces (Draft, Test, Custom, and Standard). An :ref:`integration <dashboard_configurations_integration>` is the top-level organizational unit in Security Analytics that groups related decoders and rules for a specific log source or use case. This section displays all integrations available across the active spaces, along with their status and associated metadata.
 
 .. thumbnail:: /images/wazuh-dashboard/navigating/integrations.png
    :align: center
@@ -276,7 +276,7 @@ Users can view the status of different Wazuh daemons, the overall Wazuh agent st
 Logs
 ^^^^
 
-Logs stored in /var/wazuh-manager/logs/wazuh-manager.log in the Wazuh manager are shown in the section below.
+Logs stored in ``/var/wazuh-manager/logs/wazuh-manager.log`` in the Wazuh manager are shown in the section below.
 
 .. thumbnail:: /images/wazuh-dashboard/navigating/logs.png
    :align: center
@@ -287,7 +287,7 @@ Logs stored in /var/wazuh-manager/logs/wazuh-manager.log in the Wazuh manager ar
 Settings
 ^^^^^^^^
 
-Users can modify the Wazuh manager configuration file located at /var/wazuh-manager/etc/ossec.conf from the Wazuh dashboard.
+Users can modify the Wazuh manager configuration file located at ``/var/wazuh-manager/etc/ossec.conf`` from the Wazuh dashboard.
 
 .. thumbnail:: /images/wazuh-dashboard/navigating/settings.png
    :align: center
@@ -385,8 +385,8 @@ This section includes the configuration for access to Wazuh resources based on t
    :title: Security - Indexer
    :alt: Security - Indexer
 
-Dev Tools (Indexer)
-^^^^^^^^^^^^^^^^^^^
+Dev Tools
+^^^^^^^^^
 
 This section allows users to send queries using the Wazuh indexer API. It can be used for indexer operations such as cluster management, querying index data, troubleshooting issues, and debugging errors.
 
@@ -396,10 +396,10 @@ This section allows users to send queries using the Wazuh indexer API. It can be
    :title: Dev Tools - Indexer
    :alt: Dev Tools - Indexer
 
-Settings (Indexer)
-^^^^^^^^^^^^^^^^^^
+Settings
+^^^^^^^^
 
-This section allows you to enable or disable indexing of raw events into the wazuh-events-raw-v5 indices. The wazuh-events-raw-v5\* index stores all events received from the Wazuh manager regardless of whether they trigger an alert. In Wazuh 4.x, similar data was stored in the wazuh-archives-\* indices.
+This section allows you to enable or disable indexing of raw events into the ``wazuh-events-raw-v5`` indices. The ``wazuh-events-raw-v5\*`` index stores all events received from the Wazuh manager regardless of whether they trigger an alert. In Wazuh 4.x, similar data was stored in the ``wazuh-archives-\*`` indices.
 
 .. thumbnail:: /images/wazuh-dashboard/navigating/settings-indexer.png
    :align: center
