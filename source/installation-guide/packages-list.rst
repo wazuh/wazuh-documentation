@@ -173,7 +173,7 @@ Windows
 macOS
 ^^^^^
 
-.. |macOS_intel_64| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_AGENT_CURRENT_REV|.intel64.pkg <https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/macos/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_AGENT_CURRENT_REV|.intel64.pkg>`__ (`sha512 <https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_AGENT_CURRENT_REV|.x86_64.pkg.sha512>`__)
+.. |macOS_intel_64| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_AGENT_CURRENT_REV|.intel64.pkg <https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/macos/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_AGENT_CURRENT_REV|.intel64.pkg>`__ (`sha512 <https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_AGENT_CURRENT_REV|.intel64.pkg.sha512>`__)
 .. |macOS_arm64| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_AGENT_CURRENT_REV|.arm64.pkg <https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/macos/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_AGENT_CURRENT_REV|.arm64.pkg>`__ (`sha512 <https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_AGENT_CURRENT_REV|.arm64.pkg.sha512>`__)
 
 +---------------+-------------------------+
