@@ -216,11 +216,6 @@ Starting the Filebeat service
 
 Your Wazuh server node is now successfully installed. Repeat this stage of the installation process for every Wazuh server node in your Wazuh cluster, then proceed with configuring the Wazuh cluster. If you want a Wazuh server single-node cluster, everything is set and you can proceed directly with :doc:`../wazuh-dashboard/step-by-step`.
 
-Disable Wazuh updates
----------------------
-
-.. include:: /_templates/installations/disable-wazuh-updates.rst
-
 Cluster configuration for multi-node deployment
 -----------------------------------------------
 
@@ -272,6 +267,11 @@ An example output of the command looks as follows:
    worker-node2 worker  4.12.0   10.0.0.5
 
 Note that ``10.0.0.3``, ``10.0.0.4``, ``10.0.0.5`` are example IPs.
+
+Disable Wazuh updates
+---------------------
+
+.. include:: /_templates/installations/disable-wazuh-updates.rst
 
 Next steps
 ----------
