@@ -120,11 +120,6 @@ Starting the Wazuh manager
 
 Your Wazuh manager node is now successfully installed. Repeat this stage of the installation process for every Wazuh manager node in your Wazuh cluster, then proceed with configuring the Wazuh cluster. If you want a Wazuh manager single-node cluster, everything is set and you can proceed directly with :doc:`../wazuh-dashboard/step-by-step`.
 
-Disable Wazuh updates
----------------------
-
-.. include:: /_templates/installations/disable-wazuh-updates.rst
-
 Cluster configuration for multi-node deployment
 -----------------------------------------------
 
@@ -176,6 +171,11 @@ An example output of the command looks as follows:
    worker-node2 worker  5.0.0    10.0.0.5
 
 Note that the IP addresses ``10.0.0.3``, ``10.0.0.4``, and ``10.0.0.5`` are used as examples.
+
+Disable Wazuh updates
+---------------------
+
+.. include:: /_templates/installations/disable-wazuh-updates.rst
 
 Next steps
 ----------

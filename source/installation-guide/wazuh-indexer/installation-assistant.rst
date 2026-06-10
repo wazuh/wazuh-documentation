@@ -43,14 +43,10 @@ Follow these steps on a Linux host to configure your Wazuh deployment, create SS
         indexer:
           - name: indexer
             ip: "<indexer-node-ip>"
-          #  dns: "<indexer-node-dns>"
           #- name: indexer-2
           #  ip: "<indexer-node-ip>"
-          #  dns: "<indexer-node-dns>"
           #- name: indexer-3
           #  ip: "<indexer-node-ip>"
-          #  dns:
-          #    - "<indexer-node-dns>"
 
         # Wazuh manager nodes
         # If there is more than one Wazuh manager
@@ -58,22 +54,18 @@ Follow these steps on a Linux host to configure your Wazuh deployment, create SS
         manager:
           - name: manager
             ip: "<wazuh-manager-ip>"
-          #  dns: "<wazuh-manager-dns>"
           #  node_type: master
           #- name: manager-2
-          #  dns: "<wazuh-manager-dns>"
+          #  ip: "<wazuh-manager-ip>"
           #  node_type: worker
           #- name: manager-3
           #  ip: "<wazuh-manager-ip>"
-          #  dns:
-          #    - "<wazuh-manager-dns>"
           #  node_type: worker
 
         # Wazuh dashboard nodes
         dashboard:
           - name: dashboard
             ip: "<dashboard-node-ip>"
-          #  dns: "<dashboard-node-dns>"
 
 #. Run the Wazuh installation assistant with the option ``--generate-config-files`` to generate the Wazuh cluster key, certificates, and passwords necessary for installation. You can find these files in ``./wazuh-install-files.tar``:
 
@@ -82,7 +74,7 @@ Follow these steps on a Linux host to configure your Wazuh deployment, create SS
         # bash wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh --generate-config-files
 
 
-#. Copy the ``wazuh-install-files.tar`` file from the host where you generated it to all the servers of the distributed deployment including the Wazuh manager, the Wazuh indexer, and the Wazuh dashboard nodes. This can be done by using the ``scp`` utility.
+#. Copy the ``wazuh-install-files.tar`` file from the host where you generated it to all the servers of the distributed deployment including the Wazuh manager, the Wazuh indexer, and the Wazuh dashboard nodes. You can use the ``scp`` utility or any other secure file transfer method available in your environment.
 
 
 Wazuh indexer node installation
@@ -141,7 +133,7 @@ Verify that the Wazuh indexer installed correctly and the Wazuh indexer cluster 
         "cluster_uuid" : "D8L8SfzhQeu3pzxWOKaV3w",
         "version" : {
           "distribution" : "opensearch",
-          "number" : "3.5.0",
+          "number" : "3.6.0",
           "build_type" : "deb",
           "build_hash" : "0688bb0c0d4d2384772311ab88edcd2a18a67774",
           "build_date" : "2026-04-09T12:03:20.584145075Z",

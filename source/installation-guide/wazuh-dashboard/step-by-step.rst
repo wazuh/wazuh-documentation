@@ -125,18 +125,13 @@ Starting the Wazuh dashboard service
 
    .. include:: /_templates/installations/dashboard/enable_dashboard.rst
 
-#. Access the Wazuh web interface with your ``admin`` user credentials. This is the default administrator account for the Wazuh indexer and it allows you to access the Wazuh dashboard.
+#. After deployment, the web interface may take one to two minutes to become available while the Wazuh services finish initializing. Access the Wazuh web interface with your ``admin`` user credentials. This is the default administrator account for the Wazuh indexer and it allows you to access the Wazuh dashboard.
 
    - **URL**: ``https://<WAZUH_DASHBOARD_IP_ADDRESS>``
    - **Username**: ``admin``
    - **Password**: ``admin``
 
    When you access the Wazuh dashboard for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser. For increased security, the ``root-ca.pem``  file previously generated can be imported to the certificate manager of the browser.
-
-Disable Wazuh updates
----------------------
-
-.. include:: /_templates/installations/disable-wazuh-updates.rst
 
 Securing your Wazuh installation
 --------------------------------
@@ -270,6 +265,11 @@ Select your deployment type and follow the instructions to change the default pa
 
          .. include:: /_templates/common/restart_dashboard.rst
 
+
+Disable Wazuh updates
+---------------------
+
+.. include:: /_templates/installations/disable-wazuh-updates.rst
 
 Next steps
 ----------
