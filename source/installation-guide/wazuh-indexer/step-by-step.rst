@@ -166,8 +166,6 @@ Starting the service
 
       .. include:: /_templates/installations/indexer/common/enable_indexer.rst
 
-Repeat this stage of the installation process for every Wazuh indexer node in your multi-node cluster. Then proceed with initializing your single-node or multi-node cluster in the next stage.
-
 Memory locking
 ^^^^^^^^^^^^^^
 
