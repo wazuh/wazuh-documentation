@@ -8,8 +8,8 @@ Troubleshooting
 
 This section highlights common installation or usage issues on the Wazuh dashboard and some basic steps to solve them.
 
-Wazuh server API seems to be down error
----------------------------------------
+Wazuh manager API seems to be down error
+----------------------------------------
 
 This issue means that your Wazuh manager API might be unavailable. Check the status of the Wazuh manager to see if the service is active:
 

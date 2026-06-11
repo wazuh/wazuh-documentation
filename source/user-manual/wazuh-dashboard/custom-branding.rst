@@ -10,13 +10,15 @@ Wazuh supports custom branding, allowing organizations to customize the appearan
 
 This section of the documentation covers the configuration of the following custom branding options in the Wazuh dashboard:
 
--  Loading logos
--  Wazuh dashboard home logo
--  Wazuh dashboard login
--  Application title and favicon
+-  :ref:`Loading logos <branding_loading_logos>`
+-  :ref:`Wazuh dashboard home logo <branding_home_logo>`
+-  :ref:`Wazuh dashboard login <branding_login>`
+-  :ref:`Application title and favicon <branding_title_favicon>`
 
 Custom logos on the Wazuh dashboard
 -----------------------------------
+
+.. _branding_loading_logos:
 
 Loading logos
 ^^^^^^^^^^^^^
@@ -44,6 +46,8 @@ Perform the following actions to customize the global *App loading* logo.
    .. code-block:: console
 
       # systemctl restart wazuh-dashboard
+
+.. _branding_home_logo:
 
 Wazuh dashboard home logo
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -77,6 +81,8 @@ Perform the following to customize the *Wazuh dashboard home* logo in the top he
    :width: 80%
    :title: Wazuh dashboard home logo
    :alt: Wazuh dashboard home logo
+
+.. _branding_login:
 
 Wazuh dashboard login
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -119,6 +125,8 @@ Perform the following actions to customize the Wazuh dashboard login page.
    :width: 80%
    :title: Wazuh dashboard login
    :alt: Wazuh dashboard login
+
+.. _branding_title_favicon:
 
 Application title and favicon
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
