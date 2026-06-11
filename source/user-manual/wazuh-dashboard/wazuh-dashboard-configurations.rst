@@ -20,15 +20,15 @@ Security analytics
 
 **Security Analytics** is a core section of the Wazuh dashboard that provides tools for managing the full lifecycle of log normalization and event-based detection. It centralizes the configuration of integrations, decoders, key-value databases (KVDBs), detection rules, and detectors through a unified interface powered by the Wazuh Engine.
 
-Integrations, decoders, KVDBs, rules, and detectors are organized into Spaces. The Draft, Test, and Custom spaces are user-managed and represent different stages of the content lifecycle, while the Standard space is read-only and contains the built-in content shipped with Wazuh.
+Integrations, decoders, KVDBs, rules, and detectors are organized into :ref:`Spaces <dashboard_configurations_space>`. The Draft, Test, and Custom spaces are user-managed and represent different stages of the content lifecycle, while the Standard space is read-only and contains the built-in content shipped with Wazuh.
 
 Security analytics is organized into sections that support different stages of the event processing workflow. The Normalization section focuses on parsing, enriching, and structuring raw log data. The Detection section manages the rules and detectors used to identify security findings from normalized events. The Wazuh Log test tool allows users to validate parsing and detection logic before deploying changes.
 
 The **Security Analytics** section on the Wazuh dashboard provides access to these sections:
 
-- Normalization: Provides visibility and management over the components that are used to parse, enrich, and structure raw log data before detection and analysis. Users can configure and manage integrations, decoders, and the Key-Value database (KVDB) used during log normalization.
-- Detection: Provides visibility and management over the rules responsible for generating findings from normalized events processed by the Wazuh Engine. Users can configure and manage detection rules and detectors for continuous threat monitoring.
-- Log test: Provides an interactive interface to validate that a specific log event is correctly parsed by active decoders and test detection logic directly from the Wazuh dashboard.
+-  :ref:`dashboard_configurations_normalization`: Provides visibility and management over the components that are used to parse, enrich, and structure raw log data before detection and analysis. Users can configure and manage integrations, decoders, and the Key-Value database (KVDB) used during log normalization.
+-  :ref:`dashboard_configurations_detection`: Provides visibility and management over the rules responsible for generating findings from normalized events processed by the Wazuh Engine. Users can configure and manage detection rules and detectors for continuous threat monitoring.
+-  :ref:`dashboard_configurations_logtest`: Provides an interactive interface to validate that a specific log event is correctly parsed by active decoders and test detection logic directly from the Wazuh dashboard.
 
 To view the **Security Analytics** dashboard, click ☰ to open the menu and navigate to **Security analytics** > **Overview**.
 
@@ -37,6 +37,8 @@ To view the **Security Analytics** dashboard, click ☰ to open the menu and nav
    :width: 80%
    :title: Security Analytics overview
    :alt: Security Analytics overview
+
+.. _dashboard_configurations_space:
 
 Space
 ^^^^^
@@ -67,6 +69,8 @@ Security analytics uses four spaces: **Draft**, **Test**, **Custom**, and **Stan
 
 User-managed content is typically promoted sequentially from Draft to Test and from Test to Custom after validation.
 
+.. _dashboard_configurations_normalization:
+
 Normalization
 ^^^^^^^^^^^^^
 
@@ -74,9 +78,10 @@ The **Normalization** section of **Security Analytics** in the Wazuh dashboard p
 
 The Normalization section manages the following components:
 
-- Integration
-- Decoder
-- Key-Value database (KVDB)
+.. contents::
+   :local:
+   :depth: 1
+   :backlinks: none
 
 .. _dashboard_configurations_integration:
 
@@ -95,6 +100,12 @@ In the **Security Analytics** section of the Wazuh dashboard, click **Overview**
 
 In the **Security Analytics** section of the Wazuh dashboard, navigate to **Overview** > **Draft** > **Actions** > **Create** to create custom integrations.
 
+.. thumbnail:: /images/wazuh-dashboard/configurations/create-integration1.png
+   :align: center
+   :width: 80%
+   :title: Create integration
+   :alt: Create integration
+
 .. thumbnail:: /images/wazuh-dashboard/configurations/create-integration.png
    :align: center
    :width: 80%
@@ -102,6 +113,12 @@ In the **Security Analytics** section of the Wazuh dashboard, navigate to **Over
    :alt: Create integration
 
 User-managed content is promoted sequentially from Draft to Test and from Test to Custom after validation. After creating an integration, click **Actions** at the top-right corner of the Wazuh dashboard and select **Promote**.
+
+.. thumbnail:: /images/wazuh-dashboard/configurations/create-integration-actions.png
+   :align: center
+   :width: 80%
+   :title: Create integration
+   :alt: Create integration
 
 .. note::
    When an integration is promoted from Draft to Test, or from Test to Custom, all of its associated decoders and rules are promoted together.
@@ -148,7 +165,7 @@ To create custom KVDBs, navigate to **Security Analytics** > **KVDB** > **Draft*
 
 - Select the **Integration**.
 - Set the KVDB's **Title** and **Author** name.
-- Under the **Content** section, set the key:value pair.
+- Under the **Content** section, set the ``key``:``value`` pair.
 - Click on **Create KVDB** to create the KVDB.
 
 .. thumbnail:: /images/wazuh-dashboard/configurations/create-kvdb.png
@@ -159,6 +176,8 @@ To create custom KVDBs, navigate to **Security Analytics** > **KVDB** > **Draft*
 
 After creating the custom KVDB, click **Actions** at the top-right corner of the Wazuh dashboard and select **Promote**. User-managed content is promoted sequentially from Draft to Test and from Test to Custom after validation.
 
+.. _dashboard_configurations_detection:
+
 Detection
 ^^^^^^^^^
 
@@ -166,8 +185,10 @@ The **Detection** section of **Security Analytics** on the Wazuh dashboard provi
 
 This Detection section provides the following components:
 
-- Detectors
-- Rules
+.. contents::
+   :local:
+   :depth: 1
+   :backlinks: none
 
 Detectors
 ~~~~~~~~~
@@ -186,11 +207,11 @@ In the **Security Analytics** section of the Wazuh dashboard, navigate to **Dete
 
 To create a Detector, navigate to **Detection** > **Detectors** > **Create detector** under the **Security Analytics** section of the Wazuh dashboard and perform the following actions:
 
-- Set the **Detector Name**.
-- Select a **Data source**.
-- Select an **Integration**. The Integrations are organized in different spaces, custom integrations are in the **Custom** space, and Wazuh out-of-the-box integrations are in the **Standard** space.
-- Select the rules that will be active for this detector under the **Selected rules** panel. Click **Manage** to add or remove individual rules.
-- Click on **Create detector** to create the detector.
+#. Set the **Detector Name**.
+#. Select a **Data source**.
+#. Select an **Integration**. The Integrations are organized in different spaces, custom integrations are in the **Custom** space, and Wazuh out-of-the-box integrations are in the **Standard** space.
+#. Select the rules that will be active for this detector under the **Selected rules** panel. Click **Manage** to add or remove individual rules.
+#. Click on **Create detector** to create the detector.
 
 .. thumbnail:: /images/wazuh-dashboard/configurations/create-detector.png
    :align: center
@@ -225,12 +246,14 @@ In the **Security Analytics** section of the Wazuh dashboard, navigate to **Dete
 
 After creating the custom rules, click **Actions** at the top-right corner of the Wazuh dashboard and select **Promote**. User-managed content is promoted sequentially from Draft to Test and from Test to Custom after validation.
 
+.. _dashboard_configurations_logtest:
+
 Log test
 ^^^^^^^^
 
 The Wazuh **Log Test** tool provides an interactive interface to validate that a specific log event is correctly parsed by active decoders and test detection logic directly from the Wazuh dashboard.
 
-In the **Security Analytics** section of the Wazuh dashboard, click **Log test** to access the log testing tool. For Integrations in the Test space, select the Test in **Space** field, provide the log event, and click **Test** to verify that events are correctly parsed.
+In the **Security Analytics** section of the Wazuh dashboard, click **Log test** to access the log testing tool. For Integrations in the Test space, select the ``Test`` in **Space** field, provide the log event, and click **Test** to verify that events are correctly parsed.
 
 .. thumbnail:: /images/wazuh-dashboard/configurations/log-test.png
    :align: center
@@ -243,7 +266,7 @@ Active Response
 
 The **Active Response** section on the Wazuh dashboard allows users to configure automated incident response actions triggered by security events detected by the Wazuh Engine. When specific rules are triggered, the Wazuh manager can execute scripts on monitored endpoints via the Wazuh agents to block IPs, disable accounts, or perform other security-relevant actions.
 
-Active response is implemented through wazuh-execd daemon, which receives commands from the Wazuh manager and executes response scripts on the Wazuh agent. It also manages the response lifecycle, including timeouts for stateful responses.
+Active response is implemented through ``wazuh-execd`` daemon, which receives commands from the Wazuh manager and executes response scripts on the Wazuh agent. It also manages the response lifecycle, including timeouts for stateful responses.
 
 To manage and configure the active response, click ☰ to open the menu and navigate to **Explore** > **Active Response**.
 
@@ -256,6 +279,12 @@ To manage and configure the active response, click ☰ to open the menu and navi
 Click on the **Create active response** button to create a new active response.
 
 .. thumbnail:: /images/wazuh-dashboard/configurations/create-active-response.png
+   :align: center
+   :width: 80%
+   :title: Create active response
+   :alt: Create active response
+
+.. thumbnail:: /images/wazuh-dashboard/configurations/create-active-response2.png
    :align: center
    :width: 80%
    :title: Create active response
@@ -279,42 +308,48 @@ Default notification channels
 
 When notifications are enabled in the Wazuh dashboard, healthcheck automatically creates the following channels if they do not already exist. All channels are initially disabled.
 
+.. |slack_channel| replace:: `incoming webhook <https://api.slack.com/messaging/webhooks>`__
+.. |pagerduty_channel| replace:: `Events v2 API <https://developer.pagerduty.com/docs/events-api-v2-overview#getting-started>`__
+.. |jira_channel| replace:: `REST API <https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/>`__
+.. |shuffle_channel| replace:: `webhook <https://shuffler.io/docs/triggers#webhook-example>`__
+
 +-------------+-------------------------------------------------------------------+
 | Channel     | Description                                                       |
 +=============+===================================================================+
-| Slack       | Sends notifications via Slack incoming webhook.                   |
+| Slack       | Sends notifications via Slack |slack_channel|.                    |
 +-------------+-------------------------------------------------------------------+
-| PagerDuty   | Sends alerts via the Events v2 API.                               |
+| PagerDuty   | Sends alerts via the |pagerduty_channel|.                         |
 +-------------+-------------------------------------------------------------------+
-| Jira        | Creates issues via the Jira REST API.                             |
+| Jira        | Creates issues via the Jira |jira_channel|.                       |
 +-------------+-------------------------------------------------------------------+
-| Shuffle     | Triggers Shuffle workflows via webhook.                           |
+| Shuffle     | Triggers Shuffle workflows via |shuffle_channel|.                 |
 +-------------+-------------------------------------------------------------------+
 
 All channels are stored as saved objects with names like Slack Channel, PagerDuty Channel, etc.
 
-.. warning::
+.. note::
+
    Treat these URLs and credentials as secrets. Review permissions and channel visibility before enabling it.
 
 Default sample monitors created
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If the **Alerts** functionality is available, the healthcheck mechanism attempts to create the following sample monitors on the Wazuh alerts index pattern (wazuh-events\*). Monitors will not be created if any required notification channel is missing:
+If the **Alerts** functionality is available, the healthcheck mechanism attempts to create the following sample monitors on the Wazuh alerts index pattern (``wazuh-events*``). Monitors will not be created if any required notification channel is missing:
 
 +--------------------------+----------------+-----------------------------------------------------+
 | Monitor name             | Target channel | Behavior                                            |
 +==========================+================+=====================================================+
-| Sample: Slack            | Slack channel  | Queries for alerts with rule.level > 3 and sends    |
-|                          |                | notifications to Slack.                             |
+| Sample: Slack            | Slack channel  | Queries for alerts with ``rule.level`` > ``3`` and  |
+|                          |                | sends notifications to Slack.                       |
 +--------------------------+----------------+-----------------------------------------------------+
-| Sample: PagerDuty        | PagerDuty      | Queries for alerts with rule.level > 3 and sends    |
-|                          | channel        | sample events to PagerDuty via Events v2.           |
+| Sample: PagerDuty        | PagerDuty      | Queries for alerts with ``rule.level`` > ``3`` and  |
+|                          | channel        | sends sample events to PagerDuty via Events v2.     |
 +--------------------------+----------------+-----------------------------------------------------+
-| Sample: Jira             | Jira channel   | Queries for alerts with rule.level > 3 trigger a    |
-|                          |                | mock issue creation.                                |
+| Sample: Jira             | Jira channel   | Queries for alerts with ``rule.level`` > ``3``      |
+|                          |                | trigger a mock issue creation.                      |
 +--------------------------+----------------+-----------------------------------------------------+
-| Sample: Shuffle          | Shuffle channel| Queries for alerts with rule.level > 3 and sends a  |
-|                          |                | test payload to the Shuffle workflow.               |
+| Sample: Shuffle          | Shuffle channel| Queries for alerts with ``rule.level`` > ``3`` and  |
+|                          |                | sends a test payload to the Shuffle workflow.       |
 +--------------------------+----------------+-----------------------------------------------------+
 
 You can review the created monitors under **Explore** → **Alerting** → **Monitors**. For more information about monitor configuration, see `OpenSearch Alerting Monitors Documentation <https://docs.opensearch.org/latest/observing-your-data/alerting/monitors/>`__.
@@ -323,6 +358,11 @@ Notifications and alerting configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The Notifications and Alerting configuration supports Slack, PagerDuty, Jira, and Shuffle by default. Follow these steps to configure notifications and alerting for supported channels.
+
+.. contents::
+   :local:
+   :depth: 1
+   :backlinks: none
 
 Slack
 ~~~~~
@@ -341,7 +381,7 @@ This notification channel sends alerts to Slack via an incoming webhook. Create 
       :title: Slack Channel
       :alt: Slack Channel
 
-#. Click **Action** > **Edit**, then enter the incoming webhook URL obtained from your Slack workspace in the **Slack webhook URL** field.
+#. Click **Action** > **Edit**, then enter the `incoming webhook URL <https://api.slack.com/messaging/webhooks>`__ obtained from your Slack workspace in the **Slack webhook URL** field.
 
 #. Save the Slack channel configuration and unmute the channel.
 
@@ -369,6 +409,12 @@ This notification channel sends alerts to Slack via an incoming webhook. Create 
       :title: Add notification action
       :alt: Add notification action
 
+   .. thumbnail:: /images/wazuh-dashboard/configurations/slack-add-action2.png
+      :align: center
+      :width: 80%
+      :title: Add notification action
+      :alt: Add notification action
+
 #. Open **Dashboard management** > **Health Check** and run the checks. Once channels and monitors are enabled, the related checks should pass to a healthy state.
 
 PagerDuty
@@ -388,7 +434,7 @@ This notification channel sends alerts to PagerDuty via the Events v2 API. Creat
       :title: PagerDuty Channel
       :alt: PagerDuty Channel
 
-#. Click **Action** > **Edit**, leave the default URL, and enter your Integration Key as the X-Routing-Key value.
+#. Click **Action** > **Edit**, leave the default URL, and enter your Integration Key as the ``X-Routing-Key`` value.
 
    .. thumbnail:: /images/wazuh-dashboard/configurations/pagerduty-edit.png
       :align: center
@@ -414,6 +460,12 @@ This notification channel sends alerts to PagerDuty via the Events v2 API. Creat
       :title: Add notification action
       :alt: Add notification action
 
+   .. thumbnail:: /images/wazuh-dashboard/configurations/pagerduty-add-action2.png
+      :align: center
+      :width: 80%
+      :title: Add notification action
+      :alt: Add notification action
+
 #. Open **Dashboard management** > **Health Check** and run the checks. Once channels and monitors are enabled, the related checks should pass to a healthy state.
 
 Jira
@@ -421,7 +473,7 @@ Jira
 
 **Prerequisites**
 
-This notification channel sends alerts to Jira using a Jira API token. To configure it, obtain your Jira instance URL and generate a `Jira API token <https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/>`__. Use a Base64-encoded email:api\_token string in the Authorization header.
+This notification channel sends alerts to Jira using a Jira API token. To configure it, obtain your Jira instance URL and generate a `Jira API token <https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/>`__. Use a Base64-encoded ``email:api_token`` string in the Authorization header.
 
 **Configure and enable the notification channel**
 
@@ -433,7 +485,7 @@ This notification channel sends alerts to Jira using a Jira API token. To config
       :title: Jira Channel
       :alt: Jira Channel
 
-#. Specify your instance URL in the Webhook URL, use the Base64-encoded value of your Jira instance email and API token as the Authorization header value. This will be in the form Authorization: Basic base64(email:api\_token).
+#. Specify your instance URL in the Webhook URL, use the Base64-encoded value of your Jira instance email and API token as the Authorization header value. This will be in the form ``Authorization: Basic base64(email:api_token)``.
 
    .. thumbnail:: /images/wazuh-dashboard/configurations/jira-edit.png
       :align: center
@@ -454,6 +506,12 @@ This notification channel sends alerts to Jira using a Jira API token. To config
 #. If the monitor has no actions in the default trigger, click **Edit**, and add a **Send notification** action using the **Add action** option. Then select the previously configured channel. If an action already exists, verify that it points to the correct channel. Adjust the subject/message template to match your Jira instance, then save and enable the monitor.
 
    .. thumbnail:: /images/wazuh-dashboard/configurations/jira-add-action.png
+      :align: center
+      :width: 80%
+      :title: Add notification action
+      :alt: Add notification action
+
+   .. thumbnail:: /images/wazuh-dashboard/configurations/jira-add-action2.png
       :align: center
       :width: 80%
       :title: Add notification action
@@ -499,6 +557,12 @@ This notification channel sends alerts to Shuffle via the Shuffle webhook URL. C
 #. If the monitor has no actions in the default trigger, click **Edit**, and add a **Send notification** action using the **Add action** option. Then select the previously configured channel. If an action already exists, verify that it points to the correct channel. Adjust the subject/message template if necessary, then save and enable the monitor.
 
    .. thumbnail:: /images/wazuh-dashboard/configurations/shuffle-add-action.png
+      :align: center
+      :width: 80%
+      :title: Add notification action
+      :alt: Add notification action
+
+   .. thumbnail:: /images/wazuh-dashboard/configurations/shuffle-add-action2.png
       :align: center
       :width: 80%
       :title: Add notification action
