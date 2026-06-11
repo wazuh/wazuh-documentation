@@ -45,14 +45,10 @@ Generating the SSL certificates
         indexer:
           - name: indexer
             ip: "<indexer-node-ip>"
-          #  dns: "<indexer-node-dns>"
           #- name: indexer-2
           #  ip: "<indexer-node-ip>"
-          #  dns: "<indexer-node-dns>"
           #- name: indexer-3
           #  ip: "<indexer-node-ip>"
-          #  dns:
-          #    - "<indexer-node-dns>"
 
         # Wazuh manager nodes
         # If there is more than one Wazuh manager
@@ -60,22 +56,18 @@ Generating the SSL certificates
         manager:
           - name: manager
             ip: "<wazuh-manager-ip>"
-          #  dns: "<wazuh-manager-dns>"
           #  node_type: master
           #- name: manager-2
-          #  dns: "<wazuh-manager-dns>"
+          #  ip: "<wazuh-manager-ip>"
           #  node_type: worker
           #- name: manager-3
           #  ip: "<wazuh-manager-ip>"
-          #  dns:
-          #    - "<wazuh-manager-dns>"
           #  node_type: worker
 
         # Wazuh dashboard nodes
         dashboard:
           - name: dashboard
             ip: "<dashboard-node-ip>"
-          #  dns: "<dashboard-node-dns>"
 
 
    To learn more about how to create and configure the certificates, see the `Certificates deployment </user-manual/wazuh-indexer-cluster/certificate-deployment>`__ section.
@@ -93,7 +85,7 @@ Generating the SSL certificates
       # tar -cvf ./wazuh-certificates.tar -C ./wazuh-certificates/ .
       # rm -rf ./wazuh-certificates
 
-#. Copy the ``wazuh-certificates.tar`` file to all the nodes, including the Wazuh indexer, Wazuh manager, and Wazuh dashboard nodes. This can be done by using the ``scp`` utility.
+#. Copy the ``wazuh-certificates.tar`` file to all the nodes, including the Wazuh indexer, Wazuh manager, and Wazuh dashboard nodes. You can use the ``scp`` utility or any other secure file transfer method available in your environment.
 
 Wazuh indexer nodes installation
 --------------------------------
@@ -168,12 +160,103 @@ Starting the service
 
       .. include:: /_templates/installations/indexer/common/enable_indexer.rst
 
+Memory locking
+^^^^^^^^^^^^^^
+
+When the system is swapping memory, the Wazuh indexer may not work as expected. Therefore, it is important for the health of the Wazuh indexer node that none of the Java Virtual Machine (JVM) is ever swapped out to disk. To prevent any Wazuh indexer memory from being swapped out, configure the Wazuh indexer to lock the process address space into RAM as follows.
+
+.. note::
+   
+   You require root user privileges to run the commands described below.
+
+#. Add the below line to the ``/etc/wazuh-indexer/opensearch.yml`` configuration file on the Wazuh indexer to enable memory locking:
+
+   .. code-block:: yaml
+
+      bootstrap.memory_lock: true
+
+#. Modify the limit of system resources. Configuring system settings depends on the operating system of the Wazuh indexer installation.
+
+   .. tabs::
+
+      .. group-tab:: Systemd
+
+         #. Create a new directory for the file that specifies the system limits:
+
+            .. code-block:: console
+
+               # mkdir -p /etc/systemd/system/wazuh-indexer.service.d/
+
+         #. Run the following command to create the ``wazuh-indexer.conf`` file in the newly created directory with the new system limit added:
+
+            .. code-block:: console
+
+               # cat > /etc/systemd/system/wazuh-indexer.service.d/wazuh-indexer.conf << EOF
+               [Service]
+               LimitMEMLOCK=infinity
+               EOF
+
+      .. group-tab:: SysVinit
+
+         #. Create a new directory for the file that specifies the system limits:
+
+            .. code-block:: console
+
+               # mkdir -p /etc/init.d/wazuh-indexer.service.d/
+
+         #. Run the following command to create the ``wazuh-indexer.conf`` file in the newly created directory with the new system limit added:
+
+            .. code-block:: console
+
+               # cat > /etc/init.d/wazuh-indexer.service.d/wazuh-indexer.conf << EOF
+               [Service]
+               LimitMEMLOCK=infinity
+               EOF
+
+#. Edit the ``/etc/wazuh-indexer/jvm.options`` file and change the JVM flags. Set a Wazuh indexer heap size value to limit memory usage. JVM heap limits prevent the ``OutOfMemory`` exception if the Wazuh indexer tries to allocate more memory than is available due to the configuration in the previous step. The recommended value is half of the system RAM. For example, set the size as follows for a system with 8 GB of RAM.
+
+   .. code-blocK:: ini
+
+      -Xms4g
+      -Xmx4g
+
+   Where the total heap space:
+
+   -  ``-Xms4g`` - initial size is set to 4Gb of RAM.
+   -  ``-Xmx4g`` - maximum size is to 4Gb of RAM.
+
+   .. note::
+
+      To prevent performance degradation due to JVM heap resizing at runtime, the minimum (Xms) and maximum (Xmx) size values must be the same.
+
+#. Restart the Wazuh indexer service:
+
+   .. code-block:: console
+
+      # systemctl daemon-reload
+      # systemctl restart wazuh-indexer
+
+#. Verify that the setting was changed successfully, by running the following command to check that ``mlockall`` value is set to true:
+
+   .. code-block:: console
+
+      # curl -k -u <INDEXER_USERNAME>:<INDEXER_PASSWORD> "https://<INDEXER_IP_ADDRESS>:9200/_nodes?filter_path=**.mlockall&pretty"
+
+   .. code-block:: json
+      :class: output
+      :emphasize-lines: 5
+
+      {
+        "nodes" : {
+          "sRuGbIQRRfC54wzwIHjJWQ" : {
+            "process" : {
+              "mlockall" : true
+            }
+          }
+        }
+      }
+
 Repeat this stage of the installation process for every Wazuh indexer node in your multi-node cluster. Then proceed with initializing your single-node or multi-node cluster in the next stage.
-
-Disable Wazuh updates
----------------------
-
-.. include:: /_templates/installations/disable-wazuh-updates.rst
 
 Cluster initialization
 ----------------------
@@ -208,7 +291,7 @@ Testing the cluster installation
         "cluster_uuid" : "rM3vIXsSS0qgW0fkwHGolg",
         "version" : {
           "distribution" : "opensearch",
-          "number" : "3.5.0",
+          "number" : "3.6.0",
           "build_type" : "rpm",
           "build_hash" : "0688bb0c0d4d2384772311ab88edcd2a18a67774",
           "build_date" : "2026-04-09T12:10:10.126706914Z",
@@ -233,6 +316,11 @@ Testing the cluster installation
 
       ip             heap.percent ram.percent cpu load_1m load_5m load_15m node.role node.roles                                        cluster_manager name
       192.168.33.147           33          69  17    0.09    0.61     0.50 dimr      cluster_manager,data,ingest,remote_cluster_client *               indexer
+
+Disable Wazuh updates
+---------------------
+
+.. include:: /_templates/installations/disable-wazuh-updates.rst
 
 Next steps
 ----------

@@ -33,12 +33,14 @@ The Wazuh agent runs on the endpoint you want to monitor and communicates with t
 
                   .. code-block:: console
 
+                     # curl -O https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR_OSX|/macos/wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.intel64.pkg
                      # echo "WAZUH_MANAGER='10.0.0.2'" > /tmp/wazuh_envs && sudo installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.intel64.pkg -target /
 
                .. group-tab:: Apple silicon
 
                   .. code-block:: console
 
+                     # curl -O https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR_OSX|/macos/wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.arm64.pkg
                      # echo "WAZUH_MANAGER='10.0.0.2'" > /tmp/wazuh_envs && sudo installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.arm64.pkg -target /
 
             For additional deployment options such as agent name, agent group, and enrollment password, see the `Deployment variables for macOS </user-manual/agent/agent-enrollment/deployment-variables/deployment-variables-macos>`__ section.
