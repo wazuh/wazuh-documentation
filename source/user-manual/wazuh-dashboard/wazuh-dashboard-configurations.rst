@@ -821,15 +821,19 @@ Bar charts are a type of visualization that is used to compare specific measures
 
 The steps below show how to create a horizontal bar visualization that shows varying numbers of MITRE tactics detected within a set timeframe.
 
-#. Click **Create visualization** from the Visualize tab, select the **Horizontal Bar** visualization format, and use wazuh-findings\* as the index pattern name.
-#. Set the following value in the Data section, on the Y-axis, in Metrics:
-   - Aggregation = Count
-#. Add an X-axis in Bucket and set the following values:
-   - Aggregation = Terms
-   - Field = rule.mitre.tactic
-   - Order by = Metric: Count
-   - Order = Descending
-   - Size = 10
+#. Click **Create visualization** from the Visualize tab, select the **Horizontal Bar** visualization format, and use ``wazuh-findings*`` as the index pattern name.
+#. Set the following value in the Data section, on the ``Y-axis``, in **Metrics**:
+
+   -  ``Aggregation`` = ``Count``
+
+#. Add an ``X-axis`` in **Bucket** and set the following values:
+
+   -  ``Aggregation`` = ``Terms``
+   -  ``Field`` = ``rule.mitre.tactic``
+   -  ``Order by`` = ``Metric: Count``
+   -  ``Order`` = ``Descending``
+   -  ``Size`` = ``10``
+
 #. Click the **Update** button.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-horizontal-bar-visualization-update-button.png
@@ -844,15 +848,19 @@ The steps below show how to create a horizontal bar visualization that shows var
 
 The steps below show how to create a vertical bar visualization that shows varying numbers of MITRE tactics detected within a set timeframe.
 
-#. Click **Create visualization** from the Visualize tab, select the **Vertical Bar** visualization format, and use wazuh-findings\* as the index pattern name.
-#. Set the following value in the Data section, on the Y-axis, in Metrics:
-   - Aggregation = Count
-#. Add an X-axis in Bucket and set the following values:
-   - Aggregation = Terms
-   - Field = rule.mitre.tactic
-   - Order by = Metric: Count
-   - Order = Descending
-   - Size = 10
+#. Click **Create visualization** from the Visualize tab, select the **Vertical Bar** visualization format, and use ``wazuh-findings*`` as the index pattern name.
+#. Set the following value in the Data section, on the ``Y-axis``, in **Metrics**:
+
+   -  ``Aggregation`` = ``Count``
+
+#. Add an ``X-axis`` in **Bucket** and set the following values:
+
+   -  ``Aggregation`` = ``Terms``
+   -  ``Field`` = ``rule.mitre.tactic``
+   -  ``Order by`` = ``Metric: Count``
+   -  ``Order`` = ``Descending``
+   -  ``Size`` = ``10``
+
 #. Click the **Update** button.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-vertical-bar-visualization-update-button.png
@@ -872,16 +880,20 @@ The steps below show how to create a Pie chart visualization that shows MITRE ta
 
 **Creating a Pie chart**
 
-#. Click **Create visualization** from the Visualize tab, select the **Pie** visualization format, and use wazuh-findings\* as the index pattern name.
-#. Set the following value in the Data section, on the Slice size, in Metrics:
-   - Aggregation = Count
+#. Click **Create visualization** from the Visualize tab, select the **Pie** visualization format, and use ``wazuh-findings*`` as the index pattern name.
+#. Set the following value in the Data section, on the ``Slice size``, in **Metrics**:
+
+   -  ``Aggregation`` = ``Count``
+
 #. Add a Split slices in Bucket and set the following values:
-   - Aggregation = Terms
-   - Field = rule.mitre.tactic
-   - Order by = Metric: Count
-   - Order = Descending
-   - Size = 10
-#. Customize the Pie chart by toggling on show label in the Options section.
+
+   -  ``Aggregation`` = ``Terms``
+   -  ``Field`` = ``rule.mitre.tactic``
+   -  ``Order by`` = ``Metric: Count``
+   -  ``Order`` = ``Descending``
+   -  ``Size`` = ``10``
+
+#. Customize the Pie chart by toggling on ``show label`` in the **Options** section.
 #. Click the **Update** button.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-pie-visualization-update-button.png
@@ -901,16 +913,22 @@ The steps below show how to create an Area chart that visualizes a histogram of 
 
 **Creating an Area chart**
 
-#. Click **Create visualization** from the Visualize tab, select the **Area** visualization format, and use wazuh-events\* as the index pattern name.
-#. Set the following value in the Data section, on the Y-axis, in Metrics:
-   - Aggregation = Max
-   - Field = event.severity
-#. Add another Y-axis in Metric and set the following values:
-   - Aggregation = Max
-   - Field = rule.firedtimes
-#. Add an X-axis in Bucket and set the following values:
-   - Aggregation = Date Histogram
-   - Field = timestamp
+#. Click **Create visualization** from the Visualize tab, select the **Area** visualization format, and use ``wazuh-events*`` as the index pattern name.
+#. Set the following value in the Data section, on the ``Y-axis``, in **Metrics**:
+
+   -  ``Aggregation`` = ``Max``
+   -  ``Field`` = ``event.severity``
+
+#. Add another ``Y-axis`` in **Metric** and set the following values:
+
+   -  ``Aggregation`` = ``Max``
+   -  ``Field`` = ``rule.firedtimes``
+
+#. Add an ``X-axis`` in **Bucket** and set the following values:
+
+   -  ``Aggregation`` = ``Date Histogram``
+   -  ``Field`` = ``timestamp``
+
 #. Click the **Update** button.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-area-visualization-update-button.png
@@ -930,14 +948,18 @@ The steps below show how to create a Line chart that visualizes the Wazuh rule l
 
 **Creating a Line chart**
 
-#. Click **Create visualization** from the Visualize tab, select the **Line** visualization format, and use wazuh-events\* as the index pattern name.
-#. Set the following value in the Data section, on the Y-axis, in Metrics:
-   - Aggregation = Max
-   - Field = event.severity
-#. Add an X-axis in Buckets and set the following values:
-   - Aggregation = Date Histogram
-   - Field = timestamp
-   - Minimum interval = Minute
+#. Click **Create visualization** from the Visualize tab, select the **Line** visualization format, and use ``wazuh-events*`` as the index pattern name.
+#. Set the following value in the **Data** section, on the ``Y-axis``, in **Metrics**:
+
+   -  ``Aggregation`` = ``Max``
+   -  ``Field`` = ``event.severity``
+
+#. Add an ``X-axis`` in **Buckets** and set the following values:
+
+   -  ``Aggregation`` = ``Date Histogram``
+   -  ``Field`` = ``timestamp``
+   -  ``Minimum interval`` = ``Minute``
+
 #. Click the **Update** button.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-line-visualization-update-button.png
@@ -957,21 +979,27 @@ The steps below show how to create a Heat map that visualizes the mapping of Waz
 
 **Creating a Heat Map**
 
-#. Click **Create visualization** from the Visualize tab, select the **Heat Map** visualization format, and use wazuh-events\* as the index pattern name.
-#. Set the following value in the Data section, on the Y-axis, in Metrics:
-   - Aggregation = Count
-#. Add an X-axis in Buckets and set the following values:
-   - Aggregation = Terms
-   - Field = wazuh.integration.name
-   - Order by = Metric: Count
-   - Order = Descending
-   - Size = 5
-#. Add a Y-axis in Buckets and set the following values:
-   - Aggregation = Terms
-   - Field = wazuh.integration.category
-   - Order by = Metric: Count
-   - Order = Descending
-   - Size = 5
+#. Click **Create visualization** from the Visualize tab, select the **Heat Map** visualization format, and use ``wazuh-events*`` as the index pattern name.
+#. Set the following value in the Data section, on the ``Y-axis``, in **Metrics**:
+
+   -  ``Aggregation`` = ``Count``
+
+#. Add an ``X-axis`` in **Buckets** and set the following values:
+
+   -  ``Aggregation`` = ``Terms``
+   -  ``Field`` = ``wazuh.integration.name``
+   -  ``Order by`` = ``Metric: Count``
+   -  ``Order`` = ``Descending``
+   -  ``Size`` = ``5``
+
+#. Add a ``Y-axis`` in **Buckets** and set the following values:
+
+   -  ``Aggregation`` = ``Terms``
+   -  ``Field`` = ``wazuh.integration.category``
+   -  ``Order by`` = ``Metric: Count``
+   -  ``Order`` = ``Descending``
+   -  ``Size`` = ``5``
+
 #. Click the **Update** button.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-heat-map-visualization-update-button.png
@@ -1002,15 +1030,19 @@ The following steps show how to create a Data table to visualize the maximum cou
 
 **Creating a Data table**
 
-#. Click **Create visualization** from the Visualize tab, select the **Data Table** visualization format, and use wazuh-findings-v5\* as the index pattern name.
+#. Click **Create visualization** from the Visualize tab, select the **Data Table** visualization format, and use ``wazuh-findings-v5*`` as the index pattern name.
 #. Set the following metrics in the Data section:
-   - Aggregation = Count
-#. Add a Split rows in Buckets and set the following values:
-   - Aggregation = Terms
-   - Field = wazuh.rule.level
-   - Order by = Metric: Count
-   - Order = Descending
-   - Size = 5
+
+   -  ``Aggregation`` = ``Count``
+
+#. Add a ``Split rows`` in **Buckets** and set the following values:
+
+   -  ``Aggregation`` = ``Terms``
+   -  ``Field`` = ``wazuh.rule.level``
+   -  ``Order by`` = ``Metric: Count``
+   -  ``Order`` = ``Descending``
+   -  ``Size`` = ``5``
+
 #. Click the **Update** button.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-data-table-visualization-update-button.png
@@ -1030,12 +1062,16 @@ The following steps show how to create a Metric to visualize the number of SCA c
 
 **Creating a Metric**
 
-#. Click **Create visualization** from the Visualize tab, select the **Metric** visualization format, and use wazuh-states-sca\* as the index pattern name.
+#. Click **Create visualization** from the Visualize tab, select the **Metric** visualization format, and use ``wazuh-states-sca*`` as the index pattern name.
 #. Set the following metrics in the Data section:
-   - Aggregation = count
-#. Add a Split group in Buckets and set the following values:
-   - Aggregation = Filters
-   - Filter = check.result: "Passed"
+
+   -  ``Aggregation`` = ``count``
+
+#. Add a ``Split group`` in **Buckets** and set the following values:
+
+   -  ``Aggregation`` = ``Filters``
+   -  ``Filter`` = ``check.result: "Passed"``
+
 #. Click the **Update** button.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-metric-visualization-update-button.png
@@ -1055,12 +1091,16 @@ The steps below show how to create a Gauge to visualize the SCA failed counts.
 
 **Creating a Gauge**
 
-#. Click **Create visualization** from the Visualize tab, select the **Metric** visualization format, and use wazuh-states-sca\* as the index pattern name.
+#. Click **Create visualization** from the Visualize tab, select the **Metric** visualization format, and use ``wazuh-states-sca*`` as the index pattern name.
 #. Set the following metrics in the Data section:
-   - Aggregation = count
-#. Add a Split group in Buckets and set the following values:
-   - Aggregation = Filters
-   - Filter = check.result: "Failed"
+
+   -  ``Aggregation`` = ``count``
+
+#. Add a ``Split group`` in **Buckets** and set the following values:
+
+   -  ``Aggregation`` = ``Filters``
+   -  ``Filter`` = ``check.result: "Failed"``
+
 #. Click the **Update** button.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-gauge-visualization-update-button.png
@@ -1096,11 +1136,13 @@ The steps below show how to create a geographic map.
       :title: Add layer
       :alt: Add layer
 
-#. Select Documents as the Data layer.
+#. Select ``Documents`` as the Data layer.
 #. Set the following values in the New layer:
-   - Data source = wazuh-events\*
-   - Geospatial field = destination.geo.location
-   - Number of documents = 1000
+
+   -  ``Data source`` = ``wazuh-events*``
+   -  ``Geospatial field`` = ``destination.geo.location``
+   -  ``Number of documents`` = ``1000``
+
 #. Click the **Update** button.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-map-visualization-update-button.png
@@ -1127,7 +1169,7 @@ The steps below show how to create a coordinate map based on the origin location
 
 **Creating a Coordinate map**
 
-#. Click **Create visualization** from the Visualize tab, select the **Coordinate Map** visualization format, and use wazuh-events\* as the index pattern name.
+#. Click **Create visualization** from the Visualize tab, select the **Coordinate Map** visualization format, and use ``wazuh-events*`` as the index pattern name.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-coordinate-map-visualization.png
       :align: center
@@ -1136,10 +1178,14 @@ The steps below show how to create a coordinate map based on the origin location
       :alt: Create coordinate map visualization
 
 #. Set the following values on the Metric in Data:
-   - Aggregation = Count
-#. Add a Geo coordinate in Buckets and set the following values:
-   - Aggregation = Geohash
-   - Field = destination.geo.location
+
+   -  ``Aggregation`` = ``Count``
+
+#. Add a ``Geo coordinate`` in **Buckets** and set the following values:
+
+   -  ``Aggregation`` = ``Geohash``
+   -  ``Field`` = ``destination.geo.location``
+
 #. Click the **Update** button.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-coordinate-map-visualization-update-button.png
@@ -1159,7 +1205,7 @@ The steps below show how to create a region map based on the destination country
 
 **Create region map**
 
-#. Click **Create visualization** from the Visualize tab, select the **Region Map** visualization format, and use wazuh-events\* as the index pattern name.
+#. Click **Create visualization** from the Visualize tab, select the **Region Map** visualization format, and use ``wazuh-events*`` as the index pattern name.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-region-map-visualization.png
       :align: center
@@ -1168,12 +1214,16 @@ The steps below show how to create a region map based on the destination country
       :alt: Create region map visualization
 
 #. Set the following values on the Metric in Data:
-   - Aggregation = Count
-#. Add a Shape field in Buckets and set the following values:
-   - Aggregation = Terms
-   - Field = destination.geo.country\_name
-   - Order by = Metric: Count
-   - Order = Descending
+
+   -  ``Aggregation`` = ``Count``
+
+#. Add a ``Shape field`` in **Buckets** and set the following values:
+
+   -  ``Aggregation`` = ``Terms``
+   -  ``Field`` = ``destination.geo.country_name``
+   -  ``Order by`` = ``Metric: Count``
+   -  ``Order`` = ``Descending``
+
 #. Select Name as **Join field** under the **Layer Options** tab.
 #. Click the **Update** button.
 
@@ -1204,7 +1254,7 @@ The steps below show how to use Visualization Builder to present the Wazuh integ
 
 **Creating a Visualization Builder**
 
-#. Click **Create visualization** from the Visualize tab, select the **VisBuilder** visualization format, and use wazuh-events\* as the index pattern name.
+#. Click **Create visualization** from the Visualize tab, select the **VisBuilder** visualization format, and use ``wazuh-events*`` as the index pattern name.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-visbuilder-visualization.png
       :align: center
@@ -1213,9 +1263,9 @@ The steps below show how to use Visualization Builder to present the Wazuh integ
       :alt: Create VisBuilder visualization
 
 #. Drag a field to the configuration panel to generate a visualization.
-#. Set aggregation to count on the **Y-axis**.
-#. Set wazuh.integration.name on an **X-axis**.
-#. Set wazuh.integration.category on the **Split series**.
+#. Set aggregation to ``count`` on the **Y-axis**.
+#. Set ``wazuh.integration.name`` on an **X-axis**.
+#. Set ``wazuh.integration.category`` on the **Split series**.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-visbuilder-visualization-data.png
       :align: center
@@ -1243,12 +1293,13 @@ The steps below show how to use Time Series Visual Builder to visualize Wazuh in
       :alt: Create TSVB visualization
 
 #. Set the following values on the **Metric** tab in **Data**:
-   - Aggregation = Count
-   - Group by = Terms
-   - By = wazuh.integration.category
-   - Top = 10
-   - Order by = Doc Count (default)
-   - Direction = Descending
+
+   -  ``Aggregation`` = ``Count``
+   -  ``Group by`` = ``Terms``
+   -  ``By`` = ``wazuh.integration.category``
+   -  ``Top`` = ``10``
+   -  ``Order by`` = ``Doc Count (default)``
+   -  ``Direction`` = ``Descending``
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-tsvb-visualization-data.png
       :align: center
@@ -1273,7 +1324,7 @@ This is a visual representation of text data where words are displayed in varyin
 
 **Creating a tag cloud**
 
-#. Click **Create visualization** from the Visualize tab, select the **Tag cloud** visualization format, and use wazuh-events\* as the index pattern name.
+#. Click **Create visualization** from the Visualize tab, select the **Tag cloud** visualization format, and use ``wazuh-events*`` as the index pattern name.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-tag-cloud-visualization.png
       :align: center
@@ -1282,11 +1333,15 @@ This is a visual representation of text data where words are displayed in varyin
       :alt: Create tag cloud visualization
 
 #. Set the following value on the Metric in Metrics data:
-   - Tag size = Count
+
+   -  ``Tag size`` = ``Count``
+
 #. Add a new Tag in Bucket data and set the following values:
-   - Aggregation = Terms
-   - Field = wazuh.integration.name
-   - Order by = Metric: Count
+
+   -  ``Aggregation`` = ``Terms``
+   -  ``Field`` = ``wazuh.integration.name``
+   -  ``Order by`` = ``Metric: Count``
+
 #. Click the **Update** button.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-tag-cloud-visualization-update-button.png
@@ -1304,7 +1359,7 @@ Markdown is a lightweight markup language that is used for formatting text. It a
 
 **Creating a markdown**
 
-#. Click **Create visualization** from the Visualize tab, select the **Markdown** visualization format, and use wazuh-events\* as the index pattern name.
+#. Click **Create visualization** from the Visualize tab, select the **Markdown** visualization format, and use ``wazuh-events*`` as the index pattern name.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-markdown-visualization.png
       :align: center
@@ -1341,9 +1396,9 @@ At the time of writing this document, this visualization is experimental. The de
       :title: Create controls visualization
       :alt: Create controls visualization
 
-#. Click on the **Add** button to add a new Options list and set the **Control Label** as MITRE tactic.
-#. Set wazuh-events\* as the **Index Pattern** name.
-#. Select the field rule.mitre.tactic.
+#. Click on the **Add** button to add a new ``Options list`` and set the **Control Label** as ``MITRE tactic``.
+#. Set ``wazuh-events*`` as the **Index Pattern** name.
+#. Select the field ``rule.mitre.tactic``.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/select-rule-mitre-tactic.png
       :align: center
@@ -1352,7 +1407,7 @@ At the time of writing this document, this visualization is experimental. The de
       :alt: Select rule.mitre.tactic
 
 #. Click the **Update** button.
-#. In the dropdown list, select Range slider and click on the **Add** button. Set the **Control Label** as Quantity.
+#. In the dropdown list, select ``Range slider`` and click on the **Add** button. Set the **Control Label** as ``Quantity``.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/add-range-slider.png
       :align: center
@@ -1360,8 +1415,8 @@ At the time of writing this document, this visualization is experimental. The de
       :title: Add range slider
       :alt: Add range slider
 
-#. Select wazuh-events\* as the **Index Pattern** name.
-#. Select event.severity as the Field.
+#. Select ``wazuh-events*`` as the **Index Pattern** name.
+#. Select ``event.severity`` as the **Field**.
 #. Click the **Update** button.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-controls-visualization-update-button.png
@@ -1389,7 +1444,7 @@ They are commonly used in historical analysis, project planning, or storytelling
       :title: Create timeline visualization
       :alt: Create timeline visualization
 
-#. Choose a source for the chart. In the Timeline expression windows, within .opensearch(\*). The expression .opensearch(\*) is a wildcard value that represents all the indexes currently within the Wazuh indexer, combined together. Here we selected wazuh-events\* as the index to use.
+#. Choose a source for the chart. In the Timeline expression windows, within ``.opensearch(*)``. The expression ``.opensearch(*)`` is a wildcard value that represents all the indexes currently within the Wazuh indexer, combined together. Here we selected ``wazuh-events*`` as the index to use.
 
    .. code-block:: none
 
