@@ -20,15 +20,15 @@ Security analytics
 
 **Security Analytics** is a core section of the Wazuh dashboard that provides tools for managing the full lifecycle of log normalization and event-based detection. It centralizes the configuration of integrations, decoders, key-value databases (KVDBs), detection rules, and detectors through a unified interface powered by the Wazuh Engine.
 
-Integrations, decoders, KVDBs, rules, and detectors are organized into Spaces. The Draft, Test, and Custom spaces are user-managed and represent different stages of the content lifecycle, while the Standard space is read-only and contains the built-in content shipped with Wazuh.
+Integrations, decoders, KVDBs, rules, and detectors are organized into :ref:`Spaces <dashboard_configurations_space>`. The Draft, Test, and Custom spaces are user-managed and represent different stages of the content lifecycle, while the Standard space is read-only and contains the built-in content shipped with Wazuh.
 
 Security analytics is organized into sections that support different stages of the event processing workflow. The Normalization section focuses on parsing, enriching, and structuring raw log data. The Detection section manages the rules and detectors used to identify security findings from normalized events. The Wazuh Log test tool allows users to validate parsing and detection logic before deploying changes.
 
 The **Security Analytics** section on the Wazuh dashboard provides access to these sections:
 
-- Normalization: Provides visibility and management over the components that are used to parse, enrich, and structure raw log data before detection and analysis. Users can configure and manage integrations, decoders, and the Key-Value database (KVDB) used during log normalization.
-- Detection: Provides visibility and management over the rules responsible for generating findings from normalized events processed by the Wazuh Engine. Users can configure and manage detection rules and detectors for continuous threat monitoring.
-- Log test: Provides an interactive interface to validate that a specific log event is correctly parsed by active decoders and test detection logic directly from the Wazuh dashboard.
+-  :ref:`dashboard_configurations_normalization`: Provides visibility and management over the components that are used to parse, enrich, and structure raw log data before detection and analysis. Users can configure and manage integrations, decoders, and the Key-Value database (KVDB) used during log normalization.
+-  :ref:`dashboard_configurations_detection`: Provides visibility and management over the rules responsible for generating findings from normalized events processed by the Wazuh Engine. Users can configure and manage detection rules and detectors for continuous threat monitoring.
+-  :ref:`dashboard_configurations_logtest`: Provides an interactive interface to validate that a specific log event is correctly parsed by active decoders and test detection logic directly from the Wazuh dashboard.
 
 To view the **Security Analytics** dashboard, click ☰ to open the menu and navigate to **Security analytics** > **Overview**.
 
@@ -37,6 +37,8 @@ To view the **Security Analytics** dashboard, click ☰ to open the menu and nav
    :width: 80%
    :title: Security Analytics overview
    :alt: Security Analytics overview
+
+.. _dashboard_configurations_space:
 
 Space
 ^^^^^
@@ -67,6 +69,8 @@ Security analytics uses four spaces: **Draft**, **Test**, **Custom**, and **Stan
 
 User-managed content is typically promoted sequentially from Draft to Test and from Test to Custom after validation.
 
+.. _dashboard_configurations_normalization:
+
 Normalization
 ^^^^^^^^^^^^^
 
@@ -74,9 +78,12 @@ The **Normalization** section of **Security Analytics** in the Wazuh dashboard p
 
 The Normalization section manages the following components:
 
-- Integration
-- Decoder
-- Key-Value database (KVDB)
+.. contents::
+   :local:
+   :depth: 1
+   :backlinks: none
+
+.. _dashboard_configurations_integration:
 
 Integration
 ~~~~~~~~~~~
@@ -93,6 +100,12 @@ In the **Security Analytics** section of the Wazuh dashboard, click **Overview**
 
 In the **Security Analytics** section of the Wazuh dashboard, navigate to **Overview** > **Draft** > **Actions** > **Create** to create custom integrations.
 
+.. thumbnail:: /images/wazuh-dashboard/configurations/create-integration1.png
+   :align: center
+   :width: 80%
+   :title: Create integration
+   :alt: Create integration
+
 .. thumbnail:: /images/wazuh-dashboard/configurations/create-integration.png
    :align: center
    :width: 80%
@@ -100,6 +113,12 @@ In the **Security Analytics** section of the Wazuh dashboard, navigate to **Over
    :alt: Create integration
 
 User-managed content is promoted sequentially from Draft to Test and from Test to Custom after validation. After creating an integration, click **Actions** at the top-right corner of the Wazuh dashboard and select **Promote**.
+
+.. thumbnail:: /images/wazuh-dashboard/configurations/create-integration-actions.png
+   :align: center
+   :width: 80%
+   :title: Create integration
+   :alt: Create integration
 
 .. note::
    When an integration is promoted from Draft to Test, or from Test to Custom, all of its associated decoders and rules are promoted together.
@@ -146,7 +165,7 @@ To create custom KVDBs, navigate to **Security Analytics** > **KVDB** > **Draft*
 
 - Select the **Integration**.
 - Set the KVDB's **Title** and **Author** name.
-- Under the **Content** section, set the key:value pair.
+- Under the **Content** section, set the ``key``:``value`` pair.
 - Click on **Create KVDB** to create the KVDB.
 
 .. thumbnail:: /images/wazuh-dashboard/configurations/create-kvdb.png
@@ -157,6 +176,8 @@ To create custom KVDBs, navigate to **Security Analytics** > **KVDB** > **Draft*
 
 After creating the custom KVDB, click **Actions** at the top-right corner of the Wazuh dashboard and select **Promote**. User-managed content is promoted sequentially from Draft to Test and from Test to Custom after validation.
 
+.. _dashboard_configurations_detection:
+
 Detection
 ^^^^^^^^^
 
@@ -164,8 +185,10 @@ The **Detection** section of **Security Analytics** on the Wazuh dashboard provi
 
 This Detection section provides the following components:
 
-- Detectors
-- Rules
+.. contents::
+   :local:
+   :depth: 1
+   :backlinks: none
 
 Detectors
 ~~~~~~~~~
@@ -184,11 +207,11 @@ In the **Security Analytics** section of the Wazuh dashboard, navigate to **Dete
 
 To create a Detector, navigate to **Detection** > **Detectors** > **Create detector** under the **Security Analytics** section of the Wazuh dashboard and perform the following actions:
 
-- Set the **Detector Name**.
-- Select a **Data source**.
-- Select an **Integration**. The Integrations are organized in different spaces, custom integrations are in the **Custom** space, and Wazuh out-of-the-box integrations are in the **Standard** space.
-- Select the rules that will be active for this detector under the **Selected rules** panel. Click **Manage** to add or remove individual rules.
-- Click on **Create detector** to create the detector.
+#. Set the **Detector Name**.
+#. Select a **Data source**.
+#. Select an **Integration**. The Integrations are organized in different spaces, custom integrations are in the **Custom** space, and Wazuh out-of-the-box integrations are in the **Standard** space.
+#. Select the rules that will be active for this detector under the **Selected rules** panel. Click **Manage** to add or remove individual rules.
+#. Click on **Create detector** to create the detector.
 
 .. thumbnail:: /images/wazuh-dashboard/configurations/create-detector.png
    :align: center
@@ -223,12 +246,14 @@ In the **Security Analytics** section of the Wazuh dashboard, navigate to **Dete
 
 After creating the custom rules, click **Actions** at the top-right corner of the Wazuh dashboard and select **Promote**. User-managed content is promoted sequentially from Draft to Test and from Test to Custom after validation.
 
+.. _dashboard_configurations_logtest:
+
 Log test
 ^^^^^^^^
 
 The Wazuh **Log Test** tool provides an interactive interface to validate that a specific log event is correctly parsed by active decoders and test detection logic directly from the Wazuh dashboard.
 
-In the **Security Analytics** section of the Wazuh dashboard, click **Log test** to access the log testing tool. For Integrations in the Test space, select the Test in **Space** field, provide the log event, and click **Test** to verify that events are correctly parsed.
+In the **Security Analytics** section of the Wazuh dashboard, click **Log test** to access the log testing tool. For Integrations in the Test space, select the ``Test`` in **Space** field, provide the log event, and click **Test** to verify that events are correctly parsed.
 
 .. thumbnail:: /images/wazuh-dashboard/configurations/log-test.png
    :align: center
@@ -241,7 +266,7 @@ Active Response
 
 The **Active Response** section on the Wazuh dashboard allows users to configure automated incident response actions triggered by security events detected by the Wazuh Engine. When specific rules are triggered, the Wazuh manager can execute scripts on monitored endpoints via the Wazuh agents to block IPs, disable accounts, or perform other security-relevant actions.
 
-Active response is implemented through wazuh-execd daemon, which receives commands from the Wazuh manager and executes response scripts on the Wazuh agent. It also manages the response lifecycle, including timeouts for stateful responses.
+Active response is implemented through ``wazuh-execd`` daemon, which receives commands from the Wazuh manager and executes response scripts on the Wazuh agent. It also manages the response lifecycle, including timeouts for stateful responses.
 
 To manage and configure the active response, click ☰ to open the menu and navigate to **Explore** > **Active Response**.
 
@@ -254,6 +279,12 @@ To manage and configure the active response, click ☰ to open the menu and navi
 Click on the **Create active response** button to create a new active response.
 
 .. thumbnail:: /images/wazuh-dashboard/configurations/create-active-response.png
+   :align: center
+   :width: 80%
+   :title: Create active response
+   :alt: Create active response
+
+.. thumbnail:: /images/wazuh-dashboard/configurations/create-active-response2.png
    :align: center
    :width: 80%
    :title: Create active response
@@ -277,42 +308,48 @@ Default notification channels
 
 When notifications are enabled in the Wazuh dashboard, healthcheck automatically creates the following channels if they do not already exist. All channels are initially disabled.
 
+.. |slack_channel| replace:: `incoming webhook <https://api.slack.com/messaging/webhooks>`__
+.. |pagerduty_channel| replace:: `Events v2 API <https://developer.pagerduty.com/docs/events-api-v2-overview#getting-started>`__
+.. |jira_channel| replace:: `REST API <https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/>`__
+.. |shuffle_channel| replace:: `webhook <https://shuffler.io/docs/triggers#webhook-example>`__
+
 +-------------+-------------------------------------------------------------------+
 | Channel     | Description                                                       |
 +=============+===================================================================+
-| Slack       | Sends notifications via Slack incoming webhook.                   |
+| Slack       | Sends notifications via Slack |slack_channel|.                    |
 +-------------+-------------------------------------------------------------------+
-| PagerDuty   | Sends alerts via the Events v2 API.                               |
+| PagerDuty   | Sends alerts via the |pagerduty_channel|.                         |
 +-------------+-------------------------------------------------------------------+
-| Jira        | Creates issues via the Jira REST API.                             |
+| Jira        | Creates issues via the Jira |jira_channel|.                       |
 +-------------+-------------------------------------------------------------------+
-| Shuffle     | Triggers Shuffle workflows via webhook.                           |
+| Shuffle     | Triggers Shuffle workflows via |shuffle_channel|.                 |
 +-------------+-------------------------------------------------------------------+
 
 All channels are stored as saved objects with names like Slack Channel, PagerDuty Channel, etc.
 
-.. warning::
+.. note::
+
    Treat these URLs and credentials as secrets. Review permissions and channel visibility before enabling it.
 
 Default sample monitors created
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If the **Alerts** functionality is available, the healthcheck mechanism attempts to create the following sample monitors on the Wazuh alerts index pattern (wazuh-events\*). Monitors will not be created if any required notification channel is missing:
+If the **Alerts** functionality is available, the healthcheck mechanism attempts to create the following sample monitors on the Wazuh alerts index pattern (``wazuh-events*``). Monitors will not be created if any required notification channel is missing:
 
 +--------------------------+----------------+-----------------------------------------------------+
 | Monitor name             | Target channel | Behavior                                            |
 +==========================+================+=====================================================+
-| Sample: Slack            | Slack channel  | Queries for alerts with rule.level > 3 and sends    |
-|                          |                | notifications to Slack.                             |
+| Sample: Slack            | Slack channel  | Queries for alerts with ``rule.level`` > ``3`` and  |
+|                          |                | sends notifications to Slack.                       |
 +--------------------------+----------------+-----------------------------------------------------+
-| Sample: PagerDuty        | PagerDuty      | Queries for alerts with rule.level > 3 and sends    |
-|                          | channel        | sample events to PagerDuty via Events v2.           |
+| Sample: PagerDuty        | PagerDuty      | Queries for alerts with ``rule.level`` > ``3`` and  |
+|                          | channel        | sends sample events to PagerDuty via Events v2.     |
 +--------------------------+----------------+-----------------------------------------------------+
-| Sample: Jira             | Jira channel   | Queries for alerts with rule.level > 3 trigger a    |
-|                          |                | mock issue creation.                                |
+| Sample: Jira             | Jira channel   | Queries for alerts with ``rule.level`` > ``3``      |
+|                          |                | trigger a mock issue creation.                      |
 +--------------------------+----------------+-----------------------------------------------------+
-| Sample: Shuffle          | Shuffle channel| Queries for alerts with rule.level > 3 and sends a  |
-|                          |                | test payload to the Shuffle workflow.               |
+| Sample: Shuffle          | Shuffle channel| Queries for alerts with ``rule.level`` > ``3`` and  |
+|                          |                | sends a test payload to the Shuffle workflow.       |
 +--------------------------+----------------+-----------------------------------------------------+
 
 You can review the created monitors under **Explore** → **Alerting** → **Monitors**. For more information about monitor configuration, see `OpenSearch Alerting Monitors Documentation <https://docs.opensearch.org/latest/observing-your-data/alerting/monitors/>`__.
@@ -321,6 +358,11 @@ Notifications and alerting configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The Notifications and Alerting configuration supports Slack, PagerDuty, Jira, and Shuffle by default. Follow these steps to configure notifications and alerting for supported channels.
+
+.. contents::
+   :local:
+   :depth: 1
+   :backlinks: none
 
 Slack
 ~~~~~
@@ -339,7 +381,7 @@ This notification channel sends alerts to Slack via an incoming webhook. Create 
       :title: Slack Channel
       :alt: Slack Channel
 
-#. Click **Action** > **Edit**, then enter the incoming webhook URL obtained from your Slack workspace in the **Slack webhook URL** field.
+#. Click **Action** > **Edit**, then enter the `incoming webhook URL <https://api.slack.com/messaging/webhooks>`__ obtained from your Slack workspace in the **Slack webhook URL** field.
 
 #. Save the Slack channel configuration and unmute the channel.
 
@@ -367,6 +409,12 @@ This notification channel sends alerts to Slack via an incoming webhook. Create 
       :title: Add notification action
       :alt: Add notification action
 
+   .. thumbnail:: /images/wazuh-dashboard/configurations/slack-add-action2.png
+      :align: center
+      :width: 80%
+      :title: Add notification action
+      :alt: Add notification action
+
 #. Open **Dashboard management** > **Health Check** and run the checks. Once channels and monitors are enabled, the related checks should pass to a healthy state.
 
 PagerDuty
@@ -386,7 +434,7 @@ This notification channel sends alerts to PagerDuty via the Events v2 API. Creat
       :title: PagerDuty Channel
       :alt: PagerDuty Channel
 
-#. Click **Action** > **Edit**, leave the default URL, and enter your Integration Key as the X-Routing-Key value.
+#. Click **Action** > **Edit**, leave the default URL, and enter your Integration Key as the ``X-Routing-Key`` value.
 
    .. thumbnail:: /images/wazuh-dashboard/configurations/pagerduty-edit.png
       :align: center
@@ -412,6 +460,12 @@ This notification channel sends alerts to PagerDuty via the Events v2 API. Creat
       :title: Add notification action
       :alt: Add notification action
 
+   .. thumbnail:: /images/wazuh-dashboard/configurations/pagerduty-add-action2.png
+      :align: center
+      :width: 80%
+      :title: Add notification action
+      :alt: Add notification action
+
 #. Open **Dashboard management** > **Health Check** and run the checks. Once channels and monitors are enabled, the related checks should pass to a healthy state.
 
 Jira
@@ -419,7 +473,7 @@ Jira
 
 **Prerequisites**
 
-This notification channel sends alerts to Jira using a Jira API token. To configure it, obtain your Jira instance URL and generate a `Jira API token <https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/>`__. Use a Base64-encoded email:api\_token string in the Authorization header.
+This notification channel sends alerts to Jira using a Jira API token. To configure it, obtain your Jira instance URL and generate a `Jira API token <https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/>`__. Use a Base64-encoded ``email:api_token`` string in the Authorization header.
 
 **Configure and enable the notification channel**
 
@@ -431,7 +485,7 @@ This notification channel sends alerts to Jira using a Jira API token. To config
       :title: Jira Channel
       :alt: Jira Channel
 
-#. Specify your instance URL in the Webhook URL, use the Base64-encoded value of your Jira instance email and API token as the Authorization header value. This will be in the form Authorization: Basic base64(email:api\_token).
+#. Specify your instance URL in the Webhook URL, use the Base64-encoded value of your Jira instance email and API token as the Authorization header value. This will be in the form ``Authorization: Basic base64(email:api_token)``.
 
    .. thumbnail:: /images/wazuh-dashboard/configurations/jira-edit.png
       :align: center
@@ -452,6 +506,12 @@ This notification channel sends alerts to Jira using a Jira API token. To config
 #. If the monitor has no actions in the default trigger, click **Edit**, and add a **Send notification** action using the **Add action** option. Then select the previously configured channel. If an action already exists, verify that it points to the correct channel. Adjust the subject/message template to match your Jira instance, then save and enable the monitor.
 
    .. thumbnail:: /images/wazuh-dashboard/configurations/jira-add-action.png
+      :align: center
+      :width: 80%
+      :title: Add notification action
+      :alt: Add notification action
+
+   .. thumbnail:: /images/wazuh-dashboard/configurations/jira-add-action2.png
       :align: center
       :width: 80%
       :title: Add notification action
@@ -497,6 +557,12 @@ This notification channel sends alerts to Shuffle via the Shuffle webhook URL. C
 #. If the monitor has no actions in the default trigger, click **Edit**, and add a **Send notification** action using the **Add action** option. Then select the previously configured channel. If an action already exists, verify that it points to the correct channel. Adjust the subject/message template if necessary, then save and enable the monitor.
 
    .. thumbnail:: /images/wazuh-dashboard/configurations/shuffle-add-action.png
+      :align: center
+      :width: 80%
+      :title: Add notification action
+      :alt: Add notification action
+
+   .. thumbnail:: /images/wazuh-dashboard/configurations/shuffle-add-action2.png
       :align: center
       :width: 80%
       :title: Add notification action
@@ -755,15 +821,19 @@ Bar charts are a type of visualization that is used to compare specific measures
 
 The steps below show how to create a horizontal bar visualization that shows varying numbers of MITRE tactics detected within a set timeframe.
 
-#. Click **Create visualization** from the Visualize tab, select the **Horizontal Bar** visualization format, and use wazuh-findings\* as the index pattern name.
-#. Set the following value in the Data section, on the Y-axis, in Metrics:
-   - Aggregation = Count
-#. Add an X-axis in Bucket and set the following values:
-   - Aggregation = Terms
-   - Field = rule.mitre.tactic
-   - Order by = Metric: Count
-   - Order = Descending
-   - Size = 10
+#. Click **Create visualization** from the Visualize tab, select the **Horizontal Bar** visualization format, and use ``wazuh-findings*`` as the index pattern name.
+#. Set the following value in the Data section, on the ``Y-axis``, in **Metrics**:
+
+   -  ``Aggregation`` = ``Count``
+
+#. Add an ``X-axis`` in **Bucket** and set the following values:
+
+   -  ``Aggregation`` = ``Terms``
+   -  ``Field`` = ``rule.mitre.tactic``
+   -  ``Order by`` = ``Metric: Count``
+   -  ``Order`` = ``Descending``
+   -  ``Size`` = ``10``
+
 #. Click the **Update** button.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-horizontal-bar-visualization-update-button.png
@@ -778,15 +848,19 @@ The steps below show how to create a horizontal bar visualization that shows var
 
 The steps below show how to create a vertical bar visualization that shows varying numbers of MITRE tactics detected within a set timeframe.
 
-#. Click **Create visualization** from the Visualize tab, select the **Vertical Bar** visualization format, and use wazuh-findings\* as the index pattern name.
-#. Set the following value in the Data section, on the Y-axis, in Metrics:
-   - Aggregation = Count
-#. Add an X-axis in Bucket and set the following values:
-   - Aggregation = Terms
-   - Field = rule.mitre.tactic
-   - Order by = Metric: Count
-   - Order = Descending
-   - Size = 10
+#. Click **Create visualization** from the Visualize tab, select the **Vertical Bar** visualization format, and use ``wazuh-findings*`` as the index pattern name.
+#. Set the following value in the Data section, on the ``Y-axis``, in **Metrics**:
+
+   -  ``Aggregation`` = ``Count``
+
+#. Add an ``X-axis`` in **Bucket** and set the following values:
+
+   -  ``Aggregation`` = ``Terms``
+   -  ``Field`` = ``rule.mitre.tactic``
+   -  ``Order by`` = ``Metric: Count``
+   -  ``Order`` = ``Descending``
+   -  ``Size`` = ``10``
+
 #. Click the **Update** button.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-vertical-bar-visualization-update-button.png
@@ -806,16 +880,20 @@ The steps below show how to create a Pie chart visualization that shows MITRE ta
 
 **Creating a Pie chart**
 
-#. Click **Create visualization** from the Visualize tab, select the **Pie** visualization format, and use wazuh-findings\* as the index pattern name.
-#. Set the following value in the Data section, on the Slice size, in Metrics:
-   - Aggregation = Count
+#. Click **Create visualization** from the Visualize tab, select the **Pie** visualization format, and use ``wazuh-findings*`` as the index pattern name.
+#. Set the following value in the Data section, on the ``Slice size``, in **Metrics**:
+
+   -  ``Aggregation`` = ``Count``
+
 #. Add a Split slices in Bucket and set the following values:
-   - Aggregation = Terms
-   - Field = rule.mitre.tactic
-   - Order by = Metric: Count
-   - Order = Descending
-   - Size = 10
-#. Customize the Pie chart by toggling on show label in the Options section.
+
+   -  ``Aggregation`` = ``Terms``
+   -  ``Field`` = ``rule.mitre.tactic``
+   -  ``Order by`` = ``Metric: Count``
+   -  ``Order`` = ``Descending``
+   -  ``Size`` = ``10``
+
+#. Customize the Pie chart by toggling on ``show label`` in the **Options** section.
 #. Click the **Update** button.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-pie-visualization-update-button.png
@@ -835,16 +913,22 @@ The steps below show how to create an Area chart that visualizes a histogram of 
 
 **Creating an Area chart**
 
-#. Click **Create visualization** from the Visualize tab, select the **Area** visualization format, and use wazuh-events\* as the index pattern name.
-#. Set the following value in the Data section, on the Y-axis, in Metrics:
-   - Aggregation = Max
-   - Field = event.severity
-#. Add another Y-axis in Metric and set the following values:
-   - Aggregation = Max
-   - Field = rule.firedtimes
-#. Add an X-axis in Bucket and set the following values:
-   - Aggregation = Date Histogram
-   - Field = timestamp
+#. Click **Create visualization** from the Visualize tab, select the **Area** visualization format, and use ``wazuh-events*`` as the index pattern name.
+#. Set the following value in the Data section, on the ``Y-axis``, in **Metrics**:
+
+   -  ``Aggregation`` = ``Max``
+   -  ``Field`` = ``event.severity``
+
+#. Add another ``Y-axis`` in **Metric** and set the following values:
+
+   -  ``Aggregation`` = ``Max``
+   -  ``Field`` = ``rule.firedtimes``
+
+#. Add an ``X-axis`` in **Bucket** and set the following values:
+
+   -  ``Aggregation`` = ``Date Histogram``
+   -  ``Field`` = ``timestamp``
+
 #. Click the **Update** button.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-area-visualization-update-button.png
@@ -864,14 +948,18 @@ The steps below show how to create a Line chart that visualizes the Wazuh rule l
 
 **Creating a Line chart**
 
-#. Click **Create visualization** from the Visualize tab, select the **Line** visualization format, and use wazuh-events\* as the index pattern name.
-#. Set the following value in the Data section, on the Y-axis, in Metrics:
-   - Aggregation = Max
-   - Field = event.severity
-#. Add an X-axis in Buckets and set the following values:
-   - Aggregation = Date Histogram
-   - Field = timestamp
-   - Minimum interval = Minute
+#. Click **Create visualization** from the Visualize tab, select the **Line** visualization format, and use ``wazuh-events*`` as the index pattern name.
+#. Set the following value in the **Data** section, on the ``Y-axis``, in **Metrics**:
+
+   -  ``Aggregation`` = ``Max``
+   -  ``Field`` = ``event.severity``
+
+#. Add an ``X-axis`` in **Buckets** and set the following values:
+
+   -  ``Aggregation`` = ``Date Histogram``
+   -  ``Field`` = ``timestamp``
+   -  ``Minimum interval`` = ``Minute``
+
 #. Click the **Update** button.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-line-visualization-update-button.png
@@ -891,21 +979,27 @@ The steps below show how to create a Heat map that visualizes the mapping of Waz
 
 **Creating a Heat Map**
 
-#. Click **Create visualization** from the Visualize tab, select the **Heat Map** visualization format, and use wazuh-events\* as the index pattern name.
-#. Set the following value in the Data section, on the Y-axis, in Metrics:
-   - Aggregation = Count
-#. Add an X-axis in Buckets and set the following values:
-   - Aggregation = Terms
-   - Field = wazuh.integration.name
-   - Order by = Metric: Count
-   - Order = Descending
-   - Size = 5
-#. Add a Y-axis in Buckets and set the following values:
-   - Aggregation = Terms
-   - Field = wazuh.integration.category
-   - Order by = Metric: Count
-   - Order = Descending
-   - Size = 5
+#. Click **Create visualization** from the Visualize tab, select the **Heat Map** visualization format, and use ``wazuh-events*`` as the index pattern name.
+#. Set the following value in the Data section, on the ``Y-axis``, in **Metrics**:
+
+   -  ``Aggregation`` = ``Count``
+
+#. Add an ``X-axis`` in **Buckets** and set the following values:
+
+   -  ``Aggregation`` = ``Terms``
+   -  ``Field`` = ``wazuh.integration.name``
+   -  ``Order by`` = ``Metric: Count``
+   -  ``Order`` = ``Descending``
+   -  ``Size`` = ``5``
+
+#. Add a ``Y-axis`` in **Buckets** and set the following values:
+
+   -  ``Aggregation`` = ``Terms``
+   -  ``Field`` = ``wazuh.integration.category``
+   -  ``Order by`` = ``Metric: Count``
+   -  ``Order`` = ``Descending``
+   -  ``Size`` = ``5``
+
 #. Click the **Update** button.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-heat-map-visualization-update-button.png
@@ -936,15 +1030,19 @@ The following steps show how to create a Data table to visualize the maximum cou
 
 **Creating a Data table**
 
-#. Click **Create visualization** from the Visualize tab, select the **Data Table** visualization format, and use wazuh-findings-v5\* as the index pattern name.
+#. Click **Create visualization** from the Visualize tab, select the **Data Table** visualization format, and use ``wazuh-findings-v5*`` as the index pattern name.
 #. Set the following metrics in the Data section:
-   - Aggregation = Count
-#. Add a Split rows in Buckets and set the following values:
-   - Aggregation = Terms
-   - Field = wazuh.rule.level
-   - Order by = Metric: Count
-   - Order = Descending
-   - Size = 5
+
+   -  ``Aggregation`` = ``Count``
+
+#. Add a ``Split rows`` in **Buckets** and set the following values:
+
+   -  ``Aggregation`` = ``Terms``
+   -  ``Field`` = ``wazuh.rule.level``
+   -  ``Order by`` = ``Metric: Count``
+   -  ``Order`` = ``Descending``
+   -  ``Size`` = ``5``
+
 #. Click the **Update** button.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-data-table-visualization-update-button.png
@@ -964,12 +1062,16 @@ The following steps show how to create a Metric to visualize the number of SCA c
 
 **Creating a Metric**
 
-#. Click **Create visualization** from the Visualize tab, select the **Metric** visualization format, and use wazuh-states-sca\* as the index pattern name.
+#. Click **Create visualization** from the Visualize tab, select the **Metric** visualization format, and use ``wazuh-states-sca*`` as the index pattern name.
 #. Set the following metrics in the Data section:
-   - Aggregation = count
-#. Add a Split group in Buckets and set the following values:
-   - Aggregation = Filters
-   - Filter = check.result: "Passed"
+
+   -  ``Aggregation`` = ``count``
+
+#. Add a ``Split group`` in **Buckets** and set the following values:
+
+   -  ``Aggregation`` = ``Filters``
+   -  ``Filter`` = ``check.result: "Passed"``
+
 #. Click the **Update** button.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-metric-visualization-update-button.png
@@ -989,12 +1091,16 @@ The steps below show how to create a Gauge to visualize the SCA failed counts.
 
 **Creating a Gauge**
 
-#. Click **Create visualization** from the Visualize tab, select the **Metric** visualization format, and use wazuh-states-sca\* as the index pattern name.
+#. Click **Create visualization** from the Visualize tab, select the **Metric** visualization format, and use ``wazuh-states-sca*`` as the index pattern name.
 #. Set the following metrics in the Data section:
-   - Aggregation = count
-#. Add a Split group in Buckets and set the following values:
-   - Aggregation = Filters
-   - Filter = check.result: "Failed"
+
+   -  ``Aggregation`` = ``count``
+
+#. Add a ``Split group`` in **Buckets** and set the following values:
+
+   -  ``Aggregation`` = ``Filters``
+   -  ``Filter`` = ``check.result: "Failed"``
+
 #. Click the **Update** button.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-gauge-visualization-update-button.png
@@ -1030,11 +1136,13 @@ The steps below show how to create a geographic map.
       :title: Add layer
       :alt: Add layer
 
-#. Select Documents as the Data layer.
+#. Select ``Documents`` as the Data layer.
 #. Set the following values in the New layer:
-   - Data source = wazuh-events\*
-   - Geospatial field = destination.geo.location
-   - Number of documents = 1000
+
+   -  ``Data source`` = ``wazuh-events*``
+   -  ``Geospatial field`` = ``destination.geo.location``
+   -  ``Number of documents`` = ``1000``
+
 #. Click the **Update** button.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-map-visualization-update-button.png
@@ -1061,7 +1169,7 @@ The steps below show how to create a coordinate map based on the origin location
 
 **Creating a Coordinate map**
 
-#. Click **Create visualization** from the Visualize tab, select the **Coordinate Map** visualization format, and use wazuh-events\* as the index pattern name.
+#. Click **Create visualization** from the Visualize tab, select the **Coordinate Map** visualization format, and use ``wazuh-events*`` as the index pattern name.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-coordinate-map-visualization.png
       :align: center
@@ -1070,10 +1178,14 @@ The steps below show how to create a coordinate map based on the origin location
       :alt: Create coordinate map visualization
 
 #. Set the following values on the Metric in Data:
-   - Aggregation = Count
-#. Add a Geo coordinate in Buckets and set the following values:
-   - Aggregation = Geohash
-   - Field = destination.geo.location
+
+   -  ``Aggregation`` = ``Count``
+
+#. Add a ``Geo coordinate`` in **Buckets** and set the following values:
+
+   -  ``Aggregation`` = ``Geohash``
+   -  ``Field`` = ``destination.geo.location``
+
 #. Click the **Update** button.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-coordinate-map-visualization-update-button.png
@@ -1093,7 +1205,7 @@ The steps below show how to create a region map based on the destination country
 
 **Create region map**
 
-#. Click **Create visualization** from the Visualize tab, select the **Region Map** visualization format, and use wazuh-events\* as the index pattern name.
+#. Click **Create visualization** from the Visualize tab, select the **Region Map** visualization format, and use ``wazuh-events*`` as the index pattern name.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-region-map-visualization.png
       :align: center
@@ -1102,12 +1214,16 @@ The steps below show how to create a region map based on the destination country
       :alt: Create region map visualization
 
 #. Set the following values on the Metric in Data:
-   - Aggregation = Count
-#. Add a Shape field in Buckets and set the following values:
-   - Aggregation = Terms
-   - Field = destination.geo.country\_name
-   - Order by = Metric: Count
-   - Order = Descending
+
+   -  ``Aggregation`` = ``Count``
+
+#. Add a ``Shape field`` in **Buckets** and set the following values:
+
+   -  ``Aggregation`` = ``Terms``
+   -  ``Field`` = ``destination.geo.country_name``
+   -  ``Order by`` = ``Metric: Count``
+   -  ``Order`` = ``Descending``
+
 #. Select Name as **Join field** under the **Layer Options** tab.
 #. Click the **Update** button.
 
@@ -1138,7 +1254,7 @@ The steps below show how to use Visualization Builder to present the Wazuh integ
 
 **Creating a Visualization Builder**
 
-#. Click **Create visualization** from the Visualize tab, select the **VisBuilder** visualization format, and use wazuh-events\* as the index pattern name.
+#. Click **Create visualization** from the Visualize tab, select the **VisBuilder** visualization format, and use ``wazuh-events*`` as the index pattern name.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-visbuilder-visualization.png
       :align: center
@@ -1147,9 +1263,9 @@ The steps below show how to use Visualization Builder to present the Wazuh integ
       :alt: Create VisBuilder visualization
 
 #. Drag a field to the configuration panel to generate a visualization.
-#. Set aggregation to count on the **Y-axis**.
-#. Set wazuh.integration.name on an **X-axis**.
-#. Set wazuh.integration.category on the **Split series**.
+#. Set aggregation to ``count`` on the **Y-axis**.
+#. Set ``wazuh.integration.name`` on an **X-axis**.
+#. Set ``wazuh.integration.category`` on the **Split series**.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-visbuilder-visualization-data.png
       :align: center
@@ -1177,12 +1293,13 @@ The steps below show how to use Time Series Visual Builder to visualize Wazuh in
       :alt: Create TSVB visualization
 
 #. Set the following values on the **Metric** tab in **Data**:
-   - Aggregation = Count
-   - Group by = Terms
-   - By = wazuh.integration.category
-   - Top = 10
-   - Order by = Doc Count (default)
-   - Direction = Descending
+
+   -  ``Aggregation`` = ``Count``
+   -  ``Group by`` = ``Terms``
+   -  ``By`` = ``wazuh.integration.category``
+   -  ``Top`` = ``10``
+   -  ``Order by`` = ``Doc Count (default)``
+   -  ``Direction`` = ``Descending``
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-tsvb-visualization-data.png
       :align: center
@@ -1207,7 +1324,7 @@ This is a visual representation of text data where words are displayed in varyin
 
 **Creating a tag cloud**
 
-#. Click **Create visualization** from the Visualize tab, select the **Tag cloud** visualization format, and use wazuh-events\* as the index pattern name.
+#. Click **Create visualization** from the Visualize tab, select the **Tag cloud** visualization format, and use ``wazuh-events*`` as the index pattern name.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-tag-cloud-visualization.png
       :align: center
@@ -1216,11 +1333,15 @@ This is a visual representation of text data where words are displayed in varyin
       :alt: Create tag cloud visualization
 
 #. Set the following value on the Metric in Metrics data:
-   - Tag size = Count
+
+   -  ``Tag size`` = ``Count``
+
 #. Add a new Tag in Bucket data and set the following values:
-   - Aggregation = Terms
-   - Field = wazuh.integration.name
-   - Order by = Metric: Count
+
+   -  ``Aggregation`` = ``Terms``
+   -  ``Field`` = ``wazuh.integration.name``
+   -  ``Order by`` = ``Metric: Count``
+
 #. Click the **Update** button.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-tag-cloud-visualization-update-button.png
@@ -1238,7 +1359,7 @@ Markdown is a lightweight markup language that is used for formatting text. It a
 
 **Creating a markdown**
 
-#. Click **Create visualization** from the Visualize tab, select the **Markdown** visualization format, and use wazuh-events\* as the index pattern name.
+#. Click **Create visualization** from the Visualize tab, select the **Markdown** visualization format, and use ``wazuh-events*`` as the index pattern name.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-markdown-visualization.png
       :align: center
@@ -1275,9 +1396,9 @@ At the time of writing this document, this visualization is experimental. The de
       :title: Create controls visualization
       :alt: Create controls visualization
 
-#. Click on the **Add** button to add a new Options list and set the **Control Label** as MITRE tactic.
-#. Set wazuh-events\* as the **Index Pattern** name.
-#. Select the field rule.mitre.tactic.
+#. Click on the **Add** button to add a new ``Options list`` and set the **Control Label** as ``MITRE tactic``.
+#. Set ``wazuh-events*`` as the **Index Pattern** name.
+#. Select the field ``rule.mitre.tactic``.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/select-rule-mitre-tactic.png
       :align: center
@@ -1286,7 +1407,7 @@ At the time of writing this document, this visualization is experimental. The de
       :alt: Select rule.mitre.tactic
 
 #. Click the **Update** button.
-#. In the dropdown list, select Range slider and click on the **Add** button. Set the **Control Label** as Quantity.
+#. In the dropdown list, select ``Range slider`` and click on the **Add** button. Set the **Control Label** as ``Quantity``.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/add-range-slider.png
       :align: center
@@ -1294,8 +1415,8 @@ At the time of writing this document, this visualization is experimental. The de
       :title: Add range slider
       :alt: Add range slider
 
-#. Select wazuh-events\* as the **Index Pattern** name.
-#. Select event.severity as the Field.
+#. Select ``wazuh-events*`` as the **Index Pattern** name.
+#. Select ``event.severity`` as the **Field**.
 #. Click the **Update** button.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-controls-visualization-update-button.png
@@ -1323,7 +1444,7 @@ They are commonly used in historical analysis, project planning, or storytelling
       :title: Create timeline visualization
       :alt: Create timeline visualization
 
-#. Choose a source for the chart. In the Timeline expression windows, within .opensearch(\*). The expression .opensearch(\*) is a wildcard value that represents all the indexes currently within the Wazuh indexer, combined together. Here we selected wazuh-events\* as the index to use.
+#. Choose a source for the chart. In the Timeline expression windows, within ``.opensearch(*)``. The expression ``.opensearch(*)`` is a wildcard value that represents all the indexes currently within the Wazuh indexer, combined together. Here we selected ``wazuh-events*`` as the index to use.
 
    .. code-block:: none
 
