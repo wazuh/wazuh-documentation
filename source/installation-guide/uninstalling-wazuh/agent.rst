@@ -26,6 +26,10 @@ Run the following commands to uninstall a Linux agent.
 
    To uninstall Wazuh agent from a Linux endpoint with the anti-tampering feature enabled, refer to :ref:`uninstalling_an_agent_with_anti_tampering_enabled`.
 
+#. Disable the Wazuh agent service.
+
+   .. include:: ../../_templates/installations/wazuh/common/disable_wazuh_agent_service.rst
+
 #. Remove the Wazuh agent installation.
 
    .. tabs::
@@ -45,10 +49,6 @@ Run the following commands to uninstall a Linux agent.
       .. group-tab:: ZYpp
 
          .. include:: /_templates/installations/wazuh/zypp/uninstall_wazuh_agent.rst
-
-#. Disable the Wazuh agent service.
-
-   .. include:: ../../_templates/installations/wazuh/common/disable_wazuh_agent_service.rst
 
 The Wazuh agent is now completely removed from your Linux endpoint.
 

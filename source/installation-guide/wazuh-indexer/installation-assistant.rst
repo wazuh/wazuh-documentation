@@ -74,8 +74,7 @@ Follow these steps to configure your Wazuh deployment, create SSL certificates t
         # bash wazuh-install.sh --generate-config-files
 
 
-#. Copy the ``wazuh-install-files.tar`` file to all the servers of the distributed deployment, including the Wazuh server, the Wazuh indexer, and the Wazuh dashboard nodes. This can be done by using the ``scp`` utility.
-
+#. Copy the ``wazuh-install-files.tar`` file to all the servers of the distributed deployment, including the Wazuh server, the Wazuh indexer, and the Wazuh dashboard nodes. You can use the ``scp`` utility or any other secure file transfer method available in your environment.
 
 Wazuh indexer node installation
 -------------------------------
