@@ -1,92 +1,196 @@
 # Contributing to the Wazuh documentation
 
-This document explains how to set up a Python virtual environment, clone the repository, contribute changes, and submit a pull request. It also explains how to report issues clearly so that we can resolve them quickly.
+This document explains how to report issues, set up a local environment, and submit a pull request to the Wazuh documentation repository.
 
-*Note: These contribution guidelines might change in the future as we improve or change how we organize, create, and compile the documentation.*
+---
 
-## How to report issues in the Wazuh documentation
+## Reporting issues
 
-The community is important to us. We value your feedback on bugs or typos in the documentation. When reporting an issue, include the **URL or section** where the error occurs and provide all relevant details to help us resolve it.
+We value feedback from the community. When reporting an issue, include the **URL or section** where the problem occurs and provide all relevant details.
 
-This repository is dedicated to Wazuh documentation. In some cases, your issue might be more effectively addressed if it's reported in the appropriate repository. Here you can find some tips if you have doubts about the right place for your issue:
-
-- If Wazuh works fine but something in the documentation seems inaccurate, unclear, or confusing, let us know by creating an issue [here](https://github.com/wazuh/wazuh-documentation/issues).
-- If you encounter problems, bugs, or unexpected results when using any of the Wazuh components, create the issue in its respective repository:
-  - [Wazuh server](https://github.com/wazuh/wazuh/issues)
-  - [Wazuh server API](https://github.com/wazuh/wazuh-api/issues)
-  - [Wazuh indexer](https://github.com/wazuh/wazuh-indexer/issues)
-  - [Wazuh dashboard](https://github.com/wazuh/wazuh-dashboard/issues)
+- If something in the documentation seems inaccurate, unclear, or confusing, open an issue in this repository.
+- If you encounter bugs or unexpected behavior when using Wazuh itself, report it in the corresponding component repository:
   - [All Wazuh repositories](https://github.com/wazuh)
 
-In any case, **don't worry if you create an issue here**, we'll assist you with your problem.
+Every pull request must be associated with an open issue. If one does not exist yet, please create it before submitting your PR.
 
-## How to collaborate with the Wazuh documentation
+---
 
-Contribute by forking the repository, creating a new branch, making your changes, and submitting a pull request.
+## Branching
 
-### Installing a Python virtual environment
+Refer to the [branch model in README.md](README.md#branches) for an overview of how branches map to Wazuh versions.
 
-The Digital Ocean guides below provide an overview of installing Python 3 and configuring a virtual environment. This approach lets you install the required dependencies without altering your primary environment, making it easier to manage and remove development setups.
+Target the branch that corresponds to the Wazuh version you are updating. For example, a fix for the 4.14 documentation should be submitted against the `4.14` branch. Don't use `main` to update published documentation, this branch has the documentation for  latest version currently in development.
 
-- Ubuntu 22.04: [Link](https://www.digitalocean.com/community/tutorials/how-to-install-python-3-and-set-up-a-programming-environment-on-ubuntu-22-04)
-- CentOS 7: [Link](https://www.digitalocean.com/community/tutorials/how-to-install-python-3-and-set-up-a-local-programming-environment-on-centos-7)
+Long-lived branches (`main` and version branches) are protected. Only authorized members of the documentation team can merge changes into them.
 
-After completing one of these guides, your Python environment will be ready.
+---
 
-### How to fork this repository
+## Setting up a local environment
 
-Follow the [GitHub forking model](https://help.github.com/articles/fork-a-repo/) for collaborating on the documentation. This model assumes that you have a remote called `upstream` which points to the official repository.
+### Prerequisites
 
-### Setting up the virtual environment
+- Python 3 and `pip`
+- `git`
+- `make`
 
-Assuming you have created and activated a virtual environment named `wazuh_venv`, proceed with the following steps:
+### Build the documentation
 
-1. Clone the repository:
+With a virtual environment created and activated:
 
-  ```shell
-  (wazuh_venv) $ git clone https://github.com/<YOUR_USERNAME>/wazuh-documentation.git
-  ```
+```shell
+# Clone your fork
+git clone https://github.com/wazuh/wazuh-documentation.git
+cd wazuh-documentation
 
-The `(wazuh_venv)` label indicates that the virtual environment is active.
+# Install dependencies
+pip install -r requirements.txt
 
-2. Change to the repository folder and install the dependencies.
+# Build the HTML documentation
+make html #or `make html-quick`
+```
 
-  ```shell
-  (wazuh_venv) $ cd wazuh-documentation
-  (wazuh_venv) $ pip install -r requirements.txt
-  ```
+The generated documentation will be at `build/html/index.html`. Open it in your browser to preview your changes.
 
-3. Compile the documentation:
+To remove previous builds:
 
-  ```shell
-  (wazuh_venv) $ make html
-  ```
+```shell
+make clean
+```
 
-You can view the compiled documentation at `wazuh-documentation/build/html/index.html` as if it were served by web server.
+---
 
-4. Clean the documentation.
+## Submitting a contribution
 
-  ```shell
-  (wazuh_venv) $ make clean
-  ```
+### 1. Fork and create a branch
 
-This command deletes the contents of `wazuh-documentation/build/html/`.
+Fork the repository and create a branch from the appropriate base branch. Follow this naming convention:
 
-## How the branches work
+| Type | Branch name |
+|------|-------------|
+| Bug fix | `bug/<issueID>-short-description` |
+| New content or enhancement | `enhancement/<issueID>-short-description` |
+| Test-related | `test/<issueID>-short-description` |
+| Other changes (e.g. rollbacks) | `change/<issueID>-short-description` |
 
-- The latest stable documentation is on the `main` branch. **Do not submit pull requests directly to this branch.**
-- We actively work on version numbered branches (4.10, 4.11, x.y) for new additions, improvements of existing documentation, or typo fixes.
-  - All new additions to a version branch will be compatible with the latest stable release. We won't include documentation for a future release that is incompatible with the current official version.
-- Work for a future release is merged into a separate branch until we make the final decision on the next release.
-- All branches other than `main` or version branches (e.g., 4.x) are feature branches under development and will be merged later.
-- Where appropriate, we'll backport changes into older release branches.
+Use lowercase letters, numbers, and hyphens. Avoid spaces and special characters. Replace `<issueID>` with the corresponding issue number.
 
-## Commits, pull requests and merging
+Example: `bug/1234-fix-agent-installation-steps`
 
-- Feel free to make as many commits as you want while working on a branch.
-- Please use your commit messages to include helpful information on your changes, and an explanation of *why* you made them.
-- Also include an explanation of your changes in your PR description.
-- Make sure to resolve merge conflicts so we can continue reviewing your pull request.
-- In your PR description, add links to relevant issues, external resources, or related PRs that are useful.
+### 2. Make your changes
 
-Thank you for contributing!
+Follow the writing and formatting guidelines below before committing.
+
+### 3. Commit your changes
+
+Write clear commit messages that describe what changed and why. Feel free to make as many commits as needed while working on your branch.
+
+### 4. Open a pull request
+
+Open a pull request against the appropriate base branch. In your PR description:
+
+- Explain what the PR changes and why.
+- Link to the related issue. You can use the `closes #<issueID>` keyword.
+- Add links to any relevant external resources or related PRs.
+- Resolve any merge conflicts before requesting review.
+
+The documentation team will review your PR. At least one approval from a team member is required before merging.
+
+---
+
+## PR checklist
+
+Before submitting, make sure the following are in order:
+
+**Compilation**
+- [ ] Documentation compiles without warnings (`make html`).
+
+**Changelog**
+- [ ] `CHANGELOG.md` is updated following the format below.
+
+**Web optimization**
+- [ ] `/_static/js/redirects.js` is updated if any pages were moved or renamed.
+- [ ] `/llms.txt` is updated if necessary.
+- [ ] Meta descriptions are added or updated for new or modified pages.
+
+**Writing style**
+- [ ] Use **bold** for UI elements, _italics_ for key terms and emphasis, and
+  `code` font for commands, file names, REST paths, and code.
+- [ ] Follow present tense, active voice, and a semi-formal tone.
+- [ ] Use three-space indentation in `.rst` files.
+
+---
+
+## Updating CHANGELOG.md
+
+Add an entry under the corresponding version header using the following format:
+
+```markdown
+## [vX.Y.Z]
+
+### Added
+
+- Description of the new content. ([#PR](https://github.com/wazuh/wazuh-documentation/pull/PR))
+
+### Changed
+
+- Description of the change. ([#PR](https://github.com/wazuh/wazuh-documentation/pull/PR))
+
+### Fixed
+
+- Description of the fix. ([#PR](https://github.com/wazuh/wazuh-documentation/pull/PR))
+```
+
+Use **Post-release:** as a prefix for entries that apply to an already published version. Link every entry to its corresponding pull request.
+
+---
+
+## Writing and formatting guidelines
+
+### Indentation
+
+Use three-space indentation in `.rst` files. For example:
+
+```rst
+#. Access the Wazuh web interface with ``https://<wazuh-dashboard-ip>`` and
+   your credentials:
+
+   -  Username: admin
+   -  Password: <ADMIN_PASSWORD>
+```
+
+### Links
+
+- Use the `:ref:` role to link to sections within the same page.
+- Use the `:doc:` role to link to other documentation pages. Do not use
+  `:ref:` to link to a full page.
+- Use `:api-ref:` to link to the Wazuh API reference.
+- Use anonymous hyperlinks (double underscores) for external links:
+
+```rst
+  `https://example.com`__
+
+  `Example site <https://example.com>`__
+```
+
+- To prevent Sphinx from converting a URL into a link, prepend `\`:
+
+```rst
+  This is the sample URL \https://example.com used as an example.
+```
+
+### Headings
+
+Use the following underline characters consistently:
+
+| Level | Character |
+|-------|-----------|
+| H1 | `=` |
+| H2 | `-` |
+| H3 | `^` |
+| H4 | `~` |
+| H5 | `.` |
+
+---
+
+Thank you for contributing to the Wazuh documentation.
