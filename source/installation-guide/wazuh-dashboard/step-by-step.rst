@@ -138,11 +138,6 @@ Starting the Wazuh dashboard service
 
    When you access the Wazuh dashboard for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser. For increased security, the ``root-ca.pem``  file previously generated can be imported to the certificate manager of the browser. Alternatively, you can :doc:`configure a certificate </user-manual/wazuh-dashboard/configuring-third-party-certs/index>` from a trusted authority.
 
-Disable Wazuh updates
----------------------
-
-.. include:: /_templates/installations/disable-wazuh-updates.rst
-
 Securing your Wazuh installation
 --------------------------------
 
@@ -269,6 +264,10 @@ Select your deployment type and follow the instructions to change the default pa
 
          .. include:: /_templates/common/restart_dashboard.rst
 
+Disable Wazuh updates
+---------------------
+
+.. include:: /_templates/installations/disable-wazuh-updates.rst
 
 Next steps
 ----------
