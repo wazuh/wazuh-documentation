@@ -221,7 +221,9 @@ Creating a Bar chart
 
 **Horizontal Bar**: This is a type of bar chart where rectangular bars are displayed horizontally. The length or width of each bar corresponds to a particular value. This allows an easy comparison between different data points. Horizontal bar charts are often used to visualize data that has distinct categories or to show rankings.
 
-The steps below show how to create a horizontal bar visualization that shows varying numbers of :doc:`MITRE </user-manual/ruleset/mitre>` tactics detected within a set timeframe.
+.. Republish TODO: once "/user-manual/ruleset/mitre" is in the build, restore the cross-reference in the phrase "horizontal bar visualization that shows varying numbers of MITRE tactics detected" — replace the word "MITRE" with :doc:`MITRE </user-manual/ruleset/mitre>`.
+
+The steps below show how to create a horizontal bar visualization that shows varying numbers of MITRE tactics detected within a set timeframe.
 
 #. Click **Create new visualization** from the **Visualize** tab, select the **Horizontal Bar** visualization format and use ``wazuh-alerts-*`` as the index pattern name.
 
@@ -249,7 +251,9 @@ The steps below show how to create a horizontal bar visualization that shows var
 
 **Vertical Bar**: This is a type of bar chart where the bars are displayed vertically, with the length or height of each bar representing a particular value. Vertical bar charts are suitable for comparing data across different categories. They are commonly used to display rankings, comparisons, or the distribution of values.
 
-The steps below detail how to create a vertical bar visualization that shows varying numbers of :doc:`MITRE </user-manual/ruleset/mitre>` tactics detected within a set timeframe.
+.. Republish TODO: once "/user-manual/ruleset/mitre" is in the build, restore the cross-reference in the phrase "vertical bar visualization that shows varying numbers of MITRE tactics detected" — replace the word "MITRE" with :doc:`MITRE </user-manual/ruleset/mitre>`.
+
+The steps below detail how to create a vertical bar visualization that shows varying numbers of MITRE tactics detected within a set timeframe.
 
 #. Click **Create new visualization** from the **Visualize** tab, select the **Vertical Bar** visualization format and use ``wazuh-alerts-*`` as the index pattern name.
 
@@ -280,7 +284,9 @@ Pie charts
 
 This is a circular chart that is divided into sectors, with each sector representing a percentage of a whole data set. They are commonly used to show market share, composition of data, or distribution of categories. The total slice size of a pie chart is calculated by the metrics aggregation. In the case of a pie chart, we use the count, sum, and unique count.
 
-The steps below show how to create a Pie chart visualization that shows :doc:`MITRE </user-manual/ruleset/mitre>` tactics count within a timeframe.
+.. Republish TODO: once "/user-manual/ruleset/mitre" is in the build, restore the cross-reference in the phrase "Pie chart visualization that shows MITRE tactics count" — replace the word "MITRE" with :doc:`MITRE </user-manual/ruleset/mitre>`.
+
+The steps below show how to create a Pie chart visualization that shows MITRE tactics count within a timeframe.
 
 Creating a Pie chart
 ''''''''''''''''''''
@@ -497,7 +503,9 @@ Goal
 
 This refers to the desired target that an individual or organization aims to achieve. It represents a specific purpose and serves as a benchmark for measuring progress and achieving a final goal. Goal visualization helps display progress toward a defined target, often represented as a percentage or count, making it easier to interpret key metrics at a glance.
 
-The steps below show how to create Goals to visualize the :doc:`Security Configuration Assessment </user-manual/capabilities/sec-config-assessment/index>` (SCA) policy status in percentage and counts.
+.. Republish TODO: once "/user-manual/capabilities/sec-config-assessment/index" is in the build, restore the cross-reference in the phrase "create Goals to visualize the Security Configuration Assessment (SCA) policy status" — replace the word "Security Configuration Assessment" with :doc:`Security Configuration Assessment </user-manual/capabilities/sec-config-assessment/index>`.
+
+The steps below show how to create Goals to visualize the Security Configuration Assessment (SCA) policy status in percentage and counts.
 
 Creating a Goal
 '''''''''''''''
@@ -706,7 +714,9 @@ Visualization Builder is an intuitive tool that allows users to create customize
 
 As of the time of writing this document, this visualization is experimental. The design and implementation are less mature than stable visualizations and might be subject to change.
 
-The steps below show how to use Visualization Builder to present :doc:`MITRE </user-manual/ruleset/mitre>` technique and tactics.
+.. Republish TODO: once "/user-manual/ruleset/mitre" is in the build, restore the cross-reference in the phrase "use Visualization Builder to present MITRE technique and tactics" — replace the word "MITRE" with :doc:`MITRE </user-manual/ruleset/mitre>`.
+
+The steps below show how to use Visualization Builder to present MITRE technique and tactics.
 
 Creating a Visualization Builder
 ''''''''''''''''''''''''''''''''
@@ -737,7 +747,9 @@ TSVB
 
 Time Series Visual Builder (TSVB) is a component of the Wazuh dashboard that allows users to create visualizations and analyze time series data using a visual pipeline interface. It provides features such as aggregations, filters, and metrics specifically tailored for time-based analysis.
 
-The steps below show how to use Time Series Visual Builder to visualize :doc:`MITRE </user-manual/ruleset/mitre>` tactics count within a timeframe.
+.. Republish TODO: once "/user-manual/ruleset/mitre" is in the build, restore the cross-reference in the phrase "use Time Series Visual Builder to visualize MITRE tactics count" — replace the word "MITRE" with :doc:`MITRE </user-manual/ruleset/mitre>`.
+
+The steps below show how to use Time Series Visual Builder to visualize MITRE tactics count within a timeframe.
 
 Creating a TSVB
 '''''''''''''''
@@ -857,7 +869,10 @@ Creating controls
       :title: Create controls visualization
       :alt: Create controls visualization
 
-#. Add a new ``Options list`` and set the control Label as :doc:`MITRE </user-manual/ruleset/mitre>` tactic.
+#. Add a new ``Options list`` and set the control Label as MITRE tactic.
+
+   .. Republish TODO: once "/user-manual/ruleset/mitre" is in the build, restore the cross-reference in the phrase "set the control Label as MITRE tactic" — replace the word "MITRE" with :doc:`MITRE </user-manual/ruleset/mitre>`.
+
 #. Choose a source for the chart. Here we selected ``wazuh-alerts-*`` as the index to use.
 #. Select the field ``rule.mitre.tactic``.
 

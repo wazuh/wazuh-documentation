@@ -139,7 +139,9 @@ The Wazuh manager and the Wazuh dashboard must run the same major and minor vers
 -  Wazuh manager |WAZUH_CURRENT_MINOR|.x
 -  Wazuh dashboard |WAZUH_CURRENT_MINOR|.x
 
-Check out how to upgrade the Wazuh components in our :doc:`upgrade guide </upgrade-guide/index>`.
+.. Republish TODO: once "/upgrade-guide/index" is in the build, restore the cross-reference in the phrase "upgrade the Wazuh components in our upgrade guide" — replace the word "upgrade guide" with :doc:`upgrade guide </upgrade-guide/index>`.
+
+Check out how to upgrade the Wazuh components in our upgrade guide.
 
 Saved object for index pattern not found error
 ----------------------------------------------
