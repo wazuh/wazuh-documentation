@@ -85,6 +85,7 @@ newUrls['5.0'] = [
   '/deployment-options/deploying-with-kubernetes/kubernetes-password.html',
   '/user-manual/agent/agent-management/remove-agents.html',
   '/user-manual/agent/agent-management/list-agents.html',
+  '/user-manual/wazuh-dashboard/wazuh-dashboard-configurations.html',
 ];
 
 /* Redirections 4.14—5.0  */
@@ -109,6 +110,21 @@ redirections.push(
     'target': ['4.14=>5.0', '5.0=>4.14'],
     '4.14': '/user-manual/agent/agent-management/remove-agents/restful-api-remove.html',
     '5.0': '/user-manual/agent/agent-management/remove-agents.html#remove-agents-using-the-wazuh-manager-api',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/user-manual/wazuh-dashboard/queries.html',
+    '5.0': '/user-manual/wazuh-dashboard/global-queries.html#filtering-data-using-wazuh-query-language-wql',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/user-manual/wazuh-dashboard/creating-custom-dashboards.html',
+    '5.0': '/user-manual/wazuh-dashboard/wazuh-dashboard-configurations.html#creating-custom-dashboards',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/user-manual/wazuh-dashboard/multi-tenancy.html',
+    '5.0': '/user-manual/wazuh-dashboard/wazuh-dashboard-configurations.html#multi-tenancy',
   }
 );
 
@@ -135,6 +151,10 @@ removedUrls['5.0'] = [
   '/user-manual/agent/agent-management/remove-agents/remove.html',
   '/user-manual/reference/ossec-conf/fluent-forward.html',
   '/user-manual/agent/agent-enrollment/deployment-variables/deployment-variables-aix.html',
+  '/user-manual/wazuh-dashboard/queries.html',
+  '/user-manual/wazuh-dashboard/creating-custom-dashboards.html',
+  '/user-manual/wazuh-dashboard/multi-tenancy.html',
+  '/user-manual/wazuh-dashboard/settings.html',
   '/installation-guide/wazuh-agent/wazuh-agent-package-aix.html',
   '/installation-guide/wazuh-agent/wazuh-agent-package-hpux.html',
   '/installation-guide/wazuh-agent/wazuh-agent-package-solaris.html',

@@ -115,7 +115,6 @@ exclude_patterns = [
     'user-manual/reference/**',
     'user-manual/ruleset/**',
     'user-manual/user-administration/**',
-    'user-manual/wazuh-dashboard/**',
     'user-manual/wazuh-indexer/**',
     'user-manual/wazuh-indexer-cluster/**',
     'user-manual/wazuh-server-cluster/**',

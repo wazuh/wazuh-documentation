@@ -106,3 +106,10 @@ After running the script, the directory ``wazuh-certificates`` will be created a
         ├── indexer.pem
         ├── server-key.pem
         └── server.pem
+
+Wazuh supports the use of third-party SSL/TLS certificates for securing access to the Wazuh dashboard. Instead of using self-signed SSL certificates, organizations can use certificates issued by a trusted Certificate Authority (CA) to provide trusted HTTPS connections for dashboard users.
+
+.. toctree::
+   :maxdepth: 2
+
+   configuring-third-party-certs/index

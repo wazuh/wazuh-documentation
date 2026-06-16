@@ -6,16 +6,16 @@
 Troubleshooting
 ===============
 
-This section highlights common installation or usage issues on the Wazuh dashboard, and some basic steps to solve them.
+This section highlights common installation or usage issues on the Wazuh dashboard and some basic steps to solve them.
 
-Wazuh server API seems to be down error
----------------------------------------
+Wazuh manager API seems to be down error
+----------------------------------------
 
-This issue means that your Wazuh server API might be unavailable. Check the status of the Wazuh manager to see if the service is active:
+This issue means that your Wazuh manager API might be unavailable. Check the status of the Wazuh manager to see if the service is active:
 
 .. include:: /_templates/installations/wazuh/common/check_wazuh_manager.rst
 
-If the Wazuh server API is running, try to fetch data using the CLI from the Wazuh dashboard server:
+If the Wazuh manager API is running, try to fetch data using the CLI from the Wazuh dashboard server:
 
 .. code-block:: console
 
@@ -32,26 +32,26 @@ The command returns output similar to the following example:
    {
       "data": {
          "title": "Wazuh API REST",
-         "api_version": "4.12.0",
-         "revision": "rc1",
+         "api_version": "5.0.0",
+         "revision": "beta1",
          "license_name": "GPL 2.0",
-         "license_url": "https://github.com/wazuh/wazuh/blob/v4.12.0/LICENSE",
-         "hostname": "centos8a",
-         "timestamp": "2025-08-18T19:31:01Z"
+         "license_url": "https://github.com/wazuh/wazuh/blob/v5.0.0-beta1/LICENSE",
+         "hostname": "server",
+         "timestamp": "2026-06-01T21:19:52Z"
       },
       "error": 0
    }
 
 .. code-block:: none
    :class: output
-   :caption: Output if API is down:
+   :caption: Output if the Wazuh manager API is down:
 
    % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                     Dload  Upload   Total   Spent    Left  Speed
      0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
    curl: (7) Failed to connect to 127.0.0.1 port 55000 after 0 ms: Couldn't connect to server
 
-If the Wazuh server API is down, restart the Wazuh manager and verify the API is now running.
+If the Wazuh manager API is unavailable, restart the Wazuh manager and confirm that the API is running.
 
 .. include:: /_templates/common/restart_manager.rst
 
@@ -62,67 +62,86 @@ The first step is to check if there are alerts in the Wazuh indexer:
 
 .. code-block:: console
 
-   # curl https://<WAZUH_INDEXER_IP>:9200/_cat/indices/wazuh-alerts-* -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> -k
+   # curl https://<WAZUH_INDEXER_IP>:9200/_cat/indices/wazuh* -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> -k
 
 .. code-block:: none
    :class: output
 
-   green open wazuh-alerts-4.x-2021.03.03 xwFPX7nFQxGy-O5aBA3LFQ 3 0 340 0 672.6kb 672.6kb
+   green open .ds-wazuh-events-v5-system-activity-000001     ZWfhtYJ8QyC5-zLshj-ccA 3 0 370001   0   157mb   157mb
+   green open wazuh-states-inventory-users                   XLY62qJ9TfmRJxNADUofpw 1 0     44   0  59.5kb  59.5kb
+   green open .ds-wazuh-findings-v5-unclassified-000001      8Cy3yyI2RiWYxluU7gzsgA 3 0      0   0    624b    624b
+   green open .ds-wazuh-findings-v5-system-activity-000001   OLxn2t3KQqS3m653-CJjZA 3 0  81628   0  67.7mb  67.7mb
+   green open wazuh-states-inventory-packages                JQ7toQOTTKSWaco9-WYsEw 1 0    780   5 414.8kb 414.8kb
+   green open .ds-wazuh-active-responses-000001              bN_PvMEkQUifr4RYVsszYg 3 0      0   0    624b    624b
+   green open wazuh-states-inventory-hardware                FwSUHTA7QNmfvOW00AmtBw 1 0      2   0  25.7kb  25.7kb
+   green open wazuh-states-inventory-browser-extensions      hZs30G4jTo6FTvbfFlUIkQ 1 0     29   0  88.4kb  88.4kb
+   green open wazuh-states-inventory-protocols               E1sT9505Q4C63QKm_9CmGw 1 0     30   2  48.9kb  48.9kb
+   green open wazuh-states-inventory-services                ZvyQheflQcqFTPvKbjbHBA 1 0    928  66 802.2kb 802.2kb
+   green open wazuh-states-fim-registry-keys                 iUpYlrmtRQam1xBy_X74QA 1 0   9308 374   4.1mb   4.1mb
+   green open .ds-wazuh-events-v5-security-000001            oykATY1YRsaxi2mi_s1BxQ 3 0    561   0   1.9mb   1.9mb
+   green open .ds-wazuh-findings-v5-security-000001          BmagEEMYQbSK9_Qd5zvtiw 3 0    484   0   2.5mb   2.5mb
+   green open wazuh-states-sca                               XyzKW9PFQyefxBFfxQiOhQ 1 0    689   0   1.4mb   1.4mb
+   green open wazuh-states-inventory-processes               6HiCY9lZSZGrgrKNX5LFJA 1 0    500   7 740.1kb 740.1kb
+   green open .ds-wazuh-metrics-comms-000001                 FrBBaRJbTdmjYVGrmNx17w 1 0   1734   0 530.9kb 530.9kb
+   green open .ds-wazuh-findings-v5-access-management-000001 -GRLurdjQ0G3rcd-GoCx4w 3 0      0   0    624b    624b
+   green open .ds-wazuh-events-raw-v5-000001                 UxSkDyaoTFSpN05_OO-26Q 3 0      0   0    624b    624b
+   green open wazuh-states-fim-files                         jBQ_0Ze3TWqitKUE35AsAg 1 0   3152   6     2mb     2mb
+   green open wazuh-states-inventory-interfaces              0qeNgaiVR9yeGv-eJp8wcg 1 0     15   0  51.6kb  51.6kb
+   green open .ds-wazuh-findings-v5-other-000001             b_0Z8YtuSGaEpxr2IocHMA 3 0      0   0    624b    624b
+   green open .ds-wazuh-events-v5-unclassified-000001        kgEY22_QSGew6eeXiyZwvQ 3 0      0   0    624b    624b
+   green open wazuh-states-inventory-hotfixes                56y4q9MkTwu8O1PH-nOf6w 1 0     15   0  14.7kb  14.7kb
+   green open .ds-wazuh-events-v5-network-activity-000001    K_n5VkgHSLmhHoUUAZhc-g 3 0      0   0    624b    624b
+   green open wazuh-states-inventory-ports                   h1W-2b7BTtCFQEY3yYZhxw 1 0    304 188 304.9kb 304.9kb
+   green open wazuh-states-inventory-system                  rDruR8D4Q6mBvZvz0aaQVQ 1 0      2   0  30.6kb  30.6kb
+   green open .ds-wazuh-events-v5-cloud-services-000001      RRd90sPrTo-PIrKFPmZRDw 3 0      0   0    624b    624b
+   green open wazuh-states-inventory-groups                  -gbLLrIHSMmAz2Y8ukdIWA 1 0     76   0  49.5kb  49.5kb
+   green open wazuh-states-inventory-networks                Vi87X-mgTcWFcgqWRI2qcg 1 0     34   4  65.5kb  65.5kb
+   green open wazuh-states-fim-registry-values               TG4J3OilTMS43dfTTfLxug 1 0  27862 487  14.2mb  14.2mb
+   green open .ds-wazuh-events-v5-applications-000001        sinevCgKRVmSB6HMoHFKmw 3 0      0   0    624b    624b
+   green open .ds-wazuh-findings-v5-applications-000001      zLEJ0YGSQ1WsZYRHs6uHOQ 3 0      0   0    624b    624b
+   green open wazuh-states-vulnerabilities                   8ip5i_PSRp6BTCbpF2HMTQ 1 0   7069   0 901.8kb 901.8kb
+   green open .ds-wazuh-events-v5-access-management-000001   ahTRx3ZfSPGGSbxuAj9y1Q 3 0      0   0    624b    624b
+   green open .ds-wazuh-metrics-agents-000001                BS_gJjzlS1K235I14qgl9g 1 0   2885   0   1.1mb   1.1mb
+   green open .ds-wazuh-findings-v5-cloud-services-000001    r1y3bGpBTDGsxgIUhe7ulQ 3 0      0   0    624b    624b
+   green open .ds-wazuh-events-v5-other-000001               RIN87mGdQlWYs6yMTHcx-g 3 0      0   0    624b    624b
+   green open .ds-wazuh-findings-v5-network-activity-000001  bqtm0coXQqWXBxKRjyFflA 3 0      0   0    624b    624b
 
 If you do not see any Wazuh related index, it means you do not have alerts stored in your Wazuh indexer.
 
-Run the following command to ensure that Filebeat is correctly configured:
+.. note::
 
-.. code-block:: console
-
-   # filebeat test output
-
-.. code-block:: none
-   :class: output
-
-   elasticsearch: https://127.0.0.1:9200...
-     parse url... OK
-     connection...
-       parse host... OK
-       dns lookup... OK
-       addresses: 127.0.0.1
-       dial up... OK
-     TLS...
-       security: server's certificate chain verification is enabled
-       handshake... OK
-       TLS version: TLSv1.3
-       dial up... OK
-     talk to server... OK
-     version: 7.10.2
+   The default credential for the Wazuh index is ``admin:admin``.
 
 Could not connect to API with ID error
 --------------------------------------
 
-The error *“Could not connect to API with id: default: 3003 - Missing param: API USERNAME”* is triggered when Wazuh cannot find the correct Wazuh server API username variable. Starting from Wazuh 4.0, the Wazuh server API username variable changed from ``user`` to ``username``. It is necessary to change the credentials (``foo:bar`` is no longer accepted) as well as the name of the variable in the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file.
+The error *“Could not connect to API with id: default: 3003 - Missing param: API USERNAME”* is triggered when Wazuh cannot find the correct Wazuh server API username variable. Starting from Wazuh 4.0, the Wazuh server API username variable changed from ``user`` to ``username``. It is necessary to change the credentials (``foo:bar`` is no longer accepted) as well as the name of the variable in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` configuration file.
 
 For example:
 
 .. code-block:: yaml
 
-   hosts:
-    - production:
-        url: https://localhost
-        port: 55000
-        username: wazuh-wui
-        password: wazuh-wui
-        run_as: true
+   wazuh_core.hosts:
+     default:
+       url: https://127.0.0.1
+       port: 55000
+       username: wazuh-wui
+       password: wazuh-wui
+       run_as: true
 
-Wazuh server and Wazuh dashboard version mismatch error
--------------------------------------------------------
+Wazuh manager and Wazuh dashboard version mismatch error
+--------------------------------------------------------
 
-This error shows a mismatch in the versions of the Wazuh server and the Wazuh dashboard.
+This error shows a mismatch in the versions of the Wazuh manager and the Wazuh dashboard.
 
-The Wazuh server and the Wazuh dashboard must run the same major and minor versions. For example:
+The Wazuh manager and the Wazuh dashboard must run the same major and minor versions. For example:
 
--  Wazuh server |WAZUH_CURRENT_MINOR|.x
+-  Wazuh manager |WAZUH_CURRENT_MINOR|.x
 -  Wazuh dashboard |WAZUH_CURRENT_MINOR|.x
 
-Check out how to upgrade the Wazuh components in our :doc:`upgrade guide </upgrade-guide/index>`.
+.. Republish TODO: once "/upgrade-guide/index" is in the build, restore the cross-reference in the phrase "upgrade the Wazuh components in our upgrade guide" — replace the word "upgrade guide" with :doc:`upgrade guide </upgrade-guide/index>`.
+
+Check out how to upgrade the Wazuh components in our upgrade guide.
 
 Saved object for index pattern not found error
 ----------------------------------------------
@@ -176,47 +195,13 @@ If the restart does not solve the problem, we can execute this process manually:
       :class: output
 
       {
-        ".kibana" : {
+        ".kibana_1" : {
           "mappings" : {
             "type" : {
               "full_name" : "type",
               "mapping" : {
                 "type" : {
-
-                 "type" : "text",
-
-                 "fields" : {
-
-                   "keyword" : {
-
-                     "type" : "keyword",
-
-                     "ignore_above" : 256
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        ".kibana_92668751_admin_1" : {
-          "mappings" : {
-            "type" : {
-              "full_name" : "type",
-              "mapping" : {
-                "type" : {
-
-                 "type" : "text",
-
-                 "fields" : {
-
-                   "keyword" : {
-
-                     "type" : "keyword",
-
-                     "ignore_above" : 256
-                    }
-                  }
+                  "type" : "keyword"
                 }
               }
             }
@@ -224,7 +209,7 @@ If the restart does not solve the problem, we can execute this process manually:
         }
       }
 
-   In the output, we can see type field mapping for the ``.kibana`` and ``.kibana_92668751_admin_1`` indices. Note that the field mapping type for the type field is ``text`` and that it contains a subfield called ``keyword``. This is not the expected result; the type field should be ``keyword``, not ``text``, and it should not include the keyword subfield.
+   In the output, we can see the field mapping for the ``type`` field in the ``.kibana_1`` index. The mapping shows that the ``type`` field is configured as ``keyword``, which is the expected result.
 
    These errors happened because there was no template that specified the appropriate field mappings at the time the saved object data was indexed. To solve the errors, we need to remove the index and rebuild it.
 
@@ -277,8 +262,7 @@ Check the following log files:
 
    .. code-block:: console
 
-      # cat /var/log/filebeat/filebeat | grep -i -E "error|warn"
-      # cat /var/ossec/logs/ossec.log | grep -i -E "error|warn"
+      # cat /var/wazuh-manager/logs/wazuh-manager.log | grep -i -E "error|warn"
 
 - Wazuh dashboard:
 

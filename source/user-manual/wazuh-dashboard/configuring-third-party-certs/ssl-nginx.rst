@@ -214,7 +214,7 @@ Configure the proxy and the certificates
 
 #. Access the Wazuh dashboard via the configured domain name.
 
-   .. thumbnail:: /images/configuring-third-party-certs/wazuh-dashboard.jpg
+   .. thumbnail:: /images/configuring-third-party-certs/nginx-wazuh-dashboard.png
       :title: Wazuh dashboard
       :align: center
       :width: 80%
