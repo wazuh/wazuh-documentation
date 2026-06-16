@@ -233,13 +233,13 @@ A default Wazuh manager installation includes the two outputs shown in the table
      - Description
      - Default state
    * - ``indexer.yml``
-     - Forwards decoded events to the configured Wazuh indexer
+     - Forwards processed events to the configured Wazuh indexer
      - Enabled
    * - ``file-output-integrations.yml``
-     - Writes decoded events to a local file on the Wazuh manager
+     - Writes processed events to a local file on the Wazuh manager
      - Disabled
 
-The output stage operates as a broadcaster. It dispatches the decoded event independently to every active output, allowing multiple destinations to receive the same processed event.
+The output stage operates as a broadcaster. It dispatches the processed event independently to every active output, allowing multiple destinations to receive the same processed event.
 
 .. thumbnail:: /images/manual/wazuh-server/event-flow-on-output.png
    :title: Event flow on output
