@@ -17,14 +17,13 @@ The agent enrollment service enrolls Wazuh agents in the Wazuh manager. It ensur
 
 When a Wazuh agent is installed and started on an endpoint, it automatically contacts the Wazuh manager to initiate the enrollment process. The Wazuh manager generates a unique authentication key that encrypts its communication with the Wazuh agent. You can configure additional security measures for the enrollment process, such as password authentication, Wazuh manager identity verification, and Wazuh agent identity verification.
 
-More options can be found in the :doc:`Wazuh agent enrollment </user-manual/agent/agent-enrollment/index>` documentation.
-
 Configuration
 ^^^^^^^^^^^^^
 
 The ``<auth>`` block below shows an agent enrollment service configuration in the ``/var/wazuh-manager/etc/wazuh-manager.conf`` file of a Wazuh manager:
 
 .. code-block:: xml
+   :emphasize-lines: 3-15
 
    <ossec_config>
      ...
@@ -50,7 +49,7 @@ Where:
 -  ``<port>`` specifies the TCP port number for listening to connections. The default value is ``1515``. The allowed value is any port number between ``0`` and ``65535``.
 -  ``<use_source_ip>`` defines whether to use the client's source IP address or the use of "any" to add a Wazuh agent. The allowed values are ``yes`` and ``no``. When the value is ``no``, the Wazuh agent can connect to the Wazuh manager even if the source IP used for enrollment changes. However, when the value is ``yes``, the Wazuh agent cannot connect to the Wazuh manager if the source IP address changes.
 -  ``<purge>`` specifies whether the client keys will be deleted when Wazuh agents are removed. When the value is ``no``, removed Wazuh agents will remain in the client keys file marked as removed. When the value is set to ``yes``, the client keys file will be purged. The default value is ``yes``. The possible values are ``yes`` and ``no``.
--  ``<use_password>`` determines the use of shared password authentication. When the value is ``no``, this option is disabled. When the value is set to ``yes``, a shared password will be read from the ``/var/wazuh-manager/etc/authd.pass`` file. If this file does not exist, a random password will be generated and stored in the ``/var/wazuh-manager/logs/wazuh-manager.log`` file on the Wazuh manager. See the :doc:`using password authentication </user-manual/agent/agent-enrollment/security-options/using-password-authentication>` documentation for more information.
+-  ``<use_password>`` determines the use of shared password authentication. When the value is ``no``, this option is disabled. When the value is set to ``yes``, a shared password will be read from the ``/var/wazuh-manager/etc/authd.pass`` file. If this file does not exist, a random password will be generated and stored in the ``/var/wazuh-manager/logs/wazuh-manager.log`` file on the Wazuh manager.
 -  ``<ciphers>`` sets the list of ciphers for network communication using SSL. The default value is ``HIGH:!ADH:!EXP:!MD5:!RC4:!3DES:!CAMELLIA:@STRENGTH``.
 -  ``<ssl_agent_ca>`` specifies the path to the CA certificate used to verify clients. It can be referred to as a relative path under the Wazuh installation directory or a full path. The possible value is any valid path.
 -  ``<ssl_verify_host>`` toggles source host verification on and off when a CA certificate is specified. The client source IP address will be validated using the Common Name field. The default value is ``no``. The allowed values are ``yes`` and ``no``.
@@ -72,6 +71,7 @@ Configuration
 The ``<remote>`` block below is the default connection service configuration in the Wazuh manager ``/var/wazuh-manager/etc/wazuh-manager.conf`` configuration file:
 
 .. code-block:: xml
+   :emphasize-lines: 3-7
 
    <ossec_config>
      ...
@@ -89,8 +89,6 @@ Where:
 -  ``<protocol>`` specifies the protocol to use for the connection. The default value is ``tcp``. The allowed values are ``tcp`` and ``udp``.
 -  ``<queue_size>`` allows you to set the capacity of the remote daemon queue in the number of Wazuh agent events. The default value is ``131072``. The allowed value is an integer between ``1`` and ``262144``. The remote queue is only available for Wazuh agent events, not syslog events. This option only works when the connection is set to secure.
 
-More options can be found in the :ref:`remote <reference_ossec_remote>` section of the Wazuh documentation.
-
 .. note::
 
    Whenever you change the ``/var/wazuh-manager/etc/wazuh-manager.conf`` file, restart the Wazuh manager to apply changes.
@@ -106,6 +104,7 @@ Configuration
 The vulnerability detection service is configurable. Users can enable or disable the service and customize settings such as scan intervals and vulnerability feed update intervals. The ``<vulnerability-detection>`` block below shows the default vulnerability detection service configuration in the ``/var/wazuh-manager/etc/wazuh-manager.conf`` file of the Wazuh manager:
 
 .. code-block:: xml
+   :emphasize-lines: 3-6
 
    <ossec_config>
      ...
@@ -120,8 +119,6 @@ Where:
 
 -  ``<enabled>`` specifies whether the Vulnerability Detection module is enabled or not. The default value is ``yes``. The allowed values are ``yes`` and ``no``.
 -  ``<feed-update-interval>`` specifies the time interval for periodic feed updates. The default value is ``60m`` (one hour), the minimum allowed. The allowed value is a positive number that contains a suffix character indicating a time unit, such as ``s`` (seconds), ``m`` (minutes), ``h`` (hours), and ``d`` (days).
-
-More options can be found in the :doc:`vulnerability detection </user-manual/reference/ossec-conf/vuln-detector>` reference guide in the documentation.
 
 .. note::
 
@@ -140,6 +137,7 @@ Configuration
 The following ``<cluster>`` block represents the default cluster configuration in the Wazuh manager ``/var/wazuh-manager/etc/wazuh-manager.conf`` file:
 
 .. code-block:: xml
+   :emphasize-lines: 3-14
 
    <ossec_config>
      ...
@@ -169,13 +167,6 @@ Where:
 -  ``<node>`` specifies the address of the master node within the ``<nodes>`` block, and this must be specified in all Wazuh manager nodes, including the master node itself. The address can be either an IP address or a DNS.
 -  ``<hidden>`` toggles whether or not to show information about the cluster that generated an alert.
 
-More options can be found in the :doc:`cluster </user-manual/reference/ossec-conf/cluster>` reference guide of the documentation.
-
 .. note::
 
    Whenever you change the ``/var/wazuh-manager/etc/wazuh-manager.conf`` file, restart the Wazuh manager to apply changes.
-
-Wazuh manager API service
--------------------------
-
-The Wazuh manager API service provides a RESTful interface for interacting with the Wazuh manager, allowing users and external applications to query data and perform management operations.

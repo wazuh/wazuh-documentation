@@ -31,6 +31,7 @@ Configuration
 The following ``<logging>`` block represents the default logging configuration in the Wazuh manager ``/var/wazuh-manager/etc/wazuh-manager.conf`` file:
 
 .. code-block:: xml
+   :emphasize-lines: 3-5
 
    <ossec_config>
      ...

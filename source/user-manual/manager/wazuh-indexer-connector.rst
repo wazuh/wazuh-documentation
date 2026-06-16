@@ -14,6 +14,7 @@ Configuration
 The standard configuration for the Wazuh indexer connector is specified in the ``/var/wazuh-manager/etc/wazuh-manager.conf`` file on the Wazuh manager, as highlighted below:
 
 .. code-block:: xml
+   :emphasize-lines: 3-15
 
    <ossec_config>
      ...
@@ -44,5 +45,3 @@ Where:
 -  ``<ca>`` specifies the root CA certificate for HTTPS server verifications. The default value is ``/var/wazuh-manager/etc/certs/root-ca.pem``. The possible value is any valid CA certificate.
 -  ``<certificate>`` specifies the path to the Wazuh manager certificate. The default value is ``/var/wazuh-manager/etc/certs/wazuh-manager.pem``. The possible value is any valid key.
 -  ``<key>`` specifies the certificate key used for authentication. The default value is ``/var/wazuh-manager/etc/certs/wazuh-manager-key.pem``. The possible value is any valid key.
-
-You can learn more about the available configuration options in the Wazuh indexer section of the reference guide.

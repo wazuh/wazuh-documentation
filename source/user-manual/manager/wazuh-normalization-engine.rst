@@ -94,6 +94,7 @@ The pre-enrichment stage performs the following actions:
    Conceptually, the event is enriched with the space context as shown:
 
    .. code-block:: json
+      :emphasize-lines: 3-5
 
       {
         "wazuh": {
@@ -105,12 +106,6 @@ The pre-enrichment stage performs the following actions:
 
 -  **Discarded events filter**: The discarded events filter evaluates whether discarded events should continue through the pipeline. This behavior is controlled by the policy configuration.
 -  **Cleanup of decoder temporary variables**: Decoders can only map fields that belong to the WCS or to temporary variables. Temporary variables are used to store intermediate values that help decoders share information while processing an event. After decoding is complete, all temporary variables are automatically removed. This cleanup step always runs at the end of pre-enrichment and requires no user configuration. As a result, only WCS-compliant fields remain in the event, ensuring it can be successfully indexed by the Wazuh indexer.
-
-.. thumbnail:: /images/manual/wazuh-server/pre-enrichment-flow.png
-   :title: Pre-enrichment flow
-   :alt: Pre-enrichment flow
-   :align: center
-   :width: 80%
 
 .. _enrichment:
 
@@ -299,6 +294,7 @@ The following sample logs illustrate the transformation process:
 **Example event received by the Wazuh manager:**
 
 .. code-block:: json
+   :emphasize-lines: 2-29
 
    {
      "wazuh": {
@@ -337,6 +333,7 @@ The following sample logs illustrate the transformation process:
 **Processed event:**
 
 .. code-block:: json
+   :emphasize-lines: 2-40,43-154
 
    {
      "wazuh": {
