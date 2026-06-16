@@ -74,12 +74,22 @@ jQuery(function($) {
   const documentInReleases = Object.keys(documentHistory);
   let canonicalRelease = documentInReleases[documentInReleases.length-1];
   const canonicalPath = documentHistory[canonicalRelease];
+  let skipCanonical = false;
   if ( canonicalRelease == listOfVersions[0] ) {
     canonicalRelease = 'current';
   }
 
+  /* Skip canonical on not_found.html, search.html, and moved-content.html */
+  if ( 
+    $('body').hasClass('search') || 
+    $('body').hasClass('not_found') || 
+    $('body').attr('data-path') == 'moved-content'
+  ) {
+    skipCanonical = true;
+  }
+
   /* Link rel=canonical tag based on the selector */
-  if ( !document.querySelector('link[rel=\'canonical\']') ) {
+  if ( !document.querySelector('link[rel=\'canonical\']') && !skipCanonical ) {
     const canonicalTag = document.createElement('link');
     canonicalTag.setAttribute('rel', 'canonical');
     canonicalTag.setAttribute('href', document.location.protocol + '//' + document.location.host + '/' + canonicalRelease + canonicalPath);
