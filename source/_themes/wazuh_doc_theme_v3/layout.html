@@ -53,6 +53,21 @@
   {%- set titlesuffix = '' -%}
 {%- endif -%}
 
+{%- set page_scope = namespace(file_meta_desc="User manual, installation and configuration guides. Learn how to get the most out of the Wazuh platform.", page_url=theme_wazuh_doc_url + '/' + version + '/' + pagename + '.html') %}
+
+{#- File description -#}
+{% if metatags and 'name="description"' in metatags %}
+  {# Split meta tags #}
+  {% set mtags = metatags.split('<meta ') %}
+  {%- for mtag in mtags -%}
+    {%- if 'name="description"' in mtag -%}
+      {% set file_meta_desc = mtag.replace('content="', '') %}
+      {% set file_meta_desc = file_meta_desc.split('" name="description"')[0] %}
+      {% set page_scope.file_meta_desc = file_meta_desc %}
+    {%- endif -%}
+  {%- endfor -%}
+{% endif %}
+
 {#- Remove unwanted assets -#}
 {%- set unwanted_css = ['_static/pygments.css', '_static/', '_static/tabs.css']  -%}
 {%- set unwanted_js = ['_static/documentation_options.js', '_static/doctools.js','_static/sphinx_highlight.js', '_static/tabs.js']  -%}
@@ -166,6 +181,7 @@
     {% block head -%}
     {% set is_orphan = meta and meta.orphan is defined %}
     {% if is_latest_release and  pagename != 'moved-content' and pagename != 'not_found' and pagename != 'search' and not is_orphan %}
+    <link rel="canonical" href="{{ theme_wazuh_doc_url + '/current/' + pagename + '.html' }}">
     <meta name="robots" content="index" />
     {% else %}
     <meta name="robots" content="noindex" />
@@ -182,17 +198,42 @@
     
     {%- block social_cards -%}
     <meta property="og:image" content="{{ theme_wazuh_doc_url + '/current/_static/images/wazuh-docs-card.png' }}">
-    <meta property="og:url" content="{{ theme_wazuh_doc_url + '/current/' + pagename + '.html' }}">
+    {% if is_latest_release %}
+    {% set page_scope.page_url = theme_wazuh_doc_url + '/current/' + pagename + '.html' %}
+    {% endif %}
+    <meta property="og:url" content="{{ page_scope.page_url }}">
     <meta property="og:type" content="website">
     <meta property="og:title" content="{{ pagetitle|e + titlesuffix }}">
-    <meta property="og:description" content="User manual, installation and configuration guides. Learn how to get the most out of the Wazuh platform.">
+    <meta property="og:description" content="{{ page_scope.file_meta_desc }}">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@wazuh">
     <meta name="twitter:creator" content="@wazuh">
     <meta name="twitter:title" content="{{ pagetitle|e + titlesuffix }}">
-    <meta name="twitter:description" content="User manual, installation and configuration guides. Learn how to get the most out of the Wazuh platform.">
+    <meta name="twitter:description" content="{{ page_scope.file_meta_desc }}">
     <meta name="twitter:image" content="{{ theme_wazuh_doc_url + '/current/_static/images/wazuh-docs-card.png' }}">
     {% endblock social_cards -%}
+
+    {%- if pagename not in special_pages and pagename != 'moved-content' -%}
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org", "@type": "TechArticle",
+        "headline": {{ (title|striptags)|tojson }}, "description": {{ page_scope.file_meta_desc|tojson }},
+        "url": {{ page_scope.page_url|tojson }}, "inLanguage": {{ language|tojson }},
+        "author": {"@type": "Organization", "name": "Wazuh"},
+        "publisher": {"@type": "Organization", "name": "Wazuh", "url": {{ theme_wazuh_doc_url|tojson }}}
+      }
+      </script>
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org", "@type": "BreadcrumbList",
+        "itemListElement": [
+          {%- for item in parents %}{% if not loop.first %},{% endif %}
+          {"@type": "ListItem", "position": {{ loop.index }}, "name": {{ item.title|tojson }}, "item": {{ item.link|tojson }}}
+          {%- endfor %}
+        ]
+      }
+      </script>
+    {%- endif -%}
   
     {%- block htmltitle -%}
     <title>{{ pagetitle|e }}{{ titlesuffix }}</title>
@@ -251,10 +292,6 @@
       <!-- End Google Tag Manager -->
     {%- endblock gtm_head %}
     {%- endif -%}
-
-    {%- if is_latest_release %}
-    <link rel="canonical" href="{{ theme_wazuh_doc_url + '/current/' + pagename + '.html' }}">
-    {% endif -%}
 
     {% endblock head -%}
   </head>
