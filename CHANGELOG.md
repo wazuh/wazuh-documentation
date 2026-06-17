@@ -12,7 +12,6 @@ All notable changes to this project will be documented in this file.
 - Added ``integrity_interval`` to the syscheck ``synchronization`` configuration and updated the ``response_timeout`` default value. ([#9099](https://github.com/wazuh/wazuh-documentation/pull/9099))
 - Added ``integrity_interval`` to the SCA and the syscollector ``synchronization`` configuration. ([#9164](https://github.com/wazuh/wazuh-documentation/pull/9164))
 - Added *Upgrading to Wazuh 5.x* sub-section to the Upgrade guide. ([#9435](https://github.com/wazuh/wazuh-documentation/pull/9435))
-- Added *Querying security information on the Wazuh dashboard* content to the *Wazuh dashboard* documentation in the *User manual*. ([#9688](https://github.com/wazuh/wazuh-documentation/pull/9688))
 
 ### Changed
 
@@ -23,7 +22,8 @@ All notable changes to this project will be documented in this file.
 - Updated version numbers in commands in the *Installation from sources* documentation. ([#9397](https://github.com/wazuh/wazuh-documentation/pull/9397))
 - Updated the *Installation guide*. ([#9545](https://github.com/wazuh/wazuh-documentation/pull/9545)) ([#9682](https://github.com/wazuh/wazuh-documentation/pull/9682)) ([#9692](https://github.com/wazuh/wazuh-documentation/pull/9692))
 - Updated the *Installation alternatives* documentation. ([#9587](https://github.com/wazuh/wazuh-documentation/pull/9587)) ([#9576](https://github.com/wazuh/wazuh-documentation/pull/9576)) ([#9589](https://github.com/wazuh/wazuh-documentation/pull/9589)) ([#9591](https://github.com/wazuh/wazuh-documentation/pull/9591)) ([#9591](https://github.com/wazuh/wazuh-documentation/pull/9595)) ([#9597](https://github.com/wazuh/wazuh-documentation/pull/9597)) ([#9606](https://github.com/wazuh/wazuh-documentation/pull/9606)) ([#9607](https://github.com/wazuh/wazuh-documentation/pull/9607)) ([#9674](https://github.com/wazuh/wazuh-documentation/pull/9674))
-- Updated the *Wazuh agent* documentation in *User manual*. ([#9665](https://github.com/wazuh/wazuh-documentation/pull/9665)) ([#9669](https://github.com/wazuh/wazuh-documentation/pull/9669))
+- Updated the *Wazuh agent* documentation in *User manual*. ([#9665](https://github.com/wazuh/wazuh-documentation/pull/9665)) ([#9669](https://github.com/wazuh/wazuh-documentation/pull/9669)) ([#9702](https://github.com/wazuh/wazuh-documentation/pull/9702))
+- Updated the *Wazuh dashboard* documentation in *User manual*. ([#9688](https://github.com/wazuh/wazuh-documentation/pull/9688))
 - Updated the *Quickstart* documentation. ([#9680](https://github.com/wazuh/wazuh-documentation/pull/9680))
 - Updated the *Wazuh server* documentation to the new *Wazuh manager* documentation in the *User manual*. ([#9728](https://github.com/wazuh/wazuh-documentation/pull/9728))
 
