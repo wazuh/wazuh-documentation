@@ -55,6 +55,7 @@ Where:
 -  ``<ssl_verify_host>`` toggles source host verification on and off when a CA certificate is specified. The client source IP address will be validated using the Common Name field. The default value is ``no``. The allowed values are ``yes`` and ``no``.
 -  ``<ssl_manager_cert>`` specifies the path to the Wazuh manager SSL certificate. It can be referred to as a relative path under the Wazuh installation directory or a full path. The default value is ``etc/sslmanager.cert``. The possible value is any valid path.
 -  ``<ssl_manager_key>`` specifies the path to the Wazuh manager SSL key. It can be referred to as a relative path under the Wazuh installation directory or a full path. The default value is ``etc/sslmanager.key``. The possible value is any valid path.
+-  ``<ssl_auto_negotiate>`` toggles whether or not to auto-select the SSL/TLS method. By default, only TLS v1.2 is allowed. When set to ``yes``, the Wazuh manager negotiates the most secure common method with the client. In older systems where the Wazuh manager does not support TLS v1.2, this option is enabled automatically. The default value is ``no``. The allowed values are ``yes`` and ``no``.
 
 .. note::
 

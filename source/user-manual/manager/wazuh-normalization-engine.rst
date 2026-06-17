@@ -23,7 +23,7 @@ The diagram below shows the Wazuh normalization engine and its relationships wit
 Event processing pipeline
 -------------------------
 
-The Wazuh normalization engine provides an Orchestrator, which is the central runtime component that manages active security policies. A security policy is an operational graph that defines an ordered pipeline of stages applied to each event. The Orchestrator forwards an independent copy of every incoming event to each active policy, so a single incoming event can produce multiple output documents, one per active policy.
+The Wazuh normalization engine provides an :ref:`Orchestrator <orchestrator_module>`, which is the central runtime component that manages active security policies. A security policy is an operational graph that defines an ordered pipeline of stages applied to each event. The Orchestrator forwards an independent copy of every incoming event to each active policy, so a single incoming event can produce multiple output documents, one per active policy.
 
 The diagram below shows how an incoming event moves through the Wazuh normalization engine, including the modules involved at each stage until its output.
 

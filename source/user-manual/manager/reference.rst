@@ -55,14 +55,20 @@ The modules of the Wazuh normalization engine work together to transform raw eve
 Server
    The Server module includes two HTTP servers. The events socket receives raw events from the :ref:`Remoted <wazuh_manager_daemons>` module or the Vulnerability Detector module. The management API socket exposes operations that internal client dev tools and other Wazuh manager components use. These operations include managing routes, running tester sessions, applying content changes, querying GeoIP and IOC state, toggling raw event indexing, and reading metrics. Both sockets use HTTP with JSON bodies. Protocol buffers (protobuf) define the schema for every request and response.
 
+.. _orchestrator_module:
+
 Orchestrator
    The Orchestrator is the runtime hub of the Wazuh normalization engine. It owns the routes table that maps each :ref:`space <spaces>` to the active security policy and the priority at which events are evaluated, plus the session table used by the tester. When an event arrives, the Orchestrator forwards an independent copy to each active policy, allowing a single incoming event to produce multiple output documents, one for each active policy. Routes can be added, replaced, or removed at runtime without restarting the normalization engine, which is what makes hot-swapping of synchronized content possible.
 
 Builder
-   The Builder turns the declarative content stored in the Engine Content Manager into an executable graph that the Backend can run. It validates field types against the Schema, resolves variables and definitions, and links every helper function used in ``check``, ``parse``, and ``normalize`` stages. The Engine Content Manager calls the Builder whenever content changes allowing the Orchestrator to register the resulting graph as a route.
+   The Builder turns the declarative content stored in the :ref:`Engine Content Manager <engine_content_manager_module>` into an executable graph that the :ref:`Backend <backend_module>` can run. It validates field types against the :ref:`Schema <schema_module>`, resolves variables and definitions, and links every helper function used in ``check``, ``parse``, and ``normalize`` stages. The Engine Content Manager calls the Builder whenever content changes allowing the :ref:`Orchestrator <orchestrator_module>` to register the resulting graph as a route.
+
+.. _backend_module:
 
 Backend
    The Backend is the runtime that executes the compiled graph for every event. It goes through the stages described in :ref:`event policy processing <event_processing_pipeline>`: pre-filter, decoders (including KVDB lookups), enrichment (Geo and IOC), post-filter, and outputs.
+
+.. _engine_content_manager_module:
 
 Engine Content Manager
    This is the local mirror of the content managed in the Wazuh indexer. It is organized by :ref:`spaces <spaces>`. The Engine Content Manager has three responsibilities:
@@ -72,6 +78,8 @@ Engine Content Manager
    -  CRUD which validates and applies any mutations issued through the management API.
 
    After every applied change, the Engine Content Manager hands the affected policies to the Builder and asks the Orchestrator to swap the corresponding routes.
+
+.. _schema_module:
 
 Schema
    The Schema module loads the :ref:`Wazuh Common Schema (WCS) <wazuh_common_schema>` document at startup and exposes it to the Builder for build-time field validation and to the Backend for runtime validation of dynamic values. It guarantees that every document the engine emits is type-consistent with the mappings configured in the Wazuh indexer.
@@ -86,7 +94,7 @@ Geo
    The Geo module performs GeoIP and ASN lookups using ``MaxMind MMDB`` databases. Like the IOC databases, the Geo databases are global rather than per-space. They are refreshed in the background and hot-reloaded without restarting the Wazuh normalization engine. Refer to the :ref:`Geo enrichment <geo_enrichment>` section of the documentation for more information.
 
 Indexer connector
-   The indexer connector is the single component that communicates with the Wazuh indexer. It manages three traffic flows: outbound processed events (driven by policy outputs), inbound content (consumed by the Engine Content Manager and the IOC synchronizer), and inbound runtime configuration (consumed by the Configuration module). Concentrating all Wazuh indexer traffic in one place is what allows the rest of the normalization engine to stay independent of the Wazuh indexer transport details.
+   The :doc:`indexer connector <wazuh-indexer-connector>` is the single component that communicates with the Wazuh indexer. It manages three traffic flows: outbound processed events (driven by policy outputs), inbound content (consumed by the Engine Content Manager and the IOC synchronizer), and inbound runtime configuration (consumed by the Configuration module). Concentrating all Wazuh indexer traffic in one place is what allows the rest of the normalization engine to stay independent of the Wazuh indexer transport details.
 
 Stream Log
    Stream Log provides asynchronous, rotating log channels with size-based and time-based rotation, gzip compression, and retention by file count and total size. It backs the file outputs that policies can configure, and it is also what the optional event dumper uses to persist raw events for forensic investigation. Hot-path writes never block on disk I/O.
