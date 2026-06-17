@@ -5,8 +5,6 @@
 wodle name="command"
 ========================
 
-.. versionadded:: 3.1.0
-
 .. topic:: XML section name
 
 	.. code-block:: xml
@@ -112,8 +110,6 @@ Ignore the command output when executed.
 timeout
 ^^^^^^^
 
-.. versionadded:: 3.2.2
-
 Timeout for each command to wait for the end of the execution. Whether this parameter is set to 0, it will wait indefinitely for the end of the process.
 However, if the timeout is other than 0, the execution will finish if it expires.
 
@@ -127,8 +123,6 @@ However, if the timeout is other than 0, the execution will finish if it expires
 verify_md5
 ^^^^^^^^^^
 
-.. versionadded:: 3.6.0
-
 Verify the MD5 sum of the binary or the script specified on the command option.
 
 +--------------------+--------------+
@@ -140,8 +134,6 @@ Verify the MD5 sum of the binary or the script specified on the command option.
 
 verify_sha1
 ^^^^^^^^^^^
-
-.. versionadded:: 3.6.0
 
 Verify the SHA1 sum of the binary or the script specified on the command option.
 
@@ -155,8 +147,6 @@ Verify the SHA1 sum of the binary or the script specified on the command option.
 verify_sha256
 ^^^^^^^^^^^^^
 
-.. versionadded:: 3.6.0
-
 Verify the SHA256 sum of the binary or the script specified on the command option.
 
 +--------------------+-----------------+
@@ -168,8 +158,6 @@ Verify the SHA256 sum of the binary or the script specified on the command optio
 
 skip_verification
 ^^^^^^^^^^^^^^^^^
-
-.. versionadded:: 3.6.0
 
 Run the command defined although the checksum does not match.
 In this case, the agent will log that the checksum verification failed but will run the application.
