@@ -43,7 +43,10 @@ Wazuh 5.0 supports Wazuh agent installation on the following operating systems:
 
 .. note::
 
-   Wazuh 4.x agents can enroll with and connect to Wazuh 5.0 managers.
+   Wazuh 4.x agents can enroll with and connect to Wazuh 5.0 managers. However, some agent-side components are not fully supported until the agent is upgraded to Wazuh 5.0. This affects File Integrity Monitoring (FIM), Security Configuration Assessment (SCA), System Inventory, Active Response, and Vulnerability Detection.
+
+   We recommend upgrading Wazuh 4.x agents to Wazuh 5.0 after enrollment to ensure full compatibility with Wazuh 5.0 functionality. For more information, see :ref:`Upgrade agents remotely <upgrade_agents_remotely>`.
+
 
 .. note::
 
