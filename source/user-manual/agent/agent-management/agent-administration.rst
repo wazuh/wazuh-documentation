@@ -15,9 +15,9 @@ Wazuh agent administration involves the management of the enrolled Wazuh agents.
    grouping-agents
    list-agents
    remove-agents
+   upgrade-agents-remotely
 ..
    anti-tampering
-   remote-upgrading/index
    antiflooding
    labels
    key-request

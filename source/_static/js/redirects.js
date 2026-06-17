@@ -85,6 +85,7 @@ newUrls['5.0'] = [
   '/deployment-options/deploying-with-kubernetes/kubernetes-password.html',
   '/user-manual/agent/agent-management/remove-agents.html',
   '/user-manual/agent/agent-management/list-agents.html',
+  '/user-manual/agent/agent-management/upgrade-agents-remotely.html',
   '/user-manual/wazuh-dashboard/wazuh-dashboard-configurations.html',
 ];
 
@@ -112,6 +113,11 @@ redirections.push(
     '5.0': '/user-manual/agent/agent-management/remove-agents.html#remove-agents-using-the-wazuh-manager-api',
   },
   {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/user-manual/agent/agent-management/remote-upgrading/index.html',
+    '5.0': '/user-manual/agent/agent-management/upgrade-agents-remotely.html',
+  },
+
     'target': ['4.14=>5.0', '5.0=>4.14'],
     '4.14': '/user-manual/wazuh-dashboard/queries.html',
     '5.0': '/user-manual/wazuh-dashboard/global-queries.html#filtering-data-using-wazuh-query-language-wql',
