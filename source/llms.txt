@@ -9,7 +9,7 @@ Guidelines for how artificial intelligence tools should access, ingest, and refe
 - **Availability guarantee** Every public HTML documentation page has a 1-to-1 Markdown equivalent at the same path.
 
 ### Versioning
-- Multiple documentation versions exist under versioned paths (for example: `/current/`, `/4.14/`, `/4.2/`).
+- Multiple documentation versions exist under versioned paths (for example: `/current/`, `/5.0/`, `/4.14/`, '/3.13/').
 - **Default authority** Use `/current/` as the latest and authoritative documentation by default.
 - **Version override** Use a specific version path only when the user explicitly requests that version.
 - All listed versions are actively supported.
@@ -20,167 +20,41 @@ Guidelines for how artificial intelligence tools should access, ingest, and refe
 ## Getting Started
 Learn the fundamentals of the Wazuh platform.
 
-- **[Components](https://documentation.wazuh.com/current/getting-started/components/index.md)** Detailed information about the Wazuh agent, server, indexer, and dashboard.
+- **[Components](https://documentation.wazuh.com/current/getting-started/components/index.md)** Detailed information about the Wazuh agent, manager, indexer, and dashboard.
 - **[Architecture](https://documentation.wazuh.com/current/getting-started/architecture.md)** Overview of how Wazuh components communicate and work together.
-- **[Use cases](https://documentation.wazuh.com/current/getting-started/use-cases/index.md)** Explore scenarios like cloud security, File Integrity Monitoring (FIM), incident response, and vulnerability detection.
-
-### Proof of Concept guide
-15+ practical guides for testing core Wazuh features.
-
-- **[Blocking a known malicious actor](https://documentation.wazuh.com/current/proof-of-concept-guide/block-malicious-actor-ip-reputation.md)** Learn to block threats using IP reputation data.
-- **[File integrity monitoring](https://documentation.wazuh.com/current/proof-of-concept-guide/poc-file-integrity-monitoring.md)** Test the core capability of detecting changes in files and the Windows registry.
-- **[Detecting a brute-force attack](https://documentation.wazuh.com/current/proof-of-concept-guide/detect-brute-force-attack.md)** Configure Wazuh to identify and alert on brute-force login attempts.
-- **[Monitoring Docker events](https://documentation.wazuh.com/current/proof-of-concept-guide/monitoring-docker.md)** Set up security monitoring for Docker containers and orchestration.
-- **[Monitoring AWS infrastructure](https://documentation.wazuh.com/current/proof-of-concept-guide/aws-infrastructure-monitoring.md)** Use Wazuh modules to collect and analyze security events from Amazon Web Services.
-- **[Detecting unauthorized processes](https://documentation.wazuh.com/current/proof-of-concept-guide/detect-unauthorized-processes-netcat.md)** Create rules to detect the execution of unauthorized applications like Netcat.
-- **[Network IDS integration](https://documentation.wazuh.com/current/proof-of-concept-guide/integrate-network-ids-suricata.md)** Integrate Suricata IDS alerts with Wazuh for enhanced network visibility.
-- **[Detecting a SQL injection attack](https://documentation.wazuh.com/current/proof-of-concept-guide/detect-web-attack-sql-injection.md)** Simulate and detect a common web application attack.
-- **[Detecting suspicious binaries](https://documentation.wazuh.com/current/proof-of-concept-guide/poc-detect-trojan.md)** Use YARA rules to identify malicious binaries and trojans.
-- **[Detecting and removing malware using VirusTotal integration](https://documentation.wazuh.com/current/proof-of-concept-guide/detect-remove-malware-virustotal.md)** Leverage VirusTotal's database to inspect and identify malicious files.
-- **[Vulnerability detection](https://documentation.wazuh.com/current/proof-of-concept-guide/poc-vulnerability-detection.md)** Test the detection of known vulnerabilities in OS and applications on endpoints.
-- **[Detecting malware using YARA Integration](https://documentation.wazuh.com/current/proof-of-concept-guide/detect-malware-yara-integration.md)** Implement custom YARA rules for malware detection.
-- **[Detecting hidden processes](https://documentation.wazuh.com/current/proof-of-concept-guide/poc-detect-hidden-process.md)** Identify processes that are hidden or attempting to evade detection.
-- **[Monitoring execution of malicious commands](https://documentation.wazuh.com/current/proof-of-concept-guide/audit-commands-run-by-user.md)** Audit and alert on specific commands run by users on endpoints.
-- **[Detecting a Shellshock attack](https://documentation.wazuh.com/current/proof-of-concept-guide/detect-web-attack-shellshock.md)** Configure detection for the Shellshock Bash vulnerability exploits.
-- **[Leveraging LLMs for alert enrichment](https://documentation.wazuh.com/current/proof-of-concept-guide/leveraging-llms-for-alert-enrichment.md)** Explore using Large Language Models to analyze and contextualize Wazuh alerts.
 
 ## Deploy & Operate Wazuh
 Install, configure, and maintain the Wazuh platform in your environment.
 
-### Installation & Deployment:
+### Installation & Deployment
 Step-by-step guides for installing Wazuh central components and agents across various operating systems and cloud environments.
 
 - **[Quickstart](https://documentation.wazuh.com/current/quickstart.md)** The fastest way to perform an all-in-one installation of Wazuh central components on a single host.
-- **[Installation Guide](https://documentation.wazuh.com/current/installation-guide/index.md)** Central hub for deploying all Wazuh components, including indexer, server, dashboard, and agent, on single or multiple hosts.
-- **[Deployment Alternatives](https://documentation.wazuh.com/current/deployment-options/index.md)** Install using different methods like Virtual Machines (OVA), Docker, Kubernetes, or from source code.
+- **[Installation Guide](https://documentation.wazuh.com/current/installation-guide/index.md)** Central hub for deploying all Wazuh components, including indexer, manager, dashboard, and agent, on single or multiple hosts.
+- **[Deployment Alternatives](https://documentation.wazuh.com/current/deployment-options/index.md)** Install using different methods like Virtual Machines (OVA), Docker, or Kubernetes.
 - **[Deployment with Ansible](https://documentation.wazuh.com/current/deployment-options/deploying-with-ansible/index.md)** Automate your Wazuh deployment using Ansible playbooks for configuration management.
-- **[Deployment with Puppet](https://documentation.wazuh.com/current/deployment-options/deploying-with-puppet/index.md)** Manage your Wazuh infrastructure using Puppet modules for automated deployment.
 - **[Offline Installation Guide](https://documentation.wazuh.com/current/deployment-options/offline-installation/index.md)** Install Wazuh in environments without direct internet access.
-
-### Wazuh Cloud Service
-Use the managed, ready-to-use Wazuh Cloud (SaaS) offering.
-
-- **[Getting started](https://documentation.wazuh.com/current/cloud-service/getting-started/index.md)** Learn how to sign up, access the dashboard, and enroll your first agents.
-- **[Your environment](https://documentation.wazuh.com/current/cloud-service/your-environment/index.md)** Manage authentication, settings, limits, and technical configuration for your cloud deployment.
-- **[AI Analyst](https://documentation.wazuh.com/current/cloud-service/ai-analyst.md)** Explore AI-powered features for alert analysis and threat hunting.
-- **[Account and billing](https://documentation.wazuh.com/current/cloud-service/account-billing/index.md)** Manage user settings, billing details, subscription history, and payment methods.
-- **[Archive data](https://documentation.wazuh.com/current/cloud-service/archive-data/index.md)** Configure, access, and manage long-term storage for your security event data.
-- **[Wazuh Cloud API](https://documentation.wazuh.com/current/cloud-service/apis/index.md)** Use the API to programmatically interact with and manage your Wazuh Cloud environment.
-- **[CLI](https://documentation.wazuh.com/current/cloud-service/cli/index.md)** Command-line tools for managing your Wazuh Cloud deployment.
-- **[Glossary](https://documentation.wazuh.com/current/cloud-service/glossary.md)** Definitions of key terms and concepts related to Wazuh Cloud.
-
-### Upgrade & Migration
-Keep your deployment current and move data between environments.
-
-- **[Upgrade Guide](https://documentation.wazuh.com/current/upgrade-guide/index.md)** Step-by-step procedures for updating Wazuh central components and agents across all supported OS.
-- **[Backup and Migration Guide](https://documentation.wazuh.com/current/migration-guide/index.md)** Methods for backing up your Wazuh data and restoring it for recovery or migrating environments.
 
 ### Configuration & Management
 Fine-tune settings and manage the platform's operation.
 
 - **[User Manual](https://documentation.wazuh.com/current/user-manual/index.md)** Comprehensive guide to configuring, operating, and getting the most out of Wazuh.
-- **[Configuration Reference](https://documentation.wazuh.com/current/user-manual/reference/index.md)** Detailed settings for `ossec.conf`, internal options, and command-line tools.
-
-## Security Monitoring Capabilities
-Configure and use Wazuh's core detection and protection features.
-
-### Endpoint Protection & Detection
-Monitor and secure individual devices (endpoints) using capabilities like file integrity checking, malware scanning, and vulnerability detection.
-
-- **[File Integrity Monitoring (FIM)](https://documentation.wazuh.com/current/user-manual/capabilities/file-integrity/index.md)** Detect changes in files and the Windows registry. Learn how it works, configure it, and create custom rules.
-- **[Malware Detection](https://documentation.wazuh.com/current/user-manual/capabilities/malware-detection/index.md)** Integrate with VirusTotal and YARA, detect rootkits, and use threat intelligence.
-- **[Security Configuration Assessment (SCA)](https://documentation.wazuh.com/current/user-manual/capabilities/sec-config-assessment/index.md)** Audit systems for security compliance against policies (e.g., CIS benchmarks).
-- **[Vulnerability Detection](https://documentation.wazuh.com/current/user-manual/capabilities/vulnerability-detection/index.md)** Identify known vulnerabilities in the OS and applications on your endpoints.
-- **[Log Data Collection](https://documentation.wazuh.com/current/user-manual/capabilities/log-data-collection/index.md)** Collect and analyze log data from agents, syslog, and journald.
-
-### Response & Inventory
-Automate threat response actions and maintain a detailed, up-to-date record of all hardware and software assets on your network.
-
-- **[Active Response](https://documentation.wazuh.com/current/user-manual/capabilities/active-response/index.md)** Configure automated scripts to respond to and mitigate threats (e.g., block IPs).
-- **[System Inventory](https://documentation.wazuh.com/current/user-manual/capabilities/system-inventory/index.md)** Automatically discover and inventory hardware, OS, processes, and installed packages on endpoints.
-
-### Specialized Monitoring
-Extend visibility into specific environments like containers, cloud workloads, and legacy systems with tailored monitoring approaches.
-
-- **[Container Security](https://documentation.wazuh.com/current/user-manual/capabilities/container-security/index.md)** Monitor Docker containers for security events and changes.
-- **[Monitoring system calls](https://documentation.wazuh.com/current/user-manual/capabilities/system-calls-monitoring/index.md)** Integrate with Auditd for deep system call monitoring.
-- **[Command Monitoring](https://documentation.wazuh.com/current/user-manual/capabilities/command-monitoring/index.md)** Monitor the output of custom commands or scripts on endpoints.
-- **[Agentless Monitoring](https://documentation.wazuh.com/current/user-manual/capabilities/agentless-monitoring/index.md)** Monitor devices like network equipment or unsupported systems without installing an agent.
 
 ## Management & Administration
 Manage your Wazuh infrastructure, users, and data.
 
 ### Component Management
-Administer the core Wazuh infrastructure, including server clusters, data storage (indexer), and the user interface (dashboard).
+Administer the core Wazuh infrastructure, including the user interface (dashboard).
 
-- **[Wazuh Server / Manager](https://documentation.wazuh.com/current/user-manual/manager/index.md)** Manage the core analysis engine, alerts, and event logging. The server collects and analyzes data from agents and triggers alerts.
-- **[Wazuh Server Cluster](https://documentation.wazuh.com/current/user-manual/wazuh-server-cluster/index.md)** Configure a high-availability cluster for the Wazuh manager.
-- **[Wazuh Indexer](https://documentation.wazuh.com/current/user-manual/wazuh-indexer/index.md)** Manage data storage, indexing, re-indexing, and performance tuning.
-- **[Wazuh Indexer Cluster](https://documentation.wazuh.com/current/user-manual/wazuh-indexer-cluster/index.md)** Set up a high-availability cluster for the Wazuh indexer.
-- **[Wazuh Dashboard](https://documentation.wazuh.com/current/user-manual/wazuh-dashboard/index.md)** Configure the web interface, create dashboards, enable multi-tenancy, and set up SSL.
+- **[Wazuh Dashboard](https://documentation.wazuh.com/current/user-manual/wazuh-dashboard/index.md)** Analyze, visualize, and manage security operations through the Wazuh web interface. Covers navigation, configuration, and third-party certificate setup.
 
-### Agents & Data Analysis
-Manage Wazuh agents and customize the rules that analyze collected data to generate security alerts.
+### Agents
+Manage Wazuh agents across your environment.
 
-- **[Wazuh Agent](https://documentation.wazuh.com/current/user-manual/agent/index.md)** Enroll, group, and remotely manage agents across your environment. The agent runs on endpoints and provides capabilities like log collection, FIM, and vulnerability detection.
-- **[Data Analysis (Ruleset)](https://documentation.wazuh.com/current/user-manual/ruleset/index.md)** Customize detection logic by creating and testing your own decoders and rules.
-
-### Access Control
-Configure authentication and authorization to control user access to the Wazuh dashboard and its features.
-
-- **[User Administration](https://documentation.wazuh.com/current/user-manual/user-administration/index.md)** Configure Role-Based Access Control (RBAC), Single Sign-On (SSO), and LDAP integration.
-
-## Cloud Security & Compliance
-Extend security monitoring to cloud environments and meet compliance requirements.
-
-### Cloud Security Monitoring
-Wazuh helps increase the security of comprehensive cloud platforms like AWS, Microsoft Azure, and GCP.
-
-- **[Cloud Security](https://documentation.wazuh.com/current/cloud-security/monitoring.md)** Overview of monitoring cloud infrastructure and services with Wazuh.
-- **[Amazon Web Services (AWS)](https://documentation.wazuh.com/current/cloud-security/amazon/index.md)** Monitor AWS instances, CloudTrail, GuardDuty, VPC Flow Logs, and other services.
-- **[Microsoft Azure](https://documentation.wazuh.com/current/cloud-security/azure/index.md)** Monitor Azure instances, activity logs, and Microsoft Graph services.
-- **[Google Cloud Platform (GCP)](https://documentation.wazuh.com/current/cloud-security/gcp/index.md)** Monitor GCP instances and services. Wazuh enhances the security posture of your Google Cloud infrastructure.
-- **[GitHub](https://documentation.wazuh.com/current/cloud-security/github/index.md)** Monitor GitHub audit logs for security events.
-- **[Office 365](https://documentation.wazuh.com/current/cloud-security/office365/index.md)** Monitor Office 365 audit logs.
-- **[Monitoring Microsoft Graph services with Wazuh](https://documentation.wazuh.com/current/cloud-security/azure/monitoring-ms-graph.md)** Configure Wazuh to collect and analyze logs from Microsoft Graph API.
-- **[MS Intune integration](https://documentation.wazuh.com/current/cloud-security/azure/ms-intune-integration.md)** Integrate with Microsoft Intune for endpoint management security data.
-
-### Regulatory Compliance
-Wazuh maps security alerts to specific regulatory frameworks to simplify compliance auditing and reporting.
-
-- **[Regulatory Compliance](https://documentation.wazuh.com/current/compliance/index.md)** Use Wazuh to help meet various compliance requirements.
-- **[PCI DSS Compliance](https://documentation.wazuh.com/current/compliance/pci-dss/index.md)** Map Wazuh capabilities to PCI DSS requirements.
-- **[GDPR Compliance](https://documentation.wazuh.com/current/compliance/gdpr/index.md)** Map Wazuh capabilities to GDPR requirements.
-- **[HIPAA Compliance](https://documentation.wazuh.com/current/compliance/hipaa/index.md)** Map Wazuh capabilities to HIPAA requirements.
-- **[NIST 800-53 Compliance](https://documentation.wazuh.com/current/compliance/nist/index.md)** Map Wazuh capabilities to NIST 800-53 controls.
-- **[TSC Compliance](https://documentation.wazuh.com/current/compliance/tsc/index.md)** Map Wazuh capabilities to Trust Services Criteria.
-
-## Extend & Integrate
-Connect Wazuh with other tools and use its APIs.
-
-### Integrations
-Connect Wazuh to external platforms, data lakes, and third-party tools to enhance data flow and automate security workflows.
-
-- **[Integrations Guide](https://documentation.wazuh.com/current/integrations-guide/index.md)** Learn about integrating with platforms like Elastic Stack, OpenSearch, Splunk, and Amazon Security Lake.
-- **[Indexer integration](https://documentation.wazuh.com/current/user-manual/manager/indexer-integration.md)** Forward data from the Wazuh manager to Wazuh or third-party indexers.
-- **[External API Integration](https://documentation.wazuh.com/current/user-manual/manager/integration-with-external-apis.md)** Connect Wazuh to external APIs and alerting tools like Slack, PagerDuty, VirusTotal, Shuffle, and Maltiverse to enhance orchestration and automate responses.
-
-### API References
-Programmatically interact with and manage the Wazuh platform using its comprehensive set of RESTful application programming interfaces.
-
-- **[Wazuh Server API](https://documentation.wazuh.com/current/user-manual/api/index.md)** Configure and use the RESTful API for the Wazuh server/manager.
-- **[Wazuh Indexer API](https://documentation.wazuh.com/current/user-manual/indexer-api/index.md)** Configure and use the RESTful API for the Wazuh indexer.
-- **[API Reference (HTML)](https://documentation.wazuh.com/current/user-manual/api/reference.html)** Detailed endpoint reference for the Wazuh Server API.
-- **[Indexer API Reference (HTML)](https://documentation.wazuh.com/current/user-manual/indexer-api/reference.html)** Detailed endpoint reference for the Wazuh Indexer API.
+- **[Wazuh Agent](https://documentation.wazuh.com/current/user-manual/agent/index.md)** Enroll and manage agents across your environment. Covers enrollment methods, agent life cycle, connection verification, and administrative tasks such as upgrading and querying agent configuration.
 
 ## Development & Support
-Resources for developing with and getting help for Wazuh.
-
-### Development
-Access resources for developers to understand Wazuh's internal architecture, contribute to the project, and build custom integrations.
-
-- **[Development Resources](https://documentation.wazuh.com/current/development/index.md)** Technical resources to understand Wazuh's architecture, extend its capabilities, and tailor the platform.
-- **[Release Notes](https://documentation.wazuh.com/current/release-notes/index.md)** Changelogs for current and past versions of Wazuh.
+Resources for getting help for Wazuh.
 
 ### Community & Support
 Find help, share knowledge, and access professional services through Wazuh's user community and official support channels.
