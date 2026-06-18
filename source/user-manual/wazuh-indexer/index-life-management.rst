@@ -52,7 +52,9 @@ Using the Visual editor
 #. Choose **Add before** from the **Order** tab and select **delete_alerts**.
 #. Click **Add transition** and select **delete_alerts** as the **Destination state**.
 #. Select **Minimum Index Age** in **Condition**. Input the retention value, for example, **90d** for 90 days, in the **Minimum Index Age**.
-#. Click **Add transition**. Click **Save state**. Click **Create**.
+#. Click **Add transition**. Click **Save state**.
+#. Click on the initial state dropdown and change to *initial*.
+#. Click **Create**.
 
 Using the JSON editor
 ~~~~~~~~~~~~~~~~~~~~~
