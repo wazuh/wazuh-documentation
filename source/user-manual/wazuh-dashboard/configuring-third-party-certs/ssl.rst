@@ -40,7 +40,7 @@ Install certbot
          .. code-block:: console
 
             # apt-get update
-            # apt-get install snap
+            # apt-get install snapd
 
       .. group-tab:: Amazon Linux 2
 
