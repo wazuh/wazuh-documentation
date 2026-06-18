@@ -248,6 +248,13 @@ Start the Wazuh Docker deployment using the ``docker compose`` command:
       .. code-block:: console
 
          # docker compose up -d
+#. Verify that all containers are running correctly:
+
+   .. code-block:: console
+
+      # docker compose ps
+
+   Ensure all Wazuh services show the ``Up`` status before accessing the Wazuh dashboard.
 
    .. group-tab:: Foreground
 
