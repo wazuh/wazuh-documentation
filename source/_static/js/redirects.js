@@ -141,22 +141,12 @@ redirections.push(
   {
     'target': ['4.14=>5.0', '5.0=>4.14'],
     '4.14': '/user-manual/manager/wazuh-manager.html',
-    '5.0': '/user-manual/manager/wazuh-manager-architecture.html',
-  },
-  {
-    'target': ['4.14=>5.0', '5.0=>4.14'],
-    '4.14': '/user-manual/manager/indexer-integration.html',
-    '5.0': '/user-manual/manager/wazuh-indexer-connector.html',
+    '5.0': '/user-manual/manager/wazuh-manager-services.html',
   },
   {
     'target': ['4.14=>5.0', '5.0=>4.14'],
     '4.14': '/user-manual/manager/event-logging.html',
     '5.0': '/user-manual/manager/logging.html',
-  },
-  {
-    'target': ['4.14=>5.0', '5.0=>4.14'],
-    '4.14': '/user-manual/manager/wazuh-server-queue.html',
-    '5.0': '/user-manual/manager/wazuh-normalization-engine.html',
   },
   {
     'target': ['4.14=>5.0'],
@@ -173,6 +163,8 @@ redirections.push(
 /* Pages no longer available in 5.0 */
 
 removedUrls['5.0'] = [
+  '/user-manual/manager/indexer-integration.html',
+  '/user-manual/manager/wazuh-server-queue.html',
   '/user-manual/capabilities/system-inventory/osquery.html',
   '/user-manual/reference/ossec-conf/wodle-osquery.html',
   '/user-manual/reference/daemons/wazuh-agentlessd.html',
