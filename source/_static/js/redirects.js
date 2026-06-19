@@ -1,7 +1,7 @@
 const removedUrls = [];
 const newUrls = [];
 const redirections = [];
-const betaVersions = []; // Important: betaVersions won't redirect between similar versions but to a especific page in the beta folder
+const betaVersions = []; // Important: betaVersions won't redirect between similar versions but to a specific page in the beta folder
 
 /* Note: new release versions must always be inserted in the first position of the array "versions" */
 const versions = [
@@ -87,6 +87,12 @@ newUrls['5.0'] = [
   '/user-manual/agent/agent-management/list-agents.html',
   '/user-manual/agent/agent-management/upgrade-agents-remotely.html',
   '/user-manual/wazuh-dashboard/wazuh-dashboard-configurations.html',
+  '/user-manual/manager/wazuh-manager-architecture.html',
+  '/user-manual/manager/wazuh-normalization-engine.html',
+  '/user-manual/manager/wazuh-indexer-connector.html',
+  '/user-manual/manager/wazuh-manager-services.html',
+  '/user-manual/manager/logging.html',
+  '/user-manual/manager/reference.html',
 ];
 
 /* Redirections 4.14—5.0  */
@@ -117,7 +123,7 @@ redirections.push(
     '4.14': '/user-manual/agent/agent-management/remote-upgrading/index.html',
     '5.0': '/user-manual/agent/agent-management/upgrade-agents-remotely.html',
   },
-
+  {
     'target': ['4.14=>5.0', '5.0=>4.14'],
     '4.14': '/user-manual/wazuh-dashboard/queries.html',
     '5.0': '/user-manual/wazuh-dashboard/global-queries.html#filtering-data-using-wazuh-query-language-wql',
@@ -131,12 +137,35 @@ redirections.push(
     'target': ['4.14=>5.0', '5.0=>4.14'],
     '4.14': '/user-manual/wazuh-dashboard/multi-tenancy.html',
     '5.0': '/user-manual/wazuh-dashboard/wazuh-dashboard-configurations.html#multi-tenancy',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/user-manual/manager/wazuh-manager.html',
+    '5.0': '/user-manual/manager/wazuh-manager-services.html',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/user-manual/manager/event-logging.html',
+    '5.0': '/user-manual/manager/logging.html',
+  },
+  {
+    'target': ['4.14=>5.0'],
+    '4.14': '/user-manual/manager/alert-management.html',
+    '5.0': '/user-manual/manager/index.html',
+  },
+  {
+    'target': ['4.14=>5.0'],
+    '4.14': '/user-manual/manager/integration-with-external-apis.html',
+    '5.0': '/user-manual/manager/index.html',
   }
 );
 
 /* Pages no longer available in 5.0 */
 
 removedUrls['5.0'] = [
+  '/user-manual/manager/indexer-integration.html',
+  '/user-manual/manager/wazuh-server-queue.html',
+  '/user-manual/manager/wazuh-manager.html',
   '/user-manual/capabilities/system-inventory/osquery.html',
   '/user-manual/reference/ossec-conf/wodle-osquery.html',
   '/user-manual/reference/daemons/wazuh-agentlessd.html',
