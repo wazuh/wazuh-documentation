@@ -103,7 +103,9 @@ Follow these steps to create an internal user, create a new role mapping, and gi
 
       - **Index permissions**: ``read``
 
-      - **Tenant permissions**: ``global_tenant`` and select the **Read only** option.
+      - **Tenant permissions**: ``global_tenant`` and select the **Read only** option. 
+
+   #. Click **Create** to confirm the action.
 
    #. Select the **Mapped users** tab and click **Manage mapping**.
    
