@@ -183,6 +183,8 @@ The Wazuh agent installation directory depends on the architecture of the host.
       # echo “<CUSTOM_PASSWORD>” > "C:\Program Files (x86)\ossec-agent\authd.pass"
 
    Note that you have to replace ``<CUSTOM_PASSWORD>`` with the agents enrollment password created on the manager.
+   In some cases, if you create the ``authd.pass`` file through PowerShell, the encoding was in UTF-16LE format, remember to change the ``authd.pass`` encoding to UTF-8, which is 
+   the format the agent expects it to be.
 
 #. Add the Wazuh manager IP address or DNS name in the ``<client><server><address>`` section of ``C:\Program Files (x86)\ossec-agent\ossec.conf``:
 
