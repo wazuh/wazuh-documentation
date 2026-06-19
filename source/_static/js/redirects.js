@@ -165,6 +165,7 @@ redirections.push(
 removedUrls['5.0'] = [
   '/user-manual/manager/indexer-integration.html',
   '/user-manual/manager/wazuh-server-queue.html',
+  '/user-manual/manager/wazuh-manager.html',
   '/user-manual/capabilities/system-inventory/osquery.html',
   '/user-manual/reference/ossec-conf/wodle-osquery.html',
   '/user-manual/reference/daemons/wazuh-agentlessd.html',
