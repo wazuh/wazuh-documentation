@@ -18,3 +18,4 @@ By following this guide, you will learn how to build an environment composed of 
    kubernetes-conf
    kubernetes-upgrade
    kubernetes-clean-up
+   kubernetes-local-env
