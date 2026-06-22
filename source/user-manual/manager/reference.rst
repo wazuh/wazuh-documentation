@@ -58,7 +58,7 @@ Server
 .. _orchestrator_module:
 
 Orchestrator
-   The Orchestrator is the runtime hub of the Wazuh normalization engine. It owns the routes table that maps each :ref:`space <spaces>` to the active security policy and the priority at which events are evaluated, plus the session table used by the tester. When an event arrives, the Orchestrator forwards an independent copy to each active policy, allowing a single incoming event to produce multiple output documents, one for each active policy. Routes can be added, replaced, or removed at runtime without restarting the normalization engine, which is what makes hot-swapping of synchronized content possible.
+   The Orchestrator is the runtime hub of the Wazuh normalization engine. It owns the routes table that maps each :ref:`space <space>` to the active security policy and the priority at which events are evaluated, plus the session table used by the tester. When an event arrives, the Orchestrator forwards an independent copy to each active policy, allowing a single incoming event to produce multiple output documents, one for each active policy. Routes can be added, replaced, or removed at runtime without restarting the normalization engine, which is what makes hot-swapping of synchronized content possible.
 
 Builder
    The Builder turns the declarative content stored in the :ref:`Engine Content Manager <engine_content_manager_module>` into an executable graph that the :ref:`Backend <backend_module>` can run. It validates field types against the :ref:`Schema <schema_module>`, resolves variables and definitions, and links every helper function used in ``check``, ``parse``, and ``normalize`` stages. The Engine Content Manager calls the Builder whenever content changes allowing the :ref:`Orchestrator <orchestrator_module>` to register the resulting graph as a route.
@@ -71,7 +71,7 @@ Backend
 .. _engine_content_manager_module:
 
 Engine Content Manager
-   This is the local mirror of the content managed in the Wazuh indexer. It is organized by :ref:`spaces <spaces>`. The Engine Content Manager has three responsibilities:
+   This is the local mirror of the content managed in the Wazuh indexer. It is organized by :ref:`spaces <space>`. The Engine Content Manager has three responsibilities:
 
    -  Storage of decoders, filters, KVDBs, integrations, and policies on the normalization engine endpoint.
    -  :ref:`Synchronization <synchronization_process>` with the Wazuh indexer (CMSync), which periodically compares per-space content hashes and pulls the full content when they differ.

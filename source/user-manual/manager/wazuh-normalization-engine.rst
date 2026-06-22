@@ -580,19 +580,14 @@ This involves managing content of the Wazuh normalization engines. The content i
 
 The normalization engine pulls all content and policy configurations from the Wazuh indexer and stores them locally for runtime execution. The Wazuh indexer is the single source of truth for all content management. Creating custom decoders and integrations, enabling or disabling them, and modifying policy-related settings are all actions performed through the Wazuh indexer and not directly on the Wazuh normalization engine.
 
-Content lifecycle
-^^^^^^^^^^^^^^^^^
-
-Before building the security policy, the Wazuh normalization engine must ensure that its local state reflects the latest configuration available in the Wazuh indexer. This is achieved through a ``CMSync`` module, which periodically pulls content from the Wazuh indexer and applies any detected changes to the local store of the Wazuh normalization engine.
-
-CMSync runs periodically per :ref:`space <spaces>` (``standard`` and ``custom``). For each space, it compares the hash of the content in the Wazuh indexer with the local one. If the content differs, it downloads the full content for the space and applies it to the local store of the Wazuh normalization engine.
-
 .. _synchronization_process:
 
 Synchronization process
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-The CMSync submodule synchronizes content independently for the ``standard`` and ``custom`` :ref:`spaces <spaces>`, following the same two-step process for each:
+Before building the security policy, the Wazuh normalization engine must ensure that its local state reflects the latest configuration available in the Wazuh indexer. This is achieved through a CMSync module, which periodically pulls content from the Wazuh indexer and applies any detected changes to the local store of the Wazuh normalization engine.
+
+CMSync synchronizes content independently for the standard and custom spaces, following the same two-step process for each:
 
 #. **Hash comparison**: CMSync retrieves the content hash stored in the Wazuh indexer for the space and compares it against the locally stored hash. This check allows CMSync to determine quickly whether the space content has changed at all.
 #. **Content fetch**: If the hashes differ, CMSync downloads the full content for that space from the Wazuh indexer and applies it to the local store of the Wazuh normalization engine. The engine then rebuilds the affected operational graphs.
@@ -601,14 +596,14 @@ The CMSync submodule synchronizes content independently for the ``standard`` and
 
    IOC and Geo/ASN databases are not part of this synchronization. They are shared across all spaces and are managed by a dedicated synchronization system, independent of the per-space content sync described above.
 
-.. _spaces:
+.. _space:
 
-Spaces
-^^^^^^
+Space
+^^^^^
 
-Spaces are a concept that originates in the Wazuh indexer, where content is organized and stored. The Wazuh normalization engine mirrors this structure by storing assets separately according to the indexer space they belong to when CMSync pulls content from the Wazuh indexer. Spaces in the normalization engine are therefore a direct reflection of the space organization in the Wazuh indexer, not an independent concept.
+A space is a content organization concept that originates in the Wazuh indexer. The Wazuh indexer has four spaces, including ``draft``, ``test``, ``custom``, and ``standard``. In the Wazuh manager, the normalization engine mirrors the relevant Wazuh indexer spaces by storing synchronized assets according to the space they belong to when CMSync pulls content from the Wazuh indexer.
 
-The two spaces include:
+The Wazuh normalization engine manages the following spaces:
 
 -  **Standard**: Contains the default integrations curated and maintained by the `Wazuh CTI <https://cti.wazuh.com/>`__. The Wazuh indexer is responsible for downloading and hosting this content from the CTI feed. The Wazuh normalization engine never communicates with the Wazuh CTI directly. CMSync synchronizes the local copy from the Wazuh indexer.
 -  **Custom**: An independent space for user-defined or user-modified content. Users manage this space through the Wazuh indexer, and CMSync propagates any changes to the Wazuh normalization engine.
