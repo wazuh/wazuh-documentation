@@ -19,6 +19,10 @@ This section guides you through the upgrade process of the Wazuh indexer, the Wa
 
    To avoid data loss, create an :ref:`index snapshot <migrating_indices_take_snapshots>` before upgrading. For more details, refer to the `Opensearch documentation <https://opensearch.org/docs/latest/install-and-configure/upgrade-opensearch/rolling-upgrade/>`__.
 
+.. warning::
+
+   Starting with Wazuh 4.14.1, JSON fields named ``user`` are mapped to ``dstuser`` during event decoding. This change may affect custom dashboards, searches, integrations, and scripts that reference ``data.user``. Review and update any custom content to use ``data.dstuser`` before upgrading.
+
 .. _preparing-the-upgrade:
 
 Preparing the upgrade
