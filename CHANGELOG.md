@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- **Post-release**: Added upgrade warning for the `data.user` to `data.dstuser` field mapping change introduced in Wazuh 4.14.1. ([#9741](https://github.com/wazuh/wazuh-documentation/pull/9741))
 - **Post-release**: Added authentik to the Single Sign-On documentation. ([#9656](https://github.com/wazuh/wazuh-documentation/pull/9656))
 - **Post-release**: Added the *System requirements* section to the *Wazuh server cluster* documentation. ([#9668](https://github.com/wazuh/wazuh-documentation/pull/9668))
 
