@@ -47,6 +47,7 @@ Manage your Wazuh infrastructure, users, and data.
 Administer the core Wazuh infrastructure, including the user interface (dashboard).
 
 - **[Wazuh Manager](https://documentation.wazuh.com/current/user-manual/manager/index.md)** Configure and operate the Wazuh manager, which transforms event data from agents, external APIs, and network devices into standardized schema documents, enriches it with threat intelligence, and forwards it to the Wazuh indexer. Covers architecture, the normalization engine, the indexer connector, services, and logging.
+- **[Data analysis](https://documentation.wazuh.com/current/user-manual/data-analysis/index.md)** Decode, normalize, enrich, and evaluate events to generate findings through the Security Analytics dashboard. Covers the normalization and detection engines, content management, spaces, integrations, decoders, KVDBs, enrichment, rules, detectors, and findings.
 - **[Wazuh Dashboard](https://documentation.wazuh.com/current/user-manual/wazuh-dashboard/index.md)** Analyze, visualize, and manage security operations through the Wazuh web interface. Covers navigation, configuration, and third-party certificate setup.
 
 ### Agents
