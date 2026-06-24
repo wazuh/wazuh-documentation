@@ -6,7 +6,7 @@
 Wazuh RBAC - How to create and map internal users
 =================================================
 
-Wazuh Role-Based Access Control (RBAC) allows access to Wazuh resources based on the roles and policies assigned to the users. It is an easy-to-use administration system that enables the management of users' or entities' permissions to the system resources. To learn more, see the :doc:`Role-Based Access Control </user-manual/api/rbac/index>` section.
+Wazuh Role-Based Access Control (RBAC) allows access to Wazuh resources based on the roles and policies assigned to the users. It is an easy-to-use administration system that enables the management of users' or entities' permissions to the system resources.
 
 The Wazuh platform includes an internal user database for authentication. It can also be used alongside an external authentication system, such as SAML, LDAP, or Active Directory. Learn how to create and map Wazuh users in these sections.
 
@@ -151,7 +151,7 @@ Follow these steps to create an internal user and map it to a role of your choic
       - **Roles**: Select the Wazuh roles that you want to map the user to.
       - **Internal users**: Select the internal user created previously.
 
-      Wazuh includes an extensive list of :ref:`default policies<api_rbac_reference_default_policies>` and :ref:`roles <api_rbac_reference_default_roles>`. Additionally, you can create custom policies and roles to suit your needs.
+      Wazuh includes an extensive list of default policies and roles. Additionally, you can create custom policies and roles to suit your needs.
 
    #. Click **Save role mapping** to save and map the user with Wazuh.
 
