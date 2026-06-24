@@ -166,6 +166,66 @@ Starting the service
 
       .. include:: /_templates/installations/indexer/common/enable_indexer.rst
 
+Repeat this stage of the installation process for every Wazuh indexer node in your multi-node cluster. Then proceed with initializing your single-node or multi-node cluster in the next stage.
+
+Cluster initialization
+----------------------
+
+The final stage of installing the Wazuh indexer single-node or multi-node cluster consists of running the security admin script.
+
+#. Run the Wazuh indexer ``indexer-security-init.sh`` script on `any` Wazuh indexer node to load the new certificates information and start the single-node or multi-node cluster.
+
+   .. code-block:: console
+
+      # /usr/share/wazuh-indexer/bin/indexer-security-init.sh
+
+   .. note::
+
+      You only have to initialize the cluster once, there is no need to run this command on every node.
+
+Testing the cluster installation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+#. Run the following commands to confirm that the installation is successful. Replace ``<WAZUH_INDEXER_IP_ADDRESS>``  with the IP address of the Wazuh indexer and enter admin as the password when prompted:
+
+   .. code-block:: console
+
+      # curl -k -u admin https://<WAZUH_INDEXER_IP_ADDRESS>:9200
+
+   .. code-block:: none
+      :class: output accordion-output
+
+      {
+        "name" : "node-1",
+        "cluster_name" : "wazuh-cluster",
+        "cluster_uuid" : "095jEW-oRJSFKLz5wmo5PA",
+        "version" : {
+          "number" : "7.10.2",
+          "build_type" : "rpm",
+          "build_hash" : "db90a415ff2fd428b4f7b3f800a51dc229287cb4",
+          "build_date" : "2023-06-03T06:24:25.112415503Z",
+          "build_snapshot" : false,
+          "lucene_version" : "9.6.0",
+          "minimum_wire_compatibility_version" : "7.10.0",
+          "minimum_index_compatibility_version" : "7.0.0"
+        },
+        "tagline" : "The OpenSearch Project: https://opensearch.org/"
+      }
+
+#. Run the following command to check if the cluster is working correctly. Replace ``<WAZUH_INDEXER_IP_ADDRESS>``  with the IP address of the Wazuh indexer and enter admin as the password when prompted:
+
+   .. code-block:: console
+
+      # curl -k -u admin https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cat/nodes?v
+
+   The command produces output similar to the following:
+
+   .. code-block:: none
+      :class: output
+
+      ip              heap.percent ram.percent cpu load_1m load_5m load_15m node.role node.roles                               cluster_manager name
+      192.168.107.240           19          94   4    0.22    0.21     0.20 dimr      data,ingest,master,remote_cluster_client *               node-1
+
 Memory locking
 ^^^^^^^^^^^^^^
 
@@ -261,65 +321,7 @@ When the system is swapping memory, the Wazuh indexer may not work as expected. 
         }
       }
 
-Repeat this stage of the installation process for every Wazuh indexer node in your multi-node cluster. Then proceed with initializing your single-node or multi-node cluster in the next stage.
-
-Cluster initialization
-----------------------
-
-The final stage of installing the Wazuh indexer single-node or multi-node cluster consists of running the security admin script.
-
-#. Run the Wazuh indexer ``indexer-security-init.sh`` script on `any` Wazuh indexer node to load the new certificates information and start the single-node or multi-node cluster.
-
-   .. code-block:: console
-
-      # /usr/share/wazuh-indexer/bin/indexer-security-init.sh
-
-   .. note::
-
-      You only have to initialize the cluster once, there is no need to run this command on every node.
-
-Testing the cluster installation
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-#. Run the following commands to confirm that the installation is successful. Replace ``<WAZUH_INDEXER_IP_ADDRESS>``  with the IP address of the Wazuh indexer and enter admin as the password when prompted:
-
-   .. code-block:: console
-
-      # curl -k -u admin https://<WAZUH_INDEXER_IP_ADDRESS>:9200
-
-   .. code-block:: none
-      :class: output accordion-output
-
-      {
-        "name" : "node-1",
-        "cluster_name" : "wazuh-cluster",
-        "cluster_uuid" : "095jEW-oRJSFKLz5wmo5PA",
-        "version" : {
-          "number" : "7.10.2",
-          "build_type" : "rpm",
-          "build_hash" : "db90a415ff2fd428b4f7b3f800a51dc229287cb4",
-          "build_date" : "2023-06-03T06:24:25.112415503Z",
-          "build_snapshot" : false,
-          "lucene_version" : "9.6.0",
-          "minimum_wire_compatibility_version" : "7.10.0",
-          "minimum_index_compatibility_version" : "7.0.0"
-        },
-        "tagline" : "The OpenSearch Project: https://opensearch.org/"
-      }
-
-#. Run the following command to check if the cluster is working correctly. Replace ``<WAZUH_INDEXER_IP_ADDRESS>``  with the IP address of the Wazuh indexer and enter admin as the password when prompted:
-
-   .. code-block:: console
-
-      # curl -k -u admin https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cat/nodes?v
-
-   The command produces output similar to the following:
-
-   .. code-block:: none
-      :class: output
-
-      ip              heap.percent ram.percent cpu load_1m load_5m load_15m node.role node.roles                               cluster_manager name
-      192.168.107.240           19          94   4    0.22    0.21     0.20 dimr      data,ingest,master,remote_cluster_client *               node-1
+Repeat this stage of the installation process on every Wazuh indexer node in your multi node cluster. This ensures that memory locking is correctly configured across all Wazuh indexer nodes.
 
 Disable Wazuh updates
 ---------------------
