@@ -26,6 +26,7 @@ All notable changes to this project will be documented in this file.
 - Updated the *Wazuh dashboard* documentation in *User manual*. ([#9688](https://github.com/wazuh/wazuh-documentation/pull/9688))
 - Updated the *Quickstart* documentation. ([#9680](https://github.com/wazuh/wazuh-documentation/pull/9680))
 - Updated the *Wazuh server* documentation to the new *Wazuh manager* documentation in the *User manual*. ([#9728](https://github.com/wazuh/wazuh-documentation/pull/9728)) ([#9737](https://github.com/wazuh/wazuh-documentation/pull/9737))
+- Updated the *User administration* documentation. ([#9745](https://github.com/wazuh/wazuh-documentation/pull/9745))
 
 ### Removed
 
