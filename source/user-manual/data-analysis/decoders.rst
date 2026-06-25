@@ -70,6 +70,7 @@ Most decoders start from ``event.original`` for raw log text or JSON, or some fi
 Example: Parse a JSON firewall log arriving as a string in ``event.original``:
 
 .. code-block:: yaml
+   :emphasize-lines: 5
 
    name: decoder/custom-firewall-json/0
    enabled: true
@@ -89,6 +90,7 @@ The ``check`` stage is used to target the right events. It uses filter helpers s
 Example:
 
 .. code-block:: yaml
+   :emphasize-lines: 3-4
 
    stages:
      check:

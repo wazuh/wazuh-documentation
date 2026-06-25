@@ -12,7 +12,7 @@ Within the Wazuh indexer, the detection engine evaluates the normalized data aga
 
 The Wazuh data analysis engine decodes logs, triggers rules, and generates findings using the following scheme:
 
-#. **Log collection**: Wazuh gathers logs from monitored endpoints, applications, and network devices. These logs come from various sources, including operating system logs, syslog-enabled devices, cloud provider logs, and custom logs. See the log data collection documentation for more information.
+#. **Log collection**: Wazuh gathers logs from monitored endpoints, applications, and network devices. These logs come from various sources, including operating system logs, syslog-enabled devices, cloud provider logs, and custom logs. See the :ref:`log data collection documentation <manual_log_analysis>` for more information.
 
 #. **Log normalization**: The Wazuh data analysis engine processes raw events using decoders that parse, normalize, and enrich them into structured JSON documents conforming to the `Wazuh Common Schema (WCS) <https://github.com/wazuh/wazuh-indexer-plugins/blob/main/wcs/stateless/events/main/docs/fields.csv>`__. The Wazuh Common Schema is a standardized structure for organizing and categorizing security event data from any source, ensuring consistent analysis, correlation, and reporting across data types.
 
@@ -43,8 +43,8 @@ The following sections describe the main components of the Wazuh Security Analyt
       :maxdepth: 2
 
       content-management
-      spaces
-      integrations
+      space
+      integration
       events
       filters
       decoders

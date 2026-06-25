@@ -23,7 +23,7 @@ Creating custom detectors
 
 Follow the steps below to create a custom detector:
 
-#. Navigate to **Security Analytics** > **Detectors** and click on **Create Detector**.
+#. Navigate to **Security Analytics** > **Detection** > **Detectors** and click on **Create Detector**.
 
 #. Enter a name for the detector.
 

@@ -3,6 +3,8 @@
 .. meta::
    :description: Content management defines how Wazuh handles the rules, decoders, integrations, KVDBs, and IOCs used in the data analysis pipeline. Learn more in this section.
 
+.. _data_analysis_content_management:
+
 Content management
 ==================
 

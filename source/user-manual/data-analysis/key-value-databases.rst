@@ -116,7 +116,7 @@ The following example demonstrates how to set up a KVDB on the Wazuh dashboard. 
 
    Click on **Create KVDB**.
 
-#. Navigate to **Security Analytics** > **Decoder** > **Actions** and click on **Create**. Paste the following content, specify your integration, and click **Create Decoder**.
+#. Navigate to **Security Analytics** > **Normalization** > **Decoders** > **Actions** and click on **Create**. Paste the following content, specify your integration, and click **Create Decoder**.
 
    .. code-block:: yaml
 
@@ -174,6 +174,7 @@ The following example demonstrates how to set up a KVDB on the Wazuh dashboard. 
 #. Create another decoder using the same integration you assigned in the previous root decoder and the following command:
 
    .. code-block:: yaml
+      :emphasize-lines: 52
 
       ---
       name: "decoder/test-aws-route53-resolver-logs/0"
@@ -219,7 +220,7 @@ The following example demonstrates how to set up a KVDB on the Wazuh dashboard. 
         - event.start: "parse_date($_tmp_json.query_timestamp, ISO8601Z)"
         - event.type: "array_append(protocol)"
         - network.transport: "downcase($_tmp_json.transport)"
-        - network.iana_number: "get_key_in($_netiana_map, $network.transport)"
+        - network.iana_number: "get_key_in($netiana_map, $network.transport)"
         - network.protocol: "dns"
         - source.address: "$_tmp_json.srcaddr"
         - source.ip: "$_tmp_json.srcaddr"
