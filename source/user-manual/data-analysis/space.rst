@@ -12,20 +12,22 @@ A space is the logical storage location where Wazuh keeps its detection content.
 
 The draft, test, and custom spaces are fully user-managed, enabling the creation, validation, and deployment of custom detection content, while standard provides the default Wazuh CTI-managed content.
 
-.. list-table::
-   :header-rows: 1
-   :widths: 20 80
-
-   * - Space
-     - Description
-   * - **Draft**
-     - A writable space for user-generated content where users can create, read, update, and delete resources.
-   * - **Test**
-     - Used for log test operations and content validation before final promotion.
-   * - **Custom**
-     - The final space for user content. Content promoted to this space is used by the Wazuh data analysis engine to actively decode and process logs.
-   * - **Standard**
-     - Read-only content synced from the CTI API. This is the baseline detection content.
++--------------+------------------------------------------------------------------------+
+| Space        | Description                                                            |
++==============+========================================================================+
+| **Draft**    | A writable space for user-generated content where users can create,    |
+|              | read, update, and delete resources.                                    |
++--------------+------------------------------------------------------------------------+
+| **Test**     | Used for log test operations and content validation before final       |
+|              | promotion.                                                             |
++--------------+------------------------------------------------------------------------+
+| **Custom**   | The final space for user content. Content promoted to this space is    |
+|              | used by the Wazuh data analysis engine to actively decode and process  |
+|              | logs.                                                                  |
++--------------+------------------------------------------------------------------------+
+| **Standard** | Read-only content synced from the CTI API. This is the baseline        |
+|              | detection content.                                                     |
++--------------+------------------------------------------------------------------------+
 
 .. thumbnail:: /images/manual/data-analysis/security-analytics-spaces.png
    :title: Security Analytics spaces

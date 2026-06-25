@@ -17,62 +17,36 @@ A valid rule must define top-level identifiers, a ``detection`` block, a ``logso
 
 The following table lists all supported top-level fields in a Wazuh Sigma rule. Fields marked as required must be present for the rule to pass validation.
 
-.. list-table::
-   :header-rows: 1
-   :widths: 18 12 10 60
-
-   * - Field
-     - Type
-     - Required
-     - Description
-   * - ``id``
-     - String
-     - Yes
-     - Globally unique rule identifier (UUIDv4 recommended)
-   * - ``status``
-     - String
-     - Yes
-     - Rule maturity status: ``experimental``, ``test``, or ``stable``
-   * - ``level``
-     - String
-     - Yes
-     - Findings severity: ``informational``, ``low``, ``medium``, ``high``, or ``critical``
-   * - ``detection``
-     - Object
-     - Yes
-     - Detection logic: selections, keywords, and conditions
-   * - ``logsource``
-     - Object
-     - Yes
-     - Classifies the type of log data the rule targets
-   * - ``metadata``
-     - Object
-     - Yes
-     - Authorship and lifecycle information
-   * - ``sigma_id``
-     - String
-     - No
-     - Original Sigma rule identifier (UUID), preserved when importing from upstream
-   * - ``enabled``
-     - Boolean
-     - No
-     - Whether the rule is active (default: ``true``)
-   * - ``tags``
-     - Array
-     - No
-     - Categorization tags (e.g., ``attack.initial-access``)
-   * - ``falsepositives``
-     - Array
-     - No
-     - Known sources of false positives
-   * - ``mitre``
-     - Object
-     - No
-     - MITRE ATT&CK threat intelligence mapping
-   * - ``compliance``
-     - Object
-     - No
-     - Compliance framework mapping
++--------------------+-----------+------------+--------------------------------------------------------+
+| Field              | Type      | Required   | Description                                            |
++====================+===========+============+========================================================+
+| ``id``             | String    | Yes        | Globally unique rule identifier (UUIDv4 recommended)   |
++--------------------+-----------+------------+--------------------------------------------------------+
+| ``status``         | String    | Yes        | Rule maturity status: ``experimental``, ``test``, or   |
+|                    |           |            | ``stable``                                             |
++--------------------+-----------+------------+--------------------------------------------------------+
+| ``level``          | String    | Yes        | Findings severity: ``informational``, ``low``,         |
+|                    |           |            | ``medium``, ``high``, or ``critical``                  |
++--------------------+-----------+------------+--------------------------------------------------------+
+| ``detection``      | Object    | Yes        | Detection logic: selections, keywords, and conditions  |
++--------------------+-----------+------------+--------------------------------------------------------+
+| ``logsource``      | Object    | Yes        | Classifies the type of log data the rule targets       |
++--------------------+-----------+------------+--------------------------------------------------------+
+| ``metadata``       | Object    | Yes        | Authorship and lifecycle information                   |
++--------------------+-----------+------------+--------------------------------------------------------+
+| ``sigma_id``       | String    | No         | Original Sigma rule identifier (UUID), preserved when  |
+|                    |           |            | importing from upstream                                |
++--------------------+-----------+------------+--------------------------------------------------------+
+| ``enabled``        | Boolean   | No         | Whether the rule is active (default: ``true``)         |
++--------------------+-----------+------------+--------------------------------------------------------+
+| ``tags``           | Array     | No         | Categorization tags (e.g., ``attack.initial-access``)  |
++--------------------+-----------+------------+--------------------------------------------------------+
+| ``falsepositives`` | Array     | No         | Known sources of false positives                       |
++--------------------+-----------+------------+--------------------------------------------------------+
+| ``mitre``          | Object    | No         | MITRE ATT&CK threat intelligence mapping               |
++--------------------+-----------+------------+--------------------------------------------------------+
+| ``compliance``     | Object    | No         | Compliance framework mapping                           |
++--------------------+-----------+------------+--------------------------------------------------------+
 
 Wazuh rule sample
 -----------------
@@ -174,32 +148,43 @@ A selection is a named object whose keys correspond to existing WCS fields and w
 
 There are two ways to write a selection, depending on whether you want any condition to match or all of them to match:
 
-.. list-table::
-   :header-rows: 1
-   :widths: 22 48 30
++-------------------------------------+----------------------------------------------------------------+
+| Syntax                              | How it matches                                                 |
++=====================================+================================================================+
+| **Field list (implicit OR)**        | When you assign a list of values to a single field, the        |
+|                                     | selection matches if the field equals any value in the list.   |
+|                                     | This is the "match one of these" pattern. This rule matches    |
+|                                     | when ``event.action`` is either "``login_failed``" or          |
+|                                     | "``authentication_error``".                                    |
++-------------------------------------+----------------------------------------------------------------+
+| **Field dictionary (implicit AND)** | When you assign multiple fields within a single selection, the |
+|                                     | selection matches only when all field conditions are satisfied |
+|                                     | simultaneously. This is the "match all of these together"      |
+|                                     | pattern. This rule matches when ``log.level`` is "``ERROR``"   |
+|                                     | and ``event.kind`` is "``event``". Both conditions must hold   |
+|                                     | simultaneously.                                                |
++-------------------------------------+----------------------------------------------------------------+
 
-   * - Syntax
-     - How it matches
-     - Example
-   * - **Field list (implicit OR)**
-     - When you assign a list of values to a single field, the selection matches if the field equals any value in the list. This is the "match one of these" pattern. This rule matches when ``event.action`` is either "``login_failed``" or "``authentication_error``".
-     - .. code-block:: yaml
+Field list (implicit OR) example:
 
-          detection:
-            selection:
-              event.action:
-                - login_failed # or
-                - authentication_error
-            condition: selection
-   * - **Field dictionary (implicit AND)**
-     - When you assign multiple fields within a single selection, the selection matches only when all field conditions are satisfied simultaneously. This is the "match all of these together" pattern. This rule matches when ``log.level`` is "``ERROR``" and ``event.kind`` is "``event``". Both conditions must hold simultaneously.
-     - .. code-block:: yaml
+.. code-block:: yaml
 
-          detection:
-            selection:
-              log.level: ERROR # and
-              event.kind: event
-            condition: selection
+   detection:
+     selection:
+       event.action:
+         - login_failed # or
+         - authentication_error
+     condition: selection
+
+Field dictionary (implicit AND) example:
+
+.. code-block:: yaml
+
+   detection:
+     selection:
+       log.level: ERROR # and
+       event.kind: event
+     condition: selection
 
 Keywords (implicit OR)
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -232,55 +217,65 @@ The ``condition`` field is a string expression that combines named selections us
 
    condition: (selection_one or selection_two) and not filter
 
-.. list-table::
-   :header-rows: 1
-   :widths: 12 38 50
++--------------+----------------------------------------------------------------+
+| Operator     | Description                                                    |
++==============+================================================================+
+| ``and``      | Both operands must match                                       |
++--------------+----------------------------------------------------------------+
+| ``or``       | At least one operand must match                                |
++--------------+----------------------------------------------------------------+
+| ``not``      | Fires on matching events, but excludes any event generated by  |
+|              | a thread whose name starts with ``Test``. This is the standard |
+|              | pattern for reducing false positives.                          |
++--------------+----------------------------------------------------------------+
+| ``brackets`` | Allows for the grouping of different operations                |
++--------------+----------------------------------------------------------------+
 
-   * - Operator
-     - Description
-     - Example
-   * - ``and``
-     - Both operands must match
-     - .. code-block:: yaml
+``and`` example:
 
-          detection:
-            sel_severity:
-              event.severity|gte: 8
-            sel_message:
-              message|contains: fatal
-            condition: sel_severity and sel_message
-   * - ``or``
-     - At least one operand must match
-     - .. code-block:: yaml
+.. code-block:: yaml
 
-          detection:
-            sel_error:
-              log.level: ERROR
-            sel_warn:
-              log.level: WARN
-            condition: sel_error or sel_warn
-   * - ``not``
-     - Fires on matching events, but excludes any event generated by a thread whose name starts with ``Test``. This is the standard pattern for reducing false positives.
-     - .. code-block:: yaml
+   detection:
+     sel_severity:
+       event.severity|gte: 8
+     sel_message:
+       message|contains: fatal
+     condition: sel_severity and sel_message
 
-          detection:
-            selection:
-              event.kind: event
-            filter:
-              process.thread.name|startswith: Test
-            condition: selection and not filter
-   * - ``brackets``
-     - Allows for the grouping of different operations
-     - .. code-block:: yaml
+``or`` example:
 
-          detection:
-            sel_high:
-              event.severity|gte: 8
-            sel_critical:
-              log.level: CRITICAL
-            filter:
-              process.name: monitor
-            condition: (sel_high or sel_critical) and not filter
+.. code-block:: yaml
+
+   detection:
+     sel_error:
+       log.level: ERROR
+     sel_warn:
+       log.level: WARN
+     condition: sel_error or sel_warn
+
+``not`` example:
+
+.. code-block:: yaml
+
+   detection:
+     selection:
+       event.kind: event
+     filter:
+       process.thread.name|startswith: Test
+     condition: selection and not filter
+
+``brackets`` example:
+
+.. code-block:: yaml
+
+   detection:
+     sel_high:
+       event.severity|gte: 8
+     sel_critical:
+       log.level: CRITICAL
+     filter:
+       process.name: monitor
+     condition: (sel_high or sel_critical) and not filter
 
 See `Sigma Conditions <https://sigmahq.io/docs/basics/conditions.html>`__ for the full specification of condition syntax.
 
@@ -295,70 +290,96 @@ Modifiers change how a field's value is compared. They are appended to the field
 
 Multiple modifiers can be chained: ``field|modifier1|modifier2: value``.
 
-.. list-table::
-   :header-rows: 1
-   :widths: 14 56 30
++------------------+------------------------------------------------------------------------+
+| Modifier         | What it does                                                           |
++==================+========================================================================+
+| ``contains``     | Matches if the field value contains a specified string. Wildcards are  |
+|                  | inserted around the value.                                             |
++------------------+------------------------------------------------------------------------+
+| ``startswith``   | Matches when the field value begins with the specified string. A       |
+|                  | wildcard is inserted at the end of the value.                          |
++------------------+------------------------------------------------------------------------+
+| ``endswith``     | Matches when the field value ends with the specified string. A         |
+|                  | wildcard is inserted at the beginning of the value.                    |
++------------------+------------------------------------------------------------------------+
+| ``base64``       | Encodes the provided value as a Base64 string before comparison. Used  |
+|                  | to detect commands or parameters that an attacker has Base64-encoded   |
+|                  | to evade plain-text detection.                                         |
++------------------+------------------------------------------------------------------------+
+| ``base64offset`` | Generates all three possible Base64 offsets of the value to account    |
+|                  | for the byte position where it might appear inside a larger            |
+|                  | Base64-encoded blob. Usually preferred over ``base64`` when matching a |
+|                  | substring inside an encoded stream, and typically chained with         |
+|                  | ``contains``.                                                          |
++------------------+------------------------------------------------------------------------+
+| ``wide``         | Transforms the value to a UTF-16 (wide-character) byte sequence before |
+|                  | comparison. Must be chained with an encoding modifier such as          |
+|                  | ``base64`` or ``base64offset``. It cannot be the final modifier in the |
+|                  | chain because the intermediate representation contains null bytes.     |
++------------------+------------------------------------------------------------------------+
+| ``windash``      | Expands command-line flag prefixes to match all Windows dash variants: |
+|                  | ``-``, ``/``, ``–`` (en dash), ``—`` (em dash), and ``―`` (horizontal  |
+|                  | bar). Useful for detecting invocations where attackers swap dash       |
+|                  | characters to evade signatures.                                        |
++------------------+------------------------------------------------------------------------+
+| ``re``           | Matches against a PCRE regular expression. Submodifiers can be chained |
+|                  | with ``re|<flag>``:                                                    |
+|                  |                                                                        |
+|                  | - ``i``: case-insensitive matching.                                    |
+|                  | - ``m``: multi-line mode (``^``/``$`` match the start/end of each      |
+|                  |   line).                                                               |
+|                  | - ``s``: single-line mode (``.`` also matches newline characters).     |
++------------------+------------------------------------------------------------------------+
+| ``cidr``         | Matches when the field value (an IPv4 or IPv6 address) falls within    |
+|                  | the specified CIDR subnet. IPv6 addresses are supported in the         |
+|                  | following formats:                                                     |
+|                  |                                                                        |
+|                  | - Standard: full 8-group notation with leading zeros, for example      |
+|                  |   ``2001:0db8:85a3:0000:0000:8a2e:0370:7334``.                         |
+|                  | - Compressed: zero-compression using ``::`` to omit consecutive zero   |
+|                  |   groups, for example ``2001:db8:85a3::8a2e:370:7334``.                |
+|                  | - CIDR: subnet notation with a prefix length, for example              |
+|                  |   ``2001:db8::/32``.                                                   |
++------------------+------------------------------------------------------------------------+
+| ``exists``       | Checks whether the field is present in the event. The value must be    |
+|                  | ``true`` (field must exist) or ``false`` (field must be absent).       |
++------------------+------------------------------------------------------------------------+
+| ``all``          | By default, list values are combined with ``OR``. The ``all`` modifier |
+|                  | changes the logic to ``AND``, requiring every value in the list to     |
+|                  | match. Cannot be applied to single-item lists.                         |
++------------------+------------------------------------------------------------------------+
+| ``lt``           | Matches when the field value is less than the specified number.        |
++------------------+------------------------------------------------------------------------+
+| ``lte``          | Matches when the field value is less than or equal to the specified    |
+|                  | number.                                                                |
++------------------+------------------------------------------------------------------------+
+| ``gt``           | Matches when the field value is greater than the specified number.     |
++------------------+------------------------------------------------------------------------+
+| ``gte``          | Matches when the field value is greater than or equal to the specified |
+|                  | number.                                                                |
++------------------+------------------------------------------------------------------------+
 
-   * - Modifier
-     - What it does
-     - Example
-   * - ``contains``
-     - Matches if the field value contains a specified string. Wildcards are inserted around the value.
-     - ``message|contains: timeout``
-   * - ``startswith``
-     - Matches when the field value begins with the specified string. A wildcard is inserted at the end of the value.
-     - ``process.thread.name|startswith: Gossip``
-   * - ``endswith``
-     - Matches when the field value ends with the specified string. A wildcard is inserted at the beginning of the value.
-     - ``process.thread.name|endswith: "-5"``
-   * - ``base64``
-     - Encodes the provided value as a Base64 string before comparison. Used to detect commands or parameters that an attacker has Base64-encoded to evade plain-text detection.
-     - ``process.command_line|base64: "/bin/bash"``
-   * - ``base64offset``
-     - Generates all three possible Base64 offsets of the value to account for the byte position where it might appear inside a larger Base64-encoded blob. Usually preferred over ``base64`` when matching a substring inside an encoded stream, and typically chained with ``contains``.
-     - ``process.command_line|base64offset|contains: "/bin/bash"``
-   * - ``wide``
-     - Transforms the value to a UTF-16 (wide-character) byte sequence before comparison. Must be chained with an encoding modifier such as ``base64`` or ``base64offset``. It cannot be the final modifier in the chain because the intermediate representation contains null bytes.
-     - ``process.command_line|wide|base64offset|contains: "ping"``
-   * - ``windash``
-     - Expands command-line flag prefixes to match all Windows dash variants: ``-``, ``/``, ``–`` (en dash), ``—`` (em dash), and ``―`` (horizontal bar). Useful for detecting invocations where attackers swap dash characters to evade signatures.
-     - ``process.command_line|windash|contains: " -enc "``
-   * - ``re``
-     - Matches against a PCRE regular expression. Submodifiers can be chained with ``re|<flag>``:
+Example expressions for each modifier:
 
-       - ``i``: case-insensitive matching.
-       - ``m``: multi-line mode (``^``/``$`` match the start/end of each line).
-       - ``s``: single-line mode (``.`` also matches newline characters).
-     - ``process.thread.name|re: "^Repair"``
-   * - ``cidr``
-     - Matches when the field value (an IPv4 or IPv6 address) falls within the specified CIDR subnet. IPv6 addresses are supported in the following formats:
+.. code-block:: yaml
 
-       - Standard: full 8-group notation with leading zeros, for example ``2001:0db8:85a3:0000:0000:8a2e:0370:7334``.
-       - Compressed: zero-compression using ``::`` to omit consecutive zero groups, for example ``2001:db8:85a3::8a2e:370:7334``.
-       - CIDR: subnet notation with a prefix length, for example ``2001:db8::/32``.
-     - ``source.ip|cidr: 10.42.0.0/16``
-   * - ``exists``
-     - Checks whether the field is present in the event. The value must be ``true`` (field must exist) or ``false`` (field must be absent).
-     - ``source.ip|exists: true``
-   * - ``all``
-     - By default, list values are combined with ``OR``. The ``all`` modifier changes the logic to ``AND``, requiring every value in the list to match. Cannot be applied to single-item lists.
-     - .. code-block:: yaml
-
-          event.category|contains|all:
-            - authentication
-            - failure
-   * - ``lt``
-     - Matches when the field value is less than the specified number.
-     - ``event.severity|lt: 10``
-   * - ``lte``
-     - Matches when the field value is less than or equal to the specified number.
-     - ``event.severity|lte: 3``
-   * - ``gt``
-     - Matches when the field value is greater than the specified number.
-     - ``event.severity|gt: 7``
-   * - ``gte``
-     - Matches when the field value is greater than or equal to the specified number.
-     - ``event.duration|gte: 5000``
+   message|contains: timeout
+   process.thread.name|startswith: Gossip
+   process.thread.name|endswith: "-5"
+   process.command_line|base64: "/bin/bash"
+   process.command_line|base64offset|contains: "/bin/bash"
+   process.command_line|wide|base64offset|contains: "ping"
+   process.command_line|windash|contains: " -enc "
+   process.thread.name|re: "^Repair"
+   source.ip|cidr: 10.42.0.0/16
+   source.ip|exists: true
+   event.category|contains|all:
+     - authentication
+     - failure
+   event.severity|lt: 10
+   event.severity|lte: 3
+   event.severity|gt: 7
+   event.duration|gte: 5000
 
 See `Sigma Modifiers <https://sigmahq.io/docs/basics/modifiers.html>`__ for additional context on value transformation modifiers.
 
@@ -381,42 +402,39 @@ The ``logsource`` block does not directly affect detection matching. The ``detec
 
 The ``logsource`` block has one required field and three optional fields. ``product`` is required; every rule must declare the platform or integration it targets. The ``category``, ``service``, and ``definition`` fields are optional and can be added to narrow scope, improve grouping, or document prerequisites, but the rule will validate without them.
 
-.. list-table::
-   :header-rows: 1
-   :widths: 14 10 46 30
++----------------+----------+------------------------------------------------------------+
+| Field          | Required | Description                                                |
++================+==========+============================================================+
+| ``product``    | yes      | The product or platform generating the log (for example,   |
+|                |          | ``linux``, ``windows``, ``python``). Must hold the same    |
+|                |          | value as ``metadata.title`` from the integration it        |
+|                |          | belongs to.                                                |
++----------------+----------+------------------------------------------------------------+
+| ``category``   | no       | A broad classification of the log type within the product  |
+|                |          | (for example, ``authentication``, ``process_creation``,    |
+|                |          | ``application``, ``webserver``, ``firewall``). Useful for  |
+|                |          | grouping related rules across products.                    |
++----------------+----------+------------------------------------------------------------+
+| ``service``    | no       | The specific service, daemon, or log channel within the    |
+|                |          | product (e.g., ``sshd``, ``security``, ``syslog``,         |
+|                |          | ``kerberos``). Use this when the log can be attributed to  |
+|                |          | a particular subsystem or event channel.                   |
++----------------+----------+------------------------------------------------------------+
+| ``definition`` | no       | Free-form notes describing onboarding requirements or      |
+|                |          | prerequisites for the log source. For example, audit       |
+|                |          | policies that must be enabled, agent configuration needed, |
+|                |          | or specific event IDs to collect.                          |
++----------------+----------+------------------------------------------------------------+
 
-   * - Field
-     - Required
-     - Description
-     - Example
-   * - ``product``
-     - yes
-     - The product or platform generating the log (for example, ``linux``, ``windows``, ``python``). Must hold the same value as ``metadata.title`` from the integration it belongs to.
-     - .. code-block:: yaml
+Example:
 
-          logsource:
-            product: linux
-   * - ``category``
-     - no
-     - A broad classification of the log type within the product (for example, ``authentication``, ``process_creation``, ``application``, ``webserver``, ``firewall``). Useful for grouping related rules across products.
-     - .. code-block:: yaml
+.. code-block:: yaml
 
-          logsource:
-            category: authentication
-   * - ``service``
-     - no
-     - The specific service, daemon, or log channel within the product (e.g., ``sshd``, ``security``, ``syslog``, ``kerberos``). Use this when the log can be attributed to a particular subsystem or event channel.
-     - .. code-block:: yaml
-
-          logsource:
-            service: sshd
-   * - ``definition``
-     - no
-     - Free-form notes describing onboarding requirements or prerequisites for the log source. For example, audit policies that must be enabled, agent configuration needed, or specific event IDs to collect.
-     - .. code-block:: yaml
-
-          logsource:
-            definition: Script Block Logging must be enabled
+   logsource:
+     product: linux
+     category: authentication
+     service: sshd
+     definition: Script Block Logging must be enabled
 
 See `Sigma Log Sources <https://sigmahq.io/docs/basics/log-sources.html>`__ for general guidance on log source classification, including the standard combinations of ``product``, ``category``, and ``service``.
 
@@ -427,46 +445,52 @@ Metadata
 
 The ``metadata`` block captures authorship, lifecycle, and descriptive information about the rule. It is separate from detection logic; nothing in ``metadata`` affects whether a rule fires. Its purpose is to make rules discoverable, attributable, and useful to analysts when a finding appears.
 
-.. list-table::
-   :header-rows: 1
-   :widths: 14 10 40 36
++-------------------+----------+---------------------------------------------------------+
+| Field             | Required | Description                                             |
++===================+==========+=========================================================+
+| ``title``         | Yes      | A human-readable rule title is shown in alerts and the  |
+|                   |          | rule catalog. Keep titles short and avoid prefixes like |
+|                   |          | "Detects when…" or "This rule will…".                   |
++-------------------+----------+---------------------------------------------------------+
+| ``author``        | No       | The author of the rule. Free-form text; may include     |
+|                   |          | contact information such as an email address or handle. |
++-------------------+----------+---------------------------------------------------------+
+| ``date``          | No       | Creation date in ISO 8601 format (``YYYY-MM-DD``).      |
+|                   |          | Auto-managed when the rule is first registered.         |
++-------------------+----------+---------------------------------------------------------+
+| ``modified``      | No       | Last modification date in ISO 8601 format               |
+|                   |          | (``YYYY-MM-DD``). Auto-managed when the rule's content  |
+|                   |          | changes.                                                |
++-------------------+----------+---------------------------------------------------------+
+| ``description``   | No       | Brief explanation of what the rule detects and the      |
+|                   |          | context in which it is useful.                          |
++-------------------+----------+---------------------------------------------------------+
+| ``references``    | No       | URLs or plain-text references (e.g., advisories, CVE    |
+|                   |          | IDs, blog posts) that explain the motivation for the    |
+|                   |          | rule.                                                   |
++-------------------+----------+---------------------------------------------------------+
+| ``documentation`` | No       | Free-form text or a URL providing additional triage     |
+|                   |          | context for analysts investigating a finding.           |
++-------------------+----------+---------------------------------------------------------+
+| ``supports``      | No       | List of platforms or products the rule is intended to   |
+|                   |          | operate on.                                             |
++-------------------+----------+---------------------------------------------------------+
 
-   * - Field
-     - Required
-     - Description
-     - Example
-   * - ``title``
-     - Yes
-     - A human-readable rule title is shown in alerts and the rule catalog. Keep titles short and avoid prefixes like "Detects when…" or "This rule will…".
-     - ``title: Suspicious SSH Login from IPv6``
-   * - ``author``
-     - No
-     - The author of the rule. Free-form text; may include contact information such as an email address or handle.
-     - ``author: Security Operations <secops@example.com>``
-   * - ``date``
-     - No
-     - Creation date in ISO 8601 format (``YYYY-MM-DD``). Auto-managed when the rule is first registered.
-     - ``date: "2026-06-10"``
-   * - ``modified``
-     - No
-     - Last modification date in ISO 8601 format (``YYYY-MM-DD``). Auto-managed when the rule's content changes.
-     - ``modified: "2026-06-10"``
-   * - ``description``
-     - No
-     - Brief explanation of what the rule detects and the context in which it is useful.
-     - ``description: Detects SSH login attempts from blocklisted IPv6 ranges.``
-   * - ``references``
-     - No
-     - URLs or plain-text references (e.g., advisories, CVE IDs, blog posts) that explain the motivation for the rule.
-     - ``references: - https://example.com/advisory/2026-001``
-   * - ``documentation``
-     - No
-     - Free-form text or a URL providing additional triage context for analysts investigating a finding.
-     - ``documentation: https://internal.wiki/wazuh/rules/ssh-ipv6``
-   * - ``supports``
-     - No
-     - List of platforms or products the rule is intended to operate on.
-     - ``supports: - linux``
+Example:
+
+.. code-block:: yaml
+
+   metadata:
+     title: Suspicious SSH Login from IPv6
+     author: Security Operations <secops@example.com>
+     date: "2026-06-10"
+     modified: "2026-06-10"
+     description: Detects SSH login attempts from blocklisted IPv6 ranges.
+     references:
+       - https://example.com/advisory/2026-001
+     documentation: https://internal.wiki/wazuh/rules/ssh-ipv6
+     supports:
+       - linux
 
 .. _data_analysis_rules_mitre:
 
@@ -475,22 +499,19 @@ MITRE ATT&CK
 
 The ``mitre`` block maps a rule to MITRE ATT&CK tactics, techniques, and subtechniques. Each field is an array of ID strings:
 
-.. list-table::
-   :header-rows: 1
-   :widths: 18 52 30
-
-   * - Field
-     - Description
-     - Example
-   * - ``tactic``
-     - MITRE ATT&CK tactic IDs. An array of one or more tactic identifiers.
-     - ``tactic: - TA0002``
-   * - ``technique``
-     - MITRE ATT&CK technique IDs. An array of one or more technique identifiers.
-     - ``technique: - T1059``
-   * - ``subtechnique``
-     - MITRE ATT&CK subtechnique IDs. An array of one or more subtechnique identifiers. Use an empty array ``[]`` if no subtechnique applies.
-     - ``subtechnique: - T1059.001``
++------------------+----------------------------------------------------+-------------------------------+
+| Field            | Description                                        | Example                       |
++==================+====================================================+===============================+
+| ``tactic``       | MITRE ATT&CK tactic IDs. An array of one or more   | ``tactic: - TA0002``          |
+|                  | tactic identifiers.                                |                               |
++------------------+----------------------------------------------------+-------------------------------+
+| ``technique``    | MITRE ATT&CK technique IDs. An array of one or     | ``technique: - T1059``        |
+|                  | more technique identifiers.                        |                               |
++------------------+----------------------------------------------------+-------------------------------+
+| ``subtechnique`` | MITRE ATT&CK subtechnique IDs. An array of one or  | ``subtechnique: - T1059.001`` |
+|                  | more subtechnique identifiers. Use an empty array  |                               |
+|                  | ``[]`` if no subtechnique applies.                 |                               |
++------------------+----------------------------------------------------+-------------------------------+
 
 .. _data_analysis_rules_compliance:
 
@@ -499,43 +520,63 @@ Compliance
 
 The ``compliance`` block maps a rule to one or more compliance frameworks. Each key is a normalized framework identifier, and its value is an array of requirement ID strings.
 
-.. list-table::
-   :header-rows: 1
-   :widths: 18 32 50
++------------------+--------------+
+| Framework Key    | Full Name    |
++==================+==============+
+| ``gdpr``         | GDPR         |
++------------------+--------------+
+| ``pci_dss``      | PCI DSS      |
++------------------+--------------+
+| ``cmmc``         | CMMC         |
++------------------+--------------+
+| ``nist_800_53``  | NIST 800-53  |
++------------------+--------------+
+| ``nist_800_171`` | NIST 800-171 |
++------------------+--------------+
+| ``hipaa``        | HIPAA        |
++------------------+--------------+
+| ``iso_27001``    | ISO 27001    |
++------------------+--------------+
+| ``nis2``         | NIS2         |
++------------------+--------------+
+| ``tsc``          | TSC          |
++------------------+--------------+
+| ``fedramp``      | FedRAMP      |
++------------------+--------------+
 
-   * - Framework Key
-     - Full Name
-     - Example
-   * - ``gdpr``
-     - GDPR
-     - ``gdpr: - Art. 32 - Art. 25``
-   * - ``pci_dss``
-     - PCI DSS
-     - ``pci_dss: - "2.2.1" - "6.3.3"``
-   * - ``cmmc``
-     - CMMC
-     - ``cmmc: - AC.1.001``
-   * - ``nist_800_53``
-     - NIST 800-53
-     - ``nist_800_53: - AC-3 - AU-2``
-   * - ``nist_800_171``
-     - NIST 800-171
-     - ``nist_800_171: - 3.1.1 - 3.3.1``
-   * - ``hipaa``
-     - HIPAA
-     - ``hipaa: - 164.312(a)(1)``
-   * - ``iso_27001``
-     - ISO 27001
-     - ``iso_27001: - A.8.16 - A.9.4.2``
-   * - ``nis2``
-     - NIS2
-     - ``nis2: - Art. 21 - Art. 23``
-   * - ``tsc``
-     - TSC
-     - ``tsc: - CC6.1 - CC7.2``
-   * - ``fedramp``
-     - FedRAMP
-     - ``fedramp: - AC-2 - SI-4``
+Example:
+
+.. code-block:: yaml
+
+   compliance:
+     gdpr:
+       - Art. 32
+       - Art. 25
+     pci_dss:
+       - "2.2.1"
+       - "6.3.3"
+     cmmc:
+       - AC.1.001
+     nist_800_53:
+       - AC-3
+       - AU-2
+     nist_800_171:
+       - 3.1.1
+       - 3.3.1
+     hipaa:
+       - 164.312(a)(1)
+     iso_27001:
+       - A.8.16
+       - A.9.4.2
+     nis2:
+       - Art. 21
+       - Art. 23
+     tsc:
+       - CC6.1
+       - CC7.2
+     fedramp:
+       - AC-2
+       - SI-4
 
 Dynamic event field referencing
 --------------------------------
@@ -628,20 +669,19 @@ Placeholder resolution rules
 
 The following table shows conditions and results for dynamic event field referencing:
 
-.. list-table::
-   :header-rows: 1
-   :widths: 50 50
-
-   * - Situation
-     - Result
-   * - Field is a string/number/boolean
-     - Converted to a string and substituted
-   * - Field is an array
-     - Each element is expanded into the surrounding array
-   * - Field is missing, null, or an object
-     - Resolves to an empty string, **no failure**
-   * - The entire value is an empty placeholder
-     - The field is **dropped** from the output entirely
++--------------------------------------------+--------------------------------------------------+
+| Situation                                  | Result                                           |
++============================================+==================================================+
+| Field is a string/number/boolean           | Converted to a string and substituted            |
++--------------------------------------------+--------------------------------------------------+
+| Field is an array                          | Each element is expanded into the surrounding    |
+|                                            | array                                            |
++--------------------------------------------+--------------------------------------------------+
+| Field is missing, null, or an object       | Resolves to an empty string, **no failure**      |
++--------------------------------------------+--------------------------------------------------+
+| The entire value is an empty placeholder   | The field is **dropped** from the output         |
+|                                            | entirely                                         |
++--------------------------------------------+--------------------------------------------------+
 
 Scope
 ^^^^^
