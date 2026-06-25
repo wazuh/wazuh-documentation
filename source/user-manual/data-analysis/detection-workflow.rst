@@ -3,10 +3,12 @@
 .. meta::
    :description: Follow this guide to create a custom Wazuh security analytics policy end to end, from integration and decoders to rules, detectors, and findings.
 
+.. _data_analysis_detection_workflow:
+
 Create a security analytics detection workflow
 ==============================================
 
-This guide walks you through creating a custom Wazuh security analytics policy. You will create a custom integration, add decoders to parse raw logs, write a rule to identify suspicious events, validate the content with the Wazuh Log test tool, create a detector, and promote the content into production. You will also view the generated security findings in the Wazuh dashboard.
+This guide walks you through creating a custom Wazuh security analytics policy. You will create a custom integration, add decoders to parse raw logs, write a rule to identify suspicious events, validate the content with the Wazuh Log test tool, promote the content into production, and create a detector. You will also view the generated security findings in the Wazuh dashboard.
 
 The example used throughout is based on Apache HTTP Server error logs. A few concepts make the rest of this guide easier to follow.
 
@@ -152,12 +154,12 @@ Make sure the space selector reads **Draft** and follow the steps below to creat
         - event.type: "array_append(error)"
         - event.outcome: "failure"
         check:
-        - log.level: "regex_match(^(?:emerg|alert|crit|error|warn\\)$)"
+        - log.level: "regex_match(^(?:emerg|alert|crit|error|warn)$)"
       - map:
         - event.type: "array_append(info)"
         - event.outcome: "unknown"
         check:
-        - log.level: "regex_not_match(^(?:emerg|alert|crit|error|warn\\)?$)"
+        - log.level: "regex_not_match(^(?:emerg|alert|crit|error|warn)$)"
       - parse|message:
         - "File does not exist: <file.path>(?, referer: <http.request.referrer>)"
       - map:
@@ -206,6 +208,7 @@ Make sure the space selector reads **Draft** and follow these steps to create a 
 
    .. code-block:: yaml
 
+      id: d78bd034-8838-4f85-b471-5e8c9a0daf18
       logsource:
         product: custom-integration
       tags:
@@ -232,9 +235,6 @@ Make sure the space selector reads **Draft** and follow these steps to create a 
           misconfigurations.
         references:
           - https://httpd.apache.org/docs/
-        documentation: ''
-        supports:
-          - ''
       mitre:
         tactic:
           - TA0001
@@ -312,7 +312,7 @@ After promoting the integration to the test space, use **Log test** to validate 
 
 Make sure the space selector reads **Test**, and follow these steps to validate with **Log test**.
 
-#. Go to **Security Analytics** > **Log Test**.
+#. Go to **Security Analytics** > **Log test**.
 
 #. Paste the sample Apache log line below into the **Log event** field to see how it is decoded and matched.
 
@@ -341,6 +341,7 @@ Make sure the space selector reads **Test**, and follow these steps to validate 
    **Processed JSON event**
 
    .. code-block:: json
+      :emphasize-lines: 13, 18
 
       {
         "source": {

@@ -5,8 +5,8 @@
 
 .. _data_analysis_integration:
 
-Integrations
-============
+Integration
+===========
 
 An integration is a logical grouping of decoders, KVDBs, and rules that belong to a common log source or product. Every decoder must belong to exactly one integration. Integrations are the unit at which content is organized, enabled, and ordered.
 

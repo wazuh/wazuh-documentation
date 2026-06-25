@@ -3,6 +3,8 @@
 .. meta::
    :description: A finding is the security record the Wazuh detection engine produces when an event matches a rule. Learn how Wazuh generates findings in this section.
 
+.. _data_analysis_findings:
+
 Findings
 ========
 

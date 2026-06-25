@@ -3,6 +3,8 @@
 .. meta::
    :description: Filters are engine-level constructs that control how events are routed and processed within the Wazuh security analytics pipeline. Learn more in this section.
 
+.. _data_analysis_filters:
+
 Filters
 =======
 

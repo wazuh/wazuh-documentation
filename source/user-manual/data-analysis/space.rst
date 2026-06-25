@@ -3,10 +3,10 @@
 .. meta::
    :description: A space is the logical storage location where Wazuh keeps its detection content. Learn about the draft, test, custom, and standard spaces in this section.
 
-.. _data_analysis_spaces:
+.. _data_analysis_space:
 
-Spaces
-======
+Space
+=====
 
 A space is the logical storage location where Wazuh keeps its detection content. Detection content defines how events are parsed, enriched, and evaluated. It includes decoders, KVDBs, detectors, rules, and other enrichment information. Wazuh provides four spaces: draft, test, custom, and standard. The standard space contains the official Wazuh detection content. The custom space contains the user-created detection content. This separation ensures that the Wazuh standard policy remains independent from the user-defined policy, keeping both processing pipelines isolated.
 

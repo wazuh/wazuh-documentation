@@ -324,10 +324,18 @@ Multiple modifiers can be chained: ``field|modifier1|modifier2: value``.
      - Expands command-line flag prefixes to match all Windows dash variants: ``-``, ``/``, ``–`` (en dash), ``—`` (em dash), and ``―`` (horizontal bar). Useful for detecting invocations where attackers swap dash characters to evade signatures.
      - ``process.command_line|windash|contains: " -enc "``
    * - ``re``
-     - Matches against a PCRE regular expression. Submodifiers can be chained with ``re|<flag>``: ``i``: case-insensitive matching. ``m``: multi-line mode (``^``/``$`` match the start/end of each line). ``s``: single-line mode (``.`` also matches newline characters).
+     - Matches against a PCRE regular expression. Submodifiers can be chained with ``re|<flag>``:
+
+       - ``i``: case-insensitive matching.
+       - ``m``: multi-line mode (``^``/``$`` match the start/end of each line).
+       - ``s``: single-line mode (``.`` also matches newline characters).
      - ``process.thread.name|re: "^Repair"``
    * - ``cidr``
-     - Matches when the field value (an IPv4 or IPv6 address) falls within the specified CIDR subnet. IPv6 addresses are supported in the following formats: Standard: full 8-group notation with leading zeros, for example ``2001:0db8:85a3:0000:0000:8a2e:0370:7334``. Compressed: zero-compression using ``::`` to omit consecutive zero groups, for example ``2001:db8:85a3::8a2e:370:7334``. CIDR: subnet notation with a prefix length, for example ``2001:db8::/32``.
+     - Matches when the field value (an IPv4 or IPv6 address) falls within the specified CIDR subnet. IPv6 addresses are supported in the following formats:
+
+       - Standard: full 8-group notation with leading zeros, for example ``2001:0db8:85a3:0000:0000:8a2e:0370:7334``.
+       - Compressed: zero-compression using ``::`` to omit consecutive zero groups, for example ``2001:db8:85a3::8a2e:370:7334``.
+       - CIDR: subnet notation with a prefix length, for example ``2001:db8::/32``.
      - ``source.ip|cidr: 10.42.0.0/16``
    * - ``exists``
      - Checks whether the field is present in the event. The value must be ``true`` (field must exist) or ``false`` (field must be absent).
@@ -346,7 +354,7 @@ Multiple modifiers can be chained: ``field|modifier1|modifier2: value``.
      - Matches when the field value is less than or equal to the specified number.
      - ``event.severity|lte: 3``
    * - ``gt``
-     - Field value is greater than / greater than or equal to the number.
+     - Matches when the field value is greater than the specified number.
      - ``event.severity|gt: 7``
    * - ``gte``
      - Matches when the field value is greater than or equal to the specified number.
