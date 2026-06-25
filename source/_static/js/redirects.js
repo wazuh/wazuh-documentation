@@ -94,6 +94,7 @@ newUrls['5.0'] = [
   '/user-manual/manager/logging.html',
   '/user-manual/manager/reference.html',
   '/user-manual/data-analysis/index.html',
+  '/user-manual/data-analysis/data-analysis-components.html',
   '/user-manual/data-analysis/content-management.html',
   '/user-manual/data-analysis/space.html',
   '/user-manual/data-analysis/integration.html',
