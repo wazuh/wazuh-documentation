@@ -17,6 +17,7 @@ Welcome to the Wazuh user manual. Use it as your reference library once your bas
       wazuh-dashboard/index
       manager/index
       user-administration/index
+      data-analysis/index
 
 ..
       wazuh-server-cluster/index
