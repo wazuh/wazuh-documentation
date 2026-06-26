@@ -303,7 +303,13 @@
     {% endblock css %}
     
     {#- FAVICON -#}
-    <link rel="icon" href="{{ pathto('_static/images/favicon.ico', 1) }}?v={{ compilation_ts }}"/>
+    {%- set path_to_favicon = pathto('_static/images/favicon.ico', 1) -%}
+    {%- if environment == "dev" or environment == "production" -%}
+      {%- if pagename == "not_found" -%}
+        {%- set path_to_favicon = '/current/' + path_to_favicon -%}
+      {% endif %}
+    {% endif %}
+    <link rel="icon" href="{{ path_to_favicon }}?v={{ compilation_ts }}"/>
     
     {%- if environment == 'production' and theme_breadcrumb_root_title == 'Documentation' -%}
     {#- Google Tag Manager - Head -#}
