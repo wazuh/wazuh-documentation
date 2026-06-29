@@ -544,7 +544,6 @@ Each finding is written to the ``wazuh-findings-v5-{logtype}-*`` index and refle
 You can insert ``{{ field.path }}`` placeholders into certain rule metadata fields. When a rule script executes, Wazuh replaces those placeholders with the actual values from the triggering event before writing the finding to the index.
 
 .. code-block:: yaml
-   :emphasize-lines: 2
 
    metadata:
      title: "Apache segmentation fault in agent {{ wazuh.agent.id }}"
@@ -570,7 +569,6 @@ Example
 ^^^^^^^
 
 .. code-block:: yaml
-   :emphasize-lines: 8, 18
 
    id: ed85157d-711b-4edb-8390-492ec63c92ac
    sigma_id: 12345678-90ab-cdef-1234-567890abcdef
@@ -606,7 +604,6 @@ Example
 When this rule matches an event where ``wazuh.agent.id = "001"`` and ``wazuh.agent.host.name = "web-prod-01"``, the resulting enriched finding contains:
 
 .. code-block:: json
-   :emphasize-lines: 2, 3
 
    {
      "title": "Apache segmentation fault in agent 001",

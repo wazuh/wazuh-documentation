@@ -17,7 +17,7 @@ The following sections describe the main components of the Wazuh Security Analyt
 .. topic:: Contents
 
    .. toctree::
-      :maxdepth: 2
+      :maxdepth: 1
 
       content-management
       space

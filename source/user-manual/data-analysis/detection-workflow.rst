@@ -97,7 +97,6 @@ Make sure the space selector reads **Draft** and follow the steps below to creat
    **Root decoder**
 
    .. code-block:: yaml
-      :emphasize-lines: 15
 
       name: "decoder/core-wazuh-message/0"
       metadata:
@@ -121,7 +120,6 @@ Make sure the space selector reads **Draft** and follow the steps below to creat
    **Child decoder**
 
    .. code-block:: yaml
-      :emphasize-lines: 34, 39
 
       name: "decoder/apache-error/0"
       metadata:
@@ -209,7 +207,6 @@ Make sure the space selector reads **Draft** and follow these steps to create a 
 #. Select **YAML Editor**, choose the integration **custom-integration**, and paste the rule:
 
    .. code-block:: yaml
-      :emphasize-lines: 17, 18
 
       id: d78bd034-8838-4f85-b471-5e8c9a0daf18
       logsource:
@@ -344,7 +341,6 @@ Make sure the space selector reads **Test**, and follow these steps to validate 
    **Processed JSON event**
 
    .. code-block:: json
-      :emphasize-lines: 13, 18
 
       {
         "source": {

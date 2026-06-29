@@ -110,7 +110,6 @@ The normalize stage maps parsed fields to Wazuh Common Schema fields using mappi
 Example:
 
 .. code-block:: yaml
-   :emphasize-lines: 7, 8
 
    normalize:
      - map:
@@ -138,7 +137,6 @@ A ``normalize`` array can have multiple blocks, each with its own ``check`` and 
 Example: treat ``action=ALLOW`` vs ``DENY`` differently:
 
 .. code-block:: yaml
-   :emphasize-lines: 3, 7
 
    normalize:
      - check:
@@ -163,7 +161,6 @@ The following log is a sample from a network device:
 The following decoder YAML parses the key-value fields from the log and maps them to WCS fields:
 
 .. code-block:: yaml
-   :emphasize-lines: 8-9, 11
 
    name: decoder/custom-fw-kv/0
    enabled: true

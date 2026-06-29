@@ -101,7 +101,6 @@ When a valid IP is found and a lookup succeeds, geo enrichment may populate fiel
 **Processed event**:
 
 .. code-block:: json
-   :emphasize-lines: 4, 11
 
    {
      "source": {
@@ -152,7 +151,6 @@ If an IOC match is found, the event is enriched with threat context under ``wazu
 **Processed event**:
 
 .. code-block:: json
-   :emphasize-lines: 4, 10
 
    {
      "wazuh": {
