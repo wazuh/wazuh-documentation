@@ -34,15 +34,4 @@ Click the upper-left menu icon **☰** to open the menu on the Wazuh dashboard, 
       :maxdepth: 2
 
       data-analysis-components
-      content-management
-      space
-      integration
-      events
-      filters
-      decoders
-      key-value-databases
-      enrichment
-      rules
-      detectors
-      findings
       detection-workflow

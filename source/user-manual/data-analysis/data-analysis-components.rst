@@ -14,14 +14,19 @@ Wazuh security analytics policies are managed through the Security Analytics das
 
 The following sections describe the main components of the Wazuh Security Analytics dashboard and explain their roles in the data analysis workflow.
 
--  :doc:`Content management <content-management>`
--  :doc:`Space <space>`
--  :doc:`Integration <integration>`
--  :doc:`Events <events>`
--  :doc:`Filters <filters>`
--  :doc:`Decoders <decoders>`
--  :doc:`Key-Value Databases (KVDBs) <key-value-databases>`
--  :doc:`Enrichment <enrichment>`
--  :doc:`Rules <rules>`
--  :doc:`Detectors <detectors>`
--  :doc:`Findings <findings>`
+.. topic:: Contents
+
+   .. toctree::
+      :maxdepth: 2
+
+      content-management
+      space
+      integration
+      events
+      filters
+      decoders
+      key-value-databases
+      enrichment
+      rules
+      detectors
+      findings
