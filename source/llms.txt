@@ -55,6 +55,12 @@ Manage Wazuh agents across your environment.
 
 - **[Wazuh Agent](https://documentation.wazuh.com/current/user-manual/agent/index.md)** Enroll and manage agents across your environment. Covers enrollment methods, agent life cycle, connection verification, and administrative tasks such as upgrading and querying agent configuration.
 
+### User Administration
+Manage user credentials and access control for the Wazuh platform.
+
+- **[Password Management](https://documentation.wazuh.com/current/user-manual/user-administration/password-management.md)** Use the Wazuh passwords tool to change passwords for Wazuh indexer users and Wazuh manager API users in all-in-one and distributed deployments.
+- **[RBAC — Create and map internal users](https://documentation.wazuh.com/current/user-manual/user-administration/rbac.md)** Create Wazuh indexer internal users and map them to roles and policies using the Wazuh dashboard.
+
 ## Development & Support
 Resources for getting help for Wazuh.
 

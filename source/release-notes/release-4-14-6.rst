@@ -66,6 +66,11 @@ Ruleset
 
 -  `#35927 <https://github.com/wazuh/wazuh/pull/35927>`__ Updated Rootcheck trojan signatures to avoid false positives on modern distributions, including Debian 13, Ubuntu 26, and Arch Linux.
 
+Other
+^^^^^
+
+-  `#36782 <https://github.com/wazuh/wazuh/pull/36782>`__ Fixed ``wazuh-manager`` startup failure on RHEL 10 by removing the ``libcrypt`` dependency from the embedded Python interpreter.
+
 Wazuh dashboard
 ^^^^^^^^^^^^^^^
 
