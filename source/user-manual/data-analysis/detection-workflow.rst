@@ -341,6 +341,7 @@ Make sure the space selector reads **Test**, and follow these steps to validate 
    **Processed JSON event**
 
    .. code-block:: json
+      :emphasize-lines: 13, 18
 
       {
         "source": {
