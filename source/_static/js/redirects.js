@@ -93,6 +93,20 @@ newUrls['5.0'] = [
   '/user-manual/manager/wazuh-manager-services.html',
   '/user-manual/manager/logging.html',
   '/user-manual/manager/reference.html',
+  '/user-manual/data-analysis/index.html',
+  '/user-manual/data-analysis/data-analysis-components.html',
+  '/user-manual/data-analysis/content-management.html',
+  '/user-manual/data-analysis/space.html',
+  '/user-manual/data-analysis/integration.html',
+  '/user-manual/data-analysis/events.html',
+  '/user-manual/data-analysis/filters.html',
+  '/user-manual/data-analysis/decoders.html',
+  '/user-manual/data-analysis/key-value-databases.html',
+  '/user-manual/data-analysis/enrichment.html',
+  '/user-manual/data-analysis/rules.html',
+  '/user-manual/data-analysis/detectors.html',
+  '/user-manual/data-analysis/findings.html',
+  '/user-manual/data-analysis/detection-workflow.html',
 ];
 
 /* Redirections 4.14—5.0  */
