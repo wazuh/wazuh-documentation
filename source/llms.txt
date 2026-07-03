@@ -53,7 +53,7 @@ Administer the core Wazuh infrastructure, including the user interface (dashboar
 ### Agents
 Manage Wazuh agents across your environment.
 
-- **[Wazuh Agent](https://documentation.wazuh.com/current/user-manual/agent/index.md)** Enroll and manage agents across your environment. Covers enrollment methods, agent life cycle, connection verification, and administrative tasks such as upgrading and querying agent configuration.
+- **[Wazuh Agent](https://documentation.wazuh.com/current/user-manual/agent/index.md)** Enroll and manage agents across your environment. Covers enrollment methods, agent life cycle, connection verification, and administrative tasks such as upgrading, querying agent configuration, and anti-tampering to prevent unauthorized agent removal.
 
 ### User Administration
 Manage user credentials and access control for the Wazuh platform.
