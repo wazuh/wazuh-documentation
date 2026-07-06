@@ -252,7 +252,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
 #. Edit the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file and change the following values:
 
-   - Set the ``order`` in ``basic_internal_auth_domain`` to ``0``, and set the ``challenge`` flag to ``false``.
+   - Set the ``order`` in ``basic_internal_auth_domain`` to ``0``, and ``challenge`` flag to ``false``.
    - Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
 
    .. code-block:: yaml
@@ -317,7 +317,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       Security Admin v7
       Will connect to localhost:9200 ... done
       Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
-      OpenSearch Version: 2.19.4
+      OpenSearch Version: 3.6.0
       Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
       Clustername: wazuh-cluster
       Clusterstate: GREEN
@@ -335,13 +335,17 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
    Configure the ``roles_mapping.yml`` file to map the realm role in Keycloak to the appropriate Wazuh indexer role. In our case, we map this to the ``all_access`` role:
 
    .. code-block:: console
-      :emphasize-lines: 5
+      :emphasize-lines: 7
 
       all_access:
+        hosts: []
+        users: []
         reserved: false
         hidden: false
         backend_roles:
         - "wazuh-admins"
+        and_backend_roles: []
+        description: "Maps admin to all_access"
 
 
 #. Run the ``securityadmin`` script to load the configuration changes made in the ``roles_mapping.yml`` file.
@@ -360,7 +364,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       Security Admin v7
       Will connect to localhost:9200 ... done
       Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
-      OpenSearch Version: 2.19.4
+      OpenSearch Version: 3.6.0
       Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
       Clustername: wazuh-cluster
       Clusterstate: GREEN
@@ -378,18 +382,18 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 Wazuh dashboard configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Verify that ``run_as`` is set to ``true`` in the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the backend role provided by the IdP is correctly mapped to the corresponding Wazuh role.
+#. The ``run_as`` value is enabled by default, but verify that it is set to ``true`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the backend role provided by the IdP is correctly mapped to the corresponding Wazuh role.
 
    .. code-block:: yaml
       :emphasize-lines: 7
 
-      hosts:
-        - default:
-            url: https://localhost
-            port: 55000
-            username: wazuh-wui
-            password: "<WAZUH_WUI_PASSWORD>"
-            run_as: true
+      wazuh_core.hosts:
+        default:
+          url: https://127.0.0.1
+          port: 55000
+          username: wazuh-wui
+          password: "<WAZUH_WUI_PASSWORD>"
+          run_as: true
 
    #. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **Security**, and then **Roles mapping** to open the page.
 
@@ -423,13 +427,15 @@ Wazuh dashboard configuration
       opensearch_security.auth.type: ["basicauth","saml"]
       server.xsrf.allowlist: ["/_opendistro/_security/saml/acs", "/_opendistro/_security/saml/logout", "/_opendistro/_security/saml/acs/idpinitiated"]
 
-#. Restart the Wazuh dashboard service using this command.
+#. Restart the Wazuh dashboard service using this command:
 
    .. code-block:: console
 
       # systemctl restart wazuh-dashboard
 
-#. Test the configuration. To test the configuration, go to your Wazuh dashboard URL and log in with your Keycloak account.
+#. Test the configuration.
+
+   To test the configuration, go to your Wazuh dashboard URL and log in with your Keycloak account.
 
 Setup Keycloak single sign-on with read-only role
 -------------------------------------------------
@@ -668,7 +674,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
 #. Edit the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file and change the following values:
 
-   - Set the ``order`` in ``basic_internal_auth_domain`` to ``0``, and set the ``challenge`` flag to ``false``.
+   - Set the ``order`` in ``basic_internal_auth_domain`` to ``0``, and ``challenge`` flag to ``false``.
    - Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
 
    .. code-block:: yaml
@@ -732,7 +738,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       Security Admin v7
       Will connect to localhost:9200 ... done
       Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
-      OpenSearch Version: 2.19.4
+      OpenSearch Version: 3.6.0
       Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
       Clustername: wazuh-cluster
       Clusterstate: GREEN
@@ -764,18 +770,18 @@ Wazuh dashboard configuration
    #. Select the newly created role.
    #. Select the **Mapped users** tab and click **Manage mapping**.
    #. Under **Backend roles**, add the value of the **Role name** attribute in Keycloak configuration and click **Map** to confirm the action. In our case, the backend role is ``wazuh-readonly``.
-#. Verify that ``run_as`` is set to ``true`` in the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the backend role provided by the IdP is correctly mapped to the corresponding Wazuh role.
+#. The ``run_as`` value is enabled by default, but verify that it is set to ``true`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the backend role provided by the IdP is correctly mapped to the corresponding Wazuh role.
 
    .. code-block:: yaml
       :emphasize-lines: 7
 
-      hosts:
-        - default:
-            url: https://localhost
-            port: 55000
-            username: wazuh-wui
-            password: "<WAZUH_WUI_PASSWORD>"
-            run_as: true
+      wazuh_core.hosts:
+        default:
+          url: https://127.0.0.1
+          port: 55000
+          username: wazuh-wui
+          password: "<WAZUH_WUI_PASSWORD>"
+          run_as: true
 
    #. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **Security**, and then **Roles mapping** to open the page.
 
@@ -809,10 +815,12 @@ Wazuh dashboard configuration
       opensearch_security.auth.type: ["basicauth","saml"]
       server.xsrf.allowlist: ["/_opendistro/_security/saml/acs", "/_opendistro/_security/saml/logout", "/_opendistro/_security/saml/acs/idpinitiated"]
 
-#. Restart the Wazuh dashboard service using this command.
+#. Restart the Wazuh dashboard service using this command:
 
    .. code-block:: console
 
       # systemctl restart wazuh-dashboard
 
-#. Test the configuration. To test the configuration, go to your Wazuh dashboard URL and log in with your Keycloak account.
+#. Test the configuration.
+
+   To test the configuration, go to your Wazuh dashboard URL and log in with your Keycloak account.

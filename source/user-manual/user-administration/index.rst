@@ -17,7 +17,7 @@ The RBAC section provides instructions for creating Wazuh indexer users, also kn
 
    password-management
    rbac
+   single-sign-on/index
 
 ..
-   single-sign-on/index
    ldap

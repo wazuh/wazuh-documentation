@@ -30,17 +30,17 @@ OneLogin Configuration
 ^^^^^^^^^^^^^^^^^^^^^^
 
 #. Create an account in OneLogin. Request a free trial if you don't have a paid license.
-#. Add the OneLogin extension to your browser.
+#. Add the OneLogin extension in your browser.
 #. Create a new user.
 
-   #. Log in to **OneLogin** web console, and select **Administration** > **Users** > **New User**.
+   #. Log in to **OneLogin** web console, select **Administration** > **Users** > **New User**.
 
       .. thumbnail:: /images/single-sign-on/onelogin/01-log-in-to-onelogin-web-console.png
          :title: Log in to OneLogin web console
          :align: center
          :width: 80%
 
-   #. Complete the mandatory fields, assign a value in the **Department** field and click on **Save User**. In our case, the department is ``wazuh-admins``. This field will be used later in the Wazuh indexer configuration as the backend role.
+   #. Complete the mandatory fields, and assign a value in the **Department** field and click on **Save User**. In our case, this is ``wazuh-admins``. This field will be used later in the Wazuh indexer configuration as the backend role.
 
       .. thumbnail:: /images/single-sign-on/onelogin/02-complete-the-mandatory-fields.png
          :title: Complete the mandatory fields
@@ -63,13 +63,13 @@ OneLogin Configuration
          :align: center
          :width: 80%
 
-   #. Search for **SAML Custom Connector (Advanced)** application. In **Display Name**,  assign a name. In our case, we assigned the name ``Wazuh``. Navigate to the **Configuration** tab and fill in the information:
+   #. Search for **SAML Custom Connector (Advanced)** application. In **Display Name**, assign a name, in our case, we assigned the name ``Wazuh``. Navigate to the **Configuration** tab and fill in the information:
 
       - **Audience (EntityID)**: ``wazuh-saml``
       - **Recipient**: ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs``
       - **ACS (Consumer) URL Validator**: ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs``
       - **ACS (Consumer) URL**: ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs``
-      - **Login URL**: ``https://<WAZUH_DASHBOARD_URL>``
+      - **Login URL**: ``https://<WAZUH_DASHBOARD_URL>/``
       - **SAML initiator**: ``Service Provider``
       - **SAML nameID format**: ``Unspecified``
       - **SAML issuer type**: ``Specific``
@@ -132,7 +132,7 @@ OneLogin Configuration
          :align: center
          :width: 80%
 
-   #. The **Audience (EntityID)** will be the ``sp.entity_id`` in  the Wazuh indexer security configuration.
+   #. The **Audience (EntityID)** will be the ``sp.entity_id`` in the Wazuh indexer configuration.
 
       .. thumbnail:: /images/single-sign-on/onelogin/12-the-Audience-entityid.png
          :title: The Audience (EntityID) will be the sp.entity_id in  the Wazuh indexer security configuration
@@ -171,7 +171,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
 #. Edit the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file and change the following values:
 
-   - Set the ``order`` in ``basic_internal_auth_domain`` to ``0`` and the ``challenge`` flag to ``false``.
+   - Set the ``order`` in ``basic_internal_auth_domain`` to ``0``, and ``challenge`` flag to ``false``.
 
    - Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
 
@@ -236,7 +236,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       Security Admin v7
       Will connect to localhost:9200 ... done
       Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
-      OpenSearch Version: 2.19.4
+      OpenSearch Version: 3.6.0
       Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
       Clustername: wazuh-cluster
       Clusterstate: GREEN
@@ -256,15 +256,15 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
    .. code-block:: console
       :emphasize-lines: 7
 
-      ...
       all_access:
+        hosts: []
+        users: []
         reserved: false
         hidden: false
         backend_roles:
-        - "admin"
         - "wazuh-admins"
+        and_backend_roles: []
         description: "Maps admin to all_access"
-      ...
 
 #. Run the ``securityadmin`` script to load the configuration changes made in the ``roles_mapping.yml`` file.
 
@@ -282,7 +282,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       Security Admin v7
       Will connect to localhost:9200 ... done
       Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
-      OpenSearch Version: 2.19.4
+      OpenSearch Version: 3.6.0
       Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
       Clustername: wazuh-cluster
       Clusterstate: GREEN
@@ -300,18 +300,18 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 Wazuh dashboard configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Verify that ``run_as`` is set to ``true`` in the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the backend role provided by the IdP is correctly mapped to the corresponding Wazuh role.
+#. The ``run_as`` value is enabled by default, but verify that it is set to ``true`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the backend role provided by the IdP is correctly mapped to the corresponding Wazuh role.
 
    .. code-block:: yaml
       :emphasize-lines: 7
 
-      hosts:
-        - default:
-            url: https://localhost
-            port: 55000
-            username: wazuh-wui
-            password: "<WAZUH_WUI_PASSWORD>"
-            run_as: true
+      wazuh_core.hosts:
+        default:
+          url: https://127.0.0.1
+          port: 55000
+          username: wazuh-wui
+          password: "<WAZUH_WUI_PASSWORD>"
+          run_as: true
 
    #. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **Security**, and then **Roles mapping** to open the page.
 
@@ -345,13 +345,15 @@ Wazuh dashboard configuration
       opensearch_security.auth.type: ["basicauth","saml"]
       server.xsrf.allowlist: ["/_opendistro/_security/saml/acs", "/_opendistro/_security/saml/logout", "/_opendistro/_security/saml/acs/idpinitiated"]
 
-#. Restart the Wazuh dashboard service using this command.
+#. Restart the Wazuh dashboard service using this command:
 
    .. code-block:: console
 
       # systemctl restart wazuh-dashboard
 
-#. Test the configuration. To test the configuration, go to your Wazuh dashboard URL and log in with your OneLogin account.
+#. Test the configuration.
+
+   To test the configuration, go to your Wazuh dashboard URL and log in with your OneLogin account.
 
 Setup OneLogin single sign-on with read-only role
 -------------------------------------------------
@@ -368,17 +370,17 @@ OneLogin configuration
 ^^^^^^^^^^^^^^^^^^^^^^
 
 #. Create an account in OneLogin. Request a free trial if you don't have a paid license.
-#. Add the OneLogin extension to your browser.
+#. Add the OneLogin extension in your browser.
 #. Create a new user.
 
-   #. Log in to **OneLogin** web console, and select **Administration** > **Users** > **New User**.
+   #. Log in to **OneLogin** web console, select **Administration** > **Users** > **New User**.
 
       .. thumbnail:: /images/single-sign-on/onelogin/01-log-in-to-onelogin-web-console.png
          :title: Log in to OneLogin web console
          :align: center
          :width: 80%
 
-   #. Complete the mandatory fields, assign a value in the **Department** field and click on **Save User**. In our case, the department is ``wazuh-readonly``. This field will be used later in the Wazuh indexer configuration as the backend role.
+   #. Complete the mandatory fields, and assign a value in the **Department** field and click on **Save User**. In our case, this is ``wazuh-readonly``. This field will be used later in the Wazuh indexer configuration as the backend role.
 
       .. thumbnail:: /images/single-sign-on/onelogin/02-complete-the-mandatory-fields-RO.png
          :title: Complete the mandatory fields
@@ -401,13 +403,13 @@ OneLogin configuration
          :align: center
          :width: 80%
 
-   #. Search for **SAML Custom Connector (Advanced)** application. In **Display Name**,  assign a name. In our case, we assigned the name ``Wazuh``. Navigate to the **Configuration** tab and fill in the information:
+   #. Search for **SAML Custom Connector (Advanced)** application. In **Display Name**, assign a name, in our case, we assigned the name ``Wazuh``. Navigate to the **Configuration** tab and fill in the information:
 
       - **Audience (EntityID)**: ``wazuh-saml``
       - **Recipient**: ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs``
       - **ACS (Consumer) URL Validator**: ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs``
       - **ACS (Consumer) URL**: ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs``
-      - **Login URL**: ``https://<WAZUH_DASHBOARD_URL>``
+      - **Login URL**: ``https://<WAZUH_DASHBOARD_URL>/``
       - **SAML initiator**: ``Service Provider``
       - **SAML nameID format**: ``Unspecified``
       - **SAML issuer type**: ``Specific``
@@ -470,7 +472,7 @@ OneLogin configuration
          :align: center
          :width: 80%
 
-   #. The **Audience (EntityID)** will be the ``sp.entity_id`` in  the Wazuh indexer security configuration.
+   #. The **Audience (EntityID)** will be the ``sp.entity_id`` in the Wazuh indexer configuration.
 
       .. thumbnail:: /images/single-sign-on/onelogin/12-the-Audience-entityid.png
          :title: The Audience (EntityID) will be the sp.entity_id in  the Wazuh indexer security configuration
@@ -508,7 +510,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
 #. Edit the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file and change the following values:
 
-   - Set the ``order`` in ``basic_internal_auth_domain`` to ``0`` and the ``challenge`` flag to ``false``.
+   - Set the ``order`` in ``basic_internal_auth_domain`` to ``0``, and ``challenge`` flag to ``false``.
 
    - Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
 
@@ -572,7 +574,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       Security Admin v7
       Will connect to localhost:9200 ... done
       Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
-      OpenSearch Version: 2.19.4
+      OpenSearch Version: 3.6.0
       Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
       Clustername: wazuh-cluster
       Clusterstate: GREEN
@@ -605,18 +607,18 @@ Wazuh dashboard configuration
    #. Select the **Mapped users** tab and click **Manage mapping**.
    #. Under **Backend roles**, add the value of the **Department** field in OneLogin configuration and click **Map** to confirm the action. In our case, the backend role is ``wazuh-readonly``.
 
-#. Verify that ``run_as`` is set to ``true`` in the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the backend role provided by the IdP is correctly mapped to the corresponding Wazuh role.
+#. The ``run_as`` value is enabled by default, but verify that it is set to ``true`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the backend role provided by the IdP is correctly mapped to the corresponding Wazuh role.
 
    .. code-block:: yaml
       :emphasize-lines: 7
 
-      hosts:
-        - default:
-            url: https://localhost
-            port: 55000
-            username: wazuh-wui
-            password: "<WAZUH_WUI_PASSWORD>"
-            run_as: true
+      wazuh_core.hosts:
+        default:
+          url: https://127.0.0.1
+          port: 55000
+          username: wazuh-wui
+          password: "<WAZUH_WUI_PASSWORD>"
+          run_as: true
 
    #. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **Security**, and then **Roles mapping** to open the page.
 
@@ -633,7 +635,7 @@ Wazuh dashboard configuration
       -  **Custom rules**: Click **Add new rule** to expand this field.
       -  **User field**: ``backend_roles``
       -  **Search operation**: ``FIND``
-      -  **Value**: Assign the value of the **Department** field in OneLogin configuration. In our case, this is ``wazuh-readonly``.
+      -  **Value**: Assign the value of the **Department** field in OneLogin configuration. In our case, the backend role is ``wazuh-readonly``.
       -  Click **Save role mapping** to save and map the backend role with Wazuh as *read-only*.
 
       .. thumbnail:: /images/single-sign-on/onelogin/Wazuh-role-mapping-RO.png
@@ -650,10 +652,12 @@ Wazuh dashboard configuration
       opensearch_security.auth.type: ["basicauth","saml"]
       server.xsrf.allowlist: ["/_opendistro/_security/saml/acs", "/_opendistro/_security/saml/logout", "/_opendistro/_security/saml/acs/idpinitiated"]
 
-#. Restart the Wazuh dashboard service using this command.
+#. Restart the Wazuh dashboard service using this command:
 
    .. code-block:: console
 
       # systemctl restart wazuh-dashboard
 
-#. Test the configuration. Go to your Wazuh dashboard URL and log in with your OneLogin account.
+#. Test the configuration.
+
+   To test the configuration, go to your Wazuh dashboard URL and log in with your OneLogin account.
