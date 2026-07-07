@@ -116,7 +116,6 @@ exclude_patterns = [
     'user-manual/manager/event-logging.rst',
     'user-manual/manager/integration-with-external-apis.rst',
     'user-manual/user-administration/single-sign-on/**',
-    'user-manual/user-administration/ldap.rst',
     'user-manual/wazuh-indexer/**',
     'user-manual/wazuh-indexer-cluster/**',
     'user-manual/wazuh-server-cluster/**',
