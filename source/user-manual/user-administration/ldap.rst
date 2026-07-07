@@ -73,18 +73,18 @@ Create an OU for the Users
 
 #. Run the command below on the Domain Controller using PowerShell with admin privileges to view the users in the *People* OU. The user's logon name (``sAMAccountName``) will be used for authentication on the Wazuh dashboard.
 
-.. code-block:: powershell
+   .. code-block:: powershell
 
-   > Get-ADUser -SearchBase "OU=People,DC=example,DC=org" -Filter * -Properties cn | Select-Object cn, sAMAccountName
+      > Get-ADUser -SearchBase "OU=People,DC=example,DC=org" -Filter * -Properties cn | Select-Object cn, sAMAccountName
 
-.. code-block:: none
-   :class: output
+   .. code-block:: none
+      :class: output
 
-   cn              sAMAccountName
-   ----            --------------
-   ldap            ldap
-   Wazuh Admin     wazuh-admin-user
-   Wazuh ReadOnly  wazuh-readonly-user
+      cn              sAMAccountName
+      ----            --------------
+      ldap            ldap
+      Wazuh Admin     wazuh-admin-user
+      Wazuh ReadOnly  wazuh-readonly-user
 
 Create an OU for the Groups
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -106,17 +106,17 @@ Create an OU for the Groups
 
 #. Run the command below on the Domain Controller using PowerShell with admin privileges to view the objects in the *Group* OU. The group name (CN) will be used as the backend role in the Wazuh indexer configuration.
 
-.. code-block:: powershell
+   .. code-block:: powershell
 
-   > Get-ADGroup -SearchBase "OU=Groups,DC=example,DC=org" -Filter * -Properties cn | Select-Object cn
+      > Get-ADGroup -SearchBase "OU=Groups,DC=example,DC=org" -Filter * -Properties cn | Select-Object cn
 
-.. code-block:: none
-   :class: output
+   .. code-block:: none
+      :class: output
 
-   cn
-   --
-   wazuh-admins
-   wazuh-readonly
+      cn
+      --
+      wazuh-admins
+      wazuh-readonly
 
 Get the FQDN of the LDAP server or Domain Controller
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -139,23 +139,23 @@ If you don't have a certificate authority server, you can enable LDAPS by creati
 
 #. Run the command below on the Domain Controller using PowerShell with administrator privileges to create the certificate. Replace ``<FQDN_LDAP_SERVER>`` and ``<HOSTNAME>`` with the FQDN and hostname of your domain controller:
 
-.. code-block:: powershell
+   .. code-block:: powershell
 
-   > New-SelfSignedCertificate -DnsName <FQDN_LDAP_SERVER>, <HOSTNAME> -CertStoreLocation cert:\LocalMachine\My
+      > New-SelfSignedCertificate -DnsName <FQDN_LDAP_SERVER>, <HOSTNAME> -CertStoreLocation cert:\LocalMachine\My
 
-.. code-block:: none
-   :class: output
+   .. code-block:: none
+      :class: output
 
-   PSParentPath: Microsoft.PowerShell.Security\Certificate::LocalMachine\My
-   Thumbprint                                Subject
-   ----------                                -------
-   C54F4646170E6888054B0A7C340128E0A7700572  CN=DC01.example.org
+      PSParentPath: Microsoft.PowerShell.Security\Certificate::LocalMachine\My
+      Thumbprint                                Subject
+      ----------                                -------
+      C54F4646170E6888054B0A7C340128E0A7700572  CN=DC01.example.org
 
 #. Run the following command to open the certificate management snap-in for the local machine.
 
-.. code-block:: powershell
+   .. code-block:: powershell
 
-   > certlm.msc
+      > certlm.msc
 
 #. Browse to **Personal** -> **Certificates**, locate the newly created certificate, and copy it into **Trusted Root Certification Authorities** -> **Certificates**.
 
