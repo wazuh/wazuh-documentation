@@ -258,17 +258,14 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
    Configure the ``roles_mapping.yml`` file to map the Okta group to the appropriate Wazuh indexer role, in our case, we map it to the ``all_access`` role:
 
       .. code-block:: console
-         :emphasize-lines: 7
+         :emphasize-lines: 6
 
          all_access:
-           hosts: []
-           users: []
-           reserved: false
+           reserved: true
            hidden: false
            backend_roles:
+           - "admin"
            - "<GROUP_NAME>"
-           and_backend_roles: []
-           description: "Maps admin to all_access"
 
    Replace ``<GROUP_NAME>`` with the name you gave to your group in Step 3, in our case, this is ``wazuh-admins``.
 
