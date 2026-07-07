@@ -61,6 +61,7 @@ Manage user credentials and access control for the Wazuh platform.
 - **[Password Management](https://documentation.wazuh.com/current/user-manual/user-administration/password-management.md)** Use the Wazuh passwords tool to change passwords for Wazuh indexer users and Wazuh manager API users in all-in-one and distributed deployments.
 - **[RBAC — Create and map internal users](https://documentation.wazuh.com/current/user-manual/user-administration/rbac.md)** Create Wazuh indexer internal users and map them to roles and policies using the Wazuh dashboard.
 - **[Single Sign-On](https://documentation.wazuh.com/current/user-manual/user-administration/single-sign-on/index.md)** Integrate Wazuh with Identity Providers (IdPs) using SAML to implement Single Sign-On (SSO) with administrator and read-only roles. Covers Okta, Microsoft Entra ID, PingOne, Google Workspace, JumpCloud, OneLogin, Keycloak, and authentik.
+- **[Active Directory and LDAP integration](https://documentation.wazuh.com/current/user-manual/user-administration/ldap.md)** Configure LDAP or Microsoft Active Directory to provide authentication and authorization for users accessing the Wazuh dashboard, and map LDAP groups to the administrator and read-only roles.
 
 ## Development & Support
 Resources for getting help for Wazuh.
