@@ -1,24 +1,24 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Jumpcloud is a Unified Device and Identity Access Management platform. Learn more about it and the administrator role in this section of the Wazuh documentation.
+   :description: JumpCloud is a Unified Device and Identity Access Management platform. Learn more about it and the administrator role in this section of the Wazuh documentation.
 
-Jumpcloud
+JumpCloud
 =========
 
-`Jumpcloud <https://jumpcloud.com/>`__, is a Unified Device and Identity Access Management platform that provides services such as Multi-Factor Authentication (MFA), Single Sign-On, password management, and cloud directory. In this guide, we integrate the Jumpcloud SSO to authenticate users into the Wazuh platform.
+`JumpCloud <https://jumpcloud.com/>`__ is a Unified Device and Identity Access Management platform that provides services such as Multi-Factor Authentication (MFA), Single Sign-On, password management and cloud directory. In this guide, we integrate the JumpCloud SSO to authenticate users into the Wazuh platform.
 
-Learn how to create administrator and read-only roles on Jumpcloud and map them with Wazuh in the sections below.
+Learn how to create administrator and read-only roles on JumpCloud and map them with Wazuh in the sections below.
 
 .. contents::
    :local:
    :depth: 1
    :backlinks: none
 
-Setup Jumpcloud single sign-on with administrator role
+Setup JumpCloud single sign-on with administrator role
 ------------------------------------------------------
 
-Follow these steps to integrate Jumpcloud IdP with Wazuh for single sign-on and grant administrator role to the authenticated Jumpcloud users on the Wazuh platform:
+Follow these steps to integrate JumpCloud IdP with Wazuh for single sign-on and grant administrator role to the authenticated JumpCloud users on the Wazuh platform:
 
 #. :ref:`configuration_jumpcloud_admin`
 #. :ref:`indexer_configuration_jumpcloud_admin`
@@ -26,11 +26,11 @@ Follow these steps to integrate Jumpcloud IdP with Wazuh for single sign-on and 
 
 .. _configuration_jumpcloud_admin:
 
-Jumpcloud Configuration
+JumpCloud Configuration
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Create an account in Jumpcloud. Request a free trial if you don't have a paid license.
-#. Create a new user. This step can be skipped if you are just testing, you can use your Jumpcloud ``admin`` user for example.
+#. Create an account in JumpCloud. Request a free trial if you don't have a paid license.
+#. Create a new user. This step can be skipped if you are just testing, you can use your JumpCloud ``admin`` user for example.
 
    #. Go to **User Management**, click on **Users** > **+ Users** >  **Manual User Creation**, fill in the user information, activate the user and click on **Save user**.
 
@@ -59,7 +59,7 @@ Jumpcloud Configuration
 
 #. Create a new app. Configure the SAML settings while you create the app.
 
-   #. Under **Access**, go to **SSO Applications** > **Get Started**, and select **Custom Application**.
+   #. Under **Access**, go to **SSO Applications** > **Get Started** and select **Custom Application**.
 
       .. thumbnail:: /images/single-sign-on/jumpcloud/04-go-to-SSO.png
          :title: Add new SSO application
@@ -122,7 +122,7 @@ Jumpcloud Configuration
           :align: center
           :width: 80%
 
-   #. On the **User Groups** tab, select the **Group** created previously and click **save**.
+   #. On the **User Groups** tab, select the **Group** created previously and click **Save**.
 
       .. thumbnail:: /images/single-sign-on/jumpcloud/14-on-the-user-groups-tab.png
           :title: On the User Groups tab, select the Group created previously
@@ -169,7 +169,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
 #. Edit the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file and change the following values:
 
-   - Set the ``order`` in ``basic_internal_auth_domain`` to ``0`` and the ``challenge`` flag to ``false``.
+   - Set the ``order`` in ``basic_internal_auth_domain`` to ``0``, and ``challenge`` flag to ``false``.
 
    - Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
 
@@ -210,7 +210,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
    Ensure to change the following parameters to their corresponding value:
 
-      - ``idp.metadata_file``
+      - ``idp.metadata_url``
       - ``idp.entity_id``
       - ``sp.entity_id``
       - ``kibana_url``
@@ -233,7 +233,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       Security Admin v7
       Will connect to localhost:9200 ... done
       Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
-      OpenSearch Version: 2.19.4
+      OpenSearch Version: 3.6.0
       Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
       Clustername: wazuh-cluster
       Clusterstate: GREEN
@@ -248,17 +248,19 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
 #. Edit the ``/etc/wazuh-indexer/opensearch-security/roles_mapping.yml`` file and change the following values:
 
-   Configure the ``roles_mapping.yml`` file to map the Jumpcloud user group to the appropriate Wazuh indexer role. In our case, we map the ``wazuh-admins`` group to the ``all_access`` role:
+   Configure the ``roles_mapping.yml`` file to map the JumpCloud user group to the appropriate Wazuh indexer role. In our case, we map the ``wazuh-admins`` group to the ``all_access`` role:
 
    .. code-block:: console
-      :emphasize-lines: 6
+      :emphasize-lines: 7
 
       all_access:
+        hosts: []
+        users: []
         reserved: false
         hidden: false
         backend_roles:
-        - "admin"
         - "wazuh-admins"
+        and_backend_roles: []
         description: "Maps admin to all_access"
 
 #. Run the ``securityadmin`` script to load the configuration changes made in the ``roles_mapping.yml`` file.
@@ -277,7 +279,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       Security Admin v7
       Will connect to localhost:9200 ... done
       Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
-      OpenSearch Version: 2.19.4
+      OpenSearch Version: 3.6.0
       Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
       Clustername: wazuh-cluster
       Clusterstate: GREEN
@@ -295,18 +297,18 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 Wazuh dashboard configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Verify that ``run_as`` is set to ``true`` in the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the backend role provided by the IdP is correctly mapped to the corresponding Wazuh role.
+#. The ``run_as`` value is enabled by default, but verify that it is set to ``true`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the backend role provided by the IdP is correctly mapped to the corresponding Wazuh role.
 
    .. code-block:: yaml
       :emphasize-lines: 7
 
-      hosts:
-        - default:
-            url: https://localhost
-            port: 55000
-            username: wazuh-wui
-            password: "<WAZUH_WUI_PASSWORD>"
-            run_as: true
+      wazuh_core.hosts:
+        default:
+          url: https://127.0.0.1
+          port: 55000
+          username: wazuh-wui
+          password: "<WAZUH_WUI_PASSWORD>"
+          run_as: true
 
    #. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **Security**, and then **Roles mapping** to open the page.
 
@@ -323,7 +325,7 @@ Wazuh dashboard configuration
       - **Custom rules**: Click **Add new rule** to expand this field.
       - **User field**: ``backend_roles``
       - **Search operation**: ``FIND``
-      - **Value**: Assign the name of the Jumpcloud user group. In our case, this is  ``wazuh-admins``.
+      - **Value**: Assign the name of the JumpCloud user group. In our case, this is ``wazuh-admins``.
       - Click **Save role mapping** to save and map the backend role with Wazuh as administrator.
 
       .. thumbnail:: /images/single-sign-on/jumpcloud/Wazuh-role-mapping.png
@@ -340,18 +342,20 @@ Wazuh dashboard configuration
       opensearch_security.auth.type: ["basicauth","saml"]
       server.xsrf.allowlist: ["/_opendistro/_security/saml/acs", "/_opendistro/_security/saml/logout", "/_opendistro/_security/saml/acs/idpinitiated"]
 
-#. Restart the Wazuh dashboard service.
+#. Restart the Wazuh dashboard service using this command:
 
    .. code-block:: console
 
       # systemctl restart wazuh-dashboard
 
-#. To test the configuration, go to your Wazuh dashboard URL and log in with your Jumpcloud account.
+#. Test the configuration.
 
-Setup Jumpcloud single sign-on with read-only role
+   To test the configuration, go to your Wazuh dashboard URL and log in with your JumpCloud account.
+
+Setup JumpCloud single sign-on with read-only role
 --------------------------------------------------
 
-Follow these steps to integrate Jumpcloud IdP with Wazuh for single sign-on and grant read-only role to the authenticated Jumpcloud users on the Wazuh platform:
+Follow these steps to integrate JumpCloud IdP with Wazuh for single sign-on and grant read-only role to the authenticated JumpCloud users on the Wazuh platform:
 
 #. :ref:`configuration_jumpcloud_ro`
 #. :ref:`indexer_configuration_jumpcloud_ro`
@@ -359,13 +363,13 @@ Follow these steps to integrate Jumpcloud IdP with Wazuh for single sign-on and 
 
 .. _configuration_jumpcloud_ro:
 
-Jumpcloud Configuration
+JumpCloud Configuration
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Create an account in Jumpcloud. Request a free trial if you don't have a paid license.
-#. Create a new user. This step can be skipped if you are just testing, you can use your Jumpcloud ``admin`` user for example.
+#. Create an account in JumpCloud. Request a free trial if you don't have a paid license.
+#. Create a new user. This step can be skipped if you are just testing, you can use your JumpCloud ``admin`` user for example.
 
-   #. Go to **User Management**, click on **Users** > **+ Users** >  **Manual User Creation**. Fill in the user information, activate the user and click on **Save user**.
+   #. Go to **User Management**, click on **Users** > **+ Users** >  **Manual User Creation**, fill in the user information, activate the user and click on **Save user**.
 
       .. thumbnail:: /images/single-sign-on/jumpcloud/01-go-to-user-management-and-click-on-users.png
          :title: Go to User Management and click on Users
@@ -383,7 +387,7 @@ Jumpcloud Configuration
 
       The group name will be used as the ``backend_roles`` for Wazuh role mapping.
 
-   #. In the selected **User Groups**,  go to the **Users** tab, select the newly created user and click **Save group**.
+   #. In the selected **User Groups**,  go to the **Users** tab, select the newly created user and click **Save Group**.
 
       .. thumbnail:: /images/single-sign-on/jumpcloud/03-go-to-users-tab-ro.png
           :title: Go to the Users tab and select the newly created user
@@ -442,7 +446,7 @@ Jumpcloud Configuration
       - **ACS URL**: ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs``
       - Check **Assertion** under **Sign**.
       - Check **Declare Redirect Endpoint**.
-      - Check **include group attribute** and add **Roles** as the attribute. This will be used later in the ``config.yml`` configuration file.
+      - Check **include group attribute** and add **Roles** as the attribute. This will be used later in the Wazuh indexer configuration file.
       - Leave the rest of the options as their default values and click **Save**.
 
       .. thumbnail:: /images/single-sign-on/jumpcloud/10-complete-the-sso-tab.png
@@ -502,7 +506,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
 #. Edit the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file and change the following values:
 
-   - Set the ``order`` in ``basic_internal_auth_domain`` to ``0`` and the ``challenge`` flag to ``false``.
+   - Set the ``order`` in ``basic_internal_auth_domain`` to ``0``, and ``challenge`` flag to ``false``.
 
    - Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
 
@@ -543,7 +547,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
    Ensure to change the following parameters to their corresponding value:
 
-      - ``idp.metadata_file``
+      - ``idp.metadata_url``
       - ``idp.entity_id``
       - ``sp.entity_id``
       - ``kibana_url``
@@ -566,7 +570,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       Security Admin v7
       Will connect to localhost:9200 ... done
       Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
-      OpenSearch Version: 2.19.4
+      OpenSearch Version: 3.6.0
       Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
       Clustername: wazuh-cluster
       Clusterstate: GREEN
@@ -594,23 +598,22 @@ Wazuh dashboard configuration
       -  **Cluster permissions**: ``cluster_composite_ops_ro``
       -  **Index**: ``*``
       -  **Index permissions**: ``read``
-      -  **Tenant permissions**: ``global_tenant`` and select the ``Read only`` option.
    #. Select the newly created role.
    #. Select the **Mapped users** tab and click **Manage mapping**.
    #. Under **Backend roles**, add the name of the group you created in JumpCloud  and click **Map** to confirm the action. In our case, the backend role is ``wazuh-readonly``.
 
-#. Verify that ``run_as`` is set to ``true`` in the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the backend role provided by the IdP is correctly mapped to the corresponding Wazuh role.
+#. The ``run_as`` value is enabled by default, but verify that it is set to ``true`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the backend role provided by the IdP is correctly mapped to the corresponding Wazuh role.
 
    .. code-block:: yaml
       :emphasize-lines: 7
 
-      hosts:
-        - default:
-            url: https://localhost
-            port: 55000
-            username: wazuh-wui
-            password: "<WAZUH_WUI_PASSWORD>"
-            run_as: true
+      wazuh_core.hosts:
+        default:
+          url: https://127.0.0.1
+          port: 55000
+          username: wazuh-wui
+          password: "<WAZUH_WUI_PASSWORD>"
+          run_as: true
 
 #. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **Security**, and then **Roles mapping** to open the page.
 
@@ -644,10 +647,12 @@ Wazuh dashboard configuration
       opensearch_security.auth.type: ["basicauth","saml"]
       server.xsrf.allowlist: ["/_opendistro/_security/saml/acs", "/_opendistro/_security/saml/logout", "/_opendistro/_security/saml/acs/idpinitiated"]
 
-#. Restart the Wazuh dashboard service using this command.
+#. Restart the Wazuh dashboard service using this command:
 
    .. code-block:: console
 
       # systemctl restart wazuh-dashboard
 
-#. Test the configuration. To test the configuration, go to your Wazuh dashboard URL and log in with your Jumpcloud account.
+#. Test the configuration.
+
+   To test the configuration, go to your Wazuh dashboard URL and log in with your JumpCloud account.

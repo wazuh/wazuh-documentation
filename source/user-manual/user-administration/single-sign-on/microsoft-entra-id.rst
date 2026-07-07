@@ -64,7 +64,7 @@ Microsoft Entra ID Configuration
 
       -  **Display name**: This can be any value that you want. In our case this is ``Wazuh_role``.
       -  **Allowed member types**: Select **Users/Groups**.
-      -  **Value**: Defines the name of the role. In this case ``Wazuh_role``, which will be the backend role for Wazuh role mapping.
+      -  **Value**: defines the name of the role. In this case ``Wazuh_role``, which will be the backend role for Wazuh role mapping.
       -  **Description**: This can be any value that you want. In our case this is ``Wazuh Admin Role``.
       -  **Do you want to enable this app role**: Click on the checkmark to enable the role.
 
@@ -84,7 +84,7 @@ Microsoft Entra ID Configuration
          :align: center
          :width: 80%
 
-   #. Click on **Add user/group**, assign a **user** and select the role we created in **App roles**. Click on Assign to save the configuration.
+   #. Go to **Add user/group**, assign a **user** and select the role we created in **App roles**. Click on Assign to save the configuration.
 
       .. thumbnail:: /images/single-sign-on/azure-active-directory/06-click-on-add-user-group.png
          :title: Click on Add user/group
@@ -157,7 +157,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
 #. Edit the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file and change the following values:
 
-   - Set the ``order`` in ``basic_internal_auth_domain`` to ``0`` and the ``challenge`` flag to ``false``.
+   - Set the ``order`` in ``basic_internal_auth_domain`` to ``0``, and ``challenge`` flag to ``false``.
 
    - Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
 
@@ -220,7 +220,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       Security Admin v7
       Will connect to localhost:9200 ... done
       Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
-      OpenSearch Version: 2.19.4
+      OpenSearch Version: 3.6.0
       Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
       Clustername: wazuh-cluster
       Clusterstate: GREEN
@@ -238,21 +238,23 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
    Configure the ``roles_mapping.yml`` file to map the role we have in Microsoft Entra ID to the appropriate Wazuh indexer role, in our case, we map it to the ``all_access`` role:
 
    .. code-block:: console
-      :emphasize-lines: 6
+      :emphasize-lines: 7
 
       all_access:
+        hosts: []
+        users: []
         reserved: false
         hidden: false
         backend_roles:
-        - "admin"
         - "Wazuh_role"
+        and_backend_roles: []
         description: "Maps admin to all_access"
 
 #. Run the ``securityadmin`` script to load the configuration changes made in the ``roles_mapping.yml`` file.
 
    .. code-block:: console
 
-      # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /etc/wazuh-indexer/opensearch-security/roles_mapping.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h 127.0.0.1 -nhnv
+      # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /etc/wazuh-indexer/opensearch-security/roles_mapping.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
 
    The ``-h`` flag specifies the hostname or the IP address of the Wazuh indexer node. Note that this command uses localhost, set your Wazuh indexer address if necessary.
 
@@ -262,16 +264,16 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       :class: output
 
       Security Admin v7
-      Will connect to 127.0.0.1:9200 ... done
+      Will connect to localhost:9200 ... done
       Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
-      OpenSearch Version: 2.10.0
+      OpenSearch Version: 3.6.0
       Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
       Clustername: wazuh-cluster
       Clusterstate: GREEN
       Number of nodes: 1
       Number of data nodes: 1
       .opendistro_security index already exists, so we do not need to create one.
-      Populate config from /etc/wazuh-indexer/opensearch-security
+      Populate config from /home/wazuh-user
       Will update '/rolesmapping' with /etc/wazuh-indexer/opensearch-security/roles_mapping.yml
          SUCC: Configuration for 'rolesmapping' created or updated
       SUCC: Expected 1 config types for node {"updated_config_types":["rolesmapping"],"updated_config_size":1,"message":null} is 1 (["rolesmapping"]) due to: null
@@ -282,18 +284,18 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 Wazuh dashboard configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Verify that ``run_as`` is set to ``true`` in the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the backend role provided by the IdP is correctly mapped to the corresponding Wazuh role.
+#. The ``run_as`` value is enabled by default, but verify that it is set to ``true`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the backend role provided by the IdP is correctly mapped to the corresponding Wazuh role.
 
    .. code-block:: yaml
       :emphasize-lines: 7
 
-      hosts:
-        - default:
-            url: https://localhost
-            port: 55000
-            username: wazuh-wui
-            password: "<WAZUH_WUI_PASSWORD>"
-            run_as: true
+      wazuh_core.hosts:
+        default:
+          url: https://127.0.0.1
+          port: 55000
+          username: wazuh-wui
+          password: "<WAZUH_WUI_PASSWORD>"
+          run_as: true
 
 #. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **Security**, and then **Roles mapping** to open the page.
 
@@ -333,7 +335,9 @@ Wazuh dashboard configuration
 
       # systemctl restart wazuh-dashboard
 
-#. Test the configuration, go to your Wazuh dashboard URL and log in with your Microsoft account.
+#. Test the configuration.
+
+   To test the configuration, go to your Wazuh dashboard URL and log in with your Microsoft account.
 
 Setup Microsoft Entra ID single sign-on with read-only role
 -----------------------------------------------------------
@@ -383,10 +387,10 @@ Microsoft Entra ID Configuration
 
    #. Add the following details to your app role:
 
-      -  **Display name**: This can be any value that you want. In our case, this is ``Wazuh Read Only Role``.
+      -  **Display name**: This can be any value that you want. In our case this is ``Wazuh Read Only Role``.
       -  **Allowed member types**: Select ``Users/Groups``.
       -  **Value**: defines the name of the role. In this case ``wazuh-readonly``, which will be the backend role for Wazuh role mapping.
-      -  **Description**: This can be any value that you want. In our case, this is ``Wazuh Read Only Role``.
+      -  **Description**: This can be any value that you want. In our case this is ``Wazuh Read Only Role``.
       -  **Do you want to enable this app role**: Click on the checkmark to enable the role.
 
       .. thumbnail:: /images/single-sign-on/azure-active-directory/read-only/04-create-app-roles-RO.png
@@ -402,7 +406,7 @@ Microsoft Entra ID Configuration
          :align: center
          :width: 80%
 
-   #. Click on **Add user/group**, assign a **user** and select the role we created in **App roles**. Click on **Assign** to save the configuration.
+   #. Go to **Add user/group**, assign a **user** and select the role we created in **App roles**. Click on **Assign** to save the configuration.
 
       .. thumbnail:: /images/single-sign-on/azure-active-directory/read-only/06-click-on-add-user-group-RO.png
          :title: Click on Add user/group
@@ -476,7 +480,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
 #. Edit the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file and change the following values:
 
-   - Set the ``order`` in ``basic_internal_auth_domain`` to ``0`` and the ``challenge`` flag to ``false``.
+   - Set the ``order`` in ``basic_internal_auth_domain`` to ``0``, and ``challenge`` flag to ``false``.
 
    - Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
 
@@ -539,7 +543,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       Security Admin v7
       Will connect to localhost:9200 ... done
       Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
-      OpenSearch Version: 2.19.4
+      OpenSearch Version: 3.6.0
       Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
       Clustername: wazuh-cluster
       Clusterstate: GREEN
@@ -567,23 +571,22 @@ Wazuh dashboard configuration
       -  **Cluster permissions**: ``cluster_composite_ops_ro``
       -  **Index**: ``*``
       -  **Index permissions**: ``read``
-      -  **Tenant permissions**: ``global_tenant`` and select the ``Read only`` option.
    #. Select the newly created role.
    #. Select the **Mapped users** tab and click **Manage mapping**.
    #. Under **Backend roles**, add the value attribute of the app role you created in Microsoft Entra ID and click **Map** to confirm the action. In our case, the backend role is ``wazuh-readonly``.
 
-#. Verify that ``run_as`` is set to ``true`` in the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the backend role provided by the IdP is correctly mapped to the corresponding Wazuh role.
+#. The ``run_as`` value is enabled by default, but verify that it is set to ``true`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the backend role provided by the IdP is correctly mapped to the corresponding Wazuh role.
 
    .. code-block:: yaml
       :emphasize-lines: 7
 
-      hosts:
-        - default:
-            url: https://localhost
-            port: 55000
-            username: wazuh-wui
-            password: "<WAZUH_WUI_PASSWORD>"
-            run_as: true
+      wazuh_core.hosts:
+        default:
+          url: https://127.0.0.1
+          port: 55000
+          username: wazuh-wui
+          password: "<WAZUH_WUI_PASSWORD>"
+          run_as: true
 
    #. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **Security**, and then **Roles mapping** to open the page.
 
@@ -623,4 +626,6 @@ Wazuh dashboard configuration
 
       # systemctl restart wazuh-dashboard
 
-#. Test the configuration. To test the configuration, go to your Wazuh dashboard URL and log in with your Microsoft account.
+#. Test the configuration.
+
+   To test the configuration, go to your Wazuh dashboard URL and log in with your Microsoft account.
