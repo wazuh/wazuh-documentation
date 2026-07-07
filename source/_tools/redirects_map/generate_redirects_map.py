@@ -12,12 +12,13 @@
 import read_redirects_js as rd
 import re
 from urllib.parse import quote, unquote
+from urllib.request import urlretrieve
 import os
 import json
 
 dirname = os.path.dirname(__file__)
 redirects_file = os.path.join(dirname, '../../_static/js/redirects.js')
-json_file_name = 'redirects-map.json'
+json_file_name = 'redirects-map-updates.json'
 redirects_json_file = os.path.join(dirname, '../../' + json_file_name)
 
 [rd_betaVersions,rd_versions,rd_newUrls,rd_removedUrls,rd_redirections] = rd.read_redirects_js(redirects_file)
@@ -119,7 +120,6 @@ def compareVersions(first,second):
     if first[1] == second[1]:
       return 0
 
-
 def normalizeUrl(originalUrl, options = {}):
   """
   Normalize a given URL so it comply with a standard format
@@ -151,7 +151,6 @@ def normalizeUrl(originalUrl, options = {}):
     return normalizedURL
   else:
     return originalUrl
-
 
 def check_encode_uri(url: str) -> bool:
   """
@@ -329,40 +328,79 @@ def has_redirect(path, redirections):
 
 def redirects_map_to_json_format(redirects_map):
   """
-  JSON file format for key-value pairs (according to https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/kvs-with-functions-create-s3-kvp.html):
+  JSON file format for key-value pairs:
   {
-    "data":[
-      {
-        "key":"key1",
-        "value":"value"
-      },
-      {
-        "key":"key2",
-        "value":"value"
-      }
-    ]
+    "puts":[
+      { "key":"key1", "value":"value" },
+      { "key":"key2", "value":"value" }
+    ],
+    "deletes": ["oldkey"]
   }
   """
   formated = {}
   data = []
-  for old in redirects_map:
-    new = redirects_map[old]
+  for old in redirects_map["puts"]:
+    new = redirects_map["puts"][old]
     data_item = {}
     data_item["key"] = '/' + old
     data_item["value"] = '/' + new
     data.append(data_item)
+  formated["puts"] = data 
 
-  formated["data"] = data 
+  data = []
+  for old in redirects_map["deletes"]:
+      data.append(old)
+  formated["deletes"] = data 
+
   return formated
+
+def diff_redirects(old_redirects_map, new_redirects_map):
+  redir_remove = old_redirects_map.copy()
+  redir_update = {}
+  for redir in new_redirects_map:
+    if redir in redir_remove:
+      if new_redirects_map[redir] != redir_remove[redir]:
+        redir_update[redir] = new_redirects_map[redir]
+      redir_remove.pop(redir)
+    else:
+      redir_update[redir] = new_redirects_map[redir]
+  return {"puts": redir_update, "deletes": redir_remove}
 
 ##############
 
+# 1. Generate redirects map after processing redirects.js
 redirects_map = generate_redirects_map()
-redirects_map_json = redirects_map_to_json_format(redirects_map)
+
+# 2. Read old redirects version
+old_redirects_list_file_url = 'https://documentation-dev.wazuh.com/redirects_map.json'
+old_redirects_list_file = os.path.join(dirname, '../../redirects_map_old.json')
+redir_path = ''
+url_retrieve_headers = ''
+try:
+  redir_path, url_retrieve_headers = urlretrieve(old_redirects_list_file_url, old_redirects_list_file)
+except Exception as e:
+  print(old_redirects_list_file_url + " not found.", e)
+
+if redir_path != '':
+  with open(old_redirects_list_file) as json_file:
+    old_redirects_list = json.load(json_file)
+else: 
+  old_redirects_list = {}
+  print ("There was a problem reading the old redirects list. Empty list loaded instead")
+
+# 3. Separate Add/Modify from Delete according to the differences between the old and the new redirects_map
+redirects_put_delete = diff_redirects(old_redirects_list, redirects_map)
+
+# 4. Create the updates JSON file
+redirects_map_json = redirects_map_to_json_format(redirects_put_delete)
 
 # Output the results to a JSON file
 with open(redirects_json_file, "w", encoding="utf-8") as json_file:
   json.dump(redirects_map_json, json_file, indent=4)
+
+# Output the new redirects list (this one must be uploaded to the bucket)
+with open(os.path.join(dirname, '../../redirects_map.json'), "w", encoding="utf-8") as json_file:
+  json.dump(redirects_map, json_file, indent=4)
 
 print("Success! '" + json_file_name + "' has been created.")
 
