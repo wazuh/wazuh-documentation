@@ -574,7 +574,6 @@ Wazuh dashboard configuration
       -  **Cluster permissions**: ``cluster_composite_ops_ro``
       -  Index: ``*``
       -  Index permissions: ``read``
-      -  Tenant permissions: ``global_tenant`` and select the **Read only** option.
 
    #. Select the newly created role.
    #. Select the **Mapped users** tab and click **Manage mapping**.

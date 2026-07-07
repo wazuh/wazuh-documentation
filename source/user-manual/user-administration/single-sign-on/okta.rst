@@ -258,7 +258,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
    Configure the ``roles_mapping.yml`` file to map the Okta group to the appropriate Wazuh indexer role, in our case, we map it to the ``all_access`` role:
 
       .. code-block:: console
-         :emphasize-lines: 8
+         :emphasize-lines: 7
 
          all_access:
            hosts: []
@@ -266,7 +266,6 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
            reserved: false
            hidden: false
            backend_roles:
-           - "admin"
            - "<GROUP_NAME>"
            and_backend_roles: []
            description: "Maps admin to all_access"
@@ -615,7 +614,6 @@ Wazuh dashboard configuration
       -  **Cluster permissions**: ``cluster_composite_ops_ro``
       -  **Index**: ``*``
       -  **Index permissions**: ``read``
-      -  **Tenant permissions**: ``global_tenant`` and select the ``Read only`` option.
    #. Select the newly created role.
    #. Select the **Mapped users** tab and click **Manage mapping**.
    #. Under **Backend roles**, add the name of the read-only group  you created  in Okta and click **Map** to confirm the action. In our case, the backend role is ``wazuh-readonly``.
