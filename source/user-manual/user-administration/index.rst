@@ -1,16 +1,20 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Learn how to manage user passwords, create internal users, integrate Wazuh with Identity Providers (IdPs) to implement Single Sign-On (SSO), and configure LDAP integration.
+   :description: Wazuh lets you control who can access the platform and what they can do. Learn how to manage passwords, create internal users with RBAC, enable single sign-on (SSO), and integrate with Active Directory or LDAP.
 
 User administration
 ===================
 
-Learn how to manage user passwords, create internal users, integrate Wazuh with Identity Providers (IdPs) to implement Single Sign-On (SSO), and configure LDAP integration.
+Wazuh lets you control who can access the platform and what they can do. This guide covers four areas of user administration: managing passwords, creating internal users with role-based access control (RBAC), enabling single sign-on (SSO) through an identity provider (IdP), and integrating with Active Directory or LDAP.
 
-In the password management section, you can find instructions on how to use the Wazuh passwords tool to change the passwords of both the Wazuh indexer and the Wazuh server API users.
+Password management uses the Wazuh passwords tool to change the passwords of Wazuh indexer users and Wazuh server API users.
 
-The RBAC section provides instructions for creating Wazuh indexer users, also known as internal users, assigning them different roles, and mapping them to the Wazuh server API. Find out how to create an admin user, a read-only user, a custom user, and a user with permission to read and manage only a group of agents.
+RBAC explains how to create Wazuh indexer users, also known as internal users, assign them roles, and map them to the Wazuh server API. You can create an admin user, a read-only user, or a custom user.
+
+Single sign-on connects Wazuh to your existing identity provider so users authenticate once to gain access. This guide includes instructions for Okta, Microsoft Entra ID, PingOne, Google Workspace, JumpCloud, OneLogin, Keycloak, and authentik.
+
+Active Directory and LDAP integration authenticates and authorizes users against your directory service.
 
 .. toctree::
    :maxdepth: 3
