@@ -15,7 +15,9 @@ from urllib.parse import quote, unquote
 from urllib.request import urlretrieve
 import os
 import json
+import sys
 
+environment = sys.argv[1]
 dirname = os.path.dirname(__file__)
 redirects_file = os.path.join(dirname, '../../_static/js/redirects.js')
 json_file_name = 'redirects-map-updates.json'
@@ -372,7 +374,10 @@ def diff_redirects(old_redirects_map, new_redirects_map):
 redirects_map = generate_redirects_map()
 
 # 2. Read old redirects version
-old_redirects_list_file_url = 'https://documentation-dev.wazuh.com/redirects_map.json'
+if environment == 'dev':
+  old_redirects_list_file_url = 'https://documentation-dev.wazuh.com/redirects_map.json'
+else:
+  old_redirects_list_file_url = 'https://documentation.wazuh.com/redirects_map.json'
 old_redirects_list_file = os.path.join(dirname, '../../redirects_map_old.json')
 redir_path = ''
 url_retrieve_headers = ''

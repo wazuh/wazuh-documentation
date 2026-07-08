@@ -72,6 +72,13 @@ redirects-map:
 	@cd ../../..
 	@echo
 
+redirects-map-dev:
+	@cd source/_tools/redirects_map && python generate_redirects_map.py dev
+	@echo
+	@echo Redirects map created.
+	@cd ../../..
+	@echo
+
 html-production:
 	rm -rf $(BUILDDIR)/doctrees/*
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html -t production
