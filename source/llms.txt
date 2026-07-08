@@ -41,6 +41,16 @@ Fine-tune settings and manage the platform's operation.
 
 - **[User Manual](https://documentation.wazuh.com/current/user-manual/index.md)** Comprehensive guide to configuring, operating, and getting the most out of Wazuh.
 
+## Proof of Concept guide
+Hands-on use cases for exploring Wazuh capabilities in a lab environment, covering threat prevention, detection, and response.
+
+- **[File Integrity Monitoring](https://documentation.wazuh.com/current/proof-of-concept-guide/poc-file-integrity-monitoring.md)** Detect the creation, modification, and deletion of files in monitored directories on Ubuntu and Windows endpoints using who-data audit.
+- **[Vulnerability Detection](https://documentation.wazuh.com/current/proof-of-concept-guide/poc-vulnerability-detection.md)** Detect unpatched Common Vulnerabilities and Exposures (CVEs) in applications and operating systems on a monitored endpoint.
+- **[Security Configuration Assessment](https://documentation.wazuh.com/current/proof-of-concept-guide/poc-security-configuration-assessment.md)** Evaluate endpoints against hardening standards like CIS benchmarks, and create and deploy a custom SCA policy.
+- **[Monitoring Docker Events](https://documentation.wazuh.com/current/proof-of-concept-guide/monitoring-docker.md)** Identify security incidents across Docker containers on an Ubuntu endpoint using the `docker-listener` module.
+- **[Detecting an SQL Injection Attack](https://documentation.wazuh.com/current/proof-of-concept-guide/detect-web-attack-sql-injection.md)** Simulate and detect an SQL injection attack from Apache web server logs on an Ubuntu endpoint.
+- **[Monitoring AWS Infrastructure](https://documentation.wazuh.com/current/proof-of-concept-guide/aws-infrastructure-monitoring.md)** Collect and analyze Amazon CloudTrail logs from an S3 bucket using the Wazuh `aws-s3` module.
+
 ## Management & Administration
 Manage your Wazuh infrastructure, users, and data.
 
