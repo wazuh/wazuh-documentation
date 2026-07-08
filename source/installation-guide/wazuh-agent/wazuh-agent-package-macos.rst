@@ -43,11 +43,9 @@ The Wazuh agent runs on the endpoint you want to monitor and communicates with t
                      # curl -O https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR_OSX|/macos/wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.arm64.pkg
                      # echo "WAZUH_MANAGER='10.0.0.2'" > /tmp/wazuh_envs && sudo installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.arm64.pkg -target /
 
-            For additional deployment options such as agent name, agent group, and enrollment password, see the `Deployment variables for macOS </user-manual/agent/agent-enrollment/deployment-variables/deployment-variables-macos>`__ section.
-
             .. note::
 
-               Alternatively, if you want to install an agent without enrolling it, omit the deployment variables. To learn more about the different enrollment methods, see the `Wazuh agent enrollment </user-manual/agent/agent-enrollment/index>`__ section.
+               Alternatively, if you want to install an agent without enrolling it, omit the deployment variables. To learn more about the different enrollment methods, see the :doc:`Wazuh agent enrollment </user-manual/agent/agent-enrollment/index>` section.
 
          #. Start the Wazuh agent to complete the installation process:
 
@@ -72,6 +70,6 @@ The Wazuh agent runs on the endpoint you want to monitor and communicates with t
 
                # launchctl bootstrap system /Library/LaunchDaemons/com.wazuh.agent.plist
 
-         The installation process is now complete, and the Wazuh agent is successfully installed on your macOS endpoint. The next step is to enroll and configure the Wazuh agent to communicate with the Wazuh manager. To perform this action, see the `Wazuh agent enrollment </user-manual/agent/agent-enrollment/index>`__ section.
+         The installation process is now complete and the Wazuh agent is successfully installed on your macOS endpoint. The next step is to enroll and configure the Wazuh agent to communicate with the Wazuh manager. To perform this action, see the :doc:`Wazuh agent enrollment </user-manual/agent/agent-enrollment/index>` section.
 
 By default, all agent files are stored in ``/Library/Ossec/`` after the installation.

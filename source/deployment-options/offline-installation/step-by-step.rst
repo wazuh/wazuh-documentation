@@ -233,7 +233,7 @@ After completing the installation of the Wazuh manager on every node, you must c
 Configuring the Wazuh manager master node
 """""""""""""""""""""""""""""""""""""""""
 
-#. Edit the following settings in the ``/var/wazuh-manager/etc/wazuh-manager.conf`` configuration file. Replace ``<WAZUH_MASTER_NODE_ADDRESS>`` with the IP address of the master node.
+#. Edit the following settings in the ``/var/wazuh-manager/etc/wazuh-manager.conf`` configuration file. Replace ``<WAZUH_MASTER_ADDRESS>`` with the IP address of the master node.
 
    .. include:: /_templates/installations/manager/configure_wazuh_master_node.rst
 
