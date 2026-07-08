@@ -66,7 +66,7 @@ search-index:
 	npx -y pagefind@v1.1.0 --site $(BUILDDIR)/html --force-language en
 
 redirects-map:
-	@cd source/_tools/redirects_map && python generate_redirects_map.py
+	@cd source/_tools/redirects_map && python generate_redirects_map.py prod
 	@echo
 	@echo Redirects map created.
 	@cd ../../..

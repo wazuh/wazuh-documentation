@@ -93,7 +93,7 @@ if "%1" == "search-index" (
 )
 
 if "%1" == "redirects-map" (
-	cd source/_themes/wazuh_doc_theme_v3 && python generate_redirects_map.py
+	cd source/_themes/wazuh_doc_theme_v3 && python generate_redirects_map.py prod
 	echo.
 	echo.Redirects map created.
 	cd ../../..
