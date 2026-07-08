@@ -92,6 +92,22 @@ if "%1" == "search-index" (
 	goto end
 )
 
+if "%1" == "redirects-map" (
+	cd source/_themes/wazuh_doc_theme_v3 && python generate_redirects_map.py
+	echo.
+	echo.Redirects map created.
+	cd ../../..
+	echo.
+)
+
+if "%1" == "redirects-map-dev" (
+	cd source/_themes/wazuh_doc_theme_v3 && python generate_redirects_map.py dev
+	echo.
+	echo.Redirects map created.
+	cd ../../..
+	echo.
+)
+
 if "%1" == "html-prod" (
 	%SPHINXBUILD% -b html %ALLSPHINXOPTS% %BUILDDIR%/html -t production
 	if errorlevel 1 exit /b 1
