@@ -28,6 +28,7 @@ All notable changes to this project will be documented in this file.
 - Updated the *Wazuh dashboard* documentation in *User manual*. ([#9688](https://github.com/wazuh/wazuh-documentation/pull/9688))
 - Updated the *Quickstart* documentation. ([#9680](https://github.com/wazuh/wazuh-documentation/pull/9680)) ([#9769](https://github.com/wazuh/wazuh-documentation/pull/9769))
 - Updated the *Wazuh server* documentation to the new *Wazuh manager* documentation in the *User manual*. ([#9728](https://github.com/wazuh/wazuh-documentation/pull/9728)) ([#9737](https://github.com/wazuh/wazuh-documentation/pull/9737))
+- Moved the *Transitioning from Wazuh 4.x to 5.x* section to the end of the documentation index and displayed its full title on the home page. ([#9792](https://github.com/wazuh/wazuh-documentation/pull/9792))
 - Updated the *User administration* documentation. ([#9745](https://github.com/wazuh/wazuh-documentation/pull/9745)) ([#9758](https://github.com/wazuh/wazuh-documentation/pull/9758)) ([#9765](https://github.com/wazuh/wazuh-documentation/pull/9765)) ([#9766](https://github.com/wazuh/wazuh-documentation/pull/9766))
 
 ### Removed
