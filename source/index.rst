@@ -27,8 +27,8 @@ Index
    quickstart
    installation-guide/index
    deployment-options/index
-   transitioning-from-4x-to-5x/index
    user-manual/index
+   transitioning-from-4x-to-5x/index
 
 ..
    cloud-security/monitoring
