@@ -128,84 +128,84 @@ Refer to the table in the :doc:`Troubleshooting <troubleshooting>` section for t
         </enrollment>
     </client>
 
+Unable to read CA certificate file
+----------------------------------
+
+The Wazuh agent may not be able to authenticate with the Wazuh manager if the root certificate authority is missing on either the Wazuh manager or the Wazuh agent. This applies when additional security options such as :doc:`Wazuh manager identity verification <security-options/manager-identity-verification>` and :doc:`Wazuh agent identity verification <security-options/agent-identity-verification>` are used.
+
+**Location**: Wazuh manager log file at ``/var/wazuh-manager/logs/wazuh-manager.log``.
+
+**Error log**:
+
+.. code-block:: none
+
+   2026/07/06 12:37:28 wazuh-manager-authd: ERROR: Unable to read CA certificate file "/var/wazuh-manager/etc/rootCA.pem"
+   2026/07/06 12:37:28 wazuh-manager-authd: ERROR: SSL error. Exiting.
+
+**Resolution**: Ensure the certificate authority file is in the location specified in the ``<ssl_agent_ca>`` section of the Wazuh manager ``/var/wazuh-manager/etc/wazuh-manager.conf`` file.
+
+**Location**: Wazuh agent log file
+
+Refer to the table in the :doc:`Troubleshooting <troubleshooting>` section for the Wazuh agent log file location.
+
+**Error log**:
+
+.. code-block:: none
+
+   2026/07/10 07:50:29 wazuh-agentd: ERROR: Unable to read CA certificate file "/var/ossec/etc/rootCA.pem"
+   2026/07/10 07:50:29 wazuh-agentd: ERROR: Could not set up SSL connection! Check certification configuration.
+
+**Resolution**: Ensure the certificate authority file is in the location specified in the ``<server_ca_path>`` section of the Wazuh agent configuration file (``ossec.conf``). You can find the ``ossec.conf`` file at the following locations:
+
+-  Linux/Unix endpoints - ``/var/ossec/etc/ossec.conf``
+-  macOS endpoint - ``/Library/Ossec/etc/ossec.conf``
+-  Windows endpoints - ``C:\Program Files (x86)\ossec-agent\ossec.conf``
+
+Unable to read private key file
+-------------------------------
+
+The Wazuh agent may not be able to authenticate with the Wazuh manager if the private key file is missing on the Wazuh agent. This applies when :doc:`Wazuh agent identity verification <security-options/agent-identity-verification>` is used for the Wazuh agent enrollment.
+
+**Location**: Wazuh agent log file
+
+Refer to the table in the :doc:`Troubleshooting <troubleshooting>` section for the Wazuh agent log file location.
+
+**Error log**:
+
+.. code-block:: none
+
+   2026/07/08 15:45:27 wazuh-agentd: ERROR: Unable to read private key file: /var/ossec/etc/sslagent.key
+   2026/07/08 15:45:27 wazuh-agentd: ERROR: Could not set up SSL connection! Check certification configuration.
+
+**Resolution**: Ensure the agent private key file is in the location specified in the ``<agent_key_path>`` section of the Wazuh agent ``ossec.conf`` file. You can find the ``ossec.conf`` file at the following locations:
+
+-  Linux/Unix endpoints - ``/var/ossec/etc/ossec.conf``
+-  macOS endpoint - ``/Library/Ossec/etc/ossec.conf``
+-  Windows endpoints - ``C:\Program Files (x86)\ossec-agent\ossec.conf``
+
+Unable to read certificate file
+-------------------------------
+
+The Wazuh agent may not be able to authenticate with the Wazuh manager if the signed SSL certificate is missing on the Wazuh agent. This applies when :doc:`Wazuh agent identity verification <security-options/agent-identity-verification>` is used for the Wazuh agent enrollment.
+
+**Location**: Wazuh agent log file
+
+Refer to the table in the :doc:`Troubleshooting <troubleshooting>` section for the Wazuh agent log file location.
+
+**Error log**:
+
+.. code-block:: none
+
+   2026/07/08 15:56:13 wazuh-agentd: ERROR: Unable to read certificate file (not found): /var/ossec/etc/sslagent.cert
+   2026/07/08 15:56:13 wazuh-agentd: ERROR: Could not set up SSL connection! Check certification configuration.
+
+**Resolution**: Ensure the agent certificate file is in the location specified in the ``<agent_certificate_path>`` section of the Wazuh agent ``ossec.conf`` file. You can find the ``ossec.conf`` file at the following locations:
+
+-  Linux/Unix endpoints - ``/var/ossec/etc/ossec.conf``
+-  macOS endpoint - ``/Library/Ossec/etc/ossec.conf``
+-  Windows endpoints - ``C:\Program Files (x86)\ossec-agent\ossec.conf``
+
 ..
-   Unable to read CA certificate file
-   ----------------------------------
-
-   The Wazuh agent may not be able to authenticate with the Wazuh manager if the root certificate authority is missing on either the Wazuh manager or the Wazuh agent. This applies when additional security options such as :doc:`Wazuh manager identity verification <security-options/manager-identity-verification>` and :doc:`Wazuh agent identity verification <security-options/agent-identity-verification>` are used.
-
-   **Location**: Wazuh manager log file at ``/var/ossec/logs/ossec.log``.
-
-   **Error log**:
-
-   .. code-block:: none
-
-      2022/01/26 08:25:01 wazuh-authd: ERROR: Unable to read CA certificate file "/var/ossec/etc/rootCA.pem"
-      2022/01/26 08:25:01 wazuh-authd: ERROR: SSL error. Exiting.
-
-   **Resolution**: Ensure the certificate authority file is in the location specified in the ``<ssl_agent_ca>`` section of the Wazuh manager ``/var/ossec/etc/ossec.conf`` file.
-
-   **Location**: Wazuh agent log file
-
-   Refer to the table in the :doc:`Troubleshooting <troubleshooting>` section for the Wazuh agent log file location.
-
-   **Error log**:
-
-   .. code-block:: none
-
-      2022/01/26 08:25:01 wazuh-authd: ERROR: Unable to read CA certificate file "/var/ossec/etc/rootCA.pem"
-      2022/01/26 08:25:01 wazuh-authd: ERROR: SSL error. Exiting.
-
-   **Resolution**: Ensure the certificate authority file is in the location specified in the ``<server_ca_path>`` section of the Wazuh agent configuration file (``ossec.conf``). You can find the ``ossec.conf`` file at the following locations:
-
-   -  Linux/Unix endpoints - ``/var/ossec/etc/ossec.conf``
-   -  macOS endpoint - ``/Library/Ossec/etc/ossec.conf``
-   -  Windows endpoints - ``C:\Program Files (x86)\ossec-agent\ossec.conf``
-
-   Unable to read private key file
-   -------------------------------
-
-   The Wazuh agent may not be able to authenticate with the Wazuh manager if the private key file is missing on the Wazuh agent. This applies when :doc:`Wazuh agent identity verification <security-options/agent-identity-verification>` is used for the Wazuh agent enrollment.
-
-   **Location**: Wazuh agent log file
-
-   Refer to the table in the :doc:`Troubleshooting <troubleshooting>` section for the Wazuh agent log file location.
-
-   **Error log**:
-
-   .. code-block:: none
-
-      2022/01/26 08:57:18 wazuh-agentd: ERROR: Unable to read private key file: /var/ossec/etc/sslagent.key
-      2022/01/26 08:57:18 wazuh-agentd: ERROR: Could not set up SSL connection! Check certification configuration.
-
-   **Resolution**: Ensure the agent private key file is in the location specified in the ``<agent_key_path>`` section of the Wazuh agent ``ossec.conf`` file. You can find the ossec.conf file at the following locations:
-
-   -  Linux/Unix endpoints - ``/var/ossec/etc/ossec.conf``
-   -  macOS endpoint - ``/Library/Ossec/etc/ossec.conf``
-   -  Windows endpoints - ``C:\Program Files (x86)\ossec-agent\ossec.conf``
-
-   Unable to read certificate file
-   -------------------------------
-
-   The Wazuh agent may not be able to authenticate with the Wazuh manager if the signed SSL certificate is missing on the Wazuh agent. This applies when :doc:`Wazuh agent identity verification <security-options/agent-identity-verification>` is used for the Wazuh agent enrollment.
-
-   **Location**: Wazuh agent log file
-
-   Refer to the table in the :doc:`Troubleshooting <troubleshooting>` section for the Wazuh agent log file location.
-
-   **Error log**:
-
-   .. code-block:: none
-
-      2022/01/26 08:54:55 wazuh-agentd: ERROR: Unable to read certificate file (not found): /var/ossec/etc/sslagent.cert
-      2022/01/26 08:54:55 wazuh-agentd: ERROR: Could not set up SSL connection! Check certification configuration.
-
-   **Resolution**: Ensure the agent certificate file is in the location specified in the ``<agent_certificate_path>`` section of the Wazuh agent ``ossec.conf`` file. You can find the ``ossec.conf`` file at the following locations:
-
-   -  Linux/Unix endpoints - ``/var/ossec/etc/ossec.conf``
-   -  macOS endpoint - ``/Library/Ossec/etc/ossec.conf``
-   -  Windows endpoints - ``C:\Program Files (x86)\ossec-agent\ossec.conf``
-
    Invalid password
    ----------------
 

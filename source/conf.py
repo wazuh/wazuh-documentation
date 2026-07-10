@@ -105,7 +105,6 @@ exclude_patterns = [
     'user-manual/capabilities/**',
     'user-manual/indexer-api/**',
     'user-manual/agent/agent-enrollment/deployment-variables/**',
-    'user-manual/agent/agent-enrollment/security-options/**',
     'user-manual/agent/agent-management/remote-upgrading/**',
     'user-manual/agent/agent-management/key-request.rst',
     'user-manual/agent/agent-management/antiflooding.rst',
