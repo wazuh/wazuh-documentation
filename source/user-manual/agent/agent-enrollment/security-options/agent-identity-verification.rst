@@ -133,7 +133,7 @@ Follow these steps to enroll a Linux/Unix endpoint by using certificates for age
       :emphasize-lines: 3,6,7
 
       <client>
-         <server>
+         <manager>
             <address><WAZUH_MANAGER_IP></address>
          </manager>
          <enrollment>
@@ -179,7 +179,7 @@ The Wazuh agent installation directory depends on the architecture of the host.
       <client>
          <manager>
             <address>WAZUH_MANAGER_IP</address>
-         </server>
+         </manager>
          <enrollment>
             <agent_certificate_path><PATH_TO>/sslagent.cert</agent_certificate_path>
             <agent_key_path><PATH_TO>/sslagent.key</agent_key_path>
