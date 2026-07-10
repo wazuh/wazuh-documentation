@@ -487,6 +487,7 @@ main {
       align-items: center;
       justify-content: center;
       height: 100%;
+      max-height: none;
       color: $dark-color-main-text;
       padding: 10px;
       margin-bottom: 0;
