@@ -351,7 +351,7 @@ def redirects_map_to_json_format(redirects_map):
 
   data = []
   for old in redirects_map["deletes"]:
-      data.append(old)
+      data.append( '/' + old)
   formated["deletes"] = data 
 
   return formated
