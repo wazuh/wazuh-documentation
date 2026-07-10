@@ -89,8 +89,6 @@ Generate an SSL certificate on the Wazuh manager signed by the certificate autho
    -  ``rootCA.pem`` is the root certificate for the CA.
    -  The ``-extfile`` and ``-extensions`` options are required to copy the subject and the extensions from ``sslmanager.csr`` to ``sslmanager.cert``.
 
-   **Output**
-
    .. code-block:: none
       :class: output
 
