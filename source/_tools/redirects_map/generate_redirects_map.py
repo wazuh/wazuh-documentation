@@ -25,7 +25,7 @@ redirects_json_file = os.path.join(dirname, '../../' + json_file_name)
 
 [rd_betaVersions,rd_versions,rd_newUrls,rd_removedUrls,rd_redirections] = rd.read_redirects_js(redirects_file)
 
-normalizeOptions = {"strip_query":True}
+normalizeOptions = {"strip_fragment":True}
 
 def processURLs():
   # Expand URLs: {"4.14": "/path/to/file.html"} -> ["4.14/path/to/file.html"]
@@ -54,7 +54,7 @@ def processURLs():
         if redirect_parts not in backward_redirections:
           backward_redirections.append(redirect_parts)
   
-  if "strip_query" in normalizeOptions and normalizeOptions["strip_query"] == True:
+  if "strip_fragment" in normalizeOptions and normalizeOptions["strip_fragment"] == True:
     # Discard possible ambiguous redirects due to query string removal
     forward_redirections = discard_repeated_starting_base_urls(forward_redirections, removedUrls)
     for redir in forward_redirections:
@@ -79,10 +79,10 @@ def discard_repeated_starting_base_urls(redirections, removed):
   for redir in redirections:
     split_path = redir[1].split('#')
     if len(split_path) == 2:
-      if  split_path[0] in start_urls:
-        discarded_paths.append(redir[1])
-      else:
+      if  split_path[0] not in start_urls:
         no_base.append(redir)
+      # Remove the path with fragments
+      discarded_paths.append(redir[1])
 
   for redir in redirections:
     if redir[1] not in discarded_paths:
@@ -126,7 +126,7 @@ def normalizeUrl(originalUrl, options = {}):
   """
   Normalize a given URL so it comply with a standard format
   Defined options:
-  - strip_query bool If true, remove query string from the path
+  - strip_fragment bool If true, remove query string from the path
   """
   normalizedURL = ""
   if isinstance(originalUrl, str):
@@ -147,7 +147,7 @@ def normalizeUrl(originalUrl, options = {}):
       # safe parameter preserves standard URL characters, matching JS encodeURI()
       normalizedURL = quote(normalizedURL, safe="~@#$&()*!+=:;,?/'")
     
-    if "strip_query" in options:
+    if "strip_fragment" in options:
       normalizedURL = normalizedURL.split('#')[0]
 
     return normalizedURL
@@ -163,7 +163,7 @@ def check_encode_uri(url: str) -> bool:
 
 def clean_ambiguous_redirects(redirections):
   """
-  Clean redirections from possible ambiguity, specially when the query string is removed
+  Clean redirections from possible ambiguity, specially when the fragment is removed
   """
   unique_paths = {}
   by_old_path = dict()
@@ -256,7 +256,7 @@ def generate_redirects_map():
       single_chain.append([ [ f_redir[0], f_redir[1] ], [ f_redir[2], f_redir[3] ] ])
       # follow the redirects
       newPath = f_redir[3]
-      if "strip_query" in normalizeOptions and normalizeOptions["strip_query"] == True:
+      if "strip_fragment" in normalizeOptions and normalizeOptions["strip_fragment"] == True:
         newPath = newPath.split('#')[0]
       get_redirect_chain(f_redir[2],newPath,temp_redirect, single_chain,starting_path_checked)
 
@@ -288,7 +288,7 @@ def generate_redirects_map():
   for chain in chains:
     transition_final_destiny = chain[-1][1] # target of the last element in the chain
     newPath = transition_final_destiny[1]
-    if "strip_query" in normalizeOptions and normalizeOptions["strip_query"] == True:
+    if "strip_fragment" in normalizeOptions and normalizeOptions["strip_fragment"] == True:
       newPath = newPath.split('#')[0]
     if [transition_final_destiny[0],newPath] in removedUrls:
       redirect = has_redirect([transition_final_destiny[0],newPath], redirections)
@@ -317,7 +317,7 @@ def get_redirect_chain(release, path, redirections, chain, starting_path_checked
         starting_path_checked[current_starting_path] = 1    
       chain.append([ [ redir[0], redir[1] ], [ redir[2], redir[3] ] ])
       newPath = redir[3]
-      if "strip_query" in normalizeOptions and normalizeOptions["strip_query"] == True:
+      if "strip_fragment" in normalizeOptions and normalizeOptions["strip_fragment"] == True:
         newPath = newPath.split('#')[0]
       get_redirect_chain(redir[2],newPath, redirections, chain, starting_path_checked)
   return []
@@ -351,7 +351,7 @@ def redirects_map_to_json_format(redirects_map):
 
   data = []
   for old in redirects_map["deletes"]:
-      data.append(old)
+      data.append( '/' + old)
   formated["deletes"] = data 
 
   return formated
@@ -408,6 +408,9 @@ with open(os.path.join(dirname, '../../redirects_map.json'), "w", encoding="utf-
   json.dump(redirects_map, json_file, indent=4)
 
 print("Success! '" + json_file_name + "' has been created.")
+
+
+
 
 # generate_redirects_map(): redir_map 
 #   processURLs(): 
