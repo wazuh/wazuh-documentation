@@ -3,8 +3,8 @@
 .. meta::
    :description: The Proof of Concept guide explains how to set up the Wazuh environment to test the different product capabilities. Learn more about it in our documentation.
 
-Wazuh |WAZUH_CURRENT_MINOR| Proof of Concept guide
-==================================================
+Proof of Concept guide
+======================
 
 In this section of the documentation, we provide a set of use cases to explore different Wazuh capabilities. We describe how Wazuh can be configured for threat prevention, detection, and response. Each use case represents a real-world scenario that users can deploy using specific configurations.
 
