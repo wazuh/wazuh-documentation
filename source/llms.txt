@@ -78,6 +78,7 @@ Manage user credentials and access control for the Wazuh platform.
 Configure and use Wazuh security capabilities.
 
 - **[Container security](https://documentation.wazuh.com/current/user-manual/capabilities/container-security/index.md)** Monitor container platforms such as Docker with Wazuh. Covers enabling the Wazuh Docker listener module, its configuration options, and a use case for monitoring Docker runtime activities.
+- **[System inventory](https://documentation.wazuh.com/current/user-manual/capabilities/system-inventory/index.md)** Collect hardware, software, and configuration data from monitored endpoints with the Syscollector module. Covers configuration, viewing inventory data on the dashboard, generating reports, available inventory fields, and IT Hygiene findings.
 
 ## Development & Support
 Resources for getting help for Wazuh.
