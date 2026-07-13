@@ -27,7 +27,7 @@ Monitoring the container engine
 
 Wazuh captures real-time events performed by the Docker engine via its :doc:`Docker listener </user-manual/capabilities/container-security/monitoring-docker>` module. This ensures that no crucial Docker event or operation goes undetected.
 
-:ref:`monitoring_user_interaction_with_docker_resources` demonstrates how Wazuh enhances visibility into the interactions of the container engine with the containers and the images.
+:ref:`monitoring_docker_runtime_activities` demonstrates how Wazuh enhances visibility into the interactions of the container engine with the containers and the images.
 
 .. thumbnail:: /images/getting-started/use-cases/container-security/docker-container-interaction-alerts.png
    :title: Docker container user interaction alerts
@@ -49,8 +49,6 @@ Monitoring containerized application logs
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Wazuh allows organizations to monitor containerized applications. It provides visibility into the applications that are resident in the container. When the application events are forwarded to the Wazuh manager, Security engineers can create :doc:`custom rules </user-manual/ruleset/rules/custom>` that align with the unique requirements of their organization. This facilitates a highly personalized approach that improves overall visibility into the containers and the applications they host.
-
-The :ref:`Monitoring container runtime <monitoring_container_runtime>` documentation has more information about monitoring containerized application logs.
 
 .. thumbnail:: /images/getting-started/use-cases/container-security/monitoring-containerized-application-logs.png
    :title: Monitoring containerized application logs
