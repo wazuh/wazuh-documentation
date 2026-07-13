@@ -74,6 +74,11 @@ Manage user credentials and access control for the Wazuh platform.
 - **[Single Sign-On](https://documentation.wazuh.com/current/user-manual/user-administration/single-sign-on/index.md)** Integrate Wazuh with Identity Providers (IdPs) using SAML to implement Single Sign-On (SSO) with administrator and read-only roles. Covers Okta, Microsoft Entra ID, PingOne, Google Workspace, JumpCloud, OneLogin, Keycloak, and authentik.
 - **[Active Directory and LDAP integration](https://documentation.wazuh.com/current/user-manual/user-administration/ldap.md)** Configure LDAP or Microsoft Active Directory to provide authentication and authorization for users accessing the Wazuh dashboard, and map LDAP groups to the administrator and read-only roles.
 
+### Capabilities
+Configure and use Wazuh security capabilities.
+
+- **[Container security](https://documentation.wazuh.com/current/user-manual/capabilities/container-security/index.md)** Monitor container platforms such as Docker with Wazuh. Covers enabling the Wazuh Docker listener module, its configuration options, and a use case for monitoring Docker runtime activities.
+
 ## Development & Support
 Resources for getting help for Wazuh.
 
