@@ -170,7 +170,7 @@ The Wazuh agent installation directory depends on the architecture of the host.
 
 #. Using an administrator account, modify the Wazuh agent configuration file located at ``C:\Program Files (x86)\ossec-agent\ossec.conf`` and include the following:
 
-   -  Wazuh manager IP address or FQDN in the ``<client><server><address>`` section.
+   -  Wazuh manager IP address or FQDN in the ``<client><manager><address>`` section.
    -  The local path to the agent certificate and key is in the ``<client><enrollment>`` section.
 
    .. code-block:: xml
@@ -194,14 +194,14 @@ The Wazuh agent installation directory depends on the architecture of the host.
 
          .. code-block:: pwsh-session
 
-            # Restart-Service -Name wazuh
+            > Restart-Service -Name wazuh
 
       .. group-tab:: CMD (as an administrator)
 
          .. code-block:: doscon
 
-            # net stop wazuh
-            # net start wazuh
+            > net stop wazuh
+            > net start wazuh
 
 #. Click on the upper-left menu icon and navigate to **Server management** > **Endpoints Summary** on the Wazuh dashboard to check for the newly enrolled Wazuh agent and its connection status. If the enrollment was successful, you will have an interface similar to the image below.
 
@@ -220,7 +220,7 @@ Follow these steps to enroll a macOS endpoint by using certificates for Wazuh ag
 
 #. Launch the terminal, obtain root access, edit the Wazuh agent configuration file located at ``/Library/Ossec/etc/ossec.conf``, and include the following:
 
-   -  The Wazuh manager IP address or FQDN in the ``<client><server><address>`` section.
+   -  The Wazuh manager IP address or FQDN in the ``<client><manager><address>`` section.
    -  The local path to the agent certificate and key is in the ``<client><enrollment>`` section.
 
    .. code-block:: xml

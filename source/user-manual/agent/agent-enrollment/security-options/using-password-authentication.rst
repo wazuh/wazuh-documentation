@@ -33,20 +33,20 @@ Before a Wazuh agent can be enrolled in the Wazuh manager using the password aut
 
    -  **Recommended** - Set your password. This is done by creating the ``/var/wazuh-manager/etc/authd.pass`` file on the Wazuh manager with your password.
 
-      -  Replace ``<CUSTOM_PASSWORD>`` with your chosen Wazuh agent enrollment password and run the following command:
+      #. Replace ``<CUSTOM_PASSWORD>`` with your chosen Wazuh agent enrollment password and run the following command:
 
          .. code-block:: console
 
             # echo "<CUSTOM_PASSWORD>" > /var/wazuh-manager/etc/authd.pass
 
-      -  Change the ``authd.pass`` file permissions and ownership.
+      #. Change the ``authd.pass`` file permissions and ownership.
 
          .. code-block:: console
 
             # chmod 640 /var/wazuh-manager/etc/authd.pass
             # chown root:wazuh-manager /var/wazuh-manager/etc/authd.pass
 
-      -  Restart the Wazuh service for the changes to take effect.
+      #. Restart the Wazuh service for the changes to take effect.
 
          .. code-block:: console
 
@@ -54,13 +54,13 @@ Before a Wazuh agent can be enrolled in the Wazuh manager using the password aut
 
    -  Alternatively, the Wazuh manager can generate a random enrollment password.
 
-      -  Restart the Wazuh manager service without creating the ``/var/wazuh-manager/etc/authd.pass`` file manually:
+      #. Restart the Wazuh manager service without creating the ``/var/wazuh-manager/etc/authd.pass`` file manually:
 
          .. code-block:: console
 
             # systemctl restart wazuh-manager
 
-      -  Run the following command to confirm that the Wazuh manager generated the password:
+      #. Run the following command to confirm that the Wazuh manager generated the password:
 
          .. code-block:: console
 
@@ -71,7 +71,7 @@ Before a Wazuh agent can be enrolled in the Wazuh manager using the password aut
 
             2026/07/09 16:15:06 wazuh-manager-authd: INFO: Accepting connections on port 1515. A new authentication password was generated and written to 'etc/authd.pass'
 
-      -  Run the following command to view the generated password:
+      #. Run the following command to view the generated password:
 
          .. code-block:: console
 
@@ -187,7 +187,7 @@ The Wazuh agent installation directory depends on the host's architecture.
         <authorization_pass_path><PATH_TO_PASSWORD_FILE></authorization_pass_path>
       </enrollment>
 
-#. Add the Wazuh manager IP address or fully qualified domain name (FQDN) in the ``<client><server><address>`` section of the Wazuh agent configuration file in ``C:\Program Files (x86)\ossec-agent\ossec.conf``. Replace ``<WAZUH_MANAGER_IP>`` with the IP address or FQDN of the Wazuh manager.
+#. Add the Wazuh manager IP address or fully qualified domain name (FQDN) in the ``<client><manager><address>`` section of the Wazuh agent configuration file in ``C:\Program Files (x86)\ossec-agent\ossec.conf``. Replace ``<WAZUH_MANAGER_IP>`` with the IP address or FQDN of the Wazuh manager.
 
    .. code-block:: xml
       :emphasize-lines: 3
@@ -207,7 +207,7 @@ The Wazuh agent installation directory depends on the host's architecture.
 
          .. code-block:: pwsh-session
 
-            # Restart-Service -Name wazuh
+            > Restart-Service -Name wazuh
 
       .. group-tab:: CMD (as an administrator)
 
