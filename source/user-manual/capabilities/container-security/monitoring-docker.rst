@@ -43,7 +43,7 @@ Prerequisites
 
       $ sudo curl -sSL https://get.docker.com/ | sh
 
-#. Install the `Python Docker library <https://pypi.org/project/docker/>`__ and other dependencies:
+#. Install `Python Docker library <https://pypi.org/project/docker/>`__ and other dependencies:
 
    .. code-block:: console
 
@@ -129,21 +129,21 @@ The scheduling options allow you to configure when the Wazuh Docker listener mod
 +------------------+------------------------------------------------+---------------+------------------------------------+
 | ``day``          | Day of the month to run the scan. This option  | n/a           | Day of the month [1..31]           |
 |                  | is not compatible with the ``wday`` option.    |               |                                    |
-|                  | Note: When the ``day`` option is set, the      |               |                                    |
+|                  | **Note:** When the ``day`` option is set, the  |               |                                    |
 |                  | interval value must be a multiple of months.   |               |                                    |
 |                  | The default interval is set to a month.        |               |                                    |
 +------------------+------------------------------------------------+---------------+------------------------------------+
 | ``wday``         | Day of the week to run the scan. This option   | n/a           | Day of the week: sunday/sun,       |
 |                  | is not compatible with the ``day`` option.     |               | monday/mon, tuesday/tue,           |
-|                  | Note: When the ``wday`` option is set, the     |               | wednesday/wed, thursday/thu,       |
+|                  | **Note:** When the ``wday`` option is set, the |               | wednesday/wed, thursday/thu,       |
 |                  | interval value must be a multiple of weeks.    |               | friday/fri, saturday/sat           |
 |                  | The default interval is set to a week.         |               |                                    |
 +------------------+------------------------------------------------+---------------+------------------------------------+
 | ``time``         | Time of the day to run the scan. Must be       | n/a           | Time of day [hh:mm]                |
-|                  | represented in the format hh:mm. Note: When    |               |                                    |
-|                  | only the ``time`` option is set, the interval  |               |                                    |
-|                  | value must be a multiple of days or weeks. The |               |                                    |
-|                  | default interval is set to a day.              |               |                                    |
+|                  | represented in the format hh:mm. **Note:**     |               |                                    |
+|                  | When only the ``time`` option is set, the      |               |                                    |
+|                  | interval value must be a multiple of days or   |               |                                    |
+|                  | weeks. The default interval is set to a day.   |               |                                    |
 +------------------+------------------------------------------------+---------------+------------------------------------+
 
 Example configuration
