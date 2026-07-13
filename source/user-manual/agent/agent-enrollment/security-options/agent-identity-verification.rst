@@ -89,8 +89,8 @@ Wazuh manager configuration
 
    .. code-block:: console
 
-      # scp sslagent.key  ubuntu@192.168.xxx.xxx:/home/ubuntu
-      # scp sslagent.cert ubuntu@192.168.xxx.xxx:/home/ubuntu
+      # scp sslagent.key  ubuntu@<IP_ADDRESS>:/home/ubuntu
+      # scp sslagent.cert ubuntu@<IP_ADDRESS>:/home/ubuntu
 
 #. Ensure that the ``rootCA.pem`` file is in the ``/var/wazuh-manager/etc/`` directory on the Wazuh manager.
 

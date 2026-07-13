@@ -99,8 +99,8 @@ Follow these steps to enroll a Linux/Unix endpoint with password authentication:
 
       # echo "<CUSTOM_PASSWORD>" > /var/ossec/etc/authd.pass
 
-   -  Replace ``<CUSTOM_PASSWORD>`` with the Wazuh agent enrollment password from the Wazuh manager.
-   -  Set the file permissions for the ``authd.pass`` file to 640, and the owner should be root. You can configure the permissions and ownership by running the commands below:
+   #. Replace ``<CUSTOM_PASSWORD>`` with the Wazuh agent enrollment password from the Wazuh manager.
+   #. Set the file permissions for the ``authd.pass`` file to 640, and the owner should be root. You can configure the permissions and ownership by running the commands below:
 
       .. code-block:: console
 
@@ -235,8 +235,8 @@ Follow the steps below to enroll a macOS endpoint with password authentication:
 
       # echo "<CUSTOM_PASSWORD>" > /Library/Ossec/etc/authd.pass
 
-   -  Replace ``<CUSTOM_PASSWORD>`` with the Wazuh agent enrollment password created on the Wazuh manager.
-   -  Set the file permissions for the ``authd.pass`` file to 640, and the owner should be root. Configure the permissions and ownership by running the commands below:
+   #. Replace ``<CUSTOM_PASSWORD>`` with the Wazuh agent enrollment password created on the Wazuh manager.
+   #. Set the file permissions for the ``authd.pass`` file to 640, and the owner should be root. Configure the permissions and ownership by running the commands below:
 
       .. code-block:: console
 

@@ -93,7 +93,7 @@ Generate an SSL certificate on the Wazuh manager signed by the certificate autho
       :class: output
 
       Certificate request self-signature ok
-      subject=C=US, CN=192.168.xxx.xxx
+      subject=C=US, CN=<WAZUH_MANAGER_IP>
 
 #. Copy the newly signed certificate and key files to ``/var/wazuh-manager/etc`` on the Wazuh manager:
 
