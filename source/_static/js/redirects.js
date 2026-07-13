@@ -107,6 +107,12 @@ newUrls['5.0'] = [
   '/user-manual/data-analysis/detectors.html',
   '/user-manual/data-analysis/findings.html',
   '/user-manual/data-analysis/detection-workflow.html',
+  '/transitioning-from-4x-to-5x/index.html',
+  '/transitioning-from-4x-to-5x/transition-plan.html',
+  '/transitioning-from-4x-to-5x/wazuh-indexer.html',
+  '/transitioning-from-4x-to-5x/wazuh-manager.html',
+  '/transitioning-from-4x-to-5x/wazuh-dashboard.html',
+  '/proof-of-concept-guide/poc-security-configuration-assessment.html',
 ];
 
 /* Redirections 4.14—5.0  */

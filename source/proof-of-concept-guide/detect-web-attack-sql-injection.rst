@@ -6,22 +6,18 @@
 Detecting an SQL injection attack
 =================================
 
-You can use Wazuh to detect SQL injection attacks from web server logs that contain patterns like ``select``, ``union``, and other common SQL injection patterns.
-
-SQL injection is an attack in which a threat actor inserts malicious code into strings transmitted to a database server for parsing and execution. A successful SQL injection attack gives unauthorized access to confidential information contained in the database.
-
-In this use case, you simulate an SQL injection attack against an Ubuntu endpoint and detect it with Wazuh.
+You can use Wazuh to detect SQL injection attacks in web server logs by analyzing patterns such as ``select``, ``union``, and other common SQL injection patterns. SQL injection is an attack in which a threat actor inserts malicious code into strings transmitted to a database server for parsing and execution. A successful SQL injection attack gives unauthorized access to confidential information contained in the database. In this use case, you simulate an SQL injection attack against an Ubuntu endpoint and detect it with Wazuh.
 
 Infrastructure
 --------------
 
-+---------------+-------------------------------------------------------------+
-| Endpoint      | Description                                                 |
-+===============+=============================================================+
-| Ubuntu 22.04  | Victim endpoint running an Apache 2.4.54 web server.        |
-+---------------+-------------------------------------------------------------+
-| RHEL 9.0      | Attacker endpoint that launches the SQL injection attack.   |
-+---------------+-------------------------------------------------------------+
++--------------+-----------------------------------------------------------+
+| Endpoint     | Description                                               |
++==============+===========================================================+
+| Ubuntu 24.04 | Victim endpoint running an Apache 2.4.54 web server.      |
++--------------+-----------------------------------------------------------+
+| RHEL 9.0     | Attacker endpoint that launches the SQL injection attack. |
++--------------+-----------------------------------------------------------+
 
 Configuration
 -------------
@@ -38,7 +34,7 @@ Perform the following steps to install Apache and configure the Wazuh agent to m
       $ sudo apt update
       $ sudo apt install apache2
 
-#. If the firewall is enabled, modify it to allow external access to web ports. Skip this step if the firewall is disabled.
+#. If the firewall is enabled, modify it to allow external access to web ports. Skip this step if the firewall is disabled:
 
    .. code-block:: console
 
@@ -78,29 +74,28 @@ Perform the following steps to install Apache and configure the Wazuh agent to m
 Attack emulation
 ----------------
 
-Replace ``<UBUNTU_IP>`` with the appropriate IP address and execute the following command from the attacker endpoint:
+Replace ``<UBUNTU_IP>`` with the appropriate IP address and run the following command from the attacker endpoint:
 
 .. code-block:: console
 
-   $ curl -XGET "http://<UBUNTU_IP>/users/?id=SELECT+*+FROM+users";
+   $ curl -v "http://<UBUNTU_IP>?id=1%20UNION%20SELECT%201,2,3--"
 
-The expected result here is an alert with rule ID 31103 but a successful SQL injection attempt generates an alert with rule ID 31106.
+The default Wazuh ruleset detects the SQL injection attempt, so no custom rules are required. The expected result is a finding with an ``event.dataset`` of ``apache-access``.
 
-Visualize the alerts
---------------------
+Visualize the findings
+----------------------
 
-You can visualize the alert data in the Wazuh dashboard. To do this, go to the Threat Hunting module and add the filters in the search bar to query the alerts.
+You can visualize the findings on the Wazuh dashboard. Perform the following:
 
--  ``rule.id:31103``
+#. Go to **Threat intelligence** > **Threat Hunting** and select **Findings**.
 
-   .. thumbnail:: /images/poc/SQL-injection-rule-31103.png
-      :title: SQL injection rule 31103 alert
-      :align: center
-      :width: 80%
+#. Click **+ Add filter**. Then filter by **event.dataset**.
 
--  ``rule.id:31106``
+#. In the **Operator** field, select **is**.
 
-   .. thumbnail:: /images/poc/SQL-injection-rule-31106.png
-      :title: SQL injection rule 31106 alert
-      :align: center
-      :width: 80%
+#. Input ``apache-access``.
+
+.. thumbnail:: /images/poc/sql-injection-findings.png
+   :title: SQL injection attack findings
+   :align: center
+   :width: 80%

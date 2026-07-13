@@ -13,6 +13,8 @@ All notable changes to this project will be documented in this file.
 - Added ``integrity_interval`` to the SCA and the syscollector ``synchronization`` configuration. ([#9164](https://github.com/wazuh/wazuh-documentation/pull/9164))
 - Added *Upgrading to Wazuh 5.x* sub-section to the Upgrade guide. ([#9435](https://github.com/wazuh/wazuh-documentation/pull/9435))
 - Added the *Data analysis* documentation to the *User manual*. ([#9743](https://github.com/wazuh/wazuh-documentation/pull/9743))
+- Added the *Transitioning from Wazuh 4.x to 5.x* documentation. ([#9772](https://github.com/wazuh/wazuh-documentation/pull/9772))
+- Added the *Security configuration assessment* use case to the *Proof of concept guide*. ([#9777](https://github.com/wazuh/wazuh-documentation/pull/9777))
 
 ### Changed
 
@@ -21,13 +23,15 @@ All notable changes to this project will be documented in this file.
 - Updated the FIM documentation to change the default FIM who-data mode provider to eBPF. ([#8805](https://github.com/wazuh/wazuh-documentation/pull/8805))
 - Updated references in steps and links to 5.x. ([#8853](https://github.com/wazuh/wazuh-documentation/pull/8853)) ([#9658](https://github.com/wazuh/wazuh-documentation/pull/9658)) ([#9660](https://github.com/wazuh/wazuh-documentation/pull/9660))
 - Updated version numbers in commands in the *Installation from sources* documentation. ([#9397](https://github.com/wazuh/wazuh-documentation/pull/9397))
-- Updated the *Installation guide*. ([#9545](https://github.com/wazuh/wazuh-documentation/pull/9545)) ([#9682](https://github.com/wazuh/wazuh-documentation/pull/9682)) ([#9692](https://github.com/wazuh/wazuh-documentation/pull/9692)) ([#9736](https://github.com/wazuh/wazuh-documentation/pull/9736))
+- Updated the *Installation guide*. ([#9545](https://github.com/wazuh/wazuh-documentation/pull/9545)) ([#9682](https://github.com/wazuh/wazuh-documentation/pull/9682)) ([#9692](https://github.com/wazuh/wazuh-documentation/pull/9692)) ([#9736](https://github.com/wazuh/wazuh-documentation/pull/9736)) ([#9771](https://github.com/wazuh/wazuh-documentation/pull/9771))
 - Updated the *Installation alternatives* documentation. ([#9587](https://github.com/wazuh/wazuh-documentation/pull/9587)) ([#9576](https://github.com/wazuh/wazuh-documentation/pull/9576)) ([#9589](https://github.com/wazuh/wazuh-documentation/pull/9589)) ([#9591](https://github.com/wazuh/wazuh-documentation/pull/9591)) ([#9591](https://github.com/wazuh/wazuh-documentation/pull/9595)) ([#9597](https://github.com/wazuh/wazuh-documentation/pull/9597)) ([#9606](https://github.com/wazuh/wazuh-documentation/pull/9606)) ([#9607](https://github.com/wazuh/wazuh-documentation/pull/9607)) ([#9674](https://github.com/wazuh/wazuh-documentation/pull/9674))
 - Updated the *Wazuh agent* documentation in *User manual*. ([#9665](https://github.com/wazuh/wazuh-documentation/pull/9665)) ([#9669](https://github.com/wazuh/wazuh-documentation/pull/9669)) ([#9701](https://github.com/wazuh/wazuh-documentation/pull/9701)) ([#9702](https://github.com/wazuh/wazuh-documentation/pull/9702))
 - Updated the *Wazuh dashboard* documentation in *User manual*. ([#9688](https://github.com/wazuh/wazuh-documentation/pull/9688))
 - Updated the *Quickstart* documentation. ([#9680](https://github.com/wazuh/wazuh-documentation/pull/9680)) ([#9769](https://github.com/wazuh/wazuh-documentation/pull/9769))
 - Updated the *Wazuh server* documentation to the new *Wazuh manager* documentation in the *User manual*. ([#9728](https://github.com/wazuh/wazuh-documentation/pull/9728)) ([#9737](https://github.com/wazuh/wazuh-documentation/pull/9737))
+- Moved the *Transitioning from Wazuh 4.x to 5.x* section to the end of the documentation index and displayed its full title on the home page. ([#9792](https://github.com/wazuh/wazuh-documentation/pull/9792))
 - Updated the *User administration* documentation. ([#9745](https://github.com/wazuh/wazuh-documentation/pull/9745)) ([#9758](https://github.com/wazuh/wazuh-documentation/pull/9758)) ([#9765](https://github.com/wazuh/wazuh-documentation/pull/9765)) ([#9766](https://github.com/wazuh/wazuh-documentation/pull/9766)) ([#9775](https://github.com/wazuh/wazuh-documentation/pull/9775))
+- Updated the *Proof of concept guide* use cases for File integrity monitoring, Vulnerability detection, Monitoring Docker events, Detecting an SQL injection attack, and Monitoring AWS infrastructure. ([#9777](https://github.com/wazuh/wazuh-documentation/pull/9777))
 
 ### Removed
 
