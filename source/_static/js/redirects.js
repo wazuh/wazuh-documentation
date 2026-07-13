@@ -177,6 +177,11 @@ redirections.push(
     'target': ['4.14=>5.0'],
     '4.14': '/user-manual/manager/integration-with-external-apis.html',
     '5.0': '/user-manual/manager/index.html',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/user-manual/capabilities/system-inventory/using-syscollector-information-to-trigger-alerts.html',
+    '5.0': '/user-manual/capabilities/system-inventory/syscollector-information-findings.html',
   }
 );
 

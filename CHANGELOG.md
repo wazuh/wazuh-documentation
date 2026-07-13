@@ -32,6 +32,7 @@ All notable changes to this project will be documented in this file.
 - Updated the *User administration* documentation. ([#9745](https://github.com/wazuh/wazuh-documentation/pull/9745)) ([#9758](https://github.com/wazuh/wazuh-documentation/pull/9758)) ([#9765](https://github.com/wazuh/wazuh-documentation/pull/9765)) ([#9766](https://github.com/wazuh/wazuh-documentation/pull/9766)) ([#9775](https://github.com/wazuh/wazuh-documentation/pull/9775))
 - Updated the *Proof of concept guide* use cases for File integrity monitoring, Vulnerability detection, Monitoring Docker events, Detecting an SQL injection attack, and Monitoring AWS infrastructure. ([#9777](https://github.com/wazuh/wazuh-documentation/pull/9777))
 - Updated the *Container security* documentation. ([#9816](https://github.com/wazuh/wazuh-documentation/pull/9816)) ([#9819](https://github.com/wazuh/wazuh-documentation/pull/9819))
+- Updated the *System inventory* documentation. ([#9820](https://github.com/wazuh/wazuh-documentation/pull/9820))
 
 ### Removed
 

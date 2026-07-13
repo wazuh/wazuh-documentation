@@ -12,6 +12,7 @@ This section shows detailed explanation of the Wazuh capabilities and their conf
    :maxdepth: 2
 
    container-security/index
+   system-inventory/index
 
 ..
    file-integrity/index
@@ -21,6 +22,5 @@ This section shows detailed explanation of the Wazuh capabilities and their conf
    log-data-collection/index
    vulnerability-detection/index
    command-monitoring/index
-   system-inventory/index
    system-calls-monitoring/index
    agentless-monitoring/index
