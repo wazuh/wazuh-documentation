@@ -13,7 +13,7 @@ All notable changes to this project will be documented in this file.
 - Added ``integrity_interval`` to the SCA and the syscollector ``synchronization`` configuration. ([#9164](https://github.com/wazuh/wazuh-documentation/pull/9164))
 - Added *Upgrading to Wazuh 5.x* sub-section to the Upgrade guide. ([#9435](https://github.com/wazuh/wazuh-documentation/pull/9435))
 - Added the *Data analysis* documentation to the *User manual*. ([#9743](https://github.com/wazuh/wazuh-documentation/pull/9743))
-- Added the *Transitioning from Wazuh 4.x to 5.x* documentation. ([#9772](https://github.com/wazuh/wazuh-documentation/pull/9772)) [#9792](https://github.com/wazuh/wazuh-documentation/pull/9792)
+- Added the *Transitioning from Wazuh 4.x to 5.x* documentation. ([#9772](https://github.com/wazuh/wazuh-documentation/pull/9772)) ([#9792](https://github.com/wazuh/wazuh-documentation/pull/9792)) ([#9817](https://github.com/wazuh/wazuh-documentation/pull/9817))
 - Added the *Security configuration assessment* use case to the *Proof of concept guide*. ([#9777](https://github.com/wazuh/wazuh-documentation/pull/9777))
 
 ### Changed
