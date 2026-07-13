@@ -11,7 +11,7 @@ Container security involves implementing measures and practices to ensure the pr
 Wazuh enables users to monitor container platforms such as :doc:`Docker <monitoring-docker>`, providing comprehensive visibility into container resources, including `container health monitoring <https://wazuh.com/blog/docker-container-security-monitoring-with-wazuh/>`__. Wazuh can also monitor `audit Kubernetes <https://wazuh.com/blog/auditing-kubernetes-with-wazuh/>`__ infrastructure, supporting a holistic approach to container security and monitoring.
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
 
    monitoring-docker
    use-cases
