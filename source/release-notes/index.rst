@@ -11,6 +11,7 @@ This section summarizes the most important features of each Wazuh release.
 ==============================================   ====================
 Wazuh version                                    Release date
 ==============================================   ====================
+:doc:`5.1.0 </release-notes/release-5-1-0>`      TBD
 :doc:`5.0.1 </release-notes/release-5-0-1>`      TBD
 :doc:`5.0.0 </release-notes/release-5-0-0>`      TBD
 :doc:`4.14.7 </release-notes/release-4-14-7>`    TBD
