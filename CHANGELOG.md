@@ -49,13 +49,17 @@ All notable changes to this project will be documented in this file.
 - Removed deprecated configuration variables in the *Deployment with Puppet* documentation. ([#9378](https://github.com/wazuh/wazuh-documentation/pull/9378))
 - Removed Osquery references as this capability is now deprecated. ([#8958](https://github.com/wazuh/wazuh-documentation/pull/8958))
 
+## [v4.14.8]
+
+- Support for Wazuh 4.14.8
+
 ## [v4.14.7]
 
 - Support for Wazuh 4.14.7
 
 ## [v4.14.6]
 
-- Support for Wazuh 4.14.6
+- **Post-release**: Fixed dead link in release notes. ([#9761](https://github.com/wazuh/wazuh-documentation/pull/9761))
 
 ## [v4.14.5]
 
