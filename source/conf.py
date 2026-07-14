@@ -513,6 +513,12 @@ emptyTocNodes = json.dumps(emptyTocNodes)
 
 compilation_time = 0
 
+docu_environment = "other"
+if (tags.has("production")):
+    docu_environment = "production"
+if (tags.has("dev")):
+    docu_environment = "dev"
+
 def setup(app):
 
     current_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), theme_assets_path)
@@ -794,7 +800,7 @@ html_context = {
     "github_repo": "wazuh-documentation",
     "conf_py_path": "/source/",
     "github_version": version,
-    "production": production,
+    "environment": docu_environment,
     "apiURL_server": apiURL_server,
     "apiURL_indexer": apiURL_indexer,
     "compilation_ts": compilation_time,
