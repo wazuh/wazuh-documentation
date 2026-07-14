@@ -43,7 +43,7 @@ Wazuh manager
 -  `#36296 <https://github.com/wazuh/wazuh/pull/36296>`__ Improved cluster non-merged file path validation during worker file processing.
 -  `#36460 <https://github.com/wazuh/wazuh/pull/36460>`__ Improved cluster node name format validation in the hello handler.
 -  `#35475 <https://github.com/wazuh/wazuh/pull/35475>`__ Fixed missing ``agent.host.ip`` field in inventory documents when the agent IP is empty.
--  `#6726 <https://github.com/wazuh/external-devel-requests/issues/6726>`__ Fixed stale agent ``synced`` status after hot reload on cluster worker nodes.
+-  `#36164 <https://github.com/wazuh/wazuh/pull/36164>`__ Fixed stale agent ``synced`` status after hot reload on cluster worker nodes.
 
 Wazuh agent
 ^^^^^^^^^^^

@@ -34,11 +34,22 @@ Step-by-step guides for installing Wazuh central components and agents across va
 - **[Deployment Alternatives](https://documentation.wazuh.com/current/deployment-options/index.md)** Install using different methods like Virtual Machines (OVA), Docker, or Kubernetes.
 - **[Deployment with Ansible](https://documentation.wazuh.com/current/deployment-options/deploying-with-ansible/index.md)** Automate your Wazuh deployment using Ansible playbooks for configuration management.
 - **[Offline Installation Guide](https://documentation.wazuh.com/current/deployment-options/offline-installation/index.md)** Install Wazuh in environments without direct internet access.
+- **[Transitioning from Wazuh 4.x to 5.x](https://documentation.wazuh.com/current/transitioning-from-4x-to-5x/index.md)** Deploy a new Wazuh 5.x environment using an existing Wazuh 4.x deployment as the source for supported configuration and security settings. Covers the transition plan, and recreating supported configuration for the Wazuh indexer, manager, and dashboard.
 
 ### Configuration & Management
 Fine-tune settings and manage the platform's operation.
 
 - **[User Manual](https://documentation.wazuh.com/current/user-manual/index.md)** Comprehensive guide to configuring, operating, and getting the most out of Wazuh.
+
+## Proof of Concept guide
+Hands-on use cases for exploring Wazuh capabilities in a lab environment, covering threat prevention, detection, and response.
+
+- **[File Integrity Monitoring](https://documentation.wazuh.com/current/proof-of-concept-guide/poc-file-integrity-monitoring.md)** Detect the creation, modification, and deletion of files in monitored directories on Ubuntu and Windows endpoints using who-data audit.
+- **[Vulnerability Detection](https://documentation.wazuh.com/current/proof-of-concept-guide/poc-vulnerability-detection.md)** Detect unpatched Common Vulnerabilities and Exposures (CVEs) in applications and operating systems on a monitored endpoint.
+- **[Security Configuration Assessment](https://documentation.wazuh.com/current/proof-of-concept-guide/poc-security-configuration-assessment.md)** Evaluate endpoints against hardening standards like CIS benchmarks, and create and deploy a custom SCA policy.
+- **[Monitoring Docker Events](https://documentation.wazuh.com/current/proof-of-concept-guide/monitoring-docker.md)** Identify security incidents across Docker containers on an Ubuntu endpoint using the `docker-listener` module.
+- **[Detecting an SQL Injection Attack](https://documentation.wazuh.com/current/proof-of-concept-guide/detect-web-attack-sql-injection.md)** Simulate and detect an SQL injection attack from Apache web server logs on an Ubuntu endpoint.
+- **[Monitoring AWS Infrastructure](https://documentation.wazuh.com/current/proof-of-concept-guide/aws-infrastructure-monitoring.md)** Collect and analyze Amazon CloudTrail logs from an S3 bucket using the Wazuh `aws-s3` module.
 
 ## Management & Administration
 Manage your Wazuh infrastructure, users, and data.
@@ -53,13 +64,21 @@ Administer the core Wazuh infrastructure, including the user interface (dashboar
 ### Agents
 Manage Wazuh agents across your environment.
 
-- **[Wazuh Agent](https://documentation.wazuh.com/current/user-manual/agent/index.md)** Enroll and manage agents across your environment. Covers enrollment methods, agent life cycle, connection verification, and administrative tasks such as upgrading and querying agent configuration.
+- **[Wazuh Agent](https://documentation.wazuh.com/current/user-manual/agent/index.md)** Enroll and manage agents across your environment. Covers enrollment methods, additional enrollment security options such as password authentication and manager/agent identity verification, agent life cycle, connection verification, enrollment troubleshooting, and administrative tasks such as upgrading, querying agent configuration, and anti-tampering to prevent unauthorized agent removal.
 
 ### User Administration
 Manage user credentials and access control for the Wazuh platform.
 
 - **[Password Management](https://documentation.wazuh.com/current/user-manual/user-administration/password-management.md)** Use the Wazuh passwords tool to change passwords for Wazuh indexer users and Wazuh manager API users in all-in-one and distributed deployments.
 - **[RBAC — Create and map internal users](https://documentation.wazuh.com/current/user-manual/user-administration/rbac.md)** Create Wazuh indexer internal users and map them to roles and policies using the Wazuh dashboard.
+- **[Single Sign-On](https://documentation.wazuh.com/current/user-manual/user-administration/single-sign-on/index.md)** Integrate Wazuh with Identity Providers (IdPs) using SAML to implement Single Sign-On (SSO) with administrator and read-only roles. Covers Okta, Microsoft Entra ID, PingOne, Google Workspace, JumpCloud, OneLogin, Keycloak, and authentik.
+- **[Active Directory and LDAP integration](https://documentation.wazuh.com/current/user-manual/user-administration/ldap.md)** Configure LDAP or Microsoft Active Directory to provide authentication and authorization for users accessing the Wazuh dashboard, and map LDAP groups to the administrator and read-only roles.
+
+### Capabilities
+Configure and use Wazuh security capabilities.
+
+- **[Container security](https://documentation.wazuh.com/current/user-manual/capabilities/container-security/index.md)** Monitor container platforms such as Docker with Wazuh. Covers enabling the Wazuh Docker listener module, its configuration options, and a use case for monitoring Docker runtime activities.
+- **[System inventory](https://documentation.wazuh.com/current/user-manual/capabilities/system-inventory/index.md)** Collect hardware, software, and configuration data from monitored endpoints with the Syscollector module. Covers configuration, viewing inventory data on the dashboard, generating reports, available inventory fields, and IT Hygiene findings.
 
 ## Development & Support
 Resources for getting help for Wazuh.
