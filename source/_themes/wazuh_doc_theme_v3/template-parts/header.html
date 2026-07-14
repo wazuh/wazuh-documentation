@@ -175,7 +175,7 @@
               {% endif %}
             </ul>
               
-            {% if theme_include_version_selector and pagename != 'index' %}
+            {% if theme_include_version_selector and pagename != 'index' and pagename != 'not_found' %}
             {% include "template-parts/version-selector.html" %}
             {% endif %}
           {% else %}
