@@ -255,13 +255,14 @@ main {
           margin-bottom: 5px;
           @include media-min(md) {
             overflow: hidden;
-            padding-bottom: 37px;
+            padding-bottom: 5px;
             display: -webkit-box;
-            -webkit-line-clamp: 1;
+            -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             text-overflow: ellipsis;
             line-height: 1.5;
-            height: 1.8em;
+            height: auto;
+            max-height: 3.6em;
           }
         }
 

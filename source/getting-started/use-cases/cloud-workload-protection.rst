@@ -84,8 +84,7 @@ Some additional use cases for using Wazuh to monitor cloud-native applications a
 
 -  `Auditing Kubernetes with Wazuh <https://wazuh.com/blog/auditing-kubernetes-with-wazuh/>`__
 -  `Monitoring GKE audit logs <https://wazuh.com/blog/monitoring-gke-audit-logs/>`__
--  :ref:`Monitoring user interaction with Docker resources <monitoring_user_interaction_with_docker_resources>`
--  :ref:`Monitoring container runtime <monitoring_container_runtime>`
+-  :ref:`Monitoring Docker runtime activities <monitoring_docker_runtime_activities>`
 
 Furthermore, the Wazuh integration with cloud service providers enables monitoring and analysis of cloud-native application logs, ensuring comprehensive visibility into the environment and facilitating effective security operations.
 
