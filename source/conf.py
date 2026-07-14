@@ -102,12 +102,18 @@ exclude_patterns = [
     'deployment-options/wazuh-from-sources/**',
     'deployment-options/deploying-with-puppet/**',
     'user-manual/api/**',
-    'user-manual/capabilities/**',
+    'user-manual/capabilities/active-response/**',
+    'user-manual/capabilities/agentless-monitoring/**',
+    'user-manual/capabilities/command-monitoring/**',
+    'user-manual/capabilities/file-integrity/**',
+    'user-manual/capabilities/log-data-collection/**',
+    'user-manual/capabilities/malware-detection/**',
+    'user-manual/capabilities/sec-config-assessment/**',
+    'user-manual/capabilities/system-calls-monitoring/**',
+    'user-manual/capabilities/vulnerability-detection/**',
     'user-manual/indexer-api/**',
     'user-manual/agent/agent-enrollment/deployment-variables/**',
-    'user-manual/agent/agent-enrollment/security-options/**',
     'user-manual/agent/agent-management/remote-upgrading/**',
-    'user-manual/agent/agent-management/anti-tampering.rst',
     'user-manual/agent/agent-management/key-request.rst',
     'user-manual/agent/agent-management/antiflooding.rst',
     'user-manual/agent/agent-management/labels.rst',
@@ -116,14 +122,22 @@ exclude_patterns = [
     'user-manual/manager/alert-management.rst',
     'user-manual/manager/event-logging.rst',
     'user-manual/manager/integration-with-external-apis.rst',
-    'user-manual/user-administration/single-sign-on/**',
-    'user-manual/user-administration/ldap.rst',
     'user-manual/wazuh-indexer/**',
     'user-manual/wazuh-indexer-cluster/**',
     'user-manual/wazuh-server-cluster/**',
     'cloud-security/**',
     'compliance/**',
-    'proof-of-concept-guide/**',
+    'proof-of-concept-guide/detect-unauthorized-processes-netcat.rst',
+    'proof-of-concept-guide/poc-detect-trojan.rst',
+    'proof-of-concept-guide/poc-detect-hidden-process.rst',
+    'proof-of-concept-guide/integrate-network-ids-suricata.rst',
+    'proof-of-concept-guide/audit-commands-run-by-user.rst',
+    'proof-of-concept-guide/block-malicious-actor-ip-reputation.rst',
+    'proof-of-concept-guide/detect-brute-force-attack.rst',
+    'proof-of-concept-guide/detect-malware-yara-integration.rst',
+    'proof-of-concept-guide/detect-remove-malware-virustotal.rst',
+    'proof-of-concept-guide/detect-web-attack-shellshock.rst',
+    'proof-of-concept-guide/leveraging-llms-for-alert-enrichment.rst',
     'upgrade-guide/**',
     'integrations-guide/**',
     'migration-guide/**',
@@ -548,6 +562,12 @@ emptyTocNodes = json.dumps(emptyTocNodes)
 
 compilation_time = 0
 
+docu_environment = "other"
+if (tags.has("production")):
+    docu_environment = "production"
+if (tags.has("dev")):
+    docu_environment = "dev"
+
 def setup(app):
 
     current_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), theme_assets_path)
@@ -828,7 +848,7 @@ html_context = {
     "github_repo": "wazuh-documentation",
     "conf_py_path": "/source/",
     "github_version": version,
-    "production": production,
+    "environment": docu_environment,
     "apiURL_server": apiURL_server,
     "apiURL_indexer": apiURL_indexer,
     "compilation_ts": compilation_time,

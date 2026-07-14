@@ -11,6 +11,10 @@ This section shows detailed explanation of the Wazuh capabilities and their conf
 .. toctree::
    :maxdepth: 2
 
+   container-security/index
+   system-inventory/index
+
+..
    file-integrity/index
    malware-detection/index
    sec-config-assessment/index
@@ -18,7 +22,5 @@ This section shows detailed explanation of the Wazuh capabilities and their conf
    log-data-collection/index
    vulnerability-detection/index
    command-monitoring/index
-   container-security/index
-   system-inventory/index
    system-calls-monitoring/index
    agentless-monitoring/index

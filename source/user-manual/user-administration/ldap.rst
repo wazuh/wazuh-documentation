@@ -23,10 +23,10 @@ The following parameters are required to make the configurations on the Wazuh in
 -  ``enable_ssl``: Specifies whether to use LDAP over SSL (LDAPS). This can be set to true or false.
 -  ``pemtrustedcas_filepath``: The absolute path to the Privacy Enhanced Mail (PEM) file containing the root Certificate Authority (CA) of your Microsoft Active Directory or LDAP server. This is required when ``enable_ssl`` is set to true.
 -  ``userbase``: Specifies the subtree in the directory where user information is stored.
--  ``usersearch``: The LDAP query the Security plugin executes to authenticate a user.
+-  ``usersearch``: The LDAP query that the Security plugin executes to authenticate a user.
 -  ``username_attribute``: Specifies the LDAP attribute used to identify the username. If set to null, the Distinguished Name (DN) is used by default.
 -  ``rolebase``: Specifies the directory subtree where role or group information is stored.
--  ``rolesearch``: The LDAP query the Security plugin executes to determine a user's roles.
+-  ``rolesearch``: The LDAP query that the Security plugin executes to determine a user's roles.
 -  ``userrolename``: Specifies the LDAP attribute in the user entry that contains role or group information when roles are not stored in the groups subtree.
 -  ``rolename``: The attribute of the role entry that should be used as the role name.
 -  ``skip_users``: Array of users that should be skipped when retrieving roles. Wildcards and regular expressions are supported.
@@ -73,18 +73,18 @@ Create an OU for the Users
 
 #. Run the command below on the Domain Controller using PowerShell with admin privileges to view the users in the *People* OU. The user's logon name (``sAMAccountName``) will be used for authentication on the Wazuh dashboard.
 
-.. code-block:: powershell
+   .. code-block:: powershell
 
-   > Get-ADUser -SearchBase "OU=People,DC=example,DC=org" -Filter * -Properties cn | Select-Object cn, sAMAccountName
+      > Get-ADUser -SearchBase "OU=People,DC=example,DC=org" -Filter * -Properties cn | Select-Object cn, sAMAccountName
 
-.. code-block:: none
-   :class:  output
+   .. code-block:: none
+      :class: output
 
-   cn              sAMAccountName
-   ----            --------------
-   ldap            ldap
-   Wazuh Admin     wazuh-admin-user
-   Wazuh ReadOnly  wazuh-readonly-user
+      cn              sAMAccountName
+      ----            --------------
+      ldap            ldap
+      Wazuh Admin     wazuh-admin-user
+      Wazuh ReadOnly  wazuh-readonly-user
 
 Create an OU for the Groups
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -106,17 +106,17 @@ Create an OU for the Groups
 
 #. Run the command below on the Domain Controller using PowerShell with admin privileges to view the objects in the *Group* OU. The group name (CN) will be used as the backend role in the Wazuh indexer configuration.
 
-.. code-block:: powershell
+   .. code-block:: powershell
 
-   > Get-ADGroup -SearchBase "OU=Groups,DC=example,DC=org" -Filter * -Properties cn | Select-Object cn
+      > Get-ADGroup -SearchBase "OU=Groups,DC=example,DC=org" -Filter * -Properties cn | Select-Object cn
 
-.. code-block:: none
-   :class: output
+   .. code-block:: none
+      :class: output
 
-   cn
-   --
-   wazuh-admins
-   wazuh-readonly
+      cn
+      --
+      wazuh-admins
+      wazuh-readonly
 
 Get the FQDN of the LDAP server or Domain Controller
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -139,23 +139,23 @@ If you don't have a certificate authority server, you can enable LDAPS by creati
 
 #. Run the command below on the Domain Controller using PowerShell with administrator privileges to create the certificate. Replace ``<FQDN_LDAP_SERVER>`` and ``<HOSTNAME>`` with the FQDN and hostname of your domain controller:
 
-.. code-block:: powershell
+   .. code-block:: powershell
 
-   > New-SelfSignedCertificate -DnsName <FQDN_LDAP_SERVER>, <HOSTNAME> -CertStoreLocation cert:\LocalMachine\My
+      > New-SelfSignedCertificate -DnsName <FQDN_LDAP_SERVER>, <HOSTNAME> -CertStoreLocation cert:\LocalMachine\My
 
-.. code-block:: none
-   :class: output
+   .. code-block:: none
+      :class: output
 
-   PSParentPath: Microsoft.PowerShell.Security\Certificate::LocalMachine\My
-   Thumbprint                                Subject
-   ----------                                -------
-   C54F4646170E6888054B0A7C340128E0A7700572  CN=DC01.example.org
+      PSParentPath: Microsoft.PowerShell.Security\Certificate::LocalMachine\My
+      Thumbprint                                Subject
+      ----------                                -------
+      C54F4646170E6888054B0A7C340128E0A7700572  CN=DC01.example.org
 
 #. Run the following command to open the certificate management snap-in for the local machine.
 
-.. code-block:: powershell
+   .. code-block:: powershell
 
-   > certlm.msc
+      > certlm.msc
 
 #. Browse to **Personal** -> **Certificates**, locate the newly created certificate, and copy it into **Trusted Root Certification Authorities** -> **Certificates**.
 
@@ -217,8 +217,11 @@ The ``authc`` section of the Wazuh indexer security configuration file handles a
 
    .. code-block:: none
 
-      depth=0 CN = DC01.example.org verify error:num=18:self-signed certificate verify return:1
-      depth=0 CN = DC01.example.org verify return:1
+      depth=0 CN = DC01.example.org
+      verify error:num=18:self-signed certificate
+      verify return:1
+      depth=0 CN = DC01.example.org
+      verify return:1
       DONE
 
 #. Backup the existing Wazuh indexer security configuration files:
@@ -328,7 +331,7 @@ The ``authc`` section of the Wazuh indexer security configuration file handles a
       Security Admin v7
       Will connect to localhost:9200 ... done
       Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
-      OpenSearch Version: 2.19.4
+      OpenSearch Version: 3.6.0
       Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
       Clustername: wazuh-cluster
       Clusterstate: GREEN
@@ -354,7 +357,7 @@ LDAP can be used for authorization by retrieving the backend roles associated wi
 Map LDAP role to Wazuh administrator role
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Follow these steps on the Wazuh indexer node to create a new role mapping and grant administrator permissions to the backend role.
+Follow these steps on the Wazuh indexer node to create a new role mapping and grant the backend role administrator permissions.
 
 #. Backup the existing Wazuh indexer security configuration files:
 
@@ -367,14 +370,16 @@ Follow these steps on the Wazuh indexer node to create a new role mapping and gr
    Edit the ``/etc/wazuh-indexer/opensearch-security/roles_mapping.yml`` file and add the ``wazuh-admins`` group in LDAP.
 
    .. code-block:: yaml
-      :emphasize-lines: 6
+      :emphasize-lines: 7
 
       all_access:
+        hosts: []
+        users: []
         reserved: false
         hidden: false
         backend_roles:
-        - "admin"
         - "wazuh-admins"
+        and_backend_roles: []
         description: "Maps admin to all_access"
 
 #. Run the ``securityadmin`` script to load the configuration changes made in the ``roles_mapping.yml`` file. Replace ``<WAZUH_INDEXER_URL>`` with the IP address of the Wazuh indexer:
@@ -390,7 +395,7 @@ Follow these steps on the Wazuh indexer node to create a new role mapping and gr
       Security Admin v7
       Will connect to localhost:9200 ... done
       Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
-      OpenSearch Version: 2.19.4
+      OpenSearch Version: 3.6.0
       Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
       Clustername: wazuh-cluster
       Clusterstate: GREEN
@@ -403,18 +408,18 @@ Follow these steps on the Wazuh indexer node to create a new role mapping and gr
       SUCC: Expected 1 config types for node {"updated_config_types":["rolesmapping"],"updated_config_size":1,"message":null} is 1 (["rolesmapping"]) due to: null
       Done with success
 
-#. Verify that ``run_as`` is set to ``true`` in the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file. If ``run_as`` is set to ``false``, change it to ``true``. This is required to create a role mapping in the Wazuh dashboard, ensuring the LDAP backend role is correctly mapped to the corresponding Wazuh role.
+#. The ``run_as`` value is enabled by default, but verify that it is set to ``true`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the LDAP backend role is correctly mapped to the corresponding Wazuh role.
 
    .. code-block:: yaml
       :emphasize-lines: 7
 
-      hosts:
-        - default:
-            url: https://localhost
-            port: 55000
-            username: wazuh-wui
-            password: "<WAZUH_WUI_PASSWORD>"
-            run_as: true
+      wazuh_core.hosts:
+        default:
+          url: https://127.0.0.1
+          port: 55000
+          username: wazuh-wui
+          password: "<WAZUH_WUI_PASSWORD>"
+          run_as: true
 
    #. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** -> **Security**, and then **Roles mapping** to open the page.
 
@@ -433,7 +438,7 @@ Follow these steps on the Wazuh indexer node to create a new role mapping and gr
       -  **Search operation:** ``FIND``
       -  **Value:** Assign the name of your backend role in your LDAP server. In our case, this is a group named ``wazuh-admins``, which contains users with administrator roles.
 
-   #. Click **Save role mapping** to save and map the backend role with Wazuh as administrator.
+   #. Click **Save role mapping** to map the backend role to Wazuh as administrator.
 
       .. thumbnail:: /images/manual/user-administration/ldap/create-administrator-new-role-mapping.png
          :title: Create administrator new role mapping
@@ -468,24 +473,23 @@ Map LDAP role to Wazuh read-only role
       -  **Cluster permissions**: **cluster_composite_ops_ro**
       -  **Index**: **\***
       -  **Index permissions**: **read**
-      -  **Tenant permissions**: **global_tenant** and select the **Read only** option.
 
    #. Select the newly created role.
    #. Select the **Mapped users** tab and click **Manage mapping**.
    #. Under **Backend roles**, assign the name of the read-only role you have in your LDAP server and click on **Map** to confirm the action. In our case, the backend role (CN) is ``wazuh-readonly``.
 
-#. Verify that ``run_as`` is set to ``true`` in the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file. If ``run_as`` is set to ``false``, change it to ``true``. This is required to create a role mapping in the Wazuh dashboard, ensuring the LDAP backend role is correctly mapped to the corresponding Wazuh role.
+#. The ``run_as`` value is enabled by default, but verify that it is set to ``true`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` configuration file. This is required to create a role mapping in the Wazuh dashboard, ensuring the LDAP backend role is correctly mapped to the corresponding Wazuh role.
 
    .. code-block:: yaml
       :emphasize-lines: 7
 
-      hosts:
-        - default:
-            url: https://localhost
-            port: 55000
-            username: wazuh-wui
-            password: "<WAZUH_WUI_PASSWORD>"
-            run_as: true
+      wazuh_core.hosts:
+        default:
+          url: https://127.0.0.1
+          port: 55000
+          username: wazuh-wui
+          password: "<WAZUH_WUI_PASSWORD>"
+          run_as: true
 
    #. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** -> **Security**, and then **Roles mapping** to open the page.
 
@@ -504,7 +508,7 @@ Map LDAP role to Wazuh read-only role
       -  **Search operation:** ``FIND``
       -  **Value:** Assign the name of your backend role in your LDAP server. In our case, this is a group named ``wazuh-readonly``, which contains users with read-only roles.
 
-   #. Click **Save role mapping** to save and map the backend role with Wazuh as *read-only*.
+   #. Click **Save role mapping** to map the backend role to Wazuh as *read-only*.
 
       .. thumbnail:: /images/manual/user-administration/ldap/create-readonly-new-role-mapping.png
          :title: Create readonly new role mapping

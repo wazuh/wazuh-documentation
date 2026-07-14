@@ -144,5 +144,5 @@ Follow these steps to upgrade a Wazuh agent using a WPK file:
       :emphasize-lines: 1
 
       WAZUH_VERSION="v5.0.0"
-      WAZUH_REVISION="beta2"
+      WAZUH_REVISION="beta3"
       WAZUH_TYPE="agent"

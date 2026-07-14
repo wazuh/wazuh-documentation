@@ -3,8 +3,8 @@
 .. meta::
    :description: There are different ways to remove a Wazuh agent that is enrolled in the Wazuh manager. Learn more in this section of the documentation.
 
-Removing agents
-===============
+Remove agents
+=============
 
 There are different ways to remove a Wazuh agent that is enrolled in the Wazuh manager. This includes using the Wazuh dashboard or querying the Wazuh manager API.
 

@@ -24,8 +24,8 @@ Learn about the different enrollment options and the information required for Wa
    requirements
    agent-life-cycle
    enrollment-methods/index
+   security-options/index
    troubleshooting
 
 ..
-   security-options/index
    deployment-variables/index
