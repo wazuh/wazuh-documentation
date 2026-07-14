@@ -39,7 +39,7 @@ const versions = [
 
 betaVersions.push(
   /* [ LABEL , BETA_FOLDER, FILE_PATH ] */
-  ['5.0 (Beta 2)', '5.0-beta', '/index.html']
+  ['5.0 (Beta 3)', '5.0-beta', '/index.html']
 );
 
 /* Data structure for every release
@@ -249,7 +249,7 @@ redirections.push(
   },
   {
     'target': ['4.13=>4.14', '4.14=>4.13'],
-    '4.13': 'user-manual/api/getting-started.html#practical-examples-of-wazuh-server-api-usage',
+    '4.13': '/user-manual/api/getting-started.html#practical-examples-of-wazuh-server-api-usage',
     '4.14': '/user-manual/api/api-examples.html',
   },
   {
@@ -329,13 +329,28 @@ redirections.push(
   },
   {
     'target': ['4.13=>4.14', '4.14=>4.13'],
+    '4.13': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/configuration-to-connect-with-new-node.html',
+    '4.14': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/index.html',
+  },
+  {
+    'target': ['4.13=>4.14', '4.14=>4.13'],
     '4.13': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/server-nodes-installation.html#all-in-one-deployment',
     '4.14': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/all-in-one-deployment.html#wazuh-server-worker-node-s-installation',
   },
   {
     'target': ['4.13=>4.14', '4.14=>4.13'],
+    '4.13': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/server-nodes-installation.html',
+    '4.14': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/index.html',
+  },
+  {
+    'target': ['4.13=>4.14', '4.14=>4.13'],
     '4.13': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/testing-the-cluster.html#all-in-one-deployment',
     '4.14': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/all-in-one-deployment.html#testing-the-cluster',
+  },
+  {
+    'target': ['4.13=>4.14', '4.14=>4.13'],
+    '4.13': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/testing-the-cluster.html',
+    '4.14': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/index.html',
   },
   {
     'target': ['4.13=>4.14', '4.14=>4.13'],
