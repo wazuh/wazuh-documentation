@@ -145,17 +145,3 @@ The scheduling options allow you to configure when the Wazuh Docker listener mod
 |                  | interval value must be a multiple of days or   |               |                                    |
 |                  | weeks. The default interval is set to a day.   |               |                                    |
 +------------------+------------------------------------------------+---------------+------------------------------------+
-
-Example configuration
----------------------
-
-The example configuration below shows an enabled Wazuh Docker listener module. The module attempts to execute five times at ten-minute intervals if it fails.
-
-.. code-block:: XML
-
-   <wodle name="docker-listener">
-     <interval>10m</interval>
-     <attempts>5</attempts>
-     <run_on_start>no</run_on_start>
-     <disabled>no</disabled>
-   </wodle>
