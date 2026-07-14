@@ -1,23 +1,24 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: This PoC shows how the Wazuh module for AWS (aws-s3) enables log data gathering from different AWS sources. Learn more about it in our documentation.
+   :description: This PoC shows how the Wazuh module for AWS (aws-s3) enables log data gathering from different AWS sources. Learn more about it in our documentation.
 
 Monitoring AWS infrastructure
 =============================
 
-This use case shows how the Wazuh module for AWS (aws-s3) enables the log data collection from different AWS sources.
+This use case shows how the Wazuh module for AWS (aws-s3) enables log data collection from different AWS sources.
 
-To learn more about monitoring AWS resources, see the :doc:`Using Wazuh to monitor AWS </cloud-security/amazon/index>` section of the documentation.
+.. |CLOUDTRAIL_POLICY| replace:: necessary policies
+.. |AWS_PROFILE_AUTH| replace:: profile authentication
 
 Infrastructure
 --------------
 
-+--------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Cloud service      | Description                                                                                                                                                                                                                                                                           |
-+====================+=======================================================================================================================================================================================================================================================================================+
-| Amazon CloudTrail  | AWS Cloudtrail, like all other supported AWS services, requires setting the :ref:`necessary policies <cloudtrail_policy_configuration>` for user permissions and providing a valid authentication method. In this PoC, we use the :ref:`profile authentication <aws_profile>` method. |
-+--------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++-------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Cloud service     | Description                                                                                                                                                                                                          |
++===================+======================================================================================================================================================================================================================+
+| Amazon CloudTrail | AWS CloudTrail, like all other supported AWS services, requires setting the |CLOUDTRAIL_POLICY| for user permissions and providing a valid authentication method.                                                    |
++-------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Configuration
 -------------
@@ -31,19 +32,19 @@ CloudTrail
 
 #. Create a new trail.
 
-#. Choose between creating a new S3 bucket or specifying an existing one to store CloudTrail logs. Note down the name of the S3 bucket used as it’s necessary to specify it in the Wazuh configuration.
+#. Choose whether to create a new S3 bucket or specify an existing one to store CloudTrail logs. Note down the name of the S3 bucket used, as it is necessary to specify it in the Wazuh configuration.
 
 The image below shows how to create a new CloudTrail service and attach a new S3 bucket.
 
 .. thumbnail:: /images/poc/cloudtrail.gif
-   :title: Creating a Cloudtrail service
+   :title: Creating a CloudTrail service
    :align: center
    :width: 80%
 
-Wazuh server
-^^^^^^^^^^^^
+Wazuh agent
+^^^^^^^^^^^
 
-#. Enable the Wazuh AWS module in the ``/var/ossec/etc/ossec.conf`` configuration file on the Wazuh server. Add only the AWS buckets of interest. Read our guide on how to :doc:`Configure AWS credentials </cloud-security/amazon/services/prerequisites/credentials>`:
+#. Enable the Wazuh AWS module in the ``/var/ossec/etc/ossec.conf`` configuration file on the Wazuh agent. Add only the AWS buckets of interest:
 
    .. code-block:: xml
       :emphasize-lines: 8, 9
@@ -60,27 +61,23 @@ Wazuh server
         </bucket>
       </wodle>
 
-#. Restart the Wazuh manager to apply the changes:
+#. Restart the Wazuh agent to apply the changes:
 
    .. code-block:: console
 
-      $ sudo systemctl restart wazuh-manager
+      $ sudo systemctl restart wazuh-agent
 
 Test the configuration
 ----------------------
 
-Once you configure Cloudtrail, you can generate events by simply creating a new IAM user account using the IAM service. This generates an event that Wazuh processes. 
+Once you configure CloudTrail, you can generate events by creating a new IAM user account using the IAM service. This generates an event that Wazuh processes. The Wazuh default ruleset parses AWS logs and generates findings automatically. The alerts appear as soon as Wazuh receives the logs from the AWS S3 bucket.
 
-The Wazuh default ruleset parses AWS logs and generates alerts automatically. The alerts appear as soon as Wazuh receives the logs from the AWS S3 bucket.
+Visualize the findings
+----------------------
 
-You can also find additional :ref:`CloudTrail use cases <cloudtrail-use-cases>` in our documentation. 
+You can visualize the findings on the Wazuh dashboard. Go to **Cloud security** > **Amazon Web Services** and select **Findings**.
 
-Visualize the alerts
---------------------
-
-You can visualize the alert data in the Wazuh dashboard. To do this, navigate through **Amazon Web Services** module.
-
-.. thumbnail:: /images/poc/AWS-alerts.png
-   :title: Visualize Amazon Web Services alerts 
+.. thumbnail:: /images/poc/aws-findings.png
+   :title: Visualize Amazon Web Services findings
    :align: center
    :width: 80%
