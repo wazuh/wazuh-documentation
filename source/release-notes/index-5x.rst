@@ -11,6 +11,7 @@ This section summarizes the most important features of each Wazuh 5.x release.
 =============================================  ====================
 Wazuh version                                  Release date
 =============================================  ====================
+:doc:`5.1.0 </release-notes/release-5-1-0>`    TBD
 :doc:`5.0.1 </release-notes/release-5-0-1>`    TBD
 :doc:`5.0.0 </release-notes/release-5-0-0>`    TBD
 =============================================  ====================
@@ -19,5 +20,6 @@ Wazuh version                                  Release date
 
    .. toctree::
 
+      5.1.0 Release notes <release-5-1-0>
       5.0.1 Release notes <release-5-0-1>
       5.0.0 Release notes <release-5-0-0>

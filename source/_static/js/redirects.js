@@ -40,7 +40,7 @@ const versions = [
 
 betaVersions.push(
   /* [ LABEL , BETA_FOLDER, FILE_PATH ] */
-  ['5.0 (Beta 2)', '5.0-beta', '/index.html']
+  ['5.0 (Beta 3)', '5.0-beta', '/index.html']
 );
 
 /* Data structure for every release
@@ -107,6 +107,12 @@ newUrls['5.0'] = [
   '/user-manual/data-analysis/detectors.html',
   '/user-manual/data-analysis/findings.html',
   '/user-manual/data-analysis/detection-workflow.html',
+  '/transitioning-from-4x-to-5x/index.html',
+  '/transitioning-from-4x-to-5x/transition-plan.html',
+  '/transitioning-from-4x-to-5x/wazuh-indexer.html',
+  '/transitioning-from-4x-to-5x/wazuh-manager.html',
+  '/transitioning-from-4x-to-5x/wazuh-dashboard.html',
+  '/proof-of-concept-guide/poc-security-configuration-assessment.html',
 ];
 
 /* Redirections 4.14—5.0  */
@@ -171,6 +177,11 @@ redirections.push(
     'target': ['4.14=>5.0'],
     '4.14': '/user-manual/manager/integration-with-external-apis.html',
     '5.0': '/user-manual/manager/index.html',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/user-manual/capabilities/system-inventory/using-syscollector-information-to-trigger-alerts.html',
+    '5.0': '/user-manual/capabilities/system-inventory/syscollector-information-findings.html',
   }
 );
 
@@ -226,6 +237,7 @@ removedUrls['5.0'] = [
 /* Pages added in 4.14 */
 
 newUrls['4.14'] = [
+  '/release-notes/release-4-14-8.html',
   '/release-notes/release-4-14-7.html',
   '/release-notes/release-4-14-6.html',
   '/release-notes/release-4-14-5.html',
