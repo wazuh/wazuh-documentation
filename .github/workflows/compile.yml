@@ -42,9 +42,7 @@ jobs:
       run: |
         make html
 
-    - name: Lint llms.txt (content defects + links)
+    - name: Lint llms.txt (content defects only) #Links need verification after publication
       run: |
         chmod +x tools/ci/check-llms-txt.sh
-        # Static gate is mandatory; link check needs network egress on the runner.
         tools/ci/check-llms-txt.sh source/llms.txt
-        tools/ci/check-llms-txt.sh --links source/llms.txt
