@@ -15,6 +15,7 @@ All notable changes to this project will be documented in this file.
 - Added the *Data analysis* documentation to the *User manual*. ([#9743](https://github.com/wazuh/wazuh-documentation/pull/9743))
 - Added the *Transitioning from Wazuh 4.x to 5.x* documentation. ([#9772](https://github.com/wazuh/wazuh-documentation/pull/9772)) ([#9792](https://github.com/wazuh/wazuh-documentation/pull/9792)) ([#9817](https://github.com/wazuh/wazuh-documentation/pull/9817))
 - Added the *Security configuration assessment* use case to the *Proof of concept guide*. ([#9777](https://github.com/wazuh/wazuh-documentation/pull/9777))
+- Added the *Network IDS integration* use case to the *Proof of concept guide*. ([#9831](https://github.com/wazuh/wazuh-documentation/pull/9831))
 
 ### Changed
 
@@ -30,12 +31,13 @@ All notable changes to this project will be documented in this file.
 - Updated the *Quickstart* documentation. ([#9680](https://github.com/wazuh/wazuh-documentation/pull/9680)) ([#9769](https://github.com/wazuh/wazuh-documentation/pull/9769))
 - Updated the *Wazuh server* documentation to the new *Wazuh manager* documentation in the *User manual*. ([#9728](https://github.com/wazuh/wazuh-documentation/pull/9728)) ([#9737](https://github.com/wazuh/wazuh-documentation/pull/9737))
 - Updated the *User administration* documentation. ([#9745](https://github.com/wazuh/wazuh-documentation/pull/9745)) ([#9758](https://github.com/wazuh/wazuh-documentation/pull/9758)) ([#9765](https://github.com/wazuh/wazuh-documentation/pull/9765)) ([#9766](https://github.com/wazuh/wazuh-documentation/pull/9766)) ([#9775](https://github.com/wazuh/wazuh-documentation/pull/9775))
-- Updated the *Proof of concept guide* use cases for File integrity monitoring, Vulnerability detection, Monitoring Docker events, Detecting an SQL injection attack, and Monitoring AWS infrastructure. ([#9777](https://github.com/wazuh/wazuh-documentation/pull/9777))
+- Updated the *Proof of concept guide* use cases for File integrity monitoring, Vulnerability detection, Monitoring Docker events, Detecting an SQL injection attack, and Monitoring AWS infrastructure. ([#9777](https://github.com/wazuh/wazuh-documentation/pull/9777)) ([#9831](https://github.com/wazuh/wazuh-documentation/pull/9831))
 - Updated the *Container security* documentation. ([#9816](https://github.com/wazuh/wazuh-documentation/pull/9816)) ([#9819](https://github.com/wazuh/wazuh-documentation/pull/9819)) ([#9823](https://github.com/wazuh/wazuh-documentation/pull/9823))
 - Updated the *System inventory* documentation. ([#9820](https://github.com/wazuh/wazuh-documentation/pull/9820))
 
 ### Removed
 
+- Removed outdated use cases from the *Proof of concept guide*. ([#9831](https://github.com/wazuh/wazuh-documentation/pull/9831))
 - Removed all `agent-auth` references as this tool is now deprecated. ([#8718](https://github.com/wazuh/wazuh/pull/8718))
 - Removed `compatibility.override_main_response_version` setting from Wazuh Indexer configuration as it is no longer supported in OpenSearch 3.0. ([#8609](https://github.com/wazuh/wazuh-documentation/pull/8609))
 - Removed several Rootcheck configuration options and added a corresponding note to the central components upgrade guide. ([#8759](https://github.com/wazuh/wazuh-documentation/pull/8759))
