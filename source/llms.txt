@@ -50,6 +50,7 @@ Hands-on use cases for exploring Wazuh capabilities in a lab environment, coveri
 - **[Monitoring Docker Events](https://documentation.wazuh.com/current/proof-of-concept-guide/monitoring-docker.md)** Identify security incidents across Docker containers on an Ubuntu endpoint using the `docker-listener` module.
 - **[Detecting an SQL Injection Attack](https://documentation.wazuh.com/current/proof-of-concept-guide/detect-web-attack-sql-injection.md)** Simulate and detect an SQL injection attack from Apache web server logs on an Ubuntu endpoint.
 - **[Monitoring AWS Infrastructure](https://documentation.wazuh.com/current/proof-of-concept-guide/aws-infrastructure-monitoring.md)** Collect and analyze Amazon CloudTrail logs from an S3 bucket using the Wazuh `aws-s3` module.
+- **[Network IDS Integration](https://documentation.wazuh.com/current/proof-of-concept-guide/network-ids-integration.md)** Integrate Suricata with Wazuh to enhance threat detection by monitoring and analyzing network traffic on an Ubuntu endpoint.
 
 ## Management & Administration
 Manage your Wazuh infrastructure, users, and data.

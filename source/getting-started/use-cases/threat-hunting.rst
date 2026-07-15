@@ -80,7 +80,7 @@ Third-party integrations play a crucial role in proactive threat hunting, encomp
 
 Some third-party solutions that Wazuh integrates with to aid threat hunting are:
 
-- **VirusTotal**: :doc:`Integrating VirusTotal </proof-of-concept-guide/detect-remove-malware-virustotal>` enhances threat detection by leveraging the VirusTotal malware database for accurate identification and faster incident response. The image below shows malware detection via the VirusTotal integration.
+- **VirusTotal**: Integrating VirusTotal enhances threat detection by leveraging the VirusTotal malware database for accurate identification and faster incident response. The image below shows malware detection via the VirusTotal integration.
 
    .. thumbnail:: /images/getting-started/use-cases/threat-hunting/security-events.png
       :title: Malware detection via the VirusTotal integration

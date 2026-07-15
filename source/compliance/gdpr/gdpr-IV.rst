@@ -356,8 +356,8 @@ This article recommends implementing the necessary security measures to protect 
 Wazuh helps meet this article of the GDPR by providing security measures such as:
 
 -  :doc:`Anomaly and malware detection </user-manual/capabilities/malware-detection/index>`.
--  :doc:`Integrating with VirusTotal to detect and remove malware </proof-of-concept-guide/detect-remove-malware-virustotal>`.
--  :doc:`Integrating with YARA to detect malware </proof-of-concept-guide/detect-malware-yara-integration>`.
+-  Integrating with VirusTotal to detect and remove malware.
+-  Integrating with YARA to detect malware.
 -  `Using constant database (CDB) lists to detect and remove malicious files <https://wazuh.com/blog/detecting-and-responding-to-malicious-files-using-cdb-lists-and-active-response/>`__.
 -  :doc:`Active response </getting-started/use-cases/incident-response>`.
 -  :doc:`Vulnerability detection </getting-started/use-cases/vulnerability-detection>`.
