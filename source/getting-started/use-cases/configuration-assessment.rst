@@ -34,7 +34,7 @@ By default, the Wazuh agent runs scans for every policy (``.yaml`` or ``.yml`` f
 -  Windows agents: ``C:\Program Files (x86)\ossec-agent\ruleset\sca``.
 -  macOS agents: ``/Library/Ossec/ruleset/sca``.
 
-Wazuh also allows you to :doc:`create custom policies </user-manual/capabilities/sec-config-assessment/creating-custom-policies>` that can be used to scan endpoints and verify if they conform to your organization’s policies.
+Wazuh also allows you to :ref:`create custom policies <sca_creating_custom_policies>` that can be used to scan endpoints and verify if they conform to your organization’s policies.
 
 See a snippet of a CIS policy file ``/var/ossec/ruleset/sca/cis_ubuntu22-04.yml`` which is included out-of-the-box on Ubuntu 22.04 endpoints. The SCA policy which is based on the CIS benchmarks, runs checks on the endpoint to determine if it conforms to the best practices for system hardening. The SCA policy with ID ``28500`` checks if the ``/tmp`` directory is on a separate partition.
 

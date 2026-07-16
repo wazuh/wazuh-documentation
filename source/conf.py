@@ -108,7 +108,6 @@ exclude_patterns = [
     'user-manual/capabilities/file-integrity/**',
     'user-manual/capabilities/log-data-collection/**',
     'user-manual/capabilities/malware-detection/**',
-    'user-manual/capabilities/sec-config-assessment/**',
     'user-manual/capabilities/system-calls-monitoring/**',
     'user-manual/capabilities/vulnerability-detection/**',
     'user-manual/indexer-api/**',

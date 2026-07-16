@@ -185,6 +185,16 @@ redirections.push(
   },
   {
     'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/user-manual/capabilities/sec-config-assessment/how-to-configure.html',
+    '5.0': '/user-manual/capabilities/sec-config-assessment/how-it-works.html#sca-how-to-configure',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/user-manual/capabilities/sec-config-assessment/creating-custom-policies.html',
+    '5.0': '/user-manual/capabilities/sec-config-assessment/how-it-works.html#sca-creating-custom-policies',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
     '4.14': '/proof-of-concept-guide/integrate-network-ids-suricata.html',
     '5.0': '/proof-of-concept-guide/network-ids-integration.html',
   }

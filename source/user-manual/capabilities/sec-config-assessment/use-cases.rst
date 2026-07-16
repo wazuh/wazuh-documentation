@@ -6,21 +6,21 @@
 Use cases
 =========
 
-This section shows some custom SCA use cases for various operating systems. We provide detailed steps on how to replicate these use cases. 
+This section shows some custom SCA use cases for various operating systems. We provide detailed steps on how to replicate these use cases.
 
 Prerequisites
 -------------
 
 You need the following deployment to test the use cases defined in this section:
 
-- A Wazuh server: Follow the instructions in our :doc:`quickstart guide </quickstart>` to set up a Wazuh server.
-- Monitored endpoint(s): Deploy any or all of the following endpoints, install a :doc:`Wazuh agent </installation-guide/wazuh-agent/index>` on each of them and enroll them to the Wazuh server.
+- A Wazuh manager: Follow the instructions in our :doc:`quickstart guide </quickstart>` to set up a Wazuh manager.
+- Monitored endpoint(s): Deploy any or all of the following endpoints, :doc:`install a Wazuh agent </installation-guide/wazuh-agent/index>` on each of them and enroll them to the Wazuh manager.
 
   - An Ubuntu 22.04 endpoint.
   - A Windows 11 endpoint.
   - A macOS 12 endpoint.
 
-The use cases covered in this section include :ref:`Detecting keyword in a file <detecting_keyword_in_a_file>` and :ref:`Detecting a running process <detecting_a_running_process>`. 
+The use cases covered in this section include :ref:`Detecting keyword in a file <detecting_keyword_in_a_file>` and :ref:`Detecting a running process <detecting_a_running_process>`.
 
 .. _detecting_keyword_in_a_file:
 
@@ -43,7 +43,7 @@ Take the following steps on your Ubuntu endpoint to create the file ``/usr/share
 #. Verify that the file has been created:
 
    .. code-block:: console
-   
+
       # cat /usr/share/testfile.txt
 
    You should get output similar to the following:
@@ -59,13 +59,12 @@ Take the following steps on your Ubuntu endpoint to create the file ``/usr/share
 #. Create a new directory to save your custom policy files:
 
    .. code-block:: console
-   
+
       # mkdir /var/ossec/etc/custom-sca-files/
 
 #. Create a new SCA policy file ``/var/ossec/etc/custom-sca-files/keywordcheck.yml`` and add the following content to it:
 
    .. code-block:: YAML
-      :emphasize-lines: 13,14,15,23,24,25
 
       policy:
         id: "keyword_check"
@@ -100,7 +99,7 @@ Take the following steps on your Ubuntu endpoint to create the file ``/usr/share
 #. Change the ownership of the file so Wazuh has permission to it:
 
    .. code-block:: console
-   
+
       # chown wazuh:wazuh /var/ossec/etc/custom-sca-files/keywordcheck.yml
 
 #. Enable the policy file by adding the following lines to the ``<ossec_config>`` block of the Wazuh agent configuration file at ``/var/ossec/etc/ossec.conf``:
@@ -116,10 +115,10 @@ Take the following steps on your Ubuntu endpoint to create the file ``/usr/share
 #. Restart the Wazuh agent to apply the changes and to run the new SCA check:
 
    .. code-block:: console
-   
+
       # systemctl restart wazuh-agent
 
-#. On your Wazuh dashboard, navigate to the **Configuration Assessment** module and select the Ubuntu endpoint to view the results of the custom SCA check you have created.
+#. On your Wazuh dashboard, navigate to the **Endpoint Security** > **Configuration Assessment** and select the Ubuntu endpoint to view the results of the custom SCA check you have created.
 
   .. thumbnail:: /images/sca/ubuntu-sca-check-results.png
      :title: Ubuntu results of the custom SCA check
@@ -135,13 +134,13 @@ Take the following steps on your Windows endpoint to create the file ``C:\Progra
 #. Run PowerShell as an administrator and create the test file and add some text to it, including the keyword ``password_enabled: yes``:
 
    .. code-block:: console
-   
+
       # New-Item "C:\Program Files\testfile.txt" -ItemType File -Value "config_file`nsecond line of configuration`npassword_enabled: yes"
 
 #. Verify that the file has been created:
 
    .. code-block:: console
-   
+
       # Get-Content "C:\Program Files\testfile.txt"
 
    You should get output similar to the following:
@@ -156,13 +155,12 @@ Take the following steps on your Windows endpoint to create the file ``C:\Progra
 #. Create a new directory to save your custom policy files:
 
    .. code-block:: console
-   
+
       # New-Item "C:\Program Files (x86)\ossec-agent\custom-sca-files" -itemType Directory
 
 #. Open Notepad as an administrator, create a new SCA policy file with the following content and save it as ``C:\Program Files (x86)\ossec-agent\custom-sca-files\keywordcheck.yml``:
 
    .. code-block:: YAML
-      :emphasize-lines: 12,13,14,21,22,23
 
       policy:
         id: "keyword_check_windows"
@@ -205,10 +203,10 @@ Take the following steps on your Windows endpoint to create the file ``C:\Progra
 #. Restart the Wazuh agent to apply the changes and to run the new SCA check:
 
    .. code-block:: console
-   
+
       # Restart-Service -Name wazuh
 
-#. On your Wazuh dashboard, navigate to the **Configuration Assessment** module and select the Windows endpoint to view the results of the custom SCA check you have created.
+#. On your Wazuh dashboard, navigate to the **Endpoint Security** > **Configuration Assessment** and select the Windows endpoint to view the results of the custom SCA check you have created.
 
   .. thumbnail:: /images/sca/windows-sca-check-results.png
      :title: Windows results of the custom SCA check
@@ -224,13 +222,13 @@ Take the following steps on your macOS endpoint to create the file ``/usr/local/
 #. Create the test file and add some text to it, including the phrase ``password_enabled: yes``:
 
    .. code-block:: console
-   
+
       # echo "config_file\nsecond line of configuration\npassword_enabled: yes" > /usr/local/testfile.txt
 
 #. Verify that the file has been created:
 
    .. code-block:: console
-   
+
       # cat /usr/local/testfile.txt
 
    You should get output similar to the following:
@@ -245,14 +243,13 @@ Take the following steps on your macOS endpoint to create the file ``/usr/local/
 #. Create a new directory to save your custom policy files:
 
    .. code-block:: console
-   
+
       # mkdir /Library/Ossec/etc/custom-sca-files/
 
 #. Create a new SCA policy file ``/Library/Ossec/etc/custom-sca-files/keywordcheck.yml`` and add the following content to it:
 
    .. code-block:: YAML
-      :emphasize-lines: 13,14,15,23,24,25
-      
+
       policy:
         id: "keyword_check"
         file: "keywordcheck.yml"
@@ -282,7 +279,7 @@ Take the following steps on your macOS endpoint to create the file ``/usr/local/
 
    - We create a requirement to ensure that the policy runs only if the file ``/usr/local/testfile.txt`` exists on the endpoint.
    - Check ID ``10002`` scans the file ``/usr/local/testfile.txt`` to find any line that contains the string ``password_enabled: yes``. The ``none`` condition ensures that the check fails if a match is found.
-      
+
 #. Enable the policy file by adding the following lines to the ``<ossec_config>`` block of the Wazuh agent configuration file at ``/Library/Ossec/etc/ossec.conf``:
 
      .. code-block:: xml
@@ -296,10 +293,10 @@ Take the following steps on your macOS endpoint to create the file ``/usr/local/
 #. Restart the Wazuh agent to apply the changes and to run the new SCA check:
 
    .. code-block:: console
-   
+
       # /Library/Ossec/bin/wazuh-control restart
 
-#. On your Wazuh dashboard, navigate to the **Configuration Assessment** module and select the macOS endpoint to view the results of the custom SCA check you have created.
+#. On your Wazuh dashboard, navigate to the **Endpoint Security** > **Configuration Assessment** and select the macOS endpoint to view the results of the custom SCA check you have created.
 
   .. thumbnail:: /images/sca/macos-sca-check-results.png
      :title: macOS results of the custom SCA check
@@ -317,18 +314,19 @@ In this use case, we demonstrate how to detect running processes with the Wazuh 
 Ubuntu endpoint
 ^^^^^^^^^^^^^^^
 
-Netcat is a utility that uses TCP and UDP to read and write data on an IP network. Netcat can open connections, send packets, or listen on TCP and UDP ports. Threat actors use netcat for malicious purposes such as creating backdoor access. Take the following steps to configure the Wazuh SCA module to detect netcat processes and to simulate an attack:
+Netcat is a networking utility that can open connections, transfer data, and listen on TCP and UDP ports. Because it can be used to establish backdoor access or unauthorized network listeners, threat actors often abuse it after compromising a system.
+
+The following steps show how to configure the Wazuh SCA module to detect running Netcat processes and simulate this activity:
 
 #. Create a new directory to save your custom policy files:
 
    .. code-block:: console
-   
+
       # mkdir /var/ossec/etc/custom-sca-files/
 
 #. Create a new SCA policy file ``/var/ossec/etc/custom-sca-files/processcheck.yml`` and add the following content to it:
 
    .. code-block:: YAML
-      :emphasize-lines: 13,14,15,16,17,19,20,28,29,30,31
 
       policy:
         id: "process_check"
@@ -369,7 +367,7 @@ Netcat is a utility that uses TCP and UDP to read and write data on an IP networ
 #. Change the ownership of the file so Wazuh has permission to it:
 
    .. code-block:: console
-   
+
       # chown wazuh:wazuh /var/ossec/etc/custom-sca-files/processcheck.yml
 
 #. Enable the policy file by adding the following lines to the ``<ossec_config>`` block of the Wazuh agent configuration file at ``/var/ossec/etc/ossec.conf``:
@@ -385,45 +383,44 @@ Netcat is a utility that uses TCP and UDP to read and write data on an IP networ
 #. Install netcat if you don’t have it on your endpoint:
 
    .. code-block:: console
-   
+
       # apt install netcat
 
 #. Run netcat on a new terminal and let the listener run:
 
    .. code-block:: console
-   
+
       # netcat -l 4444
 
 #. Restart the Wazuh agent to apply the changes and to run the new SCA check:
 
    .. code-block:: console
-   
+
       # systemctl restart wazuh-agent
 
-#. On your Wazuh dashboard, navigate to the **Configuration Assessment** module and select the Ubuntu endpoint to view the results of the custom SCA check you have created.
+#. On your Wazuh dashboard, navigate to the **Endpoint Security** > **Configuration Assessment** and select the Ubuntu endpoint to view the results of the custom SCA check you have created.
 
   .. thumbnail:: /images/sca/ubuntu-sca-use-case.png
      :title: Ubuntu Configuration Assessment use case to detect running processes
      :alt: Ubuntu Configuration Assessment use case to detect running processes
      :align: center
-     :width: 80%     
+     :width: 80%
 
 Windows endpoint
 ^^^^^^^^^^^^^^^^
 
-System administrators use PowerShell to configure systems. Standard users utilize PowerShell less frequently. Threat actors may take advantage of the living-off-the-land attack tactic via PowerShell. Take the following steps to configure the Wazuh SCA module to detect PowerShell processes and simulate an attack:
+Standard users utilize PowerShell less frequently. Threat actors may take advantage of the living-off-the-land attack tactic via PowerShell. Take the following steps to configure the Wazuh SCA module to detect PowerShell processes and simulate an attack:
 
 #. Run CMD as an administrator and create a new directory to save your custom policy files:
 
-   .. code-block:: console
-   
+   .. code-block:: powershell
+
       > mkdir "C:\Program Files (x86)\ossec-agent\custom-sca-files"
 
 #. Open Notepad as an administrator, create a new SCA policy file with the following content and save it as ``C:\Program Files (x86)\ossec-agent\custom-sca-files\processcheck.yml``:
 
 
    .. code-block:: YAML
-      :emphasize-lines: 13,14,15,23,24,25
 
       policy:
         id: "process_check"
@@ -467,22 +464,22 @@ System administrators use PowerShell to configure systems. Standard users utiliz
 
 #. Open a second command prompt and run the following command to spawn a hidden PowerShell process. This is a dummy Powershell process that sleeps for 300 seconds (5 minutes), enough time for you to restart the Wazuh agent for the SCA scan to run.
 
-   .. code-block:: console
-   
+   .. code-block:: powershell
+
       > powershell -windowstyle hidden -command Start-Sleep -Seconds 300
 
    .. note::
-      
+
       The command prompt closes after you run this command and PowerShell runs in the background.
 
 #. Run the following commands on CMD as an Administrator to restart the Wazuh agent:
 
-   .. code-block:: console
-   
+   .. code-block:: powershell
+
       > NET STOP Wazuh
       > NET START Wazuh
 
-#. On your Wazuh dashboard, navigate to the **Configuration Assessment** module and select the Windows endpoint to view the results of the custom SCA check you have created.
+#. On your Wazuh dashboard, navigate to the **Endpoint Security** > **Configuration Assessment** and select the Windows endpoint to view the results of the custom SCA check you have created.
 
   .. thumbnail:: /images/sca/windows-sca-use-case.png
      :title: Windows Configuration Assessment use case to detect running processes
@@ -493,18 +490,19 @@ System administrators use PowerShell to configure systems. Standard users utiliz
 macOS endpoint
 ^^^^^^^^^^^^^^
 
-Netcat is a utility that uses TCP and UDP to read and write data on an IP network. Netcat can open connections, send packets, or listen on TCP and UDP ports. Threat actors use netcat for malicious purposes such as creating backdoor access. Take the following steps to configure the Wazuh SCA module to detect netcat processes and to simulate an attack:
+Netcat is a networking utility that can open connections, transfer data, and listen on TCP and UDP ports. Because it can be used to establish backdoor access or unauthorized network listeners, threat actors often abuse it after compromising a system.
+
+The following steps show how to configure the Wazuh SCA module to detect running Netcat processes and simulate this activity:
 
 #. Create a new directory to save your custom policy files:
 
    .. code-block:: console
-   
+
       # mkdir /Library/Ossec/etc/custom-sca-files/
 
 #. Create a new SCA policy file ``/Library/Ossec/etc/custom-sca-files/processcheck.yml`` and add the following content to it:
 
    .. code-block:: YAML
-      :emphasize-lines: 13,14,15,23,24,25
 
       policy:
         id: "process_check"
@@ -549,16 +547,16 @@ Netcat is a utility that uses TCP and UDP to read and write data on an IP networ
 #. Run netcat on a new terminal and let the listener run:
 
    .. code-block:: console
-   
+
       # nc -l 4444
 
 #. Restart the Wazuh agent to apply the changes and to run the new SCA check:
 
    .. code-block:: console
-   
+
       # /Library/Ossec/bin/wazuh-control restart
 
-#. On your Wazuh dashboard, navigate to the **Configuration Assessment** module and select the macOS endpoint to view the results of the custom SCA check you have created.
+#. On your Wazuh dashboard, navigate to the **Endpoint Security** > **Configuration Assessment** and select the macOS endpoint to view the results of the custom SCA check you have created.
 
   .. thumbnail:: /images/sca/macos-sca-use-case.png
      :title: macOS Configuration Assessment use case to detect running processes

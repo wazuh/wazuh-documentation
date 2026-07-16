@@ -1,28 +1,27 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Find out more about the Wazuh Security Configuration Assessment capability. What is SCA, how it works and how to configure it, a use case and more.
+  :description: Find out more about the Wazuh Security Configuration Assessment capability. What is SCA, how it works, how to configure it, create custom policies, and use cases.
 
 .. _manual_sec_config_assessment:
 
 Security Configuration Assessment
 =================================
 
-Security Configuration Assessment (SCA) is the process of verifying that all systems conform to a set of predefined rules regarding configuration settings and approved application usage. One of the most certain ways to secure endpoints is by reducing their vulnerability surface. This process is commonly known as hardening. Configuration assessment is an effective way to identify weaknesses in your endpoints and patch them to reduce your attack surface.
+Security Configuration Assessment (SCA) is the process of verifying that systems conform to a set of predefined rules regarding configuration settings and approved application usage. One of the most reliable ways to secure endpoints is by reducing their vulnerability surface, a process known as hardening. Configuration assessment identifies weaknesses in your endpoints so you can patch them and reduce your attack surface.
 
-The Wazuh SCA module performs scans to detect misconfigurations and exposures on monitored endpoints and recommend remediation actions. Those scans assess the configuration of the endpoints using policy files that contain rules to be tested against the actual configuration of the endpoint. SCA policies can check for the existence of files, directories, registry keys and values, running processes, and recursively test for the existence of files inside directories.
+The Wazuh SCA module scans monitored endpoints to detect misconfigurations and exposures and recommends remediation actions. These scans assess the endpoint configuration using policy files that contain rules to test against the endpoint's actual configuration. SCA policies can check for the existence of:
 
-For example, the SCA module could assess whether it is necessary to change password-related configuration, remove unnecessary software, disable unnecessary services, or audit the TCP/IP stack configuration.
+- The existence of files, directories, registry keys, and registry values
+- Files inside directories, tested recursively
+- Running processes
+- The contents of files, command output, and registry value data
 
-Policies for the SCA module are written in YAML. This format was chosen because it is human-readable and easy to understand. You can easily write your own SCA policies or extend existing ones to fit your needs. Furthermore, Wazuh is distributed with a set of out-of-the-box policies mostly based on the CIS benchmarks, a well-established standard for endpoint hardening.
-
-Further information is available in the following sections:
+For example, the SCA module can assess whether you need to change password-related configuration, remove unnecessary software, disable unnecessary services, or audit the TCP/IP stack configuration. SCA policies are written in YAML, a human-readable format that is easy to understand. Wazuh ships with a set of out-of-the-box policies based mostly on the CIS benchmarks, a well-established standard for endpoint hardening. You can also write your own policies or extend existing ones to fit your needs.
 
 .. toctree::
    :maxdepth: 2
 
    how-it-works
-   how-to-configure
    available-sca-policies
-   creating-custom-policies
    use-cases
