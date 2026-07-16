@@ -86,7 +86,7 @@ On Windows endpoints, you can use the ``<hotfixes>`` option.
 Wazuh manager configuration
 ---------------------------
 
-The Wazuh Inventory Harvester component on the Wazuh manager processes the collected system inventory data and forwards it to the Wazuh indexer using the indexer connector setting. The indexer connector setting is present by default in the ``/var/wazuh-manager/etc/wazuh-manager.conf`` file of the Wazuh manager.
+The Wazuh Inventory Harvester component on the Wazuh manager processes the collected system inventory data and forwards it to the Wazuh indexer using the :doc:`indexer connector </user-manual/manager/wazuh-indexer-connector>` setting. The indexer connector setting is present by default in the ``/var/wazuh-manager/etc/wazuh-manager.conf`` file of the Wazuh manager.
 
 By default, the connector points to the localhost with certificate paths relative to the Wazuh manager installation. This default works for an all-in-one deployment, where the Wazuh manager and the Wazuh indexer run on the same host. In a distributed deployment, where the indexer runs on separate nodes, you must update the connector configuration to point to your indexer nodes. Follow the steps below to update it.
 
@@ -131,7 +131,7 @@ By default, the connector points to the localhost with certificate paths relativ
 
    The tool also accepts the value inline with the ``-v`` option or from a file with the ``-vp`` option.
 
-   If you have forgotten your Wazuh indexer password, refer to the :doc:`password management </user-manual/user-administration/password-management>` guide to reset it.
+   If you have forgotten your Wazuh indexer password, refer to the :doc:`password management guide </user-manual/user-administration/password-management>` to reset it.
 
 #. Run the command below to verify the connection to the Wazuh indexer from the Wazuh manager. Enter the Wazuh indexer password when prompted:
 
