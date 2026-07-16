@@ -104,16 +104,10 @@ jQuery(function($) {
    */
   function checkCurrentVersion() {
     const selectVersionCurrent = $('#version-selector .current');
-    const thisVersion = DOCUMENTATION_OPTIONS.VERSION;  
-    if (!listOfVersions.includes(thisVersion)) {
-      betaVersions.forEach(beta_info => {
-        if (beta_info[0].includes(thisVersion)) {
-          selectVersionCurrent.html('Version ' + beta_info[0]);
-        }
-      });
-    } else if ( listOfVersions.length > 0 ) {
+    const thisVersion = DOCUMENTATION_OPTIONS.VERSION;
+    if ( listOfVersions.length > 0 ) {
       selectVersionCurrent.html('Version ' + thisVersion + (thisVersion == listOfVersions[0] ? ' (current)' : ''));
-    } else  {
+    } else {
       selectVersionCurrent.html('Version ' + thisVersion);
     }
   }
@@ -486,7 +480,7 @@ jQuery(function($) {
    * @param {array} newUrls A list with all the new pages
    * @return {array|boolean} A list with the new pages related with the page URL
    */
-  function getInfoNewsUrl(page, newUrls) { 
+  function getInfoNewsUrl(page, newUrls) {
     let newUrlsTemp = false;
     for (forRelease in newUrls) {
       if ({}.hasOwnProperty.call(newUrls, forRelease)) {
