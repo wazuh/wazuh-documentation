@@ -129,7 +129,6 @@ exclude_patterns = [
     'proof-of-concept-guide/detect-unauthorized-processes-netcat.rst',
     'proof-of-concept-guide/poc-detect-trojan.rst',
     'proof-of-concept-guide/poc-detect-hidden-process.rst',
-    'proof-of-concept-guide/integrate-network-ids-suricata.rst',
     'proof-of-concept-guide/audit-commands-run-by-user.rst',
     'proof-of-concept-guide/block-malicious-actor-ip-reputation.rst',
     'proof-of-concept-guide/detect-brute-force-attack.rst',
