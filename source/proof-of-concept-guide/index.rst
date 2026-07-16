@@ -63,3 +63,16 @@ Use cases
    detect-web-attack-sql-injection
    aws-infrastructure-monitoring
    network-ids-integration
+
+.. Pages not yet updated for this release - kept out of the build until refreshed
+..
+   detect-unauthorized-processes-netcat
+   poc-detect-trojan
+   poc-detect-hidden-process
+   block-malicious-actor-ip-reputation
+   detect-brute-force-attack
+   detect-remove-malware-virustotal
+   detect-malware-yara-integration
+   audit-commands-run-by-user
+   detect-web-attack-shellshock
+   leveraging-llms-for-alert-enrichment

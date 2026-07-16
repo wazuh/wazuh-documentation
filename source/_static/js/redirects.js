@@ -193,16 +193,6 @@ redirections.push(
 /* Pages no longer available in 5.0 */
 
 removedUrls['5.0'] = [
-  '/proof-of-concept-guide/detect-unauthorized-processes-netcat.html',
-  '/proof-of-concept-guide/poc-detect-trojan.html',
-  '/proof-of-concept-guide/poc-detect-hidden-process.html',
-  '/proof-of-concept-guide/block-malicious-actor-ip-reputation.html',
-  '/proof-of-concept-guide/detect-brute-force-attack.html',
-  '/proof-of-concept-guide/detect-remove-malware-virustotal.html',
-  '/proof-of-concept-guide/detect-malware-yara-integration.html',
-  '/proof-of-concept-guide/audit-commands-run-by-user.html',
-  '/proof-of-concept-guide/detect-web-attack-shellshock.html',
-  '/proof-of-concept-guide/leveraging-llms-for-alert-enrichment.html',
   '/user-manual/manager/indexer-integration.html',
   '/user-manual/manager/wazuh-server-queue.html',
   '/user-manual/manager/wazuh-manager.html',
