@@ -14,13 +14,13 @@ This section shows detailed explanation of the Wazuh capabilities and their conf
    container-security/index
    sec-config-assessment/index
    system-inventory/index
+   vulnerability-detection/index
 
 ..
    file-integrity/index
    malware-detection/index
    active-response/index
    log-data-collection/index
-   vulnerability-detection/index
    command-monitoring/index
    system-calls-monitoring/index
    agentless-monitoring/index
