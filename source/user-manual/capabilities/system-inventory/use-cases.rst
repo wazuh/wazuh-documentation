@@ -60,3 +60,82 @@ Identify endpoints with critical vulnerabilities in your environment and use the
       :alt: IT Hygiene - Vulnerable package
       :align: center
       :width: 80%
+
+#. Update or uninstall the vulnerable software packages.
+
+Use case 3: Detecting new software installations
+------------------------------------------------
+
+Identify new software installed across your fleet to catch potential unauthorized or shadow-IT applications shortly after they appear.
+
+#. Click the menu icon, then navigate to **Threat intelligence** > **Threat Hunting**.
+#. Switch to the **Findings** tab.
+#. Click **+ Add filter** and configure it as follows:
+
+   -  **Field**: ``wazuh.rule.title``
+   -  **Operator**: ``is``
+   -  **Value**: ``Wazuh IT Hygiene - Item created``
+
+#. Add a second filter:
+
+   -  **Field**: ``event.action``
+   -  **Operator**: ``is``
+   -  **Value**: ``package-installed``
+
+   .. thumbnail:: /images/manual/system-inventory/use-case-3-detecting-new-software-installations.png
+      :title: Detecting new software installations
+      :alt: Detecting new software installations
+      :align: center
+      :width: 80%
+
+   The filtered view lists every package installation across your fleet as it is detected, including the endpoint, the package name, and the installation time.
+
+#. To see the full installation history of a specific package, note its name and pivot to **Security operations** > **IT Hygiene** > **Software** > **Packages**, then filter on ``package.name``.
+
+   .. thumbnail:: /images/manual/system-inventory/package-installation-history.png
+      :title: Package installation history across endpoints
+      :alt: Package installation history across endpoints
+      :align: center
+      :width: 80%
+
+Use case 4: Auditing privileged account hygiene
+-----------------------------------------------
+
+Review user accounts for unexpected privileged group membership.
+
+#. Click the menu icon, then navigate to **Security operations** > **IT Hygiene**.
+#. Select the **Identity** tab and then **Groups**.
+#. Click **+ Add filter** and configure it as follows:
+
+   -  **Field**: ``group.name``
+   -  **Operator**: ``is``
+   -  **Value**: A group name associated with administrative access in your environment. In this case ``Administrators``
+
+   The filtered view shows every account which is a member of the ``Administrators`` group.
+
+   .. thumbnail:: /images/manual/system-inventory/use-case-4-privileged-group-membership.jpg
+      :title: Privileged group membership
+      :alt: Privileged group membership
+      :align: center
+      :width: 80%
+
+Use case 5: Reviewing open ports and attack surface
+---------------------------------------------------
+
+Find endpoints with unexpected listening services to reduce your attack surface.
+
+#. Click the menu icon, then navigate to **Security operations** > **IT Hygiene**.
+#. Select the **Network** tab and then **Listeners**.
+#. Click **+ Add filter** and configure it as follows:
+
+   -  **Field**: ``source.ip``
+   -  **Operator**: ``is``
+   -  **Value**: ``0.0.0.0``
+
+   The filtered view shows every listening socket bound to all network interfaces, rather than only localhost, across your fleet. Sockets bound this way are reachable from other machines on the network and deserve closer review.
+
+   .. thumbnail:: /images/manual/system-inventory/use-case-5-listening-services.jpg
+      :title: Listening services bound to all interfaces
+      :alt: Listening services bound to all interfaces
+      :align: center
+      :width: 80%
