@@ -33,6 +33,7 @@ All notable changes to this project will be documented in this file.
 - Updated the *Proof of concept guide* use cases for File integrity monitoring, Vulnerability detection, Monitoring Docker events, Detecting an SQL injection attack, and Monitoring AWS infrastructure. ([#9777](https://github.com/wazuh/wazuh-documentation/pull/9777))
 - Updated the *Container security* documentation. ([#9816](https://github.com/wazuh/wazuh-documentation/pull/9816)) ([#9819](https://github.com/wazuh/wazuh-documentation/pull/9819)) ([#9823](https://github.com/wazuh/wazuh-documentation/pull/9823))
 - Updated the *System inventory* documentation. ([#9820](https://github.com/wazuh/wazuh-documentation/pull/9820)) ([#9832](https://github.com/wazuh/wazuh-documentation/pull/9832))
+- Updated the *Security configuration assessment* capability documentation. ([#9834](https://github.com/wazuh/wazuh-documentation/pull/9834))
 
 ### Removed
 
