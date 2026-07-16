@@ -104,10 +104,16 @@ jQuery(function($) {
    */
   function checkCurrentVersion() {
     const selectVersionCurrent = $('#version-selector .current');
-    const thisVersion = DOCUMENTATION_OPTIONS.VERSION;
-    if ( listOfVersions.length > 0 ) {
+    const thisVersion = DOCUMENTATION_OPTIONS.VERSION;  
+    if (!listOfVersions.includes(thisVersion)) {
+      betaVersions.forEach(beta_info => {
+        if (beta_info[0].includes(thisVersion)) {
+          selectVersionCurrent.html('Version ' + beta_info[0]);
+        }
+      });
+    } else if ( listOfVersions.length > 0 ) {
       selectVersionCurrent.html('Version ' + thisVersion + (thisVersion == listOfVersions[0] ? ' (current)' : ''));
-    } else {
+    } else  {
       selectVersionCurrent.html('Version ' + thisVersion);
     }
   }
