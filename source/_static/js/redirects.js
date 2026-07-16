@@ -182,6 +182,16 @@ redirections.push(
     'target': ['4.14=>5.0', '5.0=>4.14'],
     '4.14': '/user-manual/capabilities/system-inventory/using-syscollector-information-to-trigger-alerts.html',
     '5.0': '/user-manual/capabilities/system-inventory/syscollector-information-findings.html',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/user-manual/capabilities/sec-config-assessment/how-to-configure.html',
+    '5.0': '/user-manual/capabilities/sec-config-assessment/how-it-works.html#sca-how-to-configure',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/user-manual/capabilities/sec-config-assessment/creating-custom-policies.html',
+    '5.0': '/user-manual/capabilities/sec-config-assessment/how-it-works.html#sca-creating-custom-policies',
   }
 );
 

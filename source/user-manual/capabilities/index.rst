@@ -12,12 +12,12 @@ This section shows detailed explanation of the Wazuh capabilities and their conf
    :maxdepth: 2
 
    container-security/index
+   sec-config-assessment/index
    system-inventory/index
 
 ..
    file-integrity/index
    malware-detection/index
-   sec-config-assessment/index
    active-response/index
    log-data-collection/index
    vulnerability-detection/index
