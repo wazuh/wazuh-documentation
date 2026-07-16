@@ -182,6 +182,11 @@ redirections.push(
     'target': ['4.14=>5.0', '5.0=>4.14'],
     '4.14': '/user-manual/capabilities/system-inventory/using-syscollector-information-to-trigger-alerts.html',
     '5.0': '/user-manual/capabilities/system-inventory/syscollector-information-findings.html',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/proof-of-concept-guide/integrate-network-ids-suricata.html',
+    '5.0': '/proof-of-concept-guide/network-ids-integration.html',
   }
 );
 

@@ -14,7 +14,7 @@ Preparing your lab environment
 The Wazuh platform consists of two main parts:
 
 -  Security agents: Lightweight software deployed on the endpoints you want to monitor.
--  Central components (Wazuh server, indexer, and dashboard): These components collect, analyze, and visualize data from agents.
+-  Central components (Wazuh manager, indexer, and dashboard): These components collect, analyze, and visualize data from agents.
 
 We recommend using virtual machines for your lab. Take a snapshot of the environment immediately after the initial setup. This allows you to quickly restore a clean state before starting each new use case, preventing previous tests from interfering with new ones.
 
@@ -28,10 +28,10 @@ The diagram below shows the recommended lab architecture for testing the use cas
 Wazuh central components
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-For the use cases in this guide, all Wazuh central components (server, indexer, and dashboard) run on a single system. A single-node deployment is sufficient and recommended for a small-scale lab environment. To install the Wazuh central components on a single endpoint, use one of the following options:
+For the use cases in this guide, all Wazuh central components (manager, indexer, and dashboard) run on a single system. A single-node deployment is sufficient and recommended for a small-scale lab environment. To install the Wazuh central components on a single endpoint, use one of the following options:
 
 -  The :doc:`Quickstart guide </quickstart>`: Using this guide, you can install all the components on the same system in approximately 5 minutes.
--  Our preconfigured :doc:`virtual machine </deployment-options/virtual-machine/virtual-machine>`: Wazuh provides a pre-built virtual machine image in Open Virtual Appliance (OVA) format. You can import it to VirtualBox or other OVA-compatible virtualization systems.
+-  Our :doc:`preconfigured virtual machine </deployment-options/virtual-machine/virtual-machine>`: Wazuh provides a pre-built virtual machine image in Open Virtual Appliance (OVA) format. You can import it to VirtualBox or other OVA-compatible virtualization systems.
 
 Monitored endpoints
 ^^^^^^^^^^^^^^^^^^^
@@ -48,7 +48,7 @@ The Wazuh agent monitors the following endpoints. Depending on the use case, the
 | Windows  | Windows 11                   | 2 vCPU    | 4 GB | 25 GB |
 +----------+------------------------------+-----------+------+-------+
 
-Refer to our :doc:`installation guide </installation-guide/wazuh-agent/index>` for information on how to install the Wazuh agent on these endpoints. You need internet access to perform some integrations and download the software used in these use cases.
+Refer to our :doc:`installation guide </installation-guide/index>` for information on how to install the Wazuh agent on these endpoints. You need internet access to perform some integrations and download the software used in these use cases.
 
 Use cases
 ---------
@@ -62,13 +62,13 @@ Use cases
    monitoring-docker
    detect-web-attack-sql-injection
    aws-infrastructure-monitoring
+   network-ids-integration
 
 .. Pages not yet updated for this release - kept out of the build until refreshed
 ..
    detect-unauthorized-processes-netcat
    poc-detect-trojan
    poc-detect-hidden-process
-   integrate-network-ids-suricata
    block-malicious-actor-ip-reputation
    detect-brute-force-attack
    detect-remove-malware-virustotal
