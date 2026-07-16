@@ -31,7 +31,7 @@ Wazuh central components
 For the use cases in this guide, all Wazuh central components (manager, indexer, and dashboard) run on a single system. A single-node deployment is sufficient and recommended for a small-scale lab environment. To install the Wazuh central components on a single endpoint, use one of the following options:
 
 -  The :doc:`Quickstart guide </quickstart>`: Using this guide, you can install all the components on the same system in approximately 5 minutes.
--  Our preconfigured :doc:`virtual machine </deployment-options/virtual-machine/virtual-machine>`: Wazuh provides a pre-built virtual machine image in Open Virtual Appliance (OVA) format. You can import it to VirtualBox or other OVA-compatible virtualization systems.
+-  Our :doc:`preconfigured virtual machine </deployment-options/virtual-machine/virtual-machine>`: Wazuh provides a pre-built virtual machine image in Open Virtual Appliance (OVA) format. You can import it to VirtualBox or other OVA-compatible virtualization systems.
 
 Monitored endpoints
 ^^^^^^^^^^^^^^^^^^^
