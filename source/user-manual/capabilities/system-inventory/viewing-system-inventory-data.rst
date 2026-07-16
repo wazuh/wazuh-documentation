@@ -177,7 +177,7 @@ The Wazuh Syscollector module runs periodic scans and sends the updated data to 
 Using the Wazuh indexer API
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The Wazuh indexer API enables you to perform actions such as adding new indices, querying existing indices, and modifying the Wazuh indexer settings. It retrieves system inventory data from global state indices for selected or multiple monitored endpoints and displays it in a human-readable format. You can perform these queries through the Wazuh indexer API interface on the dashboard or by using command-line tools such as cURL.
+The Wazuh indexer API enables you to perform actions such as adding new indices, querying existing indices, and modifying the Wazuh indexer settings. It retrieves system inventory data from global state indices for selected or multiple monitored endpoints and displays it in a human-readable format. You can perform these queries through the Wazuh indexer API interface on the dashboard or by using command-line tools such as ``cURL``.
 
 Wazuh indexer API GUI
 ~~~~~~~~~~~~~~~~~~~~~
@@ -270,7 +270,7 @@ Follow these steps to access the Wazuh indexer API from the Wazuh dashboard.
 cURL
 ~~~~
 
-Follow the steps below to query the system inventory indices from the command line using cURL.
+Follow the steps below to query the system inventory indices from the command line using ``cURL``.
 
 #. Run the command below to retrieve information about the system inventory indices. Replace ``<WAZUH_INDEXER_USERNAME>`` with the Wazuh indexer username and type the Wazuh indexer password when prompted:
 
@@ -278,7 +278,7 @@ Follow the steps below to query the system inventory indices from the command li
 
       # curl -k -u "<WAZUH_INDEXER_USERNAME>" "https://<WAZUH_INDEXER_IP>:9200/_cat/indices/wazuh-states-inventory-*?v"
 
-   The command output looks similar to this:
+   Sample output:
 
    .. code-block:: none
       :class: output
@@ -761,7 +761,7 @@ Follow the steps below to query the system inventory indices from the command li
         }
       }
 
-#. You can query the system inventory index to look up specific details, such as whether a particular package is installed on any monitored endpoints. For example, the following command checks the package inventory for the presence of the Wazuh Agent package on Windows endpoints. Replace ``<WAZUH_INDEXER_USERNAME>`` with the Wazuh indexer username and type the Wazuh indexer password when prompted:
+#. You can query the system inventory index to look up specific details, such as whether a particular package is installed on any monitored endpoints. For example, the following command checks the package inventory for the presence of the ``Wazuh Agent`` package on Windows endpoints. Replace ``<WAZUH_INDEXER_USERNAME>`` with the Wazuh indexer username and type the Wazuh indexer password when prompted:
 
    .. code-block:: bash
 
@@ -782,71 +782,71 @@ Follow the steps below to query the system inventory indices from the command li
       :class: output
 
       {
-        "took": 0,
-        "timed_out": false,
-        "_shards": {
-          "total": 1,
-          "successful": 1,
-          "skipped": 0,
-          "failed": 0
+        "took" : 0,
+        "timed_out" : false,
+        "_shards" : {
+          "total" : 1,
+          "successful" : 1,
+          "skipped" : 0,
+          "failed" : 0
         },
-        "hits": {
-          "total": {
-            "value": 1,
-            "relation": "eq"
+        "hits" : {
+          "total" : {
+            "value" : 1,
+            "relation" : "eq"
           },
-          "max_score": 1.0,
-          "hits": [
+          "max_score" : 1.0,
+          "hits" : [
             {
-              "_index": "wazuh-states-inventory-packages",
-              "_id": "wazuh_001_084d1c387d3f9e84f518f91af40ab010043a72a9",
-              "_score": 1.0,
-              "_source": {
-                "checksum": {
-                  "hash": {
-                    "sha1": "7b7e57c16c1b49def90d7e9a6e6bbf5dcd7a80fb"
+              "_index" : "wazuh-states-inventory-packages",
+              "_id" : "wazuh_001_084d1c387d3f9e84f518f91af40ab010043a72a9",
+              "_score" : 1.0,
+              "_source" : {
+                "checksum" : {
+                  "hash" : {
+                    "sha1" : "7b7e57c16c1b49def90d7e9a6e6bbf5dcd7a80fb"
                   }
                 },
-                "package": {
-                  "architecture": "i686",
-                  "category": null,
-                  "description": null,
-                  "installed": "2026-07-10T11:17:03.000Z",
-                  "multiarch": null,
-                  "name": "Wazuh Agent",
-                  "path": null,
-                  "priority": null,
-                  "size": 0,
-                  "source": null,
-                  "type": "win",
-                  "vendor": "Wazuh, Inc.",
-                  "version": "5.0.0"
+                "package" : {
+                  "architecture" : "i686",
+                  "category" : null,
+                  "description" : null,
+                  "installed" : "2026-07-10T11:17:03.000Z",
+                  "multiarch" : null,
+                  "name" : "Wazuh Agent",
+                  "path" : null,
+                  "priority" : null,
+                  "size" : 0,
+                  "source" : null,
+                  "type" : "win",
+                  "vendor" : "Wazuh, Inc.",
+                  "version" : "5.0.0"
                 },
-                "state": {
-                  "document_version": 1,
-                  "modified_at": "2026-07-10T12:38:22.675Z"
+                "state" : {
+                  "document_version" : 1,
+                  "modified_at" : "2026-07-10T12:38:22.675Z"
                 },
-                "wazuh": {
-                  "agent": {
-                    "groups": [
+                "wazuh" : {
+                  "agent" : {
+                    "groups" : [
                       "default"
                     ],
-                    "host": {
-                      "architecture": "x86_64",
-                      "hostname": "user1",
-                      "os": {
-                        "name": "Microsoft Windows 11 Pro",
-                        "platform": "windows",
-                        "type": "windows",
-                        "version": "10.0.26100.3775"
+                    "host" : {
+                      "architecture" : "x86_64",
+                      "hostname" : "user1",
+                      "os" : {
+                        "name" : "Microsoft Windows 11 Pro",
+                        "platform" : "windows",
+                        "type" : "windows",
+                        "version" : "10.0.26100.3775"
                       }
                     },
-                    "id": "001",
-                    "name": "Windows-11",
-                    "version": "v5.0.0"
+                    "id" : "001",
+                    "name" : "Windows-11",
+                    "version" : "v5.0.0"
                   },
-                  "cluster": {
-                    "name": "wazuh"
+                  "cluster" : {
+                    "name" : "wazuh"
                   }
                 }
               }
@@ -887,71 +887,71 @@ Follow the steps below to query the system inventory indices from the command li
       :class: output
 
       {
-        "took": 0,
-        "timed_out": false,
-        "_shards": {
-          "total": 1,
-          "successful": 1,
-          "skipped": 0,
-          "failed": 0
+        "took" : 0,
+        "timed_out" : false,
+        "_shards" : {
+          "total" : 1,
+          "successful" : 1,
+          "skipped" : 0,
+          "failed" : 0
         },
-        "hits": {
-          "total": {
-            "value": 1,
-            "relation": "eq"
+        "hits" : {
+          "total" : {
+            "value" : 1,
+            "relation" : "eq"
           },
-          "max_score": 2.0,
-          "hits": [
+          "max_score" : 2.0,
+          "hits" : [
             {
-              "_index": "wazuh-states-inventory-packages",
-              "_id": "wazuh_001_084d1c387d3f9e84f518f91af40ab010043a72a9",
-              "_score": 2.0,
-              "_source": {
-                "checksum": {
-                  "hash": {
-                    "sha1": "7b7e57c16c1b49def90d7e9a6e6bbf5dcd7a80fb"
+              "_index" : "wazuh-states-inventory-packages",
+              "_id" : "wazuh_001_084d1c387d3f9e84f518f91af40ab010043a72a9",
+              "_score" : 2.0,
+              "_source" : {
+                "checksum" : {
+                  "hash" : {
+                    "sha1" : "7b7e57c16c1b49def90d7e9a6e6bbf5dcd7a80fb"
                   }
                 },
-                "package": {
-                  "architecture": "i686",
-                  "category": null,
-                  "description": null,
-                  "installed": "2026-07-10T11:17:03.000Z",
-                  "multiarch": null,
-                  "name": "Wazuh Agent",
-                  "path": null,
-                  "priority": null,
-                  "size": 0,
-                  "source": null,
-                  "type": "win",
-                  "vendor": "Wazuh, Inc.",
-                  "version": "5.0.0"
+                "package" : {
+                  "architecture" : "i686",
+                  "category" : null,
+                  "description" : null,
+                  "installed" : "2026-07-10T11:17:03.000Z",
+                  "multiarch" : null,
+                  "name" : "Wazuh Agent",
+                  "path" : null,
+                  "priority" : null,
+                  "size" : 0,
+                  "source" : null,
+                  "type" : "win",
+                  "vendor" : "Wazuh, Inc.",
+                  "version" : "5.0.0"
                 },
-                "state": {
-                  "document_version": 1,
-                  "modified_at": "2026-07-10T12:38:22.675Z"
+                "state" : {
+                  "document_version" : 1,
+                  "modified_at" : "2026-07-10T12:38:22.675Z"
                 },
-                "wazuh": {
-                  "agent": {
-                    "groups": [
+                "wazuh" : {
+                  "agent" : {
+                    "groups" : [
                       "default"
                     ],
-                    "host": {
-                      "architecture": "x86_64",
-                      "hostname": "user1",
-                      "os": {
-                        "name": "Microsoft Windows 11 Pro",
-                        "platform": "windows",
-                        "type": "windows",
-                        "version": "10.0.26100.3775"
+                    "host" : {
+                      "architecture" : "x86_64",
+                      "hostname" : "user1",
+                      "os" : {
+                        "name" : "Microsoft Windows 11 Pro",
+                        "platform" : "windows",
+                        "type" : "windows",
+                        "version" : "10.0.26100.3775"
                       }
                     },
-                    "id": "001",
-                    "name": "Windows-11",
-                    "version": "v5.0.0"
+                    "id" : "001",
+                    "name" : "Windows-11",
+                    "version" : "v5.0.0"
                   },
-                  "cluster": {
-                    "name": "wazuh"
+                  "cluster" : {
+                    "name" : "wazuh"
                   }
                 }
               }
