@@ -28,11 +28,11 @@ Index
    installation-guide/index
    deployment-options/index
    user-manual/index
+   cloud-security/monitoring
    proof-of-concept-guide/index
    transitioning-from-4x-to-5x/index
 
 ..
-   cloud-security/monitoring
    compliance/index
    upgrade-guide/index
    Integrations guide <integrations-guide/index>

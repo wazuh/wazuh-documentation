@@ -41,6 +41,11 @@ Fine-tune settings and manage the platform's operation.
 
 - **[User Manual](https://documentation.wazuh.com/current/user-manual/index.md)** Comprehensive guide to configuring, operating, and getting the most out of Wazuh.
 
+## Cloud Security
+Monitor cloud platform activity and audit logs with Wazuh.
+
+- **[Monitoring GitHub](https://documentation.wazuh.com/current/cloud-security/github/index.md)** Monitor GitHub audit logs for your organization with Wazuh. Covers required GitHub permissions, generating a personal access token, configuring the Wazuh module for GitHub, and monitoring multiple GitHub organizations.
+
 ## Proof of Concept guide
 Hands-on use cases for exploring Wazuh capabilities in a lab environment, covering threat prevention, detection, and response.
 
