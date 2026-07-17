@@ -23,5 +23,6 @@ For example, the SCA module can assess whether you need to change password-relat
    :maxdepth: 2
 
    how-it-works
+   how-to-configure
    available-sca-policies
    use-cases
