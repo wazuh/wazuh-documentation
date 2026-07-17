@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The Wazuh module for GitHub enables the collection of audit logs from GitHub through its API. Check out this section of our documentation to learn more about it.
+   :description: The Wazuh module for GitHub enables the collection of audit logs from GitHub through its API. Check out this section of our documentation to learn more about it.
 
 Monitoring GitHub audit logs
 =============================
@@ -19,7 +19,7 @@ You need the following requirements on GitHub to access the audit logs with Wazu
 Creating a personal access token on GitHub
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Take the following steps on GitHub to generate the required personal access token. This access token is required to read audit logs.
+Perform the following steps on GitHub to generate the required personal access token. This access token is required to read audit logs.
 
 #. Sign in to GitHub with an account that belongs to the organization owner.
 #. Navigate to https://github.com/settings/tokens/new to create a new personal access token.
@@ -79,7 +79,7 @@ Perform the following steps to allow Wazuh to monitor, collect, and analyze the 
    -  ``<interval>``: Defines the time interval between each execution of the Wazuh module for GitHub. The default value is ``10m``. The allowed value is any positive number with a suffix character indicating a time unit, such as s (seconds), m (minutes), h (hours), or d (days).
    -  ``<time_delay>``: Specifies the delay time of the scan with respect to the current time. The default value is ``30s``. The allowed value is any positive number with a suffix character indicating a time unit, such as s (seconds), m (minutes), h (hours), or d (days).
    -  ``<curl_max_size>``: Specifies the maximum size allowed for the GitHub API response. The default value is ``1M``. The allowed value is any positive number with a suffix character indicating a size unit, such as b/B (bytes), k/K (kilobytes), m/M (megabytes), and g/G (gigabytes).
-   -  ``<only_future_events>``: When set to yes, the Wazuh module for GitHub collects only events generated after you start the Wazuh manager. When set to no, it collects events generated before you start the Wazuh manager. The default value is ``yes``, and the allowed values are ``yes`` and ``no``.
+   -  ``<only_future_events>``: When set to ``yes``, the Wazuh module for GitHub collects only events generated after you start the Wazuh agent. When set to ``no``, it collects events generated before you start the Wazuh agent. The default value is ``yes``, and the allowed values are ``yes`` and ``no``.
    -  ``<api_auth>``: This block configures the credentials for authentication with the GitHub REST API. The tags ``<org_name>`` and ``<api_token>`` are configuration tags within ``<api_auth>``.
 
       -  ``<org_name>``: Name of your GitHub organization. The allowed value is any string.
@@ -104,18 +104,24 @@ You can monitor multiple GitHub organizations with Wazuh by specifying the organ
 
    <github>
      <enabled>yes</enabled>
-     <interval>1m</interval>
-     <time_delay>1m</time_delay>
+     <interval>10m</interval>
+     <time_delay>30s</time_delay>
      <curl_max_size>1M</curl_max_size>
-     <only_future_events>no</only_future_events>
+     <only_future_events>yes</only_future_events>
+
+
      <api_auth>
        <org_name>organization1</org_name>
        <api_token><API_TOKEN></api_token>
      </api_auth>
+
+
      <api_auth>
        <org_name>organization2</org_name>
        <api_token><API_TOKEN></api_token>
      </api_auth>
+
+
      <api_parameters>
        <event_type>git</event_type>
      </api_parameters>
@@ -174,7 +180,7 @@ Detecting manipulation of organization members
 Inviting a member
 """"""""""""""""""
 
-Take the following steps to invite a member to your organization.
+Perform the following steps to invite a member to your organization.
 
 #. Run the following command on the Ubuntu endpoint:
 
@@ -212,7 +218,7 @@ Take the following steps to invite a member to your organization.
           "login": "other_user",
           "id": 2,
           "node_id": "kgDOCifghnx1",
-          "avatar_url": "https://avatars.githubusercontent.com/u/170521045?v=4",
+          "avatar_url": "https://avatars.githubusercontent.com/u/x?v=4",
           "gravatar_id": "",
           "url": "https://api.github.com/users/other_user",
           "html_url": "https://github.com/other_user",
@@ -380,7 +386,7 @@ Sample output:
 Viewing the findings
 """"""""""""""""""""
 
-View the alerts generated on the Wazuh dashboard after we performed the above actions on the monitored GitHub organization.
+View the findings generated on the Wazuh dashboard after we performed the above actions on the monitored GitHub organization.
 
 #. Click the menu icon, then navigate to **Cloud security** > **GitHub**.
 #. Switch to the **Findings** tab.
@@ -401,7 +407,7 @@ Run the following command to create a new repository:
 
 .. code-block:: console
 
-   curl -L \
+   # curl -L \
      -X POST \
      -H "Accept: application/vnd.github+json" \
      -H "Authorization: Bearer <API_TOKEN>" \
@@ -658,13 +664,13 @@ Where:
 Viewing the findings
 """"""""""""""""""""
 
-View the alerts generated on the Wazuh dashboard after we performed the above actions on the monitored GitHub organization.
+View the findings generated on the Wazuh dashboard after we performed the above actions on the monitored GitHub organization.
 
 #. Click the menu icon, then navigate to **Cloud security** > **GitHub**.
 #. Switch to the **Findings** tab.
 
    .. thumbnail:: /images/cloud-security/github/use-case-github-repository-monitoring-alerts-dashboard.png
-      :title: GitHub repository monitoring alerts dashboard
-      :alt: GitHub repository monitoring alerts dashboard
+      :title: Repository monitoring alerts dashboard
+      :alt: Repository monitoring alerts dashboard
       :align: center
       :width: 80%
