@@ -75,8 +75,8 @@
 {%- set temp_css_files = []  -%}
 {%- for cssfile in css_files -%}
   {%- if cssfile not in unwanted_css -%}
-    {%- if environment == "dev" or environment == "production" -%}
-    {% set cssfile = cssfile.replace("_static/","/current/_static/") %}
+    {%- if (environment == "dev" or environment == "production") and pagename == "not_found" -%}
+      {% set cssfile = cssfile.replace("_static/","/current/_static/") %}
     {%- endif -%}
     {{- temp_css_files.append(cssfile)|default("", True) -}}
   {%- endif -%}
@@ -87,14 +87,14 @@
 {%- for scriptfile in script_files -%}
   {%- if scriptfile not in unwanted_js -%}
     {%- if scriptfile.filename -%}
-      {%- if environment == "dev" or environment == "production" -%}
+      {%- if (environment == "dev" or environment == "production") and pagename == "not_found" -%}
         {% set scriptfile = scriptfile.filename.replace("_static/","/current/_static/") %}
       {%- else -%}
         {% set scriptfile = scriptfile.filename %}
       {%- endif -%}
       {{- temp_script_files.append(scriptfile)|default("", True) -}}
     {%- else -%}
-      {%- if environment == "dev" or environment == "production" -%}
+      {%- if (environment == "dev" or environment == "production") and pagename == "not_found" -%}
         {% set scriptfile = scriptfile.replace("_static/","/current/_static/") %}
       {%- endif -%}
       {{- temp_script_files.append(scriptfile)|default("", True) -}}
@@ -130,7 +130,7 @@
     <link rel="stylesheet" href="{{ pathto(cssfile, 1) }}" type="text/css">
   {%- endfor -%}
 {% endif -%}
-{%- if environment == "dev" or environment == "production" -%}
+{%- if (environment == "dev" or environment == "production") and pagename == "not_found" -%}
   {% set page_css = pathto('/current/_static/'+get_css_by_page(pagename), 1) %}
 {%- else -%}
   {% set page_css = pathto('_static/'+get_css_by_page(pagename), 1) %}
@@ -156,7 +156,7 @@
 {#- Add specific files -#}
   {% set specific_js_files = get_js_by_page(pagename) %}
   
-  {%- if environment == "dev" or environment == "production" -%}
+  {%- if (environment == "dev" or environment == "production") and pagename == "not_found" -%}
     {%- set temp_specific_js_files = []  -%}
     {%- for page_scriptfile in specific_js_files -%}
       {{- temp_specific_js_files.append("/current/"+page_scriptfile)|default("", True) }}
@@ -303,10 +303,8 @@
     
     {#- FAVICON -#}
     {%- set path_to_favicon = pathto('_static/images/favicon.ico', 1) -%}
-    {%- if environment == "dev" or environment == "production" -%}
-      {%- if pagename == "not_found" -%}
-        {%- set path_to_favicon = '/current/' + path_to_favicon -%}
-      {% endif %}
+    {%- if (environment == "dev" or environment == "production") and pagename == "not_found" -%}
+      {%- set path_to_favicon = '/current/' + path_to_favicon -%}
     {% endif %}
     <link rel="icon" href="{{ path_to_favicon }}?v={{ compilation_ts }}"/>
     
@@ -363,7 +361,7 @@
     {% endblock icons -%}
   </div>
   {%- block after_footer %}
-    {%- if environment == "dev" or environment == "production" -%}
+    {%- if (environment == "dev" or environment == "production") and pagename == "not_found" -%}
       {% set documentation_options_path = pathto('/current/_static/js/documentation_options.js', 1) %}
       {% set url_root_path = pathto('', 1) %}
     {%- else -%}
