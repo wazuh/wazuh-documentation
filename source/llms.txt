@@ -34,7 +34,7 @@ Step-by-step guides for installing Wazuh central components and agents across va
 - **[Deployment Alternatives](https://documentation.wazuh.com/current/deployment-options/index.md)** Install using different methods like Virtual Machines (OVA), Docker, or Kubernetes.
 - **[Deployment with Ansible](https://documentation.wazuh.com/current/deployment-options/deploying-with-ansible/index.md)** Automate your Wazuh deployment using Ansible playbooks for configuration management.
 - **[Offline Installation Guide](https://documentation.wazuh.com/current/deployment-options/offline-installation/index.md)** Install Wazuh in environments without direct internet access.
-- **[Transitioning from Wazuh 4.x to 5.x](https://documentation.wazuh.com/current/transitioning-from-4x-to-5x/index.md)** Deploy a new Wazuh 5.x environment using an existing Wazuh 4.x deployment as the source for supported configuration and security settings. Covers the transition plan, and recreating supported configuration for the Wazuh indexer, manager, and dashboard.
+- **[Transitioning from 4.x to 5.x](https://documentation.wazuh.com/current/transitioning-from-4x-to-5x/index.md)** Deploy a new Wazuh 5.x environment using an existing Wazuh 4.x deployment as the source for supported configuration and security settings. Covers the transition plan, and recreating supported configuration for the Wazuh indexer, manager, and dashboard.
 
 ### Configuration & Management
 Fine-tune settings and manage the platform's operation.
