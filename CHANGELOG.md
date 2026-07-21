@@ -37,6 +37,7 @@ All notable changes to this project will be documented in this file.
 - Updated the *System inventory* documentation. ([#9820](https://github.com/wazuh/wazuh-documentation/pull/9820)) ([#9832](https://github.com/wazuh/wazuh-documentation/pull/9832))
 - Updated the *Security configuration assessment* capability documentation. ([#9834](https://github.com/wazuh/wazuh-documentation/pull/9834)) ([#9849](https://github.com/wazuh/wazuh-documentation/pull/9849))
 - Updated the *Vulnerability detection* capability documentation. ([#9835](https://github.com/wazuh/wazuh-documentation/pull/9835)) ([#9841](https://github.com/wazuh/wazuh-documentation/pull/9841))
+- Updated the *Command monitoring* capability documentation. ([#9883](https://github.com/wazuh/wazuh-documentation/pull/9883))
 
 ### Removed
 
