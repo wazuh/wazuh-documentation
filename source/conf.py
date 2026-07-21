@@ -104,7 +104,6 @@ exclude_patterns = [
     'user-manual/api/**',
     'user-manual/capabilities/active-response/**',
     'user-manual/capabilities/agentless-monitoring/**',
-    'user-manual/capabilities/command-monitoring/**',
     'user-manual/capabilities/file-integrity/**',
     'user-manual/capabilities/log-data-collection/**',
     'user-manual/capabilities/malware-detection/**',
