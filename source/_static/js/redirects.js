@@ -39,7 +39,7 @@ const versions = [
 
 betaVersions.push(
   /* [ LABEL , BETA_FOLDER, FILE_PATH ] */
-  ['5.0 (Beta 3)', '5.0-beta', '/index.html']
+  ['5.0 (Beta 4)', '5.0-beta', '/index.html']
 );
 
 /* Data structure for every release
