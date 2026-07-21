@@ -195,6 +195,8 @@ Make sure the space selector reads **Draft** and follow these steps to assign a 
       :align: center
       :width: 80%
 
+.. _data_analysis_create_custom_rule:
+
 Create a custom rule
 --------------------
 

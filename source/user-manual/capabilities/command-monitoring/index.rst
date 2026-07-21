@@ -1,16 +1,25 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-    :description: Explore Wazuh command monitoring: Learn its operation, setup, output analysis, and real-world applications.
-    
+    :description: Explore Wazuh command monitoring: run commands or binaries on monitored endpoints and forward their output for analysis.
+
 .. _manual_command_monitoring:
 
 Command monitoring
 ==================
 
-Wazuh command monitoring capability allows you to monitor the output of specific commands and treat the output as log content. Command monitoring can be used to monitor a variety of things, such as disk space utilization, load average, a change in network listeners, and running processes to ensure all important processes are running.
+The Wazuh command monitoring capability runs commands or binaries on monitored endpoints at specified intervals and forwards their output to Wazuh for analysis.
 
-Command monitoring can be used to detect a variety of anomalies and threats. For example, you could use it to monitor for a change in the output of the ``netstat`` command, which would indicate that a new network listener has been added or removed. You could also use it to monitor for the presence of specific strings in the output of the ``ps`` command, which could indicate that a malicious process is running.
+Depending on your needs, you can use the Wazuh Command module to run desired or custom commands that perform the following:
+
+-  Checks that a critical service or process is running
+-  Monitors disk space, memory, or CPU usage thresholds
+-  Runs custom security or compliance checks (e.g., verifying a configuration setting)
+-  Detects the presence or absence of specific files, users, or packages
+-  Integrates third-party scripts or health-check tools in Wazuh
+-  Periodically checks network connectivity or port-reachability
+
+Although some of the activities above can be performed using the :doc:`SCA </user-manual/capabilities/sec-config-assessment/index>` and :doc:`Syscollector </user-manual/capabilities/system-inventory/configuration>` modules, the Command module allows you to run the checks at a more fine-tuned interval and produces outputs you can decode and trigger findings for.
 
 .. topic:: Contents
 
@@ -18,6 +27,7 @@ Command monitoring can be used to detect a variety of anomalies and threats. For
         :maxdepth: 2
 
         how-it-works
+        requirements
         configuration
-        command-output-analysis
-        use-cases/index   
+        security-considerations
+        use-cases/index

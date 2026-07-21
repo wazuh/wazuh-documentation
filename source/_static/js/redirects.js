@@ -107,6 +107,8 @@ newUrls['5.0'] = [
   '/user-manual/data-analysis/detectors.html',
   '/user-manual/data-analysis/findings.html',
   '/user-manual/data-analysis/detection-workflow.html',
+  '/user-manual/capabilities/command-monitoring/requirements.html',
+  '/user-manual/capabilities/command-monitoring/security-considerations.html',
   '/transitioning-from-4x-to-5x/index.html',
   '/transitioning-from-4x-to-5x/transition-plan.html',
   '/transitioning-from-4x-to-5x/wazuh-indexer.html',
@@ -192,6 +194,11 @@ redirections.push(
     'target': ['4.14=>5.0', '5.0=>4.14'],
     '4.14': '/proof-of-concept-guide/integrate-network-ids-suricata.html',
     '5.0': '/proof-of-concept-guide/network-ids-integration.html',
+  },
+  {
+    'target': ['4.14=>5.0'],
+    '4.14': '/user-manual/capabilities/command-monitoring/command-output-analysis.html',
+    '5.0': '/user-manual/capabilities/command-monitoring/configuration.html#command-monitoring-configuration-example-wazuh-dashboard',
   }
 );
 
@@ -240,6 +247,10 @@ removedUrls['5.0'] = [
   '/upgrade-guide/wazuh-agent/aix.html',
   '/upgrade-guide/wazuh-agent/hp-ux.html',
   '/upgrade-guide/wazuh-agent/solaris.html',
+  '/user-manual/capabilities/command-monitoring/command-output-analysis.html',
+  '/user-manual/capabilities/command-monitoring/use-cases/check-if-the-output-changed.html',
+  '/user-manual/capabilities/command-monitoring/use-cases/load-average.html',
+  '/user-manual/capabilities/command-monitoring/use-cases/detect-usb-storage.html',
 ];
 
 /* *** RELEASE 4.14 ****/
