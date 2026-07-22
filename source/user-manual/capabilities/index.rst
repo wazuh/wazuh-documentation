@@ -11,11 +11,11 @@ This section shows detailed explanation of the Wazuh capabilities and their conf
 .. toctree::
    :maxdepth: 2
 
+   sec-config-assessment/index
+   vulnerability-detection/index
    command-monitoring/index
    container-security/index
-   sec-config-assessment/index
    system-inventory/index
-   vulnerability-detection/index
 
 ..
    file-integrity/index
