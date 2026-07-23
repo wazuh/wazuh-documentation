@@ -28,18 +28,11 @@ Tools
 |                                                   |                                                                            |                             |
 |                                                   | and system auditing database                                               |                             |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :doc:`syscheck_control <syscheck_control>`        | Provides an interface for managing the integrity checking database         | manager                     |
-|                                                   |                                                                            |                             |
-|                                                   | .. deprecated:: 3.7                                                        |                             |
-+---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :doc:`syscheck_update <syscheck_update>`          | Updates the integrity check database                                       | manager                     |
-|                                                   |                                                                            |                             |
-|                                                   | .. deprecated:: 3.7                                                        |                             |
-+---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`clear_stats <clear_stats>`                  | Clears the events stats                                                    | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`ossec-regex <ossec-regex>`                  | Validates a regex expression                                               | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
+|                                                   | .. deprecated:: 4.2.0                                                      |                             |
 | :doc:`update_ruleset <update_ruleset>`            | Update Decoders, Rules and Rootchecks                                      | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`util.sh <util.sh>`                          | Adds a file to be monitored by ossec-logcollector                          | manager agent               |
@@ -68,8 +61,6 @@ Tools
     ossec-logtest
     ossec-makelists
     rootcheck_control
-    syscheck_control
-    syscheck_update
     clear_stats
     ossec-regex
     update_ruleset
