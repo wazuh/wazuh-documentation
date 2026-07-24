@@ -61,15 +61,16 @@ Use cases
    poc-security-configuration-assessment
    monitoring-docker
    detect-web-attack-sql-injection
+   detect-web-attack-xss
    aws-infrastructure-monitoring
    network-ids-integration
+   poc-detect-hidden-process
+   block-malicious-actor-ip-reputation
 
 .. Pages not yet updated for this release - kept out of the build until refreshed
 ..
    detect-unauthorized-processes-netcat
    poc-detect-trojan
-   poc-detect-hidden-process
-   block-malicious-actor-ip-reputation
    detect-brute-force-attack
    detect-remove-malware-virustotal
    detect-malware-yara-integration
