@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: In this PoC, you learn how to block malicious IP addresses from accessing web resources on a web server. Learn more about this in our documentation.
+   :description: Use a Wazuh KVDB, custom decoders and rules, and Active Response to detect and automatically block a known malicious IP address from accessing a web server. Learn more about this in this PoC.
 
 Blocking a known malicious actor
 ================================
