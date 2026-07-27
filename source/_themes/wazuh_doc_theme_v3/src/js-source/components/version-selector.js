@@ -58,6 +58,16 @@ jQuery(function($) {
   const thisVersion = DOCUMENTATION_OPTIONS.VERSION;
   const listOfVersions = typeof(versions) === 'undefined' ? [] : versions;
 
+  /* Get all the paths created untill current */
+  const allCreatedPaths = [];
+  let pathsInVersion;
+  for (let i = 0; i < listOfVersions.length; i++ ) {
+    pathsInVersion = newUrls[listOfVersions[i]];
+    for (let j = 0; j < pathsInVersion.length; j++) {
+      allCreatedPaths.push(normalizeUrl(pathsInVersion[j]));
+    }
+  }
+
   /* Adds the current version to the selector button */
   checkCurrentVersion();
 
@@ -225,8 +235,7 @@ jQuery(function($) {
       ver = versionsCopy[i];
       verNoDot = ver.replace('.','_');
       aEle = $('#to'+verNoDot);
-      
-      if ( redirHistory[ver] != null && redirHistory[ver].length ) {
+      if ( redirHistory[ver] != null && redirHistory[ver].length && allCreatedPaths.includes(normalizeUrl(redirHistory[ver])) ) {
         if ( i == 0 ) { // the latest release version
           href = '/current'+redirHistory[ver]+param;
         } else {
@@ -486,7 +495,7 @@ jQuery(function($) {
    * @param {array} newUrls A list with all the new pages
    * @return {array|boolean} A list with the new pages related with the page URL
    */
-  function getInfoNewsUrl(page, newUrls) { 
+  function getInfoNewsUrl(page, newUrls) {
     let newUrlsTemp = false;
     for (forRelease in newUrls) {
       if ({}.hasOwnProperty.call(newUrls, forRelease)) {
