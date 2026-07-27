@@ -1,154 +1,373 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about how the Security Configuration Assessment capability of Wazuh works in this section of the documentation. 
-  
-How SCA works
-=============
+  :description: Learn more about how the Wazuh Security Configuration Assessment capability works, including SCA scan results, integrity mechanisms, and remediation.
 
-Each Wazuh agent has its own local database where it stores the current state of each SCA check. The Wazuh server maintains an SCA database for all agents that are enrolled to it. Wazuh agents only send the differences detected between scans to the Wazuh server. If there has been no change, only a summary of the SCA scan is sent, thus avoiding unnecessary network traffic while keeping the SCA database on the Wazuh server up to date. The Wazuh server then uses those updates to issue alerts that are shown in the Wazuh dashboard.
+How it works
+============
 
-Integrity and alerting flow are depicted in the sequence diagram below.
+The Wazuh agent performs SCA scans using policy files. Each policy file defines the security configuration checks to run on monitored endpoints. During a scan, the Wazuh agent evaluates endpoint settings against the rules defined in each policy to determine whether they follow the expected security configuration.
 
-  .. thumbnail:: /images/sca/sca-sequence-diagram.png
-     :title: SCA integrity and alerting flow
-     :alt: SCA integrity and alerting flow
-     :align: center
-     :width: 80%
+By default, the Wazuh agent runs scans for every policy (``.yaml`` or ``.yml`` files) present in the ruleset directory. This directory can be found in the following locations on every operating system that runs the Wazuh agent:
 
-.. _sca_check_overview:
+- Linux and Unix-based agents: ``/var/ossec/ruleset/sca``.
+- Windows agents: ``C:\Program Files (x86)\ossec-agent\ruleset\sca``.
+- macOS agents: ``/Library/Ossec/ruleset/sca``.
 
-Overview of an SCA check
-------------------------
+After each scan, the following happens:
 
-Checks are the core of an SCA policy, as they describe the scan to be performed in the endpoint. The checks contain fields that define what actions the agent should take to scan the endpoint, and how to evaluate the scan results. Each check definition comprises:
+#. The Wazuh agent synchronizes the SCA results with the Wazuh manager.
+#. The Wazuh manager processes the scan results and sends the SCA state data to the Wazuh indexer where it is stored in the ``wazuh-states-sca-*`` index.
+#. The Wazuh dashboard queries this index to provide centralized visibility into endpoint compliance status and security configuration findings.
 
-- Metadata information including a rationale, remediation, and a description of the check.
-- A logical description with the ``condition`` and ``rules`` fields.
+To optimize synchronization, the Wazuh agent tracks the current state of each SCA check and sends only the updates required to keep the manager synchronized. When no changes are detected between scans, the agent sends a scan summary instead of generating new SCA events.
 
-As part of the metadata, the SCA policy can contain an optional compliance field used to specify if the check is relevant to any compliance specifications. SCA checks usually indicate standards or policies that they aim to comply with. For example, we map CIS benchmark, PCI-DSS, NIST, and TSC controls to the relevant SCA checks.
+The sequence diagram below depicts the integrity and alerting flow.
 
-See below SCA policy ID ``19115`` for Ubuntu 20.04 operating system as an example of a policy definition.
+.. thumbnail:: /images/sca/sca-sequence-diagram.png
+   :title: SCA module integrity and alerting flow
+   :alt: SCA module integrity and alerting flow
+   :align: center
+   :width: 80%
 
-.. code-block:: yaml
+Understanding SCA scan results
+-------------------------------
 
-   - id: 19115
-       title: "Ensure SSH HostbasedAuthentication is disabled."
-       description: "The HostbasedAuthentication parameter specifies if authentication is allowed through trusted hosts via the user of .rhosts, or /etc/hosts.equiv, along with successful public key client host authentication."
-       rationale: "Even though the .rhosts files are ineffective if support is disabled in /etc/pam.conf, disabling the ability to use .rhosts files in SSH provides an additional layer of protection."
-       remediation: "Edit the /etc/ssh/sshd_config file to set the parameter above any Include entries as follows: HostbasedAuthentication no Note: First occurrence of a option takes precedence, Match set statements withstanding. If Include locations are enabled, used, and order of precedence is understood in your environment, the entry may be created in a file in Include location."
-       compliance:
-          - cis: ["4.2.8"]
-          - mitre_mitigations: ["M1042"]
-          - mitre_tactics: ["TA0001"]
-          - mitre_techniques: ["T1078", "T1078.001", "T1078.003"]
-       condition: all
-       rules:
-          - 'c:sshd -T -> r:^\s*HostbasedAuthentication\s+no'
-          - 'not f:/etc/ssh/sshd_config -> r:^\s*HostbasedAuthentication\s+yes'    
-
-Scan Results
-------------
-
-SCA scan results appear as alerts with SCA scan data whenever a particular check changes its status between scans. Moreover, Wazuh agents only send those events necessary to keep the global status of the scan updated, avoiding potential events flooding.
+SCA scan results appear as findings with SCA scan data when a check's status changes between scans. Wazuh agents send only the events necessary to keep the SCA state synchronized, which avoids potential event flooding.
 
 Any given check event has three possible results:
 
--  Passed
--  Failed
--  Not applicable
+- Passed: The endpoint configuration satisfies the conditions defined in the check.
+- Failed: The endpoint configuration does not satisfy the conditions defined in the check.
+- Not applicable: The check cannot be evaluated, for example, because a required file, command output, or registry value is unavailable or it does not apply to the operating system or software.
 
-This result is determined by the set of rules and the rule result aggregator of the check.
+The set of rules and the :ref:`check <sca_policy_file_checks_section>` result aggregator determine this result.
 
-Take the following SCA check from policy ``cis_ubuntu20-04.yml`` as an example. The example SCA check shown scans the Ubuntu 20 endpoint to verify if you have implemented a “deny all” policy on your endpoint firewall:
+On the Wazuh dashboard, navigate to **Endpoint Security** > **Configuration assessment** to view the scan summaries for the Wazuh agents.
+
+.. thumbnail:: /images/sca/configuration-assessment-dashboard.png
+   :title: Configuration Assessment scan summary
+   :alt: Configuration Assessment scan summary
+   :align: center
+   :width: 80%
+
+The **Inventory** tabs under the **Configurations Assessment** dashboard, provides the current SCA state for monitored endpoints. It displays the SCA policies evaluated on each endpoint and their individual checks, and the check result.
+
+.. thumbnail:: /images/sca/sca-inventory.png
+   :title: SCA inventory
+   :alt: SCA inventory
+   :align: center
+   :width: 80%
+
+The **Findings** tabs under the **Configurations Assessment** dashboard, displays the SCA findings generated when the result of a check changes between scans.
+
+.. thumbnail:: /images/sca/sca-findings.png
+   :title: SCA findings
+   :alt: SCA findings
+   :align: center
+   :width: 80%
+
+Example: Firewall check on an Ubuntu 22.04 endpoint
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+On the Wazuh dashboard, navigate to **Endpoint security** > **Configuration assessment** > **Inventory** and select the Ubuntu 22.04 endpoint to view its SCA results. The policy name on the Wazuh dashboard is **CIS Ubuntu Linux 22.04 LTS Benchmark v2.0.0** and is stored in the ``/var/ossec/ruleset/sca/cis_ubuntu22-04.yml`` file. The highlighted result shows check ``28588``, which verifies that a default deny policy is configured for the IPv6 firewall.
+
+.. thumbnail:: /images/sca/sca-scans-ubuntu-endpoint.png
+   :title: SCA scans for an Ubuntu 22.04 endpoint
+   :alt: SCA scans for an Ubuntu 22.04 endpoint
+   :align: center
+   :width: 80%
+
+You can expand each scan result to display additional information. On the Wazuh dashboard, navigate to the **Endpoint security** > **Configuration assessment** > **Inventory**. Click on **Inspect details** to see more information on the scan result.
+
+.. thumbnail:: /images/sca/configuration-assessment-additional-information.png
+   :title: Expanded SCA check result
+   :alt: Expanded SCA check result
+   :align: center
+   :width: 80%
+
+The YAML definition for this SCA check for ``28588`` is shown below.
 
 .. code-block:: yaml
 
-   - id: 19098
-       title: "Ensure ip6tables default deny firewall policy."
-       description: "A default deny all policy on connections ensures that any unconfigured network usage will be rejected. Note: - Changing firewall settings while connected over network can result in being locked out of the system - Remediation will only affect the ac$    rationale: "With a default accept policy the firewall will accept any packet that is not configured to be denied. It is easier to white list acceptable usage than to black list unacceptable usage."
-       remediation: "IF IPv6 is enabled on your system: Run the following commands to implement a default DROP policy: # ip6tables -P INPUT DROP # ip6tables -P OUTPUT DROP # ip6tables -P FORWARD DROP."
-       compliance:
-         - cis: ["3.4.3.3.1"]
-         - cis_csc_v8: ["4.4", "4.5"]
-         - cis_csc_v7: ["9.4"]
-         - cmmc_v2.0: ["AC.L1-3.1.20", "CM.L2-3.4.7", "SC.L1-3.13.1", "SC.L2-3.13.6"]
-         - iso_27001-2013: ["A.13.1.1"]
-         - mitre_mitigations: ["M1031", "M1037"]
-         - mitre_tactics: ["TA0011"]
-         - mitre_techniques: ["T1562", "T1562.004"]
-         - nist_sp_800-53: ["SC-7(5)"]
-         - pci_dss_v3.2.1: ["1.1.4", "1.3.1", "1.4"]
-         - pci_dss_v4.0: ["1.2.1", "1.4.1"]
-         - soc_2: ["CC6.6"]
-       condition: all
-       rules:
-         - "c:ip6tables -L -> r:^Chain INPUT && r:policy DROP"
-         - "c:ip6tables -L -> r:^Chain FORWARD && r:policy DROP"
-         - "c:ip6tables -L -> r:^Chain OUTPUT && r:policy DROP"
+   - id: 28588
+     name: "Ensure ip6tables default deny firewall policy."
+     description: "A default deny all policy on connections ensures that any unconfigured network usage will be rejected. Note: - Changing firewall settings while connected over network can result in being locked out of the system - Remediation will only affect the active system firewall, be sure to configure the default policy in your firewall management to apply on boot as well."
+     rationale: "With a default accept policy the firewall will accept any packet that is not configured to be denied. It is easier to white list acceptable usage than to black list unacceptable usage. Internal Only - General."
+     remediation: "IF IPv6 is enabled on your system: Run the following commands to implement a default DROP policy: # ip6tables -P INPUT DROP # ip6tables -P OUTPUT DROP # ip6tables -P FORWARD DROP."
+     compliance:
+       cmmc: ["AC.L2-3.1.20", "CM.L2-3.4.7", "SC.L2-3.13.1", "SC.L2-3.13.6"]
+       fedramp: ["SC-7"]
+       gdpr: ["IV_32.1.a", "IV_32.1.b", "IV_32.1.c", "IV_32.1.d", "IV_32.2", "IV_32.3", "IV_32.4"]
+       hipaa: ["164.312(e)(1)", "164.312(b)"]
+       iso_27001: ["A.13.1.1", "A.13.1.2", "A.12.4.1"]
+       nis2: ["21.2.e", "21.2.i", "21.2.a"]
+       nist_800_171: ["3.1.20", "3.4.7", "3.13.1", "3.13.6"]
+       nist_800_53: ["SC-7"]
+       pci_dss: ["1.1", "1.3", "1.2", "1.4"]
+       tsc: ["CC6.6", "CC6.1", "CC6.2", "CC6.3", "CC6.4", "CC6.5", "CC6.7", "CC6.8", "CC7.1", "CC7.2", "CC7.3", "CC7.4", "CC7.5", "CC4.1", "CC4.2"]
+     mitre:
+       tactic:
+         id:
+           - "TA0001"
+           - "TA0011"
+         name:
+           - "Initial Access"
+           - "Command and Control"
+       technique:
+         id:
+           - "T1046"
+           - "T1090"
+           - "T1133"
+         name:
+           - "Network Service Discovery"
+           - "Proxy"
+           - "External Remote Services"
+       subtechnique:
+         id:
+           - "T1090.001"
+           - "T1090.002"
+           - "T1557.001"
+         name:
+           - "Internal Proxy"
+           - "External Proxy"
+           - "LLMNR/NBT-NS Poisoning and SMB Relay"
+     condition: all
+     rules:
+       - "c:ip6tables -L -> r:^Chain INPUT && r:policy DROP"
+       - "c:ip6tables -L -> r:^Chain FORWARD && r:policy DROP"
+       - "c:ip6tables -L -> r:^Chain OUTPUT && r:policy DROP"
+   # 4.3.3.2 Ensure ip6tables loopback traffic is configured. (Automated)
+   - id: 28589
+     name: "Ensure ip6tables loopback traffic is configured."
+     description: "Configure the loopback interface to accept traffic. Configure all other interfaces to deny traffic to the loopback network (::1). Note: - Changing firewall settings while connected over network can result in being locked out of the system - Remediation will only affect the active system firewall, be sure to configure the default policy in your firewall management to apply on boot as well."
+     rationale: "Loopback traffic is generated between processes on machine and is typically critical to operation of the system. The loopback interface is the only place that loopback network (::1) traffic should be seen, all other interfaces should ignore traffic on this network as an anti-spoofing measure. Internal Only - General."
+     remediation: "Run the following commands to implement the loopback rules: # ip6tables -A INPUT -i lo -j ACCEPT # ip6tables -A OUTPUT -o lo -j ACCEPT # ip6tables -A INPUT -s ::1 -j DROP."
+     compliance:
+       cmmc: ["AC.L2-3.1.20", "CM.L2-3.4.7", "SC.L2-3.13.1", "SC.L2-3.13.6"]
+       fedramp: ["SC-7"]
+       gdpr: ["IV_32.1.a", "IV_32.1.b", "IV_32.1.c", "IV_32.1.d", "IV_32.2", "IV_32.3", "IV_32.4"]
+       hipaa: ["164.312(e)(1)", "164.312(b)"]
+       iso_27001: ["A.13.1.1", "A.13.1.2", "A.12.4.1"]
+       nis2: ["21.2.e", "21.2.i", "21.2.a"]
+       nist_800_171: ["3.1.20", "3.4.7", "3.13.1", "3.13.6"]
+       nist_800_53: ["SC-7"]
+       pci_dss: ["1.1", "1.3", "1.2", "1.4"]
+       tsc: ["CC6.6", "CC6.1", "CC6.2", "CC6.3", "CC6.4", "CC6.5", "CC6.7", "CC6.8", "CC7.1", "CC7.2", "CC7.3", "CC7.4", "CC7.5", "CC4.1", "CC4.2"]
+     mitre:
+       tactic:
+         id:
+           - "TA0001"
+           - "TA0011"
+         name:
+           - "Initial Access"
+           - "Command and Control"
+       technique:
+         id:
+           - "T1046"
+           - "T1090"
+           - "T1133"
+         name:
+           - "Network Service Discovery"
+           - "Proxy"
+           - "External Remote Services"
+       subtechnique:
+         id:
+           - "T1090.001"
+           - "T1090.002"
+           - "T1557.001"
+         name:
+           - "Internal Proxy"
+           - "External Proxy"
+           - "LLMNR/NBT-NS Poisoning and SMB Relay"
+     condition: all
+     rules:
+       - 'c:ip6tables -L INPUT -v -n -> r:.*ACCEPT.*all.*lo.*[*!+-].*::/0.*::/0'
+       - 'c:ip6tables -L INPUT -v -n -> r:.*DROP.*all.*[*!+-].*[*!+-].*::1.*::/0'
+       - 'c:ip6tables -L OUTPUT -v -n -> r:.*ACCEPT.*all.*[*!+-].*lo.*::/0.*::/0'
+   # 4.3.3.3 Ensure ip6tables outbound and established connections are configured. (Manual) - Not Implemented
+   # 4.3.3.4 Ensure ip6tables firewall rules exist for all open ports. (Automated) Not Implemented
 
-After evaluating the aforementioned check, the following event is generated:
+Evaluating this check generates the following event:
 
 .. code-block:: json
 
-    "data": {
-      "sca": {
-        "scan_id": "1023532995",
-        "check": {
-          "result": "failed",
-          "remediation": "IF IPv6 is enabled on your system: Run the following commands to implement a default DROP policy: # ip6tables -P INPUT DROP # ip6tables -P OUTPUT DROP # ip6tables -P FORWARD DROP.",
-          "compliance": {
-            "pci_dss_v4": {
-              "0": "1.2.1,1.4.1"
-            },
-            "cis_csc_v8": "4.4,4.5",
-            "soc_2": "CC6.6",
-            "pci_dss_v3": {
-              "2": {
-                "1": "1.1.4,1.3.1,1.4"
-              }
-            },
-            "nist_sp_800-53": "SC-7(5)",
-            "mitre_tactics": "TA0011",
-            "mitre_techniques": "T1562,T1562.004",
-            "cis": "3.4.3.3.1",
-            "cmmc_v2": {
-              "0": "AC.L1-3.1.20,CM.L2-3.4.7,SC.L1-3.13.1,SC.L2-3.13.6"
-            },
-            "iso_27001-2013": "A.13.1.1",
-            "cis_csc_v7": "9.4",
-            "mitre_mitigations": "M1031,M1037"
-          },
-          "description": "A default deny all policy on connections ensures that any unconfigured network usage will be rejected. Note: - Changing firewall settings while connected over network can result in being locked out of the system - Remediation will only affect the active system firewall, be sure to configure the default policy in your firewall management to apply on boot as well.",
-          "id": "19098",
-          "title": "Ensure ip6tables default deny firewall policy.",
-          "rationale": "With a default accept policy the firewall will accept any packet that is not configured to be denied. It is easier to white list acceptable usage than to black list unacceptable usage.",
-          "command": [
-            "ip6tables -L"
-          ]
-        },
-        "type": "check",
-        "policy": "CIS Ubuntu Linux 20.04 LTS Benchmark v2.0.0"
-      }
-    },
+   {
+     "_index": "wazuh-states-sca",
+     "_id": "wazuh_003_b127c9987a3963a172ffef149db2fed2d1c64c13",
+     "_score": 0,
+     "_source": {
+       "check": {
+         "compliance": {
+           "cmmc": [
+             "AC.L2-3.1.20",
+             "CM.L2-3.4.7",
+             "SC.L2-3.13.1",
+             "SC.L2-3.13.6"
+           ],
+           "fedramp": [
+             "SC-7"
+           ],
+           "gdpr": [
+             "IV_32.1.a",
+             "IV_32.1.b",
+             "IV_32.1.c",
+             "IV_32.1.d",
+             "IV_32.2",
+             "IV_32.3",
+             "IV_32.4"
+           ],
+           "hipaa": [
+             "164.312(e)(1)",
+             "164.312(b)"
+           ],
+           "iso_27001": [
+             "A.13.1.1",
+             "A.13.1.2",
+             "A.12.4.1"
+           ],
+           "nis2": [
+             "21.2.e",
+             "21.2.i",
+             "21.2.a"
+           ],
+           "nist_800_171": [
+             "3.1.20",
+             "3.4.7",
+             "3.13.1",
+             "3.13.6"
+           ],
+           "nist_800_53": [
+             "SC-7"
+           ],
+           "pci_dss": [
+             "1.1",
+             "1.3",
+             "1.2",
+             "1.4"
+           ],
+           "tsc": [
+             "CC6.6",
+             "CC6.1",
+             "CC6.2",
+             "CC6.3",
+             "CC6.4",
+             "CC6.5",
+             "CC6.7",
+             "CC6.8",
+             "CC7.1",
+             "CC7.2",
+             "CC7.3",
+             "CC7.4",
+             "CC7.5",
+             "CC4.1",
+             "CC4.2"
+           ]
+         },
+         "condition": "all",
+         "description": "A default deny all policy on connections ensures that any unconfigured network usage will be rejected. Note: - Changing firewall settings while connected over network can result in being locked out of the system - Remediation will only affect the active system firewall, be sure to configure the default policy in your firewall management to apply on boot as well.",
+         "id": "28588",
+         "mitre": {
+           "subtechnique": {
+             "id": [
+               "T1090.001",
+               "T1090.002",
+               "T1557.001"
+             ],
+             "name": [
+               "Internal Proxy",
+               "External Proxy",
+               "LLMNR/NBT-NS Poisoning and SMB Relay"
+             ]
+           },
+           "tactic": {
+             "id": [
+               "TA0001",
+               "TA0011"
+             ],
+             "name": [
+               "Initial Access",
+               "Command and Control"
+             ]
+           },
+           "technique": {
+             "id": [
+               "T1046",
+               "T1090",
+               "T1133"
+             ],
+             "name": [
+               "Network Service Discovery",
+               "Proxy",
+               "External Remote Services"
+             ]
+           }
+         },
+         "name": "Ensure ip6tables default deny firewall policy.",
+         "rationale": "With a default accept policy the firewall will accept any packet that is not configured to be denied. It is easier to white list acceptable usage than to black list unacceptable usage. Internal Only - General.",
+         "remediation": "IF IPv6 is enabled on your system: Run the following commands to implement a default DROP policy: # ip6tables -P INPUT DROP # ip6tables -P OUTPUT DROP # ip6tables -P FORWARD DROP.",
+         "result": "Failed",
+         "rules": [
+           "[\"c:ip6tables -L -> r:^Chain INPUT && r:policy DROP\"",
+           "\"c:ip6tables -L -> r:^Chain FORWARD && r:policy DROP\"",
+           "\"c:ip6tables -L -> r:^Chain OUTPUT && r:policy DROP\"]"
+         ]
+       },
+       "checksum": {
+         "hash": {
+           "sha1": "79b51b5eac2fe4e739a52b612826be1a428fd55c"
+         }
+       },
+       "policy": {
+         "description": "This document provides prescriptive guidance for establishing a secure configuration posture for Ubuntu Linux 22.04 LTS based on CIS benchmark for Ubuntu Linux 22.04 LTS.",
+         "file": "cis_ubuntu22-04.yml",
+         "id": "cis_ubuntu22-04",
+         "name": "CIS Ubuntu Linux 22.04 LTS Benchmark v2.0.0.",
+         "references": [
+           "[\"https://www.cisecurity.org/cis-benchmarks/\"]"
+         ]
+       },
+       "state": {
+         "document_version": 1,
+         "modified_at": "2026-07-11T15:53:19.503Z"
+       },
+       "wazuh": {
+         "agent": {
+           "groups": [
+             "default"
+           ],
+           "host": {
+             "architecture": "x86_64",
+             "hostname": "server",
+             "os": {
+               "name": "Ubuntu",
+               "platform": "ubuntu",
+               "type": "linux",
+               "version": "22.04.3 LTS (Jammy Jellyfish)"
+             }
+           },
+           "id": "003",
+           "name": "Ubuntu",
+           "version": "v5.0.0"
+         },
+         "cluster": {
+           "name": "wazuh"
+         }
+       }
+     },
+     "fields": {
+       "state.modified_at": [
+         "2026-07-11T15:53:19.503Z"
+       ]
+     }
+   }
 
-You can view the scan summaries on the **Configuration Assessment** module on the Wazuh dashboard.
+Remediation
+~~~~~~~~~~~
 
-  .. thumbnail:: /images/sca/configuration-assessment-dashboard.png
-     :title: Configuration Assessment module dashboard
-     :alt: Configuration Assessment module dashboard
-     :align: center
-     :width: 80%
+The scan result above is **Failed** because the rule didn't find ``Chain INPUT * policy DROP``, ``Chain FORWARD * policy DROP``, and ``Chain OUTPUT * policy DROP`` in the output of the command ``ip6tables -L``.
 
-In addition, you can expand each result to display additional information.
-
-  .. thumbnail:: /images/sca/configuration-assessment-additional-information.png
-     :title: SCA additional information
-     :alt: SCA additional information
-     :align: center
-     :width: 80%
-
-The above SCA scan result is **Failed** because the rule did not find ``Chain INPUT * policy DROP``, ``Chain FORWARD * policy DROP``, and ``Chain OUTPUT * policy DROP`` in the output of the command ``ip6tables -L``. The steps below show how we implement the remediation steps suggested by Wazuh to harden the endpoint:
+The steps below show how to apply the remediation that Wazuh suggests to harden the endpoint:
 
 #. Run the following recommended commands on the monitored endpoint to apply the firewall rules:
 
@@ -158,12 +377,11 @@ The above SCA scan result is **Failed** because the rule did not find ``Chain IN
       # ip6tables -P OUTPUT DROP
       # ip6tables -P FORWARD DROP
 
-#. Save the firewall rules and make them persist on system reboot:
+#. Save the firewall rules:
 
    .. code-block:: console
 
       # ip6tables-save > /etc/ip6tables.conf
-      # crontab -l | { cat; echo "@reboot /usr/sbin/ip6tables-restore /etc/ip6tables.conf"; } | crontab -
 
 #. Restart the Wazuh agent to trigger a new SCA scan:
 
@@ -171,72 +389,62 @@ The above SCA scan result is **Failed** because the rule did not find ``Chain IN
 
       # systemctl restart wazuh-agent
 
-The scan result for check ``19098`` changes to **Passed** as shown in the image below:
+The scan result for check ``28588`` changes to **Passed** as shown in the image below:
 
-  .. thumbnail:: /images/sca/configuration-assessment-scan-result.png
-     :title: SCA scan result
-     :alt: SCA scan result
-     :align: center
-     :width: 80%
-
-A check is marked as ``Not applicable`` in case an error occurs while performing the check. In such cases, instead of including the ``result`` field, the ``status`` and ``reason`` fields are included.
+.. thumbnail:: /images/sca/configuration-assessment-scan-result.png
+   :title: Check 28588 passed after remediation
+   :alt: Check 28588 passed after remediation
+   :align: center
+   :width: 80%
 
 Integrity mechanisms
---------------------
+---------------------
 
-Wazuh uses two integrity mechanisms  to ensure integrity between agent-side and server-side SCA states. One of the integrity mechanisms ensures the integrity of the policy files and the second ensures the integrity of scan results.
+Wazuh uses two integrity mechanisms to keep agent-side and server-side SCA states in synchronization. These mechanisms ensure the integrity of the policy files and the scan results.
 
 Integrity of policy files
-^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This mechanism is in charge of keeping policy files and scan results aligned. Whenever a change in a policy file is detected, SCA invalidates the results stored in the database for that policy and requests a new scan to generate new results.
+This integrity mechanism keeps policy files and scan results aligned. When it detects a change in a policy file, SCA invalidates the results stored in the database for that policy and requests a new scan to generate new results.
 
-In a nutshell, whenever the hash of a policy file changes, the recovery steps performed are:
+When the hash of a policy file changes, Wazuh performs the following recovery steps:
 
-#. A similar message appears in the Wazuh server log file ``/var/ossec/logs/ossec.log``:
-
-   .. code-block:: none
-      :class: output
-
-      2022/11/01 15:31:23 wazuh-analysisd: INFO: Policy 'cis_debian10' information for agent '001' is outdated. Requested latest scan results.
-
-   The log shows the SCA policy file and the affected Wazuh agent.
-
-#. The Wazuh server flushes its stored data for that SCA policy.
+#. The Wazuh manager flushes its stored data for that SCA policy.
 #. The Wazuh agent sends the new scan results of the SCA policy.
-#. The Wazuh server updates its database and fires alerts for the new scan results.
+#. The Wazuh manager processes the new scan results, updates the SCA state in its local database and synchronizes the updated state with the Wazuh indexer.
 
 .. note::
 
-  Alerts are triggered for every check in a policy when the policy is updated. This way, false negatives are avoided.
-
+   Wazuh triggers findings for every check in a policy when the policy is updated. This avoids false negatives.
 
 Integrity of the scan results
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-To illustrate how the integrity of scan results is kept, we use an example in which the agent-side database and the server-side differ. This scenario could happen when there is a network issue.
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The table below shows an example of SCA state stored in the Wazuh agent and Wazuh server databases.
+To illustrate how Wazuh maintains the integrity of scan results, consider an example where the agent-side and server-side databases differ. This scenario can happen when there's a network issue.
 
-.. table:: States stored in the Wazuh agent and Wazuh server databases
-    :widths: auto
+The table below shows an example of the SCA state stored in the Wazuh agent and Wazuh manager databases.
 
-    +----------+------------------+--------------------+
-    | Check ID | Agent-side state | Manager-side state |
-    +==========+==================+====================+
-    | 1000     | Passed           | Passed             |
-    +----------+------------------+--------------------+
-    | 1001     | Failed           | Failed             |
-    +----------+------------------+--------------------+
-    | 1002     | Failed           | Missing            |
-    +----------+------------------+--------------------+
-    | 1003     | Passed           | Passed             |
-    +----------+------------------+--------------------+
+.. table:: States stored in the Wazuh agent and Wazuh manager databases
+   :widths: auto
 
-For those databases, the corresponding SHA256 hashes are:
+   +----------+------------------+--------------------+
+   | Check ID | Agent-side state | Manager-side state |
+   +==========+==================+====================+
+   | 1000     | Passed           | Passed             |
+   +----------+------------------+--------------------+
+   | 1001     | Failed           | Failed             |
+   +----------+------------------+--------------------+
+   | 1002     | Failed           | Missing            |
+   +----------+------------------+--------------------+
+   | 1003     | Passed           | Passed             |
+   +----------+------------------+--------------------+
 
- .. code-block:: none
+For these databases, the corresponding SHA256 hashes are:
 
-    Wazuh agent:   1642AB1DC478052AC3556B5E700CD82ADB69728008301882B9CBEE0696FF2C84
-    Wazuh server: B43037CA28D95A69B6F9E03FCD826D2B253A6BB1B6AD28C4AE57A3A766ACE610
+.. code-block:: none
 
-Given that the two hashes do not match, the Wazuh server requests the latest scan data from the Wazuh agent and refreshes its database with the newly received status information.
+   Wazuh agent:   1642AB1DC478052AC3556B5E700CD82ADB69728008301882B9CBEE0696FF2C84
+   Wazuh manager: B43037CA28D95A69B6F9E03FCD826D2B253A6BB1B6AD28C4AE57A3A766ACE610
+
+Since the two hashes don't match, the Wazuh manager requests the latest scan data from the Wazuh agent and refreshes its database with the newly received status information.
+

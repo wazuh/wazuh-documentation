@@ -32,7 +32,7 @@ You can export a summary of the properties collected by the Wazuh Syscollector m
 Property-specific report
 ------------------------
 
-You can export CSV reports of a specific property of an endpoint. For example, you can generate a report of the installed software on an endpoint. The report is available in every IT Hygiene category.
+You can export ``CSV`` reports of a specific property of an endpoint. For example, you can generate a report of the installed software on an endpoint. The report is available in every IT Hygiene category.
 
 To download this report, click **Export Formatted** on the **IT Hygiene** page for the specific property you are interested in. In the image below, we download the software inventory data for all monitored endpoints.
 
