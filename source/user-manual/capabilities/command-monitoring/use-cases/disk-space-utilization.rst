@@ -1,299 +1,321 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-    :description: Optimize disk space on Windows, Linux, and macOS. Learn how to monitor partitions to maintain defined free space limits in this use case.
+    :description: Configure the Wazuh Command module to check the root partition usage on a Linux endpoint and generate a finding when usage reaches 80%.
 
-Disk space utilization
-======================
+Monitoring disk space utilization
+==================================
 
-This use case involves monitoring the partitions on Windows, Linux, and macOS endpoints to determine whether a defined amount of free space is not exceeded. We use a centralized configuration to perform this on all the endpoints.
-
-Disk space utilization on Windows endpoint
-------------------------------------------
-
-We use the PowerShell command, ``Get-Volume``, to get the free space and size of the available volumes on the filesystem. Then create a rule to trigger an alert when the free space of the ``C:`` drive is less than ``20%``.
+In this use case, we configure the Command module to check the usage of the root partition on a Linux endpoint every five minutes. Wazuh generates a finding when usage reaches 80%.
 
 Configuration
-^^^^^^^^^^^^^
-
-Windows endpoint
-~~~~~~~~~~~~~~~~
-
-Perform the following steps on the Windows endpoint.
-
-#. Enable remote command execution on the Windows endpoint by appending the following settings to the ``C:\Program Files (x86)\ossec-agent\local_internal_options.conf`` file:
-
-   .. warning:: Enable remote command execution with caution as this gives the Wazuh user permission to run any command on the endpoint.
-
-   .. code-block:: xml
-
-      logcollector.remote_commands=1
-
-#. Restart the Wazuh agent to apply the changes, using PowerShell with administrator privileges:
-
-   .. code-block:: PowerShell
-
-      > Restart-Service -Name wazuh
-
-Wazuh server
-~~~~~~~~~~~~
-
-Perform the following steps on the Wazuh server.
-
-#. Append the following configuration to the ``/var/ossec/etc/shared/default/agent.conf`` file on the Wazuh server:
-
-   .. code-block:: xml
-
-      <agent_config os="Windows">
-        <localfile>
-          <log_format>command</log_format>
-          <command>Powershell -c "Get-Volume -DriveLetter C | Select-Object -Property @{'Name' = '% Free'; Expression = {'{0:P}' -f ($_.SizeRemaining / $_.Size)}}"</command>
-          <alias>check_win_disk_space</alias>
-        </localfile>
-      </agent_config>
-
-   Where:
-
-   - The value ``command`` of the ``<log_format>`` tag specifies the output of the command is read as multiple events.
-
-   - The value ``Powershell -c "Get-Volume -DriveLetter C | Select-Object -Property @{'Name' = '% Free'; Expression = {'{0:P}' -f ($_.SizeRemaining / $_.Size)}}"`` of the ``<command>`` tag is the command the Logcollector module executes to get the percentage of free space available in the ``C:`` drive.
-
-   - The value ``check_win_disk_space`` of the ``<alias>`` tag is a string that represents the ``Powershell -c "Get-Volume -DriveLetter C | Select-Object -Property @{'Name' = '% Free'; Expression = {'{0:P}' -f ($_.SizeRemaining / $_.Size)}}"`` command for better identification in creating rules.
-
-   - Notice the absence of the ``<frequency>`` tag. This implies the command is scheduled to run periodically using the default frequency value of 360 seconds.
-
-#. Add the following rules to the ``/var/ossec/etc/rules/local_rules.xml`` file on the Wazuh server:
-
-   .. code-block:: xml
-
-      <group name="disk_space_utilization,">
-        <rule id="100014" level="7">
-          <if_sid>530</if_sid>
-          <match>^ossec: output: 'check_win_disk_space': </match>
-          <regex type="pcre2">[0-1]\d.\d+%$</regex>
-          <description>C: Drive free space less than 20%.</description>
-        </rule>
-      </group>
-
-#. Restart the Wazuh manager to apply the changes:
-
-   .. code-block:: console
-
-      $ sudo systemctl restart wazuh-manager
-
-Visualize the alerts
-^^^^^^^^^^^^^^^^^^^^
-
-Go to **Threat Hunting** module on the Wazuh dashboard to visualize the generated alert when the free disk space is less than 20%.
-
-.. thumbnail:: /images/manual/command-monitoring/windows-low-free-space-alert.png
-  :title: Drive free space less than 20% alert
-  :alt: Drive free space less than 20% alert
-  :align: center
-  :width: 100%
-
-
-Disk space utilization on Linux endpoint
-----------------------------------------
-
-For this endpoint, we monitor the disk space using the ``df -h`` command and create a rule to trigger an alert when the disk usage of the ``/dev`` partition is above ``80%``. We use the Command module to define the configuration in this scenario. You can also use the Logcollector module.
-
-Configuration
-^^^^^^^^^^^^^
+--------------
 
 Linux endpoint
-~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^
 
-Perform the following steps on the Linux endpoint.
+#. Create a Bash script named ``disk-usage.sh`` in the ``/usr/local/bin/`` directory. The script prints a warning line only when the root partition usage reaches the threshold of 80%:
 
-#. Enable remote command execution on the Linux endpoint by appending the following settings to the ``/var/ossec/etc/local_internal_options.conf`` file:
+   .. code-block:: bash
 
-   .. warning:: Enable remote command execution with caution as this gives the Wazuh user permission to run any command on the endpoint.
-
-   .. code-block:: xml
-
-      wazuh_command.remote_commands=1
-
-#. Run the following commands to get the hashes for ``<MD5_HASH>``, ``<SHA1_HASH>``, and ``<SHA256_HASH>``:
-
-   .. code-block:: console
-
-      # md5sum /bin/bash
-      # sha1sum /bin/bash
-      # sha256sum /bin/bash
-
-#. Restart the Wazuh agent to apply the changes:
-
-   .. code-block:: console
-
-      $ sudo systemctl restart wazuh-agent
-
-Wazuh server
-~~~~~~~~~~~~
-
-Knowing the Command module does have a default decoder for its log format, we need to figure out a way to format the command output so that a custom decoder can parse it. So, we leverage the below script to format the command output.
-
-#. Create a bash script named ``disk-usage.sh`` in the ``/var/ossec/etc/shared/default/`` directory of the Wazuh server and add the following content. Wazuh pushes the script to the ``/var/ossec/etc/shared/`` directory on the Linux endpoint where it is executed. The script adds a ``disk-usage`` header to the output of the ``df -h`` command:
-
-   .. code-block:: console
-
+      # tee /usr/local/bin/disk-usage.sh > /dev/null << 'EOF'
       #!/bin/bash
-      df -h | while IFS= read -r line;
-      do
-        echo "disk-usage: "$line
-      done
+      THRESHOLD=80
+      USAGE=$(df -P / | awk 'NR==2 {gsub("%",""); print $5}')
+      if [ "$USAGE" -ge "$THRESHOLD" ]; then
+        echo "disk-usage: WARNING root partition at ${USAGE}%"
+      fi
+      EOF
 
-#. Append the following configuration to the ``/var/ossec/etc/shared/default/agent.conf`` file on the Wazuh server. Replace ``<MD5_HASH>``, ``<SHA1_HASH>``, and ``<SHA256_HASH>`` with the appropriate hashes of the ``/bin/bash`` shell binary on the Linux endpoint:
+#. Make the ``/usr/local/bin/disk-usage.sh`` script executable:
+
+   .. code-block:: console
+
+      # chmod +x /usr/local/bin/disk-usage.sh
+
+#. Get the SHA256 hash of the ``/usr/local/bin/disk-usage.sh`` script:
+
+   .. code-block:: console
+
+      # sha256sum /usr/local/bin/disk-usage.sh
+
+#. Append the configuration below to the Wazuh agent ``/var/ossec/etc/ossec.conf`` file. Replace ``<SHA256_HASH>`` with the value from the previous step:
 
    .. code-block:: xml
-      :emphasize-lines: 9,10,11
+      :emphasize-lines: 9
 
-      <agent_config os="Linux">
+      <ossec_config>
         <wodle name="command">
           <disabled>no</disabled>
           <tag>disk-usage</tag>
-          <command>/bin/bash /var/ossec/etc/shared/disk-usage.sh</command>
-          <interval>2m</interval>
+          <command>/usr/local/bin/disk-usage.sh</command>
+          <interval>5m</interval>
           <run_on_start>yes</run_on_start>
           <timeout>10</timeout>
-          <verify_md5><MD5_HASH></verify_md5>
-          <verify_sha1><SHA1_HASH></verify_sha1>
           <verify_sha256><SHA256_HASH></verify_sha256>
         </wodle>
-      </agent_config>
+      </ossec_config>
 
    Where:
 
-   - The value ``/bin/bash /var/ossec/etc/shared/disk-usage.sh`` of the ``<command>`` tag specifies the Command module uses the ``/bin/bash`` binary to execute the ``/var/ossec/etc/shared/disk-usage.sh`` script.
-
-   - The value ``2m`` of the ``<interval>`` tag indicates that the command module runs the command every 2 minutes.
-
-#. Add the following decoder to the ``/var/ossec/etc/decoders/local_decoder.xml`` file on the Wazuh server:
-
-   .. code-block:: xml
-
-      <decoder name="disk-usage">
-        <prematch>^disk-usage: </prematch>
-        <regex offset="after_prematch">(\S+)\s*(\S+)\s*(\S+)\s*(\S+)\s*(\S+)%\s*(\S+)</regex>
-        <order>filesystem, size, used, available, usage, mnt</order>
-      </decoder>
-
-#. Add the following rules to the ``/var/ossec/etc/rules/local_rules.xml`` file on the Wazuh server. The rule generates an alert when the disk usage of the ``/dev`` partition exceeds ``80%``:
-
-   .. code-block:: xml
-
-      <group name="disk_space_utilization,">
-        <rule id="100015" level="7">
-          <decoded_as>disk-usage</decoded_as>
-          <field name="filesystem">^/dev/</field>
-          <field name="usage">^9\d|^8\d</field>
-          <description>Usage $(usage)% of $(filesystem) partition exceeded 80%.</description>
-        </rule>
-      </group>
-
-#. Restart the Wazuh manager to apply the changes:
-
-   .. code-block:: console
-
-      $ sudo systemctl restart wazuh-manager
-
-Visualize the alerts
-^^^^^^^^^^^^^^^^^^^^
-
-Go to **Threat Hunting** module on the Wazuh dashboard to visualize the generated alerts when the disk usage of the ``/dev`` partition exceeds ``80%``.
-
-.. thumbnail:: /images/manual/command-monitoring/partition-exceeded-80-alert.png
-  :title: Partition exceeds 80% usage alert
-  :alt: Partition exceeds 80% usage alert
-  :align: center
-  :width: 100%
-
-Disk space utilization on macOS endpoint
-----------------------------------------
-
-For this endpoint, we monitor the disk space using the ``df -P`` command. Wazuh triggers a rule to generate an alert when the disk usage of the ``/dev`` partition is ``100%``. We use the Logcollector module to demonstrate this use case. You can also use the Command module.
-
-Configuration
-^^^^^^^^^^^^^
-
-macOS endpoint
-~~~~~~~~~~~~~~
-
-Perform the following steps on the macOS endpoint.
-
-#. Enable remote command execution on the macOS endpoint by appending the following settings to the ``/Library/Ossec/etc/local_internal_options.conf`` file:
-
-   .. warning:: Enable remote command execution with caution as this gives the Wazuh user permission to run any command on the endpoint.
-
-   .. code-block:: xml
-
-      logcollector.remote_commands=1
+   -  The value ``/usr/local/bin/disk-usage.sh`` of the ``<command>`` option is the script the Command module executes. The script is the first argument, so the checksum verification applies to the script itself.
+   -  The value ``5m`` of the ``<interval>`` option specifies that the script runs every five minutes.
+   -  The value of the ``<verify_sha256>`` option is the hash the Command module compares against the script before every execution. When the hashes don't match, the module ignores the command.
 
 #. Restart the Wazuh agent to apply the changes:
 
    .. code-block:: console
 
-      # /Library/Ossec/bin/wazuh-control restart
+      # systemctl restart wazuh-agent
 
-Wazuh server
-~~~~~~~~~~~~
+Wazuh dashboard
+^^^^^^^^^^^^^^^^
 
-Wazuh has an out-of-the-box rule with ID ``531`` that generates an alert when the disk usage of the ``/dev`` partition is ``100%``. The rule is defined below and is found in the `Wazuh GitHub repository <https://github.com/wazuh/wazuh-ruleset/blob/master/rules/0015-ossec_rules.xml>`__.
+Perform the steps below to create a custom decoder and rule to analyze the event received from the monitored Linux endpoint. If you haven't already done so, perform step 1 of the :ref:`Wazuh dashboard <command_monitoring_configuration_example_wazuh_dashboard>` section under Example configuration.
 
-.. code-block:: xml
+#. Navigate to **Security Analytics** > **Normalization** > **Decoders**. Perform the following to create a root and child decoder.
 
-   <rule id="531" level="7" ignore="7200">
-     <if_sid>530</if_sid>
-     <match>ossec: output: 'df -P': /dev/</match>
-     <regex>100%</regex>
-     <description>Partition usage reached 100% (disk space monitor).</description>
-     <group>low_diskspace,pci_dss_10.6.1,gpg13_10.1,gdpr_IV_35.7.d,hipaa_164.312.b,nist_800_53_AU.6,tsc_CC7.2,tsc_CC7.3,</group>
-   </rule>
+   -  Select the space **Draft**
+   -  Click **Actions** > **Create**, select the integration ``command-integration``, paste the root decoder below in the **YAML Editor**, and click **Create decoder**:
 
-Perform the following steps on the Wazuh server.
+      .. code-block:: yaml
 
-#. Append the following configuration to the ``/var/ossec/etc/shared/default/agent.conf`` file on the Wazuh server:
+         name: "decoder/core-wazuh-message/0"
+         metadata:
+           author: "Wazuh, Inc."
+           date: "2026-06-10T19:32:11Z"
+           description: "Base decoder to process Wazuh message format, parses location part and enriches the events that comes from a Wazuh agent with the host information."
+           documentation: ""
+           modified: "2026-06-10T19:32:11Z"
+           references:
+           - "https://documentation.wazuh.com/"
+           supports: []
+           title: "Wazuh message decoder"
+         normalize:
+         - map:
+           - _tmp_json: "parse_json($event.original)"
+         enabled: true
 
-   .. code-block:: xml
+   -  Click **Actions** > **Create**, select the integration ``command-integration``, paste the child decoder below in the **YAML Editor**, and click **Create decoder**:
 
-      <agent_config os="macOS">
-        <localfile>
-          <log_format>command</log_format>
-          <command>df -P</command>
-          <frequency>180</frequency>
-        </localfile>
-      </agent_config>
+      .. code-block:: yaml
+         :emphasize-lines: 37-39
 
-   Where:
+         ---
+         name: "decoder/wazuh-command-monitoring/0"
+         metadata:
+           author: "Wazuh, Inc."
+           date: "2026-07-12T11:14:25Z"
+           description: "Decoder for Wazuh 5.x wodle command execution events. The command wodle emits a structured JSON payload as event.original. The payload contains process metadata (name, path, command line, args, exit code) and the captured standard output under process.io.text. Legacy plain-text format (4.x) is handled by decoder/wazuh-wodle-legacy/0.\n"
+           documentation: ""
+           modified: "2026-07-12T12:06:23Z"
+           references:
+           - "https://documentation.wazuh.com/current/user-manual/capabilities/command-monitoring/index.html"
+           - "https://github.com/wazuh/wazuh/issues/35634"
+           supports: []
+           title: "Wazuh Wodle decoder"
+         parents:
+         - "decoder/core-wazuh-message/0"
+         check: "string_equal($_tmp_json.event.module, wazuh-wodle-cmd)"
+         normalize:
+         - map:
+           - data_stream.dataset: "wazuh.wodle"
+           - data_stream.type: "logs"
+           - event.dataset: "wazuh.wodle"
+           - event.kind: "event"
+           - event.category: "array_append_unique(process)"
+           - event.type: "array_append_unique(start)"
+           - event.start: "$_tmp_json.event.start"
+           - process.io.text: "$_tmp_json.process.io.text"
+           - process.name: "$_tmp_json.process.name"
+           - process.command_line: "$_tmp_json.process.command_line"
+           - process.executable: "$_tmp_json.process.path"
+           - process.hash.sha256: "$_tmp_json.process.hash.sha256"
+         - check: "exists($process.hash.sha256)"
+           map:
+           - related.hash: "array_append($process.hash.sha256)"
+         - check: "exists($_tmp_json.process.args)"
+           map:
+           - process.args: "$_tmp_json.process.args"
+         - check: "exists($_tmp_json.tags)"
+           map:
+           - tags: "$_tmp_json.tags"
+         - check: "exists($_tmp_json.tags)"
+           map:
+           - tags: "array_append($_tmp_json.tags)"
+         - check: "$_tmp_json.process.exit_code == 0"
+           map:
+           - event.outcome: "success"
+         - check: "exists($_tmp_json.process.exit_code) AND NOT ($_tmp_json.process.exit_code\
+             \ == 0)"
+           map:
+           - event.outcome: "failure"
+         - check: "NOT exists($_tmp_json.process.exit_code)"
+           map:
+           - event.outcome: "unknown"
+         - map:
+           - _tmp_json: "delete()"
+         enabled: true
+         id: "a026d62c-b58b-4a8c-8945-dfd858c6b2e0"
 
-   - The value ``command`` of the ``<log_format>`` tag specifies the output of the command is read as multiple events.
+   .. thumbnail:: /images/manual/command-monitoring/create-decoders-disk.png
+      :title: Creating the root and child decoders
+      :alt: Creating the root and child decoders
+      :align: center
+      :width: 80%
 
-   - The value ``df -P`` of the ``<command>`` tag specifies the command the Logcollector module executes.
+#. Navigate to **Security Analytics** > **Overview** and perform the following to attach the root decoder to the integration:
 
-   - The value ``180`` of the ``<frequency>`` tag specifies the command runs every 180 seconds (3 minutes).
+   -  Click **Actions** > **Edit**
+   -  Confirm the status is **Enabled**
+   -  Select ``decoder/core-wazuh-message/0`` under **Root Decoder** and click **Save**.
+
+   .. thumbnail:: /images/manual/command-monitoring/attach-root-decoder.png
+      :title: Attaching the root decoder
+      :alt: Attaching the root decoder
+      :align: center
+      :width: 80%
+
+#. Navigate to **Security Analytics** > **Detection** > **Rules** and perform the following to create a detection rule.
+
+   -  Select the space **Draft**
+   -  Click **Actions** > **Create**, select the **YAML Editor**, choose the integration ``command-integration``, paste the detection rule shown below, and click **Create rule**:
+
+      .. code-block:: yaml
+         :emphasize-lines: 15,16
+
+         id: 4d5d86bb-6b00-4ded-81d2-f06becaff812
+         logsource:
+           product: command-integration
+         tags: []
+         falsepositives: []
+         level: critical
+         status: experimental
+         enabled: true
+         detection:
+           condition: Selection_1 and Selection_2
+           Selection_2:
+             process.io.text|contains:
+               - 'disk-usage: WARNING'
+           Selection_1:
+             tags|re:
+               - disk-usage
+         metadata:
+           title: Wazuh CM - Disk usage of the root partition exceeds 80%
+           author: Security team lead
+           description: Detects when the disk usage of the root partition reaches 80%
+           references:
+             - ''
+           documentation: ''
+           supports:
+             - ''
+           modified: '2026-07-15T17:47:25Z'
+         compliance:
+           pci_dss:
+             - 10.6.1
+           hipaa:
+             - 164.312.b
+           nist_800_53:
+             - AU.6
+
+#. Navigate to **Security Analytics** > **Overview**, select the space **Draft** and click **Actions** > **Promote** to promote the decoders and rule to the ``Test`` space.
+
+   .. thumbnail:: /images/manual/command-monitoring/promote-draft-disk.png
+      :title: Promoting the decoders and rule to Test
+      :alt: Promoting the decoders and rule to Test
+      :align: center
+      :width: 80%
+
+#. Navigate to **Security Analytics** > **Overview**, select the space **Test** and click **Actions** > **Promote** to promote the decoders and rule to the ``Custom`` space.
+
+   .. thumbnail:: /images/manual/command-monitoring/promote-test-disk.png
+      :title: Promoting the decoders and rule to Custom
+      :alt: Promoting the decoders and rule to Custom
+      :align: center
+      :width: 80%
+
+#. Navigate to **Security Analytics** > **Detection** > **Detectors** to create a detector that applies the detection rule and generates findings.
+
+   -  Click **Create detector**, fill the required fields, and click **Create detector**:
+
+      -  **Name**: wazuh-cm-detector
+      -  **Select indexes/aliases**: wazuh-events-v5-system-activity (this must match the integration category you configured earlier, ``System Activity``)
+      -  **Space**: Custom
+      -  **Integration**: command-integration
+      -  **Run every**: 2 minutes.
+
+   .. thumbnail:: /images/manual/command-monitoring/create-detector-disk.png
+      :title: Creating a detector
+      :alt: Creating a detector
+      :align: center
+      :width: 80%
 
 Test the configuration
-~~~~~~~~~~~~~~~~~~~~~~
+------------------------
 
-Run the following command on the macOS endpoint to fill the disk space with random data of ``10GB``. This action can take approximately 45 seconds:
+Perform the steps below on the monitored Ubuntu endpoint.
+
+#. Check the size of the root partition:
 
    .. code-block:: console
 
-      # df -h .; date; dd if=/dev/zero of=big_file count=10240000 bs=1024 ; date; df -h .
+      # df -P
 
-.. note::
+   The command output looks similar to this:
 
-   - Depending on the size of your disk, you can increase the value of ``count`` to fill up more disk space.
+   .. code-block:: none
+      :class: output
+      :emphasize-lines: 3
 
-   - After viewing the generated alert on the Wazuh dashboard, you can remove the file ``big_file`` to regain your disk space.
+      Filesystem                        1024-blocks      Used Available Capacity Mounted on
+      tmpfs                                  201500      1012    200488       1% /run
+      /dev/mapper/ubuntu--vg-ubuntu--lv    31811408   4745136  25424800      16% /
+      tmpfs                                 1007484         0   1007484       0% /dev/shm
+      tmpfs                                    5120         0      5120       0% /run/lock
+      /dev/sda2                             1992552    104804   1766508       6% /boot
+      vagrant                             732556284 244033372 488522912      34% /vagrant
+      tmpfs                                  201496        16    201480       1% /run/user/1000
 
-Visualize the alerts
-^^^^^^^^^^^^^^^^^^^^
+#. Fill the disk to cross the threshold with the command below:
 
-Go to **Threat Hunting** module on the Wazuh dashboard to visualize the generated alert when the disk usage of the ``/dev`` partition is ``100%``.
+   .. code-block:: console
 
-.. thumbnail:: /images/manual/command-monitoring/macos-partition-usage-reached-100.png
-  :title: Partition exceeds 80% usage alert
-  :alt: Partition exceeds 80% usage alert
-  :align: center
-  :width: 100%
+      # fallocate -l 20G /tmp/big_file
+
+#. Verify the size of the root partition has increased above the threshold:
+
+   .. code-block:: console
+
+      # df -P
+
+   The command output looks similar to this:
+
+   .. code-block:: none
+      :class: output
+      :emphasize-lines: 3
+
+      Filesystem                        1024-blocks      Used Available Capacity Mounted on
+      tmpfs                                  201500      1012    200488       1% /run
+      /dev/mapper/ubuntu--vg-ubuntu--lv    31811408  25717728   4452208      86% /
+      tmpfs                                 1007484         0   1007484       0% /dev/shm
+      tmpfs                                    5120         0      5120       0% /run/lock
+      /dev/sda2                             1992552    104804   1766508       6% /boot
+      vagrant                             732556284 244031132 488525152      34% /vagrant
+      tmpfs                                  201496        16    201480       1% /run/user/1000
+
+Visualize the findings
+------------------------
+
+Navigate to **Threat Intelligence** > **Threat Hunting** > **Findings** on the Wazuh dashboard to view the generated finding when the disk usage of the ``/`` partition exceeds 80%.
+
+.. thumbnail:: /images/manual/command-monitoring/dashboard-disk-usage-finding.png
+   :title: Generated finding
+   :alt: Generated finding
+   :align: center
+   :width: 80%
+
+After visualizing the findings, remove the ``/tmp/big_file`` file on the monitored endpoint to regain your disk space:
+
+.. code-block:: console
+
+   # rm /tmp/big_file
