@@ -11,13 +11,13 @@ You can use Wazuh to detect SQL injection attacks in web server logs by analyzin
 Infrastructure
 --------------
 
-+--------------+-----------------------------------------------------------+
-| Endpoint     | Description                                               |
-+==============+===========================================================+
-| Ubuntu 24.04 | Victim endpoint running an Apache 2.4.54 web server.      |
-+--------------+-----------------------------------------------------------+
-| RHEL 9.0     | Attacker endpoint that launches the SQL injection attack. |
-+--------------+-----------------------------------------------------------+
++--------------+---------------------------------------------------------------+
+| Endpoint     | Description                                                   |
++==============+===============================================================+
+| Ubuntu 24.04 | Victim endpoint running an Apache 2.4.54 web server or later. |
++--------------+---------------------------------------------------------------+
+| RHEL 9.0     | Attacker endpoint that launches the SQL injection attack.     |
++--------------+---------------------------------------------------------------+
 
 Configuration
 -------------

@@ -3,8 +3,8 @@
 .. meta::
    :description: Learn how to deploy a new Wazuh 5.x environment using an existing Wazuh 4.x deployment as the source for supported configuration and security settings.
 
-Transitioning from Wazuh 4.x to 5.x
-===================================
+Transitioning from 4.x to 5.x
+=============================
 
 This guide describes how to deploy a new Wazuh 5.x environment, using an existing Wazuh 4.x deployment as the source for supported configuration and security settings.
 

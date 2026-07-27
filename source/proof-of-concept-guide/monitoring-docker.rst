@@ -6,7 +6,7 @@
 Monitoring Docker events
 ========================
 
-Docker automates the deployment of different applications inside software containers. The Wazuh module for Docker identifies security incidents across containers and alerts in real time. In this use case, you configure Wazuh to monitor Docker events on an Ubuntu endpoint hosting Docker containers.
+Docker automates the deployment of different applications inside software containers. The Wazuh module for Docker identifies security incidents across containers and alerts in real time. In this use case, you configure Wazuh to monitor Docker events on an Ubuntu endpoint hosting Docker containers. See this section of the documentation to learn more about monitoring Docker.
 
 Infrastructure
 --------------
@@ -26,27 +26,26 @@ Perform the following steps to install Docker on the Ubuntu endpoint and configu
 
    .. code-block:: console
 
-      $ sudo apt install -y python3
+      $ sudo apt install -y python3 python3-pip
 
-#. Download pip:
-
-   .. code-block:: console
-
-      $ curl -sS https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-      $ python3 get-pip.py --break-system-packages
-
-#. Install Docker and the Python Docker library. For Python 3.11 to 3.12:
+#. Install Docker:
 
    .. code-block:: console
 
       $ curl -sSL https://get.docker.com | sh
+
+#. Install `Python Docker library <https://pypi.org/project/docker/>`__ and other dependencies:
+
+   .. code-block:: console
+
+      $ apt remove python3-urllib3
       $ sudo pip3 install docker==7.1.0 urllib3==1.26.20 requests==2.32.2 --break-system-packages
 
    .. note::
 
       This command modifies the default externally managed Python environment. See the `PEP 668 <https://peps.python.org/pep-0668/>`__ description for more information. To prevent the modification, you can run ``pip3 install --upgrade pip`` within a virtual environment. You must update the Docker ``/var/ossec/wodles/docker/DockerListener`` script shebang with your virtual environment interpreter, for example, ``#!</path/to/your/virtual/environment>/bin/python3``.
 
-      Delete any newer version of urllib3 if present.
+      Some Ubuntu distributions will have ``urllib3`` already installed using Debian packages. Uninstall and reinstall with the method above.
 
 #. Start and enable the Docker service:
 
@@ -105,20 +104,3 @@ You can visualize the findings on the Wazuh dashboard. Go to **Cloud security** 
    :title: Visualize Docker findings
    :align: center
    :width: 80%
-
-Troubleshooting
----------------
-
--  **Error log**:
-
-   .. code-block:: none
-
-      wazuh-modulesd:docker-listener: ERROR: /usr/bin/env: 'python': No such file or directory
-
-   **Location**: Wazuh agent log - ``/var/ossec/logs/ossec.log``
-
-   **Resolution**: Create a symbolic link to solve this:
-
-   .. code-block:: console
-
-      $ sudo ln -s /usr/bin/python3 /usr/bin/python

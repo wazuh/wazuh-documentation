@@ -27,11 +27,14 @@ Ubuntu endpoint
 
 Perform the following steps to configure the Wazuh agent to monitor filesystem changes in the ``/root`` directory.
 
-#. Edit the Wazuh agent ``/var/ossec/etc/ossec.conf`` configuration file. Add the directories for monitoring within the ``<syscheck>`` block. For this use case, you configure Wazuh to monitor the ``/root`` directory. To get additional information about the user and the process that made the changes, enable who-data audit:
+#. Edit the Wazuh agent ``/var/ossec/etc/ossec.conf`` configuration file. Add the following configuration within the ``<syscheck>`` block to specify the monitored directory and whodata provider. For this use case, you configure Wazuh to monitor the ``/root`` directory:
 
    .. code-block:: xml
 
       <directories check_all="yes" report_changes="yes" whodata="yes">/root</directories>
+      <whodata>
+        <provider>ebpf</provider>
+      </whodata>
 
    .. note::
 
@@ -46,9 +49,9 @@ Perform the following steps to configure the Wazuh agent to monitor filesystem c
 Windows endpoint
 ^^^^^^^^^^^^^^^^
 
-Take the following steps to configure the Wazuh agent to monitor filesystem changes in the ``C:\Users\Administrator\Desktop`` directory.
+Take the following steps to configure the Wazuh agent to monitor filesystem changes in the ``C:\Users\<USER_NAME>\Desktop`` directory.
 
-#. Edit the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file on the monitored Windows endpoint. Add the directories for monitoring within the ``<syscheck>`` block. For this use case, you configure Wazuh to monitor the ``C:\Users\Administrator\Desktop`` directory. To get additional information about the user and the process that made the changes, enable who-data audit :
+#. Edit the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file on the monitored Windows endpoint. Add the directories for monitoring within the ``<syscheck>`` block. To get additional information about the user and the process that made the changes, enable who-data audit. Replace ``<USER_NAME>`` with the name of the user:
 
    .. code-block:: xml
 
@@ -69,7 +72,7 @@ As an alternative to local configurations on the Wazuh agents, you can centrally
 Test the configuration
 ----------------------
 
-#. Create a text file in the monitored directory, then wait for 5 seconds.
+#. Create a text file in the monitored directories, then wait for 5 seconds.
 
 #. Add content to the text file and save it. Then wait for 5 seconds.
 
@@ -80,7 +83,27 @@ Visualize the findings
 
 You can visualize the alert data in the Wazuh dashboard. To do this, navigate to **Endpoint security** > **File Integrity Monitoring** and click the **Findings** tab.
 
-.. thumbnail:: /images/poc/fim-findings.png
-   :title: Visualize FIM findings
-   :align: center
-   :width: 80%
+.. note::
+
+   Findings may take up to the FIM synchronization interval (the ``<frequency>`` setting in the ``<syscheck>`` block of the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` file) to appear in the dashboard.
+
+-  Windows and Ubuntu findings for the simulated events
+
+   .. thumbnail:: /images/poc/fim-findings.png
+      :title: Windows and Ubuntu findings for the simulated events
+      :align: center
+      :width: 80%
+
+-  Finding showing whodata information on Ubuntu
+
+   .. thumbnail:: /images/poc/fim-findings-ubuntu.png
+      :title: Finding showing whodata information on Ubuntu
+      :align: center
+      :width: 80%
+
+-  Finding showing whodata information on Windows
+
+   .. thumbnail:: /images/poc/fim-findings-windows.png
+      :title: Finding showing whodata information on Windows
+      :align: center
+      :width: 80%

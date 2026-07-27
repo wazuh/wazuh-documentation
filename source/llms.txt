@@ -34,12 +34,17 @@ Step-by-step guides for installing Wazuh central components and agents across va
 - **[Deployment Alternatives](https://documentation.wazuh.com/current/deployment-options/index.md)** Install using different methods like Virtual Machines (OVA), Docker, or Kubernetes.
 - **[Deployment with Ansible](https://documentation.wazuh.com/current/deployment-options/deploying-with-ansible/index.md)** Automate your Wazuh deployment using Ansible playbooks for configuration management.
 - **[Offline Installation Guide](https://documentation.wazuh.com/current/deployment-options/offline-installation/index.md)** Install Wazuh in environments without direct internet access.
-- **[Transitioning from Wazuh 4.x to 5.x](https://documentation.wazuh.com/current/transitioning-from-4x-to-5x/index.md)** Deploy a new Wazuh 5.x environment using an existing Wazuh 4.x deployment as the source for supported configuration and security settings. Covers the transition plan, and recreating supported configuration for the Wazuh indexer, manager, and dashboard.
+- **[Transitioning from 4.x to 5.x](https://documentation.wazuh.com/current/transitioning-from-4x-to-5x/index.md)** Deploy a new Wazuh 5.x environment using an existing Wazuh 4.x deployment as the source for supported configuration and security settings. Covers the transition plan, and recreating supported configuration for the Wazuh indexer, manager, and dashboard.
 
 ### Configuration & Management
 Fine-tune settings and manage the platform's operation.
 
 - **[User Manual](https://documentation.wazuh.com/current/user-manual/index.md)** Comprehensive guide to configuring, operating, and getting the most out of Wazuh.
+
+## Cloud Security
+Monitor cloud platform activity and audit logs with Wazuh.
+
+- **[Monitoring GitHub](https://documentation.wazuh.com/current/cloud-security/github/index.md)** Monitor GitHub audit logs for your organization with Wazuh. Covers required GitHub permissions, generating a personal access token, configuring the Wazuh module for GitHub, and monitoring multiple GitHub organizations.
 
 ## Proof of Concept guide
 Hands-on use cases for exploring Wazuh capabilities in a lab environment, covering threat prevention, detection, and response.
@@ -49,7 +54,11 @@ Hands-on use cases for exploring Wazuh capabilities in a lab environment, coveri
 - **[Security Configuration Assessment](https://documentation.wazuh.com/current/proof-of-concept-guide/poc-security-configuration-assessment.md)** Evaluate endpoints against hardening standards like CIS benchmarks, and create and deploy a custom SCA policy.
 - **[Monitoring Docker Events](https://documentation.wazuh.com/current/proof-of-concept-guide/monitoring-docker.md)** Identify security incidents across Docker containers on an Ubuntu endpoint using the `docker-listener` module.
 - **[Detecting an SQL Injection Attack](https://documentation.wazuh.com/current/proof-of-concept-guide/detect-web-attack-sql-injection.md)** Simulate and detect an SQL injection attack from Apache web server logs on an Ubuntu endpoint.
+- **[Detecting a Cross-Site Scripting (XSS) Attack](https://documentation.wazuh.com/current/proof-of-concept-guide/detect-web-attack-xss.md)** Simulate and detect a Cross-Site Scripting (XSS) attack from Apache web server logs on an Ubuntu endpoint.
 - **[Monitoring AWS Infrastructure](https://documentation.wazuh.com/current/proof-of-concept-guide/aws-infrastructure-monitoring.md)** Collect and analyze Amazon CloudTrail logs from an S3 bucket using the Wazuh `aws-s3` module.
+- **[Network IDS Integration](https://documentation.wazuh.com/current/proof-of-concept-guide/network-ids-integration.md)** Integrate Suricata with Wazuh to enhance threat detection by monitoring and analyzing network traffic on an Ubuntu endpoint.
+- **[Detecting Hidden Processes](https://documentation.wazuh.com/current/proof-of-concept-guide/poc-detect-hidden-process.md)** Detect hidden processes created by a kernel-mode rootkit on an Ubuntu endpoint using the Wazuh Rootcheck module.
+- **[Blocking a Known Malicious Actor](https://documentation.wazuh.com/current/proof-of-concept-guide/block-malicious-actor-ip-reputation.md)** Use a KVDB, custom decoders and rules, and Active Response to automatically block a malicious IP address from accessing Apache web servers on Ubuntu and Windows endpoints.
 
 ## Management & Administration
 Manage your Wazuh infrastructure, users, and data.
@@ -77,8 +86,11 @@ Manage user credentials and access control for the Wazuh platform.
 ### Capabilities
 Configure and use Wazuh security capabilities.
 
+- **[Command monitoring](https://documentation.wazuh.com/current/user-manual/capabilities/command-monitoring/index.md)** Monitor the output of specific commands and treat it as log content to detect anomalies and threats. Covers how it works, requirements, configuration, security considerations, and use cases for monitoring running processes and disk space utilization.
 - **[Container security](https://documentation.wazuh.com/current/user-manual/capabilities/container-security/index.md)** Monitor container platforms such as Docker with Wazuh. Covers enabling the Wazuh Docker listener module, its configuration options, and a use case for monitoring Docker runtime activities.
+- **[Security Configuration Assessment](https://documentation.wazuh.com/current/user-manual/capabilities/sec-config-assessment/index.md)** Scan monitored endpoints against CIS benchmark policies to detect misconfigurations and recommend remediation. Covers how SCA works, configuration, the out-of-the-box policy list, creating custom policies, and use cases for detecting keywords in files and running processes.
 - **[System inventory](https://documentation.wazuh.com/current/user-manual/capabilities/system-inventory/index.md)** Collect hardware, software, and configuration data from monitored endpoints with the Syscollector module. Covers configuration, viewing inventory data on the dashboard, generating reports, available inventory fields, and IT Hygiene findings.
+- **[Vulnerability detection](https://documentation.wazuh.com/current/user-manual/capabilities/vulnerability-detection/index.md)** Detect Common Vulnerabilities and Exposures (CVEs) in operating systems and software installed on monitored endpoints. Covers how it works, the Wazuh CTI platform, finding generation and detection behavior, viewing vulnerability data, the compatibility matrix, and configuration.
 
 ## Development & Support
 Resources for getting help for Wazuh.

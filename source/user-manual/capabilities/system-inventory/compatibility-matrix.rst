@@ -8,6 +8,8 @@ Compatibility matrix
 
 The Wazuh Syscollector module supports different options across the operating systems on which the Wazuh agent can be installed. The following table shows the scans that are compatible with each of these operating systems.
 
+Table 1 (scan support per operating system):
+
 +------------------+----------+-----+----------+---------+-------+-----------+----------+-------+--------+----------+--------------------+
 | Operating System | Hardware | OS  | Packages | Network | Ports | Processes | Hotfixes | Users | Groups | Services | Browser extensions |
 +==================+==========+=====+==========+=========+=======+===========+==========+=======+========+==========+====================+
@@ -22,24 +24,24 @@ The Wazuh Syscollector module supports different options across the operating sy
 | OpenBSD          | Yes      | Yes | No       | Yes     | No    | No        | No       | No    | No     | No       | No                 |
 +------------------+----------+-----+----------+---------+-------+-----------+----------+-------+--------+----------+--------------------+
 
-The module detects multiple package formats depending on the operating system. The packages scan supports detection of `NPM (Node Package Manager) <https://www.npmjs.com/>`__ and `PyPI (Python Package Index) <https://pypi.org/>`__ packages on multiple operating systems, as the table below shows. The NPM and PyPI scan requires a C++ compiler supporting the `C++17 standard <https://en.cppreference.com/w/cpp/compiler_support/17>`__ (GCC 7 or later).
+The module detects multiple package formats depending on the operating system. The packages scan supports detection of `NPM (Node Package Manager) <https://www.npmjs.com/>`__ and `PyPI (Python Package Index) <https://pypi.org/>`__ packages on multiple operating systems, as the table below shows. The NPM and PyPI scan requires a C++ compiler supporting the `C++20 standard <https://en.cppreference.com/cpp/compiler_support/20>`__ (GCC 8+).
 
 .. note::
 
    Support for scanning NPM and PyPI packages is limited to the default installation paths.
 
-+------------------+-----+------+-----+-----+--------+-----+
-| Operating System | NPM | PyPI | rpm | deb | pacman | pkg |
-+==================+=====+======+=====+=====+========+=====+
-| Windows          | Yes | Yes  | No  | No  | No     | No  |
-+------------------+-----+------+-----+-----+--------+-----+
-| Linux            | Yes | Yes  | Yes | Yes | Yes    | No  |
-+------------------+-----+------+-----+-----+--------+-----+
-| macOS            | Yes | Yes  | No  | No  | No     | No  |
-+------------------+-----+------+-----+-----+--------+-----+
-| FreeBSD          | Yes | Yes  | No  | No  | No     | Yes |
-+------------------+-----+------+-----+-----+--------+-----+
-| OpenBSD          | No  | No   | No  | No  | No     | No  |
-+------------------+-----+------+-----+-----+--------+-----+
-| Solaris          | Yes | Yes  | No  | No  | No     | Yes |
-+------------------+-----+------+-----+-----+--------+-----+
+Table 2 (package format support per operating system):
+
++------------------+-----+------+-----+-----+--------+-----+------+
+| Operating System | NPM | PyPI | rpm | deb | pacman | pkg | snap |
++==================+=====+======+=====+=====+========+=====+======+
+| Windows          | Yes | Yes  | No  | No  | No     | No  | No   |
++------------------+-----+------+-----+-----+--------+-----+------+
+| Linux            | Yes | Yes  | Yes | Yes | No     | No  | Yes  |
++------------------+-----+------+-----+-----+--------+-----+------+
+| macOS            | Yes | Yes  | No  | No  | No     | No  | No   |
++------------------+-----+------+-----+-----+--------+-----+------+
+| FreeBSD          | No  | No   | No  | No  | No     | Yes | No   |
++------------------+-----+------+-----+-----+--------+-----+------+
+| OpenBSD          | No  | No   | No  | No  | No     | No  | No   |
++------------------+-----+------+-----+-----+--------+-----+------+
