@@ -74,6 +74,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated the *Installation from sources* documentation. ([#9173](https://github.com/wazuh/wazuh-documentation/pull/9173))
 - **Post-release**: Updated the *Wazuh signed package (WPK) files* section. ([#9177](https://github.com/wazuh/wazuh-documentation/pull/9177))
 - **Post-release**: Updated `offline-url` setting reference in the vulnerability detection capability section. ([#9199](https://github.com/wazuh/wazuh-documentation/pull/9199))
+- **Post-release**: Updated the *Monitoring Microsoft Azure* documentation page title. ([#9925](https://github.com/wazuh/wazuh-documentation/pull/9925))
 
 ### Fixed
 
