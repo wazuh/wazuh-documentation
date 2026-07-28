@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 ## [v4.14.6]
 
 - **Post-release**: Fixed dead link in release notes. ([#9761](https://github.com/wazuh/wazuh-documentation/pull/9761))
+- **Post-release**: Updated the *Monitoring Microsoft Azure* documentation page title. ([#9923](https://github.com/wazuh/wazuh-documentation/pull/9923))
 
 ## [v4.14.5]
 
