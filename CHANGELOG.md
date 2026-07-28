@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 ## [v4.10.4]
 
 - Support for Wazuh 4.10.4
+- **Post-release**: Updated the *Monitoring Microsoft Azure* documentation page title. ([#9927](https://github.com/wazuh/wazuh-documentation/pull/9927))
 
 ## [v4.10.3]
 
