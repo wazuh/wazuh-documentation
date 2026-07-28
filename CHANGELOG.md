@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 
 - **Post-release**: Fixed dead link in release notes. ([#9761](https://github.com/wazuh/wazuh-documentation/pull/9761))
 - **Post-release**: Updated the *Monitoring Microsoft Azure* documentation page title. ([#9923](https://github.com/wazuh/wazuh-documentation/pull/9923))
+- **Post-release**: Fixed broken link in the *Adding new Wazuh server nodes* section. ([#9934](https://github.com/wazuh/wazuh-documentation/pull/9934))
 
 ## [v4.14.5]
 
