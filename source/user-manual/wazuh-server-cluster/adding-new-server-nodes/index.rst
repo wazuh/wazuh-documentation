@@ -22,10 +22,6 @@ The steps for scaling the Wazuh server are divided into two subsections: all-in-
 
 If you are unsure which method aligns with your infrastructure, we recommend reviewing your deployment architecture before proceeding.
 
-.. note::
-
-   You need root user privileges to execute the commands below.
-
 .. toctree::
    :titlesonly:
    :hidden:
