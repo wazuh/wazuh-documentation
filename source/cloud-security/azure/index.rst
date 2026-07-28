@@ -3,8 +3,8 @@
 .. meta::
    :description: This section provides instructions for monitoring Microsoft Azure infrastructures.
 
-Monitoring Microsoft Azure with Wazuh
-=====================================
+Monitoring Microsoft Azure
+==========================
 
 Microsoft Azure is a cloud computing platform by Microsoft that offers a wide range of services, including computing power, storage options, and networking capabilities. It provides solutions for various applications such as virtual computing, analytics, storage, and networking, catering to the diverse needs of businesses and developers. Securing your cloud instance is an essential consideration for companies that use cloud services offered by cloud providers such as Microsoft Azure.
 
