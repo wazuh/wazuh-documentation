@@ -30,6 +30,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated the vulnerability detection compatibility matrix. ([#9063](https://github.com/wazuh/wazuh-documentation/pull/9063))
 - **Post-release**: Fixed indentation in ``remove-threat.py`` code line. ([#9081](https://github.com/wazuh/wazuh-documentation/pull/9081))
 - **Post-release**: Updated the *Resources* table in the *RBAC reference* guide. ([#9121](https://github.com/wazuh/wazuh-documentation/pull/9121))
+- **Post-release**: Updated the *Monitoring Microsoft Azure* documentation page title. ([#9926](https://github.com/wazuh/wazuh-documentation/pull/9926))
 
 ### Fixed
 
