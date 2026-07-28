@@ -125,7 +125,6 @@ exclude_patterns = [
     'cloud-security/amazon/**',
     'cloud-security/azure/**',
     'cloud-security/gcp/**',
-    'cloud-security/office365/**',
     'compliance/**',
     'proof-of-concept-guide/detect-unauthorized-processes-netcat.rst',
     'proof-of-concept-guide/poc-detect-trojan.rst',
