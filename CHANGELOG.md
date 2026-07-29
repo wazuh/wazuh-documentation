@@ -41,6 +41,7 @@ All notable changes to this project will be documented in this file.
 - Updated the *Vulnerability detection* capability documentation. ([#9835](https://github.com/wazuh/wazuh-documentation/pull/9835)) ([#9841](https://github.com/wazuh/wazuh-documentation/pull/9841))
 - Updated the *Command monitoring* capability documentation. ([#9883](https://github.com/wazuh/wazuh-documentation/pull/9883)) ([#9915](https://github.com/wazuh/wazuh-documentation/pull/9915))
 - Updated the minimum required password length for Wazuh API users to 12 characters in the *Deploying with Kubernetes* documentation. ([#9941](https://github.com/wazuh/wazuh-documentation/pull/9941))
+- Updated the *Using Wazuh for GDPR compliance* documentation in *Regulatory compliance* to Wazuh 5.0. ([#9944](https://github.com/wazuh/wazuh-documentation/pull/9944))
 
 ### Removed
 

@@ -93,6 +93,11 @@ Configure and use Wazuh security capabilities.
 - **[System inventory](https://documentation.wazuh.com/current/user-manual/capabilities/system-inventory/index.md)** Collect hardware, software, and configuration data from monitored endpoints with the Syscollector module. Covers configuration, viewing inventory data on the dashboard, generating reports, available inventory fields, and IT Hygiene findings.
 - **[Vulnerability detection](https://documentation.wazuh.com/current/user-manual/capabilities/vulnerability-detection/index.md)** Detect Common Vulnerabilities and Exposures (CVEs) in operating systems and software installed on monitored endpoints. Covers how it works, the Wazuh CTI platform, finding generation and detection behavior, viewing vulnerability data, the compatibility matrix, and configuration.
 
+### Compliance
+Map Wazuh detections and capabilities to regulatory compliance frameworks.
+
+- **[GDPR compliance](https://documentation.wazuh.com/current/compliance/gdpr/index.md)** Meet GDPR (General Data Protection Regulation) requirements with Wazuh. Covers viewing GDPR data on the Wazuh dashboard, mapping custom Sigma rules to GDPR requirements, and use cases for Chapters II, III, and IV, including detecting file changes and deletions, restricting processing, configuration assessment, detecting invalid SSH login attempts, alerting on personal data breaches by email, and raising the severity of findings for sensitive directories.
+
 ## Development & Support
 Resources for getting help for Wazuh.
 
