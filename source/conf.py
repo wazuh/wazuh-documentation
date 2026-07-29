@@ -458,6 +458,19 @@ def fix_markdown_links(app, exception):
 # Options for sphinx-markdown-builder
 markdown_http_base = '' # Use relative links
 
+def patch_markdown_translator_meta_nodes():
+    """
+    sphinx-markdown-builder's MarkdownTranslator has no visit_meta/depart_meta,
+    so every `.. meta::` directive (used site-wide for SEO descriptions) falls
+    through to unknown_visit and logs an "unknown node type" warning during
+    `make markdown`. Metadata isn't rendered in Markdown output, so skipping
+    the node is correct, not a workaround.
+    """
+    from sphinx_markdown_builder.translator import MarkdownTranslator
+
+    MarkdownTranslator.visit_meta = lambda self, node: None
+    MarkdownTranslator.depart_meta = lambda self, node: None
+
 # -- Extension configuration -------------------------------------------------
 
 # -- Images extension -----------------------------------------------------
@@ -578,6 +591,8 @@ def setup(app):
     app.connect('build-finished', finish_and_clean)
 
     app.connect('build-finished', fix_markdown_links) # Connect the markdown link fixer to post-process generated markdown files
+
+    patch_markdown_translator_meta_nodes()
 
     app.connect('html-page-context', pagefind_custom_weights)
 
