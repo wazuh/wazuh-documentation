@@ -471,6 +471,38 @@ def patch_markdown_translator_meta_nodes():
     MarkdownTranslator.visit_meta = lambda self, node: None
     MarkdownTranslator.depart_meta = lambda self, node: None
 
+def patch_markdown_translator_unhandled_nodes():
+    """
+    sphinx-markdown-builder's MarkdownTranslator doesn't handle a few more
+    node types found in this repo, each logging an "unknown node type"
+    warning during `make markdown` and silently dropping the node's content:
+
+    - `hlist`/`hlistcol` (from `.. hlist::`) are pure column-layout wrappers
+      around a bullet_list; treating them as pass-through (like `container`)
+      renders that list's content normally instead of dropping it — Markdown
+      has no column-layout equivalent to preserve anyway.
+    - `caption` (from a `:caption:` code-block option) has no handler at all,
+      silently discarding its text; render it as a bold label line instead.
+    - `toctree` only reaches the translator for `:hidden:` toctrees, which
+      Sphinx's own HTML5 translator also skips outright (`visit_toctree`
+      raises SkipNode there too), since they render via the sidebar/context,
+      not inline content.
+    """
+    from sphinx_markdown_builder.translator import MarkdownTranslator, PREDEFINED_ELEMENTS, SKIP
+
+    PREDEFINED_ELEMENTS["hlist"] = None
+    PREDEFINED_ELEMENTS["hlistcol"] = None
+    PREDEFINED_ELEMENTS["toctree"] = SKIP
+
+    def visit_caption(self, _node):
+        self.add("**", prefix_eol=2)
+
+    def depart_caption(self, _node):
+        self.add("**", suffix_eol=2)
+
+    MarkdownTranslator.visit_caption = visit_caption
+    MarkdownTranslator.depart_caption = depart_caption
+
 # -- Extension configuration -------------------------------------------------
 
 # -- Images extension -----------------------------------------------------
@@ -593,6 +625,7 @@ def setup(app):
     app.connect('build-finished', fix_markdown_links) # Connect the markdown link fixer to post-process generated markdown files
 
     patch_markdown_translator_meta_nodes()
+    patch_markdown_translator_unhandled_nodes()
 
     app.connect('html-page-context', pagefind_custom_weights)
 
