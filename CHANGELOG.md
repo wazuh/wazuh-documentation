@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [v4.14.7]
+
+- Support for Wazuh 4.14.7
+
 ## [v4.14.6]
 
 - **Post-release**: Fixed dead link in release notes. ([#9761](https://github.com/wazuh/wazuh-documentation/pull/9761))
