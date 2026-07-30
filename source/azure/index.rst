@@ -5,8 +5,8 @@
   
 .. _azure:
 
-Using Wazuh to monitor Microsoft Azure
-======================================
+Monitoring Microsoft Azure
+==========================
 
 
 .. versionadded:: 3.7.0
