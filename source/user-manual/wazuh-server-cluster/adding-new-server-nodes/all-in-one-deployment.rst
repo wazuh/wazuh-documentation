@@ -10,6 +10,10 @@ All-in-one deployment
 
 An all-in-one deployment refers to using the :ref:`Wazuh installation assistant <quickstart_installing_wazuh>` or the pre-built virtual machine image in Open Virtual Appliance (OVA) format provided by Wazuh. This deployment method installs all the Wazuh central components on a single endpoint.
 
+.. note::
+
+   You need root user privileges to execute the commands below.
+
 To add a Wazuh server node to your all-in-one Wazuh deployment, complete the following key steps:
 
 -  `Certificate creation`_

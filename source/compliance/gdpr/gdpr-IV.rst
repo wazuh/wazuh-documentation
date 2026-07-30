@@ -1,363 +1,664 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Check out this section to learn more about how to use Wazuh for GDPR IV (The General Data Protection Regulation of the European Union). 
-  
-GDPR IV, Controller and processor <gdpr_IV>
-===========================================
+  :description: Check out this section to learn more about how to use Wazuh for GDPR IV (The General Data Protection Regulation of the European Union).
+
+GDPR IV, Controller and processor
+===================================
 
 In this chapter, the GDPR sets out requirements for managing, controlling, and processing personal data.
 
 Chapter IV, Article 24, Head 2
-------------------------------
+--------------------------------
 
 **Responsibility of the controller, Head 2**: *“Where proportionate in relation to processing activities, the measures referred to in paragraph 1 shall include the implementation of appropriate data protection policies by the controller.”*
 
 This article requires that adequate technical and organizational measures be in place to assist in complying with data security and protection policies. Therefore, the entity responsible for processing and storing data must comply with these policies.
 
-Using the :doc:`Security Configuration Assessment (SCA) </getting-started/use-cases/configuration-assessment>` module, Wazuh performs configuration assessments to ensure that endpoints comply with security policies, standards, and hardening guides. Refer to the :doc:`SCA documentation </user-manual/capabilities/sec-config-assessment/index>` section for more details on configuring SCA checks.
+The Wazuh :doc:`Security Configuration Assessment (SCA) </user-manual/capabilities/sec-config-assessment/index>` module performs configuration assessments to verify that endpoints comply with security policies, standards, and hardening guides. Refer to the SCA documentation for more information about configuring SCA checks.
 
 Use case: Ensure that the shadow group is empty
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In this use case, Wazuh runs an SCA check to determine whether any users are assigned to the ``shadow`` group on an Ubuntu 22.04 endpoint. The ``/etc/shadow`` file in Linux systems stores encrypted user passwords. Any user in the ``shadow`` group can read the contents of the ``/etc/shadow`` file. Unauthorized access to this file can lead to system compromise by malicious actors. The SCA check ID is 28680. When the SCA check runs, if the shadow group in ``/etc/group`` has no members, the check passes.
+In this use case, Wazuh runs an SCA check to determine whether any users are assigned to the ``shadow`` group on an Ubuntu 24.04 endpoint. The ``/etc/shadow`` file in Linux systems stores encrypted user passwords. Any user in the ``shadow`` group can read the contents of the ``/etc/shadow`` file. Unauthorized access to this file can lead to system compromise by malicious actors. The SCA check ID is ``35773``. The check passes when the shadow group in ``/etc/group`` has no members.
 
-The image below shows the result of the SCA check on the Wazuh dashboard.
+The following image shows the result of the SCA check on the Wazuh dashboard.
 
-.. thumbnail:: /images/compliance/gdpr/SCA-28680-no-alerts.png
-    :title: Filtering SCA 28680 check alerts
+.. thumbnail:: /images/compliance/gdpr/SCA-35773-no-alerts.png
+    :title: Filtering SCA 35773 check finding
+    :align: center
+    :width: 80%
+
+.. thumbnail:: /images/compliance/gdpr/SCA-35773-full-info.png
+    :title: SCA 35773 check finding full information
     :align: center
     :width: 80%
 
 Chapter IV, Article 28, Head 3 (c)
-----------------------------------
+------------------------------------
 
 **Processor, Head 3 (c)**: *“Processing by a processor shall be governed by a contract or other legal act under Union or Member State law, that is binding on the processor with regard to the controller and that sets out the subject-matter and duration of the processing, the nature and purpose of the processing, the type of personal data and categories of data subjects and the obligations and rights of the controller. That contract or other legal act shall stipulate, in particular, that the processor: takes all measures required pursuant to Article 32.”*
 
 According to this article, organizational and technical safeguards must be in place to protect data during processing. This is necessary to avoid any unauthorized alterations.
 
-Using the :doc:`File Integrity Monitoring (FIM) </user-manual/capabilities/file-integrity/index>` module, Wazuh ensures that certain established protection measures are met. Wazuh uses the FIM module to enhance data security. It logs information about who modified the data, when the modification occurred, and all related events impacting the data of interest.
+The Wazuh FIM module helps you meet these protection measures. It logs information about who modified the data, when the modification occurred, and all related events that affect the data of interest.
 
 Use case: Detect changes to file attributes
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In this use case, you have to configure the Wazuh agent to detect changes to ``/root/personal_data`` or its attributes, and to identify who made them. The configuration in this use case is specific to an Ubuntu 22.04 endpoint. Then you need to change the file's owner to trigger an alert.
+In this use case, you configure the Wazuh agent on an Ubuntu 24.04 endpoint to detect changes to ``/root/personal_data`` or its attributes, and to identify who made them. You then change the owner of a file to trigger a finding.
 
 Ubuntu endpoint
 ~~~~~~~~~~~~~~~
 
 #. Switch to the ``root`` user:
 
-	.. code-block:: console
+   .. code-block:: console
 
-		$ sudo su
+      $ sudo su
 
 #. Create the directory ``personal_data`` in the ``/root`` directory:
 
-	.. code-block:: console
+   .. code-block:: console
 
-		# mkdir /root/personal_data
+      # mkdir /root/personal_data
 
-#. Create the file ``subject_data.txt`` in the ``/root/personal_data`` directory  and include some content:
+#. Create the file ``subject_data.txt`` in the ``/root/personal_data`` directory and include some content:
 
-	.. code-block:: console
+   .. code-block:: console
 
-		# touch /root/personal_data/subject_data.txt
-		# echo "User01= user03_ID" >> /root/personal_data/subject_data.txt
+      # touch /root/personal_data/subject_data.txt
+      # echo "User01= user03_ID" >> /root/personal_data/subject_data.txt
 
-#. Install *auditd* to get information about who made changes in a monitored directory using the Linux Auditing System:
+#. Install ``auditd`` so that the Linux Auditing System provides information about who made changes in a monitored directory:
 
-	.. code-block:: console
+   .. code-block:: console
 
-		# apt-get install auditd
+      # apt-get install auditd
 
-#. Add the configuration highlighted to the ``syscheck`` block of the Wazuh agent configuration file ``/var/ossec/etc/ossec.conf``:
+   For Audit 3.1.1 and later, install the ``audispd`` af_unix plugin and restart the Audit service.
 
-	.. code-block:: xml
-		:emphasize-lines: 2
+   .. code-block:: console
 
-		<syscheck>
-		  <directories check_all="yes" whodata="yes" >/root/personal_data</directories>
-		</syscheck>
+      # apt-get install audispd-plugins
+      # service auditd restart
+
+#. Add the highlighted configuration to the ``<syscheck>`` block of the Wazuh agent configuration file ``/var/ossec/etc/ossec.conf``:
+
+   .. code-block:: xml
+      :emphasize-lines: 2, 3, 4, 5
+
+      <syscheck>
+        <directories check_all="yes" whodata="yes">/root/personal_data</directories>
+        <whodata>
+          <provider>audit</provider>
+        </whodata>
+      </syscheck>
 
 #. Restart the Wazuh agent to apply the changes:
 
-	.. code-block:: console
+   .. code-block:: console
 
-		# systemctl restart wazuh-agent
+      # systemctl restart wazuh-agent
 
 #. Change the owner of ``subject_data.txt`` from ``root`` to a regular user:
 
-	.. code-block:: console
+   .. code-block:: console
 
-		# chown <YOUR_REGULAR_USER>:<YOUR_REGULAR_USER> /root/personal_data/subject_data.txt
+      # chown <YOUR_REGULAR_USER>:<YOUR_REGULAR_USER> /root/personal_data/subject_data.txt
 
-The FIM module generates the alert below, showing the changed attributes.
+The following image shows the change made to the file.
 
-.. thumbnail:: /images/compliance/gdpr/fim-file-mod-who1.png
-   :title: Changed attributes full alert visualization
-   :align: center
-   :width: 80%
-
-.. thumbnail:: /images/compliance/gdpr/fim-file-mod-who2.png
-   :title: Changed attributes alert visualization
-   :align: center
-   :width: 80%
+.. thumbnail:: /images/compliance/gdpr/fim-file-mod-who.png
+    :title: Changed attributes finding visualization
+    :align: center
+    :width: 80%
 
 Chapter IV, Article 30, Head 1 (g)
-----------------------------------
+------------------------------------
 
-**Records of processing activities. Head 1 (g)**: *“Each controller and, where applicable, the controller's representative, shall maintain a record of processing activities under its responsibility. That record shall contain all of the following information: where possible, a general description of the technical and organizational security measures referred to in Article 32 (1).”*
+**Records of processing activities, Head 1 (g)**: *“Each controller and, where applicable, the controller's representative, shall maintain a record of processing activities under its responsibility. That record shall contain all of the following information: where possible, a general description of the technical and organizational security measures referred to in Article 32 (1).”*
 
 This article requires that organizations document, inventory, and audit data processing activities. This helps keep a record of all data processing activities.
 
-Wazuh supports the storage of information about file integrity monitoring and system events. It uses the :doc:`log data collection </user-manual/capabilities/log-data-collection/how-it-works>` capability to store all the events the Wazuh server receives in the archives file ``/var/ossec/logs/archives/archives.log``. Additionally, the ``/var/ossec/logs/archives/alerts.log`` file stores alerts from rules triggered. These logs help in performing various activities, such as data audits and threat hunting.
+Wazuh stores information about system events. Each event enters through the root decoder ``decoder/core-wazuh-message/0``, which belongs to the ``wazuh-core`` integration in the unclassified category. If an integration can process the event, it changes the category of the event and sends it to the matching index. Events that no integration processes remain unclassified. These are events that do not match any rule or fall below the threshold to trigger a finding.
+
+You can enable the **Index unclassified events** and **Index discarded events** settings to store these events. When this is configured, Wazuh indexes unclassified events into the ``wazuh-events-v5-unclassified`` index. This gives you a record of events that no integration processes, including those that do not trigger a finding. These records help with activities such as data audits and threat hunting.
 
 Use case: Store all logs generated from an endpoint
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In this use case, you have to store all events from monitored endpoints in the Wazuh archives, whether they generate an alert or not.
+In this use case, you store all events from monitored endpoints whether they generate a finding or not.
 
-Wazuh server
-~~~~~~~~~~~~
+Wazuh dashboard
+~~~~~~~~~~~~~~~
 
-#. Edit the Wazuh server configuration file ``/var/ossec/etc/ossec.conf`` and set the ``<logall>`` option to ``yes``. We have highlighted the ``<logall>`` option in the configuration block below:
+#. Click the menu icon, then navigate to **Security analytics** > **Overview**.
 
-	.. code-block:: xml
-		:emphasize-lines: 4
+#. Select **Actions** > **Edit** at the top-right section.
 
-		<global>
-		  <jsonout_output>yes</jsonout_output>
-		  <alerts_log>yes</alerts_log>
-		  <logall>yes</logall>
-		  <logall_json>no</logall_json>
-		  <email_notification>no</email_notification>
-		  <smtp_server>smtp.example.wazuh.com</smtp_server>
-		  <email_from>wazuh@example.wazuh.com</email_from>
-		  <email_to>recipient@example.wazuh.com</email_to>
-		  <email_maxperhour>12</email_maxperhour>
-		  <email_log_source>alerts.log</email_log_source>
-		  <agents_disconnection_time>10m</agents_disconnection_time>
-		 <agents_disconnection_alert_time>0</agents_disconnection_alert_time>
-		</global>
+#. Under **Settings**, toggle on **Index unclassified events** and **Index discarded events**.
 
-#. Restart the Wazuh manager to apply the configuration:
+#. Click **Save**.
 
-	.. code-block:: console
+   .. thumbnail:: /images/compliance/gdpr/index-unclassified-events-settings.png
+       :title: Store all logs generated from an endpoint
+       :align: center
+       :width: 80%
 
-		# systemctl restart wazuh-manager
+#. View these events on the dashboard by navigating to **Explore** > **Discover**.
 
-#. Check the contents of the ``/var/ossec/logs/archives/archives.log`` file on the Wazuh manager. You can see events, including those that do not trigger an alert:
+#. Change the **Index patterns** to ``wazuh-events-v5-unclassified*``.
 
-	.. code-block:: console
+   .. thumbnail:: /images/compliance/gdpr/unclassified-events-discover.png
+       :title: Unclassified events under Discover
+       :align: center
+       :width: 80%
 
-		# tail -f /var/ossec/logs/archives/archives.log
+#. Change the **Index patterns** accordingly to view other events of interest.
 
-	.. code-block:: none
-		:class: output
-
-		2026 Mar 24 12:29:34 wazuh->df -P ossec: output: 'df -P': tmpfs                    4012488         0   4012488       0% /sys/firmware
-		2026 Mar 24 12:29:34 wazuh->df -P ossec: output: 'df -P': shm                        65536       140     65396       1% /dev/shm
-		2026 Mar 24 12:29:34 wazuh->df -P ossec: output: 'df -P': /run/host_mark/Users   971350180 396430680 574919500      41% /etc/ssl/root-ca.pem
-		2026 Mar 24 12:29:34 wazuh->df -P ossec: output: 'df -P': overlay               1055761844  39599916 962458504       4% /
-		2026 Mar 24 12:29:34 wazuh->df -P ossec: output: 'df -P': Filesystem           1024-blocks      Used Available Capacity Mounted on
-		2026 Mar 24 12:29:34 wazuh->df -P ossec: output: 'df -P': /dev/vda1             1055761844  39599916 962458504       4% /etc/filebeat
-		2026 Mar 24 12:29:37 wazuh->sca {"type":"summary","scan_id":2066442125,"name":"CIS Benchmark for Amazon Linux 2023 Benchmark v1.0.0.","policy_id":"cis_amazon_linux_2023","file":"cis_amazon_linux_2023.yml","description":"This document provides prescriptive guidance for establishing a secure configuration posture for Amazon Linux 2023 systems running on x86 and x64 platforms. This document was tested against Amazon Linux 2023.","references":"https://www.cisecurity.org/cis-benchmarks/","passed":54,"failed":73,"invalid":56,"total_checks":183,"score":42.519683837890625,"start_time":1774355372,"end_time":1774355374,"hash":"ff6827beef5d74a3647d0b9aa3b621cb630ae8a56f7ab455e8d40e215cea35a0","hash_file":"44135e93c5bafddbbd9e495d87472504fa8c66e8fd7f9ac37bffe20ad0bac2ac","first_scan":1}
-		2026 Mar 24 12:29:37 wazuh->sca {"type":"policies","policies":["cis_amazon_linux_2023"]}
-		2026 Mar 24 12:29:42 wazuh->wazuh-monitord ossec: Manager started.
-		2026 Mar 24 12:29:55 wazuh->rootcheck Ending rootcheck scan.
+   .. thumbnail:: /images/compliance/gdpr/events-discover.png
+       :title: Events under Discover
+       :align: center
+       :width: 80%
 
 Chapter IV, Article 32, Head 2
-------------------------------
+--------------------------------
 
 **Security of processing, Head 2**: *“In assessing the appropriate level of security, account shall be taken in particular of the risks that are presented by processing, in particular from accidental or unlawful destruction, loss, alteration, unauthorised disclosure of, or access to personal data transmitted, stored or otherwise processed.”*
 
-This article requires conducting risk assessments to determine what risks processing actions pose to personal user data. The Wazuh log data analysis module and default ruleset help meet aspects of this article by monitoring actions taken by data administrators. With this, the data protection officer can check who is accessing and processing the data, whether they are authorized to do so, and whether they are who they claim to be.
+This article requires you to account for the risks that processing poses to personal data. Unauthorized access is one of these risks. The Wazuh log data analysis capability helps you meet this requirement. It collects and decodes authentication logs from your endpoints and evaluates them against the Wazuh ruleset. This lets you detect access attempts to systems that process personal data and identify who made them.
 
-Use case: Invalid SSH login attempts
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Use case: Detect invalid SSH login attempts
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In this use case, there is an example Wazuh rule to detect SSH authentication attempts by an invalid user. The Wazuh server receives SSH authentication logs from the monitored endpoint. Then, the log data analysis module decodes and evaluates the logs against default Wazuh rules to determine whether they match the behavior of interest.
+In this use case, the Wazuh agent on an Ubuntu 24.04 endpoint collects authentication logs from journald. When an invalid user attempts to log in over Secure Shell (SSH), the log is evaluated against the ruleset and generates a finding.
 
--  **Rule 5710 - sshd: Attempt to login using a non-existent user.**
+The Wazuh agent reads authentication events from journald by default through the Linux integration. No extra configuration is required to collect these events.
 
-	.. code-block:: xml
-		:emphasize-lines: 5
+To generate a finding, attempt an SSH login with an invalid username on the monitored endpoint:
 
-		<rule id="5710" level="5">
-		  <if_sid>5700</if_sid>
-		  <match>illegal user|invalid user</match>
-		  <description>sshd: Attempt to login using a non-existent user</description>
-		  <group>invalid_login,authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,pci_dss_10.6.1,gpg13_7.1,gdpr_IV_35.7.d,gdpr_IV_32.2,</group>
-		</rule>
+.. code-block:: console
 
-When an invalid login attempt triggers rule 5710, you can see the alert below on the Wazuh dashboard.
+   # ssh <USERNAME>@<IP_ADDRESS>
+
+When an invalid login attempt is detected, you can see the following finding on the Wazuh dashboard.
 
 .. thumbnail:: /images/compliance/gdpr/invalid-ssh-login-attempt1.png
-   :title: Invalid SSH login attempt alert visualization
-   :align: center
-   :width: 80%
+    :title: Invalid SSH login attempts findings
+    :align: center
+    :width: 80%
+
+.. thumbnail:: /images/compliance/gdpr/invalid-ssh-login-attempt2.png
+    :title: Invalid SSH login attempts finding visualization - more information
+    :align: center
+    :width: 80%
 
 Chapter IV, Article 33, Head 1
-------------------------------
+--------------------------------
 
-**Notification of a personal data breach to the supervisory authority, Head 1**: *“In the case of a personal data breach, the controller shall without undue delay and, where feasible, not later than 72 hours after having become aware of it, notify the personal data breach to the supervisory authority competent in accordance with Article 55, unless the personal data breach is unlikely to result in a risk to the rights and freedoms of natural persons. Where the notification to the supervisory authority is not made within 72 hours, it shall be accompanied by reasons for the delay.”*
+**Notification of a personal data breach to the supervisory authority, Head 1**: *“In the case of a personal data breach, the controller shall without undue delay and, where feasible, not later than 72 hours after having become aware of it, notify the personal data breach to the supervisory authority competent in accordance with Article 55, unless the personal data breach is unlikely to result in a risk to the rights and freedoms of natural persons.”*
 
-This article requires that organizations notify the appropriate supervisory authority of a personal data breach within 72 hours of becoming aware of it. Wazuh supports this obligation by providing timely detection of security events that may indicate a personal data breach. When such events are detected, for example, through triggered alerts or alert groups related to personal data security, teams can act swiftly to assess the incident and fulfill their notification obligations. Wazuh can be configured to send these alerts to the organization's administrators via email. Refer to the Wazuh :ref:`email alerts <configuring_email_alerts>` section of the documentation for more information on configuring email notifications.
+This article requires you to notify the supervisory authority of a personal data breach without undue delay. Where feasible, you must send this notification within 72 hours of becoming aware of the breach. To meet this deadline, you must detect breach indicators quickly and alert the right people.
+
+Wazuh provides an alerting capability that helps you meet this requirement. You can configure Wazuh to send an email notification when Wazuh generates a specific finding. Your data protection officer can then become aware of a potential breach in real time.
+
+Wazuh sends email notifications through the Wazuh indexer. You configure an email notification channel with three components. A Simple Mail Transfer Protocol (SMTP) sender defines the outbound mail server, a recipient group defines who receives the email, and an email channel binds them together. You then create an alerting monitor that queries your findings and notifies the channel when it detects a match.
 
 Use case: Email alert on failed login
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In this use case, you configure Wazuh to generate an alert and send notifications to the specified email addresses whenever a user's SSH login attempt fails.
+In this use case, you configure Wazuh to send an email to your data protection officer when a failed authentication attempt occurs on a monitored endpoint. A failed authentication attempt is an early indicator of unauthorized access. It can precede a personal data breach, such as a brute force attack against an account that can access personal data.
 
-#. Edit the email section of the Wazuh manager configuration file ``/var/ossec/etc/ossec.conf`` as follows to implement email notifications:
+Configure the SMTP sender
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-	.. code-block:: xml
-		:emphasize-lines: 3, 4, 5, 6
+The SMTP sender defines the mail server that sends the notifications.
 
-		<ossec_config>
-		  <global>
-		    <email_notification>yes</email_notification>
-		    <email_to>data_protection_officer@test.com</email_to>
-		    <smtp_server>mail.test.com</smtp_server>
-		    <email_from>wazuh@test.com</email_from>
-		  </global>
-		</ossec_config>
+#. Click the menu icon, then navigate to **Explore** > **Notifications**.
 
-#. Restart the Wazuh manager to apply the configuration changes:
+#. Click **Email senders** > **Create SMTP sender**.
 
-	.. code-block:: console
+#. Type a unique name in **Sender name**.
 
-		# systemctl restart wazuh-manager
+#. Type the address that sends the notifications in **Email address**.
 
-The changes made enable alerts to be sent via email to ``data_protection_officer@test.com``.
+#. Type the hostname or IP address of your SMTP server in **Host**.
 
-The sample email sent after an alert is generated looks like the following:
+#. Type the port of your SMTP server in **Port**. The default value is 465.
 
-.. code-block:: none
+#. Select an **Encryption method**.
 
-	From: Wazuh <wazuh@test.com>               5:03 PM (2 minutes ago)
-	to: me
-	-----------------------------
-	Wazuh Notification.
-	2022 Jun 20 17:03:05
+#. Click **Create**.
 
-	Received From: Ubuntu->/var/log/secure
-	Rule: 5503 fired (level 5) -> "PAM: User login failed."
-	Src IP: 192.168.1.37
-	Portion of the log(s):
+   .. thumbnail:: /images/compliance/gdpr/configure-smtp-sender.png
+       :title: Configure the SMTP sender
+       :align: center
+       :width: 80%
 
-	Jun  20 22:03:04 Ubuntu sshd[67231]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=192.168.1.37
-	uid: 0
-	euid: 0
-	tty: ssh
+   .. note::
 
-	 --END OF NOTIFICATION
+      SSL/TLS and STARTTLS require you to add the sender account credentials to the Wazuh indexer keystore.
+
+The **Encryption method** field offers three options:
+
++--------------+------------------------------------------------------------------------+
+| Option       | Description                                                            |
++==============+========================================================================+
+| **SSL/TLS**  | Encrypts the connection to the SMTP server. Use this option when your  |
+|              | server supports implicit TLS, usually on port 465.                     |
++--------------+------------------------------------------------------------------------+
+| **STARTTLS** | Upgrades a plain connection to an encrypted one. Use this option when  |
+|              | your server supports STARTTLS, usually on port 587.                    |
++--------------+------------------------------------------------------------------------+
+| **None**     | Sends mail without encryption. Use this option only in a test          |
+|              | environment, because it does not protect the credentials or the        |
+|              | message content.                                                       |
++--------------+------------------------------------------------------------------------+
+
+Configure the recipient group
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The recipient group defines who receives the email notifications.
+
+#. Click the menu icon, then navigate to **Explore** > **Notifications**.
+
+#. Click **Email recipient groups** > **Create recipient group**.
+
+#. Type a name for the group in **Name**.
+
+#. Describe the purpose of the group in **Description**. This field is optional.
+
+#. Type one or more email addresses in **Emails**. For this use case, add the address of your data protection officer.
+
+#. Click **Create**.
+
+   .. thumbnail:: /images/compliance/gdpr/configure-recipient-group.png
+       :title: Configure the recipient group
+       :align: center
+       :width: 80%
+
+   .. note::
+
+      You can also add recipient addresses directly to the channel. A recipient group is useful when you send notifications to the same addresses from more than one channel.
+
+Configure the email channel
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The email channel binds the sender and the recipients. The alerting monitor sends its notifications to this channel.
+
+#. Click the menu icon, then navigate to **Explore** > **Notifications**.
+
+#. Click **Channels** > **Create channel**.
+
+#. Type a name for the channel in **Name**.
+
+#. Describe the purpose of the channel in **Description**. This field is optional.
+
+#. Select **Email** in **Channel type**. You cannot change the channel type after you create the channel.
+
+#. Select **SMTP sender** in **Sender type**.
+
+#. Select the sender you created in **SMTP sender**.
+
+#. Select the recipient group you created in **Default recipients**. You can also type an email address directly.
+
+#. Click **Send test message** to confirm the configuration. A success message confirms that the channel works.
+
+#. Click **Create**.
+
+   .. thumbnail:: /images/compliance/gdpr/configure-email-channel.png
+       :title: Configure the email channel
+       :align: center
+       :width: 80%
+
+The **Sender type** field offers two options:
+
++-----------------+------------------------------------------------------------------------+
+| Option          | Description                                                            |
++=================+========================================================================+
+| **SMTP sender** | Uses your own SMTP server. Use this option in most environments.       |
++-----------------+------------------------------------------------------------------------+
+| **SES sender**  | Uses Amazon Simple Email Service (SES). Use this option when you run   |
+|                 | Wazuh on Amazon Web Services (AWS) and send mail through SES. An SES   |
+|                 | sender needs an AWS region and a role Amazon Resource Name (ARN)       |
+|                 | instead of a host and port.                                            |
++-----------------+------------------------------------------------------------------------+
+
+Create the alerting monitor
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The alerting monitor watches your findings for failed authentication attempts. When the monitor detects a match, it triggers the action that sends the email.
+
+#. Click the menu icon, then navigate to **Explore** > **Alerting**.
+
+#. Switch to the **Monitors** tab and click **Create monitor**.
+
+#. Type a name for the monitor in **Monitor name**.
+
+#. Select **Per document monitor** in **Monitor type**.
+
+#. Select **Visual editor** in **Monitor defining method**.
+
+#. Set **Frequency** to **By interval** and set **Run every** to 1 minute under **Schedule**.
+
+#. Under **Select data**, select ``wazuh-findings-v5-system-activity`` in **Index**.
+
+#. Under **Query**, in **Query name**, type a name.
+
+#. Set the query condition. In **Field**, select ``event.action``. In the operator list, select **is**. In the value field, type ``authentication-failure``.
+
+   .. note::
+
+      You can also match the finding by its rule identifier. In **Field**, select ``wazuh.rule.sigma_id`` and type the rule identifier. The ``event.action`` field is more stable, because it does not change when the rule identifier changes.
+
+#. Click **Add trigger** under **Triggers**.
+
+#. Type a name in **Trigger name**.
+
+#. Select a level in **Severity level**. Level 1 is the highest.
+
+#. Under **Trigger conditions**, in **Specify queries or tags**, select the name of the query.
+
+#. Click **Add notification** under **Actions**.
+
+#. Type a name in **Action name**.
+
+#. Select the email channel you created in **Channel**.
+
+#. Type a subject such as “Wazuh alert - failed authentication” in **Message subject**.
+
+#. In **Message**, type the notification body. You can embed variables with Mustache templates.
+
+   .. code-block:: none
+
+      A failed authentication attempt was detected on a monitored endpoint.
+      Trigger: {{ctx.trigger.name}}
+      Severity: {{ctx.trigger.severity}}
+      Monitor: {{ctx.monitor.name}}
+      Detected between {{ctx.periodStart}} and {{ctx.periodEnd}} UTC.
+      Review the finding in the Wazuh dashboard for the source IP, user, and host details.
+
+#. Select **Per alert** in **Perform action**.
+
+#. Click **Send test message** to confirm the action. A test email arrives at the recipient address.
+
+#. Click **Create**.
+
+   .. thumbnail:: /images/compliance/gdpr/create-alerting-monitor.gif
+       :title: Create the alerting monitor
+       :align: center
+       :width: 80%
+
+The **Monitor type** field offers these options:
+
++--------------------------+------------------------------------------------------------------------+
+| Option                   | Description                                                            |
++==========================+========================================================================+
+| **Per document monitor** | Generates an alert for each document that matches the query. Use this  |
+|                          | option to alert on each failed authentication finding.                 |
++--------------------------+------------------------------------------------------------------------+
+| **Per query monitor**    | Runs a query and generates an alert when the results match the trigger |
+|                          | criteria. Use this option to alert when failed authentications exceed  |
+|                          | a threshold in a time window, such as a brute force attempt.           |
++--------------------------+------------------------------------------------------------------------+
+
+The **Perform action** field controls how often Wazuh sends the notification:
+
++-------------------+------------------------------------------------------------------------+
+| Option            | Description                                                            |
++===================+========================================================================+
+| **Per alert**     | Sends one email for each matching finding. Use this option to notify   |
+|                   | on every failed authentication.                                        |
++-------------------+------------------------------------------------------------------------+
+| **Per execution** | Sends one email for each monitor run, regardless of how many findings  |
+|                   | match. Use this option to receive a single summary notification for    |
+|                   | each interval.                                                         |
++-------------------+------------------------------------------------------------------------+
+
+.. note::
+
+   On a busy endpoint, the **Per alert** option can generate frequent emails. To reduce the volume, use a **Per query monitor** with a threshold instead.
+
+.. note::
+
+   The **Monitor defining method** offers two options. The **Visual editor** lets you build the query with fields and values. The **Extraction query editor** lets you write the query in raw query syntax. Use the extraction query editor for conditions that the visual editor cannot express.
+
+Verify the configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Verify that Wazuh sends the email when a failed authentication occurs.
+
+#. On a monitored endpoint, attempt a Secure Shell (SSH) login with an invalid username:
+
+   .. code-block:: console
+
+      # ssh <INVALID_USER>@<ENDPOINT_IP>
+
+#. The login fails because the user does not exist.
+
+#. Wait for one monitor interval.
+
+#. Wazuh detects the finding, the trigger fires, and the action sends an email to the recipient group.
+
+The data protection officer receives an email similar to the following:
+
+.. thumbnail:: /images/compliance/gdpr/sample-email-alert-notification.png
+    :title: Sample email alert notification
+    :align: center
+    :width: 80%
+
+The email identifies the trigger, the severity, the monitor, and the detection window. To view more details, such as the source IP address, the recipient opens the finding on the Wazuh dashboard.
+
+.. thumbnail:: /images/compliance/gdpr/email-notification-dashboard-findings.png
+    :title: Email notification dashboard findings
+    :align: center
+    :width: 80%
 
 Chapter IV, Article 35, Head 1
-------------------------------
+--------------------------------
 
 **Data protection impact assessment, Head 1**: *“Where a type of processing in particular using new technologies, and taking into account the nature, scope, context and purposes of the processing, is likely to result in a high risk to the rights and freedoms of natural persons, the controller shall, prior to the processing, carry out an assessment of the impact of the envisaged processing operations on the protection of personal data. A single assessment may address a set of similar processing operations that present similar high risks.”*
 
-This article recommends conducting a risk assessment of data processing channels and assessing the impact of the identified risks on data protection. Wazuh can support the risk assessment outcome by categorizing FIM alerts for specific files or directories and raising alert levels based on the risk assessment reports.
+This article recommends conducting a risk assessment of data processing channels and assessing the impact of the identified risks on data protection. Wazuh supports the risk assessment outcome by categorizing FIM findings for specific files or directories and raising severity levels based on the risk assessment reports.
 
-Use case: Increase the alert level of a file modification event
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Use case: Increase the severity level of a file modification finding
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In this use case, you have to set a high alert level for a file modification event if the file is in a specific directory. In the example below, you can find a rule with an alert level **15** for data changes in the ``/customers/personal_data`` directory. Then, you need to modify files to trigger alerts.
+In this use case, you set a critical severity for a file modification event when the file is in a specific directory. You configure the agent to monitor ``/customers/personal_data``, and you create a rule that raises the severity for changes in that directory.
 
 Ubuntu endpoint
 ~~~~~~~~~~~~~~~
 
 #. Create the directory ``/customers``:
 
-	.. code-block:: console
+   .. code-block:: console
 
-		# mkdir /customers
+      # mkdir /customers
 
 #. Create the directory ``personal_data`` in the ``/customers`` directory:
 
-	.. code-block:: console
+   .. code-block:: console
 
-		# mkdir /customers/personal_data
+      # mkdir /customers/personal_data
 
-#. Add the configuration highlighted to the ``syscheck`` block of the agent configuration file ``/var/ossec/etc/ossec.conf``:
+#. Add the highlighted configuration to the ``<syscheck>`` block of the agent configuration file ``/var/ossec/etc/ossec.conf``:
 
-	.. code-block:: xml
-		:emphasize-lines: 2
+   .. code-block:: xml
+      :emphasize-lines: 2
 
-		<syscheck>
-		  <directories realtime="yes" check_all="yes" report_changes="yes">/customers/</directories>
-		</syscheck>
+      <syscheck>
+        <directories realtime="yes" check_all="yes" report_changes="yes">/customers/</directories>
+      </syscheck>
 
 #. Restart the Wazuh agent to apply the changes:
 
-	.. code-block:: console
+   .. code-block:: console
 
-		# systemctl restart wazuh-agent
+      # systemctl restart wazuh-agent
 
-Wazuh server
-~~~~~~~~~~~~
+#. Create the file ``regular_data.txt`` in the ``/customers`` directory and add some content:
 
-#. Add the following rules in the ``/var/ossec/etc/rules/local_rules.xml`` file:
+   .. code-block:: console
 
-	.. code-block:: xml
+      # touch /customers/regular_data.txt
+      # echo "this is regular data" >> /customers/regular_data.txt
 
-		<rule id="100001" level="15">
-		    <if_matched_group>syscheck</if_matched_group>
-		    <match>/customers/personal_data</match>
-		    <description>Changes made to a sensitive file - $(file).</description>
-		</rule>
+A medium severity finding on the Wazuh dashboard shows that a file was modified in the monitored directory.
 
-#. Restart the Wazuh manager for the configuration changes to apply:
+.. thumbnail:: /images/compliance/gdpr/file-modification-medium-finding.png
+    :title: File modification medium finding visualization
+    :align: center
+    :width: 80%
 
-	.. code-block:: console
+Wazuh dashboard
+~~~~~~~~~~~~~~~
 
-		# systemctl restart wazuh-manager
+Create a custom rule to increase the severity of file modification in the directory ``/customers/personal_data`` from medium to critical.
+
+Create decoder and integration
+""""""""""""""""""""""""""""""
+
+The two decoders that need to exist in your custom space are ``decoder/core-wazuh-message/0`` and ``decoder/wazuh-fim/0``. ``decoder/core-wazuh-message/0`` is the Wazuh root decoder, and ``decoder/wazuh-fim/0`` decodes FIM-related events.
+
+#. Click the menu icon, then navigate to **Security analytics** > **Decoders**.
+
+#. Switch to **Standard** in **Space**.
+
+#. Search for ``decoder/core-wazuh-message/0``. Switch to the **YAML** tab and copy the decoder contents.
+
+#. Close the tab and switch to **Draft** in **Space**.
+
+#. Click the dropdown under **Actions** and select **+ Create**.
+
+#. In the **Integration** section, click **Create integration**.
+
+#. Give it a title and select **System Activity** under **Category**. Type the author name in **Author** and click **Create integration**.
+
+#. Paste the copied decoder contents from the standard space into the decoder section.
+
+#. Click **Create decoder**.
+
+#. Repeat steps 2 to 5 for ``decoder/wazuh-fim/0``.
+
+#. In the **Integration** section, select the previously created integration.
+
+#. Repeat steps 8 and 9.
+
+#. Click **Overview** in the left pane, click the **Actions** dropdown, and select **Edit**.
+
+#. In the **Settings** section, under **Root Decoder**, select the created root decoder ``decoder/core-wazuh-message/0`` and click **Save**.
+
+#. In **Overview**, select **Draft** in **Space**.
+
+#. Click the dropdown under **Actions** and select **Promote** to promote the decoders from **Draft** space to **Test**. In the prompt, type ``promote`` and click **Promote**.
+
+#. Switch to **Test** in **Space** and repeat step 16 to promote the decoders from **Test** space to **Custom**.
+
+   .. thumbnail:: /images/compliance/gdpr/create-decoders-integration.gif
+       :title: Create decoders and integration
+       :align: center
+       :width: 80%
+
+   .. note::
+
+      You can ignore the steps to create a root decoder if you already have this configured in your custom space.
+
+Create custom rule
+""""""""""""""""""
+
+The file modification rule already exists out of the box. To change the severity of file modification findings in your directory of choice, you need to create a custom rule to achieve this.
+
+#. Click the menu icon, then navigate to **Security analytics** > **Rules**.
+
+#. Switch to **Standard** in **Space**.
+
+#. Search for FIM in the search bar.
+
+#. The search returns the built-in FIM rules. Click the magnifying glass icon to view the rule titled ``Wazuh FIM - File modified - {{file.path}}``.
+
+#. Switch to the **YAML** tab and copy the rule contents.
+
+#. Close the tab and switch to **Draft** in **Space**.
+
+#. Click the dropdown under **Actions** and select **+ Create**.
+
+#. Switch to the **YAML Editor** tab, select the integration created previously, and paste the copied file modification rule from the standard space into the rule section.
+
+#. Switch back to the **Visual Editor** tab for better visualization of the copied rule.
+
+#. In the dropdown under **Rule level (severity)**, select **Critical**.
+
+#. In the **Detection** section, under **selection**, click **Add map**.
+
+#. Type ``file.path`` in **Key**. Under **Modifier**, select **contains** and type the monitored directory ``/customers/personal_data`` in **Value**.
+
+#. Click **Create rule**.
+
+#. Click **Overview** in the left pane and select **Draft** in **Space**.
+
+#. Click the dropdown under **Actions** and select **Promote** to promote the rule from **Draft** space to **Test**. In the prompt, type ``promote`` and click **Promote**.
+
+#. Switch to **Test** in **Space** and repeat step 15 to promote the rule from **Test** space to **Custom**.
+
+   .. thumbnail:: /images/compliance/gdpr/create-custom-rule.gif
+       :title: Create custom rule
+       :align: center
+       :width: 80%
+
+Create detector
+""""""""""""""""
+
+To generate a finding on the Wazuh dashboard, a corresponding detector must exist in your custom space to handle your custom rules.
+
+#. Click the menu icon, then navigate to **Security analytics** > **Detectors**.
+
+#. Click **+ Create detector**.
+
+#. Enter a name for the detector in **Name**.
+
+#. Add a description in **Description**. This is optional.
+
+#. Under **Data source**, click the drop-down and select ``wazuh-events-v5-system-activity`` in **Select indexes/aliases**.
+
+#. Switch to **Custom** in **Space**.
+
+#. Select the previously created integration under **Integration**.
+
+#. Click **Create detector**.
+
+   .. thumbnail:: /images/compliance/gdpr/create-detector.gif
+       :title: Create detector
+       :align: center
+       :width: 80%
 
 Ubuntu endpoint
 ~~~~~~~~~~~~~~~
 
-#. Create the file ``regular_data.txt`` in the ``/customers`` directory and add some content:
+Create the file ``sensitive_data.txt`` in the ``/customers/personal_data`` directory and add some content:
 
-	.. code-block:: console
+.. code-block:: console
 
-		# touch /customers/regular_data.txt
-		# echo "this is regular data" >> /customers/regular_data.txt 
+   # touch /customers/personal_data/sensitive_data.txt
+   # echo "User01= user03_ID" >> /customers/personal_data/sensitive_data.txt
 
-	You can see a level 7 alert generated in the **Integrity monitoring** section of the Wazuh dashboard to show that a file in the monitored directory was modified.
+A critical finding shows that a sensitive file was modified in the monitored directory.
 
-	.. thumbnail:: /images/compliance/gdpr/integrity-monitoring-level-7.png
-	   :title: File Integrity Monitoring level 7 alert visualization
-	   :align: center
-	   :width: 80%
-
-#. Create the file ``sensitive_data.txt`` in the ``/customers/personal_data`` directory and add some content:
-
-	.. code-block:: console
-
-		# touch /customers/personal_data/sensitive_data.txt
-		# echo "User01= user03_ID" >> /customers/personal_data/sensitive_data.txt
-
-	You can see a level 15 alert indicating that a sensitive file in the monitored directory was modified.
-
-	.. thumbnail:: /images/compliance/gdpr/integrity-monitoring-level-15.png
-	   :title: File Integrity Monitoring level 15 alert visualization
-	   :align: center
-	   :width: 80%
+.. thumbnail:: /images/compliance/gdpr/file-modification-critical-finding.png
+    :title: File modification critical finding visualization
+    :align: center
+    :width: 80%
 
 Chapter IV, Article 35, Head 7 (d)
-----------------------------------
+------------------------------------
 
-**Data protection impact assessment, Head 7 (d)**: *"The assessment shall contain at least the measures envisaged to address the risks, including safeguards, security measures and mechanisms to ensure the protection of personal data and to demonstrate compliance with this Regulation taking into account the rights and legitimate interests of data subjects and other persons concerned."*
+**Data protection impact assessment, Head 7 (d)**: *“The assessment shall contain at least the measures envisaged to address the risks, including safeguards, security measures and mechanisms to ensure the protection of personal data and to demonstrate compliance with this Regulation taking into account the rights and legitimate interests of data subjects and other persons concerned.”*
 
 This article recommends implementing the necessary security measures to protect subject data. These security measures include threat detection and response on endpoints that contain personal user data.
 
 Wazuh helps meet this article of the GDPR by providing security measures such as:
 
--  :doc:`Anomaly and malware detection </user-manual/capabilities/malware-detection/index>`.
--  :doc:`Integrating with VirusTotal to detect and remove malware </proof-of-concept-guide/detect-remove-malware-virustotal>`.
--  :doc:`Integrating with YARA to detect malware </proof-of-concept-guide/detect-malware-yara-integration>`.
--  `Using constant database (CDB) lists to detect and remove malicious files <https://wazuh.com/blog/detecting-and-responding-to-malicious-files-using-cdb-lists-and-active-response/>`__.
--  :doc:`Active response </getting-started/use-cases/incident-response>`.
--  :doc:`Vulnerability detection </getting-started/use-cases/vulnerability-detection>`.
+-  :doc:`Vulnerability detection </user-manual/capabilities/vulnerability-detection/index>`.
+-  :doc:`Security configuration assessment </user-manual/capabilities/sec-config-assessment/index>`.
+-  Malware detection.
+-  Active response.
