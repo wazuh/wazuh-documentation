@@ -2,8 +2,8 @@
 
 .. _azure:
 
-Using Wazuh to monitor Microsoft Azure
-======================================
+Monitoring Microsoft Azure
+==========================
 
 .. meta::
   :description: Discover how Wazuh can help you to monitor your Microsoft Azure infrastructure.
