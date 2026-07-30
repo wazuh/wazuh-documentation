@@ -131,6 +131,18 @@ Where:
 
 -  ``<API_TOKEN>`` is the GitHub personal access token created within the ``admin:org`` scope.
 
+.. thumbnail:: /images/cloud-security/github/github-dashboard-tab.jpg
+   :title: GitHub dashboard tab
+   :alt: GitHub dashboard tab
+   :align: center
+   :width: 80%
+
+.. thumbnail:: /images/cloud-security/github/github-panel-tab.jpg
+   :title: GitHub panel tab
+   :alt: GitHub panel tab
+   :align: center
+   :width: 80%
+
 Use cases
 ---------
 
@@ -143,7 +155,7 @@ Requirements
 GitHub
 ^^^^^^
 
-Create a GitHub personal access token within the ``admin:org``, ``repo``, and ``delete_repo`` scopes. We use this token with the GitHub REST API to test the use cases by performing actions on the organization that trigger findings on Wazuh.
+Create a GitHub personal access token within the ``admin:org``, ``repo``, and ``delete_repo`` scopes. We use this token with the GitHub REST API to test use cases by performing actions on the organization that trigger Wazuh findings.
 
 Perform the following steps to create the API token:
 
