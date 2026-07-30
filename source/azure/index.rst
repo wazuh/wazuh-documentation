@@ -5,8 +5,8 @@
   
 .. _azure:
 
-Using Wazuh to monitor Microsoft Azure
-======================================
+Monitoring Microsoft Azure
+==========================
 
 This section provides instructions for monitoring **Microsoft Azure** infrastructures, such as:
 
