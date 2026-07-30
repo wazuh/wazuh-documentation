@@ -41,12 +41,15 @@ All notable changes to this project will be documented in this file.
 - Updated the *Wazuh server* documentation to the new *Wazuh manager* documentation in the *User manual*. ([#9728](https://github.com/wazuh/wazuh-documentation/pull/9728)) ([#9737](https://github.com/wazuh/wazuh-documentation/pull/9737))
 - Updated the *User administration* documentation. ([#9745](https://github.com/wazuh/wazuh-documentation/pull/9745)) ([#9758](https://github.com/wazuh/wazuh-documentation/pull/9758)) ([#9765](https://github.com/wazuh/wazuh-documentation/pull/9765)) ([#9766](https://github.com/wazuh/wazuh-documentation/pull/9766)) ([#9775](https://github.com/wazuh/wazuh-documentation/pull/9775))
 - Updated the *Monitoring GitHub* documentation. ([#9836](https://github.com/wazuh/wazuh-documentation/pull/9836)) ([#9840](https://github.com/wazuh/wazuh-documentation/pull/9840))
+- Updated the *Monitoring Office 365* documentation. ([#9935](https://github.com/wazuh/wazuh-documentation/pull/9935))
 - Updated the *Proof of concept guide* use cases for File integrity monitoring, Vulnerability detection, Monitoring Docker events, Detecting an SQL injection attack, Network IDS integration, Monitoring AWS infrastructure, Detecting hidden processes, and Blocking a known malicious actor. ([#9777](https://github.com/wazuh/wazuh-documentation/pull/9777)) ([#9831](https://github.com/wazuh/wazuh-documentation/pull/9831)) ([#9916](https://github.com/wazuh/wazuh-documentation/pull/9916))
 - Updated the *Container security* documentation. ([#9816](https://github.com/wazuh/wazuh-documentation/pull/9816)) ([#9819](https://github.com/wazuh/wazuh-documentation/pull/9819)) ([#9823](https://github.com/wazuh/wazuh-documentation/pull/9823))
 - Updated the *System inventory* documentation. ([#9820](https://github.com/wazuh/wazuh-documentation/pull/9820)) ([#9832](https://github.com/wazuh/wazuh-documentation/pull/9832))
 - Updated the *Security configuration assessment* capability documentation. ([#9834](https://github.com/wazuh/wazuh-documentation/pull/9834)) ([#9849](https://github.com/wazuh/wazuh-documentation/pull/9849))
 - Updated the *Vulnerability detection* capability documentation. ([#9835](https://github.com/wazuh/wazuh-documentation/pull/9835)) ([#9841](https://github.com/wazuh/wazuh-documentation/pull/9841))
 - Updated the *Command monitoring* capability documentation. ([#9883](https://github.com/wazuh/wazuh-documentation/pull/9883)) ([#9915](https://github.com/wazuh/wazuh-documentation/pull/9915))
+- Updated the minimum required password length for Wazuh API users to 12 characters in the *Deploying with Kubernetes* documentation. ([#9941](https://github.com/wazuh/wazuh-documentation/pull/9941))
+- Updated the *Using Wazuh for GDPR compliance* documentation in *Regulatory compliance* to Wazuh 5.0. ([#9944](https://github.com/wazuh/wazuh-documentation/pull/9944))
 
 ### Removed
 
@@ -74,6 +77,8 @@ All notable changes to this project will be documented in this file.
 ## [v4.14.6]
 
 - **Post-release**: Fixed dead link in release notes. ([#9761](https://github.com/wazuh/wazuh-documentation/pull/9761))
+- **Post-release**: Updated the *Monitoring Microsoft Azure* documentation page title. ([#9923](https://github.com/wazuh/wazuh-documentation/pull/9923))
+- **Post-release**: Fixed broken link in the *Adding new Wazuh server nodes* section and moved the root user privileges note into the *All-in-one deployment* and *Distributed deployment* pages. ([#9934](https://github.com/wazuh/wazuh-documentation/pull/9934)) ([#9937](https://github.com/wazuh/wazuh-documentation/pull/9937))
 
 ## [v4.14.5]
 

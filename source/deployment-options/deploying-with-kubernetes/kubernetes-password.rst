@@ -184,7 +184,7 @@ The ``wazuh-wui`` user is the default account for connecting to the Wazuh manage
 
 .. note::
 
-   The password for Wazuh API users must be between 8 and 64 characters long. It must contain at least one uppercase and one lowercase letter, a number, and a symbol.
+   The password for Wazuh API users must be between 12 and 64 characters long. It must contain at least one uppercase and one lowercase letter, a number, and a symbol.
 
 #. Encode your new password in base64 format. Use the ``-n`` option with the echo command as follows to avoid inserting a trailing newline character to maintain the hash value:
 
