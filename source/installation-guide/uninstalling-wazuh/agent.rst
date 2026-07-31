@@ -50,13 +50,21 @@ The Wazuh agent is now completely removed from your Linux endpoint.
 Uninstalling a Windows Wazuh agent
 ----------------------------------
 
-To uninstall the Wazuh agent, ensure the original Windows installer file is in your working directory and run the following command:
+Ensure the original Windows installer file is in your working directory and follow these steps to uninstall the Wazuh agent from your Windows endpoint.
 
-.. code-block:: doscon
+#. Remove the Wazuh agent installation:
 
-   > msiexec.exe /x wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi /qn
+   .. code-block:: doscon
 
-The Wazuh agent is now completely removed from your Windows endpoint.
+      > msiexec.exe /x wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi /qn
+
+   The Wazuh agent is now completely removed from your Windows endpoint.
+
+#. Remove the Wazuh agent installation folder:
+
+   .. code-block:: doscon
+
+      > rmdir /s /q C:\Program Files (x86)\ossec-agent\
 
 .. _uninstalling_macos_agent:
 
