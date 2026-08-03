@@ -184,9 +184,9 @@ Select your deployment type and follow the instructions to change the default pa
 
             .. code-block:: console
 
-               # bash wazuh-passwords-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -A -au <ADMIN_USER> -ap <ADMIN_PASSWORD> -u <USER> -p <PASSWORD>
+               # bash wazuh-passwords-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -A -au <API_ADMIN_USER> -ap <API_ADMIN_PASSWORD> -u <USER> -p <PASSWORD>
 
-            Where ``<ADMIN_USER>`` and ``<ADMIN_PASSWORD>`` are the Wazuh manager API administrator user and password, respectively. ``<USER>`` is the name of the user whose password you want to change, and ``<PASSWORD>`` is the new password. If ``<PASSWORD>`` is not specified, the tool will generate a random password.
+            Where ``<API_ADMIN_USER>`` and ``<API_ADMIN_PASSWORD>`` are the Wazuh manager API administrator user and password, respectively. ``<USER>`` is the name of the user whose password you want to change, and ``<PASSWORD>`` is the new password. If ``<PASSWORD>`` is not specified, the tool will generate a random password.
 
             For example, to change the password of the ``wazuh`` user to ``Hello*123``, run the following command:
 
