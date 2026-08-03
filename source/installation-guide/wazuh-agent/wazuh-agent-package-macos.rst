@@ -25,7 +25,12 @@ The Wazuh agent runs on the endpoint you want to monitor and communicates with t
 
       .. group-tab:: CLI
 
-         #. To deploy the Wazuh agent to your system, replace the ``WAZUH_MANAGER`` value with your Wazuh manager IP address or hostname and run the following command:
+         #. Run the following command to deploy the Wazuh agent on your endpoint.
+
+            Replace
+
+            -  ``WAZUH_MANAGER``  value with your Wazuh manager IP address or hostname
+            -  ``WAZUH_REGISTRATION_PASSWORD`` value with the Wazuh manager enrollment password.
 
             .. tabs::
 
