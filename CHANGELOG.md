@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 
 ## [v4.14.7]
 
-- Support for Wazuh 4.14.7
+- **Post-release**: Obscured the sample private key values in the GCP credentials documentation. ([#9971](https://github.com/wazuh/wazuh-documentation/pull/9971))
 
 ## [v4.14.6]
 
