@@ -34,6 +34,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated the *Wazuh signed package (WPK) files* section. ([#9176](https://github.com/wazuh/wazuh-documentation/pull/9176))
 - **Post-release**: Updated `offline-url` setting reference in the vulnerability detection capability section. ([#9198](https://github.com/wazuh/wazuh-documentation/pull/9198))
 - **Post-release**: Updated the *Monitoring Microsoft Azure* documentation page title. ([#9924](https://github.com/wazuh/wazuh-documentation/pull/9924))
+- **Post-release**: Obscured the sample private key values in the GCP credentials documentation. ([#9972](https://github.com/wazuh/wazuh-documentation/pull/9972))
 
 ### Fixed
 
