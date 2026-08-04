@@ -31,6 +31,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Fixed indentation in ``remove-threat.py`` code line. ([#9081](https://github.com/wazuh/wazuh-documentation/pull/9081))
 - **Post-release**: Updated the *Resources* table in the *RBAC reference* guide. ([#9121](https://github.com/wazuh/wazuh-documentation/pull/9121))
 - **Post-release**: Updated the *Monitoring Microsoft Azure* documentation page title. ([#9926](https://github.com/wazuh/wazuh-documentation/pull/9926))
+- **Post-release**: Obscured the sample private key values in the GCP credentials documentation. ([#9974](https://github.com/wazuh/wazuh-documentation/pull/9974))
 
 ### Fixed
 
