@@ -30,7 +30,7 @@ The Wazuh agent runs on the endpoint you want to monitor and communicates with t
 
                .. code-block:: ps1con
 
-                  > msiexec.exe /i .\wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi /q WAZUH_MANAGER="10.0.0.2"
+                  > msiexec.exe /i wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi /q WAZUH_MANAGER="10.0.0.2"
 
          #. Start the Wazuh agent from the GUI or by running:
 
