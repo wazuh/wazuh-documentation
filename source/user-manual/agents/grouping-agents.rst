@@ -5,8 +5,6 @@
 Grouping agents
 ===============
 
-.. versionadded:: 3.0.0
-
 There are two methods for configuring registered agents. They can either be configured locally with the :doc:`ossec.conf <../reference/ossec-conf/index>` file or remotely using
 the :doc:`centralized configuration <../reference/centralized-configuration>`. If the centralized configuration is used, agents may be assigned to groups with each group possessing a unique configuration.  This greatly simplifies the overall configuration process.
 
@@ -71,8 +69,6 @@ Below are the steps to assign agents to a group with a specific configuration:
 
 Multiple groups
 ---------------
-
-.. versionadded:: 3.7.0
 
 Since Wazuh v3.7.0, agents have the ability to belong to multiple groups. The agents will receive all the configuration files from each group. Configuration received from the last assigned group
 has more priority than the other ones.

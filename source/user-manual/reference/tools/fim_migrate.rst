@@ -5,8 +5,6 @@
 fim_migrate
 ===========
 
-.. versionadded:: 3.7.0
-
 The *fim_migrate* tool allows to migrate FIM databases older than Wazuh v3.7.0 to the new format included in Wazuh-DB. This tool must be executed after the :ref:`upgrading process <upgrading_wazuh>` has been completed.
 
 .. note::

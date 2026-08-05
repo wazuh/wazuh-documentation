@@ -22,8 +22,6 @@ Subsections
 server
 ^^^^^^
 
-.. versionadded:: 3.0.0
-
 Configures the connection parameters for each server an agent connects to.
 
 Server subsection options
@@ -107,81 +105,12 @@ Time interval between connection attempts (seconds).
 Options
 -------
 
-- :ref:`server-ip <legacy_server-ip>`
-- :ref:`server-hostname <legacy_server-hostname>`
-- :ref:`port <legacy_port>`
-- :ref:`protocol <legacy_protocol>`
 - `config-profile`_
 - `notify_time`_
 - `time-reconnect`_
 - `local_ip`_
-- `disable-active-response`_
 - `auto_restart`_
 - `crypto_method`_
-
-.. _legacy_server-ip:
-
-server-ip
-^^^^^^^^^
-
-.. deprecated:: 3.0.0
-
-Specifies the IP address of the Wazuh manager.
-
-+--------------------+----------------------------------+
-| **Default value**  | n/a                              |
-+--------------------+----------------------------------+
-| **Allowed values** | Any valid IP address is allowed. |
-+--------------------+----------------------------------+
-
-
-.. _legacy_server-hostname:
-
-server-hostname
-^^^^^^^^^^^^^^^
-
-.. deprecated:: 3.0.0
-
-Specifies the hostname of the Wazuh manager.
-
-+--------------------+-------------------------------------+
-| **Default value**  | n/a                                 |
-+--------------------+-------------------------------------+
-| **Allowed values** | Any resolvable hostname is allowed. |
-+--------------------+-------------------------------------+
-
-.. warning::
-		This parameter is incompatible with `server-ip`_. Since version 3.0, these fields have been merged into a single field called `address` that accepts both formats.
-
-.. _legacy_port:
-
-port
-^^^^
-
-.. deprecated:: 3.0.0
-
-Specifies the port on the manager to send events to.  This must match the associated listening port configured on the Wazuh manager.
-
-+--------------------+---------------------------------------------+
-| **Default value**  | 1514                                        |
-+--------------------+---------------------------------------------+
-| **Allowed values** | Any port number from 1 to 65535 is allowed. |
-+--------------------+---------------------------------------------+
-
-.. _legacy_protocol:
-
-protocol
-^^^^^^^^
-
-.. deprecated:: 3.0.0
-
-Specifies the protocol to use when connecting to manager.
-
-+--------------------+----------+
-| **Default value**  | udp      |
-+--------------------+----------+
-| **Allowed values** | udp, tcp |
-+--------------------+----------+
 
 .. _reference_ossec_client_config_profile:
 
@@ -238,21 +167,6 @@ Specifies which IP address will be used to communicate with the manager when the
 | **Allowed values** | Any valid IP address is allowed. |
 +--------------------+----------------------------------+
 
-disable-active-response
-^^^^^^^^^^^^^^^^^^^^^^^
-
-**Deprecated:**
-
-.. warning::
-
-        This is an obsolete method to disable active response. The recommended way is by configuring as shown in the :doc:`active-response <active-response>` section.
-
-+--------------------+---------------------+
-| **Default value**  | no                  |
-+--------------------+---------------------+
-| **Allowed values** | yes, no             |
-+--------------------+---------------------+
-
 auto_restart
 ^^^^^^^^^^^^
 
@@ -266,8 +180,6 @@ Toggles on and off the automatic restart of agents when a new valid configuratio
 
 crypto_method
 ^^^^^^^^^^^^^
-
-.. versionadded:: 3.5.0
 
 Choose the encryption of the messages that the agent sends to the manager.
 
