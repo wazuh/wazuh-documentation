@@ -116,6 +116,10 @@ newUrls['5.0'] = [
   '/transitioning-from-4x-to-5x/wazuh-dashboard.html',
   '/proof-of-concept-guide/poc-security-configuration-assessment.html',
   '/proof-of-concept-guide/detect-web-attack-xss.html',
+  '/wazuh-cti/index.html',
+  '/wazuh-cti/how-it-works.html',
+  '/wazuh-cti/managing-wazuh-cti.html',
+  '/wazuh-cti/troubleshooting.html',
 ];
 
 /* Redirections 4.14—5.0  */
