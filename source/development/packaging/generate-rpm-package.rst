@@ -65,6 +65,6 @@ This will generate a |WAZUH_LATEST| Wazuh api RPM package with revision ``my_rev
 
 .. code-block:: console
 
-  # ./generate_rpm_package.sh -b v|WAZUH_LATEST| --packages-branch |WAZUH_PACKAGES_BRANCH| -t agent -a x86_64 -p /opt
+  # ./generate_rpm_package.sh -b v|WAZUH_LATEST| --packages-branch |WAZUH_PACKAGES_BRANCH| -t agent -a x86_64 -p /opt/ossec
 
-This will generate a |WAZUH_LATEST| Wazuh agent RPM package with ``/opt`` as installation directory for ``x86_64`` systems.
+This will generate a |WAZUH_LATEST| Wazuh agent RPM package with ``/opt/ossec`` as installation directory for ``x86_64`` systems.
