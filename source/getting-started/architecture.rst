@@ -23,7 +23,7 @@ The diagram below represents a Wazuh deployment architecture. It shows the solut
 Wazuh agent - Wazuh server communication
 ----------------------------------------
 
-The :doc:`Wazuh agent <components/wazuh-agent>` continuously sends events to the :doc:`Wazuh server <components/wazuh-server>` for analysis and threat detection. To start shipping this data, the agent establishes a connection with the server service for agent connection, which listens on port 1514 by default (this is configurable). The Wazuh server then decodes and rule-checks the received events, utilizing the analysis engine. Events that trip a rule are augmented with alert data such as rule ID and rule name. Events can be spooled to one or both of the following files, depending on whether or not a rule is tripped:
+The :doc:`Wazuh agent <components/wazuh-agent>` continuously sends events to the :doc:`Wazuh server <components/wazuh-server>` for analysis and threat detection. To start shipping this data, the agent establishes a connection with the server service for agent connection, which listens on port 1514 by default (this is configurable). The agent also must establish a connection with the server on port 1515. The Wazuh server then decodes and rule-checks the received events, utilizing the analysis engine. Events that trip a rule are augmented with alert data such as rule ID and rule name. Events can be spooled to one or both of the following files, depending on whether or not a rule is tripped:
 
 -  The file ``/var/ossec/logs/archives/archives.json`` contains all events whether they tripped a rule or not.
 -  The file ``/var/ossec/logs/alerts/alerts.json`` contains only events that tripped a rule with high enough priority (the threshold is configurable).
