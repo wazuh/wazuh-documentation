@@ -97,7 +97,7 @@ Rule mapping examples
 The following example rules aim to show how to apply FIM fields to correctly extract information from the FIM
 events. Every rule is shown alongside the FIM event that fires it and the subsequent alert if the rule does not silence it.
 
-The first rule silence alerts from the change of permissions from mask 600 to  mask 640.
+The first rule silence alerts from the change of permissions from mask 600 to  mask 644.
 
 .. code-block:: xml
 
@@ -105,7 +105,7 @@ The first rule silence alerts from the change of permissions from mask 600 to  m
     <if_sid>550</if_sid>
     <field name="file">.log$</field>
     <field name="changed_fields">^permission$</field>
-    <field name="perm">rw-r--r--r--</field>
+    <field name="perm">rw-r--r--</field>
     <match>rw-------</match>
     <description>Silence perm changes</description>
   </rule>
