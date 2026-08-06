@@ -14,6 +14,7 @@ Puppet is an open source software that automatically inspects, delivers, operate
 
     .. toctree::
         :maxdepth: 2
+        :titlesonly:
 
         setup-puppet/index
         wazuh-puppet-module/index
