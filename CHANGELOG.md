@@ -17,7 +17,7 @@ All notable changes to this project will be documented in this file.
 - Added the *Security configuration assessment* use case to the *Proof of concept guide*. ([#9777](https://github.com/wazuh/wazuh-documentation/pull/9777))
 - Added the *Network IDS integration* use case to the *Proof of concept guide*. ([#9831](https://github.com/wazuh/wazuh-documentation/pull/9831))
 - Added the *Detecting a Cross-Site Scripting (XSS) attack* use case to the *Proof of concept guide*. ([#9916](https://github.com/wazuh/wazuh-documentation/pull/9916))
-- Added the *Wazuh CTI* documentation as a new top-level section. ([#9989](https://github.com/wazuh/wazuh-documentation/pull/9989))
+- Added the *Wazuh CTI* documentation as a new top-level section. ([#9989](https://github.com/wazuh/wazuh-documentation/pull/9989)) ([#9990](https://github.com/wazuh/wazuh-documentation/pull/9990))
 
 ### Changed
 
@@ -44,7 +44,6 @@ All notable changes to this project will be documented in this file.
 - Updated the *File integrity monitoring* capability documentation to Wazuh 5.0. ([#9961](https://github.com/wazuh/wazuh-documentation/pull/9961))
 - Updated the minimum required password length for Wazuh API users to 12 characters in the *Deploying with Kubernetes* documentation. ([#9941](https://github.com/wazuh/wazuh-documentation/pull/9941))
 - Updated the *Using Wazuh for GDPR compliance* documentation in *Regulatory compliance* to Wazuh 5.0. ([#9944](https://github.com/wazuh/wazuh-documentation/pull/9944))
-- Updated the *Wazuh CTI* documentation to correct the CTI content indices image caption. ([#9990](https://github.com/wazuh/wazuh-documentation/pull/9990))
 
 ### Removed
 
