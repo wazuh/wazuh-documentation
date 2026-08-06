@@ -147,9 +147,9 @@ The ``.wazuh-threatintel-vulnerabilities`` index is a hidden index used by the V
 
 To view the CTI content indices on the Wazuh dashboard, navigate to **Indexer management** > **Indexes** and search for ``wazuh-threatintel`` to filter the index list.
 
-.. thumbnail:: /images/wazuh-cti/internal-cti-indices.png
-   :title: Internal CTI indices
-   :alt: Internal CTI indices
+.. thumbnail:: /images/wazuh-cti/cti-content-indices.png
+   :title: CTI content indices
+   :alt: CTI content indices
    :align: center
    :width: 80%
 
