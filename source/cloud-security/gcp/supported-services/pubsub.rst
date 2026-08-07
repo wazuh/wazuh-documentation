@@ -93,6 +93,7 @@ Follow the next steps to configure the Wazuh module for Google Cloud Pub/Sub on 
 
       <ossec_config>
         <gcp-pubsub>
+          <enabled>yes</enabled>
           <pull_on_start>yes</pull_on_start>
           <interval>1m</interval>
           <project_id><YOUR_PROJECT_ID></project_id>
