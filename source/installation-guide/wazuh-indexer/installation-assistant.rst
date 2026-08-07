@@ -36,17 +36,20 @@ Follow these steps on a Linux host to configure your Wazuh deployment, create SS
 #. Edit ``./config.yml`` and replace the node names and IP values with the corresponding names and IP addresses. You need to do this for all Wazuh manager, Wazuh indexer, and Wazuh dashboard nodes. Add as many node fields as needed:
 
    .. code-block:: yaml
-      :emphasize-lines: 4-5, 15-16, 27-28
+      :emphasize-lines: 4-5, 18-19, 33-34
 
       nodes:
         # Wazuh indexer nodes
         indexer:
           - name: indexer
             ip: "<indexer-node-ip>"
+          #  dns: "<indexer-node-dns>"
           #- name: indexer-2
-          #  ip: "<indexer-node-ip>"
+          #  dns: "<indexer-node-dns>"
           #- name: indexer-3
           #  ip: "<indexer-node-ip>"
+          #  dns:
+          #    - "<indexer-node-dns>"
 
         # Wazuh manager nodes
         # If there is more than one Wazuh manager
@@ -54,18 +57,22 @@ Follow these steps on a Linux host to configure your Wazuh deployment, create SS
         manager:
           - name: manager
             ip: "<wazuh-manager-ip>"
+          #  dns: "<wazuh-manager-dns>"
           #  node_type: master
           #- name: manager-2
-          #  ip: "<wazuh-manager-ip>"
+          #  dns: "<wazuh-manager-dns>"
           #  node_type: worker
           #- name: manager-3
           #  ip: "<wazuh-manager-ip>"
+          #  dns:
+          #    - "<wazuh-manager-dns>"
           #  node_type: worker
 
         # Wazuh dashboard nodes
         dashboard:
           - name: dashboard
             ip: "<dashboard-node-ip>"
+          #  dns: "<dashboard-node-dns>"
 
 #. Run the Wazuh installation assistant with the option ``--generate-config-files`` to generate the Wazuh cluster key, certificates, and passwords necessary for installation. You can find these files in ``./wazuh-install-files.tar``:
 

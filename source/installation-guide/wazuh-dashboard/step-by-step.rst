@@ -1,12 +1,12 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Learn how to install Wazuh dashboard, a flexible and intuitive web interface for mining and visualizing the events and archives.
+   :description: Learn how to install Wazuh dashboard, a flexible and intuitive web interface for mining and visualizing security data.
 
 Installing the Wazuh dashboard step by step
 ===========================================
 
-Install and configure the Wazuh dashboard following step-by-step instructions. The Wazuh dashboard is a web interface for mining and visualizing the Wazuh manager alerts and archived events.
+Install and configure the Wazuh dashboard following step-by-step instructions. The Wazuh dashboard is a web interface for mining and visualizing security data.
 
 .. note:: You need root user privileges to run all the commands described below.
 
@@ -86,6 +86,7 @@ Configuring the Wazuh dashboard
      #. ``wazuh_core.hosts.url``: This setting specifies the Wazuh manager master node. Replace ``<WAZUH_MANAGER_IP_ADDRESS>`` with the IP address or hostname of the Wazuh manager master node.
 
         .. code-block:: yaml
+           :emphasize-lines: 3
 
              wazuh_core.hosts:
                default:
