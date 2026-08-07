@@ -57,7 +57,7 @@ Single-node Deployment
              environment:
                - HTTP_PROXY=YOUR_PROXY_ADDRESS_OR_DNS
         
-      Execute the following command to get the desired certificates:
+      Make sure to remove the ``wazuh_indexer_ssl_certs/`` directory first, then execute the following command to get the desired certificates:
       
          .. code-block:: console
          
