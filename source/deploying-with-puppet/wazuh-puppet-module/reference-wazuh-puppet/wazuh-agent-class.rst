@@ -449,7 +449,7 @@ $ossec_syscheck_report_changes_directories_1
 $ossec_syscheck_directories_2
   List of directories to be monitored. The directories should be comma-separated
 
-  `Default '/etc,/usr/bin,/usr/sbin'`
+  `Default '/bin,/sbin,/boot'`
 
 $ossec_syscheck_realtime_directories_2
   This will enable real-time/continuous monitoring on directories listed on `ossec_syscheck_directories_2`. Real time only works with directories, not individual files.
