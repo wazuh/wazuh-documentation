@@ -42,7 +42,12 @@ Deploy a Wazuh agent
 
 Follow these steps to deploy the Wazuh agent on your Linux endpoint.
 
-#. Select your package manager and run the command below. Replace the ``WAZUH_MANAGER`` value with your Wazuh manager IP address or hostname:
+#. Select your package manager and run the command below.
+
+   Replace
+
+   -  ``WAZUH_MANAGER`` value with your Wazuh manager IP address or hostname
+   -  ``WAZUH_REGISTRATION_PASSWORD`` value with the Wazuh manager enrollment password.
 
    .. tabs::
 
@@ -50,31 +55,31 @@ Follow these steps to deploy the Wazuh agent on your Linux endpoint.
 
          .. code-block:: console
 
-            # WAZUH_MANAGER="10.0.0.2" apt-get install wazuh-agent|WAZUH_AGENT_DEB_PKG_INSTALL|
+            # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_PASSWORD='XXXXXXXXXXXX' apt-get install wazuh-agent|WAZUH_AGENT_DEB_PKG_INSTALL|
 
       .. group-tab:: Yum
 
          .. code-block:: console
 
-            # WAZUH_MANAGER="10.0.0.2" yum install wazuh-agent|WAZUH_AGENT_RPM_PKG_INSTALL|
+            # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_PASSWORD='XXXXXXXXXXXX' yum install wazuh-agent|WAZUH_AGENT_RPM_PKG_INSTALL|
 
       .. group-tab:: DNF
 
          .. code-block:: console
 
-            # WAZUH_MANAGER="10.0.0.2" dnf install wazuh-agent|WAZUH_AGENT_RPM_PKG_INSTALL|
+            # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_PASSWORD='XXXXXXXXXXXX' dnf install wazuh-agent|WAZUH_AGENT_RPM_PKG_INSTALL|
 
       .. group-tab:: ZYpp
 
          .. code-block:: console
 
-            # WAZUH_MANAGER="10.0.0.2" zypper install wazuh-agent|WAZUH_AGENT_ZYPP_PKG_INSTALL|
+            # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_PASSWORD='XXXXXXXXXXXX' zypper install wazuh-agent|WAZUH_AGENT_ZYPP_PKG_INSTALL|
 
    .. note::
 
       Alternatively, if you want to install an agent without enrolling it, omit the deployment variables. To learn more about the different enrollment methods, see the :doc:`Wazuh agent enrollment </user-manual/agent/agent-enrollment/index>` section.
 
-#. Enable and start the Wazuh agent service.
+#. Enable and start the Wazuh agent service:
 
    .. include:: ../../_templates/installations/wazuh/common/enable_wazuh_agent_service.rst
 
