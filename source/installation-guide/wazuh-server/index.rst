@@ -6,7 +6,7 @@
 Wazuh manager
 =============
 
-The Wazuh manager analyzes event data received from Wazuh agents and forwards the processed events to the Wazuh indexer. It is also used to remotely manage the configurations of Wazuh agents and monitor their status.
+The Wazuh manager analyzes event data received from Wazuh agents and forwards the processed events to the Wazuh indexer. It is also used to remotely manage the configurations of Wazuh agents and monitor their status. If you want to learn more about the Wazuh components, check the :doc:`/getting-started/index` section.
 
 You can install the Wazuh manager on a single host or distribute it across multiple nodes in a cluster configuration. Multi-node configurations provide high availability and improved performance. When combined with a network load balancer, you can achieve efficient use of its capacity.
 
@@ -97,21 +97,6 @@ You can install the Wazuh manager as a single-node or multi-node cluster.
 - Disk space requirements
 
   The Wazuh manager no longer stores alerts from monitored endpoints. Instead, it stores the content and databases required by its server-side modules. Because the Vulnerability Scanner feed requires at least 15 GB of storage, Wazuh recommends allocating at least 20 GB of disk space for a Wazuh manager.
-
-  The amount of data depends on the generated events per second (EPS). This table details the estimated disk space needed per agent to store 90 days of events on a Wazuh manager, depending on the type of monitored endpoints.
-
-  +-------------------------------------------------+-----+-----------------------------+
-  | Monitored endpoints                             | EPS || Storage in Wazuh manager   | 
-  |                                                 |     || (GB/90 days)               |  
-  +=================================================+=====+=============================+
-  | Servers                                         | 0.25|    0.1                      |
-  +-------------------------------------------------+-----+-----------------------------+
-  | Workstations                                    | 0.1 |    0.04                     | 
-  +-------------------------------------------------+-----+-----------------------------+
-  | Network devices                                 | 0.5 |    0.2                      |
-  +-------------------------------------------------+-----+-----------------------------+
-
-  For example, for an environment with 80 workstations, 10 servers, and 10 network devices, the storage needed on the Wazuh manager for 90 days of events is 6 GB.
 
 .. toctree::
     :hidden:

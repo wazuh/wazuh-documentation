@@ -1,12 +1,12 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Learn how to install the Wazuh dashboard using the assisted installation method. The Wazuh dashboard is a flexible and intuitive web interface for mining and visualizing security events and archives.
+   :description: Learn how to install the Wazuh dashboard using the assisted installation method. The Wazuh dashboard is a flexible and intuitive web interface for mining and visualizing security data.
 
 Installing the Wazuh dashboard using the assisted installation method
 =====================================================================
 
-Install and configure the Wazuh dashboard on a 64-bit (x86_64/AMD64 or AARCH64/ARM64) architecture using the assisted installation method. Wazuh dashboard is a flexible and intuitive web interface for mining and visualizing security events and archives.
+Install and configure the Wazuh dashboard on a 64-bit (x86_64/AMD64 or AARCH64/ARM64) architecture using the assisted installation method. Wazuh dashboard is a flexible and intuitive web interface for mining and visualizing security data.
 
 Wazuh dashboard installation
 -----------------------------
@@ -32,7 +32,6 @@ Wazuh dashboard installation
    Once the Wazuh installation is completed, the output shows the access credentials and a message that confirms that the installation was successful. The default password is ``admin``.
 
    .. code-block:: none
-      :emphasize-lines: 3,4
 
       INFO: --- Summary ---
       INFO: You can access the web interface https://<WAZUH_DASHBOARD_IP_ADDRESS>:443
