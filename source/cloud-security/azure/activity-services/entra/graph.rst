@@ -161,7 +161,7 @@ In this example, the records are in ``.json`` format. The following rules are al
     <rule id="87802" level="3">
         <decoded_as>json</decoded_as>
         <field name="azure_tag">azure-ad-graph</field>
-        <description>Azure: AD $(activity)</description>
+        <description>Azure: AD $(activityDisplayName)</description>
     </rule>
 
 Create a new user
