@@ -114,6 +114,8 @@ Follow the step below to uninstall the Wazuh indexer using your package manager.
          .. code:: console
 
             # apt-get remove --purge wazuh-indexer -y
+            # rm -rf /var/lib/wazuh-indexer/
+            # rm -rf /etc/wazuh-indexer/
 
       .. group-tab:: Yum
 

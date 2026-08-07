@@ -1,36 +1,33 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: File Integrity Monitoring (FIM) is a security process used to monitor the integrity of system and application files. Learn more about FIM in this section.
+  :description: File Integrity Monitoring (FIM) is a security process that monitors system, application, and sensitive data files, then reports any integrity changes. Learn more about FIM in this section.
 
 .. _manual_file_integrity:
 
 File integrity monitoring
 =========================
 
-File Integrity Monitoring (FIM) is a security process used to monitor the integrity of system and application files. FIM is an important security defense layer for any organization monitoring sensitive assets. It provides protection for sensitive data, application, and device files by monitoring, routinely scanning, and verifying their integrity. It helps organizations detect changes to critical files on their systems which reduces the risk of data being stolen or compromised. This process can save time and money in lost productivity, lost revenue, reputation damage, and legal and regulatory compliance penalties.
+File Integrity Monitoring (FIM) is a security process that monitors system, application, and sensitive data files, then reports any integrity changes. It helps organizations detect unauthorized changes to critical files and reduce the risk of data theft or compromise.
 
-Wazuh has a built-in capability for file integrity monitoring. The Wazuh FIM module monitors files and directories and triggers an alert when a user or process creates, modifies, and deletes monitored files. It runs a baseline scan, storing the cryptographic checksum and other attributes of the monitored files. When a user or process changes a file, the module compares its checksum and attributes to the baseline. It triggers an alert if it finds a mismatch. The FIM module performs real-time and scheduled scans depending on the FIM configuration for agents and manager. 
+The Wazuh FIM module monitors files and directories for creation, modification, and deletion events. It establishes a baseline by saving each file's checksum and attributes, then detects changes through scheduled or real-time scans. When a file diverges from its baseline, the FIM module generates a finding.
 
-Some benefits of the Wazuh FIM capability include change management, threat detection and response, and regulatory compliance as follows.  
+The Wazuh FIM module supports several security and operational use cases, including:
 
-.. raw:: html
+.. rubric:: Change management
+    :class: h2
 
-   <h2>Change management</h2>
+The Wazuh FIM module helps verify that change management processes work as intended. It records what changed, when, and who or what caused it, helping teams flag unauthorized configuration changes and confirm approved updates were implemented correctly.
 
-The Wazuh FIM capability is an essential tool for verifying that the change management processes are working correctly. This Wazuh capability allows you to examine files to see if they change, how and when they change, and who or what changes them. The Wazuh FIM module compares the baseline information against the information of the latest version of the file. This comparison provides visibility into alterations and updates of critical files. For example, you can use this to detect incorrect updates to applications or unauthorized changes made to configuration files.
+.. rubric:: Threat detection and response
+    :class: h2
 
-.. raw:: html
+Combine FIM with other Wazuh capabilities to strengthen threat detection and response. It monitors file integrity, flags permission changes, and tracks user and file activity, giving security teams the detailed findings they need to investigate and respond to threats fast.
 
-   <h2>Threat detection and response</h2>
+.. rubric:: Regulatory compliance
+    :class: h2
 
-You can combine FIM with other Wazuh capabilities for threat detection and response. The FIM capability monitors file integrity, detects permission changes, and monitors user and file activities. It provides detailed alerts for quick responses to detected threats.
-
-.. raw:: html
-
-   <h2>Regulatory compliance</h2>
-
-The FIM capability helps organizations meet regulatory requirements for data security, privacy, and data retention. Monitoring critical files for changes is an important requirement for regulations such as PCI DSS, HIPAA, and GDPR. 
+FIM supports compliance with data security, privacy, and retention requirements by monitoring critical files for unauthorized changes, helping organizations meet standards such as PCI DSS, HIPAA, and GDPR.
 
 .. topic:: Contents
 

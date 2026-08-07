@@ -25,6 +25,7 @@ All notable changes to this project will be documented in this file.
 - Added the *Security configuration assessment* use case to the *Proof of concept guide*. ([#9777](https://github.com/wazuh/wazuh-documentation/pull/9777))
 - Added the *Network IDS integration* use case to the *Proof of concept guide*. ([#9831](https://github.com/wazuh/wazuh-documentation/pull/9831))
 - Added the *Detecting a Cross-Site Scripting (XSS) attack* use case to the *Proof of concept guide*. ([#9916](https://github.com/wazuh/wazuh-documentation/pull/9916))
+- Added the *Wazuh CTI* documentation as a new top-level section. ([#9989](https://github.com/wazuh/wazuh-documentation/pull/9989)) ([#9990](https://github.com/wazuh/wazuh-documentation/pull/9990))
 
 ### Changed
 
@@ -33,14 +34,14 @@ All notable changes to this project will be documented in this file.
 - Updated the FIM documentation to change the default FIM who-data mode provider to eBPF. ([#8805](https://github.com/wazuh/wazuh-documentation/pull/8805))
 - Updated references in steps and links to 5.x. ([#8853](https://github.com/wazuh/wazuh-documentation/pull/8853)) ([#9658](https://github.com/wazuh/wazuh-documentation/pull/9658)) ([#9660](https://github.com/wazuh/wazuh-documentation/pull/9660))
 - Updated version numbers in commands in the *Installation from sources* documentation. ([#9397](https://github.com/wazuh/wazuh-documentation/pull/9397))
-- Updated the *Installation guide*. ([#9545](https://github.com/wazuh/wazuh-documentation/pull/9545)) ([#9682](https://github.com/wazuh/wazuh-documentation/pull/9682)) ([#9692](https://github.com/wazuh/wazuh-documentation/pull/9692)) ([#9736](https://github.com/wazuh/wazuh-documentation/pull/9736)) ([#9771](https://github.com/wazuh/wazuh-documentation/pull/9771))
+- Updated the *Installation guide*. ([#9545](https://github.com/wazuh/wazuh-documentation/pull/9545)) ([#9682](https://github.com/wazuh/wazuh-documentation/pull/9682)) ([#9692](https://github.com/wazuh/wazuh-documentation/pull/9692)) ([#9736](https://github.com/wazuh/wazuh-documentation/pull/9736)) ([#9771](https://github.com/wazuh/wazuh-documentation/pull/9771)) ([#9962](https://github.com/wazuh/wazuh-documentation/pull/9962)) ([#9968](https://github.com/wazuh/wazuh-documentation/pull/9968)) ([#9969](https://github.com/wazuh/wazuh-documentation/pull/9969)) ([#9994](https://github.com/wazuh/wazuh-documentation/pull/9994))
 - Updated the *Installation alternatives* documentation. ([#9587](https://github.com/wazuh/wazuh-documentation/pull/9587)) ([#9576](https://github.com/wazuh/wazuh-documentation/pull/9576)) ([#9589](https://github.com/wazuh/wazuh-documentation/pull/9589)) ([#9591](https://github.com/wazuh/wazuh-documentation/pull/9591)) ([#9591](https://github.com/wazuh/wazuh-documentation/pull/9595)) ([#9597](https://github.com/wazuh/wazuh-documentation/pull/9597)) ([#9606](https://github.com/wazuh/wazuh-documentation/pull/9606)) ([#9607](https://github.com/wazuh/wazuh-documentation/pull/9607)) ([#9674](https://github.com/wazuh/wazuh-documentation/pull/9674))
-- Updated the *Wazuh agent* documentation in *User manual*. ([#9665](https://github.com/wazuh/wazuh-documentation/pull/9665)) ([#9669](https://github.com/wazuh/wazuh-documentation/pull/9669)) ([#9701](https://github.com/wazuh/wazuh-documentation/pull/9701)) ([#9702](https://github.com/wazuh/wazuh-documentation/pull/9702)) ([#9812](https://github.com/wazuh/wazuh-documentation/pull/9812))
+- Updated the *Wazuh agent* documentation in *User manual*. ([#9665](https://github.com/wazuh/wazuh-documentation/pull/9665)) ([#9669](https://github.com/wazuh/wazuh-documentation/pull/9669)) ([#9701](https://github.com/wazuh/wazuh-documentation/pull/9701)) ([#9702](https://github.com/wazuh/wazuh-documentation/pull/9702)) ([#9812](https://github.com/wazuh/wazuh-documentation/pull/9812)) ([#9993](https://github.com/wazuh/wazuh-documentation/pull/9993))
 - Updated the *Wazuh dashboard* documentation in *User manual*. ([#9688](https://github.com/wazuh/wazuh-documentation/pull/9688))
 - Updated the *Quickstart* documentation. ([#9680](https://github.com/wazuh/wazuh-documentation/pull/9680)) ([#9769](https://github.com/wazuh/wazuh-documentation/pull/9769))
 - Updated the *Wazuh server* documentation to the new *Wazuh manager* documentation in the *User manual*. ([#9728](https://github.com/wazuh/wazuh-documentation/pull/9728)) ([#9737](https://github.com/wazuh/wazuh-documentation/pull/9737))
 - Updated the *User administration* documentation. ([#9745](https://github.com/wazuh/wazuh-documentation/pull/9745)) ([#9758](https://github.com/wazuh/wazuh-documentation/pull/9758)) ([#9765](https://github.com/wazuh/wazuh-documentation/pull/9765)) ([#9766](https://github.com/wazuh/wazuh-documentation/pull/9766)) ([#9775](https://github.com/wazuh/wazuh-documentation/pull/9775))
-- Updated the *Monitoring GitHub* documentation. ([#9836](https://github.com/wazuh/wazuh-documentation/pull/9836)) ([#9840](https://github.com/wazuh/wazuh-documentation/pull/9840))
+- Updated the *Monitoring GitHub* documentation. ([#9836](https://github.com/wazuh/wazuh-documentation/pull/9836)) ([#9840](https://github.com/wazuh/wazuh-documentation/pull/9840)) ([#9949](https://github.com/wazuh/wazuh-documentation/pull/9949))
 - Updated the *Monitoring Office 365* documentation. ([#9935](https://github.com/wazuh/wazuh-documentation/pull/9935))
 - Updated the *Proof of concept guide* use cases for File integrity monitoring, Vulnerability detection, Monitoring Docker events, Detecting an SQL injection attack, Network IDS integration, Monitoring AWS infrastructure, Detecting hidden processes, and Blocking a known malicious actor. ([#9777](https://github.com/wazuh/wazuh-documentation/pull/9777)) ([#9831](https://github.com/wazuh/wazuh-documentation/pull/9831)) ([#9916](https://github.com/wazuh/wazuh-documentation/pull/9916))
 - Updated the *Container security* documentation. ([#9816](https://github.com/wazuh/wazuh-documentation/pull/9816)) ([#9819](https://github.com/wazuh/wazuh-documentation/pull/9819)) ([#9823](https://github.com/wazuh/wazuh-documentation/pull/9823))
@@ -48,6 +49,7 @@ All notable changes to this project will be documented in this file.
 - Updated the *Security configuration assessment* capability documentation. ([#9834](https://github.com/wazuh/wazuh-documentation/pull/9834)) ([#9849](https://github.com/wazuh/wazuh-documentation/pull/9849))
 - Updated the *Vulnerability detection* capability documentation. ([#9835](https://github.com/wazuh/wazuh-documentation/pull/9835)) ([#9841](https://github.com/wazuh/wazuh-documentation/pull/9841))
 - Updated the *Command monitoring* capability documentation. ([#9883](https://github.com/wazuh/wazuh-documentation/pull/9883)) ([#9915](https://github.com/wazuh/wazuh-documentation/pull/9915))
+- Updated the *File integrity monitoring* capability documentation to Wazuh 5.0. ([#9961](https://github.com/wazuh/wazuh-documentation/pull/9961))
 - Updated the minimum required password length for Wazuh API users to 12 characters in the *Deploying with Kubernetes* documentation. ([#9941](https://github.com/wazuh/wazuh-documentation/pull/9941))
 - Updated the *Using Wazuh for GDPR compliance* documentation in *Regulatory compliance* to Wazuh 5.0. ([#9944](https://github.com/wazuh/wazuh-documentation/pull/9944))
 
@@ -66,13 +68,19 @@ All notable changes to this project will be documented in this file.
 - Removed deprecated configuration variables in the *Deployment with Puppet* documentation. ([#9378](https://github.com/wazuh/wazuh-documentation/pull/9378))
 - Removed Osquery references as this capability is now deprecated. ([#8958](https://github.com/wazuh/wazuh-documentation/pull/8958))
 
+## [v4.14.9]
+
+- Support for Wazuh 4.14.9
+
 ## [v4.14.8]
 
 - Support for Wazuh 4.14.8
 
 ## [v4.14.7]
 
-- Support for Wazuh 4.14.7
+- **Post-release**: Obscured the sample private key values in the GCP credentials documentation. ([#9971](https://github.com/wazuh/wazuh-documentation/pull/9971))
+- **Post-release**: Fixed the *User manual* index page so it shows the full page list for the *Wazuh dashboard* and *Data analysis* subsections. ([#9992](https://github.com/wazuh/wazuh-documentation/pull/9992))
+- **Post-release**: Fixed the *Deployment with Puppet* index page so the *Wazuh Puppet module* reference pages are listed. ([#9992](https://github.com/wazuh/wazuh-documentation/pull/9992))
 
 ## [v4.14.6]
 
