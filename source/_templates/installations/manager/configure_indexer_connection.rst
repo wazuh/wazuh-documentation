@@ -3,7 +3,7 @@
 By default, the indexer settings have one host configured. It's set to ``127.0.0.1`` as highlighted below.
 
 .. code-block:: xml
-   :emphasize-lines: 4
+   :emphasize-lines: 3
 
    <indexer>
      <hosts>

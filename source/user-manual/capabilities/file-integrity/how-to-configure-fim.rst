@@ -1,26 +1,24 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The FIM module runs scans on Windows, Linux, and macOS operating systems.  Learn how to configure the FIM module in this section of the Wazuh documentation. 
-  
-How to configure the FIM module
-===============================
+  :description: The Wazuh FIM module runs scans on Windows, Linux, and macOS. Learn how to configure the FIM module in this section of the Wazuh documentation.
 
-The FIM module runs scans on Windows, Linux, and macOS operating systems. There are both global settings and settings that are specific to the operating system of the endpoint. We discuss these settings and the supported operating systems in the :doc:`Basic settings </user-manual/capabilities/file-integrity/basic-settings>` section of this guide.
+Configuration
+=============
 
-You must specify the directories where the FIM module must monitor the creation, modification, and deletion of files or configure the specific files you need to monitor. You can specify the file or directory to monitor on the Wazuh server and the Wazuh agent :doc:`configuration </user-manual/reference/ossec-conf/index>` files. You can also configure this capability remotely using the :doc:`centralized configuration </user-manual/reference/centralized-configuration>` file. 
+The Wazuh FIM module runs scans on Windows, Linux, and macOS. Some settings are global while others are specific to the endpoint's operating system. The :doc:`Basic configuration options </user-manual/capabilities/file-integrity/basic-settings>` and :doc:`Advanced configuration options </user-manual/capabilities/file-integrity/advanced-settings>` sections provide further details on the available configuration settings.
 
-You have to set the files and directories to monitor with the :ref:`directories <reference_ossec_syscheck_directories>` options. You can include multiple files and directories using comma-separated entries or adding entries on multiple lines. You can configure FIM directories using * and ? wildcards in the same way you would use them in a shell or Command Prompt (cmd) terminal. For example, ``C:\Users\*\Downloads``.
+The Wazuh FIM module monitors files within the specified directories and detects file creation, modification, and deletion events. It does not detect directory creation, modification, or deletion events. You can configure monitored files and directories either locally in the Wazuh agent configuration file or remotely via centralized configuration.
 
-Any time the FIM module runs a scan, it triggers alerts if it finds modified files and depending on the changed file attributes. You can view these alerts in the Wazuh dashboard. 
+Use the ``<directories>`` option to specify the files and directories the FIM module monitors. Include multiple entries as a comma-separated list or on separate lines. FIM directories support ``*`` and ``?`` wildcards in the same way you would use them in a shell or Command Prompt (cmd) terminal. For example, ``C:\Users\*\Downloads``.
 
-Following, you can see how to configure the FIM module to monitor a file and directory. Replace ``<FILEPATH_OF_MONITORED_FILE>`` and ``<FILEPATH_OF_MONITORED_DIRECTORY>`` with your own filepaths. 
+This example configures the FIM module to monitor a file and directory. Replace ``<FILEPATH_OF_MONITORED_FILE>`` and ``<FILEPATH_OF_MONITORED_DIRECTORY>`` with your own file paths.
 
-#. Add the following settings to the Wazuh agent configuration file, replacing the directories values with your own filepaths:
-   
-   - Linux: ``/var/ossec/etc/ossec.conf``
-   - Windows: ``C:\Program Files (x86)\ossec-agent\ossec.conf``
-   - macOS: ``/Library/Ossec/etc/ossec.conf``
+#. Add the following settings to the Wazuh agent configuration file, replacing the ``<directories>`` values with your own file paths:
+
+   -  Linux: ``/var/ossec/etc/ossec.conf``
+   -  Windows: ``C:\Program Files (x86)\ossec-agent\ossec.conf``
+   -  macOS: ``/Library/Ossec/etc/ossec.conf``
 
    .. code-block:: xml
       :emphasize-lines: 2,3
@@ -30,17 +28,13 @@ Following, you can see how to configure the FIM module to monitor a file and dir
          <directories><FILEPATH_OF_MONITORED_DIRECTORY></directories>
       </syscheck>
 
-#. Restart the Wazuh agent with administrator privilege to apply any configuration change:
+#. Restart the Wazuh agent to apply any configuration change:
 
-   - Linux: ``systemctl restart wazuh-agent``
-   - Windows: ``Restart-Service -Name wazuh``
-   - macOS: ``/Library/Ossec/bin/wazuh-control restart``
+   -  Linux: ``systemctl restart wazuh-agent``
+   -  Windows: ``Restart-Service -Name wazuh``
+   -  macOS: ``/Library/Ossec/bin/wazuh-control restart``
 
-   .. note::
+.. note::
 
-      If you specify a directory both in a :doc:`centralized configuration </user-manual/reference/centralized-configuration>` and on the :doc:`configuration </user-manual/reference/ossec-conf/index>` file of the Wazuh agent, the centralized configuration takes precedence and overrides the local configuration.
-
-      From Wazuh 4.13.0, the FIM module does not support monitoring UNC network paths or mapped network drives on Windows. Only local file system paths are supported.
-
-
+   If you specify a directory both in a centralized configuration and in the configuration file of the Wazuh agent, the centralized configuration takes precedence and overrides the local configuration. The FIM module does not support monitoring UNC network paths or mapped network drives on Windows. Only local file system paths are supported. This applies to all FIM modes: scheduled, real-time, and whodata.
 

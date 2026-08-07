@@ -34,7 +34,7 @@ After enrollment, the Wazuh manager stores information about the Wazuh agent and
 -  **Never connected**: The Wazuh agent enrolled successfully but has not connected to the Wazuh manager.
 -  **Pending**: The Wazuh manager received the initial connection request from the Wazuh agent, but the authentication process has not completed. The Wazuh agent enters this state once after each startup. If the Wazuh agent remains in this state, check for connectivity or authentication issues.
 -  **Active**: The Wazuh agent connected successfully and can communicate with the Wazuh manager.
--  **Disconnected**: The Wazuh manager marks the Wazuh agent as disconnected when it does not receive keep alive messages within the ``agents_disconnection_time`` interval. The default value is ``10m``.
+-  **Disconnected**: The Wazuh manager marks the Wazuh agent as disconnected when it does not receive keep alive messages within the ``agents_disconnection_time`` interval. The default value is ``15m``.
 
 Removal
 -------

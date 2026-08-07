@@ -192,16 +192,17 @@ Testing the cluster installation
       {
         "name" : "node-1",
         "cluster_name" : "wazuh-cluster",
-        "cluster_uuid" : "095jEW-oRJSFKLz5wmo5PA",
+        "cluster_uuid" : "2iYNKDCzR1ShJvSN-2vfOQ",
         "version" : {
-          "number" : "7.10.2",
-          "build_type" : "rpm",
-          "build_hash" : "db90a415ff2fd428b4f7b3f800a51dc229287cb4",
-          "build_date" : "2023-06-03T06:24:25.112415503Z",
+          "distribution" : "opensearch",
+          "number" : "3.6.0",
+          "build_type" : "deb",
+          "build_hash" : "5917bc144ef6b8971cb17e53e475e306954c8fc9",
+          "build_date" : "2026-07-29T01:44:46.892912988Z",
           "build_snapshot" : false,
-          "lucene_version" : "9.6.0",
-          "minimum_wire_compatibility_version" : "7.10.0",
-          "minimum_index_compatibility_version" : "7.0.0"
+          "lucene_version" : "10.4.0",
+          "minimum_wire_compatibility_version" : "2.19.0",
+          "minimum_index_compatibility_version" : "2.0.0"
         },
         "tagline" : "The OpenSearch Project: https://opensearch.org/"
       }
