@@ -12,6 +12,7 @@ Welcome to the Wazuh user manual. Use it as your reference library once your bas
 
    .. toctree::
       :maxdepth: 2
+      :titlesonly:
 
       manager/index
       wazuh-server-cluster/index
