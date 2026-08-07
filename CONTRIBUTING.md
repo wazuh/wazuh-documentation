@@ -91,3 +91,13 @@ To compile the documentation with the alternative Pagefind search engine, instal
 - When merging, we'll squash your commits into a single commit.
 
 That's all you need to know. Thank you so much for reading this contribution guide!
+
+## Style guide
+
+Listed below are some style guides and tips to help with the documentation contributions:
+
+- [ReStructured Text basic rules](https://github.com/wazuh/wazuh-documentation/blob/master/guide/restructured-text.md)
+- [Good practices and common mistakes](https://github.com/wazuh/wazuh-documentation/blob/master/guide/good-practices.md)
+- [RST cheatsheet](https://github.com/wazuh/wazuh-documentation/blob/master/guide/cheatsheet.md)
+- [Redirections between branches](https://github.com/wazuh/wazuh-documentation/blob/master/guide/redirections.md)
+- [Empty toctree nodes](https://github.com/wazuh/wazuh-documentation/blob/master/guide/empty-nodes.md)
