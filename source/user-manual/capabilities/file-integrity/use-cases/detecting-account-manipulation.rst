@@ -3,23 +3,23 @@
 .. meta::
    :description: The Wazuh FIM module monitors directories to detect file changes, additions, and deletions. Discover some FIM use cases in this section of our documentation.
 
-Detecting account manipulation
-==============================
+Detect account manipulation
+============================
 
-Account manipulation refers to the creation, modification, or deletion of user accounts or other credentials within an organization's IT infrastructure. Monitoring this activity is critical to the cybersecurity of an organization. Unauthorized account manipulations might grant an attacker access to sensitive systems and data.
+Account manipulation refers to the creation, modification, or deletion of user accounts or credentials within an organization's IT infrastructure. Monitoring this activity is critical, since unauthorized account manipulation can grant attackers access to sensitive systems and data.
 
-To maintain persistence on a victim endpoint, adversaries can alter the SSH ``authorized_keys`` file in Linux. The ``.ssh`` directory within a user home directory holds this file. For example, for a user named smith, you can find the ``authorized_keys`` file located at ``/home/smith/.ssh/authorized_keys``. This file defines the public keys this user uses to login into some of their accounts. Each line in the file represents a single public key.
+To maintain persistence on a victim endpoint, adversaries can alter the SSH ``authorized_keys`` file in Linux. The ``.ssh`` directory within a user's home directory holds this file. For example, for a user named *smith*, you can find the ``authorized_keys`` file located at ``/home/smith/.ssh/authorized_keys``. This file defines the public keys the user can use to log in, with each line representing a single key.
 
-You can configure the Wazuh FIM module to monitor the ``authorized_keys`` file. This triggers an alert whenever a user or process modifies the public keys in the file. Detecting the modification of the SSH keys allows you to take action before a system compromise occurs.
+You can configure the Wazuh FIM module to monitor the ``authorized_keys`` file and trigger a finding whenever a user or process modifies its public keys. This lets you act before a system compromise occurs.
 
 Use case description
---------------------
+---------------------
 
-+---------------------+-----------------------------------------------------------------------------------------------+
-| Endpoint            | Description                                                                                   |
-+=====================+===============================================================================================+
-| Cent OS Stream 10   | The FIM module detects SSH key modification on this endpoint.                                 |
-+---------------------+-----------------------------------------------------------------------------------------------+
++---------------------+---------------------------------------------------------------+
+| Endpoint            | Description                                                   |
++=====================+===============================================================+
+| **CentOS Stream 9** | The FIM module detects SSH key modification on this endpoint. |
++---------------------+---------------------------------------------------------------+
 
 Configuration
 -------------
@@ -38,31 +38,29 @@ Perform the following steps to configure the FIM module to monitor SSH key modif
 
    .. code-block:: console
 
-      systemctl restart wazuh-agent
+      # systemctl restart wazuh-agent
 
 Test the configuration
+-----------------------
+
+Run the following commands on the CentOS 9 endpoint and ensure you are in the user's home directory.
+
+#. Generate an SSH key pair for user authentication and save it as ``.ssh/test_key`` using the following command:
+
+   .. code-block:: console
+
+      # ssh-keygen -f .ssh/test_key
+
+#. Run the following command on the CentOS endpoint to create the ``.ssh`` directory with the correct permissions. It then appends your ``test_key.pub`` public key to the user's ``authorized_keys`` file:
+
+   .. code-block:: console
+
+      # mkdir -m 700 -p ~/.ssh && cat ~/.ssh/test_key.pub >> ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys
+
+Visualize the finding
 ----------------------
 
-Ensure you are in the users home directory, and that the ``.ssh`` folder and ``authorized_keys`` file already exists within that directory. For example ``/home/<YOUR_USERNAME>/.ssh/authorized_keys``.
-
-#. Generate an SSH key-pair for user authentication and save it as ``.ssh/test_key`` using the following command:
-
-   .. code-block:: console
-
-      ssh-keygen -f .ssh/test_key
-
-#. Run the following command to copy your generated SSH public key ``test_key.pub`` and append it to the target CentOS user’s ``authorized_keys`` file. It will also create the ``.ssh`` directory with proper permissions if it doesn’t exist:
-
-   .. code-block:: console
-
-      cat ~/.ssh/test_key.pub | ssh -t <USERNAME>@<IP_ADDRESS> "[ -d ~/.ssh ] || mkdir -m 700 ~/.ssh; tee -a ~/.ssh/authorized_keys > /dev/null"
-
-   Replace ``<USERNAME>`` and ``<IP_ADDRESS>`` with the username and IP address for your CentOS endpoint respectively.
-
-Visualize the alert
--------------------
-
-Navigate to **File Integrity Monitoring** on the Wazuh dashboard to view the alert generated when the FIM module detects changes to the ``authorized_keys`` file.
+Navigate to **Endpoint security** → **File Integrity Monitoring** → **Findings** on the Wazuh dashboard to view the finding generated when the FIM module detects changes to the ``authorized_keys`` file.
 
 .. thumbnail:: /images/manual/fim/changes-authorized-keys-file.png
    :title: Changes to the authorized_keys file

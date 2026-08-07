@@ -3,12 +3,12 @@
 .. meta::
    :description: The Wazuh FIM module monitors directories to detect file changes, additions, and deletions. Discover some FIM use cases in this section of our documentation.
 
-Monitoring configuration changes
-================================
+Monitor configuration changes
+==============================
 
-Monitoring configuration changes helps to establish accountability for changes made to systems and applications. Organizations can identify responsible parties and ensure that changes are properly authorized and documented by maintaining a record of changes and who made them.
+Monitoring configuration changes establishes accountability for changes made to systems and applications. By maintaining a record of changes and who made them, organizations can identify responsible parties and ensure changes are properly authorized and documented.
 
-You can configure the FIM module to monitor configuration files and report any changes. The Wazuh FIM module uses the :ref:`whodata <who-data-monitoring>` and :ref:`report_changes <reporting-changes-in-registry-values>` attributes to record the following information about such changes:
+Configure the FIM module to monitor configuration files and report changes. It uses the :ref:`whodata <who-data-monitoring>` and :doc:`report_changes <reporting-file-changes>` options to log the following about such changes:
 
 -  The login user that made the changes.
 -  The time of the changes.
@@ -16,13 +16,13 @@ You can configure the FIM module to monitor configuration files and report any c
 -  The changes made to the file.
 
 Use case description
---------------------
+---------------------
 
-+---------------------+-----------------------------------------------------------------------------------------------+
-| Endpoint            | Description                                                                                   |
-+=====================+===============================================================================================+
-| CentOS Stream 10    | The FIM module monitors a configuration file on this endpoint to detect file changes.         |
-+---------------------+-----------------------------------------------------------------------------------------------+
++---------------------+---------------------------------------------------------------------------------------+
+| Endpoint            | Description                                                                           |
++=====================+=======================================================================================+
+| **CentOS Stream 9** | The FIM module monitors a configuration file on this endpoint to detect file changes. |
++---------------------+---------------------------------------------------------------------------------------+
 
 Configuration
 -------------
@@ -41,18 +41,21 @@ Perform the following steps to configure the FIM module to monitor the ``/etc/ap
 
       <syscheck>
         <directories check_all="yes" report_changes="yes" whodata="yes">/etc/app.conf</directories>
+        <whodata>
+          <provider>ebpf</provider>
+        </whodata>
       </syscheck>
 
 #. Restart the Wazuh agent to apply the configuration changes:
 
    .. code-block:: console
 
-      systemctl restart wazuh-agent
+      # systemctl restart wazuh-agent
 
 Test the configuration
-----------------------
+-----------------------
 
-#. Modify the ``/etc/app.conf`` file by using ``nano`` with root privilege:
+#. Modify the ``/etc/app.conf`` file by using ``nano`` with root privileges:
 
    .. code-block:: console
 
@@ -60,10 +63,10 @@ Test the configuration
 
 #. Add ``updated image to V2`` to the file and save.
 
-Visualize the alert
--------------------
+Visualize the finding
+----------------------
 
-Navigate to **File Integrity Monitoring** on the Wazuh dashboard to view the alert generated when the FIM module detects modification of the configuration file.
+Navigate to **Endpoint security** → **File Integrity Monitoring** → **Findings** on the Wazuh dashboard to view the finding generated when the FIM module detects modification of the configuration file.
 
 .. thumbnail:: /images/manual/fim/modification-of-the-configuration-file.png
    :title: Modification of the configuration file
@@ -71,11 +74,10 @@ Navigate to **File Integrity Monitoring** on the Wazuh dashboard to view the ale
    :align: center
    :width: 80%
 
-Expand the alert to get more information about the event. In this example, the ``nano`` text editor modified the configuration file. The logged-in user on the endpoint was ``wazuh``. The user modified the file using root privilege. The content added to the file is ``updated image to V2``.
+Expand the finding to get more information about the event. In this example, the ``nano`` text editor modified the configuration file. The logged-in user on the endpoint was ``wazuh``. The user modified the file using root privileges. The content added to the file is ``updated image to V2``.
 
 .. thumbnail:: /images/manual/fim/get-more-information-about-the-event.png
   :title: Get more information about the event
   :alt: Get more information about the event
   :align: center
   :width: 80%
-

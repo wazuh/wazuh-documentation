@@ -3,21 +3,21 @@
 .. meta::
    :description: The Wazuh FIM module monitors directories to detect file changes, additions, and deletions. Discover some FIM use cases in this section of our documentation.
 
-Reporting file changes
-======================
+Report file changes
+====================
 
-The functionality to report changes made to a file allows you to confirm the implementation of changes to an application or system. For example, if you change an application configuration file, the FIM capability reports the specific changes made to the file and shows the state before and after the change.
+The functionality to report file changes lets you confirm that changes to an application or system were implemented correctly. For example, if you modify an application configuration file, the FIM capability reports the specific changes and shows the file's state before and after.
 
-Having a record of file changes might be useful for troubleshooting issues or for auditing purposes. By providing visibility into file changes, the FIM capability plays a crucial role in effective change management.
+A record of file changes is useful for troubleshooting and auditing. By providing this visibility, the FIM capability plays an important role in effective change management.
 
 Use case description
---------------------
+---------------------
 
-+---------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Endpoint            | Description                                                                                                                                                                    |
-+=====================+================================================================================================================================================================================+
-| CentOS Stream 10    | The FIM module monitors a directory on this endpoint for file changes. It reports the exact changes made to a specified file and hides the changes made to an excluded file.   |
-+---------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++---------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Endpoint            | Description                                                                                                                                                                  |
++=====================+==============================================================================================================================================================================+
+| **CentOS Stream 9** | The FIM module monitors a directory on this endpoint for file changes. It reports the exact changes made to a specified file and hides the changes made to an excluded file. |
++---------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Configuration
 -------------
@@ -35,7 +35,7 @@ Perform the following steps to configure the FIM module to report changes made t
    .. code-block:: xml
 
       <syscheck>
-        <directories realtime="yes" report_changes="yes">/appfolder</directories>
+        <directories report_changes="yes" realtime="yes">/appfolder</directories>
         <nodiff>/appfolder/private-file.conf</nodiff>
       </syscheck>
 
@@ -43,10 +43,10 @@ Perform the following steps to configure the FIM module to report changes made t
 
    .. code-block:: console
 
-      systemctl restart wazuh-agent
+      # systemctl restart wazuh-agent
 
 Test the configuration
-----------------------
+-----------------------
 
 #. Create the files ``appreport.conf`` and ``private-file.conf`` in the ``/appfolder`` directory:
 
@@ -54,16 +54,16 @@ Test the configuration
 
       # touch /appfolder/appreport.conf && touch /appfolder/private-file.conf
 
-#. Add the value ``I added this text`` to the ``appreport.conf``  and ``private-file.conf`` files:
+#. Add the value ``I added this text`` to the ``appreport.conf`` and ``private-file.conf`` files:
 
    .. code-block:: console
 
-      echo “I added this text” | tee /appfolder/appreport.conf /appfolder/private-file.conf
+      # echo 'I added this text' | tee /appfolder/appreport.conf /appfolder/private-file.conf
 
-Visualize the alert
--------------------
+Visualize the findings
+-----------------------
 
-Navigate to **File Integrity Monitoring** on the Wazuh dashboard to view the alert. You can find four alerts related to the monitored directory.
+Navigate to **Endpoint security** → **File Integrity Monitoring** → **Findings** on the Wazuh dashboard to view the findings. You can see four findings related to the monitored directory.
 
 .. thumbnail:: /images/manual/fim/alerts-related-monitored-directory.png
    :title: Alerts related to the monitored directory
@@ -71,7 +71,7 @@ Navigate to **File Integrity Monitoring** on the Wazuh dashboard to view the ale
    :align: center
    :width: 80%
 
-Expand the alert for the ``appreport.conf`` file with ``rule.id:550`` to find information about the changes made to the file. In the image below, under the **syscheck.diff** field, you see the content added to the file.
+Expand the finding for the ``appreport.conf`` to see information about the changes made to the file. In the image below, under the **event.original** field, you see the content added to the file.
 
 .. thumbnail:: /images/manual/fim/content-added-to-the-file.png
   :title: Content added to the file
@@ -79,7 +79,7 @@ Expand the alert for the ``appreport.conf`` file with ``rule.id:550`` to find in
   :align: center
   :width: 80%
 
-Expand the alert for the ``private-file.conf`` file with ``rule.id:550`` to search for information about the changes made to the file. In the image below, under the **syscheck.diff** field, you see that FIM doesn’t report the content added to the file.
+Expand the finding for the ``private-file.conf`` file to see information about the changes made to the file. In the image below, under the **event.original** field, you see that FIM does not report the content added to the file.
 
 .. thumbnail:: /images/manual/fim/alert-for-the-private-file-conf.png
    :title: Alert for the private-file.conf file
