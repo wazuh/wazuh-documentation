@@ -96,10 +96,12 @@ You can install the Wazuh manager as a single-node or multi-node cluster.
 
 - Disk space requirements
 
-  The amount of data depends on the generated alerts per second (APS). This table details the estimated disk space needed per agent to store 90 days of alerts on a Wazuh manager, depending on the type of monitored endpoints.
+  The Wazuh manager no longer stores alerts from monitored endpoints. Instead, it stores the content and databases required by its server-side modules. Because the Vulnerability Scanner feed requires at least 15 GB of storage, Wazuh recommends allocating at least 20 GB of disk space for a Wazuh manager.
+
+  The amount of data depends on the generated events per second (EPS). This table details the estimated disk space needed per agent to store 90 days of events on a Wazuh manager, depending on the type of monitored endpoints.
 
   +-------------------------------------------------+-----+-----------------------------+
-  | Monitored endpoints                             | APS || Storage in Wazuh manager   | 
+  | Monitored endpoints                             | EPS || Storage in Wazuh manager   | 
   |                                                 |     || (GB/90 days)               |  
   +=================================================+=====+=============================+
   | Servers                                         | 0.25|    0.1                      |
@@ -109,7 +111,7 @@ You can install the Wazuh manager as a single-node or multi-node cluster.
   | Network devices                                 | 0.5 |    0.2                      |
   +-------------------------------------------------+-----+-----------------------------+
 
-  For example, for an environment with 80 workstations, 10 servers, and 10 network devices, the storage needed on the Wazuh manager for 90 days of alerts is 6 GB.
+  For example, for an environment with 80 workstations, 10 servers, and 10 network devices, the storage needed on the Wazuh manager for 90 days of events is 6 GB.
 
 .. toctree::
     :hidden:
