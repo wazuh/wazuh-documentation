@@ -45,6 +45,9 @@ All notable changes to this project will be documented in this file.
 - Updated the minimum required password length for Wazuh API users to 12 characters in the *Deploying with Kubernetes* documentation. ([#9941](https://github.com/wazuh/wazuh-documentation/pull/9941))
 - Updated the *Using Wazuh for GDPR compliance* documentation in *Regulatory compliance* to Wazuh 5.0. ([#9944](https://github.com/wazuh/wazuh-documentation/pull/9944))
 
+### Fixed
+- Corrected instances of the outdated API password minimum (8 characters) to reflect the new minimum of 12 characters in 5.0.0 ([#9970](https://github.com/wazuh/wazuh-documentation/pull/9970))
+
 ### Removed
 
 - Removed all `agent-auth` references as this tool is now deprecated. ([#8718](https://github.com/wazuh/wazuh/pull/8718))

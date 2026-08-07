@@ -61,7 +61,7 @@ You can change the default password for the administrative users ``wazuh`` and `
 
 .. note::
 
-   The password for users must be between 8 and 64 characters long. It should contain at least one uppercase, lowercase letter, number, and symbol.
+   The password for users must be between 12 and 64 characters long. It should contain at least one uppercase, lowercase letter, number, and symbol.
 
 **We show an example of changing the password using curl below:**
 
