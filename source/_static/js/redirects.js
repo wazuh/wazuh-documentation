@@ -5,8 +5,8 @@ const betaVersions = []; // Important: betaVersions won't redirect between simil
 
 /* Note: new release versions must always be inserted in the first position of the array "versions" */
 const versions = [
-  '5.0',
   '4.14',
+  '5.0',
   '4.13',
   '4.12',
   '4.11',
@@ -40,7 +40,7 @@ const versions = [
 
 betaVersions.push(
   /* [ LABEL , BETA_FOLDER, FILE_PATH ] */
-  ['5.0 (Beta 4)', '5.0-beta', '/index.html']
+  ['5.0 (Beta 4)', '5.0-beta', '/getting-started/index.html']
 );
 
 /* Data structure for every release
