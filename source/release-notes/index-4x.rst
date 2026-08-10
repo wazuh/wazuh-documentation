@@ -11,8 +11,9 @@ This section summarizes the most important features of each Wazuh 4.x release.
 =============================================  ====================
 Wazuh version                                  Release date
 =============================================  ====================
+:doc:`4.14.9 </release-notes/release-4-14-9>`  TBD
 :doc:`4.14.8 </release-notes/release-4-14-8>`  TBD
-:doc:`4.14.7 </release-notes/release-4-14-7>`  TBD
+:doc:`4.14.7 </release-notes/release-4-14-7>`  29 July 2026
 :doc:`4.14.6 </release-notes/release-4-14-6>`  1 July 2026
 :doc:`4.14.5 </release-notes/release-4-14-5>`  23 April 2026
 :doc:`4.14.4 </release-notes/release-4-14-4>`  17 March 2026
@@ -92,6 +93,7 @@ Wazuh version                                  Release date
 
    .. toctree::
 
+      4.14.9 Release notes <release-4-14-9>
       4.14.8 Release notes <release-4-14-8>
       4.14.7 Release notes <release-4-14-7>
       4.14.6 Release notes <release-4-14-6>

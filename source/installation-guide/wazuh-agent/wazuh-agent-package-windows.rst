@@ -18,19 +18,20 @@ The Wazuh agent runs on the endpoint you want to monitor and communicates with t
 
       .. group-tab:: CLI
 
-         #. Choose one of the command shell alternatives to deploy the Wazuh agent on your endpoint. Run the command below and replace the ``WAZUH_MANAGER`` value with your Wazuh manager IP address or hostname. Ensure the downloaded Wazuh agent installation file is in your working directory.
+         #. Choose one of the command shell alternatives to deploy the Wazuh agent on your endpoint. Ensure the downloaded Wazuh agent installation file is in your working directory.
 
             -  Using CMD:
 
                .. code-block:: doscon
 
-                  > msiexec.exe /i wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi /q WAZUH_MANAGER="10.0.0.2"
+                  > wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi /q WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_PASSWORD='XXXXXXXXXXXX'
 
             -  Using PowerShell:
 
                .. code-block:: ps1con
+               
+                  > msiexec.exe /i wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi /q WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_PASSWORD='XXXXXXXXXXX'
 
-                  > msiexec.exe /i wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi /q WAZUH_MANAGER="10.0.0.2"
 
          #. Start the Wazuh agent from the GUI or by running:
 

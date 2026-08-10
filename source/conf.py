@@ -104,13 +104,9 @@ exclude_patterns = [
     'user-manual/api/**',
     'user-manual/capabilities/active-response/**',
     'user-manual/capabilities/agentless-monitoring/**',
-    'user-manual/capabilities/command-monitoring/**',
-    'user-manual/capabilities/file-integrity/**',
     'user-manual/capabilities/log-data-collection/**',
     'user-manual/capabilities/malware-detection/**',
-    'user-manual/capabilities/sec-config-assessment/**',
     'user-manual/capabilities/system-calls-monitoring/**',
-    'user-manual/capabilities/vulnerability-detection/**',
     'user-manual/indexer-api/**',
     'user-manual/agent/agent-enrollment/deployment-variables/**',
     'user-manual/agent/agent-management/remote-upgrading/**',
@@ -125,14 +121,16 @@ exclude_patterns = [
     'user-manual/wazuh-indexer/**',
     'user-manual/wazuh-indexer-cluster/**',
     'user-manual/wazuh-server-cluster/**',
-    'cloud-security/**',
-    'compliance/**',
+    'cloud-security/amazon/**',
+    'cloud-security/azure/**',
+    'cloud-security/gcp/**',
+    'compliance/pci-dss/**',
+    'compliance/hipaa/**',
+    'compliance/nist/**',
+    'compliance/tsc/**',
     'proof-of-concept-guide/detect-unauthorized-processes-netcat.rst',
     'proof-of-concept-guide/poc-detect-trojan.rst',
-    'proof-of-concept-guide/poc-detect-hidden-process.rst',
-    'proof-of-concept-guide/integrate-network-ids-suricata.rst',
     'proof-of-concept-guide/audit-commands-run-by-user.rst',
-    'proof-of-concept-guide/block-malicious-actor-ip-reputation.rst',
     'proof-of-concept-guide/detect-brute-force-attack.rst',
     'proof-of-concept-guide/detect-malware-yara-integration.rst',
     'proof-of-concept-guide/detect-remove-malware-virustotal.rst',
@@ -507,6 +505,51 @@ def fix_markdown_links(app, exception):
 # Options for sphinx-markdown-builder
 markdown_http_base = '' # Use relative links
 
+def patch_markdown_translator_meta_nodes():
+    """
+    sphinx-markdown-builder's MarkdownTranslator has no visit_meta/depart_meta,
+    so every `.. meta::` directive (used site-wide for SEO descriptions) falls
+    through to unknown_visit and logs an "unknown node type" warning during
+    `make markdown`. Metadata isn't rendered in Markdown output, so skipping
+    the node is correct, not a workaround.
+    """
+    from sphinx_markdown_builder.translator import MarkdownTranslator
+
+    MarkdownTranslator.visit_meta = lambda self, node: None
+    MarkdownTranslator.depart_meta = lambda self, node: None
+
+def patch_markdown_translator_unhandled_nodes():
+    """
+    sphinx-markdown-builder's MarkdownTranslator doesn't handle a few more
+    node types found in this repo, each logging an "unknown node type"
+    warning during `make markdown` and silently dropping the node's content:
+
+    - `hlist`/`hlistcol` (from `.. hlist::`) are pure column-layout wrappers
+      around a bullet_list; treating them as pass-through (like `container`)
+      renders that list's content normally instead of dropping it — Markdown
+      has no column-layout equivalent to preserve anyway.
+    - `caption` (from a `:caption:` code-block option) has no handler at all,
+      silently discarding its text; render it as a bold label line instead.
+    - `toctree` only reaches the translator for `:hidden:` toctrees, which
+      Sphinx's own HTML5 translator also skips outright (`visit_toctree`
+      raises SkipNode there too), since they render via the sidebar/context,
+      not inline content.
+    """
+    from sphinx_markdown_builder.translator import MarkdownTranslator, PREDEFINED_ELEMENTS, SKIP
+
+    PREDEFINED_ELEMENTS["hlist"] = None
+    PREDEFINED_ELEMENTS["hlistcol"] = None
+    PREDEFINED_ELEMENTS["toctree"] = SKIP
+
+    def visit_caption(self, _node):
+        self.add("**", prefix_eol=2)
+
+    def depart_caption(self, _node):
+        self.add("**", suffix_eol=2)
+
+    MarkdownTranslator.visit_caption = visit_caption
+    MarkdownTranslator.depart_caption = depart_caption
+
 # -- Extension configuration -------------------------------------------------
 
 # -- Images extension -----------------------------------------------------
@@ -627,6 +670,9 @@ def setup(app):
     app.connect('build-finished', finish_and_clean)
 
     app.connect('build-finished', fix_markdown_links) # Connect the markdown link fixer to post-process generated markdown files
+
+    patch_markdown_translator_meta_nodes()
+    patch_markdown_translator_unhandled_nodes()
 
     app.connect('html-page-context', pagefind_custom_weights)
 

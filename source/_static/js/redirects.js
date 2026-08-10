@@ -40,7 +40,7 @@ const versions = [
 
 betaVersions.push(
   /* [ LABEL , BETA_FOLDER, FILE_PATH ] */
-  ['5.0 (Beta 3)', '5.0-beta', '/index.html']
+  ['5.0 (Beta 4)', '5.0-beta', '/index.html']
 );
 
 /* Data structure for every release
@@ -107,12 +107,19 @@ newUrls['5.0'] = [
   '/user-manual/data-analysis/detectors.html',
   '/user-manual/data-analysis/findings.html',
   '/user-manual/data-analysis/detection-workflow.html',
+  '/user-manual/capabilities/command-monitoring/requirements.html',
+  '/user-manual/capabilities/command-monitoring/security-considerations.html',
   '/transitioning-from-4x-to-5x/index.html',
   '/transitioning-from-4x-to-5x/transition-plan.html',
   '/transitioning-from-4x-to-5x/wazuh-indexer.html',
   '/transitioning-from-4x-to-5x/wazuh-manager.html',
   '/transitioning-from-4x-to-5x/wazuh-dashboard.html',
   '/proof-of-concept-guide/poc-security-configuration-assessment.html',
+  '/proof-of-concept-guide/detect-web-attack-xss.html',
+  '/wazuh-cti/index.html',
+  '/wazuh-cti/how-it-works.html',
+  '/wazuh-cti/managing-wazuh-cti.html',
+  '/wazuh-cti/troubleshooting.html',
 ];
 
 /* Redirections 4.14—5.0  */
@@ -182,6 +189,21 @@ redirections.push(
     'target': ['4.14=>5.0', '5.0=>4.14'],
     '4.14': '/user-manual/capabilities/system-inventory/using-syscollector-information-to-trigger-alerts.html',
     '5.0': '/user-manual/capabilities/system-inventory/syscollector-information-findings.html',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/user-manual/capabilities/sec-config-assessment/creating-custom-policies.html',
+    '5.0': '/user-manual/capabilities/sec-config-assessment/how-to-configure.html#sca-creating-custom-policies',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/proof-of-concept-guide/integrate-network-ids-suricata.html',
+    '5.0': '/proof-of-concept-guide/network-ids-integration.html',
+  },
+  {
+    'target': ['4.14=>5.0'],
+    '4.14': '/user-manual/capabilities/command-monitoring/command-output-analysis.html',
+    '5.0': '/user-manual/capabilities/command-monitoring/configuration.html#command-monitoring-configuration-example-wazuh-dashboard',
   }
 );
 
@@ -230,6 +252,10 @@ removedUrls['5.0'] = [
   '/upgrade-guide/wazuh-agent/aix.html',
   '/upgrade-guide/wazuh-agent/hp-ux.html',
   '/upgrade-guide/wazuh-agent/solaris.html',
+  '/user-manual/capabilities/command-monitoring/command-output-analysis.html',
+  '/user-manual/capabilities/command-monitoring/use-cases/check-if-the-output-changed.html',
+  '/user-manual/capabilities/command-monitoring/use-cases/load-average.html',
+  '/user-manual/capabilities/command-monitoring/use-cases/detect-usb-storage.html',
 ];
 
 /* *** RELEASE 4.14 ****/
@@ -237,6 +263,7 @@ removedUrls['5.0'] = [
 /* Pages added in 4.14 */
 
 newUrls['4.14'] = [
+  '/release-notes/release-4-14-9.html',
   '/release-notes/release-4-14-8.html',
   '/release-notes/release-4-14-7.html',
   '/release-notes/release-4-14-6.html',
@@ -470,11 +497,6 @@ redirections.push(
     '4.13': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/certificates-creation.html',
     '4.14': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/index.html',
   },
-  {
-    'target': ['4.13=>4.14'],
-    '4.13': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/distributed-deployment.html',
-    '4.14': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/index.html',
-  },    
   {
     'target': ['4.13=>4.14', '4.14=>4.13'],
     '4.13': '/user-manual/wazuh-server-cluster/adding-new-server-nodes/certificates-creation.html#all-in-one-deployment',

@@ -8,7 +8,7 @@
 
          # systemctl restart wazuh-dashboard
 
-   .. group-tab:: SysV init
+   .. group-tab:: SysV Init
 
       .. code-block:: console
 

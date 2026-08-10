@@ -1,12 +1,12 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Learn how to install Wazuh dashboard, a flexible and intuitive web interface for mining and visualizing the events and archives.
+   :description: Learn how to install Wazuh dashboard, a flexible and intuitive web interface for mining and visualizing security data.
 
 Installing the Wazuh dashboard step by step
 ===========================================
 
-Install and configure the Wazuh dashboard following step-by-step instructions. The Wazuh dashboard is a web interface for mining and visualizing the Wazuh manager alerts and archived events.
+Install and configure the Wazuh dashboard following step-by-step instructions. The Wazuh dashboard is a web interface for mining and visualizing security data.
 
 .. note:: You need root user privileges to run all the commands described below.
 
@@ -86,6 +86,7 @@ Configuring the Wazuh dashboard
      #. ``wazuh_core.hosts.url``: This setting specifies the Wazuh manager master node. Replace ``<WAZUH_MANAGER_IP_ADDRESS>`` with the IP address or hostname of the Wazuh manager master node.
 
         .. code-block:: yaml
+           :emphasize-lines: 3
 
              wazuh_core.hosts:
                default:
@@ -184,9 +185,9 @@ Select your deployment type and follow the instructions to change the default pa
 
             .. code-block:: console
 
-               # bash wazuh-passwords-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -A -au <ADMIN_USER> -ap <ADMIN_PASSWORD> -u <USER> -p <PASSWORD>
+               # bash wazuh-passwords-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -A -au <API_ADMIN_USER> -ap <API_ADMIN_PASSWORD> -u <USER> -p <PASSWORD>
 
-            Where ``<ADMIN_USER>`` and ``<ADMIN_PASSWORD>`` are the Wazuh manager API administrator user and password, respectively. ``<USER>`` is the name of the user whose password you want to change, and ``<PASSWORD>`` is the new password. If ``<PASSWORD>`` is not specified, the tool will generate a random password.
+            Where ``<API_ADMIN_USER>`` and ``<API_ADMIN_PASSWORD>`` are the Wazuh manager API administrator user and password, respectively. ``<USER>`` is the name of the user whose password you want to change, and ``<PASSWORD>`` is the new password. If ``<PASSWORD>`` is not specified, the tool will generate a random password.
 
             For example, to change the password of the ``wazuh`` user to ``Hello*123``, run the following command:
 
