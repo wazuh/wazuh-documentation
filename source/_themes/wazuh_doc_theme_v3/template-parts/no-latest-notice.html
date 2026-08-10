@@ -7,7 +7,11 @@
 <div class="no-latest-notice-wrapper">
   <div class="no-latest-notice">
     <span class="no-latest-title">Attention</span>
+    {% if is_prerelease %}
+    <span class="no-latest-text-wrapper"> This documentation covers an upcoming release that is still under development. For the current stable documentation, check out <a class="link-latest" href="#">the latest version</a>.</span>
+    {% else %}
     <span class="no-latest-text-wrapper"> This documentation does not apply to the most recent version of Wazuh. Check out the docs for <a class="link-latest" href="#">the latest version</a>.</span>
+    {% endif %}
   </div>
 </div>
 {% endif %}
