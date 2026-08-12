@@ -8,6 +8,10 @@ Wazuh server node(s) installation
 
 Once the certificates have been created and copied to the new node(s), you can now proceed with installing and configuring the new Wazuh server as a worker node.
 
+.. note::
+
+   You need root user privileges to execute the commands below.
+
 Adding the Wazuh repository
 ---------------------------
 
@@ -79,6 +83,26 @@ Installing the Wazuh manager
          .. code-block:: console
 
             # apt-get -y install wazuh-manager
+
+   .. note::
+
+      The commands above install the latest version of the Wazuh manager. All nodes in a Wazuh server cluster must run the same version. If your existing node runs an earlier Wazuh server version, install that specific version instead, for example:
+
+      .. tabs::
+
+         .. group-tab:: YUM
+
+            .. code-block:: console
+
+               # yum -y install wazuh-manager-4.11.2-1
+
+         .. group-tab:: APT
+
+            .. code-block:: console
+
+               # apt-get -y install wazuh-manager=4.11.2-1
+
+      Alternatively, upgrade the existing Wazuh server to the latest version before adding the new node.
 
 #. Enable and start the Wazuh manager service.
 
