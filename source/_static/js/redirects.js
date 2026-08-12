@@ -120,6 +120,10 @@ newUrls['5.0'] = [
   '/wazuh-cti/how-it-works.html',
   '/wazuh-cti/managing-wazuh-cti.html',
   '/wazuh-cti/troubleshooting.html',
+  '/user-manual/capabilities/system-calls-monitoring/use-cases/detect-when-the-audit-daemon-stops.html',
+  '/user-manual/capabilities/system-calls-monitoring/use-cases/detect-when-the-audit-daemon-starts.html',
+  '/user-manual/capabilities/system-calls-monitoring/use-cases/detect-abnormal-process-termination.html',
+  '/user-manual/capabilities/system-calls-monitoring/use-cases/detect-a-network-interface-entering-promiscuous-mode.html',
 ];
 
 /* Redirections 4.14—5.0  */
@@ -256,6 +260,9 @@ removedUrls['5.0'] = [
   '/user-manual/capabilities/command-monitoring/use-cases/check-if-the-output-changed.html',
   '/user-manual/capabilities/command-monitoring/use-cases/load-average.html',
   '/user-manual/capabilities/command-monitoring/use-cases/detect-usb-storage.html',
+  '/user-manual/capabilities/system-calls-monitoring/use-cases/monitoring-file-and-directory-access.html',
+  '/user-manual/capabilities/system-calls-monitoring/use-cases/monitoring-commands-run-as-root.html',
+  '/user-manual/capabilities/system-calls-monitoring/use-cases/privilege-abuse.html',
 ];
 
 /* *** RELEASE 4.14 ****/

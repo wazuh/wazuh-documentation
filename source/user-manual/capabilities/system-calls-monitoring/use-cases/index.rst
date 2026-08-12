@@ -1,17 +1,17 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The Linux Audit system provides a way to track security-relevant information on your machine. Discover some Audit use cases in this section of our documentation. 
-  
+  :description: Discover Wazuh use cases for Linux system call monitoring, including detecting Audit daemon stop/start events, abnormal process termination, and promiscuous mode activation.
+
 Use cases
 =========
 
-The use cases described below are performed on an Ubuntu 22.04 endpoint that has a Wazuh agent installed and enrolled to a Wazuh server.
+The use cases described below are performed on an Ubuntu 24.04 endpoint that has a Wazuh agent installed and enrolled in a Wazuh manager. The first four use cases do not need custom rules; the Linux kernel emits the ``ANOM_ABEND``, ``ANOM_PROMISCUOUS``, ``DAEMON_END``, and ``DAEMON_START`` records they rely on automatically.
 
-   .. toctree::
-      :maxdepth: 1 
+.. toctree::
+   :maxdepth: 1
 
-      monitoring-file-and-directory-access
-      monitoring-commands-run-as-root
-      privilege-abuse
-
+   detect-when-the-audit-daemon-stops
+   detect-when-the-audit-daemon-starts
+   detect-abnormal-process-termination
+   detect-a-network-interface-entering-promiscuous-mode

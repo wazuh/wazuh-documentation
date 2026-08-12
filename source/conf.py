@@ -106,7 +106,6 @@ exclude_patterns = [
     'user-manual/capabilities/agentless-monitoring/**',
     'user-manual/capabilities/log-data-collection/**',
     'user-manual/capabilities/malware-detection/**',
-    'user-manual/capabilities/system-calls-monitoring/**',
     'user-manual/indexer-api/**',
     'user-manual/agent/agent-enrollment/deployment-variables/**',
     'user-manual/agent/agent-management/remote-upgrading/**',

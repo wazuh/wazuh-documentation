@@ -1,72 +1,62 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about how to monitor system calls with Wazuh: its configuration, basic usage, how to monitor user actions, and more. 
-  
+   :description: Learn how to configure the Linux Audit framework for Wazuh system call monitoring, including built-in KVDB event normalization and endpoint setup.
+
 .. _audit-configuration:
 
 Configuration
 =============
 
-The Linux Audit system generates numerous events for write access, read access, execute access, attribute change, or system call rule. Wazuh uses the *key* argument in audit rules because it is difficult to distinguish audit events using rules and decoders alone. As previously explained, each audit rule can add a descriptive key value to identify what rule generated a particular audit log entry. We use a :doc:`CDB list </user-manual/ruleset/cdb-list>` to determine the types of audit rules fired. This list will have the following syntax:
+The Linux Audit framework generates events for file access, file attribute changes, command execution, and monitored system calls. Audit rules use the ``-k`` argument to assign a descriptive key to each rule. The Linux Audit framework includes this key in matching audit events, allowing Wazuh to identify the activity associated with the generated event.
 
-   .. code-block:: console
+Wazuh manager
+-------------
 
-      <KEY_NAME>:<VALUE>
+Wazuh normalizes Linux Audit events before evaluating them against the built-in Auditd detection rules. The Wazuh manager uses Key-Value Databases (KVDBs) to map Linux Audit record types and system call names to standardized Wazuh Common Schema (WCS) fields, such as ``event.category``, ``event.type``, and ``event.action``. This normalization provides consistent event classification and enables the built-in detection rules to evaluate audit events independently of the originating Linux Audit event.
 
-where:
+The Auditd integration includes built-in KVDBs that cover the most common Linux Audit record types and system calls. For example:
 
-- ``<KEY_NAME>`` is the string you used in the argument *-k* of a file system or system call rule.
-- ``<VALUE>`` is one of the following values:
++-------------------------+--------------------------------------------+
+| Linux Audit value       | Normalized event fields                    |
++=========================+============================================+
+| ``execve``              | | ``event.category: process``              |
+|                         | | ``event.type: start``                    |
+|                         | | ``event.action: started``                |
++-------------------------+--------------------------------------------+
+| ``chmod``               | | ``event.category: file``                 |
+|                         | | ``event.type: change``                   |
+|                         | | ``event.action: permission-changed``     |
++-------------------------+--------------------------------------------+
+| ``ANOM_LOGIN_FAILURES`` | | ``event.category: authentication``       |
+|                         | | ``event.type: info``                     |
+|                         | | ``event.action: authentication-failure`` |
++-------------------------+--------------------------------------------+
 
-   - write: File system rules with ``-p w``.
-   - read: File system rules with ``-p r``.
-   - execute: File system rules with ``-p x``.
-   - attribute: File system rules with ``-p a``.
-   - command: System call rules.
+The screenshot below shows the built-in Auditd KVDBs on the Wazuh dashboard.
 
-Wazuh server
-------------
+.. thumbnail:: /images/manual/system-calls-monitoring/auditd-kvdbs.png
+  :title: Built-in Auditd KVDBs
+  :alt: Built-in Auditd KVDBs
+  :align: center
+  :width: 80%
 
-By default, Wazuh includes an audit CDB list. This CDB list contains audit keys that map against write, read, attribute change, execution, and command events.
+After normalizing the event, the Wazuh manager evaluates it against the built-in Auditd detection rules. These rules detect authentication anomalies, privilege escalation attempts, abnormal process behavior, user account changes, audit subsystem events, SELinux events, and other security-relevant activities. Many of the built-in rules include MITRE ATT&CK mappings, false-positive guidance, and compliance mappings that help analysts investigate findings and meet regulatory requirements.
 
-Run the command below to view the content of the CDB list:
-
-   .. code-block:: console
-
-      # cat /var/ossec/etc/lists/audit-keys
-
-   .. code-block:: console
-      :class: output
-
-      audit-wazuh-w:write
-      audit-wazuh-r:read
-      audit-wazuh-a:attribute
-      audit-wazuh-x:execute
-      audit-wazuh-c:command
-
-You can add your custom key with its value to the list like this:
-
-   .. code-block:: console
-
-      # echo "<YOUR_KEY>:<VALUE>" >> /var/ossec/etc/lists/audit-keys
-
-Where ``<YOUR_KEY>`` is the key set in the audit rule and ``<VALUE>`` is used by Wazuh to process the event.
-
-Restart the Wazuh manager any time you modify the CDB list:
-
-   .. code-block:: console
-
-      # systemctl restart wazuh-manager
-
-Out-of-the-box rules for Audit events are located in the ``/var/ossec/ruleset/rules/0365-auditd_rules.xml`` file on the Wazuh server.
+If your Linux Audit configuration uses custom audit keys, record types, or system call classifications that are not included in the built-in KVDBs, create or extend KVDB entries to normalize those events before evaluating them with custom detection rules. For more information, see the :doc:`Key-Value Databases </user-manual/data-analysis/key-value-databases>` documentation.
 
 Monitored endpoint
-------------------
+-------------------
 
-#. To use the Linux Audit system, you must install the audit package on your endpoint. If you do not have this package installed, execute the following command as the root user to install it:
+#. Install the Linux Audit package on the monitored endpoint if it is not already installed:
 
    .. tabs::
+
+      .. group-tab:: Yum
+
+         .. code-block:: console
+
+            # yum install -y audit
 
       .. group-tab:: APT
 
@@ -74,24 +64,18 @@ Monitored endpoint
 
             # apt install -y auditd
 
-      .. group-tab:: Yum
-
-         .. code-block:: console
-
-            # yum install -y auditd
-
       .. group-tab:: DNF
 
          .. code-block:: console
 
-            # dnf install -y auditd
+            # dnf install -y audit
 
-   .. Note::
+   .. note::
       If the audit package is already present on the endpoint before installing the Wazuh agent, the actions below should not be performed. This configuration will be added by default.
 
-#. Add the configuration below to the Wazuh agent configuration ``/var/ossec/etc/ossec.conf`` file. This configures Wazuh to read the audit file log to process events the Linux Audit system detects:
+#. Add the configuration below to the Wazuh agent configuration ``/var/ossec/etc/ossec.conf`` file. This configures Wazuh to read the audit log file to process events the Linux Audit system detects:
 
-   .. code-block:: xml  
+   .. code-block:: xml
 
       <localfile>
         <log_format>audit</log_format>
@@ -104,6 +88,6 @@ Monitored endpoint
 
       # systemctl restart wazuh-agent
 
-#. Create proper audit rules using the ``auditctl`` command or the audit rules file. 
+#. Optionally create audit rules for the files and system calls you want to monitor, using the ``auditctl`` command or the audit rules file.
 
 Linux audit alerts are displayed in the **Threat Hunting** module of the Wazuh dashboard.
