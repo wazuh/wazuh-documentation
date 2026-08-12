@@ -11,6 +11,10 @@ Now that the installation and configuration are completed, you can proceed with 
 -  `Using the cluster control tool`_
 -  `Using the Wazuh API console`_
 
+.. note::
+
+   You need root user privileges to execute the commands below.
+
 Using the cluster control tool
 ------------------------------
 
