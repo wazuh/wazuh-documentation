@@ -10,6 +10,10 @@ Wazuh uses certificates to establish trust and confidentiality between its compo
 
 Perform the following steps on your existing Wazuh server node to generate the certificates required for secure communication among the Wazuh central components.
 
+.. note::
+
+   You need root user privileges to execute the commands below.
+
 All-in-one deployment
 ---------------------
 
