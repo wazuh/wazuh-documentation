@@ -15,6 +15,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Added LLMs-ready documentation. ([#9223](https://github.com/wazuh/wazuh-documentation/pull/9223))
 - **Post-release**: Added note about Linux and macOS WPK ARM packages in 4.11 and earlier versions. ([#9309](https://github.com/wazuh/wazuh-documentation/pull/9309))
 - **Post-release**: Backport: Added the *System requirements* section to the *Wazuh server cluster* documentation. ([#9672](https://github.com/wazuh/wazuh-documentation/pull/9672))
+- **Post-release**: Added guidance about matching the Wazuh manager version in the *Adding new Wazuh server nodes* documentation. ([#10012](https://github.com/wazuh/wazuh-documentation/pull/10012))
 
 ### Changed
 
@@ -32,6 +33,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated the *Resources* table in the *RBAC reference* guide. ([#9121](https://github.com/wazuh/wazuh-documentation/pull/9121))
 - **Post-release**: Updated the *Monitoring Microsoft Azure* documentation page title. ([#9926](https://github.com/wazuh/wazuh-documentation/pull/9926))
 - **Post-release**: Obscured the sample private key values in the GCP credentials documentation. ([#9974](https://github.com/wazuh/wazuh-documentation/pull/9974))
+- **Post-release**: Moved the root user privileges note into each step of the *Adding new Wazuh server nodes* documentation. ([#10012](https://github.com/wazuh/wazuh-documentation/pull/10012))
 
 ### Fixed
 
