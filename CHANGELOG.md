@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 ## [v4.10.4]
 
 - Support for Wazuh 4.10.4
+- Added guidance about matching the Wazuh manager version and moved the root user privileges note into each step of the *Adding new Wazuh server nodes* documentation. ([#10011](https://github.com/wazuh/wazuh-documentation/pull/10011))
 
 ## [v4.10.3]
 
