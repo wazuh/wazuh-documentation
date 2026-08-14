@@ -366,9 +366,6 @@ paths:
   /{index}/_search:
     $ref: 'search_api.yml#/paths/~1{index}~1_search'
 
-  /_plugins/_security_analytics/detectors:
-    $ref: 'stats_api.yml#/paths/~1_plugins~1_security_analytics~1detectors'
-
   /_plugins/_security_analytics/logtype:
     $ref: 'logtype_api.yml#/paths/~1_plugins~1_security_analytics~1logtype'
 
@@ -377,6 +374,63 @@ paths:
 
   /_plugins/_security_analytics/logtype/{log_type_id}:
     $ref: 'logtype_api.yml#/paths/~1_plugins~1_security_analytics~1logtype~1{log_type_id}'
+
+  /_plugins/_security_analytics/detectors:
+    $ref: 'security_analytics_api.yml#/paths/~1_plugins~1_security_analytics~1detectors'
+
+  /_plugins/_security_analytics/detectors/{detector_id}:
+    $ref: 'security_analytics_api.yml#/paths/~1_plugins~1_security_analytics~1detectors~1{detector_id}'
+
+  /_plugins/_security_analytics/detectors/_search:
+    $ref: 'security_analytics_api.yml#/paths/~1_plugins~1_security_analytics~1detectors~1_search'
+
+  /_plugins/_security_analytics/detectors/{detector_id}/_acknowledge/alerts:
+    $ref: 'security_analytics_api.yml#/paths/~1_plugins~1_security_analytics~1detectors~1{detector_id}~1_acknowledge~1alerts'
+
+  /_plugins/_security_analytics/alerts:
+    $ref: 'security_analytics_api.yml#/paths/~1_plugins~1_security_analytics~1alerts'
+
+  /_plugins/_security_analytics/findings/_search:
+    $ref: 'security_analytics_api.yml#/paths/~1_plugins~1_security_analytics~1findings~1_search'
+
+  /_plugins/_security_analytics/findings/_update:
+    $ref: 'security_analytics_api.yml#/paths/~1_plugins~1_security_analytics~1findings~1_update'
+
+  /_plugins/_security_analytics/findings/correlate:
+    $ref: 'security_analytics_api.yml#/paths/~1_plugins~1_security_analytics~1findings~1correlate'
+
+  /_plugins/_security_analytics/correlations:
+    $ref: 'security_analytics_api.yml#/paths/~1_plugins~1_security_analytics~1correlations'
+
+  /_plugins/_security_analytics/correlationAlerts:
+    $ref: 'security_analytics_api.yml#/paths/~1_plugins~1_security_analytics~1correlationAlerts'
+
+  /_plugins/_security_analytics/_acknowledge/correlationAlerts:
+    $ref: 'security_analytics_api.yml#/paths/~1_plugins~1_security_analytics~1_acknowledge~1correlationAlerts'
+
+  /_plugins/_security_analytics/rules/_search:
+    $ref: 'security_analytics_api.yml#/paths/~1_plugins~1_security_analytics~1rules~1_search'
+
+  /_plugins/_security_analytics/rules/validate:
+    $ref: 'security_analytics_api.yml#/paths/~1_plugins~1_security_analytics~1rules~1validate'
+
+  /_plugins/_security_analytics/rules/categories:
+    $ref: 'security_analytics_api.yml#/paths/~1_plugins~1_security_analytics~1rules~1categories'
+
+  /_plugins/_security_analytics/mappings:
+    $ref: 'security_analytics_api.yml#/paths/~1_plugins~1_security_analytics~1mappings'
+
+  /_plugins/_security_analytics/mappings/view:
+    $ref: 'security_analytics_api.yml#/paths/~1_plugins~1_security_analytics~1mappings~1view'
+
+  /_plugins/_security_analytics/correlation/rules:
+    $ref: 'security_analytics_api.yml#/paths/~1_plugins~1_security_analytics~1correlation~1rules'
+
+  /_plugins/_security_analytics/correlation/rules/{correlation_rule_id}:
+    $ref: 'security_analytics_api.yml#/paths/~1_plugins~1_security_analytics~1correlation~1rules~1{correlation_rule_id}'
+
+  /_plugins/_security_analytics/correlation/rules/_search:
+    $ref: 'security_analytics_api.yml#/paths/~1_plugins~1_security_analytics~1correlation~1rules~1_search'
 
   /_tasks:
     $ref: 'tasks_api.yml#/paths/~1_tasks'
@@ -767,3 +821,17 @@ tags:
   - name: Transforms API
     description: |
       The Transform API is a RESTful interface that enables users to create, manage, and execute transform jobs. These jobs allow you to generate summarized or aggregated views of your existing data, facilitating more efficient analysis and visualization. By defining specific transformations, you can restructure and condense large datasets into more insightful representations.
+  - name: Detectors
+    description: Manage Security Analytics detectors, which monitor indices and rules on a schedule and raise alerts through configurable triggers.
+  - name: Alerts
+    description: Retrieve and acknowledge alerts raised by Security Analytics detectors.
+  - name: Findings
+    description: Retrieve and update findings, which record when a detector's rules or threat-intel checks matched an event.
+  - name: Correlations
+    description: Discover and manage correlations between findings, and retrieve and acknowledge the alerts correlation rules raise.
+  - name: Correlation rules
+    description: Manage the rules that link findings across indices and categories occurring within a shared time window.
+  - name: Rules
+    description: Search and validate Security Analytics detection rules, and list the log-type categories they can target.
+  - name: Mappings
+    description: Manage the field-alias mappings that let Security Analytics rules and detectors interpret an index's raw fields.
