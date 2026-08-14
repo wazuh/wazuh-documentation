@@ -44,6 +44,7 @@ All notable changes to this project will be documented in this file.
 - Updated the *File integrity monitoring* capability documentation to Wazuh 5.0. ([#9961](https://github.com/wazuh/wazuh-documentation/pull/9961))
 - Updated the minimum required password length for Wazuh API users to 12 characters in the *Deploying with Kubernetes* documentation. ([#9941](https://github.com/wazuh/wazuh-documentation/pull/9941))
 - Updated the *Using Wazuh for GDPR compliance* documentation in *Regulatory compliance* to Wazuh 5.0. ([#9944](https://github.com/wazuh/wazuh-documentation/pull/9944))
+- Updated the *Wazuh indexer API reference*. ([#10015](https://github.com/wazuh/wazuh-documentation/pull/10015))
 
 ### Removed
 
@@ -100,7 +101,6 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Fixed the Apache ``access_log`` path on the Windows endpoint in the *Blocking a known malicious actor* section of the *Proof of Concept guide*. ([#9530](https://github.com/wazuh/wazuh-documentation/pull/9530))
 - **Post-release**: Fixed the ``opensearch_dashboards.yml`` configuration for Google Workspace in the *Single Sign-On* documentation. ([#9586](https://github.com/wazuh/wazuh-documentation/pull/9586))
 - **Post-release**: Fixed the ``cluster`` reference values in the *ossec.conf* documentation. ([#9666](https://github.com/wazuh/wazuh-documentation/pull/9666))
-- Fixed the Wazuh indexer API reference to remove Security Analytics entries that documented non-functional endpoints: a mislabeled ``/_plugins/_security_analytics/detectors`` endpoint and dead ``logtype`` create/update/delete endpoints that are not registered in the shipped plugin. Re-published the mislabeled endpoint's content as the correct ``GET /_nodes/{node_id}/stats/{metric}`` Nodes stats endpoint instead of discarding it. Also removed the unsupported *Manage notifications* capability claim from the Wazuh indexer API index page. ([#10015](https://github.com/wazuh/wazuh-documentation/pull/10015))
 
 ## [v4.14.4]
 
