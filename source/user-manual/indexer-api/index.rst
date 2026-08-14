@@ -14,7 +14,6 @@ Here is a list of some of the Wazuh indexer API capabilities:
 -  User management
 -  Managing and searching through indexes
 -  Log ingestion
--  Manage notifications
 -  Manage nodes in a single or multi-node cluster
 -  Snapshot and repository management
 -  Statistical information collection

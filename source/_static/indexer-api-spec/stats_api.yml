@@ -1,18 +1,43 @@
 paths:
-  /_plugins/_security_analytics/detectors:
-    post:
+  /_nodes/{node_id}/stats/{metric}:
+    get:
       tags:
-        - Stats API
-      summary: Stats API
+        - Nodes stats API
+      summary: Nodes stats
       description: |
-        The Stats API uses the stats operation to track and monitor shard indexing backpressure.
-      operationId: getStatsAPI
+        Returns statistical information about nodes in the cluster. Use the `metric` path parameter to limit the response to a specific metric, such as `indexing_pressure` for shard indexing pressure statistics.
+      operationId: getNodesStats
       security:
         - basicAuth: []
         - jwtAuth: []
       parameters:
-        - $ref: '#/components/parameters/top'
-        - $ref: '#/components/parameters/include_all'
+        - name: node_id
+          in: path
+          required: true
+          description: A comma-separated list of node IDs or names to limit the returned information. Use `_local` to return information from the node you are connecting to, or `_all` to return information from all nodes.
+          schema:
+            type: string
+          example: "_local"
+        - name: metric
+          in: path
+          required: true
+          description: Limits the information returned to the specified metric.
+          schema:
+            type: string
+            enum:
+              - _all
+              - breaker
+              - discovery
+              - fs
+              - http
+              - indexing_pressure
+              - indices
+              - jvm
+              - os
+              - process
+              - thread_pool
+              - transport
+          example: "indexing_pressure"
         - $ref: '#/components/parameters/pretty'
       responses:
         '200':
@@ -28,22 +53,6 @@ paths:
 
 components:
   parameters:
-    top:
-      name: top
-      in: query
-      description: Returns aggregated shard indexing pressure stats, excluding per-shard details.
-      schema:
-        type: boolean
-        default: false
-
-    include_all:
-      name: include_all
-      in: query
-      description: Includes all available shard indexing pressure statistics in the response.
-      schema:
-        type: boolean
-        default: false
-
     pretty:
       name: pretty
       in: query
