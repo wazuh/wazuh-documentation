@@ -44,6 +44,7 @@ All notable changes to this project will be documented in this file.
 - Updated the *File integrity monitoring* capability documentation to Wazuh 5.0. ([#9961](https://github.com/wazuh/wazuh-documentation/pull/9961))
 - Updated the minimum required password length for Wazuh API users to 12 characters in the *Deploying with Kubernetes* documentation. ([#9941](https://github.com/wazuh/wazuh-documentation/pull/9941))
 - Updated the *Using Wazuh for GDPR compliance* documentation in *Regulatory compliance* to Wazuh 5.0. ([#9944](https://github.com/wazuh/wazuh-documentation/pull/9944))
+- Updated the *Wazuh indexer API reference*. ([#10016](https://github.com/wazuh/wazuh-documentation/pull/10016))
 
 ### Removed
 
