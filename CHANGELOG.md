@@ -39,11 +39,12 @@ All notable changes to this project will be documented in this file.
 - Updated the *Container security* documentation. ([#9816](https://github.com/wazuh/wazuh-documentation/pull/9816)) ([#9819](https://github.com/wazuh/wazuh-documentation/pull/9819)) ([#9823](https://github.com/wazuh/wazuh-documentation/pull/9823))
 - Updated the *System inventory* documentation. ([#9820](https://github.com/wazuh/wazuh-documentation/pull/9820)) ([#9832](https://github.com/wazuh/wazuh-documentation/pull/9832))
 - Updated the *Security configuration assessment* capability documentation. ([#9834](https://github.com/wazuh/wazuh-documentation/pull/9834)) ([#9849](https://github.com/wazuh/wazuh-documentation/pull/9849))
-- Updated the *Vulnerability detection* capability documentation. ([#9835](https://github.com/wazuh/wazuh-documentation/pull/9835)) ([#9841](https://github.com/wazuh/wazuh-documentation/pull/9841))
+- Updated the *Vulnerability detection* capability documentation and added a *Use cases* section. ([#9835](https://github.com/wazuh/wazuh-documentation/pull/9835)) ([#9841](https://github.com/wazuh/wazuh-documentation/pull/9841)) ([#10018](https://github.com/wazuh/wazuh-documentation/pull/10018))
 - Updated the *Command monitoring* capability documentation. ([#9883](https://github.com/wazuh/wazuh-documentation/pull/9883)) ([#9915](https://github.com/wazuh/wazuh-documentation/pull/9915))
 - Updated the *File integrity monitoring* capability documentation to Wazuh 5.0. ([#9961](https://github.com/wazuh/wazuh-documentation/pull/9961))
 - Updated the minimum required password length for Wazuh API users to 12 characters in the *Deploying with Kubernetes* documentation. ([#9941](https://github.com/wazuh/wazuh-documentation/pull/9941))
 - Updated the *Using Wazuh for GDPR compliance* documentation in *Regulatory compliance* to Wazuh 5.0. ([#9944](https://github.com/wazuh/wazuh-documentation/pull/9944))
+- Updated the *Wazuh indexer API reference*. ([#10016](https://github.com/wazuh/wazuh-documentation/pull/10016))
 - Updated the *Wazuh indexer API reference*. ([#10017](https://github.com/wazuh/wazuh-documentation/pull/10017))
 
 ### Removed
