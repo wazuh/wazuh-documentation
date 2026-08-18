@@ -5,7 +5,7 @@ paths:
         - Nodes stats API
       summary: Nodes stats
       description: |
-        Returns statistical information about nodes in the cluster. Use the `metric` path parameter to limit the response to a specific metric, such as `indexing_pressure` for shard indexing pressure statistics.
+        Returns statistical information about nodes in the cluster. Use the `metric` path parameter to limit the response to a specific metric.
       operationId: getNodesStats
       security:
         - basicAuth: []
@@ -35,9 +35,10 @@ paths:
               - jvm
               - os
               - process
+              - shard_indexing_pressure
               - thread_pool
               - transport
-          example: "indexing_pressure"
+          example: "shard_indexing_pressure"
         - $ref: '#/components/parameters/pretty'
       responses:
         '200':
