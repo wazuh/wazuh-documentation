@@ -7,6 +7,9 @@
 #
 # * is_latest_release: this variable must be set to False except for the
 #     latest release, where it must set to True.
+# * is_prerelease: set to True only on a branch that previews an upcoming
+#     release under a beta/RC URL folder; leave False everywhere else
+#     (including the latest release and all archived releases).
 # * version: short X.Y version
 # * release: long X.Y.z version
 # * apiURL: URL of the Wazuh API reference spec in the Wazih repository (public)
@@ -17,6 +20,7 @@
 # The short X.Y version
 version = '4.14'
 is_latest_release = True
+is_prerelease = False
 
 # The full version, including alpha/beta/rc tags
 # Important: use a valid branch (4.0) or, preferably, tag name (v4.0.0)
