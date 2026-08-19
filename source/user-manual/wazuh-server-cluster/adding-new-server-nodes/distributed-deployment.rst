@@ -456,6 +456,26 @@ This step installs the Wazuh manager on the node, which enables it to function a
 
             # apt-get -y install wazuh-manager
 
+   .. note::
+
+      The commands above install the latest version of the Wazuh manager. All nodes in a Wazuh server cluster must run the same version. If your existing node runs an earlier Wazuh server version, install that specific version instead, for example:
+
+      .. tabs::
+
+         .. group-tab:: YUM
+
+            .. code-block:: console
+
+               # yum -y install wazuh-manager-4.14.4-1
+
+         .. group-tab:: APT
+
+            .. code-block:: console
+
+               # apt-get -y install wazuh-manager=4.14.4-1
+
+      Alternatively, upgrade the existing Wazuh server to the latest version before adding the new node.
+
 #. Enable and start the Wazuh manager service.
 
    .. tabs::
