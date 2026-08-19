@@ -139,7 +139,6 @@ exclude_patterns = [
     'compliance/pci-dss/**',
     'compliance/hipaa/**',
     'compliance/nist/**',
-    'compliance/tsc/**',
     'proof-of-concept-guide/detect-unauthorized-processes-netcat.rst',
     'proof-of-concept-guide/poc-detect-trojan.rst',
     'proof-of-concept-guide/audit-commands-run-by-user.rst',
