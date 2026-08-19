@@ -72,6 +72,10 @@ Administer the core Wazuh infrastructure, including the user interface (dashboar
 - **[Data analysis](https://documentation.wazuh.com/current/user-manual/data-analysis/index.md)** Decode, normalize, enrich, and evaluate events to generate findings through the Security Analytics dashboard. Covers the normalization and detection engines, content management, spaces, integrations, decoders, KVDBs, enrichment, rules, detectors, and findings.
 - **[Wazuh CTI](https://documentation.wazuh.com/current/wazuh-cti/index.md)** Synchronize detection content, indicators of compromise, and vulnerability intelligence from the Wazuh Cyber Threat Intelligence platform through the Wazuh Content Manager. Covers how it works, content storage and categories, configuring synchronization, the Wazuh indexer API, subscription management, and troubleshooting.
 
+### API References
+- **[API Reference (HTML)](https://documentation.wazuh.com/current/user-manual/api/reference.html)** Detailed endpoint reference for the Wazuh Manager API.
+- **[Indexer API Reference (HTML)](https://documentation.wazuh.com/current/user-manual/indexer-api/reference.html)** Detailed endpoint reference for the Wazuh Indexer API.
+
 ### Agents
 Manage Wazuh agents across your environment.
 
