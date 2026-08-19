@@ -25,7 +25,7 @@ except ImportError:
     sys.exit()
 from requests.utils import requote_uri
 sys.path.append(os.path.abspath("_variables"))
-from settings import version, is_latest_release, release, api_tag, apiURL, apiURL_indexer, apiURL_server
+from settings import version, is_latest_release, is_prerelease, release, api_tag, apiURL, apiURL_indexer, apiURL_server
 from replacements import custom_replacements
 from empty_toc_nodes import emptyTocNodes
 from redirect_same_release import redirectSameRelease
@@ -900,6 +900,7 @@ html_context = {
     "compilation_ts": compilation_time,
     "empty_toc_nodes": emptyTocNodes,
     "redirectSameRelease": redirectSameRelease,
-    "is_latest_release": is_latest_release
+    "is_latest_release": is_latest_release,
+    "is_prerelease": is_prerelease
 }
 sphinx_tabs_nowarn = True

@@ -10,7 +10,7 @@
 import sys
 import os
 sys.path.append(os.path.abspath("_variables"))
-from settings import version, is_latest_release, release
+from settings import version, is_latest_release, is_prerelease, release
 
 
 custom_replacements = {
@@ -190,9 +190,6 @@ if is_latest_release:
     custom_replacements["|WAZUH_INDEXER_DEB_PKG_INSTALL|"] = ''
     custom_replacements["|WAZUH_MANAGER_DEB_PKG_INSTALL|"] = ''
     custom_replacements["|WAZUH_DASHBOARD_DEB_PKG_INSTALL|"] = ''
-    custom_replacements["|WAZUH_AGENT_RPM_PKG_INSTALL|"] = ''
-    custom_replacements["|WAZUH_AGENT_DEB_PKG_INSTALL|"] = ''
-    custom_replacements["|WAZUH_AGENT_ZYPP_PKG_INSTALL|"] = ''
     custom_replacements["|FILEBEAT_LATEST_APT_PKG_INSTALL|"] = ''
     custom_replacements["|FILEBEAT_LATEST_YUM_PKG_INSTALL|"] = ''
 else:
@@ -202,8 +199,14 @@ else:
     custom_replacements["|WAZUH_INDEXER_DEB_PKG_INSTALL|"] = '=' + custom_replacements["|WAZUH_CURRENT|"] + '-' + custom_replacements["|WAZUH_INDEXER_CURRENT_REV|"]
     custom_replacements["|WAZUH_MANAGER_DEB_PKG_INSTALL|"] = '=' + custom_replacements["|WAZUH_CURRENT|"] + '-' + custom_replacements["|WAZUH_MANAGER_CURRENT_REV|"]
     custom_replacements["|WAZUH_DASHBOARD_DEB_PKG_INSTALL|"] = '=' + custom_replacements["|WAZUH_CURRENT|"] + '-' + custom_replacements["|WAZUH_DASHBOARD_CURRENT_REV|"]
-    custom_replacements["|WAZUH_AGENT_RPM_PKG_INSTALL|"] = '-' + custom_replacements["|WAZUH_CURRENT|"] + '-' + custom_replacements["|WAZUH_MANAGER_CURRENT_REV|"]
-    custom_replacements["|WAZUH_AGENT_DEB_PKG_INSTALL|"] = '=' + custom_replacements["|WAZUH_CURRENT|"] + '-' + custom_replacements["|WAZUH_MANAGER_CURRENT_REV|"]
-    custom_replacements["|WAZUH_AGENT_ZYPP_PKG_INSTALL|"] = '-' + custom_replacements["|WAZUH_CURRENT|"] + '-' + '1'
     custom_replacements["|FILEBEAT_LATEST_APT_PKG_INSTALL|"] = '=' + custom_replacements["|FILEBEAT_LATEST_APT_PKG_INSTALL|"] + '-' + custom_replacements["|FILEBEAT_CURRENT_REV|"]
     custom_replacements["|FILEBEAT_LATEST_YUM_PKG_INSTALL|"] = '-' + custom_replacements["|FILEBEAT_LATEST_YUM_PKG_INSTALL|"] + '-' + custom_replacements["|FILEBEAT_CURRENT_REV|"]
+
+if is_latest_release or is_prerelease:
+    custom_replacements["|WAZUH_AGENT_RPM_PKG_INSTALL|"] = ''
+    custom_replacements["|WAZUH_AGENT_DEB_PKG_INSTALL|"] = ''
+    custom_replacements["|WAZUH_AGENT_ZYPP_PKG_INSTALL|"] = ''
+else:
+    custom_replacements["|WAZUH_AGENT_RPM_PKG_INSTALL|"] = '-' + custom_replacements["|WAZUH_CURRENT|"] + '-' + custom_replacements["|WAZUH_AGENT_CURRENT_REV|"]
+    custom_replacements["|WAZUH_AGENT_DEB_PKG_INSTALL|"] = '=' + custom_replacements["|WAZUH_CURRENT|"] + '-' + custom_replacements["|WAZUH_AGENT_CURRENT_REV|"]
+    custom_replacements["|WAZUH_AGENT_ZYPP_PKG_INSTALL|"] = '-' + custom_replacements["|WAZUH_CURRENT|"] + '-' + '1'
