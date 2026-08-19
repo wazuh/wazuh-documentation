@@ -1,12 +1,14 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Wazuh helps to meet the TSC additional criteria using a combination of several Wazuh modules.
+   :description: Wazuh helps meet the TSC additional criteria for availability and processing integrity using several Wazuh modules and capabilities.
 
-The additional criteria
-=======================
+TSC additional criteria
+========================
 
-The Trust Service Criteria include an additional set of criteria that complement the COSO principle. These criteria, defined within the introductory section of this document, outline metrics that aim to improve the entity’s internal control process and risk management. They are specific to availability, processing integrity, confidentiality, and privacy. The sections below show the application and use cases for some selected requirements.
+The Trust Service Criteria include an additional set of criteria that complement the COSO principle. These criteria, defined within the introductory section of this document, outline metrics that aim to improve the entity's internal control process and risk management. They focus on availability, processing integrity, confidentiality, and privacy. The section below shows the application and use cases for some selected requirements.
+
+Wazuh supports these criteria by collecting logs, monitoring file integrity, assessing configurations, detecting threats, assessing vulnerabilities, and enabling automated threat response.
 
 .. toctree::
    :maxdepth: 1
