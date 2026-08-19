@@ -153,7 +153,7 @@ jQuery(function($) {
 
       const link = document.querySelector('.link-latest');
       let targetURL = 'https://' + window.location.hostname + '/current';
-      if ( documentHistory.hasOwnProperty(latestVersion) ) {
+      if ( documentHistory.hasOwnProperty(latestVersion) && allCreatedPaths.includes(normalizeUrl(redirHistory[latestVersion])) ) {
         targetURL = targetURL + redirHistory[latestVersion];
       }
       if ( link ) {
