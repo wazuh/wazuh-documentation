@@ -366,17 +366,137 @@ paths:
   /{index}/_search:
     $ref: 'search_api.yml#/paths/~1{index}~1_search'
 
-  /_plugins/_security_analytics/detectors:
-    $ref: 'stats_api.yml#/paths/~1_plugins~1_security_analytics~1detectors'
-
-  /_plugins/_security_analytics/logtype:
-    $ref: 'logtype_api.yml#/paths/~1_plugins~1_security_analytics~1logtype'
-
   /_plugins/_security_analytics/logtype/_search:
     $ref: 'logtype_api.yml#/paths/~1_plugins~1_security_analytics~1logtype~1_search'
 
-  /_plugins/_security_analytics/logtype/{log_type_id}:
-    $ref: 'logtype_api.yml#/paths/~1_plugins~1_security_analytics~1logtype~1{log_type_id}'
+  /_nodes/{node_id}/stats/{metric}:
+    $ref: 'stats_api.yml#/paths/~1_nodes~1{node_id}~1stats~1{metric}'
+
+  /_plugins/_security_analytics/detectors:
+    $ref: 'security_analytics_api.yml#/paths/~1_plugins~1_security_analytics~1detectors'
+
+  /_plugins/_security_analytics/detectors/{detector_id}:
+    $ref: 'security_analytics_api.yml#/paths/~1_plugins~1_security_analytics~1detectors~1{detector_id}'
+
+  /_plugins/_security_analytics/detectors/_search:
+    $ref: 'security_analytics_api.yml#/paths/~1_plugins~1_security_analytics~1detectors~1_search'
+
+  /_plugins/_security_analytics/detectors/{detector_id}/_acknowledge/alerts:
+    $ref: 'security_analytics_api.yml#/paths/~1_plugins~1_security_analytics~1detectors~1{detector_id}~1_acknowledge~1alerts'
+
+  /_plugins/_security_analytics/alerts:
+    $ref: 'security_analytics_api.yml#/paths/~1_plugins~1_security_analytics~1alerts'
+
+  /_plugins/_security_analytics/findings/_search:
+    $ref: 'security_analytics_api.yml#/paths/~1_plugins~1_security_analytics~1findings~1_search'
+
+  /_plugins/_security_analytics/findings/_update:
+    $ref: 'security_analytics_api.yml#/paths/~1_plugins~1_security_analytics~1findings~1_update'
+
+  /_plugins/_security_analytics/findings/correlate:
+    $ref: 'security_analytics_api.yml#/paths/~1_plugins~1_security_analytics~1findings~1correlate'
+
+  /_plugins/_security_analytics/correlations:
+    $ref: 'security_analytics_api.yml#/paths/~1_plugins~1_security_analytics~1correlations'
+
+  /_plugins/_security_analytics/correlationAlerts:
+    $ref: 'security_analytics_api.yml#/paths/~1_plugins~1_security_analytics~1correlationAlerts'
+
+  /_plugins/_security_analytics/_acknowledge/correlationAlerts:
+    $ref: 'security_analytics_api.yml#/paths/~1_plugins~1_security_analytics~1_acknowledge~1correlationAlerts'
+
+  /_plugins/_security_analytics/rules/_search:
+    $ref: 'security_analytics_api.yml#/paths/~1_plugins~1_security_analytics~1rules~1_search'
+
+  /_plugins/_security_analytics/rules/validate:
+    $ref: 'security_analytics_api.yml#/paths/~1_plugins~1_security_analytics~1rules~1validate'
+
+  /_plugins/_security_analytics/rules/categories:
+    $ref: 'security_analytics_api.yml#/paths/~1_plugins~1_security_analytics~1rules~1categories'
+
+  /_plugins/_security_analytics/mappings:
+    $ref: 'security_analytics_api.yml#/paths/~1_plugins~1_security_analytics~1mappings'
+
+  /_plugins/_security_analytics/mappings/view:
+    $ref: 'security_analytics_api.yml#/paths/~1_plugins~1_security_analytics~1mappings~1view'
+
+  /_plugins/_security_analytics/correlation/rules:
+    $ref: 'security_analytics_api.yml#/paths/~1_plugins~1_security_analytics~1correlation~1rules'
+
+  /_plugins/_security_analytics/correlation/rules/{correlation_rule_id}:
+    $ref: 'security_analytics_api.yml#/paths/~1_plugins~1_security_analytics~1correlation~1rules~1{correlation_rule_id}'
+
+  /_plugins/_security_analytics/correlation/rules/_search:
+    $ref: 'security_analytics_api.yml#/paths/~1_plugins~1_security_analytics~1correlation~1rules~1_search'
+
+  /_plugins/_setup/settings:
+    $ref: 'setup_api.yml#/paths/~1_plugins~1_setup~1settings'
+
+  /_plugins/_setup/ai_assistant/settings:
+    $ref: 'setup_api.yml#/paths/~1_plugins~1_setup~1ai_assistant~1settings'
+
+  /_plugins/_setup/ai_assistant/providers:
+    $ref: 'setup_api.yml#/paths/~1_plugins~1_setup~1ai_assistant~1providers'
+
+  /_plugins/_setup/ai_assistant/providers/{id}:
+    $ref: 'setup_api.yml#/paths/~1_plugins~1_setup~1ai_assistant~1providers~1{id}'
+
+  /_plugins/_content_manager/subscription:
+    $ref: 'content_manager_api.yml#/paths/~1_plugins~1_content_manager~1subscription'
+
+  /_plugins/_content_manager/update:
+    $ref: 'content_manager_api.yml#/paths/~1_plugins~1_content_manager~1update'
+
+  /_plugins/_content_manager/version/check:
+    $ref: 'content_manager_api.yml#/paths/~1_plugins~1_content_manager~1version~1check'
+
+  /_plugins/_content_manager/kvdbs:
+    $ref: 'content_manager_api.yml#/paths/~1_plugins~1_content_manager~1kvdbs'
+
+  /_plugins/_content_manager/kvdbs/{id}:
+    $ref: 'content_manager_api.yml#/paths/~1_plugins~1_content_manager~1kvdbs~1{id}'
+
+  /_plugins/_content_manager/decoders:
+    $ref: 'content_manager_api.yml#/paths/~1_plugins~1_content_manager~1decoders'
+
+  /_plugins/_content_manager/decoders/{id}:
+    $ref: 'content_manager_api.yml#/paths/~1_plugins~1_content_manager~1decoders~1{id}'
+
+  /_plugins/_content_manager/filters:
+    $ref: 'content_manager_api.yml#/paths/~1_plugins~1_content_manager~1filters'
+
+  /_plugins/_content_manager/filters/{id}:
+    $ref: 'content_manager_api.yml#/paths/~1_plugins~1_content_manager~1filters~1{id}'
+
+  /_plugins/_content_manager/rules:
+    $ref: 'content_manager_api.yml#/paths/~1_plugins~1_content_manager~1rules'
+
+  /_plugins/_content_manager/rules/{id}:
+    $ref: 'content_manager_api.yml#/paths/~1_plugins~1_content_manager~1rules~1{id}'
+
+  /_plugins/_content_manager/integrations:
+    $ref: 'content_manager_api.yml#/paths/~1_plugins~1_content_manager~1integrations'
+
+  /_plugins/_content_manager/integrations/{id}:
+    $ref: 'content_manager_api.yml#/paths/~1_plugins~1_content_manager~1integrations~1{id}'
+
+  /_plugins/_content_manager/logtest:
+    $ref: 'content_manager_api.yml#/paths/~1_plugins~1_content_manager~1logtest'
+
+  /_plugins/_content_manager/logtest/normalization:
+    $ref: 'content_manager_api.yml#/paths/~1_plugins~1_content_manager~1logtest~1normalization'
+
+  /_plugins/_content_manager/logtest/detection:
+    $ref: 'content_manager_api.yml#/paths/~1_plugins~1_content_manager~1logtest~1detection'
+
+  /_plugins/_content_manager/promote:
+    $ref: 'content_manager_api.yml#/paths/~1_plugins~1_content_manager~1promote'
+
+  /_plugins/_content_manager/policy/{space}:
+    $ref: 'content_manager_api.yml#/paths/~1_plugins~1_content_manager~1policy~1{space}'
+
+  /_plugins/_content_manager/space/{space}:
+    $ref: 'content_manager_api.yml#/paths/~1_plugins~1_content_manager~1space~1{space}'
 
   /_tasks:
     $ref: 'tasks_api.yml#/paths/~1_tasks'
@@ -759,11 +879,52 @@ tags:
   - name: Search
     description: The Search API operation allows you to perform a search request to find data within your cluster.
   - name: Log type APIs
-    description: The log type APIs allow you to create a custom log type, search custom log types, update custom log types, and delete custom log types.
-  - name: Stats API
-    description: The Stats API uses the stats operation to track and monitor shard indexing backpressure.
+    description: The log type APIs allow you to search custom log types.
+  - name: Nodes stats API
+    description: The nodes stats API returns statistical information about nodes in the cluster, such as shard indexing pressure metrics.
   - name: Tasks
     description: Retrieves details about tasks that are currently running within the cluster.
   - name: Transforms API
     description: |
       The Transform API is a RESTful interface that enables users to create, manage, and execute transform jobs. These jobs allow you to generate summarized or aggregated views of your existing data, facilitating more efficient analysis and visualization. By defining specific transformations, you can restructure and condense large datasets into more insightful representations.
+  - name: Settings
+    description: Operations for managing Wazuh platform settings.
+  - name: AI Assistant
+    description: |
+      Operations for managing the AI assistant's providers, global settings and field policy. These are stored, along with the CTI access token, in the hidden system index `.wazuh-internal-state`, which is unreachable through ordinary index permissions; these endpoints are the only way to read or write that data.
+  - name: Subscription Management
+    description: Operations for managing CTI subscriptions and credentials.
+  - name: Content Updates
+    description: Operations for triggering content updates.
+  - name: Version Check
+    description: Check for available Wazuh version updates.
+  - name: KVDBs
+    description: Manage key-value databases used by content.
+  - name: Decoders
+    description: Manage decoders for parsing and normalization.
+  - name: Filters
+    description: Manage filters for event pre-processing and post-processing.
+  - name: Rules
+    description: Manage detection rules and analytics.
+  - name: Integrations
+    description: Manage integration metadata and related content.
+  - name: Logtest
+    description: Execute logtest against sample events and evaluate Sigma rules via Security Analytics.
+  - name: Promotion
+    description: Preview and promote content across spaces.
+  - name: Spaces
+    description: Manage user spaces and environments.
+  - name: Detectors
+    description: Manage Security Analytics detectors, which monitor indices and rules on a schedule and raise alerts through configurable triggers.
+  - name: Alerts
+    description: Retrieve and acknowledge alerts raised by Security Analytics detectors.
+  - name: Findings
+    description: Retrieve and update findings, which record when a detector's rules or threat-intel checks matched an event.
+  - name: Correlations
+    description: Discover and manage correlations between findings, and retrieve and acknowledge the alerts correlation rules raise.
+  - name: Correlation rules
+    description: Manage the rules that link findings across indices and categories occurring within a shared time window.
+  - name: Rules
+    description: Search and validate Security Analytics detection rules, and list the log-type categories they can target.
+  - name: Mappings
+    description: Manage the field-alias mappings that let Security Analytics rules and detectors interpret an index's raw fields.
