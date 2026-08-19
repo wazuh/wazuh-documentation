@@ -1,0 +1,548 @@
+paths:
+  /_plugins/_setup/settings:
+    put:
+      summary: Update Wazuh settings
+      description: |
+        Persists configuration settings to the `.wazuh-settings` index.
+        Currently supports the `engine.index_raw_events` boolean flag, which controls
+        whether the Engine indexes raw events into the `wazuh-events-raw-v5` data stream.
+      operationId: updateSettings
+      tags:
+        - Settings
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WazuhSettingsRequest"
+            examples:
+              enable_raw_events:
+                summary: Enable raw event indexing
+                value:
+                  engine:
+                    index_raw_events: true
+              disable_raw_events:
+                summary: Disable raw event indexing
+                value:
+                  engine:
+                    index_raw_events: false
+      responses:
+        "200":
+          description: OK - Settings updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestResponse"
+              examples:
+                success:
+                  summary: Settings updated
+                  value:
+                    message: "Settings updated successfully."
+                    status: 200
+        "400":
+          description: |
+            Bad Request - The request could not be processed due to invalid input.
+
+            Common causes:
+            - Empty or missing request body
+            - Malformed JSON
+            - Missing required field (`engine` or `engine.index_raw_events`)
+            - Field `engine.index_raw_events` is not a boolean
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestResponse"
+              examples:
+                invalid_body:
+                  summary: Invalid request body
+                  value:
+                    message: "Invalid request body."
+                    status: 400
+                missing_engine:
+                  summary: Missing engine field
+                  value:
+                    message: "Missing required field: 'engine'."
+                    status: 400
+                missing_index_raw_events:
+                  summary: Missing index_raw_events field
+                  value:
+                    message: "Missing required field: 'engine.index_raw_events'."
+                    status: 400
+                invalid_type:
+                  summary: Wrong type for index_raw_events
+                  value:
+                    message: "Field 'engine.index_raw_events' must be of type boolean."
+                    status: 400
+        "500":
+          description: |
+            Internal Server Error - The server encountered an unexpected error while persisting the settings.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestResponse"
+              examples:
+                internal_error:
+                  summary: Internal server error
+                  value:
+                    message: "Internal Server Error."
+                    status: 500
+
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+  /_plugins/_setup/ai_assistant/settings:
+    get:
+      summary: Read the AI assistant's settings and field policy
+      description: |
+        Reads the reserved settings document in `.wazuh-internal-state`. Providers are stored as separate 
+        documents; read them via `GET /ai_assistant/providers`.
+      operationId: getAiAssistantSettings
+      tags:
+        - AI Assistant
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AiAssistantSettingsResponse"
+              examples:
+                default:
+                  summary: Settings and field policy
+                  value:
+                    privacy_default_on: false
+                    privacy_default_per_provider: {}
+                    user_can_override: true
+                    field_policy:
+                      - field: wazuh.agent.name
+                        action: anonymize
+                        kind: HOST
+                      - field: wazuh.agent.host.ip
+                        action: anonymize
+                        kind: IP
+                      - field: wazuh.agent.id
+                        action: allow
+        "403":
+          description: Forbidden - The caller lacks the `plugin:wazuh/ai_assistant/settings/read` cluster permission.
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+    put:
+      summary: Upsert the AI assistant's settings and field policy
+      description: |
+        Persists the settings and `field_policy` to the reserved settings document in
+        `.wazuh-internal-state`. Any other key in the request body is ignored.
+      operationId: putAiAssistantSettings
+      tags:
+        - AI Assistant
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AiAssistantSettingsRequest"
+      responses:
+        "200":
+          description: OK - Settings updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestResponse"
+              examples:
+                success:
+                  summary: Settings updated
+                  value:
+                    message: "Settings updated."
+                    status: 200
+        "400":
+          description: Bad Request - Empty or malformed request body.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestResponse"
+        "403":
+          description: Forbidden - The caller lacks the `plugin:wazuh/ai_assistant/settings/write` cluster permission.
+
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+  /_plugins/_setup/ai_assistant/providers:
+    get:
+      summary: List every AI provider
+      description: |
+        Returns every provider document in `.wazuh-internal-state`.
+      operationId: listAiAssistantProviders
+      tags:
+        - AI Assistant
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AiAssistantProviderListResponse"
+              examples:
+                default:
+                  summary: Provider list
+                  value:
+                    providers:
+                      - _id: 8c11c90d-1ead-4901-a5f0-1bd6d0a931cb
+                        name: test-ai
+                        type: anthropic
+                        base_url: https://api.anthropic.com
+                        model: claude-opus-4-6
+                        api_key: "enc:v1:SC/RyOIBkdm+kGl"
+                        is_default: true
+        "403":
+          description: Forbidden - The caller lacks the `plugin:wazuh/ai_assistant/settings/read` cluster permission.
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+    post:
+      summary: Create an AI provider
+      description: |
+        Creates a new provider document. The body must include an `id`, which must be a UUID and
+        is used as the document id.
+      operationId: createAiAssistantProvider
+      tags:
+        - AI Assistant
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AiAssistantProviderCreateRequest"
+            examples:
+              default:
+                summary: Create with a client-supplied UUID
+                value:
+                  id: 8c11c90d-1ead-4901-a5f0-1bd6d0a931cb
+                  name: test-ai
+                  type: anthropic
+                  base_url: https://api.anthropic.com
+                  model: claude-opus-4-6
+                  api_key: "enc:v1:SC/RyOIBkdm+kGl"
+                  is_default: true
+      responses:
+        "200":
+          description: OK - Provider created.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AiAssistantProviderWriteResponse"
+              examples:
+                success:
+                  summary: Provider saved
+                  value:
+                    message: "Provider saved."
+                    status: 200
+                    id: 8c11c90d-1ead-4901-a5f0-1bd6d0a931cb
+        "400":
+          description: |
+            Bad Request - Empty/malformed request body, missing `id`, or a non-UUID `id`.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestResponse"
+              examples:
+                missing_id:
+                  summary: Missing id
+                  value:
+                    message: "Provider id is required."
+                    status: 400
+                invalid_id:
+                  summary: Non-UUID id
+                  value:
+                    message: "Provider id must be a valid UUID."
+                    status: 400
+        "403":
+          description: Forbidden - The caller lacks the `plugin:wazuh/ai_assistant/settings/write` cluster permission.
+
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+  /_plugins/_setup/ai_assistant/providers/{id}:
+    put:
+      summary: Update an AI provider by id
+      description: |
+        Creates or updates the provider document with the given id. The path segment is not
+        restricted to a UUID, but the reserved ids `wazuh-ai-assistant-settings` and `credentials`
+        are rejected.
+      operationId: putAiAssistantProvider
+      tags:
+        - AI Assistant
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AiAssistantProviderRequest"
+      responses:
+        "200":
+          description: OK - Provider saved.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AiAssistantProviderWriteResponse"
+        "400":
+          description: |
+            Bad Request - Empty/malformed request body, or the path `id` is one of the reserved
+            document ids (`wazuh-ai-assistant-settings`, `credentials`).
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestResponse"
+              examples:
+                reserved_id:
+                  summary: Reserved id
+                  value:
+                    message: "Provider id is reserved."
+                    status: 400
+        "403":
+          description: Forbidden - The caller lacks the `plugin:wazuh/ai_assistant/settings/write` cluster permission.
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+    delete:
+      summary: Delete an AI provider by id
+      description: |
+        Deletes the provider document with the given id. The reserved ids
+        `wazuh-ai-assistant-settings` and `credentials` are rejected rather than deleted.
+      operationId: deleteAiAssistantProvider
+      tags:
+        - AI Assistant
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK - Provider deleted.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AiAssistantProviderWriteResponse"
+              examples:
+                success:
+                  summary: Provider deleted
+                  value:
+                    message: "Provider deleted."
+                    status: 200
+                    id: 8c11c90d-1ead-4901-a5f0-1bd6d0a931cb
+        "400":
+          description: Bad Request - The id is one of the reserved document ids (`wazuh-ai-assistant-settings`, `credentials`).
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestResponse"
+              examples:
+                reserved_id:
+                  summary: Reserved id
+                  value:
+                    message: "Provider id is reserved."
+                    status: 400
+        "403":
+          description: Forbidden - The caller lacks the `plugin:wazuh/ai_assistant/settings/write` cluster permission.
+        "404":
+          description: Not Found - No provider exists with the given id.
+
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+components:
+  schemas:
+    WazuhSettingsRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - engine
+      properties:
+        engine:
+          $ref: "#/components/schemas/Engine"
+
+    Engine:
+      type: object
+      additionalProperties: false
+      required:
+        - index_raw_events
+      properties:
+        index_raw_events:
+          type: boolean
+          description: Whether the Engine indexes raw events into the wazuh-events-raw-v5 data stream.
+          example: true
+
+    RestResponse:
+      type: object
+      description: Standard response schema.
+      properties:
+        message:
+          type: string
+        status:
+          type: integer
+      required:
+        - message
+        - status
+
+    AiAssistantFieldPolicyEntry:
+      type: object
+      required:
+        - field
+        - action
+      properties:
+        field:
+          type: string
+          example: wazuh.agent.name
+        action:
+          type: string
+          enum:
+            - allow
+            - anonymize
+        kind:
+          type: string
+          description: Classifies what is being anonymized. Only present for `anonymize` entries.
+          example: HOST
+
+    AiAssistantProvider:
+      type: object
+      properties:
+        _id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+          example: anthropic
+        base_url:
+          type: string
+          format: uri
+        model:
+          type: string
+        api_key:
+          type: string
+        is_default:
+          type: boolean
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+          description: When this document was last written. Always server-stamped.
+
+    AiAssistantSettingsResponse:
+      type: object
+      properties:
+        privacy_default_on:
+          type: boolean
+        privacy_default_per_provider:
+          type: object
+          additionalProperties: true
+        user_can_override:
+          type: boolean
+        field_policy:
+          type: array
+          items:
+            $ref: "#/components/schemas/AiAssistantFieldPolicyEntry"
+
+    AiAssistantProviderListResponse:
+      type: object
+      properties:
+        providers:
+          type: array
+          items:
+            $ref: "#/components/schemas/AiAssistantProvider"
+
+    AiAssistantSettingsRequest:
+      type: object
+      description: |
+        Only these keys are persisted; anything else is ignored.
+      properties:
+        privacy_default_on:
+          type: boolean
+        privacy_default_per_provider:
+          type: object
+          additionalProperties: true
+        user_can_override:
+          type: boolean
+        field_policy:
+          type: array
+          items:
+            $ref: "#/components/schemas/AiAssistantFieldPolicyEntry"
+
+    AiAssistantProviderRequest:
+      type: object
+      description: Body for `PUT /ai_assistant/providers/{id}` — the path segment is the id.
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+          example: anthropic
+        base_url:
+          type: string
+          format: uri
+        model:
+          type: string
+        api_key:
+          type: string
+        is_default:
+          type: boolean
+        updated_at:
+          type: string
+          format: date-time
+          description: Ignored if sent — always overwritten with a server-stamped timestamp.
+
+    AiAssistantProviderCreateRequest:
+      type: object
+      description: Body for `POST /ai_assistant/providers`.
+      additionalProperties: false
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: |
+            The document id the provider is created with. Must be a UUID. Never persisted as a
+            provider field.
+        name:
+          type: string
+        type:
+          type: string
+          example: anthropic
+        base_url:
+          type: string
+          format: uri
+        model:
+          type: string
+        api_key:
+          type: string
+        is_default:
+          type: boolean
+        updated_at:
+          type: string
+          format: date-time
+          description: Ignored if sent — always overwritten with a server-stamped timestamp.
+
+    AiAssistantProviderWriteResponse:
+      type: object
+      description: Response for a provider create, update or delete.
+      properties:
+        message:
+          type: string
+        status:
+          type: integer
+        id:
+          type: string
+          description: Id of the affected provider document.
+      required:
+        - message
+        - status
+
