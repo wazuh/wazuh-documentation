@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 
 ## [v4.14.9]
 
-- Support for Wazuh 4.14.9
+- Added the `agent.tcp_keepidle`, `agent.tcp_keepintvl`, `agent.tcp_keepcnt`, and `agent.send_timeout` internal options to the *Internal configuration* reference documentation. ([#10029](https://github.com/wazuh/wazuh-documentation/pull/10029))
 
 ## [v4.14.8]
 
