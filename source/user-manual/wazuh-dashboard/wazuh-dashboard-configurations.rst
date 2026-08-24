@@ -354,6 +354,8 @@ If the **Alerts** functionality is available, the healthcheck mechanism attempts
 
 You can review the created monitors under **Explore** → **Alerting** → **Monitors**. For more information about monitor configuration, see `OpenSearch Alerting Monitors Documentation <https://docs.opensearch.org/latest/observing-your-data/alerting/monitors/>`__.
 
+.. _notifications_and_alerting_configuration:
+
 Notifications and alerting configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

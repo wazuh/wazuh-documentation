@@ -16,8 +16,8 @@ Learn more about achieving compliance with Wazuh in the sections below:
    :maxdepth: 1
 
    gdpr/index
+   tsc/index
 ..
    pci-dss/index
    hipaa/index
    nist/index
-   tsc/index
