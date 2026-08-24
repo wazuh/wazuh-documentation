@@ -1,38 +1,60 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Wazuh helps meet the TSC common criteria CC8.1 requirement by providing several modules such as SCA, vulnerability detection, and active response.
+   :description: Wazuh helps meet the TSC common criteria CC8.1 requirement by providing capabilities for configuration assessment, vulnerability detection, IT hygiene, and file integrity monitoring.
 
 Common criteria 8.1
-===================
+=====================
 
-The TSC *common criteria CC8.1* provides a comprehensive and well-recognized technique for evaluating the security of IT products and systems. *CC 8.1* defines a set of security requirements and evaluation procedures for IT products, such as software, hardware, and systems, that are intended to be used in a security context. The objective of *CC 8.1* is to provide a standardized, objective, and repeatable evaluation process for IT products and to facilitate the development of secure IT products and systems. It states that: *“The entity authorizes, designs, develops or acquires, configures, documents, tests, approves, and implements changes to infrastructure, data, software, and procedures to meet its objectives”*. The end goal of the *common criteria 8.1* is to provide assurance to users of IT products that the product has been independently evaluated and meets a high level of security.
+The TSC **Common Criterion CC8.1** addresses change management. It states that: “*The entity authorizes, designs, develops or acquires, configures, documents, tests, approves, and implements changes to infrastructure, data, software, and procedures to meet its objectives.*” To support CC8.1, an organization should maintain defined change-management processes and evidence showing that relevant changes were reviewed, tested, approved, implemented, and monitored in accordance with those processes.
 
-The following use case shows how Wazuh can assist in meeting this objective.
+Wazuh helps meet the **TSC common criteria CC8.1** requirement by providing several capabilities for security configuration assessment, vulnerability detection, IT hygiene, and file integrity monitoring.
 
-Use case: Monitoring packages installed on an Ubuntu endpoint
--------------------------------------------------------------
+Use case: Monitoring installed packages using the IT Hygiene capability
+----------------------------------------------------------------------------
 
-Wazuh helps meet the *TSC common criteria CC8.1* requirement by providing several modules such as SCA, vulnerability detection, and active response. This use case shows how Wazuh can be used to view installed packages on an Ubuntu 22.04 endpoint.
+This use case shows how Wazuh monitors system inventory on a Windows 11 endpoint and detects a vulnerable 7-Zip package.
 
-To carry out this use case, set up a Wazuh server and an Ubuntu 22.04 endpoint with the Wazuh agent installed and connected to the Wazuh server.
+Windows endpoint
+^^^^^^^^^^^^^^^^^
 
-#. Upgrade the Ubuntu endpoint to trigger the installation of packages:
+#. Download and install 7-Zip. We used the `7z1900-x64.exe <https://www.7-zip.org/a/7z1900-x64.exe>`__ installer for this use case.
 
-   .. code-block:: console
+Wazuh dashboard
+^^^^^^^^^^^^^^^^
 
-      $ sudo apt upgrade
+#. Navigate to **IT Hygiene** > **Software** > **Packages**.
 
-#. Select **Threat Hunting** from your Wazuh dashboard.
+   .. thumbnail:: /images/compliance/tsc/common-criteria/it-hygiene-software-packages.png
+      :title: IT Hygiene - Software - Packages
+      :alt: IT Hygiene - Software - Packages
+      :align: center
+      :width: 80%
 
-#. Ensure the Ubuntu endpoint is selected. 
+#. Switch on Advanced filters at the right of the filter bar, then enter the following query: ``package.name: "7-Zip 19.00 (x64)"``.
 
-#. Filter for rule ID ``2902``.
+   .. thumbnail:: /images/compliance/tsc/common-criteria/it-hygiene-packages-7zip-filter.png
+      :title: IT Hygiene packages filtered by 7-Zip
+      :alt: IT Hygiene packages filtered by 7-Zip
+      :align: center
+      :width: 80%
 
-.. thumbnail:: /images/compliance/tsc/common-criteria/ruleid-2902-filtering.gif
-   :title: Rule ID 2902 filtering
-   :alt: Rule ID 2902 filtering
-   :align: center
-   :width: 80%
+   The above inventory shows that the package is installed on the monitored Windows endpoint.
 
-Wazuh contributes to the CC8.1 requirement by maintaining an accurate and up-to-date record of the software installed on each monitored agent. This information is vital for understanding the overall system configuration, tracking licenses, and ensuring compliance. Wazuh also integrates with vulnerability assessment tools and databases to identify known vulnerabilities associated with specific software packages. By cross-referencing the package inventory with vulnerability information, Wazuh highlights potential security weaknesses. This information allows organizations to prioritize patching or mitigating vulnerable packages, reducing the risk of exploitation.
+#. Navigate to **Vulnerability Detection** on your Wazuh **Overview** dashboard.
+
+   .. thumbnail:: /images/compliance/tsc/common-criteria/overview-vulnerability-detection-card-windows.png
+      :title: Wazuh Overview dashboard - Vulnerability Detection
+      :alt: Wazuh Overview dashboard - Vulnerability Detection
+      :align: center
+      :width: 80%
+
+#. Navigate to the **Inventory** section of the **Vulnerability Detection** dashboard and filter using the following parameters: ``package.name: 7-Zip 19.00 (x64)``
+
+   .. thumbnail:: /images/compliance/tsc/common-criteria/vulnerability-detection-inventory-7zip-filter.png
+      :title: Vulnerability Detection inventory filtered by 7-Zip
+      :alt: Vulnerability Detection inventory filtered by 7-Zip
+      :align: center
+      :width: 80%
+
+Wazuh contributes to the **CC8.1** requirement by maintaining an accurate, up-to-date record of the software installed on each monitored agent, along with the vulnerabilities it contains. This information is vital for understanding the overall system configuration, tracking licenses, and ensuring compliance. This information allows organizations to prioritize patching or mitigating vulnerable packages, reducing the risk of exploitation.

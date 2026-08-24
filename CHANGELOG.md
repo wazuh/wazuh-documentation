@@ -21,7 +21,7 @@ All notable changes to this project will be documented in this file.
 - Added ``integrity_interval`` to the SCA and the syscollector ``synchronization`` configuration. ([#9164](https://github.com/wazuh/wazuh-documentation/pull/9164))
 - Added *Upgrading to Wazuh 5.x* sub-section to the Upgrade guide. ([#9435](https://github.com/wazuh/wazuh-documentation/pull/9435))
 - Added the *Data analysis* documentation to the *User manual*. ([#9743](https://github.com/wazuh/wazuh-documentation/pull/9743))
-- Added the *Transitioning from 4.x to 5.x* documentation. ([#9772](https://github.com/wazuh/wazuh-documentation/pull/9772)) ([#9792](https://github.com/wazuh/wazuh-documentation/pull/9792)) ([#9817](https://github.com/wazuh/wazuh-documentation/pull/9817)) ([#9873](https://github.com/wazuh/wazuh-documentation/pull/9873))
+- Added the *Migration guide* documentation. ([#9772](https://github.com/wazuh/wazuh-documentation/pull/9772)) ([#9792](https://github.com/wazuh/wazuh-documentation/pull/9792)) ([#9817](https://github.com/wazuh/wazuh-documentation/pull/9817)) ([#9873](https://github.com/wazuh/wazuh-documentation/pull/9873)) ([#10028](https://github.com/wazuh/wazuh-documentation/pull/10028))
 - Added the *Security configuration assessment* use case to the *Proof of concept guide*. ([#9777](https://github.com/wazuh/wazuh-documentation/pull/9777))
 - Added the *Network IDS integration* use case to the *Proof of concept guide*. ([#9831](https://github.com/wazuh/wazuh-documentation/pull/9831))
 - Added the *Detecting a Cross-Site Scripting (XSS) attack* use case to the *Proof of concept guide*. ([#9916](https://github.com/wazuh/wazuh-documentation/pull/9916))
@@ -52,7 +52,8 @@ All notable changes to this project will be documented in this file.
 - Updated the *File integrity monitoring* capability documentation to Wazuh 5.0. ([#9961](https://github.com/wazuh/wazuh-documentation/pull/9961))
 - Updated the minimum required password length for Wazuh API users to 12 characters in the *Deploying with Kubernetes* documentation. ([#9941](https://github.com/wazuh/wazuh-documentation/pull/9941))
 - Updated the *Using Wazuh for GDPR compliance* documentation in *Regulatory compliance* to Wazuh 5.0. ([#9944](https://github.com/wazuh/wazuh-documentation/pull/9944))
-- Updated the *Wazuh indexer API reference*. ([#10015](https://github.com/wazuh/wazuh-documentation/pull/10015)) ([#10016](https://github.com/wazuh/wazuh-documentation/pull/10016)) ([#10017](https://github.com/wazuh/wazuh-documentation/pull/10017))
+- Updated the *Wazuh indexer API reference* and removed the non-tracked version number from its page header. ([#10015](https://github.com/wazuh/wazuh-documentation/pull/10015)) ([#10016](https://github.com/wazuh/wazuh-documentation/pull/10016)) ([#10017](https://github.com/wazuh/wazuh-documentation/pull/10017)) ([#10025](https://github.com/wazuh/wazuh-documentation/pull/10025))
+- Updated the *Using Wazuh for TSC compliance* documentation in *Regulatory compliance* to Wazuh 5.0. ([#10027](https://github.com/wazuh/wazuh-documentation/pull/10027))
 
 ### Removed
 
@@ -71,7 +72,7 @@ All notable changes to this project will be documented in this file.
 
 ## [v4.14.9]
 
-- Support for Wazuh 4.14.9
+- Added the `agent.tcp_keepidle`, `agent.tcp_keepintvl`, `agent.tcp_keepcnt`, and `agent.send_timeout` internal options to the *Internal configuration* reference documentation. ([#10029](https://github.com/wazuh/wazuh-documentation/pull/10029))
 
 ## [v4.14.8]
 
