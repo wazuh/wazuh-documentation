@@ -140,6 +140,8 @@ Using the Wazuh manager API to create and manage groups programmatically is effe
          "error": 0
       }
 
+.. _assigning_agents_to_a_group:
+
 Assigning agents to a group
 ---------------------------
 
