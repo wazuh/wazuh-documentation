@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Wazuh dashboard configurations for security analytics, active response, notifications, multi-tenancy, custom dashboards, global state data, and WQL.
+   :description: Wazuh dashboard configurations for security analytics, active response, notifications, the AI Assistant, multi-tenancy, custom dashboards, global state data, and WQL.
 
 Wazuh dashboard configurations
 ==============================
@@ -266,29 +266,50 @@ Active Response
 
 The **Active Response** section on the Wazuh dashboard allows users to configure automated incident response actions triggered by security events detected by the Wazuh Engine. When specific rules are triggered, the Wazuh manager can execute scripts on monitored endpoints via the Wazuh agents to block IPs, disable accounts, or perform other security-relevant actions.
 
-Active response is implemented through ``wazuh-execd`` daemon, which receives commands from the Wazuh manager and executes response scripts on the Wazuh agent. It also manages the response lifecycle, including timeouts for stateful responses.
+Active response is implemented through the ``wazuh-execd`` daemon, which receives commands from the Wazuh manager and executes response scripts on the Wazuh agent. It also manages the response lifecycle, including timeouts for stateful responses.
 
-To manage and configure the active response, click ☰ to open the menu and navigate to **Explore** > **Active Response**.
+Perform the following actions to create an active response.
 
-.. thumbnail:: /images/wazuh-dashboard/configurations/active-response.png
-   :align: center
-   :width: 80%
-   :title: Active Response
-   :alt: Active Response
+#. Click **☰** to open the menu and navigate to **Explore** > **Active Response**. Then click on **Create active response**.
 
-Click on the **Create active response** button to create a new active response.
+   .. thumbnail:: /images/wazuh-dashboard/configurations/active-response.png
+      :align: center
+      :width: 80%
+      :title: Active Response
+      :alt: Active Response
 
-.. thumbnail:: /images/wazuh-dashboard/configurations/create-active-response.png
-   :align: center
-   :width: 80%
-   :title: Create active response
-   :alt: Create active response
+   .. thumbnail:: /images/wazuh-dashboard/configurations/create-active-response.png
+      :align: center
+      :width: 80%
+      :title: Create active response
+      :alt: Create active response
 
-.. thumbnail:: /images/wazuh-dashboard/configurations/create-active-response2.png
-   :align: center
-   :width: 80%
-   :title: Create active response
-   :alt: Create active response
+#. Fill in the configuration form with the following details:
+
+   -  **Name**: A name for this active response, used later when attaching it to a trigger action.
+   -  **Description**: An optional field that describes the purpose of the active response.
+   -  **Executable**: The active response script or executable that runs when the response fires. You don't need to specify the file name extension unless you have multiple scripts sharing the same name.
+   -  **Extra arguments**: An optional field where you can specify extra arguments required by the active response script.
+   -  **Location**: Specifies where the active response command executes. The available options are:
+
+      -  **All**: The active response executes on every agent. Use this option with caution, since an incorrect configuration can affect your whole environment.
+      -  **Local**: The active response executes on the agent that generated the alert.
+      -  **Defined agent**: It runs the script on a predefined agent, regardless of where the event occurred. Use the **Agent ID** field to specify the Wazuh agent ID of the Wazuh agent that must run the script.
+
+   -  **Type**: Specifies the type of active response that is being created. The available options are:
+
+      -  **Stateful**: A stateful active response reverts or stops its action after a specified period of time.
+      -  **Stateless**: This type of active response executes once on the specified endpoint(s) and does not revert to the previous state.
+
+   -  **Stateful timeout**: For stateful active responses, it specifies how long (in seconds) the action lasts before it's automatically reverted.
+
+   .. thumbnail:: /images/wazuh-dashboard/configurations/create-active-response2.png
+      :align: center
+      :width: 80%
+      :title: Create active response
+      :alt: Create active response
+
+#. Click **Create** to save the configuration.
 
 Notifications and Alerts
 ------------------------
@@ -359,7 +380,7 @@ You can review the created monitors under **Explore** → **Alerting** → **Mon
 Notifications and alerting configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The Notifications and Alerting configuration supports Slack, PagerDuty, Jira, and Shuffle by default. Follow these steps to configure notifications and alerting for supported channels.
+The Notifications and Alerting configuration supports Slack, PagerDuty, Jira, Shuffle, and Email by default. Follow these steps to configure notifications and alerting for supported channels.
 
 .. contents::
    :local:
@@ -571,6 +592,280 @@ This notification channel sends alerts to Shuffle via the Shuffle webhook URL. C
       :alt: Add notification action
 
 #. Open **Dashboard management** > **Health Check** and run the checks. Once channels and monitors are enabled, the related checks should pass to a healthy state.
+
+Email
+~~~~~
+
+**Prerequisites**
+
+This notification channel sends alerts via a configured SMTP sender to the recipient email address based on the configured alert monitor. To configure email alerting, follow the steps below.
+
+**Configure the SMTP sender**
+
+The SMTP sender defines the mail server that sends the notifications.
+
+#. Click the menu icon, then navigate to **Explore** > **Notifications**.
+#. Click **Email senders** > **Create SMTP sender**.
+#. Type a unique name in **Sender name**.
+#. Type the address that sends the notifications in **Email address**.
+#. Type the hostname or IP address of your SMTP server in **Host**.
+#. Type the port of your SMTP server in **Port**. The default value is ``465``.
+#. Select an **Encryption method**.
+#. Click **Create**.
+
+   .. thumbnail:: /images/wazuh-dashboard/configurations/email-smtp-sender.jpg
+      :align: center
+      :width: 80%
+      :title: Configure the SMTP sender
+      :alt: Configure the SMTP sender
+
+.. note::
+
+   SSL/TLS and STARTTLS require you to add the sender account credentials to the Wazuh indexer keystore.
+
+The **Encryption method** field offers three options:
+
++----------------+-----------------------------------------------------------------------------+
+| Option         | Description                                                                 |
++================+=============================================================================+
+| **SSL/TLS**    | Encrypts the connection to the SMTP server. Use this option when your       |
+|                | server supports implicit TLS, usually on port ``465``.                      |
++----------------+-----------------------------------------------------------------------------+
+| **STARTTLS**   | Upgrades a plain connection to an encrypted one. Use this option when your  |
+|                | server supports STARTTLS, usually on port ``587``.                          |
++----------------+-----------------------------------------------------------------------------+
+| **None**       | Sends mail without encryption. Use this option only in a test environment,  |
+|                | because it does not protect the credentials or the message content.         |
++----------------+-----------------------------------------------------------------------------+
+
+
+**Configure the recipient group**
+
+The recipient group defines who receives the email notifications.
+
+#. Click the menu icon, then navigate to **Explore** > **Notifications**.
+#. Click **Email recipient groups** > **Create recipient group**.
+#. Type a name for the group in **Name**.
+#. Describe the purpose of the group in **Description**. This field is optional.
+#. Type one or more email addresses in **Emails**. For this use case, add the address of your data protection officer.
+#. Click **Create**.
+
+   .. thumbnail:: /images/wazuh-dashboard/configurations/email-recipient-group.jpg
+      :align: center
+      :width: 80%
+      :title: Configure the recipient group
+      :alt: Configure the recipient group
+
+.. note::
+
+   You can also add recipient addresses directly to the channel. A recipient group is useful when you send notifications to the same addresses from more than one channel.
+
+**Configure the email channel**
+
+The email channel binds the sender and the recipients. The alerting monitor sends its notifications to this channel.
+
+#. Click the menu icon, then navigate to **Explore** > **Notifications**.
+#. Click **Channels** > **Create channel**.
+#. Type a name for the channel in **Name**.
+#. Describe the purpose of the channel in **Description**. This field is optional.
+#. Select **Email** in **Channel type**. You cannot change the channel type after you create the channel.
+#. Select **SMTP sender** in **Sender type**.
+#. Select the sender you created in **SMTP sender**.
+#. Select the recipient group you created in **Default recipients**. You can also type an email address directly.
+#. Click **Send test message** to confirm the configuration. A success message confirms that the channel works.
+#. Click **Create**.
+
+   .. thumbnail:: /images/wazuh-dashboard/configurations/email-channel.jpg
+      :align: center
+      :width: 80%
+      :title: Configure the email channel
+      :alt: Configure the email channel
+
+The **Sender type** field offers two options:
+
++------------------+-----------------------------------------------------------------------------+
+| Option           | Description                                                                 |
++==================+=============================================================================+
+| **SMTP sender**  | Uses your own SMTP server. Use this option in most environments.            |
++------------------+-----------------------------------------------------------------------------+
+| **SES sender**   | Uses Amazon Simple Email Service (SES). Use this option when you run Wazuh  |
+|                  | on Amazon Web Services (AWS) and send mail through SES. An SES sender needs |
+|                  | an AWS region and a role Amazon Resource Name (ARN) instead of a host and   |
+|                  | port.                                                                       |
++------------------+-----------------------------------------------------------------------------+
+
+
+**Create the alerting monitor**
+
+The query Wazuh data and execute actions when specific conditions are met, including sending alerts to the configured notification channels. For the configuration below, we create an alerting monitor that watches your findings for failed authentication attempts. When the monitor detects a match, it triggers the action that sends the email.
+
+#. Click the menu icon, then navigate to **Explore** > **Alerting**.
+#. Switch to the **Monitors** tab and click **Create monitor**.
+#. Type a name for the monitor in **Monitor name**.
+#. Select **Per document monitor** in **Monitor type**.
+#. Select **Visual editor** in **Monitor defining method**.
+#. Set **Frequency** to **By interval** and set **Run every** to ``1`` minute under **Schedule**.
+#. Under **Select data**, select ``wazuh-findings-v5-system-activity`` in **Index**.
+#. Under **Query**, in **Query name**, type a name.
+#. Set the query condition. In **Field**, select ``event.action``. In the operator list, select **is**. In the value field, type ``authentication-failure``.
+
+   .. note::
+
+      You can also match the finding by its rule identifier. In **Field**, select ``wazuh.rule.sigma_id`` and type the rule identifier. The ``event.action`` field is more stable, because it does not change when the rule identifier changes.
+
+#. Click **Add trigger** under **Triggers**.
+#. Type a name in **Trigger name**.
+#. Select a level in **Severity level**. Level ``1`` is the highest.
+#. Under **Trigger conditions**, in **Specify queries or tags**, select the name of the query.
+#. Click **Add notification** under **Actions**.
+#. Type a name in **Action name**.
+#. Select the email channel you created in **Channel**.
+#. Type a subject such as "Wazuh alert - failed authentication" in **Message subject**.
+#. In **Message**, type the notification body. You can embed variables with Mustache templates.
+
+   .. code-block:: none
+
+      A failed authentication attempt was detected on a monitored endpoint.
+
+      Trigger: {{ctx.trigger.name}}
+      Severity: {{ctx.trigger.severity}}
+      Monitor: {{ctx.monitor.name}}
+      Detected between {{ctx.periodStart}} and {{ctx.periodEnd}} UTC.
+
+      Review the finding in the Wazuh dashboard for the source IP, user, and host details.
+
+#. Select **Per alert** in **Perform action**.
+#. Click **Send test message** to confirm the action. A test email arrives at the recipient address.
+#. Click **Create**.
+
+   .. thumbnail:: /images/wazuh-dashboard/configurations/email-alerting-monitor.gif
+      :align: center
+      :width: 80%
+      :title: Create the alerting monitor
+      :alt: Create the alerting monitor
+
+The **Monitor type** field offers these options:
+
++----------------------------+----------------------------------------------------------------------+
+| Option                     | Description                                                          |
++============================+======================================================================+
+| **Per document monitor**   | Generates an alert for each document that matches the query. Use     |
+|                            | this option to alert on each failed authentication finding.          |
++----------------------------+----------------------------------------------------------------------+
+| **Per query monitor**      | Runs a query and generates an alert when the results match the       |
+|                            | trigger criteria. Use this option to alert when failed               |
+|                            | authentications exceed a threshold in a time window, such as a brute |
+|                            | force attempt.                                                       |
++----------------------------+----------------------------------------------------------------------+
+
+
+The **Perform action** field controls how often Wazuh sends the notification:
+
++---------------------+-----------------------------------------------------------------------------+
+| Option              | Description                                                                 |
++=====================+=============================================================================+
+| **Per alert**       | Sends one email for each matching finding. Use this option to notify on     |
+|                     | every failed authentication.                                                |
++---------------------+-----------------------------------------------------------------------------+
+| **Per execution**   | Sends one email for each monitor run, regardless of how many findings       |
+|                     | match. Use this option to receive a single summary notification for each    |
+|                     | interval.                                                                   |
++---------------------+-----------------------------------------------------------------------------+
+
+
+.. note::
+
+   On a busy endpoint, the **Per alert** option can generate frequent emails. To reduce the volume, use a **Per query monitor** with a threshold instead.
+
+.. note::
+
+   The **Monitor defining method** offers two options. The **Visual editor** lets you build the query with fields and values. The **Extraction query editor** lets you write the query in raw query syntax. Use the extraction query editor for conditions that the visual editor cannot express.
+
+.. thumbnail:: /images/wazuh-dashboard/configurations/email-sample-alert.jpg
+   :align: center
+   :width: 80%
+   :title: Sample email alert notification
+   :alt: Sample email alert notification
+
+The email identifies the trigger, the severity, the monitor, and the detection window. To view more details, such as the source IP address, the recipient opens the finding on the Wazuh dashboard.
+
+.. thumbnail:: /images/wazuh-dashboard/configurations/email-alert-finding.jpg
+   :align: center
+   :width: 80%
+   :title: Email notification dashboard findings
+   :alt: Email notification dashboard findings
+
+AI Assistant
+------------
+
+The Wazuh AI Assistant provides a conversational interface for exploring security data using natural language from the Wazuh dashboard. Analysts can ask questions about vulnerabilities, security findings, and agent activity. The AI Assistant provides written responses and structured results that link to Discover for further investigation. Conversations are saved, allowing analysts to revisit previous queries and continue their investigations.
+
+The AI Assistant supports multiple model providers. You can configure the Wazuh AI Assistant brain, Anthropic, or an OpenAI-compatible service according to your requirements. You can also configure field policies to anonymize or exclude specific finding fields before data is sent to the configured provider. Privacy mode can be enforced by default across the cluster or controlled by individual users for each conversation.
+
+Perform the following actions to configure the AI Assistant.
+
+#. Click **☰** to open the menu and navigate to **Explore** > **AI Assistant**. Under the **Settings** tab, click on **Add a provider** to set up an AI Assistant provider.
+
+   .. thumbnail:: /images/wazuh-dashboard/configurations/ai-assistant-add-provider.png
+      :align: center
+      :width: 80%
+      :title: Add an AI Assistant provider
+      :alt: Add an AI Assistant provider
+
+#. Fill in the configuration form with the following details:
+
+   -  **Name**: A name for the provider.
+   -  **Provider type**: Select a provider type The available options are:
+
+      -  OpenAI-compatible (OpenAI, Gemini, Ollama and LM studios)
+      -  Anthropic
+      -  Wazuh AI Assistant Brain
+
+   -  **Endpoint URL**: Provide the endpoint URL for the AI Assistant provider
+   -  **API Key** - Provide the API key for the AI Assistant provider.
+
+   .. thumbnail:: /images/wazuh-dashboard/configurations/ai-assistant-provider-form.png
+      :align: center
+      :width: 80%
+      :title: Configure the AI Assistant provider
+      :alt: Configure the AI Assistant provider
+
+#. Click on **Save** to add the AI Assistant provider.
+
+   .. thumbnail:: /images/wazuh-dashboard/configurations/ai-assistant-save-provider.png
+      :align: center
+      :width: 80%
+      :title: Save the AI Assistant provider
+      :alt: Save the AI Assistant provider
+
+#. Configure the privacy settings to control how security data is handled before it is sent to the configured AI provider:
+
+   -  **Enable privacy mode by default**: Enables privacy mode by default for AI Assistant conversations. When enabled, configured fields containing sensitive information are anonymized or excluded before data is sent to the AI provider.
+   -  **Allow users to override privacy mode from the chat page**: Allows users to enable or disable privacy mode for individual conversations from the AI Assistant chat page. Disable this option to enforce the default privacy mode setting for all users.
+
+   .. thumbnail:: /images/wazuh-dashboard/configurations/ai-assistant-privacy-settings.png
+      :align: center
+      :width: 80%
+      :title: Configure the AI Assistant privacy settings
+      :alt: Configure the AI Assistant privacy settings
+
+#. Click on **Save privacy settings** to save the privacy configuration.
+
+#. Configure the conversation history settings to control how long saved AI Assistant conversations are retained. Set the value to ``0`` to retain saved conversations indefinitely. Click **Save conversation history settings** to apply the configuration.
+
+   .. thumbnail:: /images/wazuh-dashboard/configurations/ai-assistant-conversation-history.png
+      :align: center
+      :width: 80%
+      :title: Configure the AI Assistant conversation history
+      :alt: Configure the AI Assistant conversation history
+
+In the **Chat** tab, analysts can ask questions about vulnerabilities, security findings, and agent activity using natural language. In the example below, we queried the AI Assistant to identify disconnected Wazuh agents. The AI Assistant summarizes the response and displays the matching agent information in a structured results table for further investigation.
+
+.. thumbnail:: /images/wazuh-dashboard/configurations/ai-assistant-chat.png
+   :align: center
+   :width: 80%
+   :title: AI Assistant chat
+   :alt: AI Assistant chat
 
 Multi-tenancy
 -------------
