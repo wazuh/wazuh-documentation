@@ -141,6 +141,11 @@ redirections.push(
   },
   {
     'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/user-manual/agent/agent-management/listing/listing.html',
+    '5.0': '/user-manual/agent/agent-management/list-agents.html#list-agents-using-the-wazuh-manager-api',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
     '4.14': '/user-manual/agent/agent-management/remove-agents/index.html',
     '5.0': '/user-manual/agent/agent-management/remove-agents.html',
   },
