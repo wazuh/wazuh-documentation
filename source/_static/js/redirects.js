@@ -210,7 +210,7 @@ redirections.push(
     '5.0': '/user-manual/capabilities/command-monitoring/configuration.html#command-monitoring-configuration-example-wazuh-dashboard',
   },
   {
-    'target': ['4.14=>5.0'],
+    'target': ['4.14=>5.0', '5.0=>4.14'],
     '4.14': '/user-manual/capabilities/log-data-collection/multiple-socket-outputs.html',
     '5.0': '/user-manual/capabilities/log-data-collection/configuring-log-collection/monitoring-log-files.html#configuring-sockets',
   },
