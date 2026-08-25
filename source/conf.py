@@ -112,7 +112,7 @@ exclude_patterns = [
     'user-manual/api/rbac/**',
     'user-manual/capabilities/active-response/**',
     'user-manual/capabilities/agentless-monitoring/**',
-    'user-manual/capabilities/log-data-collection/**',
+    'user-manual/capabilities/log-data-collection/journald.rst',
     'user-manual/capabilities/malware-detection/**',
     'user-manual/capabilities/system-calls-monitoring/**',
     'user-manual/indexer-api/index.rst',
