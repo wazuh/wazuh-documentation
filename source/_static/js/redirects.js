@@ -109,6 +109,9 @@ newUrls['5.0'] = [
   '/user-manual/data-analysis/detection-workflow.html',
   '/user-manual/capabilities/command-monitoring/requirements.html',
   '/user-manual/capabilities/command-monitoring/security-considerations.html',
+  '/user-manual/capabilities/log-data-collection/configuring-log-collection/index.html',
+  '/user-manual/capabilities/log-data-collection/configuring-log-collection/monitoring-log-files.html',
+  '/user-manual/capabilities/log-data-collection/configuring-log-collection/configuration.html',
   '/migration-to-5x/index.html',
   '/migration-to-5x/transition-plan.html',
   '/migration-to-5x/wazuh-indexer.html',
@@ -205,6 +208,21 @@ redirections.push(
     'target': ['4.14=>5.0'],
     '4.14': '/user-manual/capabilities/command-monitoring/command-output-analysis.html',
     '5.0': '/user-manual/capabilities/command-monitoring/configuration.html#command-monitoring-configuration-example-wazuh-dashboard',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/user-manual/capabilities/log-data-collection/multiple-socket-outputs.html',
+    '5.0': '/user-manual/capabilities/log-data-collection/configuring-log-collection/monitoring-log-files.html#configuring-sockets',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/user-manual/capabilities/log-data-collection/monitoring-log-files.html',
+    '5.0': '/user-manual/capabilities/log-data-collection/configuring-log-collection/monitoring-log-files.html',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/user-manual/capabilities/log-data-collection/configuration.html',
+    '5.0': '/user-manual/capabilities/log-data-collection/configuring-log-collection/configuration.html',
   }
 );
 
@@ -257,6 +275,10 @@ removedUrls['5.0'] = [
   '/user-manual/capabilities/command-monitoring/use-cases/check-if-the-output-changed.html',
   '/user-manual/capabilities/command-monitoring/use-cases/load-average.html',
   '/user-manual/capabilities/command-monitoring/use-cases/detect-usb-storage.html',
+  '/user-manual/capabilities/log-data-collection/syslog.html',
+  '/user-manual/capabilities/log-data-collection/multiple-socket-outputs.html',
+  '/user-manual/capabilities/log-data-collection/monitoring-log-files.html',
+  '/user-manual/capabilities/log-data-collection/configuration.html',
 ];
 
 /* *** RELEASE 4.14 ****/
