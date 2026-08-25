@@ -47,6 +47,7 @@ All notable changes to this project will be documented in this file.
 - Updated the *Using Wazuh for GDPR compliance* documentation in *Regulatory compliance* to Wazuh 5.0. ([#9944](https://github.com/wazuh/wazuh-documentation/pull/9944))
 - Updated the *Wazuh indexer API reference* and removed the non-tracked version number from its page header. ([#10015](https://github.com/wazuh/wazuh-documentation/pull/10015)) ([#10016](https://github.com/wazuh/wazuh-documentation/pull/10016)) ([#10017](https://github.com/wazuh/wazuh-documentation/pull/10017)) ([#10025](https://github.com/wazuh/wazuh-documentation/pull/10025))
 - Updated the *Using Wazuh for TSC compliance* documentation in *Regulatory compliance* to Wazuh 5.0. ([#10027](https://github.com/wazuh/wazuh-documentation/pull/10027))
+- Updated the *Log data collection* capability documentation to Wazuh 5.0, covering Wazuh agent configuration, collecting logs from files and operating systems, log data analysis, and new use cases. ([#10034](https://github.com/wazuh/wazuh-documentation/pull/10034))
 
 ### Removed
 
