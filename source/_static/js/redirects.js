@@ -277,7 +277,6 @@ removedUrls['5.0'] = [
   '/user-manual/capabilities/command-monitoring/use-cases/detect-usb-storage.html',
   '/user-manual/capabilities/log-data-collection/syslog.html',
   '/user-manual/capabilities/log-data-collection/multiple-socket-outputs.html',
-  '/user-manual/capabilities/log-data-collection/journald.html',
   '/user-manual/capabilities/log-data-collection/monitoring-log-files.html',
   '/user-manual/capabilities/log-data-collection/configuration.html',
 ];
