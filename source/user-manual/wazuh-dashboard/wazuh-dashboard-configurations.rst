@@ -272,12 +272,6 @@ Perform the following actions to create an active response.
 
 #. Click **☰** to open the menu and navigate to **Explore** > **Active Response**. Then click on **Create active response**.
 
-   .. thumbnail:: /images/wazuh-dashboard/configurations/active-response.png
-      :align: center
-      :width: 80%
-      :title: Active Response
-      :alt: Active Response
-
    .. thumbnail:: /images/wazuh-dashboard/configurations/create-active-response.png
       :align: center
       :width: 80%
@@ -334,17 +328,19 @@ When notifications are enabled in the Wazuh dashboard, healthcheck automatically
 .. |jira_channel| replace:: `REST API <https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/>`__
 .. |shuffle_channel| replace:: `webhook <https://shuffler.io/docs/triggers#webhook-example>`__
 
-+-------------+-------------------------------------------------------------------+
-| Channel     | Description                                                       |
-+=============+===================================================================+
-| Slack       | Sends notifications via Slack |slack_channel|.                    |
-+-------------+-------------------------------------------------------------------+
-| PagerDuty   | Sends alerts via the |pagerduty_channel|.                         |
-+-------------+-------------------------------------------------------------------+
-| Jira        | Creates issues via the Jira |jira_channel|.                       |
-+-------------+-------------------------------------------------------------------+
-| Shuffle     | Triggers Shuffle workflows via |shuffle_channel|.                 |
-+-------------+-------------------------------------------------------------------+
++-----------+-----------------------------------------------------------------------------+
+| Channel   | Description                                                                 |
++===========+=============================================================================+
+| Slack     | Sends notifications via Slack |slack_channel|.                              |
++-----------+-----------------------------------------------------------------------------+
+| PagerDuty | Sends alerts via the |pagerduty_channel|.                                   |
++-----------+-----------------------------------------------------------------------------+
+| Jira      | Creates issues via the Jira |jira_channel|.                                 |
++-----------+-----------------------------------------------------------------------------+
+| Shuffle   | Triggers Shuffle workflows via |shuffle_channel|.                           |
++-----------+-----------------------------------------------------------------------------+
+| Email     | Sends an alert via a configured SMTP server to the recipient email address. |
++-----------+-----------------------------------------------------------------------------+
 
 All channels are stored as saved objects with names like Slack Channel, PagerDuty Channel, etc.
 
