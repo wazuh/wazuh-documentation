@@ -47,12 +47,15 @@ Wazuh server - Wazuh indexer
 
 The Wazuh server uses Filebeat to send alert and event data to the Wazuh indexer, using TLS encryption. Filebeat reads the Wazuh server output data and sends it to the Wazuh indexer (by default listening on port 9200/TCP). Once the data is indexed by the Wazuh indexer, the Wazuh dashboard is used to query and visualize the security information.
 
-Wazuh dashboard - Wazuh dashboard/Wazuh indexer
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Wazuh dashboard - Wazuh server
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The Wazuh dashboard queries the Wazuh server API (by default listening on port 55000/TCP on the Wazuh server) to display configuration and status-related information of the :doc:`Wazuh server <components/wazuh-server>` and :doc:`agents <components/wazuh-agent>`. This communication is encrypted with TLS and authenticated with a username and password.
+The Wazuh dashboard queries the Wazuh server API (by default listening on TCP port ``55000``) to display configuration and status-related information of the :doc:`Wazuh server <components/wazuh-server>` and :doc:`Wazuh agents <components/wazuh-agent>`. This communication is encrypted with SSL certificates and authenticated with a username and password.
 
-The Wazuh dashboard visualizes and queries the information indexed on the Wazuh indexer.
+Wazuh dashboard - Wazuh indexer
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The Wazuh dashboard communicates with the :doc:`Wazuh indexer <components/wazuh-indexer>` to query and retrieve indexed security data for visualization and analysis. It uses secure HTTPS connections to interact with the Wazuh indexer RESTful API, sending search, aggregation, and management queries. The Wazuh indexer processes these requests and returns the relevant data, which the dashboard then reports.
 
 .. _default_ports:
 
