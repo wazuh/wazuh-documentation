@@ -429,6 +429,21 @@ paths:
   /_plugins/_security_analytics/correlation/rules/_search:
     $ref: 'security_analytics_api.yml#/paths/~1_plugins~1_security_analytics~1correlation~1rules~1_search'
 
+  /_plugins/_notifications/configs:
+    $ref: 'notifications_api.yml#/paths/~1_plugins~1_notifications~1configs'
+
+  /_plugins/_notifications/configs/{config_id}:
+    $ref: 'notifications_api.yml#/paths/~1_plugins~1_notifications~1configs~1{config_id}'
+
+  /_plugins/_notifications/features:
+    $ref: 'notifications_api.yml#/paths/~1_plugins~1_notifications~1features'
+
+  /_plugins/_notifications/channels:
+    $ref: 'notifications_api.yml#/paths/~1_plugins~1_notifications~1channels'
+
+  /_plugins/_notifications/feature/test/{config_id}:
+    $ref: 'notifications_api.yml#/paths/~1_plugins~1_notifications~1feature~1test~1{config_id}'
+
   /_plugins/_setup/settings:
     $ref: 'setup_api.yml#/paths/~1_plugins~1_setup~1settings'
 
@@ -928,3 +943,11 @@ tags:
     description: Search and validate Security Analytics detection rules, and list the log-type categories they can target.
   - name: Mappings
     description: Manage the field-alias mappings that let Security Analytics rules and detectors interpret an index's raw fields.
+  - name: Notification configs
+    description: Manage notification configurations — Slack, Chime, Microsoft Teams, Mattermost, Webhook, Email, Email group, SMTP account, SES account, SNS, and the Wazuh-only Active response channel.
+  - name: Notification features
+    description: Discover which notification channel types and plugin features are enabled on this cluster.
+  - name: Notification channels
+    description: List configured notification channel instances across all channel types.
+  - name: Notification test messages
+    description: Send a test notification through an existing notification configuration.

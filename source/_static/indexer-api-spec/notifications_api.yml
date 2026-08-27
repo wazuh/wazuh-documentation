@@ -1,0 +1,1011 @@
+paths:
+  /_plugins/_notifications/configs:
+    post:
+      tags:
+        - Notification configs
+      summary: Create notification config
+      description: |
+        Creates a notification configuration. A config bundles a name, an optional description, an `is_enabled` flag, and channel-specific data selected by the `config_type` discriminator — Slack, Chime, Microsoft Teams, Mattermost, Webhook, Email, Email group, SMTP account, SES account, SNS, or the Wazuh-only `active_response` channel. `config_id` is optional; if omitted, the server generates one, and if supplied it must use only base64-safe characters (`A-Za-z0-9_-`).
+      operationId: createNotificationConfig
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateNotificationConfigRequest'
+            example:
+              config:
+                name: "critical-alerts-slack"
+                description: "Notifies the SOC Slack channel of critical alerts."
+                config_type: "slack"
+                is_enabled: true
+                slack:
+                  url: "https://hooks.slack.com/services/sample_slack_url"
+      responses:
+        '200':
+          description: Notification config created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateNotificationConfigResponse'
+              example:
+                config_id: "iAOep4gBnBc0IWyRThgO"
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '409':
+          $ref: '#/components/responses/Conflict'
+
+    delete:
+      tags:
+        - Notification configs
+      summary: Delete notification configs (bulk)
+      description: |
+        Deletes one or more notification configs by id, via query parameters instead of a request body. Exactly one of `config_id` or `config_id_list` must be supplied — if neither is, the request fails with 400 before reaching the backend. If any requested id doesn't exist, the whole request fails with 404 and none of the ids are deleted.
+      operationId: deleteNotificationConfigs
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: config_id
+          in: query
+          description: A single config id to delete.
+          schema:
+            type: string
+        - name: config_id_list
+          in: query
+          description: Comma-separated config ids to delete.
+          schema:
+            type: string
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: All requested notification configs deleted successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteNotificationConfigResponse'
+              example:
+                delete_response_list:
+                  iAOep4gBnBc0IWyRThgO: "OK"
+                  d9k2Lp1gCscz0DwjChgP: "OK"
+        '400':
+          description: Bad Request - neither `config_id` nor `config_id_list` was supplied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    get:
+      tags:
+        - Notification configs
+      summary: Search notification configs
+      description: |
+        Searches and lists notification configs with extensive filtering across every channel type's fields, plus a full-text `query`/`text_query` search. Set `config_id_list` to fetch specific ids directly — when set, every other filter parameter is ignored. Unlike the single-id `GET .../configs/{config_id}` endpoint, a search with no matches returns 200 with an empty `config_list`, not 404.
+      operationId: searchNotificationConfigs
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: config_id
+          in: query
+          description: Return the config with this id. Ignored if `config_id_list` is set.
+          schema:
+            type: string
+        - name: config_id_list
+          in: query
+          description: Comma-separated ids. If set, all other filters below are ignored.
+          schema:
+            type: string
+        - name: from_index
+          in: query
+          schema:
+            type: integer
+            default: 0
+        - name: max_items
+          in: query
+          schema:
+            type: integer
+            default: 1000
+        - name: sort_field
+          in: query
+          description: |
+            Any field accepted as a filter below (or its `.keyword` variant), or `config_id`. Defaults to `metadata.last_updated_time_ms`. An unsupported value returns 406 Not Acceptable.
+          schema:
+            type: string
+        - name: sort_order
+          in: query
+          schema:
+            type: string
+            enum: [asc, desc]
+        - name: last_updated_time_ms
+          in: query
+          description: Range filter. Either a single `<epoch_ms>` or a `<from>..<to>` range.
+          schema:
+            type: string
+        - name: created_time_ms
+          in: query
+          description: Range filter, same format as `last_updated_time_ms`.
+          schema:
+            type: string
+        - name: is_enabled
+          in: query
+          schema:
+            type: boolean
+        - name: config_type
+          in: query
+          description: Comma-separated config types, e.g. `slack,chime`.
+          schema:
+            type: string
+        - name: name
+          in: query
+          description: Fuzzy match on the config name. Use `name.keyword` (same parameter position, `.keyword` suffix) for an exact match.
+          schema:
+            type: string
+        - name: description
+          in: query
+          description: Fuzzy match on the config description. `.keyword` exact-match variant available, as with `name`.
+          schema:
+            type: string
+        - name: email.email_account_id
+          in: query
+          description: Comma-separated SMTP/SES account config ids referenced by `email` configs.
+          schema:
+            type: string
+        - name: email.email_group_id_list
+          in: query
+          description: Comma-separated email-group config ids referenced by `email` configs.
+          schema:
+            type: string
+        - name: email.recipient_list.recipient
+          in: query
+          description: Match on a recipient address nested inside an `email` config's recipient list.
+          schema:
+            type: string
+        - name: email_group.recipient_list.recipient
+          in: query
+          description: Match on a recipient address nested inside an `email_group` config's recipient list.
+          schema:
+            type: string
+        - name: slack.url
+          in: query
+          description: Fuzzy match on the Slack webhook URL. `.keyword` exact-match variant available.
+          schema:
+            type: string
+        - name: chime.url
+          in: query
+          description: Fuzzy match on the Chime webhook URL. `.keyword` exact-match variant available.
+          schema:
+            type: string
+        - name: microsoft_teams.url
+          in: query
+          description: Fuzzy match on the Microsoft Teams webhook URL. `.keyword` exact-match variant available.
+          schema:
+            type: string
+        - name: webhook.url
+          in: query
+          description: Fuzzy match on the generic webhook URL. `.keyword` exact-match variant available.
+          schema:
+            type: string
+        - name: smtp_account.host
+          in: query
+          description: Fuzzy match on the SMTP host. `.keyword` exact-match variant available.
+          schema:
+            type: string
+        - name: smtp_account.from_address
+          in: query
+          description: Fuzzy match on the SMTP sender address. `.keyword` exact-match variant available.
+          schema:
+            type: string
+        - name: smtp_account.method
+          in: query
+          description: Comma-separated. One or more of `none`, `ssl`, `start_tls`.
+          schema:
+            type: string
+        - name: sns.topic_arn
+          in: query
+          description: Fuzzy match on the SNS topic ARN. `.keyword` exact-match variant available.
+          schema:
+            type: string
+        - name: sns.role_arn
+          in: query
+          description: Fuzzy match on the SNS IAM role ARN. `.keyword` exact-match variant available.
+          schema:
+            type: string
+        - name: ses_account.region
+          in: query
+          description: Comma-separated AWS regions.
+          schema:
+            type: string
+        - name: ses_account.role_arn
+          in: query
+          description: Fuzzy match on the SES IAM role ARN. `.keyword` exact-match variant available.
+          schema:
+            type: string
+        - name: ses_account.from_address
+          in: query
+          description: Fuzzy match on the SES sender address. `.keyword` exact-match variant available.
+          schema:
+            type: string
+        - name: active_response.agent_id
+          in: query
+          description: Wazuh-only. Fuzzy match on the target agent id. `.keyword` exact-match variant available.
+          schema:
+            type: string
+        - name: active_response.executable
+          in: query
+          description: Wazuh-only. Fuzzy match on the active response executable name. `.keyword` exact-match variant available.
+          schema:
+            type: string
+        - name: active_response.extra_args
+          in: query
+          description: Wazuh-only. Fuzzy match on the extra arguments string. `.keyword` exact-match variant available.
+          schema:
+            type: string
+        - name: active_response.location
+          in: query
+          description: Wazuh-only. Comma-separated. One or more of `all`, `local`, `defined-agent`.
+          schema:
+            type: string
+        - name: active_response.stateful_timeout
+          in: query
+          description: Wazuh-only. Fuzzy match on the stateful timeout value. `.keyword` exact-match variant available.
+          schema:
+            type: string
+        - name: active_response.type
+          in: query
+          description: Wazuh-only. Comma-separated. One or more of `stateful`, `stateless`.
+          schema:
+            type: string
+        - name: query
+          in: query
+          description: Full-text query-string search across every filterable field above, keyword and text alike.
+          schema:
+            type: string
+        - name: text_query
+          in: query
+          description: Same as `query`, restricted to the non-keyword text fields (`name`, `description`, the various `.url`/host/address/ARN fields).
+          schema:
+            type: string
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success. `config_list` is empty if nothing matched.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotificationConfigSearchResponse'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '406':
+          description: Not Acceptable - `sort_field` isn't one of the supported field names.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+
+  /_plugins/_notifications/configs/{config_id}:
+    put:
+      tags:
+        - Notification configs
+      summary: Update notification config
+      description: |
+        Fully replaces an existing notification config — every field of `config` must be supplied again, not just the changed ones. The path `config_id` is only a default: a `config_id` in the request body overrides it if both are present.
+      operationId: updateNotificationConfig
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: config_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateNotificationConfigRequest'
+            example:
+              config:
+                name: "critical-alerts-slack"
+                description: "Notifies the SOC Slack channel of critical and high alerts."
+                config_type: "slack"
+                is_enabled: true
+                slack:
+                  url: "https://hooks.slack.com/services/sample_slack_url"
+      responses:
+        '200':
+          description: Notification config updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateNotificationConfigResponse'
+              example:
+                config_id: "iAOep4gBnBc0IWyRThgO"
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    delete:
+      tags:
+        - Notification configs
+      summary: Delete notification config
+      description: Deletes a single notification config by id. Returns 404 if the id doesn't exist.
+      operationId: deleteNotificationConfig
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: config_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Notification config deleted successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteNotificationConfigResponse'
+              example:
+                delete_response_list:
+                  iAOep4gBnBc0IWyRThgO: "OK"
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    get:
+      tags:
+        - Notification configs
+      summary: Get notification config
+      description: Returns a single notification config by id. Returns 404 if the id doesn't exist.
+      operationId: getNotificationConfig
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: config_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success. A single-element `config_list`.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotificationConfigSearchResponse'
+              example:
+                start_index: 0
+                total_hits: 1
+                total_hit_relation: "eq"
+                config_list:
+                  - config_id: "iAOep4gBnBc0IWyRThgO"
+                    last_updated_time_ms: 1755172800000
+                    created_time_ms: 1755172800000
+                    config:
+                      name: "critical-alerts-slack"
+                      description: "Notifies the SOC Slack channel of critical alerts."
+                      config_type: "slack"
+                      is_enabled: true
+                      slack:
+                        url: "https://hooks.slack.com/services/sample_slack_url"
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /_plugins/_notifications/features:
+    get:
+      tags:
+        - Notification features
+      summary: Get plugin features
+      description: |
+        Returns the notification channel types currently allowed on this cluster (`plugins.notifications.core.allowed_config_types` setting; the Wazuh-only `active_response` type is included in the default) and a small map of plugin-level feature flags.
+      operationId: getPluginFeatures
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PluginFeaturesResponse'
+              example:
+                allowed_config_type_list:
+                  - "slack"
+                  - "chime"
+                  - "microsoft_teams"
+                  - "webhook"
+                  - "email"
+                  - "sns"
+                  - "ses_account"
+                  - "smtp_account"
+                  - "email_group"
+                  - "active_response"
+                plugin_features:
+                  tooltip_support: "true"
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /_plugins/_notifications/channels:
+    get:
+      tags:
+        - Notification channels
+      summary: List notification channels
+      description: |
+        Lists configured notification channel instances (a flattened summary of every notification config, regardless of channel type). Takes no filter parameters — it always returns every channel. To filter, use `GET /_plugins/_notifications/configs` instead.
+      operationId: listNotificationChannels
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChannelListResponse'
+              example:
+                start_index: 0
+                total_hits: 1
+                total_hit_relation: "eq"
+                channel_list:
+                  - config_id: "iAOep4gBnBc0IWyRThgO"
+                    name: "critical-alerts-slack"
+                    description: "Notifies the SOC Slack channel of critical alerts."
+                    config_type: "slack"
+                    is_enabled: true
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /_plugins/_notifications/feature/test/{config_id}:
+    post:
+      tags:
+        - Notification test messages
+      summary: Send test message
+      description: |
+        Sends a canned test notification through the given config, to confirm it's set up correctly. No request body — the target config is entirely determined by the `config_id` path parameter.
+      operationId: sendTestNotification
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: config_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success. Note this reports that the send was attempted and its delivery outcome — check `status_list[].delivery_status` for the actual per-channel result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SendTestMessageResponse'
+              example:
+                event_source:
+                  title: "Test Message Title-iAOep4gBnBc0IWyRThgO"
+                  reference_id: "iAOep4gBnBc0IWyRThgO"
+                  severity: "info"
+                  tags: []
+                status_list:
+                  - config_id: "iAOep4gBnBc0IWyRThgO"
+                    config_type: "slack"
+                    config_name: "critical-alerts-slack"
+                    email_recipient_status: []
+                    delivery_status:
+                      status_code: "200"
+                      status_text: "Success"
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    get:
+      deprecated: true
+      tags:
+        - Notification test messages
+      summary: Send test message (deprecated)
+      description: |
+        Deprecated alias of `POST /_plugins/_notifications/feature/test/{config_id}`, kept for backward compatibility. Functionally identical — use the POST form instead.
+      operationId: sendTestNotificationDeprecated
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: config_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success. Same response shape as the POST form.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SendTestMessageResponse'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+components:
+  schemas:
+    SlackChannelData:
+      type: object
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          description: Incoming webhook URL. Must be `http`/`https`. Also used, unmodified, for `mattermost`.
+
+    ChimeChannelData:
+      type: object
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          description: Incoming webhook URL. Must be `http`/`https`.
+
+    MicrosoftTeamsChannelData:
+      type: object
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          description: Incoming webhook URL. Must be `http`/`https`.
+
+    WebhookChannelData:
+      type: object
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          description: Webhook URL. Must be `http`/`https`.
+        header_params:
+          type: object
+          additionalProperties:
+            type: string
+          default: {}
+        method:
+          type: string
+          enum: [POST, PUT, PATCH]
+          default: POST
+
+    EmailRecipient:
+      type: object
+      required:
+        - recipient
+      properties:
+        recipient:
+          type: string
+          description: An email address, or the `config_id` of an `email_group` config.
+
+    EmailChannelData:
+      type: object
+      required:
+        - email_account_id
+      properties:
+        email_account_id:
+          type: string
+          description: The `config_id` of an `smtp_account` or `ses_account` config to send through.
+        recipient_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmailRecipient'
+          default: []
+        email_group_id_list:
+          type: array
+          items:
+            type: string
+          description: config_ids of `email_group` configs whose recipients are also included.
+          default: []
+
+    EmailGroupChannelData:
+      type: object
+      required:
+        - recipient_list
+      properties:
+        recipient_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmailRecipient'
+
+    SmtpAccountChannelData:
+      type: object
+      required:
+        - host
+        - port
+        - method
+        - from_address
+      properties:
+        host:
+          type: string
+        port:
+          type: integer
+          description: Must be greater than 0.
+        method:
+          type: string
+          enum: [none, ssl, start_tls]
+        from_address:
+          type: string
+          description: Must be a syntactically valid (RFC 5322) email address.
+
+    SesAccountChannelData:
+      type: object
+      required:
+        - region
+        - from_address
+      properties:
+        region:
+          type: string
+          description: AWS region, e.g. `us-east-1`.
+        role_arn:
+          type: string
+          description: Optional AWS IAM role ARN to assume. Must match a valid ARN format if present.
+        from_address:
+          type: string
+          description: Must be a syntactically valid (RFC 5322) email address.
+
+    SnsChannelData:
+      type: object
+      required:
+        - topic_arn
+      properties:
+        topic_arn:
+          type: string
+          description: SNS topic ARN, e.g. `arn:aws:sns:us-east-1:123456789012:my-topic`.
+        role_arn:
+          type: string
+          description: Optional AWS IAM role ARN to assume.
+
+    ActiveResponseChannelData:
+      type: object
+      description: Wazuh-only channel type — not present in upstream OpenSearch Notifications.
+      required:
+        - type
+        - executable
+        - location
+      properties:
+        type:
+          type: string
+          enum: [stateful, stateless]
+        executable:
+          type: string
+          description: Name of the active response script to run.
+        location:
+          type: string
+          enum: [all, local, defined-agent]
+        agent_id:
+          type: string
+          description: Required, and must be all-numeric, when `location` is `defined-agent`.
+        stateful_timeout:
+          type: integer
+          description: Required, and must be greater than 0, when `type` is `stateful`.
+        extra_args:
+          type: string
+          description: Optional extra arguments passed to the executable.
+
+    NotificationConfig:
+      type: object
+      required:
+        - name
+        - config_type
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+          default: ""
+        config_type:
+          type: string
+          enum:
+            - slack
+            - chime
+            - microsoft_teams
+            - mattermost
+            - webhook
+            - email
+            - email_group
+            - smtp_account
+            - ses_account
+            - sns
+            - active_response
+            - none
+          description: |
+            Discriminator selecting which of the properties below is populated. `active_response` is Wazuh-only. `none` stores no channel data.
+        is_enabled:
+          type: boolean
+          default: true
+        slack:
+          $ref: '#/components/schemas/SlackChannelData'
+        chime:
+          $ref: '#/components/schemas/ChimeChannelData'
+        microsoft_teams:
+          $ref: '#/components/schemas/MicrosoftTeamsChannelData'
+        mattermost:
+          $ref: '#/components/schemas/SlackChannelData'
+        webhook:
+          $ref: '#/components/schemas/WebhookChannelData'
+        email:
+          $ref: '#/components/schemas/EmailChannelData'
+        email_group:
+          $ref: '#/components/schemas/EmailGroupChannelData'
+        smtp_account:
+          $ref: '#/components/schemas/SmtpAccountChannelData'
+        ses_account:
+          $ref: '#/components/schemas/SesAccountChannelData'
+        sns:
+          $ref: '#/components/schemas/SnsChannelData'
+        active_response:
+          $ref: '#/components/schemas/ActiveResponseChannelData'
+
+    CreateNotificationConfigRequest:
+      type: object
+      required:
+        - config
+      properties:
+        config_id:
+          type: string
+          description: Optional. Server-generated if omitted. If supplied, must use only `A-Za-z0-9_-` characters.
+        config:
+          $ref: '#/components/schemas/NotificationConfig'
+
+    CreateNotificationConfigResponse:
+      type: object
+      properties:
+        config_id:
+          type: string
+
+    UpdateNotificationConfigRequest:
+      type: object
+      required:
+        - config
+      properties:
+        config_id:
+          type: string
+          description: Optional. Defaults to the path `{config_id}`; overrides it if both are present.
+        config:
+          $ref: '#/components/schemas/NotificationConfig'
+
+    UpdateNotificationConfigResponse:
+      type: object
+      properties:
+        config_id:
+          type: string
+
+    DeleteNotificationConfigResponse:
+      type: object
+      properties:
+        delete_response_list:
+          type: object
+          description: Maps each requested config id to its per-id outcome (e.g. `OK`).
+          additionalProperties:
+            type: string
+
+    NotificationConfigInfo:
+      type: object
+      properties:
+        config_id:
+          type: string
+        last_updated_time_ms:
+          type: integer
+          format: int64
+        created_time_ms:
+          type: integer
+          format: int64
+        config:
+          $ref: '#/components/schemas/NotificationConfig'
+
+    NotificationConfigSearchResponse:
+      type: object
+      properties:
+        start_index:
+          type: integer
+        total_hits:
+          type: integer
+        total_hit_relation:
+          type: string
+          enum: [eq, gte]
+        config_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/NotificationConfigInfo'
+
+    ChannelInfo:
+      type: object
+      properties:
+        config_id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        config_type:
+          type: string
+        is_enabled:
+          type: boolean
+
+    ChannelListResponse:
+      type: object
+      properties:
+        start_index:
+          type: integer
+        total_hits:
+          type: integer
+        total_hit_relation:
+          type: string
+          enum: [eq, gte]
+        channel_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChannelInfo'
+
+    PluginFeaturesResponse:
+      type: object
+      properties:
+        allowed_config_type_list:
+          type: array
+          items:
+            type: string
+        plugin_features:
+          type: object
+          additionalProperties:
+            type: string
+
+    DeliveryStatus:
+      type: object
+      properties:
+        status_code:
+          type: string
+        status_text:
+          type: string
+
+    SendTestMessageResponse:
+      type: object
+      properties:
+        event_source:
+          type: object
+          properties:
+            title:
+              type: string
+            reference_id:
+              type: string
+            severity:
+              type: string
+            tags:
+              type: array
+              items:
+                type: string
+        status_list:
+          type: array
+          items:
+            type: object
+            properties:
+              config_id:
+                type: string
+              config_type:
+                type: string
+              config_name:
+                type: string
+              email_recipient_status:
+                type: array
+                items:
+                  type: object
+              delivery_status:
+                $ref: '#/components/schemas/DeliveryStatus'
+
+    ErrorEnvelope:
+      type: object
+      description: The standard OpenSearch error response envelope.
+      properties:
+        error:
+          type: object
+          properties:
+            root_cause:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                  reason:
+                    type: string
+            type:
+              type: string
+            reason:
+              type: string
+        status:
+          type: integer
+
+  responses:
+    BadRequest:
+      description: Bad Request - the request body or parameters failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+
+    Forbidden:
+      description: Forbidden - the caller lacks permission for this action.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+          example:
+            error:
+              root_cause:
+                - type: "security_exception"
+                  reason: "User doesn't have permissions to execute this action. Contact administrator."
+              type: "security_exception"
+              reason: "User doesn't have permissions to execute this action. Contact administrator."
+            status: 403
+
+    NotFound:
+      description: Not Found - the requested config id doesn't exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+
+    Conflict:
+      description: Conflict - a config with this `config_id` already exists.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
