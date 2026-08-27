@@ -31,14 +31,24 @@ Navigate to the **Log Test** page in the Wazuh dashboard and perform a log test 
    :align: center
    :width: 80%
 
-Normalization decoding and enrichment
-----------------------------------------
+Normalization, decoding, and enrichment
+-----------------------------------------
 
-In the decoding phase, the Wazuh manager processes events, where the log analysis engine uses decoders and KVDBs to normalize, enrich, and match incoming log data. For example, the following decoders match the log sample:
+In the decoding phase, the Wazuh manager processes events, where the log analysis engine uses decoders and KVDBs to normalize, enrich, and match incoming log data. For example, the following decoders match the above log sample:
 
 -  ``decoder/core-wazuh-message/0``
 -  ``decoder/windows-event/0``
 -  ``decoder/windows-defender/0``
+
+The ``decoder/core-wazuh-message/0`` decoder matches the full event, while the ``decoder/windows-event/0`` decoder matches the type of event. The ``decoder/windows-defender/0`` decoder normalizes the rest of the event; however, this event does not include enrichment data.
+
+You can view a decoder by searching the **Decoders** page using the decoder name. For example, ``decoder/windows-defender/0``.
+
+.. thumbnail:: /images/manual/log-data-collection/standard-decoder.gif
+   :title: GIF showing a Standard decoder
+   :alt: GIF showing a Standard decoder
+   :align: center
+   :width: 80%
 
 .. code-block:: json
 
@@ -91,22 +101,14 @@ In the decoding phase, the Wazuh manager processes events, where the log analysi
      }
    }
 
-The ``decoder/core-wazuh-message/0`` decoder matches the full event, while the ``decoder/windows-event/0`` decoder matches the type of event. The ``decoder/windows-defender/0`` decoder normalizes the rest of the event; however, this event does not include enrichment data.
-
-You can view a decoder by searching the **Decoders** page using the decoder name. For example, ``decoder/windows-defender/0``.
-
-.. thumbnail:: /images/manual/log-data-collection/standard-decoder.gif
-   :title: GIF showing a Standard decoder
-   :alt: GIF showing a Standard decoder
-   :align: center
-   :width: 80%
-
 To learn more about decoders, see the :doc:`decoders syntax section </user-manual/data-analysis/decoders>`.
 
 Rule matching and findings visualization
 -------------------------------------------
 
-In this phase, the Wazuh detection engine in the Wazuh indexer compares normalized events against a ruleset and outputs a finding. By default, the Wazuh detection engine generates findings with rule severity ``informational``, ``low``, ``medium``, and ``high``, and ``critical``. In this scenario, the log triggers a ``High`` finding.
+In this phase, the Wazuh detection engine in the Wazuh indexer compares normalized events against a ruleset and outputs a finding. Each finding combines the matched rule metadata with the normalized event data, providing the context needed to investigate the activity. In the Wazuh dashboard, analysts filter for related findings during triage and can review affected assets, event fields, ATT&CK mappings, and compliance information.
+
+By default, the Wazuh detection engine generates findings with rule severity ``informational``, ``low``, ``medium``, ``high``, and ``critical``. In this scenario, the log triggers a ``High`` finding.
 
 #. Click on the rule to view its details:
 
