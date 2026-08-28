@@ -110,11 +110,19 @@ paths:
         '403':
           $ref: '#/components/responses/Forbidden'
         '429':
-          description: Too Many Requests - the internal monitor-count lock could not be acquired.
+          description: Too Many Requests - the internal monitor-count lock stayed held by other requests for every retry attempt.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorEnvelope'
+              example:
+                error:
+                  root_cause:
+                    - type: "status_exception"
+                      reason: "Too many concurrent monitor creation requests, please retry."
+                  type: "status_exception"
+                  reason: "Too many concurrent monitor creation requests, please retry."
+                status: 429
 
   /_plugins/_alerting/monitors/{monitorID}:
     put:
