@@ -1,51 +1,44 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Check out our User manual to see the available tools and their supported installations for configuring and using each of the Wazuh components. 
-  
+  :description: Check out our User manual to see the available tools and their supported installations for configuring and using each of the Wazuh components.
+
 .. _tools:
 
 Tools
 =====
 
-+---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| Tools                                             | Descriptions                                                               | Supported installations     |
-+===================================================+============================================================================+=============================+
-| :doc:`wazuh-control <wazuh-control>`              | Manages the status of Wazuh processes                                      | manager, agent              |
-+---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :doc:`agent_control <agent-control>`              | Allows queries of the manager to get information about any agent           | manager                     |
-+---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :doc:`manage_agents <manage-agents>`              | Provides an interface to handle authentication keys for  agents            | agent                       |
-+---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :doc:`wazuh-logtest <wazuh-logtest>`              | Allows testing and verification of rules against provided log records      | manager                     |
-+---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :doc:`rbac_control <rbac-control>`                | Manage API RBAC resources and reset RBAC DB                                | manager                     |
-+---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :doc:`verify-agent-conf <verify-agent-conf>`      | Verifies the Wazuh agent.conf configuration                                | manager                     |
-+---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :doc:`agent_groups <agent-groups>`                | Manages and assigns groups                                                 | manager                     |
-+---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :doc:`agent_upgrade <agent-upgrade>`              | List outdated agents and upgrade them                                      | manager                     |
-+---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :doc:`cluster_control <cluster-control>`          | Manages and retrieves cluster information                                  | manager                     |
-+---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :doc:`fim_migrate <fim-migrate>`                  | Migrates older FIM databases to Wazuh-DB                                   | manager                     |
-+---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :doc:`wazuh-keystore <wazuh-keystore>`            | Stores sensitive information for increased security                        | manager                     |
-+---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
+The following command-line tools are available in Wazuh 5.0.
+
++----------------------------------------------------------+--------------------------------------------------------------------------------+--------------------------+
+| Tool                                                     | Description                                                                    | Supported installation   |
++==========================================================+================================================================================+==========================+
+| :doc:`agent_groups <agent-groups>`                       | Manages agent groups and group assignments.                                    | Wazuh manager            |
++----------------------------------------------------------+--------------------------------------------------------------------------------+--------------------------+
+| :doc:`agent_upgrade <agent-upgrade>`                     | Lists outdated agents and performs remote agent upgrades.                      | Wazuh manager            |
++----------------------------------------------------------+--------------------------------------------------------------------------------+--------------------------+
+| :doc:`cluster_control <cluster-control>`                 | Manages and retrieves information about the Wazuh manager cluster.             | Wazuh manager            |
++----------------------------------------------------------+--------------------------------------------------------------------------------+--------------------------+
+| :doc:`rbac_control <rbac-control>`                       | Manages API role-based access control resources and the RBAC database.         | Wazuh manager            |
++----------------------------------------------------------+--------------------------------------------------------------------------------+--------------------------+
+| :doc:`verify-agent-conf <verify-agent-conf>`             | Validates the centralized agent configuration.                                 | Wazuh manager            |
++----------------------------------------------------------+--------------------------------------------------------------------------------+--------------------------+
+| :doc:`wazuh-control <wazuh-control>`                     | Manages the status of Wazuh agent services.                                    | Wazuh agent              |
++----------------------------------------------------------+--------------------------------------------------------------------------------+--------------------------+
+| :doc:`wazuh-manager-control <wazuh-manager-control>`     | Manages the status of Wazuh manager services.                                  | Wazuh manager            |
++----------------------------------------------------------+--------------------------------------------------------------------------------+--------------------------+
+| :doc:`wazuh-manager-keystore <wazuh-manager-keystore>`   | Stores and manages sensitive configuration values used by the Wazuh manager.   | Wazuh manager            |
++----------------------------------------------------------+--------------------------------------------------------------------------------+--------------------------+
 
 .. toctree::
    :hidden:
    :maxdepth: 1
 
-   wazuh-control
-   agent-control
-   manage-agents
-   wazuh-logtest
-   rbac-control
-   verify-agent-conf
    agent-groups
    agent-upgrade
    cluster-control
-   fim-migrate
-   wazuh-keystore
+   rbac-control
+   verify-agent-conf
+   wazuh-control
+   wazuh-manager-control
+   wazuh-manager-keystore

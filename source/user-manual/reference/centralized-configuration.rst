@@ -1,383 +1,255 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Learn how to remotely configure agents using ``agent.conf``. This section describes the capabilities that can be configured remotely in Wazuh.
+  :description: Learn how the Wazuh manager distributes centralized configuration settings to Wazuh agents through agent.conf files, and how to create, validate, and apply them.
 
-Centralized configuration (agent.conf)
-======================================
+.. _reference_centralized_configuration:
+
+Centralized configuration for Wazuh agents
+=============================================
 
 Introduction
 ------------
 
-Agents can be configured remotely by using the ``agent.conf`` file. The following capabilities can be configured remotely:
+Centralized configuration allows the Wazuh manager to distribute shared configuration settings to Wazuh agents using ``agent.conf`` files.
 
--  :doc:`File Integrity monitoring <../capabilities/file-integrity/index>` (**syscheck**)
--  :doc:`Rootkit detection <../capabilities/malware-detection/index>` (**rootcheck**)
--  :doc:`Log data collection <../capabilities/log-data-collection/index>` (**localfile**)
--  :doc:`Remote commands <ossec-conf/wodle-command>` (**wodle name="command"**)
--  :doc:`Labels for agent alerts <../agent/agent-management/labels>` (**labels**)
--  :doc:`Security Configuration Assessment <../capabilities/sec-config-assessment/index>` (**sca**)
--  :doc:`System inventory <../capabilities/system-inventory/index>` (**syscollector**)
--  :doc:`Avoid events flooding <ossec-conf/client-buffer>` (**client_buffer**)
+Each ``agent.conf`` file is associated with an :doc:`agent group </user-manual/agent/agent-management/grouping-agents>`. The Wazuh manager distributes the configuration to all agents assigned to that group.
+
+The shared configuration supplements the local ``/var/ossec/etc/ossec.conf`` file on each Wazuh agent. Depending on the configuration option, centralized settings can override or extend the local configuration.
 
 .. note::
-  When setting up remote commands in the shared agent configuration, **you must enable remote commands for Agent Modules**. This is enabled by adding the following line to the ``/var/ossec/etc/local_internal_options.conf`` file in the agent:
+   Check the :doc:`group agents </user-manual/agent/agent-management/grouping-agents>` documentation to learn how to add groups and assign agents to them.
 
-.. code-block:: shell
+Location of the agent.conf file
+----------------------------------
 
-    wazuh_command.remote_commands=1
+Centralized configuration files are stored in the ``/var/wazuh-manager/etc/shared/`` directory on the Wazuh manager. Each agent group has its own subdirectory containing an ``agent.conf`` file.
 
-Agent groups
-------------
+.. code-block:: none
 
-Agents can be grouped together in order to send them a unique centralized configuration that is group specific. Each agent can belong to more than one group, and unless otherwise configured, all agents belong to a group called ``default``.
+   /var/wazuh-manager/etc/shared/<GROUP_NAME>/agent.conf
 
-.. note::
-    Check the :doc:`agent_groups manual <./tools/agent-groups>` to learn how to add groups and assign agents to them.
+The following example shows the directory structure:
 
-The manager pushes all files included in the group folder to the agents belonging to this group. For example, all files in ``/var/ossec/etc/shared/default`` will be pushed to all agents belonging to the ``default`` group.
+.. code-block:: none
+   :class: output
 
-In case an agent is assigned to multiple groups, all the files contained in each group folder will be merged into one, and subsequently sent to the agents, being the last one the group with the highest priority.
+   /var/wazuh-manager/etc/shared/
+   ├── agent-template.conf
+   ├── default
+   │   └── agent.conf
+   ├── linux
+   │   └── agent.conf
+   ├── webservers
+   │   └── agent.conf
+   └── windows
+       └── agent.conf
 
-The file ``ar.conf`` (Active Response status) will always be sent to agents even if it is not present in the group folder.
+The default group is named ``default``. All agents belong to the ``default`` group unless explicitly assigned to another group.
 
-The agent will store the shared files in ``/var/ossec/etc/shared``, not in a group folder.
+agent.conf structure
+----------------------
 
-Below are the files that would be found in this folder on an agent assigned to the **debian** group.  Notice that these files are pushed to the agent from the manager ``/var/ossec/etc/shared/debian`` folder.
+The ``agent.conf`` file uses the ``<agent_config>`` XML element to define the configuration distributed to Wazuh agents.
 
-+-----------------------------------------------------+-----------------------------------------------------+
-| **Manager**                                         | **Agent (Group: 'debian')**                         |
-+-----------------------------------------------------+-----------------------------------------------------+
-|.. code-block:: none                                 |.. code-block:: none                                 |
-|                                                     |                                                     |
-|    /var/ossec/etc/shared/                           |    /var/ossec/etc/shared/                           |
-|    ├── ar.conf                                      |    ├── ar.conf                                      |
-|    ├── debian                                       |    ├── agent.conf                                   |
-|    │   ├── agent.conf                               |    ├── cis_debian_linux_rcl.txt                     |
-|    │   ├── cis_debian_linux_rcl.txt                 |    ├── cis_rhel6_linux_rcl.txt                      |
-|    │   ├── cis_rhel6_linux_rcl.txt                  |    ├── cis_rhel7_linux_rcl.txt                      |
-|    │   ├── cis_rhel7_linux_rcl.txt                  |    ├── cis_rhel_linux_rcl.txt                       |
-|    │   ├── cis_rhel_linux_rcl.txt                   |    ├── cis_sles12_linux_rcl.txt                     |
-|    │   ├── cis_sles12_linux_rcl.txt                 |    ├── custom_rootcheck.txt                         |
-|    │   ├── custom_rootcheck.txt                     |    ├── debian_ports_check.txt                       |
-|    │   ├── debian_ports_check.txt                   |    ├── debian_test_files.txt                        |
-|    │   ├── debian_test_files.txt                    |    └── merged.mg                                    |
-|    │   └── merged.mg                                |                                                     |
-|    └── default                                      |                                                     |
-|        ├── agent.conf                               |                                                     |
-|        ├── cis_debian_linux_rcl.txt                 |                                                     |
-|        ├── cis_rhel6_linux_rcl.txt                  |                                                     |
-|        ├── cis_rhel7_linux_rcl.txt                  |                                                     |
-|        ├── cis_rhel_linux_rcl.txt                   |                                                     |
-|        ├── cis_sles12_linux_rcl.txt                 |                                                     |
-|        └── merged.mg                                |                                                     |
-+-----------------------------------------------------+-----------------------------------------------------+
+Each ``<agent_config>`` block contains one or more supported configuration sections. You can define multiple ``<agent_config>`` blocks in the same file to apply different configurations based on agent attributes.
 
-The proper syntax of ``agent.conf`` is shown below along with the process for pushing the configuration from the manager to the agent.
+.. code-block:: xml
 
-agent.conf
-----------
-.. topic:: XML section name
-
-	.. code-block:: xml
-
-		<agent_config>
-		    ...
-		</agent_config>
-
-The ``agent.conf`` is only valid on server installations.
-
-The ``agent.conf`` may exist in each group folder at ``/var/ossec/etc/shared``.
-
-For example, for the ``group1`` group, it is in ``/var/ossec/etc/shared/group1``.  Each of these files should be readable by the ``wazuh`` user.
+   <agent_config>
+     <localfile>
+       <location>/var/log/syslog</location>
+       <log_format>syslog</log_format>
+     </localfile>
+   </agent_config>
 
 Options
--------
+^^^^^^^^
 
-+-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **name**    | Assigns the block to agents with specific names.                                                                                                                  |
-+             +-------------------------------------------------------+-----------------------------------------------------------------------------------------------------------+
-|             | Allowed values                                        | Any regular expression that matches the agent name.                                                       |
-+-------------+-------------------------------------------------------+-----------------------------------------------------------------------------------------------------------+
-| **os**      | Assigns the block to agents on specific operating systems.                                                                                                        |
-+             +-------------------------------------------------------+-----------------------------------------------------------------------------------------------------------+
-|             | Allowed values                                        | Any regular expression that matches the agent OS information.                                             |
-+-------------+-------------------------------------------------------+-----------------------------------------------------------------------------------------------------------+
-| **profile** | Assigns the block to agents with specific profiles as defined in :ref:`client configuration <reference_ossec_client_config_profile>`.                             |
-+             +-------------------------------------------------------+-----------------------------------------------------------------------------------------------------------+
-|             | Allowed values                                        | Any regular expression that matches the agent profile.                                                    |
-+-------------+-------------------------------------------------------+-----------------------------------------------------------------------------------------------------------+
+The ``<agent_config>`` element supports attributes that control which agents receive the enclosed configuration. You can use one or more attributes in the same ``<agent_config>`` block.
 
-.. topic:: Example
+When multiple attributes are specified, an agent must satisfy all of them for the configuration to be applied. If no attributes are specified, the configuration applies to every agent assigned to the group.
 
-	.. code-block:: xml
+The supported attributes are:
 
-		<agent_config name=”^agent01|^agent02”>
-		...
-		<agent_config os="^Linux">
-		...
-		<agent_config profile="^UnixHost">
+- `name`_
+- `os`_
+- `profile`_
 
-   To get the agent name and operating system information, you can run the ``agent_control`` utility.
+name
+~~~~~
 
-   .. code-block:: console
+Applies the configuration only to agents with the specified name.
 
-      agent_control -i <AGENT_ID>
+**Allowed values**: Any regular expression that matches the agent name.
 
-   Where ``<AGENT_ID>`` corresponds to the agent ID of the endpoint.
+**Example**
 
-   The command returns output similar to the following example:
+.. code-block:: xml
 
-   .. code-block:: none
-      :class: output
+   <agent_config name="web-server-01">
+     <localfile>
+       <location>/var/log/nginx/access.log</location>
+       <log_format>syslog</log_format>
+     </localfile>
+   </agent_config>
 
-      Wazuh agent_control. Agent information:
-         Agent ID:   001
-         Agent Name: agent01
-         IP address: any
-         Status:     Active
+os
+~~~
 
-         Operating system:    Linux |centos9 |5.14.0-391.el9.x86_64 |#1 SMP PREEMPT_DYNAMIC Tue Nov 28 20:35:49 UTC 2023 |x86_64
-         Client version:      Wazuh v4.12.0
-         Configuration hash:  ab73af41699f13fdd81903b5f23d8d00
-         Shared file hash:    cb5dc59d195320bb20b6039a519a8c0e
-         Last keep alive:     1755529825
+Applies the configuration only to agents running operating systems that match the specified pattern.
 
-         Syscheck last started at:  Mon Aug 18 15:03:05 2025
-         Syscheck last ended at:    Mon Aug 18 15:03:07 2025
+The os attribute supports simple regular expressions.
+
+**Allowed values**: Any regular expression that matches the agent OS information.
+
+**Example**
+
+.. code-block:: xml
+
+   <agent_config os="Linux">
+     <localfile>
+       <location>/var/log/auth.log</location>
+       <log_format>syslog</log_format>
+     </localfile>
+   </agent_config>
+   <agent_config os="Windows">
+     <localfile>
+       <location>Security</location>
+       <log_format>eventchannel</log_format>
+     </localfile>
+   </agent_config>
+
+profile
+~~~~~~~~
+
+Applies the configuration only to agents that belong to the specified configuration profile.
+
+Configuration profiles are defined locally on the agent using the ``profile`` option in the ``<client>`` section of the ``/var/ossec/etc/ossec.conf`` file on the Wazuh agent.
+
+**Allowed values**: Any regular expression that matches the agent profile.
+
+**Example**
+
+.. code-block:: xml
+
+   <agent_config profile="database-servers">
+     <localfile>
+       <location>/var/log/mysql/error.log</location>
+       <log_format>syslog</log_format>
+     </localfile>
+   </agent_config>
+
+Combining attributes
+~~~~~~~~~~~~~~~~~~~~~~
+
+You can combine multiple attributes to target a more specific set of agents.
+
+The following example applies the configuration only to *Ubuntu* agents that use the *database* configuration profile:
+
+.. code-block:: xml
+
+   <agent_config os="Ubuntu" profile="database">
+     <syscheck>
+       <frequency>1800</frequency>
+     </syscheck>
+   </agent_config>
+
+Configuration precedence
+---------------------------
+
+The Wazuh agent combines the centralized configuration received from the Wazuh manager with its local ``ossec.conf`` configuration.
+
+When the same setting is defined in multiple places, the following precedence applies (highest to lowest):
+
+#. ``agent.conf`` (centralized configuration from the Wazuh manager)
+#. ``ossec.conf`` (local configuration on the agent)
+
+If an agent belongs to multiple groups, the configurations from all groups are merged. In case of conflicts between groups, the configuration from the group with the lowest alphabetical order takes precedence.
+
+Best practices
+^^^^^^^^^^^^^^^
+
+- Use temporary filenames (for example, ``agent.conf.tmp``) while editing configuration files.
+- Validate configuration files before making them active.
+- Use agent groups to organize shared configuration.
+- Use attributes (``name``, ``os``, ``profile``) to target only the intended agents.
 
 Centralized configuration process
----------------------------------
+-------------------------------------
 
-Creating and validating the configuration
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Create the configuration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Create or edit the configuration file in the group directory.
+1. Create or edit the configuration file in the group directory on the Wazuh manager.
 
-   Use a temporary filename such as ``agent.conf.tmp`` during editing to prevent the manager from distributing an incomplete or invalid configuration. For example, run these commands for the ``default`` group.
+   Use a temporary filename such as ``agent.conf.tmp`` during editing to prevent the Wazuh manager from distributing an incomplete or invalid configuration. For example, run these commands to create a configuration file for the ``default`` group.
 
    .. code-block:: console
 
-      # touch /var/ossec/etc/shared/default/agent.conf.tmp
-      # chown wazuh:wazuh /var/ossec/etc/shared/default/agent.conf.tmp
-      # chmod 660 /var/ossec/etc/shared/default/agent.conf.tmp
+      # touch /var/wazuh-manager/etc/shared/default/agent.conf.tmp
+      # chown wazuh-manager:wazuh-manager /var/wazuh-manager/etc/shared/default/agent.conf.tmp
+      # chmod 660 /var/wazuh-manager/etc/shared/default/agent.conf.tmp
 
-#. Define one or more configuration blocks. Use filters such as ``name``, ``os``, and ``profile`` to target specific agents:
+2. Define one or more configuration blocks. Use filters such as name, os, and profile to target specific agents:
 
    .. code-block:: xml
 
       <agent_config name="agent_name">
-          <localfile>
-              <location>/var/log/my.log</location>
-              <log_format>syslog</log_format>
-          </localfile>
+        <localfile>
+          <location>/var/log/my.log</location>
+          <log_format>syslog</log_format>
+        </localfile>
       </agent_config>
-
       <agent_config os="Linux">
-          <localfile>
-              <location>/var/log/linux.log</location>
-              <log_format>syslog</log_format>
-          </localfile>
+        <localfile>
+          <location>/var/log/linux.log</location>
+          <log_format>syslog</log_format>
+        </localfile>
       </agent_config>
-
       <agent_config profile="database">
-          <localfile>
-              <location>/var/log/database.log</location>
-              <log_format>syslog</log_format>
-          </localfile>
+        <localfile>
+          <location>/var/log/database.log</location>
+          <log_format>syslog</log_format>
+        </localfile>
       </agent_config>
 
    .. note::
+      The profile option uses values defined in the ``<config_profile>`` setting of the :doc:`client </user-manual/reference/ossec-conf/client>` configuration.
 
-      The ``profile`` option uses values defined in the :ref:`config-profile  <reference_ossec_client_config_profile>` setting of the ``<client>`` configuration.
+Validate the configuration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Use the ``verify-agent-conf`` tool to validate the temporary configuration before making it active. For example:
-
-   .. code-block:: console
-
-      # /var/ossec/bin/verify-agent-conf -f /var/ossec/etc/shared/default/agent.conf.tmp
-
-   Fix any issues before continuing.
-
-#. Rename the validated file to make it active. For example:
+3. Verify the configuration using the :doc:`verify-agent-conf </user-manual/reference/tools/verify-agent-conf>` tool. Rename the file to make it active. For example:
 
    .. code-block:: console
 
-      # mv /var/ossec/etc/shared/default/agent.conf.tmp /var/ossec/etc/shared/default/agent.conf
+      # /var/wazuh-manager/bin/verify-agent-conf /var/wazuh-manager/etc/shared/default/agent.conf.tmp
 
-The manager will automatically detect the new configuration and distribute it to all agents in the group.
+   The command output looks similar to this:
 
-.. note::
+   .. code-block:: none
+      :class: output
 
-   Restarting the manager helps distribute the new ``agent.conf`` file to the agents more quickly.
+      verify-agent-conf: OK
 
-Confirming that the configuration was applied
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Apply the configuration
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Agents automatically reload the configuration after receiving it. The agent maintains its connection to the manager, since the ``agentd`` daemon is not restarted.
-
-With every agent keepalive (10 seconds default), the agent sends the checksum of its ``merge.md`` file to the manager. If the checksums differ, the manager pushes the updated file to the agent. The agent applies the new configuration immediately after receiving it. No manual restart is required, regardless of the :ref:`auto_restart <client_auto_restart>` setting.
-
-If the configuration is successfully applied, the agent log includes entries similar to the following:
-
-.. code-block:: none
-
-   2025/07/11 08:42:24 wazuh-agentd: INFO: Agent is reloading due to shared configuration changes.
-   2025/07/11 08:42:34 wazuh-agentd: INFO: SIGNAL [(30)-(User defined signal 1: 30)] Received. Reload agentd.
-   2025/07/11 08:42:34 wazuh-agentd: INFO: Buffer agent.conf updated, enable: 1 size: 30000
-   2025/07/11 08:42:34 wazuh-agentd: INFO: Client buffer resized from 20000 to 30000 elements.
-
-Use the Wazuh server API endpoint :api-ref:`GET /agents <operation/api.controllers.agent_controller.get_agents>` or the ``agent_groups`` tool to check the synchronization status of the group configuration on the agent. For example, for agent ID ``001``:
-
--  **Wazuh server API**
+4. Rename the file to make it active. For example:
 
    .. code-block:: console
 
-      # curl -k -X GET "https://localhost:55000/agents?agents_list=001&select=group_config_status&pretty=true" -H  "Authorization: Bearer $TOKEN"
+      # mv /var/wazuh-manager/etc/shared/default/agent.conf.tmp /var/wazuh-manager/etc/shared/default/agent.conf
 
-   .. code-block:: json
-      :class: output
+   The Wazuh manager will automatically detect the new configuration and distribute it to all Wazuh agents in the ``default`` group.
 
-      {
-         "data": {
-            "affected_items": [
-               {
-                  "group_config_status": "synced",
-                  "id": "001"
-               }
-            ],
-            "total_affected_items": 1,
-            "total_failed_items": 0,
-            "failed_items": []
-         },
-         "message": "All selected agents information was returned",
-         "error": 0
-      }
+5. The Wazuh manager automatically detects the updated configuration and distributes it to agents in the group.
 
--  **agent_groups tool**
+   A restart is not normally required. To trigger distribution sooner, restart the Wazuh manager. Refer to the :doc:`query the Wazuh agent configuration </user-manual/agent/agent-management/query-configuration>` documentation for more information on checking the synchronization status of a Wazuh agent.
 
    .. code-block:: console
 
-      # /var/ossec/bin/agent_groups -S -i 001
+      # systemctl restart wazuh-manager
 
-   .. code-block:: none
-      :class: output
-
-      Agent '001' is synchronized.
-
-Precedence
-----------
-
-It's important to understand which configuration file takes precedence between ``ossec.conf`` and ``agent.conf`` when the central configuration is used. When this configuration is utilized, the local and the shared configuration are merged, however, the ``ossec.conf`` file is read before the shared ``agent.conf`` and the last configuration of any setting will overwrite the previous. Also, if a file path for a particular setting is set in both of the configuration files, both paths will be included in the final configuration.
-
-For example:
-
-Let's say we have this configuration in the ``ossec.conf`` file:
-
-.. code-block:: xml
-
-  <sca>
-    <enabled>no</enabled>
-    <scan_on_start>yes</scan_on_start>
-    <interval>12h</interval>
-    <skip_nfs>yes</skip_nfs>
-
-    <policies>
-      <policy>system_audit_rcl.yml</policy>
-      <policy>system_audit_ssh.yml</policy>
-      <policy>system_audit_pw.yml</policy>
-    </policies>
-  </sca>
-
-and this configuration in the ``agent.conf`` file.
-
-.. code-block:: xml
-
-  <sca>
-    <enabled>yes</enabled>
-
-    <policies>
-      <policy>cis_debian_linux_rcl.yml</policy>
-    </policies>
-  </sca>
-
-The final configuration will enable the Security Configuration Assessment module. In addition, it will add the `cis_debian_linux_rcl.yml` to the list of scanned policies.
-In other words, the configuration located at ``agent.conf`` will overwrite the one of the ``ossec.conf``.
-
-How to ignore shared configuration
-----------------------------------
-
-Whether for any reason you don't want to apply the shared configuration in a specific agent, it can be disabled by adding the following line to the ``/var/ossec/etc/local_internal_options.conf`` file in that agent:
-
-.. code-block:: shell
-
-    agent.remote_conf=0
-
-Download configuration files from remote location
--------------------------------------------------
-
-The Wazuh manager can download configuration files such as ``merged.mg`` and other files to be merged for selected groups.
-
-To use this feature, we need to put a yaml file named ``files.yml`` under the directory ``/var/ossec/etc/shared/``. When the **manager** starts, it will read and parse the file.
-
-The ``files.yml`` has the following structure as shown in the following example:
-
-.. code-block:: yaml
-
-    groups:
-        my_group_1:
-            files:
-                agent.conf: https://example.com/agent.conf
-                rootcheck.txt: https://example.com/rootcheck.txt
-                merged.mg: https://example.com/merged.mg
-            poll: 15
-
-        my_group_2:
-            files:
-                agent.conf: https://example.com/agent.conf
-            poll: 200
-
-The ``groups`` block defines the group name from which to download the files.
-
-    - If the group doesn't exist, it will be created.
-    - If a file has the name ``merged.mg``, only this file will be downloaded. Then it will be validated.
-    - The ``poll`` label indicates the download rate in seconds of the specified files.
-
-This configuration can be changed on the fly. The **manager** will reload the file and parse it again so there is no need to restart the **manager** every time.
-
-The information about the parsing is shown on the ``/var/ossec/logs/ossec.log`` file. For example:
-
--  Parsing is successful:
-
-   .. code-block:: none
-      :class: output
-
-      INFO: Successfully parsed of yaml file: /etc/shared/files.yml
-
--  File has been changed:
-
-   .. code-block:: none
-      :class: output
-
-      INFO: File '/etc/shared/files.yml' changed. Reloading data
-
--  Parsing failed due to bad token:
-
-   .. code-block:: none
-      :class: output
-
-      INFO: Parsing file '/etc/shared/files.yml': unexpected identifier: 'group'
-
--  Download of file failed:
-
-   .. code-block:: none
-      :class: output
-
-      ERROR: Failed to download file from url: https://example.com/merged.mg
-
--  Downloaded ``merged.mg`` file is corrupted or not valid:
-
-   .. code-block:: none
-      :class: output
-
-      ERROR: The downloaded file '/var/download/merged.mg' is corrupted.
+   Connected agents receive the updated configuration automatically after the Wazuh manager detects the change.

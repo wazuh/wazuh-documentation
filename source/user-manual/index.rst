@@ -22,6 +22,7 @@ Welcome to the Wazuh user manual. Use it as your reference library once your bas
       capabilities/index
       Wazuh manager API reference <api/reference>
       Wazuh indexer API reference <indexer-api/reference>
+      reference/index
 
 ..
       wazuh-server-cluster/index
@@ -30,4 +31,3 @@ Welcome to the Wazuh user manual. Use it as your reference library once your bas
       wazuh-indexer-cluster/index
       indexer-api/index
       ruleset/index
-      reference/index

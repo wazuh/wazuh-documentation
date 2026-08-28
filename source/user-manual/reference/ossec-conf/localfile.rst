@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about how to configure the collection of log data from files, Windows events, and from the output of commands with Wazuh.
+  :description: Learn about the localfile configuration section of ossec.conf, which configures the collection of log data from files, Windows events, and command output.
 
 .. _reference_ossec_localfile:
 
@@ -10,12 +10,14 @@ localfile
 
 .. topic:: XML section name
 
-    .. code-block:: xml
+   .. code-block:: xml
 
-        <localfile>
-        </localfile>
+      <localfile>
+      </localfile>
 
-This configuration section is used to configure the collection of log data from files, Windows events, and from the output of commands.
+This configuration section is used to configure the collection of log data from files, Windows events, and command output.
+
+Define a separate ``<localfile>`` section for each log source.
 
 Options
 -------
@@ -39,86 +41,74 @@ Options
 - `restrict`_
 - `filter`_
 
-
 location
 ^^^^^^^^
 
 The ``location`` field specifies where the log data comes from. It includes the following options.
 
--  A path to a log file
--  A Windows event channel
--  The macOS ULS
--  The ``journald`` system
+- A path to a log file
+- A Windows event channel
+- The macOS ULS
+- The ``journald`` system
 
-+--------------------+----------------------------------------------------------+
-| **Default value**  | n/a                                                      |
-+--------------------+----------------------------------------------------------+
-| **Allowed values** | File path, Event channel, ``macos``, ``journald``        |
-+--------------------+----------------------------------------------------------+
++----------------------+---------------------------------------------+
+| **Default value**    | None                                        |
++----------------------+---------------------------------------------+
+| **Allowed values**   | File path, Event channel, macos, journald   |
++----------------------+---------------------------------------------+
 
 .. note::
-
-   -  To collect logs from the macOS ULS, you must set both ``location`` and ``log_format`` to ``macos``.
-   -  To collect logs from the ``journald`` system, you must set both ``location`` and ``log_format`` to ``journald``.
+   To collect logs from the macOS ULS, you must set both ``location`` and ``log_format`` to ``macos``. To collect logs from the journald system, you must set both ``location`` and ``log_format`` to ``journald``.
 
 For log file names, you can use ``strftime`` format strings. For example, you can reference a log file named ``file.log-2024-04-26`` by ``file.log-%Y-%m-%d``.
 
 Wildcards can be used on Linux and Windows systems, if the log file doesn't exist at ``wazuh-logcollector`` start time, such log will be re-scanned after ``logcollector.vcheck_files`` seconds.
 
-The location field is also valid to filter by channel in case of using an ``eventchannel`` supporting Windows.
+The ``location`` field is also valid to filter by channel in case of using an ``eventchannel`` supporting Windows.
 
 In the following example we can see two configurations showing a channel filtering for firewall and Sysmon events.
 
 .. code-block:: xml
 
-  <localfile>
-      <location>Microsoft-Windows-Sysmon/Operational</location>
-      <log_format>eventchannel</log_format>
-  </localfile>
-
-  <localfile>
-      <location>Microsoft-Windows-Windows Firewall With Advanced Security/Firewall</location>
-      <log_format>eventchannel</log_format>
-  </localfile>
-
+   <localfile>
+     <location>Microsoft-Windows-Sysmon/Operational</location>
+     <log_format>eventchannel</log_format>
+   </localfile>
+   <localfile>
+     <location>Microsoft-Windows-Windows Firewall With Advanced Security/Firewall</location>
+     <log_format>eventchannel</log_format>
+   </localfile>
 
 Below we have some Windows wildcard examples.
 
 .. code-block:: xml
 
-  <localfile>
-      <location>C:\Users\wazuh\myapp\*</location>
-      <log_format>syslog</log_format>
-  </localfile>
-
-  <localfile>
-      <location>C:\xampp\apache\logs\*.log</location>
-      <log_format>syslog</log_format>
-  </localfile>
-
-  <localfile>
-      <location>C:\logs\file-%Y-%m-%d.log</location>
-      <log_format>syslog</log_format>
-  </localfile>
+   <localfile>
+     <location>C:\Users\wazuh\myapp\*</location>
+     <log_format>syslog</log_format>
+   </localfile>
+   <localfile>
+     <location>C:\xampp\apache\logs\*.log</location>
+     <log_format>syslog</log_format>
+   </localfile>
+   <localfile>
+     <location>C:\logs\file-%Y-%m-%d.log</location>
+     <log_format>syslog</log_format>
+   </localfile>
 
 .. note::
-  * ``strftime`` format strings and wildcards cannot be used on the same entry.
-
-  * On Windows systems, only character ``*`` is supported as a wildcard. For instance ``*ANY_STRING*``, will match all files that have ``ANY_STRING`` inside its name, another example is ``*.log`` this will match any log file.
-  * The maximum amount of files monitored at same time is limited to 1000.
-
-.. _command:
+   ``strftime`` format strings and wildcards cannot be used on the same entry. On Windows systems, only character ``*`` is supported as a wildcard. For instance ``*ANY_STRING*``, will match all files that have ANY_STRING inside its name, another example is ``*.log`` this will match any log file. The maximum amount of files monitored at same time is limited to 1000.
 
 command
 ^^^^^^^
 
-Given a command output, it will be read as one or more log messages depending on *command* or *full_command* is used.
+Given a command output, it will be read as one or more log messages depending on if ``command`` or ``full_command`` is used.
 
-+--------------------+--------------------------------------------------+
-| **Default value**  | n/a                                              |
-+--------------------+--------------------------------------------------+
-| **Allowed values** | Any command line, optionally including arguments |
-+--------------------+--------------------------------------------------+
++----------------------+----------------------------------------------------+
+| **Default value**    | n/a                                                |
++----------------------+----------------------------------------------------+
+| **Allowed values**   | Any command line, optionally including arguments   |
++----------------------+----------------------------------------------------+
 
 alias
 ^^^^^
@@ -128,6 +118,7 @@ Change a command name in the log message.
 For example ``<alias>usb-check</alias>`` would replace:
 
 .. code-block:: none
+   :class: output
 
    ossec: output: 'reg QUERY HKLM\SYSTEM\CurrentControlSet\Enum\USBSTOR':
 
@@ -138,118 +129,105 @@ with:
 
    ossec: output: 'usb-check':
 
-+--------------------+------------+
-| **Default value**  | n/a        |
-+--------------------+------------+
-| **Allowed values** | any string |
-+--------------------+------------+
++----------------------+--------------+
+| **Default value**    | n/a          |
++----------------------+--------------+
+| **Allowed values**   | any string   |
++----------------------+--------------+
 
 frequency
 ^^^^^^^^^
 
-Defines the interval (in seconds) between executions of the command. This option applies to both *command* and *full_command*.
+Defines the interval (in seconds) between executions of the command. This option applies to both ``command`` and ``full_command``.
 
-+--------------------+--------------------------------+
-| **Default value**  | 360                            |
-+--------------------+--------------------------------+
-| **Allowed values** | any positive number of seconds |
-+--------------------+--------------------------------+
++----------------------+----------------------------------+
+| **Default value**    | 360                              |
++----------------------+----------------------------------+
+| **Allowed values**   | any positive number of seconds   |
++----------------------+----------------------------------+
 
 only-future-events
-^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^
 
-It allows to read new log content since ``wazuh-logcollector`` was stopped.
+Controls whether Logcollector collects events written while it was stopped.
 
-By default, when ``wazuh-logcollector`` is started it reads the logs generated since that moment.
-Set it to ``no`` to collect events generated since ``wazuh-logcollector`` was stopped.
+When set to ``yes``, Logcollector starts at the current end of the log and collects only new events.
 
-+--------------------+-----------+
-| **Default value**  | yes       |
-+--------------------+-----------+
-| **Allowed values** | yes or no |
-+--------------------+-----------+
+When set to ``no``, Logcollector resumes from its last recorded position when possible.
+
++----------------------+-------------+
+| **Default value**    | yes         |
++----------------------+-------------+
+| **Allowed values**   | yes or no   |
++----------------------+-------------+
 
 The attributes below are optional.
 
-+-------------+---------------------------------------+--------------+---------------+
-| Attribute   |              Description              | Value range  | Default value |
-+=============+=======================================+==============+===============+
-|**max-size** | Allows to skip reading old events     |              |               |
-|             | from the last read if the length of   |  0 to 2GB    |     10MB      |
-|             | them exceeds a certain value in bytes.|              |               |
-|             |                                       |              |               |
-|             | Positive number followed by B, KB, MB |              |               |
-|             | and GB units are supported            |              |               |
-+-------------+---------------------------------------+--------------+---------------+
++-------------+----------------------------------------------------------------------------------------------+---------------+-----------------+
+| Attribute   | Description                                                                                  | Value range   | Default value   |
++=============+==============================================================================================+===============+=================+
+| max-size    | Allows to skip reading old events from the last read if the length of them exceeds a certain | 0 to 2GB      | 10MB            |
+|             | value in bytes. Positive number followed by B, KB, MB and GB units are supported             |               |                 |
++-------------+----------------------------------------------------------------------------------------------+---------------+-----------------+
 
 .. note::
-  If collecting logs with ``<log_format>`` set as ``macos``, then ``max-size`` is ignored.
+   If collecting logs with ``<log_format>`` set as ``macos``, then ``max-size`` is ignored.
 
 .. note::
-  If the log rotates while ``wazuh-logcollector`` is stopped and ``only-future-events`` is set to ``no``, it will start reading from the beginning of the log.
-
-.. _query:
+   If the log rotates while ``wazuh-logcollector`` is stopped and ``only-future-events`` is set to no, it will start reading from the beginning of the log.
 
 query
 ^^^^^
 
-This label can be used to filter *Windows* ``eventchannel`` events or *macOS* ULS logs (``macos``) that Wazuh will process.
+This label can be used to filter Windows eventchannel events or macOS ULS logs (``macos``) that Wazuh will process.
 
-To filter *Windows* ``eventchannel`` events, *XPATH* format is used to make the queries following the event schema.
-
-Example:
-
-.. code-block:: xml
-
-  <localfile>
-    <location>Security</location>
-    <log_format>eventchannel</log_format>
-    <query>Event[System/EventID = 4624 and (EventData/Data[@Name='LogonType'] = 2 or EventData/Data[@Name='LogonType'] = 10)]</query>
-  </localfile>
-
-To filter *macOS* ULS logs (``macos``), *Predicates* format is used to make the queries.
+To filter Windows ``eventchannel`` events, XPATH format is used to make the queries following the event schema.
 
 Example:
 
 .. code-block:: xml
 
-  <localfile>
-    <location>macos</location>
-    <log_format>macos</log_format>
-    <query type="log,trace" level="debug">process == "sshd" OR message CONTAINS "invalid"</query>
-  </localfile>
+   <localfile>
+     <location>Security</location>
+     <log_format>eventchannel</log_format>
+     <query>Event[System/EventID = 4624 and (EventData/Data[@Name='LogonType'] = 2 or EventData/Data[@Name='LogonType'] = 10)]</query>
+   </localfile>
 
-+--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **Default value**  | n/a                                                                                                                                                       |
-+--------------------+----------------------+------------------------------------------------------------------------------------------------------------------------------------+
-| **Allowed values** | Windows Eventchannel | XPATH query format, follows the `event schema <https://msdn.microsoft.com/en-us/library/windows/desktop/aa385201(v=vs.85).aspx>`_  |
-|                    +----------------------+------------------------------------------------------------------------------------------------------------------------------------+
-|                    | macOS ULS            | Predicate query format, see :ref:`How to collect macOS ULS logs <how-to-collect-macoslogs>`                                        |
-+--------------------+----------------------+------------------------------------------------------------------------------------------------------------------------------------+
+To filter macOS ULS logs (``macos``), Predicates format is used to make the queries.
+
+Example:
+
+.. code-block:: xml
+
+   <localfile>
+     <location>macos</location>
+     <log_format>macos</log_format>
+     <query type="log,trace" level="debug">process == "sshd" OR message CONTAINS "invalid"</query>
+   </localfile>
+
++----------------------+----------------------------------------------------------------------------------------------+
+| **Default value**    | n/a                                                                                          |
++----------------------+----------------------------------------------------------------------------------------------+
+| **Allowed values**   | For Windows Eventchannel: XPATH query format, follows the event schema. For macOS ULS:       |
+|                      | Predicate query format, see How to collect macOS ULS logs.                                   |
++----------------------+----------------------------------------------------------------------------------------------+
+
+For Windows Eventchannel, the query follows the `event schema <https://msdn.microsoft.com/en-us/library/windows/desktop/aa385201(v=vs.85).aspx>`__. For macOS ULS, see :ref:`How to collect macOS ULS logs <how-to-collect-macoslogs>`.
 
 The attributes below are optional and only valid for macOS ULS (``macos``).
 
-+-------------+---------------------------------------+--------------+----------------+
-| Attribute   |              Description              | Value range  | Default value  |
-+=============+=======================================+==============+================+
-|  **level**  | Indicates the level of verbosity,     |   default    |    default     |
-|             | `default` is the less verbose and     +--------------+                |
-|             | `debug` is the most verbose.          |   info       |                |
-|             |                                       +--------------+                |
-|             |                                       |   debug      |                |
-+-------------+---------------------------------------+--------------+----------------+
-|  **type**   | Limits the type of logs that are      |  activity    |    all         |
-|             | intended to be acquired to the ones   +--------------+                |
-|             | listed and sepparated by commas.      |   log        |                |
-|             |                                       +--------------+                |
-|             |                                       |   trace      |                |
-+-------------+---------------------------------------+--------------+----------------+
-
++---------+----------------------------------------------------------------------------------------------+
+| level   | Indicates the level of verbosity, default is the less verbose and debug is the most verbose. |
+|         | Allowed values: default (default), info, debug                                               |
++---------+----------------------------------------------------------------------------------------------+
+| type    | Limits the type of logs that are intended to be acquired to the ones listed and separated by |
+|         | commas. Allowed values: activity, log, trace (default: all)                                  |
++---------+----------------------------------------------------------------------------------------------+
 
 label
 ^^^^^
 
-Used to add custom data in JSON events. Set `log_format`_ to ``json`` to use it.
+Used to add custom data in JSON events. Set `log_format`_ to json to use it.
 
 Labels can be nested in JSON alerts by separating the "key" terms by a period.
 
@@ -257,141 +235,137 @@ Here is an example of how to identify the source of each log entry when monitori
 
 .. code-block:: xml
 
-  <localfile>
-    <location>/var/log/myapp/log.json</location>
-    <log_format>json</log_format>
-    <label key="@source">myapp</label>
-    <label key="agent.type">webserver</label>
-  </localfile>
+   <localfile>
+     <location>/var/log/myapp/log.json</location>
+     <log_format>json</log_format>
+     <label key="@source">myapp</label>
+     <label key="agent.type">webserver</label>
+   </localfile>
 
 This is a sample JSON object from the log file:
 
 .. code-block:: json
 
-  {
-    "event": {
-      "type": "write",
-      "destination": "sample.txt"
-    },
-    "agent": {
-      "name": "web01"
-    }
-  }
+   {
+     "event": {
+       "type": "write",
+       "destination": "sample.txt"
+     },
+     "agent": {
+       "name": "web01"
+     }
+   }
 
 The additional fields configured above would appear in the resulting event as below:
 
+The command output looks similar to this:
+
 .. code-block:: json
-  :class: output
+   :class: output
 
-  {
-    "event": {
-      "type": "write",
-      "destination": "sample.txt"
-    },
-    "agent": {
-      "name": "web01",
-      "type": "webserver"
-    },
-    "@source": "myapp"
-  }
+   {
+     "event": {
+       "type": "write",
+       "destination": "sample.txt"
+     },
+     "agent": {
+       "name": "web01",
+       "type": "webserver"
+     },
+     "@source": "myapp"
+   }
 
-.. note:: If a label key already exists in the log data, the configured field value will not be included. It is recommended that a unique label key is defined by using a symbol prior to the key name as in *@source*.
+.. note::
+   If a label key already exists in the log data, the configured field value will not be included. It is recommended that a unique label key is defined by using a symbol prior to the key name as in ``@source``.
 
 target
 ^^^^^^
 
 Target specifies the name of the socket where the output will be redirected. The socket must be defined previously.
 
-+--------------------+--------------------------------+
-| **Default value**  | agent                          |
-+--------------------+--------------------------------+
-| **Allowed values** | any defined socket             |
-+--------------------+--------------------------------+
-
-.. _log_format:
++----------------------+----------------------+
+| **Default value**    | agent                |
++----------------------+----------------------+
+| **Allowed values**   | any defined socket   |
++----------------------+----------------------+
 
 log_format
-^^^^^^^^^^
+^^^^^^^^^^^
 
-Specifies the format of the log to be read. **This field is required.**
-
-.. note::
-
-   For most text log files with one entry per line, use the ``syslog`` format.
-
-+--------------------+----------------------------------------------------------------------------------------------------------------------+
-| **Default value**  | n/a                                                                                                                  |
-+--------------------+--------------------+-------------------------------------------------------------------------------------------------+
-| **Allowed values** | apache             | Used for Apache web server access and error logs.                                               |
-+                    +--------------------+-------------------------------------------------------------------------------------------------+
-|                    | audit              | Used for Auditd events. Chains consecutive logs with the same ID into a single event.           |
-+                    +--------------------+-------------------------------------------------------------------------------------------------+
-|                    | command            | Executes a command as root and treats each line of output as a separate log entry.              |
-|                    |                    | Requires ``logcollector.remote_commands=1`` in internal options.                                |
-+                    +--------------------+-------------------------------------------------------------------------------------------------+
-|                    | djb-multilog       | Reads files in the format produced by the daemontools multi-log service logger.                 |
-+                    +--------------------+-------------------------------------------------------------------------------------------------+
-|                    | eventchannel       | Used for Microsoft Windows event channels (Vista+). Monitors specified channels and includes    |
-|                    |                    | all fields in JSON format. Supports standard Windows logs and Application/Service logs.         |
-+                    +--------------------+-------------------------------------------------------------------------------------------------+
-|                    | eventlog           | Used for the classic Microsoft Windows event log format.                                        |
-+                    +--------------------+-------------------------------------------------------------------------------------------------+
-|                    | full_command       | Executes a command as root and treats the entire output as a single log entry.                  |
-|                    |                    | Requires ``logcollector.remote_commands=1`` in internal options.                                |
-+                    +--------------------+-------------------------------------------------------------------------------------------------+
-|                    | generic            | Used for generic text log files.                                                                |
-+                    +--------------------+-------------------------------------------------------------------------------------------------+
-|                    | iis                | Used for Microsoft Internet Information Services (IIS) web server logs.                         |
-+                    +--------------------+-------------------------------------------------------------------------------------------------+
-|                    | journald           | Used for systemd-journal events. Events are collected in syslog format.                         |
-+                    +--------------------+-------------------------------------------------------------------------------------------------+
-|                    | json               | Used for single-line JSON files. Supports custom labels via the `label`_ tag.                   |
-+                    +--------------------+-------------------------------------------------------------------------------------------------+
-|                    | macos              | Used for macOS Unified Logging System (ULS) logs in syslog format. Monitors logs matching the   |
-|                    |                    | query filter. See :ref:`how to collect macOS ULS logs <how-to-collect-macoslogs>`.              |
-+                    +--------------------+-------------------------------------------------------------------------------------------------+
-|                    | multi-line         | Used for applications that log multiple fixed lines per event.                                  |
-|                    |                    | Format: ``multi-line: <NUMBER>``. Combines lines until the specified count is reached.          |
-+                    +--------------------+-------------------------------------------------------------------------------------------------+
-|                    | multi-line-regex   | Used for applications with variable numbers of lines per event.                                 |
-|                    |                    | Behavior depends on the `multiline_regex`_ option.                                              |
-+                    +--------------------+-------------------------------------------------------------------------------------------------+
-|                    | mysql_log          | Used for MySQL database logs. Does not support multi-line logs.                                 |
-+                    +--------------------+-------------------------------------------------------------------------------------------------+
-|                    | mssql_log          | Used for Microsoft SQL Server logs.                                                             |
-+                    +--------------------+-------------------------------------------------------------------------------------------------+
-|                    | nmapg              | Used for grep-able output from the Nmap security scanner.                                       |
-+                    +--------------------+-------------------------------------------------------------------------------------------------+
-|                    | ossecalert         | Used for OSSEC alert logs.                                                                      |
-+                    +--------------------+-------------------------------------------------------------------------------------------------+
-|                    | postgresql_log     | Used for PostgreSQL database logs. Does not support multi-line logs.                            |
-+                    +--------------------+-------------------------------------------------------------------------------------------------+
-|                    | snort-fast         | Used for Snort intrusion detection system fast-output format.                                   |
-+                    +--------------------+-------------------------------------------------------------------------------------------------+
-|                    | snort-full         | Used for Snort intrusion detection system full-output format.                                   |
-+                    +--------------------+-------------------------------------------------------------------------------------------------+
-|                    | squid              | Used for Squid proxy server logs.                                                               |
-+                    +--------------------+-------------------------------------------------------------------------------------------------+
-|                    | syslog             | Used for plain text files in syslog-like format (one entry per line).                           |
-+                    +--------------------+-------------------------------------------------------------------------------------------------+
-|                    | syslog-pipe        | Used for reading from named pipes in syslog format.                                             |
-+--------------------+--------------------+-------------------------------------------------------------------------------------------------+
+Set the format of the log to be read. **This option is required.**
 
 .. note::
+   For most of the text log files that only have one entry per line, syslog may be used.
 
-   Only one configuration block with ``log_format`` set to ``macos`` is allowed. If multiple blocks are present, only the last one is used.
+Default value: n/a. Allowed values are listed below:
+
++--------------------+----------------------------------------------------------------------------------------------+
+| Value              | Description                                                                                  |
++====================+==============================================================================================+
+| apache             | Used for Apache web server access and error logs.                                            |
++--------------------+----------------------------------------------------------------------------------------------+
+| audit              | Used for Auditd events. Chains consecutive logs with the same ID into a single event.        |
++--------------------+----------------------------------------------------------------------------------------------+
+| command            | Executes a command and treats each line of output as a separate log entry. When this         |
+|                    | configuration is distributed through agent.conf, the agent must have                         |
+|                    | logcollector.remote_commands=1 enabled in its internal options.                              |
++--------------------+----------------------------------------------------------------------------------------------+
+| djb-multilog       | Reads files in the format produced by the daemontools multi-log service logger.              |
++--------------------+----------------------------------------------------------------------------------------------+
+| eventchannel       | Used for Microsoft Windows event channels (Vista+). Monitors specified channels and includes |
+|                    | all fields in JSON format. Supports standard Windows logs and Application/Service logs.      |
++--------------------+----------------------------------------------------------------------------------------------+
+| eventlog           | Used for the classic Microsoft Windows event log format.                                     |
++--------------------+----------------------------------------------------------------------------------------------+
+| full_command       | Executes a command and treats the entire output as a single log entry. When this             |
+|                    | configuration is distributed through agent.conf, the agent must have                         |
+|                    | logcollector.remote_commands=1 enabled in its internal options.                              |
++--------------------+----------------------------------------------------------------------------------------------+
+| generic            | Used for generic text log files.                                                             |
++--------------------+----------------------------------------------------------------------------------------------+
+| iis                | Used for Microsoft Internet Information Services (IIS) web server logs.                      |
++--------------------+----------------------------------------------------------------------------------------------+
+| journald           | Used for systemd-journal events. Events are collected in syslog format.                      |
++--------------------+----------------------------------------------------------------------------------------------+
+| json               | Used for single-line JSON files. Supports custom labels via the `label`_ tag.                |
++--------------------+----------------------------------------------------------------------------------------------+
+| macos              | Used for macOS Unified Logging System (ULS) logs in syslog format. Monitors logs matching    |
+|                    | the query filter.                                                                            |
++--------------------+----------------------------------------------------------------------------------------------+
+| multi-line         | Used for applications that log multiple fixed lines per event. Format: multi-line:<NUMBER>.  |
+|                    | Combines lines until the specified count is reached.                                         |
++--------------------+----------------------------------------------------------------------------------------------+
+| multi-line-regex   | Used for applications with variable numbers of lines per event. Behavior depends on the      |
+|                    | `multiline_regex`_ option.                                                                   |
++--------------------+----------------------------------------------------------------------------------------------+
+| mysql_log          | Used for MySQL database logs. Does not support multi-line logs.                              |
++--------------------+----------------------------------------------------------------------------------------------+
+| mssql_log          | Used for Microsoft SQL Server logs.                                                          |
++--------------------+----------------------------------------------------------------------------------------------+
+| nmapg              | Used for grep-able output from the Nmap security scanner.                                    |
++--------------------+----------------------------------------------------------------------------------------------+
+| ossecalert         | Used for OSSEC alert logs.                                                                   |
++--------------------+----------------------------------------------------------------------------------------------+
+| postgresql_log     | Used for PostgreSQL database logs. Does not support multi-line logs.                         |
++--------------------+----------------------------------------------------------------------------------------------+
+| snort-fast         | Used for Snort intrusion detection system fast-output format.                                |
++--------------------+----------------------------------------------------------------------------------------------+
+| snort-full         | Used for Snort intrusion detection system full-output format.                                |
++--------------------+----------------------------------------------------------------------------------------------+
+| squid              | Used for Squid proxy server logs.                                                            |
++--------------------+----------------------------------------------------------------------------------------------+
+| syslog             | Used for plain text files in syslog-like format (one entry per line).                        |
++--------------------+----------------------------------------------------------------------------------------------+
+| syslog-pipe        | Used for reading from named pipes in syslog format.                                          |
++--------------------+----------------------------------------------------------------------------------------------+
 
 .. note::
+   Only one configuration block with ``log_format`` set as ``macos`` is allowed. If more blocks are added, the last one will be used. The ``eventchannel`` log format cannot be used on Windows agents prior to the Vista OS as they do not produce this type of log. Agents will ignore ``command`` and ``full_command`` log sources unless they have ``logcollector.remote_commands=1`` set in their ``/var/ossec/etc/internal_options.conf`` or ``/var/ossec/etc/local_internal_options.conf`` file. This is a security precaution to prevent the Wazuh manager from running arbitrary commands on agents in their root security context. When ``command`` or ``full_command`` log sources are distributed through centralized configuration in ``agent.conf``, agents ignore them unless ``logcollector.remote_commands=1`` is enabled in ``/var/ossec/etc/local_internal_options.conf``. This security control prevents the Wazuh manager from remotely causing agents to execute commands. It does not apply to ``command`` sources configured directly in the agent's local ``ossec.conf``.
 
-   The ``eventchannel`` format is not supported on Windows versions prior to Vista, as they do not support event channels.
-
-.. note::
-
-   Agents ignore ``command`` and ``full_command`` log sources unless ``logcollector.remote_commands=1`` is set in ``/var/ossec/etc/internal_options.conf`` or ``/var/ossec/etc/local_internal_options.conf``. This prevents the manager from executing arbitrary commands on agents with root privileges.
-
-Sample of multi-line log message in the original log file:
+Sample of multi-line log message in original log file:
 
 .. code-block:: none
+   :class: output
 
    Aug 9 14:22:47 hostname log line one
    Aug 9 14:22:47 hostname log line two
@@ -399,79 +373,83 @@ Sample of multi-line log message in the original log file:
    Aug 9 14:22:47 hostname log line three
    Aug 9 14:22:47 hostname log line five
 
-Sample of log message as processed by wazuh-analysisd:
+Sample log message as analyzed by ``wazuh-analysisd``:
+
+The command output looks similar to this:
 
 .. code-block:: none
    :class: output
 
-   Aug 9 14:22:47 hostname log line one Aug 9 14:22:47 hostname log line two Aug 9 14:22:47 hostname log line three Aug 9 14:22:47 hostname log line four Aug 9 14:22:47 hostname log line five
-
-.. _ossec_localfile_out_format:
+   Aug 9 14:22:47 hostname log line one
+   Aug 9 14:22:47 hostname log line two
+   Aug 9 14:22:47 hostname log line three
+   Aug 9 14:22:47 hostname log line four
+   Aug 9 14:22:47 hostname log line five
 
 out_format
-^^^^^^^^^^
+^^^^^^^^^^^
 
-This option allows formatting logs from Logcollector using field substitution.
+Specifies the output format applied before Logcollector sends an event.
 
 The list of available parameters is:
 
-+------------------------+-----------------------------------------------------------------------+
-| **Parameter**          | **Description**                                                       |
-+========================+=======================================================================+
-| ``log``                | Message from the log.                                                 |
-+------------------------+-----------------------------------------------------------------------+
-| ``json_escaped_log``   | Message from the log, escaping JSON reserver characters.              |
-+------------------------+-----------------------------------------------------------------------+
-| ``base64_log``         | Message from the log, encoded in base64.                              |
-+------------------------+-----------------------------------------------------------------------+
-| ``output``             | Output from a command. Alias of ``log``.                              |
-+------------------------+-----------------------------------------------------------------------+
-| ``location``           | Path to the source log file.                                          |
-+------------------------+-----------------------------------------------------------------------+
-| ``command``            | Command line or alias defined for the command. Alias of ``location``. |
-+------------------------+-----------------------------------------------------------------------+
-| ``timestamp``          | Current timestamp (when the log is sent), in RFC3164 format.          |
-+------------------------+-----------------------------------------------------------------------+
-| ``timestamp <FORMAT>`` | Custom timestamp, in ``strftime`` string format.                      |
-+------------------------+-----------------------------------------------------------------------+
-| ``hostname``           | System's host name.                                                   |
-+------------------------+-----------------------------------------------------------------------+
-| ``host_ip``            | Host's primary IP address.                                            |
-+------------------------+-----------------------------------------------------------------------+
++----------------------+---------------------------------------------------------------------+
+| Parameter            | Description                                                         |
++======================+=====================================================================+
+| log                  | Message from the log.                                               |
++----------------------+---------------------------------------------------------------------+
+| json_escaped_log     | Message from the log, escaping JSON reserved characters.            |
++----------------------+---------------------------------------------------------------------+
+| base64_log           | Message from the log, encoded in base64.                            |
++----------------------+---------------------------------------------------------------------+
+| output               | Output from a command. Alias of log.                                |
++----------------------+---------------------------------------------------------------------+
+| location             | Path to the source log file.                                        |
++----------------------+---------------------------------------------------------------------+
+| command              | Command line or alias defined for the command. Alias of location.   |
++----------------------+---------------------------------------------------------------------+
+| timestamp            | Current timestamp (when the log is sent), in RFC3164 format.        |
++----------------------+---------------------------------------------------------------------+
+| timestamp <FORMAT>   | Custom timestamp, in strftime string format.                        |
++----------------------+---------------------------------------------------------------------+
+| hostname             | System's host name.                                                 |
++----------------------+---------------------------------------------------------------------+
+| host_ip              | Host's primary IP address.                                          |
++----------------------+---------------------------------------------------------------------+
 
 Attributes:
 
-+------------+-----------------------------------------------------------------------------------+
-| **target** | This option selects a defined target to apply the output format.                  |
-+            +----------------+------------------------------------------------------------------+
-|            | Allowed values | Any target defined in the option ``<target>``.                   |
-|            +----------------+------------------------------------------------------------------+
-|            | Default value  | Select all targets defined in the ``<localfile>`` stanza.        |
-+------------+----------------+------------------------------------------------------------------+
++------------------+--------------------------------------------------------------------+
+| target           | This option selects a defined target to apply the output format.   |
++------------------+--------------------------------------------------------------------+
+| Allowed values   | Any target defined in the option <target>.                         |
++------------------+--------------------------------------------------------------------+
+| Default value    | Select all targets defined in the <localfile> stanza.              |
++------------------+--------------------------------------------------------------------+
 
 ignore_binaries
-^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^
 
 This specifies to ignore binary files, testing if the file is UTF8 or ASCII.
 
-If this is set to **yes** and the file is, for example, a binary file, it will be discarded.
+If this is set to yes and the file is, for example, a binary file, it will be discarded.
 
-+--------------------+-----------+
-| **Default value**  | n/a       |
-+--------------------+-----------+
-| **Allowed values** | yes or no |
-+--------------------+-----------+
++----------------------+-------------+
+| **Default value**    | n/a         |
++----------------------+-------------+
+| **Allowed values**   | yes or no   |
++----------------------+-------------+
 
 .. code-block:: xml
 
-  <localfile>
-      <log_format>syslog</log_format>
-      <location>/var/logs/*</location>
-      <ignore_binaries>yes</ignore_binaries>
-  </localfile>
+   <localfile>
+     <log_format>syslog</log_format>
+     <location>/var/logs/*</location>
+     <ignore_binaries>yes</ignore_binaries>
+   </localfile>
 
 .. note::
-  On Windows agents, it will also check if the file is encoded with UCS-2 LE BOM or UCS-2 BE BOM.
+   On Windows agents, it will also check if the file is encoded with UCS-2 LE BOM or UCS-2 BE BOM.
 
 age
 ^^^
@@ -482,308 +460,281 @@ For example, if the age is set to 1 day, all files that have not been modified s
 
 .. code-block:: xml
 
-  <localfile>
-      <log_format>syslog</log_format>
-      <location>/var/logs/*</location>
-      <age>1d</age>
-  </localfile>
+   <localfile>
+     <log_format>syslog</log_format>
+     <location>/var/logs/*</location>
+     <age>1d</age>
+   </localfile>
 
-+--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
-| **Default value**  | n/a                                                                                                                                      |
-+--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
-| **Allowed values** | A positive number that should contain a suffix character indicating a time unit, such as, s (seconds), m (minutes), h (hours), d (days). |
-+--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
++----------------------+----------------------------------------------------------------------------------------------+
+| **Default value**    | n/a                                                                                          |
++----------------------+----------------------------------------------------------------------------------------------+
+| **Allowed values**   | A positive number that should contain a suffix character indicating a time unit, such as, s  |
+|                      | (seconds), m (minutes), h (hours), d (days).                                                 |
++----------------------+----------------------------------------------------------------------------------------------+
 
 exclude
 ^^^^^^^
 
 This indicates the location of a wild-carded group of logs to be excluded.
 
-For example, we may want to read all the files from a directory, but exclude those files whose name starts with an `e`.
+For example, we may want to read all the files from a directory, but exclude those files whose name starts with an e.
 
 .. code-block:: xml
 
-  <localfile>
-      <log_format>syslog</log_format>
-      <location>/var/logs/*</location>
-      <exclude>/var/logs/e*</exclude>
-  </localfile>
+   <localfile>
+     <log_format>syslog</log_format>
+     <location>/var/logs/*</location>
+     <exclude>/var/logs/e*</exclude>
+   </localfile>
 
-+--------------------+--------------------------+
-| **Default value**  | n/a                      |
-+--------------------+--------------------------+
-| **Allowed values** | Any log file or wildcard |
-+--------------------+--------------------------+
++----------------------+----------------------------+
+| **Default value**    | n/a                        |
++----------------------+----------------------------+
+| **Allowed values**   | Any log file or wildcard   |
++----------------------+----------------------------+
 
 reconnect_time
-^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^
 
 Defines the interval of reconnection attempts when the Windows Event Channel service is down.
 
-+--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
-| **Default value**  | 5s                                                                                                                                                  |
-+--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
-| **Allowed values** | A positive number that should contain a suffix character indicating a time unit, such as, s (seconds), m (minutes), h (hours), d (days), w (weeks)  |
-+--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
++----------------------+----------------------------------------------------------------------------------------------+
+| **Default value**    | 5s                                                                                           |
++----------------------+----------------------------------------------------------------------------------------------+
+| **Allowed values**   | A positive number that should contain a suffix character indicating a time unit, such as, s  |
+|                      | (seconds), m (minutes), h (hours), d (days), w (weeks)                                       |
++----------------------+----------------------------------------------------------------------------------------------+
 
 .. note::
-
-    This option only applies when the ``log_format`` is ``eventchannel``.
+   This option only applies when the ``log_format`` is ``eventchannel``.
 
 multiline_regex
-^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^
 
 This specifies a regular expression, match criteria and replace option for logs with a variable amount of lines.
 
-+--------------------+--------------------------------------------------------------------------------------------+
-| **Default value**  | n/a                                                                                        |
-+--------------------+--------------------------------------------------------------------------------------------+
-| **Allowed values** | Any :ref:`PCRE2 regular expression <pcre2_syntax>`                                         |
-+--------------------+--------------------------------------------------------------------------------------------+
++----------------------+--------------------------------+
+| **Default value**    | n/a                            |
++----------------------+--------------------------------+
+| **Allowed values**   | Any PCRE2 regular expression   |
++----------------------+--------------------------------+
 
 The attributes below are optional.
 
-+-------------+---------------------------------------+--------------+---------------+
-| Attribute   |              Description              | Value range  | Default value |
-+=============+=======================================+==============+===============+
-| **match**   | Allows to set how regex will handle   |   start      |    start      |
-|             | regex match.                          +--------------+               |
-|             |                                       |   end        |               |
-|             |                                       +--------------+               |
-|             |                                       |   all        |               |
-+-------------+---------------------------------------+--------------+---------------+
-| **replace** | Allows to replace or remove           |  no-replace  |  no-replace   |
-|             | end-of-line.                          +--------------+               |
-|             |                                       |   wspace     |               |
-|             |                                       +--------------+               |
-|             |                                       |   tab        |               |
-|             |                                       +--------------+               |
-|             |                                       |   none       |               |
-+-------------+---------------------------------------+--------------+---------------+
-| **timeout** | Allows to set max waiting time in     |   1 to 120   |      5        |
-|             | seconds to receive a new line         |              |               |
-+-------------+---------------------------------------+--------------+---------------+
++-------------+-------------------------------------------------------------------+---------------------------------+-----------------+
+| Attribute   | Description                                                       | Value range                     | Default value   |
++=============+===================================================================+=================================+=================+
+| match       | Allows to set how regex will handle regex match.                  | start, end, all                 | start           |
++-------------+-------------------------------------------------------------------+---------------------------------+-----------------+
+| replace     | Allows to replace or remove end-of-line.                          | no-replace, wspace, tab, none   | no-replace      |
++-------------+-------------------------------------------------------------------+---------------------------------+-----------------+
+| timeout     | Allows to set max waiting time in seconds to receive a new line   | 1 to 120                        | 5               |
++-------------+-------------------------------------------------------------------+---------------------------------+-----------------+
 
 .. note::
-    This option only applies when the `log_format`_ is ``multi-line-regex``.
+   This option only applies when the `log_format`_ is ``multi-line-regex``. The value of the ``timeout`` attribute cannot be bigger than the value of the `age`_ option.
+
+The behavior of the match attribute is as follows
+
++---------+----------------------------------------------------------------------------------------------+
+| Match   | Description                                                                                  |
++=========+==============================================================================================+
+| start   | Group as one event the content between two lines that matches the regex. The grouped event   |
+|         | does not include the last matching line.                                                     |
++---------+----------------------------------------------------------------------------------------------+
+| end     | Group as one event the content until a line that matches the regex.                          |
++---------+----------------------------------------------------------------------------------------------+
+| all     | Group as one event the content until the whole event matches the regex.                      |
++---------+----------------------------------------------------------------------------------------------+
 
 .. note::
-    The value of ``timeout`` attribute cannot be bigger than the value of the `age`_ option.
-
-The behavior of the ``match`` attribute is as follows
-
-+-------------+-------------------------------------------------------------------------+
-| Match       |                       Description                                       |
-+=============+=========================================================================+
-| **start**   | Group as one event the content between two lines that matches the regex.|
-|             |                                                                         |
-|             | The grouped event does not include the last matching line.              |
-+-------------+-------------------------------------------------------------------------+
-|  **end**    | Group as one event the content until a line that matches the regex.     |
-+-------------+-------------------------------------------------------------------------+
-|  **all**    | Group as one event the content until whole event match the regex.       |
-+-------------+-------------------------------------------------------------------------+
-
-.. note::
-    ``start`` and ``end`` value for ``match`` attribute try to match the regex with a single line.
+   ``start`` and ``end`` value for ``match`` attribute try to match the regex with a single line.
 
 For example, we may want to read a Python Traceback output as one single log, replacing newline with spaces
 
 .. code-block:: xml
 
-  <localfile>
-      <log_format>multi-line-regex</log_format>
-      <location>/var/logs/my_python_app.log</location>
-      <multiline_regex replace="wspace">^Traceback</multiline_regex>
+   <localfile>
+     <log_format>multi-line-regex</log_format>
+     <location>/var/logs/my_python_app.log</location>
+     <multiline_regex replace="wspace">^Traceback</multiline_regex>
    </localfile>
 
 ignore
-^^^^^^^^^^^^^^^
+^^^^^^
 
-Specify a regular expression to ignore log lines or command outputs when matching. Whether several `ignore` labels are defined, entries are ignored when matching any of the specified ones.
+Specify a regular expression to ignore log lines or command outputs when matching. Whether several ignore labels are defined, entries are ignored when matching any of the specified ones.
 
-+--------------------+---------------------------------------------------------------+
-| **Default Value**  | n/a                                                           |
-+--------------------+---------------------------------------------------------------+
-| **Allowed values** | Any `regex <regex.html#regex-os-regex-syntax>`_,              |
-|                    | `sregex <regex.html#sregex-os-match-syntax>`_ or              |
-|                    | `PCRE2 <regex.html#pcre2-syntax>`_ expression.                |
-+--------------------+---------------------------------------------------------------+
++----------------------+------------------------------------------+
+| **Default value**    | n/a                                      |
++----------------------+------------------------------------------+
+| **Allowed values**   | Any regex, sregex or PCRE2 expression.   |
++----------------------+------------------------------------------+
 
-Use the `type` attribute to define the regular expression type. By default, PCRE2 is applied.
+Use the type attribute to define the regular expression type. By default, PCRE2 is applied.
 
-+----------+--------------------------------------------------------------------------------+
-| **type** | Allows to set regular expression type                                          |
-+          +------------------+-------------------------------------------------------------+
-|          | Default value    | PCRE2                                                       |
-|          +------------------+-------------------------------------------------------------+
-|          | Allowed values   | osregex, osmatch, PCRE2                                     |
-+----------+------------------+-------------------------------------------------------------+
++------------------+-----------------------------------------+
+| type             | Allows to set regular expression type   |
++------------------+-----------------------------------------+
+| Default value    | PCRE2                                   |
++------------------+-----------------------------------------+
+| Allowed values   | osregex, osmatch, PCRE2                 |
++------------------+-----------------------------------------+
 
 For example, to ignore events related to configuration changes in the audit log:
 
 .. code-block:: xml
 
-  <localfile>
-      <log_format>audit</log_format>
-      <location>/var/log/audit/audit.log</location>
-      <ignore type="PCRE2">type=.+_CHANGE</ignore>
-      <ignore type="osregex">type=CONFIG_\.+</ignore>
-  </localfile>
+   <localfile>
+     <log_format>audit</log_format>
+     <location>/var/log/audit/audit.log</location>
+     <ignore type="PCRE2">type=.+_CHANGE</ignore>
+     <ignore type="osregex">type=CONFIG_\.+</ignore>
+   </localfile>
 
 restrict
-^^^^^^^^^^^^^^^
+^^^^^^^^
 
-Specify a regular expression to restrict processed log lines or command outputs. Whether several `restrict` labels are defined, entries are processed when matching all of them.
+Specify a regular expression to restrict processed log lines or command outputs. Whether several restrict labels are defined, entries are processed when matching all of them.
 
-+--------------------+---------------------------------------------------------------+
-| **Default Value**  | n/a                                                           |
-+--------------------+---------------------------------------------------------------+
-| **Allowed values** | Any `regex <regex.html#regex-os-regex-syntax>`_,              |
-|                    | `sregex <regex.html#sregex-os-match-syntax>`_ or              |
-|                    | `PCRE2 <regex.html#pcre2-syntax>`_ expression.                |
-+--------------------+---------------------------------------------------------------+
++----------------------+------------------------------------------+
+| **Default value**    | n/a                                      |
++----------------------+------------------------------------------+
+| **Allowed values**   | Any regex, sregex or PCRE2 expression.   |
++----------------------+------------------------------------------+
 
-Use the `type` attribute to define the regular expression type. By default, PCRE2 is applied.
+Use the type attribute to define the regular expression type. By default, PCRE2 is applied.
 
-+----------+--------------------------------------------------------------------------------+
-| **type** | Allows to set regular expression type                                          |
-+          +------------------+-------------------------------------------------------------+
-|          | Default value    | PCRE2                                                       |
-|          +------------------+-------------------------------------------------------------+
-|          | Allowed values   | osregex, osmatch, PCRE2                                     |
-+----------+------------------+-------------------------------------------------------------+
++------------------+-----------------------------------------+
+| type             | Allows to set regular expression type   |
++------------------+-----------------------------------------+
+| Default value    | PCRE2                                   |
++------------------+-----------------------------------------+
+| Allowed values   | osregex, osmatch, PCRE2                 |
++------------------+-----------------------------------------+
 
 For example, to restrict syslog events related to a particular user name:
 
 .. code-block:: xml
 
-  <localfile>
-      <log_format>syslog</log_format>
-      <location>/custom/file/path</location>
-      <restrict type="PCRE2">username_\d?</restrict>
-      <restrict type="osregex">Jun\.+</restrict>
-  </localfile>
+   <localfile>
+     <log_format>syslog</log_format>
+     <location>/custom/file/path</location>
+     <restrict type="PCRE2">username_\d?</restrict>
+     <restrict type="osregex">Jun\.+</restrict>
+   </localfile>
 
 .. note::
-  For formats that group multiple lines, the entire group is treated as a single log when evaluating the regex.
-
-.. note::
-  Whether the same log entry matches an ignore and also a restrict configured for the same `localfile`, the entry is discarded. In other words, the `ignore` has precedence over `restrict`. Said that, if the same expression is defined in both `ignore` and `restrict`, no log will be processed for that `localfile`.
-
-.. note::
-  The `eventchannel` format already provides a way to filter logs through queries. Therefore, `ignore` and `restrict` settings don't apply to this format.
+   For formats that group multiple lines, the entire group is treated as a single log when evaluating the regex. Whether the same log entry matches an ignore and also a restrict configured for the same ``localfile``, the entry is discarded. In other words, the ``ignore`` has precedence over ``restrict``. Said that, if the same expression is defined in both ``ignore`` and ``restrict``, no log will be processed for that ``localfile``. The ``eventchannel`` format already provides a way to filter logs through queries. Therefore, ``ignore`` and ``restrict`` settings don't apply to this format.
 
 filter
 ^^^^^^
 
-Collects ``journald`` logs selectively by filtering specific fields.
+Collects journald logs selectively by filtering specific fields.
 
 Specify a PCRE2 regular expression as the filter. Use the ``field`` attribute to select the journald field to match.
 
-+--------------------+---------------------------------------------------------------+
-| **Default value**  | n/a                                                           |
-+--------------------+---------------------------------------------------------------+
-| **Allowed values** | Any :ref:`PCRE2 <pcre2_syntax>` expression.                   |
-+--------------------+---------------------------------------------------------------+
++----------------------+-------------------------+
+| **Default value**    | n/a                     |
++----------------------+-------------------------+
+| **Allowed values**   | Any PCRE2 expression.   |
++----------------------+-------------------------+
 
 Use the ``ignore_if_missing`` attribute to control logs that lack the specified field:
 
--  ``yes``: Wazuh ignores the filter and *accepts logs even if the field is missing*.
--  ``no``: Logs without the field *do not match the filter* and are filtered out.
+- ``yes``: Wazuh ignores the filter and accepts logs even if the field is missing.
+- ``no``: Logs without the field do not match the filter and are filtered out.
 
-+-----------------------+------------------+----------------+
-| **ignore_if_missing** | Default value    | no             |
-|                       +------------------+----------------+
-|                       | Allowed values   | no, yes        |
-+-----------------------+------------------+----------------+
++---------------------+---------------------------+
+| ignore_if_missing   | Default value: no         |
++---------------------+---------------------------+
+|                     | Allowed values: no, yes   |
++---------------------+---------------------------+
 
 Multiple ``<localfile>`` blocks combine with *OR* logic.
 
 Filters inside the same ``<localfile>`` block combine with *AND* logic. A log entry must match *all* filters in that block to be collected.
 
-In the following example, Wazuh collects ``journald`` logs if *any* of these conditions hold:
+In the following example, Wazuh collects journald logs if *any* of these conditions hold:
 
--  The field ``_SYSTEMD_UNIT`` equals ``ssh.service``.
--  The field ``_SYSTEMD_UNIT`` equals ``cron.service`` *and* either:
+- The field ``_SYSTEMD_UNIT`` equals ``ssh.service``.
+- The field ``_SYSTEMD_UNIT`` equals ``cron.service`` *and* either:
 
-   -  The field ``PRIORITY`` matches ``0``, ``1``, ``2``, or ``3``, or
-   -  the ``PRIORITY`` field is missing.
+  - The field ``PRIORITY`` matches 0, 1, 2, or 3, or
+  - the ``PRIORITY`` field is missing.
 
 This configuration captures:
 
--  All SSH logs
--  High-severity cron messages and anomalous cron entries that lack priority information.
+- All SSH logs
+- High-severity cron messages and anomalous cron entries that lack priority information.
 
 .. code-block:: xml
 
-    <!-- For monitoring log files -->
-    <localfile>
-      <location>journald</location>
-      <log_format>journald</log_format>
-      <filter field="_SYSTEMD_UNIT">^ssh.service$</filter>
-    </localfile>
+   <!-- For monitoring log files -->
+   <localfile>
+     <location>journald</location>
+     <log_format>journald</log_format>
+     <filter field="_SYSTEMD_UNIT">^ssh.service$</filter>
+   </localfile>
+   <localfile>
+     <location>journald</location>
+     <log_format>journald</log_format>
+     <filter field="_SYSTEMD_UNIT">^cron.service$</filter>
+     <filter field="PRIORITY" ignore_if_missing="yes">[0-3]</filter>
+   </localfile>
 
-    <localfile>
-      <location>journald</location>
-      <log_format>journald</log_format>
-      <filter field="_SYSTEMD_UNIT">^cron.service$</filter>
-      <filter field="PRIORITY" ignore_if_missing="yes">[0-3]</filter>
-    </localfile>
+When multiple journald blocks are present:
 
-When multiple ``journald`` blocks are present:
+- If no block has filters, Wazuh collects all journald logs.
+- If at least one block has filters, Wazuh applies filters only from blocks that include them. Blocks without filters are ignored. This lets restrictive blocks override the default 'collect everything' behavior.
 
--  If no block has filters, Wazuh collects *all* journald logs.
--  If at least one block has filters, Wazuh applies filters *only from blocks that include them*. Blocks without filters are ignored. This lets restrictive blocks override the default 'collect everything' behavior.
-
-Configuration examples
-----------------------
+Sample configuration
+---------------------
 
 Linux configuration:
 
 .. code-block:: xml
 
-    <!-- For monitoring log files -->
-    <localfile>
-      <log_format>syslog</log_format>
-      <location>/var/log/syslog</location>
-    </localfile>
-
-    <!-- For monitoring command output -->
-    <localfile>
-      <log_format>command</log_format>
-      <command>df -P</command>
-      <frequency>360</frequency>
-    </localfile>
-
-    <!-- To use a custom target or format -->
-    <localfile>
-      <log_format>syslog</log_format>
-      <location>/var/log/auth.log</location>
-      <target>agent,custom_socket</target>
-      <out_format target="custom_socket">$(timestamp %Y-%m-%d %H:%M:%S): $(log)</out_format>
-    </localfile>
+   <!-- For monitoring log files -->
+   <localfile>
+     <log_format>syslog</log_format>
+     <location>/var/log/syslog</location>
+   </localfile>
+   <!-- For monitoring command output -->
+   <localfile>
+     <log_format>command</log_format>
+     <command>df -P</command>
+     <frequency>360</frequency>
+   </localfile>
+   <!-- To use a custom target or format -->
+   <localfile>
+     <log_format>syslog</log_format>
+     <location>/var/log/auth.log</location>
+     <target>agent,custom_socket</target>
+     <out_format target="custom_socket">$(timestamp %Y-%m-%d %H:%M:%S): $(log)</out_format>
+   </localfile>
 
 Windows configuration:
 
 .. code-block:: xml
 
-    <!-- For monitoring Windows eventchannel -->
-    <localfile>
-      <location>Security</location>
-      <log_format>eventchannel</log_format>
-      <only-future-events>yes</only-future-events>
-      <query>Event/System[EventID != 5145 and EventID != 5156]</query>
-      <reconnect_time>10s</reconnect_time>
-    </localfile>
+   <!-- For monitoring Windows eventchannel -->
+   <localfile>
+     <location>Security</location>
+     <log_format>eventchannel</log_format>
+     <only-future-events>yes</only-future-events>
+     <query>Event/System[EventID != 5145 and EventID != 5156]</query>
+     <reconnect_time>10s</reconnect_time>
+   </localfile>
 
 macOS configuration:
 
 .. code-block:: xml
 
-  <!-- For monitoring macOS ULS Logs -->
-  <localfile>
-    <location>macos</location>
-    <log_format>macos</log_format>
-    <query type="trace,log,activity" level="info">process == "sshd" OR message CONTAINS "invalid"</query>
-  </localfile>
+   <!-- For monitoring macOS ULS Logs -->
+   <localfile>
+     <location>macos</location>
+     <log_format>macos</log_format>
+     <query type="trace,log,activity" level="info">process == "sshd" OR message CONTAINS "invalid"</query>
+   </localfile>
