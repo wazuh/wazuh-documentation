@@ -22,8 +22,7 @@ This part of the user manual covers the configuration files that Wazuh uses and 
        internal-options
        daemons/index
        tools/index
-       installation-assistant
-       certs-tools
+       installation-utilities/index
 
 ..
        unattended-installation

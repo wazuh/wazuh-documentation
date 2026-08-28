@@ -145,8 +145,9 @@ newUrls['5.0'] = [
   '/user-manual/reference/daemons/wazuh-manager-remoted.html',
   '/user-manual/reference/tools/wazuh-manager-control.html',
   '/user-manual/reference/tools/wazuh-manager-keystore.html',
-  '/user-manual/reference/installation-assistant.html',
-  '/user-manual/reference/certs-tools.html',
+  '/user-manual/reference/installation-utilities/index.html',
+  '/user-manual/reference/installation-utilities/installation-assistant.html',
+  '/user-manual/reference/installation-utilities/certs-tools.html',
 ];
 
 /* Redirections 4.14—5.0  */
