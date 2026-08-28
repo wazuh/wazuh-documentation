@@ -6,7 +6,7 @@
 Basic configuration options
 ============================
 
-Configure the FIM capability locally on each Wazuh agent or remotely through centralized configuration. Wazuh agents include a default FIM configuration you can modify as needed. To monitor file integrity on a Wazuh manager endpoint, install a Wazuh agent on the same host. Find all FIM configuration options in the ``syscheck`` section.
+Configure the FIM capability locally on each Wazuh agent or remotely through centralized configuration. Wazuh agents include a default FIM configuration you can modify as needed. To monitor file integrity on a Wazuh manager endpoint, install a Wazuh agent with the same major version as the Wazuh manager on the same host. Find all FIM configuration options in the ``syscheck`` section.
 
 This section covers the common FIM configuration options used for file integrity monitoring. For additional settings, see the :doc:`advanced configuration options </user-manual/capabilities/file-integrity/advanced-settings>`.
 

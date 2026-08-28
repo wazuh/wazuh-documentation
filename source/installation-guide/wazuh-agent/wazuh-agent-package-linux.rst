@@ -42,6 +42,10 @@ Deploy a Wazuh agent
 
 Follow these steps to deploy the Wazuh agent on your Linux endpoint.
 
+.. warning::
+
+   To monitor an endpoint that runs a Wazuh manager, install a Wazuh agent with the same major version as the Wazuh manager. Wazuh 4.x agent packages declare a conflict with the ``wazuh-manager`` package, so a Wazuh 4.x agent and a Wazuh 5.x manager cannot coexist on the same endpoint. Depending on the package manager, the installation fails or removes the Wazuh manager to resolve the conflict.
+
 #. Select your package manager and run the command below.
 
    Replace
