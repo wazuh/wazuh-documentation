@@ -5,7 +5,7 @@ paths:
         - Notification configs
       summary: Create notification config
       description: |
-        Creates a notification configuration. A config bundles a name, an optional description, an `is_enabled` flag, and channel-specific data selected by the `config_type` discriminator — Slack, Chime, Microsoft Teams, Mattermost, Webhook, Email, Email group, SMTP account, SES account, SNS, or the Wazuh-only `active_response` channel. `config_id` is optional; if omitted, the server generates one, and if supplied it must use only base64-safe characters (`A-Za-z0-9_-`).
+        Creates a notification configuration. A config bundles a name, an optional description, an `is_enabled` flag, and channel-specific data selected by the `config_type` discriminator — Slack, Chime, Microsoft Teams, Mattermost, Webhook, Email, Email group, SMTP account, SES account, SNS, or the Wazuh-only `active_response` channel. `config_id` is optional; if omitted, the server generates one, and if supplied it must use only alphanumeric characters plus `+`, `/`, `_`, and `-` (`A-Za-z0-9+/_-`).
       operationId: createNotificationConfig
       security:
         - basicAuth: []
@@ -802,7 +802,7 @@ components:
       properties:
         config_id:
           type: string
-          description: Optional. Server-generated if omitted. If supplied, must use only `A-Za-z0-9_-` characters.
+          description: Optional. Server-generated if omitted. If supplied, must use only the characters `A-Za-z0-9+/_-`.
         config:
           $ref: '#/components/schemas/NotificationConfig'
 
