@@ -138,9 +138,40 @@
                 "backgroundColor": "#fff"
 #}
 
-{%- block htmltitle -%}
-<title>API reference{{ titlesuffix }}</title>
-{% endblock htmltitle -%}
+{#
+  Note: no htmltitle block override here (anymore) - inheriting layout.html's
+  default <title>{{ pagetitle|e }}{{ titlesuffix }}</title> keeps it aligned
+  with the og:title/twitter:title below instead of diverging with a
+  hardcoded "API reference" string (SEO title-tag finding).
+#}
+
+{% block head %}
+{{ super() }}
+{#
+  layout.html skips its JSON-LD block for these pages (they're in
+  special_pages), so emit the same TechArticle + BreadcrumbList pair here
+  instead of touching that shared list (SEO json-ld-structured-data finding).
+#}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org", "@type": "TechArticle",
+  "headline": {{ (title|striptags)|tojson }}, "description": {{ page_scope.file_meta_desc|tojson }},
+  "url": {{ page_scope.page_url|tojson }}, "inLanguage": {{ language|tojson }},
+  "author": {"@type": "Organization", "name": "Wazuh"},
+  "publisher": {"@type": "Organization", "name": "Wazuh", "url": {{ theme_wazuh_doc_url|tojson }}}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org", "@type": "BreadcrumbList",
+  "itemListElement": [
+    {%- for item in parents %}{% if not loop.first %},{% endif %}
+    {"@type": "ListItem", "position": {{ loop.index }}, "name": {{ item.title|tojson }}, "item": {{ item.link|tojson }}}
+    {%- endfor %}
+  ]
+}
+</script>
+{% endblock head %}
 
 {% block body %}
 <div class="loading">
@@ -183,9 +214,21 @@
 
 {%- block main_column -%}
 <div id="central-column">
-  
+
   {# Main content #}
   <main role="main" data-pagefind-body>
+    {#
+      Static fallback content for non-JS fetchers (SEO heading-structure /
+      GEO js-only-content findings) - the ReDoc SPA below otherwise leaves
+      the served HTML with no heading or text at all. Wrapped in <noscript>
+      so JS-capable browsers never render it (avoiding a duplicate/mismatched
+      <h1> once ReDoc mounts its own); it's still present as plain markup in
+      the raw HTML for crawlers/fetchers that don't execute JS.
+    #}
+    <noscript>
+      <h1>{{ pagetitle|e }}</h1>
+      <p>{{ page_scope.file_meta_desc|e }}</p>
+    </noscript>
     {%- block redoc %}
     {% endblock redoc %}
   </main>
