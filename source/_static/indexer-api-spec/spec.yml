@@ -429,6 +429,30 @@ paths:
   /_plugins/_security_analytics/correlation/rules/_search:
     $ref: 'security_analytics_api.yml#/paths/~1_plugins~1_security_analytics~1correlation~1rules~1_search'
 
+  /_plugins/_reports/definition:
+    $ref: 'reporting_api.yml#/paths/~1_plugins~1_reports~1definition'
+
+  /_plugins/_reports/definition/{reportDefinitionId}:
+    $ref: 'reporting_api.yml#/paths/~1_plugins~1_reports~1definition~1{reportDefinitionId}'
+
+  /_plugins/_reports/definitions:
+    $ref: 'reporting_api.yml#/paths/~1_plugins~1_reports~1definitions'
+
+  /_plugins/_reports/on_demand:
+    $ref: 'reporting_api.yml#/paths/~1_plugins~1_reports~1on_demand'
+
+  /_plugins/_reports/on_demand/{reportDefinitionId}:
+    $ref: 'reporting_api.yml#/paths/~1_plugins~1_reports~1on_demand~1{reportDefinitionId}'
+
+  /_plugins/_reports/instance/{reportInstanceId}:
+    $ref: 'reporting_api.yml#/paths/~1_plugins~1_reports~1instance~1{reportInstanceId}'
+
+  /_plugins/_reports/instances:
+    $ref: 'reporting_api.yml#/paths/~1_plugins~1_reports~1instances'
+
+  /_plugins/_reports/_local/stats:
+    $ref: 'reporting_api.yml#/paths/~1_plugins~1_reports~1_local~1stats'
+
   /_plugins/_security/api/roles:
     $ref: 'security_api.yml#/paths/~1_plugins~1_security~1api~1roles'
 
@@ -982,6 +1006,14 @@ tags:
     description: Search and validate Security Analytics detection rules, and list the log-type categories they can target.
   - name: Mappings
     description: Manage the field-alias mappings that let Security Analytics rules and detectors interpret an index's raw fields.
+  - name: Report definitions
+    description: Create, retrieve, update, delete, and list report definitions — the saved configuration of what to render, how to render it, when to generate it, and optionally where to deliver it.
+  - name: On-demand reports
+    description: Generate a report instance immediately, either from an existing saved report definition or from a caller-supplied definition payload.
+  - name: Report instances
+    description: Retrieve, list, and update the status of report instances — the individual generated (or in-progress) reports produced by a report definition.
+  - name: Reporting stats
+    description: Retrieve node-local usage counters for the Reporting plugin's REST API.
   - name: Roles
     description: Manage roles — the reusable bundles of cluster, index, and tenant permissions that get assigned to users.
   - name: Role mappings
