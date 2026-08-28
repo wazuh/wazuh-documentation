@@ -19,6 +19,7 @@ All notable changes to this project will be documented in this file.
 - Added the *Detecting a Cross-Site Scripting (XSS) attack* use case to the *Proof of concept guide*. ([#9916](https://github.com/wazuh/wazuh-documentation/pull/9916))
 - Added the *Wazuh CTI* documentation as a new top-level section. ([#9989](https://github.com/wazuh/wazuh-documentation/pull/9989)) ([#9990](https://github.com/wazuh/wazuh-documentation/pull/9990))
 - Added the *Incident response* dashboard section, the *Email* notification channel, and the *AI Assistant* configuration documentation to the *Wazuh dashboard* section. ([#10033](https://github.com/wazuh/wazuh-documentation/pull/10033))
+- Added the *Installation Assistant* and *Certs tool* documentation to the *Reference* section. ([#10047](https://github.com/wazuh/wazuh-documentation/pull/10047))
 
 ### Changed
 
@@ -48,6 +49,7 @@ All notable changes to this project will be documented in this file.
 - Updated the *Wazuh indexer API reference* and removed the non-tracked version number from its page header. ([#10015](https://github.com/wazuh/wazuh-documentation/pull/10015)) ([#10016](https://github.com/wazuh/wazuh-documentation/pull/10016)) ([#10017](https://github.com/wazuh/wazuh-documentation/pull/10017)) ([#10025](https://github.com/wazuh/wazuh-documentation/pull/10025)) ([#10043](https://github.com/wazuh/wazuh-documentation/pull/10043)) ([#10044](https://github.com/wazuh/wazuh-documentation/pull/10044))
 - Updated the *Using Wazuh for TSC compliance* documentation in *Regulatory compliance* to Wazuh 5.0. ([#10027](https://github.com/wazuh/wazuh-documentation/pull/10027)) ([#10045](https://github.com/wazuh/wazuh-documentation/pull/10045))
 - Updated the *Log data collection* capability documentation to Wazuh 5.0, covering Wazuh agent configuration, collecting logs from files and operating systems, log data analysis, and new use cases. ([#10034](https://github.com/wazuh/wazuh-documentation/pull/10034)) ([#10037](https://github.com/wazuh/wazuh-documentation/pull/10037))
+- Updated the *Reference* documentation to Wazuh 5.0, splitting the local configuration reference into separate `wazuh-manager.conf` and `ossec.conf` sections, renaming manager daemons and tools with the `wazuh-manager-` prefix, and updating the internal configuration, daemons, and tools references. ([#10047](https://github.com/wazuh/wazuh-documentation/pull/10047))
 
 ### Removed
 
@@ -63,6 +65,8 @@ All notable changes to this project will be documented in this file.
 - Removed support for legacy operating systems, including Red Hat 5, CentOS 5, Oracle Linux 5, SUSE Linux Enterprise Server 11, AIX, HP-UX, Solaris, Windows XP, Windows Vista, and Windows Server 2003. ([#8894](https://github.com/wazuh/wazuh-documentation/pull/8894))
 - Removed deprecated configuration variables in the *Deployment with Puppet* documentation. ([#9378](https://github.com/wazuh/wazuh-documentation/pull/9378))
 - Removed Osquery references as this capability is now deprecated. ([#8958](https://github.com/wazuh/wazuh-documentation/pull/8958))
+- Removed documentation for `wazuh-manager.conf`/`ossec.conf` sections no longer supported in Wazuh 5.0: `agentless`, `alerts`, `command`, `database_output`, `email_alerts`, `integration`, `reports`, `rule_test`, `ruleset`, `syslog_output`, `wodle name="agent-key-polling"`, and the local configuration verification guide. ([#10047](https://github.com/wazuh/wazuh-documentation/pull/10047))
+- Removed documentation for CLI tools no longer available in Wazuh 5.0: `agent_control`, `manage_agents`, `wazuh-logtest`, and `fim_migrate`. ([#10047](https://github.com/wazuh/wazuh-documentation/pull/10047))
 
 ## [v4.14.9]
 
