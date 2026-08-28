@@ -23,6 +23,11 @@ try:
 except ImportError:
     atexit.register(print,"\nThe module jsmin is not available. Please, make sure you install all the required modules listed in requirements.txt.")
     sys.exit()
+try:
+    import yaml
+except ImportError:
+    atexit.register(print,"\nThe module PyYAML is not available. Please, make sure you install all the required modules listed in requirements.txt.")
+    sys.exit()
 from requests.utils import requote_uri
 sys.path.append(os.path.abspath("_variables"))
 from settings import version, is_latest_release, is_prerelease, release, api_tag, apiURL, apiURL_indexer, apiURL_server
@@ -564,6 +569,84 @@ if (tags.has("production")):
 if (tags.has("dev")):
     docu_environment = "dev"
 
+# -- API endpoint/auth summaries (for the ReDoc pages' noscript fallback) ----
+# Computed once in setup() from each page's own OpenAPI/YAML spec, keyed by
+# pagename; see manage_assets() below for how it reaches the templates.
+api_endpoint_summaries = {}
+
+def describe_security_schemes(security_schemes):
+    ''' Turns an OpenAPI components.securitySchemes mapping into one short,
+    human-readable sentence describing how to authenticate. '''
+    descriptions = []
+    for scheme in (security_schemes or {}).values():
+        if not isinstance(scheme, dict):
+            continue
+        scheme_type = scheme.get('type')
+        if scheme_type == 'http':
+            http_scheme = (scheme.get('scheme') or '').lower()
+            if http_scheme == 'basic':
+                descriptions.append('HTTP Basic credentials')
+            elif http_scheme == 'bearer':
+                bearer_format = scheme.get('bearerFormat')
+                descriptions.append('a Bearer %s token' % bearer_format if bearer_format else 'a Bearer token')
+            else:
+                descriptions.append('HTTP %s authentication' % (http_scheme or scheme_type))
+        elif scheme_type == 'apiKey':
+            key_location = scheme.get('in', 'header')
+            key_name = scheme.get('name')
+            if key_name:
+                descriptions.append('an API key sent in the "%s" %s' % (key_name, key_location))
+            else:
+                descriptions.append('an API key sent via %s' % key_location)
+        elif scheme_type:
+            descriptions.append(scheme_type)
+    # De-duplicate while keeping order (server/indexer specs repeat "http" schemes)
+    descriptions = list(dict.fromkeys(descriptions))
+    if not descriptions:
+        return ''
+    return 'Authentication uses ' + ' or '.join(descriptions) + '.'
+
+def extract_endpoint_groups(spec):
+    ''' Returns the spec's endpoint group names: the top-level `tags` list
+    when the spec declares one (server/indexer specs), otherwise the unique
+    per-operation `tags` values (the cloud spec has no top-level list). '''
+    tags = spec.get('tags')
+    if isinstance(tags, list) and tags:
+        names = [tag.get('name') for tag in tags if isinstance(tag, dict) and tag.get('name')]
+        if names:
+            return names
+    names = []
+    for path_item in (spec.get('paths') or {}).values():
+        if not isinstance(path_item, dict):
+            continue
+        for operation in path_item.values():
+            if not isinstance(operation, dict):
+                continue
+            for tag in operation.get('tags') or []:
+                if tag not in names:
+                    names.append(tag)
+    return names
+
+def build_api_endpoint_summary(spec_path):
+    ''' Parses one OpenAPI/YAML spec file into {endpoint_groups, auth_summary}
+    for the ReDoc pages' static noscript fallback (GEO js-only-content /
+    "summary of key endpoints/auth model" finding). Returns None - rather
+    than failing the build - if the spec is missing or unparseable; the
+    template simply skips the extra fallback content in that case. '''
+    try:
+        with open(spec_path, 'r', encoding='utf-8') as spec_file:
+            spec = yaml.safe_load(spec_file)
+    except (OSError, yaml.YAMLError) as exc:
+        print('Could not read API spec at %s for endpoint summary: %s' % (spec_path, exc))
+        return None
+    if not isinstance(spec, dict):
+        return None
+    security_schemes = ((spec.get('components') or {}).get('securitySchemes')) or {}
+    return {
+        'endpoint_groups': extract_endpoint_groups(spec),
+        'auth_summary': describe_security_schemes(security_schemes),
+    }
+
 def setup(app):
 
     current_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), theme_assets_path)
@@ -591,6 +674,15 @@ def setup(app):
         if download_needed == True:
             print ('Downloading ' + 'spec-'+api_tag+'.yaml')
             spec_path, url_retrieve_headers = urlretrieve(apiURL, server_api_spec_path)
+
+        # Build the endpoint/auth-model summaries used by the ReDoc pages'
+        # noscript fallback, straight from each page's own committed/downloaded
+        # spec file - no separate spec source of truth to keep in sync.
+        api_endpoint_summaries['user-manual/api/reference'] = build_api_endpoint_summary(server_api_spec_path)
+        api_endpoint_summaries['user-manual/indexer-api/reference'] = build_api_endpoint_summary(
+            os.path.join(static_path_str, 'indexer-api-spec', 'spec.yml'))
+        api_endpoint_summaries['cloud-service/apis/reference'] = build_api_endpoint_summary(
+            os.path.join(os.path.dirname(os.path.realpath(__file__)), '..', 'resources', 'cloud', 'spec.yml'))
 
         # Minify redirects.js
         if html_theme_options['include_version_selector'] == True:
@@ -761,6 +853,7 @@ def manage_assets(app, pagename, templatename, context, doctree):
     # Add it to the page's context
     context['get_css_by_page'] = get_css_by_page
     context['get_js_by_page'] = get_js_by_page
+    context['api_endpoint_summary'] = api_endpoint_summaries.get(pagename)
 
 exclude_doc = ["not_found"]
 list_compiled_html = []

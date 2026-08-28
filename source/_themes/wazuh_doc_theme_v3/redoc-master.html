@@ -224,10 +224,29 @@
       so JS-capable browsers never render it (avoiding a duplicate/mismatched
       <h1> once ReDoc mounts its own); it's still present as plain markup in
       the raw HTML for crawlers/fetchers that don't execute JS.
+
+      api_endpoint_summary (endpoint_groups + auth_summary) is built in
+      conf.py straight from this page's own OpenAPI spec - see
+      build_api_endpoint_summary() - so it can't drift out of sync with the
+      spec the way hand-written prose could (GEO "summary of key
+      endpoints/auth model" recommendation).
     #}
     <noscript>
       <h1>{{ pagetitle|e }}</h1>
       <p>{{ page_scope.file_meta_desc|e }}</p>
+      {%- if api_endpoint_summary %}
+      {%- if api_endpoint_summary.auth_summary %}
+      <p>{{ api_endpoint_summary.auth_summary|e }}</p>
+      {%- endif %}
+      {%- if api_endpoint_summary.endpoint_groups %}
+      <p>Endpoint groups covered by this API:</p>
+      <ul>
+        {%- for group in api_endpoint_summary.endpoint_groups %}
+        <li>{{ group|e }}</li>
+        {%- endfor %}
+      </ul>
+      {%- endif %}
+      {%- endif %}
     </noscript>
     {%- block redoc %}
     {% endblock redoc %}
