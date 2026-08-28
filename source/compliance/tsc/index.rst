@@ -8,6 +8,8 @@ Using Wazuh for TSC compliance
 
 The American Institute of Certified Public Accountants (AICPA) developed the SOC 2 reporting framework. This framework provides a consistent basis for examining and reporting on controls relevant to the security, availability, processing integrity, confidentiality, and privacy of systems used to provide products or services. SOC 2 engagements use the AICPA Trust Services Criteria (TSC) to evaluate the design and operating effectiveness of those controls. The TSC Common Criteria are structurally aligned with the five components and 17 principles of the COSO Internal Control Integrated Framework, developed by the Committee of Sponsoring Organizations of the Treadway Commission (COSO). COSO is not a separate section of a SOC 2 report; instead, its internal-control concepts are reflected in the organization of the TSC Common Criteria.
 
+This document outlines use cases that show how Wazuh supports compliance with the TSC common criteria and the additional criteria. We have also created the `Using Wazuh for TSC (2022 revision) requirements guide <https://documentation.wazuh.com/resources/using-wazuh-for-TSC-2022-requirements-guide.pdf>`__, which complements this document. Refer to the guide for more details on how Wazuh helps meet TSC requirements.
+
 Trust Services Criteria (TSC)
 ------------------------------
 
