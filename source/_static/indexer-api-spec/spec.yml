@@ -453,6 +453,60 @@ paths:
   /_plugins/_reports/_local/stats:
     $ref: 'reporting_api.yml#/paths/~1_plugins~1_reports~1_local~1stats'
 
+  /_plugins/_security/api/roles:
+    $ref: 'security_api.yml#/paths/~1_plugins~1_security~1api~1roles'
+
+  /_plugins/_security/api/roles/{role_name}:
+    $ref: 'security_api.yml#/paths/~1_plugins~1_security~1api~1roles~1{role_name}'
+
+  /_plugins/_security/api/rolesmapping:
+    $ref: 'security_api.yml#/paths/~1_plugins~1_security~1api~1rolesmapping'
+
+  /_plugins/_security/api/rolesmapping/{role_name}:
+    $ref: 'security_api.yml#/paths/~1_plugins~1_security~1api~1rolesmapping~1{role_name}'
+
+  /_plugins/_security/api/internalusers:
+    $ref: 'security_api.yml#/paths/~1_plugins~1_security~1api~1internalusers'
+
+  /_plugins/_security/api/internalusers/{username}:
+    $ref: 'security_api.yml#/paths/~1_plugins~1_security~1api~1internalusers~1{username}'
+
+  /_plugins/_security/api/internalusers/{username}/authtoken:
+    $ref: 'security_api.yml#/paths/~1_plugins~1_security~1api~1internalusers~1{username}~1authtoken'
+
+  /_plugins/_security/api/account:
+    $ref: 'security_api.yml#/paths/~1_plugins~1_security~1api~1account'
+
+  /_plugins/_security/api/permissionsinfo:
+    $ref: 'security_api.yml#/paths/~1_plugins~1_security~1api~1permissionsinfo'
+
+  /_plugins/_security/api/_upgrade_check:
+    $ref: 'security_api.yml#/paths/~1_plugins~1_security~1api~1_upgrade_check'
+
+  /_plugins/_security/api/_upgrade_perform:
+    $ref: 'security_api.yml#/paths/~1_plugins~1_security~1api~1_upgrade_perform'
+
+  /_plugins/_security/api/securityconfig:
+    $ref: 'security_api.yml#/paths/~1_plugins~1_security~1api~1securityconfig'
+
+  /_plugins/_security/api/securityconfig/config:
+    $ref: 'security_api.yml#/paths/~1_plugins~1_security~1api~1securityconfig~1config'
+
+  /_plugins/_security/api/actiongroups:
+    $ref: 'security_api.yml#/paths/~1_plugins~1_security~1api~1actiongroups'
+
+  /_plugins/_security/api/actiongroups/{action_group_name}:
+    $ref: 'security_api.yml#/paths/~1_plugins~1_security~1api~1actiongroups~1{action_group_name}'
+
+  /_plugins/_security/api/tenants:
+    $ref: 'security_api.yml#/paths/~1_plugins~1_security~1api~1tenants'
+
+  /_plugins/_security/api/tenants/{tenant_name}:
+    $ref: 'security_api.yml#/paths/~1_plugins~1_security~1api~1tenants~1{tenant_name}'
+
+  /_plugins/_security/api/tenancy/config:
+    $ref: 'security_api.yml#/paths/~1_plugins~1_security~1api~1tenancy~1config'
+
   /_plugins/_setup/settings:
     $ref: 'setup_api.yml#/paths/~1_plugins~1_setup~1settings'
 
@@ -960,3 +1014,23 @@ tags:
     description: Retrieve, list, and update the status of report instances — the individual generated (or in-progress) reports produced by a report definition.
   - name: Reporting stats
     description: Retrieve node-local usage counters for the Reporting plugin's REST API.
+  - name: Roles
+    description: Manage roles — the reusable bundles of cluster, index, and tenant permissions that get assigned to users.
+  - name: Role mappings
+    description: Map roles to internal users, backend roles, or hosts.
+  - name: Internal users
+    description: Manage the internal user database used for authentication.
+  - name: Account
+    description: Self-service account operations for the caller's own authenticated user.
+  - name: Permissions info
+    description: Retrieve the caller's evaluated REST API permissions.
+  - name: Config upgrade
+    description: Check for and apply configuration upgrades after a plugin version change.
+  - name: Security config
+    description: Manage the cluster's global security configuration — authentication and authorization domains, anonymous access, and other dynamic settings.
+  - name: Action groups
+    description: Manage reusable named bundles of permissions referenced by roles.
+  - name: Tenants
+    description: Manage Wazuh dashboard tenants, which give teams separate spaces for saved objects such as index patterns, visualizations, and dashboards.
+  - name: Multi-tenancy config
+    description: Manage cluster-wide dashboard multi-tenancy settings.
