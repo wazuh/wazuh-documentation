@@ -18,13 +18,13 @@ Agents statistical files:
 Manager statistical files:
 
   * :doc:`wazuh-remoted.state <wazuh-remoted-state>` - It shows information
-    about the :ref:`remote daemon <wazuh-remoted>`
+    about the :ref:`remote daemon <wazuh_manager_remoted>`
   * :ref:`wazuh-analysisd.state <wazuh_analysisd_state_file>` - It shows information
-    about the :ref:`analysis daemon <wazuh-analysisd>`.
+    about the :ref:`analysis daemon <wazuh_manager_analysisd>`.
 
 Manager and Agents statistical files:
 
-  * :ref:`wazuh-logcollector.state <wazuh_logcollector_state_file>` - It shows information about :ref:`logcollector daemon <wazuh-logcollector>`.
+  * :ref:`wazuh-logcollector.state <wazuh_logcollector_state_file>` - It shows information about :ref:`logcollector daemon <wazuh_logcollector>`.
 
 .. topic:: Contents
 

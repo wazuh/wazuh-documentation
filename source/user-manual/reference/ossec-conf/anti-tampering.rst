@@ -1,7 +1,9 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Find out how to prevent uninstallation of the Linux Wazuh agent package without Wazuh manager validation.
+  :description: Learn about the anti_tampering configuration section of ossec.conf, which protects against unauthorized uninstallation of the Wazuh agent package on Linux.
+
+.. _reference_ossec_anti_tampering:
 
 anti_tampering
 ==============
@@ -13,26 +15,26 @@ anti_tampering
       <anti_tampering>
       </anti_tampering>
 
-You can configure anti-tampering to prevent uninstallation of the Wazuh agent package on Linux without manager validation.
+The ``<anti_tampering>`` section configures protection against unauthorized uninstallation of the Wazuh agent package on Linux. When enabled, uninstalling the package requires validation through the Wazuh manager API.
 
 Options
 -------
 
--  `package_uninstallation`_
+- `package_uninstallation`_
 
 package_uninstallation
-^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^
 
 Enables or disables the validation requirement for a user to uninstall the Wazuh agent package.
 
-+--------------------+---------+
-| **Default value**  | no      |
-+--------------------+---------+
-| **Allowed values** | yes, no |
-+--------------------+---------+
++----------------------+-----------+
+| **Default value**    | no        |
++----------------------+-----------+
+| **Allowed values**   | yes, no   |
++----------------------+-----------+
 
 Configuration example
----------------------
+-----------------------
 
 .. code-block:: xml
 
@@ -41,30 +43,37 @@ Configuration example
      <package_uninstallation>yes</package_uninstallation>
    </anti_tampering>
 
-Wazuh server API connection data
---------------------------------
+Wazuh manager API connection data
+------------------------------------
 
-+---------------------------+---------------------------------------------------------+----------------------------------------------------------------------+
-| Environment variables     | Description                                             | Required/Optional                                                    |
-+===========================+=========================================================+======================================================================+
-| VALIDATION_TOKEN          | Token to make a Wazuh server API request.               | Either ``VALIDATION_TOKEN`` or ``VALIDATION_LOGIN`` is required.     |
-+---------------------------+---------------------------------------------------------+----------------------------------------------------------------------+
-| VALIDATION_LOGIN          | Wazuh server API username and password to generate a    | Either ``VALIDATION_TOKEN`` or ``VALIDATION_LOGIN`` is required.     |
-|                           | token. Format: ``<USER>:<PASSWORD>``                    |                                                                      |
-+---------------------------+---------------------------------------------------------+----------------------------------------------------------------------+
-| VALIDATION_SSL_VERIFY     | Enable SSL verification with the Wazuh server API       | Optional - ``true`` by default.                                      |
-|                           | certificate. Format: ``true``, ``false``                |                                                                      |
-+---------------------------+---------------------------------------------------------+----------------------------------------------------------------------+
-| VALIDATION_HOST           | Host and port where the Wazuh server API is installed.  | Required                                                             |
-|                           | Format: ``<HOST>:<PORT>``                               |                                                                      |
-+---------------------------+---------------------------------------------------------+----------------------------------------------------------------------+
+When package uninstallation protection is enabled, provide the Wazuh manager API connection details through environment variables.
+
++-----------------------------+----------------------------------------------------------------------------------------------+--------------------------------------------------------------------+
+| Environment variables       | Description                                                                                  | Required/Optional                                                  |
++=============================+==============================================================================================+====================================================================+
+| ``VALIDATION_TOKEN``        | Authentication token used for the Wazuh manager API request.                                 | Either ``VALIDATION_TOKEN`` or ``VALIDATION_LOGIN`` is required.   |
++-----------------------------+----------------------------------------------------------------------------------------------+--------------------------------------------------------------------+
+| ``VALIDATION_LOGIN``        | Wazuh manager API username and password to generate a token. Format: ``<USER>:<PASSWORD>``   | Either ``VALIDATION_TOKEN`` or ``VALIDATION_LOGIN`` is required.   |
++-----------------------------+----------------------------------------------------------------------------------------------+--------------------------------------------------------------------+
+| ``VALIDATION_SSL_VERIFY``   | Enable SSL verification with the Wazuh manager API certificate. Format: ``true``, ``false``  | Optional - ``true`` by default.                                    |
++-----------------------------+----------------------------------------------------------------------------------------------+--------------------------------------------------------------------+
+| ``VALIDATION_HOST``         | Host and port where the Wazuh manager API is installed. Format: ``<HOST>:<PORT>``            | Required                                                           |
++-----------------------------+----------------------------------------------------------------------------------------------+--------------------------------------------------------------------+
 
 You can create a file such as ``/$(WAZUH_DIR)/etc/uninstall_validation.env`` to export the environment variables. For example:
 
 .. code-block:: bash
 
    #!/bin/sh
-
    export VALIDATION_LOGIN="wazuh:wazuh"
    export VALIDATION_HOST="192.168.0.3:55000"
    export VALIDATION_SSL_VERIFY="false"
+
+Alternatively, use an existing API token instead of username and password credentials:
+
+.. code-block:: bash
+
+   #!/bin/sh
+   export VALIDATION_TOKEN="<API_TOKEN>"
+   export VALIDATION_HOST="<WAZUH_MANAGER_IP>:55000"
+   export VALIDATION_SSL_VERIFY="true"
