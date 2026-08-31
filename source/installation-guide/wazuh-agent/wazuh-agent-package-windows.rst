@@ -29,17 +29,9 @@ The Wazuh agent runs on the endpoint you want to monitor and communicates with t
             -  Using PowerShell:
 
                .. code-block:: ps1con
+               
+                  > msiexec.exe /i wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi /q WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_PASSWORD='XXXXXXXXXXX'
 
-                  > .\wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi /q WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_PASSWORD='XXXXXXXXXXXX'
-
-            Replace
-
-            -  ``WAZUH_MANAGER``  value with your Wazuh manager IP address or hostname
-            -  ``WAZUH_REGISTRATION_PASSWORD`` value with the Wazuh manager enrollment password.
-
-            .. note::
-
-               Alternatively, if you want to install an agent without enrolling it, omit the deployment variables. To learn more about the different enrollment methods, see the :doc:`Wazuh agent enrollment </user-manual/agent/agent-enrollment/index>` section.
 
          #. Start the Wazuh agent from the GUI or by running:
 
