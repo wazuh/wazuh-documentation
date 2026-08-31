@@ -51,6 +51,9 @@ All notable changes to this project will be documented in this file.
 - Updated the *Log data collection* capability documentation to Wazuh 5.0, covering Wazuh agent configuration, collecting logs from files and operating systems, log data analysis, and new use cases. ([#10034](https://github.com/wazuh/wazuh-documentation/pull/10034)) ([#10037](https://github.com/wazuh/wazuh-documentation/pull/10037))
 - Updated the *Reference* documentation to Wazuh 5.0, splitting the local configuration reference into separate `wazuh-manager.conf` and `ossec.conf` sections, renaming manager daemons and tools with the `wazuh-manager-` prefix, updating the internal configuration, daemons, and tools references, and removing documentation for configuration sections and CLI tools no longer supported in Wazuh 5.0. ([#10047](https://github.com/wazuh/wazuh-documentation/pull/10047))
 
+### Fixed
+- Corrected instances of the outdated API password minimum (8 characters) to reflect the new minimum of 12 characters in 5.0.0 ([#9970](https://github.com/wazuh/wazuh-documentation/pull/9970))
+
 ### Removed
 
 - Removed all `agent-auth` references as this tool is now deprecated. ([#8718](https://github.com/wazuh/wazuh/pull/8718))
