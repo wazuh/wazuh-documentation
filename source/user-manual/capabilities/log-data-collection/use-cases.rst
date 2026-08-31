@@ -1,222 +1,305 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Explore Log data collection use cases: Learn to forward Linux logs using rsyslog, detect Windows applications installation, and monitor PowerShell activity.
+  :description: Explore Log data collection use cases: monitor Sysmon events on a Windows endpoint, relay syslog through rsyslog on a Linux endpoint, and configure a custom socket output on a macOS endpoint.
 
 Use cases
 =========
 
-Forwarding Linux logs using rsyslog
------------------------------------
+The following use cases demonstrate how to configure Wazuh log collection for common endpoint and network monitoring scenarios, including Windows event monitoring, syslog relaying on Linux, and custom socket output on macOS.
 
-In this use case, we configure a CentOS 7 endpoint to forward logs using rsyslog to the Wazuh server for analysis. On the CentOS 7 endpoint, we create and delete the user account ``Stephen``. Wazuh has default rules that generate alerts for the creation and deletion of user accounts.
+Monitoring Sysmon events on a Windows endpoint
+-------------------------------------------------
 
-CentOS endpoint
-^^^^^^^^^^^^^^^
+To monitor specific Windows event channels using the Wazuh agent, include the channel name in the ``location`` field and set the log format as ``eventchannel`` within the ``localfile`` block in the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` file.
 
-Perform the following steps to forward logs using rsyslog to the Wazuh server.
+For example, perform the following steps to monitor Sysmon events using the ``Microsoft-Windows-Sysmon/Operational`` channel:
 
-#. Edit the ``/etc/rsyslog.conf`` file and add the following configuration:
+#. Download the latest version of Sysmon from the `Microsoft Sysinternals <https://docs.microsoft.com/en-us/sysinternals/downloads/sysmon>`__ page.
 
-   .. code-block:: xml
+#. Extract the compressed Sysmon file to your preferred location.
 
-      *.info@@<WAZUH_SERVER_IP_ADDRESS>:514
+   .. code-block:: powershell
 
-   Where:
+      > Expand-Archive "<PATH>\Sysmon.zip"
 
-      - ``<WAZUH_SERVER_IP_ADDRESS>`` represents the IP address of the Wazuh server.
+   Replace ``<PATH>`` with the directory where the ``Sysmon.zip`` file was downloaded.
 
-#. Restart the rsyslog service to apply the change:
+#. Download the `Sysmon configuration file <https://wazuh.com/resources/blog/emulation-of-attack-techniques-and-detection-with-wazuh/sysmonconfig.xml>`__ using PowerShell as an administrator. Replace ``<SYSMON_EXECUTABLE_PATH>`` with the path to your Sysmon executable:
 
-   .. code-block:: console
+   .. code-block:: powershell
 
-      # systemctl restart rsyslog
+      > wget -Uri https://wazuh.com/resources/blog/emulation-of-attack-techniques-and-detection-with-wazuh/sysmonconfig.xml -OutFile <SYSMON_EXECUTABLE_PATH>\sysmonconfig.xml
 
-Wazuh server
-^^^^^^^^^^^^
+#. Switch to the folder containing the Sysmon executable. Run the command below to install and start Sysmon:
 
-Perform the following steps to configure the Wazuh server to receive logs from the CentOS 7 endpoint.
+   .. code-block:: powershell
 
-#. Edit the ``/var/ossec/etc/ossec.conf`` file and add the following configuration in between the ``<ossec_config>`` tags:
+      > .\Sysmon64.exe -accepteula -i sysmonconfig.xml
 
-   .. code-block:: xml
+   If you are on ARM64, use:
 
-      <remote>
-        <connection>syslog</connection>
-        <port>514</port>
-        <protocol>tcp</protocol>
-        <allowed-ips><LINUX_ENDPOINT_IP_ADDRESS></allowed-ips>
-      </remote>
+   .. code-block:: powershell
 
-   Where:
+      > .\Sysmon64a.exe -accepteula -i sysmonconfig.xml
 
-      - ``<LINUX_ENDPOINT_IP_ADDRESS>`` represents the IP address of the CentOS 7 endpoint.
-
-#. Restart the Wazuh manager for the changes to take effect:
-
-   .. code-block:: console
-
-      # systemctl restart wazuh-manager
-
-Test the configuration 
-^^^^^^^^^^^^^^^^^^^^^^
-
-Perform the following on the CentOS 7 endpoint to test the configuration.
-
-#. Add the user ``Stephen``:
-
-   .. code-block:: xml
-
-      # useradd Stephen 
-
-#. Delete the same user ``Stephen``:
-
-   .. code-block:: xml
-
-      # userdel Stephen
-
-Navigate to **Threat Hunting** module on the Wazuh dashboard to view the alerts.   
-
-.. note:: 
-   :class: not-long
-   
-   You can filter for only the CentOS endpoint events by taking the following steps.
-
-   #. Click on the **Add filter** button.
-   #. Search for “location” in the **Field** input, then select the ``is`` **Operator**. 
-   #. Enter the IP address of the CentOS 7 endpoint as the **Value**, and click **save**.
-
-The image below shows an alert for user creation.
-
-.. thumbnail:: /images/manual/log-data-collection/new-user-added.png
-    :title: New user added to the system
-    :alt: New user added to the system
-    :align: center
-    :width: 80%
-
-The image below shows an alert for user deletion.
-
-.. thumbnail:: /images/manual/log-data-collection/user-deleted.png
-    :title: User deleted from the system
-    :alt: User deleted from the system
-    :align: center
-    :width: 80%
-
-Detecting the installation of applications on Windows
------------------------------------------------------
-
-In this use case, we detect when an application is installed on a Windows endpoint. We test this use case by installing an application called Dr. Memory.
-
-Dr. Memory is an open source memory monitoring tool capable of detecting invalid memory accesses, memory leaks, handle leaks, accesses to freed memory, and other memory-related issues.
-
-Windows endpoint
-^^^^^^^^^^^^^^^^
-
-#. Download and install `Dr. Memory <https://drmemory.org/page_download.html>`_.
-
-By default, the Wazuh agent monitors the installation of applications using the configuration below located in the Wazuh agent configuration file ``C:\Program Files (x86)\ossec-agent\ossec.conf``:
+#. Add the following configuration between the ``<ossec_config>`` tags of the Wazuh agent ``C:\Program Files (x86)\ossec-agent\ossec.conf`` file:
 
    .. code-block:: xml
 
       <localfile>
-        <location>Application</location>
+        <location>Microsoft-Windows-Sysmon/Operational</location>
         <log_format>eventchannel</log_format>
       </localfile>
 
-Wazuh server
-^^^^^^^^^^^^
+#. Restart the Wazuh agent via PowerShell with administrator privileges to apply the configuration change:
 
-Wazuh has a built-in rule ``60612`` to detect when an application is installed on a Windows endpoint. You can view this rule in the ``/var/ossec/ruleset/rules/0585-win-application_rules.xml`` file on the Wazuh server.
-
-   .. code-block:: xml
-
-      <rule id="60612" level="3">
-        <if_sid>60609</if_sid>
-        <field name="win.system.eventID">^11707$|^1033$</field>
-        <options>no_full_log</options>
-        <description>Application installed $(win.eventdata.data).</description>
-      </rule>
-
-Test the configuration
-^^^^^^^^^^^^^^^^^^^^^^
-
-After installing Dr. Memory, navigate to **Threat Hunting** on the Wazuh dashboard and apply the filter ``rule.id:60612`` to view the alert.
-
-.. thumbnail:: /images/manual/log-data-collection/application-installed.png
-    :title: Application installed
-    :alt: Application installed
-    :align: center
-    :width: 80%
-
-Monitoring PowerShell activity
-------------------------------
-
-In this use case, we configure Wazuh to detect when PowerShell adds a new Windows registry key. 
-
-Windows endpoint
-^^^^^^^^^^^^^^^^
-Perform the following steps to enable PowerShell logging on a Windows endpoint and configure the Wazuh agent to monitor logged PowerShell activities.
-
-#. Press **Windows + R** keys on your keyboard to open the run dialog box.
-
-#. Type **gpedit.msc** in the search box and click **OK** to open the local group policy editor.
-
-#. Navigate to **Computer Configuration > Administrative Templates > Windows Components > Windows PowerShell > Turn on PowerShell Script Block Logging**.
-
-   .. note:: Turning on **PowerShell Script Block Logging** will log a lot of PowerShell events in the ``Microsoft-Winndows-PowerShell/Operational`` event channel.
-
-#. Select **Enabled**, and then click **OK**.
-
-#. Add the following in between the ``<ossec_config>`` tags of the Wazuh agent configuration file ``C:\Program Files (x86)\ossec-agent\ossec.conf`` to monitor PowerShell logs:
-
-   .. code-block:: xml
-
-      <localfile>
-        <location>Microsoft-Windows-PowerShell/Operational</location>
-        <log_format>eventchannel</log_format>
-      </localfile>
-
-#. Restart the Wazuh agent via PowerShell with administrator privileges to apply the change:
-
-   .. code-block:: PowerShell
+   .. code-block:: powershell
 
       > Restart-Service -Name wazuh
 
-Wazuh server
-^^^^^^^^^^^^
+Trigger a Sysmon event
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Wazuh has a built-in rule ``91843`` to detect when a PowerShell adds a new Windows registry key. You can view this rule in the ``/var/ossec/ruleset/rules/0915-win-powershell_rules.xml`` file on the Wazuh server:
+#. Trigger a Sysmon event by launching ``whoami.exe``:
+
+   .. code-block:: powershell
+
+      > C:\Windows\System32\whoami.exe
+
+Visualize the event
+^^^^^^^^^^^^^^^^^^^^^^
+
+#. Navigate to **Explore** > **Discover** and filter on the event:
+
+   Where
+
+   -  ``event.dataset`` is ``sysmon``
+   -  ``process.executable`` is ``C:\Windows\System32\whoami.exe``
+
+   .. thumbnail:: /images/manual/log-data-collection/sysmon-event-triggered.png
+      :title: Image showing a triggered Sysmon event
+      :alt: Image showing a triggered Sysmon event
+      :align: center
+      :width: 80%
+
+.. _configuring_rsyslog_relay:
+
+Configuring rsyslog on a Linux endpoint
+-------------------------------------------
+
+.. note::
+
+   The Wazuh manager no longer accepts syslog events directly. To collect syslog from the network, configure rsyslog on a Linux endpoint with a Wazuh agent installed, write incoming messages to a log file, and monitor that file with the Logcollector module. The Wazuh manager has out-of-the-box decoders and rules to extract and analyze relevant fields from Linux events. You can create custom decoders and rules to parse and analyze Linux events.
+
+Follow the steps below to configure a monitored Linux endpoint as an rsyslog relay and forward the received messages to the Wazuh manager:
+
+#. Install rsyslog:
+
+   .. code-block:: console
+
+      $ sudo apt update
+      $ sudo apt install rsyslog -y
+
+#. Enable and start the rsyslog service:
+
+   .. code-block:: console
+
+      $ sudo systemctl enable rsyslog
+      $ sudo systemctl start rsyslog
+
+#. Create a dedicated configuration file ``/etc/rsyslog.d/10-remote.conf`` with the following content.
+
+   .. code-block:: none
+
+      module(load="imudp")
+      input(type="imudp" port="514" ruleset="remote")
+      template(name="TraditionalSyslogFormat" type="string"
+               string="%timegenerated% %HOSTNAME% %syslogtag%%msg:::sp-if-no-1st-sp%%msg%\n")
+      ruleset(name="remote") {
+          action(type="omfile" file="/var/log/remote.log" template="TraditionalSyslogFormat")
+          stop
+      }
+
+#. Create the destination log:
+
+   .. code-block:: console
+
+      $ sudo touch /var/log/remote.log
+      $ sudo chown syslog:adm /var/log/remote.log
+      $ sudo chmod 640 /var/log/remote.log
+
+#. Validate the configuration
+
+   .. code-block:: console
+
+      $ sudo rsyslogd -N1
+
+#. Restart rsyslog:
+
+   .. code-block:: console
+
+      $ sudo systemctl restart rsyslog
+
+#. Verify rsyslog is listening on port 514:
+
+   .. code-block:: console
+
+      $ sudo ss -lun | grep 514
+
+   The command output looks similar to this:
+
+   .. code-block:: none
+      :class: output
+
+      UNCONN 0      0            0.0.0.0:514        0.0.0.0:*
+      UNCONN 0      0               [::]:514           [::]:*
+
+   Allow inbound UDP traffic on port 514 from your network devices at every point in the path: the host firewall (if enabled, for example ``ufw``), and any cloud security group, network ACL, or upstream firewall in front of the relay. Confirm the relay is receiving before moving on:
+
+   .. code-block:: console
+
+      $ sudo ufw allow from <NETWORK_CIDR> to any port 514 proto udp
+
+   Ensure you replace ``<NETWORK_CIDR>`` with your specified network CIDR.
+
+#. Configure the Wazuh agent to monitor that rsyslog output file using the Logcollector module:
 
    .. code-block:: xml
 
-      <rule id="91843" level="3">
-        <if_sid>91802</if_sid>
-        <field name="win.eventdata.scriptBlockText" type="pcre2">(?i)New-ItemProperty.+\-Path</field>
-        <options>no_full_log</options>
-        <description>Powershell executed "New-ItemProperty -Path". Possible addition of new item to registry</description>
-        <mitre>
-          <id>T1059.001</id>
-          <id>T1112</id>
-        </mitre>
-      </rule>
+      <localfile>
+        <location>/var/log/remote.log</location>
+        <log_format>syslog</log_format>
+      </localfile>
 
-Test the configuration
+#. Restart the Wazuh agent.
+
+   .. code-block:: console
+
+      $ sudo systemctl restart wazuh-agent
+
+Test log injection from an rsyslog client
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Perform the following steps from another Linux endpoint on the same network as the rsyslog relay:
+
+#. Send a test message directly to the relay IP address with the ``logger`` command:
+
+   .. code-block:: console
+
+      $ logger -n <RSYSLOG_SERVER_IP> -P 514 -d "TEST-RSYSLOG direct to remote.log from a monitored Wazuh agent"
+
+Visualize the event
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Perform the following steps to test the configuration:
+#. Navigate to the **Explore** > **Discover** page on the Wazuh dashboard and use the filter to view the log:
 
-#. On the Windows endpoint, run the following command via PowerShell with administrator privileges to add a registry entry ``NoofAlerts`` to the ``HKLM\Software\Microsoft\ADs`` registry key, and set the value to 2:
+   Where:
 
-   .. code-block:: PowerShell
+   ``wazuh.protocol.location`` is ``/var/log/remote.log``
 
-      > New-ItemProperty -Path "HKLM:\Software\Microsoft\ADs" -Name "NoofAlerts" -Value 2
+   .. thumbnail:: /images/manual/log-data-collection/rsyslog-log-collection-linux.png
+      :title: Image showing log collection on a monitored Linux endpoint
+      :alt: Image showing log collection on a monitored Linux endpoint
+      :align: center
+      :width: 80%
 
-   .. note:: We recommend running the above command in a sandbox environment, and not in a production environment.
+Configuring a custom socket output on a macOS endpoint
+-----------------------------------------------------------
 
-#. Navigate to **Threat Hunting** on the Wazuh dashboard and apply the ``rule.id:91843`` filter to view the alert.
+Perform the following steps on the monitored macOS endpoint to create a new output socket, forward logs to it, and confirm delivery end-to-end.
 
-.. thumbnail:: /images/manual/log-data-collection/monitoring-Powershell.png
-    :title: Monitoring PowerShell activity
-    :alt: Monitoring PowerShell activity
-    :align: center
-    :width: 80%
+#. Create the receiving socket with netcat before adding it to the Wazuh configuration:
+
+   .. code-block:: console
+
+      $ sudo nohup nc -lkU /var/run/custom.sock > /tmp/custom_socket_capture.log 2>&1 &
+
+#. Create the log file that will be forwarded to the socket:
+
+   .. code-block:: console
+
+      $ sudo touch /var/log/socket-test.log
+      $ sudo chmod 644 /var/log/socket-test.log
+
+#. Add the following configuration between the ``<ossec_config>`` tags of the Wazuh agent ``/Library/Ossec/etc/ossec.conf`` file to add a new socket named ``custom_socket``:
+
+   .. code-block:: xml
+
+      <socket>
+        <name>custom_socket</name>
+        <location>/var/run/custom.sock</location>
+        <mode>tcp</mode>
+        <prefix>custom_syslog: </prefix>
+      </socket>
+
+#. Add the following to the agent configuration file to forward logs from ``socket-test.log`` to ``custom_socket``:
+
+   .. code-block:: xml
+
+      <localfile>
+        <log_format>syslog</log_format>
+        <location>/var/log/socket-test.log</location>
+        <target>agent,custom_socket</target>
+      </localfile>
+
+#. Restart the Wazuh agent with administrator privileges to apply the configuration change:
+
+   .. code-block:: console
+
+      $ sudo /Library/Ossec/bin/wazuh-control restart
+
+Test log forwarding to the custom socket (macOS)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Perform the following steps on the same monitored endpoint:
+
+#. Inject a distinctive test line into the monitored file:
+
+   .. code-block:: console
+
+      $ echo "TEST-SOCKET forwarding to custom_socket from a monitored Wazuh agent (macOS)" | sudo tee -a /var/log/socket-test.log
+
+#. Confirm the socket receiver captured the forwarded message:
+
+   .. code-block:: console
+
+      $ cat /tmp/custom_socket_capture.log
+
+   The command output looks similar to this:
+
+   .. code-block:: none
+      :class: output
+
+      custom_syslog: TEST-SOCKET forwarding to custom_socket from a monitored Wazuh agent (macOS)
+
+#. Verify that the agent shows an established connection to the socket at the moment it forwards a log line:
+
+   .. code-block:: console
+
+      $ sudo lsof -U | grep custom.sock
+
+   The command output looks similar to this:
+
+   .. code-block:: none
+      :class: output
+
+      nc           1234 root    3u  unix 0x0000000000000000      0t0      - /var/run/custom.sock
+      wazuh-agentd 5678 root   12u  unix 0x0000000000000000      0t0      - /var/run/custom.sock
+
+   The ``custom_syslog`` prefix confirms the ``<prefix>`` tag applied, and the second ``lsof`` line confirms the agent (not just the ``nc`` listener) held a connection to ``custom_socket`` at write time.
+
+Visualize the event
+^^^^^^^^^^^^^^^^^^^^^^
+
+#. Navigate to the **Explore** > **Discover** page on the Wazuh dashboard and use the filter to view the monitored log file:
+
+   Where:
+
+   ``wazuh.protocol.location`` is ``/var/log/socket-test.log``
+
+   .. thumbnail:: /images/manual/log-data-collection/custom-socket-log-collection-macos.png
+      :title: Image showing a monitored log file
+      :alt: Image showing a monitored log file
+      :align: center
+      :width: 80%

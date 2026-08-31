@@ -8,19 +8,27 @@ Navigating the Wazuh dashboard
 
 The Wazuh dashboard is designed to provide an overview of security-related incidents and activities across your environment. It aggregates and visualizes data from multiple sources, enabling administrators and security analysts to identify, investigate, and respond to potential threats. The Wazuh dashboard features a user-friendly interface that provides dashboards for endpoint security, threat intelligence, security operations, security analytics, and cloud security.
 
-The Wazuh dashboard also displays summaries of connected and disconnected Wazuh agents and highlights the severity levels of alerts triggered within the last 24 hours. In addition to monitoring and visualization capabilities, the Wazuh dashboard allows users to manage and configure various Wazuh platform settings from a centralized interface. It provides a user-friendly interface for Wazuh indexer, manager, dashboard, and agent management.
+The Wazuh dashboard provides an overview of the security posture of monitored environments. It summarizes Wazuh agent status, security findings, and MITRE ATT&CK activity, providing quick access to the corresponding dashboard sections for further investigation.
 
 .. thumbnail:: /images/wazuh-dashboard/navigating/dashboards.png
    :align: center
    :width: 80%
-   :title: Navigating the Wazuh dashboard: Dashboards
-   :alt: Navigating the Wazuh dashboard: Dashboards
+   :title: Wazuh dashboard Overview
+   :alt: Wazuh dashboard Overview
+
+It also presents information across Wazuh capabilities, including configuration assessment, file integrity monitoring, malware detection, threat hunting, vulnerability detection, IT hygiene, incident response, and regulatory compliance. It also provides information about available threat intelligence content and access to supported cloud and SaaS integrations.
 
 .. thumbnail:: /images/wazuh-dashboard/navigating/dashboards2.png
    :align: center
    :width: 80%
-   :title: Navigating the Wazuh dashboard: Overview
-   :alt: Navigating the Wazuh dashboard: Overview
+   :title: Wazuh dashboard Overview: Endpoint security and threat intelligence
+   :alt: Wazuh dashboard Overview: Endpoint security and threat intelligence
+
+.. thumbnail:: /images/wazuh-dashboard/navigating/dashboards3.png
+   :align: center
+   :width: 80%
+   :title: Wazuh dashboard Overview: Security operations and cloud security
+   :alt: Wazuh dashboard Overview: Security operations and cloud security
 
 Dashboards
 ----------
@@ -129,6 +137,17 @@ This dashboard shows compliance monitoring data mapped to regulatory standards a
    :width: 80%
    :title: Regulatory compliance
    :alt: Regulatory compliance
+
+Incident response
+~~~~~~~~~~~~~~~~~
+
+This dashboard shows incident response activity, this includes the actions performed by the active response scripts across monitored endpoints. The image below shows an alert generated after an active response script was executed on a monitored endpoint.
+
+.. thumbnail:: /images/wazuh-dashboard/navigating/security-operations-incident-response.png
+   :align: center
+   :width: 80%
+   :title: Incident response
+   :alt: Incident response
 
 Cloud security
 ^^^^^^^^^^^^^^
