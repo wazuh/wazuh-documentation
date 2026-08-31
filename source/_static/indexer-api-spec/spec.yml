@@ -576,6 +576,87 @@ paths:
   /_plugins/_content_manager/space/{space}:
     $ref: 'content_manager_api.yml#/paths/~1_plugins~1_content_manager~1space~1{space}'
 
+  /_plugins/_alerting/monitors:
+    $ref: 'alerting_api.yml#/paths/~1_plugins~1_alerting~1monitors'
+
+  /_plugins/_alerting/monitors/{monitorID}:
+    $ref: 'alerting_api.yml#/paths/~1_plugins~1_alerting~1monitors~1{monitorID}'
+
+  /_plugins/_alerting/monitors/_search:
+    $ref: 'alerting_api.yml#/paths/~1_plugins~1_alerting~1monitors~1_search'
+
+  /_plugins/_alerting/monitors/{monitorID}/_execute:
+    $ref: 'alerting_api.yml#/paths/~1_plugins~1_alerting~1monitors~1{monitorID}~1_execute'
+
+  /_plugins/_alerting/monitors/_execute:
+    $ref: 'alerting_api.yml#/paths/~1_plugins~1_alerting~1monitors~1_execute'
+
+  /_plugins/_alerting/monitors/{monitorID}/_acknowledge/alerts:
+    $ref: 'alerting_api.yml#/paths/~1_plugins~1_alerting~1monitors~1{monitorID}~1_acknowledge~1alerts'
+
+  /_plugins/_alerting/monitors/alerts:
+    $ref: 'alerting_api.yml#/paths/~1_plugins~1_alerting~1monitors~1alerts'
+
+  /_plugins/_alerting/workflows:
+    $ref: 'alerting_api.yml#/paths/~1_plugins~1_alerting~1workflows'
+
+  /_plugins/_alerting/workflows/{workflowID}:
+    $ref: 'alerting_api.yml#/paths/~1_plugins~1_alerting~1workflows~1{workflowID}'
+
+  /_plugins/_alerting/workflows/{workflowID}/_execute:
+    $ref: 'alerting_api.yml#/paths/~1_plugins~1_alerting~1workflows~1{workflowID}~1_execute'
+
+  /_plugins/_alerting/workflows/_execute:
+    $ref: 'alerting_api.yml#/paths/~1_plugins~1_alerting~1workflows~1_execute'
+
+  /_plugins/_alerting/workflows/{workflowID}/_acknowledge/alerts:
+    $ref: 'alerting_api.yml#/paths/~1_plugins~1_alerting~1workflows~1{workflowID}~1_acknowledge~1alerts'
+
+  /_plugins/_alerting/workflows/alerts:
+    $ref: 'alerting_api.yml#/paths/~1_plugins~1_alerting~1workflows~1alerts'
+
+  /_plugins/_alerting/findings/_search:
+    $ref: 'alerting_api.yml#/paths/~1_plugins~1_alerting~1findings~1_search'
+
+  /_plugins/_alerting/remote/indexes:
+    $ref: 'alerting_api.yml#/paths/~1_plugins~1_alerting~1remote~1indexes'
+
+  /_plugins/_alerting/comments/{id}:
+    $ref: 'alerting_api.yml#/paths/~1_plugins~1_alerting~1comments~1{id}'
+
+  /_plugins/_alerting/comments/_search:
+    $ref: 'alerting_api.yml#/paths/~1_plugins~1_alerting~1comments~1_search'
+
+  /_plugins/_alerting/destinations/{destinationID}:
+    $ref: 'alerting_api.yml#/paths/~1_plugins~1_alerting~1destinations~1{destinationID}'
+
+  /_plugins/_alerting/destinations:
+    $ref: 'alerting_api.yml#/paths/~1_plugins~1_alerting~1destinations'
+
+  /_plugins/_alerting/destinations/email_accounts/{emailAccountID}:
+    $ref: 'alerting_api.yml#/paths/~1_plugins~1_alerting~1destinations~1email_accounts~1{emailAccountID}'
+
+  /_plugins/_alerting/destinations/email_accounts/_search:
+    $ref: 'alerting_api.yml#/paths/~1_plugins~1_alerting~1destinations~1email_accounts~1_search'
+
+  /_plugins/_alerting/destinations/email_groups/{emailGroupID}:
+    $ref: 'alerting_api.yml#/paths/~1_plugins~1_alerting~1destinations~1email_groups~1{emailGroupID}'
+
+  /_plugins/_alerting/destinations/email_groups/_search:
+    $ref: 'alerting_api.yml#/paths/~1_plugins~1_alerting~1destinations~1email_groups~1_search'
+
+  /_plugins/_alerting/stats:
+    $ref: 'alerting_api.yml#/paths/~1_plugins~1_alerting~1stats'
+
+  /_plugins/_alerting/stats/{metric}:
+    $ref: 'alerting_api.yml#/paths/~1_plugins~1_alerting~1stats~1{metric}'
+
+  /_plugins/_alerting/{nodeId}/stats:
+    $ref: 'alerting_api.yml#/paths/~1_plugins~1_alerting~1{nodeId}~1stats'
+
+  /_plugins/_alerting/{nodeId}/stats/{metric}:
+    $ref: 'alerting_api.yml#/paths/~1_plugins~1_alerting~1{nodeId}~1stats~1{metric}'
+
   /_tasks:
     $ref: 'tasks_api.yml#/paths/~1_tasks'
 
@@ -1006,6 +1087,20 @@ tags:
     description: Search and validate Security Analytics detection rules, and list the log-type categories they can target.
   - name: Mappings
     description: Manage the field-alias mappings that let Security Analytics rules and detectors interpret an index's raw fields.
+  - name: Monitors
+    description: Manage Alerting monitors, which check indices and rules on a schedule and raise alerts through configurable triggers.
+  - name: Workflows
+    description: Manage Alerting workflows, which chain existing monitors into an evaluated sequence with their own triggers.
+  - name: Alerting findings
+    description: Retrieve findings recorded when an Alerting document-level monitor's queries matched an event.
+  - name: Alerting remote indexes
+    description: List local and cross-cluster indexes that Alerting monitors can reference, including their health and field mappings.
+  - name: Comments
+    description: Manage comments left on alerts. Disabled by default; requires the Comments feature to be enabled.
+  - name: Destinations
+    description: Retrieve legacy Alerting notification destinations and email accounts/groups. Read-only — creation and deletion moved to the Notifications plugin.
+  - name: Alerting stats
+    description: Retrieve statistics about the Alerting plugin's scheduled-job scheduler, cluster-wide or per node.
   - name: Report definitions
     description: Create, retrieve, update, delete, and list report definitions — the saved configuration of what to render, how to render it, when to generate it, and optionally where to deliver it.
   - name: On-demand reports
