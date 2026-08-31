@@ -1220,7 +1220,7 @@ paths:
   /_plugins/_security_analytics/rules/_search:
     post:
       tags:
-        - Rules
+        - Detection rules
       summary: Search detection rules
       description: |
         Searches Sigma detection rules using a standard OpenSearch query DSL body.
@@ -1321,7 +1321,7 @@ paths:
   /_plugins/_security_analytics/rules/validate:
     post:
       tags:
-        - Rules
+        - Detection rules
       summary: Validate rules against an index
       description: |
         Checks whether the fields referenced by one or more existing custom rules are present (directly or via alias) in the given index's mappings. Despite its name, the response's `nonapplicable_fields` array actually lists rule IDs, not field names — it identifies which of the requested rules have at least one field missing from the index.
@@ -1383,7 +1383,7 @@ paths:
   /_plugins/_security_analytics/rules/categories:
     get:
       tags:
-        - Rules
+        - Detection rules
       summary: Get rule categories
       description: |
         Lists the log-type categories that detection rules and detectors can target, such as `windows`, `cloudtrail`, or `network`.

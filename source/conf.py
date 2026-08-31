@@ -112,7 +112,7 @@ exclude_patterns = [
     'user-manual/api/rbac/**',
     'user-manual/capabilities/active-response/**',
     'user-manual/capabilities/agentless-monitoring/**',
-    'user-manual/capabilities/log-data-collection/**',
+    'user-manual/capabilities/log-data-collection/journald.rst',
     'user-manual/capabilities/malware-detection/**',
     'user-manual/capabilities/system-calls-monitoring/**',
     'user-manual/indexer-api/index.rst',
@@ -125,7 +125,8 @@ exclude_patterns = [
     'user-manual/agent/agent-management/key-request.rst',
     'user-manual/agent/agent-management/antiflooding.rst',
     'user-manual/agent/agent-management/labels.rst',
-    'user-manual/reference/**',
+    'user-manual/reference/unattended-installation.rst',
+    'user-manual/reference/statistics-files/**',
     'user-manual/ruleset/**',
     'user-manual/manager/alert-management.rst',
     'user-manual/manager/event-logging.rst',
@@ -218,7 +219,7 @@ if html_theme == 'wazuh_doc_theme_v3':
     # redirects.min.js should be loaded from the local folder if:
     # * the release is "current" (is_latest_release = True) or
     # * is a normal compilation (not for production)
-    html_theme_options['local_redirects_file'] = not (tags.has("production") or tags.has("dev"))
+    html_theme_options['local_redirects_file'] = is_latest_release or not (tags.has("production") or tags.has("dev"))
 
 # Add any paths that contain custom themes here, relative to this directory.
 html_theme_path = ['_themes']

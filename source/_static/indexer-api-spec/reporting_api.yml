@@ -1,0 +1,1076 @@
+paths:
+  /_plugins/_reports/definition:
+    post:
+      tags:
+        - Report definitions
+      summary: Create report definition
+      description: |
+        Creates a report definition, which stores what to render (`source`), how to render it (`format`), when to generate it (`trigger`), and optionally where to deliver it (`delivery`). Subject to the dynamic cluster setting `plugins.reports.max_report_definitions` (default `50`, range `0`-`50`) — creating a definition past this limit fails with 400.
+      operationId: createReportDefinition
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateReportDefinitionRequest'
+            example:
+              reportDefinition:
+                name: "Weekly security overview"
+                isEnabled: true
+                source:
+                  description: "Weekly security overview dashboard"
+                  type: "Dashboard"
+                  origin: "https://localhost:5601"
+                  id: "vX0mBIkBs4jgb1ZimZ0h"
+                format:
+                  duration: "PT1H"
+                  fileFormat: "Pdf"
+                  header: "Weekly security overview"
+                trigger:
+                  triggerType: "CronSchedule"
+                  schedule:
+                    cron:
+                      expression: "0 8 * * MON"
+                      timezone: "America/Los_Angeles"
+                delivery:
+                  title: "Weekly security overview"
+                  textDescription: "Attached is this week's security overview report."
+                  configIds:
+                    - "iAOep4gBnBc0IWyRThgO"
+      responses:
+        '200':
+          description: Report definition created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateReportDefinitionResponse'
+              example:
+                reportDefinitionId: "0GJhP4gB2Xj2yZ1vFhgT"
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /_plugins/_reports/definition/{reportDefinitionId}:
+    put:
+      tags:
+        - Report definitions
+      summary: Update report definition
+      description: |
+        Fully replaces an existing report definition — every field of `reportDefinition` must be supplied again, not just the changed ones. The path `reportDefinitionId` is only a default: a `reportDefinitionId` in the request body overrides it if both are present.
+      operationId: updateReportDefinition
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: reportDefinitionId
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateReportDefinitionRequest'
+            example:
+              reportDefinition:
+                name: "Weekly security overview"
+                isEnabled: true
+                source:
+                  description: "Weekly security overview dashboard"
+                  type: "Dashboard"
+                  origin: "https://localhost:5601"
+                  id: "vX0mBIkBs4jgb1ZimZ0h"
+                format:
+                  duration: "PT1H"
+                  fileFormat: "Pdf"
+                trigger:
+                  triggerType: "CronSchedule"
+                  schedule:
+                    cron:
+                      expression: "0 8 * * MON,THU"
+                      timezone: "America/Los_Angeles"
+      responses:
+        '200':
+          description: Report definition updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateReportDefinitionResponse'
+              example:
+                reportDefinitionId: "0GJhP4gB2Xj2yZ1vFhgT"
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    get:
+      tags:
+        - Report definitions
+      summary: Get report definition
+      description: Returns a single report definition, along with its metadata, by id. Returns 404 if the id doesn't exist.
+      operationId: getReportDefinition
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: reportDefinitionId
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetReportDefinitionResponse'
+              example:
+                reportDefinitionDetails:
+                  id: "0GJhP4gB2Xj2yZ1vFhgT"
+                  lastUpdatedTimeMs: 1755172800000
+                  createdTimeMs: 1755000000000
+                  tenant: "__user__"
+                  reportDefinition:
+                    name: "Weekly security overview"
+                    isEnabled: true
+                    source:
+                      description: "Weekly security overview dashboard"
+                      type: "Dashboard"
+                      origin: "https://localhost:5601"
+                      id: "vX0mBIkBs4jgb1ZimZ0h"
+                    format:
+                      duration: "PT1H"
+                      fileFormat: "Pdf"
+                      timeFrom: null
+                      timeTo: null
+                    trigger:
+                      triggerType: "CronSchedule"
+                      schedule:
+                        cron:
+                          expression: "0 8 * * MON"
+                          timezone: "America/Los_Angeles"
+                    delivery:
+                      title: "Weekly security overview"
+                      textDescription: "Attached is this week's security overview report."
+                      configIds:
+                        - "iAOep4gBnBc0IWyRThgO"
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    delete:
+      tags:
+        - Report definitions
+      summary: Delete report definition
+      description: Deletes a report definition by id. Returns 404 if the id doesn't exist.
+      operationId: deleteReportDefinition
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: reportDefinitionId
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Report definition deleted successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteReportDefinitionResponse'
+              example:
+                reportDefinitionId: "0GJhP4gB2Xj2yZ1vFhgT"
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /_plugins/_reports/definitions:
+    get:
+      tags:
+        - Report definitions
+      summary: List report definitions
+      description: |
+        Returns a paginated list of report definitions and their metadata. `fromIndex` must be non-negative or the request fails with 400. An unparseable value for `fromIndex` or `maxItems` is silently ignored and the default is used instead of returning an error.
+      operationId: listReportDefinitions
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: fromIndex
+          in: query
+          description: Zero-based offset into the result set.
+          schema:
+            type: integer
+            default: 0
+        - name: maxItems
+          in: query
+          description: Maximum number of definitions to return. Defaults to the `opensearch.reports.general.defaultItemsQueryCount` cluster setting.
+          schema:
+            type: integer
+            default: 100
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success. `reportDefinitionDetailsList` is empty if there are no definitions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAllReportDefinitionsResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /_plugins/_reports/on_demand:
+    put:
+      tags:
+        - On-demand reports
+      summary: Create report instance in context
+      description: |
+        Creates a report instance directly from a caller-supplied, near-complete instance payload, rather than from a saved report definition — used for ad hoc/in-context generation, such as a dashboard's "download" action. The request body carries the report's time range, `status`, and an embedded `reportDefinitionDetails` object (including its own `id`) directly, unlike `POST /_plugins/_reports/on_demand/{reportDefinitionId}` below, which generates from an already-saved definition.
+      operationId: createInContextReport
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InContextReportCreateRequest'
+            example:
+              beginTimeMs: 1755172800000
+              endTimeMs: 1755176400000
+              status: "Success"
+              reportDefinitionDetails:
+                id: "0GJhP4gB2Xj2yZ1vFhgT"
+                lastUpdatedTimeMs: 1755172800000
+                createdTimeMs: 1755000000000
+                tenant: "__user__"
+                reportDefinition:
+                  name: "Weekly security overview"
+                  isEnabled: true
+                  source:
+                    description: "Weekly security overview dashboard"
+                    type: "Dashboard"
+                    origin: "https://localhost:5601"
+                    id: "vX0mBIkBs4jgb1ZimZ0h"
+                  format:
+                    duration: "PT1H"
+                    fileFormat: "Pdf"
+                  trigger:
+                    triggerType: "Download"
+              inContextDownloadUrlPath: "/app/dashboards#/view/vX0mBIkBs4jgb1ZimZ0h"
+      responses:
+        '200':
+          description: Report instance created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InContextReportCreateResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /_plugins/_reports/on_demand/{reportDefinitionId}:
+    post:
+      tags:
+        - On-demand reports
+      summary: Generate report from definition
+      description: |
+        Generates a new report instance immediately from an existing saved report definition. The request body is normally empty (`{}`) — `reportDefinitionId` is taken from the path. A `reportDefinitionId` in the body, if present, overrides the path value. Returns 400 if `reportDefinitionId` doesn't resolve to an existing report definition.
+      operationId: createOnDemandReport
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: reportDefinitionId
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OnDemandReportCreateRequest'
+            example: {}
+      responses:
+        '200':
+          description: Report instance created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OnDemandReportCreateResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /_plugins/_reports/instance/{reportInstanceId}:
+    post:
+      tags:
+        - Report instances
+      summary: Update report instance status
+      description: |
+        Updates a report instance's `status`. The path `reportInstanceId` is only a default: a `reportInstanceId` in the request body overrides it if both are present. Returns 404 if the instance doesn't exist, 400 if `status` is missing or `reportInstanceId` is malformed.
+      operationId: updateReportInstanceStatus
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: reportInstanceId
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateReportInstanceStatusRequest'
+            example:
+              status: "Success"
+              statusText: "Operation completed"
+      responses:
+        '200':
+          description: Report instance status updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateReportInstanceStatusResponse'
+              example:
+                reportInstanceId: "wY1nCJlCt5khc2ajnZ1i"
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    get:
+      tags:
+        - Report instances
+      summary: Get report instance
+      description: Returns a single report instance by id. Returns 404 if the id doesn't exist, 400 if it's malformed.
+      operationId: getReportInstance
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: reportInstanceId
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetReportInstanceResponse'
+              example:
+                reportInstance:
+                  id: "wY1nCJlCt5khc2ajnZ1i"
+                  lastUpdatedTimeMs: 1755172810000
+                  createdTimeMs: 1755172800000
+                  beginTimeMs: 1755172800000
+                  endTimeMs: 1755176400000
+                  tenant: "__user__"
+                  status: "Success"
+                  reportDefinitionDetails:
+                    id: "0GJhP4gB2Xj2yZ1vFhgT"
+                    lastUpdatedTimeMs: 1755172800000
+                    createdTimeMs: 1755000000000
+                    tenant: "__user__"
+                    reportDefinition:
+                      name: "Weekly security overview"
+                      isEnabled: true
+                      source:
+                        description: "Weekly security overview dashboard"
+                        type: "Dashboard"
+                        origin: "https://localhost:5601"
+                        id: "vX0mBIkBs4jgb1ZimZ0h"
+                      format:
+                        duration: "PT1H"
+                        fileFormat: "Pdf"
+                      trigger:
+                        triggerType: "CronSchedule"
+                        schedule:
+                          cron:
+                            expression: "0 8 * * MON"
+                            timezone: "America/Los_Angeles"
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /_plugins/_reports/instances:
+    get:
+      tags:
+        - Report instances
+      summary: List report instances
+      description: |
+        Returns a paginated list of report instances. `fromIndex` must be non-negative or the request fails with 400. An unparseable value for `fromIndex` or `maxItems` is silently ignored and the default is used instead of returning an error.
+      operationId: listReportInstances
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: fromIndex
+          in: query
+          description: Zero-based offset into the result set.
+          schema:
+            type: integer
+            default: 0
+        - name: maxItems
+          in: query
+          description: Maximum number of instances to return. Defaults to the `opensearch.reports.general.defaultItemsQueryCount` cluster setting.
+          schema:
+            type: integer
+            default: 100
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success. `reportInstanceList` is empty if there are no instances.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAllReportInstancesResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /_plugins/_reports/_local/stats:
+    get:
+      tags:
+        - Reporting stats
+      summary: Get reporting stats
+      description: |
+        Returns node-local counters for the Reporting plugin's REST API — request totals plus per-operation success/error breakdowns — as a flattened JSON tree. This is served directly from an in-memory metrics store rather than a versioned schema, so treat the exact set of keys as informational and subject to change between releases.
+      operationId: getReportingStats
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success. The command output looks similar to this.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetReportingStatsResponse'
+              example:
+                request_total: 542
+                request_count: 12
+                success_count: 10
+                failed_request_count_user_error: 2
+                failed_request_count_system_error: 0
+                report_definition:
+                  create:
+                    total: 20
+                    count: 2
+                    user_error:
+                      max_report_definitions_exceeded: 0
+                    system_error: 0
+                report_instance:
+                  update:
+                    total: 8
+                    count: 1
+                    user_error:
+                      missing_report_instance: 0
+                      invalid_status: 0
+                      invalid_report_id: 0
+                    system_error: 0
+                  info:
+                    total: 40
+                    count: 3
+                    user_error:
+                      missing_report_instance: 0
+                      invalid_report_id: 1
+                    system_error: 0
+                  list:
+                    total: 15
+                    count: 2
+                    user_error:
+                      invalid_from_index: 0
+                    system_error: 0
+                on_demand:
+                  create:
+                    total: 6
+                    count: 1
+                    user_error:
+                      invalid_begin_time: 0
+                      invalid_end_time: 0
+                      invalid_status: 0
+                    system_error: 0
+                on_demand_from_definition:
+                  create:
+                    total: 3
+                    count: 0
+                    user_error:
+                      invalid_report_def_id: 0
+                    system_error: 0
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+components:
+  schemas:
+    Source:
+      type: object
+      required:
+        - description
+        - type
+        - origin
+        - id
+      properties:
+        description:
+          type: string
+        type:
+          type: string
+          enum: [Dashboard, Visualization, SavedSearch, Notebook]
+          description: What kind of Wazuh dashboard object this report renders.
+        origin:
+          type: string
+          description: Base URL of the Wazuh dashboard instance the `id` belongs to.
+        id:
+          type: string
+          description: Saved-object id of the dashboard, visualization, saved search, or notebook to render.
+
+    Format:
+      type: object
+      required:
+        - duration
+        - fileFormat
+      properties:
+        duration:
+          type: string
+          description: How long report generation may run before timing out, as an ISO-8601 duration (e.g. `PT1H` for one hour). Parsed with `java.time.Duration.parse()`.
+        fileFormat:
+          type: string
+          enum: [Pdf, Png, Csv, Xlsx]
+        limit:
+          type: integer
+          description: Optional row/item limit for `Csv`/`Xlsx` exports.
+        header:
+          type: string
+        footer:
+          type: string
+        timeFrom:
+          type: string
+          nullable: true
+          description: Start of the time range to render, as an epoch-millisecond string. Always present in responses, but `null` when the source doesn't use a time range.
+        timeTo:
+          type: string
+          nullable: true
+          description: End of the time range to render. Same behavior as `timeFrom`.
+
+    CronSchedule:
+      type: object
+      required:
+        - expression
+        - timezone
+      properties:
+        expression:
+          type: string
+          description: Unix cron expression, e.g. `0 8 * * MON`.
+        timezone:
+          type: string
+          description: IANA time zone id, e.g. `America/Los_Angeles`.
+        delay:
+          type: integer
+          description: Optional delay, in milliseconds, applied after the scheduled time before the job actually runs.
+
+    IntervalSchedule:
+      type: object
+      required:
+        - start_time
+        - period
+        - unit
+      properties:
+        start_time:
+          type: integer
+          format: int64
+          description: Epoch-millisecond time the interval schedule started.
+        period:
+          type: integer
+          description: Length of the interval, in `unit`s.
+        unit:
+          type: string
+          enum: [SECONDS, MINUTES, HOURS, DAYS]
+        delay:
+          type: integer
+          description: Optional delay, in milliseconds, applied after each scheduled run time before the job actually runs.
+
+    Schedule:
+      type: object
+      description: |
+        Present only when the enclosing `trigger.triggerType` is `CronSchedule` or `IntervalSchedule`. Exactly one of `cron` or `interval` is present — which one is present is itself the discriminator, there's no separate `type` field. This type comes from the `opensearch-job-scheduler-spi` dependency shared across OpenSearch plugins, not from the Reporting plugin's own code.
+      properties:
+        cron:
+          $ref: '#/components/schemas/CronSchedule'
+        interval:
+          $ref: '#/components/schemas/IntervalSchedule'
+
+    Trigger:
+      type: object
+      required:
+        - triggerType
+      properties:
+        triggerType:
+          type: string
+          enum: [Download, OnDemand, CronSchedule, IntervalSchedule]
+          description: |
+            `Download` and `OnDemand` are generated only on request and never carry a `schedule`. `CronSchedule` and `IntervalSchedule` generate on a recurring schedule and require one.
+        schedule:
+          $ref: '#/components/schemas/Schedule'
+
+    Delivery:
+      type: object
+      required:
+        - title
+        - textDescription
+      properties:
+        title:
+          type: string
+        textDescription:
+          type: string
+        htmlDescription:
+          type: string
+        configIds:
+          type: array
+          items:
+            type: string
+          default: []
+          description: config_ids of Notifications plugin channels to deliver the generated report through. Always present in responses, even when empty.
+
+    ReportDefinition:
+      type: object
+      required:
+        - name
+        - isEnabled
+        - source
+        - format
+        - trigger
+      properties:
+        name:
+          type: string
+        isEnabled:
+          type: boolean
+        source:
+          $ref: '#/components/schemas/Source'
+        format:
+          $ref: '#/components/schemas/Format'
+        trigger:
+          $ref: '#/components/schemas/Trigger'
+        delivery:
+          $ref: '#/components/schemas/Delivery'
+
+    ReportDefinitionDetails:
+      type: object
+      properties:
+        id:
+          type: string
+        lastUpdatedTimeMs:
+          type: integer
+          format: int64
+        createdTimeMs:
+          type: integer
+          format: int64
+        tenant:
+          type: string
+          default: "__user__"
+        access:
+          type: array
+          items:
+            type: string
+          description: Backend roles/users with access to this definition, e.g. `User:user`, `Role:sample_role`. Omitted when empty, or when the response filters sensitive info.
+        reportDefinition:
+          $ref: '#/components/schemas/ReportDefinition'
+
+    CreateReportDefinitionRequest:
+      type: object
+      required:
+        - reportDefinition
+      properties:
+        reportDefinition:
+          $ref: '#/components/schemas/ReportDefinition'
+
+    CreateReportDefinitionResponse:
+      type: object
+      required:
+        - reportDefinitionId
+      properties:
+        reportDefinitionId:
+          type: string
+
+    UpdateReportDefinitionRequest:
+      type: object
+      required:
+        - reportDefinition
+      properties:
+        reportDefinitionId:
+          type: string
+          description: Optional. Defaults to the path `{reportDefinitionId}`; overrides it if both are present.
+        reportDefinition:
+          $ref: '#/components/schemas/ReportDefinition'
+
+    UpdateReportDefinitionResponse:
+      type: object
+      required:
+        - reportDefinitionId
+      properties:
+        reportDefinitionId:
+          type: string
+
+    DeleteReportDefinitionResponse:
+      type: object
+      required:
+        - reportDefinitionId
+      properties:
+        reportDefinitionId:
+          type: string
+
+    GetReportDefinitionResponse:
+      type: object
+      required:
+        - reportDefinitionDetails
+      properties:
+        reportDefinitionDetails:
+          $ref: '#/components/schemas/ReportDefinitionDetails'
+
+    GetAllReportDefinitionsResponse:
+      type: object
+      required:
+        - startIndex
+        - totalHits
+        - totalHitRelation
+        - reportDefinitionDetailsList
+      properties:
+        startIndex:
+          type: integer
+        totalHits:
+          type: integer
+        totalHitRelation:
+          type: string
+          enum: [eq, gte]
+        reportDefinitionDetailsList:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReportDefinitionDetails'
+
+    ReportInstance:
+      type: object
+      required:
+        - lastUpdatedTimeMs
+        - createdTimeMs
+        - beginTimeMs
+        - endTimeMs
+        - tenant
+        - status
+      properties:
+        id:
+          type: string
+        lastUpdatedTimeMs:
+          type: integer
+          format: int64
+        createdTimeMs:
+          type: integer
+          format: int64
+        beginTimeMs:
+          type: integer
+          format: int64
+        endTimeMs:
+          type: integer
+          format: int64
+        tenant:
+          type: string
+          default: "__user__"
+        access:
+          type: array
+          items:
+            type: string
+          description: Same semantics as `ReportDefinitionDetails.access`.
+        reportDefinitionDetails:
+          $ref: '#/components/schemas/ReportDefinitionDetails'
+        status:
+          type: string
+          enum: [Scheduled, Executing, Success, Failed]
+        statusText:
+          type: string
+        inContextDownloadUrlPath:
+          type: string
+          description: 'Dashboard-relative path to download the report from, e.g. `/app/dashboards#/view/dashboard-id`.'
+
+    InContextReportCreateRequest:
+      type: object
+      required:
+        - beginTimeMs
+        - endTimeMs
+        - status
+        - reportDefinitionDetails
+      properties:
+        beginTimeMs:
+          type: integer
+          format: int64
+        endTimeMs:
+          type: integer
+          format: int64
+        status:
+          type: string
+          enum: [Scheduled, Executing, Success, Failed]
+        statusText:
+          type: string
+        inContextDownloadUrlPath:
+          type: string
+        reportDefinitionDetails:
+          allOf:
+            - $ref: '#/components/schemas/ReportDefinitionDetails'
+          description: The definition type declares this field nullable, but the server dereferences it unconditionally — a request that omits it fails.
+
+    InContextReportCreateResponse:
+      type: object
+      required:
+        - reportInstance
+      properties:
+        reportInstance:
+          $ref: '#/components/schemas/ReportInstance'
+
+    OnDemandReportCreateRequest:
+      type: object
+      properties:
+        reportDefinitionId:
+          type: string
+          description: Optional. Defaults to the path `{reportDefinitionId}`; overrides it if both are present. An empty JSON object (`{}`) is a valid request body.
+
+    OnDemandReportCreateResponse:
+      type: object
+      required:
+        - reportInstance
+      properties:
+        reportInstance:
+          $ref: '#/components/schemas/ReportInstance'
+
+    UpdateReportInstanceStatusRequest:
+      type: object
+      required:
+        - status
+      properties:
+        reportInstanceId:
+          type: string
+          description: Optional. Defaults to the path `{reportInstanceId}`; overrides it if both are present.
+        status:
+          type: string
+          enum: [Scheduled, Executing, Success, Failed]
+        statusText:
+          type: string
+
+    UpdateReportInstanceStatusResponse:
+      type: object
+      required:
+        - reportInstanceId
+      properties:
+        reportInstanceId:
+          type: string
+
+    GetReportInstanceResponse:
+      type: object
+      required:
+        - reportInstance
+      properties:
+        reportInstance:
+          $ref: '#/components/schemas/ReportInstance'
+
+    GetAllReportInstancesResponse:
+      type: object
+      required:
+        - startIndex
+        - totalHits
+        - totalHitRelation
+        - reportInstanceList
+      properties:
+        startIndex:
+          type: integer
+        totalHits:
+          type: integer
+        totalHitRelation:
+          type: string
+          enum: [eq, gte]
+        reportInstanceList:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReportInstance'
+
+    OperationMetrics:
+      type: object
+      description: Request-count breakdown for one Reporting REST operation.
+      properties:
+        total:
+          type: integer
+          description: Total number of times this operation was invoked.
+        count:
+          type: integer
+          description: Number of invocations counted in the current rolling window.
+        user_error:
+          type: object
+          description: Per-cause counts of client-caused failures for this operation. Key names vary by operation and are not a fixed set.
+          additionalProperties:
+            type: integer
+        system_error:
+          type: integer
+          description: Count of server-side failures for this operation.
+
+    GetReportingStatsResponse:
+      type: object
+      description: |
+        A flattened-then-unflattened tree of integer counters, grouped by REST operation. Served directly from an in-memory metrics store rather than a versioned schema, so treat the exact set of keys — especially inside `user_error` and `exception` — as informational and subject to change between releases.
+      properties:
+        request_total:
+          type: integer
+        request_count:
+          type: integer
+        success_count:
+          type: integer
+        failed_request_count_user_error:
+          type: integer
+        failed_request_count_system_error:
+          type: integer
+        exception:
+          type: object
+          description: Per-exception-type counts across all Reporting operations.
+          additionalProperties:
+            type: integer
+        report_definition:
+          type: object
+          description: Per-operation counters for the report-definition endpoints (`create`, `update`, `info`, `delete`, `list`).
+          additionalProperties:
+            $ref: '#/components/schemas/OperationMetrics'
+        report_instance:
+          type: object
+          description: Per-operation counters for the report-instance endpoints.
+          properties:
+            update:
+              $ref: '#/components/schemas/OperationMetrics'
+            info:
+              $ref: '#/components/schemas/OperationMetrics'
+            list:
+              $ref: '#/components/schemas/OperationMetrics'
+        on_demand:
+          type: object
+          properties:
+            create:
+              $ref: '#/components/schemas/OperationMetrics'
+        on_demand_from_definition:
+          type: object
+          properties:
+            create:
+              $ref: '#/components/schemas/OperationMetrics'
+        es_security_permission_error:
+          type: integer
+        permission_user_error:
+          type: integer
+      additionalProperties: true
+
+    ErrorEnvelope:
+      type: object
+      description: The standard OpenSearch error response envelope.
+      properties:
+        error:
+          type: object
+          properties:
+            root_cause:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                  reason:
+                    type: string
+            type:
+              type: string
+            reason:
+              type: string
+        status:
+          type: integer
+
+  responses:
+    BadRequest:
+      description: Bad Request - the request body or parameters failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+
+    Forbidden:
+      description: Forbidden - the caller lacks permission for this action.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+          example:
+            error:
+              root_cause:
+                - type: "security_exception"
+                  reason: "User doesn't have permissions to execute this action. Contact administrator."
+              type: "security_exception"
+              reason: "User doesn't have permissions to execute this action. Contact administrator."
+            status: 403
+
+    NotFound:
+      description: Not Found - the requested id doesn't exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'

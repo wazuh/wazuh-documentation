@@ -1,166 +1,109 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about the Wazuh local configuration, including configuration sections and supported installations, in this section of our documentation.
+  :description: Learn about the Wazuh agent local configuration file, ossec.conf, including its configuration sections in this section of our documentation.
 
 .. _reference_ossec_conf:
 
-Local configuration (ossec.conf)
-================================
+Wazuh agent local configuration (ossec.conf)
+==============================================
 
-The ``ossec.conf`` file is the main configuration file on the Wazuh manager, and it also plays an important role on the agents. It is located at ``/var/ossec/etc/ossec.conf`` both in the manager and agent on Linux machines. On Windows agents, we can find it at ``C:\Program Files (x86)\ossec-agent\ossec.conf``. It is recommended to back up this file before making changes to it. A configuration error may prevent Wazuh services from starting up.
+The ``ossec.conf`` file is the main local configuration file for the Wazuh agent. Its location depends on the operating system:
 
-The ``ossec.conf`` file is in XML format, and all of its configuration options are nested in their appropriate section of the file. In this file, the outermost XML tag is ``<ossec_config>``. There can be more than one ``<ossec_config>`` tag.
+-  Linux: ``/var/ossec/etc/ossec.conf``
+-  macOS: ``/Library/Ossec/etc/ossec.conf``
+-  Windows: ``C:\Program Files (x86)\ossec-agent\ossec.conf``
 
-Here is an example of the proper location of the *alerts* configuration section:
+The file uses XML syntax. All configuration sections must be defined within the top-level ``<ossec_config>`` element. It is recommended to back up this file before making changes to it. A configuration error may prevent Wazuh services from starting up.
+
+The following example shows the placement of the ``<client>`` section:
 
 .. code-block:: xml
 
-    <ossec_config>
-        <alerts>
-            <!--
-            alerts options here
-            -->
-        </alerts>
-    </ossec_config>
+   <ossec_config>
+     <client>
+       <!-- Client configuration options -->
+     </client>
+   </ossec_config>
 
-The ``agent.conf`` file is very similar to ``ossec.conf`` but ``agent.conf`` is used to centrally distribute configuration information to agents. See more :doc:`here <../centralized-configuration>`.
+You can define multiple ``<ossec_config>`` elements in the file. When the same option is defined more than once, a later definition may override an earlier one.
 
-Wazuh can be installed in two ways: as a manager by using the "server/manager" installation type and as an agent by using the "agent" installation type.
+Use ``ossec.conf`` to configure an individual agent locally. To distribute supported configuration settings centrally, use the ``agent.conf`` file for the agent group. See :doc:`centralized configuration <../centralized-configuration>`.
 
-+---------------------------------------------------------------------+------------------------+
-| Configuration sections                                              | Supported installations|
-+=====================================================================+========================+
-| :doc:`active-response <active-response>`                            | manager, agent         |
-+---------------------------------------------------------------------+------------------------+
-| :doc:`agentless <agentless>`                                        | manager                |
-+---------------------------------------------------------------------+------------------------+
-| :doc:`agent-upgrade <agent-upgrade>`                                | manager, agent         |
-+---------------------------------------------------------------------+------------------------+
-| :doc:`alerts <alerts>`                                              | manager                |
-+---------------------------------------------------------------------+------------------------+
-| :doc:`anti_tampering <anti-tampering>`                              | agent                  |
-+---------------------------------------------------------------------+------------------------+
-| :doc:`auth <auth>`                                                  | manager                |
-+---------------------------------------------------------------------+------------------------+
-| :doc:`client <client>`                                              | agent                  |
-+---------------------------------------------------------------------+------------------------+
-| :doc:`client_buffer <client-buffer>`                                | agent                  |
-+---------------------------------------------------------------------+------------------------+
-| :doc:`cluster <cluster>`                                            | manager                |
-+---------------------------------------------------------------------+------------------------+
-| :doc:`command <commands>`                                           | manager                |
-+---------------------------------------------------------------------+------------------------+
-| :doc:`database_output <database-output>`                            | manager                |
-+---------------------------------------------------------------------+------------------------+
-| :doc:`email_alerts <email-alerts>`                                  | manager                |
-+---------------------------------------------------------------------+------------------------+
-| :doc:`global  <global>`                                             | manager                |
-+---------------------------------------------------------------------+------------------------+
-| :doc:`github <github-module>`                                       | manager, agent         |
-+---------------------------------------------------------------------+------------------------+
-| :doc:`indexer <indexer>`                                            | manager                |
-+---------------------------------------------------------------------+------------------------+
-| :doc:`integration  <integration>`                                   | manager                |
-+---------------------------------------------------------------------+------------------------+
-| :doc:`labels  <labels>`                                             | manager, agent         |
-+---------------------------------------------------------------------+------------------------+
-| :doc:`localfile <localfile>`                                        | manager, agent         |
-+---------------------------------------------------------------------+------------------------+
-| :doc:`logging <logging>`                                            | manager, agent         |
-+---------------------------------------------------------------------+------------------------+
-| :doc:`ms-graph <ms-graph-module>`                                   | manager, agent         |
-+---------------------------------------------------------------------+------------------------+
-| :doc:`office365 <office365-module>`                                 | manager, agent         |
-+---------------------------------------------------------------------+------------------------+
-| :doc:`remote <remote>`                                              | manager                |
-+---------------------------------------------------------------------+------------------------+
-| :doc:`reports <reports>`                                            | manager                |
-+---------------------------------------------------------------------+------------------------+
-| :doc:`rootcheck <rootcheck>`                                        | manager, agent         |
-+---------------------------------------------------------------------+------------------------+
-| :doc:`rule_test <rule-test>`                                        | manager                |
-+---------------------------------------------------------------------+------------------------+
-| :doc:`ruleset <ruleset>`                                            | manager                |
-+---------------------------------------------------------------------+------------------------+
-| :doc:`sca <sca>`                                                    | manager, agent         |
-+---------------------------------------------------------------------+------------------------+
-| :doc:`socket <socket>`                                              | manager, agent         |
-+---------------------------------------------------------------------+------------------------+
-| :doc:`syscheck <syscheck>`                                          | manager, agent         |
-+---------------------------------------------------------------------+------------------------+
-| :doc:`syslog_output <syslog-output>`                                | manager                |
-+---------------------------------------------------------------------+------------------------+
-| :doc:`task-manager <task-manager>`                                  | manager                |
-+---------------------------------------------------------------------+------------------------+
-| :doc:`vulnerability-detection <vuln-detector>`                      | manager                |
-+---------------------------------------------------------------------+------------------------+
-| :doc:`wazuh_db <wazuh-db-config>`                                   | manager                |
-+---------------------------------------------------------------------+------------------------+
-| :doc:`wodle name="agent-key-polling" <wodle-agent-key-polling>`     | manager                |
-+---------------------------------------------------------------------+------------------------+
-| :doc:`wodle name="aws-s3" <wodle-s3>`                               | manager, agent         |
-+---------------------------------------------------------------------+------------------------+
-| :doc:`wodle name="azure-logs" <wodle-azure-logs>`                   | manager, agent         |
-+---------------------------------------------------------------------+------------------------+
-| :doc:`wodle name="command" <wodle-command>`                         | manager, agent         |
-+---------------------------------------------------------------------+------------------------+
-| :doc:`wodle name="docker-listener" <wodle-docker>`                  | manager, agent         |
-+---------------------------------------------------------------------+------------------------+
-| :doc:`wodle name="syscollector" <wodle-syscollector>`               | manager, agent         |
-+---------------------------------------------------------------------+------------------------+
-| :doc:`gcp-pubsub <gcp-pubsub>`                                      | manager, agent         |
-+---------------------------------------------------------------------+------------------------+
-| :doc:`gcp-bucket <gcp-bucket>`                                      | manager, agent         |
-+---------------------------------------------------------------------+------------------------+
-
-All of the above sections must be located within the top-level ``<ossec_config>`` tag. In the case of adding another ``<ossec_config>`` tag, it may override the values set on the previous tag.
-
++---------------------------------------------------------+----------------------------------------------------------------------------------------------+
+| Configuration sections                                  | Description                                                                                  |
++=========================================================+==============================================================================================+
+| :doc:`active-response <active-response>`                | Controls whether the agent executes Active Response commands and configures repeated-        |
+|                                                         | offender timeouts.                                                                           |
++---------------------------------------------------------+----------------------------------------------------------------------------------------------+
+| :doc:`agent-upgrade <agent-upgrade>`                    | Configures remote agent upgrade behavior and WPK certificate validation.                     |
++---------------------------------------------------------+----------------------------------------------------------------------------------------------+
+| :doc:`anti_tampering <anti-tampering>`                  | Requires Wazuh manager validation before uninstalling the agent package on supported Linux   |
+|                                                         | systems.                                                                                     |
++---------------------------------------------------------+----------------------------------------------------------------------------------------------+
+| :doc:`client <client>`                                  | Configures the agent connection, reconnection, enrollment, and communication settings.       |
++---------------------------------------------------------+----------------------------------------------------------------------------------------------+
+| :doc:`client_buffer <client-buffer>`                    | Controls agent-side event buffering and transmission rate limits.                            |
++---------------------------------------------------------+----------------------------------------------------------------------------------------------+
+| :doc:`github <github-module>`                           | Collects GitHub organization audit events.                                                   |
++---------------------------------------------------------+----------------------------------------------------------------------------------------------+
+| :doc:`labels <labels>`                                  | Adds custom agent metadata to generated events.                                              |
++---------------------------------------------------------+----------------------------------------------------------------------------------------------+
+| :doc:`localfile <localfile>`                            | Configures collection from log files, event channels, journald, macOS ULS, and command       |
+|                                                         | output.                                                                                      |
++---------------------------------------------------------+----------------------------------------------------------------------------------------------+
+| :doc:`logging <logging>`                                | Configures the agent internal log output format.                                             |
++---------------------------------------------------------+----------------------------------------------------------------------------------------------+
+| :doc:`ms-graph <ms-graph-module>`                       | Collects logs through the Microsoft Graph API.                                               |
++---------------------------------------------------------+----------------------------------------------------------------------------------------------+
+| :doc:`office365 <office365-module>`                     | Collects Microsoft 365 audit logs through the Office 365 Management Activity API.            |
++---------------------------------------------------------+----------------------------------------------------------------------------------------------+
+| :doc:`rootcheck <rootcheck>`                            | Configures rootkit, trojan, system anomaly, and policy checks.                               |
++---------------------------------------------------------+----------------------------------------------------------------------------------------------+
+| :doc:`sca <sca>`                                        | Configures Security Configuration Assessment scans and policies.                             |
++---------------------------------------------------------+----------------------------------------------------------------------------------------------+
+| :doc:`socket <socket>`                                  | Defines custom output sockets for collected events.                                          |
++---------------------------------------------------------+----------------------------------------------------------------------------------------------+
+| :doc:`syscheck <syscheck>`                              | Configures file integrity monitoring and Windows registry monitoring.                        |
++---------------------------------------------------------+----------------------------------------------------------------------------------------------+
+| :doc:`wodle name="aws-s3" <wodle-s3>`                   | Collects logs from supported AWS buckets, services, and subscribers.                         |
++---------------------------------------------------------+----------------------------------------------------------------------------------------------+
+| :doc:`wodle name="azure-logs" <wodle-azure-logs>`       | Collects logs from Azure Log Analytics, Microsoft Graph, and Azure Storage.                  |
++---------------------------------------------------------+----------------------------------------------------------------------------------------------+
+| :doc:`wodle name="command" <wodle-command>`             | Executes scheduled commands and collects their output.                                       |
++---------------------------------------------------------+----------------------------------------------------------------------------------------------+
+| :doc:`wodle name="docker-listener" <wodle-docker>`      | Monitors Docker container events.                                                            |
++---------------------------------------------------------+----------------------------------------------------------------------------------------------+
+| :doc:`wodle name="syscollector" <wodle-syscollector>`   | Collects system inventory data.                                                              |
++---------------------------------------------------------+----------------------------------------------------------------------------------------------+
+| :doc:`gcp-pubsub <gcp-pubsub>`                          | Collects logs from a Google Cloud Pub/Sub subscription.                                      |
++---------------------------------------------------------+----------------------------------------------------------------------------------------------+
+| :doc:`gcp-bucket <gcp-bucket>`                          | Collects access logs from Google Cloud Storage buckets.                                      |
++---------------------------------------------------------+----------------------------------------------------------------------------------------------+
 
 .. toctree::
    :hidden:
    :maxdepth: 1
 
-
    active-response
-   agentless
    agent-upgrade
-   alerts
    anti-tampering
-   auth
    client
    client-buffer
-   cluster
-   commands
-   database-output
-   email-alerts
-   global
    github-module
-   indexer
-   integration
    labels
    localfile
    logging
    ms-graph-module
    office365-module
-   remote
-   reports
    rootcheck
    sca
-   rule-test
-   ruleset
    socket
    syscheck
-   syslog-output
-   task-manager
+   wodle-s3
+   wodle-azure-logs
+   wodle-command
+   wodle-docker
+   wodle-syscollector
    gcp-pubsub
    gcp-bucket
-   vuln-detector
-   wodle-command
-   wodle-s3
-   wodle-syscollector
-   wazuh-db-config
-   wodle-docker
-   wodle-azure-logs
-   wodle-agent-key-polling
-   verifying-configuration
