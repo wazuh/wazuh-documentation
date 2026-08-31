@@ -1,0 +1,3259 @@
+paths:
+  /_plugins/_alerting/monitors:
+    post:
+      tags:
+        - Monitors
+      summary: Create monitor
+      description: |
+        Creates a monitor. A monitor defines what to check (inputs), on what schedule, and which triggers fire alerts when conditions are met. Wazuh adds a fifth monitor type, `active_response_monitor`, on top of the four stock OpenSearch types. The cluster is limited to a maximum of 10 monitors (`plugins.alerting.monitor.max_monitors`).
+      operationId: createMonitor
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: refresh
+          in: query
+          description: The refresh policy to apply after indexing the monitor.
+          schema:
+            type: string
+            enum: [IMMEDIATE, WAIT_UNTIL, NONE]
+            default: IMMEDIATE
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MonitorRequest'
+            example:
+              name: "high-cpu-alerts-monitor"
+              monitor_type: "query_level_monitor"
+              enabled: true
+              schedule:
+                period:
+                  interval: 5
+                  unit: "MINUTES"
+              inputs:
+                - search:
+                    indices:
+                      - "wazuh-alerts-*"
+                    query:
+                      query:
+                        match_all: {}
+              triggers:
+                - query_level_trigger:
+                    name: "high-severity-trigger"
+                    severity: "1"
+                    condition:
+                      script:
+                        source: "return ctx.results[0].hits.total.value > 0"
+                        lang: "painless"
+                    actions: []
+      responses:
+        '201':
+          description: Monitor created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IndexMonitorResponse'
+              example:
+                _id: "8x2kQoQBcE4TZ_1qm3aB"
+                _version: 1
+                _seq_no: 0
+                _primary_term: 1
+                monitor:
+                  name: "high-cpu-alerts-monitor"
+                  monitor_type: "query_level_monitor"
+                  enabled: true
+                  schedule:
+                    period:
+                      interval: 5
+                      unit: "MINUTES"
+                  inputs:
+                    - search:
+                        indices:
+                          - "wazuh-alerts-*"
+                        query:
+                          query:
+                            match_all: {}
+                  triggers:
+                    - query_level_trigger:
+                        id: "5f5X8-1kR9uZbg=="
+                        name: "high-severity-trigger"
+                        severity: "1"
+                        condition:
+                          script:
+                            source: "return ctx.results[0].hits.total.value > 0"
+                            lang: "painless"
+                        actions: []
+                  owner: "alerting"
+                  schema_version: 4
+                  last_update_time: 1755172800000
+                  enabled_time: 1755172800000
+        '400':
+          description: |
+            Bad Request - invalid schedule/monitor type/trigger, a Wazuh-only `active_response_monitor` constraint was violated (indices not prefixed `wazuh-findings-v5`, schedule not an interval `<=` 60 seconds), a non-default `data_sources` value was supplied (custom data sources are rejected), or the 10-monitor limit would be exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+              example:
+                error:
+                  root_cause:
+                    - type: "illegal_argument_exception"
+                      reason: "This request would create more than the allowed monitors [10]."
+                  type: "illegal_argument_exception"
+                  reason: "This request would create more than the allowed monitors [10]."
+                status: 400
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          description: Too Many Requests - the internal monitor-count lock stayed held by other requests for every retry attempt.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+              example:
+                error:
+                  root_cause:
+                    - type: "status_exception"
+                      reason: "Too many concurrent monitor creation requests, please retry."
+                  type: "status_exception"
+                  reason: "Too many concurrent monitor creation requests, please retry."
+                status: 429
+
+  /_plugins/_alerting/monitors/{monitorID}:
+    put:
+      tags:
+        - Monitors
+      summary: Update monitor
+      description: |
+        Updates an existing monitor. The request body has the same shape as monitor creation.
+      operationId: updateMonitor
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: monitorID
+          in: path
+          required: true
+          description: The unique identifier of the monitor to update.
+          schema:
+            type: string
+          example: "8x2kQoQBcE4TZ_1qm3aB"
+        - name: if_seq_no
+          in: query
+          description: Only update if the monitor's current `_seq_no` matches.
+          schema:
+            type: integer
+            format: int64
+        - name: if_primary_term
+          in: query
+          description: Only update if the monitor's current `_primary_term` matches.
+          schema:
+            type: integer
+            format: int64
+        - name: refresh
+          in: query
+          description: The refresh policy to apply after indexing the monitor.
+          schema:
+            type: string
+            enum: [IMMEDIATE, WAIT_UNTIL, NONE]
+            default: IMMEDIATE
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MonitorRequest'
+      responses:
+        '200':
+          description: Monitor updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IndexMonitorResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    get:
+      tags:
+        - Monitors
+      summary: Get monitor
+      description: |
+        Returns a single monitor by ID, along with the IDs and names of any workflows that reference it as a delegate.
+      operationId: getMonitor
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: monitorID
+          in: path
+          required: true
+          description: The unique identifier of the monitor.
+          schema:
+            type: string
+          example: "8x2kQoQBcE4TZ_1qm3aB"
+        - name: version
+          in: query
+          description: Returns the monitor document only if it matches this document version.
+          schema:
+            type: integer
+            format: int64
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMonitorResponse'
+              example:
+                _id: "8x2kQoQBcE4TZ_1qm3aB"
+                _version: 1
+                _seq_no: 0
+                _primary_term: 1
+                monitor:
+                  name: "high-cpu-alerts-monitor"
+                  monitor_type: "query_level_monitor"
+                  enabled: true
+                associated_workflows:
+                  - id: "wf_9a1c2b3d4e5f"
+                    name: "Suspicious login chained workflow"
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          description: Not Found - no monitor exists with the given ID, or its backing index is missing.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+              example:
+                error:
+                  root_cause:
+                    - type: "status_exception"
+                      reason: "Monitor not found."
+                  type: "status_exception"
+                  reason: "Monitor not found."
+                status: 404
+
+    head:
+      tags:
+        - Monitors
+      summary: Check monitor existence
+      description: |
+        Checks whether a monitor exists, without returning its content. Uses the same handler as `GET`, with the document source suppressed.
+      operationId: monitorExists
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: monitorID
+          in: path
+          required: true
+          description: The unique identifier of the monitor.
+          schema:
+            type: string
+          example: "8x2kQoQBcE4TZ_1qm3aB"
+      responses:
+        '200':
+          description: The monitor exists. No response body.
+        '404':
+          description: No monitor exists with the given ID. No response body.
+
+    delete:
+      tags:
+        - Monitors
+      summary: Delete monitor
+      description: |
+        Deletes a monitor by ID. On success, all the monitor's alerts transition to the `DELETED` state and move into the alert history index; if that move fails, the monitor is not deleted. A monitor that is a delegate of a workflow cannot be deleted directly.
+      operationId: deleteMonitor
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: monitorID
+          in: path
+          required: true
+          description: The unique identifier of the monitor to delete.
+          schema:
+            type: string
+          example: "8x2kQoQBcE4TZ_1qm3aB"
+        - name: refresh
+          in: query
+          description: The refresh policy to apply after deleting the monitor.
+          schema:
+            type: string
+            enum: [IMMEDIATE, WAIT_UNTIL, NONE]
+            default: IMMEDIATE
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Monitor deleted successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _id:
+                    type: string
+                  _version:
+                    type: integer
+                    format: int64
+              example:
+                _id: "8x2kQoQBcE4TZ_1qm3aB"
+                _version: 2
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          description: |
+            Forbidden - the monitor is a delegate of one or more workflows and can't be deleted directly, or the caller isn't allowed to delete it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+              example:
+                error:
+                  root_cause:
+                    - type: "status_exception"
+                      reason: "Monitor can't be deleted because it is a part of workflow(s)"
+                  type: "status_exception"
+                  reason: "Monitor can't be deleted because it is a part of workflow(s)"
+                status: 403
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /_plugins/_alerting/monitors/_search:
+    get:
+      tags:
+        - Monitors
+      summary: Search monitors
+      description: |
+        Searches monitors using a standard OpenSearch query DSL body. The `index` parameter accepts only the scheduled-jobs index or the alerts index pattern.
+      operationId: searchMonitors
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: index
+          in: query
+          description: The index to search. Defaults to the internal scheduled-jobs index.
+          schema:
+            type: string
+            default: ".opensearch-scheduled-jobs"
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              description: A standard OpenSearch query DSL object.
+            example:
+              query:
+                match_all: {}
+      responses:
+        '200':
+          description: |
+            Success. Returns a standard OpenSearch search response; each hit's `_source` is the full stored `Monitor` object.
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                took: 2
+                timed_out: false
+                _shards:
+                  total: 1
+                  successful: 1
+                  skipped: 0
+                  failed: 0
+                hits:
+                  total:
+                    value: 1
+                    relation: "eq"
+                  hits:
+                    - _index: ".opensearch-scheduled-jobs"
+                      _id: "8x2kQoQBcE4TZ_1qm3aB"
+                      _version: 1
+                      _source:
+                        monitor:
+                          name: "high-cpu-alerts-monitor"
+                          monitor_type: "query_level_monitor"
+                          enabled: true
+        '400':
+          description: Bad Request - `index` is neither the scheduled-jobs index nor the alerts index pattern.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '408':
+          description: Request Timeout.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+    post:
+      tags:
+        - Monitors
+      summary: Search monitors (POST)
+      description: Identical to `GET /_plugins/_alerting/monitors/_search`, provided for clients that prefer a request body over a GET-with-body pattern.
+      operationId: searchMonitorsPost
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              query:
+                match_all: {}
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /_plugins/_alerting/monitors/{monitorID}/_execute:
+    post:
+      tags:
+        - Monitors
+      summary: Execute monitor
+      description: |
+        Runs an existing monitor immediately, outside its schedule.
+      operationId: executeMonitor
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: monitorID
+          in: path
+          required: true
+          description: The unique identifier of the monitor to execute.
+          schema:
+            type: string
+          example: "8x2kQoQBcE4TZ_1qm3aB"
+        - name: dryrun
+          in: query
+          description: If true, runs the monitor without persisting any alerts or findings it would generate.
+          schema:
+            type: boolean
+            default: false
+        - name: period_end
+          in: query
+          description: The end of the evaluation period. Defaults to now.
+          schema:
+            type: string
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success. Returned even when no triggers fire.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitorRunResult'
+              example:
+                monitor_name: "high-cpu-alerts-monitor"
+                period_start: 1755172500000
+                period_end: 1755172800000
+                error: null
+                input_results:
+                  results: []
+                  error: null
+                trigger_results:
+                  5f5X8-1kR9uZbg==:
+                    name: "high-severity-trigger"
+                    triggered: true
+                    action_results: {}
+                    error: null
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /_plugins/_alerting/monitors/_execute:
+    post:
+      tags:
+        - Monitors
+      summary: Execute ad-hoc monitor
+      description: |
+        Runs an unsaved monitor immediately. The request body is a full monitor definition, with the same shape as monitor creation.
+      operationId: executeAdHocMonitor
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: dryrun
+          in: query
+          description: If true, runs the monitor without persisting any alerts or findings it would generate.
+          schema:
+            type: boolean
+            default: false
+        - name: period_end
+          in: query
+          description: The end of the evaluation period. Defaults to now.
+          schema:
+            type: string
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MonitorRequest'
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitorRunResult'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /_plugins/_alerting/monitors/{monitorID}/_acknowledge/alerts:
+    post:
+      tags:
+        - Monitors
+      summary: Acknowledge monitor alerts
+      description: |
+        Acknowledges one or more alerts raised by a monitor.
+      operationId: acknowledgeMonitorAlerts
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: monitorID
+          in: path
+          required: true
+          description: The unique identifier of the monitor that raised the alerts.
+          schema:
+            type: string
+          example: "8x2kQoQBcE4TZ_1qm3aB"
+        - name: refresh
+          in: query
+          schema:
+            type: string
+            enum: [IMMEDIATE, WAIT_UNTIL, NONE]
+            default: IMMEDIATE
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - alerts
+              properties:
+                alerts:
+                  type: array
+                  description: The IDs of the alerts to acknowledge. Must be non-empty.
+                  items:
+                    type: string
+            example:
+              alerts:
+                - "alrt_7f3e9c1a"
+      responses:
+        '200':
+          description: |
+            Success. The HTTP status stays 200 even if every alert failed to acknowledge — check `success`/`failed` in the body.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AcknowledgeAlertResponse'
+              example:
+                success:
+                  - "alrt_7f3e9c1a"
+                failed:
+                  - alrt_2b8d4f60:
+                      failed_reason: "Alert has already been acknowledged."
+        '400':
+          description: Bad Request - the alerts array is empty, or the monitor id is missing.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /_plugins/_alerting/monitors/alerts:
+    get:
+      tags:
+        - Monitors
+      summary: Get monitor alerts
+      description: |
+        Returns alerts, optionally filtered by monitor or workflow. By default (`alertState=ALL`), alerts in the `AUDIT` state are excluded — pass `alertState=AUDIT` explicitly to include them.
+      operationId: getMonitorAlerts
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: sortString
+          in: query
+          schema:
+            type: string
+            default: "monitor_name.keyword"
+        - name: sortOrder
+          in: query
+          schema:
+            type: string
+            enum: [asc, desc]
+            default: "asc"
+        - name: missing
+          in: query
+          schema:
+            type: string
+        - name: size
+          in: query
+          schema:
+            type: integer
+            default: 20
+        - name: startIndex
+          in: query
+          schema:
+            type: integer
+            default: 0
+        - name: searchString
+          in: query
+          schema:
+            type: string
+            default: ""
+        - name: severityLevel
+          in: query
+          schema:
+            type: string
+            default: "ALL"
+        - name: alertState
+          in: query
+          description: Filters alerts by state. `ALL` excludes `AUDIT`-state alerts.
+          schema:
+            type: string
+            enum: [ALL, ACTIVE, ACKNOWLEDGED, COMPLETED, ERROR, DELETED, AUDIT]
+            default: "ALL"
+        - name: monitorId
+          in: query
+          description: Return only alerts raised by this monitor.
+          schema:
+            type: string
+        - name: workflowIds
+          in: query
+          description: Return only alerts raised by this workflow.
+          schema:
+            type: string
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAlertsResponse'
+              example:
+                totalAlerts: 1
+                alerts:
+                  - id: "alrt_7f3e9c1a"
+                    version: 1
+                    schema_version: 4
+                    monitor_id: "8x2kQoQBcE4TZ_1qm3aB"
+                    workflow_id: ""
+                    workflow_name: ""
+                    associated_alert_ids: []
+                    monitor_version: 1
+                    monitor_name: "high-cpu-alerts-monitor"
+                    execution_id: "d3f1a2b4-0000-0000-0000-000000000000"
+                    trigger_id: "5f5X8-1kR9uZbg=="
+                    trigger_name: "high-severity-trigger"
+                    finding_ids: []
+                    related_doc_ids: []
+                    state: "ACTIVE"
+                    error_message: null
+                    alert_history: []
+                    severity: "1"
+                    action_execution_results: []
+                    start_time: "2026-08-14T10:00:00.000Z"
+                    last_notification_time: "2026-08-14T10:00:00.000Z"
+                    end_time: null
+                    acknowledged_time: null
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /_plugins/_alerting/workflows:
+    post:
+      tags:
+        - Workflows
+      summary: Create workflow
+      description: |
+        Creates a workflow (a chained sequence of up to 25 existing monitors, evaluated in `order`). A workflow's own triggers are `chained_alert_trigger`s that evaluate across the sequence's results.
+      operationId: createWorkflow
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: refresh
+          in: query
+          schema:
+            type: string
+            enum: [IMMEDIATE, WAIT_UNTIL, NONE]
+            default: IMMEDIATE
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkflowRequest'
+            example:
+              name: "Suspicious login chained workflow"
+              workflow_type: "composite"
+              enabled: true
+              schedule:
+                period:
+                  interval: 5
+                  unit: "MINUTES"
+              inputs:
+                - composite_input:
+                    sequence:
+                      delegates:
+                        - order: 1
+                          monitor_id: "8x2kQoQBcE4TZ_1qm3aB"
+                        - order: 2
+                          monitor_id: "9F2kQoQBcE4TZ_1q_3cD"
+                          chained_monitor_findings:
+                            monitor_id: "8x2kQoQBcE4TZ_1qm3aB"
+              triggers:
+                - chained_alert_trigger:
+                    name: "Any delegate alert fired"
+                    severity: "1"
+                    condition:
+                      script:
+                        source: "return true"
+                        lang: "painless"
+                    actions: []
+      responses:
+        '201':
+          description: Workflow created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IndexWorkflowResponse'
+              example:
+                _id: "wf_9a1c2b3d4e5f"
+                _version: 1
+                _seq_no: 0
+                _primary_term: 1
+                workflow:
+                  name: "Suspicious login chained workflow"
+                  workflow_type: "composite"
+                  enabled: true
+                  owner: "alerting"
+                  audit_delegate_monitor_alerts: true
+        '400':
+          description: |
+            Bad Request - missing/invalid fields, more than 25 delegates, duplicate delegate monitor IDs or `order` values, or a chained-findings reference to a delegate with an equal/greater `order`.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          description: Not Found - one or more delegate monitor IDs don't exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+              example:
+                error:
+                  root_cause:
+                    - type: "status_exception"
+                      reason: "Monitors not found"
+                  type: "status_exception"
+                  reason: "Monitors not found"
+                status: 404
+
+  /_plugins/_alerting/workflows/{workflowID}:
+    put:
+      tags:
+        - Workflows
+      summary: Update workflow
+      description: Updates an existing workflow. The request body has the same shape as workflow creation.
+      operationId: updateWorkflow
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: workflowID
+          in: path
+          required: true
+          description: The unique identifier of the workflow to update.
+          schema:
+            type: string
+          example: "wf_9a1c2b3d4e5f"
+        - name: refresh
+          in: query
+          schema:
+            type: string
+            enum: [IMMEDIATE, WAIT_UNTIL, NONE]
+            default: IMMEDIATE
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkflowRequest'
+      responses:
+        '200':
+          description: Workflow updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IndexWorkflowResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          description: Not Found - no workflow exists with the given ID.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+              example:
+                error:
+                  root_cause:
+                    - type: "status_exception"
+                      reason: "Workflow with wf_9a1c2b3d4e5f is not found"
+                  type: "status_exception"
+                  reason: "Workflow with wf_9a1c2b3d4e5f is not found"
+                status: 404
+
+    get:
+      tags:
+        - Workflows
+      summary: Get workflow
+      description: Returns a single workflow by ID.
+      operationId: getWorkflow
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: workflowID
+          in: path
+          required: true
+          description: The unique identifier of the workflow.
+          schema:
+            type: string
+          example: "wf_9a1c2b3d4e5f"
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetWorkflowResponse'
+              example:
+                _id: "wf_9a1c2b3d4e5f"
+                _version: 1
+                _seq_no: 0
+                _primary_term: 1
+                workflow:
+                  name: "Suspicious login chained workflow"
+                  workflow_type: "composite"
+                  enabled: true
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          description: |
+            Not Found - no workflow exists with the given ID, its backing document isn't a workflow, or the underlying index doesn't exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+
+    delete:
+      tags:
+        - Workflows
+      summary: Delete workflow
+      description: |
+        Deletes a workflow by ID. Set `deleteDelegateMonitors=true` to also delete its delegate monitors, but only the ones that don't belong to any other workflow — the rest are reported in `NON_DELETED_MONITORS`.
+      operationId: deleteWorkflow
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: workflowID
+          in: path
+          required: true
+          description: The unique identifier of the workflow to delete.
+          schema:
+            type: string
+          example: "wf_9a1c2b3d4e5f"
+        - name: deleteDelegateMonitors
+          in: query
+          description: Also delete delegate monitors that aren't shared with another workflow.
+          schema:
+            type: boolean
+            default: false
+        - name: refresh
+          in: query
+          schema:
+            type: string
+            enum: [IMMEDIATE, WAIT_UNTIL, NONE]
+            default: IMMEDIATE
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Workflow deleted successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _id:
+                    type: string
+                  _version:
+                    type: integer
+                    format: int64
+                  NON_DELETED_MONITORS:
+                    type: array
+                    description: Delegate monitor IDs that were not deleted because they're shared with another workflow. Only present if `deleteDelegateMonitors=true`.
+                    items:
+                      type: string
+              example:
+                _id: "wf_9a1c2b3d4e5f"
+                _version: 1
+                NON_DELETED_MONITORS:
+                  - "8x2kQoQBcE4TZ_1qm3aB"
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          description: Forbidden - not allowed to delete this workflow.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /_plugins/_alerting/workflows/{workflowID}/_execute:
+    post:
+      tags:
+        - Workflows
+      summary: Execute workflow
+      description: |
+        Runs an existing workflow immediately, executing its delegate monitors in sequence.
+      operationId: executeWorkflow
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: workflowID
+          in: path
+          required: true
+          description: The unique identifier of the workflow to execute.
+          schema:
+            type: string
+          example: "wf_9a1c2b3d4e5f"
+        - name: dryrun
+          in: query
+          schema:
+            type: boolean
+            default: false
+        - name: period_end
+          in: query
+          schema:
+            type: string
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success. Returned even when no triggers fire.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowRunResult'
+              example:
+                execution_id: "d3f1a2b4-0000-0000-0000-000000000000"
+                workflow_name: "Suspicious login chained workflow"
+                workflow_id: "wf_9a1c2b3d4e5f"
+                trigger_results:
+                  8k2QoQBcE4T:
+                    name: "Any delegate alert fired"
+                    triggered: true
+                    action_results: {}
+                    error: null
+                monitor_run_results:
+                  - monitor_name: "Failed login monitor"
+                    period_start: "2026-08-27T10:00:00.000Z"
+                    period_end: "2026-08-27T10:05:00.000Z"
+                    error: null
+                    input_results:
+                      results: []
+                      error: null
+                    trigger_results: {}
+                execution_start_time: "2026-08-27T10:05:00.000Z"
+                execution_end_time: "2026-08-27T10:05:01.230Z"
+                error: null
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          description: Not Found - no workflow exists with the given ID.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+              example:
+                error:
+                  root_cause:
+                    - type: "status_exception"
+                      reason: "Can't find workflow with id: wf_9a1c2b3d4e5f"
+                  type: "status_exception"
+                  reason: "Can't find workflow with id: wf_9a1c2b3d4e5f"
+                status: 404
+
+  /_plugins/_alerting/workflows/_execute:
+    post:
+      tags:
+        - Workflows
+      summary: Execute ad-hoc workflow
+      description: |
+        Runs an unsaved workflow immediately. The request body is a full workflow definition, with the same shape as workflow creation.
+      operationId: executeAdHocWorkflow
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: dryrun
+          in: query
+          schema:
+            type: boolean
+            default: false
+        - name: period_end
+          in: query
+          schema:
+            type: string
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkflowRequest'
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowRunResult'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /_plugins/_alerting/workflows/{workflowID}/_acknowledge/alerts:
+    post:
+      tags:
+        - Workflows
+      summary: Acknowledge workflow (chained) alerts
+      description: |
+        Acknowledges one or more chained alerts raised by a workflow.
+      operationId: acknowledgeWorkflowAlerts
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: workflowID
+          in: path
+          required: true
+          description: The unique identifier of the workflow that raised the alerts.
+          schema:
+            type: string
+          example: "wf_9a1c2b3d4e5f"
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - alerts
+              properties:
+                alerts:
+                  type: array
+                  description: The IDs of the chained alerts to acknowledge. Must be non-empty.
+                  items:
+                    type: string
+            example:
+              alerts:
+                - "alrt_7f3e9c1a"
+                - "alrt_2b8d4f60"
+      responses:
+        '200':
+          description: |
+            Success. The HTTP status stays 200 even if every alert failed to acknowledge — check `success`/`failed` in the body.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AcknowledgeAlertResponse'
+              example:
+                success:
+                  - "alrt_7f3e9c1a"
+                failed:
+                  - alrt_2b8d4f60:
+                      failed_reason: "Alert has already been acknowledged."
+        '400':
+          description: Bad Request - the alerts array is empty, or the workflow id is missing.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '500':
+          description: Internal Server Error - the target workflow record is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+
+  /_plugins/_alerting/workflows/alerts:
+    get:
+      tags:
+        - Workflows
+      summary: Get workflow alerts
+      description: |
+        Returns chained (workflow-level) alerts. Set `getAssociatedAlerts=true` to also include the per-delegate-monitor alerts each chained alert aggregates.
+      operationId: getWorkflowAlerts
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: sortString
+          in: query
+          schema:
+            type: string
+            default: "monitor_name.keyword"
+        - name: sortOrder
+          in: query
+          schema:
+            type: string
+            enum: [asc, desc]
+            default: "asc"
+        - name: missing
+          in: query
+          schema:
+            type: string
+        - name: size
+          in: query
+          schema:
+            type: integer
+            default: 20
+        - name: startIndex
+          in: query
+          schema:
+            type: integer
+            default: 0
+        - name: searchString
+          in: query
+          schema:
+            type: string
+            default: ""
+        - name: severityLevel
+          in: query
+          schema:
+            type: string
+            default: "ALL"
+        - name: alertState
+          in: query
+          schema:
+            type: string
+            enum: [ALL, ACTIVE, ACKNOWLEDGED, COMPLETED, ERROR, DELETED, AUDIT]
+            default: "ALL"
+        - name: workflowIds
+          in: query
+          description: Return only alerts raised by this workflow.
+          schema:
+            type: string
+        - name: alertIds
+          in: query
+          description: Return only this specific alert.
+          schema:
+            type: string
+        - name: getAssociatedAlerts
+          in: query
+          description: Also return the per-delegate-monitor alerts each chained alert aggregates.
+          schema:
+            type: boolean
+            default: false
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetWorkflowAlertsResponse'
+              example:
+                alerts:
+                  - id: "alrt_7f3e9c1a"
+                    version: 1
+                    schema_version: 4
+                    monitor_id: ""
+                    workflow_id: "wf_9a1c2b3d4e5f"
+                    workflow_name: "Suspicious login chained workflow"
+                    associated_alert_ids:
+                      - "alrt_mon_1"
+                      - "alrt_mon_2"
+                    monitor_version: -1
+                    monitor_name: ""
+                    execution_id: "d3f1a2b4-0000-0000-0000-000000000000"
+                    trigger_id: "8k2QoQBcE4T"
+                    trigger_name: "Any delegate alert fired"
+                    finding_ids: []
+                    related_doc_ids: []
+                    state: "ACTIVE"
+                    error_message: null
+                    alert_history: []
+                    severity: "1"
+                    action_execution_results: []
+                    start_time: "2026-08-27T10:05:01.000Z"
+                    last_notification_time: "2026-08-27T10:05:01.000Z"
+                    end_time: null
+                    acknowledged_time: null
+                associatedAlerts: []
+                totalAlerts: 1
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+
+  /_plugins/_alerting/findings/_search:
+    get:
+      tags:
+        - Alerting findings
+      summary: Search findings
+      description: |
+        Returns findings, which record when a document-level monitor's queries matched an event, together with the matched documents.
+      operationId: searchAlertingFindings
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: findingId
+          in: query
+          description: Return only this specific finding.
+          schema:
+            type: string
+        - name: sortString
+          in: query
+          schema:
+            type: string
+            default: "id"
+        - name: sortOrder
+          in: query
+          schema:
+            type: string
+            enum: [asc, desc]
+            default: "asc"
+        - name: missing
+          in: query
+          schema:
+            type: string
+        - name: size
+          in: query
+          schema:
+            type: integer
+            default: 20
+        - name: startIndex
+          in: query
+          schema:
+            type: integer
+            default: 0
+        - name: searchString
+          in: query
+          schema:
+            type: string
+            default: ""
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAlertingFindingsResponse'
+              example:
+                total_findings: 1
+                findings:
+                  - finding:
+                      id: "fnd_3c8b1a2d"
+                      related_doc_ids:
+                        - "AZg3x1QoQBcE4TZ_9kLm"
+                      correlated_doc_ids: []
+                      monitor_id: "8x2kQoQBcE4TZ_1qm3aB"
+                      monitor_name: "Failed login monitor"
+                      index: "security-logs-2024.01"
+                      queries:
+                        - id: "q1"
+                          name: "failed-login-query"
+                          fields: []
+                          query: "event.outcome:failure AND event.action:authentication"
+                          tags:
+                            - "authentication"
+                            - "high-severity"
+                      timestamp: 1735300800000
+                      execution_id: "d3f1a2b4-0000-0000-0000-000000000000"
+                    document_list:
+                      - index: "security-logs-2024.01"
+                        id: "AZg3x1QoQBcE4TZ_9kLm"
+                        found: true
+                        document: "{\"event\":{\"outcome\":\"failure\",\"action\":\"authentication\"},\"user\":{\"name\":\"jdoe\"}}"
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /_plugins/_alerting/remote/indexes:
+    get:
+      tags:
+        - Alerting remote indexes
+      summary: List remote monitoring indexes
+      description: |
+        Reports health and, optionally, field mappings for local and cross-cluster indexes that monitors can reference. Requires `plugins.alerting.cross_cluster_monitoring_enabled` (default `true`).
+      operationId: getRemoteIndexes
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: indexes
+          in: query
+          required: true
+          description: |
+            Comma-separated list of index patterns. Each entry is either `<index-pattern>` (local) or `<cluster-pattern>:<index-pattern>` (remote).
+          schema:
+            type: string
+          example: "logs-remote-cluster-2024.01,remote-cluster-1:logs-*"
+        - name: include_mappings
+          in: query
+          description: Include each index's field mappings in the response.
+          schema:
+            type: boolean
+            default: false
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success. Top-level object keyed dynamically by cluster name.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRemoteIndexesResponse'
+              example:
+                opensearch-local:
+                  cluster: "opensearch-local"
+                  health: "green"
+                  hub_cluster: true
+                  latency: 4
+                  indexes:
+                    logs-remote-cluster-2024.01:
+                      name: "logs-remote-cluster-2024.01"
+                      health: "green"
+                      mappings: {}
+                remote-cluster-1:
+                  cluster: "remote-cluster-1"
+                  health: "yellow"
+                  hub_cluster: false
+                  latency: 112
+                  indexes:
+                    logs-2024.01:
+                      name: "logs-2024.01"
+                      health: "yellow"
+                      mappings: {}
+        '400':
+          description: Bad Request - `indexes` is empty or contains an invalid pattern.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          description: Forbidden - remote monitoring is not enabled.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+              example:
+                error:
+                  root_cause:
+                    - type: "status_exception"
+                      reason: "Remote monitoring is not enabled."
+                  type: "status_exception"
+                  reason: "Remote monitoring is not enabled."
+                status: 403
+
+  /_plugins/_alerting/comments/{id}:
+    post:
+      tags:
+        - Comments
+      summary: Add a comment to an alert
+      description: |
+        Adds a comment to an alert. Disabled by default — requires `plugins.alerting.comments_enabled` to be set to `true` (its default is `false`). Content is capped at `plugins.alerting.max_comment_character_length` characters (default 2000), and an alert can hold at most `plugins.alerting.max_comments_per_alert` comments (default 500).
+      operationId: createAlertComment
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the alert to comment on.
+          schema:
+            type: string
+          example: "alrt_7f3e9c1a"
+        - name: if_seq_no
+          in: query
+          schema:
+            type: integer
+            format: int64
+        - name: if_primary_term
+          in: query
+          schema:
+            type: integer
+            format: int64
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - content
+              properties:
+                content:
+                  type: string
+            example:
+              content: "Investigating this alert now."
+      responses:
+        '201':
+          description: Comment created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IndexCommentResponse'
+              example:
+                _id: "R4T3WXwB9tOWfnfvAlA9"
+                _seq_no: 0
+                _primary_term: 1
+                comment:
+                  entity_id: "alrt_7f3e9c1a"
+                  entity_type: "alert"
+                  content: "Investigating this alert now."
+                  created_time: 1735689600000
+                  last_updated_time: null
+                  user: "admin"
+        '400':
+          description: |
+            Bad Request - missing content, content exceeds the max length, or the alert already holds the maximum number of comments.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          description: Forbidden - the Comments feature is disabled (`plugins.alerting.comments_enabled=false`).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+              example:
+                error:
+                  root_cause:
+                    - type: "status_exception"
+                      reason: "Comments for Alerting is currently disabled"
+                  type: "status_exception"
+                  reason: "Comments for Alerting is currently disabled"
+                status: 403
+        '404':
+          description: Not Found - the target alert does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+
+    put:
+      tags:
+        - Comments
+      summary: Update a comment
+      description: |
+        Updates an existing comment's content. Only the comment's author or an admin may edit it.
+      operationId: updateAlertComment
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the comment to update.
+          schema:
+            type: string
+          example: "R4T3WXwB9tOWfnfvAlA9"
+        - name: if_seq_no
+          in: query
+          schema:
+            type: integer
+            format: int64
+        - name: if_primary_term
+          in: query
+          schema:
+            type: integer
+            format: int64
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - content
+              properties:
+                content:
+                  type: string
+            example:
+              content: "Confirmed as a false positive."
+      responses:
+        '200':
+          description: Comment updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IndexCommentResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          description: Forbidden - the comment can only be edited by an admin or its author, or the Comments feature is disabled.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+        '404':
+          description: Not Found - the comment does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+
+    delete:
+      tags:
+        - Comments
+      summary: Delete a comment
+      description: |
+        Deletes a comment by ID. Only the comment's author or an admin may delete it.
+      operationId: deleteAlertComment
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the comment to delete.
+          schema:
+            type: string
+          example: "R4T3WXwB9tOWfnfvAlA9"
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Comment deleted successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _id:
+                    type: string
+              example:
+                _id: "R4T3WXwB9tOWfnfvAlA9"
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          description: Forbidden - not allowed to delete this comment, or the Comments feature is disabled.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+        '404':
+          description: Not Found - the comment does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+
+  /_plugins/_alerting/comments/_search:
+    get:
+      tags:
+        - Comments
+      summary: Search comments
+      description: Searches alert comments using a standard OpenSearch query DSL body. Disabled by default, same as the other comment endpoints.
+      operationId: searchAlertComments
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              description: A standard OpenSearch query DSL object.
+            example:
+              query:
+                match:
+                  entity_id: "alrt_7f3e9c1a"
+      responses:
+        '200':
+          description: |
+            Success. Standard OpenSearch search response; each hit's `_source` is a flat Comment object.
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                took: 2
+                timed_out: false
+                hits:
+                  total:
+                    value: 1
+                    relation: "eq"
+                  hits:
+                    - _index: ".opensearch-alerting-comments-history-2025.01"
+                      _id: "R4T3WXwB9tOWfnfvAlA9"
+                      _score: 1.0
+                      _seq_no: 0
+                      _primary_term: 1
+                      _source:
+                        entity_id: "alrt_7f3e9c1a"
+                        entity_type: "alert"
+                        content: "Investigating this alert now."
+                        created_time: 1735689600000
+                        user: "admin"
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    post:
+      tags:
+        - Comments
+      summary: Search comments (POST)
+      description: Identical to `GET /_plugins/_alerting/comments/_search`.
+      operationId: searchAlertCommentsPost
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /_plugins/_alerting/destinations/{destinationID}:
+    get:
+      tags:
+        - Destinations
+      summary: Get a legacy destination
+      description: |
+        Returns a single legacy notification destination by ID. Legacy destinations are read-only in this API — creation and deletion moved to the Notifications plugin. An unmatched ID does not 404; it returns an empty `destinations` array.
+      operationId: getDestination
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: destinationID
+          in: path
+          required: true
+          description: The unique identifier of the destination.
+          schema:
+            type: string
+          example: "N7XkY4wB_1234abcXYZ"
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDestinationsResponse'
+              example:
+                totalDestinations: 1
+                destinations:
+                  - id: "N7XkY4wB_1234abcXYZ"
+                    type: "slack"
+                    name: "security-team-slack"
+                    schema_version: 4
+                    seq_no: 0
+                    primary_term: 1
+                    last_update_time: 1735689600000
+                    slack:
+                      url: "https://hooks.slack.com/services/T000/B000/XXXX"
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /_plugins/_alerting/destinations:
+    get:
+      tags:
+        - Destinations
+      summary: List legacy destinations
+      description: |
+        Lists legacy notification destinations. Read-only, same as the single-destination lookup.
+      operationId: listDestinations
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: sortString
+          in: query
+          schema:
+            type: string
+            default: "destination.name.keyword"
+        - name: sortOrder
+          in: query
+          schema:
+            type: string
+            enum: [asc, desc]
+            default: "asc"
+        - name: missing
+          in: query
+          schema:
+            type: string
+        - name: size
+          in: query
+          schema:
+            type: integer
+            default: 20
+        - name: startIndex
+          in: query
+          schema:
+            type: integer
+            default: 0
+        - name: searchString
+          in: query
+          description: Matched against destination type and name.
+          schema:
+            type: string
+            default: ""
+        - name: destinationType
+          in: query
+          schema:
+            type: string
+            enum: [ALL, chime, slack, custom_webhook, email]
+            default: "ALL"
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDestinationsResponse'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /_plugins/_alerting/destinations/email_accounts/{emailAccountID}:
+    get:
+      tags:
+        - Destinations
+      summary: Get a legacy email account
+      description: |
+        Returns a single legacy email account by ID. Read-only. Requires `email` to be present in `plugins.alerting.destination.allow_list` (included by default). Never returns the stored credentials.
+      operationId: getEmailAccount
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: emailAccountID
+          in: path
+          required: true
+          description: The unique identifier of the email account.
+          schema:
+            type: string
+          example: "P7YmZ5wB_9876zyxABC"
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetEmailAccountResponse'
+              example:
+                _id: "P7YmZ5wB_9876zyxABC"
+                _version: 1
+                _seq_no: 0
+                _primary_term: 1
+                email_account:
+                  schema_version: 4
+                  name: "alertsMailbox"
+                  email: "alerts@example.com"
+                  host: "smtp.example.com"
+                  port: 465
+                  method: "ssl"
+        '400':
+          description: Bad Request - missing email account ID.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          description: Forbidden - the `email` destination type is not in the allow-list.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+        '404':
+          description: Not Found - no email account exists with the given ID.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+              example:
+                error:
+                  root_cause:
+                    - type: "status_exception"
+                      reason: "Email Account not found."
+                  type: "status_exception"
+                  reason: "Email Account not found."
+                status: 404
+
+    head:
+      tags:
+        - Destinations
+      summary: Check email account existence
+      description: Checks whether a legacy email account exists, without returning its content.
+      operationId: emailAccountExists
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: emailAccountID
+          in: path
+          required: true
+          schema:
+            type: string
+          example: "P7YmZ5wB_9876zyxABC"
+      responses:
+        '200':
+          description: The email account exists. No response body.
+        '404':
+          description: No email account exists with the given ID. No response body.
+
+  /_plugins/_alerting/destinations/email_accounts/_search:
+    get:
+      tags:
+        - Destinations
+      summary: Search legacy email accounts
+      description: Searches legacy email accounts using a standard OpenSearch query DSL body.
+      operationId: searchEmailAccounts
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              query:
+                match:
+                  name: "alertsMailbox"
+      responses:
+        '200':
+          description: Success. Standard search response; each hit's flat `_source` is an email account object.
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    post:
+      tags:
+        - Destinations
+      summary: Search legacy email accounts (POST)
+      description: Identical to `GET /_plugins/_alerting/destinations/email_accounts/_search`.
+      operationId: searchEmailAccountsPost
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /_plugins/_alerting/destinations/email_groups/{emailGroupID}:
+    get:
+      tags:
+        - Destinations
+      summary: Get a legacy email group
+      description: Returns a single legacy email group by ID. Read-only, structurally identical to the email account lookup.
+      operationId: getEmailGroup
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: emailGroupID
+          in: path
+          required: true
+          description: The unique identifier of the email group.
+          schema:
+            type: string
+          example: "Q8ZnA6wB_5432wvuDEF"
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetEmailGroupResponse'
+              example:
+                _id: "Q8ZnA6wB_5432wvuDEF"
+                _version: 1
+                _seq_no: 0
+                _primary_term: 1
+                email_group:
+                  schema_version: 4
+                  name: "SOC_Analysts"
+                  emails:
+                    - email: "analyst1@example.com"
+                    - email: "analyst2@example.com"
+        '400':
+          description: Bad Request - missing email group ID.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          description: Not Found - no email group exists with the given ID.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+
+    head:
+      tags:
+        - Destinations
+      summary: Check email group existence
+      description: Checks whether a legacy email group exists, without returning its content.
+      operationId: emailGroupExists
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: emailGroupID
+          in: path
+          required: true
+          schema:
+            type: string
+          example: "Q8ZnA6wB_5432wvuDEF"
+      responses:
+        '200':
+          description: The email group exists. No response body.
+        '404':
+          description: No email group exists with the given ID. No response body.
+
+  /_plugins/_alerting/destinations/email_groups/_search:
+    get:
+      tags:
+        - Destinations
+      summary: Search legacy email groups
+      description: Searches legacy email groups using a standard OpenSearch query DSL body.
+      operationId: searchEmailGroups
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              query:
+                match_all: {}
+      responses:
+        '200':
+          description: Success. Standard search response; each hit's flat `_source` is an email group object.
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    post:
+      tags:
+        - Destinations
+      summary: Search legacy email groups (POST)
+      description: Identical to `GET /_plugins/_alerting/destinations/email_groups/_search`.
+      operationId: searchEmailGroupsPost
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /_plugins/_alerting/stats:
+    get:
+      tags:
+        - Alerting stats
+      summary: Get cluster-wide scheduled-job stats
+      description: |
+        Returns cluster-wide statistics about the alerting job scheduler across all nodes. Equivalent to requesting both the `job_scheduling_metrics` and `jobs_info` metrics.
+      operationId: getAlertingStats
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: timeout
+          in: query
+          description: Request timeout.
+          schema:
+            type: string
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScheduledJobsStatsResponse'
+              example:
+                _nodes:
+                  total: 1
+                  successful: 1
+                  failed: 0
+                cluster_name: "wazuh-cluster"
+                opendistro.scheduled_jobs.enabled: true
+                plugins.scheduled_jobs.enabled: true
+                scheduled_job_index_exists: true
+                scheduled_job_index_status: "green"
+                nodes_on_schedule: 1
+                nodes_not_on_schedule: 0
+                nodes:
+                  mZ9k2vQvT5S3f8jH1cRQAA:
+                    name: "wazuh-indexer-node-1"
+                    schedule_status: "green"
+                    roles:
+                      - "DATA"
+                      - "INGEST"
+                      - "CLUSTER_MANAGER"
+                    job_scheduling_metrics:
+                      last_full_sweep_time_millis: 1735689000000
+                      full_sweep_on_time: true
+                    jobs_info:
+                      8fT2wXwB9tOWfnfv0lB2:
+                        last_execution_time: "2025-01-01T00:05:00.000Z"
+                        last_execution_time_in_millis: 1735689900000
+                        running_on_time: true
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /_plugins/_alerting/stats/{metric}:
+    get:
+      tags:
+        - Alerting stats
+      summary: Get cluster-wide scheduled-job stats for specific metrics
+      description: |
+        Returns cluster-wide scheduled-job statistics, limited to one or more comma-separated metrics.
+      operationId: getAlertingStatsForMetric
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: metric
+          in: path
+          required: true
+          description: Comma-separated metric names, or `_all`.
+          schema:
+            type: string
+            enum: [job_scheduling_metrics, jobs_info, _all]
+          example: "jobs_info"
+        - name: timeout
+          in: query
+          schema:
+            type: string
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScheduledJobsStatsResponse'
+        '400':
+          description: |
+            Bad Request - an unrecognized metric name was given, or `_all` was combined with individual metric names.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /_plugins/_alerting/{nodeId}/stats:
+    get:
+      tags:
+        - Alerting stats
+      summary: Get per-node scheduled-job stats
+      description: Returns scheduled-job statistics for one or more specific nodes.
+      operationId: getNodeAlertingStats
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: nodeId
+          in: path
+          required: true
+          description: Comma-separated node IDs.
+          schema:
+            type: string
+        - name: timeout
+          in: query
+          schema:
+            type: string
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScheduledJobsStatsResponse'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /_plugins/_alerting/{nodeId}/stats/{metric}:
+    get:
+      tags:
+        - Alerting stats
+      summary: Get per-node scheduled-job stats for specific metrics
+      description: Returns scheduled-job statistics for specific nodes, limited to one or more comma-separated metrics.
+      operationId: getNodeAlertingStatsForMetric
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: nodeId
+          in: path
+          required: true
+          description: Comma-separated node IDs.
+          schema:
+            type: string
+        - name: metric
+          in: path
+          required: true
+          description: Comma-separated metric names, or `_all`.
+          schema:
+            type: string
+            enum: [job_scheduling_metrics, jobs_info, _all]
+        - name: timeout
+          in: query
+          schema:
+            type: string
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScheduledJobsStatsResponse'
+        '400':
+          description: |
+            Bad Request - an unrecognized metric name was given, or `_all` was combined with individual metric names.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+components:
+  schemas:
+    Schedule:
+      type: object
+      description: Exactly one of `period` or `cron` must be provided.
+      properties:
+        period:
+          type: object
+          properties:
+            interval:
+              type: integer
+            unit:
+              type: string
+              enum: [SECONDS, MINUTES, HOURS, DAYS]
+        cron:
+          type: object
+          properties:
+            expression:
+              type: string
+            timezone:
+              type: string
+
+    MonitorRequest:
+      type: object
+      required:
+        - name
+        - schedule
+        - inputs
+        - triggers
+      properties:
+        name:
+          type: string
+        monitor_type:
+          type: string
+          description: |
+            One of `query_level_monitor`, `bucket_level_monitor`, `cluster_metrics_monitor`, `doc_level_monitor`, or the Wazuh-only `active_response_monitor`. `active_response_monitor` requires its input indices to be prefixed `wazuh-findings-v5` and an interval schedule of 60 seconds or less.
+          default: "query_level_monitor"
+        enabled:
+          type: boolean
+          default: true
+        schedule:
+          $ref: '#/components/schemas/Schedule'
+        inputs:
+          type: array
+          description: Search, document-level, cluster-metrics, or remote-monitor inputs, keyed by input type.
+          items:
+            type: object
+        triggers:
+          type: array
+          description: Trigger type must match the monitor type, e.g. `query_level_trigger` for a `query_level_monitor`.
+          items:
+            type: object
+        ui_metadata:
+          type: object
+        schema_version:
+          type: integer
+        data_sources:
+          type: object
+          description: Custom values are rejected — only the system defaults are accepted at this time.
+        delete_query_index_in_every_run:
+          type: boolean
+          default: false
+        should_create_single_alert_for_findings:
+          type: boolean
+          default: false
+        owner:
+          type: string
+          default: "alerting"
+        rbac_roles:
+          type: array
+          items:
+            type: string
+
+    MonitorSummary:
+      type: object
+      properties:
+        name:
+          type: string
+        monitor_type:
+          type: string
+        enabled:
+          type: boolean
+        schedule:
+          $ref: '#/components/schemas/Schedule'
+        inputs:
+          type: array
+          items:
+            type: object
+        triggers:
+          type: array
+          items:
+            type: object
+        owner:
+          type: string
+        schema_version:
+          type: integer
+        last_update_time:
+          type: integer
+          format: int64
+        enabled_time:
+          type: integer
+          format: int64
+          nullable: true
+
+    IndexMonitorResponse:
+      type: object
+      properties:
+        _id:
+          type: string
+        _version:
+          type: integer
+          format: int64
+        _seq_no:
+          type: integer
+          format: int64
+        _primary_term:
+          type: integer
+          format: int64
+        monitor:
+          $ref: '#/components/schemas/MonitorSummary'
+
+    GetMonitorResponse:
+      type: object
+      properties:
+        _id:
+          type: string
+        _version:
+          type: integer
+          format: int64
+        _seq_no:
+          type: integer
+          format: int64
+        _primary_term:
+          type: integer
+          format: int64
+        monitor:
+          $ref: '#/components/schemas/MonitorSummary'
+        associated_workflows:
+          type: array
+          description: Workflows that reference this monitor as a delegate.
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              name:
+                type: string
+
+    AlertDto:
+      type: object
+      properties:
+        id:
+          type: string
+        version:
+          type: integer
+          format: int64
+        schema_version:
+          type: integer
+        monitor_id:
+          type: string
+        workflow_id:
+          type: string
+        workflow_name:
+          type: string
+        associated_alert_ids:
+          type: array
+          items:
+            type: string
+        monitor_version:
+          type: integer
+          format: int64
+        monitor_name:
+          type: string
+        execution_id:
+          type: string
+          nullable: true
+        trigger_id:
+          type: string
+        trigger_name:
+          type: string
+        finding_ids:
+          type: array
+          items:
+            type: string
+        related_doc_ids:
+          type: array
+          items:
+            type: string
+        state:
+          type: string
+          enum: [ACTIVE, ACKNOWLEDGED, COMPLETED, ERROR, DELETED, AUDIT]
+        error_message:
+          type: string
+          nullable: true
+        alert_history:
+          type: array
+          items:
+            type: object
+        severity:
+          type: string
+        action_execution_results:
+          type: array
+          items:
+            type: object
+        start_time:
+          type: string
+          format: date-time
+        last_notification_time:
+          type: string
+          format: date-time
+          nullable: true
+        end_time:
+          type: string
+          format: date-time
+          nullable: true
+        acknowledged_time:
+          type: string
+          format: date-time
+          nullable: true
+        clusters:
+          type: array
+          description: Only emitted if non-empty.
+          items:
+            type: string
+
+    GetAlertsResponse:
+      type: object
+      properties:
+        totalAlerts:
+          type: integer
+          nullable: true
+        alerts:
+          type: array
+          items:
+            $ref: '#/components/schemas/AlertDto'
+
+    AcknowledgeAlertResponse:
+      type: object
+      properties:
+        success:
+          type: array
+          description: Alert IDs successfully acknowledged.
+          items:
+            type: string
+        failed:
+          type: array
+          description: |
+            Alert IDs that could not be acknowledged (already processed, in an error state, or not found), each as a single-key object mapping the alert ID to a failure reason.
+          items:
+            type: object
+            additionalProperties:
+              type: object
+              properties:
+                failed_reason:
+                  type: string
+
+    MonitorRunResult:
+      type: object
+      properties:
+        monitor_name:
+          type: string
+        period_start:
+          type: integer
+          format: int64
+        period_end:
+          type: integer
+          format: int64
+        error:
+          type: string
+          nullable: true
+        input_results:
+          type: object
+          properties:
+            results:
+              type: array
+              items:
+                type: object
+            error:
+              type: string
+              nullable: true
+        trigger_results:
+          type: object
+          description: Keyed by trigger ID.
+          additionalProperties:
+            type: object
+            properties:
+              name:
+                type: string
+              triggered:
+                type: boolean
+              action_results:
+                type: object
+              error:
+                type: string
+                nullable: true
+
+    WorkflowDelegate:
+      type: object
+      required:
+        - order
+        - monitor_id
+      properties:
+        order:
+          type: integer
+          description: Must be greater than 0 and unique within the sequence.
+        monitor_id:
+          type: string
+        chained_monitor_findings:
+          type: object
+          description: References an earlier delegate (by a strictly smaller `order`) whose findings feed this monitor.
+          properties:
+            monitor_id:
+              type: string
+            monitor_ids:
+              type: array
+              items:
+                type: string
+
+    ChainedAlertTrigger:
+      type: object
+      required:
+        - name
+        - severity
+        - condition
+        - actions
+      properties:
+        id:
+          type: string
+          readOnly: true
+        name:
+          type: string
+        severity:
+          type: string
+        condition:
+          type: object
+          properties:
+            script:
+              type: object
+              properties:
+                source:
+                  type: string
+                lang:
+                  type: string
+                  enum: [painless]
+        actions:
+          type: array
+          items:
+            type: object
+
+    WorkflowRequest:
+      type: object
+      required:
+        - name
+        - schedule
+        - inputs
+      properties:
+        name:
+          type: string
+        workflow_type:
+          type: string
+          enum: [composite]
+          default: "composite"
+        enabled:
+          type: boolean
+          default: true
+        schedule:
+          $ref: '#/components/schemas/Schedule'
+        inputs:
+          type: array
+          description: Exactly one `composite_input`, containing a sequence of up to 25 delegates.
+          items:
+            type: object
+            properties:
+              composite_input:
+                type: object
+                properties:
+                  sequence:
+                    type: object
+                    properties:
+                      delegates:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/WorkflowDelegate'
+        triggers:
+          type: array
+          description: Each element must be a `chained_alert_trigger`.
+          items:
+            type: object
+            properties:
+              chained_alert_trigger:
+                $ref: '#/components/schemas/ChainedAlertTrigger'
+        owner:
+          type: string
+          default: "alerting"
+        audit_delegate_monitor_alerts:
+          type: boolean
+          default: true
+        rbac_roles:
+          type: array
+          items:
+            type: string
+
+    WorkflowSummary:
+      type: object
+      properties:
+        name:
+          type: string
+        workflow_type:
+          type: string
+        enabled:
+          type: boolean
+        owner:
+          type: string
+        audit_delegate_monitor_alerts:
+          type: boolean
+
+    IndexWorkflowResponse:
+      type: object
+      properties:
+        _id:
+          type: string
+        _version:
+          type: integer
+          format: int64
+        _seq_no:
+          type: integer
+          format: int64
+        _primary_term:
+          type: integer
+          format: int64
+        workflow:
+          $ref: '#/components/schemas/WorkflowSummary'
+
+    GetWorkflowResponse:
+      type: object
+      properties:
+        _id:
+          type: string
+        _version:
+          type: integer
+          format: int64
+        _seq_no:
+          type: integer
+          format: int64
+        _primary_term:
+          type: integer
+          format: int64
+        workflow:
+          $ref: '#/components/schemas/WorkflowSummary'
+
+    WorkflowRunResult:
+      type: object
+      properties:
+        execution_id:
+          type: string
+        workflow_name:
+          type: string
+        workflow_id:
+          type: string
+        trigger_results:
+          type: object
+          description: Keyed by trigger ID.
+          additionalProperties:
+            type: object
+            properties:
+              name:
+                type: string
+              triggered:
+                type: boolean
+              action_results:
+                type: object
+              error:
+                type: string
+                nullable: true
+        monitor_run_results:
+          type: array
+          items:
+            $ref: '#/components/schemas/MonitorRunResult'
+        execution_start_time:
+          type: string
+          format: date-time
+        execution_end_time:
+          type: string
+          format: date-time
+        error:
+          type: string
+          nullable: true
+
+    GetWorkflowAlertsResponse:
+      type: object
+      properties:
+        alerts:
+          type: array
+          items:
+            $ref: '#/components/schemas/AlertDto'
+        associatedAlerts:
+          type: array
+          description: Per-delegate-monitor alerts. Only populated if `getAssociatedAlerts=true`.
+          items:
+            $ref: '#/components/schemas/AlertDto'
+        totalAlerts:
+          type: integer
+          nullable: true
+
+    DocLevelQuery:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        fields:
+          type: array
+          items:
+            type: string
+        query:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+
+    FindingDocument:
+      type: object
+      properties:
+        index:
+          type: string
+        id:
+          type: string
+        found:
+          type: boolean
+        document:
+          type: string
+          description: The raw JSON source of the matched document, as a string.
+
+    AlertingFinding:
+      type: object
+      properties:
+        id:
+          type: string
+        related_doc_ids:
+          type: array
+          items:
+            type: string
+        correlated_doc_ids:
+          type: array
+          items:
+            type: string
+        monitor_id:
+          type: string
+        monitor_name:
+          type: string
+        index:
+          type: string
+        queries:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocLevelQuery'
+        timestamp:
+          type: integer
+          format: int64
+        execution_id:
+          type: string
+          nullable: true
+
+    FindingWithDocs:
+      type: object
+      properties:
+        finding:
+          $ref: '#/components/schemas/AlertingFinding'
+        document_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/FindingDocument'
+
+    GetAlertingFindingsResponse:
+      type: object
+      properties:
+        total_findings:
+          type: integer
+          nullable: true
+        findings:
+          type: array
+          items:
+            $ref: '#/components/schemas/FindingWithDocs'
+
+    ClusterIndex:
+      type: object
+      properties:
+        name:
+          type: string
+        health:
+          type: string
+          nullable: true
+        mappings:
+          type: object
+          description: Empty unless `include_mappings=true`.
+
+    ClusterIndexes:
+      type: object
+      properties:
+        cluster:
+          type: string
+        health:
+          type: string
+          nullable: true
+        hub_cluster:
+          type: boolean
+          description: True for the local/coordinating cluster.
+        latency:
+          type: integer
+          format: int64
+        indexes:
+          type: object
+          description: Keyed by index name.
+          additionalProperties:
+            $ref: '#/components/schemas/ClusterIndex'
+
+    GetRemoteIndexesResponse:
+      type: object
+      description: Keyed dynamically by cluster name.
+      additionalProperties:
+        $ref: '#/components/schemas/ClusterIndexes'
+
+    Comment:
+      type: object
+      properties:
+        entity_id:
+          type: string
+        entity_type:
+          type: string
+          enum: [alert]
+        content:
+          type: string
+        created_time:
+          type: integer
+          format: int64
+        last_updated_time:
+          type: integer
+          format: int64
+          nullable: true
+        user:
+          type: string
+          nullable: true
+          description: The username that created the comment.
+
+    IndexCommentResponse:
+      type: object
+      properties:
+        _id:
+          type: string
+        _seq_no:
+          type: integer
+          format: int64
+        _primary_term:
+          type: integer
+          format: int64
+        comment:
+          $ref: '#/components/schemas/Comment'
+
+    Destination:
+      type: object
+      description: The public shape omits the internal `user` field.
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum: [chime, slack, custom_webhook, email]
+        name:
+          type: string
+        schema_version:
+          type: integer
+        seq_no:
+          type: integer
+        primary_term:
+          type: integer
+        last_update_time:
+          type: integer
+          format: int64
+        chime:
+          type: object
+          properties:
+            url:
+              type: string
+        slack:
+          type: object
+          properties:
+            url:
+              type: string
+        custom_webhook:
+          type: object
+          properties:
+            url:
+              type: string
+              nullable: true
+            scheme:
+              type: string
+              nullable: true
+            host:
+              type: string
+              nullable: true
+            port:
+              type: integer
+            path:
+              type: string
+              nullable: true
+            method:
+              type: string
+              nullable: true
+            query_params:
+              type: object
+            header_params:
+              type: object
+            username:
+              type: string
+              nullable: true
+            password:
+              type: string
+              nullable: true
+        email:
+          type: object
+          properties:
+            email_account_id:
+              type: string
+            recipients:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    enum: [email, email_group]
+                  email:
+                    type: string
+                  email_group_id:
+                    type: string
+
+    GetDestinationsResponse:
+      type: object
+      properties:
+        totalDestinations:
+          type: integer
+          nullable: true
+        destinations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Destination'
+
+    EmailAccount:
+      type: object
+      required:
+        - name
+        - email
+        - host
+        - port
+        - method
+      properties:
+        schema_version:
+          type: integer
+        name:
+          type: string
+          description: Must match `[A-Z0-9_]+` (used as a keystore namespace).
+        email:
+          type: string
+        host:
+          type: string
+        port:
+          type: integer
+        method:
+          type: string
+          enum: [none, ssl, starttls]
+
+    GetEmailAccountResponse:
+      type: object
+      properties:
+        _id:
+          type: string
+        _version:
+          type: integer
+          format: int64
+        _seq_no:
+          type: integer
+          format: int64
+        _primary_term:
+          type: integer
+          format: int64
+        email_account:
+          $ref: '#/components/schemas/EmailAccount'
+
+    EmailGroup:
+      type: object
+      required:
+        - name
+        - emails
+      properties:
+        schema_version:
+          type: integer
+        name:
+          type: string
+          description: Must match `[A-Z0-9_-]+`.
+        emails:
+          type: array
+          items:
+            type: object
+            properties:
+              email:
+                type: string
+
+    GetEmailGroupResponse:
+      type: object
+      properties:
+        _id:
+          type: string
+        _version:
+          type: integer
+          format: int64
+        _seq_no:
+          type: integer
+          format: int64
+        _primary_term:
+          type: integer
+          format: int64
+        email_group:
+          $ref: '#/components/schemas/EmailGroup'
+
+    ScheduledJobsStatsResponse:
+      type: object
+      properties:
+        _nodes:
+          type: object
+          properties:
+            total:
+              type: integer
+            successful:
+              type: integer
+            failed:
+              type: integer
+        cluster_name:
+          type: string
+        opendistro.scheduled_jobs.enabled:
+          type: boolean
+        plugins.scheduled_jobs.enabled:
+          type: boolean
+        scheduled_job_index_exists:
+          type: boolean
+        scheduled_job_index_status:
+          type: string
+          nullable: true
+        nodes_on_schedule:
+          type: integer
+        nodes_not_on_schedule:
+          type: integer
+        nodes:
+          type: object
+          description: Keyed by node ID.
+          additionalProperties:
+            type: object
+            properties:
+              name:
+                type: string
+              schedule_status:
+                type: string
+                enum: [green, red]
+              roles:
+                type: array
+                items:
+                  type: string
+              job_scheduling_metrics:
+                type: object
+                properties:
+                  last_full_sweep_time_millis:
+                    type: integer
+                    format: int64
+                  full_sweep_on_time:
+                    type: boolean
+              jobs_info:
+                type: object
+                description: Keyed by job/monitor ID.
+                additionalProperties:
+                  type: object
+                  properties:
+                    last_execution_time:
+                      type: string
+                      format: date-time
+                    last_execution_time_in_millis:
+                      type: integer
+                      format: int64
+                    running_on_time:
+                      type: boolean
+
+    ErrorEnvelope:
+      type: object
+      description: The standard OpenSearch error response envelope.
+      properties:
+        error:
+          type: object
+          properties:
+            root_cause:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                  reason:
+                    type: string
+            type:
+              type: string
+            reason:
+              type: string
+        status:
+          type: integer
+
+  responses:
+    BadRequest:
+      description: Bad Request - the request body or parameters failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+
+    Forbidden:
+      description: Forbidden - the caller lacks permission for this action.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+          example:
+            error:
+              root_cause:
+                - type: "security_exception"
+                  reason: "User doesn't have permissions to execute this action. Contact administrator."
+              type: "security_exception"
+              reason: "User doesn't have permissions to execute this action. Contact administrator."
+            status: 403
+
+    NotFound:
+      description: Not Found - the requested resource does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'

@@ -1,0 +1,2245 @@
+paths:
+  /_plugins/_security/api/roles:
+    get:
+      tags:
+        - Roles
+      summary: List roles
+      description: Returns every role, keyed by name.
+      operationId: listRoles
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  $ref: '#/components/schemas/Role'
+              example:
+                all_access:
+                  reserved: true
+                  hidden: false
+                  static: true
+                  description: "Allow full access to all indices and all cluster APIs"
+                  cluster_permissions:
+                    - "*"
+                  index_permissions:
+                    - index_patterns: ["*"]
+                      allowed_actions: ["*"]
+                  tenant_permissions:
+                    - tenant_patterns: ["*"]
+                      allowed_actions: ["kibana_all_write"]
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+    patch:
+      tags:
+        - Roles
+      summary: Patch roles (bulk)
+      description: |
+        Applies a JSON Patch document to the whole roles collection at once — JSON-pointer paths are rooted at a role name, e.g. `/my_role/description` or `/my_role` itself to add/remove an entire role. Only `add`, `replace`, and `remove` operations are supported; `move`, `copy`, and `test` are rejected with 400. If the resulting diff is empty, the request still succeeds with `"No updates required"`.
+      operationId: patchRoles
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/JsonPatchOperation'
+            example:
+              - op: replace
+                path: /my_role/description
+                value: "Updated description"
+      responses:
+        '200':
+          description: Roles patched successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusMessageResponse'
+              example:
+                status: "OK"
+                message: "Resource updated."
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /_plugins/_security/api/roles/{role_name}:
+    get:
+      tags:
+        - Roles
+      summary: Get role
+      description: Returns a single role by name. Returns 404 if the role doesn't exist, or is hidden and the caller isn't a REST API admin.
+      operationId: getRole
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: role_name
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success. A single-key object, keyed by the role name.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  $ref: '#/components/schemas/Role'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    put:
+      tags:
+        - Roles
+      summary: Create or replace role
+      description: |
+        Fully replaces a role, or creates it if `role_name` doesn't exist yet. `reserved` and `hidden` are accepted only from a REST API admin caller — a non-admin submitting either gets a 400 invalid-key error. `static` can never be set through this API. Modifying a `static` or `reserved` role as a non-admin fails with 403.
+      operationId: createOrUpdateRole
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: role_name
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Role'
+            example:
+              description: "Read-only access to wazuh-alerts indices"
+              cluster_permissions:
+                - "cluster_composite_ops_ro"
+              index_permissions:
+                - index_patterns: ["wazuh-alerts-*"]
+                  allowed_actions: ["read"]
+      responses:
+        '200':
+          description: Role updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusMessageResponse'
+              example:
+                status: "OK"
+                message: "'my_role' updated."
+        '201':
+          description: Role created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusMessageResponse'
+              example:
+                status: "CREATED"
+                message: "'my_role' created."
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+    delete:
+      tags:
+        - Roles
+      summary: Delete role
+      description: Deletes a role by name. Returns 404 if it doesn't exist, 403 if it's `reserved`/`static` and the caller isn't a REST API admin.
+      operationId: deleteRole
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: role_name
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Role deleted successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusMessageResponse'
+              example:
+                status: "OK"
+                message: "'my_role' deleted."
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    patch:
+      tags:
+        - Roles
+      summary: Patch role
+      description: |
+        Applies a JSON Patch document to just this one role — paths are relative to the role itself, e.g. `/description` or `/index_permissions/0/allowed_actions/-`. Only `add`, `replace`, and `remove` operations are supported. The role must already exist (this cannot create a new one — use the bulk `PATCH /roles` for that).
+      operationId: patchRole
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: role_name
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/JsonPatchOperation'
+            example:
+              - op: replace
+                path: /description
+                value: "Updated description"
+      responses:
+        '200':
+          description: Role patched successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusMessageResponse'
+              example:
+                status: "OK"
+                message: "'my_role' updated."
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /_plugins/_security/api/rolesmapping:
+    get:
+      tags:
+        - Role mappings
+      summary: List role mappings
+      description: Returns every role mapping, keyed by role name.
+      operationId: listRoleMappings
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  $ref: '#/components/schemas/RoleMapping'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+    patch:
+      tags:
+        - Role mappings
+      summary: Patch role mappings (bulk)
+      description: |
+        Applies a JSON Patch document to the whole role-mappings collection — paths are rooted at a role name, e.g. `/my_role/backend_roles`. Only `add`, `replace`, and `remove` operations are supported.
+      operationId: patchRoleMappings
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/JsonPatchOperation'
+      responses:
+        '200':
+          description: Role mappings patched successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusMessageResponse'
+              example:
+                status: "OK"
+                message: "Resource updated."
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /_plugins/_security/api/rolesmapping/{role_name}:
+    get:
+      tags:
+        - Role mappings
+      summary: Get role mapping
+      description: Returns a single role mapping by role name. Returns 404 if it doesn't exist.
+      operationId: getRoleMapping
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: role_name
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success. A single-key object, keyed by the role name.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  $ref: '#/components/schemas/RoleMapping'
+              example:
+                wazuh_admin:
+                  reserved: false
+                  hidden: false
+                  backend_roles: ["admin"]
+                  users: ["wazuh-admin"]
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    put:
+      tags:
+        - Role mappings
+      summary: Create or replace role mapping
+      description: |
+        Fully replaces the mapping for `role_name`, or creates it if absent. At least one of `hosts`, `users`, `backend_roles`, or `and_backend_roles` must be present. `and_backend_roles` ANDs against `backend_roles` rather than ORing.
+      operationId: createOrUpdateRoleMapping
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: role_name
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoleMapping'
+            example:
+              backend_roles: ["soc_analyst"]
+      responses:
+        '200':
+          description: Role mapping updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusMessageResponse'
+              example:
+                status: "OK"
+                message: "'my_role' updated."
+        '201':
+          description: Role mapping created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusMessageResponse'
+              example:
+                status: "CREATED"
+                message: "'my_role' created."
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+    delete:
+      tags:
+        - Role mappings
+      summary: Delete role mapping
+      description: Deletes the mapping for `role_name`. Returns 404 if it doesn't exist.
+      operationId: deleteRoleMapping
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: role_name
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Role mapping deleted successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusMessageResponse'
+              example:
+                status: "OK"
+                message: "'my_role' deleted."
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    patch:
+      tags:
+        - Role mappings
+      summary: Patch role mapping
+      description: Applies a JSON Patch document to this one role mapping — paths are relative to it, e.g. `/backend_roles/-`. The mapping must already exist.
+      operationId: patchRoleMapping
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: role_name
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/JsonPatchOperation'
+      responses:
+        '200':
+          description: Role mapping patched successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusMessageResponse'
+              example:
+                status: "OK"
+                message: "'my_role' updated."
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /_plugins/_security/api/internalusers:
+    get:
+      tags:
+        - Internal users
+      summary: List internal users
+      description: |
+        Returns every internal user, keyed by username. `hash` is always an empty string in this response — the real password hash is never exposed through the API.
+      operationId: listInternalUsers
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  $ref: '#/components/schemas/InternalUser'
+              example:
+                wazuh-admin:
+                  hash: ""
+                  reserved: true
+                  hidden: false
+                  backend_roles: []
+                  attributes: {}
+                  opendistro_security_roles: []
+                  description: "Wazuh administrator user"
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+    patch:
+      tags:
+        - Internal users
+      summary: Patch internal users (bulk)
+      description: |
+        Applies a JSON Patch document to the whole internal-users collection — paths are rooted at a username, e.g. `/newuser` with `op: add` to create a user this way. Only `add`, `replace`, and `remove` operations are supported.
+      operationId: patchInternalUsers
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/JsonPatchOperation'
+      responses:
+        '200':
+          description: Internal users patched successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusMessageResponse'
+              example:
+                status: "OK"
+                message: "Resource updated."
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /_plugins/_security/api/internalusers/{username}:
+    get:
+      tags:
+        - Internal users
+      summary: Get internal user
+      description: Returns a single internal user by username. Returns 404 if it doesn't exist.
+      operationId: getInternalUser
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: username
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success. A single-key object, keyed by username.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  $ref: '#/components/schemas/InternalUser'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    put:
+      tags:
+        - Internal users
+      summary: Create or replace internal user
+      description: |
+        Fully replaces `username`, or creates it if absent. Provide either `password` (plain text — the server hashes it, using the cluster's configured `plugins.security.password.hashing.algorithm`, bcrypt by default) or a pre-computed `hash` directly; `password` wins if both are present. Creating a new user requires one of the two; updating an existing one doesn't (the stored hash is kept if neither is supplied). `reserved`/`hidden` are accepted only from a REST API admin caller.
+      operationId: createOrUpdateInternalUser
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: username
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InternalUser'
+            example:
+              password: "Cha4nGeMe!123"
+              backend_roles: ["soc_analyst"]
+              description: "SOC analyst account"
+      responses:
+        '200':
+          description: Internal user updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusMessageResponse'
+              example:
+                status: "OK"
+                message: "'jdoe' updated."
+        '201':
+          description: Internal user created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusMessageResponse'
+              example:
+                status: "CREATED"
+                message: "'jdoe' created."
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+    delete:
+      tags:
+        - Internal users
+      summary: Delete internal user
+      description: Deletes an internal user by username. Returns 404 if it doesn't exist, 403 if it's `reserved`/`static` and the caller isn't a REST API admin.
+      operationId: deleteInternalUser
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: username
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Internal user deleted successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusMessageResponse'
+              example:
+                status: "OK"
+                message: "'jdoe' deleted."
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    patch:
+      tags:
+        - Internal users
+      summary: Patch internal user
+      description: Applies a JSON Patch document to this one internal user — paths are relative to it, e.g. `/backend_roles/-`. The user must already exist.
+      operationId: patchInternalUser
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: username
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/JsonPatchOperation'
+      responses:
+        '200':
+          description: Internal user patched successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusMessageResponse'
+              example:
+                status: "OK"
+                message: "'jdoe' updated."
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /_plugins/_security/api/internalusers/{username}/authtoken:
+    post:
+      tags:
+        - Internal users
+      summary: Generate service account auth token
+      description: |
+        Generates a new Basic-Auth credential for a **service account** (an internal user whose `attributes` include `service: "true"` and `enabled: "true"`) and returns it embedded in the response `message`. This is not a JWT or bearer token — calling this endpoint **regenerates the account's password**, invalidating any prior credential, and the returned string is `Basic <base64(username:new_password)>`. No request body. Fails with 400 for any account that isn't a service account.
+      operationId: generateInternalUserAuthToken
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: username
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Auth token generated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusMessageResponse'
+              example:
+                status: "OK"
+                message: "'my_service_account' authtoken generated Basic bXlfc2VydmljZV9hY2NvdW50Om5ldy1yYW5kb20tcGFzc3dvcmQ="
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /_plugins/_security/api/account:
+    get:
+      tags:
+        - Account
+      summary: Get own account
+      description: Returns account details for the caller's own authenticated user.
+      operationId: getAccount
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountResponse'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+
+    put:
+      tags:
+        - Account
+      summary: Change own password
+      description: |
+        Changes the password for the caller's own account. `current_password` is always required and is verified against the stored hash. Provide either `password` (plain text, subject to the cluster's password-strength settings) or a pre-computed `hash`. If the caller's own account is `reserved` (e.g. the built-in `admin` user) and the caller isn't a REST API admin, this fails with 403 — reserved accounts can't self-service their password through this endpoint.
+      operationId: updateAccountPassword
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAccountRequest'
+            example:
+              current_password: "OldPassword!1"
+              password: "NewPassword!2"
+      responses:
+        '200':
+          description: Password updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusMessageResponse'
+              example:
+                status: "OK"
+                message: "'jdoe' updated."
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /_plugins/_security/api/permissionsinfo:
+    get:
+      tags:
+        - Permissions info
+      summary: Get evaluated REST API permissions
+      description: Returns whether the caller has REST API access at all, and which HTTP methods are disabled per endpoint for the caller's current roles.
+      operationId: getPermissionsInfo
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PermissionsInfoResponse'
+              example:
+                user: "User [name=jdoe, backend_roles=[soc_analyst], ...]"
+                user_name: "jdoe"
+                has_api_access: true
+                disabled_endpoints:
+                  ROLES: ["PUT", "DELETE", "PATCH"]
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '500':
+          description: 'Internal Server Error - the permissions check itself failed unexpectedly. Uses a distinct `{"error": "..."}` envelope, not the standard `status`/`message` shape.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+
+  /_plugins/_security/api/_upgrade_check:
+    get:
+      tags:
+        - Config upgrade
+      summary: Check for pending config upgrade
+      description: |
+        Compares the currently-active `roles` configuration against the plugin's bundled default `roles.yml` and reports what would change. As of this version, `roles` is the only configuration type this endpoint supports. Body-less — driven entirely by query parameters.
+      operationId: checkConfigUpgrade
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: configs
+          in: query
+          description: Configuration types to check. Only `roles` is currently supported. Defaults to `roles` if omitted.
+          schema:
+            type: array
+            items:
+              type: string
+              enum: [roles]
+        - name: entities
+          in: query
+          description: Specific entity (role) names to check. Defaults to all (`*`) if omitted.
+          schema:
+            type: array
+            items:
+              type: string
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success. `upgradeActions` is present only when `upgradeAvailable` is `true`.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfigUpgradeCheckResponse'
+              example:
+                status: "OK"
+                upgradeAvailable: true
+                upgradeActions:
+                  roles:
+                    add: ["new_default_role"]
+                    remove: []
+                    modify: ["all_access"]
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /_plugins/_security/api/_upgrade_perform:
+    post:
+      tags:
+        - Config upgrade
+      summary: Perform config upgrade
+      description: |
+        Applies the same diff computed by `GET /_upgrade_check` — recomputes it, then patches the live configuration. Unlike ordinary `PUT`/`PATCH`/`DELETE` on `/roles`, this is explicitly allowed to modify `reserved`/`hidden` roles, since it's meant to refresh Wazuh/OpenSearch's own built-in defaults after an upgrade. Fails with 400 if there's nothing to upgrade. Body-less — driven entirely by query parameters, same as `_upgrade_check`.
+      operationId: performConfigUpgrade
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: configs
+          in: query
+          description: Configuration types to upgrade. Only `roles` is currently supported. Defaults to `roles` if omitted.
+          schema:
+            type: array
+            items:
+              type: string
+              enum: [roles]
+        - name: entities
+          in: query
+          description: Specific entity (role) names to upgrade. Defaults to all (`*`) if omitted.
+          schema:
+            type: array
+            items:
+              type: string
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfigUpgradePerformResponse'
+              example:
+                status: "OK"
+                upgrades:
+                  roles:
+                    add: ["new_default_role"]
+                    remove: []
+                    modify: ["all_access"]
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /_plugins/_security/api/securityconfig:
+    get:
+      tags:
+        - Security config
+      summary: Get security configuration
+      description: |
+        Returns the cluster's global security configuration document (authentication/authorization domains, anonymous-auth, multi-tenancy, and other dynamic settings). The stored document also carries a `_meta` block, but it's stripped from this response.
+      operationId: getSecurityConfig
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityConfigGetResponse'
+              example:
+                config:
+                  dynamic:
+                    http:
+                      anonymous_auth_enabled: false
+                      xff:
+                        enabled: false
+                    authc:
+                      basic_internal_auth_domain:
+                        description: "Authenticate via HTTP Basic against internal users database"
+                        http_enabled: true
+                        order: 4
+                        http_authenticator:
+                          type: "basic"
+                          challenge: true
+                        authentication_backend:
+                          type: "intern"
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+    patch:
+      tags:
+        - Security config
+      summary: Patch security configuration
+      description: |
+        Applies a JSON Patch document to the full stored document (including `_meta`), e.g. path `/config/dynamic/http/anonymous_auth_enabled`. In practice, only patches that leave `config` containing solely a `dynamic` key are accepted — a patch targeting `/_meta/...` is rejected, since `_meta` isn't in this endpoint's allowed-keys set. Requires either the cluster setting `plugins.security.unsupported.restapi.allow_securityconfig_modification: true`, or a REST API admin caller — otherwise every write to this endpoint fails with 403 regardless of the caller's role permissions.
+      operationId: patchSecurityConfig
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/JsonPatchOperation'
+            example:
+              - op: replace
+                path: /config/dynamic/http/anonymous_auth_enabled
+                value: true
+      responses:
+        '200':
+          description: Security configuration patched successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusMessageResponse'
+              example:
+                status: "OK"
+                message: "Resource updated."
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /_plugins/_security/api/securityconfig/config:
+    put:
+      tags:
+        - Security config
+      summary: Replace security configuration
+      description: |
+        Wholesale-replaces the security configuration. The trailing `config` path segment is fixed and not repeated in the body: the request must be exactly `{"dynamic": {...}}` — no outer `config` wrapper key and no `_meta`. Requires either the cluster setting `plugins.security.unsupported.restapi.allow_securityconfig_modification: true`, or a REST API admin caller — otherwise this fails with 403 regardless of the caller's role permissions.
+      operationId: replaceSecurityConfig
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityConfigPutRequest'
+      responses:
+        '200':
+          description: Security configuration replaced successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusMessageResponse'
+              example:
+                status: "OK"
+                message: "'config' updated."
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /_plugins/_security/api/actiongroups:
+    get:
+      tags:
+        - Action groups
+      summary: List action groups
+      description: Returns every action group, keyed by name.
+      operationId: listActionGroups
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  $ref: '#/components/schemas/ActionGroup'
+              example:
+                cluster_monitor:
+                  reserved: true
+                  static: true
+                  allowed_actions: ["cluster:monitor/*"]
+                  type: "cluster"
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+    patch:
+      tags:
+        - Action groups
+      summary: Patch action groups (bulk)
+      description: |
+        Applies a JSON Patch document to the whole action-groups collection — paths are rooted at a group name. Only `add`, `replace`, and `remove` operations are supported.
+      operationId: patchActionGroups
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/JsonPatchOperation'
+      responses:
+        '200':
+          description: Action groups patched successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusMessageResponse'
+              example:
+                status: "OK"
+                message: "Resource updated."
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /_plugins/_security/api/actiongroups/{action_group_name}:
+    get:
+      tags:
+        - Action groups
+      summary: Get action group
+      description: Returns a single action group by name. Returns 404 if it doesn't exist.
+      operationId: getActionGroup
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: action_group_name
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success. A single-key object, keyed by the action group name.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  $ref: '#/components/schemas/ActionGroup'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    put:
+      tags:
+        - Action groups
+      summary: Create or replace action group
+      description: |
+        Fully replaces `action_group_name`, or creates it if absent. `allowed_actions` is the only mandatory field — entries can be raw permission strings or the names of other action groups (nested reference; a group cannot reference itself). `type`, if supplied, must be `cluster` or `index` — the name can't already exist as a role name.
+      operationId: createOrUpdateActionGroup
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: action_group_name
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActionGroup'
+            example:
+              allowed_actions: ["read", "indices:data/read/search"]
+              type: "index"
+      responses:
+        '200':
+          description: Action group updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusMessageResponse'
+              example:
+                status: "OK"
+                message: "'my_action_group' updated."
+        '201':
+          description: Action group created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusMessageResponse'
+              example:
+                status: "CREATED"
+                message: "'my_action_group' created."
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+    delete:
+      tags:
+        - Action groups
+      summary: Delete action group
+      description: Deletes an action group by name. Returns 404 if it doesn't exist.
+      operationId: deleteActionGroup
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: action_group_name
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Action group deleted successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusMessageResponse'
+              example:
+                status: "OK"
+                message: "'my_action_group' deleted."
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    patch:
+      tags:
+        - Action groups
+      summary: Patch action group
+      description: Applies a JSON Patch document to this one action group — paths are relative to it, e.g. `/allowed_actions/-`. The group must already exist.
+      operationId: patchActionGroup
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: action_group_name
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/JsonPatchOperation'
+      responses:
+        '200':
+          description: Action group patched successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusMessageResponse'
+              example:
+                status: "OK"
+                message: "'my_action_group' updated."
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /_plugins/_security/api/tenants:
+    get:
+      tags:
+        - Tenants
+      summary: List tenants
+      description: Returns every tenant, keyed by name.
+      operationId: listTenants
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  $ref: '#/components/schemas/Tenant'
+              example:
+                admin_tenant:
+                  reserved: false
+                  description: "Demo tenant for admin user"
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+    patch:
+      tags:
+        - Tenants
+      summary: Patch tenants (bulk)
+      description: |
+        Applies a JSON Patch document to the whole tenants collection — paths are rooted at a tenant name. Only `add`, `replace`, and `remove` operations are supported.
+      operationId: patchTenants
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/JsonPatchOperation'
+      responses:
+        '200':
+          description: Tenants patched successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusMessageResponse'
+              example:
+                status: "OK"
+                message: "Resource updated."
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /_plugins/_security/api/tenants/{tenant_name}:
+    get:
+      tags:
+        - Tenants
+      summary: Get tenant
+      description: Returns a single tenant by name. Returns 404 if it doesn't exist.
+      operationId: getTenant
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: tenant_name
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success. A single-key object, keyed by the tenant name.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  $ref: '#/components/schemas/Tenant'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    put:
+      tags:
+        - Tenants
+      summary: Create or replace tenant
+      description: Fully replaces `tenant_name`, or creates it if absent. No field is mandatory beyond a non-empty request body.
+      operationId: createOrUpdateTenant
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: tenant_name
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Tenant'
+            example:
+              description: "SOC team shared tenant"
+      responses:
+        '200':
+          description: Tenant updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusMessageResponse'
+              example:
+                status: "OK"
+                message: "'soc_tenant' updated."
+        '201':
+          description: Tenant created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusMessageResponse'
+              example:
+                status: "CREATED"
+                message: "'soc_tenant' created."
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+    delete:
+      tags:
+        - Tenants
+      summary: Delete tenant
+      description: Deletes a tenant by name. Returns 404 if it doesn't exist.
+      operationId: deleteTenant
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: tenant_name
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Tenant deleted successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusMessageResponse'
+              example:
+                status: "OK"
+                message: "'soc_tenant' deleted."
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    patch:
+      tags:
+        - Tenants
+      summary: Patch tenant
+      description: Applies a JSON Patch document to this one tenant — paths are relative to it, e.g. `/description`. The tenant must already exist.
+      operationId: patchTenant
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: tenant_name
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/JsonPatchOperation'
+      responses:
+        '200':
+          description: Tenant patched successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusMessageResponse'
+              example:
+                status: "OK"
+                message: "'soc_tenant' updated."
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /_plugins/_security/api/tenancy/config:
+    get:
+      tags:
+        - Multi-tenancy config
+      summary: Get multi-tenancy configuration
+      description: |
+        Returns the dashboard multi-tenancy settings. This is a convenience view over the same underlying document `GET /securityconfig` exposes at `config.dynamic.kibana` — it isn't separate storage.
+      operationId: getMultiTenancyConfig
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MultiTenancyConfig'
+              example:
+                multitenancy_enabled: true
+                private_tenant_enabled: true
+                default_tenant: "global"
+                sign_in_options: ["BASIC"]
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+    put:
+      tags:
+        - Multi-tenancy config
+      summary: Update multi-tenancy configuration
+      description: |
+        Updates the dashboard multi-tenancy settings — writes through to the same document `PUT`/`PATCH /securityconfig` operate on. Each field is optional and only overwrites the stored value when present, so this behaves like a partial update rather than a full replace. `default_tenant` must be `""`, `global`, `private`, or the name of an existing tenant; it can't be `private` while `private_tenant_enabled` is `false`. Each `sign_in_options` value must correspond to a configured authentication domain (`ANONYMOUS` is always accepted).
+      operationId: updateMultiTenancyConfig
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MultiTenancyConfig'
+            example:
+              multitenancy_enabled: true
+              default_tenant: "global"
+      responses:
+        '200':
+          description: Multi-tenancy configuration updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusMessageResponse'
+              example:
+                status: "OK"
+                message: "'config' updated."
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+components:
+  schemas:
+    JsonPatchOperation:
+      type: object
+      description: One RFC 6902 JSON Patch operation. Only `add`, `replace`, and `remove` are accepted by this API — `move`, `copy`, and `test` are rejected with 400.
+      required:
+        - op
+        - path
+      properties:
+        op:
+          type: string
+          enum: [add, replace, remove]
+        path:
+          type: string
+          description: RFC 6901 JSON Pointer.
+        value:
+          description: Required for `add`/`replace`. Omitted for `remove`.
+
+    StatusMessageResponse:
+      type: object
+      description: The standard response envelope this API uses for mutation results and most non-validation errors.
+      required:
+        - status
+        - message
+      properties:
+        status:
+          type: string
+          description: The literal `RestStatus` enum name, e.g. `OK`, `CREATED`, `NOT_FOUND`, `FORBIDDEN`, `BAD_REQUEST`, `CONFLICT`.
+        message:
+          type: string
+
+    ValidationErrorResponse:
+      type: object
+      description: |
+        Returned when a `PUT`/`PATCH` request body fails field-level content validation (unknown/disallowed keys, wrong data type, a missing mandatory-OR key, or malformed field syntax). Distinct from `StatusMessageResponse` — note the lowercase literal `status: "error"` rather than an uppercase `RestStatus` name.
+      required:
+        - status
+        - reason
+      properties:
+        status:
+          type: string
+          enum: [error]
+        reason:
+          type: string
+      additionalProperties: true
+
+    Role:
+      type: object
+      properties:
+        cluster_permissions:
+          type: array
+          items:
+            type: string
+          default: []
+          description: Cluster-level action names or action-group names, e.g. `cluster_monitor`.
+        index_permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/RoleIndexPermission'
+          default: []
+        tenant_permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/RoleTenantPermission'
+          default: []
+        description:
+          type: string
+        reserved:
+          type: boolean
+          default: false
+          description: Settable only by a REST API admin caller. A non-admin submitting this key gets a 400 invalid-key error.
+        hidden:
+          type: boolean
+          default: false
+          description: Same admin-only write restriction as `reserved`.
+        static:
+          type: boolean
+          readOnly: true
+          description: Never settable through the API — populated only from the plugin's bundled static role definitions.
+
+    RoleIndexPermission:
+      type: object
+      properties:
+        index_patterns:
+          type: array
+          items:
+            type: string
+          description: Supports wildcards and `${user_name}` substitution.
+        dls:
+          type: string
+          nullable: true
+          description: A document-level-security query, serialized as a JSON-encoded string (not a nested object) — e.g. `"{\"term\":{\"type\":\"a\"}}"`.
+        fls:
+          type: array
+          items:
+            type: string
+          description: Field-level security. A field prefixed with `~` or `!` is excluded (blocklist); a bare field name is an allowlist entry.
+        masked_fields:
+          type: array
+          items:
+            type: string
+          description: |
+            Field masking, `::`-delimited: `field` (cluster-default hash algorithm), `field::algorithm` (a specific `java.security.MessageDigest` algorithm, e.g. `SHA-512`), or `field::/regex/::replacement` (one or more chained regex replacements).
+        allowed_actions:
+          type: array
+          items:
+            type: string
+          description: e.g. `read`, `crud`, `indices_all`, `"*"`.
+
+    RoleTenantPermission:
+      type: object
+      properties:
+        tenant_patterns:
+          type: array
+          items:
+            type: string
+        allowed_actions:
+          type: array
+          items:
+            type: string
+          description: e.g. `kibana_all_write`.
+
+    RoleMapping:
+      type: object
+      description: At least one of `hosts`, `users`, `backend_roles`, or `and_backend_roles` must be present.
+      properties:
+        hosts:
+          type: array
+          items:
+            type: string
+        users:
+          type: array
+          items:
+            type: string
+        backend_roles:
+          type: array
+          items:
+            type: string
+        and_backend_roles:
+          type: array
+          items:
+            type: string
+          description: ANDs against `backend_roles` rather than ORing.
+        description:
+          type: string
+        reserved:
+          type: boolean
+          default: false
+          description: Settable only by a REST API admin caller.
+        hidden:
+          type: boolean
+          default: false
+          description: Same admin-only write restriction as `reserved`.
+
+    InternalUser:
+      type: object
+      properties:
+        hash:
+          type: string
+          description: Always an empty string in GET responses — the real hash is never exposed. On write, produced by the cluster's configured password hashing algorithm (bcrypt by default) if `password` is supplied instead.
+        password:
+          type: string
+          writeOnly: true
+          description: Plain-text password. Takes precedence over `hash` if both are supplied. Required (as either this or `hash`) when creating a new user; optional when updating an existing one.
+        backend_roles:
+          type: array
+          items:
+            type: string
+          default: []
+        attributes:
+          type: object
+          additionalProperties:
+            type: string
+          default: {}
+          description: Arbitrary key-value metadata, e.g. used for `attribute.internal.<key>` substitution in DLS queries.
+        opendistro_security_roles:
+          type: array
+          items:
+            type: string
+          default: []
+          description: Roles assigned directly to this user, independent of `backend_roles` + role mapping.
+        description:
+          type: string
+        reserved:
+          type: boolean
+          default: false
+          description: Settable only by a REST API admin caller.
+        hidden:
+          type: boolean
+          default: false
+          description: Same admin-only write restriction as `reserved`.
+        static:
+          type: boolean
+          readOnly: true
+          description: Never settable through the API — populated only from bundled static user definitions.
+
+    AccountResponse:
+      type: object
+      properties:
+        user_name:
+          type: string
+        is_reserved:
+          type: boolean
+        is_hidden:
+          type: boolean
+        is_internal_user:
+          type: boolean
+          description: False if the caller authenticated via a non-internal backend (LDAP, SAML, etc.) with no matching internal-user document.
+        user_requested_tenant:
+          type: string
+          nullable: true
+        backend_roles:
+          type: array
+          items:
+            type: string
+        custom_attribute_names:
+          type: array
+          items:
+            type: string
+        tenants:
+          type: object
+          additionalProperties:
+            type: boolean
+          description: Map of tenant name to whether the caller has access to it.
+        roles:
+          type: array
+          items:
+            type: string
+          description: The caller's evaluated/mapped security roles.
+
+    UpdateAccountRequest:
+      type: object
+      required:
+        - current_password
+      properties:
+        current_password:
+          type: string
+        password:
+          type: string
+          description: Plain-text new password, subject to the cluster's `plugins.security.restapi.password_*` strength settings. Takes precedence over `hash` if both are supplied. One of `password`/`hash` is required.
+        hash:
+          type: string
+          description: Pre-computed password hash. One of `password`/`hash` is required.
+
+    PermissionsInfoResponse:
+      type: object
+      properties:
+        user:
+          type: string
+          description: A verbose internal debug representation of the caller (not just the username).
+        user_name:
+          type: string
+          nullable: true
+        has_api_access:
+          type: boolean
+        disabled_endpoints:
+          type: object
+          description: Maps a Security API endpoint name to the HTTP methods disabled for the caller on it.
+          additionalProperties:
+            type: array
+            items:
+              type: string
+
+    ConfigUpgradeCheckResponse:
+      type: object
+      required:
+        - status
+        - upgradeAvailable
+      properties:
+        status:
+          type: string
+        upgradeAvailable:
+          type: boolean
+        upgradeActions:
+          type: object
+          description: Present only when `upgradeAvailable` is `true`.
+          additionalProperties:
+            $ref: '#/components/schemas/ConfigUpgradeDiff'
+
+    ConfigUpgradePerformResponse:
+      type: object
+      required:
+        - status
+        - upgrades
+      properties:
+        status:
+          type: string
+        upgrades:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ConfigUpgradeDiff'
+
+    ConfigUpgradeDiff:
+      type: object
+      properties:
+        add:
+          type: array
+          items:
+            type: string
+        remove:
+          type: array
+          items:
+            type: string
+        modify:
+          type: array
+          items:
+            type: string
+
+    SecurityConfigGetResponse:
+      type: object
+      properties:
+        config:
+          type: object
+          properties:
+            dynamic:
+              $ref: '#/components/schemas/SecurityConfigDynamic'
+
+    SecurityConfigPutRequest:
+      type: object
+      description: No outer `config` wrapper and no `_meta` — the body is exactly the contents that would sit under `config.dynamic` elsewhere.
+      required:
+        - dynamic
+      properties:
+        dynamic:
+          $ref: '#/components/schemas/SecurityConfigDynamic'
+
+    SecurityConfigDynamic:
+      type: object
+      properties:
+        filtered_alias_mode:
+          type: string
+          enum: [warn, nowarn, disallow]
+          default: warn
+        disable_rest_auth:
+          type: boolean
+          default: false
+        disable_intertransport_auth:
+          type: boolean
+          default: false
+        respect_request_indices_options:
+          type: boolean
+          default: false
+        license:
+          type: string
+          nullable: true
+        kibana:
+          $ref: '#/components/schemas/SecurityConfigKibana'
+        http:
+          $ref: '#/components/schemas/SecurityConfigHttp'
+        authc:
+          type: object
+          description: Map of authentication-domain name (chosen by the administrator) to its settings.
+          additionalProperties:
+            $ref: '#/components/schemas/AuthcDomain'
+        authz:
+          type: object
+          description: Map of authorization-domain name to its settings.
+          additionalProperties:
+            $ref: '#/components/schemas/AuthzDomain'
+        auth_failure_listeners:
+          type: object
+          description: Map of listener name to its rate-limiting settings.
+          additionalProperties:
+            $ref: '#/components/schemas/AuthFailureListener'
+        do_not_fail_on_forbidden:
+          type: boolean
+          default: false
+        multi_rolespan_enabled:
+          type: boolean
+          default: true
+        hosts_resolver_mode:
+          type: string
+          default: ip-only
+        transport_userrname_attribute:
+          type: string
+          nullable: true
+          description: This exact spelling (`userrname`, not `username`) is how the field is literally named in the plugin's own source.
+        do_not_fail_on_forbidden_empty:
+          type: boolean
+          default: false
+        on_behalf_of:
+          $ref: '#/components/schemas/OnBehalfOfSettings'
+
+    AuthcDomain:
+      type: object
+      properties:
+        http_enabled:
+          type: boolean
+          default: true
+        order:
+          type: integer
+          default: 0
+          description: Lower values are evaluated first.
+        http_authenticator:
+          $ref: '#/components/schemas/HttpAuthenticator'
+        authentication_backend:
+          $ref: '#/components/schemas/AuthenticationBackend'
+        description:
+          type: string
+        transport_enabled:
+          type: boolean
+          deprecated: true
+          description: Accepted for backward compatibility but has no runtime effect — silently ignored.
+
+    AuthzDomain:
+      type: object
+      properties:
+        http_enabled:
+          type: boolean
+          default: true
+        authorization_backend:
+          $ref: '#/components/schemas/AuthorizationBackend'
+        description:
+          type: string
+        transport_enabled:
+          type: boolean
+          deprecated: true
+          description: Accepted for backward compatibility but has no runtime effect — silently ignored.
+
+    HttpAuthenticator:
+      type: object
+      properties:
+        type:
+          type: string
+          description: |
+            A built-in short name — `basic`, `proxy`, `extended-proxy`, `clientcert`, `kerberos`, `jwt`, `openid`, `saml` — or a fully-qualified custom authenticator class name.
+        challenge:
+          type: boolean
+          default: true
+        config:
+          type: object
+          description: Shape depends entirely on `type` — modeled as free-form.
+          additionalProperties: true
+
+    AuthenticationBackend:
+      type: object
+      properties:
+        type:
+          type: string
+          default: intern
+          description: |
+            A built-in short name — `intern`/`internal` (the internal user database), `noop`, `ldap`, `ldap2` — or a fully-qualified custom backend class name.
+        config:
+          type: object
+          description: Shape depends entirely on `type` (e.g. an LDAP backend takes ~15 LDAP-specific keys here) — modeled as free-form.
+          additionalProperties: true
+
+    AuthorizationBackend:
+      type: object
+      properties:
+        type:
+          type: string
+          default: noop
+          description: |
+            A built-in short name — `noop`, `intern`/`internal` (also resolves to a no-op for authorization), `ldap`, `ldap2` — or a fully-qualified custom backend class name.
+        config:
+          type: object
+          description: Shape depends entirely on `type` — modeled as free-form.
+          additionalProperties: true
+
+    SecurityConfigHttp:
+      type: object
+      properties:
+        anonymous_auth_enabled:
+          type: boolean
+          default: false
+        xff:
+          $ref: '#/components/schemas/Xff'
+
+    Xff:
+      type: object
+      description: X-Forwarded-For settings. Note the camelCase field names below — they are literal, not a documentation typo.
+      properties:
+        enabled:
+          type: boolean
+          default: false
+        internalProxies:
+          type: string
+          description: A regex matching trusted proxy IPs. Defaults to the standard RFC 1918 private-address ranges.
+        remoteIpHeader:
+          type: string
+          default: X-Forwarded-For
+
+    SecurityConfigKibana:
+      type: object
+      description: Dashboard/multi-tenancy settings. Note the JSON key is literally `kibana`, not `dashboard`.
+      properties:
+        multitenancy_enabled:
+          type: boolean
+          default: true
+        private_tenant_enabled:
+          type: boolean
+          default: true
+        default_tenant:
+          type: string
+          default: ""
+        server_username:
+          type: string
+          default: kibanaserver
+        opendistro_role:
+          type: string
+          nullable: true
+        index:
+          type: string
+          default: .kibana
+        sign_in_options:
+          type: array
+          items:
+            type: string
+            enum: [BASIC, SAML, OPENID, ANONYMOUS]
+          default: [BASIC]
+
+    AuthFailureListener:
+      type: object
+      properties:
+        type:
+          type: string
+          enum: [ip, username]
+        authentication_backend:
+          type: string
+          nullable: true
+          description: Only used for `username`-type listeners.
+        ignore_hosts:
+          type: array
+          items:
+            type: string
+        allowed_tries:
+          type: integer
+          default: 10
+        time_window_seconds:
+          type: integer
+          default: 3600
+        block_expiry_seconds:
+          type: integer
+          default: 600
+        max_blocked_clients:
+          type: integer
+          default: 100000
+        max_tracked_clients:
+          type: integer
+          default: 100000
+
+    OnBehalfOfSettings:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          default: false
+        signing_key:
+          type: string
+          nullable: true
+        encryption_key:
+          type: string
+          nullable: true
+
+    ActionGroup:
+      type: object
+      required:
+        - allowed_actions
+      properties:
+        allowed_actions:
+          type: array
+          items:
+            type: string
+          description: Raw permission strings or the names of other action groups (nested reference; a group can't reference itself).
+        type:
+          type: string
+          description: |
+            On write, only `cluster` or `index` are accepted (omitting `type` is allowed, but deprecated). Existing stock groups may also show `kibana` or `all`, which aren't accepted on write.
+          enum: [cluster, index]
+        description:
+          type: string
+        reserved:
+          type: boolean
+          default: false
+          description: Settable only by a REST API admin caller.
+        hidden:
+          type: boolean
+          default: false
+          description: Same admin-only write restriction as `reserved`.
+        static:
+          type: boolean
+          readOnly: true
+          description: Never settable through the API — populated only from bundled static action-group definitions.
+
+    Tenant:
+      type: object
+      properties:
+        description:
+          type: string
+        reserved:
+          type: boolean
+          default: false
+          description: Settable only by a REST API admin caller.
+        hidden:
+          type: boolean
+          default: false
+          description: Same admin-only write restriction as `reserved`.
+        static:
+          type: boolean
+          readOnly: true
+          description: Never settable through the API — populated only from bundled static tenant definitions.
+
+    MultiTenancyConfig:
+      type: object
+      properties:
+        multitenancy_enabled:
+          type: boolean
+          default: true
+        private_tenant_enabled:
+          type: boolean
+          default: true
+        default_tenant:
+          type: string
+          default: ""
+          description: '`""`, `global`, `private`, or the name of an existing tenant.'
+        sign_in_options:
+          type: array
+          items:
+            type: string
+            enum: [BASIC, SAML, OPENID, ANONYMOUS]
+          default: [BASIC]
+
+  responses:
+    BadRequest:
+      description: Bad Request - the request body failed content validation (invalid/missing keys, wrong data type, or a business-rule violation), or a JSON Patch request used an unsupported operation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ValidationErrorResponse'
+          example:
+            status: "error"
+            reason: "Invalid configuration"
+            invalid_keys:
+              keys: "reserved"
+
+    Forbidden:
+      description: Forbidden - the caller lacks permission for this action, or the target resource is `reserved`/`static` and the caller isn't a REST API admin.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StatusMessageResponse'
+          example:
+            status: "FORBIDDEN"
+            message: "Resource 'my_role' is reserved."
+
+    NotFound:
+      description: Not Found - the requested name doesn't exist, or it's `hidden` and the caller isn't a REST API admin.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StatusMessageResponse'
+          example:
+            status: "NOT_FOUND"
+            message: "role 'my_role' not found."

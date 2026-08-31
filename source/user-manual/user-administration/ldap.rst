@@ -181,7 +181,7 @@ If you don't have a certificate authority server, you can enable LDAPS by creati
       :align: center
       :width: 80%
 
-#. The output should be similar to the image below.
+#. If the connection is successful in ``ldp.exe``, the **Established connection** message appears. The output should look similar to the image below.
 
    .. thumbnail:: /images/manual/user-administration/ldap/ldaps-connection-success.png
       :title: Successful LDAPS connection

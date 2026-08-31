@@ -1,8 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The agent-upgrade module is responsible for carrying out the entire agent upgrade process remotely. Learn more about it in this section.
-  
+  :description: Learn about the agent-upgrade configuration section of ossec.conf, which configures the remote upgrade behavior of the Wazuh agent.
+
 .. _reference_ossec_agent_upgrade:
 
 agent-upgrade
@@ -10,32 +10,15 @@ agent-upgrade
 
 .. topic:: XML section name
 
-	.. code-block:: xml
+   .. code-block:: xml
 
-		<agent-upgrade>
-		</agent-upgrade>
+      <agent-upgrade>
+      </agent-upgrade>
 
-The agent upgrade module is responsible for carrying out the entire agent upgrade process remotely:
-
-- On the manager side, it validates, downloads and/or sends the WPK files to the agents.
-- On the agent side, it processes the received commands and sends a notification to the manager after an upgrade process has been accomplished.
-
-This configuration section only needs to be defined in order to change the default values.
+The ``<agent-upgrade>`` section configures the remote upgrade behavior of the Wazuh agent. It controls whether the agent accepts remote upgrade requests, how it retries upgrade notifications, and how it validates signed WPK packages. Define this section only when you need to override the default settings.
 
 Options
 -------
-
-Manager side
-^^^^^^^^^^^^
-
-- `chunk_size`_
-- `wpk_repository`_
-- `max_threads`_
-
-.. note:: On the manager side, this module will be always enabled and cannot be deactivated.
-
-Agent side
-^^^^^^^^^^
 
 - `enabled`_
 - `notification_wait_start`_
@@ -43,150 +26,94 @@ Agent side
 - `notification_wait_max`_
 - `ca_verification`_
 
-.. note:: On the agent side, this module can be disabled, and doing so will block remote upgrading of that agent.
-
-
-chunk_size
-^^^^^^^^^^
-
-Size in KB of the chunk that will be used to send the WPK file.
-
-+--------------------+----------------------------------+
-| **Default value**  | 32768                            |
-+--------------------+----------------------------------+
-| **Allowed values** | Any number between 64 and 60000  |
-+--------------------+----------------------------------+
-| **Required**       | no                               |
-+--------------------+----------------------------------+
-
-
-wpk_repository
-^^^^^^^^^^^^^^
-
-Repository where the WPK files will be downloaded.
-
-.. |WAZUH_CUR_MAJ| replace:: |WAZUH_CURRENT_MAJOR|
-
-+--------------------+--------------------------------------------------+
-| **Default value**  | packages.wazuh.com/|WAZUH_CUR_MAJ|/wpk/          |
-+--------------------+--------------------------------------------------+
-| **Allowed values** | Any repository URL that contains the WPK files.  |
-+--------------------+--------------------------------------------------+
-| **Required**       | no                                               |
-+--------------------+--------------------------------------------------+
-
-
-max_threads
-^^^^^^^^^^^
-
-Maximum number of threads to process upgrades in parallel. Value 0 means the number of CPU cores.
-
-+--------------------+-------------------------------+
-| **Default value**  | 8                             |
-+--------------------+-------------------------------+
-| **Allowed values** | Any number between 0 and 256  |
-+--------------------+-------------------------------+
-| **Required**       | no                            |
-+--------------------+-------------------------------+
-
-
 enabled
 ^^^^^^^
 
-Disabling this option will block the agent from upgrading.
+Enables or disables remote upgrades on the agent. Setting this option to ``no`` prevents the agent from accepting remote upgrade requests.
 
-+--------------------+----------+
-| **Default value**  | yes      |
-+--------------------+----------+
-| **Allowed values** | yes, no  |
-+--------------------+----------+
-| **Required**       | no       |
-+--------------------+----------+
-
++----------------------+-----------+
+| **Default value**    | yes       |
++----------------------+-----------+
+| **Allowed values**   | yes, no   |
++----------------------+-----------+
+| **Required**         | no        |
++----------------------+-----------+
 
 notification_wait_start
-^^^^^^^^^^^^^^^^^^^^^^^
-
-Initial time that the agent will wait to retry sending the upgrade confirmation if the first attempt remains unanswered. Can use second, minute and hour format.
-
-+--------------------+--------------------------------------------------------------------------------------------------------------------------+
-| **Default value**  | 5m                                                                                                                       |
-+--------------------+--------------------------------------------------------------------------------------------------------------------------+
-| **Allowed values** | A positive number that should contain a suffix character indicating a time unit: s (seconds), m (minutes), or h (hours). |
-+--------------------+--------------------------------------------------------------------------------------------------------------------------+
-| **Required**       | no                                                                                                                       |
-+--------------------+--------------------------------------------------------------------------------------------------------------------------+
-
-
-notification_wait_factor
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Time increase factor between successive notifications.
+Defines the initial delay before the agent retries an unanswered upgrade confirmation. Can use second, minute and hour format.
 
-+--------------------+------------------------------+
-| **Default value**  | 2.0                          |
-+--------------------+------------------------------+
-| **Allowed values** | Any number greater than 1.0  |
-+--------------------+------------------------------+
-| **Required**       | no                           |
-+--------------------+------------------------------+
++----------------------+----------------------------------------------------------------------------------------------+
+| **Default value**    | 5m                                                                                           |
++----------------------+----------------------------------------------------------------------------------------------+
+| **Allowed values**   | A positive number that should contain a suffix character indicating a time unit: s           |
+|                      | (seconds), m (minutes), or h (hours).                                                        |
++----------------------+----------------------------------------------------------------------------------------------+
+| **Required**         | no                                                                                           |
++----------------------+----------------------------------------------------------------------------------------------+
 
+notification_wait_factor
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Defines the multiplication factor applied to the delay between successive upgrade confirmation retries.
+
++----------------------+-------------------------------+
+| **Default value**    | 2.0                           |
++----------------------+-------------------------------+
+| **Allowed values**   | Any number greater than 1.0   |
++----------------------+-------------------------------+
+| **Required**         | no                            |
++----------------------+-------------------------------+
 
 notification_wait_max
-^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^
 
-Maximum time allowed between successive notifications. Can use second, minute and hour format.
+Defines the maximum delay between successive upgrade confirmation retries. Can use second, minute and hour format.
 
-+--------------------+--------------------------------------------------------------------------------------------------------------------------+
-| **Default value**  | 1h                                                                                                                       |
-+--------------------+--------------------------------------------------------------------------------------------------------------------------+
-| **Allowed values** | A positive number that should contain a suffix character indicating a time unit: s (seconds), m (minutes), or h (hours). |
-+--------------------+--------------------------------------------------------------------------------------------------------------------------+
-| **Required**       | no                                                                                                                       |
-+--------------------+--------------------------------------------------------------------------------------------------------------------------+
-
++----------------------+----------------------------------------------------------------------------------------------+
+| **Default value**    | 1h                                                                                           |
++----------------------+----------------------------------------------------------------------------------------------+
+| **Allowed values**   | A positive number that should contain a suffix character indicating a time unit: s           |
+|                      | (seconds), m (minutes), or h (hours).                                                        |
++----------------------+----------------------------------------------------------------------------------------------+
+| **Required**         | no                                                                                           |
++----------------------+----------------------------------------------------------------------------------------------+
 
 ca_verification
-^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^
 
-Configuration block to specify CA certificates to validate WPK files.
+Configures CA certificate validation for WPK packages.
 
-+---------------------------+--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|                           | This option enables or disables the WPK validation using the root CA certificate. If this parameter is set to ``no`` the agent will accept any WPK package coming from the manager.  |
-|                           +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|  **enabled**              | **Default value**  | yes                                                                                                                                                             |
-|                           +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|                           | **Allowed values** | yes, no                                                                                                                                                         |
-+---------------------------+--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|                           | Indicates the path to the root CA certificate. The agent needs the certificate with which the WPK was signed in order to be updated.                                                 |
-|                           +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|  **ca_store**             | **Default value**  | etc/wpk_root.pem                                                                                                                                                |
-|                           +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|                           | **Allowed values** | Path to root CA certificate. It can be referred to a relative path under the Wazuh installation directory or a full path.                                       |
-+---------------------------+--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+``enabled`` — This option enables or disables validation of WPK packages using the configured root CA certificate. If this parameter is set to ``no`` the agent will accept any WPK package coming from the Wazuh manager.
 
++----------------------+-----------+
+| **Default value**    | yes       |
++----------------------+-----------+
+| **Allowed values**   | yes, no   |
++----------------------+-----------+
+
+``ca_store`` — Indicates the path to the root CA certificate. The agent needs the certificate with which the WPK was signed in order to be updated.
+
++----------------------+----------------------------------------------------------------------------------------------+
+| **Default value**    | etc/wpk_root.pem                                                                             |
++----------------------+----------------------------------------------------------------------------------------------+
+| **Allowed values**   | Path to root CA certificate. It can be referred to a relative path under the Wazuh           |
+|                      | installation directory or a full path.                                                       |
++----------------------+----------------------------------------------------------------------------------------------+
 
 Sample Configuration
---------------------
+---------------------
 
 .. code-block:: xml
 
-    <!-- On the manager side -->
-
-    <agent-upgrade>
-      <chunk_size>16384</chunk_size>
-      <wpk_repository>packages.wazuh.com/4.x/wpk/</wpk_repository>
-      <max_threads>16</max_threads>
-    </agent-upgrade>
-
-    <!-- On the agent side -->
-    <agent-upgrade>
-      <enabled>yes</enabled>
-      <notification_wait_start>60s</notification_wait_start>
-      <notification_wait_factor>4</notification_wait_factor>
-      <notification_wait_max>2h</notification_wait_max>
-      <ca_verification>
-        <enabled>yes</enabled>
-        <ca_store>etc/wpk_root.pem</ca_store>
-      </ca_verification>
-    </agent-upgrade>
+   <agent-upgrade>
+     <enabled>yes</enabled>
+     <notification_wait_start>60s</notification_wait_start>
+     <notification_wait_factor>4</notification_wait_factor>
+     <notification_wait_max>2h</notification_wait_max>
+     <ca_verification>
+       <enabled>yes</enabled>
+       <ca_store>etc/wpk_root.pem</ca_store>
+     </ca_verification>
+   </agent-upgrade>
