@@ -1,171 +1,188 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Find out how to list agents assigned to a group using the agent_groups program. Learn more about it in this section of the Wazuh documentation.
-  
+  :description: The agent_groups tool manages Wazuh agent groups and group membership. Learn more about it in this section of the documentation.
+
 .. _agent_groups:
 
 agent_groups
 ============
 
-The agent_groups program allows you to list agents assigned to a group, assign agents to a group and manage the agents groups. Below are the parameters that can be used with this new function:
+The ``agent_groups`` tool manages Wazuh agent groups and group membership.
 
-+---------------------------------------+-----------------------------------------------------------+
-| **-h**                                | Displays the help message                                 |
-+---------------------------------------+-----------------------------------------------------------+
-| **-q**                                | Quiet mode (outputs no confirmation)                      |
-+---------------------------------------+-----------------------------------------------------------+
-| **-d**                                | Debug                                                     |
-+---------------------------------------+-----------------------------------------------------------+
-| **-l**                                | Lists all groups                                          |
-+---------------------------------------+-----------------------------------------------------------+
-| **-l -g group_id**                    | Lists the agents in the group                             |
-+---------------------------------------+-----------------------------------------------------------+
-| **-c -g group_id**                    | Lists the configuration files in group                    |
-+---------------------------------------+-----------------------------------------------------------+
-| **-a -g group_id [-q]**               | Creates a group                                           |
-+---------------------------------------+-----------------------------------------------------------+
-| **-r -g group_id [-q]**               | Removes a group (affects to all agents assigned to it)    |
-+---------------------------------------+-----------------------------------------------------------+
-| **-a -i agent_id -g group_id [-q]**   | Assigns group_id to the agent's group list                |
-+---------------------------------------+-----------------------------------------------------------+
-| **-a -f -i agent_id -g group_id [-q]**| Replaces the agent's groups to group_id                   |
-+---------------------------------------+-----------------------------------------------------------+
-| **-r -i agent_id [-q]**               | Remove an agent from all its groups                       |
-+---------------------------------------+-----------------------------------------------------------+
-| **-r -i agent_id -g group_id [-q]**   | Remove an agent from a specific group                     |
-+---------------------------------------+-----------------------------------------------------------+
-| **-s -i agent_id**                    | Shows the groups of an agent                              |
-+---------------------------------------+-----------------------------------------------------------+
-| **-S -i agent_id**                    | Shows the shared files sync status of an agent            |
-+---------------------------------------+-----------------------------------------------------------+
+Use this tool to create and remove groups, assign or remove agents from groups, list groups and their configuration files, and display the groups assigned to an agent.
+
+Options
+-------
+
++----------------------------------------+----------------------------------------------------------------+
+| Option                                 | Description                                                    |
++========================================+================================================================+
+| -a, --add                              | Creates a new group or adds an agent to an existing group.     |
++----------------------------------------+----------------------------------------------------------------+
+| -c, --list-files                       | Lists the configuration files associated with a group.         |
++----------------------------------------+----------------------------------------------------------------+
+| -d, --debug                            | Runs the tool in debug mode.                                   |
++----------------------------------------+----------------------------------------------------------------+
+| -f, --force                            | Forces an agent to belong to a single group.                   |
++----------------------------------------+----------------------------------------------------------------+
+| -g <group_id>, --group-id <group_id>   | Specifies the group ID.                                        |
++----------------------------------------+----------------------------------------------------------------+
+| -h, --help                             | Displays the help message and exits.                           |
++----------------------------------------+----------------------------------------------------------------+
+| -i <agent_id>, --agent-id <agent_id>   | Specifies the agent ID.                                        |
++----------------------------------------+----------------------------------------------------------------+
+| -l, --list                             | Lists the existing groups or the agents assigned to a group.   |
++----------------------------------------+----------------------------------------------------------------+
+| -q, --quiet                            | Runs in silent mode without prompting for confirmation.        |
++----------------------------------------+----------------------------------------------------------------+
+| -r, --remove                           | Removes a group or removes an agent from a group.              |
++----------------------------------------+----------------------------------------------------------------+
+| -s, --show-group                       | Displays the groups assigned to an agent.                      |
++----------------------------------------+----------------------------------------------------------------+
+| -u, --usage                            | Displays the command usage information.                        |
++----------------------------------------+----------------------------------------------------------------+
 
 Examples
 --------
-* Create group *'debian'*:
+
+Create group 'webservers':
 
 .. code-block:: console
 
-    $ /var/ossec/bin/agent_groups -a -g debian
+   # /var/wazuh-manager/bin/agent_groups -a -g webservers
+
+The command output looks similar to this:
 
 .. code-block:: none
-    :class: output
+   :class: output
 
-    Do you want to create the group 'debian'? [y/N]: y
-    Group 'debian' created.
+   Do you want to create the group 'webservers'? [y/N]: y
+   Group 'webservers' created.
 
-* Assign group *'debian'* to agent 002:
+Assign group 'webservers' to agent 010:
 
 .. code-block:: console
 
-    $ /var/ossec/bin/agent_groups -a -i 002 -g debian
+   # /var/wazuh-manager/bin/agent_groups -a -i 010 -g webservers
+
+The command output looks similar to this:
 
 .. code-block:: none
-    :class: output
+   :class: output
 
-    Do you want to set the group 'debian' to the agent '002'? [y/N]: y
-    Group 'debian' assigned to agent '002'.
+   Do you want to add the group 'webservers' to the agent '010'? [y/N]: y
+   Group 'webservers' added to agent '010'.
 
-* Get the groups of agent 002:
+Get the groups of agent 010:
 
 .. code-block:: console
 
-    $ /var/ossec/bin/agent_groups -s -i 002
+   # /var/wazuh-manager/bin/agent_groups -s -i 010
+
+The command output looks similar to this:
 
 .. code-block:: none
-    :class: output
+   :class: output
 
-    The agent 'agent-deb-002' with ID '002' belongs to groups: default, debian, east-office
+   The agent 'Ubuntu' with ID '010' belongs to groups: default, webservers.
 
-* List all agents in group *'debian'*:
+List all agents in group 'Linux':
 
 .. code-block:: console
 
-    $ /var/ossec/bin/agent_groups -l -g debian
+   # /var/wazuh-manager/bin/agent_groups -l -g Linux
+
+The command output looks similar to this:
 
 .. code-block:: none
-    :class: output
+   :class: output
 
-    3 agent(s) in group 'debian':
-        ID: 002  Name: agent-deb-002.
-        ID: 003  Name: agent-deb-003.
-        ID: 004  Name: agent-deb-004.
+   2 agent(s) in group 'Linux':
+     ID: 003  Name: CentOS.
+     ID: 007  Name: agent1.
 
-* List configuration files in group *'debian'*:
+List configuration files in group 'vd_test':
 
 .. code-block:: console
 
-    $ /var/ossec/bin/agent_groups -c -g debian
+   # /var/wazuh-manager/bin/agent_groups -c -g vd_test
+
+The command output looks similar to this:
 
 .. code-block:: none
-    :class: output
+   :class: output
 
-    Files for group 'debian':
-      agent.conf                [ab73af41699f13fdd81903b5f23d8d00]
-      merged.mg                 [4437654d67c9c4ac2e46cf5f73e04518]
-      cis_debian_linux_rcl.txt  [38cc9b168dc24576daa76f4502575a4f]
+   2 files for 'vd_test' group:
+     agent.conf  [70d8d94d64a8114658c40124b8e4bbb8]
+     merged.mg   [18c41f58607371284b44a313a6c0cd9a]
 
-
-* Remove agent 002 from all groups except the default:
+Remove agent 010 from all groups except the default:
 
 .. code-block:: console
 
-    $ /var/ossec/bin/agent_groups -r -i 002
+   # /var/wazuh-manager/bin/agent_groups -r -i 010
+
+The command output looks similar to this:
 
 .. code-block:: none
-    :class: output
+   :class: output
 
-    Do you want to delete all groups of agent '002'? [y/N]: y
-    Group unset for agent '002'.
+   Do you want to delete all groups of agent '010'? [y/N]: y
+   Group unset for agent '010'.
 
-* Remove agent 003 from a specific group
+Remove agent 007 from a specific group
 
 .. code-block:: console
 
-    $ /var/ossec/bin/agent_groups -r -i 003 -g group2
+   # /var/wazuh-manager/bin/agent_groups -r -i 007 -g Linux
+
+The command output looks similar to this:
 
 .. code-block:: none
-    :class: output
+   :class: output
 
-    Do you want to delete the group 'group2' of agent '003'? [y/N]: y
+   Do you want to delete the group 'Linux' of agent '007'? [y/N]: y
+   Agent '007' removed from Linux.
 
-.. code-block:: none
-    :class: output
-
-    Group 'group2' unset for agent '003'.
-
-* Remove the group *'debian'* from every agent:
+Remove the group 'webservers' from every agent:
 
 .. code-block:: console
 
-    $ /var/ossec/bin/agent_groups -r -g debian
+   # /var/wazuh-manager/bin/agent_groups -r -g webservers
+
+The command output looks similar to this:
 
 .. code-block:: none
-    :class: output
+   :class: output
 
-    Do you want to remove the 'debian' group? [y/N]: y
-    Group debian removed.
+   Do you want to remove the 'webservers' group? [y/N]: y
+   Group webservers removed.
 
-* Add an agent to more than one group:
+Add an agent to more than one group:
 
 .. code-block:: console
 
-    $ /var/ossec/bin/agent_groups -a -i 001 -g group1
+   # /var/wazuh-manager/bin/agent_groups -a -i 010 -g Linux
+
+The command output looks similar to this:
 
 .. code-block:: none
-    :class: output
+   :class: output
 
-    Do you want to add the group 'group1' to the agent '001'? [y/N]: y
-    Group 'group1' added to agent '001'.
+   Do you want to add the group 'Linux' to the agent '010'? [y/N]: y
+   Group 'Linux' added to agent '010'.
 
 .. code-block:: console
 
-    $ /var/ossec/bin/agent_groups -a -i 001 -g group2
+   # /var/wazuh-manager/bin/agent_groups -a -i 010 -g vd_test
+
+The command output looks similar to this:
 
 .. code-block:: none
-    :class: output
+   :class: output
 
-    Do you want to add the group 'group2' to the agent '001'? [y/N]: y
-    Group 'group2' added to agent '001'.
+   Do you want to add the group 'vd_test' to the agent '010'? [y/N]: y
+   Group 'vd_test' added to agent '010'.
 
-Now, 'agent1' belongs to 'default', 'group1' and 'group2'.
+Now, '010' belongs to 'default', 'Linux' and 'vd_test'.

@@ -1,27 +1,31 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The wazuh-syscheckd program checks files for changes to the checksums, permissions and ownership. Learn more in this section. 
+  :description: The wazuh-syscheckd program runs the Wazuh agent file integrity monitoring service, which monitors configured files and directories for changes.
 
-.. _wazuh-syscheckd:
+.. _wazuh_syscheckd:
 
 wazuh-syscheckd
-===============
+================
 
-The wazuh-syscheckd program checks configured files for changes to the checksums, permissions and ownership.  It is run using wazuh-control.
+The ``wazuh-syscheckd`` executable runs the Wazuh agent file integrity monitoring service.
 
-+-----------------+-------------------------------------------------------------------------------------------------+
-| **-c <config>** | Run using <config> as the configuration file.                                                   |
-+                 +-------------------------------------------+-----------------------------------------------------+
-|                 | Default value                             | /var/ossec/etc/ossec.conf                           |
-+-----------------+-------------------------------------------+-----------------------------------------------------+
-| **-d**          | Run in debug mode. This option may be repeated to increase the verbosity of the debug messages. |
-+-----------------+-------------------------------------------------------------------------------------------------+
-| **-f**          | Run in the foreground.                                                                          |
-+-----------------+-------------------------------------------------------------------------------------------------+
-| **-h**          | Display the help message.                                                                       |
-+-----------------+-------------------------------------------------------------------------------------------------+
-| **-t**          | Test configuration.                                                                             |
-+-----------------+-------------------------------------------------------------------------------------------------+
-| **-V**          | Display the version and license information                                                     |
-+-----------------+-------------------------------------------------------------------------------------------------+
+The file integrity monitoring service monitors configured files and directories for creation, modification, and deletion. It records file attributes and cryptographic checksums, then detects changes by comparing the current state of monitored files with the previously recorded state.
+
+On supported Windows endpoints, the service can also monitor changes to configured Windows Registry keys and values.
+
++---------------+---------------------------------------------------------------------------------+
+| Option        | Description                                                                     |
++===============+=================================================================================+
+| -c <config>   | Specifies the configuration file to use. The default is etc/ossec.conf.         |
++---------------+---------------------------------------------------------------------------------+
+| -d            | Runs the daemon in debug mode. Repeat the option to increase the debug level.   |
++---------------+---------------------------------------------------------------------------------+
+| -f            | Runs the daemon in the foreground.                                              |
++---------------+---------------------------------------------------------------------------------+
+| -h            | Displays the help message and exits.                                            |
++---------------+---------------------------------------------------------------------------------+
+| -t            | Tests the configuration and exits.                                              |
++---------------+---------------------------------------------------------------------------------+
+| -V            | Displays version and license information.                                       |
++---------------+---------------------------------------------------------------------------------+
