@@ -87,6 +87,7 @@ You can visualize the alert data in the Wazuh dashboard. To do this, go to the *
 
    .. thumbnail:: /images/poc/fim-alerts-ubuntu.png
          :title: Visualize FIM alerts from Ubuntu system
+         :alt: Wazuh dashboard Events table showing file added, modified, and deleted alerts for the Ubuntu agent AgentLinux
          :align: center
          :width: 80%
 
@@ -94,5 +95,6 @@ You can visualize the alert data in the Wazuh dashboard. To do this, go to the *
 
    .. thumbnail:: /images/poc/fim-alerts-windows.png
          :title: Visualize FIM alerts from Ubuntu system
+         :alt: Wazuh dashboard Events table showing file added, modified, and deleted alerts for the Windows agent WindowsAgent
          :align: center
          :width: 80%
