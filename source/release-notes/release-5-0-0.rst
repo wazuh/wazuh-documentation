@@ -378,7 +378,7 @@ Wazuh dashboard
 ^^^^^^^^^^^^^^^
 
 -  `#811 <https://github.com/wazuh/wazuh-dashboard/pull/811>`__ `#866 <https://github.com/wazuh/wazuh-dashboard/pull/866>`__ `#961 <https://github.com/wazuh/wazuh-dashboard/pull/961>`__ `#1031 <https://github.com/wazuh/wazuh-dashboard/pull/1031>`__ `#1179 <https://github.com/wazuh/wazuh-dashboard/pull/1179>`__ `#1366 <https://github.com/wazuh/wazuh-dashboard/pull/1366>`__ Added the Health check service.
--  `#870 <https://github.com/wazuh/wazuh-dashboard/pull/870>`__ `#946 <https://github.com/wazuh/wazuh-dashboard/pull/946>`__ `#1366 <https://github.com/wazuh/wazuh-dashboard/pull/1366>`__ `#1379 <https://github.com/wazuh/wazuh-dashboard/pull/1379>`__ `#1504 <https://github.com/wazuh/wazuh-dashboard/issues/1504>`__ Added the Health Check app.
+-  `#870 <https://github.com/wazuh/wazuh-dashboard/pull/870>`__ Added the Health Check app. `#946 <https://github.com/wazuh/wazuh-dashboard/pull/946>`__ `#1366 <https://github.com/wazuh/wazuh-dashboard/pull/1366>`__ `#1379 <https://github.com/wazuh/wazuh-dashboard/pull/1379>`__ `#1504 <https://github.com/wazuh/wazuh-dashboard/issues/1504>`__
 -  `#998 <https://github.com/wazuh/wazuh-dashboard/pull/998>`__ Added manager host configuration to the default configuration file.
 -  `#1092 <https://github.com/wazuh/wazuh-dashboard/pull/1092>`__ Set the v9 theme as default.
 -  `#805 <https://github.com/wazuh/wazuh-dashboard/issues/805>`__ Changed the location of the ``wazuh-dashboard`` service to match the other Wazuh components.
