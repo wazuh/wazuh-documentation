@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Added guidance about matching the Wazuh manager version to the existing cluster nodes in the *Adding new Wazuh server nodes* documentation. ([#10007](https://github.com/wazuh/wazuh-documentation/pull/10007))
 - **Post-release**: Fixed a duplicate heading in the *Architecture* documentation's component communication section, separating the Wazuh dashboard's connections to the Wazuh server and Wazuh indexer. ([#10038](https://github.com/wazuh/wazuh-documentation/pull/10038))
 - **Post-release**: Clarified the LDAPS connection success step and updated its screenshot in the *Active Directory and LDAP integration* documentation. ([#10039](https://github.com/wazuh/wazuh-documentation/pull/10039))
+- **Post-release**: Fixed missing or non-descriptive image alt text in the *Installation guide*, *Deployment options*, *Quickstart*, and *Proof of concept guide* documentation. ([#10057](https://github.com/wazuh/wazuh-documentation/pull/10057))
 
 ## [v4.14.6]
 

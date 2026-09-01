@@ -37,6 +37,7 @@ The image below shows how to create a new CloudTrail service and attach a new S3
 
 .. thumbnail:: /images/poc/cloudtrail.gif
    :title: Creating a Cloudtrail service
+   :alt: Animated walkthrough of creating a new AWS CloudTrail trail and attaching a new S3 bucket in the AWS console
    :align: center
    :width: 80%
 
@@ -81,6 +82,7 @@ Visualize the alerts
 You can visualize the alert data in the Wazuh dashboard. To do this, navigate through **Amazon Web Services** module.
 
 .. thumbnail:: /images/poc/AWS-alerts.png
-   :title: Visualize Amazon Web Services alerts 
+   :title: Visualize Amazon Web Services alerts
+   :alt: Wazuh dashboard Events view showing AWS CloudTrail alerts in the Amazon Web Services module
    :align: center
    :width: 80%
