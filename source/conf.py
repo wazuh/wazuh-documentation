@@ -114,7 +114,6 @@ exclude_patterns = [
     'user-manual/capabilities/agentless-monitoring/**',
     'user-manual/capabilities/log-data-collection/journald.rst',
     'user-manual/capabilities/malware-detection/**',
-    'user-manual/capabilities/system-calls-monitoring/**',
     'user-manual/indexer-api/index.rst',
     'user-manual/indexer-api/getting-started.rst',
     'user-manual/indexer-api/configuration.rst',

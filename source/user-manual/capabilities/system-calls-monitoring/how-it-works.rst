@@ -9,13 +9,13 @@ How it works
 .. note::
    This guide is based on the official `Audit guide <https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Security_Guide/sec-Defining_Audit_Rules_and_Controls.html>`_.
 
-The Linux Audit system is a feature of the Linux kernel that provides a framework for system auditing and monitoring. It is usually installed by default on RedHat and CentOS operating systems but can be manually installed on other Linux distributions. It captures and records various events, including system calls, file system activity, and network activity, among others.
+The Linux Audit system is a feature of the Linux kernel that provides a framework for system auditing and monitoring. It is usually installed by default on Red Hat and CentOS operating systems, but can be manually installed on other Linux distributions. It captures and records various events, including system calls, file system activity, and network activity, among others.
 
 When an event occurs on an endpoint, the Linux kernel generates an audit record that contains information about the event, such as the date and time, the user who initiated the event, the type of event, and any relevant parameters. The audit daemon collects and stores these audit records in a secure audit log file.
 
 You can view and analyze the audit log files using various audit management tools, which provide insights into system activity, detect security issues, and help identify potential threats.
 
-You can configure the Linux Audit system to monitor specific events based on user-defined rules and policies. This enables security teams to customize the auditing process to their specific needs and requirements. It uses a set of rules to define what is to be monitored and captured in the log files. The following are the three types of audit rules specification:
+You can configure the Linux Audit system to monitor specific events based on user-defined rules and policies. This enables security teams to customize the auditing process to their specific needs and requirements. It uses a set of rules to define what is to be monitored and captured in the log files. The following are the three types of audit rule specifications:
 
 - **File system rules**: These rules track access to files and directories.
 
@@ -44,15 +44,15 @@ Where:
 +----------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``-w <PATH>``        | ``<PATH>``: specifies what file or directory to audit.                                                                                                          |
 +----------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``-p <PERMISSIONS>`` | ``<PERMISSIONS>`` are the permissions that are for auditing, including the following:                                                                           |
+| ``-p <PERMISSIONS>`` | ``<PERMISSIONS>`` are the permissions used for auditing, including the following:                                                                               |
 +                      +---------------------------------------------------+-----------+-------------------------------------------------------------------------------------------------+
-|                      | Values                                            | r         | read access to a file or a directory                                                            |
+|                      | Values                                            | r         | read access to a file or a directory.                                                           |
 +                      +                                                   +-----------+-------------------------------------------------------------------------------------------------+
-|                      |                                                   | w         | write access to a file or a directory                                                           |
+|                      |                                                   | w         | write access to a file or a directory.                                                          |
 +                      +                                                   +-----------+-------------------------------------------------------------------------------------------------+
-|                      |                                                   | x         | execute access to a file or a directory                                                         |
+|                      |                                                   | x         | execute access to a file or a directory.                                                        |
 +                      +                                                   +-----------+-------------------------------------------------------------------------------------------------+
-|                      |                                                   | a         | change in the file's or directory's attribute                                                   |
+|                      |                                                   | a         | change in the file or directory's attribute.                                                    |
 +----------------------+---------------------------------------------------+-----------+-------------------------------------------------------------------------------------------------+
 | ``-k <KEY_NAME>``    | ``<KEY_NAME>`` assigns a unique identifier to the rule. It tags the audit events that match the rule to make searching for and analyzing related events easier. |
 |                      |                                                                                                                                                                 |
@@ -72,24 +72,24 @@ These rules enforce security policies on the system, including implementing acce
 
 The table illustrates some examples of how to modify the behavior of the audit system.
 
-+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``auditctl -b``      | Set the maximum amount of existing audit buffers in the kernel.                                                                                             |
-+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``auditctl -f``      | Define the action to be executed upon detecting a critical error.                                                                                           |
-+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``auditctl -e``      | Enable/disable the audit feature or set its configuration as read-only.                                                                                     |
-+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``auditctl -s``      | Display the status of the Linux Audit System, including the enabled audit rules, failure modes, and other relevant information.                             |
-+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``auditctl -l``      | List all the audit rules that are currently loaded into the system.                                                                                         |
-+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``auditctl -D``      | Delete all currently loaded audit rules.                                                                                                                    |
-+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
++-----------------+---------------------------------------------------------------------------------------------------------------------------------+
+| ``auditctl -b`` | Set the maximum number of outstanding audit buffers the kernel will queue (the backlog limit).                                  |
++-----------------+---------------------------------------------------------------------------------------------------------------------------------+
+| ``auditctl -f`` | Define the action to be executed upon detecting a critical error.                                                               |
++-----------------+---------------------------------------------------------------------------------------------------------------------------------+
+| ``auditctl -e`` | Enable/disable the audit feature or set its configuration as read-only.                                                         |
++-----------------+---------------------------------------------------------------------------------------------------------------------------------+
+| ``auditctl -s`` | Display the status of the Linux Audit System, including the enabled audit rules, failure modes, and other relevant information. |
++-----------------+---------------------------------------------------------------------------------------------------------------------------------+
+| ``auditctl -l`` | List all the audit rules that are currently loaded into the system.                                                             |
++-----------------+---------------------------------------------------------------------------------------------------------------------------------+
+| ``auditctl -D`` | Delete all currently loaded audit rules.                                                                                        |
++-----------------+---------------------------------------------------------------------------------------------------------------------------------+
 
 System call rules
 -----------------
 
-These rules monitor system calls made by specific users or processes. They track specific or all system calls a particular user or process makes. System call rules can be specified in several ways, including by a syscall number, name, or by a combination of both.
+These rules monitor system calls made by specific users or processes. They track specific or all system calls that a particular user or process makes. System call rules can be specified in several ways, including by a syscall number, name, or by a combination of both.
 
 To define a system call rule, use the following syntax:
 
@@ -108,7 +108,7 @@ Where:
 +                           +              +---------+----------------------------------------------------------------------------------------------------------------------------------------+
 |                           |              | never   | Sets the rule to never generate an audit event for the specified action, even if the event would normally be audited.                  |
 +                           +--------------+---------+----------------------------------------------------------------------------------------------------------------------------------------+
-|                           | The ``<FILTER>`` value specifies which kernel rule-matching filter is applied to the event                                                                      |
+|                           | The ``<FILTER>`` value specifies which kernel rule-matching filter is applied to the event.                                                                     |
 +                           +--------------+---------+----------------------------------------------------------------------------------------------------------------------------------------+
 |                           | ``<FILTER>`` | task    | Only audit events fork or clone syscalls.                                                                                              |
 |                           |              |         |                                                                                                                                        |
@@ -140,13 +140,13 @@ Where:
 |                           | Wazuh requires this argument to analyze the logs more accurately.                                                                                               |
 +---------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-For example, the following configuration defines a rule that creates a log entry every time a file is deleted or renamed by a system user whose ID is 500 or larger:
+For example, the following configuration defines a rule that creates a log entry every time a file is deleted or renamed by a system user whose ID is 1000 or larger:
 
 .. code-block:: console
 
-   # auditctl -a always,exit -F arch=b64 -S unlink -S unlinkat -S rename -S renameat -F "auid>=500" -F auid!=4294967295 -k delete
+   # auditctl -a always,exit -F arch=b64 -S unlink -S unlinkat -S rename -S renameat -F "auid>=1000" -F auid!=4294967295 -k delete
 
-The above command is executed on a Linux system with the Linux Audit subsystem (auditd) enabled and a 64‑bit architecture. To run the command on a 32-bit system, set ``-F arch=32``.
+The above command is executed on a Linux system with the Linux Audit subsystem (auditd) enabled and a 64‑bit architecture. To run the command on a 32-bit system, set ``-F arch=b32``.
 
 .. Note::
    ``-F auid!=4294967295`` option is used to exclude users whose login UID is not set.
@@ -155,4 +155,4 @@ It is also possible to define a file system rule using the system call rule synt
 
 .. code-block:: console
 
-   # auditctl -a always,exit -F path=/etc/shadow -F perm=wa
+   # auditctl -a always,exit -F path=/etc/shadow -F perm=wa -k shadow_changes
