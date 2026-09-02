@@ -18,6 +18,7 @@ import time
 import json
 import atexit
 from urllib.request import urlretrieve
+from urllib.parse import urljoin
 try:
     from jsmin import jsmin
 except ImportError:
@@ -628,6 +629,42 @@ def setup(app):
     patch_markdown_translator_unhandled_nodes()
 
     app.connect('html-page-context', pagefind_custom_weights)
+
+    app.connect('html-page-context', absolutize_breadcrumb_parents)
+
+def absolutize_breadcrumb_parents(app, pagename, templatename, context, doctree):
+    ''' Runs once per page, computing an absolute-URL version of each BreadcrumbList
+        parent for the JSON-LD structured data emitted in layout.html. Sphinx's
+        `parents` context entries carry a `link` that is a scheme-less, relative URI
+        computed relative to the *current* page (via `sphinx.util.osutil.relative_uri()`),
+        which is not valid as-is inside a `BreadcrumbList.itemListElement[].item` value.
+        Stored under a new context key (`breadcrumb_items_absolute`) so the original
+        `parents` list -- consumed as-is by the visible breadcrumb nav in
+        template-parts/breadcrumbs.html -- is left untouched. '''
+    special_pages = ['index', 'not_found', 'search']
+    if version >= '4.0':
+        special_pages += [
+            'cloud-service/apis/reference',
+            'user-manual/api/reference',
+            'user-manual/indexer-api/reference'
+        ]
+
+    if pagename in special_pages or pagename == 'moved-content':
+        return
+
+    sitemap_version = version
+    if is_latest_release == True:
+        sitemap_version = 'current'
+
+    base_url = html_theme_options.get('wazuh_doc_url') + '/' + sitemap_version + '/' + pagename + '.html'
+
+    breadcrumb_items_absolute = []
+    for item in context.get('parents', []):
+        breadcrumb_items_absolute.append({
+            'title': item['title'],
+            'item': urljoin(base_url, item['link'])
+        })
+    context['breadcrumb_items_absolute'] = breadcrumb_items_absolute
 
 def pagefind_custom_weights(app, pagename, templatename, context, doctree):
     ''' Runs once per page, inserting the attribute to customize the weights of certain elements in the Pagefind search index '''

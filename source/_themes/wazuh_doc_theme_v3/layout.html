@@ -252,8 +252,8 @@
       {
         "@context": "https://schema.org", "@type": "BreadcrumbList",
         "itemListElement": [
-          {%- for item in parents %}{% if not loop.first %},{% endif %}
-          {"@type": "ListItem", "position": {{ loop.index }}, "name": {{ item.title|tojson }}, "item": {{ item.link|tojson }}}
+          {%- for item in breadcrumb_items_absolute %}{% if not loop.first %},{% endif %}
+          {"@type": "ListItem", "position": {{ loop.index }}, "name": {{ item.title|tojson }}, "item": {{ item.item|tojson }}}
           {%- endfor %}
         ]
       }
