@@ -47,6 +47,17 @@ Wazuh manager
 -  `#36311 <https://github.com/wazuh/wazuh/issues/36311>`__ Changed the default Indexer user used by the Manager from ``admin`` to the restricted ``wazuh-server`` user, aligning with the Indexer RBAC least-privilege model.
 -  `#36705 <https://github.com/wazuh/wazuh/issues/36705>`__ Enabled shared-password agent enrollment by default, persisting the auto-generated ``authd.pass`` and synchronizing it to worker nodes, with fail-closed password validation.
 -  `#32698 <https://github.com/wazuh/wazuh/issues/32698>`__ Adapted API integration tests.
+-  `#38260 <https://github.com/wazuh/wazuh/issues/38260>`__ Added HTTPS communication between Wazuh agents and the manager: a new HTTPS transport, protocol, and control plane (connection, configuration, statistics, task dispatch, remote upgrade, and event ingestion) replacing the legacy MQ/DGRAM-based agent-manager protocol end to end.
+-  `#38023 <https://github.com/wazuh/wazuh/issues/38023>`__ Added the ``POST /config`` HTTPS endpoint, which receives an agent's reported configuration and indexes it into ``wazuh-agent-config``.
+-  `#38024 <https://github.com/wazuh/wazuh/issues/38024>`__ Added the ``POST /stats`` HTTPS endpoint, which persists the statistics an agent reports as one document per agent in the ``wazuh-agent-stats`` index, replacing the previous report on every push.
+-  `#38007 <https://github.com/wazuh/wazuh/issues/38007>`__ Added legacy ``remote_upgrade`` task delivery in ``remoted``: a polling thread pushes pending Task Manager tasks to connected agents older than v5.0.0 over their existing session using the legacy six-step WPK push, gated on ``remoted``'s HTTPS ``verification_mode``.
+-  `#38157 <https://github.com/wazuh/wazuh/issues/38157>`__ Added installation-time variables to customize the default ``<remote>`` configuration on source, DEB, and RPM manager installations.
+-  `#38553 <https://github.com/wazuh/wazuh/issues/38553>`__ Added the ``PUT /agents/scan/vulnerability`` endpoint to trigger an on-demand vulnerability scan for one agent, a list of agents, or all agents.
+-  `#38091 <https://github.com/wazuh/wazuh/issues/38091>`__ Raised the minimum TLS protocol version accepted by ``wazuh-manager-authd`` (agent enrollment) to TLS 1.3, removed the ``ssl_auto_negotiate`` fallback and its ``-a`` CLI flag, and changed ``<auth><ciphers>`` to a TLS 1.3 ciphersuite list.
+-  `#36453 <https://github.com/wazuh/wazuh/issues/36453>`__ Increased the minimum API user password length from 8 to 12 characters to align with PCI DSS.
+-  `#38436 <https://github.com/wazuh/wazuh/issues/38436>`__ Standardized the manager's Unix socket names and layout: every socket ends in ``.sock``, carries an ``-http`` marker when it speaks HTTP, and lives in ``queue/sockets/``. The sockets that were under ``queue/db/``, ``queue/tasks/`` and ``queue/cluster/`` moved there, leaving those directories holding only their data. An upgraded installation keeps the old socket files as dead entries until a clean install.
+-  `#38024 <https://github.com/wazuh/wazuh/issues/38024>`__ Removed the ``GET /agents/{agent_id}/stats/{component}`` API endpoint. Agent statistics are read from the ``wazuh-agent-stats`` index.
+-  `#37052 <https://github.com/wazuh/wazuh/issues/37052>`__ Added byte-based capacity limits to ``wazuh-manager-remoted``.
 
 Wazuh agent
 ^^^^^^^^^^^
@@ -63,6 +74,13 @@ Wazuh agent
 -  `#31582 <https://github.com/wazuh/wazuh/issues/31582>`__ Removed NSIS-based Windows agent installer; Windows agent now ships exclusively as an MSI package.
 -  `#35880 <https://github.com/wazuh/wazuh/issues/35880>`__ Reduced ``wazuh-agent`` Debian package dependencies, removing ``adduser``, ``lsb-release``, and ``debconf``.
 -  `#35471 <https://github.com/wazuh/wazuh/issues/35471>`__ Standardized agent-start and buffer-status events to a WCS-aligned JSON format.
+-  `#37828 <https://github.com/wazuh/wazuh/issues/37828>`__ Added an agent HTTPS client covering the ``/control`` lifecycle, the ``/stateless`` and ``/stateful`` data planes, ``/download`` for centralized configuration and WPK packages, task dispatch with durable deduplication, and remote upgrade, with AES-CMAC request signing and fail-closed TLS validation. `#37830 <https://github.com/wazuh/wazuh/issues/37830>`__ `#37832 <https://github.com/wazuh/wazuh/issues/37832>`__ `#37833 <https://github.com/wazuh/wazuh/issues/37833>`__ `#37834 <https://github.com/wazuh/wazuh/issues/37834>`__ `#37835 <https://github.com/wazuh/wazuh/issues/37835>`__ `#37836 <https://github.com/wazuh/wazuh/issues/37836>`__
+-  `#37843 <https://github.com/wazuh/wazuh/issues/37843>`__ Added periodic ``/stats`` and ``/config`` push, reporting every module's statistics and configuration in a single aggregated document per endpoint, behind two ``ossec.conf`` toggles that are off by default.
+-  `#37831 <https://github.com/wazuh/wazuh/issues/37831>`__ Changed the agent transport to HTTPS for all server communication, removing the legacy TCP data path and its internal-option fallback.
+-  `#38465 <https://github.com/wazuh/wazuh/issues/38465>`__ Changed agent enrollment to consume the manager's HTTPS ``POST /enroll`` endpoint instead of the legacy ``A:``/``K:`` protocol over TCP/1515, reusing the same ``<agent><ssl>``/``<agent><server>`` transport as the rest of the agent's HTTPS traffic.
+-  `#38624 <https://github.com/wazuh/wazuh/issues/38624>`__ Changed the ``WAZUH_MANAGER_ENDPOINT`` installation variable to carry the whole connection target — ``host[:port][/prefix]``, with only the address mandatory — which the DEB/RPM, source and MSI installers write verbatim into the agent's single ``<endpoint>`` setting. It supersedes ``WAZUH_MANAGER`` and ``WAZUH_MANAGER_PORT`` when set, and those keep working unchanged when it is not. A trailing slash (``host/``) opts out of the reverse-proxy prefix. Replaces the variable's previous prefix-only meaning.
+-  `#38091 <https://github.com/wazuh/wazuh/issues/38091>`__ Removed the ``<enrollment><auto_method>`` option; enrollment now always requires TLS 1.3, so there is nothing left for it to negotiate down to. The ``ssl_cipher`` option now expects a TLS 1.3 ciphersuite list instead of an OpenSSL cipher-list string.
+-  `#38465 <https://github.com/wazuh/wazuh/issues/38465>`__ Removed the ``<enrollment>`` ``manager_address``, ``port``, ``interface_index``, ``ssl_cipher``, ``server_certificate_path``, ``agent_certificate_path``, and ``agent_key_path`` options; enrollment now always targets the same manager and TLS configuration as the rest of the agent's HTTPS traffic. A 4.x ``ossec.conf`` carrying them still parses without error after an in-place upgrade.
 
 Wazuh indexer
 ^^^^^^^^^^^^^
@@ -118,6 +136,7 @@ Wazuh indexer
 -  `#1582 <https://github.com/wazuh/wazuh-indexer/issues/1582>`__ ``StreamTransportService`` not available warnings.
 -  `#1577 <https://github.com/wazuh/wazuh-indexer/issues/1577>`__ SLF4J "no provider" warnings during startup.
 -  `#1272 <https://github.com/wazuh/wazuh-indexer-plugins/issues/1272>`__ Remove non-essential plugins.
+-  `#1422 <https://github.com/wazuh/wazuh-indexer-plugins/issues/1422>`__ AI assistant support.
 
 
 Plugins
@@ -253,6 +272,15 @@ Plugins
 -  `#689 <https://github.com/wazuh/wazuh-indexer-plugins/issues/689>`__ Removal of alerts and archives index templates.
 -  `#1348 <https://github.com/wazuh/wazuh-indexer-plugins/issues/1348>`__ Make Unclassified events standard WCS category.
 -  `#1354 <https://github.com/wazuh/wazuh-indexer-plugins/issues/1354>`__ Some Wazuh indices get 1 replica on multi-node clusters due to ``auto_expand_replicas``.
+-  `#1376 <https://github.com/wazuh/wazuh-indexer-plugins/issues/1376>`__ Load standard space into all cluster nodes.
+-  `#1422 <https://github.com/wazuh/wazuh-indexer-plugins/issues/1422>`__ AI assistant support.
+-  `#1419 <https://github.com/wazuh/wazuh-indexer-plugins/issues/1419>`__ Create the ``wazuh-agent-config`` index.
+-  `#1413 <https://github.com/wazuh/wazuh-indexer-plugins/issues/1413>`__ Added ``previous`` value fields to the WCS for process, service, and package inventory changes.
+-  `#1425 <https://github.com/wazuh/wazuh-indexer-plugins/issues/1425>`__ Create the ``wazuh-agent-stats`` index.
+-  `#1458 <https://github.com/wazuh/wazuh-indexer-plugins/issues/1458>`__ Rename the ``metrics-comms`` stream to ``wazuh-metrics-comms-v4``.
+-  `#1740 <https://github.com/wazuh/wazuh-indexer/issues/1740>`__ Reduce the IoCs and ruleset memory footprint.
+-  `#1351 <https://github.com/wazuh/wazuh-indexer-plugins/issues/1351>`__ Reduce snapshot ingestion overhead with partial JSON parsing.
+-  `#1420 <https://github.com/wazuh/wazuh-indexer-plugins/issues/1420>`__ Remove maximum values from Content Manager settings.
 
 
 Security analytics
@@ -291,6 +319,7 @@ Security analytics
 -  `#1121 <https://github.com/wazuh/wazuh-indexer-plugins/issues/1121>`__ ``rule`` and ``threat`` fields alignment.
 -  `#219 <https://github.com/wazuh/wazuh-indexer-security-analytics/issues/219>`__ Undocumented plugin settings.
 -  `#38 <https://github.com/wazuh/wazuh-indexer-security-analytics/issues/38>`__ Content Management API updates.
+-  `#1420 <https://github.com/wazuh/wazuh-indexer-plugins/issues/1420>`__ Remove hard-coded upper bounds on resource limit settings.
 
 
 Notifications
@@ -306,6 +335,7 @@ Notifications
 -  `#101 <https://github.com/wazuh/wazuh-indexer-notifications/issues/101>`__ Active response events completeness.
 -  `#1276 <https://github.com/wazuh/wazuh-indexer-plugins/issues/1276>`__ Configurable resource creation limits.
 -  `#1368 <https://github.com/wazuh/wazuh-indexer/issues/1368>`__ Update Actions using Node.js 20.
+-  `#1420 <https://github.com/wazuh/wazuh-indexer-plugins/issues/1420>`__ Remove hard-coded upper bounds on resource limit settings.
 
 
 Alerting
@@ -348,18 +378,21 @@ Wazuh dashboard
 ^^^^^^^^^^^^^^^
 
 -  `#811 <https://github.com/wazuh/wazuh-dashboard/pull/811>`__ `#866 <https://github.com/wazuh/wazuh-dashboard/pull/866>`__ `#961 <https://github.com/wazuh/wazuh-dashboard/pull/961>`__ `#1031 <https://github.com/wazuh/wazuh-dashboard/pull/1031>`__ `#1179 <https://github.com/wazuh/wazuh-dashboard/pull/1179>`__ `#1366 <https://github.com/wazuh/wazuh-dashboard/pull/1366>`__ Added the Health check service.
--  `#870 <https://github.com/wazuh/wazuh-dashboard/pull/870>`__ `#946 <https://github.com/wazuh/wazuh-dashboard/pull/946>`__ `#1366 <https://github.com/wazuh/wazuh-dashboard/pull/1366>`__ `#1379 <https://github.com/wazuh/wazuh-dashboard/pull/1379>`__ Added the Health Check app.
+-  `#870 <https://github.com/wazuh/wazuh-dashboard/pull/870>`__ Added the Health Check app. `#946 <https://github.com/wazuh/wazuh-dashboard/pull/946>`__ `#1366 <https://github.com/wazuh/wazuh-dashboard/pull/1366>`__ `#1379 <https://github.com/wazuh/wazuh-dashboard/pull/1379>`__ `#1504 <https://github.com/wazuh/wazuh-dashboard/issues/1504>`__
 -  `#998 <https://github.com/wazuh/wazuh-dashboard/pull/998>`__ Added manager host configuration to the default configuration file.
 -  `#1092 <https://github.com/wazuh/wazuh-dashboard/pull/1092>`__ Set the v9 theme as default.
 -  `#805 <https://github.com/wazuh/wazuh-dashboard/issues/805>`__ Changed the location of the ``wazuh-dashboard`` service to match the other Wazuh components.
 -  `#998 <https://github.com/wazuh/wazuh-dashboard/pull/998>`__ Changed the default value of the ``metaFields`` and ``timepicker:timeDefaults`` settings.
 -  `#1278 <https://github.com/wazuh/wazuh-dashboard/pull/1278>`__ `#1279 <https://github.com/wazuh/wazuh-dashboard/pull/1279>`__ Excluded Wazuh dashboards and visualizations listing.
--  Removed creation of ``/usr/lib/.build-id/*`` links to prevent conflicts when installing Wazuh Dashboard alongside OpenSearch Dashboards on the same system.
+-  `#699 <https://github.com/wazuh/wazuh-dashboard/issues/699>`__ Removed creation of ``/usr/lib/.build-id/*`` links to prevent conflicts when installing Wazuh Dashboard alongside OpenSearch Dashboards on the same system.
 -  `#1330 <https://github.com/wazuh/wazuh-dashboard/pull/1330>`__ Changed the log level of the cross compatibility service on start.
 -  `#1328 <https://github.com/wazuh/wazuh-dashboard/pull/1328>`__ `#1365 <https://github.com/wazuh/wazuh-dashboard/pull/1365>`__ Changed pre install scripts to block Wazuh dashboard installation if there's an existing installation prior to 5.x.
 -  `#1382 <https://github.com/wazuh/wazuh-dashboard/pull/1382>`__ Removed the Anomaly Detection plugin from the default Wazuh dashboard package.
 -  `#1327 <https://github.com/wazuh/wazuh-dashboard/pull/1327>`__ `#1421 <https://github.com/wazuh/wazuh-dashboard/pull/1421>`__ Added version, revision, and stage to the Wazuh build metadata.
 -  `#1434 <https://github.com/wazuh/wazuh-dashboard/issues/1434>`__ Made the Discover CSV download row limit configurable via the ``reports.csv.maxRows`` setting.
+-  `#1480 <https://github.com/wazuh/wazuh-dashboard/issues/1480>`__ Added automatic generation and storage of the AI assistant encryption key on first install.
+-  `#8979 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/8979>`__ Changed the sidecar flyout to displace open flyouts instead of covering them.
+-  `#8989 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/8989>`__ Changed the sidecar resizable button emphasis styles to trigger on ``:active`` instead of ``:focus``.
 
 Plugins
 ~~~~~~~
@@ -371,7 +404,7 @@ Plugins
 -  Added a **Not applicable** status to the SCA ``CheckResult`` enum, including color mapping (``#B9A888``) and sample data support.
 -  `#7833 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7833>`__ Added alerting sample monitors to the health check.
 -  `#7917 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7917>`__, `#7975 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7975>`__, `#7990 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7990>`__, `#7994 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7994>`__ Added the **Normalization** application.
--  `#7924 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7924>`__ Added the default ``wazuh-events*`` index pattern.
+-  `#7924 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7924>`__ Added the default ``wazuh-events-v5*`` index pattern. `#8512 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/8512>`__
 -  `#7848 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7848>`__ Adapted alerts sample data to the Wazuh Common Schema.
 -  `#7701 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7701>`__, `#8147 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8147>`__ Set cluster mode as the default for all Wazuh installations, including single-node deployments, and updated RBAC permissions to ``cluster:*`` actions.
 -  `#7602 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7602>`__, `#7929 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7929>`__, `#7974 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7974>`__, `#7979 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7979>`__, `#8242 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8242>`__, `#8306 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8306>`__ `#8382 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8382>`__ `#8472 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8472>`__ `#8661 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8661>`__ Reworked SCA module visualizations, enabled global details for all agents without pinning, replaced the ``/sca`` endpoint with the ``wazuh-states-sca-*`` index pattern, and added sample data support.
@@ -403,7 +436,7 @@ Plugins
 -  `#7901 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7901>`__ Removed the **Rules**, **Decoders**, **CDB List**, and **Ruleset test** applications.
 -  `#7899 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7899>`__ Removed the legacy reporting application, including server routes, UI, PDF generation logic, and related customization settings.
 -  `#7932 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7932>`__, `#8271 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8271>`__ Removed several sections from **Server Management** > **Settings** and agent configuration.
--  `#7933 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7933>`__ Removed the ``wazuh-alerts*`` index pattern and replaced it with ``wazuh-events*`` as the default. Index pattern selection is now handled per module.
+-  `#7933 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7933>`__ Removed the ``wazuh-alerts*`` index pattern and replaced it with ``wazuh-events-v5*`` as the default. Index pattern selection is now handled per module. `#8512 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/8512>`__
 -  `#7933 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7933>`__ Removed deprecated ``ip.ignore`` and ``pattern`` settings.
 -  `#7977 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7977>`__ Removed references to alerts and archives templates.
 -  `#7857 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7857>`__, `#7868 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7868>`__, `#7891 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7891>`__, `#7982 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7982>`__ Removed indexer resource files from the source code and dependency installation process.
@@ -415,7 +448,7 @@ Plugins
 -  `#8233 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8233>`__ `#8520 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8520>`__ `#8577 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8577>`__ Added ``wazuh-findings-v5*`` index patterns.
 -  `#8264 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8264>`__ Added ``policy.name``, ``policy.description``, ``policy.file`` and ``event.outcome`` columns to the Configuration Assessment Findings table.
 -  `#8248 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8248>`__ Added ``wazuh-state-fim*`` index pattern.
--  `#8066 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8066>`__ `#8512 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8512>`__ Changed default index pattern settings key from ``defaultIndex`` to ``wazuh-events*``.
+-  `#8066 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8066>`__ Changed default index pattern settings key from ``defaultIndex`` to ``wazuh-events-v5*``. `#8512 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8512>`__
 -  `#8081 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8081>`__ `#8408 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8408>`__ Updated Office 365 dashboards to use new index pattern.
 -  `#8072 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8072>`__ `#8354 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8354>`__ `#8420 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8420>`__ Updated GitHub dashboards to use new index pattern.
 -  `#8074 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8074>`__ `#8247 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8247>`__ `#8496 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8496>`__ Updated File Integrity Monitoring dashboards to use new index pattern.
@@ -433,8 +466,8 @@ Plugins
 -  `#8157 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8157>`__ `#8335 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8335>`__ `#8568 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8568>`__ `#8606 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8606>`__ `#8628 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8628>`__ `#8633 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8633>`__ `#8674 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/8674>`__ `#8703 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8703>`__ Updated Malware Detection dashboard with new index pattern definition.
 -  `#8175 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8175>`__ `#8209 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8209>`__ Removed Manager UUID from Server APIs table and added Cluster UUID on About page.
 -  `#8146 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8146>`__ Updated Security Operations dashboards with new index pattern definition.
--  `#8224 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8224>`__ Changed the monitoring and statistics index patterns to ``wazuh-metrics-agents*`` and ``wazuh-metrics-comms*``.
--  `#8231 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8231>`__ Renamed ``Events`` tab to ``Findings``.
+-  `#8224 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8224>`__ Changed the monitoring and statistics index patterns to ``wazuh-metrics-agents*`` and ``wazuh-metrics-comms-v4*``; Comms metrics now only refer to 4.x agents. `#9022 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/9022>`__
+-  `#8231 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8231>`__ Renamed the **Events** tab to **Findings**. `#8971 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/8971>`__
 -  `#8232 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8232>`__ Replaced the broken visualization in Configuration Assessment.
 -  `#8230 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8230>`__ Swapped menu positions of Vulnerability detection and MITRE ATT&CK.
 -  `#8220 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8220>`__ Removed the Cluster app and relocated some panels to the Status app.
@@ -475,7 +508,7 @@ Plugins
 -  `#8350 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8350>`__ Set the downloaded local agent package name to match the remote one.
 -  `#8417 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8417>`__ Changed FIM findings default columns.
 -  `#8436 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8436>`__ Allowed only one server API configuration per indexer.
--  `#8459 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8459>`__ Updated the OS icon source field in the Endpoints summary table to display Linux agent icons.
+-  `#8459 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8459>`__ Updated the OS icon source field in the Endpoints summary table to display Linux agent icons. `#8992 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/8992>`__
 -  `#8254 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8254>`__ Reworked the Statistics dashboard.
 -  `#8498 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8498>`__ Updated the breadcrumb label in **Agents management** > **Summary**.
 -  `#8524 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8524>`__ Renamed Listener Engine tab to Comms in **Server management** > **Statistics** section.
@@ -494,6 +527,26 @@ Plugins
 -  `#8573 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8573>`__ `#8617 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8617>`__ Updated MITRE ATT&CK dashboards to use techniques, subtechniques and tactics names.
 -  `#8616 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8616>`__ Condensed the setting labels and added info tooltips in the registration service configuration view.
 -  `#8706 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8706>`__ Adapted management of daemons status to the new API response schema.
+-  `#8285 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/8285>`__ Changed the last alerts home KPI's title to **Findings**.
+-  `#7741 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/7741>`__ Added "Not applicable" status to the SCA ``CheckResult`` enum, with corresponding color mapping (``#B9A888``) and sample data support.
+-  `#8228 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/8228>`__ Centralized regulatory compliance modules (PCI DSS, GDPR, HIPAA, NIST 800-53, and TSC) into a single "Regulatory Compliance" application.
+-  `#8806 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/8806>`__ Changed the Users form password validation to require a minimum of 12 characters, matching the manager RBAC policy.
+-  `#8836 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/8836>`__ Removed the agents table ``Synced`` column and the agent configuration synchronization badge, deprecated with the ``group_config_status`` and ``mergedSum`` properties of the ``/agents`` endpoint.
+-  `#8840 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/8840>`__ Removed the usage of the deprecated agent configuration synchronization properties: ``data.configuration`` from ``agents/summary/status``, and ``agent_status.configuration`` and ``last_registered_agent.mergedSum`` from ``/overview/agents``.
+-  `#8846 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/8846>`__ Added the ``wazuh-agent-stats`` index pattern and a sample data generator for the agent statistics index, and changed the endpoint stats view to read the agent statistics from that index instead of the removed server API endpoints.
+-  `#8856 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/8856>`__ Added a success notification when an agent upgrade completes in **Agent management** > **Summary**, based on polling the agent's reported version instead of the removed upgrade task tracking (in-progress panel, task details modal, and ``task_id`` from upgrade responses), since the Wazuh Server API no longer exposes ``/tasks/status``.
+-  `#8956 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/8956>`__ Removed the usage of the deprecated agent ``node_name`` property (the ``Cluster node`` column of the agents table, the ``Cluster node`` field of the agent details, the ``node_name`` search bar suggestion and CSV column, and the ``node_name`` field requested to the ``/agents`` endpoint) and the deprecated ``GET /agents/{agent_id}/daemons/stats`` endpoint from the API reference and the security actions metadata.
+-  `#8961 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/8961>`__ Added the ``dispatched`` and ``failed`` task counters to the agent Stats tab.
+-  `#9020 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/9020>`__ Added a "Scan vulnerabilities" action to request an on-demand vulnerability scan for one or multiple agents from the agents table.
+-  `#9042 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/9042>`__ Improved the AI assistant explanatory answers: event substance (rule descriptions, command lines, vulnerability descriptions, integration category) now reaches the model, empty-result turns return written answers instead of canned copy, the final-answer instruction survives system-message hoisting, the 13 ``wazuh-states-*`` surfaces are queryable and discoverable, agent names resolve for id-only tools, and resolver ambiguity errors are scrubbed under privacy mode.
+-  `#9053 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/9053>`__ Adapted the agent Communication view and the Deploy new agent wizard to the unified agent ``<endpoint>``: the view renders the single reported endpoint instead of the ``address``/``port`` table, and the wizard collects the address, port, and path prefix separately and generates ``WAZUH_MANAGER_ENDPOINT``. Removed the ``WAZUH_PROTOCOL`` parameter.
+-  `#9061 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/9061>`__ Added the HTTPS, legacy, and agents settings sections to **Server management** > **Settings** > **Global configuration** > **Remote**.
+-  `#9067 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/9067>`__ Added a ``wazuh_ai_assistant.settingsReadOnly`` configuration key to lock AI Assistant settings and providers to their current configuration, rejecting write requests regardless of the caller's own indexer permissions.
+-  `#9074 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/9074>`__ Changed the case management comment header to always show the creation date, with the edit date now shown in a tooltip on an italic "Edited" label.
+-  `#8789 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/8789>`__ Added the Wazuh AI Assistant plugin. `#9057 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/9057>`__ `#9065 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/9065>`__
+-  `#8760 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/8760>`__ Reworked the Home page overview with more platform metrics. `#8792 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/8792>`__ `#8795 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/8795>`__ `#8860 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/8860>`__ `#8949 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/8949>`__ `#8979 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/8979>`__ `#9014 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/9014>`__
+-  `#8851 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/8851>`__ Changed agent configuration to read from ``wazuh-agent-config``, replacing the client buffer with batch settings, showing when the agent last reported, and prompting when it never reported. `#8962 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/8962>`__
+-  `#9040 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/9040>`__ Changed the agent Office 365 and GitHub Overview configuration panels to read the agent's reported configuration from the ``wazuh-agent-config*`` index pattern instead of the Server API, telling apart the not reported, not configured, and read failed states, linking to the module documentation, and reporting an enabled GitHub module as enabled. `#9056 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/9056>`__
 
 Resolved issues
 ---------------
@@ -509,6 +562,10 @@ Wazuh manager
 -  `#35043 <https://github.com/wazuh/wazuh/issues/35043>`__ Fixed token validation race condition after revoke.
 -  `#35638 <https://github.com/wazuh/wazuh/issues/35638>`__ Handled the stop signal during vulnerability feed download.
 -  `#37521 <https://github.com/wazuh/wazuh/issues/37521>`__ Fixed ``GET /cluster/{node_id}/daemons/stats`` always returning error 1014 for ``wazuh-manager-analysisd`` due to a protocol mismatch between ``WazuhSocketJSON`` and the engine's HTTP API socket.
+-  `#38511 <https://github.com/wazuh/wazuh/issues/38511>`__ Fixed world-writable permissions on bundled Python files after DEB installation, caused by the permission restoration script following symlinks.
+-  `#38547 <https://github.com/wazuh/wazuh/issues/38547>`__ Fixed the API serving its OpenAPI specification and exact version at ``/openapi.json`` and ``/openapi.yaml`` without authentication.
+-  `#38565 <https://github.com/wazuh/wazuh/issues/38565>`__ Bounded the ``search`` query parameter to 1024 characters across every endpoint that accepts it, fixed the API's ``wazuh-db`` socket client raising an unhandled error instead of a clean ``500`` when ``wazuh-db`` closes the connection on an oversized request, and stopped the API from returning ``wazuh-db``'s raw backend error text (including SQL fragments) to the caller.
+-  `#38592 <https://github.com/wazuh/wazuh/issues/38592>`__ Fixed the legacy ``remote_upgrade`` task delivery in ``remoted`` silently losing an agent's upgrade task when the push failed after the Task Manager had already marked it delivered, and fixed the agent's own reported upgrade failures being logged at ``INFO``, where severity-filtered monitoring never saw them, instead of ``WARNING``. ``remoted`` now owns a task's delivery retries end to end once it has read it: a rejection is retried up to 5 times in-memory within the same poll cycle, while a true no-response is deferred to a small in-memory retry list a later poll cycle picks back up, instead of blocking that cycle's sweep of every other agent. A task that exhausts every retry avenue is simply logged and dropped, never reported back to the Task Manager.
 
 Wazuh agent
 ^^^^^^^^^^^
@@ -537,6 +594,15 @@ Wazuh agent
 -  `#37653 <https://github.com/wazuh/wazuh/issues/37653>`__ Lowered the ``wazuh-agentd`` connection socket error log to debug level to avoid duplicating the "Lost connection with manager" error on transient disconnections.
 -  `#37626 <https://github.com/wazuh/wazuh/issues/37626>`__ Fixed a race condition when saving the Logcollector file status on shutdown.
 -  `#37656 <https://github.com/wazuh/wazuh/issues/37656>`__ Fixed an unbounded memory leak in ``wazuh-modulesd`` caused by a missing RPM macro context cleanup on every package scan cycle.
+-  `#37543 <https://github.com/wazuh/wazuh/issues/37543>`__ Fixed agent-info module caching ``cluster_name``, ``cluster_node``, and ``agent_groups`` from a one-time handshake at startup, causing stale values in ``agent_metadata`` until the agent process restarted.
+-  `#37993 <https://github.com/wazuh/wazuh/issues/37993>`__ Fixed ``wazuh-syscheckd`` failing the ``file_entry.checksum`` NOT NULL constraint when the deferred sync-flag update ran for an entry deleted during the scan.
+-  `#37993 <https://github.com/wazuh/wazuh/issues/37993>`__ Fixed ``wazuh-syscheckd`` failure on shutdown, which logged "Invalid handle value", crashed the process, and left a stale PID file.
+-  `#38163 <https://github.com/wazuh/wazuh/issues/38163>`__ Fixed ``wazuh-agentd`` crashing on start when the agent metadata segment could only be opened read-only, which happens whenever a root process creates it before the daemon drops privileges.
+-  `#38065 <https://github.com/wazuh/wazuh/issues/38065>`__ Fixed SCA and Syscollector sync threads not blocking ``SIGTERM``, which could cause the shutdown handler to run on a module thread instead of the main thread and time out joining it.
+-  `#38212 <https://github.com/wazuh/wazuh/issues/38212>`__ Fixed the Windows agent leaving the FIM synchronization database open when the service stopped, which left the ``queue\`` directory behind after an uninstall without purge.
+-  `#38646 <https://github.com/wazuh/wazuh/issues/38646>`__ Fixed SCA HIPAA compliance mappings across policy checks.
+-  `#38736 <https://github.com/wazuh/wazuh/issues/38736>`__ Fixed two CIS Amazon Linux 2023 SCA checks (``gpgcheck``, ``vsftpd``) reporting false-positives on compliant systems.
+-  `#38600 <https://github.com/wazuh/wazuh/issues/38600>`__ Removed the default ``netstat`` and ``last`` command monitoring entries, which depend on binaries not present on every supported platform (e.g. minimal container images), causing repeated failed executions every ``frequency`` cycle.
 
 Wazuh indexer
 ^^^^^^^^^^^^^
@@ -593,6 +659,14 @@ Plugins
 -  `#1373 <https://github.com/wazuh/wazuh-indexer-plugins/issues/1373>`__ [BUG] Promotion changes on fresh install.
 -  `#1362 <https://github.com/wazuh/wazuh-indexer-plugins/issues/1362>`__ [BUG] Missing threat-intel indices.
 -  `#1353 <https://github.com/wazuh/wazuh-indexer-plugins/issues/1353>`__ Update the Content Manager OpenAPI (``openapi.yml``) to match the current API.
+-  `#1383 <https://github.com/wazuh/wazuh-indexer-plugins/issues/1383>`__ [BUG] Vulnerability Detection empty for all agents after a transient snapshot bootstrap failure.
+-  `#1394 <https://github.com/wazuh/wazuh-indexer-plugins/issues/1394>`__ [BUG] ``enabled`` flag not evaluated on various resource-related operations.
+-  `#1410 <https://github.com/wazuh/wazuh-indexer-plugins/issues/1410>`__ [BUG] Log test does not use manually enabled integrations.
+-  `#1403 <https://github.com/wazuh/wazuh-indexer-plugins/issues/1403>`__ [BUG] User's enabled state is lost on CTI updates.
+-  `#1773 <https://github.com/wazuh/wazuh-indexer/issues/1773>`__ [BUG] Undefined state if a node is restarted while the standard space hash is being calculated.
+-  `#1449 <https://github.com/wazuh/wazuh-indexer/issues/1449>`__ [BUG] Fix issues in workflows.
+-  `#1828 <https://github.com/wazuh/wazuh-indexer/issues/1828>`__ Failed to save/update ``ManagedIndexMetaData``.
+-  `#1476 <https://github.com/wazuh/wazuh-indexer-plugins/issues/1476>`__ [BUG] ``wazuh-threatintel-enrichments-a`` is never created, so the CTI writer auto-creates a dynamically mapped index under the alias name and the home overview's Threat catalog fails.
 
 
 Security analytics
@@ -609,6 +683,13 @@ Security analytics
 -  `#127 <https://github.com/wazuh/wazuh-indexer-security-analytics/issues/127>`__ [BUG] Rules using ``contains`` and white spaces do not work.
 -  `#168 <https://github.com/wazuh/wazuh-indexer-security-analytics/issues/168>`__ RCA: missing findings.
 -  `#1150 <https://github.com/wazuh/wazuh-indexer-plugins/issues/1150>`__ ClassCastException during Security Analytics space resource deletion on startup.
+-  `#1394 <https://github.com/wazuh/wazuh-indexer-plugins/issues/1394>`__ [BUG] ``enabled`` flag not evaluated on various resource-related operations.
+-  `#1730 <https://github.com/wazuh/wazuh-indexer/issues/1730>`__ Correlations logged errors when index bootstrap failed transiently.
+-  `#37939 <https://github.com/wazuh/wazuh/issues/37939>`__ Findings are missing structured MITRE tactics and technique fields.
+-  `#282 <https://github.com/wazuh/wazuh-indexer-security-analytics/issues/282>`__ [BUG] Failed to initialize LogType config index and builtin log types: all shards failed.
+-  `#1403 <https://github.com/wazuh/wazuh-indexer-plugins/issues/1403>`__ [BUG] A disabled detector cannot be created because its enabled time is always set.
+-  `#1403 <https://github.com/wazuh/wazuh-indexer-plugins/issues/1403>`__ [BUG] A user's Start/Stop of a standard detector is lost on CTI updates.
+-  `#285 <https://github.com/wazuh/wazuh-indexer-security-analytics/issues/285>`__ Fixed detectors never creating findings for Sigma rules with space-containing values.
 
 
 Notifications
@@ -625,6 +706,9 @@ Alerting
 -  `#168 <https://github.com/wazuh/wazuh-indexer-security-analytics/issues/168>`__ RCA: missing findings.
 -  `#1577 <https://github.com/wazuh/wazuh-indexer/issues/1577>`__ SLF4J "no provider" warnings during startup.
 -  `#1746 <https://github.com/wazuh/wazuh-indexer/issues/1746>`__ java.lang.OutOfMemoryError: Java heap space in Soak agent tests.
+-  `#1770 <https://github.com/wazuh/wazuh-indexer/issues/1770>`__ Improved logs based on analysis.
+-  `#1731 <https://github.com/wazuh/wazuh-indexer/issues/1731>`__ Fixed unresolved write-index alias errors in document-level monitors. `#1730 <https://github.com/wazuh/wazuh-indexer/issues/1730>`__
+-  `#1730 <https://github.com/wazuh/wazuh-indexer/issues/1730>`__ Fixed noisy error logs and workflow failures caused by lock acquisition race conditions.
 
 
 Reporting
@@ -641,6 +725,7 @@ Common utils
 
 -  `#16 <https://github.com/wazuh/wazuh-indexer-common-utils/issues/16>`__ CodeQL failures.
 -  `#23 <https://github.com/wazuh/wazuh-indexer-common-utils/issues/23>`__ ``gh pr merge`` called with empty URL in ``5_bumper_repository.yml``.
+-  `#285 <https://github.com/wazuh/wazuh-indexer-security-analytics/issues/285>`__ No finding generated for a matching detection rule (Intune non-compliant device).
 
 
 Wazuh dashboard
@@ -672,6 +757,14 @@ Plugins
 -  `#8610 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8610>`__ Fixed FIM visualizations height.
 -  `#8653 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8653>`__ Fixed the GitHub link in the About page pointing to the legacy ``wazuh-kibana-app`` repository.
 -  `#8699 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/8699>`__ Fixed SCA module columns width.
+-  `#1520 <https://github.com/wazuh/wazuh-dashboard/issues/1520>`__ Added the missing ``Secure`` flag to the ``wz-api`` cookie, and added the ``X-Content-Type-Options`` and ``Strict-Transport-Security`` response headers.
+-  `#8766 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/8766>`__ Fixed Server Management Settings crashing or showing a blank page for users without permission to read the manager configuration.
+-  `#8775 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/8775>`__ Fixed the MITRE ATT&CK Framework tab not applying the date range and fetch filters.
+-  `#9015 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/9015>`__ Fixed the Controls tab showing 0 results by adding missing regulatory compliance requirement definitions for PCI DSS, GDPR, HIPAA, NIST 800-53, FedRAMP, ISO 27001, CMMC, TSC, and NIS2, and added an "Others" breakdown showing findings tagged with unrecognized requirement values.
+-  `#9023 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/9023>`__ Fixed sorting not working in the Server management > Security tables (Roles, Policies, Users, and Roles mapping), and removed the sort affordance from columns the server API cannot sort.
+-  `#9037 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/9037>`__ Fixed the Findings data grid crashing and losing every column when a configured column's field does not exist in the index pattern.
+-  `#9048 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/9048>`__ Fixed the Server API proxy reporting rejected requests as server errors: ``POST /api/request`` now answers with the status the Server API returned instead of turning every 400 or 404 into a 500.
+-  `#8708 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/8708>`__ Fixed the Home KPI's visualization persistent filters.
 
 Changelogs
 ----------

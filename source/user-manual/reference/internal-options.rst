@@ -1,1255 +1,523 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: In this section of the Wazuh documentation, you will find all the information related to the internal configuration of Wazuh.
+  :description: In this section of the Wazuh documentation, you will find all the information related to the internal configuration of Wazuh managers and agents.
 
 .. _reference_internal_options:
 
 Internal configuration
 =======================
 
-The main configuration is located in the ``ossec.conf`` file, however some internal configuration features are located in the ``/var/ossec/etc/internal_options.conf`` file.
+The Wazuh internal configuration files contain advanced settings that control the behavior of Wazuh components. These settings are intended for advanced tuning, debugging, performance optimization, and troubleshooting.
 
-Generally, this file is reserved for debugging issues and for troubleshooting. **Any error in this file may cause your installation to malfunction or fail to run.**
+Most Wazuh deployments do not require changes to the internal configuration. Before modifying any internal option, review the corresponding component documentation and change only the settings that are necessary for your environment.
 
-.. note::
-    This file will be overwritten during upgrades.  In order to maintain custom changes, you must use the ``/var/ossec/etc/local_internal_options.conf`` file.
+Wazuh 5.0 uses separate internal configuration files for the manager and the agent.
 
-- `Agent`_
++---------------------------------+--------------------------------------------------------------+
+| Component                       | Configuration file                                           |
++=================================+==============================================================+
+| Wazuh manager                   | /var/wazuh-manager/etc/wazuh-manager-internal-options.conf   |
++---------------------------------+--------------------------------------------------------------+
+| Wazuh agent                     | /var/ossec/etc/internal_options.conf                         |
++---------------------------------+--------------------------------------------------------------+
+| Wazuh agent (local overrides)   | /var/ossec/etc/local_internal_options.conf                   |
++---------------------------------+--------------------------------------------------------------+
+
+- `Wazuh manager internal configuration`_
+- `Wazuh agent internal configuration`_
+
+Wazuh manager internal configuration
+---------------------------------------
+
+The ``/var/wazuh-manager/etc/wazuh-manager-internal-options.conf`` file allows you to override the default internal settings used by Wazuh manager components.
+
+In Wazuh 5.0, the default values for manager internal options are compiled into the manager binaries. The ``wazuh-manager-internal-options.conf`` file is empty by default and should contain only the options that you want to override.
+
+All of the following settings exist in ``/var/wazuh-manager/etc/wazuh-manager-internal-options.conf``. Edit the file and restart the Wazuh manager service for changes to take effect.
+
 - `Analysisd`_
-- `Authd`_
-- `DBD`_
-- `Execd`_
-- `Integrator`_
-- `Logcollector`_
-- `Maild`_
-- `Monitord`_
 - `Remoted`_
-- `Syscheck`_
-- `Rootcheck`_
-- `Security Configuration Assessment`_
-- `Wazuh`_
-- `Wazuh Clusterd`_
-- `Wazuh Database`_
-- `Wazuh Modules`_
-- `Wazuh Command`_
-- `Wazuh-db`_
-- `Wazuh-download`_
-- `Windows`_
-
-.. _internal_options_agent:
-
-Agent
------
-
-+---------------------------+----------------+----------------------------------------------------------------------------------+
-| **agent.tolerance**       | Description    | Number of seconds the agent is full before triggering a flooding alert.          |
-+                           +----------------+----------------------------------------------------------------------------------+
-|                           | Default value  | 15                                                                               |
-+                           +----------------+----------------------------------------------------------------------------------+
-|                           | Allowed value  | Any integer between 0 and 600.                                                   |
-+---------------------------+----------------+----------------------------------------------------------------------------------+
-| **agent.warn_level**      | Description    | Percentage of occupied capacity in agent buffer to trigger a warning alert.      |
-+                           +----------------+----------------------------------------------------------------------------------+
-|                           | Default value  | 90                                                                               |
-+                           +----------------+----------------------------------------------------------------------------------+
-|                           | Allowed value  | Any integer between 1 and 100.                                                   |
-+---------------------------+----------------+----------------------------------------------------------------------------------+
-| **agent.normal_level**    | Description    | Percentage of occupied capacity in agent buffer to return to normal state.       |
-+                           +----------------+----------------------------------------------------------------------------------+
-|                           | Default value  | 70                                                                               |
-+                           +----------------+----------------------------------------------------------------------------------+
-|                           | Allowed value  | Any integer between 0 and *agent.warn_level - 1*.                                |
-+---------------------------+----------------+----------------------------------------------------------------------------------+
-| **agent.min_eps**         | Description    | Minimum events per second permitted in ``<client_buffer>`` configuration.        |
-+                           +----------------+----------------------------------------------------------------------------------+
-|                           | Default value  | 50                                                                               |
-+                           +----------------+----------------------------------------------------------------------------------+
-|                           | Allowed value  | Any integer between 1 and 1000.                                                  |
-+---------------------------+----------------+----------------------------------------------------------------------------------+
-| **agent.recv_timeout**    | Description    | Maximum number of seconds to wait for server response from the TCP client socket.|
-+                           +----------------+----------------------------------------------------------------------------------+
-|                           | Default value  | 60                                                                               |
-+                           +----------------+----------------------------------------------------------------------------------+
-|                           | Allowed value  | Any integer between 1 and 600.                                                   |
-+---------------------------+----------------+----------------------------------------------------------------------------------+
-| **agent.state_interval**  | Description    | The interval between the updates of the agent status file in seconds.            |
-+                           +----------------+----------------------------------------------------------------------------------+
-|                           | Default value  | 5                                                                                |
-+                           +----------------+----------------------------------------------------------------------------------+
-|                           | Allowed values | 0: Disable status file                                                           |
-+                           +                +----------------------------------------------------------------------------------+
-|                           |                | Any other integer between 1 and 86400                                            |
-+---------------------------+----------------+----------------------------------------------------------------------------------+
-| **agent.debug**           | Description    | Run the Unix agent processes in debug mode.                                      |
-+                           +----------------+----------------------------------------------------------------------------------+
-|                           | Default value  | 0                                                                                |
-+                           +----------------+----------------------------------------------------------------------------------+
-|                           | Allowed value  | 0: No debug output.                                                              |
-+                           +                +----------------------------------------------------------------------------------+
-|                           |                | 1: Standard debug output.                                                        |
-+                           +                +----------------------------------------------------------------------------------+
-|                           |                | 2: Verbose debug output.                                                         |
-+---------------------------+----------------+----------------------------------------------------------------------------------+
-| **agent.remote_conf**     | Description    | Apply or refuse remote configuration.                                            |
-+                           +----------------+----------------------------------------------------------------------------------+
-|                           | Default value  | 1                                                                                |
-+                           +----------------+----------------------------------------------------------------------------------+
-|                           | Allowed value  | 0: Remote configuration is disabled.                                             |
-+                           +                +----------------------------------------------------------------------------------+
-|                           |                | 1: Remote configuration is enabled.                                              |
-+---------------------------+----------------+----------------------------------------------------------------------------------+
-
-.. _ossec_internal_analysisd:
+- `Authd`_
+- `Monitord`_
+- `Wazuh clusterd`_
+- `Wazuh database`_
+- `Wazuh modules`_
+- `Vulnerability scanner`_
+- `Wazuh DB`_
 
 Analysisd
----------
+^^^^^^^^^^
 
+The ``analysisd.*`` internal options configure the Wazuh Engine (``wazuh-manager-analysisd``), which processes, enriches, and evaluates events before forwarding them to configured outputs.
 
-+---------------------------------------------------------+---------------+---------------------------------------------------------------------+
-|   **analysisd.default_timeframe**                       | Description   | Default rule time-frame.                                            |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Default value | 360                                                                 |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Allowed value | Any integer between 60 and 360.                                     |
-+---------------------------------------------------------+---------------+---------------------------------------------------------------------+
-|     **analysisd.stats_maxdiff**                         | Description   | Stats maximum diff.                                                 |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Default value | 999000                                                              |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Allowed value | Any integer between 10 and 999999.                                  |
-+---------------------------------------------------------+---------------+---------------------------------------------------------------------+
-|     **analysisd.stats_mindiff**                         | Description   | Stats minimum diff.                                                 |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Default value | 1250                                                                |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Allowed value | Any integer between 10 and 999999.                                  |
-+---------------------------------------------------------+---------------+---------------------------------------------------------------------+
-|  **analysisd.stats_percent_diff**                       | Description   | Stats percentage (how much to differ from average).                 |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Default value | 150                                                                 |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Allowed value | Any integer between 5 and 9999.                                     |
-+---------------------------------------------------------+---------------+---------------------------------------------------------------------+
-|     **analysisd.fts_list_size**                         | Description   | FTS list size.                                                      |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Default value | 32                                                                  |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Allowed value | Any integer between 12 and 512.                                     |
-+---------------------------------------------------------+---------------+---------------------------------------------------------------------+
-| **analysisd.fts_min_size_for_str**                      | Description   | FTS minimum string size.                                            |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Default value | 14                                                                  |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Allowed value | Any integer between 6 and 128.                                      |
-+---------------------------------------------------------+---------------+---------------------------------------------------------------------+
-|        **analysisd.log_fw**                             | Description   | Toggles firewall log on and off (at logs/firewall/firewall.log).    |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Default value | 1                                                                   |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Allowed value | 0, 1                                                                |
-+---------------------------------------------------------+---------------+---------------------------------------------------------------------+
-|  **analysisd.decoder_order_size**                       | Description   | Maximum number of fields in a decoder (order tag).                  |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Default value |256                                                                  |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Allowed value | Any integer between 32 and 1024.                                    |
-+---------------------------------------------------------+---------------+---------------------------------------------------------------------+
-|     **analysisd.geoip_jsonout**                         | Description   | Toggle to turn on or off the output of GeoIP data in JSON alerts.   |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Default value | 0                                                                   |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Allowed value | 0, 1                                                                |
-+---------------------------------------------------------+---------------+---------------------------------------------------------------------+
-|  **analysisd.label_cache_maxage**                       | Description   | Number of in seconds without reloading labels in cache from agents. |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Default value | 10                                                                  |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Allowed value | Any integer between 0 and 60.                                       |
-+---------------------------------------------------------+---------------+---------------------------------------------------------------------+
-|  **analysisd.show_hidden_labels**                       | Description   | Make hidden labels visible in alerts.                               |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Default value | 0                                                                   |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Allowed value | 0, 1                                                                |
-+---------------------------------------------------------+---------------+---------------------------------------------------------------------+
-|         **analysisd.rlimit_nofile**                     | Description   | Maximum number of file descriptors that Analysisd can open.         |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Default value | 458752                                                              |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Allowed value | Any integer between 1024 and 1048576.                               |
-+---------------------------------------------------------+---------------+---------------------------------------------------------------------+
-|            **analysisd.debug**                          | Description   | Debug level (manager installations).                                |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Default value | 0                                                                   |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Allowed value | 0: No debug output.                                                 |
-+                                                         +               +---------------------------------------------------------------------+
-|                                                         |               | 1: Standard debug output.                                           |
-+                                                         +               +---------------------------------------------------------------------+
-|                                                         |               | 2: Verbose debug output.                                            |
-+---------------------------------------------------------+---------------+---------------------------------------------------------------------+
-|       **analysisd.min_rotate_interval**                 | Description   | Minimum interval between log rotations.                             |
-|                                                         |               |                                                                     |
-|                                                         |               | Supersedes max_output_size option.                                  |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Default value | 600                                                                 |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Allowed value | Any integer between 10 and 86400.                                   |
-+---------------------------------------------------------+---------------+---------------------------------------------------------------------+
-|        **analysisd.event_threads**                      | Description   | Number of event decoder threads.                                    |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Default value | 0                                                                   |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Allowed value | 0: Sets the number of threads according to the number of CPU cores. |
-+                                                         +               +---------------------------------------------------------------------+
-|                                                         |               | Any integer between 0 and 32.                                       |
-+---------------------------------------------------------+---------------+---------------------------------------------------------------------+
-|       **analysisd.syscheck_threads**                    | Description   | Number of syscheck event decoder threads.                           |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Default value | 0                                                                   |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Allowed value | 0: Sets the number of threads according to the number of CPU cores. |
-+                                                         +               +---------------------------------------------------------------------+
-|                                                         |               | Any integer between 0 and 32.                                       |
-+---------------------------------------------------------+---------------+---------------------------------------------------------------------+
-|     **analysisd.syscollector_threads**                  | Description   | Number of Syscollector event decoder threads.                       |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Default value | 0                                                                   |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Allowed value | 0: Sets the number of threads according to the number of CPU cores. |
-+                                                         +               +---------------------------------------------------------------------+
-|                                                         |               | Any integer between 0 and 32.                                       |
-+---------------------------------------------------------+---------------+---------------------------------------------------------------------+
-|        **analysisd.rootcheck_threads**                  | Description   | Number of Rootcheck event decoder threads.                          |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Default value | 0                                                                   |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Allowed value | 0: Sets the number of threads according to the number of CPU cores. |
-+                                                         +               +---------------------------------------------------------------------+
-|                                                         |               | Any integer between 0 and 32.                                       |
-+---------------------------------------------------------+---------------+---------------------------------------------------------------------+
-|    **analysisd.sca_threads**                            | Description   | Number of SCA event decoder threads.                                |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Default value | 0                                                                   |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Allowed value | 0: Sets the number of threads according to the number of CPU cores. |
-+                                                         +               +---------------------------------------------------------------------+
-|                                                         |               | Any integer between 0 and 32.                                       |
-+---------------------------------------------------------+---------------+---------------------------------------------------------------------+
-|       **analysisd.hostinfo_threads**                    | Description   | Number of hostinfo event decoder threads.                           |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Default value | 0                                                                   |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Allowed value | 0: Sets the number of threads according to the number of CPU cores. |
-+                                                         +               +---------------------------------------------------------------------+
-|                                                         |               | Any integer between 0 and 32.                                       |
-+---------------------------------------------------------+---------------+---------------------------------------------------------------------+
-|     **analysisd.rule_matching_threads**                 | Description   | Number of rule matching threads.                                    |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Default value | 0                                                                   |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Allowed value | 0: Sets the number of threads according to the number of CPU cores. |
-+                                                         +               +---------------------------------------------------------------------+
-|                                                         |               | Any integer between 0 and 32.                                       |
-+---------------------------------------------------------+---------------+---------------------------------------------------------------------+
-|     **analysisd.dbsync_threads**                        | Description   | Number of database synchronization dispatcher threads.              |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Default value | 0                                                                   |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Allowed value | 0: Sets the number of threads according to the number of CPU cores. |
-+                                                         +               +---------------------------------------------------------------------+
-|                                                         |               | Any integer between 0 and 32.                                       |
-+---------------------------------------------------------+---------------+---------------------------------------------------------------------+
-|     **analysisd.winevt_threads**                        | Description   | Number of Windows event decoder threads.                            |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Default value | 0                                                                   |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Allowed value | 0: Sets the number of threads according to the number of CPU cores. |
-+                                                         +               +---------------------------------------------------------------------+
-|                                                         |               | Any integer between 0 and 32.                                       |
-+---------------------------------------------------------+---------------+---------------------------------------------------------------------+
-|     **analysisd.decode_event_queue_size**               | Description   | Sets the decode event queue size.                                   |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Default value | 16384                                                               |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Allowed value | Any integer between 128 and 2000000.                                |
-+---------------------------------------------------------+---------------+---------------------------------------------------------------------+
-| **analysisd.decode_syscheck_queue_size**                | Description   | Sets the decode Syscheck queue size.                                |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Default value | 16384                                                               |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Allowed value | Any integer between 128 and 2000000.                                |
-+---------------------------------------------------------+---------------+---------------------------------------------------------------------+
-| **analysisd.decode_syscollector_queue_size**            | Description   | Sets the decode Syscollector queue size.                            |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Default value | 16384                                                               |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Allowed value | Any integer between 128 and 2000000.                                |
-+---------------------------------------------------------+---------------+---------------------------------------------------------------------+
-|  **analysisd.decode_rootcheck_queue_size**              | Description   | Sets the decode Rootcheck queue size.                               |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Default value | 16384                                                               |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Allowed value | Any integer between 128 and 2000000.                                |
-+---------------------------------------------------------+---------------+---------------------------------------------------------------------+
-| **analysisd.decode_sca_queue_size**                     | Description   | Sets the decode SCA queue size.                                     |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Default value | 16384                                                               |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Allowed value | Any integer between 128 and 2000000.                                |
-+---------------------------------------------------------+---------------+---------------------------------------------------------------------+
-|  **analysisd.decode_hostinfo_queue_size**               | Description   | Sets the decode hostinfo queue size.                                |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Default value | 16384                                                               |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Allowed value | Any integer between 128 and 2000000.                                |
-+---------------------------------------------------------+---------------+---------------------------------------------------------------------+
-|  **analysisd.decode_output_queue_size**                 | Description   | Sets the decode output queue size.                                  |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Default value | 16384                                                               |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Allowed value | Any integer between 128 and 2000000.                                |
-+---------------------------------------------------------+---------------+---------------------------------------------------------------------+
-|  **analysisd.decode_winevt_queue_size**                 | Description   | Sets the Windows event decode queue size.                           |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Default value | 16384                                                               |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Allowed value | Any integer between 128 and 2000000.                                |
-+---------------------------------------------------------+---------------+---------------------------------------------------------------------+
-|      **analysisd.archives_queue_size**                  | Description   | Sets the archives log queue size.                                   |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Default value | 16384                                                               |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Allowed value | Any integer between 128 and 2000000.                                |
-+---------------------------------------------------------+---------------+---------------------------------------------------------------------+
-|      **analysisd.statistical_queue_size**               | Description   | Sets the statistical log queue size.                                |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Default value | 16384                                                               |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Allowed value | Any integer between 128 and 2000000.                                |
-+---------------------------------------------------------+---------------+---------------------------------------------------------------------+
-|      **analysisd.alerts_queue_size**                    | Description   | Sets the alerts log queue size.                                     |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Default value | 16384                                                               |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Allowed value | Any integer between 128 and 2000000.                                |
-+---------------------------------------------------------+---------------+---------------------------------------------------------------------+
-|      **analysisd.firewall_queue_size**                  | Description   | Sets the firewall log queue size.                                   |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Default value | 16384                                                               |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Allowed value | Any integer between 128 and 2000000.                                |
-+---------------------------------------------------------+---------------+---------------------------------------------------------------------+
-|      **analysisd.fts_queue_size**                       | Description   | Sets the fts log queue size.                                        |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Default value | 16384                                                               |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Allowed value | Any integer between 128 and 2000000.                                |
-+---------------------------------------------------------+---------------+---------------------------------------------------------------------+
-|      **analysisd.dbsync_queue_size**                    | Description   | Sets the database synchronization message queue size.               |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Default value | 16384                                                               |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Allowed value | Any integer between 128 and 2000000.                                |
-+---------------------------------------------------------+---------------+---------------------------------------------------------------------+
-|      **analysisd.upgrade_queue_size**                   | Description   | Sets the upgrade message queue size.                                |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Default value | 16384                                                               |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Allowed value | Any integer between 128 and 2000000.                                |
-+---------------------------------------------------------+---------------+---------------------------------------------------------------------+
-|      **analysisd.state_interval**                       | Description   | Sets the Analysisd interval for updating the state file in seconds. |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Default value | 5                                                                   |
-+                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Allowed value | Any integer between 0 and 86400.                                    |
-+---------------------------------------------------------+---------------+---------------------------------------------------------------------+
-
-
-Authd
------
-
-+-------------------------------+---------------+--------------------------------------------------------------------------+
-|   **authd.debug**             | Description   | Debug level.                                                             |
-+                               +---------------+--------------------------------------------------------------------------+
-|                               | Default value | 0                                                                        |
-+                               +---------------+--------------------------------------------------------------------------+
-|                               | Allowed value | 0: No debug output                                                       |
-+                               +               +--------------------------------------------------------------------------+
-|                               |               | 1: Standard debug output                                                 |
-+                               +               +--------------------------------------------------------------------------+
-|                               |               | 2: Verbose debug output                                                  |
-+-------------------------------+---------------+--------------------------------------------------------------------------+
-| **auth.timeout_seconds**      | Description   | Network timeout to automatically close connections (second part).        |
-+                               +---------------+--------------------------------------------------------------------------+
-|                               | Default value | 1                                                                        |
-+                               +---------------+--------------------------------------------------------------------------+
-|                               | Allowed value | Any integer between 1 and 2147483647.                                    |
-+-------------------------------+---------------+--------------------------------------------------------------------------+
-| **auth.timeout_microseconds** | Description   | Network timeout to automatically close connections (microsecond part).   |
-+                               +---------------+--------------------------------------------------------------------------+
-|                               | Default value | 0                                                                        |
-+                               +---------------+--------------------------------------------------------------------------+
-|                               | Allowed value | Any integer between 0 and 999999.                                        |
-+-------------------------------+---------------+--------------------------------------------------------------------------+
-
-
-DBD
----
-
-+----------------------------+---------------+--------------------------------------------------------------------------+
-| **dbd.reconnect_attempts** | Description   | Number of times wazuh-dbd will attempt to reconnect to the database.     |
-+                            +---------------+--------------------------------------------------------------------------+
-|                            | Default value | 10                                                                       |
-+                            +---------------+--------------------------------------------------------------------------+
-|                            | Allowed value | Any integer between 1 and 9999.                                          |
-+----------------------------+---------------+--------------------------------------------------------------------------+
-
-Execd
------
-
-+-------------------------------+---------------+--------------------------------------------------------------+
-|  **execd.request_timeout**    | Description   | Timeout in seconds to execute remote requests.               |
-+                               +---------------+--------------------------------------------------------------+
-|                               | Default Value | 60                                                           |
-+                               +---------------+--------------------------------------------------------------+
-|                               | Allowed Value | Any integer between 1 and 3600.                              |
-+-------------------------------+---------------+--------------------------------------------------------------+
-|  **execd.max_restart_lock**   | Description   | Maximum timeout that the agent cannot restart while updating.|
-+                               +---------------+--------------------------------------------------------------+
-|                               | Default Value | 600                                                          |
-+                               +---------------+--------------------------------------------------------------+
-|                               | Allowed Value | Any integer between 0 and 3600.                              |
-+-------------------------------+---------------+--------------------------------------------------------------+
-|        **execd.debug**        | Description   | Debug level                                                  |
-+                               +---------------+--------------------------------------------------------------+
-|                               | Default value | 0                                                            |
-+                               +---------------+--------------------------------------------------------------+
-|                               | Allowed value | 0: No debug output                                           |
-+                               +               +--------------------------------------------------------------+
-|                               |               | 1: Standard debug output                                     |
-+                               +               +--------------------------------------------------------------+
-|                               |               | 2: Verbose debug output                                      |
-+-------------------------------+---------------+--------------------------------------------------------------+
-
-Integrator
-----------
-
-+----------------------+---------------+-----------------------------------------------------------------------+
-| **integrator.debug** | Description   | Debug level.                                                          |
-+                      +---------------+-----------------------------------------------------------------------+
-|                      | Default value | 0                                                                     |
-+                      +---------------+-----------------------------------------------------------------------+
-|                      | Allowed value | 0: No debug output                                                    |
-+                      +               +-----------------------------------------------------------------------+
-|                      |               | 1: Standard debug output                                              |
-+                      +               +-----------------------------------------------------------------------+
-|                      |               | 2: Verbose debug output                                               |
-+----------------------+---------------+-----------------------------------------------------------------------+
-
-.. _ossec_internal_logcollector:
-
-Logcollector
-------------
-
-+------------------------------------------+---------------+----------------------------------------------------------------------------+
-|   **logcollector.loop_timeout**          | Description   | File polling interval.                                                     |
-+                                          +---------------+----------------------------------------------------------------------------+
-|                                          | Default value | 2                                                                          |
-+                                          +---------------+----------------------------------------------------------------------------+
-|                                          | Allowed value | Any integer between 1 and 120                                              |
-+------------------------------------------+---------------+----------------------------------------------------------------------------+
-|  **logcollector.open_attempts**          | Description   | Number of attempts to open a log file. The value 0 means that the number   |
-|                                          |               | of attempts is infinite.                                                   |
-+                                          +---------------+----------------------------------------------------------------------------+
-|                                          | Default value | 8                                                                          |
-+                                          +---------------+----------------------------------------------------------------------------+
-|                                          | Allowed value | Any integer between 0 and 998                                              |
-+------------------------------------------+---------------+----------------------------------------------------------------------------+
-| **logcollector.remote_commands**         | Description   | Toggles Logcollector to accept remote commands from the manager or not.    |
-+                                          +---------------+----------------------------------------------------------------------------+
-|                                          | Default value | 0                                                                          |
-+                                          +---------------+----------------------------------------------------------------------------+
-|                                          | Allowed value | 0: Disable remote commands                                                 |
-+                                          +               +----------------------------------------------------------------------------+
-|                                          |               | 1: Enable remote commands                                                  |
-+------------------------------------------+---------------+----------------------------------------------------------------------------+
-|   **logcollector.vcheck_files**          | Description   | File checking interval, in seconds.                                        |
-+                                          +---------------+----------------------------------------------------------------------------+
-|                                          | Default value | 64                                                                         |
-+                                          +---------------+----------------------------------------------------------------------------+
-|                                          | Allowed value | Any integer between 0 and 1024                                             |
-+------------------------------------------+---------------+----------------------------------------------------------------------------+
-|   **logcollector.max_lines**             | Description   | Maximum number of logs read from the same file in each iteration.          |
-+                                          +---------------+----------------------------------------------------------------------------+
-|                                          | Default value | 10000                                                                      |
-+                                          +---------------+----------------------------------------------------------------------------+
-|                                          | Allowed value | Any integer between 100 and 100000                                         |
-+------------------------------------------+---------------+----------------------------------------------------------------------------+
-|   **logcollector.sample_log_length**     | Description   | Sample log length limit for errors about large input logs.                 |
-+                                          +---------------+----------------------------------------------------------------------------+
-|                                          | Default value | 64                                                                         |
-+                                          +---------------+----------------------------------------------------------------------------+
-|                                          | Allowed value | Any integer between 1 and 4096                                             |
-+------------------------------------------+---------------+----------------------------------------------------------------------------+
-|      **logcollector.debug**              | Description   | Debug level (used in manager or Unix agent installations)                  |
-+                                          +---------------+----------------------------------------------------------------------------+
-|                                          | Default value | 0                                                                          |
-+                                          +---------------+----------------------------------------------------------------------------+
-|                                          | Allowed value | 0: No debug output                                                         |
-+                                          +               +----------------------------------------------------------------------------+
-|                                          |               | 1: Standard debug output                                                   |
-+                                          +               +----------------------------------------------------------------------------+
-|                                          |               | 2: Verbose debug output                                                    |
-+------------------------------------------+---------------+----------------------------------------------------------------------------+
-|      **logcollector.input_threads**      | Description   | Number of input threads reading files                                      |
-+                                          +---------------+----------------------------------------------------------------------------+
-|                                          | Default value | 4                                                                          |
-+                                          +---------------+----------------------------------------------------------------------------+
-|                                          | Allowed value | Any integer between 1 and 128                                              |
-+------------------------------------------+---------------+----------------------------------------------------------------------------+
-|      **logcollector.queue_size**         | Description   | Queue size for each type of socket                                         |
-+                                          +---------------+----------------------------------------------------------------------------+
-|                                          | Default value | 1024                                                                       |
-+                                          +---------------+----------------------------------------------------------------------------+
-|                                          | Allowed value | Any integer between 128 and 220000                                         |
-+------------------------------------------+---------------+----------------------------------------------------------------------------+
-|      **logcollector.max_files**          | Description   | Maximum number of files to be monitored                                    |
-+                                          +---------------+----------------------------------------------------------------------------+
-|                                          | Default value | 1000                                                                       |
-+                                          +---------------+----------------------------------------------------------------------------+
-|                                          | Allowed value | Any integer between 1 and 100000                                           |
-+------------------------------------------+---------------+----------------------------------------------------------------------------+
-|      **logcollector.sock_fail_time**     | Description   | Time to reattempt a socket connection after a failure, in seconds.         |
-+                                          +---------------+----------------------------------------------------------------------------+
-|                                          | Default value | 300                                                                        |
-+                                          +---------------+----------------------------------------------------------------------------+
-|                                          | Allowed value | Any integer between 1 and 3600                                             |
-+------------------------------------------+---------------+----------------------------------------------------------------------------+
-|      **logcollector.rlimit_nofile**      | Description   | Maximum number of file descriptors that Logcollector can open.             |
-|                                          |               |                                                                            |
-|                                          |               | This value must be **greater than or equal to**                            |
-|                                          |               | (*logcollector.max_files* + 100).                                          |
-+                                          +---------------+----------------------------------------------------------------------------+
-|                                          | Default value | 1100                                                                       |
-+                                          +---------------+----------------------------------------------------------------------------+
-|                                          | Allowed value | Any integer between 1024 and 1048576.                                      |
-+------------------------------------------+---------------+----------------------------------------------------------------------------+
-|      **logcollector.force_reload**       | Description   | Force file handler reloading: close and reopen monitored files.            |
-+                                          +---------------+----------------------------------------------------------------------------+
-|                                          | Default value | 0                                                                          |
-+                                          +---------------+----------------------------------------------------------------------------+
-|                                          | Allowed value | 0: Disabled                                                                |
-+                                          +               +----------------------------------------------------------------------------+
-|                                          |               | 1: Enabled                                                                 |
-+------------------------------------------+---------------+----------------------------------------------------------------------------+
-|      **logcollector.reload_interval**    | Description   | File reloading interval, in seconds.                                       |
-|                                          |               |                                                                            |
-|                                          |               | This parameter only applies if ``logcollector.force_reload``               |
-|                                          |               | is set to ``1``.                                                           |
-+                                          +---------------+----------------------------------------------------------------------------+
-|                                          | Default value | 64                                                                         |
-+                                          +---------------+----------------------------------------------------------------------------+
-|                                          | Allowed value | Any integer between 1 and 86400.                                           |
-+------------------------------------------+---------------+----------------------------------------------------------------------------+
-|      **logcollector.reload_delay**       | Description   | File reloading delay (between close and open), in milliseconds.            |
-|                                          |               |                                                                            |
-|                                          |               | This parameter only applies if ``logcollector.force_reload``               |
-|                                          |               | is set to ``1``.                                                           |
-+                                          +---------------+----------------------------------------------------------------------------+
-|                                          | Default value | 1000                                                                       |
-+                                          +---------------+----------------------------------------------------------------------------+
-|                                          | Allowed value | Any integer between 0 and 30000.                                           |
-+------------------------------------------+---------------+----------------------------------------------------------------------------+
-| **logcollector.exclude_files_interval**  | Description   | Excluded files refresh interval, in seconds                                |
-+                                          +---------------+----------------------------------------------------------------------------+
-|                                          | Default value | 86400                                                                      |
-+                                          +---------------+----------------------------------------------------------------------------+
-|                                          | Allowed value | Any integer between 1 and 172800                                           |
-+------------------------------------------+---------------+----------------------------------------------------------------------------+
-| **logcollector.state_interval**          | Description   | Statistics generation interval, in seconds                                 |
-+                                          +---------------+----------------------------------------------------------------------------+
-|                                          | Default value | 60                                                                         |
-+                                          +---------------+----------------------------------------------------------------------------+
-|                                          | Allowed values| 0: Disable statistics file generation. Statistics information will continue|
-|                                          |               | to be available through the API                                            |
-+                                          +               +----------------------------------------------------------------------------+
-|                                          |               | Any other integer between 1 and 3600.                                      |
-+------------------------------------------+---------------+----------------------------------------------------------------------------+
-| **logcollector.ip_update_interval**      | Description   | IP update interval, in seconds. This specifies how often the system        |
-|                                          |               | IP is obtained when the                                                    |
-|                                          |               | :ref:`out_format<ossec_localfile_out_format>` option is used.              |
-+                                          +---------------+----------------------------------------------------------------------------+
-|                                          | Default value | 60                                                                         |
-+                                          +---------------+----------------------------------------------------------------------------+
-|                                          | Allowed values| 0: Disable. Host IP address collection is disabled. The agent doesn't      |
-|                                          |               | periodically obtain the  system IP address.                                |
-+                                          +               +----------------------------------------------------------------------------+
-|                                          |               | Any other integer between 1 and 3600.                                      |
-|                                          |               |                                                                            |
-|                                          |               | **Warning:** Systems with extensive routing tables                         |
-|                                          |               | can suffer from high CPU usage.                                            |
-+------------------------------------------+---------------+----------------------------------------------------------------------------+
-
-Maild
------
-
-+---------------------------+---------------+---------------------------------------------------------------------+
-| **maild.strict_checking** | Description   | Toggle to enable or disable strict checking.                        |
-+                           +---------------+---------------------------------------------------------------------+
-|                           | Default value | 1                                                                   |
-+                           +---------------+---------------------------------------------------------------------+
-|                           | Allowed value | 0, 1                                                                |
-+---------------------------+---------------+---------------------------------------------------------------------+
-|    **maild.grouping**     | Description   | Toggle to enable or disable grouping of alerts into a single email. |
-+                           +---------------+---------------------------------------------------------------------+
-|                           | Default value | 1                                                                   |
-+                           +---------------+---------------------------------------------------------------------+
-|                           | Allowed value | 0, 1                                                                |
-+---------------------------+---------------+---------------------------------------------------------------------+
-|   **maild.full_subject**  | Description   | Toggle to enable or disable full subject in alert emails.           |
-+                           +---------------+---------------------------------------------------------------------+
-|                           | Default value | 0                                                                   |
-+                           +---------------+---------------------------------------------------------------------+
-|                           | Allowed value | 0, 1                                                                |
-+---------------------------+---------------+---------------------------------------------------------------------+
-|      **maild.geoip**      | Description   | Toggle to enable or disable GeoIP data in alert emails.             |
-+                           +---------------+---------------------------------------------------------------------+
-|                           | Default value | 1                                                                   |
-+                           +---------------+---------------------------------------------------------------------+
-|                           | Allowed value | 0, 1                                                                |
-+---------------------------+---------------+---------------------------------------------------------------------+
-
-Monitord
---------
-
-+----------------------------------+---------------+--------------------------------------------------------------------+
-|    **monitord.day_wait**         | Description   | Number of seconds to wait before compressing or signing the files. |
-+                                  +---------------+--------------------------------------------------------------------+
-|                                  | Default value | 10                                                                 |
-+                                  +---------------+--------------------------------------------------------------------+
-|                                  | Allowed value | Any integer between 0 and 600.                                     |
-+----------------------------------+---------------+--------------------------------------------------------------------+
-|    **monitord.compress**         | Description   | Toggle to enable or disable log file compression.                  |
-+                                  +---------------+--------------------------------------------------------------------+
-|                                  | Default value | 1                                                                  |
-+                                  +---------------+--------------------------------------------------------------------+
-|                                  | Allowed value | 0, 1                                                               |
-+----------------------------------+---------------+--------------------------------------------------------------------+
-|      **monitord.sign**           | Description   | Toggle to enable or disable signing the log files.                 |
-+                                  +---------------+--------------------------------------------------------------------+
-|                                  | Default value | 1                                                                  |
-+                                  +---------------+--------------------------------------------------------------------+
-|                                  | Allowed value | 0, 1                                                               |
-+----------------------------------+---------------+--------------------------------------------------------------------+
-| **monitord.monitor_agents**      | Description   | Toggle to enable or disable monitoring of agents.                  |
-+                                  +---------------+--------------------------------------------------------------------+
-|                                  | Default value | 1                                                                  |
-+                                  +---------------+--------------------------------------------------------------------+
-|                                  | Allowed value | 0, 1                                                               |
-+----------------------------------+---------------+--------------------------------------------------------------------+
-|   **monitord.rotate_log**        | Description   | Toggle to enable or disable daily rotation of internal logs.       |
-+                                  +---------------+--------------------------------------------------------------------+
-|                                  | Default value | 1                                                                  |
-+                                  +---------------+--------------------------------------------------------------------+
-|                                  | Allowed value | 0, 1                                                               |
-+----------------------------------+---------------+--------------------------------------------------------------------+
-| **monitord.keep_log_days**       | Description   | Number of days to keep rotated internal logs.                      |
-+                                  +---------------+--------------------------------------------------------------------+
-|                                  | Default value | 31                                                                 |
-+                                  +---------------+--------------------------------------------------------------------+
-|                                  | Allowed value | Any integer between 0 and 500.                                     |
-+----------------------------------+---------------+--------------------------------------------------------------------+
-|  **monitord.size_rotate**        | Description   | Maximum size in Megabytes of internal logs to trigger rotation.    |
-+                                  +---------------+--------------------------------------------------------------------+
-|                                  | Default value | 512                                                                |
-+                                  +---------------+--------------------------------------------------------------------+
-|                                  | Allowed value | Any integer between 0 and 4096.                                    |
-+----------------------------------+---------------+--------------------------------------------------------------------+
-| **monitord.daily_rotations**     | Description   | Maximum number of rotations per day for internal logs.             |
-+                                  +---------------+--------------------------------------------------------------------+
-|                                  | Default value | 12                                                                 |
-+                                  +---------------+--------------------------------------------------------------------+
-|                                  | Allowed value | Any integer between 1 and 256.                                     |
-+----------------------------------+---------------+--------------------------------------------------------------------+
-|      **monitord.debug**          | Description   | Debug level                                                        |
-+                                  +---------------+--------------------------------------------------------------------+
-|                                  | Default value | 0                                                                  |
-+                                  +---------------+--------------------------------------------------------------------+
-|                                  | Allowed value | 0: No debug output                                                 |
-+                                  +               +--------------------------------------------------------------------+
-|                                  |               | 1: Standard debug output                                           |
-+                                  +               +--------------------------------------------------------------------+
-|                                  |               | 2: Verbose debug output                                            |
-+----------------------------------+---------------+--------------------------------------------------------------------+
-|  **monitord.delete_old_agents**  | Description   | Number of minutes before deleting an old disconnected agent.       |
-|                                  |               |                                                                    |
-|                                  |               | This is a time-lapse after the agent is considered as              |
-|                                  |               | disconnected because of the                                        |
-|                                  |               | :ref:`disconnection time<reference_agents_disconnection_time>`.    |
-+                                  +---------------+--------------------------------------------------------------------+
-|                                  | Default value | 0                                                                  |
-+                                  +---------------+--------------------------------------------------------------------+
-|                                  | Allowed value | Any integer between 0 and 9600.                                    |
-+----------------------------------+---------------+--------------------------------------------------------------------+
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+
+| Setting                                                      | Description                                                                                  | Default value   |
++==============================================================+==============================================================================================+=================+
+| **analysisd.debug**                                          | Controls the Engine log verbosity level.                                                     | 0               |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+
+| **analysisd.event_queue_size**                               | Maximum number of events waiting in the router input queue. Events can be dropped when this  | 131072          |
+|                                                              | queue is full.                                                                               |                 |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+
+| **analysisd.event_queue_eps**                                | Maximum event ingestion rate. A value of 0 means unlimited.                                  | 0               |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+
+| **analysisd.event_queue_max_bytes**                          | Maximum total byte size of events waiting in the router input queue. Events are dropped when | 32MB            |
+|                                                              | this quota is full. A value of 0 means unlimited.                                            |                 |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+
+| **analysisd.agent_metadata_cache_ttl**                       | Time-to-live, in seconds, for cached agent metadata.                                         | 300             |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+
+| **analysisd.agent_metadata_cache_clean_interval**            | Interval, in seconds, between best-effort evictions of stale agent metadata cache entries.   | 60              |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+
+| **analysisd.indexer_queue_max_bytes**                        | Maximum number of bytes of events waiting in the indexer output queue. Events can be dropped | 64MB            |
+|                                                              | when this queue is full.                                                                     |                 |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+
+| **analysisd.indexer_bulk_max_bytes**                         | Maximum byte size of the bulk payload accumulated before a _bulk request is dispatched to    | 8MB             |
+|                                                              | the Wazuh indexer. When the buffered data reaches this threshold, a batch is flushed.        |                 |
+|                                                              | Allowed range: 64KB to 100MB.                                                                |                 |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+
+| **analysisd.indexer_flush_interval**                         | Interval, in seconds, between periodic flushes of the asynchronous indexer bulk buffer.      | 20              |
+|                                                              | Allowed range: 1 to 3600.                                                                    |                 |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+
+| **analysisd.indexer_logger_queue_size**                      | Maximum number of _bulk responses and their payloads that can wait in the indexer            | 8               |
+|                                                              | error-logger queue. When the queue is full, error details are dropped and a warning is       |                 |
+|                                                              | logged. Allowed range: 1 to 1024.                                                            |                 |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+
+| **analysisd.indexer_logger_threads**                         | Number of worker threads that parse _bulk error responses to log per-item failures. Allowed  | 1               |
+|                                                              | range: 1 to 16.                                                                              |                 |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+
+| **analysisd.indexer_max_retry_delay**                        | Maximum exponential-backoff delay, in seconds, between retries of a failed _bulk request.    | 15              |
+|                                                              | Allowed range: 1 to 3600.                                                                    |                 |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+
+| **analysisd.remote_conf_sync_interval**                      | Interval, in seconds, between remote Engine configuration synchronization cycles.            | 120             |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+
+| **analysisd.remote_conf_indexer_connector_max_retries**      | Maximum retry attempts for remote configuration requests to the Wazuh indexer.               | 3               |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+
+| **analysisd.remote_conf_indexer_connector_retry_interval**   | Interval, in seconds, between retry attempts for remote configuration synchronization.       | 5               |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+
+| **analysisd.cm_sync_interval**                               | Interval, in seconds, between content synchronization cycles from the Wazuh indexer.         | 120             |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+
+| **analysisd.cmsync_indexer_connector_sync_batch_size**       | Maximum number of content documents requested per Wazuh indexer page during content          | 100             |
+|                                                              | synchronization.                                                                             |                 |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+
+| **analysisd.cmsync_indexer_connector_max_retries**           | Maximum retry attempts for content synchronization requests to the Wazuh indexer.            | 3               |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+
+| **analysisd.cmsync_indexer_connector_retry_interval**        | Interval, in seconds, between retry attempts for content synchronization.                    | 5               |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+
+| **analysisd.ioc_sync_interval**                              | Interval, in seconds, between IoC database synchronization cycles. A value of 0 disables IoC | 360             |
+|                                                              | synchronization.                                                                             |                 |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+
+| **analysisd.ioc_indexer_connector_max_retries**              | Maximum retry attempts for IoC synchronization requests to the Wazuh indexer.                | 3               |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+
+| **analysisd.ioc_indexer_connector_retry_interval**           | Interval, in seconds, between retry attempts for IoC synchronization.                        | 5               |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+
+| **analysisd.ioc_indexer_connector_sync_batch_size**          | Maximum number of IoC documents streamed per Wazuh indexer page while synchronizing IoC      | 1000            |
+|                                                              | databases.                                                                                   |                 |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+
+| **analysisd.geo_sync_interval**                              | Interval, in seconds, between GeoIP database synchronization cycles. A value of 0 disables   | 360             |
+|                                                              | GeoIP synchronization.                                                                       |                 |
++--------------------------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+
 
 Remoted
--------
+^^^^^^^^^^^^^^^^^^^
 
-+-----------------------------------+---------------+--------------------------------------------------------------+
-|   **remoted.recv_counter_flush**  | Description   | Flush rate for the receive counter.                          |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Default value | 128                                                          |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Allowed value | Any integer between 10 and 999999.                           |
-+-----------------------------------+---------------+--------------------------------------------------------------+
-| **remoted.comp_average_printout** | Description   | Compression averages printout.                               |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Default value | 19999                                                        |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Allowed value | Any integer between 10 and 999999.                           |
-+-----------------------------------+---------------+--------------------------------------------------------------+
-|     **remoted.verify_msg_id**     | Description   | Toggle to enable or disable verification of msg id.          |
-|                                   |               | This setting doesn't work with multiple threads              |
-|                                   |               | (worker_pool > 1).                                           |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Default value | 0                                                            |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Allowed value | 0, 1                                                         |
-+-----------------------------------+---------------+--------------------------------------------------------------+
-|   **remoted.pass_empty_keyfile**  | Description   | Toggle to enable or disable acceptance of empty client.keys. |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Default value | 1                                                            |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Allowed value | 0, 1                                                         |
-+-----------------------------------+---------------+--------------------------------------------------------------+
-|   **remoted.sender_pool**         | Description   | Number of parallel threads to send the shared file.          |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Default Value | 8                                                            |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Allowed Value | Any integer between 1 and 64.                                |
-+-----------------------------------+---------------+--------------------------------------------------------------+
-|   **remoted.request_pool**        | Description   | Limit of parallel threads to dispatch requests.              |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Default Value | 1024                                                         |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Allowed Value | Any integer between 1 and 4096.                              |
-+-----------------------------------+---------------+--------------------------------------------------------------+
-|   **remoted.request_timeout**     | Description   | Time (in seconds) the remote request listener rejects a      |
-|                                   |               | new request.                                                 |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Default Value | 10                                                           |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Allowed Value | Any integer between 1 and 600.                               |
-+-----------------------------------+---------------+--------------------------------------------------------------+
-|   **remoted.response_timeout**    | Description   | Time (in seconds) the remote request listener rejects a      |
-|                                   |               | request response.                                            |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Default Value | 60                                                           |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Allowed Value | Any integer between 1 and 3600.                              |
-+-----------------------------------+---------------+--------------------------------------------------------------+
-|   **remoted.request_rto_sec**     | Description   | Re-transmission timeout in seconds for UDP.                  |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Default Value | 1                                                            |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Allowed Value | Any integer between 0 and 60.                                |
-+-----------------------------------+---------------+--------------------------------------------------------------+
-|   **remoted.request_rto_msec**    | Description   | Re-transmission timeout in milliseconds for UDP.             |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Default Value | 0                                                            |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Allowed Value | Any integer between 0 and 999.                               |
-+-----------------------------------+---------------+--------------------------------------------------------------+
-|   **remoted.max_attempts**        | Description   | Maximum number of sending attempts.                          |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Default Value | 4                                                            |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Allowed Value | Any integer between 1 and 16.                                |
-+-----------------------------------+---------------+--------------------------------------------------------------+
-|  **remoted.merge_shared**         | Description   | Merge shared configuration to be broadcast to agents.        |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Default Value | 1 (Enabled)                                                  |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Allowed Value | 1 (Enabled), 0 (Disabled)                                    |
-+-----------------------------------+---------------+--------------------------------------------------------------+
-|  **remoted.disk_storage**         | Description   | Store the temporary shared configuration file on disk.       |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Default Value | 0 (No, store in memory)                                      |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Allowed Value | 1 (Yes, store on disk), 0 (No, store in memory)              |
-+-----------------------------------+---------------+--------------------------------------------------------------+
-|   **remoted.shared_reload**       | Description   | Number of seconds between reloading of shared files.         |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Default Value | 10                                                           |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Allowed Value | Any integer between 1 and 18000.                             |
-+-----------------------------------+---------------+--------------------------------------------------------------+
-|   **remoted.rlimit_nofile**       | Description   | Maximum number of file descriptors that Remoted can open.    |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Default value | 16384                                                        |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Allowed value | Any integer between 1024 and 1048576.                        |
-+-----------------------------------+---------------+--------------------------------------------------------------+
-|   **remoted.recv_timeout**        | Description   | Maximum number of seconds to wait for client response in TCP.|
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Default value | 1                                                            |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Allowed value | Any integer between 1 and 60.                                |
-+-----------------------------------+---------------+--------------------------------------------------------------+
-|         **remoted.debug**         | Description   | Debug level (manager installation)                           |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Default value | 0                                                            |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Allowed value | 0: No debug output.                                          |
-+                                   +               +--------------------------------------------------------------+
-|                                   |               | 1: Standard debug output.                                    |
-+                                   +               +--------------------------------------------------------------+
-|                                   |               | 2: Verbose debug output.                                     |
-+-----------------------------------+---------------+--------------------------------------------------------------+
-|  **remoted.keyupdate_interval**   | Description   | Keys file reloading latency (seconds)                        |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Default value | 10                                                           |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Allowed value | Any integer between 1 and 3600                               |
-+-----------------------------------+---------------+--------------------------------------------------------------+
-|    **remoted.worker_pool**        | Description   | Number of threads that process the payload reception         |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Default value | 4                                                            |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Allowed value | Any integer between 1 and 16                                 |
-+-----------------------------------+---------------+--------------------------------------------------------------+
-| **remoted.state_interval**        | Description   | Interval between the updates of the status file in seconds.  |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Default value | 5                                                            |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Allowed values| 0: Disable status file                                       |
-+                                   +               +--------------------------------------------------------------+
-|                                   |               | Any other integer between 1 and 86400                        |
-+-----------------------------------+---------------+--------------------------------------------------------------+
-| **remoted.guess_agent_group**     | Description   | Toggle to enable or disable the guessing of the group to     |
-|                                   |               | which the agent belongs when registering it again.           |
-|                                   |               |                                                              |
-|                                   |               | .. note:: Since version 4.4.0, in a cluster architecture,    |
-|                                   |               |           this setting only applies to the master node.      |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Default value | 0                                                            |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Allowed values| 0, 1                                                         |
-+-----------------------------------+---------------+--------------------------------------------------------------+
-| **remoted.receive_chunk**         | Description   | | Reception buffer size for TCP (bytes).                     |
-|                                   |               | | Amount of data that Remoted can receive per operation.     |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Default value | 4096                                                         |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Allowed value | | Any other integer between 1024 and 16384.                  |
-|                                   |               | | Powers of two are suggested.                               |
-+-----------------------------------+---------------+--------------------------------------------------------------+
-| **remoted.send_chunk**            | Description   | | Send buffer size for TCP (bytes).                          |
-|                                   |               | | Amount of data that Remoted can send per operation.        |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Default value | 4096                                                         |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Allowed value | | Any other integer between 512 and 16384.                   |
-|                                   |               | | Powers of two are suggested.                               |
-+-----------------------------------+---------------+--------------------------------------------------------------+
-| **remoted.send_buffer_size**      | Description   | | Send queue size for TCP (bytes).                           |
-|                                   |               | | Amount of data that Remoted can queue to send              |
-|                                   |               | | (one queue per agent).                                     |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Default value | 131072                                                       |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Allowed value | | Any other integer between 65536 and 1048576.               |
-|                                   |               | | Powers of two are suggested.                               |
-+-----------------------------------+---------------+--------------------------------------------------------------+
-| **remoted.ctrl_msg_queue_size**   | Description   | Maximum number of control messages that can be queued for    |
-|                                   |               | processing. When the queue reaches this limit, backpressure  |
-|                                   |               | is applied to prevent memory exhaustion.                     |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Default value | 16384                                                        |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Allowed value | Any integer between 1024 and 1048576.                        |
-+-----------------------------------+---------------+--------------------------------------------------------------+
-| **remoted.send_timeout_to_retry** | Description   | | Maximum number of seconds to wait before retrying to       |
-|                                   |               | | queue a packet to send in TCP.                             |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Default value | 1                                                            |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Allowed value | | Any integer between 1 and 60.                              |
-+-----------------------------------+---------------+--------------------------------------------------------------+
-| **remoted.buffer_relax**          | Description   | | Method for memory deallocation after accepting input data. |
-|                                   |               | | This option applies in TCP mode only.                      |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Default value | 1                                                            |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Allowed values| 0: Keep the memory for each TCP session.                     |
-+                                   +               +--------------------------------------------------------------+
-|                                   |               | 1: Shrink memory back to ``receive_chunk``.                  |
-+                                   +               +--------------------------------------------------------------+
-|                                   |               | 2: Fully deallocate memory after usage.                      |
-+-----------------------------------+---------------+--------------------------------------------------------------+
-| **remoted.tcp_keepidle**          | Description   | | Time (in seconds) the connection needs to remain idle      |
-|                                   |               | | before TCP starts sending keepalive probes.                |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Default value | 30                                                           |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Allowed value | Any integer between 1 and 7200.                              |
-+-----------------------------------+---------------+--------------------------------------------------------------+
-| **remoted.tcp_keepintvl**         | Description   | The time (in seconds) between individual keepalive probes.   |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Default value | 10                                                           |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Allowed value | Any integer between 1 and 100.                               |
-+-----------------------------------+---------------+--------------------------------------------------------------+
-| **remoted.tcp_keepcnt**           | Description   | | Maximum number of keepalive probes TCP should send before  |
-|                                   |               | | dropping the connection.                                   |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Default value | 3                                                            |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Allowed value | Any integer between 1 and 50.                                |
-+-----------------------------------+---------------+--------------------------------------------------------------+
+The ``remoted.*`` internal options configure the Wazuh manager Remoted module.
 
-.. _ossec_internal_syscheck:
++-----------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| Setting                                       | Description                                                                                  | Default value   | Allowed values                         |
++===============================================+==============================================================================================+=================+========================================+
+| **remoted.debug**                             | Debug logging level for the remoted module.                                                  | 0               | 0 (disabled), 1 (basic), 2 (verbose)   |
++-----------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **remoted.receive_chunk**                     | Network receive buffer size in bytes.                                                        | 4096            | Positive integer                       |
++-----------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **remoted.send_timeout_to_retry**             | Timeout, in seconds, before retrying a failed send operation.                                | 1               | Positive integer                       |
++-----------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **remoted.worker_pool**                       | Number of worker threads used to process agent messages.                                     | 4               | Positive integer                       |
++-----------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **remoted.sender_pool**                       | Number of sender threads used to forward events to the Engine.                               | 8               | Positive integer                       |
++-----------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **remoted.control_msg_queue_size**            | Queue capacity for agent keepalive and control messages.                                     | 16384           | Positive integer                       |
++-----------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **remoted.batch_events_capacity**             | Queue capacity for batching events before forwarding them to the Engine.                     | 131072          | Positive integer                       |
++-----------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **remoted.queue_max_bytes**                   | Maximum number of bytes held in the input message queue. A value of 0 disables the byte      | 67108864        | 0 or integer from 1024 upward          |
+|                                               | limit.                                                                                       |                 |                                        |
++-----------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **remoted.batch_events_max_bytes**            | Maximum number of bytes held in the events queue before events are forwarded to the Engine.  | 33554432        | 0 or integer from 1024 upward          |
+|                                               | A value of 0 disables the byte limit.                                                        |                 |                                        |
++-----------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **remoted.enrich_cache_expire_time**          | Agent metadata cache expiration time, in seconds.                                            | 300             | Integer from 60 to 86400               |
++-----------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **remoted.keyupdate_interval**                | Interval, in seconds, for reloading agent key files.                                         | 10              | Positive integer                       |
++-----------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **remoted.rlimit_nofile**                     | Maximum number of file descriptors that the Remoted process can open.                        | 458752          | Positive integer                       |
++-----------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **remoted.state_interval**                    | Interval, in seconds, for updating the Remoted state file. A value of 0 disables state-file  | 5               | 0 or positive integer                  |
+|                                               | updates.                                                                                     |                 |                                        |
++-----------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **remoted.send_chunk**                        | Maximum number of bytes sent in a single write operation to an agent.                        | 4096            | Positive integer                       |
++-----------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **remoted.buffer_relax**                      | Send-buffer flushing mode.                                                                   | 1               | 0 (strict), 1 (relaxed), 2 (lazy)      |
++-----------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **remoted.send_buffer_size**                  | Size, in bytes, of the send buffer for each agent connection.                                | 131072          | Positive integer                       |
++-----------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **remoted.recv_timeout**                      | Timeout, in seconds, for receiving data from agents.                                         | 1               | Positive integer                       |
++-----------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **remoted.tcp_keepidle**                      | Time, in seconds, that a TCP connection remains idle before keepalive probes begin.          | 30              | Positive integer                       |
++-----------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **remoted.tcp_keepintvl**                     | Interval, in seconds, between TCP keepalive probes.                                          | 10              | Positive integer                       |
++-----------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **remoted.tcp_keepcnt**                       | Number of unacknowledged TCP keepalive probes before the connection is considered            | 3               | Positive integer                       |
+|                                               | unavailable.                                                                                 |                 |                                        |
++-----------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **remoted.merge_shared**                      | Controls whether Remoted merges shared configuration files for agents.                       | yes             | yes, no                                |
++-----------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **remoted.pass_empty_keyfile**                | Controls whether Remoted starts when the client.keys file is empty.                          | yes             | yes, no                                |
++-----------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **remoted.router_forwarding_disabled**        | Controls whether forwarding messages to the router component is disabled.                    | no              | yes, no                                |
++-----------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **remoted.request_pool**                      | Size of the request pool used to handle agent communications.                                | 1024            | Positive integer                       |
++-----------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **remoted.request_timeout**                   | Timeout, in seconds, for agent request operations.                                           | 10              | Positive integer                       |
++-----------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **remoted.response_timeout**                  | Timeout, in seconds, for manager responses to agent requests.                                | 60              | Positive integer                       |
++-----------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **remoted.request_rto_sec**                   | Seconds component of the retransmission timeout for agent requests.                          | 1               | Positive integer                       |
++-----------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **remoted.request_rto_msec**                  | Milliseconds component of the retransmission timeout for agent requests.                     | 0               | Integer from 0 to 999                  |
++-----------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **remoted.max_attempts**                      | Maximum number of attempts for failed agent communications.                                  | 4               | Positive integer                       |
++-----------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **remoted.shared_reload**                     | Interval, in seconds, for reloading shared configuration files.                              | 10              | Positive integer                       |
++-----------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **remoted.disk_storage**                      | Controls whether temporary shared configuration data is stored on disk.                      | no              | yes, no                                |
++-----------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **remoted.verify_msg_id**                     | Controls whether Remoted verifies agent message identifier sequences.                        | no              | yes, no                                |
++-----------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **remoted.batch_events_per_agent_capacity**   | Maximum number of events batched per agent before forwarding them to the Engine.             | 131072          | Positive integer                       |
++-----------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **remoted.recv_counter_flush**                | Number of received messages after which receive counters are flushed to statistics.          | 128             | Positive integer                       |
++-----------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **remoted.comp_average_printout**             | Number of processed events after which compression statistics are logged.                    | 19999           | Integer from 10 to 999999              |
++-----------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+
+Authd
+^^^^^^
+
+The ``authd.*`` and ``auth.*`` internal options configure the Wazuh enrollment service.
+
++---------------------------------+----------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| Setting                         | Description                                                                      | Default value   | Allowed values                         |
++=================================+==================================================================================+=================+========================================+
+| **authd.debug**                 | Debug logging level for the authd daemon.                                        | 0               | 0 (disabled), 1 (basic), 2 (verbose)   |
++---------------------------------+----------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **auth.timeout_seconds**        | Seconds component of the timeout for agent enrollment requests.                  | 1               | Integer                                |
++---------------------------------+----------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **auth.timeout_microseconds**   | Microseconds component of the timeout for agent enrollment requests.             | 0               | Integer                                |
++---------------------------------+----------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **authd.max_agents**            | Maximum number of agents that can be registered. A value of 0 means unlimited.   | 0               | Non-negative integer                   |
++---------------------------------+----------------------------------------------------------------------------------+-----------------+----------------------------------------+
+
+Monitord
+^^^^^^^^^^^^^^^^^^^^
+
+The ``monitord.*`` internal options configure the ``wazuh-manager-monitord`` daemon.
+
++-------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| Setting                       | Description                                                                                  | Default value   | Allowed values                         |
++===============================+==============================================================================================+=================+========================================+
+| **monitord.debug**            | Debug logging level for the monitoring daemon.                                               | 0               | 0 (disabled), 1 (basic), 2 (verbose)   |
++-------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **monitord.rotate_log**       | Controls whether daily log rotation is enabled.                                              | 1               | 0 (disabled), 1 (enabled)              |
++-------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **monitord.keep_log_days**    | Number of days to retain rotated logs.                                                       | 31              | Any integer between 0 and 500.         |
++-------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **monitord.size_rotate**      | Log size, in megabytes, at which size-based rotation occurs. A value of 0 disables           | 512             | Any integer between 0 and 4096.        |
+|                               | size-based rotation.                                                                         |                 |                                        |
++-------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **monitord.day_wait**         | Interval, in seconds, for daily report generation.                                           | 10              | Any integer between 0 and 600.         |
++-------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **monitord.compress**         | Controls whether rotated logs are compressed.                                                | 1               | 0 (disabled), 1 (enabled)              |
++-------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **monitord.monitor_agents**   | Controls whether the daemon monitors agent connection changes.                               | 1               | 0 (disabled), 1 (enabled)              |
++-------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+
+Wazuh clusterd
+^^^^^^^^^^^^^^^
+
+The ``wazuh_clusterd.*`` internal options configure the Wazuh cluster daemon.
+
++----------------------------+-----------------------------------------------------+-----------------+----------------------------------------+
+| Setting                    | Description                                         | Default value   | Allowed values                         |
++============================+=====================================================+=================+========================================+
+| **wazuh_clusterd.debug**   | Debug logging level for the Wazuh cluster daemon.   | 0               | 0 (disabled), 1 (basic), 2 (verbose)   |
++----------------------------+-----------------------------------------------------+-----------------+----------------------------------------+
+
+Wazuh database
+^^^^^^^^^^^^^^^
+
+The ``wazuh_database.*`` internal options configure the Database Sync module.
+
++------------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------+
+| Setting                            | Description                                                                                  | Default value   | Allowed values                |
++====================================+==============================================================================================+=================+===============================+
+| wazuh_database.sync_agents         | Controls whether agent database synchronization is enabled.                                  | 1               | 0 (disabled), 1 (enabled)     |
++------------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------+
+| wazuh_database.real_time           | Controls whether agent updates are synchronized immediately. When disabled, updates are      | 1               | 0 (disabled), 1 (enabled)     |
+|                                    | synchronized according to wazuh_database.interval.                                           |                 |                               |
++------------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------+
+| wazuh_database.interval            | Synchronization interval, in seconds, when real-time synchronization is disabled.            | 60              | Integer from 1 to 86400       |
++------------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------+
+| wazuh_database.max_queued_events   | Maximum number of agent events queued before synchronization is triggered.                   | 10000           | Integer from 100 to 1000000   |
++------------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------+
+
+Wazuh modules
+^^^^^^^^^^^^^^
+
+The ``wazuh_modules.*`` internal options configure the Inventory Sync module.
+
++------------------------------------------------------------+-----------------------------------------------------------------------------------+-----------------+----------------------------------+
+| Setting                                                    | Description                                                                       | Default value   | Allowed values                   |
++============================================================+===================================================================================+=================+==================================+
+| **wazuh_modules.max_sessions**                             | Maximum number of concurrent inventory synchronization sessions.                  | 1000            | Integer from 1 to 100000         |
++------------------------------------------------------------+-----------------------------------------------------------------------------------+-----------------+----------------------------------+
+| **wazuh_modules.inventory_sync_queue_size**                | Capacity of the input worker queue used to buffer incoming Router messages.       | 10000           | Integer from 100 to 1000000      |
++------------------------------------------------------------+-----------------------------------------------------------------------------------+-----------------+----------------------------------+
+| **wazuh_modules.inventory_sync_data_value_quota**          | Global DataValue quota shared across active inventory synchronization sessions.   | 500000          | Integer from 1 to 1000000000     |
++------------------------------------------------------------+-----------------------------------------------------------------------------------+-----------------+----------------------------------+
+| **wazuh_modules.inventory_sync_indexer_bulk_size_bytes**   | Indexer bulk-size threshold, in bytes, that triggers a synchronous flush.         | 10485760        | Integer from 4096 to 104857600   |
++------------------------------------------------------------+-----------------------------------------------------------------------------------+-----------------+----------------------------------+
+| **wazuh_modules.inventory_sync_indexer_flush_interval**    | Interval, in seconds, between periodic Indexer Connector flushes.                 | 20              | Integer from 1 to 3600           |
++------------------------------------------------------------+-----------------------------------------------------------------------------------+-----------------+----------------------------------+
+
+Vulnerability scanner
+^^^^^^^^^^^^^^^^^^^^^^^
+
+The ``wazuh_modules.*`` and ``vulnerability-detection.*`` internal options configure the Vulnerability Scanner module.
+
++---------------------------------------------+-----------------------------------------------------------------------------+-----------------+----------------------------------------+
+| Setting                                     | Description                                                                 | Default value   | Allowed values                         |
++=============================================+=============================================================================+=================+========================================+
+| **wazuh_modules.indexer_bulk_size_bytes**   | Indexer bulk-size threshold, in bytes, that triggers a synchronous flush.   | 10485760        | Integer from 4096 to 104857600         |
++---------------------------------------------+-----------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **wazuh_modules.indexer_flush_interval**    | Interval, in seconds, between periodic Indexer Connector flushes.           | 20              | Integer from 1 to 3600                 |
++---------------------------------------------+-----------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **vulnerability-detection.debug**           | Debug logging level for the Vulnerability Scanner module.                   | 0               | 0 (disabled), 1 (basic), 2 (verbose)   |
++---------------------------------------------+-----------------------------------------------------------------------------+-----------------+----------------------------------------+
+
+Wazuh DB
+^^^^^^^^^
+
+The ``wazuh_db.*`` internal options configure the Wazuh database daemon.
+
++---------------------------------------------+----------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| Setting                                     | Description                                                                            | Default value   | Allowed values                         |
++=============================================+========================================================================================+=================+========================================+
+| **wazuh_db.debug**                          | Debug logging level for Wazuh DB.                                                      | 0               | 0 (disabled), 1 (basic), 2 (verbose)   |
++---------------------------------------------+----------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **wazuh_db.worker_pool_size**               | Number of worker threads used by Wazuh DB.                                             | 8               | Integer from 1 to 32                   |
++---------------------------------------------+----------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **wazuh_db.commit_time_min**                | Minimum interval, in seconds, between database transaction commits.                    | 10              | Integer from 1 to 3600                 |
++---------------------------------------------+----------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **wazuh_db.commit_time_max**                | Maximum interval, in seconds, between database transaction commits.                    | 60              | Integer from 1 to 3600                 |
++---------------------------------------------+----------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **wazuh_db.open_db_limit**                  | Maximum number of database connections that can remain open.                           | 64              | Integer from 1 to 4096                 |
++---------------------------------------------+----------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **wazuh_db.rlimit_nofile**                  | Maximum number of file descriptors available to the Wazuh DB process.                  | 458752          | Integer from 1024 to 1048576           |
++---------------------------------------------+----------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **wazuh_db.fragmentation_threshold**        | Database fragmentation percentage at which maintenance is considered.                  | 75              | Integer from 0 to 100                  |
++---------------------------------------------+----------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **wazuh_db.fragmentation_delta**            | Additional fragmentation percentage required before a vacuum operation is triggered.   | 5               | Integer from 0 to 100                  |
++---------------------------------------------+----------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **wazuh_db.free_pages_percentage**          | Percentage of free database pages to maintain.                                         | 0               | Integer from 0 to 99                   |
++---------------------------------------------+----------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **wazuh_db.max_fragmentation**              | Maximum allowed database fragmentation percentage.                                     | 90              | Integer from 0 to 100                  |
++---------------------------------------------+----------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **wazuh_db.check_fragmentation_interval**   | Interval, in seconds, between database fragmentation checks.                           | 7200            | Integer from 1 to 30758400             |
++---------------------------------------------+----------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+
+Wazuh agent internal configuration
+--------------------------------------
+
+The Wazuh agent uses the ``/var/ossec/etc/internal_options.conf`` file for its default internal settings.
+
+To override an internal setting, add the option to ``/var/ossec/etc/local_internal_options.conf``. This file preserves custom settings when the Wazuh agent is upgraded.
+
+All of the following settings exist in ``/var/ossec/etc/local_internal_options.conf``. Edit the file and restart the Wazuh agent service for changes to take effect.
+
+- `Agent`_
+- `Execd`_
+- `Wazuh command`_
+- `Syscheck`_
+- `Logcollector`_
+- `Rootcheck`_
+- :ref:`Security configuration assessment <internal_options_sca>`
+
+Agent
+^^^^^^
+
+The ``agent.*`` internal options configure the Wazuh agent daemon. The ``monitord.*`` options control agent log rotation.
+
++--------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| Setting                        | Description                                                                                  | Default value   | Allowed values                                                    |
++================================+==============================================================================================+=================+===================================================================+
+| **agent.debug**                | Debug logging level for the Wazuh agent daemon.                                              | 0               | 0 (disabled), 1 (basic), 2 (verbose)                              |
++--------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **agent.recv_timeout**         | Timeout, in seconds, for receiving data from the manager.                                    | 60              | Any integer between 1 and 600.                                    |
++--------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **agent.send_timeout**         | Maximum time (in seconds) that ``send()`` may block on the agent → manager TCP socket before | 30              | Positive integer, 1-600                                           |
+|                                | giving up. Bounds how long the agent can stay stuck behind a full send buffer (e.g. a        |                 |                                                                   |
+|                                | stalled network path or a manager that stopped reading); once this expires, the agent closes |                 |                                                                   |
+|                                | the socket and reconnects instead of blocking indefinitely.                                  |                 |                                                                   |
++--------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **agent.tcp_keepidle**         | Time (in seconds) the connection needs to remain idle before TCP starts sending keepalive    | 60              | Positive integer, 1-7200                                          |
+|                                | probes.                                                                                      |                 |                                                                   |
++--------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **agent.tcp_keepintvl**        | Time (in seconds) between individual keepalive probes.                                       | 15              | Positive integer, 1-100                                           |
++--------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **agent.tcp_keepcnt**          | Maximum number of unanswered keepalive probes before the kernel drops the connection.        | 4               | Positive integer, 1-50                                            |
++--------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **agent.max_attempts**         | Maximum number of attempts for failed requests.                                              | 4               | Positive integer                                                  |
++--------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **agent.request_pool**         | Size of the request pool used for manager communications.                                    | 1024            | Positive integer                                                  |
++--------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **agent.request_rto_sec**      | Seconds component of the retransmission timeout for requests.                                | 1               | Positive integer                                                  |
++--------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **agent.request_rto_msec**     | Milliseconds component of the retransmission timeout for requests.                           | 0               | Integer from 0 to 999                                             |
++--------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **agent.remote_conf**          | Controls whether the agent accepts centralized configuration from the manager.               | 1               | 0 (disabled), 1 (enabled)                                         |
++--------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **agent.min_eps**              | Minimum events per second permitted in <client_buffer> configuration.                        | 50              | Any integer between 1 and 1000.                                   |
++--------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **agent.state_interval**       | Interval, in seconds, for updating the agent state information.                              | 5               | 0 (disables status file). Any other integer between 1 and 86400   |
++--------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **agent.warn_level**           | Buffer usage percentage at which a warning state begins.                                     | 90              | Any integer between 1 and 100.                                    |
++--------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **agent.normal_level**         | Buffer usage percentage at which the buffer returns to normal state.                         | 70              | Any integer between 0 and agent.warn_level - 1.                   |
++--------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **agent.tolerance**            | Percentage tolerance applied to buffer usage fluctuations.                                   | 10              | Any integer between 0 and 600.                                    |
++--------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **monitord.compress**          | Controls whether rotated logs are compressed.                                                | 1               | 0 (disabled), 1 (enabled)                                         |
++--------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **monitord.keep_log_days**     | Number of days to retain rotated logs.                                                       | 365             | Positive integer                                                  |
++--------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **monitord.day_wait**          | Time of day at which log rotation occurs.                                                    | 0               | Time value in hh:mm format                                        |
++--------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **monitord.size_rotate**       | Maximum log-file size, in megabytes, before rotation. A value of 0 means unlimited.          | 0               | 0 or positive integer                                             |
++--------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **monitord.daily_rotations**   | Number of daily log rotations to retain.                                                     | 12              | Positive integer                                                  |
++--------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+| **monitord.rotate_log**        | Controls whether automatic log rotation is enabled.                                          | 1               | 0 (disabled), 1 (enabled)                                         |
++--------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
+
+Execd
+^^^^^^
+
+The ``execd.*`` internal options configure additional Active response settings.
+
++------------------------------+-----------------------------------------------------------------+-----------------+----------------------------------------+
+| Setting                      | Description                                                     | Default value   | Allowed values                         |
++==============================+=================================================================+=================+========================================+
+| **execd.debug**              | Debug logging level for the execd daemon.                       | 0               | 0 (disabled), 1 (basic), 2 (verbose)   |
++------------------------------+-----------------------------------------------------------------+-----------------+----------------------------------------+
+| **execd.max_restart_lock**   | Maximum timeout that the agent cannot restart while updating.   | 600             | Any integer between 0 and 3600.        |
++------------------------------+-----------------------------------------------------------------+-----------------+----------------------------------------+
+
+Wazuh command
+^^^^^^^^^^^^^^
+
+The ``wazuh_command.*`` internal options configure the Command wodle.
+
++-------------------------------------+---------------------------------------------------------------------------------------+-----------------+-----------------------------+
+| Setting                             | Description                                                                           | Default value   | Allowed values              |
++=====================================+=======================================================================================+=================+=============================+
+| **wazuh_command.remote_commands**   | Controls whether the Command wodle accepts commands from centralized configuration.   | 0               | 0 (disabled), 1 (enabled)   |
++-------------------------------------+---------------------------------------------------------------------------------------+-----------------+-----------------------------+
 
 Syscheck
---------
+^^^^^^^^^^^^^^^^^^
 
-+--------------------------------------+---------------+--------------------------------------------------------------------------------+
-| **syscheck.rt_delay**                | Description   | Time in milliseconds for delay between alerts in real-time.                    |
-+                                      +---------------+--------------------------------------------------------------------------------+
-|                                      | Default value | 10                                                                             |
-+                                      +---------------+--------------------------------------------------------------------------------+
-|                                      | Allowed value | Any integer between 1 and 1000                                                 |
-+--------------------------------------+---------------+--------------------------------------------------------------------------------+
-| **syscheck.max_fd_win_rt**           | Description   | Maximum numbers of directories can be configured in ossec.conf for Windows     |
-|                                      |               | in realtime and whodata mode.                                                  |
-+                                      +---------------+--------------------------------------------------------------------------------+
-|                                      | Default value | 256                                                                            |
-+                                      +---------------+--------------------------------------------------------------------------------+
-|                                      | Allowed value | Any integer between 1 and 1024                                                 |
-+--------------------------------------+---------------+--------------------------------------------------------------------------------+
-| **syscheck.max_audit_entries**       | Description   | Maximum number of directories monitored for who-data on Linux.                 |
-+                                      +---------------+--------------------------------------------------------------------------------+
-|                                      | Default value | 256                                                                            |
-+                                      +---------------+--------------------------------------------------------------------------------+
-|                                      | Allowed value | Any integer between 1 and 4096                                                 |
-+--------------------------------------+---------------+--------------------------------------------------------------------------------+
-| **syscheck.default_max_depth**       | Description   | Maximum level of recursion allowed while reading directories.                  |
-+                                      +---------------+--------------------------------------------------------------------------------+
-|                                      | Default value | 256                                                                            |
-+                                      +---------------+--------------------------------------------------------------------------------+
-|                                      | Allowed value | Any integer between 1 and 320                                                  |
-+--------------------------------------+---------------+--------------------------------------------------------------------------------+
-| **syscheck.symlink_scan_interval**   | Description   | Check interval of the symbolic links configured in the directories section.    |
-+                                      +---------------+--------------------------------------------------------------------------------+
-|                                      | Default value | 600                                                                            |
-+                                      +---------------+--------------------------------------------------------------------------------+
-|                                      | Allowed value | Any integer between 1 and 2592000                                              |
-+--------------------------------------+---------------+--------------------------------------------------------------------------------+
-| **syscheck.file_max_size**           | Description   | Maximum file size for calculating integrity hashes (in mebibytes).             |
-+                                      +---------------+--------------------------------------------------------------------------------+
-|                                      | Default value | 1024                                                                           |
-+                                      +---------------+--------------------------------------------------------------------------------+
-|                                      | Allowed value | 0: Unlimited                                                                   |
-+                                      +               +--------------------------------------------------------------------------------+
-|                                      |               | Any integer between 0 and 4095                                                 |
-+--------------------------------------+---------------+--------------------------------------------------------------------------------+
-|    **syscheck.debug**                | Description   | Debug level (used in manager and Unix agent installations).                    |
-+                                      +---------------+--------------------------------------------------------------------------------+
-|                                      | Default value | 0                                                                              |
-+                                      +---------------+--------------------------------------------------------------------------------+
-|                                      | Allowed value | 0: No debug output                                                             |
-+                                      +               +--------------------------------------------------------------------------------+
-|                                      |               | 1: Standard debug output                                                       |
-+                                      +               +--------------------------------------------------------------------------------+
-|                                      |               | 2: Verbose debug output                                                        |
-+--------------------------------------+---------------+--------------------------------------------------------------------------------+
+The ``syscheck.*`` internal options configure the File Integrity Monitoring module.
+
++-------------------------+--------------------------------------------------------------------------+-----------------+----------------------------------------+
+| Setting                 | Description                                                              | Default value   | Allowed values                         |
++=========================+==========================================================================+=================+========================================+
+| **syscheck.sleep**      | Time to sleep between scans.                                             |                 |                                        |
++-------------------------+--------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **syscheck.debug**      | Controls debug-level logging for the File Integrity Monitoring module.   | 0               | 0 (disabled), 1 (basic), 2 (verbose)   |
++-------------------------+--------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **syscheck.rt_delay**   | Delay before processing real-time events.                                |                 |                                        |
++-------------------------+--------------------------------------------------------------------------+-----------------+----------------------------------------+
+
+Logcollector
+^^^^^^^^^^^^^
+
+The ``logcollector.*`` internal options configure the Logcollector module.
+
++-------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| Setting                                   | Description                                                                                  | Default value   | Allowed values                         |
++===========================================+==============================================================================================+=================+========================================+
+| **logcollector.loop_timeout**             | Interval, in seconds, for checking monitored log files for changes.                          | 2               | Positive integer                       |
++-------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **logcollector.open_attempts**            | Number of attempts to open a log file before stopping retries. A value of 0 means unlimited  | 0               | 0 or integer from 2 to 998             |
+|                                           | retries.                                                                                     |                 |                                        |
++-------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **logcollector.remote_commands**          | Controls whether Logcollector accepts commands from centralized configuration.               | 0               | 0 (disabled), 1 (enabled)              |
++-------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **logcollector.vcheck_files**             | Interval, in seconds, for checking file metadata changes such as rotation or deletion.       | 64              | Integer from 0 to 1024                 |
++-------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **logcollector.max_lines**                | Maximum number of lines read from one file during a single iteration. A value of 0 disables  | 10000           | 0 or integer from 100 to 1000000       |
+|                                           | the limit.                                                                                   |                 |                                        |
++-------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **logcollector.max_files**                | Maximum number of files that Logcollector can monitor simultaneously.                        | 1000            | Integer from 1 to 100000               |
++-------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **logcollector.sock_fail_time**           | Wait time, in seconds, before retrying a failed socket connection.                           | 300             | Integer from 1 to 3600                 |
++-------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **logcollector.input_threads**            | Number of threads used to read log files.                                                    | 4               | Positive integer                       |
++-------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **logcollector.queue_size**               | Size of the internal output queue for collected log events.                                  | 1024            | Integer from 128 to 220000             |
++-------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **logcollector.sample_log_length**        | Maximum number of characters from a log sample included in error messages.                   | 64              | Integer from 1 to 4096                 |
++-------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **logcollector.rlimit_nofile**            | Maximum number of file descriptors that Logcollector can open.                               | 1100            | Integer from 1024 to 1048576           |
++-------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **logcollector.force_reload**             | Controls whether Logcollector periodically closes and reopens monitored files.               | 0               | 0 (disabled), 1 (enabled)              |
++-------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **logcollector.reload_interval**          | Interval, in seconds, between forced file-handler reloads. Applies when                      | 64              | Integer from 1 to 86400                |
+|                                           | logcollector.force_reload=1.                                                                 |                 |                                        |
++-------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **logcollector.reload_delay**             | Delay, in milliseconds, between closing and reopening files during a forced reload.          | 1000            | Integer from 0 to 30000                |
++-------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **logcollector.exclude_files_interval**   | Interval, in seconds, for refreshing the list of excluded files.                             | 86400           | Integer from 1 to 172800               |
++-------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **logcollector.state_interval**           | Interval, in seconds, for updating the Logcollector state file. A value of 0 disables        | 60              | Integer from 0 to 3600                 |
+|                                           | state-file creation and updates.                                                             |                 |                                        |
++-------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **logcollector.debug**                    | Debug logging level for the Logcollector module.                                             | 0               | 0 (disabled), 1 (basic), 2 (verbose)   |
++-------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
 
 Rootcheck
----------
+^^^^^^^^^^^^^^^^^^^
 
-+--------------------------+----------------+-------------------------------------------------------------------------------+
-|    **rootcheck.sleep**   | Description    | Number of milliseconds to sleep after reading one PID or suspicious port.     |
-+                          +----------------+-------------------------------------------------------------------------------+
-|                          | Default value  | 50                                                                            |
-+                          +----------------+-------------------------------------------------------------------------------+
-|                          | Allowed values | Any integer between 0 and 1000.                                               |
-+--------------------------+----------------+-------------------------------------------------------------------------------+
+The ``rootcheck.*`` internal options configure the Rootcheck module.
 
-Security Configuration Assessment
----------------------------------
++-----------------------+-------------------------------------------------------------------------------+-----------------+-----------------------------------+
+| Setting               | Description                                                                   | Default value   | Allowed values                    |
++=======================+===============================================================================+=================+===================================+
+| **rootcheck.sleep**   | Sleep time, in milliseconds, between iterations of the Rootcheck scan loop.   | 50              | Any integer between 0 and 1000.   |
++-----------------------+-------------------------------------------------------------------------------+-----------------+-----------------------------------+
 
-+-----------------------------------+----------------+------------------------------------------------------------------------------------------------------------------+
-|    **sca.request_db_interval**    | Description    | In case of integrity fail, this is the maximum interval (minutes) to resend the scan information to the manager. |
-+                                   +----------------+------------------------------------------------------------------------------------------------------------------+
-|                                   | Default value  | 5                                                                                                                |
-+                                   +----------------+------------------------------------------------------------------------------------------------------------------+
-|                                   | Allowed values | Any integer between 1 and 60.                                                                                    |
-+-----------------------------------+----------------+------------------------------------------------------------------------------------------------------------------+
-|    **sca.remote_commands**        | Description    | Enable the execution of commands in policy files received from the manager (Files in etc/shared).                |
-+                                   +----------------+------------------------------------------------------------------------------------------------------------------+
-|                                   | Default value  | 0                                                                                                                |
-+                                   +----------------+------------------------------------------------------------------------------------------------------------------+
-|                                   | Allowed values | 1 (enabled) or 0 (disabled).                                                                                     |
-+-----------------------------------+----------------+------------------------------------------------------------------------------------------------------------------+
-|    **sca.commands_timeout**       | Description    | Timeout for the commands execution.                                                                              |
-+                                   +----------------+------------------------------------------------------------------------------------------------------------------+
-|                                   | Default value  | 30 (seconds)                                                                                                     |
-+                                   +----------------+------------------------------------------------------------------------------------------------------------------+
-|                                   | Allowed values | Any integer between 1 and 300.                                                                                   |
-+-----------------------------------+----------------+------------------------------------------------------------------------------------------------------------------+
+.. _internal_options_sca:
 
-Vulnerability Detection
------------------------
+SCA
+^^^^
 
-+----------------------------------------------------+----------------+----------------------------------------------------------------------------------+
-|  **vulnerability-detection.translation_lru_size**  | Description    | LRU cache size assigned for package translation process (in number of elements). |
-+                                                    +----------------+----------------------------------------------------------------------------------+
-|                                                    | Default value  | 2048                                                                             |
-+                                                    +----------------+----------------------------------------------------------------------------------+
-|                                                    | Allowed values | Any integer between 1 and 100000                                                 |
-+----------------------------------------------------+----------------+----------------------------------------------------------------------------------+
-|  **vulnerability-detection.osdata_lru_size**       | Description    | LRU cache size assigned for agents' OS data (in number of elements).             |
-+                                                    +----------------+----------------------------------------------------------------------------------+
-|                                                    | Default value  | 1000                                                                             |
-+                                                    +----------------+----------------------------------------------------------------------------------+
-|                                                    | Allowed values | Any integer between 1 and 100000                                                 |
-+----------------------------------------------------+----------------+----------------------------------------------------------------------------------+
-|  **vulnerability-detection.remediation_lru_size**  | Description    | LRU cache size assigned for vulnerability remediation (in number of elements).   |
-+                                                    +----------------+----------------------------------------------------------------------------------+
-|                                                    | Default value  | 2048                                                                             |
-+                                                    +----------------+----------------------------------------------------------------------------------+
-|                                                    | Allowed values | Any integer between 1 and 100000                                                 |
-+----------------------------------------------------+----------------+----------------------------------------------------------------------------------+
+The ``sca.*`` internal options configure the Security Configuration Assessment module.
 
-Wazuh
------
-
-+-------------------------------+----------------+--------------------------------------------------------------------+
-|  **wazuh.thread_stack_size**  | Description    | Stack size assigned for child threads created in Wazuh (in KiB).   |
-+                               +----------------+--------------------------------------------------------------------+
-|                               | Default value  | 8192                                                               |
-+                               +----------------+--------------------------------------------------------------------+
-|                               | Allowed values | Any integer between 2048 and 65536                                 |
-+-------------------------------+----------------+--------------------------------------------------------------------+
-
-Wazuh Clusterd
---------------
-
-+---------------------------+----------------+------------------------------------------------------------------------+
-| **wazuh_clusterd.debug**  | Description    | Debug level.                                                           |
-+                           +----------------+------------------------------------------------------------------------+
-|                           | Default value  | 0                                                                      |
-+                           +----------------+------------------------------------------------------------------------+
-|                           | Allowed value  | 0: No debug output.                                                    |
-+                           +                +------------------------------------------------------------------------+
-|                           |                | 1: Standard debug output.                                              |
-+                           +                +------------------------------------------------------------------------+
-|                           |                | 2: Verbose debug output.                                               |
-+---------------------------+----------------+------------------------------------------------------------------------+
-
-Wazuh Database
---------------
-
-The Wazuh Database Synchronization Module starts automatically on the server and local profiles and requires no configuration, however, some optional settings are available.
-
-The module uses *inotify* from Linux to monitor changes to every log file in real-time. Databases will be updated as soon as possible when a change is detected. **If inotify is not supported**, (for example, on operating systems other than Linux) every log file will be scanned continuously, looking for changes, with a default delay of one minute between scans.
-
-How to disable the module
-^^^^^^^^^^^^^^^^^^^^^^^^^
-
-To disable the Wazuh Database Synchronization Module, the sync directives must be set to 0 in the ``etc/local_internal_options.conf`` file as shown below::
-
-    wazuh_database.sync_agents=0
-
-Once these settings have been adjusted, the file must be saved followed by a restart of Wazuh.  With the above settings, the Database Synchronization Module will not be loaded when Wazuh starts.
-
-+-----------------------------------------------+---------------+-------------------------------------------------------------------------------------+
-|   **wazuh_database.sync_agents**              | Description   | Toggles synchronization of agent database with client.keys on or off.               |
-|                                               +---------------+-------------------------------------------------------------------------------------+
-|                                               | Default value | 1                                                                                   |
-|                                               +---------------+-------------------------------------------------------------------------------------+
-|                                               | Allowed value | 0, 1                                                                                |
-+-----------------------------------------------+---------------+-------------------------------------------------------------------------------------+
-|    **wazuh_database.real_time**               | Description   | Toggles synchronization of data in real-time (supported on Linux only) on and off.  |
-|                                               +---------------+-------------------------------------------------------------------------------------+
-|                                               | Default value | 1                                                                                   |
-|                                               +---------------+-------------------------------------------------------------------------------------+
-|                                               | Allowed value | 0, 1                                                                                |
-+-----------------------------------------------+---------------+-------------------------------------------------------------------------------------+
-|      **wazuh_database.interval**              | Description   | Interval to sleep between cycles. (Only used if real time sync is disabled).        |
-+                                               +---------------+-------------------------------------------------------------------------------------+
-|                                               | Default value | 60                                                                                  |
-|                                               +---------------+-------------------------------------------------------------------------------------+
-|                                               | Allowed value | Any integer between 0 and 86400 (seconds).                                          |
-+-----------------------------------------------+---------------+-------------------------------------------------------------------------------------+
-|      **wazuh_database.max_queued_events**     | Description   | Maximum number of queued events (only used if *inotify* is available).              |
-|                                               +---------------+-------------------------------------------------------------------------------------+
-|                                               | Default value | 0 (use system default value).                                                       |
-|                                               +---------------+-------------------------------------------------------------------------------------+
-|                                               | Allowed value | Any integer between 0 and 2147483647.                                               |
-+-----------------------------------------------+---------------+-------------------------------------------------------------------------------------+
-
-.. _wazuh_modules_options:
-
-Wazuh Modules
--------------
-
-+-----------------------------------+---------------+-------------------------------------------------------------------------------------+
-| **wazuh_modules.task_nice**       | Description   | Indicates the priority of the tasks. The lower the value, the higher the priority.  |
-+                                   +---------------+-------------------------------------------------------------------------------------+
-|                                   | Default value | 10                                                                                  |
-+                                   +---------------+-------------------------------------------------------------------------------------+
-|                                   | Allowed value | Any integer between -20 and 19.                                                     |
-+-----------------------------------+---------------+-------------------------------------------------------------------------------------+
-| **wazuh_modules.rlimit_nofile**   | Description   | Maximum number of file descriptor that Wazuh modules can open.                      |
-+                                   +---------------+-------------------------------------------------------------------------------------+
-|                                   | Default value | 8192                                                                                |
-+                                   +---------------+-------------------------------------------------------------------------------------+
-|                                   | Allowed value | Any integer between 1024 and 1048576                                                |
-+-----------------------------------+---------------+-------------------------------------------------------------------------------------+
-| **wazuh_modules.max_eps**         | Description   | Maximum number of events per second sent by all Wazuh Module.                       |
-+                                   +---------------+-------------------------------------------------------------------------------------+
-|                                   | Default value | 100                                                                                 |
-+                                   +---------------+-------------------------------------------------------------------------------------+
-|                                   | Allowed value | Any integer between 1 and 1000                                                      |
-+-----------------------------------+---------------+-------------------------------------------------------------------------------------+
-| **wazuh_modules.kill_timeout**    | Description   | Time for a process to quit before being killed during Modulesd exiting, in seconds. |
-+                                   +---------------+-------------------------------------------------------------------------------------+
-|                                   | Default value | 10                                                                                  |
-+                                   +---------------+-------------------------------------------------------------------------------------+
-|                                   | Allowed value | 0: Kill immediately                                                                 |
-+                                   +               +-------------------------------------------------------------------------------------+
-|                                   |               | Any integer between 1 and 3600                                                      |
-+-----------------------------------+---------------+-------------------------------------------------------------------------------------+
-|   **wazuh_modules.debug**         | Description   | Debug level.                                                                        |
-+                                   +---------------+-------------------------------------------------------------------------------------+
-|                                   | Default value | 0                                                                                   |
-+                                   +---------------+-------------------------------------------------------------------------------------+
-|                                   | Allowed value | 0: No debug output.                                                                 |
-+                                   +               +-------------------------------------------------------------------------------------+
-|                                   |               | 1: Standard debug output.                                                           |
-+                                   +               +-------------------------------------------------------------------------------------+
-|                                   |               | 2: Verbose debug output.                                                            |
-+-----------------------------------+---------------+-------------------------------------------------------------------------------------+
-
-.. _wazuh_command_remote_commands:
-
-Wazuh Command
--------------
-
-+-----------------------------------+---------------+---------------------------------------------------------------------------------------------------+
-| **wazuh_command.remote_commands** | Description   | Toggles whether Command Module should accept commands defined in the shared configuration or not. |
-+                                   +---------------+---------------------------------------------------------------------------------------------------+
-|                                   | Default value | 0                                                                                                 |
-+                                   +---------------+---------------------------------------------------------------------------------------------------+
-|                                   | Allowed value | 0: Disable remote commands.                                                                       |
-+                                   +               +---------------------------------------------------------------------------------------------------+
-|                                   |               | 1: Enable remote commands.                                                                        |
-+-----------------------------------+---------------+---------------------------------------------------------------------------------------------------+
-
-Wazuh-db
---------
-
-+-------------------------------------------+---------------+-------------------------------------------------------------------------------------+
-|      **wazuh_db.worker_pool_size**        | Description   | Number of worker threads                                                            |
-|                                           +---------------+-------------------------------------------------------------------------------------+
-|                                           | Default value | 8                                                                                   |
-|                                           +---------------+-------------------------------------------------------------------------------------+
-|                                           | Allowed value | Any integer between 1 and 32                                                        |
-+-------------------------------------------+---------------+-------------------------------------------------------------------------------------+
-|      **wazuh_db.open_db_limit**           | Description   | Maximum number of allowed open databases before closing                             |
-|                                           +---------------+-------------------------------------------------------------------------------------+
-|                                           | Default value | 64                                                                                  |
-|                                           +---------------+-------------------------------------------------------------------------------------+
-|                                           | Allowed value | Any integer between 1 and 4096                                                      |
-+-------------------------------------------+---------------+-------------------------------------------------------------------------------------+
-|      **wazuh_db.rlimit_nofile**           | Description   | Maximum number of file descriptors that Wazuh-DB can open.                          |
-+                                           +---------------+-------------------------------------------------------------------------------------+
-|                                           | Default value | 65536                                                                               |
-+                                           +---------------+-------------------------------------------------------------------------------------+
-|                                           | Allowed value | Any integer between 1024 and 1048576.                                               |
-+-------------------------------------------+---------------+-------------------------------------------------------------------------------------+
-|      **wazuh_db.commit_time_min**         | Description   | Minimum time margin before committing.                                              |
-+                                           +---------------+-------------------------------------------------------------------------------------+
-|                                           | Default value | 10                                                                                  |
-+                                           +---------------+-------------------------------------------------------------------------------------+
-|                                           | Allowed value | Any integer between 1 and 3600.                                                     |
-+-------------------------------------------+---------------+-------------------------------------------------------------------------------------+
-|      **wazuh_db.commit_time_max**         | Description   | Maximum time margin before committing.                                              |
-+                                           +---------------+-------------------------------------------------------------------------------------+
-|                                           | Default value | 60                                                                                  |
-+                                           +---------------+-------------------------------------------------------------------------------------+
-|                                           | Allowed value | Any integer between 1 and 3600.                                                     |
-+-------------------------------------------+---------------+-------------------------------------------------------------------------------------+
-|      **wazuh_db.max_fragmentation**       | Description   | Maximum fragmentation allowed for a database.                                       |
-+                                           +---------------+-------------------------------------------------------------------------------------+
-|                                           | Default value | 90                                                                                  |
-+                                           +---------------+-------------------------------------------------------------------------------------+
-|                                           | Allowed value | Any integer between 0 and 100.                                                      |
-+-------------------------------------------+---------------+-------------------------------------------------------------------------------------+
-|    **wazuh_db.fragmentation_threshold**   | Description   | Indicates the allowed fragmentation threshold.                                      |
-+                                           +---------------+-------------------------------------------------------------------------------------+
-|                                           | Default value | 75                                                                                  |
-+                                           +---------------+-------------------------------------------------------------------------------------+
-|                                           | Allowed value | Any integer between 0 and 100.                                                      |
-+-------------------------------------------+---------------+-------------------------------------------------------------------------------------+
-|      **wazuh_db.fragmentation_delta**     | Description   | | Indicates the allowed fragmentation difference between the last time              |
-|                                           |               | | the vacuum was performed and the current measurement.                             |
-+                                           +---------------+-------------------------------------------------------------------------------------+
-|                                           | Default value | 5                                                                                   |
-+                                           +---------------+-------------------------------------------------------------------------------------+
-|                                           | Allowed value | Any integer between 0 and 100.                                                      |
-+-------------------------------------------+---------------+-------------------------------------------------------------------------------------+
-|      **wazuh_db.free_pages_percentage**   | Description   | | Indicates the minimum percentage of free pages present in a database that         |
-|                                           |               | | can trigger a vacuum.                                                             |
-+                                           +---------------+-------------------------------------------------------------------------------------+
-|                                           | Default value | 0                                                                                   |
-+                                           +---------------+-------------------------------------------------------------------------------------+
-|                                           | Allowed value | Any integer between 0 and 99.                                                       |
-+-------------------------------------------+---------------+-------------------------------------------------------------------------------------+
-| **wazuh_db.check_fragmentation_interval** | Description   | Interval for database fragmentation check, in seconds.                              |
-+                                           +---------------+-------------------------------------------------------------------------------------+
-|                                           | Default value | 7200                                                                                |
-+                                           +---------------+-------------------------------------------------------------------------------------+
-|                                           | Allowed value | Any integer between 1 and 30758400.                                                 |
-+-------------------------------------------+---------------+-------------------------------------------------------------------------------------+
-|      **wazuh_db.debug**                   | Description   | Debug level                                                                         |
-|                                           +---------------+-------------------------------------------------------------------------------------+
-|                                           | Default value | 0                                                                                   |
-+                                           +---------------+-------------------------------------------------------------------------------------+
-|                                           | Allowed value | 0: No debug output                                                                  |
-+                                           +               +-------------------------------------------------------------------------------------+
-|                                           |               | 1: Standard debug output                                                            |
-+                                           +               +-------------------------------------------------------------------------------------+
-|                                           |               | 2: Verbose debug output                                                             |
-+-------------------------------------------+---------------+-------------------------------------------------------------------------------------+
-
-Wazuh-download
---------------
-
-+------------------------------------+---------------+-------------------------------------------------------------------------------------+
-|      **wazuh_download.enabled**    | Description   | Enable download module                                                              |
-|                                    +---------------+-------------------------------------------------------------------------------------+
-|                                    | Default value | 1                                                                                   |
-+                                    +---------------+-------------------------------------------------------------------------------------+
-|                                    | Allowed value | 0: Disable download module.                                                         |
-+                                    +               +-------------------------------------------------------------------------------------+
-|                                    |               | 1: Enable download module.                                                          |
-+------------------------------------+---------------+-------------------------------------------------------------------------------------+
-
-Windows
--------
-
-+----------------------------+---------------+--------------------------------------------------------------------------+
-|      **windows.debug**     | Description   | Debug level (used in windows agent installations).                       |
-+                            +---------------+--------------------------------------------------------------------------+
-|                            | Default value | 0                                                                        |
-+                            +---------------+--------------------------------------------------------------------------+
-|                            | Allowed value | 0: No debug output.                                                      |
-+                            +               +--------------------------------------------------------------------------+
-|                            |               | 1: Standard debug output.                                                |
-+                            +               +--------------------------------------------------------------------------+
-|                            |               | 2: Verbose debug output.                                                 |
-+----------------------------+---------------+--------------------------------------------------------------------------+
++----------------------------+----------------------------------------------------------------------------------------------+-----------------+-----------------------------+
+| Setting                    | Description                                                                                  | Default value   | Allowed values              |
++============================+==============================================================================================+=================+=============================+
+| **sca.remote_commands**    | Controls whether SCA policies received through shared configuration can execute commands.    | 0               | 0 (disabled), 1 (enabled)   |
+|                            | Local policies can execute commands regardless of this setting.                              |                 |                             |
++----------------------------+----------------------------------------------------------------------------------------------+-----------------+-----------------------------+
+| **sca.commands_timeout**   | Default timeout, in seconds, for commands executed during an SCA scan.                       | 30              | Integer from 1 to 300       |
++----------------------------+----------------------------------------------------------------------------------------------+-----------------+-----------------------------+

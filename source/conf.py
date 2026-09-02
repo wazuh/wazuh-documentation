@@ -101,18 +101,31 @@ exclude_patterns = [
     'deployment-options/amazon-machine-images/**',
     'deployment-options/wazuh-from-sources/**',
     'deployment-options/deploying-with-puppet/**',
-    'user-manual/api/**',
+    'user-manual/api/index.rst',
+    'user-manual/api/getting-started.rst',
+    'user-manual/api/configuration.rst',
+    'user-manual/api/securing-api.rst',
+    'user-manual/api/use-cases.rst',
+    'user-manual/api/api-examples.rst',
+    'user-manual/api/queries.rst',
+    'user-manual/api/requests-responses.rst',
+    'user-manual/api/rbac/**',
     'user-manual/capabilities/active-response/**',
     'user-manual/capabilities/agentless-monitoring/**',
-    'user-manual/capabilities/log-data-collection/**',
+    'user-manual/capabilities/log-data-collection/journald.rst',
     'user-manual/capabilities/malware-detection/**',
-    'user-manual/indexer-api/**',
+    'user-manual/indexer-api/index.rst',
+    'user-manual/indexer-api/getting-started.rst',
+    'user-manual/indexer-api/configuration.rst',
+    'user-manual/indexer-api/securing-indexer-api.rst',
+    'user-manual/indexer-api/use-case.rst',
     'user-manual/agent/agent-enrollment/deployment-variables/**',
     'user-manual/agent/agent-management/remote-upgrading/**',
     'user-manual/agent/agent-management/key-request.rst',
     'user-manual/agent/agent-management/antiflooding.rst',
     'user-manual/agent/agent-management/labels.rst',
-    'user-manual/reference/**',
+    'user-manual/reference/unattended-installation.rst',
+    'user-manual/reference/statistics-files/**',
     'user-manual/ruleset/**',
     'user-manual/manager/alert-management.rst',
     'user-manual/manager/event-logging.rst',
@@ -126,7 +139,6 @@ exclude_patterns = [
     'compliance/pci-dss/**',
     'compliance/hipaa/**',
     'compliance/nist/**',
-    'compliance/tsc/**',
     'proof-of-concept-guide/detect-unauthorized-processes-netcat.rst',
     'proof-of-concept-guide/poc-detect-trojan.rst',
     'proof-of-concept-guide/audit-commands-run-by-user.rst',
@@ -206,7 +218,7 @@ if html_theme == 'wazuh_doc_theme_v3':
     # redirects.min.js should be loaded from the local folder if:
     # * the release is "current" (is_latest_release = True) or
     # * is a normal compilation (not for production)
-    html_theme_options['local_redirects_file'] = not (tags.has("production") or tags.has("dev"))
+    html_theme_options['local_redirects_file'] = is_latest_release or not (tags.has("production") or tags.has("dev"))
 
 # Add any paths that contain custom themes here, relative to this directory.
 html_theme_path = ['_themes']

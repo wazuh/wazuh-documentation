@@ -6,69 +6,88 @@
 Using Wazuh for TSC compliance
 ==============================
 
-The American Institute of Certified Professional Accountants (AICPA) developed the SOC 2 reporting framework to provide organizations with a uniform method to assess and report on the efficacy of their information security policies. SOC 2 reports focus on the five trust service categories of security, availability, processing integrity, confidentiality, and privacy.
+The American Institute of Certified Public Accountants (AICPA) developed the SOC 2 reporting framework. This framework provides a consistent basis for examining and reporting on controls relevant to the security, availability, processing integrity, confidentiality, and privacy of systems used to provide products or services. SOC 2 engagements use the AICPA Trust Services Criteria (TSC) to evaluate the design and operating effectiveness of those controls. The TSC Common Criteria are structurally aligned with the five components and 17 principles of the COSO Internal Control Integrated Framework, developed by the Committee of Sponsoring Organizations of the Treadway Commission (COSO). COSO is not a separate section of a SOC 2 report; instead, its internal-control concepts are reflected in the organization of the TSC Common Criteria.
 
-The Trust Services Criteria (TSC) created by the Assurance Services Executive Committee (ASEC) of the AICPA presents control evaluation benchmarks. These evaluation benchmarks include metrics for security, availability, processing integrity, confidentiality, and privacy of information and systems across an entire entity. These metrics also relate to granular aspects of the entity, such as a division, an operational procedure, or a particular type of information used by the entity. The AICPA defines the common criteria as a set of controls that apply to the five Trust Services Criteria categories. 
+This document outlines use cases that show how Wazuh supports compliance with the TSC common criteria and the additional criteria. We have also created the `Using Wazuh for TSC (2022 revision) requirements guide <https://documentation.wazuh.com/resources/using-wazuh-for-TSC-2022-requirements-guide.pdf>`__, which complements this document. Refer to the guide for more details on how Wazuh helps meet TSC requirements.
 
--  **The COSO Principles and Common Criteria**
+Trust Services Criteria (TSC)
+------------------------------
 
-   The Committee of Sponsoring Organizations (COSO) internal control framework provides a systematic approach for organizations to manage risk and improve performance. It includes a detailed framework for evaluating and improving an entity's internal control structure.
+The TSC Common Criteria (CC) are AICPA-defined control criteria for the SOC 2 Security category and serve as the common baseline for engagements that also address Availability, Processing Integrity, Confidentiality, or Privacy. When one or more of those additional Trust Services Categories are included in scope, the applicable category-specific criteria are evaluated alongside the Common Criteria. The Common Criteria define requirements for controls over the systems and services an entity uses to provide products or services. They address the control environment, communication and information, risk assessment, monitoring activities, control activities, logical and physical access controls, system operations, change management, and risk mitigation.
 
-   TSC common criteria (CC) provides a framework for assessing and certifying the security of information technology (IT) products and systems. It defines a set of security standards and evaluation guidelines that organizations can adopt to assess the security of IT products and systems.
+These common criteria address the logical and physical protection of information, systems, and networks. They are organized into nine categories, which are:
 
-   It's important to note that though both frameworks intersect, they are different. The TSC framework and COSO principles evaluate the effectiveness of an organization's internal controls and risk management processes. While the COSO principles prioritize the entity's overall internal control and risk management, the TSC common criteria focus primarily on the security of IT products and systems. It achieves this by providing a set of specific criteria for evaluating controls related to security, availability, processing integrity, confidentiality, and privacy.
+-  **CC1**: Control environment
+-  **CC2**: Communication and Information
+-  **CC3**: Risk Assessment
+-  **CC4**: Monitoring Activities
+-  **CC5**: Control Activities
+-  **CC6**: Logical and Physical Access Controls
+-  **CC7**: System Operations
+-  **CC8**: Change Management
+-  **CC9**: Risk Mitigation
 
-   Providing security to IT products and systems is a key element in improving an entity's overall risk management strategy and internal control structure. These criteria focus on the logical and physical protection of information, systems, and networks. The common criteria (CC) are organized into nine subsections, which are:
+COSO Principles and Common Criteria
+-------------------------------------
 
-   -  CC1: Control environment
-   -  CC2: Communication and Information
-   -  CC3: Risk Management and Design and Implementation of Controls
-   -  CC4: Control Activities
-   -  CC5: Monitoring of Controls
-   -  CC6: Logical and Physical Access Controls
-   -  CC7: System Operations
-   -  CC8: Change Management
-   -  CC9: Risk Mitigation
+The COSO Internal Control Integrated Framework sets out five components and 17 principles for designing, implementing, and evaluating an effective system of internal control. The AICPA TSC Common Criteria are structured around these COSO components and principles and apply them to controls over the systems and services used to meet trust services objectives.
 
-   In summary, SOC 2, TSC, COSO, and CC are all frameworks and standards organizations use to manage risks and ensure the effectiveness of their internal controls. SOC 2 and TSC focus on the security, availability, processing integrity, confidentiality, and privacy of an organization's systems and services. COSO provides a broader framework for enterprise risk management and internal control, while CC offers a method for evaluating the security features of IT products and systems. Organizations may use a combination of these frameworks and standards to develop a comprehensive risk management and compliance strategy.
+Although the COSO framework and the Trust Services Criteria (TSC) are closely related, they serve different purposes. COSO focuses on an entity's overall internal control system, while the TSC Common Criteria apply those internal control concepts to the systems and services used to achieve objectives related to security, availability, processing integrity, confidentiality, and privacy. The TSC Common Criteria incorporate the 17 principles of the COSO framework and extend them with criteria specific to these trust services objectives.
 
--  **TSC additional criteria**
+To view the TSC-related data on the Wazuh dashboard:
 
-   The TSC additional criteria are an extension of the common criteria. Organizations can use these additional criteria to address precise security requirements not defined by the conventional TSC common criteria.
+#. Navigate to **Regulatory Compliance** from the Wazuh **Overview** dashboard and click on **TSC**.
 
-Wazuh assists with these criteria by performing log collection, file integrity monitoring, configuration assessment, threat detection, vulnerability assessment, and automated threat response.
+   .. thumbnail:: /images/compliance/tsc/wazuh-overview-tsc-card.png
+      :title: Wazuh Overview dashboard
+      :alt: Wazuh Overview dashboard
+      :align: center
+      :width: 80%
 
-This document outlines use cases that show how Wazuh helps users comply with the TSC common criteria, and the additional criteria for availability, confidentiality, and processing integrity. We have also created the `Using Wazuh for TSC 2017 requirements guide <https://documentation.wazuh.com/resources/using-wazuh-for-TSC-2017-requirements-guide.pdf>`__, which complements this document. Please refer to the guide for more details on how Wazuh helps meet TSC requirements.
+   The **Dashboard** below shows an overview of TSC matched requirements within your environment. It also shows information about the TSC requirements for the top 10 agents, top requirements over time, and the most recent TSC events.
 
-The following sections outline some of the technical requirements that Wazuh supports:
+   .. thumbnail:: /images/compliance/tsc/tsc-dashboard-tab.png
+      :title: TSC Dashboard tab
+      :alt: TSC Dashboard tab
+      :align: center
+      :width: 80%
 
--  The COSO Principle and Common Criteria
+#. Switch to the **Controls** tab to view the **TSC** requirements breakdown.
 
-   -  :doc:`Common criteria 2.1 <common-criteria/cc2.1>`
-   -  :doc:`Common criteria 3.1 <common-criteria/cc3.1>`
-   -  :doc:`Common criteria 5.1 <common-criteria/cc5.1>`
-   -  :doc:`Common criteria 6.1 <common-criteria/cc6.1>`
-   -  :doc:`Common criteria 7.1 <common-criteria/cc7.1>`
-   -  :doc:`Common criteria 8.1 <common-criteria/cc8.1>`
+   .. thumbnail:: /images/compliance/tsc/tsc-controls-tab.png
+      :title: TSC Controls tab
+      :alt: TSC Controls tab
+      :align: center
+      :width: 80%
 
--  :doc:`Additional criteria <additional-criteria/additional-criteria>`
+#. Switch to the **Findings** tab to view the findings related to the **TSC** requirements. This shows TSC findings generated within your environment regardless of the log source.
 
-   -  :doc:`Availability - A1.1 <additional-criteria/a1.1>`
-   -  :doc:`Processing integrity - PI1.4 <additional-criteria/pi1.4>`
+   .. thumbnail:: /images/compliance/tsc/tsc-findings-tab.png
+      :title: TSC Findings tab
+      :alt: TSC Findings tab
+      :align: center
+      :width: 80%
+
+Wazuh has standard policies that include decoders, KVDBs, and rules that detect attacks, system errors, security misconfigurations, and policy violations. By default, the rules within these policies map to the associated TSC requirements. In Wazuh 5.0, :doc:`rules </user-manual/data-analysis/rules>` use the Sigma format. You can map a custom rule to one or more TSC requirements. To do this, add the requirement to the ``tsc`` list under the ``compliance`` field of the rule. For example:
+
+.. code-block:: yaml
+
+   compliance:
+     tsc:
+       - CC6.8
+       - CC7.1
+       - CC7.2
+       - CC7.3
+
+You can find examples of technical requirements that Wazuh supports in the following sections:
 
 .. toctree::
    :maxdepth: 1
-   :hidden:
 
-   Common criteria 2.1 <common-criteria/cc2.1>
-   Common criteria 3.1 <common-criteria/cc3.1>
-   Common criteria 5.1 <common-criteria/cc5.1>
-   Common criteria 6.1 <common-criteria/cc6.1>
-   Common criteria 7.1 <common-criteria/cc7.1>
-   Common criteria 8.1 <common-criteria/cc8.1>
-
-.. toctree::
-   :maxdepth: 2
-   :hidden:
-
+   common-criteria/cc2.1
+   common-criteria/cc3.1
+   common-criteria/cc5.1
+   common-criteria/cc6.1
+   common-criteria/cc7.1
+   common-criteria/cc8.1
    additional-criteria/additional-criteria

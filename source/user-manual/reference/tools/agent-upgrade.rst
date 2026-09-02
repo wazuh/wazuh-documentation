@@ -1,131 +1,78 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: List outdated agents and upgrade them using the agent_upgrade program. Learn more about it in this section of the Wazuh documentation.
+  :description: The agent_upgrade tool remotely upgrades Wazuh agents. Learn more about it in this section of the documentation.
+
+.. _agent_upgrade:
 
 agent_upgrade
-==============
+=============
 
-The agent_upgrade program allows you to list outdated agents and upgrade them.
+The ``agent_upgrade`` tool remotely upgrades Wazuh agents.
 
-.. note:: In case of having a multi-node Wazuh cluster, agent_upgrade must be executed on the node where the agent is connected.
+Use this tool to upgrade one or more Wazuh agents to a newer version, list outdated agents, or install a custom WPK package.
 
-.. note::
+Options
+-------
 
-   Since v4.1.0, the upgrade procedure is performed by the :doc:`Agent upgrade module </user-manual/agent/agent-management/remote-upgrading/agent-upgrade-module>` and the agent_upgrade script can be executed on any node.
-
-.. |WAZUH_CUR_MAJ| replace:: |WAZUH_CURRENT_MAJOR|
-
-+--------------------------------------------+--------------------------------------------------------------------------------+
-| Option                                     | Description                                                                    |
-+============================================+================================================================================+
-| -h, --help                                 | Displays the help message.                                                     |
-+--------------------------------------------+--------------------------------------------------------------------------------+
-| -l, --list_outdated                        | Generates a list with all outdated agents.                                     |
-+--------------------------------------------+--------------------------------------------------------------------------------+
-| -a AGENT_IDs, --agents AGENT_IDs           | Agent IDs to upgrade. When upgrading multiple agents, separate IDs with spaces.|
-+--------------------------------------------+--------------------------------------------------------------------------------+
-| -F, --force                                | Forces the agents to upgrade, ignoring version validations.                    |
-+--------------------------------------------+--------------------------------------------------------------------------------+
-| -s, --silent                               | Do not show output.                                                            |
-+--------------------------------------------+--------------------------------------------------------------------------------+
-| -v VERSION, --version VERSION              | Version to upgrade. [Default: latest Wazuh version]                            |
-+--------------------------------------------+--------------------------------------------------------------------------------+
-| -r REPOSITORY, --repository REPOSITORY     | Specify a repository URL. [Default: packages.wazuh.com/|WAZUH_CUR_MAJ|/wpk/]   |
-+--------------------------------------------+--------------------------------------------------------------------------------+
-| -f FILE, --file FILE                       | Custom WPK filename.                                                           |
-+--------------------------------------------+--------------------------------------------------------------------------------+
-| -x EXECUTE, --execute EXECUTE              | Executable filename in the WPK custom file. [Default ``upgrade.sh``]           |
-+--------------------------------------------+--------------------------------------------------------------------------------+
-| -d, --debug                                | Debug mode.                                                                    |
-+--------------------------------------------+--------------------------------------------------------------------------------+
-| --http                                     | Uses http protocol instead of https.                                           |
-+--------------------------------------------+--------------------------------------------------------------------------------+
-
-.. note:: By default, the timeout will be the maximum allowed by the agent with the ``execd.max_restart_lock`` option in :doc:`internal_options.conf<../internal-options>`.
++------------------------------------------------------------------------+------------------------------------------------------------------------------------------+
+| Option                                                                 | Description                                                                              |
++========================================================================+==========================================================================================+
+| -a <agent_id> [<agent_id> ...], --agents <agent_id> [<agent_id> ...]   | Specifies one or more agent IDs to upgrade.                                              |
++------------------------------------------------------------------------+------------------------------------------------------------------------------------------+
+| -d, --debug                                                            | Runs the tool in debug mode.                                                             |
++------------------------------------------------------------------------+------------------------------------------------------------------------------------------+
+| -f <file>, --file <file>                                               | Specifies a custom WPK package file.                                                     |
++------------------------------------------------------------------------+------------------------------------------------------------------------------------------+
+| -F, --force                                                            | Forces the upgrade, ignoring version validation checks.                                  |
++------------------------------------------------------------------------+------------------------------------------------------------------------------------------+
+| -h, --help                                                             | Displays the help message and exits.                                                     |
++------------------------------------------------------------------------+------------------------------------------------------------------------------------------+
+| --http                                                                 | Uses HTTP instead of HTTPS to download the upgrade package.                              |
++------------------------------------------------------------------------+------------------------------------------------------------------------------------------+
+| -l, --list_outdated                                                    | Lists all outdated agents.                                                               |
++------------------------------------------------------------------------+------------------------------------------------------------------------------------------+
+| --package_type <type>                                                  | Specifies the Linux package type to use (rpm or deb).                                    |
++------------------------------------------------------------------------+------------------------------------------------------------------------------------------+
+| -r <repository>, --repository <repository>                             | Specifies the repository URL used to download upgrade packages.                          |
++------------------------------------------------------------------------+------------------------------------------------------------------------------------------+
+| -s, --silent                                                           | Suppresses command output.                                                               |
++------------------------------------------------------------------------+------------------------------------------------------------------------------------------+
+| -v <version>, --version <version>                                      | Specifies the Wazuh version to install. The default is the latest available version.     |
++------------------------------------------------------------------------+------------------------------------------------------------------------------------------+
+| -x <file>, --execute <file>                                            | Specifies the executable contained in a custom WPK package. The default is upgrade.sh.   |
++------------------------------------------------------------------------+------------------------------------------------------------------------------------------+
 
 Examples
-----------
+--------
 
--  List outdated agents:
+List outdated agents:
 
-   .. code-block:: console
+.. code-block:: console
 
-       # /var/ossec/bin/agent_upgrade -l
+   # /var/wazuh-manager/bin/agent_upgrade -l
 
-   .. code-block:: none
-      :class: output
+The command output looks similar to this:
 
-      ID    Name                               Version
-      002   VM_Debian9                         Wazuh v4.2.0
-      003   VM_Debian8                         Wazuh v4.2.0
-      004   VM_WinServ2016                     Wazuh v4.1.0
+.. code-block:: none
+   :class: output
 
-      Total outdated agents: 3
+   ID    Name                                Version
+   005   MacOS                               v4.14.5
+   011   ubuntu2004                          v4.14.7
+   Total outdated agents: 2
 
--  Upgrade agent:
+Upgrade agent:
 
-   .. code-block:: console
+.. code-block:: console
 
-      # /var/ossec/bin/agent_upgrade -a 002
+   # /var/wazuh-manager/bin/agent_upgrade -a 011
 
-   The command returns output similar to the following example:
+The command output looks similar to this:
 
-   .. code-block:: none
-      :class: output
+.. code-block:: none
+   :class: output
 
-      Upgrading...
-
-      Upgraded agents:
-      	Agent 002 upgraded: Wazuh v4.2.0 -> Wazuh v4.14.5
-
--  Upgrade multiple agents:
-
-   .. code-block:: console
-
-       # /var/ossec/bin/agent_upgrade -a 003 004
-
-   The command returns output similar to the following example:
-
-   .. code-block:: none
-      :class: output
-
-      Upgrading...
-
-      Upgraded agents:
-      	Agent 003 upgraded: Wazuh v4.2.0 -> Wazuh v4.14.5
-      	Agent 004 upgraded: Wazuh v4.1.0 -> Wazuh v4.14.5
-
--  Upgrade agent using a custom repository:
-
-   .. code-block:: console
-
-      # /var/ossec/bin/agent_upgrade -a 002 -v v|WAZUH_CURRENT| -r http://mycompany.wpkrepo.com/
-
-   The command returns output similar to the following example:
-
-   .. code-block:: none
-      :class: output
-
-      Upgrading...
-
-      Upgraded agents:
-      	Agent 002 upgraded: Wazuh v4.2.0 -> Wazuh v4.14.5
-
--  Install custom WPK file:
-
-   .. code-block:: console
-
-      # /var/ossec/bin/agent_upgrade -a 002 -d -f /root/wazuh-agent_v|WAZUH_CURRENT|_debian.wpk -x install.sh
-
-   The command returns output similar to the following example:
-
-   .. code-block:: none
-       :class: output
-
-       Upgrading...
-
-       Upgraded agents:
-      	Agent 002 upgraded: Wazuh v4.2.0 -> Wazuh v4.14.5
-
-.. note:: When the agent finishes updating, it is automatically restarted to apply the new configuration.
+   Upgrading...
+   Upgraded agents:
+     Agent 011 upgraded: Wazuh v4.14.7 -> 5.0.0

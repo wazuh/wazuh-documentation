@@ -1,0 +1,2605 @@
+paths:
+  /_plugins/_security_analytics/detectors:
+    post:
+      tags:
+        - Detectors
+      summary: Create detector
+      description: |
+        Creates a detector. A detector defines which indices and rules to monitor on a schedule, and which triggers fire alerts when matching events occur.
+      operationId: createDetector
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: refresh
+          in: query
+          description: The refresh policy to apply after indexing the detector.
+          schema:
+            type: string
+            enum: [IMMEDIATE, WAIT_UNTIL, NONE]
+            default: IMMEDIATE
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DetectorRequest'
+            example:
+              name: "eth-port-security"
+              detector_type: "network"
+              enabled: true
+              schedule:
+                period:
+                  interval: 1
+                  unit: "MINUTES"
+              inputs:
+                - detector_input:
+                    description: "Detector for network log events"
+                    indices:
+                      - "network-logs*"
+                    custom_rules: []
+                    pre_packaged_rules:
+                      - id: "25b9c01c-6267-4297-a1e6-e19c74119fc0"
+              triggers:
+                - name: "network-trigger"
+                  severity: "1"
+                  types:
+                    - "network"
+                  ids:
+                    - "51e6ade4-b02a-4bd1-9235-59aa03a3c5ac"
+                  sev_levels:
+                    - "high"
+                  tags:
+                    - "attack.command_and_control"
+                  actions: []
+                  detection_types:
+                    - "rules"
+              threat_intel_enabled: false
+      responses:
+        '201':
+          description: Detector created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IndexDetectorResponse'
+              example:
+                _id: "OTAt2osBnP7bDuxxKr5q"
+                _version: 1
+                detector:
+                  name: "eth-port-security"
+                  detector_type: "network"
+                  enabled: true
+                  schedule:
+                    period:
+                      interval: 1
+                      unit: "MINUTES"
+                  inputs:
+                    - detector_input:
+                        description: "Detector for network log events"
+                        indices:
+                          - "network-logs*"
+                        custom_rules: []
+                        pre_packaged_rules:
+                          - id: "25b9c01c-6267-4297-a1e6-e19c74119fc0"
+                  triggers:
+                    - id: "5f5X8-1kR9uZbg=="
+                      name: "network-trigger"
+                      severity: "1"
+                      types:
+                        - "network"
+                      ids:
+                        - "51e6ade4-b02a-4bd1-9235-59aa03a3c5ac"
+                      sev_levels:
+                        - "high"
+                      tags:
+                        - "attack.command_and_control"
+                      actions: []
+                      detection_types:
+                        - "rules"
+                  last_update_time: 1755172800000
+                  enabled_time: 1755172800000
+                  threat_intel_enabled: false
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /_plugins/_security_analytics/detectors/{detector_id}:
+    put:
+      tags:
+        - Detectors
+      summary: Update detector
+      description: |
+        Updates an existing detector. The request body has the same shape as detector creation. `monitor_id` and `workflow_ids` from the existing detector are preserved internally when its underlying alerting monitors are re-provisioned.
+      operationId: updateDetector
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: detector_id
+          in: path
+          required: true
+          description: The unique identifier of the detector to update.
+          schema:
+            type: string
+          example: "OTAt2osBnP7bDuxxKr5q"
+        - name: refresh
+          in: query
+          description: The refresh policy to apply after indexing the detector.
+          schema:
+            type: string
+            enum: [IMMEDIATE, WAIT_UNTIL, NONE]
+            default: IMMEDIATE
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DetectorRequest'
+            example:
+              name: "eth-port-security"
+              detector_type: "network"
+              enabled: false
+              schedule:
+                period:
+                  interval: 5
+                  unit: "MINUTES"
+              inputs:
+                - detector_input:
+                    description: "Detector for network log events"
+                    indices:
+                      - "network-logs*"
+                    custom_rules: []
+                    pre_packaged_rules:
+                      - id: "25b9c01c-6267-4297-a1e6-e19c74119fc0"
+              triggers:
+                - name: "network-trigger"
+                  severity: "1"
+                  types:
+                    - "network"
+                  ids:
+                    - "51e6ade4-b02a-4bd1-9235-59aa03a3c5ac"
+                  sev_levels:
+                    - "high"
+                  tags:
+                    - "attack.command_and_control"
+                  actions: []
+                  detection_types:
+                    - "rules"
+              threat_intel_enabled: false
+      responses:
+        '200':
+          description: Detector updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IndexDetectorResponse'
+              example:
+                _id: "OTAt2osBnP7bDuxxKr5q"
+                _version: 2
+                detector:
+                  name: "eth-port-security"
+                  detector_type: "network"
+                  enabled: false
+                  schedule:
+                    period:
+                      interval: 5
+                      unit: "MINUTES"
+                  inputs:
+                    - detector_input:
+                        description: "Detector for network log events"
+                        indices:
+                          - "network-logs*"
+                        custom_rules: []
+                        pre_packaged_rules:
+                          - id: "25b9c01c-6267-4297-a1e6-e19c74119fc0"
+                  triggers:
+                    - id: "5f5X8-1kR9uZbg=="
+                      name: "network-trigger"
+                      severity: "1"
+                      types:
+                        - "network"
+                      ids:
+                        - "51e6ade4-b02a-4bd1-9235-59aa03a3c5ac"
+                      sev_levels:
+                        - "high"
+                      tags:
+                        - "attack.command_and_control"
+                      actions: []
+                      detection_types:
+                        - "rules"
+                  last_update_time: 1755173100000
+                  enabled_time: null
+                  threat_intel_enabled: false
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    get:
+      tags:
+        - Detectors
+      summary: Get detector
+      description: |
+        Returns a single detector by ID.
+      operationId: getDetector
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: detector_id
+          in: path
+          required: true
+          description: The unique identifier of the detector.
+          schema:
+            type: string
+          example: "OTAt2osBnP7bDuxxKr5q"
+        - name: version
+          in: query
+          description: Returns the detector document only if it matches this document version.
+          schema:
+            type: integer
+            format: int64
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IndexDetectorResponse'
+              example:
+                _id: "OTAt2osBnP7bDuxxKr5q"
+                _version: 1
+                detector:
+                  name: "eth-port-security"
+                  detector_type: "network"
+                  enabled: true
+                  schedule:
+                    period:
+                      interval: 1
+                      unit: "MINUTES"
+                  inputs:
+                    - detector_input:
+                        description: "Detector for network log events"
+                        indices:
+                          - "network-logs*"
+                        custom_rules: []
+                        pre_packaged_rules:
+                          - id: "25b9c01c-6267-4297-a1e6-e19c74119fc0"
+                  last_update_time: 1755172800000
+                  enabled_time: 1755172800000
+                  threat_intel_enabled: false
+                  triggers:
+                    - id: "5f5X8-1kR9uZbg=="
+                      name: "network-trigger"
+                      severity: "1"
+                      types:
+                        - "network"
+                      ids:
+                        - "51e6ade4-b02a-4bd1-9235-59aa03a3c5ac"
+                      sev_levels:
+                        - "high"
+                      tags:
+                        - "attack.command_and_control"
+                      actions: []
+                      detection_types:
+                        - "rules"
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          description: |
+            Forbidden - the caller does not have permission to access this detector.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+              example:
+                error:
+                  root_cause:
+                    - type: "status_exception"
+                      reason: "Do not have permissions to resource"
+                  type: "status_exception"
+                  reason: "Do not have permissions to resource"
+                status: 403
+        '404':
+          description: Not Found - no detector exists with the given ID.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+              example:
+                error:
+                  root_cause:
+                    - type: "status_exception"
+                      reason: "Detector not found."
+                  type: "status_exception"
+                  reason: "Detector not found."
+                status: 404
+
+    delete:
+      tags:
+        - Detectors
+      summary: Delete detector
+      description: |
+        Deletes a detector by ID. Standard (pre-packaged, non-custom) detectors cannot be deleted this way.
+      operationId: deleteDetector
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: detector_id
+          in: path
+          required: true
+          description: The unique identifier of the detector to delete.
+          schema:
+            type: string
+          example: "OTAt2osBnP7bDuxxKr5q"
+        - name: refresh
+          in: query
+          description: The refresh policy to apply after deleting the detector.
+          schema:
+            type: string
+            enum: [IMMEDIATE, WAIT_UNTIL, NONE]
+            default: IMMEDIATE
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Detector deleted successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteDetectorResponse'
+              example:
+                _id: "OTAt2osBnP7bDuxxKr5q"
+                _version: 2
+        '400':
+          description: |
+            Bad Request - standard detectors cannot be deleted by users.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+              example:
+                error:
+                  root_cause:
+                    - type: "status_exception"
+                      reason: "Standard detectors cannot be deleted by users."
+                  type: "status_exception"
+                  reason: "Standard detectors cannot be deleted by users."
+                status: 400
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          description: Not Found - no detector exists with the given ID.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+              example:
+                error:
+                  root_cause:
+                    - type: "status_exception"
+                      reason: "Detector with OTAt2osBnP7bDuxxKr5q is not found"
+                  type: "status_exception"
+                  reason: "Detector with OTAt2osBnP7bDuxxKr5q is not found"
+                status: 404
+
+  /_plugins/_security_analytics/detectors/_search:
+    post:
+      tags:
+        - Detectors
+      summary: Search detectors
+      description: |
+        Searches detectors using a standard OpenSearch query DSL body. Each hit's `_source.detector` reflects the detector's full internal representation, including server-managed fields such as `monitor_id`, `alert_index`, and `findings_index` that are omitted from the create/update/get responses.
+      operationId: searchDetectors
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              description: A standard OpenSearch query DSL object.
+            example:
+              query:
+                match_all: {}
+      responses:
+        '200':
+          description: |
+            Success. Returns a standard OpenSearch search response even when no detectors exist yet.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: A standard OpenSearch search response, whose hit `_source.detector` objects use the full internal detector representation.
+              example:
+                took: 2
+                timed_out: false
+                _shards:
+                  total: 1
+                  successful: 1
+                  skipped: 0
+                  failed: 0
+                hits:
+                  total:
+                    value: 1
+                    relation: "eq"
+                  max_score: 1.0
+                  hits:
+                    - _index: ".opensearch-sap-detectors-config"
+                      _id: "OTAt2osBnP7bDuxxKr5q"
+                      _version: 1
+                      _score: 1.0
+                      _source:
+                        detector:
+                          type: "detector"
+                          name: "eth-port-security"
+                          detector_type: "network"
+                          threat_intel_enabled: false
+                          enabled: true
+                          enabled_time: 1755172800000
+                          schedule:
+                            period:
+                              interval: 1
+                              unit: "MINUTES"
+                          inputs:
+                            - detector_input:
+                                description: "Detector for network log events"
+                                indices:
+                                  - "network-logs*"
+                                custom_rules: []
+                                pre_packaged_rules:
+                                  - id: "25b9c01c-6267-4297-a1e6-e19c74119fc0"
+                          triggers:
+                            - id: "5f5X8-1kR9uZbg=="
+                              name: "network-trigger"
+                              severity: "1"
+                              types:
+                                - "network"
+                              ids:
+                                - "51e6ade4-b02a-4bd1-9235-59aa03a3c5ac"
+                              sev_levels:
+                                - "high"
+                              tags:
+                                - "attack.command_and_control"
+                              actions: []
+                              detection_types:
+                                - "rules"
+                          last_update_time: 1755172800000
+                          monitor_id:
+                            - "monitor-id-1"
+                          workflow_ids:
+                            - "workflow-id-1"
+                          bucket_monitor_id_rule_id: {}
+                          rule_topic_index: "network_rule_index"
+                          alert_index: ".opensearch-sap--network-alerts-default"
+                          alert_history_index: ".opensearch-sap--network-alerts-history-000001"
+                          alert_history_index_pattern: "<.opensearch-sap--network-alerts-history-{now/d}-1>"
+                          findings_index: ".opensearch-sap--network-findings-default"
+                          findings_index_pattern: "<.opensearch-sap--network-findings-history-{now/d}-1>"
+                          source: "custom"
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /_plugins/_security_analytics/detectors/{detector_id}/_acknowledge/alerts:
+    post:
+      tags:
+        - Detectors
+      summary: Acknowledge detector alerts
+      description: |
+        Acknowledges one or more alerts raised by a detector, transitioning their state to `ACKNOWLEDGED`.
+      operationId: acknowledgeDetectorAlerts
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: detector_id
+          in: path
+          required: true
+          description: The unique identifier of the detector that raised the alerts.
+          schema:
+            type: string
+          example: "OTAt2osBnP7bDuxxKr5q"
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - alerts
+              properties:
+                alerts:
+                  type: array
+                  description: The IDs of the alerts to acknowledge.
+                  items:
+                    type: string
+            example:
+              alerts:
+                - "OTk0Cot2wcZmxxKr5q"
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AckAlertsResponse'
+              example:
+                acknowledged:
+                  - detector_id: "OTAt2osBnP7bDuxxKr5q"
+                    id: "OTk0Cot2wcZmxxKr5q"
+                    version: 1
+                    schema_version: 4
+                    trigger_id: "5f5X8-1kR9uZbg=="
+                    trigger_name: "network-trigger"
+                    finding_ids:
+                      - "fZK2fbG9-x1kR="
+                    related_doc_ids:
+                      - "doc-1"
+                    state: "ACKNOWLEDGED"
+                    start_time: "2026-08-14T10:00:00.000Z"
+                    last_notification_time: "2026-08-14T10:00:00.000Z"
+                    end_time: null
+                    acknowledged_time: "2026-08-14T10:05:00.000Z"
+                    error_message: null
+                    alert_history: []
+                    severity: "1"
+                    action_execution_results: []
+                failed: []
+                missing: []
+        '400':
+          description: |
+            Bad Request - the detector id is missing, or the alert id list is empty.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+              example:
+                error:
+                  root_cause:
+                    - type: "action_request_validation_exception"
+                      reason: "Validation Failed: 1: alert ids list cannot be empty;"
+                  type: "action_request_validation_exception"
+                  reason: "Validation Failed: 1: alert ids list cannot be empty;"
+                status: 400
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /_plugins/_security_analytics/alerts:
+    get:
+      tags:
+        - Alerts
+      summary: Get alerts
+      description: |
+        Returns alerts, filtered by detector ID and/or detector type. At least one of `detector_id` or `detectorType` must be provided.
+      operationId: getAlerts
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: detector_id
+          in: query
+          description: Return only alerts raised by this detector. At least one of `detector_id` or `detectorType` is required.
+          schema:
+            type: string
+        - name: detectorType
+          in: query
+          description: Return only alerts raised by detectors of this log type. At least one of `detector_id` or `detectorType` is required.
+          schema:
+            type: string
+        - name: severityLevel
+          in: query
+          description: Filters alerts by severity.
+          schema:
+            type: string
+            default: "ALL"
+        - name: alertState
+          in: query
+          description: Filters alerts by state.
+          schema:
+            type: string
+            enum: [ALL, ACTIVE, ACKNOWLEDGED, COMPLETED, ERROR, DELETED, AUDIT]
+            default: "ALL"
+        - name: sortString
+          in: query
+          description: The field to sort results by.
+          schema:
+            type: string
+            default: "start_time"
+        - name: sortOrder
+          in: query
+          description: The sort order.
+          schema:
+            type: string
+            enum: [asc, desc]
+            default: "asc"
+        - name: missing
+          in: query
+          description: How to treat documents missing the sort field, forwarded to the underlying sort's `missing` option.
+          schema:
+            type: string
+        - name: size
+          in: query
+          description: The number of alerts to return.
+          schema:
+            type: integer
+            default: 20
+        - name: startIndex
+          in: query
+          description: The pagination offset.
+          schema:
+            type: integer
+            default: 0
+        - name: searchString
+          in: query
+          description: A free-text filter applied to the alerts.
+          schema:
+            type: string
+            default: ""
+        - name: startTime
+          in: query
+          description: Only return alerts starting at or after this time, in epoch milliseconds.
+          schema:
+            type: integer
+            format: int64
+        - name: endTime
+          in: query
+          description: Only return alerts starting at or before this time, in epoch milliseconds.
+          schema:
+            type: integer
+            format: int64
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAlertsResponse'
+              example:
+                total_alerts: 1
+                alerts:
+                  - detector_id: "OTAt2osBnP7bDuxxKr5q"
+                    id: "OTk0Cot2wcZmxxKr5q"
+                    version: 1
+                    schema_version: 4
+                    trigger_id: "5f5X8-1kR9uZbg=="
+                    trigger_name: "network-trigger"
+                    finding_ids:
+                      - "fZK2fbG9-x1kR="
+                    related_doc_ids:
+                      - "doc-1"
+                    state: "ACTIVE"
+                    start_time: "2026-08-14T10:00:00.000Z"
+                    last_notification_time: "2026-08-14T10:00:00.000Z"
+                    end_time: null
+                    acknowledged_time: null
+                    error_message: null
+                    alert_history: []
+                    severity: "1"
+                    action_execution_results: []
+        '400':
+          description: |
+            Bad Request - neither `detector_id` nor `detectorType` was provided.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+              example:
+                error:
+                  root_cause:
+                    - type: "illegal_argument_exception"
+                      reason: "At least one of detector type or detector id needs to be passed"
+                  type: "illegal_argument_exception"
+                  reason: "At least one of detector type or detector id needs to be passed"
+                status: 400
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /_plugins/_security_analytics/findings/_search:
+    get:
+      tags:
+        - Findings
+      summary: Get findings
+      description: |
+        Returns findings, which record when a detector's rules or threat-intel checks matched an event. All parameters are optional filters.
+      operationId: getFindings
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: detector_id
+          in: query
+          description: Return only findings raised by this detector.
+          schema:
+            type: string
+        - name: detectorType
+          in: query
+          description: Return only findings raised by detectors of this log type, e.g. `windows`, `cloudtrail`, `network`.
+          schema:
+            type: string
+        - name: sortString
+          in: query
+          description: The field to sort results by.
+          schema:
+            type: string
+            default: "timestamp"
+        - name: sortOrder
+          in: query
+          description: The sort order.
+          schema:
+            type: string
+            enum: [asc, desc]
+            default: "asc"
+        - name: missing
+          in: query
+          description: How to treat documents missing the sort field, forwarded to the underlying sort's `missing` option.
+          schema:
+            type: string
+        - name: size
+          in: query
+          description: The number of findings to return.
+          schema:
+            type: integer
+            default: 20
+        - name: startIndex
+          in: query
+          description: The pagination offset.
+          schema:
+            type: integer
+            default: 0
+        - name: searchString
+          in: query
+          description: A free-text filter applied to the findings.
+          schema:
+            type: string
+            default: ""
+        - name: severity
+          in: query
+          description: Filters findings by the matched Sigma rule's severity tag (e.g. `critical`, `high`, `medium`, `low`).
+          schema:
+            type: string
+        - name: detectionType
+          in: query
+          description: Set to `threat` to return only threat-intel findings; any other value returns only rule-based findings.
+          schema:
+            type: string
+        - name: findingIds
+          in: query
+          description: A comma-separated list of specific finding IDs to return.
+          schema:
+            type: string
+        - name: startTime
+          in: query
+          description: Only return findings timestamped at or after this time, in epoch milliseconds.
+          schema:
+            type: integer
+            format: int64
+        - name: endTime
+          in: query
+          description: Only return findings timestamped at or before this time, in epoch milliseconds.
+          schema:
+            type: integer
+            format: int64
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetFindingsResponse'
+              example:
+                total_findings: 1
+                findings:
+                  - detectorId: "OTAt2osBnP7bDuxxKr5q"
+                    id: "fZK2fbG9-x1kR="
+                    related_doc_ids:
+                      - "doc1"
+                      - "doc2"
+                    index: "network-logs-2026.08.14"
+                    queries:
+                      - id: "1"
+                        name: "network-rule"
+                        fields: []
+                        query: "destination.port:445"
+                        tags: []
+                        query_field_names: []
+                    timestamp: 1755172800000
+                    document_list:
+                      - index: "network-logs-2026.08.14"
+                        id: "doc1"
+                        found: true
+                        document: "{\"destination\":{\"port\":445}}"
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /_plugins/_security_analytics/findings/_update:
+    put:
+      tags:
+        - Findings
+      summary: Update findings
+      description: |
+        Bulk-attaches or updates a Wazuh case object on one or more findings. This is a Wazuh-original endpoint, not part of upstream OpenSearch Security Analytics. The batch size is capped by the `plugins.security_analytics.max_case_management_bulk_size` cluster setting (default 10, range 0-100; 0 disables the endpoint).
+      operationId: updateFindings
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateFindingsRequest'
+            example:
+              findings:
+                - _id: "abc123"
+                  _index: "wazuh-findings-v5-000001"
+                  case:
+                    title: "Suspicious login"
+                    description: "Multiple failed logins"
+                    status: "acknowledged"
+                    severity: "medium"
+                    priority: "high"
+                    tlp: "TLP:AMBER"
+                    tags:
+                      - "critical"
+                      - "reviewed"
+                    created_at: "2026-06-10T08:00:00.000Z"
+                    updated_at: "2026-06-10T09:00:00.000Z"
+                    user:
+                      name: "analyst1"
+                    comments:
+                      - author: "analyst1"
+                        comment: "Reviewed by analyst"
+                        created_at: "2026-06-10T09:00:00.000Z"
+                        updated_at: "2026-06-10T09:00:00.000Z"
+      responses:
+        '200':
+          description: Success - every finding in the request was updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateFindingsResponse'
+              example:
+                took: 12
+                errors: false
+                items:
+                  - _id: "abc123"
+                    _index: "wazuh-findings-v5-000001"
+                    status: 200
+                    result: "updated"
+        '207':
+          description: Multi-Status - one or more findings in the request could not be updated; check each item's `status`/`error`.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateFindingsResponse'
+              example:
+                took: 10
+                errors: true
+                items:
+                  - _id: "missing-id"
+                    _index: "wazuh-findings-v5-000001"
+                    status: 404
+                    error: "document_missing_exception"
+        '400':
+          description: |
+            Bad Request - malformed body, an unknown `case` field, or the batch exceeds `plugins.security_analytics.max_case_management_bulk_size`.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  status:
+                    type: integer
+              example:
+                message: "Cannot update more than 10 findings at once"
+                status: 400
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /_plugins/_security_analytics/findings/correlate:
+    get:
+      tags:
+        - Correlations
+      summary: Search correlated findings
+      description: |
+        Returns findings that correlate with a given finding within a time window, according to the configured correlation rules.
+      operationId: searchCorrelatedFindings
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: finding
+          in: query
+          required: true
+          description: The ID of the finding to find correlations for.
+          schema:
+            type: string
+        - name: detector_type
+          in: query
+          required: true
+          description: The log type of the given finding, e.g. `windows`, `cloudtrail`.
+          schema:
+            type: string
+        - name: time_window
+          in: query
+          description: The correlation time window, in milliseconds.
+          schema:
+            type: integer
+            format: int64
+            default: 300000
+        - name: nearby_findings
+          in: query
+          description: The maximum number of correlated findings to return.
+          schema:
+            type: integer
+            default: 10
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CorrelatedFindingResponse'
+              example:
+                findings:
+                  - finding: "def456"
+                    detector_type: "cloudtrail"
+                    score: 0.87
+                    rules:
+                      - "correlation-rule-1"
+        '400':
+          description: Bad Request - `finding` or `detector_type` was not provided.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /_plugins/_security_analytics/correlations:
+    get:
+      tags:
+        - Correlations
+      summary: List correlations
+      description: |
+        Lists findings that were correlated with each other within a given time range.
+      operationId: listCorrelations
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: start_timestamp
+          in: query
+          description: The start of the time range, in epoch milliseconds.
+          schema:
+            type: integer
+            format: int64
+            default: "now - 300000"
+        - name: end_timestamp
+          in: query
+          description: The end of the time range, in epoch milliseconds.
+          schema:
+            type: integer
+            format: int64
+            default: "now"
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListCorrelationsResponse'
+              example:
+                findings:
+                  - finding1: "abc123"
+                    logType1: "windows"
+                    finding2: "def456"
+                    logType2: "cloudtrail"
+                    rules:
+                      - "correlation-rule-1"
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /_plugins/_security_analytics/correlationAlerts:
+    get:
+      tags:
+        - Correlations
+      summary: Get correlation alerts
+      description: |
+        Returns alerts raised by correlation rules.
+      operationId: getCorrelationAlerts
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: correlation_rule_id
+          in: query
+          description: Return only alerts raised by this correlation rule.
+          schema:
+            type: string
+        - name: correlation_rule_name
+          in: query
+          description: Return only alerts raised by the correlation rule with this name.
+          schema:
+            type: string
+        - name: severityLevel
+          in: query
+          description: Filters correlation alerts by severity.
+          schema:
+            type: string
+            default: "ALL"
+        - name: alertState
+          in: query
+          description: Filters correlation alerts by state.
+          schema:
+            type: string
+            enum: [ALL, ACTIVE, ACKNOWLEDGED, COMPLETED, ERROR, DELETED, AUDIT]
+            default: "ALL"
+        - name: sortString
+          in: query
+          description: The field to sort results by.
+          schema:
+            type: string
+            default: "start_time"
+        - name: sortOrder
+          in: query
+          description: The sort order.
+          schema:
+            type: string
+            enum: [asc, desc]
+            default: "asc"
+        - name: missing
+          in: query
+          description: How to treat documents missing the sort field, forwarded to the underlying sort's `missing` option.
+          schema:
+            type: string
+        - name: size
+          in: query
+          description: The number of correlation alerts to return.
+          schema:
+            type: integer
+            default: 20
+        - name: startIndex
+          in: query
+          description: The pagination offset.
+          schema:
+            type: integer
+            default: 0
+        - name: searchString
+          in: query
+          description: A free-text filter applied to the correlation alerts.
+          schema:
+            type: string
+            default: ""
+        - name: startTime
+          in: query
+          description: Only return correlation alerts starting at or after this time, in epoch milliseconds.
+          schema:
+            type: integer
+            format: int64
+        - name: endTime
+          in: query
+          description: Only return correlation alerts starting at or before this time, in epoch milliseconds.
+          schema:
+            type: integer
+            format: int64
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCorrelationAlertsResponse'
+              example:
+                total_alerts: 1
+                correlationAlerts:
+                  - id: "alert-1"
+                    version: 1
+                    schema_version: 4
+                    trigger_name: "Trigger 1"
+                    state: "ACTIVE"
+                    error_message: null
+                    severity: "high"
+                    action_execution_results: []
+                    start_time: "2026-08-14T09:00:00.000Z"
+                    end_time: null
+                    acknowledged_time: null
+                    correlated_finding_ids:
+                      - "abc123"
+                      - "def456"
+                    correlation_rule_id: "correlation-rule-1"
+                    correlation_rule_name: "Network to AD/LDAP to Windows"
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /_plugins/_security_analytics/_acknowledge/correlationAlerts:
+    post:
+      tags:
+        - Correlations
+      summary: Acknowledge correlation alerts
+      description: |
+        Acknowledges one or more correlation alerts, transitioning their state to `ACKNOWLEDGED`.
+      operationId: acknowledgeCorrelationAlerts
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - alertIds
+              properties:
+                alertIds:
+                  type: array
+                  description: The IDs of the correlation alerts to acknowledge.
+                  items:
+                    type: string
+            example:
+              alertIds:
+                - "alert-1"
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AckCorrelationAlertsResponse'
+              example:
+                acknowledged:
+                  - id: "alert-1"
+                    version: 1
+                    schema_version: 4
+                    trigger_name: "Trigger 1"
+                    state: "ACKNOWLEDGED"
+                    error_message: null
+                    severity: "high"
+                    action_execution_results: []
+                    start_time: "2026-08-14T09:00:00.000Z"
+                    end_time: null
+                    acknowledged_time: "2026-08-14T09:05:00.000Z"
+                    correlated_finding_ids:
+                      - "abc123"
+                      - "def456"
+                    correlation_rule_id: "correlation-rule-1"
+                    correlation_rule_name: "Network to AD/LDAP to Windows"
+                failed: []
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /_plugins/_security_analytics/rules/_search:
+    post:
+      tags:
+        - Detection rules
+      summary: Search detection rules
+      description: |
+        Searches Sigma detection rules using a standard OpenSearch query DSL body.
+      operationId: searchRules
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: pre_packaged
+          in: query
+          description: Set to `false` to search custom rules instead of the built-in pre-packaged Sigma rules.
+          schema:
+            type: boolean
+            default: true
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              description: A standard OpenSearch query DSL object.
+            example:
+              query:
+                match_all: {}
+      responses:
+        '200':
+          description: |
+            Success. Returns a standard OpenSearch search response whose hit `_source` objects are Rule documents.
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                took: 3
+                timed_out: false
+                _shards:
+                  total: 1
+                  successful: 1
+                  skipped: 0
+                  failed: 0
+                hits:
+                  total:
+                    value: 1
+                    relation: "eq"
+                  max_score: 1.0
+                  hits:
+                    - _index: ".opensearch-sap-pre-packaged-rules-config"
+                      _id: "8ad1600d-e9dc-4251-b0ee-a65268f29add"
+                      _version: 1
+                      _score: 1.0
+                      _source:
+                        category: "cloudtrail"
+                        log_source: "cloudtrail"
+                        references:
+                          - value: "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_root-user.html"
+                        tags:
+                          - value: "attack.privilege_escalation"
+                          - value: "attack.t1078.004"
+                        level: "medium"
+                        false_positives:
+                          - value: "AWS Tasks That Require AWS Account Root User Credentials"
+                        status: "test"
+                        queries:
+                          - value: "userIdentity.type:Root AND NOT eventType:AwsServiceEvent"
+                        query_field_names:
+                          - value: "userIdentity.type"
+                          - value: "eventType"
+                        rule: |
+                          title: AWS Root Credentials
+                          id: 8ad1600d-e9dc-4251-b0ee-a65268f29add
+                          status: test
+                          description: Detects AWS root account usage
+                          references:
+                              - https://docs.aws.amazon.com/IAM/latest/UserGuide/id_root-user.html
+                          author: vitaliy0x1
+                          date: 2020/01/21
+                          tags:
+                              - attack.privilege_escalation
+                              - attack.t1078.004
+                          logsource:
+                              product: aws
+                              service: cloudtrail
+                          detection:
+                              selection_usertype:
+                                  userIdentity.type: Root
+                              selection_eventtype:
+                                  eventType: AwsServiceEvent
+                              condition: selection_usertype and not selection_eventtype
+                          falsepositives:
+                              - AWS Tasks That Require AWS Account Root User Credentials
+                          level: medium
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /_plugins/_security_analytics/rules/validate:
+    post:
+      tags:
+        - Detection rules
+      summary: Validate rules against an index
+      description: |
+        Checks whether the fields referenced by one or more existing custom rules are present (directly or via alias) in the given index's mappings. Despite its name, the response's `nonapplicable_fields` array actually lists rule IDs, not field names — it identifies which of the requested rules have at least one field missing from the index.
+      operationId: validateRules
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - index_name
+                - rules
+              properties:
+                index_name:
+                  type: string
+                  description: The index to validate the rules against.
+                rules:
+                  type: array
+                  description: The document IDs of existing custom rules to validate.
+                  items:
+                    type: string
+            example:
+              index_name: "network-logs*"
+              rules:
+                - "51e6ade4-b02a-4bd1-9235-59aa03a3c5ac"
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  nonapplicable_fields:
+                    type: array
+                    description: The IDs of the requested rules that reference at least one field missing from the index.
+                    items:
+                      type: string
+              example:
+                nonapplicable_fields:
+                  - "51e6ade4-b02a-4bd1-9235-59aa03a3c5ac"
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          description: Not Found - `index_name` does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+
+  /_plugins/_security_analytics/rules/categories:
+    get:
+      tags:
+        - Detection rules
+      summary: Get rule categories
+      description: |
+        Lists the log-type categories that detection rules and detectors can target, such as `windows`, `cloudtrail`, or `network`.
+      operationId: getRuleCategories
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAllRuleCategoriesResponse'
+              example:
+                rule_categories:
+                  - key: "windows"
+                    display_name: "windows"
+                  - key: "cloudtrail"
+                    display_name: "cloudtrail"
+                  - key: "network"
+                    display_name: "network"
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /_plugins/_security_analytics/mappings:
+    post:
+      tags:
+        - Mappings
+      summary: Create index field mappings
+      description: |
+        Maps an index's raw fields to the standard field names a rule category expects, either by specifying a `rule_topic` (to apply a built-in alias set) or an explicit `alias_mappings` object, or both.
+      operationId: createIndexMappings
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - index_name
+              properties:
+                index_name:
+                  type: string
+                  description: The index (or index pattern) to map. Required.
+                rule_topic:
+                  type: string
+                  description: A rule category (see `GET /rules/categories`) whose built-in alias set should be applied. At least one of `rule_topic` or `alias_mappings` is required.
+                alias_mappings:
+                  type: object
+                  description: |
+                    An explicit OpenSearch-style alias mapping object, e.g. `{"properties": {"<alias>": {"type": "alias", "path": "<raw field>"}}}`. At least one of `rule_topic` or `alias_mappings` is required.
+                partial:
+                  type: boolean
+                  description: Whether to allow applying only the aliases whose target fields exist, rather than failing if any are missing.
+                  default: true
+            example:
+              index_name: "network-logs*"
+              rule_topic: "network"
+              partial: true
+              alias_mappings:
+                properties:
+                  timestamp:
+                    type: "alias"
+                    path: "event.created"
+                  source.ip:
+                    type: "alias"
+                    path: "src_ip"
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AcknowledgedResponse'
+              example:
+                acknowledged: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+    get:
+      tags:
+        - Mappings
+      summary: Get index field mappings
+      description: |
+        Returns an index's field mappings, including any aliases created by `POST /mappings` or `PUT /mappings`. The response shape matches the core OpenSearch `GET <index>/_mapping` API.
+      operationId: getIndexMappings
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: index_name
+          in: query
+          required: true
+          description: The index (or index pattern) to get the mappings for.
+          schema:
+            type: string
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+                  properties:
+                    mappings:
+                      type: object
+              example:
+                network-logs-2026.08.14:
+                  mappings:
+                    properties:
+                      src_ip:
+                        type: "ip"
+                      timestamp:
+                        type: "alias"
+                        path: "event.created"
+                      source.ip:
+                        type: "alias"
+                        path: "src_ip"
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          description: Not Found - `index_name` does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+
+    put:
+      tags:
+        - Mappings
+      summary: Update index field mappings
+      description: |
+        Adds a single field alias to an index's mappings.
+      operationId: updateIndexMappings
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - index_name
+                - field
+                - alias
+              properties:
+                index_name:
+                  type: string
+                  description: The index (or index pattern) to update.
+                field:
+                  type: string
+                  description: The raw index field to alias.
+                alias:
+                  type: string
+                  description: The alias name to expose for the field.
+            example:
+              index_name: "network-logs*"
+              field: "src_ip"
+              alias: "source.ip"
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AcknowledgedResponse'
+              example:
+                acknowledged: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /_plugins/_security_analytics/mappings/view:
+    get:
+      tags:
+        - Mappings
+      summary: Get mappings view
+      description: |
+        Returns the alias-resolved field mappings for an index against a specific rule category, along with any index fields that a rule category expects but that remain unmapped. This is the same view the plugin uses internally when validating rules against an index.
+      operationId: getMappingsView
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: index_name
+          in: query
+          required: true
+          description: The index (or index pattern) to view.
+          schema:
+            type: string
+        - name: rule_topic
+          in: query
+          required: true
+          description: The rule category (see `GET /rules/categories`) to resolve the view against.
+          schema:
+            type: string
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMappingsViewResponse'
+              example:
+                properties:
+                  source.ip:
+                    type: "alias"
+                    path: "src_ip"
+                unmapped_index_fields:
+                  - "http.request.method"
+                unmapped_field_aliases:
+                  - "destination.port"
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /_plugins/_security_analytics/correlation/rules:
+    post:
+      tags:
+        - Correlation rules
+      summary: Create correlation rule
+      description: |
+        Creates a correlation rule, which links findings across two or more indices/categories that occur within a shared time window.
+      operationId: createCorrelationRule
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CorrelationRuleRequest'
+            example:
+              name: "vpc-ad-correlation"
+              correlate:
+                - index: "vpc-flow-logs*"
+                  query: "dstaddr:192.168.1.*"
+                  category: "network"
+                - index: "ad-logs*"
+                  query: "azure.platformlogs.result_type:50126"
+                  category: "ad_ldap"
+              time_window: 300000
+              trigger: null
+      responses:
+        '201':
+          description: Correlation rule created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IndexCorrelationRuleResponse'
+              example:
+                _id: "correlation-rule-1"
+                _version: 1
+                rule:
+                  name: "vpc-ad-correlation"
+                  correlate:
+                    - index: "vpc-flow-logs*"
+                      query: "dstaddr:192.168.1.*"
+                      category: "network"
+                    - index: "ad-logs*"
+                      query: "azure.platformlogs.result_type:50126"
+                      category: "ad_ldap"
+                  time_window: 300000
+                  trigger: null
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /_plugins/_security_analytics/correlation/rules/{correlation_rule_id}:
+    put:
+      tags:
+        - Correlation rules
+      summary: Update correlation rule
+      description: |
+        Updates an existing correlation rule. The request body has the same shape as correlation rule creation.
+      operationId: updateCorrelationRule
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: correlation_rule_id
+          in: path
+          required: true
+          description: The unique identifier of the correlation rule to update.
+          schema:
+            type: string
+          example: "correlation-rule-1"
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CorrelationRuleRequest'
+            example:
+              name: "vpc-ad-correlation"
+              correlate:
+                - index: "vpc-flow-logs*"
+                  query: "dstaddr:192.168.1.*"
+                  category: "network"
+                - index: "ad-logs*"
+                  query: "azure.platformlogs.result_type:50126"
+                  category: "ad_ldap"
+              time_window: 600000
+              trigger: null
+      responses:
+        '200':
+          description: Correlation rule updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IndexCorrelationRuleResponse'
+              example:
+                _id: "correlation-rule-1"
+                _version: 2
+                rule:
+                  name: "vpc-ad-correlation"
+                  correlate:
+                    - index: "vpc-flow-logs*"
+                      query: "dstaddr:192.168.1.*"
+                      category: "network"
+                    - index: "ad-logs*"
+                      query: "azure.platformlogs.result_type:50126"
+                      category: "ad_ldap"
+                  time_window: 600000
+                  trigger: null
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    delete:
+      tags:
+        - Correlation rules
+      summary: Delete correlation rule
+      description: |
+        Deletes a correlation rule by ID. Any correlation alerts that depend on it are marked with an error state rather than deleted.
+      operationId: deleteCorrelationRule
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: correlation_rule_id
+          in: path
+          required: true
+          description: The unique identifier of the correlation rule to delete.
+          schema:
+            type: string
+          example: "correlation-rule-1"
+        - name: refresh
+          in: query
+          description: The refresh policy to apply after deleting the correlation rule.
+          schema:
+            type: string
+            enum: [IMMEDIATE, WAIT_UNTIL, NONE]
+            default: IMMEDIATE
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Correlation rule deleted successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AcknowledgedResponse'
+              example:
+                acknowledged: true
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '408':
+          description: |
+            Request Timeout - the correlation rule could not be deleted in time.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+              example:
+                error:
+                  root_cause:
+                    - type: "status_exception"
+                      reason: "Request timed out. Correlation Rule with id correlation-rule-1 cannot be deleted"
+                  type: "status_exception"
+                  reason: "Request timed out. Correlation Rule with id correlation-rule-1 cannot be deleted"
+                status: 408
+
+  /_plugins/_security_analytics/correlation/rules/_search:
+    post:
+      tags:
+        - Correlation rules
+      summary: Search correlation rules
+      description: |
+        Searches correlation rules using a standard OpenSearch query DSL body.
+      operationId: searchCorrelationRules
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              description: A standard OpenSearch query DSL object.
+            example:
+              query:
+                match_all: {}
+      responses:
+        '200':
+          description: |
+            Success. Returns a standard OpenSearch search response whose hit `_source` objects are correlation rule documents.
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                took: 2
+                timed_out: false
+                _shards:
+                  total: 1
+                  successful: 1
+                  skipped: 0
+                  failed: 0
+                hits:
+                  total:
+                    value: 1
+                    relation: "eq"
+                  max_score: 1.0
+                  hits:
+                    - _index: ".opensearch-sap-correlation-rules-config"
+                      _id: "correlation-rule-1"
+                      _version: 1
+                      _score: 1.0
+                      _source:
+                        name: "vpc-ad-correlation"
+                        correlate:
+                          - index: "vpc-flow-logs*"
+                            query: "dstaddr:192.168.1.*"
+                            category: "network"
+                          - index: "ad-logs*"
+                            query: "azure.platformlogs.result_type:50126"
+                            category: "ad_ldap"
+                        time_window: 300000
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+components:
+  schemas:
+    Schedule:
+      type: object
+      description: Defines how often the detector runs. Exactly one of `period` or `cron` must be provided.
+      properties:
+        period:
+          type: object
+          properties:
+            interval:
+              type: integer
+              description: The schedule interval. Must be greater than 0.
+            unit:
+              type: string
+              enum: [SECONDS, MINUTES, HOURS, DAYS]
+        cron:
+          type: object
+          properties:
+            expression:
+              type: string
+              description: A cron expression, e.g. `0 */1 * * *`.
+            timezone:
+              type: string
+              description: An IANA time zone name, e.g. `America/Los_Angeles`.
+
+    DetectorRuleRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The document ID of a custom or pre-packaged detection rule.
+
+    DetectorInput:
+      type: object
+      properties:
+        detector_input:
+          type: object
+          properties:
+            description:
+              type: string
+              default: ""
+            indices:
+              type: array
+              items:
+                type: string
+            custom_rules:
+              type: array
+              items:
+                $ref: '#/components/schemas/DetectorRuleRef'
+            pre_packaged_rules:
+              type: array
+              items:
+                $ref: '#/components/schemas/DetectorRuleRef'
+
+    DetectorTrigger:
+      type: object
+      required:
+        - name
+        - detection_types
+      properties:
+        id:
+          type: string
+          description: Auto-generated if omitted.
+          readOnly: true
+        name:
+          type: string
+        severity:
+          type: string
+        types:
+          type: array
+          items:
+            type: string
+        ids:
+          type: array
+          items:
+            type: string
+          description: Detection rule IDs that fire this trigger.
+        sev_levels:
+          type: array
+          items:
+            type: string
+        tags:
+          type: array
+          items:
+            type: string
+          description: MITRE ATT&CK tags that fire this trigger.
+        actions:
+          type: array
+          items:
+            type: object
+          description: Notification actions to run when the trigger fires.
+        detection_types:
+          type: array
+          description: Must contain at least one value.
+          items:
+            type: string
+            enum: [rules, threat_intel]
+
+    DetectorRequest:
+      type: object
+      required:
+        - name
+        - detector_type
+        - schedule
+      properties:
+        name:
+          type: string
+        detector_type:
+          type: string
+          description: The log type category this detector monitors, e.g. `windows`, `cloudtrail`, `network`. See `GET /rules/categories` for the full list.
+        enabled:
+          type: boolean
+          default: true
+        threat_intel_enabled:
+          type: boolean
+          default: false
+        schedule:
+          $ref: '#/components/schemas/Schedule'
+        inputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/DetectorInput'
+        triggers:
+          type: array
+          items:
+            $ref: '#/components/schemas/DetectorTrigger'
+
+    DetectorSummary:
+      type: object
+      description: The subset of detector fields returned by create, update, and get. Server-managed fields (`monitor_id`, `workflow_ids`, and the detector's index names) are omitted here — they're only visible via `POST /detectors/_search`.
+      properties:
+        name:
+          type: string
+        detector_type:
+          type: string
+        enabled:
+          type: boolean
+        schedule:
+          $ref: '#/components/schemas/Schedule'
+        inputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/DetectorInput'
+        triggers:
+          type: array
+          items:
+            $ref: '#/components/schemas/DetectorTrigger'
+        last_update_time:
+          type: integer
+          format: int64
+        enabled_time:
+          type: integer
+          format: int64
+          nullable: true
+        threat_intel_enabled:
+          type: boolean
+
+    IndexDetectorResponse:
+      type: object
+      properties:
+        _id:
+          type: string
+        _version:
+          type: integer
+          format: int64
+        detector:
+          $ref: '#/components/schemas/DetectorSummary'
+
+    DeleteDetectorResponse:
+      type: object
+      properties:
+        _id:
+          type: string
+        _version:
+          type: integer
+          format: int64
+
+    AlertDto:
+      type: object
+      properties:
+        detector_id:
+          type: string
+        id:
+          type: string
+        version:
+          type: integer
+          format: int64
+        schema_version:
+          type: integer
+        trigger_id:
+          type: string
+        trigger_name:
+          type: string
+        finding_ids:
+          type: array
+          items:
+            type: string
+        related_doc_ids:
+          type: array
+          items:
+            type: string
+        state:
+          type: string
+          enum: [ACTIVE, ACKNOWLEDGED, COMPLETED, ERROR, DELETED, AUDIT]
+        start_time:
+          type: string
+          format: date-time
+        last_notification_time:
+          type: string
+          format: date-time
+          nullable: true
+        end_time:
+          type: string
+          format: date-time
+          nullable: true
+        acknowledged_time:
+          type: string
+          format: date-time
+          nullable: true
+        error_message:
+          type: string
+          nullable: true
+        alert_history:
+          type: array
+          items:
+            type: object
+        severity:
+          type: string
+        action_execution_results:
+          type: array
+          items:
+            type: object
+
+    GetAlertsResponse:
+      type: object
+      properties:
+        total_alerts:
+          type: integer
+        alerts:
+          type: array
+          items:
+            $ref: '#/components/schemas/AlertDto'
+
+    AckAlertsResponse:
+      type: object
+      properties:
+        acknowledged:
+          type: array
+          description: Alerts successfully transitioned to `ACKNOWLEDGED`.
+          items:
+            $ref: '#/components/schemas/AlertDto'
+        failed:
+          type: array
+          description: Alerts that were found but could not be acknowledged.
+          items:
+            $ref: '#/components/schemas/AlertDto'
+        missing:
+          type: array
+          description: Requested alert IDs that don't correspond to any real alert.
+          items:
+            type: string
+
+    DocLevelQuery:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        fields:
+          type: array
+          items:
+            type: string
+        query:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        query_field_names:
+          type: array
+          items:
+            type: string
+
+    FindingDocument:
+      type: object
+      properties:
+        index:
+          type: string
+        id:
+          type: string
+        found:
+          type: boolean
+        document:
+          type: string
+          description: The raw JSON source of the matched document, as a string.
+
+    FindingDto:
+      type: object
+      properties:
+        detectorId:
+          type: string
+        id:
+          type: string
+        related_doc_ids:
+          type: array
+          items:
+            type: string
+        index:
+          type: string
+        queries:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocLevelQuery'
+        timestamp:
+          type: integer
+          format: int64
+        document_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/FindingDocument'
+
+    GetFindingsResponse:
+      type: object
+      properties:
+        total_findings:
+          type: integer
+        findings:
+          type: array
+          items:
+            $ref: '#/components/schemas/FindingDto'
+
+    WcsCase:
+      type: object
+      description: |
+        A Wazuh Common Schema case object attached to a finding. Unknown keys are rejected with a 400 error.
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+          enum: [active, acknowledged, completed, error, deleted, audit]
+        severity:
+          type: string
+          enum: [informational, low, medium, high, critical]
+        priority:
+          type: string
+          enum: [low, medium, high, urgent]
+        tlp:
+          type: string
+          description: Traffic Light Protocol marking.
+          enum: ["TLP:RED", "TLP:AMBER", "TLP:GREEN", "TLP:CLEAR"]
+        tags:
+          type: array
+          items:
+            type: string
+        created_at:
+          type: string
+          description: ISO-8601 timestamp or epoch milliseconds.
+        updated_at:
+          type: string
+          description: ISO-8601 timestamp or epoch milliseconds.
+        user:
+          type: object
+          properties:
+            name:
+              type: string
+        comments:
+          type: array
+          items:
+            type: object
+            properties:
+              author:
+                type: string
+              comment:
+                type: string
+              created_at:
+                type: string
+              updated_at:
+                type: string
+
+    UpdateFindingsRequest:
+      type: object
+      required:
+        - findings
+      properties:
+        findings:
+          type: array
+          items:
+            type: object
+            required:
+              - _id
+              - _index
+              - case
+            properties:
+              _id:
+                type: string
+              _index:
+                type: string
+              case:
+                $ref: '#/components/schemas/WcsCase'
+
+    UpdateFindingsResponse:
+      type: object
+      properties:
+        took:
+          type: integer
+          description: Time taken, in milliseconds.
+        errors:
+          type: boolean
+          description: Whether any item in the batch failed.
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+              _index:
+                type: string
+              status:
+                type: integer
+              result:
+                type: string
+                description: Present when the item succeeded, e.g. `updated`.
+              error:
+                type: string
+                description: Present when the item failed.
+
+    FindingWithScore:
+      type: object
+      properties:
+        finding:
+          type: string
+          description: The correlated finding's ID.
+        detector_type:
+          type: string
+        score:
+          type: number
+          format: double
+        rules:
+          type: array
+          items:
+            type: string
+          description: Correlation rule IDs that matched.
+
+    CorrelatedFindingResponse:
+      type: object
+      properties:
+        findings:
+          type: array
+          items:
+            $ref: '#/components/schemas/FindingWithScore'
+
+    CorrelatedFinding:
+      type: object
+      properties:
+        finding1:
+          type: string
+        logType1:
+          type: string
+        finding2:
+          type: string
+        logType2:
+          type: string
+        rules:
+          type: array
+          items:
+            type: string
+
+    ListCorrelationsResponse:
+      type: object
+      properties:
+        findings:
+          type: array
+          items:
+            $ref: '#/components/schemas/CorrelatedFinding'
+
+    CorrelationAlert:
+      type: object
+      properties:
+        id:
+          type: string
+        version:
+          type: integer
+          format: int64
+        schema_version:
+          type: integer
+        trigger_name:
+          type: string
+        state:
+          type: string
+          enum: [ACTIVE, ACKNOWLEDGED, COMPLETED, ERROR, DELETED, AUDIT]
+        start_time:
+          type: string
+          format: date-time
+        end_time:
+          type: string
+          format: date-time
+          nullable: true
+        acknowledged_time:
+          type: string
+          format: date-time
+          nullable: true
+        error_message:
+          type: string
+          nullable: true
+          description: Only populated when `state` is `DELETED`, `ERROR`, or `AUDIT`.
+        severity:
+          type: string
+        action_execution_results:
+          type: array
+          items:
+            type: object
+        correlated_finding_ids:
+          type: array
+          items:
+            type: string
+        correlation_rule_id:
+          type: string
+        correlation_rule_name:
+          type: string
+
+    GetCorrelationAlertsResponse:
+      type: object
+      properties:
+        correlationAlerts:
+          type: array
+          items:
+            $ref: '#/components/schemas/CorrelationAlert'
+        total_alerts:
+          type: integer
+
+    AckCorrelationAlertsResponse:
+      type: object
+      properties:
+        acknowledged:
+          type: array
+          items:
+            $ref: '#/components/schemas/CorrelationAlert'
+        failed:
+          type: array
+          items:
+            $ref: '#/components/schemas/CorrelationAlert'
+
+    RuleCategory:
+      type: object
+      properties:
+        key:
+          type: string
+        display_name:
+          type: string
+
+    GetAllRuleCategoriesResponse:
+      type: object
+      properties:
+        rule_categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/RuleCategory'
+
+    AcknowledgedResponse:
+      type: object
+      properties:
+        acknowledged:
+          type: boolean
+
+    GetMappingsViewResponse:
+      type: object
+      properties:
+        properties:
+          type: object
+          description: The alias-resolved field mappings for the requested rule category.
+        unmapped_index_fields:
+          type: array
+          description: Fields present in the index that aren't mapped to any alias the rule category expects. Omitted if empty.
+          items:
+            type: string
+        unmapped_field_aliases:
+          type: array
+          description: Aliases the rule category expects that have no corresponding field in the index. Omitted if empty.
+          items:
+            type: string
+        threat_intel_field_aliases:
+          type: array
+          description: Threat-intel indicator types mapped to the aliased fields that carry them. Omitted if empty.
+          items:
+            type: object
+            properties:
+              ioc:
+                type: string
+                description: The indicator-of-compromise type, e.g. `ip`.
+              fields:
+                type: array
+                items:
+                  type: string
+
+    CorrelationQuery:
+      type: object
+      required:
+        - index
+        - category
+      properties:
+        index:
+          type: string
+        query:
+          type: string
+          description: An optional Lucene query further narrowing which documents in `index` participate in this correlation.
+        category:
+          type: string
+          description: A rule category (see `GET /rules/categories`).
+        field:
+          type: string
+
+    CorrelationRuleTrigger:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Auto-generated if omitted.
+        name:
+          type: string
+        severity:
+          type: string
+        actions:
+          type: array
+          items:
+            type: object
+          description: Notification actions to run when the trigger fires.
+
+    CorrelationRuleRequest:
+      type: object
+      required:
+        - name
+        - correlate
+      properties:
+        name:
+          type: string
+          description: Must be 5-50 characters, matching `[a-zA-Z0-9 _,-.]`.
+        correlate:
+          type: array
+          items:
+            $ref: '#/components/schemas/CorrelationQuery'
+        time_window:
+          type: integer
+          format: int64
+          description: The correlation time window, in milliseconds.
+          default: 300000
+        trigger:
+          $ref: '#/components/schemas/CorrelationRuleTrigger'
+          nullable: true
+
+    IndexCorrelationRuleResponse:
+      type: object
+      properties:
+        _id:
+          type: string
+        _version:
+          type: integer
+          format: int64
+        rule:
+          $ref: '#/components/schemas/CorrelationRuleRequest'
+
+    ErrorEnvelope:
+      type: object
+      description: The standard OpenSearch error response envelope.
+      properties:
+        error:
+          type: object
+          properties:
+            root_cause:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                  reason:
+                    type: string
+            type:
+              type: string
+            reason:
+              type: string
+        status:
+          type: integer
+
+  responses:
+    BadRequest:
+      description: Bad Request - the request body or parameters failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+          example:
+            error:
+              root_cause:
+                - type: "illegal_argument_exception"
+                  reason: "Validation Failed"
+              type: "illegal_argument_exception"
+              reason: "Validation Failed"
+            status: 400
+
+    Forbidden:
+      description: Forbidden - the caller lacks permission for this action.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+          example:
+            error:
+              root_cause:
+                - type: "security_exception"
+                  reason: "no permissions for this action"
+              type: "security_exception"
+              reason: "no permissions for this action"
+            status: 403
+
+    NotFound:
+      description: Not Found - the requested resource does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'

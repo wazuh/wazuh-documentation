@@ -1,27 +1,22 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Wazuh helps meet the processing integrity PI1.4 requirement by monitoring and reporting file changes using the FIM module.
+   :description: Wazuh helps meet the processing integrity PI1.4 requirement by monitoring and reporting file changes using the FIM capability.
 
 Processing integrity - PI1.4
-============================
+==============================
 
-The trust service criteria for *additional criteria* for processing integrity *PI1.4* is a set of guidelines that outline the requirements for ensuring the completeness and integrity of the processed data of an entity. It states: *"The entity implements policies and procedures to make available or deliver output completely, accurately, and timely in accordance with specifications to meet the entity’s objectives."*. The following actions are performed to achieve this:
+The trust service criteria for **additional criteria** for processing **integrity** **PI1.4** is a set of guidelines that outline requirements for ensuring the completeness and integrity of an entity's processed data. It states: "*The entity implements policies and procedures to make available or deliver output completely, accurately, and timely in accordance with specifications to meet the entity's objectives.*"
 
--  **Protect output**: Output is protected when stored or delivered, or both, to prevent theft, destruction, corruption, or deterioration that would prevent output from meeting specifications.
--  **Distribute output only to intended parties**: Output is distributed or made available only to intended parties.
--  **Distribute output completely and accurately**: Procedures are in place to provide for the completeness, accuracy, and timeliness of distributed output.
--  **Create and maintain records of system output activities**: Records of system output activities are created and maintained completely and accurately in a timely manner.
+Wazuh helps meet the **processing integrity PI1.4** requirement by monitoring and reporting file changes using the FIM capability. This use case shows how you can configure the Wazuh agent on an Ubuntu 24.04 endpoint to detect changes in the ``critical_folder`` directory. The finding generated can serve as supporting evidence for integrity control.
 
-The use case below demonstrates how Wazuh assists in meeting this requirement.
+Use case: Detecting file changes using the Wazuh file integrity monitoring capability
+------------------------------------------------------------------------------------------
 
-Use case: Detecting file changes using the Wazuh File Integrity Monitoring module
----------------------------------------------------------------------------------
-
-This use case shows how Wazuh helps meet the *processing integrity PI1.4* requirement by monitoring and reporting file changes using the FIM module. In this scenario, we show how you can configure the Wazuh agent on a Ubuntu 22.04 endpoint to detect changes in the ``critical_folder`` directory.
+The use case below demonstrates how Wazuh helps meet this requirement.
 
 Ubuntu endpoint
-^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^
 
 #. Switch to the ``root`` user:
 
@@ -42,9 +37,9 @@ Ubuntu endpoint
       # touch /root/critical_folder/special_data.txt
       # echo "The content in this file must maintain integrity" >> /root/critical_folder/special_data.txt
 
-#. Add the highlighted configuration to the ``<syscheck>`` block of the Wazuh agent configuration file ``/var/ossec/etc/ossec.conf``:
+#. Add the configuration highlighted to the ``<syscheck>`` block of the Wazuh agent configuration file ``/var/ossec/etc/ossec.conf``:
 
-   .. code-block:: XML
+   .. code-block:: xml
       :emphasize-lines: 2
 
       <syscheck>
@@ -64,23 +59,34 @@ Ubuntu endpoint
       # echo "A change has occurred" > /root/critical_folder/special_data.txt
       # cat /root/critical_folder/special_data.txt
 
+   The command output looks similar to this:
+
    .. code-block:: none
       :class: output
 
       A change has occurred
 
-#. Select **TSC** from the Wazuh dashboard to view the alert with rule ID ``550``.
+Wazuh dashboard
+^^^^^^^^^^^^^^^^
 
-   .. thumbnail:: /images/compliance/tsc/additional-criteria/rule-id-550-alert.png
-      :title: Rule id 550 alert
-      :alt: Rule id 550 alert
+#. Navigate to **Regulatory Compliance** on the Wazuh **Overview** dashboard and click on **TSC**.
+
+   .. thumbnail:: /images/compliance/tsc/additional-criteria/overview-regulatory-compliance-tsc-card.png
+      :title: Wazuh Overview dashboard - Regulatory Compliance
+      :alt: Wazuh Overview dashboard - Regulatory Compliance
       :align: center
       :width: 80%
-   
-   The alert is tagged with ``PI1.4`` and other compliance tags with requirements that intersect with this use case.
 
-   .. thumbnail:: /images/compliance/tsc/additional-criteria/alert-tagged-pi1.4.png
-      :title: Alert tagged PI1.4
-      :alt: Alert tagged PI1.4
+#. Select the **Findings** subsection and apply the following filter: ``wazuh.integration.name: wazuh-fim``
+
+   .. thumbnail:: /images/compliance/tsc/additional-criteria/tsc-findings-wazuh-fim-filter.png
+      :title: TSC Findings filtered by wazuh-fim
+      :alt: TSC Findings filtered by wazuh-fim
+      :align: center
+      :width: 80%
+
+   .. thumbnail:: /images/compliance/tsc/additional-criteria/fim-file-modified-details.png
+      :title: FIM file modified finding details
+      :alt: FIM file modified finding details
       :align: center
       :width: 80%
