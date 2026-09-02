@@ -6,6 +6,7 @@ test
 node_modules
 __pycache__
 .eslintrc
+source/redirects*.json
 package.json
 package-lock.json
 !source/_exts/wazuh-doc-images/package.json
