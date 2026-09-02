@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: This use case demonstrates how Wazuh detects processes that terminate unexpectedly on a monitored Linux endpoint.
+   :description: This use case demonstrates how Wazuh detects processes that terminate unexpectedly on a monitored Linux endpoint.
 
 Detect abnormal process termination
 ====================================
@@ -22,7 +22,7 @@ The command terminates the Python process with a segmentation fault, causing the
 Navigate to **Threat Intelligence > Threat Hunting > Findings** on the Wazuh dashboard to view the generated finding:
 
 .. thumbnail:: /images/manual/system-calls-monitoring/process-ended-abnormally-finding.png
-  :title: Process ended abnormally finding
-  :alt: Process ended abnormally finding
-  :align: center
-  :width: 80%
+   :title: Process ended abnormally finding
+   :alt: Process ended abnormally finding
+   :align: center
+   :width: 80%

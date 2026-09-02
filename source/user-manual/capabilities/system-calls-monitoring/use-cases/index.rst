@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Discover Wazuh use cases for Linux system call monitoring, including detecting Audit daemon stop/start events, abnormal process termination, and promiscuous mode activation.
+   :description: Discover Wazuh use cases for Linux system call monitoring, including detecting Audit daemon stop/start events, abnormal process termination, and promiscuous mode activation.
 
 Use cases
 =========

@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: This use case demonstrates how Wazuh detects when the Linux Audit daemon (auditd) stops unexpectedly on a monitored Linux endpoint.
+   :description: This use case demonstrates how Wazuh detects when the Linux Audit daemon (auditd) stops unexpectedly on a monitored Linux endpoint.
 
 Detect when the Audit daemon stops
 ===================================
@@ -28,7 +28,7 @@ Perform the following actions to test the configuration:
 Navigate to **Threat Intelligence > Threat Hunting > Findings** on the Wazuh dashboard to view the generated finding:
 
 .. thumbnail:: /images/manual/system-calls-monitoring/audit-daemon-stopped-finding.png
-  :title: Audit daemon stopped finding
-  :alt: Audit daemon stopped finding
-  :align: center
-  :width: 80%
+   :title: Audit daemon stopped finding
+   :alt: Audit daemon stopped finding
+   :align: center
+   :width: 80%

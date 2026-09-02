@@ -36,10 +36,10 @@ The Auditd integration includes built-in KVDBs that cover the most common Linux 
 The screenshot below shows the built-in Auditd KVDBs on the Wazuh dashboard.
 
 .. thumbnail:: /images/manual/system-calls-monitoring/auditd-kvdbs.png
-  :title: Built-in Auditd KVDBs
-  :alt: Built-in Auditd KVDBs
-  :align: center
-  :width: 80%
+   :title: Built-in Auditd KVDBs
+   :alt: Built-in Auditd KVDBs
+   :align: center
+   :width: 80%
 
 After normalizing the event, the Wazuh manager evaluates it against the built-in Auditd detection rules. These rules detect authentication anomalies, privilege escalation attempts, abnormal process behavior, user account changes, audit subsystem events, SELinux events, and other security-relevant activities. Many of the built-in rules include MITRE ATT&CK mappings, false-positive guidance, and compliance mappings that help analysts investigate findings and meet regulatory requirements.
 

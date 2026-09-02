@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-    :description: Learn how Wazuh integrates with the Linux Audit framework to monitor system calls, detect security-relevant activity, and support incident investigation and compliance reporting.
+   :description: Learn how Wazuh integrates with the Linux Audit framework to monitor system calls, detect security-relevant activity, and support incident investigation and compliance reporting.
 
 .. _system_call_monitoring:
 

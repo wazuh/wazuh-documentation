@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: This use case demonstrates how Wazuh detects when a network interface enters promiscuous mode on a monitored Linux endpoint.
+   :description: This use case demonstrates how Wazuh detects when a network interface enters promiscuous mode on a monitored Linux endpoint.
 
 Detect a network interface entering promiscuous mode
 ======================================================
@@ -32,7 +32,7 @@ The command enables promiscuous mode on the specified network interface, causing
 Navigate to **Threat Intelligence > Threat Hunting > Findings** on the Wazuh dashboard to view the generated finding:
 
 .. thumbnail:: /images/manual/system-calls-monitoring/network-interface-promiscuous-mode-finding.png
-  :title: Network interface entered promiscuous mode finding
-  :alt: Network interface entered promiscuous mode finding
-  :align: center
-  :width: 80%
+   :title: Network interface entered promiscuous mode finding
+   :alt: Network interface entered promiscuous mode finding
+   :align: center
+   :width: 80%
