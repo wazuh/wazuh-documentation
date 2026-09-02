@@ -1,7 +1,7 @@
 const removedUrls = [];
 const newUrls = [];
 const redirections = [];
-const betaVersions = []; // Important: betaVersions won't redirect between similar versions but to a especific page in the beta folder
+const betaVersions = []; // Important: betaVersions won't redirect between similar versions but to a specific page in the beta folder
 
 /* Note: new release versions must always be inserted in the first position of the array "versions" */
 const versions = [
@@ -226,6 +226,7 @@ newUrls['4.10'] = [
   '/user-manual/wazuh-server-cluster/adding-new-server-nodes/testing-the-cluster.html',
   '/user-manual/wazuh-server-cluster/agent-connections.html',
   '/user-manual/wazuh-server-cluster/load-balancers.html',
+  '/user-manual/wazuh-server-cluster/security-requirements.html',
   '/user-manual/agent/agent-management/anti-tampering.html',
 ]
 

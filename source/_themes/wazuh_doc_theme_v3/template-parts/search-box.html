@@ -1,5 +1,11 @@
 <div class="search-box" role="search">
-  <form method="get" class="search-form" action="{{ pathto('search') }}" id="search-form">
+  {%- set path_to_search = pathto('search') -%}
+  {%- if environment == "dev" or environment == "production" -%}
+    {%- if pagename == "not_found" -%}
+      {%- set path_to_search = '/current/' + path_to_search -%}
+    {% endif %}
+  {% endif %}
+  <form method="get" class="search-form" action="{{ path_to_search }}" id="search-form">
     <label class="visually-hidden" for="search-input">Search term</label>
     {% if  pagename == 'index' %}
     <input id="search-input" type="text" class="form-control" name="q" placeholder="What can we help you find?"></input>

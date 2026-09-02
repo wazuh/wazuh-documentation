@@ -18,6 +18,11 @@
       {% set toctree = toctree.replace('toctree-l5 current', 'toctree-l5 current show') -%}
       {% set toctree = toctree.replace('toctree-l6 current', 'toctree-l6 current show') -%}
       {% set toctree = toctree.replace('reference internal" href="#"', 'reference internal current-toc-node" href="#"') -%}
+      {%- if environment == "dev" or environment == "production" -%}
+        {%- if pagename == "not_found" -%}
+          {% set toctree = toctree.replace('reference internal" href="', 'reference internal" href="/current/') -%}
+        {% endif %}
+      {% endif %}
       {{- toctree -}}
       {%- endif -%}
     </nav>

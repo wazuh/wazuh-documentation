@@ -22,10 +22,6 @@ We have organized the steps for upscaling the Wazuh server into two subsections:
 
 Ensure you select the appropriate sub-section based on your existing deployment. If you are unsure which method aligns with your infrastructure, consider reviewing your deployment architecture before proceeding.
 
-.. note::
-
-   You need root user privileges to execute the commands in the next sub-sections.
-
 .. toctree::
    :titlesonly:
 

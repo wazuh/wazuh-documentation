@@ -6,6 +6,10 @@
 Configuring existing components to connect with the new node
 ============================================================
 
+.. note::
+
+   You need root user privileges to execute the commands below.
+
 All-in-one deployment
 ---------------------
 

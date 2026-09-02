@@ -19,7 +19,12 @@
     <div class="error-message">
       <h1>Oops! Something went wrong.</h1>
       <p>The page you requested could not be found.</p>
-      <a class="btn" href="{{ pathto(master_doc) }}">Return home</a>
+      {% if environment != 'production' and environment != 'dev' %}
+      {% set index_path = pathto(master_doc) %}
+      {% else %}
+      {% set index_path = '/current/' + pathto(master_doc) %}
+      {% endif %}
+      <a class="btn" href="{{ index_path }}">Return home</a>
     </div>
   </main>
 </div>
