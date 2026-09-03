@@ -77,7 +77,7 @@ certificate
 Path to the client certificate presented by the Wazuh manager when mutual TLS authentication is enabled. The path must exist on disk at startup time.
 
 +----------------------+------------------------------------------------------------------------------------------+
-| **Default value**    | None (The installer sets this automatically to etc/certs/manager.pem)                    |
+| **Default value**    | None (The installer sets this automatically to etc/certs/indexer-connector.pem)          |
 +----------------------+------------------------------------------------------------------------------------------+
 | **Allowed values**   | Path to a PEM-encoded certificate (existence checked at startup; relative or absolute)   |
 +----------------------+------------------------------------------------------------------------------------------+
@@ -88,7 +88,7 @@ key
 Path to the private key corresponding to ``certificate``. Required if ``certificate`` is specified. Path must exist on disk at startup time.
 
 +----------------------+------------------------------------------------------------------------------------------+
-| **Default value**    | None (The installer sets this automatically to etc/certs/manager-key.pem)                |
+| **Default value**    | None (The installer sets this automatically to etc/certs/indexer-connector-key.pem)      |
 +----------------------+------------------------------------------------------------------------------------------+
 | **Allowed values**   | Path to a PEM-encoded private key (existence checked at startup; relative or absolute)   |
 +----------------------+------------------------------------------------------------------------------------------+
@@ -108,8 +108,8 @@ Single node:
        <certificate_authorities>
          <ca>/var/wazuh-manager/etc/certs/root-ca.pem</ca>
        </certificate_authorities>
-       <certificate>/var/wazuh-manager/etc/certs/manager.pem</certificate>
-       <key>/var/wazuh-manager/etc/certs/manager-key.pem</key>
+       <certificate>/var/wazuh-manager/etc/certs/indexer-connector.pem</certificate>
+       <key>/var/wazuh-manager/etc/certs/indexer-connector-key.pem</key>
      </ssl>
    </indexer>
 
@@ -127,8 +127,8 @@ Multi-node cluster:
        <certificate_authorities>
          <ca>/var/wazuh-manager/etc/certs/root-ca.pem</ca>
        </certificate_authorities>
-       <certificate>/var/wazuh-manager/etc/certs/manager.pem</certificate>
-       <key>/var/wazuh-manager/etc/certs/manager-key.pem</key>
+       <certificate>/var/wazuh-manager/etc/certs/indexer-connector.pem</certificate>
+       <key>/var/wazuh-manager/etc/certs/indexer-connector-key.pem</key>
      </ssl>
    </indexer>
 
@@ -139,7 +139,7 @@ When the Wazuh indexer requires username and password authentication, store the 
 
 .. code-block:: console
 
-   # wazuh-manager-keystore -f indexer -k username -v admin
+   # wazuh-manager-keystore -f indexer -k username -v wazuh-manager
    # wazuh-manager-keystore -f indexer -k password -v <PASSWORD>
 
 The Wazuh manager reads these credentials from the keystore when it starts.
@@ -152,8 +152,8 @@ Use the configured CA certificate and client credentials to verify connectivity 
 .. code-block:: console
 
    $ curl --cacert /var/wazuh-manager/etc/certs/root-ca.pem \
-        --cert   /var/wazuh-manager/etc/certs/manager.pem \
-        --key    /var/wazuh-manager/etc/certs/manager-key.pem \
+        --cert   /var/wazuh-manager/etc/certs/indexer-connector.pem \
+        --key    /var/wazuh-manager/etc/certs/indexer-connector-key.pem \
         https://127.0.0.1:9200/_cluster/health
 
 A successful response returns the Wazuh indexer cluster health information with a status such as ``green`` or ``yellow``.
