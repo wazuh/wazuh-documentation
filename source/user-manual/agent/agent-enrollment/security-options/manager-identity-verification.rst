@@ -93,7 +93,7 @@ Generate an SSL certificate on the Wazuh manager signed by the certificate autho
       :class: output
 
       Certificate request self-signature ok
-      subject=C=US, CN=<WAZUH_MANAGER_IP>
+      subject=C=US, CN=192.168.xxx.xxx
 
 #. Copy the newly signed certificate and key files to ``/var/wazuh-manager/etc`` on the Wazuh manager:
 
@@ -102,6 +102,23 @@ Generate an SSL certificate on the Wazuh manager signed by the certificate autho
       # cp sslmanager.cert sslmanager.key /var/wazuh-manager/etc
 
 #. Restart the Wazuh manager to apply the changes made:
+
+   .. code-block:: console
+
+      # systemctl restart wazuh-manager
+
+#. Configure the new certificate on the Wazuh manager. Edit the ``<auth>`` section of the ``/var/wazuh-manager/etc/wazuh-manager.conf`` file:
+
+   .. code-block:: xml
+
+      <auth>
+        <ssl_manager_cert>etc/sslmanager.cert</ssl_manager_cert>
+        <ssl_manager_key>etc/sslmanager.key</ssl_manager_key>
+      </auth>
+
+   Without this step the manager keeps using its default certificate (``etc/certs/remoted.pem``) and never loads the one you just created.
+
+#. Restart the Wazuh manager to apply the changes:
 
    .. code-block:: console
 
@@ -116,24 +133,37 @@ Follow the steps below to enroll a Linux/Unix endpoint by using certificates to 
 
 #. Obtain root access, modify the Wazuh agent configuration file located at ``/var/ossec/etc/ossec.conf``, and include the following:
 
-   -  Wazuh manager IP address or fully qualified domain name (FQDN) in the ``<client><manager><address>`` section.
-   -  Local path to the root certificate in the ``<client><enrollment>`` section:
+   **Wazuh 5.0 agents**:
 
    .. code-block:: xml
-      :emphasize-lines: 3,8
+      :emphasize-lines: 4
 
-      <client>
-         <manager>
-            <address><WAZUH_MANAGER_IP></address>
-            ...
-         </manager>
-            ...
-            <enrollment>
-               <server_ca_path>/<PATH_TO>/rootCA.pem</server_ca_path>
-               ...
-            </enrollment>
-            ...
-      </client>
+      <ossec_config>
+        <agent>
+          <manager>
+            <endpoint><WAZUH_MANAGER_IP_ADDRESS></endpoint>
+          </manager>
+          <ssl>
+            <certificate_authorities>/<PATH_TO>/rootCA.pem</certificate_authorities>
+          </ssl>
+        </agent>
+      </ossec_config>
+
+   **Wazuh 4.x agents**:
+
+   .. code-block:: xml
+      :emphasize-lines: 4,7
+
+      <ossec_config>
+        <client>
+          <server>
+            <address><WAZUH_MANAGER_IP_ADDRESS></address>
+          </server>
+          <enrollment>
+            <server_ca_path>/<PATH_TO>/rootCA.pem</server_ca_path>
+          </enrollment>
+        </client>
+      </ossec_config>
 
 #. Restart the Wazuh agent to make the changes effective:
 
@@ -141,7 +171,7 @@ Follow the steps below to enroll a Linux/Unix endpoint by using certificates to 
 
       # systemctl restart wazuh-agent
 
-#. Click on the upper-left menu icon and navigate to **Agent management** > **Endpoints Summary** on the Wazuh dashboard to check for the newly enrolled Wazuh agent and its connection status. If the enrollment was successful, you will have an interface similar to the image below.
+#. Click on the upper-left menu icon and navigate to **Agent management** > **Endpoints Summary** on the Wazuh dashboard to check for the newly enrolled Wazuh agent and its connection status. If the enrollment was successful, the Wazuh dashboard displays an interface similar to the image below.
 
    .. thumbnail:: /images/manual/agent/linux-check-newly-enrolled.png
       :title: Check newly enrolled Wazuh agent - Linux
@@ -163,20 +193,37 @@ The Wazuh agent installation directory depends on the architecture of the host.
 
 #. Using an administrator account, modify the Wazuh agent configuration file located at ``C:\Program Files (x86)\ossec-agent\ossec.conf`` and include the following:
 
-   -  Wazuh manager IP address or fully qualified domain name (FQDN) in the ``<client><manager><address>`` section.
-   -  Local path to the root certificate in the ``<client><enrollment><server_ca_path>`` section.
+   **Wazuh 5.0 agents**:
 
    .. code-block:: xml
-      :emphasize-lines: 3,6
+      :emphasize-lines: 4,7
 
-      <client>
+      <ossec_config>
+        <agent>
           <manager>
-             <address><WAZUH_MANAGER_IP></address>
+            <endpoint><WAZUH_MANAGER_IP_ADDRESS></endpoint>
           </manager>
-             <enrollment>
-                <server_ca_path>/<PATH_TO>/rootCA.pem</server_ca_path>
-             </enrollment>
-      </client>
+          <enrollment>
+            <server_ca_path>/<PATH_TO>/rootCA.pem</server_ca_path>
+          </enrollment>
+        </agent>
+      </ossec_config>
+
+   **Wazuh 4.x agents**:
+
+   .. code-block:: xml
+      :emphasize-lines: 4,7
+
+      <ossec_config>
+        <client>
+          <server>
+            <address><WAZUH_MANAGER_IP_ADDRESS></address>
+          </server>
+          <enrollment>
+            <server_ca_path>/<PATH_TO>/rootCA.pem</server_ca_path>
+          </enrollment>
+        </client>
+      </ossec_config>
 
 #. Restart the Wazuh agent to make the changes effective.
 
@@ -195,7 +242,7 @@ The Wazuh agent installation directory depends on the architecture of the host.
             > net stop wazuh
             > net start wazuh
 
-#. Click on the upper-left menu icon and navigate to **Agents management** > **Summary** on the Wazuh dashboard to check for the newly enrolled Wazuh agent and its connection status. If the enrollment was successful, you will have an interface similar to the image below.
+#. Click on the upper-left menu icon and navigate to **Agents management** > **Summary** on the Wazuh dashboard to check for the newly enrolled Wazuh agent and its connection status. If the enrollment was successful, the Wazuh dashboard displays an interface similar to the image below.
 
    .. thumbnail:: /images/manual/agent/windows-check-newly-enrolled.png
       :title: Check newly enrolled Wazuh agent - Windows
@@ -212,24 +259,39 @@ Follow the steps below to enroll a macOS endpoint by using certificates to verif
 
 #. Modify the Wazuh agent configuration file located at ``/Library/Ossec/etc/ossec.conf`` with root access and include the following:
 
-   -  Wazuh manager IP address or fully qualified domain name (FQDN) in the ``<client><manager><address>`` section.
-   -  Local path to the root certificate in the ``<client><enrollment>`` section.
+   **Wazuh 5.0 agents**:
 
    .. code-block:: xml
-      :emphasize-lines: 3,8
+      :emphasize-lines: 4
 
-      <client>
-         <manager>
-            <address><WAZUH_MANAGER_IP></address>
-            ...
-         </manager>
-            ...
-            <enrollment>
-               <server_ca_path>/<PATH_TO>/rootCA.pem</server_ca_path>
-               ...
-            </enrollment>
-            ...
-      </client>
+      <ossec_config>
+        <agent>
+          <manager>
+            <endpoint><WAZUH_MANAGER_IP_ADDRESS></endpoint>
+          </manager>
+          <ssl>
+            <certificate_authorities>
+              <ca>/<PATH_TO>/rootCA.pem</ca>
+            </certificate_authorities>
+          </ssl>
+        </agent>
+      </ossec_config>
+
+   **Wazuh 4.x agents**:
+
+   .. code-block:: xml
+      :emphasize-lines: 4,7
+
+      <ossec_config>
+        <client>
+          <server>
+            <address><WAZUH_MANAGER_IP_ADDRESS></address>
+          </server>
+          <enrollment>
+            <server_ca_path>/<PATH_TO>/rootCA.pem</server_ca_path>
+          </enrollment>
+        </client>
+      </ossec_config>
 
 #. Restart the Wazuh agent to make the changes effective.
 
@@ -237,7 +299,7 @@ Follow the steps below to enroll a macOS endpoint by using certificates to verif
 
       # /Library/Ossec/bin/wazuh-control restart
 
-#. Click on the upper-left menu icon and navigate to **Server management** > **Endpoints Summary** on the Wazuh dashboard to check for the newly enrolled Wazuh agent and its connection status. If the enrollment was successful, you will have an interface similar to the image below.
+#. Click on the upper-left menu icon and navigate to **Server management** > **Endpoints Summary** on the Wazuh dashboard to check for the newly enrolled Wazuh agent and its connection status. If the enrollment was successful, the Wazuh dashboard displays an interface similar to the image below.
 
    .. thumbnail:: /images/manual/agent/macOS-check-newly-enrolled.png
       :title: Check newly enrolled Wazuh agent - macOS
