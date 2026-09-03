@@ -13,6 +13,7 @@ This section shows detailed explanation of the Wazuh capabilities and their conf
 
    file-integrity/index
    sec-config-assessment/index
+   active-response/index
    log-data-collection/index
    vulnerability-detection/index
    command-monitoring/index
@@ -22,5 +23,4 @@ This section shows detailed explanation of the Wazuh capabilities and their conf
 
 ..
    malware-detection/index
-   active-response/index
    agentless-monitoring/index

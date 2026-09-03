@@ -152,11 +152,22 @@ newUrls['5.0'] = [
   '/user-manual/reference/installation-utilities/index.html',
   '/user-manual/reference/installation-utilities/installation-assistant.html',
   '/user-manual/reference/installation-utilities/certs-tools.html',
+  '/user-manual/capabilities/active-response/how-it-works.html',
+  '/user-manual/capabilities/active-response/types-of-active-response.html',
+  '/user-manual/capabilities/active-response/python-active-response-script-sample.html',
+  '/user-manual/capabilities/active-response/migrating-active-response-scripts.html',
+  '/user-manual/capabilities/active-response/ar-use-cases/blocking-web-attacks.html',
+  '/user-manual/capabilities/active-response/ar-use-cases/removing-malicious-file.html',
 ];
 
 /* Redirections 4.14—5.0  */
 
 redirections.push(
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/user-manual/capabilities/active-response/how-to-configure.html',
+    '5.0': '/user-manual/capabilities/active-response/configuration.html',
+  },
   {
     'target': ['4.14=>5.0', '5.0=>4.14'],
     '4.14': '/user-manual/agent/agent-management/listing/index.html',
@@ -337,6 +348,10 @@ redirections.push(
 /* Pages no longer available in 5.0 */
 
 removedUrls['5.0'] = [
+  '/user-manual/capabilities/active-response/additional-information.html',
+  '/user-manual/capabilities/active-response/ar-use-cases/blocking-ssh-brute-force.html',
+  '/user-manual/capabilities/active-response/ar-use-cases/restarting-wazuh-agent.html',
+  '/user-manual/capabilities/active-response/ar-use-cases/disabling-user-account.html',
   '/user-manual/manager/indexer-integration.html',
   '/user-manual/manager/wazuh-server-queue.html',
   '/user-manual/manager/wazuh-manager.html',
