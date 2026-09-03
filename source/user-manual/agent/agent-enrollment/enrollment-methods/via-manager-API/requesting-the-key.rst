@@ -38,11 +38,11 @@ The following sections show how to request the Wazuh agent key on different oper
 Linux/Unix and macOS
 --------------------
 
-#. Generate a JSON Web Token (JWT) to authenticate to the Wazuh manager API. The default Wazuh manager API credentials are ``wazuh:wazuh``. Replace ``<WAZUH_MANAGER_IP>`` with the Wazuh manager IP address or fully qualified domain name (FQDN):
+#. Generate a JSON Web Token (JWT) to authenticate to the Wazuh manager API. The default Wazuh manager API credentials are ``wazuh:wazuh``. Replace ``<WAZUH_MANAGER_IP_ADDRESS>`` with the Wazuh manager IP address or fully qualified domain name (FQDN):
 
    .. code-block:: console
 
-      # TOKEN=$(curl -u <USER>:<PASSWORD> -k -X POST "https://<WAZUH_MANAGER_IP>:55000/security/user/authenticate?raw=true")
+      # TOKEN=$(curl -u <USER>:<PASSWORD> -k -X POST "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/security/user/authenticate?raw=true")
 
    Confirm that the command generated the token successfully:
 
