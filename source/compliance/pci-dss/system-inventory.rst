@@ -1,32 +1,47 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Learn how the Wazuh Syscollector module supports PCI DSS compliance by collecting hardware, OS, network, and process data to build a complete system inventory and identify unnecessary services.
+   :description: Learn how the Wazuh Syscollector module helps meet PCI DSS requirements for applying secure configurations to all system components.
 
 System inventory
-================
+==================
 
 Wazuh uses the Syscollector module to gather information about a monitored endpoint. This information includes hardware details, OS information, network details, services, browser extensions, running processes, users, and groups. The agent runs periodic scans on the endpoint and sends the information to the manager. The manager then updates the appropriate system information. See the :doc:`System inventory section </user-manual/capabilities/system-inventory/index>` for more information about the Wazuh Syscollector module.
 
 The Wazuh Syscollector module helps to meet the following PCI DSS requirement:
 
--  **Requirement 2: Apply Secure Configuration to All System Components**: Malicious individuals, both external and internal to an entity, often use default passwords and other vendor default settings to compromise systems. These passwords and settings are well known and are easily determined via public information. Applying secure configurations to system components reduces the means available to an attacker to compromise the system. Changing default passwords, removing unnecessary software, functions, and accounts, and disabling or removing unnecessary services all help to reduce the potential attack surface.
+-  **Requirement 2 - Apply Secure Configurations to All System Components**: This requirement mandates applying secure configurations to system components to reduce exposure to vendor defaults commonly exploited by malicious individuals. Default passwords and settings are widely known and easily obtained. Secure configurations such as changing default credentials, removing unnecessary software and accounts, and disabling unused services reduce the available attack surface.
 
-The Wazuh Syscollector module helps to achieve some of the objectives of this requirement. It keeps an inventory of all endpoints and the processes/daemons running on them. The Wazuh Syscollector module also gets information about the endpoint hardware, OS, network details, services, browser extensions, users, and groups. This allows visibility into the PCI DSS relevant assets, enabled network ports, and running processes/daemons, to individuals in an organization.
+The Wazuh Syscollector module satisfies this requirement by maintaining an inventory of endpoint configurations. It discovers active processes, system daemons, hardware specifications, operating system details, network settings, and running services. Additionally, it audits installed browser extensions, user accounts, and local groups. This centralized inventory grants organizations complete visibility into PCI DSS-relevant assets, active network ports, and running software. It enables administrators to systematically identify and remove unauthorized services or default configurations.
 
-Use cases
----------
+Use case
+--------
 
-PCI DSS 2.2.4 requires keeping only necessary services, protocols, daemons, and functions enabled and removing or disabling all unnecessary functionality. Using the Wazuh Syscollector module, you can see what processes are running on a specific endpoint and determine if the running process or protocol is necessary for the operation of the asset. You can find this information in the **IT Hygiene** and **PCI DSS** sections on the Wazuh dashboard.
+Below is a PCI DSS requirement that the Wazuh Syscollector module can meet.
 
-   .. thumbnail:: /images/compliance/pci/it-hygiene-dashboard.png
-      :title: IT Hygiene dashboard
-      :align: center
-      :width: 80%
+PCI DSS requirement 2.2.4
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-   .. thumbnail:: /images/compliance/pci/it-hygiene-dashboard-2.png
-      :title: IT Hygiene dashboard
-      :align: center
-      :width: 80%
+PCI DSS requirement 2.2.4 mandates keeping only necessary services, protocols, daemons, and functions enabled and removing unnecessary functionality. The Syscollector and :doc:`SCA <configuration-assessment>` modules support the requirement by identifying unnecessary processes, services, and configurations that can increase the attack surface.
 
-   The Wazuh Syscollector module is enabled with all available scans by default in all compatible systems.
+The Wazuh Syscollector module collects information about running processes on monitored endpoints. You can use this information to identify unnecessary processes and determine whether they are required for an endpoint's operation. The Wazuh Syscollector module is enabled with all available scans by default in all compatible systems. You can view system inventory information in the **IT Hygiene** and **PCI DSS** dashboards on the Wazuh dashboard.
+
+IT Hygiene dashboard
+~~~~~~~~~~~~~~~~~~~~~
+
+Click the upper-left menu icon **☰** to open the options, and go to **Security operations** > **IT Hygiene**. From there, you can review running processes and determine whether unnecessary functionality is enabled on monitored endpoints. The following image shows the IT Hygiene dashboard for a monitored endpoint:
+
+.. thumbnail:: /images/compliance/pci/it-hygiene-dashboard.png
+   :title: IT Hygiene dashboard
+   :align: center
+   :width: 80%
+
+PCI DSS dashboard
+~~~~~~~~~~~~~~~~~~
+
+Navigate to **Regulatory Compliance** from the Wazuh **Overview** dashboard, click **PCI DSS**, then click the **Controls** tab to review findings related to PCI DSS requirement 2.2.4. The following image shows the corresponding PCI DSS finding in the Wazuh dashboard:
+
+.. thumbnail:: /images/compliance/pci/pci-dss-dashboard-requirement-2-2-4.png
+   :title: PCI DSS dashboard finding for requirement 2.2.4
+   :align: center
+   :width: 80%

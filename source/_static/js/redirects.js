@@ -342,12 +342,18 @@ redirections.push(
     'target': ['4.14=>5.0', '5.0=>4.14'],
     '4.14': '/user-manual/reference/tools/wazuh-keystore.html',
     '5.0': '/user-manual/reference/tools/wazuh-manager-keystore.html',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/compliance/pci-dss/dashboard.html',
+    '5.0': '/compliance/pci-dss/system-inventory.html#pci-dss-dashboard',
   }
 );
 
 /* Pages no longer available in 5.0 */
 
 removedUrls['5.0'] = [
+  '/compliance/pci-dss/dashboard.html',
   '/user-manual/capabilities/active-response/additional-information.html',
   '/user-manual/capabilities/active-response/ar-use-cases/blocking-ssh-brute-force.html',
   '/user-manual/capabilities/active-response/ar-use-cases/restarting-wazuh-agent.html',

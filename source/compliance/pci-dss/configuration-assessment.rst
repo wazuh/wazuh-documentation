@@ -1,49 +1,66 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: You can use the Security configuration assessment module to create configuration policies on agents. Learn more about it in this section.
-  
-.. _configuration_assessment:
+   :description: Learn how the Wazuh Security Configuration Assessment (SCA) module helps meet PCI DSS configuration assessment requirements.
 
 Configuration assessment
-========================
+=========================
 
-The Security configuration assessment module determines the state of hardening and configuration policies on agents. SCA performs scans to discover exposures or misconfigurations in monitored endpoints. Those scans assess the hosts' configurations using policy files that contain rules to be tested against the hosts' actual configurations.
+The Wazuh Security Configuration Assessment (SCA) module determines the state of hardening and configuration policies on agents. SCA performs scans to discover exposures or misconfigurations in monitored endpoints. Those scans assess the hosts' configurations using policy files that contain rules to be tested against the hosts' actual configurations.
 
-The SCA module helps to meet the following PCI DSS requirements:
+The Wazuh SCA module helps to meet the following PCI DSS requirements:
 
--  **Requirement 2 - Apply Secure Configuration to All System Components**: This requirement ensures that default passwords are changed, unnecessary software, functions, and accounts are removed, and unnecessary services are disabled or removed, thereby reducing the potential attack surface.  
--  **Requirement 8 - Identify Users and Authentication Access to System Components**: This requirement ensures that the identification of an individual or process on a computer system is conducted by associating an identity with a person or process through an identifier, such as a user, system, or application ID. These IDs (also referred to as “accounts”) establish an individual’s or process’s identity by assigning a unique identifier to each, distinguishing one user or process from another. When each user or process can be uniquely identified, accountability for actions performed under that identity is ensured. When such accountability is in place, actions taken can be traced to known and authorized users and processes.
+-  **Requirement 2 - Apply Secure Configurations to All System Components**: This requirement mandates applying secure configurations to system components to reduce exposure to vendor defaults commonly exploited by malicious individuals. Default passwords and settings are widely known and easily obtained. Secure configurations such as changing default credentials, removing unnecessary software and accounts, and disabling unused services reduce the available attack surface.
 
-To achieve the above requirements, SCA runs assessment checks. These checks assess whether it is necessary to change password-related configuration to ensure strong passwords, remove unnecessary software, disable unnecessary services, or audit the TCP/IP stack configuration. Sources of system hardening standards accepted by the industry include, but are not limited to: the Center for Internet Security (CIS), the International Organization for Standardization (ISO), the SysAdmin, Audit, Network Security (SANS), and the National Institute of Standards and Technology (NIST).
+-  **Requirement 8 - Identify Users and Authenticate Access to System Components**: This requirement mandates systems identify users or processes by linking them to a unique identifier, such as a user, system, or application ID. These IDs establish an individual's or process's identity by assigning a unique identifier to each, distinguishing one user or process from another. When each user or process can be uniquely identified, actions taken under that identity can be traced to a known, authorized user or process.
 
-Out-of-the-box, Wazuh includes CIS baselines for a wide range of operating systems and applications. This includes Debian, MacOS, Red Hat, and Windows operating systems. For more information, see a :doc:`list of the available SCA policies </user-manual/capabilities/sec-config-assessment/available-sca-policies>`. You can create other baselines for other systems or applications as well. Find more details on configuring SCA checks in the :doc:`SCA documentation section </user-manual/capabilities/sec-config-assessment/index>`.
+To achieve the above requirements, SCA runs assessment checks. These checks determine whether password settings need adjustment, unnecessary software or services must be removed, or the TCP/IP stack configuration requires auditing to strengthen system security. Sources of system hardening standards accepted by the industry include, but are not limited to:
 
+-  Center for Internet Security (CIS)
+
+-  International Organization for Standardization (ISO)
+
+-  SysAdmin, Audit, Network Security (SANS)
+
+-  National Institute of Standards and Technology (NIST)
+
+Out of the box, Wazuh includes CIS baselines for a wide range of operating systems and applications. These operating systems include Debian, macOS, Red Hat, and Windows operating systems. For more information, see a :doc:`list of the available SCA policies </user-manual/capabilities/sec-config-assessment/available-sca-policies>`. You can create other baselines for other systems or applications as well. Find more details on configuring SCA checks in the :doc:`SCA documentation section </user-manual/capabilities/sec-config-assessment/index>`.
 
 Use cases
 ---------
 
-Below are some PCI DSS requirement use cases that can be met with the SCA module.
+Below are PCI DSS requirements that the Wazuh SCA module can meet.
 
--  PCI DSS 2.2.4 requires enabling only the necessary services, protocols, daemons, and functions, and removing or disabling all unnecessary functionality. Mounting /tmp as a separate partition is an example of a secure configuration that limits the attack surface. Without a dedicated /tmp partition, mount options such as noexec, nosuid, and nodev cannot be enforced, potentially allowing attackers to execute malicious code in ``/tmp``.
+PCI DSS requirement 2.2.4
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-   To perform checks for this specific use case, the SCA module includes check 28500: **Ensure /tmp is a separate partition** on Ubuntu 22.04 LTS endpoints. When an SCA scan is run, you can determine whether this use case is satisfied.
+PCI DSS requirement 2.2.4 mandates keeping only necessary services, protocols, daemons, and functions enabled and removing unnecessary functionality. The :doc:`Syscollector <system-inventory>` and SCA modules support the requirement by identifying unnecessary processes, services, and configurations that can increase the attack surface.
 
-   .. thumbnail:: /images/compliance/pci/ensure-ip-forwarding-is-disabled.png
-      :title: Ensure /tmp is a separate partition
-      :align: center
-      :width: 80%
-  
-   Note that the SCA check IDs for the same requirement may vary depending on the endpoint on which the SCA scan is being run.
+For this use case, the SCA module runs the check **41608 - Ensure ip forwarding is disabled** from the `cis_ubuntu26-04 <https://github.com/wazuh/wazuh/blob/main/ruleset/sca/ubuntu/cis_ubuntu26-04.yml>`__ SCA policy file on the endpoint. IP forwarding is unnecessary functionality on an endpoint that does not route traffic, and the SCA scan reports whether it is disabled.
 
--  PCI DSS 8.3.7 states that individuals are not allowed to submit a new password/passphrase that matches any of the last four passwords/passphrases used. Enforcing password history prevents users from recycling recent credentials, making it harder for attackers to regain access using previously compromised passwords.
-  
-   We have the SCA check 28733: **Ensure password history remember is configured** for Ubuntu 22.04 LTS endpoints. It checks that the ``pam_pwhistory`` module is configured with a remember value of at least 24 in ``/etc/pam.d/common-password``, ensuring users cannot recycle recent passwords and helping meet requirement 8.3.7. So, when an SCA scan runs, you can detect if the password history policy meets the requirement.
-   
-   .. thumbnail:: /images/compliance/pci/ensure-password-reuse-is-limited.png
-      :title: Ensure password history remember is configured
-      :align: center
-      :width: 80%
+.. thumbnail:: /images/compliance/pci/sca-ip-forwarding-disabled-01.png
+   :title: SCA check for ip forwarding disabled
+   :align: center
+   :width: 80%
 
+.. thumbnail:: /images/compliance/pci/sca-ip-forwarding-disabled-02.png
+   :title: SCA check details for ip forwarding disabled
+   :align: center
+   :width: 80%
 
+PCI DSS requirement 8.3.7
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+PCI DSS requirement 8.3.7 states that individuals are not allowed to submit a new password/passphrase that matches any of the last four passwords/passphrases used. Password history enforcement prevents users from reusing recent credentials, making it harder for attackers to regain access with previously compromised passwords.
+
+The SCA module runs check **41687 - Ensure password history remember is configured** from the `cis_ubuntu26-04 <https://github.com/wazuh/wazuh/blob/main/ruleset/sca/ubuntu/cis_ubuntu26-04.yml>`__ SCA policy file on the endpoint. It checks that the ``pam_pwhistory`` module is configured with a remember value of at least 24 in ``/etc/pam.d/common-password`` as specified by CIS Benchmark for Ubuntu Linux 26.04 LTS. A value of 24 is a stricter baseline than the four-password history mandated by PCI DSS requirement 8.3.7. When an SCA scan runs, the check identifies whether the endpoint meets this configured password history baseline.
+
+.. thumbnail:: /images/compliance/pci/sca-password-history-remember-01.png
+   :title: SCA check for password history remember configured
+   :align: center
+   :width: 80%
+
+.. thumbnail:: /images/compliance/pci/sca-password-history-remember-02.png
+   :title: SCA check details for password history remember configured
+   :align: center
+   :width: 80%
