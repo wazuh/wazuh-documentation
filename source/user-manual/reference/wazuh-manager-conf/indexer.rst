@@ -139,7 +139,7 @@ When the Wazuh indexer requires username and password authentication, store the 
 
 .. code-block:: console
 
-   # wazuh-manager-keystore -f indexer -k username -v wazuh-manager
+   # wazuh-manager-keystore -f indexer -k username -v admin
    # wazuh-manager-keystore -f indexer -k password -v <PASSWORD>
 
 The Wazuh manager reads these credentials from the keystore when it starts.
