@@ -14,7 +14,11 @@ For installation and configuration steps, refer to the :doc:`Wazuh manager insta
 
 .. note::
 
-   By default, the Wazuh manager does not monitor its own endpoint. To enable security monitoring and log collection on the Wazuh manager endpoint, install a Wazuh agent on that endpoint.
+   By default, the Wazuh manager does not monitor its own endpoint. To monitor it for security events and collect its logs, install and enroll a Wazuh 5.x agent on the same endpoint.
+
+.. warning::
+
+   Wazuh 4.x agent packages conflict with the ``wazuh-manager`` package. Use a Wazuh 5.x agent when monitoring a Wazuh 5.x manager endpoint. Installing a Wazuh 4.x agent on this endpoint fails or removes the Wazuh manager.
 
 .. topic:: Contents
 

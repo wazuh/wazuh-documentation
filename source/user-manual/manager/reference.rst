@@ -25,7 +25,7 @@ Daemons
      - Event processing and event generation (replaces legacy ``analysisd``)
    * - Remoted
      - ``wazuh-manager-remoted``
-     - Wazuh agent communication gateway that decrypts, enriches, and forwards events to the Wazuh normalization engine
+     - The Wazuh agent communication gateway serves the HTTPS agent API on port ``1517`` and forwards agent events to the Wazuh normalization engine. The legacy AES-encrypted TCP/UDP channel on port ``1514`` serves Wazuh 4.x agents.
    * - Wazuh DB
      - ``wazuh-manager-db``
      - SQLite-based database daemon for the Wazuh agent and global state.
@@ -34,7 +34,7 @@ Daemons
      - Wazuh agent monitoring and log rotation
    * - Auth
      - ``wazuh-manager-authd``
-     - Wazuh agent registration and enrollment via TLS port ``1515``
+     - The Wazuh agent enrollment service owns all enrollment logic. It receives enrollment requests through the HTTPS ``POST /enroll`` endpoint and, for legacy Wazuh 4.x agents, through TLS port ``1515``.
    * - Wazuh manager API
      - ``wazuh-manager-apid``
      - REST API (Python/Starlette, HTTPS) with JWT auth and RBAC
