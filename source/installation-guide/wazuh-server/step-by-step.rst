@@ -101,7 +101,7 @@ Configuring the Wazuh indexer connection
 
    .. note::
 
-      The default step-by-step installation credentials are ``admin``:``admin``.
+      The default Wazuh indexer connector credentials are ``wazuh-manager``:``wazuh-manager``.
 
 #. Edit ``/var/wazuh-manager/etc/wazuh-manager.conf`` file to configure the indexer connection.
 

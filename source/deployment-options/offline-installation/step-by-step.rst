@@ -198,7 +198,7 @@ Installing the Wazuh manager
 
    .. note::
 
-      The default offline-installation credentials are ``admin``:``admin``.
+      The default Wazuh indexer connector credentials are ``wazuh-manager``:``wazuh-manager``.
 
 #. Update the indexer configuration in ``/var/wazuh-manager/etc/wazuh-manager.conf`` to specify the indexer IP address:
 
