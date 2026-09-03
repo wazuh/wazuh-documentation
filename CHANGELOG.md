@@ -51,6 +51,7 @@ All notable changes to this project will be documented in this file.
 - Updated the *Using Wazuh for TSC compliance* documentation in *Regulatory compliance* to Wazuh 5.0. ([#10027](https://github.com/wazuh/wazuh-documentation/pull/10027)) ([#10045](https://github.com/wazuh/wazuh-documentation/pull/10045))
 - Updated the *Log data collection* capability documentation to Wazuh 5.0, covering Wazuh agent configuration, collecting logs from files and operating systems, log data analysis, and new use cases. ([#10034](https://github.com/wazuh/wazuh-documentation/pull/10034)) ([#10037](https://github.com/wazuh/wazuh-documentation/pull/10037))
 - Updated the *Reference* documentation to Wazuh 5.0, splitting the local configuration reference into separate `wazuh-manager.conf` and `ossec.conf` sections, renaming manager daemons and tools with the `wazuh-manager-` prefix, updating the internal configuration, daemons, and tools references, and removing documentation for configuration sections and CLI tools no longer supported in Wazuh 5.0. ([#10047](https://github.com/wazuh/wazuh-documentation/pull/10047))
+- Updated the *Active response* capability documentation to Wazuh 5.0, covering configuration from the Wazuh dashboard, the consolidated `block-ip` script, developing custom scripts, migrating custom scripts from Wazuh 4.x, and new use cases for blocking web attacks and removing malicious files. ([#10062](https://github.com/wazuh/wazuh-documentation/pull/10062))
 
 ### Removed
 
