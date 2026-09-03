@@ -183,8 +183,8 @@ Installing the Wazuh manager
 
       # mkdir -p /var/wazuh-manager/etc/certs
       # cp ./wazuh-install-files/root-ca.pem /var/wazuh-manager/etc/certs/root-ca.pem
-      # mv ./wazuh-install-files/$NODE_NAME.pem /var/wazuh-manager/etc/certs/manager.pem
-      # mv ./wazuh-install-files/$NODE_NAME-key.pem /var/wazuh-manager/etc/certs/manager-key.pem
+      # mv ./wazuh-install-files/$NODE_NAME.pem /var/wazuh-manager/etc/certs/indexer-connector.pem
+      # mv ./wazuh-install-files/$NODE_NAME-key.pem /var/wazuh-manager/etc/certs/indexer-connector-key.pem
       # chmod 500 /var/wazuh-manager/etc/certs
       # chmod 400 /var/wazuh-manager/etc/certs/*
       # chown -R wazuh-manager:wazuh-manager /var/wazuh-manager/etc/certs
@@ -198,7 +198,7 @@ Installing the Wazuh manager
 
    .. note::
 
-      The default offline-installation credentials are ``admin``:``admin``.
+      The default Wazuh indexer connector credentials are ``wazuh-manager``:``wazuh-manager``.
 
 #. Update the indexer configuration in ``/var/wazuh-manager/etc/wazuh-manager.conf`` to specify the indexer IP address:
 
@@ -212,8 +212,8 @@ Installing the Wazuh manager
           <certificate_authorities>
           <ca>/var/wazuh-manager/etc/certs/root-ca.pem</ca>
           </certificate_authorities>
-          <certificate>/var/wazuh-manager/etc/certs/manager.pem</certificate>
-          <key>/var/wazuh-manager/etc/certs/manager-key.pem</key>
+          <certificate>/var/wazuh-manager/etc/certs/indexer-connector.pem</certificate>
+          <key>/var/wazuh-manager/etc/certs/indexer-connector-key.pem</key>
       </ssl>
       </indexer>
 

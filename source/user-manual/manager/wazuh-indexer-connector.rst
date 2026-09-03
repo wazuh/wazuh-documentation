@@ -27,8 +27,8 @@ The standard configuration for the Wazuh indexer connector is specified in the `
          <certificate_authorities>
            <ca>/var/wazuh-manager/etc/certs/root-ca.pem</ca>
          </certificate_authorities>
-         <certificate>/var/wazuh-manager/etc/certs/wazuh-manager.pem</certificate>
-         <key>/var/wazuh-manager/etc/certs/wazuh-manager-key.pem</key>
+         <certificate>/var/wazuh-manager/etc/certs/indexer-connector.pem</certificate>
+         <key>/var/wazuh-manager/etc/certs/indexer-connector-key.pem</key>
        </ssl>
      </indexer>
      ...
@@ -43,5 +43,5 @@ Where:
 -  ``<ssl>`` specifies the configuration options for the SSL parameters.
 -  ``<certificate_authorities>`` specifies a list of root certificate file paths for verification. Use the ``<ca>`` option for setting up each CA certificate file path.
 -  ``<ca>`` specifies the root CA certificate for HTTPS server verifications. The default value is ``/var/wazuh-manager/etc/certs/root-ca.pem``. The possible value is any valid CA certificate.
--  ``<certificate>`` specifies the path to the Wazuh manager certificate. The default value is ``/var/wazuh-manager/etc/certs/wazuh-manager.pem``. The possible value is any valid key.
--  ``<key>`` specifies the certificate key used for authentication. The default value is ``/var/wazuh-manager/etc/certs/wazuh-manager-key.pem``. The possible value is any valid key.
+-  ``<certificate>`` specifies the path to the Wazuh manager certificate. The default value is ``/var/wazuh-manager/etc/certs/indexer-connector.pem``. The possible value is any valid key.
+-  ``<key>`` specifies the certificate key used for authentication. The default value is ``/var/wazuh-manager/etc/certs/indexer-connector-key.pem``. The possible value is any valid key.
