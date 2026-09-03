@@ -83,11 +83,16 @@ Deploying certificates
 
       # mkdir /var/wazuh-manager/etc/certs
       # tar -xf ./wazuh-certificates.tar -C /var/wazuh-manager/etc/certs/ ./$NODE_NAME.pem ./$NODE_NAME-key.pem ./root-ca.pem
-      # mv -n /var/wazuh-manager/etc/certs/$NODE_NAME.pem /var/wazuh-manager/etc/certs/manager.pem
-      # mv -n /var/wazuh-manager/etc/certs/$NODE_NAME-key.pem /var/wazuh-manager/etc/certs/manager-key.pem
-      # chmod 500 /var/wazuh-manager/etc/certs
-      # chmod 400 /var/wazuh-manager/etc/certs/*
-      # chown -R root:root /var/wazuh-manager/etc/certs
+      # mv -n /var/wazuh-manager/etc/certs/$NODE_NAME.pem /var/wazuh-manager/etc/certs/indexer-connector.pem
+      # mv -n /var/wazuh-manager/etc/certs/$NODE_NAME-key.pem /var/wazuh-manager/etc/certs/indexer-connector-key.pem
+      # chown root:wazuh-manager \
+          /var/wazuh-manager/etc/certs/root-ca.pem \
+          /var/wazuh-manager/etc/certs/indexer-connector.pem \
+          /var/wazuh-manager/etc/certs/indexer-connector-key.pem
+      # chmod 640 \
+          /var/wazuh-manager/etc/certs/root-ca.pem \
+          /var/wazuh-manager/etc/certs/indexer-connector.pem \
+          /var/wazuh-manager/etc/certs/indexer-connector-key.pem
 
 Configuring the Wazuh indexer connection
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
