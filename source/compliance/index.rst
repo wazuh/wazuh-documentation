@@ -15,9 +15,9 @@ Learn more about achieving compliance with Wazuh in the sections below:
 .. toctree::
    :maxdepth: 1
 
+   pci-dss/index
    gdpr/index
    tsc/index
 ..
-   pci-dss/index
    hipaa/index
    nist/index
