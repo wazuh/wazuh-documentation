@@ -171,7 +171,7 @@ Setting up a shared file system
 Perform the following steps on a server that is accessible from both the Wazuh 4.x and Wazuh 5.x indexer clusters.
 
 NFS server
-""""""""""
+~~~~~~~~~~
 
 #. Create the snapshot directory:
 
@@ -212,7 +212,7 @@ NFS server
       # exportfs -a
 
 Configure the Wazuh indexers
-"""""""""""""""""""""""""""""
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Perform the following steps on every Wazuh indexer node in the source Wazuh 4.x cluster and destination Wazuh 5.x cluster.
 
@@ -274,7 +274,7 @@ Perform the following steps on every Wazuh indexer node in the source Wazuh 4.x 
       In a distributed deployment, mount the shared directory and configure ``path.repo`` on every Wazuh indexer node in the cluster. In an all-in-one deployment, perform these steps on the host running the Wazuh indexer.
 
 Set up snapshot repository on Wazuh 4.x
-""""""""""""""""""""""""""""""""""""""""
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 On the Wazuh 4.x dashboard, perform the following steps:
 
@@ -289,7 +289,7 @@ On the Wazuh 4.x dashboard, perform the following steps:
       :width: 80%
 
 Take a snapshot of the Wazuh 4.x indices
-"""""""""""""""""""""""""""""""""""""""""
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 On the Wazuh 4.x dashboard, perform the following steps:
 
@@ -322,7 +322,7 @@ On the Wazuh 4.x dashboard, perform the following steps:
       :width: 80%
 
 Set up a snapshot repository on Wazuh 5.x
-""""""""""""""""""""""""""""""""""""""""""
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Run the command below on the Wazuh 5.x indexer node to set up a read-only snapshot repository:
 
@@ -351,7 +351,7 @@ The command output looks similar to this:
 Replace ``<WAZUH_INDEXER_IP>`` with the IP address of the Wazuh 5.x indexer.
 
 Restoring the snapshot on Wazuh 5.x
-""""""""""""""""""""""""""""""""""""
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Perform the following steps on the Wazuh 5.x deployment.
 
