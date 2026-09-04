@@ -26,7 +26,7 @@ Migrate agent registrations
 Perform the following steps to migrate the Wazuh agent registrations from Wazuh 4.x to 5.x.
 
 Wazuh 5.x manager
-"""""""""""""""""
+~~~~~~~~~~~~~~~~~~
 
 #. Copy the ``/var/ossec/etc/client.keys`` file from the Wazuh 4.x manager to the Wazuh 5.x manager:
 
@@ -95,17 +95,17 @@ Wazuh 5.x manager
       The API authentication token has a limited lifetime. For deployments with a large number of agents, import the registrations in batches and generate a new token before each batch to prevent token expiration during the migration.
 
 Wazuh agent
-"""""""""""
+~~~~~~~~~~~
 
-#. Update the manager address in the Wazuh agent configuration so that the Wazuh agent connects to the Wazuh 5.x manager. Add the Wazuh manager IP address or fully qualified domain name (FQDN) to the ``<address>`` setting in the ``<client><server>`` section.
+#. Update the manager address in the Wazuh agent configuration so that the Wazuh agent connects to the Wazuh 5.x manager. Add the Wazuh manager IP address or fully qualified domain name (FQDN) to the ``<endpoint>`` setting in the ``<agent><manager>`` section.
 
    .. code-block:: xml
 
-      <client>
-        <server>
-          <address><WAZUH_MANAGER_IP></address>
-        </server>
-      </client>
+      <agent>
+        <manager>
+          <endpoint><WAZUH_MANAGER_IP></endpoint>
+        </manager>
+      </agent>
 
    Replace ``<WAZUH_MANAGER_IP>`` with the IP address of the Wazuh 5.x manager.
 
