@@ -27,12 +27,12 @@ Options
 - `purge`_
 - `use_password`_
 - `remote_enrollment`_
+- `legacy_enrollment`_
 - `ciphers`_
 - `ssl_agent_ca`_
 - `ssl_verify_host`_
 - `ssl_manager_cert`_
 - `ssl_manager_key`_
-- `ssl_auto_negotiate`_
 - `force`_
 - `agents/allow_higher_versions`_
 
@@ -83,13 +83,13 @@ Register agents using their source IP address of the enrollment request instead 
 purge
 ^^^^^
 
-Removes existing keys for an agent when it enrolls again using the same name.
+Controls whether a deleted or replaced agent's old entry is kept as an audit trail. When an agent is removed - including the implicit removal when another agent forces it out via re-enrollment - the active ``client.keys`` entry is always deleted regardless of this setting. ``purge`` decides whether that deleted entry is also retained as a ``!``-prefixed placeholder line in ``client.keys`` (for example ``001 !oldname 1.2.3.4 <key>``), which keeps a record of the old ID/name/IP so it isn't reused. By default, the placeholder is kept; ``yes`` suppresses it, removing the entry with no trace.
 
-+----------------------+-------------------------------------+
-| **Default value**    | no (the installer sets it to yes)   |
-+----------------------+-------------------------------------+
-| **Allowed values**   | yes, no                             |
-+----------------------+-------------------------------------+
++----------------------+-----------+
+| **Default value**    | no        |
++----------------------+-----------+
+| **Allowed values**   | yes, no   |
++----------------------+-----------+
 
 use_password
 ^^^^^^^^^^^^^
@@ -116,7 +116,7 @@ We recommend providing it through the ``WAZUH_REGISTRATION_PASSWORD`` install va
 
 .. code-block:: console
 
-   # WAZUH_MANAGER="<WAZUH_MANAGER_IP_ADDRESS>" WAZUH_REGISTRATION_PASSWORD="<password>" apt install ./wazuh-agent.deb
+   WAZUH_MANAGER="<WAZUH_MANAGER_IP_ADDRESS>" WAZUH_REGISTRATION_PASSWORD="<password>" apt install ./wazuh-agent.deb
 
 To add it to an already installed agent, write the file manually. The agent daemon (``wazuh-agentd``) runs as the ``wazuh`` user, so the file must be readable by that user:
 
@@ -133,7 +133,30 @@ The agent reads the password from ``etc/authd.pass`` (relative to its install di
 remote_enrollment
 ^^^^^^^^^^^^^^^^^^
 
-Controls whether the enrollment service accepts requests over the network (port 1515). Disable to restrict enrollment to the local socket only.
+Master switch for all remote (network) self-enrollment - both this daemon's own TCP/TLS listener on port 1515 and the HTTPS ``POST /enroll`` bridge served by ``remoted_module``. Disabling it turns off both at once; use ``legacy_enrollment`` to turn off only port 1515 while keeping ``/enroll``. Either way, the local socket (``queue/sockets/auth.sock``) used by ``manage_agents``/the API stays available regardless of this setting.
+
++----------------------+-----------+
+| **Default value**    | yes       |
++----------------------+-----------+
+| **Allowed values**   | yes, no   |
++----------------------+-----------+
+
+legacy_enrollment
+^^^^^^^^^^^^^^^^^^
+
+Narrows ``remote_enrollment`` further, without affecting it: when ``remote_enrollment`` is ``yes``, this flag controls whether port 1515's TCP/TLS listener specifically starts. Set to ``no`` to retire legacy 1515 while keeping ``/enroll`` available. Has no effect when ``remote_enrollment`` is ``no`` (both paths are already off).
+
++--------------+-----------------------+-----------------------+-----------+------------------+
+| ``disabled`` | ``remote_enrollment`` | ``legacy_enrollment`` | Port 1515 | ``POST /enroll`` |
++==============+=======================+=======================+===========+==================+
+| yes          | --                    | --                    | off       | off              |
++--------------+-----------------------+-----------------------+-----------+------------------+
+| no           | no                    | --                    | off       | off              |
++--------------+-----------------------+-----------------------+-----------+------------------+
+| no           | yes                   | yes (default)         | on        | on               |
++--------------+-----------------------+-----------------------+-----------+------------------+
+| no           | yes                   | no                    | off       | on               |
++--------------+-----------------------+-----------------------+-----------+------------------+
 
 +----------------------+-----------+
 | **Default value**    | yes       |
@@ -144,13 +167,14 @@ Controls whether the enrollment service accepts requests over the network (port 
 ciphers
 ^^^^^^^
 
-OpenSSL cipher string used for TLS connections to the enrollment service.
+Colon-separated list of TLS 1.3 cipher suites (via OpenSSL's ``SSL_CTX_set_ciphersuites``). ``wazuh-manager-authd`` requires TLS 1.3 as the minimum protocol version — legacy OpenSSL cipher-list strings (for example ``HIGH:!ADH:...``) are rejected at startup with an error.
 
-+----------------------+------------------------------------------------------+
-| **Default value**    | HIGH:!ADH:!EXP:!MD5:!RC4:!3DES:!CAMELLIA:@STRENGTH   |
-+----------------------+------------------------------------------------------+
-| **Allowed values**   | Any valid OpenSSL cipher string                      |
-+----------------------+------------------------------------------------------+
++--------------------+--------------------------------------------------------------------------------+
+| **Default value**  | TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256:TLS_AES_128_GCM_SHA256     |
++--------------------+--------------------------------------------------------------------------------+
+| **Allowed values** | Colon-separated combination of TLS_AES_128_GCM_SHA256, TLS_AES_256_GCM_SHA384, |
+|                    | TLS_CHACHA20_POLY1305_SHA256, TLS_AES_128_CCM_SHA256, TLS_AES_128_CCM_8_SHA256 |
++--------------------+--------------------------------------------------------------------------------+
 
 ssl_agent_ca
 ^^^^^^^^^^^^^
@@ -180,8 +204,8 @@ ssl_manager_cert
 Path to the Wazuh manager's TLS certificate presented to agents during enrollment.
 
 +----------------------+----------------------------------------------------------------------------------------------+
-| **Default value**    | etc/sslmanager.cert (resolved relative to the Wazuh install directory, e.g. /var/wazuh-      |
-|                      | manager/etc/sslmanager.cert)                                                                 |
+| **Default value**    | etc/certs/remoted.pem (resolved relative to the Wazuh install directory, for example         |
+|                      | /var/wazuh-manager/etc/certs/remoted.pem)                                                    |
 +----------------------+----------------------------------------------------------------------------------------------+
 | **Allowed values**   | Path to a PEM-encoded certificate (relative paths resolved from the Wazuh install directory) |
 +----------------------+----------------------------------------------------------------------------------------------+
@@ -192,21 +216,10 @@ ssl_manager_key
 Path to the private key corresponding to ``ssl_manager_cert``.
 
 +----------------------+----------------------------------------------------------------------------------------------+
-| **Default value**    | etc/sslmanager.key (resolved relative to the Wazuh install directory)                        |
+| **Default value**    | etc/certs/remoted-key.pem (resolved relative to the Wazuh install directory)                 |
 +----------------------+----------------------------------------------------------------------------------------------+
 | **Allowed values**   | Path to a PEM-encoded private key (relative paths resolved from the Wazuh install directory) |
 +----------------------+----------------------------------------------------------------------------------------------+
-
-ssl_auto_negotiate
-^^^^^^^^^^^^^^^^^^^
-
-Allows the TLS handshake to negotiate the highest mutually supported protocol version.
-
-+----------------------+-----------+
-| **Default value**    | no        |
-+----------------------+-----------+
-| **Allowed values**   | yes, no   |
-+----------------------+-----------+
 
 force
 ^^^^^
@@ -305,9 +318,8 @@ Sample configuration
      <purge>yes</purge>
      <use_password>yes</use_password>
      <ssl_verify_host>no</ssl_verify_host>
-     <ssl_manager_cert>/var/wazuh-manager/etc/sslmanager.cert</ssl_manager_cert>
-     <ssl_manager_key>/var/wazuh-manager/etc/sslmanager.key</ssl_manager_key>
-     <ssl_auto_negotiate>no</ssl_auto_negotiate>
+     <ssl_manager_cert>etc/certs/remoted.pem</ssl_manager_cert>
+     <ssl_manager_key>etc/certs/remoted-key.pem</ssl_manager_key>
      <force>
        <enabled>yes</enabled>
        <key_mismatch>yes</key_mismatch>

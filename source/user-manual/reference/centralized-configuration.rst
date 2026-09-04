@@ -125,7 +125,7 @@ profile
 
 Applies the configuration only to agents that belong to the specified configuration profile.
 
-Configuration profiles are defined locally on the agent using the ``profile`` option in the ``<client>`` section of the ``/var/ossec/etc/ossec.conf`` file on the Wazuh agent.
+Configuration profiles are defined locally on the agent using the ``<config-profile>`` setting - under ``<client>`` for Wazuh 4.x agents, or ``<agent>`` for Wazuh 5.0 agents, in the agent's ``/var/ossec/etc/ossec.conf`` file.
 
 **Allowed values**: Any regular expression that matches the agent profile.
 
@@ -215,7 +215,7 @@ Create the configuration
       </agent_config>
 
    .. note::
-      The profile option uses values defined in the ``<config_profile>`` setting of the :doc:`client </user-manual/reference/ossec-conf/client>` configuration.
+      The profile filter matches against the value defined in the ``<config-profile>`` setting - under ``<client>`` for 4.x agents, or ``<agent>`` for 5.0 agents.
 
 Validate the configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

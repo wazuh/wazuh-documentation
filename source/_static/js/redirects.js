@@ -145,7 +145,6 @@ newUrls['5.0'] = [
   '/user-manual/reference/daemons/wazuh-manager-clusterd.html',
   '/user-manual/reference/daemons/wazuh-manager-db.html',
   '/user-manual/reference/daemons/wazuh-manager-modulesd.html',
-  '/user-manual/reference/daemons/wazuh-manager-monitord.html',
   '/user-manual/reference/daemons/wazuh-manager-remoted.html',
   '/user-manual/reference/tools/wazuh-manager-control.html',
   '/user-manual/reference/tools/wazuh-manager-keystore.html',
@@ -327,11 +326,6 @@ redirections.push(
     'target': ['4.14=>5.0', '5.0=>4.14'],
     '4.14': '/user-manual/reference/daemons/wazuh-db.html',
     '5.0': '/user-manual/reference/daemons/wazuh-manager-db.html',
-  },
-  {
-    'target': ['4.14=>5.0', '5.0=>4.14'],
-    '4.14': '/user-manual/reference/daemons/wazuh-monitord.html',
-    '5.0': '/user-manual/reference/daemons/wazuh-manager-monitord.html',
   },
   {
     'target': ['4.14=>5.0', '5.0=>4.14'],
