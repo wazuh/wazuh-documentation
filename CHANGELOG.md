@@ -54,6 +54,7 @@ All notable changes to this project will be documented in this file.
 - Updated the *Active response* capability documentation to Wazuh 5.0, covering configuration from the Wazuh dashboard, the consolidated `block-ip` script, developing custom scripts, migrating custom scripts from Wazuh 4.x, and new use cases for blocking web attacks and removing malicious files. ([#10062](https://github.com/wazuh/wazuh-documentation/pull/10062))
 - Replaced the `admin` user with the dedicated `wazuh-manager` user in the Wazuh indexer connector credential examples, and standardized the indexer connector certificate name to `indexer-connector.pem`/`indexer-connector-key.pem` across the *Installation guide*, *Deployment options*, and *User manual* documentation, also correcting the certificate ownership and permissions in the *Installation guide*'s certificate deployment step so the Wazuh manager can read them after dropping privileges. ([#10063](https://github.com/wazuh/wazuh-documentation/pull/10063))
 - Updated the *Using Wazuh for PCI DSS compliance* documentation in *Regulatory compliance* to Wazuh 5.0. ([#10066](https://github.com/wazuh/wazuh-documentation/pull/10066))
+- Updated the *Getting started* documentation to Wazuh 5.0, covering the dashboard screenshot gallery and the *Architecture* section's component communication and required ports. ([#10069](https://github.com/wazuh/wazuh-documentation/pull/10069))
 
 ### Removed
 
