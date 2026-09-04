@@ -53,7 +53,7 @@ Wazuh has standard policies that include decoders, Key-Value Databases (KVDBs), 
        - "2.2.1"
        - "6.3.3"
 
-The `Wazuh for PCI DSS V4.0 Guide (PDF) <https://wazuh.com/resources/WAZUH-PCI-DSS-V4.0-guide.pdf>`__ explains how Wazuh capabilities and modules assist with meeting PCI DSS 4.0 requirements.
+The `Wazuh for PCI DSS V4.0 Guide (PDF) <https://wazuh.com/resources/WAZUH-PCI_DSS-V4.0-guide-V2.0.pdf>`__ explains how Wazuh capabilities and modules assist with meeting PCI DSS 4.0 requirements.
 
 The following sections describe Wazuh capabilities and modules and the technical requirements they support:
 
