@@ -18,13 +18,33 @@ The Wazuh dashboard is a flexible and intuitive web interface for visualizing se
 Data visualization and analysis
 -------------------------------
 
-The Wazuh dashboard enables users to navigate security data collected from Wazuh agents and agentless devices. It includes dashboards for configuration assessment, threat hunting, malware detection, file integrity monitoring, IT hygiene, and regulatory compliance (for example, PCI DSS, GDPR, HIPAA, and NIST 800-53), among others. You can generate reports and create custom visualizations and dashboards.
+The Wazuh dashboard enables users to navigate security data collected from Wazuh agents and agentless devices. It provides an overview of the security posture of monitored environments. The Wazuh dashboard summarizes Wazuh agent status, security findings, and MITRE ATT&CK activity, providing quick access to the corresponding dashboard sections for further investigation.
 
 .. thumbnail::  /images/getting-started/dashboard-overview.png
    :align: center
-   :width: 80% 
+   :width: 80%
    :title: Data visualization
    :alt: Data visualization
+
+It also presents information across Wazuh capabilities, including configuration assessment, file integrity monitoring, malware detection, threat hunting, vulnerability detection, IT hygiene, incident response, and regulatory compliance. It also provides information about available threat intelligence content and access to supported cloud and SaaS integrations. You can generate reports and create custom visualizations and dashboards.
+
+.. thumbnail::  /images/getting-started/dashboard-overview-threat-hunting.png
+   :align: center
+   :width: 80%
+   :title: Threat hunting and threat intelligence
+   :alt: Threat hunting and threat intelligence
+
+.. thumbnail::  /images/getting-started/dashboard-overview-security-operations.png
+   :align: center
+   :width: 80%
+   :title: Security operations
+   :alt: Security operations
+
+.. thumbnail::  /images/getting-started/dashboard-overview-cloud-security.png
+   :align: center
+   :width: 80%
+   :title: Cloud security
+   :alt: Cloud security
 
 Wazuh manager and Wazuh indexer management
 ------------------------------------------
