@@ -8,27 +8,25 @@
 Statistics files
 ================
 
-The **statistics files** are documents that show real-time information about the Wazuh environment as the processed events, received messages, and the state of the remote connections.
+The statistics files are documents that show real-time information about the Wazuh environment, such as processed events, received messages, and the state of remote connections.
 
-Agents statistical files:
+Agent statistical files:
 
-  * :ref:`wazuh-agentd.state <wazuh_agentd_state_file>` - It shows the amount of events generated,
-    last connection date and agent status, among other useful information related to the agent.
+-  :ref:`wazuh-agentd.state <wazuh_agentd_state_file>` - shows the number of events generated, last connection date, and agent status, along with other useful agent-related information.
 
-Manager statistical files:
+Manager statistical files - **removed in Wazuh 5.0**, replaced by the API:
 
-  * :doc:`wazuh-remoted.state <wazuh-remoted-state>` - It shows information
-    about the :ref:`remote daemon <wazuh_manager_remoted>`
-  * :ref:`wazuh-analysisd.state <wazuh_analysisd_state_file>` - It shows information
-    about the :ref:`analysis daemon <wazuh_manager_analysisd>`.
+-  :doc:`wazuh-remoted.state <wazuh-remoted-state>`
+-  :ref:`wazuh-analysisd.state <wazuh_analysisd_state_file>`
 
-Manager and Agents statistical files:
+Manager and Agent statistical files:
 
-  * :ref:`wazuh-logcollector.state <wazuh_logcollector_state_file>` - It shows information about :ref:`logcollector daemon <wazuh_logcollector>`.
+-  :ref:`wazuh-logcollector.state <wazuh_logcollector_state_file>` - shows information about the logcollector daemon.
 
 .. topic:: Contents
 
-  .. toctree::
+   .. toctree::
+      :hidden:
       :maxdepth: 1
 
       wazuh-agentd-state
