@@ -23,13 +23,11 @@ Manager and Agent statistical files:
 
 -  :ref:`wazuh-logcollector.state <wazuh_logcollector_state_file>` - shows information about the logcollector daemon.
 
-.. topic:: Contents
+.. toctree::
+   :hidden:
+   :maxdepth: 1
 
-   .. toctree::
-      :hidden:
-      :maxdepth: 1
-
-      wazuh-agentd-state
-      wazuh-remoted-state
-      wazuh-analysisd-state
-      wazuh-logcollector-state
+   wazuh-agentd-state
+   wazuh-remoted-state
+   wazuh-analysisd-state
+   wazuh-logcollector-state
