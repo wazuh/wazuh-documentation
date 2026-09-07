@@ -1,141 +1,146 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about how to use Wazuh log collection and analysis capabilities to meet the following PCI DSS controls. 
-  
-.. _pci_dss_log_analysis:
+   :description: Learn how the Wazuh Logcollector module and unclassified event storage help meet PCI DSS log data analysis requirements.
 
 Log data analysis
-=================
+==================
 
-In many cases, you can find evidence of an attack in the log messages of devices, systems, and applications. The Wazuh log data analysis module receives logs through text files or Windows event logs. It can also directly receive logs via remote syslog, which is useful for firewalls and other such devices.
+Log messages from devices, systems, and applications often carry evidence of an attack. The Wazuh Logcollector module receives logs through text files or Windows event logs. It can also directly receive logs via remote syslog, which is useful for firewalls and other such devices.
 
-Additionally, the log data analysis module analyzes the log data received from agents. It performs decoding and rule matching on the received data. You can then use this processed log data for threat detection, prevention, and active response. 
+Wazuh agents use the Logcollector module to collect events from monitored endpoints and applications. The Wazuh agents forward these events to the Wazuh manager, where the normalization engine processes them. The Wazuh manager then sends the normalized data to the Wazuh indexer for rule matching and indexing. This processed data supports threat detection, prevention, and active response.
 
-The log collector module helps to meet the following PCI DSS requirement:
+The Logcollector module helps to meet the following PCI DSS requirement:
 
--  **Requirement 10 - Log and Monitor All Access to System Components and Cardholder Data**: This control requires that user activities, including those by employees, contractors, consultants, internal and external vendors, and other third parties, be logged and monitored, and that the log data be stored for a specified period.
+-  **Requirement 10 - Log and Monitor All Access to System Components and Cardholder Data**: This control mandates logging and monitoring user activities by employees, contractors, consultants, vendors, third parties, and other authorized users for a specified period.
 
-To help meet this requirement, the Wazuh agent collects logs from the endpoints on which it is deployed. The log analysis module also receives logs via syslog for network and other syslog-enabled devices. The logs received are decoded to extract relevant information from their fields. Afterward, the extracted information is compared against the ruleset to identify matches. Where the extracted information matches a rule, an alert is generated. Refer to the :doc:`ruleset section </user-manual/ruleset/index>` for more information.
+To help meet this requirement, the Wazuh agent uses the Logcollector module to collect endpoint logs or receive syslog messages from network and other syslog-enabled devices. The Wazuh manager normalization engine decodes the logs to extract the relevant fields, then forwards the normalized events to the Wazuh indexer. The detection engine in the Wazuh indexer evaluates them against the ruleset and triggers a finding when an event matches a rule. Refer to :ref:`rules <data_analysis_rules_compliance>` for more information.
 
-Wazuh also logs events that do not trigger an alert using the archive feature and the indexer's long-term storage. For more information on configuring log collection, see the :doc:`Log data collection section </user-manual/capabilities/log-data-collection/index>`.
+Wazuh also logs events that do not trigger a finding using the storage of unclassified events feature and the Wazuh indexer's long-term storage. To store events that no rule matched, see :ref:`enabling unclassified events storage <pci_dss_unclassified_events>`.
 
 Use cases
 ---------
 
--  PCI DSS 10.2.4 requires that audit logs record the following details for each auditable event:
+Below are PCI DSS requirements that the Wazuh Logcollector module can meet.
 
-   -  User identification.
-   -  Type of event.
-   -  Date and time.
-   -  Success and failure indication.
-   -  Origination of the event.
-   -  Identity or name of affected data, system component, resource, or service (for example, name and protocol).
+PCI DSS requirement 10.2.2
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-	The following are some Wazuh rules that help achieve this requirement:
+PCI DSS requirement 10.2.2 mandates that audit logs record the following details for each auditable event:
 
-   -  **Rule 5710: sshd: Attempt to login using a non-existent user**. This rule generates an alert when a non-existent user tries to log in to a system via SSH. The generated alert contains the information required by PCI DSS requirement 10.2.4 (user identification, event type, date and time, success or failure indication, event origin, and identity or name of the affected data, system component, resource, or service). The screenshot below shows the alert generated on the dashboard:
+-  User identification
 
-  	.. thumbnail:: /images/compliance/pci/attempt-to-login-using-non-existent-user.png
-  		:title: Attempt to login using a non-existent user
-  		:align: center
-  		:width: 80%
+-  Type of event
 
-   
-   -  **Rule 5715: sshd: authentication success**. This rule generates an alert when a user successfully logs into a system via SSH. The generated alert contains the information required by PCI DSS requirement 10.2.5 (user identification, event type, date and time, success or failure indication, event origin, and identity or name of the affected data, system component, resource, or service). The screenshot below shows the alert generated on the dashboard:
+-  Date and time
 
-  	.. thumbnail:: /images/compliance/pci/user-successfully-logs-into-a-system-via-SSH.png
-  		:title: User successfully logs into a system via SSH
-  		:align: center
-  		:width: 80%
+-  Success and failure indication
 
--  PCI DSS 10.5.1 requires that you retain audit log history for at least 12 months, with the most recent 3 months immediately available for analysis. You can achieve this by enabling Wazuh log archives and configuring `index management policies <https://wazuh.com/blog/wazuh-index-management/>`_. To enable Wazuh log archives, take the following steps:
+-  Origination of the event
 
-	**Enable archives monitoring in the Wazuh indexer**:
+-  Identity or name of affected data, system component, resource, or service (for example, name and protocol)
 
-	#. Set ``<logall_json>yes</logall_json>`` in ``/var/ossec/etc/ossec.conf``.
+The following Wazuh rules help achieve this requirement:
 
-	#. Set ``archives:`` ``enabled`` to true in ``/etc/filebeat/filebeat.yml``:
+Failed authentication attempt
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-		.. code-block:: console
+This rule triggers a finding when a non-existent user tries to log in to a system via SSH. The generated finding contains the information required by PCI DSS requirement 10.2.2. The screenshot below shows the finding generated on the dashboard.
 
-			archives:
-			enabled: true
+.. thumbnail:: /images/compliance/pci/failed-authentication-attempt-finding-01.png
+   :title: Failed authentication attempt finding
+   :align: center
+   :width: 80%
 
-	#. Restart Filebeat: 
+.. thumbnail:: /images/compliance/pci/failed-authentication-attempt-finding-02.png
+   :title: Failed authentication attempt finding details
+   :align: center
+   :width: 80%
 
-		.. code-block:: console
+.. thumbnail:: /images/compliance/pci/failed-authentication-attempt-finding-03.png
+   :title: Failed authentication attempt finding details expanded
+   :align: center
+   :width: 80%
 
-			# systemctl restart filebeat
+Successful user authentication
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+This rule triggers a finding when a user successfully logs in to a system via SSH. The generated finding contains the information required by PCI DSS requirement 10.2.2. The screenshot below shows the finding generated on the dashboard.
 
-	#. Restart the Wazuh manager: 
+.. thumbnail:: /images/compliance/pci/successful-user-authentication-finding-01.png
+   :title: Successful user authentication finding
+   :align: center
+   :width: 80%
 
-		.. code-block:: console
+.. thumbnail:: /images/compliance/pci/successful-user-authentication-finding-02.png
+   :title: Successful user authentication finding details
+   :align: center
+   :width: 80%
 
-			# systemctl restart wazuh-manager
+.. thumbnail:: /images/compliance/pci/successful-user-authentication-finding-03.png
+   :title: Successful user authentication finding details expanded
+   :align: center
+   :width: 80%
 
-	#. Go to the **Dashboard management** > **Dashboard Management**.
+PCI DSS requirement 10.4.1
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-		.. thumbnail:: /images/compliance/pci/select-dashboard-management.png
-			:title: Select Dashboard Management
-			:align: center
-			:width: 80%
-		
-	#. Choose **Index Patterns** and select **Create index pattern**. Use ``wazuh-archives-*`` as the index pattern name.
+PCI DSS requirement 10.4.1 mandates that the following audit logs be reviewed at least once daily:
 
-		.. thumbnail:: /images/compliance/pci/select-create-index-pattern.png
-			:title: Select Create index pattern
-			:align: center
-			:width: 80%
+-  All security events
 
-		.. thumbnail:: /images/compliance/pci/define-an-index-pattern.png
-			:title: Select Create index pattern
-			:align: center
-			:width: 80%
-			
-	#. Select the **timestamp** as the primary time field for use with the global time filter, then proceed to create the index pattern.
+-  Logs of all system components that store, process, or transmit cardholder data (CHD) and/or sensitive authentication data (SAD)
 
-		.. thumbnail:: /images/compliance/pci/configure-settings.png
-			:title: Select Create index pattern
-			:align: center
-			:width: 80%
+-  Logs of all critical system components
 
-		.. note::
+-  Logs of all servers and system components that perform security functions (for example, network security controls, intrusion-detection systems/intrusion-prevention systems (IDS/IPS), and authentication servers)
 
-			Be careful to choose **timestamp** instead of **@timestamp**.
+This requirement mandates that logs are analyzed for indicators of compromise at least once daily. The following Wazuh rules help to meet this requirement:
 
-	#. Open the menu and select **Discover** under **OpenSearch Dashboards**. Events should be getting reported there.
+System service installed
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
-		.. thumbnail:: /images/compliance/pci/select-discover-1.png
-			:title: Select Discover
-			:align: center
-			:width: 80%
-			
-		.. thumbnail:: /images/compliance/pci/select-discover-2.png
-			:title: Select Discover
-			:align: center
-			:width: 80%
-		
-- PCI DSS requirement 10.4.1 requires that the following audit logs be reviewed at least once daily:
-  
-   -  All security events.
-   -  Logs of all system components that store, process, or transmit cardholder data (CHD) and/or sensitive authentication data (SAD).
-   -  Logs of all critical system components.
-   -  Logs of all servers and system components that perform security functions (for example, network security controls, intrusion-detection systems/intrusion-prevention systems (IDS/IPS), and authentication servers).
+This rule triggers a finding after the detection engine analyzes the system logs from a Windows endpoint and determines that a new service was created. In the finding, you can see the service name, event type, installation time, and other information.
 
-   This requirement ensures that logs are analyzed for indicators of compromise at least once daily. The following are some Wazuh rules that may help in achieving this requirement:
+.. thumbnail:: /images/compliance/pci/system-service-installed-finding.png
+   :title: System service installed finding
+   :align: center
+   :width: 80%
 
-   -  **Rule 61138**: New Windows Service Created. This rule generates an alert after the analysis engine analyzes the system logs from a Windows endpoint and determines that a new service was created.
+SQL injection strings in URI
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    	.. thumbnail:: /images/compliance/pci/pci-dss-requirement-10.4.1-1.png
-    		:title: PCI DSS requirement 10.4.1
-    		:align: center
-    		:width: 80%
+This rule triggers a finding when the detection engine analyzes logs indicating a SQL injection attack from a WAF or web application. In the finding, you can see the full event log, event type, HTTP request method, and other information.
 
-   -  **Rule 31168**: Shellshock attack detected. This rule will generate an alert when logs indicating a Shellshock attack from a WAF or web application are analyzed by the analysis engine.
-      
-    	.. thumbnail:: /images/compliance/pci/pci-dss-requirement-10.4.1-2.png
-    		:title: PCI DSS requirement 10.4.1
-    		:align: center
-    		:width: 80%
+.. thumbnail:: /images/compliance/pci/sql-injection-strings-in-uri-finding.png
+   :title: SQL injection strings in URI finding
+   :align: center
+   :width: 80%
+
+PCI DSS requirement 10.5.1
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+PCI DSS requirement 10.5.1 mandates that you retain audit log history for at least 12 months, with the most recent 3 months immediately available for analysis. You can meet this requirement by enabling storage of unclassified events and configuring data stream lifecycle management.
+
+.. _pci_dss_unclassified_events:
+
+Enable the storage of unclassified events
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Unclassified event indexing keeps events that no rule matched, while data stream lifecycle management controls how long these events remain available for review. Together, these features allow you to retain up to 12 months of log history for investigation and analysis.
+
+Unclassified event indexing is configured per :doc:`space </user-manual/data-analysis/space>`. When enabled for the relevant space, events that cannot be decoded or classified are stored in the ``wazuh-events-v5-unclassified`` index.
+
+#. Navigate to the **Security Analytics** dashboard, select the space you want to enable unclassified events for, select the **Actions** drop-down menu, and select **Edit**.
+
+   .. thumbnail:: /images/compliance/pci/security-analytics-edit-space.png
+      :title: Edit a space in Security Analytics
+      :align: center
+      :width: 80%
+
+#. Toggle on **Index unclassified events**, and click **Save**.
+
+   .. thumbnail:: /images/compliance/pci/index-unclassified-events-toggle.png
+      :title: Index unclassified events toggle
+      :align: center
+      :width: 80%

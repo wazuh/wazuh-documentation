@@ -124,17 +124,34 @@ Follow these steps to enroll a Linux/Unix endpoint with password authentication:
         <authorization_pass_path><PATH_TO_PASSWORD_FILE></authorization_pass_path>
       </enrollment>
 
-#. Add the Wazuh manager IP address or fully qualified domain name (FQDN) in the ``<client><manager><address>`` section of the Wazuh agent configuration file ``/var/ossec/etc/ossec.conf``. Replace ``<WAZUH_MANAGER_IP>`` with the Wazuh manager IP address or FQDN:
+#. Add the Wazuh manager IP address or fully qualified domain name (FQDN) in the Wazuh agent configuration file ``/var/ossec/etc/ossec.conf``. The setting depends on the Wazuh agent version:
+
+   **Wazuh 5.0 agents**:
 
    .. code-block:: xml
-      :emphasize-lines: 3
+      :emphasize-lines: 4
 
-      <client>
-         <manager>
+      <ossec_config>
+        <agent>
+          <manager>
+            <endpoint><WAZUH_MANAGER_IP_ADDRESS></endpoint>
+          </manager>
+        </agent>
+      </ossec_config>
+
+   **Wazuh 4.x agents**:
+
+   .. code-block:: xml
+      :emphasize-lines: 4
+
+      <ossec_config>
+        <client>
+          <server>
             <address><WAZUH_MANAGER_IP></address>
-         ...
-         </manager>
-      </client>
+            ...
+          </server>
+        </client>
+      </ossec_config>
 
    This will allow the Wazuh agent to enroll in the specified Wazuh manager.
 
@@ -144,7 +161,7 @@ Follow these steps to enroll a Linux/Unix endpoint with password authentication:
 
       # systemctl restart wazuh-agent
 
-#. Click on the upper-left menu icon and navigate to **Agents management** > **Summary** on the Wazuh dashboard to check for the newly enrolled Wazuh agent and its connection status. If the enrollment was successful, you will have an interface similar to the image below.
+#. Click on the upper-left menu icon and navigate to **Agents management** > **Summary** on the Wazuh dashboard to check for the newly enrolled Wazuh agent and its connection status. If the enrollment was successful, the Wazuh dashboard displays an interface similar to the image below.
 
    .. thumbnail:: /images/manual/agent/linux-check-newly-enrolled.png
       :title: Check newly enrolled Wazuh agent - Linux
@@ -187,17 +204,36 @@ The Wazuh agent installation directory depends on the host's architecture.
         <authorization_pass_path><PATH_TO_PASSWORD_FILE></authorization_pass_path>
       </enrollment>
 
-#. Add the Wazuh manager IP address or fully qualified domain name (FQDN) in the ``<client><manager><address>`` section of the Wazuh agent configuration file in ``C:\Program Files (x86)\ossec-agent\ossec.conf``. Replace ``<WAZUH_MANAGER_IP>`` with the IP address or FQDN of the Wazuh manager.
+#. Add the Wazuh manager IP address or fully qualified domain name (FQDN) in the Wazuh agent configuration file in ``C:\Program Files (x86)\ossec-agent\ossec.conf``. The setting depends on the Wazuh agent version:
+
+   **Wazuh 5.0 agents**:
 
    .. code-block:: xml
-      :emphasize-lines: 3
+      :emphasize-lines: 4
 
-      <client>
-         <manager>
-             <address><WAZUH_MANAGER_IP></address>
+      <ossec_config>
+        <agent>
+          <manager>
+            <endpoint><WAZUH_MANAGER_IP_ADDRESS></endpoint>
+          </manager>
+        </agent>
+      </ossec_config>
+
+   **Wazuh 4.x agents**:
+
+   .. code-block:: xml
+      :emphasize-lines: 4
+
+      <ossec_config>
+        <client>
+          <server>
+            <address><WAZUH_MANAGER_IP_ADDRESS></address>
             ...
-         </manager>
-      </client>
+          </server>
+        </client>
+      </ossec_config>
+
+   This will allow the Wazuh agent to enroll in the specified Wazuh manager.
 
 #. Restart the Wazuh agent to make the changes effective.
 
@@ -216,7 +252,7 @@ The Wazuh agent installation directory depends on the host's architecture.
             > net stop wazuh
             > net start wazuh
 
-#. Click on the upper-left menu icon and navigate to **Agents management** > **Summary** on the Wazuh dashboard to check for the newly enrolled Wazuh agent and its connection status. If the enrollment was successful, you will have an interface similar to the image below.
+#. Click on the upper-left menu icon and navigate to **Agents management** > **Summary** on the Wazuh dashboard to check for the newly enrolled Wazuh agent and its connection status. If the enrollment was successful, the Wazuh dashboard displays an interface similar to the image below.
 
    .. thumbnail:: /images/manual/agent/windows-check-newly-enrolled.png
       :title: Check newly enrolled Wazuh agent - Windows
@@ -259,17 +295,36 @@ Follow the steps below to enroll a macOS endpoint with password authentication:
         <authorization_pass_path><PATH_TO_PASSWORD_FILE></authorization_pass_path>
       </enrollment>
 
-#. Add the Wazuh manager IP address or fully qualified domain name (FQDN) to the agent configuration file in ``/Library/Ossec/etc/ossec.conf``. Replace ``<WAZUH_MANAGER_IP>`` with the IP address or FQDN of the Wazuh manager.
+#. Add the Wazuh manager IP address or fully qualified domain name (FQDN) in the Wazuh agent configuration file ``/Library/Ossec/etc/ossec.conf``. The setting depends on the Wazuh agent version:
+
+   **Wazuh 5.0 agents**:
 
    .. code-block:: xml
-      :emphasize-lines: 3
+      :emphasize-lines: 4
 
-      <client>
-        <manager>
-          <address><WAZUH_MANAGER_IP></address>
-          ...
-        </manager>
-      </client>
+      <ossec_config>
+        <agent>
+          <manager>
+            <endpoint><WAZUH_MANAGER_IP_ADDRESS></endpoint>
+          </manager>
+        </agent>
+      </ossec_config>
+
+   **Wazuh 4.x agents**:
+
+   .. code-block:: xml
+      :emphasize-lines: 4
+
+      <ossec_config>
+        <client>
+          <server>
+            <address><WAZUH_MANAGER_IP_ADDRESS></address>
+            ...
+          </server>
+        </client>
+      </ossec_config>
+
+   This will allow the Wazuh agent to enroll in the specified Wazuh manager.
 
 #. Restart the Wazuh agent to make the changes effective:
 
@@ -277,7 +332,7 @@ Follow the steps below to enroll a macOS endpoint with password authentication:
 
       # /Library/Ossec/bin/wazuh-control restart
 
-#. Click on the upper-left menu icon and navigate to **Agents management** > **Summary** on the Wazuh dashboard to check for the newly enrolled Wazuh agent and its connection status. If the enrollment was successful, you will have an interface similar to the image below.
+#. Click on the upper-left menu icon and navigate to **Agents management** > **Summary** on the Wazuh dashboard to check for the newly enrolled Wazuh agent and its connection status. If the enrollment was successful, the Wazuh dashboard displays an interface similar to the image below.
 
    .. thumbnail:: /images/manual/agent/macOS-check-newly-enrolled.png
       :title: Check newly enrolled Wazuh agent - macOS

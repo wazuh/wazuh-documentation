@@ -1,12 +1,12 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: The Wazuh manager stores operational logs that are retained indefinitely and rotated. Learn more in this section of the documentation.
+   :description: The Wazuh manager stores operational logs that are rotated and retained for 31 days by default. Learn more in this section of the documentation.
 
 Logging
 =======
 
-The Wazuh manager generates and stores operational logs in the ``/var/wazuh-manager/logs/`` directory, where they are retained indefinitely by default.
+The Wazuh manager generates and stores operational logs in the ``/var/wazuh-manager/logs/`` directory. Rotated logs are kept for 31 days by default. To change the retention period, set the ``wazuh_modules.manager_task_log_keep_days`` option in the ``/var/wazuh-manager/etc/wazuh-manager-internal-options.conf`` file.
 
 The table below describes the log files and their storage location on the Wazuh manager.
 
@@ -33,13 +33,13 @@ The following ``<logging>`` block represents the default logging configuration i
 .. code-block:: xml
    :emphasize-lines: 3-5
 
-   <ossec_config>
+   <wazuh_config>
      ...
      <logging>
        <log_format>plain</log_format>
      </logging>
      ...
-   </ossec_config>
+   </wazuh_config>
 
 Where ``<log_format>`` specifies the format of internal logs (JSON or plaintext). The default value is ``plain`` for plaintext logs. The allowed value is any of the following formats, including ``plain``, ``json``, and ``plain,json``.
 
@@ -48,7 +48,7 @@ Log compression and rotation
 
 Log files can quickly accumulate and consume significant disk space on the Wazuh manager endpoint. To prevent this behavior, the Wazuh manager compresses logs during its rotation process, helping to manage disk usage efficiently and maintain system performance.
 
-The Wazuh manager compresses log files daily or when they reach a certain threshold (file size, age, time, and more) and archives them. During the log rotation process, the Wazuh manager creates a new log file with the original filename to continuously write new logs. It then compresses the old log file and stores it in the ``/var/wazuh-manager/logs/`` directory within nested directories in the format ``…/<FILENAME>/<YEAR>/<MONTH>/``, where:
+The Wazuh manager rotates its log files daily, shortly after midnight, and whenever a log file exceeds 512 MB. Rotated files are compressed with ``gzip`` by default and kept for 31 days. During rotation, the Wazuh manager creates a new log file with the original filename and continues writing to it. It stores the compressed old file in the ``/var/wazuh-manager/logs/`` directory within nested directories in the format ``.../<FILENAME>/<YEAR>/<MONTH>/``, where:
 
 -  The ``<FILENAME>`` indicates the name of the original log file.
 -  The ``<YEAR>`` indicates the current year.
@@ -70,5 +70,7 @@ For example, the log file ``/var/wazuh-manager/logs/cluster.log`` compressed on 
    -rw-r----- 1 wazuh-manager wazuh-manager 12728 Jun  2 09:13 cluster.log-01.gz
 
 The Wazuh manager appends the suffix ``-<DAY_OF_THE_MONTH>`` to the original filename as seen in the highlighted output above (``cluster.log-01.gz``).
+
+The ``wazuh_modules.manager_task_log_*`` internal options in the ``/var/wazuh-manager/etc/wazuh-manager-internal-options.conf`` file control the rotation schedule, size threshold, compression, daily rotation slots, and retention period.
 
 Depending on your needs, you can configure the removal of compressed files after a specified period. You can move them to log management systems, backup servers, or cloud-based storage devices for longer-term retention.

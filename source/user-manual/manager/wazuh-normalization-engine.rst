@@ -587,7 +587,7 @@ Synchronization process
 
 Before building the security policy, the Wazuh normalization engine must ensure that its local state reflects the latest configuration available in the Wazuh indexer. This is achieved through a CMSync module, which periodically pulls content from the Wazuh indexer and applies any detected changes to the local store of the Wazuh normalization engine.
 
-CMSync synchronizes content independently for the standard and custom spaces, following the same two-step process for each:
+CMSync synchronizes content independently for the ``standard`` and ``custom`` :ref:`spaces <space>`, following the same two-step process for each:
 
 #. **Hash comparison**: CMSync retrieves the content hash stored in the Wazuh indexer for the space and compares it against the locally stored hash. This check allows CMSync to determine quickly whether the space content has changed at all.
 #. **Content fetch**: If the hashes differ, CMSync downloads the full content for that space from the Wazuh indexer and applies it to the local store of the Wazuh normalization engine. The engine then rebuilds the affected operational graphs.
@@ -601,7 +601,7 @@ CMSync synchronizes content independently for the standard and custom spaces, fo
 Space
 ^^^^^
 
-A space is a content organization concept that originates in the Wazuh indexer. The Wazuh indexer has four spaces, including ``draft``, ``test``, ``custom``, and ``standard``. In the Wazuh manager, the normalization engine mirrors the relevant Wazuh indexer spaces by storing synchronized assets according to the space they belong to when CMSync pulls content from the Wazuh indexer.
+A :doc:`space </user-manual/data-analysis/space>` is a content organization concept that originates in the Wazuh indexer. The Wazuh indexer has four spaces, including ``draft``, ``test``, ``custom``, and ``standard``. In the Wazuh manager, the normalization engine mirrors the relevant Wazuh indexer spaces by storing synchronized assets according to the space they belong to when CMSync pulls content from the Wazuh indexer.
 
 The Wazuh normalization engine manages the following spaces:
 

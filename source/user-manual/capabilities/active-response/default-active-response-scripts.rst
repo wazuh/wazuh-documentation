@@ -6,84 +6,61 @@
 Default active response scripts
 ================================
 
-This section lists out-of-the-box active response scripts for the following operating systems:
+Wazuh agents ship with active response scripts for Linux, Unix, macOS, and Windows endpoints.
 
 .. contents::
    :local:
    :depth: 1
    :backlinks: none
 
-Linux, macOS, and Unix-based endpoints
---------------------------------------
+In Wazuh 5.x, Wazuh consolidates the firewall-specific active response scripts used in Wazuh 4.x into a single ``block-ip`` executable for each supported platform.
+
+The ``block-ip`` executable attempts to use the available firewall mechanisms in a predefined order. If a firewall method is unavailable or unsupported on the endpoint, the executable automatically proceeds to the next available method. This approach removes the need to select or configure a firewall-specific script for each endpoint.
+
+Linux and Unix-based endpoints
+--------------------------------
 
 The table below lists out-of-the-box active response scripts for:
 
--  Linux/Unix endpoints located in the Wazuh agent ``/var/ossec/active-response/bin`` directory. 
--  macOS endpoints located in the Wazuh agent ``/Library/Ossec/active-response/bin`` directory.
+-  Linux/Unix endpoints, located in the Wazuh agent ``/var/ossec/active-response/bin`` directory.
 
-Click on the name of each active response to open its source code. 
+.. |block-ip| replace:: `block-ip <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|/src/active-response/src/block-ip-unix.c>`__
+.. |disable-account| replace:: `disable-account <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|/src/active-response/src/disable-account.c>`__
 
-.. |disable-account| replace:: `disable-account <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|/src/active-response/disable-account.c>`__
-.. |firewall-drop| replace:: `firewall-drop <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|/src/active-response/firewalls/default-firewall-drop.c>`__
-.. |firewalld-drop| replace:: `firewalld-drop <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|/src/active-response/firewalld-drop.c>`__
-.. |host-deny| replace:: `host-deny <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|/src/active-response/host-deny.c>`__
-.. |ip-customblock| replace:: `ip-customblock <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|/src/active-response/ip-customblock.c>`__
-.. |ipfw| replace:: `ipfw <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|/src/active-response/firewalls/ipfw.c>`__
-.. |npf| replace:: `npf <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|/src/active-response/firewalls/npf.c>`__
-.. |wazuh-slack| replace:: `wazuh-slack <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|/src/active-response/wazuh-slack.c>`__
-.. |pf| replace:: `pf <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|/src/active-response/firewalls/pf.c>`__
-.. |restart.sh| replace:: `restart.sh <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|/src/active-response/restart.sh>`__
-.. |restart-wazuh| replace:: `restart-wazuh <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|/src/active-response/restart-wazuh.c>`__
-.. |route-null| replace:: `route-null <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|/src/active-response/route-null.c>`__
-.. |kaspersky| replace:: `kaspersky <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|/src/active-response/kaspersky.c>`__
++----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
+| Name of script       | Description                                                                                                                                     |
++======================+=================================================================================================================================================+
+| |block-ip|           | Blocks or unblocks an IP address. The order depends on the platform. On Linux: ``firewalld``, ``iptables`` or ``ip6tables``,                    |
+|                      | ``/etc/hosts.deny``, then a null route. On FreeBSD: ``ipfw``, ``pf``, ``/etc/hosts.deny``, then a null route. On OpenBSD: ``pf``,               |
+|                      | ``/etc/hosts.deny``, then a null route. On NetBSD: ``npf``, ``/etc/hosts.deny``, then a null route.                                             |
++----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
+| |disable-account|    | Disables or re-enables a user account, using ``passwd -l/passwd -u`` on Linux.                                                                  |
++----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
 
-+---------------------------+-------------------------------------------------------------------------------------------------------------+
-| Name of script            | Description                                                                                                 |
-+===========================+=============================================================================================================+
-| |disable-account|         | Disables a user account                                                                                     |
-+---------------------------+-------------------------------------------------------------------------------------------------------------+
-| |firewall-drop|           | Adds an IP address to the iptables deny list.                                                               |
-+---------------------------+-------------------------------------------------------------------------------------------------------------+
-| |firewalld-drop|          | Adds an IP address to the firewalld drop list. Requires firewalld installed on the endpoint.                |
-+---------------------------+-------------------------------------------------------------------------------------------------------------+
-| |host-deny|               | Adds an IP address to the ``/etc/hosts.deny`` file.                                                         |
-+---------------------------+-------------------------------------------------------------------------------------------------------------+
-| |ip-customblock|          | Custom Wazuh block, easily modifiable for a custom response.                                                |
-+---------------------------+-------------------------------------------------------------------------------------------------------------+
-| |ipfw|                    | Firewall-drop response script created for IPFW. Requires IPFW installed on the endpoint.                    |
-+---------------------------+-------------------------------------------------------------------------------------------------------------+
-| |npf|                     | Firewall-drop response script created for NPF. Requires NPF installed on the endpoint.                      |
-+---------------------------+-------------------------------------------------------------------------------------------------------------+
-| |wazuh-slack|             | Posts notifications on Slack. Requires a slack hook URL passed as an ``extra_args``.                        |
-+---------------------------+-------------------------------------------------------------------------------------------------------------+
-| |pf|                      | Firewall-drop response script created for PF. Requires PF installed on the endpoint.                        |
-+---------------------------+-------------------------------------------------------------------------------------------------------------+
-| |restart.sh|              | Restarts the Wazuh agent or manager.                                                                        |
-+---------------------------+-------------------------------------------------------------------------------------------------------------+
-| |restart-wazuh|           | Restarts the Wazuh agent or manager.                                                                        |
-+---------------------------+-------------------------------------------------------------------------------------------------------------+
-| |route-null|              | Adds an IP address to a null route.                                                                         |
-+---------------------------+-------------------------------------------------------------------------------------------------------------+
-| |kaspersky|               | Integration of Wazuh agents with Kaspersky endpoint security. This uses Kaspersky Endpoint Security for     |
-|                           | Linux CLI to execute relevant commands based on a trigger.                                                  |
-+---------------------------+-------------------------------------------------------------------------------------------------------------+
-
-Windows endpoints
+macOS endpoints
 -----------------
 
-The table below lists out-of-the-box scripts for Windows endpoints, located in the Wazuh agent ``C:\Program Files (x86)\ossec-agent\active-response\bin`` directory. Click on the name of each script to see its source code.
+The table below lists out-of-the-box active response scripts for:
 
-.. |netsh.exe| replace:: `netsh.exe <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|/src/active-response/netsh.c>`__
-.. |restart-wazuh.exe| replace:: `restart-wazuh.exe <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|/src/active-response/restart-wazuh.c>`__
-.. |route-null.exe| replace:: `route-null.exe <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|/src/active-response/route-null.c>`__
+-  macOS endpoints, located in the Wazuh agent ``/Library/Ossec/active-response/bin`` directory.
 
-+-------------------------+---------------------------------------------------------------+
-| Name of script          |                          Description                          |
-+=========================+===============================================================+
-| |netsh.exe|             | Blocks an IP address using ``netsh``.                         |
-+-------------------------+---------------------------------------------------------------+
-| |restart-wazuh.exe|     | Restarts the Wazuh agent.                                     |
-+-------------------------+---------------------------------------------------------------+
-| |route-null.exe|        | Adds an IP address to null route.                             |
-+-------------------------+---------------------------------------------------------------+
+.. |block-ip-macos| replace:: `block-ip <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|/src/active-response/src/block-ip-macos.c>`__
 
++----------------------+----------------------------------------------------------------------------------------------------+
+| Name of script       | Description                                                                                        |
++======================+====================================================================================================+
+| |block-ip-macos|     | Blocks or unblocks an IP address. On macOS, it tries pf and then ``/etc/hosts.deny``.              |
++----------------------+----------------------------------------------------------------------------------------------------+
+
+Windows endpoints
+-------------------
+
+The table below lists out-of-the-box scripts for Windows endpoints, located in the Wazuh agent ``C:\Program Files (x86)\ossec-agent\active-response\bin`` directory.
+
+.. |block-ip-exe| replace:: `block-ip.exe <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|/src/active-response/src/block-ip-windows.c>`__
+
++----------------------+----------------------------------------------------------------------------------------------------------------------------------+
+| Name of script       | Description                                                                                                                      |
++======================+==================================================================================================================================+
+| |block-ip-exe|       | Blocks or unblocks an IP address. It tries ``netsh advfirewall`` first, then falls back to a blackhole route if that fails.      |
++----------------------+----------------------------------------------------------------------------------------------------------------------------------+
