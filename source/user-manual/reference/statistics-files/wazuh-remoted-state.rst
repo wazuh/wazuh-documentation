@@ -1,55 +1,77 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn how the wazuh-remoted.state file provides information about the remote daemon as the queue size, discarded messages, and other useful information.
+  :description: The wazuh-remoted.state file was removed in Wazuh 5.0. Manager daemon statistics are now served through the API. Learn more about it here.
 
 wazuh-remoted.state
 ===================
 
-The statistical file for **wazuh-remoted** is located at ``/var/ossec/var/run/wazuh-remoted.state``.
+**Removed in Wazuh 5.0**. Manager daemon statistics are now served through the API:
 
-This file provides information about the remote daemon as the queue size, discarded messages, number of remote connections, and other useful information.
+.. code-block:: none
 
-By default, this file is updated every 5 seconds. This interval can be changed by modifying the ``remoted.state_interval`` value from the :ref:`internal configuration <reference_internal_options>` file.
+   GET /cluster/{node_id}/daemons/stats?daemons_list=wazuh-manager-remoted
 
-Below there is an example of the content of the file:
+Sample response:
 
-.. code-block:: ini
+.. code-block:: json
 
-    # State file for wazuh-remoted
-    # Updated every 5 seconds.
-
-    # Queue size
-    queue_size='0'
-
-    # Total queue size
-    total_queue_size='131072'
-
-    # TCP sessions
-    tcp_sessions='130'
-
-    # Events sent to Analysisd
-    evt_count='19097'
-
-    # Control messages received
-    ctrl_msg_count='3444'
-
-    # Discarded messages
-    discarded_count='23'
-
-    # Messages sent
-    msg_sent='3460'
-
-    # Total number of bytes received
-    recv_bytes='435879'
-
-    # Messages dequeued after the agent closes the connection
-    dequeued_after_close='487'
-
-    # Control messages queue usage
-    ctrl_msg_queue_usage='0'
-
-    # Control messages queue breakdown
-    ctrl_msg_queue_inserted='5587'
-    ctrl_msg_queue_replaced='13'
-    ctrl_msg_queue_processed='5587'
+   {
+      "data": {
+         "affected_items": [
+            {
+               "uptime": "2026-09-04T14:47:41+00:00",
+               "timestamp": "2026-09-04T16:31:17+00:00",
+               "name": "wazuh-manager-remoted",
+               "metrics": {
+                  "bytes": {
+                     "received": 351518,
+                     "sent": 27768
+                  },
+                  "keys_reload_count": 0,
+                  "messages": {
+                     "received_breakdown": {
+                        "control": 312,
+                        "control_breakdown": {
+                           "keepalive": 311,
+                           "request": 0,
+                           "shutdown": 0,
+                           "startup": 1
+                        },
+                        "events_failed": 0,
+                        "dequeued_after": 0,
+                        "discarded": 0,
+                        "events": 1160,
+                        "ping": 0,
+                        "unknown": 0,
+                        "upgrade_ack": 0
+                     },
+                     "sent_breakdown": {
+                        "ack": 312,
+                        "discarded": 0,
+                        "shared": 0
+                     }
+                  },
+                  "queues": {
+                     "received": {
+                        "size": 67108864,
+                        "usage": 0
+                     }
+                  },
+                  "tcp_sessions": 1,
+                  "control_messages_queue_usage": 0,
+                  "control_messages_queue_breakdown": {
+                     "inserted": 312,
+                     "replaced": 0,
+                     "processed": 312
+                  }
+               }
+            }
+         ],
+         "total_affected_items": 1,
+         "total_failed_items": 0,
+         "failed_items": []
+      },
+      "message": "Statistical information for each daemon was successfully read",
+      "error": 0
+   }

@@ -102,8 +102,8 @@ By default, the connector points to the localhost with certificate paths relativ
           <certificate_authorities>
             <ca>etc/certs/root-ca.pem</ca>
           </certificate_authorities>
-          <certificate>etc/certs/manager.pem</certificate>
-          <key>etc/certs/manager-key.pem</key>
+          <certificate>etc/certs/indexer-connector.pem</certificate>
+          <key>etc/certs/indexer-connector-key.pem</key>
         </ssl>
       </indexer>
 
@@ -137,7 +137,7 @@ By default, the connector points to the localhost with certificate paths relativ
 
    .. code-block:: console
 
-      # curl --cacert /var/wazuh-manager/etc/certs/root-ca.pem --cert /var/wazuh-manager/etc/certs/manager.pem --key /var/wazuh-manager/etc/certs/manager-key.pem -u <WAZUH_INDEXER_USERNAME> -XGET "https://<WAZUH_INDEXER_IP>:9200/_cluster/health?pretty"
+      # curl --cacert /var/wazuh-manager/etc/certs/root-ca.pem --cert /var/wazuh-manager/etc/certs/indexer-connector.pem --key /var/wazuh-manager/etc/certs/indexer-connector-key.pem -u <WAZUH_INDEXER_USERNAME> -XGET "https://<WAZUH_INDEXER_IP>:9200/_cluster/health?pretty"
 
    A successful connection returns a result similar to the following:
 

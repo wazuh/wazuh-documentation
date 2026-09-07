@@ -24,8 +24,6 @@ Options
 
 - `enabled`_
 - `wpk_repository`_
-- `chunk_size`_
-- `max_threads`_
 
 enabled
 ^^^^^^^
@@ -49,30 +47,6 @@ Base URL from which WPK upgrade packages are downloaded. A trailing ``/`` is add
 | **Allowed values**   | Any valid URL                                                                       |
 +----------------------+-------------------------------------------------------------------------------------+
 
-chunk_size
-^^^^^^^^^^^
-
-Specifies the size, in bytes, of each chunk transferred to an agent during a WPK package transfer.
-
-+----------------------+----------------------------+
-| **Default value**    | 32768                      |
-+----------------------+----------------------------+
-| **Allowed values**   | Integer from 64 to 60000   |
-+----------------------+----------------------------+
-
-max_threads
-^^^^^^^^^^^^
-
-Specifies the maximum number of agent upgrade operations that can run concurrently.
-
-Set this option to ``0`` to use the number of available CPU cores.
-
-+----------------------+------------------------------------------+
-| **Default value**    | 8                                        |
-+----------------------+------------------------------------------+
-| **Allowed values**   | 0 (CPU count) or integer from 1 to 256   |
-+----------------------+------------------------------------------+
-
 Sample configuration
 ---------------------
 
@@ -80,6 +54,4 @@ Sample configuration
 
    <agent-upgrade>
      <enabled>yes</enabled>
-     <chunk_size>32768</chunk_size>
-     <max_threads>8</max_threads>
    </agent-upgrade>
