@@ -80,6 +80,7 @@ removedUrls['x.y'] = [
 /* Pages added in 5.0 */
 
 newUrls['5.0'] = [
+  '/user-manual/reference/ossec-conf/agent.html',
   '/release-notes/release-5-0-0.html',
   '/release-notes/index-5x.html',
   '/deployment-options/deploying-with-kubernetes/kubernetes-password.html',
@@ -162,6 +163,11 @@ newUrls['5.0'] = [
 /* Redirections 4.14—5.0  */
 
 redirections.push(
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/user-manual/reference/ossec-conf/client-buffer.html',
+    '5.0': '/user-manual/reference/ossec-conf/agent.html#batch',
+  },
   {
     'target': ['4.14=>5.0', '5.0=>4.14'],
     '4.14': '/user-manual/capabilities/active-response/how-to-configure.html',
@@ -347,6 +353,8 @@ redirections.push(
 /* Pages no longer available in 5.0 */
 
 removedUrls['5.0'] = [
+  '/user-manual/reference/ossec-conf/client-buffer.html',
+  '/user-manual/reference/ossec-conf/labels.html',
   '/compliance/pci-dss/dashboard.html',
   '/user-manual/capabilities/active-response/additional-information.html',
   '/user-manual/capabilities/active-response/ar-use-cases/blocking-ssh-brute-force.html',

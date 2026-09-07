@@ -36,6 +36,8 @@ Use ``ossec.conf`` to configure an individual agent locally. To distribute suppo
 | :doc:`active-response <active-response>`                | Controls whether the agent executes Active Response commands and configures repeated-        |
 |                                                         | offender timeouts.                                                                           |
 +---------------------------------------------------------+----------------------------------------------------------------------------------------------+
+| :doc:`agent <agent>`                                    | Configures the agent's connection to the manager and enrollment settings.                    |
++---------------------------------------------------------+----------------------------------------------------------------------------------------------+
 | :doc:`agent-upgrade <agent-upgrade>`                    | Configures remote agent upgrade behavior and WPK certificate validation.                     |
 +---------------------------------------------------------+----------------------------------------------------------------------------------------------+
 | :doc:`anti_tampering <anti-tampering>`                  | Requires Wazuh manager validation before uninstalling the agent package on supported Linux   |
@@ -43,11 +45,7 @@ Use ``ossec.conf`` to configure an individual agent locally. To distribute suppo
 +---------------------------------------------------------+----------------------------------------------------------------------------------------------+
 | :doc:`client <client>`                                  | Configures the agent connection, reconnection, enrollment, and communication settings.       |
 +---------------------------------------------------------+----------------------------------------------------------------------------------------------+
-| :doc:`client_buffer <client-buffer>`                    | Controls agent-side event buffering and transmission rate limits.                            |
-+---------------------------------------------------------+----------------------------------------------------------------------------------------------+
 | :doc:`github <github-module>`                           | Collects GitHub organization audit events.                                                   |
-+---------------------------------------------------------+----------------------------------------------------------------------------------------------+
-| :doc:`labels <labels>`                                  | Adds custom agent metadata to generated events.                                              |
 +---------------------------------------------------------+----------------------------------------------------------------------------------------------+
 | :doc:`localfile <localfile>`                            | Configures collection from log files, event channels, journald, macOS ULS, and command       |
 |                                                         | output.                                                                                      |
@@ -86,12 +84,11 @@ Use ``ossec.conf`` to configure an individual agent locally. To distribute suppo
    :maxdepth: 1
 
    active-response
+   agent
    agent-upgrade
    anti-tampering
    client
-   client-buffer
    github-module
-   labels
    localfile
    logging
    ms-graph-module
