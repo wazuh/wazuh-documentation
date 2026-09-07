@@ -15,7 +15,7 @@ indexer
       <indexer>
       </indexer>
 
-The ``<indexer>`` section configures the connection between the Wazuh manager and the Wazuh indexer. This connection is used to send data to the Wazuh indexer and retrieve content required by manager components, including vulnerability content.
+The Indexer Connector configuration ``<indexer>`` establishes TLS-secured connections to one or more Indexer nodes for data indexing and feed synchronization.
 
 Options
 -------
@@ -76,11 +76,11 @@ certificate
 
 Path to the client certificate presented by the Wazuh manager when mutual TLS authentication is enabled. The path must exist on disk at startup time.
 
-+----------------------+------------------------------------------------------------------------------------------+
-| **Default value**    | None (The installer sets this automatically to etc/certs/indexer-connector.pem)          |
-+----------------------+------------------------------------------------------------------------------------------+
-| **Allowed values**   | Path to a PEM-encoded certificate (existence checked at startup; relative or absolute)   |
-+----------------------+------------------------------------------------------------------------------------------+
++--------------------+----------------------------------------------------------------------------------------+
+| **Default value**  | None (The installer sets this automatically to etc/certs/indexer-connector.pem)        |
++--------------------+----------------------------------------------------------------------------------------+
+| **Allowed values** | Path to a PEM-encoded certificate (existence checked at startup; relative or absolute) |
++--------------------+----------------------------------------------------------------------------------------+
 
 key
 ~~~~
@@ -106,10 +106,10 @@ Single node:
      </hosts>
      <ssl>
        <certificate_authorities>
-         <ca>/var/wazuh-manager/etc/certs/root-ca.pem</ca>
+         <ca>etc/certs/root-ca.pem</ca>
        </certificate_authorities>
-       <certificate>/var/wazuh-manager/etc/certs/indexer-connector.pem</certificate>
-       <key>/var/wazuh-manager/etc/certs/indexer-connector-key.pem</key>
+       <certificate>etc/certs/indexer-connector.pem</certificate>
+       <key>etc/certs/indexer-connector-key.pem</key>
      </ssl>
    </indexer>
 
@@ -119,16 +119,16 @@ Multi-node cluster:
 
    <indexer>
      <hosts>
-       <host>https://10.0.0.1:9200</host>
+       <host>https://127.0.0.1:9200</host>
        <host>https://10.0.0.2:9200</host>
        <host>https://10.0.0.3:9200</host>
      </hosts>
      <ssl>
        <certificate_authorities>
-         <ca>/var/wazuh-manager/etc/certs/root-ca.pem</ca>
+         <ca>etc/certs/root-ca.pem</ca>
        </certificate_authorities>
-       <certificate>/var/wazuh-manager/etc/certs/indexer-connector.pem</certificate>
-       <key>/var/wazuh-manager/etc/certs/indexer-connector-key.pem</key>
+       <certificate>etc/certs/indexer-connector.pem</certificate>
+       <key>etc/certs/indexer-connector-key.pem</key>
      </ssl>
    </indexer>
 
