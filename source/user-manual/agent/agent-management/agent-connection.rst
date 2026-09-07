@@ -40,11 +40,11 @@ This option displays the **Endpoints** dashboard with a list of all enrolled Waz
 Using the Wazuh manager API
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You can check the :ref:`status <agent-connection-states>` of a Wazuh agent by sending a request to the Wazuh manager API to retrieve :api-ref:`statistical information from an agent <operation/api.controllers.agent_controller.get_component_stats>`. This action is performed on the Wazuh manager.
+You can check the :ref:`status <agent-connection-states>` of a Wazuh agent by sending a request to the Wazuh manager API. This action is performed on the Wazuh manager.
 
 .. code-block:: none
 
-   GET /agents/<WAZUH_AGENT_ID>/stats/agent
+   GET /agents?agents_list=<WAZUH_AGENT_ID>
 
 Output
 
@@ -55,20 +55,34 @@ Output
      "data": {
        "affected_items": [
          {
-           "status": "connected",
-           "last_keepalive": "2026-05-26T14:38:38Z",
-           "last_ack": "2026-05-26T14:38:53Z",
-           "msg_count": 2650,
-           "msg_sent": 4153,
-           "msg_buffer": 0,
-           "buffer_enabled": true
+           "os": {
+             "arch": "x86_64",
+             "major": "",
+             "minor": "",
+             "name": "Amazon Linux",
+             "platform": "amzn",
+             "type": "linux",
+             "version": "2023"
+           },
+           "status": "active",
+           "registerIP": "any",
+           "group": [
+             "default"
+           ],
+           "status_code": 0,
+           "ip": "172.31.20.55",
+           "version": "v5.0.0",
+           "lastKeepAlive": "2026-09-03T17:41:55+00:00",
+           "id": "001",
+           "name": "agent5",
+           "dateAdd": "2026-09-03T13:39:57+00:00"
          }
        ],
        "total_affected_items": 1,
        "total_failed_items": 0,
        "failed_items": []
      },
-     "message": "Statistical information for each agent was successfully read",
+     "message": "All selected agents information was returned",
      "error": 0
    }
 
@@ -197,35 +211,3 @@ Navigate to the **Agents management** > **Summary** tab in the Wazuh dashboard. 
    :alt: Wazuh agent configuration synchronized
    :align: center
    :width: 80%
-
-Using the GET /agents Wazuh manager API endpoint
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Run the command below on the Wazuh manager or any endpoint that has connectivity with the Wazuh manager. Replace ``<WAZUH_MANAGER_IP>`` with the IP address or FQDN of the Wazuh manager.
-
-.. code-block:: console
-
-   # curl -k -X GET "https://<WAZUH_MANAGER_IP>:55000/agents?agents_list=<WAZUH_AGENT_ID>&select=group_config_status&pretty=true" -H  "Authorization: Bearer $TOKEN"
-
-Output
-
-.. code-block:: json
-   :class: output
-
-   {
-      "data": {
-         "affected_items": [
-            {
-               "id": "014",
-               "group_config_status": "synced"
-            }
-         ],
-         "total_affected_items": 1,
-         "total_failed_items": 0,
-         "failed_items": []
-      },
-      "message": "All selected agents information was returned",
-      "error": 0
-   }
-
-Refer to the following documentation for other information on the `Wazuh manager API </user-manual/api/reference>`__.

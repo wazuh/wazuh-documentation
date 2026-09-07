@@ -1,139 +1,69 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The wazuh-analysisd.state file can be useful when benchmarking our Wazuh manager analysis engine in highly loaded environments. Learn more about it here.
+  :description: The wazuh-analysisd.state file was removed in Wazuh 5.0. Manager daemon statistics are now served through the API. Learn more about it here.
 
 .. _wazuh_analysisd_state_file:
 
 wazuh-analysisd.state
 =====================
 
-The statistical file for **wazuh-analysisd** is located at ``/var/ossec/var/run/wazuh-analysisd.state``.
+**Removed in Wazuh 5.0**. Manager daemon statistics are now served through the API:
 
-It can be useful when benchmarking our Wazuh manager analysis engine in highly loaded environments.
+.. code-block:: none
 
-By default, this file is updated every 5 seconds. This interval can be changed by modifying the ``analysisd.state_interval`` value from the :ref:`internal configuration <reference_internal_options>` file.
+   GET /cluster/{node_id}/daemons/stats?daemons_list=wazuh-manager-analysisd
 
-Below there is an example of the content of the file:
+Sample response:
 
-.. code-block:: pkgconfig
+.. code-block:: json
 
-    # State file for wazuh-analysisd
-
-    # Total events decoded
-    total_events_decoded='184'
-
-    # Syscheck events decoded
-    syscheck_events_decoded='49'
-    syscheck_edps='6'
-
-    # Syscollector events decoded
-    syscollector_events_decoded='11'
-    syscollector_edps='7'
-
-    # Rootcheck events decoded
-    rootcheck_events_decoded='48'
-    rootcheck_edps='3'
-
-    # Security configuration assessment events decoded
-    sca_events_decoded='0'
-    sca_edps='0'
-
-    # Hostinfo events decoded
-    hostinfo_events_decoded='3'
-    hostinfo_edps='0'
-
-    # Other events decoded
-    other_events_decoded='23'
-    other_events_edps='2'
-
-    # Events processed (Rule matching)
-    events_processed='19'
-    events_edps='2'
-
-    # Events received
-    events_received='10'
-
-    # Events dropped
-    events_dropped='1'
-
-    # Alerts written to disk
-    alerts_written='179'
-
-    # Firewall alerts written to disk
-    firewall_written='8'
-
-    # FTS alerts written to disk
-    fts_written='1'
-
-    # Syscheck queue
-    syscheck_queue_usage='0.12'
-
-    # Syscheck queue size
-    syscheck_queue_size='16384'
-
-    # Syscollector queue
-    syscollector_queue_usage='0.10'
-
-    # Syscollector queue size
-    syscollector_queue_size='16384'
-
-    # Rootcheck queue
-    rootcheck_queue_usage='0.73'
-
-    # Rootcheck queue size
-    rootcheck_queue_size='16384'
-
-    # Security configuration assessment queue
-    sca_queue_usage='0.00'
-
-    # Security configuration assessment queue size
-    sca_queue_size='16384'
-
-    # Hostinfo queue
-    hostinfo_queue_usage='0.05'
-
-    # Hostinfo queue size
-    hostinfo_queue_size='16384'
-
-    # Upgrade module message queue
-    upgrade_queue_usage='0.01'
-
-    # Upgrade module message queue size
-    upgrade_queue_size='16384'
-
-    # Event queue
-    event_queue_usage='0.53'
-
-    # Event queue size
-    event_queue_size='16384'
-
-    # Rule matching queue
-    rule_matching_queue_usage='0.42'
-
-    # Rule matching queue size
-    rule_matching_queue_size='16384'
-
-    # Alerts log queue
-    alerts_queue_usage='0.04'
-
-    # Alerts log queue size
-    alerts_queue_size='16384'
-
-    # Firewall log queue
-    firewall_queue_usage='0.18'
-
-    # Firewall log queue size
-    firewall_queue_size='16384'
-
-    # Statistical log queue
-    statistical_queue_usage='0.10'
-
-    # Statistical log queue size
-    statistical_queue_size='16384'
-
-    # Archives log queue
-    archives_queue_usage='0.09'
-
-    # Archives log queue size
-    archives_queue_size='16384'
+   {
+      "data": {
+         "affected_items": [
+            {
+               "status": "OK",
+               "global": [
+                  { "name": "server.events.received", "type": "counter", "enabled": true, "value": 3484 },
+                  { "name": "server.bytes.received", "type": "counter", "enabled": true, "value": 996293 },
+                  { "name": "agent.cache.entries", "type": "pull", "enabled": true, "value": 2 },
+                  { "name": "agent.cache.evictions", "type": "counter", "enabled": true, "value": 0 },
+                  { "name": "agent.cache.insertions", "type": "counter", "enabled": true, "value": 2 },
+                  { "name": "agent.cache.hits", "type": "counter", "enabled": true, "value": 828 },
+                  { "name": "router.events.processed", "type": "counter", "enabled": true, "value": 3484 },
+                  { "name": "indexer.queue.usage.percent", "type": "pull", "enabled": true, "value": 0 },
+                  { "name": "agent.cache.updates", "type": "counter", "enabled": true, "value": 0 },
+                  { "name": "router.queue.size", "type": "pull", "enabled": true, "value": 0 },
+                  { "name": "router.eps.30m", "type": "pull", "enabled": true, "value": 0.9177777777777778 },
+                  { "name": "router.queue.usage.percent", "type": "pull", "enabled": true, "value": 0 },
+                  { "name": "router.queue.bytes.usage.percent", "type": "pull", "enabled": true, "value": 0 },
+                  { "name": "router.queue.bytes.used", "type": "pull", "enabled": true, "value": 0 },
+                  { "name": "router.events.dropped", "type": "counter", "enabled": true, "value": 0 },
+                  { "name": "router.eps.1m", "type": "pull", "enabled": true, "value": 0 },
+                  { "name": "router.eps.5m", "type": "pull", "enabled": true, "value": 0.26666666666666666 },
+                  { "name": "indexer.queue.size", "type": "pull", "enabled": true, "value": 0 },
+                  { "name": "indexer.events.dropped", "type": "pull", "enabled": true, "value": 0 }
+               ],
+               "spaces": [
+                  {
+                     "name": "standard",
+                     "metrics": [
+                        { "name": "events.unclassified", "type": "counter", "enabled": true, "value": 2475 },
+                        { "name": "events.discarded.postfilter", "type": "counter", "enabled": true, "value": 0 },
+                        { "name": "events.discarded", "type": "counter", "enabled": true, "value": 0 },
+                        { "name": "events.discarded.prefilter", "type": "counter", "enabled": true, "value": 0 }
+                     ]
+                  }
+               ],
+               "name": "wazuh-manager-analysisd",
+               "uptime": "2026-09-04T14:47:40.366Z",
+               "timestamp": "2026-09-04T16:31:17.719Z"
+            }
+         ],
+         "total_affected_items": 1,
+         "total_failed_items": 0,
+         "failed_items": []
+      },
+      "message": "Statistical information for each daemon was successfully read",
+      "error": 0
+   }

@@ -40,7 +40,7 @@ const versions = [
 
 betaVersions.push(
   /* [ LABEL , BETA_FOLDER, FILE_PATH ] */
-  ['5.0 (Beta 4)', '5.0-beta', '/index.html']
+  ['5.0 (Beta 5)', '5.0-beta', '/index.html']
 );
 
 /* Data structure for every release
@@ -80,6 +80,7 @@ removedUrls['x.y'] = [
 /* Pages added in 5.0 */
 
 newUrls['5.0'] = [
+  '/user-manual/reference/ossec-conf/agent.html',
   '/release-notes/release-5-0-0.html',
   '/release-notes/index-5x.html',
   '/deployment-options/deploying-with-kubernetes/kubernetes-password.html',
@@ -124,6 +125,10 @@ newUrls['5.0'] = [
   '/wazuh-cti/how-it-works.html',
   '/wazuh-cti/managing-wazuh-cti.html',
   '/wazuh-cti/troubleshooting.html',
+  '/user-manual/capabilities/system-calls-monitoring/use-cases/detect-when-the-audit-daemon-stops.html',
+  '/user-manual/capabilities/system-calls-monitoring/use-cases/detect-when-the-audit-daemon-starts.html',
+  '/user-manual/capabilities/system-calls-monitoring/use-cases/detect-abnormal-process-termination.html',
+  '/user-manual/capabilities/system-calls-monitoring/use-cases/detect-a-network-interface-entering-promiscuous-mode.html',
   '/user-manual/reference/wazuh-manager-conf/index.html',
   '/user-manual/reference/wazuh-manager-conf/global.html',
   '/user-manual/reference/wazuh-manager-conf/logging.html',
@@ -141,18 +146,33 @@ newUrls['5.0'] = [
   '/user-manual/reference/daemons/wazuh-manager-clusterd.html',
   '/user-manual/reference/daemons/wazuh-manager-db.html',
   '/user-manual/reference/daemons/wazuh-manager-modulesd.html',
-  '/user-manual/reference/daemons/wazuh-manager-monitord.html',
   '/user-manual/reference/daemons/wazuh-manager-remoted.html',
   '/user-manual/reference/tools/wazuh-manager-control.html',
   '/user-manual/reference/tools/wazuh-manager-keystore.html',
   '/user-manual/reference/installation-utilities/index.html',
   '/user-manual/reference/installation-utilities/installation-assistant.html',
   '/user-manual/reference/installation-utilities/certs-tools.html',
+  '/user-manual/capabilities/active-response/how-it-works.html',
+  '/user-manual/capabilities/active-response/types-of-active-response.html',
+  '/user-manual/capabilities/active-response/python-active-response-script-sample.html',
+  '/user-manual/capabilities/active-response/migrating-active-response-scripts.html',
+  '/user-manual/capabilities/active-response/ar-use-cases/blocking-web-attacks.html',
+  '/user-manual/capabilities/active-response/ar-use-cases/removing-malicious-file.html',
 ];
 
 /* Redirections 4.14—5.0  */
 
 redirections.push(
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/user-manual/reference/ossec-conf/client-buffer.html',
+    '5.0': '/user-manual/reference/ossec-conf/agent.html#batch',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/user-manual/capabilities/active-response/how-to-configure.html',
+    '5.0': '/user-manual/capabilities/active-response/configuration.html',
+  },
   {
     'target': ['4.14=>5.0', '5.0=>4.14'],
     '4.14': '/user-manual/agent/agent-management/listing/index.html',
@@ -315,11 +335,6 @@ redirections.push(
   },
   {
     'target': ['4.14=>5.0', '5.0=>4.14'],
-    '4.14': '/user-manual/reference/daemons/wazuh-monitord.html',
-    '5.0': '/user-manual/reference/daemons/wazuh-manager-monitord.html',
-  },
-  {
-    'target': ['4.14=>5.0', '5.0=>4.14'],
     '4.14': '/user-manual/reference/daemons/wazuh-remoted.html',
     '5.0': '/user-manual/reference/daemons/wazuh-manager-remoted.html',
   },
@@ -327,12 +342,24 @@ redirections.push(
     'target': ['4.14=>5.0', '5.0=>4.14'],
     '4.14': '/user-manual/reference/tools/wazuh-keystore.html',
     '5.0': '/user-manual/reference/tools/wazuh-manager-keystore.html',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/compliance/pci-dss/dashboard.html',
+    '5.0': '/compliance/pci-dss/system-inventory.html#pci-dss-dashboard',
   }
 );
 
 /* Pages no longer available in 5.0 */
 
 removedUrls['5.0'] = [
+  '/user-manual/reference/ossec-conf/client-buffer.html',
+  '/user-manual/reference/ossec-conf/labels.html',
+  '/compliance/pci-dss/dashboard.html',
+  '/user-manual/capabilities/active-response/additional-information.html',
+  '/user-manual/capabilities/active-response/ar-use-cases/blocking-ssh-brute-force.html',
+  '/user-manual/capabilities/active-response/ar-use-cases/restarting-wazuh-agent.html',
+  '/user-manual/capabilities/active-response/ar-use-cases/disabling-user-account.html',
   '/user-manual/manager/indexer-integration.html',
   '/user-manual/manager/wazuh-server-queue.html',
   '/user-manual/manager/wazuh-manager.html',
@@ -379,6 +406,9 @@ removedUrls['5.0'] = [
   '/user-manual/capabilities/command-monitoring/use-cases/check-if-the-output-changed.html',
   '/user-manual/capabilities/command-monitoring/use-cases/load-average.html',
   '/user-manual/capabilities/command-monitoring/use-cases/detect-usb-storage.html',
+  '/user-manual/capabilities/system-calls-monitoring/use-cases/monitoring-file-and-directory-access.html',
+  '/user-manual/capabilities/system-calls-monitoring/use-cases/monitoring-commands-run-as-root.html',
+  '/user-manual/capabilities/system-calls-monitoring/use-cases/privilege-abuse.html',
   '/user-manual/capabilities/log-data-collection/syslog.html',
   '/user-manual/capabilities/log-data-collection/multiple-socket-outputs.html',
   '/user-manual/capabilities/log-data-collection/monitoring-log-files.html',

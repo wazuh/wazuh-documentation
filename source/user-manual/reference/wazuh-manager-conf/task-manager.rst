@@ -20,30 +20,54 @@ The ``<task-manager>`` section manages remote upgrade tasks created by ``<agent-
 Options
 -------
 
-- `cleanup_time`_
-- `task_timeout`_
+- `task_ttl`_
+- `cleanup_interval`_
+- `max_payload_bytes`_
+- `max_tasks_per_poll`_
 
-cleanup_time
-^^^^^^^^^^^^^
+task_ttl
+^^^^^^^^^
 
-Specifies how long completed, failed, or timed-out upgrade task records are retained before they are removed. Must be greater than or equal to ``task_timeout``.
+Time-to-live for a task, measured from creation. Tasks older than this are moved to the expired state.
 
-+----------------------+---------------------------------------------------------+
-| **Default value**    | 15m                                                     |
-+----------------------+---------------------------------------------------------+
-| **Allowed values**   | Positive time value with optional suffix - s, m, h, d   |
-+----------------------+---------------------------------------------------------+
++--------------------+-----------------------------------------------+
+| **Default value**  | 3600 (1 hour)                                 |
++--------------------+-----------------------------------------------+
+| **Allowed values** | Integer >= 0 (seconds); 0 means "use default" |
++--------------------+-----------------------------------------------+
 
-task_timeout
-^^^^^^^^^^^^^
+cleanup_interval
+^^^^^^^^^^^^^^^^^
 
-Specifies the maximum time an upgrade task can remain ``In progress`` before it is marked as ``Timeout``.
+Interval between cleanup runs - marks expired tasks and deletes rows expired more than 24h ago.
 
-+----------------------+---------------------------------------------------------+
-| **Default value**    | 15m                                                     |
-+----------------------+---------------------------------------------------------+
-| **Allowed values**   | Positive time value with optional suffix - s, m, h, d   |
-+----------------------+---------------------------------------------------------+
++--------------------+-----------------------------------------------+
+| **Default value**  | 300 (5 minutes)                               |
++--------------------+-----------------------------------------------+
+| **Allowed values** | Integer >= 0 (seconds); 0 means "use default" |
++--------------------+-----------------------------------------------+
+
+max_payload_bytes
+^^^^^^^^^^^^^^^^^^
+
+Maximum accepted size of a single task payload after JSON serialization.
+
++--------------------+---------------------------------------------+
+| **Default value**  | 1048576 (1 MiB)                             |
++--------------------+---------------------------------------------+
+| **Allowed values** | Integer >= 0 (bytes); 0 means "use default" |
++--------------------+---------------------------------------------+
+
+max_tasks_per_poll
+^^^^^^^^^^^^^^^^^^^
+
+Maximum tasks returned by a single poll; remaining pending tasks are returned on later polls.
+
++--------------------+-------------------------------------+
+| **Default value**  | 100                                 |
++--------------------+-------------------------------------+
+| **Allowed values** | Integer >= 0; 0 means "use default" |
++--------------------+-------------------------------------+
 
 Sample configuration
 ---------------------
@@ -51,6 +75,8 @@ Sample configuration
 .. code-block:: xml
 
    <task-manager>
-     <cleanup_time>15m</cleanup_time>
-     <task_timeout>300</task_timeout>
+     <task_ttl>3600</task_ttl>
+     <cleanup_interval>300</cleanup_interval>
+     <max_payload_bytes>1048576</max_payload_bytes>
+     <max_tasks_per_poll>100</max_tasks_per_poll>
    </task-manager>

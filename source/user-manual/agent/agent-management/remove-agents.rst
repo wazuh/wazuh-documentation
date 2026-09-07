@@ -38,11 +38,11 @@ Remove agents using the Wazuh manager API
 
 This section includes examples of using the :api-ref:`DELETE /agents <operation/api.controllers.agent_controller.delete_agents>` request to delete a list of agents or agents disconnected for a given period. This action is performed on the Wazuh manager or on an authorized endpoint.
 
-The examples use an authentication token. To get your token, replace ``<USER>:<PASSWORD>`` with your Wazuh manager API credentials, ``<WAZUH_MANAGER_IP>`` with the Wazuh manager IP address or fully qualified domain name (FQDN), and run the following command:
+The examples use an authentication token. To get your token, replace ``<USER>:<PASSWORD>`` with your Wazuh manager API credentials, ``<WAZUH_MANAGER_IP_ADDRESS>`` with the Wazuh manager IP address or fully qualified domain name (FQDN), and run the following command:
 
 .. code-block:: console
 
-   # TOKEN=$(curl -u <USER>:<PASSWORD> -k -X GET "https://<WAZUH_MANAGER_IP>:55000/security/user/authenticate?raw=true")
+   # TOKEN=$(curl -u <USER>:<PASSWORD> -k -X POST "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/security/user/authenticate?raw=true")
 
 .. note::
 

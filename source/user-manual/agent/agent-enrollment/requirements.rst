@@ -12,11 +12,19 @@ Make sure that your environment meets these requirements before you enroll a Waz
 
 #. An installed and running Wazuh agent on the endpoint that you want to enroll.
 
-#. Outbound connectivity from the Wazuh agent to the Wazuh manager services. You can configure the following ports:
+#. Outbound connectivity from the Wazuh agent to the Wazuh manager services. The ports required depend on the agent version:
 
-   -  1514/TCP for agent communication.
-   -  1515/TCP for enrollment through automatic agent request.
-   -  55000/TCP for enrollment through the Wazuh manager API.
+   -  Wazuh 5.0 agents: 1517/TCP (HTTPS) for both enrollment and ongoing agent communication.
+   -  Wazuh 4.x agents:
+
+      -  1514/TCP for agent communication.
+      -  1515/TCP for enrollment through automatic agent request.
+
+   -  55000/TCP for enrollment through the Wazuh manager API (both agent versions).
+
+.. note::
+
+   On the Wazuh manager, the 1517 and 1514 listeners are bound to 127.0.0.1 by default and only accept local connections. To accept Wazuh agents from other endpoints, set ``<bind_addr>0.0.0.0</bind_addr>`` (for ``<https>``) and ``<local_ip>0.0.0.0</local_ip>`` (for ``<legacy>``) in ``wazuh-manager.conf``.
 
 Supported operating systems
 ---------------------------
