@@ -13,8 +13,8 @@ By default, the indexer settings have one host configured. It's set to ``127.0.0
        <certificate_authorities>
          <ca>/var/wazuh-manager/etc/certs/root-ca.pem</ca>
        </certificate_authorities>
-       <certificate>/var/wazuh-manager/etc/certs/manager.pem</certificate>
-       <key>/var/wazuh-manager/etc/certs/manager-key.pem</key>
+       <certificate>/var/wazuh-manager/etc/certs/indexer-connector.pem</certificate>
+       <key>/var/wazuh-manager/etc/certs/indexer-connector-key.pem</key>
      </ssl>
    </indexer>
 

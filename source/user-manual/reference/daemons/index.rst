@@ -36,8 +36,6 @@ The Wazuh manager includes the following daemons:
 +------------------------------------------------------------+----------------------------------------------------------------------------------------------+
 | :doc:`wazuh-manager-modulesd <wazuh-manager-modulesd>`     | Executes manager modules such as vulnerability detection and other integrated services.      |
 +------------------------------------------------------------+----------------------------------------------------------------------------------------------+
-| :doc:`wazuh-manager-monitord <wazuh-manager-monitord>`     | Monitors manager files and performs maintenance tasks such as log rotation and housekeeping. |
-+------------------------------------------------------------+----------------------------------------------------------------------------------------------+
 | :doc:`wazuh-manager-remoted <wazuh-manager-remoted>`       | Receives events from Wazuh agents and forwards them to the Wazuh manager for processing.     |
 +------------------------------------------------------------+----------------------------------------------------------------------------------------------+
 
@@ -71,7 +69,6 @@ The Wazuh agent includes the following daemons:
    wazuh-manager-clusterd
    wazuh-manager-db
    wazuh-manager-modulesd
-   wazuh-manager-monitord
    wazuh-manager-remoted
    wazuh-agentd
    wazuh-execd

@@ -29,34 +29,52 @@ Verifying communication with the Wazuh manager
 
 In some scenarios, the Wazuh agent may be unable to enroll or establish a connection with the Wazuh manager because the necessary ports on the Wazuh manager are unreachable.
 
-The following default ports on the Wazuh manager should be opened:
+The default ports on the Wazuh manager depend on the agent version:
 
--  1514/TCP for agent communication.
--  1515/TCP for enrollment via agent configuration.
--  55000/TCP for enrollment via Wazuh manager API.
+-  **Wazuh 5.0 agents**: 1517/TCP (HTTPS) - used for both enrollment and agent communication.
+-  **Wazuh 4.x agents**: 1515/TCP for enrollment and 1514/TCP for agent communication.
+-  55000/TCP for enrollment via Wazuh manager API (both agent versions).
 
-On Linux and macOS systems (with netcat installed), open a terminal and run the following command. Replace ``<WAZUH_MANAGER_IP>`` with your Wazuh manager IP address or fully qualified domain name (FQDN).
+On Linux and macOS systems (with netcat installed) open a terminal and run the following commands. Replace ``<WAZUH_MANAGER_IP_ADDRESS>`` with your Wazuh manager IP address or fully qualified domain name (FQDN).
+
+For a Wazuh 5.0 agent:
 
 .. code-block:: console
 
-   # nc -zv <WAZUH_MANAGER_IP> 1514 1515 55000
+   # nc -zv <WAZUH_MANAGER_IP_ADDRESS> 1517 55000
+
+For a Wazuh 4.x agent:
+
+.. code-block:: console
+
+   # nc -zv <WAZUH_MANAGER_IP_ADDRESS> 1514 1515 55000
 
 If there is connectivity, the output should be a connection success message:
 
 .. code-block:: none
    :class: output
 
-   Connection to <WAZUH_MANAGER_IP> port 1514 [tcp] succeeded!
-   Connection to <WAZUH_MANAGER_IP> port 1515 [tcp] succeeded!
-   Connection to <WAZUH_MANAGER_IP> port 55000 [tcp] succeeded!
+   Connection to <WAZUH_MANAGER_IP_ADDRESS> port 1517 [tcp] succeeded!
+   Connection to <WAZUH_MANAGER_IP_ADDRESS> port 1514 [tcp] succeeded!
+   Connection to <WAZUH_MANAGER_IP_ADDRESS> port 1515 [tcp] succeeded!
+   Connection to <WAZUH_MANAGER_IP_ADDRESS> port 55000 [tcp] succeeded!
 
-On Windows, open a PowerShell terminal and run the following command:
+On Windows, open a PowerShell terminal and run the following commands:
+
+For a Wazuh 5.0 agent:
 
 .. code-block:: pwsh-session
 
-   # (new-object Net.Sockets.TcpClient).Connect("<WAZUH_MANAGER_IP>", 1514)
-   # (new-object Net.Sockets.TcpClient).Connect("<WAZUH_MANAGER_IP>", 1515)
-   # (new-object Net.Sockets.TcpClient).Connect("<WAZUH_MANAGER_IP>", 55000)
+   > (new-object Net.Sockets.TcpClient).Connect("<WAZUH_MANAGER_IP>", 1517)
+   > (new-object Net.Sockets.TcpClient).Connect("<WAZUH_MANAGER_IP>", 55000)
+
+For a Wazuh 4.x agent:
+
+.. code-block:: pwsh-session
+
+   > (new-object Net.Sockets.TcpClient).Connect("<WAZUH_MANAGER_IP>", 1514)
+   > (new-object Net.Sockets.TcpClient).Connect("<WAZUH_MANAGER_IP>", 1515)
+   > (new-object Net.Sockets.TcpClient).Connect("<WAZUH_MANAGER_IP>", 55000)
 
 If there is connectivity, there is no output. Otherwise, an error is shown:
 
@@ -64,6 +82,10 @@ If there is connectivity, there is no output. Otherwise, an error is shown:
    :class: output
 
    A connection attempt failed because the connected party did not properly respond after a period of time (...)
+
+.. note::
+
+   If ports appear reachable at the network level but the connection still fails, check whether the manager's remoted listener is bound to the loopback interface only. Both ``<remote><https><bind_addr>`` (1517) and ``<remote><legacy><local_ip>`` (1514) in ``wazuh-manager.conf`` default to ``127.0.0.1``, which rejects connections from any other host. Set them to ``0.0.0.0`` to accept remote agents.
 
 Authentication error
 --------------------
