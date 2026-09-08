@@ -195,13 +195,13 @@ redirections.push(
 /* Pages added in 4.10 */
 
 newUrls['4.10'] = [
-  '/release-notes/release-4-10-6.html',
   '/release-notes/release-4-10-0.html',
   '/release-notes/release-4-10-1.html',
   '/release-notes/release-4-10-2.html',
   '/release-notes/release-4-10-3.html',
   '/release-notes/release-4-10-4.html',
   '/release-notes/release-4-10-5.html',
+  '/release-notes/release-4-10-6.html',
   '/user-manual/reference/ossec-conf/anti-tampering.html',
   '/user-manual/capabilities/vulnerability-detection/troubleshooting.html',
   '/user-manual/capabilities/vulnerability-detection/FAQ.html',
