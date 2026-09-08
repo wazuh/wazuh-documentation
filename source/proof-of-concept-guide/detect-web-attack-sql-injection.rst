@@ -95,6 +95,7 @@ You can visualize the alert data in the Wazuh dashboard. To do this, go to the T
 
    .. thumbnail:: /images/poc/SQL-injection-rule-31103.png
       :title: SQL injection rule 31103 alert
+      :alt: Wazuh dashboard Events table showing three SQL injection attempt alerts with rule ID 31103
       :align: center
       :width: 80%
 
@@ -102,5 +103,6 @@ You can visualize the alert data in the Wazuh dashboard. To do this, go to the T
 
    .. thumbnail:: /images/poc/SQL-injection-rule-31106.png
       :title: SQL injection rule 31106 alert
+      :alt: Wazuh dashboard Events table filtered by rule ID 31106 showing successful web attack alerts with HTTP 200 responses
       :align: center
       :width: 80%
