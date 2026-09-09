@@ -726,22 +726,17 @@ def setup(app):
 
 def absolutize_breadcrumb_parents(app, pagename, templatename, context, doctree):
     ''' Runs once per page, computing an absolute-URL version of each BreadcrumbList
-        parent for the JSON-LD structured data emitted in layout.html. Sphinx's
-        `parents` context entries carry a `link` that is a scheme-less, relative URI
-        computed relative to the *current* page (via `sphinx.util.osutil.relative_uri()`),
-        which is not valid as-is inside a `BreadcrumbList.itemListElement[].item` value.
-        Stored under a new context key (`breadcrumb_items_absolute`) so the original
-        `parents` list -- consumed as-is by the visible breadcrumb nav in
-        template-parts/breadcrumbs.html -- is left untouched. '''
-    special_pages = ['index', 'not_found', 'search']
-    if version >= '4.0':
-        special_pages += [
-            'cloud-service/apis/reference',
-            'user-manual/api/reference',
-            'user-manual/indexer-api/reference'
-        ]
-
-    if pagename in special_pages or pagename == 'moved-content':
+        parent for the JSON-LD structured data emitted in layout.html and
+        redoc-master.html. Sphinx's `parents` context entries carry a `link` that is
+        a scheme-less, relative URI computed relative to the *current* page (via
+        `sphinx.util.osutil.relative_uri()`), which is not valid as-is inside a
+        `BreadcrumbList.itemListElement[].item` value. Stored under a new context
+        key (`breadcrumb_items_absolute`) so the original `parents` list -- consumed
+        as-is by the visible breadcrumb nav in template-parts/breadcrumbs.html -- is
+        left untouched. Runs for the ReDoc API reference pages too: they emit their
+        own JSON-LD (layout.html skips them as they're in its special_pages list),
+        but still need this absolute-URL breadcrumb data. '''
+    if pagename in ['index', 'not_found', 'search'] or pagename == 'moved-content':
         return
 
     sitemap_version = version
