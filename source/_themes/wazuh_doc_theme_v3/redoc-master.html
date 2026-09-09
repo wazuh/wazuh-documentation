@@ -138,9 +138,43 @@
                 "backgroundColor": "#fff"
 #}
 
-{%- block htmltitle -%}
-<title>API reference{{ titlesuffix }}</title>
-{% endblock htmltitle -%}
+{#
+  Note: no htmltitle block override here (anymore) - inheriting layout.html's
+  default <title>{{ pagetitle|e }}{{ titlesuffix }}</title> keeps it aligned
+  with the og:title/twitter:title below instead of diverging with a
+  hardcoded "API reference" string (SEO title-tag finding).
+#}
+
+{% block head %}
+{{ super() }}
+{#
+  layout.html skips its JSON-LD block for these pages (they're in
+  special_pages), so emit the same TechArticle + BreadcrumbList pair here
+  instead of touching that shared list (SEO json-ld-structured-data finding).
+  breadcrumb_items_absolute (computed in conf.py's absolutize_breadcrumb_parents,
+  same as layout.html uses) carries absolute item URLs, unlike parents' relative
+  link entries which are not valid BreadcrumbList item values.
+#}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org", "@type": "TechArticle",
+  "headline": {{ (title|striptags)|tojson }}, "description": {{ page_scope.file_meta_desc|tojson }},
+  "url": {{ page_scope.page_url|tojson }}, "inLanguage": {{ language|tojson }},
+  "author": {"@type": "Organization", "name": "Wazuh"},
+  "publisher": {"@type": "Organization", "name": "Wazuh", "url": {{ theme_wazuh_doc_url|tojson }}}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org", "@type": "BreadcrumbList",
+  "itemListElement": [
+    {%- for item in breadcrumb_items_absolute %}{% if not loop.first %},{% endif %}
+    {"@type": "ListItem", "position": {{ loop.index }}, "name": {{ item.title|tojson }}, "item": {{ item.item|tojson }}}
+    {%- endfor %}
+  ]
+}
+</script>
+{% endblock head %}
 
 {% block body %}
 <div class="loading">
@@ -183,9 +217,40 @@
 
 {%- block main_column -%}
 <div id="central-column">
-  
+
   {# Main content #}
   <main role="main" data-pagefind-body>
+    {#
+      Static fallback content for non-JS fetchers (SEO heading-structure /
+      GEO js-only-content findings) - the ReDoc SPA below otherwise leaves
+      the served HTML with no heading or text at all. Wrapped in <noscript>
+      so JS-capable browsers never render it (avoiding a duplicate/mismatched
+      <h1> once ReDoc mounts its own); it's still present as plain markup in
+      the raw HTML for crawlers/fetchers that don't execute JS.
+
+      api_endpoint_summary (endpoint_groups + auth_summary) is built in
+      conf.py straight from this page's own OpenAPI spec - see
+      build_api_endpoint_summary() - so it can't drift out of sync with the
+      spec the way hand-written prose could (GEO "summary of key
+      endpoints/auth model" recommendation).
+    #}
+    <noscript>
+      <h1>{{ pagetitle|e }}</h1>
+      <p>{{ page_scope.file_meta_desc|e }}</p>
+      {%- if api_endpoint_summary %}
+      {%- if api_endpoint_summary.auth_summary %}
+      <p>{{ api_endpoint_summary.auth_summary|e }}</p>
+      {%- endif %}
+      {%- if api_endpoint_summary.endpoint_groups %}
+      <p>Endpoint groups covered by this API:</p>
+      <ul>
+        {%- for group in api_endpoint_summary.endpoint_groups %}
+        <li>{{ group|e }}</li>
+        {%- endfor %}
+      </ul>
+      {%- endif %}
+      {%- endif %}
+    </noscript>
     {%- block redoc %}
     {% endblock redoc %}
   </main>
