@@ -56,7 +56,7 @@ Wazuh has standard policies that include decoders, Key-Value Databases (KVDBs), 
 
 See the :ref:`compliance <data_analysis_rules_compliance>` section for more information about configuring compliance mappings for Wazuh rules.
 
-The `Wazuh for HIPAA guide (PDF) <https://wazuh.com/resources/Wazuh-for-HIPAA-guide-V2.0.pdf>`__ maps HIPAA compliance requirements to the Wazuh capabilities and modules that help address them. You can find examples of technical requirements that Wazuh supports in the following sections:
+The `Wazuh for HIPAA guide (PDF) <https://wazuh.com/resources/wazuh-for-HIPAA-guide-v2.0.pdf>`__ maps HIPAA compliance requirements to the Wazuh capabilities and modules that help address them. You can find examples of technical requirements that Wazuh supports in the following sections:
 
 .. toctree::
    :maxdepth: 1
