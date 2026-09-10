@@ -27,6 +27,7 @@ The image below shows the Active Response workflow.
 
 .. thumbnail:: /images/manual/active-response/active-response-workflow.png
    :title: Active Response workflow
+   :alt: Diagram of the Active Response workflow, showing the numbered steps between the Wazuh agent on a monitored host and the Wazuh manager on the Wazuh server, from event collection through rule matching to execution of the active response script and logging of the results.
    :align: center
    :width: 100%
 
