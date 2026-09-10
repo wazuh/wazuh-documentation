@@ -1,32 +1,71 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Wazuh helps organizations meet technical compliance requirements, including HIPAA. Learn how our capabilities assist with each of HIPAA standard requirements.
+   :description: Wazuh helps organizations meet HIPAA compliance requirements. Learn how Wazuh capabilities support each HIPAA technical requirement.
 
 .. _hipaa:
 
 Using Wazuh for HIPAA compliance
-================================
+=================================
 
-The Health Insurance Portability and Accountability Act (HIPAA) has specifications and procedures for handling health information. This act aims to improve the effectiveness of healthcare services. It includes standards for electronic health care transactions and code sets. It also includes standards for security and unique health identifiers. Because changes in technology can impact the privacy and security of healthcare data, HIPAA provisions have sections that require the use of federal privacy protections for individually identifiable health information.
+The Health Insurance Portability and Accountability Act (HIPAA) establishes standards to protect health information and improve healthcare efficiency. Technology can impact healthcare data privacy and security, so HIPAA creates federal protections for individually identifiable health information held by covered entities and business associates. Part 164, Subpart C (Security Standards for the Protection of Electronic Protected Health Information), provides standards for transmitting, handling, storing, and safeguarding electronic protected health information.
 
-Part 164, subpart C (Security Standards For The Protection Of Electronic Protected Health Information), provides guidelines for the transmission, handling, storage, and protection of electronic healthcare information.
+Wazuh supports HIPAA compliance by performing log data analysis, configuration assessment, malware detection, file integrity monitoring, vulnerability detection, and active response. Follow these steps to view the HIPAA-related data on the Wazuh dashboard:
 
-Wazuh has various capabilities that assist with HIPAA compliance such as log data analysis, file integrity monitoring, configuration assessment, threat detection and response.
+#. Navigate to **Regulatory Compliance** from the Wazuh **Overview** dashboard, then click **HIPAA**.
 
-Wazuh includes default rules and decoders for detecting security incidents, system errors, security misconfigurations, and policy violations. By default, these rules are mapped to the associated HIPAA standard. In addition to the default rule mapping provided by Wazuh, it’s possible to map your custom rules to one or more HIPAA standards by adding the compliance identifier in the ``<group>`` tag of the rule. The syntax used to map a rule to a HIPAA standard is ``hipaa_`` followed by the number of the requirement, for example, ``hipaa_164.312.b``. Refer to the :doc:`ruleset section </user-manual/ruleset/index>` for more information. 
+   .. thumbnail:: /images/compliance/hipaa/hipaa-overview-card.png
+      :title: Wazuh Overview dashboard - Regulatory Compliance
+      :alt: Wazuh Overview dashboard - Regulatory Compliance
+      :align: center
+      :width: 80%
 
-The `Wazuh for HIPAA guide (PDF) <https://wazuh.com/resources/Wazuh-for-IPAA-guide-V2.0.pdf>`_ focuses on part 164, subpart C (Security Standards For The Protection Of Electronic Protected Health Information) of the HIPAA standard. This guide explains how the various Wazuh modules assist in complying with HIPAA standards.
+#. Click **Dashboard** to view requirement volume by agent, top requirements, active agents, and how HIPAA requirements change over time.
 
-We have use cases in the following sections that show how to use Wazuh capabilities and modules to comply with HIPAA standards:
+   .. thumbnail:: /images/compliance/hipaa/hipaa-dashboard-tab.png
+      :title: HIPAA Dashboard tab
+      :alt: HIPAA Dashboard tab
+      :align: center
+      :width: 80%
+
+#. Switch to the **Controls** tab to view the HIPAA requirements breakdown.
+
+   .. thumbnail:: /images/compliance/hipaa/hipaa-controls-tab.png
+      :title: HIPAA Controls tab
+      :alt: HIPAA Controls tab
+      :align: center
+      :width: 80%
+
+#. Switch to the **Findings** tab to see HIPAA findings generated within your environment regardless of the log source.
+
+   .. thumbnail:: /images/compliance/hipaa/hipaa-findings-tab.png
+      :title: HIPAA Findings tab
+      :alt: HIPAA Findings tab
+      :align: center
+      :width: 80%
+
+Wazuh has standard policies that include decoders, Key-Value Databases (KVDBs), and rules that detect attacks, system errors, security misconfigurations, and policy violations. By default, these rules map to the associated HIPAA requirements. In Wazuh 5.0, :doc:`rules </user-manual/data-analysis/rules>` use the Sigma format. You can map a custom rule to one or more HIPAA requirements. To do this, add the requirement to the ``hipaa`` list under the ``compliance`` field of the rule. For example:
+
+.. code-block:: yaml
+
+   compliance:
+     hipaa:
+       - 164.308.a.1.ii.D
+       - 164.308.a.3
+       - 164.312.d
+
+See the :ref:`compliance <data_analysis_rules_compliance>` section for more information about configuring compliance mappings for Wazuh rules.
+
+The `Wazuh for HIPAA guide (PDF) <https://wazuh.com/resources/Wazuh-for-HIPAA-guide-V2.0.pdf>`__ maps HIPAA compliance requirements to the Wazuh capabilities and modules that help address them. You can find examples of technical requirements that Wazuh supports in the following sections:
 
 .. toctree::
-    :maxdepth: 1
+   :maxdepth: 1
 
-    visualization-and-dashboard
-    log-data-analysis
-    configuration-assessment
-    malware-detection
-    file-integrity-monitoring
-    vulnerability-detection
-    active-response
+   164.308.a.1.ii.a
+   164.308.a.5.ii.b
+   164.308.a.6.ii
+   164.308.a.8
+   164.312.a.2.iii
+   164.312.b
+   164.312.c.2
+   164.312.d

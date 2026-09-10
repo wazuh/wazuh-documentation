@@ -80,6 +80,14 @@ removedUrls['x.y'] = [
 /* Pages added in 5.0 */
 
 newUrls['5.0'] = [
+  '/compliance/hipaa/164.308.a.1.ii.a.html',
+  '/compliance/hipaa/164.308.a.5.ii.b.html',
+  '/compliance/hipaa/164.308.a.6.ii.html',
+  '/compliance/hipaa/164.308.a.8.html',
+  '/compliance/hipaa/164.312.a.2.iii.html',
+  '/compliance/hipaa/164.312.b.html',
+  '/compliance/hipaa/164.312.c.2.html',
+  '/compliance/hipaa/164.312.d.html',
   '/user-manual/reference/ossec-conf/agent.html',
   '/release-notes/release-5-0-0.html',
   '/release-notes/index-5x.html',
@@ -347,6 +355,41 @@ redirections.push(
     'target': ['4.14=>5.0', '5.0=>4.14'],
     '4.14': '/compliance/pci-dss/dashboard.html',
     '5.0': '/compliance/pci-dss/system-inventory.html#pci-dss-dashboard',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/compliance/hipaa/visualization-and-dashboard.html',
+    '5.0': '/compliance/hipaa/index.html',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/compliance/hipaa/log-data-analysis.html',
+    '5.0': '/compliance/hipaa/164.312.b.html',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/compliance/hipaa/configuration-assessment.html',
+    '5.0': '/compliance/hipaa/164.308.a.8.html',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/compliance/hipaa/malware-detection.html',
+    '5.0': '/compliance/hipaa/164.308.a.5.ii.b.html',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/compliance/hipaa/file-integrity-monitoring.html',
+    '5.0': '/compliance/hipaa/164.312.c.2.html',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/compliance/hipaa/vulnerability-detection.html',
+    '5.0': '/compliance/hipaa/164.308.a.1.ii.a.html',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/compliance/hipaa/active-response.html',
+    '5.0': '/compliance/hipaa/164.308.a.6.ii.html',
   }
 );
 
@@ -356,6 +399,13 @@ removedUrls['5.0'] = [
   '/user-manual/reference/ossec-conf/client-buffer.html',
   '/user-manual/reference/ossec-conf/labels.html',
   '/compliance/pci-dss/dashboard.html',
+  '/compliance/hipaa/visualization-and-dashboard.html',
+  '/compliance/hipaa/log-data-analysis.html',
+  '/compliance/hipaa/configuration-assessment.html',
+  '/compliance/hipaa/malware-detection.html',
+  '/compliance/hipaa/file-integrity-monitoring.html',
+  '/compliance/hipaa/vulnerability-detection.html',
+  '/compliance/hipaa/active-response.html',
   '/user-manual/capabilities/active-response/additional-information.html',
   '/user-manual/capabilities/active-response/ar-use-cases/blocking-ssh-brute-force.html',
   '/user-manual/capabilities/active-response/ar-use-cases/restarting-wazuh-agent.html',
