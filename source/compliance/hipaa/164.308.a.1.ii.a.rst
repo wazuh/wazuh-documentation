@@ -1,0 +1,53 @@
+.. Copyright (C) 2015, Wazuh, Inc.
+
+.. meta::
+   :description: Wazuh helps meet the HIPAA § 164.308(a)(1)(ii)(A) risk analysis requirement by detecting vulnerabilities in operating systems and applications on monitored endpoints.
+
+HIPAA § 164.308(a)(1)(ii)(A) - Risk analysis
+==============================================
+
+The HIPAA § 164.308(a)(1)(ii)(A) requirement states, "*Conduct an accurate and thorough assessment of the potential risks and vulnerabilities to the confidentiality, integrity, and availability of electronic protected health information held by the covered entity or business associate.*"
+
+This requirement mandates identifying risks and vulnerabilities affecting systems containing healthcare information.
+
+Wazuh supports this requirement using the vulnerability detection capability. The Wazuh Vulnerability Scanner module detects vulnerabilities in operating systems and applications on monitored endpoints. The Wazuh agent uses the Syscollector module to collect endpoint inventory, including operating system details and installed packages, and sends it to the Wazuh manager. The Vulnerability Scanner module analyzes the inventory against vulnerability intelligence synchronized from Wazuh Cyber Threat Intelligence (CTI) via the Wazuh indexer to identify vulnerable packages. See the :doc:`vulnerability detection </user-manual/capabilities/vulnerability-detection/index>` section for details on configuring vulnerability scans.
+
+Use case: Detect vulnerabilities
+----------------------------------
+
+This use case detects vulnerabilities on an Ubuntu 26.04 endpoint. The Syscollector and Vulnerability Scanner modules are enabled by default on the Ubuntu endpoint and the Wazuh manager, respectively.
+
+Wazuh dashboard
+^^^^^^^^^^^^^^^^
+
+#. Navigate to **Vulnerability Detection** from the Wazuh **Overview** dashboard. Click **Vulnerability Detection**.
+
+   .. thumbnail:: /images/compliance/hipaa/vulnerability-detection-overview.png
+      :title: Wazuh Overview dashboard - Vulnerability Detection
+      :alt: Wazuh Overview dashboard - Vulnerability Detection
+      :align: center
+      :width: 80%
+
+#. The **Dashboard** tab shows an overview that includes the top 5 vulnerabilities, agents, packages, and severity filters.
+
+   .. thumbnail:: /images/compliance/hipaa/vulnerability-detection-dashboard-tab.png
+      :title: Vulnerability Detection Dashboard tab
+      :alt: Vulnerability Detection Dashboard tab
+      :align: center
+      :width: 80%
+
+#. Click the **Inventory** tab to view details about detected vulnerabilities:
+
+   .. thumbnail:: /images/compliance/hipaa/vulnerability-detection-inventory-tab.png
+      :title: Vulnerability Detection Inventory tab
+      :alt: Vulnerability Detection Inventory tab
+      :align: center
+      :width: 80%
+
+   You can also access the Wazuh CTI platform by clicking the **Inspect vulnerability details** icon. Then, navigate to the ``vulnerability.scanner.reference`` field and click the provided URL to open the Wazuh CTI page, which contains detailed information about the vulnerability.
+
+   .. thumbnail:: /images/compliance/hipaa/vulnerability-cti-details.png
+      :title: Vulnerability details - Wazuh CTI reference
+      :alt: Vulnerability details - Wazuh CTI reference
+      :align: center
+      :width: 80%

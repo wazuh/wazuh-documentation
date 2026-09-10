@@ -1,0 +1,53 @@
+.. Copyright (C) 2015, Wazuh, Inc.
+
+.. meta::
+   :description: Wazuh helps meet the HIPAA § 164.308(a)(8) evaluation requirement with the Security Configuration Assessment module.
+
+HIPAA § 164.308(a)(8) - Evaluation
+=====================================
+
+The HIPAA § 164.308(a)(8) requirement states, "*A covered entity or business associate must, in accordance with § 164.306, perform a periodic technical and nontechnical evaluation, based initially upon the standards implemented under this rule and, subsequently, in response to environmental or operational changes affecting the security of electronic protected health information, that establishes the extent to which a covered entity's or business associate's security policies and procedures meet the requirements of this subpart.*"
+
+This requirement mandates regularly reviewing systems containing health information to ensure compliance with security policies.
+
+Wazuh helps meet this requirement by providing several modules. One of these modules is the Security Configuration Assessment (SCA) module, which is enabled by default on your Wazuh installation. The Wazuh Security Configuration Assessment (SCA) module performs scans to determine if monitored endpoints meet secure configuration and hardening policies. These scans assess the endpoint configuration using SCA policy files that contain rules tested against the endpoint's actual configuration.
+
+Use case: Security Configuration Assessment scan
+-----------------------------------------------------
+
+In this case, we use the SCA module to evaluate a monitored Ubuntu 26.04 endpoint against the CIS Benchmark for Ubuntu Linux 26.04. SCA scans provide a mechanism to regularly assess the endpoint's security controls and identify configurations that require remediation. You can track these events and actions on the Wazuh dashboard:
+
+Wazuh dashboard
+^^^^^^^^^^^^^^^^
+
+#. Click **Configuration Assessment** from the Wazuh **Overview** dashboard:
+
+   .. thumbnail:: /images/compliance/hipaa/configuration-assessment-overview.png
+      :title: Wazuh Overview dashboard - Configuration Assessment
+      :alt: Wazuh Overview dashboard - Configuration Assessment
+      :align: center
+      :width: 80%
+
+#. The **Dashboard** tab shows an overview of the top 5 SCA agents, policies, checks, MITRE tactics, number of passed, failed, not applicable checks, and an overall score.
+
+   .. thumbnail:: /images/compliance/hipaa/configuration-assessment-dashboard-tab.png
+      :title: Configuration Assessment Dashboard tab
+      :alt: Configuration Assessment Dashboard tab
+      :align: center
+      :width: 80%
+
+#. The **Inventory** tab shows the current SCA state for monitored endpoints. It displays the SCA policies evaluated on each endpoint and their individual checks, and the check result.
+
+   .. thumbnail:: /images/compliance/hipaa/configuration-assessment-inventory-tab.png
+      :title: Configuration Assessment Inventory tab
+      :alt: Configuration Assessment Inventory tab
+      :align: center
+      :width: 80%
+
+#. The **Findings** tab displays the SCA findings generated when the result of a check changes between scans.
+
+   .. thumbnail:: /images/compliance/hipaa/configuration-assessment-findings-tab.png
+      :title: Configuration Assessment Findings tab
+      :alt: Configuration Assessment Findings tab
+      :align: center
+      :width: 80%
