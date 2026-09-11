@@ -133,7 +133,7 @@ exclude_patterns = [
     'user-manual/wazuh-server-cluster/**',
     'cloud-security/amazon/**',
     'cloud-security/azure/**',
-    'cloud-security/gcp/**',
+    'cloud-security/gcp/posture-management.rst',
     'compliance/nist/**',
     'proof-of-concept-guide/detect-unauthorized-processes-netcat.rst',
     'proof-of-concept-guide/poc-detect-trojan.rst',

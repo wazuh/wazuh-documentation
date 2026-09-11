@@ -45,6 +45,7 @@ Fine-tune settings and manage the platform's operation.
 Monitor cloud platform activity and audit logs with Wazuh.
 
 - **[Monitoring GitHub](https://documentation.wazuh.com/current/cloud-security/github/index.md)** Monitor GitHub audit logs for your organization with Wazuh. Covers required GitHub permissions, generating a personal access token, configuring the Wazuh module for GitHub, and monitoring multiple GitHub organizations.
+- **[Monitoring Google Cloud](https://documentation.wazuh.com/current/cloud-security/gcp/index.md)** Monitor Google Cloud with Wazuh agents installed on Google Cloud instances and integrations with Google Cloud Pub/Sub and Cloud Storage. Covers prerequisites, enabling the integration, creating credentials, exporting logs through a sink, and configuring the Wazuh modules for Pub/Sub and Storage buckets.
 - **[Monitoring Office 365](https://documentation.wazuh.com/current/cloud-security/office365/index.md)** Monitor Office 365 audit logs with Wazuh. Covers the Office 365 Management Activity API, registering an Azure app and enabling API permissions, configuring the Wazuh module for multiple tenants and subscriptions, dashboard visualization, and use cases.
 
 ## Proof of Concept guide

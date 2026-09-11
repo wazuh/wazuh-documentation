@@ -6,14 +6,15 @@
 Monitoring Google Cloud services
 =================================
 
-Wazuh provides modules that integrate with the Google Cloud Pub/Sub and Google Cloud Storage bucket services. Pub/Sub is a Google Cloud messaging service that allows communications between independent applications while Cloud Storage is a managed service that allows you to store and distribute your data in Google Cloud.  The Wazuh modules for monitoring Google Cloud fetches different events such as data access, privileged activities, system events, and DNS queries from your Google Cloud infrastructure.
+Wazuh integrates with Google Cloud :doc:`Pub/Sub </cloud-security/gcp/pubsub>` and :doc:`Cloud Storage </cloud-security/gcp/cloud-storage-buckets>` to collect security-related logs from supported Google Cloud services. Pub/Sub provides messaging between applications, while Cloud Storage provides object storage for data in Google Cloud.
 
-These log collection and analysis capabilities allow organizations that rely on Google Cloud Platform for their infrastructure, providing them with the ability to proactively monitor activities and respond effectively to security incidents within their cloud environment.
+The Wazuh Google Cloud integration collects logs such as data access, administrative activity, system events, and DNS activity. Wazuh analyzes these logs to detect suspicious activity and provide visibility into security events across your Google Cloud environment.
 
-Further sections highlight the :doc:`prerequisites <prerequisites/index>` for monitoring :doc:`Google Cloud supported services <supported-services/index>`.
+The following sections describe the prerequisites and supported Google Cloud services for configuring the integration.
 
 .. toctree::
    :maxdepth: 2
 
    prerequisites/index
-   supported-services/index
+   pubsub
+   cloud-storage-buckets
