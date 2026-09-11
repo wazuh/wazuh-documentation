@@ -166,6 +166,10 @@ newUrls['5.0'] = [
   '/user-manual/capabilities/active-response/migrating-active-response-scripts.html',
   '/user-manual/capabilities/active-response/ar-use-cases/blocking-web-attacks.html',
   '/user-manual/capabilities/active-response/ar-use-cases/removing-malicious-file.html',
+  '/cloud-security/gcp/prerequisites/requirements.html',
+  '/cloud-security/gcp/prerequisites/enabling-integration.html',
+  '/cloud-security/gcp/pubsub.html',
+  '/cloud-security/gcp/cloud-storage-buckets.html',
 ];
 
 /* Redirections 4.14—5.0  */
@@ -390,6 +394,31 @@ redirections.push(
     'target': ['4.14=>5.0', '5.0=>4.14'],
     '4.14': '/compliance/hipaa/active-response.html',
     '5.0': '/compliance/hipaa/164.308.a.6.ii.html',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/cloud-security/gcp/supported-services/use-cases.html',
+    '5.0': '/cloud-security/gcp/pubsub.html#creating-a-log-sink-on-google-cloud',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/cloud-security/gcp/prerequisites/visualizing-events.html',
+    '5.0': '/cloud-security/gcp/pubsub.html#visualizing-google-cloud-events-on-the-wazuh-dashboard',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/cloud-security/gcp/supported-services/index.html',
+    '5.0': '/cloud-security/gcp/services.html',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/cloud-security/gcp/supported-services/pubsub.html',
+    '5.0': '/cloud-security/gcp/pubsub.html',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/cloud-security/gcp/supported-services/cloud-storage-buckets.html',
+    '5.0': '/cloud-security/gcp/cloud-storage-buckets.html',
   }
 );
 
@@ -494,6 +523,11 @@ removedUrls['5.0'] = [
   '/user-manual/reference/tools/manage-agents.html',
   '/user-manual/reference/tools/wazuh-logtest.html',
   '/user-manual/reference/tools/fim-migrate.html',
+  '/cloud-security/gcp/supported-services/use-cases.html',
+  '/cloud-security/gcp/prerequisites/visualizing-events.html',
+  '/cloud-security/gcp/supported-services/index.html',
+  '/cloud-security/gcp/supported-services/pubsub.html',
+  '/cloud-security/gcp/supported-services/cloud-storage-buckets.html',
 ];
 
 /* *** RELEASE 4.14 ****/

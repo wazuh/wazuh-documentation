@@ -1,20 +1,24 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Learn how to integrate Wazuh with supported Google Cloud services in this section of the documentation.
-  
+   :description: Learn how Wazuh monitors Google Cloud through Wazuh agents and integrations with supported Google Cloud services in this section of the documentation.
+
 Monitoring Google Cloud
 =======================
 
-Google Cloud is a comprehensive suite of cloud computing services provided by Google. It offers various infrastructure and application services, enabling businesses to efficiently deploy, build, and scale applications as needed.
+Google Cloud provides infrastructure and application services to deploy, manage, and scale workloads in cloud environments.
 
-Wazuh offers security monitoring, incident response, and regulatory compliance capabilities that enhance the security posture of your Google Cloud infrastructure. You can install Wazuh agents on your Google Cloud instances or configure Wazuh modules to integrate with supported Google Cloud services. This allows you to analyze events and receive real-time alerts for anomalies within your Google Cloud environment.
+Wazuh monitors Google Cloud environments through Wazuh agents installed on Google Cloud instances and integrations with supported Google Cloud services. These monitoring methods provide visibility into security events and help detect suspicious activity across your Google Cloud environment.
 
-.. topic:: Contents
+Wazuh monitors Google Cloud in two ways:
 
-   .. toctree::
-      :maxdepth: 2
+-  :doc:`instances`: Install Wazuh agents on Google Cloud compute instances to monitor endpoint activity and security events.
 
-      instances
-      services
-      posture-management
+-  :doc:`services`: Integrate supported Google Cloud services with Wazuh to collect and analyze security-related events.
+
+.. toctree::
+   :maxdepth: 2
+   :hidden:
+
+   instances
+   services

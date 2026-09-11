@@ -1,11 +1,13 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Install the Wazuh agent directly on Google Cloud virtual machines or instances to collect security data.
+   :description: Install the Wazuh agent directly on Google Cloud virtual machines or instances to collect security telemetry.
 
 Monitoring Google Cloud instances
-=================================
+==================================
 
-You can install the Wazuh agent directly on Google Cloud virtual machines or instances for Linux, Windows, and macOS operating systems. Once installed, Wazuh agents collect security data from the monitored endpoints and transmit it to the Wazuh server for analysis. Security protection is applied to the monitored endpoints based on the analysis and the detected events.
+You can install the Wazuh agent directly on Google Cloud virtual machines or instances running Linux, Windows, or macOS. The Wazuh agents collect security telemetry from monitored workloads and send it to the Wazuh manager for analysis. Wazuh uses this telemetry to detect threats, monitor system activity, assess configurations, and support other configured security capabilities.
 
-Check the :doc:`Wazuh agent installation </installation-guide/wazuh-agent/index>` and :doc:`enrollment </user-manual/agent/agent-enrollment/index>` documentation to learn more about the Wazuh agents. Additionally, read about Wazuh SIEM and XDR capabilities and their configuration in our :doc:`capabilities </user-manual/capabilities/index>` documentation.
+See the :doc:`Wazuh agent installation </installation-guide/wazuh-agent/index>` and :doc:`agent enrollment </user-manual/agent/agent-enrollment/index>` documentation for information about installing and enrolling Wazuh agents.
+
+See the :doc:`Wazuh capabilities </user-manual/capabilities/index>` documentation to learn about the security monitoring capabilities available for monitored workloads.
