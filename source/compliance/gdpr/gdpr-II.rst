@@ -3,8 +3,8 @@
 .. meta::
   :description: Check out this section to learn more about how to use Wazuh for GDPR II (The General Data Protection Regulation of the European Union). 
   
-GDPR II, Principles <gdpr_II>
-=============================
+GDPR II, Principles
+===================
 
 This chapter describes the GDPR requirements for processing personal data.
 
