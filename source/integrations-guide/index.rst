@@ -41,6 +41,7 @@ Wazuh indexer integration
 
 .. thumbnail:: /images/integrations/indexer-integration-diagram.png
    :title: Wazuh indexer integration diagram
+   :alt: Wazuh indexer integration diagram
    :align: center
    :width: 80%
 
@@ -57,6 +58,7 @@ Wazuh server integration
 
 .. thumbnail:: /images/integrations/server-integration-diagram.png
    :title: Wazuh server integration diagram
+   :alt: Wazuh server integration diagram
    :align: center
    :width: 80%
 
@@ -84,6 +86,7 @@ In the Wazuh indexer integration alternative, the forwarder executes periodic qu
 
 .. thumbnail:: /images/integrations/indexer-queries-diagram.png
    :title: Wazuh indexer queries diagram
+   :alt: Wazuh indexer queries diagram
    :align: center
    :width: 80%
 
@@ -93,6 +96,7 @@ Similarly, checking for new alerts periodically means that the alerts reach the 
 
 .. thumbnail:: /images/integrations/alerts-file-checking-diagram.png
    :title: Alerts file checking diagram
+   :alt: Alerts file checking diagram
    :align: center
    :width: 80%
 
