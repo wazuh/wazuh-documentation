@@ -57,6 +57,10 @@ All notable changes to this project will be documented in this file.
 - Updated the *Getting started* documentation to Wazuh 5.0, covering the dashboard screenshot gallery and the *Architecture* section's component communication and required ports. ([#10069](https://github.com/wazuh/wazuh-documentation/pull/10069)) ([#10073](https://github.com/wazuh/wazuh-documentation/pull/10073))
 - Updated the *Using Wazuh for HIPAA compliance* documentation in *Regulatory compliance* to Wazuh 5.0. ([#10083](https://github.com/wazuh/wazuh-documentation/pull/10083))
 
+### Fixed
+
+- Fixed the Wazuh 5.0 agent state-file reference so it no longer lists the obsolete `msg_sent` field. ([#10084](https://github.com/wazuh/wazuh-documentation/pull/10084))
+
 ### Removed
 
 - Removed all `agent-auth` references as this tool is now deprecated. ([#8718](https://github.com/wazuh/wazuh/pull/8718))
