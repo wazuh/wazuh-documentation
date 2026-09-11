@@ -47,6 +47,7 @@ This step involves configuring the API permissions required to access Microsoft 
 -  ``DeviceManagementManagedDevices.Read.All``: Read ``auditEvents`` and ``managedDevices`` relationship data from your tenant.
 
 .. thumbnail:: /images/cloud-security/azure/ms-intune/configuring-api-permissions.png
+   :alt: Azure API permissions page showing DeviceManagementApps.Read.All and DeviceManagementManagedDevices.Read.All granted to the Wazuh application
    :align: center
    :width: 80%
 
@@ -153,6 +154,7 @@ The official rules associated with Microsoft Intune are:
 The image below shows Microsoft Intune alerts generated on the Wazuh dashboard.
 
 .. thumbnail:: /images/cloud-security/azure/ms-intune/ms-intune-alerts-on-wazuh-dashboard.png
+   :alt: Wazuh dashboard Threat Hunting Events view listing Microsoft Intune MDM alerts for the Windows-10 agent
    :align: center
    :width: 80%
 
@@ -228,6 +230,7 @@ In the example below, Microsoft Intune detects the application Freeform on one o
    }
 
 .. thumbnail:: /images/cloud-security/azure/ms-intune/detectedapps-sample-alert.png
+   :alt: Sample Wazuh alert JSON for a Microsoft Intune detectedApps event showing the Freeform app detected on a managed device
    :align: center
    :width: 80%
 
@@ -345,6 +348,7 @@ In the example below, Microsoft Intune detects information about a managed devic
    }
 
 .. thumbnail:: /images/cloud-security/azure/ms-intune/manageddevices-sample-alert.png
+   :alt: Sample Wazuh alert JSON for a Microsoft Intune managedDevices event showing a Windows device's compliance and configuration details
    :align: center
    :width: 80%
 
@@ -358,6 +362,7 @@ Import the predefined dashboards to visualize Microsoft Intune alerts in the Waz
 #. Select one of the downloaded files and click on **Import**. Repeat this step for the other file.
 
    .. thumbnail:: /images/cloud-security/azure/ms-intune/import-saved-object.gif
+      :alt: Animated walkthrough of importing the Microsoft Intune saved objects file via the Wazuh dashboard's Import saved objects dialog
       :align: center
       :width: 80%
 
@@ -367,13 +372,16 @@ Dashboard examples
 ~~~~~~~~~~~~~~~~~~
 
 .. thumbnail:: /images/cloud-security/azure/ms-intune/dahsboard-example1.png
+   :alt: Wazuh Intune managed devices and apps dashboard showing device and app counts, owner type, and top apps by device count
    :align: center
    :width: 80%
 
 .. thumbnail:: /images/cloud-security/azure/ms-intune/dahsboard-example2.png
+   :alt: Wazuh Intune dashboard panel showing managed devices by application, device ownership type, and operating system breakdown
    :align: center
    :width: 80%
 
 .. thumbnail:: /images/cloud-security/azure/ms-intune/dahsboard-example3.png
+   :alt: Wazuh Intune dashboard panel showing top apps, agents, and platforms by alert count with an ms-graph alerts timeline
    :align: center
    :width: 80%

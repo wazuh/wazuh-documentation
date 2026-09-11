@@ -82,5 +82,6 @@ You can visualize the alert data in the Wazuh dashboard. To do this, go to the *
 
    .. thumbnail:: /images/poc/shellshock-alerts.png
       :title: Shellshock alerts
+      :alt: Wazuh dashboard Threat Hunting events showing a Shellshock attack attempt alert
       :align: center
       :width: 80%
