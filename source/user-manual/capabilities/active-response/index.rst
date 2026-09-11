@@ -32,8 +32,8 @@ The image below shows the Active Response workflow.
    :width: 100%
 
 
-Types of active response
--------------------------
+.. rubric:: Types of active response
+    :class: h2
 
 An active response can either be:
 
