@@ -138,7 +138,7 @@ Where:
 -  ``<ssl>`` specifies the configuration options for the SSL parameters.
 -  ``<certificate_authorities>`` specifies a list of root certificate file paths for verification. Use the ``ca`` option for setting up each CA certificate file path.
 -  ``<ca>`` specifies the root CA certificate for HTTPS server verifications. The default value is ``/etc/filebeat/certs/root-ca.pem``. The possible value is any valid CA certificate.
--  ``<certificate>`` specifies the path to the Filebeat SSL certificate. The default value is ``/etc/filebeat/certs/filebeat-key.pem``. The possible value is any valid key.
+-  ``<certificate>`` specifies the path to the Filebeat SSL certificate. The default value is ``/etc/filebeat/certs/filebeat.pem``. The possible value is any valid key.
 -  ``<key>`` specifies the certificate key used for authentication. The default value is ``/etc/filebeat/certs/filebeat-key.pem``. The possible value is any valid key.
 
 You can learn more about the available configuration options in the :doc:`indexer </user-manual/reference/ossec-conf/indexer>` section of the reference guide.

@@ -36,6 +36,7 @@ To perform the upgrade locally, select your operating system and follow the inst
 
 .. image:: /images/installation/linux.png
       :align: center
+      :alt: Tux, the Linux penguin mascot logo
 
 .. raw:: html
 
@@ -47,6 +48,7 @@ To perform the upgrade locally, select your operating system and follow the inst
 
 .. image:: /images/installation/windows-logo.png
       :align: center
+      :alt: Windows logo
 
 .. raw:: html
 
@@ -58,6 +60,7 @@ To perform the upgrade locally, select your operating system and follow the inst
 
 .. image:: /images/installation/macOS-logo.png
       :align: center
+      :alt: Apple logo representing macOS
 
 .. raw:: html
 
@@ -70,6 +73,7 @@ To perform the upgrade locally, select your operating system and follow the inst
 .. image:: /images/installation/solaris.png
       :align: center
       :width: 150px
+      :alt: Oracle Solaris logo
 
 .. raw:: html
 
@@ -81,6 +85,7 @@ To perform the upgrade locally, select your operating system and follow the inst
 
 .. image:: /images/installation/AIX.png
       :align: center
+      :alt: AIX logo
 
 .. raw:: html
 
@@ -92,6 +97,7 @@ To perform the upgrade locally, select your operating system and follow the inst
 
 .. image:: /images/installation/hpux.png
       :align: center
+      :alt: HP-UX logo
 
 .. raw:: html
 
