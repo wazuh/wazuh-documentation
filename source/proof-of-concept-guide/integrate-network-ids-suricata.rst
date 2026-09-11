@@ -122,6 +122,7 @@ You can visualize the alert data in the Wazuh dashboard. To do this, go to the *
 
 .. thumbnail:: /images/poc/NIDS-suricata-alerts.png
    :title: Network IDS alerts
+   :alt: Wazuh dashboard Threat Hunting Events view filtered by the Suricata rule group, showing NIDS alerts
    :align: center
    :width: 80%
 

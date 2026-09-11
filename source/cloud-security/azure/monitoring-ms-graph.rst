@@ -24,6 +24,7 @@ The Wazuh module for Microsoft Graph allows you to monitor the following:
 The data from these services is visualised using the Wazuh Microsoft API Dashboard
 
 .. thumbnail:: /images/cloud-security/ms-graph/ms-graph-dashboard.png
+   :alt: Wazuh Microsoft Graph API dashboard showing activity results, top regions, security alerts, operation types, and a geolocation map of events
    :align: center
    :width: 80%
 

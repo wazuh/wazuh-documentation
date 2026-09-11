@@ -61,6 +61,7 @@ You can visualize the alert data in the Wazuh dashboard. To do this, go to the *
 
    .. thumbnail:: /images/poc/brute-force-attack-alerts-ubuntu.png
          :title: Visualize Brute force attack to Ubuntu system alerts
+         :alt: Wazuh dashboard Threat Hunting events showing SSH brute-force alerts on the Ubuntu system, including repeated login failures and PAM authentication failures.
          :align: center
          :width: 80%
 
@@ -68,5 +69,6 @@ You can visualize the alert data in the Wazuh dashboard. To do this, go to the *
 
    .. thumbnail:: /images/poc/brute-force-attack-alerts-windows.png
          :title: Visualize Brute force attack to Windows system alerts
+         :alt: Wazuh dashboard Threat Hunting events showing RDP brute-force alerts on the Windows system, including repeated logon failures.
          :align: center
          :width: 80%
