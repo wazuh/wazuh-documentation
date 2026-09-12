@@ -58,6 +58,10 @@ All notable changes to this project will be documented in this file.
 - Updated the *Using Wazuh for HIPAA compliance* documentation in *Regulatory compliance* to Wazuh 5.0. ([#10083](https://github.com/wazuh/wazuh-documentation/pull/10083))
 - Updated the *Monitoring Google Cloud* documentation in *Cloud security* to Wazuh 5.0, covering the Wazuh agent-only prerequisites, enabling the integration from the Wazuh dashboard, a consolidated log sink export flow, and configuring the Wazuh modules for Pub/Sub and Storage buckets. ([#10092](https://github.com/wazuh/wazuh-documentation/pull/10092))
 
+### Fixed
+
+- Fixed the Wazuh 5.0 agent state-file reference so it no longer lists the obsolete `msg_sent` field. ([#10084](https://github.com/wazuh/wazuh-documentation/pull/10084))
+
 ### Removed
 
 - Removed all `agent-auth` references as this tool is now deprecated. ([#8718](https://github.com/wazuh/wazuh/pull/8718))
