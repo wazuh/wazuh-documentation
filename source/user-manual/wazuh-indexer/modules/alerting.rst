@@ -112,7 +112,7 @@ Triggers
 
 A trigger defines the condition that determines whether a monitor generates an alert. Each monitor contains one or more triggers that evaluate the monitor results against user-defined conditions.
 
-When a monitor runs, the trigger processes the monitor output and determines whether the configured conditions have been met. If a trigger evaluates to true, the Alerting module creates an alert and executes any associated actions.
+When a monitor runs, the trigger processes the monitor output and determines whether the configured conditions have been met. If a trigger evaluates to ``true``, the Alerting module creates an alert and executes any associated actions.
 
 The Alerting module supports the following trigger types.
 
@@ -162,7 +162,7 @@ An alerting workflow consists of five main components.
 Alert lifecycle
 ---------------
 
-An alert is created when a trigger condition evaluates to true. Alerts represent the current state of a monitored condition and provide a mechanism for tracking, acknowledging, and resolving issues over time.
+An alert is created when a trigger condition evaluates to ``true``. Alerts represent the current state of a monitored condition and provide a mechanism for tracking, acknowledging, and resolving issues over time.
 
 Each alert transitions through a series of states that reflect its status during the monitoring process.
 
@@ -178,7 +178,7 @@ Each alert transitions through a series of states that reflect its status during
 | Error        | An error occurred while evaluating the monitor or executing one or more configured actions.                                                                                         |
 +--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-Alerts are updated automatically each time the associated monitor executes. If the trigger condition remains true, the alert stays in the Active state unless it has been acknowledged. When the trigger condition is no longer met, the Alerting module automatically marks the alert as Completed.
+Alerts are updated automatically each time the associated monitor executes. If the trigger condition remains ``true``, the alert stays in the Active state unless it has been acknowledged. When the trigger condition is no longer met, the Alerting module automatically marks the alert as Completed.
 
 An acknowledged alert does not resolve the underlying condition. It simply indicates that the alert is being investigated or has been reviewed by an operator.
 

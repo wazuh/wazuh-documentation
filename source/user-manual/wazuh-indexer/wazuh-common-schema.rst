@@ -8,7 +8,7 @@ Wazuh Common Schema (WCS)
 
 WCS is a standardized structure for organizing and categorizing security event data from any source, ensuring consistent analysis, correlation, and reporting across data types. The WCS definitions, templates, and mappings are maintained in the `wazuh-indexer-plugins repository <https://github.com/wazuh/wazuh-indexer-plugins>`__.
 
-Every event category shares a single baseline template (``templates/streams/events.json``). During deployment, the Setup module generates one index template for each category from this shared template by overriding the ``index_patterns`` and ``rollover_alias`` fields. Specialized data streams, such as raw, unclassified, and active-responses, use dedicated template files instead.
+Every event category shares a single baseline template (``templates/streams/events.json``). During deployment, the Setup module generates one index template for each category from this shared template by overriding the ``index_patterns`` and ``rollover_alias`` fields. Specialized data streams, such as ``raw``, ``unclassified``, and ``active-responses``, use dedicated template files instead.
 
 Template priority
 -----------------
