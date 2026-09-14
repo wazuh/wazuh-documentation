@@ -199,7 +199,7 @@ The previous index is retained until its configured retention period expires. It
 
 The ISM policy below keeps matching indices in the hot state while they receive data. It rolls them over when they reach 200 million documents or a 20 GB primary shard size. After the configured retention period expires, the policy moves the index to the delete state and removes it. Failed actions are retried up to three times using exponential backoff.
 
-.. code-block:: json
+.. code-block:: none
    :emphasize-lines: 3, 4, 5, 19, 20, 28, 51, 53
 
    {
@@ -296,7 +296,7 @@ To verify that the Wazuh templates are installed, query the Wazuh indexer from t
 
 The response lists all deployed Wazuh index templates and the index patterns associated with each template.
 
-.. code-block:: json
+.. code-block:: none
    :class: output
 
    {
