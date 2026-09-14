@@ -513,6 +513,6 @@ You can create and manage users and roles through the Wazuh dashboard interface.
 
 .. note::
 
-   Default users and roles cannot be modified. Instead, duplicate them and modify the duplicates. You must be logged in as a user with administrative privileges (for example, admin).
+   Default users and roles cannot be modified. Instead, duplicate them and modify the duplicates. You must be logged in as a user with administrative privileges (for example, ``admin``).
 
 For step-by-step instructions on creating and managing access control resources, see the :doc:`Wazuh RBAC - How to create and map internal users </user-manual/user-administration/rbac>` documentation. It includes procedures for creating internal users, defining custom roles, configuring role mappings, and managing user permissions through the Wazuh dashboard.
