@@ -189,7 +189,7 @@ To complete the Wazuh index migration, restore the snapshots taken from the sour
 
 .. note::
 
-   It is necessary to have performed the steps in the :ref:`Set up a snapshot repository section <migrating_wazuh_indices_setup_snapshot_repository>` on the destination Wazuh cluster before proceeding to Restore snapshots.
+   It is necessary to have performed the steps in the :ref:`Set up a snapshot repository section <migrating_wazuh_indices_setup_snapshot_repository>` on the destination Wazuh cluster before proceeding to **Restore snapshots**.
 
 #. Restart the Wazuh indexer node in the destination Wazuh cluster to load the snapshot files using the command:
 
@@ -438,7 +438,7 @@ To complete the Wazuh index migration, restore the snapshots taken from the sour
 
 .. note::
 
-   It is necessary to have performed the steps in the :ref:`Set up a snapshot repository section <migrating_wazuh_indices_setup_snapshot_repository_nfs>` on the destination Wazuh cluster before proceeding to Restore snapshots.
+   It is necessary to have performed the steps in the :ref:`Set up a snapshot repository section <migrating_wazuh_indices_setup_snapshot_repository_nfs>` on the destination Wazuh cluster before proceeding to **Restore snapshots**.
 
 #. Restart the Wazuh indexer node in the destination Wazuh cluster to load the snapshot files using the command:
 
