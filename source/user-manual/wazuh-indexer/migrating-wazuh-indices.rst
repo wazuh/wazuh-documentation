@@ -40,6 +40,7 @@ Perform the following configuration on the source and destination Wazuh indexer 
    **Example:**
 
    .. code-block:: yaml
+      :emphasize-lines: 11
 
       network.host: 127.0.0.1
       node.name: indexer
@@ -263,6 +264,7 @@ Perform the following steps to set up NFS on a dedicated endpoint:
 #. Add the ``/mnt/snapshots`` directory to the ``/etc/exports`` file using the command below. Replace the ``<NETWORK_ADDRESS/CIDR>`` variable with your network address.
 
    .. code-block:: console
+      :emphasize-lines: 1
 
       # echo "/mnt/snapshots <NETWORK_ADDRESS/CIDR>(rw,sync,no_root_squash,no_subtree_check)" | sudo tee -a /etc/exports
 
@@ -329,6 +331,7 @@ Perform the following steps on the source and destination Wazuh indexer nodes to
    **Example:**
 
    .. code-block:: yaml
+      :emphasize-lines: 11
 
       network.host: 127.0.0.1
       node.name: indexer

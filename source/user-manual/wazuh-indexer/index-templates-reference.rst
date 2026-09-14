@@ -156,6 +156,7 @@ All Wazuh stream policies follow the same lifecycle:
 The following example shows a simplified lifecycle policy:
 
 .. code-block:: json
+   :emphasize-lines: 11, 19
 
    {
      "policy": {

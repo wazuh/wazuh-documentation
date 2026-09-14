@@ -505,6 +505,7 @@ The following example updates two Alerting module settings:
 Run the following command from a terminal on a host that can communicate with the Wazuh indexer REST API.
 
 .. code-block:: console
+   :emphasize-lines: 1
 
    curl -sk -u <USERNAME>:<PASSWORD> -X PUT \
      "https://localhost:9200/_cluster/settings" \

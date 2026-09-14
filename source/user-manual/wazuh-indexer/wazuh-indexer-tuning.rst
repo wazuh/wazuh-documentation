@@ -87,6 +87,7 @@ When the system is swapping memory, the Wazuh indexer may not work as expected. 
 #. Verify that the setting was changed successfully, by running the following command to check that ``mlockall`` value is set to ``true``:
 
    .. code-block:: console
+      :emphasize-lines: 1
 
       # curl -k -u <INDEXER_USERNAME>:<INDEXER_PASSWORD> "https://<INDEXER_IP_ADDRESS>:9200/_nodes?filter_path=**.mlockall&pretty"
 
@@ -94,6 +95,7 @@ When the system is swapping memory, the Wazuh indexer may not work as expected. 
 
    .. code-block:: json
       :class: output
+      :emphasize-lines: 5
 
       {
         "nodes" : {
