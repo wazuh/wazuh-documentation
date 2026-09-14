@@ -537,4 +537,4 @@ Run the following command from a terminal on a host that can communicate with th
      "transient": {}
    }
 
-The acknowledged value confirms that the Wazuh indexer accepted the settings update. The updated values appear under the persistent section, which means they remain in effect after the Wazuh indexer restarts.
+The ``acknowledged`` value confirms that the Wazuh indexer accepted the settings update. The updated values appear under the ``persistent`` section, which means they remain in effect after the Wazuh indexer restarts.

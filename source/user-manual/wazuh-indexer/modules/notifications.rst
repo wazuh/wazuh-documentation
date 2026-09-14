@@ -258,7 +258,7 @@ Run the following command from a terminal on a host that can communicate with th
      "transient": {}
    }
 
-The acknowledged value confirms that the Wazuh indexer successfully applied the requested settings. The updated values appear under the persistent section, indicating that they are stored as persistent cluster settings and remain in effect after the Wazuh indexer restarts.
+The ``acknowledged`` value confirms that the Wazuh indexer successfully applied the requested settings. The updated values appear under the ``persistent`` section, indicating that they are stored as persistent cluster settings and remain in effect after the Wazuh indexer restarts.
 
 Email destination secure settings
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
