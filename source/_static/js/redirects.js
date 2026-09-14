@@ -170,6 +170,18 @@ newUrls['5.0'] = [
   '/cloud-security/gcp/prerequisites/enabling-integration.html',
   '/cloud-security/gcp/pubsub.html',
   '/cloud-security/gcp/cloud-storage-buckets.html',
+  '/user-manual/wazuh-indexer/modules/index.html',
+  '/user-manual/wazuh-indexer/modules/setup.html',
+  '/user-manual/wazuh-indexer/modules/content-manager.html',
+  '/user-manual/wazuh-indexer/modules/reporting.html',
+  '/user-manual/wazuh-indexer/modules/security-analytics.html',
+  '/user-manual/wazuh-indexer/modules/notifications.html',
+  '/user-manual/wazuh-indexer/modules/alerting.html',
+  '/user-manual/wazuh-indexer/wazuh-common-schema.html',
+  '/user-manual/wazuh-indexer/wazuh-sigma-rules.html',
+  '/user-manual/wazuh-indexer/index-templates-reference.html',
+  '/user-manual/wazuh-indexer/backup-and-restore.html',
+  '/user-manual/wazuh-indexer/security.html',
 ];
 
 /* Redirections 4.14—5.0  */
