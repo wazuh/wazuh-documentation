@@ -214,7 +214,7 @@ Updating a setting at runtime
 
 Almost every Security Analytics setting is dynamic. To change one without restarting the node, use the Cluster Settings API:
 
-.. code-block:: none
+.. code-block:: console
 
    # curl -sk -u admin:admin -X PUT "https://127.0.0.1:9200/_cluster/settings" \
      -H 'Content-Type: application/json' -d '{
