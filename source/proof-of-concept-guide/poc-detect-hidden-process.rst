@@ -144,6 +144,7 @@ You can visualize the findings in the Wazuh dashboard. To do this:
 
    .. thumbnail:: /images/poc/hidden-processes-findings.png
       :title: Hidden processes findings
+      :alt: Wazuh dashboard Threat Hunting events table filtered by rule.groups:rootcheck, showing rootcheck alerts such as "Possible Kernel level rootkit" and "Host-based anomaly detection event"
       :align: center
       :width: 80%
 

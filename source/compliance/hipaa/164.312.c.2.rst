@@ -1,0 +1,118 @@
+.. Copyright (C) 2015, Wazuh, Inc.
+
+.. meta::
+   :description: Wazuh helps meet the HIPAA § 164.312(c)(2) requirement by monitoring healthcare files and generating findings on modification or deletion with file integrity monitoring.
+
+HIPAA § 164.312(c)(2) - Mechanism to authenticate electronic protected health information
+=============================================================================================
+
+The HIPAA § 164.312(c)(2) requirement states, "*Implement electronic mechanisms to corroborate that electronic protected health information has not been altered or destroyed in an unauthorized manner.*"
+
+This requirement specifies monitoring files and directories containing healthcare data. The Wazuh FIM module meets this requirement by monitoring healthcare files and generating findings on modification or deletion. See the Wazuh :doc:`FIM documentation </user-manual/capabilities/file-integrity/index>` for details on configuring file integrity monitoring.
+
+Use cases: Detect file changes and deletion
+-----------------------------------------------
+
+The use cases in this section are performed on an Ubuntu 26.04 endpoint. Use a virtual machine or a dedicated lab environment for these use cases.
+
+Detect file changes
+^^^^^^^^^^^^^^^^^^^^^
+
+In this use case, the Wazuh agent detects changes made to the ``patient_data.txt`` file in the ``/root/health_data`` directory. Perform the following steps on the Ubuntu endpoint:
+
+#. Create the ``health_data`` directory in the ``/root`` directory:
+
+   .. code-block:: console
+
+      # mkdir /root/health_data
+
+#. Create the file ``patient_data.txt`` in the ``/root/health_data`` directory:
+
+   .. code-block:: console
+
+      # touch /root/health_data/patient_data.txt
+
+#. Add the following configuration to the ``syscheck`` block of the Wazuh agent configuration file ``/var/ossec/etc/ossec.conf`` to monitor the ``/root/health_data`` directory for changes in real time:
+
+   .. code-block:: xml
+
+      <directories realtime="yes">/root/health_data</directories>
+
+#. Restart the Wazuh agent to apply the changes:
+
+   .. code-block:: console
+
+      # systemctl restart wazuh-agent
+
+#. Write a line of test data to the file:
+
+   .. code-block:: console
+
+      # echo "User2 = medication3" > /root/health_data/patient_data.txt
+
+#. Navigate to **Endpoint security** > **File Integrity Monitoring** > **Findings** to see the file modification finding on the Wazuh dashboard.
+
+   .. thumbnail:: /images/compliance/hipaa/fim-file-modification-finding.png
+      :title: FIM file modification finding
+      :alt: FIM file modification finding
+      :align: center
+      :width: 80%
+
+   The finding includes differences in the file checksum, the modified file, the modification time, the mapped HIPAA requirement, and other information.
+
+   .. thumbnail:: /images/compliance/hipaa/fim-file-modification-finding-details.png
+      :title: FIM file modification finding details
+      :alt: FIM file modification finding details
+      :align: center
+      :width: 80%
+
+Detect file deletion
+^^^^^^^^^^^^^^^^^^^^^^
+
+In this use case, you configure the Wazuh agent to detect file deletion in a monitored directory. Perform the following steps on the Ubuntu endpoint to configure the FIM module to monitor the ``/root/health_records`` directory.
+
+#. Create the ``health_records`` directory in the ``/root`` directory if it is not present:
+
+   .. code-block:: console
+
+      # mkdir /root/health_records
+
+#. Create the file ``patient_data.txt`` in the ``/root/health_records`` directory:
+
+   .. code-block:: console
+
+      # touch /root/health_records/patient_data.txt
+
+#. Add the following configuration to the ``syscheck`` block of the agent configuration file ``/var/ossec/etc/ossec.conf`` to monitor the ``/root/health_records`` directory for changes in real time:
+
+   .. code-block:: xml
+
+      <directories realtime="yes">/root/health_records</directories>
+
+#. Restart the Wazuh agent to apply the changes:
+
+   .. code-block:: console
+
+      # systemctl restart wazuh-agent
+
+#. Delete the ``patient_data.txt`` file from the monitored directory:
+
+   .. code-block:: console
+
+      # rm /root/health_records/patient_data.txt
+
+#. Navigate to **Endpoint security** > **File Integrity Monitoring** > **Findings** to see the file deletion finding on the Wazuh dashboard.
+
+   .. thumbnail:: /images/compliance/hipaa/fim-file-deletion-finding.png
+      :title: FIM file deletion finding
+      :alt: FIM file deletion finding
+      :align: center
+      :width: 80%
+
+   The finding also includes the file deleted, the endpoint where the file was deleted, and other details.
+
+   .. thumbnail:: /images/compliance/hipaa/fim-file-deletion-finding-details.png
+      :title: FIM file deletion finding details
+      :alt: FIM file deletion finding details
+      :align: center
+      :width: 80%

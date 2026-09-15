@@ -80,6 +80,14 @@ removedUrls['x.y'] = [
 /* Pages added in 5.0 */
 
 newUrls['5.0'] = [
+  '/compliance/hipaa/164.308.a.1.ii.a.html',
+  '/compliance/hipaa/164.308.a.5.ii.b.html',
+  '/compliance/hipaa/164.308.a.6.ii.html',
+  '/compliance/hipaa/164.308.a.8.html',
+  '/compliance/hipaa/164.312.a.2.iii.html',
+  '/compliance/hipaa/164.312.b.html',
+  '/compliance/hipaa/164.312.c.2.html',
+  '/compliance/hipaa/164.312.d.html',
   '/user-manual/reference/ossec-conf/agent.html',
   '/release-notes/release-5-0-0.html',
   '/release-notes/index-5x.html',
@@ -158,6 +166,22 @@ newUrls['5.0'] = [
   '/user-manual/capabilities/active-response/migrating-active-response-scripts.html',
   '/user-manual/capabilities/active-response/ar-use-cases/blocking-web-attacks.html',
   '/user-manual/capabilities/active-response/ar-use-cases/removing-malicious-file.html',
+  '/cloud-security/gcp/prerequisites/requirements.html',
+  '/cloud-security/gcp/prerequisites/enabling-integration.html',
+  '/cloud-security/gcp/pubsub.html',
+  '/cloud-security/gcp/cloud-storage-buckets.html',
+  '/user-manual/wazuh-indexer/modules/index.html',
+  '/user-manual/wazuh-indexer/modules/setup.html',
+  '/user-manual/wazuh-indexer/modules/content-manager.html',
+  '/user-manual/wazuh-indexer/modules/reporting.html',
+  '/user-manual/wazuh-indexer/modules/security-analytics.html',
+  '/user-manual/wazuh-indexer/modules/notifications.html',
+  '/user-manual/wazuh-indexer/modules/alerting.html',
+  '/user-manual/wazuh-indexer/wazuh-common-schema.html',
+  '/user-manual/wazuh-indexer/wazuh-sigma-rules.html',
+  '/user-manual/wazuh-indexer/index-templates-reference.html',
+  '/user-manual/wazuh-indexer/backup-and-restore.html',
+  '/user-manual/wazuh-indexer/security.html',
 ];
 
 /* Redirections 4.14—5.0  */
@@ -347,6 +371,66 @@ redirections.push(
     'target': ['4.14=>5.0', '5.0=>4.14'],
     '4.14': '/compliance/pci-dss/dashboard.html',
     '5.0': '/compliance/pci-dss/system-inventory.html#pci-dss-dashboard',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/compliance/hipaa/visualization-and-dashboard.html',
+    '5.0': '/compliance/hipaa/index.html',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/compliance/hipaa/log-data-analysis.html',
+    '5.0': '/compliance/hipaa/164.312.b.html',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/compliance/hipaa/configuration-assessment.html',
+    '5.0': '/compliance/hipaa/164.308.a.8.html',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/compliance/hipaa/malware-detection.html',
+    '5.0': '/compliance/hipaa/164.308.a.5.ii.b.html',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/compliance/hipaa/file-integrity-monitoring.html',
+    '5.0': '/compliance/hipaa/164.312.c.2.html',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/compliance/hipaa/vulnerability-detection.html',
+    '5.0': '/compliance/hipaa/164.308.a.1.ii.a.html',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/compliance/hipaa/active-response.html',
+    '5.0': '/compliance/hipaa/164.308.a.6.ii.html',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/cloud-security/gcp/supported-services/use-cases.html',
+    '5.0': '/cloud-security/gcp/pubsub.html#creating-a-log-sink-on-google-cloud',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/cloud-security/gcp/prerequisites/visualizing-events.html',
+    '5.0': '/cloud-security/gcp/pubsub.html#visualizing-google-cloud-events-on-the-wazuh-dashboard',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/cloud-security/gcp/supported-services/index.html',
+    '5.0': '/cloud-security/gcp/services.html',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/cloud-security/gcp/supported-services/pubsub.html',
+    '5.0': '/cloud-security/gcp/pubsub.html',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/cloud-security/gcp/supported-services/cloud-storage-buckets.html',
+    '5.0': '/cloud-security/gcp/cloud-storage-buckets.html',
   }
 );
 
@@ -356,6 +440,13 @@ removedUrls['5.0'] = [
   '/user-manual/reference/ossec-conf/client-buffer.html',
   '/user-manual/reference/ossec-conf/labels.html',
   '/compliance/pci-dss/dashboard.html',
+  '/compliance/hipaa/visualization-and-dashboard.html',
+  '/compliance/hipaa/log-data-analysis.html',
+  '/compliance/hipaa/configuration-assessment.html',
+  '/compliance/hipaa/malware-detection.html',
+  '/compliance/hipaa/file-integrity-monitoring.html',
+  '/compliance/hipaa/vulnerability-detection.html',
+  '/compliance/hipaa/active-response.html',
   '/user-manual/capabilities/active-response/additional-information.html',
   '/user-manual/capabilities/active-response/ar-use-cases/blocking-ssh-brute-force.html',
   '/user-manual/capabilities/active-response/ar-use-cases/restarting-wazuh-agent.html',
@@ -444,6 +535,11 @@ removedUrls['5.0'] = [
   '/user-manual/reference/tools/manage-agents.html',
   '/user-manual/reference/tools/wazuh-logtest.html',
   '/user-manual/reference/tools/fim-migrate.html',
+  '/cloud-security/gcp/supported-services/use-cases.html',
+  '/cloud-security/gcp/prerequisites/visualizing-events.html',
+  '/cloud-security/gcp/supported-services/index.html',
+  '/cloud-security/gcp/supported-services/pubsub.html',
+  '/cloud-security/gcp/supported-services/cloud-storage-buckets.html',
 ];
 
 /* *** RELEASE 4.14 ****/
@@ -1027,6 +1123,7 @@ newUrls['4.10'] = [
   '/release-notes/release-4-10-2.html',
   '/release-notes/release-4-10-3.html',
   '/release-notes/release-4-10-4.html',
+  '/release-notes/release-4-10-5.html',
   '/user-manual/reference/ossec-conf/anti-tampering.html',
   '/user-manual/capabilities/vulnerability-detection/troubleshooting.html',
   '/user-manual/capabilities/vulnerability-detection/FAQ.html',

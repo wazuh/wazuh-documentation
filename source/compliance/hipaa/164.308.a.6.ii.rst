@@ -1,0 +1,24 @@
+.. Copyright (C) 2015, Wazuh, Inc.
+
+.. meta::
+   :description: Wazuh helps meet the HIPAA § 164.308(a)(6)(ii) requirement by automating response actions to security incidents with Wazuh Active Response.
+
+HIPAA § 164.308(a)(6)(ii) - Response and reporting
+======================================================
+
+The HIPAA § 164.308(a)(6)(ii) requirement states, "*Identify and respond to suspected or known security incidents; mitigate, to the extent practicable, harmful effects of security incidents that are known to the covered entity or business associate; and document security incidents and their outcomes.*"
+
+This requirement mandates identifying suspected or known security incidents, responding to them, mitigating their potential impact, and documenting the incidents and their outcomes.
+
+Wazuh helps meet this requirement by providing several security monitoring and incident response modules. One of these modules is the Wazuh :doc:`Active Response </user-manual/capabilities/active-response/index>` module, which automates response actions when security findings meet configured conditions. Wazuh Active Response can execute predefined or custom scripts on monitored endpoints to mitigate detected threats. For example, it can block malicious IP addresses, terminate malicious processes, or perform other configured response actions when a security finding triggers an active response.
+
+Use case: Block a known malicious actor
+------------------------------------------
+
+In this example, the Wazuh Active Response module blocks malicious IP addresses from accessing web resources on a web server monitored by a Wazuh agent. See :doc:`Blocking a known malicious actor </proof-of-concept-guide/block-malicious-actor-ip-reputation>` for more information.
+
+.. thumbnail:: /images/compliance/hipaa/block-malicious-actor-poc.png
+   :title: Threat Hunting findings - blocked malicious actor
+   :alt: Threat Hunting findings - blocked malicious actor
+   :align: center
+   :width: 80%
