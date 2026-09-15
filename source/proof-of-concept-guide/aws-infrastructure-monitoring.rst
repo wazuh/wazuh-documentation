@@ -38,6 +38,7 @@ The image below shows how to create a new CloudTrail service and attach a new S3
 
 .. thumbnail:: /images/poc/cloudtrail.gif
    :title: Creating a CloudTrail service
+   :alt: Animated walkthrough of creating a new AWS CloudTrail trail and attaching a new S3 bucket in the AWS console
    :align: center
    :width: 80%
 
