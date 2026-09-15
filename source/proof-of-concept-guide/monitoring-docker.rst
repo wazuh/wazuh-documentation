@@ -102,5 +102,6 @@ You can visualize the findings on the Wazuh dashboard. Go to **Cloud security** 
 
 .. thumbnail:: /images/poc/docker-findings.png
    :title: Visualize Docker findings
+   :alt: Wazuh dashboard Docker module Events view showing a histogram and table of Docker container alerts
    :align: center
    :width: 80%

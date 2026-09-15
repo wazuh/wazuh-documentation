@@ -97,5 +97,6 @@ You can visualize the findings on the Wazuh dashboard. Perform the following:
 
 .. thumbnail:: /images/poc/sql-injection-findings.png
    :title: SQL injection attack findings
+   :alt: Wazuh dashboard Events table filtered by rule ID 31106 showing successful web attack alerts with HTTP 200 responses
    :align: center
    :width: 80%
