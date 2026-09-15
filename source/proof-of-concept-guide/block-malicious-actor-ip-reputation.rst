@@ -508,6 +508,7 @@ You can visualize the findings in the Wazuh dashboard. To do this, go to the **T
 -  Ubuntu:
 
    .. thumbnail:: /images/poc/block-malicious-actor-ubuntu-findings.png
+      :alt: Wazuh dashboard Threat Hunting events for the Ubuntu22.04 agent, showing alerts for an IP address found in the AlienVault reputation database and a host blocked by the firewall-drop active response.
       :title: Blocking a known malicious actor Ubuntu findings
       :align: center
       :width: 80%
@@ -515,6 +516,7 @@ You can visualize the findings in the Wazuh dashboard. To do this, go to the **T
 -  Windows:
 
    .. thumbnail:: /images/poc/block-malicious-actor-windows-findings.png
+      :alt: Wazuh dashboard Threat Hunting events for the Windows11 agent, showing alerts for an IP address found in the AlienVault reputation database and netsh active response commands adding and deleting a firewall block.
       :title: Blocking a known malicious actor Windows findings
       :align: center
       :width: 80%

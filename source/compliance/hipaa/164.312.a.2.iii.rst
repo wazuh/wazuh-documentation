@@ -1,0 +1,74 @@
+.. Copyright (C) 2015, Wazuh, Inc.
+
+.. meta::
+   :description: Wazuh helps meet the HIPAA § 164.312(a)(2)(iii) automatic logoff requirement by verifying SSH idle timeout configuration with Security Configuration Assessment.
+
+HIPAA § 164.312(a)(2)(iii) - Automatic logoff
+================================================
+
+The HIPAA § 164.312(a)(2)(iii) requirement states, "*Implement electronic procedures that terminate an electronic session after a predetermined time of inactivity.*"
+
+This requirement mandates configuring systems to automatically terminate electronic sessions after a defined period of inactivity.
+
+Wazuh helps meet this requirement through the Security Configuration Assessment (SCA) module, which evaluates monitored endpoints against security configuration policies. One example is SCA check ``41646`` from the `cis_ubuntu26-04 <https://github.com/wazuh/wazuh/blob/main/ruleset/sca/ubuntu/cis_ubuntu26-04.yml>`__ SCA :doc:`policy file </user-manual/capabilities/sec-config-assessment/available-sca-policies>`. The check verifies that ``ClientAliveInterval`` and ``ClientAliveCountMax`` are configured to enforce an SSH idle timeout. The check returns a **Failed** result when the SSH session timeout is not configured.
+
+Use case: SSH session timeout
+--------------------------------
+
+In the use case, the Wazuh SCA module runs check ``41646`` on an Ubuntu 26.04 endpoint to verify that inactive SSH sessions terminate after a defined period.
+
+Wazuh dashboard
+^^^^^^^^^^^^^^^^
+
+#. Click **Configuration Assessment** from the Wazuh **Overview** dashboard:
+
+   .. thumbnail:: /images/compliance/hipaa/configuration-assessment-overview.png
+      :title: Wazuh Overview dashboard - Configuration Assessment
+      :alt: Wazuh Overview dashboard - Configuration Assessment
+      :align: center
+      :width: 80%
+
+   .. thumbnail:: /images/compliance/hipaa/configuration-assessment-dashboard-tab.png
+      :title: Configuration Assessment Dashboard tab
+      :alt: Configuration Assessment Dashboard tab
+      :align: center
+      :width: 80%
+
+#. Go to the **Inventory** tab and apply the ``check.id: 41646`` filter:
+
+   .. thumbnail:: /images/compliance/hipaa/sca-inventory-check-41646-filtered.png
+      :title: Configuration Assessment Inventory tab - check.id 41646
+      :alt: Configuration Assessment Inventory tab - check.id 41646
+      :align: center
+      :width: 80%
+
+#. The check fails because ``ClientAliveInterval`` and ``ClientAliveCountMax`` are not configured. Expand the finding to see the check name, description, rationale, compliance mapping, and other information.
+
+   .. thumbnail:: /images/compliance/hipaa/sca-finding-41646-failed-details.png
+      :title: SCA check 41646 - Failed finding details
+      :alt: SCA check 41646 - Failed finding details
+      :align: center
+      :width: 80%
+
+#. Configure the ``ClientAliveInterval`` and ``ClientAliveCountMax`` options in the ``/etc/ssh/sshd_config`` file. In this example, the SSH server sends a probe every 15 seconds and disconnects the client after three consecutive unanswered probes.
+
+   .. code-block:: ini
+
+      ClientAliveInterval 15
+      ClientAliveCountMax 3
+
+#. Restart the Wazuh agent to force a new SCA scan:
+
+   .. code-block:: console
+
+      # systemctl restart wazuh-agent
+
+#. Go to the **Findings** tab and apply the ``check.id: 41646`` filter.
+
+   .. thumbnail:: /images/compliance/hipaa/sca-finding-41646-passed.png
+      :title: SCA check 41646 - Passed finding
+      :alt: SCA check 41646 - Passed finding
+      :align: center
+      :width: 80%
+
+   The check now passes after updating the SSH configuration.
