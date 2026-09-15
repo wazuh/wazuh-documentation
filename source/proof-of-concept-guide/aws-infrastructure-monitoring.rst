@@ -16,7 +16,7 @@ Infrastructure
 +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Cloud service      | Description                                                                                                                                                                                                                                                                           |
 +====================+=======================================================================================================================================================================================================================================================================================+
-| Amazon CloudTrail  | AWS Cloudtrail, like all other supported AWS services, requires setting the :ref:`necessary policies <cloudtrail_policy_configuration>` for user permissions and providing a valid authentication method. In this PoC, we use the :ref:`profile authentication <aws_profile>` method. |
+| Amazon CloudTrail  | AWS CloudTrail, like all other supported AWS services, requires setting the :ref:`necessary policies <cloudtrail_policy_configuration>` for user permissions and providing a valid authentication method. In this PoC, we use the :ref:`profile authentication <aws_profile>` method. |
 +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Configuration
@@ -36,7 +36,7 @@ CloudTrail
 The image below shows how to create a new CloudTrail service and attach a new S3 bucket.
 
 .. thumbnail:: /images/poc/cloudtrail.gif
-   :title: Creating a Cloudtrail service
+   :title: Creating a CloudTrail service
    :alt: Animated walkthrough of creating a new AWS CloudTrail trail and attaching a new S3 bucket in the AWS console
    :align: center
    :width: 80%
@@ -70,7 +70,7 @@ Wazuh server
 Test the configuration
 ----------------------
 
-Once you configure Cloudtrail, you can generate events by simply creating a new IAM user account using the IAM service. This generates an event that Wazuh processes. 
+Once you configure CloudTrail, you can generate events by simply creating a new IAM user account using the IAM service. This generates an event that Wazuh processes. 
 
 The Wazuh default ruleset parses AWS logs and generates alerts automatically. The alerts appear as soon as Wazuh receives the logs from the AWS S3 bucket.
 
