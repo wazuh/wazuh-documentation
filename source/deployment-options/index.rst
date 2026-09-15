@@ -61,6 +61,7 @@ If the Wazuh central components are already installed in your environment, selec
          <p class="link-boxes-label">Linux</p>
 
 .. image:: /images/installation/linux.png
+   :alt: Linux Tux penguin logo
    :align: center
 
 .. raw:: html
@@ -72,6 +73,7 @@ If the Wazuh central components are already installed in your environment, selec
          <p class="link-boxes-label">Windows</p>
 
 .. image:: /images/installation/windows-logo.png
+   :alt: Windows logo
    :align: center
 
 .. raw:: html
@@ -83,6 +85,7 @@ If the Wazuh central components are already installed in your environment, selec
          <p class="link-boxes-label">macOS</p>
 
 .. image:: /images/installation/macOS-logo.png
+   :alt: Apple macOS logo
    :align: center
 
 .. raw:: html

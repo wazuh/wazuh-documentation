@@ -3,23 +3,25 @@
 .. meta::
    :description: The Wazuh modules for Google Cloud are accessible through a Python script. Learn more in this section of the documentation.
 
-Gcloud Python script
-====================
+gcloud Python script
+=====================
 
-The Wazuh modules for Google Cloud are accessible through the ``var/ossec/wodles/gcloud/gcloud`` Python script. This script enables them to automatically fetch various types of events from Google Cloud Pub/Sub and Google Cloud Storage bucket services based on the configuration. It provides multiple options to manually fetch data and test the configuration as shown below:
+The Wazuh modules for Google Cloud are accessible through the ``/var/ossec/wodles/gcloud/gcloud`` Python script. This script automatically fetches multiple event types from Google Cloud Pub/Sub and Google Cloud Storage buckets based on the configuration. It provides multiple options to manually fetch data and test the configuration, as shown below:
 
 .. code-block:: console
 
    # /var/ossec/wodles/gcloud/gcloud --help
 
+The command output looks similar to this:
+
 .. code-block:: none
    :class: output
 
-   usage: usage: gcloud.py [options]
-   
+   usage: usage: gcloud [options]
+
    Wazuh wodle for monitoring Google Cloud
-   
-   optional arguments:
+
+   options:
      -h, --help            show this help message and exit
      -T INTEGRATION_TYPE, --integration_type INTEGRATION_TYPE
                            Supported integration types: ('pubsub', 'access_logs')

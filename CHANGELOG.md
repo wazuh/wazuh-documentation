@@ -59,6 +59,9 @@ All notable changes to this project will be documented in this file.
 - Replaced the `admin` user with the dedicated `wazuh-manager` user in the Wazuh indexer connector credential examples, and standardized the indexer connector certificate name to `indexer-connector.pem`/`indexer-connector-key.pem` across the *Installation guide*, *Deployment options*, and *User manual* documentation, also correcting the certificate ownership and permissions in the *Installation guide*'s certificate deployment step so the Wazuh manager can read them after dropping privileges. ([#10063](https://github.com/wazuh/wazuh-documentation/pull/10063))
 - Updated the *Using Wazuh for PCI DSS compliance* documentation in *Regulatory compliance* to Wazuh 5.0. ([#10066](https://github.com/wazuh/wazuh-documentation/pull/10066))
 - Updated the *Getting started* documentation to Wazuh 5.0, covering the dashboard screenshot gallery and the *Architecture* section's component communication and required ports. ([#10069](https://github.com/wazuh/wazuh-documentation/pull/10069)) ([#10073](https://github.com/wazuh/wazuh-documentation/pull/10073))
+- Updated the *Using Wazuh for HIPAA compliance* documentation in *Regulatory compliance* to Wazuh 5.0. ([#10083](https://github.com/wazuh/wazuh-documentation/pull/10083))
+- Updated the *Monitoring Google Cloud* documentation in *Cloud security* to Wazuh 5.0, covering the Wazuh agent-only prerequisites, enabling the integration from the Wazuh dashboard, a consolidated log sink export flow, and configuring the Wazuh modules for Pub/Sub and Storage buckets. ([#10092](https://github.com/wazuh/wazuh-documentation/pull/10092))
+- Updated the *Wazuh indexer* documentation in *User manual* to Wazuh 5.0, covering data streams and stateful indices, the Wazuh Common Schema, Sigma rules, index templates, the Setup, Content Manager, Reporting, Security Analytics, Notifications, and Alerting modules, indexer tuning, migrating indices, backup and restore, and role-based access control. ([#10093](https://github.com/wazuh/wazuh-documentation/pull/10093))
 
 ### Removed
 
@@ -91,6 +94,14 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Added guidance about matching the Wazuh manager version to the existing cluster nodes in the *Adding new Wazuh server nodes* documentation. ([#10007](https://github.com/wazuh/wazuh-documentation/pull/10007))
 - **Post-release**: Fixed a duplicate heading in the *Architecture* documentation's component communication section, separating the Wazuh dashboard's connections to the Wazuh server and Wazuh indexer. ([#10038](https://github.com/wazuh/wazuh-documentation/pull/10038))
 - **Post-release**: Clarified the LDAPS connection success step and updated its screenshot in the *Active Directory and LDAP integration* documentation. ([#10039](https://github.com/wazuh/wazuh-documentation/pull/10039))
+- **Post-release**: Fixed missing or non-descriptive image alt text in the *Installation guide*, *Deployment options*, *Quickstart*, *Proof of concept guide*, *Integrations guide*, *Cloud security*, *Upgrade guide*, and *Active Response* documentation. ([#10057](https://github.com/wazuh/wazuh-documentation/pull/10057)) ([#10081](https://github.com/wazuh/wazuh-documentation/pull/10081)) ([#10082](https://github.com/wazuh/wazuh-documentation/pull/10082)) ([#10089](https://github.com/wazuh/wazuh-documentation/pull/10089))
+- **Post-release**: Fixed the heading hierarchy in the *Using Wazuh for TSC compliance* documentation by converting two bolded subtopics into real H2 sections. ([#10060](https://github.com/wazuh/wazuh-documentation/pull/10060))
+- **Post-release**: Fixed third-party brand-name casing inconsistencies (CloudTrail, VirusTotal, PyInstaller) in the *Proof of concept guide* documentation. ([#10087](https://github.com/wazuh/wazuh-documentation/pull/10087))
+- **Post-release**: Fixed a stray, garbled label fragment left in the *GDPR* compliance documentation's page titles, which also affected the sitewide sidebar navigation. ([#10090](https://github.com/wazuh/wazuh-documentation/pull/10090))
+- **Post-release**: Fixed the shared site footer's *Getting started* and *Installation guide* links, which pointed at the wrong domain. ([#10090](https://github.com/wazuh/wazuh-documentation/pull/10090))
+- **Post-release**: Corrected the `<certificate>` configuration option's stated default value in the *Indexer integration* documentation. ([#10090](https://github.com/wazuh/wazuh-documentation/pull/10090))
+- **Post-release**: Updated the *User administration* documentation to name the Google identity provider integration by its full product name, Google Workspace. ([#10090](https://github.com/wazuh/wazuh-documentation/pull/10090))
+- **Post-release**: Disambiguated duplicated *Attack emulation* and *Visualize the alerts* headings in the *Proof of concept guide*'s YARA integration and VirusTotal malware-detection pages by naming the target OS in each. ([#10091](https://github.com/wazuh/wazuh-documentation/pull/10091))
 
 ## [v4.14.6]
 
@@ -517,6 +528,10 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Increased note and code block indentation. ([8213](https://github.com/wazuh/wazuh-documentation/pull/8213))
 - **Post-release**: Fixed script argument in dashboard package generation command. ([8265](https://github.com/wazuh/wazuh-documentation/pull/8265))
 - **Post-release**: Fixed OpenSearch Dashboards version reference. ([8265](https://github.com/wazuh/wazuh-documentation/pull/8265))
+
+## [v4.10.5]
+
+- Support for Wazuh 4.10.5
 
 ## [v4.10.4]
 

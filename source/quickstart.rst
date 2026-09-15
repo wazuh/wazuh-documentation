@@ -96,6 +96,7 @@ Instructions on how to deploy the Wazuh agent can be found in the Wazuh web user
 
 .. image:: /images/installation/linux.png
       :align: center
+      :alt: Tux, the Linux penguin mascot logo
 
 .. raw:: html
 
@@ -107,6 +108,7 @@ Instructions on how to deploy the Wazuh agent can be found in the Wazuh web user
 
 .. image:: /images/installation/windows-logo.png
       :align: center
+      :alt: Windows logo
 
 .. raw:: html
 
@@ -118,6 +120,7 @@ Instructions on how to deploy the Wazuh agent can be found in the Wazuh web user
 
 .. image:: /images/installation/macOS-logo.png
       :align: center
+      :alt: Apple logo representing macOS
 
 .. raw:: html
 

@@ -14,9 +14,10 @@ Welcome to the Wazuh user manual. Use it as your reference library once your bas
       :maxdepth: 2
       :titlesonly:
 
-      agent/index
-      wazuh-dashboard/index
       manager/index
+      wazuh-indexer/index
+      wazuh-dashboard/index
+      agent/index
       data-analysis/index
       user-administration/index
       capabilities/index
@@ -27,7 +28,6 @@ Welcome to the Wazuh user manual. Use it as your reference library once your bas
 ..
       wazuh-server-cluster/index
       api/index
-      wazuh-indexer/index
       wazuh-indexer-cluster/index
       indexer-api/index
       ruleset/index

@@ -40,6 +40,7 @@ Follow this installation workflow:
         <p class="link-boxes-label">Install the Wazuh indexer</p>
 
 .. image:: ../images/installation/Indexer-noBG.png
+     :alt: Wazuh indexer logo
      :align: center
      :height: 61px
 
@@ -53,6 +54,7 @@ Follow this installation workflow:
         <p class="link-boxes-label">Install the Wazuh manager</p>
 
 .. image:: ../images/installation/Server-noBG.png
+     :alt: Wazuh server logo
      :align: center
      :height: 61px
 
@@ -66,6 +68,7 @@ Follow this installation workflow:
         <p class="link-boxes-label">Install the Wazuh dashboard</p>
 
 .. image:: ../images/installation/Dashboard-noBG.png
+     :alt: Wazuh dashboard logo
      :align: center
      :height: 61px
 
@@ -92,6 +95,7 @@ Select your endpoint operating system below and follow the installation steps to
         <p class="link-boxes-label">Linux</p>
 
 .. image:: /images/installation/linux.png
+      :alt: Linux penguin mascot logo
       :align: center
 
 .. raw:: html
@@ -103,6 +107,7 @@ Select your endpoint operating system below and follow the installation steps to
         <p class="link-boxes-label">Windows</p>
 
 .. image:: /images/installation/windows-logo.png
+      :alt: Windows logo
       :align: center
 
 .. raw:: html
@@ -114,6 +119,7 @@ Select your endpoint operating system below and follow the installation steps to
         <p class="link-boxes-label">macOS</p>
 
 .. image:: /images/installation/macOS-logo.png
+      :alt: macOS Apple logo
       :align: center
 
 .. raw:: html

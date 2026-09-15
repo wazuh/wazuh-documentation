@@ -97,5 +97,6 @@ You can visualize the alert data in the Wazuh dashboard. To do this, go to the *
 
 .. thumbnail:: /images/poc/unauthorized-processes-alerts.png
    :title: Unauthorized processes alerts
+   :alt: Wazuh dashboard Threat Hunting events showing a netcat listening alert on the Ubuntu endpoint
    :align: center
    :width: 80%
