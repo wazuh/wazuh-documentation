@@ -3,8 +3,8 @@
 .. meta::
   :description: Check out this section to learn more about how to use Wazuh for GDPR IV (The General Data Protection Regulation of the European Union). 
   
-GDPR IV, Controller and processor <gdpr_IV>
-===========================================
+GDPR IV, Controller and processor
+=================================
 
 In this chapter, the GDPR sets out requirements for managing, controlling, and processing personal data.
 
