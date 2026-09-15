@@ -115,6 +115,7 @@ You can visualize the alert data in the Wazuh dashboard. To do this, go to **Doc
 
    .. thumbnail:: /images/poc/docker-alerts.png
       :title: Visualize Docker alerts
+      :alt: Wazuh dashboard Docker module Events view showing a histogram and table of Docker container alerts
       :align: center
       :width: 80%
 
