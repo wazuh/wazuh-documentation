@@ -6,12 +6,15 @@
 Prerequisites
 =============
 
-You can configure either the Wazuh server or the agent to collect logs from Google Cloud Pub/Sub or storage buckets. You need to install dependencies and configure Google Cloud credentials on the endpoint you want to perform the integration to access the supported services. Take a look at the following sections:
+Before configuring the Google Cloud integration, install the required dependencies and create credentials that allow Wazuh to access the supported Google Cloud services.
+
+Complete the following prerequisites:
 
 .. toctree::
    :maxdepth: 1
-  
+
+   requirements
    dependencies
-   credentials
    gcloud-python-script
-   visualizing-events
+   enabling-integration
+   credentials

@@ -1,49 +1,73 @@
 .. Copyright (C) 2015, Wazuh, Inc.
+
 .. meta::
-  :description: Install Python and Pip on the endpoint you are performing the integration to monitor Google Cloud.
+   :description: Install Python and Pip on the Wazuh agent endpoint you are performing the integration to monitor Google Cloud.
 
 Installing dependencies
 =======================
 
-.. |service| replace:: GCP
-
-.. include:: /_templates/cloud/notes.rst
+The Google Cloud integration runs on a Wazuh agent. Install the required dependencies on the monitored endpoint before configuring the integration.
 
 Python
 ------
 
-.. |py_cloud_cont_min| replace:: |PYTHON_CLOUD_CONTAINERS_MIN|
-.. |py_cloud_cont_max| replace:: |PYTHON_CLOUD_CONTAINERS_MAX|
+The Google Cloud integration is compatible with Python 3.8 and later. This documentation uses Python 3.11 or later for the configuration examples.
 
-.. include:: /_templates/cloud/python_installation.rst
+If Python 3 is not installed on the monitored endpoint, use the following commands to install it.
 
-.. |module_script| replace:: ``/var/ossec/wodles/gcloud/gcloud``
+.. note::
 
-.. include:: /_templates/cloud/pip_installation.rst
-
-Google Cloud pip dependencies
------------------------------
-
-`google-cloud-pubsub <https://pypi.org/project/google-cloud-pubsub/>`__ and `google-cloud-storage <https://pypi.org/project/google-cloud-storage/>`__ are the official Python libraries supported by Google to manage Google Cloud Pub/Sub and Cloud Storage resources.
-
-Google Cloud Pub/Sub API is used to pull the log messages from the Pub/Sub queue, while Google Cloud Storage API is used to store and retrieve data.
-
-Run the following command to install the dependencies depending on your Python version:
+   Python 3.8 and 3.9 have reached end of support. Python 3.10 reaches end of support in October 2026. We recommend using Python 3.11 or later.
 
 .. tabs::
 
-   .. group-tab:: Python 3.8–3.10
+   .. group-tab:: APT
 
       .. code-block:: console
 
-         $ sudo pip3 install google-cloud-core==1.7.1 google-cloud-pubsub==2.7.1 google-cloud-storage==1.39.0 pytz==2020.1 setuptools==68.0.0
+         # apt-get update && apt-get install python3
 
-   .. group-tab:: Python 3.11–3.13
+   .. group-tab:: Yum
 
       .. code-block:: console
 
-         $ sudo pip3 install --break-system-packages google-cloud-core==1.7.1 google-cloud-pubsub==2.7.1 google-cloud-storage==1.39.0 pytz==2020.1 setuptools==68.0.0
+         # yum update && yum install python3
 
-      .. note::
+Install the required Python modules using Pip. Most UNIX distributions provide Pip through their package repositories. If Pip is not installed on the monitored endpoint, use the following command to install it.
 
-         If you're using a virtual environment, remove the ``--break-system-packages`` parameter from the command above.
+.. tabs::
+
+   .. group-tab:: APT
+
+      .. code-block:: console
+
+         # apt-get update && apt-get install python3-pip
+
+   .. group-tab:: Yum
+
+      .. code-block:: console
+
+         # yum update && yum install python3-pip
+
+Run the command below to check your pip version.
+
+.. code-block:: console
+
+   # pip3 --version
+
+Google Cloud pip dependencies
+------------------------------
+
+The `google-cloud-pubsub <https://pypi.org/project/google-cloud-pubsub/>`__ and `google-cloud-storage <https://pypi.org/project/google-cloud-storage/>`__ packages provide Python clients for Google Cloud Pub/Sub and Cloud Storage.
+
+The integration uses the Pub/Sub client to retrieve messages from configured subscriptions and the Cloud Storage client to retrieve data from configured buckets.
+
+Run the following command to install the required dependencies for Python 3.11–3.13:
+
+.. code-block:: console
+
+   # sudo pip3 install --break-system-packages google-cloud-pubsub==2.7.1 "google-cloud-storage>=2.14.0" pytz==2020.1 setuptools==68.0.0
+
+.. note::
+
+   When using a virtual environment, remove the ``--break-system-packages`` option from the command.

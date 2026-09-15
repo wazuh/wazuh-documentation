@@ -1,0 +1,45 @@
+.. Copyright (C) 2015, Wazuh, Inc.
+
+.. meta::
+   :description: Wazuh helps meet the HIPAA § 164.312(b) audit controls requirement by collecting and analyzing logs from systems that contain or use electronic protected health information.
+
+HIPAA § 164.312(b) - Audit controls
+======================================
+
+The HIPAA § 164.312(b) requirement states, "*A covered entity or business associate must, in accordance with § 164.306, implement hardware, software, and/or procedural mechanisms that record and examine activity in information systems that contain or use electronic protected health information.*"
+
+This requirement mandates logging activity on systems containing health data, including authentication events, failures, and file read, write, or modification actions.
+
+Wazuh helps meet this requirement by providing capabilities to record and examine activity in information systems that contain or use electronic protected health information (ePHI). An example is log data analysis. The Wazuh Logcollector module collects events from monitored endpoints and applications, including systems that store or process ePHI. Wazuh agents forward these events to the Wazuh manager, where the normalization engine processes them. The Wazuh manager then sends the normalized data to the Wazuh indexer for rule matching and indexing. This enables organizations to analyze activity involving systems that contain or use ePHI and support the review of audit information. See the :doc:`data analysis </user-manual/data-analysis/index>` section for more information.
+
+Use case: Collecting and analyzing logs across multiple endpoints
+---------------------------------------------------------------------
+
+The use case below shows how log data analysis can detect specific events on monitored endpoints.
+
+Wazuh dashboard
+^^^^^^^^^^^^^^^^
+
+#. Click **Threat Hunting** from the Wazuh dashboard:
+
+   .. thumbnail:: /images/compliance/hipaa/threat-hunting-overview-card.png
+      :title: Wazuh Overview dashboard - Threat Hunting
+      :alt: Wazuh Overview dashboard - Threat Hunting
+      :align: center
+      :width: 80%
+
+   The image below shows the Wazuh **Threat Hunting** dashboard. The **Threat Hunting** dashboard provides an overview of security findings, agent activity, integrations, detection rules, and associated MITRE ATT&CK techniques.
+
+   .. thumbnail:: /images/compliance/hipaa/threat-hunting-dashboard.png
+      :title: Threat Hunting dashboard
+      :alt: Threat Hunting dashboard
+      :align: center
+      :width: 80%
+
+#. Navigate to the **Findings** section and click on a finding to view details. In this example, the image shows the details of an authentication finding.
+
+   .. thumbnail:: /images/compliance/hipaa/threat-hunting-authentication-finding-details.png
+      :title: Threat Hunting finding details - authentication
+      :alt: Threat Hunting finding details - authentication
+      :align: center
+      :width: 80%
