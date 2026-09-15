@@ -145,5 +145,6 @@ You can visualize the alert data in the Wazuh dashboard. To do this, go to the *
 
    .. thumbnail:: /images/poc/audit-commands-alerts.png
       :title: Suspicious binary alerts
+      :alt: Wazuh dashboard Threat Hunting events showing alerts for the rule Audit Highly Suspicious Command executed /usr/bin/nc
       :align: center
       :width: 80%
