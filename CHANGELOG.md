@@ -170,6 +170,10 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Fixed script argument in dashboard package generation command. ([8265](https://github.com/wazuh/wazuh-documentation/pull/8265))
 - **Post-release**: Fixed OpenSearch Dashboards version reference. ([8265](https://github.com/wazuh/wazuh-documentation/pull/8265))
 
+## [v4.10.5]
+
+- Support for Wazuh 4.10.5
+
 ## [v4.10.4]
 
 - Support for Wazuh 4.10.4
