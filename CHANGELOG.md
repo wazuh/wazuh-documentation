@@ -59,6 +59,9 @@ All notable changes to this project will be documented in this file.
 - Updated the *Monitoring Google Cloud* documentation in *Cloud security* to Wazuh 5.0, covering the Wazuh agent-only prerequisites, enabling the integration from the Wazuh dashboard, a consolidated log sink export flow, and configuring the Wazuh modules for Pub/Sub and Storage buckets. ([#10092](https://github.com/wazuh/wazuh-documentation/pull/10092))
 - Updated the *Wazuh indexer* documentation in *User manual* to Wazuh 5.0, covering data streams and stateful indices, the Wazuh Common Schema, Sigma rules, index templates, the Setup, Content Manager, Reporting, Security Analytics, Notifications, and Alerting modules, indexer tuning, migrating indices, backup and restore, and role-based access control. ([#10093](https://github.com/wazuh/wazuh-documentation/pull/10093))
 
+### Fixed
+- Corrected instances of the outdated API password minimum (8 characters) to reflect the new minimum of 12 characters in 5.0.0 ([#9970](https://github.com/wazuh/wazuh-documentation/pull/9970))
+
 ### Removed
 
 - Removed all `agent-auth` references as this tool is now deprecated. ([#8718](https://github.com/wazuh/wazuh/pull/8718))
