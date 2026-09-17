@@ -17,6 +17,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Corrected the `<certificate>` configuration option's stated default value in the *Indexer integration* documentation. ([#10090](https://github.com/wazuh/wazuh-documentation/pull/10090))
 - **Post-release**: Updated the *User administration* documentation to name the Google identity provider integration by its full product name, Google Workspace. ([#10090](https://github.com/wazuh/wazuh-documentation/pull/10090))
 - **Post-release**: Disambiguated duplicated *Attack emulation* and *Visualize the alerts* headings in the *Proof of concept guide*'s YARA integration and VirusTotal malware-detection pages by naming the target OS in each. ([#10091](https://github.com/wazuh/wazuh-documentation/pull/10091))
+- **Post-release**: Fixed links pointing to the `current` documentation version instead of the version being read, in the *Cloud service*, *PCI DSS compliance*, and *System inventory* documentation. ([#10126](https://github.com/wazuh/wazuh-documentation/pull/10126))
 
 ## [v4.14.6]
 
