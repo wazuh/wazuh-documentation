@@ -15,27 +15,10 @@ Generally, this file is reserved for debugging issues and for troubleshooting. *
 .. note::
     This file will be overwritten during upgrades.  In order to maintain custom changes, you must use the ``/var/ossec/etc/local_internal_options.conf`` file.
 
-- `Agent`_
-- `Analysisd`_
-- `Authd`_
-- `DBD`_
-- `Execd`_
-- `Integrator`_
-- `Logcollector`_
-- `Maild`_
-- `Monitord`_
-- `Remoted`_
-- `Syscheck`_
-- `Rootcheck`_
-- `Security Configuration Assessment`_
-- `Wazuh`_
-- `Wazuh Clusterd`_
-- `Wazuh Database`_
-- `Wazuh Modules`_
-- `Wazuh Command`_
-- `Wazuh-db`_
-- `Wazuh-download`_
-- `Windows`_
+.. contents::
+   :local:
+   :depth: 1
+   :backlinks: none
 
 .. _internal_options_agent:
 
