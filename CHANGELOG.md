@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Obscured the sample private key values in the GCP credentials documentation. ([#9971](https://github.com/wazuh/wazuh-documentation/pull/9971))
 - **Post-release**: Fixed the *User manual* index page so it shows the full page list for the *Wazuh dashboard* and *Data analysis* subsections. ([#9992](https://github.com/wazuh/wazuh-documentation/pull/9992))
 - **Post-release**: Fixed the *Deployment with Puppet* index page so the *Wazuh Puppet module* reference pages are listed. ([#9992](https://github.com/wazuh/wazuh-documentation/pull/9992))
-- **Post-release**: Added guidance about matching the Wazuh manager version to the existing cluster nodes in the *Adding new Wazuh server nodes* documentation. ([#10007](https://github.com/wazuh/wazuh-documentation/pull/10007))
+- **Post-release**: Added guidance about matching the Wazuh manager version to the existing cluster nodes in the *Adding new Wazuh server nodes* documentation. ([#10007](https://github.com/wazuh/wazuh-documentation/pull/10007)) ([#10130](https://github.com/wazuh/wazuh-documentation/pull/10130))
 - **Post-release**: Fixed a duplicate heading in the *Architecture* documentation's component communication section, separating the Wazuh dashboard's connections to the Wazuh server and Wazuh indexer. ([#10038](https://github.com/wazuh/wazuh-documentation/pull/10038))
 - **Post-release**: Clarified the LDAPS connection success step and updated its screenshot in the *Active Directory and LDAP integration* documentation. ([#10039](https://github.com/wazuh/wazuh-documentation/pull/10039))
 - **Post-release**: Fixed missing or non-descriptive image alt text in the *Installation guide*, *Deployment options*, *Quickstart*, *Proof of concept guide*, *Integrations guide*, *Cloud security*, *Upgrade guide*, and *Active Response* documentation. ([#10057](https://github.com/wazuh/wazuh-documentation/pull/10057)) ([#10081](https://github.com/wazuh/wazuh-documentation/pull/10081)) ([#10082](https://github.com/wazuh/wazuh-documentation/pull/10082)) ([#10089](https://github.com/wazuh/wazuh-documentation/pull/10089))
@@ -17,6 +17,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Corrected the `<certificate>` configuration option's stated default value in the *Indexer integration* documentation. ([#10090](https://github.com/wazuh/wazuh-documentation/pull/10090))
 - **Post-release**: Updated the *User administration* documentation to name the Google identity provider integration by its full product name, Google Workspace. ([#10090](https://github.com/wazuh/wazuh-documentation/pull/10090))
 - **Post-release**: Disambiguated duplicated *Attack emulation* and *Visualize the alerts* headings in the *Proof of concept guide*'s YARA integration and VirusTotal malware-detection pages by naming the target OS in each. ([#10091](https://github.com/wazuh/wazuh-documentation/pull/10091))
+- **Post-release**: Fixed typos, subject/verb agreement, and formatting issues in the *Wazuh manager*, *Wazuh dashboard*, *Wazuh indexer*, and *Wazuh server cluster* documentation. ([#10130](https://github.com/wazuh/wazuh-documentation/pull/10130))
 
 ## [v4.14.6]
 
