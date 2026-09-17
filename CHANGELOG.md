@@ -19,6 +19,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Disambiguated duplicated *Attack emulation* and *Visualize the alerts* headings in the *Proof of concept guide*'s YARA integration and VirusTotal malware-detection pages by naming the target OS in each. ([#10091](https://github.com/wazuh/wazuh-documentation/pull/10091))
 - **Post-release**: Fixed links pointing to the `current` documentation version instead of the version being read, in the *Cloud service*, *PCI DSS compliance*, and *System inventory* documentation. ([#10126](https://github.com/wazuh/wazuh-documentation/pull/10126))
 - **Post-release**: Fixed typos and wrong `code-block` language tags in the *Capabilities* documentation's command monitoring, file integrity, log data collection, and malware detection use cases. ([#10127](https://github.com/wazuh/wazuh-documentation/pull/10127))
+- **Post-release**: Fixed a malformed `code-block` directive that silently dropped its content in the *Generate agent package* documentation. ([#10128](https://github.com/wazuh/wazuh-documentation/pull/10128))
 
 ## [v4.14.6]
 
