@@ -18,7 +18,7 @@ Perform the following steps to forward logs using rsyslog to the Wazuh server.
 
 #. Edit the ``/etc/rsyslog.conf`` file and add the following configuration:
 
-   .. code-block:: xml
+   .. code-block:: none
 
       *.info@@<WAZUH_SERVER_IP_ADDRESS>:514
 
@@ -65,13 +65,13 @@ Perform the following on the CentOS 7 endpoint to test the configuration.
 
 #. Add the user ``Stephen``:
 
-   .. code-block:: xml
+   .. code-block:: console
 
-      # useradd Stephen 
+      # useradd Stephen
 
 #. Delete the same user ``Stephen``:
 
-   .. code-block:: xml
+   .. code-block:: console
 
       # userdel Stephen
 
@@ -163,7 +163,7 @@ Perform the following steps to enable PowerShell logging on a Windows endpoint a
 
 #. Navigate to **Computer Configuration > Administrative Templates > Windows Components > Windows PowerShell > Turn on PowerShell Script Block Logging**.
 
-   .. note:: Turning on **PowerShell Script Block Logging** will log a lot of PowerShell events in the ``Microsoft-Winndows-PowerShell/Operational`` event channel.
+   .. note:: Turning on **PowerShell Script Block Logging** will log a lot of PowerShell events in the ``Microsoft-Windows-PowerShell/Operational`` event channel.
 
 #. Select **Enabled**, and then click **OK**.
 
