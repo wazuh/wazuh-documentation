@@ -365,7 +365,7 @@ Then, send the request to the logtest endpoint:
 
 The above result shows that rule ID ``5710`` matches the event log.
 
-The ``messages`` field shows the session token ``95375d4c``. You must add this token to the next requests to keep the session loaded, including its event history, and rules and decoders. If you don't add the token field to the next request, a new session initializes, reloading the rules and decoders.
+The ``messages`` field shows the session token ``35604a22``. You must add this token to the next requests to keep the session loaded, including its event history, and rules and decoders. If you don't add the token field to the next request, a new session initializes, reloading the rules and decoders.
 
 Repeating the request with the same session
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

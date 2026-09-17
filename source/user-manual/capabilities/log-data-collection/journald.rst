@@ -496,7 +496,7 @@ In this section, we proceed to install Docker on the monitored Ubuntu endpoint a
    Where:
 
    -  ``--log-driver`` is set to ``journald`` to forward Docker logs to the journald service.
-   -  ``--name`` defines the Docker container name as ``nginx_werbserver``.
+   -  ``--name`` defines the Docker container name as ``nginx_webserver``.
 
 #. Verify if the journald is configured for the NGINX Docker image:
 
