@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: The Wazuh indexer is a real-time, full-text search and analytics engine for security data. Find more information in this section of the documntation.
+   :description: The Wazuh indexer is a real-time, full-text search and analytics engine for security data. Find more information in this section of the documentation.
 
 Wazuh indexer
 =============
