@@ -731,9 +731,9 @@ This section walks you through downloading the Wazuh source code, compiling it, 
                .. code-block:: console
 
                   # for file in $(find . -name "*.sh");do
-                  # sed 's:#!/bin/sh:#!/usr/xpg4/bin/sh:g' $file > $file.new
-                  # mv $file.new $file && chmod +x $file
-                  # done
+                  sed 's:#!/bin/sh:#!/usr/xpg4/bin/sh:g' $file > $file.new
+                  mv $file.new $file && chmod +x $file
+                  done
 
             #. If you have previously compiled for another platform, you must clean the build using the   Makefile in ``src/``:
 
