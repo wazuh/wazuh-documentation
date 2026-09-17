@@ -45,7 +45,7 @@ Perform the following steps on the Wazuh server.
         <localfile>
           <log_format>command</log_format>
           <command>reg QUERY HKLM\SYSTEM\CurrentControlSet\Enum\USBSTOR</command>
-          <alias>check_usb_connetivity</alias>
+          <alias>check_usb_connectivity</alias>
         </localfile>
       </agent_config>
 
@@ -55,7 +55,7 @@ Perform the following steps on the Wazuh server.
 
    - The value ``reg QUERY HKLM\SYSTEM\CurrentControlSet\Enum\USBSTOR`` of the ``<command>`` tag is the command the Logcollector module executes to know if a USB device is attached to the endpoint.
 
-   - The value ``check_usb_connetivity`` of the ``<alias>`` tag is a string that represents the ``reg QUERY HKLM\SYSTEM\CurrentControlSet\Enum\USBSTOR`` command for better identification in creating rules.   
+   - The value ``check_usb_connectivity`` of the ``<alias>`` tag is a string that represents the ``reg QUERY HKLM\SYSTEM\CurrentControlSet\Enum\USBSTOR`` command for better identification in creating rules.   
 
 #. Add the following rules to the ``/var/ossec/etc/rules/local_rules.xml`` file on the Wazuh server:
 
@@ -64,7 +64,7 @@ Perform the following steps on the Wazuh server.
       <group name="detect_usb_storage,">
         <rule id="100016" level="7">
           <if_sid>530</if_sid>
-          <match>^ossec: output: 'check_usb_connetivity':</match>
+          <match>^ossec: output: 'check_usb_connectivity':</match>
           <description>New USB device connected</description>
         </rule>
       </group>

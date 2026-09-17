@@ -126,10 +126,10 @@ Wazuh server
       <decoder name="unused-memory">
         <prematch>^MemFree: </prematch>
         <regex offset="after_prematch">\t*(\S+)\s(\S+)</regex>
-        <order>free_memory, unit_of_measurment</order>
+        <order>free_memory, unit_of_measurement</order>
       </decoder>
 
-#. Run the ``/var/ossec/bin/wazuh-logtest`` program and paste the value of the ``full_log`` field in the log again. This time you can see that the log is properly decoded by the decoder ``unused-memory`` and the fields ``free_memory`` and ``unit_of_measurment`` are extracted accordingly:
+#. Run the ``/var/ossec/bin/wazuh-logtest`` program and paste the value of the ``full_log`` field in the log again. This time you can see that the log is properly decoded by the decoder ``unused-memory`` and the fields ``free_memory`` and ``unit_of_measurement`` are extracted accordingly:
 
    .. code-block:: console
       :emphasize-lines: 11,12,13
@@ -146,7 +146,7 @@ Wazuh server
       **Phase 2: Completed decoding.
       	name: 'unused-memory'
       	free_memory: '90008'
-      	unit_of_measurment: 'kB'
+      	unit_of_measurement: 'kB'
 
 #. The decoded output of the command needs to trigger a rule to generate an alert. Add the custom rule below to the ``/var/ossec/etc/rules/local_rules.xml`` file to generate an alert when the Command module executes the ``grep MemFree /proc/meminfo`` command. The rule uses the ``<decoded_as>`` tag to reference the ``unused-memory`` decoder created above:
 
@@ -155,7 +155,7 @@ Wazuh server
       <group name="unused_memory">
         <rule id="100003" level="5">
           <decoded_as>unused-memory</decoded_as>
-          <description>The system’s free memory is $(free_memory) $(unit_of_measurment).</description>
+          <description>The system’s free memory is $(free_memory) $(unit_of_measurement).</description>
         </rule>
       </group>
 
@@ -202,7 +202,7 @@ Wazuh server
           },
           "data": {
               "free_memory": "88456",
-              "unit_of_measurment": "kB"
+              "unit_of_measurement": "kB"
           },
           "location": "command_unused_memory"
       }

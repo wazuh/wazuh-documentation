@@ -130,7 +130,7 @@ Wazuh leverages Windows environment variables like ``%WINDIR%`` and ``%ProgramFi
 
 #. Restart the Wazuh agent via PowerShell with administrator privileges to apply the configuration change:    
 
-   .. code-block:: xml
+   .. code-block:: powershell
 
       > Restart-Service -Name wazuh
 
