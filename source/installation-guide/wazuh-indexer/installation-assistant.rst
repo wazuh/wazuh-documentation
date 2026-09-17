@@ -151,6 +151,8 @@ Verify that the Wazuh indexer installed correctly and the Wazuh indexer cluster 
         },
         "tagline" : "The OpenSearch Project: https://opensearch.org/"
       }
+      .. note::
+      The cluster_name value is ``wazuh-cluster`` for all-in-one deployments and ``wazuh-indexer-cluster`` for distributed deployments installed using the installation assistant.
 
 #. Run the following command to check if the cluster is working correctly. Replace ``<WAZUH_INDEXER_IP_ADDRESS>`` with the IP address of the Wazuh indexer and enter the password for the Wazuh indexer ``admin`` user when it prompts for password:
 
