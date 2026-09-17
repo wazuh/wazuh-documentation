@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Obscured the sample private key values in the GCP credentials documentation. ([#9971](https://github.com/wazuh/wazuh-documentation/pull/9971))
 - **Post-release**: Fixed the *User manual* index page so it shows the full page list for the *Wazuh dashboard* and *Data analysis* subsections. ([#9992](https://github.com/wazuh/wazuh-documentation/pull/9992))
 - **Post-release**: Fixed the *Deployment with Puppet* index page so the *Wazuh Puppet module* reference pages are listed. ([#9992](https://github.com/wazuh/wazuh-documentation/pull/9992))
-- **Post-release**: Added guidance about matching the Wazuh manager version to the existing cluster nodes in the *Adding new Wazuh server nodes* documentation. ([#10007](https://github.com/wazuh/wazuh-documentation/pull/10007))
+- **Post-release**: Added guidance about matching the Wazuh manager version to the existing cluster nodes in the *Adding new Wazuh server nodes* documentation. ([#10007](https://github.com/wazuh/wazuh-documentation/pull/10007)) ([#10130](https://github.com/wazuh/wazuh-documentation/pull/10130))
 - **Post-release**: Fixed a duplicate heading in the *Architecture* documentation's component communication section, separating the Wazuh dashboard's connections to the Wazuh server and Wazuh indexer. ([#10038](https://github.com/wazuh/wazuh-documentation/pull/10038))
 - **Post-release**: Clarified the LDAPS connection success step and updated its screenshot in the *Active Directory and LDAP integration* documentation. ([#10039](https://github.com/wazuh/wazuh-documentation/pull/10039))
 - **Post-release**: Fixed missing or non-descriptive image alt text in the *Installation guide*, *Deployment options*, *Quickstart*, *Proof of concept guide*, *Integrations guide*, *Cloud security*, *Upgrade guide*, and *Active Response* documentation. ([#10057](https://github.com/wazuh/wazuh-documentation/pull/10057)) ([#10081](https://github.com/wazuh/wazuh-documentation/pull/10081)) ([#10082](https://github.com/wazuh/wazuh-documentation/pull/10082)) ([#10089](https://github.com/wazuh/wazuh-documentation/pull/10089))
@@ -21,6 +21,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Fixed typos and wrong `code-block` language tags in the *Capabilities* documentation's command monitoring, file integrity, log data collection, and malware detection use cases. ([#10127](https://github.com/wazuh/wazuh-documentation/pull/10127))
 - **Post-release**: Fixed a malformed `code-block` directive that silently dropped its content in the *Generate agent package* documentation. ([#10128](https://github.com/wazuh/wazuh-documentation/pull/10128))
 - **Post-release**: Fixed reference-page formatting and completeness issues and worked-example value mismatches across the *Reference*, *Indexer API*, *Ruleset*, and *User manual* documentation. ([#10129](https://github.com/wazuh/wazuh-documentation/pull/10129))
+- **Post-release**: Fixed typos, subject/verb agreement, and formatting issues in the *Wazuh manager*, *Wazuh dashboard*, *Wazuh indexer*, and *Wazuh server cluster* documentation. ([#10130](https://github.com/wazuh/wazuh-documentation/pull/10130))
 
 ## [v4.14.6]
 

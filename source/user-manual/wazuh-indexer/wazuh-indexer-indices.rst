@@ -694,7 +694,7 @@ To find information relating to browser extensions on a monitored endpoint, navi
 The wazuh-states-inventory-services-* indices
 ---------------------------------------------
 
-The ``wazuh-states-inventory-services-*`` indices records information about active and inactive system services. Each entry includes details such as service name, status, startup type, and associated executable paths.
+The ``wazuh-states-inventory-services-*`` indices record information about active and inactive system services. Each entry includes details such as service name, status, startup type, and associated executable paths.
 
 By maintaining this inventory, administrators can monitor for unauthorized or misconfigured services, detect persistence mechanisms used by malware, and validate service configurations during audits or incident investigations.
 
@@ -728,7 +728,7 @@ To find information relating to user groups on a monitored endpoint, navigate to
 The wazuh-states-inventory-users-* indices
 ------------------------------------------
 
-The ``wazuh-states-inventory-users-*`` indices catalogs user accounts found on monitored endpoints, including usernames, group assignment, privilege levels, and login status.
+The ``wazuh-states-inventory-users-*`` indices catalog user accounts found on monitored endpoints, including usernames, group assignment, privilege levels, and login status.
 
 It supports identity and access management by helping detect unauthorized user creation, track administrative accounts, and correlate user activity with security alerts. This visibility enhances auditing, insider threat detection, and compliance reporting.
 
