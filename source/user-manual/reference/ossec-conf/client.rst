@@ -105,7 +105,7 @@ The number of connection retries.
 +--------------------+--------------------+
 | **Default value**  | 5                  |
 +--------------------+--------------------+
-| **Allowed values** | 1 to 1.000.000.000 |
+| **Allowed values** | 1 to 1,000,000,000 |
 +--------------------+--------------------+
 
 .. _server_retry_interval:
@@ -118,7 +118,7 @@ Time interval between connection attempts (seconds).
 +--------------------+--------------------+
 | **Default value**  | 10                 |
 +--------------------+--------------------+
-| **Allowed values** | 1 to 1.000.000.000 |
+| **Allowed values** | 1 to 1,000,000,000 |
 +--------------------+--------------------+
 
 Options
