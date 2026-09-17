@@ -131,6 +131,8 @@ Verify that the Wazuh indexer installed correctly and the Wazuh indexer cluster 
 
       # curl -k -u admin https://<WAZUH_INDEXER_IP_ADDRESS>:9200
 
+   .. note:: The cluster_name value is ``wazuh-cluster`` for all-in-one deployments and ``wazuh-indexer-cluster`` for distributed deployments installed using the installation assistant.
+
    .. code-block:: none
       :class: output
 
