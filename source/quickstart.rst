@@ -34,9 +34,9 @@ Following this quickstart implies deploying the Wazuh manager, the Wazuh indexer
   +=============+=========+=========+=======================+
   | **1-25**    | 4 vCPU  | 8 GiB   | 50 GB                 |
   +-------------+---------+---------+-----------------------+
-  | **25-50**   | 8 vCPU  | 16 GiB  | 100 GB                |
+  | **26-50**   | 8 vCPU  | 16 GiB  | 100 GB                |
   +-------------+---------+---------+-----------------------+
-  | **50-100**  | 8 vCPU  | 16 GiB  | 200 GB                |
+  | **51-100**  | 8 vCPU  | 16 GiB  | 200 GB                |
   +-------------+---------+---------+-----------------------+
 
 
@@ -78,7 +78,15 @@ Installing Wazuh
 
 When you access the Wazuh dashboard for the first time, the browser shows a warning message stating that a trusted authority did not issue the certificate. This is expected, and the user can either accept the certificate as an exception or configure the system to use a certificate from a trusted authority.
 
-If you want to uninstall the Wazuh central components, run the Wazuh installation assistant using the option ``-u`` or ``–-uninstall``.
+To uninstall the Wazuh central components, run the Wazuh installation assistant with the `-u` option::
+
+``sudo bash ./wazuh-install.sh -u``
+
+Alternatively, run the following command::
+
+``sudo bash ./wazuh-install.sh --uninstall``
+
+
 
 Next steps
 ----------
