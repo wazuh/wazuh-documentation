@@ -18,7 +18,7 @@ Use case description
 +---------------------+-----------------------------------------------------------------------------------------------+
 | Endpoint            | Description                                                                                   |
 +=====================+===============================================================================================+
-| Cent OS Stream 10   | The FIM module detects SSH key modification on this endpoint.                                 |
+| CentOS Stream 10    | The FIM module detects SSH key modification on this endpoint.                                 |
 +---------------------+-----------------------------------------------------------------------------------------------+
 
 Configuration
