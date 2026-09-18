@@ -23,7 +23,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Fixed reference-page formatting and completeness issues and worked-example value mismatches across the *Reference*, *Indexer API*, *Ruleset*, and *User manual* documentation. ([#10129](https://github.com/wazuh/wazuh-documentation/pull/10129))
 - **Post-release**: Fixed typos, subject/verb agreement, and formatting issues in the *Wazuh manager*, *Wazuh dashboard*, *Wazuh indexer*, and *Wazuh server cluster* documentation. ([#10130](https://github.com/wazuh/wazuh-documentation/pull/10130))
 - **Post-release**: Fixed the overlapping agent range labels in the *Quickstart* hardware requirements table and the en dash in the `--uninstall` installation assistant flag. ([#10133](https://github.com/wazuh/wazuh-documentation/pull/10133))
-- **Post-release**: Fixed inconsistent Windows service naming, a `registry_ignore` example mismatch, and inaccurate default scan-frequency wording in the *File integrity monitoring* documentation's *Windows Registry monitoring* page. ([#10134](https://github.com/wazuh/wazuh-documentation/pull/10134))
+- **Post-release**: Fixed inconsistent Windows service naming, a `registry_ignore` example mismatch, leftover file-based wording in the attribute recording section, and inaccurate default scan-frequency wording in the *File integrity monitoring* documentation's *Windows Registry monitoring* page. ([#10134](https://github.com/wazuh/wazuh-documentation/pull/10134))
 
 ## [v4.14.6]
 
