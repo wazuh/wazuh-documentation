@@ -22,6 +22,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Fixed a malformed `code-block` directive that silently dropped its content in the *Generate agent package* documentation. ([#10128](https://github.com/wazuh/wazuh-documentation/pull/10128))
 - **Post-release**: Fixed reference-page formatting and completeness issues and worked-example value mismatches across the *Reference*, *Indexer API*, *Ruleset*, and *User manual* documentation. ([#10129](https://github.com/wazuh/wazuh-documentation/pull/10129))
 - **Post-release**: Fixed typos, subject/verb agreement, and formatting issues in the *Wazuh manager*, *Wazuh dashboard*, *Wazuh indexer*, and *Wazuh server cluster* documentation. ([#10130](https://github.com/wazuh/wazuh-documentation/pull/10130))
+- **Post-release**: Fixed the overlapping agent range labels in the *Quickstart* hardware requirements table and the en dash in the `--uninstall` installation assistant flag. ([#10133](https://github.com/wazuh/wazuh-documentation/pull/10133))
 
 ## [v4.14.6]
 
