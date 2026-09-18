@@ -120,7 +120,7 @@ To configure the application permissions, go to the **API permissions** page and
 
    .. note::
 
-      An Admin account is required to Grant admin consent for Default Directory.
+      An Admin account is required to **Grant admin consent for Default Directory**.
 
 Test to retrieve content
 """""""""""""""""""""""""
