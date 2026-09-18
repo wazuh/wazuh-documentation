@@ -400,7 +400,7 @@ Expected successful response:
        "total_failed_items": 0,
        "failed_items": []
      },
-     "message": "All roles were linked to user sales-member-1",
+     "message": "All roles were linked to user alpha-member-1",
      "error": 0
    }
 

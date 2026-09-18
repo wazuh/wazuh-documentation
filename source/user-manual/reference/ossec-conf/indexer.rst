@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description:
+  :description: This section of the Wazuh documentation shows the options for forwarding inventory data to the Wazuh indexer.
 
 indexer
 =======
