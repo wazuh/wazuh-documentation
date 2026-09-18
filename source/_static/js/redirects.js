@@ -435,7 +435,17 @@ redirections.push(
   {
     'target': ['4.14=>5.0', '5.0=>4.14'],
     '4.14': '/cloud-security/azure/ms-graph-api-setup.html',
-    '5.0': '/cloud-security/azure/monitoring-ms-graph.html#configure-the-microsoft-graph-api-permissions',
+    '5.0': '/cloud-security/azure/platform-and-services/monitoring-ms-graph.html#configure-the-microsoft-graph-api-permissions',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/cloud-security/azure/monitoring-ms-graph.html',
+    '5.0': '/cloud-security/azure/platform-and-services/monitoring-ms-graph.html',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/cloud-security/azure/ms-intune-integration.html',
+    '5.0': '/cloud-security/azure/platform-and-services/ms-intune-integration.html',
   }
 );
 
@@ -445,6 +455,8 @@ removedUrls['5.0'] = [
   '/user-manual/reference/ossec-conf/client-buffer.html',
   '/user-manual/reference/ossec-conf/labels.html',
   '/cloud-security/azure/ms-graph-api-setup.html',
+  '/cloud-security/azure/monitoring-ms-graph.html',
+  '/cloud-security/azure/ms-intune-integration.html',
   '/compliance/pci-dss/dashboard.html',
   '/compliance/hipaa/visualization-and-dashboard.html',
   '/compliance/hipaa/log-data-analysis.html',

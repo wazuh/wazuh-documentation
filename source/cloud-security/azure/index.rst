@@ -15,5 +15,3 @@ Wazuh provides solutions to collect and analyze security and runtime event data 
 
    monitoring-instances
    platform-and-services
-   monitoring-ms-graph
-   ms-intune-integration
