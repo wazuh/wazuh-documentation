@@ -180,7 +180,9 @@ The Wazuh agent retrieves the event and sends it to the Wazuh manager. The event
 
 .. code-block:: none
 
-   "decoder/core-wazuh-message/0", "decoder/ms-graph/0", "decoder/azure-intune-device/0"
+   "decoder/core-wazuh-message/0",
+   "decoder/ms-graph/0",
+   "decoder/azure-intune-device/0"
 
 The ``azure-intune-device`` decoder normalizes the Microsoft Intune event into the following relevant fields:
 
