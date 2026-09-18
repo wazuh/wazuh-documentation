@@ -27,7 +27,7 @@ The Wazuh FIM module uses two databases to collect FIM event data, such as regis
   :align: center
   :width: 80%
 
-The FIM module synchronization mechanism ensures synchronization between the Wazuh agent and the Wazuh server databases. It always updates the file inventory in the Wazuh server with the data available to  the Wazuh agent. This allows for servicing FIM-related API queries regarding the Wazuh agents.
+The FIM module synchronization mechanism ensures synchronization between the Wazuh agent and the Wazuh server databases. It always updates the registry inventory in the Wazuh server with the data available to  the Wazuh agent. This allows for servicing FIM-related API queries regarding the Wazuh agents.
 
 Configuration
 -------------
