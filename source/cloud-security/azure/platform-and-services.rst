@@ -237,6 +237,7 @@ To authenticate your Microsoft Azure environment to Wazuh, store your credential
 #. Specify the authentication file in the ``/var/ossec/etc/ossec.conf`` configuration file using the ``<auth_path>`` option, regardless of the service or activity you monitor. For example:
 
    .. code-block:: xml
+      :emphasize-lines: 6, 16, 26
 
       <wodle name="azure-logs">
          <disabled>no</disabled>
