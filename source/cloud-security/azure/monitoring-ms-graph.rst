@@ -145,6 +145,7 @@ Next, set the necessary configurations to allow the Wazuh module for Microsoft G
 #. Apply the following configuration to the local configuration file ``/var/ossec/etc/ossec.conf``:
 
    .. code-block:: xml
+      :emphasize-lines: 10-12
 
       <ossec_config>
          <ms-graph>
