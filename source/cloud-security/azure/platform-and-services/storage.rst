@@ -50,6 +50,7 @@ Wazuh agent
 #. Apply the following configuration to the local configuration file ``/var/ossec/etc/ossec.conf`` of the Wazuh agent:
 
    .. code-block:: xml
+      :emphasize-lines: 7
 
       <wodle name="azure-logs">
          <disabled>no</disabled>

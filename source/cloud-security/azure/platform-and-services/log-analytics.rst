@@ -147,6 +147,7 @@ You need to authorize the Wazuh module for Azure to access your Azure Log Analyt
 #. Apply the following configuration to the local configuration file ``/var/ossec/etc/ossec.conf`` of the Wazuh agent.
 
    .. code-block:: xml
+      :emphasize-lines: 6, 7, 11
 
       <wodle name="azure-logs">
          <disabled>no</disabled>

@@ -128,7 +128,7 @@ We use the ``(client) ID`` and ``key`` of the application saved during the previ
 #. Apply the following configuration to the local configuration file ``/var/ossec/etc/ossec.conf`` of the Wazuh agent:
 
    .. code-block:: xml
-      :emphasize-lines: 12
+      :emphasize-lines: 8, 9, 12
 
       <wodle name="azure-logs">
          <disabled>no</disabled>
