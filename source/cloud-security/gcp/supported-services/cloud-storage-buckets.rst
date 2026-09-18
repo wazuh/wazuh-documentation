@@ -184,7 +184,7 @@ Where:
 
 -  ``<name>``:Contains the name of the Google Cloud Storage bucket from which logs are read.
 -  ``<credentials_file>``:Contains the path to the Google Cloud credentials file.
--  ``<only_logs_after>``: Parses logs from a specific date onwards. It must follow the `YYYY-MM-DD` format.
+-  ``<only_logs_after>``: Parses logs from a specific date onwards. It must follow the `YYYY-MMM-DD` format (for example, `2021-Jun-01`); a numeric month is not accepted.
 -  ``<remove_from_bucket>``: Sets whether the logs should be removed from the Google Cloud Storage bucket once they are read. The possible values are ``no`` and ``yes``.
 
 .. note::
