@@ -57,6 +57,7 @@ In the example below, we search for ``auditEvents``, ``managedDevices``, and ``d
 #. Edit the Wazuh agent configuration file ``/var/ossec/etc/ossec.conf`` and add the following to enable the Wazuh module for Microsoft Graph with the desired relationships:
 
    .. code-block:: xml
+      :emphasize-lines: 10-12, 16-19
 
       <ossec_config>
          <ms-graph>
