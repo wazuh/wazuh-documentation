@@ -61,7 +61,7 @@ You can specify the Windows Registry keys to monitor using the :ref:`windows_reg
 
 - ``check_all``: The allowed values for the ``check_all`` attribute are ``yes`` and ``no``. This option is enabled by default. Records:
 
-   - File size
+   - Registry size
    - Last modification date
    - MD5, SHA1, and SHA256 hash sums
 
@@ -70,8 +70,8 @@ You can specify the Windows Registry keys to monitor using the :ref:`windows_reg
 
 Follow these steps to configure the FIM module with the following settings:
 
-- Record last modification date and all the file hashes of the ``HKEY_LOCAL_MACHINE\Software\Classes\batfile\TestKey1`` registry key.
-- Disable the recording of file hashes (MD5, SHA1, and SHA256) of the ``HKEY_LOCAL_MACHINE\Software\Classes\batfile\TestKey2`` registry key.
+- Record last modification date and all the hashes of the ``HKEY_LOCAL_MACHINE\Software\Classes\batfile\TestKey1`` registry key.
+- Disable the recording of hashes (MD5, SHA1, and SHA256) of the ``HKEY_LOCAL_MACHINE\Software\Classes\batfile\TestKey2`` registry key.
 - Disable the recording of the modification time of the ``HKEY_LOCAL_MACHINE\Software\Classes\batfile\TestKey3`` registry key.
 
 #. Edit the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file:
