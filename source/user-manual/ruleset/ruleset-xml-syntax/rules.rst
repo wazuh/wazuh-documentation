@@ -1229,6 +1229,8 @@ The attributes below are optional.
 |             |                                         |   osregex   |               |
 |             |                                         +-------------+               |
 |             |                                         |   pcre2     |               |
+|             |                                         +-------------+               |
+|             |                                         |   string    |               |
 +-------------+-----------------------------------------+-------------+---------------+
 
 .. note::
@@ -1771,7 +1773,7 @@ Specifies that the decoded action must be the same. This option is used in conju
 different_action
 ^^^^^^^^^^^^^^^^
 
-Specifies that the decoded data must be the same. This option is used in conjunction with ``frequency`` and ``timeframe``.
+Specifies that the decoded action must be different. This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+-----------------------+
 | Example of use     | <different_action />  |

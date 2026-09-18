@@ -147,7 +147,7 @@ This default configuration can be changed on the ``internal_options.conf`` file 
 +                                              +               +---------------------------------------------------------------------+
 |                                              |               | Any integer between 0 and 32.                                       |
 +----------------------------------------------+---------------+---------------------------------------------------------------------+
-|     **analysisd.winevt_threads**             | Description   | Number of rule matching threads.                                    |
+|     **analysisd.winevt_threads**             | Description   | Number of Windows event decoder threads.                            |
 +                                              +---------------+---------------------------------------------------------------------+
 |                                              | Default value | 0                                                                   |
 +                                              +---------------+---------------------------------------------------------------------+
