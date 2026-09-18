@@ -6,8 +6,8 @@
 Monitoring instances
 ====================
 
-The Wazuh agent is cross-platform compatible, meaning it can run on various operating systems, such as Windows, Linux, and macOS. It collects data on different systems and applications and ensures the instance benefits from other Wazuh capabilities, such as File Integrity Monitoring (FIM) and Security Configuration Assessment (SCA). This data is sent to the Wazuh server through an encrypted and authenticated channel. A unique pre-shared key registration process establishes this secure channel.
+The Wazuh agent is cross-platform compatible, meaning it can run on Windows, Linux, and macOS endpoints. It collects data on different systems and applications and ensures the instance benefits from other Wazuh capabilities, such as File Integrity Monitoring (FIM) and Security Configuration Assessment (SCA). It sends this data to the Wazuh manager through an encrypted, authenticated channel.
 
-You can install the Wazuh agent on the virtual machines in your Microsoft Azure environment. Monitoring cloud virtual machines using the Wazuh agent is beneficial because it ensures comprehensive security and performance oversight, enabling early detection of potential threats and operational issues in dynamic cloud environments.
+You can install the Wazuh agent on the virtual machines in your Microsoft Azure environment. Monitoring Microsoft Azure virtual machines with the Wazuh agent helps ensure comprehensive security and performance oversight, enabling early detection of potential threats and operational issues in dynamic cloud environments.
 
-Check the :doc:`Wazuh agent installation </installation-guide/wazuh-agent/index>` and :doc:`enrollment </user-manual/agent/agent-enrollment/index>` documentation to learn more about the Wazuh agents. Additionally, read about Wazuh SIEM and XDR capabilities and their configuration in our :doc:`capabilities </user-manual/capabilities/index>` documentation.
+Check the :doc:`Wazuh agent installation </installation-guide/wazuh-agent/index>` and :doc:`enrollment </user-manual/agent/agent-enrollment/index>` sections to learn more about the Wazuh agents. Additionally, read about Wazuh SIEM and XDR capabilities and their configuration in our :doc:`capabilities </user-manual/capabilities/index>` documentation.

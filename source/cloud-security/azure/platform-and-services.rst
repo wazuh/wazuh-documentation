@@ -1,12 +1,14 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: The Wazuh module for Azure enables centralized logging, threat detection, and compliance management of your Microsoft Azure environments from your Wazuh deployment.
+   :description: The Wazuh module for Azure and the Wazuh module for Microsoft Graph enable centralized logging, threat detection, and compliance management of your Microsoft Azure environments from your Wazuh deployment.
 
-Monitoring Azure platform and services
-======================================
+Monitoring Microsoft Azure platform and services
+==================================================
 
-The `Azure Monitor Logs <https://docs.microsoft.com/en-us/azure/azure-monitor/logs/data-platform-logs>`__ collects and organizes logs and performance data from monitored resources, including Azure services, virtual machines, and applications. This insight is sent to Wazuh using the Azure Log Analytics REST API or by directly accessing the contents of a Microsoft Azure Storage account. The Wazuh module for Azure enables centralized logging, threat detection, and compliance management of your Microsoft Azure environments from your Wazuh deployment.
+`Microsoft Azure Monitor Logs <https://docs.microsoft.com/en-us/azure/azure-monitor/logs/data-platform-logs>`__ collects and organizes logs and performance data from monitored resources, including Azure services, virtual machines, and applications. The Wazuh module for Azure retrieves this data through the Azure Log Analytics REST API or directly from a Microsoft Azure Storage account. The Wazuh module for Azure and Microsoft Graph enable centralized logging, threat detection, and compliance management of your Microsoft Azure environments from your Wazuh deployment.
+
+The Wazuh module for Azure and the Wazuh module for Microsoft Graph run exclusively on the Wazuh agent. Starting with Wazuh 5.0, the Wazuh manager no longer collects Azure Log Analytics logs directly.
 
 This section focuses on:
 
@@ -14,34 +16,63 @@ This section focuses on:
 -  :doc:`Microsoft Azure Storage <platform-and-services/storage>`
 -  :doc:`Microsoft Graph <platform-and-services/graph>`
 
-The Wazuh module for Azure requires dependencies and credentials to access your Microsoft Azure logs. These dependencies are available by default on the Wazuh manager, but you must install them when you use a Wazuh agent for the integration. Take a look at the `Prerequisites`_ section before proceeding.
+The Wazuh module for Azure requires dependencies and credentials to access your Microsoft Azure logs. Review the `Prerequisites`_ section before proceeding.
 
 Prerequisites
 -------------
 
-Installing dependencies
-^^^^^^^^^^^^^^^^^^^^^^^
+Microsoft Azure
+^^^^^^^^^^^^^^^^
 
-.. |service| replace:: Azure
+Before installing these dependencies, make sure the following are already in place in your Microsoft Azure environment. The integrations in the following section depend entirely on these resources:
 
-.. include:: /_templates/cloud/notes.rst
+-  An active Microsoft Azure subscription.
+-  A Microsoft Entra ID tenant and an account with sufficient administrator rights to grant admin consent when registering applications. Every integration below requires this.
+-  For Microsoft Azure Log Analytics, a Log Analytics workspace.
+-  For Microsoft Azure Storage, a storage account.
+-  For the Microsoft 365 Defender for Office 365 use case, a Microsoft 365 license that includes Defender for Office 365.
+-  For the Microsoft Intune integration, a Microsoft Intune license, with devices enrolled and managed.
+
+Without these resources, application registration and permission grants can succeed while the underlying Microsoft service still returns no data.
+
+Wazuh
+^^^^^
+
+Enable the Microsoft Azure integration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The Azure integration is disabled by default on the Wazuh manager. Enable this integration to allow Microsoft Azure event analysis and processing.
+
+#. Navigate to the **Ruleset Management** dashboard \> **Overview** dashboard.
+#. Search for the integration name Azure and select it.
+
+   .. thumbnail:: /images/cloud-security/azure/ruleset-management-search-azure.png
+      :align: center
+      :width: 80%
+
+#. Click on **Actions** \> **Enable** to enable the integration.
+
+   .. thumbnail:: /images/cloud-security/azure/enable-azure-integration.png
+      :align: center
+      :width: 80%
 
 Python
 ~~~~~~
 
-.. |py_cloud_cont_min| replace:: |PYTHON_CLOUD_CONTAINERS_MIN|
-.. |py_cloud_cont_max| replace:: |PYTHON_CLOUD_CONTAINERS_MAX|
+.. |service| replace:: Azure
 
 .. include:: /_templates/cloud/python_installation.rst
 
+.. |py_cloud_cont_min| replace:: |PYTHON_CLOUD_CONTAINERS_MIN|
+.. |py_cloud_cont_max| replace:: |PYTHON_CLOUD_CONTAINERS_MAX|
 .. |module_script| replace:: ``/var/ossec/wodles/azure/azure-logs``
 
 .. include:: /_templates/cloud/pip_installation.rst
 
-Azure Storage client library for Python
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Azure Blob Storage client library for Python
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You need the libraries in the command below to set up your Wazuh agent endpoint and monitor your Microsoft Azure platform and services. We recommend creating a `virtual Python environment <https://docs.python.org/3/library/venv.html>`__ for these installations.
+You need the libraries below to set up your Wazuh agent endpoint and monitor your Microsoft Azure platform and services. We recommend creating a `virtual Python environment <https://docs.python.org/3/library/venv.html>`__ for these installations.
 
 .. tabs::
 
@@ -57,13 +88,11 @@ You need the libraries in the command below to set up your Wazuh agent endpoint 
 
          # pip3 install --break-system-packages azure-storage-blob==12.20.0 azure-storage-common==2.1.0 azure-common==1.1.25 cryptography==3.3.2 cffi==1.14.4 pycparser==2.20 six==1.14.0 python-dateutil==2.8.1 requests==2.25.1 certifi==2022.12.07 chardet==3.0.4 idna==2.9 urllib3==1.26.18 SQLAlchemy==2.0.23 pytz==2020.1
 
-      .. note::
-
-         If you use a virtual environment, remove the ``--break-system-packages`` parameter from the above command.
+      If you use a virtual environment, remove the ``--break-system-packages`` parameter from the above command.
 
    .. group-tab:: Python 3.12–3.13
 
-      #. Install system-level package libffi.
+      #. Install the system-level package libffi.
 
          .. tabs::
 
@@ -83,30 +112,32 @@ You need the libraries in the command below to set up your Wazuh agent endpoint 
 
          .. code-block:: console
 
-            # pip3 install --break-system-packages azure-storage-blob==2.1.0 azure-storage-common==2.1.0 azure-common==1.1.25 cryptography==3.3.2 cffi==1.14.4 pycparser==2.20 six==1.14.0 python-dateutil==2.8.1 requests==2.25.1 certifi==2022.12.07 chardet==3.0.4 idna==2.9 urllib3==1.26.5 SQLAlchemy==1.3.11 pytz==2020.1
+            # pip3 install --break-system-packages azure-storage-blob==12.20.0 SQLAlchemy==2.0.23 pytz==2020.1 six==1.17.0
 
-      .. note::
+      If you use a virtual environment, remove the ``--break-system-packages`` parameter from the above command.
 
-         If you use a virtual environment, remove the ``--break-system-packages`` parameter from the above command.
+.. note::
+
+   The Wazuh module for Azure and the Wazuh module for Microsoft Graph run only on a Linux-based Wazuh agent. Install the required dependencies before configuring the Wazuh module for Azure.
 
 .. _configure_azure_credentials:
 
-Configuring Azure credentials
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Authentication
+~~~~~~~~~~~~~~
 
-The :doc:`Wazuh module for Azure </user-manual/reference/ossec-conf/wodle-azure-logs>` must have access credentials to connect to Azure successfully. The credentials required vary depending on the type of monitoring. These include:
+The Wazuh module for Azure must have access credentials to connect to Azure successfully. The credentials required vary depending on the type of monitoring. These include:
 
 -  Access credentials for Microsoft Graph and Azure Log Analytics
 -  Access credentials for Microsoft Azure Storage
 
-The following sections provide an overview of how you can create these credentials.
+The following sections explain how to create these credentials.
 
 .. _graph_and_log_analytics_credentials:
 
-Getting access credentials for Microsoft Graph and Azure Log Analytics
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Get access credentials for Microsoft Graph and Azure Log Analytics
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-You need valid application_id and application_key values to authenticate connection from the Wazuh module for Azure.
+You need valid ``application_id`` and ``application_key`` values to authenticate the connection from the Wazuh module for Azure.
 
 Follow the steps below to obtain an ``application_id`` and ``application_key``:
 
@@ -122,13 +153,13 @@ Follow the steps below to obtain an ``application_id`` and ``application_key``:
       :align: center
       :width: 80%
 
-#. Give the key a descriptive name and specify the duration for which the key should remain active, then select **Add**.
+#. Give the key a descriptive name and specify the duration for which the key remains active, then select **Add**.
 
    .. thumbnail:: /images/cloud-security/azure/add-client-secret.png
       :align: center
       :width: 80%
 
-#. Copy the ``Value`` and the ``Secret ID``. Ensure you securely store these values, as you can only view them once. The ``Value`` is the ``application_key``.
+#. Copy the ``Value`` and the ``Secret ID``. Store these values securely, as you can view them only once. The ``Value`` is the ``application_key``.
 
    .. thumbnail:: /images/cloud-security/azure/copy-client-secret.png
       :align: center
@@ -142,12 +173,12 @@ Follow the steps below to obtain an ``application_id`` and ``application_key``:
 
 .. _getting_access_credentials:
 
-Getting access credentials for Microsoft Azure Storage
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Get access credentials for Microsoft Azure Storage
+""""""""""""""""""""""""""""""""""""""""""""""""""
 
-The Microsoft Azure Storage requires valid ``account_name`` and ``account_key`` values. You can obtain them in the **Access keys** section of **Storage accounts** on your Azure environment. Follow the Microsoft guide to `create a storage account <https://learn.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal>`__.
+Microsoft Azure Storage requires valid ``account_name`` and ``account_key`` values. You can obtain them in the **Access keys** section of **Storage accounts** in your Azure environment. Follow the Microsoft guide to `create a storage account <https://learn.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal>`__.
 
-The section below shows the steps to retrieving the Microsoft Azure Storage account key.
+The section below shows the steps to retrieve the Microsoft Azure Storage account key.
 
 #. Go to the **Storage accounts** section of your Microsoft Azure environment and select the account of interest.
 
@@ -163,93 +194,87 @@ The section below shows the steps to retrieving the Microsoft Azure Storage acco
 
 .. _wazuh_azure_authentication_file:
 
-Wazuh Azure authentication file
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Configure the Wazuh agent for Microsoft Azure
+""""""""""""""""""""""""""""""""""""""""""""""
 
-To authenticate your Microsoft Azure environment to Wazuh, you must store your credentials in a file using the format ``field = value``.
+To authenticate your Microsoft Azure environment to Wazuh, store your credentials in a file in the format ``field = value``.
 
-The fields expected to be present in the credentials file depend on the type of service or activity you are monitoring.
+#. Create the credentials directory if it doesn't already exist:
 
-Microsoft Azure Log Analytics and Graph
-.......................................
+   .. code-block:: console
 
-The file must contain only two lines, one for the ``application_id`` and another for the ``application_key`` obtained previously:
+      # mkdir -p /var/ossec/wodles/credentials
 
-.. code-block:: ini
+#. Create the credentials file for your service inside that directory, using the ``field = value`` format:
 
-   application_id = <YOUR_APPLICATION_ID>
-   application_key = <YOUR_APPLICATION_KEY>
+   The fields expected in the credentials file depend on the type of service or activity you are monitoring.
 
-Microsoft Azure Storage
-.......................
+   -  **Microsoft Azure Log Analytics and Graph**
 
-The file must contain only two lines, one for the ``account_name`` and the other one for the ``account_key`` obtained previously:
+      The file must contain only two lines, one for the ``application_id`` and another for the ``application_key`` obtained previously:
 
-.. code-block:: ini
+      .. code-block:: ini
 
-   account_name = <YOUR_ACCOUNT_NAME>
-   account_key = <YOUR_ACCOUNT_KEY>
+         application_id = <YOUR_APPLICATION_ID>
+         application_key = <YOUR_APPLICATION_KEY>
 
-Specify the authentication file in the ``/var/ossec/etc/ossec.conf`` configuration file using the ``<auth_path>`` tag, regardless of the service or activity you monitor. Take a look at the following example:
+   -  **Microsoft Azure Storage**
 
-.. code-block:: xml
-   :emphasize-lines: 6, 16, 25
+      The file must contain only two lines, one for the ``account_name`` and the other one for the ``account_key`` obtained previously:
 
-   <wodle name="azure-logs">
-     <disabled>no</disabled>
-     <run_on_start>yes</run_on_start>
+      .. code-block:: ini
 
-     <log_analytics>
-        <auth_path>/var/ossec/wodles/credentials/log_analytics_credentials</auth_path>
-         <tenantdomain>wazuh.com</tenantdomain>
-         <request>
-             <query>AzureActivity</query>
-             <workspace>12345678-90ab-cdef-1234-567890abcdef</workspace>
-             <time_offset>1d</time_offset>
-         </request>
-     </log_analytics>
+         account_name = <YOUR_ACCOUNT_NAME>
+         account_key = <YOUR_ACCOUNT_KEY>
 
-     <graph>
-        <auth_path>/var/ossec/wodles/credentials/graph_credentials</auth_path>
-         <tenantdomain>wazuh.com</tenantdomain>
-         <request>
-             <query>auditLogs/directoryAudits</query>
-             <time_offset>1d</time_offset>
-         </request>
-     </graph>
+#. Restrict the file so that only the root user can write it and the wazuh group can read it:
 
-   <storage>
-        <auth_path>/var/ossec/wodles/credentials/storage_credentials</auth_path>
-         <container name="insights-activity-logs">
-             <blobs>.json</blobs>
-             <content_type>json_inline</content_type>
-             <time_offset>24h</time_offset>
-         </container>
-     </storage>
-   </wodle>
+   .. code-block:: console
+
+      # chown root:wazuh /var/ossec/wodles/credentials/<SERVICE_NAME_CREDENTIALS>
+      # chmod 640 /var/ossec/wodles/credentials/<SERVICE_NAME_CREDENTIALS>
+
+#. Specify the authentication file in the ``/var/ossec/etc/ossec.conf`` configuration file using the ``<auth_path>`` option, regardless of the service or activity you monitor. For example:
+
+   .. code-block:: xml
+
+      <wodle name="azure-logs">
+         <disabled>no</disabled>
+         <run_on_start>yes</run_on_start>
+
+         <log_analytics>
+            <auth_path>/var/ossec/wodles/credentials/<LOG_ANALYTICS_CREDENTIALS></auth_path>
+            <tenantdomain><YOUR_TENANT_DOMAIN></tenantdomain>
+            <request>
+               <query>AzureActivity</query>
+               <workspace><WORKSPACE_ID></workspace>
+               <time_offset>1d</time_offset>
+            </request>
+         </log_analytics>
+
+         <graph>
+            <auth_path>/var/ossec/wodles/credentials/<GRAPH_CREDENTIALS></auth_path>
+            <tenantdomain><YOUR_TENANT_DOMAIN></tenantdomain>
+            <request>
+               <tag>microsoft-entra_id</tag>
+               <query>auditLogs/directoryAudits</query>
+               <time_offset>1d</time_offset>
+            </request>
+         </graph>
+
+         <storage>
+            <auth_path>/var/ossec/wodles/credentials/<STORAGE_CREDENTIALS></auth_path>
+            <container name="insights-logs-auditlogs">
+               <blobs>.json</blobs>
+               <content_type>json_inline</content_type>
+               <time_offset>24h</time_offset>
+            </container>
+         </storage>
+      </wodle>
+
+You can add more than one ``request`` block simultaneously in the same configuration. The Wazuh module for Azure processes each request sequentially. The above configuration is an example. It includes Microsoft Azure Log Analytics, Graph, and Storage configuration blocks.
 
 For more information on ``<auth_path>``, look at the :doc:`Wazuh module for Azure </user-manual/reference/ossec-conf/wodle-azure-logs>` reference page.
-
-Adding more than one ``request`` block simultaneously in the same configuration is possible. The Wazuh module for Azure would process each request sequentially. The above configuration is an example. It includes Microsoft Azure Log Analytics, Graph, and Storage configuration blocks.
-
-Reparse
-~~~~~~~
-
-.. warning::
-
-   The ``reparse`` option will fetch and process all the logs from the starting date until the present. This process may generate duplicate alerts.
-
-To fetch and process older Azure logs, you must run the Wazuh module for Azure using the ``--reparse`` option.
-
-The ``la_time_offset`` value sets the time as an offset for the starting point. If you don't provide a ``la_time_offset`` value, the Wazuh module for Azure returns to the date it processed the first file.
-
-The following code block shows an example of running the Wazuh module for Azure on a Wazuh manager using the ``--reparse`` option:
-
-.. code-block:: console
-
-   # /var/ossec/wodles/azure/azure-logs --log_analytics --la_auth_path credentials_example --la_tenant_domain 'wazuh.example.domain' --la_tag azure-activity --la_query "AzureActivity" --workspace example-workspace --la_time_offset 50d --debug 2 --reparse
-
-The ``--debug 2`` parameter gets a verbose output. This output is helpful to show that the script works, especially when handling a large amount of data.
 
 .. toctree::
    :hidden:
