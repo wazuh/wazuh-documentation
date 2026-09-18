@@ -90,10 +90,16 @@ Follow these steps to configure the FIM module with the following settings:
 
       Restart-Service -Name WazuhSvc
 
+.. _recursion_level_windows_registry:
+
 Recursion level
 ^^^^^^^^^^^^^^^
 
 You can configure the maximum recursion level allowed for a Windows Registry entity  with the ``recursion_level`` attribute of the :ref:`windows_registry <reference_ossec_syscheck_windows_registry>` option. The allowed values for this attribute are any integer between 0 and 512.
+
+.. note::
+
+   This 512 limit applies specifically to ``<windows_registry>`` (Windows Registry monitoring). The ``recursion_level`` attribute for ``<directories>`` is different and supports a lower range. See :ref:`Recursion level <recursion_level_directories>`.
 
 Follow these steps to set the ``recursion_level`` of ``HKEY_LOCAL_MACHINE\SYSTEM\Setup`` to 3.
 
