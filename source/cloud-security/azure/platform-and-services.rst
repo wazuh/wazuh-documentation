@@ -15,8 +15,6 @@ This section focuses on:
 -  :doc:`Microsoft Azure Log Analytics <platform-and-services/log-analytics>`
 -  :doc:`Microsoft Azure Storage <platform-and-services/storage>`
 -  :doc:`Microsoft Graph <platform-and-services/graph>`
--  :doc:`Monitoring Microsoft Graph services with Wazuh <platform-and-services/monitoring-ms-graph>`
--  :doc:`Microsoft Intune integration <platform-and-services/ms-intune-integration>`
 
 The Wazuh module for Azure requires dependencies and credentials to access your Microsoft Azure logs. Review the `Prerequisites`_ section before proceeding.
 
@@ -284,5 +282,3 @@ For more information on ``<auth_path>``, look at the :doc:`Wazuh module for Azur
    platform-and-services/log-analytics
    platform-and-services/storage
    platform-and-services/graph
-   platform-and-services/monitoring-ms-graph
-   platform-and-services/ms-intune-integration
