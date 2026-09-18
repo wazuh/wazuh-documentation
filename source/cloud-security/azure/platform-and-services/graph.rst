@@ -123,7 +123,7 @@ To use the Microsoft Graph API to retrieve logs, we must generate an application
 Wazuh agent
 ^^^^^^^^^^^
 
-We use the (client) ID and key of the application saved during the previous steps here. In this case, both fields were saved in a file for authentication. Check the :ref:`authentication <configure_azure_credentials>` section for more information about configuring Azure credentials.
+We use the ``(client) ID`` and ``key`` of the application saved during the previous steps here. In this case, both fields were saved in a file for authentication. Check the :ref:`authentication <configure_azure_credentials>` section for more information about configuring Azure credentials.
 
 #. Apply the following configuration to the local configuration file ``/var/ossec/etc/ossec.conf`` of the Wazuh agent:
 
