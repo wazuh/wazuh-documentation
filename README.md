@@ -12,8 +12,9 @@ This repository contains the source files for the official Wazuh documentation, 
 |--------|---------|
 | `main` | Documentation for the [latest development version](https://github.com/wazuh/wazuh-documentation/blob/main/source/_variables/settings.py#L24) |
 | `4.14`, `4.13`, `4.12`, ..., `2.1` | Documentation for each stable release |
+| `X.Y.Z` (e.g. `5.0.0`) | Documentation for a release still in development, before it has its own stable `X.Y` branch |
 
-If you are looking for the documentation source of a specific Wazuh release, switch to the corresponding version branch.
+If you are looking for the documentation source of a specific Wazuh release, switch to the corresponding version branch. A release still in development may not have a plain `X.Y` branch yet — check the repository's branch list for an `X.Y.Z`-named branch matching your target version instead.
 
 ## Built with
 

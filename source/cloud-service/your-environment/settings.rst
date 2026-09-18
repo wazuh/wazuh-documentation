@@ -64,7 +64,7 @@ This advanced setting is the average and maximum number of events per second (EP
 
 If ingestion exceeds the peak EPS, events queue. When the queue is full, Wazuh discards new events, which causes event loss. Queueing is managed automatically by the cloud service, ensuring optimal resource utilization.
 
-The environment is configured with the `limits eps option <https://documentation.wazuh.com/current/user-manual/reference/ossec-conf/global.html#limits>`__ using the following parameters:
+The environment is configured with the :ref:`limits eps option <reference_limits>` using the following parameters:
 
 - timeframe = 1 seconds
 - maximum = Peak EPS / number of server nodes
