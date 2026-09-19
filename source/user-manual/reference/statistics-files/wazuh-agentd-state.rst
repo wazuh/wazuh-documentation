@@ -36,9 +36,6 @@ The content differs slightly between agent versions.
    # Number of generated events
    msg_count='324'
 
-   # Number of messages (events + control messages) sent to the manager
-   msg_sent='0'
-
    # Number of events currently buffered
    # Always empty: the HTTPS accumulator reports occupancy as a ladder,
    # not as a count
