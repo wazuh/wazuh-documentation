@@ -11,7 +11,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Clarified the LDAPS connection success step and updated its screenshot in the *Active Directory and LDAP integration* documentation. ([#10039](https://github.com/wazuh/wazuh-documentation/pull/10039))
 - **Post-release**: Fixed missing or non-descriptive image alt text in the *Installation guide*, *Deployment options*, *Quickstart*, *Proof of concept guide*, *Integrations guide*, *Cloud security*, *Upgrade guide*, and *Active Response* documentation. ([#10057](https://github.com/wazuh/wazuh-documentation/pull/10057)) ([#10081](https://github.com/wazuh/wazuh-documentation/pull/10081)) ([#10082](https://github.com/wazuh/wazuh-documentation/pull/10082)) ([#10089](https://github.com/wazuh/wazuh-documentation/pull/10089))
 - **Post-release**: Fixed the heading hierarchy in the *Using Wazuh for TSC compliance* documentation by converting two bolded subtopics into real H2 sections. ([#10060](https://github.com/wazuh/wazuh-documentation/pull/10060))
-- **Post-release**: Fixed third-party brand-name casing inconsistencies (CloudTrail, VirusTotal, PyInstaller) in the *Proof of concept guide* documentation. ([#10087](https://github.com/wazuh/wazuh-documentation/pull/10087))
+- **Post-release**: Fixed third-party brand-name casing inconsistencies (CloudTrail, VirusTotal, PyInstaller, AlienVault) in the *Proof of concept guide* documentation. ([#10087](https://github.com/wazuh/wazuh-documentation/pull/10087)) ([#10166](https://github.com/wazuh/wazuh-documentation/pull/10166))
 - **Post-release**: Fixed a stray, garbled label fragment left in the *GDPR* compliance documentation's page titles, which also affected the sitewide sidebar navigation. ([#10090](https://github.com/wazuh/wazuh-documentation/pull/10090))
 - **Post-release**: Fixed the shared site footer's *Getting started* and *Installation guide* links, which pointed at the wrong domain. ([#10090](https://github.com/wazuh/wazuh-documentation/pull/10090))
 - **Post-release**: Corrected the `<certificate>` configuration option's stated default value in the *Indexer integration* documentation. ([#10090](https://github.com/wazuh/wazuh-documentation/pull/10090))
@@ -29,6 +29,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Normalized inconsistent tab labels across the documentation that were silently splitting synchronized tab selections into separate, unsynced groups. ([#10143](https://github.com/wazuh/wazuh-documentation/pull/10143))
 - **Post-release**: Fixed mismatched screenshot titles in the *Proof of concept guide* and *Active Response* documentation. ([#10161](https://github.com/wazuh/wazuh-documentation/pull/10161))
 - **Post-release**: Corrected a false version-support claim and a URL-breaking formatting issue in `llms.txt`. ([#10162](https://github.com/wazuh/wazuh-documentation/pull/10162))
+- **Post-release**: Fixed a third-party brand-name casing inconsistency (PagerDuty) in the *Integration with external APIs* documentation. ([#10166](https://github.com/wazuh/wazuh-documentation/pull/10166))
 
 ## [v4.14.6]
 
