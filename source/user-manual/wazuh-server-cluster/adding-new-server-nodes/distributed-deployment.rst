@@ -466,13 +466,13 @@ This step installs the Wazuh manager on the node, which enables it to function a
 
             .. code-block:: console
 
-               # yum -y install wazuh-manager-4.14.4-1
+               # yum -y install wazuh-manager-<VERSION>-1
 
          .. group-tab:: APT
 
             .. code-block:: console
 
-               # apt-get -y install wazuh-manager=4.14.4-1
+               # apt-get -y install wazuh-manager=<VERSION>-1
 
       Alternatively, upgrade the existing Wazuh server to the latest version before adding the new node.
 
@@ -543,7 +543,7 @@ Install and configure Filebeat
 
    .. code-block:: console
 
-      # curl -so /etc/filebeat/filebeat.yml https://packages.wazuh.com/4.14/tpl/wazuh/filebeat/filebeat.yml
+      # curl -so /etc/filebeat/filebeat.yml https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/tpl/wazuh/filebeat/filebeat.yml
 
 #. Edit the ``/etc/filebeat/filebeat.yml`` configuration file and replace the following value:
 

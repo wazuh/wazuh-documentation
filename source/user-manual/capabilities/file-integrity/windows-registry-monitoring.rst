@@ -49,7 +49,7 @@ You can specify the Windows Registry keys to monitor using the ``windows_registr
 
 -  ``check_all``: The allowed values for the ``check_all`` option are ``yes`` and ``no``. This option is enabled by default. Records:
 
-   -  File size
+   -  Registry size
    -  Last modification date
    -  MD5, SHA-1, and SHA-256 hash sums
 
@@ -58,8 +58,8 @@ You can specify the Windows Registry keys to monitor using the ``windows_registr
 
 The following example shows how to configure different attribute checks for monitored Windows Registry keys:
 
--  Record the last modification date and all the file hashes of the ``HKEY_LOCAL_MACHINE\Software\Classes\batfile\TestKey1`` registry key.
--  Disable the recording of file hashes (MD5, SHA-1, and SHA-256) of the ``HKEY_LOCAL_MACHINE\Software\Classes\batfile\TestKey2`` registry key.
+-  Record the last modification date and all the hashes of the ``HKEY_LOCAL_MACHINE\Software\Classes\batfile\TestKey1`` registry key.
+-  Disable the recording of hashes (MD5, SHA-1, and SHA-256) of the ``HKEY_LOCAL_MACHINE\Software\Classes\batfile\TestKey2`` registry key.
 -  Disable the recording of the modification time of the ``HKEY_LOCAL_MACHINE\Software\Classes\batfile\TestKey3`` registry key.
 
 #. Edit the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file:
@@ -78,10 +78,16 @@ The following example shows how to configure different attribute checks for moni
 
       > Restart-Service -Name wazuh
 
+.. _recursion_level_windows_registry:
+
 Recursion level
 ^^^^^^^^^^^^^^^
 
 You can configure the maximum recursion level allowed for a Windows Registry entity with the ``recursion_level`` option of the ``windows_registry`` option. The allowed values for this option are any integer between 0 and 512.
+
+.. note::
+
+   This 512 limit applies specifically to ``<windows_registry>`` (Windows Registry monitoring). The ``recursion_level`` attribute for ``<directories>`` is different and supports a lower range. See :ref:`Recursion level <recursion_level_directories>`.
 
 Follow these steps to set the ``recursion_level`` of ``HKEY_LOCAL_MACHINE\SYSTEM\Setup`` to 3.
 
@@ -201,7 +207,7 @@ Follow these steps to configure the FIM module to ignore the ``HKEY_LOCAL_MACHIN
    .. code-block:: xml
 
       <syscheck>
-        <registry_ignore>HKEY_LOCAL_MACHINE\Security\Policy\Secrets</registry_ignore>
+        <registry_ignore>HKEY_LOCAL_MACHINE\Security\Policy</registry_ignore>
         <registry_ignore type="sregex">\Enum$</registry_ignore>
       </syscheck>
 

@@ -431,6 +431,11 @@ redirections.push(
     'target': ['4.14=>5.0', '5.0=>4.14'],
     '4.14': '/cloud-security/gcp/supported-services/cloud-storage-buckets.html',
     '5.0': '/cloud-security/gcp/cloud-storage-buckets.html',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/cloud-security/azure/ms-graph-api-setup.html',
+    '5.0': '/cloud-security/azure/monitoring-ms-graph.html#configure-the-microsoft-graph-api-permissions',
   }
 );
 
@@ -439,6 +444,7 @@ redirections.push(
 removedUrls['5.0'] = [
   '/user-manual/reference/ossec-conf/client-buffer.html',
   '/user-manual/reference/ossec-conf/labels.html',
+  '/cloud-security/azure/ms-graph-api-setup.html',
   '/compliance/pci-dss/dashboard.html',
   '/compliance/hipaa/visualization-and-dashboard.html',
   '/compliance/hipaa/log-data-analysis.html',

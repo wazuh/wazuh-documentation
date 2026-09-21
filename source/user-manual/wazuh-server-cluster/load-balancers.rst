@@ -26,7 +26,7 @@ There are different installation instructions for installing NGINX based on the 
 Configuration
 ^^^^^^^^^^^^^
 
-The way NGINX and its modules work are determined in it’s configuration file. By default, the configuration file of NGINX is named ``nginx.conf`` and located in the ``/usr/local/nginx/conf``, ``/etc/nginx``, or ``/usr/local/etc/nginx`` directory depending on the installation type.
+The way NGINX and its modules work are determined in its configuration file. By default, the configuration file of NGINX is named ``nginx.conf`` and located in the ``/usr/local/nginx/conf``, ``/etc/nginx``, or ``/usr/local/etc/nginx`` directory depending on the installation type.
 
 Perform the steps below to configure NGINX as a load balancer.
 
