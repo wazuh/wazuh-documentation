@@ -199,7 +199,7 @@ Sub options
 Removed options
 ^^^^^^^^^^^^^^^^
 
-**The following options are no longer read, they are silently ignored with an INFO log line if present:** ``manager_address``, ``port``, ``interface_index`` (superseded by ``<agent><manager>`` - a link-local IPv6 manager's zone id now lives inside ``<endpoint>`` itself, e.g. ``[fe80::1%25eth0]:1517``), ``ssl_cipher``, ``server_ca_path``, ``agent_certificate_path``, ``agent_key_path`` (superseded by ``<agent><ssl>``).
+**The following options are no longer read, they are silently ignored with an INFO log line if present:** ``manager_address``, ``port``, ``interface_index`` (superseded by ``<agent><manager>`` - a link-local IPv6 manager's zone id now lives inside ``<endpoint>`` itself, e.g. ``[fe80::1%eth0]:1517``), ``ssl_cipher``, ``server_ca_path``, ``agent_certificate_path``, ``agent_key_path`` (superseded by ``<agent><ssl>``).
 
 Sample configuration
 ---------------------

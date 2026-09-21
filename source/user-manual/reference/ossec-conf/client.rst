@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn about the client configuration section of ossec.conf, the legacy schema used by Wazuh 4.x agents, and how it is handled after an upgrade to Wazuh 5.0.
+  :description: Learn about the client configuration section of ossec.conf, which configures the Wazuh agent connection to the Wazuh manager and enrollment settings.
 
 .. _reference_ossec_client:
 
@@ -15,14 +15,12 @@ client
       <client>
       </client>
 
-This section documents the ``<client>`` schema used by Wazuh 4.x agents. Wazuh 5.0 agents use a different top-level section, ``<agent>``, with a different (and partially overlapping) schema — see :doc:`agent <agent>`.
-
-A 4.x ``<client>`` configuration left in place after an in-place binary upgrade to 5.0 still partially works: only ``<client><server><address>`` is read (port defaults to 1517); every other option under the old ``<client>`` is silently ignored.
+The ``<client>`` section configures the Wazuh agent connection to the Wazuh manager and the agent enrollment settings.
 
 Options
 -------
 
-- `server`_
+- `manager`_
 - `config-profile`_
 - `notify_time`_
 - `time-reconnect`_
@@ -30,17 +28,17 @@ Options
 - `auto_restart`_
 - `enrollment`_
 
-server
-^^^^^^
+manager
+^^^^^^^
 
-The ``<server>`` subsection configures the connection parameters for a Wazuh manager. Define multiple ``<server>`` subsections to configure more than one manager.
+The ``<manager>`` subsection configures the connection parameters for a Wazuh manager. Define multiple ``<manager>`` subsections to configure more than one manager.
 
-Server subsection options
+Manager subsection options
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - `address`_
-- :ref:`port <ossec_client_server_port>`
-- :ref:`interface_index <ossec_client_server_interface_index>`
+- :ref:`port <ossec_client_manager_port>`
+- :ref:`interface_index <ossec_client_manager_interface_index>`
 - `max_retries`_
 - `retry_interval`_
 
@@ -55,7 +53,7 @@ Specifies the IP address or the hostname of the Wazuh manager.
 | **Allowed values**   | Any valid IP address or any resolvable hostname is allowed.   |
 +----------------------+---------------------------------------------------------------+
 
-.. _ossec_client_server_port:
+.. _ossec_client_manager_port:
 
 port
 """""
@@ -68,7 +66,7 @@ Specifies the port to send events to the manager. This must match the associated
 | **Allowed values**   | Any port number from 1 to 65535 is allowed.   |
 +----------------------+-----------------------------------------------+
 
-.. _ossec_client_server_interface_index:
+.. _ossec_client_manager_interface_index:
 
 interface_index
 """"""""""""""""
@@ -112,15 +110,15 @@ Sample configuration
 .. code-block:: xml
 
    <client>
-     <server>
+     <manager>
        <address>192.168.1.100</address>
        <port>1514</port>
        <max_retries>5</max_retries>
        <retry_interval>5</retry_interval>
-     </server>
-     <server>
+     </manager>
+     <manager>
        <address>example.hostname</address>
-     </server>
+     </manager>
      <config-profile>webserver, debian8</config-profile>
      <notify_time>30</notify_time>
      <time-reconnect>120</time-reconnect>
@@ -133,11 +131,11 @@ Sample link-local IPv6 configuration
 .. code-block:: xml
 
    <client>
-     <server>
+     <manager>
        <address>fe80:0000:0000:0000:a00:27ff:feff:6b0b</address>
        <interface_index>3</interface_index>
        <port>1514</port>
-     </server>
+     </manager>
      <config-profile>ubuntu, ubuntu22, ubuntu22.04</config-profile>
      <notify_time>20</notify_time>
      <time-reconnect>60</time-reconnect>
