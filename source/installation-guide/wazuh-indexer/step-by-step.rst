@@ -262,7 +262,7 @@ When the system is swapping memory, the Wazuh indexer may not work as expected. 
                LimitMEMLOCK=infinity
                EOF
 
-      .. group-tab:: SysVinit
+      .. group-tab:: SysV init
 
          #. Create a new directory for the file that specifies the system limits:
 

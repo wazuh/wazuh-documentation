@@ -960,7 +960,7 @@ The location of the database for each monitored endpoint is on the Wazuh server 
 
             $ sudo apt install sqlite3
 
-      .. group-tab:: YUM
+      .. group-tab:: Yum
 
          .. code-block:: console
 

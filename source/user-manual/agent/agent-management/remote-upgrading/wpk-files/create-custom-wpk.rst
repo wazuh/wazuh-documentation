@@ -150,7 +150,7 @@ To build a WPK for macOS, you need to first download a PKG package of the desire
 
          # curl -O https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/macos/wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.intel64.pkg
 
-   .. group-tab:: Apple Silicon
+   .. group-tab:: Apple silicon
 
       .. code-block:: console
 
@@ -166,7 +166,7 @@ Run the command below to build a macOS WPK:
 
          # ./generate_wpk_package.sh -t macos -b v|WAZUH_CURRENT_OSX| -d /<DESTINATION_PATH> -k /<PATH_TO_GENERATED_WPK_KEYS> -o wazuh-agent_v|WAZUH_CURRENT_OSX|_macOS.wpk -pn /<PATH_TO_WPK_FILE>/wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.intel64.pkg
 
-   .. group-tab:: Apple Silicon
+   .. group-tab:: Apple silicon
 
       .. code-block:: console
 
@@ -346,7 +346,7 @@ macOS WPK
 
             # curl -O https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/macos/wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.intel64.pkg
 
-      .. group-tab:: Apple Silicon
+      .. group-tab:: Apple silicon
 
          .. code-block:: console
 

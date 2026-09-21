@@ -25,13 +25,13 @@ Using the Wazuh Syscollector module for this use case, you can see all packages 
 
    .. tabs::
 
-      .. group-tab:: PowerShell (as an administrator)
+      .. group-tab:: PowerShell (as an administrator):
 
          .. code-block:: powershell
 
             > Restart-Service -Name wazuh
 
-      .. group-tab:: CMD (as an administrator)
+      .. group-tab:: CMD (as an administrator):
 
          .. code-block:: doscon
 
