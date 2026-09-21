@@ -44,12 +44,12 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Add missing changes in Download configuration files from remote location section. ([#8476](https://github.com/wazuh/wazuh-documentation/pull/8476))
 - **Post-release**: Reverted new configuration options added to the MS Graph integration documentation. ([#8495](https://github.com/wazuh/wazuh-documentation/pull/8495))
 - **Post-release**: Fixed the Apache ``access_log`` path on the Windows endpoint in the *Blocking a known malicious actor* section of the *Proof of Concept guide*. ([#9536](https://github.com/wazuh/wazuh-documentation/pull/9536))
+- **Post-release**: Fixed the overlapping agent range labels in the *Quickstart* hardware requirements table and the en dash in the `--uninstall` installation assistant flag. ([#10152](https://github.com/wazuh/wazuh-documentation/pull/10152))
 
 ## [v4.11.1]
 
 - **Post-release**: Added missing entry to 4.11.1 release notes. ([#8280](https://github.com/wazuh/wazuh-documentation/pull/8280))
 - **Post-release**: Added clarification about the user account used to access the Wazuh dashboard. ([#8282](https://github.com/wazuh/wazuh-documentation/pull/8282))
-- **Post-release**: Fixed the overlapping agent range labels in the *Quickstart* hardware requirements table and the en dash in the `--uninstall` installation assistant flag. ([#10152](https://github.com/wazuh/wazuh-documentation/pull/10152))
 
 ## [v4.11.0]
 
