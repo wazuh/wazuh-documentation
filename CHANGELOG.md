@@ -28,6 +28,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Fixed an image filename containing a space in the *CloudTrail* documentation and corrected the `only_logs_after` date format documented in the *GCP bucket* reference and capability pages. ([#10140](https://github.com/wazuh/wazuh-documentation/pull/10140))
 - **Post-release**: Normalized inconsistent tab labels across the documentation that were silently splitting synchronized tab selections into separate, unsynced groups. ([#10143](https://github.com/wazuh/wazuh-documentation/pull/10143))
 - **Post-release**: Fixed mismatched screenshot titles in the *Proof of concept guide* and *Active Response* documentation. ([#10161](https://github.com/wazuh/wazuh-documentation/pull/10161))
+- **Post-release**: Corrected a false version-support claim and a URL-breaking formatting issue in `llms.txt`. ([#10162](https://github.com/wazuh/wazuh-documentation/pull/10162))
 
 ## [v4.14.6]
 
