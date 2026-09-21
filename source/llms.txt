@@ -12,7 +12,7 @@ Guidelines for how artificial intelligence tools should access, ingest, and refe
 - Multiple documentation versions exist under versioned paths (for example: `/current/`, `/4.14/`, `/4.2/`).
 - **Default authority** Use `/current/` as the latest and authoritative documentation by default.
 - **Version override** Use a specific version path only when the user explicitly requests that version.
-- Version support is not uniform: some older version paths continue to receive updates and some do not, decided on a case-by-case basis. Do not assume a version path is current or maintained just because it is reachable; prefer `/current/` unless the user explicitly requests another version.
+- Documentation maintenance is not uniform across version paths: some older version paths continue to receive documentation updates and some do not, decided on a case-by-case basis. This is about documentation upkeep only, not the underlying Wazuh product's own support or end-of-life status. Do not assume a version path's documentation is current or maintained just because it is reachable; prefer `/current/` unless the user explicitly requests another version.
 
 ### Citations
 - **Canonical citation** Always cite the canonical HTML URL (`.html`) in outputs, even when ingesting Markdown content.
