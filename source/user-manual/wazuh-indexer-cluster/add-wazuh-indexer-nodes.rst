@@ -190,7 +190,7 @@ Before deploying an additional Wazuh node, it’s essential to reconfigure exist
 
    .. tabs::
 
-      .. group-tab:: SystemD
+      .. group-tab:: Systemd
 
          .. code-block:: console
 
@@ -217,7 +217,7 @@ Once the certificates have been created and copied to the new node(s), you can n
 
    .. tabs::
 
-      .. group-tab:: YUM
+      .. group-tab:: Yum
 
          .. code-block:: console
 
@@ -234,7 +234,7 @@ Once the certificates have been created and copied to the new node(s), you can n
 
    .. tabs::
 
-      .. group-tab:: YUM
+      .. group-tab:: Yum
 
          -  Import the GPG key:
 
@@ -286,7 +286,7 @@ Once the certificates have been created and copied to the new node(s), you can n
 
    .. tabs::
 
-      .. group-tab:: YUM
+      .. group-tab:: Yum
 
          .. code-block:: console
 
@@ -367,7 +367,7 @@ Run the following commands to start the Wazuh indexer service:
 
       .. tabs::
 
-         .. group-tab:: SystemD
+         .. group-tab:: Systemd
 
             .. code-block:: console
 
@@ -763,7 +763,7 @@ Before deploying an additional Wazuh node, it’s essential to reconfigure exist
 
       .. tabs::
 
-         .. group-tab:: SystemD
+         .. group-tab:: Systemd
 
             .. code-block:: console
 
@@ -779,7 +779,7 @@ Before deploying an additional Wazuh node, it’s essential to reconfigure exist
 
       .. tabs::
 
-         .. group-tab:: SystemD
+         .. group-tab:: Systemd
 
             .. code-block:: console
 
@@ -797,7 +797,7 @@ Before deploying an additional Wazuh node, it’s essential to reconfigure exist
 
       .. tabs::
 
-         .. group-tab:: SystemD
+         .. group-tab:: Systemd
 
             .. code-block:: console
 
@@ -818,7 +818,7 @@ Once the certificates have been created and copied to the new node(s), you can n
 
    .. tabs::
 
-      .. group-tab:: YUM
+      .. group-tab:: Yum
 
          .. code-block:: console
 
@@ -835,7 +835,7 @@ Once the certificates have been created and copied to the new node(s), you can n
 
    .. tabs::
 
-      .. group-tab:: YUM
+      .. group-tab:: Yum
 
          -  Import the GPG key:
 
@@ -887,7 +887,7 @@ Once the certificates have been created and copied to the new node(s), you can n
 
    .. tabs::
 
-      .. group-tab:: YUM
+      .. group-tab:: Yum
 
          .. code-block:: console
 
@@ -968,7 +968,7 @@ Run the following commands to start the Wazuh indexer service:
 
       .. tabs::
 
-         .. group-tab:: SystemD
+         .. group-tab:: Systemd
 
             .. code-block:: console
 

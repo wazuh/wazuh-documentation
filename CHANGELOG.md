@@ -30,6 +30,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Fixed inconsistent Windows service naming, a `registry_ignore` example mismatch, leftover file-based wording in the attribute recording section, and inaccurate default scan-frequency wording in the *File integrity monitoring* documentation's *Windows Registry monitoring* page, and added notes disambiguating the `recursion_level` limits for `<directories>` and `<windows_registry>`. ([#10134](https://github.com/wazuh/wazuh-documentation/pull/10134)) ([#10137](https://github.com/wazuh/wazuh-documentation/pull/10137))
 - **Post-release**: Removed a stale, unpublished `pm_event` table from the *wazuh-db* daemon reference's source and dropped two `wodle-osquery` cross-references from the *Deploying with Ansible* reference that pointed at the wrong page. ([#10138](https://github.com/wazuh/wazuh-documentation/pull/10138))
 - **Post-release**: Fixed an image filename containing a space in the *CloudTrail* documentation and corrected the `only_logs_after` date format documented in the *GCP bucket* reference and capability pages. ([#10140](https://github.com/wazuh/wazuh-documentation/pull/10140))
+- **Post-release**: Normalized inconsistent tab labels across the documentation that were silently splitting synchronized tab selections into separate, unsynced groups. ([#10143](https://github.com/wazuh/wazuh-documentation/pull/10143))
 
 ## [v4.14.6]
 
