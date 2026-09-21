@@ -623,10 +623,16 @@ Tuning audit to deal with a flood of who-data events
 
 On the Wazuh side, the ``syscheck.rt_delay`` variable in the :ref:`internal FIM configuration <ossec_internal_syscheck>` helps to prevent the loss of events by setting a delay between alerts. You can configure this variable in the ``/var/ossec/etc/internal_options.conf`` file on the Wazuh server. The allowed value for this variable is a numerical value. You must set the delay in milliseconds. To process who-data events faster, decrease this numerical value.
 
+.. _recursion_level_directories:
+
 Recursion level
 ---------------
 
 You can configure the maximum recursion level allowed for a specific directory by using the ``recursion_level`` attribute of the :ref:`directories <reference_ossec_syscheck_directories>`   option. The ``recursion_level`` value must be an integer between 0 and 320.
+
+.. note::
+
+   This 320 limit applies specifically to ``<directories>`` (file and folder monitoring). The ``recursion_level`` attribute for ``<windows_registry>`` is different and supports a wider range. See :ref:`Recursion level <recursion_level_windows_registry>` in *Windows Registry monitoring*.
 
 In the configuration example below, you can see how to set the ``recursion_level`` of the ``folder_test``  directory to 3. Replace ``FILEPATH/OF/MONITORED/DIRECTORY`` with your own file paths.
 
