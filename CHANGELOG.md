@@ -46,6 +46,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Updated the OpenSearch Dashboards version references. ([#9192](https://github.com/wazuh/wazuh-documentation/pull/9192))
 - **Post-release**: Fixed the Apache ``access_log`` path on the Windows endpoint in the *Blocking a known malicious actor* section of the *Proof of Concept guide*. ([#9534](https://github.com/wazuh/wazuh-documentation/pull/9534))
 - **Post-release**: Fixed the overlapping agent range labels in the *Quickstart* hardware requirements table and the en dash in the `--uninstall` installation assistant flag. ([#10154](https://github.com/wazuh/wazuh-documentation/pull/10154))
+- **Post-release**: Fixed inconsistent Windows service naming, a `registry_ignore` example mismatch, and inaccurate default scan-frequency wording in the *File integrity monitoring* documentation's *Windows Registry monitoring* page, and added notes disambiguating the `recursion_level` limits for `<directories>` and `<windows_registry>`. ([#10167](https://github.com/wazuh/wazuh-documentation/pull/10167))
 
 ### Removed
 
