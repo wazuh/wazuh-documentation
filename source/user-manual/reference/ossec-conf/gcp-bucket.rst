@@ -76,7 +76,7 @@ Bucket options
 +----------------------+---------------------------------------------------------------------------------------------+----------------------+
 | path                 | Any valid path                                                                              | Optional             |
 +----------------------+---------------------------------------------------------------------------------------------+----------------------+
-| only_logs_after      | Valid date in YYYY-MM-DD format                                                             | Optional             |
+| only_logs_after      | Valid date in YYYY-MMM-DD format                                                            | Optional             |
 +----------------------+---------------------------------------------------------------------------------------------+----------------------+
 | remove_from_bucket   | A value to determine if each log file is deleted once it has been collected by the module   | Optional             |
 +----------------------+---------------------------------------------------------------------------------------------+----------------------+
@@ -130,13 +130,13 @@ Bucket path or prefix.
 only_logs_after
 ^^^^^^^^^^^^^^^^^
 
-Parse logs from a specific date onwards. It must follow the YYYY-MM-DD format.
+Parse logs from a specific date onwards. It must follow the YYYY-MMM-DD format (for example, ``2021-Jun-01``); a numeric month is not accepted.
 
-+----------------------+---------------------------------+
-| **Default value**    | Date of execution at 00:00:00   |
-+----------------------+---------------------------------+
-| **Allowed values**   | Valid date [YYYY-MM-DD]         |
-+----------------------+---------------------------------+
++----------------------+--------------------------------------+
+| **Default value**    | Date of execution at ``00:00:00``    |
++----------------------+--------------------------------------+
+| **Allowed values**   | Valid date [YYYY-MMM-DD]             |
++----------------------+--------------------------------------+
 
 remove_from_bucket
 ^^^^^^^^^^^^^^^^^^^^

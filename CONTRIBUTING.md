@@ -22,6 +22,8 @@ Refer to the [branch model in README.md](README.md#branches) for an overview of 
 
 Target the branch that corresponds to the Wazuh version you are updating. For example, a fix for the 4.14 documentation should be submitted against the `4.14` branch. Don't use `main` to update published documentation, this branch has the documentation for  latest version currently in development.
 
+A release still in development may not have a plain `X.Y` branch yet. For example, a fix for the 5.0 documentation before it publishes should target the `5.0.0` (or later `5.0.Z`) branch instead of `5.0`.
+
 Long-lived branches (`main` and version branches) are protected. Only authorized members of the documentation team can merge changes into them.
 
 ---
@@ -85,6 +87,19 @@ Follow the writing and formatting guidelines below before committing.
 
 Write clear commit messages that describe what changed and why. Feel free to make as many commits as needed while working on your branch.
 
+**Every commit must be signed and show as verified on GitHub.** This repository's branches enforce required commit signatures, so a PR containing unsigned commits cannot be merged, no matter how many approvals it has.
+
+To sign your commits:
+
+1. Set up a GPG or SSH signing key and [add it to your GitHub account](https://docs.github.com/en/authentication/managing-commit-signature-verification).
+2. Configure Git to sign automatically:
+
+```shell
+git config commit.gpgsign true
+```
+
+If you already made unsigned commits, sign them retroactively, for example with an interactive rebase (`git rebase --exec 'git commit --amend --no-edit -S' -i <base-commit>`), then force-push the branch.
+
 ### 4. Open a pull request
 
 Open a pull request against the appropriate base branch. In your PR description:
@@ -96,28 +111,7 @@ Open a pull request against the appropriate base branch. In your PR description:
 
 The documentation team will review your PR. At least one approval from a team member is required before merging.
 
----
-
-## PR checklist
-
-Before submitting, make sure the following are in order:
-
-**Compilation**
-- [ ] Documentation compiles without warnings (`make html`).
-
-**Changelog**
-- [ ] `CHANGELOG.md` is updated following the format below.
-
-**Web optimization**
-- [ ] `/_static/js/redirects.js` is updated if any pages were moved or renamed.
-- [ ] `/llms.txt` is updated if necessary.
-- [ ] Meta descriptions are added or updated for new or modified pages.
-
-**Writing style**
-- [ ] Use **bold** for UI elements, _italics_ for key terms and emphasis, and
-  `code` font for commands, file names, REST paths, and code.
-- [ ] Follow present tense, active voice, and a semi-formal tone.
-- [ ] Use three-space indentation in `.rst` files.
+Before submitting, make sure your PR meets the checklist in the pull request template.
 
 ---
 
