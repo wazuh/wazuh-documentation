@@ -64,3 +64,5 @@ Rules are categorized into multiple levels, ranging from the lowest (0) to the m
 +-------+----------------------------------+--------------------------------------------------------------------------------------------------------------------+
 | 15    | Severe attack                    | No chances of false positives. Immediate attention is necessary.                                                   |
 +-------+----------------------------------+--------------------------------------------------------------------------------------------------------------------+
+| 16    | Maximum severity                 | The highest allowed severity level. No default rule uses it; reserved for custom rules requiring maximum severity. |
++-------+----------------------------------+--------------------------------------------------------------------------------------------------------------------+

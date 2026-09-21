@@ -65,7 +65,7 @@ Perform the following steps on your existing Wazuh server node to generate the c
 
    Replace the node names and IP values with your new node names and IP addresses.
 
-   You can assign a different ``node_type`` in your installation. In this documentation, we assign the master role to the existing Wazuh server  node and the worker role to the new node.
+   You can assign a different ``node_type`` in your installation. In this documentation, we assign the master role to the existing Wazuh server node and the worker role to the new node.
 
 #. Download and run ``wazuh-certs-tool.sh`` from your ``/root`` directory to create the certificates for the new Wazuh server node and recreate them for the existing one:
 
@@ -105,7 +105,7 @@ Configuring existing components to connect with the new node
 
 Before deploying an additional Wazuh server node, it's essential to reconfigure existing components to ensure communication within the cluster. This step involves updating configuration files and connection parameters so that the Wazuh manager, indexer, and dashboard recognize and properly interact with the newly added Wazuh server node.
 
-#. Create a file, ``env_variables.sh``, in the ``/root`` directory of the existing Wazuh server  node where you define your environmental variables as follows:
+#. Create a file, ``env_variables.sh``, in the ``/root`` directory of the existing Wazuh server node where you define your environmental variables as follows:
 
    .. code-block:: bash
       :emphasize-lines: 1,2,3
@@ -163,7 +163,7 @@ Before deploying an additional Wazuh server node, it's essential to reconfigure 
 
    This deploys the SSL certificates to encrypt communications between the Wazuh central components.
 
-   **Recommended action:** Save a copy offline for potential future use and scalability. You can  remove the ``<CERTIFICATE_ARCHIVE>.tar`` file on this Wazuh server node by running the command below to increase security:
+   **Recommended action:** Save a copy offline for potential future use and scalability. You can remove the ``<CERTIFICATE_ARCHIVE>.tar`` file on this Wazuh server node by running the command below to increase security:
 
    .. code-block:: console
       :emphasize-lines: 2
@@ -244,7 +244,7 @@ Before deploying an additional Wazuh server node, it's essential to reconfigure 
    The configurable fields in the above section of the ``/var/ossec/etc/ossec.conf`` file are as follows:
 
    -  :ref:`<name> <cluster_name>` indicates the name of the cluster.
-   -  :ref:`<node_name> <cluster_node_name>` indicates the name of the current node Wazuh server node as defined in the ``<node_name>`` field under the ``<cluster>`` block of the ``/root/config.yml`` file on that node. . Replace ``<EXISTING_WAZUH_SERVER_NODE_NAME>`` with this exact value.
+   -  :ref:`<node_name> <cluster_node_name>` indicates the name of the current node Wazuh server node as defined in the ``<node_name>`` field under the ``<cluster>`` block of the ``/root/config.yml`` file on that node. Replace ``<EXISTING_WAZUH_SERVER_NODE_NAME>`` with this exact value.
    -  :ref:`<node_type> <cluster_node_type>` specifies the node's role. In this instance, it should be set to master.
    -  :ref:`<key> <cluster_key>` represents a :ref:`key <generate_random_encryption_key>` used to encrypt communication between cluster nodes. It should be the same on all the server nodes. To generate a unique key, you can use the command ``openssl rand -hex 16``.
    -  :ref:`<port> <cluster_port>` indicates the destination port for cluster communication. Leave the default as ``1516``.
@@ -366,13 +366,13 @@ This step installs the Wazuh manager on the node, which enables it to function a
 
             .. code-block:: console
 
-               # yum -y install wazuh-manager-4.14.4-1
+               # yum -y install wazuh-manager-<VERSION>-1
 
          .. group-tab:: APT
 
             .. code-block:: console
 
-               # apt-get -y install wazuh-manager=4.14.4-1
+               # apt-get -y install wazuh-manager=<VERSION>-1
 
       Alternatively, upgrade the existing Wazuh server to the latest version before adding the new node.
 
@@ -443,7 +443,7 @@ Install and configure Filebeat
 
    .. code-block:: console
 
-      # curl -so /etc/filebeat/filebeat.yml https://packages.wazuh.com/4.14/tpl/wazuh/filebeat/filebeat.yml
+      # curl -so /etc/filebeat/filebeat.yml https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/tpl/wazuh/filebeat/filebeat.yml
 
 #. Edit the ``/etc/filebeat/filebeat.yml`` configuration file and replace the ``<WAZUH_INDEXER_IP>`` value with the IP addresses or hostnames of your Wazuh indexer:
 
