@@ -32,11 +32,11 @@ Following this quickstart implies deploying the Wazuh server, the Wazuh indexer,
   +-------------+---------+---------+-----------------------+
   | **Agents**  | **CPU** | **RAM** | **Storage (90 days)** |
   +=============+=========+=========+=======================+
-  | **1–25**    | 4 vCPU  | 8 GiB   | 50 GB                 |
+  | **1-25**    | 4 vCPU  | 8 GiB   | 50 GB                 |
   +-------------+---------+---------+-----------------------+
-  | **25–50**   | 8 vCPU  | 8 GiB   | 100 GB                |
+  | **26-50**   | 8 vCPU  | 8 GiB   | 100 GB                |
   +-------------+---------+---------+-----------------------+
-  | **50–100**  | 8 vCPU  | 8 GiB   | 200 GB                |
+  | **51-100**  | 8 vCPU  | 8 GiB   | 200 GB                |
   +-------------+---------+---------+-----------------------+
 
 
@@ -107,7 +107,7 @@ When you access the Wazuh dashboard for the first time, the browser shows a warn
       
          $ sudo tar -O -xvf wazuh-install-files.tar wazuh-install-files/wazuh-passwords.txt
 
-If you want to uninstall the Wazuh central components, run the Wazuh installation assistant using the option ``-u`` or ``–-uninstall``.
+If you want to uninstall the Wazuh central components, run the Wazuh installation assistant using the option ``-u`` or ``--uninstall``.
 
 Next steps
 ----------
