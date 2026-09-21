@@ -31,7 +31,7 @@ To upgrade agents using the command line, use the :doc:`/var/ossec/bin/agent_upg
       002   debian12                           Wazuh v4.7.5
       003   debian12                           Wazuh v4.7.5
 
-      Total outdated agents: 2
+      Total outdated agents: 3
 
 #. Upgrade the Wazuh agent using the ``-a`` parameter followed by the agent ID (here, the agent ID is *003*):
 

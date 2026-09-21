@@ -88,7 +88,7 @@ Configure the Wazuh server with a custom decoder and rule to analyze the events 
 
 #. Restart the Wazuh manager to apply the changes:
 
-   .. code-block:: PowerShell
+   .. code-block:: console
 
       $ sudo systemctl restart wazuh-manager
 

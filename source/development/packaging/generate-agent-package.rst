@@ -391,7 +391,7 @@ Follow the steps below  to build a Solaris package.
 
 #. First, install the needed dependencies:
 
-   .. code-block::console
+   .. code-block:: console
 
       $ ./generate_wazuh_packages.sh -e
 

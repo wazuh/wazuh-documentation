@@ -660,7 +660,7 @@ Specifies if the number of monitored entries has a limit.
 +--------------------+---------------------------------------+
 | **Default value**  | yes                                   |
 +--------------------+---------------------------------------+
-| **Allowed values** | yes/no                                |
+| **Allowed values** | yes, no                               |
 +--------------------+---------------------------------------+
 
 
@@ -699,7 +699,7 @@ Specifies if the number of monitored entries has a limit.
 +--------------------+---------------------------------------+
 | **Default value**  | yes                                   |
 +--------------------+---------------------------------------+
-| **Allowed values** | yes/no                                |
+| **Allowed values** | yes, no                               |
 +--------------------+---------------------------------------+
 
 **entries**
@@ -741,7 +741,7 @@ Specifies performing periodic inventory synchronizations.
 +--------------------+---------------------------------------+
 | **Default value**  | yes                                   |
 +--------------------+---------------------------------------+
-| **Allowed values** | yes/no                                |
+| **Allowed values** | yes, no                               |
 +--------------------+---------------------------------------+
 
 **registry_enabled**
@@ -752,7 +752,7 @@ this parameter is ignored.
 +--------------------+---------------------------------------+
 | **Default value**  | yes                                   |
 +--------------------+---------------------------------------+
-| **Allowed values** | yes/no                                |
+| **Allowed values** | yes, no                               |
 +--------------------+---------------------------------------+
 
 **interval**
@@ -760,7 +760,7 @@ this parameter is ignored.
 Specifies the initial time interval between every inventory synchronization. If the synchronization fails the value is duplicated until it reaches the value of ``max_interval``. If the synchronization succeds the value is restored.
 
 +--------------------+-----------------------------------------------------------------------+
-| **Default value**  | 5 m                                                                   |
+| **Default value**  | 5m                                                                    |
 +--------------------+-----------------------------------------------------------------------+
 | **Allowed values** | Any number greater than or equal to 0. Allowed suffixes (s, m, h, d). |
 +--------------------+-----------------------------------------------------------------------+
@@ -770,7 +770,7 @@ Specifies the initial time interval between every inventory synchronization. If 
 Maximum time interval to trigger a synchronization. When a synchronization fails the interval is duplicated up to this maximum value.
 
 +--------------------+-----------------------------------------------------------------------------------+
-| **Default value**  | 1 h                                                                               |
+| **Default value**  | 1h                                                                                |
 +--------------------+-----------------------------------------------------------------------------------+
 | **Allowed values** | Any integer greater than or equal to ``interval``. Allowed suffixes (s, m, h, d). |
 +--------------------+-----------------------------------------------------------------------------------+
@@ -849,7 +849,7 @@ Set the disk quota limit option to enabled or disabled.
 +--------------------+---------------------------------------+
 | **Default value**  | yes                                   |
 +--------------------+---------------------------------------+
-| **Allowed values** | yes/no                                |
+| **Allowed values** | yes, no                               |
 +--------------------+---------------------------------------+
 
 **limit**
@@ -874,7 +874,7 @@ Set the size limit of a file to enabled or disabled.
 +--------------------+---------------------------------------+
 | **Default value**  | yes                                   |
 +--------------------+---------------------------------------+
-| **Allowed values** | yes/no                                |
+| **Allowed values** | yes, no                               |
 +--------------------+---------------------------------------+
 
 **limit**
