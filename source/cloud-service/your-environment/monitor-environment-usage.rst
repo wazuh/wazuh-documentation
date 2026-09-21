@@ -73,7 +73,7 @@ If you observe a pattern of drops in these metrics, consider the following actio
 
 -  **Increase the EPS setting**: Adjust the :ref:`average/peak EPS <cloud_settings_data_ingestion_rate>` configuration to better align with your actual event rate. This ensures your environment can process more events without loss.
 -  **Review agent configuration**: Some agents may be sending excessive or unnecessary data. Tune their configuration to reduce noise, such as by filtering out less critical events before they are sent.
--  **Use the leaky bucket algorithm**: Implement a `leaky bucket <https://documentation.wazuh.com/current/user-manual/agent/agent-management/antiflooding.html>`__ configuration on agents to smooth out event flow. This prevents sudden spikes in event bursts that could overwhelm queues and cause drops.
+-  **Use the leaky bucket algorithm**: Implement a :doc:`leaky bucket </user-manual/agent/agent-management/antiflooding>` configuration on agents to smooth out event flow. This prevents sudden spikes in event bursts that could overwhelm queues and cause drops.
 
 By combining these strategies, you can ensure that your environment remains within its processing limits, reducing the risk of lost events while maintaining efficient and reliable event ingestion.
 
