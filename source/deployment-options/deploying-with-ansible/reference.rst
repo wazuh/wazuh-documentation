@@ -224,7 +224,7 @@ Wazuh manager
 
 |
 | **Variable**: ``wazuh_manager_openscap``
-| **Description**: Configures the :doc:`wodle </user-manual/reference/ossec-conf/wodle-osquery>` item named ``open-scap`` in ``ossec.conf``.
+| **Description**: Configures the ``wodle`` item named ``open-scap`` in ``ossec.conf``.
 | **Default values**:
 
 .. code-block:: yaml
@@ -237,7 +237,7 @@ Wazuh manager
 
 |
 | **Variable**: ``wazuh_manager_ciscat``
-| **Description**: Configures the :doc:`wodle </user-manual/reference/ossec-conf/wodle-osquery>` item named ``cis-cat`` in ``ossec.conf``.
+| **Description**: Configures the ``wodle`` item named ``cis-cat`` in ``ossec.conf``.
 | **Default value**:
 
 .. code-block:: yaml

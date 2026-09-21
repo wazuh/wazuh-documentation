@@ -57,7 +57,7 @@ max_sessions
 Max number of users connected simultaneously.
 
 +--------------------+---------------------------------+
-| **Default value**  | 1                               |
+| **Default value**  | 64                              |
 +--------------------+---------------------------------+
 | **Allowed values** | A number between 1 and 500      |
 +--------------------+---------------------------------+
