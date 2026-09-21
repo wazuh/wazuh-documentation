@@ -70,6 +70,8 @@ Example
 allow_remote_prefilter_cmd
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+.. deprecated:: 5.0.0
+
 Allows ``prefilter_cmd`` option apply in remote configuration (``agent.conf``).
 
 +----------------------+-----------+
@@ -413,6 +415,8 @@ Example:
 
 prefilter_cmd
 ^^^^^^^^^^^^^^
+
+.. deprecated:: 5.0.0
 
 Run to prevent prelinking from creating false positives.
 
@@ -1128,7 +1132,6 @@ Wazuh agent - Linux/Unix
      <disabled>no</disabled>
      <!-- Frequency that syscheck is executed default every 12 hours -->
      <frequency>43200</frequency>
-     <scan_on_start>yes</scan_on_start>
      <!-- Directories to check  (perform all possible verifications) -->
      <directories>/etc,/usr/bin,/usr/sbin</directories>
      <directories>/bin,/sbin,/boot</directories>
@@ -1250,7 +1253,6 @@ Wazuh agent - MacOS X
      <disabled>no</disabled>
      <!-- Frequency that syscheck is executed default every 12 hours -->
      <frequency>43200</frequency>
-     <scan_on_start>yes</scan_on_start>
      <!-- Directories to check  (perform all possible verifications) -->
      <directories>/etc,/usr/bin,/usr/sbin</directories>
      <directories>/bin,/sbin</directories>
