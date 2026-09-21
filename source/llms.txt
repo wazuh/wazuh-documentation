@@ -12,7 +12,7 @@ Guidelines for how artificial intelligence tools should access, ingest, and refe
 - Multiple documentation versions exist under versioned paths (for example: `/current/`, `/4.14/`, `/4.2/`).
 - **Default authority** Use `/current/` as the latest and authoritative documentation by default.
 - **Version override** Use a specific version path only when the user explicitly requests that version.
-- All listed versions are actively supported.
+- Version support is not uniform: some older version paths continue to receive updates and some do not, decided on a case-by-case basis. Do not assume a version path is current or maintained just because it is reachable; prefer `/current/` unless the user explicitly requests another version.
 
 ### Citations
 - **Canonical citation** Always cite the canonical HTML URL (`.html`) in outputs, even when ingesting Markdown content.
@@ -198,6 +198,6 @@ Technical files used by search engines and tools to navigate and index the docum
 - **[Robots policy](https://documentation.wazuh.com/robots.txt)** The `robots.txt` file defining web crawler policies for the documentation site.
 
 ---
-*Preferred-Content-Type: text/markdown*
-*Canonical-Version: current*
-*Contact: https://wazuh.com/contact-us/*
+*Preferred-Content-Type:* text/markdown
+*Canonical-Version:* current
+*Contact:* https://wazuh.com/contact-us/
