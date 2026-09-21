@@ -76,7 +76,7 @@ The following example shows how to configure different attribute checks for moni
 
    .. code-block:: powershell
 
-      > Restart-Service -Name wazuh
+      > Restart-Service -Name WazuhSvc
 
 .. _recursion_level_windows_registry:
 
@@ -103,7 +103,7 @@ Follow these steps to set the ``recursion_level`` of ``HKEY_LOCAL_MACHINE\SYSTEM
 
    .. code-block:: powershell
 
-      > Restart-Service -Name wazuh
+      > Restart-Service -Name WazuhSvc
 
 When using the following registry structure and ``recursion_level="3"``, FIM generates findings for ``Subkey_3`` and all registry subkeys or values up to ``HKEY_LOCAL_MACHINE\SYSTEM\Setup\level_1\level_2\level_3\`` but not for any registry subkeys or values deeper than ``level_3``.
 
@@ -167,7 +167,7 @@ Follow these steps to configure the FIM module to report changes made to ``HKEY_
 
    .. code-block:: powershell
 
-      > Restart-Service -Name wazuh
+      > Restart-Service -Name WazuhSvc
 
 #. Modify the ``Custom Key`` subkey and add a new string value ``FIM`` and data ``cmd``.
 
@@ -215,7 +215,7 @@ Follow these steps to configure the FIM module to ignore the ``HKEY_LOCAL_MACHIN
 
    .. code-block:: powershell
 
-      > Restart-Service -Name wazuh
+      > Restart-Service -Name WazuhSvc
 
 Use case: Detect malware persistence in Windows Registry
 --------------------------------------------------------
@@ -236,7 +236,9 @@ Use case description
 Configuration
 ^^^^^^^^^^^^^
 
-Wazuh monitors the startup registry keys by default, without requiring any special user action or configuration. By default, the Wazuh agent configuration file at ``C:\Program Files (x86)\ossec-agent\ossec.conf`` uses the following setting to monitor the startup registry keys:
+Wazuh monitors the startup registry keys by default, without requiring any special user action or configuration. The FIM module's default scan frequency is 43200 seconds (12 hours), so changes to these keys might not generate a finding for up to 12 hours.
+
+Modify the ``frequency`` option in the following configuration of the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` file to lower the scan frequency to 300 seconds (5 minutes) for this use case:
 
 .. code-block:: xml
 
