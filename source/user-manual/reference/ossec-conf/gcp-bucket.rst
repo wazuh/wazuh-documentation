@@ -82,7 +82,7 @@ Defines a bucket to process. It must have its ``type`` attribute defined. It sup
    +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
    | :ref:`gcp_bucket_path`                 | Any valid path                                              | Optional                                      |
    +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
-   | :ref:`gcp_bucket_only_logs_after`      | Valid date in YYYY-MM-DD format                             | Optional                                      |
+   | :ref:`gcp_bucket_only_logs_after`      | Valid date in YYYY-MMM-DD format                            | Optional                                      |
    +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
    | :ref:`gcp_bucket_remove_from_bucket`   | A value to determine if each log file is deleted once it    | Optional                                      |
    |                                        | has been collected by the module                            |                                               |
@@ -147,12 +147,12 @@ Bucket path or prefix.
 only_logs_after
 ~~~~~~~~~~~~~~~
 
-Parse logs from a specific date onwards. It must follow the YYYY-MM-DD format. 
+Parse logs from a specific date onwards. It must follow the YYYY-MMM-DD format (for example, ``2021-Jun-01``); a numeric month is not accepted.
 
 +--------------------+-----------------------------------+
 | **Default value**  | Date of execution at ``00:00:00`` |
 +--------------------+-----------------------------------+
-| **Allowed values** | Valid date [YYYY-MM-DD]           |
+| **Allowed values** | Valid date [YYYY-MMM-DD]          |
 +--------------------+-----------------------------------+
 
 .. _gcp_bucket_remove_from_bucket:

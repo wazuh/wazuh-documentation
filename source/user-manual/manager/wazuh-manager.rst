@@ -223,10 +223,10 @@ The extracted information after the pre-decoding phase is shown below:
    Starting wazuh-logtest v4.14.2
    Type one log per line
 
-   Feb 14 12:19:04 192.168.1.1 sshd[25474]: Accepted password for Stephen from 192.168.1.133 port 49765 ssh
+   Feb 14 12:19:04 192.168.1.1 sshd[25474]: Accepted password for Stephen from 192.168.1.133 port 49765 ssh2
 
    **Phase 1: Completed pre-decoding.
-           full event: 'Feb 14 12:19:04 192.168.1.1 sshd[25474]: Accepted password for Stephen from 192.168.1.133 port 49765 ssh'
+           full event: 'Feb 14 12:19:04 192.168.1.1 sshd[25474]: Accepted password for Stephen from 192.168.1.133 port 49765 ssh2'
            timestamp: 'Feb 14 12:19:04'
            hostname: '192.168.1.1'
            program_name: 'sshd'
@@ -275,10 +275,10 @@ The extracted information after the decoding phase is shown below:
    Starting wazuh-logtest v4.14.2
    Type one log per line
 
-   Feb 14 12:19:04 192.168.1.1 sshd[25474]: Accepted password for Stephen from 192.168.1.133 port 49765 ssh
+   Feb 14 12:19:04 192.168.1.1 sshd[25474]: Accepted password for Stephen from 192.168.1.133 port 49765 ssh2
 
    **Phase 1: Completed pre-decoding.
-           full event: 'Feb 14 12:19:04 192.168.1.1 sshd[25474]: Accepted password for Stephen from 192.168.1.133 port 49765 ssh'
+           full event: 'Feb 14 12:19:04 192.168.1.1 sshd[25474]: Accepted password for Stephen from 192.168.1.133 port 49765 ssh2'
            timestamp: 'Feb 14 12:19:04'
            hostname: '192.168.1.1'
            program_name: 'sshd'

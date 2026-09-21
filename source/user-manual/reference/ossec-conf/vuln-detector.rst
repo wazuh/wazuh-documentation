@@ -58,7 +58,8 @@ Time interval for periodic feed updates.
 +--------------------+------------------------------------------------------------------------------------------------------+
 | **Default**        | ``60m``                                                                                              |
 +--------------------+------------------------------------------------------------------------------------------------------+
-| **Allowed values** | A positive number containing a time unit suffix character. For example ``2h`` for 2 hours            |
+| **Allowed values** | A positive number containing a time unit suffix character. For example ``2h`` for 2 hours. The       |
+|                    | minimum allowed is ``60m``; lower values are automatically reset to ``60m``.                         |
 +--------------------+------------------------------------------------------------------------------------------------------+
 
 index-status

@@ -181,7 +181,7 @@ The following table shows the configuration options for the Wazuh dashboard:
 +---------------------------------+---------------------------------------------------------+-----------------------------------------------------+-------------------------+
 |                                 | .. _wazuh.monitoring.enabled:                           |                                                     |                         |
 |                                 |                                                         |                                                     |                         |
-| wazuh.monitoring.enabled        | Enables or disables the ``wazuh-monitoring`` index      | ``True``                                            | true,false              |
+| wazuh.monitoring.enabled        | Enables or disables the ``wazuh-monitoring`` index      | ``true``                                            | true,false              |
 |                                 | creation and/or visualization:                          |                                                     |                         |
 |                                 |                                                         |                                                     |                         |
 |                                 | - When the value is set to ``true``, the Wazuh          | .. note:: The Wazuh dashboard user interface        |                         |

@@ -61,7 +61,7 @@ You can specify the Windows Registry keys to monitor using the :ref:`windows_reg
 
 - ``check_all``: The allowed values for the ``check_all`` attribute are ``yes`` and ``no``. This option is enabled by default. Records:
 
-   - File size
+   - Registry size
    - Last modification date
    - MD5, SHA1, and SHA256 hash sums
 
@@ -70,8 +70,8 @@ You can specify the Windows Registry keys to monitor using the :ref:`windows_reg
 
 Follow these steps to configure the FIM module with the following settings:
 
-- Record last modification date and all the file hashes of the ``HKEY_LOCAL_MACHINE\Software\Classes\batfile\TestKey1`` registry key.
-- Disable the recording of file hashes (MD5, SHA1, and SHA256) of the ``HKEY_LOCAL_MACHINE\Software\Classes\batfile\TestKey2`` registry key.
+- Record last modification date and all the hashes of the ``HKEY_LOCAL_MACHINE\Software\Classes\batfile\TestKey1`` registry key.
+- Disable the recording of hashes (MD5, SHA1, and SHA256) of the ``HKEY_LOCAL_MACHINE\Software\Classes\batfile\TestKey2`` registry key.
 - Disable the recording of the modification time of the ``HKEY_LOCAL_MACHINE\Software\Classes\batfile\TestKey3`` registry key.
 
 #. Edit the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file:
@@ -88,12 +88,18 @@ Follow these steps to configure the FIM module with the following settings:
 
    .. code-block:: console
 
-      Restart-Service -Name wazuh
+      Restart-Service -Name WazuhSvc
+
+.. _recursion_level_windows_registry:
 
 Recursion level
 ^^^^^^^^^^^^^^^
 
 You can configure the maximum recursion level allowed for a Windows Registry entity  with the ``recursion_level`` attribute of the :ref:`windows_registry <reference_ossec_syscheck_windows_registry>` option. The allowed values for this attribute are any integer between 0 and 512.
+
+.. note::
+
+   This 512 limit applies specifically to ``<windows_registry>`` (Windows Registry monitoring). The ``recursion_level`` attribute for ``<directories>`` is different and supports a lower range. See :ref:`Recursion level <recursion_level_directories>`.
 
 Follow these steps to set the ``recursion_level`` of ``HKEY_LOCAL_MACHINE\SYSTEM\Setup`` to 3.
 
@@ -109,7 +115,7 @@ Follow these steps to set the ``recursion_level`` of ``HKEY_LOCAL_MACHINE\SYSTEM
 
    .. code-block:: console
 
-      Restart-Service -Name wazuh
+      Restart-Service -Name WazuhSvc
 
 When using the following registry structure and ``recursion_level="3"``, FIM generates alerts for ``Subkey_3`` and all registry subkeys or values up to ``HKEY_LOCAL_MACHINE\SYSTEM\Setup\level_1\level_2\level_3\`` but not for any registry subkeys or values deeper than ``level_3``.
 
@@ -169,7 +175,7 @@ Follow these steps to configure the FIM module to report changes made to ``HKEY_
 
    .. code-block:: console
 
-      Restart-Service -Name wazuh
+      Restart-Service -Name WazuhSvc
 
 #. Modify the ``Custom Key`` subkey and add a new string value ``FIM`` and data ``cmd``.
 
@@ -209,7 +215,7 @@ Follow these steps to configure the FIM module to ignore the ``HKEY_LOCAL_MACHIN
    .. code-block:: xml
 
       <syscheck>
-        <registry_ignore>HKEY_LOCAL_MACHINE\Security\Policy\Secrets</registry_ignore>
+        <registry_ignore>HKEY_LOCAL_MACHINE\Security\Policy</registry_ignore>
         <registry_ignore type="sregex">\Enum$</registry_ignore>
       </syscheck>
 
@@ -217,7 +223,7 @@ Follow these steps to configure the FIM module to ignore the ``HKEY_LOCAL_MACHIN
 
    .. code-block:: console
 
-      Restart-Service -Name wazuh
+      Restart-Service -Name WazuhSvc
 
 Use case: Detect malware persistence in Windows Registry
 --------------------------------------------------------
@@ -238,7 +244,9 @@ Use case description
 Configuration
 ^^^^^^^^^^^^^
 
-Wazuh monitors the startup registry keys automatically, out-of-the-box, without requiring any user special action or configuration. By default, the Wazuh agent configuration file at ``C:\Program Files (x86)\ossec-agent\ossec.conf`` uses the following setting to monitor the startup registry keys:
+Wazuh monitors the startup registry keys by default, without requiring any special user action or configuration. The FIM module's default scan frequency is 43200 seconds (12 hours), so changes to these keys might not generate an alert for up to 12 hours.
+
+Modify the ``frequency`` option in the following configuration of the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` file to lower the scan frequency to 300 seconds (5 minutes) for this use case:
 
    .. code-block:: xml
 
@@ -252,7 +260,7 @@ Restart the Wazuh agent to apply the configuration:
 
 .. code-block:: PowerShell
 
-   Restart-Service -Name wazuh
+   Restart-Service -Name WazuhSvc
 
 Test the configuration
 ^^^^^^^^^^^^^^^^^^^^^^

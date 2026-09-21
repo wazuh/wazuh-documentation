@@ -1026,10 +1026,16 @@ You can monitor the Windows special directories ``%WINDIR%/System32`` and ``%WIN
    
    If these types of paths are included in your ``<directories>`` configuration, they will be ignored and no FIM events will be generated for them. This applies to all FIM modes: scheduled, real-time, and whodata.
 
+.. _recursion_level_directories:
+
 Recursion level
 ---------------
 
 You can configure the maximum recursion level allowed for a specific directory by using the ``recursion_level`` attribute of the :ref:`directories <reference_ossec_syscheck_directories>`   option. The ``recursion_level`` value must be an integer between 0 and 320.
+
+.. note::
+
+   This 320 limit applies specifically to ``<directories>`` (file and folder monitoring). The ``recursion_level`` attribute for ``<windows_registry>`` is different and supports a wider range. See :ref:`Recursion level <recursion_level_windows_registry>` in *Windows Registry monitoring*.
 
 In the configuration example below, you can see how to set the ``recursion_level`` of the ``folder_test``  directory to 3. Replace ``<FILEPATH_OF_MONITORED_DIRECTORY>`` with your own file paths.
 
@@ -1209,5 +1215,5 @@ The table below explains the supported attributes of the synchronization option:
   +---------------------+----------------------+---------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
   | queue_size          | 16384                | Integer number between 2 and 1000000.                                                       | Specifies the queue size of the manager synchronization responses.                                                                                                                                      |
   +---------------------+----------------------+---------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-  | response_timeout    | 10                   | Integer number between 0 and 1000000. 0 means disabled.                                     | Sets the maximum synchronization message throughput.                                                                                                                                                    |
+  | max_eps             | 10                   | Integer number between 0 and 1000000. 0 means disabled.                                     | Sets the maximum synchronization message throughput.                                                                                                                                                    |
   +---------------------+----------------------+---------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+

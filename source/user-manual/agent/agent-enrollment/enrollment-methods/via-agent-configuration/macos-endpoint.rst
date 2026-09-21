@@ -47,7 +47,7 @@ Follow these steps to configure a macOS endpoint for enrollment via the Wazuh ag
       -  ``<agent_name>EXAMPLE_NAME</agent_name>``: This specifies the name the endpoint should be enrolled as. When this is not specified, it defaults to the endpoint hostname.
       -  ``<groups>GROUP1,GROUP2,GROUP3</groups>``: This specifies the group(s) in which the Wazuh agent should be added. An agent group is a collection of agents that would share the same configuration. This allows the Wazuh manager to push configuration settings to a set of Wazuh agents that belong to the same group. The Wazuh agent enrollment will fail if a non-existent group is specified. Therefore, it is necessary to create the desired group on the Wazuh manager before using the group parameter. Additional information on agent groups can be found :doc:`here </user-manual/agent/agent-management/grouping-agents>`.
 
-	   More optional enrollment parameters and their usage are provided :ref:`here <enrollment>`.
+      More optional enrollment parameters and their usage are provided :ref:`here <enrollment>`.
 
 #. Restart the Wazuh agent to make the changes effective:
 

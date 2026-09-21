@@ -466,7 +466,7 @@ agents_disconnection_alert_time
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 This sets the time after which an alert is generated since an agent was considered as disconnected.
-As this is a time-lapse after an agent is considered as disconnected because of the :ref:`disconnection time<reference_agents_disconnection_time>`, the minimum time frame to produce an alert taking the default values is 2m and 20s.
+As this is a time-lapse after an agent is considered as disconnected because of the :ref:`disconnection time<reference_agents_disconnection_time>`, the minimum time frame to produce an alert taking the default values is 15m.
 
 +-------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**       | 0s                                                                                                                                                                                                                                            |
