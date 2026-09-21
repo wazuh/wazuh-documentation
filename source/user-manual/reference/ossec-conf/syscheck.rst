@@ -70,6 +70,8 @@ Example
 allow_remote_prefilter_cmd
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+.. deprecated:: 5.0.0
+
 Allows ``prefilter_cmd`` option apply in remote configuration (``agent.conf``).
 
 +----------------------+-----------+
@@ -413,6 +415,8 @@ Example:
 
 prefilter_cmd
 ^^^^^^^^^^^^^^
+
+.. deprecated:: 5.0.0
 
 Run to prevent prelinking from creating false positives.
 
