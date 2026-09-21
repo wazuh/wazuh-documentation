@@ -643,7 +643,7 @@ Specifies a limit on the number of files that FIM monitors. It ignores files add
 +----------------------+----------+
 | **Default value**    | yes      |
 +----------------------+----------+
-| **Allowed values**   | yes/no   |
+| **Allowed values**   | yes, no  |
 +----------------------+----------+
 
 ``entries`` — Specifies the maximum number of files to monitor.
@@ -675,7 +675,7 @@ Specifies a limit on the number of registry entries that FIM monitors. It ignore
 +----------------------+----------+
 | **Default value**    | yes      |
 +----------------------+----------+
-| **Allowed values**   | yes/no   |
+| **Allowed values**   | yes, no  |
 +----------------------+----------+
 
 ``entries`` — Specifies the maximum number of registry entries to monitor.
@@ -707,13 +707,13 @@ The database synchronization settings are configured inside this tag.
 +----------------------+----------+
 | **Default value**    | yes      |
 +----------------------+----------+
-| **Allowed values**   | yes/no   |
+| **Allowed values**   | yes, no  |
 +----------------------+----------+
 
 ``interval`` — Specifies the initial time interval between every inventory synchronization.
 
 +----------------------+-------------------------------------------------------------------------+
-| **Default value**    | 5 m                                                                     |
+| **Default value**    | 5m                                                                      |
 +----------------------+-------------------------------------------------------------------------+
 | **Allowed values**   | Any number greater than or equal to 0. Allowed suffixes (s, m, h, d).   |
 +----------------------+-------------------------------------------------------------------------+
@@ -741,6 +741,8 @@ The database synchronization settings are configured inside this tag.
 +----------------------+---------------------------------------+
 | **Allowed values**   | Any non-negative integer (seconds).   |
 +----------------------+---------------------------------------+
+
+.. _reference_ossec_syscheck_diff:
 
 diff
 ^^^^
@@ -771,7 +773,7 @@ This option can be used to limit the size of the ``queue/diff/local`` folder whe
 +----------------------+----------+
 | **Default value**    | yes      |
 +----------------------+----------+
-| **Allowed values**   | yes/no   |
+| **Allowed values**   | yes, no  |
 +----------------------+----------+
 
 ``limit`` — Specifies the limit for the size of the ``queue/diff/local`` folder.
@@ -792,7 +794,7 @@ This option can be used to limit the size of the file which will report diff inf
 +----------------------+----------+
 | **Default value**    | yes      |
 +----------------------+----------+
-| **Allowed values**   | yes/no   |
+| **Allowed values**   | yes, no  |
 +----------------------+----------+
 
 ``limit`` — Specifies the limit for the size of files monitored with ``report_changes``.

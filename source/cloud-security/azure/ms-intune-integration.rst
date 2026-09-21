@@ -6,23 +6,17 @@
 Microsoft Intune integration
 ============================
 
-Microsoft Intune is a cloud-based solution for managing various devices, including virtual endpoints, physical computers, mobile devices, and IoT devices. Integrating Microsoft Intune with Wazuh provides the following benefits:
+Microsoft Intune is a cloud-based solution for managing virtual endpoints, physical computers, mobile devices, and IoT devices. Integrating Microsoft Intune with Wazuh provides the following benefits:
 
--  It allows Wazuh to retrieve and process audit logs from managed devices using built-in decoders and rules, and generate insightful and actionable security alerts.
+-  It allows Wazuh to retrieve and process audit logs from managed devices using built-in decoders and rules and generate insightful, actionable security findings.
 -  It enhances visibility into all managed endpoint activities, strengthening security monitoring across the organization.
--  It helps organizations ensure device administration aligns with compliance requirements, thus helping with maintaining security policies.
+-  It helps organizations ensure device administration aligns with compliance requirements and supports security policy enforcement.
 
-Wazuh integration with Microsoft Intune is available from Wazuh 4.10.0 and builds on the existing :doc:`Microsoft Graph API integration <monitoring-ms-graph>`. It operates synchronously, retrieving logs from managed endpoints at scheduled intervals. This integration allows the Wazuh agent to collect and process three types of data from Intune:
-
--  **Audit events**: Logs of actions and changes occurring within the Intune environment.
--  **Managed devices**: Information about devices managed by Intune.
--  **Detected applications**: Applications installed on managed devices as reported by Intune.
-
-The configuration of this integration is handled via the Wazuh module for Microsoft Graph in the Wazuh agent. You must configure the ``deviceManagement`` resource (i.e., specific API endpoint) on the Wazuh agent with the following relationships to enable the integration:
+The Wazuh module for Microsoft Graph in the Wazuh agent handles this integration configuration. You must configure the ``deviceManagement`` resource (that is, a specific API endpoint) on the Wazuh agent with the following relationships to enable the integration:
 
 -  ``auditEvents``: Audit logs include a record of activities that generate a change in Microsoft Intune.
 -  ``managedDevices``: List of devices managed by Microsoft Intune.
--  ``detectedApps``: List of applications managed by Microsoft Intune. The results will also include a list of devices where each app is installed.
+-  ``detectedApps``: List of applications managed by Microsoft Intune. The results include a list of devices where each app is installed.
 
 Refer to the :doc:`ms-graph configuration reference </user-manual/reference/ossec-conf/ms-graph-module>` documentation for more information.
 
@@ -32,14 +26,14 @@ Configuration
 Perform the following steps to integrate Microsoft Intune with Wazuh:
 
 -  Configure the Microsoft Graph API permissions.
--  Configure the relationships.
--  Extend the Wazuh ruleset (optional).
--  Import custom dashboards.
+-  Configure the Wazuh agent.
+
+.. _ms_intune_graph_api_permissions:
 
 Configure the Microsoft Graph API permissions
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This integration allows Wazuh to pull data from the Microsoft Graph API. Before Wazuh can pull logs and other content from the Microsoft Graph API, it must be authorized and pass through an authentication process. Wazuh must provide the ``tenant_id``, ``client_id``, and ``secret_value`` of an authorized application that is registered through Azure.
+This integration allows Wazuh to pull data from the Microsoft Graph API. Before Wazuh can pull logs and other content from the Microsoft Graph API, it must be authorized and pass through an authentication process. Wazuh must provide the ``tenant_id``, ``client_id``, and ``secret_value`` of an authorized application registered in Azure.
 
 This step involves configuring the API permissions required to access Microsoft Intune events via the Microsoft Graph API. The required permissions are:
 
@@ -47,47 +41,45 @@ This step involves configuring the API permissions required to access Microsoft 
 -  ``DeviceManagementManagedDevices.Read.All``: Read ``auditEvents`` and ``managedDevices`` relationship data from your tenant.
 
 .. thumbnail:: /images/cloud-security/azure/ms-intune/configuring-api-permissions.png
-   :alt: Azure API permissions page showing DeviceManagementApps.Read.All and DeviceManagementManagedDevices.Read.All granted to the Wazuh application
+   :alt: Microsoft Graph API permissions on Azure Portal
    :align: center
    :width: 80%
 
-For further information, please refer to the :ref:`Microsoft Graph API setup <permissions-ms-graph-api-setup>` guide.
+For further information, refer to the :ref:`Microsoft Graph API setup <configure_ms_graph_api_permissions>` guide.
 
-Configure the relationships
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Wazuh agent
+^^^^^^^^^^^
 
 The relationships ``auditEvents``, ``managedDevices``, and ``detectedApps`` need to be configured within the Wazuh module for Microsoft Graph in the Wazuh agent. This configuration enables Wazuh to search for logs created by Microsoft Graph resources and relationships.
 
-In the example below, we search for ``auditEvents``, ``managedDevices``, and ``detectedApps`` type events within the ``deviceManagement`` resource at an interval of ``5m``. The logs will only be those that were created after the module was started.
-
-Perform the following steps on the Wazuh agent:
+In the example below, we search for ``auditEvents``, ``managedDevices``, and ``detectedApps`` type events within the ``deviceManagement`` resource at an interval of ``20m``. The logs include only events created after the module started.
 
 #. Edit the Wazuh agent configuration file ``/var/ossec/etc/ossec.conf`` and add the following to enable the Wazuh module for Microsoft Graph with the desired relationships:
 
    .. code-block:: xml
-      :emphasize-lines: 10-12, 16-19
+      :emphasize-lines: 10-12
 
       <ossec_config>
-        <ms-graph>
-          <enabled>yes</enabled>
-          <only_future_events>yes</only_future_events>
-          <curl_max_size>10M</curl_max_size>
-          <run_on_start>yes</run_on_start>
-          <interval>5m</interval>
-          <version>v1.0</version>
-          <api_auth>
-            <tenant_id><YOUR_TENANT_ID></tenant_id>
-            <client_id><YOUR_CLIENT_ID></client_id>
-            <secret_value><YOUR_SECRET_VALUE></secret_value>
-            <api_type>global</api_type>
-          </api_auth>
-          <resource>
-            <name>deviceManagement</name>
-            <relationship>auditEvents</relationship>
-            <relationship>managedDevices</relationship>
-            <relationship>detectedApps</relationship>
-          </resource>
-        </ms-graph>
+         <ms-graph>
+            <enabled>yes</enabled>
+            <only_future_events>yes</only_future_events>
+            <curl_max_size>10M</curl_max_size>
+            <run_on_start>yes</run_on_start>
+            <interval>20m</interval>
+            <version>v1.0</version>
+            <api_auth>
+               <tenant_id><YOUR_TENANT_ID></tenant_id>
+               <client_id><YOUR_CLIENT_ID></client_id>
+               <secret_value><YOUR_SECRET_VALUE></secret_value>
+               <api_type>global</api_type>
+            </api_auth>
+            <resource>
+               <name>deviceManagement</name>
+               <relationship>auditEvents</relationship>
+               <relationship>managedDevices</relationship>
+               <relationship>detectedApps</relationship>
+            </resource>
+         </ms-graph>
       </ossec_config>
 
    Replace:
@@ -96,7 +88,7 @@ Perform the following steps on the Wazuh agent:
    -  ``<YOUR_CLIENT_ID>`` with the client ID of the application registered in Azure.
    -  ``<YOUR_SECRET_VALUE>`` with the secret associated with the application registered in Azure.
 
-#. Save the changes and restart the Wazuh agent to effect the changes:
+#. Save the changes and restart the Wazuh agent to take effect:
 
    .. code-block:: console
 
@@ -104,284 +96,181 @@ Perform the following steps on the Wazuh agent:
 
 For more configuration details, refer to the :doc:`ms-graph configuration reference </user-manual/reference/ossec-conf/ms-graph-module>` documentation.
 
-.. note::
+Use case
+--------
 
-   To avoid duplicate alerts, this setting should be added to only one Wazuh agent.
+Monitor managed device compliance
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Extend the Wazuh ruleset
-^^^^^^^^^^^^^^^^^^^^^^^^
+Microsoft Intune managed-device records describe the enrollment, compliance, and configuration state of each device under management. Wazuh collects Microsoft Azure managed-device inventory data through the Wazuh module for Microsoft Graph using the ``deviceManagement`` resource and ``managedDevices`` relationship. It then processes these events using out-of-the-box decoders, KVDBs, and detection rules.
 
-You can extend the ruleset to customize the hierarchy of detection rules. The Wazuh manager includes a basic ruleset to detect events and inventory items collected by the Wazuh agent. To customize detection rules for Microsoft Intune data, extend the Wazuh ruleset by following the :doc:`ruleset customization documentation </user-manual/ruleset/rules/custom>`. This allows you to tailor the hierarchy and behavior of detection rules to meet specific requirements.
+This use case shows a Microsoft Intune-managed device that Wazuh reports as out of compliance, with disk encryption disabled:
 
-.. note::
+The command output looks similar to this:
 
-   The Wazuh manager includes a set of inbuilt rules that aid in classifying the importance and context of different events.
-
-The official rules associated with Microsoft Intune are:
-
-.. code-block:: xml
-
-   <group name="ms-graph,">
-     <rule id="99651" level="3">
-          <if_sid>99500</if_sid>
-          <options>no_full_log</options>
-          <field name="ms-graph.resource">deviceManagement</field>
-          <description>MS Graph message: MDM Intune event.</description>
-      </rule>
-
-      <rule id="99652" level="3">
-          <if_sid>99651</if_sid>
-          <options>no_full_log</options>
-          <field name="ms-graph.relationship">auditEvents</field>
-          <description>MS Graph message: MDM Intune audit event.</description>
-      </rule>
-
-      <rule id="99653" level="3">
-          <if_sid>99651</if_sid>
-          <options>no_full_log</options>
-          <field name="ms-graph.relationship">managedDevices</field>
-          <description>MS Graph message: MDM Intune device.</description>
-      </rule>
-
-      <rule id="99654" level="3">
-          <if_sid>99651</if_sid>
-          <options>no_full_log</options>
-          <field name="ms-graph.relationship">detectedApps</field>
-          <description>MS Graph message: MDM Intune app.</description>
-      </rule>
-   </group>
-
-The image below shows Microsoft Intune alerts generated on the Wazuh dashboard.
-
-.. thumbnail:: /images/cloud-security/azure/ms-intune/ms-intune-alerts-on-wazuh-dashboard.png
-   :alt: Wazuh dashboard Threat Hunting Events view listing Microsoft Intune MDM alerts for the Windows-10 agent
-   :align: center
-   :width: 80%
-
-Below, we show sample alerts for some of the relationships we configured previously.
-
-**Sample alert for** ``detectedApps``:
-
-In the example below, Microsoft Intune detects the application Freeform on one of the managed devices. As a result, the JSON below is generated:
-
-.. code-block:: javascript
+.. code-block:: json
+   :class: output
 
    {
-     "_index": "wazuh-alerts-4.x-2025.01.21",
-     "_id": "m3R0iZQBy8z-qvGHPpVH",
-     "_score": null,
-     "_source": {
-       "input": {
-         "type": "log"
-       },
-       "agent": {
-         "ip": "X.X.X.X",
-         "name": "Windows-10",
-         "id": "001"
-       },
-       "manager": {
-         "name": "wazuh-server"
-       },
-       "data": {
-         "ms-graph": {
-           "deviceCount": "1",
-           "resource": "deviceManagement",
-           "displayName": "Freeform",
-           "managedDevices": [
-             {
-               "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxx",
-               "deviceName": "xxxxxxxx"
-             }
-           ],
-           "id": "cb7d25a27a1d420817229d272fd27a039b4c330380fc29b2ccc1d3f01e1cfa78",
-           "relationship": "detectedApps",
-           "version": "2.0",
-           "sizeInByte": "0",
-           "platform": "macOS"
-         },
-         "integration": "ms-graph",
-         "scan_id": "594315551"
-       },
-       "rule": {
-         "firedtimes": 865,
-         "mail": false,
-         "level": 3,
-         "description": "MS Graph message: MDM Intune app.",
-         "groups": [
-           "ms-graph"
-         ],
-         "id": "99654"
-       },
-       "location": "ms-graph",
-       "decoder": {
-         "name": "json-msgraph"
-       },
-       "id": "1737472881.2773328",
-       "timestamp": "2025-01-21T15:21:21.941+0000"
-     },
-     "fields": {
-       "timestamp": [
-         "2025-01-21T15:21:21.941Z"
-       ]
-     },
-     "sort": [
-       1737472881941
-     ]
+      "scan_id": 1145761535,
+      "integration": "ms-graph",
+      "ms-graph": {
+         "id": "00062d1b-4421-4706-83f0-81e071d839fb",
+         "userId": "19cbd805-6d08-4de1-8be0-7a9e8062407c",
+         "deviceName": "WINDOWS-11-25H2",
+         "managedDeviceOwnerType": "personal",
+         "managementState": "managed",
+         "enrolledDateTime": "2026-05-27T19:16:06Z",
+         "lastSyncDateTime": "2026-05-29T15:37:23Z",
+         "operatingSystem": "Windows",
+         "complianceState": "noncompliant",
+         "jailBroken": "Unknown",
+         "managementAgent": "mdm",
+         "osVersion": "10.0.26200.8457",
+         "easActivated": true,
+         "easDeviceId": "6F25F3C7D9677E4A89B85B7049738141",
+         "easActivationDateTime": "0001-01-01T00:00:00Z",
+         "azureADRegistered": true,
+         "deviceEnrollmentType": "windowsAutoEnrollment",
+         "activationLockBypassCode": null,
+         "emailAddress": "Wazuh",
+         "azureADDeviceId": "bbe2c331-f3b8-4da3-be7b-8dbd7f957f61",
+         "deviceRegistrationState": "registered",
+         "deviceCategoryDisplayName": "Unknown",
+         "isSupervised": false,
+         "exchangeLastSuccessfulSyncDateTime": "0001-01-01T00:00:00Z",
+         "exchangeAccessState": "none",
+         "exchangeAccessStateReason": "none",
+         "remoteAssistanceSessionUrl": null,
+         "remoteAssistanceSessionErrorDetails": null,
+         "isEncrypted": false,
+         "userPrincipalName": "Wazuh",
+         "model": "c5ad.xlarge",
+         "manufacturer": "Amazon EC2",
+         "imei": "",
+         "complianceGracePeriodExpirationDateTime": "2026-06-30T01:08:29Z",
+         "serialNumber": "ec20a8b5-6ba0-5f5e-a525-c6174bfe902f",
+         "phoneNumber": "",
+         "androidSecurityPatchLevel": "",
+         "userDisplayName": "Wazuh",
+         "configurationManagerClientEnabledFeatures": null,
+         "wiFiMacAddress": "",
+         "deviceHealthAttestationState": null,
+         "subscriberCarrier": "",
+         "meid": "",
+         "totalStorageSpaceInBytes": 127918931968,
+         "freeStorageSpaceInBytes": 92478111744,
+         "managedDeviceName": "Wazuh_Windows_5/27/2026_7:16 PM",
+         "partnerReportedThreatState": "unknown",
+         "requireUserEnrollmentApproval": null,
+         "managementCertificateExpirationDate": "2027-05-27T03:38:08Z",
+         "iccid": null,
+         "udid": null,
+         "notes": null,
+         "ethernetMacAddress": null,
+         "physicalMemoryInBytes": 0,
+         "enrollmentProfileName": null,
+         "deviceActionResults": [],
+         "resource": "deviceManagement",
+         "relationship": "managedDevices"
+      }
    }
 
-.. thumbnail:: /images/cloud-security/azure/ms-intune/detectedapps-sample-alert.png
-   :alt: Sample Wazuh alert JSON for a Microsoft Intune detectedApps event showing the Freeform app detected on a managed device
-   :align: center
-   :width: 80%
+The Wazuh agent retrieves the event and sends it to the Wazuh manager. The event is processed by the following decoders:
 
-**Sample alert for** ``managedDevices``:
+.. code-block:: none
 
-In the example below, Microsoft Intune detects information about a managed device. As a result, the JSON below is generated:
+   "decoder/core-wazuh-message/0",
+   "decoder/ms-graph/0",
+   "decoder/azure-intune-device/0"
 
-.. code-block:: javascript
+The ``azure-intune-device`` decoder normalizes the Microsoft Intune event into the following relevant fields:
+
+The command output looks similar to this:
+
+.. code-block:: json
+   :class: output
 
    {
-     "_index": "wazuh-alerts-4.x-2025.01.21",
-     "_id": "ynR3iZQBy8z-qvGHYZae",
-     "_score": null,
-     "_source": {
-       "input": {
-         "type": "log"
-       },
-       "agent": {
-         "ip": "X.X.X.X",
-         "name": "Windows-10",
-         "id": "001"
-       },
-       "manager": {
-         "name": "wazuh-server"
-       },
-       "data": {
-         "ms-graph": {
-           "azureADRegistered": "true",
-           "deviceRegistrationState": "registered",
-           "deviceActionResults": [],
-           "easDeviceId": "XXXXXXXXXXXXXXXXXXX",
-           "complianceState": "noncompliant",
-           "partnerReportedThreatState": "unknown",
-           "deviceName": "XXXXXXXXXXXXXXXXXXX",
-           "operatingSystem": "Windows",
-           "manufacturer": "HP",
-           "osVersion": "10.0.22631.4037",
-           "lastSyncDateTime": "2024-09-23T18:38:44Z",
-           "isEncrypted": "false",
-           "exchangeAccessStateReason": "none",
-           "totalStorageSpaceInBytes": "478772461568.000000",
-           "model": "HP Pavilion Laptop 15-cs0xxx",
-           "wiFiMacAddress": "XXXXXXXXXXXXXXXXXXX",
-           "id": "XXXXXXXXXXXXXXXXXXX",
-           "managedDeviceOwnerType": "company",
-           "exchangeLastSuccessfulSyncDateTime": "0001-01-01T00:00:00Z",
-           "relationship": "managedDevices",
-           "userPrincipalName": "XXXXXXXXXXXXXXXXXXX",
-           "easActivationDateTime": "0001-01-01T00:00:00Z",
-           "jailBroken": "Unknown",
-           "serialNumber": "XXXXXX",
-           "resource": "deviceManagement",
-           "easActivated": "true",
-           "exchangeAccessState": "none",
-           "deviceEnrollmentType": "deviceEnrollmentManager",
-           "userDisplayName": "Tomás",
-           "freeStorageSpaceInBytes": "153643646976.000000",
-           "managedDeviceName": "XXXXXXXXXXXXXXXXXXX",
-           "userId": "XXXX-XXXX-XXXX-XXXXXXX",
-           "managementAgent": "mdm",
-           "isSupervised": "false",
-           "azureADDeviceId": "XXXX-XXXX-XXXX-XXXXXXX",
-           "deviceCategoryDisplayName": "Unknown",
-           "physicalMemoryInBytes": "0",
-           "managementCertificateExpirationDate": "2025-08-29T20:39:04Z",
-           "complianceGracePeriodExpirationDateTime": "2024-10-23T23:52:11Z",
-           "enrolledDateTime": "2024-08-30T19:48:53Z"
-         },
-         "integration": "ms-graph",
-         "scan_id": "1365180664"
-       },
-       "rule": {
-         "firedtimes": 6,
-         "mail": false,
-         "level": 3,
-         "description": "MS Graph message: MDM Intune device.",
-         "groups": [
-           "ms-graph"
+      "data_stream": {
+         "dataset": "azure.intune_device",
+         "type": "logs"
+      },
+      "@timestamp": "2026-09-02T08:45:24.412Z",
+      "observer": {
+         "product": "Microsoft Intune",
+         "vendor": "Microsoft"
+      },
+      "host": {
+         "name": "WINDOWS-11-25H2",
+         "id": "00062d1b-4421-4706-83f0-81e071d839fb",
+         "os": {
+            "name": "Windows",
+            "version": "10.0.26200.8457",
+            "type": "windows"
+         }
+      },
+      "event": {
+         "outcome": "failure",
+         "kind": "state",
+         "dataset": "azure.intune_device",
+         "code": "noncompliant",
+         "start": "2026-05-29T15:37:23Z",
+         "category": [
+            "host"
          ],
-         "id": "99653"
-       },
-       "location": "ms-graph",
-       "decoder": {
-         "name": "json-msgraph"
-       },
-       "id": "1737473086.3097425",
-       "timestamp": "2025-01-21T15:24:46.407+0000"
-     },
-     "fields": {
-       "data.ms-graph.exchangeLastSuccessfulSyncDateTime": [
-         "0001-01-01T00:00:00.000Z"
-       ],
-       "timestamp": [
-         "2025-01-21T15:24:46.407Z"
-       ],
-       "data.ms-graph.enrolledDateTime": [
-         "2024-08-30T19:48:53.000Z"
-       ],
-       "data.ms-graph.complianceGracePeriodExpirationDateTime": [
-         "2024-10-23T23:52:11.000Z"
-       ],
-       "data.ms-graph.managementCertificateExpirationDate": [
-         "2025-08-29T20:39:04.000Z"
-       ],
-       "data.ms-graph.lastSyncDateTime": [
-         "2024-09-23T18:38:44.000Z"
-       ],
-       "data.ms-graph.easActivationDateTime": [
-         "0001-01-01T00:00:00.000Z"
-       ]
-     },
-     "sort": [
-       1737473086407
-     ]
+         "type": [
+            "info"
+         ],
+         "original": "{\"scan_id\":1145761535,\"integration\":\"ms-graph\",\"ms-graph\":{\"id\":\"00062d1b-4421-4706-83f0-81e071d839fb\",\"userId\":\"19cbd805-6d08-4de1-8be0-7a9e8062407c\",\"deviceName\":\"WINDOWS-11-25H2\",\"managedDeviceOwnerType\":\"personal\",\"managementState\":\"managed\",\"enrolledDateTime\":\"2026-05-27T19:16:06Z\",\"lastSyncDateTime\":\"2026-05-29T15:37:23Z\",\"operatingSystem\":\"Windows\",\"complianceState\":\"noncompliant\",\"jailBroken\":\"Unknown\",\"managementAgent\":\"mdm\",\"osVersion\":\"10.0.26200.8457\",\"easActivated\":true,\"easDeviceId\":\"6F25F3C7D9677E4A89B85B7049738141\",\"easActivationDateTime\":\"0001-01-01T00:00:00Z\",\"azureADRegistered\":true,\"deviceEnrollmentType\":\"windowsAutoEnrollment\",\"activationLockBypassCode\":null,\"emailAddress\":\"Wazuh\",\"azureADDeviceId\":\"bbe2c331-f3b8-4da3-be7b-8dbd7f957f61\",\"deviceRegistrationState\":\"registered\",\"deviceCategoryDisplayName\":\"Unknown\",\"isSupervised\":false,\"exchangeLastSuccessfulSyncDateTime\":\"0001-01-01T00:00:00Z\",\"exchangeAccessState\":\"none\",\"exchangeAccessStateReason\":\"none\",\"remoteAssistanceSessionUrl\":null,\"remoteAssistanceSessionErrorDetails\":null,\"isEncrypted\":false,\"userPrincipalName\":\"Wazuh\",\"model\":\"c5ad.xlarge\",\"manufacturer\":\"Amazon EC2\",\"imei\":\"\",\"complianceGracePeriodExpirationDateTime\":\"2026-06-30T01:08:29Z\",\"serialNumber\":\"ec20a8b5-6ba0-5f5e-a525-c6174bfe902f\",\"phoneNumber\":\"\",\"androidSecurityPatchLevel\":\"\",\"userDisplayName\":\"Wazuh\",\"configurationManagerClientEnabledFeatures\":null,\"wiFiMacAddress\":\"\",\"deviceHealthAttestationState\":null,\"subscriberCarrier\":\"\",\"meid\":\"\",\"totalStorageSpaceInBytes\":127918931968,\"freeStorageSpaceInBytes\":92478111744,\"managedDeviceName\":\"Wazuh_Windows_5/27/2026_7:16 PM\",\"partnerReportedThreatState\":\"unknown\",\"requireUserEnrollmentApproval\":null,\"managementCertificateExpirationDate\":\"2027-05-27T03:38:08Z\",\"iccid\":null,\"udid\":null,\"notes\":null,\"ethernetMacAddress\":null,\"physicalMemoryInBytes\":0,\"enrollmentProfileName\":null,\"deviceActionResults\":[],\"resource\":\"deviceManagement\",\"relationship\":\"managedDevices\"}}"
+      },
+      "cloud": {
+         "provider": "azure",
+         "service": {
+            "name": "Microsoft Intune"
+         }
+      },
+      "wazuh": {
+         "protocol": {
+            "location": "-",
+            "queue": 1
+         },
+         "event": {
+            "id": "49314b83-6262-47c4-9e19-5e554baba029"
+         },
+         "space": {
+            "name": "standard"
+         },
+         "integration": {
+            "decoders": [
+               "decoder/core-wazuh-message/0",
+               "decoder/ms-graph/0",
+               "decoder/azure-intune-device/0"
+            ],
+            "category": "cloud-services",
+            "name": "azure"
+         }
+      },
+      "related": {
+         "user": [
+            "Wazuh"
+         ],
+         "hosts": [
+            "WINDOWS-11-25H2"
+         ]
+      },
+      "user": {
+         "id": "19cbd805-6d08-4de1-8be0-7a9e8062407c",
+         "email": "Wazuh",
+         "full_name": "Wazuh",
+         "name": "Wazuh"
+      }
    }
 
-.. thumbnail:: /images/cloud-security/azure/ms-intune/manageddevices-sample-alert.png
-   :alt: Sample Wazuh alert JSON for a Microsoft Intune managedDevices event showing a Windows device's compliance and configuration details
-   :align: center
-   :width: 80%
+The normalized event matches the built-in ruleset management rule created and generates a finding with the ``wazuh.rule.title``: Intune non-compliant managed device.
 
-Import custom dashboards
-^^^^^^^^^^^^^^^^^^^^^^^^
+You can view the finding on the Wazuh dashboard by navigating to **Cloud security \> Microsoft Graph API**:
 
-Import the predefined dashboards to visualize Microsoft Intune alerts in the Wazuh dashboard. These dashboards are not configured out-of-the-box on Wazuh deployments and are provided as separate packages. Perform the following steps to import the Microsoft Intune dashboards:
-
-#. Download the `MS graph Intune events <https://raw.githubusercontent.com/wazuh/wazuh-documentation/refs/heads/|WAZUH_CURRENT_MINOR|/resources/dashboards/MS-graph%20Intune%20events.ndjson>`__ and `Intune managed devices and apps <https://raw.githubusercontent.com/wazuh/wazuh-documentation/refs/heads/|WAZUH_CURRENT_MINOR|/resources/dashboards/MS-graph%20Intune%20managed%20devices%20and%20apps.ndjson>`__ dashboards.
-#. Import the downloaded dashboards using the Wazuh dashboard import functionality. Navigate to **Dashboard management** > **Dashboards Management** > **Saved objects** on the Wazuh dashboard. Click **Import**.
-#. Select one of the downloaded files and click on **Import**. Repeat this step for the other file.
-
-   .. thumbnail:: /images/cloud-security/azure/ms-intune/import-saved-object.gif
-      :alt: Animated walkthrough of importing the Microsoft Intune saved objects file via the Wazuh dashboard's Import saved objects dialog
-      :align: center
-      :width: 80%
-
-#. Access the dashboards from the **Saved objects** tab. Alternatively, navigate to **Explore** > **Dashboards** to view the dashboards.
-
-Dashboard examples
-~~~~~~~~~~~~~~~~~~
-
-.. thumbnail:: /images/cloud-security/azure/ms-intune/dahsboard-example1.png
-   :alt: Wazuh Intune managed devices and apps dashboard showing device and app counts, owner type, and top apps by device count
-   :align: center
-   :width: 80%
-
-.. thumbnail:: /images/cloud-security/azure/ms-intune/dahsboard-example2.png
-   :alt: Wazuh Intune dashboard panel showing managed devices by application, device ownership type, and operating system breakdown
-   :align: center
-   :width: 80%
-
-.. thumbnail:: /images/cloud-security/azure/ms-intune/dahsboard-example3.png
-   :alt: Wazuh Intune dashboard panel showing top apps, agents, and platforms by alert count with an ms-graph alerts timeline
+.. thumbnail:: /images/cloud-security/azure/ms-intune/ms-intune-managed-device-finding.png
    :align: center
    :width: 80%

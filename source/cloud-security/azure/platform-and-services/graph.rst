@@ -8,44 +8,41 @@ Microsoft Graph
 
 You can use the Wazuh module for Azure to collect Microsoft Graph activity logs from multiple Azure services (including Microsoft Entra ID) via the Microsoft Graph REST API.
 
-In this section, you will learn how to monitor your Microsoft Entra ID activity using the Microsoft Graph REST API. This section contains:
+In this section, you learn how to monitor your Microsoft Entra ID activity using the Microsoft Graph REST API. This section contains:
 
--  :ref:`Azure configuration <azure_configuration>`
--  :ref:`Wazuh configuration <wazuh_configuration>`
--  :ref:`Microsoft Entra ID use case <microsoft_entra_ID_use_case>`
+-  :ref:`Azure configuration <azure_graph_block_configuration>`
+-  :ref:`Wazuh configuration <wazuh_graph_block_agent>`
+-  :ref:`Microsoft Entra ID use case <microsoft_entra_ID_graph_block_use_case>`
 
-The following are endpoints in the Microsoft Graph REST API related to auditing and monitoring activities in Microsoft Entra ID.
+The following Microsoft Graph REST API endpoints support auditing and monitoring activities in Microsoft Entra ID.
 
 +---------------------------------------------------------------------------------------------------------------------------+-------------------------------+
 | **Report type**                                                                                                           | **Query**                     |
-+---------------------------------------------------------------------------------------------------------------------------+-------------------------------+
-| `Directory audits <https://docs.microsoft.com/en-us/graph/api/directoryaudit-list?view=graph-rest-1.0&tabs=http>`_        | ``auditLogs/directoryaudits`` |
++===========================================================================================================================+===============================+
+| `Directory audits <https://docs.microsoft.com/en-us/graph/api/directoryaudit-list?view=graph-rest-1.0&tabs=http>`_        | ``auditLogs/directoryAudits`` |
 +---------------------------------------------------------------------------------------------------------------------------+-------------------------------+
 | `Sign-ins <https://docs.microsoft.com/en-us/graph/api/signin-list?view=graph-rest-1.0&tabs=http>`_                        | ``auditLogs/signIns``         |
 +---------------------------------------------------------------------------------------------------------------------------+-------------------------------+
 | `Provisioning <https://docs.microsoft.com/en-us/graph/api/provisioningobjectsummary-list?view=graph-rest-1.0&tabs=http>`_ | ``auditLogs/provisioning``    |
 +---------------------------------------------------------------------------------------------------------------------------+-------------------------------+
 
-These endpoints allow administrators and developers to monitor and audit activities within Microsoft Entra ID for security, compliance, and operational purposes.
+These endpoints let administrators and developers monitor and audit Microsoft Entra ID activities for security, compliance, and operational purposes.
 
-Wazuh can process Microsoft Entra ID activity reports using the above endpoints. Each one of them requires you to execute a different query. You will place these queries within the command block of your Wazuh module for Azure :ref:`configuration <wazuh_configuration>`.
+Wazuh can process Microsoft Entra ID activity reports using the above endpoints. Each requires a different query. Place these queries in the ``<query>`` field of the ``<request>`` block in your :ref:`Wazuh module for Azure configuration <wazuh_graph_block_agent>`.
+
+.. _azure_graph_block_configuration:
 
 Configuration
 -------------
 
-.. _azure_configuration:
+Create the application
+^^^^^^^^^^^^^^^^^^^^^^^
 
-Azure
-^^^^^
-
-Creating the application
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-This section explains creating an application using the Azure Log Analytics REST API. However, it is also possible to configure an existing application. If this is the case, skip this step.
+This section explains how to create an application that uses the Microsoft Graph REST API. You can also configure an existing application. Skip this step if you already have an existing application.
 
 #. In the **Microsoft Entra ID** panel, select **App registrations**. Then, select **New registration**.
 
-   .. thumbnail:: /images/cloud-security/azure/new-app-registration2.png
+   .. thumbnail:: /images/cloud-security/azure/new-app-registration.png
       :align: center
       :width: 80%
 
@@ -55,14 +52,14 @@ This section explains creating an application using the Azure Log Analytics REST
       :align: center
       :width: 80%
 
-The app is now registered.
+   The app is now registered.
 
-.. thumbnail:: /images/cloud-security/azure/app-registrations.png
-   :align: center
-   :width: 80%
+   .. thumbnail:: /images/cloud-security/azure/app-registrations.png
+      :align: center
+      :width: 80%
 
-Granting permissions to the application
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Grant permissions to the application
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 #. Click on the application, go to the **Overview** section, and save the **Application (client) ID** for later authentication.
 
@@ -76,13 +73,13 @@ Granting permissions to the application
       :align: center
       :width: 80%
 
-#. Search for *"Microsoft Graph"* and select the API.
+#. Search for "**Microsoft Graph**" and select the API.
 
    .. thumbnail:: /images/cloud-security/azure/select-microsoft-graph-api.png
       :align: center
       :width: 80%
 
-#. Select the permissions in **Applications permissions** that align with your infrastructure. In this case, ``AuditLog.Read.All`` permissions will be granted. Then, click **Add permissions**.
+#. Select the permissions in **Application permissions** that align with your infrastructure. In this case, the ``AuditLog.Read.All`` permissions are granted. Then, click **Add permissions**.
 
    .. thumbnail:: /images/cloud-security/azure/add-api-permissions.png
       :align: center
@@ -94,10 +91,10 @@ Granting permissions to the application
       :align: center
       :width: 80%
 
-Obtaining the application key for authentication
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Obtain the application key for authentication
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-To use the Log Analytics API to retrieve the logs, we must generate an application key to authenticate the Log Analytics API. Follow the steps below to generate the application key.
+To use the Microsoft Graph API to retrieve logs, we must generate an application key to authenticate. Follow the steps below to generate the application key.
 
 #. Select **Certificates & secrets**, then select **New client secret** to generate a key.
 
@@ -105,92 +102,83 @@ To use the Log Analytics API to retrieve the logs, we must generate an applicati
       :align: center
       :width: 80%
 
-#. Give an appropriate **description**, set a preferred duration for the key, and then click **Add**.
+#. Give an appropriate description, set a preferred duration for the key, and then click **Add**.
 
    .. thumbnail:: /images/cloud-security/azure/add-client-secret2.png
       :align: center
       :width: 80%
 
-#. Copy the key **value**. This would be later used for authentication.
+#. Copy the key **value**. Use this for authentication in a later section.
 
    .. note::
 
-      Copy the key before exiting this page, as it will only be displayed once. If you do not copy it before exiting the page, you will have to generate a fresh key.
+      Copy the key before exiting this page, as it is displayed once. If you do not copy it before exiting the page, you must generate a new key.
 
    .. thumbnail:: /images/cloud-security/azure/copy-client-secret3.png
       :align: center
       :width: 80%
 
-.. _wazuh_configuration:
+.. _wazuh_graph_block_agent:
 
-Wazuh server or agent
-^^^^^^^^^^^^^^^^^^^^^
+Wazuh agent
+^^^^^^^^^^^
 
-You will use the ``key`` and ``ID`` of the application saved during the previous steps here. In this case, both fields were saved in a file for authentication. Check the :ref:`configure_azure_credentials` section for more information about this topic.
+We use the ``(client) ID`` and ``key`` of the application saved during the previous steps here. In this case, both fields were saved in a file for authentication. Check the :ref:`authentication <configure_azure_credentials>` section for more information about configuring Azure credentials.
 
-#. Apply the following configuration to the local configuration file ``/var/ossec/etc/ossec.conf`` of the Wazuh server or agent. This will depend on where you configured the Wazuh module for Azure:
+#. Apply the following configuration to the local configuration file ``/var/ossec/etc/ossec.conf`` of the Wazuh agent:
 
    .. code-block:: xml
-      :emphasize-lines: 12
+      :emphasize-lines: 8, 9, 12
 
       <wodle name="azure-logs">
-        <disabled>no</disabled>
-        <wday>Monday</wday>
-        <time>2:00</time>
-        <run_on_start>no</run_on_start>
+         <disabled>no</disabled>
+         <wday>Monday</wday>
+         <time>2:00</time>
+         <run_on_start>yes</run_on_start>
 
-        <graph>
-          <auth_path>/var/ossec/wodles/azure/credentials</auth_path>
-          <tenantdomain>wazuh.com</tenantdomain>
-          <request>
-              <tag>microsoft-entra_id</tag>
-              <query>auditLogs/directoryAudits</query>
-              <time_offset>1d</time_offset>
-          </request>
-        </graph>
-
+         <graph>
+            <auth_path>/var/ossec/wodles/credentials/<GRAPH_CREDENTIALS></auth_path>
+            <tenantdomain><YOUR_TENANT_DOMAIN></tenantdomain>
+            <request>
+               <tag>microsoft-entra_id</tag>
+               <query>auditLogs/directoryAudits</query>
+               <time_offset>1d</time_offset>
+            </request>
+         </graph>
       </wodle>
 
    Where:
 
-   -  ``<auth_path>`` is the full path of where the workspace secret key is stored.
-   -  ``<tenantdomain>`` is the tenant domain name. You can obtain this from the **Overview** section in Microsoft Entra ID
-   -  ``<wday>`` is the day of the week scheduled for the scan
-   -  ``<query>`` is the path to where the audit logs are stored.
+   -  ``<auth_path>`` is the full path of the file holding the application ID and application key. Replace ``<GRAPH_CREDENTIALS>`` with your authentication credentials file name.
+   -  ``<tenantdomain>`` is the tenant domain name. You can obtain this from the **Overview** section in Microsoft Entra ID. Replace the ``<YOUR_TENANT_DOMAIN>`` value with your tenant domain.
+   -  ``<wday>`` is the day of the week scheduled for the scan.
+   -  ``<query>`` is the Microsoft Graph endpoint to request.
    -  ``<time>`` is the time scheduled for the scan.
    -  ``<time_offset>`` set to ``1d`` means that only the log data from the last day is parsed.
 
-#. Restart your Wazuh server or agent, depending on where you configured the Wazuh module for Azure.
-
-   Wazuh agent:
+#. Restart the Wazuh agent to apply the configuration changes:
 
    .. code-block:: console
 
       # systemctl restart wazuh-agent
 
-   Wazuh server:
-
-   .. code-block:: console
-
-      # systemctl restart wazuh-manager
-
-Check the :doc:`Wazuh module for Azure </user-manual/reference/ossec-conf/wodle-azure-logs>` reference for more information about using the different available parameters. Please see the :ref:`wazuh_azure_authentication_file` section for guidance on how to set up credentials to monitor your Microsoft Entra ID.
+Check the :doc:`Wazuh module for Azure </user-manual/reference/ossec-conf/wodle-azure-logs>` reference for more information about using the different available parameters. See the :ref:`Wazuh Azure authentication file <wazuh_azure_authentication_file>` section for guidance on setting up credentials to monitor your Microsoft Entra ID.
 
 .. note::
 
-   The field ``tenantdomain`` is mandatory. You can obtain it from the **Overview** section in **Microsoft Entra ID**.
+   The field ``tenantdomain`` is mandatory. You can obtain it from the **Overview** section in Microsoft Entra ID.
+
+.. _microsoft_entra_ID_graph_block_use_case:
 
 Use case
-^^^^^^^^
+--------
 
-.. _microsoft_entra_ID_use_case:
-
-Monitoring Microsoft Entra ID
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Monitor Microsoft Entra ID
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 `Microsoft Entra ID <https://docs.microsoft.com/en-us/azure/active-directory/fundamentals/active-directory-whatis>`__ is the identity and directory management service that combines essential directory services, application access management, and identity protection in a single solution.
 
-Wazuh can monitor the Microsoft Entra ID (ME-ID) service using the activity reports provided by the `Microsoft Graph REST API <https://docs.microsoft.com/en-us/graph/overview>`__. Microsoft Graph API can perform read operations on directory data and objects on Microsoft Entra ID applications.
+Wazuh can monitor the Microsoft Entra ID (ME-ID) service using the activity reports provided by the `Microsoft Graph REST API <https://docs.microsoft.com/en-us/graph/overview>`__. Microsoft Graph API can perform read operations on directory data and objects in Microsoft Entra ID applications.
 
 .. thumbnail:: /images/cloud-security/azure/microsoft-entra-ID.png
    :align: center
@@ -198,12 +186,12 @@ Wazuh can monitor the Microsoft Entra ID (ME-ID) service using the activity repo
 
 Here is an example of Microsoft Entra ID activity monitoring using the above configuration.
 
-Create a new user
-~~~~~~~~~~~~~~~~~
+Monitor a new user creation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Create a new user in Azure. A successful user creation activity will produce a log to reflect it. You can retrieve this log using the auditLogs/directoryAudits query.
+Create a new user in Azure. A successful user creation activity produces a log entry. You can retrieve this log using the ``auditLogs/directoryAudits`` query.
 
-#. Navigate to **Users** > **All users**, select **New user** > **Create new user**.
+#. Navigate to **Users** \> **All users**, select **New user** \> **Create new user**.
 
    .. thumbnail:: /images/cloud-security/azure/click-new-user.png
       :align: center
@@ -211,18 +199,18 @@ Create a new user in Azure. A successful user creation activity will produce a l
 
 #. Fill in the required details and click **Review + create**. The user is now created.
 
-You can check for the result of the successful user creation in the **Audit logs** section of **Microsoft Entra ID**.
+   You can check the result of the successful user creation in the **Audit logs** section of **Microsoft Entra ID**.
 
-.. thumbnail:: /images/cloud-security/azure/user-creation-result.png
-   :align: center
-   :width: 80%
+   .. thumbnail:: /images/cloud-security/azure/user-creation-result.png
+      :align: center
+      :width: 80%
 
-Once the integration is running, the results will be available in the **Security Events** tab of the **Wazuh dashboard**.
+   The results are available in the **Threat Hunting** tab of the Wazuh dashboard.
 
-.. thumbnail:: /images/cloud-security/azure/ms-graph-results-in-wazuh-dashboard1.png
-   :align: center
-   :width: 80%
+   .. thumbnail:: /images/cloud-security/azure/ms-graph-results-in-wazuh-dashboard1.png
+      :align: center
+      :width: 80%
 
-.. thumbnail:: /images/cloud-security/azure/ms-graph-results-in-wazuh-dashboard2.png
-   :align: center
-   :width: 80%
+   .. thumbnail:: /images/cloud-security/azure/ms-graph-results-in-wazuh-dashboard2.png
+      :align: center
+      :width: 80%
