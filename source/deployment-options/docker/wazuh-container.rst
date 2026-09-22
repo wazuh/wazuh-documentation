@@ -34,8 +34,14 @@ Wazuh supports deploying its central components and agent on Docker.
 
 Prerequisites
 -------------
-
 Before deploying Wazuh on Docker, ensure your environment meets the following requirements.
+.. note::
+
+   For Ubuntu/Debian systems, ensure you have the ``software-properties-common`` package installed before starting:
+   
+   .. code-block:: bash
+
+      sudo apt-get update && sudo apt-get install -y software-properties-common
 
 System requirements
 ^^^^^^^^^^^^^^^^^^^
