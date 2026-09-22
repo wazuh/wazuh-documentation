@@ -30,6 +30,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Fixed mismatched screenshot titles in the *Proof of concept guide* and *Active Response* documentation. ([#10161](https://github.com/wazuh/wazuh-documentation/pull/10161))
 - **Post-release**: Corrected a false version-support claim and a URL-breaking formatting issue in `llms.txt`. ([#10162](https://github.com/wazuh/wazuh-documentation/pull/10162))
 - **Post-release**: Fixed a third-party brand-name casing inconsistency (PagerDuty) in the *Integration with external APIs* documentation. ([#10166](https://github.com/wazuh/wazuh-documentation/pull/10166))
+- **Post-release**: Clarified the *Security configuration assessment* documentation's policy enabling and disabling section and removed the nonexistent `sca_win_audit` entry from the available policies table. ([#10179](https://github.com/wazuh/wazuh-documentation/pull/10179))
 
 ## [v4.14.6]
 
