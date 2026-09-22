@@ -72,8 +72,8 @@ Take the following steps on your Ubuntu endpoint to create the file ``/usr/share
         name: "SCA use case: Keyword check"
         description: "Guidance for checking for a keyword or phrase in files on Ubuntu endpoints."
         references:
-          - https://documentation.wazuh.com/current/user-manual/capabilities/sec-config-assessment/index.html
-          - https://documentation.wazuh.com/current/user-manual/capabilities/sec-config-assessment/creating-custom-policies.html
+          - https://documentation.wazuh.com/5.0-beta/user-manual/capabilities/sec-config-assessment/index.html
+          - https://documentation.wazuh.com/5.0-beta/user-manual/capabilities/sec-config-assessment/how-to-configure.html#creating-custom-sca-policies
 
       requirements:
         title: "Check that the desired file exists on the monitored endpoints"
@@ -168,8 +168,8 @@ Take the following steps on your Windows endpoint to create the file ``C:\Progra
         name: "SCA use case: Keyword check"
         description: "Guidance for checking for a keyword or phrase in files on Windows."
         references:
-          - https://documentation.wazuh.com/current/user-manual/capabilities/sec-config-assessment/index.html
-          - https://documentation.wazuh.com/current/user-manual/capabilities/sec-config-assessment/creating-custom-policies.html
+          - https://documentation.wazuh.com/5.0-beta/user-manual/capabilities/sec-config-assessment/index.html
+          - https://documentation.wazuh.com/5.0-beta/user-manual/capabilities/sec-config-assessment/how-to-configure.html#creating-custom-sca-policies
       requirements:
         title: "Check that the desired file exists on the monitored endpoints"
         description: "Requirements for running the SCA scans against endpoints with testfile.txt on them."
@@ -256,8 +256,8 @@ Take the following steps on your macOS endpoint to create the file ``/usr/local/
         name: "SCA use case: Keyword check"
         description: "Guidance for checking for a keyword or phrase in files on macOS endpoints."
         references:
-          - https://documentation.wazuh.com/current/user-manual/capabilities/sec-config-assessment/index.html
-          - https://documentation.wazuh.com/current/user-manual/capabilities/sec-config-assessment/creating-custom-policies.html
+          - https://documentation.wazuh.com/5.0-beta/user-manual/capabilities/sec-config-assessment/index.html
+          - https://documentation.wazuh.com/5.0-beta/user-manual/capabilities/sec-config-assessment/how-to-configure.html#creating-custom-sca-policies
 
       requirements:
         title: "Check that the desired file exists on the monitored endpoints"
@@ -334,8 +334,8 @@ The following steps show how to configure the Wazuh SCA module to detect running
         name: "SCA use case to detect running processes"
         description: "Guidance for checking running processes on Linux endpoints."
         references:
-          - https://documentation.wazuh.com/current/user-manual/capabilities/sec-config-assessment/index.html
-          - https://documentation.wazuh.com/current/user-manual/capabilities/sec-config-assessment/creating-custom-policies.html
+          - https://documentation.wazuh.com/5.0-beta/user-manual/capabilities/sec-config-assessment/index.html
+          - https://documentation.wazuh.com/5.0-beta/user-manual/capabilities/sec-config-assessment/how-to-configure.html#creating-custom-sca-policies
 
       requirements:
         title: "Check that the SSH service and password-related files are present on the system"
@@ -428,8 +428,8 @@ Standard users utilize PowerShell less frequently. Threat actors may take advant
         name: "SCA use case to detect running processes"
         description: "Guidance for checking running PowerShell processes on Windows 10 endpoints."
         references:
-          - https://documentation.wazuh.com/current/user-manual/capabilities/sec-config-assessment/index.html
-          - https://documentation.wazuh.com/current/user-manual/capabilities/sec-config-assessment/creating-custom-policies.html
+          - https://documentation.wazuh.com/5.0-beta/user-manual/capabilities/sec-config-assessment/index.html
+          - https://documentation.wazuh.com/5.0-beta/user-manual/capabilities/sec-config-assessment/how-to-configure.html#creating-custom-sca-policies
 
       requirements:
         title: "Check that the Windows platform is Windows 10"
@@ -510,8 +510,8 @@ The following steps show how to configure the Wazuh SCA module to detect running
         name: "SCA use case to detect running processes"
         description: "Guidance for checking running processes on mac endpoints."
         references:
-          - https://documentation.wazuh.com/current/user-manual/capabilities/sec-config-assessment/index.html
-          - https://documentation.wazuh.com/current/user-manual/capabilities/sec-config-assessment/creating-custom-policies.html
+          - https://documentation.wazuh.com/5.0-beta/user-manual/capabilities/sec-config-assessment/index.html
+          - https://documentation.wazuh.com/5.0-beta/user-manual/capabilities/sec-config-assessment/how-to-configure.html#creating-custom-sca-policies
 
       requirements:
         title: "Check macOS"
