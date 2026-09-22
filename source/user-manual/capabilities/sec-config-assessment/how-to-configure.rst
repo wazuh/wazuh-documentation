@@ -22,7 +22,7 @@ By default, the Wazuh agent scans every policy (``.yaml`` or ``.yml`` file) in i
 - macOS agents: ``/Library/Ossec/ruleset/sca``.
 
 .. note::
-    Installations and updates don't preserve the contents of these default ruleset folders. Place your policies under an alternative folder if you want to modify or add new ones.
+   Installations and updates don't preserve the contents of these default ruleset folders. Place your policies under an alternative folder if you want to modify or add new ones.
 
 There are two ways to disable policies on the Wazuh agent. The simplest method is to rename the policy file with an extension other than ``.yaml`` or ``.yml``.
 
@@ -32,21 +32,21 @@ To disable a policy included with the Wazuh agent, specify its path relative to 
 
 .. code-block:: xml
 
-    <sca>
-      <policies>
-        <policy enabled="no">ruleset/sca/<POLICY_FILE_TO_DISABLE></policy>
-      </policies>
-    </sca>
+   <sca>
+     <policies>
+       <policy enabled="no">ruleset/sca/<POLICY_FILE_TO_DISABLE></policy>
+     </policies>
+   </sca>
 
 For a policy distributed through centralized configuration, use its path in the ``etc/shared`` directory:
 
 .. code-block:: xml
 
-    <sca>
-      <policies>
-        <policy enabled="no">etc/shared/<POLICY_FILE_TO_DISABLE></policy>
-      </policies>
-    </sca>
+   <sca>
+     <policies>
+       <policy enabled="no">etc/shared/<POLICY_FILE_TO_DISABLE></policy>
+     </policies>
+   </sca>
 
 You can also specify an absolute path to the policy file.
 
