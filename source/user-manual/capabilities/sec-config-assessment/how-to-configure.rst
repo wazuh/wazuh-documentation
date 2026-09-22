@@ -74,29 +74,21 @@ By default, the Wazuh agent scans every policy (``.yaml`` or ``.yml`` file) in i
 
    Installations and updates don't preserve the contents of these default ruleset folders. Place your policies under an alternative folder if you want to modify or add new ones.
 
-To enable a policy file outside the Wazuh agent installation folder, add the policy file path to the ``<sca>`` block in the Wazuh agent configuration file. For example:
+There are two ways to disable policies on the Wazuh agent. The simplest method is to rename the policy file with an extension other than ``.yaml`` or ``.yml``.
+
+Alternatively, disable a policy in the Wazuh agent ``ossec.conf`` file by setting the ``enabled`` attribute to ``no``.
+
+To disable a policy included with the Wazuh agent, specify its path relative to the Wazuh installation directory:
 
 .. code-block:: xml
 
    <sca>
      <policies>
-       <policy><FULLPATH_TO_CUSTOM_SCA_POLICY_FILE></policy>
+       <policy enabled="no">ruleset/sca/<POLICY_FILE_TO_DISABLE></policy>
      </policies>
    </sca>
 
-You can also specify a path relative to the Wazuh installation directory:
-
-.. code-block:: xml
-
-   <sca>
-     <policies>
-       <policy>etc/shared/<CUSTOM_SCA_POLICY_FILE></policy>
-     </policies>
-   </sca>
-
-You can disable policies on the Wazuh agent in two ways. The simplest is to rename the policy file by adding ``.disabled`` (or anything other than ``.yaml`` or ``.yml``) after its YAML extension.
-
-The second way is to disable the policy from the Wazuh agent ``ossec.conf`` file by adding a line like the following to the ``<policy>`` section of the SCA module:
+For a policy distributed through centralized configuration, use its path in the ``etc/shared`` directory:
 
 .. code-block:: xml
 
@@ -105,6 +97,8 @@ The second way is to disable the policy from the Wazuh agent ``ossec.conf`` file
        <policy enabled="no">etc/shared/<POLICY_FILE_TO_DISABLE></policy>
      </policies>
    </sca>
+
+You can also specify an absolute path to the policy file.
 
 Managing SCA policies using centralized configuration
 -------------------------------------------------------
