@@ -1,3 +1,6 @@
+.. meta::
+   :description: Discover the offline assisted installation method to install the Wazuh central components without connection to the Internet.
+
 Install Wazuh components using the assisted method
 --------------------------------------------------
 

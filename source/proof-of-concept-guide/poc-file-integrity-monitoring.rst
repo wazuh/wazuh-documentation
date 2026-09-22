@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: The Wazuh File Integrity Monitoring system watches for modification of files in selected directories and triggers alerts when these files are modified. Learn more about it in this PoC.
+   :description: The Wazuh File Integrity Monitoring system watches for file modifications in selected directories and triggers alerts.
 
 File integrity monitoring
 =========================

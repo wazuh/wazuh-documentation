@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-    :description: Learn more about the local configuration of Wazuh. In this section of the documentation you can learn more about the configuration options of the Wazuh integration with AWS.
+    :description: Learn about the local configuration options of the Wazuh integration with AWS in this section of the documentation.
 
 .. _wodle_s3:
 

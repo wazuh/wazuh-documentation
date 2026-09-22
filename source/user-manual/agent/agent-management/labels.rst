@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Agent labels allow the user to customize the alert information from agents to include specific information related to the Wazuh agent generating the alert. Learn more in this section of the documentation.
+   :description: Agent labels let you customize alert information from agents to include specific information about the generating agent.
 
 Agent labels
 ============

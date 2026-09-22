@@ -1,3 +1,6 @@
+.. meta::
+   :description: Learn how to uninstall a Wazuh Docker deployment in this section of the documentation.
+
 Uninstalling the Wazuh Docker deployment
 =========================================
 

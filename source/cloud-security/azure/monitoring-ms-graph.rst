@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: This section provides instructions for monitoring your organization's Microsoft Graph API resources and relationships using the Wazuh module for Microsoft Graph.
+   :description: Learn how to monitor your organization's Microsoft Graph API resources and relationships using the Wazuh module.
 
 Monitoring Microsoft Graph services with Wazuh
 ==============================================

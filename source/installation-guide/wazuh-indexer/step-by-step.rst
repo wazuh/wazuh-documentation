@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Wazuh indexer is a highly scalable full-text search engine. Install the Wazuh indexer in a single-node or multi-node configuration according to your environment needs.
+   :description: The Wazuh indexer is a highly scalable full-text search engine. Install it in a single-node or multi-node configuration.
 
 Installing the Wazuh indexer step by step
 =========================================

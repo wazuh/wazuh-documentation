@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: authentik is an open source Identity Provider (IdP) for modern SSO. Learn more about it and its integration with Wazuh roles in this section of the Wazuh documentation.
+   :description: authentik is an open source Identity Provider (IdP) for modern SSO. Learn about its integration with Wazuh roles.
 
 authentik
 =========

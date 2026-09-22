@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Having information synchronized allows any Wazuh server cluster nodes to process and raise alerts from the Wazuh agents properly. Learn more in this section of the documentation.
+   :description: Synchronized information allows any Wazuh server cluster node to process and raise alerts from the Wazuh agents properly.
 
 Data synchronization
 ====================

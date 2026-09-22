@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Sibling decoders refer to a decoder building strategy where multiple decoders operate at the same hierarchical level without a parent-child relationship. Learn more about it in this section.
+   :description: Sibling decoders are a decoder-building strategy where multiple decoders operate at the same hierarchical level.
 
 Sibling Decoders
 ================

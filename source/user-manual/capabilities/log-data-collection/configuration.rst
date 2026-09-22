@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Log data collection helps security teams to meet regulatory compliance, detect and remediate threats. Learn how to configure log collection on Windows, Linux, and macOS endpoints.
+  :description: Log data collection helps security teams meet regulatory compliance and detect threats. Learn how to configure it.
 
 Configuring log collection for different operating systems
 ==========================================================

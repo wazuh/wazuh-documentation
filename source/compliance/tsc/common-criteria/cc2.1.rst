@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Wazuh helps meet the COSO Principle 13 (CC2.1) requirement by providing capabilities that generate quality information for the proper functioning of internal control measures.
+   :description: Wazuh helps meet the COSO Principle 13 (CC2.1) requirement by generating quality information for internal control measures.
 
 Common criteria 2.1 (COSO Principle 13)
 =======================================

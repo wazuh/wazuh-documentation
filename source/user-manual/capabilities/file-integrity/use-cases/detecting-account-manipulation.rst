@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: The Wazuh FIM module monitors directories to detect file changes, additions, and deletions. Discover some FIM use cases in this section of our documentation.
+   :description: Learn how to use the Wazuh FIM module to detect unauthorized creation, modification, or deletion of user accounts.
 
 Detecting account manipulation
 ==============================

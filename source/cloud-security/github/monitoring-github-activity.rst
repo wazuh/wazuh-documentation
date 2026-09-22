@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The Wazuh module for GitHub enables the collection of audit logs from GitHub through its API. Check out this section of our documentation to learn more about it.
+  :description: The Wazuh module for GitHub enables the collection of audit logs from GitHub through its API.
 
 Monitoring GitHub audit logs
 ============================

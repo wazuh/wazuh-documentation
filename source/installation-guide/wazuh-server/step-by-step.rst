@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: The Wazuh server is in charge of analyzing the data received from the Wazuh agents. Install the Wazuh server in a single-node or multi-node configuration according to your environment needs.
+   :description: The Wazuh server analyzes data received from Wazuh agents. Install it in a single-node or multi-node configuration.
 
 Installing the Wazuh server step by step
 ========================================

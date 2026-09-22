@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: The Wazuh FIM module tracks the activities performed within monitored directories or files to gain extensive information on file creation, modification, and deletion. Learn more in this use case.
+   :description: The Wazuh FIM module tracks activities in monitored directories or files to detect file creation, modification, and deletion.
     
 File integrity monitoring
 =========================
