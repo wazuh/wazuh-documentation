@@ -28,6 +28,7 @@ Perform the outlined steps on your existing Wazuh indexer node to generate the c
 #. Edit ``/root/config.yml`` to reference all nodes in your deployment, including the new Wazuh indexer node. In an all-in-one deployment, the Wazuh manager and the Wazuh dashboard share the address of the existing node:
 
    .. code-block:: yaml
+      :emphasize-lines: 5,7,11,15
 
       nodes:
         # Wazuh indexer nodes
@@ -55,6 +56,7 @@ Perform the outlined steps on your existing Wazuh indexer node to generate the c
 #. Compress the certificates folder and copy it to the new Wazuh indexer node. You can use the ``scp`` utility to copy the compressed file securely:
 
    .. code-block:: console
+      :emphasize-lines: 2
 
       # tar -cvf ./wazuh-certificates.tar -C ./wazuh-certificates/ .
       # scp wazuh-certificates.tar <TARGET_USERNAME>@<TARGET_IP>:
@@ -412,6 +414,7 @@ In this section, we configure the Wazuh components of your existing all-in-one d
 #. Edit the configuration file at ``/etc/wazuh-indexer/opensearch.yml`` on the existing Wazuh indexer node.
 
    .. code-block:: yaml
+      :emphasize-lines: 1,2,6,9,10,13,14
 
       network.host: "<EXISTING_WAZUH_INDEXER_IP>"
       node.name: "<EXISTING_WAZUH_INDEXER_NODE_NAME>"
@@ -442,6 +445,7 @@ In this section, we configure the Wazuh components of your existing all-in-one d
 #. Edit the ``<indexer>`` block of the Wazuh manager configuration file ``/var/wazuh-manager/etc/wazuh-manager.conf`` to connect to the new Wazuh indexer node. In Wazuh 5.0, the Wazuh manager reports to the Wazuh indexer directly through its indexer connector.
 
    .. code-block:: xml
+      :emphasize-lines: 2,3
 
       <hosts>
         <host>https://<EXISTING_WAZUH_INDEXER_IP>:9200</host>

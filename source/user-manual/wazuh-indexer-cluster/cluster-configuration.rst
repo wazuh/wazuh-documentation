@@ -55,6 +55,7 @@ Wazuh manager
 #. Save the Wazuh indexer username and password into the Wazuh manager keystore using the ``wazuh-manager-keystore`` tool.
 
    .. code-block:: console
+      :emphasize-lines: 1,2
 
       # echo '<WAZUH_INDEXER_USERNAME>' | /var/wazuh-manager/bin/wazuh-manager-keystore -f indexer -k username
       # echo '<WAZUH_INDEXER_PASSWORD>' | /var/wazuh-manager/bin/wazuh-manager-keystore -f indexer -k password
@@ -113,6 +114,7 @@ Wazuh uses certificates to establish confidentiality and encrypt communications 
 #. Compress all the necessary files and copy the archive to every node in your deployment. You can use the ``scp`` utility or any other secure file transfer method available in your environment:
 
    .. code-block:: console
+      :emphasize-lines: 2
 
       # tar -cvf ./wazuh-certificates.tar -C ./wazuh-certificates/ .
       # scp ./wazuh-certificates.tar <USERNAME>@<TARGET_ENDPOINT_IP>:.
@@ -120,6 +122,7 @@ Wazuh uses certificates to establish confidentiality and encrypt communications 
 #. On each Wazuh indexer node, deploy the certificates. Replace ``<INDEXER_NODE_NAME>`` with the name of the node you are configuring as defined in ``config.yml``:
 
    .. code-block:: console
+      :emphasize-lines: 1
 
       # NODE_NAME=<INDEXER_NODE_NAME>
       # mkdir -p /etc/wazuh-indexer/certs
@@ -230,6 +233,7 @@ Apply the :ref:`Wazuh indexer cluster tuning <wazuh_indexer_cluster_tuning>` set
 The Wazuh indexer users are defined in ``/etc/wazuh-indexer/opensearch-security/internal_users.yml``. The default credentials are ``admin:admin``. Change the password with the Wazuh password tool on any Wazuh indexer node. The password must have a length between 8 and 64 characters and contain at least one uppercase letter, one lowercase letter, a number, and one of the following symbols: ``.*+?-``.
 
 .. code-block:: console
+   :emphasize-lines: 2
 
    # curl -sO https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-passwords-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh
    # bash wazuh-passwords-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -u admin -p <NEW_PASSWORD>

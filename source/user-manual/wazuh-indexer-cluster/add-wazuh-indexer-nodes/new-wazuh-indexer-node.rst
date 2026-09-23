@@ -81,13 +81,19 @@ Certificate deployment involves a fixed sequence of extraction, renaming, and pe
 
 Run the script, passing the name of the new node as defined in ``/root/config.yml``. This deploys the SSL certificates to encrypt communications between the Wazuh central components:
 
-+------------------------+--------------------------------------------------------------------------------------------------------------------------------+
-| Scenario               | Command                                                                                                                        |
-+========================+================================================================================================================================+
-| All-in-one deployment  | ``# bash ./deploy-certificates.sh -i <NEW_WAZUH_INDEXER_NODE_NAME> -t ./wazuh-certificates.tar``                               |
-+------------------------+--------------------------------------------------------------------------------------------------------------------------------+
-| Distributed deployment | ``# bash ./deploy-certificates.sh -i <NEW_WAZUH_INDEXER_NODE_NAME> -t ./wazuh-certificates-<NEW_WAZUH_INDEXER_NODE_NAME>.tar`` |
-+------------------------+--------------------------------------------------------------------------------------------------------------------------------+
+.. tabs::
+
+   .. group-tab:: All-in-one deployment
+
+      .. code-block:: console
+
+         # bash ./deploy-certificates.sh -i <NEW_WAZUH_INDEXER_NODE_NAME> -t ./wazuh-certificates.tar
+
+   .. group-tab:: Distributed deployment
+
+      .. code-block:: console
+
+         # bash ./deploy-certificates.sh -i <NEW_WAZUH_INDEXER_NODE_NAME> -t ./wazuh-certificates-<NEW_WAZUH_INDEXER_NODE_NAME>.tar
 
 The script confirms the deployment and produces the following certificate layout:
 
@@ -117,6 +123,7 @@ Configuring the new Wazuh indexer node
 Edit ``/etc/wazuh-indexer/opensearch.yml`` on the new node. Use the same ``cluster.name``, ``discovery.seed_hosts``, and ``plugins.security.nodes_dn`` values that are configured on the existing nodes, and set ``network.host`` and ``node.name`` to the values of the new node.
 
 .. code-block:: yaml
+   :emphasize-lines: 1,2,5,7,8,10,11
 
    network.host: "<NEW_WAZUH_INDEXER_IP>"
    node.name: "<NEW_WAZUH_INDEXER_NODE_NAME>"
