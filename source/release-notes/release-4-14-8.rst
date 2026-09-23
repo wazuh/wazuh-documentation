@@ -3,8 +3,8 @@
 .. meta::
    :description: Wazuh 4.14.8 has been released. Check out our release notes to discover the changes and additions of this release.
 
-4.14.8 Release notes - TBD
-==========================
+4.14.8 Release notes - 23 September 2026
+========================================
 
 This section lists the changes in version 4.14.8. Every update of the Wazuh solution is cumulative and includes all enhancements and fixes from previous releases.
 
