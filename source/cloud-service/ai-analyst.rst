@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: The Wazuh AI Analyst service provides Wazuh Cloud users with insights into their security posture and recommendations to remediate threats detected within their Wazuh Cloud subscription.
+   :description: The Wazuh AI Analyst service gives Wazuh Cloud users insights into their security posture and threat remediation recommendations.
 
 AI Analyst
 ==========

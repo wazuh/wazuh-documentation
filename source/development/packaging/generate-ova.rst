@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: In this section, we describe how to create a virtual machine (VM) in Open Virtual Appliance (OVA) format with the Wazuh server, dashboard, and indexer components pre-installed.
+   :description: Learn how to create a virtual machine in Open Virtual Appliance (OVA) format with the Wazuh central components pre-installed.
 
 Virtual machine
 ===============

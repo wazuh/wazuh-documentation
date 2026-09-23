@@ -1,3 +1,6 @@
+.. meta::
+   :description: Follow these steps to install the Wazuh central components offline, without connection to the Internet.
+
 Install Wazuh components step by step
 -----------------------------------------
 

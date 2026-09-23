@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+   :description: Learn how to create a backup of your Wazuh central components and Wazuh agent files before migrating your installation.
+
 Creating a backup
 =================
 

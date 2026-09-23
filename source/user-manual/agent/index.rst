@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: The Wazuh agent is a multi-platform component of the Wazuh solution and runs on the endpoints you want to monitor. Learn more in this section of the documentation.
+   :description: The Wazuh agent is a multi-platform component of the Wazuh solution that runs on the endpoints you want to monitor.
 
 Wazuh agent
 ===========

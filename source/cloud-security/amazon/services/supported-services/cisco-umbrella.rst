@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Cisco Umbrella is a cloud-based Secure Internet Gateway (SIG) platform that provides you with multiple levels of defense against internet-based threats. Learn how to configure and monitor it with Wazuh.
+   :description: Cisco Umbrella is a cloud-based Secure Internet Gateway that defends against internet-based threats. Learn how to monitor it with Wazuh.
 
 Cisco Umbrella
 ==============

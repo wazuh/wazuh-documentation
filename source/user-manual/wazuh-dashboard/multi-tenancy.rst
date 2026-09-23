@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Tenants in the Wazuh dashboard are containments for saving index patterns, visualizations, dashboards, and other objects. Learn more in this section of the documentation.
+   :description: Tenants in the Wazuh dashboard are containers for saving index patterns, visualizations, dashboards, and other objects.
 
 Enabling multi-tenancy
 ======================

@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Learn how to enable the Google Cloud module on your Wazuh dashboard to visualize security events related to your Google Cloud services in this section of the documentation.
+   :description: Learn how to enable the Google Cloud module on your Wazuh dashboard to visualize security events from your Google Cloud services.
 
 Visualizing Google Cloud events on the Wazuh dashboard
 ======================================================

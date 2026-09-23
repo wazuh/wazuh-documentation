@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Learn how the Wazuh Syscollector module supports NIST 800-53 compliance by collecting detailed system inventory data, including installed applications, processes, and open ports on monitored endpoints.
+   :description: Learn how the Wazuh Syscollector module supports NIST 800-53 compliance by collecting system inventory data on monitored endpoints.
 
 System inventory
 ================

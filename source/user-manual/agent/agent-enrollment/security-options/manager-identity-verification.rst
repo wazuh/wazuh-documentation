@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: This method uses SSL certificates to verify the identity of the Wazuh manager before a Wazuh agent sends the enrollment request. Learn more in this section of the documentation.
+   :description: This method uses SSL certificates to verify the Wazuh manager's identity before a Wazuh agent sends its enrollment request.
 
 Wazuh manager identity verification
 ===================================

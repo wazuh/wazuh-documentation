@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Wazuh is a free, open source, and enterprise-ready security monitoring solution for threat detection, file integrity monitoring, incident response and compliance.
+  :description: The Wazuh dashboard is a web interface for visualizing and analyzing security events, vulnerabilities, and compliance data.
 
 Wazuh dashboard
 ===============

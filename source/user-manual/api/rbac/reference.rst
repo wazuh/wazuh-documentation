@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+   :description: Learn about the RBAC actions, resources, and default roles and policies available on the Wazuh server API.
+
 RBAC Reference
 ==============
 

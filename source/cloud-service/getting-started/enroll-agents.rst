@@ -1,5 +1,5 @@
 .. meta::
-   :description: New agents in Wazuh are automatically assigned to a default group called "default" if they are not specifically placed in another group. Learn more in this documentation section.
+   :description: New agents in Wazuh are automatically assigned to a default group called "default" unless placed in another group.
 
 Enrolling agents
 ================

@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Wazuh provides a comprehensive suite of features to monitor and improve the security of your AWS infrastructure. Learn more in this section of our documentation.
+   :description: Wazuh provides a comprehensive suite of features to monitor and improve the security of your AWS infrastructure.
 
 Monitoring Amazon Web Services (AWS)
 ====================================

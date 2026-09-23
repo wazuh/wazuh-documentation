@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Wazuh provides a pre-built virtual machine image in Open Virtual Appliance (OVA) format.  It includes the Amazon Linux 2023 operating system and the Wazuh central components.
+   :description: Wazuh provides a pre-built virtual machine image in OVA format, including Amazon Linux 2023 and the Wazuh central components.
 
 Virtual machine (VM)
 ====================

@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Wazuh rules are used by the Wazuh manager to detect specific patterns or behaviors within log messages and generate alerts or responses accordingly. learn more in this section of the documentation.
+   :description: Wazuh rules are used by the Wazuh manager to detect specific patterns or behaviors within log messages and generate alerts.
 
 Rules
 =====

@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The Wazuh server is the Wazuh central component that analyzes data it receives from agents, external APIs, and network devices. Learn more in this section of the documentation.
+  :description: The Wazuh server is the central component that analyzes data it receives from agents, external APIs, and network devices.
 
 Wazuh server
 ============

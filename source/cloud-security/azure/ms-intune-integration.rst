@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Integrate Microsoft Intune with Wazuh to enhance security monitoring, process audit logs, generate actionable alerts, and ensure compliance with device administration policies for improved endpoint visibility.
+   :description: Integrate Microsoft Intune with Wazuh to enhance security monitoring, process audit logs, and generate actionable alerts.
 
 Microsoft Intune integration
 ============================
