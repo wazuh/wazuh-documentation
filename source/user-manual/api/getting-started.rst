@@ -21,7 +21,7 @@ The Wazuh server API is automatically installed and runs as part of the Wazuh ma
 
          # systemctl start/status/stop/restart wazuh-manager
 
-   .. group-tab:: SysV Init
+   .. group-tab:: SysV init
 
       .. code-block:: console
 

@@ -13,7 +13,7 @@ Execute the following command only after completing all installations:
          # sed -i "s/^deb /#deb /" /etc/apt/sources.list.d/wazuh.list
          # apt update
 
-   .. group-tab:: YUM
+   .. group-tab:: Yum
 
       .. code-block:: console
 

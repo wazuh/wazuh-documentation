@@ -119,7 +119,7 @@ You can set up an SSH key-pair to provide a passwordless authentication mechanis
 
                   # systemctl start ssh
 
-         .. group-tab:: SysV Init
+         .. group-tab:: SysV init
 
             -  CentOS / RHEL / Fedora:
 
@@ -187,7 +187,7 @@ You can set up an SSH key-pair to provide a passwordless authentication mechanis
 
                # systemctl start ssh
 
-      .. group-tab:: SysV Init
+      .. group-tab:: SysV init
 
          -  CentOS / RHEL / Fedora:
 

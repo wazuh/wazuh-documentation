@@ -123,7 +123,7 @@ Single-node stack
 
             -  Replace ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/`` with ``/usr/share/wazuh-indexer/opensearch-security/``.
 
-      .. group-tab:: Upgrading from 4.4 – 4.13
+      .. group-tab:: Upgrading from 4.4 to 4.13
 
          **Wazuh indexer**
 
@@ -244,7 +244,7 @@ Multi-node stack
 
             -  Replace ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/`` with ``/usr/share/wazuh-indexer/opensearch-security/``.
 
-      .. group-tab:: Upgrading from 4.4 - 4.13
+      .. group-tab:: Upgrading from 4.4 to 4.13
 
          **Wazuh indexer**
 
