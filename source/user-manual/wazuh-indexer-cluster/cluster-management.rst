@@ -121,8 +121,6 @@ Replica shards
 
 Wazuh creates its indices with ``index.auto_expand_replicas`` set to ``0-1``. The setting resolves to no replica on a single-node deployment, so that deployment reports green rather than yellow, and to one replica as soon as a second Wazuh indexer node joins. The Wazuh data streams that hold event and state data need no change.
 
-The OpenSearch plugins that ship with the Wazuh indexer create their own internal indices, such as ``.opendistro-*`` and ``.opensearch-*``, and some of those are created with a single copy of their data. They are managed by the plugin that owns them and are outside the scope of this check.
-
 Verify the replica configuration after you build a multi-node cluster, after you enable new detection content, and after an upgrade. Replace ``<INDEXER_USERNAME>``, ``<INDEXER_PASSWORD>``, and ``<WAZUH_INDEXER_IP>`` with the Wazuh indexer credentials and the IP address of any Wazuh indexer node.
 
 #. Confirm that the Wazuh indices carry the automatic replica setting. Every Wazuh index should return ``0-1``.

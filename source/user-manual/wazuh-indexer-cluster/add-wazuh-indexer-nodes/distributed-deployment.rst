@@ -24,6 +24,7 @@ Use the pre-existing root CA keys to generate the certificate for the new node, 
 #. Edit the ``/root/config.yml`` file to include only the node name and IP address of the new node:
 
    .. code-block:: yaml
+      :emphasize-lines: 4,5
 
       nodes:
         # Wazuh indexer nodes
@@ -62,6 +63,7 @@ Use the pre-existing root CA keys to generate the certificate for the new node, 
 #. Compress the certificates that the new node requires, taken from the complete set assembled in ``wazuh-install-files``, and copy the archive to the new Wazuh indexer node. You can use the ``scp`` utility to copy the compressed file securely:
 
    .. code-block:: console
+      :emphasize-lines: 1,2
 
       # tar -cvf ./wazuh-certificates-<NEW_WAZUH_INDEXER_NODE_NAME>.tar -C ./wazuh-install-files/ ./<NEW_WAZUH_INDEXER_NODE_NAME>.pem ./<NEW_WAZUH_INDEXER_NODE_NAME>-key.pem ./admin.pem ./admin-key.pem ./root-ca.pem
       # scp ./wazuh-certificates-<NEW_WAZUH_INDEXER_NODE_NAME>.tar <TARGET_USERNAME>@<TARGET_IP>:
@@ -76,6 +78,7 @@ Configuring existing components to connect with the new node
 #. Edit the configuration file at ``/etc/wazuh-indexer/opensearch.yml`` on all existing Wazuh indexer nodes. Add the ``<NEW_WAZUH_INDEXER_IP>`` to the ``discovery.seed_hosts`` block, and the ``<NEW_WAZUH_INDEXER_NODE_NAME>`` to ``CN`` in ``plugins.security.nodes_dn`` block.
 
    .. code-block:: yaml
+      :emphasize-lines: 1,2,6,9,10,13,14
 
       network.host: "<EXISTING_WAZUH_INDEXER_IP>"
       node.name: "<EXISTING_WAZUH_INDEXER_NODE_NAME>"
@@ -105,6 +108,7 @@ Configuring existing components to connect with the new node
 #. Edit the ``<indexer>`` block of the Wazuh manager configuration file ``/var/wazuh-manager/etc/wazuh-manager.conf`` to add the new Wazuh indexer node, then restart the Wazuh manager:
 
    .. code-block:: xml
+      :emphasize-lines: 2,3
 
       <hosts>
         <host>https://<EXISTING_WAZUH_INDEXER_IP>:9200</host>
