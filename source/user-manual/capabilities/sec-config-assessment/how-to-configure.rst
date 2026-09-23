@@ -15,50 +15,40 @@ For a detailed description of the various configuration parameters of SCA, pleas
 Enabling and disabling policies
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-By default, the Wazuh agent runs scans for every policy (``.yaml`` or ``.yml`` files) present in their ruleset folder:
+By default, the Wazuh agent scans every policy (``.yaml`` or ``.yml`` file) in its ruleset folder:
 
 - Linux and Unix-based agents: ``/var/ossec/ruleset/sca``.
 - Windows agents: ``C:\Program Files (x86)\ossec-agent\ruleset\sca``.
 - macOS agents: ``/Library/Ossec/ruleset/sca``.
 
 .. note::
-    The contents of the aforementioned default ruleset folders are neither kept across installations nor updates. Place them under an alternative folder if you wish to modify or add new policies.
+   Installations and updates don't preserve the contents of these default ruleset folders. Place your policies under an alternative folder if you want to modify or add new ones.
 
-To enable a policy file outside the Wazuh agent installation folder, add the policy file path to the ``<sca>`` block in the Wazuh agent configuration file. An example is shown below:
+There are two ways to disable policies on the Wazuh agent. The simplest method is to rename the policy file with an extension other than ``.yaml`` or ``.yml``.
 
-.. code-block:: xml
+Alternatively, disable a policy in the Wazuh agent ``ossec.conf`` file by setting the ``enabled`` attribute to ``no``.
 
-    <sca>
-      <policies>
-        <policy><FULLPATH_TO_CUSTOM_SCA_POLICY_FILE></policy>
-      </policies>
-    </sca>
-
-You can also specify a relative path to the Wazuh installation directory:
+To disable a policy included with the Wazuh agent, specify its path relative to the Wazuh installation directory:
 
 .. code-block:: xml
 
-    <sca>
-      <policies>
-        <policy>etc/shared/<CUSTOM_SCA_POLICY_FILE></policy>
-      </policies>
-    </sca>
+   <sca>
+     <policies>
+       <policy enabled="no">ruleset/sca/<POLICY_FILE_TO_DISABLE></policy>
+     </policies>
+   </sca>
 
-There are two ways to disable policies on the Wazuh agent. The simplest one is renaming the policy file by adding ``.disabled`` (or anything different from ``.yaml`` or ``.yml``) after their YAML extension. 
-
-The second is to disable them from the Wazuh agent ``ossec.conf`` file by adding a line such as the following to the ``<policy>`` section of the SCA module:
+For a policy distributed through centralized configuration, use its path in the ``etc/shared`` directory:
 
 .. code-block:: xml
 
-    <sca>
-      <policies>
-        <policy enabled="no">etc/shared/<POLICY_FILE_TO_DISABLE></policy>
-      </policies>
-    </sca>
+   <sca>
+     <policies>
+       <policy enabled="no">etc/shared/<POLICY_FILE_TO_DISABLE></policy>
+     </policies>
+   </sca>
 
-.. note::
-
-   From Wazuh 4.13.0, SCA policy files must be on local file systems. UNC network paths or mapped network drives are not supported.
+You can also specify an absolute path to the policy file.
 
 .. _share_policy_files_and_configuration_with_the_Wazuh_agents:
 
