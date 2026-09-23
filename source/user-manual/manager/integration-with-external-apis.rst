@@ -139,7 +139,7 @@ To set up this integration, perform the following steps:
 
    .. include:: /_templates/common/restart_manager.rst
 
-Once the configuration is complete, alerts start showing on the Pagerduty dashboard.
+Once the configuration is complete, alerts start showing on the PagerDuty dashboard.
 
 .. thumbnail:: /images/manual/wazuh-server/alerts-in-pagerduty.png
    :title: Alerts in PagerDuty

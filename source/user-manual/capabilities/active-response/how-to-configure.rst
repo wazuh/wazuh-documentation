@@ -105,7 +105,7 @@ Linux/Unix
 macOS
 ~~~~~
 
-#. Add your custom active response script or executable to the ``/Library/Ossec/active-response/bin`` directory on Linux/Unix endpoints.
+#. Add your custom active response script or executable to the ``/Library/Ossec/active-response/bin`` directory on macOS endpoints.
 
 #. Change the script permissions and ownership as shown below:
 

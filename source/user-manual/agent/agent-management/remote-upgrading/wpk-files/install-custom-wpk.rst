@@ -41,7 +41,7 @@ Follow the steps below to upgrade a Wazuh agent using a custom WPK file in a WPK
 
                # Restart-Service -Name wazuh
 
-         .. group-tab:: MacOS
+         .. group-tab:: macOS
 
             .. code-block:: console
 
