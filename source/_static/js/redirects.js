@@ -436,6 +436,21 @@ redirections.push(
     'target': ['4.14=>5.0', '5.0=>4.14'],
     '4.14': '/cloud-security/azure/ms-graph-api-setup.html',
     '5.0': '/cloud-security/azure/monitoring-ms-graph.html#configure-the-microsoft-graph-api-permissions',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/user-manual/wazuh-indexer-cluster/add-wazuh-indexer-nodes.html',
+    '5.0': '/user-manual/wazuh-indexer-cluster/add-wazuh-indexer-nodes/index.html',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/user-manual/wazuh-indexer-cluster/certificate-deployment.html',
+    '5.0': '/user-manual/wazuh-indexer-cluster/cluster-configuration.html#certificates-deployment',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/user-manual/wazuh-indexer-cluster/wazuh-indexer-cluster-tuning.html',
+    '5.0': '/user-manual/wazuh-indexer-cluster/cluster-configuration.html#wazuh-indexer-cluster-tuning',
   }
 );
 
@@ -445,6 +460,9 @@ removedUrls['5.0'] = [
   '/user-manual/reference/ossec-conf/client-buffer.html',
   '/user-manual/reference/ossec-conf/labels.html',
   '/cloud-security/azure/ms-graph-api-setup.html',
+  '/user-manual/wazuh-indexer-cluster/add-wazuh-indexer-nodes.html',
+  '/user-manual/wazuh-indexer-cluster/certificate-deployment.html',
+  '/user-manual/wazuh-indexer-cluster/wazuh-indexer-cluster-tuning.html',
   '/compliance/pci-dss/dashboard.html',
   '/compliance/hipaa/visualization-and-dashboard.html',
   '/compliance/hipaa/log-data-analysis.html',
@@ -546,6 +564,15 @@ removedUrls['5.0'] = [
   '/cloud-security/gcp/supported-services/index.html',
   '/cloud-security/gcp/supported-services/pubsub.html',
   '/cloud-security/gcp/supported-services/cloud-storage-buckets.html',
+  '/user-manual/wazuh-indexer-cluster/cluster-architecture-and-node-types.html',
+  '/user-manual/wazuh-indexer-cluster/required-ports.html',
+  '/user-manual/wazuh-indexer-cluster/cluster-configuration.html',
+  '/user-manual/wazuh-indexer-cluster/add-wazuh-indexer-nodes/index.html',
+  '/user-manual/wazuh-indexer-cluster/add-wazuh-indexer-nodes/all-in-one-deployment.html',
+  '/user-manual/wazuh-indexer-cluster/add-wazuh-indexer-nodes/distributed-deployment.html',
+  '/user-manual/wazuh-indexer-cluster/add-wazuh-indexer-nodes/new-wazuh-indexer-node.html',
+  '/user-manual/wazuh-indexer-cluster/removing-a-wazuh-indexer-node.html',
+  '/user-manual/wazuh-indexer-cluster/troubleshooting.html',
 ];
 
 /* *** RELEASE 4.14 ****/

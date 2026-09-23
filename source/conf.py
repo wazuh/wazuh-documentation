@@ -136,7 +136,7 @@ exclude_patterns = [
     'user-manual/manager/integration-with-external-apis.rst',
     'user-manual/wazuh-indexer/re-indexing.rst',
     'user-manual/wazuh-indexer/wazuh-indexer-on-hardened-endpoints.rst',
-    'user-manual/wazuh-indexer-cluster/**',
+    'user-manual/wazuh-indexer-cluster/index-lifecycle-management.rst',
     'user-manual/wazuh-server-cluster/**',
     'cloud-security/amazon/**',
     'cloud-security/gcp/posture-management.rst',
