@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [v4.14.8]
 
+### Added
+
+- **Post-release**: Added a note to the *Regulatory compliance* documentation stating that the rule and control mappings are indicative and require an independent qualified assessor for formal certification. ([#10202](https://github.com/wazuh/wazuh-documentation/pull/10202))
+
 ### Fixed
 
 - **Post-release**: Clarified where the `wazuh-install-files.tar` archive is created in the *Quickstart* documentation's installation note. ([#10186](https://github.com/wazuh/wazuh-documentation/pull/10186))
