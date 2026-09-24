@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 
 ## [v4.14.8]
 
-- Support for Wazuh 4.14.8
+- **Post-release**: Clarified where the `wazuh-install-files.tar` archive is created in the *Quickstart* documentation's installation note. ([#10186](https://github.com/wazuh/wazuh-documentation/pull/10186))
 
 ## [v4.14.7]
 
