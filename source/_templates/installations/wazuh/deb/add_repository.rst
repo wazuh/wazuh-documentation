@@ -4,7 +4,7 @@
 
    .. code-block:: console
 
-     # apt-get install gnupg apt-transport-https
+     # apt-get install gnupg apt-transport-https curl
 
 #. Install the GPG key:
 
@@ -30,7 +30,7 @@
 
    .. code-block:: console
 
-      # apt-get install gnupg apt-transport-https
+      # apt-get install gnupg apt-transport-https curl
       # curl -s https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH | apt-key add -
       # echo "deb https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/apt/ unstable main" | tee -a /etc/apt/sources.list.d/wazuh.list
 
