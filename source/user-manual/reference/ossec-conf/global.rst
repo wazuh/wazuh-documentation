@@ -264,7 +264,7 @@ This sets the memory size for the event correlation engine.
 white_list
 ^^^^^^^^^^
 
-This specifies an IPv4/IPv6 address, netblock, or hostname that will not trigger an active response. Only one of those values may be specified for each ``<while_list>`` tag, but several values may be used by including multiple ``<white_list>`` tags. This configuration is compared against the extracted **srcip** field in the alert.
+This specifies an IPv4/IPv6 address, netblock, or hostname that will not trigger an active response. Only one of those values may be specified for each ``<white_list>`` tag, but several values may be used by including multiple ``<white_list>`` tags. This configuration is compared against the extracted **srcip** field in the alert.
 
 +--------------------+--------------------------------------------------------------------+
 | **Default value**  | n/a                                                                |
