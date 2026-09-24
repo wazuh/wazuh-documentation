@@ -84,7 +84,7 @@ When you access the Wazuh dashboard for the first time, the browser shows a warn
 .. note::
    :class: not-long
   
-   You can find the passwords for all the Wazuh indexer and Wazuh API users in the ``wazuh-passwords.txt`` file inside ``wazuh-install-files.tar``. To print them, run the following command:
+   You can find the passwords for all the Wazuh indexer and Wazuh API users in the ``wazuh-passwords.txt`` file inside ``wazuh-install-files.tar``. The ``wazuh-install-files.tar`` archive is created in the directory where you run the Wazuh installation assistant. To print them, run the following command:
 
       .. code-block:: console
       
