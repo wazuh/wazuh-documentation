@@ -16,6 +16,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Added note about Linux and macOS WPK ARM packages in 4.11 and earlier versions. ([#9309](https://github.com/wazuh/wazuh-documentation/pull/9309))
 - **Post-release**: Backport: Added the *System requirements* section to the *Wazuh server cluster* documentation. ([#9672](https://github.com/wazuh/wazuh-documentation/pull/9672))
 - **Post-release**: Added guidance about matching the Wazuh manager version in the *Adding new Wazuh server nodes* documentation. ([#10012](https://github.com/wazuh/wazuh-documentation/pull/10012))
+- **Post-release**: Added a note to the *Regulatory compliance* documentation stating that the rule and control mappings are indicative and require an independent qualified assessor for formal certification. ([#10199](https://github.com/wazuh/wazuh-documentation/pull/10199))
 
 ### Changed
 
