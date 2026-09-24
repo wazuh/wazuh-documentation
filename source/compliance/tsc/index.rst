@@ -10,6 +10,9 @@ The American Institute of Certified Public Accountants (AICPA) developed the SOC
 
 This document outlines use cases that show how Wazuh supports compliance with the TSC common criteria and the additional criteria. We have also created the `Using Wazuh for TSC (2022 revision) requirements guide <https://documentation.wazuh.com/resources/using-wazuh-for-TSC-2022-requirements-guide.pdf>`__, which complements this document. Refer to the guide for more details on how Wazuh helps meet TSC requirements.
 
+.. note::
+   These rules and control mappings are indicative and do not by themselves certify compliance. See :doc:`Regulatory compliance </compliance/index>` for more details.
+
 Trust Services Criteria (TSC)
 ------------------------------
 

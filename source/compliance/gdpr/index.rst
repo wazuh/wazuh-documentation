@@ -8,7 +8,12 @@ Using Wazuh for GDPR compliance
 
 The European Union's General Data Protection Regulation (GDPR) was created to establish a harmonized data privacy framework across Europe. Its primary focus is protecting the data of European Union citizens. The regulation aims to improve user data privacy and reform the way European Union organizations approach data privacy.
 
-Wazuh helps with GDPR compliance by performing log collection, file integrity monitoring, configuration assessment, intrusion detection, and automated threat response. To view the GDPR related data on the Wazuh dashboard:
+Wazuh helps with GDPR compliance by performing log collection, file integrity monitoring, configuration assessment, intrusion detection, and automated threat response.
+
+.. note::
+   These rules and control mappings are indicative and do not by themselves certify compliance. See :doc:`Regulatory compliance </compliance/index>` for more details.
+
+To view the GDPR related data on the Wazuh dashboard:
 
 #. Click the menu icon, then navigate to **Security operations** > **Regulatory Compliance** > **GDPR**.
 
