@@ -12,6 +12,9 @@ The Payment Card Industry Data Security Standard (PCI DSS) is a proprietary info
 
 Wazuh helps ensure PCI DSS compliance by performing log data collection, file integrity monitoring, security configuration assessment, system inventory, real-time alerting, and active response. The Wazuh dashboard displays information in real-time, allowing filtering by alert field types, including compliance controls. We have also developed a couple of PCI DSS dashboards to make relevant alerts easier to view. The syntax used for tagging PCI DSS-relevant rules is ``pci_dss`` followed by the requirement number (e.g., ``pci_dss_10.2.4`` and ``pci_dss_10.2.5``).
 
+.. note::
+   These rules and control mappings are indicative and do not by themselves certify compliance. See :doc:`Regulatory compliance </compliance/index>` for more details.
+
 This guide explains how Wazuh capabilities and modules assist with meeting **PCI DSS version 4.0** requirements:
 
 -  `Wazuh for PCI DSS V4.0 Guide (PDF) <https://wazuh.com/resources/WAZUH-PCI-DSS-V4.0-guide.pdf>`_
