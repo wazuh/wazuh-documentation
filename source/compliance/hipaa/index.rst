@@ -13,6 +13,7 @@ The Health Insurance Portability and Accountability Act (HIPAA) establishes stan
 Wazuh supports HIPAA compliance by performing log data analysis, configuration assessment, malware detection, file integrity monitoring, vulnerability detection, and active response.
 
 .. note::
+
    These rules and control mappings are indicative and do not by themselves certify compliance. See :doc:`Regulatory compliance </compliance/index>` for more details.
 
 Follow these steps to view the HIPAA-related data on the Wazuh dashboard:
