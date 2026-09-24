@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file.
 - **Post-release**: Added *Prerequisites* section to *Install Wazuh Agent* documentation. ([#9279](https://github.com/wazuh/wazuh-documentation/pull/9279))
 - **Post-release**: Backport: Added the *System requirements* section to the *Wazuh server cluster* documentation. ([#9670](https://github.com/wazuh/wazuh-documentation/pull/9670))
 - **Post-release**: Added guidance about matching the Wazuh manager version in the *Adding new Wazuh server nodes* documentation. ([#10014](https://github.com/wazuh/wazuh-documentation/pull/10014))
+- **Post-release**: Added a note to the *Regulatory compliance* documentation stating that the rule and control mappings are indicative and require an independent qualified assessor for formal certification. ([#10201](https://github.com/wazuh/wazuh-documentation/pull/10201))
 
 ### Changed
 
