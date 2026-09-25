@@ -89,17 +89,9 @@ extlinks = {
 # (2026-09-24) rather than guessed — see that run's categorized findings for the reasoning
 # behind each entry.
 linkcheck_ignore = [
-    # The DOMAIN placeholder above (used by all three extlinks roles) is a deliberate
-    # stand-in for the reader's own Wazuh server, never a resolvable hostname — every
-    # :api-ref:/:cloud-api-ref:/:indexer-api-ref: use will DNS-fail under linkcheck by design.
-    # Unlike every other false-positive category `make linkcheck` surfaces, this one is
-    # permanent and fully within this repo's own control (a template mechanism, not a
-    # third-party site's behavior) — there's nothing for a report to periodically re-confirm,
-    # so this is the one config-level suppression kept; everything else (a third-party site's
-    # bot-blocking or JS-only rendering, which *could* change) is annotated in the
-    # `/audit-linkcheck` report instead of silenced here. See that skill for the rest of this
-    # run's calibration history (http://<address>-style format text, a truncated example URL,
-    # npmjs.com, and three JS-rendered sites with no server-side anchors).
+    # DOMAIN (the extlinks placeholder above) is rewritten client-side, not server-side —
+    # see content.js — so linkcheck only ever sees the raw, pre-rewrite text and always
+    # reports it broken.
     r'^https://DOMAIN/',
 ]
 
