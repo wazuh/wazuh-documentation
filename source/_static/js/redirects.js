@@ -1980,6 +1980,8 @@ newUrls['4.5'] = [
   '/user-manual/wazuh-indexer/wazuh-indexer-tuning.html',
   '/user-manual/wazuh-indexer/migrating-wazuh-indices.html',
   '/user-manual/user-administration/ldap.html',
+  '/cloud-security/amazon/services/supported-services/security-lake.html',
+  '/cloud-security/amazon/services/supported-services/elastic-load-balancing/index.html',
 ];
 
 /* Pages no longer available in 4.5 */
@@ -2000,6 +2002,8 @@ removedUrls['4.5'] = [
   '/user-manual/elasticsearch/elasticsearch.html',
   '/user-manual/elasticsearch/index.html',
   '/user-manual/elasticsearch/troubleshooting.html',
+  '/amazon/services/supported-services/security-lake.html',
+  '/amazon/services/supported-services/elastic-load-balancing/index.html',
 ];
 
 /* *** RELEASE 4.4 ****/
@@ -2223,9 +2227,9 @@ redirections.push(
     '4.4': '/cloud-security/amazon/services/index.html',
   },
   {
-    'target': ['4.3=>4.4', '4.4=>4.3'],
-    '4.3': '/amazon/services/supported-services/elastic-load-balancing/index.html',
-    '4.4': '/cloud-security/amazon/services/supported-services/elastic-load-balancing/index.html',
+    'target': ['4.4=>4.5', '4.5=>4.4'],
+    '4.4': '/amazon/services/supported-services/elastic-load-balancing/index.html',
+    '4.5': '/cloud-security/amazon/services/supported-services/elastic-load-balancing/index.html',
   },
   {
     'target': ['4.3=>4.4', '4.4=>4.3'],
@@ -2233,9 +2237,9 @@ redirections.push(
     '4.4': '/cloud-security/amazon/services/supported-services/vpc.html',
   },
   {
-    'target': ['4.3=>4.4', '4.4=>4.3'],
-    '4.3': '/amazon/services/supported-services/security-lake.html',
-    '4.4': '/cloud-security/amazon/services/supported-services/security-lake.html',
+    'target': ['4.4=>4.5', '4.5=>4.4'],
+    '4.4': '/amazon/services/supported-services/security-lake.html',
+    '4.5': '/cloud-security/amazon/services/supported-services/security-lake.html',
   },
   {
     'target': ['4.3=>4.4', '4.4=>4.3'],
@@ -2572,7 +2576,6 @@ newUrls['4.4'] = [
   '/cloud-security/amazon/services/prerequisites/S3-bucket.html',
   '/cloud-security/amazon/services/index.html',
   '/cloud-security/amazon/services/supported-services/vpc.html',
-  '/cloud-security/amazon/services/supported-services/security-lake.html',
   '/cloud-security/amazon/services/supported-services/waf.html',
   '/cloud-security/amazon/services/supported-services/guardduty.html',
   '/cloud-security/amazon/services/supported-services/cisco-umbrella.html',
@@ -2584,7 +2587,6 @@ newUrls['4.4'] = [
   '/cloud-security/amazon/services/supported-services/inspector.html',
   '/cloud-security/amazon/services/supported-services/macie.html',
   '/cloud-security/amazon/services/supported-services/cloudwatchlogs.html',
-  '/cloud-security/amazon/services/supported-services/elastic-load-balancing/index.html',
   '/cloud-security/amazon/services/supported-services/elastic-load-balancing/alb.html',
   '/cloud-security/amazon/services/supported-services/elastic-load-balancing/nlb.html',
   '/cloud-security/amazon/services/supported-services/elastic-load-balancing/clb.html',
@@ -2713,6 +2715,8 @@ newUrls['4.4'] = [
   '/compliance/pci-dss/active-response.html',
   '/compliance/pci-dss/file-integrity-monitoring.html',
   '/compliance/pci-dss/log-analysis.html',
+  '/amazon/services/supported-services/security-lake.html',
+  '/amazon/services/supported-services/elastic-load-balancing/index.html',
 ];
 
 /* Pages removed in 4.4 */
@@ -2728,7 +2732,6 @@ removedUrls['4.4'] = [
   '/amazon/services/prerequisites/S3-bucket.html',
   '/amazon/services/index.html',
   '/amazon/services/supported-services/vpc.html',
-  '/amazon/services/supported-services/security-lake.html',
   '/amazon/services/supported-services/waf.html',
   '/amazon/services/supported-services/guardduty.html',
   '/amazon/services/supported-services/cisco-umbrella.html',
@@ -3018,6 +3021,8 @@ newUrls['4.3'] = [
   '/user-manual/files-backup/index.html',
   '/user-manual/files-backup/wazuh-central-components.html',
   '/user-manual/files-backup/wazuh-agent.html',
+  '/user-manual/capabilities/vulnerability-detection/scan-types.html',
+  '/azure/activity-services/prerequisites/dependencies.html',
 ];
 
 removedUrls['4.3'] = [
@@ -3685,18 +3690,18 @@ redirections.push(
   },
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': 'azure/monitoring-activity.html',
-    '4.3': 'azure/activity-services/index.html',
+    '4.2': '/azure/monitoring-activity.html',
+    '4.3': '/azure/activity-services/index.html',
   },
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': 'azure/monitoring-services.html',
-    '4.3': 'azure/activity-services/index.html',
+    '4.2': '/azure/monitoring-services.html',
+    '4.3': '/azure/activity-services/index.html',
   },
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': 'azure/dependencies.html',
-    '4.3': 'azure/activity-services/prerequisites/dependencies.html',
+    '4.2': '/azure/dependencies.html',
+    '4.3': '/azure/activity-services/prerequisites/dependencies.html',
   },
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
@@ -4158,6 +4163,7 @@ newUrls['4.2'] = [
   '/user-manual/agent-enrollment/security-options/manager-identity-verification.html',
   '/user-manual/agent-enrollment/security-options/agent-identity-verification.html',
   '/user-manual/agent-enrollment/troubleshooting.html',
+  '/azure/dependencies.html',
 ];
 
 removedUrls['4.2'] = [
