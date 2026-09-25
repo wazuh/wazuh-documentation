@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file.
 
 - **Post-release**: Clarified where the `wazuh-install-files.tar` archive is created in the *Quickstart* documentation's installation note. ([#10186](https://github.com/wazuh/wazuh-documentation/pull/10186))
 - **Post-release**: Added `curl` to the prerequisite package list for the APT repository instructions in the *Installation guide*'s Wazuh indexer, manager, dashboard, and agent sections. ([#10188](https://github.com/wazuh/wazuh-documentation/pull/10188))
+- **Post-release**: Fixed the version selector incorrectly showing versions 4.4 through 4.14 as unavailable across the *Regulatory compliance* documentation pages. ([#10203](https://github.com/wazuh/wazuh-documentation/pull/10203))
 
 ## [v4.14.7]
 
