@@ -16,10 +16,15 @@ All notable changes to this project will be documented in this file.
 
 ## [v4.14.7]
 
+### Added
+
+- **Post-release**: Added guidance about matching the Wazuh manager version to the existing cluster nodes in the *Adding new Wazuh server nodes* documentation. ([#10007](https://github.com/wazuh/wazuh-documentation/pull/10007)) ([#10130](https://github.com/wazuh/wazuh-documentation/pull/10130))
+
+### Fixed
+
 - **Post-release**: Obscured the sample private key values in the GCP credentials documentation. ([#9971](https://github.com/wazuh/wazuh-documentation/pull/9971))
 - **Post-release**: Fixed the *User manual* index page so it shows the full page list for the *Wazuh dashboard* and *Data analysis* subsections. ([#9992](https://github.com/wazuh/wazuh-documentation/pull/9992))
 - **Post-release**: Fixed the *Deployment with Puppet* index page so the *Wazuh Puppet module* reference pages are listed. ([#9992](https://github.com/wazuh/wazuh-documentation/pull/9992))
-- **Post-release**: Added guidance about matching the Wazuh manager version to the existing cluster nodes in the *Adding new Wazuh server nodes* documentation. ([#10007](https://github.com/wazuh/wazuh-documentation/pull/10007)) ([#10130](https://github.com/wazuh/wazuh-documentation/pull/10130))
 - **Post-release**: Fixed a duplicate heading in the *Architecture* documentation's component communication section, separating the Wazuh dashboard's connections to the Wazuh server and Wazuh indexer. ([#10038](https://github.com/wazuh/wazuh-documentation/pull/10038))
 - **Post-release**: Clarified the LDAPS connection success step and updated its screenshot in the *Active Directory and LDAP integration* documentation. ([#10039](https://github.com/wazuh/wazuh-documentation/pull/10039))
 - **Post-release**: Fixed missing or non-descriptive image alt text in the *Installation guide*, *Deployment options*, *Quickstart*, *Proof of concept guide*, *Integrations guide*, *Cloud security*, *Upgrade guide*, and *Active Response* documentation. ([#10057](https://github.com/wazuh/wazuh-documentation/pull/10057)) ([#10081](https://github.com/wazuh/wazuh-documentation/pull/10081)) ([#10082](https://github.com/wazuh/wazuh-documentation/pull/10082)) ([#10089](https://github.com/wazuh/wazuh-documentation/pull/10089))
@@ -48,8 +53,13 @@ All notable changes to this project will be documented in this file.
 
 ## [v4.14.6]
 
-- **Post-release**: Fixed dead link in release notes. ([#9761](https://github.com/wazuh/wazuh-documentation/pull/9761))
+### Changed
+
 - **Post-release**: Updated the *Monitoring Microsoft Azure* documentation page title. ([#9923](https://github.com/wazuh/wazuh-documentation/pull/9923))
+
+### Fixed
+
+- **Post-release**: Fixed dead link in release notes. ([#9761](https://github.com/wazuh/wazuh-documentation/pull/9761))
 - **Post-release**: Fixed broken link in the *Adding new Wazuh server nodes* section and moved the root user privileges note into the *All-in-one deployment* and *Distributed deployment* pages. ([#9934](https://github.com/wazuh/wazuh-documentation/pull/9934)) ([#9937](https://github.com/wazuh/wazuh-documentation/pull/9937))
 
 ## [v4.14.5]
