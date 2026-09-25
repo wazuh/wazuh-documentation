@@ -180,48 +180,49 @@ Main options
 
 The main options enable or disable the Wazuh Docker listener module. They also set how many times the listener retries after a failure.
 
-+------------------+--------------------------------------------------+---------------+-------------------+
-| Parameter        | Description                                      | Default value | Allowed values    |
-+==================+==================================================+===============+===================+
-| ``disabled``     | Enables or disables the Wazuh Docker listener    | no            | yes, no           |
-|                  | module.                                          |               |                   |
-+------------------+--------------------------------------------------+---------------+-------------------+
-| ``attempts``     | The number of attempts to execute the listener   | 5             | A positive number |
-|                  | in case it fails.                                |               |                   |
-+------------------+--------------------------------------------------+---------------+-------------------+
++------------------+----------------------------------------------------+----------------+---------------------+
+| Parameter        | Description                                        | Default value  | Allowed values      |
++==================+====================================================+================+=====================+
+| ``disabled``     | Enables or disables the Wazuh Docker listener      | ``no``         | ``yes``, ``no``     |
+|                  | module.                                            |                |                     |
++------------------+----------------------------------------------------+----------------+---------------------+
+| ``attempts``     | The number of attempts to execute the listener in  | ``5``          | A positive number   |
+|                  | case it fails.                                     |                |                     |
++------------------+----------------------------------------------------+----------------+---------------------+
 
 Scheduling options
 ^^^^^^^^^^^^^^^^^^
 
 The scheduling options allow you to configure when the Wazuh Docker listener module executes. The available scheduling options are ``run_on_start``, ``interval``, ``day``, ``wday``, and ``time``.
 
-+------------------+------------------------------------------------+---------------+------------------------------------+
-| Parameter        | Description                                    | Default value | Allowed values                     |
-+==================+================================================+===============+====================================+
-| ``run_on_start`` | Runs the Wazuh Docker listener module          | no            | yes, no                            |
-|                  | immediately when the Wazuh agent starts.       |               |                                    |
-+------------------+------------------------------------------------+---------------+------------------------------------+
-| ``interval``     | How long to wait before restarting the Docker  | 1m            | A positive number with a suffix    |
-|                  | listener after it exits due to unexpected      |               | character indicating a time unit:  |
-|                  | error or other issues.                         |               | s (seconds), m (minutes), h        |
-|                  |                                                |               | (hours), d (days), M (months).     |
-+------------------+------------------------------------------------+---------------+------------------------------------+
-| ``day``          | Day of the month on which to restart the       | n/a           | Day of the month [1..31]           |
-|                  | Docker listener after it exits. This option is |               |                                    |
-|                  | not compatible with the ``wday`` option.       |               |                                    |
-|                  | **Note:** When the ``day`` option is set, the  |               |                                    |
-|                  | interval value must be a multiple of months.   |               |                                    |
-+------------------+------------------------------------------------+---------------+------------------------------------+
-| ``wday``         | Day of the week on which to restart the        | n/a           | Day of the week: sunday/sun,       |
-|                  | Docker listener after it exits. This option is |               | monday/mon, tuesday/tue,           |
-|                  | not compatible with the ``day`` option.        |               | wednesday/wed, thursday/thu,       |
-|                  | **Note:** When the ``wday`` option is set, the |               | friday/fri, saturday/sat           |
-|                  | interval value must be a multiple of weeks.    |               |                                    |
-+------------------+------------------------------------------------+---------------+------------------------------------+
-| ``time``         | Time of the day to restart the Docker listener | n/a           | Time of day [hh:mm]                |
-|                  | after it exits. Must be represented in the     |               |                                    |
-|                  | format hh:mm. **Note:** When only the ``time`` |               |                                    |
-|                  | option is set, the interval value must be a    |               |                                    |
-|                  | multiple of days or weeks. The default         |               |                                    |
-|                  | interval is set to a day (1d).                 |               |                                    |
-+------------------+------------------------------------------------+---------------+------------------------------------+
++------------------+--------------------------------------------------+----------------+-------------------------------------+
+| Parameter        | Description                                      | Default value  | Allowed values                      |
++==================+==================================================+================+=====================================+
+| ``run_on_start`` | Runs the Wazuh Docker listener module            | ``no``         | ``yes``, ``no``                     |
+|                  | immediately when the Wazuh agent starts.         |                |                                     |
++------------------+--------------------------------------------------+----------------+-------------------------------------+
+| ``interval``     | How long to wait before restarting the Docker    | ``1m``         | A positive number with a suffix     |
+|                  | listener after it exits due to unexpected error  |                | character indicating a time unit:   |
+|                  | or other issues.                                 |                | ``s`` (seconds), ``m`` (minutes),   |
+|                  |                                                  |                | ``h`` (hours), ``d`` (days), ``M``  |
+|                  |                                                  |                | (months).                           |
++------------------+--------------------------------------------------+----------------+-------------------------------------+
+| ``day``          | Day of the month on which to restart the Docker  | ``n/a``        | Day of the month [1..31]            |
+|                  | listener after it exits. This option is not      |                |                                     |
+|                  | compatible with the ``wday`` option. **Note:**   |                |                                     |
+|                  | When the ``day`` option is set, the interval     |                |                                     |
+|                  | value must be a multiple of months.              |                |                                     |
++------------------+--------------------------------------------------+----------------+-------------------------------------+
+| ``wday``         | Day of the week on which to restart the Docker   | ``n/a``        | Day of the week: ``sunday/sun``,    |
+|                  | listener after it exits. This option is not      |                | ``monday/mon``, ``tuesday/tue``,    |
+|                  | compatible with the ``day`` option. **Note:**    |                | ``wednesday/wed``,                  |
+|                  | When the ``wday`` option is set, the interval    |                | ``thursday/thu``, ``friday/fri``,   |
+|                  | value must be a multiple of weeks.               |                | ``saturday/sat``                    |
++------------------+--------------------------------------------------+----------------+-------------------------------------+
+| ``time``         | Time of the day to restart the Docker listener   | ``n/a``        | Time of day [hh:mm]                 |
+|                  | after it exits. Must be represented in the       |                |                                     |
+|                  | format hh:mm. **Note:** When only the ``time``   |                |                                     |
+|                  | option is set, the interval value must be a      |                |                                     |
+|                  | multiple of days or weeks. The default interval  |                |                                     |
+|                  | is set to a day (1d).                            |                |                                     |
++------------------+--------------------------------------------------+----------------+-------------------------------------+
