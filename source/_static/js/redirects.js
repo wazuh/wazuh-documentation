@@ -1282,6 +1282,7 @@ newUrls['4.7'] = [
   '/user-manual/ruleset/decoders/sibling-decoders.html',
   '/user-manual/ruleset/rules/custom.html',
   '/user-manual/ruleset/rules/index.html',
+  '/user-manual/capabilities/vulnerability-detection/scan-types.html',
 ];
 
 /* Pages no longer available in 4.7 */
@@ -2996,6 +2997,9 @@ newUrls['4.3'] = [
   '/user-manual/files-backup/index.html',
   '/user-manual/files-backup/wazuh-central-components.html',
   '/user-manual/files-backup/wazuh-agent.html',
+  '/amazon/services/supported-services/security-lake.html',
+  '/amazon/services/supported-services/elastic-load-balancing/index.html',
+  '/azure/activity-services/prerequisites/dependencies.html',
 ];
 
 removedUrls['4.3'] = [
@@ -3663,18 +3667,18 @@ redirections.push(
   },
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': 'azure/monitoring-activity.html',
-    '4.3': 'azure/activity-services/index.html',
+    '4.2': '/azure/monitoring-activity.html',
+    '4.3': '/azure/activity-services/index.html',
   },
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': 'azure/monitoring-services.html',
-    '4.3': 'azure/activity-services/index.html',
+    '4.2': '/azure/monitoring-services.html',
+    '4.3': '/azure/activity-services/index.html',
   },
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': 'azure/dependencies.html',
-    '4.3': 'azure/activity-services/prerequisites/dependencies.html',
+    '4.2': '/azure/dependencies.html',
+    '4.3': '/azure/activity-services/prerequisites/dependencies.html',
   },
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
@@ -4136,6 +4140,7 @@ newUrls['4.2'] = [
   '/user-manual/agent-enrollment/security-options/manager-identity-verification.html',
   '/user-manual/agent-enrollment/security-options/agent-identity-verification.html',
   '/user-manual/agent-enrollment/troubleshooting.html',
+  '/azure/dependencies.html',
 ];
 
 removedUrls['4.2'] = [
