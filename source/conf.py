@@ -85,9 +85,6 @@ extlinks = {
     'indexer-api-ref': ('https://DOMAIN/user-manual/indexer-api/reference.html#%s', '')
 }
 
-# `make linkcheck` false-positive calibration. Populated from a real full-tree run
-# (2026-09-24) rather than guessed — see that run's categorized findings for the reasoning
-# behind each entry.
 linkcheck_ignore = [
     # DOMAIN (the extlinks placeholder above) is rewritten client-side, not server-side —
     # see content.js — so linkcheck only ever sees the raw, pre-rewrite text and always
