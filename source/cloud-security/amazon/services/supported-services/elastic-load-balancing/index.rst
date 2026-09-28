@@ -1,7 +1,7 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
-   :description: The following sections cover how to configure the Amazon ALB service to integrate with Wazuh.
+   :description: Learn how to configure the Amazon ALB, CLB, and NLB Elastic Load Balancer services to integrate with Wazuh.
 
 Elastic Load Balancers
 ======================
