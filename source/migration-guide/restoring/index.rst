@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+   :description: Learn how to restore a backup of your Wazuh central components and Wazuh agent files after migrating your installation.
+
 Restoring Wazuh from backup
 ===========================
 

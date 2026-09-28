@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: This section covers deploying Wazuh on Kubernetes for Amazon EKS and Local Kubernetes clusters, from environment preparation to verifying that all components are running correctly.
+   :description: Learn how to deploy Wazuh on Kubernetes for Amazon EKS and local clusters, from preparation to verifying components.
 
 Deployment
 ==========

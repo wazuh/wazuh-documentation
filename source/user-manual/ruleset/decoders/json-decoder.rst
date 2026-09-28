@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Wazuh incorporates a default decoder for JSON logs, enabling the extraction of data from any source in this format. Learn more in this section of the documentation.
+   :description: Wazuh incorporates a default decoder for JSON logs, enabling the extraction of data from any source in this format.
     
 JSON decoder
 ============
