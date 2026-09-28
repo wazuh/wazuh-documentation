@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: By installing the Wazuh agent on your AWS EC2 instances, you gain insights and monitor activities within these instances. Learn more in this section of the documentation.
+   :description: Installing the Wazuh agent on your AWS EC2 instances gives you insights into and monitors activity within those instances.
 
 Monitoring AWS instances
 ========================

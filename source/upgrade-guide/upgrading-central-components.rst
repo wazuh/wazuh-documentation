@@ -697,7 +697,7 @@ Backup the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file to save your 
 
    .. tabs::
 
-      .. group-tab:: YUM
+      .. group-tab:: Yum
 
          .. code-block:: console
 

@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Installing the Wazuh agent on the virtual machines in your Microsoft Azure environment enables early detection of potential threats and operational issues in dynamic cloud environments.
+   :description: Installing the Wazuh agent on Microsoft Azure virtual machines enables early detection of threats and operational issues.
 
 Monitoring instances
 ====================

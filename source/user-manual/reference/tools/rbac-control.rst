@@ -5,6 +5,9 @@
 
 .. _rbac_control:
 
+.. meta::
+   :description: Manage resources from the Wazuh RBAC database and reset it to its default state using the rbac_control program.
+
 rbac_control
 ============
 

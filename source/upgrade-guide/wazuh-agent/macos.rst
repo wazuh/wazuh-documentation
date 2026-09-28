@@ -1,7 +1,7 @@
 
 .. Copyright (C) 2015, Wazuh, Inc.
 .. meta::
-  :description: Check out how to upgrade the Wazuh agent to the latest available version remotely, using the agent_upgrade tool or the Wazuh API, or locally.
+  :description: Follow these steps to upgrade the Wazuh agent to the latest available version on macOS endpoints.
 
 
 Upgrading Wazuh agents on macOS endpoints

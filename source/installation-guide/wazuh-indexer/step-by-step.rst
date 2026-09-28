@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Wazuh indexer is a highly scalable full-text search engine. Install the Wazuh indexer in a single-node or multi-node configuration according to your environment needs.
+   :description: The Wazuh indexer is a highly scalable full-text search engine. Install it in a single-node or multi-node configuration.
 
 Installing the Wazuh indexer step-by-step
 =========================================
@@ -70,7 +70,7 @@ Generating the SSL certificates
             ip: "<dashboard-node-ip>"
 
 
-   To learn more about how to create and configure the certificates, see the `Certificates deployment </user-manual/wazuh-indexer-cluster/certificate-deployment>`__ section.
+   To learn more about how to create and configure the certificates, see the :ref:`Certificates deployment <wazuh_indexer_cluster_certificates_deployment>` section.
 
 #. Run ``./wazuh-certs-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh`` to create the certificates. For a multi-node cluster, these certificates need to be later deployed to all Wazuh instances in your cluster:
 
@@ -257,7 +257,7 @@ When the system is swapping memory, the Wazuh indexer may not work as expected. 
                LimitMEMLOCK=infinity
                EOF
 
-      .. group-tab:: SysVinit
+      .. group-tab:: SysV init
 
          #. Create a new directory for the file that specifies the system limits:
 

@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Learn about the security requirements for deploying the Wazuh server cluster, including network isolation, cluster key management, node hardening, and monitoring.
+   :description: Learn about the security requirements for deploying the Wazuh server cluster, including network isolation and hardening.
 
 Security requirements
 =====================
