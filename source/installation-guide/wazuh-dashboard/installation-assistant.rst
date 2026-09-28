@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Learn how to install the Wazuh dashboard using the assisted installation method. The Wazuh dashboard is a flexible and intuitive web interface for mining and visualizing security events and archives.
+   :description: Learn how to install the Wazuh dashboard, a web interface for mining and visualizing security events, using the assisted method.
 
 Installing the Wazuh dashboard using the assisted installation method
 =====================================================================

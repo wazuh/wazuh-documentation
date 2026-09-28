@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Monitoring Office 365 provides visibility and data visualization into actions occurring on its suite of tools. Learn more in this section of the Wazuh documentation.
+   :description: Monitoring Office 365 provides visibility and data visualization into actions occurring across its suite of tools.
   
 Monitoring Office 365
 =====================

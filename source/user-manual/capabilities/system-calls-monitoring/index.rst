@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-    :description: The Linux Audit system provides a way to track security-relevant information on your machine. Learn more about how to monitor system calls with Wazuh in this section. 
+    :description: The Linux Audit system tracks security-relevant information on your machine. Learn how to monitor system calls with Wazuh. 
     
 .. _system_call_monitoring:
 

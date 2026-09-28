@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: The Wazuh File Integrity Monitoring system watches for modification of files in selected directories and triggers alerts when these files are modified. Learn more about it in this PoC.
+   :description: The Wazuh File Integrity Monitoring system watches for file modifications in selected directories and triggers alerts.
 
 File integrity monitoring
 =========================
@@ -94,7 +94,7 @@ You can visualize the alert data in the Wazuh dashboard. To do this, go to the *
 -  Windows - ``rule.id: is one of 550,553,554``
 
    .. thumbnail:: /images/poc/fim-alerts-windows.png
-         :title: Visualize FIM alerts from Ubuntu system
+         :title: Visualize FIM alerts from Windows system
          :alt: Wazuh dashboard Events table showing file added, modified, and deleted alerts for the Windows agent WindowsAgent
          :align: center
          :width: 80%

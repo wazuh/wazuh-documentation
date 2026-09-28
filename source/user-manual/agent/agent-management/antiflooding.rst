@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: The Wazuh agent includes a queue mechanism to prevent large bursts of events from negatively impacting the network or the Wazuh manager. Learn more in this section of the documentation.
+   :description: The Wazuh agent includes a queue mechanism to prevent event bursts from negatively impacting the network or the manager.
 
 Wazuh agent queue
 =================

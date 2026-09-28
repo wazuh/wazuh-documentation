@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The Linux Audit system provides a way to track security-relevant information on your machine. Discover some Audit use cases in this section of our documentation. 
+  :description: Learn how to use Wazuh and the Linux Audit system to monitor all commands executed with root privileges.
   
 Monitoring commands run as root
 ===============================

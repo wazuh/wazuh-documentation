@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: The integration of AWS services with Wazuh configured on the Wazuh agent requires that certain dependencies be installed on the Wazuh agent. Learn more on this section of the documentation.
+   :description: Integrating AWS services with the Wazuh agent requires certain dependencies to be installed on the agent.
 
 Installing dependencies
 =======================

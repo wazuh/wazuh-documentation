@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Learn how to integrate Wazuh with YARA to detect the addition of malicious files, and use ChatGPT queries to enrich the YARA scan results with additional insights.
+   :description: Learn how to integrate Wazuh with YARA to detect malicious files, and use ChatGPT to enrich the YARA scan results.
 
 Leveraging LLMs for alert enrichment
 ====================================

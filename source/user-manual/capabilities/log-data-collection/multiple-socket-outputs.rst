@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Log data is sent to the Wazuh agent socket by default, but it's also possible to specify other sockets. Learn how to configure multiple sockets in this section of the documentation.
+  :description: Log data is sent to the Wazuh agent socket by default. Learn how to configure multiple sockets instead.
 
 Using multiple socket outputs
 =============================

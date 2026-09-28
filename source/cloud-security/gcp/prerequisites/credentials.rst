@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Learn how to authenticate Wazuh to Google Cloud to pull events and log data from the Google Pub/Sub or Google Storage services in this section of the documentation.
+   :description: Learn how to authenticate Wazuh to Google Cloud to pull events and log data from the Pub/Sub or Storage services.
 
 Creating Google Cloud credentials
 =================================

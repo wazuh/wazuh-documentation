@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Jumpcloud is a Unified Device and Identity Access Management platform. Learn more about it and the administrator role in this section of the Wazuh documentation.
+   :description: JumpCloud is a Unified Device and Identity Access Management platform. Learn about its administrator role.
 
 Jumpcloud
 =========

@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: You can query and visualize centralized system inventory data from all monitored endpoints in the **IT Hygiene** section on the Wazuh dashboard. Learn more about it in this section of the Wazuh documentation.
+  :description: Learn how to query and visualize centralized system inventory data from all monitored endpoints in the IT Hygiene dashboard section.
 
 Viewing system inventory data
 =============================
@@ -960,7 +960,7 @@ The location of the database for each monitored endpoint is on the Wazuh server 
 
             $ sudo apt install sqlite3
 
-      .. group-tab:: YUM
+      .. group-tab:: Yum
 
          .. code-block:: console
 

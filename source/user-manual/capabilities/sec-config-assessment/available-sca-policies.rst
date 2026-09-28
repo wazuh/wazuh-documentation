@@ -33,8 +33,6 @@ The table below shows SCA policies pre-installed in Wazuh out-of-the-box. The Wa
    +-----------------------------+------------------------------------------------------------+-------------------------------+
    | cis_win2025                 |  CIS Benchmark for Windows Server 2025                     | Windows Server 2025           |
    +-----------------------------+------------------------------------------------------------+-------------------------------+
-   | sca_win_audit               |  Benchmark for Windows auditing                            | Windows                       |
-   +-----------------------------+------------------------------------------------------------+-------------------------------+
    | cis_alma_linux_8            |  CIS Benchmark for Alma Linux 8                            | Alma Linux 8                  |
    +-----------------------------+------------------------------------------------------------+-------------------------------+
    | cis_alma_linux_9            |  CIS Benchmark for Alma Linux 9                            | Alma Linux 9                  |

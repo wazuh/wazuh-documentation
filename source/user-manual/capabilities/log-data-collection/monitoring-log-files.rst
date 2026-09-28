@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn to set up log file monitoring. This section explores various configuration possibilities, such as tracking date-based logs files, employing wildcard patterns, and using environment variables.
+  :description: Learn to set up log file monitoring, including tracking date-based log files, wildcard patterns, and environment variables.
 
 Configuration for monitoring log files
 ======================================
