@@ -157,7 +157,7 @@ Below are the steps to assign agents to a group with a specific configuration:
 
       .. note::
 
-         The group must be created and configured before assigning agents. You can create agent groups using the `/var/wazuh-manager/bin/agent_groups </user-manual/reference/tools/agent-groups>`__ tool. The group name can only contain upper/lower case letters, numbers, dots, underscores, and hyphens.
+         The group must be created and configured before assigning agents. You can create agent groups using the :doc:`/var/wazuh-manager/bin/agent_groups </user-manual/reference/tools/agent-groups>` tool. The group name can only contain upper/lower case letters, numbers, dots, underscores, and hyphens.
 
    #. Using the Wazuh manager API endpoint :api-ref:`PUT /agents/{agent_id}/group/{group_id} <operation/api.controllers.agent_controller.put_agent_single_group>`:
 
@@ -230,7 +230,7 @@ Below are the steps to assign agents to a group with a specific configuration:
 
 #. After connecting to the Wazuh manager, each agent assigned to the group will receive the files contained in the ``/var/wazuh-manager/etc/shared/dbms/`` folder from the Wazuh manager, including the ``agent.conf`` file that was modified in the previous step. The length of time it takes for the Wazuh manager to push these files to the Wazuh agents depends on the size of the files, the number of agents in the group, and the connection protocol used. For example, depending on network bandwidth and performance, it may take 8 minutes to receive a 10 MB folder (excluding merged.mg file) on 100 Wazuh 4.x agents using UDP, less time if using TCP. Wazuh 5.0 agents always communicate over HTTPS (TCP), so this UDP/TCP distinction does not apply to them.
 
-#. Once a specific agent belongs to a group, it will not be automatically reassigned to this group even if it is re-enrolled under another name or ID. After re-enrollment, it will be added to the *default* group which is the default behavior. If you want the Wazuh agent to be automatically reassigned after re-enrollment, it must be explicitly configured by the user in the ``/var/ossec/etc/local_internal_options.conf`` file on the Wazuh agent by adding the option ``remoted.guess_agent_group=1`` (see section remoted in `internal options </user-manual/reference/internal-options>`__).
+#. Once a specific agent belongs to a group, it will not be automatically reassigned to this group even if it is re-enrolled under another name or ID. After re-enrollment, it will be added to the *default* group which is the default behavior. If you want the Wazuh agent to be automatically reassigned after re-enrollment, it must be explicitly configured by the user in the ``/var/ossec/etc/local_internal_options.conf`` file on the Wazuh agent by adding the option ``remoted.guess_agent_group=1`` (see section remoted in :doc:`internal options </user-manual/reference/internal-options>`).
 
    When this option is added, on re-enrollment, the checksum of the ``merged.mg`` file sent by the Wazuh agent is compared with that of the other agents enrolled with the Wazuh manager.
 
@@ -503,7 +503,7 @@ Shared files behavior
 As previously mentioned, the Wazuh manager shares configuration files with its agents according to their group. In the case of belonging to multiple groups, the configuration files of every group are merged into one following these criteria:
 
 -  Shared files, such as CIS benchmarks for rootkit detection, are joined in the shared folder. If there are repeated files, the last one added will overwrite the old ones.
--  The new ``agent.conf`` file added is appended to the existing one. When two groups have conflicting configurations, the last group assigned to the Wazuh agent will take precedence. Learn more about the configuration precedence in `centralized configuration </user-manual/reference/centralized-configuration>`__ manual.
+-  The new ``agent.conf`` file added is appended to the existing one. When two groups have conflicting configurations, the last group assigned to the Wazuh agent will take precedence. Learn more about the configuration precedence in the :doc:`centralized configuration </user-manual/reference/centralized-configuration>` manual.
 -  Custom shared files set from the user to a particular group are also joined to send them to the Wazuh agents.
 
 .. thumbnail:: /images/manual/agent/shared-files-behavior.png
