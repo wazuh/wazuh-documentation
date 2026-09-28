@@ -8,7 +8,7 @@
 
          .. code-block:: console
 
-            # apt install debconf adduser procps
+            # apt install debconf adduser procps curl
 
       .. group-tab:: Yum
 

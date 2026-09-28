@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Wazuh collects system inventory data that includes hardware and operating system information, installed software, network interfaces, ports, and running processes. Find more information in this use case.
+   :description: Wazuh collects system inventory data including hardware, OS information, installed software, network interfaces, ports, and processes.
 
 IT hygiene
 ==========

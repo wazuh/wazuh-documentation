@@ -6,55 +6,54 @@
 Use case
 ========
 
-This use case demonstrates how to use Wazuh to monitor Docker runtime activities.
+Wazuh generates findings for container and image activity on a monitored Docker host. Docker runtime activities such as a pull, run, or a removal gains visibility without the user manually reading the daemon log. This use case demonstrates how to use Wazuh to monitor Docker runtime activities.
 
 .. _monitoring_docker_runtime_activities:
 
 Monitoring Docker runtime activities
 ------------------------------------
 
-Wazuh monitors Docker events and generates findings for activities involving containers and images.
-
-Requirements
-^^^^^^^^^^^^
-
--  Install Docker on an Ubuntu 24.04 endpoint.
--  :doc:`Install the Wazuh agent </installation-guide/wazuh-agent/index>` on the Docker host and enroll it on a Wazuh manager.
--  :ref:`Enable the Wazuh Docker listener module <enable-wazuh-docker-listener>` on the Docker host.
+Wazuh monitors Docker events and generates findings for activities involving containers and images. This use case assumes Docker is installed on an Ubuntu 24.04 endpoint and that a Wazuh agent is installed and enrolled on it. Complete the steps in :ref:`Configuration <monitoring_docker_configuration>` including all prerequisite dependencies, to install Docker, enroll the Wazuh agent, and enable the Wazuh Docker integration and listener module.
 
 Simulate events
 ^^^^^^^^^^^^^^^
 
 Perform the following steps to simulate Docker runtime events:
 
-#. Run ``test-container`` from the ``httpd`` image:
+#. Pull the ``httpd`` image from Docker Hub:
 
    .. code-block:: console
 
-      # docker run -d --name test-container httpd
+      $ sudo docker pull httpd
+
+#. Run a test container from the ``httpd`` image:
+
+   .. code-block:: console
+
+      $ sudo docker run -d --name test-container httpd
 
 #. Stop ``test-container``:
 
    .. code-block:: console
 
-      # docker stop test-container
+      $ sudo docker stop test-container
 
 #. Remove ``test-container``:
 
    .. code-block:: console
 
-      # docker rm test-container
+      $ sudo docker rm test-container
 
 #. Remove the ``httpd`` image:
 
    .. code-block:: console
 
-      # docker rmi httpd
+      $ sudo docker rmi httpd
 
 View the findings on the Wazuh dashboard
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Navigate to the **Threat Hunting** module or the **Findings** tab of the dedicated **Wazuh Docker dashboard** on the Wazuh dashboard to view the findings. The following findings are generated when we perform all the actions above. We have highlighted the findings and labeled them according to the action that triggered each of them.
+On the Wazuh dashboard, navigate to the **Findings** tab of the Wazuh **Docker dashboard** to view the findings. The following findings are generated once the ``interval`` elapses when you perform the actions above.
 
 .. thumbnail:: /images/manual/container-security/docker-runtime-findings.png
    :title: Docker runtime findings
@@ -64,7 +63,7 @@ Navigate to the **Threat Hunting** module or the **Findings** tab of the dedicat
 
 Below, we show the full data of a finding triggered when a Docker image is downloaded:
 
-.. code-block:: JSON
+.. code-block:: json
 
    {
      "_index": ".ds-wazuh-findings-v5-system-activity-000001",
