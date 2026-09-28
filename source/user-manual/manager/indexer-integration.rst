@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: The indexer integration describes data forwarders that forward data from the Wazuh manager to the Wazuh indexer or third-party indexers. Learn more in this section of the documentation.
+   :description: Indexer integration describes data forwarders that forward data from the Wazuh manager to the Wazuh indexer or third parties.
 
 Indexer integration
 ===================

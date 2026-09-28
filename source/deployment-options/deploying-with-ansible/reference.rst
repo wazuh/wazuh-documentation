@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :Description: Ansible is an open source platform designed for automating tasks. Learn more about the variable references in this section of the Wazuh documentation.
+  :description: Ansible is an open source platform designed for automating tasks. Learn more about the variable references in this section of the Wazuh documentation.
   
 Variables references
 --------------------

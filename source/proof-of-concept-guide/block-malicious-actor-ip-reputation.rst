@@ -135,7 +135,7 @@ Download the utilities and configure the CDB list
 
       $ sudo yum update && sudo yum install -y wget
 
-#. Download the Alienvault IP reputation database:
+#. Download the AlienVault IP reputation database:
 
    .. code-block:: console
 

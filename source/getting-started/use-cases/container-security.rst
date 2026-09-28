@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Wazuh integrates with container platforms like Docker and Kubernetes. It actively monitors container runtime events, application logs, and overall container health. Learn more in this use case.
+   :description: Wazuh integrates with Docker and Kubernetes, monitoring container runtime events, application logs, and overall container health.
   
 Container security
 ==================

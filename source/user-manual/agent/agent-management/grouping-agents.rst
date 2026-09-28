@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Wazuh agents can either be configured locally with the Wazuh agent configuration file or remotely using the centralized configuration. Learn more in this section of the documentation.
+   :description: Wazuh agents can be configured locally with the agent configuration file, or remotely using the centralized configuration.
 
 Grouping agents
 ===============

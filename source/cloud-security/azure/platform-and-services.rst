@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: The Wazuh module for Azure enables centralized logging, threat detection, and compliance management of your Microsoft Azure environments from your Wazuh deployment.
+   :description: The Wazuh module for Azure enables centralized logging, threat detection, and compliance management of Azure environments.
 
 Monitoring Azure platform and services
 ======================================

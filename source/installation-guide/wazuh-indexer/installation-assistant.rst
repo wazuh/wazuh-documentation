@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Learn how to install the Wazuh indexer using the assisted installation method. The Wazuh indexer is a highly scalable full-text search engine and offers advanced security, alerting, index management, deep performance analysis, and several other features.
+   :description: Learn how to install the Wazuh indexer, a highly scalable full-text search engine, using the assisted installation method.
 
 Installing the Wazuh indexer using the assisted installation method
 ===================================================================

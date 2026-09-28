@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Deployment variables can be used to simplify the installation, enrollment, and configuration process of a Wazuh agent. Learn more in this section of the documentation.
+   :description: Deployment variables can be used to simplify the installation, enrollment, and configuration process of a Wazuh agent.
 
 Deployment variables
 ====================

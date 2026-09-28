@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Learn how to manage user passwords, create internal users, integrate Wazuh with Identity Providers (IdPs) to implement Single Sign-On (SSO), and configure LDAP integration.
+   :description: Learn how to manage user passwords, create internal users, integrate Identity Providers for SSO, and configure LDAP.
 
 User administration
 ===================

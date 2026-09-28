@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Wazuh provides two types of storage for your data: indexed and archive. Learn more about the archive data in this section. 
+  :description: Learn how to configure your Wazuh Cloud environment to send output files to archive data.
 
 Configuration
 =============

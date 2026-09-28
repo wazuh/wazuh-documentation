@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :Description: Ansible is an agentless automation platform. Learn more about remote endpoints deployments in this section of the Wazuh documentation.
+  :description: Ansible is an agentless automation platform. Learn more about remote endpoints deployments in this section of the Wazuh documentation.
   
 Remote endpoint connection
 ==========================
@@ -119,7 +119,7 @@ You can set up an SSH key-pair to provide a passwordless authentication mechanis
 
                   # systemctl start ssh
 
-         .. group-tab:: SysV Init
+         .. group-tab:: SysV init
 
             -  CentOS / RHEL / Fedora:
 
@@ -187,7 +187,7 @@ You can set up an SSH key-pair to provide a passwordless authentication mechanis
 
                # systemctl start ssh
 
-      .. group-tab:: SysV Init
+      .. group-tab:: SysV init
 
          -  CentOS / RHEL / Fedora:
 

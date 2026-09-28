@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: WPK files are archive files used for distributing and installing updates or new versions of the Wazuh agent on various operating systems. Learn more in this section of the documentation.
+   :description: WPK files are archive files used for distributing and installing updates or new versions of the Wazuh agent.
 
 Wazuh signed package (WPK) files
 ================================

@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Wazuh Query Language (WQL) is a text-based language designed to allow users to perform advanced data filtering in the Wazuh dashboard. Learn more in this section of the documentation.
+  :description: Wazuh Query Language (WQL) is a text-based language for performing advanced data filtering in the Wazuh dashboard.
 
 Filtering data using Wazuh Query Language (WQL)
 ===============================================

@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Okta Inc. provides technologies that enable secure user authentication into applications. Learn more about it and the administrator role in this section of the Wazuh documentation.
+   :description: Okta Inc. provides technologies that enable secure user authentication into applications. Learn about its administrator role.
 
 Okta
 ====
