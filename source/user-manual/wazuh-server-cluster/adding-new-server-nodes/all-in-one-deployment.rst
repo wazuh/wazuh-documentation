@@ -257,7 +257,7 @@ Before deploying an additional Wazuh server node, it's essential to reconfigure 
 
    .. tabs::
 
-      .. group-tab:: SystemD
+      .. group-tab:: Systemd
 
          .. code-block:: console
 
@@ -287,7 +287,7 @@ This step ensures that the new Wazuh server node can download and install the re
 
 .. tabs::
 
-   .. group-tab:: YUM
+   .. group-tab:: Yum
 
       #. Import the GPG key:
 
@@ -344,7 +344,7 @@ This step installs the Wazuh manager on the node, which enables it to function a
 
    .. tabs::
 
-      .. group-tab:: YUM
+      .. group-tab:: Yum
 
          .. code-block:: console
 
@@ -362,7 +362,7 @@ This step installs the Wazuh manager on the node, which enables it to function a
 
       .. tabs::
 
-         .. group-tab:: YUM
+         .. group-tab:: Yum
 
             .. code-block:: console
 
@@ -380,7 +380,7 @@ This step installs the Wazuh manager on the node, which enables it to function a
 
    .. tabs::
 
-      .. group-tab:: SystemD
+      .. group-tab:: Systemd
 
          .. code-block:: console
 
@@ -408,7 +408,7 @@ This step installs the Wazuh manager on the node, which enables it to function a
 
    .. tabs::
 
-      .. group-tab:: SystemD
+      .. group-tab:: Systemd
 
          .. code-block:: console
 
@@ -427,7 +427,7 @@ Install and configure Filebeat
 
    .. tabs::
 
-      .. group-tab:: YUM
+      .. group-tab:: Yum
 
          .. code-block:: console
 
@@ -521,7 +521,7 @@ Starting the service
 
 .. tabs::
 
-   .. group-tab:: SystemD
+   .. group-tab:: Systemd
 
       .. code-block:: console
 
@@ -611,7 +611,7 @@ Configuring the Wazuh server worker nodes
 
    .. tabs::
 
-      .. group-tab:: SystemD
+      .. group-tab:: Systemd
 
          .. code-block:: console
 

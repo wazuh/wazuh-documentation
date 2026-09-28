@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Custom rules in Wazuh allow users to define specific conditions or patterns in log data that are relevant to their unique requirements. Learn more in this section of the documentation.
+   :description: Custom rules in Wazuh let users define specific conditions or patterns in log data relevant to their unique requirements.
 
 Custom rules
 ============

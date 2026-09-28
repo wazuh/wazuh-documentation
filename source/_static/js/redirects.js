@@ -436,6 +436,21 @@ redirections.push(
     'target': ['4.14=>5.0', '5.0=>4.14'],
     '4.14': '/cloud-security/azure/ms-graph-api-setup.html',
     '5.0': '/cloud-security/azure/monitoring-ms-graph.html#configure-the-microsoft-graph-api-permissions',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/user-manual/wazuh-indexer-cluster/add-wazuh-indexer-nodes.html',
+    '5.0': '/user-manual/wazuh-indexer-cluster/add-wazuh-indexer-nodes/index.html',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/user-manual/wazuh-indexer-cluster/certificate-deployment.html',
+    '5.0': '/user-manual/wazuh-indexer-cluster/cluster-configuration.html#certificates-deployment',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/user-manual/wazuh-indexer-cluster/wazuh-indexer-cluster-tuning.html',
+    '5.0': '/user-manual/wazuh-indexer-cluster/cluster-configuration.html#wazuh-indexer-cluster-tuning',
   }
 );
 
@@ -445,6 +460,9 @@ removedUrls['5.0'] = [
   '/user-manual/reference/ossec-conf/client-buffer.html',
   '/user-manual/reference/ossec-conf/labels.html',
   '/cloud-security/azure/ms-graph-api-setup.html',
+  '/user-manual/wazuh-indexer-cluster/add-wazuh-indexer-nodes.html',
+  '/user-manual/wazuh-indexer-cluster/certificate-deployment.html',
+  '/user-manual/wazuh-indexer-cluster/wazuh-indexer-cluster-tuning.html',
   '/compliance/pci-dss/dashboard.html',
   '/compliance/hipaa/visualization-and-dashboard.html',
   '/compliance/hipaa/log-data-analysis.html',
@@ -546,6 +564,15 @@ removedUrls['5.0'] = [
   '/cloud-security/gcp/supported-services/index.html',
   '/cloud-security/gcp/supported-services/pubsub.html',
   '/cloud-security/gcp/supported-services/cloud-storage-buckets.html',
+  '/user-manual/wazuh-indexer-cluster/cluster-architecture-and-node-types.html',
+  '/user-manual/wazuh-indexer-cluster/required-ports.html',
+  '/user-manual/wazuh-indexer-cluster/cluster-configuration.html',
+  '/user-manual/wazuh-indexer-cluster/add-wazuh-indexer-nodes/index.html',
+  '/user-manual/wazuh-indexer-cluster/add-wazuh-indexer-nodes/all-in-one-deployment.html',
+  '/user-manual/wazuh-indexer-cluster/add-wazuh-indexer-nodes/distributed-deployment.html',
+  '/user-manual/wazuh-indexer-cluster/add-wazuh-indexer-nodes/new-wazuh-indexer-node.html',
+  '/user-manual/wazuh-indexer-cluster/removing-a-wazuh-indexer-node.html',
+  '/user-manual/wazuh-indexer-cluster/troubleshooting.html',
 ];
 
 /* *** RELEASE 4.14 ****/
@@ -2455,6 +2482,8 @@ newUrls['4.5'] = [
   '/user-manual/wazuh-indexer/wazuh-indexer-tuning.html',
   '/user-manual/wazuh-indexer/migrating-wazuh-indices.html',
   '/user-manual/user-administration/ldap.html',
+  '/cloud-security/amazon/services/supported-services/security-lake.html',
+  '/cloud-security/amazon/services/supported-services/elastic-load-balancing/index.html',
 ];
 
 /* Pages no longer available in 4.5 */
@@ -2475,6 +2504,8 @@ removedUrls['4.5'] = [
   '/user-manual/elasticsearch/elasticsearch.html',
   '/user-manual/elasticsearch/index.html',
   '/user-manual/elasticsearch/troubleshooting.html',
+  '/amazon/services/supported-services/security-lake.html',
+  '/amazon/services/supported-services/elastic-load-balancing/index.html',
 ];
 
 /* *** RELEASE 4.4 ****/
@@ -2698,9 +2729,9 @@ redirections.push(
     '4.4': '/cloud-security/amazon/services/index.html',
   },
   {
-    'target': ['4.3=>4.4', '4.4=>4.3'],
-    '4.3': '/amazon/services/supported-services/elastic-load-balancing/index.html',
-    '4.4': '/cloud-security/amazon/services/supported-services/elastic-load-balancing/index.html',
+    'target': ['4.4=>4.5', '4.5=>4.4'],
+    '4.4': '/amazon/services/supported-services/elastic-load-balancing/index.html',
+    '4.5': '/cloud-security/amazon/services/supported-services/elastic-load-balancing/index.html',
   },
   {
     'target': ['4.3=>4.4', '4.4=>4.3'],
@@ -2708,9 +2739,9 @@ redirections.push(
     '4.4': '/cloud-security/amazon/services/supported-services/vpc.html',
   },
   {
-    'target': ['4.3=>4.4', '4.4=>4.3'],
-    '4.3': '/amazon/services/supported-services/security-lake.html',
-    '4.4': '/cloud-security/amazon/services/supported-services/security-lake.html',
+    'target': ['4.4=>4.5', '4.5=>4.4'],
+    '4.4': '/amazon/services/supported-services/security-lake.html',
+    '4.5': '/cloud-security/amazon/services/supported-services/security-lake.html',
   },
   {
     'target': ['4.3=>4.4', '4.4=>4.3'],
@@ -3047,7 +3078,6 @@ newUrls['4.4'] = [
   '/cloud-security/amazon/services/prerequisites/S3-bucket.html',
   '/cloud-security/amazon/services/index.html',
   '/cloud-security/amazon/services/supported-services/vpc.html',
-  '/cloud-security/amazon/services/supported-services/security-lake.html',
   '/cloud-security/amazon/services/supported-services/waf.html',
   '/cloud-security/amazon/services/supported-services/guardduty.html',
   '/cloud-security/amazon/services/supported-services/cisco-umbrella.html',
@@ -3059,7 +3089,6 @@ newUrls['4.4'] = [
   '/cloud-security/amazon/services/supported-services/inspector.html',
   '/cloud-security/amazon/services/supported-services/macie.html',
   '/cloud-security/amazon/services/supported-services/cloudwatchlogs.html',
-  '/cloud-security/amazon/services/supported-services/elastic-load-balancing/index.html',
   '/cloud-security/amazon/services/supported-services/elastic-load-balancing/alb.html',
   '/cloud-security/amazon/services/supported-services/elastic-load-balancing/nlb.html',
   '/cloud-security/amazon/services/supported-services/elastic-load-balancing/clb.html',
@@ -3166,6 +3195,30 @@ newUrls['4.4'] = [
   '/user-manual/files-backup/restoring/index.html',
   '/user-manual/files-backup/restoring/wazuh-central-components.html',
   '/user-manual/files-backup/restoring/wazuh-agent.html',
+  '/compliance/index.html',
+  '/compliance/gdpr/index.html',
+  '/compliance/gdpr/gdpr-II.html',
+  '/compliance/gdpr/gdpr-III.html',
+  '/compliance/gdpr/gdpr-IV.html',
+  '/compliance/hipaa/index.html',
+  '/compliance/hipaa/visualization-and-dashboard.html',
+  '/compliance/hipaa/log-data-analysis.html',
+  '/compliance/hipaa/configuration-assessment.html',
+  '/compliance/hipaa/malware-detection.html',
+  '/compliance/hipaa/file-integrity-monitoring.html',
+  '/compliance/hipaa/vulnerability-detection.html',
+  '/compliance/hipaa/active-response.html',
+  '/compliance/pci-dss/index.html',
+  '/compliance/pci-dss/configuration-assessment.html',
+  '/compliance/pci-dss/malware-detection.html',
+  '/compliance/pci-dss/vulnerability-detection.html',
+  '/compliance/pci-dss/system-inventory.html',
+  '/compliance/pci-dss/dashboard.html',
+  '/compliance/pci-dss/active-response.html',
+  '/compliance/pci-dss/file-integrity-monitoring.html',
+  '/compliance/pci-dss/log-analysis.html',
+  '/amazon/services/supported-services/security-lake.html',
+  '/amazon/services/supported-services/elastic-load-balancing/index.html',
 ];
 
 /* Pages removed in 4.4 */
@@ -3181,7 +3234,6 @@ removedUrls['4.4'] = [
   '/amazon/services/prerequisites/S3-bucket.html',
   '/amazon/services/index.html',
   '/amazon/services/supported-services/vpc.html',
-  '/amazon/services/supported-services/security-lake.html',
   '/amazon/services/supported-services/waf.html',
   '/amazon/services/supported-services/guardduty.html',
   '/amazon/services/supported-services/cisco-umbrella.html',
@@ -3471,6 +3523,8 @@ newUrls['4.3'] = [
   '/user-manual/files-backup/index.html',
   '/user-manual/files-backup/wazuh-central-components.html',
   '/user-manual/files-backup/wazuh-agent.html',
+  '/user-manual/capabilities/vulnerability-detection/scan-types.html',
+  '/azure/activity-services/prerequisites/dependencies.html',
 ];
 
 removedUrls['4.3'] = [
@@ -4138,18 +4192,18 @@ redirections.push(
   },
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': 'azure/monitoring-activity.html',
-    '4.3': 'azure/activity-services/index.html',
+    '4.2': '/azure/monitoring-activity.html',
+    '4.3': '/azure/activity-services/index.html',
   },
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': 'azure/monitoring-services.html',
-    '4.3': 'azure/activity-services/index.html',
+    '4.2': '/azure/monitoring-services.html',
+    '4.3': '/azure/activity-services/index.html',
   },
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
-    '4.2': 'azure/dependencies.html',
-    '4.3': 'azure/activity-services/prerequisites/dependencies.html',
+    '4.2': '/azure/dependencies.html',
+    '4.3': '/azure/activity-services/prerequisites/dependencies.html',
   },
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
@@ -4611,6 +4665,7 @@ newUrls['4.2'] = [
   '/user-manual/agent-enrollment/security-options/manager-identity-verification.html',
   '/user-manual/agent-enrollment/security-options/agent-identity-verification.html',
   '/user-manual/agent-enrollment/troubleshooting.html',
+  '/azure/dependencies.html',
 ];
 
 removedUrls['4.2'] = [

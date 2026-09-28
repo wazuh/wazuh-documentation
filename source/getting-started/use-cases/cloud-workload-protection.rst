@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: The Wazuh security platform protects cloud workloads by monitoring the infrastructure at two levels: Endpoint level and Cloud infrastructure level. Find more information in this getting started use case.
+   :description: The Wazuh security platform protects cloud workloads by monitoring the infrastructure at the endpoint and cloud infrastructure levels.
 
 Cloud workload protection
 =========================
