@@ -30,7 +30,7 @@ The Wazuh agent runs on the endpoint you want to monitor and communicates with t
             Replace
 
             -  ``WAZUH_MANAGER``  value with your Wazuh manager IP address or hostname
-            -  ``WAZUH_REGISTRATION_PASSWORD`` value with the Wazuh manager enrollment password.
+            -  ``WAZUH_REGISTRATION_PASSWORD`` value with the Wazuh manager enrollment password generated in :ref:`requirements <agent-installation-requirements>`.
 
             .. tabs::
 

@@ -94,6 +94,8 @@ Then follow the steps on the Wazuh dashboard to deploy a new agent.
     :title: Deploy a new agent instructions
     :alt: Deploy a new agent instructions
 
+.. _agent-installation-requirements:
+
 Requirements
 ------------
 
