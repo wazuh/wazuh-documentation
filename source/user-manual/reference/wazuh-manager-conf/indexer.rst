@@ -35,13 +35,13 @@ host
 
 Specifies the URLs of the Wazuh indexer nodes. Define each node in a separate ``<host>`` element. The Wazuh manager uses the configured hosts to establish the connection and can connect to another listed host if one becomes unavailable.
 
-+----------------------+------------------------------------------+
-| **Required**         | yes                                      |
-+----------------------+------------------------------------------+
-| **Allowed values**   | A URL in one of the following formats:   |
-|                      | - http://<address>:<port>                |
-|                      | - https://<address>:<port>               |
-+----------------------+------------------------------------------+
++--------------------+----------------------------------------+
+| **Required**       | yes                                    |
++--------------------+----------------------------------------+
+| **Allowed values** | A URL in one of the following formats: |
+|                    | - ``http://<address>:<port>``          |
+|                    | - ``https://<address>:<port>``         |
++--------------------+----------------------------------------+
 
 Both schemes are accepted. Use ``https://`` for TLS-protected deployments.
 
