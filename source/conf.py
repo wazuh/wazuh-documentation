@@ -175,6 +175,10 @@ if html_theme == 'wazuh_doc_theme_v3':
     # * is a normal compilation (not for production)
     html_theme_options['local_redirects_file'] = is_latest_release or not (tags.has("production") or tags.has("dev"))
 
+    # Hide the version selector in preview builds (sphinx-build -t preview)
+    if tags.has("preview"):
+        html_theme_options['include_version_selector'] = False
+
 # Add any paths that contain custom themes here, relative to this directory.
 html_theme_path = ['_themes']
 
