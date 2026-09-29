@@ -227,7 +227,8 @@ if html_theme == 'wazuh_doc_theme_v3':
     # redirects.min.js should be loaded from the local folder if:
     # * the release is "current" (is_latest_release = True) or
     # * is a normal compilation (not for production)
-    html_theme_options['local_redirects_file'] = is_latest_release or not (tags.has("production") or tags.has("dev"))
+    # The 5.0.0-rc branch always uses its local copy to show its own version label.
+    html_theme_options['local_redirects_file'] = True
 
 # Add any paths that contain custom themes here, relative to this directory.
 html_theme_path = ['_themes']
