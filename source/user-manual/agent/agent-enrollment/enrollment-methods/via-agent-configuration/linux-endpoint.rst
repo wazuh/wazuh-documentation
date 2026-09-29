@@ -43,7 +43,7 @@ Follow these steps to enroll a Linux/UNIX endpoint through the Wazuh agent confi
 
       .. note::
 
-         (4.x only) If you have a Wazuh manager cluster, you can add multiple ``<server>`` sections that point to the worker nodes. Refer to `pointing agents to the cluster (Failover mode) <https://documentation.wazuh.com/current/user-manual/manager/configuring-cluster/advanced-settings.html#pointing-agents-to-the-cluster-failover-mode>`__ for more information.
+         (4.x only) If you have a Wazuh manager cluster, you can add multiple ``<server>`` sections that point to the worker nodes. Refer to pointing agents to the cluster (Failover mode) for more information.
 
    #. (Optional) Add enrollment parameters.
 
