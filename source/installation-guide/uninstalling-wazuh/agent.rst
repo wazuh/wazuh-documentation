@@ -58,13 +58,13 @@ Ensure the original Windows installer file is in your working directory and foll
 
       > msiexec.exe /x wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi /qn
 
-   The Wazuh agent is now completely removed from your Windows endpoint.
-
 #. Remove the Wazuh agent installation folder:
 
    .. code-block:: doscon
 
-      > rmdir /s /q C:\Program Files (x86)\ossec-agent\
+      > rmdir /s /q "C:\Program Files (x86)\ossec-agent\"
+
+   The Wazuh agent is now completely removed from your Windows endpoint.
 
 .. _uninstalling_macos_agent:
 
