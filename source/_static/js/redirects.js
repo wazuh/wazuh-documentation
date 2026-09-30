@@ -182,6 +182,19 @@ newUrls['5.0'] = [
   '/user-manual/wazuh-indexer/index-templates-reference.html',
   '/user-manual/wazuh-indexer/backup-and-restore.html',
   '/user-manual/wazuh-indexer/security.html',
+  '/proof-of-concept-guide/network-ids-integration.html',
+  '/user-manual/capabilities/active-response/configuration.html',
+  '/user-manual/capabilities/system-inventory/syscollector-information-findings.html',
+  '/user-manual/capabilities/vulnerability-detection/use-cases.html',
+  '/user-manual/wazuh-indexer-cluster/cluster-architecture-and-node-types.html',
+  '/user-manual/wazuh-indexer-cluster/required-ports.html',
+  '/user-manual/wazuh-indexer-cluster/cluster-configuration.html',
+  '/user-manual/wazuh-indexer-cluster/add-wazuh-indexer-nodes/index.html',
+  '/user-manual/wazuh-indexer-cluster/add-wazuh-indexer-nodes/all-in-one-deployment.html',
+  '/user-manual/wazuh-indexer-cluster/add-wazuh-indexer-nodes/distributed-deployment.html',
+  '/user-manual/wazuh-indexer-cluster/add-wazuh-indexer-nodes/new-wazuh-indexer-node.html',
+  '/user-manual/wazuh-indexer-cluster/removing-a-wazuh-indexer-node.html',
+  '/user-manual/wazuh-indexer-cluster/troubleshooting.html',
 ];
 
 /* Redirections 4.14—5.0  */
@@ -564,15 +577,6 @@ removedUrls['5.0'] = [
   '/cloud-security/gcp/supported-services/index.html',
   '/cloud-security/gcp/supported-services/pubsub.html',
   '/cloud-security/gcp/supported-services/cloud-storage-buckets.html',
-  '/user-manual/wazuh-indexer-cluster/cluster-architecture-and-node-types.html',
-  '/user-manual/wazuh-indexer-cluster/required-ports.html',
-  '/user-manual/wazuh-indexer-cluster/cluster-configuration.html',
-  '/user-manual/wazuh-indexer-cluster/add-wazuh-indexer-nodes/index.html',
-  '/user-manual/wazuh-indexer-cluster/add-wazuh-indexer-nodes/all-in-one-deployment.html',
-  '/user-manual/wazuh-indexer-cluster/add-wazuh-indexer-nodes/distributed-deployment.html',
-  '/user-manual/wazuh-indexer-cluster/add-wazuh-indexer-nodes/new-wazuh-indexer-node.html',
-  '/user-manual/wazuh-indexer-cluster/removing-a-wazuh-indexer-node.html',
-  '/user-manual/wazuh-indexer-cluster/troubleshooting.html',
 ];
 
 /* *** RELEASE 4.14 ****/
