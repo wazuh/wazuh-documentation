@@ -190,7 +190,7 @@ Testing the cluster installation
       :class: output accordion-output
 
       {
-        "name" : "node-1",
+        "name" : "indexer",
         "cluster_name" : "wazuh-cluster",
         "cluster_uuid" : "2iYNKDCzR1ShJvSN-2vfOQ",
         "version" : {
@@ -230,7 +230,7 @@ When the system is swapping memory, the Wazuh indexer may not work as expected. 
    
    You require root user privileges to run the commands described below.
 
-#. Add the below line to the ``/etc/wazuh-indexer/opensearch.yml`` configuration file on the Wazuh indexer to enable memory locking:
+#. Ensure the following line is present in the ``/etc/wazuh-indexer/opensearch.yml`` configuration file on the Wazuh indexer to enable memory locking and add it if missing:
 
    .. code-block:: yaml
 
