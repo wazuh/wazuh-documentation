@@ -62,7 +62,6 @@ All notable changes to this project will be documented in this file.
 - Updated the *Monitoring Microsoft Azure* documentation in *Cloud security* to Wazuh 5.0, covering the Wazuh agent-only prerequisites, enabling the integration from the Wazuh dashboard, configuring credentials for Azure Log Analytics, Azure Storage, and the standalone Wazuh module for Microsoft Graph, the Microsoft Intune integration, and use cases. ([#10139](https://github.com/wazuh/wazuh-documentation/pull/10139))
 - Updated the *Wazuh indexer cluster* documentation in *User manual* to Wazuh 5.0, covering cluster architecture and node types, required ports, cluster configuration, certificate deployment, cluster tuning, security initialization, adding and removing nodes, cluster management, and troubleshooting. ([#10183](https://github.com/wazuh/wazuh-documentation/pull/10183)) ([#10185](https://github.com/wazuh/wazuh-documentation/pull/10185))
 - Corrected an internal link in the *Wazuh Docker utilities* documentation that pointed to a bare path instead of the built page. ([#10212](https://github.com/wazuh/wazuh-documentation/pull/10212))
-- Sent old links to 4.14 pages that have no 5.0 page yet to their 4.14 version in `redirects.js`, instead of a not-found page. ([#10229](https://github.com/wazuh/wazuh-documentation/pull/10229))
 
 ### Removed
 
