@@ -74,7 +74,7 @@ Follow these steps on a Linux host to configure your Wazuh deployment, create SS
             ip: "<dashboard-node-ip>"
           #  dns: "<dashboard-node-dns>"
 
-#. Run the Wazuh installation assistant with the option ``--generate-config-files`` to generate the Wazuh cluster key, certificates, and passwords necessary for installation. You can find these files in ``./wazuh-install-files.tar``:
+#. Run the Wazuh installation assistant with the option ``--generate-config-files`` to generate the Wazuh cluster key, and certificates necessary for installation. You can find these files in ``./wazuh-install-files.tar``:
 
       .. code-block:: console
 
