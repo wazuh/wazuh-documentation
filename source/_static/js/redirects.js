@@ -1791,6 +1791,8 @@ newUrls['4.8'] = [
   '/user-manual/manager/wazuh-manager.html',
   '/user-manual/manager/wazuh-server-cluster.html',
   '/user-manual/manager/wazuh-server-queue.html',
+  '/user-manual/reference/ossec-conf/indexer.html',
+  '/user-manual/reference/tools/wazuh-keystore.html',
 ];
 
 /* Pages no longer available in 4.8 */
