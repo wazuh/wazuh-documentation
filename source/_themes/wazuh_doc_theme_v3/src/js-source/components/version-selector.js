@@ -57,6 +57,8 @@ jQuery(function($) {
   /* Versions main constants */
   const thisVersion = DOCUMENTATION_OPTIONS.VERSION;
   const listOfVersions = typeof(versions) === 'undefined' ? [] : versions;
+  /* prereleaseVersions replaced betaVersions in redirects.js, which may still be an older copy */
+  const listOfPrereleases = typeof(prereleaseVersions) !== 'undefined' ? prereleaseVersions : (typeof(betaVersions) !== 'undefined' ? betaVersions : []);
 
   /* Get all the paths created untill current */
   const allCreatedPaths = [];
@@ -116,9 +118,9 @@ jQuery(function($) {
     const selectVersionCurrent = $('#version-selector .current');
     const thisVersion = DOCUMENTATION_OPTIONS.VERSION;  
     if (!listOfVersions.includes(thisVersion)) {
-      betaVersions.forEach(beta_info => {
-        if (beta_info[0].includes(thisVersion)) {
-          selectVersionCurrent.html('Version ' + beta_info[0]);
+      listOfPrereleases.forEach(prerelease_info => {
+        if (prerelease_info[0].includes(thisVersion)) {
+          selectVersionCurrent.html('Version ' + prerelease_info[0]);
         }
       });
     } else if ( listOfVersions.length > 0 ) {
@@ -271,13 +273,13 @@ jQuery(function($) {
       }
     }
 
-    /* Add temporary beta versions
-      betaVersions is an array that must exist in redirects.js
-      and each item in that array must an array of three elements: [ LABEL , BETA_FOLDER, /FILE_PATH ]
+    /* Add temporary prerelease versions
+      prereleaseVersions is an array defined in redirects.js
+      and each item in that array must an array of three elements: [ LABEL , PRERELEASE_FOLDER, /FILE_PATH ]
      */
-    if (betaVersions != undefined && betaVersions.length > 0) {
-      for (let i = betaVersions.length - 1; i >=  0; i--) {
-        ver = betaVersions[i][1].match(/\d{1,3}\.\d{1,2}/);
+    if (listOfPrereleases.length > 0) {
+      for (let i = listOfPrereleases.length - 1; i >=  0; i--) {
+        ver = listOfPrereleases[i][1].match(/\d{1,3}\.\d{1,2}/);
         /* the version in "ver" must have some version indicator */
         if ( ver == null ) {
           continue;
@@ -285,10 +287,10 @@ jQuery(function($) {
         ver = ver[0];
         verNoDot = ver.replace('.','_');
         aEle = $('#to'+verNoDot);
-        href = urlRoot + betaVersions[i][1] + betaVersions[i][2];
+        href = urlRoot + listOfPrereleases[i][1] + listOfPrereleases[i][2];
         if (aEle.length == 0) {
           aEle = $(document.createElement('a'));
-          aEle.text(betaVersions[i][0]);
+          aEle.text(listOfPrereleases[i][0]);
           aEle.attr('id','to'+verNoDot);
         }
         aEle.attr('href', href);
