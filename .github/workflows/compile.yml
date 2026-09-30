@@ -35,7 +35,7 @@ jobs:
       id: build
       run: |
         mkdir -p build
-        make html SPHINXOPTS="-w build/sphinx-warnings.log"
+        make html-quick SPHINXOPTS="-w build/sphinx-warnings.log"
 
     # Fails the check when the build has any warning, but never blocks merging:
     # no branch protection rule requires this check.
