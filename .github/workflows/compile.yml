@@ -1,48 +1,52 @@
-# This is a basic workflow to help you get started with Actions
-
 name: CI
 
 permissions:
   contents: read
 
-# Controls when the action will run. Triggers the workflow on push or pull request 
-# events but only for the master branch
+# Keep this file identical on every branch. Branch-specific filters get
+# overwritten by upward merges and silently stop the build from running.
 on:
   push:
-    branches: [ main ]
+    branches: [ 'main', '[0-9]*' ]
   pull_request:
-    branches: [ main ]
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         python-version: ['3.10', '3.12']
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
+
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
 
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v2
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    # Runs a set of commands using the runners shell
-    - name: Run a multi-line script
+    - name: Build the documentation
+      id: build
       run: |
-        make html
+        mkdir -p build
+        make html-quick SPHINXOPTS="-w build/sphinx-warnings.log"
+
+    # Fails the check when the build has any warning, but never blocks merging:
+    # no branch protection rule requires this check.
+    - name: Report build warnings
+      if: ${{ !cancelled() }}
+      run: |
+        python3 tools/ci/report-sphinx-warnings.py build/sphinx-warnings.log \
+          ${{ matrix.python-version == '3.12' && '--annotate' || '' }}
 
     - name: Lint llms.txt (content defects only) #Links need verification after publication
+      if: ${{ !cancelled() && hashFiles('tools/ci/check-llms-txt.sh') != '' }}
       run: |
         chmod +x tools/ci/check-llms-txt.sh
         tools/ci/check-llms-txt.sh source/llms.txt
