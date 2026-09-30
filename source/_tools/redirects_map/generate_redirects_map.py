@@ -23,7 +23,7 @@ redirects_file = os.path.join(dirname, '../../_static/js/redirects.js')
 json_file_name = 'redirects-map-updates.json'
 redirects_json_file = os.path.join(dirname, '../../' + json_file_name)
 
-[rd_betaVersions,rd_versions,rd_newUrls,rd_removedUrls,rd_redirections] = rd.read_redirects_js(redirects_file)
+[rd_prereleaseVersions,rd_versions,rd_newUrls,rd_removedUrls,rd_redirections] = rd.read_redirects_js(redirects_file)
 
 normalizeOptions = {"strip_fragment":True}
 

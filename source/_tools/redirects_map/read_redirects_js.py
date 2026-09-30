@@ -1,7 +1,7 @@
 import pythonmonkey as pm
 
 def read_redirects_js(redirects_file):
-    betaVersions = []
+    prereleaseVersions = []
     versions = []
     newUrls = []
     removedUrls = []
@@ -12,7 +12,8 @@ def read_redirects_js(redirects_file):
         js_code = file.read()
 
     # 2. Append the Wrapper Bundle at the absolute bottom
-    bundle_wrapper = "\n; ({ versions: versions, betaVersions: betaVersions, redirections: redirections, newUrls: newUrls, removedUrls: removedUrls });"
+    # prereleaseVersions replaced betaVersions; fall back for an older redirects.js
+    bundle_wrapper = "\n; ({ versions: versions, prereleaseVersions: (typeof prereleaseVersions !== 'undefined' ? prereleaseVersions : betaVersions), redirections: redirections, newUrls: newUrls, removedUrls: removedUrls });"
 
     # Combine everything together into a flawless executable JS package
     full_js_code = js_code + bundle_wrapper
@@ -22,7 +23,7 @@ def read_redirects_js(redirects_file):
 
     # 4. Extract and normalize the data structures into native Python types
     # Arrays of arrays become lists of lists
-    betaVersions = [list(item) for item in raw_data["betaVersions"]]
+    prereleaseVersions = [list(item) for item in raw_data["prereleaseVersions"]]
 
     # Arrays of objects become lists of dicts
     redirections = [dict(item) for item in raw_data["redirections"]]
@@ -48,9 +49,9 @@ def read_redirects_js(redirects_file):
         # JavaScript arrays inside pythonmonkey must be cast explicitly to list
         removedUrls[py_key] = list(pm.eval(f"(obj, k) => obj[k]")(raw_rem_urls, py_key))
     
-    return [betaVersions,versions,newUrls,removedUrls,redirections]
+    return [prereleaseVersions,versions,newUrls,removedUrls,redirections]
 
-# print("betaVersions",betaVersions)
+# print("prereleaseVersions",prereleaseVersions)
 # print("versions",versions)
 # print("newUrls",newUrls)
 # print("removedUrls",removedUrls)

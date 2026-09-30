@@ -1,7 +1,8 @@
 const removedUrls = [];
 const newUrls = [];
 const redirections = [];
-const betaVersions = []; // Important: betaVersions won't redirect between similar versions but to a especific page in the beta folder
+const prereleaseVersions = []; // Important: prereleaseVersions won't redirect between similar versions but to a specific page in the prerelease folder
+const betaVersions = prereleaseVersions; // Legacy name, read by already-published theme bundles. Do not remove.
 
 /* Note: new release versions must always be inserted in the first position of the array "versions" */
 const versions = [
@@ -37,8 +38,8 @@ const versions = [
   '2.1',
 ];
 
-betaVersions.push(
-  /* [ LABEL , BETA_FOLDER, FILE_PATH ] */
+prereleaseVersions.push(
+  /* [ LABEL , PRERELEASE_FOLDER, FILE_PATH ] */
   ['5.0 (Beta 5)', '5.0-beta', '/index.html']
 );
 
