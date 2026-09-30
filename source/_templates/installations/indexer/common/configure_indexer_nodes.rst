@@ -9,12 +9,12 @@
 
    #. ``node.name``: Name of the Wazuh indexer node as defined in the ``config.yml`` file. For example, ``indexer``.
 
-   #. ``cluster.initial_manager_nodes``: List of the names of the master-eligible nodes. These names are defined in the ``config.yml`` file. Uncomment the ``node-2`` and ``node-3`` lines, change the names, or add more lines, according to your ``config.yml`` definitions.
+   #. ``cluster.initial_cluster_manager_nodes``: List of the names of the master-eligible nodes. Use names defined in the ``config.yml`` file, for example, ``indexer``. Uncomment the ``node-2`` and ``node-3`` lines, change the names, or add more lines, according to your ``config.yml`` definitions.
 
       .. code-block:: yaml
          :emphasize-lines: 2
 
-         cluster.initial_manager_nodes:
+         cluster.initial_cluster_manager_nodes:
          - "indexer"
          #- "node-2"
          #- "node-3"
