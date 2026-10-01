@@ -60,21 +60,27 @@ Installing Wazuh
 
       # wget https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh && sudo bash ./wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -a -id -d pre-release
 
-   Once the assistant finishes the installation, the output shows the access credentials and a message that confirms that the installation was successful. The default password is ``admin``.
+   Once the assistant finishes the installation, the output shows the access credentials and a message confirming successful installation.
 
    .. code-block:: none
-      :emphasize-lines: 4
 
+      INFO: Wazuh dashboard web application initialized.
       INFO: --- Summary ---
-      INFO: You can access the web interface https://<WAZUH_DASHBOARD_IP_ADDRESS>
+      INFO: You can access the web interface https://<wazuh-dashboard-ip>:443
           User: admin
-          Password: admin
+          Password: the WAZUH_INDEXER_ADMIN_PASSWORD value in /etc/wazuh/credentials.env
       INFO: Installation finished.
 
-#. Access the Wazuh web interface with ``https://<WAZUH_DASHBOARD_IP_ADDRESS>`` and the following credentials. Replace ``<WAZUH_DASHBOARD_IP_ADDRESS>`` with the IP address of your endpoint:
+#. All Wazuh indexer and manager API user passwords are now stored in the ``/etc/wazuh/credentials.env`` file. Run the following command to view the ``<WAZUH_INDEXER_ADMIN_PASSWORD>``.
+
+   .. code-block:: console
+
+      # cat /etc/wazuh/credentials.env
+
+#. Access the Wazuh web interface at ``https://<WAZUH_DASHBOARD_IP_ADDRESS>`` with your credentials. Replace ``<WAZUH_DASHBOARD_IP_ADDRESS>`` with the IP address of your endpoint and ``<WAZUH_INDEXER_ADMIN_PASSWORD>`` with the ``admin`` password:
 
    -  **Username:** ``admin``
-   -  **Password:** ``admin``
+   -  **Password:** ``<WAZUH_INDEXER_ADMIN_PASSWORD>``
 
 When you access the Wazuh dashboard for the first time, the browser shows a warning message stating that a trusted authority did not issue the certificate. This is expected, and the user can either accept the certificate as an exception or configure the system to use a certificate from a trusted authority.
 
