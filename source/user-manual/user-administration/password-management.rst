@@ -10,8 +10,9 @@ The Wazuh passwords tool changes the passwords for :doc:`Wazuh indexer </getting
 
 The following Wazuh indexer users are relevant to password management:
 
--  ``admin``: The default administrator user of the Wazuh indexer. This user logs in to the Wazuh dashboard and handles communication between the Wazuh manager and the Wazuh indexer.
+-  ``admin``: The default administrator user of the Wazuh indexer. This user logs in to the Wazuh dashboard.
 -  ``kibanaserver``: Handles communications between the Wazuh dashboard and the Wazuh indexer.
+-  ``wazuh-manager``: Handles communications between the Wazuh manager and the Wazuh indexer.
 
 The Wazuh manager API has two default users:
 
@@ -26,58 +27,52 @@ The Wazuh passwords tool is located at ``/usr/share/wazuh-indexer/plugins/opense
 
 In an all-in-one deployment, the tool automatically updates the passwords in the required components. In a distributed deployment, you must update the password in other components depending on the user whose password you change. See :ref:`Change the passwords in a distributed environment <passwords_distributed>` for more details.
 
-The ``wazuh-passwords-tool.sh`` script provides the following options for managing Wazuh internal user passwords:
+The ``wazuh-passwords-tool.sh`` script provides the following options:
 
-+------------------------------------------------+------------------------------------------------------------------------------+
-| Option                                         | Description                                                                  |
-+================================================+==============================================================================+
-| ``-A``, ``--api``                              | Changes the Wazuh manager API password for the specified user. Requires      |
-|                                                | ``-u|--user <USER>``, ``-p|--password <PASSWORD>``, ``-au|--admin-user       |
-|                                                | <API_ADMIN_USERNAME>``, and ``-ap|--admin-password <API_ADMIN_PASSWORD>``.   |
-+------------------------------------------------+------------------------------------------------------------------------------+
-| ``-au``, ``--admin-user <ADMIN_USER>``         | Specifies the Wazuh manager API administrator user. Required when changing   |
-|                                                | the Wazuh manager API passwords. Requires ``-A``, ``--api``.                 |
-+------------------------------------------------+------------------------------------------------------------------------------+
-| ``-ap``, ``--admin-password <ADMIN_PASSWORD>`` | Specifies the password for the Wazuh manager API administrator user.         |
-|                                                | Required when changing the Wazuh manager API passwords. Requires ``-A``,     |
-|                                                | ``--api``.                                                                   |
-+------------------------------------------------+------------------------------------------------------------------------------+
-| ``-u``, ``--user <user>``                      | Specifies the user whose password is changed. If you don't provide a         |
-|                                                | password, the tool generates a random one.                                   |
-+------------------------------------------------+------------------------------------------------------------------------------+
-| ``-p``, ``--password <PASSWORD>``              | Specifies the new password. Must be used with option ``-u``, ``--user        |
-|                                                | <user>``.                                                                    |
-+------------------------------------------------+------------------------------------------------------------------------------+
-| ``-v``, ``--verbose``                          | Displays the full script execution output.                                   |
-+------------------------------------------------+------------------------------------------------------------------------------+
-| ``-h``, ``--help``                             | Displays the help message.                                                   |
-+------------------------------------------------+------------------------------------------------------------------------------+
++---------------------------+-------------------------------------------------------------------------------+
+| Option                    | Description                                                                   |
++===========================+===============================================================================+
+| ``-a``, ``--change-all``  | Changes the passwords of all the Wazuh indexer and Wazuh manager API users    |
+|                           | installed on the host. The new passwords are generated and saved in           |
+|                           | ``/etc/wazuh/credentials.env``.                                               |
++---------------------------+-------------------------------------------------------------------------------+
+| ``-u``, ``--user <USER>`` | Specifies the user whose password is changed. If ``-p`` is not used, the tool |
+|                           | generates a random password and saves it in ``/etc/wazuh/credentials.env``.   |
++---------------------------+-------------------------------------------------------------------------------+
+| ``-p``, ``--password``    | Reads the new password from standard input. Must be used with ``-u``.         |
++---------------------------+-------------------------------------------------------------------------------+
+| ``-v``, ``--verbose``     | Displays the full script execution output.                                    |
++---------------------------+-------------------------------------------------------------------------------+
+| ``-h``, ``--help``        | Displays the help message.                                                    |
++---------------------------+-------------------------------------------------------------------------------+
 
 .. _change_password_indexer_user:
 
 Change the password for a Wazuh indexer user
 ---------------------------------------------
 
-Wazuh indexer users are defined in ``/etc/wazuh-indexer/opensearch-security/internal_users.yml``. To change the password for a Wazuh indexer user, run the script with the ``-u`` option and specify the new password with the ``-p`` option. The password must contain 8 to 64 characters, including at least one uppercase letter, one lowercase letter, one number, and one of the following special characters: ``.*+?-``.
+Wazuh indexer users are defined in ``/etc/wazuh-indexer/opensearch-security/internal_users.yml``. To change the password for a Wazuh indexer user, run the script with the ``-u`` option and pass the new password to the ``-p`` option through standard input. Passwords for Wazuh indexer users and Wazuh manager API users must contain 12 to 64 characters, using only ``A``-``Z``, ``a``-``z``, ``0``-``9``, and the symbols ``. , _ + : @ % ^ = ~ -``. They must include at least one uppercase letter, one lowercase letter, one number, and one of the previously mentioned symbols.
 
 .. code-block:: console
 
-   # bash wazuh-passwords-tool.sh -u <USER> [-p <PASSWORD>]
+   # printf '%s\n' '<PASSWORD>' | bash wazuh-passwords-tool.sh -u <USER> -p
 
 Where:
 
--  ``<USER>`` is the name of the user whose password you want to change.
--  ``<PASSWORD>`` is the new password. If ``<PASSWORD>`` is not specified, the tool generates a random password.
+-  ``<USER>`` is the name of the user whose password you want to change: ``admin``, ``kibanaserver``, or ``wazuh-manager``.
+-  ``<PASSWORD>`` is the new password. If you omit ``-p``, the tool generates a random password and saves it in ``/etc/wazuh/credentials.env``.
 
 .. note::
 
    Run this command on **any Wazuh indexer node** for distributed deployments.
 
-For example, run the following command to change the password of the ``admin`` user to ``Secr3tP4ssw*rd``:
+For example, run the following command to change the password of the ``admin`` user to ``Secr3tP4ssw.rd``:
 
 .. code-block:: console
 
-   # bash wazuh-passwords-tool.sh -u admin -p Secr3tP4ssw*rd
+   # printf '%s\n' 'Secr3tP4ssw.rd' | bash wazuh-passwords-tool.sh -u admin -p
+
+The command output looks similar to this:
 
 .. code-block:: none
    :class: output
@@ -85,40 +80,44 @@ For example, run the following command to change the password of the ``admin`` u
    INFO: Updating the internal users.
    INFO: A backup of the internal users has been saved in the /etc/wazuh-indexer/internalusers-backup folder.
    INFO: Generating password hash
-   WARNING: Password changed. Remember to update the password in the Wazuh dashboard and the Wazuh manager nodes if necessary, and restart the services.
+   INFO: The password of the Wazuh indexer user admin was changed.
+   INFO: WAZUH_INDEXER_ADMIN_PASSWORD was updated in /etc/wazuh/credentials.env.
 
 .. _change_password_api_user:
 
 Change the password for a Wazuh manager API user
 -------------------------------------------------
 
-To change the password for a Wazuh manager API user, use the ``-A`` option and specify the Wazuh manager API administrator credentials:
+To change the password for a Wazuh manager API user, run the script with the ``-u`` option and pass the new password to the ``-p`` option through standard input:
 
 .. code-block:: console
 
-   # bash wazuh-passwords-tool.sh -A -au <API_ADMIN_USERNAME> -ap <API_ADMIN_PASSWORD> -u <USER> [-p <PASSWORD>]
+   # printf '%s\n' '<PASSWORD>' | bash wazuh-passwords-tool.sh -u <USER> -p
 
 Where:
 
--  ``<API_ADMIN_USERNAME>`` is the Wazuh manager API administrator user.
--  ``<API_ADMIN_PASSWORD>`` is the Wazuh manager API administrator password.
--  ``<USER>`` is the name of the API user whose password you want to change.
--  ``<PASSWORD>`` is the new password. If ``<PASSWORD>`` is not specified, the tool generates a random password.
+-  ``<USER>`` is the name of the API user whose password you want to change: ``wazuh`` or ``wazuh-wui``.
+-  ``<PASSWORD>`` is the new password. If you omit ``-p``, the tool generates a random password and saves it in ``/etc/wazuh/credentials.env``.
 
 .. note::
 
    Run this command **on the Wazuh manager master node** for distributed deployments.
 
-For example, run the following command to change the password of the ``wazuh`` user to ``Hello*123``:
+For example, run the following command to change the password of the ``wazuh`` user to ``Secr3tP4ssw.rd``:
 
 .. code-block:: console
 
-   # bash wazuh-passwords-tool.sh -A -au wazuh -ap wazuh -u wazuh -p Hello*123
+   # printf '%s\n' 'Secr3tP4ssw.rd' | bash wazuh-passwords-tool.sh -u wazuh -p
+
+The command output looks similar to this:
 
 .. code-block:: none
    :class: output
 
-   INFO: The password for Wazuh API user wazuh is Hello*123
+   INFO: The password of the Wazuh API user wazuh was changed.
+   INFO: WAZUH_MANAGER_API_PASSWORD was updated in /etc/wazuh/credentials.env.
+
+You can also change the Wazuh manager API passwords by following the instructions in the Securing the Wazuh manager API documentation.
 
 .. _passwords_distributed:
 

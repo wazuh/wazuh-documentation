@@ -10,7 +10,7 @@ The Wazuh manager is one of the central components of the Wazuh platform. It tra
 
 The Wazuh manager uses multiple threat intelligence sources and enriches events with contextual data to enhance detection accuracy and security visibility. This includes mapping events to the MITRE ATT&CK framework, detecting vulnerabilities with the `Wazuh CTI <https://cti.wazuh.com/>`__ service, and aligning security findings with regulatory standards such as PCI DSS, GDPR, HIPAA, CIS benchmarks, and NIST 800-53.
 
-For installation and configuration steps, refer to the :doc:`Wazuh manager installation </installation-guide/wazuh-server/index>` guide.
+For installation and configuration steps, refer to the :doc:`Wazuh manager installation </installation-guide/wazuh-manager/index>` guide.
 
 .. note::
 
