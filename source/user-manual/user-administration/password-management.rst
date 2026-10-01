@@ -66,11 +66,13 @@ Where:
 
    Run this command on **any Wazuh indexer node** for distributed deployments.
 
-For example, run the following command to change the password of the ``admin`` user to ``Secr3tP4ssw*rd``:
+For example, run the following command to change the password of the ``admin`` user to ``Secr3tP4ssw.rd``:
 
 .. code-block:: console
 
-   # bash wazuh-passwords-tool.sh -u admin -p Secr3tP4ssw*rd
+   # printf '%s\n' 'Secr3tP4ssw.rd' | bash wazuh-passwords-tool.sh -u admin -p
+
+The command output looks similar to this:
 
 .. code-block:: none
    :class: output
@@ -78,7 +80,8 @@ For example, run the following command to change the password of the ``admin`` u
    INFO: Updating the internal users.
    INFO: A backup of the internal users has been saved in the /etc/wazuh-indexer/internalusers-backup folder.
    INFO: Generating password hash
-   WARNING: Password changed. Remember to update the password in the Wazuh dashboard and the Wazuh manager nodes if necessary, and restart the services.
+   INFO: The password of the Wazuh indexer user admin was changed.
+   INFO: WAZUH_INDEXER_ADMIN_PASSWORD was updated in /etc/wazuh/credentials.env.
 
 .. _change_password_api_user:
 
