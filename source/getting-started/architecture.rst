@@ -6,7 +6,7 @@
 Architecture
 ============
 
-The Wazuh architecture is composed of a multi-platform :doc:`Wazuh agent <components/wazuh-agent>` and three central components: the :doc:`Wazuh manager <components/wazuh-server>`, the :doc:`Wazuh indexer <components/wazuh-indexer>`, and the :doc:`Wazuh dashboard <components/wazuh-dashboard>`.
+The Wazuh architecture is composed of a multi-platform :doc:`Wazuh agent <components/wazuh-agent>` and three central components: the :doc:`Wazuh manager <components/wazuh-manager>`, the :doc:`Wazuh indexer <components/wazuh-indexer>`, and the :doc:`Wazuh dashboard <components/wazuh-dashboard>`.
 
 -  The Wazuh agent is deployed on endpoints to collect and forward security data to the Wazuh manager, where it is transformed and enriched.
 -  The Wazuh manager transforms data received from Wazuh agents into standardized schema documents. It decodes and enriches the data with threat intelligence, then forwards the processed output to the Wazuh indexer and other configured destinations.
@@ -43,7 +43,7 @@ Wazuh 5.0 changes the agent-manager communication transport. A Wazuh 5.0 agent c
 Wazuh agent - Wazuh manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The Wazuh agent collects security data from monitored endpoints and forwards it to the :doc:`Wazuh manager <components/wazuh-server>`, where the :doc:`normalization engine </user-manual/manager/wazuh-normalization-engine>` transforms and enriches the data. A Wazuh 5.0 agent uses an HTTPS channel for communication with the Wazuh manager. The channel carries enrollment, event reporting, state synchronization, control messages, and file downloads. The Wazuh manager serves this channel on port ``1517/TCP``. The listener requires a Transport Layer Security (TLS) certificate and private key.
+The Wazuh agent collects security data from monitored endpoints and forwards it to the :doc:`Wazuh manager <components/wazuh-manager>`, where the :doc:`normalization engine </user-manual/manager/wazuh-normalization-engine>` transforms and enriches the data. A Wazuh 5.0 agent uses an HTTPS channel for communication with the Wazuh manager. The channel carries enrollment, event reporting, state synchronization, control messages, and file downloads. The Wazuh manager serves this channel on port ``1517/TCP``. The listener requires a Transport Layer Security (TLS) certificate and private key.
 
 A Wazuh 5.0 agent enrolls through the same HTTPS channel using the ``POST /enroll`` endpoint. The endpoint acts as a bridge to the enrollment service, authenticates the request, and relays it to that service. After enrollment, the Wazuh agent authenticates subsequent requests using a bearer token.
 
@@ -71,7 +71,7 @@ When an enrollment request arrives at a worker node, the worker forwards it to t
 Wazuh dashboard - Wazuh manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The Wazuh dashboard queries the Wazuh manager API to retrieve information and perform management operations. It displays configuration and status information about the :doc:`Wazuh manager <components/wazuh-server>` and enrolled :doc:`Wazuh agents <components/wazuh-agent>`. It also performs operations such as agent enrollment, group assignment, and remote upgrades. The Wazuh manager API listens on port ``55000/TCP`` by default and exposes a REST interface over HTTPS.
+The Wazuh dashboard queries the Wazuh manager API to retrieve information and perform management operations. It displays configuration and status information about the :doc:`Wazuh manager <components/wazuh-manager>` and enrolled :doc:`Wazuh agents <components/wazuh-agent>`. It also performs operations such as agent enrollment, group assignment, and remote upgrades. The Wazuh manager API listens on port ``55000/TCP`` by default and exposes a REST interface over HTTPS.
 
 The Wazuh manager API uses JSON Web Tokens (JWTs) for authentication. The Wazuh dashboard sends the API username and password to the ``POST /security/user/authenticate`` endpoint, which returns a signed JWT. The dashboard includes the token in the ``Authorization`` header of subsequent API requests. Tokens expire after 900 seconds by default.
 
