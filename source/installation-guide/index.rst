@@ -9,7 +9,7 @@
 Installation guide
 ==================
 
-Wazuh is a security platform that provides unified XDR and SIEM protection for endpoints and cloud workloads. The solution is composed of the :doc:`Wazuh agent </getting-started/components/wazuh-agent>` and three central components: the :doc:`Wazuh manager </getting-started/components/wazuh-server>`, the :doc:`Wazuh indexer </getting-started/components/wazuh-indexer>`, and the :doc:`Wazuh dashboard </getting-started/components/wazuh-dashboard>`.
+Wazuh is a security platform that provides unified XDR and SIEM protection for endpoints and cloud workloads. The solution is composed of the :doc:`Wazuh agent </getting-started/components/wazuh-agent>` and three central components: the :doc:`Wazuh manager </getting-started/components/wazuh-manager>`, the :doc:`Wazuh indexer </getting-started/components/wazuh-indexer>`, and the :doc:`Wazuh dashboard </getting-started/components/wazuh-dashboard>`.
 
 Wazuh is a free and open source platform. Its components abide by the `GNU General Public License, version 2 <https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html>`_, and the `GNU Affero General Public License version 3 <https://www.gnu.org/licenses/agpl-3.0.en.html>`_ (AGPLv3).
 
@@ -50,7 +50,7 @@ Follow this installation workflow:
     </div>
 
     <div class="link-boxes-item future-step">
-      <a class="link-boxes-link" href="wazuh-server/index.html">
+      <a class="link-boxes-link" href="wazuh-manager/index.html">
         <p class="link-boxes-label">Install the Wazuh manager</p>
 
 .. image:: ../images/installation/Server-noBG.png
@@ -142,7 +142,7 @@ In the :doc:`Uninstalling Wazuh <uninstalling-wazuh/index>` section, you will fi
    :maxdepth: 1
 
    wazuh-indexer/index
-   wazuh-server/index
+   wazuh-manager/index
    wazuh-dashboard/index
    wazuh-agent/index
    packages-list

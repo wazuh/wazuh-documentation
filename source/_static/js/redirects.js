@@ -195,6 +195,10 @@ newUrls['5.0'] = [
   '/user-manual/wazuh-indexer-cluster/add-wazuh-indexer-nodes/new-wazuh-indexer-node.html',
   '/user-manual/wazuh-indexer-cluster/removing-a-wazuh-indexer-node.html',
   '/user-manual/wazuh-indexer-cluster/troubleshooting.html',
+  '/getting-started/components/wazuh-manager.html',
+  '/installation-guide/wazuh-manager/index.html',
+  '/installation-guide/wazuh-manager/installation-assistant.html',
+  '/installation-guide/wazuh-manager/step-by-step.html',
 ];
 
 /* Redirections 4.14—5.0  */
@@ -464,6 +468,26 @@ redirections.push(
     'target': ['4.14=>5.0', '5.0=>4.14'],
     '4.14': '/user-manual/wazuh-indexer-cluster/wazuh-indexer-cluster-tuning.html',
     '5.0': '/user-manual/wazuh-indexer-cluster/cluster-configuration.html#wazuh-indexer-cluster-tuning',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/getting-started/components/wazuh-server.html',
+    '5.0': '/getting-started/components/wazuh-manager.html',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/installation-guide/wazuh-server/index.html',
+    '5.0': '/installation-guide/wazuh-manager/index.html',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/installation-guide/wazuh-server/installation-assistant.html',
+    '5.0': '/installation-guide/wazuh-manager/installation-assistant.html',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/installation-guide/wazuh-server/step-by-step.html',
+    '5.0': '/installation-guide/wazuh-manager/step-by-step.html',
   }
 );
 
@@ -808,6 +832,10 @@ removedUrls['5.0'] = [
   '/cloud-security/gcp/supported-services/index.html',
   '/cloud-security/gcp/supported-services/pubsub.html',
   '/cloud-security/gcp/supported-services/cloud-storage-buckets.html',
+  '/getting-started/components/wazuh-server.html',
+  '/installation-guide/wazuh-server/index.html',
+  '/installation-guide/wazuh-server/installation-assistant.html',
+  '/installation-guide/wazuh-server/step-by-step.html',
 ];
 
 /* *** RELEASE 4.14 ****/

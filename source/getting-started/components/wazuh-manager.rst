@@ -48,4 +48,4 @@ The Wazuh manager comprises several components that perform functions such as ag
 
 -  **Indexer connector:** Forwards events from the Wazuh normalization engine to the Wazuh indexer.
 
-Visit the :doc:`installation guide </installation-guide/wazuh-server/index>` to learn how to install the Wazuh manager.
+Visit the :doc:`installation guide </installation-guide/wazuh-manager/index>` to learn how to install the Wazuh manager.

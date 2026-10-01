@@ -8,7 +8,7 @@ Wazuh agent
 
 The Wazuh agent runs on Linux, Windows, and macOS. You can deploy it on laptops, desktops, servers, cloud instances, containers, and virtual machines.
 
-The Wazuh agent collects system and application data and sends it to the :doc:`Wazuh manager <wazuh-server>` through an encrypted and authenticated channel. It also provides threat prevention, detection, and response capabilities on monitored endpoints.
+The Wazuh agent collects system and application data and sends it to the :doc:`Wazuh manager <wazuh-manager>` through an encrypted and authenticated channel. It also provides threat prevention, detection, and response capabilities on monitored endpoints.
 
 Wazuh agent architecture
 ------------------------
@@ -51,7 +51,7 @@ All agent modules are configurable and perform different security tasks. This mo
 Communication with the Wazuh manager
 ------------------------------------
 
-The Wazuh agent communicates with the :doc:`Wazuh manager <wazuh-server>` to send collected data and security events. It also sends operational data, including its configuration and status. The Wazuh agent retrieves pending tasks from the Wazuh manager through the same channel, including upgrades, configuration changes, and active response commands.
+The Wazuh agent communicates with the :doc:`Wazuh manager <wazuh-manager>` to send collected data and security events. It also sends operational data, including its configuration and status. The Wazuh agent retrieves pending tasks from the Wazuh manager through the same channel, including upgrades, configuration changes, and active response commands.
 
 The Wazuh agent communicates with the Wazuh manager through the HTTPS agent API on port 1517. TLS encrypts the communication, and the Wazuh agent authenticates requests using a signed bearer token. The Wazuh agent sends events in batches and queues them locally when the Wazuh manager is unreachable. Local queuing helps prevent event loss during temporary connection failures and reduces repeated connection attempts.
 
