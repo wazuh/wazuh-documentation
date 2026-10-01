@@ -133,7 +133,7 @@ Wazuh uses certificates to establish confidentiality and encrypt communications 
       # chmod 400 /etc/wazuh-indexer/certs/*
       # chown -R wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/certs
 
-#. Follow these steps to deploy the certificates for the :doc:`Wazuh manager </installation-guide/wazuh-server/step-by-step>` and the :doc:`Wazuh dashboard </installation-guide/wazuh-dashboard/step-by-step>` nodes.
+#. Follow these steps to deploy the certificates for the :doc:`Wazuh manager </installation-guide/wazuh-manager/step-by-step>` and the :doc:`Wazuh dashboard </installation-guide/wazuh-dashboard/step-by-step>` nodes.
 
    .. note::
 

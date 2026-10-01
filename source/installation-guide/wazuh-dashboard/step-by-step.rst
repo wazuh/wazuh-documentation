@@ -299,7 +299,7 @@ All the Wazuh central components are successfully installed and secured.
     </div>
 
     <div class="link-boxes-item past-step">
-      <a class="link-boxes-link" href="../wazuh-server/index.html">
+      <a class="link-boxes-link" href="../wazuh-manager/index.html">
         <p class="link-boxes-label">Install the Wazuh manager</p>
 
 .. image:: ../../images/installation/Server-Circle.png

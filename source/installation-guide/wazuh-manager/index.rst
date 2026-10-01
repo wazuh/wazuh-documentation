@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The Wazuh server analyzes data from Wazuh agents, triggers alerts, and remotely manages agent configurations.
+   :description: Install the Wazuh manager, which analyzes event data from Wazuh agents, forwards it to the Wazuh indexer, and remotely manages agent configurations.
 
 Wazuh manager
 =============
