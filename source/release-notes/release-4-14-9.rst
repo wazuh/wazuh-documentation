@@ -84,8 +84,8 @@ Wazuh agent
 -  `#38969 <https://github.com/wazuh/wazuh/pull/38969>`__ Fixed process names truncated to fifteen characters in the syscollector inventory.
 -  `#38868 <https://github.com/wazuh/wazuh/pull/38868>`__ Fixed the gcloud wodle's Pub/Sub integration failing to start whenever the bucket integration's dependencies (e.g. ``google-cloud-storage``) were broken, by deferring each integration's imports so a failure in one no longer blocks the other.
 -  `#39119 <https://github.com/wazuh/wazuh/issues/39119>`__ Fixed the macOS agent's default FIM configuration monitoring ``/etc``, which macOS resolves as a symlink to ``/private/etc``; without ``follow_symbolic_link`` enabled, syscheck only recorded the symlink itself, leaving every file under it (``sudoers``, ``sshd_config``, ``pam.d``, ``hosts``) uncovered. The default ``<directories>``, ``<ignore>``, and ``<nodiff>`` entries now target ``/private/etc`` directly.
--  `#39126 <https://github.com/wazuh/wazuh/issues/39126>`__ Fixed the macOS agent's syscollector process and port inventory being truncated, because ``proc_listallpids()`` was called with the buffer size expressed in pid_t count instead of bytes.
--  `#39124 <https://github.com/wazuh/wazuh/pull/39124>`__ Fixed the default agent nodiff list not protecting /etc/shadow and real key paths.
+-  `#39126 <https://github.com/wazuh/wazuh/issues/39126>`__ Fixed the macOS agent's syscollector process and port inventory being truncated, because ``proc_listallpids()`` was called with the buffer size expressed in ``pid_t`` count instead of bytes.
+-  `#39124 <https://github.com/wazuh/wazuh/pull/39124>`__ Fixed the default agent nodiff list not protecting ``/etc/shadow`` and real key paths.
 -  `#38627 <https://github.com/wazuh/wazuh/pull/38627>`__ Fixed FIM not monitoring user-mounted ``tmpfs`` directories mistaken for ``/dev``.
 -  `#38943 <https://github.com/wazuh/wazuh/pull/38943>`__ Fixed the gcloud wodle silently discarding a crashed process's raw output when it produced no recognized log line, and fixed ``wm_exec()`` (shared by every wodle) reporting exit code 0 for a process killed by a signal, such as an OOM kill or a native segfault, which had made that raw-output fallback unreachable for exactly the crashes it was meant to catch.
 -  `#39198 <https://github.com/wazuh/wazuh/issues/39198>`__ Fixed the default Windows FIM configuration monitoring none of its 19 named critical binaries (``cmd.exe``, ``lsass.exe``, ``sc.exe``, ``sethc.exe``, etc.), because duplicate ``%WINDIR%\SysNative`` / ``%WINDIR%\System32`` directory declarations collapsed onto the same path once normalized and silently replaced each other's ``restrict`` list.
@@ -106,7 +106,7 @@ Ruleset
 -  `#38669 <https://github.com/wazuh/wazuh/pull/38669>`__ Fixed multiple checks with deprecated commands in Apple macOS 26.0 SCA file.
 -  `#39047 <https://github.com/wazuh/wazuh/pull/39047>`__ Fixed false-pass on the CIS Amazon Linux 2023 and Ubuntu 18.04 minimum password-days checks.
 -  `#39166 <https://github.com/wazuh/wazuh/pull/39166>`__ Fixed a ``Permisive`` typo failing the SELinux mode check on compliant hosts across 5 SCA policies.
--  `#39474 <https://github.com/wazuh/wazuh/pull/39474>`__ Fixed the CIS Ubuntu 20.04 and Debian 10 "nologin is not listed in /etc/shells" check always reporting passed, by matching ``nologin`` instead of the never-occurring ``nologins``.
+-  `#39474 <https://github.com/wazuh/wazuh/pull/39474>`__ Fixed the CIS Ubuntu 20.04 and Debian 10 "nologin is not listed in ``/etc/shells``" check always reporting passed, by matching ``nologin`` instead of the never-occurring ``nologins``.
 -  `#38679 <https://github.com/wazuh/wazuh/pull/38679>`__ Fixed SCA checks silently failing across macOS, RHEL/Debian, AlmaLinux, Amazon Linux, CentOS, Oracle Linux, and Rocky Linux, Ubuntu, Solaris, MongoDB policies by adding missing shell wrappers and fixing broken rule syntax.
 
 Wazuh dashboard
