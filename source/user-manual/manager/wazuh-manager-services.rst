@@ -13,13 +13,22 @@ This section describes the purpose, responsibilities, and configuration of each 
 Agent enrollment service
 ------------------------
 
-The agent enrollment service registers Wazuh agents with the Wazuh manager through the ``wazuh-manager-authd`` daemon. It listens for agent registration requests, validates credentials, generates the agent key, and writes the resulting entry to the agent keystore.
+The agent enrollment service registers Wazuh agents with the Wazuh manager through the ``wazuh-manager-authd`` daemon. It receives enrollment requests, validates credentials, generates the agent key, and stores the resulting entry in the agent keystore.
 
-Wazuh 5.0 agents enroll over HTTPS through the ``POST /enroll`` endpoint of ``remoted_module`` on port ``1517``. That endpoint forwards to the same ``wazuh-manager-authd`` daemon through its local socket, so every enrollment follows one validation path regardless of how it arrives. Port ``1515`` remains fully supported for legacy Wazuh 4.x agents.
+Wazuh 5.0 agents enroll over HTTPS through the ``POST /enroll`` endpoint of the agent connection service on port ``1517``. The endpoint forwards requests to the same ``wazuh-manager-authd`` daemon through its local socket. This method ensures that all enrollment requests use the same validation path. Port ``1515`` remains supported for legacy Wazuh 4.x agents.
 
-When a Wazuh agent starts on an endpoint, it contacts the Wazuh manager to begin enrollment. Enrollment requires the enrollment password by default. The Wazuh manager generates the password at first start, and you must copy it to each agent before enrollment. The Wazuh manager then generates a unique agent key, which authenticates the Wazuh agent on subsequent connections.
+When a Wazuh agent starts, it contacts the Wazuh manager to begin enrollment. A Wazuh 5.x agent uses an enrollment token that you create on the Wazuh manager. Legacy Wazuh 4.x agents use port ``1515`` and the shared enrollment password, which is required by default. The Wazuh manager generates the password at first startup and stores it in the ``/var/wazuh-manager/etc/authd.pass`` file. After successful enrollment, the Wazuh manager generates a unique agent key. The Wazuh agent uses this key to sign the bearer tokens that authenticate its subsequent requests.
 
-You can configure :doc:`additional security options </user-manual/agent/agent-enrollment/security-options/index>` for the enrollment process, such as Wazuh manager identity verification and Wazuh agent identity verification.
+Enrollment tokens
+^^^^^^^^^^^^^^^^^
+
+An enrollment token is a credential that a Wazuh 5.x agent presents during enrollment. It contains the Wazuh manager address, the certificate authority to trust, and a single-use credential. You create an enrollment token on the Wazuh manager using the token utility of the ``wazuh-manager-authd`` daemon. Specify the address that the Wazuh agent uses to connect to the Wazuh manager. The service validates the specified address against the Subject Alternative Names (SANs) in the Wazuh manager certificate. It rejects tokens that specify a name not included in the certificate.
+
+In a Wazuh manager cluster, the master node creates all enrollment tokens. It validates each address against its own certificate. A token for a worker node address is rejected unless the master certificate also includes that address.
+
+.. note::
+
+   A certificate with only loopback addresses in its SANs cannot be used to create enrollment tokens. Configure the HTTPS listener certificate with the addresses that Wazuh agents use before creating tokens.
 
 Configuration
 ^^^^^^^^^^^^^
@@ -61,6 +70,10 @@ Where:
 
 .. note::
 
+   The Wazuh manager does not generate TLS certificates at startup. The credential resolver issues the certificate pair during installation. The agent enrollment service does not start if the files referenced by ``<ssl_manager_cert>`` and ``<ssl_manager_key>`` are missing or unreadable.
+
+.. note::
+
    Whenever you change the ``/var/wazuh-manager/etc/wazuh-manager.conf`` file, restart the Wazuh manager to apply changes.
 
 Agent connection service
@@ -78,24 +91,26 @@ Configuration
 The following ``<remote>`` block shows the default connection service configuration in the ``<wazuh_config>`` block of the ``/var/wazuh-manager/etc/wazuh-manager.conf`` file:
 
 .. code-block:: xml
-   :emphasize-lines: 3-22
+   :emphasize-lines: 3-24
 
    <wazuh_config>
      ...
      <remote>
        <https>
          <port>1517</port>
-         <bind_addr>127.0.0.1</bind_addr>
+         <bind_addr>0.0.0.0</bind_addr>
          <global_prefix>/wazuh-manager/</global_prefix>
          <certificate>etc/certs/remoted.pem</certificate>
          <key>etc/certs/remoted-key.pem</key>
+         <ca_certificate>etc/certs/root-ca.pem</ca_certificate>
        </https>
 
        <legacy>
          <enabled>yes</enabled>
          <port>1514</port>
          <protocol>tcp</protocol>
-         <local_ip>127.0.0.1</local_ip>
+         <local_ip>0.0.0.0</local_ip>
+         <queue_size>131072</queue_size>
        </legacy>
 
        <agents>
@@ -107,17 +122,24 @@ The following ``<remote>`` block shows the default connection service configurat
 
 Where:
 
+**HTTPS options**
+
 -  ``<https>`` specifies the configuration parameters for the HTTPS listener. All options are optional; an absent ``<https>`` block (or an absent individual option) falls back to the module's built-in defaults, so the listener is usable without any configuration.
 -  ``<port>`` specifies the HTTPS listening port. The default port value is ``1517``. The allowed value is any port number between ``1`` and ``65535``.
--  ``<bind_addr>`` specifies the address the HTTPS listener binds to. The default value is ``127.0.0.1``. The allowed values are any valid IPv4 or IPv6 address.
+-  ``<bind_addr>`` specifies the address the HTTPS listener binds to. The default value is ``0.0.0.0``. The allowed values are any valid IPv4 or IPv6 address.
 -  ``<global_prefix>`` specifies the URL path prefix every HTTPS endpoint is served under. The default path is ``/wazuh-manager/``.
 -  ``<certificate>`` specifies the path to the TLS certificate chain (PEM) presented by the Wazuh manager. The default path is ``etc/certs/remoted.pem`` relative to the Wazuh manager installation path.
 -  ``<key>`` specifies the path to the TLS private key (PEM) matching ``certificate``. The default path is ``etc/certs/remoted-key.pem`` relative to the Wazuh manager installation path.
+-  ``<ca_certificate>`` specifies the path to the CA certificate (PEM) that issued the listener certificate. The default path is ``etc/certs/root-ca.pem`` relative to the Wazuh manager installation path.
+
+**Legacy options**
+
 -  ``<legacy>`` specifies the configuration parameters for the TCP/UDP listener.
 -  ``<enabled>`` enables the classic TCP/UDP listener and every subsystem that only serves Wazuh 4.x agents. The default value is ``yes`` when ``<legacy>`` is present. The allowed values are ``yes`` and ``no``.
 -  ``<port>`` specifies the listening port for Wazuh agent connections. The default port is ``1514``. The allowed value is any port number between ``1`` and ``65535``.
 -  ``<protocol>`` specifies communication protocol(s) to accept from Wazuh agents. The default value is ``tcp``. The allowed values are ``tcp``, ``udp``, or ``tcp,udp``.
--  ``<local_ip>`` binds ``wazuh-manager-remoted`` to a specific local IP address. The default value is ``127.0.0.1``. The allowed values are any valid IPv4 or IPv6 address.
+-  ``<local_ip>`` binds ``wazuh-manager-remoted`` to a specific local IP address. The default value is ``0.0.0.0``. The allowed values are any valid IPv4 or IPv6 address.
+-  ``<queue_size>`` specifies the message queue size for incoming agent messages. The default value is ``131072``. The allowed value is any positive integer.
 -  ``<allow_higher_versions>`` allows the Wazuh manager to accept connections from Wazuh agents running a Wazuh version higher than the manager. The default value is ``no``. Enable when upgrading Wazuh agents before the Wazuh manager. This option is configurable under ``<agents>``.
 
 You can find more configuration options in the :doc:`remote </user-manual/reference/wazuh-manager-conf/remote>` section of the reference guide.

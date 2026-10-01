@@ -497,7 +497,7 @@ Perform the following steps on each Wazuh indexer node.
 Restoring Wazuh server files
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You need to have a new installation of a Wazuh server. Follow the :doc:`Wazuh server - Installation guide </installation-guide/wazuh-server/index>` to perform a multi-node Wazuh server installation. There will be at least one master node and one worker node as node types. Perform the steps below, considering your node type.
+You need to have a new installation of a Wazuh server. Follow the :doc:`Wazuh server - Installation guide </installation-guide/wazuh-manager/index>` to perform a multi-node Wazuh server installation. There will be at least one master node and one worker node as node types. Perform the steps below, considering your node type.
 
 #. Stop the Wazuh manager and Filebeat to prevent any modification to the Wazuh server files during the restore process:
 
