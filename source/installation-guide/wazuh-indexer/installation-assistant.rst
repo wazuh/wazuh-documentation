@@ -174,4 +174,4 @@ Disable Wazuh updates
 Next steps
 ----------
 
-The Wazuh indexer is now successfully installed and you can proceed with installing the Wazuh manager. To perform this action, see the :doc:`../wazuh-server/installation-assistant` section.
+The Wazuh indexer is now successfully installed and you can proceed with installing the Wazuh manager. To perform this action, see the :doc:`../wazuh-manager/installation-assistant` section.
