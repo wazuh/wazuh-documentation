@@ -117,6 +117,8 @@ The command output looks similar to this:
    INFO: The password of the Wazuh API user wazuh was changed.
    INFO: WAZUH_MANAGER_API_PASSWORD was updated in /etc/wazuh/credentials.env.
 
+You can also change the Wazuh manager API passwords by following the instructions in the Securing the Wazuh manager API documentation.
+
 .. _passwords_distributed:
 
 Change the passwords in a distributed environment
