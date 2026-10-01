@@ -95,7 +95,6 @@ Wazuh agent
 -  `#39356 <https://github.com/wazuh/wazuh/pull/39356>`__ Fixed the macOS agent reporting zeroed password aging values for local users, where macOS defines no such policy.
 -  `#39165 <https://github.com/wazuh/wazuh/issues/39165>`__ Fixed the users inventory misreporting sudoers, missing group-based grants (e.g. macOS's ``%admin``, Linux's ``%sudo``/``%wheel``) and flagging unrelated accounts.
 -  `#39165 <https://github.com/wazuh/wazuh/issues/39165>`__ Fixed the users inventory never reading sudo grants placed in sudoers drop-in files (``/etc/sudoers.d/*``).
--  `#39120 <https://github.com/wazuh/wazuh/issues/39120>`__ Fixed the macOS agent shipping preinstalled empty ``logs/ossec.log``/``ossec.json`` placeholders.
 -  `#39353 <https://github.com/wazuh/wazuh/issues/39353>`__ Fixed the Windows agent accepting ``<whodata><provider>ebpf</provider></whodata>`` and silently disabling whodata.
 -  `#39570 <https://github.com/wazuh/wazuh/pull/39570>`__ Fixed the FIM eBPF whodata healthcheck failing on RHEL 9 kernels and discarding the eBPF provider.
 -  `#39708 <https://github.com/wazuh/wazuh/pull/39708>`__ Fixed FIM eBPF whodata dropping events for files outside the root mount.
