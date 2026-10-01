@@ -157,3 +157,5 @@ The Wazuh manager provides a set of command-line interface (CLI) tools for manag
      - Query cluster status and node health
    * - ``rbac_control``
      - Manage RBAC policies and role assignments
+   * - ``wazuh-manager-conf``
+     - Validates the Wazuh manager configuration. Run ``wazuh-manager-conf validate`` to check the ``/var/wazuh-manager/etc/wazuh-manager.conf`` file before restarting the Wazuh manager.
