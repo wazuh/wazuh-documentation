@@ -327,6 +327,6 @@ Disable Wazuh updates
 Next steps
 ----------
 
-The Wazuh indexer is now successfully installed on your single-node or multi-node cluster, and you can proceed with installing the Wazuh manager. To perform this action, see the :doc:`../wazuh-server/step-by-step` section.
+The Wazuh indexer is now successfully installed on your single-node or multi-node cluster, and you can proceed with installing the Wazuh manager. To perform this action, see the :doc:`../wazuh-manager/step-by-step` section.
 
 To uninstall the Wazuh indexer, see :ref:`uninstall_indexer`.
