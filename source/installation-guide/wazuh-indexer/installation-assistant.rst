@@ -24,7 +24,7 @@ The Wazuh indexer installation process is divided into three stages:
    You need root user privileges to run all the commands described below.
 
 Initial configuration
----------------------
+^^^^^^^^^^^^^^^^^^^^^
 
 Follow these steps on a Linux host to configure your Wazuh deployment, create SSL certificates to encrypt communications between the Wazuh components, and generate random passwords to secure your installation.
 
@@ -110,7 +110,7 @@ Follow these steps on a Linux host to configure your Wazuh deployment, create SS
 #. Copy the ``wazuh-install-files.tar`` file and the ``wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh`` script from the host where you generated it to all the servers of the distributed deployment including the Wazuh manager, the Wazuh indexer, and the Wazuh dashboard nodes. You can use the ``scp`` utility or any other secure file transfer method available in your environment.
 
 Wazuh indexer nodes installation
---------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Follow these steps to install and configure a single-node or multi-node Wazuh indexer.
 
@@ -133,7 +133,7 @@ Follow these steps to install and configure a single-node or multi-node Wazuh in
 Repeat this stage of the installation process for every Wazuh indexer node in your cluster. The command installs, configures and starts the Wazuh indexer on the host. Then proceed with initializing your single-node or multi-node cluster in the next stage.
 
 Cluster initialization
-----------------------
+^^^^^^^^^^^^^^^^^^^^^^
 
 The final stage of installing the Wazuh indexer single-node or multi-node cluster consists of running the security admin script. The security admin script loads the new certificates and initializes the single-node or multi-node cluster.
 

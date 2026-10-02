@@ -54,7 +54,7 @@ Follow this installation workflow:
         <p class="link-boxes-label">Install the Wazuh manager</p>
 
 .. image:: ../images/installation/Server-noBG.png
-     :alt: Wazuh server logo
+     :alt: Wazuh manager logo
      :align: center
      :height: 61px
 
