@@ -63,6 +63,10 @@ All notable changes to this project will be documented in this file.
 - Updated the *Wazuh indexer cluster* documentation in *User manual* to Wazuh 5.0, covering cluster architecture and node types, required ports, cluster configuration, certificate deployment, cluster tuning, security initialization, adding and removing nodes, cluster management, and troubleshooting. ([#10183](https://github.com/wazuh/wazuh-documentation/pull/10183)) ([#10185](https://github.com/wazuh/wazuh-documentation/pull/10185)) ([#10228](https://github.com/wazuh/wazuh-documentation/pull/10228))
 - Corrected an internal link in the *Wazuh Docker utilities* documentation that pointed to a bare path instead of the built page. ([#10212](https://github.com/wazuh/wazuh-documentation/pull/10212))
 
+### Fixed
+
+- Fixed the Wazuh 5.0 agent state-file reference so it no longer lists the obsolete `msg_sent` field. ([#10084](https://github.com/wazuh/wazuh-documentation/pull/10084))
+
 ### Removed
 
 - Removed all `agent-auth` references as this tool is now deprecated. ([#8718](https://github.com/wazuh/wazuh/pull/8718))
