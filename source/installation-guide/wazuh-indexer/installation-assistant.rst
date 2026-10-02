@@ -15,7 +15,7 @@ The Wazuh indexer installation process is divided into three stages:
 
 #. Initial configuration
 
-#. Wazuh indexer nodes installation
+#. Wazuh indexer node installation
 
 #. Cluster initialization
 

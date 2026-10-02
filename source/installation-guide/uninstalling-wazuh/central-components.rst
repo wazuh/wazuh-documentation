@@ -27,10 +27,9 @@ Uninstalling Wazuh components
 
 Choose from the options below to uninstall a Wazuh component.
 
-.. contents::
-   :local:
-   :depth: 1
-   :backlinks: none
+-  :ref:`Uninstalling the Wazuh dashboard <uninstall_dashboard>`
+-  :ref:`Uninstalling the Wazuh manager <uninstall_server>`
+-  :ref:`Uninstalling the Wazuh indexer <uninstall_indexer>`
 
 .. _uninstall_dashboard:
 
