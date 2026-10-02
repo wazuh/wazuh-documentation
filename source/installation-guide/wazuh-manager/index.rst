@@ -12,9 +12,9 @@ You can install the Wazuh manager on a single host or distribute it across multi
 
 Check the requirements below and choose an installation method to start installing the Wazuh manager.
 
-- :doc:`Assisted installation <installation-assistant>`: Install this component by running an assistant that automates the installation and configuration process.
- 
-- :doc:`Step-by-step installation <step-by-step>`: Install this component following detailed step-by-step instructions.
+-  :doc:`Assisted installation <installation-assistant>`: Install this component by running an assistant that automates the installation and configuration process.
+
+-  :doc:`Step-by-step installation <step-by-step>`: Install this component following detailed step-by-step instructions.
 
 .. raw:: html
 
@@ -29,6 +29,7 @@ Check the requirements below and choose an installation method to start installi
         <p class="link-boxes-label">Install the Wazuh indexer</p>
 
 .. image:: ../../images/installation/Indexer-Circle.png
+     :alt: Wazuh indexer logo
      :align: center
      :height: 61px
 
@@ -42,6 +43,7 @@ Check the requirements below and choose an installation method to start installi
         <p class="link-boxes-label">Install the Wazuh manager</p>
 
 .. image:: ../../images/installation/Server-Circle.png
+     :alt: Wazuh manager logo
      :align: center
      :height: 61px
 
@@ -55,6 +57,7 @@ Check the requirements below and choose an installation method to start installi
         <p class="link-boxes-label">Install the Wazuh dashboard</p>
 
 .. image:: ../../images/installation/Dashboard-noBG.png
+     :alt: Wazuh dashboard logo
      :align: center
      :height: 61px
      
@@ -83,24 +86,57 @@ Hardware requirements
 
 You can install the Wazuh manager as a single-node or multi-node cluster.
 
-- Hardware recommendations
-                          
-  +-------------------------+-------------------------+-------------------------------+
-  |                         |  Minimum                |   Recommended                 |
-  +-------------------------+----------+--------------+--------------+----------------+
-  | Component               |  RAM (GB)|  CPU (cores) |  RAM (GB)    |   CPU (cores)  |
-  +=========================+==========+==============+==============+================+
-  | Wazuh manager           |     8    |     4        |     16       |       8        |
-  +-------------------------+----------+--------------+--------------+----------------+
+-  Hardware recommendations
 
+   +-------------------------+-------------------------+-------------------------------+
+   |                         |  Minimum                |   Recommended                 |
+   +-------------------------+----------+--------------+--------------+----------------+
+   | Component               |  RAM (GB)|  CPU (cores) |  RAM (GB)    |   CPU (cores)  |
+   +=========================+==========+==============+==============+================+
+   | Wazuh manager           |     8    |     4        |     16       |       8        |
+   +-------------------------+----------+--------------+--------------+----------------+
 
-- Disk space requirements
+-  Disk space requirements
 
-  The Wazuh manager no longer stores alerts from monitored endpoints. Instead, it stores the content and databases required by its server-side modules. Because the Vulnerability Scanner feed requires at least 15 GB of storage, Wazuh recommends allocating at least 20 GB of disk space for a Wazuh manager.
+   The Wazuh manager no longer stores alerts from monitored endpoints. Instead, it stores the content and databases required by its server-side modules. Because the Vulnerability Scanner feed requires at least 15 GB of storage, Wazuh recommends allocating at least 20 GB of disk space for a Wazuh manager.
+
+.. _wazuh_manager_required_ports:
+
+Required ports
+^^^^^^^^^^^^^^
+
+The Wazuh manager uses the following ports.
+
++--------------------+-----------------------------------------------------------------------------------+--------------------------------------------+
+| Port               | From                                                                              | Purpose                                    |
++====================+===================================================================================+============================================+
+| 1517/TCP           | Wazuh 5.x agents, load balancer                                                   | Agent enrollment and connection over HTTPS |
++--------------------+-----------------------------------------------------------------------------------+--------------------------------------------+
+| 1516/TCP           | Other Wazuh manager nodes                                                         | Cluster communication, multi-node only     |
++--------------------+-----------------------------------------------------------------------------------+--------------------------------------------+
+| 55000/TCP          | Wazuh dashboard, API clients, and agents removing themselves under anti-tampering | Wazuh manager API, master node             |
++--------------------+-----------------------------------------------------------------------------------+--------------------------------------------+
+| 1514/TCP           | Wazuh 4.x agents                                                                  | Legacy agent connection                    |
++--------------------+-----------------------------------------------------------------------------------+--------------------------------------------+
+| 1515/TCP           | Wazuh 4.x agents                                                                  | Legacy enrollment                          |
++--------------------+-----------------------------------------------------------------------------------+--------------------------------------------+
+| 9200/TCP, outbound | This Wazuh manager                                                                | Connection to the Wazuh indexer            |
++--------------------+-----------------------------------------------------------------------------------+--------------------------------------------+
+
+If no Wazuh 4.x agents report to this Wazuh manager, you can keep 1514 and 1515 closed. They are owned by ``<remote><legacy><enabled>`` and ``<auth><disabled>`` in ``/var/wazuh-manager/etc/wazuh-manager.conf``.
+
+.. _wazuh_manager_agent_connection_address:
+
+Agent connection address
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Agents check the Wazuh manager's agent listener certificate against the address they connect to, and you can create enrollment tokens only for addresses in its subject alternative name (SAN). The installation assistant and the certificates tool include each Wazuh manager node's ``ip`` and ``dns`` values from ``config.yml``. For any other address, such as a load balancer in front of a cluster, a NAT address, or a public name, add ``-as <AGENT_ADDRESS>`` when you create the certificates. Every node's certificate then includes it.
+
+In a cluster behind a load balancer, every node's certificate must include the load balancer's address. The load balancer can send any agent request, enrollment included, to any node, and a worker node forwards enrollment to the master node. Use a TCP passthrough load balancer on 1517/TCP. If the proxy terminates TLS, use the ``load_balancer`` section of ``config.yml`` instead.
 
 .. toctree::
-    :hidden:
-    :maxdepth: 1
+   :hidden:
+   :maxdepth: 1
 
-    Assisted installation <installation-assistant>
-    Step-by-step installation <step-by-step>
+   Assisted installation <installation-assistant>
+   Step-by-step installation <step-by-step>

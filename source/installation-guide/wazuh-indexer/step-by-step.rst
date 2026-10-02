@@ -10,7 +10,7 @@ Install and configure the Wazuh indexer as a single-node or multi-node cluster f
 
 The installation process is divided into three stages:
 
-#. `Certificate creation`_
+#. `Certificates creation <Certificate creation_>`_
 #. `Wazuh indexer nodes installation`_
 #. `Cluster initialization`_
 
@@ -23,7 +23,9 @@ The installation process is divided into three stages:
 Certificate creation
 --------------------
 
-Wazuh uses certificates to establish confidentiality and encrypt communications between its central components. Follow these steps to create certificates for the Wazuh central components.
+Wazuh uses certificates to establish confidentiality and encrypt communications between its central components. The Wazuh indexer package generates certificates signed by a local certificate authority (CA) during installation.
+
+Follow the steps below to generate and distribute certificates for the Wazuh central components in a multi-node deployment.
 
 Generating the SSL certificates
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -69,6 +71,27 @@ Generating the SSL certificates
           - name: dashboard
             ip: "<dashboard-node-ip>"
 
+        # ip and dns both accept a list, for a node reachable at more than one address.
+        # Every item reaches the certificate of the node; the first one is the address
+        # the components are configured with.
+        #- name: manager-2
+        #  ip:
+        #    - "<wazuh-manager-ip>"
+        #    - "<wazuh-manager-second-ip>"
+        #  dns:
+        #    - "<wazuh-manager-name>"
+
+        # Optional. Only for a proxy that TERMINATES the agents' TLS session: it issues the
+        # certificate that proxy serves, from the same root-ca the agents pin. A layer 4
+        # passthrough load balancer terminates nothing and needs --agent-san with its
+        # address instead, so that address reaches the listener certificate of every
+        # manager node.
+        #load_balancer:
+        #  - name: lb
+        #    dns:
+        #      - "<load-balancer-name>"
+        #    ip:
+        #      - "<load-balancer-ip>"
 
    To learn more about how to create and configure the certificates, see the :ref:`Certificates deployment <wazuh_indexer_cluster_certificates_deployment>` section.
 
@@ -78,6 +101,16 @@ Generating the SSL certificates
 
       # bash ./wazuh-certs-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -A
 
+   If the Wazuh agents will connect to a Wazuh manager through a different address, such as a public IP, a NAT address, or a load balancer, add it with ``-as|--agent-san <ADDRESS>``. Agent enrollment tokens can only be created for an address that is in the listener certificate of the Wazuh manager.
+
+   .. code-block:: console
+
+      # bash ./wazuh-certs-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -A -as <ADDRESS>
+
+   .. note::
+
+      The ``-A`` option creates the root CA in ``/etc/wazuh/ca`` on the host where you run it, and keeps its private key, ``root-ca.key``, there. The key is not in ``wazuh-certificates.tar``. Back up ``/etc/wazuh/ca``: you need it to add nodes or renew certificates. Each Wazuh package issues its own certificates during installation, and the following steps replace them.
+
 #. Compress all the necessary files:
 
    .. code-block:: console
@@ -85,7 +118,7 @@ Generating the SSL certificates
       # tar -cvf ./wazuh-certificates.tar -C ./wazuh-certificates/ .
       # rm -rf ./wazuh-certificates
 
-#. Copy the ``wazuh-certificates.tar`` file to all the nodes, including the Wazuh indexer, Wazuh manager, and Wazuh dashboard nodes. You can use the ``scp`` utility or any other secure file transfer method available in your environment.
+#. Copy the ``wazuh-certificates.tar`` file to all the nodes, including the Wazuh indexer, Wazuh manager, and Wazuh dashboard nodes. You can use the ``scp`` utility or any other secure file transfer method available in your environment. On the node that generated the certificate, and on every other Wazuh indexer node, replace the certificates the package issued with this node's pair. See :ref:`Deploying certificates <wazuh_indexer_deploying_certificates>`.
 
 Wazuh indexer nodes installation
 --------------------------------
@@ -117,7 +150,7 @@ Adding the Wazuh repository
 Installing the Wazuh indexer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Install the Wazuh indexer package.
+#. Install the Wazuh indexer package:
 
    .. tabs::
 
@@ -139,26 +172,62 @@ Installing the Wazuh indexer
 
             # dnf -y install wazuh-indexer|WAZUH_INDEXER_RPM_PKG_INSTALL|
 
+Retrieving the generated credentials
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The installation generates one password per internal user and writes them to ``/etc/wazuh/credentials.env`` readable only by root. On a multi-node cluster, every node generates its own values, and only the values on the node where you run ``indexer-security-init.sh`` work after cluster initialization. Run this command to view the credential:
+
+.. code-block:: console
+
+   # cat /etc/wazuh/credentials.env
+
+The command output looks similar to this:
+
+.. code-block:: none
+   :class: output
+
+   # >>> wazuh generated — do not edit <<<
+   # Editing a value here does not change the deployment.
+   # To rotate, use wazuh-passwords-tool.sh.
+   WAZUH_INDEXER_ADMIN_PASSWORD="..."
+   WAZUH_INDEXER_KIBANASERVER_PASSWORD="..."
+   WAZUH_INDEXER_MANAGER_PASSWORD="..."
+   # >>> end wazuh generated <<<
+
+The Wazuh manager and Wazuh dashboard use this file during installation. Keep it until all components are installed and running, then remove it after securely storing the passwords, as it contains all deployment credentials in plain text:
+
+.. code-block:: console
+
+   # rm /etc/wazuh/credentials.env
+
+Passwords are generated once. Reinstalling, restarting or upgrading the Wazuh indexer does not change them, and neither does removing this file. To change a password after installation, see the :doc:`password management </user-manual/user-administration/password-management>` documentation.
+
+.. _wazuh_indexer_configuring:
+
 Configuring the Wazuh indexer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. include:: /_templates/installations/indexer/common/configure_indexer_nodes.rst
+
+.. _wazuh_indexer_deploying_certificates:
 
 Deploying certificates
 ^^^^^^^^^^^^^^^^^^^^^^
 
 .. note::
 
-   Make sure that a copy of ``wazuh-certificates.tar``, created in the previous stage of the installation process, is placed in your working directory.
+   -  This step applies only if you generated the certificates in advance, as described in `Certificate creation`_. A single-node deployment already has the certificates the package issued.
+
+   -  Make sure that a copy of ``wazuh-certificates.tar``, created in the previous stage of the installation process, is placed in your working directory.
 
 .. include:: /_templates/installations/indexer/common/deploy_certificates.rst
 
 Starting the service
 ^^^^^^^^^^^^^^^^^^^^
 
-  #. Enable and start the Wazuh indexer service.
+#. Enable and start the Wazuh indexer service:
 
-      .. include:: /_templates/installations/indexer/common/enable_indexer.rst
+   .. include:: /_templates/installations/indexer/common/enable_indexer.rst
 
 Repeat this stage of the installation process for every Wazuh indexer node in your multi-node cluster. Then proceed with initializing your single-node or multi-node cluster in the next stage.
 
@@ -167,24 +236,32 @@ Cluster initialization
 
 The final stage of installing the Wazuh indexer single-node or multi-node cluster consists of running the security admin script.
 
-#. Run the Wazuh indexer ``indexer-security-init.sh`` script on `any` Wazuh indexer node to load the new certificates information and start the single-node or multi-node cluster.
+.. note::
+
+   You only have to initialize the cluster once, there is no need to run this command on every node.
+
+#. Run the Wazuh indexer ``indexer-security-init.sh`` script on *any* Wazuh indexer node to load the new certificates information and start the single-node or multi-node cluster:
 
    .. code-block:: console
 
       # /usr/share/wazuh-indexer/bin/indexer-security-init.sh
 
-   .. note::
-
-      You only have to initialize the cluster once, there is no need to run this command on every node.
-
 Testing the cluster installation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Run the following commands to confirm that the installation is successful. Replace ``<WAZUH_INDEXER_IP_ADDRESS>``  with the IP address of the Wazuh indexer and enter admin as the password when prompted:
+#. On the node where you ran ``indexer-security-init.sh``, run the following command to view the ``WAZUH_INDEXER_ADMIN_PASSWORD`` value. Only this node's value works on a multi-node cluster.
+
+   .. code-block:: console
+
+      # grep WAZUH_INDEXER_ADMIN_PASSWORD /etc/wazuh/credentials.env
+
+#. Run the following commands to confirm that the installation is successful. Replace ``<WAZUH_INDEXER_IP_ADDRESS>`` with the IP address of the Wazuh indexer. When prompted, enter the ``WAZUH_INDEXER_ADMIN_PASSWORD`` value from step 1, without the quotes around it:
 
    .. code-block:: console
 
       # curl -k -u admin https://<WAZUH_INDEXER_IP_ADDRESS>:9200
+
+   The command output looks similar to this:
 
    .. code-block:: none
       :class: output accordion-output
@@ -192,13 +269,13 @@ Testing the cluster installation
       {
         "name" : "indexer",
         "cluster_name" : "wazuh-cluster",
-        "cluster_uuid" : "2iYNKDCzR1ShJvSN-2vfOQ",
+        "cluster_uuid" : "89AmEmB8QImyIJFFxkYaBQ",
         "version" : {
           "distribution" : "opensearch",
           "number" : "3.6.0",
-          "build_type" : "deb",
-          "build_hash" : "5917bc144ef6b8971cb17e53e475e306954c8fc9",
-          "build_date" : "2026-07-29T01:44:46.892912988Z",
+          "build_type" : "rpm",
+          "build_hash" : "1b0a897cd71105595b450b48b591581865f8b46b",
+          "build_date" : "2026-10-01T01:51:00.589932681Z",
           "build_snapshot" : false,
           "lucene_version" : "10.4.0",
           "minimum_wire_compatibility_version" : "2.19.0",
@@ -207,7 +284,7 @@ Testing the cluster installation
         "tagline" : "The OpenSearch Project: https://opensearch.org/"
       }
 
-#. Run the following command to check if the cluster is working correctly. Replace ``<WAZUH_INDEXER_IP_ADDRESS>``  with the IP address of the Wazuh indexer and enter admin as the password when prompted:
+#. Run the following command to check if the cluster is working correctly. Replace ``<WAZUH_INDEXER_IP_ADDRESS>`` with the IP address of the Wazuh indexer. When prompted, enter the ``WAZUH_INDEXER_ADMIN_PASSWORD`` value from step 1, without the quotes around it:
 
    .. code-block:: console
 
@@ -218,65 +295,23 @@ Testing the cluster installation
    .. code-block:: none
       :class: output
 
-      ip              heap.percent ram.percent cpu load_1m load_5m load_15m node.role node.roles                               cluster_manager name
-      192.168.107.240           19          94   4    0.22    0.21     0.20 dimr      data,ingest,master,remote_cluster_client *               node-1
+      ip             heap.percent ram.percent cpu load_1m load_5m load_15m node.role node.roles                                        cluster_manager name
+      192.168.33.135           30          57  16    1.50    1.30     0.69 dimr      cluster_manager,data,ingest,remote_cluster_client *               indexer
 
 Memory locking
 --------------
 
-When the system is swapping memory, the Wazuh indexer may not work as expected. Therefore, it is important for the health of the Wazuh indexer node that none of the Java Virtual Machine (JVM) is ever swapped out to disk. To prevent any Wazuh indexer memory from being swapped out, configure the Wazuh indexer to lock the process address space into RAM as follows.
+When the system is swapping memory, the Wazuh indexer may not work as expected. Therefore, it is important for the health of the Wazuh indexer node that none of the Java Virtual Machine (JVM) is ever swapped out to disk. To prevent any Wazuh indexer memory from being swapped out, the Wazuh indexer locks its process address space into RAM. The package enables memory locking by default, so you only set the heap size and check the result.
 
 .. note::
-   
+
    You require root user privileges to run the commands described below.
 
-#. Ensure the following line is present in the ``/etc/wazuh-indexer/opensearch.yml`` configuration file on the Wazuh indexer to enable memory locking and add it if missing:
+#. The Wazuh indexer package already enables memory locking: ``/etc/wazuh-indexer/opensearch.yml`` ships ``bootstrap.memory_lock: true``, and the service sets an unlimited locked-memory limit. No change is needed.
 
-   .. code-block:: yaml
+#. Edit the ``/etc/wazuh-indexer/jvm.options`` file and change the JVM flags. Set a Wazuh indexer heap size value to limit memory usage. JVM heap limits prevent the ``OutOfMemory`` exception if the Wazuh indexer tries to allocate more memory than is available while memory locking is enabled. The recommended value is half of the system RAM. For example, set the size as follows for a system with 8 GB of RAM.
 
-      bootstrap.memory_lock: true
-
-#. Modify the limit of system resources. Configuring system settings depends on the operating system of the Wazuh indexer installation.
-
-   .. tabs::
-
-      .. group-tab:: Systemd
-
-         #. Create a new directory for the file that specifies the system limits:
-
-            .. code-block:: console
-
-               # mkdir -p /etc/systemd/system/wazuh-indexer.service.d/
-
-         #. Run the following command to create the ``wazuh-indexer.conf`` file in the newly created directory with the new system limit added:
-
-            .. code-block:: console
-
-               # cat > /etc/systemd/system/wazuh-indexer.service.d/wazuh-indexer.conf << EOF
-               [Service]
-               LimitMEMLOCK=infinity
-               EOF
-
-      .. group-tab:: SysV init
-
-         #. Create a new directory for the file that specifies the system limits:
-
-            .. code-block:: console
-
-               # mkdir -p /etc/init.d/wazuh-indexer.service.d/
-
-         #. Run the following command to create the ``wazuh-indexer.conf`` file in the newly created directory with the new system limit added:
-
-            .. code-block:: console
-
-               # cat > /etc/init.d/wazuh-indexer.service.d/wazuh-indexer.conf << EOF
-               [Service]
-               LimitMEMLOCK=infinity
-               EOF
-
-#. Edit the ``/etc/wazuh-indexer/jvm.options`` file and change the JVM flags. Set a Wazuh indexer heap size value to limit memory usage. JVM heap limits prevent the ``OutOfMemory`` exception if the Wazuh indexer tries to allocate more memory than is available due to the configuration in the previous step. The recommended value is half of the system RAM. For example, set the size as follows for a system with 8 GB of RAM.
-
-   .. code-blocK:: ini
+   .. code-block:: ini
 
       -Xms4g
       -Xmx4g
@@ -292,16 +327,27 @@ When the system is swapping memory, the Wazuh indexer may not work as expected. 
 
 #. Restart the Wazuh indexer service:
 
+   .. tabs::
+
+      .. group-tab:: Systemd
+
+         .. code-block:: console
+
+            # systemctl restart wazuh-indexer
+
+      .. group-tab:: SysV Init
+
+         .. code-block:: console
+
+            # service wazuh-indexer restart
+
+#. Run the following command to check that the ``mlockall`` value is ``true`` on every node. Replace ``<WAZUH_INDEXER_IP_ADDRESS>`` with the IP address of a Wazuh indexer node. When prompted, enter the ``WAZUH_INDEXER_ADMIN_PASSWORD`` value from the node where you ran ``indexer-security-init.sh``, without the quotes around it:
+
    .. code-block:: console
 
-      # systemctl daemon-reload
-      # systemctl restart wazuh-indexer
+      # curl -k -u admin "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_nodes?filter_path=**.mlockall&pretty"
 
-#. Verify that the setting was changed successfully, by running the following command to check that ``mlockall`` value is set to true:
-
-   .. code-block:: console
-
-      # curl -k -u <INDEXER_USERNAME>:<INDEXER_PASSWORD> "https://<INDEXER_IP_ADDRESS>:9200/_nodes?filter_path=**.mlockall&pretty"
+   The command output looks similar to this:
 
    .. code-block:: json
       :class: output
@@ -317,7 +363,7 @@ When the system is swapping memory, the Wazuh indexer may not work as expected. 
         }
       }
 
-Repeat this stage of the installation process on every Wazuh indexer node in your multi node cluster. This ensures that memory locking is correctly configured across all Wazuh indexer nodes.
+Repeat the heap size and restart steps on every Wazuh indexer node in your multi-node cluster. The ``mlockall`` check lists every node, so you run it once.
 
 Disable Wazuh updates
 ---------------------

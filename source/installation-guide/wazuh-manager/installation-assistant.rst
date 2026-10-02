@@ -11,26 +11,37 @@ Install the Wazuh manager as a single-node or multi-node cluster on a 64-bit (x8
 Wazuh manager cluster installation
 ----------------------------------
 
-#. Download the Wazuh installation assistant. Skip this step if you performed the initial configuration on the same server and the Wazuh installation assistant is already in your working directory:
+#. Download the Wazuh installation assistant. Skip this step if the Wazuh installation assistant is already in your working directory:
 
    .. code-block:: console
 
-       # curl -sO https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh
+      # curl -sO https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh
 
-#. Run the Wazuh installation assistant with the option ``--wazuh-manager`` followed by the node name to install the Wazuh manager. The node name must be the same one used in config.yml for the initial configuration, for example, ``manager``:
+#. Run the Wazuh installation assistant with the option ``--wazuh-manager`` followed by the node name to install the Wazuh manager. The node name must be the same one used in ``config.yml`` for the initial configuration, for example, ``manager``:
 
-   .. note:: Make sure that a copy of the ``wazuh-install-files.tar``, created during the initial configuration step, is placed in your working directory.
+   .. note::
+
+      Make sure that a copy of the ``wazuh-install-files.tar``, created during the initial configuration step, is placed in your working directory.
 
    .. code-block:: console
 
-       # bash wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh --wazuh-manager manager -id -d pre-release
+      # bash wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh --wazuh-manager manager -id -d pre-release
 
+   .. note::
 
-Your Wazuh manager is now successfully installed. 
+      This node's agent listener certificate was created at ``--generate-config-files``, with the other certificates, so you can't add ``-as`` at this step. Add every address that agents use, such as a load balancer, with ``--generate-config-files -as <AGENT_ADDRESS>``.
 
-- If you want a Wazuh manager single-node cluster, everything is set and you can proceed directly with :doc:`../wazuh-dashboard/installation-assistant`.
+   To list the addresses in this node's agent listener certificate, run:
 
-- If you want a Wazuh manager multi-node cluster, repeat this process on every Wazuh manager node.
+   .. code-block:: console
+
+      # openssl x509 -in /var/wazuh-manager/etc/certs/remoted.pem -noout -ext subjectAltName
+
+Your Wazuh manager is now successfully installed.
+
+-  If you want a Wazuh manager single-node cluster, everything is set and you can proceed directly with :doc:`../wazuh-dashboard/installation-assistant`.
+
+-  If you want a Wazuh manager multi-node cluster, repeat this process on every Wazuh manager node.
 
 Disable Wazuh updates
 ---------------------
@@ -39,5 +50,5 @@ Disable Wazuh updates
 
 Next steps
 ----------
-  
-The Wazuh manager installation is now complete and you can proceed with installing the Wazuh dashboard. To perform this action, see the :doc:`../wazuh-dashboard/installation-assistant` section.  
+
+The Wazuh manager installation is now complete and you can proceed with installing the Wazuh dashboard. To perform this action, see the :doc:`../wazuh-dashboard/installation-assistant` section.
