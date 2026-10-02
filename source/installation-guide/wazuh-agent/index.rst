@@ -37,6 +37,7 @@ To install a Wazuh agent, select your operating system and follow the instructio
         <p class="link-boxes-label">Linux</p>
 
 .. image:: /images/installation/linux.png
+      :alt: Linux penguin mascot logo
       :align: center
 
 .. raw:: html
@@ -48,6 +49,7 @@ To install a Wazuh agent, select your operating system and follow the instructio
         <p class="link-boxes-label">Windows</p>
 
 .. image:: /images/installation/windows-logo.png
+      :alt: Windows logo
       :align: center
 
 .. raw:: html
@@ -59,6 +61,7 @@ To install a Wazuh agent, select your operating system and follow the instructio
         <p class="link-boxes-label">macOS</p>
 
 .. image:: /images/installation/macOS-logo.png
+      :alt: macOS Apple logo
       :align: center
 
 .. raw:: html

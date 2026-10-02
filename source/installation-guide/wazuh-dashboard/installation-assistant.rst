@@ -95,6 +95,7 @@ All the Wazuh central components are successfully installed.
         <p class="link-boxes-label">Install the Wazuh indexer</p>
 
 .. image:: ../../images/installation/Indexer-Circle.png
+     :alt: Wazuh indexer logo
      :align: center
      :height: 61px
 
@@ -108,6 +109,7 @@ All the Wazuh central components are successfully installed.
         <p class="link-boxes-label">Install the Wazuh manager</p>
 
 .. image:: ../../images/installation/Server-Circle.png
+     :alt: Wazuh manager logo
      :align: center
      :height: 61px
 
@@ -121,6 +123,7 @@ All the Wazuh central components are successfully installed.
         <p class="link-boxes-label">Install the Wazuh dashboard</p>
 
 .. image:: ../../images/installation/Dashboard-Circle.png
+     :alt: Wazuh dashboard logo
      :align: center
      :height: 61px
 
