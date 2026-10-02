@@ -39,7 +39,7 @@ Uninstalling the Wazuh dashboard
 
 Follow the step below to uninstall the Wazuh dashboard using your package manager.
 
-#. Remove the Wazuh dashboard installation.
+#. Remove the Wazuh dashboard installation:
 
    .. tabs::
 
@@ -74,7 +74,7 @@ Uninstalling the Wazuh manager
 
 Follow these steps to uninstall the Wazuh manager using your package manager.
 
-#. Remove the Wazuh manager installation.
+#. Remove the Wazuh manager installation:
 
    .. tabs::
 
@@ -82,6 +82,7 @@ Follow these steps to uninstall the Wazuh manager using your package manager.
 
          .. code-block:: console
 
+            # systemctl disable wazuh-manager
             # apt-get remove --purge wazuh-manager -y
 
       .. group-tab:: Yum
@@ -105,7 +106,7 @@ Uninstalling the Wazuh indexer
 
 Follow the step below to uninstall the Wazuh indexer using your package manager.
 
-#. Remove the Wazuh indexer installation.
+#. Remove the Wazuh indexer installation:
 
    .. tabs::
 
@@ -116,6 +117,10 @@ Follow the step below to uninstall the Wazuh indexer using your package manager.
             # apt-get remove --purge wazuh-indexer -y
             # rm -rf /var/lib/wazuh-indexer/
             # rm -rf /etc/wazuh-indexer/
+            # rm -rf /var/log/wazuh-indexer/
+            # rm -rf /etc/systemd/system/wazuh-indexer.service.d/
+            # systemctl daemon-reload
+            # userdel wazuh-indexer
 
       .. group-tab:: Yum
 
@@ -134,3 +139,18 @@ Follow the step below to uninstall the Wazuh indexer using your package manager.
             # rm -rf /var/lib/wazuh-indexer/
             # rm -rf /usr/share/wazuh-indexer/
             # rm -rf /etc/wazuh-indexer/
+
+Removing the shared directory
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The Wazuh central components share the ``/etc/wazuh/`` directory. While they are installed, ``credentials.env`` holds the generated passwords and ``ca/`` holds the root CA and its private key. Purging a component removes only its own entries, and purging the Wazuh indexer never removes ``credentials.env``, so the directory can remain after the last component is gone.
+
+After you uninstall the last Wazuh central component on a host, remove the directory:
+
+.. code-block:: console
+
+   # rm -rf /etc/wazuh
+
+.. note::
+
+   Don't run this command while a Wazuh central component is still installed on the host. Each component reads this directory every time it starts.

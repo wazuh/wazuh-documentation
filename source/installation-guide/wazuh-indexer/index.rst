@@ -82,7 +82,7 @@ Hardware recommendations
 
 You can install the Wazuh indexer as a single-node or multi-node cluster.
 
--  Hardware recommendations for each node
+-  Hardware recommendations for each node:
 
    +-------------------------+-------------------------+-------------------------------+
    |                         |  Minimum                |   Recommended                 |
@@ -106,6 +106,21 @@ You can install the Wazuh indexer as a single-node or multi-node cluster.
    +-------------------------------------------------+-----+---------------------------+
 
    For example, for an environment with 80 workstations, 10 servers, and 10 network devices, the storage needed on the Wazuh indexer server for 90 days of events is 231 GB.
+
+.. _wazuh_indexer_required_ports:
+
+Required ports
+^^^^^^^^^^^^^^
+
+Make sure that your firewall allows the following traffic to every Wazuh indexer node:
+
++---------------+---------------------------------------------------------------+------------------------+
+| Port          | From                                                          | Purpose                |
++===============+===============================================================+========================+
+| 9200/TCP      | Wazuh manager, Wazuh dashboard, and other Wazuh indexer nodes | Wazuh indexer REST API |
++---------------+---------------------------------------------------------------+------------------------+
+| 9300-9400/TCP | Other Wazuh indexer nodes                                     | Cluster communication  |
++---------------+---------------------------------------------------------------+------------------------+
 
 .. toctree::
    :hidden:

@@ -1,11 +1,5 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
-#. Install the following packages if missing:
-
-   .. code-block:: console
-
-     # apt-get install gnupg apt-transport-https curl
-
 #. Install the GPG key:
 
    .. code-block:: console
