@@ -54,11 +54,19 @@ You can install the Wazuh central components on 64-bit Linux systems using Intel
 Installing Wazuh
 ----------------
 
-#. Download and run the installation assistant. The installation assistant deploys the Wazuh central components and generates access credentials.
+#. Download and run the installation assistant to deploy the Wazuh central components and generate the credentials required to access the Wazuh dashboard.
 
-   .. code-block:: console
+   -  **Default address:** If the Wazuh agents connect using the Wazuh manager's configured address, such as a private IP address or hostname, no additional parameters are required.
 
-      # wget https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh && sudo bash ./wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -a -id -d pre-release
+      .. code-block:: console
+
+         # wget https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh && sudo bash ./wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -a -id -d pre-release
+
+   -  **Alternative address:** If the Wazuh agents connect through an address other than the Wazuh manager's configured address, such as a public IP address, NAT address, or load balancer, specify it with ``-as|--agent-san <ADDRESS>``. Replace ``<ADDRESS>`` with the alternative address, such as the public IP or load balancer.
+
+      .. code-block:: console
+
+         # wget https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh && sudo bash ./wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -a -id -d pre-release -as <ADDRESS>
 
    Once the assistant finishes the installation, the output shows the access credentials and a message confirming successful installation.
 
