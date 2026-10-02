@@ -63,7 +63,7 @@ The Wazuh agent runs on the endpoint you want to monitor and communicates with t
                :title: Windows agent manager
                :alt: Windows agent manager
 
-         #. Go to **Manage** > **Enroll** and paste the enrollment key generated in :ref:`generate the enrollment token <generate_enrollment_token>`.
+         #. Go to **Manage** > **Enroll** and paste the enrollment token from :ref:`generate the enrollment token <generate_enrollment_token>`.
 
          The installation process is now complete and the Wazuh agent is successfully installed on your Windows endpoint.
 
