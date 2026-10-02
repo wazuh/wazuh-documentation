@@ -97,12 +97,6 @@ Then follow the steps on the Wazuh dashboard to deploy a new agent.
    :title: Deploy a new agent instructions
    :alt: Deploy a new agent instructions
 
-.. thumbnail:: /images/installation/deploy-new-agent-from-ui-options-3.png
-   :align: center
-   :width: 80%
-   :title: Deploy a new agent instructions
-   :alt: Deploy a new agent instructions
-
 .. _agent-installation-requirements:
 
 Prerequisite
