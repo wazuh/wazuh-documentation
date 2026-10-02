@@ -17,7 +17,7 @@ All notable changes to this project will be documented in this file.
 - Added the *Security configuration assessment* use case to the *Proof of concept guide*. ([#9777](https://github.com/wazuh/wazuh-documentation/pull/9777))
 - Added the *Network IDS integration* use case to the *Proof of concept guide*. ([#9831](https://github.com/wazuh/wazuh-documentation/pull/9831)) ([#10228](https://github.com/wazuh/wazuh-documentation/pull/10228))
 - Added the *Detecting a Cross-Site Scripting (XSS) attack* use case to the *Proof of concept guide*. ([#9916](https://github.com/wazuh/wazuh-documentation/pull/9916))
-- Added the *Wazuh CTI* documentation as a new top-level section. ([#9989](https://github.com/wazuh/wazuh-documentation/pull/9989)) ([#9990](https://github.com/wazuh/wazuh-documentation/pull/9990))
+- Added the *Wazuh CTI* documentation as a new top-level section. ([#9989](https://github.com/wazuh/wazuh-documentation/pull/9989)) ([#9990](https://github.com/wazuh/wazuh-documentation/pull/9990)) ([#10250](https://github.com/wazuh/wazuh-documentation/pull/10250))
 - Added the *Incident response* dashboard section, the *Email* notification channel, and the *AI Assistant* configuration documentation to the *Wazuh dashboard* section. ([#10033](https://github.com/wazuh/wazuh-documentation/pull/10033))
 - Added the *Installation Assistant* and *Certs tool* documentation to the *Reference* section. ([#10047](https://github.com/wazuh/wazuh-documentation/pull/10047))
 - Added a note to the *Regulatory compliance* index page stating that the rule and control mappings are indicative and require an independent qualified assessor for formal certification. ([#10191](https://github.com/wazuh/wazuh-documentation/pull/10191))
