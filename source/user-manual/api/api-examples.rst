@@ -43,11 +43,11 @@ The command returns output similar to the following example:
 POST
 ^^^^
 
-The following POST request to the Wazuh server API creates a new user on the Wazuh server by specifying the username ``test_user`` and password ``Test_user1`` in the request body.
+The following POST request to the Wazuh server API creates a new user on the Wazuh server by specifying the username ``test_user`` and password ``Test_user_1!`` in the request body.
 
 .. code-block:: console
 
-   # curl -k -X POST "https://localhost:55000/security/users" -H  "Authorization: Bearer $TOKEN" -H  "Content-Type: application/json" -d "{\"username\":\"test_user\",\"password\":\"Test_user1\"}"
+   # curl -k -X POST "https://localhost:55000/security/users" -H  "Authorization: Bearer $TOKEN" -H  "Content-Type: application/json" -d "{\"username\":\"test_user\",\"password\":\"Test_user_1!\"}"
 
 .. code-block:: none
    :class: output
