@@ -5,6 +5,8 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- **Post-release**: Added a custom IsMalicious indicator-enrichment example with a downloadable script, JSON rules, and synthetic tests. ([#10253](https://github.com/wazuh/wazuh-documentation/issues/10253))
+
 - **Post-release**: Added a note to the *Regulatory compliance* documentation stating that the rule and control mappings are indicative and require an independent qualified assessor for formal certification. ([#10202](https://github.com/wazuh/wazuh-documentation/pull/10202))
 
 ### Fixed
