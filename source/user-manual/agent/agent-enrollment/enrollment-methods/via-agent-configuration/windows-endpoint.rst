@@ -104,7 +104,7 @@ The Wazuh agent is a 32-bit application. Its installation directory depends on t
       -  ``<agent_name>EXAMPLE_NAME</agent_name>``: Specifies the name that the Wazuh agent uses during enrollment. If you do not configure this setting, the Wazuh agent uses the endpoint hostname.
       -  ``<groups>GROUP1,GROUP2,GROUP3</groups>``: Specifies the groups that the Wazuh agent joins during enrollment. An agent group is a collection of Wazuh agents that share the same configuration. The Wazuh manager pushes configuration settings to Wazuh agents that belong to the same group. Enrollment fails if you specify a group that does not exist. Create the required group on the Wazuh manager before you use the ``<groups>`` setting. For more information, see :doc:`Grouping agents </user-manual/agent/agent-management/grouping-agents>`.
 
-      More optional enrollment parameters and their usage can be found in the :doc:`Wazuh agent configuration reference </user-manual/reference/ossec-conf/agent>`.
+      More optional enrollment parameters and their usage can be found in the :ref:`Wazuh agent configuration reference <reference_ossec_agent_enrollment>`.
 
 #. Restart the Wazuh agent to make the changes effective.
 

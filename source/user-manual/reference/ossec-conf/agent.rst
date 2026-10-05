@@ -171,6 +171,8 @@ DEPRECATED: This option is parsed but ignored. Encryption method is hard-coded t
 | **Behavior**         | Always uses AES regardless of configured value    |
 +----------------------+---------------------------------------------------+
 
+.. _reference_ossec_agent_enrollment:
+
 enrollment
 ^^^^^^^^^^^
 
