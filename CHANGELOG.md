@@ -3,7 +3,13 @@ All notable changes to this project will be documented in this file.
 
 ## [v4.14.9]
 
+### Added
+
 - Added the `agent.tcp_keepidle`, `agent.tcp_keepintvl`, `agent.tcp_keepcnt`, and `agent.send_timeout` internal options to the *Internal configuration* reference documentation. ([#10029](https://github.com/wazuh/wazuh-documentation/pull/10029))
+
+### Changed
+
+- Updated the *Wazuh server* disk space requirements in the *Installation guide* to include the vulnerability detection database. ([#10267](https://github.com/wazuh/wazuh-documentation/pull/10267))
 
 ## [v4.14.8]
 
