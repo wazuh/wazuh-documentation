@@ -65,6 +65,6 @@ The Wazuh agent runs on the endpoint you want to monitor and communicates with t
 
          #. Go to **Manage** > **Enroll** and paste the enrollment token from :ref:`generate the enrollment token <generate_enrollment_token>`.
 
-         The installation process is now complete and the Wazuh agent is successfully installed on your Windows endpoint.
+         The installation process is now complete, and the Wazuh agent is successfully installed on your Windows endpoint.
 
 By default, all agent files are stored in ``C:\Program Files (x86)\ossec-agent`` after the installation.

@@ -27,6 +27,6 @@ If you are running a Wazuh indexer cluster infrastructure, add a ``<host>`` entr
      <host>https://10.0.0.2:9200</host>
    </hosts>
 
-The Wazuh manager prioritizes reporting to the first Wazuh indexer node in the list. It switches to the next node in case it is not available.
+The Wazuh manager prioritizes reporting to the first Wazuh indexer node in the list. It switches to the next node if it is unavailable.
 
 .. End of include file

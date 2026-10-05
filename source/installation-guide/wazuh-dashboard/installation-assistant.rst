@@ -41,7 +41,7 @@ Wazuh dashboard installation
 
       INFO: Installation finished.
 
-   You now have installed and configured Wazuh.
+   You have now installed and configured the Wazuh dashboard.
 
 #. Get the ``<WAZUH_INDEXER_ADMIN_PASSWORD>``. On a Wazuh indexer node, run the following command. The quotes around the value are not part of the password.
 

@@ -91,12 +91,6 @@ Then follow the steps on the Wazuh dashboard to deploy a new agent.
    :title: Deploy a new agent instructions
    :alt: Deploy a new agent instructions
 
-.. thumbnail:: /images/installation/deploy-new-agent-from-ui-options-2.png
-   :align: center
-   :width: 80%
-   :title: Deploy a new agent instructions
-   :alt: Deploy a new agent instructions
-
 .. _agent-installation-requirements:
 
 Prerequisite
@@ -111,7 +105,7 @@ Generate the enrollment token
 
 Complete the following steps to generate the enrollment token.
 
-#. Run the following command to create an enrollment token. Replace ``<MANAGER_ADDRESS>`` with the address that agents use to connect to the Wazuh manager. This address must match an address configured for the manager certificate during installation, that is, either the address defined in ``config.yml`` or an address specified with ``-as|--agent-san``.
+#. Run the following command to create an enrollment token. Replace ``<MANAGER_ADDRESS>`` with the address that agents use to connect to the Wazuh manager. This address must match an address configured for the manager certificate during installation, that is, either the address defined in ``config.yml`` or an address specified with ``-as|--agent-san``. In a cluster, you create the token on the master node, and the address must be in the master node's agent listener certificate.
 
    .. code-block:: console
 
