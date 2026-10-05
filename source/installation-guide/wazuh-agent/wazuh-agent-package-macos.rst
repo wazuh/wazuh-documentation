@@ -54,7 +54,7 @@ The Wazuh agent runs on the endpoint you want to monitor and communicates with t
 
                # launchctl bootstrap system /Library/LaunchDaemons/com.wazuh.agent.plist
 
-         The installation process is now complete, and the Wazuh agent is now successfully running on your macOS endpoint.
+         The installation process is now complete and the Wazuh agent is now successfully running on your macOS endpoint.
 
       .. group-tab:: GUI
 

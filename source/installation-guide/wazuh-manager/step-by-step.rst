@@ -150,7 +150,7 @@ Starting the Wazuh manager
 
       # grep 'indexer is reachable' /var/wazuh-manager/logs/wazuh-manager.log | tail -1
 
-Your Wazuh manager node is now successfully installed. Repeat this stage of the installation process for every Wazuh manager node in your Wazuh cluster, then proceed with configuring the Wazuh cluster. If you want a Wazuh manager single-node cluster, everything is set and you can proceed directly with :doc:`../wazuh-dashboard/step-by-step`.
+Your Wazuh manager node is now successfully installed. Repeat this stage of the installation process for every Wazuh manager node in your Wazuh cluster, then proceed with configuring the Wazuh cluster. If you want a Wazuh manager single-node cluster, everything is set, and you can proceed directly with :doc:`../wazuh-dashboard/step-by-step`.
 
 Cluster configuration for multi-node deployment
 -----------------------------------------------
