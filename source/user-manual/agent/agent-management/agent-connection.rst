@@ -155,7 +155,7 @@ The Wazuh agent sends short HTTPS requests to the Wazuh manager instead of keepi
 
          # ss -tan '( dport = :1517 )'
 
-      Output
+      The command output looks similar to this:
 
       .. code-block:: none
          :class: output
@@ -168,7 +168,7 @@ The Wazuh agent sends short HTTPS requests to the Wazuh manager instead of keepi
 
          # nc -zv <WAZUH_MANAGER_IP_ADDRESS> 1517
 
-      Output
+      The command output looks similar to this:
 
       .. code-block:: none
          :class: output
@@ -181,7 +181,7 @@ The Wazuh agent sends short HTTPS requests to the Wazuh manager instead of keepi
 
          > Get-NetTCPConnection -RemotePort 1517
 
-      Output
+      The command output looks similar to this:
 
       .. code-block:: none
          :class: output
@@ -195,7 +195,7 @@ The Wazuh agent sends short HTTPS requests to the Wazuh manager instead of keepi
 
          > Test-NetConnection <WAZUH_MANAGER_IP_ADDRESS> -Port 1517
 
-      Output
+      The command output looks similar to this:
 
       .. code-block:: none
          :class: output
@@ -210,7 +210,7 @@ The Wazuh agent sends short HTTPS requests to the Wazuh manager instead of keepi
 
          # netstat -an -p tcp | grep '\.1517 '
 
-      Output
+      The command output looks similar to this:
 
       .. code-block:: none
          :class: output
@@ -222,7 +222,7 @@ The Wazuh agent sends short HTTPS requests to the Wazuh manager instead of keepi
 
          # nc -zv <WAZUH_MANAGER_IP_ADDRESS> 1517
 
-      Output
+      The command output looks similar to this:
 
       .. code-block:: none
          :class: output

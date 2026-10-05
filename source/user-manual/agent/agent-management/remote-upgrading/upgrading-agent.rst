@@ -41,7 +41,7 @@ To upgrade agents using the command line, use the :doc:`/var/wazuh-manager/bin/a
 
       # /var/wazuh-manager/bin/agent_upgrade -l
 
-   Output
+   The command output looks similar to this:
 
    .. code-block:: none
       :class: output
@@ -57,7 +57,7 @@ To upgrade agents using the command line, use the :doc:`/var/wazuh-manager/bin/a
 
       # /var/wazuh-manager/bin/agent_upgrade -a 008
 
-   Output
+   The command output looks similar to this:
 
    .. code-block:: none
       :class: output
@@ -71,7 +71,7 @@ To upgrade agents using the command line, use the :doc:`/var/wazuh-manager/bin/a
 
       # /var/wazuh-manager/bin/agent_upgrade -a 001 002
 
-   Output
+   The command output looks similar to this:
 
    .. code-block:: none
       :class: output
@@ -85,7 +85,7 @@ To upgrade agents using the command line, use the :doc:`/var/wazuh-manager/bin/a
 
       # /var/wazuh-manager/bin/agent_upgrade -l
 
-   Output
+   The command output looks similar to this:
 
    .. code-block:: none
       :class: output
@@ -103,7 +103,7 @@ Using the RESTful API
 
       # curl -k -X GET "https://<WAZUH_MANAGER_IP>:55000/agents/outdated?pretty=true" -H  "Authorization: Bearer $TOKEN"
 
-   Output:
+   The command output looks similar to this:
 
    .. code-block:: none
       :class: output
@@ -148,7 +148,7 @@ Using the RESTful API
 
       # curl -k -X PUT "https://<WAZUH_MANAGER_IP>:55000/agents/upgrade?agents_list=008&pretty=true" -H  "Authorization: Bearer $TOKEN"
 
-   Output
+   The command output looks similar to this:
 
    .. code-block:: none
       :class: output
@@ -181,7 +181,7 @@ Using the RESTful API
 
       # curl -k -X GET "https://<WAZUH_MANAGER_IP>:55000/agents?agents_list=008&pretty=true&select=version" -H  "Authorization: Bearer $TOKEN"
 
-   Output
+   The command output looks similar to this:
 
    .. code-block:: json
       :class: output
