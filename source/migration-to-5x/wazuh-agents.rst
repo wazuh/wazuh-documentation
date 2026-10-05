@@ -97,15 +97,15 @@ Wazuh 5.x manager
 Wazuh agent
 ~~~~~~~~~~~
 
-#. Update the manager address in the Wazuh agent configuration so that the Wazuh agent connects to the Wazuh 5.x manager. Add the Wazuh manager IP address or fully qualified domain name (FQDN) to the ``<endpoint>`` setting in the ``<agent><manager>`` section.
+#. Update the manager address in the Wazuh agent configuration so that the Wazuh agent connects to the Wazuh 5.x manager. Add the Wazuh manager IP address or fully qualified domain name (FQDN) to the ``<address>`` setting in the ``<client><server>`` section.
 
    .. code-block:: xml
 
-      <agent>
-        <manager>
-          <endpoint><WAZUH_MANAGER_IP></endpoint>
-        </manager>
-      </agent>
+      <client>
+        <server>
+          <address><WAZUH_MANAGER_IP></address>
+        </server>
+      </client>
 
    Replace ``<WAZUH_MANAGER_IP>`` with the IP address of the Wazuh 5.x manager.
 
