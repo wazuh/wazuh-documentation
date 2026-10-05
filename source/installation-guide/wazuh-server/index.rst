@@ -96,7 +96,7 @@ You can install the Wazuh server as a single-node or multi-node cluster.
 
 - Disk space requirements
 
-  The amount of data depends on the generated alerts per second (APS). This table details the estimated disk space needed per agent to store 90 days of alerts on a Wazuh server, depending on the type of monitored endpoints.
+  The disk space the Wazuh server needs covers the vulnerability detection database and alert storage. The space for alerts depends on the generated alerts per second (APS). This table details the estimated disk space needed per agent to store 90 days of alerts on a Wazuh server, depending on the type of monitored endpoints.
 
   +-------------------------------------------------+-----+-----------------------------+
   | Monitored endpoints                             | APS || Storage in Wazuh Server    | 
@@ -109,7 +109,11 @@ You can install the Wazuh server as a single-node or multi-node cluster.
   | Network devices                                 | 0.5 |    0.2                      |
   +-------------------------------------------------+-----+-----------------------------+
 
-  For example, for an environment with 80 workstations, 10 servers, and 10 network devices, the storage needed on the Wazuh server for 90 days of alerts is 6 GB.
+  For example, for an environment with 80 workstations, 10 servers, and 10 network devices, the storage needed on the Wazuh server for 90 days of alerts is 6 GB. Adding 11 GB for the vulnerability detection database brings the total to 17 GB.
+
+  .. note::
+
+     The Wazuh manager ships the vulnerability detection database compressed and unpacks it on its first start. During this process, the compressed file, a temporary archive in ``/var/ossec/tmp``, and the extracted database in ``/var/ossec/queue/vd`` exist at the same time. Make sure the volume that holds ``/var/ossec`` has at least 20 GB of free space before you start the Wazuh manager for the first time. Once unpacking finishes, the temporary files are removed and the database takes about 11 GB.
 
 
 
