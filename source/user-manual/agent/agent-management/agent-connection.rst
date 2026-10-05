@@ -86,6 +86,8 @@ Output
      "error": 0
    }
 
+.. _reading_wazuh_agentd_state_file:
+
 Reading the local wazuh-agentd.state file
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -93,7 +95,7 @@ You can read the ``/var/ossec/var/run/wazuh-agentd.state`` file found in the end
 
 -  ``pending``: Waiting for acknowledgement from the Wazuh manager about the connection established.
 -  ``disconnected``: No acknowledgement signal received in the last 60 seconds or lost connection.
--  ``connected``: Acknowledgement about the connection established received from the Wazuh manager.
+-  ``connected``: The Wazuh agent connected to the Wazuh manager in the last 10 seconds.
 
 To check the current status and verify the connection of the Wazuh agent to the Wazuh manager, run the following command on the endpoint:
 
@@ -141,9 +143,9 @@ To check the current status and verify the connection of the Wazuh agent to the 
 Checking network communication
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Agent communication with the Wazuh manager requires outbound connectivity from the Wazuh agent to the Wazuh manager. It uses the port ``1514/TCP`` by default.
+Wazuh agent communication with the Wazuh manager requires outbound connectivity from the Wazuh agent to the Wazuh manager on port ``1517/TCP`` (HTTPS) by default. Wazuh 4.x agents use port ``1514/TCP`` instead.
 
-Run the following commands on the Wazuh agent to verify if a connection to the Wazuh manager is established. The result should match the Wazuh agent and Wazuh manager IP addresses.
+The Wazuh agent sends short HTTPS requests to the Wazuh manager instead of keeping a connection open, so recent connections usually appear in the ``TIME-WAIT`` state. Run the following commands on the Wazuh agent to verify that it reaches the Wazuh manager. The remote address must match the Wazuh manager IP address.
 
 .. tabs::
 
@@ -151,42 +153,83 @@ Run the following commands on the Wazuh agent to verify if a connection to the W
 
       .. code-block:: console
 
-         # netstat -vatunp|grep wazuh-agentd
+         # ss -tan '( dport = :1517 )'
 
       Output
 
       .. code-block:: none
          :class: output
 
-         tcp        0      0 192.168.1.209:59129     192.168.1.174:1514      ESTABLISHED 2384/wazuh-agentd
+         State     Recv-Q Send-Q Local Address:Port   Peer Address:Port
+         TIME-WAIT 0      0      192.168.71.11:33432 192.168.71.15:1517
+         TIME-WAIT 0      0      192.168.71.11:33868 192.168.71.15:1517
+
+      .. code-block:: console
+
+         # nc -zv <WAZUH_MANAGER_IP_ADDRESS> 1517
+
+      Output
+
+      .. code-block:: none
+         :class: output
+
+         Connection to 192.168.71.15 1517 port [tcp/*] succeeded!
 
    .. group-tab:: Windows
 
       .. code-block:: pwsh-session
 
-         > Get-NetTCPConnection -RemotePort 1514
+         > Get-NetTCPConnection -RemotePort 1517
 
       Output
 
       .. code-block:: none
          :class: output
 
-         LocalAddress                        LocalPort RemoteAddress                       RemotePort State       AppliedSetting OwningProcess
-         ------------                        --------- -------------                       ---------- -----       -------------- -------------
-         192.168.1.101                       15262     192.168.1.174                       1514       Established Internet       14884
+         LocalAddress  LocalPort RemoteAddress RemotePort    State
+         ------------  --------- ------------- ----------    -----
+         192.168.71.14     54811 192.168.71.15       1517 TimeWait
+         192.168.71.14     54810 192.168.71.15       1517 TimeWait
+
+      .. code-block:: pwsh-session
+
+         > Test-NetConnection <WAZUH_MANAGER_IP_ADDRESS> -Port 1517
+
+      Output
+
+      .. code-block:: none
+         :class: output
+
+         ComputerName     : 192.168.71.15
+         RemotePort       : 1517
+         TcpTestSucceeded : True
 
    .. group-tab:: macOS
 
       .. code-block:: console
 
-         # lsof -i -P | grep ESTABLISHED | grep 1514
+         # netstat -an -p tcp | grep '\.1517 '
 
       Output
 
       .. code-block:: none
          :class: output
 
-         wazuh-age  309          wazuh    7u  IPv4 0x146ea8aac5da611b      0t0    TCP 192.168.1.208:49246->192.168.1.174:1514 (ESTABLISHED)
+         tcp4       0      0  192.168.72.2.50176     192.168.71.15.1517     TIME_WAIT
+         tcp4       0      0  192.168.72.2.50177     192.168.71.15.1517     TIME_WAIT
+
+      .. code-block:: console
+
+         # nc -zv <WAZUH_MANAGER_IP_ADDRESS> 1517
+
+      Output
+
+      .. code-block:: none
+         :class: output
+
+         Connection to 192.168.71.15 port 1517 [tcp/vpac] succeeded!
+
+To confirm that the Wazuh agent is connected, check its status as described in :ref:`Reading the local wazuh-agentd.state file <reading_wazuh_agentd_state_file>`.
 
 Search for errors or warnings in the corresponding agent log files for troubleshooting purposes.
 
