@@ -131,7 +131,34 @@ Configuring the Wazuh indexer connection
 
 #. Edit ``/var/wazuh-manager/etc/wazuh-manager.conf`` file to configure the indexer connection. Do it on the master node and on every worker node, as the cluster does not synchronize this block. By default, the indexer settings configure one host. It's set to ``127.0.0.1`` as highlighted below.
 
-   .. include:: /_templates/installations/manager/configure_indexer_connection.rst
+   .. code-block:: xml
+      :emphasize-lines: 3
+
+      <indexer>
+        <hosts>
+          <host>https://127.0.0.1:9200</host>
+        </hosts>
+        <ssl>
+          <certificate_authorities>
+            <ca>etc/certs/root-ca.pem</ca>
+          </certificate_authorities>
+          <certificate>etc/certs/indexer-connector.pem</certificate>
+          <key>etc/certs/indexer-connector-key.pem</key>
+        </ssl>
+      </indexer>
+
+   -  Replace ``127.0.0.1`` with your Wazuh indexer node IP address or hostname. You can find this value in the Wazuh indexer config file ``/etc/wazuh-indexer/opensearch.yml``
+
+   If you are running a Wazuh indexer cluster infrastructure, add a ``<host>`` entry for each one of your Wazuh indexer nodes. For example, in a two-node configuration:
+
+   .. code-block:: xml
+
+      <hosts>
+        <host>https://10.0.0.1:9200</host>
+        <host>https://10.0.0.2:9200</host>
+      </hosts>
+
+   The Wazuh manager prioritizes reporting to the first Wazuh indexer node in the list. It switches to the next node if it is unavailable.
 
 Starting the Wazuh manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
