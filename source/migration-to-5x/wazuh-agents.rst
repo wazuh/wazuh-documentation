@@ -100,6 +100,7 @@ Wazuh agent
 #. Update the manager address in the Wazuh agent configuration so that the Wazuh agent connects to the Wazuh 5.x manager. Add the Wazuh manager IP address or fully qualified domain name (FQDN) to the ``<address>`` setting in the ``<client><server>`` section.
 
    .. code-block:: xml
+      :emphasize-lines: 3
 
       <client>
         <server>
