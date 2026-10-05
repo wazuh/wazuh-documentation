@@ -81,13 +81,15 @@ Follow these steps to uninstall the Wazuh manager using your package manager.
 
          .. code-block:: console
 
-            # systemctl disable wazuh-manager
+            # systemctl disable --now wazuh-manager
             # apt-get remove --purge wazuh-manager -y
+            # rm -rf /var/wazuh-manager/
 
       .. group-tab:: Yum
 
          .. code-block:: console
 
+            # systemctl disable --now wazuh-manager
             # yum remove wazuh-manager -y
             # rm -rf /var/wazuh-manager/
 
@@ -95,6 +97,7 @@ Follow these steps to uninstall the Wazuh manager using your package manager.
 
          .. code-block:: console
 
+            # systemctl disable --now wazuh-manager
             # dnf remove wazuh-manager -y
             # rm -rf /var/wazuh-manager/
 
@@ -103,7 +106,7 @@ Follow these steps to uninstall the Wazuh manager using your package manager.
 Uninstalling the Wazuh indexer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Follow the step below to uninstall the Wazuh indexer using your package manager.
+Follow the steps below to uninstall the Wazuh indexer using your package manager.
 
 #. Remove the Wazuh indexer installation:
 
@@ -114,9 +117,7 @@ Follow the step below to uninstall the Wazuh indexer using your package manager.
          .. code:: console
 
             # apt-get remove --purge wazuh-indexer -y
-            # rm -rf /var/lib/wazuh-indexer/
-            # rm -rf /etc/wazuh-indexer/
-            # rm -rf /var/log/wazuh-indexer/
+            # rm -rf /var/lib/wazuh-indexer/ /usr/share/wazuh-indexer/ /etc/wazuh-indexer/ /var/log/wazuh-indexer/
             # rm -rf /etc/systemd/system/wazuh-indexer.service.d/
             # systemctl daemon-reload
             # userdel wazuh-indexer
@@ -126,18 +127,20 @@ Follow the step below to uninstall the Wazuh indexer using your package manager.
          .. code:: console
 
             # yum remove wazuh-indexer -y
-            # rm -rf /var/lib/wazuh-indexer/
-            # rm -rf /usr/share/wazuh-indexer/
-            # rm -rf /etc/wazuh-indexer/
+            # rm -rf /var/lib/wazuh-indexer/ /usr/share/wazuh-indexer/ /etc/wazuh-indexer/ /var/log/wazuh-indexer/
+            # rm -rf /etc/systemd/system/wazuh-indexer.service.d/
+            # systemctl daemon-reload
+            # userdel wazuh-indexer
 
       .. group-tab:: DNF
 
          .. code:: console
 
             # dnf remove wazuh-indexer -y
-            # rm -rf /var/lib/wazuh-indexer/
-            # rm -rf /usr/share/wazuh-indexer/
-            # rm -rf /etc/wazuh-indexer/
+            # rm -rf /var/lib/wazuh-indexer/ /usr/share/wazuh-indexer/ /etc/wazuh-indexer/ /var/log/wazuh-indexer/
+            # rm -rf /etc/systemd/system/wazuh-indexer.service.d/
+            # systemctl daemon-reload
+            # userdel wazuh-indexer
 
 Removing the shared directory
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

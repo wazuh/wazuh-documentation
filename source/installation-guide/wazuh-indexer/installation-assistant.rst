@@ -107,7 +107,7 @@ Follow these steps on a Linux host to configure your Wazuh deployment, create SS
 
       The root Certificate Authority (CA) certificate and its private key remain in ``/etc/wazuh/ca`` on this node and are not included in the archive. Back up these files securely, as they are required to add new cluster nodes and renew certificates in the future.
 
-#. Copy the ``wazuh-install-files.tar`` file and the ``wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh`` script from the host where you generated it to all the servers of the distributed deployment including the Wazuh manager, the Wazuh indexer, and the Wazuh dashboard nodes. You can use the ``scp`` utility or any other secure file transfer method available in your environment.
+#. Copy the ``wazuh-install-files.tar`` file and the ``wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh`` script from the host where you generated it to all the servers of the distributed deployment, including the Wazuh manager, the Wazuh indexer, and the Wazuh dashboard nodes. You can use the ``scp`` utility or any other secure file transfer method available in your environment.
 
 Wazuh indexer nodes installation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

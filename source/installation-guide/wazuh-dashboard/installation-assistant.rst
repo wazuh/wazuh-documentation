@@ -41,7 +41,7 @@ Wazuh dashboard installation
 
       INFO: Installation finished.
 
-   You now have installed and configured Wazuh.
+   You have now installed and configured the Wazuh dashboard.
 
 #. Get the ``<WAZUH_INDEXER_ADMIN_PASSWORD>``. On a Wazuh indexer node, run the following command. The quotes around the value are not part of the password.
 
@@ -66,9 +66,33 @@ Wazuh dashboard installation
 Securing your Wazuh installation
 --------------------------------
 
-The ``/etc/wazuh/credentials.env`` file contains the passwords of the Wazuh users generated during the installation. Each node receives only the passwords of the components installed on it, while the node where ``wazuh-install-files.tar`` was generated retains the complete set of credentials.
+After every component is installed and running, each component stores the passwords it needs in its own keystore or database. No component reads ``/etc/wazuh/credentials.env`` after the installation. Every node gets the same five passwords from ``wazuh-install-files.tar``.
 
-Securely store these passwords and remove the ``/etc/wazuh/credentials.env`` file from every node. Wazuh components do not use this file after the installation process is complete.
+#. Log in to the Wazuh dashboard and confirm that it reaches both the Wazuh indexer and the Wazuh manager.
+
+#. Store the five passwords in a safe place. The ``credentials.env`` file in ``wazuh-install-files.tar`` holds all five. Run the following command to show them:
+
+   .. code-block:: console
+
+      # tar -xOf wazuh-install-files.tar wazuh-install-files/credentials.env
+
+#. Remove the credentials file and the installation files from every node:
+
+   .. code-block:: console
+
+      # rm -f /etc/wazuh/credentials.env ./wazuh-install-files.tar
+
+#. Only the host where you ran ``--generate-config-files`` keeps the root CA private key. On every other node, ``/etc/wazuh/ca`` holds only ``root-ca.pem``. Run the following command to check:
+
+   .. code-block:: console
+
+      # ls -A /etc/wazuh/ca
+
+   If the command lists ``root-ca.key`` on any other node, remove the key there. Don't remove it from the host where you ran ``--generate-config-files``, because you need the key to add nodes or renew certificates later:
+
+   .. code-block:: console
+
+      # rm -f /etc/wazuh/ca/root-ca.key /etc/wazuh/ca/root-ca.srl
 
 To change a password after installation, see the :doc:`password management </user-manual/user-administration/password-management>` documentation.
 

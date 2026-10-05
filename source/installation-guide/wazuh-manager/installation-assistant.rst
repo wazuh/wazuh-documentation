@@ -27,10 +27,6 @@ Wazuh manager cluster installation
 
       # bash wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh --wazuh-manager manager -id -d pre-release
 
-   .. note::
-
-      This node's agent listener certificate was created at ``--generate-config-files``, with the other certificates, so you can't add ``-as`` at this step. Add every address that agents use, such as a load balancer, with ``--generate-config-files -as <AGENT_ADDRESS>``.
-
    To list the addresses in this node's agent listener certificate, run:
 
    .. code-block:: console
@@ -39,7 +35,7 @@ Wazuh manager cluster installation
 
 Your Wazuh manager is now successfully installed.
 
--  If you want a Wazuh manager single-node cluster, everything is set and you can proceed directly with :doc:`../wazuh-dashboard/installation-assistant`.
+-  If you want a Wazuh manager single-node cluster, everything is set, and you can proceed directly with :doc:`../wazuh-dashboard/installation-assistant`.
 
 -  If you want a Wazuh manager multi-node cluster, repeat this process on every Wazuh manager node.
 

@@ -101,34 +101,34 @@ Follow these steps to uninstall the Wazuh agent from your macOS endpoint.
 
    .. code-block:: console
 
-      # sudo launchctl bootout system /Library/LaunchDaemons/com.wazuh.agent.plist
+      # launchctl bootout system /Library/LaunchDaemons/com.wazuh.agent.plist
 
 #. Remove the ``/Library/Ossec/`` folder:
 
    .. code-block:: console
 
-      # sudo /bin/rm -r /Library/Ossec
+      # /bin/rm -r /Library/Ossec
 
 #. Remove the launch daemon and the startup items:
 
    .. code-block:: console
 
-      # sudo /bin/rm -f /Library/LaunchDaemons/com.wazuh.agent.plist
-      # sudo /bin/rm -rf /Library/StartupItems/WAZUH
+      # /bin/rm -f /Library/LaunchDaemons/com.wazuh.agent.plist
+      # /bin/rm -rf /Library/StartupItems/WAZUH
 
 #. Remove the Wazuh user and group:
 
    .. code-block:: console
 
-      # sudo /usr/bin/dscl . -delete "/Users/wazuh"
-      # sudo /usr/bin/dscl . -delete "/Groups/wazuh"
+      # /usr/bin/dscl . -delete "/Users/wazuh"
+      # /usr/bin/dscl . -delete "/Groups/wazuh"
 
 #. Remove the package receipts from ``pkgutil``:
 
    .. code-block:: console
 
-      # sudo /usr/sbin/pkgutil --forget com.wazuh.pkg.wazuh-agent
-      # sudo /usr/sbin/pkgutil --forget com.wazuh.pkg.wazuh-agent-etc
+      # /usr/sbin/pkgutil --forget com.wazuh.pkg.wazuh-agent
+      # /usr/sbin/pkgutil --forget com.wazuh.pkg.wazuh-agent-etc
 
    If the second command prints a "No receipt" error, you can ignore it.
 
