@@ -10,7 +10,7 @@ The Wazuh passwords tool changes the passwords for :doc:`Wazuh indexer </getting
 
 The following Wazuh indexer users are relevant to password management:
 
--  ``admin``: The default administrator user of the Wazuh indexer. This user logs in to the Wazuh dashboard.
+-  ``admin``: The default administrator user of the Wazuh indexer. This user logs in to the Wazuh dashboard and handles communication between the Wazuh manager and the Wazuh indexer.
 -  ``kibanaserver``: Handles communications between the Wazuh dashboard and the Wazuh indexer.
 -  ``wazuh-manager``: Handles communications between the Wazuh manager and the Wazuh indexer.
 
@@ -124,23 +124,29 @@ You can also change the Wazuh manager API passwords by following the instruction
 Change the passwords in a distributed environment
 -------------------------------------------------
 
-Run the ``wazuh-passwords-tool.sh`` script on the node that corresponds to the user whose password you want to change in a distributed deployment:
+In a distributed deployment, run the Wazuh passwords tool on the correct node depending on the user whose password you change:
 
 -  To :ref:`change the password of a Wazuh indexer user <change_password_indexer_user>`, run the tool on **any Wazuh indexer node**.
 -  To :ref:`change the password of a Wazuh manager API user <change_password_api_user>`, run the tool on the **Wazuh manager master node**.
 
-Update the Wazuh dashboard
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+Update the Wazuh dashboard configuration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Perform these steps on the Wazuh dashboard node after changing the ``kibanaserver`` or ``wazuh-wui`` password in a distributed deployment.
+Perform these steps on the Wazuh dashboard node after you change the ``kibanaserver`` or ``wazuh-wui`` password in a distributed deployment. This ensures the Wazuh dashboard can authenticate with the Wazuh indexer and Wazuh manager API using the updated credentials.
 
-If you change the ``kibanaserver`` password, update the ``opensearch.password`` value in the Wazuh dashboard keystore. Replace ``<KIBANASERVER_PASSWORD>`` with the new password:
+Update the kibanaserver password
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+When you change the ``kibanaserver`` password, update the ``opensearch.password`` value in the Wazuh dashboard keystore. Replace ``<KIBANASERVER_PASSWORD>`` with the new password:
 
 .. code-block:: console
 
    # echo '<KIBANASERVER_PASSWORD>' | runuser -u wazuh-dashboard -- /usr/share/wazuh-dashboard/bin/opensearch-dashboards-keystore add opensearch.password --stdin --force
 
-If you change the ``wazuh-wui`` password, update the ``wazuh_core.hosts.default.password`` value in the Wazuh dashboard keystore. Replace ``<WAZUH_WUI_PASSWORD>`` with the new password:
+Update the wazuh-wui password
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+When you change the ``wazuh-wui`` password, update the ``wazuh_core.hosts.default.password`` value in the Wazuh dashboard keystore. Replace ``<WAZUH_WUI_PASSWORD>`` with the new password:
 
 .. code-block:: console
 
