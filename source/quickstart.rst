@@ -54,6 +54,16 @@ You can install the Wazuh central components on 64-bit Linux systems using Intel
 Installing Wazuh
 ----------------
 
+.. note::
+
+   If a firewall such as firewalld or UFW is active on the endpoint, allow incoming traffic on the following ports. This lets Wazuh agents and users reach the Wazuh central components:
+
+   -  **1517/TCP**: Wazuh 5.x agent enrollment and connection.
+   -  **443/TCP**: Wazuh dashboard web interface.
+   -  **1514/TCP and 1515/TCP**: only needed if Wazuh 4.x agents connect to this deployment.
+
+   See :ref:`required ports <default_ports>` for the full list of default ports.
+
 #. Download and run the installation assistant to deploy the Wazuh central components and generate the credentials required to access the Wazuh dashboard.
 
    -  **Default address:** If the Wazuh agents connect using the Wazuh manager's configured address, such as a private IP address or hostname, no additional parameters are required.
