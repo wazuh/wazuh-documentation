@@ -645,7 +645,6 @@ removedUrls['5.0'] = [
   '/user-manual/agent/agent-management/key-request.html',
   '/user-manual/agent/agent-management/labels.html',
   '/user-manual/agent/agent-management/remote-upgrading/agent-upgrade-module.html',
-  '/user-manual/agent/agent-management/remote-upgrading/upgrading-agent.html',
   '/user-manual/agent/agent-management/remote-upgrading/wpk-files/create-custom-wpk.html',
   '/user-manual/agent/agent-management/remote-upgrading/wpk-files/index.html',
   '/user-manual/agent/agent-management/remote-upgrading/wpk-files/install-custom-wpk.html',
