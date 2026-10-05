@@ -20,7 +20,7 @@ Remove agents using the Wazuh dashboard
 
 You can remove Wazuh agents directly from the Wazuh dashboard.
 
-#. In the Wazuh dashboard, go to **Agents management** > **Endpoints**.
+#. In the Wazuh dashboard, go to **Agents management** > **Summary**.
 #. In the **Actions** column, click the selection icon for the Wazuh agent that you want to remove.
 #. Select **Remove**.
 #. When prompted, click **Remove**.
@@ -46,12 +46,12 @@ The examples use an authentication token. To get your token, replace ``<USER>:<P
 
 .. note::
 
-   You can `reset the password </user-manual/user-administration/password-management>`__ for the Wazuh manager API user if you forget it.
+   You can :doc:`reset the password </user-manual/user-administration/password-management>` for the Wazuh manager API user if you forget it.
 
 Removing agents in a list
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You can remove specific Wazuh agents using a list. Use the parameter ``agents_list`` to set a list of agent IDs separated by commas. For example, to remove agents ID ``005``, ``006``, and ``007``, run the following query:
+You can remove specific Wazuh agents using a list. Use the parameter ``agents_list`` to set a list of agent IDs separated by commas. For example, to remove the Wazuh agents with IDs ``012``, ``014``, and ``016``, run the following query:
 
 .. code-block:: console
 
