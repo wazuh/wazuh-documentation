@@ -17,13 +17,14 @@ Users can generate system inventory reports from the Wazuh dashboard, which can 
 
 .. topic:: Contents
 
-    .. toctree::
-        :maxdepth: 2
+   .. toctree::
+      :maxdepth: 2
 
-        how-it-works
-        configuration
-        viewing-system-inventory-data
-        generating-system-inventory-reports
-        available-inventory-fields
-        compatibility-matrix
-        using-syscollector-information-to-trigger-alerts
+      how-it-works
+      configuration
+      viewing-system-inventory-data
+      generating-system-inventory-reports
+      available-inventory-fields
+      compatibility-matrix
+      using-syscollector-information-to-trigger-alerts
+      osquery

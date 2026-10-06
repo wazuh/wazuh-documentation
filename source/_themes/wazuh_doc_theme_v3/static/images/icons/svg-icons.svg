@@ -74,6 +74,7 @@
   <view id="chevron-blue-light-lt" viewBox="80 40 32 32"/>
   <view id="chevron-blue-dt" viewBox="80 80 32 32"/>
   <view id="chevron-blue-light-dt" viewBox="80 120 32 32"/>
+  <view id="chevron-white" viewBox="80 160 32 32"/>
   <view id="sun-lt" viewBox="120 0 20 20"/>
   <view id="sun-dt" viewBox="120 40 20 20"/>
   <view id="moon-lt" viewBox="160 0 20 20"/>
@@ -127,6 +128,9 @@
   </g>
   <g transform="translate(80, 120)">
     <use xlink:href="#chevron" fill="#6ca2f0"/>
+  </g>
+  <g transform="translate(80, 160)">
+    <use xlink:href="#chevron" fill="#ffffff"/>
   </g>
   <g transform="translate(120, 0)">
     <use xlink:href="#sun" fill="black"/>

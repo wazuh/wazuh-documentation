@@ -68,10 +68,6 @@ Uninstall the Wazuh server
         
             # apt-get remove --purge wazuh-manager -y
 
-#. Disable the Wazuh manager service.
-
-   .. include:: ../../_templates/installations/wazuh/common/disable_wazuh_manager_service.rst
-
 #. Remove the Filebeat installation.
 
    .. tabs::

@@ -3,8 +3,6 @@
 .. meta::
    :description: Learn more about Kubernetes deployment with Wazuh in this section of the Wazuh documentation. 
 
-.. _kubernetes_deployment:
-
 Deployment
 ==========
 
@@ -181,14 +179,15 @@ In case you created domain names for the services, you should be able to access 
          dashboard             LoadBalancer   xxx.xx.xxx.xxx   xxx.xx.xxx.xxx                   80:31831/TCP,443:30974/TCP       15m       app=wazuh-dashboard
 
 
-**Optional**: On a local cluster deployment where the external IP address is not accessible, you can use port-forward:
+**Optional**: On a local cluster deployment where the external IP address is not accessible, you can use ``port-forward``:
  
-    .. code-block:: console
+.. code-block:: console
 
-         $ kubectl -n wazuh port-forward service/dashboard 8443:443
-
+   $ kubectl -n wazuh port-forward --address <INTERFACE_IP_ADDRESS> service/dashboard 8443:443
   
-The Wazuh dashboard will be accessible on ``https://localhost:8443``.
+Where ``<INTERFACE_IP_ADDRESS>`` is the IP address of the Kubernetes host.
+
+The Wazuh dashboard is accessible on ``https://<INTERFACE_IP_ADDRESS>:8443``.
 
 The default credentials are ``admin:SecretPassword``.
 
@@ -208,6 +207,13 @@ Wazuh indexer users
 .. warning::
 
    If you have custom users, add them to the ``internal_users.yml`` file. Otherwise, executing this procedure deletes them.
+
+Closing your Wazuh dashboard session
+....................................
+
+Before starting the password change process, we recommend to log out of your Wazuh dashboard session.
+
+If you don't log out, persistent session cookies might cause errors when accessing Wazuh after changing user passwords.
 
 Setting a new hash
 ..................
@@ -262,6 +268,10 @@ Setting a new hash
 Setting the new password
 ........................
 
+.. warning::
+
+   Don't use the ``$`` or ``&`` characters in your new password. These characters can cause errors during deployment.
+
 #. Encode your new password in base64 format. Avoid inserting a trailing newline character to maintain the hash value. For example, use the ``-n`` option with the ``echo`` command as follows.
 
    .. code-block::
@@ -305,9 +315,17 @@ Applying the changes
 
 #. Apply the manifest changes
 
-   .. code-block:: console
+   -  EKS cluster
 
-      # kubectl apply -k envs/eks/
+      .. code-block:: console
+
+         # kubectl apply -k envs/eks/
+
+   -  Other cluster types
+
+      .. code-block:: console
+
+         # kubectl apply -k envs/local-env/
 
 #. Start a bash shell in ``wazuh-indexer-0`` once more.
 
@@ -330,6 +348,12 @@ Applying the changes
    .. code-block:: console
 
       $ bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -cd /usr/share/wazuh-indexer/opensearch-security/ -nhnv -cacert  $CACERT -cert $CERT -key $KEY -p 9200 -icl -h $NODE_NAME
+
+#. Delete all Wazuh manager pods to update the component credentials.
+
+   .. code-block:: console
+
+      $ kubectl delete -n wazuh pod/wazuh-manager-master-0 pod/wazuh-manager-worker-0 pod/wazuh-manager-worker-1
 
 #. Login with the new credentials on the Wazuh dashboard.
 
@@ -378,4 +402,4 @@ Wazuh agents are designed to monitor hosts. To start using them:
 #. :doc:`Install the agent </installation-guide/wazuh-agent/index>`.
 #. Enroll the agent by modifying the file ``/var/ossec/etc/ossec.conf``. Change the “transport protocol” to TCP and replace the ``MANAGER_IP`` with the external IP address of the service pointing to port 1514 or with the hostname provided by the cloud provider
 
-To learn more about registering agents, see the :doc:`Wazuh agent enrollment </user-manual/agent-enrollment/index>` section of the documentation.
+To learn more about registering agents, see the :doc:`Wazuh agent enrollment </user-manual/agent/agent-enrollment/index>` section of the documentation.

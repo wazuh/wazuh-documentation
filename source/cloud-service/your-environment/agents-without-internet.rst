@@ -65,10 +65,14 @@ To achieve this configuration, follow these steps:
 	     proxy_pass mycluster;
 	   }
 	 }
-	
-   #. Run the command to restart NGINX: ``systemctl restart nginx``.
 
-   #. Enroll your agent with the IP address of the NGINX instance. To learn more about registering agents, see the :ref:`Enroll agents <cloud_register_agents>` section.
+   #. Restart the NGINX service.
+
+      .. code-block:: console
+
+         # systemctl restart nginx
+
+   #. Enroll your agent with the IP address of the NGINX instance. To learn more about registering agents, see the :doc:`Enroll agents </cloud-service/getting-started/enroll-agents>` section.
 
       Example:
 

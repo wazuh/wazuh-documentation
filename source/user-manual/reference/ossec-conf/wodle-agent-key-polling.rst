@@ -10,7 +10,7 @@ wodle name="agent-key-polling"
 
 .. deprecated:: 4.4.0
 
-.. note:: The agent-key-polling wodle is deprecated in favor of the :doc:`agent key request <../../agents/key-request>` feature. Although this configuration block is still usable, we highly recommend to use the agent key request dedicated block in :doc:`auth <auth>`.
+.. note:: The agent-key-polling wodle is deprecated in favor of the :doc:`agent key request <../../agent/agent-management/key-request>` feature. Although this configuration block is still usable, we highly recommend to use the agent key request dedicated block in :doc:`auth <auth>`.
 
 .. topic:: XML section name
 

@@ -1,5 +1,7 @@
 # Wazuh documentation
 
+ ⚠️⚠️ **The `master` branch is deprecated. Please use `main` instead.** ⚠️ ⚠️
+
 [![Slack](https://img.shields.io/badge/slack-join-blue.svg)](https://wazuh.com/community/join-us-on-slack/)
 [![Mailing list](https://img.shields.io/badge/email-join-blue.svg)](https://groups.google.com/forum/#!forum/wazuh)
 [![Documentation](https://img.shields.io/badge/docs-view-green.svg)](https://documentation.wazuh.com/)
@@ -22,11 +24,11 @@ You can also join our [users mailing list](https://groups.google.com/d/forum/waz
 
 ## Software and libraries used
 
-- [Python](https://www.python.org/) 3.8+
-- [Sphinx](http://www.sphinx-doc.org/) 7.0.1
-- [sphinx-tabs](https://github.com/djungelorm/sphinx-tabs) 3.4.1
+- [Python](https://www.python.org/) 3.9+
+- [Sphinx](http://www.sphinx-doc.org/) 7.2.6
+- [sphinx-tabs](https://github.com/djungelorm/sphinx-tabs) 3.4.5
 - [jsmin](https://github.com/tikitu/jsmin) 3.0.1
-- [sphinx-reredirects](https://gitlab.com/documatt/sphinx-reredirects) 0.1.2
+- [sphinx-reredirects](https://gitlab.com/documatt/sphinx-reredirects) 0.1.5
 
 ### Optional software to run the alternative Pagefind search engine
 

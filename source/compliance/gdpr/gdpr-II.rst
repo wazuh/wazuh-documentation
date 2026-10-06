@@ -95,7 +95,3 @@ On the Wazuh dashboard, an alert detects the modification of the ``subject_data.
     :align: center
     :width: 80%
 
-.. thumbnail:: /images/compliance/gdpr/gdprii-tag.png
-    :title: GDPRII tag in file modification alert
-    :align: center
-    :width: 80%

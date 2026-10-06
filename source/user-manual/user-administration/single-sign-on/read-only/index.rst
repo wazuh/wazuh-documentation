@@ -21,8 +21,8 @@ The following parameters are required to make the configurations on the Wazuh da
 -  ``sp.entity_id``: Entity ID of the Service Provider. This is a unique value assigned to a Service Provider.
 -  ``kibana_url``: URL to access the Wazuh dashboard.
 -  ``roles_key``: The attribute in the SAML assertion where the roles/groups are sent.
--  ``exchange_key``: The key that will be used to sign the assertions. It must have at least 32 characters.
-  
+-  ``exchange_key``: The key that will be used to sign the assertions. It must have at least 64 characters.
+
 .. note::
 
    -  The group and role names used in this guide can be changed. They do not necessarily have to be the ones we used.

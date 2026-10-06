@@ -53,7 +53,7 @@ Wazuh dashboard
 | **Default value**: ``443``
 |
 | **Variable**: ``wazuh_version``
-| **Description**: Wazuh APP compatible version to install.
+| **Description**: Wazuh dashboard compatible version to install.
 | **Default value**: ``|WAZUH_CURRENT_ANSIBLE|``
 |
 

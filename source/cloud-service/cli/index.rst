@@ -88,10 +88,14 @@ This command generates an AWS token to access the archive data of the environmen
 .. code-block:: none
   :class: output
 
-  The following AWS credentials will be valid until 2021-05-07 13:45:24:
+  Environment Cloud ID: '012345678ab'
+  Region: 'us-east-1'
+  S3 path: 'wazuh-cloud-cold-us-east-1/012345678ab'
+
+  The following AWS credentials will be valid until 2024-04-22 13:55:27:
   [wazuh_cloud_storage]
-  aws_access_key_id = A...Q
-  aws_secret_access_key = A...E
+  aws_access_key_id = A...M
+  aws_secret_access_key = L...0
   aws_session_token = F...Q==
 
 Listing archive data

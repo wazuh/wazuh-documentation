@@ -33,13 +33,12 @@ Google Configuration
 
       -  **Entity ID**: This will be used later as the ``idp.entity_id``
       -  Select **DOWNLOAD METADATA** and place the metadata file in the ``configuration`` directory of the Wazuh indexer. The path to the directory is ``/etc/wazuh-indexer/opensearch-security/``.
-      -  **Certificate**: Copy the blob of the certificate excluding the ``-----BEGIN CERTIFICATE-----`` and ``-----END CERTIFICATE-----`` lines. This will be our ``exchange_key`` in the Wazuh indexer configuration file.
 
       .. thumbnail:: /images/single-sign-on/google/02-take-note-of-the-parameters.png
          :title: Take note of the parameters
          :align: center
          :width: 80%
-   
+
    #. Select **CONTINUE** and configure the following:
 
       -  **ACS URL**: ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs``. Replace the Wazuh dashboard URL field with the appropriate URL or IP address.
@@ -111,6 +110,14 @@ Wazuh indexer configuration
 
 Edit the Wazuh indexer security configuration files. We recommend that you back up these files before you carry out the configuration.
 
+#. Generate a 64-character long random key using the following command.
+
+   .. code-block:: console
+
+      openssl rand -hex 32
+
+   The output will be used as the ``exchange_key`` in the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file.
+
 #. Place the ``Google_Metadata.xml`` file within the ``/etc/wazuh-indexer/opensearch-security/`` directory. Set the file ownership to ``wazuh-indexer`` using the following command:
 
    .. code-block:: console
@@ -118,11 +125,11 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       # chown wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/opensearch-security/Google_Metadata.xml
 
 #. Edit the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file and change the following values:
-   
+
    - Set the ``order`` in ``basic_internal_auth_domain`` to ``0`` and the ``challenge`` flag to ``false``. 
 
    - Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
-  
+
    .. code-block:: yaml
       :emphasize-lines: 7,10,22,23,25,26,27,28
 
@@ -153,10 +160,9 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
                     entity_id: wazuh-saml
                   kibana_url: https://<WAZUH_DASHBOARD_URL>
                   roles_key: Roles
-                  exchange_key: 'MIICajCCAdOgAwIBAgIBAD.........'
+                  exchange_key: 'b1d6dd32753374557dcf92e241.......'
               authentication_backend:
                 type: noop
-
 
    Ensure to change the following parameters to their corresponding value:
 
@@ -171,9 +177,9 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
    .. code-block:: console
 
-      # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /etc/wazuh-indexer/opensearch-security/config.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
+      # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /etc/wazuh-indexer/opensearch-security/config.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h 127.0.0.1 -nhnv
 
-   The ``-h`` flag specifies the hostname or the IP address of the Wazuh indexer node. Note that this command uses localhost, set your Wazuh indexer address if necessary.
+   The ``-h`` flag specifies the hostname or the IP address of the Wazuh indexer node. Note that this command uses 127.0.0.1, set your Wazuh indexer address if necessary.
 
    The command output must be similar to the following:
 
@@ -181,7 +187,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       :class: output
 
       Security Admin v7
-      Will connect to localhost:9200 ... done
+      Will connect to 127.0.0.1:9200 ... done
       Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
       OpenSearch Version: 2.10.0
       Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
@@ -215,9 +221,9 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
    .. code-block:: console
 
-      # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /etc/wazuh-indexer/opensearch-security/roles_mapping.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
+      # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /etc/wazuh-indexer/opensearch-security/roles_mapping.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h 127.0.0.1 -nhnv
 
-   The ``-h`` flag specifies the hostname or the IP address of the Wazuh indexer node. Note that this command uses localhost, set your Wazuh indexer address if necessary.
+   The ``-h`` flag specifies the hostname or the IP address of the Wazuh indexer node. Note that this command uses 127.0.0.1, set your Wazuh indexer address if necessary.
 
    The command output must be similar to the following:
 
@@ -225,7 +231,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       :class: output
             
       Security Admin v7
-      Will connect to localhost:9200 ... done
+      Will connect to 127.0.0.1:9200 ... done
       Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
       OpenSearch Version: 2.10.0
       Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
@@ -250,7 +256,7 @@ Wazuh dashboard configuration
 
       hosts:
         - default:
-            url: https://localhost
+            url: https://127.0.0.1
             port: 55000
             username: wazuh-wui
             password: "<wazuh-wui-password>"

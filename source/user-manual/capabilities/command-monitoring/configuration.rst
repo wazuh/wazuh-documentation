@@ -272,10 +272,10 @@ Perform the following steps on the Wazuh server to generate alerts when Wazuh an
    .. code-block:: xml
 
       <group name="memory_utilization,">
-        <rule id="100012" level="6">
+        <rule id="100059" level="6">
           <if_sid>530</if_sid>
           <match>^ossec: output: 'memory_utilization'</match>
-          <description>Memory utilization metric.</description>
+          <description>Memory metrics.</description>
         </rule>
       </group>
 

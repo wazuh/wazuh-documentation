@@ -5,8 +5,8 @@
 
 .. _create-osx:
 
-macOS
-=====
+macOS agent
+===========
 
 Wazuh provides an automated way of building macOS packages, keep in mind that to build an macOS package you must run this tool in an macOS system.
 
@@ -25,7 +25,7 @@ Download our wazuh-packages repository from GitHub and go to the macos directory
 
 .. code-block:: console
 
-  $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/macos && git checkout v|WAZUH_CURRENT_OSX|
+  $ git clone https://github.com/wazuh/wazuh && cd wazuh/packages/macos && git checkout v|WAZUH_CURRENT_OSX|
 
 Execute the ``generate_wazuh_packages.sh`` script, with the different options you desire.
 
@@ -39,12 +39,15 @@ Execute the ``generate_wazuh_packages.sh`` script, with the different options yo
   Usage: ./generate_wazuh_packages.sh [OPTIONS]
 
     Build options:
-      -a, --architecture <arch>     [Optional] Select architecture to build (intel64 or arm64). Default: intel64
-      -b, --branch <branch>         [Required] Select Git branch or tag.
+      -a, --architecture <arch>     [Optional] Target architecture of the package [intel64/arm64]. By Default: intel64.
+      -b, --branch <branch>         [Optional] Select Git branch.
       -s, --store-path <path>       [Optional] Set the destination absolute path of package.
       -j, --jobs <number>           [Optional] Number of parallel jobs when compiling.
       -r, --revision <rev>          [Optional] Package revision that append to version e.g. x.x.x-rev
+      -d, --debug                   [Optional] Build the binaries with debug symbols. By default: no.
       -c, --checksum <path>         [Optional] Generate checksum on the desired path (by default, if no path is specified it will be generated on the same directory than the package).
+      --is_stage                    [Optional] Use release name in package
+      -nc, --not-compile            [Optional] Set whether or not to compile the code.
       -h, --help                    [  Util  ] Show this help.
       -i, --install-deps            [  Util  ] Install build dependencies (Packages).
       -x, --install-xcode           [  Util  ] Install X-Code and brew. Can't be executed as root.
@@ -55,8 +58,10 @@ Execute the ``generate_wazuh_packages.sh`` script, with the different options yo
       --keychain-password           [Optional] Password of the keychain.
       --application-certificate     [Optional] Apple Developer ID certificate name to sign Apps and binaries.
       --installer-certificate       [Optional] Apple Developer ID certificate name to sign pkg.
-      --notarize                    [Optional] Notarize the package for its distribution on macOS Catalina .
+      --notarize                    [Optional] Notarize the package for its distribution on macOS.
+      --notarize-path <path>        [Optional] Path of the package to be notarized.
       --developer-id                [Optional] Your Apple Developer ID.
+      --team-id                     [Optional] Your Apple Team ID.
       --altool-password             [Optional] Temporary password to use altool from Xcode.
 
 
@@ -64,19 +69,19 @@ Below, you will find some examples of how to build macOS packages.
 
 .. code-block:: console
 
-  # ./generate_wazuh_packages.sh -b v|WAZUH_CURRENT_OSX| -s /tmp
+  # ./generate_wazuh_packages.sh -s /tmp
 
 This will build a |WAZUH_CURRENT_OSX| Wazuh agent macOS  package and store it in ``/tmp``.
 
 .. code-block:: console
 
-  # ./generate_wazuh_packages.sh -b v|WAZUH_CURRENT_OSX| -s /tmp -j 6
+  # ./generate_wazuh_packages.sh -s /tmp -j 6
 
 This will also build a |WAZUH_CURRENT_OSX| Wazuh agent macOS package and store it in ``/tmp`` but will use 6 jobs to compile the sources.
 
 .. code-block:: console
 
-  # ./generate_wazuh_packages.sh -b v|WAZUH_CURRENT_OSX| -s /tmp -j 6 -c
+  # ./generate_wazuh_packages.sh -s /tmp -j 6 -c
 
 In addition to the previous settings this will generate a ``.sha512`` file containing the checksum of the package.
 
@@ -94,7 +99,7 @@ Once you have set up the environment, you can build and notarize the package as 
 
 .. code-block:: console
 
-  $ sudo ./generate_wazuh_packages.sh -b v|WAZUH_CURRENT_OSX| -j 4 -r 1 --notarize \
+  $ sudo ./generate_wazuh_packages.sh -j 4 -r 1 --notarize \
       --keychain "/Users/your-user/Library/Keychains/login.keychain-db" \
       --application-certificate "Your Developer ID Application" \
       --installer-certificate "Your Developer ID Installer" \

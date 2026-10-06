@@ -6,86 +6,139 @@
 -#}
 
   {% if theme_breadcrumb_root_title == 'Documentation' %}
-  <nav class="website-links row d-xl-none">
-    <div class="col-12 col-xs-6 col-sm-6 col-lg-4">
-      <div class="footer-section">
-        <div class="footer-title">Explore</div>
-        <ul>
-          <li><a href="{{ theme_wazuh_web_url + '/platform/overview/' }}" target="_blank" rel="noreferrer noopener">Overview</a></li>
-          <li><a href="{{ theme_wazuh_web_url + '/platform/xdr/' }}" target="_blank" rel="noreferrer noopener">XDR</a></li>
-          <li><a href="{{ theme_wazuh_web_url + '/platform/siem/' }}" target="_blank" rel="noreferrer noopener">SIEM</a></li>
-        </ul>
+  <div class="navbar dropup">
+    <div id="toggle-full-footer-wrapper" class="">
+      <button id="toggle-full-footer" class="btn  dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+        <svg width="21.88" height="23"><use xlink:href="#wide-chevron"></use></svg>
+      </button>
+      <div class="website-links dropdown-menu">
+        <div class="container">
+          <nav class="row d-flex justify-content-start mainfooter">
+            <div class="col-12 col-xs-6 col-sm-6 col-lg-4">
+              <div class="footer-section">
+                <div class="footer-title">Explore</div>
+                <ul>
+                  <li><a href="{{ theme_wazuh_web_url + '/platform/overview/' }}" target="_blank" rel="noreferrer noopener">Overview</a></li>
+                  <li><a href="{{ theme_wazuh_web_url + '/platform/xdr/' }}" target="_blank" rel="noreferrer noopener">XDR</a></li>
+                  <li><a href="{{ theme_wazuh_web_url + '/platform/siem/' }}" target="_blank" rel="noreferrer noopener">SIEM</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-12 col-xs-6 col-sm-6 col-lg-4">
+              <div class="footer-section">
+                <div class="footer-title">Services</div>
+                <ul>
+                  <li><a href="{{ theme_wazuh_web_url + '/cloud/' }}" target="_blank" rel="noreferrer noopener">Wazuh Cloud</a></li>
+                  <li><a href="{{ theme_wazuh_web_url + '/services/professional-support/' }}" target="_blank" rel="noreferrer noopener">Professional support</a></li>
+                  <li><a href="{{ theme_wazuh_web_url + '/services/consulting-services/' }}" target="_blank" rel="noreferrer noopener">Consulting services</a></li>
+                  <li><a href="{{ theme_wazuh_web_url + '/services/training-courses/' }}" target="_blank" rel="noreferrer noopener">Training courses</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-12 col-xs-6 col-sm-6 col-lg-4">
+              <div class="footer-section">
+                <div class="footer-title">Company</div>
+                <ul>
+                  <li><a href="{{ theme_wazuh_web_url + '/about-us/' }}" target="_blank" rel="noreferrer noopener">About us</a></li>
+                  <li><a href="{{ theme_wazuh_web_url + '/our-customers/' }}" target="_blank" rel="noreferrer noopener">Customers</a></li>
+                  <li><a href="{{ theme_wazuh_web_url + '/partners/' }}" target="_blank" rel="noreferrer noopener">Partners</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-12 col-xs-6 col-sm-6 col-lg-4">
+              <div class="footer-section">
+                <div class="footer-title">Documentation</div>
+                <ul>
+                  <li><a href="{{ theme_wazuh_doc_url + '/current/quickstart.html' }}">Quickstart</a></li>
+                  <li><a href="{{ theme_wazuh_web_url + '/current/getting-started/index.html' }}">Getting started</a></li>
+                  <li><a href="{{ theme_wazuh_web_url + '/current/installation-guide/index.html' }}">Installation guide</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-12 col-xs-6 col-sm-6 col-lg-4">
+              <div class="footer-section">
+                <div class="footer-title">Resources</div>
+                <ul>
+                  <li><a href="{{ theme_wazuh_web_url + '/blog/' }}" target="_blank" rel="noreferrer noopener">Blog</a></li>
+                  <li><a href="{{ theme_wazuh_web_url + '/community/' }}" target="_blank" rel="noreferrer noopener">Community</a></li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+        </div>
       </div>
     </div>
-    <div class="col-12 col-xs-6 col-sm-6 col-lg-4">
-      <div class="footer-section">
-        <div class="footer-title">Services</div>
-        <ul>
-          <li><a href="{{ theme_wazuh_web_url + '/cloud/' }}" target="_blank" rel="noreferrer noopener">Wazuh Cloud</a></li>
-          <li><a href="{{ theme_wazuh_web_url + '/services/professional-support/' }}" target="_blank" rel="noreferrer noopener">Professional support</a></li>
-          <li><a href="{{ theme_wazuh_web_url + '/services/consulting-services/' }}" target="_blank" rel="noreferrer noopener">Consulting services</a></li>
-          <li><a href="{{ theme_wazuh_web_url + '/services/training-courses/' }}" target="_blank" rel="noreferrer noopener">Training courses</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="col-12 col-xs-6 col-sm-6 col-lg-4">
-      <div class="footer-section">
-        <div class="footer-title">Company</div>
-        <ul>
-          <li><a href="{{ theme_wazuh_web_url + '/about-us/' }}" target="_blank" rel="noreferrer noopener">About us</a></li>
-          <li><a href="{{ theme_wazuh_web_url + '/our-customers/' }}" target="_blank" rel="noreferrer noopener">Customers</a></li>
-          <li><a href="{{ theme_wazuh_web_url + '/partners/' }}" target="_blank" rel="noreferrer noopener">Partners</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="col-12 col-xs-6 col-sm-6 col-lg-4">
-      <div class="footer-section">
-        <div class="footer-title">Documentation</div>
-        <ul>
-          <li><a href="{{ theme_wazuh_doc_url + '/current/quickstart.html' }}">Quickstart</a></li>
-          <li><a href="{{ theme_wazuh_web_url + '/current/getting-started/' }}">Getting started</a></li>
-          <li><a href="{{ theme_wazuh_web_url + '/current/installation-guide/' }}">Installation guide</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="col-12 col-xs-6 col-sm-6 col-lg-4">
-      <div class="footer-section">
-        <div class="footer-title">Resources</div>
-        <ul>
-          <li><a href="{{ theme_wazuh_web_url + '/blog/' }}" target="_blank" rel="noreferrer noopener">Blog</a></li>
-          <li><a href="{{ theme_wazuh_web_url + '/community/' }}" target="_blank" rel="noreferrer noopener">Community</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+  </div>
+
   {% endif %}
-  <div class="desktop-footer row">
-    <div class="subfooter col-12 col-md-6 col-xl-4">
-      <div class="logo">
-        <a class="logo-link web" href="{{ theme_wazuh_web_url }}" target="_blank" rel="noreferrer noopener">
-          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="28" height="16" viewBox="0 0 28 16" xml:space="preserve">
-            <path d="M16.2491 10.7636L12.7889 0.0132231H10.0484L6.58823 10.7636L3.14187 0H0L5.01038 15.6959H7.57093L11.4187 4.33719L15.2526 15.6959H17.7993L22.8097 0.0132231H19.6817L16.2491 10.7636Z"/>
-            <path d="M25.4118 16C26.8412 16 28 14.8929 28 13.5273C28 12.1616 26.8412 11.0546 25.4118 11.0546C23.9823 11.0546 22.8235 12.1616 22.8235 13.5273C22.8235 14.8929 23.9823 16 25.4118 16Z" fill="#3585F9"/>
-          </svg>
-        </a>
+  <div class="subfooter">
+    <div class="container">
+      <div class="legal">
+        <div class="logo d-none d-md-flex">
+          <a href="{{ theme_wazuh_web_url }}" target="_blank" rel="noreferrer noopener" title="Open Source Security">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="28" height="16" viewBox="0 0 28 16" xml:space="preserve">
+              <path d="M16.2491 10.7636L12.7889 0.0132231H10.0484L6.58823 10.7636L3.14187 0H0L5.01038 15.6959H7.57093L11.4187 4.33719L15.2526 15.6959H17.7993L22.8097 0.0132231H19.6817L16.2491 10.7636Z" fill="white"></path>
+              <path d="M25.4118 16C26.8412 16 28 14.8929 28 13.5273C28 12.1616 26.8412 11.0546 25.4118 11.0546C23.9823 11.0546 22.8235 12.1616 22.8235 13.5273C22.8235 14.8929 23.9823 16 25.4118 16Z" fill="#3585F9"></path>
+            </svg>
+          </a>
+        </div>
+        <div class="logo d-flex d-md-none">
+          <a href="{{ theme_wazuh_web_url }}" target="_blank" rel="noreferrer noopener" title="Open Source Security">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="130" height="27" viewBox="0 0 1892 388" xml:space="preserve">
+              <g transform="matrix(1 0 0 1 207.47 229.19)">
+                <polygon style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;" points="-115.97,148.99 -206.97,-148.99 -149.88,-148.99 -87.56,55.5 -24.67,-148.85 24.96,-148.85 87.83,55.5 150.16,-148.85 206.97,-148.85 115.96,148.99 69.64,148.99 0.14,-66.68 -69.64,148.99 "></polygon>
+              </g>
+              <g transform="matrix(1 0 0 1 933.4 229.26)">
+                <polygon style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;" points="-130.3,148.92 -130.3,139.81 38.74,-97.35 -114.85,-97.35 -114.85,-148.92 130.3,-148.92 130.3,-139.54 -38.46,97.35 122.04,97.35 122.04,148.92 "></polygon>
+              </g>
+              <g transform="matrix(1 0 0 1 590.65 229.49)">
+                <path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;" transform=" translate(-989.13, -549.61)" d="M 1086.744 431.852 c -25.538 -26.649 -60.38 -40.671 -101.374 -40.671 c -86.753 0 -152.165 68.117 -152.165 158.44 c 0 90.313 65.411 158.421 152.165 158.421 c 40.899 0 75.741 -13.937 101.374 -40.405 v 34.158 h 58.31 V 397.447 h -58.31 V 431.852 z M 991.313 653.169 c -57.266 0 -98.848 -43.547 -98.848 -103.548 c 0 -59.81 41.582 -103.225 98.848 -103.225 c 57.095 0 98.544 43.415 98.544 103.225 C 1089.858 609.621 1048.408 653.169 991.313 653.169 z" stroke-linecap="round"></path>
+              </g>
+              <g transform="matrix(1 0 0 1 1254.44 232.63)">
+                <path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;" transform=" translate(-1652.91, -552.74)" d="M 1733.776 397.447 v 171.579 c 0 53.468 -29.43 84.142 -80.715 84.142 c -51.475 0 -81 -30.674 -81 -84.142 V 397.447 h -58.329 v 176.269 c 0 99.143 75.057 134.326 139.329 134.326 c 64.139 0 139.026 -35.184 139.026 -134.326 V 397.447 H 1733.776 z" stroke-linecap="round"></path>
+              </g>
+              <g transform="matrix(1 0 0 1 1599.48 189.34)">
+                <path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;" transform=" translate(-1997.96, -509.46)" d="M 1864.067 698.302 V 320.624 h 51.57 v 194.829 h 6.892 v 182.848 H 1864.067 z M 2073.384 698.302 v -146.45 c 0 -11.582 -0.968 -23.478 -2.905 -35.706 c -1.918 -12.228 -5.601 -23.582 -11.032 -34.063 c -5.411 -10.481 -13.044 -18.93 -22.88 -25.367 s -22.671 -9.655 -38.468 -9.655 c -10.31 0 -20.051 1.699 -29.24 5.108 c -9.19 3.399 -17.241 8.867 -24.133 16.405 c -6.892 7.538 -12.304 17.468 -16.272 29.782 c -3.949 12.323 -5.924 27.304 -5.924 44.953 l -35.848 -13.51 c 0 -27.029 5.051 -50.886 15.171 -71.563 c 10.101 -20.687 24.627 -36.816 43.576 -48.399 c 18.93 -11.582 41.81 -17.373 68.658 -17.373 c 20.582 0 37.88 3.304 51.854 9.921 c 13.956 6.627 25.31 15.313 34.044 26.06 c 8.734 10.756 15.399 22.481 19.994 35.165 c 4.595 12.684 7.728 25.092 9.38 37.234 c 1.652 12.133 2.488 22.794 2.488 31.984 v 165.475 H 2073.384 z" stroke-linecap="round"></path>
+              </g>
+              <g transform="matrix(1 0 0 1 1844.64 337.1)">
+                <circle style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(53,133,249); fill-rule: nonzero; opacity: 1;" cx="0" cy="0" r="47.007"></circle>
+              </g>
+            </svg>
+          </a>
+        </div>
+        <div class="sub-section">
+          <div class="no-border">
+            <div class="copyright">
+              {{copyright}}
+            </div>
+          </div>
+          <div>
+            <a href="{{ theme_wazuh_web_url + '/legal-resources/' }}" target="_blank" rel="noreferrer noopener">Legal resources</a>
+          </div>
+        </div>
+        <div class="sub-section">
+          <div>
+            <a href="{{ theme_wazuh_web_url + '/contact-us/' }}" target="_blank" rel="noreferrer noopener">Contact us</a>
+          </div>
+          <div>
+            <a class="footer-tel" href="tel:+18443492984">
+              <svg height="16" width="16" class="social-icon" id="ico-phone" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17 17"><path d="M3.86698 7.56209C5.14318 10.0702 7.19928 12.1174 9.70737 13.4025L11.6571 11.4527C11.8964 11.2134 12.2509 11.1337 12.5611 11.24C13.5537 11.5679 14.6261 11.7452 15.725 11.7452C16.2124 11.7452 16.6113 12.144 16.6113 12.6314V15.7245C16.6113 16.2119 16.2124 16.6107 15.725 16.6107C7.40311 16.6107 0.658752 9.86634 0.658752 1.54445C0.658752 1.05702 1.05756 0.658203 1.545 0.658203H4.64688C5.13432 0.658203 5.53313 1.05702 5.53313 1.54445C5.53313 2.65227 5.71038 3.71577 6.03829 4.70837C6.13578 5.01855 6.06488 5.36419 5.81673 5.61234L3.86698 7.56209Z"></path></svg>
+              +1 (844) 349 2984
+            </a>
+          </div>
+        </div>
       </div>
-      <div class="copyright">
-        {{copyright}}
-      </div>
-      <div class="d-inline-block d-xl-none">
-        <a href="{{ theme_wazuh_web_url + '/contact-us/' }}" target="_blank" rel="noreferrer noopener">Contact us</a>
+      <div class="social">
+        {% if theme_breadcrumb_root_title == 'Documentation' %}
+        <ul class="social-links nav">
+          <li class="rrss nav-item"><a class="nav-link" title="Wazuh on X" aria-label="Wazuh on X" target="_blank" href="https://x.com/wazuh" rel="noreferrer noopener"><svg><use xlink:href="#ico-twitter"></use></svg><span class="sr-only">X</span></a></li>
+          <li class="rrss nav-item"><a class="nav-link" title="Wazuh on LinkedIn" aria-label="Wazuh on LinkedIn" target="_blank" href="https://www.linkedin.com/company/wazuh" rel="noreferrer noopener"><svg><use xlink:href="#ico-linkedin"></use></svg><span class="sr-only">LinkedIn</span></a></li>
+          <li class="rrss nav-item"><a class="nav-link" title="Wazuh on Reddit" aria-label="Wazuh on Reddit" target="_blank" href="https://www.reddit.com/r/Wazuh/" rel="noreferrer noopener"><svg><use xlink:href="#ico-reddit"></use></svg><span class="sr-only">Reddit</span></a></li>
+          <li class="rrss nav-item"><a class="nav-link" title="Wazuh on Github" aria-label="Wazuh on Github" target="_blank" href="https://github.com/wazuh" rel="noreferrer noopener"><svg><use xlink:href="#ico-github"></use></svg><span class="sr-only">GitHub</span></a></a></li>
+          <li class="rrss nav-item"><a class="nav-link" title="Join us on Slack" aria-label="Join us on Slack" target="_blank" href="{{ theme_wazuh_web_url }}/community/join-us-on-slack/" rel="noreferrer noopener"><svg><use xlink:href="#ico-slack"></use></svg><span class="sr-only">Slack</span></a></li>
+          <li class="rrss nav-item"><a class="nav-link" title="Subscribe to our mailing list" aria-label="Subscribe to our mailing list" target="_blank" href="mailto:wazuh+subscribe@googlegroups.com" rel="noreferrer noopener"><svg><use xlink:href="#ico-mailinglist"></use></svg><span class="sr-only">Mailing list</span></a></li>
+        </ul>
+        {% endif %}
       </div>
     </div>
-    {% if theme_breadcrumb_root_title == 'Documentation' %}
-    <ul class="social-links col-12 col-md-6 col-xl-8">
-      <li class="nav-item d-none d-xl-inline-block"><a class="nav-link" href="{{ theme_wazuh_web_url + '/community/' }}" target="_blank" rel="noreferrer noopener">Community</a></li>
-      <li class="nav-item d-none d-xl-inline-block"><a class="nav-link" href="{{ theme_wazuh_web_url + '/contact-us/' }}" target="_blank" rel="noreferrer noopener">Contact us</a></li>
-      <li class="rrss nav-item d-inline-block"><a class="nav-link" title="Wazuh on Twitter" aria-label="Wazuh on Twitter" target="_blank" href="https://twitter.com/wazuh" rel="noreferrer noopener"><svg><use xlink:href="#ico-twitter"></use></svg></a></li>
-      <li class="rrss nav-item d-inline-block"><a class="nav-link" title="Wazuh on LinkedIn" aria-label="Wazuh on LinkedIn" target="_blank" href="https://www.linkedin.com/company/wazuh" rel="noreferrer noopener"><svg><use xlink:href="#ico-linkedin"></use></svg></a></li>
-      <li class="rrss nav-item d-inline-block"><a class="nav-link" title="Wazuh on Reddit" aria-label="Wazuh on Reddit" target="_blank" href="https://www.reddit.com/r/Wazuh/" rel="noreferrer noopener"><svg><use xlink:href="#ico-reddit"></use></svg></a></li>
-      <li class="rrss nav-item d-inline-block"><a class="nav-link" title="Wazuh on Github" aria-label="Wazuh on Github" target="_blank" href="https://github.com/wazuh" rel="noreferrer noopener"><svg><use xlink:href="#ico-github"></use></svg></a></li>
-      <li class="rrss nav-item d-inline-block"><a class="nav-link" title="Join us on Slack" aria-label="Join us on Slack" target="_blank" href="https://wazuh.com/community/join-us-on-slack/" rel="noreferrer noopener"><svg><use xlink:href="#ico-slack"></use></svg></a></li>
-      <li class="rrss nav-item d-inline-block"><a class="nav-link" title="Subscribe to our mailing list" aria-label="Subscribe to our mailing list" target="_blank" href="mailto:wazuh+subscribe@googlegroups.com" rel="noreferrer noopener"><svg><use xlink:href="#ico-mailinglist"></use></svg></a></li>
-    </ul>
-    {% endif %}
   </div>

@@ -1,19 +1,17 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: You can use third-party certificates, instead of self-signed, in the Wazuh dashboard. Learn more about it in this section of the Wazuh documentation. 
+   :description: Let’s Encrypt certificate can be configured for the Wazuh dashboard using the certbot client. Learn more in this section of the Wazuh documentation.
 
-.. _ssl:
+Configuring SSL certificates on the Wazuh dashboard using Let’s Encrypt
+=======================================================================
 
-Configuring SSL certificates directly on the Wazuh dashboard
-============================================================
-
-Let’s Encrypt certificate can be configured for the Wazuh dashboard using the `certbot <https://certbot.eff.org/>`_ client. Follow the instructions below to install and configure a Let’s Encrypt certificate on an all-in-one Wazuh installation consisting of the Wazuh server, the Wazuh indexer, and the Wazuh dashboard. In a clustered environment, the instructions should be applied to the Wazuh dashboard node(s).
+Let’s Encrypt certificate can be configured for the Wazuh dashboard using the `certbot <https://certbot.eff.org/>`__ client. Follow the instructions below to install and configure a Let’s Encrypt certificate on an All-In-One Wazuh installation consisting of the Wazuh server, the Wazuh indexer, and the Wazuh dashboard. In a clustered environment, the instructions should be applied to the Wazuh dashboard node(s).
 
 The process is divided into three stages:
 
 #. Installing and configuring the certbot client.
-#. Configuring Let’s Encrypt certificates in the Wazuh dashboard.
+#. Configuring Let’s Encrypt certificates on the Wazuh dashboard.
 #. Configuring auto-renewal of the certificates.
 
 Installing and configuring the certbot client
@@ -50,13 +48,19 @@ Install certbot
 
       # snap install core; snap refresh core
 
+   .. code-block:: none
+      :class: output
+
+      core 16-2.61.4-20240607 from Canonical✓ installed
+      snap "core" has no updates available
+
 #. Install certbot:
 
    .. code-block:: console
 
       # snap install --classic certbot
 
-#. Link certbot from the snap install directory to the user directory, so you can run it by just typing certbot:
+#. Run the following command to link the certbot from the snap directory to the user directory:
 
    .. code-block:: console
 
@@ -92,9 +96,9 @@ Configure certbot to generate Let’s Encrypt SSL certificate
 
    Where:
 
-      - ``--standalone``: Instruct certbot to handle cryptographic challenge using its built-in web server.
-      - ``-d``: Specify the Wazuh dashboard FQDN (Fully Qualified Domain Name).
-      - ``<YOUR_DOMAIN_NAME>``: Sample fully qualified domain name.
+   -  ``--standalone``: Instructs certbot to handle cryptographic challenges using its built-in web server.
+   -  ``-d``: Specifies the Wazuh dashboard Fully Qualified Domain Name (FQDN).
+   -  ``<YOUR_DOMAIN_NAME>``: Your FQDN.
 
 #. Confirm that the certificates are generated:
 
@@ -102,27 +106,25 @@ Configure certbot to generate Let’s Encrypt SSL certificate
 
       # ls -la /etc/letsencrypt/live/<YOUR_DOMAIN_NAME>/
 
-
-
    The output of the command generally returns the following:
 
-      .. code-block:: console
-         :class: output
+   .. code-block:: console
+      :class: output
 
-         cert.pem
-         chain.pem 
-         fullchain.pem 
-         privkey.pem 
-         README
+      cert.pem
+      chain.pem
+      fullchain.pem
+      privkey.pem
+      README
 
    Where:
 
-      - ``README``: contains information about the certificate files.
-      - ``privkey.pem``: This is the private key for the certificate.
-      - ``fullchain.pem``: This is the SSL certificate, bundled with all intermediate certificates.
+   -  ``README``: contains information about the certificate files.
+   -  ``privkey.pem``: This is the private key for the certificate.
+   -  ``fullchain.pem``: This is the SSL certificate, bundled with all intermediate certificates.
 
 
-Configuring Let’s Encrypt SSL certificates in the Wazuh dashboard
+Configuring Let’s Encrypt SSL certificates on the Wazuh dashboard
 -----------------------------------------------------------------
 
 #. Copy the generated Let’s Encrypt certificates from the directory ``/etc/letsencrypt/live/<YOUR_DOMAIN_NAME>/`` to the Wazuh dashboard certificate directory ``/etc/wazuh-dashboard/certs``:
@@ -131,7 +133,7 @@ Configuring Let’s Encrypt SSL certificates in the Wazuh dashboard
 
       # cp /etc/letsencrypt/live/<YOUR_DOMAIN_NAME>/privkey.pem /etc/letsencrypt/live/<YOUR_DOMAIN_NAME>/fullchain.pem /etc/wazuh-dashboard/certs/
 
-#. Add the Let’s Encrypt certificates to the Wazuh dashboard by editing the configuration file  ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` replacing the old certificates with the configuration below:
+#. Replace the old certificates with the Let’s Encrypt certificates to the Wazuh dashboard by editing the configuration file ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` as shown below:
 
    .. code-block:: console
 
@@ -147,8 +149,8 @@ Configuring Let’s Encrypt SSL certificates in the Wazuh dashboard
       opensearch.hosts: https://127.0.0.1:9200
       server.port: 443
       opensearch.ssl.verificationMode: certificate
-      # opensearch.username: kibanaserver
-      # opensearch.password: kibanaserver
+      opensearch.username: kibanaserver
+      opensearch.password: kibanaserver
       opensearch.requestHeadersWhitelist: ["securitytenant","Authorization"]
       opensearch_security.multitenancy.enabled: false
       opensearch_security.readonly_mode.roles: ["kibana_read_only"]
@@ -156,7 +158,7 @@ Configuring Let’s Encrypt SSL certificates in the Wazuh dashboard
       server.ssl.key: "/etc/wazuh-dashboard/certs/privkey.pem"
       server.ssl.certificate: "/etc/wazuh-dashboard/certs/fullchain.pem"
       opensearch.ssl.certificateAuthorities: ["/etc/wazuh-dashboard/certs/root-ca.pem"]
-      uiSettings.overrides.defaultRoute: /app/wz-home
+      uiSettings.overrides.defaultRoute: /app/wazuh
       opensearch_security.cookie.secure: true
 
 #. Modify the permissions and ownership of the certificates:
@@ -171,17 +173,19 @@ Configuring Let’s Encrypt SSL certificates in the Wazuh dashboard
 
    .. include:: /_templates/common/restart_dashboard.rst
 
-The Let’s Encrypt certificate installation on the Wazuh dashboard is now ready, and you can proceed to access it by using the configured domain name.
+The Let’s Encrypt certificate installation on the Wazuh dashboard is now ready, and you can proceed to access it by using the configured fully qualified domain name.
 
-      .. thumbnail:: /images/configuring-third-party-certs/wazuh-dashboard.png
-         :title: Wazuh dashboard
-         :align: center
-         :width: 80%
+.. thumbnail:: /images/configuring-third-party-certs/wazuh-dashboard.jpg
+   :title: Wazuh dashboard
+   :align: center
+   :width: 80%
 
 Configuring auto-renewal of the certificates
 --------------------------------------------
 
-The generated Let’s Encrypt certificates are valid for ninety days. The certbot package previously installed renews the certificate by adding a renewal script to the  ``/etc/cron.d`` directory on the Wazuh dashboard. This script runs twice a day and will renew the certificate when it is within thirty days of expiration. Also, a renewal hook, ``renew_hook`` is added to the configuration to restart or reload the Wazuh dashboard for the renewed certificate to apply.
+The generated Let’s Encrypt certificates are valid for ninety days. The certbot package previously installed renews the certificate by adding a renewal script to the ``/etc/cron.d`` directory on the Wazuh dashboard. This script runs twice a day and will renew the certificate thirty days before expiration.
+
+Also, we append a renewal hook, ``renew_hook`` to the configuration to restart or reload the Wazuh dashboard for the renewed certificate to apply.
 
 Configure the renew_hook using the following steps
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -189,7 +193,7 @@ Configure the renew_hook using the following steps
 #. Edit the domain configuration file at ``/etc/letsencrypt/renewal/<YOUR_DOMAIN_NAME>.conf`` and add the renewal hook at the end of the file:
 
    .. code-block:: console
-      :emphasize-lines: 16
+      :emphasize-lines: 15
 
       # renew_before_expiry = 30 days
       version = 1.32.0
@@ -205,7 +209,6 @@ Configure the renew_hook using the following steps
       authenticator = standalone
       server = https://acme-v02.api.letsencrypt.org/directory
       key_type = rsa
-
       renew_hook = systemctl restart wazuh-dashboard
 
 #. Test the renewal hook by running the command below:
@@ -214,23 +217,17 @@ Configure the renew_hook using the following steps
 
       # certbot renew --dry-run
 
-   
    The output looks like this:
 
    .. code-block:: console
       :class: output
 
-         Saving debug log to /var/log/letsencrypt/letsencrypt.log
-
-         - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-         Processing /etc/letsencrypt/renewal/<YOUR_DOMAIN_NAME>.conf
-         - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-         Simulating renewal of an existing certificate for <YOUR_DOMAIN_NAME>
-
-         - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-         Congratulations, all simulated renewals succeeded:
-         /etc/letsencrypt/live/<YOUR_DOMAIN_NAME>/fullchain.pem (success)
-         - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-
-        
+      Saving debug log to /var/log/letsencrypt/letsencrypt.log
+      - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      Processing /etc/letsencrypt/renewal/<YOUR_DOMAIN_NAME>.conf
+      - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      Simulating renewal of an existing certificate for <YOUR_DOMAIN_NAME>
+      - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      Congratulations, all simulated renewals succeeded:
+      /etc/letsencrypt/live/<YOUR_DOMAIN_NAME>/fullchain.pem (success)
+      - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

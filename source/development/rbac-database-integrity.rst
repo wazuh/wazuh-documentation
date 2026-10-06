@@ -58,7 +58,7 @@ After upgrading from a Wazuh version with RBAC database version 0 to 1, ``WAZUH_
     2022/06/17 09:44:04 INFO: RBAC database migration required. Current version is 0 but it should be 1. Upgrading RBAC database to version 1
     2022/06/17 09:44:09 INFO: /var/ossec/api/configuration/security/rbac.db database upgraded successfully
     2022/06/17 09:44:09 INFO: RBAC database integrity check finished successfully
-    2022/06/17 09:44:12 INFO: Listening on 0.0.0.0:55000..
+    2022/06/17 09:44:12 INFO: Listening on ['0.0.0.0', '::']:55000..
 
 After upgrading from a Wazuh version with RBAC database version 0 to 1, with the old DB having a user that is a default user in the new version:
 
@@ -72,7 +72,7 @@ After upgrading from a Wazuh version with RBAC database version 0 to 1, with the
     2022/06/17 10:00:25 WARNING: User 100 (example) is part of the new default users. Renaming it to 'example_user'
     2022/06/17 10:00:26 INFO: /var/ossec/api/configuration/security/rbac.db database upgraded successfully
     2022/06/17 10:00:26 INFO: RBAC database integrity check finished successfully
-    2022/06/17 10:00:29 INFO: Listening on 0.0.0.0:55000..
+    2022/06/17 10:00:29 INFO: Listening on ['0.0.0.0', '::']:55000..
 
 ``GET /security/users`` response:
 

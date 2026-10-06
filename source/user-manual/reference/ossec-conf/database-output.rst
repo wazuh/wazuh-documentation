@@ -16,7 +16,8 @@ database_output
     </database_output>
 
 .. note::
-  To use this output feature, Wazuh must be compiled with the database type that is to be used. Read :ref:`this article <manual_database_output>` to learn about how to install and enable it.
+
+   To use this output feature, Wazuh must be compiled with the database type that is to be used. Read :ref:`this article <configuring_database_output>` to learn about how to install and enable it.
 
 MySQL and PostgreSQL database output is supported. The following options below are available to configure it:
 

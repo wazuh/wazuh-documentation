@@ -32,5 +32,4 @@ In this section you will find:
    container-security/index
    system-inventory/index
    system-calls-monitoring/index
-   agentless-monitoring/index        
-   policy-monitoring/index
+   agentless-monitoring/index

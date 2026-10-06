@@ -208,7 +208,7 @@ Chapter IV, Article 33, Head 1
 
 **Notification of a personal data breach to the supervisory authority, Head 1**: *“In the case of a personal data breach, the controller shall without undue delay and, where feasible, not later than 72 hours after having become aware of it, notify the personal data breach to the supervisory authority competent in accordance with Article 55, unless the personal data breach is unlikely to result in a risk to the rights and freedoms of natural persons. Where the notification to the supervisory authority is not made within 72 hours, it shall be accompanied by reasons for the delay.”*
 
-This article requires that organizations report data breaches to the appropriate authorities within a stipulated time frame. Wazuh facilitates this communication by sending email notifications when events trigger a specific alert or a group of alerts related to events about personal data. Refer to the Wazuh :doc:`email alerts </user-manual/manager/manual-email-report/index>` section of the documentation for more information on configuring email notifications.
+This article requires that organizations report data breaches to the appropriate authorities within a stipulated time frame. Wazuh facilitates this communication by sending email notifications when events trigger a specific alert or a group of alerts related to events about personal data. Refer to the Wazuh :ref:`email alerts <configuring_email_alerts>` section of the documentation for more information on configuring email notifications.
 
 Use case: Email alert on failed login
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -364,5 +364,5 @@ Wazuh helps meet this article of the GDPR by providing security measures such as
 -  :doc:`Integrating with VirusTotal to detect and remove malware </proof-of-concept-guide/detect-remove-malware-virustotal>`.
 -  :doc:`Integrating with YARA to detect malware </proof-of-concept-guide/detect-malware-yara-integration>`.
 -  `Using constant database (CDB) lists to detect and remove malicious files <https://wazuh.com/blog/detecting-and-responding-to-malicious-files-using-cdb-lists-and-active-response/>`__.
--  :doc:`Active response </getting-started/use-cases/incident-response>`.
+-  :doc:`Active Response </getting-started/use-cases/incident-response>`.
 -  :doc:`Vulnerability detection </getting-started/use-cases/vulnerability-detection>`.

@@ -1,11 +1,8 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
-   :description: AWS Elastic Load Balancers are services that distribute incoming traffic across multiple targets. Learn how to configure and monitor them with Wazuh.
+   :description: The following sections cover how to configure the Amazon ALB service to integrate with Wazuh.
 
-.. _elastic_load_balancing:
-
-======================
 Elastic Load Balancers
 ======================
 

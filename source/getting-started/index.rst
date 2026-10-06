@@ -37,36 +37,36 @@ Screenshots
    :width: 100%
    :widths: 50 50
 
-   * - .. thumbnail:: ../images/getting-started/security-events.png
+   * - .. thumbnail:: ../images/getting-started/threat-hunting.png
           :title: Threat Hunting 
           :alt: Threat Hunting 
      - .. thumbnail:: ../images/getting-started/malware-detection.png
           :title: Malware detection
           :alt: Malware detection 
-   * - .. thumbnail:: ../images/getting-started/log-data-analysis.png
-          :title: Log data analysis
-          :alt: Log data analysis
-     - .. thumbnail:: ../images/getting-started/file-integrity-monitoring.png
+   * - .. thumbnail:: ../images/getting-started/file-integrity-monitoring.png
           :title: File Integrity Monitoring
           :alt: File Integrity Monitoring 
-   * - .. thumbnail:: ../images/getting-started/vulnerability-detection.png
+     - .. thumbnail:: ../images/getting-started/vulnerability-detection.png
           :title: Vulnerability Detection  
           :alt: Vulnerability Detection  
-     - .. thumbnail:: ../images/getting-started/security-configuration-assessment.png
+   * - .. thumbnail:: ../images/getting-started/mitre-attack.png
+          :title: Mitre Att&ck
+          :alt: Mitre Att&ck
+     - .. thumbnail:: ../images/getting-started/configuration-assessment.png
           :title: Security configuration assessment   
           :alt: Security configuration assessment   
-   * - .. thumbnail:: ../images/getting-started/incident-response.png
-          :title: Incident response 
-          :alt: Incident response 
-     - .. thumbnail:: ../images/getting-started/regulatory-compliance.png
-          :title: Regulatory compliance 
-          :alt: Regulatory compliance 
-   * - .. thumbnail:: ../images/getting-started/cloud-security.png
-          :title: Cloud security  
-          :alt: Cloud security  
-     - .. thumbnail:: ../images/getting-started/containers-security.png
-          :title: Containers security 
-          :alt: Containers security 
+   * - .. thumbnail:: ../images/getting-started/virustotal.png
+          :title: VirusTotal 
+          :alt: VirusTotal 
+     - .. thumbnail:: ../images/getting-started/aws.png
+          :title: Amazon Web Services 
+          :alt: Amazon Web Services 
+   * - .. thumbnail:: ../images/getting-started/github.png
+          :title: GitHub 
+          :alt: GitHub 
+     - .. thumbnail:: ../images/getting-started/pci-dss.png
+          :title: PCI DSS 
+          :alt: PCI DSS 
 
 .. toctree::
    :hidden:

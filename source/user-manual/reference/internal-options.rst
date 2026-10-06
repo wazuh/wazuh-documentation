@@ -37,6 +37,7 @@ Generally, this file is reserved for debugging issues and for troubleshooting. *
 - `Wazuh-download`_
 - `Windows`_
 
+.. _internal_options_agent:
 
 Agent
 -----
@@ -1004,6 +1005,12 @@ Vulnerability Detection
 |  **vulnerability-detection.osdata_lru_size**       | Description    | LRU cache size assigned for agents' OS data (in number of elements).             |
 +                                                    +----------------+----------------------------------------------------------------------------------+
 |                                                    | Default value  | 1000                                                                             |
++                                                    +----------------+----------------------------------------------------------------------------------+
+|                                                    | Allowed values | Any integer between 1 and 100000                                                 |
++----------------------------------------------------+----------------+----------------------------------------------------------------------------------+
+|  **vulnerability-detection.remediation_lru_size**  | Description    | LRU cache size assigned for vulnerability remediation (in number of elements).   |
++                                                    +----------------+----------------------------------------------------------------------------------+
+|                                                    | Default value  | 2048                                                                             |
 +                                                    +----------------+----------------------------------------------------------------------------------+
 |                                                    | Allowed values | Any integer between 1 and 100000                                                 |
 +----------------------------------------------------+----------------+----------------------------------------------------------------------------------+

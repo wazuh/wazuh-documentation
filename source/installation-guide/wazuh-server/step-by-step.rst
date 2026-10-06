@@ -68,29 +68,6 @@ Installing the Wazuh manager
 
             # apt-get -y install wazuh-manager|WAZUH_MANAGER_DEB_PKG_INSTALL|
 
-#. Save the Wazuh indexer username and password into the Wazuh manager keystore using the wazuh-keystore tool: 
-
-   .. code-block:: console
-
-      # /var/ossec/bin/wazuh-keystore -f indexer -k username -v <INDEXER_USERNAME>
-      # /var/ossec/bin/wazuh-keystore -f indexer -k password -v <INDEXER_PASSWORD>   
-
-   .. note::
-      
-      The default step-by-step installation credentials are ``admin``:``admin``
-
-#. Edit ``/var/ossec/etc/ossec.conf`` to configure the indexer connection. Set your host indexer URL. You can skip this step if you are not going to use the vulnerability detection capability.
-
-   .. include:: /_templates/installations/manager/configure_indexer_connection.rst
-
-#. Enable and start the Wazuh manager service.
-
-   .. include:: /_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
-
-#. Run the following command to verify the Wazuh manager status.
-
-   .. include:: /_templates/installations/wazuh/common/check_wazuh_manager.rst
-
 .. _wazuh_server_multi_node_filebeat:
 
 Installing Filebeat
@@ -114,6 +91,7 @@ Installing Filebeat
           .. include:: /_templates/installations/filebeat/common/apt/install_filebeat.rst
 
 
+.. _installation_configuring_filebeat:
 
 Configuring Filebeat
 ^^^^^^^^^^^^^^^^^^^^
@@ -161,10 +139,42 @@ Deploying certificates
   .. note::
     Make sure that a copy of the ``wazuh-certificates.tar`` file, created during the initial configuration step, is placed in your working directory.
 
-  #. Replace ``<server-node-name>`` with your Wazuh server node certificate name, the same one used in ``config.yml`` when creating the certificates. Then, move the certificates to their corresponding location.
+  #. Replace ``<SERVER_NODE_NAME>`` with your Wazuh server node certificate name, the same one used in ``config.yml`` when creating the certificates. Then, move the certificates to their corresponding location.
 
       .. include:: /_templates/installations/filebeat/opensearch/copy_certificates_filebeat_wazuh_cluster.rst
 
+Configuring the Wazuh indexer connection
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. note::
+
+   You can skip this step if you are not going to use the vulnerability detection capability.
+
+#. Save the Wazuh indexer username and password into the Wazuh manager keystore using the wazuh-keystore tool:
+
+   .. code-block:: console
+
+      # echo '<INDEXER_USERNAME>' | /var/ossec/bin/wazuh-keystore -f indexer -k username
+      # echo '<INDEXER_PASSWORD>' | /var/ossec/bin/wazuh-keystore -f indexer -k password
+
+   .. note::
+
+      The default step-by-step installation credentials are ``admin``:``admin``
+
+#. Edit ``/var/ossec/etc/ossec.conf`` to configure the indexer connection.
+
+   .. include:: /_templates/installations/manager/configure_indexer_connection.rst
+
+Starting the Wazuh manager
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+#. Enable and start the Wazuh manager service.
+
+   .. include:: /_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
+
+#. Run the following command to verify the Wazuh manager status.
+
+   .. include:: /_templates/installations/wazuh/common/check_wazuh_manager.rst
 
 Starting the Filebeat service
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

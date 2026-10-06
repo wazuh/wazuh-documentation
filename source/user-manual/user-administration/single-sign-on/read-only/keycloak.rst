@@ -54,7 +54,7 @@ KeyCloak configuration
       - **Canonicalization method**: ``EXCLUSIVE``
       - **Front channel logout**: ``ON``
 
-      Replace the ``WAZUH_DASHBOARD_URL`` field with the corresponding URL of your Wazuh dashboard instance.
+      Replace the ``<WAZUH_DASHBOARD_URL>`` field with the corresponding URL of your Wazuh dashboard instance.
 
       The configuration must be similar to the highlighted blue rectangles:   
 
@@ -103,7 +103,7 @@ KeyCloak configuration
 
 #. Create a new role. Navigate to **Realm roles > Create role** and complete the section with these parameters:
 
-   - **Role name**: Input ``wazuh-readonly``. This will be our backend role in the Wazuh Indexer configuration.
+   - **Role name**: Input ``wazuh-readonly``. This will be our backend role in the Wazuh indexer configuration.
 
       .. thumbnail:: /images/single-sign-on/keycloak/read-only/09-create-a-new-role-RO.png
          :title: Create a new role
@@ -175,7 +175,7 @@ KeyCloak configuration
 
       - **Mapper type**: ``Role list``
       - **Name**: ``wazuhRoleKey``. You can use any name here.
-      - **Role attribute name**: ``Roles``. This will be the ``roles_key`` on the Wazuh Indexer configuration.
+      - **Role attribute name**: ``Roles``. This will be the ``roles_key`` on the Wazuh indexer configuration.
       - **SAML Attribute NameFormat**: ``Basic``  
       - **Single Role Attribute**: ``On``
 
@@ -206,20 +206,26 @@ KeyCloak configuration
          :width: 80% 
 
    #. The downloaded files contain the ``idp.metadata.xml`` file and the ``sp.metadata.xml`` file.
-   
-      - The ``idp.entityID`` parameter is in the ``idp.metadata.xml`` file.
-      - The ``exchange_key`` parameter is found in the ``ds:X509Certificate`` field in the ``idp.metadata.xml`` file.
+
+      -  The ``idp.entityID`` parameter is in the ``idp.metadata.xml`` file.
 
       .. thumbnail:: /images/single-sign-on/keycloak/19-the-exchange_key-parameter.png
          :title: The exchange_key parameter
          :align: center
-         :width: 80% 
-
+         :width: 80%
 
 Wazuh indexer configuration
 ---------------------------
 
 Edit the Wazuh indexer security configuration files. We recommend that you back up these files before you carry out the configuration.
+
+#. Generate a 64-character long random key using the following command.
+
+   .. code-block:: console
+
+      openssl rand -hex 32
+
+   The output will be used as the ``exchange_key`` in the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file.
 
 #. Place the ``idp.metadata.xml`` and ``sp.metadata.xml`` files within the ``/etc/wazuh-indexer/opensearch-security/`` directory. Set the file ownership to wazuh-indexer using the following command:
 
@@ -264,10 +270,9 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
                     metadata_file: '/etc/wazuh-indexer/opensearch-security/sp.metadata.xml'
                   kibana_url: https://<WAZUH_DASHBOARD_ADDRESS>
                   roles_key: Roles
-                  exchange_key: 'MIICajCCAdOgAwIBAgIBAD.........'
+                  exchange_key: 'b1d6dd32753374557dcf92e241.......'
               authentication_backend:
                 type: noop
-      
 
    Ensure to change the following parameters to their corresponding value:
 
@@ -283,9 +288,9 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
    .. code-block:: console
 
-      # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /etc/wazuh-indexer/opensearch-security/config.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
+      # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /etc/wazuh-indexer/opensearch-security/config.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h 127.0.0.1 -nhnv
 
-   The ``-h`` flag specifies the hostname or the IP address of the Wazuh indexer node. Note that this command uses localhost, set your Wazuh indexer address if necessary.
+   The ``-h`` flag specifies the hostname or the IP address of the Wazuh indexer node. Note that this command uses 127.0.0.1, set your Wazuh indexer address if necessary.
 
    The command output must be similar to the following:
 
@@ -293,7 +298,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       :class: output
 
       Security Admin v7
-      Will connect to localhost:9200 ... done
+      Will connect to 127.0.0.1:9200 ... done
       Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
       OpenSearch Version: 2.10.0
       Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
@@ -314,7 +319,7 @@ Wazuh dashboard configuration
 #. Create a new role mapping for the backend role. Follow these steps to create a new role mapping, and grant read-only permissions to the backend role.
 
    #. Log into the Wazuh dashboard as administrator.
-   #. Click the upper-left menu icon **☰** to open the options, go to **Indexer/dashboard management** > **Security**, and then **Roles** to open the roles page.
+   #. Click the upper-left menu icon **☰** to open the options, go to **Indexer management** > **Security**, and then **Roles** to open the roles page.
    #. Click **Create role**, complete the empty fields with the following parameters, and then click **Create** to complete the task.
 
       -  **Name**: Assign a name to the role.
@@ -332,7 +337,7 @@ Wazuh dashboard configuration
 
       hosts:
         - default:
-            url: https://localhost
+            url: https://127.0.0.1
             port: 55000
             username: wazuh-wui
             password: "<wazuh-wui-password>"

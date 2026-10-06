@@ -1,88 +1,37 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn about the required dependencies for using the AWS integration in a Wazuh agent.
-
-.. _amazon_dependencies:
+   :description: The integration of AWS services with Wazuh configured on the Wazuh agent requires that certain dependencies be installed on the Wazuh agent. Learn more on this section of the documentation.
 
 Installing dependencies
 =======================
 
-.. note::
-  The integration with AWS S3 can be configured in the Wazuh manager (which also behaves as an agent) or directly in a Wazuh agent. This choice merely depends on how you decide to access your AWS infrastructure in your environment.
+.. |service| replace:: AWS
 
-.. warning::
-  The Wazuh manager includes all dependencies installed, these steps are only necessary when configuring the integration in a Wazuh agent.
+.. include:: /_templates/cloud/notes.rst
 
+We outline the dependencies needed to configure the integration on a Wazuh agent installed on a Linux endpoint.
 
 Python
 ------
 
-The AWS module requires `Python 3 <https://www.python.org/>`__. Specifically, it's compatible with
-`Python |PYTHON_CLOUD_CONTAINERS_MIN|–|PYTHON_CLOUD_CONTAINERS_MAX| <https://www.python.org/downloads/>`_. While later Python versions should work as well, we can't assure they are compatible.
+.. |py_cloud_cont_min| replace:: |PYTHON_CLOUD_CONTAINERS_MIN|
+.. |py_cloud_cont_max| replace:: |PYTHON_CLOUD_CONTAINERS_MAX|
 
-.. tabs::
+.. include:: /_templates/cloud/python_installation.rst
 
-   .. group-tab:: Yum
+.. |module_script| replace:: ``/var/ossec/wodles/aws/aws-s3``
 
-      .. code-block:: console
-
-         # yum update && yum install python3
-
-   .. group-tab:: APT
-
-      .. code-block:: console
-
-         # apt-get update && apt-get install python3
-
-
-The required modules can be installed with Pip, the Python package manager. Most UNIX distributions have this tool available in their software repositories:
-
-.. tabs::
-
-   .. group-tab:: Yum
-
-      .. code-block:: console
-
-         # yum update && yum install python3-pip
-
-   .. group-tab:: APT
-
-      .. code-block:: console
-
-         # apt-get update && apt-get install python3-pip
-
-It is recommended to use a pip version greater than or equal to 19.3 to ease the installation of the required dependencies.
-
-.. tabs::
-
-   .. group-tab:: Python 3.8–3.10
-
-      .. code-block:: console
-
-         # pip3 install --upgrade pip
-
-   .. group-tab:: Python 3.11
-
-      .. code-block:: console
-
-         # pip3 install --upgrade pip --break-system-packages
-
-      .. note::
-
-         This command modifies the default externally managed Python environment. See the `PEP 668 <https://peps.python.org/pep-0668/>`__ description for more information.
-
-         To prevent the modification, you can run ``pip3 install --upgrade pip`` within a virtual environment. You must update the ``aws-s3`` script shebang with your virtual environment interpreter, for example, ``#!/path/to/your/virtual/environment/bin/python3``.
-
+.. include:: /_templates/cloud/pip_installation.rst
 
 .. _boto-3:
 
 AWS client library for Python
 -----------------------------
 
-`Boto3 <https://boto3.readthedocs.io/>`__ is the official package that Amazon supports to manage AWS resources. It's used to download the log messages from the AWS services that Wazuh supports. The AWS module is compatible with Boto3 versions ``1.13.1``–``1.17.85``. Later Boto3 releases should be compatible although we cannot assure it.
+`Boto3 <https://boto3.readthedocs.io/>`__ is the official package supported by Amazon to manage AWS resources. It is used to download log messages from the different AWS services supported by Wazuh. The Wazuh module for AWS is compatible with ``boto3`` from version ``1.13.1`` to ``1.17.85``. Future ``boto3`` releases should maintain compatibility although we cannot assure it.
 
-To install the dependencies, execute the following command:
+Execute the following command to install the dependencies:
 
 .. tabs::
 
@@ -90,13 +39,13 @@ To install the dependencies, execute the following command:
 
       .. code-block:: console
 
-         # pip3 install boto3==1.17.85 pyarrow==14.0.1
+         # pip3 install boto3==1.34.135 pyarrow==14.0.1 numpy==1.26.0
 
-   .. group-tab:: Python 3.11
+   .. group-tab:: Python 3.11–3.12
 
       .. code-block:: console
 
-         # pip3 install --break-system-packages boto3==1.17.85 pyarrow==14.0.1
+         # pip3 install --break-system-packages boto3==1.34.135 pyarrow==14.0.1 numpy==1.26.0
 
       .. note::
 

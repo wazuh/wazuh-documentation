@@ -18,7 +18,7 @@ This contains variables that can be used to configure the Wazuh agent.
 Active-Response variables
 -------------------------
 $configure_active_response
-  Enables active response on this host.
+  Enables Active Response on this host.
 
   `Default true`
 

@@ -7,14 +7,15 @@ const UglifyJS = require("uglify-js");
 const SRC_PATH = "src/js-source/";
 const END_PATH = "static/js/";
 
-const parameter = process.argv[2]; 
+const parameter = process.argv[2].replace(/\.\./g, ''); 
 const FILE = parameter.split('=')[1];
 // const cacheFileName = path.resolve(__dirname, "../build/cache.json");
 
 // List of javascript files that must be included in all pages
 const commonJS = [
   SRC_PATH + "utils.js",
-  SRC_PATH + "components/light-dark-mode.js"
+  SRC_PATH + "components/light-dark-mode.js",
+  SRC_PATH + "components/back-to-top.js"
 ];
 
 // List of javascript files per page

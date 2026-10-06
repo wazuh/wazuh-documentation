@@ -3,8 +3,6 @@
 .. meta::
   :description: CBD lists are used to create a white/black list of users, file hashes, IPs, or domain names. Learn more about how to create CBD lists with Wazuh. 
   
-.. _ruleset_cdb-list:
-
 Using CDB lists
 ===============
 
@@ -12,9 +10,6 @@ Wazuh is able to check if a field extracted during the decoding phase is in a CD
 
 Creating a CDB list
 -------------------
-
-Creating the list file
-^^^^^^^^^^^^^^^^^^^^^^
 
 The list file is a plain text file. Each line has a unique key followed by a colon ``:`` separator character.
 
@@ -38,7 +33,7 @@ If you need to include the ``:`` character as part of the key, such as with MAC 
 	"a0:a0:a0:a0:a0:a0":
 	"b1:b1:b1:b1:b1:b1":
 
-With a key, we can determine the presence or absence of a field in a given list. By adding a value, we can use it as criteria in rules. For example, if we have account names (key) with a department name (value) associated, it would be possible to create an alert that triggers when a user not from the finance department logs into the finance server.
+With a key, we can determine the presence or absence of a field in a given list. By adding a value, we can use it as a criterion in rules. For example, if we have account names (key) with a department name (value) associated, it would be possible to create an alert that triggers when a user not from the finance department logs into the finance server.
 
 For IP addresses the dot notation is used for subnet matches:
 
@@ -52,34 +47,48 @@ For IP addresses the dot notation is used for subnet matches:
 | 10.1.1.1:   | 10.1.1.1/32    | 10.1.1.1                      |
 +-------------+----------------+-------------------------------+
 
-Example of IP address list file::
+Example of IP address list file
 
-    192.168.: Matches 192.168.0.0 - 192.168.255.255
-    172.16.19.: Matches 172.16.19.0 - 172.16.19.255
-    10.1.1.1: Matches 10.1.1.1
+.. code-block:: none
 
-We recommend to store the lists on ``/var/ossec/etc/lists``.
+   192.168.: Matches 192.168.0.0 - 192.168.255.255
+   172.16.19.: Matches 172.16.19.0 - 172.16.19.255
+   10.1.1.1: Matches 10.1.1.1
 
-Since Wazuh v3.11.0, CDB lists are built and loaded automatically when the analysis engine is started. Therefore, when adding or modifying CDB lists, just restart the manager.
+We recommend storing the lists on ``/var/ossec/etc/lists``.
 
+CDB lists are built and loaded automatically when the Wazuh analysis engine starts. Therefore, you need to restart the Wazuh manager service when you add or modify a CDB list.
 
-Adding the list to ossec.conf
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Adding the list in the Wazuh server configuration file
+------------------------------------------------------
 
-Each list must be defined in the ``ossec.conf`` file using the following syntax:
+Perform the following steps to add a CDB list to the Wazuh server configuration file.
 
-.. code-block:: xml
+#. Define the CDB list within the ``<ruleset>`` block of the ``/var/ossec/etc/ossec.conf`` file. For example, to define the CDB list ``/var/ossec/etc/lists/list-IP``, add the relative path ``etc/lists/list-IP`` as highlighted below:
 
-  <ossec_config>
-    <ruleset>
-      <list>etc/lists/list-IP</list>
+   .. code-block:: xml
+      :emphasize-lines: 10
 
-.. warning::
-  The ``<list>`` setting uses a relative path to the Wazuh installation folder (``/var/ossec/``) so make sure to indicate the directory accordingly.
+      ...  
+        <ruleset>
+          <!-- Default ruleset -->
+          <decoder_dir>ruleset/decoders</decoder_dir>
+          <rule_dir>ruleset/rules</rule_dir>
+          <rule_exclude>0215-policy_rules.xml</rule_exclude>
+          <list>etc/lists/audit-keys</list>
+          <list>etc/lists/amazon/aws-eventnames</list>
+          <list>etc/lists/security-eventchannel</list>
+          <list>etc/lists/list-IP</list>
 
-Restart Wazuh to apply the changes:
+          <!-- User-defined ruleset -->
+          <decoder_dir>etc/decoders</decoder_dir>
+          <rule_dir>etc/rules</rule_dir>
+        </ruleset>
+      ...
 
-  .. include:: /_templates/common/restart_manager.rst
+#. Restart the Wazuh manager via the CLI to apply the changes:
+
+   .. include:: /_templates/common/restart_manager.rst
 
 Using the CDB list in the rules
 -------------------------------
@@ -93,19 +102,19 @@ This example is a search for the key stored in the field attribute and will matc
 
 .. code-block:: xml
 
-     <list field="user" lookup="match_key">etc/lists/list-user</list>
+   <list field="user" lookup="match_key">etc/lists/list-user</list>
 
 The ``lookup="match_key"`` is the default and can be omitted as in this example:
 
 .. code-block:: xml
 
-     <list field="user">etc/lists/list-user</list>
+   <list field="user">etc/lists/list-user</list>
 
 In case the field is an IP address, you must use ``address_match_key``:
 
 .. code-block:: xml
 
-    <list field="srcip" lookup="address_match_key">etc/lists/list-IP</list>
+   <list field="srcip" lookup="address_match_key">etc/lists/list-IP</list>
 
 Negative key match
 ^^^^^^^^^^^^^^^^^^
@@ -114,13 +123,13 @@ This example is a search for the key stored in the field attribute and will matc
 
 .. code-block:: xml
 
-    <list field="user" lookup="not_match_key">etc/lists/list-user</list>
+   <list field="user" lookup="not_match_key">etc/lists/list-user</list>
 
 In case the field is an IP address, you must use ``not_address_match_key``:
 
 .. code-block:: xml
 
-    <list field="srcip" lookup="not_address_match_key">etc/lists/list-IP</list>
+   <list field="srcip" lookup="not_address_match_key">etc/lists/list-IP</list>
 
 Key and value match
 ^^^^^^^^^^^^^^^^^^^
@@ -129,7 +138,7 @@ This example is a search for the key stored in the field attribute, and on a pos
 
 .. code-block:: xml
 
-     <list field="user" lookup="match_key_value" check_value="^block">etc/lists/list-user</list>
+   <list field="user" lookup="match_key_value" check_value="^block">etc/lists/list-user</list>
 
 In case the field is an IP address, you must use ``address_match_key_value``:
 
@@ -137,33 +146,30 @@ In case the field is an IP address, you must use ``address_match_key_value``:
 
    <list field="srcip" lookup="address_match_key_value" check_value="^reject">etc/lists/list-IP</list>
 
-
 CDB lists examples
 ^^^^^^^^^^^^^^^^^^
 
+The following rules below are triggered if an IP address is in ``/var/ossec/etc/lists/List-one``, in ``/var/ossec/etc/lists/List-two`` or in both:
+
 .. code-block:: xml
 
-  <rule id="110700" level="10">
-    <if_group>json</if_group>
-    <list field="srcip" lookup="address_match_key">etc/lists/List-one</list>
-    <description>IP blacklisted in LIST ONE</description>
-    <group>list1,</group>
-  </rule>
+   <rule id="110700" level="10">
+     <if_group>json</if_group>
+     <list field="srcip" lookup="address_match_key">etc/lists/List-one</list>
+     <description>IP blacklisted in LIST ONE</description>
+     <group>list1,</group>
+   </rule>
 
+   <rule id="110701" level="10">
+     <if_group>json</if_group>
+     <list field="srcip" lookup="address_match_key">etc/lists/List-two</list>
+     <description>IP blacklisted in LIST TWO</description>
+     <group>list2,</group>
+   </rule>
 
-  <rule id="110701" level="10">
-    <if_group>json</if_group>
-    <list field="srcip" lookup="address_match_key">etc/lists/List-two</list>
-    <description>IP blacklisted in LIST TWO</description>
-    <group>list2,</group>
-  </rule>
-
-
-  <rule id="110710" level="10">
-    <if_sid>110700</if_sid>
-    <list field="srcip" lookup="address_match_key">etc/lists/List-two</list>
-    <description>IP blacklisted in LIST ONE and LIST TWO</description>
-    <group>list1,list2,</group>
-  </rule>
-
-In this example, the described rules check if an IP address is in the *List-one*, in the *List-two* or in both.
+   <rule id="110710" level="10">
+     <if_sid>110700</if_sid>
+     <list field="srcip" lookup="address_match_key">etc/lists/List-two</list>
+     <description>IP blacklisted in LIST ONE and LIST TWO</description>
+     <group>list1,list2,</group>
+   </rule>

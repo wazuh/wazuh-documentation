@@ -73,7 +73,7 @@ In this use case, Wazuh assists security administrators in meeting the **AU-6 Au
 
 #. Select the **NIST 800-53** module from your Wazuh dashboard.
 
-   .. thumbnail:: /images/compliance/nist/select-nist-800-53-moduleg.png    
+   .. thumbnail:: /images/compliance/nist/select-nist-800-53-module.png    
       :title: Select the NIST 800-53 module
       :alt: Select the NIST 800-53 module
       :align: center

@@ -1,0 +1,57 @@
+/* -----------------------------------------------------------------------------
+  Component: Back-to-top button
+
+  Style for the back-to-top button.
+----------------------------------------------------------------------------- */
+
+#btn-scroll-wrapper {  
+  pointer-events: none;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 118px;
+  z-index: 10000;
+  .container {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  #btn-scroll {
+    pointer-events: auto;
+    position: relative;
+    background-color: $light-color-accent;
+    border-radius: 100%;
+    height: 40px;
+    width: 40px;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 3px 3px 12px -2px rgba(31,31,31,0.5);
+    -webkit-box-shadow: 3px 3px 12px -2px rgba(31,31,31,0.5);
+    -moz-box-shadow: 3px 3px 12px -2px rgba(31,31,31,0.5);
+    &:not(.init-hidden) {
+      display: flex;
+    }
+    @include media-min(xxl) {
+      right: -50px;
+    }
+    &:focus,
+    &:hover {
+      text-decoration: none;
+    }
+    i {
+      color: $light-color-accent;
+      font-size: 40px;
+    }
+    svg {
+      fill: black;
+      transform: rotate(180deg) scale(1.0, 0.8);
+      stroke-width: 10px;
+      stroke: black;
+      @include media-max (lg) {
+        transform: rotate(180deg) scale(0.7, 0.6);
+      }
+    }
+  }
+}

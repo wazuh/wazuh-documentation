@@ -1,7 +1,7 @@
 {
   "name": "wazuh-documentation",
   "version": "3.0.0",
-  "description": "Wazuh is a free, open source and enterprise-ready security monitoring solution for threat detection, file integrity monitoring, incident response and compliance.",
+  "description": "Wazuh is a free, open source and enterprise-ready security monitoring solution for threat detection, integrity monitoring, incident response and compliance.",
   "main": "index.html",
   "watch": {
     "build": {
@@ -124,29 +124,21 @@
   },
   "homepage": "https://github.com/wazuh/wazuh-documentation#readme",
   "devDependencies": {
-    "@babel/core": "^7.22.8",
-    "@rollup/plugin-babel": "^5.3.0",
-    "@rollup/plugin-node-resolve": "^13.0.5",
-    "autoprefixer": "^10.3.6",
-    "clean-css-cli": "^5.4.1",
+    "@babel/core": "^7.24.7",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "autoprefixer": "^10.4.19",
+    "clean-css-cli": "^5.6.3",
     "eol-converter-cli": "^1.0.8",
-    "eslint": "^7.32.0",
+    "eslint": "^9.5.0",
     "eslint-config-google": "^0.14.0",
     "npm-run-all": "^4.1.5",
-    "npm-watch": "^0.11.0",
+    "npm-watch": "^0.13.0",
     "popper.js": "^1.16.1",
-    "postcss": "^8.4.31",
-    "postcss-cli": "^9.0.1",
-    "rollup": "^2.58.0",
-    "sass": "1.32.13",
-    "stylelint": "^15.10.1",
-    "stylelint-config-recommended-scss": "^5.0.2",
-    "stylelint-config-standard-scss": "^3.0.0",
-    "stylelint-order": "^5.0.0",
-    "stylelint-scss": "^4.1.0",
-    "uglify-js": "^3.17.0"
-  },
-  "resolutions": {
-    "semver": "^7.5.2"
+    "postcss": "^8.4.38",
+    "postcss-cli": "^11.0.0",
+    "rollup": "^4.18.0",
+    "sass": "1.77.6",
+    "uglify-js": "^3.18.0"
   }
 }

@@ -6,7 +6,7 @@
 Network IDS integration
 =======================
 
-Wazuh integrates with a network-based intrusion detection system (NIDS) to enhance threat detection by monitoring network traffic.
+Wazuh integrates with a network-based intrusion detection system (NIDS) to enhance threat detection by monitoring and analyzing network traffic.
 
 In this use case, we demonstrate how to integrate Suricata with Wazuh. Suricata can provide additional insights into your network's security with its network traffic inspection capabilities.
 
@@ -37,7 +37,7 @@ Take the following steps to configure Suricata on the Ubuntu endpoint and send t
    .. code-block:: console
 
       $ cd /tmp/ && curl -LO https://rules.emergingthreats.net/open/suricata-6.0.8/emerging.rules.tar.gz
-      $ sudo tar -xvzf emerging.rules.tar.gz && sudo mv rules/*.rules /etc/suricata/rules/
+      $ sudo tar -xvzf emerging.rules.tar.gz && sudo mkdir /etc/suricata/rules && sudo mv rules/*.rules /etc/suricata/rules/
       $ sudo chmod 640 /etc/suricata/rules/*.rules
 
 #. Modify Suricata settings in the ``/etc/suricata/suricata.yaml`` file and set the following variables:
@@ -54,7 +54,7 @@ Take the following steps to configure Suricata on the Ubuntu endpoint and send t
 
       # Global stats configuration
       stats:
-      enabled: no
+      enabled: yes
 
       # Linux high speed capture support
       af-packet:

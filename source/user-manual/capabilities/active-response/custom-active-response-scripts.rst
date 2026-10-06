@@ -6,7 +6,7 @@
 Custom active response scripts
 ==============================
 
-You can create custom active response scripts that execute when an alert of a specific rule ID, alert level, or rule group triggers. You can create active response scripts in any programming language. A trigger initiates the script using a defined :doc:`command </user-manual/reference/ossec-conf/commands>`. An :doc:`active response </user-manual/reference/ossec-conf/active-response>` configuration determines when and where the command executes.
+You can create custom active response scripts that execute when an alert of a specific rule ID, alert level, or rule group triggers. You can create active response scripts in any programming language. A trigger initiates the script using a defined :doc:`command </user-manual/reference/ossec-conf/commands>`. An :doc:`Active Response </user-manual/reference/ossec-conf/active-response>` configuration determines when and where the command executes.
 
 Programming an active response
 ------------------------------
@@ -88,7 +88,7 @@ As you can see, the JSON message format that an active response script analyzes 
        }
    }
 
-The ``parameters`` field of the active response alert corresponds to:
+The ``parameters`` field of the Active Response alert corresponds to:
 
 -  ``extra_args``: The extra arguments required to execute the active response script.
 -  ``alert``: The full alert that triggered the active response script.
@@ -556,7 +556,7 @@ With this configuration, Wazuh runs an executable instead of a Python script whe
 Method 2: Run a Python script through a Batch launcher
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 
-In this method, the Wazuh active response module executes the ``launcher.cmd`` script which subsequently executes the ``custom-ar.py`` script.
+In this method, the Wazuh Active Response module executes the ``launcher.cmd`` script which subsequently executes the ``custom-ar.py`` script.
 
 #. Create a ``launcher.cmd`` file in ``C:\Program Files (x86)\ossec-agent\active-response\bin\`` with the following content. This allows you to run any Windows script through the ``launcher.cmd`` script when triggering an active response.
 
@@ -658,7 +658,7 @@ In this method, the Wazuh active response module executes the ``launcher.cmd`` s
 
       > Restart-Service -Name wazuh
 
-#. On the Wazuh server, add the ``<command>`` and ``<active-response>`` blocks below to the Wazuh configuration ``/var/ossec/etc/ossec.conf`` file. The active response module runs the ``launcher.cmd`` script which runs the Python script in its ``<extra_args>`` option. This action executes for 60 seconds when rule ID 503 is triggered.
+#. On the Wazuh server, add the ``<command>`` and ``<active-response>`` blocks below to the Wazuh configuration ``/var/ossec/etc/ossec.conf`` file. The Active Response module runs the ``launcher.cmd`` script which runs the Python script in its ``<extra_args>`` option. This action executes for 60 seconds when rule ID 503 is triggered.
 
    .. code-block:: xml
       :emphasize-lines: 4, 5

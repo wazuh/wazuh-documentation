@@ -19,15 +19,11 @@ Add your billing details
 
 To add the billing details:
 
-1. Log in to the `Wazuh Cloud Console <https://console.cloud.wazuh.com/>`_.
-
-2. Go to the **Account** section and select **Billing**.
-
-3. In Payment method section, select **Add billing information**.
-
-4. Fill in the form with your billing details.
-
-5. Click **Save** to confirm the payment method.
+#. Log in to the `Wazuh Cloud Console <https://console.cloud.wazuh.com/>`_.
+#. Go to the **Account** section and select **Billing**.
+#. In the Payment method section, select **Add billing information**.
+#. Fill in the form with your billing details.
+#. Click **Save** to confirm the payment method.
 
 You can stop upcoming charges by :ref:`canceling your environments <cloud_stop_charges>`. 
 

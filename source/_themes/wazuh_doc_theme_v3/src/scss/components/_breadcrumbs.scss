@@ -4,6 +4,15 @@
   Style for the breadcrumbs present in the content area.
 ----------------------------------------------------------------------------- */
 
+
+.inner-body:not(.not-top) {
+  .breadcrumb-wrapper {
+    @include media-min(xl){
+      top: calc(#{$header-height-xl} + #{$secondary-mobile-bar});
+    }
+  }
+}
+
 .breadcrumb-wrapper {
   position: fixed;
   top: $header-height-xl;
@@ -26,11 +35,11 @@
     align-items: flex-end;
     max-height: $breadcrumbs-height-xl * 1.5;
   }
-  @include media-only(xl, xxl) {
+  @include media-only(xl,xxl) {
     width: calc(100% - #{$left-sidebar-width-narrow} - #{$right-sidebar-width-narrow});
   }
   @include media-min(xxl) {
-    width: calc(100% - #{$left-sidebar-width} - #{$right-sidebar-width});
+    width: calc(#{$outer-container-xxl} - #{$left-sidebar-width-narrow} - #{$right-sidebar-width-narrow});
   }
 }
 

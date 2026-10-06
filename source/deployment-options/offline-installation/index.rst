@@ -6,7 +6,7 @@
 Offline installation
 ====================
 
-You can install Wazuh even when there is no connection to the Internet. Installing the solution offline involves downloading the Wazuh central components to later install them on a system with no Internet connection. The Wazuh server, the Wazuh indexer, and the Wazuh dashboard can be installed and configured on the same host in an all-in-one deployment, or each component can be installed on a separate host as a distributed deployment, depending on your environment needs. 
+You can install Wazuh even when there is no connection to the Internet. Installing the solution offline involves downloading the Wazuh central components to later install them on a system with no Internet connection. The Wazuh server, the Wazuh indexer, and the Wazuh dashboard can be installed and configured on the same host in an all-in-one deployment, or each component can be installed on a separate host as a distributed deployment, depending on your environment needs. The supported architecture is 64-bit (x86_64/AMD64).
 
 For more information about the hardware requirements and the recommended operating systems, check the :ref:`Requirements <installation_requirements>` section.
 
@@ -61,8 +61,11 @@ Download the packages and configuration files
     
         # ./wazuh-install.sh -g            
 
-#. Copy or move ``wazuh-offline.tar.gz`` and ``wazuh-install-files.tar`` files to a folder accessible to the host(s) from where the offline installation will be carried out. This can be done by using ``scp``.
+#. Copy or move the following files to a directory on the host(s) from where the offline installation will be carried out. You can use ``scp`` for this.
 
+   -  ``wazuh-install.sh``
+   -  ``wazuh-offline.tar.gz``
+   -  ``wazuh-install-files.tar``
 
 Next steps
 ----------

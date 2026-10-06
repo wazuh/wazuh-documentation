@@ -10,7 +10,7 @@ In this use case, we demonstrate how to block malicious IP addresses from access
 
 This case uses a public IP reputation database that contains the IP addresses of some malicious actors. An IP reputation database is a collection of IP addresses that have been flagged as malicious. The RHEL endpoint plays the role of the malicious actor here, therefore you add its IP address to the reputation database. Then, configure Wazuh to block the RHEL endpoint from accessing web resources on the Apache web servers for 60 seconds. It’s a way of discouraging attackers from continuing to carry out their malicious activities.
 
-In this use case, you use the Wazuh :doc:`CDB list </user-manual/ruleset/cdb-list>` and :doc:`active response </getting-started/use-cases/incident-response>` capabilities.
+In this use case, you use the Wazuh :doc:`CDB list </user-manual/ruleset/cdb-list>` and :doc:`Active Response </getting-started/use-cases/incident-response>` capabilities.
 
 Infrastructure
 --------------
@@ -20,9 +20,9 @@ Infrastructure
 +===============+=====================================================================================================================================================================+
 | RHEL 9.0      | Attacker endpoint connecting to the victim's web server on which you use Wazuh CDB list capability to flag its IP address as malicious.                             |
 +---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Ubuntu 22.04  | Victim endpoint running an Apache 2.4.54 web server. Here, you use the Wazuh active response module to automatically block connections from the attacker endpoint.  |
+| Ubuntu 22.04  | Victim endpoint running an Apache 2.4.54 web server. Here, you use the Wazuh Active Response module to automatically block connections from the attacker endpoint.  |
 +---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Windows 11    | Victim endpoint running an Apache 2.4.54 web server. Here, you use the Wazuh active response module to automatically block connections from the attacker endpoint.  |
+| Windows 11    | Victim endpoint running an Apache 2.4.54 web server. Here, you use the Wazuh Active Response module to automatically block connections from the attacker endpoint.  |
 +---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Configuration
@@ -124,7 +124,7 @@ Perform the steps below to configure the Wazuh agent to monitor Apache web serve
 Wazuh server
 ^^^^^^^^^^^^
 
-You need to perform the following steps on the Wazuh server to add the IP address of the RHEL endpoint to a CDB list, and then configure rules and active response.
+You need to perform the following steps on the Wazuh server to add the IP address of the RHEL endpoint to a CDB list, and then configure rules and Active Response.
 
 Download the utilities and configure the CDB list
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -172,7 +172,7 @@ Download the utilities and configure the CDB list
 
       $ sudo chown wazuh:wazuh /var/ossec/etc/lists/blacklist-alienvault
 
-Configure the active response module to block the malicious IP address
+Configure the Active Response module to block the malicious IP address
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #. Add a custom rule to trigger a Wazuh :doc:`active response </user-manual/capabilities/active-response/index>` script. Do this in the Wazuh server ``/var/ossec/etc/rules/local_rules.xml`` custom ruleset file:
@@ -210,7 +210,7 @@ Configure the active response module to block the malicious IP address
 
       </ossec_config>
 
-#. Add the active response block to the Wazuh server ``/var/ossec/etc/ossec.conf`` file:
+#. Add the Active Response block to the Wazuh server ``/var/ossec/etc/ossec.conf`` file:
 
    **For the Ubuntu endpoint**
 
@@ -259,7 +259,7 @@ Attack emulation
 
       $ curl http://<WEBSERVER_IP>
 
-The attacker endpoint connects to the victim's web servers the first time. After the first connection, the Wazuh active response module temporarily blocks any successive connection to the web servers for 60 seconds.
+The attacker endpoint connects to the victim's web servers the first time. After the first connection, the Wazuh Active Response module temporarily blocks any successive connection to the web servers for 60 seconds.
 
 Visualize the alerts
 --------------------

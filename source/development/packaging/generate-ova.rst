@@ -29,11 +29,11 @@ Creating the Wazuh VM
 
 To create the virtual machine follow these steps:
 
-#. Download our *wazuh-packages* repository from GitHub and navigate to the ``ova/`` directory. Select the version, for example, ``v|WAZUH_CURRENT_OVA|``.
+#. Download our *wazuh-virtual-machines* repository from GitHub and navigate to the ``ova/`` directory. Select the version, for example, ``v|WAZUH_CURRENT_OVA|``.
 
    .. code-block:: console
 
-      $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/ova && git checkout v|WAZUH_CURRENT_OVA|
+      $ git clone https://github.com/wazuh/wazuh-virtual-machines && cd wazuh-virtual-machines/ova/ && git checkout v|WAZUH_CURRENT_OVA|
 
 #. Execute the ``generate_ova.sh`` script.
 

@@ -162,4 +162,6 @@ Available regions:
 
 * Sydney: ``ap-southeast-2``
 
+* Canada: ``ca-central-1``
+
 When selecting a region to host your environment, if you are not sure which one is the best option for you, select one that is the closest to your location since this typically reduces latency for indexing and search requests.

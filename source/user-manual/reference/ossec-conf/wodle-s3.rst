@@ -138,7 +138,7 @@ Time of the day to run the scan. It has to be in the hh:mm format.
 Buckets
 ~~~~~~~
 
-It is necessary to specify the type as an attribute of the ``bucket`` tag to indicate the service configured. More information about the supported services and their associated types on :ref:`AWS supported services <amazon_supported_services>`.
+It is necessary to specify the type as an attribute of the ``bucket`` tag to indicate the service configured. More information about the supported services and their associated types on :doc:`AWS supported services </cloud-security/amazon/services/supported-services/index>`.
 
 	.. code-block:: xml
 
@@ -182,6 +182,8 @@ The available types are:  ``cloudtrail``, ``guardduty``, ``vpcflow``, ``config``
 | :ref:`bucket_sts_endpoint`             | The AWS Security Token Service VPC endpoint URL             | Optional                                      |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`bucket_service_endpoint`         | The AWS S3 endpoint URL                                     | Optional                                      |
++----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
+| :ref:`bucket_waf_acls`                 | Comma-separated list of ACLs AWS WAF                        | Optional (only works with WAF v2 buckets)     |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 
 .. _bucket_name:
@@ -425,7 +427,7 @@ A value to determine if each log file is deleted once it has been collected by t
 sts_endpoint
 ^^^^^^^^^^^^
 
-The AWS Security Token Service VPC endpoint URL to be used when an IAM role is provided as the authentication method. Check the :ref:`Considerations for configuration <amazon_considerations>` page to learn more about VPC endpoints.
+The AWS Security Token Service VPC endpoint URL to be used when an IAM role is provided as the authentication method. Check the :doc:`Considerations for configuration </cloud-security/amazon/services/prerequisites/considerations>` page to learn more about VPC endpoints.
 
 +--------------------+----------------------------------------+
 | **Default value**  | N/A                                    |
@@ -438,7 +440,7 @@ The AWS Security Token Service VPC endpoint URL to be used when an IAM role is p
 service_endpoint
 ^^^^^^^^^^^^^^^^
 
-The AWS S3 endpoint URL to be used to download the data from the bucket. Check the :ref:`Considerations for configuration <amazon_considerations>` page to learn more about VPC and FIPS endpoints.
+The AWS S3 endpoint URL to be used to download the data from the bucket. Check the :doc:`Considerations for configuration </cloud-security/amazon/services/prerequisites/considerations>` page to learn more about VPC and FIPS endpoints.
 
 +--------------------+----------------------------------------+
 | **Default value**  | N/A                                    |
@@ -446,12 +448,25 @@ The AWS S3 endpoint URL to be used to download the data from the bucket. Check t
 | **Allowed values** | Any valid endpoint URL for S3          |
 +--------------------+----------------------------------------+
 
+.. _bucket_waf_acls:
+
+waf_acls
+^^^^^^^^
+
+A comma-separated list of ACLs to limit parsing of logs. Only works with WAF v2 buckets.
+
++--------------------+----------------------------------------+
+| **Default value**  | N/A                                    |
++--------------------+----------------------------------------+
+| **Allowed values** | Comma-separated list of valid ACLs     |
++--------------------+----------------------------------------+
+
 .. _services:
 
 Services
 ~~~~~~~~
 
-It is necessary to specify the type as an attribute of the ``service`` tag to indicate the service configured. More information about the supported services and their associated types on :ref:`AWS supported services <amazon_supported_services>`.
+It is necessary to specify the type as an attribute of the ``service`` tag to indicate the service configured. More information about the supported services and their associated types on :doc:`AWS supported services </cloud-security/amazon/services/supported-services/index>`.
 
 	.. code-block:: xml
 
@@ -650,7 +665,7 @@ Define whether or not to remove the log streams from the log groups after they a
 sts_endpoint
 ^^^^^^^^^^^^
 
-The AWS Security Token Service VPC endpoint URL to be used when an IAM role is provided as the authentication method. Check the :ref:`Considerations for configuration <amazon_considerations>` page to learn more about VPC endpoints.
+The AWS Security Token Service VPC endpoint URL to be used when an IAM role is provided as the authentication method. Check the :doc:`Considerations for configuration </cloud-security/amazon/services/prerequisites/considerations>` page to learn more about VPC endpoints.
 
 +--------------------+----------------------------------------+
 | **Default value**  | N/A                                    |
@@ -663,7 +678,7 @@ The AWS Security Token Service VPC endpoint URL to be used when an IAM role is p
 service_endpoint
 ^^^^^^^^^^^^^^^^
 
-The endpoint URL for the required AWS Service to be used to download the data from it. Check the :ref:`Considerations for configuration <amazon_considerations>` page to learn more about VPC and FIPS endpoints.
+The endpoint URL for the required AWS Service to be used to download the data from it. Check the :doc:`Considerations for configuration </cloud-security/amazon/services/prerequisites/considerations>` page to learn more about VPC and FIPS endpoints.
 
 +--------------------+------------------------------------------------+
 | **Default value**  | N/A                                            |
@@ -678,7 +693,7 @@ Subscribers
 
 .. versionadded:: 4.4.2
 
-It is necessary to specify the type as an attribute of the ``subscriber`` tag to indicate the service configured. More information about the supported services and their associated types on :ref:`AWS supported services <amazon_supported_services>`.
+It is necessary to specify the type as an attribute of the ``subscriber`` tag to indicate the service configured. More information about the supported services and their associated types on :doc:`AWS supported services </cloud-security/amazon/services/supported-services/index>`.
 
 	.. code-block:: xml
 
@@ -686,7 +701,11 @@ It is necessary to specify the type as an attribute of the ``subscriber`` tag to
 
 		</subscriber>
 
-The currently available types are: ``security_lake`` and ``buckets``.
+The currently available types are:
+
+-  ``security_lake``
+-  ``buckets``
+-  ``security_hub``
 
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | Options                                | Allowed values                                              | Mandatory/Optional                            |
@@ -698,7 +717,8 @@ The currently available types are: ``security_lake`` and ``buckets``.
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`subscriber_external_id`          | Valid external ID                                           | Mandatory for Amazon Security Lake            |
 |                                        |                                                             | Subscription                                  |
-|                                        |                                                             | (not available for Custom Logs Buckets)       |
+|                                        |                                                             | (not available for Custom Logs Buckets        |
+|                                        |                                                             | and Amazon Security Hub)                      |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`subscriber_aws_profile`          | Valid profile name                                          | Optional                                      |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
@@ -706,7 +726,8 @@ The currently available types are: ``security_lake`` and ``buckets``.
 |                                        |                                                             | to be provided)                               |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`subscriber_discard_regex`        | A regex value to determine if an event must be discarded    | Optional                                      |
-|                                        |                                                             | (only available for Custom Logs Buckets)      |
+|                                        |                                                             | (only available for Custom Logs Buckets       |
+|                                        |                                                             | and Amazon Security Hub)                      |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`subscriber_sts_endpoint`         | Any valid VPC endpoint URL for STS                          | Optional                                      |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
@@ -867,7 +888,7 @@ Usage example only for plain text logs:
 sts_endpoint
 ^^^^^^^^^^^^
 
-The AWS Security Token Service VPC endpoint URL to be used when an IAM role is provided as the authentication method. Check the :ref:`Considerations for configuration <amazon_considerations>` page to learn more about VPC endpoints.
+The AWS Security Token Service VPC endpoint URL to be used when an IAM role is provided as the authentication method. Check the :doc:`Considerations for configuration </cloud-security/amazon/services/prerequisites/considerations>` page to learn more about VPC endpoints.
 
 +--------------------+----------------------------------------+
 | **Default value**  | N/A                                    |
@@ -880,7 +901,7 @@ The AWS Security Token Service VPC endpoint URL to be used when an IAM role is p
 service_endpoint
 ^^^^^^^^^^^^^^^^
 
-The AWS S3 endpoint URL to be used to download the data from the bucket. Check the :ref:`Considerations for configuration <amazon_considerations>` page to learn more about VPC and FIPS endpoints.
+The AWS S3 endpoint URL to be used to download the data from the bucket. Check the :doc:`Considerations for configuration </cloud-security/amazon/services/prerequisites/considerations>` page to learn more about VPC and FIPS endpoints.
 
 +--------------------+------------------------------------------------+
 | **Default value**  | N/A                                            |
@@ -950,6 +971,10 @@ Example of configuration
         <iam_role_arn>arn:aws:iam::010203040506:role/ASL-Role</iam_role_arn>
       </subscriber>
       <subscriber type="buckets">
+        <sqs_name>sqs-custom-logs-queue</sqs_name>
+        <aws_profile>dev</aws_profile>
+      </subscriber>
+      <subscriber type="security_hub">
         <sqs_name>sqs-custom-logs-queue</sqs_name>
         <aws_profile>dev</aws_profile>
       </subscriber>

@@ -23,7 +23,7 @@ Access to services and containers
 
       In case you use a self-signed certificate, your browser will warn that it cannot verify its authenticity.
 
-#. Enroll the agents by following the standard enrollment process and using the Docker host address as the manager address. For more information, see the :doc:`Wazuh agent enrollment </user-manual/agent-enrollment/index>` documentation.
+#. Enroll the agents by following the standard enrollment process and using the Docker host address as the manager address. For more information, see the :doc:`Wazuh agent enrollment </user-manual/agent/agent-enrollment/index>` documentation.
 
 #. List the containers in the directory where the Wazuh ``docker-compose.yml`` file is located:
 

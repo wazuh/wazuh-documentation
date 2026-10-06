@@ -61,7 +61,7 @@ The second is to disable them from the Wazuh agent ``ossec.conf`` file by adding
 How to share policy files and configuration with the Wazuh agents
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-As described in the :doc:`centralized configuration <../../reference/centralized-configuration>` section, the Wazuh manager can push files and configurations to connected Wazuh agents.
+As described in the :doc:`centralized configuration </user-manual/reference/centralized-configuration>` section, the Wazuh manager can push files and configurations to connected Wazuh agents.
 
 You can enable this feature to push policy files to the Wazuh agents in defined groups. By default, every Wazuh agent belongs to the ``default`` group, which is used here as an example:
 

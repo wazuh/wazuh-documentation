@@ -52,10 +52,10 @@ Perform the following steps to install Logstash and the required plugin.
 
    .. code-block:: console
 
-      $ sudo chmod -R 755 </PATH/TO/LOCAL/WAZUH-INDEXER/CERTIFICATE>/root-ca.pem
+      $ sudo chmod -R 755 </PATH/TO/LOCAL/WAZUH_INDEXER/CERTIFICATE>/root-ca.pem
       $ sudo chmod -R 755 </PATH/TO/LOCAL/ELASTICSEARCH/CERTIFICATE>/root-ca.pem
 
-   Replace ``</PATH/TO/LOCAL/WAZUH-INDEXER/CERTIFICATE>/root-ca.pem`` and ``</PATH/TO/LOCAL/ELASTICSEARCH/CERTIFICATE>/root-ca.pem`` with your Wazuh indexer and Elasticsearch certificate local paths on the Logstash endpoint respectively.
+   Replace ``</PATH/TO/LOCAL/WAZUH_INDEXER/CERTIFICATE>/root-ca.pem`` and ``</PATH/TO/LOCAL/ELASTICSEARCH/CERTIFICATE>/root-ca.pem`` with your Wazuh indexer and Elasticsearch certificate local paths on the Logstash endpoint respectively.
 
 Configuring new indexes
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -249,6 +249,8 @@ Check Elastic documentation for more details on `setting up and running Logstash
    The ``/var/log/logstash/logstash-plain.log`` file in the Logstash instance stores events generated when Logstash runs. View this file in case you need to troubleshoot.
 
 After Logstash is successfully running, check how to :ref:`configure the Wazuh alert index pattern <configuring_wazuh_alerts_index_pattern_in_elastic>` and :ref:`verify the integration <verifying_elastic_integration>`.
+
+.. _elastic_stack_wazuh_server_integration_using_logstash:
 
 Wazuh server integration using Logstash
 ---------------------------------------

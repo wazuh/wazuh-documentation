@@ -15,10 +15,12 @@ The Wazuh indexer can be configured as a single-node or multi-node cluster, prov
 .. topic:: Contents
 
    .. toctree::
-      :maxdepth: 1
-      
+      :titlesonly:
+
       wazuh-indexer-indices
       re-indexing
       index-life-management
       wazuh-indexer-tuning
       migrating-wazuh-indices
+      wazuh-indexer-cluster
+

@@ -1,19 +1,17 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn how to install and configure the Wazuh module to monitor Google Cloud services in this section of the Wazuh documentation.
-
-.. _gcp_prerequisites:
+   :description: Learn about the prerequisites to collect logs from Google Cloud Pub/Sub or storage buckets in this section of the documentation.
 
 Prerequisites
 =============
 
-This module requires dependencies to work, and also the right credentials in order to access the services. Take a look at the elements of this section before proceeding.
+You can configure either the Wazuh server or the agent to collect logs from Google Cloud Pub/Sub or storage buckets. You need to install dependencies and configure Google Cloud credentials on the endpoint you want to perform the integration to access the supported services. Take a look at the following sections:
 
 .. toctree::
-  :maxdepth: 1
+   :maxdepth: 1
   
-  dependencies
-  credentials
-  pubsub
-  considerations
+   dependencies
+   credentials
+   gcloud-python-script
+   visualizing-events

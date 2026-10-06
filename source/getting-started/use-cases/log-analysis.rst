@@ -47,7 +47,7 @@ Wazuh collects logs from a wide range of sources, enabling comprehensive monitor
       :align: center
       :width: 80%
 
--  **Cloud provider logs**: Wazuh integrates with cloud providers like :doc:`AWS </cloud-security/amazon/index>`, :doc:`Azure </cloud-security/azure/index>`, :doc:`Google Cloud </cloud-security/gcp/index>`, and :doc:`Office 365 </cloud-security/office365/index>` to collect logs from cloud services such as EC2 instances, S3 buckets, Azure VMs, and more. The image below shows the various cloud provider modules on the Wazuh dashboard.
+-  **Cloud provider logs**: Wazuh integrates with cloud providers like :doc:`AWS </cloud-security/amazon/index>`, :doc:`Azure </cloud-security/azure/index>`, :doc:`Google Cloud </cloud-security/gcp/index>`, and :doc:`Office 365 </cloud-security/office365/index>` to collect logs from cloud services such as EC2 instances, S3 buckets, Azure VMs, and more. The image below shows the **CLOUD SECURITY** section in the Wazuh dashboard.
 
    .. thumbnail:: /images/getting-started/use-cases/log-data-analysis/cloud-provider-modules.png
       :title: Cloud provider modules
@@ -68,7 +68,7 @@ Rules and decoders
 
 Wazuh :doc:`rules and decoders </user-manual/ruleset/index>` are core components in log data analysis and threat detection and response. Wazuh provides a powerful platform for log data analysis, allowing organizations to enhance their security posture by promptly detecting and responding to potential security threats.
 
-Wazuh decoders are responsible for parsing and normalizing log data collected from various sources. Decoders are essential for converting the raw log data in several formats into a unified and structured format that Wazuh can process effectively. Wazuh has pre-built decoders for common log formats such as syslog, Windows event channel, macOS ULS, and more. Additionally, Wazuh allows you to define :doc:`custom decoders </user-manual/ruleset/custom>` for parsing logs from specific applications or devices with unique log formats. By using decoders, Wazuh can efficiently interpret log data and extract relevant information, such as timestamps, log levels, source IP addresses, user names, and more. As shown below, you can view Wazuh out-of-the-box and custom decoders on the **Decoders** module of the Wazuh dashboard.
+Wazuh decoders are responsible for parsing and normalizing log data collected from various sources. Decoders are essential for converting the raw log data in several formats into a unified and structured format that Wazuh can process effectively. Wazuh has pre-built decoders for common log formats such as syslog, Windows event channel, macOS ULS, and more. Additionally, Wazuh allows you to define :doc:`custom decoders </user-manual/ruleset/decoders/custom>` for parsing logs from specific applications or devices with unique log formats. By using decoders, Wazuh can efficiently interpret log data and extract relevant information, such as timestamps, log levels, source IP addresses, user names, and more. As shown below, you can view Wazuh out-of-the-box and custom decoders on the **Server management** > **Decoders** of the Wazuh dashboard.
 
 .. thumbnail:: /images/getting-started/use-cases/log-data-analysis/decoders-in-wazuh-dashboard.png
    :title: Decoders in Wazuh dashboard
@@ -76,7 +76,7 @@ Wazuh decoders are responsible for parsing and normalizing log data collected fr
    :align: center
    :width: 80%
 
-Wazuh ruleset detects security events and anomalies in log data. These rules are written in a specific format and they trigger alerts when certain conditions are met. The rules are defined based on certain criteria like log fields, values, or patterns to match specific log entries that may indicate security threats. Wazuh provides a wide range of pre-built rules covering common security use cases. Additionally, administrators can create :doc:`custom rules </user-manual/ruleset/custom>` tailored to their specific environment and security requirements. The **Rules** module of the Wazuh dashboard lets you view the default and custom rules.
+Wazuh ruleset detects security events and anomalies in log data. These rules are written in a specific format and they trigger alerts when certain conditions are met. The rules are defined based on certain criteria like log fields, values, or patterns to match specific log entries that may indicate security threats. Wazuh provides a wide range of pre-built rules covering common security use cases. Additionally, administrators can create :doc:`custom rules </user-manual/ruleset/rules/custom>` tailored to their specific environment and security requirements. The **Server management** category of the Wazuh dashboard lets you view the default and custom **Rules**.
 
 .. thumbnail:: /images/getting-started/use-cases/log-data-analysis/rules-in-wazuh-dashboard.png
    :title: Rules in Wazuh dashboard
@@ -108,7 +108,7 @@ The Wazuh indexer guarantees redundancy by storing the JSON documents across sev
 
 Wazuh uses four indices to store several event types:
 
--  **wazuh-alerts** stores alerts generated by the Wazuh server when an event triggers a rule with high enough priority. The image below shows alerts in the **Threat Hunting** module of the Wazuh dashboard. The index pattern is set to ``wazuh-alerts-*`` by default.
+-  **wazuh-alerts** stores alerts generated by the Wazuh server when an event triggers a rule with high enough priority. The image below shows alerts in the **Discover** module of the Wazuh dashboard. The index pattern is set to ``wazuh-alerts-*`` by default.
 
    .. thumbnail:: /images/getting-started/use-cases/log-data-analysis/alerts-in-index-pattern.png
       :title: Alerts in the wazuh-alerts-* index pattern
@@ -116,7 +116,7 @@ Wazuh uses four indices to store several event types:
       :align: center
       :width: 80%
 
--  **wazuh-archives** index stores all events received from the Wazuh server regardless of whether they trigger an alert. The :doc:`Wazuh archives </user-manual/manager/wazuh-archives>` use this index to enable log retention and querying capabilities that offer deeper insight into events happening within monitored endpoints. Wazuh archives are disabled by default because of the huge storage requirements needed to store all the logs. The image below shows archived events in the **Discover** section of Wazuh dashboard with the index pattern set to ``wazuh-archives-*``.
+-  **wazuh-archives** index stores all events received from the Wazuh server regardless of whether they trigger an alert. The :ref:`Wazuh archives <archiving_event_logs>` use this index to enable log retention and querying capabilities that offer deeper insight into events happening within monitored endpoints. Wazuh archives are disabled by default because of the huge storage requirements needed to store all the logs. The image below shows archived events in the **Discover** section of Wazuh dashboard with the index pattern set to ``wazuh-archives-*``.
 
    .. thumbnail:: /images/getting-started/use-cases/log-data-analysis/events-in-index-pattern.png
       :title: Events in wazuh-archives-* index pattern

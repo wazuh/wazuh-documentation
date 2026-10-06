@@ -1,8 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Wazuh provides a script to connect the agentless endpoint to the Wazuh server using SSH authentication. Learn more about it in this section. 
-  
+  :description: Wazuh provides a script to connect the agentless endpoint to the Wazuh server using SSH authentication. Learn more about it in this section.
+
 Connection
 ==========
 
@@ -11,14 +11,14 @@ Wazuh provides a ``register_host.sh`` script to connect the agentless endpoint t
 Add an endpoint
 ---------------
 
-The ``add`` option of the ``register_host.sh`` script adds an agentless endpoint to the Wazuh server. Specify the ``NOPASS`` option to use public key authentication rather than using a password. 
+The ``add`` option of the ``register_host.sh`` script adds an agentless endpoint to the Wazuh server. Specify the ``NOPASS`` option to use public key authentication rather than using a password.
 
 Endpoints with public key authentication
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 To add agentless endpoints that use public key authentication, perform the following steps on the Wazuh server.
 
-#. Generate a public key with the following command:
+#. Generate a public key with the following command. It saves the public key in ``/var/ossec/.ssh/id_rsa.pub`` by default.
 
    .. code-block:: console
 
@@ -28,7 +28,7 @@ To add agentless endpoints that use public key authentication, perform the follo
 
    .. code-block:: console
 
-      ssh-copy-id -i ~/.ssh/id_rsa.pub user@test.com
+      ssh-copy-id -i /var/ossec/.ssh/id_rsa.pub user@test.com
 
 #. Add the endpoint by running the following command on the Wazuh server:
 
@@ -40,7 +40,7 @@ To add agentless endpoints that use public key authentication, perform the follo
 
    .. code-block:: console
       :class: output
-      
+
       *Host user@test.com added.
 
 Endpoints with password authentication
@@ -62,7 +62,7 @@ The command output must be similar to the following:
 Cisco PIX
 ^^^^^^^^^
 
-For Cisco devices, such as routers or firewalls, use ``enablepass`` to specify the enable password. 
+For Cisco devices, such as routers or firewalls, use ``enablepass`` to specify the enable password.
 
 Add a Cisco device using the configuration command example below:
 
@@ -80,7 +80,7 @@ The command output must be similar to the following:
 List connected endpoints
 ------------------------
 
-The ``list`` option of the ``register_host.sh`` script displays all agentless endpoints connected to the Wazuh server. 
+The ``list`` option of the ``register_host.sh`` script displays all agentless endpoints connected to the Wazuh server.
 
 Use the following command to display the connected endpoints:
 
@@ -92,15 +92,15 @@ The command output must be similar to the following:
 
    .. code-block:: console
       :class: output
-      
-      *Available hosts: 
+
+      *Available hosts:
       user@example_address.com
-      pix@example_address.com 
+      pix@example_address.com
 
 Remove agentless configuration
 ------------------------------
 
-Agentless endpoint credentials are stored in the ``/var/ossec/agentless/.passlist`` file on the Wazuh server. This file must be deleted to remove all agentless configurations, as it is currently not possible to remove the configuration of only one endpoint. 
+Agentless endpoint credentials are stored in the ``/var/ossec/agentless/.passlist`` file on the Wazuh server. This file must be deleted to remove all agentless configurations, as it is currently not possible to remove the configuration of only one endpoint.
 
 Perform the following steps on the Wazuh server to remove your agentless configuration and passwords.
 
@@ -108,10 +108,8 @@ Perform the following steps on the Wazuh server to remove your agentless configu
 
 #. Delete the ``/var/ossec/agentless/.passlist`` file.
 
-#. Restart the Wazuh manager to apply the changes: 
+#. Restart the Wazuh manager to apply the changes:
 
    .. code-block:: console
 
       systemctl restart wazuh-manager
-
-

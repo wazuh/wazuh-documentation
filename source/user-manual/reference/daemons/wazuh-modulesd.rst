@@ -23,7 +23,7 @@ The wazuh-modulesd program manages the Wazuh modules described below.
 
 .. topic:: CIS-CAT wodle
 
-  The CIS-CAT wodle allows you to run CIS policy scans visualizing the results of assessments in the Wazuh App. See the :doc:`CIS-CAT integration <../../capabilities/policy-monitoring/ciscat/ciscat>` for more information on this functionality.
+  The CIS-CAT wodle allows you to run CIS policy scans visualizing the results of assessments in the Wazuh dashboard.
 
 .. topic:: Command wodle
 
@@ -43,7 +43,7 @@ The wazuh-modulesd program manages the Wazuh modules described below.
 
 .. topic:: Office 365 wodle
 
-  The Office 365 wodle allows you to gather audit logs from multiple Office 365 organizations. See the :ref:`Office 365 <office365>` section for more information on this functionality.
+  The Office 365 wodle allows you to gather audit logs from multiple Office 365 organizations. See the :doc:`Office 365 </cloud-security/office365/index>` section for more information on this functionality.
 
 .. topic:: Vulnerability detector wodle
 
@@ -51,7 +51,7 @@ The wazuh-modulesd program manages the Wazuh modules described below.
 
 .. topic:: Osquery wodle
 
-  The Osquery wodle provides the user with an operating system instrumentation tool that makes low-level operating system analytics and monitoring both efficient and intuitive using SQL-based queries. For more information, read through the documentation for :doc:`osquery integration </user-manual/capabilities/malware-detection/osquery>`.
+  The Osquery wodle provides the user with an operating system instrumentation tool that makes low-level operating system analytics and monitoring both efficient and intuitive using SQL-based queries. For more information, read through the documentation for :doc:`osquery integration </user-manual/capabilities/system-inventory/osquery>`.
 
 .. topic:: SCA module
 

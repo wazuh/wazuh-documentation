@@ -81,18 +81,10 @@ The Wazuh dashboard has a **Configuration Assessment** module that allows you to
    :align: center
    :width: 80%
     
-In the image below, you see the policy based on the CIS benchmark for Ubuntu Linux 22.04.
-
-.. thumbnail:: /images/getting-started/use-cases/sca/cis-benchmark-ubuntu22-policy.png
-   :title: Policy for CIS benchmark for Ubuntu 22.04
-   :alt: Policy for CIS benchmark for Ubuntu 22.04
-   :align: center
-   :width: 80%
 
 Interpreting SCA results
 ------------------------
-
-On the Wazuh dashboard, we select a policy to see the checks that we run on the endpoint. In the image below, you can see 182 checks were run against the Ubuntu 22.04 endpoint. Out of these, 63 passed, 98 failed, and 21 are not applicable to the endpoint. It also shows a score of 39% which is calculated based on the number of tests passed.  
+The image below shows the policy based on the CIS benchmark for Ubuntu Linux 22.04 LTS. You can see that 191 checks were run against the Ubuntu 22.04 endpoint. Out of these, 56 passed, 87 failed, and 48 are not applicable to the endpoint. It also shows a score of 39% which is calculated based on the number of tests passed.  
 
 .. thumbnail:: /images/getting-started/use-cases/sca/cis-benchmark-ubuntu22-results.png
    :title: Results for CIS benchmark for Ubuntu 22.04 checks
@@ -100,24 +92,24 @@ On the Wazuh dashboard, we select a policy to see the checks that we run on the 
    :align: center
    :width: 80%
 
-You can click on the checks to get more information. In the image below, you can see information such as rationale, remediation, and a description of the check with ID ``28500``.
+You can click on the checks to get more information. In the image below, you can see information such as rationale, remediation, and a description of the check with ID ``3003``.
 
-.. thumbnail:: /images/getting-started/use-cases/sca/check-28500-results.png
-   :title: Results for CIS benchmark for Ubuntu 22.04 check ID 28500
-   :alt: Results for CIS benchmark for Ubuntu 22.04 check ID 28500
+.. thumbnail:: /images/getting-started/use-cases/sca/check-3003-results.png
+   :title: Results for CIS benchmark for Ubuntu 22.04 check ID 3003
+   :alt: Results for CIS benchmark for Ubuntu 22.04 check ID 3003
    :align: center
    :width: 80%
 
-The above SCA scan result shows ``failed`` because the ``/tmp`` directory is not on a separate partition and the directory is not mounted at boot time. If the remediation is implemented, the result will change to ``passed`` thereby improving the security of the endpoint.
+The above SCA scan result shows ``failed`` because the public key authentication for ssh is not enabled. If the remediation is implemented, the result will change to ``passed`` thereby improving the security of the endpoint.
 
 Implementing SCA remediation steps
 ----------------------------------
 
-In the example in the previous section, implementing the remediation provided by the Wazuh SCA improves the security of the endpoint. This involves mounting the ``/tmp`` directory to a separate partition and adding some options such as ``nodev``, ``noexec``, and ``nosuid`` to the mount point. In the image below, you can see the status of the checks ``28500``–``28503`` have changed to ``passed``.
+In the example in the previous section, implementing the remediation provided by the Wazuh SCA improves the security of the endpoint. This involves changing the ``PubkeyAuthentication`` option value in the ``sshd_config`` file. In the image below, you can see the status of the check ``3003`` has changed to ``passed``.
 
 .. thumbnail:: /images/getting-started/use-cases/sca/sca-checks-status-changed.png
-   :title: Status passed for the checks 28500–28503
-   :alt: Status passed for the checks 28500–28503
+   :title: Status passed for the check 3003
+   :alt: Status passed for the check 3003
    :align: center
    :width: 80%
 

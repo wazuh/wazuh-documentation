@@ -62,7 +62,7 @@ theme:
 	@echo
 
 search-index:
-	npx -y pagefind@v0.8.0 --source $(BUILDDIR)/html --force-language en
+	npx -y pagefind@v1.1.0 --site $(BUILDDIR)/html --force-language en
 
 html-production:
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html -t production

@@ -113,6 +113,8 @@ Available regions:
 
 * Sydney: ``ap-southeast-2``
 
+* Canada: ``ca-central-1``
+
 .. _cloud_glossary_wazuh_cloud_api:
 
 Wazuh Cloud API

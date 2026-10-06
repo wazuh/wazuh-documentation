@@ -31,8 +31,6 @@ The Syscollector module runs periodic scans and sends the updated data in JSON f
 Using the Wazuh API
 ^^^^^^^^^^^^^^^^^^^
 
-.. deprecated:: 4.9
-
 You can query the Wazuh inventory data using the `Wazuh API <https://documentation.wazuh.com/current/user-manual/api/reference.html#tag/Syscollector>`_, which retrieves nested data in JSON format. You can use the Wazuh API GUI on the dashboard or a command line tool like ``cURL`` to query the inventory database. 
 
 Wazuh API GUI

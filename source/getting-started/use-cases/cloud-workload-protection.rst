@@ -26,7 +26,7 @@ The image below is an example of an AWS dashboard on Wazuh showing the trend of 
    :align: center
    :width: 80%
 
-Wazuh monitors and logs activities in the cloud, providing a centralized view of user actions across the entire cloud infrastructure. Wazuh has out-of-the-box rules to detect suspicious or unauthorized activities. In addition to the in-built rules, users can :doc:`create custom rules </user-manual/ruleset/custom>` to consolidate threat detection.
+Wazuh monitors and logs activities in the cloud, providing a centralized view of user actions across the entire cloud infrastructure. Wazuh has out-of-the-box rules to detect suspicious or unauthorized activities. In addition to the in-built rules, users can :doc:`create custom rules </user-manual/ruleset/rules/custom>` to consolidate threat detection.
 
 Amazon web services
 ^^^^^^^^^^^^^^^^^^^

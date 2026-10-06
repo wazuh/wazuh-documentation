@@ -15,7 +15,7 @@ integration
     <integration>
     </integration>
 
-This configures the manager to :ref:`connect Wazuh to external APIs <manual_integration>` and alerting tools such as Slack, PagerDuty, VirusTotal, Shuffle, and Maltiverse.
+This configures the manager to :doc:`connect Wazuh to external APIs </user-manual/manager/integration-with-external-apis>` and alerting tools such as Slack, PagerDuty, VirusTotal, Shuffle, and Maltiverse.
 
 Integration options
 -------------------

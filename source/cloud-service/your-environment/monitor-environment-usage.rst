@@ -60,6 +60,6 @@ If you observe a consistent pattern of event drops over time, it's an indication
 
 -  **Adjust the agent leaky bucket**: Consider implementing a "leaky bucket" strategy in your agent configuration. The leaky bucket algorithm enables control over the rate of events sent to the Wazuh Cloud environment. Configuring the leaky bucket helps smooth out the event flow, preventing sudden spikes that might cause event drops.
 
-Implementing these agent-level adjustments can complement your strategy, ensuring that your environment operates within the defined event processing rate. This helps reducing the risk of event loss while maintaining efficient event processing.
+Implementing these agent-level adjustments can complement your strategy, ensuring that your environment operates within the defined event processing rate. This helps reduce the risk of event loss while maintaining efficient event processing.
 
 

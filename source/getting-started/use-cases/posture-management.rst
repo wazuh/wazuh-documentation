@@ -21,9 +21,9 @@ Wazuh connects with GCP through the Google Cloud publisher and subscriber servic
    :align: center
    :width: 80%
 
-You can configure your Wazuh instance to receive GCP logs using the Pub/Sub service. Once configured, you can enable the Google Cloud Platform module via the Wazuh dashboard to view logs related to your GCP services. We provide detailed guidelines on configuring Wazuh to receive GCP logs using the Pub/Sub service in our :doc:`using Wazuh to monitor GCP services </cloud-security/gcp/index>` documentation.
+You can configure your Wazuh instance to receive GCP logs using the Pub/Sub service. Once configured, you can go to the Google Cloud module in the Wazuh dashboard to view logs related to your GCP services. We provide detailed guidelines on configuring Wazuh to receive GCP logs using the Pub/Sub service in our :doc:`using Wazuh to monitor GCP services </cloud-security/gcp/index>` documentation.
 
-.. thumbnail:: /images/getting-started/use-cases/posture-management/using-wazuh-to-monitor-gcp.gif
+.. thumbnail:: /images/getting-started/use-cases/posture-management/using-wazuh-to-monitor-gcp.png
    :title: Using Wazuh to monitor Google Cloud Platform
    :alt: Using Wazuh to monitor Google Cloud Platform
    :align: center
@@ -42,7 +42,7 @@ Amazon Web Services
 
 Wazuh provides CSPM to your AWS workloads by monitoring the AWS services and instances. Monitoring your AWS services includes collecting and analyzing log data about your AWS infrastructure using the :doc:`Wazuh module for AWS </cloud-security/amazon/services/index>`.
 
-You can enable the Amazon AWS module via your Wazuh dashboard to view logs related to AWS services.
+You can use the Amazon Web Services module in the Wazuh dashboard to view logs related to AWS services.
 
 .. thumbnail:: /images/getting-started/use-cases/posture-management/enabling-aws-module.png
    :title: Enabling AWS module in the Wazuh dashboard

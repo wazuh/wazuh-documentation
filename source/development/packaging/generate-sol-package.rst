@@ -5,8 +5,8 @@
 
 .. _create-sol:
 
-Solaris
-=======
+Solaris agent
+=============
 
 Wazuh provides an automated way of building Solaris 10 and 11 packages, keep in mind that to build these packages you must use the corresponding system.
 

@@ -62,6 +62,7 @@ This is the minimum alert severity level for which emails will be sent.
 | **Allowed values** | Any alert level 0 to 16 is allowed. |
 +--------------------+-------------------------------------+
 
+.. _email_alerts_group:
 
 group
 ^^^^^^^^
@@ -80,6 +81,7 @@ This option sets specific rule groups that alerts must belong to for email notif
 
    Also, check that the rule group in your rule definitions ends with a comma as well. For example, ``<group>group_b,</group>``. This is usually the case in the Wazuh default ruleset.
 
+.. _email_alerts_event_location:
 
 event_location
 ^^^^^^^^^^^^^^^^
@@ -109,6 +111,7 @@ This specifies the email format.
 |                    | sms     | Use a compact format more suitable for SMS. |
 +--------------------+---------+---------------------------------------------+
 
+.. _email_alerts_rule_id:
 
 rule_id
 ^^^^^^^^

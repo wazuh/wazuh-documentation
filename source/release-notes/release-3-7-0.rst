@@ -76,7 +76,7 @@ And on the API, it's possible to check all the groups the agent is added:
 
 The agent will receive the configuration of all the groups where it has been added.
 
-Learn more about this feature in the :ref:`multiple groups' <grouping-agents>` documentation.
+Learn more about this feature in the :doc:`multiple groups' </user-manual/agent/agent-management/grouping-agents>` documentation.
 
 New module to monitor Microsoft Azure
 -------------------------------------
@@ -156,7 +156,7 @@ The Wazuh app for Kibana includes new features and interface redesigns to make u
   - Get the current manager/agent configuration on the redesigned tabs.
   - Added support for multiple groups feature.
   - The :doc:`Amazon AWS </cloud-security/amazon/index>` tab has been redesigned to include better visualizations and the module configuration.
-  - The new :ref:`Osquery <osquery>` extension shows scans results from this Wazuh module.
+  - The new :doc:`Osquery </user-manual/capabilities/system-inventory/osquery>` extension shows scans results from this Wazuh module.
   - Added a new selector to check the cluster nodes’ status and logs on the *Management > Status/Logs* tabs.
   - Several bugfixes, performance improvements, and compatibility with the latest Elastic Stack version.
 

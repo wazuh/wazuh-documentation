@@ -1,4 +1,4 @@
 # pagefind.yml
-source: build/html
-bundle_dir: _pagefind
+site: build/html
+output_subdir: pagefind
 force_language: en

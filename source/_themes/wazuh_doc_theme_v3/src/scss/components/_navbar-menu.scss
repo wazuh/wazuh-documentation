@@ -93,6 +93,7 @@ header {
     background-color: $light-color-base-space;
     .nav-link {
       color: $light-color-main-text;
+      &.active,
       &:hover,
       &:focus {
         color: $light-color-primary;
@@ -134,6 +135,7 @@ header {
     background-color: $dark-color-index-header-background;
     .nav-link {
       color: $dark-color-main-text;
+      &.active,
       &:hover,
       &:focus {
         color: $dark-color-primary;

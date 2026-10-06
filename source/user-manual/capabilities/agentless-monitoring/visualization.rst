@@ -73,11 +73,17 @@ Perform the following steps to create a visualization for the alerts from agentl
       :align: center
       :width: 80%
 
-#. Expand one of the alerts to view more information about the event.
+#. Click on **Details** button in the table to view more information about the event.
 
-   .. thumbnail:: /images/manual/agentless-monitoring/expand-one-of-the-alerts.png
-      :title: Expand one of the alerts
-      :alt: Expand one of the alerts
+   .. thumbnail:: /images/manual/agentless-monitoring/open-alert-details-button.png
+      :title: Open alert details button
+      :alt: Open alert details button
+      :align: center
+      :width: 80%
+
+   .. thumbnail:: /images/manual/agentless-monitoring/open-alert-details.png
+      :title: Open alert details
+      :alt: Open alert details
       :align: center
       :width: 80%
 

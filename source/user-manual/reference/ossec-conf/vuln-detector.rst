@@ -10,10 +10,14 @@ This section covers the configuration for the :doc:`/user-manual/capabilities/vu
 
 .. topic:: XML section name
 
-	.. code-block:: xml
+   .. note::
 
-		<vulnerability-detection>
-		</vulnerability-detection>
+      In Wazuh 4.8.0, we rename the previous ``<vulnerability-detector>`` tag to ``<vulnerability-detection>``.
+
+   .. code-block:: xml
+
+      <vulnerability-detection>
+      </vulnerability-detection>
 
 Options
 -------
@@ -23,15 +27,17 @@ Options
    :depth: 1
    :backlinks: none
 
-+---------------------------+------------------------------------+
-| Options                   | Allowed values                     |
-+===========================+====================================+
-| `enabled`_                | ``yes``, ``no``                    |
-+---------------------------+------------------------------------+
-| `feed-update-interval`_   | Positive number + Time unit suffix |
-+---------------------------+------------------------------------+
-| `index-status`_           | ``yes``, ``no``                    |
-+---------------------------+------------------------------------+
++---------------------------+------------------------------------------------------------+
+| Options                   | Allowed values                                             |
++===========================+============================================================+
+| `enabled`_                | ``yes``, ``no``                                            |
++---------------------------+------------------------------------------------------------+
+| `feed-update-interval`_   | Positive number + Time unit suffix                         |
++---------------------------+------------------------------------------------------------+
+| `index-status`_           | ``yes``, ``no``                                            |
++---------------------------+------------------------------------------------------------+
+| `offline-url`_            | ``file://<LOCAL_FILE_PATH>``, ``http[s]://<CONTENT_URL>``  |
++---------------------------+------------------------------------------------------------+
 
 enabled
 ^^^^^^^
@@ -66,6 +72,22 @@ Enables indexing of vulnerability inventory data.
 | **Allowed values** | ``yes``, ``no``             |
 +--------------------+-----------------------------+
 
+offline-url
+^^^^^^^^^^^
+.. versionadded:: 4.8.0
+
+File path or URL for offline content access.
+
++--------------------+---------------------------------------------------------+
+| **Default**        | Empty                                                   |
++--------------------+---------------------------------------------------------+
+| **Allowed values** |``file://<LOCAL_FILE_PATH>``, ``http[s]://<CONTENT_URL>``|
++--------------------+---------------------------------------------------------+
+
+``<LOCAL_FILE_PATH>``: A local file path starting with \file://, pointing to offline content stored on the device.
+
+``<CONTENT_URL>``: A URL starting with either \http:// or \https://, pointing to local network content or online content accessible via the internet.
+
 interval
 ^^^^^^^^
 
@@ -95,4 +117,5 @@ Example of configuration
       <enabled>yes</enabled>
       <index-status>yes</index-status>
       <feed-update-interval>60m</feed-update-interval>
+      <offline-url>file://path/to/content/file.tar.xz</offline-url> <!-- Optional -->
    </vulnerability-detection>

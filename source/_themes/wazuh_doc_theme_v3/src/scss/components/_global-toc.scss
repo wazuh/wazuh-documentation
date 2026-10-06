@@ -122,7 +122,15 @@
     }
     > ul {
       margin-left: 20px;
-      border-left: 1px solid;
+      position: relative;
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 10px;
+        bottom: 10px;
+        border-left: 1px solid;
+      }
     }
   }
 
@@ -181,14 +189,29 @@
       }
     }
     .toctree-l1 {
-      &.show {
+      &.current {
         background-color: rgba($light-color-base-space, .3);
         > a {
           background-color: $light-color-global-toc-highlight;
+          color: $light-color-base-space;
+          &:hover {
+            color: $light-color-base-space;
+            .toc-toggle-btn {
+              background-image: url(#{$ico-path}svg-icons.svg#chevron-white);
+            }
+          }
+          .toc-toggle-btn {
+            background-image: url(#{$ico-path}svg-icons.svg#chevron-white);
+          }
         }
       }
-      > ul {
-        border-left-color: $light-color-primary;
+      &.show {
+        & > ul {
+          background: linear-gradient(90deg, $light-color-sidebar-space 0, rgba(#fff,.5) 40px);
+        }
+      }
+      > ul::before {
+        border-left-color: $light-color-border-details;
       }
     }
   }
@@ -222,14 +245,32 @@
       }
     }
     .toctree-l1 {
-      &.show {
+      &.current {
         background-color: rgba($dark-color-base-space, .3);
         > a {
-          background-color: rgba($dark-color-global-toc-highlight, .1);
+          background-color: $light-color-global-toc-highlight;
+          color: $light-color-base-space;
+          &::before {
+            border-top-color: $light-color-primary;
+          }
+          &:hover {
+            color: $light-color-base-space;
+            .toc-toggle-btn {
+              background-image: url(#{$ico-path}svg-icons.svg#chevron-white);
+            }
+          }
+          .toc-toggle-btn {
+            background-image: url(#{$ico-path}svg-icons.svg#chevron-white);
+          }
         }
       }
-      > ul {
-        border-left-color: $dark-color-primary;
+      &.show {
+        & > ul {
+          background: linear-gradient(90deg, $dark-color-sidebar-space 0, #2D2E33 40px);
+        }
+      }
+      > ul::before {
+        border-left-color: $dark-color-border-details;
       }
     }
   }
