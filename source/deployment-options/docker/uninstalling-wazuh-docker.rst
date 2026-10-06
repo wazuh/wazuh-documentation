@@ -51,11 +51,15 @@ Follow these steps to remove a single-node or multi-node deployment:
 
          # docker compose down -v
 
-#. Remove generated files by deleting certificates and other generated configuration files:
+#. Remove the generated files, including the certificates and the passwords of the deployment in ``config/credentials/``:
 
    .. code-block:: console
 
-      # rm -rf wazuh-certificates/ config.yml wazuh-certs-tool.sh config/*/certs
+      # rm -rf wazuh-certificates/ wazuh-certificates-tool.log config.yml wazuh-certs-tool.sh wazuh-credentials.sh config/*/certs config/credentials
+
+   .. warning::
+
+      If you kept the volumes in step 3, keep ``config/credentials/`` too. The volumes hold the passwords from these files, and the files are the only record of them.
 
 #. Run the following command to confirm that no containers are running:
 
@@ -74,11 +78,17 @@ Follow these steps to remove a Wazuh agent container deployment:
 
       # cd wazuh-docker/wazuh-agent
 
-#. Stop and remove the Wazuh agent stack:
+#. Stop and remove the Wazuh agent stack and its ``wazuh_agent_etc`` volume, which holds the Wazuh agent enrollment:
 
    .. code-block:: console
 
-      # docker compose down
+      # docker compose down -v
+
+   Restore the ``docker-compose.yml`` file, which still holds the enrollment token:
+
+   .. code-block:: console
+
+      # git checkout docker-compose.yml
 
 #. Run the following command to confirm that the container is not running:
 
