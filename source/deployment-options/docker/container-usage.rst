@@ -14,7 +14,7 @@ Access to services and containers
 This section explains how to interact with your Wazuh deployment by accessing service logs and shell instances of running containers.
 
 #. Access the Wazuh dashboard using the Docker host IP address.
-#. Enroll Wazuh agents through the :ref:`Wazuh agent Docker deployment <agent_deployment_docker>` or the standard :doc:`Wazuh agent enrollment </user-manual/agent/agent-enrollment/index>` process. Use the Docker host address as the Wazuh manager address.
+#. Enroll Wazuh agents with an enrollment token. Create it on the Wazuh manager container for the Docker host address, as shown in the :ref:`Wazuh agent Docker deployment <agent_deployment_docker>`. Then use it with a Wazuh agent container, or pass it in ``WAZUH_ENROLLMENT_TOKEN`` when you :doc:`install the Wazuh agent </installation-guide/wazuh-agent/index>`.
 #. List the containers in the directory where the Wazuh ``docker-compose.yml`` file is located:
 
    .. code-block:: console
@@ -24,10 +24,12 @@ This section explains how to interact with your Wazuh deployment by accessing se
    .. code-block:: none
       :class: output
 
-      NAME                            IMAGE                                          COMMAND                  SERVICE           CREATED          STATUS                          PORTS
-      single-node-wazuh.dashboard-1   wazuh/wazuh-dashboard:|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|-latest   "/entrypoint.sh"         wazuh.dashboard   58 minutes ago   Restarting (1) 55 seconds ago
-      single-node-wazuh.indexer-1     wazuh/wazuh-indexer:|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|-latest     "/entrypoint.sh open…"   wazuh.indexer     58 minutes ago   Up 3 seconds                    0.0.0.0:9200->9200/tcp, [::]:9200->9200/tcp
-      single-node-wazuh.manager-1     wazuh/wazuh-manager:|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|-latest     "/init"                  wazuh.manager     58 minutes ago   Up 58 minutes                   0.0.0.0:1514-1515->1514-1515/tcp, [::]:1514-1515->1514-1515/tcp, 0.0.0.0:514->514/udp, [::]:514->514/udp, 0.0.0.0:55000->55000/tcp, [::]:55000->55000/tcp, 1516/tcp
+      NAME                          IMAGE                             COMMAND                  SERVICE           CREATED              STATUS                        PORTS
+      single-node-wazuh.dashboard   wazuh/wazuh-dashboard:|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|   "/entrypoint.sh"         wazuh.dashboard   About a minute ago   Up 32 seconds (healthy)       443/tcp, 0.0.0.0:443->5601/tcp, [::]:443->5601/tcp
+      single-node-wazuh.indexer     wazuh/wazuh-indexer:|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|     "/entrypoint.sh open…"   wazuh.indexer     About a minute ago   Up About a minute (healthy)   9200/tcp
+      single-node-wazuh.manager     wazuh/wazuh-manager:|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|     "/usr/local/bin/tini…"   wazuh.manager     About a minute ago   Up 48 seconds (healthy)       0.0.0.0:1514-1515->1514-1515/tcp, [::]:1514-1515->1514-1515/tcp, 0.0.0.0:1517->1517/tcp, [::]:1517->1517/tcp, 0.0.0.0:514->514/udp, [::]:514->514/udp, 0.0.0.0:55000->55000/tcp, [::]:55000->55000/tcp, 1516/tcp
+
+   In a working stack, every container shows ``(healthy)``, except the multi-node ``nginx`` container, which has no health check. Port ``9200`` on the Wazuh indexer is reachable only from the other containers, because the ``docker-compose.yml`` file does not publish it.
 
 #. Run the command below from the directory where the ``docker-compose.yml`` file is located to open a shell inside the container:
 
@@ -65,6 +67,7 @@ Run the following to see the persistent volumes on your Docker host:
    local     single-node_wazuh-dashboard-custom
    local     single-node_wazuh-indexer-data
    local     single-node_wazuh_api_configuration
+   local     single-node_wazuh_data
    local     single-node_wazuh_etc
    local     single-node_wazuh_logs
    local     single-node_wazuh_queue
@@ -83,7 +86,7 @@ You need multiple volumes to ensure persistence on the Wazuh manager, Wazuh inde
      wazuh.manager:
        . . .
        volumes:
-         - wazuh_api_configuration:/var/ossec/api/configuration
+         - wazuh_api_configuration:/var/wazuh-manager/api/configuration
        . . .
    volumes:
      wazuh_api_configuration:
