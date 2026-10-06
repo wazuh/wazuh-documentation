@@ -70,58 +70,58 @@ Upgrade the Wazuh agent using a WPK file
 
 Follow these steps to upgrade a Wazuh agent using a WPK file:
 
-#. Download the corresponding WPK package on the Wazuh manager. This example uses the Linux AMD64 WPK package. We recommend that you download the WPK file to ``/var/wazuh-manager/tmp/``:
+#. Download the WPK package that matches the operating system and architecture of the Wazuh agent to the ``/var/wazuh-manager/var/upgrade/`` directory on the Wazuh manager. This example uses the Linux AMD64 WPK package:
 
    .. code-block:: console
 
-      # wget -P /var/wazuh-manager/tmp/ https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/wpk/linux/deb/amd64/wazuh_agent_v|WAZUH_CURRENT|_linux_amd64.deb.wpk
+      # wget -P /var/wazuh-manager/var/upgrade/ https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/wpk/linux/deb/amd64/wazuh_agent_v|WAZUH_CURRENT|_linux_amd64.deb.wpk
 
    The command output looks similar to this:
 
    .. code-block:: none
       :class: output
 
-      --2026-06-02 13:39:20--  https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/wpk/linux/deb/amd64/wazuh_agent_v5.0.0_linux_amd64.deb.wpk
-      Resolving packages-staging.xdrsiem.wazuh.info (packages-staging.xdrsiem.wazuh.info)... 3.162.125.88, 3.162.125.62, 3.162.125.83, ...
-      Connecting to packages-staging.xdrsiem.wazuh.info (packages-staging.xdrsiem.wazuh.info)|3.162.125.88|:443... connected.
+      --2026-10-05 08:56:09--  https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/wpk/linux/deb/amd64/wazuh_agent_v5.0.0_linux_amd64.deb.wpk
+      Resolving packages-staging.xdrsiem.wazuh.info (packages-staging.xdrsiem.wazuh.info)... 13.249.228.114, 13.249.228.54, 13.249.228.126, ...
+      Connecting to packages-staging.xdrsiem.wazuh.info (packages-staging.xdrsiem.wazuh.info)|13.249.228.114|:443... connected.
       HTTP request sent, awaiting response... 200 OK
-      Length: 14004881 (13M) [binary/octet-stream]
-      Saving to: '/var/wazuh-manager/tmp/wazuh_agent_v5.0.0_linux_amd64.deb.wpk.1'
-      wazuh_agent_v5.0.0_linux_amd64 100%[==================================================>]  13.36M  21.3MB/s    in 0.6s
-      2026-06-02 13:39:21 (21.3 MB/s) - '/var/wazuh-manager/tmp/wazuh_agent_v5.0.0_linux_amd64.deb.wpk.1' saved [14004881/14004881]
+      Length: 14473792 (14M) [binary/octet-stream]
+      Saving to: '/var/wazuh-manager/var/upgrade/wazuh_agent_v5.0.0_linux_amd64.deb.wpk'
+      2026-10-05 08:56:11 (9.58 MB/s) - '/var/wazuh-manager/var/upgrade/wazuh_agent_v5.0.0_linux_amd64.deb.wpk' saved [14473792/14473792]
 
-#. Run the ``agent_upgrade`` tool and specify the agent ID of the Wazuh agent you want to upgrade. This example upgrades agent ``002`` which has Wazuh agent 4.14.5 installed.
+   .. note::
+
+      In a multi-node Wazuh manager cluster, the WPK file must exist in ``/var/wazuh-manager/var/upgrade/`` on every Wazuh manager node.
+
+#. Run the ``agent_upgrade`` tool and specify the agent ID of the Wazuh agent you want to upgrade. Pass the WPK file name with the ``-f`` option. This example upgrades agent ``002`` which has Wazuh agent 4.14.5 installed.
 
    .. code-block:: console
 
-      # /var/wazuh-manager/bin/agent_upgrade -a 002 -f /var/wazuh-manager/tmp/wazuh_agent_v|WAZUH_CURRENT|_linux_amd64.deb.wpk
+      # /var/wazuh-manager/bin/agent_upgrade -a 002 -f wazuh_agent_v|WAZUH_CURRENT|_linux_amd64.deb.wpk
 
    The command output looks similar to this:
 
    .. code-block:: none
       :class: output
 
-      Upgrading...
-
-      Upgraded agents:
-              Agent 002 upgraded: v4.14.5 -> v5.0.0
+      Upgrade tasks created for 1 agent(s).
+      Note: Agents will execute upgrades autonomously. Use agent logs to track progress.
 
    It is possible to specify multiple agent IDs using this method:
 
    .. code-block:: console
 
-      # /var/wazuh-manager/bin/agent_upgrade -a 002 003
+      # /var/wazuh-manager/bin/agent_upgrade -a 002 003 -f wazuh_agent_v|WAZUH_CURRENT|_linux_amd64.deb.wpk
 
    The command output looks similar to this:
 
    .. code-block:: none
       :class: output
 
-      Upgrading...
+      Upgrade tasks created for 2 agent(s).
+      Note: Agents will execute upgrades autonomously. Use agent logs to track progress.
 
-      Upgraded agents:
-              Agent 002 upgraded: v4.14.5 -> v5.0.0
-              Agent 003 upgraded: v4.14.5 -> v5.0.0
+   The Wazuh manager does not wait for the result. To follow the upgrade, check the ``/var/ossec/logs/upgrade.log`` file on the Wazuh agent.
 
 #. Verify the Wazuh agent version from the Wazuh dashboard.
 
@@ -144,5 +144,5 @@ Follow these steps to upgrade a Wazuh agent using a WPK file:
       :emphasize-lines: 1
 
       WAZUH_VERSION="v5.0.0"
-      WAZUH_REVISION="beta5"
+      WAZUH_REVISION="rc1"
       WAZUH_TYPE="agent"

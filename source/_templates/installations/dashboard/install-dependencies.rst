@@ -1,6 +1,6 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
-#. Install the following packages if missing.
+#. Install the following packages if missing:
 
    .. tabs::
 
@@ -8,7 +8,7 @@
 
          .. code-block:: console
 
-            # apt-get install -y debhelper tar curl libcap2-bin #debhelper version 9 or later
+            # apt-get install -y tar curl libcap2-bin openssl
 
       .. group-tab:: Yum
 
