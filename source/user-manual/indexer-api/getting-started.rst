@@ -8,7 +8,7 @@ Getting started
 
 This guide provides the essential information needed to utilize the Wazuh indexer API.
 
-The examples on this page replace ``<WAZUH_INDEXER_IP>`` with the IP address of the Wazuh indexer node, which is the ``network.host`` value in the ``/etc/wazuh-indexer/opensearch.yml`` file.
+In the examples on this page, replace ``<WAZUH_INDEXER_IP>`` with the IP address or hostname of the Wazuh indexer node, as set in ``network.host`` in the ``/etc/wazuh-indexer/opensearch.yml`` file. Use ``127.0.0.1`` on an all-in-one deployment.
 
 Starting and stopping the Wazuh indexer API
 -------------------------------------------
@@ -111,13 +111,7 @@ JWT authentication is not enabled by default, and its settings are specified wit
 
    .. code-block:: console
 
-      # curl -k -u <WAZUH_INDEXER_USER>:<WAZUH_INDEXER_PASSWORD> -XPOST "https://<WAZUH_INDEXER_IP>:9200/_plugins/_security/api/generateonbehalfoftoken" -H 'Content-Type: application/json' -d '
-      {
-         "description":"Testing",
-         "service":"Testing Service",
-         "durationSeconds":"180"
-      }
-      '
+      # curl -k -u <WAZUH_INDEXER_USER>:<WAZUH_INDEXER_PASSWORD> -XPOST "https://<WAZUH_INDEXER_IP>:9200/_plugins/_security/api/generateonbehalfoftoken" -H 'Content-Type: application/json' -d '{"description":"Testing","service":"Testing Service","durationSeconds":"180"}'
 
    Below is an example of an output.
 
