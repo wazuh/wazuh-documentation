@@ -384,3 +384,8 @@ We recommend following the instructions below when creating an integration scrip
 We recommend that you check the ``/logs/alerts/alerts.json`` file before starting the development of the integration script to find the format of the alerts to be interpreted.
 
 You can see an example integration script for Jira in the `How to integrate external software using Integrator <https://wazuh.com/blog/how-to-integrate-external-software-using-integrator//>`__ blog post.
+
+Custom IsMalicious example
+--------------------------
+
+For a custom Integrator example with API authentication, indicator extraction, JSON alert rules, and explicit unknown/error outcomes, see :doc:`IsMalicious indicator enrichment </proof-of-concept-guide/ismalicious-integration>`.
