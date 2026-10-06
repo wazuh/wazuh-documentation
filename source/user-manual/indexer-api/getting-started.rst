@@ -109,9 +109,15 @@ JWT authentication is not enabled by default, and its settings are specified wit
 
 #. Run the command below to fetch a JSON web token.
 
-   .. code-block:: console
+   .. code-block:: bash
 
-      # curl -k -u <WAZUH_INDEXER_USER>:<WAZUH_INDEXER_PASSWORD> -XPOST "https://<WAZUH_INDEXER_IP>:9200/_plugins/_security/api/generateonbehalfoftoken" -H 'Content-Type: application/json' -d '{"description":"Testing","service":"Testing Service","durationSeconds":"180"}'
+      curl -k -u <WAZUH_INDEXER_USER>:<WAZUH_INDEXER_PASSWORD> -XPOST "https://<WAZUH_INDEXER_IP>:9200/_plugins/_security/api/generateonbehalfoftoken" \
+      -H 'Content-Type: application/json' \
+      -d '{
+        "description":"Testing",
+        "service":"Testing Service",
+        "durationSeconds":"180"
+      }'
 
    Below is an example of an output.
 
