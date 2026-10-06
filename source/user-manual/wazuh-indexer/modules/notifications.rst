@@ -294,7 +294,7 @@ Perform the following steps to configure SMTP credentials for an email account n
 
 -  Enter the SMTP password when prompted.
 
-SMTP authentication credentials are stored as secure settings in the Wazuh Indexer keystore using the following keys, where ``<account_name>`` is the name of the configured SMTP sender:
+SMTP authentication credentials are stored as secure settings in the Wazuh indexer keystore using the following keys, where ``<account_name>`` is the name of the configured SMTP sender:
 
 .. code-block:: none
 
