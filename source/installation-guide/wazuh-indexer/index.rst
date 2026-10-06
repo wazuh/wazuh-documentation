@@ -116,6 +116,11 @@ The Wazuh indexer can be installed as a single-node or as a multi-node cluster.
 
   For example, for an environment with 80 workstations, 10 servers, and 10 network devices, the storage needed on the Wazuh indexer server for 90 days of alerts is 230 GB. 
 
+Firewall configuration
+^^^^^^^^^^^^^^^^^^^^^^
+
+Configure the host and network firewalls to allow ports mentioned in :doc:`Architecture <getting-started/architecture>`. Disabling the host firewall is not recommended for use in production. It is advised to check the firewall configuration after each service installation to prevent possible cluster problems.
+
 
 
 .. toctree::
