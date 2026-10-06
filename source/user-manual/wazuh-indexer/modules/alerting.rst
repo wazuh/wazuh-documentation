@@ -502,13 +502,13 @@ The following example updates two Alerting module settings:
 -  ``plugins.alerting.monitor.max_monitors``: Increases the maximum number of monitors a user can create to 20.
 -  ``plugins.alerting.alert_history_max_age``: Extends the maximum age of alert history indices to 60d.
 
-Run the following command from a terminal on a host that can communicate with the Wazuh indexer REST API.
+Run the following command from a terminal on a host that can communicate with the Wazuh indexer REST API. Replace ``<WAZUH_INDEXER_IP>`` with the IP address of the Wazuh indexer node.
 
 .. code-block:: console
    :emphasize-lines: 1
 
    curl -sk -u <USERNAME>:<PASSWORD> -X PUT \
-     "https://localhost:9200/_cluster/settings" \
+     "https://<WAZUH_INDEXER_IP>:9200/_cluster/settings" \
      -H "Content-Type: application/json" \
      -d '{
      "persistent": {
