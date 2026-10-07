@@ -40,6 +40,7 @@ Single-node deployment
 Edit ``wazuh-docker/single-node/docker-compose.yml`` and replace ``<NEW_TAG>`` with the new tag in the ``image`` field of each Wazuh service:
 
 .. code-block:: yaml
+   :emphasize-lines: 3,7,11
 
    services:
      wazuh.manager:
@@ -60,6 +61,7 @@ Multi-node deployment
 Edit ``wazuh-docker/multi-node/docker-compose.yml`` and replace ``<NEW_TAG>`` with the new tag in the ``image`` field of each Wazuh service:
 
 .. code-block:: yaml
+   :emphasize-lines: 3,7,11,15,19,23
 
    services:
      wazuh.master:

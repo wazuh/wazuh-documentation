@@ -55,6 +55,8 @@ Run the following to see the persistent volumes on your Docker host:
 
    # docker volume ls
 
+The command output looks similar to this:
+
 .. code-block:: none
    :class: output
 
@@ -100,6 +102,4 @@ Changes persist only under the paths mounted as volumes, such as ``/var/wazuh-ma
 
 At every start, the Wazuh manager container sets the Wazuh indexer hosts, the cluster settings, and the listener addresses in ``/var/wazuh-manager/etc/wazuh-manager.conf`` from its environment variables. Change those settings in the ``environment`` section of the ``docker-compose.yml`` file instead.
 
-.. note::
-
-   The actions you can perform inside the containers are limited.
+The actions you can perform inside the containers are limited.
