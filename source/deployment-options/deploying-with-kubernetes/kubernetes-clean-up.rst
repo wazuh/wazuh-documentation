@@ -18,17 +18,19 @@ Follow the steps below to delete all deployments, services, and volumes.
 
    To delete your Wazuh cluster, execute the following command from the repository directory.
 
-   -  EKS cluster:
+   .. tabs::
 
-      .. code-block:: console
+      .. group-tab:: EKS cluster
 
-         # kubectl delete -k envs/eks/
+         .. code-block:: console
 
-   -  Other cluster types:
+            # kubectl delete -k envs/eks/
 
-      .. code-block:: console
+      .. group-tab:: Other cluster types
 
-         # kubectl delete -k envs/local-env/
+         .. code-block:: console
+
+            # kubectl delete -k envs/local-env/
 
    This will remove every resource defined in the ``kustomization.yml`` file.
 
