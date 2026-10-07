@@ -859,16 +859,18 @@ If you created domain names for the services, access the dashboard at ``https://
 
 Check the services to view ``EXTERNAL-IP``:
 
-   .. code-block:: console
+.. code-block:: console
 
-      # kubectl -n traefik get svc
+   # kubectl -n traefik get svc
 
-   .. code-block:: none
-      :class: output
+The command output looks similar to this:
 
-      NAME                                 TYPE           CLUSTER-IP      EXTERNAL-IP                                                                     PORT(S)                                                    AGE
-      ingress-Traefik-controller             LoadBalancer   10.100.228.67   a0c363db4315d484fa38751820a9e89b-e1811181631efef0.elb.us-west-1.amazonaws.com   80:30561/TCP,443:32533/TCP,1514:31784/TCP,1515:31274/TCP   36s
-      ingress-Traefik-controller-admission   ClusterIP      10.100.118.85   <none>                                                                          443/TCP                                                    35s
+.. code-block:: none
+   :class: output
+
+   NAME                                 TYPE           CLUSTER-IP      EXTERNAL-IP                                                                     PORT(S)                                                    AGE
+   ingress-Traefik-controller             LoadBalancer   10.100.228.67   a0c363db4315d484fa38751820a9e89b-e1811181631efef0.elb.us-west-1.amazonaws.com   80:30561/TCP,443:32533/TCP,1514:31784/TCP,1515:31274/TCP   36s
+   ingress-Traefik-controller-admission   ClusterIP      10.100.118.85   <none>                                                                          443/TCP                                                    35s
 
 .. note::
 
