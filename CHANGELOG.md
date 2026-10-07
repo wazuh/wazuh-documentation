@@ -63,6 +63,7 @@ All notable changes to this project will be documented in this file.
 - Updated the *Wazuh indexer cluster* documentation in *User manual* to Wazuh 5.0, covering cluster architecture and node types, required ports, cluster configuration, certificate deployment, cluster tuning, security initialization, adding and removing nodes, cluster management, and troubleshooting. ([#10183](https://github.com/wazuh/wazuh-documentation/pull/10183)) ([#10185](https://github.com/wazuh/wazuh-documentation/pull/10185)) ([#10228](https://github.com/wazuh/wazuh-documentation/pull/10228))
 - Corrected an internal link in the *Wazuh Docker utilities* documentation that pointed to a bare path instead of the built page. ([#10212](https://github.com/wazuh/wazuh-documentation/pull/10212))
 - Updated the *Deployment with Ansible* documentation to Wazuh 5.0, covering generated deployment passwords, enrollment token-based agent deployment, certificate handling, and the *Roles* and *Variables references*. ([#10319](https://github.com/wazuh/wazuh-documentation/pull/10319))
+- Updated the *Deployment on Kubernetes* documentation to Wazuh 5.0, covering the resource requirements, network policies, Amazon EKS and local cluster deployment steps, enrollment token-based agent deployment, and the clean up steps. ([#10320](https://github.com/wazuh/wazuh-documentation/pull/10320))
 
 ### Removed
 
