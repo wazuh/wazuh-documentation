@@ -47,7 +47,7 @@ Single-node stack deployment
 -  **Architecture**: AMD64 or ARM64 (AARCH64)
 -  **CPU**: At least 4 cores
 -  **Memory**: At least 8 GB of RAM for the Docker host
--  **Disk space**: At least 50 GB of storage for Docker images and data volumes
+-  **Disk space**: At least 50 GB storage for Docker images and data volumes
 
 Multi-node stack deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -327,7 +327,7 @@ At each start, the Wazuh manager container sets its Wazuh indexer hosts, cluster
 Accessing the Wazuh dashboard
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-After deploying the single-node stack, you can access the Wazuh dashboard using your Docker host's IP address or `localhost <http://localhost>`__.
+After deploying the single-node stack, you can access the Wazuh dashboard using your Docker host's IP address or localhost.
 
 .. code-block:: none
 
@@ -453,21 +453,21 @@ The Wazuh Docker images ship no passwords. Generate the passwords for your deplo
 Deployment
 ~~~~~~~~~~
 
-Start the Wazuh Docker deployment using the ``docker compose`` command:
+#. Start the Wazuh Docker deployment using the ``docker compose`` command:
 
-.. tabs::
+   .. tabs::
 
-   .. group-tab:: Background
+      .. group-tab:: Background
 
-      .. code-block:: console
+         .. code-block:: console
 
-         # docker compose up -d
+            # docker compose up -d
 
-   .. group-tab:: Foreground
+      .. group-tab:: Foreground
 
-      .. code-block:: console
+         .. code-block:: console
 
-         # docker compose up
+            # docker compose up
 
 Check that the stack is ready. Run the following command from the ``wazuh-docker/multi-node/`` directory. If you started the stack in the foreground, use another terminal.
 
@@ -488,7 +488,7 @@ At each start, the Wazuh manager containers set their Wazuh indexer hosts, clust
 Accessing the Wazuh dashboard
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-After deploying the multi-node stack, you can access the Wazuh dashboard using your Docker host's IP address or `localhost <http://localhost>`__.
+After deploying the multi-node stack, you can access the Wazuh dashboard using your Docker host's IP address or localhost.
 
 .. code-block:: none
 
@@ -545,7 +545,6 @@ You need root user privileges to run the commands below. If you use Docker as a 
       .. group-tab:: Single-node stack
 
          .. code-block:: console
-            :emphasize-lines: 2
 
             # rm -rf wazuh-certificates/
             # bash ../tools/utils/deployment/certificates-conf.sh --cert --copy --priv --agent-san <DOCKER_HOST_IP>
@@ -554,7 +553,6 @@ You need root user privileges to run the commands below. If you use Docker as a 
       .. group-tab:: Multi-node stack
 
          .. code-block:: console
-            :emphasize-lines: 2
 
             # rm -rf wazuh-certificates/
             # bash ../tools/utils/deployment/certificates-conf.sh --cert --copy --priv --agent-san <DOCKER_HOST_IP>

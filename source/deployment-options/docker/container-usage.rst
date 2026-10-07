@@ -55,8 +55,6 @@ Run the following to see the persistent volumes on your Docker host:
 
    # docker volume ls
 
-The command output looks similar to this:
-
 .. code-block:: none
    :class: output
 
