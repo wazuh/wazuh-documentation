@@ -14,22 +14,41 @@ The agent communication service establishes and maintains a secure connection be
 
 For more information about the Wazuh agent and its communication with the Wazuh manager, see the :doc:`Wazuh agent section </user-manual/agent/index>` of the User Manual.
 
-+---------------+---------------------------------------------------------------------------------+
-| Option        | Description                                                                     |
-+===============+=================================================================================+
-| -c <config>   | Specifies the configuration file to use. The default is etc/ossec.conf.         |
-+---------------+---------------------------------------------------------------------------------+
-| -d            | Runs the daemon in debug mode. Repeat the option to increase the debug level.   |
-+---------------+---------------------------------------------------------------------------------+
-| -f            | Runs the daemon in the foreground.                                              |
-+---------------+---------------------------------------------------------------------------------+
-| -g <group>    | Specifies the group under which the daemon runs. The default is wazuh.          |
-+---------------+---------------------------------------------------------------------------------+
-| -h            | Displays the help message and exits.                                            |
-+---------------+---------------------------------------------------------------------------------+
-| -t            | Tests the configuration and exits.                                              |
-+---------------+---------------------------------------------------------------------------------+
-| -u <user>     | Specifies the user under which the daemon runs. The default is wazuh.           |
-+---------------+---------------------------------------------------------------------------------+
-| -V            | Displays version and license information.                                       |
-+---------------+---------------------------------------------------------------------------------+
++----------------------------------------+----------------------------------------------------------------------------------------------+
+| Option                                 | Description                                                                                  |
++========================================+==============================================================================================+
+| -c <config>                            | Specifies the configuration file to use. The default is etc/ossec.conf.                      |
++----------------------------------------+----------------------------------------------------------------------------------------------+
+| -d                                     | Runs the daemon in debug mode. Repeat the option to increase the debug level.                |
++----------------------------------------+----------------------------------------------------------------------------------------------+
+| -f                                     | Runs the daemon in the foreground.                                                           |
++----------------------------------------+----------------------------------------------------------------------------------------------+
+| -g <group>                             | Specifies the group under which the daemon runs. The default is wazuh.                       |
++----------------------------------------+----------------------------------------------------------------------------------------------+
+| -h                                     | Displays the help message and exits.                                                         |
++----------------------------------------+----------------------------------------------------------------------------------------------+
+| -t                                     | Tests the configuration and exits.                                                           |
++----------------------------------------+----------------------------------------------------------------------------------------------+
+| -u <user>                              | Specifies the user under which the daemon runs. The default is wazuh.                        |
++----------------------------------------+----------------------------------------------------------------------------------------------+
+| -V                                     | Displays version and license information.                                                    |
++----------------------------------------+----------------------------------------------------------------------------------------------+
+| --show-token                           | Decodes the enrollment token read from standard input, prints its content without its        |
+|                                        | credential, and exits.                                                                       |
++----------------------------------------+----------------------------------------------------------------------------------------------+
+| --shred-enrollment-password            | Overwrites the enrollment password file, etc/authd.pass, in place, deletes it, and exits.    |
++----------------------------------------+----------------------------------------------------------------------------------------------+
+| --uninstall-auth-host <host>           | Used by the package uninstaller for the anti-tampering uninstall validation. Specifies the   |
+|                                        | Wazuh server API host, with an optional port, that validates the uninstallation. Use it with |
+|                                        | ``--uninstall-auth-token`` or ``--uninstall-auth-login``.                                    |
++----------------------------------------+----------------------------------------------------------------------------------------------+
+| --uninstall-auth-login <user:password> | Used by the package uninstaller. Specifies the Wazuh server API credentials used to obtain a |
+|                                        | token and validate the uninstallation.                                                       |
++----------------------------------------+----------------------------------------------------------------------------------------------+
+| --uninstall-auth-token <token>         | Used by the package uninstaller. Specifies the Wazuh server API token used to validate the   |
+|                                        | uninstallation.                                                                              |
++----------------------------------------+----------------------------------------------------------------------------------------------+
+| --uninstall-ssl-verify[=<value>]       | Used by the package uninstaller. Enables or disables TLS certificate verification for the    |
+|                                        | requests to the Wazuh server API. Allowed values are true, false, 1, and 0. The default is   |
+|                                        | true.                                                                                        |
++----------------------------------------+----------------------------------------------------------------------------------------------+

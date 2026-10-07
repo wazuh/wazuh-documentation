@@ -30,16 +30,16 @@ Options
 - `check_ports`_
 - `check_sys`_
 - `skip_nfs`_
+- `scanall`_
+- `readall`_
 
 base_directory
 ^^^^^^^^^^^^^^^
 
 The base directory that will be prefixed to the following options:
 
-- Check rootkits
-- Check trojans
-- Scan the ``/dev`` directory
-- Check the hidden files using system calls
+- Scan the ``/dev`` directory (``check_dev``)
+- Scan the file system for anomalies such as hidden files (``check_sys``)
 
 +-------------------------------+-----------------------+
 | **Default value (UNIX)**      | /                     |
@@ -156,6 +156,28 @@ Enable or disable scanning of network-mounted filesystems.
 | **Allowed values**   | yes, no   |
 +----------------------+-----------+
 
+scanall
+^^^^^^^
+
+Scans the whole file system during the system scan (``check_sys``), starting at ``base_directory``, instead of only a fixed list of system directories such as ``bin``, ``sbin``, ``etc``, ``usr/lib`` and ``var/log``. Scanning the whole file system can be slow.
+
++--------------------+---------+
+| **Default value**  | no      |
++--------------------+---------+
+| **Allowed values** | yes, no |
++--------------------+---------+
+
+readall
+^^^^^^^
+
+Reads the content of every file during the system scan (``check_sys``) and compares the bytes read with the size the file system reports, to detect hidden data. When set to ``no``, only files in a fixed list of sensitive directories are read.
+
++--------------------+---------+
+| **Default value**  | no      |
++--------------------+---------+
+| **Allowed values** | yes, no |
++--------------------+---------+
+
 Default Unix configuration
 ------------------------------
 
@@ -164,7 +186,6 @@ Default Unix configuration
    <!-- Policy monitoring -->
    <rootcheck>
      <disabled>no</disabled>
-     <check_unixaudit>yes</check_unixaudit>
      <check_dev>yes</check_dev>
      <check_sys>yes</check_sys>
      <check_pids>yes</check_pids>

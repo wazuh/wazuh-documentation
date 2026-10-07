@@ -24,6 +24,7 @@ Main options
 
 - `enabled`_
 - `bucket`_
+- `logging`_ (deprecated)
 
 Scheduling options
 
@@ -42,7 +43,7 @@ enabled
 Enables or disables the module.
 
 +----------------------+-----------+
-| **Default value**    | n/a       |
+| **Default value**    | yes       |
 +----------------------+-----------+
 | **Allowed values**   | yes, no   |
 +----------------------+-----------+
@@ -148,6 +149,13 @@ Remove the logs from the Google Cloud Storage bucket once the module reads them.
 +----------------------+-----------+
 | **Allowed values**   | yes, no   |
 +----------------------+-----------+
+
+logging
+^^^^^^^
+
+.. deprecated:: 5.0.0
+
+   The module still accepts the ``<logging>`` tag inside ``<gcp-bucket>`` for backward compatibility, but ignores it and logs a debug message saying the setting is skipped. Remove it from the configuration.
 
 Scheduling options
 -------------------

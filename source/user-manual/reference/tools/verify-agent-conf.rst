@@ -15,14 +15,18 @@ Use this tool to identify syntax errors before deploying centralized configurati
 Options
 -------
 
-+-------------+----------------------------------------------------------------------------------------------+
-| Option      | Description                                                                                  |
-+=============+==============================================================================================+
-| -f <file>   | Specifies the full path to the agent.conf file to validate. If omitted, the tool validates   |
-|             | all agent.conf files in the shared configuration directory.                                  |
-+-------------+----------------------------------------------------------------------------------------------+
-| -h          | Displays the help message and exits.                                                         |
-+-------------+----------------------------------------------------------------------------------------------+
++-----------+--------------------------------------------------------------------------------------------+
+| Option    | Description                                                                                |
++===========+============================================================================================+
+| -d        | Runs the tool in debug mode.                                                               |
++-----------+--------------------------------------------------------------------------------------------+
+| -f <file> | Specifies the full path to the agent.conf file to validate. If omitted, the tool validates |
+|           | all agent.conf files in the shared configuration directory.                                |
++-----------+--------------------------------------------------------------------------------------------+
+| -h        | Displays the help message and exits.                                                       |
++-----------+--------------------------------------------------------------------------------------------+
+| -V        | Displays the version and license information and exits.                                    |
++-----------+--------------------------------------------------------------------------------------------+
 
 Example
 -------

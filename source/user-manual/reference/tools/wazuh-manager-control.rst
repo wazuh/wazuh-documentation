@@ -10,7 +10,7 @@ wazuh-manager-control
 
 The ``wazuh-manager-control`` tool manages the Wazuh manager services.
 
-Use this tool to start, stop, restart, enable, disable, or check the status of the Wazuh manager services. It can also display information about the current Wazuh manager installation.
+Use this tool to start, stop, restart, reload, enable, disable, or check the status of the Wazuh manager services. It can also display information about the current Wazuh manager installation.
 
 Options
 -------
@@ -31,6 +31,8 @@ Commands
 +-------------------+----------------------------------------------------------------------------------------------+
 | restart           | Restarts the Wazuh manager services.                                                         |
 +-------------------+----------------------------------------------------------------------------------------------+
+| reload            | Restarts all Wazuh manager daemons except ``wazuh-manager-remoted``, which keeps running.    |
++-------------------+----------------------------------------------------------------------------------------------+
 | status            | Displays the status of the Wazuh manager services.                                           |
 +-------------------+----------------------------------------------------------------------------------------------+
 | info [-v -r -t]   | Displays information about the Wazuh manager installation. Specify only one option to        |
@@ -39,6 +41,8 @@ Commands
 | enable debug      | Run all Wazuh daemons in debug mode.                                                         |
 +-------------------+----------------------------------------------------------------------------------------------+
 | disable debug     | Disables debug mode for all Wazuh manager daemons.                                           |
++-------------------+----------------------------------------------------------------------------------------------+
+| help              | Displays the usage message.                                                                  |
 +-------------------+----------------------------------------------------------------------------------------------+
 
 Examples
