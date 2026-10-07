@@ -64,7 +64,7 @@ All notable changes to this project will be documented in this file.
 - Corrected an internal link in the *Wazuh Docker utilities* documentation that pointed to a bare path instead of the built page. ([#10212](https://github.com/wazuh/wazuh-documentation/pull/10212))
 - Updated the *Deployment with Ansible* documentation to Wazuh 5.0, covering generated deployment passwords, enrollment token-based agent deployment, certificate handling, and the *Roles* and *Variables references*. ([#10319](https://github.com/wazuh/wazuh-documentation/pull/10319))
 - Updated the *Deployment on Kubernetes* documentation to Wazuh 5.0, covering the resource requirements, network policies, Amazon EKS and local cluster deployment steps, enrollment token-based agent deployment, and the clean up steps. ([#10320](https://github.com/wazuh/wazuh-documentation/pull/10320)) ([#10324](https://github.com/wazuh/wazuh-documentation/pull/10324))
-- Updated the *Deployment on Docker* documentation to Wazuh 5.0, covering the QA review fixes for the deployment, image build, utilities, upgrade, and uninstall pages. ([#10325](https://github.com/wazuh/wazuh-documentation/pull/10325))
+- Updated the *Deployment on Docker* documentation to Wazuh 5.0, covering the Nginx agent connection role, readiness checks and restart steps, Docker Compose plugin requirements, local image build options, container access and persistence, 5.0.x upgrade scope, and uninstall steps. ([#10325](https://github.com/wazuh/wazuh-documentation/pull/10325))
 
 ### Removed
 
