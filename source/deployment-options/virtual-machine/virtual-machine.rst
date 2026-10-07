@@ -46,7 +46,7 @@ The Wazuh VM is configured with these specifications by default:
 +------------------+----------------+--------------+--------------+
 |    Component     |   CPU (cores)  |   RAM (GB)   | Storage (GB) |
 +==================+================+==============+==============+
-| |OVA_COMPONENT|  |       8        |      16      |     50       |
+| |OVA_COMPONENT|  |       8        |      16      |     25       |
 +------------------+----------------+--------------+--------------+
 
 This default size matches the :doc:`Quickstart </quickstart>` guide recommendation for 26 to 100 Wazuh agents. For up to 25 agents, you can lower it to 4 CPU cores and 8 GB of RAM when you import the VM. You can adjust the hardware configuration based on the number of protected endpoints and indexed alert data.
