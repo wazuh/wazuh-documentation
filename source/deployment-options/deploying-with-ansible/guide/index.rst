@@ -394,7 +394,6 @@ Where:
 -  ``ansible_user`` variable specifies the SSH user for the nodes when it's the same. Replace ``<USERNAME>`` with a valid user account that has the required privileges on the endpoints. Specify this variable for each ``ansible_host`` if the SSH users are different. For example:
 
    .. code-block:: ini
-      :emphasize-lines: 1,2
 
       wi1 ansible_host=<WI1_PUBLIC_IP> private_ip=<WI1_PRIVATE_IP> ansible_user=ubuntu
       wi2 ansible_host=<WI2_PUBLIC_IP> private_ip=<WI2_PRIVATE_IP> ansible_user=admin
