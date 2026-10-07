@@ -11,15 +11,15 @@ After deploying Wazuh with Docker, you can perform several tasks to manage your 
 Access to services and containers
 ---------------------------------
 
-This section explains how to interact with your Wazuh deployment by accessing service logs and shell instances of running containers.
+This section explains how to list the Wazuh containers and open a shell inside them.
 
-#. Access the Wazuh dashboard using the Docker host IP address.
-#. Enroll Wazuh agents with an enrollment token. Create it on the Wazuh manager container for the Docker host address, as shown in the :ref:`Wazuh agent Docker deployment <agent_deployment_docker>`. Then use it with a Wazuh agent container, or pass it in ``WAZUH_ENROLLMENT_TOKEN`` when you :doc:`install the Wazuh agent </installation-guide/wazuh-agent/index>`.
-#. List the containers in the directory where the Wazuh ``docker-compose.yml`` file is located:
+#. From the ``wazuh-docker/single-node/`` directory, or ``wazuh-docker/multi-node/`` for the multi-node stack, list the containers:
 
    .. code-block:: console
 
       # docker compose ps
+
+   The command output looks similar to this:
 
    .. code-block:: none
       :class: output
@@ -31,19 +31,15 @@ This section explains how to interact with your Wazuh deployment by accessing se
 
    In a working stack, every container shows ``(healthy)``, except the multi-node ``nginx`` container, which has no health check. Port ``9200`` on the Wazuh indexer is reachable only from the other containers, because the ``docker-compose.yml`` file does not publish it.
 
-#. Run the command below from the directory where the ``docker-compose.yml`` file is located to open a shell inside the container:
+#. From the same directory, open a shell inside a container:
 
    .. code-block:: console
 
       # docker compose exec <SERVICE> bash
 
-   Replace ``<SERVICE>`` with the name of the service you want to access. A bash shell allows you to interact directly with the container's operating system to run commands, inspect configurations, and troubleshoot issues.
+   Replace ``<SERVICE>`` with a name from the ``SERVICE`` column of the output above, for example ``wazuh.manager``. In the multi-node stack, the Wazuh manager services are ``wazuh.master`` and ``wazuh.worker``. A bash shell allows you to interact directly with the container's operating system to run commands, inspect configurations, and troubleshoot issues.
 
-   When you are done using the shell, exit it to return to your normal terminal:
-
-   .. code-block:: console
-
-      bash-5.2# exit
+   When you are done, run ``exit`` to close the shell and return to the terminal of the Docker host.
 
 Wazuh service data volumes
 --------------------------
@@ -94,14 +90,14 @@ You need multiple volumes to ensure persistence on the Wazuh manager, Wazuh inde
 Custom commands and scripts
 ---------------------------
 
-Run the command below to execute commands inside the containers. We use the Wazuh manager ``single-node-wazuh.manager`` container in this example:
+You can also open a shell with ``docker exec``, from any directory. ``docker exec`` takes a name from the ``NAME`` column of the ``docker compose ps`` output, not the service name. This example uses the Wazuh manager container of the single-node stack. In the multi-node stack, use ``multi-node-wazuh.master``:
 
 .. code-block:: console
 
    # docker exec -it single-node-wazuh.manager bash
 
-Every change made to this shell persists due to the data volumes.
+Changes persist only under the paths mounted as volumes, such as ``/var/wazuh-manager/etc`` in the Wazuh manager container. The ``volumes`` section of each service in ``wazuh-docker/single-node/docker-compose.yml`` or ``wazuh-docker/multi-node/docker-compose.yml`` lists them. Changes anywhere else are lost when Docker recreates the container, for example after ``docker compose down`` or an upgrade.
 
-.. note::
+At every start, the Wazuh manager container sets the Wazuh indexer hosts, the cluster settings, and the listener addresses in ``/var/wazuh-manager/etc/wazuh-manager.conf`` from its environment variables. Change those settings in the ``environment`` section of the ``docker-compose.yml`` file instead.
 
-   The actions you can perform inside the containers are limited.
+The actions you can perform inside the containers are limited.
