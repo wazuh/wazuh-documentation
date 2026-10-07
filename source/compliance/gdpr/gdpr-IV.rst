@@ -20,17 +20,17 @@ The Wazuh :doc:`Security Configuration Assessment (SCA) </user-manual/capabiliti
 Use case: Ensure that the shadow group is empty
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In this use case, Wazuh runs an SCA check to determine whether any users are assigned to the ``shadow`` group on an Ubuntu 24.04 endpoint. The ``/etc/shadow`` file in Linux systems stores encrypted user passwords. Any user in the ``shadow`` group can read the contents of the ``/etc/shadow`` file. Unauthorized access to this file can lead to system compromise by malicious actors. The SCA check ID is ``35773``. The check passes when the shadow group in ``/etc/group`` has no members.
+In this use case, Wazuh runs an SCA check to determine whether any users are assigned to the ``shadow`` group on an Ubuntu 24.04 endpoint. The ``/etc/shadow`` file in Linux systems stores encrypted user passwords. Any user in the ``shadow`` group can read the contents of the ``/etc/shadow`` file. Unauthorized access to this file can lead to system compromise by malicious actors. The SCA check ID is ``35774``. The check passes when the shadow group in ``/etc/group`` has no members.
 
 The following image shows the result of the SCA check on the Wazuh dashboard.
 
-.. thumbnail:: /images/compliance/gdpr/SCA-35773-no-alerts.png
-    :title: Filtering SCA 35773 check finding
+.. thumbnail:: /images/compliance/gdpr/SCA-35774-no-alerts.png
+    :title: Filtering SCA 35774 check finding
     :align: center
     :width: 80%
 
-.. thumbnail:: /images/compliance/gdpr/SCA-35773-full-info.png
-    :title: SCA 35773 check finding full information
+.. thumbnail:: /images/compliance/gdpr/SCA-35774-full-info.png
+    :title: SCA 35774 check finding full information
     :align: center
     :width: 80%
 

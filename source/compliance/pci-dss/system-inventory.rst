@@ -39,7 +39,7 @@ Click the upper-left menu icon **☰** to open the options, and go to **Security
 PCI DSS dashboard
 ~~~~~~~~~~~~~~~~~~
 
-Navigate to **Regulatory Compliance** from the Wazuh **Overview** dashboard, click **PCI DSS**, then click the **Controls** tab to review findings related to PCI DSS requirement 2.2.4. The following image shows the corresponding PCI DSS finding in the Wazuh dashboard:
+Click the menu icon, then navigate to **Security operations** > **Regulatory Compliance** > **PCI DSS**, then click the **Controls** tab to review findings related to PCI DSS requirement 2.2.4. The following image shows the corresponding PCI DSS finding in the Wazuh dashboard:
 
 .. thumbnail:: /images/compliance/pci/pci-dss-dashboard-requirement-2-2-4.png
    :title: PCI DSS dashboard finding for requirement 2.2.4
