@@ -40,14 +40,18 @@ You can modify and build Docker images for the Wazuh central components (manager
 
       # ./build-images.sh -h
 
+   The command output looks similar to this:
+
    .. code-block:: none
       :class: output
 
-      Usage: build-images.sh [OPTIONS]
+      Usage: ./build-images.sh [OPTIONS]
 
-          -d, --dev <ref>              [Optional] Set the development stage you want to build, example rc2 or beta1, not used by default.
-          -refs, --references <ref>    [Optional] Set each Wazuh component reference to be build (indexer, manager, dasboard and agent). By default, using the latest release: ['latest', 'latest', 'latest', 'latest']
+          -d, --dev-stage <ref>        [Optional] Set the pre-release stage suffix (e.g. beta1, rc2). Not used by default.
+          --dev                        [Optional] Mark as a development build: appends the commit ref to the image tag. Controlled by inputs.dev in the workflow.
+          -refs, --references <refs>   [Optional] [Only with --dev] JSON array of commit refs for components (indexer, manager, dashboard, agent) in order. Defaults to 'latest'.
           -rg, --registry <reg>        [Optional] Set the Docker registry to push the images.
+          -c, --component <comp>       [Optional] Build only this component: 'wazuh-indexer', 'wazuh-manager', 'wazuh-dashboard' or 'wazuh-agent'. By default, all four.
           -v, --version <ver>          [Optional] Set the Wazuh version should be builded. By default, 5.0.0.
           -m, --multiarch              [Optional] Enable multi-architecture builds.
           -h, --help                   Show this help.
