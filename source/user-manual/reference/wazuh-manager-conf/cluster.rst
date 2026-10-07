@@ -67,13 +67,14 @@ Specifies the role of the current node. A Wazuh manager cluster supports one mas
 key
 ^^^
 
-Specifies the shared key used to authenticate cluster nodes and protect cluster communication. All nodes in the cluster must use the same key.
+Specifies the shared key used to authenticate cluster nodes and protect cluster communication. All nodes in the cluster must use the same key. This option is required: the ``<cluster>`` section and its ``key`` option must be present in the Wazuh manager configuration.
 
-+----------------------+------------------------------------------------------+
-| **Default value**    | Value randomly generated during node installation.   |
-+----------------------+------------------------------------------------------+
-| **Allowed values**   | Letters, digits, and underscores (32 characters)     |
-+----------------------+------------------------------------------------------+
++--------------------+---------------------------------------------------------------------------------+
+| **Default value**  | None (required option). The installer sets a randomly generated key during node |
+|                    | installation.                                                                   |
++--------------------+---------------------------------------------------------------------------------+
+| **Allowed values** | 32 alphanumeric characters (letters and digits only)                            |
++--------------------+---------------------------------------------------------------------------------+
 
 **Generate a suitable key with:**
 

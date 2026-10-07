@@ -63,7 +63,7 @@ Specifies the interval between module executions.
    When Wazuh starts, it waits for the configured time interval before running the first scan, unless the module has already been running before and the ``only_future_events`` option is set to no.
 
 +----------------------+----------------------------------------------------------------------------------------------+
-| **Default value**    | 10m                                                                                          |
+| **Default value**    | 1m                                                                                           |
 +----------------------+----------------------------------------------------------------------------------------------+
 | **Allowed values**   | A positive number that should contain a suffix character indicating a time unit, such as, s  |
 |                      | (seconds), m (minutes), h (hours), d (days)                                                  |

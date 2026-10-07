@@ -145,7 +145,6 @@ newUrls['5.0'] = [
   '/user-manual/reference/wazuh-manager-conf/auth.html',
   '/user-manual/reference/wazuh-manager-conf/indexer.html',
   '/user-manual/reference/wazuh-manager-conf/vulnerability-detection.html',
-  '/user-manual/reference/wazuh-manager-conf/agent-upgrade.html',
   '/user-manual/reference/wazuh-manager-conf/task-manager.html',
   '/user-manual/reference/wazuh-manager-conf/wdb.html',
   '/user-manual/reference/wazuh-manager-conf/cluster.html',
@@ -158,6 +157,8 @@ newUrls['5.0'] = [
   '/user-manual/reference/daemons/wazuh-manager-remoted.html',
   '/user-manual/reference/tools/wazuh-manager-control.html',
   '/user-manual/reference/tools/wazuh-manager-keystore.html',
+  '/user-manual/reference/tools/wazuh-agent-auth.html',
+  '/user-manual/reference/tools/wazuh-manager-conf.html',
   '/user-manual/reference/installation-utilities/index.html',
   '/user-manual/reference/installation-utilities/installation-assistant.html',
   '/user-manual/reference/installation-utilities/certs-tools.html',
@@ -384,6 +385,11 @@ redirections.push(
     'target': ['4.14=>5.0', '5.0=>4.14'],
     '4.14': '/user-manual/reference/tools/wazuh-keystore.html',
     '5.0': '/user-manual/reference/tools/wazuh-manager-keystore.html',
+  },
+  {
+    'target': ['4.14=>5.0', '5.0=>4.14'],
+    '4.14': '/user-manual/reference/tools/agent-auth.html',
+    '5.0': '/user-manual/reference/tools/wazuh-agent-auth.html',
   },
   {
     'target': ['4.14=>5.0', '5.0=>4.14'],

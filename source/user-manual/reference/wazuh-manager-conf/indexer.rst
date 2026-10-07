@@ -23,7 +23,7 @@ Options
 - `hosts`_
 - `ssl`_
 
-Both ``<hosts>`` and ``<ssl>`` are required.
+``<hosts>`` is required. ``<ssl>`` is optional and only needed for TLS-protected connections to the Wazuh indexer.
 
 hosts
 ^^^^^

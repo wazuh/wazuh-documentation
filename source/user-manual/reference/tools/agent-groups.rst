@@ -117,7 +117,7 @@ The command output looks similar to this:
      agent.conf  [70d8d94d64a8114658c40124b8e4bbb8]
      merged.mg   [18c41f58607371284b44a313a6c0cd9a]
 
-Remove agent 010 from all groups except the default:
+Remove agent 010 from all groups except the default. If the agent only belongs to the ``default`` group, the command returns ``Error 1745 - Agent only belongs to 'default' and it cannot be unassigned from this group.``
 
 .. code-block:: console
 
@@ -129,7 +129,7 @@ The command output looks similar to this:
    :class: output
 
    Do you want to delete all groups of agent '010'? [y/N]: y
-   Group unset for agent '010'.
+   Agent '010' removed from webservers.
 
 Remove agent 007 from a specific group
 
