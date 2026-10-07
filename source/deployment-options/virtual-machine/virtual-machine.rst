@@ -137,7 +137,7 @@ All components in this virtual image are configured to work out of the box. Howe
 Network configuration
 ---------------------
 
-By default, the network interface type is set to **Bridged Adapter**. The VM attempts to obtain an IP address from the network DHCP server. Alternatively, you can give the VM a static IP address as described in :ref:`vm_set_static_ip_address`. If the VM's address changes after its first start, reissue the agent listener certificate as described in :ref:`vm_reissue_agent_listener_certificate`. Find all required ports in the :ref:`architecture <default_ports>` documentation.
+By default, the network interface type is set to **Bridged Adapter**. The VM attempts to obtain an IP address from the network DHCP server. Alternatively, you can give the VM a static IP address as described in :ref:`vm_set_static_ip_address`. If the VM's address changes after its first start, reissue the agent listener certificate as described in :ref:`vm_reissue_agent_listener_certificate`.
 
 .. _vm_set_static_ip_address:
 
