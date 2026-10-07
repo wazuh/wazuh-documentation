@@ -357,7 +357,7 @@ You can adjust cluster resources by editing patch files in ``envs/eks/`` or ``en
       :emphasize-lines: 2
 
       NAME      TYPE           CLUSTER-IP     EXTERNAL-IP                                                              PORT(S)                                       AGE
-      traefik   LoadBalancer   10.100.34.51   a7ffe29bfcf38420988fd52a698be422-862207742.us-west-1.elb.amazonaws.com   443:30725/TCP,1514:32036/TCP,1515:30354/TCP   6m29s                                                   35s
+      traefik   LoadBalancer   10.100.34.51   a7ffe29bfcf38420988fd52a698be422-862207742.us-west-1.elb.amazonaws.com   443:30725/TCP,1514:32036/TCP,1515:30354/TCP   6m29s
 
 #. Deploy the Wazuh Kubernetes cluster using the ``kustomization`` file:
 
@@ -698,7 +698,7 @@ You can adjust cluster resources by editing patch files in ``envs/local-env/``. 
          $ kubectl -n wazuh port-forward service/wazuh-agents --address <KUBERNETES_HOST_IP_ADDRESS> 1514:1514 > /tmp/wazuh-agent-port-forward.log 2>&1 &
          $ kubectl -n wazuh port-forward service/wazuh-agents --address <KUBERNETES_HOST_IP_ADDRESS> 1515:1515 > /tmp/wazuh-agent-port-forward.log 2>&1 &
 
-#. Access the Wazuh dashboard using port forwarding. The Wazuh Dashboard will be accessible on ``https://<KUBERNETES_HOST_IP_ADDRESS>:8443``:
+#. Access the Wazuh dashboard using port forwarding. The Wazuh dashboard will be accessible on ``https://<KUBERNETES_HOST_IP_ADDRESS>:8443``:
 
    .. code-block:: console
 
@@ -878,7 +878,7 @@ Check the services to view ``EXTERNAL-IP``:
 
       # kubectl -n wazuh port-forward --address <KUBERNETES_HOST_IP_ADDRESS> service/dashboard 8443:443 > /tmp/wazuh-dashboard-port-forward.log 2>&1 &
 
-The Wazuh dashboard is accessible at ``https://<KUBERNETES_HOST>:8443``.
+The Wazuh dashboard is accessible at ``https://<KUBERNETES_HOST_IP_ADDRESS>:8443``.
 
 The default credentials are ``admin:admin``.
 

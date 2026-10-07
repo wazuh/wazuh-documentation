@@ -74,7 +74,7 @@ Import and access the virtual machine
 
    .. code-block:: console
 
-      # sudo -i
+      $ sudo -i
 
 Access the Wazuh dashboard
 --------------------------
