@@ -437,6 +437,7 @@ Run the playbook
       Run the following command on the Ansible control node to read it. Replace ``<CLONE_DIRECTORY>`` with the directory of the clone you ran ``wazuh-distributed.yml`` from, for example ``/etc/ansible/roles/wazuh-ansible``:
 
       .. code-block:: console
+         :emphasize-lines: 1
 
          # cat <CLONE_DIRECTORY>/deployment-credentials/WAZUH_INDEXER_ADMIN_PASSWORD; echo
 
@@ -489,6 +490,7 @@ Each password must have 12 to 64 characters from ``A-Z a-z 0-9 . , _ + : @ % ^ =
 The playbook does not change passwords. After you change a password with the Wazuh passwords tool, write the new value to the file of its key on the Ansible control node. Later runs of the playbook use ``admin`` and ``wazuh`` users to check the Wazuh indexer and Wazuh server API, and stop if either password is rejected. If the tool generated the new password, read it from the ``# >>> wazuh generated`` block of ``/etc/wazuh/credentials.env`` on the host where you ran the tool. The same key also appears earlier in the file with its old value. For example, after you change the ``admin`` password, run:
 
 .. code-block:: console
+   :emphasize-lines: 1
 
    # printf '%s' '<NEW_ADMIN_PASSWORD>' > /etc/ansible/roles/wazuh-ansible/deployment-credentials/WAZUH_INDEXER_ADMIN_PASSWORD
 
@@ -505,6 +507,7 @@ Then remove ``/etc/wazuh/credentials.env`` from the host where you ran the tool.
    The playbook writes the passwords of each component to ``/etc/wazuh/credentials.env`` on its host before it installs the package. The packages read the file only during installation, and later runs of the playbook do not need it. After you back up ``deployment-credentials``, remove the file from the Wazuh central component hosts. Run the following command on the Ansible control node:
 
    .. code-block:: console
+      :emphasize-lines: 1
 
       # ansible <HOSTS> -b -K -m ansible.builtin.file -a "path=/etc/wazuh/credentials.env state=absent"
 
@@ -554,6 +557,7 @@ Generate an enrollment token
 Run the following command on the Wazuh manager to generate an enrollment token. In a Wazuh cluster, run it on the master node, because worker nodes do not create tokens. Replace ``<WAZUH_MANAGER_ADDRESS>`` with the IP address or FQDN that the agents use to reach the Wazuh manager.
 
 .. code-block:: console
+   :emphasize-lines: 1
 
    # /var/wazuh-manager/bin/wazuh-manager-authd --create-enrollment-token --address <WAZUH_MANAGER_ADDRESS>
 
@@ -740,6 +744,7 @@ Where:
 To install Windows agents, add the following configuration to the ``[agents]`` section in the ``/etc/ansible/hosts`` Ansible hosts file:
 
 .. code-block:: ini
+   :emphasize-lines: 1
 
    windows_agent ansible_host=<WINDOWS_AGENT_IP>  ansible_connection=winrm  ansible_port=5986  ansible_winrm_transport=ntlm  ansible_user=<WINDOWS_USERNAME>  ansible_password=<WINDOWS_PASSWORD> ansible_winrm_server_cert_validation=ignore
 
