@@ -16,6 +16,7 @@ All notable changes to this project will be documented in this file.
 
 - Fixed the Distributed deployment steps for securing the installation in the *Wazuh dashboard* step-by-step installation documentation. ([#10330](https://github.com/wazuh/wazuh-documentation/pull/10330))
 - Fixed code samples and commands that could not be copied and used as written across the *Regulatory compliance*, *Deployment options*, *Proof of concept guide* and *User manual* documentation. ([#10334](https://github.com/wazuh/wazuh-documentation/pull/10334))
+- Fixed dead links, typos, garbled sentences, broken inline markup and XML code blocks marked as `console` across the *Compliance*, *Deployment options*, *Getting started*, *Integrations guide*, *Release notes*, *Upgrade guide* and *User manual* documentation. ([#10335](https://github.com/wazuh/wazuh-documentation/pull/10335))
 
 ## [v4.14.8]
 
