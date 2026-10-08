@@ -426,13 +426,13 @@ You need root user privileges to run the commands below. If you use Docker as a 
 
    .. tabs::
 
-      .. group-tab:: Single-node stack
+      .. group-tab:: Single-node
 
          .. code-block:: console
 
             # docker compose exec wazuh.manager /var/wazuh-manager/bin/wazuh-manager-authd --create-enrollment-token --address <DOCKER_HOST_IP>
 
-      .. group-tab:: Multi-node stack
+      .. group-tab:: Multi-node
 
          .. code-block:: console
 
@@ -444,7 +444,7 @@ You need root user privileges to run the commands below. If you use Docker as a 
 
    .. tabs::
 
-      .. group-tab:: Single-node stack
+      .. group-tab:: Single-node
 
          .. code-block:: console
 
@@ -452,7 +452,7 @@ You need root user privileges to run the commands below. If you use Docker as a 
             # bash ../tools/utils/deployment/certificates-conf.sh --cert --copy --priv --agent-san <DOCKER_HOST_IP>
             # docker compose up -d --force-recreate --no-deps wazuh.manager
 
-      .. group-tab:: Multi-node stack
+      .. group-tab:: Multi-node
 
          .. code-block:: console
 
