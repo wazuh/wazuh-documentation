@@ -951,7 +951,7 @@ The Whodata options will be configured inside this tag.
 
 **provider**
 
-Specifies the who-data mode used by the FIM module. If the ``<provider>`` tag is not configured, the FIM module defaults to the ``audit`` mode. If the provider is set to ``ebpf`` but unavailable due to kernel version incompatibility, it also falls back to the ``audit`` mode. This option is only available for Linux endpoints.
+Specifies the who-data mode used by the FIM module. If the ``<provider>`` tag is not configured, the FIM module defaults to the ``audit`` mode. If the provider is set to ``ebpf`` but unavailable because its health check fails, for example on a kernel without the BPF ring buffer or BTF, it also falls back to the ``audit`` mode. This option is only available for Linux endpoints.
 
 +--------------------+---------------------+
 | **Default value**  | ``audit``           |
