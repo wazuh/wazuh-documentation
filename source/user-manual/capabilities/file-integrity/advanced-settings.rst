@@ -387,7 +387,7 @@ Wazuh uses a kernel data structure called ``ring_buffer`` to transfer these even
 
 .. note::
 
-   Who-data monitoring with eBPF requires kernel version 5.8 or higher, as the data structure is only present in kernels starting with this version.
+   Who-data monitoring with eBPF requires a kernel that supports the BPF ring buffer and BTF. Upstream kernels support them from version 5.8, and some distributions backport them to older kernels, such as RHEL 8.10 (kernel 4.18). When the agent starts, the FIM module runs a health check of the eBPF provider and uses it only if the health check succeeds.
 
 Configuration
 .............
@@ -396,7 +396,9 @@ Configuring who-data in eBPF mode requires a :ref:`provider <syscheck_whodata_pr
 
 .. note::
 
-   If the ``<provider>`` tag is not configured, the FIM module defaults to the ``audit`` mode. Additionally, if the provider is set to ``ebpf``, but unavailable due to kernel version incompatibility, it also falls back to the ``audit`` mode.
+   -  If the ``<provider>`` tag is not configured, the FIM module uses the ``audit`` provider by default. To confirm which mode is in use, check the Wazuh agent log file ``/var/ossec/logs/ossec.log``.
+   -  When the eBPF provider is configured and the eBPF health check succeeds, the agent logs this message ``(6048): Healthcheck for eBPF FIM whodata module success.``
+   -  If the eBPF provider is configured but the health check fails, FIM falls back to the ``audit`` provider. The agent logs this message ``(6959): The eBPF healthcheck has failed. Switching all whodata eBPF configuration to audit.``
 
 A configuration block of who-data in eBPF mode to monitor the ``/home/user/documents`` directory is shown below:
 
