@@ -10,7 +10,10 @@ All notable changes to this project will be documented in this file.
 ### Changed
 
 - Updated the *Wazuh server* disk space requirements in the *Installation guide* to include the vulnerability detection database. ([#10267](https://github.com/wazuh/wazuh-documentation/pull/10267))
-- Corrected the Distributed deployment steps for securing the installation in the *Wazuh dashboard* step-by-step installation documentation. ([#10330](https://github.com/wazuh/wazuh-documentation/pull/10330))
+
+### Fixed
+
+- Fixed the Distributed deployment steps for securing the installation in the *Wazuh dashboard* step-by-step installation documentation. ([#10330](https://github.com/wazuh/wazuh-documentation/pull/10330))
 
 ## [v4.14.8]
 
