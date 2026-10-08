@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: A Wazuh agent can be upgraded remotely using the command line and through the Wazuh server API. learn more in this section of the documentation.
+   :description: A Wazuh agent can be upgraded remotely using the command line and through the Wazuh server API. Learn more in this section of the documentation.
 
 Upgrading the Wazuh agent
 =========================

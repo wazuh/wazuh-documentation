@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: The GET /agents request returns a list of available Wazuh agents. learn more in this section of the documentation.
+   :description: The GET /agents request returns a list of available Wazuh agents. Learn more in this section of the documentation.
 
 Listing agents using the Wazuh server API
 -----------------------------------------

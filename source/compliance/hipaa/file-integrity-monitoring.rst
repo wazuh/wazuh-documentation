@@ -46,7 +46,7 @@ On the Ubuntu endpoint
 
 #. Add the following configuration to the ``syscheck`` block of the agent configuration file ``/var/ossec/etc/ossec.conf`` to monitor the ``/root/health_data`` directory for changes:
 
-   .. code-block:: console
+   .. code-block:: xml
 
          <syscheck>
             <directories check_all="yes" realtime="yes">/root/health_data</directories>
@@ -93,7 +93,7 @@ On the Ubuntu endpoint
 
 #. Add the following configuration to the ``syscheck`` block of the agent configuration file ``/var/ossec/etc/ossec.conf`` to monitor the ``/root/health_data`` directory for changes: 
 
-   .. code-block:: console
+   .. code-block:: xml
 
          <syscheck>
             <directories check_all="yes" realtime="yes">/root/health_data</directories>

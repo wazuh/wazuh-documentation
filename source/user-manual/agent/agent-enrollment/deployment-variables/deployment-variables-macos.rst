@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: learn about the variables used by Wazuh agent packages on macOS endpoints and see examples of how to use them.
+   :description: Learn about the variables used by Wazuh agent packages on macOS endpoints and see examples of how to use them.
 
 Deployment variables for macOS
 ==============================

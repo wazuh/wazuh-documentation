@@ -27,7 +27,7 @@ In this use case, from the Wazuh dashboard, filter for ``syscheck`` events to co
     :align: center
     :width: 80%
 
-We can see that an event exists from the previous use case.
+Any event in the selected time range means that monitored data was modified or deleted during the restriction period. In this example, the search returns one event, a file modification, which you need to investigate.
 
 Chapter III, Article 17, Head 1
 -------------------------------

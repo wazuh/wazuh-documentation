@@ -33,7 +33,7 @@ Run the following command on the Wazuh server:
    Confirm deleting it?(y/n): y
    Agent '002' removed.
 
-You can run the following command on the Wazuh server and specifiy the Wazuh agent ID by using the ``-r`` option. Replace ``<WAZUH_AGENT_ID>`` with the agent ID of the Wazuh agent:
+You can run the following command on the Wazuh server and specify the Wazuh agent ID by using the ``-r`` option. Replace ``<WAZUH_AGENT_ID>`` with the agent ID of the Wazuh agent:
 
 .. code-block:: console
 

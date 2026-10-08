@@ -16,7 +16,7 @@ Wazuh provides several :doc:`capabilities </user-manual/capabilities/index>` for
 -  Security Configuration Assessment (SCA).
 -  Vulnerability detection.
 -  Malware detection.
--  Incidence response.
+-  Incident response.
 
 Wazuh provides out-of-the-box rulesets mapped against compliance tags for PCI DSS, HIPAA, NIST 800-53, TSC, and GDPR frameworks and standards.
 

@@ -384,7 +384,7 @@ For instance, if a user updates the enrollment settings, configuring the module 
                    {
                        "displayName": "DeviceManagementAPIVersion",
                        "oldValue": null,
-                       "newValue": "5023-03-29"
+                       "newValue": "2023-03-29"
                    },
                    {
                        "displayName": "$Collection.RoleScopeTagIds[0]",
@@ -509,7 +509,7 @@ Once Wazuh connects with the Microsoft Graph API, the previous log triggers the 
                            {
                                "displayName": "DeviceManagementAPIVersion",
                                "oldValue": null,
-                               "newValue": "5023-03-29"
+                               "newValue": "2023-03-29"
                            },
                            {
                                "displayName": "$Collection.RoleScopeTagIds[0]",
