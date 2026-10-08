@@ -199,7 +199,7 @@ Below are the steps for deploying the Wazuh central components in :ref:`single-n
 Deploying the central components
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Follow the steps below to deploy the Wazuh central components. Each step shows the single-node and multi-node values in tabs, so select the stack you chose. The tab you select applies to the whole procedure.
+Follow the steps below to deploy the Wazuh central components. Steps that differ between the stacks show the single-node and multi-node values in tabs, so select the stack you chose. The tab you select applies to the whole procedure.
 
 .. note::
 
