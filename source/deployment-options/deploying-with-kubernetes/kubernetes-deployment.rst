@@ -1258,12 +1258,6 @@ The sidecar approach is ideal for targeted monitoring of sensitive applications 
                   port: 80
                   targetPort: 8080
                   nodePort: 30013
-              type: NodePort
-              ports:
-                - protocol: TCP
-                  port: 80
-                  targetPort: 8080
-                  nodePort: 30013
 
          .. note::
 

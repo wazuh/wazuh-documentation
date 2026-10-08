@@ -155,7 +155,7 @@ Wazuh server
       <group name="unused_memory">
         <rule id="100003" level="5">
           <decoded_as>unused-memory</decoded_as>
-          <description>The system’s free memory is $(free_memory) $(unit_of_measurement).</description>
+          <description>The system's free memory is $(free_memory) $(unit_of_measurement).</description>
         </rule>
       </group>
 
@@ -179,7 +179,7 @@ Wazuh server
           "timestamp": "2023-07-26T09:21:07.928+0000",
           "rule": {
               "level": 5,
-              "description": "The system\u2019s free memory is 88456 kB.",
+              "description": "The system's free memory is 88456 kB.",
               "id": "100003",
               "firedtimes": 1,
               "mail": false,

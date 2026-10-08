@@ -113,7 +113,7 @@ The following output shows us the current authentication settings in the Wazuh i
            "anonymous_auth_enabled": false,
            "xff": {
              "enabled": false,
-             "internalProxies": """192\.168\.0\.10|192\.168\.0\.11""",
+             "internalProxies": "192\\.168\\.0\\.10|192\\.168\\.0\\.11",
              "remoteIpHeader": "X-Forwarded-For"
            }
          },
@@ -280,8 +280,8 @@ Keeping track of the Wazuh indexer health and associated node statistics is impo
 
    .. code-block:: console
 
-      # export WAZUH_INDEXER_USER= "<WAZUH_INDEXER_USERNAME>"
-      # export WAZUH_INDEXER_PASS = "<WAZUH_INDEXER_PASSWORD>"
+      # export WAZUH_INDEXER_USER="<WAZUH_INDEXER_USERNAME>"
+      # export WAZUH_INDEXER_PASS="<WAZUH_INDEXER_PASSWORD>"
 
    Replace ``<WAZUH_INDEXER_USERNAME>`` and ``<WAZUH_INDEXER_PASSWORD>`` with your Wazuh indexer username and password.
 
@@ -522,8 +522,8 @@ The Wazuh indexer API is helpful during threat hunting exercises where you have 
 
    .. code-block:: console
 
-      # export WAZUH_INDEXER_USER= "<WAZUH_INDEXER_USERNAME>"
-      # export WAZUH_INDEXER_PASS= "<WAZUH_INDEXER_PASSWORD>"
+      # export WAZUH_INDEXER_USER="<WAZUH_INDEXER_USERNAME>"
+      # export WAZUH_INDEXER_PASS="<WAZUH_INDEXER_PASSWORD>"
       # export ABUSEIPDB_KEY="<ABUSEIPDB_KEY>"
 
    Replace ``<WAZUH_INDEXER_USERNAME>`` and ``<WAZUH_INDEXER_PASSWORD>`` with your Wazuh indexer username and password. Replace ``ABUSEIPDB_KEY`` with your AbuseIPDB API key collected in step 1.

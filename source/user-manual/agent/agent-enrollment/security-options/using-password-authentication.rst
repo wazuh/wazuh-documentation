@@ -157,13 +157,13 @@ The Wazuh agent installation directory depends on the host's architecture.
 
    .. code-block:: console
 
-      # echo “<CUSTOM_PASSWORD>” > "C:\Program Files\ossec-agent\authd.pass"
+      # echo "<CUSTOM_PASSWORD>" > "C:\Program Files\ossec-agent\authd.pass"
 
    For 64-bit systems
 
    .. code-block:: console
 
-      # echo “<CUSTOM_PASSWORD>” > "C:\Program Files (x86)\ossec-agent\authd.pass"
+      # echo "<CUSTOM_PASSWORD>" > "C:\Program Files (x86)\ossec-agent\authd.pass"
 
 #. (Optional) To ensure the Wazuh agent can locate your password file if it is not in the default location (``C:\Program Files (x86)\ossec-agent\authd.pass``), include the ``authorization_pass_path`` setting in the Wazuh agent configuration. Replace ``<PATH_TO_PASSWORD_FILE>`` with the filepath of the password file.
 

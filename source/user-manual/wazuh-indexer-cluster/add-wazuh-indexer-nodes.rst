@@ -519,7 +519,7 @@ Run the command below on any of the Wazuh indexer nodes and check the output for
 
 .. code-block:: console
 
-   # curl -XGET https:/<EXISTING_WAZUH_INDEXER_IP>:9200/_cluster/health?pretty -u admin:<ADMIN-PASSWORD> -k
+   # curl -XGET https://<EXISTING_WAZUH_INDEXER_IP>:9200/_cluster/health?pretty -u admin:<ADMIN-PASSWORD> -k
 
 Replace:
 
@@ -1120,7 +1120,7 @@ Run the command below on any of the Wazuh indexer nodes and check the output for
 
 .. code-block:: console
 
-   # curl -XGET https:/<EXISTING_WAZUH_INDEXER_IP>:9200/_cluster/health?pretty -u admin:<ADMIN-PASSWORD> -k
+   # curl -XGET https://<EXISTING_WAZUH_INDEXER_IP>:9200/_cluster/health?pretty -u admin:<ADMIN-PASSWORD> -k
 
 Replace:
 
