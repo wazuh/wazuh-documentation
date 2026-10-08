@@ -31,6 +31,8 @@ Options
 - `nodes`_
 - `hidden`_
 
+.. _reference_wazuh_manager_conf_cluster_name:
+
 name
 ^^^^
 
@@ -41,6 +43,8 @@ Specifies the name of the cluster this node belongs to. All nodes in the same cl
 +----------------------+------------+
 | **Allowed values**   | Any name   |
 +----------------------+------------+
+
+.. _reference_wazuh_manager_conf_cluster_node_name:
 
 node_name
 ^^^^^^^^^^
@@ -53,6 +57,8 @@ Specifies the name of the current node of the cluster. Each node of the cluster 
 | **Allowed values**   | Any name   |
 +----------------------+------------+
 
+.. _reference_wazuh_manager_conf_cluster_node_type:
+
 node_type
 ^^^^^^^^^^
 
@@ -63,6 +69,8 @@ Specifies the role of the current node. A Wazuh manager cluster supports one mas
 +----------------------+------------------+
 | **Allowed values**   | master, worker   |
 +----------------------+------------------+
+
+.. _reference_wazuh_manager_conf_cluster_key:
 
 key
 ^^^
@@ -97,6 +105,8 @@ Then set that value on each worker node and restart the manager:
 
 Treat the cluster key as a credential. Do not include it in scripts, source control, documentation examples, or command history.
 
+.. _reference_wazuh_manager_conf_cluster_port:
+
 port
 ^^^^
 
@@ -108,6 +118,8 @@ Specifies the port to use for the cluster node communications.
 | **Allowed values**   | Any port number higher than 1024 and lower than 65535   |
 +----------------------+---------------------------------------------------------+
 
+.. _reference_wazuh_manager_conf_cluster_bind_addr:
+
 bind_addr
 ^^^^^^^^^^
 
@@ -118,6 +130,8 @@ Specifies which IP address will communicate with the cluster when the node has m
 +----------------------+------------------------+
 | **Allowed values**   | Any valid IP address   |
 +----------------------+------------------------+
+
+.. _reference_wazuh_manager_conf_cluster_nodes:
 
 nodes
 ^^^^^
@@ -131,6 +145,8 @@ Lists all master nodes in the cluster using the ``<node>`` tag for each one.
 +----------------------+---------------------------------------------------+
 
 The current cluster only allows one master node. Therefore, this list must have only one element. If more elements are found, the first one will be used as master, and the rest will be ignored.
+
+.. _reference_wazuh_manager_conf_cluster_hidden:
 
 hidden
 ^^^^^^
