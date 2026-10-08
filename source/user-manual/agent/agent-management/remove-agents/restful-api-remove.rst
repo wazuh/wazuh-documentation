@@ -41,10 +41,10 @@ Replace ``<WAZUH_MANAGER_IP_ADDRESS>`` with the IP address or FQDN of the Wazuh 
            ],
            "total_affected_items": 3,
            "total_failed_items": 0,
-           "failed_items": [],
+           "failed_items": []
        },
        "message": "All selected agents were deleted",
-       "error": 0,
+       "error": 0
    }
 
 .. _remove_disconnected_agents:

@@ -132,7 +132,7 @@ Options
 
 	.. code-block:: xml
 
-		<agent_config name=”^agent01|^agent02”>
+		<agent_config name="^agent01|^agent02">
 		...
 		<agent_config os="^Linux">
 		...

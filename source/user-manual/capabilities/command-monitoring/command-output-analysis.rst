@@ -155,7 +155,7 @@ Wazuh server
       <group name="unused_memory">
         <rule id="100003" level="5">
           <decoded_as>unused-memory</decoded_as>
-          <description>The system’s free memory is $(free_memory) $(unit_of_measurement).</description>
+          <description>The system's free memory is $(free_memory) $(unit_of_measurement).</description>
         </rule>
       </group>
 

@@ -252,7 +252,7 @@ Configure the Wazuh server with a custom rule to analyze the Calendar applicatio
    .. code-block:: xml
 
       <group name="process_monitor,">
-        <rule id="100013" level="6">
+        <rule id="100018" level="6">
           <if_sid>530</if_sid>
           <match>^ossec: output: 'check_calendar_status'</match>
           <description>Calendar is running.</description>

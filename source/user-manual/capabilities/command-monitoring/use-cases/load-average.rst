@@ -88,7 +88,7 @@ Follow the steps below to trigger a load average alert on the Linux endpoint.
 
    .. code-block:: console
 
-      $ stress --cpu <NUMBER_OF_THREADS> –-timeout <DURATION_IN_SECONDS>
+      $ stress --cpu <NUMBER_OF_THREADS> --timeout <DURATION_IN_SECONDS>
 
    Where:
 
