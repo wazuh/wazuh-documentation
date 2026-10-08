@@ -493,8 +493,6 @@ Perform the following steps to configure HAProxy to work with a Wazuh server clu
         	mode tcp
         	balance leastconn
         	server master <IP_ADDRESS_OR_DNS_OF_WAZUH_MASTER_NODE>:1515 check
-        	server worker1 <IP_ADDRESS_OR_DNS_OF_WAZUH_WORKER_NODE>:1515 check
-        	server workern <IP_ADDRESS_OR_DNS_OF_WAZUH_WORKER_NODE>:1515 check
 
       # Do not include the following if you will enable HAProxy Helper
       frontend wazuh_reporting_front
