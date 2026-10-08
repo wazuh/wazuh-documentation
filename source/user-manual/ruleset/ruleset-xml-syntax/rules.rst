@@ -502,7 +502,7 @@ Example:
        <description>Forbidden srcip has been detected.</description>
    </rule>
 
-This rule will trigger when that exact ``scrip`` has been decoded.
+This rule will trigger when that exact ``srcip`` has been decoded.
 
 The attributes below are optional.
 

@@ -236,7 +236,7 @@ Confirming that the configuration was applied
 
 Agents automatically reload the configuration after receiving it. The agent maintains its connection to the manager, since the ``agentd`` daemon is not restarted.
 
-With every agent keepalive (10 seconds default), the agent sends the checksum of its ``merge.md`` file to the manager. If the checksums differ, the manager pushes the updated file to the agent. The agent applies the new configuration immediately after receiving it. No manual restart is required, regardless of the :ref:`auto_restart <client_auto_restart>` setting.
+With every agent keepalive (10 seconds default), the agent sends the checksum of its ``merged.mg`` file to the manager. If the checksums differ, the manager pushes the updated file to the agent. The agent applies the new configuration immediately after receiving it. No manual restart is required, regardless of the :ref:`auto_restart <client_auto_restart>` setting.
 
 If the configuration is successfully applied, the agent log includes entries similar to the following:
 

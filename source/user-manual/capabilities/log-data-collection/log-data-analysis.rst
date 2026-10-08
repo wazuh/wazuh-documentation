@@ -34,7 +34,7 @@ Extracted information:
 Decoding
 --------
 
-In the decoding phase, the log analysis engine looks for a decoder that matches the sample log. The decoders below match the sample log. These decoders are in the ``/var/ossec/rulesets/decoders/0310-ssh_decoders.xml`` file on the Wazuh server:
+In the decoding phase, the log analysis engine looks for a decoder that matches the sample log. The decoders below match the sample log. These decoders are in the ``/var/ossec/ruleset/decoders/0310-ssh_decoders.xml`` file on the Wazuh server:
 
    .. code-block:: xml
 

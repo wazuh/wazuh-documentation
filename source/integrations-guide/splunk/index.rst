@@ -480,7 +480,7 @@ Configuring the Splunk forwarder
 Running the forwarder
 ^^^^^^^^^^^^^^^^^^^^^
 
-#. `Start the Splunk Forwarder <https://docs.splunk.com/Documentation/Forwarder/latest/Forwarder/StartorStoptheuniversalforwarder#Start_the_universal_forwarder>`__ following Splunk documentation.
+#. `Start the Splunk Forwarder <https://help.splunk.com/en/splunk-enterprise/forward-and-process-data/universal-forwarder-manual/10.2/configure-the-universal-forwarder/start-or-stop-the-universal-forwarder#ariaid-title3>`__ following Splunk documentation.
 #. Run the following command to verify the connection is established:
 
    .. code-block:: console
