@@ -94,20 +94,28 @@ interval
 
 .. deprecated:: 4.8.0
 
+   In earlier versions, this option set the time between vulnerability scans. The module now analyzes the inventory data that Syscollector sends, so the Syscollector ``interval`` sets how often inventory is checked. The Wazuh manager ignores it and logs an invalid element warning.
+
 run_on_start
 ^^^^^^^^^^^^
 
 .. deprecated:: 4.8.0
+
+   In earlier versions, this option ran feed updates and vulnerability scans when the service started. There is no replacement: the module analyzes inventory data as the agents send it. The Wazuh manager ignores it and logs an invalid element warning.
 
 retry_interval
 ^^^^^^^^^^^^^^
 
 .. deprecated:: 4.8.0
 
+   In earlier versions, this option set the time to wait before retrying agents that failed a scan. There is no replacement. The Wazuh manager ignores it and logs an invalid element warning.
+
 provider
 ^^^^^^^^
 
 .. deprecated:: 4.8.0
+
+   In earlier versions, this block configured the vulnerability feed providers. Vulnerability data now comes from the Wazuh Cyber Threat Intelligence (CTI) platform and is updated every ``feed-update-interval``. To use offline content, set ``offline-url``. The Wazuh manager ignores it and logs an invalid element warning.
 
 Example of configuration
 ------------------------

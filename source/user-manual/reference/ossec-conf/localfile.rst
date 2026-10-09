@@ -327,7 +327,8 @@ Specifies the format of the log to be read. **This field is required.**
 |                    | audit              | Used for Auditd events. Chains consecutive logs with the same ID into a single event.           |
 +                    +--------------------+-------------------------------------------------------------------------------------------------+
 |                    | command            | Executes a command as root and treats each line of output as a separate log entry.              |
-|                    |                    | Requires ``logcollector.remote_commands=1`` in internal options.                                |
+|                    |                    | When set through centralized configuration (``agent.conf``), requires                           |
+|                    |                    | ``logcollector.remote_commands=1`` in internal options.                                         |
 +                    +--------------------+-------------------------------------------------------------------------------------------------+
 |                    | djb-multilog       | Reads files in the format produced by the daemontools multi-log service logger.                 |
 +                    +--------------------+-------------------------------------------------------------------------------------------------+
@@ -337,7 +338,8 @@ Specifies the format of the log to be read. **This field is required.**
 |                    | eventlog           | Used for the classic Microsoft Windows event log format.                                        |
 +                    +--------------------+-------------------------------------------------------------------------------------------------+
 |                    | full_command       | Executes a command as root and treats the entire output as a single log entry.                  |
-|                    |                    | Requires ``logcollector.remote_commands=1`` in internal options.                                |
+|                    |                    | When set through centralized configuration (``agent.conf``), requires                           |
+|                    |                    | ``logcollector.remote_commands=1`` in internal options.                                         |
 +                    +--------------------+-------------------------------------------------------------------------------------------------+
 |                    | generic            | Used for generic text log files.                                                                |
 +                    +--------------------+-------------------------------------------------------------------------------------------------+
@@ -387,7 +389,7 @@ Specifies the format of the log to be read. **This field is required.**
 
 .. note::
 
-   Agents ignore ``command`` and ``full_command`` log sources unless ``logcollector.remote_commands=1`` is set in ``/var/ossec/etc/internal_options.conf`` or ``/var/ossec/etc/local_internal_options.conf``. This prevents the manager from executing arbitrary commands on agents with root privileges.
+   Agents ignore ``command`` and ``full_command`` log sources received through centralized configuration (``agent.conf``) unless ``logcollector.remote_commands=1`` is set in ``/var/ossec/etc/internal_options.conf`` or ``/var/ossec/etc/local_internal_options.conf``. This prevents the manager from executing arbitrary commands on agents with root privileges.
 
 Sample of multi-line log message in the original log file:
 

@@ -20,6 +20,7 @@ Configuration options for file integrity monitoring:
 
 - `alert_new_files`_
 - `allow_remote_prefilter_cmd`_
+- `auto_ignore`_
 - `database`_
 - `file_limit`_
 - `registry_limit`_
@@ -34,6 +35,7 @@ Configuration options for file integrity monitoring:
 - `process_priority`_
 - `registry_ignore`_
 - `scan_day`_
+- `scan_on_start`_
 - `scan_time`_
 - `skip_dev`_
 - `skip_nfs`_
@@ -90,6 +92,37 @@ Example:
 .. note::
 
    This option only can be activated from the agent side, on its own ``ossec.conf``.
+
+.. _reference_ossec_syscheck_auto_ignore:
+
+auto_ignore
+-----------
+
+Specifies whether the Wazuh manager stops alerting on a file that changes too often. When enabled, the Wazuh manager generates no more alerts for a monitored file after it changes ``frequency`` times within ``timeframe`` seconds. Alerts for that file resume after ``timeframe`` seconds. This option is read by the Wazuh manager from the ``<syscheck>`` section of its own configuration file and applies to the alerts of all agents. It has no effect in the Wazuh agent configuration.
+
++--------------------+---------+
+| **Default value**  | no      |
++--------------------+---------+
+| **Allowed values** | yes, no |
++--------------------+---------+
+
+Attributes:
+
++---------------+-------------------------------------------------------------------------+
+| **frequency** | Number of changes allowed within the time frame before the alerts stop. |
++---------------+-------------------------------------------------------------------------+
+|               | Default value: 10. Allowed values: a number from 1 to 99.               |
++---------------+-------------------------------------------------------------------------+
+| **timeframe** | Time frame, in seconds.                                                 |
++---------------+-------------------------------------------------------------------------+
+|               | Default value: 3600. Allowed values: a number from 0 to 43200.          |
++---------------+-------------------------------------------------------------------------+
+
+Example:
+
+.. code-block:: xml
+
+   <auto_ignore frequency="10" timeframe="3600">yes</auto_ignore>
 
 .. _reference_ossec_syscheck_database:
 
@@ -533,6 +566,25 @@ Example:
 
  <scan_day>thursday</scan_day>
 
+
+.. _reference_ossec_syscheck_scan_on_start:
+
+scan_on_start
+-------------
+
+This option is accepted but has no effect. Syscheck always runs a scan when it starts, to create the baseline, whatever this option is set to.
+
++--------------------+---------+
+| **Default value**  | yes     |
++--------------------+---------+
+| **Allowed values** | yes, no |
++--------------------+---------+
+
+Example:
+
+.. code-block:: xml
+
+   <scan_on_start>yes</scan_on_start>
 
 .. _reference_ossec_syscheck_scan_time:
 

@@ -1435,7 +1435,7 @@ This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 .. note::
 
-   Rules at level 0 are discarded immediately and will not be used with ``if_matched_rules``. The level must be at least 1, but you will have to add the ``<no_log>`` option to the rule to ensure it is not logged.
+   Rules at level 0 are discarded immediately and will not be used with ``if_matched_sid``. The level must be at least 1, but you will have to add the ``<no_log>`` option to the rule to ensure it is not logged.
 
 Example:
 

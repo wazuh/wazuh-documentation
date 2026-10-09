@@ -12,7 +12,7 @@ The examples use an :ref:`authentication token <api_log_in>`. To get your token,
 
 .. code-block:: console
 
-   # TOKEN=$(curl -u <USER>:<PASSWORD> -k -X GET "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/security/user/authenticate?raw=true")
+   # TOKEN=$(curl -u <USER>:<PASSWORD> -k -X POST "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/security/user/authenticate?raw=true")
 
 .. note::
 
@@ -25,7 +25,7 @@ You can remove specific Wazuh agents using a list. Use the parameter ``agents_li
 
 .. code-block:: console
 
-   # curl -k -X DELETE "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/agents?pretty=true&older_than=0s&agents_list=005,006,007&status=all" -H  "Authorization: Bearer $TOKEN"
+   # curl -k -X DELETE "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/agents?pretty=true&older_than=0s&agents_list=005,006,007&status=all" -H "Authorization: Bearer $TOKEN"
 
 Replace ``<WAZUH_MANAGER_IP_ADDRESS>`` with the IP address or FQDN of the Wazuh server.
 
@@ -56,7 +56,7 @@ You can remove Wazuh agents that never connected or agents that have been discon
 
 .. code-block:: console
 
-   # curl -k -X DELETE "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/agents?pretty=true&older_than=21d&agents_list=all&status=never_connected,disconnected" -H  "Authorization: Bearer $TOKEN"
+   # curl -k -X DELETE "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/agents?pretty=true&older_than=21d&agents_list=all&status=never_connected,disconnected" -H "Authorization: Bearer $TOKEN"
 
 Replace ``<WAZUH_MANAGER_IP_ADDRESS>`` with the IP address or FQDN of the Wazuh server.
 

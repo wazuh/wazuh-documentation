@@ -1190,7 +1190,7 @@ The sidecar approach is ideal for targeted monitoring of sensitive applications 
                       lifecycle:
                         preStop:
                           exec:
-                            command: ["/bin/sh", "-lc", "/var/ossec/bin/ossec-control stop || true; sleep 2"]
+                            command: ["/bin/sh", "-lc", "/var/ossec/bin/wazuh-control stop || true; sleep 2"]
                       command: ["/bin/sh", "-lc"]
                       args:
                         - |
@@ -1434,7 +1434,7 @@ The sidecar approach is ideal for targeted monitoring of sensitive applications 
                       lifecycle:
                         preStop:
                           exec:
-                            command: ["/bin/sh", "-lc", "/var/ossec/bin/ossec-control stop || true; sleep 2"]
+                            command: ["/bin/sh", "-lc", "/var/ossec/bin/wazuh-control stop || true; sleep 2"]
                       command: ["/bin/sh", "-lc"]
                       args:
                         - |
