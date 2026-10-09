@@ -92,6 +92,7 @@ Perform the steps below to enable the archiving on your Wazuh server.
           <alerts_log>yes</alerts_log>
           <logall>yes</logall>
           <logall_json>yes</logall_json>
+        </global>
 
          ...
       </ossec_config>

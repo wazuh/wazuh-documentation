@@ -82,7 +82,20 @@ All notable changes to this project will be documented in this file.
 
 ## [v4.14.9]
 
+### Added
+
 - Added the `agent.tcp_keepidle`, `agent.tcp_keepintvl`, `agent.tcp_keepcnt`, and `agent.send_timeout` internal options to the *Internal configuration* reference documentation. ([#10029](https://github.com/wazuh/wazuh-documentation/pull/10029))
+
+### Changed
+
+- Updated the *Wazuh server* disk space requirements in the *Installation guide* to include the vulnerability detection database. ([#10267](https://github.com/wazuh/wazuh-documentation/pull/10267))
+- Updated the eBPF who-data requirements and fallback behavior in the *File integrity monitoring* and *Reference* documentation to describe the eBPF health check instead of a kernel version check. ([#10331](https://github.com/wazuh/wazuh-documentation/pull/10331))
+
+### Fixed
+
+- Fixed the Distributed deployment steps for securing the installation in the *Wazuh dashboard* step-by-step installation documentation. ([#10330](https://github.com/wazuh/wazuh-documentation/pull/10330))
+- Fixed code samples and commands that could not be copied and used as written across the *Regulatory compliance*, *Deployment options*, *Proof of concept guide* and *User manual* documentation. ([#10334](https://github.com/wazuh/wazuh-documentation/pull/10334))
+- Fixed dead links, typos, garbled sentences, broken inline markup and XML code blocks marked as `console` across the *Compliance*, *Deployment options*, *Getting started*, *Integrations guide*, *Release notes*, *Upgrade guide* and *User manual* documentation. ([#10335](https://github.com/wazuh/wazuh-documentation/pull/10335))
 
 ## [v4.14.8]
 

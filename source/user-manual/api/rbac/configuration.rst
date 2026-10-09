@@ -542,8 +542,8 @@ Step 2: Assign the allow policy at position 1 (higher priority -- will override 
            "id": 100,
            "name": "example_role",
            "policies": [
-             101,              // ← deny (position 0 – lower)
-             100               // ← allow (position 1 – higher, wins!)
+             101,              // ← deny (position 0 - lower)
+             100               // ← allow (position 1 - higher, wins!)
            ],
            "users": [],
            "rules": []
