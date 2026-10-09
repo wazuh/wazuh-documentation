@@ -60,7 +60,7 @@ Perform the following steps to install Apache and configure the Wazuh agent to m
 
       <ossec_config>
         <localfile>
-          <log_format>apache</log_format>
+          <log_format>syslog</log_format>
           <location>/var/log/apache2/access.log</location>
         </localfile>
       </ossec_config>

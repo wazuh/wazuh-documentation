@@ -14,14 +14,18 @@ The module manager service loads, manages, and coordinates the execution of Wazu
 
 For more information about the available manager modules and their configuration, see the :ref:`Wazuh manager <normalization_engine_modules>` section of the User Manual.
 
-+----------+-----------------------------------------------------------------------------------+
-| Option   | Description                                                                       |
-+==========+===================================================================================+
-| -d       | Increases the debug level. Repeat the option to further increase the verbosity.   |
-+----------+-----------------------------------------------------------------------------------+
-| -f       | Runs the daemon in the foreground.                                                |
-+----------+-----------------------------------------------------------------------------------+
-| -h       | Displays the help message and exits.                                              |
-+----------+-----------------------------------------------------------------------------------+
-| -t       | Tests the configuration and exits.                                                |
-+----------+-----------------------------------------------------------------------------------+
++-------------+---------------------------------------------------------------------------------+
+| Option      | Description                                                                     |
++=============+=================================================================================+
+| -c <config> | Specifies the configuration file to use. The default is etc/wazuh-manager.conf. |
++-------------+---------------------------------------------------------------------------------+
+| -d          | Increases the debug level. Repeat the option to further increase the verbosity. |
++-------------+---------------------------------------------------------------------------------+
+| -f          | Runs the daemon in the foreground.                                              |
++-------------+---------------------------------------------------------------------------------+
+| -h          | Displays the help message and exits.                                            |
++-------------+---------------------------------------------------------------------------------+
+| -t          | Tests the configuration and exits.                                              |
++-------------+---------------------------------------------------------------------------------+
+| -u <user>   | Specifies the user under which the daemon runs. The default is wazuh-manager.   |
++-------------+---------------------------------------------------------------------------------+

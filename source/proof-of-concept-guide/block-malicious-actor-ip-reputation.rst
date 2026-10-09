@@ -121,7 +121,7 @@ Perform the following steps on the Wazuh dashboard to add the IP address of the 
 Decoders
 ~~~~~~~~
 
-#. Navigate to **Security analytics** > **Decoders**.
+#. Navigate to **Ruleset management** > **Decoders**.
 
 #. Select the **Draft** space, then select **Actions** > **Create**.
 
@@ -292,7 +292,7 @@ Decoders
 KVDBs
 ~~~~~
 
-#. Navigate to **Security Analytics** > **KVDBs**. Ensure you are in the **Draft** space, click on **Actions**, and select **Create**. Fill in the following parameters:
+#. Navigate to **Ruleset management** > **KVDBs**. Ensure you are in the **Draft** space, click on **Actions**, and select **Create**. Fill in the following parameters:
 
    +-----------------+-------------------------+
    | Field           | Value                   |
@@ -318,7 +318,7 @@ KVDBs
 Rules
 ~~~~~
 
-#. Navigate to **Security analytics** > **Rules**. Select the **Draft** space, then select **Actions** > **Create**.
+#. Navigate to **Ruleset management** > **Rules**. Select the **Draft** space, then select **Actions** > **Create**.
 
 #. Switch to the YAML editor, select the custom HTTP integration, then input the rule below and click the **Create rule** button.
 
@@ -389,21 +389,21 @@ Rules
       :align: center
       :width: 80%
 
-#. Navigate to **Security analytics** > **Overview** > **Actions** > **Edit**. Select the decoder/core-wazuh-message/0 decoder under the **Root Decoder** field, then click **Save**.
+#. Navigate to **Ruleset management** > **Overview** > **Actions** > **Edit**. Select the decoder/core-wazuh-message/0 decoder under the **Root Decoder** field, then click **Save**.
 
    .. thumbnail:: /images/poc/block-malicious-actor-root-decoder-config.png
       :title: Root decoder configuration
       :align: center
       :width: 80%
 
-#. Navigate to **Security analytics** > **Overview,** then click **Actions** > **Promote.** Type the confirmation message when prompted, and click **Promote**. This promotes the created assets from the **Draft** user space to the **Test** user space.
+#. Navigate to **Ruleset management** > **Overview,** then click **Actions** > **Promote.** Type the confirmation message when prompted, and click **Promote**. This promotes the created assets from the **Draft** user space to the **Test** user space.
 
 #. Select the **Test** space, then click **Actions** > **Promote.** Type the confirmation message when prompted, and click **Promote**. This promotes the created assets from the **Test** user space to the **Custom** user space.
 
 Detector
 ~~~~~~~~
 
-#. Navigate to **Security analytics** > **Detectors,** then click **Create detector**.
+#. Navigate to **Ruleset management** > **Detectors,** then click **Create detector**.
 
 #. Set the value of the **Name** field to http_detector, then click the **Data source** drop-down and select wazuh-events-v5-network-activity as the **indexes/aliases**.
 
@@ -508,7 +508,7 @@ You can visualize the findings in the Wazuh dashboard. To do this, go to the **T
 -  Ubuntu:
 
    .. thumbnail:: /images/poc/block-malicious-actor-ubuntu-findings.png
-      :alt: Wazuh dashboard Threat Hunting events for the Ubuntu22.04 agent, showing alerts for an IP address found in the AlienVault reputation database and a host blocked by the firewall-drop active response.
+      :alt: Wazuh dashboard Threat Hunting showing the Apache: Successful HTTP connection from malicious IP and Active response blocked IP findings for the Ubuntu 24.04 agent
       :title: Blocking a known malicious actor Ubuntu findings
       :align: center
       :width: 80%
@@ -516,7 +516,7 @@ You can visualize the findings in the Wazuh dashboard. To do this, go to the **T
 -  Windows:
 
    .. thumbnail:: /images/poc/block-malicious-actor-windows-findings.png
-      :alt: Wazuh dashboard Threat Hunting events for the Windows11 agent, showing alerts for an IP address found in the AlienVault reputation database and netsh active response commands adding and deleting a firewall block.
+      :alt: Wazuh dashboard Threat Hunting showing the Apache: Successful HTTP connection from malicious IP finding for the Windows 11 agent
       :title: Blocking a known malicious actor Windows findings
       :align: center
       :width: 80%

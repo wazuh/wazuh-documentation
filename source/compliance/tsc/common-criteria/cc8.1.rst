@@ -49,7 +49,7 @@ Wazuh dashboard
       :align: center
       :width: 80%
 
-#. Navigate to the **Inventory** section of the **Vulnerability Detection** dashboard and filter using the following parameters: ``package.name: 7-Zip 19.00 (x64)``
+#. Navigate to the **Inventory** section of the **Vulnerability Detection** dashboard and filter using the following parameters: ``package.name: "7-Zip 19.00 (x64)"``
 
    .. thumbnail:: /images/compliance/tsc/common-criteria/vulnerability-detection-inventory-7zip-filter.png
       :title: Vulnerability Detection inventory filtered by 7-Zip

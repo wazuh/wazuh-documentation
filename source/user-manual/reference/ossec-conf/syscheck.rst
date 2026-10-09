@@ -50,6 +50,10 @@ Options
 alert_new_files
 ^^^^^^^^^^^^^^^^
 
+.. deprecated:: 5.0.0
+
+   This option has no effect in Wazuh 5.0. It is still accepted so configurations from Wazuh 4.x agents don't fail, and the Wazuh agent logs a deprecation warning when it finds it.
+
 Specifies if FIM should alert when new files are created.
 
 +----------------------+-----------+
@@ -72,6 +76,8 @@ allow_remote_prefilter_cmd
 
 .. deprecated:: 5.0.0
 
+   This option has no effect in Wazuh 5.0. It is still accepted so configurations from Wazuh 4.x agents don't fail, and the Wazuh agent logs a deprecation warning when it finds it.
+
 Allows ``prefilter_cmd`` option apply in remote configuration (``agent.conf``).
 
 +----------------------+-----------+
@@ -91,6 +97,10 @@ Example
 
 database
 ^^^^^^^^
+
+.. deprecated:: 5.0.0
+
+   This option has no effect in Wazuh 5.0. It is still accepted so configurations from Wazuh 4.x agents don't fail, and the Wazuh agent logs a deprecation warning when it finds it.
 
 Specifies where the database is going to be stored.
 
@@ -418,6 +428,8 @@ prefilter_cmd
 
 .. deprecated:: 5.0.0
 
+   This option has no effect in Wazuh 5.0. It is still accepted so configurations from Wazuh 4.x agents don't fail, and the Wazuh agent logs a deprecation warning when it finds it.
+
 Run to prevent prelinking from creating false positives.
 
 +----------------------+----------------------------------+
@@ -701,50 +713,36 @@ The database synchronization settings are configured inside this tag.
    <synchronization>
      <enabled>yes</enabled>
      <interval>5m</interval>
-     <response_timeout>60</response_timeout>
-     <max_eps>10</max_eps>
-     <integrity_interval>86400</integrity_interval>
+     <integrity_interval>24h</integrity_interval>
    </synchronization>
 
 ``enabled`` — Specifies performing periodic inventory synchronizations.
 
-+----------------------+----------+
-| **Default value**    | yes      |
-+----------------------+----------+
-| **Allowed values**   | yes, no  |
-+----------------------+----------+
++--------------------+---------+
+| **Default value**  | yes     |
++--------------------+---------+
+| **Allowed values** | yes, no |
++--------------------+---------+
 
 ``interval`` — Specifies the initial time interval between every inventory synchronization.
 
-+----------------------+-------------------------------------------------------------------------+
-| **Default value**    | 5m                                                                      |
-+----------------------+-------------------------------------------------------------------------+
-| **Allowed values**   | Any number greater than or equal to 0. Allowed suffixes (s, m, h, d).   |
-+----------------------+-------------------------------------------------------------------------+
-
-``response_timeout`` — Waiting time in seconds since a sync message is sent or received for the next synchronization activity.
-
-+----------------------+--------------------------------------+
-| **Default value**    | 60                                   |
-+----------------------+--------------------------------------+
-| **Allowed values**   | Any number between 0 and interval.   |
-+----------------------+--------------------------------------+
-
-``max_eps`` — Sets the maximum synchronization message throughput.
-
-+----------------------+-----------------------------------------------------------+
-| **Default value**    | 10                                                        |
-+----------------------+-----------------------------------------------------------+
-| **Allowed values**   | Integer number between 0 and 1000000. 0 means disabled.   |
-+----------------------+-----------------------------------------------------------+
++--------------------+--------------------------------------------------------------------------+
+| **Default value**  | 5m                                                                       |
++--------------------+--------------------------------------------------------------------------+
+| **Allowed values** | Positive time value with optional suffix s, m, h or d. 0 is not allowed. |
++--------------------+--------------------------------------------------------------------------+
 
 ``integrity_interval`` — Defines how often the agent performs a periodic integrity validation for FIM databases. When the interval elapses, the agent calculates checksums and compares them with the manager. On mismatch, the agent triggers a recovery mechanism to resolve synchronization inconsistencies.
 
-+----------------------+---------------------------------------+
-| **Default value**    | 86400 (24 hours)                      |
-+----------------------+---------------------------------------+
-| **Allowed values**   | Any non-negative integer (seconds).   |
-+----------------------+---------------------------------------+
++--------------------+--------------------------------------------------------------------------+
+| **Default value**  | 86400 (24 hours)                                                         |
++--------------------+--------------------------------------------------------------------------+
+| **Allowed values** | Positive time value with optional suffix s, m, h or d. 0 is not allowed. |
++--------------------+--------------------------------------------------------------------------+
+
+.. deprecated:: 5.0.0
+
+   The ``max_eps``, ``max_interval``, ``response_timeout``, ``queue_size``, ``registry_enabled`` and ``thread_pool`` synchronization options have no effect in Wazuh 5.0. They are still accepted so configurations from Wazuh 4.x agents don't fail, and the Wazuh agent logs a deprecation warning when it finds one.
 
 .. _reference_ossec_syscheck_diff:
 
@@ -833,11 +831,11 @@ registry_nodiff
 
 List of values to not compute the diff (one entry per line).
 
-+----------------------+---------------------------------------------------+
-| **Allowed values**   | Any registry path, with value_name added.         |
-+----------------------+---------------------------------------------------+
-| **Example**          | HKEY_LOCAL_MACHINE\SOFTWARE\test_key\value_name   |
-+----------------------+---------------------------------------------------+
++--------------------+----------------------------------------------------+
+| **Allowed values** | Any registry path, with value_name added.          |
++--------------------+----------------------------------------------------+
+| **Example**        | HKEY_LOCAL_MACHINE\\SOFTWARE\\test_key\\value_name |
++--------------------+----------------------------------------------------+
 
 Attributes:
 
@@ -1164,7 +1162,6 @@ Wazuh agent - Linux/Unix
      <synchronization>
        <enabled>yes</enabled>
        <interval>5m</interval>
-       <max_eps>10</max_eps>
      </synchronization>
    </syscheck>
 
@@ -1240,7 +1237,6 @@ Wazuh agent - Windows
      <synchronization>
        <enabled>yes</enabled>
        <interval>5m</interval>
-       <max_eps>10</max_eps>
      </synchronization>
    </syscheck>
 
@@ -1285,6 +1281,5 @@ Wazuh agent - MacOS X
      <synchronization>
        <enabled>yes</enabled>
        <interval>5m</interval>
-       <max_eps>10</max_eps>
      </synchronization>
    </syscheck>

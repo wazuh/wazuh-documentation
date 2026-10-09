@@ -49,23 +49,46 @@ The Wazuh VM is configured with these specifications by default:
 | |OVA_COMPONENT|  |       8        |      16      |     50       |
 +------------------+----------------+--------------+--------------+
 
-The hardware configuration can be modified depending on the number of protected endpoints and indexed alert data. For more information about requirements, see :doc:`/quickstart`.
+This default size matches the :doc:`Quickstart </quickstart>` guide recommendation for 26 to 100 Wazuh agents. For up to 25 agents, you can lower it to 4 CPU cores and 8 GB of RAM when you import the VM. You can adjust the hardware configuration based on the number of protected endpoints and indexed alert data.
+
+.. _vm_import_and_access:
 
 Import and access the virtual machine
 -------------------------------------
 
-#. Download and import the `wazuh-|WAZUH_CURRENT_OVA|-|WAZUH_CURRENT_OVA_REV|.ova <https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR_OVA|/vm/wazuh-|WAZUH_CURRENT_OVA|-|WAZUH_CURRENT_OVA_REV|.ova>`_ file to your virtualization platform.
+#. Download the `wazuh-|WAZUH_CURRENT_OVA|-|WAZUH_CURRENT_OVA_REV|.ova <https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR_OVA|/vm/wazuh-|WAZUH_CURRENT_OVA|-|WAZUH_CURRENT_OVA_REV|.ova>`__ file. To check the download, run the following command and compare its output with the value in the `sha512 <https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR_OVA|/checksums/wazuh/|WAZUH_CURRENT_OVA|/wazuh-|WAZUH_CURRENT_OVA|-|WAZUH_CURRENT_OVA_REV|.ova.sha512>`__ file:
 
-#. If you use VirtualBox, set the Graphics Controller to ``VMSVGA``. Other controllers can freeze the VM window.
+   .. code-block:: console
 
-   #. Select the imported VM
-   #. Click **Settings** > **Display**
-   #. Switch from **Basic** to **Expert** mode at the top-left of the settings window.
-   #. From the **Graphic controller** dropdown, select the ``VMSVGA`` option.
+      $ sha512sum wazuh-|WAZUH_CURRENT_OVA|-|WAZUH_CURRENT_OVA_REV|.ova
 
-#. Start the VM.
+#. Import the OVA into your virtualization platform. In VirtualBox, select **File** > **Import Appliance**, then select the ``wazuh-|WAZUH_CURRENT_OVA|-|WAZUH_CURRENT_OVA_REV|.ova`` file. If your host can't spare 8 CPU cores and 16 GB of RAM, lower them before you click **Finish**. The VM also runs with 4 CPU cores and 8 GB of RAM. To import from a terminal instead, run:
 
-#. Log in using these credentials. You can use the virtualization platform or access it via SSH.
+   .. code-block:: console
+
+      $ VBoxManage import wazuh-|WAZUH_CURRENT_OVA|-|WAZUH_CURRENT_OVA_REV|.ova --vsys 0 --cpus 4 --memory 8192
+
+#. If you use VirtualBox, change two settings before you start the VM. Other graphics controllers can freeze the VM window, and without the UTC setting, the VM clock can jump by your time zone offset during the first start.
+
+   #. Select the imported VM and click **Settings**. In VirtualBox 7.1 and later, switch from **Basic** to **Expert** mode at the top-left of the settings window.
+   #. In **Display**, select ``VMSVGA`` from the **Graphics Controller** list.
+   #. In **System** > **Motherboard**, select **Hardware Clock in UTC Time**.
+
+   To change both settings from a terminal instead, run the following command while the VM is powered off. Replace ``<VM_NAME>`` with the VM's name:
+
+   .. code-block:: console
+
+      $ VBoxManage modifyvm "<VM_NAME>" --graphicscontroller vmsvga --rtc-use-utc on
+
+#. Start the VM. The first start configures the VM and takes about 5 minutes.
+
+#. Log in on the VM console, or over SSH to the VM's IP address. To find the address, run the following command on the console. Use the ``inet`` address of the interface on the network you connect from. With the default single network adapter, that is ``eth0``.
+
+   .. code-block:: console
+
+      $ ip -4 addr
+
+   Use these credentials:
 
    -  User: ``wazuh-user``
    -  Password: ``wazuh``
@@ -74,22 +97,32 @@ Import and access the virtual machine
 
    .. code-block:: console
 
-      # sudo -i
+      $ sudo -i
+
+   The VM runs Amazon Linux in FIPS mode. For SSH key login, use an RSA or ECDSA key. Ed25519 keys are refused.
+
+#. Check that the first start has finished:
+
+   .. code-block:: console
+
+      $ sudo systemctl status wazuh-starter
+
+   It has finished when the output shows ``status=0/SUCCESS``. After a later reboot, the command reports that the unit could not be found instead. If it shows ``failed``, the Wazuh dashboard doesn't start.
 
 Access the Wazuh dashboard
 --------------------------
 
-It might take a few seconds to minutes for the Wazuh dashboard to complete initialization. Find the ``<WAZUH_MANAGER_IP>`` by typing the following command in the VM:
+When the first start has finished, access the Wazuh dashboard in a web browser. Replace ``<VM_IP_ADDRESS>`` with the VM's IP address from step 5 of :ref:`vm_import_and_access`:
 
-.. code-block:: console
-
-   # ip a
-
-After starting the VM, access the Wazuh dashboard in a web browser using these credentials:
-
--  URL: ``https://<WAZUH_MANAGER_IP>``
+-  URL: ``https://<VM_IP_ADDRESS>``
 -  User: ``admin``
--  Password: ``admin``
+-  Password: generated for this VM at its first start. Print it by running the following command in the VM as root:
+
+   .. code-block:: console
+
+      # grep '^WAZUH_INDEXER_ADMIN_PASSWORD=' /etc/wazuh/credentials.env | cut -d= -f2-
+
+The ``/etc/wazuh/credentials.env`` file holds every password generated for this VM, including the one for the Wazuh manager API user ``wazuh``. Save the passwords somewhere safe, then delete the file.
 
 Configuration files
 -------------------
@@ -101,23 +134,155 @@ All components in this virtual image are configured to work out of the box. Howe
 -  Wazuh dashboard: ``/etc/wazuh-dashboard/opensearch_dashboards.yml``
 -  Wazuh agent: ``/var/ossec/etc/ossec.conf``
 
-VirtualBox time configuration
------------------------------
+Network configuration
+---------------------
 
-If you use VirtualBox, the VM might experience time skew when VirtualBox synchronizes the guest machine time. Follow the steps below to avoid this:
+By default, the network interface type is set to **Bridged Adapter**. The VM attempts to obtain an IP address from the network DHCP server. Alternatively, you can give the VM a static IP address as described in :ref:`vm_set_static_ip_address`. If the VM's address changes after its first start, reissue the agent listener certificate as described in :ref:`vm_reissue_agent_listener_certificate`.
 
-#. Select the imported Wazuh VM
-#. Click on **Settings** > **System**.
-#. Switch from **Basic** to **Expert** mode at the top-left of the settings window.
-#. Click on the **Motherboard** sub-tab.
-#. Enable the ``Hardware Clock in UTC Time`` option under **Features**.
+.. _vm_set_static_ip_address:
 
-.. note::
+Set a static IP address
+^^^^^^^^^^^^^^^^^^^^^^^
 
-   By default, the network interface type is set to **Bridged Adapter**. The VM attempts to obtain an IP address from the network DHCP server. Alternatively, you can set a static IP address by configuring the network files in Amazon Linux.
+The VM gets its addresses from DHCP. To give one of its network interfaces a static address, run the following steps in the VM as root.
 
+#. Find the interface on the network you want to configure. Its ``inet`` line shows the address it has now:
 
-Once the virtual machine is imported and running, it is ready for monitoring using the preinstalled Wazuh agent. To monitor additional endpoints, :doc:`deploy the Wazuh agents </installation-guide/wazuh-agent/index>` on the systems you want to include.
+   .. code-block:: console
+
+      # ip -4 addr
+
+   With the default single network adapter, the interface is ``eth0``. With more than one adapter, the interface names don't always follow the adapter order in your virtualization platform, so identify the interface by its address.
+
+#. Create ``/etc/systemd/network/10-static.network`` with the following content. Replace ``<INTERFACE>``, ``<STATIC_IP>``, ``<PREFIX_LENGTH>``, ``<GATEWAY_IP>``, and ``<DNS_SERVER_IP>`` with your values:
+
+   .. code-block:: ini
+      :emphasize-lines: 2,4-6
+
+      [Match]
+      Name=<INTERFACE>
+      [Network]
+      Address=<STATIC_IP>/<PREFIX_LENGTH>
+      Gateway=<GATEWAY_IP>
+      DNS=<DNS_SERVER_IP>
+
+   This file applies only to that interface. The other interfaces keep using DHCP through ``/etc/systemd/network/20-eth0.network``. Keep that file unchanged, because it matches every Ethernet interface.
+
+#. Apply the change. An SSH session to the old address disconnects, so reconnect to the new address:
+
+   .. code-block:: console
+
+      # systemctl restart systemd-networkd
+
+#. Reissue the agent listener certificate as described in the :ref:`vm_reissue_agent_listener_certificate` section, so agents can verify the Wazuh manager at the new address.
+
+Enroll additional Wazuh agents
+------------------------------
+
+Once the virtual machine is imported and running, it is ready for monitoring using the preinstalled Wazuh agent. To monitor additional endpoints, enroll Wazuh agents on them with an enrollment token. Wazuh 5.x agents connect to the VM on TCP port ``1517`` for enrollment and for their connection, while older agents still use the legacy ports.
+
+#. Run the following command in the VM as root to create an enrollment token. Replace ``<VM_IP_ADDRESS>`` with the address the agents use to reach the VM. It must be an address the VM had when it first started. If the address has changed since then, see :ref:`vm_reissue_agent_listener_certificate` below.
+
+   .. code-block:: console
+
+      # /var/wazuh-manager/bin/wazuh-manager-authd --create-enrollment-token --address <VM_IP_ADDRESS>
+
+   Copy the token, the long string in the output.
+
+#. :doc:`Deploy the Wazuh agent </installation-guide/wazuh-agent/index>` on each endpoint, and use the token as the value of ``WAZUH_ENROLLMENT_TOKEN``. See the :doc:`Wazuh agent installation guide </installation-guide/wazuh-agent/index>` for more information.
+
+.. _vm_reissue_agent_listener_certificate:
+
+Reissue the agent listener certificate
+--------------------------------------
+
+Wazuh agents verify the Wazuh manager with its agent listener certificate, ``/var/wazuh-manager/etc/certs/remoted.pem``. The VM issues it at its first start, for the addresses it has at that moment and for loopback. If the VM's address changes later, or agents reach it through an address that is not on the VM, such as a NAT port forward, agents fail to verify it. Creating an enrollment token for that address fails with ``ERROR 9025: Enrollment token refused: address not in certificate SAN``.
+
+Reissue the certificate from the VM's own certificate authority. Run the following steps in the VM as root. Agents enrolled before the change keep trusting the Wazuh manager because the certificate authority stays the same.
+
+#. Stop the Wazuh manager, then check that none of its processes are still running:
+
+   .. code-block:: console
+
+      # systemctl stop wazuh-manager
+      # /var/wazuh-manager/bin/wazuh-manager-control status
+
+   If any line ends in ``is running...``, stop them:
+
+   .. code-block:: console
+
+      # /var/wazuh-manager/bin/wazuh-manager-control stop
+
+#. Check the Wazuh manager's indexer certificate:
+
+   .. code-block:: console
+
+      # openssl verify -CAfile /etc/wazuh/ca/root-ca.pem /var/wazuh-manager/etc/certs/indexer-connector.pem
+
+   The output ends in ``OK``. If it doesn't, also move the indexer certificate pair in the next step.
+
+#. Move the current certificate pair to a backup directory:
+
+   .. code-block:: console
+
+      # mkdir -p /root/wazuh-certs-backup
+      # mv /var/wazuh-manager/etc/certs/remoted.pem /var/wazuh-manager/etc/certs/remoted-key.pem /root/wazuh-certs-backup/
+
+   If step 2 did not print ``OK``, also run:
+
+   .. code-block:: console
+
+      # mv /var/wazuh-manager/etc/certs/indexer-connector.pem /var/wazuh-manager/etc/certs/indexer-connector-key.pem /root/wazuh-certs-backup/
+
+#. Issue the new certificate. Use the command that matches how agents reach the VM.
+
+   -  **The address is on the VM**, for example, a new DHCP lease or a static IP. The certificate covers the VM's hostname, ``localhost``, loopback, and every address the VM has now:
+
+      .. code-block:: console
+
+         # /var/wazuh-manager/bin/wazuh-manager-resolve-credentials --install
+
+   -  **The address is not on the VM**, for example, a NAT port forward. Forward TCP port ``1517`` to the VM, then list the addresses agents use. The list replaces the discovered addresses, and loopback is always added. Replace ``<AGENT_FACING_ADDRESS>``:
+
+      .. code-block:: console
+
+         # WAZUH_MANAGER_REMOTED_CERT_SANS='IP:<AGENT_FACING_ADDRESS>' /var/wazuh-manager/bin/wazuh-manager-resolve-credentials --install
+
+   The output includes a line that starts with ``resolve-credentials: remoted.pem:`` and lists the new address. If that line is missing, the certificate was not issued. Move the files in ``/root/wazuh-certs-backup/`` back to ``/var/wazuh-manager/etc/certs/`` and start the Wazuh manager.
+
+#. Start the Wazuh manager:
+
+   .. code-block:: console
+
+      # systemctl restart wazuh-manager
+
+#. Create an enrollment token for the new address to confirm the change. The command now succeeds:
+
+   .. code-block:: console
+
+      # /var/wazuh-manager/bin/wazuh-manager-authd --create-enrollment-token --address <NEW_ADDRESS>
+
+Move enrolled agents to the new address
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Wazuh agents enrolled before the change keep their ID. Point each one to the new address with a token that cannot enroll new agents.
+
+#. Run the following command in the VM as root. Replace ``<NEW_ADDRESS>`` with the new address, and copy the token from the output:
+
+   .. code-block:: console
+
+      # /var/wazuh-manager/bin/wazuh-manager-authd --create-enrollment-token --address <NEW_ADDRESS> --no-credential
+
+#. On each Linux endpoint, as root, save the token to a file only root can read, for example ``/root/token``, then run:
+
+   .. code-block:: console
+
+      # systemctl stop wazuh-agent
+      # /var/ossec/bin/wazuh-agent-auth --token-file /root/token --certs-only
+      # rm /root/token
+      # systemctl start wazuh-agent
+
+   The output of ``wazuh-agent-auth`` confirms the new address: ``etc/ossec.conf now points <manager><endpoint> at '<NEW_ADDRESS>'.``
 
 Troubleshooting
 ---------------
@@ -150,4 +315,4 @@ VM fails to start on AMD processors with VMware
       cpuid.1.edx = "0000:0111:1000:1011:1111:1011:1111:1111"
       featureCompat.enable = "FALSE"
 
-#. Save the file and power on the VM.
+#. Save the file and power on the VM. These lines make VMware present the CPU to the VM as an older Intel CPU without AVX instructions, which can reduce performance. Use them only if you get the error above.

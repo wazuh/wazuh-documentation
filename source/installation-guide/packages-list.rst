@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Find the packages required for Wazuh installation on this page. Available for Linux, macOS, and Windows.
+   :description: Find the packages required for Wazuh installation on this page. Available for Linux, macOS, and Windows.
 
 Packages list
 =============
@@ -162,11 +162,13 @@ Windows
 
 .. |Windows7Plus_32_64| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_AGENT_CURRENT_REV|.msi <https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/windows/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_AGENT_CURRENT_REV|.msi>`__ (`sha512 <https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_AGENT_CURRENT_REV|.msi.sha512>`__)
 
-+---------------------+--------------+---------------------------+
-| Version             | Architecture | Package                   |
-+=====================+==============+===========================+
-| 10 or later         |   32/64bits  | |Windows7Plus_32_64|      |
-+---------------------+--------------+---------------------------+
++---------------------------------------+--------------+---------------------------+
+| Version                               | Architecture | Package                   |
++=======================================+==============+===========================+
+| Windows 10 and 11, and Windows Server |   32/64bits  | |Windows7Plus_32_64|      |
+| 2008 R2, 2012 R2, 2016, 2019, 2022,   |              |                           |
+| and 2025                              |              |                           |
++---------------------------------------+--------------+---------------------------+
 
 .. _packages_list_agent_macos:
 

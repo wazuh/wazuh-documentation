@@ -82,7 +82,7 @@ With the FIM module and the Wazuh dashboard, you can perform searches to confirm
 Use case: Search for FIM events within a certain time frame
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-On the Wazuh dashboard, check **Threat intelligence** > **Threat Hunting** > **findings** to confirm that no modification or deletion of restricted data occurred during a specific time interval. The **GDPR** dashboard also shows this information.
+Click the menu icon, then navigate to **Threat intelligence** > **Threat Hunting** and switch to the **Findings** tab. Confirm that no modification or deletion of restricted data occurred during a specific time interval. The **GDPR** dashboard also shows this information.
 
 .. thumbnail:: /images/compliance/gdpr/syscheck-no-alerts.png
     :title: File modification finding visualization within specific time frame

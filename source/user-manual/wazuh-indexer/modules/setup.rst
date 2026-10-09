@@ -106,10 +106,12 @@ Where:
 
 **Example**
 
+Replace ``<WAZUH_INDEXER_IP>`` with the IP address of the Wazuh indexer node and ``<WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD>`` with your Wazuh indexer username and password.
+
 .. code-block:: console
 
    curl -sk -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD>  -X PUT \
-   "https://127.0.0.1:9200/_plugins/_setup/settings" \
+   "https://<WAZUH_INDEXER_IP>:9200/_plugins/_setup/settings" \
    -H 'Content-Type: application/json' \
    -d '{
      "engine": {

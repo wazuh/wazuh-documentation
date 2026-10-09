@@ -11,37 +11,35 @@ After deploying Wazuh with Docker, you can perform several tasks to manage your 
 Access to services and containers
 ---------------------------------
 
-This section explains how to interact with your Wazuh deployment by accessing service logs and shell instances of running containers.
+This section explains how to list the Wazuh containers and open a shell inside them.
 
-#. Access the Wazuh dashboard using the Docker host IP address.
-#. Enroll Wazuh agents through the :ref:`Wazuh agent Docker deployment <agent_deployment_docker>` or the standard :doc:`Wazuh agent enrollment </user-manual/agent/agent-enrollment/index>` process. Use the Docker host address as the Wazuh manager address.
-#. List the containers in the directory where the Wazuh ``docker-compose.yml`` file is located:
+#. From the ``wazuh-docker/single-node/`` directory, or ``wazuh-docker/multi-node/`` for the multi-node stack, list the containers:
 
    .. code-block:: console
 
       # docker compose ps
 
+   The command output looks similar to this:
+
    .. code-block:: none
       :class: output
 
-      NAME                            IMAGE                                          COMMAND                  SERVICE           CREATED          STATUS                          PORTS
-      single-node-wazuh.dashboard-1   wazuh/wazuh-dashboard:|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|-latest   "/entrypoint.sh"         wazuh.dashboard   58 minutes ago   Restarting (1) 55 seconds ago
-      single-node-wazuh.indexer-1     wazuh/wazuh-indexer:|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|-latest     "/entrypoint.sh open…"   wazuh.indexer     58 minutes ago   Up 3 seconds                    0.0.0.0:9200->9200/tcp, [::]:9200->9200/tcp
-      single-node-wazuh.manager-1     wazuh/wazuh-manager:|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|-latest     "/init"                  wazuh.manager     58 minutes ago   Up 58 minutes                   0.0.0.0:1514-1515->1514-1515/tcp, [::]:1514-1515->1514-1515/tcp, 0.0.0.0:514->514/udp, [::]:514->514/udp, 0.0.0.0:55000->55000/tcp, [::]:55000->55000/tcp, 1516/tcp
+      NAME                          IMAGE                             COMMAND                  SERVICE           CREATED              STATUS                        PORTS
+      single-node-wazuh.dashboard   wazuh/wazuh-dashboard:|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|   "/entrypoint.sh"         wazuh.dashboard   About a minute ago   Up 32 seconds (healthy)       443/tcp, 0.0.0.0:443->5601/tcp, [::]:443->5601/tcp
+      single-node-wazuh.indexer     wazuh/wazuh-indexer:|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|     "/entrypoint.sh open…"   wazuh.indexer     About a minute ago   Up About a minute (healthy)   9200/tcp
+      single-node-wazuh.manager     wazuh/wazuh-manager:|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|     "/usr/local/bin/tini…"   wazuh.manager     About a minute ago   Up 48 seconds (healthy)       0.0.0.0:1514-1515->1514-1515/tcp, [::]:1514-1515->1514-1515/tcp, 0.0.0.0:1517->1517/tcp, [::]:1517->1517/tcp, 0.0.0.0:514->514/udp, [::]:514->514/udp, 0.0.0.0:55000->55000/tcp, [::]:55000->55000/tcp, 1516/tcp
 
-#. Run the command below from the directory where the ``docker-compose.yml`` file is located to open a shell inside the container:
+   In a working stack, every container shows ``(healthy)``, except the multi-node ``nginx`` container, which has no health check. Port ``9200`` on the Wazuh indexer is reachable only from the other containers, because the ``docker-compose.yml`` file does not publish it.
+
+#. From the same directory, open a shell inside a container:
 
    .. code-block:: console
 
       # docker compose exec <SERVICE> bash
 
-   Replace ``<SERVICE>`` with the name of the service you want to access. A bash shell allows you to interact directly with the container's operating system to run commands, inspect configurations, and troubleshoot issues.
+   Replace ``<SERVICE>`` with a name from the ``SERVICE`` column of the output above, for example ``wazuh.manager``. In the multi-node stack, the Wazuh manager services are ``wazuh.master`` and ``wazuh.worker``. A bash shell allows you to interact directly with the container's operating system to run commands, inspect configurations, and troubleshoot issues.
 
-   When you are done using the shell, exit it to return to your normal terminal:
-
-   .. code-block:: console
-
-      bash-5.2# exit
+   When you are done, run ``exit`` to close the shell and return to the terminal of the Docker host.
 
 Wazuh service data volumes
 --------------------------
@@ -65,6 +63,7 @@ Run the following to see the persistent volumes on your Docker host:
    local     single-node_wazuh-dashboard-custom
    local     single-node_wazuh-indexer-data
    local     single-node_wazuh_api_configuration
+   local     single-node_wazuh_data
    local     single-node_wazuh_etc
    local     single-node_wazuh_logs
    local     single-node_wazuh_queue
@@ -83,7 +82,7 @@ You need multiple volumes to ensure persistence on the Wazuh manager, Wazuh inde
      wazuh.manager:
        . . .
        volumes:
-         - wazuh_api_configuration:/var/ossec/api/configuration
+         - wazuh_api_configuration:/var/wazuh-manager/api/configuration
        . . .
    volumes:
      wazuh_api_configuration:
@@ -91,14 +90,14 @@ You need multiple volumes to ensure persistence on the Wazuh manager, Wazuh inde
 Custom commands and scripts
 ---------------------------
 
-Run the command below to execute commands inside the containers. We use the Wazuh manager ``single-node-wazuh.manager`` container in this example:
+You can also open a shell with ``docker exec``, from any directory. ``docker exec`` takes a name from the ``NAME`` column of the ``docker compose ps`` output, not the service name. This example uses the Wazuh manager container of the single-node stack. In the multi-node stack, use ``multi-node-wazuh.master``:
 
 .. code-block:: console
 
    # docker exec -it single-node-wazuh.manager bash
 
-Every change made to this shell persists due to the data volumes.
+Changes persist only under the paths mounted as volumes, such as ``/var/wazuh-manager/etc`` in the Wazuh manager container. The ``volumes`` section of each service in ``wazuh-docker/single-node/docker-compose.yml`` or ``wazuh-docker/multi-node/docker-compose.yml`` lists them. Changes anywhere else are lost when Docker recreates the container, for example after ``docker compose down`` or an upgrade.
 
-.. note::
+At every start, the Wazuh manager container sets the Wazuh indexer hosts, the cluster settings, and the listener addresses in ``/var/wazuh-manager/etc/wazuh-manager.conf`` from its environment variables. Change those settings in the ``environment`` section of the ``docker-compose.yml`` file instead.
 
-   The actions you can perform inside the containers are limited.
+The actions you can perform inside the containers are limited.

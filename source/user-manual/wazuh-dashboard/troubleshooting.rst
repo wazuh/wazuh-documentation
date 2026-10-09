@@ -222,7 +222,7 @@ If the restart does not solve the problem, we can execute this process manually:
    .. code-block:: none
       :class: output
 
-      {“acknowledged”:true}
+      {"acknowledged":true}
 
 #. Restart the Wazuh dashboard service.
 

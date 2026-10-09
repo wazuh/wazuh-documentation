@@ -36,7 +36,7 @@ PCI DSS requirement 2.2.4
 
 PCI DSS requirement 2.2.4 mandates keeping only necessary services, protocols, daemons, and functions enabled and removing unnecessary functionality. The :doc:`Syscollector <system-inventory>` and SCA modules support the requirement by identifying unnecessary processes, services, and configurations that can increase the attack surface.
 
-For this use case, the SCA module runs the check **41608 - Ensure ip forwarding is disabled** from the `cis_ubuntu26-04 <https://github.com/wazuh/wazuh/blob/main/ruleset/sca/ubuntu/cis_ubuntu26-04.yml>`__ SCA policy file on the endpoint. IP forwarding is unnecessary functionality on an endpoint that does not route traffic, and the SCA scan reports whether it is disabled.
+For this use case, the SCA module runs the check **35608 - Ensure ip forwarding is disabled** from the `cis_ubuntu24-04 <https://github.com/wazuh/wazuh/blob/5.0.0/ruleset/sca/ubuntu/cis_ubuntu24-04.yml>`__ SCA policy file on an Ubuntu 24.04 endpoint. This check maps to PCI DSS requirement 2.2.4. IP forwarding is unnecessary functionality on an endpoint that does not route traffic, and the SCA scan reports whether it is disabled.
 
 .. thumbnail:: /images/compliance/pci/sca-ip-forwarding-disabled-01.png
    :title: SCA check for ip forwarding disabled
@@ -48,12 +48,12 @@ For this use case, the SCA module runs the check **41608 - Ensure ip forwarding 
    :align: center
    :width: 80%
 
-PCI DSS requirement 8.3.7
+PCI DSS requirement 8.3.6
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-PCI DSS requirement 8.3.7 states that individuals are not allowed to submit a new password/passphrase that matches any of the last four passwords/passphrases used. Password history enforcement prevents users from reusing recent credentials, making it harder for attackers to regain access with previously compromised passwords.
+PCI DSS requirement 8.3.6 mandates that passwords and passphrases used as authentication factors meet a minimum level of strength. Password history enforcement strengthens password-based authentication by preventing users from reusing recent credentials, making it harder for attackers to regain access with previously compromised passwords.
 
-The SCA module runs check **41687 - Ensure password history remember is configured** from the `cis_ubuntu26-04 <https://github.com/wazuh/wazuh/blob/main/ruleset/sca/ubuntu/cis_ubuntu26-04.yml>`__ SCA policy file on the endpoint. It checks that the ``pam_pwhistory`` module is configured with a remember value of at least 24 in ``/etc/pam.d/common-password`` as specified by CIS Benchmark for Ubuntu Linux 26.04 LTS. A value of 24 is a stricter baseline than the four-password history mandated by PCI DSS requirement 8.3.7. When an SCA scan runs, the check identifies whether the endpoint meets this configured password history baseline.
+The SCA module runs check **35687 - Ensure password history remember is configured** from the `cis_ubuntu24-04 <https://github.com/wazuh/wazuh/blob/5.0.0/ruleset/sca/ubuntu/cis_ubuntu24-04.yml>`__ SCA policy file on an Ubuntu 24.04 endpoint. It checks that the ``pam_pwhistory`` module is configured with a remember value of at least 24 in ``/etc/pam.d/common-password`` as specified by the CIS Benchmark for Ubuntu Linux 24.04 LTS. This check maps to PCI DSS requirements 8.3.5 and 8.3.6. When an SCA scan runs, the check identifies whether the endpoint meets this configured password history baseline.
 
 .. thumbnail:: /images/compliance/pci/sca-password-history-remember-01.png
    :title: SCA check for password history remember configured

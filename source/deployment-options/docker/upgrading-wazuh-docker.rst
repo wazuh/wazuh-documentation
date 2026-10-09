@@ -6,12 +6,20 @@
 Upgrading the Wazuh Docker deployment
 =====================================
 
-To upgrade your Wazuh deployment using Docker, update the image tags in the ``docker-compose.yml`` file to the target version (|WAZUH_CURRENT_DOCKER|) and redeploy the stack.
+This procedure upgrades a Wazuh 5.0 Docker deployment to a later 5.0.x release. It does not cover a Wazuh 4.x deployment.
 
-Follow these steps to upgrade your deployment using the default ``docker-compose.yml`` file:
+The upgrade replaces the images and keeps everything else. Your indexed data and the configuration each component stores are in the stack's named volumes. The certificates and passwords are files in the ``config/`` directory of your deployment. Do not run the certificate creation script ``certificates-conf.sh`` or the credentials creation script ``credentials-conf.sh`` again.
+
+You need root user privileges to run the commands below. If you use Docker as a non-root user, run them with ``sudo``.
 
 Stop the current deployment
 ---------------------------
+
+#. Navigate to the directory of your deployment, ``wazuh-docker/single-node/`` or ``wazuh-docker/multi-node/``. For example, for a single-node deployment:
+
+   .. code-block:: console
+
+      # cd wazuh-docker/single-node/
 
 #. Stop and remove the running containers:
 
@@ -19,75 +27,72 @@ Stop the current deployment
 
       # docker compose down
 
+   Do not add the ``-v`` flag. It deletes the stack's named volumes, and with them your indexed data and stored configuration.
+
 Update the image tags
 ---------------------
 
-Edit the image tags of all the services in the ``docker-compose.yml`` file to your desired version tag:
+Each release of the Wazuh Docker repository sets its image tags in its own ``single-node/docker-compose.yml`` and ``multi-node/docker-compose.yml`` files. Use the tags from the release you upgrade to. If that release also changes other lines of those files, take its files and apply your own changes to them again.
 
 Single-node deployment
 ^^^^^^^^^^^^^^^^^^^^^^
 
-#. Navigate to the ``wazuh-docker/single-node/`` directory:
+Edit ``wazuh-docker/single-node/docker-compose.yml`` and replace ``<NEW_TAG>`` with the new tag in the ``image`` field of each Wazuh service:
 
-   .. code-block:: console
+.. code-block:: yaml
+   :emphasize-lines: 3,7,11
 
-      # cd wazuh-docker/single-node/
+   services:
+     wazuh.manager:
+       image: wazuh/wazuh-manager:<NEW_TAG>
+       ...
 
-#. Edit the ``docker-compose.yml`` file and update the ``image`` field for all Wazuh services to the desired version.
+     wazuh.indexer:
+       image: wazuh/wazuh-indexer:<NEW_TAG>
+       ...
 
-   .. code-block:: yaml
-
-      services:
-        wazuh.manager:
-          image: wazuh/wazuh-manager:|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|-latest
-          ...
-        wazuh.indexer:
-          image: wazuh/wazuh-indexer:|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|-latest
-          ...
-        wazuh.dashboard:
-          image: wazuh/wazuh-dashboard:|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|-latest
-          ...
+     wazuh.dashboard:
+       image: wazuh/wazuh-dashboard:<NEW_TAG>
+       ...
 
 Multi-node deployment
 ^^^^^^^^^^^^^^^^^^^^^
 
-#. Navigate to the ``wazuh-docker/multi-node/`` directory:
+Edit ``wazuh-docker/multi-node/docker-compose.yml`` and replace ``<NEW_TAG>`` with the new tag in the ``image`` field of each Wazuh service:
 
-   .. code-block:: console
+.. code-block:: yaml
+   :emphasize-lines: 3,7,11,15,19,23
 
-      # cd wazuh-docker/multi-node/
+   services:
+     wazuh.master:
+       image: wazuh/wazuh-manager:<NEW_TAG>
+       ...
 
-#. Edit the ``docker-compose.yml`` file and update the ``image`` field for all Wazuh services to the desired version.
+     wazuh.worker:
+       image: wazuh/wazuh-manager:<NEW_TAG>
+       ...
 
-   .. code-block:: yaml
+     wazuh1.indexer:
+       image: wazuh/wazuh-indexer:<NEW_TAG>
+       ...
 
-      services:
-        wazuh.master:
-          image: wazuh/wazuh-manager:|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|-latest
-          ...
-        wazuh.worker:
-          image: wazuh/wazuh-manager:|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|-latest
-          ...
-        wazuh1.indexer:
-          image: wazuh/wazuh-indexer:|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|-latest
-          ...
-        wazuh2.indexer:
-          image: wazuh/wazuh-indexer:|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|-latest
-          ...
-        wazuh3.indexer:
-          image: wazuh/wazuh-indexer:|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|-latest
-          ...
-        wazuh.dashboard:
-          image: wazuh/wazuh-dashboard:|WAZUH_CURRENT_DOCKER|-|WAZUH_CURRENT_DOCKER_REV|-latest
-          ...
+     wazuh2.indexer:
+       image: wazuh/wazuh-indexer:<NEW_TAG>
+       ...
+
+     wazuh3.indexer:
+       image: wazuh/wazuh-indexer:<NEW_TAG>
+       ...
+
+     wazuh.dashboard:
+       image: wazuh/wazuh-dashboard:<NEW_TAG>
+       ...
 
 Start the updated deployment
 ----------------------------
 
-#. Start the upgraded Wazuh Docker environment using the ``docker compose`` command:
+#. Start the upgraded deployment. Docker pulls the new images:
 
    .. code-block:: console
 
       # docker compose up -d
-
-Your data and certificates remain persistent because they are stored in mounted Docker volumes. This means upgrading the environment does not erase your existing configuration or indexed data.

@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn how to deploy the Wazuh agent on Linux with deployment variables that facilitate the task of installing, enrolling, and configuring the agent.
+   :description: Learn how to deploy the Wazuh agent on Linux with deployment variables that facilitate the task of installing, enrolling, and configuring the agent.
 
 Deploying Wazuh agents on Linux endpoints
 =========================================
@@ -46,8 +46,8 @@ Follow these steps to deploy the Wazuh agent on your Linux endpoint.
 
    Replace
 
-   -  ``WAZUH_MANAGER`` value with your Wazuh manager IP address or hostname
-   -  ``WAZUH_REGISTRATION_PASSWORD`` value with the Wazuh manager enrollment password generated in :ref:`requirements <agent-installation-requirements>`.
+   -  ``WAZUH_ENROLLMENT_TOKEN`` value with the enrollment token generated in :ref:`generate the enrollment token <generate_enrollment_token>`.
+   -  ``WAZUH_AGENT_NAME`` value with the agent's name for identification in the Wazuh manager.
 
    .. tabs::
 
@@ -55,29 +55,25 @@ Follow these steps to deploy the Wazuh agent on your Linux endpoint.
 
          .. code-block:: console
 
-            # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_PASSWORD='XXXXXXXXXXXX' apt-get install wazuh-agent|WAZUH_AGENT_DEB_PKG_INSTALL|
+            # WAZUH_ENROLLMENT_TOKEN='<ENROLLMENT_TOKEN>' WAZUH_AGENT_NAME='<AGENT_NAME>' apt-get install wazuh-agent|WAZUH_AGENT_DEB_PKG_INSTALL|
 
       .. group-tab:: Yum
 
          .. code-block:: console
 
-            # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_PASSWORD='XXXXXXXXXXXX' yum install wazuh-agent|WAZUH_AGENT_RPM_PKG_INSTALL|
+            # WAZUH_ENROLLMENT_TOKEN='<ENROLLMENT_TOKEN>' WAZUH_AGENT_NAME='<AGENT_NAME>' yum install wazuh-agent|WAZUH_AGENT_RPM_PKG_INSTALL|
 
       .. group-tab:: DNF
 
          .. code-block:: console
 
-            # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_PASSWORD='XXXXXXXXXXXX' dnf install wazuh-agent|WAZUH_AGENT_RPM_PKG_INSTALL|
+            # WAZUH_ENROLLMENT_TOKEN='<ENROLLMENT_TOKEN>' WAZUH_AGENT_NAME='<AGENT_NAME>' dnf install wazuh-agent|WAZUH_AGENT_RPM_PKG_INSTALL|
 
       .. group-tab:: ZYpp
 
          .. code-block:: console
 
-            # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_PASSWORD='XXXXXXXXXXXX' zypper install wazuh-agent|WAZUH_AGENT_ZYPP_PKG_INSTALL|
-
-   .. note::
-
-      Alternatively, if you want to install an agent without enrolling it, omit the deployment variables. To learn more about the different enrollment methods, see the :doc:`Wazuh agent enrollment </user-manual/agent/agent-enrollment/index>` section.
+            # WAZUH_ENROLLMENT_TOKEN='<ENROLLMENT_TOKEN>' WAZUH_AGENT_NAME='<AGENT_NAME>' zypper install wazuh-agent|WAZUH_AGENT_ZYPP_PKG_INSTALL|
 
 #. Enable and start the Wazuh agent service:
 
