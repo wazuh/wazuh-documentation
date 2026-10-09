@@ -17,7 +17,7 @@ Perform the outlined steps on your existing Wazuh indexer node to generate the c
 
 .. note::
 
-   Single-node deployments name the Wazuh indexer node as ``indexer`` by default. This guide renames the existing node to ``indexer-1`` so the certificates and the configuration follow the ``indexer-1``, ``indexer-2`` naming scheme. The ``node.name`` value on the existing node must be updated to match the name on the new certificate.
+   An all-in-one deployment installed with the installation assistant names the Wazuh indexer node ``node-1`` by default. This guide renames the existing node to ``indexer-1`` so the certificates and the configuration follow the ``indexer-1``, ``indexer-2`` naming scheme. The ``node.name`` value on the existing node must be updated to match the name on the new certificate.
 
 #. Create a ``config.yml`` file in the ``/root`` directory:
 
@@ -392,12 +392,13 @@ Perform the outlined steps on your existing Wazuh indexer node to generate the c
    .. code-block:: none
       :class: output
 
-      Usage: bash deploy-certificates.sh -i <INDEXER_NODE_NAME> -m <MANAGER_NODE_NAME> -d <DASHBOARD_NODE_NAME> [-t <PATH_TO_CERTIFICATES_TAR>] [-b]
+      Usage: bash deploy-certificates.sh -i <INDEXER_NODE_NAME> -m <MANAGER_NODE_NAME> -d <DASHBOARD_NODE_NAME> [-t <PATH_TO_CERTIFICATES_TAR>] [-b] [-n]
         -i  Wazuh indexer node name as defined in config.yml
         -m  Wazuh manager (server) node name as defined in config.yml
         -d  Wazuh dashboard node name as defined in config.yml
         -t  Path to the certificates archive (default: ./wazuh-certificates.tar)
-        -b  Back up any certificate this script replaces, as <file>.bak-<timestamp>
+        -b  Back up every certificate this script replaces, under /var/backups/wazuh-certificates/<timestamp>/
+        -n  Dry run: report what would change and exit without writing anything
       Pass only the flags for the components installed on this node.
 
 #. Deploy the recreated certificates on the existing components. On the existing Wazuh indexer node, run the deployment script created earlier, passing the existing node names:

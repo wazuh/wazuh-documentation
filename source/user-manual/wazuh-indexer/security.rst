@@ -103,73 +103,32 @@ The following example shows the structure of the ``internal_users.yml`` configur
    ---
    # This is the internal user database
    # The hash value is a bcrypt hash and can be generated with plugin/tools/hash.sh
+
    _meta:
      type: "internalusers"
      config_version: 2
-   # Define your internal users here
-   ## Demo users
+
    admin:
-     hash: "$2a$12$VcCDgh2NDk07JGN0rjGbM.Ad41qVR/YFJcgHp0UGns5JDymv..TOG"
+     hash: "<HASH>"
      reserved: true
      backend_roles:
      - "admin"
-     description: "Demo admin user"
-   anomalyadmin:
-     hash: "$2y$12$TRwAAJgnNo67w3rVUz4FIeLx9Dy/llB79zf9I15CKJ9vkM4ZzAd3."
-     reserved: false
-     opendistro_security_roles:
-     - "anomaly_full_access"
-     description: "Demo anomaly admin user, using internal role"
+     description: "Admin user"
+
    kibanaserver:
-     hash: "$2a$12$4AcgAt3xwOWadA5s5blL6ev39OXDNhmOesEoo33eZtrq2N0YrU3H."
+     hash: "<HASH>"
      reserved: true
-     description: "Demo OpenSearch Dashboards user"
-   kibanaro:
-     hash: "$2a$12$JJSXNfTowz7Uu5ttXfeYpeYE0arACvcwlPBStB1F.MI7f0U9Z4DGC"
-     reserved: false
-     backend_roles:
-     - "kibanauser"
-     - "readall"
-     attributes:
-       attribute1: "value1"
-       attribute2: "value2"
-       attribute3: "value3"
-     description: "Demo OpenSearch Dashboards read only user, using external role mapping"
-   logstash:
-     hash: "$2a$12$u1ShR4l4uBS3Uv59Pa2y5.1uQuZBrZtmNfqB3iM/.jL0XoV9sghS2"
-     reserved: false
-     backend_roles:
-     - "logstash"
-     description: "Demo logstash user, using external role mapping"
-   readall:
-     hash: "$2a$12$ae4ycwzwvLtZxwZ82RmiEunBbIPiAmGZduBAjKN0TXdwQFtCwARz2"
-     reserved: false
-     backend_roles:
-     - "readall"
-     description: "Demo readall user, using external role mapping"
-   snapshotrestore:
-     hash: "$2y$12$DpwmetHKwgYnorbgdvORCenv4NAK8cPUg8AI6pxLCuWf/ALc0.v7W"
-     reserved: false
-     backend_roles:
-     - "snapshotrestore"
-     description: "Demo snapshotrestore user, using external role mapping"
-   # This file contains the internal users configuration for Wazuh.
-   wazuh-server:
-     # The hash is the hash of the password "wazuh-server"
-     hash: "$2y$12$4pwjkynhYg09QJtJ5zxAcuqUSOV8JBziFDca6u9cV/H9oglVCGZEW"
+     description: "Wazuh dashboard user"
+
+   wazuh-manager:
+     hash: "<HASH>"
      reserved: true
      backend_roles: []
-     description: "Wazuh manager user with read/write access to stateful and write-only access to stateless indexes."
-   wazuh-dashboard:
-     # The hash is the hash of the password "wazuh-dashboard"
-     hash: "$2y$12$Mn2XvokTfwo2NWL2AK83yOkio1qmJyZrAp0iEWqs3lz0L8ruhu9LK"
-     reserved: true
-     backend_roles: []
-     description: "Wazuh Dashboard user with read access to stateful and stateless indexes, write access to metrics indexes and management for sample data indexes."
+     description: "Wazuh manager user"
 
-.. warning::
+.. note::
 
-   The password hashes for the accounts above are for demo purposes and must be changed before use in production.
+   The password hashes are generated for each installation. The passwords are stored in ``/etc/wazuh/credentials.env``.
 
 The following table describes the main elements of the configuration file:
 
@@ -178,7 +137,7 @@ The following table describes the main elements of the configuration file:
 +===============================+========================================================================================================================================================================================================+
 | ``_meta``                     | Defines metadata for the configuration file, including the configuration type (internalusers) and the configuration version.                                                                           |
 +-------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``User name``                 | Each top-level key represents an internal user account. For example, ``admin``, ``wazuh-server``, and ``wazuh-dashboard``.                                                                             |
+| ``User name``                 | Each top-level key represents an internal user account. For example, ``admin``, ``kibanaserver``, and ``wazuh-manager``.                                                                               |
 +-------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``hash``                      | Stores the *bcrypt* hash of the user's password. Passwords are never stored in plain text. Password hashes can be generated using the Security plugin password hashing tool.                           |
 +-------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -196,41 +155,25 @@ The following table describes the main elements of the configuration file:
 Default internal users
 """"""""""""""""""""""
 
-The default ``internal_users.yml`` file includes both OpenSearch Security plugin users and Wazuh specific reserved internal user accounts.
+The default ``internal_users.yml`` file includes the following reserved internal user accounts.
 
 **OpenSearch users**
 
-The following users are inherited from the underlying OpenSearch Security plugin.
-
-+---------------------+----------------------------------------------------------------+
-| User                | Purpose                                                        |
-+=====================+================================================================+
-| ``admin``           | Default administrator account with full access to the cluster. |
-+---------------------+----------------------------------------------------------------+
-| ``anomalyadmin``    | Demo administrator for anomaly detection features.             |
-+---------------------+----------------------------------------------------------------+
-| ``kibanaserver``    | Reserved internal account used by OpenSearch Dashboards.       |
-+---------------------+----------------------------------------------------------------+
-| ``kibanaro``        | Demo read-only dashboard user.                                 |
-+---------------------+----------------------------------------------------------------+
-| ``logstash``        | Demo reserved internal account for Logstash integrations.      |
-+---------------------+----------------------------------------------------------------+
-| ``readall``         | Demo user with read-only access.                               |
-+---------------------+----------------------------------------------------------------+
-| ``snapshotrestore`` | Demo user for snapshot and restore operations.                 |
-+---------------------+----------------------------------------------------------------+
++------------------+----------------------------------------------------------------------------------------------+
+| User             | Purpose                                                                                      |
++==================+==============================================================================================+
+| ``admin``        | Default administrator account with full access to the cluster.                               |
++------------------+----------------------------------------------------------------------------------------------+
+| ``kibanaserver`` | Reserved internal account used by the Wazuh dashboard to communicate with the Wazuh indexer. |
++------------------+----------------------------------------------------------------------------------------------+
 
 **Wazuh users**
 
-Wazuh adds the following reserved internal accounts during installation.
-
-+---------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| User                | Purpose                                                                                                                                                                                                       |
-+=====================+===============================================================================================================================================================================================================+
-| ``wazuh-server``    | Used by the Wazuh manager to communicate with the Wazuh indexer. It has read/write access to stateful indices and write-only access to stateless indices.                                                     |
-+---------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``wazuh-dashboard`` | Used by the Wazuh dashboard to communicate with the Wazuh indexer. It has read access to stateful and stateless indices, write access to metrics indices, and management permissions for sample data indices. |
-+---------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++-------------------+------------------------------------------------------------------+
+| User              | Purpose                                                          |
++===================+==================================================================+
+| ``wazuh-manager`` | Used by the Wazuh manager to communicate with the Wazuh indexer. |
++-------------------+------------------------------------------------------------------+
 
 Roles
 ^^^^^
@@ -253,20 +196,31 @@ This file contains the security roles used by the Wazuh indexer. This includes r
 Role definition
 ~~~~~~~~~~~~~~~
 
-Each role is defined as a YAML object containing the permissions assigned to that role. The following example shows the structure of a Wazuh role:
+Each role is defined as a YAML object containing the permissions assigned to that role. The following example shows the structure of the ``wazuh_manager`` role:
 
 .. code-block:: yaml
 
-   stateful-read:
+   wazuh_manager:
      reserved: true
-     cluster_permissions: []
+     cluster_permissions:
+       - "cluster_composite_ops"
+       - "cluster_monitor"
      index_permissions:
        - index_patterns:
            - "wazuh-states-*"
+           - "wazuh-agent-*"
          allowed_actions:
            - "read"
+           - "index"
+           - "delete"
+       - index_patterns:
+           - "wazuh-events-v5-*"
+           - "wazuh-events-raw-v5*"
+           - "wazuh-metrics-*"
+         allowed_actions:
+           - "read"
+           - "index"
      tenant_permissions: []
-     static: true
 
 The following table describes the most commonly used fields.
 
@@ -320,53 +274,19 @@ These roles are intended to support the corresponding Wazuh indexer functionalit
 
 **Wazuh platform roles**
 
-Wazuh defines several reserved roles that provide the permissions required by Wazuh components to access and manage Wazuh indices.
+Wazuh defines the following reserved roles that provide the permissions required by Wazuh components to access Wazuh indices.
 
-+----------------------------+------------------------------------------------------------------------------------------------------------------------------------+
-| Role                       | Description                                                                                                                        |
-+============================+====================================================================================================================================+
-| ``manage_wazuh_index``     | Grants administrative permissions for Wazuh indices (``wazuh-*``), including read, write, delete, and index management operations. |
-+----------------------------+------------------------------------------------------------------------------------------------------------------------------------+
-| ``stateful-read``          | Grants read access to the ``wazuh-states-*`` indices used to store persistent Wazuh state information.                             |
-+----------------------------+------------------------------------------------------------------------------------------------------------------------------------+
-| ``stateful-write``         | Grants write permissions to the ``wazuh-states-*`` indices.                                                                        |
-+----------------------------+------------------------------------------------------------------------------------------------------------------------------------+
-| ``stateful-delete``        | Grants delete permissions for documents stored in the ``wazuh-states-*`` indices.                                                  |
-+----------------------------+------------------------------------------------------------------------------------------------------------------------------------+
-| ``stateless-read``         | Grants read access to the ``wazuh-events-v5*`` and ``wazuh-findings-v5*`` indices.                                                 |
-+----------------------------+------------------------------------------------------------------------------------------------------------------------------------+
-| ``stateless-write``        | Grants write access to the ``wazuh-events-v5*`` and ``wazuh-findings-v5*`` indices.                                                |
-+----------------------------+------------------------------------------------------------------------------------------------------------------------------------+
-| ``metrics-read``           | Grants read access to the ``wazuh-metrics-agents*`` and ``wazuh-metrics-comms*`` indices.                                          |
-+----------------------------+------------------------------------------------------------------------------------------------------------------------------------+
-| ``metrics-write``          | Grants write access to the ``wazuh-metrics-agents*`` and ``wazuh-metrics-comms*`` indices.                                         |
-+----------------------------+------------------------------------------------------------------------------------------------------------------------------------+
-| ``sample-data-management`` | Grants management permissions for sample data indices used by the Wazuh dashboard.                                                 |
-+----------------------------+------------------------------------------------------------------------------------------------------------------------------------+
++------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Role                   | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
++========================+===================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================+
+| ``wazuh_manager``      | Used by the Wazuh manager. Grants ``read`` on ``.wazuh-settings``, ``.wazuh-cti-consumers``, ``wazuh-active-responses*``, ``wazuh-threatintel-*``, and ``wazuh-findings-v5-*``; ``read`` and ``index`` on ``wazuh-events-v5-*``, ``wazuh-events-raw-v5*``, and ``wazuh-metrics-*``; ``read``, ``index``, and ``delete`` on ``wazuh-states-*`` and ``wazuh-agent-*``; and ``manage_point_in_time`` on ``.wazuh-threatintel-vulnerabilities*`` and ``wazuh-threatintel-*``. Cluster permissions: ``cluster_composite_ops`` and ``cluster_monitor``. |
++------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``dashboard_server``   | Used by the Wazuh dashboard. Grants ``read`` and ``indices:admin/mappings/get`` on ``wazuh-*``, and the cluster permission ``cluster:admin/opensearch/notifications/configs/get``.                                                                                                                                                                                                                                                                                                                                                                |
++------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``wazuh_ai_assistant`` | Grants ``read`` on ``wazuh-ai-assistant-sessions*``, limited by document-level security to the user's own sessions, and the ``plugin:wazuh/ai_assistant/session/write`` permission.                                                                                                                                                                                                                                                                                                                                                               |
++------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 These roles are assigned to Wazuh reserved internal user accounts through role mappings and provide the minimum permissions required for normal platform operation.
-
-Plugin-specific roles
-
-The ``/etc/wazuh-indexer/opensearch-security/roles.yml`` file also includes roles required by optional Wazuh indexer plugins.
-
-Examples include:
-
-+---------------------------+-----------------------------------------------------------------------------------------+
-| Role                      | Description                                                                             |
-+===========================+=========================================================================================+
-| ``ml_config_read``        | Grants read access to machine learning configuration indices used by the AI Assistant.  |
-+---------------------------+-----------------------------------------------------------------------------------------+
-| ``ml_config_write``       | Grants write access to machine learning configuration indices used by the AI Assistant. |
-+---------------------------+-----------------------------------------------------------------------------------------+
-| ``cm_subscription_read``  | Grants permission to view Content Manager subscriptions.                                |
-+---------------------------+-----------------------------------------------------------------------------------------+
-| ``cm_subscription_write`` | Grants permission to create and remove Content Manager subscriptions.                   |
-+---------------------------+-----------------------------------------------------------------------------------------+
-| ``cm_update``             | Grants permission to update Content Manager resources.                                  |
-+---------------------------+-----------------------------------------------------------------------------------------+
-
-These roles are intended for specific plugin functionality and generally do not require modification.
 
 Role mappings
 ^^^^^^^^^^^^^
@@ -397,15 +317,11 @@ The following example shows the structure of a Wazuh role mapping.
 
 .. code-block:: yaml
 
-   stateful-read:
+   wazuh_manager:
      reserved: true
      hidden: false
-     backend_roles: []
-     hosts: []
      users:
-       - "wazuh-server"
-       - "wazuh-dashboard"
-     and_backend_roles: []
+       - "wazuh-manager"
 
 The following table describes the most commonly used fields.
 
@@ -436,75 +352,31 @@ The default ``roles_mapping.yml`` file contains role mappings provided by both t
 
 **OpenSearch Security role mappings**
 
-The underlying OpenSearch Security plugin includes predefined role mappings for its built-in users and plugin-specific roles. These mappings enable administrative access and support OpenSearch features such as Alerting, Notifications, Snapshot Management, and other plugins.
-
-Examples include:
-
-+----------------------+-------------------------------------------------------------------------+
-| Role mapping         | Description                                                             |
-+======================+=========================================================================+
-| ``all_access``       | Maps users with the admin backend role to the all_access security role. |
-+----------------------+-------------------------------------------------------------------------+
-| ``own_index``        | Grants users full access to an index that matches their username.       |
-+----------------------+-------------------------------------------------------------------------+
-| ``kibana_server``    | Maps the kibanaserver service account to the kibana_server role.        |
-+----------------------+-------------------------------------------------------------------------+
-| ``logstash``         | Maps the logstash backend role to the logstash security role.           |
-+----------------------+-------------------------------------------------------------------------+
-| ``manage_snapshots`` | Maps the snapshotrestore backend role to the snapshot management role.  |
-+----------------------+-------------------------------------------------------------------------+
++-------------------+-------------------------------------------------------------------------+
+| Role mapping      | Description                                                             |
++===================+=========================================================================+
+| ``all_access``    | Maps users with the admin backend role to the all_access security role. |
++-------------------+-------------------------------------------------------------------------+
+| ``kibana_server`` | Maps the kibanaserver service account to the kibana_server role.        |
++-------------------+-------------------------------------------------------------------------+
 
 These mappings are intended to support the underlying OpenSearch functionality and are not to be modified.
 
-Wazuh platform role mappings
+**Wazuh platform role mappings**
 
-Wazuh adds several role mappings that associate its reserved internal user accounts with the minimum permissions required for normal platform operation.
+Wazuh adds the following role mappings that associate its reserved internal user accounts with the minimum permissions required for normal platform operation.
 
-+----------------------------+-------------------------------+
-| Role mapping               | Mapped users                  |
-+============================+===============================+
-| ``stateful-read``          | wazuh-server, wazuh-dashboard |
-+----------------------------+-------------------------------+
-| ``stateful-write``         | wazuh-server                  |
-+----------------------------+-------------------------------+
-| ``stateful-delete``        | wazuh-server                  |
-+----------------------------+-------------------------------+
-| ``stateless-write``        | wazuh-server                  |
-+----------------------------+-------------------------------+
-| ``stateless-read``         | wazuh-dashboard               |
-+----------------------------+-------------------------------+
-| ``metrics-read``           | wazuh-dashboard               |
-+----------------------------+-------------------------------+
-| ``metrics-write``          | wazuh-dashboard               |
-+----------------------------+-------------------------------+
-| ``sample-data-management`` | wazuh-dashboard               |
-+----------------------------+-------------------------------+
++------------------------+-------------------+
+| Role mapping           | Mapped users      |
++========================+===================+
+| ``dashboard_server``   | kibanaserver      |
++------------------------+-------------------+
+| ``wazuh_manager``      | wazuh-manager     |
++------------------------+-------------------+
+| ``wazuh_ai_assistant`` | ``*`` (all users) |
++------------------------+-------------------+
 
 These mappings ensure that the Wazuh manager and Wazuh dashboard have only the permissions required to perform their respective functions.
-
-Plugin-specific role mappings
-
-The configuration also includes role mappings required by optional Wazuh indexer plugins.
-
-Examples include:
-
-+-------------------------------+-----------------+
-| Role mapping                  | Mapped users    |
-+===============================+=================+
-| ``ml_config_read``            | admin           |
-+-------------------------------+-----------------+
-| ``ml_config_write``           | admin           |
-+-------------------------------+-----------------+
-| ``alerting_full_access``      | kibanaserver    |
-+-------------------------------+-----------------+
-| ``notifications_full_access`` | kibanaserver    |
-+-------------------------------+-----------------+
-| ``cm_subscription_read``      | wazuh-server    |
-+-------------------------------+-----------------+
-| ``cm_subscription_write``     | wazuh-dashboard |
-+-------------------------------+-----------------+
-| ``cm_update``                 | wazuh-dashboard |
-+-------------------------------+-----------------+
 
 Managing access control
 ^^^^^^^^^^^^^^^^^^^^^^^
