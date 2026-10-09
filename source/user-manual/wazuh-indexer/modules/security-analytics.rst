@@ -212,11 +212,11 @@ Detector behavior
 Updating a setting at runtime
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Almost every Security Analytics setting is dynamic. To change one without restarting the node, use the Cluster Settings API:
+Almost every Security Analytics setting is dynamic. To change one without restarting the node, use the Cluster Settings API. Replace ``<WAZUH_INDEXER_IP>`` with the IP address of the Wazuh indexer node and ``<WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD>`` with your Wazuh indexer username and password.
 
 .. code-block:: none
 
-   curl -sk -u admin:admin -X PUT "https://127.0.0.1:9200/_cluster/settings" \
+   curl -sk -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> -X PUT "https://<WAZUH_INDEXER_IP>:9200/_cluster/settings" \
      -H 'Content-Type: application/json' -d '{
      "persistent": {
        "plugins.security_analytics.correlation.max_in_flight_findings": 100
@@ -355,11 +355,11 @@ Querying findings by status
 
 You can filter findings using the ``wazuh.case.status`` field.
 
-The following example returns all acknowledged findings:
+The following example returns all acknowledged findings. Replace ``<WAZUH_INDEXER_IP>`` with the IP address of the Wazuh indexer node and ``<WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD>`` with your Wazuh indexer username and password.
 
 .. code-block:: console
 
-   curl -k -u admin:admin -X GET "https://127.0.0.1:9200/wazuh-findings-v5-*/_search" \
+   curl -k -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> -X GET "https://<WAZUH_INDEXER_IP>:9200/wazuh-findings-v5-*/_search" \
      -H "Content-Type: application/json" \
      -d '{
      "query": {

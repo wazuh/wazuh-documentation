@@ -3,7 +3,7 @@
 .. meta::
    :description: Learn how to install Wazuh dashboard, a flexible and intuitive web interface for mining and visualizing security data.
 
-Installing the Wazuh dashboard step by step
+Installing the Wazuh dashboard step-by-step
 ===========================================
 
 Install and configure the Wazuh dashboard following step-by-step instructions. The Wazuh dashboard is a web interface for mining and visualizing security data.
@@ -41,10 +41,50 @@ Adding the Wazuh repository
 
       .. include:: /_templates/installations/common/dnf/add-repository.rst
 
+Deploying certificates and passwords
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Do this **before installing the package**. The package then uses these files and passwords instead of generating its own.
+
+.. note::
+
+   Make sure that a copy of the ``wazuh-certificates.tar`` file, created in the Wazuh indexer :ref:`Certificate creation <certificates_creation>` stage, is placed in your working directory.
+
+#. Replace ``<DASHBOARD_NODE_NAME>`` with your Wazuh dashboard node name, the same one used in the ``config.yml`` file to create the certificates. In our case, the node name is ``dashboard``. Then place the root CA, the passwords, and this node's certificates:
+
+   .. code-block:: console
+
+      # NODE_NAME=<DASHBOARD_NODE_NAME>
+
+   .. code-block:: console
+
+      # umask 022
+      # mkdir wazuh-certificates
+      # tar -xf wazuh-certificates.tar -C wazuh-certificates
+      # install -d -m 0700 -o root -g root /etc/wazuh /etc/wazuh/ca
+      # install -m 0644 wazuh-certificates/root-ca.pem /etc/wazuh/ca/root-ca.pem
+      # [ -e /etc/wazuh/credentials.env ] || install -m 0600 /dev/null /etc/wazuh/credentials.env
+      # for key in WAZUH_INDEXER_KIBANASERVER_PASSWORD WAZUH_MANAGER_WUI_PASSWORD; do
+          sed -i "/^${key}=/d" /etc/wazuh/credentials.env
+          grep "^${key}=" wazuh-certificates/credentials.env >> /etc/wazuh/credentials.env
+        done
+      # mkdir -p /etc/wazuh-dashboard/certs
+      # install -m 0400 wazuh-certificates/$NODE_NAME.pem /etc/wazuh-dashboard/certs/dashboard.pem
+      # install -m 0400 wazuh-certificates/$NODE_NAME-key.pem /etc/wazuh-dashboard/certs/dashboard-key.pem
+      # rm -rf wazuh-certificates
+
+   The ``wazuh-dashboard`` user does not exist yet. When the package is installed, it gives it these files and installs ``root-ca.pem`` in ``/etc/wazuh-dashboard/certs/``.
+
+#. **Recommended action**: If no other Wazuh components will be installed on this node, remove the ``wazuh-certificates.tar`` file.
+
+   .. code-block:: console
+
+      # rm -f ./wazuh-certificates.tar
+
 Installing the Wazuh dashboard
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Install the Wazuh dashboard package.
+#. Install the Wazuh dashboard package:
 
    .. tabs::
 
@@ -69,203 +109,94 @@ Installing the Wazuh dashboard
 Configuring the Wazuh dashboard
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-  #. Edit the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file and replace the following values:
+#. Give the certificates to the service user and restrict their directory. Some versions of the package leave a pair placed before installing owned by ``root``, and the Wazuh dashboard then fails to start with ``EACCES``:
 
-     #. ``server.host``: This setting specifies the host of the Wazuh dashboard server. To allow remote users to connect, set the value to the IP address or DNS name of the Wazuh dashboard server. The value ``0.0.0.0`` will accept all the available IP addresses of the host.
+   .. code-block:: console
 
-     #. ``opensearch.hosts``: The URLs of the Wazuh indexer instances to use for all your queries. The Wazuh dashboard can be configured to connect to multiple Wazuh indexer nodes in the same cluster. The addresses of the nodes can be separated by commas. For example,  ``["https://10.0.0.2:9200", "https://10.0.0.3:9200","https://10.0.0.4:9200"]``
+      # chown -R wazuh-dashboard:wazuh-dashboard /etc/wazuh-dashboard/certs
+      # chmod 500 /etc/wazuh-dashboard/certs
 
-        .. code-block:: yaml
-          :emphasize-lines: 1,3
+#. Edit the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file. The package ships it pre-filled with single-host values, so change only ``opensearch.hosts`` and ``wazuh_core.hosts.default.url``, and leave the rest of the file as shipped:
 
-             server.host: 0.0.0.0
-             server.port: 443
-             opensearch.hosts: https://localhost:9200
-             opensearch.ssl.verificationMode: certificate
+   #. ``server.host``: The package sets ``0.0.0.0``, which accepts connections on every address of the host. You don't need to change it.
 
-     #. ``wazuh_core.hosts.url``: This setting specifies the Wazuh manager master node. Replace ``<WAZUH_MANAGER_IP_ADDRESS>`` with the IP address or hostname of the Wazuh manager master node.
+   #. ``opensearch.hosts``: Replace ``localhost`` with the URLs of the Wazuh indexer instances to use for all your queries. The Wazuh dashboard can be configured to connect to multiple Wazuh indexer nodes in the same cluster. The addresses of the nodes can be separated by commas. For example, ``["https://10.0.0.2:9200", "https://10.0.0.3:9200","https://10.0.0.4:9200"]``
 
-        .. code-block:: yaml
-           :emphasize-lines: 3
+      .. code-block:: yaml
+         :emphasize-lines: 3
 
-             wazuh_core.hosts:
-               default:
-                 url: https://<WAZUH_MANAGER_IP_ADDRESS>
-                 port: 55000
-                 username: wazuh-wui
-                 password: wazuh-wui
-                 run_as: true
+         server.host: 0.0.0.0
+         server.port: 443
+         opensearch.hosts: https://localhost:9200
+         opensearch.ssl.verificationMode: certificate
 
-Deploying certificates
-^^^^^^^^^^^^^^^^^^^^^^
+   #. ``wazuh_core.hosts.default.url``: The Wazuh manager master node. Replace ``<WAZUH_MANAGER_IP_ADDRESS>`` with the IP address or DNS name of the master node. If the Wazuh manager master node is on this host, keep the shipped value, ``https://localhost``.
+
+      .. code-block:: yaml
+         :emphasize-lines: 3
+
+         wazuh_core.hosts:
+           default:
+             url: https://<WAZUH_MANAGER_IP_ADDRESS>
+             port: 55000
+             username: wazuh-wui
+             run_as: true
 
    .. note::
-     Make sure that a copy of ``wazuh-certificates.tar`` file, created during the initial configuration step, is placed in your working directory.
 
-   #. Replace ``<DASHBOARD_NODE_NAME>`` with your Wazuh dashboard node name, the same one used in the ``config.yml`` file to create the certificates. In our case, the node name is, ``dashboard``. Then move the certificates to their corresponding location:
-
-       .. code-block:: console
-
-         # NODE_NAME=<DASHBOARD_NODE_NAME>
-
-       .. code-block:: console
-
-         # mkdir /etc/wazuh-dashboard/certs
-         # tar -xf ./wazuh-certificates.tar -C /etc/wazuh-dashboard/certs/ ./$NODE_NAME.pem ./$NODE_NAME-key.pem ./root-ca.pem
-         # [ ! -e /etc/wazuh-dashboard/certs/dashboard.pem ] && mv -n /etc/wazuh-dashboard/certs/$NODE_NAME.pem /etc/wazuh-dashboard/certs/dashboard.pem
-         # [ ! -e /etc/wazuh-dashboard/certs/dashboard-key.pem ] && mv -n /etc/wazuh-dashboard/certs/$NODE_NAME-key.pem /etc/wazuh-dashboard/certs/dashboard-key.pem
-         # chmod 500 /etc/wazuh-dashboard/certs
-         # chmod 400 /etc/wazuh-dashboard/certs/*
-         # chown -R wazuh-dashboard:wazuh-dashboard /etc/wazuh-dashboard/certs
-
+      Firewalls can block communication between Wazuh components on different hosts. Refer to the :ref:`Required ports <default_ports>` section and ensure the necessary ports are open.
 
 Starting the Wazuh dashboard service
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Enable and start the Wazuh dashboard service.
+#. Enable and start the Wazuh dashboard service:
 
    .. include:: /_templates/installations/dashboard/enable_dashboard.rst
 
-#. After deployment, the web interface may take one to two minutes to become available while the Wazuh services finish initializing. Access the Wazuh web interface with your ``admin`` user credentials. This is the default administrator account for the Wazuh indexer and it allows you to access the Wazuh dashboard.
+#. Get the ``<WAZUH_INDEXER_ADMIN_PASSWORD>``. On the Wazuh indexer node where you ran ``indexer-security-init.sh``, run the following command. The quotes around the value are not part of the password.
 
-   - **URL**: ``https://<WAZUH_DASHBOARD_IP_ADDRESS>``
-   - **Username**: ``admin``
-   - **Password**: ``admin``
+   .. code-block:: console
 
-   When you access the Wazuh dashboard for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser. For increased security, the ``root-ca.pem``  file previously generated can be imported to the certificate manager of the browser.
+      # grep WAZUH_INDEXER_ADMIN_PASSWORD /etc/wazuh/credentials.env
+
+#. Access the Wazuh web interface with your ``admin`` user credentials. This is the default administrator account for the Wazuh indexer, and it allows you to access the Wazuh dashboard.
+
+   -  **URL**: ``https://<WAZUH_DASHBOARD_IP_ADDRESS>``
+   -  **Username**: ``admin``
+   -  **Password**: ``<WAZUH_INDEXER_ADMIN_PASSWORD>``
+
+   When you access the Wazuh dashboard for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser. For increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser. Alternatively, you can :doc:`configure a certificate </user-manual/wazuh-dashboard/configuring-third-party-certs/index>` from a trusted authority.
+
+.. _wazuh_dashboard_securing_installation:
 
 Securing your Wazuh installation
 --------------------------------
 
-You have now installed and configured all the Wazuh central components. We recommend changing the default credentials to protect your infrastructure from possible attacks.
+Once every component is installed and running, each component stores the passwords it needs in its own keystore or database. Nothing reads ``/etc/wazuh/credentials.env`` after installation. Every node receives the same passwords from ``wazuh-certificates.tar``. The Wazuh indexer passwords match those created on the first Wazuh indexer node, and the Wazuh manager API passwords match those created in **Adding the passwords**.
 
-Select your deployment type and follow the instructions to change the default passwords for both the Wazuh API and the Wazuh indexer users.
+#. Log in to the Wazuh dashboard and confirm it reaches both the Wazuh indexer and the Wazuh manager.
 
-.. tabs::
+#. Securely store the five passwords. The ``credentials.env`` file in the working directory of the first Wazuh indexer node holds all five.
 
-   .. group-tab:: All-in-one deployment
+#. Remove the credentials file, the ``credentials.env`` you created on the first Wazuh indexer node, and any ``wazuh-certificates.tar`` left behind, on every node:
 
-      .. tabs::
+   .. code-block:: console
 
-         .. group-tab:: Changing the password for a Wazuh indexer user
+      # rm -f /etc/wazuh/credentials.env ./credentials.env ./wazuh-certificates.tar
 
-            Wazuh indexer users are defined in ``/etc/wazuh-indexer/opensearch-security/internal_users.yml``.
+#. Only the first Wazuh indexer node must hold the root CA private key. On every other node, ``/etc/wazuh/ca`` must hold only ``root-ca.pem``:
 
-            #. Download the Wazuh passwords tool:
+   .. code-block:: console
 
-               .. code-block:: console
+      # ls -A /etc/wazuh/ca
 
-                  # wget https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-passwords-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh
+   If the command lists ``root-ca.key`` on any node other than the first Wazuh indexer node, remove the key there. Never run this on the first Wazuh indexer node, which must keep the key to add nodes or renew certificates:
 
-            #. To change the password for a Wazuh indexer user, run the passwords tool with the ``-u`` option and indicate the new password with the ``-p`` option. The password must have a length between 8 and 64 characters and contain at least one upper case letter, one lower case letter, a number, and one of the following symbols: ``.*+?-``.
+   .. code-block:: console
 
-               .. code-block:: console
+      # rm -f /etc/wazuh/ca/root-ca.key /etc/wazuh/ca/root-ca.srl
 
-                  # bash wazuh-passwords-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -u <USER> -p <PASSWORD>
-
-               Where ``<USER>`` is the name of the user whose password you want to change and ``<PASSWORD>`` is the new password. If ``<PASSWORD>`` is not specified, the tool will generate a random password.
-
-               For example, to change the password of the ``admin`` user to ``Secr3tP4ssw*rd``, run the following command:
-
-               .. code-block:: console
-
-                  # bash wazuh-passwords-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -u admin -p Secr3tP4ssw*rd
-
-               .. code-block:: console
-                  :class: output
-
-                  10/04/2026 13:40:45 INFO: Updating the internal users.
-                  10/04/2026 13:41:04 INFO: A backup of the internal users has been saved in the /etc/wazuh-indexer/internalusers-backup folder.
-                  10/04/2026 13:41:05 INFO: Generating password hash
-                  10/04/2026 13:42:28 WARNING: Password changed. Remember to update the password in the Wazuh dashboard and the Wazuh manager nodes if necessary, and restart the services.
-
-         .. group-tab:: Changing the password for a Wazuh manager API user
-
-            To change the password for a Wazuh manager API user, use the following syntax:
-
-            .. code-block:: console
-
-               # bash wazuh-passwords-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -A -au <API_ADMIN_USER> -ap <API_ADMIN_PASSWORD> -u <USER> -p <PASSWORD>
-
-            Where ``<API_ADMIN_USER>`` and ``<API_ADMIN_PASSWORD>`` are the Wazuh manager API administrator user and password, respectively. ``<USER>`` is the name of the user whose password you want to change, and ``<PASSWORD>`` is the new password. If ``<PASSWORD>`` is not specified, the tool will generate a random password.
-
-            For example, to change the password of the ``wazuh`` user to ``Hello*123``, run the following command:
-
-            .. code-block:: console
-
-               # bash wazuh-passwords-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -A -au wazuh -ap wazuh -u wazuh -p Hello*123
-
-            .. code-block:: console
-               :class: output
-
-               10/04/2026 13:52:43 INFO: The password for Wazuh API user wazuh is Hello*123
-
-
-   .. group-tab:: Distributed deployment
-
-      .. tabs::
-
-         .. group-tab:: Changing the password for a Wazuh indexer user
-
-            #. Download the Wazuh passwords tool on any Wazuh indexer node:
-
-               .. code-block:: console
-
-                  # wget https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-passwords-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh
-
-            #. Use the Wazuh passwords tool to change the passwords of a specific Wazuh indexer user:
-
-               .. code-block:: console
-
-                  # bash wazuh-passwords-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -u <USER> -p <PASSWORD>
-
-               Where ``<USER>`` is the name of the user whose password you want to change and ``<PASSWORD>`` is the new password. If ``<PASSWORD>`` is not specified, the tool will generate a random password.
-
-               For example, to change the password of the ``admin`` user to ``Secr3tP4ssw*rd``, run the following command:
-
-               .. code-block:: console
-
-                  # bash wazuh-passwords-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -u admin -p Secr3tP4ssw*rd
-
-               .. code-block:: console
-                  :class: output
-
-                  10/04/2026 13:40:45 INFO: Updating the internal users.
-                  10/04/2026 13:41:04 INFO: A backup of the internal users has been saved in the /etc/wazuh-indexer/internalusers-backup folder.
-                  10/04/2026 13:41:05 INFO: Generating password hash
-                  10/04/2026 13:42:28 WARNING: Password changed. Remember to update the password in the Wazuh dashboard and the Wazuh manager nodes if necessary, and restart the services.
-
-         .. group-tab:: Changing the password for a Wazuh manager API user
-
-            #. On your Wazuh manager master node, download the Wazuh passwords tool and use it to change the password of the ``wazuh-wui`` Wazuh API user:
-
-               .. code-block:: console
-
-                  # wget https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-passwords-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh
-                  # bash wazuh-passwords-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -A -au wazuh -ap Hello*123 -u wazuh-wui -p P3ssword+098
-
-               .. code-block:: console
-                  :class: output
-
-                  10/04/2026 13:56:47 INFO: The password for Wazuh API user wazuh-wui is P3ssword+098
-
-      #. Replace ``<WAZUH_WUI_PASSWORD>`` in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file with the new ``wazuh-wui`` password generated in the previous step:
-
-         .. code-block:: yaml
-            :emphasize-lines: 6
-
-            wazuh_core.hosts:
-              default:
-                url: https://127.0.0.1
-                port: 55000
-                username: wazuh-wui
-                password: "<WAZUH_WUI_PASSWORD>"
-                run_as: true
-
-      #. Restart the Wazuh dashboard to apply the changes.
-
-         .. include:: /_templates/common/restart_dashboard.rst
-
+To change a password after installation, see the :doc:`password management </user-manual/user-administration/password-management>` documentation.
 
 Disable Wazuh updates
 ---------------------
@@ -290,6 +221,7 @@ All the Wazuh central components are successfully installed and secured.
         <p class="link-boxes-label">Install the Wazuh indexer</p>
 
 .. image:: ../../images/installation/Indexer-Circle.png
+     :alt: Wazuh indexer logo
      :align: center
      :height: 61px
 
@@ -303,6 +235,7 @@ All the Wazuh central components are successfully installed and secured.
         <p class="link-boxes-label">Install the Wazuh manager</p>
 
 .. image:: ../../images/installation/Server-Circle.png
+     :alt: Wazuh manager logo
      :align: center
      :height: 61px
 
@@ -316,6 +249,7 @@ All the Wazuh central components are successfully installed and secured.
         <p class="link-boxes-label">Install the Wazuh dashboard</p>
 
 .. image:: ../../images/installation/Dashboard-Circle.png
+     :alt: Wazuh dashboard logo
      :align: center
      :height: 61px
 

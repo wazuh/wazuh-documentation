@@ -50,6 +50,22 @@ The Wazuh agent is a 32-bit application. Its installation directory depends on t
 
          (4.x only) If you have a Wazuh manager cluster, you can add multiple ``<server>`` sections that point to the worker nodes. Refer to `pointing agents to the cluster (Failover mode) <https://documentation.wazuh.com/current/user-manual/manager/configuring-cluster/advanced-settings.html#pointing-agents-to-the-cluster-failover-mode>`__ for more information.
 
+   -  Store the enrollment password in ``C:\Program Files (x86)\ossec-agent\authd.pass``. For the steps, see the :doc:`Enroll Wazuh agents with password authentication </user-manual/agent/agent-enrollment/security-options/using-password-authentication>` section.
+
+   -  (Recommended) Configure the certificate authority (CA) that signs the Wazuh manager certificate, so that the Wazuh agent verifies the identity of the Wazuh manager. Copy the CA certificate to the endpoint. By default, it's ``/var/wazuh-manager/etc/certs/root-ca.pem`` on the Wazuh manager. Then add the following to the Wazuh agent configuration file:
+
+      .. code-block:: xml
+         :emphasize-lines: 4
+
+         <ossec_config>
+           <agent>
+             <ssl>
+               <certificate_authorities>C:\<PATH_TO>\rootCA.pem</certificate_authorities>
+               <verification_mode>full</verification_mode>
+             </ssl>
+           </agent>
+         </ossec_config>
+
    -  (Optional) Add enrollment parameters.
 
       **Wazuh 5.0 agents**:
@@ -88,7 +104,7 @@ The Wazuh agent is a 32-bit application. Its installation directory depends on t
       -  ``<agent_name>EXAMPLE_NAME</agent_name>``: Specifies the name that the Wazuh agent uses during enrollment. If you do not configure this setting, the Wazuh agent uses the endpoint hostname.
       -  ``<groups>GROUP1,GROUP2,GROUP3</groups>``: Specifies the groups that the Wazuh agent joins during enrollment. An agent group is a collection of Wazuh agents that share the same configuration. The Wazuh manager pushes configuration settings to Wazuh agents that belong to the same group. Enrollment fails if you specify a group that does not exist. Create the required group on the Wazuh manager before you use the ``<groups>`` setting. For more information, see :doc:`Grouping agents </user-manual/agent/agent-management/grouping-agents>`.
 
-      More optional enrollment parameters and their usage can be found `here <https://documentation.wazuh.com/current/user-manual/reference/ossec-conf/client.html#enrollment>`__.
+      More optional enrollment parameters and their usage can be found in the :ref:`Wazuh agent configuration reference <reference_ossec_agent_enrollment>`.
 
 #. Restart the Wazuh agent to make the changes effective.
 

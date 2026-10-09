@@ -8,6 +8,8 @@ Enroll Wazuh agents with password authentication
 
 Password authentication requires a shared password during enrollment. The Wazuh manager accepts the enrollment request only when the Wazuh agent provides the configured password.
 
+Wazuh 5.0 agents enroll with an enrollment token by default. See the :doc:`Wazuh manager identity verification </user-manual/agent/agent-enrollment/security-options/manager-identity-verification>` section. Password authentication is used by Wazuh 4.x agents, and by Wazuh 5.0 agents that have the password stored in the file set in ``<enrollment><authorization_pass_path>``.
+
 Follow the steps below to configure password authentication on different operating systems:
 
 .. contents::
@@ -20,10 +22,9 @@ Prerequisites
 
 Before a Wazuh agent can be enrolled in the Wazuh manager using the password authentication method, you must complete the following on the Wazuh manager:
 
-#. Enable the password authentication option by adding the configuration highlighted below to the ``<auth>`` section of the Wazuh manager configuration file ``/var/wazuh-manager/etc/wazuh-manager.conf``:
+#. Password authentication is enabled by default. The ``<auth>`` section of the Wazuh manager configuration file ``/var/wazuh-manager/etc/wazuh-manager.conf`` includes the following setting:
 
    .. code-block:: xml
-      :emphasize-lines: 2
 
       <auth>
         <use_password>yes</use_password>
@@ -69,7 +70,7 @@ Before a Wazuh agent can be enrolled in the Wazuh manager using the password aut
          .. code-block:: none
             :class: output
 
-            2026/07/09 16:15:06 wazuh-manager-authd: INFO: Accepting connections on port 1515. A new authentication password was generated and written to 'etc/authd.pass'
+            2026/07/09 16:15:06 wazuh-manager-authd: INFO: A new enrollment password was generated and written to 'etc/authd.pass'
 
       #. Run the following command to view the generated password:
 
@@ -80,11 +81,11 @@ Before a Wazuh agent can be enrolled in the Wazuh manager using the password aut
          .. code-block:: none
             :class: output
 
-            f96d957cb68e94512eae3f5063b649b7
+            3f1c9a7e52d84b60a9e1f2c7d4b8e05a6c3d9f1b7e2a4c8d0f5b6a9e3c7d1f20
 
    .. note::
 
-      If you use a multi-node Wazuh manager cluster, enable password authentication on each Wazuh manager node. We recommend using the same enrollment password on all Wazuh manager nodes. This simplifies Wazuh agent enrollment and prevents enrollment through an unsecured node.
+      In a Wazuh manager cluster, the enrollment password belongs to the Wazuh master node and is distributed to the Wazuh worker nodes automatically. A Wazuh worker node rejects enrollment requests until it receives the password.
 
 Once the above prerequisites are fulfilled, you can enroll the Wazuh agent using the steps corresponding to the OS running on the endpoints with the Wazuh agent installed.
 

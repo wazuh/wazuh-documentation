@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Visit the Wazuh installation guide and learn more about the deployment process, available installation alternatives, and requirements.
+   :description: Visit the Wazuh installation guide and learn more about the deployment process, available installation alternatives, and requirements.
 
 .. _installation_guide:
 
@@ -19,7 +19,7 @@ In this installation guide, you will learn how to install Wazuh in your infrastr
 Installing the Wazuh central components
 ---------------------------------------
 
-You can install the Wazuh indexer, Wazuh manager, and Wazuh dashboard on a single host or distribute them in cluster configurations. Each Wazuh central component supports two deployment methods: Assisted installation, and Step-by-step installation. Both methods provide instructions to install the central components on a single host or on separate hosts.
+You can install the Wazuh indexer, Wazuh manager, and Wazuh dashboard on a single host or distribute them in cluster configurations. Each Wazuh central component supports two deployment methods: Assisted installation and Step-by-step installation. Both methods provide instructions to install the central components on a single host or on separate hosts.
 
 Check our :doc:`Quickstart </quickstart>` documentation to perform an all-in-one installation of the Wazuh central components. This is the fastest way to get the Wazuh central components up and running.
 
@@ -54,7 +54,7 @@ Follow this installation workflow:
         <p class="link-boxes-label">Install the Wazuh manager</p>
 
 .. image:: ../images/installation/Server-noBG.png
-     :alt: Wazuh server logo
+     :alt: Wazuh manager logo
      :align: center
      :height: 61px
 
@@ -137,6 +137,11 @@ Uninstalling Wazuh
 ------------------
 
 In the :doc:`Uninstalling Wazuh <uninstalling-wazuh/index>` section, you will find instructions on how to uninstall the Wazuh central components and the Wazuh agent.
+
+Installation alternatives
+-------------------------
+
+Wazuh provides other :doc:`installation alternatives </deployment-options/index>` as well. These are complementary to the installation methods of this installation guide. You will find instructions on how to deploy Wazuh using ready-to-use machines, containers, and orchestration tools. There is also information on how to install the solution offline, from sources, and with alternative components.
 
 .. toctree::
    :maxdepth: 1

@@ -16,7 +16,7 @@ This release includes new features or enhancements as the following:
 Wazuh manager
 ^^^^^^^^^^^^^
 
--  `#38571 <https://github.com/wazuh/wazuh/pull/38571>`__ Added the missing compiler hardening flags (stack canary, PIE, full RELRO and FORTIFY_SOURCE) to the Linux binaries.
+-  `#38571 <https://github.com/wazuh/wazuh/pull/38571>`__ Added the missing compiler hardening flags (stack canary, PIE, full RELRO and ``FORTIFY_SOURCE``) to the Linux binaries.
 -  `#39471 <https://github.com/wazuh/wazuh/pull/39471>`__ The API access log no longer writes the ``run_as`` authorization context verbatim unless debug logging is enabled; ``hash_auth_context`` still identifies it.
 
 Wazuh agent
@@ -25,7 +25,7 @@ Wazuh agent
 -  `#39746 <https://github.com/wazuh/wazuh/pull/39746>`__ Narrowed the Windows agent MSI pending-restart check to the agent's own files.
 -  `#39577 <https://github.com/wazuh/wazuh/issues/39577>`__ Added a script that builds the eBPF precompiled dependency with Zig for every Linux architecture.
 -  `#38509 <https://github.com/wazuh/wazuh/pull/38509>`__ Raised from 64 to 1024 the number of active response commands that ``wazuh-execd`` can load from ``etc/shared/ar.conf``.
--  `#38571 <https://github.com/wazuh/wazuh/pull/38571>`__ Added the missing compiler hardening flags (stack canary, PIE, full RELRO and FORTIFY_SOURCE) to the Linux binaries.
+-  `#38571 <https://github.com/wazuh/wazuh/pull/38571>`__ Added the missing compiler hardening flags (stack canary, PIE, full RELRO and ``FORTIFY_SOURCE``) to the Linux binaries.
 -  `#39167 <https://github.com/wazuh/wazuh/issues/39167>`__ Removed the per-comparison JSON serialisation from the macOS ports deduplication in syscollector.
 -  `#39591 <https://github.com/wazuh/wazuh/issues/39591>`__ Allowed FIM eBPF whodata on capable kernels older than 5.8, such as RHEL 8.10.
 
@@ -59,7 +59,7 @@ Wazuh manager
 -  `#38686 <https://github.com/wazuh/wazuh/pull/38686>`__ Added Fluentd server identity verification to the ``fluent-forward`` module: the certificate name is now checked against the configured address and the shared key digest returned by the server is verified.
 -  `#38804 <https://github.com/wazuh/wazuh/pull/38804>`__ Aligned the API ``force`` parameter with its OpenAPI schema: ``POST /agents`` now declares it, and ``POST /agents/insert`` no longer sends a ``force`` object that the request did not carry.
 -  `#38894 <https://github.com/wazuh/wazuh/pull/38894>`__ Escaped control characters in the request path of the API plain-text access log, so an unauthenticated request can no longer forge access log entries.
--  `#39041 <https://github.com/wazuh/wazuh/pull/39041>`__ Fixed the indexer connector silently diverging from the ``wazuh-states-*`` indices: per-item ``_bulk`` rejections are now logged instead of ignored, aggregated by error type and reason, ``_delete_by_query`` responses reporting failures or version conflicts are now logged too, agent-ID deletions no longer match by raw string prefix, ``diff()`` no longer deletes real documents when its local mirror comes up empty, and a DELETED document no longer sweeps in sibling documents whose ID merely starts with the deleted one.
+-  `#39041 <https://github.com/wazuh/wazuh/pull/39041>`__ Fixed the indexer connector silently diverging from the ``wazuh-states-*`` indices: per-item ``_bulk`` rejections are now logged instead of ignored, aggregated by error type and reason, ``_delete_by_query`` responses reporting failures or version conflicts are now logged too, agent-ID deletions no longer match by raw string prefix, and a DELETED document no longer sweeps in sibling documents whose ID merely starts with the deleted one.
 -  `#39471 <https://github.com/wazuh/wazuh/pull/39471>`__ Raised the default API ``run_as`` authentication-context payload size limit from 8 KB to 64 KB and made it configurable via the new ``auth_context_max_payload_size`` option, for AD/LDAP/SSO logins with large group-membership contexts.
 
 Wazuh agent
@@ -98,6 +98,7 @@ Wazuh agent
 -  `#39353 <https://github.com/wazuh/wazuh/issues/39353>`__ Fixed the Windows agent accepting ``<whodata><provider>ebpf</provider></whodata>`` and silently disabling whodata.
 -  `#39570 <https://github.com/wazuh/wazuh/pull/39570>`__ Fixed the FIM eBPF whodata healthcheck failing on RHEL 9 kernels and discarding the eBPF provider.
 -  `#39708 <https://github.com/wazuh/wazuh/pull/39708>`__ Fixed FIM eBPF whodata dropping events for files outside the root mount.
+-  `#40084 <https://github.com/wazuh/wazuh/pull/40084>`__ Fixed the Windows ``netsh`` and ``route-null`` active responses failing with ``Cannot read 'srcip' from data`` since v4.14.7, because the IP validation called ``getaddrinfo()`` without initializing Winsock.
 
 Ruleset
 ^^^^^^^
@@ -112,6 +113,7 @@ Wazuh dashboard
 ^^^^^^^^^^^^^^^
 
 -  `#9141 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/9141>`__ Fixed override of Server API authorization header.
+-  `#9313 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/9313>`__ Fixed the enabled status shown for active response commands, the GitHub module and the Command wodle.
 
 Changelogs
 ----------

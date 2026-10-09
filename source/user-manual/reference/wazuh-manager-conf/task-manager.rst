@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn about the task-manager configuration section of wazuh-manager.conf, which manages remote agent upgrade tasks.
+  :description: Learn about the task-manager configuration section of wazuh-manager.conf, which configures task tracking and remote agent upgrades.
 
 .. _reference_wazuh_manager_conf_task_manager:
 
@@ -15,7 +15,7 @@ task-manager
       <task-manager>
       </task-manager>
 
-The ``<task-manager>`` section manages remote upgrade tasks created by ``<agent-upgrade>``. It tracks task status, applies execution timeouts, and removes expired task records.
+The ``<task-manager>`` section configures the task manager module. It tracks the status of agent tasks, applies execution timeouts, removes expired task records, and serves remote Wazuh agent upgrades.
 
 Options
 -------
@@ -24,6 +24,8 @@ Options
 - `cleanup_interval`_
 - `max_payload_bytes`_
 - `max_tasks_per_poll`_
+- `upgrade_enabled`_
+- `wpk_repository`_
 
 task_ttl
 ^^^^^^^^^
@@ -69,6 +71,28 @@ Maximum tasks returned by a single poll; remaining pending tasks are returned on
 | **Allowed values** | Integer >= 0; 0 means "use default" |
 +--------------------+-------------------------------------+
 
+upgrade_enabled
+^^^^^^^^^^^^^^^
+
+Enables or disables remote Wazuh agent upgrades (WPK upgrades requested through the Wazuh server API).
+
++--------------------+---------+
+| **Default value**  | yes     |
++--------------------+---------+
+| **Allowed values** | yes, no |
++--------------------+---------+
+
+wpk_repository
+^^^^^^^^^^^^^^
+
+Repository from which WPK upgrade packages are downloaded, as ``host/path``. If the value starts with ``http://`` or ``https://``, it is used as given. Otherwise, ``https://`` is prepended, or ``http://`` when the upgrade request asks for HTTP.
+
++--------------------+-----------------------------------------------------------------------------------+
+| **Default value**  | None. When not set, the repository is chosen from the target Wazuh agent version. |
++--------------------+-----------------------------------------------------------------------------------+
+| **Allowed values** | A non-empty ``host/path``, with or without an ``http://`` or ``https://`` scheme  |
++--------------------+-----------------------------------------------------------------------------------+
+
 Sample configuration
 ---------------------
 
@@ -79,4 +103,5 @@ Sample configuration
      <cleanup_interval>300</cleanup_interval>
      <max_payload_bytes>1048576</max_payload_bytes>
      <max_tasks_per_poll>100</max_tasks_per_poll>
+     <upgrade_enabled>yes</upgrade_enabled>
    </task-manager>

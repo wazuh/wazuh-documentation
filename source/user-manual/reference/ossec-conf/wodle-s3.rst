@@ -48,7 +48,7 @@ skip_on_error
 When unable to process and parse a log, skip it and continue processing. If set to no, the module will abort the execution once it encounters an error.
 
 +----------------------+-----------+
-| **Default value**    | yes       |
+| **Default value**    | no        |
 +----------------------+-----------+
 | **Allowed values**   | yes, no   |
 +----------------------+-----------+
@@ -505,6 +505,8 @@ A user-friendly name for the AWS account.
 access_key
 ~~~~~~~~~~~
 
+**Deprecated since version 4.4.0.**
+
 The access key ID for the IAM user with the permission to access the service.
 
 +----------------------+--------------------------+
@@ -526,6 +528,8 @@ A comma-separated list of log group names from where the logs should be extracte
 
 secret_key
 ~~~~~~~~~~~
+
+**Deprecated since version 4.4.0.**
 
 The secret key created for the IAM user with the permission to access the service.
 

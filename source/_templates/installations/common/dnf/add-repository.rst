@@ -1,12 +1,12 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
-#. Import the GPG key.
+#. Import the GPG key:
 
    .. code-block:: console
 
       # rpm --import https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH
 
-#. Add the repository.
+#. Add the repository:
 
    .. code-block:: console
 

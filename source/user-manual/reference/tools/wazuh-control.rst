@@ -31,10 +31,6 @@ Commands
 | info [-v -r -t]   | Displays information about the Wazuh agent installation. Specify only one option to display  |
 |                   | the version (-v), revision (-r), or installation type (-t).                                  |
 +-------------------+----------------------------------------------------------------------------------------------+
-| enable debug      | Run all Wazuh daemons in debug mode.                                                         |
-+-------------------+----------------------------------------------------------------------------------------------+
-| disable debug     | Disables debug mode for all Wazuh agent daemons.                                             |
-+-------------------+----------------------------------------------------------------------------------------------+
 
 Examples
 --------

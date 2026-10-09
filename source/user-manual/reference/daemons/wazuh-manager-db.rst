@@ -12,16 +12,18 @@ The ``wazuh-manager-db`` executable runs the Wazuh manager database service.
 
 The manager database service manages the local databases used by the Wazuh manager. It provides storage and retrieval of manager and agent information for internal Wazuh components and services.
 
-+----------+---------------------------------------------------------------------------------+
-| Option   | Description                                                                     |
-+==========+=================================================================================+
-| -d       | Runs the daemon in debug mode. Repeat the option to increase the debug level.   |
-+----------+---------------------------------------------------------------------------------+
-| -f       | Runs the daemon in the foreground.                                              |
-+----------+---------------------------------------------------------------------------------+
-| -h       | Displays the help message and exits.                                            |
-+----------+---------------------------------------------------------------------------------+
-| -t       | Tests the configuration and exits.                                              |
-+----------+---------------------------------------------------------------------------------+
-| -V       | Displays version and license information.                                       |
-+----------+---------------------------------------------------------------------------------+
++-------------+---------------------------------------------------------------------------------+
+| Option      | Description                                                                     |
++=============+=================================================================================+
+| -c <config> | Specifies the configuration file to use. The default is etc/wazuh-manager.conf. |
++-------------+---------------------------------------------------------------------------------+
+| -d          | Runs the daemon in debug mode. Repeat the option to increase the debug level.   |
++-------------+---------------------------------------------------------------------------------+
+| -f          | Runs the daemon in the foreground.                                              |
++-------------+---------------------------------------------------------------------------------+
+| -h          | Displays the help message and exits.                                            |
++-------------+---------------------------------------------------------------------------------+
+| -t          | Tests the configuration and exits.                                              |
++-------------+---------------------------------------------------------------------------------+
+| -V          | Displays version and license information.                                       |
++-------------+---------------------------------------------------------------------------------+

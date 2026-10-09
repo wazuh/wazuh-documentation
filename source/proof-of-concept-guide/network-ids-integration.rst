@@ -48,9 +48,9 @@ Take the following steps to configure Suricata on the Ubuntu endpoint and send t
       HOME_NET: "<UBUNTU_IP>"
       EXTERNAL_NET: "any"
 
-      default-rule-path: /etc/suricata/rules
+      default-rule-path: /var/lib/suricata/rules
       rule-files:
-      - "*.rules"
+      - suricata.rules
 
       # Global stats configuration
       stats:
@@ -110,7 +110,7 @@ Run the command below on the Ubuntu endpoint to simulate malicious traffic:
 
 .. code-block:: console
 
-   $ curl -s http://testmynids.org/uid/index.html
+   $ curl -s http://testmyids.com
 
 Visualize the alerts
 --------------------

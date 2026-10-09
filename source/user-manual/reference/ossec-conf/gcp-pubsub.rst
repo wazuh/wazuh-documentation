@@ -31,6 +31,7 @@ Main options
 - `credentials_file`_
 - `max_messages`_
 - `num_threads`_
+- `logging`_ (deprecated)
 
 Scheduling options
 
@@ -49,7 +50,7 @@ enabled
 Enables or disables the module.
 
 +----------------------+-----------+
-| **Default value**    | n/a       |
+| **Default value**    | yes       |
 +----------------------+-----------+
 | **Allowed values**   | yes, no   |
 +----------------------+-----------+
@@ -57,7 +58,7 @@ Enables or disables the module.
 project_id
 ^^^^^^^^^^^
 
-Google Cloud project ID.
+Google Cloud project ID. This option is mandatory.
 
 +----------------------+----------------------------------------+
 | **Default value**    | n/a                                    |
@@ -70,7 +71,7 @@ For example ``<project_id>wazuh-dev</project_id>``.
 subscription_name
 ^^^^^^^^^^^^^^^^^^^
 
-Name of the subscription to read from.
+Name of the subscription to read from. This option is mandatory.
 
 +----------------------+--------------+
 | **Default value**    | n/a          |
@@ -83,7 +84,7 @@ For example ``<subscription_name>wazuh-name</subscription_name>``.
 credentials_file
 ^^^^^^^^^^^^^^^^^^
 
-Path to the Google Cloud credentials file. It can be absolute path or relative to WAZUH_HOME.
+Path to the Google Cloud credentials file. It can be absolute path or relative to WAZUH_HOME. This option is mandatory.
 
 +----------------------+----------------------------------+
 | **Default value**    | n/a                              |
@@ -117,6 +118,13 @@ Number of threads used to pull in each iteration. The maximum number of messages
 
 .. note::
    The number of threads will be truncated to the maximum allowed, depending on the number of CPU cores. The maximum value is ``number_of_physical_cores * 5``.
+
+logging
+^^^^^^^
+
+.. deprecated:: 5.0.0
+
+   The module still accepts the ``<logging>`` tag for backward compatibility, but ignores it and logs a debug message saying the setting is skipped. Remove it from the configuration.
 
 Scheduling options
 -------------------

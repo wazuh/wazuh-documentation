@@ -176,7 +176,7 @@ jwt_auth_domain
 +------------------+---------------------+-------------------+-----------------------------------------------------------------------------------------------+
 | **Sub-fields**   | **Allowed values**  | **Default value** | **Description**                                                                               |
 +==================+=====================+===================+===============================================================================================+
-| ``http_enabled`` | true, false         | false             | Defines if  JWT-based authentication is enabled for HTTP requests.                            |
+| ``http_enabled`` | true, false         | false             | Defines if JWT-based authentication is enabled for HTTP requests.                             |
 +------------------+---------------------+-------------------+-----------------------------------------------------------------------------------------------+
 | ``order``        | Any positive        | 0                 | Indicates the sequence in which authentication domains are evaluated. This is particularly    |
 |                  | integer             |                   | relevant when multiple authentication mechanisms are configured.                              |

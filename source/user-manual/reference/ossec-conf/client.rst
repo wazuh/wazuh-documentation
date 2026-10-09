@@ -15,12 +15,15 @@ client
       <client>
       </client>
 
-The ``<client>`` section configures the Wazuh agent connection to the Wazuh manager and the agent enrollment settings.
+The ``<client>`` section configures the Wazuh agent connection to the Wazuh manager and the agent enrollment settings. It is the Wazuh 4.x agent configuration section. Wazuh 5.0 agents use the :doc:`agent <agent>` section instead.
+
+.. important::
+   Wazuh 5.0 agents read only two parts of a ``<client>`` block left in place after an upgrade from Wazuh 4.x: the Wazuh manager address in ``<server>`` (``<address>``, with port 1517 by default, or ``<endpoint>``), and the ``<enrollment>`` block. If ``<agent>`` also defines a manager address or ``<enrollment>``, the ``<agent>`` values win. The Wazuh agent ignores every other option in ``<client>`` and logs a warning for each one. Move options such as ``notify_time``, ``config-profile``, ``auto_restart`` and ``disable-active-response`` to the ``<agent>`` section.
 
 Options
 -------
 
-- `manager`_
+- `server`_
 - `config-profile`_
 - `notify_time`_
 - `time-reconnect`_
@@ -28,12 +31,12 @@ Options
 - `auto_restart`_
 - `enrollment`_
 
-manager
-^^^^^^^
+server
+^^^^^^
 
-The ``<manager>`` subsection configures the connection parameters for a Wazuh manager. Define multiple ``<manager>`` subsections to configure more than one manager.
+The ``<server>`` subsection configures the connection parameters for a Wazuh manager. Define multiple ``<server>`` subsections to configure more than one manager.
 
-Manager subsection options
+Server subsection options
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - `address`_
@@ -110,15 +113,15 @@ Sample configuration
 .. code-block:: xml
 
    <client>
-     <manager>
+     <server>
        <address>192.168.1.100</address>
        <port>1514</port>
        <max_retries>5</max_retries>
        <retry_interval>5</retry_interval>
-     </manager>
-     <manager>
+     </server>
+     <server>
        <address>example.hostname</address>
-     </manager>
+     </server>
      <config-profile>webserver, debian8</config-profile>
      <notify_time>30</notify_time>
      <time-reconnect>120</time-reconnect>
@@ -131,11 +134,11 @@ Sample link-local IPv6 configuration
 .. code-block:: xml
 
    <client>
-     <manager>
+     <server>
        <address>fe80:0000:0000:0000:a00:27ff:feff:6b0b</address>
        <interface_index>3</interface_index>
        <port>1514</port>
-     </manager>
+     </server>
      <config-profile>ubuntu, ubuntu22, ubuntu22.04</config-profile>
      <notify_time>20</notify_time>
      <time-reconnect>60</time-reconnect>
@@ -159,7 +162,7 @@ notify_time
 Specifies the interval, in seconds, between agent keepalive messages sent to the Wazuh manager. Lower values propagate centrally distributed configuration updates more quickly but increase the load on the Wazuh manager when many agents are connected.
 
 +----------------------+-------------------------------+
-| **Default value**    | 20                            |
+| **Default value**    | 10                            |
 +----------------------+-------------------------------+
 | **Allowed values**   | A positive number (seconds)   |
 +----------------------+-------------------------------+

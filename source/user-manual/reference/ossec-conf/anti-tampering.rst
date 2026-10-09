@@ -65,7 +65,7 @@ You can create a file such as ``/$(WAZUH_DIR)/etc/uninstall_validation.env`` to 
 .. code-block:: bash
 
    #!/bin/sh
-   export VALIDATION_LOGIN="wazuh:wazuh"
+   export VALIDATION_LOGIN="<WAZUH_API_USER>:<WAZUH_API_PASSWORD>"
    export VALIDATION_HOST="192.168.0.3:55000"
    export VALIDATION_SSL_VERIFY="false"
 

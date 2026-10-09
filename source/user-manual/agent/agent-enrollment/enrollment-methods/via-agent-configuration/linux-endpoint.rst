@@ -45,6 +45,22 @@ Follow these steps to enroll a Linux/UNIX endpoint through the Wazuh agent confi
 
          (4.x only) If you have a Wazuh manager cluster, you can add multiple ``<server>`` sections that point to the worker nodes. Refer to pointing agents to the cluster (Failover mode) for more information.
 
+   #. Store the enrollment password in ``/var/ossec/etc/authd.pass``. For the steps and the required file permissions, see the :doc:`Enroll Wazuh agents with password authentication </user-manual/agent/agent-enrollment/security-options/using-password-authentication>` section.
+
+   #. (Recommended) Configure the certificate authority (CA) that signs the Wazuh manager certificate, so that the Wazuh agent verifies the identity of the Wazuh manager. Copy the CA certificate to the endpoint. By default, it's ``/var/wazuh-manager/etc/certs/root-ca.pem`` on the Wazuh manager. Then add the following to the Wazuh agent configuration file:
+
+      .. code-block:: xml
+         :emphasize-lines: 4
+
+         <ossec_config>
+           <agent>
+             <ssl>
+               <certificate_authorities>/<PATH_TO>/rootCA.pem</certificate_authorities>
+               <verification_mode>full</verification_mode>
+             </ssl>
+           </agent>
+         </ossec_config>
+
    #. (Optional) Add enrollment parameters.
 
       **Wazuh 5.0 agents**:
@@ -83,13 +99,13 @@ Follow these steps to enroll a Linux/UNIX endpoint through the Wazuh agent confi
       -  ``<agent_name><EXAMPLE_NAME></agent_name>``: Specifies the name that the Wazuh agent uses during enrollment. If you do not configure this setting, the Wazuh agent uses the endpoint hostname.
       -  ``<groups><GROUP1>,<GROUP2>,<GROUP3></groups>``: Specifies the groups that the Wazuh agent joins during enrollment. An agent group is a collection of Wazuh agents that share the same configuration. The Wazuh manager pushes configuration settings to Wazuh agents that belong to the same group. Enrollment fails if you specify a group that does not exist. Create the required group on the Wazuh manager before you use the ``<groups>`` setting. For more information, see :doc:`Grouping agents </user-manual/agent/agent-management/grouping-agents>`.
 
-      More optional enrollment parameters and their usage can be found `here <https://documentation.wazuh.com/current/user-manual/reference/ossec-conf/client.html#enrollment>`__.
+      More optional enrollment parameters and their usage can be found in the :ref:`Wazuh agent configuration reference <reference_ossec_agent_enrollment>`.
 
 #. Restart the Wazuh agent to make the changes effective:
 
    .. include:: /_templates/common/restart_agent_more.rst
 
-#. Click on the upper-left menu icon and navigate to **Agents management** > **Endpoints Summary** on the Wazuh dashboard to check for the newly enrolled Wazuh agent and its connection status. If the enrollment was successful, the Wazuh dashboard displays an interface similar to the image below.
+#. Click on the upper-left menu icon and navigate to **Agents management** > **Summary** on the Wazuh dashboard to check for the newly enrolled Wazuh agent and its connection status. If the enrollment was successful, the Wazuh dashboard displays an interface similar to the image below.
 
    .. thumbnail:: /images/manual/agent/linux-check-newly-enrolled.png
       :title: Check newly enrolled Wazuh agent - Linux

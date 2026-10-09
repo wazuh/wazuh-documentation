@@ -26,33 +26,22 @@ Main options
 ^^^^^^^^^^^^^
 
 - `enabled`_
-- `skip_nfs`_
 - `policies`_
+- `max_eps`_
+- `synchronization`_
+- `skip_nfs`_ (deprecated)
 
 Scheduling options
 ^^^^^^^^^^^^^^^^^^^^
 
 - `scan_on_start`_
 - `interval`_
-- `day`_
-- `wday`_
-- `time`_
+- `day, wday, time`_ (deprecated)
 
 enabled
 ^^^^^^^
 
 Enables the module.
-
-+----------------------+-----------+
-| **Default value**    | yes       |
-+----------------------+-----------+
-| **Allowed values**   | yes, no   |
-+----------------------+-----------+
-
-skip_nfs
-^^^^^^^^
-
-Enable or disable the scanning of network mounted filesystems (Works on Linux and FreeBSD). Currently, ``skip_nfs`` will exclude checking files on CIFS or NFS mounts.
 
 +----------------------+-----------+
 | **Default value**    | yes       |
@@ -92,6 +81,49 @@ Example
      <policy>/path/to/my/policy.yml</policy>
    </policies>
 
+max_eps
+^^^^^^^
+
+Maximum number of events per second the SCA module sends.
+
++--------------------+---------------------------+
+| **Default value**  | 50                        |
++--------------------+---------------------------+
+| **Allowed values** | Integer from 0 to 1000000 |
++--------------------+---------------------------+
+
+synchronization
+^^^^^^^^^^^^^^^
+
+Settings for synchronizing the SCA results database with the Wazuh manager.
+
+.. code-block:: xml
+
+   <synchronization>
+     <enabled>yes</enabled>
+     <interval>5m</interval>
+     <integrity_interval>24h</integrity_interval>
+   </synchronization>
+
++------------------------+---------------------------------------------------+---------------------+----------------------------------------------------+
+| Option                 | Description                                       | Default             | Allowed values                                     |
++========================+===================================================+=====================+====================================================+
+| ``enabled``            | Enables periodic synchronization.                 | yes                 | yes, no                                            |
++------------------------+---------------------------------------------------+---------------------+----------------------------------------------------+
+| ``interval``           | Time between synchronizations.                    | 5m (300 seconds)    | Positive time value with optional suffix s, m, h   |
+|                        |                                                   |                     | or d. 0 is not allowed.                            |
++------------------------+---------------------------------------------------+---------------------+----------------------------------------------------+
+| ``integrity_interval`` | Time between integrity checks of the synchronized | 24h (86400 seconds) | Non-negative time value with optional suffix s, m, |
+|                        | data.                                             |                     | h or d.                                            |
++------------------------+---------------------------------------------------+---------------------+----------------------------------------------------+
+
+skip_nfs
+^^^^^^^^
+
+.. deprecated:: 5.0.0
+
+   This option has no effect in Wazuh 5.0. The SCA module still accepts it so configurations from Wazuh 4.x agents don't fail, and logs a deprecation warning when it finds it.
+
 scan_on_start
 ^^^^^^^^^^^^^^
 
@@ -108,63 +140,19 @@ interval
 
 The interval between module executions.
 
-+----------------------+----------------------------------------------------------------------------------------------+
-| **Default value**    | 12h                                                                                          |
-+----------------------+----------------------------------------------------------------------------------------------+
-| **Allowed values**   | A positive number that should contain a suffix character indicating a time unit, such as, s  |
-|                      | (seconds), m (minutes), h (hours), d (days), w (weeks), M (months)                           |
-+----------------------+----------------------------------------------------------------------------------------------+
++--------------------+---------------------------------------------------------------------------------------------+
+| **Default value**  | 1d (86400 seconds)                                                                          |
++--------------------+---------------------------------------------------------------------------------------------+
+| **Allowed values** | A positive number with an optional suffix: s (seconds), m (minutes), h (hours) or d (days). |
+|                    | A number without a suffix is in seconds.                                                    |
++--------------------+---------------------------------------------------------------------------------------------+
 
-The interval option is conditioned by the following described options ``day``, ``wday`` and ``time``. If none of these options are set, the interval can take any allowed value.
+day, wday, time
+^^^^^^^^^^^^^^^
 
-day
-^^^
+.. deprecated:: 5.0.0
 
-Day of the month to run the scan.
-
-+----------------------+----------------------------+
-| **Default value**    | n/a                        |
-+----------------------+----------------------------+
-| **Allowed values**   | Day of the month [1..31]   |
-+----------------------+----------------------------+
-
-.. note::
-   When the ``day`` option is set, the interval value must be a multiple of months. By default, the interval is set to a month.
-
-wday
-^^^^
-
-Day of the week to run the scan. This option is not compatible with the ``day`` option.
-
-+----------------------+----------------------------------------------------------------------------------------------+
-| **Default value**    | n/a                                                                                          |
-+----------------------+----------------------------------------------------------------------------------------------+
-| **Allowed values**   | Day of the week:                                                                             |
-|                      | - sunday/sun                                                                                 |
-|                      | - monday/mon                                                                                 |
-|                      | - tuesday/tue                                                                                |
-|                      | - wednesday/wed                                                                              |
-|                      | - thursday/thu                                                                               |
-|                      | - friday/fri                                                                                 |
-|                      | - saturday/sat                                                                               |
-+----------------------+----------------------------------------------------------------------------------------------+
-
-.. note::
-   When the ``wday`` option is set, the interval value must be a multiple of weeks. By default, the interval is set to a week.
-
-time
-^^^^
-
-Time of the day to run the scan. It has to be represented in the format hh:mm.
-
-+----------------------+-----------------------+
-| **Default value**    | n/a                   |
-+----------------------+-----------------------+
-| **Allowed values**   | Time of day [hh:mm]   |
-+----------------------+-----------------------+
-
-.. note::
-   When only the ``time`` option is set, the interval value must be a multiple of days or weeks. By default, the interval is set to a day.
+   These scheduling options have no effect in Wazuh 5.0. The SCA module runs on ``interval`` only. It still accepts them so configurations from Wazuh 4.x agents don't fail, and logs a deprecation warning when it finds one.
 
 Sample configuration
 ---------------------
@@ -174,8 +162,6 @@ Sample configuration
    <sca>
      <enabled>yes</enabled>
      <scan_on_start>yes</scan_on_start>
-     <time>04:00</time>
-     <skip_nfs>yes</skip_nfs>
      <policies>
        <policy>etc/shared/cis_debian10.yml</policy>
        <policy enabled="no">ruleset/sca/cis_debian9.yml</policy>

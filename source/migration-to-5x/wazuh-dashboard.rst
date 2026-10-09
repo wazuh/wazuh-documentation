@@ -81,12 +81,12 @@ Perform the following steps to recreate the Wazuh dashboard configuration in Waz
    .. code-block:: yaml
 
       wazuh_core.hosts:
-        - default:
-            url: https://<WAZUH_MANAGER_IP_OR_HOSTNAME>
-            port: <PORT>
-            username: <USERNAME>
-            password: <PASSWORD>
-            run_as: true
+        default:
+          url: https://<WAZUH_MANAGER_IP_OR_HOSTNAME>
+          port: <PORT>
+          username: <USERNAME>
+          password: <PASSWORD>
+          run_as: true
 
 #. Navigate to **Dashboard Management** > **Advanced Settings** on the Wazuh dashboard to reconfigure advanced settings. Recreate any customized settings from the Wazuh 4.x deployment. Review the following settings:
 
