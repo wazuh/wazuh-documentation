@@ -127,8 +127,14 @@ Configure the proxy and the certificates
       server.ssl.key: "/etc/wazuh-dashboard/certs/wazuh-dashboard-key.pem"
       server.ssl.certificate: "/etc/wazuh-dashboard/certs/wazuh-dashboard.pem"
       opensearch.ssl.certificateAuthorities: ["/etc/wazuh-dashboard/certs/root-ca.pem"]
-      uiSettings.overrides.defaultRoute: /app/wz-home
+      uiSettings.overrides.defaultRoute: /app/wazuh
       opensearch_security.cookie.secure: true
+      wazuh_core.hosts:
+        default:
+          url: https://localhost
+          port: 55000
+          username: wazuh-wui
+          run_as: true
 
 #. Navigate to the ``/etc/nginx/conf.d`` directory and create a ``wazuh.conf`` file for the certificate installation:
 
