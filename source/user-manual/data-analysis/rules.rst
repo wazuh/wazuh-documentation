@@ -537,7 +537,7 @@ Dynamic event field referencing
 
 A Sigma rule's metadata is normally static: the ``title``, ``tags``, ``mitre``, and ``compliance`` blocks describe the rule itself and are attached unchanged to every finding it generates. Wazuh extends Sigma with dynamic event field referencing, allowing those metadata fields to embed placeholders that resolve against the triggering event at enrichment time. This process is known as Interpolation. Interpolation means taking static text in your rule YAML and replacing placeholders with values from the current event at detection time, so the final string is dynamically built for each event.
 
-Each finding is written to the ``wazuh-findings-v5-{logtype}-*`` index and reflects the specific context of the matched event. For example, the Wazuh agent ID, hostname, or any other field present in the normalized event.
+Each finding is written to the ``wazuh-findings-v5-<category>`` data stream and reflects the specific context of the matched event. For example, the Wazuh agent ID, hostname, or any other field present in the normalized event. The ``<category>`` value is the integration category in the ``wazuh.integration.category`` field of the event.
 
 **Syntax**
 
@@ -640,4 +640,4 @@ The following table shows conditions and results for dynamic event field referen
 Scope
 ^^^^^
 
-Interpolation runs after a matching rule is fetched and before the finding is indexed into ``wazuh-findings-v5-{logtype}-*``. The original rule document in the rule index is never modified.
+Interpolation runs after a matching rule is fetched and before the finding is indexed into the ``wazuh-findings-v5-<category>`` data stream. The original rule document in the rule index is never modified.

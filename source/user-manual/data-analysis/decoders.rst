@@ -31,29 +31,27 @@ Each decoder defines the:
 
 -  ``check`` stage: boolean conditions to decide if this decoder applies.
 
--  ``parse|`` stage: parsing operations (e.g., parse JSON, key-value, CSV) on a field.
+-  ``parse|<field>`` stage: An ordered list of parser patterns that the engine tries against the value of ``<field>``.
 
 -  ``normalize`` stage: one or more blocks that run ``check/parse|/map`` in order to populate WCS fields. The ``map`` block is a transformation stage inside a decoder's normalize section that sets or modifies event fields (using literals, field references, or functions) without affecting whether the event is accepted.
 
 Conceptually, a decoder asset looks like this:
 
 .. code-block:: yaml
-   :emphasize-lines: 4, 6, 8
+   :emphasize-lines: 3, 5
 
    name: decoder/custom-mylog/0
    enabled: true
-   stages:
-     check:
-       - $event.original: contains("MyProduct")
-     parse|:
-       - $event.original: parse_json()
-     normalize:
-       - check:
-           - $some.field: exists()
-         map:
-           event.category: "network"
-           source.ip: $src_ip
-           # ...
+   check:
+     - event.original: contains("MyProduct")
+   normalize:
+     - map:
+         - _json: parse_json($event.original)
+     - check:
+         - _json.some_field: exists()
+       map:
+         - event.category: "network"
+         - source.ip: $_json.src_ip
 
 Identifying the input field and format
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -68,16 +66,17 @@ Most decoders start from ``event.original`` for raw log text or JSON, or some fi
 
 -  ``regex_extract()`` if you want custom regex capture into fields.
 
-Example: Parse a JSON firewall log arriving as a string in ``event.original``:
+**Example:** Parse a JSON firewall log that arrives as a string in ``event.original``:
 
 .. code-block:: yaml
-   :emphasize-lines: 5
+   :emphasize-lines: 6
 
    name: decoder/custom-firewall-json/0
    enabled: true
-   stages:
-     parse|:
-       - _json: parse_json($event.original)
+
+   normalize:
+     - map:
+         - _json: parse_json($event.original)
 
 Here ``_json`` is a temporary variable used as scratch space during decoding and will later be cleaned in pre-enrichment. A scratch space refers to temporary fields (names starting with ``_``) that decoders use to store intermediate values during event processing, which are later cleaned up before indexing. Temporary variables are any fields whose names start with ``_``, like ``_raw_message`` or ``_parsed_ts``. They are not part of the Wazuh Common Schema. Decoders can read and write these fields as an event moves through the decoder tree, so different decoders can share intermediate parsing results or flags.
 
@@ -88,17 +87,17 @@ Adding a check stage to target the right events
 
 The ``check`` stage is used to target the right events. It uses filter helpers such as ``contains()`` and ``starts_with()`` to determine whether the decoder should process the event.
 
-Example:
+**Example:**
 
 .. code-block:: yaml
-   :emphasize-lines: 3-4
+   :emphasize-lines: 2, 3
 
-   stages:
-     check:
-       - $event.original: contains("firewall")
-       - $event.original: starts_with("{")
-     parse|:
-       - _json: parse_json($event.original)
+   check:
+     - event.original: contains("firewall")
+     - event.original: starts_with("{")
+   normalize:
+     - map:
+         - _json: parse_json($event.original)
 
 The above example shows that ``check`` lines use a filter helper (``contains``, ``starts_with``). Both conditions must evaluate to true for the decoder to accept the event.
 
@@ -113,15 +112,15 @@ Example:
 
    normalize:
      - map:
-         event.kind: "event"
-         event.category: "network"
-         event.type: "connection"
-         network.transport: $_json.transport
-         source.ip: $_json.src_ip
-         source.port: to_int($_json.src_port)
-         destination.ip: $_json.dst_ip
-         destination.port: to_int($_json.dst_port)
-         event.outcome: $_json.action
+         - event.kind: "event"
+         - event.category: "network"
+         - event.type: "connection"
+         - network.transport: $_json.transport
+         - source.ip: $_json.src_ip
+         - source.port: to_int($_json.src_port)
+         - destination.ip: $_json.dst_ip
+         - destination.port: to_int($_json.dst_port)
+         - event.outcome: $_json.action
 
 In the above example, we use:
 
@@ -132,21 +131,20 @@ In the above example, we use:
 Conditional normalize blocks
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-A ``normalize`` array can have multiple blocks, each with its own ``check`` and ``map``, evaluated in order.
-
-Example: treat ``action=ALLOW`` vs ``DENY`` differently:
+A ``normalize`` array can have multiple blocks, each with its own ``check`` and ``map``, evaluated in order. For example, this treats ``action=ALLOW`` and ``action=DENY`` differently:
 
 .. code-block:: yaml
 
    normalize:
      - check:
-         - $_json.action: string_equal("ALLOW")
+         - _json.action: string_equal("ALLOW")
        map:
-         event.outcome: "success"
+         - event.outcome: "success"
+
      - check:
-         - $_json.action: string_equal("DENY")
+         - _json.action: string_equal("DENY")
        map:
-         event.outcome: "failure"
+         - event.outcome: "failure"
 
 Here, ``string_equal`` is a filter helper used as a condition inside ``normalize``.
 
@@ -167,32 +165,40 @@ The following decoder YAML parses the key-value fields from the log and maps the
    metadata:
      description: "Custom firewall key=value logs"
      version: "1.0.0"
-   stages:
-     check:
-       - $event.original: starts_with("FW:")
-       - $event.original: contains("conn ")
-     parse|:
-       - _kv: parse_key_value($event.original, " ", "=", true)
-     normalize:
-       - map:
-           event.kind: "event"
-           event.category: "network"
-           event.type: "connection"
-           source.ip: $_kv.src
-           source.port: to_int($_kv.src_port)
-           destination.ip: $_kv.dst
-           destination.port: to_int($_kv.dst_port)
-           network.transport: downcase($_kv.proto)
-       - check:
-           - $_kv.action: string_equal("ALLOW")
-         map:
-           event.outcome: "success"
-       - check:
-           - $_kv.action: string_equal("DENY")
-         map:
-           event.outcome: "failure"
+
+   check:
+     - event.original: starts_with("FW:")
+     - event.original: contains("conn ")
+
+   parse|event.original:
+     - "FW: conn <_kv_text>"
+
+   normalize:
+     - map:
+         - _kv: parse_key_value($_kv_text, '=', ' ', "'", '\\')
+         - event.kind: "event"
+         - event.category: "network"
+         - event.type: "connection"
+
+         - source.ip: $_kv.src
+         - source.port: to_int($_kv.src_port)
+         - destination.ip: $_kv.dst
+         - destination.port: to_int($_kv.dst_port)
+         - network.transport: downcase($_kv.proto)
+
+     - check:
+         - _kv.action: string_equal("ALLOW")
+       map:
+         - event.outcome: "success"
+
+     - check:
+         - _kv.action: string_equal("DENY")
+       map:
+         - event.outcome: "failure"
 
 In the above example:
+
+-  ``parse|event.original``, a parser stage with the pattern ``FW: conn <_kv_text>``, to capture the ``key=value`` text in the temporary field ``_kv_text``.
 
 -  ``parse_key_value`` from the Transformation helpers to split ``k=v`` pairs. In this context, "``k=v`` pairs" just means the key=value fragments inside the log line, like ``src=10.0.0.5``, ``src_port=34567``, ``dst=192.168.1.10``, etc.
 
@@ -200,4 +206,4 @@ In the above example:
 
 -  ``to_int`` and ``downcase`` from Map helpers to convert types/normalize casing.
 
--  Scratch field ``_kv`` as temporary storage, later removed by the pre-enrichment cleanup.
+-  Scratch fields, ``_kv_text`` and ``_kv``, as temporary storage, later removed by the pre-enrichment cleanup.
