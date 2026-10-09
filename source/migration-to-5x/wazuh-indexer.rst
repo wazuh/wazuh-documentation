@@ -82,7 +82,7 @@ Perform the following steps on the new Wazuh 5.x endpoint.
 
    .. note::
 
-      The default credentials for the Wazuh indexer are ``admin:admin``.
+      Retrieve the generated ``WAZUH_INDEXER_ADMIN_PASSWORD`` from ``/etc/wazuh/credentials.env`` on the Wazuh indexer.
 
 .. _migration_wazuh_indexer_security_configuration:
 
