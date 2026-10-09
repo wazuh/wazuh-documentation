@@ -117,16 +117,15 @@ Could not connect to API with ID error
 
 The error *“Could not connect to API with id: default: 3003 - Missing param: API USERNAME”* is triggered when Wazuh cannot find the correct Wazuh server API username variable. Starting from Wazuh 4.0, the Wazuh server API username variable changed from ``user`` to ``username``. It is necessary to change the credentials (``foo:bar`` is no longer accepted) as well as the name of the variable in the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` configuration file.
 
-For example:
+The example has no password for the default host. The Wazuh manager sets the ``wazuh-wui`` password at installation, from ``WAZUH_MANAGER_WUI_PASSWORD`` or a generated value. The Wazuh dashboard keeps it in its keystore as ``wazuh_core.hosts.default.password``. For example:
 
 .. code-block:: yaml
 
    wazuh_core.hosts:
      default:
-       url: https://127.0.0.1
+       url: https://localhost
        port: 55000
        username: wazuh-wui
-       password: wazuh-wui
        run_as: true
 
 Wazuh manager and Wazuh dashboard version mismatch error
