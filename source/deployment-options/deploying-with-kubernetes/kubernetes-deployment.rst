@@ -26,80 +26,8 @@ Clone the Wazuh Kubernetes repository for the necessary services and pods:
 
 .. code-block:: console
 
-   $ git clone https://github.com/wazuh/wazuh-kubernetes.git -b v|WAZUH_CURRENT_KUBERNETES|-|WAZUH_CURRENT_KUBERNETES_REV| --depth=1
+   $ git clone https://github.com/wazuh/wazuh-kubernetes.git -b |WAZUH_CURRENT_KUBERNETES| --depth=1
    $ cd wazuh-kubernetes
-
-.. _kubernetes_ssl_certificates:
-
-Setup SSL certificates
-~~~~~~~~~~~~~~~~~~~~~~
-
-Perform the steps below to generate the required certificates for the deployment:
-
-#. Download the ``wazuh-certs-tool.sh`` script and the ``config.yml`` configuration file. These files are used to create the certificates that encrypt communications between the Wazuh central components.
-
-   .. code-block:: console
-
-      $ cd wazuh
-      $ curl -o wazuh-certs-tool.sh https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-certs-tool-|WAZUH_CURRENT_KUBERNETES|-|WAZUH_CURRENT_KUBERNETES_REV|.sh
-      $ curl -o config.yml https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/config-|WAZUH_CURRENT_KUBERNETES|-|WAZUH_CURRENT_KUBERNETES_REV|.yml
-
-#. Edit ``./config.yml`` and replace the node names and IP values with the corresponding names and IP addresses. You need to do this for the Wazuh manager, Wazuh indexer, and Wazuh dashboard node.
-
-   .. code-block:: yaml
-
-      nodes:
-        # Wazuh indexer nodes
-        indexer:
-          - name: indexer
-            dns:
-              - "wazuh-indexer"
-              - "wazuh-indexer.wazuh.svc.cluster.local"
-
-        # Wazuh manager nodes
-        manager:
-          - name: manager
-            dns:
-              - "wazuh-api"
-              - "wazuh-api.wazuh.svc.cluster.local"
-
-        # Wazuh dashboard nodes
-        dashboard:
-          - name: dashboard
-            dns:
-              - "dashboard"
-              - "dashboard.wazuh.svc.cluster.local"
-
-#. Run script ``/tools/utils/deployment/certificates-conf.sh`` to create and import the certificates via ``secretGenerator`` on the ``kustomization.yml`` file.
-
-   .. code-block:: console
-
-      $ sudo bash ../tools/utils/deployment/certificates-conf.sh --cert --copy --priv
-
-   .. code-block:: none
-      :class: output
-
-      Detected indexer nodes:   indexer
-      Detected manager nodes:   manager
-      Detected dashboard nodes: dashboard
-      Generating certificates
-      29/04/2026 11:52:47 INFO: Verbose logging redirected to /home/vagrant/wazuh-kubernetes/wazuh/wazuh-certificates-tool.log
-      29/04/2026 11:52:47 INFO: Generating the root certificate.
-      29/04/2026 11:52:48 INFO: Generating Admin certificates.
-      29/04/2026 11:52:48 INFO: Admin certificates created.
-      29/04/2026 11:52:48 INFO: Generating Wazuh indexer certificates.
-      29/04/2026 11:52:48 INFO: Wazuh indexer certificates created.
-      29/04/2026 11:52:48 INFO: Generating Wazuh manager certificates.
-      29/04/2026 11:52:49 INFO: Wazuh manager certificates created.
-      29/04/2026 11:52:49 INFO: Generating Wazuh dashboard certificates.
-      29/04/2026 11:52:49 INFO: Wazuh dashboard certificates created.
-      Copying certificates for indexer: indexer -> config/indexer/certs/
-      Copying certificates for manager: manager -> config/manager/certs/
-      Copying certificates for dashboard: dashboard -> config/dashboard/certs/
-      Setting permissions for indexer indexer (1000:1000)
-      Setting permissions for manager manager (999:999)
-      Setting permissions for dashboard dashboard (1000:1000)
-      Process completed.
 
 Apply Traefik ingress controller
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -110,8 +38,9 @@ The Traefik ingress controller routes and load balances external traffic to the 
 
    .. code-block:: console
 
-      $ cd ..
       $ kubectl apply -f traefik/crd/kubernetes-crd-definition-v1.yml
+
+   The command output looks similar to this:
 
    .. code-block:: none
       :class: output
@@ -133,6 +62,8 @@ The Traefik ingress controller routes and load balances external traffic to the 
 
       $ kubectl apply -k traefik/runtime/
 
+   The command output looks similar to this:
+
    .. code-block:: none
       :class: output
 
@@ -149,11 +80,234 @@ The Traefik ingress controller routes and load balances external traffic to the 
 
       $ kubectl -n traefik get svc
 
+   The command output looks similar to this:
+
    .. code-block:: none
       :class: output
 
       NAME      TYPE           CLUSTER-IP     EXTERNAL-IP                                                              PORT(S)                                       AGE
       traefik   LoadBalancer   10.100.34.51   a7ffe29bfcf38420988fd52a698be422-862207742.us-west-1.elb.amazonaws.com   443:30725/TCP,1514:32036/TCP,1515:30354/TCP   6m29s
+
+   Note the ``EXTERNAL-IP`` as this will be used in generating the Wazuh dashboard certificate.
+
+.. _kubernetes_ssl_certificates:
+
+Setup SSL certificates
+~~~~~~~~~~~~~~~~~~~~~~
+
+Perform the steps below to generate the required certificates for the deployment:
+
+#. Download the ``wazuh-certs-tool.sh`` script and the ``config.yml`` configuration file. These files are used to create the certificates that encrypt communications between the Wazuh central components.
+
+   .. code-block:: console
+
+      $ cd wazuh
+      $ curl -so wazuh-certs-tool.sh https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-certs-tool-|WAZUH_CURRENT|-1.sh
+      $ curl -so wazuh-credentials.sh https://raw.githubusercontent.com/wazuh/wazuh-installation-assistant/|WAZUH_CURRENT|/credentials_lib/wazuh-credentials.sh
+      $ curl -so config.yml https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/config-|WAZUH_CURRENT|-1.yml
+
+#. Edit ``./config.yml`` and replace the node names and IP values with the corresponding names and IP addresses. You need to do this for the Wazuh manager, Wazuh indexer, and Wazuh dashboard node.
+
+   .. code-block:: yaml
+      :emphasize-lines: 29
+
+      nodes:
+        indexer:
+          - name: indexer
+            dns:
+              - "wazuh-indexer"
+              - "wazuh-indexer.wazuh.svc.cluster.local"
+              - "wazuh-indexer-0.wazuh-indexer"
+              - "wazuh-indexer-1.wazuh-indexer"
+              - "wazuh-indexer-2.wazuh-indexer"
+              - "wazuh-indexer-0.wazuh-indexer.wazuh.svc.cluster.local"
+              - "wazuh-indexer-1.wazuh-indexer.wazuh.svc.cluster.local"
+              - "wazuh-indexer-2.wazuh-indexer.wazuh.svc.cluster.local"
+        manager:
+          - name: manager
+            dns:
+              - "wazuh-api"
+              - "wazuh-api.wazuh.svc.cluster.local"
+              - "wazuh-agents"
+              - "wazuh-agents.wazuh.svc.cluster.local"
+              - "wazuh-events"
+              - "wazuh-events.wazuh.svc.cluster.local"
+              - "wazuh-registration"
+              - "wazuh-registration.wazuh.svc.cluster.local"
+        dashboard:
+          - name: dashboard
+            dns:
+              - "dashboard"
+              - "dashboard.wazuh.svc.cluster.local"
+              - "<EXTERNAL-IP>"
+
+   Replace
+
+   -  ``<EXTERNAL-IP>`` with the external IP address for the Traefik ingress controller. Run the following command get the external IP address  ``kubectl -n traefik get svc``.
+
+#. Run script ``/tools/utils/deployment/certificates-conf.sh`` to create and import the certificates via secretGenerator on the ``kustomization.yml`` file.
+
+   .. code-block:: console
+
+      $ sudo bash ../tools/utils/deployment/certificates-conf.sh --cert --copy --priv
+
+   The command output looks similar to this:
+
+   .. code-block:: none
+      :class: output
+
+      Detected indexer nodes:   indexer
+      Detected manager nodes:   manager
+      Detected dashboard nodes: dashboard
+      Generating certificates
+      05/10/2026 16:37:5x INFO: Verbose logging redirected to .../wazuh-certificates-tool.log
+      05/10/2026 16:37:5x INFO: Generating the root certificate.
+      05/10/2026 16:37:5x INFO: Generating Admin certificates.
+      05/10/2026 16:37:5x INFO: Admin certificates created.
+      05/10/2026 16:37:5x INFO: Generating Wazuh indexer certificates.
+      05/10/2026 16:37:5x INFO: Wazuh indexer certificates created.
+      05/10/2026 16:37:5x INFO: Generating Wazuh manager certificates.
+      05/10/2026 16:37:56 INFO: Wazuh manager certificates created.
+      05/10/2026 16:37:56 INFO: Generating Wazuh dashboard certificates.
+      05/10/2026 16:37:57 INFO: Wazuh dashboard certificates created.
+      Copying certificates for indexer: indexer -> config/indexer/certs/
+      Copying certificates for manager: manager -> config/manager/certs/
+      Copying certificates for dashboard: dashboard -> config/dashboard/certs/
+      Copying root-ca certificates -> config/root-ca/certs/
+      Setting ownership for indexer indexer (1000:1000)
+      Setting ownership for manager manager (1000:1000)
+      Setting ownership for dashboard dashboard (1000:1000)
+      Setting ownership for root-ca certificates (1000:1000)
+      Process completed.
+
+Generate credentials
+~~~~~~~~~~~~~~~~~~~~
+
+The Wazuh images ship with no default passwords. Each deployment generates its own, before the first deployment. Perform the steps below to generate the required credentials.
+
+#. Download the ``wazuh-credentials.sh`` library. This file provides the credential generation functions used by the script in the next step.
+
+   .. code-block:: console
+
+      $ cd wazuh
+      $ curl -o wazuh-credentials.sh https://raw.githubusercontent.com/wazuh/wazuh-installation-assistant/|WAZUH_CURRENT|/credentials_lib/wazuh-credentials.sh
+
+#. Run the ``credentials-conf.sh`` script to generate the credentials and import them via ``secretGenerator`` on the ``kustomization.yml`` file.
+
+   .. code-block:: console
+
+      $ sudo bash ../tools/utils/deployment/credentials-conf.sh
+
+   The command output looks similar to this:
+
+   .. code-block:: none
+      :class: output
+
+      WAZUH_INDEXER_ADMIN_PASSWORD: generated
+      WAZUH_INDEXER_KIBANASERVER_PASSWORD: generated
+      WAZUH_INDEXER_MANAGER_PASSWORD: generated
+      WAZUH_MANAGER_API_PASSWORD: generated
+      WAZUH_MANAGER_WUI_PASSWORD: generated
+      Credentials written to ./config/credentials: indexer.env, manager.env, dashboard.env
+      Log in to the Wazuh dashboard as 'admin'. Read its password with:
+        grep '^WAZUH_INDEXER_ADMIN_PASSWORD=' ./config/credentials/indexer.env | cut -d= -f2-
+
+   The command creates the ``indexer.env``, ``manager.env``, and ``dashboard.env`` in the ``wazuh/config/credentials/`` directory, holding only the credentials that each component needs. Keep these files for the life of the deployment, every ``kubectl apply -k`` and ``kubectl delete -k`` reads them, and a recreated indexer pod retrieves its credentials from them again.
+
+#. Retrieve the generated dashboard password to log in after deployment. This will be required to login to Wazuh dashboard after the deployment is completed.
+
+   .. code-block:: console
+
+      $ grep '^WAZUH_INDEXER_ADMIN_PASSWORD=' wazuh/config/credentials/indexer.env | cut -d= -f2-
+
+Set the cluster key and the agent enrollment password
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The repository ships ``wazuh/secrets/wazuh-cluster-key-secret.yaml`` and ``wazuh/secrets/wazuh-authd-pass-secret.yaml`` with placeholder values. These values must be replaced manually before the first deployment. Perform the steps below to create the cluster key and agent enrollment password.
+
+#. Generate a ``CLUSTER_KEY``. It must be exactly 32 alphanumeric characters.
+
+   .. code-block:: console
+
+      $ openssl rand -hex 16
+
+   The command output looks similar to this:
+
+   .. code-block:: none
+      :class: output
+
+      e9e059de43c6631e0a52e8acb3738c21
+
+#. Encode the key in base64.
+
+   .. code-block:: console
+
+      $ echo -n "<CLUSTER_KEY>" | base64
+
+#. Replacing the ``data.key`` value in ``wazuh/secrets/wazuh-cluster-key-secret.yaml`` with the encoded ``CLUSTER_KEY``.
+
+   .. code-block:: yaml
+      :emphasize-lines: 16
+
+      # Copyright (C) 2019, Wazuh Inc.
+      #
+      # This program is a free software; you can redistribute it
+      # and/or modify it under the terms of the GNU General Public
+      # License (version 2) as published by the FSF - Free Software
+      # Foundation.
+      # Wazuh cluster key secret
+      apiVersion: v1
+      kind: Secret
+      metadata:
+        name: wazuh-cluster-key
+        namespace: wazuh
+      # Placeholder, not a key. Replace it before the first deployment: see
+      # docs/ref/getting-started/installation.md, step 3.3.2.
+      data:
+        key: <CLUSTER_KEY> # string "REPLACETHISCLUSTERKEYBEFOREDEPLO" base64 encoded
+
+   .. warning::
+
+      Every Wazuh manager master and worker presents it ``Cluster_Key`` when joining the Wazuh manager cluster; a node whose key doesn't match the Wazuh manager master's key cannot join the cluster
+
+#. Generate an agent enrollment password ``ENROLLMENT_PASSWORD``.
+
+   .. code-block:: console
+
+      $ openssl rand -base64 24 | tr -dc A-Za-z0-9 | head -c 24
+
+   The command output looks similar to this:
+
+   .. code-block:: none
+      :class: output
+
+      ul0GkIsq9zGa0lVpbB5WOKsF
+
+#. Encode the ``ENROLLMENT_PASSWORD`` in base64
+
+   .. code-block:: console
+
+      $ echo -n "<ENROLLMENT_PASSWORD>" | base64
+
+#. Replacing the ``data.authd.pass`` value in ``wazuh/secrets/wazuh-authd-pass-secret.yaml`` with the encoded ``ENROLLMENT_PASSWORD``.
+
+   .. code-block:: yaml
+      :emphasize-lines: 14
+
+      # Copyright (C) 2019, Wazuh Inc.
+      #
+      # This program is a free software; you can redistribute it
+      # and/or modify it under the terms of the GNU General Public
+      # License (version 2) as published by the FSF - Free Software
+      # Foundation.
+      # Wazuh authd password secret
+      apiVersion: v1
+      kind: Secret
+      metadata:
+        name: wazuh-authd-pass
+        namespace: wazuh
+      data:
+        authd.pass: <ENROLLMENT_PASSWORD> # string "password" base64 encoded
 
 Apply all manifests
 ~~~~~~~~~~~~~~~~~~~
@@ -166,12 +320,12 @@ You can adjust cluster resources by editing patch files in ``envs/eks/`` or ``en
 
    Edit the following document to update ``image`` value for the Wazuh indexer, manager, and dashboard.
 
-   -  Edit the manifest file ``wazuh/indexer_stack/wazuh-dashboard/dashboard-deploy.yaml`` that defines the Wazuh dashboard deployment. Locate the ``containers`` section and replace the ``image`` value with ``wazuh/wazuh-dashboard:|WAZUH_CURRENT_KUBERNETES|-|WAZUH_CURRENT_KUBERNETES_REV|-latest``.
-   -  Edit the manifest file ``wazuh/indexer_stack/wazuh-indexer/cluster/indexer-sts.yaml`` that defines the Wazuh indexer statefulset. Locate the ``containers`` section and replace the ``image`` value with ``wazuh/wazuh-indexer:|WAZUH_CURRENT_KUBERNETES|-|WAZUH_CURRENT_KUBERNETES_REV|-latest``.
-   -  Edit the manifest file ``wazuh/wazuh_managers/wazuh-master-sts.yaml`` that defines the Wazuh manager master statefulset. Locate the ``initContainers`` and ``containers`` section and replace the ``image`` value with ``wazuh/wazuh-manager:|WAZUH_CURRENT_KUBERNETES|-|WAZUH_CURRENT_KUBERNETES_REV|-latest``.
-   -  Edit the manifest file ``wazuh/wazuh_managers/wazuh-workers-sts.yaml`` that defines the Wazuh manager worker statefulset. Locate the ``initContainers`` and ``containers`` section and replace the ``image`` value with ``wazuh/wazuh-manager:|WAZUH_CURRENT_KUBERNETES|-|WAZUH_CURRENT_KUBERNETES_REV|-latest``.
+   -  Edit the manifest file ``wazuh/indexer_stack/wazuh-dashboard/dashboard-deploy.yaml`` that defines the Wazuh dashboard deployment. Locate the ``containers`` section and replace the ``image`` value with ``wazuh/wazuh-dashboard:|WAZUH_CURRENT_KUBERNETES|-|WAZUH_CURRENT_KUBERNETES_REV|``.
+   -  Edit the manifest file ``wazuh/indexer_stack/wazuh-indexer/cluster/indexer-sts.yaml`` that defines the Wazuh indexer statefulset. Locate the ``containers`` section and replace the ``image`` value with ``wazuh/wazuh-indexer:|WAZUH_CURRENT_KUBERNETES|-|WAZUH_CURRENT_KUBERNETES_REV|``.
+   -  Edit the manifest file ``wazuh/wazuh_managers/wazuh-master-sts.yaml`` that defines the Wazuh manager master statefulset. Locate the ``initContainers`` and ``containers`` section and replace the ``image`` value with ``wazuh/wazuh-manager:|WAZUH_CURRENT_KUBERNETES|-|WAZUH_CURRENT_KUBERNETES_REV|``.
+   -  Edit the manifest file ``wazuh/wazuh_managers/wazuh-worker-sts.yaml`` that defines the Wazuh manager worker statefulset. Locate the ``initContainers`` and ``containers`` section and replace the ``image`` value with ``wazuh/wazuh-manager:|WAZUH_CURRENT_KUBERNETES|-|WAZUH_CURRENT_KUBERNETES_REV|``.
 
-#. Edit ``wazuh/base/ingressRoute-tcp-dashboard.yaml`` and replace ``<FQDN_OF_THE_INGRESS>`` with the fully qualified domain name (FQDN) of the external load balancer created for the Traefik service. This configures TLS pass-through for the Wazuh dashboard.
+#. Edit the ``wazuh/base/ingressRoute-tcp-dashboard.yaml`` file and replace ``<FQDN_OF_THE_INGRESS>`` with the fully qualified domain name (FQDN) of the external load balancer created for the Traefik service. This configures TLS pass-through for the Wazuh dashboard.
 
    .. code-block:: yaml
       :emphasize-lines: 10
@@ -194,13 +348,16 @@ You can adjust cluster resources by editing patch files in ``envs/eks/`` or ``en
         tls:
           passthrough: true
 
-   Run the command ``kubectl -n traefik get svc`` to get the FQDN  of the load balancer created for the Traefik service.
+   Run the command ``kubectl -n traefik get svc`` to get the FQDN of the load balancer created for the Traefik service.
+
+   The command output looks similar to this:
 
    .. code-block:: none
       :class: output
+      :emphasize-lines: 2
 
       NAME      TYPE           CLUSTER-IP     EXTERNAL-IP                                                              PORT(S)                                       AGE
-      traefik   LoadBalancer   10.100.34.51   a7ffe29bfcf38420988fd52a698be422-862207742.us-west-1.elb.amazonaws.com   443:30725/TCP,1514:32036/TCP,1515:30354/TCP   6m29s                                                   35s
+      traefik   LoadBalancer   10.100.34.51   a7ffe29bfcf38420988fd52a698be422-862207742.us-west-1.elb.amazonaws.com   443:30725/TCP,1514:32036/TCP,1515:30354/TCP   6m29s
 
 #. Deploy the Wazuh Kubernetes cluster using the ``kustomization`` file:
 
@@ -208,23 +365,29 @@ You can adjust cluster resources by editing patch files in ``envs/eks/`` or ``en
 
       $ kubectl apply -k envs/eks/
 
-Refer to :ref:`verifying-the-deployment` to confirm the deployment is successful.
+   Refer to the :ref:`verifying the deployment <verifying-the-deployment>` section to confirm the deployment is successful.
+
+#. Run the following command to publish the Wazuh manager ports for Wazuh API service using port forwarding:
+
+   .. code-block:: console
+
+      $ kubectl -n wazuh port-forward service/wazuh-api --address <KUBERNETES_HOST_IP_ADDRESS> 55000:55000 &
 
 .. _local-cluster-deployment:
 
 Local cluster deployment
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Follow the steps below to deploy a Wazuh Kubernetes cluster on a local Kubernetes cluster.
+Follow the steps below to deploy a Wazuh Kubernetes cluster on a Local Kubernetes cluster.
 
-#. Clone the Wazuh Kubernetes repository for the necessary services and pods.
+#. Clone the Wazuh Kubernetes repository for the necessary services and pods:
 
    .. code-block:: console
 
-      $ git clone https://github.com/wazuh/wazuh-kubernetes.git -b v|WAZUH_CURRENT_KUBERNETES|-|WAZUH_CURRENT_KUBERNETES_REV| --depth=1
+      $ git clone https://github.com/wazuh/wazuh-kubernetes.git -b |WAZUH_CURRENT_KUBERNETES| --depth=1
       $ cd wazuh-kubernetes
 
-#. Edit ``wazuh/base/ingressRoute-tcp-dashboard.yaml`` and clear its contents for local deployments to prevent the EKS ingress configuration from being applied:
+#. Edit the ``wazuh/base/ingressRoute-tcp-dashboard.yaml`` file and clear its contents for local deployments to prevent the EKS ingress configuration from being applied:
 
    .. code-block:: console
 
@@ -233,13 +396,15 @@ Follow the steps below to deploy a Wazuh Kubernetes cluster on a local Kubernete
 Set up storage class
 ~~~~~~~~~~~~~~~~~~~~
 
-The storage class provisioner varies depending on your cluster. Edit the ``envs/local-env/storage-class.yaml`` file to set the provisioner that matches your cluster type.
+The storage class provisioner varies by cluster. Edit the ``envs/local-env/storage-class.yaml`` file to set the provisioner that matches your cluster type.
 
 Check your storage class by running the command below:
 
 .. code-block:: console
 
-   # kubectl get sc
+   $ kubectl get sc
+
+The command output looks similar to this:
 
 .. code-block:: none
    :class: output
@@ -259,40 +424,49 @@ Perform the steps below to generate the required certificates for the deployment
    .. code-block:: console
 
       $ cd wazuh
-      $ curl -o wazuh-certs-tool.sh  https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-certs-tool-|WAZUH_CURRENT_KUBERNETES|-|WAZUH_CURRENT_KUBERNETES_REV|.sh
-      $ curl -o config.yml https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/config-|WAZUH_CURRENT_KUBERNETES|-|WAZUH_CURRENT_KUBERNETES_REV|.yml
+      $ curl -so wazuh-certs-tool.sh https://packages-staging.xdrsiem.wazuh.info/nightly-backup/2026-09-29/wazuh-certs-tool-|WAZUH_CURRENT|-latest.sh
+      $ curl -o config.yml https://packages-staging.xdrsiem.wazuh.info/nightly-backup/<DATE>/config-|WAZUH_CURRENT|-latest.yml
 
-#. Edit the ``./config.yml`` file and replace node names and IP values with the corresponding names and IP addresses. You need to do this for the Wazuh manager, Wazuh indexer, and Wazuh dashboard nodes.
+#. Edit the ``./config.yml`` file and replace the node names and IP values with the corresponding names and IP addresses. You need to do this for the Wazuh manager, Wazuh indexer, and Wazuh dashboard nodes.
 
    .. code-block:: yaml
 
       nodes:
-        # Wazuh indexer nodes
         indexer:
           - name: indexer
             dns:
               - "wazuh-indexer"
               - "wazuh-indexer.wazuh.svc.cluster.local"
-
-        # Wazuh manager nodes
+              - "wazuh-indexer-0.wazuh-indexer"
+              - "wazuh-indexer-1.wazuh-indexer"
+              - "wazuh-indexer-2.wazuh-indexer"
+              - "wazuh-indexer-0.wazuh-indexer.wazuh.svc.cluster.local"
+              - "wazuh-indexer-1.wazuh-indexer.wazuh.svc.cluster.local"
+              - "wazuh-indexer-2.wazuh-indexer.wazuh.svc.cluster.local"
         manager:
           - name: manager
             dns:
               - "wazuh-api"
               - "wazuh-api.wazuh.svc.cluster.local"
-
-        # Wazuh dashboard nodes
+              - "wazuh-agents"
+              - "wazuh-agents.wazuh.svc.cluster.local"
+              - "wazuh-events"
+              - "wazuh-events.wazuh.svc.cluster.local"
+              - "wazuh-registration"
+              - "wazuh-registration.wazuh.svc.cluster.local"
         dashboard:
           - name: dashboard
             dns:
               - "dashboard"
               - "dashboard.wazuh.svc.cluster.local"
 
-#. Run the script ``/tools/utils/deployment/certificates-conf.sh`` to create and import the certificates via secretGenerator on the ``kustomization.yml`` file.:
+#. Run the script ``/tools/utils/deployment/certificates-conf.sh`` to create and import the certificates via secretGenerator on the ``kustomization.yml`` file.
 
    .. code-block:: console
 
       $ sudo bash ../tools/utils/deployment/certificates-conf.sh --cert --copy --priv
+
+   The command output looks similar to this:
 
    .. code-block:: none
       :class: output
@@ -301,39 +475,170 @@ Perform the steps below to generate the required certificates for the deployment
       Detected manager nodes:   manager
       Detected dashboard nodes: dashboard
       Generating certificates
-      29/04/2026 11:52:47 INFO: Verbose logging redirected to /home/vagrant/wazuh-kubernetes/wazuh/wazuh-certificates-tool.log
-      29/04/2026 11:52:47 INFO: Generating the root certificate.
-      29/04/2026 11:52:48 INFO: Generating Admin certificates.
-      29/04/2026 11:52:48 INFO: Admin certificates created.
-      29/04/2026 11:52:48 INFO: Generating Wazuh indexer certificates.
-      29/04/2026 11:52:48 INFO: Wazuh indexer certificates created.
-      29/04/2026 11:52:48 INFO: Generating Wazuh manager certificates.
-      29/04/2026 11:52:49 INFO: Wazuh manager certificates created.
-      29/04/2026 11:52:49 INFO: Generating Wazuh dashboard certificates.
-      29/04/2026 11:52:49 INFO: Wazuh dashboard certificates created.
+      05/10/2026 16:37:5x INFO: Verbose logging redirected to .../wazuh-certificates-tool.log
+      05/10/2026 16:37:5x INFO: Generating the root certificate.
+      05/10/2026 16:37:5x INFO: Generating Admin certificates.
+      05/10/2026 16:37:5x INFO: Admin certificates created.
+      05/10/2026 16:37:5x INFO: Generating Wazuh indexer certificates.
+      05/10/2026 16:37:5x INFO: Wazuh indexer certificates created.
+      05/10/2026 16:37:5x INFO: Generating Wazuh manager certificates.
+      05/10/2026 16:37:56 INFO: Wazuh manager certificates created.
+      05/10/2026 16:37:56 INFO: Generating Wazuh dashboard certificates.
+      05/10/2026 16:37:57 INFO: Wazuh dashboard certificates created.
       Copying certificates for indexer: indexer -> config/indexer/certs/
       Copying certificates for manager: manager -> config/manager/certs/
       Copying certificates for dashboard: dashboard -> config/dashboard/certs/
-      Setting permissions for indexer indexer (1000:1000)
-      Setting permissions for manager manager (999:999)
-      Setting permissions for dashboard dashboard (1000:1000)
+      Copying root-ca certificates -> config/root-ca/certs/
+      Setting ownership for indexer indexer (1000:1000)
+      Setting ownership for manager manager (1000:1000)
+      Setting ownership for dashboard dashboard (1000:1000)
+      Setting ownership for root-ca certificates (1000:1000)
       Process completed.
+
+Generate credentials
+~~~~~~~~~~~~~~~~~~~~
+
+The Wazuh images ship with no default passwords. Each deployment generates its own before the first deployment. Perform the steps below to generate the required credentials.
+
+#. Download the ``wazuh-credentials.sh`` library. This file provides the credential generation functions used by the script in the next step.
+
+   .. code-block:: console
+
+      $ cd wazuh
+      $ curl -o wazuh-credentials.sh https://raw.githubusercontent.com/wazuh/wazuh-installation-assistant/|WAZUH_CURRENT|/credentials_lib/wazuh-credentials.sh
+
+#. Run the ``credentials-conf.sh`` script to generate the credentials and import them via ``secretGenerator`` on the ``kustomization.yml`` file.
+
+   .. code-block:: console
+
+      $ sudo bash ../tools/utils/deployment/credentials-conf.sh
+
+   The command output looks similar to this:
+
+   .. code-block:: none
+      :class: output
+
+      WAZUH_INDEXER_ADMIN_PASSWORD: generated
+      WAZUH_INDEXER_KIBANASERVER_PASSWORD: generated
+      WAZUH_INDEXER_MANAGER_PASSWORD: generated
+      WAZUH_MANAGER_API_PASSWORD: generated
+      WAZUH_MANAGER_WUI_PASSWORD: generated
+      Credentials written to ./config/credentials: indexer.env, manager.env, dashboard.env
+      Log in to the Wazuh dashboard as 'admin'. Read its password with:
+        grep '^WAZUH_INDEXER_ADMIN_PASSWORD=' ./config/credentials/indexer.env | cut -d= -f2-
+
+   The command creates the ``indexer.env``, ``manager.env``, and ``dashboard.env`` in the ``wazuh/config/credentials/`` directory, holding only the credentials that each component needs. Keep these files for the life of the deployment; every ``kubectl apply -k`` and ``kubectl delete -k`` reads them, and a recreated indexer pod retrieves its credentials from them again.
+
+#. Retrieve the generated dashboard password to log in after deployment.
+
+   .. code-block:: console
+
+      $ grep '^WAZUH_INDEXER_ADMIN_PASSWORD=' wazuh/config/credentials/indexer.env | cut -d= -f2-
+
+Set the cluster key and the agent enrollment password
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The repository ships ``wazuh/secrets/wazuh-cluster-key-secret.yaml`` and ``wazuh/secrets/wazuh-authd-pass-secret.yaml`` with placeholder values. These values must be replaced manually before the first deployment. Perform the steps below to create the cluster key and agent enrollment password.
+
+#. Generate a ``CLUSTER_KEY``. It must be exactly 32 alphanumeric characters.
+
+   .. code-block:: console
+
+      $ openssl rand -hex 16
+
+   The command output looks similar to this:
+
+   .. code-block:: none
+      :class: output
+
+      e9e059de43c6631e0a52e8acb3738c21
+
+#. Encode the key in base64.
+
+   .. code-block:: console
+
+      $ echo -n "<CLUSTER_KEY>" | base64
+
+#. Replacing the ``data.key`` value in ``wazuh/secrets/wazuh-cluster-key-secret.yaml`` with the encoded ``CLUSTER_KEY``.
+
+   .. code-block:: yaml
+      :emphasize-lines: 16
+
+      # Copyright (C) 2019, Wazuh Inc.
+      #
+      # This program is a free software; you can redistribute it
+      # and/or modify it under the terms of the GNU General Public
+      # License (version 2) as published by the FSF - Free Software
+      # Foundation.
+      # Wazuh cluster key secret
+      apiVersion: v1
+      kind: Secret
+      metadata:
+        name: wazuh-cluster-key
+        namespace: wazuh
+      # Placeholder, not a key. Replace it before the first deployment: see
+      # docs/ref/getting-started/installation.md, step 3.3.2.
+      data:
+        key: <CLUSTER_KEY> # string "REPLACETHISCLUSTERKEYBEFOREDEPLO" base64 encoded
+
+   .. warning::
+
+      Every Wazuh manager master and worker presents it ``Cluster_Key`` when joining the Wazuh manager cluster; a node whose key doesn't match the Wazuh manager master's key cannot join the cluster
+
+#. Generate an agent enrollment password ``ENROLLMENT_PASSWORD``.
+
+   .. code-block:: console
+
+      $ openssl rand -base64 24 | tr -dc A-Za-z0-9 | head -c 24
+
+   The command output looks similar to this:
+
+   .. code-block:: none
+      :class: output
+
+      ul0GkIsq9zGa0lVpbB5WOKsF
+
+#. Encode the ``ENROLLMENT_PASSWORD`` in base64
+
+   .. code-block:: console
+
+      $ echo -n "<ENROLLMENT_PASSWORD>" | base64
+
+#. Replacing the ``data.authd.pass`` value in ``wazuh/secrets/wazuh-authd-pass-secret.yaml`` with the encoded ``ENROLLMENT_PASSWORD``.
+
+   .. code-block:: yaml
+      :emphasize-lines: 14
+
+      # Copyright (C) 2019, Wazuh Inc.
+      #
+      # This program is a free software; you can redistribute it
+      # and/or modify it under the terms of the GNU General Public
+      # License (version 2) as published by the FSF - Free Software
+      # Foundation.
+      # Wazuh authd password secret
+      apiVersion: v1
+      kind: Secret
+      metadata:
+        name: wazuh-authd-pass
+        namespace: wazuh
+      data:
+        authd.pass: <ENROLLMENT_PASSWORD> # string "password" base64 encoded
 
 Apply all manifests
 ~~~~~~~~~~~~~~~~~~~
 
-The Wazuh Kubernetes cluster manifest for local cluster types is located in ``envs/local-env``.
+The Wazuh Kubernetes cluster manifest for other cluster types is located in ``envs/local-env``.
 
 You can adjust cluster resources by editing patch files in ``envs/local-env/``. These files override specific values in the base manifests for each environment, such as CPU, memory, and storage for persistent volumes.
 
 .. note::
 
-   Edit the following document to update ``image`` value for the Wazuh indexer, manager, and dashboard.
+   Edit the following document to update ``image`` value for the Wazuh indexer, manager and dashboard.
 
-   -  Edit the manifest file ``wazuh/indexer_stack/wazuh-dashboard/dashboard-deploy.yaml`` that defines the Wazuh dashboard deployment. Locate the ``containers`` section and replace the ``image`` value with ``wazuh/wazuh-dashboard:|WAZUH_CURRENT_KUBERNETES|-|WAZUH_CURRENT_KUBERNETES_REV|-latest``.
-   -  Edit the manifest file ``wazuh/indexer_stack/wazuh-indexer/cluster/indexer-sts.yaml`` that defines the Wazuh indexer statefulset. Locate the ``containers`` section and replace the ``image`` value with ``wazuh/wazuh-indexer:|WAZUH_CURRENT_KUBERNETES|-|WAZUH_CURRENT_KUBERNETES_REV|-latest``.
-   -  Edit the manifest file ``wazuh/wazuh_managers/wazuh-master-sts.yaml`` that defines the Wazuh manager master statefulset. Locate the ``initContainers`` and ``containers`` section and replace the ``image`` value with ``wazuh/wazuh-manager:|WAZUH_CURRENT_KUBERNETES|-|WAZUH_CURRENT_KUBERNETES_REV|-latest``.
-   -  Edit the manifest file ``wazuh/wazuh_managers/wazuh-workers-sts.yaml`` that defines the Wazuh manager worker statefulset. Locate the ``initContainers`` and ``containers`` section and replace the ``image`` value with ``wazuh/wazuh-manager:|WAZUH_CURRENT_KUBERNETES|-|WAZUH_CURRENT_KUBERNETES_REV|-latest``.
+   -  Edit the manifest file ``wazuh/indexer_stack/wazuh-dashboard/dashboard-deploy.yaml`` that defines the Wazuh dashboard deployment. Locate the ``containers`` section and replace the ``image`` value with ``wazuh/wazuh-dashboard:|WAZUH_CURRENT_KUBERNETES|-|WAZUH_CURRENT_KUBERNETES_REV|``.
+   -  Edit the manifest file ``wazuh/indexer_stack/wazuh-indexer/cluster/indexer-sts.yaml`` that defines the Wazuh indexer statefulset. Locate the ``containers`` section and replace the ``image`` value with ``wazuh/wazuh-indexer:|WAZUH_CURRENT_KUBERNETES|-|WAZUH_CURRENT_KUBERNETES_REV|``.
+   -  Edit the manifest file ``wazuh/wazuh_managers/wazuh-master-sts.yaml`` that defines the Wazuh manager master statefulset. Locate the ``initContainers`` and ``containers`` section and replace the ``image`` value with ``wazuh/wazuh-manager:|WAZUH_CURRENT_KUBERNETES|-|WAZUH_CURRENT_KUBERNETES_REV|``.
+   -  Edit the manifest file ``wazuh/wazuh_managers/wazuh-worker-sts.yaml`` that defines the Wazuh manager worker statefulset. Locate the ``initContainers`` and ``containers`` section and replace the ``image`` value with ``wazuh/wazuh-manager:|WAZUH_CURRENT_KUBERNETES|-|WAZUH_CURRENT_KUBERNETES_REV|``.
 
 #. Run the command below to deploy Traefik CRD:
 
@@ -341,6 +646,8 @@ You can adjust cluster resources by editing patch files in ``envs/local-env/``. 
 
       $ cd ..
       $ kubectl apply -f traefik/crd/
+
+   The command output looks similar to this:
 
    .. code-block:: none
       :class: output
@@ -356,7 +663,7 @@ You can adjust cluster resources by editing patch files in ``envs/local-env/``. 
       customresourcedefinition.apiextensions.k8s.io/tlsstores.traefik.io created
       customresourcedefinition.apiextensions.k8s.io/traefikservices.traefik.io created
 
-#. Deploy the Wazuh cluster using the ``kustomization`` file:
+#. Deploy the Wazuh Kubernetes cluster using the ``kustomization`` file:
 
    .. code-block:: console
 
@@ -368,21 +675,30 @@ You can adjust cluster resources by editing patch files in ``envs/local-env/``. 
 
       .. code-block:: console
 
-         # docker pull wazuh/wazuh-indexer:|WAZUH_CURRENT_KUBERNETES|
-         # docker pull wazuh/wazuh-manager:|WAZUH_CURRENT_KUBERNETES|
-         # docker pull wazuh/wazuh-dashboard:|WAZUH_CURRENT_KUBERNETES|
-         # minikube image load wazuh/wazuh-indexer:|WAZUH_CURRENT_KUBERNETES|
-         # minikube image load wazuh/wazuh-manager:|WAZUH_CURRENT_KUBERNETES|
-         # minikube image load wazuh/wazuh-dashboard:|WAZUH_CURRENT_KUBERNETES|
+         $ docker pull wazuh/wazuh-indexer:|WAZUH_CURRENT_KUBERNETES|-|WAZUH_CURRENT_KUBERNETES_REV|
+         $ docker pull wazuh/wazuh-manager:|WAZUH_CURRENT_KUBERNETES|-|WAZUH_CURRENT_KUBERNETES_REV|
+         $ docker pull wazuh/wazuh-dashboard:|WAZUH_CURRENT_KUBERNETES|-|WAZUH_CURRENT_KUBERNETES_REV|
+         $ minikube image load wazuh/wazuh-indexer:|WAZUH_CURRENT_KUBERNETES|-|WAZUH_CURRENT_KUBERNETES_REV|
+         $ minikube image load wazuh/wazuh-manager:|WAZUH_CURRENT_KUBERNETES|-|WAZUH_CURRENT_KUBERNETES_REV|
+         $ minikube image load wazuh/wazuh-dashboard:|WAZUH_CURRENT_KUBERNETES|-|WAZUH_CURRENT_KUBERNETES_REV|
 
-#. Run the following commands to expose the Wazuh manager ports for agent enrollment and connection service using port forwarding:
+#. Run the following commands to expose the Wazuh manager ports for agent enrollment and Wazuh API service using port forwarding:
 
    .. code-block:: console
 
-      $ kubectl -n wazuh port-forward service/wazuh-events 1514:1514
-      $ kubectl -n wazuh port-forward service/wazuh-registration 1515:1515
+      $ kubectl -n wazuh port-forward service/wazuh-agents --address <KUBERNETES_HOST_IP_ADDRESS> 1517:1517 > /tmp/wazuh-agent-port-forward.log 2>&1 &
+      $ kubectl -n wazuh port-forward service/wazuh-api --address <KUBERNETES_HOST_IP_ADDRESS> 55000:55000 &
 
-#. Access the dashboard with port forwarding. The Wazuh Dashboard will be accessible on ``https://<KUBERNETES_HOST_IP_ADDRESS>:8443``:
+   .. note::
+
+      Older versions of Wazuh agents (version 4.x) use the ports 1514 and 1515 for agent enrollment and connection. Run the command below to expose ports 1514 and 1515.
+
+      .. code-block:: console
+
+         $ kubectl -n wazuh port-forward service/wazuh-agents --address <KUBERNETES_HOST_IP_ADDRESS> 1514:1514 > /tmp/wazuh-agent-port-forward.log 2>&1 &
+         $ kubectl -n wazuh port-forward service/wazuh-agents --address <KUBERNETES_HOST_IP_ADDRESS> 1515:1515 > /tmp/wazuh-agent-port-forward.log 2>&1 &
+
+#. Access the Wazuh dashboard using port forwarding. The Wazuh dashboard will be accessible on ``https://<KUBERNETES_HOST_IP_ADDRESS>:8443``:
 
    .. code-block:: console
 
@@ -390,16 +706,47 @@ You can adjust cluster resources by editing patch files in ``envs/local-env/``. 
 
    Replace ``<KUBERNETES_HOST_IP_ADDRESS>`` with the IP address of the Kubernetes endpoint:
 
-   .. note::
+   Refer to the :ref:`verifying the deployment <verifying-the-deployment>` section to confirm the deployment is successful.
 
-      You can run the process in background by adding ``&`` to the ``port-forward`` command.
+Allow agent traffic to the Wazuh manager
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-      .. code-block:: console
+Perform the following steps to permit Wazuh agent traffic to the Wazuh manager.
 
-         $ kubectl -n wazuh port-forward service/wazuh-events 1514:1514 &
-         $ kubectl -n wazuh port-forward service/wazuh-registration 1515:1515 &
+#. Create the network policy manifest ``allow-agents-to-manager-np.yaml``.
 
-Refer to the :ref:`verifying-the-deployment` section to confirm the deployment is successful.
+   .. code-block:: yaml
+
+      apiVersion: networking.k8s.io/v1
+      kind: NetworkPolicy
+      metadata:
+        name: allow-agents-to-manager
+        namespace: wazuh
+      spec:
+        podSelector:
+          matchLabels:
+            app: wazuh-manager
+        policyTypes:
+          - Ingress
+        ingress:
+          - from:
+              - ipBlock:
+                  cidr: 0.0.0.0/0
+            ports:
+              - port: 1514
+                protocol: TCP
+              - port: 1514
+                protocol: UDP
+              - port: 1515
+                protocol: TCP
+              - port: 1517
+                protocol: TCP
+
+#. Apply the manifest ``allow-agents-to-manager-np.yaml``.
+
+   .. code-block:: console
+
+      $ kubectl apply -f allow-agents-to-manager-np.yaml
 
 .. _verifying-the-deployment:
 
@@ -512,16 +859,18 @@ If you created domain names for the services, access the dashboard at ``https://
 
 Check the services to view ``EXTERNAL-IP``:
 
-   .. code-block:: console
+.. code-block:: console
 
-      # kubectl -n traefik get svc
+   # kubectl -n traefik get svc
 
-   .. code-block:: none
-      :class: output
+The command output looks similar to this:
 
-      NAME                                 TYPE           CLUSTER-IP      EXTERNAL-IP                                                                     PORT(S)                                                    AGE
-      ingress-Traefik-controller             LoadBalancer   10.100.228.67   a0c363db4315d484fa38751820a9e89b-e1811181631efef0.elb.us-west-1.amazonaws.com   80:30561/TCP,443:32533/TCP,1514:31784/TCP,1515:31274/TCP   36s
-      ingress-Traefik-controller-admission   ClusterIP      10.100.118.85   <none>                                                                          443/TCP                                                    35s
+.. code-block:: none
+   :class: output
+
+   NAME                                 TYPE           CLUSTER-IP      EXTERNAL-IP                                                                     PORT(S)                                                    AGE
+   ingress-Traefik-controller             LoadBalancer   10.100.228.67   a0c363db4315d484fa38751820a9e89b-e1811181631efef0.elb.us-west-1.amazonaws.com   80:30561/TCP,443:32533/TCP,1514:31784/TCP,1515:31274/TCP   36s
+   ingress-Traefik-controller-admission   ClusterIP      10.100.118.85   <none>                                                                          443/TCP                                                    35s
 
 .. note::
 
@@ -531,57 +880,73 @@ Check the services to view ``EXTERNAL-IP``:
 
       # kubectl -n wazuh port-forward --address <KUBERNETES_HOST_IP_ADDRESS> service/dashboard 8443:443 > /tmp/wazuh-dashboard-port-forward.log 2>&1 &
 
-The Wazuh dashboard is accessible at ``https://<KUBERNETES_HOST>:8443``.
+The Wazuh dashboard is accessible at ``https://<KUBERNETES_HOST_IP_ADDRESS>:8443``.
 
 The default credentials are ``admin:admin``.
 
 Deploying a Wazuh agent
 -----------------------
 
-This section provides steps to enroll a Wazuh agent in a Wazuh manager running in a Kubernetes environment and deploy a Wazuh agent on Kubernetes.
+This section provide steps to enroll a Wazuh agent in a Wazuh manager running in a Kubernetes environment and deploy a Wazuh agent on Kubernetes.
 
 .. contents::
    :local:
    :depth: 1
    :backlinks: none
 
+.. _kubernetes-creating-enrollment-token:
+
+Creating an enrollment token
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Perform the following steps to generate an enrollment token for the Wazuh agent deployment.
+
+#. On the Wazuh dashboard, Click **☰** to open the menu and navigate to **Agent management** > **Enrollment tokens**. Click on **Create token**.
+
+#. Fill in the following configuration information
+
+   #. **Address**: Provide the Wazuh manager address (For example: ``wazuh-agents.wazuh.svc.cluster.local``) .
+   #. Toggle **Embed CA** to include the CA certificate in the token.
+   #. Click **Create**.
+
+   .. thumbnail:: /images/deployment-options/deploying-with-kubernetes/kubernetes-enrollment-token-address.png
+      :title: Create enrollment token
+      :alt: Create enrollment token form with the Address field
+      :align: center
+      :width: 80%
+
+   .. thumbnail:: /images/deployment-options/deploying-with-kubernetes/kubernetes-enrollment-token-embed-ca.png
+      :title: Embed CA option
+      :alt: Create enrollment token form with the Embed CA option enabled
+      :align: center
+      :width: 80%
+
+#. Copy the enrollment token created. This will be required for the Wazuh agent deployment.
+
 Enrolling a Wazuh agent
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 Follow the steps below to enroll a Wazuh agent in a Wazuh manager running in a Kubernetes environment.
 
-#. Execute this command on the Kubernetes cluster and note the external IP of the load balancer:
-
-   .. code-block:: console
-
-      # kubectl -n traefik get svc
-
-   .. code-block:: none
-      :class: output
-
-      NAME                                 TYPE           CLUSTER-IP      EXTERNAL-IP                                                                     PORT(S)                                                    AGE
-      ingress-Traefik-controller             LoadBalancer   10.100.228.67   a0c363db4315d484fa38751820a9e89b-e1811181631efef0.elb.us-west-1.amazonaws.com   80:30561/TCP,443:32533/TCP,1514:31784/TCP,1515:31274/TCP   36s
-      ingress-Traefik-controller-admission   ClusterIP      10.100.118.85   <none>                                                                          443/TCP                                                    35s
-
 #. Note the following Wazuh agent deployment variables to simplify the installation, enrollment, and configuration process of the Wazuh agent.
 
-   -  ``WAZUH_MANAGER``: External IP of the load balancer.
+   -  ``WAZUH_ENROLLMENT_TOKEN``: The enrollment token generated for the agent deployment.
    -  ``WAZUH_AGENT_NAME``: Name of the new Wazuh agent to be enrolled.
 
 #. Use the deployment variables to install the Wazuh agent using the :doc:`Wazuh agent installation </installation-guide/wazuh-agent/index>` guide. The example below shows the command to install the Wazuh agent on a Linux endpoint after adding the :ref:`Wazuh repository <agent-installation-add-wazuh-repository>`.
 
    .. code-block:: console
 
-      # WAZUH_MANAGER="<WAZUH_MANAGER>" \
+      $ sudo WAZUH_ENROLLMENT_TOKEN="<ENROLLMENT_TOKEN>" \
       WAZUH_AGENT_NAME="<WAZUH_AGENT_NAME>" \
       apt-get install -y wazuh-agent
 
    Replace:
 
-   -  ``<WAZUH_MANAGER>`` with the external IP address of the load balancer.
+   -  ``<ENROLLMENT_TOKEN>`` with the Wazuh agent enrollment token generated in the previous :ref:`section <kubernetes-creating-enrollment-token>`.
    -  ``<WAZUH_AGENT_NAME>`` with the Wazuh agent name that will be used for enrollment.
 
-#. Enable and start the Wazuh agent service with the following commands.
+   Enable and start the Wazuh agent service with the following commands.
 
    .. code-block:: console
 
@@ -606,447 +971,124 @@ This is the most common approach for full-cluster monitoring. Each node runs one
 
 #. Create the Wazuh agent DaemonSet manifest ``wazuh-agent-daemonset.yaml``:
 
-   .. tabs::
+   .. code-block:: yaml
+      :emphasize-lines: 18
 
-      .. group-tab:: EKS user
-
-         .. code-block:: yaml
-            :emphasize-lines: 84,90,167
-
-            apiVersion: v1
-            kind: Namespace
-            metadata:
-              name: wazuh-daemonset
-            ---
-            apiVersion: apps/v1
-            kind: DaemonSet
-            metadata:
-              name: wazuh-agent
-              namespace: wazuh-daemonset
-            spec:
-              selector:
-                matchLabels:
-                  app: wazuh-agent
-              template:
-                metadata:
-                  labels:
-                    app: wazuh-agent
-                spec:
-                  serviceAccountName: default
-                  terminationGracePeriodSeconds: 20
-
-                  #        INIT CONTAINERS
-                  initContainers:
-                    # 1) Clean stale PID / lock files
-                    - name: cleanup-ossec-stale
-                      image: busybox:1.36
-                      imagePullPolicy: IfNotPresent
-                      command: ["/bin/sh", "-lc"]
-                      args:
-                        - |
-                          set -e
-                          echo "[init] Cleaning old locks..."
-                          mkdir -p /agent/var/run /agent/queue/ossec
-                          rm -f /agent/var/run/*.pid || true
-                          rm -f /agent/queue/ossec/*.lock || true
-                      volumeMounts:
-                        - name: ossec-data
-                          mountPath: /agent
-
-                    # 2) Seed /var/ossec into hostPath (first run only)
-                    - name: seed-ossec-tree
-                      image: wazuh/wazuh-agent:|WAZUH_CURRENT_KUBERNETES|-|WAZUH_CURRENT_KUBERNETES_REV|-latest
-                      imagePullPolicy: IfNotPresent
-                      command: ["/bin/sh", "-lc"]
-                      args:
-                        - |
-                          set -e
-                          echo "[init] Checking if seeding is required..."
-                          if [ ! -d /agent/bin ]; then
-                            echo "[init] Seeding /var/ossec to hostPath..."
-                            tar -C /var/ossec -cf - . | tar -C /agent -xpf -
-                          else
-                            echo "[init] Existing data found, skipping seed"
-                          fi
-                      volumeMounts:
-                        - name: ossec-data
-                          mountPath: /agent
-
-                    # 3) Fix ownership/permissions
-                    - name: fix-permissions
-                      image: busybox:1.36
-                      imagePullPolicy: IfNotPresent
-                      command: ["/bin/sh", "-lc"]
-                      args:
-                        - |
-                          set -e
-                          echo "[init] Fixing permissions..."
-                          for d in etc logs queue var rids tmp "active-response"; do
-                            [ -d "/agent/$d" ] && chown -R 999:999 "/agent/$d"
-                          done
-                          chown -R 0:0 /agent/bin /agent/lib || true
-                          find /agent/bin -type f -exec chmod 0755 {} \; || true
-                      volumeMounts:
-                        - name: ossec-data
-                          mountPath: /agent
-
-                    # 4) Write ossec.conf with PASSWORD ENROLLMENT
-                    - name: write-ossec-config
-                      image: busybox:1.36
-                      imagePullPolicy: IfNotPresent
-                      env:
-                        - name: WAZUH_MANAGER
-                          value: "<EXTERNAL_IP_WAZUH_EVENTS>"
-                        - name: WAZUH_PORT
-                          value: "1514"
-                        - name: WAZUH_PROTOCOL
-                          value: "tcp"
-                        - name: WAZUH_REGISTRATION_SERVER
-                          value: "<EXTERNAL_IP_WAZUH_REGISTRATION>"
-                        - name: WAZUH_REGISTRATION_PORT
-                          value: "1515"
-                        - name: NODE_NAME
-                          valueFrom:
-                            fieldRef:
-                              fieldPath: spec.nodeName
-                      command: ["/bin/sh", "-lc"]
-                      args:
-                        - |
-                          set -e
-                          echo "[init] Writing ossec.conf..."
-                          mkdir -p /agent/etc
-
-
-                          cat > /agent/etc/ossec.conf <<EOF
-                          <ossec_config>
-                            <client>
-                              <server>
-                                <address>${WAZUH_MANAGER}</address>
-                                <port>${WAZUH_PORT}</port>
-                                <protocol>${WAZUH_PROTOCOL}</protocol>
-                              </server>
-
-                              <enrollment>
-                                <enabled>yes</enabled>
-                                <agent_name>${NODE_NAME}</agent_name>
-                                <manager_address>${WAZUH_REGISTRATION_SERVER}</manager_address>
-                                <port>${WAZUH_REGISTRATION_PORT}</port>
-                                <authorization_pass_path>/var/ossec/etc/authd.pass</authorization_pass_path>
-                              </enrollment>
-                            </client>
-                          </ossec_config>
-                          EOF
-
-                          chown 999:999 /agent/etc/ossec.conf
-                          chmod 0640 /agent/etc/ossec.conf
-                      volumeMounts:
-                        - name: ossec-data
-                          mountPath: /agent
-
-                    # 5) Copy authd.pass from Secret and fix ownership
-                    - name: fix-authd-pass-perms
-                      image: busybox:1.36
-                      imagePullPolicy: IfNotPresent
-                      command: ["/bin/sh", "-lc"]
-                      args:
-                        - |
-                          set -e
-                          echo "[init] Copying authd.pass from Secret..."
-                          mkdir -p /agent/etc
-                          cp /secret/authd.pass /agent/etc/authd.pass
-                          chown 0:999 /agent/etc/authd.pass
-                          chmod 0640 /agent/etc/authd.pass
-                          ls -l /agent/etc/authd.pass
-                      volumeMounts:
-                        - name: ossec-data
-                          mountPath: /agent
-                        - name: wazuh-authd-pass
-                          mountPath: /secret/authd.pass
-                          subPath: authd.pass
-                          readOnly: true
-
-
-                  #        MAIN CONTAINER
-                  containers:
-                    - name: wazuh-agent
-                      image: wazuh/wazuh-agent:|WAZUH_CURRENT_KUBERNETES|-|WAZUH_CURRENT_KUBERNETES_REV|-latest
-                      imagePullPolicy: IfNotPresent
-                      command: ["/bin/sh", "-lc"]
-                      args:
-                        - |
-                          set -e
-                          ln -sf /var/ossec/etc/ossec.conf /etc/ossec.conf || true
-                          exec /init
-                      env:
-                        - name: WAZUH_MANAGER
-                          value: "<EXTERNAL_IP_WAZUH_EVENTS>"
-                        - name: NODE_NAME
-                          valueFrom:
-                            fieldRef:
-                              fieldPath: spec.nodeName
-                      securityContext:
-                        runAsUser: 0
-                        allowPrivilegeEscalation: true
-                        capabilities:
-                          add: ["SETGID","SETUID"]
-                      volumeMounts:
-                        - name: varlog
-                          mountPath: /var/log
-                          readOnly: true
-                        - name: ossec-data
-                          mountPath: /var/ossec
-
-
-                  #            VOLUMES
-                  volumes:
-                    - name: varlog
-                      hostPath:
-                        path: /var/log
-                        type: Directory
-                    - name: ossec-data
-                      hostPath:
-                        path: /var/lib/wazuh
-                        type: DirectoryOrCreate
-                    - name: wazuh-authd-pass
-                      secret:
-                        secretName: wazuh-authd-pass
-
-      .. group-tab:: Other cluster types
-
-         .. code-block:: yaml
-            :emphasize-lines: 84,90,167
-
-            apiVersion: v1
-            kind: Namespace
-            metadata:
-              name: wazuh-daemonset
-            ---
-            apiVersion: apps/v1
-            kind: DaemonSet
-            metadata:
-              name: wazuh-agent
-              namespace: wazuh-daemonset
-            spec:
-              selector:
-                matchLabels:
-                  app: wazuh-agent
-              template:
-                metadata:
-                  labels:
-                    app: wazuh-agent
-                spec:
-                  serviceAccountName: default
-                  terminationGracePeriodSeconds: 20
-
-                  #        INIT CONTAINERS
-                  initContainers:
-                    # 1) Clean stale PID / lock files
-                    - name: cleanup-ossec-stale
-                      image: busybox:1.36
-                      imagePullPolicy: IfNotPresent
-                      command: ["/bin/sh", "-lc"]
-                      args:
-                        - |
-                          set -e
-                          echo "[init] Cleaning old locks..."
-                          mkdir -p /agent/var/run /agent/queue/ossec
-                          rm -f /agent/var/run/*.pid || true
-                          rm -f /agent/queue/ossec/*.lock || true
-                      volumeMounts:
-                        - name: ossec-data
-                          mountPath: /agent
-
-                    # 2) Seed /var/ossec into hostPath (first run only)
-                    - name: seed-ossec-tree
-                      image: wazuh/wazuh-agent:|WAZUH_CURRENT_KUBERNETES|-|WAZUH_CURRENT_KUBERNETES_REV|-latest
-                      imagePullPolicy: IfNotPresent
-                      command: ["/bin/sh", "-lc"]
-                      args:
-                        - |
-                          set -e
-                          echo "[init] Checking if seeding is required..."
-                          if [ ! -d /agent/bin ]; then
-                            echo "[init] Seeding /var/ossec to hostPath..."
-                            tar -C /var/ossec -cf - . | tar -C /agent -xpf -
-                          else
-                            echo "[init] Existing data found, skipping seed"
-                          fi
-                      volumeMounts:
-                        - name: ossec-data
-                          mountPath: /agent
-
-                    # 3) Fix ownership/permissions
-                    - name: fix-permissions
-                      image: busybox:1.36
-                      imagePullPolicy: IfNotPresent
-                      command: ["/bin/sh", "-lc"]
-                      args:
-                        - |
-                          set -e
-                          echo "[init] Fixing permissions..."
-                          for d in etc logs queue var rids tmp "active-response"; do
-                            [ -d "/agent/$d" ] && chown -R 999:999 "/agent/$d"
-                          done
-                          chown -R 0:0 /agent/bin /agent/lib || true
-                          find /agent/bin -type f -exec chmod 0755 {} \; || true
-                      volumeMounts:
-                        - name: ossec-data
-                          mountPath: /agent
-
-                    # 4) Write ossec.conf with PASSWORD ENROLLMENT
-                    - name: write-ossec-config
-                      image: busybox:1.36
-                      imagePullPolicy: IfNotPresent
-                      env:
-                        - name: WAZUH_MANAGER
-                          value: "<EXTERNAL_IP_WAZUH_EVENTS>"
-                        - name: WAZUH_PORT
-                          value: "1514"
-                        - name: WAZUH_PROTOCOL
-                          value: "tcp"
-                        - name: WAZUH_REGISTRATION_SERVER
-                          value: "<EXTERNAL_IP_WAZUH_REGISTRATION>"
-                        - name: WAZUH_REGISTRATION_PORT
-                          value: "1515"
-                        - name: NODE_NAME
-                          valueFrom:
-                            fieldRef:
-                              fieldPath: spec.nodeName
-                      command: ["/bin/sh", "-lc"]
-                      args:
-                        - |
-                          set -e
-                          echo "[init] Writing ossec.conf..."
-                          mkdir -p /agent/etc
-
-
-                          cat > /agent/etc/ossec.conf <<EOF
-                          <ossec_config>
-                            <client>
-                              <server>
-                                <address>${WAZUH_MANAGER}</address>
-                                <port>${WAZUH_PORT}</port>
-                                <protocol>${WAZUH_PROTOCOL}</protocol>
-                              </server>
-
-                              <enrollment>
-                                <enabled>yes</enabled>
-                                <agent_name>${NODE_NAME}</agent_name>
-                                <manager_address>${WAZUH_REGISTRATION_SERVER}</manager_address>
-                                <port>${WAZUH_REGISTRATION_PORT}</port>
-                                <authorization_pass_path>/var/ossec/etc/authd.pass</authorization_pass_path>
-                              </enrollment>
-                            </client>
-                          </ossec_config>
-                          EOF
-
-                          chown 999:999 /agent/etc/ossec.conf
-                          chmod 0640 /agent/etc/ossec.conf
-                      volumeMounts:
-                        - name: ossec-data
-                          mountPath: /agent
-
-                    # 5) Copy authd.pass from Secret and fix ownership
-                    - name: fix-authd-pass-perms
-                      image: busybox:1.36
-                      imagePullPolicy: IfNotPresent
-                      command: ["/bin/sh", "-lc"]
-                      args:
-                        - |
-                          set -e
-                          echo "[init] Copying authd.pass from Secret..."
-                          mkdir -p /agent/etc
-                          cp /secret/authd.pass /agent/etc/authd.pass
-                          chown 0:999 /agent/etc/authd.pass
-                          chmod 0640 /agent/etc/authd.pass
-                          ls -l /agent/etc/authd.pass
-                      volumeMounts:
-                        - name: ossec-data
-                          mountPath: /agent
-                        - name: wazuh-authd-pass
-                          mountPath: /secret/authd.pass
-                          subPath: authd.pass
-                          readOnly: true
-
-
-                  #        MAIN CONTAINER
-                  containers:
-                    - name: wazuh-agent
-                      image: wazuh/wazuh-agent:|WAZUH_CURRENT_KUBERNETES|-|WAZUH_CURRENT_KUBERNETES_REV|-latest
-                      imagePullPolicy: IfNotPresent
-                      command: ["/bin/sh", "-lc"]
-                      args:
-                        - |
-                          set -e
-                          ln -sf /var/ossec/etc/ossec.conf /etc/ossec.conf || true
-                          exec /init
-                      env:
-                        - name: WAZUH_MANAGER
-                          value: "<EXTERNAL_IP_WAZUH_EVENTS>"
-                        - name: NODE_NAME
-                          valueFrom:
-                            fieldRef:
-                              fieldPath: spec.nodeName
-                      securityContext:
-                        runAsUser: 0
-                        allowPrivilegeEscalation: true
-                        capabilities:
-                          add: ["SETGID","SETUID"]
-                      volumeMounts:
-                        - name: varlog
-                          mountPath: /var/log
-                          readOnly: true
-                        - name: dockersock
-                          mountPath: /var/run/docker.sock
-                          readOnly: true
-                        - name: ossec-data
-                          mountPath: /var/ossec
-
-
-                  #            VOLUMES
-                  volumes:
-                    - name: varlog
-                      hostPath:
-                        path: /var/log
-                        type: Directory
-                    - name: dockersock
-                      hostPath:
-                        path: /var/run/docker.sock
-                        type: Socket
-                    - name: ossec-data
-                      hostPath:
-                        path: /var/lib/wazuh
-                        type: DirectoryOrCreate
-                    - name: wazuh-authd-pass
-                      secret:
-                        secretName: wazuh-authd-pass
-
-   .. note::
-
-      The manifest in this example is for the Docker container runtime.
+      apiVersion: v1
+      kind: Namespace
+      metadata:
+        name: wazuh-daemonset
+      ---
+      # Replace TOKEN_PLACEHOLDER with a real enrollment token, minted on the
+      # manager with:
+      #   wazuh-manager-authd --create-enrollment-token \
+      #     --address wazuh-agents.wazuh.svc.cluster.local
+      # (the --address value must be in the manager listener certificate's SAN)
+      apiVersion: v1
+      kind: Secret
+      metadata:
+        name: wazuh-enrollment-token
+        namespace: wazuh-daemonset
+      type: Opaque
+      stringData:
+        token: "<ENROLLMENT_TOKEN>"
+      ---
+      apiVersion: apps/v1
+      kind: DaemonSet
+      metadata:
+        name: wazuh-agent
+        namespace: wazuh-daemonset
+      spec:
+        selector:
+          matchLabels:
+            app: wazuh-agent
+        template:
+          metadata:
+            labels:
+              app: wazuh-agent
+          spec:
+            automountServiceAccountToken: false
+            terminationGracePeriodSeconds: 20
+            initContainers:
+              # Clear stale PID/lock files left behind by an unclean restart
+              - name: cleanup-ossec-stale
+                image: busybox:1.36
+                imagePullPolicy: IfNotPresent
+                command: ["/bin/sh", "-lc"]
+                args:
+                  - |
+                    set -e
+                    mkdir -p /agent/var/run /agent/queue/ossec
+                    rm -f /agent/var/run/*.pid || true
+                    rm -f /agent/queue/ossec/*.lock || true
+                volumeMounts:
+                  - name: ossec-data
+                    mountPath: /agent
+              # Seed /var/ossec into the persistent hostPath on first run only,
+              - name: prepare-ossec-tree
+                image: public.ecr.aws/wazuh-cicd/wazuh/wazuh-agent:|WAZUH_CURRENT|-latest
+                imagePullPolicy: IfNotPresent
+                command: ["/bin/sh", "-lc"]
+                args:
+                  - |
+                    set -e
+                    if [ ! -d /agent/bin ]; then
+                      cp -a /var/ossec/. /agent/
+                    fi
+                    for d in etc logs queue var rids tmp "active-response"; do
+                      [ -d "/agent/$d" ] && chown -R wazuh:wazuh "/agent/$d"
+                    done
+                    chown -R 0:0 /agent/bin /agent/lib || true
+                    find /agent/bin -type f -exec chmod 0755 {} \; || true
+                volumeMounts:
+                  - name: ossec-data
+                    mountPath: /agent
+            containers:
+              - name: wazuh-agent
+                image: public.ecr.aws/wazuh-cicd/wazuh/wazuh-agent:|WAZUH_CURRENT|-latest
+                imagePullPolicy: IfNotPresent
+                env:
+                  - name: NODE_NAME
+                    valueFrom:
+                      fieldRef:
+                        fieldPath: spec.nodeName
+                  - name: WAZUH_AGENT_NAME
+                    value: "wazuh-agent-$(NODE_NAME)"
+                  - name: WAZUH_ENROLLMENT_TOKEN
+                    valueFrom:
+                      secretKeyRef:
+                        name: wazuh-enrollment-token
+                        key: token
+                securityContext:
+                  runAsUser: 0
+                  allowPrivilegeEscalation: true
+                  capabilities:
+                    add: ["SETGID", "SETUID"]
+                volumeMounts:
+                  - name: varlog
+                    mountPath: /var/log
+                    readOnly: true
+                  - name: ossec-data
+                    mountPath: /var/ossec
+            volumes:
+              - name: varlog
+                hostPath:
+                  path: /var/log
+                  type: Directory
+              - name: ossec-data
+                hostPath:
+                  path: /var/lib/wazuh
+                  type: DirectoryOrCreate
 
    Replace:
 
-   -  ``<EXTERNAL_IP_WAZUH_EVENTS>`` with the external IP of the ``wazuh-events`` load balancer.
-   -  ``<EXTERNAL_IP_WAZUH_REGISTRATION>`` with the external IP of the ``wazuh_registration`` load balancer.
+   -  ``<ENROLLMENT_TOKEN>`` with the Wazuh agent enrollment token generated in the previous :ref:`section <kubernetes-creating-enrollment-token>`.
 
 #. Create the namespace:
 
    .. code-block:: console
 
       $ kubectl create namespace wazuh-daemonset
-
-#. Create the Kubernetes secret for the enrollment password:
-
-   .. code-block:: console
-
-      $ kubectl create secret generic wazuh-authd-pass \
-        -n wazuh-daemonset \
-        --from-literal=authd.pass=password
-
-   .. note::
-
-      The default password for enrolling the Wazuh agent in your Kubernetes cluster is ``password``. This value is stored in the ``/var/wazuh-manager/etc/authd.pass`` file on the Wazuh Manager.
 
 #. Deploy the Wazuh agent:
 
@@ -1060,9 +1102,12 @@ This is the most common approach for full-cluster monitoring. Each node runs one
 
       $ kubectl get pods -n wazuh-daemonset -o wide
 
+   The command output looks similar to this:
+
    .. code-block:: none
       :class: output
 
+      $ kubectl get pods -n wazuh-daemonset -o wide
       NAME                READY   STATUS    RESTARTS   AGE   IP          NODE     NOMINATED NODE   READINESS GATES
       wazuh-agent-t2fwl   1/1     Running   0          21m   10.42.0.9   server   <none>           <none>
 
@@ -1073,529 +1118,162 @@ The sidecar approach is ideal for targeted monitoring of sensitive applications 
 
 #. Modify your application's deployment to include the Wazuh agent container. In the example below, we deploy Wazuh alongside the Apache Tomcat application from the ``wazuh-agent-sidecar.yaml`` deployment file:
 
-   .. tabs::
+   .. code-block:: yaml
+      :emphasize-lines: 125
 
-      .. group-tab:: EKS user
-
-         .. code-block:: yaml
-            :emphasize-lines: 72,78,178,184
-
-            apiVersion: v1
-            kind: Namespace
-            metadata:
-              name: wazuh-sidecar
-            ---
-            apiVersion: apps/v1
-            kind: StatefulSet
-            metadata:
-              name: tomcat-wazuh-agent
-              namespace: wazuh-sidecar
+      apiVersion: v1
+      kind: Namespace
+      metadata:
+        name: wazuh-sidecar
+      ---
+      # Replace TOKEN_PLACEHOLDER with a real enrollment token - see the
+      apiVersion: v1
+      kind: Secret
+      metadata:
+        name: wazuh-enrollment-token
+        namespace: wazuh-sidecar
+      type: Opaque
+      stringData:
+        token: "TOKEN_PLACEHOLDER"
+      ---
+      apiVersion: apps/v1
+      kind: StatefulSet
+      metadata:
+        name: tomcat-wazuh-agent
+        namespace: wazuh-sidecar
+      spec:
+        serviceName: tomcat-app
+        replicas: 1
+        selector:
+          matchLabels:
+            app: tomcat-wazuh-agent
+        template:
+          metadata:
+            labels:
+              app: tomcat-wazuh-agent
+          spec:
+            automountServiceAccountToken: false
+            terminationGracePeriodSeconds: 20
+            initContainers:
+              # Clear stale PID/lock files left behind by an unclean restart
+              - name: cleanup-ossec-stale
+                image: busybox:1.36
+                imagePullPolicy: IfNotPresent
+                command: ["/bin/sh", "-lc"]
+                args:
+                  - |
+                    set -e
+                    mkdir -p /agent/var/run /agent/queue/ossec
+                    rm -f /agent/var/run/*.pid || true
+                    rm -f /agent/queue/ossec/*.lock || true
+                volumeMounts:
+                  - name: wazuh-agent-data
+                    mountPath: /agent
+              # Seed /var/ossec into the PVC on first run only
+              - name: prepare-ossec-tree
+                image: public.ecr.aws/wazuh-cicd/wazuh/wazuh-agent:|WAZUH_CURRENT|-latest
+                imagePullPolicy: IfNotPresent
+                command: ["/bin/sh", "-lc"]
+                args:
+                  - |
+                    set -e
+                    if [ ! -d /agent/bin ]; then
+                      cp -a /var/ossec/. /agent/
+                      cat >> /agent/etc/ossec.conf <<'EOF'
+                    <ossec_config>
+                      <localfile>
+                        <log_format>syslog</log_format>
+                        <location>/usr/local/tomcat/logs/catalina.*.log</location>
+                      </localfile>
+                    </ossec_config>
+                    EOF
+                    fi
+                    for d in etc logs queue var rids tmp "active-response"; do
+                      [ -d "/agent/$d" ] && chown -R wazuh:wazuh "/agent/$d"
+                    done
+                    chown -R 0:0 /agent/bin /agent/lib || true
+                    find /agent/bin -type f -exec chmod 0755 {} \; || true
+                volumeMounts:
+                  - name: wazuh-agent-data
+                    mountPath: /agent
+            containers:
+              - name: tomcat
+                image: tomcat:10.1-jdk17
+                imagePullPolicy: IfNotPresent
+                ports:
+                  - containerPort: 8080
+                volumeMounts:
+                  - name: application-data
+                    mountPath: /usr/local/tomcat/logs
+              - name: wazuh-agent
+                image: public.ecr.aws/wazuh-cicd/wazuh/wazuh-agent:|WAZUH_CURRENT|-latest
+                imagePullPolicy: IfNotPresent
+                lifecycle:
+                  preStop:
+                    exec:
+                      command: ["/bin/sh", "-lc", "/var/ossec/bin/wazuh-control stop || true; sleep 2"]
+                env:
+                  - name: WAZUH_AGENT_NAME
+                    valueFrom:
+                      fieldRef:
+                        fieldPath: metadata.name
+                  - name: WAZUH_ENROLLMENT_TOKEN
+                    valueFrom:
+                      secretKeyRef:
+                        name: wazuh-enrollment-token
+                        key: token
+                securityContext:
+                  runAsUser: 0
+                  allowPrivilegeEscalation: true
+                  capabilities:
+                    add: ["SETGID", "SETUID"]
+                volumeMounts:
+                  - name: wazuh-agent-data
+                    mountPath: /var/ossec
+                  - name: application-data
+                    mountPath: /usr/local/tomcat/logs
+        volumeClaimTemplates:
+          - metadata:
+              name: wazuh-agent-data
             spec:
-              serviceName: tomcat-app
-              replicas: 1
-              selector:
-                matchLabels:
-                  app: tomcat-wazuh-agent
-              template:
-                metadata:
-                  labels:
-                    app: tomcat-wazuh-agent
-                spec:
-                  terminationGracePeriodSeconds: 20
-                  securityContext:
-                    fsGroup: 999
-                    fsGroupChangePolicy: OnRootMismatch
-
-                  #        INIT CONTAINERS
-                  initContainers:
-                    - name: cleanup-ossec-stale
-                      image: busybox:1.36
-                      imagePullPolicy: IfNotPresent
-                      securityContext:
-                        runAsUser: 0
-                      command: ["/bin/sh", "-lc"]
-                      args:
-                        - |
-                          set -e
-                          mkdir -p /agent/var/run /agent/queue/ossec
-                          rm -f /agent/var/run/*.pid || true
-                          rm -f /agent/queue/ossec/*.lock || true
-                          echo "Cleanup complete. Ready for next init step."
-                      volumeMounts:
-                        - name: wazuh-agent-data
-                          mountPath: /agent
-
-                    - name: seed-ossec-tree
-                      image: wazuh/wazuh-agent:|WAZUH_CURRENT_KUBERNETES|-|WAZUH_CURRENT_KUBERNETES_REV|-latest
-                      imagePullPolicy: IfNotPresent
-                      securityContext:
-                        runAsUser: 0
-                      command: ["/bin/sh", "-lc"]
-                      args:
-                        - |
-                          set -e
-                          if [ ! -d /agent/bin ]; then
-                            echo "Seeding /var/ossec into PVC..."
-                            tar -C /var/ossec -cf - . | tar -C /agent -xpf -
-                          else
-                            echo "Existing Wazuh data found, skipping seed."
-                          fi
-                      volumeMounts:
-                        - name: wazuh-agent-data
-                          mountPath: /agent
-
-                    - name: write-ossec-config
-                      image: busybox:1.36
-                      imagePullPolicy: IfNotPresent
-                      securityContext:
-                        runAsUser: 0
-                      env:
-                        - name: WAZUH_MANAGER
-                          value: "<EXTERNAL_IP_WAZUH_EVENTS>"
-                        - name: WAZUH_PORT
-                          value: "1514"
-                        - name: WAZUH_PROTOCOL
-                          value: "tcp"
-                        - name: WAZUH_REGISTRATION_SERVER
-                          value: "<EXTERNAL_IP_WAZUH_REGISTRATION>"
-                        - name: WAZUH_REGISTRATION_PORT
-                          value: "1515"
-                        - name: WAZUH_AGENT_NAME
-                          valueFrom:
-                            fieldRef:
-                              fieldPath: metadata.name
-                      command: ["/bin/sh", "-lc"]
-                      args:
-                        - |
-                          set -e
-                          mkdir -p /agent/etc
-                          cat > /agent/etc/ossec.conf <<'EOF'
-                          <ossec_config>
-                            <client>
-                              <server>
-                                <address>${WAZUH_MANAGER}</address>
-                                <port>${WAZUH_PORT}</port>
-                                <protocol>${WAZUH_PROTOCOL}</protocol>
-                              </server>
-                              <enrollment>
-                                <enabled>yes</enabled>
-                                <agent_name>${WAZUH_AGENT_NAME}</agent_name>
-                                <manager_address>${WAZUH_REGISTRATION_SERVER}</manager_address>
-                                <port>${WAZUH_REGISTRATION_PORT}</port>
-                                <authorization_pass_path>/var/ossec/etc/authd.pass</authorization_pass_path>
-                              </enrollment>
-                            </client>
-                            <localfile>
-                              <log_format>syslog</log_format>
-                              <location>/usr/local/tomcat/logs/catalina.out</location>
-                            </localfile>
-                          </ossec_config>
-                          EOF
-
-                          sed -i \
-                            -e "s|\${WAZUH_MANAGER}|${WAZUH_MANAGER}|g" \
-                            -e "s|\${WAZUH_PORT}|${WAZUH_PORT}|g" \
-                            -e "s|\${WAZUH_PROTOCOL}|${WAZUH_PROTOCOL}|g" \
-                            -e "s|\${WAZUH_REGISTRATION_SERVER}|${WAZUH_REGISTRATION_SERVER}|g" \
-                            -e "s|\${WAZUH_REGISTRATION_PORT}|${WAZUH_REGISTRATION_PORT}|g" \
-                            -e "s|\${WAZUH_AGENT_NAME}|${WAZUH_AGENT_NAME}|g" \
-                            /agent/etc/ossec.conf
-
-                          chown 999:999 /agent/etc/ossec.conf
-                          chmod 0640 /agent/etc/ossec.conf
-                      volumeMounts:
-                        - name: wazuh-agent-data
-                          mountPath: /agent
-
-                    - name: fix-authd-pass-perms
-                      image: busybox:1.36
-                      imagePullPolicy: IfNotPresent
-                      securityContext:
-                        runAsUser: 0
-                      command: ["/bin/sh", "-lc"]
-                      args:
-                        - |
-                          set -e
-                          echo "Copying authd.pass from Secret..."
-                          mkdir -p /agent/etc
-                          cp /secret/authd.pass /agent/etc/authd.pass
-                          chown 0:999 /agent/etc/authd.pass
-                          chmod 0640 /agent/etc/authd.pass
-                          ls -l /agent/etc/authd.pass
-                      volumeMounts:
-                        - name: wazuh-agent-data
-                          mountPath: /agent
-                        - name: wazuh-authd-pass
-                          mountPath: /secret/authd.pass
-                          subPath: authd.pass
-                          readOnly: true
-
-
-                  #        MAIN CONTAINERS
-                  containers:
-                    - name: tomcat
-                      image: tomcat:10.1-jdk17
-                      imagePullPolicy: IfNotPresent
-                      ports:
-                        - containerPort: 8080
-                      volumeMounts:
-                        - name: application-data
-                          mountPath: /usr/local/tomcat/logs
-
-                    - name: wazuh-agent
-                      image: wazuh/wazuh-agent:|WAZUH_CURRENT_KUBERNETES|-|WAZUH_CURRENT_KUBERNETES_REV|-latest
-                      imagePullPolicy: IfNotPresent
-                      lifecycle:
-                        preStop:
-                          exec:
-                            command: ["/bin/sh", "-lc", "/var/ossec/bin/ossec-control stop || true; sleep 2"]
-                      command: ["/bin/sh", "-lc"]
-                      args:
-                        - |
-                          set -e
-                          ln -sf /var/ossec/etc/ossec.conf /etc/ossec.conf
-                          exec /init
-                      env:
-                        - name: WAZUH_MANAGER
-                          value: "<EXTERNAL_IP_WAZUH_EVENTS>"
-                        - name: WAZUH_PORT
-                          value: "1514"
-                        - name: WAZUH_PROTOCOL
-                          value: "tcp"
-                        - name: WAZUH_REGISTRATION_SERVER
-                          value: "<EXTERNAL_IP_WAZUH_REGISTRATION>"
-                        - name: WAZUH_REGISTRATION_PORT
-                          value: "1515"
-                        - name: WAZUH_AGENT_NAME
-                          valueFrom:
-                            fieldRef:
-                              fieldPath: metadata.name
-                      securityContext:
-                        runAsUser: 0
-                        runAsGroup: 0
-                      volumeMounts:
-                        - name: wazuh-agent-data
-                          mountPath: /var/ossec
-                        - name: application-data
-                          mountPath: /usr/local/tomcat/logs
-
-                  #            VOLUMES
-                  volumes:
-                    - name: wazuh-authd-pass
-                      secret:
-                        secretName: wazuh-authd-pass
-
-              volumeClaimTemplates:
-                - metadata:
-                    name: wazuh-agent-data
-                  spec:
-                    accessModes: ["ReadWriteOnce"]
-                    storageClassName: gp2  # Adjust according to your cluster's StorageClass
-                    resources:
-                      requests:
-                        storage: 3Gi
-                - metadata:
-                    name: application-data
-                  spec:
-                    accessModes: ["ReadWriteOnce"]
-                    storageClassName: gp2  # Adjust according to your cluster's StorageClass
-                    resources:
-                      requests:
-                        storage: 5Gi
-            ---
-            apiVersion: v1
-            kind: Service
-            metadata:
-              name: tomcat-app
-              namespace: wazuh-sidecar
+              accessModes: ["ReadWriteOnce"]
+              # storageClassName: gp2   # set to your cluster's StorageClass (kubectl get sc)
+              resources:
+                requests:
+                  storage: 3Gi
+          - metadata:
+              name: application-data
             spec:
-              selector:
-                app: tomcat-wazuh-agent
-              type: NodePort
-              ports:
-                - protocol: TCP
-                  port: 80
-                  targetPort: 8080
-                  nodePort: 30013
-
-              type: NodePort
-              ports:
-                - protocol: TCP
-                  port: 80
-                  targetPort: 8080
-                  nodePort: 30013
-
-         .. note::
-
-            Before applying the manifest, confirm the StorageClass names in your cluster by running the command ``kubectl get sc``. In this example, the cluster uses the ``gp2`` StorageClass.
-
-      .. group-tab:: Other cluster types
-
-         .. code-block:: yaml
-            :emphasize-lines: 72,78,178,184
-
-            apiVersion: v1
-            kind: Namespace
-            metadata:
-              name: wazuh-sidecar
-            ---
-            apiVersion: apps/v1
-            kind: StatefulSet
-            metadata:
-              name: tomcat-wazuh-agent
-              namespace: wazuh-sidecar
-            spec:
-              serviceName: tomcat-app
-              replicas: 1
-              selector:
-                matchLabels:
-                  app: tomcat-wazuh-agent
-              template:
-                metadata:
-                  labels:
-                    app: tomcat-wazuh-agent
-                spec:
-                  terminationGracePeriodSeconds: 20
-                  securityContext:
-                    fsGroup: 999
-                    fsGroupChangePolicy: OnRootMismatch
-
-                  #        INIT CONTAINERS
-                  initContainers:
-                    - name: cleanup-ossec-stale
-                      image: busybox:1.36
-                      imagePullPolicy: IfNotPresent
-                      securityContext:
-                        runAsUser: 0
-                      command: ["/bin/sh", "-lc"]
-                      args:
-                        - |
-                          set -e
-                          mkdir -p /agent/var/run /agent/queue/ossec
-                          rm -f /agent/var/run/*.pid || true
-                          rm -f /agent/queue/ossec/*.lock || true
-                          echo "Cleanup complete. Ready for next init step."
-                      volumeMounts:
-                        - name: wazuh-agent-data
-                          mountPath: /agent
-
-                    - name: seed-ossec-tree
-                      image: wazuh/wazuh-agent:|WAZUH_CURRENT_KUBERNETES|-|WAZUH_CURRENT_KUBERNETES_REV|-latest
-                      imagePullPolicy: IfNotPresent
-                      securityContext:
-                        runAsUser: 0
-                      command: ["/bin/sh", "-lc"]
-                      args:
-                        - |
-                          set -e
-                          if [ ! -d /agent/bin ]; then
-                            echo "Seeding /var/ossec into PVC..."
-                            tar -C /var/ossec -cf - . | tar -C /agent -xpf -
-                          else
-                            echo "Existing Wazuh data found, skipping seed."
-                          fi
-                      volumeMounts:
-                        - name: wazuh-agent-data
-                          mountPath: /agent
-
-                    - name: write-ossec-config
-                      image: busybox:1.36
-                      imagePullPolicy: IfNotPresent
-                      securityContext:
-                        runAsUser: 0
-                      env:
-                        - name: WAZUH_MANAGER
-                          value: "<EXTERNAL_IP_WAZUH_EVENTS>"
-                        - name: WAZUH_PORT
-                          value: "1514"
-                        - name: WAZUH_PROTOCOL
-                          value: "tcp"
-                        - name: WAZUH_REGISTRATION_SERVER
-                          value: "<EXTERNAL_IP_WAZUH_REGISTRATION>"
-                        - name: WAZUH_REGISTRATION_PORT
-                          value: "1515"
-                        - name: WAZUH_AGENT_NAME
-                          valueFrom:
-                            fieldRef:
-                              fieldPath: metadata.name
-                      command: ["/bin/sh", "-lc"]
-                      args:
-                        - |
-                          set -e
-                          mkdir -p /agent/etc
-                          cat > /agent/etc/ossec.conf <<'EOF'
-                          <ossec_config>
-                            <client>
-                              <server>
-                                <address>${WAZUH_MANAGER}</address>
-                                <port>${WAZUH_PORT}</port>
-                                <protocol>${WAZUH_PROTOCOL}</protocol>
-                              </server>
-                              <enrollment>
-                                <enabled>yes</enabled>
-                                <agent_name>${WAZUH_AGENT_NAME}</agent_name>
-                                <manager_address>${WAZUH_REGISTRATION_SERVER}</manager_address>
-                                <port>${WAZUH_REGISTRATION_PORT}</port>
-                                <authorization_pass_path>/var/ossec/etc/authd.pass</authorization_pass_path>
-                              </enrollment>
-                            </client>
-                            <localfile>
-                              <log_format>syslog</log_format>
-                              <location>/usr/local/tomcat/logs/catalina.out</location>
-                            </localfile>
-                          </ossec_config>
-                          EOF
-
-                          sed -i \
-                            -e "s|\${WAZUH_MANAGER}|${WAZUH_MANAGER}|g" \
-                            -e "s|\${WAZUH_PORT}|${WAZUH_PORT}|g" \
-                            -e "s|\${WAZUH_PROTOCOL}|${WAZUH_PROTOCOL}|g" \
-                            -e "s|\${WAZUH_REGISTRATION_SERVER}|${WAZUH_REGISTRATION_SERVER}|g" \
-                            -e "s|\${WAZUH_REGISTRATION_PORT}|${WAZUH_REGISTRATION_PORT}|g" \
-                            -e "s|\${WAZUH_AGENT_NAME}|${WAZUH_AGENT_NAME}|g" \
-                            /agent/etc/ossec.conf
-
-                          chown 999:999 /agent/etc/ossec.conf
-                          chmod 0640 /agent/etc/ossec.conf
-                      volumeMounts:
-                        - name: wazuh-agent-data
-                          mountPath: /agent
-
-                    - name: fix-authd-pass-perms
-                      image: busybox:1.36
-                      imagePullPolicy: IfNotPresent
-                      securityContext:
-                        runAsUser: 0
-                      command: ["/bin/sh", "-lc"]
-                      args:
-                        - |
-                          set -e
-                          echo "Copying authd.pass from Secret..."
-                          mkdir -p /agent/etc
-                          cp /secret/authd.pass /agent/etc/authd.pass
-                          chown 0:999 /agent/etc/authd.pass
-                          chmod 0640 /agent/etc/authd.pass
-                          ls -l /agent/etc/authd.pass
-                      volumeMounts:
-                        - name: wazuh-agent-data
-                          mountPath: /agent
-                        - name: wazuh-authd-pass
-                          mountPath: /secret/authd.pass
-                          subPath: authd.pass
-                          readOnly: true
-
-
-                  #        MAIN CONTAINERS
-                  containers:
-                    - name: tomcat
-                      image: tomcat:10.1-jdk17
-                      imagePullPolicy: IfNotPresent
-                      ports:
-                        - containerPort: 8080
-                      volumeMounts:
-                        - name: application-data
-                          mountPath: /usr/local/tomcat/logs
-
-                    - name: wazuh-agent
-                      image: wazuh/wazuh-agent:|WAZUH_CURRENT_KUBERNETES|-|WAZUH_CURRENT_KUBERNETES_REV|-latest
-                      imagePullPolicy: IfNotPresent
-                      lifecycle:
-                        preStop:
-                          exec:
-                            command: ["/bin/sh", "-lc", "/var/ossec/bin/ossec-control stop || true; sleep 2"]
-                      command: ["/bin/sh", "-lc"]
-                      args:
-                        - |
-                          set -e
-                          ln -sf /var/ossec/etc/ossec.conf /etc/ossec.conf
-                          exec /init
-                      env:
-                        - name: WAZUH_MANAGER
-                          value: "<EXTERNAL_IP_WAZUH_EVENTS>"
-                        - name: WAZUH_PORT
-                          value: "1514"
-                        - name: WAZUH_PROTOCOL
-                          value: "tcp"
-                        - name: WAZUH_REGISTRATION_SERVER
-                          value: "<EXTERNAL_IP_WAZUH_REGISTRATION>"
-                        - name: WAZUH_REGISTRATION_PORT
-                          value: "1515"
-                        - name: WAZUH_AGENT_NAME
-                          valueFrom:
-                            fieldRef:
-                              fieldPath: metadata.name
-                      securityContext:
-                        runAsUser: 0
-                        runAsGroup: 0
-                      volumeMounts:
-                        - name: wazuh-agent-data
-                          mountPath: /var/ossec
-                        - name: application-data
-                          mountPath: /usr/local/tomcat/logs
-
-                  #            VOLUMES
-                  volumes:
-                    - name: wazuh-authd-pass
-                      secret:
-                        secretName: wazuh-authd-pass
-
-              volumeClaimTemplates:
-                - metadata:
-                    name: wazuh-agent-data
-                  spec:
-                    accessModes: ["ReadWriteOnce"]
-                    resources:
-                      requests:
-                        storage: 3Gi
-                - metadata:
-                    name: application-data
-                  spec:
-                    accessModes: ["ReadWriteOnce"]
-                    resources:
-                      requests:
-                        storage: 5Gi
-            ---
-            apiVersion: v1
-            kind: Service
-            metadata:
-              name: tomcat-app
-              namespace: wazuh-sidecar
-            spec:
-              selector:
-                app: tomcat-wazuh-agent
-              type: NodePort
-              ports:
-                - protocol: TCP
-                  port: 80
-                  targetPort: 8080
-                  nodePort: 30013
-
-   .. note::
-
-      The manifest in this example is for the Docker container runtime.
+              accessModes: ["ReadWriteOnce"]
+              # storageClassName: gp2   # uncomment to set to your cluster's StorageClass on EKS (kubectl get sc)
+              resources:
+                requests:
+                  storage: 5Gi
+      ---
+      apiVersion: v1
+      kind: Service
+      metadata:
+        name: tomcat-app
+        namespace: wazuh-sidecar
+      spec:
+        selector:
+          app: tomcat-wazuh-agent
+        type: NodePort
+        ports:
+          - protocol: TCP
+            port: 80
+            targetPort: 8080
+            nodePort: 30013
 
    Replace:
 
-   -  ``<EXTERNAL_IP_WAZUH_EVENTS>`` with the external IP of the ``wazuh-events`` load balancer.
-   -  ``<EXTERNAL_IP_WAZUH_REGISTRATION>`` with the external IP of the ``wazuh_registration`` load balancer.
+   -  ``<ENROLLMENT_TOKEN>`` with the Wazuh agent enrollment token generated in the previous :ref:`section <kubernetes-creating-enrollment-token>`.
 
 #. Create the namespace for the Wazuh agent and the Node.js application:
 
    .. code-block:: console
 
       # kubectl create namespace wazuh-sidecar
-
-#. Create the Kubernetes secret for the enrollment password:
-
-   .. code-block:: console
-
-      $ kubectl create secret generic wazuh-authd-pass \
-        -n wazuh-sidecar \
-        --from-literal=authd.pass=password
-
-   .. note::
-
-      The default password for enrolling the Wazuh agent in your Kubernetes cluster is ``password``. This value is stored in the ``/var/wazuh-manager/etc/authd.pass`` file on the Wazuh manager.
 
 #. Deploy the sidecar setup:
 
@@ -1608,6 +1286,8 @@ The sidecar approach is ideal for targeted monitoring of sensitive applications 
    .. code-block:: console
 
       # kubectl get pods -n wazuh-sidecar
+
+   The command output looks similar to this:
 
    .. code-block:: none
       :class: output

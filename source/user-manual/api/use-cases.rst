@@ -1644,7 +1644,7 @@ Using the Wazuh server API, we can delete all or specific Wazuh agents based on 
 
    .. code-block:: console
 
-      # curl -k -X DELETE "https://localhost:55000/agents?agents_list=<AGENT_ID>"&status=all&older_than=1&pretty=true" -H  "Authorization: Bearer $TOKEN"
+      # curl -k -X DELETE "https://localhost:55000/agents?agents_list=<AGENT_ID>&status=all&older_than=1&pretty=true" -H  "Authorization: Bearer $TOKEN"
 
    This query deletes the specified Wazuh agent.
 

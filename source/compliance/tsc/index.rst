@@ -40,7 +40,7 @@ Although the COSO framework and the Trust Services Criteria (TSC) are closely re
 
 To view the TSC-related data on the Wazuh dashboard:
 
-#. Navigate to **Regulatory Compliance** from the Wazuh **Overview** dashboard and click on **TSC**.
+#. Click the menu icon, then navigate to **Security operations** > **Regulatory Compliance** > **TSC**.
 
    .. thumbnail:: /images/compliance/tsc/wazuh-overview-tsc-card.png
       :title: Wazuh Overview dashboard

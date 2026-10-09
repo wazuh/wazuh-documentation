@@ -18,7 +18,7 @@ Make sure that your environment meets these requirements before you enroll a Waz
    -  Wazuh 4.x agents:
 
       -  1514/TCP for agent communication.
-      -  1515/TCP for enrollment through automatic agent request.
+      -  1515/TCP for enrollment via agent configuration.
 
    -  55000/TCP for enrollment through the Wazuh manager API (both agent versions).
 

@@ -54,7 +54,7 @@ Wazuh 5.x manager
 
    .. note::
 
-      The default credentials for the Wazuh manager API are ``wazuh:wazuh``.
+      Retrieve the generated ``WAZUH_MANAGER_API_PASSWORD`` from ``/etc/wazuh/credentials.env`` on the Wazuh manager.
 
 #. Run the script below to import the Wazuh agent registrations from the ``client.keys`` file:
 
@@ -97,15 +97,16 @@ Wazuh 5.x manager
 Wazuh agent
 ~~~~~~~~~~~
 
-#. Update the manager address in the Wazuh agent configuration so that the Wazuh agent connects to the Wazuh 5.x manager. Add the Wazuh manager IP address or fully qualified domain name (FQDN) to the ``<endpoint>`` setting in the ``<agent><manager>`` section.
+#. Update the manager address in the Wazuh agent configuration so that the Wazuh agent connects to the Wazuh 5.x manager. Add the Wazuh manager IP address or fully qualified domain name (FQDN) to the ``<address>`` setting in the ``<client><server>`` section.
 
    .. code-block:: xml
+      :emphasize-lines: 3
 
-      <agent>
-        <manager>
-          <endpoint><WAZUH_MANAGER_IP></endpoint>
-        </manager>
-      </agent>
+      <client>
+        <server>
+          <address><WAZUH_MANAGER_IP></address>
+        </server>
+      </client>
 
    Replace ``<WAZUH_MANAGER_IP>`` with the IP address of the Wazuh 5.x manager.
 
@@ -175,7 +176,7 @@ Perform the following steps to recreate the Wazuh agent groups in the Wazuh 5.x 
 
       # systemctl restart wazuh-manager
 
-#. Assign each migrated Wazuh agent to its corresponding group in the Wazuh 5.x manager. For more information refer to the :ref:`Wazuh agent administration <assigning_agents_to_a_group>` documentation.
+#. Assign each migrated Wazuh agent to its corresponding group in the Wazuh 5.x manager. For more information, refer to the :ref:`Wazuh agent administration <assigning_agents_to_a_group>` documentation.
 
    .. note::
 

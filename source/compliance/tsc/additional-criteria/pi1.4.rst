@@ -69,7 +69,7 @@ Ubuntu endpoint
 Wazuh dashboard
 ^^^^^^^^^^^^^^^^
 
-#. Navigate to **Regulatory Compliance** on the Wazuh **Overview** dashboard and click on **TSC**.
+#. Click the menu icon, then navigate to **Security operations** > **Regulatory Compliance** > **TSC**.
 
    .. thumbnail:: /images/compliance/tsc/additional-criteria/overview-regulatory-compliance-tsc-card.png
       :title: Wazuh Overview dashboard - Regulatory Compliance

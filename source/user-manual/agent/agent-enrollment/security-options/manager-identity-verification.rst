@@ -26,6 +26,84 @@ You need a certificate authority to sign certificates for the Wazuh manager and 
 
 The root certificate is created and saved as the ``rootCA.pem`` file.
 
+Wazuh agents enrollment with token
+----------------------------------
+
+Wazuh 5.0 agents verify the identity of the Wazuh manager using an enrollment token. The token carries the Wazuh manager address, the enrollment credential, and a pin of the certificate authority (CA) that signs the Wazuh manager certificate. During enrollment, the Wazuh agent installs that CA as its trust anchor and verifies the Wazuh manager certificate against it, including the hostname. You don't need to copy a CA file to the endpoint or edit the ``ossec.conf`` file.
+
+#. Create a token on the Wazuh manager for the address the Wazuh agents connect to. In a cluster, run this command on the master node. The address must be included in the subject alternative names (SAN) of the Wazuh manager certificate:
+
+   .. code-block:: console
+
+      # /var/wazuh-manager/bin/wazuh-manager-authd --create-enrollment-token --address <WAZUH_MANAGER_ADDRESS>
+
+   The token is displayed only once. Store it securely, as no command retrieves it later. Tokens expire after 30 days by default. Use ``--ttl`` to change this.
+
+   By default, the Wazuh agent downloads the CA from the Wazuh manager and installs it only if it matches the pin in the token. To include the CA certificate in the token instead, so the Wazuh agent doesn't download it, add the ``--embed-ca`` option:
+
+   .. code-block:: console
+
+      # /var/wazuh-manager/bin/wazuh-manager-authd --create-enrollment-token --address <WAZUH_MANAGER_ADDRESS> --embed-ca
+
+#. Install the Wazuh agent with the token.
+
+   Replace ``<TOKEN>`` with the token you created:
+
+   -  Debian-based endpoints:
+
+      .. code-block:: console
+
+         # WAZUH_ENROLLMENT_TOKEN='<TOKEN>' dpkg -i wazuh-agent_*.deb
+
+   -  Red Hat-based endpoints:
+
+      .. code-block:: console
+
+         # WAZUH_ENROLLMENT_TOKEN='<TOKEN>' rpm -ivh wazuh-agent-*.rpm
+
+   -  macOS endpoints:
+
+      .. code-block:: console
+
+         # echo "WAZUH_ENROLLMENT_TOKEN='<TOKEN>'" > /tmp/wazuh_envs && installer -pkg wazuh-agent-*.pkg -target /
+
+   -  Windows endpoints. Replace ``<WAZUH_AGENT_MSI>`` with the file name of the package you downloaded:
+
+      .. code-block:: doscon
+
+         > msiexec.exe /i <WAZUH_AGENT_MSI> /q WAZUH_ENROLLMENT_TOKEN="<TOKEN>"
+
+   For a Wazuh agent that is already installed, save the token to a file, stop the Wazuh agent, and run ``wazuh-agent-auth`` from the ``bin`` directory of the Wazuh agent installation. For example, on Linux:
+
+   .. code-block:: console
+
+      # /var/ossec/bin/wazuh-agent-auth --token-file <TOKEN_FILE>
+
+#. Start the Wazuh agent:
+
+   Linux:
+
+   .. code-block:: console
+
+      # systemctl daemon-reload
+      # systemctl enable --now wazuh-agent
+
+   Windows (PowerShell):
+
+   .. code-block:: pwsh-session
+
+      > Start-Service -Name wazuh
+
+   macOS:
+
+   .. code-block:: console
+
+      # /Library/Ossec/bin/wazuh-control start
+
+The Wazuh agent saves the CA as its trust anchor in ``etc/certs/root-ca.pem`` (``certs\root-ca.pem`` on Windows) and verifies the Wazuh manager certificate on every connection, without any ``<ssl>`` configuration.
+
+To use your own certificate authority instead, follow the steps in the sections below.
+
 .. _manager-identity-validation:
 
 Wazuh manager identity validation
@@ -136,7 +214,7 @@ Follow the steps below to enroll a Linux/Unix endpoint by using certificates to 
    **Wazuh 5.0 agents**:
 
    .. code-block:: xml
-      :emphasize-lines: 4
+      :emphasize-lines: 4,7
 
       <ossec_config>
         <agent>
@@ -145,6 +223,7 @@ Follow the steps below to enroll a Linux/Unix endpoint by using certificates to 
           </manager>
           <ssl>
             <certificate_authorities>/<PATH_TO>/rootCA.pem</certificate_authorities>
+            <verification_mode>full</verification_mode>
           </ssl>
         </agent>
       </ossec_config>
@@ -171,7 +250,7 @@ Follow the steps below to enroll a Linux/Unix endpoint by using certificates to 
 
       # systemctl restart wazuh-agent
 
-#. Click on the upper-left menu icon and navigate to **Agent management** > **Endpoints Summary** on the Wazuh dashboard to check for the newly enrolled Wazuh agent and its connection status. If the enrollment was successful, the Wazuh dashboard displays an interface similar to the image below.
+#. Click on the upper-left menu icon and navigate to **Agents management** > **Summary** on the Wazuh dashboard to check for the newly enrolled Wazuh agent and its connection status. If the enrollment was successful, the Wazuh dashboard displays an interface similar to the image below.
 
    .. thumbnail:: /images/manual/agent/linux-check-newly-enrolled.png
       :title: Check newly enrolled Wazuh agent - Linux
@@ -203,9 +282,10 @@ The Wazuh agent installation directory depends on the architecture of the host.
           <manager>
             <endpoint><WAZUH_MANAGER_IP_ADDRESS></endpoint>
           </manager>
-          <enrollment>
-            <server_ca_path>/<PATH_TO>/rootCA.pem</server_ca_path>
-          </enrollment>
+          <ssl>
+            <certificate_authorities>C:\<PATH_TO>\rootCA.pem</certificate_authorities>
+            <verification_mode>full</verification_mode>
+          </ssl>
         </agent>
       </ossec_config>
 
@@ -262,7 +342,7 @@ Follow the steps below to enroll a macOS endpoint by using certificates to verif
    **Wazuh 5.0 agents**:
 
    .. code-block:: xml
-      :emphasize-lines: 4
+      :emphasize-lines: 4,7
 
       <ossec_config>
         <agent>
@@ -270,9 +350,8 @@ Follow the steps below to enroll a macOS endpoint by using certificates to verif
             <endpoint><WAZUH_MANAGER_IP_ADDRESS></endpoint>
           </manager>
           <ssl>
-            <certificate_authorities>
-              <ca>/<PATH_TO>/rootCA.pem</ca>
-            </certificate_authorities>
+            <certificate_authorities>/<PATH_TO>/rootCA.pem</certificate_authorities>
+            <verification_mode>full</verification_mode>
           </ssl>
         </agent>
       </ossec_config>
@@ -299,7 +378,7 @@ Follow the steps below to enroll a macOS endpoint by using certificates to verif
 
       # /Library/Ossec/bin/wazuh-control restart
 
-#. Click on the upper-left menu icon and navigate to **Server management** > **Endpoints Summary** on the Wazuh dashboard to check for the newly enrolled Wazuh agent and its connection status. If the enrollment was successful, the Wazuh dashboard displays an interface similar to the image below.
+#. Click on the upper-left menu icon and navigate to **Agents management** > **Summary** on the Wazuh dashboard to check for the newly enrolled Wazuh agent and its connection status. If the enrollment was successful, the Wazuh dashboard displays an interface similar to the image below.
 
    .. thumbnail:: /images/manual/agent/macOS-check-newly-enrolled.png
       :title: Check newly enrolled Wazuh agent - macOS

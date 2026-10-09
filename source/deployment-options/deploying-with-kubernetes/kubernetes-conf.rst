@@ -43,23 +43,23 @@ Local storage provisioners such as ``microk8s.io/hostpath`` and ``k8s.io/minikub
 
    Other managed Kubernetes services, such as Google GKE, Azure AKS, and similar platforms, should work with appropriate storage class configurations. The storage class must support dynamic volume provisioning and provide low-latency storage, especially for the Wazuh indexer component. For example, use GCE Persistent Disk for GKE and Azure Disk for AKS through their respective CSI drivers.
 
-Resource Requirement
+Resource requirement
 --------------------
 
-The minimum cluster resource required for deploying the Wazuh central components are listed below:
+The minimum cluster resources required for deploying the Wazuh central components are listed below:
 
 Amazon EKS
 ^^^^^^^^^^
 
--  4 CPU units
--  5.5 Gi of memory
+-  5 CPU units
+-  8 Gi of memory
 
 Local cluster
 ^^^^^^^^^^^^^
 
 -  2 CPU units
--  3 Gi of memory
--  2 Gi of storage
+-  4.5 Gi of memory
+-  2.5 Gi of storage
 
 Overview
 --------
@@ -168,13 +168,13 @@ The following network policies are included:
 
 -  ``Allow-dns``: Allows DNS traffic within the Wazuh cluster so that pods can resolve service names.
 -  ``Allow-ingress-to-dashboard``: Permits incoming traffic from the ingress controller to port ``443`` of the Wazuh dashboard.
--  ``Allow-ingress-to-manager-master``: Permits incoming traffic from the ingress controller to port ``1515`` of the Wazuh manager master node for agent enrollment.
--  ``Allow-ingress-to-manager-worker``: Permits incoming traffic from the ingress controller to port ``1514`` of the Wazuh manager worker nodes for agent event communication.
+-  ``Allow-ingress-to-manager-master``: Allows incoming traffic from the ingress controller to ports ``1517`` and ``1515`` of Wazuh manager (master).
+-  ``Allow-ingress-to-manager-worker``: Allows incoming traffic from the ingress controller to ports ``1517`` and ``1514`` of Wazuh manager (worker) .
 -  ``Dashboard-egress``: Allows outgoing traffic from Wazuh dashboard pods to port ``9200`` of the Wazuh indexer and port ``55000`` of the Wazuh manager master.
 -  ``Default-deny-all``: Blocks all incoming and outgoing traffic that is not explicitly allowed by another network policy. This ensures a secure-by-default configuration.
 -  ``Indexer-egress``: Allows outgoing traffic from Wazuh indexer pods to ports ``9200`` and ``9300`` of other indexer nodes for cluster communication.
 -  ``Indexer-ingress``: Allows incoming traffic to Wazuh indexer pods from the dashboard (port ``9200``), manager (port ``9200``), and other indexer nodes (port ``9300``).
--  ``Manager-egress-external``: Allows outgoing traffic from Wazuh manager pods to the internet for CTI updates and external resources.
+-  ``Manager-egress-external``: Allows outgoing traffic from Wazuh manager pods to the internet. This is required for downloading CTI updates and other external resources.
 -  ``Manager-egress``: Allows outgoing traffic from Wazuh manager pods to the Wazuh indexer on port ``9200``.
 -  ``Wazuh-api-ingress``: Allows incoming traffic from the Wazuh dashboard (port ``55000``) and other manager pods to port ``1516`` of the manager master for internal API communication.
 -  ``Wazuh-worker-egress``: Allows outgoing traffic from Wazuh manager worker pods to manager ports ``1516`` and ``55000`` for cluster coordination.

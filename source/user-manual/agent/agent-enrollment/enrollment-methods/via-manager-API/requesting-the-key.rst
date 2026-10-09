@@ -35,10 +35,14 @@ The following sections show how to request the Wazuh agent key on different oper
    :depth: 1
    :backlinks: none
 
+.. note::
+
+   The Wazuh manager API administrator user is ``wazuh``. Its password is generated during installation and stored as ``WAZUH_MANAGER_API_PASSWORD`` in ``/etc/wazuh/credentials.env`` on the Wazuh manager. To read it, run ``grep WAZUH_MANAGER_API_PASSWORD /etc/wazuh/credentials.env`` as root. To change it, see :doc:`Password management </user-manual/user-administration/password-management>`.
+
 Linux/Unix and macOS
 --------------------
 
-#. Generate a JSON Web Token (JWT) to authenticate to the Wazuh manager API. The default Wazuh manager API credentials are ``wazuh:wazuh``. Replace ``<WAZUH_MANAGER_IP_ADDRESS>`` with the Wazuh manager IP address or fully qualified domain name (FQDN):
+#. Generate a JSON Web Token (JWT) to authenticate to the Wazuh manager API. Replace ``<USER>`` and ``<PASSWORD>`` with the Wazuh manager API credentials, and ``<WAZUH_MANAGER_IP_ADDRESS>`` with the Wazuh manager IP address or fully qualified domain name (FQDN):
 
    .. code-block:: console
 
@@ -113,7 +117,7 @@ Follow these steps to send a Wazuh agent enrollment request from a Windows endpo
 
       This function exists only in the PowerShell session where you run it.
 
-#. Encode the Wazuh manager API credentials in Base64 and assign it to the ``$base64AuthInfo`` variable. The default Wazuh manager API credentials are ``wazuh:wazuh``. Replace ``<WAZUH_MANAGER_API_USERNAME>`` and ``<WAZUH_MANAGER_API_PASSWORD>`` with the Wazuh manager API credentials:
+#. Encode the Wazuh manager API credentials in Base64 and assign it to the ``$base64AuthInfo`` variable. Replace ``<WAZUH_MANAGER_API_USERNAME>`` and ``<WAZUH_MANAGER_API_PASSWORD>`` with the Wazuh manager API credentials:
 
    .. code-block:: powershell
 

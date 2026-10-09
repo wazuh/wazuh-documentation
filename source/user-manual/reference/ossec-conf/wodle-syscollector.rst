@@ -23,6 +23,8 @@ Options
 - `disabled`_
 - `interval`_
 - `scan_on_start`_
+- `max_eps`_
+- `notify_first_scan`_
 - `hardware`_
 - `os`_
 - `network`_
@@ -42,7 +44,7 @@ disabled
 Disable the Syscollector wodle.
 
 +----------------------+-----------+
-| **Default value**    | yes       |
+| **Default value**    | no        |
 +----------------------+-----------+
 | **Allowed values**   | yes, no   |
 +----------------------+-----------+
@@ -70,6 +72,28 @@ Run a system scan immediately when the service is started
 +----------------------+-----------+
 | **Allowed values**   | yes, no   |
 +----------------------+-----------+
+
+max_eps
+^^^^^^^
+
+Maximum number of events per second the Syscollector wodle sends.
+
++--------------------+---------------------------+
+| **Default value**  | 50                        |
++--------------------+---------------------------+
+| **Allowed values** | Integer from 0 to 1000000 |
++--------------------+---------------------------+
+
+notify_first_scan
+^^^^^^^^^^^^^^^^^
+
+Specifies whether the first scan reports stateless events.
+
++--------------------+---------+
+| **Default value**  | no      |
++--------------------+---------+
+| **Allowed values** | yes, no |
++--------------------+---------+
 
 hardware
 ^^^^^^^^
@@ -212,26 +236,39 @@ The database synchronization settings are configured inside this tag.
 
    <wodle name="syscollector">
      <synchronization>
-       <max_eps>75</max_eps>
+       <enabled>yes</enabled>
+       <interval>5m</interval>
        <integrity_interval>24h</integrity_interval>
      </synchronization>
    </wodle>
 
-``max_eps`` — Sets the maximum event reporting throughput.
+``enabled`` — Enables periodic inventory synchronization.
 
-+----------------------+----------------------------------------------------------------+
-| **Default value**    | 75                                                             |
-+----------------------+----------------------------------------------------------------+
-| **Allowed values**   | Integer number between 0 and 1000000. 0 means default value.   |
-+----------------------+----------------------------------------------------------------+
++--------------------+---------+
+| **Default value**  | yes     |
++--------------------+---------+
+| **Allowed values** | yes, no |
++--------------------+---------+
+
+``interval`` — Time between inventory synchronizations.
+
++--------------------+--------------------------------------------------------------------------+
+| **Default value**  | 5m (300 seconds)                                                         |
++--------------------+--------------------------------------------------------------------------+
+| **Allowed values** | Positive time value with optional suffix s, m, h or d. 0 is not allowed. |
++--------------------+--------------------------------------------------------------------------+
 
 ``integrity_interval`` — Sets the time interval for periodic database integrity validation.
 
-+----------------------+---------------------------------------+
-| **Default value**    | 24h                                   |
-+----------------------+---------------------------------------+
-| **Allowed values**   | Any non-negative integer (seconds).   |
-+----------------------+---------------------------------------+
++--------------------+------------------------------------------------------------+
+| **Default value**  | 24h                                                        |
++--------------------+------------------------------------------------------------+
+| **Allowed values** | Non-negative time value with optional suffix s, m, h or d. |
++--------------------+------------------------------------------------------------+
+
+.. deprecated:: 5.0.0
+
+   ``<synchronization><max_eps>`` has no effect in Wazuh 5.0. It is still accepted so configurations from Wazuh 4.x agents don't fail. Use the top-level ``max_eps`` option instead.
 
 Example of configuration
 ----------------------------
@@ -255,7 +292,8 @@ Example of configuration
      <browser_extensions>yes</browser_extensions>
      <!-- Database synchronization settings -->
      <synchronization>
-       <max_eps>75</max_eps>
+       <enabled>yes</enabled>
+       <interval>5m</interval>
        <integrity_interval>24h</integrity_interval>
      </synchronization>
    </wodle>

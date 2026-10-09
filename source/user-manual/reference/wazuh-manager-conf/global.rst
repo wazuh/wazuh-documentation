@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn about the global configuration section of wazuh-manager.conf, which configures agent disconnection timing and disconnection alerts.
+  :description: Learn about the global configuration section of wazuh-manager.conf, which configures the time after which a Wazuh agent is marked as disconnected.
 
 .. _reference_wazuh_manager_conf_global:
 
@@ -15,13 +15,12 @@ global
       <global>
       </global>
 
-The ``<global>`` section configures manager-wide timing for detecting agent disconnections and generating disconnection alerts.
+The ``<global>`` section configures the time after which the Wazuh manager marks a Wazuh agent as disconnected.
 
 Options
 -------
 
 - `agents_disconnection_time`_
-- `agents_disconnection_alert_time`_
 
 .. _reference_manager_agents_disconnection_time:
 
@@ -37,18 +36,6 @@ Time a Wazuh agent can remain without communication before the Wazuh manager mar
 |                      | `d` (days). Minimum: 1s.                                                                     |
 +----------------------+----------------------------------------------------------------------------------------------+
 
-agents_disconnection_alert_time
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Time after a Wazuh agent disconnects before a disconnection alert is generated. Set to ``0`` to disable disconnection alerts.
-
-+----------------------+----------------------------------------------------------------------------------------------+
-| **Default value**    | 0                                                                                            |
-+----------------------+----------------------------------------------------------------------------------------------+
-| **Allowed values**   | Non-negative integer with optional time unit suffix: `s`, `m`, `h`, `d`. A value of 0        |
-|                      | disables disconnection alerts.                                                               |
-+----------------------+----------------------------------------------------------------------------------------------+
-
 Sample configuration
 ---------------------
 
@@ -56,5 +43,4 @@ Sample configuration
 
    <global>
      <agents_disconnection_time>15m</agents_disconnection_time>
-     <agents_disconnection_alert_time>0</agents_disconnection_alert_time>
    </global>

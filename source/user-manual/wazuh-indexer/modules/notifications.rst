@@ -220,12 +220,12 @@ The following example updates two Notifications module settings as persistent cl
 -  ``opensearch.notifications.core.http.max_connections``: Increases the maximum number of HTTP connections that the Notifications module can use simultaneously to deliver notifications.
 -  ``opensearch.notifications.general.filter_by_backend_roles``: Enables backend role filtering so users can access only the notification resources permitted by their assigned backend roles.
 
-Run the following command from a terminal on a host that can communicate with the Wazuh indexer REST API.
+Run the following command from a terminal on a host that can communicate with the Wazuh indexer REST API. Replace ``<WAZUH_INDEXER_IP>`` with the IP address of the Wazuh indexer node and ``<WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD>`` with your Wazuh indexer username and password.
 
 .. code-block:: console
 
-   curl -sk -u admin:admin -X PUT \
-   "https://localhost:9200/_cluster/settings" \
+   curl -sk -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> -X PUT \
+   "https://<WAZUH_INDEXER_IP>:9200/_cluster/settings" \
    -H "Content-Type: application/json" \
    -d '{
      "persistent": {
@@ -275,13 +275,13 @@ Both SMTP and SES configurations require credentials to authenticate with the em
 SMTP account credentials
 """"""""""""""""""""""""
 
-Perform the following steps to configure SMTP credentials for an email account named ``my_smtp_account``:
+Perform the following steps to configure SMTP credentials for an email account named ``my_smtp_account``. Run the ``opensearch-keystore`` commands as the ``wazuh-indexer`` user, as shown below. If you run them as ``root``, the ``/etc/wazuh-indexer/opensearch.keystore`` file becomes owned by ``root`` and the Wazuh indexer fails to start.
 
 -  Run the command below to add the SMTP username:
 
    .. code-block:: console
 
-      /usr/share/wazuh-indexer/bin/opensearch-keystore add \
+      # sudo -u wazuh-indexer /usr/share/wazuh-indexer/bin/opensearch-keystore add \
       opensearch.notifications.core.email.my_smtp_account.username
 
 -  Enter the SMTP username when prompted
@@ -289,12 +289,12 @@ Perform the following steps to configure SMTP credentials for an email account n
 
    .. code-block:: console
 
-      /usr/share/wazuh-indexer/bin/opensearch-keystore add \
+      # sudo -u wazuh-indexer /usr/share/wazuh-indexer/bin/opensearch-keystore add \
       opensearch.notifications.core.email.my_smtp_account.password
 
 -  Enter the SMTP password when prompted.
 
-SMTP authentication credentials are stored as secure settings in the Wazuh Indexer keystore using the following keys, where ``<account_name>`` is the name of the configured SMTP sender:
+SMTP authentication credentials are stored as secure settings in the Wazuh indexer keystore using the following keys, where ``<account_name>`` is the name of the configured SMTP sender:
 
 .. code-block:: none
 
