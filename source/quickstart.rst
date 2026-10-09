@@ -10,9 +10,7 @@ Wazuh is a security platform that provides unified XDR and SIEM protection for e
 
 Wazuh is a free and open source platform. Its components abide by the `GNU General Public License, version 2 <https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html>`_, and the `GNU Affero General Public License version 3 <https://www.gnu.org/licenses/agpl-3.0.en.html>`_ (AGPLv3).
 
-This quickstart shows you how to install the Wazuh central components on the same endpoint, using our :doc:`installation assistant </installation-guide/wazuh-indexer/installation-assistant>`. You can check our :doc:`Installation guide </installation-guide/index>` for more details and other installation options.
-
-Below you can find a section about the requirements needed to install Wazuh. It will help you learn about the hardware requirements and the supported operating systems for your Wazuh installation.
+This quickstart installs the Wazuh manager, the Wazuh indexer, and the Wazuh dashboard on one host with the installation assistant, a script that downloads, installs, and configures them. For other installation options, see the :doc:`Installation guide </installation-guide/index>`.
 
 .. _installation_requirements:
 
@@ -27,17 +25,17 @@ Hardware requirements highly depend on the number of protected endpoints and clo
 Following this quickstart implies deploying the Wazuh manager, the Wazuh indexer, and the Wazuh dashboard on the same endpoint. This is usually enough for monitoring up to 100 endpoints and for 90 days of queryable/indexed alert data. The table below shows the recommended hardware for a quickstart deployment:
 
 .. table::
-  :align: center
+   :align: center
 
-  +-------------+---------+---------+-----------------------+
-  | **Agents**  | **CPU** | **RAM** | **Storage (90 days)** |
-  +=============+=========+=========+=======================+
-  | **1-25**    | 4 vCPU  | 8 GiB   | 50 GB                 |
-  +-------------+---------+---------+-----------------------+
-  | **26-50**   | 8 vCPU  | 16 GiB  | 100 GB                |
-  +-------------+---------+---------+-----------------------+
-  | **51-100**  | 8 vCPU  | 16 GiB  | 200 GB                |
-  +-------------+---------+---------+-----------------------+
+   +-------------+---------+---------+-----------------------+
+   | **Agents**  | **CPU** | **RAM** | **Storage (90 days)** |
+   +=============+=========+=========+=======================+
+   | **1-25**    | 4 vCPU  | 8 GB    | 50 GB                 |
+   +-------------+---------+---------+-----------------------+
+   | **26-50**   | 8 vCPU  | 16 GB   | 100 GB                |
+   +-------------+---------+---------+-----------------------+
+   | **51-100**  | 8 vCPU  | 16 GB   | 200 GB                |
+   +-------------+---------+---------+-----------------------+
 
 
 For larger environments, we recommend a distributed deployment. Multi-node cluster configuration is available for the Wazuh manager and for the Wazuh indexer, providing high availability and load balancing.
@@ -54,6 +52,8 @@ You can install the Wazuh central components on 64-bit Linux systems using Intel
 Installing Wazuh
 ----------------
 
+You need a host that meets the requirements above, internet access, and a user with sudo privileges. The installation takes about 5 to 10 minutes.
+
 .. note::
 
    If a firewall such as firewalld or UFW is active on the endpoint, allow incoming traffic on the following ports. This lets Wazuh agents and users reach the Wazuh central components:
@@ -62,54 +62,61 @@ Installing Wazuh
    -  **443/TCP**: Wazuh dashboard web interface.
    -  **1514/TCP and 1515/TCP**: only needed if Wazuh 4.x agents connect to this deployment.
 
+   For example, with firewalld, run ``sudo firewall-cmd --permanent --add-port=443/tcp --add-port=1517/tcp && sudo firewall-cmd --reload``. With UFW, run ``sudo ufw allow 443/tcp && sudo ufw allow 1517/tcp``. To check whether a firewall is active, run ``sudo firewall-cmd --state`` or ``sudo ufw status``.
+
    See :ref:`required ports <default_ports>` for the full list of default ports.
 
-#. Download and run the installation assistant to deploy the Wazuh central components and generate the credentials required to access the Wazuh dashboard.
+#. Download and run the installation assistant to deploy the Wazuh central components and generate the credentials required to access the Wazuh dashboard. In the commands, ``-a`` installs all the central components on this host, ``-id`` installs missing operating system dependencies without asking, and ``-d pre-release`` downloads the release candidate packages.
 
-   -  **Default address:** If the Wazuh agents connect using the Wazuh manager's configured address, such as a private IP address or hostname, no additional parameters are required.
+   -  **Default address:** The assistant adds this server's hostname and all its IP addresses to the certificate that agents check. If agents connect to one of them, run:
 
       .. code-block:: console
 
          # wget https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh && sudo bash ./wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -a -id -d pre-release
 
-   -  **Alternative address:** If the Wazuh agents connect through an address other than the Wazuh manager's configured address, such as a public IP address, NAT address, or load balancer, specify it with ``-as|--agent-san <ADDRESS>``. Replace ``<ADDRESS>`` with the alternative address, such as the public IP or load balancer.
+   -  **Alternative address:** If agents connect through an address this server cannot know, such as a public IP address, a NAT address, a DNS name, or a load balancer, add it with ``-as|--agent-san <ALTERNATE_ADDRESS>``. Replace ``<ALTERNATE_ADDRESS>`` with that address. To add more than one address, repeat the option for each.
 
       .. code-block:: console
 
-         # wget https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh && sudo bash ./wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -a -id -d pre-release -as <ADDRESS>
+         # wget https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh && sudo bash ./wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -a -id -d pre-release -as <ALTERNATE_ADDRESS>
 
-   Once the assistant finishes the installation, the output shows the access credentials and a message confirming successful installation.
+   When the installation finishes, the assistant prints the address of the Wazuh dashboard, one URL for each IP address of the host, then the user name and the command that shows the password:
 
    .. code-block:: none
+      :class: output
 
       INFO: Wazuh dashboard web application initialized.
       INFO: --- Summary ---
-      INFO: You can access the web interface https://<wazuh-dashboard-ip>:443
-          User: admin
-          Password: the WAZUH_INDEXER_ADMIN_PASSWORD value in /etc/wazuh/credentials.env
+      INFO: You can access the web interface https://<WAZUH_DASHBOARD_ADDRESS>:443
+      INFO:     User: admin (Wazuh dashboard login and Wazuh indexer administrator)
+      INFO:     Password: to read it from the credentials file, run:
+      INFO:         sudo grep '^WAZUH_INDEXER_ADMIN_PASSWORD=' /etc/wazuh/credentials.env | cut -d= -f2-
+      INFO: The other users of the deployment are listed at the top of /etc/wazuh/credentials.env.
       INFO: Installation finished.
 
-#. All Wazuh indexer and manager API user passwords are now stored in the ``/etc/wazuh/credentials.env`` file. Run the following command to view the ``<WAZUH_INDEXER_ADMIN_PASSWORD>``.
+#. The installation assistant stores the passwords of all Wazuh users in ``/etc/wazuh/credentials.env``, which only root can read. Run the following command to show the ``admin`` password:
 
    .. code-block:: console
 
-      # cat /etc/wazuh/credentials.env
+      $ sudo grep '^WAZUH_INDEXER_ADMIN_PASSWORD=' /etc/wazuh/credentials.env | cut -d= -f2-
 
-#. Access the Wazuh web interface at ``https://<WAZUH_DASHBOARD_IP_ADDRESS>`` with your credentials. Replace ``<WAZUH_DASHBOARD_IP_ADDRESS>`` with the IP address of your endpoint and ``<WAZUH_INDEXER_ADMIN_PASSWORD>`` with the ``admin`` password:
+#. Open the Wazuh dashboard at ``https://<WAZUH_DASHBOARD_ADDRESS>`` in a browser. Replace ``<WAZUH_DASHBOARD_ADDRESS>`` with an address of this host that your browser can reach, such as one of the URLs the assistant printed. Log in with the following credentials:
 
    -  **Username:** ``admin``
-   -  **Password:** ``<WAZUH_INDEXER_ADMIN_PASSWORD>``
+   -  **Password:** the ``admin`` password from step 2
 
-When you access the Wazuh dashboard for the first time, the browser shows a warning message stating that a trusted authority did not issue the certificate. This is expected, and the user can either accept the certificate as an exception or configure the system to use a certificate from a trusted authority.
+When you access the Wazuh dashboard for the first time, the browser shows a warning message stating that a trusted authority did not issue the certificate. This is expected because the installation assistant creates its own certificate authority. Accept the certificate as an exception, or :doc:`use a certificate from a trusted authority </user-manual/wazuh-dashboard/configuring-third-party-certs/index>`.
 
-If you want to uninstall the Wazuh central components, run the Wazuh installation assistant using the option ``-u`` or ``--uninstall``.
+The ``/etc/wazuh/credentials.env`` file holds the passwords of all five Wazuh users, and no component reads it after the installation. Store the passwords in a safe place, then remove the file with ``sudo rm -f /etc/wazuh/credentials.env``. Keep ``/etc/wazuh/ca``, which holds the root CA private key you need to add nodes or renew certificates. The passwords tool writes new passwords to this file again, as described in :doc:`Password management </user-manual/user-administration/password-management>`.
+
+To remove the Wazuh central components and all their data, run the Wazuh installation assistant using the option ``-u`` or ``--uninstall``. See :doc:`Uninstalling the Wazuh central components </installation-guide/uninstalling-wazuh/central-components>` for details.
 
 Next steps
 ----------
 
 Now that your Wazuh installation is ready, you can start deploying the Wazuh agent. This can be used to protect laptops, desktops, servers, cloud instances, containers, or virtual machines. The Wazuh agent is lightweight and multi-purpose, providing a variety of security capabilities.
 
-Instructions on how to deploy the Wazuh agent can be found in the Wazuh web user interface or in our :doc:`documentation </installation-guide/wazuh-agent/index>`.
+Each agent enrolls with a token that you create on this server for the address agents connect to (see step 1). To deploy agents, follow the instructions for your operating system below, or go to **Agents management** > **Summary** > **Deploy new agent** in the Wazuh dashboard.
 
 .. raw:: html
 
