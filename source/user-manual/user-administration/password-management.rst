@@ -10,7 +10,7 @@ The Wazuh passwords tool changes the passwords for :doc:`Wazuh indexer </getting
 
 The following Wazuh indexer users are relevant to password management:
 
--  ``admin``: The default administrator user of the Wazuh indexer. This user logs in to the Wazuh dashboard and handles communication between the Wazuh manager and the Wazuh indexer.
+-  ``admin``: The default administrator user of the Wazuh indexer. This user logs in to the Wazuh dashboard.
 -  ``kibanaserver``: Handles communications between the Wazuh dashboard and the Wazuh indexer.
 -  ``wazuh-manager``: Handles communications between the Wazuh manager and the Wazuh indexer.
 
@@ -19,7 +19,7 @@ The Wazuh manager API has two default users:
 -  ``wazuh``: The default administrator user for the Wazuh manager API.
 -  ``wazuh-wui``: Administrator user that handles communications between the Wazuh dashboard and the Wazuh manager API.
 
-The Wazuh passwords tool is located at ``/usr/share/wazuh-indexer/plugins/opensearch-security/tools/wazuh-passwords-tool.sh``. You can also download it by running the following command:
+The Wazuh passwords tool is located at ``/usr/share/wazuh-indexer/tools/wazuh-passwords-tool.sh``. You can also download it by running the following command:
 
 .. code-block:: console
 
