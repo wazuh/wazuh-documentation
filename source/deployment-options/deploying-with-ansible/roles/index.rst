@@ -6,14 +6,14 @@
 Roles
 =====
 
-You can use the preconfigured roles to deploy the Wazuh central components and the Wazuh agents. Roles are reusable Ansible components that contain the tasks, default variables, and configuration logic required to install and configure each Wazuh component. Clone the Wazuh `GitHub repository <https://github.com/wazuh/wazuh-ansible>`_ to your Ansible roles folder:
+You can use the preconfigured roles to deploy the Wazuh central components and the Wazuh agents. Roles are reusable Ansible components that contain the tasks, default variables, and configuration logic required to install and configure each Wazuh component. Clone the Wazuh `GitHub repository <https://github.com/wazuh/wazuh-ansible>`__ to your Ansible roles folder:
 
 .. code-block:: console
 
    # cd /etc/ansible/roles
    # git clone --branch v|WAZUH_CURRENT_ANSIBLE|-|WAZUH_CURRENT_ANSIBLE_REV| https://github.com/wazuh/wazuh-ansible.git
 
-The following sections explain how to use and customize these roles. For more details about Ansible roles, see the `Ansible community documentation <https://docs.ansible.com/projects/ansible/latest/playbook_guide/playbooks_reuse_roles.html>`_.
+The following sections explain how to use and customize these roles. For more details about Ansible roles, see the `Ansible community documentation <https://docs.ansible.com/projects/ansible/latest/playbook_guide/playbooks_reuse_roles.html>`__.
 
 .. contents::
    :local:
