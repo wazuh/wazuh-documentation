@@ -82,7 +82,7 @@ The following rules govern how the module creates and manages default channels.
 -  If a default channel already exists, it is not recreated or overwritten on subsequent startups.
 -  All default channels are created with an empty access list, making them visible to all users.
 -  Each channel has a fixed, predictable ID (for example, ``default_slack_channel``) so they can be referenced consistently.
--  A sample alerting monitor is created alongside these channels. You can review it under **Explore** > **Alerting** > **Monitors** in the Wazuh Dashboard before enabling production alerts.
+-  No alerting monitors are created with these channels. Create monitors under **Explore** > **Alerting** > **Monitors** in the Wazuh dashboard.
 
 Activating a default channel
 ----------------------------
