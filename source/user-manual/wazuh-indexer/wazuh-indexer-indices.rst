@@ -383,11 +383,11 @@ Enabling Wazuh archives
       :emphasize-lines: 6
 
       filebeat.modules:
-       - module: wazuh
-        alerts:
-         enabled: true
-        archives:
-         enabled: true
+        - module: wazuh
+          alerts:
+            enabled: true
+          archives:
+            enabled: true
 
 #. Restart the Filebeat service to apply the change:
 

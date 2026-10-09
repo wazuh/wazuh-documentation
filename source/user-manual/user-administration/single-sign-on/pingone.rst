@@ -81,7 +81,7 @@ PingOne Configuration
           :align: center
           :width: 80%
 
-      The ``Roles`` attribute will be used later as the ``sp.entity_id`` in the Wazuh indexer configuration file.
+      The ``Roles`` attribute will be used later as the ``roles_key`` in the Wazuh indexer configuration file.
 
    #. Click on the **Required** checkbox, and click on **Save**.
 
@@ -196,7 +196,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
    Ensure to change the following parameters to their corresponding value:
 
-   - ``idp.metadata_file``
+   - ``idp.metadata_url``
    - ``idp.entity_id``
    - ``sp.entity_id``
    - ``sp.signature_private_key_filepath``
@@ -401,7 +401,7 @@ PingOne Configuration
          :align: center
          :width: 80%
 
-      The ``Roles`` attribute will be used later as the ``sp.entity_id`` in the Wazuh indexer configuration file.
+      The ``Roles`` attribute will be used later as the ``roles_key`` in the Wazuh indexer configuration file.
 
    #. Click on the **Required** checkbox, and click on **Save**.
 
@@ -516,7 +516,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
    Ensure to change the following parameters to their corresponding value:
 
-   - ``idp.metadata_file``
+   - ``idp.metadata_url``
    - ``idp.entity_id``
    - ``sp.entity_id``
    - ``sp.signature_private_key_filepath``

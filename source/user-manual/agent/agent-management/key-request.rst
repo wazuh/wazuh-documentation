@@ -227,40 +227,40 @@ The Python script below shows an example of an agent key retrieval from the data
 
    def main():
 
-   	if len(sys.argv) < 3:
-       	print json.dumps({"error": 1, "message": "Too few arguments"})
-       	return
+    if len(sys.argv) < 3:
+        print(json.dumps({"error": 1, "message": "Too few arguments"}))
+        return
 
-   	try:
-       	conn = mysql.connector.connect(host='localhost',
-                                   	database='your_database',
-                                   	user='user',
-                                   	password='secret')
-   	except Error as e:
-       	print json.dumps({"error": 2, "message": str(e)})
-       	return
+    try:
+        conn = mysql.connector.connect(host='localhost',
+                                    database='your_database',
+                                    user='user',
+                                    password='secret')
+    except Error as e:
+        print(json.dumps({"error": 2, "message": str(e)}))
+        return
 
-   	cursor = conn.cursor()
-   	data = sys.argv[2]
+    cursor = conn.cursor()
+    data = sys.argv[2]
 
-   	if sys.argv[1] == "id":
-       	cursor.execute("SELECT id,name,ip,`agent_key` FROM agent WHERE id = '{}'".format(data))
-   	elif sys.argv[1] == "ip":
-       	cursor.execute("SELECT id,name,ip,`agent_key` FROM agent WHERE ip = '{}'".format(data))
-   	else:
-       	print json.dumps({"error": 3, "message": "Bad arguments given"})
-       	return
+    if sys.argv[1] == "id":
+        cursor.execute("SELECT id,name,ip,`agent_key` FROM agent WHERE id = '{}'".format(data))
+    elif sys.argv[1] == "ip":
+        cursor.execute("SELECT id,name,ip,`agent_key` FROM agent WHERE ip = '{}'".format(data))
+    else:
+        print(json.dumps({"error": 3, "message": "Bad arguments given"}))
+        return
 
-   	row = cursor.fetchone()
+    row = cursor.fetchone()
 
-   	if row:
-       	print json.dumps({"error": 0, "data": {"id" : row[0], "name": row[1], "ip": row[2], "key": row[3]}},sort_keys=False)
-   	else:
-       	print json.dumps({"error": 4, "message": "No agent key found"},sort_keys=False)
+    if row:
+        print(json.dumps({"error": 0, "data": {"id" : row[0], "name": row[1], "ip": row[2], "key": row[3]}},sort_keys=False))
+    else:
+        print(json.dumps({"error": 4, "message": "No agent key found"},sort_keys=False))
 
 
    if __name__ == '__main__':
-   	main()
+    main()
 
 The php script below shows an example of an agent key retrieval from the database (MySQL).
 

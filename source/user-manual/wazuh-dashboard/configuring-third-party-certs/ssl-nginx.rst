@@ -120,12 +120,12 @@ Configure the proxy and the certificates
       opensearch.ssl.verificationMode: certificate
       # opensearch.username: kibanaserver
       # opensearch.password: kibanaserver
-      opensearch.requestHeadersWhitelist: ["securitytenant","Authorization"]
+      opensearch.requestHeadersAllowlist: ["securitytenant","Authorization"]
       opensearch_security.multitenancy.enabled: false
       opensearch_security.readonly_mode.roles: ["kibana_read_only"]
       server.ssl.enabled: true
-      server.ssl.key: "/etc/wazuh-dashboard/certs/wazuh-dashboard-key.pem"
-      server.ssl.certificate: "/etc/wazuh-dashboard/certs/wazuh-dashboard.pem"
+      server.ssl.key: "/etc/wazuh-dashboard/certs/dashboard-key.pem"
+      server.ssl.certificate: "/etc/wazuh-dashboard/certs/dashboard.pem"
       opensearch.ssl.certificateAuthorities: ["/etc/wazuh-dashboard/certs/root-ca.pem"]
       uiSettings.overrides.defaultRoute: /app/wazuh
       opensearch_security.cookie.secure: true

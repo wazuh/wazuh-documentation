@@ -234,7 +234,7 @@ The number of replicas can be changed dynamically using the Wazuh indexer API. I
 .. code-block:: console
    :emphasize-lines: 1, 5
 
-   curl -k -u "<INDEXER_USERNAME>:<INDEXER_PASSWORD>" -XPUT "https://<INDEXER_IP_ADDRESS>:9200/wazuh-alerts-" -H 'Content-Type: application/json' -d'
+   curl -k -u "<INDEXER_USERNAME>:<INDEXER_PASSWORD>" -XPUT "https://<INDEXER_IP_ADDRESS>:9200/wazuh-alerts-*/_settings" -H 'Content-Type: application/json' -d'
    {
      "settings": {
        "index": {
