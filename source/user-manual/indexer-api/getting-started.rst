@@ -8,6 +8,8 @@ Getting started
 
 This guide provides the essential information needed to utilize the Wazuh indexer API.
 
+In the examples on this page, replace ``<WAZUH_INDEXER_IP>`` with the IP address or hostname of the Wazuh indexer node, as set in ``network.host`` in the ``/etc/wazuh-indexer/opensearch.yml`` file. Use ``127.0.0.1`` on an all-in-one deployment.
+
 Starting and stopping the Wazuh indexer API
 -------------------------------------------
 
@@ -48,7 +50,7 @@ The format to authenticate to the Wazuh indexer API using basic authentication i
 
 .. code-block:: console
 
-   # curl -k -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> https://localhost:9200/
+   # curl -k -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> https://<WAZUH_INDEXER_IP>:9200/
 
 .. code-block:: json
    :class: output
@@ -103,20 +105,19 @@ JWT authentication is not enabled by default, and its settings are specified wit
 
    .. code-block:: console
 
-      # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /etc/wazuh-indexer/opensearch-security/config.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h 127.0.0.1 -nhnv
+      # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /etc/wazuh-indexer/opensearch-security/config.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h <WAZUH_INDEXER_IP> -nhnv
 
 #. Run the command below to fetch a JSON web token.
 
-   .. code-block:: console
+   .. code-block:: bash
 
-      # curl -k -u <WAZUH_INDEXER_USER>:<WAZUH_INDEXER_PASSWORD> -XPOST "https://localhost:9200/_plugins/_security/api/generateonbehalfoftoken" -H 'Content-Type: application/json' -d
-      '
-      {
-         "description":"Testing",
-         "service":"Testing Service",
-         "durationSeconds":"180"
-      }
-      '
+      curl -k -u <WAZUH_INDEXER_USER>:<WAZUH_INDEXER_PASSWORD> -XPOST "https://<WAZUH_INDEXER_IP>:9200/_plugins/_security/api/generateonbehalfoftoken" \
+      -H 'Content-Type: application/json' \
+      -d '{
+        "description":"Testing",
+        "service":"Testing Service",
+        "durationSeconds":"180"
+      }'
 
    Below is an example of an output.
 
@@ -131,7 +132,7 @@ JWT authentication is not enabled by default, and its settings are specified wit
 
    .. code-block:: console
 
-      # curl -k -XGET "https://localhost:9200" -H "Authorization: Bearer <WAZUH_INDEXER_JWT>"
+      # curl -k -XGET "https://<WAZUH_INDEXER_IP>:9200" -H "Authorization: Bearer <WAZUH_INDEXER_JWT>"
 
    Replace ``<WAZUH_INDEXER_JWT>`` with your generated JWT. The expected output is as seen below:
 
@@ -161,7 +162,7 @@ You can access any API endpoint using the below structure. Replace ``<METHOD>`` 
 
 .. code-block:: console
 
-   # curl -k -X <METHOD> "https://localhost:9200/<ENDPOINT>" -H "Authorization: Bearer <WAZUH_INDEXER_JWT>"
+   # curl -k -X <METHOD> "https://<WAZUH_INDEXER_IP>:9200/<ENDPOINT>" -H "Authorization: Bearer <WAZUH_INDEXER_JWT>"
 
 If you are using an environment variable, replace ``<WAZUH_INDEXER_JWT>`` with your environment variable e.g. ``$TOKEN``.
 
@@ -254,7 +255,7 @@ In the example below, we use ``cURL`` to check the cluster health status of the 
 
 .. code-block:: console
 
-   # curl -k -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> https://localhost:9200/_cluster/health?pretty
+   # curl -k -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> https://<WAZUH_INDEXER_IP>:9200/_cluster/health?pretty
 
 .. code-block:: none
    :class: output
@@ -298,7 +299,7 @@ The Python ``requests`` library allows us to send HTTP requests to the Wazuh Ind
    from requests.auth import HTTPBasicAuth
 
    # Base URL and endpoint
-   wazuh_indexer_url = "https://localhost:9200"
+   wazuh_indexer_url = "https://<WAZUH_INDEXER_IP>:9200"
    endpoint = "/_cluster/health"
 
    # Full URL
@@ -373,7 +374,7 @@ You can also interact with the Wazuh indexer API using a bash script. A bash scr
       #!/bin/bash
 
       # Base URL and endpoint for Wazuh Indexer API
-      WAZUH_INDEXER_URL="https://localhost:9200"
+      WAZUH_INDEXER_URL="https://<WAZUH_INDEXER_IP>:9200"
       ENDPOINT="/_cluster/health"
       FULL_URL="${WAZUH_INDEXER_URL}${ENDPOINT}"
       USERNAME="<WAZUH_INDEXER_USERNAME>"
@@ -444,7 +445,7 @@ A standard Wazuh indexer API request consists of three essential components: the
 
 .. code-block:: console
 
-   # curl -k -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> -XGET https://localhost:9200/_cluster/health?pretty
+   # curl -k -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> -XGET https://<WAZUH_INDEXER_IP>:9200/_cluster/health?pretty
 
 The cURL command for each request contains the following fields:
 
@@ -554,7 +555,7 @@ The following GET request retrieves basic information about the Wazuh indexer AP
 
 .. code-block:: console
 
-   curl -k -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> -X GET https://localhost:9200/
+   curl -k -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> -X GET https://<WAZUH_INDEXER_IP>:9200/
 
 
 .. code-block:: none
@@ -584,7 +585,7 @@ The following PUT request to the Wazuh indexer API updates the Wazuh indexer clu
 
 .. code-block:: console
 
-   # curl -k -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> -H "Content-Type: application/json" -X PUT "https://localhost:9200/_cluster/settings?pretty" -d '{"transient": {"search.max_buckets": 75000}}'
+   # curl -k -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> -H "Content-Type: application/json" -X PUT "https://<WAZUH_INDEXER_IP>:9200/_cluster/settings?pretty" -d '{"transient": {"search.max_buckets": 75000}}'
 
 .. code-block:: none
    :class: output
@@ -606,7 +607,7 @@ In this example, we use this DELETE request to remove documents from indexes fro
 
 .. code-block:: bash
 
-   curl -X POST "https://localhost:9200/wazuh-alerts-4.x-2024*/_search?pretty" \
+   curl -X POST "https://<WAZUH_INDEXER_IP>:9200/wazuh-alerts-4.x-2024*/_search?pretty" \
    -H "Content-Type: application/json" \
    -u "<WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD>" \
    -k \
@@ -648,7 +649,7 @@ In the output above, we observe eight (8) documents matching the query. Next, we
 
 .. code-block:: bash
 
-   curl -X DELETE "https://localhost:9200/wazuh-alerts-4.x-2024*?pretty" -H "Content-Type: application/json" -u "$indexer_username:$indexer_password" -k -d '{
+   curl -X DELETE "https://<WAZUH_INDEXER_IP>:9200/wazuh-alerts-4.x-2024*?pretty" -H "Content-Type: application/json" -u "$indexer_username:$indexer_password" -k -d '{
      "query": {
        "range": {
          "@timestamp": {
@@ -720,7 +721,7 @@ Save the following Python script as ``top_successful_login.py``:
    import json
 
    # Base URL and endpoint
-   indexer_url = "https://localhost:9200"
+   indexer_url = "https://<WAZUH_INDEXER_IP>:9200"
    endpoint = "/wazuh-alerts*/_search"
    url = indexer_url + endpoint
 
@@ -811,7 +812,7 @@ Follow the steps below.
       #!/bin/bash
 
       # Wazuh indexer API URL
-      WAZUH_INDEXER_URL="https://localhost:9200/wazuh-alerts*/_search"
+      WAZUH_INDEXER_URL="https://<WAZUH_INDEXER_IP>:9200/wazuh-alerts*/_search"
 
       # JSON query payload
       PAYLOAD=$(cat <<EOF
