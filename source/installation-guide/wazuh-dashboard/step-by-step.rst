@@ -8,7 +8,9 @@ Installing the Wazuh dashboard step-by-step
 
 Install and configure the Wazuh dashboard following step-by-step instructions. The Wazuh dashboard is a web interface for mining and visualizing security data.
 
-.. note:: You need root user privileges to run all the commands described below.
+.. note::
+
+   You need root user privileges to run all the commands described below.
 
 Wazuh dashboard installation
 ----------------------------
@@ -25,21 +27,71 @@ Adding the Wazuh repository
 
 .. note::
 
-   If you are installing the Wazuh dashboard on the same host as the Wazuh indexer or the Wazuh manager, you may skip these steps as you may have added the Wazuh repository already.
+   If the Wazuh repository is already configured and enabled on this host, for example on the Wazuh indexer host, skip these steps.
 
 .. tabs::
 
    .. group-tab:: APT
 
-      .. include:: /_templates/installations/common/deb/add-repository.rst
+      #. Install the following packages if missing:
+
+         .. code-block:: console
+
+            # apt-get install -y gnupg apt-transport-https curl
+
+      #. Install the GPG key:
+
+         .. code-block:: console
+
+            # curl -s https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH | gpg --no-default-keyring --keyring gnupg-ring:/usr/share/keyrings/wazuh.gpg --import && chmod 644 /usr/share/keyrings/wazuh.gpg
+
+      #. Add the repository:
+
+         .. code-block:: console
+
+            # echo "deb [signed-by=/usr/share/keyrings/wazuh.gpg] https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/apt/ unstable main" | tee /etc/apt/sources.list.d/wazuh.list
+
+      #. Update the package information:
+
+         .. code-block:: console
+
+            # apt-get update
 
    .. group-tab:: Yum
 
-      .. include:: /_templates/installations/common/yum/add-repository.rst
+      #. Import the GPG key:
+
+         .. code-block:: console
+
+            # rpm --import https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH
+
+      #. Add the repository:
+
+         -  For RHEL-compatible systems version 8 and earlier, use the following command:
+
+            .. code-block:: console
+
+               # echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/yum/\nprotect=1' | tee /etc/yum.repos.d/wazuh.repo
+
+         -  For RHEL-compatible systems version 9 and later, use the following command:
+
+            .. code-block:: console
+
+               # echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/yum/\npriority=1' | tee /etc/yum.repos.d/wazuh.repo
 
    .. group-tab:: DNF
 
-      .. include:: /_templates/installations/common/dnf/add-repository.rst
+      #. Import the GPG key:
+
+         .. code-block:: console
+
+            # rpm --import https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH
+
+      #. Add the repository:
+
+         .. code-block:: console
+
+            # echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/yum/\npriority=1' | tee /etc/yum.repos.d/wazuh.repo
 
 Deploying certificates and passwords
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -73,7 +125,7 @@ Do this **before installing the package**. The package then uses these files and
       # install -m 0400 wazuh-certificates/$NODE_NAME-key.pem /etc/wazuh-dashboard/certs/dashboard-key.pem
       # rm -rf wazuh-certificates
 
-   The ``wazuh-dashboard`` user does not exist yet. When the package is installed, it gives it these files and installs ``root-ca.pem`` in ``/etc/wazuh-dashboard/certs/``.
+   The ``wazuh-dashboard`` user does not exist yet. When the package is installed, it gives these files to the ``wazuh-dashboard`` user and installs ``root-ca.pem`` in ``/etc/wazuh-dashboard/certs/``.
 
 #. **Recommended action**: If no other Wazuh components will be installed on this node, remove the ``wazuh-certificates.tar`` file.
 
@@ -109,7 +161,7 @@ Installing the Wazuh dashboard
 Configuring the Wazuh dashboard
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Give the certificates to the service user and restrict their directory. Some versions of the package leave a pair placed before installing owned by ``root``, and the Wazuh dashboard then fails to start with ``EACCES``:
+#. Make sure the service user owns the certificates and restrict their directory:
 
    .. code-block:: console
 
@@ -120,61 +172,111 @@ Configuring the Wazuh dashboard
 
    #. ``server.host``: The package sets ``0.0.0.0``, which accepts connections on every address of the host. You don't need to change it.
 
-   #. ``opensearch.hosts``: Replace ``localhost`` with the URLs of the Wazuh indexer instances to use for all your queries. The Wazuh dashboard can be configured to connect to multiple Wazuh indexer nodes in the same cluster. The addresses of the nodes can be separated by commas. For example, ``["https://10.0.0.2:9200", "https://10.0.0.3:9200","https://10.0.0.4:9200"]``
+   #. ``opensearch.hosts``: The package sets ``https://localhost:9200``. Replace it with the URL of the Wazuh indexer node, using the address you set in ``network.host`` in **Configuring the Wazuh indexer**. The Wazuh indexer listens only on that address, so ``localhost`` fails even when the Wazuh indexer runs on this host.
 
       .. code-block:: yaml
          :emphasize-lines: 3
 
          server.host: 0.0.0.0
          server.port: 443
-         opensearch.hosts: https://localhost:9200
+         opensearch.hosts: https://<WAZUH_INDEXER_ADDRESS>:9200
          opensearch.ssl.verificationMode: certificate
 
-   #. ``wazuh_core.hosts.default.url``: The Wazuh manager master node. Replace ``<WAZUH_MANAGER_IP_ADDRESS>`` with the IP address or DNS name of the master node. If the Wazuh manager master node is on this host, keep the shipped value, ``https://localhost``.
+      For a Wazuh indexer cluster, list every node:
+
+      .. code-block:: yaml
+
+         opensearch.hosts: ["https://10.0.0.2:9200", "https://10.0.0.3:9200", "https://10.0.0.4:9200"]
+
+   #. ``wazuh_core.hosts.default.url``: The Wazuh manager master node. Replace ``<WAZUH_MASTER_ADDRESS>`` with the IP address or DNS name of the master node. If the Wazuh manager master node is on this host, keep the shipped value, ``https://localhost``.
 
       .. code-block:: yaml
          :emphasize-lines: 3
 
          wazuh_core.hosts:
            default:
-             url: https://<WAZUH_MANAGER_IP_ADDRESS>
+             url: https://<WAZUH_MASTER_ADDRESS>
              port: 55000
              username: wazuh-wui
              run_as: true
 
-   .. note::
+      .. note::
 
-      Firewalls can block communication between Wazuh components on different hosts. Refer to the :ref:`Required ports <default_ports>` section and ensure the necessary ports are open.
+         Firewalls can block communication between Wazuh components on different hosts. Refer to the :ref:`Required ports <default_ports>` section and ensure the necessary ports are open.
 
 Starting the Wazuh dashboard service
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 #. Enable and start the Wazuh dashboard service:
 
-   .. include:: /_templates/installations/dashboard/enable_dashboard.rst
+   .. tabs::
 
-#. Get the ``<WAZUH_INDEXER_ADMIN_PASSWORD>``. On the Wazuh indexer node where you ran ``indexer-security-init.sh``, run the following command. The quotes around the value are not part of the password.
+      .. group-tab:: Systemd
+
+         .. code-block:: console
+
+            # systemctl daemon-reload
+            # systemctl enable wazuh-dashboard
+            # systemctl start wazuh-dashboard
+
+      .. group-tab:: SysV Init
+
+         Choose one option according to your operating system:
+
+         #. RPM-based operating system:
+
+            .. code-block:: console
+
+               # chkconfig --add wazuh-dashboard
+               # service wazuh-dashboard start
+
+         #. Debian-based operating system:
+
+            .. code-block:: console
+
+               # update-rc.d wazuh-dashboard defaults 95 10
+               # service wazuh-dashboard start
+
+#. Run the following command to verify the Wazuh dashboard status. Check that the output shows ``Active: active (running)``:
+
+   .. tabs::
+
+      .. group-tab:: Systemd
+
+         .. code-block:: console
+
+            # systemctl status wazuh-dashboard
+
+      .. group-tab:: SysV Init
+
+         .. code-block:: console
+
+            # service wazuh-dashboard status
+
+   If the service stops at once, run ``journalctl -u wazuh-dashboard``. A ``MISSING WAZUH_INDEXER_KIBANASERVER_PASSWORD`` or ``MISSING WAZUH_MANAGER_WUI_PASSWORD`` line means that the password is not in ``/etc/wazuh/credentials.env``. Repeat **Deploying certificates and passwords**, then start the service again.
+
+#. Get the ``admin`` password. On the Wazuh indexer node where you ran ``indexer-security-init.sh``, run the following command:
 
    .. code-block:: console
 
-      # grep WAZUH_INDEXER_ADMIN_PASSWORD /etc/wazuh/credentials.env
+      # grep '^WAZUH_INDEXER_ADMIN_PASSWORD=' /etc/wazuh/credentials.env | tr -d '"' | sort -u | cut -d= -f2-
 
 #. Access the Wazuh web interface with your ``admin`` user credentials. This is the default administrator account for the Wazuh indexer, and it allows you to access the Wazuh dashboard.
 
-   -  **URL**: ``https://<WAZUH_DASHBOARD_IP_ADDRESS>``
-   -  **Username**: ``admin``
-   -  **Password**: ``<WAZUH_INDEXER_ADMIN_PASSWORD>``
+   -  **URL:** ``https://<WAZUH_DASHBOARD_ADDRESS>``
+   -  **Username:** ``admin``
+   -  **Password:** the password from step 3
 
-   When you access the Wazuh dashboard for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser. For increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser. Alternatively, you can :doc:`configure a certificate </user-manual/wazuh-dashboard/configuring-third-party-certs/index>` from a trusted authority.
+   The browser warns that the certificate wasn't issued by a trusted authority. Add an exception in the browser, or, for better security, import ``root-ca.pem`` into the browser's certificate manager. You can also :doc:`configure a certificate </user-manual/wazuh-dashboard/configuring-third-party-certs/index>` from a trusted authority.
 
 .. _wazuh_dashboard_securing_installation:
 
 Securing your Wazuh installation
 --------------------------------
 
-Once every component is installed and running, each component stores the passwords it needs in its own keystore or database. Nothing reads ``/etc/wazuh/credentials.env`` after installation. Every node receives the same passwords from ``wazuh-certificates.tar``. The Wazuh indexer passwords match those created on the first Wazuh indexer node, and the Wazuh manager API passwords match those created in **Adding the passwords**.
+Once every component is installed and running, each component stores the passwords it needs in its own keystore or database. Nothing reads ``/etc/wazuh/credentials.env`` after installation, and deleting it doesn't affect running or restarted components. Every node received the passwords it needs from the ``credentials.env`` file you created in **Creating the passwords**, directly on the first Wazuh indexer node and through ``wazuh-certificates.tar`` on the others.
 
-#. Log in to the Wazuh dashboard and confirm it reaches both the Wazuh indexer and the Wazuh manager.
+#. Log in to the Wazuh dashboard. A successful login shows that the Wazuh dashboard reaches the Wazuh indexer. Then open the menu and go to **Dashboard management** > **Server API**. In the **API connection** card, the **Host** is the address of the Wazuh manager master node, and the **Status** is **Online**. This shows that the Wazuh dashboard reaches the Wazuh manager. If the **Status** is **Offline**, check that the ``wazuh-manager`` service is running on the master node and that port 55000/TCP is reachable from the Wazuh dashboard host, then click **Refresh**.
 
 #. Securely store the five passwords. The ``credentials.env`` file in the working directory of the first Wazuh indexer node holds all five.
 
@@ -201,7 +303,28 @@ To change a password after installation, see the :doc:`password management </use
 Disable Wazuh updates
 ---------------------
 
-.. include:: /_templates/installations/disable-wazuh-updates.rst
+After all Wazuh components on this host are installed, disable the Wazuh repository to prevent accidental upgrades:
+
+.. tabs::
+
+   .. group-tab:: APT
+
+      .. code-block:: console
+
+         # sed -i "s/^deb /#deb /" /etc/apt/sources.list.d/wazuh.list
+         # apt update
+
+   .. group-tab:: Yum
+
+      .. code-block:: console
+
+         # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
+
+   .. group-tab:: DNF
+
+      .. code-block:: console
+
+         # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
 
 Next steps
 ----------
@@ -262,4 +385,4 @@ All the Wazuh central components are successfully installed and secured.
 
 The Wazuh environment is now ready, and you can proceed with installing the Wazuh agent on the endpoints to be monitored. To perform this action, see the :doc:`Wazuh agent </installation-guide/wazuh-agent/index>` section.
 
-If you want to uninstall the Wazuh dashboard, see :ref:`uninstall_dashboard`.
+If you want to uninstall the Wazuh dashboard, see :ref:`Uninstall the Wazuh dashboard <uninstall_dashboard>`.

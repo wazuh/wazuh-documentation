@@ -8,7 +8,7 @@ Wazuh dashboard
 
 This Wazuh central component is a flexible and intuitive web interface for mining, analyzing, and visualizing security data. It provides out-of-the-box dashboards, allowing you to seamlessly navigate through the user interface. It also enables centralized management of the Wazuh manager and Wazuh agents, giving you full control from a single unified console.
 
-With the Wazuh dashboard, you can visualize security events, detected vulnerabilities, file integrity monitoring data, configuration assessment results, cloud infrastructure monitoring events, and regulatory compliance standards. If you want to learn more about the Wazuh components, see the :doc:`/getting-started/index` section.
+With the Wazuh dashboard, you can visualize security events, detected vulnerabilities, file integrity monitoring data, configuration assessment results, cloud infrastructure monitoring events, and regulatory compliance standards. If you want to learn more about the Wazuh components, see the :doc:`Getting started </getting-started/index>` section.
 
 Check the requirements below and choose an installation method to start installing the Wazuh dashboard.
 
@@ -84,7 +84,7 @@ Hardware requirements
 
 The Wazuh dashboard can be installed on a dedicated node or along with the Wazuh indexer.
 
--  Hardware recommendations
+-  Hardware requirements for each node:
 
    +-------------------------+-------------------------+-------------------------------+
    |                         |  Minimum                |   Recommended                 |
@@ -101,15 +101,15 @@ Required ports
 
 The Wazuh dashboard uses the following ports.
 
-+-----------+--------------------------------------------+------------------------+
-| Port      | Direction                                  | Purpose                |
-+===========+============================================+========================+
-| 443/TCP   | Inbound, from users                        | Wazuh web interface    |
-+-----------+--------------------------------------------+------------------------+
-| 9200/TCP  | Outbound, to the Wazuh indexer nodes       | Wazuh indexer REST API |
-+-----------+--------------------------------------------+------------------------+
-| 55000/TCP | Outbound, to the Wazuh manager master node | Wazuh manager API      |
-+-----------+--------------------------------------------+------------------------+
++---------------------+--------------------------------------------------------+------------------------+
+| Port                | From                                                   | Purpose                |
++=====================+========================================================+========================+
+| 443/TCP             | Users' web browsers                                    | Wazuh web interface    |
++---------------------+--------------------------------------------------------+------------------------+
+| 9200/TCP, outbound  | This Wazuh dashboard, to the Wazuh indexer nodes       | Wazuh indexer REST API |
++---------------------+--------------------------------------------------------+------------------------+
+| 55000/TCP, outbound | This Wazuh dashboard, to the Wazuh manager master node | Wazuh manager API      |
++---------------------+--------------------------------------------------------+------------------------+
 
 .. toctree::
    :hidden:

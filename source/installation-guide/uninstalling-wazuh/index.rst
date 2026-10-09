@@ -10,7 +10,7 @@ This section describes how to uninstall the Wazuh central components and the Waz
 
 .. note::
 
-   You need root user privileges to run all the commands described below.
+   The commands in this section need root privileges. Run them as root or with ``sudo``.
 
 .. toctree::
    :maxdepth: 1

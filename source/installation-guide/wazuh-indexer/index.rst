@@ -6,7 +6,6 @@
 Wazuh indexer
 =============
 
-
 The Wazuh indexer is a scalable search and analytics engine that stores and indexes events forwarded by the Wazuh manager, enabling near real-time data analysis. It manages threat intelligence updates, including decoders, detection rules, vulnerability feeds, and Indicators of Compromise (IoCs) from the Wazuh Cyber Threat Intelligence (CTI) platform.
 
 You can install the Wazuh indexer on a single host or distribute it across multiple nodes in a cluster configuration. The cluster configuration provides scalability, high availability, and improved performance.
@@ -76,16 +75,16 @@ Check the recommended operating systems and hardware requirements for the Wazuh 
 Recommended operating systems
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The Wazuh indexer requires a 64-bit Intel, AMD, or ARM Linux processor (x86_64/AMD64 or AARCH64/ARM64 architecture) to run. Wazuh recommends the following operating system versions:
+The Wazuh indexer requires a 64-bit Intel, AMD, or ARM Linux processor (x86_64/AMD64 or AARCH64/ARM64 architecture). Wazuh recommends the following operating system versions:
 
 .. include:: /_templates/installations/wazuh/recommended-operating-systems.rst
 
-Hardware recommendations
-^^^^^^^^^^^^^^^^^^^^^^^^
+Hardware requirements
+^^^^^^^^^^^^^^^^^^^^^
 
 You can install the Wazuh indexer as a single-node or multi-node cluster.
 
--  Hardware recommendations for each node:
+-  Hardware requirements for each node:
 
    +-------------------------+-------------------------+-------------------------------+
    |                         |  Minimum                |   Recommended                 |
