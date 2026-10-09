@@ -13,7 +13,7 @@ You can use the preconfigured roles to deploy the Wazuh central components and t
    # cd /etc/ansible/roles
    # git clone --branch v|WAZUH_CURRENT_ANSIBLE|-|WAZUH_CURRENT_ANSIBLE_REV| https://github.com/wazuh/wazuh-ansible.git
 
-The following sections explain how to use and customize these roles. For more details about Ansible roles, see the `Ansible community documentation <https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_reuse_roles.html>`_.
+The following sections explain how to use and customize these roles. For more details about Ansible roles, see the `Ansible community documentation <https://docs.ansible.com/projects/ansible/latest/playbook_guide/playbooks_reuse_roles.html>`_.
 
 .. contents::
    :local:
@@ -84,7 +84,7 @@ The role performs the following tasks:
 -  **Deploy SSL certificates:** Copies the root CA certificate, the indexer connector certificate, and the agent listener certificate to the paths the Wazuh manager uses.
 -  **Wait for the certificate:** Waits until the node certificate is valid on the host.
 -  **Start service:** Enables and restarts the Wazuh manager service.
--  **Verify API:** On the master node, authenticates to the Wazuh server API as ``wazuh`` with the deployment password and runs a cluster health check. On a worker node, runs ``cluster_control -l``.
+-  **Verify API:** On the master node, authenticates to the Wazuh manager API as ``wazuh`` with the deployment password and runs a cluster health check. On a worker node, runs ``cluster_control -l``.
 -  **Remove installation files:** Deletes the package download directory on the target node.
 
 Wazuh dashboard
