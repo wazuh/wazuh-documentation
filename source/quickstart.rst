@@ -54,11 +54,29 @@ You can install the Wazuh central components on 64-bit Linux systems using Intel
 Installing Wazuh
 ----------------
 
-#. Download and run the installation assistant. The installation assistant deploys the Wazuh central components and generates access credentials.
+.. note::
 
-   .. code-block:: console
+   If a firewall such as firewalld or UFW is active on the endpoint, allow incoming traffic on the following ports. This lets Wazuh agents and users reach the Wazuh central components:
 
-      # wget https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh && sudo bash ./wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -a -id -d pre-release
+   -  **1517/TCP**: Wazuh 5.x agent enrollment and connection.
+   -  **443/TCP**: Wazuh dashboard web interface.
+   -  **1514/TCP and 1515/TCP**: only needed if Wazuh 4.x agents connect to this deployment.
+
+   See :ref:`required ports <default_ports>` for the full list of default ports.
+
+#. Download and run the installation assistant to deploy the Wazuh central components and generate the credentials required to access the Wazuh dashboard.
+
+   -  **Default address:** If the Wazuh agents connect using the Wazuh manager's configured address, such as a private IP address or hostname, no additional parameters are required.
+
+      .. code-block:: console
+
+         # wget https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh && sudo bash ./wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -a -id -d pre-release
+
+   -  **Alternative address:** If the Wazuh agents connect through an address other than the Wazuh manager's configured address, such as a public IP address, NAT address, or load balancer, specify it with ``-as|--agent-san <ADDRESS>``. Replace ``<ADDRESS>`` with the alternative address, such as the public IP or load balancer.
+
+      .. code-block:: console
+
+         # wget https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh && sudo bash ./wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -a -id -d pre-release -as <ADDRESS>
 
    Once the assistant finishes the installation, the output shows the access credentials and a message confirming successful installation.
 

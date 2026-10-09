@@ -7,7 +7,13 @@ Deployment on Docker
 ====================
 
 
-`Docker <https://www.docker.com/>`__ is an open source platform that simplifies building, delivering, and running applications in lightweight, portable containers. These containers bundle their application with all its dependencies, such as code, system tools, system libraries, and settings. Docker enables the separation of applications from the underlying infrastructure and ensures they run consistently across any environment, whether in the cloud or on-premises.
+Deploy Wazuh with the official Wazuh Docker images. Each stack runs all its containers on one Docker host.
+
+-  **Single-node stack:** one container for each Wazuh central component. Use it for tests and small environments. It needs at least 8 GB of RAM.
+-  **Multi-node stack:** three Wazuh indexer nodes, two Wazuh manager nodes, a Wazuh dashboard, and an Nginx container that receives Wazuh agent connections. It needs at least 16 GB of RAM.
+-  **Wazuh agent container:** a Wazuh agent for syslog collection and integrations, on any Docker host.
+
+Start with :doc:`Wazuh Docker deployment <wazuh-container>`, which covers the requirements, both stacks, and the Wazuh agent container. Use :doc:`Building Docker images locally <build-docker-images-locally>` only if you need custom images.
 
 Wazuh provides official Docker images you can use to streamline the deployment of its components. These include:
 

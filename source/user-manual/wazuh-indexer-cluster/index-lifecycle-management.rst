@@ -133,7 +133,7 @@ Using the JSON editor
           }
       }
 
-   Adjust the ``“min_index_age”:`` from ``“90d”`` to your preferred number of days for minimum index retention.
+   Adjust the ``"min_index_age":`` from ``"90d"`` to your preferred number of days for minimum index retention.
 
 #. Click **Create**.
 

@@ -26,6 +26,9 @@ Options
 - `notify_time`_
 - `time-reconnect`_
 - `auto_restart`_
+- `disable-active-response`_
+- `stats_report`_
+- `config_report`_
 - `ip_update_interval`_
 - `crypto_method`_
 - `enrollment`_
@@ -66,31 +69,31 @@ TLS configuration for the agent's HTTPS connection to the manager.
 
 Sub options
 
-+-----------------------------+-----------------------------------------------------------------------+----------------------------------------+----------------------------------------------------------------------+
-| Option                      | Description                                                           | Default                                | Allowed values                                                       |
-+=============================+=======================================================================+========================================+======================================================================+
-| ``certificate``             | Optional client (mTLS) certificate the agent presents to the manager. | None                                   | Path to a PEM-encoded certificate file, readable by the agent        |
-|                             | Must be set together with ``key`` - setting only one of the two is    |                                        |                                                                      |
-|                             | rejected.                                                             |                                        |                                                                      |
-+-----------------------------+-----------------------------------------------------------------------+----------------------------------------+----------------------------------------------------------------------+
-| ``key``                     | Private key matching ``certificate``. Must be set together with       | None                                   | Path to a PEM-encoded private key file, readable by the agent        |
-|                             | ``certificate``.                                                      |                                        |                                                                      |
-+-----------------------------+-----------------------------------------------------------------------+----------------------------------------+----------------------------------------------------------------------+
-| ``certificate_authorities`` | CA bundle used to verify the manager's certificate - a flat path      | None                                   | Path to a PEM-encoded CA bundle file, readable by the agent          |
-|                             | value, not a container. Required when ``verification_mode`` is        |                                        |                                                                      |
-|                             | ``full`` or ``certificate`` (agent fails closed without it). Must NOT |                                        |                                                                      |
-|                             | be set when ``verification_mode`` is ``system``. Ignored (with a      |                                        |                                                                      |
-|                             | warning if unreadable) when ``verification_mode`` is ``none``.        |                                        |                                                                      |
-+-----------------------------+-----------------------------------------------------------------------+----------------------------------------+----------------------------------------------------------------------+
-| ``verification_mode``       | How strictly the agent verifies the manager's TLS certificate.        | none                                   | ``none`` (no verification - insecure, testing only). ``certificate`` |
-|                             |                                                                       |                                        | (verify against CA, no hostname check) ``full`` (verify + hostname)  |
-|                             |                                                                       |                                        | ``system`` (verify against the OS trust store instead of             |
-|                             |                                                                       |                                        | ``certificate_authorities``). Any other value is rejected at config- |
-|                             |                                                                       |                                        | parse time.                                                          |
-+-----------------------------+-----------------------------------------------------------------------+----------------------------------------+----------------------------------------------------------------------+
-| ``ciphers``                 | TLS 1.3 ciphersuite list to offer during the handshake.               | None (libcurl/OpenSSL TLS 1.3 default) | Colon-separated list of TLS 1.3 ciphersuite names, e.g.              |
-|                             |                                                                       |                                        | ``TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256``              |
-+-----------------------------+-----------------------------------------------------------------------+----------------------------------------+----------------------------------------------------------------------+
++-----------------------------+-----------------------------------------------------------------------+-----------------------------------------------------------------+----------------------------------------------------------------------+
+| Option                      | Description                                                           | Default                                                         | Allowed values                                                       |
++=============================+=======================================================================+=================================================================+======================================================================+
+| ``certificate``             | Optional client (mTLS) certificate the agent presents to the manager. | None                                                            | Path to a PEM-encoded certificate file, readable by the agent        |
+|                             | Must be set together with ``key`` - setting only one of the two is    |                                                                 |                                                                      |
+|                             | rejected.                                                             |                                                                 |                                                                      |
++-----------------------------+-----------------------------------------------------------------------+-----------------------------------------------------------------+----------------------------------------------------------------------+
+| ``key``                     | Private key matching ``certificate``. Must be set together with       | None                                                            | Path to a PEM-encoded private key file, readable by the agent        |
+|                             | ``certificate``.                                                      |                                                                 |                                                                      |
++-----------------------------+-----------------------------------------------------------------------+-----------------------------------------------------------------+----------------------------------------------------------------------+
+| ``certificate_authorities`` | CA bundle used to verify the manager's certificate - a flat path      | None                                                            | Path to a PEM-encoded CA bundle file, readable by the agent          |
+|                             | value, not a container. Required when ``verification_mode`` is        |                                                                 |                                                                      |
+|                             | ``full`` or ``certificate`` (agent fails closed without it). Must NOT |                                                                 |                                                                      |
+|                             | be set when ``verification_mode`` is ``system``. Ignored (with a      |                                                                 |                                                                      |
+|                             | warning if unreadable) when ``verification_mode`` is ``none``.        |                                                                 |                                                                      |
++-----------------------------+-----------------------------------------------------------------------+-----------------------------------------------------------------+----------------------------------------------------------------------+
+| ``verification_mode``       | How strictly the agent verifies the manager's TLS certificate.        | Depends on the trust material available: ``certificate`` when   | ``none`` (no verification - insecure, testing only). ``certificate`` |
+|                             |                                                                       | ``certificate_authorities`` is set; otherwise ``full`` when the | (verify against CA, no hostname check) ``full`` (verify + hostname)  |
+|                             |                                                                       | enrollment CA file ``etc/certs/root-ca.pem`` exists; otherwise  | ``system`` (verify against the OS trust store instead of             |
+|                             |                                                                       | ``none``.                                                       | ``certificate_authorities``). Any other value is rejected at config- |
+|                             |                                                                       |                                                                 | parse time.                                                          |
++-----------------------------+-----------------------------------------------------------------------+-----------------------------------------------------------------+----------------------------------------------------------------------+
+| ``ciphers``                 | TLS 1.3 ciphersuite list to offer during the handshake.               | None (libcurl/OpenSSL TLS 1.3 default)                          | Colon-separated list of TLS 1.3 ciphersuite names, e.g.              |
+|                             |                                                                       |                                                                 | ``TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256``              |
++-----------------------------+-----------------------------------------------------------------------+-----------------------------------------------------------------+----------------------------------------------------------------------+
 
 config-profile
 ^^^^^^^^^^^^^^^
@@ -109,7 +112,7 @@ notify_time
 Specifies the interval, in seconds, between agent keepalive messages sent to the Wazuh manager. Lower values propagate centrally distributed configuration updates more quickly but increase the load on the Wazuh manager when many agents are connected.
 
 +--------------------+-----------------------------+
-| **Default value**  | 20                          |
+| **Default value**  | 10                          |
 +--------------------+-----------------------------+
 | **Allowed values** | A positive number (seconds) |
 +--------------------+-----------------------------+
@@ -120,18 +123,9 @@ Specifies the interval, in seconds, between agent keepalive messages sent to the
 time-reconnect
 ^^^^^^^^^^^^^^^
 
-Specifies the time in seconds before a reconnection is attempted. This should be set to a higher number than the ``notify_time`` parameter.
+.. deprecated:: 5.0.0
 
-For example, a ``notify_time`` setting of 60 combined with a ``time-reconnect`` of 300 would mean that agents will attempt to check in once per minute, but if a checkin attempt fails to get a response from the manager, the agent will wait five minutes before trying again. Checkins will resume their normal one-minute interval following a successful connection attempt.
-
-+--------------------+-----------------------------+
-| **Default value**  | 60                          |
-+--------------------+-----------------------------+
-| **Allowed values** | A positive number (seconds) |
-+--------------------+-----------------------------+
-
-.. warning::
-   Notice that the ``notify_time`` value uses an underscore while the ``time-reconnect`` value uses a dash. This is an unfortunate legacy naming inconsistency that is easy to mix up.
+   This option has no effect in Wazuh 5.0. The Wazuh agent sends its data over HTTPS and keeps no persistent connection to reconnect. The option is still accepted so configurations from Wazuh 4.x agents don't fail, and the Wazuh agent logs a deprecation warning when it finds it.
 
 auto_restart
 ^^^^^^^^^^^^^
@@ -144,21 +138,51 @@ Toggles on and off the automatic restart of agents when a new valid configuratio
 | **Allowed values**   | yes, no   |
 +----------------------+-----------+
 
+disable-active-response
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Disables active response on the Wazuh agent. When set to ``yes``, the Wazuh agent doesn't run active response commands.
+
++--------------------+---------+
+| **Default value**  | no      |
++--------------------+---------+
+| **Allowed values** | yes, no |
++--------------------+---------+
+
+stats_report
+^^^^^^^^^^^^
+
+Periodically sends Wazuh agent statistics to the Wazuh manager.
+
++--------------+--------------------------------+---------+--------------------------------------------------+
+| Option       | Description                    | Default | Allowed values                                   |
++==============+================================+=========+==================================================+
+| ``enabled``  | Enables the statistics report. | no      | yes, no                                          |
++--------------+--------------------------------+---------+--------------------------------------------------+
+| ``interval`` | Time between reports.          | 60s     | Positive time value with optional suffix s, m, h |
+|              |                                |         | or d. Maximum 86400s (1d).                       |
++--------------+--------------------------------+---------+--------------------------------------------------+
+
+config_report
+^^^^^^^^^^^^^
+
+Periodically sends a snapshot of the Wazuh agent configuration to the Wazuh manager.
+
++--------------+-----------------------------------+------------+--------------------------------------------------+
+| Option       | Description                       | Default    | Allowed values                                   |
++==============+===================================+============+==================================================+
+| ``enabled``  | Enables the configuration report. | yes        | yes, no                                          |
++--------------+-----------------------------------+------------+--------------------------------------------------+
+| ``interval`` | Time between reports.             | 3600s (1h) | Positive time value with optional suffix s, m, h |
+|              |                                   |            | or d. Maximum 86400s (1d).                       |
++--------------+-----------------------------------+------------+--------------------------------------------------+
+
 ip_update_interval
 ^^^^^^^^^^^^^^^^^^^
 
-Specifies how often an agent will query the control module for its main IP address.
+.. deprecated:: 5.0.0
 
-Any value equal to or lower than the configured ``notify_time`` will cause the IP address to be queried on each keep-alive message.
-
-+--------------------+-----------------------------+
-| **Default value**  | 0                           |
-+--------------------+-----------------------------+
-| **Allowed values** | A positive number (seconds) |
-+--------------------+-----------------------------+
-
-.. note::
-   Most systems won't need to modify this value, but on systems with large routing tables this configuration can help lower CPU usage from ``wazuh-modulesd``.
+   This option has no effect in Wazuh 5.0. It is still accepted, and the Wazuh agent logs a deprecation warning when it finds it.
 
 crypto_method
 ^^^^^^^^^^^^^^
@@ -171,6 +195,8 @@ DEPRECATED: This option is parsed but ignored. Encryption method is hard-coded t
 | **Behavior**         | Always uses AES regardless of configured value    |
 +----------------------+---------------------------------------------------+
 
+.. _reference_ossec_agent_enrollment:
+
 enrollment
 ^^^^^^^^^^^
 
@@ -178,23 +204,26 @@ Agent auto-enrollment configuration block (optional). Runs over the same HTTPS c
 
 Sub options
 
-+-----------------------------+---------------------------------------------------------------------------------------+-----------------+------------------------------------------+
-| Option                      | Description                                                                           | Default         | Allowed values                           |
-+=============================+=======================================================================================+=================+==========================================+
-| **enabled**                 | Enable automatic agent enrollment.                                                    | yes             | yes, no                                  |
-+-----------------------------+---------------------------------------------------------------------------------------+-----------------+------------------------------------------+
-| **agent_name**              | Custom agent name for enrollment.                                                     | System hostname | Any string                               |
-+-----------------------------+---------------------------------------------------------------------------------------+-----------------+------------------------------------------+
-| **groups**                  | Comma-separated list of groups to assign during enrollment.                           | default         | Comma-separated group names              |
-+-----------------------------+---------------------------------------------------------------------------------------+-----------------+------------------------------------------+
-| **authorization_pass_path** | Path to file containing enrollment authorization password.                            | None            | Valid file path                          |
-+-----------------------------+---------------------------------------------------------------------------------------+-----------------+------------------------------------------+
-| **agent_address**           | Agent's IP address to use for enrollment (overrides auto-detected address).           | Auto-detected   | Valid IPv4 or IPv6 address               |
-+-----------------------------+---------------------------------------------------------------------------------------+-----------------+------------------------------------------+
-| **delay_after_enrollment**  | Delay in seconds after successful enrollment before starting normal agent operations. | 20              | Positive integer (seconds) from 1 upward |
-+-----------------------------+---------------------------------------------------------------------------------------+-----------------+------------------------------------------+
-| **use_source_ip**           | Use agent's source IP address for enrollment instead of configured address.           | no              | yes, no                                  |
-+-----------------------------+---------------------------------------------------------------------------------------+-----------------+------------------------------------------+
++-----------------------------+--------------------------------------------------------------+--------------------+------------------------------------------+
+| Option                      | Description                                                  | Default            | Allowed values                           |
++=============================+==============================================================+====================+==========================================+
+| **enabled**                 | Enable automatic agent enrollment.                           | yes                | yes, no                                  |
++-----------------------------+--------------------------------------------------------------+--------------------+------------------------------------------+
+| **agent_name**              | Custom agent name for enrollment.                            | System hostname    | Any string                               |
++-----------------------------+--------------------------------------------------------------+--------------------+------------------------------------------+
+| **groups**                  | Comma-separated list of groups to assign during enrollment.  | default            | Comma-separated group names              |
++-----------------------------+--------------------------------------------------------------+--------------------+------------------------------------------+
+| **authorization_pass_path** | Path to file containing enrollment authorization password.   | ``etc/authd.pass`` | Valid file path                          |
++-----------------------------+--------------------------------------------------------------+--------------------+------------------------------------------+
+| **agent_address**           | Agent's IP address to use for enrollment (overrides          | Auto-detected      | Valid IPv4 or IPv6 address               |
+|                             | auto-detected address).                                      |                    |                                          |
++-----------------------------+--------------------------------------------------------------+--------------------+------------------------------------------+
+| **delay_after_enrollment**  | Delay in seconds after successful enrollment before starting | 20                 | Positive integer (seconds) from 1 upward |
+|                             | normal agent operations.                                     |                    |                                          |
++-----------------------------+--------------------------------------------------------------+--------------------+------------------------------------------+
+| **use_source_ip**           | Use agent's source IP address for enrollment instead of      | no                 | yes, no                                  |
+|                             | configured address.                                          |                    |                                          |
++-----------------------------+--------------------------------------------------------------+--------------------+------------------------------------------+
 
 Removed options
 ^^^^^^^^^^^^^^^^
@@ -215,7 +244,6 @@ Sample configuration
      </ssl>
      <config-profile>webserver, debian8</config-profile>
      <notify_time>60</notify_time>
-     <time-reconnect>120</time-reconnect>
      <auto_restart>yes</auto_restart>
      <enrollment>
        <enabled>yes</enabled>
@@ -240,6 +268,19 @@ batch
 This replaces ``<client_buffer>`` in Wazuh 5.0. It is nested inside ``<agent>``, not a top-level section like the old ``<client_buffer>``.
 
 Configures the HTTPS transport's event-batching accumulator (buffering and pacing).
+
+Options
+^^^^^^^
+
++--------------+---------------------------------------------------+------------+--------------------------------------------------+
+| Option       | Description                                       | Default    | Allowed values                                   |
++==============+===================================================+============+==================================================+
+| ``size``     | Maximum size of a batch of events.                | 1M (1 MiB) | Size in bytes, or with a K, M or G suffix (for   |
+|              |                                                   |            | example ``512K`` or ``10MB``). Maximum 1G.       |
++--------------+---------------------------------------------------+------------+--------------------------------------------------+
+| ``interval`` | Maximum time the Wazuh agent waits before sending | 10s        | Positive time value with optional suffix s, m, h |
+|              | a batch.                                          |            | or d. Maximum 86400s (1d).                       |
++--------------+---------------------------------------------------+------------+--------------------------------------------------+
 
 Sample configuration
 ^^^^^^^^^^^^^^^^^^^^^

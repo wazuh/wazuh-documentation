@@ -18,7 +18,7 @@ Configuring labels that will be included in alerts is a straightforward process.
 
 Information on how to configure labels can be found in the :doc:`labels </user-manual/reference/ossec-conf/labels>` section of the :doc:`ossec.conf </user-manual/reference/ossec-conf/index>` file on the Wazuh agent.
 
-Agent labels can also be centralized using the :doc:`agent.conf </user-manual/reference/centralized-configuration>` file on the Wazuh manager, such that labels can be set for specific Wazuh agents at the Wazuh manager level. When there is a pre-existing label that is the same as one the user has defined in the Wazuh agent :doc:`ossec.conf </user-manual/reference/ossec-conf/index>` file or ``agent.conf``, the second one will override the first.
+Agent labels can also be centralized using the :doc:`agent.conf </user-manual/reference/centralized-configuration>` file on the Wazuh manager, such that labels can be set for specific Wazuh agents at the Wazuh manager level. When there is a pre-existing label that is the same as one the user has defined in the Wazuh agent :doc:`ossec.conf </user-manual/reference/ossec-conf/index>` file and in ``agent.conf``, the label in ``agent.conf`` overrides the one in ``ossec.conf``, because ``agent.conf`` is read after ``ossec.conf``.
 
 For more information about centralizing agent configuration, see the :doc:`centralized configuration </user-manual/reference/centralized-configuration>` section.
 

@@ -32,7 +32,7 @@ You can find below an example decoder to match some static fields:
 Dynamic decoders
 ----------------
 
-It is often necessary to extract more than eight relevant fields from an event, and often the actual data items extracted have no relationship to the limited list of predefined field names. Recognizing the limitations of operating within these constraints, 	 unlimited number of fields with names that accurately reflect the extracted data. This enhancement includes support for nested field names as well.
+It is often necessary to extract more than eight relevant fields from an event, and often the actual data items extracted have no relationship to the limited list of predefined field names. Recognizing the limitations of operating within these constraints, Wazuh supports an unlimited number of fields with names that accurately reflect the extracted data. This enhancement includes support for nested field names as well.
 
 You can find below an example decoder to match some dynamic fields:
 

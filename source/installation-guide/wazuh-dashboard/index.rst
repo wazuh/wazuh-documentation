@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The Wazuh dashboard is a web interface for visualizing and analyzing security events, vulnerabilities, and compliance data.
+   :description: The Wazuh dashboard is a web interface for visualizing and analyzing security events, vulnerabilities, and compliance data.
 
 Wazuh dashboard
 ===============
@@ -28,6 +28,7 @@ Check the requirements below and choose an installation method to start installi
         <p class="link-boxes-label">Install the Wazuh indexer</p>
 
 .. image:: ../../images/installation/Indexer-Circle.png
+     :alt: Wazuh indexer logo
      :align: center
      :height: 61px
 
@@ -41,6 +42,7 @@ Check the requirements below and choose an installation method to start installi
         <p class="link-boxes-label">Install the Wazuh manager</p>
 
 .. image:: ../../images/installation/Server-Circle.png
+     :alt: Wazuh manager logo
      :align: center
      :height: 61px
 
@@ -54,6 +56,7 @@ Check the requirements below and choose an installation method to start installi
         <p class="link-boxes-label">Install the Wazuh dashboard</p>
 
 .. image:: ../../images/installation/Dashboard-Circle.png
+     :alt: Wazuh dashboard logo
      :align: center
      :height: 61px
      
@@ -81,19 +84,36 @@ Hardware requirements
 
 The Wazuh dashboard can be installed on a dedicated node or along with the Wazuh indexer.
 
-- Hardware recommendations
-                          
-  +-------------------------+-------------------------+-------------------------------+
-  |                         |  Minimum                |   Recommended                 |
-  +-------------------------+----------+--------------+--------------+----------------+
-  | Component               |  RAM (GB)|  CPU (cores) |  RAM (GB)    |   CPU (cores)  |
-  +=========================+==========+==============+==============+================+
-  | Wazuh dashboard         |     4    |     2        |     8        |       4        |
-  +-------------------------+----------+--------------+--------------+----------------+
+-  Hardware recommendations
+
+   +-------------------------+-------------------------+-------------------------------+
+   |                         |  Minimum                |   Recommended                 |
+   +-------------------------+----------+--------------+--------------+----------------+
+   | Component               |  RAM (GB)|  CPU (cores) |  RAM (GB)    |   CPU (cores)  |
+   +=========================+==========+==============+==============+================+
+   | Wazuh dashboard         |     4    |     2        |     8        |       4        |
+   +-------------------------+----------+--------------+--------------+----------------+
+
+.. _wazuh_dashboard_required_ports:
+
+Required ports
+^^^^^^^^^^^^^^
+
+The Wazuh dashboard uses the following ports.
+
++-----------+--------------------------------------------+------------------------+
+| Port      | Direction                                  | Purpose                |
++===========+============================================+========================+
+| 443/TCP   | Inbound, from users                        | Wazuh web interface    |
++-----------+--------------------------------------------+------------------------+
+| 9200/TCP  | Outbound, to the Wazuh indexer nodes       | Wazuh indexer REST API |
++-----------+--------------------------------------------+------------------------+
+| 55000/TCP | Outbound, to the Wazuh manager master node | Wazuh manager API      |
++-----------+--------------------------------------------+------------------------+
 
 .. toctree::
-    :hidden:
-    :maxdepth: 1
+   :hidden:
+   :maxdepth: 1
 
-    Assisted installation <installation-assistant>
-    Step-by-step installation <step-by-step>
+   Assisted installation <installation-assistant>
+   Step-by-step installation <step-by-step>

@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Wazuh dashboard configurations for security analytics, active response, notifications, the AI Assistant, multi-tenancy, custom dashboards, global state data, and WQL.
+   :description: Wazuh dashboard configurations for ruleset management, active response, notifications, the AI Assistant, multi-tenancy, custom dashboards, global state data, and WQL.
 
 Wazuh dashboard configurations
 ==============================
@@ -15,37 +15,35 @@ The following configuration and management capabilities are covered in this sect
    :depth: 1
    :backlinks: none
 
-Security analytics
+Ruleset management
 ------------------
 
-**Security Analytics** is a core section of the Wazuh dashboard that provides tools for managing the full lifecycle of log normalization and event-based detection. It centralizes the configuration of integrations, decoders, key-value databases (KVDBs), detection rules, and detectors through a unified interface powered by the Wazuh Engine.
+**Ruleset Management** is a core section of the Wazuh dashboard that provides tools for managing the full lifecycle of log normalization and event-based detection. It centralizes the configuration of integrations, decoders, key-value databases (KVDBs), detection rules, and detectors through a unified interface.
 
 Integrations, decoders, KVDBs, rules, and detectors are organized into :ref:`Spaces <dashboard_configurations_space>`. The Draft, Test, and Custom spaces are user-managed and represent different stages of the content lifecycle, while the Standard space is read-only and contains the built-in content shipped with Wazuh.
 
-Security analytics is organized into sections that support different stages of the event processing workflow. The Normalization section focuses on parsing, enriching, and structuring raw log data. The Detection section manages the rules and detectors used to identify security findings from normalized events. The Wazuh Log test tool allows users to validate parsing and detection logic before deploying changes.
-
-The **Security Analytics** section on the Wazuh dashboard provides access to these sections:
+The **Ruleset Management** section on the Wazuh dashboard is organized into the following sections:
 
 -  :ref:`dashboard_configurations_normalization`: Provides visibility and management over the components that are used to parse, enrich, and structure raw log data before detection and analysis. Users can configure and manage integrations, decoders, and the Key-Value database (KVDB) used during log normalization.
--  :ref:`dashboard_configurations_detection`: Provides visibility and management over the rules responsible for generating findings from normalized events processed by the Wazuh Engine. Users can configure and manage detection rules and detectors for continuous threat monitoring.
+-  :ref:`dashboard_configurations_detection`: Provides visibility and management over the rules responsible for generating findings from normalized events processed by the Wazuh normalization engine. Users can configure and manage detection rules and detectors for continuous threat monitoring.
 -  :ref:`dashboard_configurations_logtest`: Provides an interactive interface to validate that a specific log event is correctly parsed by active decoders and test detection logic directly from the Wazuh dashboard.
 
-To view the **Security Analytics** dashboard, click ☰ to open the menu and navigate to **Security analytics** > **Overview**.
+To view the **Ruleset Management** dashboard, click **☰** to open the menu and navigate to **Ruleset management** > **Overview**.
 
-.. thumbnail:: /images/wazuh-dashboard/configurations/security-analytics-overview.png
+.. thumbnail:: /images/wazuh-dashboard/configurations/ruleset-management-overview.png
    :align: center
    :width: 80%
-   :title: Security Analytics overview
-   :alt: Security Analytics overview
+   :title: Ruleset management overview
+   :alt: Ruleset management overview
 
 .. _dashboard_configurations_space:
 
 Space
 ^^^^^
 
-Security analytics organizes content across four spaces. These spaces are based on the Wazuh indexer structure and are synchronized to the Wazuh Engine through the CMSync module. The Wazuh CMSync module periodically pulls content from the Wazuh indexer and applies any detected changes to the Wazuh engine. This synchronization process ensures that Wazuh Engine always uses the latest integrations, decoders, KVDBs, rules, and detectors configured in the Wazuh indexer.
+Ruleset management organizes content across four spaces. These spaces are based on the Wazuh indexer structure and are synchronized to the Wazuh Engine through the :ref:`CMSync module <content_management>`. The Wazuh CMSync module periodically pulls content from the Wazuh indexer and applies any detected changes to the Wazuh engine. This synchronization process ensures that Wazuh Engine always uses the latest integrations, decoders, KVDBs, rules, and detectors configured in the Wazuh indexer.
 
-Security analytics uses four spaces: **Draft**, **Test**, **Custom**, and **Standard**. The Draft, Test, and Custom spaces are user-managed and represent different stages of the content lifecycle. The Standard space contains default integrations, decoders, and rules maintained by the Wazuh CTI.
+Wazuh uses four spaces: **Draft**, **Test**, **Custom**, and **Standard**. The Draft, Test, and Custom spaces are user-managed and represent different stages of the content lifecycle. The Standard space contains default integrations, decoders, and rules maintained by the Wazuh CTI.
 
 +-------------+-----------+-------------------------------------------------------------------+
 | Space       | Managed by| Purpose                                                           |
@@ -74,7 +72,7 @@ User-managed content is typically promoted sequentially from Draft to Test and f
 Normalization
 ^^^^^^^^^^^^^
 
-The **Normalization** section of **Security Analytics** in the Wazuh dashboard provides visibility and management over the components responsible for parsing, enriching, and structuring raw log data before it is used for detection and analysis.
+The **Normalization** section of **Ruleset Management** in the Wazuh dashboard provides visibility and management over the components responsible for parsing, enriching, and structuring raw log data before it is used for detection and analysis.
 
 The Normalization section manages the following components:
 
@@ -88,9 +86,9 @@ The Normalization section manages the following components:
 Integration
 ~~~~~~~~~~~
 
-An integration is the top-level organizational unit in security analytics. It groups related decoders and rules that provide support for a specific log source or use case. Each integration is configured through a space policy within a space. The policy must be enabled before the integration can progress through the promotion workflow. It also defines the root decoder used by the normalization engine as the entry point for processing events for the integration in the Test and Custom spaces.
+An integration is the top-level organizational unit in the **Ruleset management** section of the Wazuh dashboard. It groups related decoders and rules that provide support for a specific log source or use case. Each integration is configured through a space policy within a space. The policy must be enabled before the integration can progress through the promotion workflow. It also defines the root decoder used by the normalization engine as the entry point for processing events for the integration in the Test and Custom spaces.
 
-In the **Security Analytics** section of the Wazuh dashboard, click **Overview** to display all integrations available across the active spaces (Draft, Test, Custom, and Standard), along with their status and associated metadata.
+In the **Ruleset Management** section of the Wazuh dashboard, click **Overview** to display all integrations available across the active spaces (Draft, Test, Custom, and Standard), along with their status and associated metadata.
 
 .. thumbnail:: /images/wazuh-dashboard/configurations/integrations-overview.png
    :align: center
@@ -98,7 +96,7 @@ In the **Security Analytics** section of the Wazuh dashboard, click **Overview**
    :title: Integrations overview
    :alt: Integrations overview
 
-In the **Security Analytics** section of the Wazuh dashboard, navigate to **Overview** > **Draft** > **Actions** > **Create** to create custom integrations.
+In the **Ruleset Management** section of the Wazuh dashboard, navigate to **Overview** > **Draft** > **Actions** > **Create** to create custom integrations.
 
 .. thumbnail:: /images/wazuh-dashboard/configurations/create-integration1.png
    :align: center
@@ -112,7 +110,7 @@ In the **Security Analytics** section of the Wazuh dashboard, navigate to **Over
    :title: Create integration
    :alt: Create integration
 
-User-managed content is promoted sequentially from Draft to Test and from Test to Custom after validation. After creating an integration, click **Actions** at the top-right corner of the Wazuh dashboard and select **Promote**.
+User-managed content is promoted sequentially from Draft to Test and from Test to Custom after validation. After creating an integration, select it, and click **Actions** > **Promote** at the top-right corner of the Wazuh dashboard.
 
 .. thumbnail:: /images/wazuh-dashboard/configurations/create-integration-actions.png
    :align: center
@@ -128,7 +126,7 @@ Decoder
 
 A decoder defines how a raw log event is parsed and mapped to normalized fields. Decoders are written in YAML and are validated against the Wazuh Engine schema. Each decoder belongs to an integration.
 
-In the **Security Analytics** section of the Wazuh dashboard, navigate to **Normalization** > **Decoders** to display all decoders available across the active spaces (Draft, Test, Custom, and Standard).
+In the **Ruleset Management** section of the Wazuh dashboard, navigate to **Normalization > Decoders** to display all decoders available across the active spaces (Draft, Test, Custom, and Standard).
 
 .. thumbnail:: /images/wazuh-dashboard/configurations/decoders-list.png
    :align: center
@@ -136,7 +134,7 @@ In the **Security Analytics** section of the Wazuh dashboard, navigate to **Norm
    :title: Decoders list
    :alt: Decoders list
 
-In the **Security Analytics** section of the Wazuh dashboard, navigate to **Decoders** > **Draft** > **Actions** > **Create** to create custom decoders. In the creation form, select the integration and provide the decoder definition, then click on **Create decoder**.
+In the **Ruleset Management** section of the Wazuh dashboard, navigate to **Decoders** > **Draft** > **Actions** > **Create** to create custom decoders. In the creation form, select the integration and provide the decoder definition, then click on **Create decoder**.
 
 .. thumbnail:: /images/wazuh-dashboard/configurations/create-decoder.png
    :align: center
@@ -153,7 +151,7 @@ A KVDB (Key-Value Database) is a lookup table that can be referenced in decoder 
 
 The KVDB contains a key-value pair consisting of a field (key) and its expected content (value). The key identifies a specific field extracted during decoding, while the value defines the condition used for matching. Wazuh uses key-value pairs to verify whether extracted event fields, such as IP addresses, file hashes, usernames, or process names, match specific values defined in rules.
 
-In the **Security Analytics** section of the Wazuh dashboard, navigate to **KVDBs** to display all KVDBs available across the active spaces (Draft, Test, Custom, and Standard).
+In the **Ruleset Management** section of the Wazuh dashboard, navigate to **KVDBs** to display all KVDBs available across the active spaces (Draft, Test, Custom, and Standard).
 
 .. thumbnail:: /images/wazuh-dashboard/configurations/kvdb-list.png
    :align: center
@@ -161,18 +159,18 @@ In the **Security Analytics** section of the Wazuh dashboard, navigate to **KVDB
    :title: KVDB list
    :alt: KVDB list
 
-To create custom KVDBs, navigate to **Security Analytics** > **KVDB** > **Draft** > **Actions** > **Create** in the Wazuh dashboard. Perform the following steps:
+To create custom KVDBs, navigate to **Ruleset management** > **KVDB** > **Draft** > **Actions** > **Create** in the Wazuh dashboard. Perform the following steps:
 
-- Select the **Integration**.
-- Set the KVDB's **Title** and **Author** name.
-- Under the **Content** section, set the ``key``:``value`` pair.
-- Click on **Create KVDB** to create the KVDB.
+#. Select the **Integration**.
+#. Set the KVDB's **Title** and **Author** name.
+#. Under the **Content** section, set the ``key``:``value`` pair.
+#. Click on **Create KVDB** to create the KVDB.
 
-.. thumbnail:: /images/wazuh-dashboard/configurations/create-kvdb.png
-   :align: center
-   :width: 80%
-   :title: Create KVDB
-   :alt: Create KVDB
+   .. thumbnail:: /images/wazuh-dashboard/configurations/create-kvdb.png
+      :align: center
+      :width: 80%
+      :title: Create KVDB
+      :alt: Create KVDB
 
 After creating the custom KVDB, click **Actions** at the top-right corner of the Wazuh dashboard and select **Promote**. User-managed content is promoted sequentially from Draft to Test and from Test to Custom after validation.
 
@@ -181,14 +179,16 @@ After creating the custom KVDB, click **Actions** at the top-right corner of the
 Detection
 ^^^^^^^^^
 
-The **Detection** section of **Security Analytics** on the Wazuh dashboard provides visibility and management over the rules responsible for generating findings from normalized events processed by the Wazuh Engine.
+The **Detection** section of **Ruleset Management** on the Wazuh dashboard provides visibility and management over the rules responsible for generating findings from normalized events.
 
-This Detection section provides the following components:
+This **Detection** section provides the following components:
 
 .. contents::
    :local:
    :depth: 1
    :backlinks: none
+
+.. _dashboard_configurations_detectors:
 
 Detectors
 ~~~~~~~~~
@@ -197,7 +197,7 @@ A detector connects detection rules to a specific data source (an index or alias
 
 A detector uses the selected data source to determine which events are analyzed by the associated rules. When incoming events match the configured rule conditions, the detector generates findings for further analysis and monitoring. This allows organizations to apply specific detection logic to selected log sources for continuous threat monitoring.
 
-In the **Security Analytics** section of the Wazuh dashboard, navigate to **Detection** > **Detectors** to view all available detectors.
+In the **Ruleset Management** section of the Wazuh dashboard, navigate to **Detection** > **Detectors** to view all available detectors.
 
 .. thumbnail:: /images/wazuh-dashboard/configurations/detectors-list.png
    :align: center
@@ -205,7 +205,7 @@ In the **Security Analytics** section of the Wazuh dashboard, navigate to **Dete
    :title: Detectors list
    :alt: Detectors list
 
-To create a Detector, navigate to **Detection** > **Detectors** > **Create detector** under the **Security Analytics** section of the Wazuh dashboard and perform the following actions:
+To create a Detector, navigate to **Detection > Detectors > Create detector** under the **Ruleset Management** section of the Wazuh dashboard and perform the following actions:
 
 #. Set the **Detector Name**.
 #. Select a **Data source**.
@@ -213,22 +213,22 @@ To create a Detector, navigate to **Detection** > **Detectors** > **Create detec
 #. Select the rules that will be active for this detector under the **Selected rules** panel. Click **Manage** to add or remove individual rules.
 #. Click on **Create detector** to create the detector.
 
-.. thumbnail:: /images/wazuh-dashboard/configurations/create-detector.png
-   :align: center
-   :width: 80%
-   :title: Create detector
-   :alt: Create detector
+   .. thumbnail:: /images/wazuh-dashboard/configurations/create-detector.png
+      :align: center
+      :width: 80%
+      :title: Create detector
+      :alt: Create detector
 
 Once the detector is created, it will start running against the configured data source using the selected rules.
 
 Rules
 ~~~~~
 
-A detection rule defines the conditions under which the Wazuh Engine generates a security finding. Rules operate on fields normalized by decoders and support references to compliance frameworks and the MITRE ATT\&CK framework.
+A detection rule defines the conditions under which the detection engine generates a security finding. Rules operate on fields normalized by decoders and support references to compliance frameworks and the MITRE ATT\&CK framework.
 
 Rules are written in YAML and follow the same promotion lifecycle as integrations and decoders. The Draft, Test, and Custom spaces are user-managed, while the Standard space is read-only.
 
-In the **Security Analytics** section of the Wazuh dashboard, navigate to **Detection** > **Rules** to display all rules available across the active spaces (Draft, Test, Custom, and Standard).
+In the **Ruleset Management** section of the Wazuh dashboard, navigate to **Detection** > **Rules** to display all rules available across the active spaces (Draft, Test, Custom, and Standard).
 
 .. thumbnail:: /images/wazuh-dashboard/configurations/rules-list.png
    :align: center
@@ -236,7 +236,7 @@ In the **Security Analytics** section of the Wazuh dashboard, navigate to **Dete
    :title: Rules list
    :alt: Rules list
 
-In the **Security Analytics** section of the Wazuh dashboard, navigate to **Detection** > **Rules** > **Draft** > **Actions** > **Create** to create custom rules. In the creation form, select the integration and provide the decoder definition, then click on **Create rules**.
+In the **Ruleset Management** section of the Wazuh dashboard, navigate to **Detection > Rules** > **Draft** > **Actions** > **Create** to create custom rules. In the creation form, select the integration and provide the decoder definition, then click on **Create rules**.
 
 .. thumbnail:: /images/wazuh-dashboard/configurations/create-rule.png
    :align: center
@@ -251,9 +251,9 @@ After creating the custom rules, click **Actions** at the top-right corner of th
 Log test
 ^^^^^^^^
 
-The Wazuh **Log Test** tool provides an interactive interface to validate that a specific log event is correctly parsed by active decoders and test detection logic directly from the Wazuh dashboard.
+The Wazuh **Log test** tool provides an interactive interface to validate that a specific log event is correctly parsed by active decoders and test detection logic directly from the Wazuh dashboard.
 
-In the **Security Analytics** section of the Wazuh dashboard, click **Log test** to access the log testing tool. For Integrations in the Test space, select the ``Test`` in **Space** field, provide the log event, and click **Test** to verify that events are correctly parsed.
+In the **Ruleset Management** section of the Wazuh dashboard, click **Log test** to access the log testing tool. For Integrations in the Test space, select the ``Test`` in **Space** field, provide the log event, and click **Test** to verify that events are correctly parsed.
 
 .. thumbnail:: /images/wazuh-dashboard/configurations/log-test.png
    :align: center

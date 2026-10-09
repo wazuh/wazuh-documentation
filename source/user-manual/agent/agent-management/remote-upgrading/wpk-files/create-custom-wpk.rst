@@ -92,7 +92,7 @@ Requirements
           -a,   --architecture <arch>                 [Optional] Target architecture of the package [x86_64].
           -j,   --jobs <number>                       [Optional] Number of parallel jobs when compiling.
           -p,   --path <path>                         [Optional] Installation path for the package. By default: /var.
-          -c,   --checksum                            [Optional] Generatez checksum.
+          -c,   --checksum                            [Optional] Generate checksum.
           -h,   --help                                Show this help.
 
 To use this tool, the previously created :ref:`certificate and key <create-wpk-key>` must be in the same directory.

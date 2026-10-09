@@ -95,29 +95,27 @@ Configuration sections
 
 The following table lists the configuration sections available in ``wazuh-manager.conf``.
 
-+------------------------------------------------------------+-----------------------------------------------------------------------------------+
-| Section                                                    | Description                                                                       |
-+============================================================+===================================================================================+
-| :doc:`global <global>`                                     | Configures global Wazuh manager settings, including agent disconnection timing.   |
-+------------------------------------------------------------+-----------------------------------------------------------------------------------+
-| :doc:`logging <logging>`                                   | Configures the format of Wazuh manager internal logs.                             |
-+------------------------------------------------------------+-----------------------------------------------------------------------------------+
-| :doc:`remote <remote>`                                     | Configures communication between Wazuh agents and the Wazuh manager.              |
-+------------------------------------------------------------+-----------------------------------------------------------------------------------+
-| :doc:`auth <auth>`                                         | Configures Wazuh agent enrollment.                                                |
-+------------------------------------------------------------+-----------------------------------------------------------------------------------+
-| :doc:`indexer <indexer>`                                   | Configures communication with the Wazuh indexer.                                  |
-+------------------------------------------------------------+-----------------------------------------------------------------------------------+
-| :doc:`vulnerability-detection <vulnerability-detection>`   | Configures vulnerability detection and vulnerability feed updates.                |
-+------------------------------------------------------------+-----------------------------------------------------------------------------------+
-| :doc:`agent-upgrade <agent-upgrade>`                       | Configures remote Wazuh agent upgrades.                                           |
-+------------------------------------------------------------+-----------------------------------------------------------------------------------+
-| :doc:`task-manager <task-manager>`                         | Configures remote task scheduling and lifecycle management.                       |
-+------------------------------------------------------------+-----------------------------------------------------------------------------------+
-| :doc:`wdb <wdb>`                                           | Configures Wazuh database backup settings.                                        |
-+------------------------------------------------------------+-----------------------------------------------------------------------------------+
-| :doc:`cluster <cluster>`                                   | Configures Wazuh manager cluster communication and synchronization.               |
-+------------------------------------------------------------+-----------------------------------------------------------------------------------+
++----------------------------------------------------------+----------------------------------------------------------------------------------------------+
+| Section                                                  | Description                                                                                  |
++==========================================================+==============================================================================================+
+| :doc:`global <global>`                                   | Configures global Wazuh manager settings, including agent disconnection timing.              |
++----------------------------------------------------------+----------------------------------------------------------------------------------------------+
+| :doc:`logging <logging>`                                 | Configures the format of Wazuh manager internal logs.                                        |
++----------------------------------------------------------+----------------------------------------------------------------------------------------------+
+| :doc:`remote <remote>`                                   | Configures communication between Wazuh agents and the Wazuh manager.                         |
++----------------------------------------------------------+----------------------------------------------------------------------------------------------+
+| :doc:`auth <auth>`                                       | Configures Wazuh agent enrollment.                                                           |
++----------------------------------------------------------+----------------------------------------------------------------------------------------------+
+| :doc:`indexer <indexer>`                                 | Configures communication with the Wazuh indexer.                                             |
++----------------------------------------------------------+----------------------------------------------------------------------------------------------+
+| :doc:`vulnerability-detection <vulnerability-detection>` | Configures vulnerability detection and vulnerability feed updates.                           |
++----------------------------------------------------------+----------------------------------------------------------------------------------------------+
+| :doc:`task-manager <task-manager>`                       | Configures remote task scheduling and lifecycle management, and remote Wazuh agent upgrades. |
++----------------------------------------------------------+----------------------------------------------------------------------------------------------+
+| :doc:`wdb <wdb>`                                         | Configures Wazuh database backup settings.                                                   |
++----------------------------------------------------------+----------------------------------------------------------------------------------------------+
+| :doc:`cluster <cluster>`                                 | Configures Wazuh manager cluster communication and synchronization.                          |
++----------------------------------------------------------+----------------------------------------------------------------------------------------------+
 
 .. toctree::
    :hidden:
@@ -129,7 +127,6 @@ The following table lists the configuration sections available in ``wazuh-manage
    auth
    indexer
    vulnerability-detection
-   agent-upgrade
    task-manager
    wdb
    cluster

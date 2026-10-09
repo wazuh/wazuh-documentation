@@ -101,7 +101,7 @@ Wazuh agent
 ^^^^^^^^^^^
 
 - `#30831 <https://github.com/wazuh/wazuh/pull/30831>`__ Fixed errors in Azure Graph event fields.
-- `#30877 <https://github.com/wazuh/wazuh/pull/30877>`__ Added the missing `prov`i`der` field to the ``whodata`` section in the ``syscheckd`` JSON configuration.
+- `#30877 <https://github.com/wazuh/wazuh/pull/30877>`__ Added the missing ``provider`` field to the ``whodata`` section in the ``syscheckd`` JSON configuration.
 - `#31700 <https://github.com/wazuh/wazuh/pull/31700>`__ Fixed ``journald`` disabled filters when both configuration blocks have no filters.
 - `#30215 <https://github.com/wazuh/wazuh/pull/30215>`__ Fixed ``whodata`` FIM compatibility with the latest ``audit`` versions.
 - `#31875 <https://github.com/wazuh/wazuh/pull/31875>`__ Fixed mismatch between MTU values in the database and indexer for Windows agents.

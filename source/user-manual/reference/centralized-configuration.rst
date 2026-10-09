@@ -220,11 +220,11 @@ Create the configuration
 Validate the configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-3. Verify the configuration using the :doc:`verify-agent-conf </user-manual/reference/tools/verify-agent-conf>` tool. Rename the file to make it active. For example:
+3. Verify the configuration using the :doc:`verify-agent-conf </user-manual/reference/tools/verify-agent-conf>` tool. For example:
 
    .. code-block:: console
 
-      # /var/wazuh-manager/bin/verify-agent-conf /var/wazuh-manager/etc/shared/default/agent.conf.tmp
+      # /var/wazuh-manager/bin/verify-agent-conf -f /var/wazuh-manager/etc/shared/default/agent.conf.tmp
 
    The command output looks similar to this:
 

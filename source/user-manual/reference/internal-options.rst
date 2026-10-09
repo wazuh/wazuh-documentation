@@ -148,7 +148,7 @@ The ``remoted.*`` internal options configure the Wazuh manager Remoted module.
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
 | **remoted.keyupdate_interval**                   | Interval, in seconds, for reloading agent key files.                                           | 10                       | Positive integer                     |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
-| **remoted.rlimit_nofile**                        | Maximum number of file descriptors that the Remoted process can open.                          | 458752                   | Positive integer                     |
+| **remoted.rlimit_nofile**                        | Maximum number of file descriptors that the Remoted process can open.                          | 65536                    | Integer from 1024 to 1048576         |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
 | **remoted.state_interval**                       | Interval, in seconds, for updating the Remoted state file. A value of 0 disables state-file    | 5                        | 0 or positive integer                |
 |                                                  | updates.                                                                                       |                          |                                      |
@@ -170,8 +170,6 @@ The ``remoted.*`` internal options configure the Wazuh manager Remoted module.
 | **remoted.merge_shared**                         | Controls whether Remoted merges shared configuration files for agents.                         | yes                      | yes, no                              |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
 | **remoted.pass_empty_keyfile**                   | Controls whether Remoted starts when the client.keys file is empty.                            | yes                      | yes, no                              |
-+--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
-| **remoted.router_forwarding_disabled**           | Controls whether forwarding messages to the router component is disabled.                      | no                       | yes, no                              |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
 | **remoted.request_pool**                         | Size of the request pool used to handle agent communications.                                  | 1024                     | Positive integer                     |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
@@ -223,9 +221,9 @@ The ``remoted.*`` internal options configure the Wazuh manager Remoted module.
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
 | **remoted.max_inflight_bytes**                   | Max in-flight request payload bytes before shedding load with HTTP 503.                        | 268435456 (256 MiB)      | Integer from 1048576 to 1073741824   |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
-| **remoted.max_parallel_connections**             | Max simultaneous HTTPS connections.                                                            | 512                      | Integer from 1 to 65536              |
+| **remoted.max_parallel_connections**             | Max simultaneous HTTPS connections.                                                            | 256                      | Integer from 1 to 65536              |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
-| **remoted.max_deferred_requests**                | Max requests parked awaiting a downstream service before 503.                                  | 256                      | Integer from 1 to 65536              |
+| **remoted.max_deferred_requests**                | Max requests parked awaiting a downstream service before 503.                                  | 128                      | Integer from 1 to 65536              |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
 | **remoted.http_stream_chunk_size**               | Bytes per chunk when streaming POST /download.                                                 | 65536                    | Integer from 4096 to 1048576         |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
@@ -243,7 +241,7 @@ The ``remoted.*`` internal options configure the Wazuh manager Remoted module.
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
 | **remoted.jwt_clock_skew**                       | Tolerated clock difference between agent and manager.                                          | 30                       | Integer from 0 to 43200              |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
-| **remoted.auth_max_body_size**                   | Hard cap on authenticated request body size.                                                   | 10485760 (10 MiB)        | Integer from 1048576 to 67108864     |
+| **remoted.auth_max_body_size**                   | Hard cap on authenticated request body size.                                                   | 5242880 (5 MiB)          | Integer from 1048576 to 67108864     |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
 | **remoted.enroll_password_refresh_interval**     | Seconds between polls of etc/authd.pass for Password-mode POST /enroll.                        | 10                       | Integer from 1 to 3600               |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
@@ -312,21 +310,7 @@ The ``wazuh_database.*`` internal options configure the Database Sync module.
 Wazuh modules
 ^^^^^^^^^^^^^^
 
-The ``wazuh_modules.*`` internal options configure the Inventory Sync module.
-
-+------------------------------------------------------------+-----------------------------------------------------------------------------------+-----------------+----------------------------------+
-| Setting                                                    | Description                                                                       | Default value   | Allowed values                   |
-+============================================================+===================================================================================+=================+==================================+
-| **wazuh_modules.max_sessions**                             | Maximum number of concurrent inventory synchronization sessions.                  | 1000            | Integer from 1 to 100000         |
-+------------------------------------------------------------+-----------------------------------------------------------------------------------+-----------------+----------------------------------+
-| **wazuh_modules.inventory_sync_queue_size**                | Capacity of the input worker queue used to buffer incoming Router messages.       | 10000           | Integer from 100 to 1000000      |
-+------------------------------------------------------------+-----------------------------------------------------------------------------------+-----------------+----------------------------------+
-| **wazuh_modules.inventory_sync_data_value_quota**          | Global DataValue quota shared across active inventory synchronization sessions.   | 500000          | Integer from 1 to 1000000000     |
-+------------------------------------------------------------+-----------------------------------------------------------------------------------+-----------------+----------------------------------+
-| **wazuh_modules.inventory_sync_indexer_bulk_size_bytes**   | Indexer bulk-size threshold, in bytes, that triggers a synchronous flush.         | 10485760        | Integer from 4096 to 104857600   |
-+------------------------------------------------------------+-----------------------------------------------------------------------------------+-----------------+----------------------------------+
-| **wazuh_modules.inventory_sync_indexer_flush_interval**    | Interval, in seconds, between periodic Indexer Connector flushes.                 | 20              | Integer from 1 to 3600           |
-+------------------------------------------------------------+-----------------------------------------------------------------------------------+-----------------+----------------------------------+
+The Inventory Sync Server module reads its tuning parameters from the ``wazuh_modules.inventory_sync_server_*`` internal options. These options are documented in the Wazuh internal reference, `docs/ref/modules/inventory-sync-server/configuration.md <https://github.com/wazuh/wazuh/blob/v5.0.0-rc1/docs/ref/modules/inventory-sync-server/configuration.md>`__.
 
 Vulnerability scanner
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -409,7 +393,7 @@ The ``wazuh_db.*`` internal options configure the Wazuh database daemon.
 +---------------------------------------------+----------------------------------------------------------------------------------------+-----------------+----------------------------------------+
 | **wazuh_db.open_db_limit**                  | Maximum number of database connections that can remain open.                           | 64              | Integer from 1 to 4096                 |
 +---------------------------------------------+----------------------------------------------------------------------------------------+-----------------+----------------------------------------+
-| **wazuh_db.rlimit_nofile**                  | Maximum number of file descriptors available to the Wazuh DB process.                  | 458752          | Integer from 1024 to 1048576           |
+| **wazuh_db.rlimit_nofile**                  | Maximum number of file descriptors available to the Wazuh DB process.                  | 65536           | Integer from 1024 to 1048576           |
 +---------------------------------------------+----------------------------------------------------------------------------------------+-----------------+----------------------------------------+
 | **wazuh_db.fragmentation_threshold**        | Database fragmentation percentage at which maintenance is considered.                  | 75              | Integer from 0 to 100                  |
 +---------------------------------------------+----------------------------------------------------------------------------------------+-----------------+----------------------------------------+
@@ -449,8 +433,6 @@ The ``agent.*`` internal options configure the Wazuh agent daemon. The ``monitor
 +================================+==============================================================================================+=================+===================================================================+
 | **agent.debug**                | Debug logging level for the Wazuh agent daemon.                                              | 0               | 0 (disabled), 1 (basic), 2 (verbose)                              |
 +--------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
-| **agent.recv_timeout**         | Timeout, in seconds, for receiving data from the manager.                                    | 60              | Any integer between 1 and 600.                                    |
-+--------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
 | **agent.send_timeout**         | Maximum time (in seconds) that ``send()`` may block on the agent → manager TCP socket before | 30              | Positive integer, 1-600                                           |
 |                                | giving up. Bounds how long the agent can stay stuck behind a full send buffer (e.g. a        |                 |                                                                   |
 |                                | stalled network path or a manager that stopped reading); once this expires, the agent closes |                 |                                                                   |
@@ -481,15 +463,17 @@ The ``agent.*`` internal options configure the Wazuh agent daemon. The ``monitor
 +--------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
 | **agent.normal_level**         | Buffer usage percentage at which the buffer returns to normal state.                         | 70              | Any integer between 0 and agent.warn_level - 1.                   |
 +--------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
-| **agent.tolerance**            | Percentage tolerance applied to buffer usage fluctuations.                                   | 10              | Any integer between 0 and 600.                                    |
+| **agent.tolerance**            | Time, in seconds, that the agent buffer must remain full before the agent considers events   | 15              | Any integer between 0 and 600.                                    |
+|                                | to be flooding.                                                                              |                 |                                                                   |
 +--------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
 | **monitord.compress**          | Controls whether rotated logs are compressed.                                                | 1               | 0 (disabled), 1 (enabled)                                         |
 +--------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
-| **monitord.keep_log_days**     | Number of days to retain rotated logs.                                                       | 365             | Positive integer                                                  |
+| **monitord.keep_log_days**     | Number of days to retain rotated logs.                                                       | 31              | Integer from 0 to 500                                             |
 +--------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
-| **monitord.day_wait**          | Time of day at which log rotation occurs.                                                    | 0               | Time value in hh:mm format                                        |
+| **monitord.day_wait**          | Delay, in seconds, that the agent waits after the day changes before it runs the daily log   | 10              | Integer from 0 to 600                                             |
+|                                | rotation.                                                                                    |                 |                                                                   |
 +--------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
-| **monitord.size_rotate**       | Maximum log-file size, in megabytes, before rotation. A value of 0 means unlimited.          | 0               | 0 or positive integer                                             |
+| **monitord.size_rotate**       | Maximum log-file size, in megabytes, before rotation. A value of 0 means unlimited.          | 512             | Integer from 0 to 4096                                            |
 +--------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
 | **monitord.daily_rotations**   | Number of daily log rotations to retain.                                                     | 12              | Positive integer                                                  |
 +--------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------------+
@@ -507,6 +491,9 @@ The ``execd.*`` internal options configure additional Active response settings.
 | **execd.debug**              | Debug logging level for the execd daemon.                       | 0               | 0 (disabled), 1 (basic), 2 (verbose)   |
 +------------------------------+-----------------------------------------------------------------+-----------------+----------------------------------------+
 | **execd.max_restart_lock**   | Maximum timeout that the agent cannot restart while updating.   | 600             | Any integer between 0 and 3600.        |
++------------------------------+-----------------------------------------------------------------+-----------------+----------------------------------------+
+| **execd.request_timeout**    | Timeout, in seconds, for running the upgrade installer during a | 60              | Any integer between 1 and 3600.        |
+|                              | WPK agent upgrade.                                              |                 |                                        |
 +------------------------------+-----------------------------------------------------------------+-----------------+----------------------------------------+
 
 Wazuh command
@@ -528,11 +515,9 @@ The ``syscheck.*`` internal options configure the File Integrity Monitoring modu
 +-------------------------+--------------------------------------------------------------------------+-----------------+----------------------------------------+
 | Setting                 | Description                                                              | Default value   | Allowed values                         |
 +=========================+==========================================================================+=================+========================================+
-| **syscheck.sleep**      | Time to sleep between scans.                                             |                 |                                        |
-+-------------------------+--------------------------------------------------------------------------+-----------------+----------------------------------------+
 | **syscheck.debug**      | Controls debug-level logging for the File Integrity Monitoring module.   | 0               | 0 (disabled), 1 (basic), 2 (verbose)   |
 +-------------------------+--------------------------------------------------------------------------+-----------------+----------------------------------------+
-| **syscheck.rt_delay**   | Delay before processing real-time events.                                |                 |                                        |
+| **syscheck.rt_delay**   | Delay, in milliseconds, before processing real-time events.              | 5               | Integer from 0 to 1000                 |
 +-------------------------+--------------------------------------------------------------------------+-----------------+----------------------------------------+
 
 Logcollector
@@ -578,6 +563,9 @@ The ``logcollector.*`` internal options configure the Logcollector module.
 +-------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
 | **logcollector.state_interval**           | Interval, in seconds, for updating the Logcollector state file. A value of 0 disables        | 60              | Integer from 0 to 3600                 |
 |                                           | state-file creation and updates.                                                             |                 |                                        |
++-------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
+| **logcollector.ip_update_interval**       | Interval, in seconds, for refreshing the host IP address that Logcollector uses in output    | 60              | Integer from 0 to 3600                 |
+|                                           | formats (``$(host_ip)``). A value of 0 disables the refresh.                                 |                 |                                        |
 +-------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+
 | **logcollector.debug**                    | Debug logging level for the Logcollector module.                                             | 0               | 0 (disabled), 1 (basic), 2 (verbose)   |
 +-------------------------------------------+----------------------------------------------------------------------------------------------+-----------------+----------------------------------------+

@@ -35,9 +35,3 @@ Ubuntu endpoint
       :width: 80%
 
    The finding includes the username, timestamp, and authentication status (success or failure).
-
-   .. thumbnail:: /images/compliance/hipaa/ssh-authentication-finding.png
-      :title: Threat Hunting findings - SSH authentication
-      :alt: Threat Hunting findings - SSH authentication
-      :align: center
-      :width: 80%
