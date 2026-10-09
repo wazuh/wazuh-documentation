@@ -165,7 +165,7 @@ Separators
 or separator
 ~~~~~~~~~~~~
 
-The *or* logical operator, denoted as a comma (``,``), merges various conditions within a query, requiring at least one condition to be true for the query to succeed. For example, we show the query to filter software named “Bumblebee” or “Avenger” below:
+The *or* logical operator merges various conditions within a query, requiring at least one condition to be true for the query to succeed. For example, we show the query to filter software named “Bazar” or “Avenger” below:
 
 .. code-block:: none
 
@@ -180,7 +180,7 @@ The *or* logical operator, denoted as a comma (``,``), merges various conditions
 and separator
 ~~~~~~~~~~~~~
 
-The *and* logical operator, denoted as a semicolon (``;``), links several conditions in a query, requiring all conditions to be met for the overall query to succeed. For example, run the following query to filter agents whose status is “disconnected”, and whose operating system platform is “debian”:
+The *and* logical operator links several conditions in a query, requiring all conditions to be met for the overall query to succeed. For example, run the following query to filter agents whose status is “disconnected”, and whose operating system platform is “debian”:
 
 .. code-block:: none
 

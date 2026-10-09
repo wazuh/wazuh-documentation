@@ -190,7 +190,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
                 type: "intern"
             saml_auth_domain:
               http_enabled: true
-              transport_enabled: true
+              transport_enabled: false
               order: 1
               http_authenticator:
                 type: saml
@@ -210,7 +210,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
    Ensure to change the following parameters to their corresponding value:
 
-      - ``idp.metadata_file``
+      - ``idp.metadata_url``
       - ``idp.entity_id``
       - ``sp.entity_id``
       - ``kibana_url``
@@ -523,7 +523,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
                 type: "intern"
             saml_auth_domain:
               http_enabled: true
-              transport_enabled: true
+              transport_enabled: false
               order: 1
               http_authenticator:
                 type: saml
@@ -543,7 +543,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
    Ensure to change the following parameters to their corresponding value:
 
-      - ``idp.metadata_file``
+      - ``idp.metadata_url``
       - ``idp.entity_id``
       - ``sp.entity_id``
       - ``kibana_url``

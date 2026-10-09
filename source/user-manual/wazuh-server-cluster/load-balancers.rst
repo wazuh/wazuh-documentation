@@ -620,7 +620,7 @@ To set this up, create a file at ``/etc/haproxy/dataplaneapi.yml`` and add the b
             transaction:
                 transaction_dir: /tmp/haproxy
             user:
-            - insecure: true
+            -  insecure: true
                password: <DATAPLANE_PASSWORD>
                name: <DATAPLANE_USER>
          haproxy:

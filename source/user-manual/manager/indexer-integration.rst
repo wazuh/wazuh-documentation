@@ -53,7 +53,8 @@ The code block below shows an expanded Filebeat configuration on the Wazuh serve
      - module: wazuh
        alerts:
          enabled: true
-       Archives:
+       archives:
+         enabled: false
 
    logging.level: info
    logging.to_files: true
