@@ -639,7 +639,7 @@ To set this up, create a file at ``/etc/haproxy/dataplaneapi.yml`` and add the b
 
       .. code-block:: console
 
-         # openssl req -x509 -newkey rsa:4096 -keyout <KEY_FILE_NAME> -out <CERTIFICATE_FILE_NAME> -sha256 -nodes -addext "subjectAltName=DNS:<FQDN>" -subj "/C=US/ST=CA/O=Wazuh>/CN=<CommonName>"
+         # openssl req -x509 -newkey rsa:4096 -keyout <KEY_FILE_NAME> -out <CERTIFICATE_FILE_NAME> -sha256 -nodes -addext "subjectAltName=DNS:<FQDN>" -subj "/C=US/ST=CA/O=Wazuh/CN=<CommonName>"
 
       .. code-block:: yaml
          :emphasize-lines: 15,16
