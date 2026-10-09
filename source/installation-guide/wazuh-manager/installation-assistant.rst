@@ -8,6 +8,8 @@ Installing the Wazuh manager using the assisted installation method
 
 Install the Wazuh manager as a single-node or multi-node cluster on a 64-bit (x86_64/AMD64 or AARCH64/ARM64) architecture using the assisted installation method. The Wazuh manager analyzes event data received from Wazuh agents and forwards the processed events to the Wazuh indexer.
 
+You need root user privileges to run all the commands described below.
+
 Wazuh manager cluster installation
 ----------------------------------
 
@@ -21,30 +23,45 @@ Wazuh manager cluster installation
 
    .. note::
 
-      Make sure that a copy of the ``wazuh-install-files.tar``, created during the initial configuration step, is placed in your working directory.
+      Make sure that a copy of ``wazuh-install-files.tar``, created in **Initial configuration** of the Wazuh indexer assisted installation, is in your working directory.
 
    .. code-block:: console
 
       # bash wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh --wazuh-manager manager -id -d pre-release
 
-   To list the addresses in this node's agent listener certificate, run:
+   To check which addresses agents can use to reach this node, run:
 
    .. code-block:: console
 
       # openssl x509 -in /var/wazuh-manager/etc/certs/remoted.pem -noout -ext subjectAltName
 
+   The output lists them, for example ``IP Address:<WAZUH_MANAGER_ADDRESS>, DNS:manager``. Make sure that every address your agents connect to is in this list.
+
 Your Wazuh manager is now successfully installed.
 
--  If you want a Wazuh manager single-node cluster, everything is set, and you can proceed directly with :doc:`../wazuh-dashboard/installation-assistant`.
+Testing the Wazuh manager cluster
+---------------------------------
 
--  If you want a Wazuh manager multi-node cluster, repeat this process on every Wazuh manager node.
+On the master node, run the following command. The output lists every node of the cluster:
 
-Disable Wazuh updates
----------------------
+.. code-block:: console
 
-.. include:: /_templates/installations/disable-wazuh-updates.rst
+   # /var/wazuh-manager/bin/cluster_control -l
+
+The command output looks similar to this:
+
+.. code-block:: none
+   :class: output
+
+   NAME       TYPE    VERSION  ADDRESS
+   manager    master  5.0.0    <WAZUH_MASTER_ADDRESS>
+   manager-2  worker  5.0.0    <WAZUH_WORKER_ADDRESS>
+
+With a single Wazuh manager, the output lists one node, ``node01``, with the address ``127.0.0.1``.
 
 Next steps
 ----------
 
-The Wazuh manager installation is now complete and you can proceed with installing the Wazuh dashboard. To perform this action, see the :doc:`../wazuh-dashboard/installation-assistant` section.
+-  If you want a Wazuh manager single-node cluster, everything is set, and you can proceed directly with :doc:`Installing the Wazuh dashboard <../wazuh-dashboard/installation-assistant>` using the assisted installation method.
+
+-  If you want a Wazuh manager multi-node cluster, repeat this process on every Wazuh manager node, replacing ``manager`` with that node's name in ``config.yml``, for example ``manager-2``.

@@ -13,7 +13,9 @@ The installation process is divided into two stages:
 #. `Wazuh manager node installation`_
 #. `Cluster configuration for multi-node deployment`_
 
-.. note:: You need root user privileges to run all the commands described below.
+.. note::
+
+   You need root user privileges to run all the commands described below.
 
 Wazuh manager node installation
 -------------------------------
@@ -25,21 +27,71 @@ Adding the Wazuh repository
 
 .. note::
 
-   If you are installing the Wazuh manager on the same host as the Wazuh indexer, you may skip these steps only if the Wazuh repository is already configured and enabled.
+   If the Wazuh repository is already configured and enabled on this host, for example, on the Wazuh indexer host, skip these steps.
 
 .. tabs::
 
    .. group-tab:: APT
 
-      .. include:: /_templates/installations/common/deb/add-repository.rst
+      #. Install the following packages if missing:
+
+         .. code-block:: console
+
+            # apt-get install -y gnupg apt-transport-https curl
+
+      #. Install the GPG key:
+
+         .. code-block:: console
+
+            # curl -s https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH | gpg --no-default-keyring --keyring gnupg-ring:/usr/share/keyrings/wazuh.gpg --import && chmod 644 /usr/share/keyrings/wazuh.gpg
+
+      #. Add the repository:
+
+         .. code-block:: console
+
+            # echo "deb [signed-by=/usr/share/keyrings/wazuh.gpg] https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/apt/ unstable main" | tee /etc/apt/sources.list.d/wazuh.list
+
+      #. Update the package information:
+
+         .. code-block:: console
+
+            # apt-get update
 
    .. group-tab:: Yum
 
-      .. include:: /_templates/installations/common/yum/add-repository.rst
+      #. Import the GPG key:
+
+         .. code-block:: console
+
+            # rpm --import https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH
+
+      #. Add the repository:
+
+         -  For RHEL-compatible systems version 8 and earlier, use the following command:
+
+            .. code-block:: console
+
+               # echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/yum/\nprotect=1' | tee /etc/yum.repos.d/wazuh.repo
+
+         -  For RHEL-compatible systems version 9 and later, use the following command:
+
+            .. code-block:: console
+
+               # echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/yum/\npriority=1' | tee /etc/yum.repos.d/wazuh.repo
 
    .. group-tab:: DNF
 
-      .. include:: /_templates/installations/common/dnf/add-repository.rst
+      #. Import the GPG key:
+
+         .. code-block:: console
+
+            # rpm --import https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH
+
+      #. Add the repository:
+
+         .. code-block:: console
+
+            # echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/yum/\npriority=1' | tee /etc/yum.repos.d/wazuh.repo
 
 .. _wazuh_manager_deploying_certificates:
 
@@ -77,7 +129,7 @@ Do this **before installing the package**. The package then uses these files and
       # install -m 0640 wazuh-certificates/$NODE_NAME-remoted-key.pem /var/wazuh-manager/etc/certs/remoted-key.pem
       # rm -rf wazuh-certificates
 
-   The ``wazuh-manager`` user does not exist yet. When the package is installed, it gives each file its owner and copies ``root-ca.pem`` to ``/var/wazuh-manager/etc/certs``. ``remoted.pem`` is served to the agents by ``wazuh-manager-remoted`` on port 1517 and reused by ``wazuh-manager-authd`` on port 1515.
+   The ``wazuh-manager`` user does not exist yet. When the package is installed, it gives each file its owner and copies ``root-ca.pem`` to ``/var/wazuh-manager/etc/certs``.
 
 #. **Recommended action**: If no other Wazuh components will be installed on this node, remove the ``wazuh-certificates.tar`` file.
 
@@ -129,25 +181,25 @@ Checking the agent listener certificate
 Configuring the Wazuh indexer connection
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Edit ``/var/wazuh-manager/etc/wazuh-manager.conf`` file to configure the indexer connection. Do it on the master node and on every worker node, as the cluster does not synchronize this block. By default, the indexer settings configure one host. It's set to ``127.0.0.1`` as highlighted below.
+#. Edit ``/var/wazuh-manager/etc/wazuh-manager.conf`` file to configure the indexer connection. Do it on the master node and on every worker node, as the cluster does not synchronize this block. By default, the indexer settings configure one host. It's set to ``127.0.0.1``:
 
    .. code-block:: xml
       :emphasize-lines: 3
 
       <indexer>
-        <hosts>
-          <host>https://127.0.0.1:9200</host>
-        </hosts>
-        <ssl>
-          <certificate_authorities>
-            <ca>etc/certs/root-ca.pem</ca>
-          </certificate_authorities>
-          <certificate>etc/certs/indexer-connector.pem</certificate>
-          <key>etc/certs/indexer-connector-key.pem</key>
-        </ssl>
-      </indexer>
+         <hosts>
+           <host>https://127.0.0.1:9200</host>
+         </hosts>
+         <ssl>
+           <certificate_authorities>
+             <ca>etc/certs/root-ca.pem</ca>
+           </certificate_authorities>
+           <certificate>etc/certs/indexer-connector.pem</certificate>
+           <key>etc/certs/indexer-connector-key.pem</key>
+         </ssl>
+       </indexer>
 
-   -  Replace ``127.0.0.1`` with your Wazuh indexer node IP address or hostname. You can find this value in the Wazuh indexer config file ``/etc/wazuh-indexer/opensearch.yml``
+   -  Replace ``127.0.0.1`` with the address of your Wazuh indexer node: its ``ip`` value in ``config.yml``, which is also its ``network.host`` value in ``/etc/wazuh-indexer/opensearch.yml`` on that node.
 
    If you are running a Wazuh indexer cluster infrastructure, add a ``<host>`` entry for each one of your Wazuh indexer nodes. For example, in a two-node configuration:
 
@@ -165,33 +217,79 @@ Starting the Wazuh manager
 
 #. Enable and start the Wazuh manager service:
 
-   .. include:: /_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
+   .. tabs::
 
-#. Run the following command to verify the Wazuh manager status:
+      .. group-tab:: Systemd
 
-   .. include:: /_templates/installations/wazuh/common/check_wazuh_manager.rst
+         .. code-block:: console
+
+            # systemctl daemon-reload
+            # systemctl enable wazuh-manager
+            # systemctl start wazuh-manager
+
+      .. group-tab:: SysV Init
+
+         Choose one option according to your operating system:
+
+         #. RPM-based operating system:
+
+            .. code-block:: console
+
+               # chkconfig --add wazuh-manager
+               # service wazuh-manager start
+
+         #. Debian-based operating system:
+
+            .. code-block:: console
+
+               # update-rc.d wazuh-manager defaults 95 10
+               # service wazuh-manager start
+
+#. Run the following command to verify the Wazuh manager status. Check that the output shows ``Active: active (running)``:
+
+   .. tabs::
+
+      .. group-tab:: Systemd
+
+         .. code-block:: console
+
+            # systemctl status wazuh-manager
+
+      .. group-tab:: SysV Init
+
+         .. code-block:: console
+
+            # service wazuh-manager status
 
 #. Check that the Wazuh manager reaches the Wazuh indexer:
 
    .. code-block:: console
 
-      # grep 'indexer is reachable' /var/wazuh-manager/logs/wazuh-manager.log | tail -1
+      # grep -E 'indexer is reachable|No configured indexer host' /var/wazuh-manager/logs/wazuh-manager.log | tail -1
 
-Your Wazuh manager node is now successfully installed. Repeat this stage of the installation process for every Wazuh manager node in your Wazuh cluster, then proceed with configuring the Wazuh cluster. If you want a Wazuh manager single-node cluster, everything is set, and you can proceed directly with :doc:`../wazuh-dashboard/step-by-step`.
+   The output is a line that ends in ``INFO: The indexer is reachable; inventory documents can be delivered.`` If the command prints nothing, wait a minute and run it again. If it still prints nothing, or it prints a line with ``No configured indexer host is currently reachable``, check the ``<indexer>`` block and that port 9200/TCP of the Wazuh indexer is reachable from this host.
+
+Your Wazuh manager node is now successfully installed. Repeat this stage of the installation process for every Wazuh manager node in your Wazuh cluster, then proceed with configuring the Wazuh cluster. If you want a Wazuh manager single-node cluster, everything is set, and you can proceed directly with :doc:`Installing the Wazuh dashboard <../wazuh-dashboard/step-by-step>` step-by-step.
 
 Cluster configuration for multi-node deployment
 -----------------------------------------------
 
-After completing the installation of the Wazuh manager on every node, configure one Wazuh manager node as the master and the rest as workers. Every node received the same Wazuh manager API passwords from ``wazuh-certificates.tar`` in :ref:`Deploying certificates and passwords <wazuh_manager_deploying_certificates>`, so the workers need no extra password step.
+After completing the installation of the Wazuh manager on every node, configure one Wazuh manager node as the master and the rest as workers. Every node receives the same Wazuh manager API passwords from ``wazuh-certificates.tar`` in :ref:`Deploying certificates and passwords <wazuh_manager_deploying_certificates>`, so the workers need no extra password step.
 
-The package writes a single-node ``<cluster>`` block on every node, with ``node_type`` set to ``master``, a random key, and ``127.0.0.1`` as the ``bind_addr`` and node address. Edit that block in place on each node, and don't add a second ``<cluster>`` block.
+The package writes a single-node ``<cluster>`` block on every node, with ``node_type`` set to ``master``, a random key, and ``127.0.0.1`` as the ``bind_addr`` and node address. Edit that block in place on each node, and don't add a second ``<cluster>`` block. The ``node_name`` parameter is the node's name inside the Wazuh manager cluster. It doesn't need to match the certificate name in ``config.yml``.
 
 .. _wazuh_server_master_node:
 
 Configuring the Wazuh manager master node
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Edit the following settings in the ``/var/wazuh-manager/etc/wazuh-manager.conf`` file and configure the necessary parameters:
+#. On the master node, create the cluster key and keep the output. You use the same value on the master node and on every worker node:
+
+   .. code-block:: console
+
+      # openssl rand -hex 16
+
+   Then edit the following settings in the ``/var/wazuh-manager/etc/wazuh-manager.conf`` file and configure the necessary parameters:
 
    .. code-block:: xml
       :emphasize-lines: 5,9
@@ -204,30 +302,30 @@ Configuring the Wazuh manager master node
         <port>1516</port>
         <bind_addr>0.0.0.0</bind_addr>
         <nodes>
-          <node><WAZUH_MASTER_ADDRESS></node>
+            <node><WAZUH_MASTER_ADDRESS></node>
         </nodes>
         <hidden>no</hidden>
       </cluster>
 
    Configuration parameters:
 
-   +--------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | :ref:`name <cluster_name>`           | Indicates the name of the cluster. All nodes must use the same cluster name.                                                                                                                                                                  |
-   +--------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | :ref:`node_name <cluster_node_name>` | Indicates the name of the current node. Each node of the cluster must have a unique name.                                                                                                                                                     |
-   +--------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | :ref:`node_type <cluster_node_type>` | Specifies the role of the node. It has to be set to ``master``.                                                                                                                                                                               |
-   +--------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | :ref:`key <cluster_key>`             | Key that encrypts communication between cluster nodes. Replace ``<CLUSTER_KEY>`` with a 32-character key that is the same on every node. Create it once, on the master node, with ``openssl rand -hex 16``.                                   |
-   +--------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | :ref:`port <cluster_port>`           | It indicates the destination port for cluster communication.                                                                                                                                                                                  |
-   +--------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | :ref:`bind_addr <cluster_bind_addr>` | It is the network IP to which the node is bound to listen for incoming requests (0.0.0.0 to listen on all interfaces.).                                                                                                                       |
-   +--------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | :ref:`nodes <cluster_nodes>`         | It is the address of the ``master node`` and can be either an IP or a DNS. This parameter must be specified in all nodes, including the master itself. Replace ``<WAZUH_MASTER_ADDRESS>`` with the IP address or DNS name of the master node. |
-   +--------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | :ref:`hidden <cluster_hidden>`       | Whether the node is hidden from the cluster. Default:``no``.                                                                                                                                                                                  |
-   +--------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   +-------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`name <reference_wazuh_manager_conf_cluster_name>`           | Indicates the name of the cluster. All nodes must use the same cluster name.                                                                                                                                                                  |
+   +-------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`node_name <reference_wazuh_manager_conf_cluster_node_name>` | Indicates the name of the current node. Each node of the cluster must have a unique name.                                                                                                                                                     |
+   +-------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`node_type <reference_wazuh_manager_conf_cluster_node_type>` | Specifies the role of the node. It has to be set to ``master``.                                                                                                                                                                               |
+   +-------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`key <reference_wazuh_manager_conf_cluster_key>`             | Key that encrypts communication between cluster nodes. Replace ``<CLUSTER_KEY>`` with a 32-character key that is the same on every node. Create it once, on the master node, with ``openssl rand -hex 16``.                                   |
+   +-------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`port <reference_wazuh_manager_conf_cluster_port>`           | It indicates the destination port for cluster communication.                                                                                                                                                                                  |
+   +-------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`bind_addr <reference_wazuh_manager_conf_cluster_bind_addr>` | It is the network IP to which the node is bound to listen for incoming requests (0.0.0.0 to listen on all interfaces.).                                                                                                                       |
+   +-------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`nodes <reference_wazuh_manager_conf_cluster_nodes>`         | It is the address of the ``master node`` and can be either an IP or a DNS. This parameter must be specified in all nodes, including the master itself. Replace ``<WAZUH_MASTER_ADDRESS>`` with the IP address or DNS name of the master node. |
+   +-------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`hidden <reference_wazuh_manager_conf_cluster_hidden>`       | Whether the node is hidden from the cluster. Default: ``no``.                                                                                                                                                                                 |
+   +-------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 #. Restart the Wazuh manager:
 
@@ -238,14 +336,14 @@ Configuring the Wazuh manager master node
 Configuring the Wazuh manager worker nodes
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. The Wazuh manager cluster lets you scale horizontally by distributing the load across multiple nodes. On each worker node, edit the ``<cluster>`` block in ``/var/wazuh-manager/etc/wazuh-manager.conf`` as follows. Use a unique ``node_name``, set ``node_type`` to ``worker``, and use the same ``<CLUSTER_KEY>`` as the master node:
+#. The Wazuh manager cluster lets you scale horizontally by distributing the load across multiple nodes. On each worker node, edit the ``<cluster>`` block in ``/var/wazuh-manager/etc/wazuh-manager.conf`` as follows. Use a unique ``node_name``, for example ``worker-node1`` and ``worker-node2``, set ``node_type`` to ``worker``, and use the same ``<CLUSTER_KEY>`` as the master node:
 
    .. code-block:: xml
       :emphasize-lines: 5,9
 
       <cluster>
           <name>wazuh</name>
-          <node_name>worker-node</node_name>
+          <node_name>worker-node1</node_name>
           <node_type>worker</node_type>
           <key><CLUSTER_KEY></key>
           <port>1516</port>
@@ -258,17 +356,17 @@ Configuring the Wazuh manager worker nodes
 
    Configuration parameters:
 
-   +--------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | :ref:`name <cluster_name>`           | Indicates the name of the cluster. All nodes must use the same cluster name.                                                                                                    |
-   +--------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | :ref:`node_name <cluster_node_name>` | Indicates the name of the current node. Each node of the cluster must have a unique name.                                                                                       |
-   +--------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | :ref:`node_type <cluster_node_type>` | Specifies the role of the node. It has to be set as ``worker``.                                                                                                                 |
-   +--------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | :ref:`key <cluster_key>`             | The ``<CLUSTER_KEY>`` value you created on the master node. It must be the same on every node.                                                                                  |
-   +--------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | :ref:`nodes <cluster_nodes>`         | Specifies the address of the ``master node``. Replace ``<WAZUH_MASTER_ADDRESS>`` with the IP address or DNS name of the master node, the same value you set on the master node. |
-   +--------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   +-------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`name <reference_wazuh_manager_conf_cluster_name>`           | Indicates the name of the cluster. All nodes must use the same cluster name.                                                                                                    |
+   +-------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`node_name <reference_wazuh_manager_conf_cluster_node_name>` | Indicates the name of the current node. Each node of the cluster must have a unique name.                                                                                       |
+   +-------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`node_type <reference_wazuh_manager_conf_cluster_node_type>` | Specifies the role of the node. It has to be set as ``worker``.                                                                                                                 |
+   +-------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`key <reference_wazuh_manager_conf_cluster_key>`             | The ``<CLUSTER_KEY>`` value you created on the master node (the package wrote a different random key on this node). It must be the same on every node.                          |
+   +-------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`nodes <reference_wazuh_manager_conf_cluster_nodes>`         | Specifies the address of the ``master node``. Replace ``<WAZUH_MASTER_ADDRESS>`` with the IP address or DNS name of the master node, the same value you set on the master node. |
+   +-------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 #. Restart the Wazuh manager:
 
@@ -276,14 +374,14 @@ Configuring the Wazuh manager worker nodes
 
 Repeat these configuration steps for every Wazuh manager worker node in your cluster.
 
-Testing Wazuh manager cluster
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Testing the Wazuh manager cluster
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Run the following command to verify that the Wazuh cluster is enabled and all the nodes are connected:
+On any Wazuh manager node, run the following command to verify that the Wazuh cluster is enabled and all the nodes are connected:
 
 .. code-block:: console
 
-    # /var/wazuh-manager/bin/cluster_control -l
+   # /var/wazuh-manager/bin/cluster_control -l
 
 An example output of the command looks as follows:
 
@@ -300,11 +398,32 @@ Note that the IP addresses ``10.0.0.3``, ``10.0.0.4``, and ``10.0.0.5`` are used
 Disable Wazuh updates
 ---------------------
 
-.. include:: /_templates/installations/disable-wazuh-updates.rst
+After all Wazuh components on this host are installed, disable the Wazuh repository to prevent accidental upgrades. If you will also install another component on this host, do this after installing it:
+
+.. tabs::
+
+   .. group-tab:: APT
+
+      .. code-block:: console
+
+         # sed -i "s/^deb /#deb /" /etc/apt/sources.list.d/wazuh.list
+         # apt update
+
+   .. group-tab:: Yum
+
+      .. code-block:: console
+
+         # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
+
+   .. group-tab:: DNF
+
+      .. code-block:: console
+
+         # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
 
 Next steps
 ----------
 
-The Wazuh manager installation is now complete, and you can proceed with :doc:`../wazuh-dashboard/step-by-step`.
+The Wazuh manager installation is now complete, and you can proceed with :doc:`Installing the Wazuh dashboard <../wazuh-dashboard/step-by-step>` step-by-step.
 
-If you want to uninstall the Wazuh manager, see :ref:`uninstall_server`.
+If you want to uninstall the Wazuh manager, see :ref:`Uninstall the Wazuh manager <uninstall_server>`.

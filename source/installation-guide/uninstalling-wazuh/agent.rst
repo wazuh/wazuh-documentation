@@ -14,7 +14,11 @@ This section describes how to uninstall Wazuh agents installed across the differ
 
 .. note::
 
-   To reinstall a Wazuh agent under the same name, first remove the agent from the Wazuh manager, or set a new ``WAZUH_AGENT_NAME`` when you reinstall. Otherwise, the Wazuh manager refuses the enrollment with "Duplicate name" until the old entry ages out.
+   After you uninstall a Wazuh agent, remove it from the Wazuh manager using the Wazuh dashboard or the Wazuh manager API, as :doc:`Remove agents </user-manual/agent/agent-management/remove-agents>` describes. This stops it from showing as disconnected, frees its name for reuse, and lets you reinstall it under the same name. Without this, or a new ``WAZUH_AGENT_NAME`` on reinstall, the manager refuses enrollment with "Duplicate name" until the old agent has been disconnected for one hour. Agents enrolled without ``WAZUH_AGENT_NAME``, and agents enrolled from the Windows GUI, use the host name.
+
+   If no other agent will use the enrollment token, revoke it on the Wazuh manager master node with ``/var/wazuh-manager/bin/wazuh-manager-authd --revoke-enrollment-token <TOKEN_ID>``. To find the token ID, run ``/var/wazuh-manager/bin/wazuh-manager-authd --list-enrollment-tokens``.
+
+To enroll an agent again instead of uninstalling it, see :ref:`Re-enrolling a Wazuh agent <reenrolling_wazuh_agent>`.
 
 .. _uninstalling_linux_agent:
 
@@ -29,7 +33,35 @@ Run the following commands to uninstall a Linux agent.
 
 #. Disable the Wazuh agent service. To find the endpoint's service manager, run ``ps -p 1 -o comm=``. If it prints ``systemd``, use the **Systemd** tab. On a systemd host, the SysV commands either fail or silently do nothing.
 
-   .. include:: ../../_templates/installations/wazuh/common/disable_wazuh_agent_service.rst
+   .. tabs::
+
+      .. group-tab:: Systemd
+
+         .. code-block:: console
+
+            # systemctl disable wazuh-agent
+            # systemctl daemon-reload
+
+      .. group-tab:: SysV Init
+
+         Choose one option according to your operating system.
+
+         #. RPM-based operating systems:
+
+            .. code-block:: console
+
+               # chkconfig wazuh-agent off
+               # chkconfig --del wazuh-agent
+
+         #. Debian-based operating systems:
+
+            .. code-block:: console
+
+               # update-rc.d -f wazuh-agent remove
+
+      .. group-tab:: No service manager
+
+         No action required.
 
 #. Remove the Wazuh agent installation:
 
@@ -37,21 +69,89 @@ Run the following commands to uninstall a Linux agent.
 
       .. group-tab:: APT
 
-         .. include:: /_templates/installations/wazuh/deb/uninstall_wazuh_agent.rst
+         .. code-block:: console
+
+            # apt-get remove wazuh-agent
+
+         ``apt-get remove`` keeps the agent configuration, its key, and the re-enrollment secret in ``/var/ossec/etc/*.save``, the Wazuh manager CA in ``/var/ossec/etc/certs/root-ca.pem.save``, and the ``wazuh`` user. To remove them too, run the following command:
+
+         .. code-block:: console
+
+            # apt-get remove --purge wazuh-agent
 
       .. group-tab:: Yum
 
-         .. include:: /_templates/installations/wazuh/yum/uninstall_wazuh_agent.rst
+         .. code-block:: console
+
+            # yum remove wazuh-agent
+
+         The package manager leaves ``/var/ossec/`` behind. It holds the agent key (``etc/client.keys.rpmsave``), the re-enrollment secret (``etc/reenroll.secret``), and the Wazuh manager CA (``etc/certs/root-ca.pem``). Delete it:
+
+         .. code-block:: console
+
+            # rm -rf /var/ossec
 
       .. group-tab:: DNF
 
-         .. include:: /_templates/installations/wazuh/dnf/uninstall_wazuh_agent.rst
+         .. code-block:: console
+
+            # dnf remove wazuh-agent
+
+         The package manager leaves ``/var/ossec/`` behind. It holds the agent key (``etc/client.keys.rpmsave``), the re-enrollment secret (``etc/reenroll.secret``), and the Wazuh manager CA (``etc/certs/root-ca.pem``). Delete it:
+
+         .. code-block:: console
+
+            # rm -rf /var/ossec
 
       .. group-tab:: ZYpp
 
-         .. include:: /_templates/installations/wazuh/zypp/uninstall_wazuh_agent.rst
+         .. code-block:: console
 
-The Wazuh agent is now completely removed from your Linux endpoint.
+            # zypper remove wazuh-agent
+
+         The package manager leaves ``/var/ossec/`` behind. It holds the agent key (``etc/client.keys.rpmsave``), the re-enrollment secret (``etc/reenroll.secret``), and the Wazuh manager CA (``etc/certs/root-ca.pem``). Delete it:
+
+         .. code-block:: console
+
+            # rm -rf /var/ossec
+
+#. Remove the Wazuh repository and its key:
+
+   .. tabs::
+
+      .. group-tab:: APT
+
+         .. code-block:: console
+
+            # rm -f /etc/apt/sources.list.d/wazuh.list /usr/share/keyrings/wazuh.gpg /usr/share/keyrings/wazuh.gpg~
+            # apt-get clean
+            # apt-get update
+
+      .. group-tab:: Yum
+
+         .. code-block:: console
+
+            # rm -f /etc/yum.repos.d/wazuh.repo
+            # rpm -e gpg-pubkey-29111145
+            # yum clean all
+
+      .. group-tab:: DNF
+
+         .. code-block:: console
+
+            # rm -f /etc/yum.repos.d/wazuh.repo
+            # rpm -e gpg-pubkey-29111145
+            # dnf clean all
+
+      .. group-tab:: ZYpp
+
+         .. code-block:: console
+
+            # rm -f /etc/zypp/repos.d/wazuh.repo
+            # zypper clean
+            # rpm -e gpg-pubkey-29111145
+
+The Wazuh agent is now removed from your Linux endpoint. Remove it from the Wazuh manager too, as the note at the start of this section describes.
 
 .. _uninstalling_windows_agent:
 
@@ -74,6 +174,8 @@ Follow these steps in an elevated session to uninstall the Wazuh agent from your
 
          > Start-Process msiexec.exe -ArgumentList '/x "<MSI_PATH>" /qn' -Wait
 
+   If you no longer have the installer, uninstall **Wazuh Agent** from **Settings** > **Apps** > **Installed apps**, or run the **Uninstall** shortcut in the Start menu folder **OSSEC**, then continue with step 2. To check the removal, run ``Get-Service WazuhSvc``: it reports that no service was found.
+
 #. Remove the Wazuh agent installation folder. After the removal, the folder still holds the agent key in ``client.keys.save``.
 
    -  Using CMD:
@@ -88,7 +190,11 @@ Follow these steps in an elevated session to uninstall the Wazuh agent from your
 
          > Remove-Item -Path "C:\Program Files (x86)\ossec-agent" -Recurse -Force
 
-The Wazuh agent is now completely removed from your Windows endpoint.
+   If the command reports that the folder is in use, wait until ``Get-Process wazuh-agent -ErrorAction SilentlyContinue`` prints nothing, then run it again.
+
+The Wazuh agent is now removed from your Windows endpoint.
+
+Remove the agent from the Wazuh manager too, as the note at the start of this section describes.
 
 .. _uninstalling_macos_agent:
 
@@ -138,4 +244,6 @@ Follow these steps to uninstall the Wazuh agent from your macOS endpoint.
 
       # pkgutil --pkgs | grep -i wazuh
 
-The Wazuh agent is now completely removed from your macOS endpoint.
+The Wazuh agent is now removed from your macOS endpoint.
+
+Remove the agent from the Wazuh manager too, as the note at the start of this section describes.
