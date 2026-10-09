@@ -273,7 +273,11 @@ Wazuh agents enrolled before the change keep their ID. Point each one to the new
 
       # /var/wazuh-manager/bin/wazuh-manager-authd --create-enrollment-token --address <NEW_ADDRESS> --no-credential
 
-#. On each Linux endpoint, as root, save the token to a file only root can read, for example ``/root/token``, then run:
+#. Point the Wazuh agent on each endpoint to the new address. Follow the steps for the endpoint's operating system.
+
+   **Linux**
+
+   As root, save the token to a file only root can read, for example ``/root/token``, then run:
 
    .. code-block:: console
 
@@ -283,6 +287,36 @@ Wazuh agents enrolled before the change keep their ID. Point each one to the new
       # systemctl start wazuh-agent
 
    The output of ``wazuh-agent-auth`` confirms the new address: ``etc/ossec.conf now points <manager><endpoint> at '<NEW_ADDRESS>'.``
+
+   **macOS**
+
+   As root, save the token to a file only root can read, for example ``/var/root/token``, then run:
+
+   .. code-block:: console
+
+      # launchctl bootout system /Library/LaunchDaemons/com.wazuh.agent.plist
+      # /Library/Ossec/bin/wazuh-agent-auth --token-file /var/root/token --certs-only
+      # rm /var/root/token
+      # launchctl bootstrap system /Library/LaunchDaemons/com.wazuh.agent.plist
+
+   The output of ``wazuh-agent-auth`` confirms the new address: ``etc/ossec.conf now points <manager><endpoint> at '<NEW_ADDRESS>'.``
+
+   **Windows**
+
+   Run the following commands in PowerShell as an administrator. Replace ``<TOKEN>`` with the token:
+
+   .. code-block:: powershell
+      :emphasize-lines: 1
+
+      > Set-Content -Path C:\token.txt -Value "<TOKEN>"
+      > Stop-Service WazuhSvc
+      > & "C:\Program Files (x86)\ossec-agent\wazuh-agent-auth.exe" --token-file C:\token.txt --certs-only
+      > Remove-Item C:\token.txt
+      > Start-Service WazuhSvc
+
+   Write the token file with ``Set-Content`` as shown. A file with a byte order mark, such as one ``Out-File`` writes in Windows PowerShell, fails with ``invalid enrollment token: malformed token``. The output of ``wazuh-agent-auth.exe`` confirms the new address: ``ossec.conf now points <manager><endpoint> at '<NEW_ADDRESS>'.``
+
+   Alternatively, open **Manage Agent** GUI from the Start menu and select **Manage** > **Update CA**. Paste the token and click **OK**. Click **Yes** to stop the Wazuh agent service. When the message ``Trust anchor and manager address refreshed.`` appears, click **OK**, then click **Yes** to start the service.
 
 Troubleshooting
 ---------------
