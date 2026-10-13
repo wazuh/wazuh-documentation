@@ -105,7 +105,7 @@ Perform the steps below to create a custom decoder and rule to analyze the event
       :align: center
       :width: 80%
 
-#. Navigate to **Ruleset management** > **Overview**, select the space **Draft** and click **Actions** > **Promote** to promote the detection rule to the Test space.
+#. Navigate to **Ruleset management** > **Overview**, select the space **Draft** and click **Actions** > **Promote** to promote the detection rule to the ``Test`` space.
 
    .. thumbnail:: /images/manual/command-monitoring/promote-rule-draft-process.png
       :title: Promoting the detection rule to Test
@@ -113,7 +113,7 @@ Perform the steps below to create a custom decoder and rule to analyze the event
       :align: center
       :width: 80%
 
-#. Navigate to **Ruleset management** > **Overview**, select the space **Test**, and click **Actions** > **Promote** to promote the detection rule to the Custom space.
+#. Navigate to **Ruleset management** > **Overview**, select the space **Test**, and click **Actions** > **Promote** to promote the detection rule to the ``Custom`` space.
 
    .. thumbnail:: /images/manual/command-monitoring/promote-rule-test-process.png
       :title: Promoting the detection rule to Custom

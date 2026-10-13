@@ -295,7 +295,7 @@ Wazuh must analyze the command output to generate findings on the Wazuh dashboar
       :align: center
       :width: 80%
 
-#. Navigate to **Ruleset management** > **Overview**, select the space **Test**, and click **Actions** > **Promote** to promote the detection rule to the Custom space.
+#. Navigate to **Ruleset management** > **Overview**, select the space **Test**, and click **Actions** > **Promote** to promote the detection rule to the ``Custom`` space.
 
    .. thumbnail:: /images/manual/command-monitoring/promote-rule-test.png
       :title: Promoting the detection rule to Custom
