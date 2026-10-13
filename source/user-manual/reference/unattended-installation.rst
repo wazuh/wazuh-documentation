@@ -1,138 +1,215 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The unattended installation allows the user to predefine several installation variables. Learn more about it in this section of the Wazuh documentation.
-  
+   :description: Learn how to automate a Wazuh installation from source by predefining the installer variables in the preloaded-vars.conf file, and check the supported variables.
+
 .. _unattended-installation:
 
-Unattended Installation
+Unattended installation
 =======================
-The unattended installation saves time deploying agents, allowing the user to predefine several installation variables instead of waiting for them to be prompted. This can be made by modifying the ``preloaded-vars.conf`` file and uncommenting the configuration lines that you want to automate during the installation process.
 
-- `Global`_
-- `Agent`_
-- `Manager/local`_
+The unattended installation saves time when installing Wazuh from source with the ``install.sh`` script. Instead of answering the installer prompts, you predefine the installation variables in the ``preloaded-vars.conf`` file, located in the ``etc/`` directory of the source tree, and ``install.sh`` reads it at startup. Uncomment the lines for the variables you want to automate and set their values. A variable that is not set takes its default value where one exists; otherwise the installer still asks for it.
+
+To run an unattended installation, edit ``etc/preloaded-vars.conf`` in the extracted source directory and then run the installer from that directory:
+
+.. code-block:: console
+
+   # sudo ./install.sh
+
+-  :ref:`Global <unattended_installation_global>`
+-  :ref:`Agent <unattended_installation_agent>`
+-  :ref:`Manager <unattended_installation_manager>`
+-  :ref:`Manager remote listeners (WAZUH_REMOTE\_\*) <unattended_installation_remote_listeners>`
+
+.. _unattended_installation_global:
 
 Global
 ------
 
-+------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **USER_LANGUAGE**                  | Defines the language to be used.                                                                                                                          |
-+                                    +-------------------------------------------------------+---------------------------------------------------------------------------------------------------+
-|                                    | Allowed values                                        | "en", "br", "cn", "de", "el", "es", "fr", "hu", "it", "jp", "nl", "pl", "ru", "sr", "tr"          |
-+------------------------------------+-------------------------------------------------------+---------------------------------------------------------------------------------------------------+
-| **USER_NO_STOP**                   | If it is set to anything, the confirmation messages are not going to be asked for.                                                                        |
-+------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **USER_INSTALL_TYPE**              | Defines the role for the Wazuh instance that is being installed.                                                                                          |
-+                                    +-------------------------------------------------------+---------------------------------------------------------------------------------------------------+
-|                                    | Allowed values                                        | "local", "agent", "server"                                                                        |
-+------------------------------------+-------------------------------------------------------+---------------------------------------------------------------------------------------------------+
-| **USER_DIR**                       | Defines the location to install Wazuh.                                                                                                                    |
-+                                    +-------------------------------------------------------+---------------------------------------------------------------------------------------------------+
-|                                    | Allowed values                                        | Any path                                                                                          |
-+------------------------------------+-------------------------------------------------------+---------------------------------------------------------------------------------------------------+
-| **USER_DELETE_DIR**                | If it is set to "y", the directory to install Wazuh will be removed if exists.                                                                            |
-+                                    +-------------------------------------------------------+---------------------------------------------------------------------------------------------------+
-|                                    | Allowed values                                        | "y", "n"                                                                                          |
-+------------------------------------+-------------------------------------------------------+---------------------------------------------------------------------------------------------------+
-| **USER_ENABLE_ACTIVE_RESPONSE**    | If it is set to "n", Active Response will be disabled.                                                                                                    |
-+                                    +-------------------------------------------------------+---------------------------------------------------------------------------------------------------+
-|                                    | Allowed values                                        | "y", "n"                                                                                          |
-+------------------------------------+-------------------------------------------------------+---------------------------------------------------------------------------------------------------+
-| **USER_ENABLE_SYSCHECK**           | If it is set to "n", syscheck will be disabled.                                                                                                           |
-+                                    +-------------------------------------------------------+---------------------------------------------------------------------------------------------------+
-|                                    | Allowed values                                        | "y", "n"                                                                                          |
-+------------------------------------+-------------------------------------------------------+---------------------------------------------------------------------------------------------------+
-| **USER_ENABLE_ROOTCHECK**          | If it is set to "n", rootcheck will be disabled.                                                                                                          |
-+                                    +-------------------------------------------------------+---------------------------------------------------------------------------------------------------+
-|                                    | Allowed values                                        | "y", "n"                                                                                          |
-+------------------------------------+-------------------------------------------------------+---------------------------------------------------------------------------------------------------+
-| **USER_ENABLE_AUTHD**              | If it is set to "y", Authd will be enabled.                                                                                                               |
-+                                    +-------------------------------------------------------+---------------------------------------------------------------------------------------------------+
-|                                    | Allowed values                                        | "y", "n"                                                                                          |
-+------------------------------------+-------------------------------------------------------+---------------------------------------------------------------------------------------------------+
-| **USER_GENERATE_AUTHD_CERT**       | If it is set to "y", the Authd certificate will be auto generated.                                                                                        |
-+                                    +-------------------------------------------------------+---------------------------------------------------------------------------------------------------+
-|                                    | Allowed values                                        | "y", "n"                                                                                          |
-+------------------------------------+-------------------------------------------------------+---------------------------------------------------------------------------------------------------+
-| **USER_UPDATE**                    | If it is set to anything, the update installation will be done.                                                                                           |
-+------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **USER_BINARYINSTALL**             | If it is set to anything, the installation is not going to compile the code, but use the binaries from ./bin/                                             |
-+------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **USER_CA_STORE**                  | Custom location for certificates to verify incoming WPK packages for remote upgrades.                                                                     |
-+------------------------------------+-------------------------------------------------------+---------------------------------------------------------------------------------------------------+
-|                                    | Allowed values                                        | If none "n", otherwise the path to a X509 certificate or to a folder containing certificates.     |
-+------------------------------------+-------------------------------------------------------+---------------------------------------------------------------------------------------------------+
+The following variables apply to agent installations only and have no effect on a manager installation: USER_ENABLE_ACTIVE_RESPONSE, USER_ENABLE_SYSCHECK, USER_ENABLE_ROOTCHECK, USER_ENABLE_SYSCOLLECTOR, USER_ENABLE_SCA and USER_CA_STORE.
+
++---------------------------------+------------------------------------------------------------------+------------------------------+------------------------------------------+
+| Variable                        | Description                                                      | Default                      | Allowed values                           |
++=================================+==================================================================+==============================+==========================================+
+| ``USER_LANGUAGE``               | Language of the installer messages and prompts. An invalid value | en                           | en, br, cn, de, el, es, fr, hu, it, jp,  |
+|                                 | falls back to English. The yes/no answers in the other variables |                              | nl, pl, ru, sr, tr                       |
+|                                 | must be given in the same language (for example s and n for es;  |                              |                                          |
+|                                 | y is rejected).                                                  |                              |                                          |
++---------------------------------+------------------------------------------------------------------+------------------------------+------------------------------------------+
+| ``USER_INSTALL_TYPE``           | Role of the Wazuh instance being installed.                      | Not set (the installer asks) | agent, manager                           |
++---------------------------------+------------------------------------------------------------------+------------------------------+------------------------------------------+
+| ``USER_DIR``                    | Location where Wazuh is installed.                               | /var/wazuh-manager for a     | Any absolute path                        |
+|                                 |                                                                  | manager; /var/ossec for an   |                                          |
+|                                 |                                                                  | agent                        |                                          |
++---------------------------------+------------------------------------------------------------------+------------------------------+------------------------------------------+
+| ``USER_DELETE_DIR``             | If set to y, an existing installation directory is removed       | Not set (the installer asks) | y, n                                     |
+|                                 | before installing. If it is not set and the directory exists,    |                              |                                          |
+|                                 | the installer asks, and the prompt defaults to n (the existing   |                              |                                          |
+|                                 | files are kept and the installer continues over them).           |                              |                                          |
++---------------------------------+------------------------------------------------------------------+------------------------------+------------------------------------------+
+| ``USER_ENABLE_ACTIVE_RESPONSE`` | If set to n, Active Response is disabled (disabled is set to yes | y                            | y, n                                     |
+|                                 | in the active-response section of ossec.conf).                   |                              |                                          |
++---------------------------------+------------------------------------------------------------------+------------------------------+------------------------------------------+
+| ``USER_ENABLE_SYSCHECK``        | Enables or disables the File integrity monitoring module         | y (agent installations only) | y, n                                     |
+|                                 | (syscheck). If set to n, disabled is set to yes in the syscheck  |                              |                                          |
+|                                 | section of ossec.conf.                                           |                              |                                          |
++---------------------------------+------------------------------------------------------------------+------------------------------+------------------------------------------+
+| ``USER_ENABLE_ROOTCHECK``       | Enables or disables rootcheck. If set to n, disabled is set to   | y (agent installations only) | y, n                                     |
+|                                 | yes in the rootcheck section of ossec.conf.                      |                              |                                          |
++---------------------------------+------------------------------------------------------------------+------------------------------+------------------------------------------+
+| ``USER_ENABLE_SYSCOLLECTOR``    | Enables or disables the Syscollector module. If set to n, the    | y (agent installations only) | y, n                                     |
+|                                 | syscollector section is omitted from ossec.conf.                 |                              |                                          |
++---------------------------------+------------------------------------------------------------------+------------------------------+------------------------------------------+
+| ``USER_ENABLE_SCA``             | Enables or disables the Security configuration assessment        | y (agent installations only) | y, n                                     |
+|                                 | module. If set to n, the sca section is omitted from ossec.conf. |                              |                                          |
++---------------------------------+------------------------------------------------------------------+------------------------------+------------------------------------------+
+| ``USER_UPDATE``                 | If set to y, an existing installation is updated. If set to n,   | Not set (the installer asks) | y, n                                     |
+|                                 | the installer exits without modifying the current installation.  |                              |                                          |
+|                                 | Ignored when USER_CLEANINSTALL is y. The installer finds an      |                              |                                          |
+|                                 | existing installation through its registered service, so this    |                              |                                          |
+|                                 | variable has no effect on an installation that was made with     |                              |                                          |
+|                                 | USER_REGISTER_SERVICE="n".                                       |                              |                                          |
++---------------------------------+------------------------------------------------------------------+------------------------------+------------------------------------------+
+| ``USER_CLEANINSTALL``           | If set to y, forces a clean installation. If the target          | n                            | y, n                                     |
+|                                 | directory already exists, USER_DELETE_DIR must be set to y or n: |                              |                                          |
+|                                 | with n the installer stops with "Refusing overlay installation", |                              |                                          |
+|                                 | and if it is not set the installer stops with an invalid-value   |                              |                                          |
+|                                 | error.                                                           |                              |                                          |
++---------------------------------+------------------------------------------------------------------+------------------------------+------------------------------------------+
+| ``USER_BINARYINSTALL``          | If set, the installer does not compile the code and installs the | Not set (the installer asks) | Any non-empty value, for example y       |
+|                                 | prebuilt artifacts already present in the source tree instead.   |                              |                                          |
++---------------------------------+------------------------------------------------------------------+------------------------------+------------------------------------------+
+| ``USER_REGISTER_SERVICE``       | If set to n, the installer does not touch the boot integration   | y                            | y, n                                     |
+|                                 | (systemd unit or init script) and does not start anything at the |                              |                                          |
+|                                 | end of the installation. Use it for throwaway installations into |                              |                                          |
+|                                 | a sandbox directory; start Wazuh manually with the control       |                              |                                          |
+|                                 | script in the installation directory (bin/wazuh-manager-control  |                              |                                          |
+|                                 | for a manager, bin/wazuh-control for an agent).                  |                              |                                          |
++---------------------------------+------------------------------------------------------------------+------------------------------+------------------------------------------+
+| ``USER_TAKEOVER_SERVICE``       | By default, if an existing service definition already registers  | n                            | y, n                                     |
+|                                 | a different installation directory, the installer completes the  |                              |                                          |
+|                                 | installation, leaves the service definition unchanged and prints |                              |                                          |
+|                                 | a warning. If set to y, the service is repointed to USER_DIR.    |                              |                                          |
++---------------------------------+------------------------------------------------------------------+------------------------------+------------------------------------------+
+| ``USER_RESOLVE_CREDENTIALS``    | If set to n, the installer does not resolve any credential: no   | y                            | y, n                                     |
+|                                 | Server API password is seeded, no indexer credential is stored   |                              |                                          |
+|                                 | and no TLS certificate is issued, so the manager does not start  |                              |                                          |
+|                                 | until they are provisioned manually. Use it when the             |                              |                                          |
+|                                 | installation stages a tree that is copied elsewhere, such as a   |                              |                                          |
+|                                 | package build or a container image layer, so that generated      |                              |                                          |
+|                                 | credentials are not identical on every host. With the default,   |                              |                                          |
+|                                 | the installer issues the certificates and the Server API         |                              |                                          |
+|                                 | password at installation time.                                   |                              |                                          |
++---------------------------------+------------------------------------------------------------------+------------------------------+------------------------------------------+
+| ``USER_CA_STORE``               | Custom location of the certificates used to verify incoming WPK  | n                            | n, or the path to an X509 certificate or |
+|                                 | packages for remote upgrades. The location is added as an extra  |                              | to a directory containing certificates   |
+|                                 | ca_store entry next to the built-in etc/wpk_root.pem, which is   |                              |                                          |
+|                                 | always kept.                                                     |                              |                                          |
++---------------------------------+------------------------------------------------------------------+------------------------------+------------------------------------------+
+| ``OPTIMIZE_CPYTHON``            | Enables all Python optimizations when building the CPython       | Not set (no optimizations)   | y                                        |
+|                                 | interpreter. This can take a while.                              |                              |                                          |
++---------------------------------+------------------------------------------------------------------+------------------------------+------------------------------------------+
+
+.. _unattended_installation_agent:
 
 Agent
 -----
 
-+------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **USER_AGENT_SERVER_IP**           | Specifies the IP address of the Wazuh server.                                                                                                             |
-+------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **USER_AGENT_SERVER_NAME**         | Specifies the hostname of the Wazuh server.                                                                                                               |
-+------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **USER_AGENT_CONFIG_PROFILE**      | Specifies the agent's config profile name. This is used to create configuration profiles for this particular profile name.                                |
-+------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
++-------------------------------+------------------------------------------------------------+------------------------------+---------------------------------------+
+| Variable                      | Description                                                | Default                      | Allowed values                        |
++===============================+============================================================+==============================+=======================================+
+| ``USER_AGENT_MANAGER_IP``     | IP address of the Wazuh manager. Use only one of           | Not set (the installer asks) | A valid IP address                    |
+|                               | USER_AGENT_MANAGER_IP and USER_AGENT_MANAGER_NAME.         |                              |                                       |
++-------------------------------+------------------------------------------------------------+------------------------------+---------------------------------------+
+| ``USER_AGENT_MANAGER_NAME``   | Hostname of the Wazuh manager. Use only one of             | Not set (the installer asks) | A valid hostname                      |
+|                               | USER_AGENT_MANAGER_IP and USER_AGENT_MANAGER_NAME.         |                              |                                       |
++-------------------------------+------------------------------------------------------------+------------------------------+---------------------------------------+
+| ``USER_AGENT_CONFIG_PROFILE`` | Name of the agent configuration profile, used to apply the | Not set                      | Any string, for example LinuxDBServer |
+|                               | matching agent.conf profiles to this agent.                |                              |                                       |
++-------------------------------+------------------------------------------------------------+------------------------------+---------------------------------------+
 
 Example:
 
-.. code-block:: pkgconfig
+.. code-block:: ini
 
-    USER_LANGUAGE="en"
-    USER_NO_STOP="y"
-    USER_INSTALL_TYPE="agent"
-    USER_DIR="/var/ossec"
-    USER_ENABLE_SYSCHECK="y"
-    USER_ENABLE_ROOTCHECK="y"
-    USER_ENABLE_ACTIVE_RESPONSE="y"
+   USER_LANGUAGE="en"
+   USER_INSTALL_TYPE="agent"
+   USER_DIR="/var/ossec"
+   USER_ENABLE_SYSCHECK="y"
+   USER_ENABLE_ROOTCHECK="y"
+   USER_ENABLE_SYSCOLLECTOR="y"
+   USER_ENABLE_SCA="y"
+   USER_ENABLE_ACTIVE_RESPONSE="y"
+   USER_AGENT_MANAGER_IP="10.0.0.2"
 
-Manager/local
--------------
+.. _unattended_installation_manager:
 
-+------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **USER_ENABLE_EMAIL**              | Enables or disables alerts by e-mail.                                                                                                                     |
-+                                    +-------------------------------------------------------+---------------------------------------------------------------------------------------------------+
-|                                    | Allowed values                                        | "y", "n"                                                                                          |
-+------------------------------------+-------------------------------------------------------+---------------------------------------------------------------------------------------------------+
-| **USER_AUTO_START**                | Enables or disables the auto-start of Wazuh.                                                                                                              |
-+------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **USER_EMAIL_ADDRESS**             | Defines the destination e-mail for the alerts.                                                                                                            |
-+                                    +-------------------------------------------------------+---------------------------------------------------------------------------------------------------+
-|                                    | Allowed values                                        | A valid e-mail address.                                                                           |
-+------------------------------------+-------------------------------------------------------+---------------------------------------------------------------------------------------------------+
-| **USER_EMAIL_SMTP**                | Defines the SMTP server to send the e-mails.                                                                                                              |
-+                                    +-------------------------------------------------------+---------------------------------------------------------------------------------------------------+
-|                                    | Allowed values                                        | A valid SMTP server.                                                                              |
-+------------------------------------+-------------------------------------------------------+---------------------------------------------------------------------------------------------------+
-| **USER_ENABLE_UPDATE_CHECK**       | Enables or disables the update checker.                                                                                                                   |
-+                                    +-------------------------------------------------------+---------------------------------------------------------------------------------------------------+
-|                                    | Allowed values                                        | "y", "n"                                                                                          |
-+------------------------------------+-------------------------------------------------------+---------------------------------------------------------------------------------------------------+
-| **USER_ENABLE_SYSLOG**             | Enables or disables remote syslog.                                                                                                                        |
-+                                    +-------------------------------------------------------+---------------------------------------------------------------------------------------------------+
-|                                    | Allowed values                                        | "y", "n"                                                                                          |
-+------------------------------------+-------------------------------------------------------+---------------------------------------------------------------------------------------------------+
-| **USER_WHITE_LIST**                | List of IP addresses or networks that are going to be set to never be blocked.                                                                            |
-+------------------------------------+-------------------------------------------------------+---------------------------------------------------------------------------------------------------+
+Manager
+-------
 
-
-Example:
-
-.. code-block:: pkgconfig
-
-    USER_LANGUAGE="en"
-    USER_NO_STOP="y"
-    USER_INSTALL_TYPE="server"
-    USER_DIR="/var/ossec"
-    USER_ENABLE_EMAIL="n"
-    USER_ENABLE_SYSCHECK="y"
-    USER_ENABLE_ROOTCHECK="y"
-    USER_WHITE_LIST="n"
-    USER_ENABLE_SYSLOG="y"
-    USER_CA_STORE="n"
-
++-----------------------+-----------------------------------------------------------------+---------+----------------+
+| Variable              | Description                                                     | Default | Allowed values |
++=======================+=================================================================+=========+================+
+| ``USER_AUTO_START``   | If set to y, Wazuh is started at the end of the installation.   | n       | y, n           |
+|                       | Used for manager installations only; agent installations ignore |         |                |
+|                       | it.                                                             |         |                |
++-----------------------+-----------------------------------------------------------------+---------+----------------+
+| ``USER_ENABLE_AUTHD`` | Enables or disables the agent enrollment (Auth) service.        | y       | y, n           |
++-----------------------+-----------------------------------------------------------------+---------+----------------+
 
 .. note::
 
-   To automate deployments in Windows, you can use the parameters of its :doc:`installer </installation-guide/wazuh-agent/wazuh-agent-package-windows>`.
+   By default, the installer issues the TLS certificates (``etc/certs/remoted.pem``, ``remoted-key.pem``, ``root-ca.pem`` and the indexer connector pair) and generates the Server API password, which it saves in ``/etc/wazuh/credentials.env`` (readable by root only). The manager does not start until it also has an indexer credential: set WAZUH_INDEXER_MANAGER_PASSWORD in that file, or install wazuh-indexer on the same host first. To provide your own certificates, set USER_RESOLVE_CREDENTIALS="n" and place them in etc/certs before starting the manager.
+
+Example:
+
+.. code-block:: ini
+
+   USER_LANGUAGE="en"
+   USER_INSTALL_TYPE="manager"
+   USER_DIR="/var/wazuh-manager"
+   USER_ENABLE_ACTIVE_RESPONSE="y"
+   USER_ENABLE_AUTHD="y"
+   USER_AUTO_START="y"
+   USER_REGISTER_SERVICE="y"
+
+.. _unattended_installation_remote_listeners:
+
+Manager remote listeners (WAZUH_REMOTE\_\*)
+-------------------------------------------
+
+The WAZUH_REMOTE\_\* variables customize the remote block of the generated ``wazuh-manager.conf``. They apply to manager installations only. The same variables are honored by the DEB and RPM manager packages when they are exported at installation time. The installer validates them and stops with an error if a value is invalid, for example, a port outside 1-65535 or a certificate without its key.
+
+The certificate, key, and CA paths are opened inside the remoted chroot, so they must be relative to the installation directory.
+
+The options most often changed at installation time are:
+
++------------------------------------+------------------------------------------------------------------+---------------------------+--------------------+
+| Variable                           | Description                                                      | Default                   | Allowed values     |
++====================================+==================================================================+===========================+====================+
+| ``WAZUH_REMOTE_HTTPS_PORT``        | Port of the HTTPS listener used by 5.0 agents for enrollment and | 1517                      | 1-65535            |
+|                                    | communication.                                                   |                           |                    |
++------------------------------------+------------------------------------------------------------------+---------------------------+--------------------+
+| ``WAZUH_REMOTE_HTTPS_BIND_ADDR``   | Address the HTTPS listener binds to. 127.0.0.1 only accepts      | 0.0.0.0                   | A valid IP address |
+|                                    | local connections.                                               |                           |                    |
++------------------------------------+------------------------------------------------------------------+---------------------------+--------------------+
+| ``WAZUH_REMOTE_HTTPS_CERTIFICATE`` | Listener certificate, relative to the installation directory.    | etc/certs/remoted.pem     | A path             |
+|                                    | When set, WAZUH_REMOTE_HTTPS_KEY is also required.               |                           |                    |
++------------------------------------+------------------------------------------------------------------+---------------------------+--------------------+
+| ``WAZUH_REMOTE_HTTPS_KEY``         | Listener private key, relative to the installation directory.    | etc/certs/remoted-key.pem | A path             |
+|                                    | When set, WAZUH_REMOTE_HTTPS_CERTIFICATE is also required.       |                           |                    |
++------------------------------------+------------------------------------------------------------------+---------------------------+--------------------+
+| ``WAZUH_REMOTE_LEGACY_ENABLED``    | Enables the legacy listener used by 4.x agents. Set it to no to  | yes                       | yes, no            |
+|                                    | disable that listener.                                           |                           |                    |
++------------------------------------+------------------------------------------------------------------+---------------------------+--------------------+
+| ``WAZUH_REMOTE_LEGACY_PORT``       | Port of the legacy listener.                                     | 1514                      | 1-65535            |
++------------------------------------+------------------------------------------------------------------+---------------------------+--------------------+
+| ``WAZUH_REMOTE_LEGACY_LOCAL_IP``   | Address the legacy listener binds to. 127.0.0.1 only accepts     | 0.0.0.0                   | A valid IP address |
+|                                    | local connections.                                               |                           |                    |
++------------------------------------+------------------------------------------------------------------+---------------------------+--------------------+
+
+Every other option of the remote block can be set the same way, using WAZUH_REMOTE\_ followed by the section (HTTPS\_, LEGACY\_ or AGENTS\_) and the option name in capitals. See the remote section of the Wazuh manager configuration reference for all the options.
+
+.. note::
+
+   To automate deployments from DEB, RPM, Windows (MSI), and macOS packages instead of building from source, use the deployment variables of each package type. See the Wazuh agent installation guide.
