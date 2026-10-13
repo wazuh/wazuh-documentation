@@ -76,16 +76,16 @@ Perform the following steps to recreate the Wazuh dashboard configuration in Waz
 
 #. Review the Wazuh dashboard 4.x configuration file ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` and identify any settings that differ from the default values.
 
-#. Edit the Wazuh dashboard 5.x configuration file ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` to recreate the supported Wazuh manager API configuration, using the values from the 4.x deployment:
+#. Edit the Wazuh dashboard 5.x configuration file ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` to recreate the supported Wazuh manager API configuration. Use the URL, port, and ``run_as`` values from the Wazuh 4.x deployment. Keep the ``wazuh-internal-client`` user, which replaces ``wazuh-wui`` in Wazuh 5.x. Leave out the ``password`` setting, because the Wazuh dashboard reads the password from its keystore:
 
    .. code-block:: yaml
+      :emphasize-lines: 3, 4
 
       wazuh_core.hosts:
         default:
           url: https://<WAZUH_MANAGER_IP_OR_HOSTNAME>
           port: <PORT>
-          username: <USERNAME>
-          password: <PASSWORD>
+          username: wazuh-internal-client
           run_as: true
 
 #. Navigate to **Dashboard Management** > **Advanced Settings** on the Wazuh dashboard to reconfigure advanced settings. Recreate any customized settings from the Wazuh 4.x deployment. Review the following settings:
@@ -146,38 +146,35 @@ Perform the following steps to recreate custom dashboards and visualizations in 
 
    .. note::
 
-      Enable **Include related objects** before exporting the saved objects.
+      Disable **Include related objects** before exporting the saved objects. Otherwise, the export includes the Wazuh 4.x ``wazuh-alerts-*`` index pattern, and the imported panels display no data.
 
 #. Import the exported saved objects into the new deployment. Click the **☰** menu and navigate to **Dashboard Management** > **Saved objects**. Click **Import** and select the exported ``.ndjson`` file.
 
    .. note::
 
-      When you import objects, select one of the following conflict resolution strategies:
+      When you import objects, select **Check for existing objects** and then **Request action on conflict**. When the Wazuh dashboard reports index pattern conflicts for ``wazuh-alerts-*``, select a Wazuh 5.x index pattern, such as ``wazuh-findings-v5*``, and click **Confirm all changes**. This option preserves the default objects that the Wazuh dashboard 5.x provisions. The **Automatically overwrite conflicts** option replaces existing objects that have the same IDs.
 
-      -  Check for existing objects (recommended)
-      -  Automatically overwrite all conflicts
-
-      The recommended option preserves the default objects that the Wazuh dashboard 5.x provisions.
-
-#. Replace references to ``wazuh-alerts-*`` with an appropriate Wazuh 5.x index pattern. Wazuh 5.x stores events and findings in category specific data streams, while the Wazuh dashboard can use broader index patterns such as ``wazuh-events*`` and ``wazuh-findings*`` to query multiple categories. Select the index pattern that contains the data required by the migrated visualization.
+#. Replace references to ``wazuh-alerts-*`` with an appropriate Wazuh 5.x index pattern. Wazuh 5.x stores events and findings in category specific data streams, while the Wazuh dashboard can use broader index patterns such as ``wazuh-events-v5*`` and ``wazuh-findings-v5*`` to query multiple categories. Select the index pattern that contains the data required by the migrated visualization.
 
 #. Update field references where required. Wazuh 5.x uses the Wazuh Common Schema (WCS) to standardize event fields. When recreating visualizations, review the fields referenced by the Wazuh 4.x visualization and identify the appropriate WCS fields for the data you want to display.
 
    The following table provides examples of Wazuh 4.x fields and related WCS fields in Wazuh 5.x. For the complete list of WCS fields, refer to the :ref:`Wazuh Common Schema (WCS) <wazuh_common_schema>` documentation.
 
-   +----------------------+----------------------+---------------------------------------------------------------------------------------------------------+
-   | Wazuh 4.x field      | Wazuh 5.x field      | Notes                                                                                                   |
-   +======================+======================+=========================================================================================================+
-   | ``rule.level``       | ``wazuh.rule.level`` | Type changed from integer values 0–16 to values such as low, medium, high, critical, and informational. |
-   +----------------------+----------------------+---------------------------------------------------------------------------------------------------------+
-   | ``rule.description`` | ``wazuh.rule.title`` | Use this field for the rule title or description shown in migrated visualizations.                      |
-   +----------------------+----------------------+---------------------------------------------------------------------------------------------------------+
-   | ``rule.id``          | ``wazuh.rule.id``    | Use this field to filter or aggregate by rule ID.                                                       |
-   +----------------------+----------------------+---------------------------------------------------------------------------------------------------------+
-   | ``agent.name``       | ``wazuh.agent.name`` | Use this field to filter or group by agent name.                                                        |
-   +----------------------+----------------------+---------------------------------------------------------------------------------------------------------+
-   | ``agent.id``         | ``wazuh.agent.id``   | Use this field to filter or group by Wazuh agent ID.                                                    |
-   +----------------------+----------------------+---------------------------------------------------------------------------------------------------------+
+   +----------------------+----------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | Wazuh 4.x field      | Wazuh 5.x field            | Notes                                                                                                                                                                                                                           |
+   +======================+============================+=================================================================================================================================================================================================================================+
+   | ``rule.level``       | ``wazuh.rule.level``       | Type changed from integer values 0–16 to values such as low, medium, high, critical, and informational. Rewrite range queries, for example, replace ``rule.level >= 5`` with ``wazuh.rule.level:(medium or high or critical)``. |
+   +----------------------+----------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | ``rule.description`` | ``wazuh.rule.title``       | Use this field for the rule title or description shown in migrated visualizations.                                                                                                                                              |
+   +----------------------+----------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | ``rule.id``          | ``wazuh.rule.id``          | Use this field to filter or aggregate by rule ID. Wazuh 5.x rule IDs are UUIDs, so filters on Wazuh 4.x numeric rule IDs don't match.                                                                                           |
+   +----------------------+----------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | ``agent.name``       | ``wazuh.agent.name``       | Use this field to filter or group by agent name.                                                                                                                                                                                |
+   +----------------------+----------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | ``agent.id``         | ``wazuh.agent.id``         | Use this field to filter or group by Wazuh agent ID.                                                                                                                                                                            |
+   +----------------------+----------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | ``rule.groups``      | ``wazuh.integration.name`` | Use this field to filter or group by the integration that generated the event.                                                                                                                                                  |
+   +----------------------+----------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
    .. note::
 

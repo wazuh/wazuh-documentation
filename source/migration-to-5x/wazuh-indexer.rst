@@ -57,6 +57,26 @@ Perform the following steps on the new Wazuh 5.x endpoint.
 
 #. Review the Wazuh 4.x configuration and recreate the required settings manually in the corresponding Wazuh 5.x files.
 
+#. Update or remove the Wazuh 4.x settings that changed in Wazuh 5.x:
+
+   +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------+
+   | Setting                                                                                                                                                                                                      | Wazuh 5.x change                                                                                                  |
+   +==============================================================================================================================================================================================================+===================================================================================================================+
+   | ``compatibility.override_main_response_version``                                                                                                                                                             | Removed. The Wazuh indexer doesn't start if ``opensearch.yml`` contains this setting.                             |
+   +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------+
+   | ``opensearch_performance_analyzer.*``, ``plugins.anomaly_detection.*``, ``plugins.asynchronous_search.*``, ``plugins.ml_commons.*``, ``plugins.query.datasources.*``, ``plugins.neural_search.*``, ``knn.*`` | Removed. Wazuh indexer 5.x doesn't include the related plugins.                                                   |
+   +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------+
+   | ``cluster.initial_master_nodes``                                                                                                                                                                             | The Wazuh 5.x default differs from Wazuh 4.x. Review the value before you reuse it.                               |
+   +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------+
+   | ``plugins.security.ssl.transport.enforce_hostname_verification``, ``plugins.security.ssl.transport.resolve_hostname``                                                                                        | The Wazuh 5.x defaults differ from Wazuh 4.x. Keep the Wazuh 5.x values unless your deployment requires a change. |
+   +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------+
+   | ``plugins.security.authcz.admin_dn``, ``plugins.security.nodes_dn``                                                                                                                                          | The distinguished name (DN) attribute order differs. Copy the DN values that match the Wazuh 5.x certificates.    |
+   +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------+
+   | ``plugins.security.ssl.*`` certificate paths                                                                                                                                                                 | The certificate file names differ. Point the paths to the files in ``/etc/wazuh-indexer/certs/``.                 |
+   +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------+
+   | Multi-tenancy settings                                                                                                                                                                                       | Disabled by default in Wazuh 5.x.                                                                                 |
+   +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------+
+
 #. Review any custom JVM and logging configuration before you apply it to the Wazuh 5.x deployment.
 
 #. Complete the security configuration described in the :ref:`Wazuh indexer security configuration <migration_wazuh_indexer_security_configuration>` section.
@@ -119,7 +139,16 @@ The security configuration is stored under ``/etc/wazuh-indexer/opensearch-secur
 
 .. note::
 
-   Before migrating the security settings, use the `backup procedure <https://documentation.wazuh.com/4.14/migration-guide/creating/index.html>`__ to export the active Wazuh 4.x security configuration. The files on disk might not reflect the active configuration because the effective security configuration is stored in the Wazuh indexer security index.
+   Before migrating the security settings, export the active Wazuh 4.x security configuration. The files on disk might not reflect the active configuration because the effective security configuration is stored in the Wazuh indexer security index.
+
+Run the following commands on a Wazuh 4.x indexer node to export the active security configuration:
+
+.. code-block:: console
+
+   # install -d -o wazuh-indexer -g wazuh-indexer <BACKUP_DIRECTORY>
+   # /usr/share/wazuh-indexer/bin/indexer-security-init.sh --options "-backup <BACKUP_DIRECTORY> -icl -nhnv"
+
+Replace ``<BACKUP_DIRECTORY>`` with the directory that stores the exported files, for example ``/var/tmp/security-backup``. Use the exported ``internal_users.yml``, ``roles.yml``, and ``roles_mapping.yml`` files as the reference for the Wazuh 5.x security configuration.
 
 Before applying the recreated security configuration, verify that the recreated roles reference valid permissions and that the role mappings reference users and roles defined in the Wazuh 5.x security configuration. Refer to the :doc:`user administration </user-manual/user-administration/index>` documentation for more information.
 
@@ -280,7 +309,7 @@ On the Wazuh 4.x dashboard, perform the following steps:
 
 #. Click the **☰** menu, navigate to **Indexer management** > **Snapshot Management** > **Repositories**, and select **Create repository** to create a new snapshot repository.
 
-#. Enter a **Repository name**, select the repository type **Shared file system**, enter the repository **Location** ``/mnt/snapshots``, and select **Add** to register the new repository.
+#. Enter a **Repository name**, such as ``wazuh-4x-migration``, select the repository type **Shared file system**, enter the repository **Location** ``/mnt/snapshots``, and select **Add** to register the new repository.
 
    .. thumbnail:: /images/migration-to-5x/create-snapshot-repository.png
       :title: Create a snapshot repository on Wazuh 4.x
@@ -297,11 +326,11 @@ On the Wazuh 4.x dashboard, perform the following steps:
 
 #. Select **Take snapshot** and enter a Snapshot name.
 
-#. Select only the Wazuh data indices that you want to migrate.
+#. Select the Wazuh data indices that you want to migrate from the list. The Wazuh 4.x dashboard ignores index patterns that you type in this field and includes every index in the snapshot.
 
    .. warning::
 
-      Do not include system indices or the cluster state in the migration snapshot. The snapshot is intended to transfer Wazuh 4.x historical data to the new Wazuh 5.x deployment, not the Wazuh 4.x indexer configuration.
+      Do not include system indices or the cluster state in the migration snapshot. The snapshot is intended to transfer Wazuh 4.x historical data to the new Wazuh 5.x deployment, not the Wazuh 4.x indexer configuration. Before you restore the snapshot, verify that it contains only the Wazuh data indices you selected.
 
 #. Select the repository you created earlier to store the snapshots.
 
@@ -328,10 +357,10 @@ Run the command below on the Wazuh 5.x indexer node to set up a read-only snapsh
 
 .. code-block:: bash
 
-   # curl -sk -X PUT \
+   # curl -k -X PUT \
      --cert /etc/wazuh-indexer/certs/admin.pem \
      --key /etc/wazuh-indexer/certs/admin-key.pem \
-     "https://<WAZUH_INDEXER_IP>:9200/_snapshot/Wazuh-4x-migration" \
+     "https://<WAZUH_INDEXER_IP>:9200/_snapshot/wazuh-4x-migration" \
      -H "Content-Type: application/json" \
      -d '{
        "type": "fs",
@@ -348,7 +377,7 @@ The command output looks similar to this:
 
    {"acknowledged":true}
 
-Replace ``<WAZUH_INDEXER_IP>`` with the IP address of the Wazuh 5.x indexer.
+Replace ``<WAZUH_INDEXER_IP>`` with the IP address of the Wazuh 5.x indexer. In an all-in-one deployment, use ``127.0.0.1`` because the Wazuh indexer listens on the loopback address.
 
 Restoring the snapshot on Wazuh 5.x
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
