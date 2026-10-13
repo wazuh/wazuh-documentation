@@ -43,7 +43,7 @@ The primary Wazuh manager configuration file has changed between Wazuh 4.x and W
 Configuration changes
 ------------------------
 
-Review the following changes before you recreate the Wazuh manager configuration.
+Review the following changes before you recreate the Wazuh manager configuration. Wazuh 5.x uses ``<wazuh_config>`` as the root element of ``wazuh-manager.conf`` instead of ``<ossec_config>``.
 
 .. _migration_unsupported_configuration_sections:
 
@@ -87,6 +87,21 @@ Wazuh 5.x removes, relocates, or changes the following Wazuh 4.x sections and op
 +---------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``<cluster>``                   | Wazuh 5.x doesn't support ``<disabled>``. Every Wazuh 5.x manager runs as a cluster node.                                                                                                                                    |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+Other configuration files
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Wazuh 5.x also changes the internal options, Wazuh manager API, and cluster configuration files. Recreate your customizations in the following Wazuh 5.x files.
+
++------------------------------------------------+----------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Wazuh 4.x file                                 | Wazuh 5.x file                                                 | Notes                                                                                                                                                                                                                                                      |
++================================================+================================================================+============================================================================================================================================================================================================================================================+
+| ``/var/ossec/etc/local_internal_options.conf`` | ``/var/wazuh-manager/etc/wazuh-manager-internal-options.conf`` | Set only the options that Wazuh 5.x still reads. Wazuh 5.x ignores removed options. Rename ``monitord.*`` options to their ``wazuh_modules.manager_task_*`` equivalents, for example ``monitord.rotate_log`` to ``wazuh_modules.manager_task_log_rotate``. |
++------------------------------------------------+----------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``/var/ossec/api/configuration/api.yaml``      | ``/var/wazuh-manager/api/configuration/api.yaml``              | Wazuh 5.x doesn't support ``https.ssl_protocol``, ``experimental_features``, or ``upload_configuration.integrations``. The default certificate names change to ``apid.pem``, ``apid-key.pem``, and ``root-ca.pem``.                                        |
++------------------------------------------------+----------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``cluster.json``                               | ``cluster.json``                                               | Use the Wazuh 5.x file as the base. Reapply only the interval values that you changed.                                                                                                                                                                     |
++------------------------------------------------+----------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Recreate Wazuh manager configuration
 ---------------------------------------

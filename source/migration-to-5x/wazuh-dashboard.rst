@@ -90,17 +90,17 @@ Perform the following steps to recreate the Wazuh dashboard configuration in Waz
 
 #. Navigate to **Dashboard Management** > **Advanced Settings** on the Wazuh dashboard to reconfigure advanced settings. Recreate any customized settings from the Wazuh 4.x deployment. Review the following settings:
 
-   +----------------------------+-----------------------------------------------------------+
-   | Setting                    | Description                                               |
-   +============================+===========================================================+
-   | ``timeout``                | Request timeout in milliseconds.                          |
-   +----------------------------+-----------------------------------------------------------+
-   | ``enrollment.dns``         | Wazuh server DNS name used in the agent deployment guide. |
-   +----------------------------+-----------------------------------------------------------+
-   | ``reports.csv.maxRows``    | Maximum rows allowed in exported CSV files.               |
-   +----------------------------+-----------------------------------------------------------+
-   | ``wazuh.updates.disabled`` | Enables or disables update notifications.                 |
-   +----------------------------+-----------------------------------------------------------+
+   +----------------------------+-------------------------------------------------------------------------------------------------------------+
+   | Setting                    | Description                                                                                                 |
+   +============================+=============================================================================================================+
+   | ``timeout``                | Request timeout in milliseconds.                                                                            |
+   +----------------------------+-------------------------------------------------------------------------------------------------------------+
+   | ``enrollment.dns``         | Wazuh manager DNS name used in the agent deployment guide. Set this value to the Wazuh 5.x manager address. |
+   +----------------------------+-------------------------------------------------------------------------------------------------------------+
+   | ``reports.csv.maxRows``    | Maximum rows allowed in exported CSV files.                                                                 |
+   +----------------------------+-------------------------------------------------------------------------------------------------------------+
+   | ``wazuh.updates.disabled`` | Enables or disables update notifications.                                                                   |
+   +----------------------------+-------------------------------------------------------------------------------------------------------------+
 
 #. Restart the Wazuh dashboard service:
 

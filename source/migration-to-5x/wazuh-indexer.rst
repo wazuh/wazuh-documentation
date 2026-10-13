@@ -150,7 +150,7 @@ Run the following commands on a Wazuh 4.x indexer node to export the active secu
 
 Replace ``<BACKUP_DIRECTORY>`` with the directory that stores the exported files, for example ``/var/tmp/security-backup``. Use the exported ``internal_users.yml``, ``roles.yml``, and ``roles_mapping.yml`` files as the reference for the Wazuh 5.x security configuration.
 
-Before applying the recreated security configuration, verify that the recreated roles reference valid permissions and that the role mappings reference users and roles defined in the Wazuh 5.x security configuration. Refer to the :doc:`user administration </user-manual/user-administration/index>` documentation for more information.
+Before applying the recreated security configuration, verify that the recreated roles reference valid permissions and that the role mappings reference users and roles defined in the Wazuh 5.x security configuration. Replace Wazuh 4.x index patterns in recreated roles, such as ``wazuh-alerts-*``, with the Wazuh 5.x index patterns, such as ``wazuh-events-v5*``, ``wazuh-findings-v5*``, and ``wazuh-states-*``. Keep the Wazuh 5.x permission names. Users with roles that reference Wazuh 4.x index patterns can log in, but the Wazuh dashboard doesn't display their data. Refer to the :doc:`user administration </user-manual/user-administration/index>` documentation for more information.
 
 Apply the security configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
