@@ -47,6 +47,8 @@ User-generated (custom) content is promoted through the *Draft* -> *Test* -> *Cu
 
 This workflow allows content to be validated before it is deployed to production environments.
 
+.. _wazuh_indexer_content_manager_cti_synchronization:
+
 CTI synchronization
 -------------------
 
@@ -58,9 +60,9 @@ The Content Manager module automatically synchronizes content from the Wazuh CTI
 -  KVDBs
 -  Policies
 
-By default, synchronization runs every 60 minutes.
+By default, synchronization runs every 60 minutes. The ``plugins.content_manager.catalog.sync_interval`` setting changes the interval.
 
-When new content becomes available, The Content Manager module updates the local content repository and automatically synchronizes related Security Analytics resources.
+When new content becomes available, the Content Manager module updates the local content repository and automatically synchronizes related Security Analytics resources.
 
 Security Analytics integration
 ------------------------------
@@ -75,7 +77,7 @@ When CTI content changes, Content Manager updates the corresponding Security Ana
 
 .. note::
 
-   Security Analytics detectors support a maximum of 100 Sigma rules per detector. Detector creation or updates that exceed this limit are rejected.
+   By default, a Security Analytics detector can reference up to 50 Sigma rules. Detector creation or updates that exceed this limit are rejected. The limit also applies to the detectors that the Content Manager module creates from Wazuh CTI integrations. The ``plugins.security_analytics.max_rules_per_detector`` setting changes this limit. See the :ref:`settings reference <wazuh_indexer_security_analytics_configuration>` of the Security Analytics module.
 
 Content management
 ------------------
@@ -138,9 +140,42 @@ The Content Manager module automatically protects promotions from partial failur
 Update notifications
 --------------------
 
-Content Manager periodically checks for available content updates from the Wazuh CTI service. When newer content becomes available, the Wazuh dashboard displays update notifications to administrators.
+The Content Manager module sends a daily telemetry ping to the Wazuh CTI service. The ping carries the cluster UUID and the installed Wazuh version. It does not send rules, events, or logs. The ping is enabled by default. To turn it off, set ``plugins.content_manager.telemetry.enabled`` to ``false``.
 
-This functionality is enabled by default, and you can configure it through the Wazuh indexer settings.
+The setting does not turn off update notifications. The Wazuh dashboard checks for newer Wazuh releases through ``GET /_plugins/_content_manager/version/check``, which answers whether the ping is on or off. Content updates follow the schedule described in :ref:`CTI synchronization <wazuh_indexer_content_manager_cti_synchronization>`.
+
+Configuration
+-------------
+
+The Content Manager module settings are configured in the ``/etc/wazuh-indexer/opensearch.yml`` file using the ``plugins.content_manager`` prefix. Changes take effect after you restart the Wazuh indexer. You can also change the settings marked dynamic at runtime through the Cluster Settings API.
+
++--------------------------------+---------+----------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| Setting                        | Type    | Default  | Description                                                                                                                                 |
++================================+=========+==========+=============================================================================================================================================+
+| ``catalog.sync_interval``      | Integer | ``60``   | Interval, in minutes, between scheduled CTI synchronizations. Valid range: 10-1440. Dynamic.                                                |
++--------------------------------+---------+----------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| ``catalog.update_on_start``    | Boolean | ``true`` | Synchronizes content when the Wazuh indexer starts.                                                                                         |
++--------------------------------+---------+----------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| ``catalog.update_on_schedule`` | Boolean | ``true`` | Runs the scheduled CTI synchronization. When ``false``, no content is downloaded on a schedule. Dynamic.                                    |
++--------------------------------+---------+----------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| ``catalog.update_on_demand``   | Boolean | ``true`` | Allows on-demand updates through ``POST /_plugins/_content_manager/update``. When ``false``, the endpoint returns ``403`` for every caller. |
++--------------------------------+---------+----------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| ``catalog.create_detectors``   | Boolean | ``true`` | Creates Security Analytics detectors from Wazuh CTI integrations during synchronization.                                                    |
++--------------------------------+---------+----------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| ``telemetry.enabled``          | Boolean | ``true`` | Sends the daily telemetry ping. It does not turn off update notifications in the Wazuh dashboard. Dynamic.                                  |
++--------------------------------+---------+----------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| ``max_integrations``           | Integer | ``100``  | Maximum number of user-created integrations in the Draft space. Minimum 0. Dynamic.                                                         |
++--------------------------------+---------+----------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| ``max_decoders``               | Integer | ``200``  | Maximum number of user-created decoders in the Draft space. Minimum 0. Dynamic.                                                             |
++--------------------------------+---------+----------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| ``max_rules``                  | Integer | ``200``  | Maximum number of user-created Sigma rules in the Draft space. Minimum 0. Dynamic.                                                          |
++--------------------------------+---------+----------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| ``max_kvdbs``                  | Integer | ``100``  | Maximum number of user-created KVDBs in the Draft space. Minimum 0. Dynamic.                                                                |
++--------------------------------+---------+----------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| ``max_filters``                | Integer | ``100``  | Maximum number of user-created filters in each space. Minimum 0. Dynamic.                                                                   |
++--------------------------------+---------+----------+---------------------------------------------------------------------------------------------------------------------------------------------+
+
+A create request that would exceed a ``max_*`` limit is rejected with ``400 Bad Request``.
 
 REST API
 --------

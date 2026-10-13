@@ -6,7 +6,7 @@
 Migrating Wazuh indices
 =======================
 
-This section focuses on migrating Wazuh indices by using snapshots. This helps to restore alerts from one Wazuh indexer cluster to another without losing the original timestamp. We make use of two methods:
+This section focuses on migrating Wazuh indices by using snapshots. This helps to restore findings from one Wazuh indexer cluster to another without losing the original timestamp. We make use of two methods:
 
 -  :ref:`Using a local repository <migrating_wazuh_indices_local_repository>`
 -  :ref:`Using a shared file system (NFS) <migrating_wazuh_indices_nfs>`
@@ -40,15 +40,19 @@ Perform the following configuration on the source and destination Wazuh indexer 
    **Example:**
 
    .. code-block:: yaml
-      :emphasize-lines: 11
+      :emphasize-lines: 15
 
-      network.host: 127.0.0.1
-      node.name: indexer
+      network.host: "127.0.0.1"
+      node.name: "node-1"
       cluster.initial_cluster_manager_nodes:
-        - "indexer"
+      - "node-1"
+      #- "node-2"
+      #- "node-3"
       cluster.name: "wazuh-cluster"
-      discovery.seed_hosts:
-        - "127.0.0.1"
+      #discovery.seed_hosts:
+      #  - "node-1-ip"
+      #  - "node-2-ip"
+      #  - "node-3-ip"
       node.max_local_storage_nodes: "3"
       path.data: /var/lib/wazuh-indexer
       path.logs: /var/log/wazuh-indexer
@@ -61,19 +65,23 @@ Perform the following configuration on the source and destination Wazuh indexer 
       plugins.security.ssl.transport.pemkey_filepath: /etc/wazuh-indexer/certs/indexer-key.pem
       plugins.security.ssl.transport.pemtrustedcas_filepath: /etc/wazuh-indexer/certs/root-ca.pem
       plugins.security.ssl.http.enabled: true
-      plugins.security.ssl.transport.enforce_hostname_verification: false
-      plugins.security.ssl.transport.resolve_hostname: false
+      transport.ssl.enforce_hostname_verification: true
+      transport.ssl.resolve_hostname: false
+
+      # Filled in by resolve-credentials.sh with the DN of the admin certificate.
       plugins.security.authcz.admin_dn:
-        - "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
+      - "C=US,L=California,O=Wazuh,OU=Wazuh,CN=admin"
       plugins.security.check_snapshot_restore_write_privileges: true
       plugins.security.enable_snapshot_restore_privilege: true
+      # Filled in by resolve-credentials.sh with the DN of this node's own certificate.
       plugins.security.nodes_dn:
-        - "CN=indexer,OU=Wazuh,O=Wazuh,L=California,C=US"
+      - "C=US,L=California,O=Wazuh,OU=Wazuh,CN=wazuh-VirtualBox"
       plugins.security.restapi.roles_enabled:
-        - "all_access"
-        - "security_rest_api_access"
+      - "all_access"
+      - "security_rest_api_access"
+
       plugins.security.system_indices.enabled: true
-      plugins.security.system_indices.indices: [".opendistro-alerting-config", ".opendistro-alerting-alert*", ".opendistro-re>
+      plugins.security.system_indices.indices: [".opendistro-alerting-config", ".opendistro-alerting-alert*", ".opendistro-reports-*", ".opensearch-notifications-*", ".replication-metadata-store", ".wazuh-internal-state"]
       cluster.default_number_of_replicas: 0
       bootstrap.memory_lock: true
 
@@ -87,6 +95,9 @@ Perform the following configuration on the source and destination Wazuh indexer 
       # Use no replicas by default on ISM internal indices
       plugins.index_state_management.history.number_of_replicas: 0
 
+      # Default max scroll context keep alive
+      search.max_keep_alive: "4h"
+
 #. Restart the Wazuh indexer to apply the configuration changes:
 
    .. code-block:: console
@@ -95,7 +106,7 @@ Perform the following configuration on the source and destination Wazuh indexer 
 
    .. note::
 
-      Make sure to confirm that the ``/mnt/snapshots`` directory has the ``wazuh-indexer:wazuh-indexer`` ownership on the Wazuh indexer nodes by running ``ls -l /mnt/snapshots``.
+      Make sure to confirm that the ``/mnt/snapshots`` directory has the ``wazuh-indexer:wazuh-indexer`` ownership on the Wazuh indexer nodes by running ``ls -ld /mnt/snapshots``.
 
 .. _migrating_wazuh_indices_setup_snapshot_repository:
 
@@ -331,15 +342,17 @@ Perform the following steps on the source and destination Wazuh indexer nodes to
    **Example:**
 
    .. code-block:: yaml
-      :emphasize-lines: 11
+      :emphasize-lines: 13
 
       network.host: 127.0.0.1
       node.name: indexer
       cluster.initial_cluster_manager_nodes:
-        - "indexer"
+      - "indexer"
+
       cluster.name: "wazuh-cluster"
       discovery.seed_hosts:
         - "127.0.0.1"
+
       node.max_local_storage_nodes: "3"
       path.data: /var/lib/wazuh-indexer
       path.logs: /var/log/wazuh-indexer
@@ -354,17 +367,20 @@ Perform the following steps on the source and destination Wazuh indexer nodes to
       plugins.security.ssl.http.enabled: true
       plugins.security.ssl.transport.enforce_hostname_verification: false
       plugins.security.ssl.transport.resolve_hostname: false
+
       plugins.security.authcz.admin_dn:
-        - "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
+      - "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
       plugins.security.check_snapshot_restore_write_privileges: true
       plugins.security.enable_snapshot_restore_privilege: true
       plugins.security.nodes_dn:
-        - "CN=indexer,OU=Wazuh,O=Wazuh,L=California,C=US"
+      - "CN=indexer,OU=Wazuh,O=Wazuh,L=California,C=US"
+
       plugins.security.restapi.roles_enabled:
-        - "all_access"
-        - "security_rest_api_access"
+      - "all_access"
+      - "security_rest_api_access"
+
       plugins.security.system_indices.enabled: true
-      plugins.security.system_indices.indices: [".opendistro-alerting-config", ".opendistro-alerting-alert*", ".opendistro-re>
+      plugins.security.system_indices.indices: [".opendistro-alerting-config", ".opendistro-alerting-alert*", ".opendistro-reports-*", ".opensearch-notifications-*", ".replication-metadata-store", ".wazuh-internal-state"]
       cluster.default_number_of_replicas: 0
       bootstrap.memory_lock: true
 
@@ -386,7 +402,7 @@ Perform the following steps on the source and destination Wazuh indexer nodes to
 
    .. note::
 
-      Make sure to confirm that the ``/mnt/snapshots`` directory has the ``wazuh-indexer:wazuh-indexer`` ownership on the Wazuh indexer nodes by running ``ls -l /mnt/snapshots``.
+      Make sure to confirm that the ``/mnt/snapshots`` directory has the ``wazuh-indexer:wazuh-indexer`` ownership on the Wazuh indexer nodes by running ``ls -ld /mnt/snapshots``.
 
 .. _migrating_wazuh_indices_setup_snapshot_repository_nfs:
 
