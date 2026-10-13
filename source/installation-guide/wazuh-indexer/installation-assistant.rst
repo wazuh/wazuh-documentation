@@ -105,6 +105,8 @@ Run these steps as root on one host of your deployment, for example, your first 
 
       # bash wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh --generate-config-files -id
 
+   ``-id`` (``--install-dependencies``) installs the missing operating system packages that the installation requires, without asking.
+
    If the Wazuh agents will connect to a Wazuh manager through a different address, such as a public IP, a NAT address, or a load balancer, add it with ``-as|--agent-san <ALTERNATE_ADDRESS>``. Agent enrollment tokens can only be created for an address that is in the listener certificate of the Wazuh manager.
 
    .. code-block:: console

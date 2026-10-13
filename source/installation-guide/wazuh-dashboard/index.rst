@@ -94,6 +94,8 @@ The Wazuh dashboard can be installed on a dedicated node or along with the Wazuh
    | Wazuh dashboard         |     4    |     2        |     8        |       4        |
    +-------------------------+----------+--------------+--------------+----------------+
 
+   All-in-one host (the Wazuh indexer, Wazuh manager, and Wazuh dashboard on one host), up to 25 agents: 4 CPU cores and 8 GB of RAM, as in the Quickstart. Two or more Wazuh central components on one host need at least 8 GB of RAM and 4 CPU cores.
+
 .. _wazuh_dashboard_required_ports:
 
 Required ports

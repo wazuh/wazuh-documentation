@@ -94,6 +94,8 @@ You can install the Wazuh indexer as a single-node or multi-node cluster.
    | Wazuh indexer           |     8    |     4        |     32       |       8        |
    +-------------------------+----------+--------------+--------------+----------------+
 
+   All-in-one host (the Wazuh indexer, Wazuh manager, and Wazuh dashboard on one host), up to 25 agents: 4 CPU cores and 8 GB of RAM, as in the Quickstart. Two or more Wazuh central components on one host need at least 8 GB of RAM and 4 CPU cores.
+
 -  Disk space requirements: The amount of disk space required depends on the generated events per second (EPS). This table details the estimated disk space needed per agent to store 90 days of events on a Wazuh indexer server, depending on the type of monitored endpoints.
 
    +-------------------------------------------------+-----+---------------------------+
