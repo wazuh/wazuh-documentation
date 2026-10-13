@@ -101,3 +101,42 @@ Changes persist only under the paths mounted as volumes, such as ``/var/wazuh-ma
 At every start, the Wazuh manager container sets the Wazuh indexer hosts, the cluster settings, and the listener addresses in ``/var/wazuh-manager/etc/wazuh-manager.conf`` from its environment variables. Change those settings in the ``environment`` section of the ``docker-compose.yml`` file instead.
 
 The actions you can perform inside the containers are limited.
+
+.. _docker_changing_password:
+
+Changing a password
+-------------------
+
+Editing ``config/credentials/indexer.env``, ``config/credentials/manager.env``, or ``config/credentials/dashboard.env`` after the first start doesn't change any password. Use the password tool in the Wazuh indexer or Wazuh manager container instead. It changes the account on the running deployment, then prints the commands that apply the new password everywhere else the account is used.
+
+You need root user privileges to run the commands below. If you use Docker as a non-root user, run them with ``sudo``.
+
+#. From the ``wazuh-docker/single-node/`` directory, or ``wazuh-docker/multi-node/`` for the multi-node stack, change the password. Replace ``<USER>`` with the account name:
+
+   -  **Wazuh indexer accounts** ``admin``, ``kibanaserver``, and ``wazuh-manager``. In the multi-node stack, replace ``wazuh.indexer`` with ``wazuh1.indexer``:
+
+      .. code-block:: console
+
+         # docker compose exec wazuh.indexer /password-tool.sh --user <USER>
+
+   -  **Wazuh manager API accounts** ``wazuh`` and ``wazuh-wui``. In the multi-node stack, replace ``wazuh.manager`` with ``wazuh.master``:
+
+      .. code-block:: console
+
+         # docker compose exec wazuh.manager /password-tool.sh --user <USER>
+
+   To choose the password yourself, pass it on standard input with the ``--stdin`` option. The example below changes a Wazuh indexer account. For a Wazuh manager API account, or in the multi-node stack, use the service name from the commands above:
+
+   .. code-block:: console
+
+      # printf '%s\n' '<PASSWORD>' | docker compose exec -T wazuh.indexer /password-tool.sh --user <USER> --stdin
+
+   Replace ``<PASSWORD>`` with 12 to 64 characters from ``A-Z``, ``a-z``, ``0-9``, and the symbols ``. , _ + : @ % ^ = ~ -``. It needs at least one lowercase letter, one uppercase letter, one digit, and one symbol.
+
+#. Run the commands the tool prints, from the same directory. The components that use the account keep the password they stored, and these commands update the credentials files and the keystores of those components.
+
+   In the multi-node stack, the printed commands use the single-node service names. Replace them with the multi-node ones. For the ``wazuh-manager`` account, run the Wazuh manager keystore command on both ``wazuh.master`` and ``wazuh.worker``, then restart both:
+
+   .. code-block:: console
+
+      # docker compose restart wazuh.master wazuh.worker
