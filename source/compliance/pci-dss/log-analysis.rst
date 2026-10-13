@@ -131,10 +131,10 @@ Unclassified event indexing keeps events that no rule matched, while data stream
 
 Unclassified event indexing is configured per :doc:`space </user-manual/data-analysis/space>`. When enabled for the relevant space, events that cannot be decoded or classified are stored in the ``wazuh-events-v5-unclassified`` index.
 
-#. Navigate to the **Security Analytics** dashboard, select the space you want to enable unclassified events for, select the **Actions** drop-down menu, and select **Edit**.
+#. Navigate to **Ruleset management** > **Overview**, select the space you want to enable unclassified events for, select the **Actions** drop-down menu, and select **Edit**.
 
    .. thumbnail:: /images/compliance/pci/security-analytics-edit-space.png
-      :title: Edit a space in Security Analytics
+      :title: Edit a space in Ruleset management
       :align: center
       :width: 80%
 

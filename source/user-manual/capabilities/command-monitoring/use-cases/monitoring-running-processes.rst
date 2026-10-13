@@ -68,7 +68,7 @@ Wazuh dashboard
 
 Perform the steps below to create a custom decoder and rule to analyze the event received from the monitored Windows endpoint. If you haven't already done so, perform step 1 of the :ref:`Wazuh dashboard <command_monitoring_configuration_example_wazuh_dashboard>` section under Example configuration.
 
-#. Navigate to **Security Analytics** > **Detection** > **Rules** and perform the following to create a detection rule.
+#. Navigate to **Ruleset management** > **Detection** > **Rules** and perform the following to create a detection rule.
 
    -  Select the space **Draft**
    -  Click **Actions** > **Create**, select the **YAML Editor**, choose the integration ``command-integration``, paste the detection rule shown below, and click **Create rule**:
@@ -105,7 +105,7 @@ Perform the steps below to create a custom decoder and rule to analyze the event
       :align: center
       :width: 80%
 
-#. Navigate to **Security Analytics** > **Overview**, select the space **Draft** and click **Actions** > **Promote** to promote the detection rule to the Test space.
+#. Navigate to **Ruleset management** > **Overview**, select the space **Draft** and click **Actions** > **Promote** to promote the detection rule to the Test space.
 
    .. thumbnail:: /images/manual/command-monitoring/promote-rule-draft-process.png
       :title: Promoting the detection rule to Test
@@ -113,7 +113,7 @@ Perform the steps below to create a custom decoder and rule to analyze the event
       :align: center
       :width: 80%
 
-#. Navigate to **Security Analytics** > **Overview**, select the space **Test**, and click **Actions** > **Promote** to promote the detection rule to the Custom space.
+#. Navigate to **Ruleset management** > **Overview**, select the space **Test**, and click **Actions** > **Promote** to promote the detection rule to the Custom space.
 
    .. thumbnail:: /images/manual/command-monitoring/promote-rule-test-process.png
       :title: Promoting the detection rule to Custom
@@ -121,7 +121,7 @@ Perform the steps below to create a custom decoder and rule to analyze the event
       :align: center
       :width: 80%
 
-#. Navigate to **Security Analytics** > **Detection** > **Detectors** to create a detector that applies the detection rule and generates findings.
+#. Navigate to **Ruleset management** > **Detection** > **Detectors** to create a detector that applies the detection rule and generates findings.
 
    -  Click **Create detector**, fill the required fields, and click **Create detector**:
 
