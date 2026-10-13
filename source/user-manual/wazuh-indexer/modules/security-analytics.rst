@@ -6,31 +6,31 @@
 Security Analytics module
 =========================
 
-The Security Analytics module is a component of the Wazuh Indexer that evaluates incoming events against :doc:`Wazuh Sigma rules </user-manual/wazuh-indexer/wazuh-sigma-rules>` to generate findings.
+The Security Analytics module is a component of the Wazuh indexer that evaluates incoming events against :doc:`Wazuh Sigma rules </user-manual/wazuh-indexer/wazuh-sigma-rules>` to generate findings.
 
-It generates findings when events match Sigma rules and correlates related findings across detectors. The module runs within the Wazuh Indexer and provides the detection engine used by Security Analytics.
+It generates findings when events match Sigma rules and correlates related findings across detectors. The module runs within the Wazuh indexer and provides the detection engine used by Security Analytics.
 
 Detectors
 ---------
 
 A detector evaluates events against a set of Sigma rules for a specific log category. When creating or updating a detector, the following constraints apply:
 
-+----------------------------+---------------------+-----------------------------------------------------------------------------------------------------------------------+
-| Constraint                 | Value               | Description                                                                                                           |
-+============================+=====================+=======================================================================================================================+
-| Rule space type            | One space type only | A detector can reference either Standard rules or Custom rules. A detector cannot use both rule types simultaneously. |
-+----------------------------+---------------------+-----------------------------------------------------------------------------------------------------------------------+
-| Maximum rules per detector | 100                 | A detector can reference up to 100 Sigma rules.                                                                       |
-+----------------------------+---------------------+-----------------------------------------------------------------------------------------------------------------------+
++----------------------------+---------------------+--------------------------------------------------------------------------------------------------------------------------------------+
+| Constraint                 | Value               | Description                                                                                                                          |
++============================+=====================+======================================================================================================================================+
+| Rule space type            | One space type only | A detector can reference either Standard rules or Custom rules. A detector cannot use both rule types simultaneously.                |
++----------------------------+---------------------+--------------------------------------------------------------------------------------------------------------------------------------+
+| Maximum rules per detector | 50 by default       | A detector can reference up to 50 Sigma rules. The ``plugins.security_analytics.max_rules_per_detector`` setting changes this limit. |
++----------------------------+---------------------+--------------------------------------------------------------------------------------------------------------------------------------+
 
 .. warning::
 
-   Requests that violate either constraint are rejected with 400 Bad Request. Both constraints apply to detector creation and update operations.
+   Requests that violate either constraint are rejected with ``400 Bad Request``. Both constraints apply to detector creation and update operations.
 
 Findings
 --------
 
-A finding is generated when a monitored event matches a Sigma detection rule. SAP creates one finding for each matching event.
+A finding is generated when a monitored event matches a Sigma detection rule. The Security Analytics module creates one finding for each matching event.
 
 A raw finding contains references to the matching event and detector, but does not include the event payload or Sigma rule metadata.
 
@@ -52,7 +52,7 @@ The following fields are included in a raw finding:
 | ``timestamp``       | The time when the finding was created.                        |
 +---------------------+---------------------------------------------------------------+
 
-To provide a complete alert context in the Wazuh dashboard, SAP enriches each raw finding with additional information.
+To provide a complete alert context in the Wazuh dashboard, the Security Analytics module enriches each raw finding with additional information.
 
 The enriched finding includes:
 
@@ -69,7 +69,7 @@ Enriched findings are stored in indices matching the ``wazuh-findings-v5-{catego
 Finding workflow
 ^^^^^^^^^^^^^^^^
 
-When SAP receives an event from a Wazuh manager, it performs the following actions:
+When the Security Analytics module receives an event from a Wazuh manager, it performs the following actions:
 
 #. Evaluates the event against active Sigma rules for the corresponding log category.
 #. Creates a raw finding if a rule match occurs.
@@ -79,7 +79,9 @@ When SAP receives an event from a Wazuh manager, it performs the following actio
 
 .. note::
 
-   Finding enrichment is performed asynchronously and does not block finding creation. If enrichment fails, the raw finding remains available.
+   Finding enrichment is performed asynchronously and does not block finding creation. If enrichment fails, the raw finding is kept only if ``plugins.alerting.alert_finding_enabled`` is ``true``.
+
+.. _wazuh_indexer_security_analytics_configuration:
 
 Configuration
 -------------
@@ -89,59 +91,83 @@ The Security Analytics module is configured through settings in ``/etc/wazuh-ind
 Settings reference
 ^^^^^^^^^^^^^^^^^^
 
-+---------------------------------------------------+---------+-----------+-------------------------------------------------------------------------------------------------------------------------+
-| Setting                                           | Type    | Default   | Description                                                                                                             |
-+===================================================+=========+===========+=========================================================================================================================+
-| ``alert_finding_enabled``                         | Boolean | ``true``  | Enable rollover and retention management for the finding history indices.                                               |
-+---------------------------------------------------+---------+-----------+-------------------------------------------------------------------------------------------------------------------------+
-| ``alert_finding_max_docs``                        | Long    | ``1000``  | Deprecated. Maximum document count for a finding history index before rollover. Minimum 0.                              |
-+---------------------------------------------------+---------+-----------+-------------------------------------------------------------------------------------------------------------------------+
-| ``alert_finding_rollover_period``                 | Time    | ``12h``   | How often the finding history rollover job runs.                                                                        |
-+---------------------------------------------------+---------+-----------+-------------------------------------------------------------------------------------------------------------------------+
-| ``alert_history_enabled``                         | Boolean | ``true``  | Enable rollover and retention management for the alert history indices.                                                 |
-+---------------------------------------------------+---------+-----------+-------------------------------------------------------------------------------------------------------------------------+
-| ``alert_history_max_age``                         | Time    | ``30d``   | Maximum age of an alert history index before rollover.                                                                  |
-+---------------------------------------------------+---------+-----------+-------------------------------------------------------------------------------------------------------------------------+
-| ``alert_history_max_docs``                        | Long    | ``1000``  | Maximum document count for an alert history index before rollover. Minimum 0.                                           |
-+---------------------------------------------------+---------+-----------+-------------------------------------------------------------------------------------------------------------------------+
-| ``alert_history_retention_period``                | Time    | ``60d``   | Retention period after which alert history indices are deleted.                                                         |
-+---------------------------------------------------+---------+-----------+-------------------------------------------------------------------------------------------------------------------------+
-| ``alert_history_rollover_period``                 | Time    | ``12h``   | How often the alert history rollover job runs.                                                                          |
-+---------------------------------------------------+---------+-----------+-------------------------------------------------------------------------------------------------------------------------+
-| ``auto_correlations_enabled``                     | Boolean | ``false`` | Automatically generate correlation rules from new findings.                                                             |
-+---------------------------------------------------+---------+-----------+-------------------------------------------------------------------------------------------------------------------------+
-| ``correlation.detector_cache_ttl``                | Time    | ``5m``    | TTL for the in-memory monitor-id to detector cache. Set to 0s to disable the cache.                                     |
-+---------------------------------------------------+---------+-----------+-------------------------------------------------------------------------------------------------------------------------+
-| ``correlation.max_in_flight_findings``            | Integer | ``50``    | Maximum number of correlation pipelines running concurrently. Valid range: 1-1000.                                      |
-+---------------------------------------------------+---------+-----------+-------------------------------------------------------------------------------------------------------------------------+
-| ``correlation.metadata_cache_ttl``                | Time    | ``5m``    | TTL for the in-memory caches of log-type list and correlation rules by detector type. Set to 0s to disable both caches. |
-+---------------------------------------------------+---------+-----------+-------------------------------------------------------------------------------------------------------------------------+
-| ``correlation_history_max_age``                   | Time    | ``30d``   | Maximum age of a correlation history index before rollover.                                                             |
-+---------------------------------------------------+---------+-----------+-------------------------------------------------------------------------------------------------------------------------+
-| ``correlation_history_max_docs``                  | Long    | ``1000``  | Maximum document count for a correlation history index before rollover. Minimum 0.                                      |
-+---------------------------------------------------+---------+-----------+-------------------------------------------------------------------------------------------------------------------------+
-| ``correlation_history_retention_period``          | Time    | ``60d``   | Retention period after which correlation history indices are deleted.                                                   |
-+---------------------------------------------------+---------+-----------+-------------------------------------------------------------------------------------------------------------------------+
-| ``correlation_history_rollover_period``           | Time    | ``12h``   | How often the correlation history rollover job runs.                                                                    |
-+---------------------------------------------------+---------+-----------+-------------------------------------------------------------------------------------------------------------------------+
-| ``correlation_time_window``                       | Time    | ``5m``    | Time window used to group findings into correlations.                                                                   |
-+---------------------------------------------------+---------+-----------+-------------------------------------------------------------------------------------------------------------------------+
-| ``enable_detectors_with_dedicated_query_indices`` | Boolean | ``true``  | Create dedicated query indices for new detectors.                                                                       |
-+---------------------------------------------------+---------+-----------+-------------------------------------------------------------------------------------------------------------------------+
-| ``enable_workflow_usage``                         | Boolean | ``true``  | Use Alerting composite workflows when running detectors.                                                                |
-+---------------------------------------------------+---------+-----------+-------------------------------------------------------------------------------------------------------------------------+
-| ``enriched_findings_index_enabled``               | Boolean | ``true``  | Toggle the enriched findings pipeline.                                                                                  |
-+---------------------------------------------------+---------+-----------+-------------------------------------------------------------------------------------------------------------------------+
-| ``filter_by_backend_roles``                       | Boolean | ``false`` | Restrict access to detectors, rules, and findings based on the requester's backend roles.                               |
-+---------------------------------------------------+---------+-----------+-------------------------------------------------------------------------------------------------------------------------+
-| ``finding_history_max_age``                       | Time    | ``30d``   | Maximum age of a finding history index before rollover.                                                                 |
-+---------------------------------------------------+---------+-----------+-------------------------------------------------------------------------------------------------------------------------+
-| ``finding_history_retention_period``              | Time    | ``60d``   | Retention period after which finding history indices are deleted.                                                       |
-+---------------------------------------------------+---------+-----------+-------------------------------------------------------------------------------------------------------------------------+
-| ``index_timeout``                                 | Time    | ``60s``   | Timeout for Security Analytics index operations.                                                                        |
-+---------------------------------------------------+---------+-----------+-------------------------------------------------------------------------------------------------------------------------+
-| ``max_detectors``                                 | Integer | ``10``    | Maximum number of user-created detectors (Content Manager detectors do not count). Minimum 0.                           |
-+---------------------------------------------------+---------+-----------+-------------------------------------------------------------------------------------------------------------------------+
++------------------------------------------------------------+---------+-----------+--------------------------------------------------------------------------------------------------------------------------------------------+
+| Setting                                                    | Type    | Default   | Description                                                                                                                                |
++============================================================+=========+===========+============================================================================================================================================+
+| ``alert_finding_enabled``                                  | Boolean | ``false`` | Enables the rollover job for the finding history indices. Rollover does not run until you set it to ``true``.                              |
++------------------------------------------------------------+---------+-----------+--------------------------------------------------------------------------------------------------------------------------------------------+
+| ``alert_finding_max_docs``                                 | Long    | ``1000``  | Deprecated. Maximum document count for a finding history index before rollover. Minimum 0.                                                 |
++------------------------------------------------------------+---------+-----------+--------------------------------------------------------------------------------------------------------------------------------------------+
+| ``alert_finding_rollover_period``                          | Time    | ``12h``   | How often the finding history rollover job runs.                                                                                           |
++------------------------------------------------------------+---------+-----------+--------------------------------------------------------------------------------------------------------------------------------------------+
+| ``alert_history_enabled``                                  | Boolean | ``false`` | Enables the rollover job for the alert history indices. Rollover does not run until you set it to ``true``.                                |
++------------------------------------------------------------+---------+-----------+--------------------------------------------------------------------------------------------------------------------------------------------+
+| ``alert_history_max_age``                                  | Time    | ``30d``   | Maximum age of an alert history index before rollover.                                                                                     |
++------------------------------------------------------------+---------+-----------+--------------------------------------------------------------------------------------------------------------------------------------------+
+| ``alert_history_max_docs``                                 | Long    | ``1000``  | Maximum document count for an alert history index before rollover. Minimum 0.                                                              |
++------------------------------------------------------------+---------+-----------+--------------------------------------------------------------------------------------------------------------------------------------------+
+| ``alert_history_retention_period``                         | Time    | ``60d``   | Retention period after which alert history indices are deleted.                                                                            |
++------------------------------------------------------------+---------+-----------+--------------------------------------------------------------------------------------------------------------------------------------------+
+| ``alert_history_rollover_period``                          | Time    | ``12h``   | How often the alert history rollover job runs.                                                                                             |
++------------------------------------------------------------+---------+-----------+--------------------------------------------------------------------------------------------------------------------------------------------+
+| ``auto_correlations_enabled``                              | Boolean | ``false`` | Automatically generate correlation rules from new findings.                                                                                |
++------------------------------------------------------------+---------+-----------+--------------------------------------------------------------------------------------------------------------------------------------------+
+| ``correlation.detector_cache_ttl``                         | Time    | ``5m``    | TTL for the in-memory monitor-id to detector cache. Set to 0s to disable the cache.                                                        |
++------------------------------------------------------------+---------+-----------+--------------------------------------------------------------------------------------------------------------------------------------------+
+| ``correlation.events_backpressure.enabled``                | Boolean | ``true``  | Write-blocks the events indices when the correlation backlog reaches the high watermark, and lifts the block at the low watermark.         |
++------------------------------------------------------------+---------+-----------+--------------------------------------------------------------------------------------------------------------------------------------------+
+| ``correlation.events_backpressure.high_watermark_percent`` | Integer | ``100``   | Backlog level, as a percentage of ``correlation.max_pending_findings``, at which the events indices are write-blocked. Valid range: 1-100. |
++------------------------------------------------------------+---------+-----------+--------------------------------------------------------------------------------------------------------------------------------------------+
+| ``correlation.events_backpressure.low_watermark_percent``  | Integer | ``60``    | Backlog level, as a percentage of ``correlation.max_pending_findings``, at which the write block is lifted. Valid range: 0-99.             |
++------------------------------------------------------------+---------+-----------+--------------------------------------------------------------------------------------------------------------------------------------------+
+| ``correlation.max_in_flight_findings``                     | Integer | ``50``    | Maximum number of correlation pipelines running concurrently. Valid range: 1–1000.                                                         |
++------------------------------------------------------------+---------+-----------+--------------------------------------------------------------------------------------------------------------------------------------------+
+| ``correlation.max_pending_findings``                       | Integer | ``10000`` | Maximum number of findings waiting in the correlation backlog. Valid range: 1-1000000.                                                     |
++------------------------------------------------------------+---------+-----------+--------------------------------------------------------------------------------------------------------------------------------------------+
+| ``correlation.metadata_cache_ttl``                         | Time    | ``5m``    | TTL for the in-memory caches of log-type list and correlation rules by detector type. Set to 0s to disable both caches.                    |
++------------------------------------------------------------+---------+-----------+--------------------------------------------------------------------------------------------------------------------------------------------+
+| ``correlation_history_max_age``                            | Time    | ``30d``   | Maximum age of a correlation history index before rollover.                                                                                |
++------------------------------------------------------------+---------+-----------+--------------------------------------------------------------------------------------------------------------------------------------------+
+| ``correlation_history_max_docs``                           | Long    | ``1000``  | Maximum document count for a correlation history index before rollover. Minimum 0.                                                         |
++------------------------------------------------------------+---------+-----------+--------------------------------------------------------------------------------------------------------------------------------------------+
+| ``correlation_history_retention_period``                   | Time    | ``60d``   | Retention period after which correlation history indices are deleted.                                                                      |
++------------------------------------------------------------+---------+-----------+--------------------------------------------------------------------------------------------------------------------------------------------+
+| ``correlation_history_rollover_period``                    | Time    | ``12h``   | How often the correlation history rollover job runs.                                                                                       |
++------------------------------------------------------------+---------+-----------+--------------------------------------------------------------------------------------------------------------------------------------------+
+| ``correlation_time_window``                                | Time    | ``5m``    | Time window used to group findings into correlations.                                                                                      |
++------------------------------------------------------------+---------+-----------+--------------------------------------------------------------------------------------------------------------------------------------------+
+| ``enable_detectors_with_dedicated_query_indices``          | Boolean | ``true``  | Create dedicated query indices for new detectors.                                                                                          |
++------------------------------------------------------------+---------+-----------+--------------------------------------------------------------------------------------------------------------------------------------------+
+| ``enable_workflow_usage``                                  | Boolean | ``true``  | Use Alerting composite workflows when running detectors.                                                                                   |
++------------------------------------------------------------+---------+-----------+--------------------------------------------------------------------------------------------------------------------------------------------+
+| ``enriched_findings_bulk_size``                            | Integer | ``100``   | Number of enriched findings accumulated before a bulk index request. Valid range: 10-1000.                                                 |
++------------------------------------------------------------+---------+-----------+--------------------------------------------------------------------------------------------------------------------------------------------+
+| ``enriched_findings_enrich_batch_size``                    | Integer | ``100``   | Maximum number of findings taken from the queue per in-flight enrichment. Valid range: 1-1000.                                             |
++------------------------------------------------------------+---------+-----------+--------------------------------------------------------------------------------------------------------------------------------------------+
+| ``enriched_findings_flush_interval``                       | Integer | ``5``     | Interval, in seconds, at which pending index requests are flushed regardless of batch size. Valid range: 1-60.                             |
++------------------------------------------------------------+---------+-----------+--------------------------------------------------------------------------------------------------------------------------------------------+
+| ``enriched_findings_index_enabled``                        | Boolean | ``true``  | Toggle the enriched findings pipeline.                                                                                                     |
++------------------------------------------------------------+---------+-----------+--------------------------------------------------------------------------------------------------------------------------------------------+
+| ``enriched_findings_max_in_flight``                        | Integer | ``5``     | Maximum number of concurrent enrichment chains. Valid range: 1-10.                                                                         |
++------------------------------------------------------------+---------+-----------+--------------------------------------------------------------------------------------------------------------------------------------------+
+| ``enriched_findings_rule_cache_max_size``                  | Integer | ``10000`` | Maximum number of rule metadata entries cached in memory. Static: set it in ``/etc/wazuh-indexer/opensearch.yml``. Minimum 0.              |
++------------------------------------------------------------+---------+-----------+--------------------------------------------------------------------------------------------------------------------------------------------+
+| ``filter_by_backend_roles``                                | Boolean | ``false`` | Restrict access to detectors, rules, and findings based on the requester's backend roles.                                                  |
++------------------------------------------------------------+---------+-----------+--------------------------------------------------------------------------------------------------------------------------------------------+
+| ``finding_history_max_age``                                | Time    | ``30d``   | Maximum age of a finding history index before rollover.                                                                                    |
++------------------------------------------------------------+---------+-----------+--------------------------------------------------------------------------------------------------------------------------------------------+
+| ``finding_history_retention_period``                       | Time    | ``60d``   | Retention period after which finding history indices are deleted.                                                                          |
++------------------------------------------------------------+---------+-----------+--------------------------------------------------------------------------------------------------------------------------------------------+
+| ``index_timeout``                                          | Time    | ``60s``   | Timeout for Security Analytics index operations.                                                                                           |
++------------------------------------------------------------+---------+-----------+--------------------------------------------------------------------------------------------------------------------------------------------+
+| ``mappings.default_schema``                                | String  | ``ecs``   | Default mapping schema.                                                                                                                    |
++------------------------------------------------------------+---------+-----------+--------------------------------------------------------------------------------------------------------------------------------------------+
+| ``max_case_management_bulk_size``                          | Integer | ``10``    | Maximum number of findings one findings update request can change. ``0`` disables the endpoint. Valid range: 0-100.                        |
++------------------------------------------------------------+---------+-----------+--------------------------------------------------------------------------------------------------------------------------------------------+
+| ``max_detectors``                                          | Integer | ``10``    | Maximum number of user-created detectors (Content Manager detectors do not count). Minimum 0.                                              |
++------------------------------------------------------------+---------+-----------+--------------------------------------------------------------------------------------------------------------------------------------------+
+| ``max_rules_per_detector``                                 | Integer | ``50``    | Maximum number of Sigma rules a detector can reference. Detector requests over the limit are rejected with ``400 Bad Request``. Minimum 0. |
++------------------------------------------------------------+---------+-----------+--------------------------------------------------------------------------------------------------------------------------------------------+
 
 All settings use the ``plugins.security_analytics`` prefix shown in the examples below.
 
@@ -174,11 +200,25 @@ To tune retention for the alert history indices in the ``/etc/wazuh-indexer/open
    plugins.security_analytics.alert_history_max_docs: 1000
    plugins.security_analytics.alert_history_retention_period: 60d
 
-The same pattern applies to finding history (``finding_history_*``) and correlation history (``correlation_history_*``).
+The table below summarizes the Security Analytics history-index settings for alerts, findings, and correlations, highlighting differences in available controls and configuration names:
+
++-----------------+------------------------------------+-----------------------------------------+------------------------------------------+
+| Control         | Alerts                             | Findings                                | Correlations                             |
++=================+====================================+=========================================+==========================================+
+| Enable          | ``alert_history_enabled``          | ``alert_finding_enabled``               | —                                        |
++-----------------+------------------------------------+-----------------------------------------+------------------------------------------+
+| Rollover period | ``alert_history_rollover_period``  | ``alert_finding_rollover_period``       | ``correlation_history_rollover_period``  |
++-----------------+------------------------------------+-----------------------------------------+------------------------------------------+
+| Max age         | ``alert_history_max_age``          | ``finding_history_max_age``             | ``correlation_history_max_age``          |
++-----------------+------------------------------------+-----------------------------------------+------------------------------------------+
+| Max docs        | ``alert_history_max_docs``         | ``alert_finding_max_docs`` (deprecated) | ``correlation_history_max_docs``         |
++-----------------+------------------------------------+-----------------------------------------+------------------------------------------+
+| Retention       | ``alert_history_retention_period`` | ``finding_history_retention_period``    | ``correlation_history_retention_period`` |
++-----------------+------------------------------------+-----------------------------------------+------------------------------------------+
 
 .. warning::
 
-   ``plugins.security_analytics.alert_finding_max_docs`` is deprecated. Configure finding history rollover through the ``finding_history_*`` settings.
+   ``plugins.security_analytics.alert_finding_max_docs`` is deprecated.
 
 Correlation tuning
 ^^^^^^^^^^^^^^^^^^
@@ -207,12 +247,14 @@ Detector behavior
 
 .. note::
 
-   Setting ``enriched_findings_index_enabled`` to false disables the Wazuh enriched findings pipeline. Raw SAP findings continue to be written to ``.opensearch-sap-{category}-findings-*``, but no ``wazuh-findings-v5-{category}*`` documents are produced.
+   Setting ``enriched_findings_index_enabled`` to ``false`` disables the Wazuh enriched findings pipeline. Raw Security Analytics module findings continue to be written to ``.opensearch-sap-{category}-findings-*``, but no ``wazuh-findings-v5-{category}*`` documents are produced.
 
 Updating a setting at runtime
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Almost every Security Analytics setting is dynamic. To change one without restarting the node, use the Cluster Settings API. Replace ``<WAZUH_INDEXER_IP>`` with the IP address of the Wazuh indexer node and ``<WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD>`` with your Wazuh indexer username and password.
+In the ``curl`` examples on this page, replace ``<WAZUH_INDEXER_USERNAME>`` and ``<WAZUH_INDEXER_PASSWORD>`` with the credentials of a Wazuh indexer user that has the permissions the request needs, such as ``admin``. The ``admin`` password is the ``WAZUH_INDEXER_ADMIN_PASSWORD`` value in ``/etc/wazuh/credentials.env`` of a Wazuh indexer node, or in the ``credentials.env`` file of ``wazuh-install-files.tar``. Replace ``<WAZUH_INDEXER_IP>`` with the IP address of the Wazuh indexer node.
+
+Almost every Security Analytics setting is dynamic. To change one without restarting the node, use the Cluster Settings API:
 
 .. code-block:: none
 
@@ -232,7 +274,7 @@ Almost every Security Analytics setting is dynamic. To change one without restar
 
 .. note::
 
-   -  Changes to ``/etc/wazuh-indexer/opensearch.yml`` require a restart of the Wazuh Indexer to take effect. Dynamic settings can additionally be updated at runtime through the Cluster Settings API shown above.
+   -  Changes to ``/etc/wazuh-indexer/opensearch.yml`` require a restart of the Wazuh indexer to take effect. Dynamic settings can additionally be updated at runtime through the Cluster Settings API shown above.
    -  ``index.correlation`` is an index-scope setting and must be applied to individual indices (for example, through an index template or the ``_settings`` API), not to the cluster as a whole.
    -  The OpenSearch Job Scheduler enforces rollover jobs. Actual rollover timing may vary slightly depending on cluster load.
 
@@ -256,38 +298,54 @@ Case fields
 
 Case information is stored under the ``wazuh.case`` field in enriched findings.
 
-+---------------------------+-----------------+----------------------------------------------+
-| Field                     | Type            | Description                                  |
-+===========================+=================+==============================================+
-| ``wazuh.case.status``     | keyword         | Current case status.                         |
-+---------------------------+-----------------+----------------------------------------------+
-| ``wazuh.case.comment``    | match_only_text | Analyst comment associated with the finding. |
-+---------------------------+-----------------+----------------------------------------------+
-| ``wazuh.case.tags``       | keyword[]       | Tags used for organization and filtering.    |
-+---------------------------+-----------------+----------------------------------------------+
-| ``wazuh.case.created_at`` | date            | The time when the case was created.          |
-+---------------------------+-----------------+----------------------------------------------+
-| ``wazuh.case.updated_at`` | date            | The time when the case was last updated.     |
-+---------------------------+-----------------+----------------------------------------------+
-| ``wazuh.case.user.name``  | keyword         | The user who last updated the case.          |
-+---------------------------+-----------------+----------------------------------------------+
++------------------------------------+-----------------+--------------------------------------------------------------------------+
+| Field                              | Type            | Description                                                              |
++====================================+=================+==========================================================================+
+| ``wazuh.case.title``               | match_only_text | Case title.                                                              |
++------------------------------------+-----------------+--------------------------------------------------------------------------+
+| ``wazuh.case.description``         | match_only_text | Case description.                                                        |
++------------------------------------+-----------------+--------------------------------------------------------------------------+
+| ``wazuh.case.status``              | keyword         | Current case status.                                                     |
++------------------------------------+-----------------+--------------------------------------------------------------------------+
+| ``wazuh.case.severity``            | keyword         | ``informational``, ``low``, ``medium``, ``high``, or ``critical``.       |
++------------------------------------+-----------------+--------------------------------------------------------------------------+
+| ``wazuh.case.priority``            | keyword         | ``low``, ``medium``, ``high``, or ``urgent``.                            |
++------------------------------------+-----------------+--------------------------------------------------------------------------+
+| ``wazuh.case.tlp``                 | keyword         | ``TLP:RED``, ``TLP:AMBER``, ``TLP:GREEN``, or ``TLP:CLEAR``.             |
++------------------------------------+-----------------+--------------------------------------------------------------------------+
+| ``wazuh.case.tags``                | keyword[]       | Tags used for organization and filtering.                                |
++------------------------------------+-----------------+--------------------------------------------------------------------------+
+| ``wazuh.case.comments.comment``    | match_only_text | Text of an analyst comment. ``comments`` is an array of comment objects. |
++------------------------------------+-----------------+--------------------------------------------------------------------------+
+| ``wazuh.case.comments.author``     | keyword         | Author of the comment.                                                   |
++------------------------------------+-----------------+--------------------------------------------------------------------------+
+| ``wazuh.case.comments.created_at`` | date            | The time when the comment was created.                                   |
++------------------------------------+-----------------+--------------------------------------------------------------------------+
+| ``wazuh.case.comments.updated_at`` | date            | The time when the comment was last updated.                              |
++------------------------------------+-----------------+--------------------------------------------------------------------------+
+| ``wazuh.case.created_at``          | date            | The time when the case was created.                                      |
++------------------------------------+-----------------+--------------------------------------------------------------------------+
+| ``wazuh.case.updated_at``          | date            | The time when the case was last updated.                                 |
++------------------------------------+-----------------+--------------------------------------------------------------------------+
+| ``wazuh.case.user.name``           | keyword         | The user who last updated the case.                                      |
++------------------------------------+-----------------+--------------------------------------------------------------------------+
 
 The following case statuses are supported:
 
 +------------------+-----------------------------------------------------------+
 | Status           | Description                                               |
 +==================+===========================================================+
-| ``ACTIVE``       | Finding requires investigation.                           |
+| ``active``       | Finding requires investigation.                           |
 +------------------+-----------------------------------------------------------+
-| ``ACKNOWLEDGED`` | The finding has been reviewed and is under investigation. |
+| ``acknowledged`` | The finding has been reviewed and is under investigation. |
 +------------------+-----------------------------------------------------------+
-| ``COMPLETED``    | Investigation has been completed.                         |
+| ``completed``    | Investigation has been completed.                         |
 +------------------+-----------------------------------------------------------+
-| ``ERROR``        | An error occurred during processing.                      |
+| ``error``        | An error occurred during processing.                      |
 +------------------+-----------------------------------------------------------+
-| ``DELETED``      | The case was deleted.                                     |
+| ``deleted``      | The case was deleted.                                     |
 +------------------+-----------------------------------------------------------+
-| ``AUDIT``        | Case update recorded for auditing purposes.               |
+| ``audit``        | Case update recorded for auditing purposes.               |
 +------------------+-----------------------------------------------------------+
 
 Updating findings
@@ -311,19 +369,24 @@ The request body contains one or more findings to update.
          "_id": "<finding-document-id>",
          "_index": "<finding-index-name>",
          "case": {
-           "status": "ACKNOWLEDGED",
-           "comment": "Reviewed by SOC analyst",
+           "status": "acknowledged",
+           "comments": [
+             {
+               "comment": "Reviewed by SOC analyst",
+               "author": "<ANALYST_NAME>"
+             }
+           ],
            "tags": ["critical", "reviewed"]
          }
        }
      ]
    }
 
-All fields within the case object are optional. Updates are applied as partial updates and only the supplied fields are modified, and a request can update up to 50 findings.
+All fields within the case object are optional. Updates are applied as partial updates and only the supplied fields are modified. The ``comments`` array replaces the stored comments. To add a comment, send the existing comments with the new one. A request can update up to 10 findings by default, set by ``plugins.security_analytics.max_case_management_bulk_size``.
 
 .. note::
 
-   The ``created_at``, ``updated_at``, and ``user.name`` fields are automatically managed by the Wazuh dashboard and are not to be modified manually.
+   The Wazuh dashboard sets ``created_at``, ``updated_at``, ``user.name``, and the ``author`` and ``created_at`` of each comment. The API stores these fields only when the request includes them.
 
 Response codes
 ^^^^^^^^^^^^^^
@@ -344,9 +407,9 @@ Investigation workflow
 A typical investigation workflow consists of the following stages:
 
 #. A Sigma rule matches an event and creates a finding.
-#. An analyst reviews the finding and changes its status to ``ACKNOWLEDGED``.
+#. An analyst reviews the finding and changes its status to ``acknowledged``.
 #. The analyst adds investigation notes and tags to the case.
-#. The finding status is updated to ``COMPLETED`` when the investigation is finished.
+#. The finding status is updated to ``completed`` when the investigation is finished.
 
 Case management operations are typically performed through the Wazuh dashboard, which automatically manages user attribution and timestamps.
 
@@ -355,7 +418,7 @@ Querying findings by status
 
 You can filter findings using the ``wazuh.case.status`` field.
 
-The following example returns all acknowledged findings. Replace ``<WAZUH_INDEXER_IP>`` with the IP address of the Wazuh indexer node and ``<WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD>`` with your Wazuh indexer username and password.
+The following example returns all acknowledged findings. Replace ``<WAZUH_INDEXER_IP>`` with the IP address of the Wazuh indexer node.
 
 .. code-block:: console
 
@@ -365,7 +428,7 @@ The following example returns all acknowledged findings. Replace ``<WAZUH_INDEXE
      "query": {
        "term": {
          "wazuh.case.status": {
-           "value": "ACKNOWLEDGED"
+           "value": "acknowledged"
          }
        }
      }

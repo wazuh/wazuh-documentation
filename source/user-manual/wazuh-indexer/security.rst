@@ -124,7 +124,7 @@ The following example shows the structure of the ``internal_users.yml`` configur
      hash: "<HASH>"
      reserved: true
      backend_roles: []
-     description: "Wazuh manager user"
+     description: "Wazuh Manager user with write-only access to stateless (events) indexes, read/write/delete access to stateful (states) indexes, and read access to consumers, threat intelligence content, and active-responses indexes."
 
 .. note::
 
