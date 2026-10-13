@@ -172,9 +172,9 @@ If an IOC match is found, the event is enriched with threat context under ``wazu
 
 This model makes IOC enrichment an augmenting step: the event continues to output, now carrying CTI-backed context that downstream detection rules, dashboards, or response playbooks can consume.
 
-.. thumbnail:: /images/manual/data-analysis/security-analytics-enrichment.png
-   :title: Security Analytics enrichment
-   :alt: Security Analytics enrichment
+.. thumbnail:: /images/manual/data-analysis/ruleset-management-enrichment.png
+   :title: Ruleset Management enrichment
+   :alt: Ruleset Management enrichment
    :align: center
    :width: 80%
 
