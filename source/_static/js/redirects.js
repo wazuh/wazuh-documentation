@@ -682,7 +682,6 @@ removedUrls['5.0'] = [
   '/user-manual/indexer-api/use-case.html',
   '/user-manual/reference/tools/clear-stats.html',
   '/user-manual/reference/tools/update-ruleset.html',
-  '/user-manual/reference/unattended-installation.html',
   '/user-manual/ruleset/cdb-list.html',
   '/user-manual/ruleset/decoders/custom.html',
   '/user-manual/ruleset/decoders/dynamic-fields.html',

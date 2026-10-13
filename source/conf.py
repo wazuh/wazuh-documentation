@@ -139,7 +139,6 @@ exclude_patterns = [
     'user-manual/agent/agent-management/key-request.rst',
     'user-manual/agent/agent-management/antiflooding.rst',
     'user-manual/agent/agent-management/labels.rst',
-    'user-manual/reference/unattended-installation.rst',
     'user-manual/ruleset/**',
     'user-manual/manager/alert-management.rst',
     'user-manual/manager/event-logging.rst',
