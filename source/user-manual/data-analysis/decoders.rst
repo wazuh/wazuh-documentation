@@ -23,7 +23,7 @@ The above image shows a logical decoder tree.
 Custom decoders
 ---------------
 
-Custom decoders are managed through the draft, test, and custom spaces on the Wazuh Security Analytics dashboard. They are organized within integrations, which serve as containers for grouping related decoders, rules, KVDBs, and supporting content.
+Custom decoders are managed through the draft, test, and custom spaces on the Wazuh Ruleset Management dashboard. They are organized within integrations, which serve as containers for grouping related decoders, rules, KVDBs, and supporting content.
 
 A decoder is an asset that takes a raw event and normalizes it into the Wazuh Common Schema (WCS) using a small domain-specific language (DSL): ``check``, ``parse``, and ``normalize`` with map operations. Each operation in those stages is defined using literal values, field references, and `helper functions <https://github.com/wazuh/wazuh/blob/main/docs/ref/modules/engine/ref-helper-functions.md>`__. Decoders are arranged in a tree, starting from a root decoder, and each decoder can accept or reject an event based on its conditions before mapping fields.
 

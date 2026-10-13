@@ -29,9 +29,9 @@ The draft, test, and custom spaces are fully user-managed, enabling the creation
 |              | detection content.                                                     |
 +--------------+------------------------------------------------------------------------+
 
-.. thumbnail:: /images/manual/data-analysis/security-analytics-spaces.png
-   :title: Security Analytics spaces
-   :alt: Security Analytics spaces
+.. thumbnail:: /images/manual/data-analysis/ruleset-management-spaces.png
+   :title: Ruleset Management spaces
+   :alt: Ruleset Management spaces
    :align: center
    :width: 80%
 
