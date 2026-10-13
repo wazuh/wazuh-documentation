@@ -1,32 +1,51 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about how the Wazuh capabilities work and check out some common Wazuh use cases in this section of our documentation.
+   :description: Explore Wazuh 5.0 use cases for endpoint security, threat intelligence, security operations, and cloud security, and learn how Wazuh detects, investigates, and responds to threats.
 
 Use cases
 =========
 
-The Wazuh platform helps organizations and individuals protect their data assets through threat prevention, detection, and response. Besides, Wazuh is also employed to meet regulatory compliance requirements, such as PCI DSS or HIPAA, and configuration standards like CIS hardening guides.
+Explore how Wazuh 5.0 capabilities address common security challenges across endpoints, cloud workloads, and security operations. Each use case describes a security need and explains how Wazuh detects, investigates, or responds to related threats.
 
-Moreover, Wazuh is also a solution for users of IaaS (Amazon AWS, Azure, or Google Cloud) to monitor virtual machines and cloud instances. This is done at a system level utilizing the :doc:`Wazuh security agent <../components/wazuh-agent>` and at an infrastructure level pulling data directly from the cloud provider API.
+The :doc:`Wazuh agent </getting-started/components/wazuh-agent>` collects logs, system inventory, and file integrity data from monitored endpoints and forwards the data to the :doc:`Wazuh manager </getting-started/components/wazuh-manager>`. The Wazuh normalization engine decodes and maps each event to the Wazuh Common Schema (WCS). The :doc:`Wazuh indexer </getting-started/components/wazuh-indexer>` stores the events and evaluates them against detection rules to generate findings. You investigate these findings on the :doc:`Wazuh dashboard </getting-started/components/wazuh-dashboard>`.
 
-Additionally, Wazuh is employed to protect containerized environments by providing cloud-native runtime security. This feature is based on an integration with the Docker engine API and the Kubernetes API. The Wazuh security agent can run on the Docker host providing a complete set of threat detection and response capabilities.
+Wazuh also monitors cloud services, including Amazon Web Services (AWS), Microsoft Azure, Google Cloud, Office 365, and GitHub, through their APIs. In containerized environments, the Docker listener module of the Wazuh agent collects Docker Engine events to support container activity monitoring.
 
-Below you can find examples of some of the most common use cases of the Wazuh platform.
+Wazuh maps findings and Security Configuration Assessment (SCA) checks to regulatory frameworks and security standards. Supported frameworks include the Payment Card Industry Data Security Standard (PCI DSS), the Health Insurance Portability and Accountability Act (HIPAA), and the General Data Protection Regulation (GDPR). Wazuh also supports NIST SP 800-53, NIST SP 800-171, ISO 27001, NIS2, CMMC, FedRAMP, and the Trust Services Criteria (TSC). SCA policies also assess endpoints against the Center for Internet Security (CIS) Benchmarks. These mappings help you collect evidence for compliance assessments.
 
-=================================  ================================  ==============================  ==================================
-Endpoint security                  Threat intelligence               Security operations             Cloud security
-=================================  ================================  ==============================  ==================================
-:doc:`configuration-assessment`    :doc:`threat-hunting`             :doc:`incident-response`        :doc:`container-security`
-:doc:`malware-detection`           :doc:`log-analysis`               :doc:`regulatory-compliance`    :doc:`posture-management`
-:doc:`file-integrity`              :doc:`vulnerability-detection`    :doc:`it-hygiene`               :doc:`Workload protection <cloud-workload-protection>`
-=================================  ================================  ==============================  ==================================
+The use cases are grouped into four categories that include endpoint security, threat intelligence, security operations, and cloud security. Select a use case in the following table to explore its details.
+
++------------------------------------------------------------+----------------------------------------------------------+------------------------------------------------------+------------------------------------------------+
+| **Endpoint security**                                      | **Threat intelligence**                                  | **Security operations**                              | **Cloud security**                             |
++============================================================+==========================================================+======================================================+================================================+
+| :doc:`Configuration assessment <configuration-assessment>` | :doc:`Threat hunting <threat-hunting>`                   | :doc:`Incident response <incident-response>`         | :doc:`Container security <container-security>` |
++------------------------------------------------------------+----------------------------------------------------------+------------------------------------------------------+------------------------------------------------+
+| :doc:`File integrity monitoring <file-integrity>`          | :doc:`Log data analysis <log-analysis>`                  | :doc:`Regulatory compliance <regulatory-compliance>` |                                                |
++------------------------------------------------------------+----------------------------------------------------------+------------------------------------------------------+------------------------------------------------+
+|                                                            | :doc:`Vulnerability detection <vulnerability-detection>` | :doc:`IT hygiene <it-hygiene>`                       |                                                |
++------------------------------------------------------------+----------------------------------------------------------+------------------------------------------------------+------------------------------------------------+
+
+.. rubric:: Endpoint security
+
+The Wazuh platform secures monitored endpoints through Security Configuration Assessment (SCA), malware detection, and File integrity monitoring (FIM).
+
+.. rubric:: Threat intelligence
+
+The Wazuh unified XDR and SIEM platform provides threat intelligence capabilities. They help you hunt for threats, analyze log data at scale, and detect vulnerable software across your monitored endpoints.
+
+.. rubric:: Security operations
+
+The Wazuh unified XDR (Extended Detection and Response) and SIEM (Security Information and Event Management) platform strengthens security operations through automated response, compliance mapping, and continuous endpoint visibility.
+
+.. rubric:: Cloud security
+
+The Wazuh unified XDR and SIEM platform helps organizations monitor cloud environments by analyzing container activity, assessing configuration posture, and collecting and analyzing cloud provider logs and workload data.
 
 .. toctree::
    :hidden:
 
    configuration-assessment
-   malware-detection
    file-integrity
    threat-hunting
    log-analysis
@@ -35,5 +54,3 @@ Endpoint security                  Threat intelligence               Security op
    regulatory-compliance
    it-hygiene
    container-security
-   posture-management
-   cloud-workload-protection

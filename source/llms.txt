@@ -22,6 +22,7 @@ Learn the fundamentals of the Wazuh platform.
 
 - **[Components](https://documentation.wazuh.com/current/getting-started/components/index.md)** Detailed information about the Wazuh agent, manager, indexer, and dashboard.
 - **[Architecture](https://documentation.wazuh.com/current/getting-started/architecture.md)** Overview of how Wazuh components communicate and work together.
+- **[Use cases](https://documentation.wazuh.com/current/getting-started/use-cases/index.md)** Examples of how Wazuh addresses common security challenges, grouped into endpoint security, threat intelligence, security operations, and cloud security. Covers configuration assessment, file integrity monitoring, threat hunting, log data analysis, vulnerability detection, incident response, regulatory compliance, IT hygiene, and container security.
 
 ## Deploy & Operate Wazuh
 Install, configure, and maintain the Wazuh platform in your environment.

@@ -61,6 +61,8 @@ Where:
 
 For a detailed description of the SCA configuration parameters, check the SCA reference.
 
+.. _sca_enabling_and_disabling_policies:
+
 Enabling and disabling policies
 --------------------------------
 
