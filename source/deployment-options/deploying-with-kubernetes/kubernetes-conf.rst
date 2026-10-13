@@ -60,7 +60,7 @@ Local cluster
 
 -  4 CPU units
 -  6 Gi of memory
--  2.5 Gi of storage for volumes, plus about 12 GB of disk for the container images
+-  2.5 Gi of storage for volumes (12 GB of disk for the container images)
 
 Overview
 --------
