@@ -220,8 +220,7 @@ The Wazuh images ship with no default passwords. Each deployment generates its o
 
    .. code-block:: console
 
-      $ cd ..
-      $ grep '^WAZUH_INDEXER_ADMIN_PASSWORD=' wazuh/config/credentials/indexer.env | cut -d= -f2-
+      $ grep '^WAZUH_INDEXER_ADMIN_PASSWORD=' ./config/credentials/indexer.env | cut -d= -f2-
 
 Set the cluster key and the agent enrollment password
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -669,7 +668,7 @@ You can adjust cluster resources by editing patch files in ``envs/local-env/``. 
    .. code-block:: console
 
       $ kubectl -n wazuh port-forward service/wazuh-agents --address <KUBERNETES_HOST_IP_ADDRESS> 1517:1517 > /tmp/wazuh-agent-port-forward.log 2>&1 &
-      $ kubectl -n wazuh port-forward service/wazuh-api --address <KUBERNETES_HOST_IP_ADDRESS> 55000:55000 &
+      $ kubectl -n wazuh port-forward service/wazuh-api 55000:55000 > /tmp/wazuh-api-port-forward.log 2>&1 &
 
    .. note::
 
@@ -880,7 +879,7 @@ Follow the steps below to enroll a Wazuh agent outside the cluster in a Wazuh ma
 
    .. code-block:: console
 
-      $ sudo WAZUH_ENROLLMENT_TOKEN="<ENROLLMENT_TOKEN>" \
+      # WAZUH_ENROLLMENT_TOKEN="<ENROLLMENT_TOKEN>" \
       WAZUH_AGENT_NAME="<WAZUH_AGENT_NAME>" \
       apt-get install -y wazuh-agent
 
