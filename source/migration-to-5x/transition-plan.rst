@@ -20,7 +20,7 @@ The following table summarizes the Wazuh data and configurations that you can mi
 .. |security_configuration_ref| replace:: :ref:`Security configuration <migration_wazuh_indexer_security_configuration>`
 .. |custom_dashboards_visualizations_ref| replace:: :ref:`Custom dashboards and visualizations <migration_custom_dashboards_and_visualization>`
 .. |agent_registration_ref| replace:: :ref:`Agent registration <migration_agent_registration>`
-.. |agent_groups_ref| replace:: :ref:`Agent groups <migration_agent_groups>`
+.. |agent_groups_ref| replace:: :ref:`Agent groups <migration_migrate_agent_registrations>`
 
 +------------------------------------------+--------------------------------------------------------------------------------------------+
 | Configuration                            | Notes                                                                                      |
@@ -40,9 +40,10 @@ The following table summarizes the Wazuh data and configurations that you can mi
 | |custom_dashboards_visualizations_ref|   | Export from Wazuh 4.x and import into Wazuh 5.x.                                           |
 +------------------------------------------+--------------------------------------------------------------------------------------------+
 | |agent_registration_ref|                 | Migrate existing Wazuh agent registrations to the Wazuh 5.x manager while preserving their |
-|                                          | agent IDs and authentication keys.                                                         |
+|                                          | agent IDs, authentication keys, registration dates, and group membership.                  |
 +------------------------------------------+--------------------------------------------------------------------------------------------+
-| |agent_groups_ref|                       | Restore group configuration and reassign agents where required.                            |
+| |agent_groups_ref|                       | Migrated with the agent registrations, including group configuration and agent             |
+|                                          | assignments.                                                                               |
 +------------------------------------------+--------------------------------------------------------------------------------------------+
 
 Limitations
