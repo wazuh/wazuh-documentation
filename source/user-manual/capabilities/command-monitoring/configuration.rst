@@ -228,7 +228,7 @@ Wazuh dashboard
 
 Wazuh must analyze the command output to generate findings on the Wazuh dashboard. Perform the steps below to create a detection rule to analyze the event received from the monitored Linux endpoint.
 
-#. Navigate to **Security Analytics** > **Overview** and perform the following to create an integration:
+#. Navigate to **Ruleset management** > **Overview** and perform the following to create an integration:
 
    -  Select the space **Draft**
 
@@ -244,7 +244,7 @@ Wazuh must analyze the command output to generate findings on the Wazuh dashboar
       :align: center
       :width: 80%
 
-#. Navigate to **Security Analytics** > **Detection** > **Rules** and perform the following to create a detection rule.
+#. Navigate to **Ruleset management** > **Detection** > **Rules** and perform the following to create a detection rule.
 
    -  Select the space **Draft**
    -  Click **Actions** > **Create**, select the **YAML Editor**, choose the integration ``command-integration``, paste the detection rule shown below, and click **Create rule**:
@@ -287,7 +287,7 @@ Wazuh must analyze the command output to generate findings on the Wazuh dashboar
       :align: center
       :width: 80%
 
-#. Navigate to **Security Analytics** > **Overview**, select the space **Draft**, and click **Actions** > **Promote** to promote the detection rule to the ``Test`` space.
+#. Navigate to **Ruleset management** > **Overview**, select the space **Draft**, and click **Actions** > **Promote** to promote the detection rule to the ``Test`` space.
 
    .. thumbnail:: /images/manual/command-monitoring/promote-rule-draft.png
       :title: Promoting the detection rule to Test
@@ -295,7 +295,7 @@ Wazuh must analyze the command output to generate findings on the Wazuh dashboar
       :align: center
       :width: 80%
 
-#. Navigate to **Security Analytics** > **Overview**, select the space **Test**, and click **Actions** > **Promote** to promote the detection rule to the Custom space.
+#. Navigate to **Ruleset management** > **Overview**, select the space **Test**, and click **Actions** > **Promote** to promote the detection rule to the ``Custom`` space.
 
    .. thumbnail:: /images/manual/command-monitoring/promote-rule-test.png
       :title: Promoting the detection rule to Custom
@@ -303,7 +303,7 @@ Wazuh must analyze the command output to generate findings on the Wazuh dashboar
       :align: center
       :width: 80%
 
-#. Navigate to **Security Analytics** > **Detection** > **Detectors** to create a detector that applies the detection rule and generates findings.
+#. Navigate to **Ruleset management** > **Detection** > **Detectors** to create a detector that applies the detection rule and generates findings.
 
    -  Click **Create detector**, fill the required fields, and click **Create detector**:
 
