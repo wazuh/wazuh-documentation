@@ -27,7 +27,7 @@ Adding the Wazuh repository
 
 .. note::
 
-   If the Wazuh repository is already configured and enabled on this host, for example, on the Wazuh indexer host, skip these steps.
+   If the Wazuh repository is already configured and enabled on this host (for example on the Wazuh indexer host), skip these steps.
 
 .. tabs::
 
@@ -67,17 +67,9 @@ Adding the Wazuh repository
 
       #. Add the repository:
 
-         -  For RHEL-compatible systems version 8 and earlier, use the following command:
+         .. code-block:: console
 
-            .. code-block:: console
-
-               # echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/yum/\nprotect=1' | tee /etc/yum.repos.d/wazuh.repo
-
-         -  For RHEL-compatible systems version 9 and later, use the following command:
-
-            .. code-block:: console
-
-               # echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/yum/\npriority=1' | tee /etc/yum.repos.d/wazuh.repo
+            # echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/yum/\nprotect=1' | tee /etc/yum.repos.d/wazuh.repo
 
    .. group-tab:: DNF
 

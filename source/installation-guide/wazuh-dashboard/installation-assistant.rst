@@ -65,7 +65,7 @@ Wazuh dashboard installation
    -  **Username:** ``admin``
    -  **Password:** the password from step 3
 
-   The browser warns that the certificate wasn't issued by a trusted authority. Add an exception in the browser, or, for better security, import ``root-ca.pem`` into the browser's certificate manager. You can also :doc:`configure a certificate </user-manual/wazuh-dashboard/configuring-third-party-certs/index>` from a trusted authority.
+   The browser warns that the certificate wasn't issued by a trusted authority, because Wazuh creates its own certificate authority. Add an exception in the browser, or, for better security, import ``root-ca.pem`` into the browser's certificate manager. You can also :doc:`configure a certificate </user-manual/wazuh-dashboard/configuring-third-party-certs/index>` from a trusted authority.
 
 Securing your Wazuh installation
 --------------------------------

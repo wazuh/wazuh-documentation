@@ -94,17 +94,9 @@ Adding the Wazuh repository
 
       #. Add the repository:
 
-         -  For RHEL-compatible systems version 8 and earlier, use the following command:
+         .. code-block:: console
 
-            .. code-block:: console
-
-               # echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/yum/\nprotect=1' | tee /etc/yum.repos.d/wazuh.repo
-
-         -  For RHEL-compatible systems version 9 and later, use the following command:
-
-            .. code-block:: console
-
-               # echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/yum/\npriority=1' | tee /etc/yum.repos.d/wazuh.repo
+            # echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages-staging.xdrsiem.wazuh.info/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages-staging.xdrsiem.wazuh.info/pre-release/5.x/yum/\nprotect=1' | tee /etc/yum.repos.d/wazuh.repo
 
    .. group-tab:: DNF
 
@@ -459,9 +451,9 @@ Configuring the Wazuh indexer
       .. code-block:: yaml
 
          discovery.seed_hosts:
-         #  - "node-1-ip"
-         #  - "node-2-ip"
-         #  - "node-3-ip"
+         #  - "<WAZUH_INDEXER_1_ADDRESS>"
+         #  - "<WAZUH_INDEXER_2_ADDRESS>"
+         #  - "<WAZUH_INDEXER_3_ADDRESS>"
 
    #. ``plugins.security.nodes_dn``: the Distinguished Names (DNs) of the certificates of all Wazuh indexer nodes. On every node, including single-node clusters, replace the line the package wrote with one line per Wazuh indexer node in ``config.yml``. Each entry is ``C=US,L=California,O=Wazuh,OU=Wazuh,CN=`` followed by the node's name in ``config.yml``, with the fields in this order, because the Security plugin compares each entry as an exact string. The ``openssl`` command in :ref:`Deploying certificates <wazuh_indexer_deploying_certificates>` prints this node's subject in that form, so you can check it:
 

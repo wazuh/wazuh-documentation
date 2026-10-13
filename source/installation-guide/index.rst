@@ -23,27 +23,27 @@ You can install the Wazuh indexer, Wazuh manager, and Wazuh dashboard on a singl
 
 Check our :doc:`Quickstart </quickstart>` documentation to perform an all-in-one installation of the Wazuh central components. This is the fastest way to get the Wazuh central components up and running.
 
-For more deployment flexibility and customization, install the Wazuh central components by starting with the :doc:`Wazuh indexer <wazuh-indexer/index>` deployment. This deployment method supports both an all-in-one installation and installing components on separate hosts.
+For more deployment flexibility and customization, install the Wazuh central components by starting with the :doc:`Wazuh indexer <wazuh-indexer/index>` deployment. This deployment method supports both an all-in-one installation and installing components on separate hosts. For an all-in-one host, use the hardware requirements in the :doc:`Quickstart </quickstart>`.
 
 Before you start, choose the name and IP address of every Wazuh indexer, Wazuh manager, and Wazuh dashboard node. You create the certificates and passwords for all of them on one host, usually the first Wazuh indexer node, then copy one archive to every other node.
 
-+--------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+
-| **I want to...**                           | **Use**                                                                                                                   |
-+============================================+===========================================================================================================================+
-| Try Wazuh on one Linux host                | :doc:`Quickstart </quickstart>`                                                                                           |
-+--------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+
-| Install on one or more hosts with a script | :doc:`Assisted installation <wazuh-indexer/installation-assistant>`                                                       |
-+--------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+
-| Control every step                         | :doc:`Step-by-step installation <wazuh-indexer/step-by-step>`                                                             |
-+--------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+
-| Install without internet access            | :doc:`Offline installation </deployment-options/offline-installation/index>`                                              |
-+--------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+
-| Import a ready virtual machine             | :doc:`Virtual machine (OVA) </deployment-options/virtual-machine/virtual-machine>`                                        |
-+--------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+
-| Run in containers                          | :doc:`Docker </deployment-options/docker/index>`, :doc:`Kubernetes </deployment-options/deploying-with-kubernetes/index>` |
-+--------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+
-| Automate with Ansible                      | :doc:`Ansible </deployment-options/deploying-with-ansible/index>`                                                         |
-+--------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+
++--------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------+
+| **I want to...**                           | **Use**                                                                                                                   | **Typical time**                                   |
++============================================+===========================================================================================================================+====================================================+
+| Try Wazuh on one Linux host                | :doc:`Quickstart </quickstart>`                                                                                           | About 5 minutes                                    |
++--------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------+
+| Install on one or more hosts with a script | :doc:`Assisted installation <wazuh-indexer/installation-assistant>`                                                       | About 6 minutes (all-in-one), 15 minutes (3 hosts) |
++--------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------+
+| Control every step                         | :doc:`Step-by-step installation <wazuh-indexer/step-by-step>`                                                             | About 20 minutes (all-in-one)                      |
++--------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------+
+| Install without internet access            | :doc:`Offline installation </deployment-options/offline-installation/index>`                                              | About 20 minutes, plus the download                |
++--------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------+
+| Import a ready virtual machine             | :doc:`Virtual machine (OVA) </deployment-options/virtual-machine/virtual-machine>`                                        | About 15 minutes, plus a 3.9 GB download           |
++--------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------+
+| Run in containers                          | :doc:`Docker </deployment-options/docker/index>`, :doc:`Kubernetes </deployment-options/deploying-with-kubernetes/index>` | About 15 minutes (Docker single-node)              |
++--------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------+
+| Automate with Ansible                      | :doc:`Ansible </deployment-options/deploying-with-ansible/index>`                                                         | About 10 minutes (all-in-one)                      |
++--------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------+
 
 The assisted and step-by-step methods install one component at a time, and both start on the Wazuh indexer page. Use the same method for the three components.
 
