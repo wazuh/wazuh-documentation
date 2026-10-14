@@ -48,6 +48,7 @@ Perform the steps below before upgrading any of the Wazuh components. In case Wa
    #. Select which objects to export and click **Export**, or click **Export all objects** to export everything.
 
    .. image:: /images/upgrade-guide/saved-objects-export.png
+      :alt: Wazuh dashboard Saved objects page with an index pattern selected and the Export and Export all objects buttons highlighted
 
 #. Stop the Filebeat and Wazuh dashboard services if installed in the node:
 
