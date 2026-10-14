@@ -8,7 +8,7 @@ Container security
 
 Container security involves implementing measures and practices to ensure the protection and availability of containers and the applications they host. Wazuh provides several capabilities to help organizations secure their container environments, including centralized logging, threat detection, and automated incident response.
 
-With Wazuh you can monitor container platforms such as :doc:`Docker <monitoring-docker>`, with visibility into container resources, including `container health monitoring <https://wazuh.com/blog/docker-container-security-monitoring-with-wazuh/>`__. Wazuh can also `audit Kubernetes <https://wazuh.com/blog/auditing-kubernetes-with-wazuh/>`__ infrastructure, supporting a holistic approach to container security and monitoring.
+Wazuh monitors :doc:`Docker <monitoring-docker>` environments by collecting container logs and monitoring `container activity <https://wazuh.com/blog/docker-container-security-monitoring-with-wazuh/>`__ and resource usage, including container health. It also supports `Kubernetes security auditing <https://wazuh.com/blog/auditing-kubernetes-with-wazuh/>`__, helping organizations monitor their containerized workloads and identify potential security issues across their infrastructure.
 
 .. toctree::
    :maxdepth: 3
