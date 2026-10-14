@@ -375,7 +375,7 @@ The ``ansible-wazuh-manager`` and ``ansible-filebeat-oss`` roles are used in the
          filebeat_output_indexer_hosts:
          - "<indexer-node-1>:9200"
          - "<indexer-node-2>:9200"
-         - "<indexer-node-2>:9200"
+         - "<indexer-node-3>:9200"
 
 Where:
 
@@ -771,9 +771,9 @@ The contents of the Ansible host file below:
 
 .. code-block:: ini
 
-   wi1 ansible_host=<WI1_EC2_PUBLIC_1P> private_ip=<WI1_EC2_PRIVATE_IP> indexer_node_name=node-1
-   wi2 ansible_host=<WI2_EC2_PUBLIC_1P> private_ip=<WI2_EC2_PRIVATE_IP> indexer_node_name=node-2
-   wi3 ansible_host=<WI3_EC2_PUBLIC_1P> private_ip=<WI3_EC2_PRIVATE_IP> indexer_node_name=node-3
+   wi1 ansible_host=<WI1_EC2_PUBLIC_IP> private_ip=<WI1_EC2_PRIVATE_IP> indexer_node_name=node-1
+   wi2 ansible_host=<WI2_EC2_PUBLIC_IP> private_ip=<WI2_EC2_PRIVATE_IP> indexer_node_name=node-2
+   wi3 ansible_host=<WI3_EC2_PUBLIC_IP> private_ip=<WI3_EC2_PRIVATE_IP> indexer_node_name=node-3
    dashboard  ansible_host=<DASHBOARD_NODE_PUBLIC_IP> private_ip=<DASHBOARD_EC2_PRIVATE_IP>
    manager ansible_host=<MANAGER_NODE_PUBLIC_IP> private_ip=<MANAGER_EC2_PRIVATE_IP>
    worker  ansible_host=<WORKER_NODE_PUBLIC_IP> private_ip=<WORKER_EC2_PRIVATE_IP>

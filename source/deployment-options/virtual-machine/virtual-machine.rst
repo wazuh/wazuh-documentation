@@ -91,6 +91,10 @@ It might take a few seconds to minutes for the Wazuh dashboard to complete initi
 
      ip a
 
+.. warning::
+
+   Every copy of the Wazuh virtual machine ships with the same default credentials, including ``wazuh-user``:``wazuh`` and ``admin``:``admin``. We highly recommend changing the Wazuh passwords and the ``wazuh-user`` system password on first access. To change the Wazuh passwords, see :doc:`Password management </user-manual/user-administration/password-management>`. To change the system password, run ``passwd`` as ``wazuh-user``.
+
 
 Configuration files
 -------------------

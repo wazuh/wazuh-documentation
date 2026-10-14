@@ -31,8 +31,8 @@ Preparing the backup
          .. code-block:: ps1con
 
             > $timestamp = Get-Date -Format "yyyy-MM-dd_HH-mm-ss"
-            > mkdir %bkp_folder% ; echo %bkp_folder%
             > $bkp_folder = Join-Path -Path $env:USERPROFILE -ChildPath "wazuh_files_backup\$timestamp"
+            > New-Item -Path $bkp_folder -ItemType Directory -Force | Out-Null ; Write-Output $bkp_folder
 
       .. group-tab:: macOS
 
@@ -114,9 +114,10 @@ Backing up a Wazuh agent
 
          .. code-block:: ps1con
 
-            > Copy-Item "$SCA_DIRECTORY\$CUSTOM_SCA_FILE" "C:\Program Files (x86)\ossec-agent\$SCA_DIRECTORY" -Recurse -Force
-            > Copy-Item "active-response\bin\$CUSTOM_ACTIVE_RESPONSE_SCRIPT" "C:\Program Files (x86)\ossec-agent\active-response\bin" -Recurse -Force
-            > Copy-Item "wodles\$CUSTOM_WODLE_SCRIPT" "C:\Program Files (x86)\ossec-agent\wodles" -Recurse -Force
+            > New-Item -Path "$bkp_folder\$SCA_DIRECTORY", "$bkp_folder\active-response\bin", "$bkp_folder\wodles" -ItemType Directory -Force | Out-Null
+            > Copy-Item "C:\Program Files (x86)\ossec-agent\$SCA_DIRECTORY\$CUSTOM_SCA_FILE" "$bkp_folder\$SCA_DIRECTORY" -Force
+            > Copy-Item "C:\Program Files (x86)\ossec-agent\active-response\bin\$CUSTOM_ACTIVE_RESPONSE_SCRIPT" "$bkp_folder\active-response\bin" -Force
+            > Copy-Item "C:\Program Files (x86)\ossec-agent\wodles\$CUSTOM_WODLE_SCRIPT" "$bkp_folder\wodles" -Force
 
       .. group-tab:: macOS
 
