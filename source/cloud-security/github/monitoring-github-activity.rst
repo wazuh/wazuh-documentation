@@ -31,7 +31,7 @@ Take the following steps on GitHub to generate the required personal access toke
       :align: center
       :width: 80%
 
-#. Scroll down, select **audit_log**, and click **Generate token**.
+#. Scroll down, select **read:audit_log**, and click **Generate token**.
 
    .. thumbnail:: /images/cloud-security/github/github-generate-token.png   
       :title: GitHub generate token
@@ -282,24 +282,24 @@ Add a team to your repository
 
 Run the following commands to list teams and add a team to your repository:
 
-#. List the team IDs in your organization.
+#. List the teams in your organization and note the ``slug`` of the team you want to add.
 
    .. code-block:: console
 
       # curl -H "Authorization: Bearer <API_TOKEN>" "https://api.github.com/orgs/<ORG_NAME>/teams"
 
-#. Input the ID of the team you want to add to your repository.
+#. Add the team to your repository using its slug.
 
    .. code-block:: console
 
       # curl -X PUT \
            -H "Authorization: Bearer <API_TOKEN>" \
            -d '{"permission": "push"}' \
-           "https://api.github.com/teams/<TEAM_ID>/repos/<ORG_NAME>/<REPO_NAME>"
+           "https://api.github.com/orgs/<ORG_NAME>/teams/<TEAM_SLUG>/repos/<ORG_NAME>/<REPO_NAME>"
 
    Where:
 
-   -  ``<TEAM_ID>`` is the team ID.
+   -  ``<TEAM_SLUG>`` is the team slug, shown in the ``slug`` field of the previous command's output.
    -  ``<API_TOKEN>`` is the GitHub personal access token created within the ``admin:org`` scope.
    -  ``<ORG_NAME>`` is your organization name.
    -  ``<REPO_NAME>`` is the name of the repository you want to add a team to.
@@ -314,7 +314,7 @@ Run the following command to grant members of your team administrator privileges
    # curl \
    -u <ADMIN_USERNAME>:<API_TOKEN> \
    -X PUT \
-   -H "Accept: application/vnd.github.v3+json" https://api.github.com/orgs/<ORG_NAME>/teams/<TEAM_NAME>/repos/<ORG_NAME>/<REPO_NAME> \
+   -H "Accept: application/vnd.github.v3+json" https://api.github.com/orgs/<ORG_NAME>/teams/<TEAM_SLUG>/repos/<ORG_NAME>/<REPO_NAME> \
     -d '{"permission":"admin"}'
 
 Where:
@@ -323,7 +323,7 @@ Where:
 -  ``<API_TOKEN>`` is the GitHub personal access token created within the ``admin:org`` scope.
 -  ``<ORG_NAME>`` is your organization name.
 -  ``<REPO_NAME>`` is the name of the repository you want to manage its team’s access.
--  ``<TEAM_NAME>`` is the name of the specific team in your repository.
+-  ``<TEAM_SLUG>`` is the slug of the team.
 
 Delete repository
 '''''''''''''''''
@@ -356,13 +356,13 @@ Run the following command to delete the team you created:
      -X DELETE \
      -H "Accept: application/vnd.github+json" \
      -H "Authorization: Bearer <API_TOKEN>" \
-     https://api.github.com/orgs/<ORG_NAME>/teams/<TEAM_NAME>
+     https://api.github.com/orgs/<ORG_NAME>/teams/<TEAM_SLUG>
 
 Where:
 
 -  ``<API_TOKEN>`` is the GitHub personal access token created within the ``admin:org`` scope.
 -  ``<ORG_NAME>`` is your organization name.
--  ``<TEAM_NAME>`` is the name of the specific team in your repository.
+-  ``<TEAM_SLUG>`` is the slug of the team.
 
 The image below shows the alerts generated on the Wazuh dashboard after we performed the above actions on the monitored GitHub organization.
 

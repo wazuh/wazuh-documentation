@@ -219,7 +219,7 @@ First, set up Splunk as follows:
 -  Define the ``wazuh-alerts`` Splunk index to store your logs.
 -  Create your Event Collector token.
 
-Check the Splunk `set up and use HTTP Event Collector <https://docs.splunk.com/Documentation/Splunk/latest/Data/UsetheHTTPEventCollector>`_ documentation to achieve this.￼
+Check the Splunk `set up and use HTTP Event Collector <https://docs.splunk.com/Documentation/Splunk/latest/Data/UsetheHTTPEventCollector>`_ documentation to achieve this.
 
 .. thumbnail:: /images/integrations/enable-http-event-collector.gif
    :title: Enable the HTTP Event Collector
@@ -255,7 +255,7 @@ The Logstash pipeline requires access to your Splunk Event Collector Token.
 
 To securely store these values, you can use the `Logstash keystore <https://www.elastic.co/guide/en/logstash/current/keystore.html>`__.
 
-#. Run the following commands on your Logstash server to set a keystore password:
+#. Run the following commands on your Wazuh server to set a keystore password:
 
    .. code-block:: console
       :emphasize-lines: 2,3
@@ -309,7 +309,7 @@ To configure the Logstash pipeline do the following.
       output {
          http {
             format => "json" # format of forwarded logs
-            http_method => "post" # HTTP method used to <SPLUNK_URL>forward logs
+            http_method => "post" # HTTP method used to forward logs
             url => "<SPLUNK_URL>:8088/services/collector/raw" # endpoint to forward logs to
             headers => ["Authorization", "Splunk ${SPLUNK_AUTH}"]
             cacert => "</PATH/TO/LOCAL/SPLUNK/CERTIFICATE>/ca.pem"
@@ -319,7 +319,7 @@ To configure the Logstash pipeline do the following.
    Where:
 
    -  ``<SPLUNK_URL>`` is your Splunk URL.
-   -  ``</PATH/TO/LOCAL/SPLUNK/CERTIFICATE>/ca.pem`` is your Splunk certificate local path on the Logstash server. In our case we used ``/etc/logstash/splunk-certs/ca.pem``.
+   -  ``</PATH/TO/LOCAL/SPLUNK/CERTIFICATE>/ca.pem`` is your Splunk certificate local path on the Wazuh server. In our case we used ``/etc/logstash/splunk-certs/ca.pem``.
 
    .. note::
       
