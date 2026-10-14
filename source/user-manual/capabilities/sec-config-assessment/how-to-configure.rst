@@ -102,6 +102,10 @@ For a policy distributed through centralized configuration, use its path in the 
 
 You can also specify an absolute path to the policy file.
 
+Restart the Wazuh agent to apply the change:
+
+.. include:: /_templates/common/restart_agent.rst
+
 Managing SCA policies using centralized configuration
 -------------------------------------------------------
 
