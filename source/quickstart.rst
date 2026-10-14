@@ -43,7 +43,7 @@ For larger environments, we recommend a distributed deployment. Multi-node clust
 Operating system
 ^^^^^^^^^^^^^^^^
 
-You can install the Wazuh central components on 64-bit Linux systems using Intel, AMD, or ARM architectures (x86_64/AMD64 or AARCH64/ARM64). Wazuh recommends any of the following operating system versions:
+The Wazuh central components require a 64-bit Intel, AMD, or ARM Linux processor (x86_64/AMD64 or AARCH64/ARM64 architecture). Wazuh recommends the following operating system versions:
 
 .. include:: /_templates/installations/wazuh/recommended-operating-systems.rst
 
@@ -105,7 +105,7 @@ You need a host that meets the requirements above, internet access, and a user w
    -  **Username:** ``admin``
    -  **Password:** the ``admin`` password from step 2
 
-When you access the Wazuh dashboard for the first time, the browser shows a warning message stating that a trusted authority did not issue the certificate. This is expected because the installation assistant creates its own certificate authority. Accept the certificate as an exception, or :doc:`use a certificate from a trusted authority </user-manual/wazuh-dashboard/configuring-third-party-certs/index>`.
+The browser warns that the certificate wasn't issued by a trusted authority, because Wazuh creates its own certificate authority. Add an exception in the browser, or, for better security, import ``root-ca.pem`` into the browser's certificate manager. You can also :doc:`configure a certificate </user-manual/wazuh-dashboard/configuring-third-party-certs/index>` from a trusted authority.
 
 The ``/etc/wazuh/credentials.env`` file holds the passwords of all five Wazuh users, and no component reads it after the installation. Store the passwords in a safe place, then remove the file with ``sudo rm -f /etc/wazuh/credentials.env``. Keep ``/etc/wazuh/ca``, which holds the root CA private key you need to add nodes or renew certificates. The passwords tool writes new passwords to this file again, as described in :doc:`Password management </user-manual/user-administration/password-management>`.
 
@@ -116,13 +116,13 @@ Next steps
 
 Now that your Wazuh installation is ready, you can start deploying the Wazuh agent. This can be used to protect laptops, desktops, servers, cloud instances, containers, or virtual machines. The Wazuh agent is lightweight and multi-purpose, providing a variety of security capabilities.
 
-Each agent enrolls with a token that you create on this server for the address agents connect to (see step 1). To deploy agents, follow the instructions for your operating system below, or go to **Agents management** > **Summary** > **Deploy new agent** in the Wazuh dashboard.
+Next, deploy Wazuh agents. Each agent enrolls with a token that you create on this server for the address agents connect to. To deploy agents, follow the instructions for your operating system below, or go to **Agents management** > **Summary** > **Deploy new agent** in the Wazuh dashboard.
 
 .. raw:: html
 
   <div class="link-boxes-group layout-6">
     <div class="link-boxes-item">
-      <a class="link-boxes-link" href="installation-guide/wazuh-agent/wazuh-agent-package-linux.html">
+      <a class="link-boxes-link" href="installation-guide/wazuh-agent/index.html#generate-enrollment-token">
         <p class="link-boxes-label">Linux</p>
 
 .. image:: /images/installation/linux.png
@@ -134,7 +134,7 @@ Each agent enrolls with a token that you create on this server for the address a
       </a>
     </div>
     <div class="link-boxes-item">
-      <a class="link-boxes-link" href="installation-guide/wazuh-agent/wazuh-agent-package-windows.html">
+      <a class="link-boxes-link" href="installation-guide/wazuh-agent/index.html#generate-enrollment-token">
         <p class="link-boxes-label">Windows</p>
 
 .. image:: /images/installation/windows-logo.png
@@ -146,7 +146,7 @@ Each agent enrolls with a token that you create on this server for the address a
       </a>
     </div>
     <div class="link-boxes-item">
-      <a class="link-boxes-link" href="installation-guide/wazuh-agent/wazuh-agent-package-macos.html">
+      <a class="link-boxes-link" href="installation-guide/wazuh-agent/index.html#generate-enrollment-token">
         <p class="link-boxes-label">macOS</p>
 
 .. image:: /images/installation/macOS-logo.png
