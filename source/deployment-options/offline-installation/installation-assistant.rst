@@ -32,7 +32,7 @@ The following dependencies must be installed on the Wazuh single node.
       -  debhelper (version 9 or later)
       -  libcap2-bin
 
-#. To perform the offline installation with the ``--offline-installation`` of Wazuh server on a single-node using the assisted method, run:
+#. To install all the Wazuh central components on a single node using the assisted method, run the installation assistant with the ``--offline-installation`` option:
 
    .. code-block:: console
 

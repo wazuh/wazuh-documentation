@@ -129,7 +129,7 @@ Configure the Wazuh server to receive logs from Google Cloud by performing the f
    Where:
 
    -  ``<PROJECT_ID>`` is the ID of the `Google Cloud project`_ created above.
-   -  ``<SUBSCRIPTION_NAME>`` is the `subscription ID`_ of your Google Cloud Pub/Sub.
+   -  ``<SUBSCRIPTION_ID>`` is the `subscription ID`_ of your Google Cloud Pub/Sub.
 
 #. Create a rule file ``gcp_posture.xml`` in the ``/var/ossec/etc/rules/`` directory and add the following custom rules to detect Google Cloud posture findings:
 
