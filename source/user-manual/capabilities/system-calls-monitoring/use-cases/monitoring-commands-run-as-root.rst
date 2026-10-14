@@ -19,11 +19,12 @@ Ubuntu endpoint
 
    .. code-block:: console
       
-      # echo "-a exit,always -F euid=0 -F arch=b64 -S execve -k audit-wazuh-c" >> /etc/audit/audit.rules
-      # echo "-a exit,always -F euid=0 -F arch=b32 -S execve -k audit-wazuh-c" >> /etc/audit/audit.rules
+      # echo "-a always,exit -F euid=0 -F arch=b64 -S execve -k audit-wazuh-c" >> /etc/audit/audit.rules
+      # echo "-a always,exit -F euid=0 -F arch=b32 -S execve -k audit-wazuh-c" >> /etc/audit/audit.rules
 
    - ``-a always,exit``: Specifies that the audit event should always be generated, regardless of whether the system call was successful or not.
    - ``-S execve``: Specifies that the rule should match events that involve the ``execve`` system call.
+   - ``-F arch=b64``, ``-F arch=b32``: Match system calls made through the 64-bit and the 32-bit interfaces. A 64-bit system can run 32-bit programs, so the two rules together cover both.
    - ``-F euid=0``: Specifies that the rule should only match events where the effective user ID (euid) is equal to 0, which is the root user.
    - ``-k audit-wazuh-c``: Specifies a key value that will be used to tag the generated audit events.
    

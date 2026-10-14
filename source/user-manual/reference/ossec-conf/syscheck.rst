@@ -892,7 +892,7 @@ The diff settings will be configured inside this tag.
 disk_quota
 """"""""""
 
-This option can be used to limit the size of the ``queue/diff/local`` folder where Wazuh stores the compressed files used to perform the diff operation when ``report_changes`` is enabled. After reaching this size, alerts will not show the diff information until the size is smaller than the configured limit.
+This option can be used to limit the size of the ``queue/diff/file`` folder where Wazuh stores the compressed files used to perform the diff operation when ``report_changes`` is enabled. After reaching this size, alerts will not show the diff information until the size is smaller than the configured limit.
 
 **enabled**
 
@@ -906,7 +906,7 @@ Set the disk quota limit option to enabled or disabled.
 
 **limit**
 
-Specifies the limit for the size of the ``queue/diff/local`` folder.
+Specifies the limit for the size of the ``queue/diff/file`` folder.
 
 +--------------------+---------------------------------------------+
 | **Default value**  | 1GB                                         |
