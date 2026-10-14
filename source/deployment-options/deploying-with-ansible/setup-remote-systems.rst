@@ -179,13 +179,13 @@ You can set up an SSH key-pair to provide a passwordless authentication mechanis
 
             .. code-block:: console
 
-               # systemctl start sshd
+               # systemctl restart sshd
 
          -  Ubuntu/Debian:
 
             .. code-block:: console
 
-               # systemctl start ssh
+               # systemctl restart ssh
 
       .. group-tab:: SysV init
 
@@ -193,13 +193,13 @@ You can set up an SSH key-pair to provide a passwordless authentication mechanis
 
             .. code-block:: console
 
-               # service sshd start
+               # service sshd restart
 
          -  Ubuntu/Debian:
 
             .. code-block:: console
 
-               # service ssh start
+               # service ssh restart
 
 #. Test the connection from the Ansible server:
 

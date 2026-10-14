@@ -873,11 +873,11 @@ Uninstall
 
             # WAZUH_HOME="/WAZUH/INSTALLATION/PATH"
 
-      #. Stop the service:
+      #. Stop and unload the service:
 
          .. code-block:: console
 
-            # service wazuh-agent stop 2> /dev/null
+            # launchctl bootout system /Library/LaunchDaemons/com.wazuh.agent.plist
 
       #. Stop the daemon:
 
@@ -895,6 +895,7 @@ Uninstall
 
          .. code-block:: console
 
+            # rm -f /Library/LaunchDaemons/com.wazuh.agent.plist
             # rm -rf /Library/StartupItems/WAZUH
 
       #. Remove Wazuh user and group:

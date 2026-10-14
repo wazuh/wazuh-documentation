@@ -474,7 +474,7 @@ Perform the following steps on each Wazuh indexer node.
 
       # sudo cp etc/wazuh-indexer/jvm.options /etc/wazuh-indexer/jvm.options
       # chown wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/jvm.options
-      # sudo cp etc/wazuh-indexer/jvm.options.d /etc/wazuh-indexer/jvm.options.d
+      # sudo cp -r etc/wazuh-indexer/jvm.options.d/* /etc/wazuh-indexer/jvm.options.d/
       # chown wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/jvm.options.d
       # sudo cp etc/wazuh-indexer/log4j2.properties /etc/wazuh-indexer/log4j2.properties
       # chown wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/log4j2.properties
