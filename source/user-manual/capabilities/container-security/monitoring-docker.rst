@@ -84,7 +84,7 @@ Prerequisites
 
       The above commands modify the default externally managed Python environment. See the `PEP 668 <https://peps.python.org/pep-0668/>`__ description for more information. To prevent the modification, create a virtual environment and install the dependencies inside it. Then update the Docker ``/var/ossec/wodles/docker/DockerListener`` script shebang with your virtual environment interpreter, for example, ``#!<VIRTUAL_ENVIRONMENT_PATH>/bin/python3``.
 
-      The ``urllib3`` and ``requests`` versions are pinned to the versions compatible with the Wazuh Docker listener. The command removes any existing version of ``urllib3`` (and its dependencies) and replaces it with the pinned version.
+      The ``urllib3`` and ``requests`` versions are pinned to the versions compatible with the Wazuh Docker listener. The command removes the ``python3-urllib3`` package and every package that depends on it, then installs the pinned version. On Ubuntu 24.04, that removes ten packages, including ``cloud-init`` and ``ubuntu-server``.
 
 #. Start and enable the Docker service:
 
@@ -113,10 +113,10 @@ Perform the following steps on the Docker host to configure the Wazuh agent to f
 
    **Where:**
 
-   -  ``<interval>`` sets how long to wait before restarting the Docker listener after it exits due to unexpected error or other issues. In this example, it is ``1m`` (1 minute).
+   -  ``<interval>`` sets how long to wait before restarting the Docker listener after it exits due to an unexpected error or other issues. In this example, it is ``1m`` (1 minute).
    -  ``<attempts>`` sets how many times the Wazuh agent tries to run the Docker listener if it fails. In this example, it is ``5``.
-   -  ``<run_on_start>`` runs the Docker listener immediately when the Wazuh agent starts. The value ``yes``, enables this behavior.
-   -  ``<disabled>`` enables or disables the Docker listener. The value ``no``, enables it.
+   -  ``<run_on_start>`` runs the Docker listener immediately when the Wazuh agent starts. The value ``yes`` enables this behavior.
+   -  ``<disabled>`` enables or disables the Docker listener. The value ``no`` enables it.
 
    Refer to :ref:`Wazuh Docker listener module configuration options <docker_listener_module_configuration_options>` for more information about the available options.
 
@@ -147,8 +147,8 @@ Enable the Wazuh Docker integration
 
 Perform the following steps on the Wazuh dashboard to enable the Wazuh Docker integration.
 
-#. Navigate to **Security Analytics** > **Overview**.
-#. Enter ``docker`` into the search box and select **docker**.
+#. Navigate to **Ruleset management** > **Overview**.
+#. Enter ``docker`` into the search box and click **docker**.
 #. Click on **Actions** and select **Enable**.
 
    .. thumbnail:: /images/manual/container-security/enable-docker-integration.png
@@ -157,14 +157,14 @@ Perform the following steps on the Wazuh dashboard to enable the Wazuh Docker in
       :align: center
       :width: 80%
 
-Wazuh Docker dashboard
------------------------
+Docker dashboard
+----------------
 
-The Wazuh Docker dashboard offers a centralized and user-friendly interface that allows you to monitor the security of your Dockerized infrastructure. It provides real-time insights that help system administrators and security teams review container events, detect and respond to threats. To view the Wazuh Docker dashboard, navigate to **Cloud security** > **Docker**.
+The Docker dashboard offers a centralized and user-friendly interface that allows you to monitor the security of your Dockerized infrastructure. It provides real-time insights that help system administrators and security teams review container events, detect and respond to threats. To view the Docker dashboard, navigate to **Cloud security** > **Docker**.
 
 .. thumbnail:: /images/manual/container-security/docker-dashboard.png
-   :title: Wazuh Docker dashboard
-   :alt: Wazuh Docker dashboard
+   :title: Docker dashboard
+   :alt: Docker dashboard
    :align: center
    :width: 80%
 
@@ -195,34 +195,36 @@ Scheduling options
 
 The scheduling options allow you to configure when the Wazuh Docker listener module executes. The available scheduling options are ``run_on_start``, ``interval``, ``day``, ``wday``, and ``time``.
 
-+------------------+--------------------------------------------------+----------------+-------------------------------------+
-| Parameter        | Description                                      | Default value  | Allowed values                      |
-+==================+==================================================+================+=====================================+
-| ``run_on_start`` | Runs the Wazuh Docker listener module            | ``no``         | ``yes``, ``no``                     |
-|                  | immediately when the Wazuh agent starts.         |                |                                     |
-+------------------+--------------------------------------------------+----------------+-------------------------------------+
-| ``interval``     | How long to wait before restarting the Docker    | ``1m``         | A positive number with a suffix     |
-|                  | listener after it exits due to unexpected error  |                | character indicating a time unit:   |
-|                  | or other issues.                                 |                | ``s`` (seconds), ``m`` (minutes),   |
-|                  |                                                  |                | ``h`` (hours), ``d`` (days), ``M``  |
-|                  |                                                  |                | (months).                           |
-+------------------+--------------------------------------------------+----------------+-------------------------------------+
-| ``day``          | Day of the month on which to restart the Docker  | ``n/a``        | Day of the month [1..31]            |
-|                  | listener after it exits. This option is not      |                |                                     |
-|                  | compatible with the ``wday`` option. **Note:**   |                |                                     |
-|                  | When the ``day`` option is set, the interval     |                |                                     |
-|                  | value must be a multiple of months.              |                |                                     |
-+------------------+--------------------------------------------------+----------------+-------------------------------------+
-| ``wday``         | Day of the week on which to restart the Docker   | ``n/a``        | Day of the week: ``sunday/sun``,    |
-|                  | listener after it exits. This option is not      |                | ``monday/mon``, ``tuesday/tue``,    |
-|                  | compatible with the ``day`` option. **Note:**    |                | ``wednesday/wed``,                  |
-|                  | When the ``wday`` option is set, the interval    |                | ``thursday/thu``, ``friday/fri``,   |
-|                  | value must be a multiple of weeks.               |                | ``saturday/sat``                    |
-+------------------+--------------------------------------------------+----------------+-------------------------------------+
-| ``time``         | Time of the day to restart the Docker listener   | ``n/a``        | Time of day [hh:mm]                 |
-|                  | after it exits. Must be represented in the       |                |                                     |
-|                  | format hh:mm. **Note:** When only the ``time``   |                |                                     |
-|                  | option is set, the interval value must be a      |                |                                     |
-|                  | multiple of days or weeks. The default interval  |                |                                     |
-|                  | is set to a day (1d).                            |                |                                     |
-+------------------+--------------------------------------------------+----------------+-------------------------------------+
++------------------+------------------------------------------------+----------------+-----------------------------------+
+| Parameter        | Description                                    | Default value  | Allowed values                    |
++==================+================================================+================+===================================+
+| ``run_on_start`` | Runs the Wazuh Docker listener module          | ``no``         | ``yes``, ``no``                   |
+|                  | immediately when the Wazuh agent starts.       |                |                                   |
++------------------+------------------------------------------------+----------------+-----------------------------------+
+| ``interval``     | How long to wait before restarting the Docker  | ``1m``         | A positive number with a suffix   |
+|                  | listener after it exits due to unexpected      |                | character indicating a time unit: |
+|                  | error or other issues.                         |                | ``s`` (seconds), ``m`` (minutes), |
+|                  |                                                |                | ``h`` (hours), ``d`` (days),      |
+|                  |                                                |                | ``M`` (months).                   |
++------------------+------------------------------------------------+----------------+-----------------------------------+
+| ``day``          | Day of the month on which to restart the       | ``n/a``        | Day of the month [1..31]          |
+|                  | Docker listener after it exits. This option is |                |                                   |
+|                  | not compatible with the ``wday`` option.       |                |                                   |
+|                  | **Note:** When the ``day`` option is set, the  |                |                                   |
+|                  | ``interval`` value must be a multiple of       |                |                                   |
+|                  | months.                                        |                |                                   |
++------------------+------------------------------------------------+----------------+-----------------------------------+
+| ``wday``         | Day of the week on which to restart the Docker | ``n/a``        | Day of the week: ``sunday/sun``,  |
+|                  | listener after it exits. This option is not    |                | ``monday/mon``, ``tuesday/tue``,  |
+|                  | compatible with the ``day`` option. **Note:**  |                | ``wednesday/wed``,                |
+|                  | When the ``wday`` option is set, the           |                | ``thursday/thu``, ``friday/fri``, |
+|                  | ``interval`` value must be a multiple of       |                | ``saturday/sat``                  |
+|                  | weeks.                                         |                |                                   |
++------------------+------------------------------------------------+----------------+-----------------------------------+
+| ``time``         | Time of the day to restart the Docker listener | ``n/a``        | Time of day [hh:mm]               |
+|                  | after it exits. Must be represented in the     |                |                                   |
+|                  | format ``hh:mm``. **Note:** When only the      |                |                                   |
+|                  | ``time`` option is set, the ``interval`` value |                |                                   |
+|                  | must be a multiple of days or weeks. The       |                |                                   |
+|                  | default interval is set to a day (1d).         |                |                                   |
++------------------+------------------------------------------------+----------------+-----------------------------------+
