@@ -50,6 +50,10 @@ For a policy distributed through centralized configuration, use its path in the 
 
 You can also specify an absolute path to the policy file.
 
+Restart the Wazuh agent to apply the change:
+
+.. include:: /_templates/common/restart_agent.rst
+
 .. _share_policy_files_and_configuration_with_the_Wazuh_agents:
 
 How to share policy files and configuration with the Wazuh agents

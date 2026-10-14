@@ -38,7 +38,7 @@ Check the processes that have a deleted executable.
 
     SELECT * FROM processes WHERE on_disk = 0;
 
-A complete list of all the available tables can be found `here <https://osquery.io/schema/current/>`_.
+A complete list of all the available tables can be found in the `osquery schema <https://osquery.io/schema/current/>`__.
 
 Configuration
 -------------

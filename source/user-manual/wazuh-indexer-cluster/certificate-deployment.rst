@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description:: This section covers deploying certificates to secure communication between Wazuh components.
+   :description: This section covers deploying certificates to secure communication between Wazuh components.
 
 Certificates deployment
 =======================
