@@ -267,42 +267,42 @@ The php script below shows an example of an agent key retrieval from the databas
 .. code-block:: php
 
    <?php
-   	$servername = "localhost";
-   	$username = "user";
-   	$password = "secret";
-   	$dbname = "your_database";
+       $servername = "localhost";
+       $username = "user";
+       $password = "secret";
+       $dbname = "your_database";
 
-   	if($argc < 3){
-       	echo json_encode(array('error' => 1, 'message' => 'To few arguments'));
-       	exit;
-   	}
+       if($argc < 3){
+           echo json_encode(array('error' => 1, 'message' => 'To few arguments'));
+           exit;
+       }
 
-   	$conn = new mysqli($servername, $username, $password, $dbname);
-   	if ($conn->connect_error) {
-       	echo json_encode(array('error' => 2, 'message' => 'Could not connect to database'));
-       	exit;
-   	}
+       $conn = new mysqli($servername, $username, $password, $dbname);
+       if ($conn->connect_error) {
+           echo json_encode(array('error' => 2, 'message' => 'Could not connect to database'));
+           exit;
+       }
 
-   	$data = $argv[2];
+       $data = $argv[2];
 
-   	if($argv[1] == "id"){
-       	$sql = "SELECT id,name,ip,`agent_key` FROM agent WHERE id = '$data'";
-   	} else if ($argv[1] == "ip") {
-       	$sql = "SELECT id,name,ip,`agent_key` FROM agent WHERE ip = '$data'";
-   	} else {
-       	echo json_encode(array('error' => 3, 'message' => 'Bad arguments given'));
-       	exit;
-   	}
+       if($argv[1] == "id"){
+           $sql = "SELECT id,name,ip,`agent_key` FROM agent WHERE id = '$data'";
+       } else if ($argv[1] == "ip") {
+           $sql = "SELECT id,name,ip,`agent_key` FROM agent WHERE ip = '$data'";
+       } else {
+           echo json_encode(array('error' => 3, 'message' => 'Bad arguments given'));
+           exit;
+       }
 
-   	$result = $conn->query($sql);
+       $result = $conn->query($sql);
 
-   	if ($result->num_rows > 0) {
-       	$row = $result->fetch_assoc();
-       	echo json_encode(array('error' => 0, 'data' => array( "id" => $row["id"], "ip" => $row["ip"],"key" => $row["agent_key"],"name" => $row["name"])));
-   	} else {
-       	echo json_encode(array('error' => 4, 'message' => 'No agent key found'));
-   	}
-   	$conn->close();
+       if ($result->num_rows > 0) {
+           $row = $result->fetch_assoc();
+           echo json_encode(array('error' => 0, 'data' => array( "id" => $row["id"], "ip" => $row["ip"],"key" => $row["agent_key"],"name" => $row["name"])));
+       } else {
+           echo json_encode(array('error' => 4, 'message' => 'No agent key found'));
+       }
+       $conn->close();
    ?>
 
 .. note::

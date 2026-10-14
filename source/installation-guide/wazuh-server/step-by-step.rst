@@ -155,7 +155,7 @@ Configuring the Wazuh indexer connection
 
    You can skip this step if you are not going to use the vulnerability detection capability.
 
-#. Save the Wazuh indexer username and password into the Wazuh manager keystore using the wazuh-keystore tool. Replace ``<WAZUH_INDEXER_USERNAME>`` and ``<WAZUH_INDEXER_PASSWORD>`` with the Wazuh indexer username and password:
+#. Save the Wazuh indexer username and password into the Wazuh manager keystore using the wazuh-keystore tool. Replace ``<INDEXER_USERNAME>`` and ``<INDEXER_PASSWORD>`` with the Wazuh indexer username and password:
 
    .. code-block:: console
 

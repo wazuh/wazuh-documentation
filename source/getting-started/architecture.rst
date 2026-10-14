@@ -88,6 +88,23 @@ Wazuh components communicate using several services. The list of default ports u
 | Wazuh dashboard | 443       | TCP            | Wazuh web user interface                       |
 +-----------------+-----------+----------------+------------------------------------------------+
 
+Outbound connections
+--------------------
+
+Some Wazuh features need outbound Internet access from the Wazuh central components. If your environment restricts outbound traffic, allow the following connections:
+
++------------------------+------------------------+------+----------+-------------------------------------------------------------------------+
+| Source                 | Destination            | Port | Protocol | Purpose                                                                 |
++========================+========================+======+==========+=========================================================================+
+| Wazuh server           | ``cti.wazuh.com``      | 443  | TCP      | Vulnerability detection feed updates and the Wazuh update check service |
++------------------------+------------------------+------+----------+-------------------------------------------------------------------------+
+| Wazuh server           | ``packages.wazuh.com`` | 443  | TCP      | WPK packages for remote Wazuh agent upgrades                            |
++------------------------+------------------------+------+----------+-------------------------------------------------------------------------+
+| All central components | ``packages.wazuh.com`` | 443  | TCP      | Installation and upgrade of the Wazuh central components                |
++------------------------+------------------------+------+----------+-------------------------------------------------------------------------+
+
+If the Wazuh server cannot reach ``cti.wazuh.com``, vulnerability detection has no CVE data. In that case, configure :ref:`offline vulnerability detection <offline_threat_intelligence_snapshot>`.
+
 Wazuh CTI
 ---------
 

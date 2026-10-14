@@ -186,7 +186,7 @@ Before deploying an additional Wazuh server node, it's essential to reconfigure 
    .. code-block:: yaml
       :emphasize-lines: 2
 
-      output.elasticsearchhosts:
+      output.elasticsearch.hosts:
               - <WAZUH_INDEXER_IP>:9200
 
    .. note::

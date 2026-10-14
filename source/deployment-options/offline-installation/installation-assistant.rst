@@ -212,3 +212,7 @@ The following dependencies must be installed on the Wazuh dashboard node.
    -  **Password**: ``<ADMIN_PASSWORD>``
 
    When you access the Wazuh dashboard for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser. For increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser instead. Alternatively, a certificate from a trusted authority can be configured.
+
+.. note::
+
+   Without Internet access, the Wazuh server cannot download the vulnerability detection feed from the Wazuh Cyber Threat Intelligence (CTI) service. To use vulnerability detection in an offline environment, download the threat intelligence snapshot on a system with Internet access and configure the Wazuh server to use it. See :ref:`Offline vulnerability detection <offline_threat_intelligence_snapshot>`.
