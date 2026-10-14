@@ -102,7 +102,7 @@ In this scenario, the Wazuh FIM monitors the Uncomplicated Firewall (UFW) rule f
 
 #. Check the ``syscheck.audit.login_user.name`` and ``syscheck.audit.process.name`` fields to see the user and process that initiated the change.
  
-   .. thumbnail:: /images/compliance/nist/check-syscheck-fieldsd.png    
+   .. thumbnail:: /images/compliance/nist/check-syscheck-fields.png
       :title: Check syscheck fields
       :alt: Check syscheck fields
       :align: center

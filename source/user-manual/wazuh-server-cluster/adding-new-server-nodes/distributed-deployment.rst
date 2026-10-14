@@ -256,7 +256,7 @@ Before adding a new Wazuh server node, existing components must be adjusted to m
    .. code-block:: yaml
       :emphasize-lines: 2
 
-      output.elasticsearchhosts:
+      output.elasticsearch.hosts:
               - <WAZUH_INDEXER_IP>:9200
 
    .. note::

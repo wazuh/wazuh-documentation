@@ -620,7 +620,7 @@ To set this up, create a file at ``/etc/haproxy/dataplaneapi.yml`` and add the b
             transaction:
                 transaction_dir: /tmp/haproxy
             user:
-            - insecure: true
+            -  insecure: true
                password: <DATAPLANE_PASSWORD>
                name: <DATAPLANE_USER>
          haproxy:
@@ -639,7 +639,7 @@ To set this up, create a file at ``/etc/haproxy/dataplaneapi.yml`` and add the b
 
       .. code-block:: console
 
-         # openssl req -x509 -newkey rsa:4096 -keyout <KEY_FILE_NAME> -out <CERTIFICATE_FILE_NAME> -sha256 -nodes -addext "subjectAltName=DNS:<FQDN>" -subj "/C=US/ST=CA/O=Wazuh>/CN=<CommonName>"
+         # openssl req -x509 -newkey rsa:4096 -keyout <KEY_FILE_NAME> -out <CERTIFICATE_FILE_NAME> -sha256 -nodes -addext "subjectAltName=DNS:<FQDN>" -subj "/C=US/ST=CA/O=Wazuh/CN=<CommonName>"
 
       .. code-block:: yaml
          :emphasize-lines: 15,16
@@ -678,7 +678,7 @@ Depending on the :ref:`HAProxy installation method <haproxy_installation>`, foll
 
    .. group-tab:: Packages
 
-      1. Download the binary file for the installed HAProxy version. You can find the available versions `here <https://github.com/haproxytech/dataplaneapi/releases/>`__.
+      1. Download the binary file for the installed HAProxy version. You can find the available versions on the `Data Plane API releases page <https://github.com/haproxytech/dataplaneapi/releases/>`__.
 
          .. code-block:: console
 

@@ -48,6 +48,9 @@ Follow the step below to uninstall the Wazuh dashboard using your package manage
          .. code:: console
 
             # apt-get remove --purge wazuh-dashboard -y
+            # rm -rf /var/lib/wazuh-dashboard/
+            # rm -rf /usr/share/wazuh-dashboard/
+            # rm -rf /etc/wazuh-dashboard/
 
       .. group-tab:: Yum
 
@@ -107,6 +110,9 @@ Follow these steps to uninstall the Wazuh manager and filebeat using your packag
          .. code:: console
 
             # apt-get remove --purge filebeat -y
+            # rm -rf /var/lib/filebeat/
+            # rm -rf /usr/share/filebeat/
+            # rm -rf /etc/filebeat/
 
       .. group-tab:: Yum
 
@@ -142,6 +148,9 @@ Follow the step below to uninstall the Wazuh indexer using your package manager.
          .. code:: console
 
             # apt-get remove --purge wazuh-indexer -y
+            # rm -rf /var/lib/wazuh-indexer/
+            # rm -rf /usr/share/wazuh-indexer/
+            # rm -rf /etc/wazuh-indexer/
 
       .. group-tab:: Yum
 

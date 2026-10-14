@@ -417,7 +417,7 @@ Google Workspace configuration
          :align: center
          :width: 80%
 
-   #. Add a value to the **Department** field, in this example, we add ``Wazuh_access``, click on **SAVE**. This value will be used in the ``role_mapping`` file configuration.
+   #. Add a value to the **Department** field, in this example, we add ``wazuh-readonly``, click on **SAVE**. This value will be used in the ``role_mapping`` file configuration.
 
       .. thumbnail:: /images/single-sign-on/google/10-add-a-value-to-the-department-field.png
         :title:  Add a value to the Department field

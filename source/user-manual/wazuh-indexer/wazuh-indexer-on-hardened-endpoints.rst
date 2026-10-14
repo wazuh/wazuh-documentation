@@ -35,7 +35,8 @@ To resolve this problem, either remove the ``noexec`` option from your ``/tmp`` 
       RuntimeDirectory=wazuh-indexer
       PrivateTmp=true
       Environment=OPENSEARCH_HOME=/usr/share/wazuh-indexer
-      Environment=OPENSEARCH_TMPDIR=/var/lib/wazuh-indexer/tmp  Environment=OPENSEARCH_PATH_CONF=/etc/wazuh-indexer
+      Environment=OPENSEARCH_TMPDIR=/var/lib/wazuh-indexer/tmp
+      Environment=OPENSEARCH_PATH_CONF=/etc/wazuh-indexer
       Environment=PID_DIR=/run/wazuh-indexer
       Environment=OPENSEARCH_SD_NOTIFY=true
       EnvironmentFile=-/etc/default/wazuh-indexer

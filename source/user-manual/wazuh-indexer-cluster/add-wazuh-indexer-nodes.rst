@@ -24,6 +24,10 @@ If you are unsure which method aligns with your infrastructure, we recommend rev
 
 .. note::
 
+   For high availability, a Wazuh indexer cluster needs at least three cluster-manager-eligible nodes. Electing a cluster manager requires a majority (quorum) of the voting nodes. In a two-node cluster, only one node takes part in the vote, so if that node fails the cluster cannot elect a cluster manager and stops accepting changes. A second node adds data redundancy (replica shards) but not cluster-manager fault tolerance. Use an odd number of cluster-manager-eligible nodes, and add a third node for production deployments.
+
+.. note::
+
    You need root user privileges to execute the commands below.
 
 All-in-one deployment
@@ -158,14 +162,14 @@ Before deploying an additional Wazuh node, it’s essential to reconfigure exist
       node.name: "<EXISTING_WAZUH_INDEXER_NODE_NAME>"
       cluster.initial_master_nodes:
       - "<EXISTING_WAZUH_INDEXER_NODE_NAME>"
-      - "<NEW-WAZUH-INDEXER-NODE-NAME>"
+      - "<NEW_WAZUH_INDEXER_NODE_NAME>"
       cluster.name: "wazuh-cluster"
       discovery.seed_hosts:
         - "<EXISTING_WAZUH_INDEXER_IP>"
         - "<NEW_WAZUH_INDEXER_IP>"
       plugins.security.nodes_dn:
-      - "CN=<EXISTING-WAZUH-INDEXER-NODE-NAME>,OU=Wazuh,O=Wazuh,L=California,C=US"
-      - "CN=<NEW-WAZUH-INDEXER-NODE-NAME>,OU=Wazuh,O=Wazuh,L=California,C=US"
+      - "CN=<EXISTING_WAZUH_INDEXER_NODE_NAME>,OU=Wazuh,O=Wazuh,L=California,C=US"
+      - "CN=<NEW_WAZUH_INDEXER_NODE_NAME>,OU=Wazuh,O=Wazuh,L=California,C=US"
 
 #. Edit the Filebeat configuration file ``/etc/filebeat/filebeat.yml`` to add the new Wazuh indexer node(s). Uncomment or add more lines, according to your ``/root/config.yml`` definitions:
 
@@ -519,7 +523,7 @@ Run the command below on any of the Wazuh indexer nodes and check the output for
 
 .. code-block:: console
 
-   # curl -XGET https:/<EXISTING_WAZUH_INDEXER_IP>:9200/_cluster/health?pretty -u admin:<ADMIN-PASSWORD> -k
+   # curl -XGET https://<EXISTING_WAZUH_INDEXER_IP>:9200/_cluster/health?pretty -u admin:<ADMIN-PASSWORD> -k
 
 Replace:
 
@@ -669,20 +673,20 @@ Before deploying an additional Wazuh node, it’s essential to reconfigure exist
 #. Edit the indexer configuration file at ``/etc/wazuh-indexer/opensearch.yml`` to include the new node(s) as follows. Uncomment or add more lines, according to your ``/root/config.yml`` definitions. Create the ``discovery.seed_hosts`` section if it doesn’t exist:
 
    .. code-block:: yaml
-      :emphasize-lines: 1,2,4,5,8,9,12
+      :emphasize-lines: 1,2,4,5,8,9,11,12
 
       network.host: "<EXISTING_WAZUH_INDEXER_IP>"
       node.name: "<EXISTING_WAZUH_INDEXER_NODE_NAME>"
       cluster.initial_master_nodes:
       - "<EXISTING_WAZUH_INDEXER_NODE_NAME>"
-      - "<NEW-WAZUH-INDEXER-NODE-NAME>"
+      - "<NEW_WAZUH_INDEXER_NODE_NAME>"
       cluster.name: "wazuh-cluster"
       discovery.seed_hosts:
         - "<EXISTING_WAZUH_INDEXER_IP>"
         - "<NEW_WAZUH_INDEXER_IP>"
       plugins.security.nodes_dn:
-      - "CN=indexer,OU=Wazuh,O=Wazuh,L=California,C=US"
-      - "CN=<WAZUH-INDEXER2-NODE-NAME>,OU=Wazuh,O=Wazuh,L=California,C=US"
+      - "CN=<EXISTING_WAZUH_INDEXER_NODE_NAME>,OU=Wazuh,O=Wazuh,L=California,C=US"
+      - "CN=<NEW_WAZUH_INDEXER_NODE_NAME>,OU=Wazuh,O=Wazuh,L=California,C=US"
 
 #. Edit the Filebeat configuration file ``/etc/filebeat/filebeat.yml`` (the file is located in the Wazuh server) to add the new Wazuh indexer node(s). Uncomment or add more lines, according to your ``/root/config.yml`` definitions:
 
@@ -1120,7 +1124,7 @@ Run the command below on any of the Wazuh indexer nodes and check the output for
 
 .. code-block:: console
 
-   # curl -XGET https:/<EXISTING_WAZUH_INDEXER_IP>:9200/_cluster/health?pretty -u admin:<ADMIN-PASSWORD> -k
+   # curl -XGET https://<EXISTING_WAZUH_INDEXER_IP>:9200/_cluster/health?pretty -u admin:<ADMIN-PASSWORD> -k
 
 Replace:
 

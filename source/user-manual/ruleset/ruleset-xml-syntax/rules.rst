@@ -502,7 +502,7 @@ Example:
        <description>Forbidden srcip has been detected.</description>
    </rule>
 
-This rule will trigger when that exact ``scrip`` has been decoded.
+This rule will trigger when that exact ``srcip`` has been decoded.
 
 The attributes below are optional.
 
@@ -537,7 +537,7 @@ Example:
 
    <rule id="100110" level="5">
        <if_sid>100100</if_sid>
-       <dstip negate=”yes”>198.168.41.30</dstip>
+       <dstip negate="yes">198.168.41.30</dstip>
        <description>A different dstip has been detected.</description>
    </rule>
 
@@ -1435,7 +1435,7 @@ This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 .. note::
 
-   Rules at level 0 are discarded immediately and will not be used with ``if_matched_rules``. The level must be at least 1, but you will have to add the ``<no_log>`` option to the rule to ensure it is not logged.
+   Rules at level 0 are discarded immediately and will not be used with ``if_matched_sid``. The level must be at least 1, but you will have to add the ``<no_log>`` option to the rule to ensure it is not logged.
 
 Example:
 
@@ -1892,7 +1892,7 @@ As an example of these last options, check this rule:
 .. code-block:: xml
    :emphasize-lines: 4
 
-   <rule id=100005 level="0">
+   <rule id="100005" level="0">
      <match> Could not open /home </match>
      <same_user />
      <different_srcgeoip />

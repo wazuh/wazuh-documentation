@@ -238,7 +238,7 @@ Perform the following steps on the macOS endpoint.
 Wazuh server
 ~~~~~~~~~~~~
 
-Wazuh has an out-of-the-box rule with ID ``531`` that generates an alert when the disk usage of the ``/dev`` partition is ``100%``. The rule is defined below and is found in the `Wazuh GitHub repository <https://github.com/wazuh/wazuh-ruleset/blob/master/rules/0015-ossec_rules.xml>`__.
+Wazuh has an out-of-the-box rule with ID ``531`` that generates an alert when the disk usage of the ``/dev`` partition is ``100%``. The rule is defined below and is found in the `Wazuh GitHub repository <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|/ruleset/rules/0015-ossec_rules.xml>`__.
 
 .. code-block:: xml
 

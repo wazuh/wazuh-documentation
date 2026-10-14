@@ -260,7 +260,7 @@ The macOS unified logging system (ULS) centralizes the management and storage of
 Collecting macOS ULS logs with the Wazuh agent
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Wazuh interfaces with the CLI log tool using the ``–style syslog`` format to collect logs from macOS ULS:
+Wazuh interfaces with the CLI log tool using the ``--style syslog`` format to collect logs from macOS ULS:
 
    .. code-block:: xml
 

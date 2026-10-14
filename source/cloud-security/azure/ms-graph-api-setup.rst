@@ -67,6 +67,7 @@ To configure the application permissions, go to the **API permissions** page and
 
    -  ``SecurityAlert.Read.All``: This permission is required to read security alerts from the ``/security/alerts_v2`` API on your tenant.
    -  ``SecurityIncident.Read.All``: This permission is required to read security incident data, including associated events/alerts from the ``/security/incidents`` API on your tenant.
+   -  ``DeviceManagementApps.Read.All``: This permission is required to read Microsoft Intune audit events from the ``deviceManagement/auditEvents`` API on your tenant. See :doc:`Microsoft Intune integration </cloud-security/azure/ms-intune-integration>` for the other Intune relationships.
 
    .. thumbnail:: /images/cloud-security/ms-graph/add-api-permissions.png
       :align: center
@@ -384,7 +385,7 @@ For instance, if a user updates the enrollment settings, configuring the module 
                    {
                        "displayName": "DeviceManagementAPIVersion",
                        "oldValue": null,
-                       "newValue": "5023-03-29"
+                       "newValue": "2023-03-29"
                    },
                    {
                        "displayName": "$Collection.RoleScopeTagIds[0]",
@@ -509,7 +510,7 @@ Once Wazuh connects with the Microsoft Graph API, the previous log triggers the 
                            {
                                "displayName": "DeviceManagementAPIVersion",
                                "oldValue": null,
-                               "newValue": "5023-03-29"
+                               "newValue": "2023-03-29"
                            },
                            {
                                "displayName": "$Collection.RoleScopeTagIds[0]",

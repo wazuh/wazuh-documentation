@@ -1,6 +1,24 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [v4.14.9]
+
+### Added
+
+- Added the `agent.tcp_keepidle`, `agent.tcp_keepintvl`, `agent.tcp_keepcnt`, and `agent.send_timeout` internal options to the *Internal configuration* reference documentation. ([#10029](https://github.com/wazuh/wazuh-documentation/pull/10029))
+
+### Changed
+
+- Updated the *Wazuh server* disk space requirements in the *Installation guide* to include the vulnerability detection database. ([#10267](https://github.com/wazuh/wazuh-documentation/pull/10267))
+- Updated the eBPF who-data requirements and fallback behavior in the *File integrity monitoring* and *Reference* documentation to describe the eBPF health check instead of a kernel version check. ([#10331](https://github.com/wazuh/wazuh-documentation/pull/10331))
+
+### Fixed
+
+- Fixed the Distributed deployment steps for securing the installation in the *Wazuh dashboard* step-by-step installation documentation. ([#10330](https://github.com/wazuh/wazuh-documentation/pull/10330))
+- Fixed code samples and commands that could not be copied and used as written across the *Regulatory compliance*, *Deployment options*, *Development*, *Migration guide*, *Proof of concept guide*, *Upgrade guide* and *User manual* documentation. ([#10334](https://github.com/wazuh/wazuh-documentation/pull/10334)) ([#10369](https://github.com/wazuh/wazuh-documentation/pull/10369)) ([#10370](https://github.com/wazuh/wazuh-documentation/pull/10370)) ([#10371](https://github.com/wazuh/wazuh-documentation/pull/10371)) ([#10373](https://github.com/wazuh/wazuh-documentation/pull/10373)) ([#10374](https://github.com/wazuh/wazuh-documentation/pull/10374))
+- Fixed dead links, typos, garbled sentences, broken inline markup and XML code blocks marked as `console` across the *Compliance*, *Deployment options*, *Getting started*, *Installation guide*, *Integrations guide*, *Release notes*, *Upgrade guide* and *User manual* documentation. ([#10335](https://github.com/wazuh/wazuh-documentation/pull/10335)) ([#10370](https://github.com/wazuh/wazuh-documentation/pull/10370)) ([#10372](https://github.com/wazuh/wazuh-documentation/pull/10372)) ([#10375](https://github.com/wazuh/wazuh-documentation/pull/10375))
+- Fixed incorrect field names, setting names, menu names, values and examples that did not work as written across the *Cloud security*, *User manual* and *Wazuh Cloud* documentation, including the Wazuh indexer API, the Wazuh dashboard, the Wazuh manager and the single sign-on guides. ([#10354](https://github.com/wazuh/wazuh-documentation/pull/10354)) ([#10355](https://github.com/wazuh/wazuh-documentation/pull/10355)) ([#10369](https://github.com/wazuh/wazuh-documentation/pull/10369)) ([#10370](https://github.com/wazuh/wazuh-documentation/pull/10370)) ([#10371](https://github.com/wazuh/wazuh-documentation/pull/10371)) ([#10372](https://github.com/wazuh/wazuh-documentation/pull/10372))
+
 ## [v4.14.8]
 
 ### Added

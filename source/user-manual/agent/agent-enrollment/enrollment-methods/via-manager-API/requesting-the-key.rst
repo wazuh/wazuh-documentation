@@ -97,7 +97,7 @@ Follow these steps to send Wazuh agent enrollment requests from a Windows endpoi
 
    .. code-block:: pwsh-session
 
-      # $base64AuthInfo=[Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(("{0}:{1}" -f “<WAZUH_SERVER_API_USERNAME>”, “<WAZUH_SERVER_API_PASSWORD>”)))
+      # $base64AuthInfo=[Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(("{0}:{1}" -f "<WAZUH_SERVER_API_USERNAME>", "<WAZUH_SERVER_API_PASSWORD>")))
 
    Then, request the JWT. Replace ``<WAZUH_MANAGER_IP_ADDRESS>`` with the IP address or FQDN (Fully Qualified Domain Name) of the Wazuh manager:
 
@@ -120,7 +120,7 @@ Follow these steps to send Wazuh agent enrollment requests from a Windows endpoi
 
       .. code-block:: pwsh-session
 
-         # $TOKEN = “<TOKEN_GENERATED>”
+         # $TOKEN = "<TOKEN_GENERATED>"
 
    -  Replace ``<WAZUH_AGENT_NAME>`` with the desired agent name:
 

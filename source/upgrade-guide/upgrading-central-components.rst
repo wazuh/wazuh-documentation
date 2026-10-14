@@ -48,6 +48,7 @@ Perform the steps below before upgrading any of the Wazuh components. In case Wa
    #. Select which objects to export and click **Export**, or click **Export all objects** to export everything.
 
    .. image:: /images/upgrade-guide/saved-objects-export.png
+      :alt: Wazuh dashboard Saved objects page with an index pattern selected and the Export and Export all objects buttons highlighted
 
 #. Stop the Filebeat and Wazuh dashboard services if installed in the node:
 
@@ -75,7 +76,7 @@ The Wazuh indexer cluster remains operational throughout the upgrade. The rollin
 Preparing the Wazuh indexer cluster for upgrade
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Perform the following steps on any of the Wazuh indexer nodes replacing ``<WAZUH_INDEXER_IP_ADDRESS>``, ``<USERNAME>``, and ``<PASSWORD>``.
+Perform the following steps on any of the Wazuh indexer nodes replacing ``<WAZUH_INDEXER_IP_ADDRESS>`` and ``<USERNAME>``. Enter the password of ``<USERNAME>`` when prompted.
 
 #. Backup the existing Wazuh indexer security configuration files:
 
@@ -247,7 +248,7 @@ Repeat steps 1 to 5 above on all Wazuh indexer nodes before proceeding to the :r
 Post-upgrade actions
 ^^^^^^^^^^^^^^^^^^^^
 
-Perform the following steps on any of the Wazuh indexer nodes replacing ``<WAZUH_INDEXER_IP_ADDRESS>``, ``<USERNAME>``, and ``<PASSWORD>``.
+Perform the following steps on any of the Wazuh indexer nodes replacing ``<WAZUH_INDEXER_IP_ADDRESS>`` and ``<USERNAME>``. Enter the password of ``<USERNAME>`` when prompted.
 
 #. Run the ``indexer-security-init.sh`` script to apply the security configuration files from backup into the new Wazuh indexer:
 
@@ -327,19 +328,34 @@ Perform the following steps on any of the Wazuh indexer nodes replacing ``<WAZUH
         "transient" : {}
       }
 
-#. Check the status of the Wazuh indexer cluster again to see if the shard allocation has finished.
+#. Check the status of the Wazuh indexer cluster again to see if the shard allocation has finished. The allocation is complete when ``status`` is ``green`` and ``relocating_shards``, ``initializing_shards``, and ``unassigned_shards`` are ``0``.
 
    .. code-block:: console
 
-      # curl -k -u <USERNAME> https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cat/nodes?v
+      # curl -k -u <USERNAME> "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cluster/health?pretty"
 
-   .. code-block:: console
+   .. code-block:: json
       :class: output
 
-      ip         heap.percent ram.percent cpu load_1m load_5m load_15m node.role node.roles                                        cluster_manager name
-      172.18.0.3           34          86  32    6.67    5.30     2.53 dimr      cluster_manager,data,ingest,remote_cluster_client -               wazuh2.indexer
-      172.18.0.4           21          86  32    6.67    5.30     2.53 dimr      cluster_manager,data,ingest,remote_cluster_client *               wazuh1.indexer
-      172.18.0.2           16          86  32    6.67    5.30     2.53 dimr      cluster_manager,data,ingest,remote_cluster_client -               wazuh3.indexer
+      {
+        "cluster_name" : "wazuh-cluster",
+        "status" : "green",
+        "timed_out" : false,
+        "number_of_nodes" : 3,
+        "number_of_data_nodes" : 3,
+        "discovered_master" : true,
+        "discovered_cluster_manager" : true,
+        "active_primary_shards" : 30,
+        "active_shards" : 60,
+        "relocating_shards" : 0,
+        "initializing_shards" : 0,
+        "unassigned_shards" : 0,
+        "delayed_unassigned_shards" : 0,
+        "number_of_pending_tasks" : 0,
+        "number_of_in_flight_fetch" : 0,
+        "task_max_waiting_in_queue_millis" : 0,
+        "active_shards_percent_as_number" : 100.0
+      }
 
 .. note::
 
@@ -581,7 +597,7 @@ When upgrading Wazuh, you must also update the Wazuh Filebeat module and the ale
       # filebeat setup --pipelines
       # filebeat setup --index-management -E output.logstash.enabled=false
 
-#. If you are upgrading from Wazuh versions v4.8.x or v4.9.x, manually update the ``wazuh-states-vulnerabilities-*`` mappings using the following command. Replace ``<WAZUH_INDEXER_IP_ADDRESS>``, ``<USERNAME>``, and ``<PASSWORD>`` with the values applicable to your deployment.
+#. If you are upgrading from Wazuh versions v4.8.x or v4.9.x, manually update the ``wazuh-states-vulnerabilities-*`` mappings using the following command. Replace ``<WAZUH_INDEXER_IP_ADDRESS>`` and ``<USERNAME>`` with the values applicable to your deployment.
 
    Skip this step if upgrading from other versions.
 
@@ -612,11 +628,11 @@ When upgrading Wazuh, you must also update the Wazuh Filebeat module and the ale
 Upgrading the Wazuh dashboard
 -----------------------------
 
-Backup the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file to save your settings.  For example, create a copy of the file using the following command:
+#. Back up the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file to save your settings. For example, create a copy of the file using the following command:
 
-.. code-block:: console
+   .. code-block:: console
 
-   # cp /etc/wazuh-dashboard/opensearch_dashboards.yml /etc/wazuh-dashboard/opensearch_dashboards.yml.old
+      # cp /etc/wazuh-dashboard/opensearch_dashboards.yml /etc/wazuh-dashboard/opensearch_dashboards.yml.old
 
 #. Upgrade the Wazuh dashboard.
 
@@ -655,7 +671,7 @@ Backup the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file to save your 
 
 #. Import the saved customizations exported while :ref:`preparing the upgrade <preparing-the-upgrade>`.
 
-   #. Navigate to **Dashboard management** > **Dashboard Management** > **Saved objects** on the Wazuh dashboard.
+   #. Navigate to **Dashboard management** > **Dashboards Management** > **Saved objects** on the Wazuh dashboard.
    #. Click **Import**, add the ndjson file and click **Import**.
 
 .. note::

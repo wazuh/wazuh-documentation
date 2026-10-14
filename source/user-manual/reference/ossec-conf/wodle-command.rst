@@ -126,7 +126,7 @@ However, if the timeout is other than 0, the execution will finish if it expires
 verify_md5
 ^^^^^^^^^^
 
-Verify the MD5 sum of the binary or the script specified on the command option.
+Verify the MD5 sum of the binary or the script specified on the command option. If the command option has two or more arguments, only the first one is verified.
 
 +--------------------+--------------+
 | **Default value**  | n/a          |
@@ -138,7 +138,7 @@ Verify the MD5 sum of the binary or the script specified on the command option.
 verify_sha1
 ^^^^^^^^^^^
 
-Verify the SHA1 sum of the binary or the script specified on the command option.
+Verify the SHA1 sum of the binary or the script specified on the command option. If the command option has two or more arguments, only the first one is verified.
 
 +--------------------+---------------+
 | **Default value**  | n/a           |
@@ -150,7 +150,7 @@ Verify the SHA1 sum of the binary or the script specified on the command option.
 verify_sha256
 ^^^^^^^^^^^^^
 
-Verify the SHA256 sum of the binary or the script specified on the command option.
+Verify the SHA256 sum of the binary or the script specified on the command option. If the command option has two or more arguments, only the first one is verified.
 
 +--------------------+-----------------+
 | **Default value**  | n/a             |

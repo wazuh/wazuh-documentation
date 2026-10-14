@@ -274,16 +274,16 @@ The **Roles mapping** tab presents users with the option to assign different rol
    :title: Navigating the Wazuh dashboard: Security: Roles mapping
    :alt: Navigating the Wazuh dashboard: Security: Roles mapping
 
-Index management
-----------------
+Indexer management
+------------------
 
 The Wazuh indexer is a real-time, full-text search and analytics engine for security data. Log data ingested into the Wazuh server is analyzed and forwarded to the Wazuh indexer for indexing and storage.
 
 .. thumbnail:: /images/wazuh-dashboard/navigating/index-management.png
    :align: center
    :width: 80%
-   :title: Navigating the Wazuh dashboard: Index management
-   :alt: Navigating the Wazuh dashboard: Index management
+   :title: Navigating the Wazuh dashboard: Indexer management
+   :alt: Navigating the Wazuh dashboard: Indexer management
 
 Index and Snapshot Management
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

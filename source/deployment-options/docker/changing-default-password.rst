@@ -254,9 +254,9 @@ The ``wazuh-wui`` user is the default user for connecting to the Wazuh server AP
             port: 55000
             username: wazuh-wui
 
-           password: "MyS3cr37P450r.*-"
+            password: "MyS3cr37P450r.*-"
 
-           run_as: true
+            run_as: true
       ...
 
 #. Open the ``docker-compose.yml`` file. Change all occurrences of the old password with the new one.
@@ -277,7 +277,7 @@ The ``wazuh-wui`` user is the default user for connecting to the Wazuh server AP
             - SSL_CERTIFICATE=/etc/ssl/filebeat.pem
             - SSL_KEY=/etc/ssl/filebeat.key
             - API_USERNAME=wazuh-wui
-           - API_PASSWORD=MyS3cr37P450r.*-
+            - API_PASSWORD=MyS3cr37P450r.*-
 
        ...
         wazuh.dashboard:
@@ -290,7 +290,7 @@ The ``wazuh-wui`` user is the default user for connecting to the Wazuh server AP
             - DASHBOARD_PASSWORD=kibanaserver
             - API_USERNAME=wazuh-wui
 
-           - API_PASSWORD=MyS3cr37P450r.*-
+            - API_PASSWORD=MyS3cr37P450r.*-
 
        ...
 

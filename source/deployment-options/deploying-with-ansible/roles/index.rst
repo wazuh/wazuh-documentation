@@ -13,7 +13,7 @@ You can use our preconfigured roles to deploy the Wazuh indexer and dashboard co
    # cd /etc/ansible/roles
    # sudo git clone --branch v|WAZUH_CURRENT_ANSIBLE| https://github.com/wazuh/wazuh-ansible.git
 
-The following sections explain how to use and customize these roles. For more details about Ansible roles, see the `Ansible community documentation <http://docs.ansible.com/ansible/playbooks.html>`_.
+The following sections explain how to use and customize these roles. For more details about Ansible roles, see the `Ansible community documentation <https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_reuse_roles.html>`_.
 
 .. topic:: Contents
 

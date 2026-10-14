@@ -58,7 +58,7 @@ Test the configuration
 
    .. code-block:: console
 
-      echo “I added this text” | tee /appfolder/appreport.conf /appfolder/private-file.conf
+      echo "I added this text" | tee /appfolder/appreport.conf /appfolder/private-file.conf
 
 Visualize the alert
 -------------------

@@ -13,7 +13,7 @@ The following requirements have to be in place to ensure the Wazuh agent enrollm
 -  Outbound connectivity from the Wazuh agent to the Wazuh manager services. The following ports are configurable:
 
    -  1514/TCP for agent communication.
-   -  1515/TCP for enrollment via automatic agent request.
+   -  1515/TCP for enrollment via agent configuration.
    -  55000/TCP for enrollment via Wazuh server API.
 
 .. note::

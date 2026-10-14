@@ -349,7 +349,7 @@ We show how to configure the sample ``custom-ar.py`` Python script below as an a
            """ Start Custom Action Add """
 
            with open("ar-test-result.txt", mode="a") as test_file:
-               test_file.write("Active response triggered by rule ID: <" + str(keys) + ">\n")
+               test_file.write("Active response triggered by rule ID: <" + keys[0] + ">\n")
 
            """ End Custom Action Add """
 
@@ -387,7 +387,7 @@ Configurable sections in this script
    .. code-block:: python
 
       with open("ar-test-result.txt", mode="a") as test_file:
-          test_file.write("Active response triggered by rule ID: <" + str(keys) + ">\n")
+          test_file.write("Active response triggered by rule ID: <" + keys[0] + ">\n")
 
 -  Custom action - ``delete``: It deletes the file once the timeout triggers.
 
@@ -516,6 +516,7 @@ Method 1: Convert the Python script to an executable application
 
    .. code-block:: powershell
 
+      > cd $env:USERPROFILE
       > pyinstaller -F <PATH_TO_CUSTOM-AR.PY>
 
    You can find the created ``custom-ar.exe`` executable in the ``C:\Users\<USER>\dist\`` directory.

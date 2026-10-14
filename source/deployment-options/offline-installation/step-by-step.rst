@@ -581,6 +581,10 @@ Select your deployment type and follow the instructions to change the default pa
 Next steps
 ^^^^^^^^^^
 
+.. note::
+
+   Without Internet access, the Wazuh server cannot download the vulnerability detection feed from the Wazuh Cyber Threat Intelligence (CTI) service. To use vulnerability detection in an offline environment, download the threat intelligence snapshot on a system with Internet access and configure the Wazuh server to use it. See :ref:`Offline vulnerability detection <offline_threat_intelligence_snapshot>`.
+
 Once the Wazuh environment is ready, Wazuh agents can be installed on every endpoint to be monitored. To install the Wazuh agents and start monitoring the endpoints, see the :doc:`Wazuh agent </installation-guide/wazuh-agent/index>` installation section. If you need to install them offline, you can check the appropriate agent package to download for your monitored system in the :ref:`Wazuh agent packages list <wazuh_agent_packages_list>` section.
 
 To uninstall all the Wazuh central components, see the :doc:`/installation-guide/uninstalling-wazuh/central-components` section.

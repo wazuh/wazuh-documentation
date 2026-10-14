@@ -33,19 +33,19 @@ See below SCA policy ID ``19115`` for Ubuntu 20.04 operating system as an exampl
 .. code-block:: yaml
 
    - id: 19115
-       title: "Ensure SSH HostbasedAuthentication is disabled."
-       description: "The HostbasedAuthentication parameter specifies if authentication is allowed through trusted hosts via the user of .rhosts, or /etc/hosts.equiv, along with successful public key client host authentication."
-       rationale: "Even though the .rhosts files are ineffective if support is disabled in /etc/pam.conf, disabling the ability to use .rhosts files in SSH provides an additional layer of protection."
-       remediation: "Edit the /etc/ssh/sshd_config file to set the parameter above any Include entries as follows: HostbasedAuthentication no Note: First occurrence of a option takes precedence, Match set statements withstanding. If Include locations are enabled, used, and order of precedence is understood in your environment, the entry may be created in a file in Include location."
-       compliance:
-          - cis: ["4.2.8"]
-          - mitre_mitigations: ["M1042"]
-          - mitre_tactics: ["TA0001"]
-          - mitre_techniques: ["T1078", "T1078.001", "T1078.003"]
-       condition: all
-       rules:
-          - 'c:sshd -T -> r:^\s*HostbasedAuthentication\s+no'
-          - 'not f:/etc/ssh/sshd_config -> r:^\s*HostbasedAuthentication\s+yes'    
+     title: "Ensure SSH HostbasedAuthentication is disabled."
+     description: "The HostbasedAuthentication parameter specifies if authentication is allowed through trusted hosts via the user of .rhosts, or /etc/hosts.equiv, along with successful public key client host authentication."
+     rationale: "Even though the .rhosts files are ineffective if support is disabled in /etc/pam.conf, disabling the ability to use .rhosts files in SSH provides an additional layer of protection."
+     remediation: "Edit the /etc/ssh/sshd_config file to set the parameter above any Include entries as follows: HostbasedAuthentication no Note: First occurrence of a option takes precedence, Match set statements withstanding. If Include locations are enabled, used, and order of precedence is understood in your environment, the entry may be created in a file in Include location."
+     compliance:
+        - cis: ["4.2.8"]
+        - mitre_mitigations: ["M1042"]
+        - mitre_tactics: ["TA0001"]
+        - mitre_techniques: ["T1078", "T1078.001", "T1078.003"]
+     condition: all
+     rules:
+        - 'c:sshd -T -> r:^\s*HostbasedAuthentication\s+no'
+        - 'not f:/etc/ssh/sshd_config -> r:^\s*HostbasedAuthentication\s+yes'    
 
 Scan Results
 ------------
@@ -65,27 +65,28 @@ Take the following SCA check from policy ``cis_ubuntu20-04.yml`` as an example. 
 .. code-block:: yaml
 
    - id: 19098
-       title: "Ensure ip6tables default deny firewall policy."
-       description: "A default deny all policy on connections ensures that any unconfigured network usage will be rejected. Note: - Changing firewall settings while connected over network can result in being locked out of the system - Remediation will only affect the ac$    rationale: "With a default accept policy the firewall will accept any packet that is not configured to be denied. It is easier to white list acceptable usage than to black list unacceptable usage."
-       remediation: "IF IPv6 is enabled on your system: Run the following commands to implement a default DROP policy: # ip6tables -P INPUT DROP # ip6tables -P OUTPUT DROP # ip6tables -P FORWARD DROP."
-       compliance:
-         - cis: ["3.4.3.3.1"]
-         - cis_csc_v8: ["4.4", "4.5"]
-         - cis_csc_v7: ["9.4"]
-         - cmmc_v2.0: ["AC.L1-3.1.20", "CM.L2-3.4.7", "SC.L1-3.13.1", "SC.L2-3.13.6"]
-         - iso_27001-2013: ["A.13.1.1"]
-         - mitre_mitigations: ["M1031", "M1037"]
-         - mitre_tactics: ["TA0011"]
-         - mitre_techniques: ["T1562", "T1562.004"]
-         - nist_sp_800-53: ["SC-7(5)"]
-         - pci_dss_v3.2.1: ["1.1.4", "1.3.1", "1.4"]
-         - pci_dss_v4.0: ["1.2.1", "1.4.1"]
-         - soc_2: ["CC6.6"]
-       condition: all
-       rules:
-         - "c:ip6tables -L -> r:^Chain INPUT && r:policy DROP"
-         - "c:ip6tables -L -> r:^Chain FORWARD && r:policy DROP"
-         - "c:ip6tables -L -> r:^Chain OUTPUT && r:policy DROP"
+     title: "Ensure ip6tables default deny firewall policy."
+     description: "A default deny all policy on connections ensures that any unconfigured network usage will be rejected. Note: - Changing firewall settings while connected over network can result in being locked out of the system - Remediation will only affect the active system firewall, be sure to configure the default policy in your firewall management to apply on boot as well."
+     rationale: "With a default accept policy the firewall will accept any packet that is not configured to be denied. It is easier to white list acceptable usage than to black list unacceptable usage."
+     remediation: "IF IPv6 is enabled on your system: Run the following commands to implement a default DROP policy: # ip6tables -P INPUT DROP # ip6tables -P OUTPUT DROP # ip6tables -P FORWARD DROP."
+     compliance:
+       - cis: ["3.4.3.3.1"]
+       - cis_csc_v8: ["4.4", "4.5"]
+       - cis_csc_v7: ["9.4"]
+       - cmmc_v2.0: ["AC.L1-3.1.20", "CM.L2-3.4.7", "SC.L1-3.13.1", "SC.L2-3.13.6"]
+       - iso_27001-2013: ["A.13.1.1"]
+       - mitre_mitigations: ["M1031", "M1037"]
+       - mitre_tactics: ["TA0011"]
+       - mitre_techniques: ["T1562", "T1562.004"]
+       - nist_sp_800-53: ["SC-7(5)"]
+       - pci_dss_v3.2.1: ["1.1.4", "1.3.1", "1.4"]
+       - pci_dss_v4.0: ["1.2.1", "1.4.1"]
+       - soc_2: ["CC6.6"]
+     condition: all
+     rules:
+       - "c:ip6tables -L -> r:^Chain INPUT && r:policy DROP"
+       - "c:ip6tables -L -> r:^Chain FORWARD && r:policy DROP"
+       - "c:ip6tables -L -> r:^Chain OUTPUT && r:policy DROP"
 
 After evaluating the aforementioned check, the following event is generated:
 

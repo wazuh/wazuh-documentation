@@ -176,7 +176,7 @@ Configuring Let’s Encrypt SSL certificates on the Wazuh dashboard
       opensearch.ssl.verificationMode: certificate
       opensearch.username: kibanaserver
       opensearch.password: kibanaserver
-      opensearch.requestHeadersWhitelist: ["securitytenant","Authorization"]
+      opensearch.requestHeadersAllowlist: ["securitytenant","Authorization"]
       opensearch_security.multitenancy.enabled: false
       opensearch_security.readonly_mode.roles: ["kibana_read_only"]
       server.ssl.enabled: true

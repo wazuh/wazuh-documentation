@@ -127,7 +127,8 @@ Perform the following steps on the Wazuh indexer node (s) to complete the shared
       plugins.security.ssl.http.pemkey_filepath: /etc/wazuh-indexer/certs/wazuh-indexer-key.pem
       plugins.security.ssl.http.pemtrustedcas_filepath: /etc/wazuh-indexer/certs/root-ca.pem
       plugins.security.ssl.transport.pemcert_filepath: /etc/wazuh-indexer/certs/wazuh-indexer.pem
-      plugins.security.ssl.transport.pemkey_filepath: /etc/wazuh-indexer/certs/wazuh-indexer-key.>plugins.security.ssl.transport.pemtrustedcas_filepath: /etc/wazuh-indexer/certs/root-ca.pem
+      plugins.security.ssl.transport.pemkey_filepath: /etc/wazuh-indexer/certs/wazuh-indexer-key.pem
+      plugins.security.ssl.transport.pemtrustedcas_filepath: /etc/wazuh-indexer/certs/root-ca.pem
       plugins.security.ssl.http.enabled: true
       plugins.security.ssl.transport.enforce_hostname_verification: false
       plugins.security.ssl.transport.resolve_hostname: false
@@ -149,7 +150,7 @@ Perform the following steps on the Wazuh indexer node (s) to complete the shared
       - "security_rest_api_access"
 
       plugins.security.system_indices.enabled: true
-      plugins.security.system_indices.indices: [".opendistro-alerting-config", ".opendistro-alert>
+      plugins.security.system_indices.indices: [".opendistro-alerting-config", ".opendistro-alerting-alert*", ".opendistro-anomaly-results*", ".opendistro-anomaly-detector*", ".opendistro-anomaly-checkpoints", ".opendistro-anomaly-detection-state", ".opendistro-reports-*", ".opendistro-notifications-*", ".opendistro-notebooks", ".opensearch-observability", ".opendistro-asynchronous-search-response*", ".replication-metadata-store"]
       ### Option to allow Filebeat-oss 7.10.2 to work ###
       compatibility.override_main_response_version: true
 
