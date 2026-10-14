@@ -152,6 +152,55 @@ Allows Wazuh to track events over multiple log messages based on a decoded id. T
 | Example of use     | <accumulate />     |
 +--------------------+--------------------+
 
+Example:
+
+The built-in OpenLDAP decoders use ``accumulate``. slapd writes one connection over several log lines that share a ``conn=`` number, and only some lines hold the client address or the user:
+
+.. code-block:: none
+
+   Jan 11 09:26:57 hostname slapd[20872]: conn=999999 fd=64 ACCEPT from IP=10.10.248.27:33957 (IP=10.10.241.77:389)
+   Jan 11 09:26:57 hostname slapd[20872]: conn=999999 op=0 BIND dn="uid=example,ou=People,dc=example,dc=com" method=128
+   Jan 11 09:26:57 hostname slapd[20872]: conn=999999 op=0 RESULT tag=97 err=49 text=
+
+Each decoder in ``/var/ossec/ruleset/decoders/0185-openldap_decoders.xml`` extracts the connection number as ``id`` and sets ``<accumulate/>``:
+
+.. code-block:: xml
+
+   <decoder name="openldap">
+       <program_name>^slapd</program_name>
+       <accumulate/>
+   </decoder>
+
+   <decoder name="openldap-connect_ipv4">
+       <parent>openldap</parent>
+       <prematch>ACCEPT from IP=</prematch>
+       <regex>^conn=(\d+) fd=\d+ ACCEPT from IP=(\S+):\d+ \(IP=(\S+):</regex>
+       <order>id, srcip, dstip</order>
+       <accumulate/>
+   </decoder>
+
+   <decoder name="openldap-bind">
+       <parent>openldap</parent>
+       <prematch>BIND </prematch>
+       <regex>^conn=(\d+) op=\d+ BIND dn="\w+=(\S+),</regex>
+       <order>id, dstuser</order>
+       <accumulate/>
+   </decoder>
+
+   <decoder name="openldap-result">
+       <accumulate/>
+       <parent>openldap</parent>
+       <prematch> RESULT </prematch>
+       <regex>^conn=(\d+) op=\d+ RESULT </regex>
+       <order>id</order>
+   </decoder>
+
+The ``RESULT`` line only contains the connection number. Because the earlier lines have the same ``id``, Wazuh fills its empty fields from them, so the decoded event for the failed bind (``err=49``) carries ``srcip`` 10.10.248.27, ``dstip`` 10.10.241.77 and ``dstuser`` example. A rule on that event can report who failed to log in and from where.
+
+.. note::
+
+   Wazuh groups the lines by the agent, the decoder name, and the ``id`` value. It only fills fields that are empty in the current event: ``srcip``, ``dstip``, ``srcport``, ``dstport``, ``srcuser``, ``dstuser``, and ``data``. Accumulated values expire 120 seconds after the last matching line.
+
 .. _decoders_program_name:
 
 program_name
