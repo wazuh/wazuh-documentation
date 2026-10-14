@@ -33,7 +33,6 @@ In this use case, we have two users, John and Jane. We monitor Jane’s home dir
    Here is a breakdown of the rule:
 
    -  ``-a always,exit`` specifies that the rule should always trigger on a process exit.
-   -  ``-F arch=b64`` specifies the hardware CPU architecture of the monitored endpoint.
    -  ``-S open -S openat`` specifies that the rule applies when a process invokes the ``open`` or ``openat`` syscalls.
    -  ``-F dir=/home/jane/`` specifies that the rule should only apply to files and directories inside the ``/home/jane`` directory.
    -  ``-F perm=rwa`` specifies the permissions being monitored for the system call to occur, in this case, read, write, and append permissions.
@@ -50,7 +49,7 @@ In this use case, we have two users, John and Jane. We monitor Jane’s home dir
 
    .. code-block:: console
 
-      # auditctl -R /etc/audit/rules.d/audit.rules
+      # auditctl -R /etc/audit/audit.rules
       # auditctl -l
 
    .. code-block:: console

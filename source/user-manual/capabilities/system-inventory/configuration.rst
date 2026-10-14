@@ -63,7 +63,7 @@ Where:
 - ``<os>`` option enables or disables the operating system scan. The default value is ``yes``. The allowed values are ``yes`` and ``no``.
 - ``<network>`` enables or disables the network scan. The default value is ``yes``. The allowed values are ``yes`` and ``no``.
 - ``<packages>`` enables or disables the scanning of packages, with a default value of ``yes``. The allowed values are ``yes`` and ``no``.
-- ``<ports all="no">`` enables or disables the port scan. The default value is ``yes``. You can configure two allowed values is ``yes`` and ``no``. This option also accepts an additional parameter ``all``, with which you can restrict the scan to only listening ports using ``<ports all="no">``. If you want Syscollector to scan all ports, then you change the value to ``yes``.
+- ``<ports all="no">`` enables or disables the port scan. The default value is ``yes``. The allowed values are ``yes`` and ``no``. This option also accepts an additional parameter ``all``, with which you can restrict the scan to only listening ports using ``<ports all="no">``. If you want Syscollector to scan all ports, then you change the value to ``yes``.
 - ``<processes>`` enables or disables the scanning for running processes on a monitored endpoint. The default value is ``yes``. The allowed values are ``yes`` and ``no``.
 - ``<users>`` enables or disables the scanning for user accounts on a monitored endpoint. The default value is ``yes``. The allowed values are ``yes`` and ``no``.
 - ``<groups>`` enables or disables the scanning for user account groups on a monitored endpoint. The default value is ``yes``. The allowed values are ``yes`` and ``no``.
@@ -136,10 +136,10 @@ The indexer connector may be missing if the Wazuh manager is using an old config
    Where:
 
    -  ``<ROOT_CA>``, ``<CERTIFICATE_PEM>``, ``<CERTIFICATE_KEY>``: Certificate paths.
-   -  ``<USER>`` and ``<PASS>``: Admin username of the Wazuh indexer.
-   -  ``<WAZUH_INDEXER_IP_ADDRESS>``: IP address of the Wazuh indexer.
+   -  ``<WAZUH_INDEXER_USER>``: Admin username of the Wazuh indexer.
+   -  ``<INDEXER_IP_ADDRESS>``: IP address of the Wazuh indexer.
 
-   If this command fails, the vulnerability detector module won't be able to connect to the Wazuh indexer.
+   If this command fails, the Wazuh server won't be able to send system inventory data to the Wazuh indexer.
 
    To check if the issue is related to certificates, bypass certificate verification using the -k option. Enter the Wazuh indexer password when prompted:
 
