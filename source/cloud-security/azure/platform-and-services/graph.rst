@@ -19,7 +19,7 @@ The following are endpoints in the Microsoft Graph REST API related to auditing 
 +---------------------------------------------------------------------------------------------------------------------------+-------------------------------+
 | **Report type**                                                                                                           | **Query**                     |
 +---------------------------------------------------------------------------------------------------------------------------+-------------------------------+
-| `Directory audits <https://docs.microsoft.com/en-us/graph/api/directoryaudit-list?view=graph-rest-1.0&tabs=http>`_        | ``auditLogs/directoryaudits`` |
+| `Directory audits <https://docs.microsoft.com/en-us/graph/api/directoryaudit-list?view=graph-rest-1.0&tabs=http>`_        | ``auditLogs/directoryAudits`` |
 +---------------------------------------------------------------------------------------------------------------------------+-------------------------------+
 | `Sign-ins <https://docs.microsoft.com/en-us/graph/api/signin-list?view=graph-rest-1.0&tabs=http>`_                        | ``auditLogs/signIns``         |
 +---------------------------------------------------------------------------------------------------------------------------+-------------------------------+

@@ -62,12 +62,6 @@ All API operations are restricted to a single tenant, and the root URL of the AP
 
       https://manage.office365.us/api/v1.0/{tenant_id}/activity/feed/{operation}
 
--  Department of Defense (DoD) government plan
-
-   .. code-block:: none
-
-      https://manage.protection.apps.mil/api/v1.0/{tenant_id}/activity/feed/{operation}
-
 Office 365 subscription plans may have different features and services included, so the available activities can vary based on your specific plan. Here are some categories of activities that you may find in the Office 365 Management API, depending on common Office 365 plans and services:
 
 -  **Azure Active Directory (Azure AD) activities** -  Events related to the creation, modification, or deletion of users and groups in Azure AD. This also includes sign-ins, authentication events, and role assignments and changes.
@@ -87,7 +81,7 @@ Below, we show how to use the Activity API to list available content and retriev
 
    .. code-block:: none
 
-      Get https://manage.office.com/api/v1.0/<Tenant_ID>/activity/feed//subscriptions/content?contentType=<ContentType>&startTime=<START_TIME>&endTime=<END_TIME>
+      GET https://manage.office.com/api/v1.0/<Tenant_ID>/activity/feed/subscriptions/content?contentType=<ContentType>&startTime=<START_TIME>&endTime=<END_TIME>
 
    Where:
 
@@ -319,7 +313,7 @@ Perform the following steps to configure the Wazuh server to pull audit logs fro
 
       -  ``<tenant_id>`` specifies the tenant ID of the application registered in Azure. The allowed value is any string. Replace the variable, ``<YOUR_TENANT_ID>`` with the tenant ID of your application registered in Azure.
       -  ``<client_id>`` specifies the client ID of the application registered in Azure. The allowed value is any string. Replace the variable, ``<YOUR_CLIENT_ID>`` with the client ID of your application registered in Azure.
-      -  ``<client_secret>`` specifies the client secret value of the application registered in Azure. Replace the variable, ``<YOUR_CLIENT_SECRET>`` with the client secret of your application registered in Azure.
+      -  ``<client_secret>`` specifies the client secret value of the application registered in Azure. Replace the variable, ``<YOUR_CLIENT_SECRET>`` with the client secret of your application registered in Azure. Alternatively, use ``<client_secret_path>`` with the path to a file that contains the client secret. See the :doc:`reference </user-manual/reference/ossec-conf/office365-module>`.
       -  ``<api_type>`` specifies the type of Office 365 subscription plan used by the tenant. The allowed subscriptions are ``commercial``, ``gcc``, and ``gcc-high``.
 
    -  The ``<subscriptions>`` block configures the internal options in the Office 365 REST API.
@@ -441,8 +435,8 @@ Panel
 This visualization option provides detailed information about the event that occurred including the top users of the service, the top client IP addresses using the service, top rules that have been triggered, and the top operations performed in Office 365.
 
 .. thumbnail:: /images/cloud-security/office365/office365-module-panel.png
-   :title: Office 365 modul panel
-   :alt: Office 365 modul panel
+   :title: Office 365 module panel
+   :alt: Office 365 module panel
    :align: center
    :width: 80%
 
