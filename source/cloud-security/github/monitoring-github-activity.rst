@@ -31,7 +31,7 @@ Perform the following steps on GitHub to generate the required personal access t
       :align: center
       :width: 80%
 
-#. Scroll down, select ``audit_log``, and click **Generate token**.
+#. Scroll down, select ``read:audit_log``, and click **Generate token**.
 
    .. thumbnail:: /images/cloud-security/github/github-generate-token.png
       :title: Generate token

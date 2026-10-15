@@ -81,7 +81,7 @@ PingOne Configuration
           :align: center
           :width: 80%
 
-      The ``Roles`` attribute will be used later as the ``sp.entity_id`` in the Wazuh indexer configuration file.
+      The ``Roles`` attribute will be used later as the ``roles_key`` in the Wazuh indexer configuration file.
 
    #. Click on **Required** checkbox, and click on **Save**.
 
@@ -406,7 +406,7 @@ PingOne Configuration
          :align: center
          :width: 80%
 
-      The ``Roles`` attribute will be used later as the ``sp.entity_id`` in the Wazuh indexer configuration file.
+      The ``Roles`` attribute will be used later as the ``roles_key`` in the Wazuh indexer configuration file.
 
    #. Click on **Required** checkbox, and click on **Save**.
 
