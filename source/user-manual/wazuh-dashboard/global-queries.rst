@@ -377,6 +377,10 @@ WQL does not support the use of wildcards represented as ``*``.
    :title: Wildcards not supported
    :alt: Wildcards not supported
 
+.. note::
+
+   WQL doesn't apply to the search bar in Threat hunting, Discover dashboard or other search bars labelled DQL. These search bars use Dashboards Query Language (DQL), which supports wildcards. For example, ``wazuh.rule.title:Failed*`` returns findings with a rule title that starts with Failed. For the full syntax, see `Dashboards Query Language (DQL) <https://docs.opensearch.org/latest/dashboards/dql/>`__ in the OpenSearch documentation.
+
 Whitespaces
 ^^^^^^^^^^^
 
