@@ -80,7 +80,7 @@ You need a host that meets the requirements above, internet access, and a user w
 
          $ wget https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh && sudo bash ./wazuh-install-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -a -id -d pre-release -as <ALTERNATE_ADDRESS>
 
-   When the installation finishes, the assistant prints the address of the Wazuh dashboard, one URL for each IP address of the host, then the user name and the command that shows the password:
+   When the installation finishes, the assistant prints the address of the Wazuh dashboard, one URL for each IP address of the host, then the username, the password, and the command to read the password again:
 
    .. code-block:: none
       :class: output
@@ -89,12 +89,13 @@ You need a host that meets the requirements above, internet access, and a user w
       INFO: --- Summary ---
       INFO: You can access the web interface https://<WAZUH_DASHBOARD_ADDRESS>:443
       INFO:     User: admin (Wazuh dashboard login and Wazuh indexer administrator)
-      INFO:     Password: to read it from the credentials file, run:
+      INFO:     Password: <ADMIN_PASSWORD>
+      INFO:     To read the password again, run:
       INFO:         sudo grep '^WAZUH_INDEXER_ADMIN_PASSWORD=' /etc/wazuh/credentials.env | cut -d= -f2-
       INFO: The other users of the deployment are listed at the top of /etc/wazuh/credentials.env.
       INFO: Installation finished.
 
-#. The installation assistant stores the passwords of all Wazuh users in ``/etc/wazuh/credentials.env``, which only root can read. Run the following command to show the ``admin`` password:
+#. The summary shows the password only when the assistant runs in an interactive terminal. If you redirect its output, for example to a file or a cloud-init log, the summary shows only the command. The installation assistant stores the passwords of all Wazuh users in ``/etc/wazuh/credentials.env``, which only root can read. To show the ``admin`` password again, run:
 
    .. code-block:: console
 
