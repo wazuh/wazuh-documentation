@@ -250,7 +250,7 @@ In the draft space, you create and refine your integrations, decoders, and rules
      :align: center
      :width: 80%
 
-#. Type the confirmation message when prompted, and click **Promote**.
+#. Click **Promote**, type the confirmation message when prompted, and click **Promote** again.
 
    .. thumbnail:: /images/manual/fim/promote-draft-confirmation.png
      :title: Promote confirmation
