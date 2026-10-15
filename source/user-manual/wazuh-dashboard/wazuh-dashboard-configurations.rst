@@ -403,7 +403,7 @@ This notification channel sends alerts to Slack via an incoming webhook. Create 
       :title: Monitors
       :alt: Monitors
 
-#. In the monitor trigger, click **Add action** to add a **Send notification** action, and select the Slack channel. Adjust the subject and message template if necessary, then save and enable the monitor.
+#. In the monitor trigger, click **Add action to** add a **Send notification** action, and select the Slack channel. Adjust the subject and message template if necessary, then save and enable the monitor.
 
    .. thumbnail:: /images/wazuh-dashboard/configurations/slack-add-action.png
       :align: center
@@ -454,7 +454,7 @@ This notification channel sends alerts to PagerDuty via the Events v2 API. Creat
       :title: Monitors
       :alt: Monitors
 
-#. In the monitor trigger, click **Add action** to add a **Send notification** action, and select the PagerDuty channel. Adjust the subject and message template if necessary, then save and enable the monitor.
+#. In the monitor trigger, click **Add action to** add a **Send notification** action, and select the PagerDuty channel. Adjust the subject and message template if necessary, then save and enable the monitor.
 
    .. thumbnail:: /images/wazuh-dashboard/configurations/pagerduty-add-action.png
       :align: center
@@ -505,7 +505,7 @@ This notification channel sends alerts to Jira using a Jira API token. To config
       :title: Monitors
       :alt: Monitors
 
-#. In the monitor trigger, click **Add action** to add a **Send notification** action, and select the Jira channel. Adjust the subject and message template to match your Jira instance, then save and enable the monitor.
+#. In the monitor trigger, click **Add action to** add a **Send notification** action, and select the Jira channel. Adjust the subject and message template to match your Jira instance, then save and enable the monitor.
 
    .. thumbnail:: /images/wazuh-dashboard/configurations/jira-add-action.png
       :align: center
@@ -556,7 +556,7 @@ This notification channel sends alerts to Shuffle via the Shuffle webhook URL. C
       :title: Monitors
       :alt: Monitors
 
-#. In the monitor trigger, click **Add action** to add a **Send notification** action, and select the Shuffle channel. Adjust the subject and message template if necessary, then save and enable the monitor.
+#. In the monitor trigger, click **Add action to** add a **Send notification** action, and select the Shuffle channel. Adjust the subject and message template if necessary, then save and enable the monitor.
 
    .. thumbnail:: /images/wazuh-dashboard/configurations/shuffle-add-action.png
       :align: center
