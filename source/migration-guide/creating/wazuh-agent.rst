@@ -73,6 +73,7 @@ Backing up a Wazuh agent
             > Copy-Item "C:\Program Files (x86)\ossec-agent\local_internal_options.conf" $bkp_folder -Recurse -Force
             > Copy-Item "C:\Program Files (x86)\ossec-agent\*.pem" $bkp_folder -Recurse -Force
             > Copy-Item "C:\Program Files (x86)\ossec-agent\ossec.log" $bkp_folder -Recurse -Force
+            > New-Item -Path "$bkp_folder\logs" -ItemType Directory -Force | Out-Null
             > Copy-Item "C:\Program Files (x86)\ossec-agent\logs\*"  "$bkp_folder\logs\" -Recurse -Force
             > Copy-Item "C:\Program Files (x86)\ossec-agent\rids" "$bkp_folder\rids" -Recurse -Force
 

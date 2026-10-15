@@ -156,14 +156,10 @@ Before deploying an additional Wazuh node, it’s essential to reconfigure exist
 #. Edit the indexer configuration file at ``/etc/wazuh-indexer/opensearch.yml`` to include the new node(s) as follows. Uncomment or add more lines, according to your ``/root/config.yml`` definitions. Create the ``discovery.seed_hosts`` section if it doesn’t exist:
 
    .. code-block:: yaml
-      :emphasize-lines: 1,2,4,5,8,9,11,12
+      :emphasize-lines: 4,5,7,8
 
       network.host: "<EXISTING_WAZUH_INDEXER_IP>"
       node.name: "<EXISTING_WAZUH_INDEXER_NODE_NAME>"
-      cluster.initial_master_nodes:
-      - "<EXISTING_WAZUH_INDEXER_NODE_NAME>"
-      - "<NEW_WAZUH_INDEXER_NODE_NAME>"
-      cluster.name: "wazuh-cluster"
       discovery.seed_hosts:
         - "<EXISTING_WAZUH_INDEXER_IP>"
         - "<NEW_WAZUH_INDEXER_IP>"
@@ -312,15 +308,8 @@ Edit the ``/etc/wazuh-indexer/opensearch.yml`` configuration file and replace th
    Use the same node address set in ``/root/config.yml`` to create the SSL certificates.
 
 -  ``node.name``: Name of the Wazuh indexer node as defined in the ``/root/config.yml`` file. For example, ``node-1``.
--  ``cluster.initial_master_nodes``: List of the names of the master-eligible nodes. These names are defined in the ``/root/config.yml`` file. Uncomment the ``node-2`` line or add more lines, and change the node names according to your ``/root/config.yml`` definitions:
-
-   .. code-block:: yaml
-      :emphasize-lines: 2,3
-
-      cluster.initial_master_nodes:
-      - "<EXISTING_WAZUH_INDEXER_NODE_NAME>"
-      - "<NEW_WAZUH_INDEXER_NODE_NAME>"
-
+-  ``cluster.initial_master_nodes``: Leave this setting commented out on the new node. It is only used to bootstrap a new cluster, and the new node joins the existing one.
+-  ``cluster.name``: Set it to the cluster name of the existing Wazuh indexer nodes, from ``cluster.name`` in their ``/etc/wazuh-indexer/opensearch.yml`` file. Distributed installations made with the Wazuh installation assistant use ``wazuh-indexer-cluster``, and all-in-one installations use ``wazuh-cluster``.
 -  ``discovery.seed_hosts``: List of the addresses of the master-eligible nodes. Each element can be either an IP address or a hostname. Uncomment this setting and set the IP addresses of each master-eligible node:
 
    .. code-block:: yaml
@@ -398,15 +387,9 @@ Run the following commands to start the Wazuh indexer service:
 Cluster initialization
 ^^^^^^^^^^^^^^^^^^^^^^
 
-#. Run the Wazuh indexer ``indexer-security-init.sh`` script on any Wazuh indexer node to load the new certificate information and start the cluster:
+.. warning::
 
-   .. code-block:: console
-
-      # /usr/share/wazuh-indexer/bin/indexer-security-init.sh
-
-   .. note::
-
-      You only have to initialize the cluster once, there is no need to run this command on every node.
+   Don't run ``indexer-security-init.sh`` when you add a node to an existing cluster. The new node loads the security configuration already stored in the cluster when it joins. Running the script replaces that configuration with the files on the node where you run it. On a new node, these files contain the default users and passwords, which breaks the Wazuh dashboard and Filebeat. On any node, it deletes users, roles and role mappings created through the Wazuh dashboard or the Wazuh indexer API.
 
 #. Confirm the configurations work by running the command below on your Wazuh server node:
 
@@ -598,6 +581,12 @@ Perform the steps below on one indexer node only.
 
       # mkdir wazuh-install-files && tar -xf ./wazuh-certificates.tar -C wazuh-install-files
 
+   If the archive is the ``wazuh-install-files.tar`` file created by the Wazuh installation assistant, add ``--strip-components=1`` to the ``tar`` command, because the archive stores its files in a ``wazuh-install-files/`` directory:
+
+   .. code-block:: console
+
+      # mkdir wazuh-install-files && tar -xf ./wazuh-install-files.tar -C wazuh-install-files --strip-components=1
+
 #. Download and run ``./wazuh-certs-tool.sh`` to create the certificates for the new indexer node using the pre-existing root CA keys:
 
    .. code-block:: console
@@ -673,14 +662,10 @@ Before deploying an additional Wazuh node, it’s essential to reconfigure exist
 #. Edit the indexer configuration file at ``/etc/wazuh-indexer/opensearch.yml`` to include the new node(s) as follows. Uncomment or add more lines, according to your ``/root/config.yml`` definitions. Create the ``discovery.seed_hosts`` section if it doesn’t exist:
 
    .. code-block:: yaml
-      :emphasize-lines: 1,2,4,5,8,9,11,12
+      :emphasize-lines: 4,5,7,8
 
       network.host: "<EXISTING_WAZUH_INDEXER_IP>"
       node.name: "<EXISTING_WAZUH_INDEXER_NODE_NAME>"
-      cluster.initial_master_nodes:
-      - "<EXISTING_WAZUH_INDEXER_NODE_NAME>"
-      - "<NEW_WAZUH_INDEXER_NODE_NAME>"
-      cluster.name: "wazuh-cluster"
       discovery.seed_hosts:
         - "<EXISTING_WAZUH_INDEXER_IP>"
         - "<NEW_WAZUH_INDEXER_IP>"
@@ -694,8 +679,8 @@ Before deploying an additional Wazuh node, it’s essential to reconfigure exist
       :emphasize-lines: 2,3
 
       output.elasticsearch.hosts:
-              - <EXISTING_WAZUH_INDEXER_IP>:9200
-              - <NEW_WAZUH_INDEXER_IP>:9200
+        - <EXISTING_WAZUH_INDEXER_IP>:9200
+        - <NEW_WAZUH_INDEXER_IP>:9200
       output.elasticsearch:
         protocol: https
         username: ${username}
@@ -760,6 +745,16 @@ Before deploying an additional Wazuh node, it’s essential to reconfigure exist
             # chmod 500 /etc/wazuh-dashboard/certs
             # chmod 400 /etc/wazuh-dashboard/certs/*
             # chown -R wazuh-dashboard:wazuh-dashboard /etc/wazuh-dashboard/certs
+
+      .. note::
+
+         The certificate file names must match the ones in the component configuration. Check them with the following command:
+
+         .. code-block:: console
+
+            # grep -h "\.pem" /etc/wazuh-indexer/opensearch.yml /etc/filebeat/filebeat.yml /etc/wazuh-dashboard/opensearch_dashboards.yml 2>/dev/null
+
+         If you installed the node with the installation assistant, the files are named after the node (``<NODE_NAME>.pem`` and ``<NODE_NAME>-key.pem``). In that case, skip the two ``mv -n`` commands.
 
 #. Run the following commands on your respective nodes to apply the changes:
 
@@ -913,15 +908,8 @@ Edit the ``/etc/wazuh-indexer/opensearch.yml`` configuration file and replace th
    Use the same node address set in ``/root/config.yml`` to create the SSL certificates.
 
 -  ``node.name``: Name of the Wazuh indexer node as defined in the ``/root/config.yml`` file. For example, ``node-1``.
--  ``cluster.initial_master_nodes``: List of the names of the master-eligible nodes. These names are defined in the ``/root/config.yml`` file. Uncomment the ``node-2`` line or add more lines, and change the node names according to your ``/root/config.yml`` definitions:
-
-   .. code-block:: yaml
-      :emphasize-lines: 2,3
-
-      cluster.initial_master_nodes:
-      - "<EXISTING_WAZUH_INDEXER_NODE_NAME>"
-      - "<NEW_WAZUH_INDEXER_NODE_NAME>"
-
+-  ``cluster.initial_master_nodes``: Leave this setting commented out on the new node. It is only used to bootstrap a new cluster, and the new node joins the existing one.
+-  ``cluster.name``: Set it to the cluster name of the existing Wazuh indexer nodes, from ``cluster.name`` in their ``/etc/wazuh-indexer/opensearch.yml`` file. Distributed installations made with the Wazuh installation assistant use ``wazuh-indexer-cluster``, and all-in-one installations use ``wazuh-cluster``.
 -  ``discovery.seed_hosts``: List of the addresses of the master-eligible nodes. Each element can be either an IP address or a hostname. Uncomment this setting and set the IP addresses of each master-eligible node:
 
    .. code-block:: yaml
@@ -999,15 +987,9 @@ Run the following commands to start the Wazuh indexer service:
 Cluster initialization
 ^^^^^^^^^^^^^^^^^^^^^^
 
-#. Run the Wazuh indexer ``indexer-security-init.sh`` script on any Wazuh indexer node to load the new certificate information and start the cluster:
+.. warning::
 
-   .. code-block:: console
-
-      # /usr/share/wazuh-indexer/bin/indexer-security-init.sh
-
-   .. note::
-
-      You only have to initialize the cluster once, there is no need to run this command on every node.
+   Don't run ``indexer-security-init.sh`` when you add a node to an existing cluster. The new node loads the security configuration already stored in the cluster when it joins. Running the script replaces that configuration with the files on the node where you run it. On a new node, these files contain the default users and passwords, which breaks the Wazuh dashboard and Filebeat. On any node, it deletes users, roles and role mappings created through the Wazuh dashboard or the Wazuh indexer API.
 
 #. Confirm the configurations work by running the command below on your Wazuh server node:
 
