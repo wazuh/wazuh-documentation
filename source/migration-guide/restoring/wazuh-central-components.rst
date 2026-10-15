@@ -159,6 +159,19 @@ Perform the following steps to restore the Wazuh server files on the new server.
       # sudo cp var/ossec/queue/db/* /var/ossec/queue/db/ 
       # chown -R wazuh:wazuh /var/ossec/queue/db/
 
+#. Restore the Wazuh server API configuration and RBAC database. On a multi-node cluster, do this on the master node only:
+
+   .. code-block:: console
+
+      # sudo cp var/ossec/api/configuration/api.yaml /var/ossec/api/configuration/
+      # chown root:wazuh /var/ossec/api/configuration/api.yaml
+      # sudo cp -r var/ossec/api/configuration/security/* /var/ossec/api/configuration/security/
+      # chown wazuh:wazuh /var/ossec/api/configuration/security/*
+
+   .. note::
+
+      The restored RBAC database contains the Wazuh server API users and passwords of your old deployment, including ``wazuh`` and ``wazuh-wui``. Use the old passwords, not the ones in the new ``wazuh-install-files.tar`` file, and restore the ``wazuh.yml`` file on the Wazuh dashboard as described below.
+
 #. Start the Filebeat service:
 
    .. code-block:: console
@@ -183,6 +196,16 @@ Perform the following steps to restore Wazuh reports and custom images on the ne
       # mkdir -p /usr/share/wazuh-dashboard/data/wazuh/downloads/reports/
       # sudo cp -r usr/share/wazuh-dashboard/data/wazuh/downloads/reports/* /usr/share/wazuh-dashboard/data/wazuh/downloads/reports/ 
       # chown -R wazuh-dashboard:wazuh-dashboard /usr/share/wazuh-dashboard/data/wazuh/downloads/
+
+#. Restore the Wazuh dashboard application configuration, which contains the ``wazuh-wui`` password of your old deployment, and restart the Wazuh dashboard:
+
+   .. code-block:: console
+
+      # sudo cp usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml /usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml
+      # chown wazuh-dashboard:wazuh-dashboard /usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml
+      # systemctl restart wazuh-dashboard
+
+   In a distributed deployment, update the ``url`` value of each entry under ``hosts`` in ``wazuh.yml`` with the address of the new Wazuh server before restarting.
 
 #. Navigate to **Dashboard management** > **App Settings** > **Custom branding** from the Wazuh dashboard and upload your custom images.
 
@@ -574,6 +597,19 @@ You need to have a new installation of a Wazuh server. Follow the :doc:`Wazuh se
       # sudo cp var/ossec/queue/db/* /var/ossec/queue/db/ 
       # chown -R wazuh:wazuh /var/ossec/queue/db/
 
+#. Restore the Wazuh server API configuration and RBAC database. On a multi-node cluster, do this on the master node only:
+
+   .. code-block:: console
+
+      # sudo cp var/ossec/api/configuration/api.yaml /var/ossec/api/configuration/
+      # chown root:wazuh /var/ossec/api/configuration/api.yaml
+      # sudo cp -r var/ossec/api/configuration/security/* /var/ossec/api/configuration/security/
+      # chown wazuh:wazuh /var/ossec/api/configuration/security/*
+
+   .. note::
+
+      The restored RBAC database contains the Wazuh server API users and passwords of your old deployment, including ``wazuh`` and ``wazuh-wui``. Use the old passwords, not the ones in the new ``wazuh-install-files.tar`` file, and restore the ``wazuh.yml`` file on the Wazuh dashboard as described below.
+
 #. Start the Filebeat service:
 
    .. code-block:: console
@@ -600,6 +636,16 @@ Perform the following steps to restore Wazuh reports and custom images on the ne
       # mkdir -p /usr/share/wazuh-dashboard/data/wazuh/downloads/reports/
       # sudo cp -r usr/share/wazuh-dashboard/data/wazuh/downloads/reports/* /usr/share/wazuh-dashboard/data/wazuh/downloads/reports/ 
       # chown -R wazuh-dashboard:wazuh-dashboard /usr/share/wazuh-dashboard/data/wazuh/downloads/
+
+#. Restore the Wazuh dashboard application configuration, which contains the ``wazuh-wui`` password of your old deployment, and restart the Wazuh dashboard:
+
+   .. code-block:: console
+
+      # sudo cp usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml /usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml
+      # chown wazuh-dashboard:wazuh-dashboard /usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml
+      # systemctl restart wazuh-dashboard
+
+   In a distributed deployment, update the ``url`` value of each entry under ``hosts`` in ``wazuh.yml`` with the address of the new Wazuh server before restarting.
 
 #. Navigate to **Dashboard management** > **App Settings** > **Custom branding** from the Wazuh dashboard and upload your custom images.
 

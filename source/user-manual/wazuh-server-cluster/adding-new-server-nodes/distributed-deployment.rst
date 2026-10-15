@@ -75,6 +75,12 @@ Perform the steps below on your existing Wazuh server node to generate the certi
 
    Replace ``<CERTIFICATE_ARCHIVE>.tar`` with the name of the compressed certificates generated during the certificate creation step. (for example, ``wazuh-certificates.tar`` or ``wazuh-install-files.tar``).
 
+   If the archive is the ``wazuh-install-files.tar`` file created by the Wazuh installation assistant, add ``--strip-components=1`` to the ``tar`` command, because the archive stores its files in a ``wazuh-install-files/`` directory:
+
+   .. code-block:: console
+
+      # mkdir wazuh-install-files && tar -xf ./wazuh-install-files.tar -C wazuh-install-files --strip-components=1
+
 #. Download and run ``wazuh-certs-tool.sh`` to create the certificates for the new Wazuh server node using the pre-existing root CA keys:
 
    .. code-block:: console
@@ -234,6 +240,16 @@ Before adding a new Wazuh server node, existing components must be adjusted to m
          # chmod 500 /etc/wazuh-dashboard/certs
          # chmod 400 /etc/wazuh-dashboard/certs/*
          # chown -R wazuh-dashboard:wazuh-dashboard /etc/wazuh-dashboard/certs
+
+   .. note::
+
+      The certificate file names must match the ones in the component configuration. Check them with the following command:
+
+      .. code-block:: console
+
+         # grep -h "\.pem" /etc/wazuh-indexer/opensearch.yml /etc/filebeat/filebeat.yml /etc/wazuh-dashboard/opensearch_dashboards.yml 2>/dev/null
+
+      If you installed the node with the installation assistant, the files are named after the node (``<NODE_NAME>.pem`` and ``<NODE_NAME>-key.pem``). In that case, skip the two ``mv -n`` commands.
 
    **Recommended action:** Securely save a copy offline for potential future use and scalability. You can  remove the ``<CERTIFICATE_ARCHIVE>.tar`` file on this node by running the command below to increase security:
 
