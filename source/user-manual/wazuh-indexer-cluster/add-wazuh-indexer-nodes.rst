@@ -138,16 +138,6 @@ Before deploying an additional Wazuh node, it’s essential to reconfigure exist
       chmod 400 /etc/wazuh-dashboard/certs/*
       chown -R wazuh-dashboard:wazuh-dashboard /etc/wazuh-dashboard/certs
 
-   .. note::
-
-      The certificate file names must match the ones in the component configuration. Check them with the following command:
-
-      .. code-block:: console
-
-         # grep -h "\.pem" /etc/wazuh-indexer/opensearch.yml /etc/filebeat/filebeat.yml /etc/wazuh-dashboard/opensearch_dashboards.yml 2>/dev/null
-
-      If you installed the node with the installation assistant, the files are named after the node (``<NODE_NAME>.pem`` and ``<NODE_NAME>-key.pem``). In that case, skip the two ``mv -n`` commands.
-
 #. Deploy the certificates by executing the following command:
 
    .. code-block:: console
@@ -183,8 +173,8 @@ Before deploying an additional Wazuh node, it’s essential to reconfigure exist
       :emphasize-lines: 2,3
 
       output.elasticsearch.hosts:
-        - <EXISTING_WAZUH_INDEXER_IP>:9200
-        - <NEW_WAZUH_INDEXER_IP>:9200
+              - <EXISTING_WAZUH_INDEXER_IP>:9200
+              - <NEW_WAZUH_INDEXER_IP>:9200
       output.elasticsearch:
         protocol: https
         username: ${username}
@@ -319,7 +309,7 @@ Edit the ``/etc/wazuh-indexer/opensearch.yml`` configuration file and replace th
 
 -  ``node.name``: Name of the Wazuh indexer node as defined in the ``/root/config.yml`` file. For example, ``node-1``.
 -  ``cluster.initial_master_nodes``: Leave this setting commented out on the new node. It is only used to bootstrap a new cluster, and the new node joins the existing one.
--  ``cluster.name``: Set it to the cluster name of the existing Wazuh indexer nodes, from ``cluster.name`` in their ``/etc/wazuh-indexer/opensearch.yml`` file. Installations made with the Wazuh installation assistant use ``wazuh-indexer-cluster``.
+-  ``cluster.name``: Set it to the cluster name of the existing Wazuh indexer nodes, from ``cluster.name`` in their ``/etc/wazuh-indexer/opensearch.yml`` file. Distributed installations made with the Wazuh installation assistant use ``wazuh-indexer-cluster``, and all-in-one installations use ``wazuh-cluster``.
 -  ``discovery.seed_hosts``: List of the addresses of the master-eligible nodes. Each element can be either an IP address or a hostname. Uncomment this setting and set the IP addresses of each master-eligible node:
 
    .. code-block:: yaml
@@ -919,7 +909,7 @@ Edit the ``/etc/wazuh-indexer/opensearch.yml`` configuration file and replace th
 
 -  ``node.name``: Name of the Wazuh indexer node as defined in the ``/root/config.yml`` file. For example, ``node-1``.
 -  ``cluster.initial_master_nodes``: Leave this setting commented out on the new node. It is only used to bootstrap a new cluster, and the new node joins the existing one.
--  ``cluster.name``: Set it to the cluster name of the existing Wazuh indexer nodes, from ``cluster.name`` in their ``/etc/wazuh-indexer/opensearch.yml`` file. Installations made with the Wazuh installation assistant use ``wazuh-indexer-cluster``.
+-  ``cluster.name``: Set it to the cluster name of the existing Wazuh indexer nodes, from ``cluster.name`` in their ``/etc/wazuh-indexer/opensearch.yml`` file. Distributed installations made with the Wazuh installation assistant use ``wazuh-indexer-cluster``, and all-in-one installations use ``wazuh-cluster``.
 -  ``discovery.seed_hosts``: List of the addresses of the master-eligible nodes. Each element can be either an IP address or a hostname. Uncomment this setting and set the IP addresses of each master-eligible node:
 
    .. code-block:: yaml

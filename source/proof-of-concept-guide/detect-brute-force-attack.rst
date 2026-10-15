@@ -72,7 +72,7 @@ You can visualize the alert data in the Wazuh dashboard. To do this, go to the *
 
    .. thumbnail:: /images/poc/brute-force-attack-alerts-rhel.png
       :title: Visualize Brute force attack to RHEL system alerts
-      :alt: Wazuh dashboard Threat Hunting events showing SSH brute-force alerts on the RHEL system, including PAM login failures, multiple failed logins and a brute-force attempt with a non-existent user.
+      :alt: Wazuh dashboard Threat Hunting events showing SSH brute-force alerts on the RHEL system: multiple failed logins and a brute-force attempt with a non-existent user.
       :align: center
       :width: 80%
 
