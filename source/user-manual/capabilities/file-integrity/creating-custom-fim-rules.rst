@@ -104,14 +104,14 @@ Use case description
 Wazuh dashboard
 ~~~~~~~~~~~~~~~~~
 
-This section describes how to create custom rules using the Security Analytics interface on the Wazuh dashboard.
+This section describes how to create custom rules in **Ruleset management** on the Wazuh dashboard.
 
 Create custom integration
 """"""""""""""""""""""""""""
 
-An integration is a logical grouping of decoders, KVDBs, and rules that belong to a common log source or product. Perform the following steps on the Wazuh dashboard using the Security Analytics section.
+An integration is a logical grouping of decoders, KVDBs, and rules that belong to a common log source or product. Perform the following steps on the Wazuh dashboard in **Ruleset management**.
 
-#. Go to **Security Analytics** → **Overview** → **Integrations** → **Actions** → **Create**. Make sure the space selector reads Draft.
+#. Go to **Ruleset management** → **Overview** → **Integrations** → **Actions** → **Create**. Make sure the space selector reads Draft.
 
 #. In the form, enter the following values that we use in this example. Make sure the integration is **Enabled**, then click **Create integration**:
 
@@ -130,7 +130,7 @@ Create a custom rule
 
 Wazuh rules define the detection logic for identifying relevant security activity in normalized events. They describe what should be detected by specifying conditions on event fields. Make sure the space selector reads **Draft** and then follow these steps to create a custom rule.
 
-#. Go to **Security Analytics** → **Detection** → **Rules** → **Create**.
+#. Go to **Ruleset management** → **Detection** → **Rules** → **Create**.
 
 #. Select **YAML Editor**, choose the integration ``wazuh-fim-custom``, and paste the rule below:
 
@@ -242,7 +242,7 @@ Promote the rule from the draft to the test space
 
 In the draft space, you create and refine your integrations, decoders, and rules. Promoting this rule to the test space allows you to validate it before introducing it to production. Make sure the space selector reads **Draft**, then follow these steps to promote the content.
 
-#. Go to **Security Analytics** → **Overview**, and click **Actions** → **Promote**.
+#. Go to **Ruleset management** → **Overview**, and click **Actions** → **Promote**.
 
    .. thumbnail:: /images/manual/fim/promote-draft.png
      :title: Promote draft
@@ -263,7 +263,7 @@ Promote the rule from test to custom
 
 Promoting your rule makes it available for use in production environments, where the Wazuh data analysis engine can process and analyze incoming events. Make sure the space selector reads **Test**, then follow these steps to promote the rule.
 
-#. Go to **Security Analytics → Overview**.
+#. Go to **Ruleset management → Overview**.
 
 #. Click **Actions** → **Promote**, type the confirmation message, and click **Promote**.
 
@@ -286,7 +286,7 @@ Create a detector
 
 A detector is the scheduled job that executes your rule. It scans indexed events from monitored endpoints at a defined interval, applies the selected rules, and generates findings when matches occur. Follow these steps to create a detector.
 
-#. Go to **Security Analytics** → **Detection** → **Detectors** → **Create detector**.
+#. Go to **Ruleset management** → **Detection** → **Detectors** → **Create detector**.
 
    .. thumbnail:: /images/manual/fim/detector-list.png
      :title: Detector list
