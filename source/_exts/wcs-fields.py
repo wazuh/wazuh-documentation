@@ -23,46 +23,40 @@ CODE_COLUMNS = COLUMNS[:6]
 
 REPO = 'wazuh/wazuh-indexer-plugins'
 FILE = '/wcs/stateless/events/main/docs/fields.csv'
-STAGES = {'alpha': 0, 'beta': 1, 'rc': 2}
 
 
 def cache_path(app):
     return os.path.join(app.doctreedir, 'wcs-fields.csv')
 
 
-def latest_tag(release):
-    ''' Returns the newest published tag of the release, such as v5.0.0, or the
-        newest alpha, beta or rc tag of it while the release has no final tag yet. '''
+def tag_exists(tag):
     result = subprocess.run(
-        ['git', 'ls-remote', '--tags', '--refs', 'https://github.com/%s' % REPO, 'v%s*' % release],
+        ['git', 'ls-remote', '--tags', '--refs', 'https://github.com/%s' % REPO, 'refs/tags/%s' % tag],
         capture_output=True, text=True, timeout=60, check=True)
-    pattern = re.compile(r'refs/tags/(v%s(?:-(alpha|beta|rc)(\d+))?)$' % re.escape(release))
-    found = []
-    for line in result.stdout.splitlines():
-        match = pattern.search(line)
-        if match:
-            tag, stage, number = match.groups()
-            found.append(((1, 0, 0) if stage is None else (0, STAGES[stage], int(number)), tag))
-    return max(found)[1] if found else None
+    return bool(result.stdout.strip())
 
 
 def resolve_ref(app):
     ''' The ref the WCS page reads: the wcs_fields_ref setting when set, otherwise
-        the newest published tag of the release, otherwise the release branch. '''
+        the tag of the version the documentation declares (release plus the Wazuh
+        indexer revision, such as v5.0.0-rc2, or v5.0.0 for a final release),
+        otherwise the release branch while that tag doesn't exist yet. '''
     if app.config.wcs_fields_ref:
         return app.config.wcs_fields_ref
     release = app.config.release
+    revision = app.config.custom_replacements.get('|WAZUH_INDEXER_CURRENT_REV|', '')
+    stage = revision if re.fullmatch(r'(alpha|beta|rc)\d+', revision) else ''
+    tag = 'v%s%s' % (release, '-' + stage if stage else '')
     try:
-        tag = latest_tag(release)
+        if tag_exists(tag):
+            return tag
     except (OSError, subprocess.SubprocessError) as error:
-        logger.warning('Could not list the %s tags to find the WCS version (%s); using the %s branch',
-                       REPO, error, release)
+        logger.warning('Could not check the %s tags for %s (%s); using the %s branch',
+                       REPO, tag, error, release)
         return release
-    if tag is None:
-        logger.info('No %s tag for %s yet; reading the WCS field reference from the %s branch',
-                    REPO, release, release)
-        return release
-    return tag
+    logger.info('No %s tag %s yet; reading the WCS field reference from the %s branch',
+                REPO, tag, release)
+    return release
 
 
 def download(app):
