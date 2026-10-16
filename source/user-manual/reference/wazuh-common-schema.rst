@@ -16,7 +16,7 @@ WCS extends ECS with field sets specific to Wazuh security monitoring:
 -  ``check`` and ``policy``: Security Configuration Assessment (SCA) check results, including the condition, result, rationale, and remediation, and the policies that group them.
 -  ``compliance``: The compliance frameworks an event relates to, such as PCI DSS, HIPAA, GDPR, NIST 800-53, ISO 27001, and MITRE ATT&CK. SCA checks use the same structure under ``check.compliance``.
 -  ``host``, ``interface``, ``network``, and ``observer`` extensions: Hardware inventory, network interface details, and network traffic counters.
--  Additional fields in ECS field sets: ``agent.groups``, ``event.changed_fields``, ``event.collector``, ``file.diff``, ``vulnerability.scanner.reference``, ``process.state``, and ``process.previous.*``, ``service.previous.state``, and ``package.previous.installed``. These record changes in inventory and file integrity monitoring events and add context to vulnerabilities.
+-  Additional fields in ECS field sets: ``agent.groups``, ``event.changed_fields``, ``event.collector``, ``file.diff``, ``vulnerability.scanner.reference``, ``process.state``, ``process.previous.*``, ``service.previous.state``, and ``package.previous.installed``. These record changes in inventory and file integrity monitoring events and add context to vulnerabilities.
 
 The Wazuh indexer doesn't add fields that aren't in the schema to the index mappings, so you can't search on them. It still stores them in the original event (``_source``).
 
