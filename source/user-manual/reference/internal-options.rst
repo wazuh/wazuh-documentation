@@ -257,7 +257,7 @@ The ``remoted.*`` internal options configure the Wazuh manager Remoted module.
 Authd
 ^^^^^^
 
-The ``authd.*`` and ``auth.*`` internal options configure the Wazuh enrollment service.
+The ``authd.*`` internal options configure the Wazuh enrollment service.
 
 +----------------------------------------------------+------------------------------------------------------------------------------------------------+---------------+--------------------------------------+
 | Setting                                            | Description                                                                                    | Default value | Allowed values                       |
