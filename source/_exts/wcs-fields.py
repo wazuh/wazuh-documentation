@@ -1,5 +1,7 @@
 import csv
 import os
+import re
+import subprocess
 import time
 from urllib.request import urlopen
 
@@ -19,22 +21,67 @@ WIDTHS = [25, 9, 9, 9, 8, 15, 25]
 CODE_COLUMNS = COLUMNS[:6]
 
 
+REPO = 'wazuh/wazuh-indexer-plugins'
+FILE = '/wcs/stateless/events/main/docs/fields.csv'
+STAGES = {'alpha': 0, 'beta': 1, 'rc': 2}
+
+
 def cache_path(app):
     return os.path.join(app.doctreedir, 'wcs-fields.csv')
+
+
+def latest_tag(release):
+    ''' Returns the newest published tag of the release, such as v5.0.0, or the
+        newest alpha, beta or rc tag of it while the release has no final tag yet. '''
+    result = subprocess.run(
+        ['git', 'ls-remote', '--tags', '--refs', 'https://github.com/%s' % REPO, 'v%s*' % release],
+        capture_output=True, text=True, timeout=60, check=True)
+    pattern = re.compile(r'refs/tags/(v%s(?:-(alpha|beta|rc)(\d+))?)$' % re.escape(release))
+    found = []
+    for line in result.stdout.splitlines():
+        match = pattern.search(line)
+        if match:
+            tag, stage, number = match.groups()
+            found.append(((1, 0, 0) if stage is None else (0, STAGES[stage], int(number)), tag))
+    return max(found)[1] if found else None
+
+
+def resolve_ref(app):
+    ''' The ref the WCS page reads: the wcs_fields_ref setting when set, otherwise
+        the newest published tag of the release, otherwise the release branch. '''
+    if app.config.wcs_fields_ref:
+        return app.config.wcs_fields_ref
+    release = app.config.release
+    try:
+        tag = latest_tag(release)
+    except (OSError, subprocess.SubprocessError) as error:
+        logger.warning('Could not list the %s tags to find the WCS version (%s); using the %s branch',
+                       REPO, error, release)
+        return release
+    if tag is None:
+        logger.info('No %s tag for %s yet; reading the WCS field reference from the %s branch',
+                    REPO, release, release)
+        return release
+    return tag
 
 
 def download(app):
     ''' Runs once per build. The cached file is rewritten only when its content
         changes, so an incremental build re-reads the page only after a real change. '''
-    url = app.config.wcs_fields_url
+    ref = resolve_ref(app)
+    url = 'https://raw.githubusercontent.com/%s/%s%s' % (REPO, ref, FILE)
+    app.config.custom_replacements['|WCS_FIELDS_PAGE_URL|'] = 'https://github.com/%s/blob/%s%s' % (REPO, ref, FILE)
     path = cache_path(app)
-    # A separate stamp file tracks when the download last ran: touching the CSV
-    # itself would make Sphinx read the page again even though nothing changed.
+    # A separate stamp file records when the download last ran and for which ref:
+    # touching the CSV itself would make Sphinx read the page again for nothing.
     stamp = path + '.stamp'
     try:
-        if time.time() - os.path.getmtime(stamp) < MAX_AGE and os.path.exists(path):
+        with open(stamp) as stamp_file:
+            stamped_time, stamped_ref = stamp_file.read().split(' ', 1)
+        if (time.time() - float(stamped_time) < MAX_AGE and stamped_ref == ref
+                and os.path.exists(path)):
             return
-    except OSError:
+    except (OSError, ValueError):
         pass
     try:
         with urlopen(url, timeout=60) as response:
@@ -54,7 +101,7 @@ def download(app):
         with open(path, 'wb') as csv_file:
             csv_file.write(data)
     with open(stamp, 'w') as stamp_file:
-        stamp_file.write(str(time.time()))
+        stamp_file.write('%s %s' % (time.time(), ref))
 
 
 def entry(content):
@@ -121,7 +168,7 @@ class WCSFieldTables(SphinxDirective):
 
 
 def setup(app):
-    app.add_config_value('wcs_fields_url', '', 'env')
+    app.add_config_value('wcs_fields_ref', '', 'env')
     app.add_directive('wcs-field-tables', WCSFieldTables)
     app.connect('builder-inited', download)
     return {'parallel_read_safe': True, 'parallel_write_safe': True}
