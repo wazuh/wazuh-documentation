@@ -22,6 +22,8 @@ custom_replacements = {
     "|DEB_MANAGER_URL|" : "https://packages.wazuh.com/5.x/apt/pool/main/w/wazuh-manager/wazuh-manager",
     #
     "|CTI_URL|" : "https://cti.wazuh.com/api/v1/catalog/contexts/vd_1.0.0/consumers/vd_4.8.0",
+    # Set at build time by the wcs-fields extension (source/_exts/wcs-fields.py)
+    "|WCS_FIELDS_PAGE_URL|" : "",
     #
     # === Environment
     "|PYTHON_CLOUD_CONTAINERS_MIN|": "3.8",
