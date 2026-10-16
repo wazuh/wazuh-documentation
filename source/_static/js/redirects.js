@@ -89,6 +89,7 @@ newUrls['5.0'] = [
   '/compliance/hipaa/164.312.c.2.html',
   '/compliance/hipaa/164.312.d.html',
   '/user-manual/reference/ossec-conf/agent.html',
+  '/user-manual/reference/wazuh-common-schema.html',
   '/release-notes/release-5-0-0.html',
   '/release-notes/index-5x.html',
   '/user-manual/agent/agent-management/remove-agents.html',

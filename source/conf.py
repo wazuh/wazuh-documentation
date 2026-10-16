@@ -61,6 +61,7 @@ extensions = [
     'sphinx.ext.extlinks', # Sphinx built-in extension
     'sphinx_tabs.tabs',
     'wazuh-doc-images', # Custom extension
+    'wcs-fields', # Custom extension
     'sphinx_reredirects',
     'sphinx_markdown_builder'
 ]
@@ -78,6 +79,9 @@ source_encoding = 'utf-8'
 
 # The master toctree document.
 master_doc = 'index'
+
+# WCS field reference downloaded at build time for the Wazuh Common Schema page
+wcs_fields_url = 'https://raw.githubusercontent.com/wazuh/wazuh-indexer-plugins/'+api_tag+'/wcs/stateless/events/main/docs/fields.csv'
 
 extlinks = {
     'api-ref': ('https://DOMAIN/user-manual/api/reference.html#%s', ''),
