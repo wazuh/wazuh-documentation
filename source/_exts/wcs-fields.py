@@ -19,12 +19,21 @@ WIDTHS = [25, 9, 9, 9, 8, 15, 25]
 CODE_COLUMNS = COLUMNS[:6]
 
 
+def cache_path(app):
+    return os.path.join(app.doctreedir, 'wcs-fields.csv')
+
+
 def download(app):
+    ''' Runs once per build. The cached file is rewritten only when its content
+        changes, so an incremental build re-reads the page only after a real change. '''
     url = app.config.wcs_fields_url
-    path = os.path.join(app.doctreedir, 'wcs-fields.csv')
+    path = cache_path(app)
+    # A separate stamp file tracks when the download last ran: touching the CSV
+    # itself would make Sphinx read the page again even though nothing changed.
+    stamp = path + '.stamp'
     try:
-        if time.time() - os.path.getmtime(path) < MAX_AGE:
-            return path
+        if time.time() - os.path.getmtime(stamp) < MAX_AGE and os.path.exists(path):
+            return
     except OSError:
         pass
     try:
@@ -33,17 +42,25 @@ def download(app):
     except Exception as error:
         if os.path.exists(path):
             logger.warning('Could not refresh %s (%s); using the cached copy', url, error)
-            return path
+            return
         raise ExtensionError('Could not download the WCS field reference from %s: %s' % (url, error))
     os.makedirs(os.path.dirname(path), exist_ok=True)
-    with open(path, 'wb') as csv_file:
-        csv_file.write(data)
-    return path
+    try:
+        with open(path, 'rb') as csv_file:
+            unchanged = csv_file.read() == data
+    except OSError:
+        unchanged = False
+    if not unchanged:
+        with open(path, 'wb') as csv_file:
+            csv_file.write(data)
+    with open(stamp, 'w') as stamp_file:
+        stamp_file.write(str(time.time()))
 
 
 def entry(content):
     cell = nodes.entry()
-    cell += nodes.paragraph('', '', *content)
+    if content:
+        cell += nodes.paragraph('', '', *content)
     return cell
 
 
@@ -88,7 +105,7 @@ class WCSFieldTables(SphinxDirective):
         return section
 
     def run(self):
-        path = download(self.env.app)
+        path = cache_path(self.env.app)
         self.env.note_dependency(path)
         with open(path, newline='', encoding='utf-8') as csv_file:
             rows = list(csv.DictReader(csv_file))
@@ -116,4 +133,5 @@ def setup(app):
     app.add_config_value('wcs_fields_url', '', 'env')
     app.add_config_value('wcs_fields_page_url', '', 'env')
     app.add_directive('wcs-field-tables', WCSFieldTables)
+    app.connect('builder-inited', download)
     return {'parallel_read_safe': True, 'parallel_write_safe': True}
