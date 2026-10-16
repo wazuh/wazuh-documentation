@@ -1,158 +1,187 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The pre-built Wazuh Amazon Machine Image includes all Wazuh components ready to use. Learn more about it in this section of the documentation.
+   :description: The pre-built Wazuh Amazon Machine Image includes all Wazuh components ready to use. Learn more about it in this section of the documentation.
 
 Amazon Machine Images (AMI)
 ===========================
 
-Wazuh provides a pre-built Amazon Machine Image (AMI). An AMI is a ready-to-use template for creating virtual computing environments in Amazon Elastic Compute Cloud (Amazon EC2). The latest Wazuh AMI includes Amazon Linux 2023 and the Wazuh central components.
+Wazuh provides a pre-built Amazon Machine Image (AMI). An AMI is a ready-to-use template for creating virtual computing environments in Amazon Elastic Compute Cloud (Amazon EC2). The Wazuh |WAZUH_CURRENT_AMI| AMI runs on Amazon Linux 2023 and includes the following components:
 
-- Wazuh manager |WAZUH_CURRENT_AMI|
-- Filebeat-OSS |FILEBEAT_LATEST_AMI|
-- Wazuh indexer |WAZUH_CURRENT_AMI|
-- Wazuh dashboard |WAZUH_CURRENT_AMI|
+-  Wazuh manager |WAZUH_CURRENT_AMI|
+-  Wazuh indexer |WAZUH_CURRENT_AMI|
+-  Wazuh dashboard |WAZUH_CURRENT_AMI|
+-  Wazuh agent |WAZUH_CURRENT_AMI|
+
+The AMI uses an all-in-one configuration, so all Wazuh central components run on one instance. Monitoring starts after first-boot configuration finishes. The pre-installed Wazuh agent enrolls with the local Wazuh manager on first boot and monitors the instance itself. Starting with Wazuh 5.0, the Wazuh agent uses a separate package. The Wazuh manager package no longer includes the agent. The AMI excludes Filebeat.
 
 Packages list
 -------------
 
 .. |AMI_PRODUCT_PAGE| replace:: `Wazuh All-In-One Deployment <https://aws.amazon.com/marketplace/pp/prodview-eju4flv5eqmgq>`__
 
-.. |var_WAZUH_CURRENT_AMI| replace:: |WAZUH_CURRENT_AMI|
+.. |AMI_RELEASE| replace:: ``|WAZUH_CURRENT_AMI|``
 
-+---------------------+--------------+-------------+-------------------------+---------------------+
-| Distribution        | Architecture | VM Format   | Latest version          | Product page        |
-+=====================+==============+=============+=========================+=====================+
-| Amazon Linux 2023   | 64-bit       | AWS AMI     | |var_WAZUH_CURRENT_AMI| | |AMI_PRODUCT_PAGE|  |
-+---------------------+--------------+-------------+-------------------------+---------------------+
++-------------------+-------------------------+-----------+---------------+--------------------+
+| Distribution      | Architecture            | VM format | Wazuh release | Product page       |
++===================+=========================+===========+===============+====================+
+| Amazon Linux 2023 | ``x86_64``, ``aarch64`` | AWS AMI   | |AMI_RELEASE| | |AMI_PRODUCT_PAGE| |
++-------------------+-------------------------+-----------+---------------+--------------------+
 
 Deployment alternatives
 -----------------------
 
-You can deploy a Wazuh instance in two ways. Launch the `Wazuh All-In-One Deployment AMI <https://aws.amazon.com/marketplace/pp/B09J56274H>`_ directly from the AWS Marketplace or configure and deploy an instance using the AWS Management Console.
+You can deploy the Wazuh AMI in one of the following ways:
 
-- `Launch an instance from the AWS Marketplace`_
-- `Deploy an instance using the AWS Management Console`_
+-  Launch an instance from the AWS Marketplace.
+-  Deploy an instance using the AWS Management Console.
 
 .. note::
-  Our `Wazuh Consulting Service <https://aws.amazon.com/marketplace/pp/prodview-ve4mgmhukgmzi>`_ is also available in the AWS Marketplace. Check the Professional Service packages that Wazuh has to offer.
 
+   The `Wazuh Consulting Service <https://aws.amazon.com/marketplace/pp/prodview-ve4mgmhukgmzi>`__ is also available in the AWS Marketplace. It offers professional service packages for your Wazuh deployment.
 
 Launch an instance from the AWS Marketplace
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Go to `Wazuh All-In-One Deployment <https://aws.amazon.com/marketplace/pp/prodview-eju4flv5eqmgq?ref=hmpg_recommendations_widget>`_ in the AWS Marketplace, then click **View purchase options**.
+Launch the pre-built Wazuh AMI to deploy the Wazuh components on an Amazon EC2 instance.
 
-#. Review the information and the terms for the software. Click **Subscribe** to confirm subscribing to our product. You will receive an email notification that your offer has been accepted.
+#. Open `Wazuh All-In-One Deployment <https://aws.amazon.com/marketplace/pp/prodview-eju4flv5eqmgq>`__ in the AWS Marketplace and click **View purchase options**.
 
-#. Click **Launch your software** to continue your setup.
+#. Review the information and the terms for the software, then click **Subscribe**.
 
-#. Select the service **Amazon EC2**, **Launch from EC2 console**, and a **Region**.
+   You will receive an email confirming the subscription.
 
-#. Click **Launch from EC2** to take you to the AWS Management Console.
+#. Click **Launch your software**.
 
-#. Review your configuration, ensuring all settings are correct, before launching the software. Adapt the default configuration to your needs.
+#. Select **Amazon EC2** as the service, **Launch from EC2 console** as the launch method, and a Region.
 
-    #. When selecting the **EC2 Instance Type**, we recommend ``c5a.xlarge`` because it offers an ideal balance of high compute performance and cost-efficiency.
+#. Click **Launch from EC2** to open the launch page in the AWS Management Console.
 
-    #. To guarantee the correct operation, the **Security Group** must have the appropriate :ref:`settings for your Wazuh instance <default_ports>`. You can create a new security group by choosing **Create security group**. This new group will have the appropriate settings by default.
+#. Review the instance type, key pair, security group, and root volume before you launch the instance. Select a key pair for SSH access and allocate at least 100 GiB of ``gp3`` storage.
 
-#. Click **Launch** to generate the instance.
+   .. note::
 
-Once your instance is successfully launched and a few minutes have elapsed, you can :ref:`access the Wazuh dashboard <ami_wazuh_ui>`.
+      Select ``c5a.2xlarge`` for x86_64 or ``c6g.2xlarge`` for aarch64 as the instance type. Wazuh 5.0 needs more resources than earlier versions, and smaller instance types can stop responding.
 
+   .. warning::
+
+      The security group must allow the :ref:`ports that the Wazuh AMI uses <default_ports>`. Select **Create security group** to create a group with the seller's default settings, then limit each source to trusted addresses.
+
+#. Click **Launch instance**.
+
+The instance needs about five minutes to finish its first-boot configuration. After first-boot configuration finishes, follow :ref:`Access the Wazuh dashboard <ami_wazuh_ui>`.
 
 Deploy an instance using the AWS Management Console
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Select **EC2** from your `AWS Management Console <https://aws.amazon.com/console/>`_ dashboard.
+Use the Amazon EC2 launch wizard to configure an instance from the pre-built Wazuh AMI.
+
+#. Sign in to the AWS Management Console and open the **EC2** console.
 
 #. Click **Launch instance**.
 
-#. Click on **Browse more AMIs**.
+#. Click **Browse more AMIs** in **Application and OS Images**.
 
-#. Search **Wazuh All-In-One Deployment** by Wazuh Inc under the **AWS Marketplace AMIs** tab, and click **Select**. This brings up a description of the Wazuh All-In-One Deployment with the option to either **Subscribe on instance launch** or **Subscribe now**.
+#. Search for **Wazuh All-In-One Deployment** by Wazuh Inc. in the **AWS Marketplace AMIs** tab and click **Select**.
 
-#. Select the instance type that best fits your needs. We recommend ``c5a.xlarge``.
+   Click **Subscribe on instance launch** or **Subscribe now** to subscribe to the product.
 
-   You can use either of these three configuration alternatives available regarding the key pair settings:
+#. Select ``c5a.2xlarge`` for x86_64 or ``c6g.2xlarge`` for aarch64 in **Instance type**.
 
-    - **Choose an existing key pair**
+#. Select your key pair in **Key pair (login)**, or click **Create new key pair** to create one.
 
-    - **Create a new key pair**
+   .. warning::
 
-    - **Proceed without a key pair** (Not recommended)
+      Select a key pair before you launch the instance. You need its private key file to connect with SSH and retrieve the passwords.
 
-    You need to choose an existing key pair or create a new one to access the instance with SSH.
+#. Configure the security group in **Network settings**.
 
-#. When selecting the **Security Group**, ensure it has the appropriate :ref:`settings for your Wazuh instance <default_ports>` to guarantee correct operation. You can create a new security group by choosing **Create security group**. This new group will have the appropriate settings by default. Check that the ports and protocols are the :ref:`ports and protocols <default_ports>` for Wazuh. Check the security measures for your instance. This will establish the Security Group (SG).
+   Select **Create security group** to create a group with the seller's default settings. Check that it allows the :ref:`ports that the Wazuh AMI uses <default_ports>`, and limit each source to trusted addresses.
 
-#. Under the **Size (GiB)** column, set your instance's storage capacity, then click **Next: Add Tags**. We recommend 100 GiB gp3 or more.
+#. Set the root volume to 100 GiB or more and the volume type to **gp3** in **Configure storage**.
 
-#. Review the instance configuration and click **Launch instance**.
+#. Review the configuration in **Summary** and click **Launch instance**.
 
-After a few minutes, the instance will be ready. You can :ref:`access the Wazuh dashboard <ami_wazuh_ui>`.
-
+The instance needs about five minutes to finish its first-boot configuration. After first-boot configuration finishes, follow :ref:`Access the Wazuh dashboard <ami_wazuh_ui>`.
 
 Configuration files
 -------------------
 
-All components included in this AMI are configured to work out-of-the-box without the need to modify any settings. However, all components can be fully customized. These are the configuration file locations:
+The Wazuh AMI includes preconfigured Wazuh components. You can customize each component in the same way as in a standard Wazuh installation. The following table lists the configuration file for each component.
 
-- Wazuh manager: ``/var/ossec/etc/ossec.conf``
-- Wazuh indexer: ``/etc/wazuh-indexer/opensearch.yml``
-- Filebeat-OSS: ``/etc/filebeat/filebeat.yml``
-- Wazuh dashboard:
++-----------------+----------------------------------------------------+
+| Component       | Configuration file                                 |
++=================+====================================================+
+| Wazuh manager   | ``/var/wazuh-manager/etc/wazuh-manager.conf``      |
++-----------------+----------------------------------------------------+
+| Wazuh indexer   | ``/etc/wazuh-indexer/opensearch.yml``              |
++-----------------+----------------------------------------------------+
+| Wazuh dashboard | ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` |
++-----------------+----------------------------------------------------+
+| Wazuh agent     | ``/var/ossec/etc/ossec.conf``                      |
++-----------------+----------------------------------------------------+
 
-    - ``/etc/wazuh-dashboard/opensearch_dashboards.yml``
-    - ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml``
+.. note::
 
-To learn more about configuring Wazuh, see the :doc:`User manual </user-manual/index>`.
+   The ``/var/ossec/etc/ossec.conf`` file configures the pre-installed Wazuh agent, not the Wazuh manager.
+
+To learn more about configuring each component, see the :doc:`User manual </user-manual/index>`.
 
 .. _ami_wazuh_ui:
 
 Access the Wazuh dashboard
 --------------------------
 
-When the instance is launched, the user passwords are automatically changed to the instance ID with the first letter capitalized. For example: ``I-07f25f6afe4789342``. This ensures that only the creator has access to the interface. This process can take an average of five minutes, depending on the type of instance. During this time, SSH access and Wazuh dashboard access are disabled.
-
-Once the instance runs and the process to initialize passwords is complete, you can access the Wazuh dashboard with your credentials.
-
-- URL: ``https://<YOUR_INSTANCE_IP>``
-- Username: ``admin``
-- Password: ``<YOUR_INSTANCE_ID>``
-
-.. note::
-   :class: not-long
-
-   The password is the instance ID with the first letter capitalized. For example, if the instance ID is: ``i-07f25f6afe4789342``, the default password will be ``I-07f25f6afe4789342``.
+The Wazuh AMI has no default passwords. Each instance generates passwords, certificates, and a root certificate authority (CA) during first-boot configuration. It stores the passwords for every Wazuh account in the ``/etc/wazuh/credentials.env`` file. Only the ``root`` user can read this file. First-boot configuration takes about five minutes, depending on the instance type.
 
 .. warning::
 
-   The passwords for the Wazuh server API users ``wazuh`` and ``wazuh-wui`` are the same as those for the ``admin`` user. We highly recommend changing the default passwords on the first SSH access. To perform this action, refer to the :doc:`/user-manual/user-administration/password-management` section.
+   SSH access and Wazuh dashboard access are unavailable until first-boot configuration finishes.
+
+Read the ``admin`` password from the instance, then log in to the Wazuh dashboard. You need the private key file of the key pair you selected at launch.
+
+#. Get the public IP address of the instance from the **Details** tab on the **Instances** page of the EC2 console.
+
+   Use the private IP address instead if you connect from inside a VPC without internet access.
+
+#. Restrict the permissions of your private key file if you use Linux or macOS:
+
+   .. code-block:: console
+
+      $ chmod 400 "<KEY_PAIR_FILE>"
+
+#. Connect to the instance with SSH as ``wazuh-user``:
+
+   .. code-block:: console
+
+      $ ssh -i "<KEY_PAIR_FILE>" wazuh-user@<YOUR_INSTANCE_IP>
+
+   Replace ``<KEY_PAIR_FILE>`` with the path to your private key file and ``<YOUR_INSTANCE_IP>`` with the IP address from step 1.
+
+#. Run the following command to read the ``admin`` password:
+
+   .. code-block:: console
+
+      $ sudo grep '^WAZUH_INDEXER_ADMIN_PASSWORD=' /etc/wazuh/credentials.env | cut -d= -f2-
+
+#. Open ``https://<YOUR_INSTANCE_IP>`` in a web browser and accept the certificate warning. Your browser shows the warning because the instance uses certificates from its own certificate authority.
+
+#. Log in with the username ``admin`` and the password from step 4.
 
 Security considerations about SSH
 ---------------------------------
 
-- The ``root`` user cannot be identified by SSH, and the instance can only be accessed through the user: ``wazuh-user``.
-- The instance can only be accessed through a key pair, which is provided to the user with the key pair.
-- You must download the key generated or stored in AWS to access the instance with a key pair. Then, run the following command to connect with the instance.
+-  The ``root`` user cannot be identified by SSH, and the instance can only be accessed through the user: ``wazuh-user``.
+-  The instance can only be accessed through a key pair, which is provided to the user with the key pair.
+-  You must download the key generated or stored in AWS to access the instance with a key pair. Then, run the following command to connect to the instance.
 
-  .. code-block:: console
+   .. code-block:: console
 
       # ssh -i "<KEY_PAIR_NAME>" wazuh-user@<YOUR_INSTANCE_IP>
 
-- Access during the initial password change is disabled to prevent potential problems. This process might take a few minutes to complete. Any access attempt before completion shows: ``wazuh-user@<INSTANCE_IP>: Permission denied (publickey,gssapi-keyex,gssapi-with-mic)``.
-
+-  Access during the initial password change is disabled to prevent potential problems. This process might take a few minutes to complete. Any access attempt before completion shows: ``wazuh-user@<INSTANCE_IP>: Permission denied (publickey,gssapi-keyex,gssapi-with-mic)``.
 
 Next steps
 ----------
 
-The Wazuh AMI is now ready and you can proceed with :doc:`deploying the Wazuh agents </installation-guide/wazuh-agent/index>` on the systems to be monitored.
-
-Upgrading the AMI
------------------
-
-Follow the instructions on how to upgrade the Wazuh central components.
-
-  - :doc:`Upgrading the Wazuh central components </upgrade-guide/upgrading-central-components>`
+The Wazuh AMI is now ready, and you can proceed with :doc:`deploying the Wazuh agents </installation-guide/wazuh-agent/index>` on the systems to be monitored.

@@ -18,9 +18,7 @@ All the alternatives include instructions on how to install the :doc:`Wazuh cent
    <h3>Ready-to-use machines</h3>
 
 -  :doc:`virtual-machine/virtual-machine`: Wazuh provides a pre-built virtual machine image (OVA) that you can directly import using VirtualBox or other OVA compatible virtualization systems.
-
-..
-   -  :doc:`amazon-machine-images/amazon-machine-images`: This is a pre-built Amazon Machine Image (AMI) you can directly launch on an AWS cloud instance.
+-  :doc:`amazon-machine-images/amazon-machine-images`: This is a pre-built Amazon Machine Image (AMI) you can directly launch on an AWS cloud instance.
 
 .. raw:: html
 
@@ -117,11 +115,11 @@ These alternatives guide you to install the Wazuh central components along with 
    :maxdepth: 1
 
    virtual-machine/virtual-machine
+   amazon-machine-images/amazon-machine-images
    docker/index
    deploying-with-kubernetes/index
    offline-installation/index
    deploying-with-ansible/index
 ..
-   amazon-machine-images/amazon-machine-images
    wazuh-from-sources/index
    deploying-with-puppet/index
