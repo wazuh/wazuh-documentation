@@ -582,7 +582,6 @@ removedUrls['5.0'] = [
   '/compliance/nist/threat-intelligence.html',
   '/compliance/nist/visualization-and-dashboard.html',
   '/compliance/nist/vulnerability-detection.html',
-  '/deployment-options/amazon-machine-images/amazon-machine-images.html',
   '/deployment-options/deploying-with-puppet/index.html',
   '/deployment-options/deploying-with-puppet/setup-puppet/index.html',
   '/deployment-options/deploying-with-puppet/setup-puppet/install-puppet-agent.html',
