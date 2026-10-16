@@ -7,6 +7,15 @@ All notable changes to this project will be documented in this file.
 
 - Added the `analysisd.rule_tree_memory_warning` and `analysisd.rule_tree_memory_limit` internal options and a section on the rule tree memory thresholds to the *Internal configuration* reference documentation. ([#10397](https://github.com/wazuh/wazuh-documentation/pull/10397))
 
+### Changed
+
+- Removed the `auth.timeout_seconds` and `auth.timeout_microseconds` internal options from the *Internal configuration* reference documentation. ([#10399](https://github.com/wazuh/wazuh-documentation/pull/10399))
+
+### Fixed
+
+- Removed Amazon Inspector Classic from the *Amazon Inspector* integration documentation, which now covers Amazon Inspector (v2) only. ([#10399](https://github.com/wazuh/wazuh-documentation/pull/10399))
+- Added the Windows and macOS agent restart commands to the steps for enabling and disabling policies in the *Security Configuration Assessment* documentation. ([#10399](https://github.com/wazuh/wazuh-documentation/pull/10399))
+
 ## [v4.14.9]
 
 ### Added
