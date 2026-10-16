@@ -476,6 +476,22 @@ Configuring the Wazuh indexer
 
          Firewalls can block communication between Wazuh components on different hosts. Refer to the :ref:`Required ports <default_ports>` section and ensure the necessary ports are open.
 
+#. Set the heap size in ``/etc/wazuh-indexer/jvm.options`` before you start the service. The package default is 1 GB. Use half of the system RAM when the Wazuh indexer runs alone on the host, or a quarter when the Wazuh manager or Wazuh dashboard runs on the same host. For example, use ``-Xms4g`` and ``-Xmx4g`` on a dedicated node with 8 GB of RAM or on a shared host with 16 GB, and ``-Xms2g`` and ``-Xmx2g`` on an all-in-one host with 8 GB. For a size that is not a whole number of gigabytes, use megabytes, for example ``-Xms1536m`` and ``-Xmx1536m``:
+
+   .. code-block:: ini
+
+      -Xms4g
+      -Xmx4g
+
+   Where the total heap space:
+
+   -  ``-Xms4g`` sets the initial size to 4 GB of RAM.
+   -  ``-Xmx4g`` sets the maximum size to 4 GB of RAM.
+
+   .. note::
+
+      To prevent performance degradation due to JVM heap resizing at runtime, the minimum (Xms) and maximum (Xmx) size values must be the same.
+
 Starting the service
 ^^^^^^^^^^^^^^^^^^^^
 
@@ -616,85 +632,6 @@ Testing the cluster installation
 
       ip             heap.percent ram.percent cpu load_1m load_5m load_15m node.role node.roles                                        cluster_manager name
       192.168.33.135           30          57  16    1.50    1.30     0.69 dimr      cluster_manager,data,ingest,remote_cluster_client *               indexer
-
-Memory locking
---------------
-
-If the system swaps Wazuh indexer memory to disk, the Wazuh indexer can stop working correctly. The package enables memory locking by default, so you only set the heap size and check the result.
-
-.. note::
-
-   You require root user privileges to run the commands described below.
-
-#. The Wazuh indexer package already enables memory locking: ``/etc/wazuh-indexer/opensearch.yml`` ships ``bootstrap.memory_lock: true``, and the service sets an unlimited locked-memory limit. No change is needed.
-
-#. Set the heap size in ``/etc/wazuh-indexer/jvm.options``. Use half of the system RAM on a dedicated Wazuh indexer node, or a quarter on a host that also runs the Wazuh manager or Wazuh dashboard. For example, use ``-Xms4g`` and ``-Xmx4g`` on a dedicated node with 8 GB of RAM or on a shared host with 16 GB, and ``-Xms2g`` and ``-Xmx2g`` on an all-in-one host with 8 GB. For a size that is not a whole number of gigabytes, use megabytes, for example ``-Xms1536m`` and ``-Xmx1536m``:
-
-   .. code-block:: ini
-
-      -Xms4g
-      -Xmx4g
-
-   Where the total heap space:
-
-   -  ``-Xms4g`` sets the initial size to 4 GB of RAM.
-   -  ``-Xmx4g`` sets the maximum size to 4 GB of RAM.
-
-   .. note::
-
-      To prevent performance degradation due to JVM heap resizing at runtime, the minimum (Xms) and maximum (Xmx) size values must be the same.
-
-#. Restart the Wazuh indexer service:
-
-   .. tabs::
-
-      .. group-tab:: Systemd
-
-         .. code-block:: console
-
-            # systemctl restart wazuh-indexer
-
-      .. group-tab:: SysV Init
-
-         .. code-block:: console
-
-            # service wazuh-indexer restart
-
-#. Run the following command to check that the ``mlockall`` value is ``true`` on every node. Replace ``<WAZUH_INDEXER_ADDRESS>`` with the IP address of a Wazuh indexer node. When prompted, enter the password that step 1 of **Testing the cluster installation** printed:
-
-   .. code-block:: console
-
-      # curl -k -u admin "https://<WAZUH_INDEXER_ADDRESS>:9200/_nodes?filter_path=**.mlockall&pretty"
-
-   The command output looks similar to this:
-
-   .. code-block:: json
-      :class: output
-      :emphasize-lines: 5
-
-      {
-        "nodes" : {
-          "sRuGbIQRRfC54wzwIHjJWQ" : {
-            "process" : {
-              "mlockall" : true
-            }
-          }
-        }
-      }
-
-   Repeat the heap size and restart steps on every Wazuh indexer node in your multi-node cluster. The ``mlockall`` checks every node, so you run it once.
-
-#. Restart one Wazuh indexer node at a time. Before you restart the next node, check that the cluster status is ``green``. Replace ``<WAZUH_INDEXER_ADDRESS>`` with the IP address of a Wazuh indexer node. When prompted, enter the password that step 1 of **Testing the cluster installation** printed:
-
-   .. code-block:: console
-
-      # curl -k -u admin "https://<WAZUH_INDEXER_ADDRESS>:9200/_cluster/health?pretty"
-
-   If the status stays ``yellow`` and a shard failed to allocate after several attempts, retry the allocation:
-
-   .. code-block:: console
-
-      # curl -k -u admin -X POST "https://<WAZUH_INDEXER_ADDRESS>:9200/_cluster/reroute?retry_failed=true"
 
 Disable Wazuh updates
 ---------------------
