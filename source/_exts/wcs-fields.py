@@ -5,6 +5,7 @@ import re
 import time
 from urllib.request import urlopen
 
+from sphinx.errors import ExtensionError
 from sphinx.util import logging
 
 logger = logging.getLogger(__name__)
@@ -20,9 +21,13 @@ SPECIAL = re.compile(r'([\\*`|<>])')
 
 def escape(text):
     ''' Escapes the characters reStructuredText would read as markup. '''
-    text = SPECIAL.sub(r'\\\1', text.strip())
-    text = re.sub(r'_(?=\s|$|[.,;:!?)\]])', r'\\_', text)
-    return re.sub(r'(?<=\s)_|^_', r'\\_', text)
+    text = ' '.join(text.split())
+    text = SPECIAL.sub(r'\\\1', text)
+    text = re.sub(r'_(?!\w)', r'\\_', text)
+    text = re.sub(r'(?<=\s)_|^_', r'\\_', text)
+    # A leading list or enumerator marker would turn the cell into a list
+    text = re.sub(r'^([-+])(?=\s)', r'\\\1', text)
+    return re.sub(r'^(\(?\w{1,3})([.)])(?=\s)', r'\1\\\2', text)
 
 
 def literal(text):
@@ -50,12 +55,11 @@ def download(app):
     try:
         with urlopen(url, timeout=60) as response:
             data = response.read()
-    except OSError as error:
+    except Exception as error:
         if os.path.exists(path):
             logger.warning('Could not refresh %s (%s); using the cached copy', url, error)
             return path
-        logger.warning('Could not download the WCS field reference from %s: %s', url, error)
-        return None
+        raise ExtensionError('Could not download the WCS field reference from %s: %s' % (url, error))
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, 'wb') as csv_file:
         csv_file.write(data)
@@ -93,9 +97,6 @@ def read_source(app, docname, source):
     if MARKER not in source[0]:
         return
     path = download(app)
-    if path is None:
-        source[0] = source[0].replace(MARKER, '')
-        return
     source[0] = source[0].replace(MARKER, build(path))
 
 

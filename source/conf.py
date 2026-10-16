@@ -80,7 +80,8 @@ source_encoding = 'utf-8'
 # The master toctree document.
 master_doc = 'index'
 
-# WCS field reference downloaded at build time for the Wazuh Common Schema page
+# WCS field reference downloaded at build time for the Wazuh Common Schema page.
+# It reads the wazuh-indexer-plugins branch or tag named by api_tag.
 wcs_fields_url = 'https://raw.githubusercontent.com/wazuh/wazuh-indexer-plugins/'+api_tag+'/wcs/stateless/events/main/docs/fields.csv'
 
 extlinks = {
