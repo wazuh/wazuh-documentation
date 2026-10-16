@@ -164,25 +164,26 @@ Analysisd
 +---------------------------------------------------------+---------------+---------------------------------------------------------------------+
 |  **analysisd.rule_tree_memory_warning**                 | Description   | Rule tree memory above which a warning is logged while the ruleset  |
 |                                                         |               | is loaded. A rule is added as a child of every rule that matches    |
-|                                                         |               | its if_sid, if_group, if_level or category, so the rule tree can be |
-|                                                         |               | much larger than the number of rules suggests. Each node takes 32   |
-|                                                         |               | bytes on 64-bit systems.                                            |
+|                                                         |               | its ``if_sid``, ``if_group``, ``if_level`` or category, so the rule |
+|                                                         |               | tree can be much larger than the number of rules suggests. Each     |
+|                                                         |               | node takes 32 bytes on 64-bit systems.                              |
 +                                                         +---------------+---------------------------------------------------------------------+
 |                                                         | Default value | 25%                                                                 |
 +                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Allowed value | A size (a number of bytes, or a number followed by K, M or G), or a |
-|                                                         |               | percentage between 1% and 100% of the physical memory or of the     |
-|                                                         |               | cgroup memory limit, whichever is lower. 0 disables the warning.    |
+|                                                         | Allowed value | A size (a number of bytes, or a number followed by ``K``, ``M`` or  |
+|                                                         |               | ``G``), or a percentage between 1% and 100% of the physical memory  |
+|                                                         |               | or of the cgroup memory limit, whichever is lower. 0 disables the   |
+|                                                         |               | warning.                                                            |
 +---------------------------------------------------------+---------------+---------------------------------------------------------------------+
 |  **analysisd.rule_tree_memory_limit**                   | Description   | Maximum rule tree memory. If loading the ruleset would exceed it,   |
 |                                                         |               | loading stops and the ruleset is rejected. When both thresholds are |
 |                                                         |               | enabled, it must be greater than                                    |
-|                                                         |               | analysisd.rule_tree_memory_warning.                                 |
+|                                                         |               | ``analysisd.rule_tree_memory_warning``.                             |
 +                                                         +---------------+---------------------------------------------------------------------+
 |                                                         | Default value | 0 (disabled)                                                        |
 +                                                         +---------------+---------------------------------------------------------------------+
-|                                                         | Allowed value | Same format as analysisd.rule_tree_memory_warning. 0 disables the   |
-|                                                         |               | limit.                                                              |
+|                                                         | Allowed value | Same format as ``analysisd.rule_tree_memory_warning``. 0 disables   |
+|                                                         |               | the limit.                                                          |
 +---------------------------------------------------------+---------------+---------------------------------------------------------------------+
 |     **analysisd.geoip_jsonout**                         | Description   | Toggle to turn on or off the output of GeoIP data in JSON alerts.   |
 +                                                         +---------------+---------------------------------------------------------------------+
@@ -416,7 +417,8 @@ For example, ``2G`` is 67,108,864 nodes, and the default warning threshold of ``
 -  If a percentage is set but the memory size cannot be determined, that threshold is disabled and ``wazuh-analysisd`` logs ``(7622): Could not determine the memory size.``
 -  If both thresholds are enabled and the warning threshold is not lower than the limit, ``wazuh-analysisd`` does not start and logs ``(5109): Invalid rule tree thresholds``.
 
-**Warning threshold**
+Warning threshold
+~~~~~~~~~~~~~~~~~
 
 When the rule tree exceeds the warning threshold, ``wazuh-analysisd`` logs the following message once per ruleset load and continues loading:
 
@@ -426,7 +428,8 @@ When the rule tree exceeds the warning threshold, ``wazuh-analysisd`` logs the f
 
 The reported rule is the one being added when the threshold was crossed. It is not necessarily the only cause, because a rule can expand over nodes created by earlier rules. Logtest also returns this warning in its response.
 
-**Node limit**
+Node limit
+~~~~~~~~~~
 
 When adding a node would exceed the limit, ``wazuh-analysisd`` stops loading the ruleset and logs:
 
@@ -436,9 +439,9 @@ When adding a node would exceed the limit, ``wazuh-analysisd`` stops loading the
 
 The result depends on how the ruleset is loaded:
 
--  **Manager start and** ``wazuh-analysisd -t``: the ruleset isn't loaded and ``wazuh-analysisd`` doesn't start.
--  **Ruleset reload**: the new ruleset is rejected and the current ruleset stays active.
--  **Rule or decoder file upload through the Wazuh server API, including from the Wazuh dashboard**: the upload is rejected with API error ``1132`` ("The ruleset exceeds the rule tree node limit"), which includes the message above. A new file is removed and a replaced file is restored.
+-  Manager start and ``wazuh-analysisd -t``: the ruleset isn't loaded and ``wazuh-analysisd`` doesn't start.
+-  Ruleset reload: the new ruleset is rejected and the current ruleset stays active.
+-  Rule or decoder file upload through the Wazuh server API, including from the Wazuh dashboard: the upload is rejected with API error ``1132`` ("The ruleset exceeds the rule tree node limit"), which includes the message above. A new file is removed and a replaced file is restored.
 
 The limit is disabled by default. Deployments that let users change rules from the Wazuh dashboard can set it to reject rulesets that would use too much memory.
 
