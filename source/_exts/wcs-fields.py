@@ -1,47 +1,22 @@
 import csv
-import io
 import os
-import re
 import time
 from urllib.request import urlopen
 
+from docutils import nodes
 from sphinx.errors import ExtensionError
 from sphinx.util import logging
+from sphinx.util.docutils import SphinxDirective
 
 logger = logging.getLogger(__name__)
 
-# Replaced, in the page that holds it, by one section per field set, each with
-# a table of that field set's fields read from the WCS fields.csv file.
-MARKER = '.. wcs-field-tables::'
+# Builds one section per field set, each with a table of that field set's fields
+# read from the WCS fields.csv file. Values go into the document as plain text
+# nodes, never as reStructuredText, so no value is parsed as markup.
 MAX_AGE = 60 * 15  # 15 minutes, same as the manager API spec download
 COLUMNS = ['Field', 'Type', 'Level', 'Normalization', 'Indexed', 'Example', 'Description']
-WIDTHS = '25 9 9 9 8 15 25'
-SPECIAL = re.compile(r'([\\*`|<>])')
-
-
-def escape(text):
-    ''' Escapes the characters reStructuredText would read as markup. '''
-    text = ' '.join(text.split())
-    text = SPECIAL.sub(r'\\\1', text)
-    text = re.sub(r'_(?!\w)', r'\\_', text)
-    text = re.sub(r'(?<=\s)_|^_', r'\\_', text)
-    # A leading list or enumerator marker would turn the cell into a list
-    text = re.sub(r'^([-+])(?=\s)', r'\\\1', text)
-    return re.sub(r'^(\(?\w{1,3})([.)])(?=\s)', r'\1\\\2', text)
-
-
-def literal(text):
-    ''' Renders a value in code font when it can be, escaped plain text otherwise. '''
-    text = text.strip()
-    if not text:
-        return ''
-    if '`' in text or '\n' in text:
-        return escape(text).replace('\n', ' ')
-    return '``%s``' % text
-
-
-def cell(text):
-    return text.replace('"', '""')
+WIDTHS = [25, 9, 9, 9, 8, 15, 25]
+CODE_COLUMNS = COLUMNS[:6]
 
 
 def download(app):
@@ -66,44 +41,79 @@ def download(app):
     return path
 
 
-def build(path):
-    with open(path, newline='', encoding='utf-8') as csv_file:
-        rows = list(csv.DictReader(csv_file))
-    sets = {}
+def entry(content):
+    cell = nodes.entry()
+    cell += nodes.paragraph('', '', *content)
+    return cell
+
+
+def build_table(rows):
+    table = nodes.table(classes=['colwidths-given'])
+    tgroup = nodes.tgroup(cols=len(COLUMNS))
+    table += tgroup
+    for width in WIDTHS:
+        tgroup += nodes.colspec(colwidth=width)
+    head = nodes.thead()
+    head_row = nodes.row()
+    for name in COLUMNS:
+        head_row += entry([nodes.Text(name)])
+    head += head_row
+    tgroup += head
+    body = nodes.tbody()
     for row in rows:
-        sets.setdefault(row['Field_Set'], []).append(row)
-    lines = []
-    for name in sorted(sets):
-        title = escape(name)
-        lines += [title, '-' * len(title), '']
-        lines += ['.. csv-table::', '   :header-rows: 1', '   :widths: %s' % WIDTHS, '']
-        lines.append('   ' + ','.join('"%s"' % c for c in COLUMNS))
-        for row in sets[name]:
-            values = [
-                literal(row['Field']),
-                literal(row['Type']),
-                literal(row['Level']),
-                literal(row['Normalization']),
-                literal(row['Indexed']),
-                literal(row['Example']),
-                escape(row['Description']),
-            ]
-            lines.append('   ' + ','.join('"%s"' % cell(v) for v in values))
-        lines.append('')
-    return '\n'.join(lines)
+        body_row = nodes.row()
+        for name in COLUMNS:
+            value = ' '.join(row[name].split())
+            if not value:
+                content = []
+            elif name in CODE_COLUMNS:
+                content = [nodes.literal(value, value)]
+            else:
+                content = [nodes.Text(value)]
+            body_row += entry(content)
+        body += body_row
+    tgroup += body
+    return table
 
 
-def read_source(app, docname, source):
-    if MARKER not in source[0]:
-        return
-    path = download(app)
-    source[0] = source[0].replace(MARKER, build(path))
+class WCSFieldTables(SphinxDirective):
+    has_content = False
+
+    def make_section(self, title):
+        section = nodes.section()
+        section += nodes.title(title, title)
+        section['names'].append(nodes.fully_normalize_name(title))
+        section['ids'].append(nodes.make_id(title))
+        self.state.document.note_implicit_target(section, section)
+        return section
+
+    def run(self):
+        path = download(self.env.app)
+        self.env.note_dependency(path)
+        with open(path, newline='', encoding='utf-8') as csv_file:
+            rows = list(csv.DictReader(csv_file))
+        sets = {}
+        for row in rows:
+            sets.setdefault(row['Field_Set'], []).append(row)
+        result = []
+        for name in sorted(sets):
+            section = self.make_section(name)
+            section += build_table(sets[name])
+            result.append(section)
+        source = self.make_section('Source file')
+        paragraph = nodes.paragraph()
+        paragraph += nodes.Text('The tables on this page come from the ')
+        paragraph += nodes.reference(
+            'fields.csv', '', nodes.literal('fields.csv', 'fields.csv'),
+            refuri=self.env.config.wcs_fields_page_url)
+        paragraph += nodes.Text(' file in the wazuh-indexer-plugins repository.')
+        source += paragraph
+        result.append(source)
+        return result
 
 
 def setup(app):
-    app.add_config_value(
-        'wcs_fields_url',
-        'https://raw.githubusercontent.com/wazuh/wazuh-indexer-plugins/main/wcs/stateless/events/main/docs/fields.csv',
-        'env')
-    app.connect('source-read', read_source)
+    app.add_config_value('wcs_fields_url', '', 'env')
+    app.add_config_value('wcs_fields_page_url', '', 'env')
+    app.add_directive('wcs-field-tables', WCSFieldTables)
     return {'parallel_read_safe': True, 'parallel_write_safe': True}
