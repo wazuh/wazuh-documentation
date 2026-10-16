@@ -61,6 +61,7 @@ extensions = [
     'sphinx.ext.extlinks', # Sphinx built-in extension
     'sphinx_tabs.tabs',
     'wazuh-doc-images', # Custom extension
+    'wcs-fields', # Custom extension
     'sphinx_reredirects',
     'sphinx_markdown_builder'
 ]
