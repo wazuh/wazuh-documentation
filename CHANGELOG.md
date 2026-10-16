@@ -3,7 +3,9 @@ All notable changes to this project will be documented in this file.
 
 ## [v4.14.10]
 
-- Support for Wazuh 4.14.10
+### Added
+
+- Added the `analysisd.rule_tree_memory_warning` and `analysisd.rule_tree_memory_limit` internal options and a section on the rule tree memory thresholds to the *Internal configuration* reference documentation. ([#10397](https://github.com/wazuh/wazuh-documentation/pull/10397))
 
 ## [v4.14.9]
 
