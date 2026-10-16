@@ -70,7 +70,7 @@ def build(path):
         sets.setdefault(row['Field_Set'], []).append(row)
     lines = []
     for name in sorted(sets):
-        title = '``%s``' % name
+        title = escape(name)
         lines += [title, '-' * len(title), '']
         lines += ['.. csv-table::', '   :header-rows: 1', '   :widths: %s' % WIDTHS, '']
         lines.append('   ' + ','.join('"%s"' % c for c in COLUMNS))
