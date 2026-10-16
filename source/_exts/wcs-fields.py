@@ -1,4 +1,5 @@
 import csv
+import html
 import os
 import re
 import subprocess
@@ -23,15 +24,16 @@ CODE_COLUMNS = COLUMNS[:6]
 
 REPO = 'wazuh/wazuh-indexer-plugins'
 FILE = '/wcs/stateless/events/main/docs/fields.csv'
+RESOLVED = {}
 
 
 def cache_path(app):
     return os.path.join(app.doctreedir, 'wcs-fields.csv')
 
 
-def tag_exists(tag):
+def ref_exists(kind, name):
     result = subprocess.run(
-        ['git', 'ls-remote', '--tags', '--refs', 'https://github.com/%s' % REPO, 'refs/tags/%s' % tag],
+        ['git', 'ls-remote', '--%s' % kind, '--refs', 'https://github.com/%s' % REPO, 'refs/%s/%s' % (kind, name)],
         capture_output=True, text=True, timeout=60, check=True)
     return bool(result.stdout.strip())
 
@@ -40,7 +42,8 @@ def resolve_ref(app):
     ''' The ref the WCS page reads: the wcs_fields_ref setting when set, otherwise
         the tag of the version the documentation declares (release plus the Wazuh
         indexer revision, such as v5.0.0-rc2, or v5.0.0 for a final release),
-        otherwise the release branch while that tag doesn't exist yet. '''
+        otherwise the release branch while that tag doesn't exist yet, otherwise
+        main when the repository has no branch for the release either. '''
     if app.config.wcs_fields_ref:
         return app.config.wcs_fields_ref
     release = app.config.release
@@ -48,23 +51,33 @@ def resolve_ref(app):
     stage = revision if re.fullmatch(r'(alpha|beta|rc)\d+', revision) else ''
     tag = 'v%s%s' % (release, '-' + stage if stage else '')
     try:
-        if tag_exists(tag):
+        if ref_exists('tags', tag):
             return tag
+        if ref_exists('heads', release):
+            logger.info('No %s tag %s yet; reading the WCS field reference from the %s branch',
+                        REPO, tag, release)
+            return release
     except (OSError, subprocess.SubprocessError) as error:
-        logger.warning('Could not check the %s tags for %s (%s); using the %s branch',
-                       REPO, tag, error, release)
-        return release
-    logger.info('No %s tag %s yet; reading the WCS field reference from the %s branch',
+        logger.warning('Could not check the %s refs for %s (%s); using the main branch', REPO, tag, error)
+        return 'main'
+    logger.info('No %s tag %s or branch %s yet; reading the WCS field reference from the main branch',
                 REPO, tag, release)
-    return release
+    return 'main'
+
+
+def set_ref(app, config):
+    ''' Runs before Sphinx compares the configuration with the previous build, so
+        an unchanged ref doesn't make every page be read again. '''
+    ref = resolve_ref(app)
+    RESOLVED['ref'] = ref
+    config.custom_replacements['|WCS_FIELDS_PAGE_URL|'] = 'https://github.com/%s/blob/%s%s' % (REPO, ref, FILE)
 
 
 def download(app):
     ''' Runs once per build. The cached file is rewritten only when its content
         changes, so an incremental build re-reads the page only after a real change. '''
-    ref = resolve_ref(app)
+    ref = RESOLVED['ref']
     url = 'https://raw.githubusercontent.com/%s/%s%s' % (REPO, ref, FILE)
-    app.config.custom_replacements['|WCS_FIELDS_PAGE_URL|'] = 'https://github.com/%s/blob/%s%s' % (REPO, ref, FILE)
     path = cache_path(app)
     # A separate stamp file records when the download last ran and for which ref:
     # touching the CSV itself would make Sphinx read the page again for nothing.
@@ -98,6 +111,15 @@ def download(app):
         stamp_file.write('%s %s' % (time.time(), ref))
 
 
+def text_nodes(value):
+    ''' Plain text, with each `code` span of the CSV's Markdown shown in code font. '''
+    parts = value.split('`')
+    if len(parts) % 2 == 0:
+        return [nodes.Text(value)]
+    return [nodes.literal(part, part) if index % 2 else nodes.Text(part)
+            for index, part in enumerate(parts) if part]
+
+
 def entry(content):
     cell = nodes.entry()
     if content:
@@ -121,13 +143,13 @@ def build_table(rows):
     for row in rows:
         body_row = nodes.row()
         for name in COLUMNS:
-            value = ' '.join(row[name].split())
+            value = ' '.join(html.unescape(row[name]).split())
             if not value:
                 content = []
             elif name in CODE_COLUMNS:
                 content = [nodes.literal(value, value)]
             else:
-                content = [nodes.Text(value)]
+                content = text_nodes(value)
             body_row += entry(content)
         body += body_row
     tgroup += body
@@ -164,5 +186,6 @@ class WCSFieldTables(SphinxDirective):
 def setup(app):
     app.add_config_value('wcs_fields_ref', '', 'env')
     app.add_directive('wcs-field-tables', WCSFieldTables)
+    app.connect('config-inited', set_ref)
     app.connect('builder-inited', download)
     return {'parallel_read_safe': True, 'parallel_write_safe': True}
