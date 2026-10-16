@@ -117,21 +117,11 @@ class WCSFieldTables(SphinxDirective):
             section = self.make_section(name)
             section += build_table(sets[name])
             result.append(section)
-        source = self.make_section('Source file')
-        paragraph = nodes.paragraph()
-        paragraph += nodes.Text('The tables on this page come from the ')
-        paragraph += nodes.reference(
-            'fields.csv', '', nodes.literal('fields.csv', 'fields.csv'),
-            refuri=self.env.config.wcs_fields_page_url)
-        paragraph += nodes.Text(' file in the wazuh-indexer-plugins repository.')
-        source += paragraph
-        result.append(source)
         return result
 
 
 def setup(app):
     app.add_config_value('wcs_fields_url', '', 'env')
-    app.add_config_value('wcs_fields_page_url', '', 'env')
     app.add_directive('wcs-field-tables', WCSFieldTables)
     app.connect('builder-inited', download)
     return {'parallel_read_safe': True, 'parallel_write_safe': True}

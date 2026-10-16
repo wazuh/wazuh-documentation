@@ -32,6 +32,6 @@ The WCS field reference lists every field with the following columns:
 -  ``Example``: A sample value for the field, as it would appear in an event. For example, ``/home/alice/example.png`` for ``file.path``.
 -  ``Description``: A short explanation of what the field contains. For example, the description of ``file.size`` is "File size in bytes."
 
-The following tables show the `WCS field reference <https://github.com/wazuh/wazuh-indexer-plugins/blob/main/wcs/stateless/events/main/docs/fields.csv>`__, grouped by field set.
+The following tables show the `WCS field reference <|WCS_FIELDS_PAGE_URL|>`__, grouped by field set.
 
 .. wcs-field-tables::
