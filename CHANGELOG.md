@@ -65,6 +65,10 @@ All notable changes to this project will be documented in this file.
 - Updated the *Deployment on Kubernetes* documentation to Wazuh 5.0, covering the resource requirements, network policies, Amazon EKS and local cluster deployment steps, enrollment token-based agent deployment, and the clean up steps. Removed the steps to change the password of Wazuh users. ([#9941](https://github.com/wazuh/wazuh-documentation/pull/9941)) ([#10320](https://github.com/wazuh/wazuh-documentation/pull/10320)) ([#10324](https://github.com/wazuh/wazuh-documentation/pull/10324)) ([#10346](https://github.com/wazuh/wazuh-documentation/pull/10346)) ([#10358](https://github.com/wazuh/wazuh-documentation/pull/10358))
 - Updated the *Using Wazuh for NIST 800-53 compliance* documentation in *Regulatory compliance* to Wazuh 5.0. ([#10381](https://github.com/wazuh/wazuh-documentation/pull/10381))
 
+### Fixed
+
+- Fixed the Wazuh 5.0 agent state-file reference so it no longer lists the obsolete `msg_sent` field. ([#10084](https://github.com/wazuh/wazuh-documentation/pull/10084))
+
 ### Removed
 
 - Removed all `agent-auth` references as this tool was replaced by `wazuh-agent-auth`. ([#8718](https://github.com/wazuh/wazuh/pull/8718))
