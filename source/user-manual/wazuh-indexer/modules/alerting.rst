@@ -26,10 +26,6 @@ The Alerting module provides the following capabilities:
 -  **REST API support:** Manage monitors, workflows, alerts, findings, and comments programmatically.
 -  **Dashboard integration**: Create, manage, and monitor alerts from the Wazuh dashboard.
 
-.. note::
-
-   The Alerting module supports up to 10 custom monitors per user. This limit applies to all supported monitor types.
-
 Monitor types
 -------------
 
@@ -200,7 +196,7 @@ Unlike alerts, which represent the state of a monitored condition, findings reco
 Each finding includes information such as:
 
 -  The identifiers of the matching documents.
--  The source index contains the matching documents.
+-  The source index containing the matching documents.
 -  The query or rule that matched the documents.
 -  The timestamp indicating when the match was detected.
 
@@ -336,7 +332,7 @@ Active Response monitors have the following requirements:
 Default monitors
 ----------------
 
-Wazuh does not create default monitors. The health check verifies that the default notification channels (Slack Channel, Jira Channel, PagerDuty Channel, and Shuffle Channel) exist. You can create monitors under **Explore** > **Alerting** > **Monitors**. For more information about monitor configuration, see `OpenSearch Alerting Monitors Documentation <https://docs.opensearch.org/latest/observing-your-data/alerting/monitors/>`__.
+Wazuh does not create any default user-facing monitors. The health check verifies that the default notification channels (Slack Channel, Jira Channel, PagerDuty Channel, and Shuffle Channel) exist. You can create monitors under **Explore** > **Alerting** > **Monitors**. For more information about monitor configuration, see `OpenSearch Alerting Monitors Documentation <https://docs.opensearch.org/latest/observing-your-data/alerting/monitors/>`__.
 
 Dependencies
 ------------
@@ -380,9 +376,9 @@ Monitor settings control how the Alerting module creates, executes, and manages 
 +--------------------------------------------------------------------------------+-----------+-----------+------------------------------------------------------------------------------------------------+
 | ``plugins.alerting.monitor.doc_level_monitor_fan_out_nodes``                   | Integer   | ``1000``  | Maximum number of nodes that participate in document-level monitor execution.                  |
 +--------------------------------------------------------------------------------+-----------+-----------+------------------------------------------------------------------------------------------------+
-| ``plugins.alerting.monitor.doc_level_monitor_fanout_max_duration``             | TimeValue | ``5m``    | Maximum duration allowed for fan-out execution.                                                |
+| ``plugins.alerting.monitor.doc_level_monitor_fanout_max_duration``             | TimeValue | ``3m``    | Maximum duration allowed for fan-out execution.                                                |
 +--------------------------------------------------------------------------------+-----------+-----------+------------------------------------------------------------------------------------------------+
-| ``plugins.alerting.monitor.doc_level_monitor_execution_max_duration``          | TimeValue | ``5m``    | Maximum execution time for a document-level monitor.                                           |
+| ``plugins.alerting.monitor.doc_level_monitor_execution_max_duration``          | TimeValue | ``4m``    | Maximum execution time for a document-level monitor.                                           |
 +--------------------------------------------------------------------------------+-----------+-----------+------------------------------------------------------------------------------------------------+
 | ``plugins.alerting.monitor.percolate_query_max_num_docs_in_memory``            | Integer   | ``50000`` | Maximum number of documents evaluated simultaneously by percolate queries.                     |
 +--------------------------------------------------------------------------------+-----------+-----------+------------------------------------------------------------------------------------------------+
@@ -396,17 +392,17 @@ Timeout settings
 
 Timeout settings define how long the Alerting module waits for queries, indexing operations, and bulk requests before cancelling the operation.
 
-+--------------------------------------+-----------+---------+---------------------------------------------------------------+
-| Setting                              | Type      | Default | Description                                                   |
-+======================================+===========+=========+===============================================================+
-| ``plugins.alerting.input_timeout``   | TimeValue | ``30s`` | Timeout for monitor query execution.                          |
-+--------------------------------------+-----------+---------+---------------------------------------------------------------+
-| ``plugins.alerting.index_timeout``   | TimeValue | ``30s`` | Timeout for indexing alerts, findings, and other plugin data. |
-+--------------------------------------+-----------+---------+---------------------------------------------------------------+
-| ``plugins.alerting.bulk_timeout``    | TimeValue | ``30s`` | Timeout for bulk indexing operations.                         |
-+--------------------------------------+-----------+---------+---------------------------------------------------------------+
-| ``plugins.alerting.request_timeout`` | TimeValue | ``10s`` | Timeout for requests made by the Alerting module.             |
-+--------------------------------------+-----------+---------+---------------------------------------------------------------+
++--------------------------------------+-----------+----------+---------------------------------------------------------------+
+| Setting                              | Type      | Default  | Description                                                   |
++======================================+===========+==========+===============================================================+
+| ``plugins.alerting.input_timeout``   | TimeValue | ``30s``  | Timeout for monitor query execution.                          |
++--------------------------------------+-----------+----------+---------------------------------------------------------------+
+| ``plugins.alerting.index_timeout``   | TimeValue | ``60s``  | Timeout for indexing alerts, findings, and other plugin data. |
++--------------------------------------+-----------+----------+---------------------------------------------------------------+
+| ``plugins.alerting.bulk_timeout``    | TimeValue | ``120s`` | Timeout for bulk indexing operations.                         |
++--------------------------------------+-----------+----------+---------------------------------------------------------------+
+| ``plugins.alerting.request_timeout`` | TimeValue | ``10s``  | Timeout for requests made by the Alerting module.             |
++--------------------------------------+-----------+----------+---------------------------------------------------------------+
 
 Alert history settings
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -416,7 +412,7 @@ Alert history settings control how alert records are stored, rolled over, and re
 +-----------------------------------------------------+-----------+-----------+------------------------------------------------------------------------------------------------------------+
 | Setting                                             | Type      | Default   | Description                                                                                                |
 +=====================================================+===========+===========+============================================================================================================+
-| ``plugins.alerting.alert_history_enabled``          | Boolean   | ``true``  | Enables storage of historical alert records.                                                               |
+| ``plugins.alerting.alert_history_enabled``          | Boolean   | ``false`` | Enables storage of historical alert records.                                                               |
 +-----------------------------------------------------+-----------+-----------+------------------------------------------------------------------------------------------------------------+
 | ``plugins.alerting.alert_history_rollover_period``  | TimeValue | ``12h``   | Specifies how frequently alert history indices are rolled over.                                            |
 +-----------------------------------------------------+-----------+-----------+------------------------------------------------------------------------------------------------------------+
@@ -428,7 +424,7 @@ Alert history settings control how alert records are stored, rolled over, and re
 +-----------------------------------------------------+-----------+-----------+------------------------------------------------------------------------------------------------------------+
 | ``plugins.alerting.alert_backoff_millis``           | TimeValue | ``50ms``  | Specifies the delay between retry attempts when writing alert history.                                     |
 +-----------------------------------------------------+-----------+-----------+------------------------------------------------------------------------------------------------------------+
-| ``plugins.alerting.alert_backoff_count``            | Integer   | ``3``     | Specifies the maximum number of retry attempts when alert history indexing fails.                          |
+| ``plugins.alerting.alert_backoff_count``            | Integer   | ``2``     | Specifies the maximum number of retry attempts when alert history indexing fails.                          |
 +-----------------------------------------------------+-----------+-----------+------------------------------------------------------------------------------------------------------------+
 | ``plugins.alerting.move_alerts_backoff_millis``     | TimeValue | ``250ms`` | Specifies the delay between retry attempts when moving alerts to the alert history indices.                |
 +-----------------------------------------------------+-----------+-----------+------------------------------------------------------------------------------------------------------------+
@@ -442,46 +438,46 @@ Finding history settings
 
 Finding history settings control how findings generated by document-level and Active Response monitors are stored and retained. These settings determine whether findings are indexed, when finding history indices are rolled over, and how long historical findings remain available for analysis.
 
-+---------------------------------------------------------+-----------+----------+------------------------------------------------------------------------------------------------------+
-| Setting                                                 | Type      | Default  | Description                                                                                          |
-+=========================================================+===========+==========+======================================================================================================+
-| ``plugins.alerting.alert_finding_enabled``              | Boolean   | ``true`` | Enables storage of findings generated by document-level monitors.                                    |
-+---------------------------------------------------------+-----------+----------+------------------------------------------------------------------------------------------------------+
-| ``plugins.alerting.alert_finding_rollover_period``      | TimeValue | ``12h``  | Specifies how frequently finding history indices are rolled over.                                    |
-+---------------------------------------------------------+-----------+----------+------------------------------------------------------------------------------------------------------+
-| ``plugins.alerting.finding_history_max_age``            | TimeValue | ``30d``  | Specifies the maximum age of finding history indices before they are eligible for deletion.          |
-+---------------------------------------------------------+-----------+----------+------------------------------------------------------------------------------------------------------+
-| ``plugins.alerting.finding_history_retention_period``   | TimeValue | ``60d``  | Specifies how long finding history indices are retained before they are deleted.                     |
-+---------------------------------------------------------+-----------+----------+------------------------------------------------------------------------------------------------------+
-| ``plugins.alerting.alert_finding_max_docs``             | Long      | ``1000`` | Specifies the maximum number of documents allowed in a finding history index before rollover occurs. |
-+---------------------------------------------------------+-----------+----------+------------------------------------------------------------------------------------------------------+
-| ``plugins.alerting.alert_findings_indexing_batch_size`` | Integer   | ``1000`` | Specifies the maximum number of findings indexed in a single bulk indexing operation.                |
-+---------------------------------------------------------+-----------+----------+------------------------------------------------------------------------------------------------------+
++---------------------------------------------------------+-----------+-----------+------------------------------------------------------------------------------------------------------+
+| Setting                                                 | Type      | Default   | Description                                                                                          |
++=========================================================+===========+===========+======================================================================================================+
+| ``plugins.alerting.alert_finding_enabled``              | Boolean   | ``false`` | Enables storage of findings generated by document-level monitors.                                    |
++---------------------------------------------------------+-----------+-----------+------------------------------------------------------------------------------------------------------+
+| ``plugins.alerting.alert_finding_rollover_period``      | TimeValue | ``12h``   | Specifies how frequently finding history indices are rolled over.                                    |
++---------------------------------------------------------+-----------+-----------+------------------------------------------------------------------------------------------------------+
+| ``plugins.alerting.finding_history_max_age``            | TimeValue | ``30d``   | Specifies the maximum age of finding history indices before they are eligible for deletion.          |
++---------------------------------------------------------+-----------+-----------+------------------------------------------------------------------------------------------------------+
+| ``plugins.alerting.finding_history_retention_period``   | TimeValue | ``60d``   | Specifies how long finding history indices are retained before they are deleted.                     |
++---------------------------------------------------------+-----------+-----------+------------------------------------------------------------------------------------------------------+
+| ``plugins.alerting.alert_finding_max_docs``             | Long      | ``1000``  | Specifies the maximum number of documents allowed in a finding history index before rollover occurs. |
++---------------------------------------------------------+-----------+-----------+------------------------------------------------------------------------------------------------------+
+| ``plugins.alerting.alert_findings_indexing_batch_size`` | Integer   | ``1000``  | Specifies the maximum number of findings indexed in a single bulk indexing operation.                |
++---------------------------------------------------------+-----------+-----------+------------------------------------------------------------------------------------------------------+
 
 Comment settings
 ^^^^^^^^^^^^^^^^
 
 Comment settings control the management and retention of comments added to alerts. These settings determine whether comments are enabled, define storage limits, and configure the retention and rollover of comment history indices.
 
-+--------------------------------------------------------+-----------+----------+--------------------------------------------------------------------------------------------------------+
-| Setting                                                | Type      | Default  | Description                                                                                            |
-+========================================================+===========+==========+========================================================================================================+
-| ``plugins.alerting.comments_enabled``                  | Boolean   | ``true`` | Enables comments on alerts.                                                                            |
-+--------------------------------------------------------+-----------+----------+--------------------------------------------------------------------------------------------------------+
-| ``plugins.alerting.comments_history_max_docs``         | Long      | ``1000`` | Specifies the maximum number of documents permitted in a comment history index before rollover occurs. |
-+--------------------------------------------------------+-----------+----------+--------------------------------------------------------------------------------------------------------+
-| ``plugins.alerting.comments_history_max_age``          | TimeValue | ``30d``  | Specifies the maximum age of comment history indices before they are eligible for deletion.            |
-+--------------------------------------------------------+-----------+----------+--------------------------------------------------------------------------------------------------------+
-| ``plugins.alerting.comments_history_rollover_period``  | TimeValue | ``12h``  | Specifies how frequently comment history indices are rolled over.                                      |
-+--------------------------------------------------------+-----------+----------+--------------------------------------------------------------------------------------------------------+
-| ``plugins.alerting.comments_history_retention_period`` | TimeValue | ``60d``  | Specifies how long comment history indices are retained before they are deleted.                       |
-+--------------------------------------------------------+-----------+----------+--------------------------------------------------------------------------------------------------------+
-| ``plugins.alerting.max_comment_character_length``      | Integer   | ``2000`` | Specifies the maximum number of characters allowed in a single comment.                                |
-+--------------------------------------------------------+-----------+----------+--------------------------------------------------------------------------------------------------------+
-| ``plugins.alerting.max_comments_per_alert``            | Integer   | ``500``  | Specifies the maximum number of comments that can be associated with a single alert.                   |
-+--------------------------------------------------------+-----------+----------+--------------------------------------------------------------------------------------------------------+
-| ``plugins.alerting.max_comments_per_notification``     | Integer   | ``3``    | Specifies the maximum number of comments included in a notification message.                           |
-+--------------------------------------------------------+-----------+----------+--------------------------------------------------------------------------------------------------------+
++--------------------------------------------------------+-----------+-----------+--------------------------------------------------------------------------------------------------------+
+| Setting                                                | Type      | Default   | Description                                                                                            |
++========================================================+===========+===========+========================================================================================================+
+| ``plugins.alerting.comments_enabled``                  | Boolean   | ``false`` | Enables comments on alerts.                                                                            |
++--------------------------------------------------------+-----------+-----------+--------------------------------------------------------------------------------------------------------+
+| ``plugins.alerting.comments_history_max_docs``         | Long      | ``1000``  | Specifies the maximum number of documents permitted in a comment history index before rollover occurs. |
++--------------------------------------------------------+-----------+-----------+--------------------------------------------------------------------------------------------------------+
+| ``plugins.alerting.comments_history_max_age``          | TimeValue | ``30d``   | Specifies the maximum age of comment history indices before they are eligible for deletion.            |
++--------------------------------------------------------+-----------+-----------+--------------------------------------------------------------------------------------------------------+
+| ``plugins.alerting.comments_history_rollover_period``  | TimeValue | ``12h``   | Specifies how frequently comment history indices are rolled over.                                      |
++--------------------------------------------------------+-----------+-----------+--------------------------------------------------------------------------------------------------------+
+| ``plugins.alerting.comments_history_retention_period`` | TimeValue | ``60d``   | Specifies how long comment history indices are retained before they are deleted.                       |
++--------------------------------------------------------+-----------+-----------+--------------------------------------------------------------------------------------------------------+
+| ``plugins.alerting.max_comment_character_length``      | Integer   | ``2000``  | Specifies the maximum number of characters allowed in a single comment.                                |
++--------------------------------------------------------+-----------+-----------+--------------------------------------------------------------------------------------------------------+
+| ``plugins.alerting.max_comments_per_alert``            | Integer   | ``500``   | Specifies the maximum number of comments that can be associated with a single alert.                   |
++--------------------------------------------------------+-----------+-----------+--------------------------------------------------------------------------------------------------------+
+| ``plugins.alerting.max_comments_per_notification``     | Integer   | ``3``     | Specifies the maximum number of comments included in a notification message.                           |
++--------------------------------------------------------+-----------+-----------+--------------------------------------------------------------------------------------------------------+
 
 General settings
 ^^^^^^^^^^^^^^^^
@@ -507,7 +503,7 @@ Most Alerting module settings can be updated dynamically without restarting the 
 
 The following example updates two Alerting module settings:
 
--  ``plugins.alerting.monitor.max_monitors``: Increases the maximum number of monitors a user can create to 20.
+-  ``plugins.alerting.monitor.max_monitors``: Sets the maximum number of monitors a user can create to 20.
 -  ``plugins.alerting.alert_history_max_age``: Extends the maximum age of alert history indices to 60d.
 
 Run the following command from a terminal on a host that can communicate with the Wazuh indexer REST API. Replace ``<WAZUH_INDEXER_IP>`` with the IP address of the Wazuh indexer node and ``<WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD>`` with your Wazuh indexer username and password.

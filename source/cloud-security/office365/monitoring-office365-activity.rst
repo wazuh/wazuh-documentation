@@ -97,7 +97,7 @@ You can list the content currently available for retrieval for a specified conte
 
 .. code-block:: none
 
-   Get https://manage.office.com/api/v1.0/<TENANT_ID>/activity/feed/subscriptions/content?contentType=<CONTENT_TYPE>&startTime=<START_TIME>&endTime=<END_TIME>
+   GET https://manage.office.com/api/v1.0/<TENANT_ID>/activity/feed/subscriptions/content?contentType=<CONTENT_TYPE>&startTime=<START_TIME>&endTime=<END_TIME>
 
 Where:
 

@@ -165,33 +165,33 @@ Upgrade the migrated Wazuh agents
 
 Wazuh 5.x agents verify the Wazuh manager certificate. A package upgrade doesn't install the Wazuh manager root certificate on the agent, so the upgraded agent connects with TLS verification disabled. Perform the following steps on each Linux agent that you upgrade with a package.
 
-Copy ``/var/wazuh-manager/etc/certs/root-ca.pem`` from the Wazuh 5.x manager to the agent. Then create the ``certs`` directory and install the file with the required ownership and permissions:
+#. Copy ``/var/wazuh-manager/etc/certs/root-ca.pem`` from the Wazuh 5.x manager to the agent. Then create the ``certs`` directory and install the file with the required ownership and permissions:
 
-.. code-block:: console
+   .. code-block:: console
 
-   # mkdir -p /var/ossec/etc/certs
-   # install -m 640 -o root -g wazuh root-ca.pem /var/ossec/etc/certs/root-ca.pem
+      # mkdir -p /var/ossec/etc/certs
+      # install -m 640 -o root -g wazuh root-ca.pem /var/ossec/etc/certs/root-ca.pem
 
-Upgrade the Wazuh agent package. On Debian-based systems, add ``--force-confold`` so that the upgrade doesn't stop at the configuration file prompt:
+#. Upgrade the Wazuh agent package. On Debian-based systems, add ``--force-confold`` so that the upgrade doesn't stop at the configuration file prompt:
 
-.. code-block:: console
+   .. code-block:: console
 
-   # dpkg -i --force-confold wazuh-agent_<VERSION>_amd64.deb
+      # dpkg -i --force-confold wazuh-agent_<VERSION>_amd64.deb
 
-If an earlier ``dpkg -i`` run stopped at the configuration file prompt, complete it with the following command. Running ``dpkg -i`` again overwrites the agent key and configuration.
+   If an earlier ``dpkg -i`` run stopped at the configuration file prompt, complete it with the following command. Running ``dpkg -i`` again overwrites the agent key and configuration.
 
-.. code-block:: console
+   .. code-block:: console
 
-   # dpkg --configure --force-confold wazuh-agent
+      # dpkg --configure --force-confold wazuh-agent
 
-Verify that the agent log doesn't report ``TLS verification is DISABLED``:
+#. Verify that the agent log doesn't report ``TLS verification is DISABLED``:
 
-.. code-block:: console
+   .. code-block:: console
 
-   # grep "TLS verification" /var/ossec/logs/ossec.log
+      # grep "TLS verification" /var/ossec/logs/ossec.log
 
-If you already upgraded an agent without the root certificate, stop the agent and run ``/var/ossec/bin/wazuh-agent-auth --token-file <TOKEN_FILE> --certs-only``. Replace ``<TOKEN_FILE>`` with a file that contains an enrollment token generated on the Wazuh 5.x manager.
+   If you already upgraded an agent without the root certificate, stop the agent and run ``/var/ossec/bin/wazuh-agent-auth --token-file <TOKEN_FILE> --certs-only``. Replace ``<TOKEN_FILE>`` with a file that contains an enrollment token generated on the Wazuh 5.x manager.
 
-.. note::
+   .. note::
 
-   Wazuh 4.x agents can connect to a Wazuh 5.x manager. However, File Integrity Monitoring (FIM), Security Configuration Assessment (SCA), System Inventory, Active Response, and Vulnerability Detection are not fully supported until the agents are upgraded to Wazuh 5.x. We recommend upgrading migrated agents to Wazuh 5.x to ensure full compatibility with Wazuh 5.x functionality.
+      Wazuh 4.x agents can connect to a Wazuh 5.x manager. However, File Integrity Monitoring (FIM), Security Configuration Assessment (SCA), System Inventory, Active Response, and Vulnerability Detection are not fully supported until the agents are upgraded to Wazuh 5.x. We recommend upgrading migrated agents to Wazuh 5.x to ensure full compatibility with Wazuh 5.x functionality.

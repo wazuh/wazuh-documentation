@@ -44,6 +44,7 @@ The Wazuh Sigma rule consists of the following components:
 The following example shows a complete Sigma rule, using all supported blocks:
 
 .. code-block:: yaml
+   :emphasize-lines: 14
 
    metadata:
      title: Python SQL Exceptions
@@ -58,7 +59,7 @@ The following example shows a complete Sigma rule, using all supported blocks:
      - attack.t1190
    logsource:
      category: application
-     product: python
+     product: <INTEGRATION_TITLE>
    detection:
      keywords:
        - DataError
@@ -70,36 +71,41 @@ The following example shows a complete Sigma rule, using all supported blocks:
      - Application bugs
    mitre:
      tactic:
-       - TA0001
+       id:
+         - TA0001
+       name:
+         - Initial Access
      technique:
-       - T1190
-     subtechnique: []
+       id:
+         - T1190
+       name:
+         - Exploit Public-Facing Application
    compliance:
      pci_dss:
        - "6.5.1"
      gdpr:
        - Art. 32
 
+Replace ``<INTEGRATION_TITLE>`` with the title of the Draft space integration that you create the rule in. The ``logsource.product`` value must match that title exactly. It decides which detector evaluates the rule. The Content Manager module rejects a rule whose ``logsource.product`` does not match, with 400 Bad Request.
+
 Required fields
 ---------------
 
 The following fields are required for all Sigma rules:
 
-+---------------+--------+---------------------------------------------------------------------------------------------------------+
-| Field         | Type   | Description                                                                                             |
-+===============+========+=========================================================================================================+
-| ``sigma_id``  | String | Original Sigma rule identifier. Preserved when importing rules from external Sigma repositories.        |
-+---------------+--------+---------------------------------------------------------------------------------------------------------+
-| ``status``    | String | Rule maturity level. Supported values are ``experimental``, ``test``, and ``stable``.                   |
-+---------------+--------+---------------------------------------------------------------------------------------------------------+
-| ``level``     | String | Rule severity. Supported values are ``informational``, ``low``, ``medium``, ``high``, and ``critical``. |
-+---------------+--------+---------------------------------------------------------------------------------------------------------+
-| ``metadata``  | Object | Rule metadata, including the rule title.                                                                |
-+---------------+--------+---------------------------------------------------------------------------------------------------------+
-| ``logsource`` | Object | Target log source definition.                                                                           |
-+---------------+--------+---------------------------------------------------------------------------------------------------------+
-| ``detection`` | Object | Rule detection logic.                                                                                   |
-+---------------+--------+---------------------------------------------------------------------------------------------------------+
++---------------+--------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Field         | Type   | Description                                                                                                                                           |
++===============+========+=======================================================================================================================================================+
+| ``status``    | String | Rule maturity level. Supported values are ``stable``, ``test``, ``experimental``, ``deprecated``, and ``unsupported``. Values are not case-sensitive. |
++---------------+--------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``level``     | String | Rule severity. Supported values are ``informational``, ``low``, ``medium``, ``high``, and ``critical``.                                               |
++---------------+--------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``metadata``  | Object | Rule metadata. Must include ``title``.                                                                                                                |
++---------------+--------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``logsource`` | Object | Target log source definition. Must include ``product``, set to the title of the integration that the rule belongs to.                                 |
++---------------+--------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``detection`` | Object | Rule detection logic.                                                                                                                                 |
++---------------+--------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Rules that do not contain the required fields fail validation and cannot be added to the rule catalog.
 
@@ -108,21 +114,23 @@ Optional fields
 
 In addition to the required fields, Sigma rules support several optional fields that provide additional context, threat intelligence mappings, and compliance information.
 
-+--------------------+---------+------------------------------------------------------------------------------+
-| Field              | Type    | Description                                                                  |
-+====================+=========+==============================================================================+
-| ``id``             | String  | Unique rule identifier.                                                      |
-+--------------------+---------+------------------------------------------------------------------------------+
-| ``enabled``        | Boolean | Enables or disables the rule. Disabled rules are not evaluated by detectors. |
-+--------------------+---------+------------------------------------------------------------------------------+
-| ``tags``           | Array   | Categorization tags used for grouping, filtering, and threat classification. |
-+--------------------+---------+------------------------------------------------------------------------------+
-| ``falsepositives`` | Array   | Known sources of legitimate activity that may trigger the rule.              |
-+--------------------+---------+------------------------------------------------------------------------------+
-| ``mitre``          | Object  | Maps the rule to MITRE ATT&CK tactics, techniques, and sub-techniques.       |
-+--------------------+---------+------------------------------------------------------------------------------+
-| ``compliance``     | Object  | Maps the rule to the supported compliance frameworks and controls.           |
-+--------------------+---------+------------------------------------------------------------------------------+
++--------------------+---------+--------------------------------------------------------------------------------------------------+
+| Field              | Type    | Description                                                                                      |
++====================+=========+==================================================================================================+
+| ``id``             | String  | Unique rule identifier.                                                                          |
++--------------------+---------+--------------------------------------------------------------------------------------------------+
+| ``sigma_id``       | String  | Original Sigma rule identifier. Preserved when importing rules from external Sigma repositories. |
++--------------------+---------+--------------------------------------------------------------------------------------------------+
+| ``enabled``        | Boolean | Enables or disables the rule. Disabled rules are not evaluated by detectors.                     |
++--------------------+---------+--------------------------------------------------------------------------------------------------+
+| ``tags``           | Array   | Categorization tags used for grouping, filtering, and threat classification.                     |
++--------------------+---------+--------------------------------------------------------------------------------------------------+
+| ``falsepositives`` | Array   | Known sources of legitimate activity that may trigger the rule.                                  |
++--------------------+---------+--------------------------------------------------------------------------------------------------+
+| ``mitre``          | Object  | Maps the rule to MITRE ATT&CK tactics, techniques, and sub-techniques.                           |
++--------------------+---------+--------------------------------------------------------------------------------------------------+
+| ``compliance``     | Object  | Maps the rule to the supported compliance frameworks and controls.                               |
++--------------------+---------+--------------------------------------------------------------------------------------------------+
 
 Detection logic
 ---------------
@@ -139,7 +147,7 @@ The detection section defines the conditions that must be met for a rule to gene
    detection:
      selection:
        process.name: powershell.exe
-       command_line|contains: "-enc"
+       process.command_line|contains: "-enc"
      condition: selection
 
 Multiple selections can be combined using boolean operators.
@@ -150,7 +158,7 @@ Multiple selections can be combined using boolean operators.
      sel_process:
        process.name: powershell.exe
      sel_command:
-       command_line|contains: "-enc"
+       process.command_line|contains: "-enc"
      condition: sel_process and sel_command
 
 The following operators are supported:
@@ -199,6 +207,8 @@ The MITRE section supports:
 -  Techniques
 -  Sub-techniques
 
+Each category holds an ``id`` list and a ``name`` list, in the same order: the first name describes the first ID. Omit a category that does not apply.
+
 These mappings are displayed in Security Analytics findings and can be used for threat hunting and reporting activities.
 
 Compliance mapping
@@ -245,15 +255,19 @@ Rule lifecycle
 
 Rules can exist in one of the following states:
 
-+------------------+---------------------------------------+
-| Status           | Description                           |
-+==================+=======================================+
-| ``experimental`` | Initial development or testing stage. |
-+------------------+---------------------------------------+
-| ``test``         | Validated but still under evaluation. |
-+------------------+---------------------------------------+
-| ``stable``       | Production-ready rule.                |
-+------------------+---------------------------------------+
++------------------+----------------------------------------------+
+| Status           | Description                                  |
++==================+==============================================+
+| ``experimental`` | Initial development or testing stage.        |
++------------------+----------------------------------------------+
+| ``test``         | Validated but still under evaluation.        |
++------------------+----------------------------------------------+
+| ``stable``       | Production-ready rule.                       |
++------------------+----------------------------------------------+
+| ``deprecated``   | Replaced by another rule, or covered by one. |
++------------------+----------------------------------------------+
+| ``unsupported``  | Cannot be used in its current state.         |
++------------------+----------------------------------------------+
 
 Rules can also be enabled or disabled without being removed from the rule catalog. Disabled rules remain available for management and editing, but are not evaluated by detectors.
 
@@ -265,7 +279,7 @@ Detectors evaluate events against assigned Sigma rules and generate findings whe
 -  Standard rules, or
 -  Custom rules
 
-A detector cannot use both rule types simultaneously. Each detector supports a maximum of 100 Sigma rules.
+A detector cannot use both rule types simultaneously. By default, each detector supports up to 50 Sigma rules. The ``plugins.security_analytics.max_rules_per_detector`` setting changes this limit.
 
 .. note::
 

@@ -90,4 +90,4 @@ Monitored endpoint
 
 #. Optionally create audit rules for the files and system calls you want to monitor, using the ``auditctl`` command or the audit rules file.
 
-Linux audit alerts are displayed in the **Threat Hunting** module of the Wazuh dashboard.
+The **Threat Hunting** module of the Wazuh dashboard displays Linux audit findings.

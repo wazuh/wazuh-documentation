@@ -62,7 +62,7 @@ To create this policy, use the following Wazuh server API request:
 
 .. code-block:: console
 
-   # curl -k -X POST "https://localhost:55000/security/policies?pretty=true" -H  "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d "{\"name\":\"customer_x_agents\",\"policy\":{\"actions\":[\"agent:read\"],\"resources\":[\"agent:id:001\",\"agent:id:002\",\"agent:id:003\",\"agent:id:004\"],\"effect\":\"allow\"}}"
+   # curl -k -X POST "https://localhost:55000/security/policies?pretty=true" -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d "{\"name\":\"customer_x_agents\",\"policy\":{\"actions\":[\"agent:read\"],\"resources\":[\"agent:id:001\",\"agent:id:002\",\"agent:id:003\",\"agent:id:004\"],\"effect\":\"allow\"}}"
 
 The Wazuh server API response will be something similar to this. Note the highlighted policy ID as this will be used later on to assign the policy to the role:
 
@@ -120,7 +120,7 @@ To create this role, use the following Wazuh server API request:
 
 .. code-block:: console
 
-   # curl -k -X POST "https://localhost:55000/security/roles?pretty=true" -H  "accept: application/json" -H  "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d "{\"name\":\"team-alpha\"}"
+   # curl -k -X POST "https://localhost:55000/security/roles?pretty=true" -H "accept: application/json" -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d "{\"name\":\"team-alpha\"}"
 
 The Wazuh server API response will be something similar to this. Note the highlighted role ID as this will be used later on to link policies to this role:
 
@@ -165,7 +165,7 @@ To create this user, use the following Wazuh server API request:
 
 .. code-block:: console
 
-   # curl -k -X POST "https://localhost:55000/security/users?pretty=true" -H  "accept: application/json" -H  "Authorization: Bearer $TOKEN" -H  "Content-Type: application/json" -d "{\"username\":\"alpha-member-1\",\"password\":\"Alpha-Member-1\"}"
+   # curl -k -X POST "https://localhost:55000/security/users?pretty=true" -H "accept: application/json" -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d "{\"username\":\"alpha-member-1\",\"password\":\"Alpha-Member-1\"}"
 
 The Wazuh server API response will be something similar to this:
 
@@ -202,7 +202,7 @@ To enable authorization context login for a user, set ``allow_run_as`` to ``true
 
 .. code-block:: console
 
-   # curl -k -X PUT "https://localhost:55000/security/users/<USER_ID>/run_as?allow_run_as=true" -H  "Authorization: Bearer $TOKEN"
+   # curl -k -X PUT "https://localhost:55000/security/users/<USER_ID>/run_as?allow_run_as=true" -H "Authorization: Bearer $TOKEN"
 
 Expected successful response:
 
@@ -236,7 +236,7 @@ For example, to assign the ``customer_x_agents`` policy created in the `Create a
 
 .. code-block:: console
 
-   # curl -k -X POST "https://localhost:55000/security/roles/100/policies?policy_ids=100&pretty=true" -H  "Authorization: Bearer $TOKEN"
+   # curl -k -X POST "https://localhost:55000/security/roles/100/policies?policy_ids=100&pretty=true" -H "Authorization: Bearer $TOKEN"
 
 .. code-block:: none
    :class: output
@@ -296,7 +296,7 @@ Run the following command to create the rule:
 
 .. code-block:: console
 
-   # curl -k -X POST "https://localhost:55000/security/rules?pretty=true" -H  "accept: application/json" -H  "Authorization: Bearer $TOKEN" -H  "Content-Type: application/json" -d "{\"name\":\"alpha_rule\",\"rule\":{\"FIND\":{\"username\":\"alpha-member-1\"}}}"
+   # curl -k -X POST "https://localhost:55000/security/rules?pretty=true" -H "accept: application/json" -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d "{\"name\":\"alpha_rule\",\"rule\":{\"FIND\":{\"username\":\"alpha-member-1\"}}}"
 
 Expected successful response:
 
@@ -336,7 +336,7 @@ To assign rules, you need to specify both the rule ID and the role ID. For examp
 
 .. code-block:: console
 
-   # curl -k -X POST "https://localhost:55000/security/roles/100/rules?rule_ids=100&pretty=true" -H  "accept: application/json" -H  "Authorization: Bearer $TOKEN"
+   # curl -k -X POST "https://localhost:55000/security/roles/100/rules?rule_ids=100&pretty=true" -H "accept: application/json" -H "Authorization: Bearer $TOKEN"
 
 .. code-block:: none
    :class: output
@@ -369,15 +369,15 @@ To assign rules, you need to specify both the rule ID and the role ID. For examp
 Assign roles to a user
 ----------------------
 
-Use the :api-ref:`POST /security/users/{username}/roles <operation/api.controllers.security_controller.set_user_role>` endpoint to assign users to one or more roles. You can add existing users to a role by specifying the user ID and role ID you want to assign.
+Use the :api-ref:`POST /security/users/{user_id}/roles <operation/api.controllers.security_controller.set_user_role>` endpoint to assign users to one or more roles. You can add existing users to a role by specifying the user ID and role ID you want to assign.
 
-The :api-ref:`POST /security/users/{username}/roles <operation/api.controllers.security_controller.set_user_role>` endpoint features an optional ``position`` parameter to set the order of role application, which is crucial when roles contain conflicting policies. For more details, see :ref:`rbac_priority`.
+The :api-ref:`POST /security/users/{user_id}/roles <operation/api.controllers.security_controller.set_user_role>` endpoint features an optional ``position`` parameter to set the order of role application, which is crucial when roles contain conflicting policies. For more details, see :ref:`rbac_priority`.
 
 Following the previous example, you can assign ``team-alpha`` role, with *role_id* ``100`` to the user ``alpha-member-1``, with user ID ``101``, use this request:
 
 .. code-block:: console
 
-   # curl -k -X POST "https://localhost:55000/security/users/101/roles?role_ids=100&pretty=true" -H  "Authorization: Bearer $TOKEN"
+   # curl -k -X POST "https://localhost:55000/security/users/101/roles?role_ids=100&pretty=true" -H "Authorization: Bearer $TOKEN"
 
 Expected successful response:
 
@@ -473,8 +473,8 @@ To see the final policies applied to the current user, use the :api-ref:`GET /se
        "agent:read": {
            "agent:id:001": "allow"
        },
-       "rbac_mode": "white"
-           "roles": []
+       "rbac_mode": "white",
+       "roles": []
      },
      "message": "Current user processed policies information was returned",
      "error": 0
