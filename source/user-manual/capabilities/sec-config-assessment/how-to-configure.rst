@@ -52,7 +52,25 @@ You can also specify an absolute path to the policy file.
 
 Restart the Wazuh agent to apply the change:
 
-.. include:: /_templates/common/restart_agent.rst
+.. tabs::
+
+   .. group-tab:: Linux
+
+      .. code-block:: console
+
+         # systemctl restart wazuh-agent
+
+   .. group-tab:: Windows
+
+      .. code-block:: pwsh-session
+
+         # Restart-Service -Name wazuh
+
+   .. group-tab:: macOS
+
+      .. code-block:: console
+
+         # /Library/Ossec/bin/wazuh-control restart
 
 .. _share_policy_files_and_configuration_with_the_Wazuh_agents:
 
