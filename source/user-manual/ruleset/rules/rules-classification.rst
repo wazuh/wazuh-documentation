@@ -17,6 +17,12 @@ Rules are categorized into multiple levels, ranging from the lowest (0) to the m
 |       |                                  | These rules are scanned before all the others, include events with no security relevance and do not appear in the  |
 |       |                                  | security event dashboard.                                                                                          |
 +-------+----------------------------------+--------------------------------------------------------------------------------------------------------------------+
+| 1     | Low relevance information        | Events with very low security relevance on their own, kept as context or as a base for other rules. For example,   |
+|       |                                  | rule 5754 (sshd: failed to create a session).                                                                      |
+|       |                                  |                                                                                                                    |
+|       |                                  | Level 1 is below the default alert threshold (log_alert_level 3), so these events don't generate alerts unless you |
+|       |                                  | lower that value.                                                                                                  |
++-------+----------------------------------+--------------------------------------------------------------------------------------------------------------------+
 | 2     | System low priority notification | System notification or status messages. These have no security relevance and do not appear in the security event   |
 |       |                                  | dashboard.                                                                                                         |
 +-------+----------------------------------+--------------------------------------------------------------------------------------------------------------------+

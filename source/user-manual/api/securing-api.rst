@@ -69,7 +69,7 @@ You can change the default password for the administrative users ``wazuh`` and `
 
    .. code-block:: console
 
-      # curl -k -X GET "https://localhost:55000/security/users?pretty=true" -H  "Authorization: Bearer $TOKEN"
+      # curl -k -X GET "https://localhost:55000/security/users?pretty=true" -H "Authorization: Bearer $TOKEN"
 
 #. Change the password of the desired user, replace ``<USER_ID>`` with the user's ID, and ``<NEW_PASSWORD>`` with the new password:
 
@@ -118,4 +118,4 @@ To protect against brute force attacks, you can limit login attempts from the sa
 
 By default, you're allowed 50 login attempts per 300-second period. To adjust these limits, edit the ``max_login_attempts`` and/or ``block_time`` settings in ``/var/ossec/api/configuration/api.yaml``.
 
-You can find a complete Wazuh server API configuration guide :doc:`here <configuration>`.
+For a complete guide, see :doc:`Wazuh server API configuration <configuration>`.

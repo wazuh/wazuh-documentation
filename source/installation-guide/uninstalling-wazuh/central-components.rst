@@ -104,6 +104,9 @@ Run the following commands to uninstall the Wazuh dashboard:
 
             # systemctl disable --now wazuh-dashboard
             # apt-get remove --purge wazuh-dashboard -y
+            # rm -rf /var/lib/wazuh-dashboard/
+            # rm -rf /usr/share/wazuh-dashboard/
+            # rm -rf /etc/wazuh-dashboard/
 
       .. group-tab:: Yum
 
