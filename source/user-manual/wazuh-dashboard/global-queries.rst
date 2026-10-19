@@ -154,7 +154,7 @@ The following index pattern stores Security Configuration Assessment data:
    * - ``wazuh-states-sca-*``
      - Stores Security Configuration Assessment (SCA) scan results and compliance evaluation data.
 
-Navigate to **Endpoint security** > **File Integrity Monitoring** on the Wazuh dashboard to view and query security configuration assessment (SCA) data collected from monitored endpoints.
+Navigate to **Endpoint security** > **Configuration Assessment** on the Wazuh dashboard to view and query security configuration assessment (SCA) data collected from monitored endpoints.
 
 .. thumbnail:: /images/wazuh-dashboard/global-queries/security-configuration-assessment.png
    :align: center
