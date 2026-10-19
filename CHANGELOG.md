@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file.
 
 - Updated the *Wazuh server* disk space requirements in the *Installation guide* to include the vulnerability detection database. ([#10267](https://github.com/wazuh/wazuh-documentation/pull/10267))
 - Updated the eBPF who-data requirements and fallback behavior in the *File integrity monitoring* and *Reference* documentation to describe the eBPF health check instead of a kernel version check. ([#10331](https://github.com/wazuh/wazuh-documentation/pull/10331))
+- Updated the *Wazuh Cloud service* documentation to describe Wazuh Cloud as the software as a service (SaaS) edition of Wazuh, including the introduction, benefits, shared responsibility model, FAQ and limitations. ([#10413](https://github.com/wazuh/wazuh-documentation/pull/10413))
 
 ### Fixed
 
