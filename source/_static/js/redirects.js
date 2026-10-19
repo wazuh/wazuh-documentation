@@ -40,7 +40,7 @@ const versions = [
 
 betaVersions.push(
   /* [ LABEL , BETA_FOLDER, FILE_PATH ] */
-  ['5.0 (RC 1)', '5.0-rc', '/index.html']
+  ['5.0 (RC 2)', '5.0-rc', '/index.html']
 );
 
 /* Data structure for every release
@@ -89,9 +89,9 @@ newUrls['5.0'] = [
   '/compliance/hipaa/164.312.c.2.html',
   '/compliance/hipaa/164.312.d.html',
   '/user-manual/reference/ossec-conf/agent.html',
+  '/user-manual/reference/wazuh-common-schema.html',
   '/release-notes/release-5-0-0.html',
   '/release-notes/index-5x.html',
-  '/deployment-options/deploying-with-kubernetes/kubernetes-password.html',
   '/user-manual/agent/agent-management/remove-agents.html',
   '/user-manual/agent/agent-management/list-agents.html',
   '/user-manual/agent/agent-management/upgrade-agents-remotely.html',
@@ -573,16 +573,6 @@ removedUrls['5.0'] = [
   '/cloud-service/your-environment/send-syslog-data.html',
   '/cloud-service/your-environment/settings.html',
   '/cloud-service/your-environment/technical-faq.html',
-  '/compliance/nist/active-response.html',
-  '/compliance/nist/configuration-assessment.html',
-  '/compliance/nist/file-integrity-monitoring.html',
-  '/compliance/nist/index.html',
-  '/compliance/nist/log-data-analysis.html',
-  '/compliance/nist/malware-detection.html',
-  '/compliance/nist/system-inventory.html',
-  '/compliance/nist/threat-intelligence.html',
-  '/compliance/nist/visualization-and-dashboard.html',
-  '/compliance/nist/vulnerability-detection.html',
   '/deployment-options/amazon-machine-images/amazon-machine-images.html',
   '/deployment-options/deploying-with-puppet/index.html',
   '/deployment-options/deploying-with-puppet/setup-puppet/index.html',
@@ -610,18 +600,8 @@ removedUrls['5.0'] = [
   '/development/wazuh-cluster.html',
   '/development/wazuh-logtest.html',
   '/getting-started/use-cases/cloud-workload-protection.html',
-  '/getting-started/use-cases/configuration-assessment.html',
-  '/getting-started/use-cases/container-security.html',
-  '/getting-started/use-cases/file-integrity.html',
-  '/getting-started/use-cases/incident-response.html',
-  '/getting-started/use-cases/index.html',
-  '/getting-started/use-cases/it-hygiene.html',
-  '/getting-started/use-cases/log-analysis.html',
   '/getting-started/use-cases/malware-detection.html',
   '/getting-started/use-cases/posture-management.html',
-  '/getting-started/use-cases/regulatory-compliance.html',
-  '/getting-started/use-cases/threat-hunting.html',
-  '/getting-started/use-cases/vulnerability-detection.html',
   '/integrations-guide/amazon-security-lake/index.html',
   '/integrations-guide/elastic-stack/index.html',
   '/integrations-guide/index.html',
@@ -693,7 +673,6 @@ removedUrls['5.0'] = [
   '/user-manual/indexer-api/use-case.html',
   '/user-manual/reference/tools/clear-stats.html',
   '/user-manual/reference/tools/update-ruleset.html',
-  '/user-manual/reference/unattended-installation.html',
   '/user-manual/ruleset/cdb-list.html',
   '/user-manual/ruleset/decoders/custom.html',
   '/user-manual/ruleset/decoders/dynamic-fields.html',
@@ -847,6 +826,8 @@ removedUrls['5.0'] = [
 /* Pages added in 4.14 */
 
 newUrls['4.14'] = [
+  '/release-notes/release-4-14-11.html',
+  '/release-notes/release-4-14-10.html',
   '/release-notes/release-4-14-9.html',
   '/release-notes/release-4-14-8.html',
   '/release-notes/release-4-14-7.html',

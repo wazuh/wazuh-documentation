@@ -6,91 +6,31 @@
 Amazon Inspector
 ================
 
-`Amazon Inspector <https://aws.amazon.com/inspector/>`__ is an automated security assessment service that helps improve the security and compliance of applications deployed on AWS. Two versions are available:
+`Amazon Inspector <https://aws.amazon.com/inspector/>`__ is an automated vulnerability management service that continually scans Amazon EC2 instances, container images in Amazon ECR, and AWS Lambda functions for software vulnerabilities and unintended network exposure. It produces detailed security findings prioritized by severity, which you can review in the Amazon Inspector console or through its API.
 
--  **Amazon Inspector Classic**: The original service, which assesses applications for exposure, vulnerabilities, and deviations from best practices.
--  **Amazon Inspector (v2)**: The new version, offering consolidated scanning for EC2 instances, container images in Amazon ECR, and AWS Lambda functions.
+.. note::
 
-Both versions produce detailed security findings prioritized by severity. Findings can be reviewed directly or included in assessment reports accessible via the Amazon Inspector console or API.
+   The Wazuh module for AWS collects findings from Amazon Inspector only. Amazon Inspector Classic isn't supported.
 
 AWS configuration
 -----------------
 
-Learn how to configure Amazon Inspector (Classic and v2) integration in Wazuh.
+Learn how to configure the Amazon Inspector integration in Wazuh.
 
-Amazon Inspector Classic configuration
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Amazon Inspector configuration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. tabs::
+#. Open the Amazon Inspector page in the AWS Management Console.
+#. Click **Get Started** to access the dashboard.
+#. Configure your scanning preferences under **General settings**:
 
-   .. group-tab:: Inspector (v2)
+   -  Enable EC2 scanning
+   -  Enable ECR scanning
+   -  Enable Lambda function scanning
 
-      Amazon Inspector (v2) is available in your AWS account. To start using it:
+.. note::
 
-      #. Open the Amazon Inspector page in the AWS Management Console.
-      #. Click **Get Started** to access the dashboard.
-      #. Configure your scanning preferences under **General settings**:
-
-         - Enable EC2 scanning
-         - Enable ECR scanning
-         - Enable Lambda function scanning
-
-      .. note::
-
-         For detailed instructions on configuring scanning preferences, see the `Amazon Inspector documentation <https://docs.aws.amazon.com/inspector/latest/user/getting-started.html>`__.
-
-   .. group-tab:: Inspector Classic
-
-      #. To start using Amazon Inspector Classic, go to the AWS management console, search for "*Amazon Inspector*" and click it from the results. Once there, click on the left-side menu.
-
-         .. thumbnail:: /images/cloud-security/aws/inspector/01-left-side-menu.png
-            :align: center
-            :width: 80%
-
-      #. Click on **Switch to Inspector Classic**.
-
-         .. thumbnail:: /images/cloud-security/aws/inspector/02-switch-to-inspector-classic.png
-            :align: center
-            :width: 80%
-
-      #. On the Amazon Inspector Classic page, click **Get started**.
-
-         .. thumbnail:: /images/cloud-security/aws/inspector/03-click-get-started.png
-            :align: center
-            :width: 80%
-
-      #. Click on **Advanced setup**.
-
-         .. thumbnail:: /images/cloud-security/aws/inspector/04-advanced-setup.png
-            :align: center
-            :width: 80%
-
-      #. Configure the assessment target:
-
-         #. Choose a name for the assessment target.
-         #. Select if you are going to include all EC2 instances in the scans or if you prefer to filter them based on a tag by enabling or disabling the **Include all EC2 instances in this AWS account and region** checkbox.
-         #. If you prefer to install the agents manually, disable the **Install the Amazon Inspector Agent on all EC2 instances in this assessment target** checkbox.
-         #. Click on **Next**.
-
-         .. thumbnail:: /images/cloud-security/aws/inspector/05-configure-the-assessment-target.png
-            :align: center
-            :width: 80%
-
-         .. note::
-
-            If you prefer to install the Inspector Classic agents manually, follow the instructions on the `installing Amazon Inspector Classic agents <https://docs.aws.amazon.com/inspector/v1/userguide/inspector_installing-uninstalling-agents.html>`__ guide.
-
-      #. Configure the assessment template. Choose the name, duration, and frequency of the analysis and click on **Next**.
-
-         .. thumbnail:: /images/cloud-security/aws/inspector/06-configure-the-assessment-template.png
-            :align: center
-            :width: 80%
-
-      #. Finally, review the details of the configured target and template and click on **Next**.
-
-         .. thumbnail:: /images/cloud-security/aws/inspector/07-review-and-click-next.png
-            :align: center
-            :width: 80%
+   For detailed instructions on configuring scanning preferences, see the `Amazon Inspector documentation <https://docs.aws.amazon.com/inspector/latest/user/getting-started.html>`__.
 
 .. _inspector_policy_configuration:
 
@@ -110,8 +50,6 @@ Policy configuration
                "Sid": "VisualEditor0",
                "Effect": "Allow",
                "Action": [
-                   "inspector:ListFindings",
-                   "inspector:DescribeFindings",
                    "inspector2:ListFindings"
                ],
                "Resource": "*"
@@ -134,7 +72,7 @@ Configure Wazuh to process Amazon Inspector logs
       :align: center
       :width: 80%
 
-#. Add the following :doc:`Wazuh module for AWS </user-manual/reference/ossec-conf/wodle-s3>` configuration block to enable the integration with both Inspector versions:
+#. Add the following :doc:`Wazuh module for AWS </user-manual/reference/ossec-conf/wodle-s3>` configuration block to enable the integration with Amazon Inspector:
 
    .. code-block:: xml
 
@@ -153,7 +91,7 @@ Configure Wazuh to process Amazon Inspector logs
 
    .. note::
 
-      The same configuration block processes findings from both Inspector Classic and Inspector (v2). Findings from v2 will have ``aws.source`` set to ``inspector2``.
+      Amazon Inspector findings have ``aws.source`` set to ``inspector2``.
 
 #. Save the changes and restart Wazuh to apply the changes. The service can be manually restarted using the following command outside the Wazuh dashboard:
 

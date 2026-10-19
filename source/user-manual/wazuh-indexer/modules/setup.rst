@@ -41,7 +41,7 @@ Initialization retry mechanism
 
 The Setup module retries initialization tasks when temporary failures occur during startup. After an operation fails, the module waits for the configured backoff interval before retrying.
 
-If initialization of the same index fails twice in succession, the module stops the initialization process and shuts down the node. This prevents the node from running with incomplete storage resources. You can configure the retry interval using the ``plugins.setup.backoff`` setting in the ``/etc/wazuh-indexer/opensearch.yml`` configuration file.
+By default, the module retries a failed initialization task once. If the retry also fails, the module stops the initialization process and shuts down the node. This prevents the node from running with incomplete storage resources. You can set the number of retries with the ``plugins.setup.max_retries`` setting and the interval between them with the ``plugins.setup.backoff`` setting, in the ``/etc/wazuh-indexer/opensearch.yml`` file.
 
 Replica configuration
 ^^^^^^^^^^^^^^^^^^^^^
@@ -51,17 +51,19 @@ When configured, the Setup module applies ``cluster.default_number_of_replicas``
 Configuration
 -------------
 
-The setup module settings are configured in the ``/etc/wazuh-indexer/opensearch.yml`` file using the ``plugins.setup`` prefix.
+The Setup module settings are configured in the ``/etc/wazuh-indexer/opensearch.yml`` file using the ``plugins.setup`` prefix. Changes take effect after you restart the Wazuh indexer.
 
-+-------------------------------------------+----------+-----------------------------------------------------------------+
-| Setting                                   | Default  | Description                                                     |
-+===========================================+==========+=================================================================+
-| ``plugins.setup.timeout``                 | ``30``   | Timeout, in seconds, for index and search operations.           |
-+-------------------------------------------+----------+-----------------------------------------------------------------+
-| ``plugins.setup.backoff``                 | ``15``   | Delay, in seconds, between initialization retry attempts.       |
-+-------------------------------------------+----------+-----------------------------------------------------------------+
-| ``plugins.setup.settings_update.enabled`` | ``true`` | Setting this to ``false`` will return ``403`` for every caller. |
-+-------------------------------------------+----------+-----------------------------------------------------------------+
++-------------------------------------------+----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Setting                                   | Default  | Description                                                                                                                                               |
++===========================================+==========+===========================================================================================================================================================+
+| ``plugins.setup.timeout``                 | ``30``   | Timeout, in seconds, for index and search operations. Valid range: 5-120.                                                                                 |
++-------------------------------------------+----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``plugins.setup.backoff``                 | ``15``   | Delay, in seconds, between initialization retry attempts. Valid range: 5-60.                                                                              |
++-------------------------------------------+----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``plugins.setup.max_retries``             | ``1``    | Number of times the module retries a failed initialization task before it shuts down the node. ``0`` disables retries. Valid range: 0-10.                 |
++-------------------------------------------+----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``plugins.setup.settings_update.enabled`` | ``true`` | Allows changes through the ``PUT /_plugins/_setup/settings`` endpoint. When ``false``, the endpoint returns ``403`` for every caller, regardless of role. |
++-------------------------------------------+----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 API reference
@@ -76,7 +78,7 @@ The Setup module exposes REST API endpoints under ``/_plugins/_setup/``.
 Update settings
 ^^^^^^^^^^^^^^^
 
-Update settings are stored in the ``.wazuh-settings`` index on the Wazuh indexer. Currently, the Wazuh indexer API supports the ``engine.index_raw_events`` setting, which controls whether raw events are indexed into the ``wazuh-events-raw-v5`` data stream.
+Update settings are stored in the ``.wazuh-settings`` index on the Wazuh indexer. Currently, the Wazuh indexer API supports the ``engine.index_raw_events`` setting, which controls whether raw events are indexed into the ``wazuh-events-raw-v5`` data stream. The default value is ``false``, so Wazuh does not index raw events until you enable the setting.
 
 **Request**
 
@@ -96,13 +98,13 @@ Update settings are stored in the ``.wazuh-settings`` index on the Wazuh indexer
 
 Where:
 
-+-----------------------------+----------+-------------------------------------------------+
-| Field                       | Required | Description                                     |
-+=============================+==========+=================================================+
-| ``engine``                  | Yes      | Engine configuration object.                    |
-+-----------------------------+----------+-------------------------------------------------+
-| ``engine.index_raw_events`` | Yes      | Enables or disables the indexing of raw events. |
-+-----------------------------+----------+-------------------------------------------------+
++-----------------------------+----------+--------------------------------------------------------------------------------------------------+
+| Field                       | Required | Description                                                                                      |
++=============================+==========+==================================================================================================+
+| ``engine``                  | Yes      | Engine configuration object.                                                                     |
++-----------------------------+----------+--------------------------------------------------------------------------------------------------+
+| ``engine.index_raw_events`` | Yes      | Enables (``true``) or disables (``false``) the indexing of raw events. The default is ``false``. |
++-----------------------------+----------+--------------------------------------------------------------------------------------------------+
 
 **Example**
 
@@ -142,14 +144,22 @@ Replace ``<WAZUH_INDEXER_IP>`` with the IP address of the Wazuh indexer node and
      "status": 400
    }
 
-The status codes in the responses gave the following meanings:
+   // Settings updates disabled
+   {
+     "message": "Setup settings updates are disabled on this deployment.",
+     "status": 403
+   }
 
-+---------+-----------------------------------------------------------------------+
-| Code    | Description                                                           |
-+=========+=======================================================================+
-| ``200`` | Settings updated successfully.                                        |
-+---------+-----------------------------------------------------------------------+
-| ``400`` | Invalid request body, missing required fields, or invalid field type. |
-+---------+-----------------------------------------------------------------------+
-| ``500`` | Internal server error.                                                |
-+---------+-----------------------------------------------------------------------+
+The status codes in the responses have the following meanings:
+
++---------+-------------------------------------------------------------------------------------------------------------+
+| Code    | Description                                                                                                 |
++=========+=============================================================================================================+
+| ``200`` | Settings updated successfully.                                                                              |
++---------+-------------------------------------------------------------------------------------------------------------+
+| ``400`` | Invalid request body, missing required fields, or invalid field type.                                       |
++---------+-------------------------------------------------------------------------------------------------------------+
+| ``403`` | Settings updates are disabled on this node, because ``plugins.setup.settings_update.enabled`` is ``false``. |
++---------+-------------------------------------------------------------------------------------------------------------+
+| ``500`` | Internal server error.                                                                                      |
++---------+-------------------------------------------------------------------------------------------------------------+

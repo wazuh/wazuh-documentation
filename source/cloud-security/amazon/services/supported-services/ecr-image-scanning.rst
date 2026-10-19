@@ -232,7 +232,7 @@ Configure Wazuh to process Amazon ECR image scanning logs
         <run_on_start>yes</run_on_start>
         <service type="cloudwatchlogs">
           <aws_profile>default</aws_profile>
-          <aws_log_groups>/aws/ecr/<NAME_OF_ECR_REPOSITORY></aws_log_groups>
+          <aws_log_groups>/aws/ecr/image-scan-findings/<NAME_OF_ECR_REPOSITORY></aws_log_groups>
         </service>
       </wodle>
 

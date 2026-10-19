@@ -284,7 +284,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
                   sp:
                     entity_id: wazuh-saml
                     metadata_file: '/etc/wazuh-indexer/opensearch-security/sp-metadata.xml'
-                  kibana_url: https://<WAZUH_DASHBOARD_ADDRESS>
+                  kibana_url: https://<WAZUH_DASHBOARD_URL>
                   roles_key: Roles
                   exchange_key: 'b1d6dd32753374557dcf92e241.......'
               authentication_backend:
@@ -344,6 +344,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
         hidden: false
         backend_roles:
         - "wazuh-admins"
+        - "admin"
         and_backend_roles: []
         description: "Maps admin to all_access"
 
@@ -706,7 +707,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
                   sp:
                     entity_id: wazuh-saml
                     metadata_file: '/etc/wazuh-indexer/opensearch-security/sp-metadata.xml'
-                  kibana_url: https://<WAZUH_DASHBOARD_ADDRESS>
+                  kibana_url: https://<WAZUH_DASHBOARD_URL>
                   roles_key: Roles
                   exchange_key: 'b1d6dd32753374557dcf92e241.......'
               authentication_backend:

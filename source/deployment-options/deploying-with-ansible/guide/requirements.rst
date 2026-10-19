@@ -18,11 +18,13 @@ The control node is the endpoint where you install Ansible and run the playbooks
 -  **Inventory file is configured**: Create and configure the ``/etc/ansible/hosts`` file that defines your target endpoints and connection variables. You can verify connectivity with ``ansible <HOST_OR_GROUP> -m ping`` for Linux and macOS endpoints, and with ``ansible <HOST_OR_GROUP> -m win_ping`` for Windows endpoints. Replace ``<HOST_OR_GROUP>`` with a host or group from your inventory. Each module works only on its own operating system.
 -  **Git is installed**: Required to clone the ``wazuh-ansible`` repository.
 -  **OpenSSL is installed**: The playbooks run ``openssl`` on the control node to read the certificates and to generate the cluster key.
+-  **Root privileges**: Run the commands and playbooks of this guide as root (or with ``sudo``).
+-  **SSH key access**: The control node logs in to every Linux and macOS target with an SSH key, as a user with ``sudo`` privileges.
 
 Target node requirements
 ------------------------
 
-Target nodes are the endpoints where Wazuh components will be installed. Your endpoints must meet the following requirements before you proceed with the deployment of Ansible:
+Target nodes are the endpoints where Wazuh components will be installed. Your endpoints must meet the following requirements before you deploy Wazuh:
 
 -  **Ansible version compatibility**: Ensure the Ansible version installed on the control node is compatible with the target endpoints on which Wazuh components will be installed.
 -  **Python is installed on Linux endpoints**: Install Python 3.10 or later on all Linux endpoints. Ansible requires Python on managed Linux endpoints.

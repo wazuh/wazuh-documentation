@@ -312,6 +312,7 @@ Secure communication between Wazuh components requires the use of certificates. 
    Where:
 
    -  ``--cert`` generates the certificates.
+   -  ``--copy`` copies the certificates to the ``config/`` directory, where the ``docker-compose.yml`` file mounts them from.
    -  ``--priv`` option sets the file owners the Wazuh containers need.
    -  ``--agent-san`` option adds the address to the certificate the Wazuh manager presents to Wazuh agents. Wazuh agents check that this certificate names the address they connect to, and the Wazuh manager creates enrollment tokens only for addresses it names. Repeat ``--agent-san`` for each address agents use, such as a DNS name.
 
@@ -342,7 +343,7 @@ The Wazuh Docker images ship no passwords. Generate the passwords for your deplo
 
       # bash ../tools/utils/deployment/credentials-conf.sh
 
-   The script writes a random password for each account to ``config/credentials/indexer.env``, ``config/credentials/manager.env``, and ``config/credentials/dashboard.env``. The stack does not start without these files. Keep them, because they are the only record of your passwords. Don't edit them after the first start: an edit doesn't change the passwords, and the files then no longer match your deployment.
+   The script writes a random password for each account to ``config/credentials/indexer.env``, ``config/credentials/manager.env``, and ``config/credentials/dashboard.env``. The stack does not start without these files. Keep them, because they are the only record of your passwords. Don't edit them after the first start: an edit doesn't change the passwords, and the files then no longer match your deployment. To change a password later, see :ref:`docker_changing_password`.
 
 Deployment
 ~~~~~~~~~~

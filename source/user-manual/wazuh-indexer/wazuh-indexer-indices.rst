@@ -23,30 +23,34 @@ Each data stream is associated with an index template that defines its mappings 
 
 The following table lists the Wazuh data streams and the type of information each stores:
 
-+----------------------------------+--------------------------------------------------------------------------------+
-| Data stream                      | Description                                                                    |
-+==================================+================================================================================+
-| ``wazuh-events-raw-v5``          | Stores incoming events before processing and normalization.                    |
-+----------------------------------+--------------------------------------------------------------------------------+
-| ``wazuh-events-v5-<category>``   | Stores normalized and categorized events using the Wazuh Common Schema (WCS).  |
-+----------------------------------+--------------------------------------------------------------------------------+
-| ``wazuh-events-v5-unclassified`` | Stores events that could not be assigned to a category.                        |
-+----------------------------------+--------------------------------------------------------------------------------+
-| ``wazuh-findings-v5-<category>`` | Stores findings generated when Security Analytics detectors match Sigma rules. |
-+----------------------------------+--------------------------------------------------------------------------------+
-| ``wazuh-active-responses``       | Stores active response execution requests.                                     |
-+----------------------------------+--------------------------------------------------------------------------------+
-| ``wazuh-metrics-agents``         | Stores operational metrics for monitored endpoints.                            |
-+----------------------------------+--------------------------------------------------------------------------------+
-| ``wazuh-metrics-comms``          | Stores communication and performance metrics for the Wazuh manager.            |
-+----------------------------------+--------------------------------------------------------------------------------+
++----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
+| Data stream                      | Description                                                                                                                                  |
++==================================+==============================================================================================================================================+
+| ``wazuh-events-raw-v5``          | Stores incoming events before processing and normalization, when raw event indexing is enabled. Raw event indexing is disabled by default.   |
++----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
+| ``wazuh-events-v5-<category>``   | Stores normalized and categorized events using the Wazuh Common Schema (WCS).                                                                |
++----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
+| ``wazuh-events-v5-unclassified`` | Stores events that could not be assigned to a category.                                                                                      |
++----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
+| ``wazuh-findings-v5-<category>`` | Stores findings generated when Security Analytics detectors match Sigma rules.                                                               |
++----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
+| ``wazuh-active-responses``       | Stores active response execution requests.                                                                                                   |
++----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
+| ``wazuh-metrics-agents``         | Stores operational metrics for monitored endpoints.                                                                                          |
++----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
+| ``wazuh-metrics-comms-v4``       | Stores Wazuh manager communication and performance metrics for the legacy communication protocol, which Wazuh agents earlier than 5.0.0 use. |
++----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
+| ``wazuh-metrics-normalization``  | Stores metrics about how the Wazuh manager normalizes (decodes) events.                                                                      |
++----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
+| ``wazuh-ai-assistant-sessions``  | Stores the conversations users have with the AI assistant.                                                                                   |
++----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
 
 Event data streams
 ^^^^^^^^^^^^^^^^^^
 
 Events collected from monitored endpoints pass through several stages before becoming searchable security data.
 
-When an event arrives, Wazuh indexer stores the original event in the raw events data stream. The event is then normalized according to the Wazuh Common Schema and routed to the appropriate category-specific data stream. Events that cannot be categorized are stored in the unclassified data stream for further analysis. The event data streams are ``wazuh-events-raw-v5``, ``wazuh-events-v5-<category>``, and ``wazuh-events-v5-unclassified``.
+When an event arrives, Wazuh normalizes it according to the Wazuh Common Schema and routes it to the appropriate category-specific data stream. When unclassified event indexing is enabled for the space, events that cannot be categorized go to the unclassified data stream. When raw event indexing is enabled, Wazuh also stores the original event in the raw events data stream. Raw event indexing is disabled by default, and you enable it with the Setup module settings API. The event data streams are ``wazuh-events-raw-v5``, ``wazuh-events-v5-<category>``, and ``wazuh-events-v5-unclassified``.
 
 Findings data streams
 ^^^^^^^^^^^^^^^^^^^^^
@@ -70,7 +74,7 @@ Each document contains information about:
 -  Execution parameters and response state.
 -  Agent and cluster metadata.
 
-This provides a complete audit trail linking response actions to the events that generated them. The template for this data stream is stored at ``templates/streams/active-responses.json``. It matches the ``wazuh-active-responses*`` index pattern, uses ``wazuh-active-responses`` as its rollover alias, and is set to priority 1. Its fields follow the Wazuh Common Schema with the following fields included:
+This provides a complete audit trail linking response actions to the events that generated them. The template for this data stream is stored at ``templates/streams/active-responses.json``. It matches the ``wazuh-active-responses*`` index pattern and is set to priority ``1``. Its fields follow the Wazuh Common Schema with the following fields included:
 
 +--------------------------------------------+------------------------------------------------------------------------------------------+
 | Field                                      | Description                                                                              |
@@ -113,45 +117,49 @@ Unlike data streams, stateful information is continuously updated as the monitor
 
 The following stateful indices are available:
 
-+-----------------------------------------------+--------------------------------------------+
-| Index pattern                                 | Description                                |
-+===============================================+============================================+
-| ``wazuh-states-sca``                          | Security Configuration Assessment results. |
-+-----------------------------------------------+--------------------------------------------+
-| ``wazuh-states-fim-files``                    | File Integrity Monitoring file metadata.   |
-+-----------------------------------------------+--------------------------------------------+
-| ``wazuh-states-fim-registry-keys``            | Monitored Windows registry keys.           |
-+-----------------------------------------------+--------------------------------------------+
-| ``wazuh-states-fim-registry-values``          | Monitored Windows registry values.         |
-+-----------------------------------------------+--------------------------------------------+
-| ``wazuh-states-vulnerabilities``              | Vulnerability assessment results.          |
-+-----------------------------------------------+--------------------------------------------+
-| ``wazuh-states-inventory-users``              | User account inventory.                    |
-+-----------------------------------------------+--------------------------------------------+
-| ``wazuh-states-inventory-groups``             | Local group inventory.                     |
-+-----------------------------------------------+--------------------------------------------+
-| ``wazuh-states-inventory-packages``           | Installed software inventory.              |
-+-----------------------------------------------+--------------------------------------------+
-| ``wazuh-states-inventory-processes``          | Running process inventory.                 |
-+-----------------------------------------------+--------------------------------------------+
-| ``wazuh-states-inventory-services``           | Service inventory.                         |
-+-----------------------------------------------+--------------------------------------------+
-| ``wazuh-states-inventory-ports``              | Open port inventory.                       |
-+-----------------------------------------------+--------------------------------------------+
-| ``wazuh-states-inventory-networks``           | Network address inventory.                 |
-+-----------------------------------------------+--------------------------------------------+
-| ``wazuh-states-inventory-interfaces``         | Network interface information.             |
-+-----------------------------------------------+--------------------------------------------+
-| ``wazuh-states-inventory-protocols``          | Routing and protocol information.          |
-+-----------------------------------------------+--------------------------------------------+
-| ``wazuh-states-inventory-hardware``           | Hardware inventory.                        |
-+-----------------------------------------------+--------------------------------------------+
-| ``wazuh-states-inventory-system``             | Operating system and host information.     |
-+-----------------------------------------------+--------------------------------------------+
-| ``wazuh-states-inventory-hotfixes``           | Installed updates and hotfixes.            |
-+-----------------------------------------------+--------------------------------------------+
-| ``wazuh-states-inventory-browser-extensions`` | Browser extension inventory.               |
-+-----------------------------------------------+--------------------------------------------+
++-----------------------------------------------+-----------------------------------------------------------------+
+| Index pattern                                 | Description                                                     |
++===============================================+=================================================================+
+| ``wazuh-agent-config``                        | Latest configuration that each Wazuh agent reports, per module. |
++-----------------------------------------------+-----------------------------------------------------------------+
+| ``wazuh-agent-stats``                         | Latest statistics that each Wazuh agent reports, per module.    |
++-----------------------------------------------+-----------------------------------------------------------------+
+| ``wazuh-states-sca``                          | Security Configuration Assessment results.                      |
++-----------------------------------------------+-----------------------------------------------------------------+
+| ``wazuh-states-fim-files``                    | File Integrity Monitoring file metadata.                        |
++-----------------------------------------------+-----------------------------------------------------------------+
+| ``wazuh-states-fim-registry-keys``            | Monitored Windows registry keys.                                |
++-----------------------------------------------+-----------------------------------------------------------------+
+| ``wazuh-states-fim-registry-values``          | Monitored Windows registry values.                              |
++-----------------------------------------------+-----------------------------------------------------------------+
+| ``wazuh-states-vulnerabilities``              | Vulnerability assessment results.                               |
++-----------------------------------------------+-----------------------------------------------------------------+
+| ``wazuh-states-inventory-users``              | User account inventory.                                         |
++-----------------------------------------------+-----------------------------------------------------------------+
+| ``wazuh-states-inventory-groups``             | Local group inventory.                                          |
++-----------------------------------------------+-----------------------------------------------------------------+
+| ``wazuh-states-inventory-packages``           | Installed software inventory.                                   |
++-----------------------------------------------+-----------------------------------------------------------------+
+| ``wazuh-states-inventory-processes``          | Running process inventory.                                      |
++-----------------------------------------------+-----------------------------------------------------------------+
+| ``wazuh-states-inventory-services``           | Service inventory.                                              |
++-----------------------------------------------+-----------------------------------------------------------------+
+| ``wazuh-states-inventory-ports``              | Open port inventory.                                            |
++-----------------------------------------------+-----------------------------------------------------------------+
+| ``wazuh-states-inventory-networks``           | Network address inventory.                                      |
++-----------------------------------------------+-----------------------------------------------------------------+
+| ``wazuh-states-inventory-interfaces``         | Network interface information.                                  |
++-----------------------------------------------+-----------------------------------------------------------------+
+| ``wazuh-states-inventory-protocols``          | Routing and protocol information.                               |
++-----------------------------------------------+-----------------------------------------------------------------+
+| ``wazuh-states-inventory-hardware``           | Hardware inventory.                                             |
++-----------------------------------------------+-----------------------------------------------------------------+
+| ``wazuh-states-inventory-system``             | Operating system and host information.                          |
++-----------------------------------------------+-----------------------------------------------------------------+
+| ``wazuh-states-inventory-hotfixes``           | Installed updates and hotfixes.                                 |
++-----------------------------------------------+-----------------------------------------------------------------+
+| ``wazuh-states-inventory-browser-extensions`` | Browser extension inventory.                                    |
++-----------------------------------------------+-----------------------------------------------------------------+
 
 Data stream lifecycle
 ---------------------
@@ -160,26 +168,32 @@ Wazuh automatically manages data stream growth through rollover and retention po
 
 A rollover occurs when the active backing index reaches a configured size or document count threshold. After rollover, new documents are written to a new backing index while existing data remains searchable.
 
-Retention policies determine how long data is preserved before it is deleted. This approach keeps storage consumption predictable while maintaining access to the data required for investigation, threat hunting, and compliance activities.
+Each lifecycle policy also sets a minimum age for deletion. Wazuh deletes a backing index only after the data stream rolls over to a new one. The old index must also be older than the minimum age, counted from its creation. This approach keeps storage consumption predictable while maintaining access to the data required for investigation, threat hunting, and compliance activities.
 
 By default, Wazuh rolls over a data stream when either of the following limits is reached:
 
 -  20 GB primary shard size.
 -  200 million documents.
 
-The default retention periods are shown below.
+The ``wazuh-ai-assistant-sessions`` data stream also rolls over daily.
 
-+----------------------------+------------------+
-| Data stream                | Retention period |
-+============================+==================+
-| ``wazuh-events-raw-v5``    | 10 minutes       |
-+----------------------------+------------------+
-| ``wazuh-events-v5-*``      | 1 hour           |
-+----------------------------+------------------+
-| ``wazuh-findings-v5-*``    | 90 days          |
-+----------------------------+------------------+
-| ``wazuh-active-responses`` | 3 days           |
-+----------------------------+------------------+
+The default minimum ages for deletion are shown below. A data stream that never reaches a rollover limit keeps its data until you delete it.
+
++---------------------------------+--------------------------+
+| Data stream                     | Minimum age for deletion |
++=================================+==========================+
+| ``wazuh-events-raw-v5``         | 10 minutes               |
++---------------------------------+--------------------------+
+| ``wazuh-events-v5-*``           | 1 hour                   |
++---------------------------------+--------------------------+
+| ``wazuh-findings-v5-*``         | 90 days                  |
++---------------------------------+--------------------------+
+| ``wazuh-active-responses``      | 3 days                   |
++---------------------------------+--------------------------+
+| ``wazuh-metrics-*``             | 30 days                  |
++---------------------------------+--------------------------+
+| ``wazuh-ai-assistant-sessions`` | 7 days                   |
++---------------------------------+--------------------------+
 
 The following diagram illustrates the lifecycle of a data stream:
 
@@ -193,11 +207,11 @@ The following diagram illustrates the lifecycle of a data stream:
 
    Data stream rollover and retention are managed automatically through :ref:`Index State Management (ISM) <index_state_management>` policies. In most deployments, no manual intervention is required.
 
-Each lifecycle policy moves an index through two stages during its lifetime. When an index is first created, it enters the active stage, where it accepts new data. It remains in this stage until one of the configured rollover conditions, such as age or size, is met. At that point, Wazuh creates a new active index, and the previous index stops accepting new data.
+Each lifecycle policy moves an index through two stages during its lifetime. When an index is first created, it enters the active stage, where it accepts new data. It remains in this stage until one of the configured rollover conditions, such as primary shard size or document count, is met. At that point, Wazuh creates a new active index, and the previous index stops accepting new data.
 
-The previous index is retained until its configured retention period expires. It then enters the delete stage, where Wazuh permanently removes it. If the deletion fails, Wazuh automatically retries the operation up to three times with increasing delays between attempts.
+The previous index moves to the delete stage once it is older than its minimum age for deletion, and Wazuh permanently removes it. If the deletion fails, Wazuh automatically retries the operation up to three times with increasing delays between attempts.
 
-The ISM policy below keeps matching indices in the hot state while they receive data. It rolls them over when they reach 200 million documents or a 20 GB primary shard size. After the configured retention period expires, the policy moves the index to the delete state and removes it. Failed actions are retried up to three times using exponential backoff.
+The ISM policy below keeps matching indices in the hot state while they receive data. It rolls them over when they reach 200 million documents or a 20 GB primary shard size. After rollover, once the index is older than the minimum age, the policy moves it to the delete state and removes it. Failed actions are retried up to three times using exponential backoff.
 
 .. code-block:: none
    :emphasize-lines: 3, 4, 5, 19, 20, 28, 51, 53
@@ -206,7 +220,7 @@ The ISM policy below keeps matching indices in the hot state while they receive 
      "policy": {
        "policy_id": "<index-name>-policy",
        "description": "<POLICY_DESCRIPTION>",
-       "last_updated_time": <UNIX_TIMESTAMP_IN-MILLISECONDS>,
+       "last_updated_time": <UNIX_TIMESTAMP_IN_MILLISECONDS>,
        "schema_version": 1,
        "default_state": "hot",
        "states": [
@@ -229,7 +243,7 @@ The ISM policy below keeps matching indices in the hot state while they receive 
              {
                "state_name": "delete",
                "conditions": {
-                 "min_index_age": "<RETENTION_TIME>"
+                 "min_index_age": "<MINIMUM_AGE_FOR_DELETION>"
                }
              }
            ]
@@ -330,11 +344,10 @@ The response lists all deployed Wazuh index templates and the index patterns ass
                  "max_docvalue_fields_search": "200",
                  "query": {
                    "default_field": [
-                     "agent.host.architecture",
-                     "agent.host.ip",
-                     "agent.id",
-                     "agent.name",
-                     "agent.version",
+                     "wazuh.agent.host.architecture",
+                     "wazuh.agent.id",
+                     "wazuh.agent.name",
+                     "wazuh.agent.version",
                      "wazuh.cluster.name",
                      "wazuh.cluster.node",
                      "wazuh.schema.version"

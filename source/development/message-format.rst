@@ -27,7 +27,7 @@ Below is an example of a Syslog message:
 
 ::
 
-    Sept  9 16:06:16 localhost salute: Hello world.
+    Sep  9 16:06:26 localhost salute: Hello world.
 
 When logs are in Syslog format, the pre-decoder processes and interprets the message header, extracting essential information like timestamps, hostnames, and severity levels before further analysis. In the case of the message above, the following fields are extracted:
 
@@ -91,7 +91,7 @@ Example:
 .. code-block:: none
     :class: output
 
-    1:/var/log/syslog:Nov  9 16:06:26 localhost salute: Hello world.
+    1:/var/log/syslog:Sep  9 16:06:26 localhost salute: Hello world.
 
 Secure message format
 ---------------------

@@ -1,162 +1,180 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Wazuh collects, analyzes, and stores logs from endpoints, network devices, and applications. Find more information in this getting started use-case.
-  
+   :description: Learn how Wazuh collects, normalizes, analyzes, indexes, and visualizes log data from endpoints, network devices, applications, and cloud services.
+
 Log data analysis
 =================
 
-Log data analysis is a crucial process that involves examining and extracting valuable insights from log files created by different systems, applications, or devices. These logs contain records of events that provide useful information for troubleshooting, security analysis and monitoring,  and optimizing performance. Log data analysis is an essential practice that contributes to a secure, efficient, and reliable IT ecosystem.
+Log data analysis helps organizations detect security events, investigate suspicious activity, and understand what is happening across their infrastructure. Logs collected and analyzed from multiple systems give you visibility into authentication activity, application behavior, network events, configuration changes, and other security-relevant operations.
 
-Wazuh collects, analyzes, and stores logs from endpoints, network devices, and applications. The Wazuh agent, running on a monitored endpoint collects and forwards system and application logs to the Wazuh server for analysis. Additionally, you can send log messages to the Wazuh server via syslog or third-party API integrations.
+The Wazuh :doc:`log data collection </user-manual/capabilities/log-data-collection/index>` capability centralizes logs from monitored endpoints, network devices, applications, cloud services, containers, and agentless sources. The Wazuh manager enriches and normalizes this telemetry into the :ref:`Wazuh Common Schema (WCS) <wazuh_common_schema>` and forwards the processed events to the Wazuh indexer for analysis. Wazuh rules and decoders support :doc:`log data analysis </user-manual/data-analysis/index>`, threat detection, and response. Centralized logs enable security teams to search, correlate, and investigate security events from a single interface.
 
-Log data collection
--------------------
+Collecting and centralizing security logs
+-----------------------------------------
 
-Wazuh collects logs from a wide range of sources, enabling comprehensive monitoring of various aspects of your IT environment. You can check our documentation on :doc:`Log data collection </user-manual/capabilities/log-data-collection/index>` to understand better how Wazuh collects and analyzes logs from monitored endpoints. Some of the common log sources supported by Wazuh include:
+Security events originate from operating systems, applications, network devices, cloud services, and other infrastructure components. Wazuh centralizes log collection across these sources, giving security teams a single location to search, correlate, and investigate security events.
 
--  **Operating system logs**: Wazuh collects logs from several operating systems, including :ref:`Linux <how-to-collect-linuxlogs>`, :ref:`Windows <how-to-collect-windowslogs>`, and :ref:`macOS <how-to-collect-macoslogs>`.
+The :doc:`Logcollector module </user-manual/capabilities/log-data-collection/how-it-works>` collects log files on :ref:`Linux <how-to-collect-linuxlogs>`, :ref:`Windows <how-to-collect-windowslogs>`, and :ref:`macOS <how-to-collect-macoslogs>` operating systems. It also monitors Windows Event Channels, collects logs from the macOS Unified Logging System (ULS), and reads the systemd journal through the journald collector. The Wazuh agent forwards collected logs to the Wazuh manager. The Wazuh manager normalizes and processes the logs before forwarding them to the Wazuh indexer. The Wazuh indexer analyzes the logs and stores them in dedicated data streams for centralized analysis.
 
-   Wazuh can collect syslog, auditd, application logs, and others from Linux endpoints.
+Wazuh also collects logs from syslog-enabled devices, agentless monitored systems, cloud providers, and third-party applications. A new log source requires only a configuration change on the Wazuh agent or Wazuh manager, depending on the integration.
 
-   Wazuh collects logs on Windows endpoints using the Windows event channel and Windows event log format. By default, the Wazuh agent monitors the System, Application, and Security Windows event channels on Windows endpoints. The Wazuh agent offers the flexibility to configure and monitor other :ref:`Windows event channels <windows_event_channel_log_collection>`. 
+The **Discover** section of the Wazuh dashboard centralizes security events collected from monitored endpoints, applications, network devices, and cloud services.
 
-   Wazuh utilizes the unified logging system (ULS) to collect logs on macOS endpoints. The macOS ULS centralizes the management and storage of logs across all the system levels.
-
-   The image below shows an event collected from the ``Microsoft-Windows-Sysmon/Operational`` event channel on a Windows endpoint.
-
-   .. thumbnail:: /images/getting-started/use-cases/log-data-analysis/sysmon-operational-event-channel-alert.png
-      :title: Sysmon operational Event channel alert
-      :alt: Sysmon operational Event channel alert
-      :align: center
-      :width: 80%
-
--  **Syslog events**: Wazuh gathers logs from :doc:`syslog-enabled </user-manual/capabilities/log-data-collection/how-it-works>` devices, encompassing a wide array of sources including Linux/Unix systems and network devices that do not support agent installation. The image below shows an alert triggered when a new user is created on the Linux endpoint and the log is forwarded to the Wazuh server via rsyslog.
-
-   .. thumbnail:: /images/getting-started/use-cases/log-data-analysis/new-user-added-alert.png
-      :title: New user added to the system alert
-      :alt: New user added to the system alert
-      :align: center
-      :width: 80%
-
--  **Agentless monitoring**: The Wazuh agentless monitoring module monitors endpoints that don't support agent installation. It requires an SSH connection between the endpoint and the Wazuh server. The Wazuh :doc:`agentless monitoring </user-manual/capabilities/agentless-monitoring/how-it-works>` module monitors files, directories, or configurations and runs commands on the endpoint. The image below is an alert from an agentless device on the Wazuh dashboard.
-
-   .. thumbnail:: /images/getting-started/use-cases/log-data-analysis/agentless-device-alert.png
-      :title: Agentless device alert
-      :alt: Agentless device alert
-      :align: center
-      :width: 80%
-
--  **Cloud provider logs**: Wazuh integrates with cloud providers like :doc:`AWS </cloud-security/amazon/index>`, :doc:`Azure </cloud-security/azure/index>`, :doc:`Google Cloud </cloud-security/gcp/index>`, and :doc:`Office 365 </cloud-security/office365/index>` to collect logs from cloud services such as EC2 instances, S3 buckets, Azure VMs, and more. The image below shows the **CLOUD SECURITY** section in the Wazuh dashboard.
-
-   .. thumbnail:: /images/getting-started/use-cases/log-data-analysis/cloud-provider-modules.png
-      :title: Cloud provider modules
-      :alt: Cloud provider modules
-      :align: center
-      :width: 80%
-
--  **Custom logs**: You can configure Wazuh to collect and parse logs from several applications and third-party security tools like :doc:`VirusTotal </user-manual/capabilities/malware-detection/virus-total-integration>`, :doc:`Windows Defender </user-manual/capabilities/malware-detection/win-defender-logs-collection>`, and :doc:`ClamAV </user-manual/capabilities/malware-detection/clam-av-logs-collection>`. The image below shows an alert of a log from VirusTotal processed by the Wazuh server.
-
-   .. thumbnail:: /images/getting-started/use-cases/log-data-analysis/virustotal-log-alert.png
-      :title: VirusTotal log alert
-      :alt: VirusTotal log alert
-      :align: center
-      :width: 80%
-
-Rules and decoders
-------------------
-
-Wazuh :doc:`rules and decoders </user-manual/ruleset/index>` are core components in log data analysis and threat detection and response. Wazuh provides a powerful platform for log data analysis, allowing organizations to enhance their security posture by promptly detecting and responding to potential security threats.
-
-Wazuh decoders are responsible for parsing and normalizing log data collected from various sources. Decoders are essential for converting the raw log data in several formats into a unified and structured format that Wazuh can process effectively. Wazuh has pre-built decoders for common log formats such as syslog, Windows event channel, macOS ULS, and more. Additionally, Wazuh allows you to define :doc:`custom decoders </user-manual/ruleset/decoders/custom>` for parsing logs from specific applications or devices with unique log formats. By using decoders, Wazuh can efficiently interpret log data and extract relevant information, such as timestamps, log levels, source IP addresses, user names, and more. As shown below, you can view Wazuh out-of-the-box and custom decoders on the **Server management** > **Decoders** of the Wazuh dashboard.
-
-.. thumbnail:: /images/getting-started/use-cases/log-data-analysis/decoders-in-wazuh-dashboard.png
-   :title: Decoders in Wazuh dashboard
-   :alt: Decoders in Wazuh dashboard
+.. thumbnail:: /images/getting-started/use-cases/log-data-analysis/centralized-security-events.png
+   :title: Discover section showing security events collected from endpoints, applications, network devices, and cloud services
+   :alt: Discover section showing security events collected from endpoints, applications, network devices, and cloud services
    :align: center
    :width: 80%
 
-Wazuh ruleset detects security events and anomalies in log data. These rules are written in a specific format and they trigger alerts when certain conditions are met. The rules are defined based on certain criteria like log fields, values, or patterns to match specific log entries that may indicate security threats. Wazuh provides a wide range of pre-built rules covering common security use cases. Additionally, administrators can create :doc:`custom rules </user-manual/ruleset/rules/custom>` tailored to their specific environment and security requirements. The **Server management** category of the Wazuh dashboard lets you view the default and custom **Rules**.
+Normalizing diverse log formats into a single schema
+----------------------------------------------------
 
-.. thumbnail:: /images/getting-started/use-cases/log-data-analysis/rules-in-wazuh-dashboard.png
-   :title: Rules in Wazuh dashboard
-   :alt: Rules in Wazuh dashboard
+Different technologies record the same security activity in different log formats. For example, a firewall log, a Windows logon event, and a web server access log represent network activity using different fields and structures. Wazuh normalizes these events into the :ref:`Wazuh Common Schema (WCS) <wazuh_common_schema>`, providing a consistent representation of security data across all supported sources.
+
+The :doc:`Wazuh normalization engine </user-manual/manager/wazuh-normalization-engine>` uses YAML-based decoders to parse raw logs and map their fields to WCS. As a result, common attributes such as source IP address, destination IP address, username, process, and event type use the same field names regardless of the original log source.
+
+A consistent schema simplifies log analysis, threat hunting, and detection engineering. Security teams can use the same search query, dashboard visualization, or detection rule across multiple log sources without adapting it to each log format. For applications with proprietary or custom log formats, Wazuh supports :ref:`custom decoders <data_analysis_custom_decoders>` that integrate into the same normalization pipeline.
+
+The **Decoders** sub-section of the **Ruleset Management** section in the Wazuh dashboard shows the decoders used to normalize log sources into the WCS.
+
+.. thumbnail:: /images/getting-started/use-cases/log-data-analysis/wcs-decoders.png
+   :title: Decoders sub-section of Ruleset Management showing decoders that normalize logs into the WCS
+   :alt: Decoders sub-section of Ruleset Management showing decoders that normalize logs into the WCS
    :align: center
    :width: 80%
 
-For example, the rule below includes a ``match`` field used to define the pattern that the rule looks for. The rule also has a ``level`` field that specifies the priority of the resulting alert. Additionally, rules enrich events with technique identifiers from the MITRE ATT&CK framework and map them to regulatory compliance controls.
+Detecting threats from normalized logs
+--------------------------------------
 
-.. code-block:: xml
+Wazuh evaluates normalized events against out-of-the-box :ref:`detection rules <data_analysis_rules>` in the Wazuh indexer and generates findings when rule conditions match. Each rule matches log fields, values, or patterns that might indicate a security threat. These rules cover detections such as authentication failures, privilege escalation, malware activity, file integrity events, network anomalies, and other security events.
 
-   <rule id="5715" level="3">
-     <if_sid>5700</if_sid>
-     <match>^Accepted|authenticated.$</match>
-     <description>sshd: authentication success.</description>
-     <mitre>
-       <id>T1078</id>
-       <id>T1021</id>
-     </mitre>
-     <group>authentication_success,gdpr_IV_32.2,gpg13_7.1,gpg13_7.2,hipaa_164.312.b,nist_800_53_AU.14,nist_800_53_AC.7,pci_dss_10.2.5,tsc_CC6.8,tsc_CC7.2,tsc_CC7.3,</group>
-   </rule>
+Each finding includes additional context, such as MITRE ATT&CK tactics and techniques, severity, and compliance mappings for supported frameworks. This information helps security teams understand the detected activity and prioritize investigation.
 
-Log data indexing and storage
+The Wazuh indexer stores generated findings in the ``wazuh-findings-v5*`` data stream. Security teams can extend detection coverage by creating custom rules or adding Sigma-based rules without changing how logs are collected or normalized. The **Rules** sub-section of the **Ruleset Management** section in the Wazuh dashboard lets you view the default and custom detection rules.
+
+.. thumbnail:: /images/getting-started/use-cases/log-data-analysis/detection-rule-details.png
+   :title: Detection rule details including MITRE ATT&CK and compliance mappings
+   :alt: Detection rule details including MITRE ATT&CK and compliance mappings
+   :align: center
+   :width: 80%
+
+For example, the rule below is triggered when a security audit log or cloud audit trail is cleared. Additionally, rules enrich events with technique identifiers from the MITRE ATT&CK framework and map them to regulatory compliance controls.
+
+.. code-block:: json
+
+   {
+     "id": "c0260049-054d-4336-8ea9-2434be0c7c80",
+     "title": "Security Audit Log Cleared",
+     "level": "high",
+     "category": "configuration",
+     "description": "Detects when a security audit log or cloud audit trail is cleared. Log clearing is a common anti-forensics technique used by attackers to cover their tracks after a compromise.\n",
+     "author": "Wazuh, Inc.",
+     "status": "stable",
+     "detection": "condition: selection\nselection:\n  event.action: security-log-cleared\n  event.category|contains: configuration\n",
+     "references": [
+       {
+         "value": "https://attack.mitre.org/techniques/T1070/"
+       }
+     ],
+     "tags": [
+       {
+         "value": "attack.defense-evasion"
+       },
+       {
+         "value": "attack.t1070.001"
+       }
+     ],
+     "false_positives": [
+       {
+         "value": "Authorised log management and archival procedures"
+       }
+     ],
+     "log_source": {
+       "category": "configuration",
+       "product": "wazuh-core"
+     },
+     "last_update_time": "2026-04-01",
+     "metadata": {
+       "author": "Wazuh, Inc.",
+       "compatibility": "Integration agnostic - matches any decoder that populates event.action.",
+       "date": "2026-04-01",
+       "description": "Detects when a security audit log or cloud audit trail is cleared. Log clearing is a common anti-forensics technique used by attackers to cover their tracks after a compromise.\n",
+       "documentation": null,
+       "modified": "2026-04-01",
+       "module": null,
+       "references": [
+         "https://attack.mitre.org/techniques/T1070/"
+       ],
+       "title": "Security Audit Log Cleared",
+       "versions": null
+     },
+     "enabled": true,
+     "mitre": "subtechnique:\n  - T1070.001\ntactic:\n  - TA0005\ntechnique:\n  - T1070\n",
+     "compliance": "cmmc:\n  - AU.L2-3.3.1\n  - AU.L2-3.3.2\n  - IR.L2-3.6.1\nfedramp:\n  - AU-6\n  - AU-9\n  - IR-4\ngdpr:\n  - '32'\n  - '33'\nhipaa:\n  - 164.308.a.1.ii.D\n  - 164.308.a.6\n  - 164.312.b\niso_27001:\n  - A.12.4.1\n  - A.12.4.2\n  - A.16.1.2\nnis2:\n  - 21.2.a\n  - 21.2.e\n  - '23'\nnist_800_171:\n  - 3.3.1\n  - 3.3.2\n  - 3.3.4\nnist_800_53:\n  - AU-6\n  - AU-9\n  - SI-4\npci_dss:\n  - 10.2.6\n  - '10.3'\n  - '11.4'\ntsc:\n  - CC7.2\n  - CC7.3\n  - A1.2\n",
+     "rule": "",
+     "queries": [],
+     "query_field_names": []
+   }
+
+The **Findings** tab in the **Threat Hunting** section of the Wazuh dashboard shows the findings generated after normalized logs are evaluated against Wazuh detection rules.
+
+.. thumbnail:: /images/getting-started/use-cases/log-data-analysis/findings-from-normalized-logs.png
+   :title: Findings tab of the Threat Hunting section showing findings generated from normalized logs
+   :alt: Findings tab of the Threat Hunting section showing findings generated from normalized logs
+   :align: center
+   :width: 80%
+
+Indexing and storing log data
 -----------------------------
 
-The :doc:`Wazuh indexer </getting-started/components/wazuh-indexer>` is a highly scalable, distributed real-time search and analytics engine. The Wazuh indexer is critical in log analysis as it stores and indexes alerts generated by the Wazuh server. These alerts are stored as JSON documents.
+The :doc:`Wazuh indexer </user-manual/wazuh-indexer/index>` stores and indexes security events, findings, endpoint state, and other data collected and generated by Wazuh. The Wazuh indexer stores data as JSON documents and provides distributed search and analytics across the Wazuh environment.
 
-The Wazuh indexer guarantees redundancy by storing the JSON documents across several containers called shards and distributing the shards across multiple nodes.  This implementation prevents downtime when hardware failures or cyber-attacks occur and increases query capacity as nodes are added to a cluster.
+The Wazuh indexer organizes data into indices and data streams and distributes their shards across cluster nodes. Replicas provide redundancy for indexed data, while adding nodes can increase storage capacity and support higher query workloads.
 
-Wazuh uses four indices to store several event types:
+Wazuh uses multiple :ref:`stateful indices <wazuh_indexer_indices_stateful_indices>` and :ref:`data streams <wazuh_indexer_indices_data_streams>` for different types of data. The primary data streams used for log analysis are:
 
--  **wazuh-alerts** stores alerts generated by the Wazuh server when an event triggers a rule with high enough priority. The image below shows alerts in the **Discover** module of the Wazuh dashboard. The index pattern is set to ``wazuh-alerts-*`` by default.
+-  ``wazuh-events-v5*`` stores normalized security events collected from monitored endpoints and other sources. The **Discover** section of the Wazuh dashboard can display these events for searching and analysis. The index pattern is set to ``wazuh-events-v5*`` by default.
 
-   .. thumbnail:: /images/getting-started/use-cases/log-data-analysis/alerts-in-index-pattern.png
-      :title: Alerts in the wazuh-alerts-* index pattern
-      :alt: Alerts in the wazuh-alerts-* index pattern
+   .. thumbnail:: /images/getting-started/use-cases/log-data-analysis/normalized-events.png
+      :title: Discover section showing normalized events from the wazuh-events-v5* data stream
+      :alt: Discover section showing normalized events from the wazuh-events-v5* data stream
       :align: center
       :width: 80%
 
--  **wazuh-archives** index stores all events received from the Wazuh server regardless of whether they trigger an alert. The :ref:`Wazuh archives <archiving_event_logs>` use this index to enable log retention and querying capabilities that offer deeper insight into events happening within monitored endpoints. Wazuh archives are disabled by default because of the huge storage requirements needed to store all the logs. The image below shows archived events in the **Discover** section of Wazuh dashboard with the index pattern set to ``wazuh-archives-*``.
+-  ``wazuh-events-raw-v5*`` stores raw events received by the Wazuh manager, including events that do not generate findings. Wazuh uses this data to support long-term log retention and analysis. This data stream is disabled by default because storing all collected events can require significant storage capacity.
 
-   .. thumbnail:: /images/getting-started/use-cases/log-data-analysis/events-in-index-pattern.png
-      :title: Events in wazuh-archives-* index pattern
-      :alt: Events in wazuh-archives-* index pattern
+   .. thumbnail:: /images/getting-started/use-cases/log-data-analysis/raw-events.png
+      :title: Discover section showing raw events from the wazuh-events-raw-v5* data stream
+      :alt: Discover section showing raw events from the wazuh-events-raw-v5* data stream
       :align: center
       :width: 80%
 
--  **wazuh-monitoring** index stores data about the state of Wazuh agents over a period of time. The state of the agent could be ``Active``, ``Disconnected``, or ``Never connected``. This information is very useful in tracking Wazuh agents that are not reporting for several reasons that need investigation. The image below shows the connection status of the agents on the Wazuh dashboard. The agent information as shown in the image is collected from the ``wazuh-monitoring`` index.
+-  The ``wazuh-metrics-agents*`` data stream stores data about the state of Wazuh agents over a period of time. The state of the Wazuh agent can be ``active``, ``disconnected``, ``pending``, or ``never_connected``. Use this information to find Wazuh agents that have stopped reporting to the Wazuh manager and need investigation. The image below shows the connection status of the agents on the Wazuh dashboard.
 
-   .. thumbnail:: /images/getting-started/use-cases/log-data-analysis/agent-monitoring-information.png
-      :title: Agent information from wazuh-monitoring index
-      :alt: Agent information from wazuh-monitoring index
+   .. thumbnail:: /images/getting-started/use-cases/log-data-analysis/wazuh-agent-state-metrics.png
+      :title: Wazuh agent state data from the wazuh-metrics-agents* data stream
+      :alt: Wazuh agent state data from the wazuh-metrics-agents* data stream
       :align: center
       :width: 80%
 
--  **wazuh-statistics** index stores performance data related to the Wazuh server. This information is critical to ensuring the Wazuh server performs optimally with the available computing resources. The image below shows performance-related events on the Wazuh dashboard.
+-  ``wazuh-metrics-comms*`` stores agent communication metrics, such as received events, sent and received bytes, queue usage, and TCP sessions.
+-  ``wazuh-findings-v5*`` stores findings generated when normalized events match detection rules.
 
-   .. thumbnail:: /images/getting-started/use-cases/log-data-analysis/performance-related-events.png
-      :title: Performance-related events
-      :alt: Performance-related events
-      :align: center
-      :width: 80%
+Querying and visualizing security telemetry
+-------------------------------------------
 
-Log data querying and visualization 
------------------------------------
+Wazuh provides querying and visualization capabilities that help security teams analyze security telemetry across monitored endpoints, applications, network devices, cloud services, and other data sources. The Wazuh dashboard supports real-time searches, filtering, and drill-down analysis across collected events and findings, such as failed logins, malware detections, and system anomalies.
 
-The Wazuh dashboard offers log data querying and visualization capabilities. You can leverage the dashboard’s intuitive interface to conduct complex searches and queries to extract meaningful insights from the log data collected by Wazuh.
+Wazuh also includes predefined dashboards for security monitoring, compliance, endpoint security, cloud security, vulnerability detection, and other use cases. These dashboards show security telemetry in charts, tables, timelines, and other widgets. Analysts use them to identify trends, anomalies, and security activity across their environment.
 
-Wazuh provides a set of predefined dashboards and visualizations out of the box, specifically tailored to security monitoring and compliance use cases. These dashboards provide insight into common security events such as failed logins, malware detection, and system anomalies. You can further customize these dashboards to suit your specific needs and requirements. Below is a sample image of the **Security event** dashboard showing several interesting information like **Top 5 PCI DSS Requirements**, **Top 5 alerts**, and **Alert groups evolution**.
+Security teams can create custom dashboards to monitor organization-specific security metrics, key performance indicators (KPIs), and operational telemetry. Custom dashboards provide a centralized view of security events and support continuous monitoring across different environments.
 
-   .. thumbnail:: /images/getting-started/use-cases/log-data-analysis/security-event-dashboard.png
-      :title: Security event dashboard
-      :alt: Security event dashboard
-      :align: center
-      :width: 80%
+The **Threat Hunting** dashboard provides a real-time overview of security telemetry, including event trends, compliance summaries, severity distribution, and other security metrics.
 
-The Wazuh dashboard enables users to explore log entries in real time, apply various filters, and drill down into specific events or time ranges. This flexibility allows security analysts to identify trends, anomalies, and potential security incidents within their environment.
+.. thumbnail:: /images/getting-started/use-cases/log-data-analysis/threat-hunting-dashboard.png
+   :title: Threat Hunting dashboard showing event trends, compliance summaries, and severity distribution
+   :alt: Threat Hunting dashboard showing event trends, compliance summaries, and severity distribution
+   :align: center
+   :width: 80%
 
-Wazuh allows users to :doc:`create customized dashboards </user-manual/wazuh-dashboard/creating-custom-dashboards>` that display key performance indicators, security metrics, and real-time monitoring of critical systems and applications. Users can assemble multiple visualizations, such as pie charts, line graphs, and heat maps, onto a single dashboard, providing a holistic view of their infrastructure's security posture. The following blog posts detailed how to query and create custom dashboards:
-
--  `Monitoring macOS resources with Wazuh <https://wazuh.com/blog/monitoring-macos-resources/>`__
--  `Monitoring Linux resources with Wazuh <https://wazuh.com/blog/monitoring-linux-resource-usage-with-wazuh/>`__
--  `Monitoring Windows resources with Performance Counters <https://wazuh.com/blog/monitoring-windows-resources-with-performance-counters/>`__

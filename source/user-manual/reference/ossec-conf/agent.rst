@@ -30,6 +30,7 @@ Options
 - `stats_report`_
 - `config_report`_
 - `ip_update_interval`_
+- `force_reconnect_interval`_
 - `crypto_method`_
 - `enrollment`_
 
@@ -183,6 +184,13 @@ ip_update_interval
 .. deprecated:: 5.0.0
 
    This option has no effect in Wazuh 5.0. It is still accepted, and the Wazuh agent logs a deprecation warning when it finds it.
+
+force_reconnect_interval
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. deprecated:: 5.0.0
+
+   This option has no effect in Wazuh 5.0. It is still accepted, and the Wazuh agent logs a warning when it finds it.
 
 crypto_method
 ^^^^^^^^^^^^^^

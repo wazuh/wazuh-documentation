@@ -350,7 +350,7 @@ We recommend following the instructions below when creating an integration scrip
 
 #. The script checks the following arguments because it will receive configuration options from them.
 
-   -  The first parameter includes the location of the file that contains the alert. The parameter is the ``/logs/alerts/alerts.json`` file passed by default in the Wazuh Integrator module:
+   -  The first parameter is the path to a temporary file that contains the alert in JSON format. The Wazuh Integrator module writes each matching alert to a file such as ``/tmp/<INTEGRATION_NAME>-<TIMESTAMP>-<RANDOM>.alert`` and passes its path:
 
       .. code-block:: python
 
@@ -381,6 +381,6 @@ We recommend following the instructions below when creating an integration scrip
       agentname = alert_json['agent']['name']
       path = alert_json['syscheck']['path']
 
-We recommend that you check the ``/logs/alerts/alerts.json`` file before starting the development of the integration script to find the format of the alerts to be interpreted.
+We recommend that you check the ``/var/ossec/logs/alerts/alerts.json`` file before starting the development of the integration script to find the format of the alerts to be interpreted.
 
 You can see an example integration script for Jira in the `How to integrate external software using Integrator <https://wazuh.com/blog/how-to-integrate-external-software-using-integrator//>`__ blog post.

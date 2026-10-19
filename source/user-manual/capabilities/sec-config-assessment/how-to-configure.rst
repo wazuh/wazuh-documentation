@@ -61,6 +61,8 @@ Where:
 
 For a detailed description of the SCA configuration parameters, check the SCA reference.
 
+.. _sca_enabling_and_disabling_policies:
+
 Enabling and disabling policies
 --------------------------------
 
@@ -100,6 +102,28 @@ For a policy distributed through centralized configuration, use its path in the 
 
 You can also specify an absolute path to the policy file.
 
+Restart the Wazuh agent to apply the change:
+
+.. tabs::
+
+   .. group-tab:: Linux
+
+      .. code-block:: console
+
+         # systemctl restart wazuh-agent
+
+   .. group-tab:: Windows
+
+      .. code-block:: pwsh-session
+
+         # Restart-Service -Name wazuh
+
+   .. group-tab:: macOS
+
+      .. code-block:: console
+
+         # /Library/Ossec/bin/wazuh-control restart
+
 Managing SCA policies using centralized configuration
 -------------------------------------------------------
 
@@ -135,13 +159,13 @@ You can enable this feature to push policy files to Wazuh agents in defined grou
 
       Enabling remote command execution lets the Wazuh manager execute commands on the monitored endpoint. Remote commands are disabled by default as a security measure, which helps reduce the attack surface if the Wazuh manager is compromised. You don't need to enable remote commands if you add the policy files to each agent without using Wazuh to push them. For example, you can create the policy file directly on the monitored endpoint, or use ``scp`` to copy it there.
 
-#. On the Wazuh manager, place a new policy file in the ``/var/ossec/etc/shared/default`` folder and change its ownership. Replace ``<NEW_POLICY_FILE>`` with your policy name:
+#. On the Wazuh manager, place a new policy file in the ``/var/wazuh-manager/etc/shared/default`` folder and change its ownership. Replace ``<NEW_POLICY_FILE>`` with your policy name:
 
    .. code-block:: console
 
-      # chown wazuh:wazuh /var/ossec/etc/shared/default/<NEW_SCA_POLICY_FILE>
+      # chown wazuh-manager:wazuh-manager /var/wazuh-manager/etc/shared/default/<NEW_POLICY_FILE>
 
-#. Add the following configuration block to the Wazuh manager ``/var/ossec/etc/shared/default/agent.conf`` file to configure the new policy file in the Wazuh agent:
+#. Add the following configuration block to the Wazuh manager ``/var/wazuh-manager/etc/shared/default/agent.conf`` file to configure the new policy file in the Wazuh agent:
 
    .. code-block:: xml
       :emphasize-lines: 5
@@ -157,7 +181,7 @@ You can enable this feature to push policy files to Wazuh agents in defined grou
 
    Wazuh saves every file pushed remotely from the server in the ``/<WAZUH_HOME_DIRECTORY>/etc/shared/`` directory on the agent endpoints, regardless of the group they belong to. We specify the policy's relative file path in the configuration because the full file path might differ depending on the endpoint's operating system.
 
-The new ``<sca>`` block in the Wazuh manager ``/var/ossec/etc/shared/default/agent.conf`` file merges with the ``<sca>`` block on the Wazuh agent side, and Wazuh adds the new configuration.
+The new ``<sca>`` block in the Wazuh manager ``/var/wazuh-manager/etc/shared/default/agent.conf`` file merges with the ``<sca>`` block on the Wazuh agent side, and Wazuh adds the new configuration.
 
 .. _sca_creating_custom_policies:
 
