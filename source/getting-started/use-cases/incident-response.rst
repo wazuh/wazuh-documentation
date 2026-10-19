@@ -1,95 +1,111 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Check out a use case about Incident Response, one of the key capabilities of the Wazuh platform. Learn more about it in this section of our documentation.
+   :description: Learn how Wazuh helps security teams investigate incidents, respond to malware, contain threats with active response, and automate incident response workflows.
 
 Incident response
 =================
 
-A security incident refers to any adverse event or activity that risks or threatens the confidentiality, integrity, or availability of digital assets, networks, data, or resources. Such incidents include unauthorized access, data breaches, malware infections, denial-of-service attacks, and any other activities that compromise the security posture of an organization's information technology environment.
+Incident response involves detecting, investigating, containing, and remediating security incidents to limit their impact on an organization. As environments generate increasing volumes of security events, security teams need centralized visibility and automated response capabilities to handle incidents efficiently.
 
-The goal of incident response is to effectively handle a security incident and restore normal business operations as quickly as possible. As organizations’ digital assets continuously grow, managing incidents manually becomes increasingly challenging, hence the need for automation.
+Wazuh supports incident response by collecting security telemetry, generating findings from detected activity, and providing tools to investigate and respond to security incidents. The :doc:`Wazuh Active Response module </user-manual/capabilities/active-response/index>` automates predefined response actions when configured detection rules are triggered. Security teams can use these capabilities to investigate suspicious activity, contain threats, and automate repetitive response tasks.
 
-Automated incident response involves automatic actions taken when responding to security incidents. These actions can include isolating compromised endpoints, blocking malicious IP addresses, quarantining infected devices, or disabling compromised user accounts. By automating incident response, cybersecurity teams reduce response time to detected threats, prevent or minimize the impact of incidents, and efficiently handle a large volume of security events.
+Investigating security incidents
+--------------------------------
 
-Wazuh Active Response module
-----------------------------
+Wazuh centralizes security findings from monitored endpoints and other configured data sources in the Wazuh dashboard. Security teams can search and filter findings by monitored endpoint, severity, event type, and other fields to investigate suspicious activity and identify affected assets.
 
-The Wazuh :doc:`Active Response </user-manual/capabilities/active-response/index>` module allows users to run automated actions when incidents are detected on endpoints. This improves an organization's incident response processes, enabling security teams to take immediate and automated actions to counter detected threats.
+The **Threat Hunting** section of the Wazuh dashboard shows security findings detected on monitored endpoints.
 
-You can also configure the actions to be either stateless or stateful. Stateless active responses are one-time actions while stateful responses revert their actions after some time.
+.. thumbnail:: /images/getting-started/use-cases/incident-response/security-findings.png
+   :title: Threat Hunting section showing security findings detected on monitored endpoints
+   :alt: Threat Hunting section showing security findings detected on monitored endpoints
+   :align: center
+   :width: 80%
 
-Default active response actions
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+The finding details provide additional information about the detected activity, helping security teams determine what happened and identify the systems involved.
 
-Out-of-the-box scripts are available on every operating system that runs the Wazuh agents. Some of the :doc:`default active response </user-manual/capabilities/active-response/default-active-response-scripts>` scripts include:
+.. thumbnail:: /images/getting-started/use-cases/incident-response/security-finding-details.png
+   :title: Finding details showing the detected activity and the systems involved
+   :alt: Finding details showing the detected activity and the systems involved
+   :align: center
+   :width: 80%
 
-=============== ===========
-Name of script  Description
-=============== ===========
-disable-account Disables a user account
-firewall-drop   Adds an IP address to the iptables deny list.
-firewalld-drop  Adds an IP address to the firewalld drop list.
-restart.sh      Restarts the Wazuh agent or server.
-netsh.exe       Blocks an IP address using netsh.
-=============== ===========
+Responding to malware activity
+------------------------------
 
-Custom active response actions
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Wazuh detects malware-related activity using capabilities such as :doc:`File Integrity Monitoring </user-manual/capabilities/file-integrity/index>`, threat intelligence, and security event analysis. Security teams can investigate the resulting findings and configure :doc:`Active Response </user-manual/capabilities/active-response/index>` to perform predefined actions when specific detection rules are triggered.
 
-One of the benefits of the Wazuh Active Response module is its adaptability. Wazuh allows security teams to create :doc:`custom active response </user-manual/capabilities/active-response/custom-active-response-scripts>` actions in any programming language, tailoring them to their specific needs. This ensures that when a threat is detected, the response can be customized to align with the organization's requirements.
+For example, an organization can configure a response to remove a known malicious file or block an associated source address. The **Threat Hunting** section on the Wazuh dashboard below shows the removal of the EICAR file downloaded to a Windows endpoint.
 
-Automating incident response with Wazuh
+.. thumbnail:: /images/getting-started/use-cases/incident-response/eicar-file-removal-finding.png
+   :title: Threat Hunting section showing the removal of the EICAR file downloaded to a monitored endpoint
+   :alt: Threat Hunting section showing the removal of the EICAR file downloaded to a monitored endpoint
+   :align: center
+   :width: 80%
+
+The **Incident Response** section on the Wazuh dashboard shows the active response action that is triggered to remove the suspicious file.
+
+.. thumbnail:: /images/getting-started/use-cases/incident-response/file-removal-response.png
+   :title: Incident Response section showing the active response action that removed the suspicious file
+   :alt: Incident Response section showing the active response action that removed the suspicious file
+   :align: center
+   :width: 80%
+
+Containing threats with active response
 ---------------------------------------
 
-To leverage the Wazuh Active Response module, you need to :doc:`configure </user-manual/capabilities/active-response/how-to-configure>` the action to be carried out when a specific event occurs on a monitored endpoint. For example, you can configure the Wazuh Active Response module to delete a malicious executable from an infected endpoint. In the examples that follow, we show how the Wazuh Active Response module handles different incidents.
+Wazuh Active Response automatically executes configured actions when a detection rule matches specified activity. It can block a malicious IP address, disable a user account, or execute a custom script on the affected endpoint, depending on the configuration. Predefined containment actions reduce the time between threat detection and response, helping security teams contain threats more quickly.
 
-Removing malware
-^^^^^^^^^^^^^^^^
+The **Threat Hunting** section on the Wazuh dashboard below shows the detection of a cross-site scripting attack against a monitored Ubuntu endpoint.
 
-You can use the Wazuh Active Response module in conjunction with the :doc:`File Integrity Monitoring </user-manual/capabilities/file-integrity/index>` module and :doc:`VirusTotal integration </user-manual/capabilities/malware-detection/virus-total-integration>` to detect and remove malicious files from an endpoint.
-
-The image below shows the following activities:
-
-#. Rule ID ``554`` is fired when a file is added to the ``Downloads`` directory which is monitored with the Wazuh File Integrity Monitoring module.
-#. Rule ID ``87105`` triggers when Wazuh extracts the file hash, requests data about the file hash from the VirusTotal database via its API, and receives a malicious file response.
-#. Rule ID ``553`` is fired when a file is deleted from the ``Downloads`` directory which is monitored with the Wazuh File Integrity Monitoring module.
-#. Rule ID ``110006`` is fired when the Wazuh Active Response module deletes the malicious file from the endpoint.
-
-.. thumbnail:: /images/getting-started/use-cases/incident-response/removing-malware-activities.png
-   :title: Removing malware activity events
-   :alt: Removing malware activity events
+.. thumbnail:: /images/getting-started/use-cases/incident-response/cross-site-scripting-finding.png
+   :title: Threat Hunting section showing a cross-site scripting attack detected on an Ubuntu endpoint
+   :alt: Threat Hunting section showing a cross-site scripting attack detected on an Ubuntu endpoint
    :align: center
    :width: 80%
 
-In this scenario, the Wazuh Active Response module automatically removes the malicious file, reducing the time between threat detection and mitigation.
+The **Incident Response** section on the Wazuh dashboard shows the active response action that is triggered to block the IP address of the endpoint that initiated the attack.
 
-Responding to DoS attacks
-^^^^^^^^^^^^^^^^^^^^^^^^^
-
-The primary goal of a DoS attack is to render the target inaccessible to legitimate users, causing a denial of service. In the image below, we show how the Wazuh Active Response module blocks malicious IP addresses performing a DoS against a web server on an Ubuntu endpoint.
-
-.. thumbnail:: /images/getting-started/use-cases/incident-response/ar-module-blocks-dos-attack.png
-   :title: Host blocked by Active Response alerts
-   :alt: Host blocked by Active Response alerts
+.. thumbnail:: /images/getting-started/use-cases/incident-response/ip-block-response.png
+   :title: Incident Response section showing the active response action that blocked the attacking IP address
+   :alt: Incident Response section showing the active response action that blocked the attacking IP address
    :align: center
    :width: 80%
 
-In this case, the Wazuh Active Response module automatically blocks the malicious hosts from causing a DoS attack on the web server. Thereby ensuring the availability of the web server to the authorized users.
+You can view details of active response findings, including the rule that triggered the response action and the IP address associated with the detected activity. These details help security teams understand why the response was triggered and investigate the associated activity.
 
-Disabling a user account after a brute-force attack
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Account lockout is a security measure used to defend against brute force attacks by limiting the number of login attempts a user can make within a specified time. We use the Wazuh Active Response module to disable the user account whose password is being guessed by an attacker.
-
-In the image below, the Wazuh Active Response module disables the account on a Linux endpoint and re-enables it again after 5 minutes. 
-
-.. thumbnail:: /images/getting-started/use-cases/incident-response/account-temporarily-disabled.png
-   :title: Linux account temporarily disabled alerts
-   :alt: Linux account temporarily disabled alerts
+.. thumbnail:: /images/getting-started/use-cases/incident-response/active-response-finding-details.png
+   :title: Active response finding details showing the triggering rule and the associated IP address
+   :alt: Active response finding details showing the triggering rule and the associated IP address
    :align: center
    :width: 80%
 
-In this scenario, when an attacker tries to guess a user's password repeatedly and fails, the account becomes temporarily inaccessible. This impedes attackers who rely on brute-force methods to guess user account passwords.
+Monitoring response actions
+---------------------------
 
-By utilizing the Wazuh Active Response module, security teams can automate responses to different incidents. Thereby ensuring efficient incident response and a more resilient cybersecurity posture.
+Wazuh provides visibility into security findings and configured response activity, allowing security teams to investigate whether predefined response actions were triggered for detected threats. This information helps teams review incident handling and verify that configured response procedures operated as expected.
+
+The **Dashboard** tab of the **Incident Response** section on the Wazuh dashboard below provides a summary of the active response actions triggered in your environment.
+
+.. thumbnail:: /images/getting-started/use-cases/incident-response/incident-response-dashboard.png
+   :title: Dashboard tab of the Incident Response section summarizing triggered active response actions
+   :alt: Dashboard tab of the Incident Response section summarizing triggered active response actions
+   :align: center
+   :width: 80%
+
+The **Responses** tab of the **Incident Response** section shows the active response actions triggered in your environment, allowing you to investigate any occurring incidents.
+
+.. thumbnail:: /images/getting-started/use-cases/incident-response/responses-tab.png
+   :title: Responses tab of the Incident Response section listing triggered active response actions
+   :alt: Responses tab of the Incident Response section listing triggered active response actions
+   :align: center
+   :width: 80%
+
+Automating incident response workflows
+--------------------------------------
+
+Organizations can create :ref:`custom detection rules <data_analysis_create_custom_rule>` and associate them with active response actions to automate repetitive response tasks. This process allows security teams to define specific actions for known threats while retaining control over which detections trigger automated responses.
+
+Predefined automated tasks allow security teams to handle recurring response actions consistently and focus manual investigation on incidents that require further analysis.
+

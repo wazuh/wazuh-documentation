@@ -81,7 +81,7 @@ PingOne Configuration
           :align: center
           :width: 80%
 
-      The ``Roles`` attribute will be used later as the ``sp.entity_id`` in the Wazuh indexer configuration file.
+      The ``Roles`` attribute will be used later as the ``roles_key`` in the Wazuh indexer configuration file.
 
    #. Click on **Required** checkbox, and click on **Save**.
 
@@ -247,6 +247,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
         hidden: false
         backend_roles:
         - "wazuh-admins"
+        - "admin"
         and_backend_roles: []
         description: "Maps admin to all_access"
 
@@ -405,7 +406,7 @@ PingOne Configuration
          :align: center
          :width: 80%
 
-      The ``Roles`` attribute will be used later as the ``sp.entity_id`` in the Wazuh indexer configuration file.
+      The ``Roles`` attribute will be used later as the ``roles_key`` in the Wazuh indexer configuration file.
 
    #. Click on **Required** checkbox, and click on **Save**.
 

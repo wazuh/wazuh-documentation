@@ -8,19 +8,19 @@
 Create a security analytics detection workflow
 ==============================================
 
-This guide walks you through creating a custom Wazuh security analytics policy. You will create a custom integration, add decoders to parse raw logs, write a rule to identify suspicious events, validate the content with the Wazuh Log test tool, promote the content into production, and create a detector. You will also view the generated security findings in the Wazuh dashboard.
+This guide walks you through creating a custom Wazuh security analytics policy. You will create a custom integration, add decoders to parse raw logs, write a rule to identify suspicious events, validate the content with the Wazuh Log test tool, create a detector, and promote the content into production. You will also view the generated security findings in the Wazuh dashboard.
 
 The example used throughout is based on Apache HTTP Server error logs. A few concepts make the rest of this guide easier to follow.
 
--  **Integration**: A logical grouping of decoders, rules, and optional key-value databases (KVDBs) that belong to the same log source or product. Every decoder must belong to exactly one integration.
+-  **Integration.** A logical grouping of decoders, rules, and optional key-value databases (KVDBs) that belong to the same log source or product. Every decoder must belong to exactly one integration.
 
--  **Decoder**: Parses raw, unstructured log lines into a structured format that follows the Wazuh Common Schema, so the analysis engine can work with consistent fields.
+-  **Decoder.** Parses raw, unstructured log lines into a structured format that follows the Wazuh Common Schema, so the analysis engine can work with consistent fields.
 
--  **Rule**: Defines detection logic that inspects the structured fields produced by decoders and generates a finding when a condition is met.
+-  **Rule.** Defines detection logic that inspects the structured fields produced by decoders and generates a finding when a condition is met.
 
--  **Detector**: A scheduled job that applies selected rules to incoming events and generates findings.
+-  **Detector.** A scheduled job that applies selected rules to incoming events and generates findings.
 
--  **Finding**: A security record is created when an event matches a rule. This was previously called alerts in Wazuh 4.x.
+-  **Finding.** A security record is created when an event matches a rule. This was previously called alert in Wazuh 4.x.
 
 .. note::
 
@@ -32,7 +32,7 @@ You will complete the following steps in order:
 
 -  `Create custom decoders`_
 
--  `Attach the root decoder to an integration`_
+-  `Attach the root decoder to the integration <Attach the root decoder to an integration_>`_
 
 -  `Create a custom rule`_
 
@@ -44,16 +44,18 @@ You will complete the following steps in order:
 
 -  `Create a detector`_
 
+-  `Configure the Wazuh agent to collect the Apache error log`_
+
 -  `View findings on the Wazuh dashboard`_
 
 Create a custom integration
 ---------------------------
 
-Custom Wazuh security policies are managed through an integration on the Security Analytics dashboard. Each custom decoder, KVDB, or rule is managed from within an integration.
+Custom Wazuh security policies are managed through an integration on the Ruleset Management dashboard. Each custom decoder, KVDB, or rule is managed from within an integration.
 
 Make sure the space selector reads **Draft** and follow these steps to create a custom integration.
 
-#. Go to **Security Analytics** > **Overview** > **Integrations** > **Actions** > **Create**.
+#. Go to **Ruleset management** > **Overview** > **Integrations** > **Actions** > **Create**.
 
    .. thumbnail:: /images/manual/data-analysis/security-analytics-create-custom-integration.png
       :title: Create a custom integration
@@ -88,9 +90,9 @@ Create custom decoders
 
 Configure two decoders: a root decoder that processes all incoming events before any source-specific analysis, and a child decoder that receives matching events from the root decoder to perform detailed parsing of Apache error logs.
 
-Make sure the space selector reads **Draft** and follow the steps below to create custom decoders using the **Security Analytics** dashboard.
+Make sure the space selector reads **Draft** and follow the steps below to create custom decoders using the **Ruleset Management** dashboard.
 
-#. Go to **Security Analytics** > **Normalization** > **Decoders** > **Actions** > **Create**.
+#. Go to **Ruleset management** > **Normalization** > **Decoders** > **Actions** > **Create**.
 
 #. Select the integration you created (``custom-integration``), then use the two decoders below.
 
@@ -154,12 +156,12 @@ Make sure the space selector reads **Draft** and follow the steps below to creat
         - event.type: "array_append(error)"
         - event.outcome: "failure"
         check:
-        - log.level: "regex_match(^(?:emerg|alert|crit|error|warn)$)"
+        - log.level: "regex_match(^(?:emerg|alert|crit|error|warn\\)$)"
       - map:
         - event.type: "array_append(info)"
         - event.outcome: "unknown"
         check:
-        - log.level: "regex_not_match(^(?:emerg|alert|crit|error|warn)$)"
+        - log.level: "regex_not_match(^(?:emerg|alert|crit|error|warn\\)?$)"
       - parse|message:
         - "File does not exist: <file.path>(?, referer: <http.request.referrer>)"
       - map:
@@ -185,7 +187,7 @@ The integration must be enabled and configured with a root decoder before any ad
 
 Make sure the space selector reads **Draft** and follow these steps to assign a root decoder to the integration.
 
-#. Go to **Security Analytics** > **Overview** > **Actions** > **Edit**.
+#. Go to **Ruleset management** > **Overview** > **Actions** > **Edit**.
 
 #. Confirm the status is **Enabled**, and assign the ``decoder/core-wazuh-message/0`` as the root decoder. Click **Save** to apply the configuration.
 
@@ -204,13 +206,12 @@ Rules are used to identify patterns in normalized events and determine when spec
 
 Make sure the space selector reads **Draft** and follow these steps to create a rule that flags Apache error events classified as failures.
 
-#. Go to **Security Analytics** > **Detection** > **Rules** > **Create**.
+#. Go to **Ruleset management** > **Detection** > **Rules** > **Create**.
 
-#. Select **YAML Editor**, choose the integration **custom-integration**, and paste the rule:
+#. Select **YAML Editor**, choose the **custom-integration** integration and paste the rule:
 
    .. code-block:: yaml
 
-      id: d78bd034-8838-4f85-b471-5e8c9a0daf18
       logsource:
         product: custom-integration
       tags:
@@ -237,11 +238,20 @@ Make sure the space selector reads **Draft** and follow these steps to create a 
           misconfigurations.
         references:
           - https://httpd.apache.org/docs/
+        documentation: ''
+        supports:
+          - ''
       mitre:
         tactic:
-          - TA0001
+          id:
+            - TA0001
+          name:
+            - Initial Access
         technique:
-          - T1190
+          id:
+            - T1190
+          name:
+            - Exploit Public-Facing Application
       compliance:
         pci_dss:
           - '10.2'
@@ -277,7 +287,7 @@ In the draft space, you create and refine your integrations, decoders, and rules
 
 Make sure the space selector reads **Draft**, and follow these steps to promote the content from draft to test.
 
-#. Go to **Security Analytics** > **Overview**, and click **Actions** > **Promote**.
+#. Go to **Ruleset management** > **Overview**, and click **Actions** > **Promote**
 
    .. thumbnail:: /images/manual/data-analysis/security-analytics-promotion.png
       :title: Promote the content
@@ -314,7 +324,7 @@ After promoting the integration to the test space, use **Log test** to validate 
 
 Make sure the space selector reads **Test**, and follow these steps to validate with **Log test**.
 
-#. Go to **Security Analytics** > **Log test**.
+#. Go to **Ruleset management** > **Log test**.
 
 #. Paste the sample Apache log line below into the **Log event** field to see how it is decoded and matched.
 
@@ -404,11 +414,11 @@ Make sure the space selector reads **Test**, and follow these steps to validate 
 Promote the content from test to custom
 ---------------------------------------
 
-After validating your integrations, decoders, and rules in the test space using Log test, you can promote the content to the custom space. This makes your validated detection content available for use in production environments, where the Wazuh data analysis engine can process and analyze incoming events.
+After validating your integrations, decoders, and rules in the test space using Log test, you can promote the content to the custom space. This makes your validated detection content available for use in production environments, where the Wazuh data analysis capability can process and analyze incoming events.
 
 Make sure the space selector reads **Test**, then follow these steps to promote the content.
 
-#. Go to **Security Analytics** > **Overview**.
+#. Go to **Ruleset management** > **Overview**.
 
 #. Click **Actions** > **Promote**, type the confirmation message, and click **Promote**.
 
@@ -424,7 +434,11 @@ Make sure the space selector reads **Test**, then follow these steps to promote 
       :align: center
       :width: 80%
 
-#. After promotion the integration becomes active and is used by the Wazuh data analysis engine to process incoming events and trigger findings when rule conditions are met.
+#. After promotion the integration becomes active and is used by the Wazuh data analysis capability to process incoming events and trigger findings when rule conditions are met.
+
+   .. note::
+
+      The Wazuh manager loads the custom space on a polling cycle. Events sent within about 2 minutes of the promotion are processed only by the standard policy and don't generate the custom finding.
 
 Create a detector
 -----------------
@@ -433,7 +447,7 @@ A detector is the scheduled job that executes your rule. It scans indexed events
 
 Follow these steps to create a detector.
 
-#. Go to **Security Analytics** > **Detection** > **Detectors** > **Create detector**.
+#. Go to **Ruleset management** > **Detection** > **Detectors** > **Create detector**.
 
    .. thumbnail:: /images/manual/data-analysis/security-analytics-detectors-list.png
       :title: Detectors list
@@ -475,12 +489,32 @@ Follow these steps to create a detector.
       :align: center
       :width: 80%
 
+Configure the Wazuh agent to collect the Apache error log
+---------------------------------------------------------
+
+The detector only generates findings from events that reach the Wazuh manager. Configure the Wazuh agent on the monitored endpoint to collect the Apache error log.
+
+#. Append the following configuration to the ``/var/ossec/etc/ossec.conf`` file on the monitored endpoint:
+
+   .. code-block:: xml
+
+      <ossec_config>
+        <localfile>
+          <log_format>apache</log_format>
+          <location>/var/log/apache2/error.log</location>
+        </localfile>
+      </ossec_config>
+
+#. Restart the Wazuh agent to apply the changes:
+
+   .. include:: /_templates/common/restart_agent.rst
+
 View findings on the Wazuh dashboard
 ------------------------------------
 
 A finding is a security record generated when an event matches a detection rule during normal processing by the Wazuh detection engine. Findings are indexed and displayed in the Wazuh dashboard for investigation and analysis. Follow these steps to view findings on the Wazuh dashboard.
 
-#. Go to **Threat Intelligence** > **Threat Hunting** > **Findings**.
+#. Go to **Threat intelligence** > **Threat Hunting** > **Findings**.
 
 #. In the image below, you see the findings generated from the events.
 

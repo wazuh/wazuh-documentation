@@ -16,15 +16,13 @@ The Wazuh data analysis engine decodes logs, triggers rules, and generates findi
 
 #. **Log normalization**: The Wazuh data analysis engine processes raw events using decoders that parse, normalize, and enrich them into structured JSON documents conforming to the `Wazuh Common Schema (WCS) <https://github.com/wazuh/wazuh-indexer-plugins/blob/main/wcs/stateless/events/main/docs/fields.csv>`__. The Wazuh Common Schema is a standardized structure for organizing and categorizing security event data from any source, ensuring consistent analysis, correlation, and reporting across data types.
 
-#. **Rule matching and findings visualization**: The Wazuh manager forwards normalized events to the indexer, where detectors evaluate them against detection rules at configured intervals. This means that findings from Wazuh rules match in near real-time. When an event matches a rule, the indexer generates a finding, enriches it with event and rule metadata, and indexes it for visualization and investigation in the Wazuh dashboard.
+#. **Rule matching and findings visualization**: On the indexer, the detection engine evaluates normalized events against Sigma-compatible Wazuh detection rules at configured intervals and generates findings on each scheduled run. Each finding includes event and rule metadata for visualization and investigation in the Wazuh dashboard.
 
-You can manage Wazuh data analysis policies using the Wazuh Security Analytics dashboard. In this interface, you can create and configure decoders, KVDBs, detectors, and detection rules.
+You can manage Wazuh data analysis policies from Ruleset management on the Wazuh dashboard, where you create and configure decoders, KVDBs, detectors, and detection rules. To access it, click the menu icon **☰** on the Wazuh dashboard and go to **Ruleset management** > **Overview**.
 
-Click the upper-left menu icon **☰** to open the menu on the Wazuh dashboard, and go to **Security Analytics** > **Overview** to access the Security Analytics dashboard.
-
-.. thumbnail:: /images/manual/data-analysis/security-analytics-overview.png
-   :title: Security Analytics overview
-   :alt: Security Analytics overview
+.. thumbnail:: /images/manual/data-analysis/ruleset-management-overview.png
+   :title: Ruleset management overview
+   :alt: Ruleset management overview
    :align: center
    :width: 80%
 

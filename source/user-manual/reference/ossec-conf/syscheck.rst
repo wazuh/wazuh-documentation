@@ -864,7 +864,7 @@ The whodata options will be configured inside this tag.
 provider
 ~~~~~~~~~
 
-Specifies the who-data mode used by the FIM module. If the ``<provider>`` tag is not configured, the FIM module defaults to the audit mode. This option is only available for Linux endpoints.
+Specifies the who-data mode used by the FIM module. If the ``<provider>`` tag is not configured, the FIM module defaults to the audit mode. If the provider is set to ``ebpf`` but its health check fails, for example on a kernel without the BPF ring buffer or BTF, the FIM module falls back to the ``audit`` mode. The Wazuh agent logs ``(6048): Healthcheck for eBPF FIM whodata module success.`` when the health check succeeds, and ``(6959): The eBPF healthcheck has failed. Switching all whodata eBPF configuration to audit.`` when it falls back. This option is only available for Linux endpoints.
 
 +----------------------+---------------+
 | **Default value**    | audit         |

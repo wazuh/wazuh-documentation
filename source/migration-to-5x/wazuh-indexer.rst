@@ -47,7 +47,7 @@ Wazuh indexer 5.x stores its configuration under ``/etc/wazuh-indexer/``. The fo
 Migrate the Wazuh indexer configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Perform the following steps on the new Wazuh 5.x endpoint.
+Perform the following steps on every Wazuh indexer node of the new Wazuh 5.x cluster.
 
 #. Stop the Wazuh indexer service:
 
@@ -57,9 +57,33 @@ Perform the following steps on the new Wazuh 5.x endpoint.
 
 #. Review the Wazuh 4.x configuration and recreate the required settings manually in the corresponding Wazuh 5.x files.
 
-#. Review any custom JVM and logging configuration before you apply it to the Wazuh 5.x deployment.
+#. Update or remove the Wazuh 4.x settings that changed in Wazuh 5.x:
 
-#. Complete the security configuration described in the :ref:`Wazuh indexer security configuration <migration_wazuh_indexer_security_configuration>` section.
+   +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | Setting                                                                                                                                                                                                      | Wazuh 5.x change                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+   +==============================================================================================================================================================================================================+==============================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================+
+   | ``compatibility.override_main_response_version``                                                                                                                                                             | Removed. The Wazuh indexer doesn't start if ``opensearch.yml`` contains this setting.                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+   +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | ``opensearch_performance_analyzer.*``, ``plugins.anomaly_detection.*``, ``plugins.asynchronous_search.*``, ``plugins.ml_commons.*``, ``plugins.query.datasources.*``, ``plugins.neural_search.*``, ``knn.*`` | Removed. Wazuh indexer 5.x doesn't include the related plugins. Also remove the settings of the ``opensearch-observability`` plugin (observability and notebooks), which Wazuh indexer 5.x no longer includes.                                                                                                                                                                                                                                                                                                                                               |
+   +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | ``cluster.initial_master_nodes``                                                                                                                                                                             | Renamed to ``cluster.initial_cluster_manager_nodes``, which the Wazuh 5.x ``opensearch.yml`` already sets. Copy the node list to the new setting and don't add the old one.                                                                                                                                                                                                                                                                                                                                                                                  |
+   +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | ``plugins.security.ssl.transport.enforce_hostname_verification``, ``plugins.security.ssl.transport.resolve_hostname``                                                                                        | Renamed to ``transport.ssl.enforce_hostname_verification`` and ``transport.ssl.resolve_hostname``, which the Wazuh 5.x ``opensearch.yml`` already sets. Don't add the Wazuh 4.x settings: the Wazuh indexer doesn't start if ``opensearch.yml`` defines both the old and the new name of a setting. ``transport.ssl.enforce_hostname_verification`` is ``true`` in Wazuh 5.x (it was ``false`` in Wazuh 4.x), so each node certificate must include the node address in its subject alternative names. ``transport.ssl.resolve_hostname`` remains ``false``. |
+   +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | ``plugins.security.authcz.admin_dn``, ``plugins.security.nodes_dn``                                                                                                                                          | The distinguished name (DN) attribute order differs. Keep the values that the Wazuh 5.x package generated. If you keep the Wazuh 4.x certificates, set them to the subjects of those certificates.                                                                                                                                                                                                                                                                                                                                                           |
+   +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | ``plugins.security.ssl.*`` certificate paths                                                                                                                                                                 | The Wazuh 5.x package names the node certificate ``indexer.pem`` and ``indexer-key.pem``. To keep the Wazuh 4.x certificates, copy them to ``/etc/wazuh-indexer/certs/`` as ``indexer.pem``, ``indexer-key.pem``, ``admin.pem``, ``admin-key.pem``, and ``root-ca.pem``, so the Wazuh 5.x paths stay valid. To keep the certificates that the Wazuh 5.x package issued, don't change the paths.                                                                                                                                                              |
+   +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | Multi-tenancy settings                                                                                                                                                                                       | Disabled by default in Wazuh 5.x.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+   +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | ``plugins.security.ssl.http.enabled_ciphers``, ``plugins.security.ssl.http.enabled_protocols``                                                                                                               | Not set in Wazuh 5.x, which uses the OpenSearch defaults. The Wazuh 4.x installation assistant restricted them to TLS 1.2 and four cipher suites. Copy them only if your security policy requires a restricted list.                                                                                                                                                                                                                                                                                                                                         |
+   +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | ``plugins.security.system_indices.indices``                                                                                                                                                                  | The Wazuh 5.x list drops the indices of the removed plugins and adds ``.wazuh-internal-state``. Keep the Wazuh 5.x values.                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+   +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+#. Review any custom JVM and logging configuration before you apply it to the Wazuh 5.x deployment. Copy only individual non-default lines into the Wazuh 5.x ``jvm.options`` and ``log4j2.properties`` files instead of replacing them. The Wazuh 5.x package sets a 1 GB JVM heap. Before you start the service, set ``-Xms`` and ``-Xmx`` to the same value: half of the RAM when the Wazuh indexer runs alone on the host, or a quarter when the Wazuh manager or the Wazuh dashboard runs on the same host.
+
+#. Edit the security configuration files as described in the :ref:`Wazuh indexer security configuration <migration_wazuh_indexer_security_configuration>` section. Apply the configuration after you start the Wazuh indexer service on every node, as described in Apply the security configuration.
 
 #. Start the Wazuh indexer service:
 
@@ -67,7 +91,7 @@ Perform the following steps on the new Wazuh 5.x endpoint.
 
       # systemctl start wazuh-indexer
 
-#. Verify that the node joins the cluster.
+#. After the Wazuh indexer service is running on every node and you have applied the security configuration, verify that the nodes have joined the cluster.
 
    .. code-block:: console
 
@@ -82,7 +106,7 @@ Perform the following steps on the new Wazuh 5.x endpoint.
 
    .. note::
 
-      The default credentials for the Wazuh indexer are ``admin:admin``.
+      Retrieve the generated ``WAZUH_INDEXER_ADMIN_PASSWORD`` from ``/etc/wazuh/credentials.env`` on the Wazuh indexer.
 
 .. _migration_wazuh_indexer_security_configuration:
 
@@ -95,46 +119,55 @@ During the migration, review the existing Wazuh 4.x security configuration and r
 
 The security configuration is stored under ``/etc/wazuh-indexer/opensearch-security/``.
 
-+------------------------+------------------------------------------------+
-| File                   | Purpose                                        |
-+========================+================================================+
-| ``config.yml``         | Authentication and authorization configuration |
-+------------------------+------------------------------------------------+
-| ``internal_users.yml`` | Internal user accounts                         |
-+------------------------+------------------------------------------------+
-| ``roles.yml``          | Role definitions                               |
-+------------------------+------------------------------------------------+
-| ``roles_mapping.yml``  | Role mappings                                  |
-+------------------------+------------------------------------------------+
-| ``action_groups.yml``  | Permission groups                              |
-+------------------------+------------------------------------------------+
-| ``tenants.yml``        | Dashboard tenants                              |
-+------------------------+------------------------------------------------+
-| ``nodes_dn.yml``       | Allowed node certificate identities            |
-+------------------------+------------------------------------------------+
-| ``allowlist.yml``      | Restricted API access configuration            |
-+------------------------+------------------------------------------------+
-| ``audit.yml``          | Audit logging configuration                    |
-+------------------------+------------------------------------------------+
++------------------------+-----------------------------------------------------------------------------------------------------+
+| File                   | Purpose                                                                                             |
++========================+=====================================================================================================+
+| ``config.yml``         | Authentication and authorization configuration                                                      |
++------------------------+-----------------------------------------------------------------------------------------------------+
+| ``internal_users.yml`` | Internal user accounts                                                                              |
++------------------------+-----------------------------------------------------------------------------------------------------+
+| ``roles.yml``          | Role definitions                                                                                    |
++------------------------+-----------------------------------------------------------------------------------------------------+
+| ``roles_mapping.yml``  | Role mappings                                                                                       |
++------------------------+-----------------------------------------------------------------------------------------------------+
+| ``action_groups.yml``  | Permission groups                                                                                   |
++------------------------+-----------------------------------------------------------------------------------------------------+
+| ``tenants.yml``        | Dashboard tenants                                                                                   |
++------------------------+-----------------------------------------------------------------------------------------------------+
+| ``nodes_dn.yml``       | Allowed node certificate identities                                                                 |
++------------------------+-----------------------------------------------------------------------------------------------------+
+| ``allowlist.yml``      | When enabled, limits every user except the super admin to the listed REST API endpoints and methods |
++------------------------+-----------------------------------------------------------------------------------------------------+
+| ``audit.yml``          | Audit logging configuration                                                                         |
++------------------------+-----------------------------------------------------------------------------------------------------+
 
 .. note::
 
-   Before migrating the security settings, use the `backup procedure <https://documentation.wazuh.com/4.14/migration-guide/creating/index.html>`__ to export the active Wazuh 4.x security configuration. The files on disk might not reflect the active configuration because the effective security configuration is stored in the Wazuh indexer security index.
+   Before migrating the security settings, export the active Wazuh 4.x security configuration. The files on disk might not reflect the active configuration because the effective security configuration is stored in the Wazuh indexer security index.
 
-Before applying the recreated security configuration, verify that the recreated roles reference valid permissions and that the role mappings reference users and roles defined in the Wazuh 5.x security configuration. Refer to the :doc:`user administration </user-manual/user-administration/index>` documentation for more information.
+Run the following commands on a Wazuh 4.x indexer node to export the active security configuration:
+
+.. code-block:: console
+
+   # install -d -o wazuh-indexer -g wazuh-indexer <BACKUP_DIRECTORY>
+   # /usr/share/wazuh-indexer/bin/indexer-security-init.sh --options "-backup <BACKUP_DIRECTORY> -icl -nhnv"
+
+Replace ``<BACKUP_DIRECTORY>`` with the directory that stores the exported files, for example ``/var/tmp/security-backup``. Use the exported ``internal_users.yml``, ``roles.yml``, and ``roles_mapping.yml`` files as the reference for the Wazuh 5.x security configuration.
+
+Before applying the recreated security configuration, verify that the recreated roles reference valid permissions and that the role mappings reference users and roles defined in the Wazuh 5.x security configuration. Replace Wazuh 4.x index patterns in recreated roles, such as ``wazuh-alerts-*``, with the Wazuh 5.x index patterns, such as ``wazuh-events-v5-*``, ``wazuh-findings-v5-*``, and ``wazuh-states-*``. Keep the Wazuh 5.x permission names. Users with roles that reference Wazuh 4.x index patterns can log in, but the Wazuh dashboard doesn't display their data. Refer to the :doc:`user administration </user-manual/user-administration/index>` documentation for more information.
 
 Apply the security configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-After you recreate the required security configuration, apply the changes to the Wazuh indexer.
+After you recreate the required security configuration, apply the changes to the Wazuh indexer. Make the same changes to the files in ``/etc/wazuh-indexer/opensearch-security/`` on every Wazuh indexer node.
 
-#. Restart the Wazuh indexer service:
+#. Restart the Wazuh indexer service on every node:
 
    .. code-block:: console
 
       # systemctl restart wazuh-indexer
 
-#. Apply the security configuration:
+#. Apply the security configuration. Run the script once, from a single node whose files contain all the changes, after the Wazuh indexer service is running on every node. The Wazuh indexer stores the security configuration in its security index, so the change reaches every node:
 
    .. code-block:: console
 
@@ -142,9 +175,9 @@ After you recreate the required security configuration, apply the changes to the
 
    .. warning::
 
-      Running ``indexer-security-init.sh`` loads the security configuration from ``/etc/wazuh-indexer/opensearch-security/`` into the Wazuh indexer security index. This can overwrite security settings previously configured through the Wazuh dashboard or security API. Ensure that the configuration files contain the security settings you want to retain before running the script.
+      Running ``indexer-security-init.sh`` loads the security configuration from ``/etc/wazuh-indexer/opensearch-security/`` into the Wazuh indexer security index. This can overwrite security settings previously configured through the Wazuh dashboard or security API. Ensure that the configuration files contain the security settings you want to retain before running the script. Running the script later from a node whose files lack the recreated users, roles, or role mappings removes them from the whole cluster, and the affected users can no longer log in. Keep the files in ``/etc/wazuh-indexer/opensearch-security/`` identical on every node.
 
-#. Verify that authentication works. Log in to the Wazuh dashboard and confirm that users can authenticate and access the resources their assigned roles permit.
+#. Verify that authentication works. Log in to the Wazuh dashboard and confirm that users can authenticate and access the resources their assigned roles permit. Also verify each external authentication backend, such as LDAP or SAML, against every Wazuh indexer node before you point production traffic at the Wazuh 5.x cluster.
 
 .. _migration_indexer_data_migration:
 
@@ -163,7 +196,7 @@ The following sections describe the steps required to migrate Wazuh indices from
 
 .. note::
 
-   Index data migration to Wazuh 5.x requires the source deployment to run Wazuh 4.4.0 or later due to snapshot compatibility requirements.
+   Index data migration to Wazuh 5.x requires the source deployment to run Wazuh 4.4.0 or later due to snapshot compatibility requirements. Indices created before Wazuh 4.4.0 can't be restored, even if the deployment was later upgraded to Wazuh 4.4.0 or later.
 
 Setting up a shared file system
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -242,7 +275,7 @@ Perform the following steps on every Wazuh indexer node in the source Wazuh 4.x 
 
       # mount -t nfs <NFS_SERVER_IP>:/mnt/snapshots /mnt/snapshots
 
-   Replace ``<NFS_SERVER_IP>`` with the IP address of the NFS server configured in the previous section.
+   Replace ``<NFS_SERVER_IP>`` with the IP address of the NFS server configured in the previous section. To keep the mount after a reboot, add ``<NFS_SERVER_IP>:/mnt/snapshots /mnt/snapshots nfs defaults 0 0`` to ``/etc/fstab``.
 
 #. Grant the Wazuh indexers access to the directory:
 
@@ -280,7 +313,7 @@ On the Wazuh 4.x dashboard, perform the following steps:
 
 #. Click the **☰** menu, navigate to **Indexer management** > **Snapshot Management** > **Repositories**, and select **Create repository** to create a new snapshot repository.
 
-#. Enter a **Repository name**, select the repository type **Shared file system**, enter the repository **Location** ``/mnt/snapshots``, and select **Add** to register the new repository.
+#. Enter a **Repository name**, such as ``wazuh-4x-migration``, select the repository type **Shared file system**, enter the repository **Location** ``/mnt/snapshots``, and select **Add** to register the new repository.
 
    .. thumbnail:: /images/migration-to-5x/create-snapshot-repository.png
       :title: Create a snapshot repository on Wazuh 4.x
@@ -297,11 +330,11 @@ On the Wazuh 4.x dashboard, perform the following steps:
 
 #. Select **Take snapshot** and enter a Snapshot name.
 
-#. Select only the Wazuh data indices that you want to migrate.
+#. Select the Wazuh data indices that you want to migrate from the list. The Wazuh 4.x dashboard ignores index patterns that you type in this field and includes every index in the snapshot.
 
    .. warning::
 
-      Do not include system indices or the cluster state in the migration snapshot. The snapshot is intended to transfer Wazuh 4.x historical data to the new Wazuh 5.x deployment, not the Wazuh 4.x indexer configuration.
+      Do not include system indices or the cluster state in the migration snapshot. The snapshot is intended to transfer Wazuh 4.x historical data to the new Wazuh 5.x deployment, not the Wazuh 4.x indexer configuration. Before you restore the snapshot, verify that it contains only the Wazuh data indices you selected.
 
 #. Select the repository you created earlier to store the snapshots.
 
@@ -328,10 +361,10 @@ Run the command below on the Wazuh 5.x indexer node to set up a read-only snapsh
 
 .. code-block:: bash
 
-   # curl -sk -X PUT \
+   # curl -k -X PUT \
      --cert /etc/wazuh-indexer/certs/admin.pem \
      --key /etc/wazuh-indexer/certs/admin-key.pem \
-     "https://<WAZUH_INDEXER_IP>:9200/_snapshot/Wazuh-4x-migration" \
+     "https://<WAZUH_INDEXER_IP>:9200/_snapshot/wazuh-4x-migration" \
      -H "Content-Type: application/json" \
      -d '{
        "type": "fs",
@@ -348,7 +381,7 @@ The command output looks similar to this:
 
    {"acknowledged":true}
 
-Replace ``<WAZUH_INDEXER_IP>`` with the IP address of the Wazuh 5.x indexer.
+Replace ``<WAZUH_INDEXER_IP>`` with the IP address of the Wazuh 5.x indexer. In an all-in-one deployment, use ``127.0.0.1`` because the Wazuh indexer listens on the loopback address.
 
 Restoring the snapshot on Wazuh 5.x
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

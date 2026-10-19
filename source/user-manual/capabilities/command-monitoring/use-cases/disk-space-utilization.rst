@@ -73,7 +73,7 @@ Wazuh dashboard
 
 Perform the steps below to create a custom decoder and rule to analyze the event received from the monitored Linux endpoint. If you haven't already done so, perform step 1 of the :ref:`Wazuh dashboard <command_monitoring_configuration_example_wazuh_dashboard>` section under Example configuration.
 
-#. Navigate to **Security Analytics** > **Normalization** > **Decoders**. Perform the following to create a root and child decoder.
+#. Navigate to **Ruleset management** > **Normalization** > **Decoders**. Perform the following to create a root and child decoder.
 
    -  Select the space **Draft**
    -  Click **Actions** > **Create**, select the integration ``command-integration``, paste the root decoder below in the **YAML Editor**, and click **Create decoder**:
@@ -164,7 +164,7 @@ Perform the steps below to create a custom decoder and rule to analyze the event
       :align: center
       :width: 80%
 
-#. Navigate to **Security Analytics** > **Overview** and perform the following to attach the root decoder to the integration:
+#. Navigate to **Ruleset management** > **Overview** and perform the following to attach the root decoder to the integration:
 
    -  Click **Actions** > **Edit**
    -  Confirm the status is **Enabled**
@@ -176,7 +176,7 @@ Perform the steps below to create a custom decoder and rule to analyze the event
       :align: center
       :width: 80%
 
-#. Navigate to **Security Analytics** > **Detection** > **Rules** and perform the following to create a detection rule.
+#. Navigate to **Ruleset management** > **Detection** > **Rules** and perform the following to create a detection rule.
 
    -  Select the space **Draft**
    -  Click **Actions** > **Create**, select the **YAML Editor**, choose the integration ``command-integration``, paste the detection rule shown below, and click **Create rule**:
@@ -218,7 +218,7 @@ Perform the steps below to create a custom decoder and rule to analyze the event
            nist_800_53:
              - AU.6
 
-#. Navigate to **Security Analytics** > **Overview**, select the space **Draft** and click **Actions** > **Promote** to promote the decoders and rule to the ``Test`` space.
+#. Navigate to **Ruleset management** > **Overview**, select the space **Draft** and click **Actions** > **Promote** to promote the decoders and rule to the ``Test`` space.
 
    .. thumbnail:: /images/manual/command-monitoring/promote-draft-disk.png
       :title: Promoting the decoders and rule to Test
@@ -226,7 +226,7 @@ Perform the steps below to create a custom decoder and rule to analyze the event
       :align: center
       :width: 80%
 
-#. Navigate to **Security Analytics** > **Overview**, select the space **Test** and click **Actions** > **Promote** to promote the decoders and rule to the ``Custom`` space.
+#. Navigate to **Ruleset management** > **Overview**, select the space **Test** and click **Actions** > **Promote** to promote the decoders and rule to the ``Custom`` space.
 
    .. thumbnail:: /images/manual/command-monitoring/promote-test-disk.png
       :title: Promoting the decoders and rule to Custom
@@ -234,7 +234,7 @@ Perform the steps below to create a custom decoder and rule to analyze the event
       :align: center
       :width: 80%
 
-#. Navigate to **Security Analytics** > **Detection** > **Detectors** to create a detector that applies the detection rule and generates findings.
+#. Navigate to **Ruleset management** > **Detection** > **Detectors** to create a detector that applies the detection rule and generates findings.
 
    -  Click **Create detector**, fill the required fields, and click **Create detector**:
 
@@ -276,11 +276,11 @@ Perform the steps below on the monitored Ubuntu endpoint.
       vagrant                             732556284 244033372 488522912      34% /vagrant
       tmpfs                                  201496        16    201480       1% /run/user/1000
 
-#. Fill the disk to cross the threshold with the command below:
+#. Fill the disk to cross the threshold with the command below. Replace ``<SIZE>`` with enough space to raise the usage of the ``/`` partition above 80%, based on the output of the previous step. For example, ``20G`` for the disk shown above:
 
    .. code-block:: console
 
-      # fallocate -l 20G /tmp/big_file
+      # fallocate -l <SIZE> /tmp/big_file
 
 #. Verify the size of the root partition has increased above the threshold:
 

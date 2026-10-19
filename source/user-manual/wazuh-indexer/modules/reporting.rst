@@ -27,7 +27,7 @@ The Reporting module supports email notifications for report delivery. To config
 #. Enter a name (for example, *wazuh*).
 #. Enter an email address.
 #. In **Host**, type your SMTP server domain name (for example, *smtp.gmail.com*).
-#. In Port, type 465 (adapt this to your SMTP server settings).
+#. In Port, type ``465`` (adapt this to your SMTP server settings).
 #. Select **None** as the encryption method or your preferred encryption method.
 #. Click **Create**.
 #. Click **Create recipient group**.
@@ -86,7 +86,7 @@ After the report is generated, it appears in the **Reports** section, where you 
 Managing permissions via RBAC
 -----------------------------
 
-The Reporting module uses the Wazuh indexer RBAC system to manage permissions. Users must have the appropriate roles assigned to create, read, update, or delete reports. Roles are managed in the Wazuh dashboard under **Index Management** > **Security** > **Roles**.
+The Reporting module uses the Wazuh indexer RBAC system to manage permissions. Users must have the appropriate roles assigned to create, read, update, or delete reports. Roles are managed in the Wazuh dashboard under **Index management** > **Security** > **Roles**.
 
 The following permissions are available:
 
