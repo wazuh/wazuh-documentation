@@ -64,7 +64,7 @@ Wazuh manager
 
    .. note::
 
-      The default Wazuh indexer connector credentials are ``wazuh-manager:wazuh-manager``.
+      The Wazuh indexer connector username is ``wazuh-manager``. Its password is generated during installation and stored as ``WAZUH_INDEXER_MANAGER_PASSWORD`` in ``/etc/wazuh/credentials.env``.
 
 #. Add one ``<host>`` entry for each Wazuh indexer node in the ``<indexer>`` block of the Wazuh manager ``/var/wazuh-manager/etc/wazuh-manager.conf`` file:
 
@@ -144,7 +144,7 @@ Wazuh uses certificates to establish confidentiality and encrypt communications 
 Wazuh indexer cluster tuning
 ----------------------------
 
-A Wazuh indexer installed from the package reserves 1 GB of JVM heap regardless of how much memory the node has. A node deployed with the installation assistant receives about a quarter of the node's memory instead, so an all-in-one deployment starts with a different value. Both allocations can be insufficient for multi-node clusters, where shard recovery after a node restart requires more memory than the parent circuit breaker allows. When that happens, shard recovery fails repeatedly and the cluster can remain in a red state. Check the current value before changing it.
+A Wazuh indexer installed from the package reserves 1 GB of JVM heap regardless of how much memory the node has. The installation assistant sets the heap to about a quarter of the node's memory on an all-in-one deployment, and to about half of the node's memory on each Wazuh indexer node of a distributed deployment. Both allocations can be insufficient for multi-node clusters, where shard recovery after a node restart requires more memory than the parent circuit breaker allows. When that happens, shard recovery fails repeatedly and the cluster can remain in a red state. Check the current value before changing it.
 
 Set the JVM heap size on every Wazuh indexer node, including nodes added to the cluster later, before starting the Wazuh indexer service for the first time.
 
@@ -230,13 +230,13 @@ Apply the :ref:`Wazuh indexer cluster tuning <wazuh_indexer_cluster_tuning>` set
 
       You only have to initialize the cluster once. There is no need to run this command on every node, and you do not need to run it again when new nodes join the cluster.
 
-The Wazuh indexer users are defined in ``/etc/wazuh-indexer/opensearch-security/internal_users.yml``. The default credentials are ``admin:admin``. Change the password with the Wazuh password tool on any Wazuh indexer node. The password must have a length between 8 and 64 characters and contain at least one uppercase letter, one lowercase letter, a number, and one of the following symbols: ``.*+?-``.
+The Wazuh indexer users are defined in ``/etc/wazuh-indexer/opensearch-security/internal_users.yml``. Wazuh 5.0 has no default passwords. The installation generates the passwords for the ``admin``, ``kibanaserver``, and ``wazuh-manager`` users and stores them in ``/etc/wazuh/credentials.env``. Change a password with the Wazuh password tool on any Wazuh indexer node. The password must have between 12 and 64 characters, use only A-Z, a-z, 0-9, and ``. , _ + : @ % ^ = ~ -``, and contain at least one uppercase letter, one lowercase letter, one digit, and one symbol.
 
 .. code-block:: console
    :emphasize-lines: 2
 
    # curl -sO https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-passwords-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh
-   # bash wazuh-passwords-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -u admin -p <NEW_PASSWORD>
+   # printf '%s\n' '<NEW_PASSWORD>' | bash wazuh-passwords-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -u admin -p
 
 .. note::
 

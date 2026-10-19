@@ -379,6 +379,7 @@ Follow these steps on the Wazuh indexer node to create a new role mapping and gr
         hidden: false
         backend_roles:
         - "wazuh-admins"
+        - "admin"
         and_backend_roles: []
         description: "Maps admin to all_access"
 

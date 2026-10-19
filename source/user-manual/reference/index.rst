@@ -23,7 +23,6 @@ This part of the user manual covers the configuration files that Wazuh uses and 
        daemons/index
        tools/index
        installation-utilities/index
-       statistics-files/index
-
-..
        unattended-installation
+       wazuh-common-schema
+       statistics-files/index

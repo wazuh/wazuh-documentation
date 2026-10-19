@@ -68,12 +68,12 @@ Below are some of the available settings for the ``/var/ossec/api/configuration/
       limits:
          eps:
             allow: yes
-       agents:
+      agents:
          allow_higher_versions:
             allow: yes
-       indexer:
+      indexer:
          allow: yes
-       integrations:
+      integrations:
          virustotal:
             public_key:
                allow: yes

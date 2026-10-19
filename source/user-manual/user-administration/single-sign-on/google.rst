@@ -235,6 +235,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
         hidden: false
         backend_roles:
         - "Wazuh_access"
+        - "admin"
         and_backend_roles: []
         description: "Maps admin to all_access"
 

@@ -8,7 +8,11 @@
 wazuh-agentd.state
 ==================
 
-The statistics file for ``wazuh-agentd`` is located at ``/var/ossec/var/run/wazuh-agentd.state``.
+The statistics file for ``wazuh-agentd`` is located at:
+
+-  Linux: ``/var/ossec/var/run/wazuh-agentd.state``
+-  Windows: ``C:\Program Files (x86)\ossec-agent\wazuh-agent.state``
+-  macOS: ``/Library/Ossec/var/run/wazuh-agentd.state``
 
 This file provides information about the agent, such as the number of generated events, last connection, and agent status.
 

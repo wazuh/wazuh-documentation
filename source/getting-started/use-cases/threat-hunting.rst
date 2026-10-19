@@ -1,124 +1,136 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Wazuh provides multiple capabilities to aid security teams in threat hunting, helping them swiftly contain threats and prevent damage.
+   :description: Learn how Wazuh supports threat hunting with indicator of compromise matching, centralized telemetry, inventory baselines, MITRE ATT&CK mapping, and Sigma-based detection rules.
 
 Threat hunting
 ==============
 
-Threat hunting is a proactive approach that involves analyzing numerous data sources like logs, network traffic, and endpoint data to identify and eliminate cyber threats that have evaded traditional security measures. It aims to uncover potential threats that may have gone undetected in an IT environment. The process of threat hunting typically involves several steps: hypothesis generation, data collection, analysis, and response.
+Threat hunting is a proactive security practice that searches for malicious activity that has evaded automated detection and preventive controls. Instead of waiting for a security finding, security teams analyze endpoint, network, cloud, and threat intelligence data. They search for indicators of compromise, suspicious behavior, and affected assets across their environment.
 
-Wazuh offers several capabilities that assist security teams in hunting threats within their environment, empowering them to take rapid actions to contain the threat and prevent further damage.
+Wazuh supports threat hunting by collecting and correlating security telemetry from endpoints, cloud environments, network devices, and threat intelligence sources. Wazuh provides :doc:`system inventory </user-manual/capabilities/system-inventory/index>`, :doc:`log data collection </user-manual/capabilities/log-data-collection/index>`, :doc:`log data analysis </user-manual/capabilities/log-data-collection/log-data-analysis>`, :doc:`threat intelligence </wazuh-cti/index>`, :doc:`vulnerability detection </user-manual/capabilities/vulnerability-detection/index>`, and search capabilities. Security teams can use these capabilities to investigate suspicious activity, identify affected assets, and respond to threats.
 
-Log data analysis
------------------
+Hunting for indicators of compromise
+------------------------------------
 
-Effective log data collection and analysis are essential for enhancing your threat hunting methodology. You can leverage the robust capabilities of Wazuh to optimize your threat hunting efforts. 
+Wazuh helps security teams proactively search for indicators of compromise (IOCs), including malicious IP addresses, domains, URLs, and file hashes. Wazuh uses information from the `Wazuh Cyber Threat Intelligence (CTI) <https://cti.wazuh.com/>`__ platform and custom Key-Value Databases (KVDBs) to match these indicators against endpoint security events. Matching indicators identify systems that have communicated with known malicious infrastructure.
 
-Wazuh as a unified XDR and SIEM platform offers centralized :doc:`log data collection </user-manual/capabilities/log-data-collection/index>`, allowing gathering of data from diverse sources such as endpoints, network devices, and applications. This centralized approach simplifies analysis and reduces the effort required to monitor multiple sources.
+The Wazuh normalization engine enriches events during processing with IOC and GeoIP context. When an event matches an indicator from Wazuh CTI, the resulting finding includes threat enrichment details such as the provider, confidence level, and associated malware family. GeoIP enrichment also adds geolocation information for IP addresses when available.
 
-The image below shows the configuration settings on the Wazuh dashboard for collecting audit logs from a monitored endpoint.
+Security teams can use the **Discover** section of the Wazuh dashboard to search findings and historical telemetry for matching IOCs. They can identify affected endpoints and investigate potential threats across their environment.
 
-.. thumbnail:: /images/getting-started/use-cases/threat-hunting/log-collection-settings.png
-   :title: Log collection settings
-   :alt: Log collection settings
+The finding details show IOC enrichment from Wazuh CTI, including the matched indicator, provider, confidence level, and malware family.
+
+.. thumbnail:: /images/getting-started/use-cases/threat-hunting/ioc-enrichment-details.png
+   :title: Finding details showing Wazuh CTI IOC enrichment with the matched indicator, provider, confidence, and malware family
+   :alt: Finding details showing Wazuh CTI IOC enrichment with the matched indicator, provider, confidence, and malware family
    :align: center
    :width: 80%
 
-Wazuh uses decoders to extract meaningful information from log data obtained from various sources. It breaks down raw log data into individual fields or attributes, such as timestamp, source IP address, destination IP address, event type, and others. The Index patterns tab on the Wazuh dashboard shows the ``wazuh-alerts-*`` index pattern and its fields.
+Hunting across security telemetry and logs
+------------------------------------------
 
-.. thumbnail:: /images/getting-started/use-cases/threat-hunting/wazuh-alerts-index-pattern.png
-   :title: wazuh-alerts-* index pattern
-   :alt: wazuh-alerts-* index pattern
+Effective threat hunting depends on collecting and searching security telemetry from across the environment. Wazuh centralizes logs from monitored endpoints, network devices, applications, cloud services, and agentless sources, giving security teams a single place to investigate suspicious activity.
+
+Wazuh stores collected telemetry in dedicated data streams for security events, endpoint inventory, vulnerability findings, file integrity state, and other security data. This organized storage model allows security teams to hunt across historical and current telemetry without inspecting individual endpoints.
+
+.. thumbnail:: /images/getting-started/use-cases/threat-hunting/wazuh-data-streams.png
+   :title: Wazuh data streams for security events, inventory, vulnerability findings, and file integrity state
+   :alt: Wazuh data streams for security events, inventory, vulnerability findings, and file integrity state
    :align: center
    :width: 80%
 
-Wazuh offers :doc:`agentless monitoring </user-manual/capabilities/agentless-monitoring/index>` and :ref:`syslog log collection <configuring_syslog_output>` for efficient log data handling. It ensures consistency and compatibility across various log formats. Wazuh indexing and querying capabilities facilitate quick search and access to specific log data, streamlining analysis and investigation. Wazuh uses its advanced parsing and real-time analysis to enhance threat hunting by proactively identifying and mitigating risks thereby enhancing security.
+Wazuh normalizes collected logs into the :ref:`Wazuh Common Schema (WCS) <wazuh_common_schema>`, extracting fields such as timestamps, source and destination IP addresses, usernames, processes, and event types. This consistent data model allows threat hunters to search and correlate activity across multiple data streams in the **Discover** section of the Wazuh dashboard.
 
-Wazuh archives
---------------
+The **Discover** section of the Wazuh dashboard lets security teams search and correlate data across Wazuh security events, inventory, vulnerability, and other telemetry data streams.
 
-Wazuh provides a centralized storage location for archiving all collected logs from monitored endpoints. The Wazuh archives logs include those that do not trigger alerts on the Wazuh dashboard. Wazuh archives are disabled by default and can be easily enabled. The availability of detailed logs is crucial for effective threat hunting, providing comprehensive visibility into your environment.
-
-:ref:`Wazuh archives <archiving_event_logs>` provide log retention, indexing, and querying capabilities that give concrete visibility to analyze events within specific monitored endpoints in your environment. This facilitates uncovering event causes, event locations, event communications, event timestamps, and related parent-child processes. The image below shows the archived logs in the **Discover** section on the Wazuh dashboard.
-
-.. thumbnail:: /images/getting-started/use-cases/threat-hunting/discover-archives-logs.png
-   :title: wazuh-archives logs in the Discover section
-   :alt: wazuh-archives in the Discover section
+.. thumbnail:: /images/getting-started/use-cases/threat-hunting/discover-section.png
+   :title: Discover section of the Wazuh dashboard searching across Wazuh data streams
+   :alt: Discover section of the Wazuh dashboard searching across Wazuh data streams
    :align: center
    :width: 80%
 
-MITRE ATT&CK mapping
---------------------
+Hunting anomalies against an inventory baseline
+-----------------------------------------------
 
-The MITRE ATT&CK framework offers a standardized approach to mapping and understanding cyber attack tactics, techniques, and procedures (TTPs). By utilizing the :doc:`Wazuh MITRE ATT&CK module </user-manual/ruleset/mitre>`, we can enhance our understanding of TTPs used by threat actors and proactively defend against them.
+Threat hunters need visibility into what is running across their environment. They can compare endpoint inventory against an approved baseline to identify unauthorized software, unexpected services, and other anomalies that might indicate compromise.
 
-The Wazuh MITRE ATT&CK module maps TTPs to generated events, facilitating efficient threat hunting by promptly identifying patterns in attacker behavior. For instance, a suspicious login attempt can be associated with the “Credential Stuffing” technique in the MITRE ATT&CK framework. This empowers users to assess the frequency of such attacks and implement necessary measures to mitigate risks, such as enabling multi-factor authentication or rate-limiting login attempts. The **MITRE ATT&CK** module on the Wazuh dashboard allows you to view various techniques found within a monitored environment. 
+The Wazuh agent collects endpoint inventory through the :doc:`Syscollector module </user-manual/capabilities/system-inventory/index>`, including installed software, running processes, network ports, users, groups, services, and browser extensions. The Wazuh manager synchronizes this inventory to the ``wazuh-states-inventory-*`` indices, providing a queryable view of the current endpoint state.
 
-.. thumbnail:: /images/getting-started/use-cases/threat-hunting/mitre.png
-   :title: The MITRE ATT&CK module
-   :alt: The MITRE ATT&CK module
+Security teams can query the inventory from the Wazuh dashboard, Wazuh manager API, or Wazuh indexer API. They can use this information to identify endpoints running software outside the approved baseline, unexpected listening ports, unauthorized services, or user accounts that do not match provisioning records.
+
+The **Services** tab in the **IT Hygiene** section of the Wazuh dashboard displays the installed services on an Ubuntu endpoint.
+
+.. thumbnail:: /images/getting-started/use-cases/threat-hunting/services-inventory.png
+   :title: Services tab of the IT Hygiene section listing installed services on an Ubuntu endpoint
+   :alt: Services tab of the IT Hygiene section listing installed services on an Ubuntu endpoint
    :align: center
    :width: 80%
 
-This module generates reports and visualizations on the Wazuh dashboard, showcasing the frequency and severity of attacks utilizing specific TTP. These reports help track compliance with security standards and regulations while highlighting areas where security measures may require strengthening. The Wazuh **MITRE ATT&CK** module on the Wazuh dashboard has a customizable dashboard that displays an overview of TTPs found within a monitored environment as seen below.
+The :doc:`Rootcheck module </proof-of-concept-guide/poc-detect-hidden-process>` complements inventory-based hunting by detecting anomalies that do not appear in standard inventory data. It can identify processes and network ports hidden from standard operating system tools, helping hunters investigate activity that inventory queries alone might not reveal.
 
-.. thumbnail:: /images/getting-started/use-cases/threat-hunting/mitre-dashboard.png
-   :title: The MITRE ATT&CK module dashboard
-   :alt: The MITRE ATT&CK module dashboard
+Hunting for unauthorized file and configuration changes
+-------------------------------------------------------
+
+Wazuh File Integrity Monitoring (FIM) helps security teams proactively hunt for unauthorized changes to critical files, directories, and Windows registry keys that attackers commonly modify to establish persistence. The FIM module monitors these locations in real time and records file additions, modifications, deletions, permission changes, and registry changes.
+
+Attackers often establish persistence by modifying startup locations such as the Windows Run and RunOnce registry keys, scheduled tasks, cron entries, and startup folders. They can also modify web-accessible directories to deploy web shells. Wazuh monitors these locations and synchronizes the current file and registry state across monitored endpoints.
+
+Threat hunters can investigate FIM findings in two ways. They can review recent findings to identify new or modified persistence locations and use *who-data* information to determine the user and process responsible for each change. They can also query the synchronized FIM state to identify persistence artifacts that currently exist across all monitored endpoints, regardless of when they were created.
+
+The ``report_changes`` attribute records the content added or modified in monitored text files, helping security teams distinguish legitimate configuration updates from injected payloads or unauthorized changes.
+
+The Wazuh dashboard shows FIM findings for changes to monitored files and registry keys, including the user, process, and modified content recorded by *who-data* and *report_changes*.
+
+.. thumbnail:: /images/getting-started/use-cases/threat-hunting/file-and-registry-change-findings.png
+   :title: FIM findings showing the user, process, and modified content of changed files and registry keys
+   :alt: FIM findings showing the user, process, and modified content of changed files and registry keys
    :align: center
    :width: 80%
 
-You can proactively protect your systems and data by leveraging insights from the MITRE ATT&CK framework. The integration of MITRE ATT&CK with Wazuh significantly enhances threat hunting and improves overall security.
+Hunting adversary techniques with MITRE
+---------------------------------------
 
-Third-party integration
------------------------
+The MITRE ATT&CK framework offers a standardized approach to mapping attack tactics, techniques, and procedures (TTPs). Wazuh detection content carries MITRE ATT&CK metadata, so each finding identifies the technique behind the detected behavior. Instead of starting from raw events, the hunter starts from a technique. For example, a hunt for credential abuse begins by filtering findings mapped to Brute Force and Valid Accounts, then examines which endpoints and accounts concentrate that activity.
 
-Wazuh integrates with :doc:`third-party solutions </user-manual/manager/integration-with-external-apis>` that enhance threat hunting capabilities. These integrations enable users to consolidate data from diverse sources and automate threat detection and response. Wazuh seamlessly integrates with popular open source platforms like VirusTotal, AlienVault, URLHaus, MISP, and many others. This integration allows users to cross-reference telemetry with threat intelligence feeds, improving detection and response to threats.
+Technique frequency analysis extends this approach across time. The Wazuh dashboard shows which techniques appear most in your environment, and a sudden spike in one technique is a hunting lead. A rise in autostart-related findings, for instance, prompts a persistence hunt on the affected endpoints. Technique frequency analysis lets you prioritize hunts by observed attacker behavior rather than by guesswork.
 
-Third-party integrations play a crucial role in proactive threat hunting, encompassing threat intelligence and a range of collaborative tools. These integrations provide essential insights into both established and emerging threats, enabling a comprehensive and forward-looking approach to threat detection. By promoting the exchange of information among seasoned security teams, these integrations foster a collective defense strategy, enhancing the effectiveness of the overall threat hunting process.
-
-Some third-party solutions that Wazuh integrates with to aid threat hunting are:
-
-- **VirusTotal**: :doc:`Integrating VirusTotal </proof-of-concept-guide/detect-remove-malware-virustotal>` enhances threat detection by leveraging the VirusTotal malware database for accurate identification and faster incident response. The image below shows malware detection via the VirusTotal integration.
-
-   .. thumbnail:: /images/getting-started/use-cases/threat-hunting/security-events.png
-      :title: Malware detection via the VirusTotal integration
-      :alt: Malware detection via the VirusTotal integration
-      :align: center
-      :width: 80%
-
-- **URLHaus**: `Integrating URLHaus by abuse.ch <https://wazuh.com/blog/detecting-malicious-urls-using-wazuh-and-urlhaus/>`__ with Wazuh amplifies threat intelligence capabilities, empowering users to proactively detect and block malicious URLs in real-time.
-
-- **MISP**: We can enrich Wazuh alerts by automating identifications of IOCs and integrating MISP with Wazuh.
-
-Wazuh integrates with other tools that aid threat hunting beyond the above-mentioned. It supports third-party integrations for threat intelligence platforms, SIEMs, and messaging platforms using APIs and other integration methods.
-
-Rules and decoders
-------------------
-
-Wazuh enhances threat hunting with robust rules, decoders, and pre-configured rules for diverse attack vectors and cyber activities.
-
-The **Rules** module on the Wazuh dashboard presents both default and custom rules, covering a broad array of security events, including system anomalies, malware detection, authentication failures, and other potential threats as seen below.
-
-.. thumbnail:: /images/getting-started/use-cases/threat-hunting/rules.png
-   :title: Wazuh dashboard rules view
-   :alt: Wazuh dashboard rules view
+.. thumbnail:: /images/getting-started/use-cases/threat-hunting/mitre-attack-technique-trends.png
+   :title: Wazuh dashboard showing the most frequent MITRE ATT&CK techniques in findings
+   :alt: Wazuh dashboard showing the most frequent MITRE ATT&CK techniques in findings
    :align: center
    :width: 80%
 
-Wazuh allows you to customize and :doc:`create your own rules and decoders </user-manual/ruleset/index>`, tailored to your specific environment and threat landscape. This enables you to fine-tune detection, address unique requirements, and minimize blind spots.
+Hunting with decoders and detection rules
+-----------------------------------------
 
-Wazuh decoders play a vital role in normalizing and parsing diverse log formats and data sources. They ensure that collected information is presented in a standardized manner, facilitating effective analysis and correlation of data from various sources.
+Wazuh provides detection content that helps threat hunters investigate suspicious activity and identify attack techniques across collected telemetry. Its decoders and detection rules process diverse log sources and provide the fields and detection logic needed to identify malicious behavior.
 
-The **Decoders** module on the Wazuh dashboard allows you to view default and custom decoders. The image below shows details of the default decoder ``agent-upgrade``.
+Decoders parse incoming logs and extract meaningful fields from different data formats. Detection rules use these fields to identify patterns associated with authentication failures, malware, suspicious system activity, and other security events. Security teams can create custom rules and decoders to adapt detection coverage to their environment and investigate activity that predefined content does not cover.
 
-.. thumbnail:: /images/getting-started/use-cases/threat-hunting/decoders.png
-   :title: Details of the default agent-upgrade decoder
-   :alt: Details of the default agent-upgrade decoder
+Wazuh detection rules are Sigma-based, providing a standardized way to define detection logic for log events. Threat hunters can use Sigma-based rules to investigate specific attack techniques without creating detection logic from scratch. Effective rules can then become part of the organization's ongoing detection coverage for continuous monitoring.
+
+Security teams can use the **Rules** and **Decoders** sub-sections of the **Ruleset Management** section in the Wazuh dashboard to review the detection content available in their environment. The **Rules** sub-section displays predefined detection rules used to identify suspicious activity.
+
+.. thumbnail:: /images/getting-started/use-cases/threat-hunting/ruleset-management-rules.png
+   :title: Rules sub-section of Ruleset Management listing the detection rules available in the environment
+   :alt: Rules sub-section of Ruleset Management listing the detection rules available in the environment
    :align: center
    :width: 80%
 
-Leveraging Wazuh rules and decoders, security teams attain actionable insights, enabling them to swiftly detect IOCs, anomalous behavior, and potential breaches.
+The **Decoders** sub-section displays the decoders used to parse and extract fields from different log sources.
 
-Refer to the :doc:`Wazuh ruleset documentation </user-manual/ruleset/index>` for detailed guidance on configuring custom rules and decoders.
+.. thumbnail:: /images/getting-started/use-cases/threat-hunting/security-analytics-decoders.png
+   :title: Decoders sub-section of Ruleset Management listing the decoders used to parse log sources
+   :alt: Decoders sub-section of Ruleset Management listing the decoders used to parse log sources
+   :align: center
+   :width: 80%
+
+The **Threat Hunting** section of the Wazuh dashboard shows detection findings generated from a Sigma rule applied to security events.
+
+.. thumbnail:: /images/getting-started/use-cases/threat-hunting/sigma-rule-findings.png
+   :title: Threat Hunting section showing findings generated by a Sigma rule
+   :alt: Threat Hunting section showing findings generated by a Sigma rule
+   :align: center
+   :width: 80%
+

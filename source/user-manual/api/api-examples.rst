@@ -20,7 +20,7 @@ The following GET request retrieves basic information about the Wazuh server API
 
 .. code-block:: console
 
-   # curl -k -X GET "https://localhost:55000/?pretty=true" -H  "Authorization: Bearer $TOKEN"
+   # curl -k -X GET "https://localhost:55000/?pretty=true" -H "Authorization: Bearer $TOKEN"
 
 The command returns output similar to the following example:
 
@@ -47,7 +47,7 @@ The following POST request to the Wazuh server API creates a new user on the Waz
 
 .. code-block:: console
 
-   # curl -k -X POST "https://localhost:55000/security/users" -H  "Authorization: Bearer $TOKEN" -H  "Content-Type: application/json" -d "{\"username\":\"test_user\",\"password\":\"Test_user1\"}"
+   # curl -k -X POST "https://localhost:55000/security/users" -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d "{\"username\":\"test_user\",\"password\":\"Test_user1\"}"
 
 .. code-block:: none
    :class: output
@@ -75,7 +75,7 @@ The following DELETE request to the Wazuh server API deletes all agent groups on
 
 .. code-block:: console
 
-   # curl -k -X DELETE "https://localhost:55000/groups?pretty=true&groups_list=all" -H  "Authorization: Bearer $TOKEN"
+   # curl -k -X DELETE "https://localhost:55000/groups?pretty=true&groups_list=all" -H "Authorization: Bearer $TOKEN"
 
 .. code-block:: none
    :class: output

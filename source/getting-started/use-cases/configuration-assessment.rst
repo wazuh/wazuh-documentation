@@ -1,116 +1,134 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Wazuh offers a Security Configuration Assessment module that assists security teams to scan and detect misconfigurations within their environment.
+   :description: Learn how the Wazuh Security Configuration Assessment (SCA) module checks endpoint configurations against CIS Benchmarks and custom policies to harden endpoints and demonstrate compliance.
 
 Configuration assessment
 ========================
 
-Configuration assessment is a process that verifies whether endpoints adhere to a set of predefined rules regarding configuration settings and approved application usage. It involves comparing the current configuration against established industry standards and organizational policies to identify vulnerabilities and misconfigurations.
+Configuration assessment verifies whether endpoints comply with predefined configuration requirements and approved application usage. It compares endpoint configurations against industry standards and organizational policies to identify misconfigurations.
 
-Regular configuration assessments are essential in maintaining a secure and compliant environment, as they help organizations proactively identify and patch vulnerabilities. This practice strengthens security controls and minimizes the risk of security incidents.
+Regular configuration assessments help you maintain a secure and compliant environment. They surface weaknesses early, so you remediate them before attackers exploit them and before they grow into security incidents.
 
 Wazuh SCA module
 ----------------
 
-Wazuh offers a :doc:`Security Configuration Assessment (SCA) </user-manual/capabilities/sec-config-assessment/index>` module that assists security teams to scan and detect misconfigurations within their environment. The Wazuh agent uses policy files to scan endpoints that it monitors. These files contain predefined checks to be carried out on each monitored endpoint. 
+Wazuh provides a :doc:`Security Configuration Assessment (SCA) </user-manual/capabilities/sec-config-assessment/index>` module that scans endpoints for configuration issues. The Wazuh agent evaluates each endpoint against SCA policy files that contain predefined checks.
 
-Wazuh includes :doc:`SCA policies </user-manual/capabilities/sec-config-assessment/available-sca-policies>` out-of-the-box based on the Center for Internet Security (CIS) security benchmarks. These benchmarks serve as essential guidelines on best practices for protecting IT systems and data from cyberattacks. They provide clear instructions for establishing a secure baseline configuration and offer guidance to ensure that users implement effective measures to safeguard their critical assets and mitigate potential vulnerabilities. By adhering to these standards, you can enhance your overall security posture and mitigate the risk of cyber threats against your business. 
+Wazuh includes :doc:`SCA policies </user-manual/capabilities/sec-config-assessment/available-sca-policies>` based on CIS Benchmarks by default. These policies provide security configuration checks based on recommended system-hardening practices.
 
-Some other benefits of the Wazuh Security Configuration Assessment (SCA) module include:
+The SCA module supports:
 
--  **Security posture management**: Wazuh SCA helps organizations ensure that their endpoints are configured securely. This minimizes vulnerabilities resulting from misconfigurations and reduces the risk of security breaches.
--  **Compliance monitoring**: It allows organizations to assess and implement compliance with regulatory standards, best practices, and internal security policies.
--  **Continuous monitoring**: Wazuh SCA continuously monitors the configuration of the endpoints and alerts when it discovers misconfigurations. 
+-  **Security posture management:** Identifies configuration issues that can weaken endpoint security.
+-  **Compliance monitoring:** Assesses endpoint configurations against regulatory requirements, security standards, and organizational policies.
+-  **Continuous monitoring:** Periodically evaluates endpoint configurations and reports changes in the assessment results.
 
-Overview of Wazuh SCA policies
-------------------------------
+Wazuh SCA policies
+------------------
 
-The Wazuh SCA module uses policies written in YAML format. Each policy consists of :ref:`checks <sca_check_overview>`, and each check comprises one or more rules. These rules can examine various aspects of an endpoint, such as the presence of files, directories, Windows registry keys, running processes, and more.
+The Wazuh SCA module uses policies written in YAML format. Each policy contains :ref:`checks <sca_policy_file_checks_section>`, and each check contains one or more rules. These rules examine endpoint attributes such as files, directories, Windows registry keys, and running processes. In Wazuh 5.0, the module evaluates regular expressions in rules with Perl Compatible Regular Expressions (PCRE2). Each check has a unique numeric ``id``, and its ``name`` field is the canonical check name.
 
-By default, the Wazuh agent runs scans for every policy (``.yaml`` or ``.yml`` files) present in the ruleset directory. This directory can be found in the following locations on every operating system that runs the Wazuh agent:
+Each check can include compliance metadata in a ``compliance`` object with the ``cmmc``, ``fedramp``, ``gdpr``, ``hipaa``, ``iso_27001``, ``nis2``, ``nist_800_171``, ``nist_800_53``, ``pci_dss``, or ``tsc`` object. MITRE ATT&CK data is stored separately in the ``mitre`` object, which contains ``tactic``, ``technique``, and ``subtechnique`` keys.
 
--  Linux and Unix-based agents: ``/var/ossec/ruleset/sca``.
--  Windows agents: ``C:\Program Files (x86)\ossec-agent\ruleset\sca``.
--  macOS agents: ``/Library/Ossec/ruleset/sca``.
+By default, the Wazuh agent scans every policy file with a ``.yaml`` or ``.yml`` extension in the ``ruleset/sca`` directory. The ruleset directory is located at the following paths:
 
-Wazuh also allows you to :ref:`create custom policies <sca_creating_custom_policies>` that can be used to scan endpoints and verify if they conform to your organization’s policies.
+-  Linux and Unix-based agents: ``/var/ossec/ruleset/sca``
+-  Windows agents: ``C:\Program Files (x86)\ossec-agent\ruleset\sca``
+-  macOS agents: ``/Library/Ossec/ruleset/sca``
 
-See a snippet of a CIS policy file ``/var/ossec/ruleset/sca/cis_ubuntu22-04.yml`` which is included out-of-the-box on Ubuntu 22.04 endpoints. The SCA policy which is based on the CIS benchmarks, runs checks on the endpoint to determine if it conforms to the best practices for system hardening. The SCA policy with ID ``28500`` checks if the ``/tmp`` directory is on a separate partition.
-
-.. code-block:: yaml
-   :emphasize-lines: 2
-
-   - id: 28500
-     title: "Ensure /tmp is a separate partition."
-     description: "The /tmp directory is a world-writable directory used for temporary storage by all users and some applications."
-     rationale: "Making /tmp its own file system allows an administrator to set additional mount options such as the noexec option on the mount, making /tmp useless for an attacker to install executable code. It would also prevent an attacker from establishing a hard link to a system setuid program and wait for it to be updated. Once the program was updated, the hard link would be broken and the attacker would have his own copy of the program. If the program happened to have a security vulnerability, the attacker could continue to exploit the known flaw. This can be accomplished by either mounting tmpfs to /tmp, or creating a separate partition for /tmp."
-     impact: "Since the /tmp directory is intended to be world-writable, there is a risk of resource exhaustion if it is not bound to a separate partition. Running out of /tmp space is a problem regardless of what kind of filesystem lies under it, but in a configuration where /tmp is not a separate file system it will essentially have the whole disk available, as the default installation only creates a single / partition. On the other hand, a RAM-based /tmp (as with tmpfs) will almost certainly be much smaller, which can lead to applications filling up the filesystem much more easily. Another alternative is to create a dedicated partition for /tmp from a separate volume or disk. One of the downsides of a disk-based dedicated partition is that it will be slower than tmpfs which is RAM-based. /tmp utilizing tmpfs can be resized using the size={size} parameter in the relevant entry in /etc/fstab."
-     remediation: "First ensure that systemd is correctly configured to ensure that /tmp will be mounted at boot time. # systemctl unmask tmp.mount For specific configuration requirements of the /tmp mount for your environment, modify /etc/fstab or tmp.mount. Example of /etc/fstab configured tmpfs file system with specific mount options: tmpfs 0 /tmp tmpfs defaults,rw,nosuid,nodev,noexec,relatime,size=2G 0 Example of tmp.mount configured tmpfs file system with specific mount options: [Unit] Description=Temporary Directory /tmp ConditionPathIsSymbolicLink=!/tmp DefaultDependencies=no Conflicts=umount.target Before=local-fs.target umount.target After=swap.target [Mount] What=tmpfs Where=/tmp Type=tmpfs."
-     references:
-       - https://www.freedesktop.org/wiki/Software/systemd/APIFileSystems/
-       - https://www.freedesktop.org/software/systemd/man/systemd-fstab-generator.html
-     compliance:
-       - cis: ["1.1.2.1"]
-       - cis_csc_v7: ["14.6"]
-       - cis_csc_v8: ["3.3"]
-       - mitre_techniques: ["T1499", "T1499.001"]
-       - mitre_tactics: ["TA0005"]
-       - mitre_mitigations: ["M1022"]
-       - cmmc_v2.0: ["AC.L1-3.1.1", "AC.L1-3.1.2", "AC.L2-3.1.5", "AC.L2-3.1.3", "MP.L2-3.8.2"]
-       - hipaa: ["164.308(a)(3)(i)", "164.308(a)(3)(ii)(A)", "164.312(a)(1)"]
-       - pci_dss_v3.2.1: ["7.1", "7.1.1", "7.1.2", "7.1.3"]
-       - pci_dss_v4.0: ["1.3.1", "7.1"]
-       - nist_sp_800-53: ["AC-5", "AC-6"]
-       - soc_2: ["CC5.2", "CC6.1"]
-     condition: all
-     rules:
-       - 'c:findmnt --kernel /tmp -> r:\s*/tmp\s'
-       - "c:systemctl is-enabled tmp.mount -> r:generated|enabled"
-
-The ``/tmp`` directory is used to store data that is needed for a short time by system and user applications. Mounting ``/tmp`` on a separate partition allows an administrator to set additional mount options such as the ``noexec``, ``nodev``, and ``nosuid``. Therefore making the directory useless for an attacker to install executable code. The SCA policy file also gives recommendations on how to remediate this issue.
+Wazuh also lets you :ref:`create custom policies <sca_creating_custom_policies>` to assess endpoints against your organization's security requirements.
 
 Viewing SCA results
 -------------------
 
-The Wazuh dashboard has a **Configuration Assessment** module that allows you to view SCA scan results for each agent.
+The Wazuh dashboard has a **Configuration Assessment** section that allows you to view SCA scan results for each monitored endpoint.
 
-.. thumbnail:: /images/getting-started/use-cases/sca/sca-module.png
-   :title: Configuration Assessment module
-   :alt: Configuration Assessment module
+.. thumbnail:: /images/getting-started/use-cases/sca/sca-scan-results.png
+   :title: Configuration Assessment section of the Wazuh dashboard showing SCA scan results for monitored endpoints
+   :alt: Configuration Assessment section of the Wazuh dashboard showing SCA scan results for monitored endpoints
    :align: center
    :width: 80%
-    
+
+Hardening endpoints against CIS Benchmarks
+------------------------------------------
+
+The SCA module ships stock policies based on the CIS Benchmarks, which define best practices for establishing a secure baseline configuration. The Wazuh agent evaluates each endpoint against the policy for its operating system. It reports which checks passed and failed, and a score calculated from the results.
+
+Each failed check includes a rationale, a description, and remediation steps. You apply the remediation, and the next scan confirms the fix by changing the check result to **Passed**. The score gives you a measurable hardening level per endpoint and across your fleet.
+
+By using the Wazuh SCA module, you can identify and remediate misconfigurations and verify that your endpoints comply with industry best practices. This approach helps strengthen your security posture and reduce the risk of security incidents.
 
 Interpreting SCA results
-------------------------
-The image below shows the policy based on the CIS benchmark for Ubuntu Linux 22.04 LTS. You can see that 191 checks were run against the Ubuntu 22.04 endpoint. Out of these, 56 passed, 87 failed, and 48 are not applicable to the endpoint. It also shows a score of 39% which is calculated based on the number of tests passed.  
+^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. thumbnail:: /images/getting-started/use-cases/sca/cis-benchmark-ubuntu22-results.png
-   :title: Results for CIS benchmark for Ubuntu 22.04 checks
-   :alt: Policy for CIS benchmark for Ubuntu 22.04 checks
+The following Wazuh dashboard image shows the results of the policy based on the CIS Benchmark for Ubuntu Linux 22.04 LTS. The scan evaluated 207 checks on the Ubuntu 22.04 endpoint: 92 passed, 104 failed, and 11 were not applicable. The dashboard shows a score of 46.939%, calculated as the 92 passed checks divided by the 196 applicable checks.
+
+.. thumbnail:: /images/getting-started/use-cases/sca/cis-ubuntu-22-04-policy-results.png
+   :title: SCA results for the CIS Ubuntu Linux 22.04 LTS policy showing 92 passed, 104 failed, and 11 not applicable checks
+   :alt: SCA results for the CIS Ubuntu Linux 22.04 LTS policy showing 92 passed, 104 failed, and 11 not applicable checks
    :align: center
    :width: 80%
 
-You can click on the checks to get more information. In the image below, you can see information such as rationale, remediation, and a description of the check with ID ``3003``.
+The following images show the description, rationale, and remediation steps for SCA check ``28653`` in the CIS Benchmark policy for Ubuntu Linux 22.04 LTS.
 
-.. thumbnail:: /images/getting-started/use-cases/sca/check-3003-results.png
-   :title: Results for CIS benchmark for Ubuntu 22.04 check ID 3003
-   :alt: Results for CIS benchmark for Ubuntu 22.04 check ID 3003
+.. thumbnail:: /images/getting-started/use-cases/sca/sca-check-28653-description.png
+   :title: Description and rationale of SCA check 28653 in the CIS Ubuntu Linux 22.04 LTS policy
+   :alt: Description and rationale of SCA check 28653 in the CIS Ubuntu Linux 22.04 LTS policy
    :align: center
    :width: 80%
 
-The above SCA scan result shows ``failed`` because the public key authentication for ssh is not enabled. If the remediation is implemented, the result will change to ``passed`` thereby improving the security of the endpoint.
+.. thumbnail:: /images/getting-started/use-cases/sca/sca-check-28653-remediation.png
+   :title: Remediation steps for SCA check 28653 in the CIS Ubuntu Linux 22.04 LTS policy
+   :alt: Remediation steps for SCA check 28653 in the CIS Ubuntu Linux 22.04 LTS policy
+   :align: center
+   :width: 80%
+
+The above SCA scan result shows a **Failed** status because the ``ClientAliveInterval`` and ``ClientAliveCountMax`` settings for SSH are not configured. After you implement the remediation, the result changes to **Passed**, which improves the security of the endpoint.
 
 Implementing SCA remediation steps
-----------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In the example in the previous section, implementing the remediation provided by the Wazuh SCA improves the security of the endpoint. This involves changing the ``PubkeyAuthentication`` option value in the ``sshd_config`` file. In the image below, you can see the status of the check ``3003`` has changed to ``passed``.
+In the previous example, the remediation sets the ``ClientAliveInterval`` and ``ClientAliveCountMax`` options in the ``/etc/ssh/sshd_config`` file, which improves the endpoint security. The image below shows that check ID ``28653`` now has a **Passed** status.
 
-.. thumbnail:: /images/getting-started/use-cases/sca/sca-checks-status-changed.png
-   :title: Status passed for the check 3003
-   :alt: Status passed for the check 3003
+.. thumbnail:: /images/getting-started/use-cases/sca/sca-check-28653-passed.png
+   :title: SCA check 28653 showing a Passed result after the remediation is applied
+   :alt: SCA check 28653 showing a Passed result after the remediation is applied
    :align: center
    :width: 80%
 
-By utilizing the Wazuh SCA module, you can detect misconfigurations, remediate them, and verify that your endpoints adhere to industry best practices. This proactive approach significantly reduces the likelihood of security breaches within your environment.
+Enforcing internal security policies with custom checks
+-------------------------------------------------------
+
+Industry benchmarks might not cover requirements specific to your organization, such as required agent software, prohibited services, or internal password policies. You can create :ref:`custom SCA policies <sca_creating_custom_policies>` in YAML. Each check contains rules that use Perl Compatible Regular Expressions (PCRE2) to evaluate files, directories, processes, registry keys, and command output.
+
+Store custom policies in an administrator-managed directory outside the package-managed ruleset directory, and reference the directory in the SCA configuration. A custom policy assigned through shared agent groups applies the same organizational requirements to every endpoint in the group. Command rules in a shared policy run only when the ``sca.remote_commands`` internal option is enabled on the Wazuh agent.
+
+For example, the custom SCA policy ``process_check`` checks whether Netcat is running on an endpoint and marks the check as **Failed** when it is detected. The **Configuration Assessment** section of the Wazuh dashboard displays the policy and its check, as shown below.
+
+.. thumbnail:: /images/getting-started/use-cases/sca/custom-sca-policy-result.png
+   :title: Configuration Assessment section showing the custom process_check policy failing when Netcat is running
+   :alt: Configuration Assessment section showing the custom process_check policy failing when Netcat is running
+   :align: center
+   :width: 80%
+
+Demonstrating regulatory compliance
+-----------------------------------
+
+SCA checks can include compliance metadata that maps them to requirements in supported regulatory frameworks and security standards. A failed check identifies a configuration weakness and the associated compliance requirements.
+
+SCA results provide evidence of the security configuration of each monitored endpoint. Security teams can review check results, compliance mappings, scores, and generated reports to assess their configuration posture and track changes after remediation.
+
+The two images below show the check description and its remediation guidance.
+
+.. thumbnail:: /images/getting-started/use-cases/sca/sca-check-compliance-mapping.png
+   :title: SCA check description with its mapped compliance requirements
+   :alt: SCA check description with its mapped compliance requirements
+   :align: center
+   :width: 80%
+
+.. thumbnail:: /images/getting-started/use-cases/sca/sca-check-remediation-guidance.png
+   :title: Remediation guidance for an SCA check that maps to regulatory compliance requirements
+   :alt: Remediation guidance for an SCA check that maps to regulatory compliance requirements
+   :align: center
+   :width: 80%
+

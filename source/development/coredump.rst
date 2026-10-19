@@ -33,7 +33,7 @@ Follow the steps below to enable core dump on RedHat based systems:
    .. code-block:: console
 
       # mkdir /var/lib/coredumps
-      # chmod 700 /var/lib/coredumps
+      # chmod 773 /var/lib/coredumps
 
 #. Reboot the system.
 

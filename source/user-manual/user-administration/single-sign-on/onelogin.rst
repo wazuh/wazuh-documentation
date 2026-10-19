@@ -190,9 +190,9 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
                 challenge: false
               authentication_backend:
                 type: "intern"
-            saml_auth_domain2:
+            saml_auth_domain:
               http_enabled: true
-              transport_enabled: true
+              transport_enabled: false
               order: 1
               http_authenticator:
                 type: saml
@@ -263,6 +263,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
         hidden: false
         backend_roles:
         - "wazuh-admins"
+        - "admin"
         and_backend_roles: []
         description: "Maps admin to all_access"
 
@@ -529,9 +530,9 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
                 challenge: false
               authentication_backend:
                 type: "intern"
-            saml_auth_domain2:
+            saml_auth_domain:
               http_enabled: true
-              transport_enabled: true
+              transport_enabled: false
               order: 1
               http_authenticator:
                 type: saml

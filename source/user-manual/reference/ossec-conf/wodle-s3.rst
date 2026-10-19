@@ -74,7 +74,7 @@ interval
 The amount of time the module will wait for before running again.
 
 +----------------------+----------------------------------------------------------------------------------------------+
-| **Default value**    | 10m                                                                                          |
+| **Default value**    | 5s                                                                                           |
 +----------------------+----------------------------------------------------------------------------------------------+
 | **Allowed values**   | A positive number that must contain a suffix character indicating a time unit, such as, s    |
 |                      | (seconds), m (minutes), h (hours), d (days), M (months).                                     |
