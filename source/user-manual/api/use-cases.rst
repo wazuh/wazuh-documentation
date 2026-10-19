@@ -53,7 +53,6 @@ Follow the steps below to retrieve the Wazuh daemon status:
               "wazuh-analysisd": "running",
               "wazuh-authd": "running",
               "wazuh-csyslogd": "stopped",
-              "wazuh-dbd": "stopped",
               "wazuh-monitord": "running",
               "wazuh-execd": "running",
               "wazuh-integratord": "stopped",
@@ -1644,7 +1643,7 @@ Using the Wazuh server API, we can delete all or specific Wazuh agents based on 
 
    .. code-block:: console
 
-      # curl -k -X DELETE "https://localhost:55000/agents?agents_list=<AGENT_ID>&status=all&older_than=1&pretty=true" -H  "Authorization: Bearer $TOKEN"
+      # curl -k -X DELETE "https://localhost:55000/agents?agents_list=<AGENT_ID>&status=all&older_than=1&pretty=true" -H "Authorization: Bearer $TOKEN"
 
    This query deletes the specified Wazuh agent.
 
@@ -1681,7 +1680,7 @@ Run the following query to get the active configuration state of a Wazuh agent:
 
    .. code-block:: console
    
-      # curl -k -X GET "https://localhost:55000/agents/<AGENT_ID>/config/agent/client?&pretty=true" -H  "Authorization: Bearer $TOKEN"
+      # curl -k -X GET "https://localhost:55000/agents/<AGENT_ID>/config/agent/client?&pretty=true" -H "Authorization: Bearer $TOKEN"
 
 Where:
 
@@ -1736,7 +1735,7 @@ You can use the ``/agents/summary`` endpoint to return a summary of the availabl
 
    .. code-block:: console
 
-      # curl -k -X GET "https://localhost:55000/agents/summary?pretty=true" -H  "Authorization: Bearer $TOKEN"
+      # curl -k -X GET "https://localhost:55000/agents/summary?pretty=true" -H "Authorization: Bearer $TOKEN"
 
    A response similar to the one below is expected when the command runs:
 
@@ -1772,7 +1771,7 @@ You can utilize the Wazuh server API to display information about all files moni
 
    .. code-block:: console
    
-      # curl -k -X GET "https://localhost:55000/syscheck/<AGENT_ID>?pretty=true&search=.py" -H  "Authorization: Bearer $TOKEN"
+      # curl -k -X GET "https://localhost:55000/syscheck/<AGENT_ID>?pretty=true&search=.py" -H "Authorization: Bearer $TOKEN"
 
 Where:
 
@@ -1831,7 +1830,7 @@ You can find a file using its SHA1 or MD5 hash. In the following examples, we re
 
    .. code-block:: console
    
-      # curl -k -X GET "https://localhost:55000/syscheck/<AGENT_ID>?pretty=true&hash=bc929cb047b79d5c16514f2c553e6b759abfb1b8" -H  "Authorization: Bearer $TOKEN"
+      # curl -k -X GET "https://localhost:55000/syscheck/<AGENT_ID>?pretty=true&hash=bc929cb047b79d5c16514f2c553e6b759abfb1b8" -H "Authorization: Bearer $TOKEN"
    
    .. code-block:: json
       :class: output
@@ -1867,7 +1866,7 @@ You can find a file using its SHA1 or MD5 hash. In the following examples, we re
    
    .. code-block:: console
    
-      # curl -k -X GET "https://localhost:55000/syscheck/<AGENT_ID>?pretty=true&hash=085c1161d814a8863562694b3819f6a5" -H  "Authorization: Bearer $TOKEN"
+      # curl -k -X GET "https://localhost:55000/syscheck/<AGENT_ID>?pretty=true&hash=085c1161d814a8863562694b3819f6a5" -H "Authorization: Bearer $TOKEN"
    
    .. code-block:: json
       :class: output

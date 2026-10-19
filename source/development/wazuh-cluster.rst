@@ -569,7 +569,7 @@ If the error log message doesn't provide enough detail to identify the issue, yo
 
 .. code-block:: console
 
-    # sed -i "s:wazuh_clusterd.debug=1:wazuh_clusterd.debug=2:g" /var/ossec/etc/internal_options.conf
+    # sed -i -E "s/wazuh_clusterd\.debug=[0-9]+/wazuh_clusterd.debug=2/g" /var/ossec/etc/internal_options.conf
     # systemctl restart wazuh-manager
     # grep -i error /var/ossec/logs/cluster.log -A 10
 

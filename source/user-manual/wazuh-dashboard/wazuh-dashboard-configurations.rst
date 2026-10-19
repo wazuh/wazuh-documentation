@@ -313,7 +313,6 @@ External API integrations such as Slack, PagerDuty, Jira, and Shuffle are centra
 These capabilities are built into the Wazuh dashboard, and their availability depends on how the platform is installed and configured. To ensure proper functionality, Wazuh includes a health check mechanism that verifies the presence of the **Notifications** and **Alerting** plugins and confirms that a minimal, working configuration is in place. When both plugins are detected, the system automatically:
 
 - Creates default notification channels (muted by default) for the supported integrations.
-- Creates sample alerting monitors associated with these channels.
 - Logs the verification and creation progress in the Wazuh dashboard server logs.
 
 This automation simplifies the setup process and ensures that notifications can be easily configured after installation.
@@ -348,28 +347,12 @@ All channels are stored as saved objects with names like Slack Channel, PagerDut
 
    Treat these URLs and credentials as secrets. Review permissions and channel visibility before enabling it.
 
-Default sample monitors created
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Default monitors
+^^^^^^^^^^^^^^^^
 
-If the **Alerts** functionality is available, the healthcheck mechanism attempts to create the following sample monitors on the Wazuh alerts index pattern (``wazuh-events*``). Monitors will not be created if any required notification channel is missing:
+Wazuh does not create default monitors. The health check only verifies that the default notification channels exist.
 
-+--------------------------+----------------+-----------------------------------------------------+
-| Monitor name             | Target channel | Behavior                                            |
-+==========================+================+=====================================================+
-| Sample: Slack            | Slack channel  | Queries for alerts with ``rule.level`` > ``3`` and  |
-|                          |                | sends notifications to Slack.                       |
-+--------------------------+----------------+-----------------------------------------------------+
-| Sample: PagerDuty        | PagerDuty      | Queries for alerts with ``rule.level`` > ``3`` and  |
-|                          | channel        | sends sample events to PagerDuty via Events v2.     |
-+--------------------------+----------------+-----------------------------------------------------+
-| Sample: Jira             | Jira channel   | Queries for alerts with ``rule.level`` > ``3``      |
-|                          |                | trigger a mock issue creation.                      |
-+--------------------------+----------------+-----------------------------------------------------+
-| Sample: Shuffle          | Shuffle channel| Queries for alerts with ``rule.level`` > ``3`` and  |
-|                          |                | sends a test payload to the Shuffle workflow.       |
-+--------------------------+----------------+-----------------------------------------------------+
-
-You can review the created monitors under **Explore** → **Alerting** → **Monitors**. For more information about monitor configuration, see `OpenSearch Alerting Monitors Documentation <https://docs.opensearch.org/latest/observing-your-data/alerting/monitors/>`__.
+You can create monitors under **Explore** > **Alerting** > **Monitors**. For more information about monitor configuration, see `OpenSearch Alerting Monitors Documentation <https://docs.opensearch.org/latest/observing-your-data/alerting/monitors/>`__.
 
 .. _notifications_and_alerting_configuration:
 
@@ -412,15 +395,15 @@ This notification channel sends alerts to Slack via an incoming webhook. Create 
       :title: Slack test message
       :alt: Slack test message
 
-#. Go to **Explore** > **Alerting** > **Monitors** and open the corresponding **Sample: Slack** monitor.
+#. Go to **Explore** > **Alerting** > **Monitors** and click **Create monitor** to create a monitor for the findings you want to send to Slack. The **Create the alerting monitor** steps in the Email section show an example.
 
    .. thumbnail:: /images/wazuh-dashboard/configurations/slack-monitor.png
       :align: center
       :width: 80%
-      :title: Sample: Slack monitor
-      :alt: Sample: Slack monitor
+      :title: Monitors
+      :alt: Monitors
 
-#. If the monitor has no actions in the default trigger, click **Edit**, and add a **Send notification** action using the **Add action** option. Then select the previously configured channel. If an action already exists, verify that it points to the correct channel. Adjust the subject/message template if necessary, then save and enable the monitor.
+#. In the monitor trigger, click **Add action to** add a **Send notification** action, and select the Slack channel. Adjust the subject and message template if necessary, then save and enable the monitor.
 
    .. thumbnail:: /images/wazuh-dashboard/configurations/slack-add-action.png
       :align: center
@@ -434,7 +417,7 @@ This notification channel sends alerts to Slack via an incoming webhook. Create 
       :title: Add notification action
       :alt: Add notification action
 
-#. Open **Dashboard management** > **Health Check** and run the checks. Once channels and monitors are enabled, the related checks should pass to a healthy state.
+#. Open **Dashboard management** > **Health Check** and run the checks. The ``integrations:default-notifications-channels`` check passes when all the default notification channels exist.
 
 PagerDuty
 ~~~~~~~~~
@@ -463,15 +446,15 @@ This notification channel sends alerts to PagerDuty via the Events v2 API. Creat
 
 #. Save the PagerDuty channel configuration and unmute the channel.
 
-#. Go to **Explore** > **Alerting** > **Monitors** and open the corresponding **Sample: PagerDuty** monitor.
+#. Go to **Explore** > **Alerting** > **Monitors** and click **Create monitor** to create a monitor for the findings you want to send to PagerDuty. The **Create the alerting monitor** steps in the Email section show an example.
 
    .. thumbnail:: /images/wazuh-dashboard/configurations/pagerduty-monitor.png
       :align: center
       :width: 80%
-      :title: Sample: PagerDuty monitor
-      :alt: Sample: PagerDuty monitor
+      :title: Monitors
+      :alt: Monitors
 
-#. If the monitor has no actions in the default trigger, click **Edit**, and add a **Send notification** action using the **Add action** option. Then select the previously configured channel. If an action already exists, verify that it points to the correct channel. Adjust the subject/message template if necessary, then save and enable the monitor.
+#. In the monitor trigger, click **Add action to** add a **Send notification** action, and select the PagerDuty channel. Adjust the subject and message template if necessary, then save and enable the monitor.
 
    .. thumbnail:: /images/wazuh-dashboard/configurations/pagerduty-add-action.png
       :align: center
@@ -485,7 +468,7 @@ This notification channel sends alerts to PagerDuty via the Events v2 API. Creat
       :title: Add notification action
       :alt: Add notification action
 
-#. Open **Dashboard management** > **Health Check** and run the checks. Once channels and monitors are enabled, the related checks should pass to a healthy state.
+#. Open **Dashboard management** > **Health Check** and run the checks. The ``integrations:default-notifications-channels`` check passes when all the default notification channels exist.
 
 Jira
 ~~~~
@@ -514,15 +497,15 @@ This notification channel sends alerts to Jira using a Jira API token. To config
 
 #. Save the Jira channel configuration and unmute the channel.
 
-#. Go to **Explore** > **Alerting** > **Monitors** and open the corresponding **Sample: Jira** monitor.
+#. Go to **Explore** > **Alerting** > **Monitors** and click **Create monitor** to create a monitor for the findings you want to send to Jira. The **Create the alerting monitor** steps in the Email section show an example.
 
    .. thumbnail:: /images/wazuh-dashboard/configurations/jira-monitor.png
       :align: center
       :width: 80%
-      :title: Sample: Jira monitor
-      :alt: Sample: Jira monitor
+      :title: Monitors
+      :alt: Monitors
 
-#. If the monitor has no actions in the default trigger, click **Edit**, and add a **Send notification** action using the **Add action** option. Then select the previously configured channel. If an action already exists, verify that it points to the correct channel. Adjust the subject/message template to match your Jira instance, then save and enable the monitor.
+#. In the monitor trigger, click **Add action to** add a **Send notification** action, and select the Jira channel. Adjust the subject and message template to match your Jira instance, then save and enable the monitor.
 
    .. thumbnail:: /images/wazuh-dashboard/configurations/jira-add-action.png
       :align: center
@@ -536,7 +519,7 @@ This notification channel sends alerts to Jira using a Jira API token. To config
       :title: Add notification action
       :alt: Add notification action
 
-#. Open **Dashboard management** > **Health Check** and run the checks. Once channels and monitors are enabled, the related checks should pass to a healthy state.
+#. Open **Dashboard management** > **Health Check** and run the checks. The ``integrations:default-notifications-channels`` check passes when all the default notification channels exist.
 
 Shuffle
 ~~~~~~~
@@ -565,15 +548,15 @@ This notification channel sends alerts to Shuffle via the Shuffle webhook URL. C
 
 #. Save the Shuffle channel configuration and unmute the channel.
 
-#. Go to **Explore** > **Alerting** > **Monitors** and open the corresponding **Sample: Shuffle** monitor.
+#. Go to **Explore** > **Alerting** > **Monitors** and click **Create monitor** to create a monitor for the findings you want to send to Shuffle. The **Create the alerting monitor** steps in the Email section show an example.
 
    .. thumbnail:: /images/wazuh-dashboard/configurations/shuffle-monitor.png
       :align: center
       :width: 80%
-      :title: Sample: Shuffle monitor
-      :alt: Sample: Shuffle monitor
+      :title: Monitors
+      :alt: Monitors
 
-#. If the monitor has no actions in the default trigger, click **Edit**, and add a **Send notification** action using the **Add action** option. Then select the previously configured channel. If an action already exists, verify that it points to the correct channel. Adjust the subject/message template if necessary, then save and enable the monitor.
+#. In the monitor trigger, click **Add action to** add a **Send notification** action, and select the Shuffle channel. Adjust the subject and message template if necessary, then save and enable the monitor.
 
    .. thumbnail:: /images/wazuh-dashboard/configurations/shuffle-add-action.png
       :align: center
@@ -587,7 +570,7 @@ This notification channel sends alerts to Shuffle via the Shuffle webhook URL. C
       :title: Add notification action
       :alt: Add notification action
 
-#. Open **Dashboard management** > **Health Check** and run the checks. Once channels and monitors are enabled, the related checks should pass to a healthy state.
+#. Open **Dashboard management** > **Health Check** and run the checks. The ``integrations:default-notifications-channels`` check passes when all the default notification channels exist.
 
 Email
 ~~~~~
@@ -800,7 +783,7 @@ The AI Assistant supports multiple model providers. You can configure the Wazuh 
 
 Perform the following actions to configure the AI Assistant.
 
-#. Click **☰** to open the menu and navigate to **Explore** > **AI Assistant**. Under the **Settings** tab, click on **Add a provider** to set up an AI Assistant provider.
+#. Click **☰** to open the menu and navigate to **Home** > **AI Assistant**. Under the **Settings** tab, click on **Add a provider** to set up an AI Assistant provider.
 
    .. thumbnail:: /images/wazuh-dashboard/configurations/ai-assistant-add-provider.png
       :align: center
@@ -866,7 +849,7 @@ In the **Chat** tab, analysts can ask questions about vulnerabilities, security 
 Multi-tenancy
 -------------
 
-Tenants in the Wazuh dashboard are containers for saving index patterns, visualizations, dashboards, and other objects. Tenants are useful for safely sharing your work with other users. You can control which roles have access to a tenant and whether those roles have read or write access. By default, all Wazuh dashboard users have access to two independent tenants:
+Tenants in the Wazuh dashboard are containers for saving index patterns, visualizations, dashboards, and other objects. Tenants are useful for safely sharing your work with other users. You can control which roles have access to a tenant and whether those roles have read or write access. By default, all Wazuh dashboard users have access to two independent tenants, Global and Private. Administrators can also create custom tenants. The tenant types are the following:
 
 - **Global**: This tenant is shared between every Wazuh dashboard user.
 - **Private**: This tenant is exclusive to each user and can't be shared. Users in the private tenant can't access routes or index patterns made by users in the global tenant.
@@ -1114,7 +1097,7 @@ Bar charts are a type of visualization that is used to compare specific measures
 
 The steps below show how to create a horizontal bar visualization that shows varying numbers of MITRE tactics detected within a set timeframe.
 
-#. Click **Create visualization** from the Visualize tab, select the **Horizontal Bar** visualization format, and use ``wazuh-findings*`` as the index pattern name.
+#. Click **Create visualization** from the Visualize tab, select the **Horizontal Bar** visualization format, and use ``wazuh-findings-v5*`` as the index pattern name.
 #. Set the following value in the Data section, on the ``Y-axis``, in **Metrics**:
 
    -  ``Aggregation`` = ``Count``
@@ -1122,7 +1105,7 @@ The steps below show how to create a horizontal bar visualization that shows var
 #. Add an ``X-axis`` in **Bucket** and set the following values:
 
    -  ``Aggregation`` = ``Terms``
-   -  ``Field`` = ``rule.mitre.tactic``
+   -  ``Field`` = ``wazuh.rule.mitre.tactic.name``
    -  ``Order by`` = ``Metric: Count``
    -  ``Order`` = ``Descending``
    -  ``Size`` = ``10``
@@ -1141,7 +1124,7 @@ The steps below show how to create a horizontal bar visualization that shows var
 
 The steps below show how to create a vertical bar visualization that shows varying numbers of MITRE tactics detected within a set timeframe.
 
-#. Click **Create visualization** from the Visualize tab, select the **Vertical Bar** visualization format, and use ``wazuh-findings*`` as the index pattern name.
+#. Click **Create visualization** from the Visualize tab, select the **Vertical Bar** visualization format, and use ``wazuh-findings-v5*`` as the index pattern name.
 #. Set the following value in the Data section, on the ``Y-axis``, in **Metrics**:
 
    -  ``Aggregation`` = ``Count``
@@ -1149,7 +1132,7 @@ The steps below show how to create a vertical bar visualization that shows varyi
 #. Add an ``X-axis`` in **Bucket** and set the following values:
 
    -  ``Aggregation`` = ``Terms``
-   -  ``Field`` = ``rule.mitre.tactic``
+   -  ``Field`` = ``wazuh.rule.mitre.tactic.name``
    -  ``Order by`` = ``Metric: Count``
    -  ``Order`` = ``Descending``
    -  ``Size`` = ``10``
@@ -1173,7 +1156,7 @@ The steps below show how to create a Pie chart visualization that shows MITRE ta
 
 **Creating a Pie chart**
 
-#. Click **Create visualization** from the Visualize tab, select the **Pie** visualization format, and use ``wazuh-findings*`` as the index pattern name.
+#. Click **Create visualization** from the Visualize tab, select the **Pie** visualization format, and use ``wazuh-findings-v5*`` as the index pattern name.
 #. Set the following value in the Data section, on the ``Slice size``, in **Metrics**:
 
    -  ``Aggregation`` = ``Count``
@@ -1181,7 +1164,7 @@ The steps below show how to create a Pie chart visualization that shows MITRE ta
 #. Add a Split slices in Bucket and set the following values:
 
    -  ``Aggregation`` = ``Terms``
-   -  ``Field`` = ``rule.mitre.tactic``
+   -  ``Field`` = ``wazuh.rule.mitre.tactic.name``
    -  ``Order by`` = ``Metric: Count``
    -  ``Order`` = ``Descending``
    -  ``Size`` = ``10``
@@ -1202,20 +1185,15 @@ Area charts
 
 This is used to display graphically quantitative data using filled-in areas. The areas between axes and lines are typically filled with colors or patterns to differentiate between different categories or data points. This emphasizes the quantity beneath a line chart. Area charts are useful for showing the magnitude and distribution of data over time or categories. They are often used to display trends, comparisons, or cumulative values.
 
-The steps below show how to create an Area chart that visualizes a histogram of Wazuh rule levels and their maximum fired times.
+The steps below show how to create an Area chart that visualizes the maximum event severity over time.
 
 **Creating an Area chart**
 
-#. Click **Create visualization** from the Visualize tab, select the **Area** visualization format, and use ``wazuh-events*`` as the index pattern name.
+#. Click **Create visualization** from the Visualize tab, select the **Area** visualization format, and use ``wazuh-events-v5*`` as the index pattern name.
 #. Set the following value in the Data section, on the ``Y-axis``, in **Metrics**:
 
    -  ``Aggregation`` = ``Max``
    -  ``Field`` = ``event.severity``
-
-#. Add another ``Y-axis`` in **Metric** and set the following values:
-
-   -  ``Aggregation`` = ``Max``
-   -  ``Field`` = ``rule.firedtimes``
 
 #. Add an ``X-axis`` in **Bucket** and set the following values:
 
@@ -1241,7 +1219,7 @@ The steps below show how to create a Line chart that visualizes the Wazuh rule l
 
 **Creating a Line chart**
 
-#. Click **Create visualization** from the Visualize tab, select the **Line** visualization format, and use ``wazuh-events*`` as the index pattern name.
+#. Click **Create visualization** from the Visualize tab, select the **Line** visualization format, and use ``wazuh-events-v5*`` as the index pattern name.
 #. Set the following value in the **Data** section, on the ``Y-axis``, in **Metrics**:
 
    -  ``Aggregation`` = ``Max``
@@ -1272,7 +1250,7 @@ The steps below show how to create a Heat map that visualizes the mapping of Waz
 
 **Creating a Heat Map**
 
-#. Click **Create visualization** from the Visualize tab, select the **Heat Map** visualization format, and use ``wazuh-events*`` as the index pattern name.
+#. Click **Create visualization** from the Visualize tab, select the **Heat Map** visualization format, and use ``wazuh-events-v5*`` as the index pattern name.
 #. Set the following value in the Data section, on the ``Y-axis``, in **Metrics**:
 
    -  ``Aggregation`` = ``Count``
@@ -1432,7 +1410,7 @@ The steps below show how to create a geographic map.
 #. Select ``Documents`` as the Data layer.
 #. Set the following values in the New layer:
 
-   -  ``Data source`` = ``wazuh-events*``
+   -  ``Data source`` = ``wazuh-events-v5*``
    -  ``Geospatial field`` = ``destination.geo.location``
    -  ``Number of documents`` = ``1000``
 
@@ -1462,7 +1440,7 @@ The steps below show how to create a coordinate map based on the origin location
 
 **Creating a Coordinate map**
 
-#. Click **Create visualization** from the Visualize tab, select the **Coordinate Map** visualization format, and use ``wazuh-events*`` as the index pattern name.
+#. Click **Create visualization** from the Visualize tab, select the **Coordinate Map** visualization format, and use ``wazuh-events-v5*`` as the index pattern name.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-coordinate-map-visualization.png
       :align: center
@@ -1498,7 +1476,7 @@ The steps below show how to create a region map based on the destination country
 
 **Create region map**
 
-#. Click **Create visualization** from the Visualize tab, select the **Region Map** visualization format, and use ``wazuh-events*`` as the index pattern name.
+#. Click **Create visualization** from the Visualize tab, select the **Region Map** visualization format, and use ``wazuh-events-v5*`` as the index pattern name.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-region-map-visualization.png
       :align: center
@@ -1547,7 +1525,7 @@ The steps below show how to use Visualization Builder to present the Wazuh integ
 
 **Creating a Visualization Builder**
 
-#. Click **Create visualization** from the Visualize tab, select the **VisBuilder** visualization format, and use ``wazuh-events*`` as the index pattern name.
+#. Click **Create visualization** from the Visualize tab, select the **VisBuilder** visualization format, and use ``wazuh-events-v5*`` as the index pattern name.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-visbuilder-visualization.png
       :align: center
@@ -1617,7 +1595,7 @@ This is a visual representation of text data where words are displayed in varyin
 
 **Creating a tag cloud**
 
-#. Click **Create visualization** from the Visualize tab, select the **Tag cloud** visualization format, and use ``wazuh-events*`` as the index pattern name.
+#. Click **Create visualization** from the Visualize tab, select the **Tag cloud** visualization format, and use ``wazuh-events-v5*`` as the index pattern name.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-tag-cloud-visualization.png
       :align: center
@@ -1652,7 +1630,7 @@ Markdown is a lightweight markup language that is used for formatting text. It a
 
 **Creating a markdown**
 
-#. Click **Create visualization** from the Visualize tab, select the **Markdown** visualization format, and use ``wazuh-events*`` as the index pattern name.
+#. Click **Create visualization** from the Visualize tab, select the **Markdown** visualization format, and use ``wazuh-events-v5*`` as the index pattern name.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-markdown-visualization.png
       :align: center
@@ -1690,14 +1668,14 @@ At the time of writing this document, this visualization is experimental. The de
       :alt: Create controls visualization
 
 #. Click on the **Add** button to add a new ``Options list`` and set the **Control Label** as ``MITRE tactic``.
-#. Set ``wazuh-events*`` as the **Index Pattern** name.
-#. Select the field ``rule.mitre.tactic``.
+#. Set ``wazuh-findings-v5*`` as the **Index Pattern** name.
+#. Select the field ``wazuh.rule.mitre.tactic.name``.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/select-rule-mitre-tactic.png
       :align: center
       :width: 80%
-      :title: Select rule.mitre.tactic
-      :alt: Select rule.mitre.tactic
+      :title: Select wazuh.rule.mitre.tactic.name
+      :alt: Select wazuh.rule.mitre.tactic.name
 
 #. Click the **Update** button.
 #. In the dropdown list, select ``Range slider`` and click on the **Add** button. Set the **Control Label** as ``Quantity``.
@@ -1708,7 +1686,7 @@ At the time of writing this document, this visualization is experimental. The de
       :title: Add range slider
       :alt: Add range slider
 
-#. Select ``wazuh-events*`` as the **Index Pattern** name.
+#. Select ``wazuh-events-v5*`` as the **Index Pattern** name.
 #. Select ``event.severity`` as the **Field**.
 #. Click the **Update** button.
 
@@ -1737,11 +1715,11 @@ They are commonly used in historical analysis, project planning, or storytelling
       :title: Create timeline visualization
       :alt: Create timeline visualization
 
-#. Choose a source for the chart. In the Timeline expression windows, within ``.opensearch(*)``. The expression ``.opensearch(*)`` is a wildcard value that represents all the indexes currently within the Wazuh indexer, combined together. Here we selected ``wazuh-events*`` as the index to use.
+#. Choose a source for the chart. In the Timeline expression windows, within ``.opensearch(*)``. The expression ``.opensearch(*)`` is a wildcard value that represents all the indexes currently within the Wazuh indexer, combined together. Here we selected ``wazuh-events-v5*`` as the index to use.
 
    .. code-block:: none
 
-      .opensearch(index=wazuh-events-*)
+      .opensearch(index=wazuh-events-v5*)
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-timeline-visualization-source.png
       :align: center
@@ -1764,7 +1742,7 @@ They are commonly used in historical analysis, project planning, or storytelling
 
    .. code-block:: none
 
-      .opensearch(index=wazuh-alerts-*, timefield=@timestamp, metric=count:request).aggregate(function=avg)
+      .opensearch(index=wazuh-events-v5*, timefield=@timestamp, metric=count:request).aggregate(function=avg)
 
 Vega
 ~~~~

@@ -21,6 +21,8 @@ Use case
 
 Below is a PCI DSS requirement that the Wazuh FIM module can meet.
 
+.. _pci_dss_fim_requirement_11_5_2:
+
 PCI DSS requirement 11.5.2
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

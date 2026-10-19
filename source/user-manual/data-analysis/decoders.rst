@@ -20,6 +20,8 @@ All events enter the decoder tree through the root decoder and then move through
 
 The above image shows a logical decoder tree.
 
+.. _data_analysis_custom_decoders:
+
 Custom decoders
 ---------------
 

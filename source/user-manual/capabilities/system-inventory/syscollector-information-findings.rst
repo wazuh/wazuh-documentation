@@ -242,7 +242,15 @@ Fields present in every system inventory finding:
 | Cluster      | ``wazuh.cluster.name``, ``wazuh.cluster.node``, ``wazuh.space.name``                                                                                                                                                                                                                       |                                                                                                                                                                                                               |
 +--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-Fields describing the changed item itself, which differ by category. Only the fields for the category the finding concerns are present; a package finding has no ``user.*`` fields, and a user finding has no ``package.*`` fields. The category-specific fields match those of the corresponding states index: ``package.*`` for package and browser extension changes (with ``user_agent.name`` and ``file.hash.sha256`` for browser extensions), ``process.*`` for processes, ``user.*`` for users, ``group.*`` for groups, ``service.*`` for services, ``interface.*`` / ``network.*`` / ``source.*`` / ``destination.*`` for network changes, and ``host.*`` for hardware and operating system information.
+Fields describing the changed item itself, which differ by category. Only the fields for the category the finding concerns are present; a package finding has no ``user.*`` fields, and a user finding has no ``package.*`` fields. The category-specific fields follow the findings data stream schema, so some names differ from the states indices, such as ``package.license`` and ``user_agent.name``. The category-specific fields are:
+
+-  ``package.*`` for package and browser extension changes (with ``user_agent.name`` and ``file.hash.sha256`` for browser extensions)
+-  ``process.*`` for processes
+-  ``user.*`` for users
+-  ``group.*`` for groups
+-  ``service.*`` for services
+-  ``interface.*`` / ``network.*`` / ``source.*`` / ``destination.*`` for network changes
+-  ``host.*`` for hardware and operating system information
 
 The table below shows the ``package.*`` set in detail. The other categories follow the same pattern, populating their own states-index fields.
 

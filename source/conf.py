@@ -111,7 +111,9 @@ language = 'en-US'
 # This pattern also affects html_static_path and html_extra_path .
 exclude_patterns = [
     'redirects.js',
-    'getting-started/use-cases/**',
+    'getting-started/use-cases/cloud-workload-protection.rst',
+    'getting-started/use-cases/malware-detection.rst',
+    'getting-started/use-cases/posture-management.rst',
     'deployment-options/amazon-machine-images/**',
     'deployment-options/wazuh-from-sources/**',
     'deployment-options/deploying-with-puppet/**',
@@ -138,7 +140,6 @@ exclude_patterns = [
     'user-manual/agent/agent-management/key-request.rst',
     'user-manual/agent/agent-management/antiflooding.rst',
     'user-manual/agent/agent-management/labels.rst',
-    'user-manual/reference/unattended-installation.rst',
     'user-manual/ruleset/**',
     'user-manual/manager/alert-management.rst',
     'user-manual/manager/event-logging.rst',
@@ -149,7 +150,6 @@ exclude_patterns = [
     'user-manual/wazuh-server-cluster/**',
     'cloud-security/amazon/**',
     'cloud-security/gcp/posture-management.rst',
-    'compliance/nist/**',
     'proof-of-concept-guide/detect-unauthorized-processes-netcat.rst',
     'proof-of-concept-guide/poc-detect-trojan.rst',
     'proof-of-concept-guide/audit-commands-run-by-user.rst',

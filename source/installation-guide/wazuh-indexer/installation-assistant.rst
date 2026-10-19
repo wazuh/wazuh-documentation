@@ -149,7 +149,7 @@ Follow these steps to install and configure a single-node or multi-node Wazuh in
 
 Repeat this stage of the installation process for every Wazuh indexer node in your cluster. The command installs, configures, and starts the Wazuh indexer on the host. Then proceed with initializing your single-node or multi-node cluster in the next stage.
 
-The installation assistant sets the Wazuh indexer heap to half of the host's RAM. On a host that also runs the Wazuh manager or the Wazuh dashboard, set it to a quarter of the RAM, as **Memory locking** in the step-by-step section describes, and restart the Wazuh indexer.
+The installation assistant sets the Wazuh indexer heap to half of the host's RAM. On a host that also runs the Wazuh manager or the Wazuh dashboard, set it to a quarter of the RAM, as **Configuring the Wazuh indexer** in the step-by-step section describes, and restart the Wazuh indexer.
 
 Cluster initialization
 ^^^^^^^^^^^^^^^^^^^^^^
