@@ -66,7 +66,7 @@ The following index patterns store system inventory data:
    * - ``wazuh-states-inventory-users-*``
      - Stores information about users configured on monitored endpoints.
 
-Navigate to **Security operation** > **IT Hygiene** on the Wazuh dashboard to view system inventory information, including hardware, operating system, software, network, user, and service data collected from monitored endpoints.
+Navigate to **Security operations** > **IT Hygiene** on the Wazuh dashboard to view system inventory information, including hardware, operating system, software, network, user, and service data collected from monitored endpoints.
 
 .. thumbnail:: /images/wazuh-dashboard/global-queries/system-inventory.png
    :align: center
@@ -79,7 +79,7 @@ Vulnerability detection
 
 Vulnerability detection provides visibility into software vulnerabilities affecting monitored endpoints. It identifies vulnerable packages and applications by correlating endpoint inventory information with vulnerability data provided by the Wazuh Cyber Threat Intelligence (CTI) service, enabling security teams to prioritize remediation efforts and monitor the vulnerability posture of their environment.
 
-The Wazuh agent collects inventory data such as installed packages, operating system details, and hardware information from monitored endpoints. The collected data is sent to the Wazuh manager, where the ``wazuh-remoted`` daemon publishes it to the Router inventory-states topic. The Inventory Sync module synchronizes the inventory state with the Wazuh indexer through the Indexer Connector and triggers the Vulnerability Scanner module.
+The Wazuh agent collects inventory data such as installed packages, operating system details, and hardware information from monitored endpoints. The collected data is sent to the Wazuh manager, where the ``wazuh-manager-remoted`` daemon publishes it to the Router ``inventory-states`` topic. The Inventory Sync module synchronizes the inventory state with the Wazuh indexer through the Indexer Connector and triggers the Vulnerability Scanner module.
 
 The Vulnerability Scanner retrieves CVE feeds from the Wazuh indexer through the Content Manager and Indexer Connector. It then correlates the vulnerability information with the inventory data collected from monitored endpoints to identify affected systems and software packages. Vulnerability state information is stored as global state data in the ``wazuh-states-vulnerabilities-*`` index and can be queried and visualized from the Wazuh dashboard.
 
@@ -126,7 +126,7 @@ The following index patterns store file integrity monitoring data:
    * - ``wazuh-states-fim-files-*``
      - Stores File Integrity Monitoring information about monitored files and detected file changes.
 
-Navigate to **Endpoint Security** > **File Integrity Monitoring** on the Wazuh dashboard to view and query file integrity monitoring data collected from monitored endpoints.
+Navigate to **Endpoint security** > **File Integrity Monitoring** on the Wazuh dashboard to view and query file integrity monitoring data collected from monitored endpoints.
 
 .. thumbnail:: /images/wazuh-dashboard/global-queries/file-integrity-monitoring.png
    :align: center
@@ -154,7 +154,7 @@ The following index pattern stores Security Configuration Assessment data:
    * - ``wazuh-states-sca-*``
      - Stores Security Configuration Assessment (SCA) scan results and compliance evaluation data.
 
-Navigate to **Endpoint Security** > **File Integrity Monitoring** on the Wazuh dashboard to view and query security configuration assessment (SCA) data collected from monitored endpoints.
+Navigate to **Endpoint security** > **Configuration Assessment** on the Wazuh dashboard to view and query security configuration assessment (SCA) data collected from monitored endpoints.
 
 .. thumbnail:: /images/wazuh-dashboard/global-queries/security-configuration-assessment.png
    :align: center
@@ -418,7 +418,7 @@ Generate a token to be used to interact with the API:
 
 .. code-block:: console
 
-   # TOKEN=$(curl -u <WAZUH_API_USERNAME>:<WAZUH_API_PASSWORD> -k -X GET "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/security/user/authenticate?raw=true")
+   # TOKEN=$(curl -u <WAZUH_API_USERNAME>:<WAZUH_API_PASSWORD> -k -X POST "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/security/user/authenticate?raw=true")
 
 Replace:
 

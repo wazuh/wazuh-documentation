@@ -19,7 +19,8 @@ If the Wazuh manager API is running, try to fetch data using the CLI from the Wa
 
 .. code-block:: console
 
-   # curl -k -X GET "https://<api_url>:55000/?pretty=true" -H "Authorization: Bearer $(curl -u <api_user>:<api_password> -k -X POST 'https://<api_url>:55000/security/user/authenticate?raw=true')"
+   # TOKEN=$(curl -u <WAZUH_API_USERNAME>:<WAZUH_API_PASSWORD> -k -X POST "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/security/user/authenticate?raw=true")
+   # curl -k -X GET "https://<WAZUH_MANAGER_IP_ADDRESS>:55000/?pretty=true" -H "Authorization: Bearer $TOKEN"
 
 The command returns output similar to the following example:
 
