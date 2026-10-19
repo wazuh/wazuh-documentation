@@ -15,6 +15,7 @@ All notable changes to this project will be documented in this file.
 
 - Removed Amazon Inspector Classic from the *Amazon Inspector* integration documentation, which now covers Amazon Inspector (v2) only. ([#10399](https://github.com/wazuh/wazuh-documentation/pull/10399))
 - Added the Windows and macOS agent restart commands to the steps for enabling and disabling policies in the *Security Configuration Assessment* documentation. ([#10399](https://github.com/wazuh/wazuh-documentation/pull/10399))
+- Fixed the Python 3.11–3.13 dependency installation command in the *Google Cloud* prerequisites documentation, which failed on Python 3.13. ([#10412](https://github.com/wazuh/wazuh-documentation/pull/10412))
 
 ## [v4.14.9]
 
