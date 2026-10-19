@@ -58,7 +58,7 @@ Before compiling Wazuh from sources, you need to install the required build tool
 
                         # yum update -y
                         # yum install make gcc gcc-c++ policycoreutils-python automake autoconf libtool centos-release-scl openssl-devel wget bzip2 procps -y
-                        # curl -OL http://packages.wazuh.com/utils/gcc/gcc-14.3.0.tar.gz && tar xzf gcc-14.3.0.tar.gz  && cd gcc-14.3.0/ && ./contrib/download_prerequisites && ./configure --enable-languages=c,c++ --prefix=/usr --disable-multilib --disable-libsanitizer && make -j$(nproc) && make install && ln -fs /bin/g++ /usr/bin/c++ && ln -fs /bin/gcc /usr/bin/cc && cd .. && rm -rf gcc-*
+                        # curl -OL https://packages.wazuh.com/utils/gcc/gcc-14.3.0.tar.gz && tar xzf gcc-14.3.0.tar.gz  && cd gcc-14.3.0/ && ./contrib/download_prerequisites && ./configure --enable-languages=c,c++ --prefix=/usr --disable-multilib --disable-libsanitizer && make -j$(nproc) && make install && ln -fs /bin/g++ /usr/bin/c++ && ln -fs /bin/gcc /usr/bin/cc && cd .. && rm -rf gcc-*
 
                      CMake 3.22 installation
 
@@ -74,7 +74,7 @@ Before compiling Wazuh from sources, you need to install the required build tool
                      .. code-block:: console
 
                         # yum install make gcc gcc-c++ python3 python3-policycoreutils automake autoconf libtool openssl-devel cmake procps -y
-                        # curl -OL http://packages.wazuh.com/utils/gcc/gcc-14.3.0.tar.gz && tar xzf gcc-14.3.0.tar.gz  && cd gcc-14.3.0/ && ./contrib/download_prerequisites && ./configure --enable-languages=c,c++ --prefix=/usr --disable-multilib --disable-libsanitizer && make -j$(nproc) && make install && ln -fs /bin/g++ /usr/bin/c++ && ln -fs /bin/gcc /usr/bin/cc && cd .. && rm -rf gcc-*
+                        # curl -OL https://packages.wazuh.com/utils/gcc/gcc-14.3.0.tar.gz && tar xzf gcc-14.3.0.tar.gz  && cd gcc-14.3.0/ && ./contrib/download_prerequisites && ./configure --enable-languages=c,c++ --prefix=/usr --disable-multilib --disable-libsanitizer && make -j$(nproc) && make install && ln -fs /bin/g++ /usr/bin/c++ && ln -fs /bin/gcc /usr/bin/cc && cd .. && rm -rf gcc-*
                         # yum-config-manager --enable PowerTools
                         # yum install libstdc++-static -y
 
@@ -91,7 +91,7 @@ Before compiling Wazuh from sources, you need to install the required build tool
                      .. code-block:: console
 
                         # yum install make gcc gcc-c++ python3 python3-policycoreutils automake autoconf libtool openssl-devel cmake procps -y
-                        # curl -OL http://packages.wazuh.com/utils/gcc/gcc-14.3.0.tar.gz && tar xzf gcc-14.3.0.tar.gz  && cd gcc-14.3.0/ && ./contrib/download_prerequisites && ./configure --enable-languages=c,c++ --prefix=/usr --disable-multilib --disable-libsanitizer && make -j$(nproc) && make install && ln -fs /bin/g++ /usr/bin/c++ && ln -fs /bin/gcc /usr/bin/cc && cd .. && rm -rf gcc-*
+                        # curl -OL https://packages.wazuh.com/utils/gcc/gcc-14.3.0.tar.gz && tar xzf gcc-14.3.0.tar.gz  && cd gcc-14.3.0/ && ./contrib/download_prerequisites && ./configure --enable-languages=c,c++ --prefix=/usr --disable-multilib --disable-libsanitizer && make -j$(nproc) && make install && ln -fs /bin/g++ /usr/bin/c++ && ln -fs /bin/gcc /usr/bin/cc && cd .. && rm -rf gcc-*
                         # yum config-manager --set-enabled crb
                         # yum install libstdc++-static -y
 
@@ -110,7 +110,7 @@ Before compiling Wazuh from sources, you need to install the required build tool
                   # dnf update -y
                   # dnf groupinstall "Development Tools"
                   # dnf install gmp-devel mpfr-devel libmpc-devel isl-devel make cmake gcc gcc-c++ python3 python3-policycoreutils automake autoconf libtool openssl-devel yum-utils procps -y
-                  # curl -OL http://packages.wazuh.com/utils/gcc/gcc-14.3.0.tar.gz && tar xzf gcc-14.3.0.tar.gz && cd gcc-14.3.0/ && ./configure --enable-languages=c,c++ --prefix=/usr --disable-multilib --disable-libsanitizer && make -j$(nproc) && make install && ln -fs /usr/bin/g++ /bin/c++ && ln -fs /usr/bin/gcc /bin/cc && cd .. && rm -rf gcc-*
+                  # curl -OL https://packages.wazuh.com/utils/gcc/gcc-14.3.0.tar.gz && tar xzf gcc-14.3.0.tar.gz && cd gcc-14.3.0/ && ./configure --enable-languages=c,c++ --prefix=/usr --disable-multilib --disable-libsanitizer && make -j$(nproc) && make install && ln -fs /usr/bin/g++ /bin/c++ && ln -fs /usr/bin/gcc /bin/cc && cd .. && rm -rf gcc-*
                   # dnf config-manager --set-enabled crb
                   # dnf install libstdc++-static -y
 
@@ -633,11 +633,11 @@ Uninstall
 
             # WAZUH_HOME="/WAZUH/INSTALLATION/PATH"
 
-      #. Stop the service:
+      #. Stop and unload the service:
 
          .. code-block:: console
 
-            # service wazuh-agent stop 2> /dev/null
+            # launchctl bootout system /Library/LaunchDaemons/com.wazuh.agent.plist
 
       #. Stop the daemon:
 
@@ -655,6 +655,7 @@ Uninstall
 
          .. code-block:: console
 
+            # rm -f /Library/LaunchDaemons/com.wazuh.agent.plist
             # rm -rf /Library/StartupItems/WAZUH
 
       #. Remove Wazuh user and group:

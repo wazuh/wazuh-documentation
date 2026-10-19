@@ -1,202 +1,154 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Wazuh collects system inventory data including hardware, OS information, installed software, network interfaces, ports, and processes.
+   :description: Learn how Wazuh supports IT hygiene by monitoring system inventory, configurations, vulnerable software, services, processes, and network activity on endpoints.
 
 IT hygiene
 ==========
 
-IT hygiene refers to the measures that organizations and individuals undertake to maintain the health and security of their IT assets. IT hygiene requires continuous adaptation of practices and processes to counter emerging cybersecurity threats and challenges, fostering a secure and resilient IT environment. Organizations implement IT hygiene practices to prevent cyberattacks, data breaches, and other security concerns that may result in data loss, service disruption, reputational harm, or financial instability.
+IT hygiene involves maintaining the security, configuration, and visibility of IT assets throughout their lifecycle. Effective IT hygiene helps organizations identify security weaknesses, maintain approved configurations, and detect changes that can increase security risks.
 
-.. _system_inventory_gs_use_case:
+Wazuh helps organizations maintain IT hygiene by collecting endpoint inventory, assessing configurations, monitoring files and processes, identifying vulnerable software, and providing centralized visibility into endpoint activity.
 
-System inventory
-----------------
+Monitoring system inventory
+---------------------------
 
-An up-to-date :doc:`system inventory </user-manual/capabilities/system-inventory/index>` helps organizations optimize asset visibility in their environment, and is essential for maintaining good IT hygiene. The inventory includes hardware and operating system information, user accounts, installed packages, running processes and services, network ports, users, groups, and browser extensions. Wazuh agents use the Wazuh :doc:`Syscollector </user-manual/capabilities/system-inventory/configuration>` module to collect inventory data from monitored endpoints and send them to the Wazuh server. All data is aggregated into dedicated indices in the Wazuh indexer and accessible through the Wazuh dashboard, enabling rapid detection and remediation without endpoint-by-endpoint inspection.
+An up-to-date :doc:`system inventory </user-manual/capabilities/system-inventory/index>` helps organizations maintain visibility into their IT assets and supports effective IT hygiene. Wazuh agents use the :doc:`Syscollector </user-manual/capabilities/system-inventory/configuration>` module to collect information about hardware, operating systems, installed packages, running processes and services, network interfaces and ports, users, groups, and browser extensions.
 
-Navigate to **Security operations** > **IT Hygiene** to generate system inventory reports from the Wazuh IT hygiene module on the Wazuh dashboard.
+Security teams can use this inventory to maintain visibility into their assets, identify unexpected changes, and investigate software or services that require attention.
 
-.. thumbnail:: /images/getting-started/use-cases/it-hygiene/inventory-data-dashboard.png
-   :title: Inventory data on the Wazuh dashboard
-   :alt: Inventory data on the Wazuh dashboard
+.. thumbnail:: /images/getting-started/use-cases/it-hygiene/system-inventory.png
+   :title: IT Hygiene section showing the system inventory of a monitored endpoint
+   :alt: IT Hygiene section showing the system inventory of a monitored endpoint
    :align: center
    :width: 80%
 
 You can also generate property-specific reports for a monitored endpoint. For example, you can get a report containing the list of installed software or a list of running processes on a monitored endpoint.
 
-.. thumbnail:: /images/getting-started/use-cases/it-hygiene/inventory-data-download.png
-   :title: Inventory data download
-   :alt: Inventory data download
+.. thumbnail:: /images/getting-started/use-cases/it-hygiene/inventory-report.png
+   :title: Property-specific inventory report for a monitored endpoint
+   :alt: Property-specific inventory report for a monitored endpoint
    :align: center
    :width: 80%
 
-The inventory data collected can be queried using the `Wazuh server API <https://documentation.wazuh.com/|WAZUH_CURRENT_MINOR|/user-manual/api/reference.html#tag/Syscollector>`__ or Wazuh indexer API, which retrieves nested data in JSON format. For example, you can query the package inventory to check for the wazuh-agent package on a monitored endpoint using the **Wazuh** > **Tools** > **API Console** module on the Wazuh dashboard. Command line tools like :ref:`cURL <inventory_wazuh_api_curl>` can also be used to query the inventory database.
+Monitoring system configurations
+--------------------------------
 
-.. thumbnail:: /images/getting-started/use-cases/it-hygiene/inventory-querying-api.png
-   :title: Querying the package inventory using the Dev Tools
-   :alt: Querying the package inventory using the Dev Tools
+Secure system configurations are a core IT hygiene practice that helps organizations reduce their attack surface. The :doc:`Wazuh Security Configuration Assessment (SCA) </user-manual/capabilities/sec-config-assessment/index>` module periodically scans monitored endpoints against policies based on the Center for Internet Security (CIS) Benchmarks and other supported security policies. The scans identify security misconfigurations and configuration weaknesses across monitored endpoints.
+
+The **Configuration Assessment** section in the Wazuh dashboard displays the results of each SCA scan for every monitored endpoint. It shows the number of checks performed, passed, failed, and not applicable, along with an overall compliance score based on the applicable checks that passed.
+
+.. thumbnail:: /images/getting-started/use-cases/it-hygiene/sca-scan-summary.png
+   :title: Configuration Assessment section showing checks performed, passed, failed, and not applicable for each endpoint
+   :alt: Configuration Assessment section showing checks performed, passed, failed, and not applicable for each endpoint
    :align: center
    :width: 80%
 
-Security Configuration Assessment
+Security teams can review individual failed checks, view the rationale and remediation guidance, and generate a CSV report to support remediation activities. The report helps organizations identify configuration weaknesses, track remediation progress, and maintain secure endpoint configurations.
+
+The following SCA scan result shows a failed check because the Windows password is below the 14-character minimum required by the CIS Benchmark policy applied to the endpoint. You can implement the remediation suggested in the report to improve the security posture.
+
+.. thumbnail:: /images/getting-started/use-cases/it-hygiene/failed-password-policy-check.png
+   :title: Failed SCA check for a Windows password shorter than the 14-character CIS Benchmark minimum
+   :alt: Failed SCA check for a Windows password shorter than the 14-character CIS Benchmark minimum
+   :align: center
+   :width: 80%
+
+Identifying vulnerable software for IT hygiene
+----------------------------------------------
+
+The Wazuh :doc:`Vulnerability Scanner </user-manual/capabilities/vulnerability-detection/index>` module identifies vulnerable applications by using vulnerability information available in the `Wazuh CTI <https://cti.wazuh.com/vulnerabilities/cves>`__. Links to specific vulnerabilities on the Wazuh CTI are also available on each vulnerability ID.
+
+.. thumbnail:: /images/getting-started/use-cases/it-hygiene/vulnerable-applications.png
+   :title: Vulnerability Detection inventory linking each vulnerability to Wazuh CTI
+   :alt: Vulnerability Detection inventory linking each vulnerability to Wazuh CTI
+   :align: center
+   :width: 80%
+
+You can download a report that contains findings related to discovered and resolved vulnerabilities on a monitored endpoint from the Wazuh dashboard. This feature allows you to identify endpoints with unresolved vulnerabilities and keep track of remediation activities.
+
+.. thumbnail:: /images/getting-started/use-cases/it-hygiene/vulnerability-report-download.png
+   :title: Vulnerability report with discovered and resolved vulnerabilities on a monitored endpoint
+   :alt: Vulnerability report with discovered and resolved vulnerabilities on a monitored endpoint
+   :align: center
+   :width: 80%
+
+The Wazuh Vulnerability Scanner module also enables you to track remediation activities, which serves as a progress report on improving or maintaining IT hygiene. For example, when a vulnerability is remediated, Wazuh generates a finding that records the change.
+
+.. thumbnail:: /images/getting-started/use-cases/it-hygiene/resolved-vulnerability-finding.png
+   :title: Finding generated when a vulnerability is remediated on a monitored endpoint
+   :alt: Finding generated when a vulnerability is remediated on a monitored endpoint
+   :align: center
+   :width: 80%
+
+Monitoring services and processes
 ---------------------------------
 
-One of the objectives of implementing good IT hygiene is to reduce the attack surface of your organization. The :doc:`Wazuh SCA </user-manual/capabilities/sec-config-assessment/index>` module periodically scans monitored endpoints against policies based on the Center for Internet Security (CIS) benchmarks to identify security misconfigurations and flaws. The CIS benchmarks are essential guidelines for establishing a secure baseline configuration for critical assets. This minimizes vulnerabilities resulting from misconfigurations and reduces the risk of security breaches.
+Visibility into running processes and services helps organizations identify software executing on their endpoints. Unexpected processes, unauthorized services, or applications configured to start automatically can indicate poor IT hygiene, policy violations, misconfigurations, or malicious activity.
 
-The **Configuration Assessment** module on the Wazuh dashboard provides each agent's SCA scan result. The results show the number of checks performed on the endpoint, how many failed, and the number of checks that passed. It also shows a score calculated based on the number of tests passed, giving you an overview of the level of compliance.
+The Wazuh agent collects information about running processes and services on monitored endpoints and synchronizes the data with the Wazuh indexer. The Wazuh dashboard centralizes this information, allowing security teams to review processes and services across their environment without inspecting endpoints individually.
 
-You can gain more insights from the Wazuh dashboard to view the passed and failed checks. Also, you can generate a CSV report to aid remediation activities, thereby improving the endpoint security posture.
+Security teams can use this inventory to identify unauthorized applications, investigate services configured to start automatically, and detect software that does not conform to the organization's approved software baseline. The process inventory provides details such as the process name, executable path, user, process identifier (PID), and start time. These details help analysts investigate suspicious processes and determine their potential impact on the endpoint.
 
-.. thumbnail:: /images/getting-started/use-cases/it-hygiene/sca-results-details.png
-   :title: SCA results details and download
-   :alt: SCA results details and download
+Wazuh detection rules match process and service activity that requires investigation, such as unauthorized services, malicious processes, or activity associated with persistence and privilege escalation.
+
+The **Services** tab of the **IT Hygiene** section displays the services installed on monitored endpoints, including their startup state and operational status.
+
+.. thumbnail:: /images/getting-started/use-cases/it-hygiene/services-tab.png
+   :title: Services tab of the IT Hygiene section showing services and their startup and operational status
+   :alt: Services tab of the IT Hygiene section showing services and their startup and operational status
    :align: center
    :width: 80%
 
-You can see information such as rationale, remediation steps, and description of the checks performed on the endpoint on the Wazuh dashboard. This information is included in the report generated by Wazuh.
+The **Processes** tab of the **IT Hygiene** section shows the running processes collected from monitored endpoints. The process inventory includes details such as the executable path, user, process ID, and endpoint where each process is running.
 
-.. thumbnail:: /images/getting-started/use-cases/it-hygiene/sca-check-result-details.png
-   :title: SCA check result details
-   :alt: SCA check result details
+.. thumbnail:: /images/getting-started/use-cases/it-hygiene/processes-tab.png
+   :title: Processes tab of the IT Hygiene section showing running processes with path, user, and process ID
+   :alt: Processes tab of the IT Hygiene section showing running processes with path, user, and process ID
    :align: center
    :width: 80%
 
-The SCA scan result above indicates a failure because the endpoint allows you to mount the cramfs file system. You can implement the remediation suggested in the report to improve the security posture.
+Monitoring network activity
+---------------------------
 
-Vulnerability management
-------------------------
+Wazuh collects information about network interfaces and listening ports on monitored endpoints through the Syscollector module. This inventory helps organizations identify exposed services and maintain visibility into network-facing activity across their environment.
 
-The Wazuh :doc:`vulnerability detection </user-manual/capabilities/vulnerability-detection/index>` module identifies vulnerable applications by using vulnerability information available in our `Wazuh CTI <https://cti.wazuh.com/vulnerabilities/cves>`__. Links to specific vulnerabilities on our Wazuh CTI are also available on each vulnerability ID.
+Security teams can use the **Network** tab of the **IT Hygiene** section in the Wazuh dashboard to review listening ports, associated processes, and network interfaces on monitored endpoints. Network visibility helps identify unexpected open ports, investigate exposed services, and detect unauthorized services that can increase the endpoint's attack surface.
 
-.. thumbnail:: /images/getting-started/use-cases/it-hygiene/vulnerabilities-inventory-dashboard.png
-   :title: Vulnerability Detection inventory dashboard
-   :alt: Vulnerability Detection inventory dashboard
+The **Network** tab of the **IT Hygiene** section shows the network interfaces and listening ports collected from monitored endpoints.
+
+.. thumbnail:: /images/getting-started/use-cases/it-hygiene/network-tab.png
+   :title: Network tab of the IT Hygiene section showing network interfaces and listening ports
+   :alt: Network tab of the IT Hygiene section showing network interfaces and listening ports
    :align: center
    :width: 80%
 
-You can download a report that contains security events related to discovered and resolved vulnerabilities on a monitored endpoint from the Wazuh dashboard. This feature allows you to identify endpoints with unresolved vulnerabilities and keep track of remediation activities.
+Supporting regulatory compliance
+--------------------------------
 
-.. thumbnail:: /images/getting-started/use-cases/it-hygiene/vulnerabilities-data-download.png
-   :title: Vulnerabilities data download
-   :alt: Vulnerabilities data download
+Good IT hygiene helps organizations implement and monitor technical controls required by regulatory standards. Wazuh supports this process by providing visibility into endpoint configurations, file integrity, vulnerabilities, security events, and other activities associated with compliance requirements.
+
+Wazuh maps Security Configuration Assessment (SCA) checks and security findings to supported compliance frameworks. These mappings help security teams identify findings associated with specific compliance requirements and prioritize remediation.
+
+.. thumbnail:: /images/getting-started/use-cases/it-hygiene/compliance-mapping-overview.png
+   :title: Regulatory Compliance section showing findings mapped to compliance frameworks
+   :alt: Regulatory Compliance section showing findings mapped to compliance frameworks
    :align: center
    :width: 80%
 
-The Wazuh vulnerability detection module also enables you to track remediation activities, which could serve as a progress report on improving or maintaining IT hygiene. For example, when a vulnerability is remediated, an alert is generated on the Wazuh dashboard. This feature detects when a patch or software upgrade resolves a previously detected vulnerability.
+You can drill down to an individual requirement from the **Controls** tab of the **Regulatory Compliance** section to discover where the policy violations occurred. For example, the following image shows the CMMC requirements.
 
-.. thumbnail:: /images/getting-started/use-cases/it-hygiene/remediation-alerts.png
-   :title: Remediation alerts
-   :alt: Remediation alerts
+.. thumbnail:: /images/getting-started/use-cases/it-hygiene/cmmc-requirements.png
+   :title: Controls tab of the Regulatory Compliance section showing CMMC requirements
+   :alt: Controls tab of the Regulatory Compliance section showing CMMC requirements
    :align: center
    :width: 80%
 
-Malware detection
------------------
+The image below shows findings generated for vulnerabilities that violate the *CMMC Requirement RA.L2-3.11.2*.
 
-Malware detection is essential for safeguarding computer systems and networks from cyber threats. Organizations can improve their IT hygiene by identifying and mitigating malicious software that can cause data breaches, system compromises, and financial losses.
-
-Wazuh offers an out-of-the-box ruleset designed to recognize malware patterns and trigger alerts for quick response. Wazuh also allows security analysts to create :doc:`custom rules </user-manual/ruleset/rules/custom>` tailored to their environment, thereby optimizing their malware detection efforts. For example, we created custom rules to detect `Vidar infostealer malware using Wazuh <https://wazuh.com/blog/detecting-vidar-infostealer-with-wazuh/>`__.
-
-.. code-block:: xml
-
-   <group name="windows,sysmon,vidar_detection_rule,">
-   <!-- Vidar downloads malicious DLL files on victim endpoint -->
-     <rule id="100084" level="10">
-       <if_sid>61613</if_sid>
-       <field name="win.eventdata.image" type="pcre2">(?i)\\\\.+(exe|dll|bat|msi)</field>
-       <field name="win.eventdata.targetFilename" type="pcre2">(?i)\\\\ProgramData\\\\(freebl3|mozglue|msvcp140|nss3|softokn3|vcruntime140)\.dll</field>
-       <description>Possible Vidar malware detected. $(win.eventdata.targetFilename) was downloaded on $(win.system.computer)</description>
-       <mitre>
-         <id>T1056.001</id>
-       </mitre>
-     </rule>
-   <!-- Vidar loads malicious DLL files -->
-     <rule id="100085" level="12">
-       <if_sid>61609</if_sid>
-       <field name="win.eventdata.image" type="pcre2">(?i)\\\\.+(exe|dll|bat|msi)</field>
-       <field name="win.eventdata.imageLoaded" type="pcre2">(?i)\\\\programdata\\\\(freebl3|mozglue|msvcp140|nss3|softokn3|vcruntime140)\.dll</field>
-       <description>Possible Vidar malware detected. Malicious $(win.eventdata.imageLoaded) file loaded by $(win.eventdata.image)</description>
-       <mitre>
-         <id>T1574.002</id>
-       </mitre>
-     </rule>
-   <!-- Vidar deletes itself or a malicious process it creates -->
-     <rule id="100086" level="7" frequency="5" timeframe="360">
-       <if_sid>61603</if_sid>
-       <if_matched_sid>100085</if_matched_sid>
-       <field name="win.eventdata.image" type="pcre2">(?i)\\\\cmd.exe</field>
-       <match type="pcre2">cmd.exe\\" /c timeout /t \d{1,}.+del /f /q \\".+(exe|dll|bat|msi)</match>
-       <description>Possible Vidar malware detected. Malware deletes $(win.eventdata.parentCommandLine)</description>
-       <mitre>
-         <id>T1070.004</id>
-       </mitre>
-     </rule>
-   </group>
-
-The rules above detect specific behaviors of the Vidar infostealer malware and trigger alerts on the dashboard.
-
-.. thumbnail:: /images/getting-started/use-cases/it-hygiene/vidar-malware-alerts.png
-   :title: Vidar malware alerts
-   :alt: Vidar malware alerts
+.. thumbnail:: /images/getting-started/use-cases/it-hygiene/cmmc-ra-l2-3-11-2-findings.png
+   :title: Vulnerability findings that violate CMMC requirement RA.L2-3.11.2
+   :alt: Vulnerability findings that violate CMMC requirement RA.L2-3.11.2
    :align: center
    :width: 80%
 
-Wazuh boosts its malware detection capabilities by :doc:`integrating with threat intelligence </user-manual/capabilities/malware-detection/virus-total-integration>` sources such as VirusTotal, MISP, and more. Wazuh also offers support for integrating third-party malware detection tools such as :doc:`ClamAV </user-manual/capabilities/malware-detection/clam-av-logs-collection>` and :doc:`Windows Defender </user-manual/capabilities/malware-detection/win-defender-logs-collection>`. By collecting and analyzing logs from third-party malware detection tools, Wazuh provides security analysts with a centralized monitoring platform. Wazuh increases the efficiency in detecting malware by combining diverse threat intelligence from third-party tools, thereby improving the organization's IT hygiene.
-
-The image below shows an alert of an event from VirusTotal processed by the Wazuh server.
-
-.. thumbnail:: /images/getting-started/use-cases/it-hygiene/virustotal-finding-alert.png
-   :title: VirusTotal finding alert
-   :alt: VirusTotal finding alert
-   :align: center
-   :width: 80%
-
-Wazuh uses :doc:`CDB lists </user-manual/ruleset/cdb-list>` (constant databases) containing indicators of compromise (IOCs) to detect malware. These lists contain known malware IOCs such as file hashes, IP addresses, and domain names. Wazuh proactively identifies malicious files by comparing the identified IOCs with the information stored in the CDB lists.
-
-.. thumbnail:: /images/getting-started/use-cases/it-hygiene/malware-detected-alert.png
-   :title: Malware detected alert
-   :alt: Malware detected alert
-   :align: center
-   :width: 80%
-
-Regulatory compliance
----------------------
-
-Regulatory standards provide a global benchmark for best business practices to help improve customer trust and business reputation. Compliance with regulatory standards also helps organizations to enhance their IT hygiene.
-
-Wazuh streamlines the process of meeting :doc:`regulatory compliance </compliance/index>` obligations by offering a solution that addresses requirements of industry standards such as PCI DSS, HIPAA, GDPR, and others.
-
-.. thumbnail:: /images/getting-started/use-cases/it-hygiene/security-operations-module.png
-   :title: Security operations module
-   :alt: Security operations module
-   :align: center
-   :width: 80%
-
-Wazuh uses its capabilities such as the :doc:`SCA </user-manual/capabilities/sec-config-assessment/index>`, :doc:`vulnerability detection </user-manual/capabilities/vulnerability-detection/index>`, :doc:`FIM </user-manual/capabilities/file-integrity/index>`, and more to identify and report compliance violations. It also provides dedicated compliance dashboards to help monitor compliance status, identify improvement areas, and take appropriate remediation actions.
-
-For example, you can get a general overview of the PCI DSS requirement of a monitored endpoint on the Wazuh dashboard.
-
-.. thumbnail:: /images/getting-started/use-cases/it-hygiene/pci-dss-dashboard.png
-   :title: PCI DSS dashboard
-   :alt: PCI DSS dashboard
-   :align: center
-   :width: 80%
-
-You can drill down to the individual PCI DSS requirement from the **Controls** tab to discover where the policy violations occurred.
-
-.. thumbnail:: /images/getting-started/use-cases/it-hygiene/pci-dss-requirement-violations.png
-   :title: PCI DSS requirement violations
-   :alt: PCI DSS requirement violations
-   :align: center
-   :width: 80%
-
-The image below shows alerts generated for vulnerabilities that violate the *PCI DSS Requirement 11.2.1*.
-
-.. thumbnail:: /images/getting-started/use-cases/it-hygiene/pci-dss-requirement-violation-details.png
-   :title: PCI DSS requirement violation details
-   :alt: PCI DSS requirement violation details
-   :align: center
-   :width: 80%
-
-This feature is also available for other compliance standards such as GDPR, TSC, HIPAA, and  NIST-800-53.

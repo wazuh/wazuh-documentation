@@ -620,7 +620,7 @@ To set this up, create a file at ``/etc/haproxy/dataplaneapi.yml`` and add the b
             transaction:
                 transaction_dir: /tmp/haproxy
             user:
-            - insecure: true
+            -  insecure: true
                password: <DATAPLANE_PASSWORD>
                name: <DATAPLANE_USER>
          haproxy:
@@ -678,7 +678,7 @@ Depending on the :ref:`HAProxy installation method <haproxy_installation>`, foll
 
    .. group-tab:: Packages
 
-      1. Download the binary file for the installed HAProxy version. You can find the available versions `here <https://github.com/haproxytech/dataplaneapi/releases/>`__.
+      1. Download the binary file for the installed HAProxy version. You can find the available versions on the `Data Plane API releases page <https://github.com/haproxytech/dataplaneapi/releases/>`__.
 
          .. code-block:: console
 

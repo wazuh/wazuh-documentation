@@ -20,14 +20,14 @@ The following table summarizes the Wazuh data and configurations that you can mi
 .. |security_configuration_ref| replace:: :ref:`Security configuration <migration_wazuh_indexer_security_configuration>`
 .. |custom_dashboards_visualizations_ref| replace:: :ref:`Custom dashboards and visualizations <migration_custom_dashboards_and_visualization>`
 .. |agent_registration_ref| replace:: :ref:`Agent registration <migration_agent_registration>`
-.. |agent_groups_ref| replace:: :ref:`Agent groups <migration_agent_groups>`
+.. |agent_groups_ref| replace:: :ref:`Agent groups <migration_migrate_agent_registrations>`
 
 +------------------------------------------+--------------------------------------------------------------------------------------------+
 | Configuration                            | Notes                                                                                      |
 +==========================================+============================================================================================+
 | |wazuh_indexer_configuration_ref|        | Recreate the configuration in the Wazuh 5.x deployment.                                    |
 +------------------------------------------+--------------------------------------------------------------------------------------------+
-| |indexed_data_ref|                       | Migrate the required Wazuh indices using snapshots and a shared snapshot repository.       |
+| |indexed_data_ref|                       | Restore the required Wazuh 4.x indices using snapshots and a shared snapshot repository.   |
 |                                          | Restored indices retain their Wazuh 4.x mappings and are used to access historical data.   |
 |                                          | Wazuh 5.x does not write new data to them.                                                 |
 +------------------------------------------+--------------------------------------------------------------------------------------------+
@@ -40,9 +40,10 @@ The following table summarizes the Wazuh data and configurations that you can mi
 | |custom_dashboards_visualizations_ref|   | Export from Wazuh 4.x and import into Wazuh 5.x.                                           |
 +------------------------------------------+--------------------------------------------------------------------------------------------+
 | |agent_registration_ref|                 | Migrate existing Wazuh agent registrations to the Wazuh 5.x manager while preserving their |
-|                                          | agent IDs and authentication keys.                                                         |
+|                                          | agent IDs, authentication keys, registration dates, and group membership.                  |
 +------------------------------------------+--------------------------------------------------------------------------------------------+
-| |agent_groups_ref|                       | Restore group configuration and reassign agents where required.                            |
+| |agent_groups_ref|                       | Migrated with the agent registrations, including group configuration and agent             |
+|                                          | assignments.                                                                               |
 +------------------------------------------+--------------------------------------------------------------------------------------------+
 
 Limitations
@@ -54,7 +55,7 @@ Wazuh 5.x introduces architectural and configuration changes that prevent some W
 
 -  You cannot migrate custom Wazuh 4.x rules and decoders in XML format to Wazuh 5.x. Recreate the required detection content using the Wazuh 5.x :ref:`content management <content_management>`.
 
--  Index data migration is supported from Wazuh 4.4.0 or later. Restored Wazuh 4.x indices retain their original mappings and field structure and remain separate from the indices and data streams created by Wazuh 5.x.
+-  Index data migration is supported from Wazuh 4.4.0 or later. Indices created before Wazuh 4.4.0 can't be restored, even if the deployment was later upgraded. Restored Wazuh 4.x indices retain their original mappings and field structure and remain separate from the indices and data streams created by Wazuh 5.x.
 
 Prerequisites
 -------------
@@ -63,7 +64,7 @@ Before migrating to Wazuh 5.x, complete the following prerequisites:
 
 #. Deploy a new Wazuh 5.x environment that matches your deployment architecture. Do not reuse or upgrade an existing Wazuh 4.x deployment in place. Refer to the :doc:`Wazuh installation guide </installation-guide/index>` for your deployment.
 
-#. Ensure that the existing deployment runs Wazuh 4.4.0 or later. Index data migration to Wazuh 5.x requires Wazuh 4.4.0 or later due to snapshot compatibility requirements.
+#. Ensure that the existing deployment runs Wazuh 4.4.0 or later. Index data migration to Wazuh 5.x requires Wazuh 4.4.0 or later due to snapshot compatibility requirements. If the deployment was upgraded from an earlier version, indices created before the upgrade to Wazuh 4.4.0 can't be restored.
 
 #. Verify network connectivity between the Wazuh 4.x and Wazuh 5.x environments. This includes connectivity required to migrate agent registrations and access shared migration resources.
 

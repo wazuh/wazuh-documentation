@@ -43,6 +43,8 @@ Any given check event has three possible results:
 
 The set of rules and the :ref:`check <sca_policy_file_checks_section>` result aggregator determine this result.
 
+The Wazuh dashboard shows the **Overall score** of each SCA policy. The score is the percentage of applicable checks that passed. It equals the passed checks divided by the sum of passed and failed checks. Checks with the Not applicable result don't count toward the score. For example, 119 passed checks and 118 failed checks give a score of 50.211%.
+
 On the Wazuh dashboard, navigate to **Endpoint Security** > **Configuration assessment** to view the scan summaries for the Wazuh agents.
 
 .. thumbnail:: /images/sca/configuration-assessment-dashboard.png

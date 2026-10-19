@@ -124,7 +124,7 @@ Once authenticated, you can access any API endpoint using the below structure. R
 
 .. code-block:: console
 
-   # curl -k -X <METHOD> "https://localhost:55000/<ENDPOINT>" -H  "Authorization: Bearer $TOKEN"
+   # curl -k -X <METHOD> "https://localhost:55000/<ENDPOINT>" -H "Authorization: Bearer $TOKEN"
 
 Authenticate the Wazuh server API via scripts
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -276,11 +276,11 @@ You can also authenticate to the Wazuh server API using a Bash script. The follo
 
       echo -e "Getting default information:\n"
 
-      curl -k -X GET "https://localhost:55000/?pretty=true" -H  "Authorization: Bearer $TOKEN"
+      curl -k -X GET "https://localhost:55000/?pretty=true" -H "Authorization: Bearer $TOKEN"
 
       echo -e "\n\nGetting /agents/summary/os:\n"
 
-      curl -k -X GET "https://localhost:55000/agents/summary/os?pretty=true" -H  "Authorization: Bearer $TOKEN"
+      curl -k -X GET "https://localhost:55000/agents/summary/os?pretty=true" -H "Authorization: Bearer $TOKEN"
 
       echo -e "\n\nEnd of the script.\n"
 

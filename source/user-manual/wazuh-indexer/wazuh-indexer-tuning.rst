@@ -17,7 +17,7 @@ When the system is swapping memory, the Wazuh indexer may not work as expected. 
 
    You require root user privileges to run the commands described below.
 
-#. Add the below line to the ``/etc/wazuh-indexer/opensearch.yml`` configuration file on the Wazuh indexer to enable memory locking:
+#. Make sure the following line is present in the ``/etc/wazuh-indexer/opensearch.yml`` configuration file to enable memory locking. It is set by default. Add it if it was removed or if you are using a custom configuration file:
 
    .. code-block:: yaml
 
@@ -46,20 +46,14 @@ When the system is swapping memory, the Wazuh indexer may not work as expected. 
 
       .. group-tab:: SysV init
 
-         #. Create a new directory for the file that specifies the system limits:
+         The Wazuh indexer init script sets ``MAX_LOCKED_MEMORY=unlimited`` and applies it with ``ulimit -l`` when the service starts, so memory locking needs no extra system limit by default. To set the value explicitly, add or update the following line in the service defaults file:
 
-            .. code-block:: console
+         -  Debian-based systems: ``/etc/default/wazuh-indexer``
+         -  RPM-based systems: ``/etc/sysconfig/wazuh-indexer``
 
-               # mkdir -p /etc/init.d/wazuh-indexer.service.d/
+         .. code-block:: ini
 
-         #. Run the following command to create the ``wazuh-indexer.conf`` file in the newly created directory with the new system limit added:
-
-            .. code-block:: console
-
-               # cat > /etc/init.d/wazuh-indexer.service.d/wazuh-indexer.conf << EOF
-               [Service]
-               LimitMEMLOCK=infinity
-               EOF
+            MAX_LOCKED_MEMORY=unlimited
 
 #. Edit the ``/etc/wazuh-indexer/jvm.options`` file and change the JVM flags. Set a Wazuh indexer heap size value to limit memory usage. JVM heap limits prevent the ``OutOfMemory`` exception if the Wazuh indexer tries to allocate more memory than is available due to the configuration in the previous step. The recommended value is half of the system RAM. For example, set the size as follows for a system with 8 GB of RAM.
 
@@ -75,21 +69,30 @@ When the system is swapping memory, the Wazuh indexer may not work as expected. 
 
    .. note::
 
-      To prevent performance degradation due to JVM heap resizing at runtime, the minimum (Xms) and maximum (Xmx) size values must be the same.
+      To prevent performance degradation due to JVM heap resizing at runtime, the minimum (``Xms``) and maximum (``Xmx``) size values must be the same.
 
 #. Restart the Wazuh indexer service:
 
-   .. code-block:: console
+   .. tabs::
 
-      # systemctl daemon-reload
-      # systemctl restart wazuh-indexer
+      .. group-tab:: Systemd
+
+         .. code-block:: console
+
+            # systemctl daemon-reload
+            # systemctl restart wazuh-indexer
+
+      .. group-tab:: SysV init
+
+         .. code-block:: console
+
+            # service wazuh-indexer restart
 
 #. Verify that the setting was changed successfully, by running the following command to check that ``mlockall`` value is set to ``true``:
 
    .. code-block:: console
-      :emphasize-lines: 1
 
-      # curl -k -u <INDEXER_USERNAME>:<INDEXER_PASSWORD> "https://<INDEXER_IP_ADDRESS>:9200/_nodes?filter_path=**.mlockall&pretty"
+      # curl -k -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> "https://<INDEXER_IP_ADDRESS>:9200/_nodes?filter_path=**.mlockall&pretty"
 
    **Output**
 
@@ -107,7 +110,7 @@ When the system is swapping memory, the Wazuh indexer may not work as expected. 
         }
       }
 
-#. If the output is ``false``, the request has failed, and the following line appears in the ``/var/log/wazuh-indexer/wazuh-indexer.log`` file:
+#. If the output is ``false``, the request has failed, and the following line appears in the ``/var/log/wazuh-indexer/wazuh-cluster.log`` file:
 
    **Output**
 

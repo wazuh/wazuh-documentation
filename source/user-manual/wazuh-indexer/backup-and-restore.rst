@@ -46,8 +46,8 @@ Preparing the backup
       # cat /etc/*release* > $bkp_folder/host-info.txt
       # echo -e "\n$(hostname): $(hostname -I)" >>$bkp_folder/host-info.txt
 
-Backing up the Wazuh indexer and dashboard
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Backing up the Wazuh indexer
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 #. Back up the Wazuh indexer certificates and configuration files.
 
@@ -60,7 +60,6 @@ Backing up the Wazuh indexer and dashboard
       /etc/wazuh-indexer/log4j2.properties \
       /etc/wazuh-indexer/opensearch.yml \
       /etc/wazuh-indexer/opensearch.keystore \
-      /etc/wazuh-indexer/opensearch-observability/ \
       /etc/wazuh-indexer/opensearch-security/ \
       /etc/wazuh-indexer/wazuh-indexer-notifications/ \
       /etc/wazuh-indexer/wazuh-indexer-notifications-core/ \
@@ -116,32 +115,31 @@ Perform the following steps to restore Wazuh indexer files on the new server.
 
    .. code-block:: console
 
-      # cp -r etc/wazuh-indexer/certs/ /etc/wazuh-indexer/certs/
+      # cp -r etc/wazuh-indexer/certs/. /etc/wazuh-indexer/certs/
       # cp etc/wazuh-indexer/jvm.options /etc/wazuh-indexer/jvm.options
-      # cp -r etc/wazuh-indexer/jvm.options.d/ /etc/wazuh-indexer/jvm.options.d/
+      # cp -r etc/wazuh-indexer/jvm.options.d/. /etc/wazuh-indexer/jvm.options.d/
       # cp etc/wazuh-indexer/log4j2.properties /etc/wazuh-indexer/log4j2.properties
       # cp etc/wazuh-indexer/opensearch.yml /etc/wazuh-indexer/opensearch.yml
       # cp etc/wazuh-indexer/opensearch.keystore /etc/wazuh-indexer/opensearch.keystore
-      # cp -r etc/wazuh-indexer/opensearch-observability/ /etc/wazuh-indexer/opensearch-observability/
-      # cp -r etc/wazuh-indexer/opensearch-security/ /etc/wazuh-indexer/opensearch-security/
-      # cp -r etc/wazuh-indexer/wazuh-indexer-reports-scheduler/ /etc/wazuh-indexer/wazuh-indexer-reports-scheduler/
-      # cp -r etc/wazuh-indexer/wazuh-indexer-notifications/ /etc/wazuh-indexer/wazuh-indexer-notifications/
-      # cp -r etc/wazuh-indexer/wazuh-indexer-notifications-core/ /etc/wazuh-indexer/wazuh-indexer-notifications-core/
-      # cp -r etc/wazuh-indexer/wazuh-indexer-security-analytics/ /etc/wazuh-indexer/wazuh-indexer-security-analytics/
+      # cp -r etc/wazuh-indexer/opensearch-security/. /etc/wazuh-indexer/opensearch-security/
+      # cp -r etc/wazuh-indexer/wazuh-indexer-reports-scheduler/. /etc/wazuh-indexer/wazuh-indexer-reports-scheduler/
+      # cp -r etc/wazuh-indexer/wazuh-indexer-notifications/. /etc/wazuh-indexer/wazuh-indexer-notifications/
+      # cp -r etc/wazuh-indexer/wazuh-indexer-notifications-core/. /etc/wazuh-indexer/wazuh-indexer-notifications-core/
+      # cp -r etc/wazuh-indexer/wazuh-indexer-security-analytics/. /etc/wazuh-indexer/wazuh-indexer-security-analytics/
       # cp usr/lib/sysctl.d/wazuh-indexer.conf /usr/lib/sysctl.d/wazuh-indexer.conf
+
       # chown -R wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/certs/
       # chown wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/jvm.options
       # chown -R wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/jvm.options.d
       # chown wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/log4j2.properties
       # chown wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/opensearch.yml
       # chown wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/opensearch.keystore
-      # chown -R wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/opensearch-observability/
       # chown -R wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/opensearch-security/
       # chown -R wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/wazuh-indexer-reports-scheduler/
       # chown -R wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/wazuh-indexer-notifications/
       # chown -R wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/wazuh-indexer-notifications-core/
       # chown -R wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/wazuh-indexer-security-analytics/
-      # chown wazuh-indexer:wazuh-indexer /usr/lib/sysctl.d/wazuh-indexer.conf
+      # chown root:root /usr/lib/sysctl.d/wazuh-indexer.conf
 
 #. Start the Wazuh indexer service:
 

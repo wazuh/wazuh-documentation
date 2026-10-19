@@ -35,6 +35,17 @@ Perform the following steps to configure the Ubuntu endpoint. This allows perfor
       $ sudo apt update 
       $ sudo apt install -y hydra
 
+#. On the RHEL endpoint, enable SSH password authentication and restart the SSH service:
+
+   .. code-block:: console
+
+      # echo "PasswordAuthentication yes" > /etc/ssh/sshd_config.d/00-poc-password-auth.conf
+      # systemctl restart sshd
+
+   .. note::
+
+      The file name must sort before the other files in ``/etc/ssh/sshd_config.d/``, because the SSH server uses the first value it reads. Remove the file and restart the SSH service after the test.
+
 Attack emulation
 ----------------
 
@@ -59,11 +70,11 @@ You can visualize the alert data in the Wazuh dashboard. To do this, go to the *
 
 -  Linux - ``rule.id:(5551 OR 5712)``. Other related rules are ``5710``, ``5711``, ``5716``, ``5720``, ``5503``, ``5504``.
 
-   .. thumbnail:: /images/poc/brute-force-attack-alerts-ubuntu.png
-         :title: Visualize Brute force attack to Ubuntu system alerts
-         :alt: Wazuh dashboard Threat Hunting events showing SSH brute-force alerts on the Ubuntu system, including repeated login failures and PAM authentication failures.
-         :align: center
-         :width: 80%
+   .. thumbnail:: /images/poc/brute-force-attack-alerts-rhel.png
+      :title: Visualize Brute force attack to RHEL system alerts
+      :alt: Wazuh dashboard Threat Hunting events showing SSH brute-force alerts on the RHEL system: multiple failed logins and a brute-force attempt with a non-existent user.
+      :align: center
+      :width: 80%
 
 -  Windows - ``rule.id:(60122 OR 60204)``
 
