@@ -42,8 +42,8 @@ Perform the following steps to add a new key to the service account.
 #. Select **JSON**, and click **CREATE** to complete the action.
 
    .. thumbnail:: /images/cloud-security/gcp/create-private-key-json.png
-      :title: 
-      :alt: 
+      :title: Create a JSON private key for the service account
+      :alt: Google Cloud IAM and Admin console, Keys tab of the wazuh-cloud-storage service account, with the Create private key dialog open and the JSON key type selected
       :align: center
       :width: 80%
 
