@@ -91,7 +91,8 @@ Ubuntu endpoint
 On the Wazuh dashboard, an alert detects the modification of the ``subject_data.txt`` file. The alert is also tagged with ``gdpr_II_5.1.f``.
 
 .. thumbnail:: /images/compliance/gdpr/fim-file-mod.png
-    :title: File modification alert visualization
-    :align: center
-    :width: 80%
+   :title: File modification alert visualization
+   :alt: Wazuh dashboard GDPR module, document details of an alert for the modified file /root/personal_data/subject_data.txt, with the GDPR requirement II_5.1.f highlighted
+   :align: center
+   :width: 80%
 

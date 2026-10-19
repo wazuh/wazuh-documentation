@@ -30,10 +30,10 @@ wazuh-db options
 +---------+-------------------------------+
 
 Tables available for wazuh-db
-=============================
+-----------------------------
 
 Agent tables
-------------
+^^^^^^^^^^^^
 
 - `fim_entry`_
 - `sync_info`_
@@ -43,12 +43,12 @@ Agent tables
 - `Syscollector tables`_
 
 Task tables
------------
+^^^^^^^^^^^
 - `tasks`_
 
 
 fim_entry
----------
+^^^^^^^^^
 
 Data from FIM records reported by the agent
 
@@ -93,7 +93,7 @@ Data from FIM records reported by the agent
 +-------------------+-----------------------------------+------------------------------------------------------------------+
 
 sync_info
----------
+^^^^^^^^^
 
 It stores the information related to the synchronization between the databases of the agents and the manager
 
@@ -112,7 +112,7 @@ It stores the information related to the synchronization between the databases o
 +-----------------------+---------------------------------------------------------+-------------------------------------------+
 
 scan_info
----------
+^^^^^^^^^
 
 It stores the begin and end times of each scan of an agent (used for agents prior to 3.12)
 
@@ -139,7 +139,7 @@ It stores the begin and end times of each scan of an agent (used for agents prio
 .. note:: Fields ``fim_first_check``, ``fim_second_check`` and ``fim_third_check`` are only used on FIM scans
 
 metadata
---------
+^^^^^^^^
 
 Data needed to upgrade the agent's database
 
@@ -158,7 +158,7 @@ The ``key`` field can also store the following values:
   - **last_vacuum_value**: its ``value`` field stores the fragmentation value that the database was left with after the last vacuum was performed.
 
 pm_event
---------
+^^^^^^^^
 
 Policy monitoring findings that the rootcheck module reports from the agent. Wazuh keeps one row for each distinct finding and updates ``date_last`` each time the finding repeats.
 
@@ -179,7 +179,7 @@ Policy monitoring findings that the rootcheck module reports from the agent. Waz
 +----------------+-----------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
 
 Syscollector tables
--------------------
+^^^^^^^^^^^^^^^^^^^
 
 +-------------------------------------------------------+--------------------------------------------------------------------------------+
 | Table                                                 | Description                                                                    |
@@ -212,7 +212,7 @@ Syscollector tables
 +-------------------------------------------------------+--------------------------------------------------------------------------------+
 
 tasks
------
+^^^^^
 
 Tasks executed on the agents
 

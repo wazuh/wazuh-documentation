@@ -39,7 +39,8 @@ To create agent groups from the Wazuh dashboard:
 #. Enter a name for the agent group and click on the **Save new group** button.
 
 .. thumbnail:: /images/manual/agent/new-group-agent-dashboard.gif
-   :title: Creating an agent in Wazuh Dashboard
+   :title: Creating an agent group in the Wazuh dashboard
+   :alt: Animation: in the Wazuh dashboard, opening Agents management > Groups, clicking Add new group, entering a group name and clicking Save new group, which adds the group to the list
    :align: center
    :width: 80%
    
@@ -118,7 +119,8 @@ Using the :doc:`Wazuh API </user-manual/api/reference>` to create and manage gro
       POST /groups {"group_id": "Linux"}
       
    .. thumbnail:: /images/manual/agent/new-group-agent-api.gif
-      :title: Creating an agent with Wazuh API
+      :title: Creating an agent group with the Wazuh API
+      :alt: Animation: opening Server management > Dev Tools and running POST /groups with the group_id Windows, which returns "Group 'Windows' created"
       :align: center
       :width: 80%
       
