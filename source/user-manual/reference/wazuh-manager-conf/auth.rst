@@ -108,7 +108,7 @@ In a Wazuh manager cluster, the enrollment password is maintained on the master 
 
 Agent-side setup: Wazuh 5.0 agents enroll with an enrollment token by default. The token carries its own credential, so ``use_password`` doesn't apply to token enrollment. See :ref:`Generate the enrollment token <generate_enrollment_token>`.
 
-A Wazuh 5.0 agent still sends the enrollment password when the file set in ``<enrollment><authorization_pass_path>`` exists. By default, this is ``etc/authd.pass`` in the agent installation directory (``/var/ossec/etc/authd.pass`` on Linux). The Wazuh agent installer doesn't create this file: the ``WAZUH_REGISTRATION_PASSWORD`` install variable was removed and has no effect, and upgrading a Wazuh 4.x agent to 5.0 deletes the file at the default path. To enroll an agent with the password, first retrieve it from the Wazuh manager:
+A Wazuh 5.0 agent still sends the enrollment password when the file set in ``<enrollment><authorization_pass_path>`` exists. By default, this is ``etc/authd.pass`` in the agent installation directory (``/var/ossec/etc/authd.pass`` on Linux), or ``authd.pass`` on Windows. The Wazuh agent installer doesn't create this file: the ``WAZUH_REGISTRATION_PASSWORD`` install variable was removed and has no effect, and upgrading a Wazuh 4.x agent to 5.0 deletes the file at the default path. To enroll an agent with the password, first retrieve it from the Wazuh manager:
 
 .. code-block:: console
 
