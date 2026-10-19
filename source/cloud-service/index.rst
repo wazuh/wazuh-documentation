@@ -1,36 +1,36 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Wazuh Cloud hosts and manages all central components in a unified, secure environment. Learn more in this section of the documentation.
+   :description: Wazuh Cloud is the software as a service (SaaS) edition of Wazuh. We run the platform, and your team runs security monitoring. Learn more in this section of the documentation.
 
 Wazuh Cloud service
 ===================
 
-Wazuh is a free and open source platform that delivers unified Security Information and Event Management (SIEM) and Extended Detection and Response (XDR) capabilities. It protects workloads across on-premises, virtualized, cloud, and containerized environments.
+Wazuh is a free and open source platform that provides unified Security Information and Event Management (SIEM) and Extended Detection and Response (XDR) capabilities. It helps organizations protect workloads across on-premises, virtualized, cloud, and containerized environments.
 
 You can deploy Wazuh in three ways:
 
--  On-premises, managed entirely by you.
--  In your own cloud environment, under your control.
--  With Wazuh Cloud, a fully managed service operated by Wazuh.
+-  **On-premises**: You install and manage the entire platform on your own infrastructure.
+-  **In the cloud**: You deploy and manage Wazuh in a cloud environment under your control.
+-  **With Wazuh Cloud**: You use the software as a service (SaaS) edition of Wazuh, which we host and operate.
 
-Wazuh Cloud hosts and manages all central components in a unified, secure environment. The service provides fast provisioning, automated scaling, ongoing updates, and operational management, so you can focus on security operations rather than infrastructure.
+Wazuh Cloud manages the Wazuh central components and their underlying infrastructure, including scaling, updates, and platform monitoring. Your team remains responsible for security monitoring, investigating alerts, and responding to incidents, just as it would with a self-hosted deployment.
 
 Wazuh Cloud benefits
 --------------------
 
--  **Fully managed service**: We take care of installation, scaling, updates, and monitoring of Wazuh components.
--  **Immediate time-to-value**: A ready-to-use solution, with no additional hardware or software required, driving down the cost and complexity.
--  **High availability and scalability**: A flexible infrastructure that you can tailor to meet specific needs and upgrade it to the most appropriate tier.
--  **Wazuh AI security analyst**: Automate your security analysis and receive actionable insights to help you understand and strengthen your security posture.
--  **Security and regulatory compliance**: Fully protected data, regular application of security patches and hardening practices. Compliant with PCI DSS and SOC2.
--  **Customizable environments**: Tailor retention, integrations, and resources to match your needs.
--  **Support and monitoring**: Continuous monitoring of the platform and access to Wazuh technical support.
+-  **Managed platform**: We install, maintain, update, and monitor the Wazuh central components, reducing the operational work required from your team.
+-  **Faster deployment**: Get started without provisioning hardware or installing and maintaining the central components yourself.
+-  **High availability and scalability**: Use infrastructure designed to support availability and scale resources as your requirements change.
+-  **Wazuh AI security analyst**: Automate parts of security analysis and receive actionable insights to help investigate events and strengthen your security posture.
+-  **Security and regulatory compliance**: Benefit from security hardening and regular security updates. Wazuh Cloud supports compliance efforts for standards such as PCI DSS and SOC 2.
+-  **Customizable environments**: Configure data retention, integrations, and resources to suit your requirements.
+-  **Platform monitoring and support**: We continuously monitor the health of your Wazuh Cloud environment, and you have access to Wazuh technical support.
 
 Shared responsibility model
 ----------------------------
 
-With Wazuh Cloud, responsibilities are divided between the service and the customer.
+With Wazuh Cloud, we run the platform and you run security operations on it.
 
 Managed by Wazuh
 ^^^^^^^^^^^^^^^^
@@ -46,6 +46,7 @@ Managed by customer
 * Deploying and configuring Wazuh agents on your endpoints.
 * Defining custom detection rules, alerting policies, and integrations.
 * Managing access control for your users.
+* Monitoring alerts and investigating security events in your environment.
 * Responding to incidents detected in your environment.
 
 Learn more about Wazuh Cloud in the sections below.
