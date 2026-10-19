@@ -116,6 +116,14 @@ It provides features like recursive patterns, look-ahead and look-behind asserti
 
 By default, PCRE2 is case-sensitive. Use ``(?i)`` for case-insensitive matching. For example, the string ``post`` matches the regex ``(?i)POST|GET|PUT`` but not ``POST|GET|PUT``.
 
+**Matching < and > characters**
+
+Rules and decoders are XML files. The Wazuh XML parser reads a ``<`` inside an element value as the start of a new element, and it doesn't decode XML entities. To match a literal ``<`` in a PCRE2 expression, write it as the hexadecimal escape ``\x3C``. You can write ``>`` as ``\x3E`` in the same way. For example, this expression captures the address and the domain from ``from=<user@example.com>``:
+
+.. code-block:: xml
+
+   <regex type="pcre2">from=\x3C(.*?@(.*?))\x3E</regex>
+
 .. topic:: Supported expressions
 
    +-------------+----------------------------------------------------------------------------+

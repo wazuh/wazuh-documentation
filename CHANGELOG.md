@@ -80,6 +80,25 @@ All notable changes to this project will be documented in this file.
 - Removed deprecated configuration variables in the *Deployment with Puppet* documentation. ([#9378](https://github.com/wazuh/wazuh-documentation/pull/9378))
 - Removed Osquery references as this capability is now deprecated. ([#8958](https://github.com/wazuh/wazuh-documentation/pull/8958))
 
+## [v4.14.11]
+
+- Support for Wazuh 4.14.11
+
+## [v4.14.10]
+
+### Added
+
+- Added the `analysisd.rule_tree_memory_warning` and `analysisd.rule_tree_memory_limit` internal options and a section on the rule tree memory thresholds to the *Internal configuration* reference documentation. ([#10397](https://github.com/wazuh/wazuh-documentation/pull/10397))
+
+### Changed
+
+- Removed the `auth.timeout_seconds` and `auth.timeout_microseconds` internal options from the *Internal configuration* reference documentation. ([#10399](https://github.com/wazuh/wazuh-documentation/pull/10399))
+
+### Fixed
+
+- Removed Amazon Inspector Classic from the *Amazon Inspector* integration documentation, which now covers Amazon Inspector (v2) only. ([#10399](https://github.com/wazuh/wazuh-documentation/pull/10399))
+- Added the Windows and macOS agent restart commands to the steps for enabling and disabling policies in the *Security Configuration Assessment* documentation. ([#10399](https://github.com/wazuh/wazuh-documentation/pull/10399))
+
 ## [v4.14.9]
 
 ### Added
@@ -94,8 +113,9 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 
 - Fixed the Distributed deployment steps for securing the installation in the *Wazuh dashboard* step-by-step installation documentation. ([#10330](https://github.com/wazuh/wazuh-documentation/pull/10330))
-- Fixed code samples and commands that could not be copied and used as written across the *Regulatory compliance*, *Deployment options*, *Proof of concept guide* and *User manual* documentation. ([#10334](https://github.com/wazuh/wazuh-documentation/pull/10334))
-- Fixed dead links, typos, garbled sentences, broken inline markup and XML code blocks marked as `console` across the *Compliance*, *Deployment options*, *Getting started*, *Integrations guide*, *Release notes*, *Upgrade guide* and *User manual* documentation. ([#10335](https://github.com/wazuh/wazuh-documentation/pull/10335))
+- Fixed code samples and commands that could not be copied and used as written across the *Regulatory compliance*, *Deployment options*, *Development*, *Migration guide*, *Proof of concept guide*, *Upgrade guide* and *User manual* documentation. ([#10334](https://github.com/wazuh/wazuh-documentation/pull/10334)) ([#10369](https://github.com/wazuh/wazuh-documentation/pull/10369)) ([#10370](https://github.com/wazuh/wazuh-documentation/pull/10370)) ([#10371](https://github.com/wazuh/wazuh-documentation/pull/10371)) ([#10373](https://github.com/wazuh/wazuh-documentation/pull/10373)) ([#10374](https://github.com/wazuh/wazuh-documentation/pull/10374)) ([#10385](https://github.com/wazuh/wazuh-documentation/pull/10385))
+- Fixed dead links, typos, garbled sentences, broken inline markup and XML code blocks marked as `console` across the *Compliance*, *Deployment options*, *Getting started*, *Installation guide*, *Integrations guide*, *Release notes*, *Upgrade guide* and *User manual* documentation. ([#10335](https://github.com/wazuh/wazuh-documentation/pull/10335)) ([#10370](https://github.com/wazuh/wazuh-documentation/pull/10370)) ([#10372](https://github.com/wazuh/wazuh-documentation/pull/10372)) ([#10375](https://github.com/wazuh/wazuh-documentation/pull/10375))
+- Fixed incorrect field names, setting names, menu names, values and examples that did not work as written across the *Cloud security*, *User manual* and *Wazuh Cloud* documentation, including the Wazuh indexer API, the Wazuh dashboard, the Wazuh manager and the single sign-on guides. ([#10354](https://github.com/wazuh/wazuh-documentation/pull/10354)) ([#10355](https://github.com/wazuh/wazuh-documentation/pull/10355)) ([#10369](https://github.com/wazuh/wazuh-documentation/pull/10369)) ([#10370](https://github.com/wazuh/wazuh-documentation/pull/10370)) ([#10371](https://github.com/wazuh/wazuh-documentation/pull/10371)) ([#10372](https://github.com/wazuh/wazuh-documentation/pull/10372))
 
 ## [v4.14.8]
 

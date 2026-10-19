@@ -588,25 +588,25 @@ Adding a team to your repository
 
 Run the following commands to list teams and add a team to your repository:
 
-#. List your organization's team IDs.
+#. List the teams in your organization and note the ``slug`` of the team you want to add.
 
    .. code-block:: console
 
       # curl -H "Authorization: Bearer <API_TOKEN>" "https://api.github.com/orgs/<ORG_NAME>/teams"
 
-#. Input the ID of the team you want to add to your repository.
+#. Add the team to your repository using its slug.
 
    .. code-block:: console
 
       # curl -X PUT \
            -H "Authorization: Bearer <API_TOKEN>" \
            -d '{"permission": "push"}' \
-           "https://api.github.com/teams/<TEAM_ID>/repos/<ORG_NAME>/<REPO_NAME>"
+           "https://api.github.com/orgs/<ORG_NAME>/teams/<TEAM_SLUG>/repos/<ORG_NAME>/<REPO_NAME>"
 
    Where:
 
    -  ``<API_TOKEN>`` is the GitHub personal access token created within the ``admin:org`` scope.
-   -  ``<TEAM_ID>`` is the team ID.
+   -  ``<TEAM_SLUG>`` is the team slug, shown in the ``slug`` field of the previous command's output.
    -  ``<ORG_NAME>`` is your organization's name.
    -  ``<REPO_NAME>`` is the name of the repository you want to add a team to.
 
@@ -621,14 +621,14 @@ Run the following command to grant members of your team administrator privileges
      -H "Authorization: Bearer <API_TOKEN>" \
      -X PUT \
      -H "Accept: application/vnd.github.v3+json" \
-     https://api.github.com/orgs/<ORG_NAME>/teams/<TEAM_NAME>/repos/<ORG_NAME>/<REPO_NAME> \
+     https://api.github.com/orgs/<ORG_NAME>/teams/<TEAM_SLUG>/repos/<ORG_NAME>/<REPO_NAME> \
      -d '{"permission":"admin"}'
 
 Where:
 
 -  ``<API_TOKEN>`` is the GitHub personal access token created within the ``admin:org`` scope.
 -  ``<ORG_NAME>`` is your organization's name.
--  ``<TEAM_NAME>`` is the name of the specific team in your repository.
+-  ``<TEAM_SLUG>`` is the slug of the team.
 -  ``<REPO_NAME>`` is the name of the repository whose team access you want to manage.
 
 Deleting repository
@@ -663,13 +663,13 @@ Run the following command to delete the team you created:
      -H "Accept: application/vnd.github+json" \
      -H "Authorization: Bearer <API_TOKEN>" \
      -H "X-GitHub-Api-Version: 2026-03-10" \
-     https://api.github.com/orgs/<ORG_NAME>/teams/<TEAM_NAME>
+     https://api.github.com/orgs/<ORG_NAME>/teams/<TEAM_SLUG>
 
 Where:
 
 -  ``<API_TOKEN>`` is the GitHub personal access token created within the ``admin:org`` scope.
 -  ``<ORG_NAME>`` is your organization's name.
--  ``<TEAM_NAME>`` is the name of the specific team in your repository.
+-  ``<TEAM_SLUG>`` is the slug of the team.
 
 .. _github-viewing-the-findings-repository:
 

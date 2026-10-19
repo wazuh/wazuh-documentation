@@ -548,23 +548,6 @@ task:status
 
 -  :api-ref:`GET /tasks/status <operation/api.controllers.task_controller.get_tasks_status>` (:ref:`*:* <api_rbac_reference_resources>`)
 
-Vulnerability
-^^^^^^^^^^^^^
-
-The :api-ref:`/vulnerability <tag/Vulnerability>` endpoint of the Wazuh server API allows users to perform vulnerability detector scans and collect relevant information about vulnerabilities from Wazuh agents. This API endpoint has been deprecated since version 4.7.
-
-vulnerability:read
-~~~~~~~~~~~~~~~~~~
-
--  :api-ref:`GET /vulnerability/{agent_id} <operation/api.controllers.vulnerability_controller.get_vulnerability_agent>` (:ref:`agent:id <api_rbac_reference_resources>`, :ref:`agent:group <api_rbac_reference_resources>`) - *Deprecated since version 4.7*
--  :api-ref:`GET /vulnerability/{agent_id}/last_scan <operation/api.controllers.vulnerability_controller.get_last_scan_agent>` (:ref:`agent:id <api_rbac_reference_resources>`, :ref:`agent:group <api_rbac_reference_resources>`) - *Deprecated since version 4.7*
--  :api-ref:`GET /vulnerability/{agent_id}/summary/{field} <operation/api.controllers.vulnerability_controller.get_summary>` (:ref:`agent:id <api_rbac_reference_resources>`, :ref:`agent:group <api_rbac_reference_resources>`) - *Deprecated since version 4.7*
-
-vulnerability:run
-~~~~~~~~~~~~~~~~~~
-
--  :api-ref:`PUT /vulnerability <operation/api.controllers.vulnerability_controller.put_vulnerability>` (:ref:`*:* <api_rbac_reference_resources>`) - *Deprecated since version 4.7*
-
 .. _api_rbac_reference_default_policies:
 
 Default policies
@@ -651,7 +634,7 @@ Allow reading the agent ciscat results information.
 
 .. code-block:: yaml
 
-   ciscat_read_agents:
+   ciscat_read_ciscat:
      actions:
        - ciscat:read
      resources:
@@ -765,7 +748,7 @@ Allow managing all CDB lists files on the Wazuh server.
 
 .. code-block:: yaml
 
-   lists_all_files:
+   lists_all_rules:
      actions:
        - lists:read
        - lists:delete
@@ -786,7 +769,7 @@ Allow reading the path of  all the lists in the Wazuh server.
 
 .. code-block:: yaml
 
-   lists_read_lists:
+   lists_read_rules:
      actions:
        - lists:read
      resources:
@@ -1026,34 +1009,6 @@ Provides the capability to modify the users' run_as parameter.
        - '*:*:*'
      effect: allow
 
-vulnerability_read_*
-^^^^^^^^^^^^^^^^^^^^
-
-Allow reading agents' vulnerabilities information.
-
-.. code-block:: yaml
-
-   vulnerability_read_vulnerability:
-     actions:
-       - vulnerability:read
-     resources:
-       - agent:id:*
-     effect: allow
-
-vulnerability_run_*
-^^^^^^^^^^^^^^^^^^^
-
-Allow running a vulnerability detector scan.
-
-.. code-block:: yaml
-
-   vulnerability_run_resourceless:
-     actions:
-       - vulnerability:run
-     resources:
-       - '*:*:*'
-     effect: allow
-
 .. _api_rbac_reference_default_roles:
 
 Default roles
@@ -1068,8 +1023,10 @@ The administrator role has full access to all endpoints in the Wazuh server API.
 
    -  `agents_all_*`_
    -  `agents_commands_*`_
+   -  `ciscat_read_*`_
    -  `cluster_all_*`_
    -  `decoders_all_*`_
+   -  `events_ingest_*`_
    -  `lists_all_*`_
    -  `logtest_all_*`_
    -  `mitre_read_*`_
@@ -1080,13 +1037,11 @@ The administrator role has full access to all endpoints in the Wazuh server API.
    -  `syscheck_all_*`_
    -  `syscollector_read_*`_
    -  `task_status_*`_
-   -  `vulnerability_read_*`_
-   -  `vulnerability_run_*`_
 
 **Rules**
 
    -  `wui_elastic_admin`_
-   -  `wui_opendistro_admin`_
+   -  `wui_opensearch_admin`_
 
 agents_admin
 ^^^^^^^^^^^^
@@ -1142,7 +1097,6 @@ Read only role, this role can read all the information of the system.
    -  `sca_read_*`_
    -  `syscheck_read_*`_
    -  `syscollector_read_*`_
-   -  `vulnerability_read_*`_
 
 users_admin
 ^^^^^^^^^^^
@@ -1171,10 +1125,10 @@ Administrator permissions for the elastic users of the Wazuh dashboard.
        FIND:
            username: "elastic"
 
-wui_opendistro_admin
+wui_opensearch_admin
 ^^^^^^^^^^^^^^^^^^^^
 
-Administrator permissions for the opendistro users of the Wazuh dashboard.
+Administrator permissions for the OpenSearch users of the Wazuh dashboard.
 
 .. code-block:: yaml
 

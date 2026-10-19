@@ -178,7 +178,7 @@ jwt_auth_domain
 +==================+=====================+===================+===============================================================================================+
 | ``http_enabled`` | true, false         | false             | Defines if JWT-based authentication is enabled for HTTP requests.                             |
 +------------------+---------------------+-------------------+-----------------------------------------------------------------------------------------------+
-| ``order``        | Any positive        | 0                 | Indicates the sequence in which authentication domains are evaluated. This is particularly    |
+| ``order``        | 0 or any positive   | 0                 | Indicates the sequence in which authentication domains are evaluated. This is particularly    |
 |                  | integer             |                   | relevant when multiple authentication mechanisms are configured.                              |
 +------------------+---------------------+-------------------+-----------------------------------------------------------------------------------------------+
 
@@ -229,7 +229,7 @@ jwt_auth_domain.authentication_backend
 Using the Wazuh indexer API via the Wazuh dashboard
 ---------------------------------------------------
 
-Using the Wazuh indexer API from the Wazuh dashboard enables users to run API requests directly within the dashboard’s Web User Interface (WUI). Through the Wazuh dashboard, users can use the API to perform searches, manage index settings, view document details, and retrieve insights without direct access to the command line. To use the Wazuh indexer API from the Wazuh dashboard, you must log in with a user with appropriate privileges. For example, the default ``admin`` user has administrator privileges. To access the Wazuh indexer API, click the menu icon and navigate to **Index management** > **Dev Tools**.
+Using the Wazuh indexer API from the Wazuh dashboard enables users to run API requests directly within the dashboard’s Web User Interface (WUI). Through the Wazuh dashboard, users can use the API to perform searches, manage index settings, view document details, and retrieve insights without direct access to the command line. To use the Wazuh indexer API from the Wazuh dashboard, you must log in with a user with appropriate privileges. For example, the default ``admin`` user has administrator privileges. To access the Wazuh indexer API, click the menu icon and navigate to **Indexer management** > **Dev Tools**.
 
 .. thumbnail:: /images/manual/indexer-api/access-wazuh-indexer-api-from-dashboard.png
    :title: Access the Wazuh indexer API from the dashboard
@@ -602,7 +602,7 @@ The following PUT request to the Wazuh indexer API updates the Wazuh indexer clu
 DELETE
 ^^^^^^
 
-In this example, we use this DELETE request to remove documents from indexes from a specified time. First, we run a query to list the target indexes:
+In this example, we use this DELETE request to remove documents from indexes from a specified time. First, we run a query to list the documents that the DELETE request will remove:
 
 .. code-block:: bash
 
@@ -761,8 +761,8 @@ Save the following Python script as ``top_successful_login.py``:
 
        # Process and display the results
        print("Top three (3) Users with Most Successful Login Sessions:")
-       if "aggregations" in result and "successful_logins_by_users" in result["aggregations"]:
-           buckets = result["aggregations"]["successful_logins_by_users"]["buckets"]
+       if "aggregations" in result and "successful_logins_by_user" in result["aggregations"]:
+           buckets = result["aggregations"]["successful_logins_by_user"]["buckets"]
            if buckets:
                for user in buckets:
                    print(f"User: {user['key']}, Count: {user['doc_count']}")

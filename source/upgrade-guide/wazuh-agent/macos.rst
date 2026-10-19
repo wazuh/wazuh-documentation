@@ -35,14 +35,14 @@ Follow these steps to upgrade Wazuh agents locally on macOS endpoints.
          
                .. code-block:: console
 
-                  # installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.intel64.pkg -target /
+                  # sudo installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.intel64.pkg -target /
 
 
             .. group-tab:: Apple silicon
          
                .. code-block:: console
 
-                  # installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.arm64.pkg -target /
+                  # sudo installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.arm64.pkg -target /
 
                .. note::
                   

@@ -35,7 +35,7 @@ Below is an example cURL request to get Wazuh agent OS summary:
 
 .. code-block:: console
 
-   # curl -k -X GET "https://<WAZUH_MANAGER_IP>:55000/agents/summary/os?pretty=true" -H  "Authorization: Bearer $TOKEN"
+   # curl -k -X GET "https://<WAZUH_MANAGER_IP>:55000/agents/summary/os?pretty=true" -H "Authorization: Bearer $TOKEN"
 
 The cURL command for each request contains the following fields:
 
@@ -190,10 +190,7 @@ Example response with errors (HTTP 200 - error 1):
            "error": {
              "code": 1707,
              "message": "Cannot send request, agent is not active",
-             "remediation": "Please, check non-active agents connection and try again. Visit
-             https://documentation.wazuh.com/current/user-manual/registering/index.html and
-             https://documentation.wazuh.com/current/user-manual/agents/agent-connection.html
-             to obtain more information on registering and connecting agents"
+             "remediation": "Please, check non-active agents connection and try again. Visit https://documentation.wazuh.com/4.14/user-manual/registering/index.html and https://documentation.wazuh.com/4.14/user-manual/agents/agent-connection.html to obtain more information on registering and connecting agents"
            },
            "id": [
              "001",
@@ -201,7 +198,7 @@ Example response with errors (HTTP 200 - error 1):
              "009",
              "010"
            ]
-         },
+         }
        ]
      },
      "message": "Restart command was not sent to any agent",
