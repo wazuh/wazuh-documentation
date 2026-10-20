@@ -96,8 +96,6 @@ Additionally, this script allows the use of a pre-existent rootCA certificate. T
        # install -m 0400 -o root -g root /path/to/root-ca.key /etc/wazuh/ca/root-ca.key
        # bash wazuh-certs-tool.sh -A
 
-To read the root CA from another directory, set its absolute path in the ``WAZUH_CA_DIR`` environment variable, and give that directory and files the same modes.
-
 After running the script, the directory ``wazuh-certificates`` will be created and will have the following content:
 
     .. code-block:: none
