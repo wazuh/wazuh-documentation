@@ -64,6 +64,7 @@ All notable changes to this project will be documented in this file.
 - Updated the *Deployment with Ansible* documentation to Wazuh 5.0, covering generated deployment passwords, enrollment token-based agent deployment, certificate handling, and the *Roles* and *Variables references*. ([#10319](https://github.com/wazuh/wazuh-documentation/pull/10319)) ([#10341](https://github.com/wazuh/wazuh-documentation/pull/10341))
 - Updated the *Deployment on Kubernetes* documentation to Wazuh 5.0, covering the resource requirements, network policies, Amazon EKS and local cluster deployment steps, enrollment token-based agent deployment, and the clean up steps. Removed the steps to change the password of Wazuh users. ([#9941](https://github.com/wazuh/wazuh-documentation/pull/9941)) ([#10320](https://github.com/wazuh/wazuh-documentation/pull/10320)) ([#10324](https://github.com/wazuh/wazuh-documentation/pull/10324)) ([#10346](https://github.com/wazuh/wazuh-documentation/pull/10346)) ([#10358](https://github.com/wazuh/wazuh-documentation/pull/10358))
 - Updated the *Using Wazuh for NIST 800-53 compliance* documentation in *Regulatory compliance* to Wazuh 5.0. ([#10381](https://github.com/wazuh/wazuh-documentation/pull/10381))
+- Updated the *Wazuh indexer API* documentation for Wazuh 5.0, including the use of data streams and the Wazuh Common Schema fields in the examples, and the JSON Web Token authentication steps. ([#10419](https://github.com/wazuh/wazuh-documentation/pull/10419))
 
 ### Removed
 
