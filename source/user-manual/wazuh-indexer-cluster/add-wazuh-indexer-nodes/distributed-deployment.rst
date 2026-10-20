@@ -9,7 +9,7 @@ Distributed deployment
 Certificates creation and deployment
 ------------------------------------
 
-Use the pre-existing root CA to generate the certificate for the new node, so the certificates of the existing nodes remain valid. Perform the steps below in the directory that holds the ``wazuh-ca`` folder with ``root-ca.key``, where the original certificates were created.
+Use the pre-existing root CA to generate the certificate for the new node, so the certificates of the existing nodes remain valid. Perform the steps below on the host that holds ``root-ca.key`` in ``/etc/wazuh/ca``, where the original certificates were created.
 
 .. note::
 
@@ -46,7 +46,7 @@ Use the pre-existing root CA to generate the certificate for the new node, so th
 
          # tar -xf ./wazuh-install-files.tar
 
-#. Download and run the certificates tool to create the certificate for the new indexer node using the pre-existing root CA, which the tool reads from the ``wazuh-ca`` folder next to the script. Run the tool in the directory that holds that folder, so that it does not create a new root CA. The tool refuses to run when a ``wazuh-certificates`` directory already exists beside it, which is the case on the node where the original certificates were created. Rename any existing directory first so that the original certificates are kept.
+#. Download and run the certificates tool to create the certificate for the new indexer node using the pre-existing root CA, which the tool reads from ``/etc/wazuh/ca``. The tool refuses to run when a ``wazuh-certificates`` directory already exists beside it, which is the case on the node where the original certificates were created. Rename any existing directory first so that the original certificates are kept.
 
    .. code-block:: console
 
@@ -70,7 +70,7 @@ Use the pre-existing root CA to generate the certificate for the new node, so th
 
    .. note::
 
-      The new archive is named after the new node so that the original ``wazuh-certificates.tar`` is not overwritten. The root CA key, ``root-ca.key``, stays in the ``wazuh-ca`` folder and is required to sign the certificate of every node added later. Keep a backup of that folder in secure storage.
+      The new archive is named after the new node so that the original ``wazuh-certificates.tar`` is not overwritten. The root CA key, ``root-ca.key``, stays in ``/etc/wazuh/ca`` and is required to sign the certificate of every node added later. Keep a backup of ``/etc/wazuh/ca`` in secure storage.
 
 Configuring existing components to connect with the new node
 ------------------------------------------------------------
