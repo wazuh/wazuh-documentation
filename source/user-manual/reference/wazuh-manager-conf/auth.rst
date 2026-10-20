@@ -106,19 +106,15 @@ When enabled, the password is read from ``/var/wazuh-manager/etc/authd.pass``. I
 
 In a Wazuh manager cluster, the enrollment password is maintained on the master node and distributed to worker nodes. A worker node rejects enrollment until it receives the file.
 
-Agent-side setup: The Wazuh installer generates a configuration that sets ``use_password`` to ``yes`` by default. Agents must supply the enrollment password, or the manager rejects their enrollment request. First, retrieve the password from the manager:
+Agent-side setup: Wazuh 5.0 agents enroll with an enrollment token by default. The token carries its own credential, so ``use_password`` doesn't apply to token enrollment. See :ref:`Generate the enrollment token <generate_enrollment_token>`.
+
+A Wazuh 5.0 agent still sends the enrollment password when the file set in ``<enrollment><authorization_pass_path>`` exists. By default, this is ``etc/authd.pass`` in the agent installation directory (``/var/ossec/etc/authd.pass`` on Linux), or ``authd.pass`` on Windows. The Wazuh agent installer doesn't create this file: the ``WAZUH_REGISTRATION_PASSWORD`` install variable was removed and has no effect, and upgrading a Wazuh 4.x agent to 5.0 deletes the file at the default path. To enroll an agent with the password, first retrieve it from the Wazuh manager:
 
 .. code-block:: console
 
    $ sudo cat /var/wazuh-manager/etc/authd.pass
 
-We recommend providing it through the ``WAZUH_REGISTRATION_PASSWORD`` install variable. This variable writes ``etc/authd.pass`` and sets its ownership and permissions automatically:
-
-.. code-block:: console
-
-   WAZUH_MANAGER="<WAZUH_MANAGER_IP_ADDRESS>" WAZUH_REGISTRATION_PASSWORD="<password>" apt install ./wazuh-agent.deb
-
-To add it to an already installed agent, write the file manually. The agent daemon (``wazuh-agentd``) runs as the ``wazuh`` user, so the file must be readable by that user:
+Then write it to the agent's password file. The Wazuh agent daemon (``wazuh-agentd``) runs as the ``wazuh`` user, so the file must be readable by that user:
 
 .. code-block:: console
 
@@ -126,7 +122,7 @@ To add it to an already installed agent, write the file manually. The agent daem
    $ sudo chown root:wazuh /var/ossec/etc/authd.pass
    $ sudo chmod 640 /var/ossec/etc/authd.pass
 
-The agent reads the password from ``etc/authd.pass`` (relative to its install directory, typically ``/var/ossec/etc/authd.pass``) at startup.
+For the full procedure, including Windows and macOS agents, see :doc:`Using password authentication </user-manual/agent/agent-enrollment/security-options/using-password-authentication>`.
 
 **Password rotation**: The generated password persists across restarts. To rotate it (for example after a security incident), delete ``/var/wazuh-manager/etc/authd.pass`` on the master and restart ``wazuh-manager-authd``. ``wazuh-manager-authd`` generates a new random password, persists it, and distributes it to workers automatically. It logs the reuse of an existing password at ``INFO`` level on every start.
 
