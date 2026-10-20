@@ -46,13 +46,13 @@ Use the pre-existing root CA keys to generate the certificate for the new node, 
 
          # tar -xf ./wazuh-install-files.tar
 
-#. Download and run the certificates tool to create the certificate for the new indexer node using the pre-existing root CA keys. The tool refuses to run when a ``wazuh-certificates`` directory already exists beside it, which is the case on the node where the original certificates were created. Rename any existing directory first so that the original certificates are kept.
+#. Download and run the certificates tool to create the certificate for the new indexer node using the pre-existing root CA keys. The tool reads the root CA certificate and key from the directory that the ``WAZUH_CA_DIR`` environment variable sets, which must be an absolute path. The tool refuses to run when a ``wazuh-certificates`` directory already exists beside it, which is the case on the node where the original certificates were created. Rename any existing directory first so that the original certificates are kept.
 
    .. code-block:: console
 
       # curl -sO https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-certs-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh
       # [ -d wazuh-certificates ] && mv wazuh-certificates wazuh-certificates.$(date +%Y%m%d%H%M%S).bak
-      # bash wazuh-certs-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -A wazuh-install-files/root-ca.pem wazuh-install-files/root-ca.key
+      # WAZUH_CA_DIR="$PWD/wazuh-install-files" bash wazuh-certs-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -A
 
 #. Copy the newly created certificates to the ``wazuh-install-files`` folder, making sure not to replace the existing admin certificates:
 
