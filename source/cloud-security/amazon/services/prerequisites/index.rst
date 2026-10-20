@@ -6,12 +6,13 @@
 Prerequisites
 =============
 
-In this section, we outline the requirements for setting up Wazuh to retrieve logs from various AWS services.
+Wazuh needs the following requirements to retrieve logs from AWS services.
 
 .. toctree::
    :maxdepth: 2
 
    dependencies
+   enabling-integration
    S3-bucket
    iam-identities
    aws-policy
