@@ -16,6 +16,8 @@ You can download the Wazuh certs tool here:
 
    https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-certs-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh
 
+The tool reads the root CA, ``root-ca.pem`` and ``root-ca.key``, from the CA directory, the ``wazuh-ca`` folder next to the script. Only ``-A`` and ``-ca`` create the root CA there if none exists.
+
 Options list
 --------------
 
