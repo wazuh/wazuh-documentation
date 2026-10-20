@@ -68,6 +68,8 @@ Run the module immediately after the Wazuh service starts.
 | **Mandatory**        | no        |
 +----------------------+-----------+
 
+.. _aws_interval:
+
 interval
 ^^^^^^^^
 
@@ -296,6 +298,8 @@ If defined, the suffix for the bucket. Only works with buckets that contain the 
 +----------------------+--------------+
 | **Allowed values**   | Valid path   |
 +----------------------+--------------+
+
+.. _only_logs_aws_buckets:
 
 only_logs_after
 ~~~~~~~~~~~~~~~~~
@@ -662,6 +666,8 @@ The endpoint URL for the required AWS Service to be used to download the data fr
 +----------------------+----------------------------------------------+
 | **Allowed values**   | Any valid endpoint URL for the AWS Service   |
 +----------------------+----------------------------------------------+
+
+.. _subscribers:
 
 Subscribers
 ^^^^^^^^^^^^
