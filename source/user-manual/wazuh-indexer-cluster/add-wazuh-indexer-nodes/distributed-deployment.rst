@@ -46,13 +46,7 @@ Use the pre-existing root CA keys to generate the certificate for the new node, 
 
          # tar -xf ./wazuh-install-files.tar
 
-#. Download and run the certificates tool to create the certificate for the new indexer node using the pre-existing root CA keys. The tool reads the root CA from the absolute path set in the ``WAZUH_CA_DIR`` environment variable, and fails unless these modes are set:
-
-   -  Directory: ``700``
-   -  ``root-ca.key``: ``400``
-   -  ``root-ca.pem``: ``644``
-
-   The tool also refuses to run when a ``wazuh-certificates`` directory already exists beside it, which is the case on the node where the original certificates were created. The commands below set the modes and rename any existing directory, so that the original certificates are kept.
+#. Download and run the certificates tool to create the certificate for the new indexer node using the pre-existing root CA keys. The tool reads the root CA from the absolute path set in the ``WAZUH_CA_DIR`` environment variable. The tool refuses to run when a ``wazuh-certificates`` directory already exists beside it, which is the case on the node where the original certificates were created. Rename any existing directory first so that the original certificates are kept. The commands below also set the modes that the tool requires for the root CA files.
 
    .. code-block:: console
 
