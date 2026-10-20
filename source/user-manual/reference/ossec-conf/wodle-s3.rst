@@ -142,7 +142,7 @@ Time of the day to run the scan. It has to be in the hh:mm format.
 Buckets
 ^^^^^^^
 
-It is necessary to specify the type as an attribute of the ``bucket`` tag to indicate the service configured. More information about the supported services and their associated types on AWS supported services.
+It is necessary to specify the type as an attribute of the ``bucket`` tag to indicate the service configured. More information about the supported services and their associated types on :doc:`AWS supported services </cloud-security/amazon/services/supported-services/index>`.
 
 .. code-block:: xml
 
