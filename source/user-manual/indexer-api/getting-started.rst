@@ -6,12 +6,14 @@
 Getting started
 ===============
 
-This guide provides the essential information needed to utilize the Wazuh indexer API.
+This guide provides the essential information you need to use the Wazuh indexer API.
+
+In the examples, replace ``<WAZUH_INDEXER_USERNAME>`` and ``<WAZUH_INDEXER_PASSWORD>`` with the credentials of a Wazuh indexer user that has the permissions the request needs, such as ``admin``. Run the examples on the Wazuh indexer node, and replace ``<WAZUH_INDEXER_IP>`` with the ``network.host`` value of its ``/etc/wazuh-indexer/opensearch.yml`` file. On an all-in-one deployment, this value is ``127.0.0.1``.
 
 Starting and stopping the Wazuh indexer API
 -------------------------------------------
 
-By default, the Wazuh indexer API is included in the Wazuh indexer installation. You can manage or monitor the Wazuh indexer API by executing the ``systemctl`` or ``service`` commands with the Wazuh indexer service:
+By default, the Wazuh indexer API is included in the Wazuh indexer installation. You can manage or monitor the Wazuh indexer API by running the ``systemctl`` or ``service`` commands with the Wazuh indexer service.
 
 .. include:: /_templates/installations/indexer/common/restart_indexer.rst
 
@@ -20,18 +22,16 @@ By default, the Wazuh indexer API is included in the Wazuh indexer installation.
 Logging into the Wazuh indexer API
 ----------------------------------
 
-You need to be authenticated to be able to use the Wazuh indexer API service. Users can authenticate to the Wazuh indexer API using various supported methods and can select the one that best meets their requirements. Logging in to the Wazuh dashboard with a user with appropriate privileges gives the user access to the Wazuh indexer API via the dashboard. The sections below describe some options for how a user can access the Wazuh indexer API via scripts or command lines.
-
+You must authenticate to use the Wazuh indexer API. The Wazuh indexer supports several authentication methods, and you can select the one that best meets your requirements. When you log in to the Wazuh dashboard with a user that has the appropriate privileges, you can use the Wazuh indexer API from the dashboard. The following sections describe options to access the Wazuh indexer API from scripts or the command line.
 
 HTTP basic authentication
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-HTTP basic authentication is one of the simplest methods of accessing the Wazuh indexer API. The client provides credentials as a username and password with every request in this mechanism. These credentials are included in the Authorization header of the HTTP request. While this makes implementation straightforward and compatible with most tools and systems, it is less secure as the risk of exposure is high.
+HTTP basic authentication is one of the simplest methods of accessing the Wazuh indexer API. The client sends a username and password with every request in the ``Authorization`` header of the HTTP request. This method is straightforward to implement and compatible with most tools and systems. However, it's less secure because the credentials travel with every request.
 
-HTTP basic authentication is enabled by default, and its settings are specified within the ``basic_internal_auth_domain`` section in the ``/etc/wazuh-indexer/opensearch-security/config.yml`` configuration file. The default setting is seen below:
+HTTP basic authentication is enabled by default. Its settings are in the ``basic_internal_auth_domain`` section of the ``/etc/wazuh-indexer/opensearch-security/config.yml`` configuration file. The default settings are the following:
 
 .. code-block:: yaml
-   :emphasize-lines: 3,4
 
    basic_internal_auth_domain:
      description: "Authenticate via HTTP Basic against internal users database"
@@ -44,11 +44,13 @@ HTTP basic authentication is enabled by default, and its settings are specified 
      authentication_backend:
        type: intern
 
-The format to authenticate to the Wazuh indexer API using basic authentication is below. In this example, we use ``cURL`` to connect and authenticate:
+The following example uses ``curl`` to connect and authenticate with HTTP basic authentication:
 
 .. code-block:: console
 
-   # curl -k -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> https://localhost:9200/
+   # curl -k -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> https://<WAZUH_INDEXER_IP>:9200/
+
+The command output looks similar to this:
 
 .. code-block:: json
    :class: output
@@ -56,180 +58,197 @@ The format to authenticate to the Wazuh indexer API using basic authentication i
    {
      "name" : "node-1",
      "cluster_name" : "wazuh-cluster",
-     "cluster_uuid" : "XUqydNCQTuCnvtXobnRZ8w",
+     "cluster_uuid" : "hE4dRwcIS5WwgJZKXiCKUw",
      "version" : {
-       "number" : "7.10.2",
+       "distribution" : "opensearch",
+       "number" : "3.6.0",
        "build_type" : "deb",
-       "build_hash" : "9fd1835bba77ae04d48550eb4dc9be4787070806",
-       "build_date" : "2024-08-30T10:06:03.028357Z",
+       "build_hash" : "17bec3a11c6593a2dabafa83fd97e17dac8f6ac8",
+       "build_date" : "2026-10-05T15:19:59.692749060Z",
        "build_snapshot" : false,
-       "lucene_version" : "9.10.0",
-       "minimum_wire_compatibility_version" : "7.10.0",
-       "minimum_index_compatibility_version" : "7.0.0"
+       "lucene_version" : "10.4.0",
+       "minimum_wire_compatibility_version" : "2.19.0",
+       "minimum_index_compatibility_version" : "2.0.0"
      },
      "tagline" : "The OpenSearch Project: https://opensearch.org/"
    }
 
+.. _indexer_api_jwt:
 
 JSON Web Token (JWT)
 ^^^^^^^^^^^^^^^^^^^^
 
-The JSON Web Token (JWT) is another method of authenticating to the Wazuh indexer API. JWT is an open standard (RFC 7519) that defines a compact and self-contained method for securely transmitting information between parties as a JSON object.
+A JSON Web Token (JWT) is another method of authenticating to the Wazuh indexer API. JWT is an open standard (RFC 7519) that defines a compact and self-contained method for securely transmitting information between parties as a JSON object.
 
-A JWT can be self-generated using validation keys stored in the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file or generated and validated through a JSON Web Key Set (JWKS) endpoint to retrieve the key from its location on the issuer's server.
+You can use JWTs in the following ways:
 
-JWT authentication is not enabled by default, and its settings are specified within the ``dynamic`` section in the ``/etc/wazuh-indexer/opensearch-security/config.yml`` configuration file. Follow the steps below to enable and log into the Wazuh indexer using JWT authentication:
+-  **On-behalf-of tokens**: The Wazuh indexer issues a short-lived JWT for an authenticated user. It signs the token with a key stored in the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file. The following steps use this method.
+-  **External JWTs**: An external identity provider issues the token. The Wazuh indexer validates it with the ``jwt_auth_domain`` settings, or with keys retrieved from a JSON Web Key Set (JWKS) endpoint on the issuer's server. See :ref:`Configuration options <indexer_api_jwt_configuration_options>` for these settings.
 
-#. Run the following command twice to generate 64 bytes of cryptographically secure random data and output it as a Base64-encoded string:
+On-behalf-of token authentication isn't enabled by default. Its settings are in the ``on_behalf_of`` section under ``config.dynamic`` in the ``/etc/wazuh-indexer/opensearch-security/config.yml`` configuration file. Follow these steps to enable it and log in to the Wazuh indexer API with a JWT.
+
+#. Run the following command twice to generate 64 bytes of cryptographically secure random data as a single-line Base64-encoded string:
 
    .. code-block:: console
 
-      # openssl rand -base64 64
-      # openssl rand -base64 64
+      # openssl rand -base64 64 | tr -d '\n'; echo
+      # openssl rand -base64 64 | tr -d '\n'; echo
 
-#. Open the ``/etc/wazuh-indexer/opensearch-security/config.yml`` configuration file and update the highlighted settings. Use the first output as a signing key, replacing the ``<SIGNING_KEY>`` variable. Use the second output as an encryption key, replacing the ``<ENCRYPTION_KEY>`` variable below:
+#. Open the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file and add the following ``on_behalf_of`` block under ``config.dynamic``, at the same indentation level as the existing ``http`` and ``authc`` keys. Replace ``<SIGNING_KEY>`` with the first output and ``<ENCRYPTION_KEY>`` with the second output of the previous step:
 
    .. code-block:: yaml
-      :emphasize-lines: 3,4,5,6
+      :emphasize-lines: 5,6
 
       config:
         dynamic:
           on_behalf_of:
             enabled: 'true'
-            signing_key: <SIGNING_KEY>
-            encryption_key: <ENCRYPTION_KEY>
+            signing_key: "<SIGNING_KEY>"
+            encryption_key: "<ENCRYPTION_KEY>"
 
-#. Run the ``/usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh`` script to load the configuration changes made in the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file:
+   The ``signing_key`` signs the tokens with HMAC SHA-512. The ``encryption_key`` is optional and encrypts the role information in the token.
 
-   .. code-block:: console
-
-      # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /etc/wazuh-indexer/opensearch-security/config.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h 127.0.0.1 -nhnv
-
-#. Run the command below to fetch a JSON web token.
+#. Run the ``indexer-security-init.sh`` script to load the changes made in the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file:
 
    .. code-block:: console
 
-      # curl -k -u <WAZUH_INDEXER_USER>:<WAZUH_INDEXER_PASSWORD> -XPOST "https://localhost:9200/_plugins/_security/api/generateonbehalfoftoken" -H 'Content-Type: application/json' -d
-      '
-      {
-         "description":"Testing",
-         "service":"Testing Service",
-         "durationSeconds":"180"
-      }
-      '
+      # /usr/share/wazuh-indexer/bin/indexer-security-init.sh --options "-f /etc/wazuh-indexer/opensearch-security/config.yml -icl -nhnv"
 
-   Below is an example of an output.
+   The ``indexer-security-init.sh`` script runs ``securityadmin.sh`` with the admin certificate and reads the address and port from ``/etc/wazuh-indexer/opensearch.yml``. Alternatively, you can run ``securityadmin.sh`` directly:
+
+   .. code-block:: console
+
+      # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /etc/wazuh-indexer/opensearch-security/config.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h <WAZUH_INDEXER_IP> -nhnv
+
+#. Run the following command to fetch a JWT. Replace ``<WAZUH_INDEXER_USERNAME>`` and ``<WAZUH_INDEXER_PASSWORD>`` with your Wazuh indexer username and password:
+
+   .. code-block:: console
+
+      # curl -k -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> -X POST "https://<WAZUH_INDEXER_IP>:9200/_plugins/_security/api/generateonbehalfoftoken" -H 'Content-Type: application/json' -d '{"description":"Testing","service":"Testing Service","durationSeconds":"600"}'
+
+   The output is similar to the following:
 
    .. code-block:: json
       :class: output
 
-      {"user":"admin","authenticationToken":"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1ZCI6IlRlc3RpbmcgU2VydmljZSIsIm5iZiI6MTc2Nzc5Njc1NiwiaXNzIjoid2F6dWgtY2x1c3RlciIsImV4cCI6MTc2Nzc5NjkzNiwiaWF0IjoxNzY3Nzk2NzU2LCJlciI6Illid1JkVGxKVDZWRXdvR2lSZS8rblNNalVyNG9zZFM3SnlSZkg5S09LTlE9In0.oUOVhPB6WCidAIp3O9W6GQnngq0dednQQNtBIHExhMhtJcNw9h1aL6MwZ42kGr4JORbA-a-wc9IpKcrUV2omGg","durationSeconds":180}
+      {"user":"admin","authenticationToken":"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1ZCI6IlRlc3RpbmcgU2VydmljZSIs...","durationSeconds":600}
 
-   Replace the variables ``<WAZUH_INDEXER_USER>:<WAZUH_INDEXER_PASSWORD>`` with your Wazuh indexer username and password.
+   The token expires after ``durationSeconds``. The default duration is 300 seconds and the maximum is 600 seconds. The Wazuh indexer caps larger values at 600 seconds. Request a new token when it expires. You can't use an on-behalf-of token to request another token or to change a password.
 
-#. Authenticate to the Wazuh indexer API using your JWT, as seen below. In this example, we use cURL to connect and authenticate:
+#. Authenticate to the Wazuh indexer API with your JWT. The following example uses ``curl``. Replace ``<WAZUH_INDEXER_JWT>`` with the ``authenticationToken`` value from the previous step:
 
    .. code-block:: console
 
-      # curl -k -XGET "https://localhost:9200" -H "Authorization: Bearer <WAZUH_INDEXER_JWT>"
+      # curl -k -X GET "https://<WAZUH_INDEXER_IP>:9200" -H "Authorization: Bearer <WAZUH_INDEXER_JWT>"
 
-   Replace ``<WAZUH_INDEXER_JWT>`` with your generated JWT. The expected output is as seen below:
+   The output is similar to the following:
 
-   .. code-block:: none
+   .. code-block:: json
       :class: output
 
       {
         "name" : "node-1",
         "cluster_name" : "wazuh-cluster",
-        "cluster_uuid" : "XUqydNCQTuCnvtXobnRZ8w",
+        "cluster_uuid" : "hE4dRwcIS5WwgJZKXiCKUw",
         "version" : {
-          "number" : "7.10.2",
+          "distribution" : "opensearch",
+          "number" : "3.6.0",
           "build_type" : "deb",
-          "build_hash" : "9fd1835bba77ae04d48550eb4dc9be4787070806",
-          "build_date" : "2024-08-30T10:06:03.028357Z",
+          "build_hash" : "17bec3a11c6593a2dabafa83fd97e17dac8f6ac8",
+          "build_date" : "2026-10-05T15:19:59.692749060Z",
           "build_snapshot" : false,
-          "lucene_version" : "9.10.0",
-          "minimum_wire_compatibility_version" : "7.10.0",
-          "minimum_index_compatibility_version" : "7.0.0"
+          "lucene_version" : "10.4.0",
+          "minimum_wire_compatibility_version" : "2.19.0",
+          "minimum_index_compatibility_version" : "2.0.0"
         },
         "tagline" : "The OpenSearch Project: https://opensearch.org/"
       }
 
-   Optionally, you can use your JWT as an environment variable.
+   Optionally, store a new JWT in an environment variable instead of copying it by hand:
 
-You can access any API endpoint using the below structure. Replace ``<METHOD>`` with the desired method, ``<ENDPOINT>`` with the string corresponding to the endpoint you wish to access, and ``<WAZUH_INDEXER_JWT>`` with your JWT.
+   .. code-block:: console
+      :emphasize-lines: 2
 
-.. code-block:: console
+      # apt-get install -y jq
+      # export TOKEN=$(curl -s -k -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> -X POST "https://<WAZUH_INDEXER_IP>:9200/_plugins/_security/api/generateonbehalfoftoken" -H 'Content-Type: application/json' -d '{"durationSeconds":"600"}' | jq -r .authenticationToken)
 
-   # curl -k -X <METHOD> "https://localhost:9200/<ENDPOINT>" -H "Authorization: Bearer <WAZUH_INDEXER_JWT>"
+   You can access any API endpoint with the following structure. Replace ``<METHOD>`` with the HTTP method, ``<ENDPOINT>`` with the endpoint you want to access, and ``<WAZUH_INDEXER_JWT>`` with your JWT:
 
-If you are using an environment variable, replace ``<WAZUH_INDEXER_JWT>`` with your environment variable e.g. ``$TOKEN``.
+   .. code-block:: console
+
+      # curl -k -X <METHOD> "https://<WAZUH_INDEXER_IP>:9200/<ENDPOINT>" -H "Authorization: Bearer <WAZUH_INDEXER_JWT>"
+
+If you stored the JWT in an environment variable, replace ``<WAZUH_INDEXER_JWT>`` with the variable, for example, ``$TOKEN``.
+
+.. _indexer_api_jwt_configuration_options:
 
 Configuration options
 ~~~~~~~~~~~~~~~~~~~~~
 
-The JWT configurations are specified under the ``authc`` key in the ``/etc/wazuh-indexer/opensearch-security/config.yml`` configuration file. The configuration parameters are described below:
+The external JWT settings are in the ``jwt_auth_domain`` section under the ``authc`` key in the ``/etc/wazuh-indexer/opensearch-security/config.yml`` configuration file. The following tables describe the configuration parameters.
 
-jwt_auth_domain
-...............
+**jwt_auth_domain**
 
-+------------------+---------------------+-------------------+-----------------------------------------------------------------------------------------------+
-| **Sub-fields**   | **Allowed values**  | **Default value** | **Description**                                                                               |
-+==================+=====================+===================+===============================================================================================+
-| ``http_enabled`` | true, false         | false             | Defines if JWT-based authentication is enabled for HTTP requests.                             |
-+------------------+---------------------+-------------------+-----------------------------------------------------------------------------------------------+
-| ``order``        | 0 or any positive   | 0                 | Indicates the sequence in which authentication domains are evaluated. This is particularly    |
-|                  | integer             |                   | relevant when multiple authentication mechanisms are configured.                              |
-+------------------+---------------------+-------------------+-----------------------------------------------------------------------------------------------+
++------------------+-------------------------------+-------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Sub-fields**   | **Allowed values**            | **Default value** | **Description**                                                                                                                                        |
++==================+===============================+===================+========================================================================================================================================================+
+| ``http_enabled`` | ``true``, ``false``           | ``false``         | Defines if JWT-based authentication is enabled for HTTP requests.                                                                                      |
++------------------+-------------------------------+-------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``order``        | ``0`` or any positive integer | ``0``             | Sets the sequence in which the Wazuh indexer evaluates authentication domains. This is relevant when you configure multiple authentication mechanisms. |
++------------------+-------------------------------+-------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-jwt_auth_domain.http_authenticator
-..................................
-+------------------+---------------------+--------------------+-----------------------------------------------------------------------------------------------+
-| **Sub-fields**   | **Allowed values**  | **Default value**  | **Description**                                                                               |
-+==================+=====================+====================+===============================================================================================+
-| ``type``         | jwt                 | jwt                | Specifies the authentication domain.                                                          |
-+------------------+---------------------+--------------------+-----------------------------------------------------------------------------------------------+
-| ``challenge``    | true, false         | false              | Specifies if a challenge should be presented to the user during authentication.               |
-+------------------+---------------------+--------------------+-----------------------------------------------------------------------------------------------+
+**jwt_auth_domain.http_authenticator**
 
-jwt_auth_domain.http_authenticator.config
-.........................................
-+--------------------------------------+------------------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **Sub-fields**                       | **Allowed values**                       | **Default value** | **Description**                                                                                                                                                                                                                                                           |
-+======================================+==========================================+===================+===========================================================================================================================================================================================================================================================================+
-| ``signing_key``                      | Any Base64 encoded secret or public key  | null              | The signing key(s) is used to verify the JWT token. Where a symmetric key algorithm is used, set the value to the Base64 encoded secret. If an asymmetric algorithm is used, set the value to the public key. Use a comma list or enumerate the keys.                     |
-+--------------------------------------+------------------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``jwt_header``                       | Any string                               | Authorization     | The HTTP header that transmits the JWT in HTTP requests. The value typically has the following Bearer schema: ``Authorization: Bearer <token>``. Using a value other than ``Authorization`` prevents the field from being properly redacted in audit logs.                |
-+--------------------------------------+------------------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``jwt_url_parameter``                | Any string                               | null              | Used to define the name of a URL parameter if the token is not transmitted in the HTTP header but rather as a URL.                                                                                                                                                        |
-+--------------------------------------+------------------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``subject_key``                      | Any string                               | null              | Sets the name of the key in the JSON payload that stores the username. If a value is not set, the subject registered claim is used instead.                                                                                                                               |
-+--------------------------------------+------------------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``roles_key``                        | Any string                               | null              | Sets the name of the key in the JSON payload that stores the user’s role(s). Multiple values are supported by a comma-separated list of roles.                                                                                                                            |
-+--------------------------------------+------------------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``required_audience``                | Any string                               | null              | Sets the name of the audience that the JWT must specify. Multiple values are supported as a comma-separated list.                                                                                                                                                         |
-+--------------------------------------+------------------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``required_issuer``                  | Any string                               | null              | Sets the target issuer of a JWT stored in the JSON payload.                                                                                                                                                                                                               |
-+--------------------------------------+------------------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``jwt_clock_skew_tolerance_seconds`` | Any positive integer                     | 30                | Sets a time window (in seconds) to compensate for any disparity between the JWT authentication server and Wazuh indexer node clock times. It prevents authentication failures due to misalignment.                                                                        |
-+--------------------------------------+------------------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++----------------+---------------------+-------------------+----------------------------------------------------------------------------------------+
+| **Sub-fields** | **Allowed values**  | **Default value** | **Description**                                                                        |
++================+=====================+===================+========================================================================================+
+| ``type``       | ``jwt``             | ``jwt``           | Specifies the authentication domain.                                                   |
++----------------+---------------------+-------------------+----------------------------------------------------------------------------------------+
+| ``challenge``  | ``true``, ``false`` | ``false``         | Specifies if the Wazuh indexer presents a challenge to the user during authentication. |
++----------------+---------------------+-------------------+----------------------------------------------------------------------------------------+
 
-jwt_auth_domain.authentication_backend
-......................................
-+----------------------+---------------------+--------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
-| **Sub-fields**       | **Allowed values**  | **Default value**  | **Description**                                                                                                                                |
-+======================+=====================+====================+================================================================================================================================================+
-| ``type``             | noop                | noop               | This value is set to no operation (``noop``) because JWTs are self-contained and the user is authenticated at the HTTP level.                  |
-+----------------------+---------------------+--------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
+**jwt_auth_domain.http_authenticator.config**
+
++--------------------------------------+-----------------------------------------+----------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Sub-fields**                       | **Allowed values**                      | **Default value**                                              | **Description**                                                                                                                                                                                                                  |
++======================================+=========================================+================================================================+==================================================================================================================================================================================================================================+
+| ``signing_key``                      | Any Base64-encoded secret or public key | None. The default ``config.yml`` file has a placeholder value. | The key or keys that verify the JWT. With a symmetric key algorithm, set the value to the Base64-encoded secret. With an asymmetric algorithm, set the value to the public key. Use a comma-separated list to set multiple keys. |
++--------------------------------------+-----------------------------------------+----------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``jwks_uri``                         | Any URL                                 | None. The default ``config.yml`` file has a placeholder value. | The JSON Web Key Set (JWKS) endpoint that provides the keys to verify the JWT.                                                                                                                                                   |
++--------------------------------------+-----------------------------------------+----------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``jwt_header``                       | Any string                              | ``Authorization``                                              | The HTTP header that carries the JWT. The value typically uses the Bearer schema: ``Authorization: Bearer <token>``. A value other than ``Authorization`` prevents the Wazuh indexer from redacting the field in audit logs.     |
++--------------------------------------+-----------------------------------------+----------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``jwt_url_parameter``                | Any string                              | ``null``                                                       | The name of the URL parameter that carries the token when the client doesn't send it in an HTTP header.                                                                                                                          |
++--------------------------------------+-----------------------------------------+----------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``subject_key``                      | Any string                              | ``null``                                                       | The key in the JSON payload that stores the username. If you don't set a value, the Wazuh indexer uses the ``sub`` registered claim.                                                                                             |
++--------------------------------------+-----------------------------------------+----------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``roles_key``                        | Any string                              | ``null``                                                       | The key in the JSON payload that stores the user roles. The value can be a comma-separated list of roles.                                                                                                                        |
++--------------------------------------+-----------------------------------------+----------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``required_audience``                | Any string                              | ``null``                                                       | The audience that the JWT must specify. The value can be a comma-separated list.                                                                                                                                                 |
++--------------------------------------+-----------------------------------------+----------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``required_issuer``                  | Any string                              | ``null``                                                       | The issuer that the JWT must specify in its payload.                                                                                                                                                                             |
++--------------------------------------+-----------------------------------------+----------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``jwt_clock_skew_tolerance_seconds`` | Any positive integer                    | ``30``                                                         | A time window, in seconds, that compensates for clock differences between the JWT issuer and the Wazuh indexer nodes. It prevents authentication failures caused by clock drift.                                                 |
++--------------------------------------+-----------------------------------------+----------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**jwt_auth_domain.authentication_backend**
+
++----------------+--------------------+-------------------+--------------------------------------------------------------------------------------------------------------------------------+
+| **Sub-fields** | **Allowed values** | **Default value** | **Description**                                                                                                                |
++================+====================+===================+================================================================================================================================+
+| ``type``       | ``noop``           | ``noop``          | Set to no operation (``noop``) because JWTs are self-contained and the Wazuh indexer authenticates the user at the HTTP level. |
++----------------+--------------------+-------------------+--------------------------------------------------------------------------------------------------------------------------------+
 
 .. note::
 
-   The JWT values are case-sensitive. Ensure the casing matches to avoid errors
+   The JWT values are case-sensitive. Make sure the casing matches to avoid errors.
 
 Using the Wazuh indexer API via the Wazuh dashboard
 ---------------------------------------------------
 
-Using the Wazuh indexer API from the Wazuh dashboard enables users to run API requests directly within the dashboard’s Web User Interface (WUI). Through the Wazuh dashboard, users can use the API to perform searches, manage index settings, view document details, and retrieve insights without direct access to the command line. To use the Wazuh indexer API from the Wazuh dashboard, you must log in with a user with appropriate privileges. For example, the default ``admin`` user has administrator privileges. To access the Wazuh indexer API, click the menu icon and navigate to **Indexer management** > **Dev Tools**.
+You can run Wazuh indexer API requests directly in the Wazuh dashboard web user interface (WUI). From the Wazuh dashboard, you can use the API to perform searches, manage index settings, view document details, and retrieve insights without command-line access. You must log in with a user that has the appropriate privileges. For example, the default ``admin`` user has administrator privileges.
+
+To open the Wazuh indexer API console, click the upper-left menu icon and go to **Indexer management** > **Dev Tools**.
 
 .. thumbnail:: /images/manual/indexer-api/access-wazuh-indexer-api-from-dashboard.png
    :title: Access the Wazuh indexer API from the dashboard
@@ -237,7 +256,7 @@ Using the Wazuh indexer API from the Wazuh dashboard enables users to run API re
    :align: center
    :width: 100%
 
-The API Console is made up of two panes. The pane on the left collects the API request, while the pane on the right displays the query result. On the left pane, input the HTTP method, request endpoint, and any query parameters, then click the play button to execute the request. The pane on the right displays the result of the API request. See `Understanding the Wazuh indexer API request and response`_ to learn more about the basic concepts.
+The console has two panes. The left pane collects the API request, and the right pane displays the result. In the left pane, enter the HTTP method, request endpoint, and any query parameters, then click the **Send request** button, the play icon at the top right of the request, to run the request. See :ref:`Understanding the Wazuh indexer API request and response <indexer_api_request_response>` to learn more about the basic concepts.
 
 .. thumbnail:: /images/manual/indexer-api/access-wazuh-indexer-api-console.png
    :title: Access the Wazuh indexer API console
@@ -248,15 +267,19 @@ The API Console is made up of two panes. The pane on the left collects the API r
 Using the Wazuh indexer API via the command line
 ------------------------------------------------
 
-The Wazuh indexer API can also be accessed through a terminal. We use any client that can send HTTP requests to communicate with the API through the terminal, such as ``cURL``. The Wazuh indexer API service listens for incoming requests on TCP port ``9200`` and requires authentication, such as a username and password, to authorize the API request.
+You can also access the Wazuh indexer API from a terminal with any client that sends HTTP requests, such as ``curl``. The Wazuh indexer API listens for incoming requests on TCP port ``9200`` and requires authentication, such as a username and password, to authorize each request.
 
-In the example below, we use ``cURL`` to check the cluster health status of the Wazuh indexes:
+The following example uses ``curl`` to check the health status of the Wazuh indexer cluster:
 
 .. code-block:: console
 
-   # curl -k -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> https://localhost:9200/_cluster/health?pretty
+   # curl -k -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> "https://<WAZUH_INDEXER_IP>:9200/_cluster/health?pretty"
 
-.. code-block:: none
+Replace ``<WAZUH_INDEXER_USERNAME>`` and ``<WAZUH_INDEXER_PASSWORD>`` with the correct credentials.
+
+The output is similar to the following. The number of shards depends on your deployment.
+
+.. code-block:: json
    :class: output
 
    {
@@ -267,8 +290,8 @@ In the example below, we use ``cURL`` to check the cluster health status of the 
      "number_of_data_nodes" : 1,
      "discovered_master" : true,
      "discovered_cluster_manager" : true,
-     "active_primary_shards" : 16,
-     "active_shards" : 16,
+     "active_primary_shards" : 110,
+     "active_shards" : 110,
      "relocating_shards" : 0,
      "initializing_shards" : 0,
      "unassigned_shards" : 0,
@@ -279,31 +302,28 @@ In the example below, we use ``cURL`` to check the cluster health status of the 
      "active_shards_percent_as_number" : 100.0
    }
 
-Replace ``<WAZUH_INDEXER_USERNAME>`` and ``<WAZUH_INDEXER_PASSWORD>`` with the correct credentials.
-
 Using the Wazuh indexer API via a script
 ----------------------------------------
 
-Accessing the Wazuh indexer API with a script is a convenient way to interact with the API when automation is required. The Wazuh indexer supports any programming language that can process HTTP requests. This section demonstrates how to use Python and Bash to interact with the Wazuh indexer API. This approach allows for the development of custom workflows that can integrate the indexer data into broader security operations, automate repetitive tasks, or quickly retrieve data for analysis and reporting.
+Scripts are a convenient way to interact with the Wazuh indexer API when you need automation. You can use any programming language that can send HTTP requests. This section shows how to use Python and Bash with the Wazuh indexer API. With scripts, you can build custom workflows that integrate Wazuh indexer data into broader security operations, automate repetitive tasks, or quickly retrieve data for analysis and reporting.
 
 Using Python
 ^^^^^^^^^^^^
 
-The Python ``requests`` library allows us to send HTTP requests to the Wazuh Indexer API endpoints. With a Python script, we can automatically handle authentication, parse, and manipulate the Wazuh indexer responses within the script. In the ``check_wazuh_indexer_health.py`` script below, we query the Wazuh indexer health status using Python.
+The Python ``requests`` library sends HTTP requests to the Wazuh indexer API endpoints. A Python script can handle authentication and parse and manipulate the Wazuh indexer responses. The following ``check_wazuh_indexer_health.py`` script queries the Wazuh indexer health status. Save the following script as ``check_wazuh_indexer_health.py:``
 
-.. code-block:: python
-   :emphasize-lines: 12,13
-   
+.. code-block:: python3
+   :emphasize-lines: 5,11,12
+
    import requests
    from requests.auth import HTTPBasicAuth
 
    # Base URL and endpoint
-   wazuh_indexer_url = "https://localhost:9200"
+   wazuh_indexer_url = "https://<WAZUH_INDEXER_IP>:9200"
    endpoint = "/_cluster/health"
 
    # Full URL
    url = wazuh_indexer_url + endpoint
-
    # Credentials for authentication
    username = "<WAZUH_INDEXER_USERNAME>"
    password = "<WAZUH_INDEXER_PASSWORD>"
@@ -324,20 +344,21 @@ The Python ``requests`` library allows us to send HTTP requests to the Wazuh Ind
            print(f"Number of Nodes: {cluster_health['number_of_nodes']}")
            print(f"Active Primary Shards: {cluster_health['active_primary_shards']}")
            print(f"Active Shards: {cluster_health['active_shards']}")
+
        else:
            print(f"Failed to retrieve cluster health. Status Code: {response.status_code}")
            print(response.text)
 
    except Exception as e:
-       print("Error connecting to Wazuh Indexer:", e)
+       print("Error connecting to Wazuh indexer:", e)
 
-Replace ``<WAZUH_INDEXER_USERNAME>`` and ``<WAZUH_INDEXER_PASSWORD>`` with the correct credentials. Follow the steps below to run the script.
+Replace ``<WAZUH_INDEXER_USERNAME>`` and ``<WAZUH_INDEXER_PASSWORD>`` with the correct credentials. Follow these steps to run the script.
 
-#. Install the Python ``requests`` module:
+#. Install the Python ``requests`` module. On Ubuntu and Debian, install it from the distribution packages:
 
    .. code-block:: console
 
-      # python3 -m pip install requests
+      # apt-get install -y python3-requests
 
 #. Run the ``check_wazuh_indexer_health.py`` Python script:
 
@@ -345,72 +366,81 @@ Replace ``<WAZUH_INDEXER_USERNAME>`` and ``<WAZUH_INDEXER_PASSWORD>`` with the c
 
       # python3 check_wazuh_indexer_health.py
 
+   The output is similar to the following:
+
    .. code-block:: none
       :class: output
-   
+
       Cluster Health Status
       Status: green
       Number of Nodes: 1
-      Active Primary Shards: 16
-      Active Shards: 16
+      Active Primary Shards: 110
+      Active Shards: 110
 
-.. note::
+   .. note::
 
-   When using the script in a production environment, it is advised to use environment variables or a secrets manager to secure the authentication credentials from exposure. See :doc:`securing-indexer-api` for more information.
-
-   The script is run from the Wazuh indexer node. You can run it from a remote host by replacing the value of ``wazuh_indexer_url`` with the IP address or hostname of the Wazuh indexer node.
+      In a production environment, we recommend that you use environment variables or a secrets manager to protect the authentication credentials from exposure. See :doc:`Securing the Wazuh indexer API <securing-indexer-api>` for more information.
 
 Using Bash
 ^^^^^^^^^^
 
-You can also interact with the Wazuh indexer API using a bash script. A bash script is preferable when you do not want to install additional programs like Python. In the following ``check_wazuh_indexer_health.sh`` bash script, we query the Wazuh indexer API to retrieve the cluster health status.
+You can also interact with the Wazuh indexer API using a Bash script. A Bash script is useful when you don't want to install additional programs such as Python. The following ``check_wazuh_indexer_health.sh`` Bash script queries the Wazuh indexer API to retrieve the cluster health status.
 
-#. Create a bash script called ``check_wazuh_indexer_health.sh`` and paste the content below:
+#. Create a Bash script called ``check_wazuh_indexer_health.sh`` and paste the following content:
 
    .. code-block:: bash
-      :emphasize-lines: 7,8
+      :emphasize-lines: 4,8,9
 
       #!/bin/bash
 
-      # Base URL and endpoint for Wazuh Indexer API
-      WAZUH_INDEXER_URL="https://localhost:9200"
+      # Base URL and endpoint for the Wazuh indexer API
+      WAZUH_INDEXER_URL="https://<WAZUH_INDEXER_IP>:9200"
       ENDPOINT="/_cluster/health"
+
       FULL_URL="${WAZUH_INDEXER_URL}${ENDPOINT}"
       USERNAME="<WAZUH_INDEXER_USERNAME>"
       PASSWORD="<WAZUH_INDEXER_PASSWORD>"
 
       # Make the API request using basic authentication
       response=$(curl -s -k -u "$USERNAME:$PASSWORD" "$FULL_URL")
+
       # Check if the request was successful
       if [ $? -eq 0 ]; then
         echo "Cluster Health Status:"
+
         # Check if jq is installed
         if command -v jq > /dev/null; then
           echo "$response" | jq .
+
         else
           echo "Warning: 'jq' is not installed. Displaying raw JSON response:"
           echo "$response"
         fi
+
       else
         echo "Error: Failed to retrieve cluster health."
+
       fi
 
-#. Run the following command to make the above script executable:
+#. Run the following command to make the script executable:
 
    .. code-block:: console
 
       # chmod +x check_wazuh_indexer_health.sh
 
-#. Run the ``check_wazuh_indexer_health`` script:
+#. Run the ``check_wazuh_indexer_health.sh`` script:
 
    .. code-block:: console
 
       # ./check_wazuh_indexer_health.sh
 
+   The output is similar to the following:
+
    .. code-block:: none
       :class: output
 
       Cluster Health Status:
+
       {
         "cluster_name": "wazuh-cluster",
         "status": "green",
@@ -419,8 +449,8 @@ You can also interact with the Wazuh indexer API using a bash script. A bash scr
         "number_of_data_nodes": 1,
         "discovered_master": true,
         "discovered_cluster_manager": true,
-        "active_primary_shards": 30,
-        "active_shards": 30,
+        "active_primary_shards": 110,
+        "active_shards": 110,
         "relocating_shards": 0,
         "initializing_shards": 0,
         "unassigned_shards": 0,
@@ -428,58 +458,56 @@ You can also interact with the Wazuh indexer API using a bash script. A bash scr
         "number_of_pending_tasks": 0,
         "number_of_in_flight_fetch": 0,
         "task_max_waiting_in_queue_millis": 0,
-        "active_shards_percent_as_number": 100
+        "active_shards_percent_as_number": 100.0
       }
 
-.. note::
+   .. note::
 
-   When using the script in a production environment, it is advised to use environment variables or a secrets manager to secure the authentication credentials from exposure. See :doc:`securing-indexer-api` for more information.
+      In a production environment, we recommend that you use environment variables or a secrets manager to protect the authentication credentials from exposure. See :doc:`Securing the Wazuh indexer API <securing-indexer-api>` for more information.
 
-   The script is run from the Wazuh indexer node. You can run it from a remote host by replacing the value of ``indexer_url`` with the IP address or hostname of the Wazuh indexer node.
+.. _indexer_api_request_response:
 
 Understanding the Wazuh indexer API request and response
 --------------------------------------------------------
 
-A standard Wazuh indexer API request consists of three essential components: the request method (GET, POST, PUT, or DELETE), the API URL, which specifies the endpoint being accessed, and user credentials for authentication and authorization of the request. Below is an example cURL request:
+A standard Wazuh indexer API request has three essential components:
+
+-  The request method: ``GET``, ``POST``, ``PUT``, or ``DELETE``
+-  The API URL, which specifies the endpoint
+-  User credentials for authentication and authorization
+
+The following is an example cURL request:
 
 .. code-block:: console
 
-   # curl -k -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> -XGET https://localhost:9200/_cluster/health?pretty
+   # curl -k -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> -X GET "https://<WAZUH_INDEXER_IP>:9200/_cluster/health?pretty"
 
 The cURL command for each request contains the following fields:
 
-+--------------------------------------+-----------------------------------------------------------------------------------------------------------------+
-| **Field**                            | **Description**                                                                                                 |
-+======================================+=================================================================================================================+
-| ``-X GET/POST/PUT/DELETE``           | Specify a request method to use when communicating with the HTTP server.                                        |
-+--------------------------------------+-----------------------------------------------------------------------------------------------------------------+
-| ``http://<WAZUH_INDEXER_IP>:9200/``  | The API URL to use. Specify ``http`` or ``https`` depending on whether SSL is activated in the API.             |
-| ``<ENDPOINT>``                       |                                                                                                                 |
-|                                      |                                                                                                                 |
-| ``https://<WAZUH_INDEXER_IP>:9200/`` |                                                                                                                 |
-| ``<ENDPOINT>``                       |                                                                                                                 |
-+--------------------------------------+-----------------------------------------------------------------------------------------------------------------+
-| ``-k``                               | Suppress SSL certificate errors (only if you use the default self-signed certificates).                         |
-+--------------------------------------+-----------------------------------------------------------------------------------------------------------------+
-| ``-u``                               | Used to specify user credentials for HTTP Basic Authentication. It allows you to provide a username and         |
-|                                      | password required by the indexer API.                                                                           |
-+--------------------------------------+-----------------------------------------------------------------------------------------------------------------+
++------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Field**                                      | **Description**                                                                                                                                                                          |
++================================================+==========================================================================================================================================================================================+
+| ``-X`` ``GET``/``POST``/``PUT``/``DELETE``     | The request method to use when communicating with the HTTP server.                                                                                                                       |
++------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``https://<WAZUH_INDEXER_IP>:9200/<ENDPOINT>`` | The API URL. The Wazuh indexer API uses HTTPS by default. Use ``http`` only if you disabled TLS on the HTTP layer.                                                                       |
++------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``-k``                                         | Skips TLS certificate verification. Use it only with self-signed certificates. To verify the certificate instead, replace ``-k`` with ``--cacert /etc/wazuh-indexer/certs/root-ca.pem``. |
++------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``-u``                                         | The user credentials for HTTP basic authentication. Use the format ``<USERNAME>:<PASSWORD>``. If you enter only the username, ``curl`` prompts for the password.                         |
++------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
--  The number of documents a single query returns is restricted to 10,000 results. This is controlled by the ``index.max_result_window`` setting. If you need more results, you can either:
-   
-   -  Use pagination by adjusting the ``from`` and ``size`` parameters to paginate the result. This must still be within the 10,000 limit.
-   -  Increase the ``index.max_result_window`` value in the cluster settings. This option is not advised as it can increase memory usage and degrade performance.
+-  A single search returns at most 10,000 results. The ``index.max_result_window`` index setting controls this limit. If you need more results, use one of the following options:
 
--  All responses include an HTTP status code: 2xx (success), 4xx (client error), 5xx (server error), etc.
+   -  Paginate the results with the ``from`` and ``size`` parameters. The sum of ``from`` and ``size`` must stay within the 10,000 limit.
+   -  Increase the ``index.max_result_window`` value in the settings of the target indexes. We don't recommend this option because it increases memory usage and can degrade performance.
 
--  All requests accept the ``pretty`` parameter to convert the JSON response to a more human-readable format.
+-  All responses include an HTTP status code: 2xx for success, 4xx for client errors, and 5xx for server errors.
+-  All requests accept the ``pretty`` parameter, which formats the JSON response for readability.
+-  The Wazuh indexer stores its logs in ``/var/log/wazuh-indexer/wazuh-cluster.log`` and ``/var/log/wazuh-indexer/wazuh-cluster_server.json``.
 
--  The Wazuh indexer API stores logs in ``/var/log/wazuh-indexer/wazuh-cluster.log`` and ``/var/log/wazuh-indexer/wazuh-cluster_server.json``.
+Example response without errors (HTTP status code 200). The request is ``GET`` ``_plugins/_security/api/permissionsinfo``:
 
-Example response without errors (HTTP status code 200)
-
-.. code-block:: none
-   :class: output
+.. code-block:: json
 
    {
      "user" : "User [name=admin, backend_roles=[admin], requestedTenant=null]",
@@ -488,39 +516,36 @@ Example response without errors (HTTP status code 200)
      "disabled_endpoints" : { }
    }
 
-Example response with errors (HTTP status code 200)
+Example response that reports a resource not found (HTTP status code 404). The request is ``GET _plugins/_security/api/actiongroups/admin``:
 
-.. code-block:: none
-   :class: output
+.. code-block:: json
 
    {
      "status" : "NOT_FOUND",
      "message" : "actiongroup 'admin' not found."
    }
 
-Example response to report a permission denied error (HTTP status code 403)
+Example response that reports a permission denied error (HTTP status code 403):
 
-.. code-block:: none
-   :class: output
+.. code-block:: json
 
    {
-     "error":{
-        "root_cause":[
-           {
-              "type":"security_exception",
-              "reason":"no permissions for [cluster:monitor/main] and User [name=admin, backend_roles=[all_access], requestedTenant=null]"
-           }
-        ],
-        "type":"security_exception",
-        "reason":"no permissions for [cluster:monitor/main] and User [name=admin, backend_roles=[all_access], requestedTenant=null]"
+     "error" : {
+       "root_cause" : [
+         {
+           "type" : "security_exception",
+           "reason" : "no permissions for [cluster:monitor/health] and User [name=<WAZUH_INDEXER_USERNAME>, backend_roles=[], requestedTenant=null]"
+         }
+       ],
+       "type" : "security_exception",
+       "reason" : "no permissions for [cluster:monitor/health] and User [name=<WAZUH_INDEXER_USERNAME>, backend_roles=[], requestedTenant=null]"
      },
-     "status":403
+     "status" : 403
    }
 
-Example response to report a resource not found exception (HTTPS status code 404)
+Example response that reports an index not found exception (HTTP status code 404). The request is ``GET testindex/_search``:
 
-.. code-block:: none
-   :class: output
+.. code-block:: json
 
    {
      "error" : {
@@ -540,7 +565,7 @@ Example response to report a resource not found exception (HTTPS status code 404
        "resource.id" : "testindex",
        "resource.type" : "index_or_alias",
        "index_uuid" : "_na_"
-     },      
+     },
      "status" : 404
    }
 
@@ -550,29 +575,31 @@ Practical examples of Wazuh indexer API methods
 GET
 ^^^
 
-The following GET request retrieves basic information about the Wazuh indexer API, such as its cluster name, version, revision, hostname, and compatibility information.
+The following GET request retrieves basic information about the Wazuh indexer, such as its node name, cluster name, version, and compatibility information.
 
 .. code-block:: console
 
-   curl -k -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> -X GET https://localhost:9200/
+   # curl -k -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> -X GET "https://<WAZUH_INDEXER_IP>:9200/?pretty"
 
+The output is similar to the following:
 
-.. code-block:: none
+.. code-block:: json
    :class: output
 
    {
      "name" : "node-1",
      "cluster_name" : "wazuh-cluster",
-     "cluster_uuid" : "XUqydNCQTuCnvtXobnRZ8w",
+     "cluster_uuid" : "hE4dRwcIS5WwgJZKXiCKUw",
      "version" : {
-       "number" : "7.10.2",
+       "distribution" : "opensearch",
+       "number" : "3.6.0",
        "build_type" : "deb",
-       "build_hash" : "9fd1835bba77ae04d48550eb4dc9be4787070806",
-       "build_date" : "2024-08-30T10:06:03.028357Z",
+       "build_hash" : "17bec3a11c6593a2dabafa83fd97e17dac8f6ac8",
+       "build_date" : "2026-10-05T15:19:59.692749060Z",
        "build_snapshot" : false,
-       "lucene_version" : "9.10.0",
-       "minimum_wire_compatibility_version" : "7.10.0",
-       "minimum_index_compatibility_version" : "7.0.0"
+       "lucene_version" : "10.4.0",
+       "minimum_wire_compatibility_version" : "2.19.0",
+       "minimum_index_compatibility_version" : "2.0.0"
      },
      "tagline" : "The OpenSearch Project: https://opensearch.org/"
    }
@@ -580,13 +607,15 @@ The following GET request retrieves basic information about the Wazuh indexer AP
 PUT
 ^^^
 
-The following PUT request to the Wazuh indexer API updates the Wazuh indexer cluster setting to change the value of ``search.max_buckets`` to 75000. The ``search.max_buckets`` setting controls the maximum aggregation buckets allowed in                                                                                               response to a single query.
+The following PUT request updates the Wazuh indexer cluster settings to change the value of ``search.max_buckets`` to ``75000``. The ``search.max_buckets`` setting controls the maximum number of aggregation buckets allowed in the response to a single query. A ``transient`` setting applies until the next full cluster restart. Use ``persistent`` instead to keep the value after a restart.
 
 .. code-block:: console
 
-   # curl -k -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> -H "Content-Type: application/json" -X PUT "https://localhost:9200/_cluster/settings?pretty" -d '{"transient": {"search.max_buckets": 75000}}'
+   # curl -k -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> -H "Content-Type: application/json" -X PUT "https://<WAZUH_INDEXER_IP>:9200/_cluster/settings?pretty" -d '{"transient": {"search.max_buckets": 75000}}'
 
-.. code-block:: none
+The output is similar to the following:
+
+.. code-block:: json
    :class: output
 
    {
@@ -599,204 +628,266 @@ The following PUT request to the Wazuh indexer API updates the Wazuh indexer clu
      }
    }
 
-DELETE
-^^^^^^
+POST
+^^^^
 
-In this example, we use this DELETE request to remove documents from indexes from a specified time. First, we run a query to list the documents that the DELETE request will remove:
+In this example, you send a POST request to the ``_search`` endpoint to list the events indexed within a time range in the event data streams. The query uses a ``range`` filter on the ``@timestamp`` field and returns the matching documents without changing them. Replace ``<START_TIMESTAMP>`` and ``<END_TIMESTAMP>`` with dates and times in ISO 8601 format, for example, ``2026-10-01T00:00:00Z`` and ``2026-10-02T00:00:00Z``:
 
 .. code-block:: bash
+   :emphasize-lines: 1,5,6
 
-   curl -X POST "https://localhost:9200/wazuh-alerts-4.x-2024*/_search?pretty" \
-   -H "Content-Type: application/json" \
-   -u "<WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD>" \
-   -k \
-   -d '{
+   curl -X POST "https://<WAZUH_INDEXER_IP>:9200/wazuh-events-v5-*/_search?pretty" -H "Content-Type: application/json" -u "<WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD>" -k -d '{
      "query": {
        "range": {
          "@timestamp": {
-           "gt": "2024-11-25T00:00:00Z"
+           "gt": "<START_TIMESTAMP>",
+           "lte": "<END_TIMESTAMP>"
          }
        }
      }
    }'
 
-In the query above, we query the index ``wazuh-alerts-4.x-2024`` using a wildcard ``*`` to match all associated documents in the index pattern. We also use a timestamp query to filter and return only the documents with a timestamp greater than (``gt``) the specified value.
-
+The query targets all the ``wazuh-events-v5-*`` data streams with the wildcard ``*``. The ``range`` query returns only the documents with a timestamp after ``<START_TIMESTAMP>`` and up to ``<END_TIMESTAMP>``. The output is similar to the following:
 
 .. code-block:: none
    :class: output
-   :emphasize-lines: 12
-   
+
    {
      "took" : 23,
      "timed_out" : false,
      "_shards" : {
-       "total" : 30,
-       "successful" : 30,
+       "total" : 8,
+       "successful" : 8,
        "skipped" : 0,
        "failed" : 0
      },
      "hits" : {
        "total" : {
-         "value" : 8,
+         "value" : 30,
          "relation" : "eq"
        },
        "max_score" : 1.0,
        ...
 
-In the output above, we observe eight (8) documents matching the query. Next, we use DELETE to remove these documents from the index.
+In the output above, thirty (30) documents match the query.
 
-.. code-block:: bash
+DELETE
+^^^^^^
 
-   curl -X DELETE "https://localhost:9200/wazuh-alerts-4.x-2024*?pretty" -H "Content-Type: application/json" -u "$indexer_username:$indexer_password" -k -d '{
-     "query": {
-       "range": {
-         "@timestamp": {
-           "gt": "2024-11-25T00:00:00Z"
-         }
-       }
-     }
-   }'
+The following DELETE request removes a single event from the Wazuh indexer. Data streams are designed for append-only data, so you delete a document from the backing index that stores it, not from the data stream name.
 
-In the output, we see that the query ran successfully.
+First, run a search to find the event to delete. The following request returns one event indexed within a time range, without the document content. Replace ``<START_TIMESTAMP>`` and ``<END_TIMESTAMP>`` with dates and times in ISO 8601 format, for example, ``2026-10-01T00:00:00Z`` and ``2026-10-02T00:00:00Z``:
 
-.. code-block:: none
+.. code-block:: console
+
+   # curl -k -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> -H "Content-Type: application/json" -X POST "https://<WAZUH_INDEXER_IP>:9200/wazuh-events-v5-*/_search?pretty" -d '{"size": 1, "_source": false, "query": {"range": {"@timestamp": {"gt": "<START_TIMESTAMP>", "lte": "<END_TIMESTAMP>"}}}}'
+
+The output is similar to the following. The ``_index`` field is the backing index that stores the event, and ``_id`` is the document ID:
+
+.. code-block:: json
    :class: output
 
    {
-     "acknowledged" : true
-   }
-
-To verify the documents are deleted, we run the initial query to search for the documents. As seen from the output, no matches indicate that the documents are deleted.
-
-.. code-block:: none
-   :class: output
-   :emphasize-lines: 12
-
-   {
-     "took" : 0,
+     "took" : 5,
      "timed_out" : false,
      "_shards" : {
-       "total" : 0,
-       "successful" : 0,
+       "total" : 8,
+       "successful" : 8,
        "skipped" : 0,
        "failed" : 0
      },
      "hits" : {
        "total" : {
-         "value" : 0,
+         "value" : 30,
          "relation" : "eq"
        },
-       "max_score" : 0.0,
-       "hits" : [ ]
+       "max_score" : 1.0,
+       "hits" : [
+         {
+           "_index" : ".ds-wazuh-events-v5-system-activity-000001",
+           "_id" : "jWOBMaEBsTl-Vx86cIPk",
+           "_score" : 1.0
+         }
+       ]
      }
    }
+
+Next, delete the document. Replace ``<BACKING_INDEX>`` with the ``_index`` value and ``<DOCUMENT_ID>`` with the ``_id`` value from the previous output. The ``refresh=true`` parameter makes the deletion visible to searches immediately:
+
+.. code-block:: console
+
+   # curl -k -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> -X DELETE "https://<WAZUH_INDEXER_IP>:9200/<BACKING_INDEX>/_doc/<DOCUMENT_ID>?refresh=true&pretty"
+
+The output is similar to the following. The ``result`` field is ``deleted``:
+
+.. code-block:: json
+   :class: output
+
+   {
+     "_index" : ".ds-wazuh-events-v5-system-activity-000001",
+     "_id" : "jWOBMaEBsTl-Vx86cIPk",
+     "_version" : 2,
+     "result" : "deleted",
+     "forced_refresh" : true,
+     "_shards" : {
+       "total" : 1,
+       "successful" : 1,
+       "failed" : 0
+     },
+     "_seq_no" : 30,
+     "_primary_term" : 1
+   }
+
+To verify that the document is deleted, retrieve it by its ID:
+
+.. code-block:: console
+
+   # curl -k -u <WAZUH_INDEXER_USERNAME>:<WAZUH_INDEXER_PASSWORD> -X GET "https://<WAZUH_INDEXER_IP>:9200/<BACKING_INDEX>/_doc/<DOCUMENT_ID>?pretty"
+
+The Wazuh indexer returns HTTP status code 404, and the output shows ``"found" : false``:
+
+.. code-block:: json
+   :class: output
+
+   {
+     "_index" : ".ds-wazuh-events-v5-system-activity-000001",
+     "_id" : "jWOBMaEBsTl-Vx86cIPk",
+     "found" : false
+   }
+
+.. warning::
+
+   A ``DELETE`` request on an index, such as ``DELETE`` ``/<INDEX_NAME>``, removes the entire index and ignores any query in the request body. Use ``_delete_by_query`` to remove only the documents that match a query. To remove a whole data stream and its backing indexes, use ``DELETE`` ``/_data_stream/<DATA_STREAM_NAME>``. The deleted data can't be recovered.
 
 Practical examples of Wazuh indexer API access tools
 ----------------------------------------------------
 
-This section demonstrates how to send requests to the Wazuh indexer API using cURL, Python scripts, Bash scripts, and the Wazuh dashboard. These examples serve as foundational knowledge for more advanced use cases you may envision.
+This section shows how to send requests to the Wazuh indexer API with cURL, Python scripts, Bash scripts, and the Wazuh dashboard. These examples are a foundation for more advanced use cases.
+
+The Python and Bash examples query the ``wazuh-events-v5-*`` data streams for authentication events. They use the following Wazuh Common Schema (WCS) fields:
+
+-  ``event.category``: The event category, such as ``authentication``.
+-  ``event.outcome``: The result of the event, ``success`` or ``failure``.
+-  ``user.name``: The name of the user.
+
+These queries return results only after a Wazuh agent sends authentication logs, for example, from a monitored Linux endpoint. The Wazuh manager doesn't collect the logs of its own host, so a new installation has no events or findings until a Wazuh agent reports. Without matching events, the requests succeed and return empty results.
 
 cURL
 ^^^^
 
-cURL is a command-line tool for sending HTTP/HTTPS requests and commands. It comes pre-installed on many Linux, macOS, and Windows endpoints, allowing users to interact directly with the Wazuh indexer API from the command line. In the examples below, we store the Wazuh API credentials as environment variables and interact with different endpoints. For detailed instructions on obtaining authentication, please refer to the :ref:`logging_into_wazuh_indexer_api` section.
+cURL is a command-line tool for sending HTTP and HTTPS requests. It comes preinstalled on most Linux, macOS, and Windows endpoints, so you can interact directly with the Wazuh indexer API from the command line. In the examples, you store the Wazuh indexer credentials or JWT as environment variables and interact with different endpoints. For detailed instructions on authentication, see :ref:`Logging into the Wazuh indexer API <logging_into_wazuh_indexer_api>`.
 
 .. note::
 
-   When sending a cURL request that contains JSON data, we must set the content type to JSON using the header ``-H "Content-Type: application/json"``
+   When you send a cURL request that contains JSON data, set the content type to JSON with the ``-H "Content-Type: application/json"`` header.
 
 Python
 ^^^^^^
 
-You can use a Python script to retrieve information about documents from any index in the Wazuh indexer. In this example, we query the ``wazuh-alerts*`` index to find the top three (3) users with the most successful logins via SSH on monitored endpoints. The script authenticates with the Wazuh indexer API using any authentication method (we use JWT in this example). Then, it makes a POST request to retrieve the required information.
+You can use a Python script to retrieve information about documents from any index in the Wazuh indexer. In this example, you query the ``wazuh-events-v5-*`` data streams to find the top three (3) users with the most successful logins on monitored endpoints. The script authenticates to the Wazuh indexer API with a JWT. Then, it makes a POST request to retrieve the required information.
 
-Save the following Python script as ``top_successful_login.py``:
+#. Save the following Python script as ``top_successful_login.py``:
 
-.. code-block:: python
-   :emphasize-lines: 11
-   
-   import requests
-   import json
+   .. code-block:: python3
+      :emphasize-lines: 5,11
 
-   # Base URL and endpoint
-   indexer_url = "https://localhost:9200"
-   endpoint = "/wazuh-alerts*/_search"
-   url = indexer_url + endpoint
+      import requests
+      import json
 
-   headers = {
-       "Content-Type": "application/json",
-       "Authorization": "Bearer <WAZUH_INDEXER_JWT>"
-   }
+      # Base URL and endpoint
+      indexer_url = "https://<WAZUH_INDEXER_IP>:9200"
+      endpoint = "/wazuh-events-v5-*/_search"
+      url = indexer_url + endpoint
 
-   # Query payload
-   payload = {
-       "size": 0,
-       "query": {
-           "match": {
-               "rule.description": "PAM: Login session opened."
-           }
-       },
-       "aggs": {
-           "successful_logins_by_user": {
-               "terms": {
-                   "field": "data.dstuser",
-                   "size": 3,
-                   "order": {
-                       "_count": "desc"
-                   }
-               }
-           }
-       }
-   }
+      headers = {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer <WAZUH_INDEXER_JWT>"
+      }
 
-   # Disable SSL warnings
-   requests.packages.urllib3.disable_warnings()
+      # Query payload
+      payload = {
+          "size": 0,
+          "query": {
+              "bool": {
+                  "filter": [
+                      {"term": {"event.category": "authentication"}},
+                      {"term": {"event.outcome": "success"}}
+                  ]
+              }
+          },
+          "aggs": {
+              "successful_logins_by_user": {
+                  "terms": {
+                      "field": "user.name",
+                      "size": 3,
+                      "order": {
+                          "_count": "desc"
+                      }
+                  }
+              }
+          }
+      }
 
-   # Execute the API request
-   try:
-       response = requests.post(url, headers=headers, data=json.dumps(payload), verify=False)
-       response.raise_for_status()  # Raise an exception for HTTP errors
-       result = response.json()  # Parse the JSON response
+      # Disable SSL warnings
+      requests.packages.urllib3.disable_warnings()
 
-       # Process and display the results
-       print("Top three (3) Users with Most Successful Login Sessions:")
-       if "aggregations" in result and "successful_logins_by_user" in result["aggregations"]:
-           buckets = result["aggregations"]["successful_logins_by_user"]["buckets"]
-           if buckets:
-               for user in buckets:
-                   print(f"User: {user['key']}, Count: {user['doc_count']}")
-           else:
-               print("No data found for the query.")
-       else:
-           print("Unexpected response format.")
-   except requests.exceptions.RequestException as e:
-       print(f"Error querying Wazuh API: {e}")
+      # Execute the API request
+      try:
+          response = requests.post(url, headers=headers, data=json.dumps(payload), verify=False)
+          response.raise_for_status()  # Raise an exception for HTTP errors
+          result = response.json()  # Parse the JSON response
 
-Replace ``<WAZUH_INDEXER_JWT>`` with your JWT. An output similar to the one below is observed. In the output, we can see the top three (3) users with the most amount of successful logins recorded:
+          # Process and display the results
+          print("Top three (3) Users with Most Successful Login Sessions:")
 
-.. code-block:: none
-   :class: output
+          if "aggregations" in result and "successful_logins_by_user" in result["aggregations"]:
+              buckets = result["aggregations"]["successful_logins_by_user"]["buckets"]
 
-   Top three (3) Users with Most Successful Login Sessions:
-   User: root(uid=0), Count: 22
-   User: wazuh(uid=1000), Count: 3
-   User: test(uid=2000), Count: 2
+              if buckets:
+                  for user in buckets:
+                      print(f"User: {user['key']}, Count: {user['doc_count']}")
+
+              else:
+                  print("No data found for the query.")
+
+          else:
+              print("Unexpected response format.")
+
+      except requests.exceptions.RequestException as e:
+          print(f"Error querying Wazuh indexer API: {e}")
+
+   Replace ``<WAZUH_INDEXER_JWT>`` with your JWT. The token expires after at most 600 seconds, so generate a new one if the script returns ``401 Client`` ``Error: Unauthorized``.
+
+#. Run the script:
+
+   .. code-block:: console
+
+      # python3 top_successful_login.py
+
+   The output is similar to the following. It shows the top three (3) users with the most successful logins:
+
+   .. code-block:: none
+      :class: output
+
+      Top three (3) Users with Most Successful Login Sessions:
+      User: root, Count: 22
+      User: wazuh, Count: 3
+      User: test, Count: 2
+
+If the Wazuh indexer has no matching events, the output is ``No data found for the query.``
 
 Bash
 ^^^^
 
-In this example, we query the ``wazuh-alerts*`` index to find the top three (3) users with the most failed login attempts. The script authenticates with the Wazuh indexer API using the JWT authentication method. In this example, we demonstrate how to export the JWT as an environment variable to avoid putting the token inside the script.
+In this example, you query the ``wazuh-events-v5-*`` data streams to find the top three (3) users with the most failed login attempts. The script authenticates to the Wazuh indexer API with a JWT. You export the JWT as an environment variable to keep the token out of the script.
 
-Follow the steps below.
+Follow these steps.
 
-#. Export your JWT as an environment variable:
+#. Export your JWT as an environment variable. Replace ``<WAZUH_INDEXER_JWT>`` with your JWT:
 
    .. code-block:: console
 
       # export JWT_AUTH_TOKEN="<WAZUH_INDEXER_JWT>"
-
-   Replace ``<WAZUH_INDEXER_JWT>`` with your appropriate JWT.
 
 #. Verify that the token is exported:
 
@@ -807,25 +898,29 @@ Follow the steps below.
 #. Save the following script as ``top_failed_login.sh``:
 
    .. code-block:: bash
+      :emphasize-lines: 4
 
       #!/bin/bash
 
       # Wazuh indexer API URL
-      WAZUH_INDEXER_URL="https://localhost:9200/wazuh-alerts*/_search"
+      WAZUH_INDEXER_URL="https://<WAZUH_INDEXER_IP>:9200/wazuh-events-v5-*/_search"
 
       # JSON query payload
       PAYLOAD=$(cat <<EOF
       {
         "size": 0,
         "query": {
-          "match": {
-            "rule.description": "PAM: User login failed."
+          "bool": {
+            "filter": [
+              { "term": { "event.category": "authentication" } },
+              { "term": { "event.outcome": "failure" } }
+            ]
           }
         },
         "aggs": {
           "failed_logins_by_user": {
             "terms": {
-              "field": "data.dstuser",
+              "field": "user.name",
               "size": 3,
               "order": {
                 "_count": "desc"
@@ -849,7 +944,7 @@ Follow the steps below.
         exit 1
       fi
 
-      echo "Top three (3) Users with Most Failed Login Session"
+      echo "Top three (3) Users with Most Failed Login Attempts"
       echo "$RESPONSE"
 
 #. Make the script executable:
@@ -864,11 +959,12 @@ Follow the steps below.
 
       # ./top_failed_login.sh
 
-   .. code-block:: none
+   The output is similar to the following:
+
+   .. code-block:: json
       :class: output
-   
-      ...
-              {
+
+             {
                 "key" : "root",
                 "doc_count" : 19
               },
@@ -885,3 +981,4 @@ Follow the steps below.
         }
       }
 
+If the Wazuh indexer has no matching events, the ``buckets`` list is empty.
