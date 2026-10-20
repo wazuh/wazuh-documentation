@@ -9,7 +9,7 @@ Distributed deployment
 Certificates creation and deployment
 ------------------------------------
 
-Use the pre-existing root CA keys to generate the certificate for the new node, so the certificates of the existing nodes remain valid. Perform the steps below on one of the existing Wazuh indexer nodes.
+Use the pre-existing root CA to generate the certificate for the new node, so the certificates of the existing nodes remain valid. Perform the steps below on the host that holds ``root-ca.key`` in ``/etc/wazuh/ca``, where the original certificates were created.
 
 .. note::
 
@@ -32,7 +32,7 @@ Use the pre-existing root CA keys to generate the certificate for the new node, 
           - name: <NEW_WAZUH_INDEXER_NODE_NAME>
             ip: "<NEW_WAZUH_INDEXER_IP>"
 
-#. Extract the certificate archive to obtain the root CA keys.
+#. Extract the certificate archive to obtain the existing certificates.
 
    -  If the certificate archive is ``wazuh-certificates.tar``, use this command:
 
@@ -46,14 +46,13 @@ Use the pre-existing root CA keys to generate the certificate for the new node, 
 
          # tar -xf ./wazuh-install-files.tar
 
-#. Download and run the certificates tool to create the certificate for the new indexer node using the pre-existing root CA keys. The tool reads the root CA from the absolute path set in the ``WAZUH_CA_DIR`` environment variable. The tool refuses to run when a ``wazuh-certificates`` directory already exists beside it, which is the case on the node where the original certificates were created. Rename any existing directory first so that the original certificates are kept. The commands below also set the modes that the tool requires for the root CA files.
+#. Download and run the certificates tool to create the certificate for the new indexer node using the pre-existing root CA, which the tool reads from ``/etc/wazuh/ca``. The tool refuses to run when a ``wazuh-certificates`` directory already exists beside it, which is the case on the node where the original certificates were created. Rename any existing directory first so that the original certificates are kept.
 
    .. code-block:: console
 
       # curl -sO https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/wazuh-certs-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh
       # [ -d wazuh-certificates ] && mv wazuh-certificates wazuh-certificates.$(date +%Y%m%d%H%M%S).bak
-      # chmod 700 wazuh-install-files && chmod 400 wazuh-install-files/root-ca.key && chmod 644 wazuh-install-files/root-ca.pem
-      # WAZUH_CA_DIR="$PWD/wazuh-install-files" bash wazuh-certs-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -A
+      # bash wazuh-certs-tool-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.sh -A
 
 #. Copy the newly created certificates to the ``wazuh-install-files`` folder, making sure not to replace the existing admin certificates:
 
@@ -71,7 +70,7 @@ Use the pre-existing root CA keys to generate the certificate for the new node, 
 
    .. note::
 
-      The new archive is named after the new node so that the original ``wazuh-certificates.tar`` is not overwritten. That archive holds the root CA key, which is required to sign the certificate of every node added later. Keep it, or the ``wazuh-install-files`` directory, in secure storage.
+      The new archive is named after the new node so that the original ``wazuh-certificates.tar`` is not overwritten. The root CA key, ``root-ca.key``, stays in ``/etc/wazuh/ca`` and is required to sign the certificate of every node added later. Keep a backup of ``/etc/wazuh/ca`` in secure storage.
 
 Configuring existing components to connect with the new node
 ------------------------------------------------------------

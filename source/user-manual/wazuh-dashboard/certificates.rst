@@ -87,17 +87,16 @@ After running the script, the directory ``wazuh-certificates`` will be created a
         ├── server-key.pem
         └── server.pem
 
-Additionally, this script allows the use of a pre-existent rootCA certificate. To use it, place ``root-ca.pem`` and ``root-ca.key`` in ``/etc/wazuh/ca``, or in the absolute path set in the ``WAZUH_CA_DIR`` environment variable. Set these modes:
-
--  Directory: ``700``
--  ``root-ca.key``: ``400``
--  ``root-ca.pem``: ``644``
-
-Then run the script with option ``-A`` and no other operand:
+Additionally, this script allows the use of a pre-existent rootCA certificate. To use it, copy ``root-ca.pem`` and ``root-ca.key`` to ``/etc/wazuh/ca``, and run the script with option ``-A`` and no other operand:
 
     .. code-block:: console
 
+       # install -d -m 0700 -o root -g root /etc/wazuh /etc/wazuh/ca
+       # install -m 0644 -o root -g root /path/to/root-ca.pem /etc/wazuh/ca/root-ca.pem
+       # install -m 0400 -o root -g root /path/to/root-ca.key /etc/wazuh/ca/root-ca.key
        # bash wazuh-certs-tool.sh -A
+
+To read the root CA from another directory, set its absolute path in the ``WAZUH_CA_DIR`` environment variable, and give that directory and files the same modes.
 
 After running the script, the directory ``wazuh-certificates`` will be created and will have the following content:
 
