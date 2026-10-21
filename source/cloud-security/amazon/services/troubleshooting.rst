@@ -72,10 +72,10 @@ Checking if logs are being processed
 
 To verify log processing for any bucket or service, check the ``wazuh-events-v5*`` index pattern. This works even when no findings are generated. Go to **Explore** > **Discover** on the Wazuh dashboard and select the ``wazuh-events-v5*`` index pattern. To see every event that the Wazuh module for AWS sends, filter by ``wazuh.protocol.location: Wazuh-AWS``. This includes CloudWatch Logs events that other integrations decode.
 
-The following event processing workflow shows how Wazuh processes logs from the AWS integration and displays the resulting findings on the Wazuh dashboard:
+The following event processing workflow shows how Wazuh processes logs from the Wazuh module for AWS and displays the resulting findings on the Wazuh dashboard:
 
-#. **Log collection:** The AWS integration retrieves logs from the configured AWS services according to the integration settings. See :doc:`considerations for the Wazuh module for AWS configuration </cloud-security/amazon/services/prerequisites/considerations>` for information about filtering the logs.
-#. **Log normalization:** The integration sends the collected logs to the Wazuh manager. There, the data analysis engine uses decoders to parse, normalize, and enrich the raw events into structured data that follows the Wazuh Common Schema (WCS).
+#. **Log collection:** The Wazuh module for AWS retrieves logs from the configured AWS services according to its configuration. See :doc:`considerations for the Wazuh module for AWS configuration </cloud-security/amazon/services/prerequisites/considerations>` for information about filtering the logs.
+#. **Log normalization:** The module sends the collected logs to the Wazuh manager. There, the data analysis engine uses decoders to parse, normalize, and enrich the raw events into structured data that follows the Wazuh Common Schema (WCS).
 #. **Rule matching:** The Wazuh manager forwards the normalized events to the Wazuh indexer. Detectors on the indexer evaluate the events against the configured detection rules at regular intervals. When an event matches a rule, the indexer generates a finding and enriches it with event and rule metadata.
 #. **Finding indexing:** The Wazuh indexer indexes and stores the generated findings, making them available for search and investigation.
 #. **Finding visualization:** The Wazuh dashboard retrieves the indexed findings from the Wazuh indexer, allowing users to search, filter, analyze, and investigate them.
@@ -165,8 +165,8 @@ First of all, review ``ERROR`` or ``WARNING`` messages in the ``/var/ossec/logs/
 
    Events that don't match any rule don't raise findings, but they still appear in Discover. See the :ref:`Checking if logs are being processed <aws_events_processed>` section to check whether the AWS logs reach the analysis engine.
 
-CloudWatch Logs integration is running but no finding is shown on the Wazuh dashboard
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+CloudWatch Logs collection is running but no finding is shown on the Wazuh dashboard
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The Wazuh module for AWS is running without any error or warning messages, but no findings from CloudWatch Logs are displayed on the Wazuh dashboard.
 

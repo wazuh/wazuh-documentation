@@ -239,7 +239,7 @@ Sensitive data disclosure in S3 bucket
 
 When Macie finds sensitive data, such as financial information, credentials, or personal information, in an S3 bucket, it generates sensitive data findings. Each finding title ends with its Macie finding type, for example, **AWS Macie high severity finding - SensitiveData:S3Object/Multiple**. Low and medium severity findings are titled **AWS Macie finding**, followed by the type.
 
-To see them, go to **Amazon Web Services** > **Findings** and filter by ``cloud.service.name: macie``.
+To see them, go to **Amazon Web Services** > **Findings** and filter by ``wazuh.rule.title:*Macie*``.
 
 .. thumbnail:: /images/cloud-security/aws/macie/1-sensitive-data-disclosure-in-s3-bucket.png
    :title: Amazon Macie findings on the Wazuh dashboard

@@ -39,7 +39,7 @@ Create an IAM user group
       :align: center
       :width: 80%
 
-#. Scroll down, and click **Create group**.
+#. Scroll down, and click **Create user group**.
 
    .. thumbnail:: /images/cloud-security/aws/config-iam-identities/click-create-group-3.png
       :title: Create group 2

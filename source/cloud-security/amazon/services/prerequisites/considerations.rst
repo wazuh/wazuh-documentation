@@ -51,7 +51,7 @@ In the ``/var/ossec/etc/ossec.conf`` file of the Wazuh agent, the configuration 
 Older logs
 ----------
 
-The Wazuh module for AWS looks for new logs in buckets based on the key of the last processed log object. This key includes the datetime stamp. After the integration has processed logs, it cannot retrieve logs that are older than the processed ones, even if you specify the :ref:`only_logs_after <only_logs_aws_buckets>` option. The logs older than the first one processed are ignored and not ingested into Wazuh. The same applies to all supported services except CloudWatch Logs.
+The Wazuh module for AWS looks for new logs in buckets based on the key of the last processed log object. This key includes the datetime stamp. After the module has processed logs, it cannot retrieve logs that are older than the processed ones, even if you specify the :ref:`only_logs_after <only_logs_aws_buckets>` option. The logs older than the first one processed are ignored and not ingested into Wazuh. The same applies to all supported services except CloudWatch Logs.
 
 On the other hand, when monitoring the CloudWatch Logs service, the Wazuh module for AWS can process logs older than the first one processed. To do so, specify an older ``only_logs_after`` value. The Wazuh module for AWS then processes all logs between the ``only_logs_after`` date and the first log processed, without generating duplicate events.
 
@@ -198,7 +198,7 @@ The following example of a ``/root/.aws/config`` file sets the supported configu
 
    All ``s3`` and ``proxy`` configuration sections must start with ``[profile <PROFILE_NAME>]``.
 
-To configure multiple profiles for the integration, declare each profile section in ``/root/.aws/config`` with ``[profile <PROFILE_NAME>]``. If you don't declare a profile section in this configuration file, Wazuh uses the ``default`` profile.
+To configure multiple profiles for the Wazuh module for AWS, declare each profile section in ``/root/.aws/config`` with ``[profile <PROFILE_NAME>]``. If you don't declare a profile section in this configuration file, Wazuh uses the ``default`` profile.
 
 Configuring multiple services
 -----------------------------

@@ -14,7 +14,7 @@ Combining Amazon SQS with Amazon S3 buckets allows Wazuh to collect JSON, CSV, a
 
    To properly process CSV logs, they must include column headers.
 
-To set up the Wazuh integration for Custom Logs Buckets, you need to do the following:
+To collect logs from Custom Logs Buckets, you need to do the following:
 
 #. Create an Amazon SQS queue.
 #. Configure an S3 bucket. For every object creation event, the bucket sends notifications to the queue.

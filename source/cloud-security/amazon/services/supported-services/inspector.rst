@@ -28,7 +28,7 @@ Activate Amazon Inspector in each AWS Region where you want Wazuh to collect fin
 
 .. note::
 
-   Amazon ECR scanning in Amazon Inspector replaces basic scanning with enhanced scanning for your whole private registry. The Amazon ECR image scanning integration only receives results from basic scanning. If you use that integration, deactivate Amazon ECR scanning in Amazon Inspector. Otherwise, collect your container image findings through this Amazon Inspector integration instead. For detailed instructions on activating scan types, see the `Amazon Inspector documentation <https://docs.aws.amazon.com/inspector/latest/user/what-is-inspector.html>`__.
+   Amazon ECR scanning in Amazon Inspector replaces basic scanning with enhanced scanning for your whole private registry. The Amazon ECR image scanning configuration only receives results from basic scanning. If you use that configuration, deactivate Amazon ECR scanning in Amazon Inspector. Otherwise, collect your container image findings through Amazon Inspector instead. For detailed instructions on activating scan types, see the `Amazon Inspector documentation <https://docs.aws.amazon.com/inspector/latest/user/what-is-inspector.html>`__.
 
 .. _inspector_policy_configuration:
 
@@ -89,7 +89,7 @@ Configure Wazuh to process Amazon Inspector logs
 Inspector use case
 ------------------
 
-Wazuh collects the Inspector findings through the configured AWS integration and displays them on the Wazuh dashboard. The screenshot below shows the ingested findings, including network reachability findings for publicly reachable ports on an EC2 instance.
+Wazuh collects the Inspector findings through the Wazuh module for AWS and displays them on the Wazuh dashboard. The screenshot below shows the ingested findings, including network reachability findings for publicly reachable ports on an EC2 instance.
 
 .. thumbnail:: /images/cloud-security/aws/inspector/1-inspector-findings.png
    :title: Amazon Inspector findings on the Wazuh dashboard
