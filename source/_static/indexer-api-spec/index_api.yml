@@ -1741,7 +1741,7 @@ paths:
       tags: [Index APIs]
       summary: Get settings (Global Setting GET)
       description: |
-        The Get Settings API retrieves all configuration settings associated with a specified index.
+        The Get Settings API retrieves the configuration settings whose name matches the `setting` path parameter, across all indexes.
       operationId: getSettingsGlobalSetting
       security:
         - basicAuth: []

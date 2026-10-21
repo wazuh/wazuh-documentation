@@ -62,7 +62,7 @@ paths:
         - Nodes stats API
       summary: Nodes stats (all nodes)
       description: |
-        Returns statistical information about nodes in the cluster. Use the `metric` path parameter to limit the response to a specific metric.
+        Returns statistical information about all the nodes in the cluster.
       operationId: getNodesStatsAll
       security:
         - basicAuth: []
@@ -91,7 +91,7 @@ paths:
         - Nodes stats API
       summary: Nodes stats (by node)
       description: |
-        Returns statistical information about nodes in the cluster. Use the `metric` path parameter to limit the response to a specific metric.
+        Returns statistical information about the nodes selected with the `node_id` path parameter.
       operationId: getNodesStatsByNode
       security:
         - basicAuth: []
