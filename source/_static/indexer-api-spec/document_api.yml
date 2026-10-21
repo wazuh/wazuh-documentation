@@ -320,6 +320,37 @@ paths:
         - basicAuth: []
         - jwtAuth: []
 
+    put:
+      tags: [Document APIs]
+      summary: Bulk (PUT)
+      description: |
+        The bulk operation allows you to add, update, or delete multiple documents within a single request. This approach offers significant performance improvements over individual Wazuh indexing requests. Whenever possible, it is recommended to batch indexing operations using bulk requests for better efficiency.
+      operationId: bulkOperationsPut
+      parameters:
+        - $ref: '#/components/parameters/pipeline_bulk'
+        - $ref: '#/components/parameters/refresh'
+        - $ref: '#/components/parameters/require_alias'
+        - $ref: '#/components/parameters/routing'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/type'
+        - $ref: '#/components/parameters/wait_for_active_shards'
+        - $ref: '#/components/parameters/batch_size'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/BulkRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/BulkSuccess'
+        '400':
+          $ref: '#/components/responses/BulkBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
   /{index}/_bulk:
     parameters:
       - $ref: '#/components/parameters/document_index'
@@ -329,6 +360,37 @@ paths:
       description: |
         The bulk operation allows you to add, update, or delete multiple documents within a single request. This approach offers significant performance improvements over individual Wazuh indexing requests. Whenever possible, it is recommended to batch indexing operations using bulk requests for better efficiency.
       operationId: bulkOperationsIndex
+      parameters:
+        - $ref: '#/components/parameters/pipeline_bulk'
+        - $ref: '#/components/parameters/refresh'
+        - $ref: '#/components/parameters/require_alias'
+        - $ref: '#/components/parameters/routing'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/type'
+        - $ref: '#/components/parameters/wait_for_active_shards'
+        - $ref: '#/components/parameters/batch_size'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/BulkRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/BulkSuccess'
+        '400':
+          $ref: '#/components/responses/BulkBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+    put:
+      tags: [Document APIs]
+      summary: Bulk (Index) (PUT)
+      description: |
+        The bulk operation allows you to add, update, or delete multiple documents within a single request. This approach offers significant performance improvements over individual Wazuh indexing requests. Whenever possible, it is recommended to batch indexing operations using bulk requests for better efficiency.
+      operationId: bulkOperationsIndexPut
       parameters:
         - $ref: '#/components/parameters/pipeline_bulk'
         - $ref: '#/components/parameters/refresh'

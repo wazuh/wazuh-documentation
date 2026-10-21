@@ -1,4 +1,80 @@
 paths:
+  /_plugins/_ism/policies:
+    get:
+      tags:
+        - Index state management API
+      summary: List policies
+      description: Lists all policies. To retrieve a specific policy, include its `policy_id` in the path.
+      operationId: listPolicies
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: from
+          in: query
+          description: The starting position of the results.
+          schema:
+            type: integer
+            default: 0
+        - name: size
+          in: query
+          description: The number of policies to return.
+          schema:
+            type: integer
+            default: 20
+        - name: sortField
+          in: query
+          description: The field to sort the results by.
+          schema:
+            type: string
+            default: policy.policy_id.keyword
+        - name: sortOrder
+          in: query
+          description: The sort order, `asc` or `desc`.
+          schema:
+            type: string
+            default: asc
+        - name: queryString
+          in: query
+          description: A query string that filters the policies.
+          schema:
+            type: string
+            default: "*"
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  policies:
+                    type: array
+                    description: The policies that match the request.
+                    items:
+                      type: object
+                      properties:
+                        _id:
+                          type: string
+                          description: The unique identifier of the policy.
+                        _seq_no:
+                          type: integer
+                          description: The sequence number for internal versioning.
+                        _primary_term:
+                          type: integer
+                          description: The primary term used for optimistic concurrency control.
+                        policy:
+                          type: object
+                          description: The policy definition.
+                  total_policies:
+                    type: integer
+                    description: The total number of policies.
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+
   /_plugins/_ism/policies/{policy_id}:
     put:
       tags:
@@ -190,6 +266,33 @@ paths:
           $ref: 'spec.yml#/components/responses/Forbidden'
         '404':
           $ref: '#/components/responses/PolicyNotFoundGet'
+
+    head:
+      tags:
+        - Index state management API
+      summary: Check policy existence
+      description: Checks whether a policy exists, using its `policy_id`. The response has no body.
+      operationId: headPolicy
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: policy_id
+          in: path
+          required: true
+          description: The unique identifier of the policy.
+          schema:
+            type: string
+          example: "policy_1"
+      responses:
+        '200':
+          description: The policy exists.
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          description: The policy doesn't exist.
 
     delete:
       tags:
@@ -608,7 +711,285 @@ paths:
           description: Specifies the name of the index or index pattern whose ISM (Index State Management) status should be retrieved. You can also use wildcard expressions (e.g., `wazuh-alerts-4.x-*`) to target multiple indexes.
           schema:
             type: string
+        - name: show_policy
+          in: query
+          description: If true, the response includes the policy that manages each index.
+          schema:
+            type: boolean
+            default: false
+        - name: validate_action
+          in: query
+          description: If true, the response includes the validation result of the current action.
+          schema:
+            type: boolean
+            default: false
+        - name: local
+          in: query
+          description: Whether to return information from the local node only instead of from the cluster manager node.
+          schema:
+            type: boolean
+            default: false
         - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExplainIndexResponse'
+              example:
+                "wazuh-alerts-4.x-2025.03.36":
+                  "index.plugins.index_state_management.policy_id": "policy_1"
+                  "index.opendistro.index_state_management.policy_id": "policy_1"
+                  index: "wazuh-alerts-4.x-2025.03.36"
+                  index_uuid: "1GkrhBwOQA-2I-Giq0ul9A"
+                  policy_id: "policy_1"
+                  policy_seq_no: 144943
+                  policy_primary_term: 8
+                  rolled_over: false
+                  index_creation_date: 1742532571328
+                  state:
+                    name: "ingest"
+                    start_time: 1745214419126
+                  action:
+                    name: "rollover"
+                    start_time: 1745214828297
+                    index: 0
+                    failed: true
+                    consumed_retries: 3
+                    last_retry_time: 1745215466654
+                  step:
+                    name: "attempt_rollover"
+                    start_time: 1745214828297
+                    step_status: "failed"
+                  retry_info:
+                    failed: false
+                    consumed_retries: 0
+                  info:
+                    message: "Missing rollover_alias index setting [index=wazuh-alerts-4.x-2025.03.36]"
+                  enabled: false
+                total_managed_indices: 1
+        '400':
+          $ref: '#/components/responses/PolicyBadRequestExplain'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+
+    post:
+      tags:
+        - Index state management API
+      summary: Explain index (POST)
+      description: The Explain index API retrieves the current state of an index. It supports the use of index patterns to obtain the status of multiple indexes simultaneously.
+      operationId: explainIndexPost
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: index
+          in: path
+          required: true
+          description: Specifies the name of the index or index pattern whose ISM (Index State Management) status should be retrieved. You can also use wildcard expressions (e.g., `wazuh-alerts-4.x-*`) to target multiple indexes.
+          schema:
+            type: string
+        - name: show_policy
+          in: query
+          description: If true, the response includes the policy that manages each index.
+          schema:
+            type: boolean
+            default: false
+        - name: validate_action
+          in: query
+          description: If true, the response includes the validation result of the current action.
+          schema:
+            type: boolean
+            default: false
+        - name: local
+          in: query
+          description: Whether to return information from the local node only instead of from the cluster manager node.
+          schema:
+            type: boolean
+            default: false
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: false
+        description: The request body applies to POST requests only.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                filter:
+                  type: object
+                  description: Filters the managed indexes by `policy_id`, `state`, `action_type`, or `failed` status.
+            example:
+              filter:
+                policy_id: policy_1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExplainIndexResponse'
+              example:
+                "wazuh-alerts-4.x-2025.03.36":
+                  "index.plugins.index_state_management.policy_id": "policy_1"
+                  "index.opendistro.index_state_management.policy_id": "policy_1"
+                  index: "wazuh-alerts-4.x-2025.03.36"
+                  index_uuid: "1GkrhBwOQA-2I-Giq0ul9A"
+                  policy_id: "policy_1"
+                  policy_seq_no: 144943
+                  policy_primary_term: 8
+                  rolled_over: false
+                  index_creation_date: 1742532571328
+                  state:
+                    name: "ingest"
+                    start_time: 1745214419126
+                  action:
+                    name: "rollover"
+                    start_time: 1745214828297
+                    index: 0
+                    failed: true
+                    consumed_retries: 3
+                    last_retry_time: 1745215466654
+                  step:
+                    name: "attempt_rollover"
+                    start_time: 1745214828297
+                    step_status: "failed"
+                  retry_info:
+                    failed: false
+                    consumed_retries: 0
+                  info:
+                    message: "Missing rollover_alias index setting [index=wazuh-alerts-4.x-2025.03.36]"
+                  enabled: false
+                total_managed_indices: 1
+        '400':
+          $ref: '#/components/responses/PolicyBadRequestExplain'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+
+  /_plugins/_ism/explain:
+    get:
+      tags:
+        - Index state management API
+      summary: Explain all indexes
+      description: The Explain index API retrieves the current state of the managed indexes. Without an `index` path parameter, it returns every managed index.
+      operationId: explainAllIndexes
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: show_policy
+          in: query
+          description: If true, the response includes the policy that manages each index.
+          schema:
+            type: boolean
+            default: false
+        - name: validate_action
+          in: query
+          description: If true, the response includes the validation result of the current action.
+          schema:
+            type: boolean
+            default: false
+        - name: local
+          in: query
+          description: Whether to return information from the local node only instead of from the cluster manager node.
+          schema:
+            type: boolean
+            default: false
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExplainIndexResponse'
+              example:
+                "wazuh-alerts-4.x-2025.03.36":
+                  "index.plugins.index_state_management.policy_id": "policy_1"
+                  "index.opendistro.index_state_management.policy_id": "policy_1"
+                  index: "wazuh-alerts-4.x-2025.03.36"
+                  index_uuid: "1GkrhBwOQA-2I-Giq0ul9A"
+                  policy_id: "policy_1"
+                  policy_seq_no: 144943
+                  policy_primary_term: 8
+                  rolled_over: false
+                  index_creation_date: 1742532571328
+                  state:
+                    name: "ingest"
+                    start_time: 1745214419126
+                  action:
+                    name: "rollover"
+                    start_time: 1745214828297
+                    index: 0
+                    failed: true
+                    consumed_retries: 3
+                    last_retry_time: 1745215466654
+                  step:
+                    name: "attempt_rollover"
+                    start_time: 1745214828297
+                    step_status: "failed"
+                  retry_info:
+                    failed: false
+                    consumed_retries: 0
+                  info:
+                    message: "Missing rollover_alias index setting [index=wazuh-alerts-4.x-2025.03.36]"
+                  enabled: false
+                total_managed_indices: 1
+        '400':
+          $ref: '#/components/responses/PolicyBadRequestExplain'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+
+    post:
+      tags:
+        - Index state management API
+      summary: Explain all indexes (POST)
+      description: The Explain index API retrieves the current state of the managed indexes. Without an `index` path parameter, it returns every managed index.
+      operationId: explainAllIndexesPost
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: show_policy
+          in: query
+          description: If true, the response includes the policy that manages each index.
+          schema:
+            type: boolean
+            default: false
+        - name: validate_action
+          in: query
+          description: If true, the response includes the validation result of the current action.
+          schema:
+            type: boolean
+            default: false
+        - name: local
+          in: query
+          description: Whether to return information from the local node only instead of from the cluster manager node.
+          schema:
+            type: boolean
+            default: false
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        required: false
+        description: The request body applies to POST requests only.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                filter:
+                  type: object
+                  description: Filters the managed indexes by `policy_id`, `state`, `action_type`, or `failed` status.
+            example:
+              filter:
+                policy_id: policy_1
       responses:
         '200':
           description: Success

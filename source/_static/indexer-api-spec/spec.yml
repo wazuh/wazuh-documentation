@@ -103,6 +103,9 @@ paths:
   /_block/{block}:
     $ref: 'index_api.yml#/paths/~1_block~1{block}'
 
+  /_cache/clear:
+    $ref: 'index_api.yml#/paths/~1_cache~1clear'
+
   /{target}/_cache/clear:
     $ref: 'index_api.yml#/paths/~1{target}~1_cache~1clear'
 
@@ -114,6 +117,9 @@ paths:
 
   /{index}:
     $ref: 'index_api.yml#/paths/~1{index}'
+
+  /_index_template:
+    $ref: 'index_api.yml#/paths/~1_index_template'
 
   /_index_template/{template_name}:
     $ref: 'index_api.yml#/paths/~1_index_template~1{template_name}'
@@ -156,6 +162,9 @@ paths:
 
   /{target_index}/_settings:
     $ref: 'index_api.yml#/paths/~1{target_index}~1_settings'
+
+  /_settings/{setting}:
+    $ref: 'index_api.yml#/paths/~1_settings~1{setting}'
 
   /{target_index}/_settings/{setting}:
     $ref: 'index_api.yml#/paths/~1{target_index}~1_settings~1{setting}'
@@ -753,6 +762,9 @@ paths:
   /_cluster/stats/{metric}/{index_metric}/nodes/{node_filters}:
     $ref: 'cluster_api.yml#/paths/~1_cluster~1stats~1{metric}~1{index_metric}~1nodes~1{node_filters}'
 
+  /_plugins/_ism/policies:
+    $ref: 'ism_api.yml#/paths/~1_plugins~1_ism~1policies'
+
   /_plugins/_ism/policies/{policy_id}:
     $ref: 'ism_api.yml#/paths/~1_plugins~1_ism~1policies~1{policy_id}'
 
@@ -770,6 +782,9 @@ paths:
 
   /_plugins/_ism/retry/{index}:
     $ref: 'ism_api.yml#/paths/~1_plugins~1_ism~1retry~1{index}'
+
+  /_plugins/_ism/explain:
+    $ref: 'ism_api.yml#/paths/~1_plugins~1_ism~1explain'
 
   /_plugins/_ism/explain/{index}:
     $ref: 'ism_api.yml#/paths/~1_plugins~1_ism~1explain~1{index}'
