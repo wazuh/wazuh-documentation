@@ -104,7 +104,7 @@ Wazuh agent
 -  `#40387 <https://github.com/wazuh/wazuh/pull/40387>`__ Fixed the macOS ULS reader splitting messages that contain line breaks into several events.
 -  `#39547 <https://github.com/wazuh/wazuh/pull/39547>`__ Fixed the Windows agent reporting the operating system it had before an in-place feature update.
 -  `#39734 <https://github.com/wazuh/wazuh/pull/39734>`__ Fixed the Windows agent installer not applying the configuration file permissions to the ``shared`` directory.
--  `#40365 <https://github.com/wazuh/wazuh/pull/40365>`__ Fixed ``make deps`` silently ignoring a failed ``http-request`` download.
+-  `#40365 <https://github.com/wazuh/wazuh/pull/40365>`__ `#40569 <https://github.com/wazuh/wazuh/pull/40569>`__ Fixed ``make deps`` silently ignoring a failed ``http-request`` download.
 -  `#39807 <https://github.com/wazuh/wazuh/pull/39807>`__ Fixed the Solaris 10 and AIX agent packages leaving files in ``/var/ossec`` after removal.
 -  `#39931 <https://github.com/wazuh/wazuh/pull/39931>`__ Fixed the browser extensions inventory dropping entries when an extension metadata file contains unexpected values.
 -  `#40017 <https://github.com/wazuh/wazuh/pull/40017>`__ Fixed active responses following symbolic links when writing their log file on UNIX systems.
