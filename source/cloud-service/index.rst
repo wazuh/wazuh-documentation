@@ -22,7 +22,7 @@ Wazuh Cloud benefits
 -  **Managed platform**: We install, maintain, update, and monitor the Wazuh central components, reducing the operational work required from your team.
 -  **Faster deployment**: Get started without provisioning hardware or installing and maintaining the central components yourself.
 -  **High availability and scalability**: Use infrastructure designed to support availability and scale resources as your requirements change.
--  **Wazuh AI security analyst**: Automate parts of security analysis and receive actionable insights to help investigate events and strengthen your security posture.
+-  **Wazuh AI Analyst**: Automate parts of security analysis and receive actionable insights to help investigate events and strengthen your security posture.
 -  **Security and regulatory compliance**: Benefit from security hardening and regular security updates. Wazuh Cloud supports compliance efforts for standards such as PCI DSS and SOC 2.
 -  **Customizable environments**: Configure data retention, integrations, and resources to suit your requirements.
 -  **Platform monitoring and support**: We continuously monitor the health of your Wazuh Cloud environment, and you have access to Wazuh technical support.

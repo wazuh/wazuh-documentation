@@ -59,7 +59,7 @@ It is possible to get a new URL by opening a support ticket through the **Help**
 What happens if the tier limit is reached?
 ------------------------------------------
 
-See :ref:`What happens if *indexed data capacity* setting is reached? <cloud_technical_faq_change_setting>`
+The tier was replaced by the indexed data capacity setting. See :ref:`What happens if indexed data capacity setting is reached? <cloud_technical_faq_size_reached>`
 
 .. _cloud_technical_faq_size_reached:
 
@@ -76,7 +76,7 @@ It is possible to download the data from the archive data and re-index it into y
 What if I need to change the size of my tier?
 ---------------------------------------------
 
-See :ref:`What if I need to upgrade or downgrade a setting? <cloud_technical_faq_change_setting>`
+The tier was replaced by the indexed data capacity setting. See :ref:`What if I need to upgrade or downgrade a setting? <cloud_technical_faq_change_setting>`
 
 .. _cloud_technical_faq_change_setting:
 
