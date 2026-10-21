@@ -36,9 +36,10 @@ Daemon multithreaded internal structure
 ---------------------------------------
 
 .. thumbnail:: ../../../images/manual/analysisd-diagram/analysisd-structure.png
-    :title: Analysisd architecture
-    :align: center
-    :width: 100%
+   :title: Analysisd architecture
+   :alt: Analysisd architecture: events from the socket are received and sent, or dropped when queues are full, to decoder queues and threads for syscheck, rootcheck, syscollector, hostinfo, events and Windows events, then to the rule matching threads, and finally to writer threads for the firewall, alerts, statistical, FTS and archives logs
+   :align: center
+   :width: 100%
 
 **How this works**
 ^^^^^^^^^^^^^^^^^^
@@ -82,9 +83,10 @@ Flow example of an event
 The image below shows the flow for a Rootcheck event that generates an alert.
 
 .. thumbnail:: ../../../images/manual/analysisd-diagram/analysisd-flow-example.png
-    :title: Flow example
-    :align: center
-    :width: 100%
+   :title: Flow example
+   :alt: Analysisd flow example: a rootcheck event goes from the socket through decode_rootcheck_queue and the rootcheck decoder threads to rule_matching_queue, matches a rule, and goes through alerts_log_writer_queue to be written to disk
+   :align: center
+   :width: 100%
 
 As you can see, every part of the Analysisd multithreaded engine is independent of one another, except for the rule-matching threads that share the same queue.
 
