@@ -549,6 +549,12 @@ paths:
   /_plugins/_setup/ai_assistant/providers/{id}:
     $ref: 'setup_api.yml#/paths/~1_plugins~1_setup~1ai_assistant~1providers~1{id}'
 
+  /_plugins/_setup/ai_assistant/sessions:
+    $ref: 'setup_api.yml#/paths/~1_plugins~1_setup~1ai_assistant~1sessions'
+
+  /_plugins/_setup/ai_assistant/sessions/{id}:
+    $ref: 'setup_api.yml#/paths/~1_plugins~1_setup~1ai_assistant~1sessions~1{id}'
+
   /_plugins/_content_manager/subscription:
     $ref: 'content_manager_api.yml#/paths/~1_plugins~1_content_manager~1subscription'
 
