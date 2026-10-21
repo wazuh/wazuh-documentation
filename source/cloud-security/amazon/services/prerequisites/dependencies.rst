@@ -6,7 +6,7 @@
 Install dependencies
 ====================
 
-You can configure the integration of AWS services with Wazuh on a Wazuh agent installed on a Linux endpoint. To run the integration on the Wazuh manager host, install a Wazuh agent on that host.
+You can run the Wazuh module for AWS on a Wazuh agent installed on a Linux endpoint. To run the module on the Wazuh manager host, install a Wazuh agent on that host.
 
 Install the following dependencies on the Linux endpoint where the Wazuh agent runs.
 

@@ -6,20 +6,16 @@
 Amazon Security Lake
 ====================
 
-.. note::
-
-   This document guides you through setting up Wazuh as a subscriber to AWS Security Lake data. To configure Wazuh as a source for Amazon Security Lake, refer to `Amazon Security Lake integration <https://documentation.wazuh.com/current/integrations-guide/amazon-security-lake/index.html>`__
-
 `Amazon Security Lake <https://aws.amazon.com/security-lake/>`__ is a fully managed security data lake service that consolidates data from multiple AWS and other services. It optimizes storage costs and performance at scale.
 
-All logs in Amazon Security Lake use the Open Cybersecurity Schema Framework (OCSF) standard for formatting. You can use the Wazuh integration for Amazon Security Lake to ingest security events from AWS services.
+All logs in Amazon Security Lake use the Open Cybersecurity Schema Framework (OCSF) standard for formatting. You can use the Wazuh module for AWS as a Security Lake subscriber to ingest security events from AWS services.
 
 These events are available as multi-event Apache Parquet objects in an S3 bucket. Each object has a corresponding SQS message, once it's ready for download.
 
-Wazuh periodically checks for new SQS messages and downloads the new objects. It converts the files from Parquet to JSON and sends each event to the Wazuh manager for analysis. To set up the Wazuh integration for Amazon Security Lake as a subscriber, you need to do the following:
+Wazuh periodically checks for new SQS messages and downloads the new objects. It converts the files from Parquet to JSON and sends each event to the Wazuh manager for analysis. To set up the Wazuh module for AWS as a Security Lake subscriber, you need to do the following:
 
 #. Create a subscriber in Amazon Security Lake and configure the role and user permissions.
-#. Set up the Wazuh integration for Amazon Security Lake.
+#. Configure the Wazuh module for AWS to read from Amazon Security Lake.
 
 AWS configuration
 -----------------
@@ -179,7 +175,7 @@ The available authentication configuration parameters are the following:
 
 -  ``<iam_role_arn>``: Amazon Resource Name (ARN) for the corresponding IAM role to assume.
 -  ``<external_id>``: External ID to use when assuming the role.
--  ``<aws_profile>``: A valid profile name from a shared credentials file or AWS config file with the permissions to access the service. By default, the integration uses the settings found in the ``default`` profile. This example uses the ``dev`` profile. Replace it with the appropriate profile defined in your :ref:`credential file <aws_profile>`.
+-  ``<aws_profile>``: A valid profile name from a shared credentials file or AWS config file with the permissions to access the service. By default, the Wazuh module for AWS uses the settings found in the ``default`` profile. This example uses the ``dev`` profile. Replace it with the appropriate profile defined in your :ref:`credential file <aws_profile>`.
 -  ``<iam_role_duration>`` - Optional: The session duration in seconds.
 -  ``<sts_endpoint>`` - Optional: The URL of the VPC endpoint of the AWS Security Token Service.
 

@@ -184,9 +184,9 @@ Configure Wazuh to process Amazon GuardDuty logs
 GuardDuty use case
 ------------------
 
-Amazon GuardDuty continuously monitors AWS accounts and workloads for potentially malicious or unauthorized activity. To validate the integration, generate sample findings after you configure the findings export. On your AWS console, go to **GuardDuty** > **Settings** > **Sample findings** and select **Generate sample findings**. GuardDuty exports only the findings created after the export is configured.
+Amazon GuardDuty continuously monitors AWS accounts and workloads for potentially malicious or unauthorized activity. To validate the configuration, generate sample findings after you configure the findings export. On your AWS console, go to **GuardDuty** > **Settings** > **Sample findings** and select **Generate sample findings**. GuardDuty exports only the findings created after the export is configured.
 
-Wazuh collects the sample findings through the configured AWS integration. Each finding on the Wazuh dashboard has a title that describes the threat, for example, **AWS GuardDuty brute force attack detected**.
+Wazuh collects the sample findings through the Wazuh module for AWS. Each finding on the Wazuh dashboard has a title that describes the threat, for example, **AWS GuardDuty brute force attack detected**.
 
 To see them, go to **Amazon Web Services** > **Findings** and filter by ``cloud.service.name: guardduty``. The screenshot below shows the ingested findings.
 
