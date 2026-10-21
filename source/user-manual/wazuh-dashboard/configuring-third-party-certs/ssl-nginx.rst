@@ -160,12 +160,12 @@ Configure the proxy and the certificates
    -  ``<WAZUH_DASHBOARD_IP_ADDRESS>`` with your Wazuh dashboard IP address.
    -  ``<PORT_NUMBER>`` with your new port number.
 
-#. Restart the Wazuh dashboard and the Wazuh server:
+#. Restart the Wazuh dashboard and NGINX:
 
    .. code-block:: console
 
       # systemctl restart wazuh-dashboard
-      # systemctl restart wazuh-manager
+      # systemctl restart nginx
 
 #. Use certbot to generate an SSL certificate:
 
