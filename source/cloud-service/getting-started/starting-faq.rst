@@ -71,7 +71,7 @@ Wazuh archives data in an AWS S3 bucket for long‑term storage. Unlike indexed 
 What happens if the tier limit is reached?
 ------------------------------------------
 
-See :ref:`cloud_starting_faq_data_reached`.
+The tier was replaced by the indexed data capacity setting. See :ref:`cloud_starting_faq_data_reached`.
 
 .. _cloud_starting_faq_data_reached:
 
