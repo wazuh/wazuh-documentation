@@ -776,7 +776,7 @@ The Wazuh indexer returns HTTP status code 404, and the output shows ``"found" :
 Practical examples of Wazuh indexer API access tools
 ----------------------------------------------------
 
-This section shows how to send requests to the Wazuh indexer API with cURL, Python scripts, Bash scripts, and the Wazuh dashboard. These examples are a foundation for more advanced use cases.
+This section shows how to send requests to the Wazuh indexer API with cURL, Python scripts and Bash scripts. These examples are a foundation for more advanced use cases.
 
 The Python and Bash examples query the ``wazuh-events-v5-*`` data streams for authentication events. They use the following Wazuh Common Schema (WCS) fields:
 
@@ -794,6 +794,48 @@ cURL is a command-line tool for sending HTTP and HTTPS requests. It comes preins
 .. note::
 
    When you send a cURL request that contains JSON data, set the content type to JSON with the ``-H "Content-Type: application/json"`` header.
+
+In this example, you count the failed login attempts stored in the ``wazuh-events-v5-*`` data streams.
+
+#. Export your Wazuh indexer credentials as environment variables. Replace ``<WAZUH_INDEXER_USERNAME>`` and ``<WAZUH_INDEXER_PASSWORD>`` with your credentials:
+
+   .. code-block:: console
+
+      # export WAZUH_INDEXER_USER="<WAZUH_INDEXER_USERNAME>"
+      # export WAZUH_INDEXER_PASS="<WAZUH_INDEXER_PASSWORD>"
+
+#. Send a request to the ``_count`` endpoint with a query that matches failed authentication events:
+
+   .. code-block:: bash
+      :emphasize-lines: 1
+
+      curl -k -u "$WAZUH_INDEXER_USER:$WAZUH_INDEXER_PASS" -X POST "https://<WAZUH_INDEXER_IP>:9200/wazuh-events-v5-*/_count?pretty" -H "Content-Type: application/json" -d '{
+        "query": {
+          "bool": {
+            "filter": [
+              { "term": { "event.category": "authentication" } },
+              { "term": { "event.outcome": "failure" } }
+            ]
+          }
+        }
+      }'
+
+   The output is similar to the following. The ``count`` field shows the number of failed login attempts:
+
+   .. code-block:: json
+      :class: output
+
+      {
+        "count" : 14,
+        "_shards" : {
+          "total" : 3,
+          "successful" : 3,
+          "skipped" : 0,
+          "failed" : 0
+        }
+      }
+
+To authenticate with a JWT instead, replace ``-u`` ``"$WAZUH_INDEXER_USER:$WAZUH_INDEXER_PASS"`` with ``-H "Authorization: Bearer $TOKEN"``, where ``$TOKEN`` holds the JWT you exported in :ref:`Logging into the Wazuh indexer API <logging_into_wazuh_indexer_api>`.
 
 Python
 ^^^^^^
@@ -975,20 +1017,43 @@ Follow these steps.
 
    The output is similar to the following:
 
-   .. code-block:: json
+   .. code-block:: none
       :class: output
 
-             {
+      Top three (3) Users with Most Failed Login Attempts
+      {
+        "took" : 271,
+        "timed_out" : false,
+        "_shards" : {
+          "total" : 8,
+          "successful" : 8,
+          "skipped" : 0,
+          "failed" : 0
+        },
+        "hits" : {
+          "total" : {
+            "value" : 36,
+            "relation" : "eq"
+          },
+          "max_score" : null,
+          "hits" : [ ]
+        },
+        "aggregations" : {
+          "failed_logins_by_user" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 6,
+            "buckets" : [
+              {
                 "key" : "root",
-                "doc_count" : 19
+                "doc_count" : 15
               },
               {
                 "key" : "test",
                 "doc_count" : 9
               },
               {
-                "key" : "nobody",
-                "doc_count" : 4
+                "key" : "admin",
+                "doc_count" : 6
               }
             ]
           }
