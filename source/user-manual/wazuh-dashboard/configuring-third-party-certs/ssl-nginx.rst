@@ -216,7 +216,6 @@ Configure the proxy and the certificates
 
    .. thumbnail:: /images/configuring-third-party-certs/wazuh-dashboard.jpg
       :title: Wazuh dashboard
-      :alt: Wazuh dashboard login page opened in a browser through the configured domain name
       :align: center
       :width: 80%
 
