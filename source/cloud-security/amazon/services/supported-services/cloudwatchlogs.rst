@@ -90,7 +90,7 @@ Configure Wazuh to process Amazon CloudWatch logs
 -------------------------------------------------
 
 #. Make sure that the AWS integrations are enabled on the Wazuh dashboard, as described in :doc:`Enable AWS integration on the Wazuh dashboard </cloud-security/amazon/services/prerequisites/enabling-integration>`.
-#. Add the following :doc:`Wazuh module for AWS </user-manual/reference/ossec-conf/wodle-s3>` configuration block in the ``/var/ossec/etc/ossec.conf`` file of the Wazuh agent to enable the integration with CloudWatch Logs. Replace the log group name and Region in the example with your own values. If the file already has a ``<wodle name="aws-s3">`` block, add only the ``<service>`` section to it:
+#. Add the following :doc:`Wazuh module for AWS </user-manual/reference/ossec-conf/wodle-s3>` configuration block in the ``/var/ossec/etc/ossec.conf`` file of the Wazuh agent to collect logs from CloudWatch Logs. Replace the log group name and Region in the example with your own values. If the file already has a ``<wodle name="aws-s3">`` block, add only the ``<service>`` section to it:
 
    .. code-block:: xml
       :emphasize-lines: 7
@@ -121,4 +121,4 @@ Configure Wazuh to process Amazon CloudWatch logs
 CloudWatch Logs use case
 ------------------------
 
-Check the :doc:`Amazon ECR image scanning </cloud-security/amazon/services/supported-services/ecr-image-scanning>` section for an example of this integration. In that example, a Lambda function writes each Amazon ECR basic scan finding as a log event to the ``/aws/ecr/image-scan-findings/<REPOSITORY_NAME>`` log group. Wazuh reads these log events and raises the AWS ECR critical or high image vulnerability and AWS ECR image vulnerability findings.
+Check the :doc:`Amazon ECR image scanning </cloud-security/amazon/services/supported-services/ecr-image-scanning>` section for an example. In that example, a Lambda function writes each Amazon ECR basic scan finding as a log event to the ``/aws/ecr/image-scan-findings/<REPOSITORY_NAME>`` log group. Wazuh reads these log events and raises the AWS ECR critical or high image vulnerability and AWS ECR image vulnerability findings.

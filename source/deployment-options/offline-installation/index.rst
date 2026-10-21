@@ -154,6 +154,8 @@ Run the Wazuh installation assistant on any Linux system with Internet access to
         #    ip:
         #      - "<load-balancer-ip>"
 
+   Each node needs an ``ip``, a ``dns``, or both, and each accepts a list. The certificate of the node includes every value.
+
 #. Run the following command to create the certificates and the passwords. For a multi-node cluster, these certificates need to be later deployed to all Wazuh instances in your cluster. The command reads ``config.yml`` from the directory of the installation assistant and moves it into ``wazuh-install-files.tar``.
 
    .. code-block:: console

@@ -212,27 +212,3 @@ Configure Wazuh to process AWS Trusted Advisor logs
    .. code-block:: console
 
       # systemctl restart wazuh-agent
-
-Trusted Advisor use case
-------------------------
-
-Monitoring Trusted Advisor check results
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-When a Trusted Advisor check finds an issue, such as a security group that allows unrestricted access to a port, it sets the check status to WARN or ERROR. EventBridge forwards the check result to the S3 bucket, and Wazuh indexes it as an event.
-
-To see these events, go to **Explore** > **Discover**, select the ``wazuh-events-v5*`` index pattern, and filter by ``wazuh.integration.name:aws and not event.kind:*``.
-
-.. thumbnail:: /images/cloud-security/aws/trusted-advisor/1-monitoring-trusted-advisor-check-results.png
-   :title: Trusted Advisor check result events in Discover
-   :alt: Trusted Advisor check result events in Discover
-   :align: center
-   :width: 80%
-
-Expand an event and check event.original to see the check result: the check name (check-name), its status (status), the affected resource (resource_id), and the check details (check-item-detail).
-
-.. thumbnail:: /images/cloud-security/aws/trusted-advisor/2-monitoring-trusted-advisor-check-results.png
-   :title: Expanded Trusted Advisor check result event
-   :alt: Expanded Trusted Advisor check result event
-   :align: center
-   :width: 80%

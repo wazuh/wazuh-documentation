@@ -6,7 +6,7 @@
 Amazon ECR image scanning
 =========================
 
-`Amazon ECR image scanning <https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning.html>`__ detects software vulnerabilities in container images and lists them as scan findings. Amazon ECR basic scanning uses AWS native technology and more than 50 data feeds to detect common vulnerabilities and exposures (CVEs). Wazuh collects these findings through the :doc:`Amazon CloudWatch Logs </cloud-security/amazon/services/supported-services/cloudwatchlogs>` integration. This integration covers Amazon ECR basic scanning only. If your registry uses enhanced scanning, collect the findings with the :doc:`Amazon Inspector integration </cloud-security/amazon/services/supported-services/inspector>` instead.
+`Amazon ECR image scanning <https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning.html>`__ detects software vulnerabilities in container images and lists them as scan findings. Amazon ECR basic scanning uses AWS native technology and more than 50 data feeds to detect common vulnerabilities and exposures (CVEs). Wazuh collects these findings from :doc:`Amazon CloudWatch Logs </cloud-security/amazon/services/supported-services/cloudwatchlogs>`. This method covers Amazon ECR basic scanning only. If your registry uses enhanced scanning, collect the findings with :doc:`Amazon Inspector </cloud-security/amazon/services/supported-services/inspector>` instead.
 
 Amazon ECR sends an event to Amazon EventBridge when an image scan is completed. The event itself is only a summary and does not contain the details of the scan findings. However, you can configure a Lambda function to request the scan findings details and store them in CloudWatch Logs. The following list and diagram summarize the workflow:
 
@@ -15,7 +15,7 @@ Amazon ECR sends an event to Amazon EventBridge when an image scan is completed.
 #. The "Scan completed" event triggers a Lambda function.
 #. The Lambda function takes the data from the "Scan completed" event and requests the scan details.
 #. The Lambda function creates a log group and a log stream in CloudWatch Logs to store the response received.
-#. Wazuh retrieves logs from CloudWatch log groups via the CloudWatch Logs integration.
+#. Wazuh retrieves logs from CloudWatch log groups with the Wazuh module for AWS.
 
 .. thumbnail:: /images/cloud-security/aws/ecr-image-scanning/ecr-image-scanning.png
    :title: Amazon ECR image scanning workflow
@@ -31,7 +31,7 @@ The following sections cover configuring AWS to store scan findings in CloudWatc
 Amazon ECR image scan configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-AWS provides a `template <https://github.com/aws-samples/ecr-image-scan-findings-logger/blob/main/Template-ECR-SFL.yml>`__ that logs findings from Amazon ECR image scans to CloudWatch. The template uses an AWS Lambda function to accomplish this. The Lambda function runs when an Amazon ECR basic scan completes. If your registry uses enhanced scanning with Amazon Inspector, Amazon ECR doesn't send this event, so the function writes no logs. In that case, use basic scanning for the repository, or collect the findings with the Amazon Inspector integration.
+AWS provides a `template <https://github.com/aws-samples/ecr-image-scan-findings-logger/blob/main/Template-ECR-SFL.yml>`__ that logs findings from Amazon ECR image scans to CloudWatch. The template uses an AWS Lambda function to accomplish this. The Lambda function runs when an Amazon ECR basic scan completes. If your registry uses enhanced scanning with Amazon Inspector, Amazon ECR doesn't send this event, so the function writes no logs. In that case, use basic scanning for the repository, or collect the findings with Amazon Inspector.
 
 Deploying the stack, pushing and scanning images, and reading the scan findings require specific permissions, so you need to create custom policies. Attach the first five policies below to the user who deploys the stack and pushes the images. They cover the IAM roles, the CloudFormation stack, the Amazon ECR registry, image pushing and scanning, and AWS Lambda and Amazon EventBridge. Attach the CloudWatch Logs policy to the IAM user that the Wazuh module for AWS uses. After creating a policy, you can attach it directly to a user or to a group to which the user belongs. In the policies below, replace ``<REGION>``, ``<ACCOUNT_ID>``, and ``<REPOSITORY_NAME>`` with your AWS Region, AWS account ID, and Amazon ECR repository name.
 
@@ -287,7 +287,7 @@ Configure Wazuh to process Amazon ECR image scanning logs
 ---------------------------------------------------------
 
 #. Make sure that the AWS integrations are enabled on the Wazuh dashboard, as described in :doc:`Enable AWS integration on the Wazuh dashboard </cloud-security/amazon/services/prerequisites/enabling-integration>`.
-#. Add the following :doc:`Wazuh module for AWS </user-manual/reference/ossec-conf/wodle-s3>` configuration block in the ``/var/ossec/etc/ossec.conf`` file of the Wazuh agent to enable the integration with Amazon ECR Image scanning. Replace ``<REPOSITORY_NAME>`` with the name of the Amazon ECR repository and ``<REGION>`` with its AWS Region. If the file already has a ``<wodle name="aws-s3">`` block, add only the ``<service>`` section to it:
+#. Add the following :doc:`Wazuh module for AWS </user-manual/reference/ossec-conf/wodle-s3>` configuration block in the ``/var/ossec/etc/ossec.conf`` file of the Wazuh agent to collect the Amazon ECR image scanning findings. Replace ``<REPOSITORY_NAME>`` with the name of the Amazon ECR repository and ``<REGION>`` with its AWS Region. If the file already has a ``<wodle name="aws-s3">`` block, add only the ``<service>`` section to it:
 
    .. code-block:: xml
       :emphasize-lines: 7,8
@@ -307,7 +307,7 @@ Configure Wazuh to process Amazon ECR image scanning logs
 
       This example uses the ``aws_profile`` authentication parameter. Check the :doc:`Configure AWS credentials </cloud-security/amazon/services/prerequisites/credentials>` section to learn more about the different authentication options and how to use them.
 
-      Check the :doc:`Amazon CloudWatch Logs integration </cloud-security/amazon/services/supported-services/cloudwatchlogs>` to learn more about how the CloudWatch Logs integration works.
+      Check the :doc:`Amazon CloudWatch Logs </cloud-security/amazon/services/supported-services/cloudwatchlogs>` section to learn more about how Wazuh collects CloudWatch Logs.
 
 #. Save the changes and restart the Wazuh agent service to apply the changes:
 

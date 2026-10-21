@@ -14,7 +14,7 @@ AWS Security Hub CSPM
 
 AWS renamed AWS Security Hub to AWS Security Hub CSPM. This section uses AWS Security Hub CSPM, which sends findings in the AWS Security Finding Format (ASFF).
 
-You need to perform the following to set up the integration that allows you to receive Security Hub CSPM events on your Wazuh environment:
+You need to perform the following to set up the configuration that allows you to receive Security Hub CSPM events on your Wazuh environment:
 
 #. Configure your AWS environment. This involves:
 
@@ -111,7 +111,7 @@ Integrating Security Hub CSPM with EventBridge
 
 Integrating Security Hub CSPM with EventBridge enables the storage of Security Hub CSPM events in S3 buckets.
 
-There are three types of events available, each using a specific `EventBridge event format <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cwe-event-formats.html>`__. The Wazuh integration takes every relevant ``detail`` and ``detail-type`` value from them.
+There are three types of events available, each using a specific `EventBridge event format <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cwe-event-formats.html>`__. The Wazuh module for AWS takes every relevant ``detail`` and ``detail-type`` value from them.
 
 -  Security Hub Findings - Imported: Security Hub CSPM automatically sends events of this type to EventBridge. They include new findings and updates to existing findings, each containing a single finding.
 -  Security Hub Findings - Custom Action: When you trigger custom actions, Security Hub CSPM sends these events to EventBridge. The custom actions associate the events with their findings.
@@ -137,7 +137,7 @@ To integrate Security Hub CSPM with EventBridge, you must create an event rule i
       :align: center
       :width: 80%
 
-   The **Create rule** page opens.
+   On the **default** event bus page, click **Create rule**.
 
    .. thumbnail:: /images/cloud-security/aws/security-hub/02-create-rule-2.png
       :title: Create rule on the default event bus
@@ -351,7 +351,7 @@ Check the :doc:`Wazuh module for AWS </user-manual/reference/ossec-conf/wodle-s3
    Every message sent to the queue is read and deleted. Make sure you only use the queue for bucket notifications.
 
 Visualize the findings on the Wazuh dashboard
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+---------------------------------------------
 
 You can view these findings on the Wazuh dashboard. Go to **Amazon Web Services** > **Findings** and filter by ``observer.vendor: "AWS Security Hub"``.
 
