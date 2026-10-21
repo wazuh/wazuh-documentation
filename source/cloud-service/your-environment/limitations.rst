@@ -20,8 +20,8 @@ Restricted API access
 * Access to these APIs can be enabled on request through Wazuh Support.
 * Even when enabled, only read operations are supported; direct write operations to the indexer API are not permitted.
 
-No CLI access
--------------
+No shell or infrastructure access
+---------------------------------
 
 Users do not have direct command-line or shell access to the underlying cloud infrastructure. This ensures that the environment remains secure, stable, and consistent across tenants.
 
