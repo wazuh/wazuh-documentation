@@ -372,6 +372,21 @@ paths:
   /_nodes/{node_id}/stats/{metric}:
     $ref: 'stats_api.yml#/paths/~1_nodes~1{node_id}~1stats~1{metric}'
 
+  /_nodes/stats:
+    $ref: 'stats_api.yml#/paths/~1_nodes~1stats'
+
+  /_nodes/{node_id}/stats:
+    $ref: 'stats_api.yml#/paths/~1_nodes~1{node_id}~1stats'
+
+  /_nodes/stats/{metric}:
+    $ref: 'stats_api.yml#/paths/~1_nodes~1stats~1{metric}'
+
+  /_nodes/stats/{metric}/{index_metric}:
+    $ref: 'stats_api.yml#/paths/~1_nodes~1stats~1{metric}~1{index_metric}'
+
+  /_nodes/{node_id}/stats/{metric}/{index_metric}:
+    $ref: 'stats_api.yml#/paths/~1_nodes~1{node_id}~1stats~1{metric}~1{index_metric}'
+
   /_plugins/_security_analytics/detectors:
     $ref: 'security_analytics_api.yml#/paths/~1_plugins~1_security_analytics~1detectors'
 
@@ -789,6 +804,9 @@ paths:
 
   /_reindex:
     $ref: 'document_api.yml#/paths/~1_reindex'
+
+  /_count:
+    $ref: 'miscellaneous_api.yml#/paths/~1_count'
 
   /{target}/_count:
     $ref: 'miscellaneous_api.yml#/paths/~1{target}~1_count'

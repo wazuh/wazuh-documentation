@@ -39,6 +39,246 @@ paths:
               - thread_pool
               - transport
           example: "shard_indexing_pressure"
+        - $ref: '#/components/parameters/include_all'
+        - $ref: '#/components/parameters/level'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/top'
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: '#/components/responses/StatsSuccess'
+        '400':
+          $ref: '#/components/responses/StatsBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/StatsForbidden'
+        '404':
+          $ref: '#/components/responses/StatsNotFound'
+
+  /_nodes/stats:
+    get:
+      tags:
+        - Nodes stats API
+      summary: Nodes stats (all nodes)
+      description: |
+        Returns statistical information about nodes in the cluster. Use the `metric` path parameter to limit the response to a specific metric.
+      operationId: getNodesStatsAll
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/include_all'
+        - $ref: '#/components/parameters/level'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/top'
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: '#/components/responses/StatsSuccess'
+        '400':
+          $ref: '#/components/responses/StatsBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/StatsForbidden'
+        '404':
+          $ref: '#/components/responses/StatsNotFound'
+
+  /_nodes/{node_id}/stats:
+    get:
+      tags:
+        - Nodes stats API
+      summary: Nodes stats (by node)
+      description: |
+        Returns statistical information about nodes in the cluster. Use the `metric` path parameter to limit the response to a specific metric.
+      operationId: getNodesStatsByNode
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: node_id
+          in: path
+          required: true
+          description: A comma-separated list of node IDs or names to limit the returned information. Use `_local` to return information from the node you are connecting to, or `_all` to return information from all nodes.
+          schema:
+            type: string
+          example: "_local"
+        - $ref: '#/components/parameters/include_all'
+        - $ref: '#/components/parameters/level'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/top'
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: '#/components/responses/StatsSuccess'
+        '400':
+          $ref: '#/components/responses/StatsBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/StatsForbidden'
+        '404':
+          $ref: '#/components/responses/StatsNotFound'
+
+  /_nodes/stats/{metric}:
+    get:
+      tags:
+        - Nodes stats API
+      summary: Nodes stats (by metric)
+      description: |
+        Returns statistical information about nodes in the cluster. Use the `metric` path parameter to limit the response to a specific metric.
+      operationId: getNodesStatsByMetric
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: metric
+          in: path
+          required: true
+          description: Limits the information returned to the specified metric.
+          schema:
+            type: string
+            enum:
+              - _all
+              - breaker
+              - discovery
+              - fs
+              - http
+              - indexing_pressure
+              - indices
+              - jvm
+              - os
+              - process
+              - shard_indexing_pressure
+              - thread_pool
+              - transport
+          example: "shard_indexing_pressure"
+        - $ref: '#/components/parameters/include_all'
+        - $ref: '#/components/parameters/level'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/top'
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: '#/components/responses/StatsSuccess'
+        '400':
+          $ref: '#/components/responses/StatsBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/StatsForbidden'
+        '404':
+          $ref: '#/components/responses/StatsNotFound'
+
+  /_nodes/stats/{metric}/{index_metric}:
+    get:
+      tags:
+        - Nodes stats API
+      summary: Nodes stats (by metric and index metric)
+      description: |
+        Returns statistical information about nodes in the cluster. Use the `metric` path parameter to limit the response to a specific metric.
+      operationId: getNodesStatsByMetricAndIndexMetric
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: metric
+          in: path
+          required: true
+          description: Limits the information returned to the specified metric.
+          schema:
+            type: string
+            enum:
+              - _all
+              - breaker
+              - discovery
+              - fs
+              - http
+              - indexing_pressure
+              - indices
+              - jvm
+              - os
+              - process
+              - shard_indexing_pressure
+              - thread_pool
+              - transport
+          example: "shard_indexing_pressure"
+        - name: index_metric
+          in: path
+          required: true
+          description: Limits the information returned for the `indices` metric to the specified index metrics, such as `docs`, `store`, `indexing`, or `search`.
+          schema:
+            type: string
+          example: "docs"
+        - $ref: '#/components/parameters/include_all'
+        - $ref: '#/components/parameters/level'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/top'
+        - $ref: '#/components/parameters/pretty'
+      responses:
+        '200':
+          $ref: '#/components/responses/StatsSuccess'
+        '400':
+          $ref: '#/components/responses/StatsBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/StatsForbidden'
+        '404':
+          $ref: '#/components/responses/StatsNotFound'
+
+  /_nodes/{node_id}/stats/{metric}/{index_metric}:
+    get:
+      tags:
+        - Nodes stats API
+      summary: Nodes stats (by node, metric and index metric)
+      description: |
+        Returns statistical information about nodes in the cluster. Use the `metric` path parameter to limit the response to a specific metric.
+      operationId: getNodesStatsByNodeMetricAndIndexMetric
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - name: node_id
+          in: path
+          required: true
+          description: A comma-separated list of node IDs or names to limit the returned information. Use `_local` to return information from the node you are connecting to, or `_all` to return information from all nodes.
+          schema:
+            type: string
+          example: "_local"
+        - name: metric
+          in: path
+          required: true
+          description: Limits the information returned to the specified metric.
+          schema:
+            type: string
+            enum:
+              - _all
+              - breaker
+              - discovery
+              - fs
+              - http
+              - indexing_pressure
+              - indices
+              - jvm
+              - os
+              - process
+              - shard_indexing_pressure
+              - thread_pool
+              - transport
+          example: "shard_indexing_pressure"
+        - name: index_metric
+          in: path
+          required: true
+          description: Limits the information returned for the `indices` metric to the specified index metrics, such as `docs`, `store`, `indexing`, or `search`.
+          schema:
+            type: string
+          example: "docs"
+        - $ref: '#/components/parameters/include_all'
+        - $ref: '#/components/parameters/level'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/top'
         - $ref: '#/components/parameters/pretty'
       responses:
         '200':
@@ -58,6 +298,42 @@ components:
       name: pretty
       in: query
       description: Show results in human-readable format.
+      schema:
+        type: boolean
+        default: false
+
+    include_all:
+      name: include_all
+      in: query
+      description: Includes all available shard indexing pressure statistics in the response.
+      schema:
+        type: boolean
+        default: false
+
+    level:
+      name: level
+      in: query
+      description: The level of the indices statistics. Valid values are `node`, `indices`, and `shards`.
+      schema:
+        type: string
+        enum:
+          - node
+          - indices
+          - shards
+        default: node
+
+    timeout:
+      name: timeout
+      in: query
+      description: The time to wait for the nodes to respond.
+      schema:
+        type: string
+        format: duration
+
+    top:
+      name: top
+      in: query
+      description: Returns aggregated shard indexing pressure stats, excluding per-shard details.
       schema:
         type: boolean
         default: false
