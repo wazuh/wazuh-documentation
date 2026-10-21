@@ -601,6 +601,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/allow_no_indices'
         - $ref: '#/components/parameters/expand_wildcards'
+        - $ref: '#/components/parameters/ignore_unavailable'
         - $ref: '#/components/parameters/cluster_manager_timeout'
         - $ref: '#/components/parameters/timeout'
       responses:
@@ -737,6 +738,7 @@ paths:
         - $ref: '#/components/parameters/create'
         - $ref: '#/components/parameters/cluster_manager_timeout'
         - $ref: '#/components/parameters/flat_settings'
+        - $ref: '#/components/parameters/local'
       responses:
         '200':
           $ref: '#/components/responses/GetIndexTemplateSuccess'
@@ -1066,6 +1068,7 @@ paths:
         - $ref: '#/components/parameters/max_num_segments'
         - $ref: '#/components/parameters/only_expunge_deletes'
         - $ref: '#/components/parameters/primary_only'
+        - $ref: '#/components/parameters/wait_for_completion'
       responses:
         '200':
           $ref: '#/components/responses/ForcemergeSuccess'
@@ -1110,6 +1113,7 @@ paths:
         - $ref: '#/components/parameters/max_num_segments'
         - $ref: '#/components/parameters/only_expunge_deletes'
         - $ref: '#/components/parameters/primary_only'
+        - $ref: '#/components/parameters/wait_for_completion'
       responses:
         '200':
           $ref: '#/components/responses/ForcemergeSuccess'
