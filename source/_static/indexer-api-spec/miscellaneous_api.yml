@@ -18,6 +18,7 @@ paths:
         - $ref: '#/components/parameters/count_min_score'
         - $ref: '#/components/parameters/count_routing'
         - $ref: '#/components/parameters/count_preference'
+        - $ref: '#/components/parameters/count_q'
         - $ref: '#/components/parameters/count_terminate_after'
         - $ref: 'spec.yml#/components/parameters/pretty'
       requestBody:
@@ -52,6 +53,7 @@ paths:
         - $ref: '#/components/parameters/count_min_score'
         - $ref: '#/components/parameters/count_routing'
         - $ref: '#/components/parameters/count_preference'
+        - $ref: '#/components/parameters/count_q'
         - $ref: '#/components/parameters/count_terminate_after'
         - $ref: 'spec.yml#/components/parameters/pretty'
       requestBody:
@@ -88,6 +90,7 @@ paths:
         - $ref: '#/components/parameters/count_min_score'
         - $ref: '#/components/parameters/count_routing'
         - $ref: '#/components/parameters/count_preference'
+        - $ref: '#/components/parameters/count_q'
         - $ref: '#/components/parameters/count_terminate_after'
         - $ref: 'spec.yml#/components/parameters/pretty'
       requestBody:
@@ -122,6 +125,7 @@ paths:
         - $ref: '#/components/parameters/count_min_score'
         - $ref: '#/components/parameters/count_routing'
         - $ref: '#/components/parameters/count_preference'
+        - $ref: '#/components/parameters/count_q'
         - $ref: '#/components/parameters/count_terminate_after'
         - $ref: 'spec.yml#/components/parameters/pretty'
       requestBody:
@@ -374,6 +378,13 @@ components:
       schema:
         type: number
         format: float
+
+    count_q:
+      name: q
+      in: query
+      description: A query in the Lucene query string syntax.
+      schema:
+        type: string
 
     count_routing:
       name: routing

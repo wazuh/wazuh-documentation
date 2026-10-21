@@ -1104,7 +1104,9 @@ tags:
     description: Operations for managing Wazuh platform settings.
   - name: AI Assistant
     description: |
-      Operations for managing the AI assistant's providers, global settings and field policy. These are stored, along with the CTI access token, in the hidden system index `.wazuh-internal-state`, which is unreachable through ordinary index permissions; these endpoints are the only way to read or write that data.
+      Operations for managing the AI assistant's providers, global settings, field policy, and saved sessions. These are stored, along with the CTI access token, in the hidden system index `.wazuh-internal-state`, which is unreachable through ordinary index permissions; these endpoints are the only way to read or write that data.
+
+      **Note:** The reserved `wazuh_ai_assistant` role is mapped to all users and grants the `plugin:wazuh/ai_assistant/session/write` action group, so every authenticated user can manage their own sessions, and the session endpoints don't return 403 with the shipped configuration. The settings and provider endpoints need the `plugin:wazuh/ai_assistant/settings/read` or `plugin:wazuh/ai_assistant/settings/write` action group, which the shipped configuration doesn't give to ordinary users. Error messages show the underlying `cluster:admin/ai_assistant/` actions.
   - name: Subscription Management
     description: Operations for managing CTI subscriptions and credentials.
   - name: Content Updates

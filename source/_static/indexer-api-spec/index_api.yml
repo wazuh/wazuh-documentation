@@ -411,6 +411,8 @@ paths:
         - $ref: '#/components/parameters/expand_wildcards'
         - $ref: '#/components/parameters/fielddata'
         - $ref: '#/components/parameters/fields'
+        - $ref: '#/components/parameters/file'
+        - $ref: '#/components/parameters/clear_cache_index'
         - $ref: '#/components/parameters/ignore_unavailable'
         - $ref: '#/components/parameters/query'
         - $ref: '#/components/parameters/request'
@@ -441,6 +443,8 @@ paths:
         - $ref: '#/components/parameters/expand_wildcards'
         - $ref: '#/components/parameters/fielddata'
         - $ref: '#/components/parameters/fields'
+        - $ref: '#/components/parameters/file'
+        - $ref: '#/components/parameters/clear_cache_index'
         - $ref: '#/components/parameters/ignore_unavailable'
         - $ref: '#/components/parameters/query'
         - $ref: '#/components/parameters/request'
@@ -710,7 +714,7 @@ paths:
       description: |
         To create or add mappings and fields to an index, you can use the PUT mapping API. If the mapping already exists, this operation will update it.
 
-        However, this operation cannot be used to modify mappings that are already applied to existing data in the index. To update those mappings, you must first create a new index with the desired mappings and then use the [Reindex API](https://documentation.wazuh.com/indexer-api/user-manual/indexer-api/reference.html#operation/reindexDocuments) to transfer the documents from the old index to the new one.
+        However, this operation cannot be used to modify mappings that are already applied to existing data in the index. To update those mappings, you must first create a new index with the desired mappings and then use the Reindex API to transfer the documents from the old index to the new one.
       operationId: postTargetIndexMapping
       security:
         - basicAuth: []
@@ -954,7 +958,7 @@ paths:
 
     post:
       tags: [Index APIs]
-      summary: Create or update component template (PUT) (POST)
+      summary: Create or update component template (POST)
       description: |
         The Component Template API allows you to create or update a component template. These templates serve as reusable building blocks that define settings, mappings, and aliases, which can be shared across multiple index templates.
 
@@ -2307,6 +2311,23 @@ components:
       schema:
         type: string
       example: "wazuh-alerts-4.x-2025.03.14"
+
+    file:
+      name: file
+      in: query
+      required: false
+      description: When true, clears the file cache of indexes that use searchable snapshots.
+      schema:
+        type: boolean
+        default: false
+
+    clear_cache_index:
+      name: index
+      in: query
+      required: false
+      description: A comma-separated list of index names whose cache should be cleared.
+      schema:
+        type: string
 
     fielddata:
       name: fielddata

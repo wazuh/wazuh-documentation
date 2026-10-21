@@ -201,6 +201,7 @@ paths:
         - jwtAuth: []
       parameters:
         - $ref: '#/components/parameters/bytes'
+        - $ref: '#/components/parameters/fields'
         - $ref: '#/components/parameters/format'
         - $ref: '#/components/parameters/h'
         - $ref: '#/components/parameters/help'
@@ -234,6 +235,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/FieldName'
         - $ref: '#/components/parameters/bytes'
+        - $ref: '#/components/parameters/fields'
         - $ref: '#/components/parameters/format'
         - $ref: '#/components/parameters/h'
         - $ref: '#/components/parameters/help'
@@ -1085,6 +1087,7 @@ paths:
         - $ref: '#/components/parameters/format'
         - $ref: '#/components/parameters/h'
         - $ref: '#/components/parameters/help'
+        - $ref: '#/components/parameters/local'
         - $ref: '#/components/parameters/s'
         - $ref: '#/components/parameters/v'
       responses:
@@ -1183,6 +1186,13 @@ components:
           - type: array
             items:
               type: string
+
+    fields:
+      name: fields
+      in: query
+      description: A comma-separated list of fields to return. You can also specify the fields in the path.
+      schema:
+        type: string
 
     format:
       name: format
