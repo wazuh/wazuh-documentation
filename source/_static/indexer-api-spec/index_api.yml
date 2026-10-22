@@ -553,6 +553,35 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 
+  /_close:
+    post:
+      tags: [Index APIs]
+      summary: Close index (all indexes)
+      description: |
+        The Close Index API is used to close an index, making it inaccessible for writing or searching. Once closed, the index cannot be updated or queried until it is reopened.
+      operationId: postClose
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/allow_no_indices'
+        - $ref: '#/components/parameters/expand_wildcards'
+        - $ref: '#/components/parameters/ignore_unavailable'
+        - $ref: '#/components/parameters/wait_for_active_shards'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/timeout'
+      responses:
+        '200':
+          $ref: '#/components/responses/CloseIndexSuccess'
+        '400':
+          $ref: '#/components/responses/CloseIndexBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
   /{index}:
     put:
       tags: [Index APIs]
@@ -716,6 +745,73 @@ paths:
 
         However, this operation cannot be used to modify mappings that are already applied to existing data in the index. To update those mappings, you must first create a new index with the desired mappings and then use the Reindex API to transfer the documents from the old index to the new one.
       operationId: postTargetIndexMapping
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/allow_no_indices'
+        - $ref: '#/components/parameters/expand_wildcards'
+        - $ref: '#/components/parameters/ignore_unavailable'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/write_index_only'
+      requestBody:
+        $ref: '#/components/requestBodies/MappingRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/MappingSuccess'
+        '400':
+          $ref: '#/components/responses/MappingBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /{target_index}/_mappings:
+    parameters:
+      - $ref: '#/components/parameters/target_index_mapping'
+    put:
+      tags: [Index APIs]
+      summary: Create or update mappings (plural path, PUT)
+      description: |
+        To create or add mappings and fields to an index, you can use the PUT mapping API. If the mapping already exists, this operation will update it.
+
+        However, this operation cannot be used to modify mappings that are already applied to existing data in the index. To update those mappings, you must first create a new index with the desired mappings and then use the Reindex API to transfer the documents from the old index to the new one.
+      operationId: putTargetIndexMappings
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/allow_no_indices'
+        - $ref: '#/components/parameters/expand_wildcards'
+        - $ref: '#/components/parameters/ignore_unavailable'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/write_index_only'
+      requestBody:
+        $ref: '#/components/requestBodies/MappingRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/MappingSuccess'
+        '400':
+          $ref: '#/components/responses/MappingBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    post:
+      tags: [Index APIs]
+      summary: Create or update mappings (plural path, POST)
+      description: |
+        To create or add mappings and fields to an index, you can use the POST mapping API. If the mapping already exists, this operation will update it.
+
+        However, this operation cannot be used to modify mappings that are already applied to existing data in the index. To update those mappings, you must first create a new index with the desired mappings and then use the Reindex API to transfer the documents from the old index to the new one.
+      operationId: postTargetIndexMappings
       security:
         - basicAuth: []
         - jwtAuth: []
@@ -1358,6 +1454,37 @@ paths:
       description: |
         The Open Index API reactivates a previously closed index, allowing data to be added to it or searched from it once again.
       operationId: postIndexOpen
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+      parameters:
+        - $ref: '#/components/parameters/allow_no_indices'
+        - $ref: '#/components/parameters/expand_wildcards'
+        - $ref: '#/components/parameters/ignore_unavailable'
+        - $ref: '#/components/parameters/wait_for_active_shards'
+        - $ref: '#/components/parameters/cluster_manager_timeout'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/wait_for_completion'
+        - $ref: '#/components/parameters/task_execution_timeout'
+      responses:
+        '200':
+          $ref: '#/components/responses/OpenIndexSuccess'
+        '400':
+          $ref: '#/components/responses/OpenIndexBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /_open:
+    post:
+      tags: [Index APIs]
+      summary: Open index (all indexes)
+      description: |
+        The Open Index API reactivates a previously closed index, allowing data to be added to it or searched from it once again.
+      operationId: postOpen
       security:
         - basicAuth: []
         - jwtAuth: []

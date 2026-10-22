@@ -115,6 +115,9 @@ paths:
   /{index}/_close:
     $ref: 'index_api.yml#/paths/~1{index}~1_close'
 
+  /_close:
+    $ref: 'index_api.yml#/paths/~1_close'
+
   /{index}:
     $ref: 'index_api.yml#/paths/~1{index}'
 
@@ -129,6 +132,9 @@ paths:
 
   /{target_index}/_mapping:
     $ref: 'index_api.yml#/paths/~1{target_index}~1_mapping'
+
+  /{target_index}/_mappings:
+    $ref: 'index_api.yml#/paths/~1{target_index}~1_mappings'
 
   /_component_template/{component_template_name}:
     $ref: 'index_api.yml#/paths/~1_component_template~1{component_template_name}'
@@ -171,6 +177,9 @@ paths:
 
   /{index}/_open:
     $ref: 'index_api.yml#/paths/~1{index}~1_open'
+
+  /_open:
+    $ref: 'index_api.yml#/paths/~1_open'
 
   /_refresh:
     $ref: 'index_api.yml#/paths/~1_refresh'
