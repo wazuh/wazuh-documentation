@@ -17,7 +17,8 @@ For more information about the available manager modules and their configuration
 +-------------+---------------------------------------------------------------------------------+
 | Option      | Description                                                                     |
 +=============+=================================================================================+
-| -c <config> | Specifies the configuration file to use. The default is etc/wazuh-manager.conf. |
+| -c <config> | Specifies the configuration file to use. The default is                         |
+|             | /etc/wazuh-manager/wazuh-manager.conf.                                          |
 +-------------+---------------------------------------------------------------------------------+
 | -d          | Increases the debug level. Repeat the option to further increase the verbosity. |
 +-------------+---------------------------------------------------------------------------------+

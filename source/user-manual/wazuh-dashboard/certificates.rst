@@ -31,7 +31,7 @@ These certificates are created with the following additional information:
 - ``CN``: Name of the node
 
 
-To create the certificates, edit the ``config.yml`` file and replace the node names and IP values with the corresponding names and IP addresses. The ``<node-ip>`` can be either an IP address or a DNS name. The ``config.yml`` template can be found here: `config.yml <https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/config-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.yml>`_.
+To create the certificates, edit the ``config.yml`` file and replace the node names and IP values with the corresponding names and IP addresses. The ``<indexer-node-ip>``, ``<wazuh-manager-ip>``, and ``<dashboard-node-ip>`` values can be either IP addresses or DNS names. The ``config.yml`` template can be found here: `config.yml <https://packages-staging.xdrsiem.wazuh.info/pre-release/|WAZUH_CURRENT_MAJOR|/installation-assistant/config-|WAZUH_CURRENT|-|WAZUH_MANAGER_CURRENT_REV|.yml>`_.
 
     .. code-block:: yaml
 
@@ -87,11 +87,14 @@ After running the script, the directory ``wazuh-certificates`` will be created a
         ├── server-key.pem
         └── server.pem
 
-Additionally, this script allows the use of a pre-existent rootCA certificate. To create all the certificates using a pre-existent rootCA certificate, use option ``-A`` and indicate the ``root-ca`` certificate and key as follows:
+Additionally, this script allows the use of a pre-existent rootCA certificate. To use it, copy ``root-ca.pem`` and ``root-ca.key`` to ``/etc/wazuh/ca``, and run the script with option ``-A``:
 
     .. code-block:: console
 
-        # bash wazuh-certs-tool.sh -A /path/to/root-ca.pem /path/to/root-ca.key
+       # install -d -m 0700 -o root -g root /etc/wazuh /etc/wazuh/ca
+       # install -m 0644 -o root -g root /path/to/root-ca.pem /etc/wazuh/ca/root-ca.pem
+       # install -m 0400 -o root -g root /path/to/root-ca.key /etc/wazuh/ca/root-ca.key
+       # bash wazuh-certs-tool.sh -A
 
 After running the script, the directory ``wazuh-certificates`` will be created and will have the following content:
 

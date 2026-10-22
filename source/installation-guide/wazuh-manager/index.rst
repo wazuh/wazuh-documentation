@@ -125,7 +125,7 @@ The Wazuh manager uses the following ports.
 | 9200/TCP, outbound | This Wazuh manager                                                                | Connection to the Wazuh indexer            |
 +--------------------+-----------------------------------------------------------------------------------+--------------------------------------------+
 
-If no Wazuh 4.x agents connect to this Wazuh manager, you can keep 1514 and 1515 closed. You can also disable them in ``/var/wazuh-manager/etc/wazuh-manager.conf`` with ``<remote><legacy><enabled>`` and ``<auth><disabled>``.
+If no Wazuh 4.x agents connect to this Wazuh manager, you can keep 1514 and 1515 closed. You can also disable them in ``/etc/wazuh-manager/wazuh-manager.conf`` with ``<remote><legacy><enabled>`` and ``<auth><disabled>``.
 
 .. _wazuh_manager_agent_connection_address:
 

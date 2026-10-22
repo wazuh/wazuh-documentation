@@ -16,12 +16,12 @@ You have now installed and configured all the Wazuh central components. Each com
       # curl -k -u kibanaserver https://<WAZUH_INDEXER_ADDRESS>:9200/_plugins/_security/authinfo?pretty
       # curl -k -u wazuh-manager https://<WAZUH_INDEXER_ADDRESS>:9200/_plugins/_security/authinfo?pretty
 
-   On the Wazuh manager API of the master node, the users are ``wazuh`` (``WAZUH_MANAGER_API_PASSWORD``) and ``wazuh-wui`` (``WAZUH_MANAGER_WUI_PASSWORD``). Each command prints a token:
+   On the Wazuh manager API of the master node, the users are ``wazuh`` (``WAZUH_MANAGER_API_PASSWORD``) and ``wazuh-internal-client`` (``WAZUH_MANAGER_WUI_PASSWORD``). Each command prints a token:
 
    .. code-block:: console
 
       # curl -k -u wazuh -X POST "https://<WAZUH_MASTER_ADDRESS>:55000/security/user/authenticate?raw=true"
-      # curl -k -u wazuh-wui -X POST "https://<WAZUH_MASTER_ADDRESS>:55000/security/user/authenticate?raw=true"
+      # curl -k -u wazuh-internal-client -X POST "https://<WAZUH_MASTER_ADDRESS>:55000/security/user/authenticate?raw=true"
 
 #. Securely store the five passwords. The ``credentials.env`` file in ``wazuh-install-files.tar`` holds all of them. In an all-in-one installation, which creates no ``wazuh-install-files.tar``, the passwords are in ``/etc/wazuh/credentials.env`` on that host.
 
@@ -47,7 +47,7 @@ When you run the tool on a node, it does the following on that node only:
 
 -  It changes the password.
 -  It saves a generated password in ``/etc/wazuh/credentials.env``. If you removed this file in step 3 of Securing your Wazuh installation, the tool creates it again. A password you set with ``-p`` is saved only if the file already exists, so write it down.
--  It stores the new password in the keystore of each component on that node that uses the user: the Wazuh manager for ``wazuh-manager``, and the Wazuh dashboard for ``kibanaserver`` and ``wazuh-wui``. It restarts the Wazuh dashboard when it changes the dashboard keystore.
+-  It stores the new password in the keystore of each component on that node that uses the user: the Wazuh manager for ``wazuh-manager``, and the Wazuh dashboard for ``kibanaserver`` and ``wazuh-internal-client``. It restarts the Wazuh dashboard when it changes the dashboard keystore.
 -  It restarts the Wazuh manager only if that node is the master node. On a worker node, it reports that the ``wazuh-manager`` service is not running and that ``The restart is pending``. The service is running, but it keeps using the previous password, can't write to the Wazuh indexer, and drops the events it receives until you restart it.
 
 On the other nodes, you update the keystores yourself, as the following sections describe.
@@ -103,21 +103,21 @@ The Wazuh indexer users are ``admin``, ``kibanaserver``, and ``wazuh-manager``.
 Changing the password for a Wazuh manager API user
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The Wazuh manager API users are ``wazuh`` and ``wazuh-wui``. Change their passwords on the master node, which runs the Wazuh manager API. Only the Wazuh indexer package installs the Wazuh passwords tool. If the master node doesn't run a Wazuh indexer, copy ``/usr/share/wazuh-indexer/tools/wazuh-passwords-tool.sh`` from a Wazuh indexer node to the master node, and use the path of the copy.
+The Wazuh manager API users are ``wazuh`` and ``wazuh-internal-client``. Change their passwords on the master node, which runs the Wazuh manager API. Only the Wazuh indexer package installs the Wazuh passwords tool. If the master node doesn't run a Wazuh indexer, copy ``/usr/share/wazuh-indexer/tools/wazuh-passwords-tool.sh`` from a Wazuh indexer node to the master node, and use the path of the copy.
 
-#. Run the tool on the master node. Replace ``<USER>`` with ``wazuh`` or ``wazuh-wui``. The ``-p`` option works as it does for the Wazuh indexer users.
+#. Run the tool on the master node. Replace ``<USER>`` with ``wazuh`` or ``wazuh-internal-client``. The ``-p`` option works as it does for the Wazuh indexer users.
 
    .. code-block:: console
 
       # bash /usr/share/wazuh-indexer/tools/wazuh-passwords-tool.sh -u <USER>
 
-#. If the tool generated the password, or ``/etc/wazuh/credentials.env`` existed when you set it with ``-p``, run the following command on the master node to show the new password. Replace ``<KEY>`` with ``WAZUH_MANAGER_API_PASSWORD`` for ``wazuh`` or ``WAZUH_MANAGER_WUI_PASSWORD`` for ``wazuh-wui``.
+#. If the tool generated the password, or ``/etc/wazuh/credentials.env`` existed when you set it with ``-p``, run the following command on the master node to show the new password. Replace ``<KEY>`` with ``WAZUH_MANAGER_API_PASSWORD`` for ``wazuh`` or ``WAZUH_MANAGER_WUI_PASSWORD`` for ``wazuh-internal-client``.
 
    .. code-block:: console
 
       # grep -m 1 '^<KEY>=' /etc/wazuh/credentials.env
 
-#. After you change the ``wazuh-wui`` password, run the following commands on every Wazuh dashboard node that doesn't share a host with the master node. The tool updates a Wazuh dashboard on its own host. Replace ``<WAZUH_MANAGER_WUI_PASSWORD>`` with the new password.
+#. After you change the ``wazuh-internal-client`` password, run the following commands on every Wazuh dashboard node that doesn't share a host with the master node. The tool updates a Wazuh dashboard on its own host. Replace ``<WAZUH_MANAGER_WUI_PASSWORD>`` with the new password.
 
    .. code-block:: console
 

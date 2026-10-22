@@ -310,7 +310,7 @@ Wazuh dashboard configuration
         default:
           url: https://127.0.0.1
           port: 55000
-          username: wazuh-wui
+          username: wazuh-internal-client
           password: "<WAZUH_WUI_PASSWORD>"
           run_as: true
 
@@ -616,7 +616,7 @@ Wazuh dashboard configuration
         default:
           url: https://127.0.0.1
           port: 55000
-          username: wazuh-wui
+          username: wazuh-internal-client
           password: "<WAZUH_WUI_PASSWORD>"
           run_as: true
 

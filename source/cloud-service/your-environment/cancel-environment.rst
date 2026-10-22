@@ -17,8 +17,8 @@ To cancel your environment:
 #. The environment is removed at the end of the billing cycle.
 
 .. thumbnail:: /images/cloud-service/cancellation.png
-   :title: Create internal user
-   :alt: Create internal user
+   :title: Cancel environment
+   :alt: Wazuh Cloud Console Cancel environment dialog with CANCEL typed in the confirmation box and the Cancel button highlighted
    :align: center
    :width: 80%
 

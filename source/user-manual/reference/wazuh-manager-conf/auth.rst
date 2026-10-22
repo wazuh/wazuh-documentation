@@ -102,23 +102,19 @@ Require agents to provide a shared enrollment password.
 | **Allowed values**   | yes, no                             |
 +----------------------+-------------------------------------+
 
-When enabled, the password is read from ``/var/wazuh-manager/etc/authd.pass``. If the file does not exist, ``wazuh-manager-authd`` generates a random password on start, stores it in that file, and reuses it on later starts. If the file exists but is empty or invalid, ``wazuh-manager-authd`` does not start.
+When enabled, the password is read from ``/etc/wazuh-manager/authd.pass``. If the file does not exist, ``wazuh-manager-authd`` generates a random password on start, stores it in that file, and reuses it on later starts. If the file exists but is empty or invalid, ``wazuh-manager-authd`` does not start.
 
 In a Wazuh manager cluster, the enrollment password is maintained on the master node and distributed to worker nodes. A worker node rejects enrollment until it receives the file.
 
-Agent-side setup: The Wazuh installer generates a configuration that sets ``use_password`` to ``yes`` by default. Agents must supply the enrollment password, or the manager rejects their enrollment request. First, retrieve the password from the manager:
+Agent-side setup: Wazuh 5.0 agents enroll with an enrollment token by default. The token carries its own credential, so ``use_password`` doesn't apply to token enrollment. See :ref:`Generate the enrollment token <generate_enrollment_token>`.
+
+A Wazuh 5.0 agent still sends the enrollment password when the file set in ``<enrollment><authorization_pass_path>`` exists. By default, this is ``etc/authd.pass`` in the agent installation directory (``/var/ossec/etc/authd.pass`` on Linux), or ``authd.pass`` on Windows. The Wazuh agent installer doesn't create this file: the ``WAZUH_REGISTRATION_PASSWORD`` install variable was removed and has no effect, and upgrading a Wazuh 4.x agent to 5.0 deletes the file at the default path. To enroll an agent with the password, first retrieve it from the Wazuh manager:
 
 .. code-block:: console
 
-   $ sudo cat /var/wazuh-manager/etc/authd.pass
+   $ sudo cat /etc/wazuh-manager/authd.pass
 
-We recommend providing it through the ``WAZUH_REGISTRATION_PASSWORD`` install variable. This variable writes ``etc/authd.pass`` and sets its ownership and permissions automatically:
-
-.. code-block:: console
-
-   WAZUH_MANAGER="<WAZUH_MANAGER_IP_ADDRESS>" WAZUH_REGISTRATION_PASSWORD="<password>" apt install ./wazuh-agent.deb
-
-To add it to an already installed agent, write the file manually. The agent daemon (``wazuh-agentd``) runs as the ``wazuh`` user, so the file must be readable by that user:
+Then write it to the agent's password file. The Wazuh agent daemon (``wazuh-agentd``) runs as the ``wazuh`` user, so the file must be readable by that user:
 
 .. code-block:: console
 
@@ -126,9 +122,9 @@ To add it to an already installed agent, write the file manually. The agent daem
    $ sudo chown root:wazuh /var/ossec/etc/authd.pass
    $ sudo chmod 640 /var/ossec/etc/authd.pass
 
-The agent reads the password from ``etc/authd.pass`` (relative to its install directory, typically ``/var/ossec/etc/authd.pass``) at startup.
+For the full procedure, including Windows and macOS agents, see :doc:`Using password authentication </user-manual/agent/agent-enrollment/security-options/using-password-authentication>`.
 
-**Password rotation**: The generated password persists across restarts. To rotate it (for example after a security incident), delete ``/var/wazuh-manager/etc/authd.pass`` on the master and restart ``wazuh-manager-authd``. ``wazuh-manager-authd`` generates a new random password, persists it, and distributes it to workers automatically. It logs the reuse of an existing password at ``INFO`` level on every start.
+**Password rotation**: The generated password persists across restarts. To rotate it (for example after a security incident), delete ``/etc/wazuh-manager/authd.pass`` on the master and restart ``wazuh-manager-authd``. ``wazuh-manager-authd`` generates a new random password, persists it, and distributes it to workers automatically. It logs the reuse of an existing password at ``INFO`` level on every start.
 
 remote_enrollment
 ^^^^^^^^^^^^^^^^^^
@@ -205,10 +201,9 @@ ssl_manager_cert
 Path to the Wazuh manager's TLS certificate presented to agents during enrollment.
 
 +----------------------+----------------------------------------------------------------------------------------------+
-| **Default value**    | etc/certs/remoted.pem (resolved relative to the Wazuh install directory, for example         |
-|                      | /var/wazuh-manager/etc/certs/remoted.pem)                                                    |
+| **Default value**    | /etc/wazuh-manager/certs/remoted.pem                                                         |
 +----------------------+----------------------------------------------------------------------------------------------+
-| **Allowed values**   | Path to a PEM-encoded certificate (relative paths resolved from the Wazuh install directory) |
+| **Allowed values**   | Absolute path to a PEM-encoded certificate in /etc/wazuh-manager/certs                       |
 +----------------------+----------------------------------------------------------------------------------------------+
 
 ssl_manager_key
@@ -217,9 +212,9 @@ ssl_manager_key
 Path to the private key corresponding to ``ssl_manager_cert``.
 
 +----------------------+----------------------------------------------------------------------------------------------+
-| **Default value**    | etc/certs/remoted-key.pem (resolved relative to the Wazuh install directory)                 |
+| **Default value**    | /etc/wazuh-manager/certs/remoted-key.pem                                                     |
 +----------------------+----------------------------------------------------------------------------------------------+
-| **Allowed values**   | Path to a PEM-encoded private key (relative paths resolved from the Wazuh install directory) |
+| **Allowed values**   | Absolute path to a PEM-encoded private key in /etc/wazuh-manager/certs                       |
 +----------------------+----------------------------------------------------------------------------------------------+
 
 force
@@ -290,7 +285,7 @@ Minimum time since an agent was last registered before a forced re-enrollment is
 agents/allow_higher_versions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Accept enrollment from agents running a newer Wazuh version than the manager.
+Accept enrollment from agents running a newer Wazuh version than the manager. It applies to the enrollment service on port 1515 and to HTTPS ``POST /enroll``.
 
 +----------------------+-----------+
 | **Default value**    | no        |
@@ -299,7 +294,7 @@ Accept enrollment from agents running a newer Wazuh version than the manager.
 +----------------------+-----------+
 
 .. note::
-   This option controls the enrollment gate (authd, port 1515). There is an independent option with the same name under ``<remote><agents>`` that controls the connection gate (remoted, port 1514). Both options must be set to ``yes`` for a higher-version agent to enroll and connect. If enrollment is allowed but connection is not, the agent can obtain an authentication key but cannot establish communication with the Wazuh manager.
+   This option controls the enrollment gate (authd, port 1515, and HTTPS ``POST /enroll``). There is an independent option with the same name under ``<remote><agents>`` that controls the connection gate (remoted, ports 1514 and 1517). Both options must be set to ``yes`` for a higher-version agent to enroll and connect. If enrollment is allowed but connection is not, the agent can obtain an authentication key but cannot establish communication with the Wazuh manager.
 
 .. code-block:: xml
 
@@ -319,8 +314,8 @@ Sample configuration
      <purge>yes</purge>
      <use_password>yes</use_password>
      <ssl_verify_host>no</ssl_verify_host>
-     <ssl_manager_cert>etc/certs/remoted.pem</ssl_manager_cert>
-     <ssl_manager_key>etc/certs/remoted-key.pem</ssl_manager_key>
+     <ssl_manager_cert>/etc/wazuh-manager/certs/remoted.pem</ssl_manager_cert>
+     <ssl_manager_key>/etc/wazuh-manager/certs/remoted-key.pem</ssl_manager_key>
      <force>
        <enabled>yes</enabled>
        <key_mismatch>yes</key_mismatch>

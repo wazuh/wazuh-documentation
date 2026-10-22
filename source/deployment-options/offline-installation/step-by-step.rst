@@ -229,13 +229,13 @@ Install and configure the Wazuh manager on each manager node. Before installing 
           sed -i "/^${key}=/d" /etc/wazuh/credentials.env
           grep "^${key}=" wazuh-install-files/credentials.env >> /etc/wazuh/credentials.env
         done
-      # mkdir -p /var/wazuh-manager/etc/certs
-      # install -m 0640 wazuh-install-files/$NODE_NAME.pem /var/wazuh-manager/etc/certs/indexer-connector.pem
-      # install -m 0640 wazuh-install-files/$NODE_NAME-key.pem /var/wazuh-manager/etc/certs/indexer-connector-key.pem
-      # install -m 0640 wazuh-install-files/$NODE_NAME-remoted.pem /var/wazuh-manager/etc/certs/remoted.pem
-      # install -m 0640 wazuh-install-files/$NODE_NAME-remoted-key.pem /var/wazuh-manager/etc/certs/remoted-key.pem
+      # mkdir -p /etc/wazuh-manager/certs
+      # install -m 0640 wazuh-install-files/$NODE_NAME.pem /etc/wazuh-manager/certs/indexer-connector.pem
+      # install -m 0640 wazuh-install-files/$NODE_NAME-key.pem /etc/wazuh-manager/certs/indexer-connector-key.pem
+      # install -m 0640 wazuh-install-files/$NODE_NAME-remoted.pem /etc/wazuh-manager/certs/remoted.pem
+      # install -m 0640 wazuh-install-files/$NODE_NAME-remoted-key.pem /etc/wazuh-manager/certs/remoted-key.pem
 
-   ``remoted.pem`` is the agent listener certificate, served on port 1517 and reused by enrollment on port 1515. The package gives each file its owner and copies ``root-ca.pem`` to ``/var/wazuh-manager/etc/certs/``.
+   ``remoted.pem`` is the agent listener certificate, served on port 1517 and reused by enrollment on port 1515. The package gives each file its owner and copies ``root-ca.pem`` to ``/etc/wazuh-manager/certs/``.
 
 #. Install the Wazuh manager package.
 
@@ -257,7 +257,7 @@ Install and configure the Wazuh manager on each manager node. Before installing 
 
    .. code-block:: console
 
-      # openssl verify -CAfile /var/wazuh-manager/etc/certs/root-ca.pem /var/wazuh-manager/etc/certs/remoted.pem
+      # openssl verify -CAfile /etc/wazuh-manager/certs/root-ca.pem /etc/wazuh-manager/certs/remoted.pem
 
 #. Verify that the Wazuh manager package used the deployment passwords during installation. The package stores the Wazuh indexer credential (``WAZUH_INDEXER_MANAGER_PASSWORD``) in the Wazuh manager keystore automatically, so no additional keystore configuration step is required:
 
@@ -267,7 +267,7 @@ Install and configure the Wazuh manager on each manager node. Before installing 
 
    To change this credential later, use the Wazuh passwords tool, as described in :ref:`Changing the password for a Wazuh indexer user <offline_installation_change_indexer_password>`.
 
-#. In the ``<indexer>`` block of ``/var/wazuh-manager/etc/wazuh-manager.conf``, replace ``127.0.0.1`` with the addresses of the Wazuh indexer nodes, using one ``<host>`` entry per node. The package automatically creates the ``<indexer>`` block and configures the ``<ssl>`` certificate paths during installation, pointing to the certificates generated in step 1. Only update the ``<host>`` entries. Apply this change on every Wazuh manager node, as this configuration is not synchronized across the cluster.
+#. In the ``<indexer>`` block of ``/etc/wazuh-manager/wazuh-manager.conf``, replace ``127.0.0.1`` with the addresses of the Wazuh indexer nodes, using one ``<host>`` entry per node. The package automatically creates the ``<indexer>`` block and configures the ``<ssl>`` certificate paths during installation, pointing to the certificates generated in step 1. Only update the ``<host>`` entries. Apply this change on every Wazuh manager node, as this configuration is not synchronized across the cluster.
 
    .. code-block:: xml
       :emphasize-lines: 3, 4
@@ -296,7 +296,7 @@ After completing the installation of the Wazuh manager on every node, you must c
 Configuring the Wazuh manager master node
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Edit the following settings in the ``/var/wazuh-manager/etc/wazuh-manager.conf`` configuration file. Replace ``<CLUSTER_KEY>`` with the key in ``wazuh-install-files/clusterkey``, which the following command shows, and ``<WAZUH_MASTER_ADDRESS>`` with the IP address of the master node.
+#. Edit the following settings in the ``/etc/wazuh-manager/wazuh-manager.conf`` configuration file. Replace ``<CLUSTER_KEY>`` with the key in ``wazuh-install-files/clusterkey``, which the following command shows, and ``<WAZUH_MASTER_ADDRESS>`` with the IP address of the master node.
 
    .. code-block:: console
 
@@ -444,7 +444,7 @@ Install and configure the Wazuh dashboard node. Before installing Wazuh, install
         default:
           url: https://10.0.0.3
           port: 55000
-          username: wazuh-wui
+          username: wazuh-internal-client
           run_as: true
 
    -  ``server.host``: This setting specifies the host of the Wazuh dashboard server. To allow remote users to connect, set the value to the IP address or DNS name of the Wazuh dashboard. The value ``0.0.0.0`` accepts all available IP addresses on the host.

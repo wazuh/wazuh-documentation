@@ -25,6 +25,7 @@ Options
 | -fn [<node> ...], --filter-node [<node> ...]               | Filters the results by one or more node names.          |
 +------------------------------------------------------------+---------------------------------------------------------+
 | -fs [<status> ...], --filter-agent-status [<status> ...]   | Filters the agent list by one or more agent statuses.   |
+|                                                            | Valid only with ``-a``.                                 |
 +------------------------------------------------------------+---------------------------------------------------------+
 | -h, --help                                                 | Displays the help message and exits.                    |
 +------------------------------------------------------------+---------------------------------------------------------+
@@ -65,10 +66,10 @@ The command output looks similar to this:
 .. code-block:: none
    :class: output
 
-   ID   NAME        IP             STATUS        VERSION  NODE NAME
-   003  CentOS      192.168.1.209  disconnected  v5.0.0   node01
-   005  MacOS       192.168.1.208  disconnected  v4.14.5  node01
-   007  agent1      192.168.1.185  disconnected  v5.0.0   node01
-   009  Windows     192.168.1.204  active        v5.0.0   node01
-   010  Ubuntu      192.168.1.252  disconnected  v5.0.0   node01
-   011  ubuntu2004  192.168.1.252  active        v4.14.7  node01
+   ID   NAME        IP             STATUS        VERSION
+   003  CentOS      192.168.1.209  disconnected  v5.0.0
+   005  MacOS       192.168.1.208  disconnected  v4.14.5
+   007  agent1      192.168.1.185  disconnected  v5.0.0
+   009  Windows     192.168.1.204  active        v5.0.0
+   010  Ubuntu      192.168.1.252  disconnected  v5.0.0
+   011  ubuntu2004  192.168.1.252  active        v4.14.7
