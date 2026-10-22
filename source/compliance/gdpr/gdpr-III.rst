@@ -23,9 +23,10 @@ Use case: Search for FIM events within a certain time frame
 In this use case, from the Wazuh dashboard, filter for ``syscheck`` events to confirm that there have been no FIM events involving modification or deletion of restricted data during specific time intervals.
 
 .. thumbnail:: /images/compliance/gdpr/syscheck-no-alerts.png
-    :title: Filtering syscheck alerts
-    :align: center
-    :width: 80%
+   :title: Filtering syscheck alerts
+   :alt: Wazuh dashboard GDPR Events tab filtered on syscheck.event, with one Integrity checksum changed alert, rule 550, for the GDPR requirement II_5.1.f
+   :align: center
+   :width: 80%
 
 Any event in the selected time range means that monitored data was modified or deleted during the restriction period. In this example, the search returns one event, a file modification, which you need to investigate.
 
@@ -87,6 +88,7 @@ Ubuntu endpoint
 On the Wazuh dashboard, an alert shows that the ``subject_data.txt`` file has been deleted.
 
 .. thumbnail:: /images/compliance/gdpr/fim-file-del.png
-    :title: File deletion alert visualization
-    :align: center
-    :width: 80%
+   :title: File deletion alert visualization
+   :alt: Wazuh dashboard GDPR module, document details of a File deleted alert, rule 553, for /root/personal_data/subject_data.txt with the GDPR requirement II_5.1.f
+   :align: center
+   :width: 80%

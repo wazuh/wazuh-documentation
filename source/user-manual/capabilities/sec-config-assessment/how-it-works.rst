@@ -45,7 +45,8 @@ See below SCA policy ID ``19115`` for Ubuntu 20.04 operating system as an exampl
      condition: all
      rules:
         - 'c:sshd -T -> r:^\s*HostbasedAuthentication\s+no'
-        - 'not f:/etc/ssh/sshd_config -> r:^\s*HostbasedAuthentication\s+yes'    
+        - 'not f:/etc/ssh/sshd_config -> r:^\s*HostbasedAuthentication\s+yes'
+        - 'not d:/etc/ssh/sshd_config.d -> r:\.*.conf$ -> r:^\s*HostbasedAuthentication\s+yes'
 
 Scan Results
 ------------

@@ -28,7 +28,7 @@ Each Wazuh Cloud account has a primary email associated with it. If needed, you 
 #. Click **Email address**.
 #. Enter a new email address and your current password, then click **Save** to confirm the action.
 
-  An email is sent to the new address with a link to confirm the change.
+   An email is sent to the new address with a link to confirm the change.
 
 Change your Wazuh Cloud Console password
 ----------------------------------------
@@ -47,7 +47,7 @@ If you don’t know your current password:
 #. Click on **Forgot my password** on the login page of the Wazuh Cloud Console.
 #. Enter the primary email address for your account and click **Reset password**.
 
-  An email is sent to your address with a link to reset the password.
+   An email is sent to your address with a link to reset the password.
 
 Enable multi-factor authentication
 ----------------------------------
@@ -61,4 +61,4 @@ To enable multi-factor authentication:
 #. Under Multi-factor authentication, click **Add MFA** and follow the steps described in the Set up virtual MFA device pane.
 #. Click **Enable MFA** to complete the process.
 
-  If your device is lost or stolen, contact support through the **Help** section of the Wazuh Cloud Console.
+   If your device is lost or stolen, contact support through the **Help** section of the Wazuh Cloud Console.
