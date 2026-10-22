@@ -15,7 +15,8 @@ The manager database service manages the local databases used by the Wazuh manag
 +-------------+---------------------------------------------------------------------------------+
 | Option      | Description                                                                     |
 +=============+=================================================================================+
-| -c <config> | Specifies the configuration file to use. The default is etc/wazuh-manager.conf. |
+| -c <config> | Specifies the configuration file to use. The default is                         |
+|             | /etc/wazuh-manager/wazuh-manager.conf.                                          |
 +-------------+---------------------------------------------------------------------------------+
 | -d          | Runs the daemon in debug mode. Repeat the option to increase the debug level.   |
 +-------------+---------------------------------------------------------------------------------+

@@ -114,14 +114,14 @@ Do this **before installing the package**. The package then uses these files and
           sed -i "/^${key}=/d" /etc/wazuh/credentials.env
           grep "^${key}=" wazuh-certificates/credentials.env >> /etc/wazuh/credentials.env
         done
-      # mkdir -p /var/wazuh-manager/etc/certs
-      # install -m 0640 wazuh-certificates/$NODE_NAME.pem /var/wazuh-manager/etc/certs/indexer-connector.pem
-      # install -m 0640 wazuh-certificates/$NODE_NAME-key.pem /var/wazuh-manager/etc/certs/indexer-connector-key.pem
-      # install -m 0640 wazuh-certificates/$NODE_NAME-remoted.pem /var/wazuh-manager/etc/certs/remoted.pem
-      # install -m 0640 wazuh-certificates/$NODE_NAME-remoted-key.pem /var/wazuh-manager/etc/certs/remoted-key.pem
+      # mkdir -p /etc/wazuh-manager/certs
+      # install -m 0640 wazuh-certificates/$NODE_NAME.pem /etc/wazuh-manager/certs/indexer-connector.pem
+      # install -m 0640 wazuh-certificates/$NODE_NAME-key.pem /etc/wazuh-manager/certs/indexer-connector-key.pem
+      # install -m 0640 wazuh-certificates/$NODE_NAME-remoted.pem /etc/wazuh-manager/certs/remoted.pem
+      # install -m 0640 wazuh-certificates/$NODE_NAME-remoted-key.pem /etc/wazuh-manager/certs/remoted-key.pem
       # rm -rf wazuh-certificates
 
-   The ``wazuh-manager`` user does not exist yet. When the package is installed, it gives each file its owner and copies ``root-ca.pem`` to ``/var/wazuh-manager/etc/certs``.
+   The ``wazuh-manager`` user does not exist yet. When the package is installed, it gives each file its owner and copies ``root-ca.pem`` to ``/etc/wazuh-manager/certs``.
 
 #. **Recommended action**: If no other Wazuh components will be installed on this node, remove the ``wazuh-certificates.tar`` file.
 
@@ -165,15 +165,15 @@ Checking the agent listener certificate
 
    .. code-block:: console
 
-      # openssl verify -CAfile /var/wazuh-manager/etc/certs/root-ca.pem /var/wazuh-manager/etc/certs/remoted.pem
-      # openssl x509 -in /var/wazuh-manager/etc/certs/remoted.pem -noout -ext subjectAltName
+      # openssl verify -CAfile /etc/wazuh-manager/certs/root-ca.pem /etc/wazuh-manager/certs/remoted.pem
+      # openssl x509 -in /etc/wazuh-manager/certs/remoted.pem -noout -ext subjectAltName
 
-   The first command prints ``/var/wazuh-manager/etc/certs/remoted.pem: OK``. The second lists this node's address, its name, and every address you added with ``-as``. Only these addresses can be used to create enrollment tokens on this node.
+   The first command prints ``/etc/wazuh-manager/certs/remoted.pem: OK``. The second lists this node's address, its name, and every address you added with ``-as``. Only these addresses can be used to create enrollment tokens on this node.
 
 Configuring the Wazuh indexer connection
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Edit ``/var/wazuh-manager/etc/wazuh-manager.conf`` file to configure the indexer connection. Do it on the master node and on every worker node, as the cluster does not synchronize this block. By default, the indexer settings configure one host. It's set to ``127.0.0.1``:
+#. Edit ``/etc/wazuh-manager/wazuh-manager.conf`` file to configure the indexer connection. Do it on the master node and on every worker node, as the cluster does not synchronize this block. By default, the indexer settings configure one host. It's set to ``127.0.0.1``:
 
    .. code-block:: xml
       :emphasize-lines: 3
@@ -184,14 +184,14 @@ Configuring the Wazuh indexer connection
          </hosts>
          <ssl>
            <certificate_authorities>
-             <ca>etc/certs/root-ca.pem</ca>
+             <ca>/etc/wazuh-manager/certs/indexer-ca.pem</ca>
            </certificate_authorities>
-           <certificate>etc/certs/indexer-connector.pem</certificate>
-           <key>etc/certs/indexer-connector-key.pem</key>
+           <certificate>/etc/wazuh-manager/certs/indexer-connector.pem</certificate>
+           <key>/etc/wazuh-manager/certs/indexer-connector-key.pem</key>
          </ssl>
        </indexer>
 
-   -  Replace ``127.0.0.1`` with the address of your Wazuh indexer node: its ``ip`` value in ``config.yml``, which is also its ``network.host`` value in ``/etc/wazuh-indexer/opensearch.yml`` on that node.
+   -  Replace ``127.0.0.1`` with the address of your Wazuh indexer node: its ``ip`` value in ``config.yml``, which is also its ``network.host`` value in ``/etc/wazuh-indexer/opensearch.yml`` on that node. Edit only the ``<host>`` value: the ``<ssl>`` block already points to the certificate files in ``/etc/wazuh-manager/certs``.
 
    If you are running a Wazuh indexer cluster infrastructure, add a ``<host>`` entry for each one of your Wazuh indexer nodes. For example, in a two-node configuration:
 
@@ -281,7 +281,7 @@ Configuring the Wazuh manager master node
 
       # openssl rand -hex 16
 
-   Then edit the following settings in the ``/var/wazuh-manager/etc/wazuh-manager.conf`` file and configure the necessary parameters:
+   Then edit the following settings in the ``/etc/wazuh-manager/wazuh-manager.conf`` file and configure the necessary parameters:
 
    .. code-block:: xml
       :emphasize-lines: 5,9
@@ -328,7 +328,7 @@ Configuring the Wazuh manager master node
 Configuring the Wazuh manager worker nodes
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. The Wazuh manager cluster lets you scale horizontally by distributing the load across multiple nodes. On each worker node, edit the ``<cluster>`` block in ``/var/wazuh-manager/etc/wazuh-manager.conf`` as follows. Use a unique ``node_name``, for example ``worker-node1`` and ``worker-node2``, set ``node_type`` to ``worker``, and use the same ``<CLUSTER_KEY>`` as the master node:
+#. The Wazuh manager cluster lets you scale horizontally by distributing the load across multiple nodes. On each worker node, edit the ``<cluster>`` block in ``/etc/wazuh-manager/wazuh-manager.conf`` as follows. Use a unique ``node_name``, for example ``worker-node1`` and ``worker-node2``, set ``node_type`` to ``worker``, and use the same ``<CLUSTER_KEY>`` as the master node:
 
    .. code-block:: xml
       :emphasize-lines: 5,9

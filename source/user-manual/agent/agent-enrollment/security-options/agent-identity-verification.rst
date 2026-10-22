@@ -20,11 +20,11 @@ Prerequisites
 
 You need a certificate authority to sign certificates for the Wazuh manager and Wazuh agents. Perform the following prerequisites on your Wazuh manager if you do not have an already configured certificate authority:
 
-#. Navigate to the ``/var/wazuh-manager/etc`` folder of your Wazuh manager.
+#. Navigate to the ``/etc/wazuh-manager`` folder of your Wazuh manager.
 
    .. code-block:: console
 
-      # cd /var/wazuh-manager/etc
+      # cd /etc/wazuh-manager
 
 #. Run the following command on the Wazuh manager to use it as the certificate authority:
 
@@ -92,16 +92,16 @@ Wazuh manager configuration
       # scp sslagent.key  ubuntu@<IP_ADDRESS>:/home/ubuntu
       # scp sslagent.cert ubuntu@<IP_ADDRESS>:/home/ubuntu
 
-#. Ensure that the ``rootCA.pem`` file is in the ``/var/wazuh-manager/etc/`` directory on the Wazuh manager.
+#. Ensure that the ``rootCA.pem`` file is in the ``/etc/wazuh-manager/`` directory on the Wazuh manager.
 
-#. Update the ``/var/wazuh-manager/etc/wazuh-manager.conf`` file with the location of the ``rootCA.pem`` file to enable the use of certificates. Uncomment the ``<auth><ssl_agent_ca>`` section and specify the path to the ``rootCA.pem`` file on the Wazuh manager.
+#. Update the ``/etc/wazuh-manager/wazuh-manager.conf`` file with the location of the ``rootCA.pem`` file to enable the use of certificates. Uncomment the ``<auth><ssl_agent_ca>`` section and specify the path to the ``rootCA.pem`` file on the Wazuh manager.
 
    .. code-block:: xml
       :emphasize-lines: 3
 
       <auth>
          ...
-         <ssl_agent_ca>/var/wazuh-manager/etc/rootCA.pem</ssl_agent_ca>
+         <ssl_agent_ca>/etc/wazuh-manager/rootCA.pem</ssl_agent_ca>
       </auth>
 
 #. Restart the Wazuh manager service to apply the changes:

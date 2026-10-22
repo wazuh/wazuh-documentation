@@ -29,9 +29,6 @@ Daemons
    * - Wazuh DB
      - ``wazuh-manager-db``
      - SQLite-based database daemon for the Wazuh agent and global state.
-   * - Monitord
-     - ``wazuh-manager-monitord``
-     - Wazuh agent monitoring and log rotation
    * - Auth
      - ``wazuh-manager-authd``
      - The Wazuh agent enrollment service owns all enrollment logic. It receives enrollment requests through the HTTPS ``POST /enroll`` endpoint and, for legacy Wazuh 4.x agents, through TLS port ``1515``.
@@ -123,10 +120,6 @@ The table below lists the shared libraries provided by the Wazuh manager, their 
      - ``shared_modules/content_manager``
      - Vulnerability scanner, Modulesd
      - Plugin framework for downloading and managing content (feeds, rulesets)
-   * - Router
-     - ``shared_modules/router``
-     - Remoted, Wazuh DB, Auth, Inventory Sync, Agent Upgrade
-     - Pub/sub IPC messaging between daemons via per-topic sockets under ``queue/router/``
    * - Keystore
      - ``shared_modules/keystore``
      - Indexer connector
@@ -158,4 +151,4 @@ The Wazuh manager provides a set of command-line interface (CLI) tools for manag
    * - ``rbac_control``
      - Manage RBAC policies and role assignments
    * - ``wazuh-manager-conf``
-     - Validates the Wazuh manager configuration. Run ``wazuh-manager-conf validate`` to check the ``/var/wazuh-manager/etc/wazuh-manager.conf`` file before restarting the Wazuh manager.
+     - Validates the Wazuh manager configuration. Run ``wazuh-manager-conf validate`` to check the ``/etc/wazuh-manager/wazuh-manager.conf`` file before restarting the Wazuh manager.

@@ -418,7 +418,7 @@ Follow these steps on the Wazuh indexer node to create a new role mapping and gr
         default:
           url: https://127.0.0.1
           port: 55000
-          username: wazuh-wui
+          username: wazuh-internal-client
           password: "<WAZUH_WUI_PASSWORD>"
           run_as: true
 
@@ -488,7 +488,7 @@ Map LDAP role to Wazuh read-only role
         default:
           url: https://127.0.0.1
           port: 55000
-          username: wazuh-wui
+          username: wazuh-internal-client
           password: "<WAZUH_WUI_PASSWORD>"
           run_as: true
 

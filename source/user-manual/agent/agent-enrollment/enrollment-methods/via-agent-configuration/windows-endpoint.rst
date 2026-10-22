@@ -52,7 +52,7 @@ The Wazuh agent is a 32-bit application. Its installation directory depends on t
 
    -  Store the enrollment password in ``C:\Program Files (x86)\ossec-agent\authd.pass``. For the steps, see the :doc:`Enroll Wazuh agents with password authentication </user-manual/agent/agent-enrollment/security-options/using-password-authentication>` section.
 
-   -  (Recommended) Configure the certificate authority (CA) that signs the Wazuh manager certificate, so that the Wazuh agent verifies the identity of the Wazuh manager. Copy the CA certificate to the endpoint. By default, it's ``/var/wazuh-manager/etc/certs/root-ca.pem`` on the Wazuh manager. Then add the following to the Wazuh agent configuration file:
+   -  (Recommended) Configure the certificate authority (CA) that signs the Wazuh manager certificate, so that the Wazuh agent verifies the identity of the Wazuh manager. Copy the CA certificate to the endpoint. By default, it's ``/etc/wazuh-manager/certs/root-ca.pem`` on the Wazuh manager. The Wazuh manager also serves it at ``GET https://<WAZUH_MANAGER_IP_ADDRESS>:1517/wazuh-manager/cacerts``. Then add the following to the Wazuh agent configuration file:
 
       .. code-block:: xml
          :emphasize-lines: 4

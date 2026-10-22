@@ -33,7 +33,7 @@ Wazuh manager cluster installation
 
    .. code-block:: console
 
-      # openssl x509 -in /var/wazuh-manager/etc/certs/remoted.pem -noout -ext subjectAltName
+      # openssl x509 -in /etc/wazuh-manager/certs/remoted.pem -noout -ext subjectAltName
 
    The output lists them, for example ``IP Address:<WAZUH_MANAGER_ADDRESS>, DNS:manager``. Make sure that every address your agents connect to is in this list.
 

@@ -68,6 +68,8 @@ Run the module immediately after the Wazuh service starts.
 | **Mandatory**        | no        |
 +----------------------+-----------+
 
+.. _aws_interval:
+
 interval
 ^^^^^^^^
 
@@ -140,7 +142,7 @@ Time of the day to run the scan. It has to be in the hh:mm format.
 Buckets
 ^^^^^^^
 
-It is necessary to specify the type as an attribute of the ``bucket`` tag to indicate the service configured. More information about the supported services and their associated types on AWS supported services.
+It is necessary to specify the type as an attribute of the ``bucket`` tag to indicate the service configured. More information about the supported services and their associated types on :doc:`AWS supported services </cloud-security/amazon/services/supported-services/index>`.
 
 .. code-block:: xml
 
@@ -296,6 +298,8 @@ If defined, the suffix for the bucket. Only works with buckets that contain the 
 +----------------------+--------------+
 | **Allowed values**   | Valid path   |
 +----------------------+--------------+
+
+.. _only_logs_aws_buckets:
 
 only_logs_after
 ~~~~~~~~~~~~~~~~~
@@ -662,6 +666,8 @@ The endpoint URL for the required AWS Service to be used to download the data fr
 +----------------------+----------------------------------------------+
 | **Allowed values**   | Any valid endpoint URL for the AWS Service   |
 +----------------------+----------------------------------------------+
+
+.. _subscribers:
 
 Subscribers
 ^^^^^^^^^^^^

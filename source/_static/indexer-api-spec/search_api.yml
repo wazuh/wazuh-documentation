@@ -123,6 +123,7 @@ paths:
         - $ref: '#/components/parameters/rest_total_hits_as_int'
         - $ref: '#/components/parameters/routing'
         - $ref: '#/components/parameters/scroll'
+        - $ref: '#/components/parameters/search_pipeline'
         - $ref: '#/components/parameters/search_type'
         - $ref: '#/components/parameters/seq_no_primary_term'
         - $ref: '#/components/parameters/size'
@@ -142,6 +143,7 @@ paths:
         - $ref: '#/components/parameters/track_total_hits'
         - $ref: '#/components/parameters/typed_keys'
         - $ref: '#/components/parameters/version'
+        - $ref: '#/components/parameters/verbose_pipeline'
         - $ref: '#/components/parameters/include_named_queries_score'
       requestBody:
         $ref: '#/components/requestBodies/SearchRequest'
@@ -189,6 +191,7 @@ paths:
         - $ref: '#/components/parameters/rest_total_hits_as_int'
         - $ref: '#/components/parameters/routing'
         - $ref: '#/components/parameters/scroll'
+        - $ref: '#/components/parameters/search_pipeline'
         - $ref: '#/components/parameters/search_type'
         - $ref: '#/components/parameters/seq_no_primary_term'
         - $ref: '#/components/parameters/size'
@@ -208,6 +211,7 @@ paths:
         - $ref: '#/components/parameters/track_total_hits'
         - $ref: '#/components/parameters/typed_keys'
         - $ref: '#/components/parameters/version'
+        - $ref: '#/components/parameters/verbose_pipeline'
         - $ref: '#/components/parameters/include_named_queries_score'
       requestBody:
         $ref: '#/components/requestBodies/SearchRequest'
@@ -258,6 +262,7 @@ paths:
         - $ref: '#/components/parameters/rest_total_hits_as_int'
         - $ref: '#/components/parameters/routing'
         - $ref: '#/components/parameters/scroll'
+        - $ref: '#/components/parameters/search_pipeline'
         - $ref: '#/components/parameters/search_type'
         - $ref: '#/components/parameters/seq_no_primary_term'
         - $ref: '#/components/parameters/size'
@@ -277,6 +282,7 @@ paths:
         - $ref: '#/components/parameters/track_total_hits'
         - $ref: '#/components/parameters/typed_keys'
         - $ref: '#/components/parameters/version'
+        - $ref: '#/components/parameters/verbose_pipeline'
         - $ref: '#/components/parameters/include_named_queries_score'
       requestBody:
         $ref: '#/components/requestBodies/SearchRequest'
@@ -324,6 +330,7 @@ paths:
         - $ref: '#/components/parameters/rest_total_hits_as_int'
         - $ref: '#/components/parameters/routing'
         - $ref: '#/components/parameters/scroll'
+        - $ref: '#/components/parameters/search_pipeline'
         - $ref: '#/components/parameters/search_type'
         - $ref: '#/components/parameters/seq_no_primary_term'
         - $ref: '#/components/parameters/size'
@@ -343,6 +350,7 @@ paths:
         - $ref: '#/components/parameters/track_total_hits'
         - $ref: '#/components/parameters/typed_keys'
         - $ref: '#/components/parameters/version'
+        - $ref: '#/components/parameters/verbose_pipeline'
         - $ref: '#/components/parameters/include_named_queries_score'
       requestBody:
         $ref: '#/components/requestBodies/SearchRequest'
@@ -584,6 +592,21 @@ components:
       description: How many results to include in the response.
       schema:
         type: integer
+
+    search_pipeline:
+      name: search_pipeline
+      in: query
+      description: The name of the search pipeline to use for the request.
+      schema:
+        type: string
+
+    verbose_pipeline:
+      name: verbose_pipeline
+      in: query
+      description: If true, the response includes the processing details of each search pipeline processor.
+      schema:
+        type: boolean
+        default: false
 
     sort:
       name: sort

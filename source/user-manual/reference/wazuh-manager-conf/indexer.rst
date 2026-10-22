@@ -45,7 +45,7 @@ Specifies the URLs of the Wazuh indexer nodes. Define each node in a separate ``
 
 Both schemes are accepted. Use ``https://`` for TLS-protected deployments.
 
-The Wazuh manager validates the host value: it must start with ``http://`` or ``https://`` and include a port number.
+The Wazuh manager validates the host value: it must start with ``http://`` or ``https://``. The validation checks only the scheme, so a port number is not required.
 
 .. code-block:: xml
 
@@ -66,9 +66,11 @@ Path to one or more CA certificates used to verify the Indexer's TLS certificate
 ``ca`` — CA certificate file path. The path must exist on disk at startup time.
 
 +----------------------+---------------------------------------------------------------------------------------------+
-| **Default value**    | None (The installer sets this automatically to etc/certs/root-ca.pem)                       |
+| **Default value**    | None (The installer sets this automatically to /etc/wazuh-manager/certs/indexer-ca.pem, the |
+|                      | CA of the Wazuh indexer)                                                                    |
 +----------------------+---------------------------------------------------------------------------------------------+
-| **Allowed values**   | Path to a PEM-encoded CA certificate (existence checked at startup; relative or absolute)   |
+| **Allowed values**   | Absolute path to a PEM-encoded CA certificate directly in /etc/wazuh-manager/certs          |
+|                      | (existence checked at startup)                                                              |
 +----------------------+---------------------------------------------------------------------------------------------+
 
 certificate
@@ -77,9 +79,11 @@ certificate
 Path to the client certificate presented by the Wazuh manager when mutual TLS authentication is enabled. The path must exist on disk at startup time.
 
 +--------------------+----------------------------------------------------------------------------------------+
-| **Default value**  | None (The installer sets this automatically to etc/certs/indexer-connector.pem)        |
+| **Default value**  | None (The installer sets this automatically to                                         |
+|                    | /etc/wazuh-manager/certs/indexer-connector.pem)                                        |
 +--------------------+----------------------------------------------------------------------------------------+
-| **Allowed values** | Path to a PEM-encoded certificate (existence checked at startup; relative or absolute) |
+| **Allowed values** | Absolute path to a PEM-encoded certificate directly in /etc/wazuh-manager/certs        |
+|                    | (existence checked at startup)                                                         |
 +--------------------+----------------------------------------------------------------------------------------+
 
 key
@@ -88,9 +92,11 @@ key
 Path to the private key corresponding to ``certificate``. Required if ``certificate`` is specified. Path must exist on disk at startup time.
 
 +----------------------+------------------------------------------------------------------------------------------+
-| **Default value**    | None (The installer sets this automatically to etc/certs/indexer-connector-key.pem)      |
+| **Default value**    | None (The installer sets this automatically to                                           |
+|                      | /etc/wazuh-manager/certs/indexer-connector-key.pem)                                      |
 +----------------------+------------------------------------------------------------------------------------------+
-| **Allowed values**   | Path to a PEM-encoded private key (existence checked at startup; relative or absolute)   |
+| **Allowed values**   | Absolute path to a PEM-encoded private key directly in /etc/wazuh-manager/certs          |
+|                      | (existence checked at startup)                                                           |
 +----------------------+------------------------------------------------------------------------------------------+
 
 Sample configuration
@@ -106,10 +112,10 @@ Single node:
      </hosts>
      <ssl>
        <certificate_authorities>
-         <ca>etc/certs/root-ca.pem</ca>
+         <ca>/etc/wazuh-manager/certs/indexer-ca.pem</ca>
        </certificate_authorities>
-       <certificate>etc/certs/indexer-connector.pem</certificate>
-       <key>etc/certs/indexer-connector-key.pem</key>
+       <certificate>/etc/wazuh-manager/certs/indexer-connector.pem</certificate>
+       <key>/etc/wazuh-manager/certs/indexer-connector-key.pem</key>
      </ssl>
    </indexer>
 
@@ -125,10 +131,10 @@ Multi-node cluster:
      </hosts>
      <ssl>
        <certificate_authorities>
-         <ca>etc/certs/root-ca.pem</ca>
+         <ca>/etc/wazuh-manager/certs/indexer-ca.pem</ca>
        </certificate_authorities>
-       <certificate>etc/certs/indexer-connector.pem</certificate>
-       <key>etc/certs/indexer-connector-key.pem</key>
+       <certificate>/etc/wazuh-manager/certs/indexer-connector.pem</certificate>
+       <key>/etc/wazuh-manager/certs/indexer-connector-key.pem</key>
      </ssl>
    </indexer>
 
@@ -151,9 +157,9 @@ Use the configured CA certificate and client credentials to verify connectivity 
 
 .. code-block:: console
 
-   $ curl --cacert /var/wazuh-manager/etc/certs/root-ca.pem \
-        --cert   /var/wazuh-manager/etc/certs/indexer-connector.pem \
-        --key    /var/wazuh-manager/etc/certs/indexer-connector-key.pem \
+   $ curl --cacert /etc/wazuh-manager/certs/indexer-ca.pem \
+        --cert   /etc/wazuh-manager/certs/indexer-connector.pem \
+        --key    /etc/wazuh-manager/certs/indexer-connector-key.pem \
         https://127.0.0.1:9200/_cluster/health
 
 A successful response returns the Wazuh indexer cluster health information with a status such as ``green`` or ``yellow``.

@@ -141,7 +141,7 @@ The command output looks similar to this:
    :class: output
 
    New password for 'wazuh' (skip):
-   New password for 'wazuh-wui' (skip):
+   New password for 'wazuh-internal-client' (skip):
          wazuh: FAILED | Error 5009 - Insecure user password provided
 
 ``change-password`` example where the *wazuh* user password was changed successfully (to skip any of the user, leave the new password blank):
@@ -156,5 +156,5 @@ The command output looks similar to this:
    :class: output
 
    New password for 'wazuh' (skip):
-   New password for 'wazuh-wui' (skip):
+   New password for 'wazuh-internal-client' (skip):
      wazuh: UPDATED
