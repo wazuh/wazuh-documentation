@@ -14,7 +14,11 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 
 - Removed Amazon Inspector Classic from the *Amazon Inspector* integration documentation, which now covers Amazon Inspector (v2) only. ([#10399](https://github.com/wazuh/wazuh-documentation/pull/10399))
-- Added the Windows and macOS agent restart commands to the steps for enabling and disabling policies in the *Security Configuration Assessment* documentation. ([#10399](https://github.com/wazuh/wazuh-documentation/pull/10399))
+- Added the Windows and macOS agent restart commands to the steps for enabling and disabling policies in the *Security Configuration Assessment* documentation. ([#10399](https://github.com/wazuh/wazuh-documentation/pull/10399)) ([#10425](https://github.com/wazuh/wazuh-documentation/pull/10425))
+- Added a note about the pages that a read-only user cannot open to the *User administration* documentation. ([#10425](https://github.com/wazuh/wazuh-documentation/pull/10425))
+- Added a note that the Wazuh module for Google Cloud Pub/Sub supports only one `gcp-pubsub` block per configuration file to the *Monitoring Google Cloud Pub/Sub* documentation. ([#10430](https://github.com/wazuh/wazuh-documentation/pull/10430))
+- Corrected the queue list in the *Wazuh server queue* documentation, the allowed `<protocol>` values in the *Wazuh manager* documentation, and the archives files in the *Event logging* documentation. ([#10430](https://github.com/wazuh/wazuh-documentation/pull/10430))
+- Corrected the restart step in the *SSL with NGINX* documentation and the node address placeholders in the *Wazuh dashboard certificates* documentation. ([#10430](https://github.com/wazuh/wazuh-documentation/pull/10430))
 
 ## [v4.14.9]
 
