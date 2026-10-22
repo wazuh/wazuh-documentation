@@ -70,7 +70,7 @@ This section shows how to remove a Wazuh indexer node from the cluster safely by
 
       Wait for the cluster to return to a green state between restarts to avoid errors resulting from a yellow cluster state.
 
-#. Remove its ``<host>`` entry from ``/var/wazuh-manager/etc/wazuh-manager.conf`` and its address from ``opensearch.hosts`` in ``/etc/wazuh-dashboard/opensearch_dashboards.yml``, then restart the Wazuh manager and the Wazuh dashboard:
+#. Remove its ``<host>`` entry from ``/etc/wazuh-manager/wazuh-manager.conf`` and its address from ``opensearch.hosts`` in ``/etc/wazuh-dashboard/opensearch_dashboards.yml``, then restart the Wazuh manager and the Wazuh dashboard:
 
    .. code-block:: console
 

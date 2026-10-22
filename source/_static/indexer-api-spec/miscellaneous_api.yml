@@ -18,6 +18,7 @@ paths:
         - $ref: '#/components/parameters/count_min_score'
         - $ref: '#/components/parameters/count_routing'
         - $ref: '#/components/parameters/count_preference'
+        - $ref: '#/components/parameters/count_q'
         - $ref: '#/components/parameters/count_terminate_after'
         - $ref: 'spec.yml#/components/parameters/pretty'
       requestBody:
@@ -52,6 +53,79 @@ paths:
         - $ref: '#/components/parameters/count_min_score'
         - $ref: '#/components/parameters/count_routing'
         - $ref: '#/components/parameters/count_preference'
+        - $ref: '#/components/parameters/count_q'
+        - $ref: '#/components/parameters/count_terminate_after'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/CountRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/CountSuccess'
+        '400':
+          $ref: '#/components/responses/CountBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/CountNotFound'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+
+  /_count:
+    get:
+      tags: [Count]
+      summary: Count all documents (GET)
+      operationId: countAllDocuments
+      parameters:
+        - $ref: '#/components/parameters/count_allow_no_indices'
+        - $ref: '#/components/parameters/count_analyzer'
+        - $ref: '#/components/parameters/count_analyze_wildcard'
+        - $ref: '#/components/parameters/count_default_operator'
+        - $ref: '#/components/parameters/count_df'
+        - $ref: '#/components/parameters/count_expand_wildcards'
+        - $ref: '#/components/parameters/count_ignore_unavailable'
+        - $ref: '#/components/parameters/count_lenient'
+        - $ref: '#/components/parameters/count_min_score'
+        - $ref: '#/components/parameters/count_routing'
+        - $ref: '#/components/parameters/count_preference'
+        - $ref: '#/components/parameters/count_q'
+        - $ref: '#/components/parameters/count_terminate_after'
+        - $ref: 'spec.yml#/components/parameters/pretty'
+      requestBody:
+        $ref: '#/components/requestBodies/CountRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/CountSuccess'
+        '400':
+          $ref: '#/components/responses/CountBadRequest'
+        '401':
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        '403':
+          $ref: 'spec.yml#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/CountNotFound'
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+    post:
+      tags: [Count]
+      summary: Count all documents (POST)
+      operationId: countAllDocumentsPost
+      parameters:
+        - $ref: '#/components/parameters/count_allow_no_indices'
+        - $ref: '#/components/parameters/count_analyzer'
+        - $ref: '#/components/parameters/count_analyze_wildcard'
+        - $ref: '#/components/parameters/count_default_operator'
+        - $ref: '#/components/parameters/count_df'
+        - $ref: '#/components/parameters/count_expand_wildcards'
+        - $ref: '#/components/parameters/count_ignore_unavailable'
+        - $ref: '#/components/parameters/count_lenient'
+        - $ref: '#/components/parameters/count_min_score'
+        - $ref: '#/components/parameters/count_routing'
+        - $ref: '#/components/parameters/count_preference'
+        - $ref: '#/components/parameters/count_q'
         - $ref: '#/components/parameters/count_terminate_after'
         - $ref: 'spec.yml#/components/parameters/pretty'
       requestBody:
@@ -304,6 +378,13 @@ components:
       schema:
         type: number
         format: float
+
+    count_q:
+      name: q
+      in: query
+      description: A query in the Lucene query string syntax.
+      schema:
+        type: string
 
     count_routing:
       name: routing

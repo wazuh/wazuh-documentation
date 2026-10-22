@@ -6,7 +6,7 @@
 Logging
 =======
 
-The Wazuh manager generates and stores operational logs in the ``/var/wazuh-manager/logs/`` directory. Rotated logs are kept for 31 days by default. To change the retention period, set the ``wazuh_modules.manager_task_log_keep_days`` option in the ``/var/wazuh-manager/etc/wazuh-manager-internal-options.conf`` file.
+The Wazuh manager generates and stores operational logs in the ``/var/wazuh-manager/logs/`` directory. Rotated logs are kept for 31 days by default. To change the retention period, set the ``wazuh_modules.manager_task_log_keep_days`` option in the ``/etc/wazuh-manager/wazuh-manager-internal-options.conf`` file.
 
 The table below describes the log files and their storage location on the Wazuh manager.
 
@@ -28,7 +28,7 @@ The table below describes the log files and their storage location on the Wazuh 
 Configuration
 -------------
 
-The following ``<logging>`` block represents the default logging configuration in the Wazuh manager ``/var/wazuh-manager/etc/wazuh-manager.conf`` file:
+The following ``<logging>`` block represents the default logging configuration in the Wazuh manager ``/etc/wazuh-manager/wazuh-manager.conf`` file:
 
 .. code-block:: xml
    :emphasize-lines: 3-5
@@ -71,6 +71,6 @@ For example, the log file ``/var/wazuh-manager/logs/cluster.log`` compressed on 
 
 The Wazuh manager appends the suffix ``-<DAY_OF_THE_MONTH>`` to the original filename as seen in the highlighted output above (``cluster.log-01.gz``).
 
-The ``wazuh_modules.manager_task_log_*`` internal options in the ``/var/wazuh-manager/etc/wazuh-manager-internal-options.conf`` file control the rotation schedule, size threshold, compression, daily rotation slots, and retention period.
+The ``wazuh_modules.manager_task_log_*`` internal options in the ``/etc/wazuh-manager/wazuh-manager-internal-options.conf`` file control the rotation schedule, size threshold, compression, daily rotation slots, and retention period.
 
 Depending on your needs, you can configure the removal of compressed files after a specified period. You can move them to log management systems, backup servers, or cloud-based storage devices for longer-term retention.

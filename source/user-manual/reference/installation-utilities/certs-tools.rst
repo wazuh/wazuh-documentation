@@ -22,20 +22,20 @@ Options list
 +-------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+
 | Option                                                                              | Description                                                                                  |
 +=====================================================================================+==============================================================================================+
-| -a, --admin-certificates </path/to/root-ca.pem> </path/to/root-ca.key>              | Creates the admin certificates; add root-ca.pem and root-ca.key.                             |
+| -a, --admin-certificates                                                            | Creates the admin certificates.                                                              |
 +-------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+
-| -A, --all </path/to/root-ca.pem> </path/to/root-ca.key>                             | Creates certificates specified in config.yml and admin certificates. Add root-ca.pem and     |
-|                                                                                     | root-ca.key, or leave it empty so a new one will be created.                                 |
+| -A, --all                                                                           | Creates certificates specified in config.yml and admin certificates. If there is no root CA  |
+|                                                                                     | in the CA directory, a new one is created there.                                             |
 +-------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+
 | -ca, --root-ca-certificates                                                         | Creates the root-ca certificates.                                                            |
 +-------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+
 | -v, --verbose                                                                       | Enables verbose mode.                                                                        |
 +-------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+
-| -wd, --wazuh-dashboard-certificates </path/to/root-ca.pem> </path/to/root-ca.key>   | Creates the Wazuh dashboard certificates; add root-ca.pem and root-ca.key.                   |
+| -wd, --wazuh-dashboard-certificates                                                 | Creates the Wazuh dashboard certificates.                                                    |
 +-------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+
-| -wi, --wazuh-indexer-certificates </path/to/root-ca.pem> </path/to/root-ca.key>     | Creates the Wazuh indexer certificates; add root-ca.pem and root-ca.key.                     |
+| -wi, --wazuh-indexer-certificates                                                   | Creates the Wazuh indexer certificates.                                                      |
 +-------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+
-| -wm, --wazuh-manager-certificates </path/to/root-ca.pem> </path/to/root-ca.key>     | Creates the Wazuh manager certificates; add root-ca.pem and root-ca.key.                     |
+| -wm, --wazuh-manager-certificates                                                   | Creates the Wazuh manager certificates.                                                      |
 +-------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+
 | -tmp, --cert_tmp_path </path/to/tmp_dir>                                            | Modifies the default tmp directory (/tmp/wazuh-ceritificates) to the specified one. Must be  |
 |                                                                                     | used along with one of these options: -a, -A, -ca, -wi, -wd, -wm                             |

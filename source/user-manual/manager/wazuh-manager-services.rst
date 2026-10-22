@@ -13,11 +13,11 @@ This section describes the purpose, responsibilities, and configuration of each 
 Agent enrollment service
 ------------------------
 
-The agent enrollment service registers Wazuh agents with the Wazuh manager through the ``wazuh-manager-authd`` daemon. It receives enrollment requests, validates credentials, generates the agent key, and stores the resulting entry in the agent keystore.
+The agent enrollment service registers Wazuh agents with the Wazuh manager through the ``wazuh-manager-authd`` daemon. It receives enrollment requests, validates credentials, generates the agent key, and stores the resulting entry in the ``client.keys`` file and in Wazuh DB.
 
 Wazuh 5.0 agents enroll over HTTPS through the ``POST /enroll`` endpoint of the agent connection service on port ``1517``. The endpoint forwards requests to the same ``wazuh-manager-authd`` daemon through its local socket. This method ensures that all enrollment requests use the same validation path. Port ``1515`` remains supported for legacy Wazuh 4.x agents.
 
-When a Wazuh agent starts, it contacts the Wazuh manager to begin enrollment. A Wazuh 5.x agent uses an enrollment token that you create on the Wazuh manager. Legacy Wazuh 4.x agents use port ``1515`` and the shared enrollment password, which is required by default. The Wazuh manager generates the password at first startup and stores it in the ``/var/wazuh-manager/etc/authd.pass`` file. After successful enrollment, the Wazuh manager generates a unique agent key. The Wazuh agent uses this key to sign the bearer tokens that authenticate its subsequent requests.
+When a Wazuh agent starts, it contacts the Wazuh manager to begin enrollment. A Wazuh 5.x agent uses an enrollment token that you create on the Wazuh manager. Legacy Wazuh 4.x agents use port ``1515`` and the shared enrollment password, which is required by default. The Wazuh manager generates the password at first startup and stores it in the ``/etc/wazuh-manager/authd.pass`` file. After successful enrollment, the Wazuh manager generates a unique agent key. The Wazuh agent uses this key to sign the bearer tokens that authenticate its subsequent requests.
 
 Enrollment tokens
 ^^^^^^^^^^^^^^^^^
@@ -33,7 +33,7 @@ In a Wazuh manager cluster, the master node creates all enrollment tokens. It va
 Configuration
 ^^^^^^^^^^^^^
 
-The following ``<auth>`` block shows the default agent enrollment service configuration in the ``<wazuh_config>`` block of the ``/var/wazuh-manager/etc/wazuh-manager.conf`` file:
+The following ``<auth>`` block shows the default agent enrollment service configuration in the ``<wazuh_config>`` block of the ``/etc/wazuh-manager/wazuh-manager.conf`` file:
 
 .. code-block:: xml
    :emphasize-lines: 3-14
@@ -49,8 +49,8 @@ The following ``<auth>`` block shows the default agent enrollment service config
        <ciphers>TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256:TLS_AES_128_GCM_SHA256</ciphers>
        <!-- <ssl_agent_ca></ssl_agent_ca> -->
        <ssl_verify_host>no</ssl_verify_host>
-       <ssl_manager_cert>etc/certs/remoted.pem</ssl_manager_cert>
-       <ssl_manager_key>etc/certs/remoted-key.pem</ssl_manager_key>
+       <ssl_manager_cert>/etc/wazuh-manager/certs/remoted.pem</ssl_manager_cert>
+       <ssl_manager_key>/etc/wazuh-manager/certs/remoted-key.pem</ssl_manager_key>
      </auth>
      ...
    </wazuh_config>
@@ -60,13 +60,13 @@ Where:
 -  ``<disabled>`` enables or disables the process of the Wazuh agent enrolling and authenticating with the Wazuh manager. The default value is ``no``. The allowed values are ``yes`` and ``no``.
 -  ``<port>`` specifies the TCP port number for listening to connections. The default value is ``1515``. The allowed value is any port number between ``1`` and ``65535``.
 -  ``<use_source_ip>`` defines whether to use the client's source IP address or the use of "any" to add a Wazuh agent. The allowed values are ``yes`` and ``no``. When the value is ``no``, the Wazuh agent can connect to the Wazuh manager even if the source IP used for enrollment changes. However, when the value is ``yes``, the Wazuh agent cannot connect to the Wazuh manager if the source IP address changes.
--  ``<purge>`` specifies whether the client keys will be deleted when Wazuh agents are removed. When the value is ``no``, removed Wazuh agents will remain in the client keys file marked as removed. When the value is set to ``yes``, the client keys file will be purged. The default value is ``yes``. The possible values are ``yes`` and ``no``.
--  ``<use_password>`` determines the use of shared password authentication. When the value is ``no``, this option is disabled. When the value is set to ``yes``, a shared password is read from the ``/var/wazuh-manager/etc/authd.pass`` file.
+-  ``<purge>`` specifies whether the client keys will be deleted when Wazuh agents are removed. When the value is ``no``, removed Wazuh agents will remain in the client keys file marked as removed. When the value is set to ``yes``, the client keys file will be purged. When the option is absent, the value is ``no``. The configuration that the installer generates sets it to ``yes``. The possible values are ``yes`` and ``no``.
+-  ``<use_password>`` determines the use of shared password authentication. When the option is absent, the value is ``no``. The configuration that the installer generates sets it to ``yes``. When the value is ``no``, this option is disabled. When the value is set to ``yes``, a shared password is read from the ``/etc/wazuh-manager/authd.pass`` file.
 -  ``<ciphers>`` sets the list of ciphers for network communication using SSL. The default value is ``TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256:TLS_AES_128_GCM_SHA256``.
 -  ``<ssl_agent_ca>`` specifies the path to the CA certificate used to verify clients. It can be referred to as a relative path under the Wazuh installation directory or a full path. The possible value is any valid path.
 -  ``<ssl_verify_host>`` toggles source host verification on and off when a CA certificate is specified. The client source IP address will be validated using the Common Name field. The default value is ``no``. The allowed values are ``yes`` and ``no``.
--  ``<ssl_manager_cert>`` specifies the path to the Wazuh manager SSL certificate. It can be referred to as a relative path under the Wazuh installation directory or a full path. The default value is ``etc/certs/remoted.pem``. The possible value is any valid path.
--  ``<ssl_manager_key>`` specifies the path to the Wazuh manager SSL key. It can be referred to as a relative path under the Wazuh installation directory or a full path. The default value is ``etc/certs/remoted-key.pem``. The possible value is any valid path.
+-  ``<ssl_manager_cert>`` specifies the path to the Wazuh manager SSL certificate. The default value is ``/etc/wazuh-manager/certs/remoted.pem``. The possible value is an absolute path to a file in ``/etc/wazuh-manager/certs``.
+-  ``<ssl_manager_key>`` specifies the path to the Wazuh manager SSL key. The default value is ``/etc/wazuh-manager/certs/remoted-key.pem``. The possible value is an absolute path to a file in ``/etc/wazuh-manager/certs``.
 
 .. note::
 
@@ -74,7 +74,7 @@ Where:
 
 .. note::
 
-   Whenever you change the ``/var/wazuh-manager/etc/wazuh-manager.conf`` file, restart the Wazuh manager to apply changes.
+   Whenever you change the ``/etc/wazuh-manager/wazuh-manager.conf`` file, restart the Wazuh manager to apply changes.
 
 Agent connection service
 ------------------------
@@ -83,12 +83,12 @@ The agent connection service, provided by the ``wazuh-manager-remoted`` daemon, 
 
 In Wazuh 5.0, agents communicate over an HTTPS API on port ``1517``. The listener authenticates every request with a per-agent JWT bearer token that the agent signs with its ``client.keys`` key. The Wazuh manager also checks the request source address against the Wazuh agent ``client.keys`` entry.
 
-The legacy AES-encrypted TCP and UDP channel on port ``1514`` serves Wazuh 4.x agents. The Wazuh manager starts it only when you enable the ``<legacy>`` block inside ``<remote>``. Without that block, only Wazuh 5.x agents can connect.
+The legacy AES-encrypted TCP and UDP channel on port ``1514`` serves Wazuh 4.x agents. The configuration that the installer generates enables the ``<legacy>`` block inside ``<remote>``. Setting ``<enabled>`` to ``no`` or removing the ``<legacy>`` block disables this channel, and then only Wazuh 5.x agents can connect.
 
 Configuration
 ^^^^^^^^^^^^^
 
-The following ``<remote>`` block shows the default connection service configuration in the ``<wazuh_config>`` block of the ``/var/wazuh-manager/etc/wazuh-manager.conf`` file:
+The following ``<remote>`` block shows the default connection service configuration in the ``<wazuh_config>`` block of the ``/etc/wazuh-manager/wazuh-manager.conf`` file:
 
 .. code-block:: xml
    :emphasize-lines: 3-24
@@ -100,9 +100,9 @@ The following ``<remote>`` block shows the default connection service configurat
          <port>1517</port>
          <bind_addr>0.0.0.0</bind_addr>
          <global_prefix>/wazuh-manager/</global_prefix>
-         <certificate>etc/certs/remoted.pem</certificate>
-         <key>etc/certs/remoted-key.pem</key>
-         <ca_certificate>etc/certs/root-ca.pem</ca_certificate>
+         <certificate>/etc/wazuh-manager/certs/remoted.pem</certificate>
+         <key>/etc/wazuh-manager/certs/remoted-key.pem</key>
+         <ca_certificate>/etc/wazuh-manager/certs/root-ca.pem</ca_certificate>
        </https>
 
        <legacy>
@@ -128,9 +128,9 @@ Where:
 -  ``<port>`` specifies the HTTPS listening port. The default port value is ``1517``. The allowed value is any port number between ``1`` and ``65535``.
 -  ``<bind_addr>`` specifies the address the HTTPS listener binds to. The default value is ``0.0.0.0``. The allowed values are any valid IPv4 or IPv6 address.
 -  ``<global_prefix>`` specifies the URL path prefix every HTTPS endpoint is served under. The default path is ``/wazuh-manager/``.
--  ``<certificate>`` specifies the path to the TLS certificate chain (PEM) presented by the Wazuh manager. The default path is ``etc/certs/remoted.pem`` relative to the Wazuh manager installation path.
--  ``<key>`` specifies the path to the TLS private key (PEM) matching ``certificate``. The default path is ``etc/certs/remoted-key.pem`` relative to the Wazuh manager installation path.
--  ``<ca_certificate>`` specifies the path to the CA certificate (PEM) that issued the listener certificate. The default path is ``etc/certs/root-ca.pem`` relative to the Wazuh manager installation path.
+-  ``<certificate>`` specifies the path to the TLS certificate chain (PEM) presented by the Wazuh manager. The default path is ``/etc/wazuh-manager/certs/remoted.pem``. It must be an absolute path to a file in ``/etc/wazuh-manager/certs``.
+-  ``<key>`` specifies the path to the TLS private key (PEM) matching ``certificate``. The default path is ``/etc/wazuh-manager/certs/remoted-key.pem``. It must be an absolute path to a file in ``/etc/wazuh-manager/certs``.
+-  ``<ca_certificate>`` specifies the path to the CA certificate (PEM) that issued the listener certificate. The default path is ``/etc/wazuh-manager/certs/root-ca.pem``. It must be an absolute path to a file in ``/etc/wazuh-manager/certs``.
 
 **Legacy options**
 
@@ -146,7 +146,7 @@ You can find more configuration options in the :doc:`remote </user-manual/refere
 
 .. note::
 
-   Whenever you change the ``/var/wazuh-manager/etc/wazuh-manager.conf`` file, restart the Wazuh manager to apply changes.
+   Whenever you change the ``/etc/wazuh-manager/wazuh-manager.conf`` file, restart the Wazuh manager to apply changes.
 
 Vulnerability detection service
 -------------------------------
@@ -156,7 +156,7 @@ This service uses a Vulnerability Scanner to detect known security vulnerabiliti
 Configuration
 ^^^^^^^^^^^^^
 
-Enable or disable the service and tune the CVE feed download using the ``<vulnerability-detection>`` block in the ``/var/wazuh-manager/etc/wazuh-manager.conf`` file. The following block shows the default configuration:
+Enable or disable the service and tune the CVE feed download using the ``<vulnerability-detection>`` block in the ``/etc/wazuh-manager/wazuh-manager.conf`` file. The following block shows the default configuration:
 
 .. code-block:: xml
    :emphasize-lines: 3-6
@@ -181,7 +181,7 @@ You can find more configuration options in the :doc:`vulnerability detection </u
 
 .. note::
 
-   Whenever you change the ``/var/wazuh-manager/etc/wazuh-manager.conf`` file, restart the Wazuh manager to apply changes.
+   Whenever you change the ``/etc/wazuh-manager/wazuh-manager.conf`` file, restart the Wazuh manager to apply changes.
 
 Cluster service
 ---------------
@@ -193,7 +193,7 @@ Every Wazuh manager installation runs as a cluster node, including single-node d
 Configuration
 ^^^^^^^^^^^^^
 
-The following ``<cluster>`` block represents the default cluster configuration in the Wazuh manager ``/var/wazuh-manager/etc/wazuh-manager.conf`` file:
+The following ``<cluster>`` block represents the default cluster configuration in the Wazuh manager ``/etc/wazuh-manager/wazuh-manager.conf`` file:
 
 .. code-block:: xml
    :emphasize-lines: 3-14
@@ -230,4 +230,4 @@ You can learn more about the configuration options in the :doc:`cluster </user-m
 
 .. note::
 
-   Whenever you change the ``/var/wazuh-manager/etc/wazuh-manager.conf`` file, restart the Wazuh manager to apply changes.
+   Whenever you change the ``/etc/wazuh-manager/wazuh-manager.conf`` file, restart the Wazuh manager to apply changes.

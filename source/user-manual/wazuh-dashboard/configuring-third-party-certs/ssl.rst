@@ -189,7 +189,7 @@ Configuring Let’s Encrypt SSL certificates on the Wazuh dashboard
         default:
           url: https://localhost
           port: 55000
-          username: wazuh-wui
+          username: wazuh-internal-client
           run_as: true
 
 #. Modify the permissions and ownership of the certificates:

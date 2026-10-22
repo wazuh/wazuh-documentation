@@ -94,13 +94,13 @@ To share the key across the cluster, read it on the master node:
 
 .. code-block:: console
 
-   $ sed -n 's|.*<key>\(.*\)</key>.*|\1|p' /var/wazuh-manager/etc/wazuh-manager.conf
+   $ sed -n 's|.*<key>\(.*\)</key>.*|\1|p' /etc/wazuh-manager/wazuh-manager.conf
 
 Then set that value on each worker node and restart the manager:
 
 .. code-block:: console
 
-   $ sudo sed -i 's|<key>.*</key>|<key>PASTE_MASTER_KEY_HERE</key>|' /var/wazuh-manager/etc/wazuh-manager.conf
+   $ sudo sed -i 's|<key>.*</key>|<key>PASTE_MASTER_KEY_HERE</key>|' /etc/wazuh-manager/wazuh-manager.conf
    $ sudo systemctl restart wazuh-manager
 
 Treat the cluster key as a credential. Do not include it in scripts, source control, documentation examples, or command history.
@@ -123,7 +123,7 @@ Specifies the port to use for the cluster node communications.
 bind_addr
 ^^^^^^^^^^
 
-Specifies which IP address will communicate with the cluster when the node has multiple network interfaces.
+Specifies the IP address on which the master node listens for connections from worker nodes. Worker nodes ignore this option.
 
 +----------------------+------------------------+
 | **Default value**    | 127.0.0.1              |
@@ -151,7 +151,7 @@ The current cluster only allows one master node. Therefore, this list must have 
 hidden
 ^^^^^^
 
-Toggles whether or not to show information about the cluster that generated an alert. If this is set to ``yes``, information about the cluster that generated the event won't be included in the alert.
+This option has no effect. No component reads it.
 
 +----------------------+-----------+
 | **Default value**    | no        |
@@ -160,7 +160,7 @@ Toggles whether or not to show information about the cluster that generated an a
 +----------------------+-----------+
 
 .. note::
-   Note for users migrating from Wazuh 4.x: The ``<disabled>`` option present in 4.x cluster configuration is no longer processed in 5.0. Cluster enable/disable is controlled at the service level; to disable the cluster, stop or disable the ``wazuh-manager-clusterd`` service. If ``<disabled>`` is present in the configuration file, it is silently ignored.
+   Note for users migrating from Wazuh 4.x: The ``<disabled>`` option present in 4.x cluster configuration is not supported in 5.0. Every Wazuh manager is a cluster node, so the ``<cluster>`` section is mandatory. If ``<disabled>`` is present in the configuration file, the Wazuh manager refuses to start.
 
 Sample configuration
 ---------------------
@@ -208,7 +208,7 @@ Replace ``<MASTER_NODE_IP_ADDRESS>`` with the actual IP address of the master no
 Applying configuration changes
 --------------------------------
 
-After editing ``/var/wazuh-manager/etc/wazuh-manager.conf`` on each node, restart the manager service:
+After editing ``/etc/wazuh-manager/wazuh-manager.conf`` on each node, restart the manager service:
 
 .. code-block:: console
 

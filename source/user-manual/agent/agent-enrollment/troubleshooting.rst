@@ -85,7 +85,7 @@ If there is connectivity, there is no output. Otherwise, an error is shown:
 
 .. note::
 
-   If ports appear reachable at the network level but the connection still fails, check whether the manager's remoted listener is bound to the loopback interface only. Both ``<remote><https><bind_addr>`` (1517) and ``<remote><legacy><local_ip>`` (1514) in ``wazuh-manager.conf`` default to ``127.0.0.1``, which rejects connections from any other host. Set them to ``0.0.0.0`` to accept remote agents.
+   If ports appear reachable at the network level but the connection still fails, check whether the manager's remoted listener is bound to the loopback interface only. Both ``<remote><https><bind_addr>`` (1517) and ``<remote><legacy><local_ip>`` (1514) in ``wazuh-manager.conf`` default to ``0.0.0.0``, which accepts connections from any host. If either one is set to ``127.0.0.1``, the listener rejects connections from any other host. Set them to ``0.0.0.0`` to accept remote agents.
 
 Authentication error
 --------------------
@@ -106,13 +106,13 @@ The ``client.keys`` file stores the data used to authenticate the Wazuh agent an
 ============= ====================================================
 Endpoint      Location
 ============= ====================================================
-Wazuh manager ``/var/wazuh-manager/etc/client.keys``
+Wazuh manager ``/etc/wazuh-manager/client.keys``
 Linux/Unix    ``/var/ossec/etc/client.keys``
 macOS         ``/Library/Ossec/etc/client.keys``
 Windows       ``"C:\Program Files (x86)\ossec-agent\client.keys"``
 ============= ====================================================
 
-Also, verify that each agent has a unique agent key stored in the Wazuh manager ``/var/wazuh-manager/etc/client.keys`` file. Duplicate keys can arise if you previously deleted agents with the highest IDs or copied the ``client.keys`` file between agents.
+Also, verify that each agent has a unique agent key stored in the Wazuh manager ``/etc/wazuh-manager/client.keys`` file. Duplicate keys can arise if you previously deleted agents with the highest IDs or copied the ``client.keys`` file between agents.
 
 Invalid agent name for enrollment
 ---------------------------------
@@ -161,10 +161,10 @@ The Wazuh agent may not be able to authenticate with the Wazuh manager if the ro
 
 .. code-block:: none
 
-   2026/07/06 12:37:28 wazuh-manager-authd: ERROR: Unable to read CA certificate file "/var/wazuh-manager/etc/rootCA.pem"
+   2026/07/06 12:37:28 wazuh-manager-authd: ERROR: Unable to read CA certificate file "/etc/wazuh-manager/rootCA.pem"
    2026/07/06 12:37:28 wazuh-manager-authd: ERROR: SSL error. Exiting.
 
-**Resolution**: Ensure the certificate authority file is in the location specified in the ``<ssl_agent_ca>`` section of the Wazuh manager ``/var/wazuh-manager/etc/wazuh-manager.conf`` file.
+**Resolution**: Ensure the certificate authority file is in the location specified in the ``<ssl_agent_ca>`` section of the Wazuh manager ``/etc/wazuh-manager/wazuh-manager.conf`` file.
 
 **Location**: Wazuh agent log file
 
@@ -235,9 +235,5 @@ Refer to the table in the :doc:`Troubleshooting <troubleshooting>` section for t
    **Resolution**:
 
    #. Ensure the same password is used by the Wazuh manager and the Wazuh agent
-   #. Ensure that the ``authd.pass`` password file is in the ``/var/ossec/etc/`` directory and has the right permission. The file permissions should be set to 640, and the owner should be ``root``.
-   #. If password authentication is not needed, it should be disabled in the ``<auth>`` section of the Wazuh manager ``/var/ossec/etc/ossec.conf`` file. You can find the ``ossec.conf`` file at the following locations:
-
-      -  Linux/Unix endpoints - ``/var/ossec/etc/ossec.conf``
-      -  macOS endpoint - ``/Library/Ossec/etc/ossec.conf``
-      -  Windows endpoints - ``C:\Program Files (x86)\ossec-agent\ossec.conf``
+   #. Ensure that the ``authd.pass`` password file is in the ``/etc/wazuh-manager/`` directory of the Wazuh manager and has the right permission. The file permissions should be set to 640, and the owner should be ``root``.
+   #. If password authentication is not needed, it should be disabled in the ``<auth>`` section of the Wazuh manager ``/etc/wazuh-manager/wazuh-manager.conf`` file.

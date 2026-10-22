@@ -173,11 +173,11 @@ Generate an SSL certificate on the Wazuh manager signed by the certificate autho
       Certificate request self-signature ok
       subject=C=US, CN=192.168.xxx.xxx
 
-#. Copy the newly signed certificate and key files to ``/var/wazuh-manager/etc`` on the Wazuh manager:
+#. Copy the newly signed certificate and key files to ``/etc/wazuh-manager/certs`` on the Wazuh manager:
 
    .. code-block:: console
 
-      # cp sslmanager.cert sslmanager.key /var/wazuh-manager/etc
+      # cp sslmanager.cert sslmanager.key /etc/wazuh-manager/certs
 
 #. Restart the Wazuh manager to apply the changes made:
 
@@ -185,16 +185,16 @@ Generate an SSL certificate on the Wazuh manager signed by the certificate autho
 
       # systemctl restart wazuh-manager
 
-#. Configure the new certificate on the Wazuh manager. Edit the ``<auth>`` section of the ``/var/wazuh-manager/etc/wazuh-manager.conf`` file:
+#. Configure the new certificate on the Wazuh manager. Edit the ``<auth>`` section of the ``/etc/wazuh-manager/wazuh-manager.conf`` file:
 
    .. code-block:: xml
 
       <auth>
-        <ssl_manager_cert>etc/sslmanager.cert</ssl_manager_cert>
-        <ssl_manager_key>etc/sslmanager.key</ssl_manager_key>
+        <ssl_manager_cert>/etc/wazuh-manager/certs/sslmanager.cert</ssl_manager_cert>
+        <ssl_manager_key>/etc/wazuh-manager/certs/sslmanager.key</ssl_manager_key>
       </auth>
 
-   Without this step the manager keeps using its default certificate (``etc/certs/remoted.pem``) and never loads the one you just created.
+   Without this step the manager keeps using its default certificate (``/etc/wazuh-manager/certs/remoted.pem``) and never loads the one you just created.
 
 #. Restart the Wazuh manager to apply the changes:
 

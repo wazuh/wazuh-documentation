@@ -6,10 +6,10 @@
 Monitoring AWS infrastructure
 =============================
 
-This use case shows how the Wazuh module for AWS (aws-s3) enables log data collection from different AWS sources. To learn more about monitoring AWS resources, see the Using Wazuh to monitor AWS section of the documentation.
+This use case shows how the Wazuh module for AWS (aws-s3) enables log data collection from different AWS sources. To learn more about monitoring AWS resources, see the :doc:`Using Wazuh to monitor AWS </cloud-security/amazon/index>` section of the documentation.
 
-.. |CLOUDTRAIL_POLICY| replace:: necessary policies
-.. |AWS_PROFILE_AUTH| replace:: profile authentication
+.. |CLOUDTRAIL_POLICY| replace:: :ref:`necessary policies <cloudtrail_policy_configuration>`
+.. |AWS_PROFILE_AUTH| replace:: :ref:`profile authentication <aws_profile>`
 
 Infrastructure
 --------------
@@ -45,7 +45,7 @@ The image below shows how to create a new CloudTrail service and attach a new S3
 Wazuh agent
 ^^^^^^^^^^^
 
-#. Enable the Wazuh AWS module in the ``/var/ossec/etc/ossec.conf`` configuration file on the Wazuh agent. Add only the AWS buckets of interest. Read our guide on how to configure AWS credentials:
+#. Enable the Wazuh AWS module in the ``/var/ossec/etc/ossec.conf`` configuration file on the Wazuh agent. Add only the AWS buckets of interest. Read our guide on how to :doc:`configure AWS credentials </cloud-security/amazon/services/prerequisites/credentials>`:
 
    .. code-block:: xml
       :emphasize-lines: 8, 9
@@ -71,7 +71,7 @@ Wazuh agent
 Test the configuration
 ----------------------
 
-Once you configure CloudTrail, you can generate events by creating a new IAM user account using the IAM service. This generates an event that Wazuh processes. The Wazuh default ruleset parses AWS logs and generates findings automatically. The alerts appear as soon as Wazuh receives the logs from the AWS S3 bucket. You can also find additional CloudTrail use cases in our documentation.
+Once you configure CloudTrail, you can generate events by creating a new IAM user account using the IAM service. This generates an event that Wazuh processes. The Wazuh default ruleset parses AWS logs and generates findings automatically. The alerts appear as soon as Wazuh receives the logs from the AWS S3 bucket. You can also find additional :ref:`CloudTrail use cases <cloudtrail-use-cases>` in our documentation.
 
 Visualize the findings
 ----------------------

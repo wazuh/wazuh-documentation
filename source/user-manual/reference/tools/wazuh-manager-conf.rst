@@ -12,7 +12,7 @@ The ``wazuh-manager-conf`` tool validates the Wazuh manager configuration file a
 
 The tool is located at ``/var/wazuh-manager/bin/wazuh-manager-conf``.
 
-Use it to check ``/var/wazuh-manager/etc/wazuh-manager.conf`` before you restart the Wazuh manager, or to find the value that the Wazuh manager uses for an option.
+Use it to check ``/etc/wazuh-manager/wazuh-manager.conf`` before you restart the Wazuh manager, or to find the value that the Wazuh manager uses for an option.
 
 Usage
 -----
@@ -43,10 +43,12 @@ Options
 +--------------------+--------------------------------------------------------------------------------------------+
 | Option             | Description                                                                                |
 +====================+============================================================================================+
-| -f <file>          | Configuration file to read. Default: ``<home>/etc/wazuh-manager.conf``.                    |
+| -f <file>          | Configuration file to read. Default: ``/etc/wazuh-manager/wazuh-manager.conf``, whatever   |
+|                    | the home.                                                                                  |
 +--------------------+--------------------------------------------------------------------------------------------+
-| -H <home>          | Wazuh manager home directory, used to resolve relative paths. Default: the value of        |
-|                    | ``$WAZUH_MANAGER_HOME``, or else the parent of the ``bin/`` directory that holds the tool. |
+| -H <home>          | Wazuh manager home directory, used to resolve relative paths. It never moves the default   |
+|                    | configuration file. Default: the value of ``$WAZUH_MANAGER_HOME``, or else the parent of   |
+|                    | the ``bin/`` directory that holds the tool.                                                |
 +--------------------+--------------------------------------------------------------------------------------------+
 | --skip-file-checks | Doesn't require the certificate and key files named in the configuration to exist.         |
 +--------------------+--------------------------------------------------------------------------------------------+

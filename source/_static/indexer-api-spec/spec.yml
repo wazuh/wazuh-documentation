@@ -103,6 +103,9 @@ paths:
   /_block/{block}:
     $ref: 'index_api.yml#/paths/~1_block~1{block}'
 
+  /_cache/clear:
+    $ref: 'index_api.yml#/paths/~1_cache~1clear'
+
   /{target}/_cache/clear:
     $ref: 'index_api.yml#/paths/~1{target}~1_cache~1clear'
 
@@ -112,8 +115,14 @@ paths:
   /{index}/_close:
     $ref: 'index_api.yml#/paths/~1{index}~1_close'
 
+  /_close:
+    $ref: 'index_api.yml#/paths/~1_close'
+
   /{index}:
     $ref: 'index_api.yml#/paths/~1{index}'
+
+  /_index_template:
+    $ref: 'index_api.yml#/paths/~1_index_template'
 
   /_index_template/{template_name}:
     $ref: 'index_api.yml#/paths/~1_index_template~1{template_name}'
@@ -123,6 +132,9 @@ paths:
 
   /{target_index}/_mapping:
     $ref: 'index_api.yml#/paths/~1{target_index}~1_mapping'
+
+  /{target_index}/_mappings:
+    $ref: 'index_api.yml#/paths/~1{target_index}~1_mappings'
 
   /_component_template/{component_template_name}:
     $ref: 'index_api.yml#/paths/~1_component_template~1{component_template_name}'
@@ -157,11 +169,17 @@ paths:
   /{target_index}/_settings:
     $ref: 'index_api.yml#/paths/~1{target_index}~1_settings'
 
+  /_settings/{setting}:
+    $ref: 'index_api.yml#/paths/~1_settings~1{setting}'
+
   /{target_index}/_settings/{setting}:
     $ref: 'index_api.yml#/paths/~1{target_index}~1_settings~1{setting}'
 
   /{index}/_open:
     $ref: 'index_api.yml#/paths/~1{index}~1_open'
+
+  /_open:
+    $ref: 'index_api.yml#/paths/~1_open'
 
   /_refresh:
     $ref: 'index_api.yml#/paths/~1_refresh'
@@ -372,6 +390,21 @@ paths:
   /_nodes/{node_id}/stats/{metric}:
     $ref: 'stats_api.yml#/paths/~1_nodes~1{node_id}~1stats~1{metric}'
 
+  /_nodes/stats:
+    $ref: 'stats_api.yml#/paths/~1_nodes~1stats'
+
+  /_nodes/{node_id}/stats:
+    $ref: 'stats_api.yml#/paths/~1_nodes~1{node_id}~1stats'
+
+  /_nodes/stats/{metric}:
+    $ref: 'stats_api.yml#/paths/~1_nodes~1stats~1{metric}'
+
+  /_nodes/stats/{metric}/{index_metric}:
+    $ref: 'stats_api.yml#/paths/~1_nodes~1stats~1{metric}~1{index_metric}'
+
+  /_nodes/{node_id}/stats/{metric}/{index_metric}:
+    $ref: 'stats_api.yml#/paths/~1_nodes~1{node_id}~1stats~1{metric}~1{index_metric}'
+
   /_plugins/_security_analytics/detectors:
     $ref: 'security_analytics_api.yml#/paths/~1_plugins~1_security_analytics~1detectors'
 
@@ -533,6 +566,12 @@ paths:
 
   /_plugins/_setup/ai_assistant/providers/{id}:
     $ref: 'setup_api.yml#/paths/~1_plugins~1_setup~1ai_assistant~1providers~1{id}'
+
+  /_plugins/_setup/ai_assistant/sessions:
+    $ref: 'setup_api.yml#/paths/~1_plugins~1_setup~1ai_assistant~1sessions'
+
+  /_plugins/_setup/ai_assistant/sessions/{id}:
+    $ref: 'setup_api.yml#/paths/~1_plugins~1_setup~1ai_assistant~1sessions~1{id}'
 
   /_plugins/_content_manager/subscription:
     $ref: 'content_manager_api.yml#/paths/~1_plugins~1_content_manager~1subscription'
@@ -732,6 +771,9 @@ paths:
   /_cluster/stats/{metric}/{index_metric}/nodes/{node_filters}:
     $ref: 'cluster_api.yml#/paths/~1_cluster~1stats~1{metric}~1{index_metric}~1nodes~1{node_filters}'
 
+  /_plugins/_ism/policies:
+    $ref: 'ism_api.yml#/paths/~1_plugins~1_ism~1policies'
+
   /_plugins/_ism/policies/{policy_id}:
     $ref: 'ism_api.yml#/paths/~1_plugins~1_ism~1policies~1{policy_id}'
 
@@ -749,6 +791,9 @@ paths:
 
   /_plugins/_ism/retry/{index}:
     $ref: 'ism_api.yml#/paths/~1_plugins~1_ism~1retry~1{index}'
+
+  /_plugins/_ism/explain:
+    $ref: 'ism_api.yml#/paths/~1_plugins~1_ism~1explain'
 
   /_plugins/_ism/explain/{index}:
     $ref: 'ism_api.yml#/paths/~1_plugins~1_ism~1explain~1{index}'
@@ -789,6 +834,9 @@ paths:
 
   /_reindex:
     $ref: 'document_api.yml#/paths/~1_reindex'
+
+  /_count:
+    $ref: 'miscellaneous_api.yml#/paths/~1_count'
 
   /{target}/_count:
     $ref: 'miscellaneous_api.yml#/paths/~1{target}~1_count'
@@ -1065,7 +1113,9 @@ tags:
     description: Operations for managing Wazuh platform settings.
   - name: AI Assistant
     description: |
-      Operations for managing the AI assistant's providers, global settings and field policy. These are stored, along with the CTI access token, in the hidden system index `.wazuh-internal-state`, which is unreachable through ordinary index permissions; these endpoints are the only way to read or write that data.
+      Operations for managing the AI assistant's providers, global settings, field policy, and saved sessions. The providers, settings and field policy are stored, along with the CTI access token, in the hidden system index `.wazuh-internal-state`, which is unreachable through ordinary index permissions; these endpoints are the only way to read or write that data. Saved sessions are stored in the `wazuh-ai-assistant-sessions` data stream.
+
+      **Note:** The reserved `wazuh_ai_assistant` role is mapped to all users and grants the `plugin:wazuh/ai_assistant/session/write` action group, so every authenticated user can manage their own sessions, and the session endpoints don't return 403 with the shipped configuration. The settings and provider endpoints need the `plugin:wazuh/ai_assistant/settings/read` or `plugin:wazuh/ai_assistant/settings/write` action group, which the shipped configuration doesn't give to ordinary users. Error messages show the underlying `cluster:admin/ai_assistant/` actions.
   - name: Subscription Management
     description: Operations for managing CTI subscriptions and credentials.
   - name: Content Updates
