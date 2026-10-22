@@ -8,15 +8,14 @@ Monitoring AWS instances
 
 By installing the Wazuh agent on your AWS EC2 instances, you gain insights and monitor activities within these instances.
 
-The Wazuh agent runs as a service on an EC2 instance, and collects and forwards system, security and application data to the Wazuh server through an encrypted and authenticated channel.
+The Wazuh agent runs as a service on an EC2 instance. It collects system, security, and application data and forwards it to the Wazuh manager through an encrypted and authenticated channel.
 
-To install the Wazuh agent on an EC2 instance, follow the instructions available in the :doc:`agent installation guide </installation-guide/wazuh-agent/index>`. The Wazuh agent allows you to monitor your EC2 instance with these capabilities:
+To install the Wazuh agent on an EC2 instance, follow the instructions available in the :doc:`agent installation guide </installation-guide/wazuh-agent/index>`. The Wazuh agent provides several capabilities for monitoring your EC2 instance, including:
 
--  :doc:`/user-manual/capabilities/log-data-collection/index`
--  :doc:`/user-manual/capabilities/file-integrity/index`
--  :doc:`/user-manual/capabilities/malware-detection/index`
--  Security policy monitoring
--  :doc:`/user-manual/capabilities/system-inventory/index`
--  :doc:`/user-manual/capabilities/vulnerability-detection/index`
+-  :doc:`Log data collection </user-manual/capabilities/log-data-collection/index>`
+-  :doc:`File integrity monitoring </user-manual/capabilities/file-integrity/index>`
+-  :doc:`Security Configuration Assessment </user-manual/capabilities/sec-config-assessment/index>`
+-  :doc:`System inventory </user-manual/capabilities/system-inventory/index>`
+-  :doc:`Vulnerability detection </user-manual/capabilities/vulnerability-detection/index>`
 
-To learn more about the different Wazuh capabilities, check out :doc:`this section </user-manual/capabilities/index>`.
+For more information about these and other Wazuh capabilities, see the :doc:`Wazuh capabilities </user-manual/capabilities/index>` documentation.

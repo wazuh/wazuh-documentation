@@ -29,23 +29,23 @@
    :emphasize-lines: 13,14
 
    {
-        "Version": "2012-10-17",
-        "Statement": [
-            {
-                "Sid": "VisualEditor0",
-                "Effect": "Allow",
-                "Action": [
-                    "s3:GetObject",
-                    "s3:ListBucket",
-                    "s3:DeleteObject"
-                ],
-                "Resource": [
-                    "arn:aws:s3:::<WAZUH_AWS_BUCKET>/*",
-                    "arn:aws:s3:::<WAZUH_AWS_BUCKET>"
-                ]
-            }
-        ]
-    }
+       "Version": "2012-10-17",
+       "Statement": [
+           {
+               "Sid": "VisualEditor0",
+               "Effect": "Allow",
+               "Action": [
+                   "s3:GetObject",
+                   "s3:ListBucket",
+                   "s3:DeleteObject"
+               ],
+               "Resource": [
+                   "arn:aws:s3:::<WAZUH_AWS_BUCKET>/*",
+                   "arn:aws:s3:::<WAZUH_AWS_BUCKET>"
+               ]
+           }
+       ]
+   }
 
 .. note::
 

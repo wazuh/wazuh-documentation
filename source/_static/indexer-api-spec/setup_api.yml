@@ -357,8 +357,331 @@ paths:
       security:
         - basicAuth: []
         - jwtAuth: []
+  /_plugins/_setup/ai_assistant/sessions:
+    post:
+      summary: Create an AI assistant session
+      description: |
+        Creates a saved session of the AI assistant for the authenticated user. Sessions are stored in the `wazuh-ai-assistant-sessions` data stream. Each session belongs to the authenticated user who created it. The server sets the owner, `created_at`, `updated_at`, and `@timestamp` fields, and ignores any value for them in the request body. A user can store up to 500 sessions. The request body can be up to 5 MiB, the title up to 200 characters, and a session up to 1000 messages.
+      operationId: createAiAssistantSession
+      tags:
+        - AI Assistant
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              description: Any other field in the request body is ignored.
+              required:
+                - title
+                - messages
+              properties:
+                title:
+                  type: string
+                  maxLength: 200
+                  description: Required. The title of the session. It can't be blank and can have up to 200 characters.
+                messages:
+                  type: array
+                  maxItems: 1000
+                  description: Required. The messages of the session, up to 1000. The server stores the items as sent.
+                  items:
+                    type: object
+            examples:
+              default:
+                summary: Create a session
+                value:
+                  title: Failed logins review
+                  messages:
+                    - role: user
+                      content: Summarize the failed logins of the last hour.
+                    - role: assistant
+                      content: There were 3 failed logins for sample-user.
+      responses:
+        "200":
+          description: OK - Session created.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AiAssistantSession"
+              example: {"id": "PlmaQ6EBIPkraxi7l01a", "title": "Failed logins review", "created_at": "2026-10-16T07:26:07.187755012Z", "updated_at": "2026-10-16T07:26:07.187755012Z", "messages": [{"role": "user", "content": "Summarize the failed logins of the last hour."}, {"role": "assistant", "content": "There were 3 failed logins for sample-user."}], "version": "0:5"}
+        "400":
+          description: Bad Request - The body is missing, malformed, or larger than 5 MiB, the title is missing, blank, or too long, or messages is missing or has more than 1000 items. An empty request body returns the OpenSearch `action_request_validation_exception` error envelope instead of the `{message, status}` body.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestResponse"
+              examples:
+                missing_title:
+                  summary: Missing title
+                  value:
+                    message: "Session title is required."
+                    status: 400
+        "401":
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        "403":
+          description: Forbidden - The user lacks the `cluster:admin/ai_assistant/session/write` cluster permission.
+          content:
+            application/json:
+              example: {"error": {"root_cause": [{"type": "security_exception", "reason": "no permissions for [cluster:admin/ai_assistant/session/write] and User [name=test, backend_roles=[], requestedTenant=null]"}], "type": "security_exception", "reason": "no permissions for [cluster:admin/ai_assistant/session/write] and User [name=test, backend_roles=[], requestedTenant=null]"}, "status": 403}
+        "409":
+          description: Conflict - The user already has 500 saved sessions.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestResponse"
+              examples:
+                limit_reached:
+                  summary: Session limit reached
+                  value:
+                    message: "You have reached the maximum of 500 saved sessions."
+                    status: 409
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+  /_plugins/_setup/ai_assistant/sessions/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: Required. The ID of the session, as returned when the session was created.
+        schema:
+          type: string
+    put:
+      summary: Update an AI assistant session
+      description: |
+        Replaces the messages of a session that belongs to the authenticated user, and optionally its title. Sessions are stored in the `wazuh-ai-assistant-sessions` data stream. Each session belongs to the authenticated user who created it. The server sets the owner, `created_at`, `updated_at`, and `@timestamp` fields, and ignores any value for them in the request body. If you omit `title`, the session keeps its stored title. If you send `expected_version`, the update fails with `409` when the session changed after you read that version.
+      operationId: updateAiAssistantSession
+      tags:
+        - AI Assistant
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - messages
+              properties:
+                messages:
+                  type: array
+                  maxItems: 1000
+                  description: Required. The complete list of messages, up to 1000. It replaces the stored messages.
+                  items:
+                    type: object
+                title:
+                  type: string
+                  maxLength: 200
+                  description: Optional. A new title. If present, it can't be blank and can have up to 200 characters.
+                expected_version:
+                  type: string
+                  description: Optional. The version token of the last response you received for this session.
+            example:
+              messages:
+                - role: user
+                  content: Summarize the failed logins of the last hour.
+                - role: assistant
+                  content: There were 3 failed logins for sample-user.
+                - role: user
+                  content: Which source IP addresses were involved?
+              expected_version: "<VERSION>"
+      responses:
+        "200":
+          description: OK - Session updated.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AiAssistantSession"
+              example: {"id": "PlmaQ6EBIPkraxi7l01a", "title": "Failed logins review", "created_at": "2026-10-16T07:26:07.187755012Z", "updated_at": "2026-10-16T07:26:09.141467521Z", "messages": [{"role": "user", "content": "Summarize the failed logins of the last hour."}, {"role": "assistant", "content": "There were 3 failed logins for sample-user."}, {"role": "user", "content": "Which source IP addresses were involved?"}], "version": "2:5"}
+        "400":
+          description: Bad Request - The body is missing, malformed, or too large, `messages` is missing or has more than 1000 items, or `title` is blank or too long.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestResponse"
+              examples:
+                missing_messages:
+                  summary: Missing messages
+                  value:
+                    message: "Session messages are required."
+                    status: 400
+        "401":
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        "403":
+          description: Forbidden - The user lacks the `cluster:admin/ai_assistant/session/write` cluster permission.
+          content:
+            application/json:
+              example: {"error": {"root_cause": [{"type": "security_exception", "reason": "no permissions for [cluster:admin/ai_assistant/session/write] and User [name=test, backend_roles=[], requestedTenant=null]"}], "type": "security_exception", "reason": "no permissions for [cluster:admin/ai_assistant/session/write] and User [name=test, backend_roles=[], requestedTenant=null]"}, "status": 403}
+        "404":
+          description: Not Found - No session with that ID belongs to the authenticated user.
+          content:
+            application/json:
+              example: {"error": {"root_cause": [{"type": "resource_not_found_exception", "reason": "Session not found: nonexistent"}], "type": "resource_not_found_exception", "reason": "Session not found: nonexistent"}, "status": 404}
+        "409":
+          description: Conflict - The session changed since the version in `expected_version`.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestResponse"
+              examples:
+                version_conflict:
+                  summary: Version conflict
+                  value:
+                    message: "Session was updated by another session since you last loaded it. Refresh and retry."
+                    status: 409
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+    patch:
+      summary: Rename an AI assistant session
+      description: |
+        Changes the title of a session that belongs to the authenticated user. The messages and `updated_at` don't change, so a rename doesn't move the session in a list ordered by last activity.
+      operationId: renameAiAssistantSession
+      tags:
+        - AI Assistant
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - title
+              properties:
+                title:
+                  type: string
+                  maxLength: 200
+                  description: Required. The new title. It can't be blank and can have up to 200 characters.
+            examples:
+              default:
+                summary: Rename a session
+                value:
+                  title: Failed logins, sample-user
+      responses:
+        "200":
+          description: OK - Session renamed.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: The ID of the session.
+                  title:
+                    type: string
+                    description: The new title.
+                  updated_at:
+                    type: string
+                    description: The stored `updated_at` value, unchanged by the rename.
+                  version:
+                    type: string
+                    description: The new version token.
+              example: {"id": "PlmaQ6EBIPkraxi7l01a", "title": "Failed logins, sample-user", "updated_at": "2026-10-16T07:26:09.141467521Z", "version": "3:5"}
+        "400":
+          description: Bad Request - The body is missing or malformed, or the title is missing, blank, or too long.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestResponse"
+              examples:
+                title_too_long:
+                  summary: Title too long
+                  value:
+                    message: "Session title must be 200 characters or fewer."
+                    status: 400
+        "401":
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        "403":
+          description: Forbidden - The user lacks the `cluster:admin/ai_assistant/session/write` cluster permission.
+          content:
+            application/json:
+              example: {"error": {"root_cause": [{"type": "security_exception", "reason": "no permissions for [cluster:admin/ai_assistant/session/write] and User [name=test, backend_roles=[], requestedTenant=null]"}], "type": "security_exception", "reason": "no permissions for [cluster:admin/ai_assistant/session/write] and User [name=test, backend_roles=[], requestedTenant=null]"}, "status": 403}
+        "404":
+          description: Not Found - No session with that ID belongs to the authenticated user.
+          content:
+            application/json:
+              example: {"error": {"root_cause": [{"type": "resource_not_found_exception", "reason": "Session not found: nonexistent"}], "type": "resource_not_found_exception", "reason": "Session not found: nonexistent"}, "status": 404}
+        "409":
+          description: Conflict - The session changed while the request ran.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestResponse"
+              examples:
+                version_conflict:
+                  summary: Version conflict
+                  value:
+                    message: "Session was updated by another session since you last loaded it. Refresh and retry."
+                    status: 409
+      security:
+        - basicAuth: []
+        - jwtAuth: []
+    delete:
+      summary: Delete an AI assistant session
+      description: |
+        Deletes a session that belongs to the authenticated user.
+      operationId: deleteAiAssistantSession
+      tags:
+        - AI Assistant
+      responses:
+        "200":
+          description: OK - Session deleted.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  status:
+                    type: integer
+                  id:
+                    type: string
+                    description: The ID of the deleted session.
+              example:
+                message: "Session deleted."
+                status: 200
+                id: PlmaQ6EBIPkraxi7l01a
+        "401":
+          $ref: 'spec.yml#/components/responses/Unauthorized'
+        "403":
+          description: Forbidden - The user lacks the `cluster:admin/ai_assistant/session/write` cluster permission.
+          content:
+            application/json:
+              example: {"error": {"root_cause": [{"type": "security_exception", "reason": "no permissions for [cluster:admin/ai_assistant/session/write] and User [name=test, backend_roles=[], requestedTenant=null]"}], "type": "security_exception", "reason": "no permissions for [cluster:admin/ai_assistant/session/write] and User [name=test, backend_roles=[], requestedTenant=null]"}, "status": 403}
+        "404":
+          description: Not Found - No session with that ID belongs to the authenticated user.
+          content:
+            application/json:
+              example: {"error": {"root_cause": [{"type": "resource_not_found_exception", "reason": "Session not found: nonexistent"}], "type": "resource_not_found_exception", "reason": "Session not found: nonexistent"}, "status": 404}
+      security:
+        - basicAuth: []
+        - jwtAuth: []
 components:
   schemas:
+    AiAssistantSession:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the session document.
+        title:
+          type: string
+          description: The title of the session.
+        created_at:
+          type: string
+          description: The time when the session was created, in ISO 8601 format. Set by the server.
+        updated_at:
+          type: string
+          description: The time of the last change to the session messages, in ISO 8601 format. Set by the server.
+        messages:
+          type: array
+          description: The messages of the session, as stored.
+          items:
+            type: object
+        version:
+          type: string
+          description: A version token in `<SEQ_NO>:<PRIMARY_TERM>` format. Send it as `expected_version` in the next update to detect concurrent changes.
     WazuhSettingsRequest:
       type: object
       additionalProperties: false
