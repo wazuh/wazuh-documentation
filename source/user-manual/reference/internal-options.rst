@@ -17,7 +17,7 @@ Wazuh 5.0 uses separate internal configuration files for the manager and the age
 +---------------------------------+--------------------------------------------------------------+
 | Component                       | Configuration file                                           |
 +=================================+==============================================================+
-| Wazuh manager                   | /var/wazuh-manager/etc/wazuh-manager-internal-options.conf   |
+| Wazuh manager                   | /etc/wazuh-manager/wazuh-manager-internal-options.conf       |
 +---------------------------------+--------------------------------------------------------------+
 | Wazuh agent                     | /var/ossec/etc/internal_options.conf                         |
 +---------------------------------+--------------------------------------------------------------+
@@ -30,11 +30,11 @@ Wazuh 5.0 uses separate internal configuration files for the manager and the age
 Wazuh manager internal configuration
 ---------------------------------------
 
-The ``/var/wazuh-manager/etc/wazuh-manager-internal-options.conf`` file allows you to override the default internal settings used by Wazuh manager components.
+The ``/etc/wazuh-manager/wazuh-manager-internal-options.conf`` file allows you to override the default internal settings used by Wazuh manager components.
 
-In Wazuh 5.0, the default values for manager internal options are compiled into the manager binaries. The ``wazuh-manager-internal-options.conf`` file is empty by default and should contain only the options that you want to override.
+In Wazuh 5.0, the default values for manager internal options are compiled into the manager binaries. The ``wazuh-manager-internal-options.conf`` file ships with comments only and should contain only the options that you want to override.
 
-All of the following settings exist in ``/var/wazuh-manager/etc/wazuh-manager-internal-options.conf``. Edit the file and restart the Wazuh manager service for changes to take effect.
+You can add any of the following settings to ``/etc/wazuh-manager/wazuh-manager-internal-options.conf``. Edit the file and restart the Wazuh manager service for changes to take effect.
 
 - `Analysisd`_
 - `Remoted`_
@@ -150,9 +150,6 @@ The ``remoted.*`` internal options configure the Wazuh manager Remoted module.
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
 | **remoted.rlimit_nofile**                        | Maximum number of file descriptors that the Remoted process can open.                          | 65536                    | Integer from 1024 to 1048576         |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
-| **remoted.state_interval**                       | Interval, in seconds, for updating the Remoted state file. A value of 0 disables state-file    | 5                        | 0 or positive integer                |
-|                                                  | updates.                                                                                       |                          |                                      |
-+--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
 | **remoted.send_chunk**                           | Maximum number of bytes sent in a single write operation to an agent.                          | 4096                     | Positive integer                     |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
 | **remoted.buffer_relax**                         | Send-buffer flushing mode.                                                                     | 1                        | 0 (strict), 1 (relaxed), 2 (lazy)    |
@@ -167,9 +164,9 @@ The ``remoted.*`` internal options configure the Wazuh manager Remoted module.
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
 | **remoted.tcp_keepcnt**                          | Number of unacknowledged TCP keepalive probes before the connection is considered unavailable. | 3                        | Positive integer                     |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
-| **remoted.merge_shared**                         | Controls whether Remoted merges shared configuration files for agents.                         | yes                      | yes, no                              |
+| **remoted.merge_shared**                         | Controls whether Remoted merges shared configuration files for agents.                         | 1                        | 0, 1                                 |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
-| **remoted.pass_empty_keyfile**                   | Controls whether Remoted starts when the client.keys file is empty.                            | yes                      | yes, no                              |
+| **remoted.pass_empty_keyfile**                   | Controls whether Remoted starts when the client.keys file is empty.                            | 1                        | 0, 1                                 |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
 | **remoted.request_pool**                         | Size of the request pool used to handle agent communications.                                  | 1024                     | Positive integer                     |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
@@ -185,9 +182,9 @@ The ``remoted.*`` internal options configure the Wazuh manager Remoted module.
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
 | **remoted.shared_reload**                        | Interval, in seconds, for reloading shared configuration files.                                | 10                       | Positive integer                     |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
-| **remoted.disk_storage**                         | Controls whether temporary shared configuration data is stored on disk.                        | no                       | yes, no                              |
+| **remoted.disk_storage**                         | Controls whether temporary shared configuration data is stored on disk.                        | 0                        | 0, 1                                 |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
-| **remoted.verify_msg_id**                        | Controls whether Remoted verifies agent message identifier sequences.                          | no                       | yes, no                              |
+| **remoted.verify_msg_id**                        | Controls whether Remoted verifies agent message identifier sequences.                          | 0                        | 0, 1                                 |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
 | **remoted.batch_events_per_agent_capacity**      | Maximum number of events batched per agent before forwarding them to the Engine.               | 131072                   | Positive integer                     |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
@@ -243,7 +240,7 @@ The ``remoted.*`` internal options configure the Wazuh manager Remoted module.
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
 | **remoted.auth_max_body_size**                   | Hard cap on authenticated request body size.                                                   | 5242880 (5 MiB)          | Integer from 1048576 to 67108864     |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
-| **remoted.enroll_password_refresh_interval**     | Seconds between polls of etc/authd.pass for Password-mode POST /enroll.                        | 10                       | Integer from 1 to 3600               |
+| **remoted.enroll_password_refresh_interval**     | Seconds between polls of /etc/wazuh-manager/authd.pass for Password-mode POST /enroll.         | 10                       | Integer from 1 to 3600               |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
 | **remoted.authd_connect_timeout**                | Seconds remoted waits to connect to authd's local enrollment socket.                           | 2                        | Integer from 1 to 60                 |
 +--------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------+--------------------------------------+
@@ -298,9 +295,9 @@ The ``wazuh_database.*`` internal options configure the Database Sync module.
 | wazuh_database.real_time           | Controls whether agent updates are synchronized immediately. When disabled, updates are      | 1               | 0 (disabled), 1 (enabled)     |
 |                                    | synchronized according to wazuh_database.interval.                                           |                 |                               |
 +------------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------+
-| wazuh_database.interval            | Synchronization interval, in seconds, when real-time synchronization is disabled.            | 60              | Integer from 1 to 86400       |
+| wazuh_database.interval            | Synchronization interval, in seconds, when real-time synchronization is disabled.            | 60              | Integer from 0 to 86400       |
 +------------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------+
-| wazuh_database.max_queued_events   | Maximum number of agent events queued before synchronization is triggered.                   | 10000           | Integer from 100 to 1000000   |
+| wazuh_database.max_queued_events   | Maximum number of agent events queued before synchronization is triggered.                   | 0               | Integer from 0 to 2147483647  |
 +------------------------------------+----------------------------------------------------------------------------------------------+-----------------+-------------------------------+
 
 Wazuh modules
@@ -319,8 +316,6 @@ The ``wazuh_modules.*`` and ``vulnerability-detection.*`` internal options confi
 | **wazuh_modules.indexer_bulk_size_bytes**        | Indexer bulk-size threshold, in bytes, that triggers a synchronous flush.          | 10485760      | Integer from 4096 to 104857600       |
 +--------------------------------------------------+------------------------------------------------------------------------------------+---------------+--------------------------------------+
 | **wazuh_modules.indexer_flush_interval**         | Interval, in seconds, between periodic Indexer Connector flushes.                  | 20            | Integer from 1 to 3600               |
-+--------------------------------------------------+------------------------------------------------------------------------------------+---------------+--------------------------------------+
-| **vulnerability-detection.debug**                | Debug logging level for the Vulnerability Scanner module.                          | 0             | 0 (disabled), 1 (basic), 2 (verbose) |
 +--------------------------------------------------+------------------------------------------------------------------------------------+---------------+--------------------------------------+
 | **vulnerability-detection.translation_lru_size** | LRU cache size for OS/package to CPE translation lookups.                          | 2048          | 1 to 100000                          |
 +--------------------------------------------------+------------------------------------------------------------------------------------+---------------+--------------------------------------+

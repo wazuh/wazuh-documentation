@@ -207,11 +207,11 @@ Unlike decoders and enrichment assets, which are downloaded from the content dis
 Output directory structure
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Outputs are stored under ``/var/wazuh-manager/etc/outputs/`` and organized by space name.
+Outputs are stored under ``/etc/wazuh-manager/outputs/`` and organized by space name.
 
 .. code-block:: none
 
-   /var/wazuh-manager/etc/outputs/
+   /etc/wazuh-manager/outputs/
    ├── default/                          # Fallback outputs, applied to all spaces unless overridden
    │   ├── indexer.yml                   # Sends decoded events to the Wazuh Indexer (enabled)
    │   └── file-output-integrations.yml  # Writes decoded events to a local file (disabled)
@@ -250,7 +250,7 @@ The output stage operates as a broadcaster. It dispatches the processed event in
 Unclassified events
 ~~~~~~~~~~~~~~~~~~~
 
-An event is considered unclassified when only the ``root`` decoder processed it and no other decoder accepted it. When no child decoder matches the event, the root decoder remains the only one that has processed it. The Wazuh normalization engine tracks this by recording the decoder names in the ``wazuh.integration.decoders`` array field defined in the ``/var/wazuh-manager/etc/outputs/default/indexer.yml`` file. An event is therefore identified as unclassified when that array contains exactly one element (the ``root`` decoder).
+An event is considered unclassified when only the ``root`` decoder processed it and no other decoder accepted it. When no child decoder matches the event, the root decoder remains the only one that has processed it. The Wazuh normalization engine routes these events on the ``wazuh.integration.category`` field. The ``index_unclassified_events`` filter in the ``/etc/wazuh-manager/outputs/default/indexer.yml`` file matches the events whose category is ``unclassified`` and sends them to the ``wazuh-events-v5-unclassified`` index. The engine applies this route only when the policy enables indexing of unclassified events.
 
 Event format
 ------------

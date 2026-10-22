@@ -133,7 +133,7 @@ Configure the proxy and the certificates
         default:
           url: https://localhost
           port: 55000
-          username: wazuh-wui
+          username: wazuh-internal-client
           run_as: true
 
 #. Navigate to the ``/etc/nginx/conf.d`` directory and create a ``wazuh.conf`` file for the certificate installation:

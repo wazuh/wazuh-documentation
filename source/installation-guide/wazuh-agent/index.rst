@@ -45,7 +45,7 @@ Complete the following steps on the Wazuh manager master node to generate the en
 
    .. code-block:: console
 
-      # openssl x509 -in /var/wazuh-manager/etc/certs/remoted.pem -noout -ext subjectAltName
+      # openssl x509 -in /etc/wazuh-manager/certs/remoted.pem -noout -ext subjectAltName
 
    The list holds the node name, the ``ip`` and ``dns`` values of the node in ``config.yml``, and any address added with ``-as|--agent-san``. After an installation with the Quickstart, it holds the server's host name, its fully qualified domain name, and its global IP addresses. A token for any other address fails with ``ERROR 9025: Enrollment token refused: address not in certificate SAN``.
 

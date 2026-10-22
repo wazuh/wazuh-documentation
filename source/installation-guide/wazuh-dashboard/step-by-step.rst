@@ -189,7 +189,7 @@ Configuring the Wazuh dashboard
            default:
              url: https://<WAZUH_MASTER_ADDRESS>
              port: 55000
-             username: wazuh-wui
+             username: wazuh-internal-client
              run_as: true
 
       .. note::
