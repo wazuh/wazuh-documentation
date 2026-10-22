@@ -128,7 +128,7 @@ The following example shows the structure of the ``internal_users.yml`` configur
 
 .. note::
 
-   The password hashes are generated for each installation. The passwords are stored in ``/etc/wazuh/credentials.env``.
+   The password hashes are generated for each installation. The passwords are stored in ``/etc/wazuh/credentials.env``. On the Wazuh manager, the password of the ``wazuh-manager`` user is stored in the keystore, in the ``/var/wazuh-manager/queue/keystore/`` directory.
 
 The following table describes the main elements of the configuration file:
 

@@ -22,7 +22,7 @@ The Syscollector module is enabled by default on all endpoints where the Wazuh a
 - ``C:\Program Files (x86)\ossec-agent\ossec.conf`` for Windows endpoints.
 - ``/Library/Ossec/ossec.conf`` for macOS endpoints.
 
-You can also use the centralized configuration file to make changes to the Wazuh Syscollector module across multiple monitored endpoints that belong to the same agent group. For example, the ``default`` group uses the configuration file, which you can find at ``/var/ossec/etc/shared/default/agent.conf`` on the Wazuh manager. Settings applied with the centralized configuration take precedence over the local Wazuh agent configuration.
+You can also use the centralized configuration file to make changes to the Wazuh Syscollector module across multiple monitored endpoints that belong to the same agent group. For example, the ``default`` group uses the configuration file, which you can find at ``/etc/wazuh-manager/shared/default/agent.conf`` on the Wazuh manager. Settings applied with the centralized configuration take precedence over the local Wazuh agent configuration.
 
 The following block shows the default Syscollector configuration on a Wazuh agent:
 
@@ -86,11 +86,11 @@ On Windows endpoints, you can use the ``<hotfixes>`` option.
 Wazuh manager configuration
 ---------------------------
 
-The Wazuh Inventory Harvester component on the Wazuh manager processes the collected system inventory data and forwards it to the Wazuh indexer using the :doc:`indexer connector </user-manual/manager/wazuh-indexer-connector>` setting. The indexer connector setting is present by default in the ``/var/wazuh-manager/etc/wazuh-manager.conf`` file of the Wazuh manager.
+The ``inventory_sync_server`` module on the Wazuh manager processes the collected system inventory data and forwards it to the Wazuh indexer using the :doc:`indexer connector </user-manual/manager/wazuh-indexer-connector>` setting. The indexer connector setting is present by default in the ``/etc/wazuh-manager/wazuh-manager.conf`` file of the Wazuh manager.
 
-By default, the connector points to the localhost with certificate paths relative to the Wazuh manager installation. This default works for an all-in-one deployment, where the Wazuh manager and the Wazuh indexer run on the same host. In a distributed deployment, where the indexer runs on separate nodes, you must update the connector configuration to point to your indexer nodes. Follow the steps below to update it.
+By default, the connector points to the localhost with absolute certificate paths in the ``/etc/wazuh-manager/certs`` directory. This default works for an all-in-one deployment, where the Wazuh manager and the Wazuh indexer run on the same host. In a distributed deployment, where the indexer runs on separate nodes, you must update the connector configuration to point to your indexer nodes. Follow the steps below to update it.
 
-#. Locate the indexer connector configuration block below to the ``/var/wazuh-manager/etc/wazuh-manager.conf`` file on the Wazuh manager. By default, it points to the local host:
+#. Locate the indexer connector configuration block below to the ``/etc/wazuh-manager/wazuh-manager.conf`` file on the Wazuh manager. By default, it points to the local host:
 
    .. code-block:: xml
 
@@ -100,10 +100,10 @@ By default, the connector points to the localhost with certificate paths relativ
         </hosts>
         <ssl>
           <certificate_authorities>
-            <ca>etc/certs/root-ca.pem</ca>
+            <ca>/etc/wazuh-manager/certs/indexer-ca.pem</ca>
           </certificate_authorities>
-          <certificate>etc/certs/indexer-connector.pem</certificate>
-          <key>etc/certs/indexer-connector-key.pem</key>
+          <certificate>/etc/wazuh-manager/certs/indexer-connector.pem</certificate>
+          <key>/etc/wazuh-manager/certs/indexer-connector-key.pem</key>
         </ssl>
       </indexer>
 
@@ -118,16 +118,16 @@ By default, the connector points to the localhost with certificate paths relativ
 
    Ensure:
 
-   -  The ``<ca>``, ``<certificate>``, and ``<key>`` values match the certificate files in the ``/var/wazuh-manager/etc/certs/`` directory. Relative paths resolve from the Wazuh manager installation directory at ``/var/wazuh-manager/``.
+   -  The ``<ca>``, ``<certificate>``, and ``<key>`` values match the certificate files in the ``/etc/wazuh-manager/certs/`` directory. The paths must be absolute and point directly to the ``/etc/wazuh-manager/certs/`` directory.
 
    The Wazuh manager prioritizes reporting to the first Wazuh indexer node in the list and switches to the next available node if the first one becomes unavailable.
 
-#. Save the Wazuh indexer username and password into the Wazuh manager keystore using the Wazuh-keystore tool:
+#. Save the Wazuh indexer username and password into the Wazuh manager keystore using the ``wazuh-manager-keystore`` tool:
 
    .. code-block:: console
 
-      # echo '<WAZUH_INDEXER_USERNAME>' | /var/ossec/bin/wazuh-keystore -f indexer -k username
-      # echo '<WAZUH_INDEXER_PASSWORD>' | /var/ossec/bin/wazuh-keystore -f indexer -k password
+      # echo '<WAZUH_INDEXER_USERNAME>' | /var/wazuh-manager/bin/wazuh-manager-keystore -f indexer -k username
+      # echo '<WAZUH_INDEXER_PASSWORD>' | /var/wazuh-manager/bin/wazuh-manager-keystore -f indexer -k password
 
    The tool also accepts the value inline with the ``-v`` option or from a file with the ``-vp`` option.
 
@@ -137,7 +137,7 @@ By default, the connector points to the localhost with certificate paths relativ
 
    .. code-block:: console
 
-      # curl --cacert /var/wazuh-manager/etc/certs/root-ca.pem --cert /var/wazuh-manager/etc/certs/indexer-connector.pem --key /var/wazuh-manager/etc/certs/indexer-connector-key.pem -u <WAZUH_INDEXER_USERNAME> -XGET "https://<WAZUH_INDEXER_IP>:9200/_cluster/health?pretty"
+      # curl --cacert /etc/wazuh-manager/certs/indexer-ca.pem --cert /etc/wazuh-manager/certs/indexer-connector.pem --key /etc/wazuh-manager/certs/indexer-connector-key.pem -u <WAZUH_INDEXER_USERNAME> -XGET "https://<WAZUH_INDEXER_IP>:9200/_cluster/health?pretty"
 
    A successful connection returns a result similar to the following:
 
@@ -174,7 +174,7 @@ By default, the connector points to the localhost with certificate paths relativ
 
       # curl -k -u <WAZUH_INDEXER_USERNAME> -XGET "https://<WAZUH_INDEXER_IP>:9200/_cluster/health?pretty"
 
-   If the command succeeds with the ``-k`` option but fails with the certificate options, verify that the certificate paths in the indexer connector configuration match the files in the ``/var/wazuh-manager/etc/certs/`` directory.
+   If the command succeeds with the ``-k`` option but fails with the certificate options, verify that the certificate paths in the indexer connector configuration match the files in the ``/etc/wazuh-manager/certs/`` directory.
 
 #. Restart the Wazuh manager to apply the configuration:
 

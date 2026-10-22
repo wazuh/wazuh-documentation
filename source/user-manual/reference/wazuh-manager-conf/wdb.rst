@@ -41,7 +41,8 @@ Specifies how often the Wazuh manager creates a backup.
 +----------------------+---------------------------------------------------------+
 | **Default value**    | 1d (86400 seconds)                                      |
 +----------------------+---------------------------------------------------------+
-| **Allowed values**   | Positive time value with optional suffix - s, m, h, d   |
+| **Allowed values**   | Positive time value with optional suffix - s, m, h, d,  |
+|                      | w. Minimum: 1s.                                         |
 +----------------------+---------------------------------------------------------+
 
 backup/max_files
