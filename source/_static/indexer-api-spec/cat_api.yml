@@ -1278,7 +1278,7 @@ components:
       description: Enables verbose mode, which displays column headers.
       schema:
         type: boolean
-        default: true
+        default: false
 
     cancel_after_time_interval:
       name: cancel_after_time_interval
