@@ -412,6 +412,7 @@ paths:
         - $ref: '#/components/parameters/fielddata'
         - $ref: '#/components/parameters/fields'
         - $ref: '#/components/parameters/file'
+        - $ref: '#/components/parameters/clear_cache_index'
         - $ref: '#/components/parameters/ignore_unavailable'
         - $ref: '#/components/parameters/query'
         - $ref: '#/components/parameters/request'
@@ -845,7 +846,7 @@ paths:
       tags: [Index APIs]
       summary: Index template exists
       description: |
-        Checks whether an index template exists. The response has no body.
+        The Get Index Template API returns information about one or more index templates.
       operationId: headIndexTemplate
       security:
         - basicAuth: []
@@ -1740,7 +1741,7 @@ paths:
       tags: [Index APIs]
       summary: Get settings (Global Setting GET)
       description: |
-        The Get Settings API retrieves the configuration settings whose name matches the `setting` path parameter, across all indexes.
+        The Get Settings API retrieves all configuration settings associated with a specified index.
       operationId: getSettingsGlobalSetting
       security:
         - basicAuth: []

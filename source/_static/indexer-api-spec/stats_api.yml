@@ -62,7 +62,7 @@ paths:
         - Nodes stats API
       summary: Nodes stats (all nodes)
       description: |
-        Returns statistical information about all the nodes in the cluster.
+        The nodes stats API returns statistical information about the nodes in the cluster. Use the `metric` path parameter to limit the response to a metric, such as `shard_indexing_pressure` to track and monitor shard indexing backpressure.
       operationId: getNodesStatsAll
       security:
         - basicAuth: []
@@ -91,7 +91,7 @@ paths:
         - Nodes stats API
       summary: Nodes stats (by node)
       description: |
-        Returns statistical information about the nodes selected with the `node_id` path parameter.
+        The nodes stats API returns statistical information about the nodes in the cluster. Use the `metric` path parameter to limit the response to a metric, such as `shard_indexing_pressure` to track and monitor shard indexing backpressure.
       operationId: getNodesStatsByNode
       security:
         - basicAuth: []

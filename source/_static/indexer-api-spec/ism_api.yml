@@ -4,7 +4,7 @@ paths:
       tags:
         - Index state management API
       summary: List policies
-      description: Lists all policies. To retrieve a specific policy, include its `policy_id` in the path.
+      description: Retrieves a policy by its `policy_id`. If you omit the `policy_id`, the operation lists all policies.
       operationId: listPolicies
       security:
         - basicAuth: []
@@ -48,28 +48,6 @@ paths:
             application/json:
               schema:
                 type: object
-                properties:
-                  policies:
-                    type: array
-                    description: The policies that match the request.
-                    items:
-                      type: object
-                      properties:
-                        _id:
-                          type: string
-                          description: The unique identifier of the policy.
-                        _seq_no:
-                          type: integer
-                          description: The sequence number for internal versioning.
-                        _primary_term:
-                          type: integer
-                          description: The primary term used for optimistic concurrency control.
-                        policy:
-                          type: object
-                          description: The policy definition.
-                  total_policies:
-                    type: integer
-                    description: The total number of policies.
         '401':
           $ref: 'spec.yml#/components/responses/Unauthorized'
         '403':
@@ -271,7 +249,7 @@ paths:
       tags:
         - Index state management API
       summary: Check policy existence
-      description: Checks whether a policy exists, using its `policy_id`. The response has no body.
+      description: Retrieves a policy by its `policy_id`. If you omit the `policy_id`, the operation lists all policies.
       operationId: headPolicy
       security:
         - basicAuth: []
@@ -876,7 +854,7 @@ paths:
       tags:
         - Index state management API
       summary: Explain all indexes
-      description: The Explain index API retrieves the current state of the managed indexes. Without an `index` path parameter, it returns the managed indexes in the cluster. The response is paginated and returns up to 20 indexes by default.
+      description: The Explain index API retrieves the current state of an index. It supports the use of index patterns to obtain the status of multiple indexes simultaneously.
       operationId: explainAllIndexes
       security:
         - basicAuth: []
@@ -951,7 +929,7 @@ paths:
       tags:
         - Index state management API
       summary: Explain all indexes (POST)
-      description: The Explain index API retrieves the current state of the managed indexes. Without an `index` path parameter, it returns the managed indexes in the cluster. The response is paginated and returns up to 20 indexes by default.
+      description: The Explain index API retrieves the current state of an index. It supports the use of index patterns to obtain the status of multiple indexes simultaneously.
       operationId: explainAllIndexesPost
       security:
         - basicAuth: []
