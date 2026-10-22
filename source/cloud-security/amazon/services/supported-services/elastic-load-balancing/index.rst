@@ -6,7 +6,7 @@
 Elastic Load Balancers
 ======================
 
-AWS Elastic Load Balancers are services that distribute incoming traffic across multiple targets. The following sections explain the different types of load balancers available and how to configure and monitor them with Wazuh:
+Elastic Load Balancing automatically distributes incoming traffic across multiple targets, such as EC2 instances, containers, and IP addresses, in one or more Availability Zones. It monitors the health of its registered targets and routes traffic only to the healthy targets. The following sections explain the different types of load balancers available and how to configure and monitor them with Wazuh:
 
 .. toctree::
    :titlesonly:

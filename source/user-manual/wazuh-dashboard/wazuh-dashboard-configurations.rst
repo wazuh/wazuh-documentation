@@ -900,6 +900,8 @@ The configuration above adds the options to switch tenants on the Wazuh dashboar
 
 Select your tenant and click **Confirm** to switch to the selected tenant.
 
+.. _creating_custom_dashboards:
+
 Creating custom dashboards
 --------------------------
 
